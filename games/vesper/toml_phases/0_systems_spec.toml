@@ -144,6 +144,19 @@ bands = [
   { min = 72,           text = "Core: Failing",  icon = "◕" },   # NO max — survives the frozen 96
 ]
 
+# ─── Core: Locked (SALVAGE) — the sealed-partition fault, post-repair. beat_0046. ─────────────
+# At the verdict Kess relieves the acute overload (core_strain -> 0), so the "Core: Failing" row above
+# VANISHES (the renderer emits nothing when no band matches), and THIS row lights in its place: the permanent
+# fault she cannot open — the standing promise only the Site pays. Driven by core_sealed (0 until the verdict
+# sets it 1); band from min=1 so the row is ABSENT the whole game until repair lights it. Honors
+# "no cure shipped": function restored, the true fault Locked. Additive — core_strain's bands are untouched.
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "core_sealed"
+bands = [
+  { min = 1, text = "Core: Locked", icon = "🔒" },
+]
+
 # ─── NPC panel — REMOVED per LO (2026-07-01) ──────────────────────────────────
 # The Renner sidebar npc_panel (corruption / location / quest-goal rows) was removed — early
 # game it read as uninformative clutter ("Corruption 0 / Location Away"). Renner's seduction
@@ -228,4 +241,13 @@ hidden = true
 # cell_door: the sealed door's gate. Never set by anything. Pure internal machinery.
 [[traits.labels]]
 key    = "cell_door"
+hidden = true
+# SALVAGE (beat_0046) — both hidden from the <<playerTraits>> dump. Like core_strain, core_sealed still
+# draws its sidebar row (the trait_status_text renderer ignores `hidden`). kess_debt is the owed-coin
+# accumulator — named in the verdict prose, read by no gate this chunk (a deferred Act-2 seed).
+[[traits.labels]]
+key    = "core_sealed"
+hidden = true
+[[traits.labels]]
+key    = "kess_debt"
 hidden = true

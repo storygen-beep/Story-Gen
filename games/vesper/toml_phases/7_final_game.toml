@@ -152,6 +152,19 @@ bands = [
   { min = 72,           text = "Core: Failing",  icon = "◕" },   # NO max — survives the frozen 96
 ]
 
+# ─── Core: Locked (SALVAGE) — the sealed-partition fault, post-repair. beat_0046. ─────────────
+# At the verdict Kess relieves the acute overload (core_strain -> 0), so the "Core: Failing" row above
+# VANISHES (the renderer emits nothing when no band matches), and THIS row lights in its place: the permanent
+# fault she cannot open — the standing promise only the Site pays. Driven by core_sealed (0 until the verdict
+# sets it 1); band from min=1 so the row is ABSENT the whole game until repair lights it. Honors
+# "no cure shipped": function restored, the true fault Locked. Additive — core_strain's bands are untouched.
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "core_sealed"
+bands = [
+  { min = 1, text = "Core: Locked", icon = "🔒" },
+]
+
 # ─── NPC panel — REMOVED per LO (2026-07-01) ──────────────────────────────────
 # The Renner sidebar npc_panel (corruption / location / quest-goal rows) was removed — early
 # game it read as uninformative clutter ("Corruption 0 / Location Away"). Renner's seduction
@@ -236,6 +249,15 @@ hidden = true
 # cell_door: the sealed door's gate. Never set by anything. Pure internal machinery.
 [[traits.labels]]
 key    = "cell_door"
+hidden = true
+# SALVAGE (beat_0046) — both hidden from the <<playerTraits>> dump. Like core_strain, core_sealed still
+# draws its sidebar row (the trait_status_text renderer ignores `hidden`). kess_debt is the owed-coin
+# accumulator — named in the verdict prose, read by no gate this chunk (a deferred Act-2 seed).
+[[traits.labels]]
+key    = "core_sealed"
+hidden = true
+[[traits.labels]]
+key    = "kess_debt"
 hidden = true
 
 # ══════════════════════════════════════════════════════════════════
@@ -322,6 +344,15 @@ core_strain       = 0
 # room's nav non-empty (an empty nav makes the generator render the WHOLE MAP as clickable cards).
 # A TRAIT not a flag — a flag `is_true` gate demands a located setter or the flag-chain validator hard-fails.
 cell_door         = 0
+# SALVAGE — the sealed-partition fault (beat_0046). 0 until the repair verdict flips it to 1. Drives the
+# "Core: Locked" sidebar row (0_systems_spec): it appears the instant repair lights it — the standing promise
+# only the Site can pay. A TRAIT (not a flag) — the verdict setter needs no located flag-chain, same reason
+# as core_strain. Hidden from the dump.
+core_sealed       = 0
+# SALVAGE — the coin Kess is owed (beat_0046). Accrues per repair stage (untraceable coin, NEVER company
+# Credits); she walks out OWING the balance — the broke->rich seed. Read by NO gate this chunk (a deferred
+# Act-2 seed with a named address: Kess collects when the berth re-opens). Named in the verdict prose.
+kess_debt         = 0
 
 # ─── NPCs ─────────────────────────────────────────────────────────────────────
 
@@ -450,6 +481,21 @@ portrait    = "marsh.jpg"
 core_traits = { relation = 0 }
 flag_keys   = []
 arc_stages  = ["The Sunday regular"]
+
+# ── Kess — the off-books fixer (Salvage) — beat_0049 ─────────────────────────────
+# The dockside synth-mechanic / ship-breaker who repairs Wren's core. Reads bodies as HARDWARE. NOT a
+# conquest (no relation/corruption climb, no meters). NO [[npcs.schedules]] — chunk-scripted at kess_berth,
+# so getNpcsWithSchedules can't leak her onto the Schedule page (Step-6 G3; npc-intro step 7). Dialog
+# speaker (npcId=npc_kess) renders "Kess:"; she's "Stranger:" (speaker=unknown) in her intro until she names
+# herself (Step-6 G10). Recurs as the kess_debt holder (Act-2 seed). Minimal, like npc_bastien.
+[[npcs]]
+id          = "npc_kess"
+name        = "Kess"
+description = "An off-books ship-breaker in the Reach — cuts decommissioned machines down for parts and does quiet illegal repair on the side. Reads a body the way she reads a hull: what it's made of, what's failing, what it costs to hold. Won't touch company work (company work touches back) — until a frame she can't put a book to walks in and she can't help herself. Wants coin, and the problem nobody else can solve."
+portrait    = "kess.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = ["The fixer"]
 
 [[npcs.schedules]]
 location   = "underworld_brothel"
@@ -635,6 +681,26 @@ entry_conditions = { version = "1.0", items = [
   { type = "flag", subject = "player", flag_key = "renner_hired", operator = "is_true" },
 ] }
 blocked_message = "You've no reason to be out at his burned yard — not yet. Get inside his world first."
+
+# ── kess_berth — the Salvage repair hub (the off-books fixer's dry-dock) ────────────────────────
+# SALVAGE (beat_0047). Kess's drained dry-dock in the Reach. entry_from=the_waterfront -> a free Leave-exit
+# + a nav card on the docks. LIFECYCLE (Step-6 G3): entry_conditions {salvage_entered AND !salvage_done} +
+# blocked_message -> greyed-visible before she goes off-books, ENTERABLE during the repair, LOCKED-visible
+# again after the verdict (which teleports her to the_waterfront). NO seal; Kess carries NO schedule
+# (chunk-scripted, so no Schedule-page leak). Name is BARE ("The Berth") so the nav card doesn't spoil Kess
+# before she names herself. version="1.0" or the lock fails OPEN.
+[[locations]]
+id          = "kess_berth"
+name        = "The Berth"
+description = "A drained dry-dock off the waterfront, a stripped hull still up on the blocks, cutting-gear and parts bins and a work-cradle rigged for something bigger than a person. Whoever works here takes machines apart for a living — and, for the right coin, puts them back."
+image       = "locations/kess_berth.jpg"
+image_search_queries = ["drained dry dock ship breaking yard night", "gutted hull workshop cutting torch dark"]
+entry_from  = "the_waterfront"
+entry_conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "salvage_entered", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "salvage_done",    operator = "is_false" },
+] }
+blocked_message = "A dry-dock berth off the waterfront, chained and dark. Whoever strips ships down here doesn't take walk-ins."
 
 # ── THE UNDERWORLD — the dark city the hunt points to (her second life) ────────────────────────
 # Always available (gated only opening_done). The gate is cleared EVERY visit (pay coin / fight / weapon —
@@ -5228,15 +5294,43 @@ when = [
   { flag = "captivity_done",    op = "is_false" },
 ]
 
-# ── Frontier card (Story-Goals, priority 10) — after the release (captivity_done is_true). The NEW
-# end-of-content. Narrates the current peak HONESTLY (the frozen fault) and telegraphs the deferred repair
-# as a locked-visible seed — never blank, never dev-speak (per beat-authoring.md frontier + quests.md).
+# ── Captivity frontier card (Story-Goals, priority 10) — the WINDOW between release and finding Kess.
+# beat_0043 made this the post-release end-of-content; beat_0054 UPPER-GATES it with `salvage_entered
+# is_false` so it retires the instant the Salvage cold-open (beat_0048) fires. (In practice beat_0048
+# auto-fires on the first post-captivity waterfront render, so this shows only in that instant — but the
+# gate keeps it from claiming the page once the repair is underway.)
 [[quest_cards]]
 priority   = 10
 text       = "You walked out of the Reach on a machine that will not run right again. The core sits faulted where it stopped — you can read it in the sidebar, Failing, and it does not move. You still don't know who came through that door, or why a stranger would tear a place apart to pull you out of it. You went back to work. There was nothing else to do."
-tip        = "The fault won't heal on its own — there's no fixing it yet. Finding a way to mend the core, and finding out who freed you, both wait for a later chapter. For now: back to Mercer, back to the depot, back to the Sunday work, carrying it."
+tip        = "The fault won't heal on its own. You can't take it to the company — a refit is a wipe. Find someone who works hardware off the books. And whoever came through that door is a question for later."
 when = [
-  { flag = "captivity_done", op = "is_true" },
+  { flag = "captivity_done",  op = "is_true"  },
+  { flag = "salvage_entered", op = "is_false" },
+]
+
+# ── Salvage STATUS card (Story-Goals, priority 10) — live DURING the repair (salvage_entered is_true +
+# salvage_done is_false). beat_0054. A status card (text + tip, no goals — the stages auto-fire at the
+# berth). Names the place + the plan; honest that it costs a debt. Mutually exclusive with the captivity
+# frontier (salvage_entered) and the post-salvage frontier (salvage_done), so exactly one shows.
+[[quest_cards]]
+priority   = 10
+text       = "The company can't fix you — a refit means a wipe, and you're not walking into that. So you've gone off the books, down to a ship-breaker in the Reach who works on hardware nobody's supposed to be able to afford. She'll put you back together one system at a time, and read something off your guts you didn't know was written there."
+tip        = "Get to the Berth, off the waterfront, and let Kess work. Each stage fixes a system, then tests it live; the bill goes on a tab. There's no other road back to operational."
+when = [
+  { flag = "salvage_entered", op = "is_true"  },
+  { flag = "salvage_done",    op = "is_false" },
+]
+
+# ── Post-Salvage FRONTIER card (Story-Goals, priority 10) — the NEW end-of-content after the verdict
+# (salvage_done is_true). beat_0054. Narrates the current peak honestly (the core is Locked now, not
+# Failing; the debt; the un-held name) and telegraphs Mission 3 / Calloway as the next chapter's frontier —
+# the file room that holds her build. Never blank, never dev-speak (frontier + quests.md).
+[[quest_cards]]
+priority   = 10
+text       = "You walk on a core that runs again — Locked now, not Failing; the fixer bought back your body but not the thing sealed inside it. That needs your own build file, and Vance keeps those. Mercer's handed you the way in without knowing it: Calloway, Vance Securities, a file room nobody audits — the same room that holds what you are."
+tip        = "Mission 3: get inside Calloway at Vance Securities, and into his file room. That's the next chapter — the way in isn't open yet. For now: back to the work, owing Kess her sixty, carrying a name you still can't say."
+when = [
+  { flag = "salvage_done", op = "is_true" },
 ]
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -6445,6 +6539,432 @@ effects = [
   { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0 },
   { targetType = "player", trait = "anal_active",       op = "set", value = 0 },
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0 },
+]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SALVAGE — the repair bridge (beats 0046-0055). Pays the frozen Core: Failing
+# promise; Kess repairs her in staged weapon-tests; re-launches at Calloway.
+# Design: games/vesper/design_salvage_the_repair.md + design_book "## Salvage".
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ═══ salvage_body_wont_hold — Beat 1, the cold open (auto-fire capstone-shape) ══
+# beat_0048. Auto-fire @the_waterfront, priority 10, one-shot, gated captivity_done is_true +
+# salvage_entered is_false — fires the first waterfront render after the Cain release (which set
+# captivity_done + dumped her here). NO contention with captivity_recovery (that needs captivity_entered
+# is_false; captivity_done implies it's TRUE). SOLO scene -> NARRATED is the correct mode (Step-6 G2
+# exemption; RTS Rule 4 solo exemption). Third person, RTS-flat, body-forward. Single FORCED exit (Step-6
+# G6 — no report branch): SETS salvage_entered (opens kess_berth's nav card) + lands her back at the
+# waterfront so she walks into the now-open berth (avoids a teleport-into-a-gated-location race).
+[[canvases]]
+id          = "salvage_body_wont_hold"
+name        = "The body won't hold"
+description = "beat_0048. Salvage cold-open. Auto-fire @the_waterfront, priority 10, one-shot, gated captivity_done is_true + salvage_entered is_false. Two loop-attempts (Mercer's summons, Renner's depot) break ON INPUT; she can't report (a refit = a wipe, and the wipe takes the name she caught); the first un-ordered choice -> off the books. SETS salvage_entered; opens The Berth. Solo -> narrated. Third person, RTS-flat, one rationed thought_bubble."
+
+[canvases.trigger]
+location      = "the_waterfront"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "captivity_done",  operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "salvage_entered", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The body won't hold"
+blocks = [
+  { type = "image", props = { file = "scenes/salvage_waterfront_dawn.jpg", description = "A woman down on one knee on wet dock boards at dawn, one leg not answering under her, grey water and container cranes behind.", search_queries = ["woman kneeling dock dawn grey", "figure collapsed pier morning industrial"] } },
+  { type = "paragraph", content = "The phone in her hip buzzes before the light's full up. Mercer's summons — the pattern she answers on reflex, before she's decided anything. She gets her feet under her to go in and report. The bad leg folds and puts her down on one knee." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Try the other road.", blocks = [
+        { type = "paragraph", content = "The other road, then. Renner's depot, cheap hands, the cover she can still wear. She reaches back for the drain to check it's seated, and it answers cold — a dead click where the charge should catch. Nothing takes." },
+    ] },
+    { advance_text = "Take stock.", blocks = [
+        { type = "paragraph", content = "Both roads want a body that works. Hers doesn't. The leg holds if she never asks it to turn; the drain seats but won't fire; the core sits wrong behind her sternum, a low fault she can feel the edge of and can't reach." },
+    ] },
+    { advance_text = "Consider the company.", blocks = [
+        { type = "paragraph", content = "The company fixes assets. She knows exactly what fixing is: the techs open her up on the bench, find the fault, and take her back to spec." },
+    ] },
+    { advance_text = "Count what that costs.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Back to spec is back to nothing. The four words go. The name that fit a lock she didn't know she had — filed, overwritten, gone." },
+        { type = "paragraph", content = "And she finds she does not want that. She does not look at why." },
+    ] },
+    { advance_text = "Let it ring.", blocks = [
+        { type = "paragraph", content = "So she doesn't call it in. The summons rings out unanswered — the first order in her life she's let go dark. No one's watching. No one will know until it's already done." },
+    ] },
+    { advance_text = "Go off the books.", blocks = [
+        { type = "paragraph", content = "There's underworld talk of hardware worked off the books: a ship-breaker down in the Reach who takes machines the company can't see, and asks the wrong questions for the right coin. She has a berth to find." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go find it."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_waterfront"
+flagEffects = [
+  { targetType = "player", flag = "salvage_entered", op = "set" },
+]
+
+# ═══ salvage_kess_intro — beat_0049, Kess's first-contact + the terms ═══════════
+# npc-intro one-shot. Auto-fire @kess_berth, priority 10, is_repeatable=false, gated salvage_entered is_true
+# + kess_met is_false (version="1.0"). NO requires_npc (kess_berth is only enterable during the chunk and
+# Kess is definitionally there — location IS her presence, so she needs NO schedule) + NO npc= (a one-shot
+# with npc= renders nowhere, v2.py:4677). DIALOGUE-DOMINANT (Step-6 G2 — Kess's clinical reads are SPOKEN):
+# ~0.32:1 narration:dialogue. She is "Stranger:" (speaker=unknown) until she names herself, then npc_kess
+# ("Kess:") (Step-6 G10). Third person for the connective narration. SETS kess_met on exit -> opens Stage A
+# (beat_0050, gated kess_met is_true). Exits to kess_berth so the next stage auto-fires on the re-render.
+[[canvases]]
+id          = "salvage_kess_intro"
+name        = "The Berth"
+description = "beat_0049. Kess's first-contact + the staged terms. Auto-fire @kess_berth, pri 10, one-shot, gated salvage_entered is_true + kess_met is_false. She clocks the Vance steel and moves to eject (company heat = the one thing a ship-breaker won't touch), then the CORE read flips her greedy — custom/bespoke/one-at-a-time (the mystery crumb, no Cain) — and she names herself. Terms: staged repair, each stage costs COIN not Credits, she's broke -> owes (kess_debt). Dialogue-dominant; Stranger->Kess handoff. SETS kess_met."
+
+[canvases.trigger]
+location      = "kess_berth"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "salvage_entered", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "kess_met",        operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The Berth"
+blocks = [
+  { type = "image", props = { file = "scenes/kess_berth_intro.jpg", description = "A woman ship-breaker on a work-cradle inside a drained dry-dock, cutting-torch in hand, a stripped hull behind her, turning to look at someone who's just walked in.", search_queries = ["woman welder cutting torch industrial night", "female mechanic workshop torch sparks"] } },
+  { type = "paragraph", content = "The berth's colder than the dock, all cut steel and sparks. Someone's up on the work-cradle with a torch. It cuts out when Wren's boots hit the floor." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Yard's shut. Turn around." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Don't leave.", blocks = [
+        { type = "dialog", props = { speaker = "unknown" }, content = "...that's Vance plate under the coat. No. I don't touch company work — company work touches back. Out." },
+        { type = "paragraph", content = "She's already turning back to the hull, done with it." },
+    ] },
+    { advance_text = "Name the fault.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "I can't operate. Something in the core." },
+        { type = "paragraph", content = "The word core turns the woman's head. She comes down off the cradle, a gauge already in her hand, and holds it to the base of Wren's spine." },
+    ] },
+    { advance_text = "Let her read it.", blocks = [
+        { type = "dialog", props = { speaker = "unknown" }, content = "...that's not a Vance core. That's not anybody's core I've got a book for. Bespoke. Hand-built — somebody made you one at a time." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "I'm Kess. Sit down." },
+    ] },
+    { advance_text = "Hear the terms.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Here's how it runs. I don't fix a thing like you in one sitting. I open it, I see what's wrong, I fix one system, I make it hold. Then the next. Stage at a time." },
+    ] },
+    { advance_text = "Ask the price.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "What's it cost." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Coin. Not company scrip — I can't spend Vance money without Vance noticing, and neither can you. Which is the one smart thing about you being here." },
+    ] },
+    { advance_text = "Hear the catch.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "You're broke. I can read that off you too. So you'll owe me. Every stage goes on the book." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get on the cradle."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "kess_berth"
+flagEffects = [
+  { targetType = "player", flag = "kess_met", op = "set" },
+]
+
+# ═══ salvage_stage_a — beat_0050, Stage A: core & charge (the TIER-3 centerpiece) ═══
+# Auto-fire @kess_berth, pri 10, one-shot, gated kess_met is_true + salvage_stage_a_done is_false
+# (version=1.0). NO requires_npc / NO npc= (one-shot; location is Kess's presence). THREE registers braided:
+# (1) Kess's SPOKEN clinical forensic read (the cold-channel clue — no Cain); (2) the crude-flat, CLINICAL
+# Tolly charge-test (consensual, real anatomical words, NO degradation, NO 'she wanted it'); (3) the ONE
+# licensed TIER-3 glitch-leak — REUSES beat_0042's devices (smoke / the hand straight to the seam without
+# searching / a name kept OFF-page as ONE unspelled syllable) but NOT its Rule-5 'the way you'd' similes
+# (Step-6 G9). The reach-and-fail is a PLAYER CLICK ('Reach for it') that loses it (Step-6). Tolly = a
+# narration-level test-body (quoted speech, no npc_ object — the captivity-crew treatment). core_strain is
+# NOT touched here (dropping it into a captivity band would surface 'Faulting' mid-repair — the flip is
+# saved for the verdict); the easing is PROSE. TERMINAL exit: salvage_stage_a_done + kess_debt += 20.
+[[canvases]]
+id          = "salvage_stage_a"
+name        = "The seam"
+description = "beat_0050. Stage A — core & charge. Kess opens the re-seated drain-seam (forensic read: 'somebody who'd had their fingers in you before, who didn't need to look' — the rescuer via a cold channel, no Cain), needs the core live to work it, brings the runner Tolly to charge her; mid-charge her hands in the seam trip the involuntary Tier-3 glitch-leak (beat_0042 devices reused, name OFF-page); she reaches and loses it (player click). Prose-eases the fault; SETS salvage_stage_a_done, kess_debt += 20."
+
+[canvases.trigger]
+location      = "kess_berth"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "kess_met",             operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "salvage_stage_a_done", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The seam"
+blocks = [
+  { type = "image", props = { file = "scenes/salvage_stage_a_seam.jpg", description = "A woman strapped face-down on an industrial work-cradle, a mechanic crouched behind her working a probe into an open panel at the base of her spine.", search_queries = ["woman strapped table back panel machine", "cyborg spine port open mechanic"] } },
+  { type = "paragraph", content = "Kess racks her face-down on the cradle and finds the seam at the base of her spine — the drain's socket, the one somebody re-seated in the dark. She works a probe in." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Huh." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Let her read it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "This wasn't us. Wasn't a field medic either. Somebody re-seated this by hand — somebody who'd had their fingers in you before, and didn't need to look for it. You know whose hands?" },
+        { type = "dialog", props = { speaker = "player" }, content = "No." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Course you don't." },
+    ] },
+    { advance_text = "Hear the rest.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "I can't work a cold core. It's got to be live, and you know how you go live. There's a runner owes me — I'll bring him down. Don't make it a thing." },
+    ] },
+    { advance_text = "Bring him down.", blocks = [
+        { type = "paragraph", content = "The boy comes down the ramp when she whistles — dock-runner young, all hands, half-hard already at the sight of her strapped to the cradle. \"This her?\" he starts, and Kess doesn't look up." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Don't talk. Charge her." },
+    ] },
+    { advance_text = "Charge.", blocks = [
+        { type = "video", props = { file = "sex/salvage_tolly_charge.webm", description = "A young man bends a woman over an industrial cradle and fucks her from behind while a second woman works at a panel on her back.", search_queries = ["doggystyle bent over from behind", "rough sex from behind pov"] } },
+        { type = "paragraph", content = "Tolly gets her hips up and works his cock into her, and it's nothing — a fit, a rhythm, the intake her body does without being asked. Behind her Kess keeps one hand in the open seam and the other flat on the gauge." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "There. It's taking. Hold him in you." },
+    ] },
+    { advance_text = "Feel it climb.", blocks = [
+        { type = "paragraph", content = "The charge comes up the way it always comes up, heat with no name on it. Kess's fingers move inside the seam, seating something — and the fill and the fingers at the base of her spine cross, and the room tips." },
+    ] },
+    { advance_text = "Go under.", blocks = [
+        { type = "paragraph", content = "And it isn't Tolly's hand at her spine. It's a bigger hand, and it goes to the seam without searching, straight down in the dark, and there's smoke — old smoke, the kind that doesn't wash out — and she's somewhere else, on a floor, breaking." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "That hand. I know that hand." },
+    ] },
+    { advance_text = "Hear the voice.", blocks = [
+        { type = "paragraph", content = "A voice she's never heard and knows anyway, torn open, saying a word over her that no one says over a thing they own. And a name — one syllable of a name, and it fits her like a socket she didn't know was empty." },
+    ] },
+    { advance_text = "Reach for it.", blocks = [
+        { type = "paragraph", content = "She grabs for the name with everything the fill left her, and it goes out like a held breath. Then it's only Tolly again, and the gauge, and Kess's voice." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Whoa. You went somewhere. Gauge spiked. Stay with me." },
+    ] },
+    { advance_text = "Come back.", blocks = [
+        { type = "paragraph", content = "Tolly finishes somewhere she doesn't track; Kess already has him by the collar and off her. She seals the panel. The pressure behind Wren's sternum sits lower than it did — not gone, but no longer climbing — and the bad leg takes her weight." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "That's one. Core takes a charge now without eating itself. You're a long way from fixed. On the book — twenty." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Rest a minute."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "kess_berth"
+flagEffects = [
+  { targetType = "player", flag = "salvage_stage_a_done", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "kess_debt", op = "add", value = 20 },
+]
+
+# ═══ salvage_stage_b — beat_0051, Stage B: the drain-test on Reeves (the CLUE) ═══
+# Auto-fire @kess_berth, pri 10, one-shot, gated salvage_stage_a_done is_true + salvage_stage_b_done is_false
+# (version=1.0). Stage A's sibling — Kess tests the DRAIN weapon this time. The test = the drain fires on the
+# anal finish with REEVES (a Vance COURIER — she drains the company's own man for the location of her own
+# build file); the drain's take makes him give up 'the build-files are in Calloway's file room' (the
+# weapon-test IS the intel beat; the drain's canon anal-finish path, narrated not gated). Beat 6 fuses the
+# clue to HER (the build file = the cure for the sealed partition + the coming Mission-3 order = 'doubly
+# hers'). Reeves = a narration-level test-body (quoted/narrated, NO npc_ object — like Tolly + the captivity
+# crew); his clue is the DRAIN WALKING THE WORDS OUT of him (Step-6 G2 satisfied — HIS testimony, the drain's
+# take, not narrated summary). NOTE: Step-6's "speaker=slug title-cases to 'Reeves:'" claim was FALSE —
+# v2.py:14104 reads npcId not the speaker, so an undefined speaker renders "NPC:"; verified + corrected to
+# narrated extraction. core_strain untouched. TERMINAL: salvage_stage_b_done + kess_debt += 20.
+[[canvases]]
+id          = "salvage_stage_b"
+name        = "The drain"
+description = "beat_0051. Stage B — the drain-test on Reeves. Kess pulls the drain node, tests it live: the drain fires on the anal finish with Reeves (a scared Vance courier), and its take makes him give up that the classified build-files are in Calloway's file room at Vance Securities. The clue is a spoken line (speaker=reeves); it fuses to Wren's own build file. SETS salvage_stage_b_done, kess_debt += 20."
+
+[canvases.trigger]
+location      = "kess_berth"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "salvage_stage_a_done", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "salvage_stage_b_done", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The drain"
+blocks = [
+  { type = "image", props = { file = "scenes/salvage_stage_b_drain.jpg", description = "A mechanic holding a small cylindrical implant up to a work-lamp, turning it in gloved fingers, a woman face-down on the cradle behind her.", search_queries = ["mechanic holding small implant light", "hand examining metal cylinder workshop"] } },
+  { type = "paragraph", content = "Day two on the cradle. Kess pulls the drain itself this time — the node in its socket — and turns it in the light. Seated true; someone did that right. But the firing channel's scarred where the core cooks it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "This is the part they built you around. It fires, or you're a very expensive doll. We test it live." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "How it fires.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "It fires when a man finishes in your ass. That's the trigger, that's the take. Don't look at me like I wrote it." },
+    ] },
+    { advance_text = "Bring him down.", blocks = [
+        { type = "paragraph", content = "The one she brings down this time isn't a dock-runner. Company courier — Vance lanyard still on under his coat, soft hands of a man who moves data, not cargo, and scared. \"Kess, what is this—\" he starts, and she doesn't look up." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "A job. Bend her over. Then you'll talk. They always talk." },
+    ] },
+    { advance_text = "Test it.", blocks = [
+        { type = "video", props = { file = "sex/salvage_reeves_drain.webm", description = "A man in an open shirt takes a woman anally over an industrial cradle from behind while a second woman watches a readout.", search_queries = ["anal from behind bent over", "anal doggystyle pov rough"] } },
+        { type = "paragraph", content = "Reeves does what he's told, the way men do, and works into her ass — and this one she feels. Not him. The node in her spine, waking as he moves, drawing on him, hungry the way it was built to be hungry." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "There. It's charging off him. Let it fill." },
+    ] },
+    { advance_text = "Let it fire.", blocks = [
+        { type = "paragraph", content = "He finishes and the drain takes it — takes him — a pull behind her sternum like a circuit closing, and for a second she has the whole shape of him, everything he's carried down company halls, laid open." },
+    ] },
+    { advance_text = "Take it.", blocks = [
+        { type = "paragraph", content = "The words come up out of him without him, the drain walking them out: the classified build specs — Calloway keeps them, his file room at Vance Securities, everything on the Cain program in there. Then he's blinking on the floor, mouth dry, not sure what he said." },
+    ] },
+    { advance_text = "Hold the name.", blocks = [
+        { type = "paragraph", content = "Calloway. The name's nothing to her yet and everything to the thing behind her sternum: a room with her build in it. The file that says what she is. The fault she can't reach, maybe written down somewhere she could walk into." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Somebody wrote down what I am." },
+    ] },
+    { advance_text = "That's two.", blocks = [
+        { type = "paragraph", content = "Kess nudges Reeves toward the ramp with her boot, already done with him." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Weapon fires. That's two. He won't remember the address he just gave you. You will. On the book — another twenty." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Off the cradle."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "kess_berth"
+flagEffects = [
+  { targetType = "player", flag = "salvage_stage_b_done", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "kess_debt", op = "add", value = 20 },
+]
+
+# ═══ salvage_verdict — beat_0052, THE VERDICT (Core: Failing -> Locked) ═══════════
+# Auto-fire @kess_berth, pri 10, one-shot, gated salvage_stage_b_done is_true + salvage_done is_false
+# (version=1.0). The chunk's PAYOFF + Tier-3 end card. Kess delivers the verdict (SPOKEN, dialogue-forward):
+# function bought back, but the deep fault is a sealed partition she can't open -> 'you need your own build
+# file' (which Reeves placed in Calloway's room — Kess overheard, and says so). Beat 3 narrates the flip
+# IN-FICTION (the fault goes quiet, a sealed door where the scream was) — NEVER naming the UI labels; the
+# actual sidebar swap happens on the EXIT effects. Beat 5a/5b close on BOTH names: Calloway (the actionable
+# Mission-3 hook) + the un-held leak-name (the deeper Vesper thread, still off-page) + the awakening line.
+# THE FLIP (exit effects): core_strain -> 0 (the 'Core: Failing' row VANISHES — no band matches 0) +
+# core_sealed -> 1 (the 'Core: Locked' row lights). flags: salvage_done (locks kess_berth = the dormant
+# seed; arms the re-launch) + mission_3_active. Teleport to the_waterfront. MUST live-test the flip.
+[[canvases]]
+id          = "salvage_verdict"
+name        = "What she can do"
+description = "beat_0052. THE VERDICT — the meter flip + Tier-3 end card. Auto-fire @kess_berth, pri 10, one-shot, gated salvage_stage_b_done is_true + salvage_done is_false. Kess: function restored, but the true fault is a sealed partition only her own build file opens (which she now knows is in Calloway's room). The flip fires on the exit: core_strain->0 (Failing vanishes) + core_sealed=1 (Locked lights); sets salvage_done + mission_3_active; teleports to the_waterfront. She walks owing sixty coin, carrying Calloway + the un-held leak-name."
+
+[canvases.trigger]
+location      = "kess_berth"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "salvage_stage_b_done", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "salvage_done",         operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "What she can do"
+blocks = [
+  { type = "image", props = { file = "scenes/salvage_verdict.jpg", description = "A mechanic stepping back from a work-cradle wiping her hands, a woman sitting up on the edge of it in the low light of a dry-dock.", search_queries = ["mechanic wiping hands workshop dim", "woman sitting edge table dark industrial"] } },
+  { type = "paragraph", content = "Day three. Kess closes the last panel and steps back, wiping her hands, and looks at Wren the way she'd look at a hull she's decided is finished — not fixed. Finished." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "That's what I can do." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Hear the verdict.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "You'll operate. Leg holds, drain fires, core takes a charge without cooking. But the thing that's actually wrong with you — that's in a partition somebody sealed when they built you. I can't open it. Nobody down here can." },
+    ] },
+    { advance_text = "Ask what opens it.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Then what opens it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Your own build file. The one that says how you were made — Vance keeps those, classified, locked up. But you already know where that sits, don't you. You went somewhere on my cradle and came back holding a name." },
+    ] },
+    { advance_text = "Feel it go quiet.", blocks = [
+        { type = "paragraph", content = "And the thing behind her sternum that's screamed since the cell goes quiet under Kess's last touch. Not gone. She can feel exactly where it sits now — a sealed door where the scream was. She'll carry it. It beats dying by inches." },
+    ] },
+    { advance_text = "Settle up.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Book says sixty. I'll find you when I want it — don't make me look hard. Go on. You've got somewhere to be." },
+    ] },
+    { advance_text = "Stand up.", blocks = [
+        { type = "paragraph", content = "She stands off the cradle. The leg holds. The drain sits true. She has a name she can use — Calloway — and a room to find it in. And under Mercer's next order, for the first time, a reason that's hers." },
+    ] },
+    { advance_text = "And under that.", blocks = [
+        { type = "paragraph", content = "And under that, further down, the other name. The one from the leak — the one that fit, and slipped. She still can't say it. She's just stopped being able to stop reaching for it." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go to work."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_waterfront"
+flagEffects = [
+  { targetType = "player", flag = "salvage_done",     op = "set" },
+  { targetType = "player", flag = "mission_3_active", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "core_strain", op = "set", value = 0 },
+  { targetType = "player", trait = "core_sealed", op = "set", value = 1 },
+]
+
+# ═══ salvage_relaunch — beat_0053, the re-launch (Mercer's Mission-3 dispatch) ═══
+# Auto-fire @the_waterfront, pri 10, one-shot, gated mission_3_active is_true + salvage_relaunched is_false
+# (version=1.0). Fires the render after the verdict teleports her here. Mercer over COMM (dialog speaker,
+# not physically present — she's a company asset, briefed remotely; NO phone system needed, 8_phone.toml
+# isn't built). The order = Calloway / Vance Securities / the file room; beat 2 fuses it to her private
+# reason (the same room holds her build file — the door the sealed partition needs). Calloway's ARC stays
+# the frontier (next chunk) — this only drops the lead. Dialogue-forward. SETS salvage_relaunched. Exits to
+# the_waterfront: the open sandbox, Calloway the frontier objective (the quest card lands in beat_0054).
+[[canvases]]
+id          = "salvage_relaunch"
+name        = "New target"
+description = "beat_0053. The re-launch. Auto-fire @the_waterfront, pri 10, one-shot, gated mission_3_active is_true + salvage_relaunched is_false. Mercer's comm order: Calloway, Vance Securities, the unaudited file room. Beat 2 fuses the order to her own reason (the room holds her build file). Dialogue-forward (Mercer over comm). Calloway's arc = frontier/next chunk; this drops the lead only. SETS salvage_relaunched."
+
+[canvases.trigger]
+location      = "the_waterfront"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "mission_3_active",   operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "salvage_relaunched", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "New target"
+blocks = [
+  { type = "image", props = { file = "scenes/salvage_relaunch.jpg", description = "A woman standing upright on a grey waterfront at morning, the stacked towers of a corporate city behind her across the water.", search_queries = ["woman standing dock city skyline grey morning", "figure waterfront corporate skyline overcast"] } },
+  { type = "paragraph", content = "She comes up the ramp into the grey morning, and the comm in her jaw clicks live before she's ten steps clear — Mercer, who always knows the minute she's operational again." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "You went dark three days. I don't like dark." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Take the order.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "New target. Calloway — Vance Securities, internal division. He runs the hunt for the rogue from the inside, and he keeps a file room nobody audits. Get into it. Bring me what's in it." },
+    ] },
+    { advance_text = "Say yes.", blocks = [
+        { type = "paragraph", content = "She says yes the way she says yes to everything. But under the order, for the first time, a second reason rides the same address: the room that holds the company's secrets holds hers too — the build that says what she is, the door only her own file opens." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "You still in one piece?" },
+        { type = "dialog", props = { speaker = "player" }, content = "Operational." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Then move." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go to work."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_waterfront"
+flagEffects = [
+  { targetType = "player", flag = "salvage_relaunched", op = "set" },
 ]
 
 # ══════════════════════════════════════════════════════════════════

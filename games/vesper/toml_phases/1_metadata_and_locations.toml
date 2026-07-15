@@ -78,6 +78,15 @@ core_strain       = 0
 # room's nav non-empty (an empty nav makes the generator render the WHOLE MAP as clickable cards).
 # A TRAIT not a flag — a flag `is_true` gate demands a located setter or the flag-chain validator hard-fails.
 cell_door         = 0
+# SALVAGE — the sealed-partition fault (beat_0046). 0 until the repair verdict flips it to 1. Drives the
+# "Core: Locked" sidebar row (0_systems_spec): it appears the instant repair lights it — the standing promise
+# only the Site can pay. A TRAIT (not a flag) — the verdict setter needs no located flag-chain, same reason
+# as core_strain. Hidden from the dump.
+core_sealed       = 0
+# SALVAGE — the coin Kess is owed (beat_0046). Accrues per repair stage (untraceable coin, NEVER company
+# Credits); she walks out OWING the balance — the broke->rich seed. Read by NO gate this chunk (a deferred
+# Act-2 seed with a named address: Kess collects when the berth re-opens). Named in the verdict prose.
+kess_debt         = 0
 
 # ─── NPCs ─────────────────────────────────────────────────────────────────────
 
@@ -206,6 +215,21 @@ portrait    = "marsh.jpg"
 core_traits = { relation = 0 }
 flag_keys   = []
 arc_stages  = ["The Sunday regular"]
+
+# ── Kess — the off-books fixer (Salvage) — beat_0049 ─────────────────────────────
+# The dockside synth-mechanic / ship-breaker who repairs Wren's core. Reads bodies as HARDWARE. NOT a
+# conquest (no relation/corruption climb, no meters). NO [[npcs.schedules]] — chunk-scripted at kess_berth,
+# so getNpcsWithSchedules can't leak her onto the Schedule page (Step-6 G3; npc-intro step 7). Dialog
+# speaker (npcId=npc_kess) renders "Kess:"; she's "Stranger:" (speaker=unknown) in her intro until she names
+# herself (Step-6 G10). Recurs as the kess_debt holder (Act-2 seed). Minimal, like npc_bastien.
+[[npcs]]
+id          = "npc_kess"
+name        = "Kess"
+description = "An off-books ship-breaker in the Reach — cuts decommissioned machines down for parts and does quiet illegal repair on the side. Reads a body the way she reads a hull: what it's made of, what's failing, what it costs to hold. Won't touch company work (company work touches back) — until a frame she can't put a book to walks in and she can't help herself. Wants coin, and the problem nobody else can solve."
+portrait    = "kess.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = ["The fixer"]
 
 [[npcs.schedules]]
 location   = "underworld_brothel"
@@ -391,6 +415,26 @@ entry_conditions = { version = "1.0", items = [
   { type = "flag", subject = "player", flag_key = "renner_hired", operator = "is_true" },
 ] }
 blocked_message = "You've no reason to be out at his burned yard — not yet. Get inside his world first."
+
+# ── kess_berth — the Salvage repair hub (the off-books fixer's dry-dock) ────────────────────────
+# SALVAGE (beat_0047). Kess's drained dry-dock in the Reach. entry_from=the_waterfront -> a free Leave-exit
+# + a nav card on the docks. LIFECYCLE (Step-6 G3): entry_conditions {salvage_entered AND !salvage_done} +
+# blocked_message -> greyed-visible before she goes off-books, ENTERABLE during the repair, LOCKED-visible
+# again after the verdict (which teleports her to the_waterfront). NO seal; Kess carries NO schedule
+# (chunk-scripted, so no Schedule-page leak). Name is BARE ("The Berth") so the nav card doesn't spoil Kess
+# before she names herself. version="1.0" or the lock fails OPEN.
+[[locations]]
+id          = "kess_berth"
+name        = "The Berth"
+description = "A drained dry-dock off the waterfront, a stripped hull still up on the blocks, cutting-gear and parts bins and a work-cradle rigged for something bigger than a person. Whoever works here takes machines apart for a living — and, for the right coin, puts them back."
+image       = "locations/kess_berth.jpg"
+image_search_queries = ["drained dry dock ship breaking yard night", "gutted hull workshop cutting torch dark"]
+entry_from  = "the_waterfront"
+entry_conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "salvage_entered", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "salvage_done",    operator = "is_false" },
+] }
+blocked_message = "A dry-dock berth off the waterfront, chained and dark. Whoever strips ships down here doesn't take walk-ins."
 
 # ── THE UNDERWORLD — the dark city the hunt points to (her second life) ────────────────────────
 # Always available (gated only opening_done). The gate is cleared EVERY visit (pay coin / fight / weapon —
