@@ -1,0 +1,124 @@
+# Phase 8/8 — 8_phone.toml
+# The Inheritance — the phone (household chat threads). Merges LAST so the [phone]
+# table + its arrays-of-tables sit at the end (no [[canvases]] reopens after it).
+# Threads fire on FLAGS/STAGES only (never place/time/roll — the phone evaluator
+# doesn't support them; see the gotcha note). Register: casual text, terse, lower-
+# case-natural for the young ones, careful for Richard. Not register-audited (UI).
+# The phone button appears once opening_done is set (purchase_flag).
+
+[phone]
+enabled       = true
+purchase_flag = "opening_done"
+
+[[phone.apps]]
+id    = "messages"
+type  = "chat"
+label = "Messages"
+
+# ── Audrey — eager, warm, oblivious (gated aud_opened_up) ──────────────────────
+[[phone.conversations]]
+id     = "audrey_thread"
+app    = "messages"
+npc    = "npc_audrey"
+notify = "@Audrey texted you."
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "aud_opened_up", operator = "is_true" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "cath!! ok is it weird that you're the first person i wanted to text when something good happened. probably weird. don't care"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "are you home tonight? i saved you the good spot on the bed and everything"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "player"
+content = "On my way up."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "!!! good. i missed you. is that weird too. everything's less scary when you're around, i decided that ages ago"
+
+# ── Grayson — post-flip, servile and unmoored (gated grayson_flipped) ──────────
+[[phone.conversations]]
+id     = "grayson_thread"
+app    = "messages"
+npc    = "npc_grayson"
+notify = "Grayson texted you."
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "grayson_flipped", operator = "is_true" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you didn't say if you needed anything tonight. i'm around. i'm always around now. just tell me"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "did the bar order and the linens. did i do the right ones. tell me if i did the right ones"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "player"
+content = "You did fine."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "ok. good. god i don't know who i am anymore and the worst part is i don't even want to go back. don't tell anyone i said that"
+
+# ── Richard — shy, careful, tender (gated richard_stage>=1) ────────────────────
+[[phone.conversations]]
+id     = "richard_thread"
+app    = "messages"
+npc    = "npc_richard"
+notify = "Richard sent you a message."
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "richard_stage", operator = "gte", value = 1 },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I'm not very good at this — the phone. Eleanor did all our messages. But the study was very quiet without you in it tonight, and I wanted to say so."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "That's likely too much to send by text. Ignore an old man. Sleep well, Catherine."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "player"
+content = "Goodnight, Richard."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Goodnight. I'm glad you came home. I don't say that enough. I'm glad."
+
+# ── Lorna — the ally, business + the knife (gated lorna_opened_up) ─────────────
+[[phone.conversations]]
+id     = "lorna_thread"
+app    = "messages"
+npc    = "npc_lorna"
+notify = "Lorna: heads up."
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "lorna_opened_up", operator = "is_true" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "guest in 14 asked about you by name. thirsty type, deep pockets. thought you'd want to know"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "no pressure. just pointing at doors, like i said. you decide how far they open"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "player"
+content = "Noted."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "good girl. you learn faster than your mother ever did. she'd have been terrified of you. i mean that as the highest compliment i've got"
