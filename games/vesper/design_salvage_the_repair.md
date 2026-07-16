@@ -1,5 +1,11 @@
 # Vesper — Locked Design: Salvage (Act 2, The Repair Bridge)
 
+> ⚠️ **SUPERSEDED (2026-07-16) by `design_salvage_v2.md`.** This is v1 — the tight 2-scene bridge with the
+> awakening/build-file verdict and female Kess. It was built + shipped (`b979332`/`a2ec95f`), then reworked:
+> the repair became a **repeatable grind**, the reveal became the **chip-as-leash**, and Kess became **male**.
+> The cold-open + Kess/berth + debt + the `core_strain`/`core_sealed` mechanic carry forward from here; the
+> rest is replaced. **Build from `design_salvage_v2.md`, not this doc.**
+
 > **What this doc is.** The design record for Vesper's next chunk — the short bridge between Bastien's
 > captivity and Calloway's Mission 3. It pays the frozen `Core: Failing` promise the captivity chunk left
 > in the sidebar, turns the "man who knew her body" hook into play *without* spending Cain, and re-launches

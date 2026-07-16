@@ -87,6 +87,13 @@ core_sealed       = 0
 # Credits); she walks out OWING the balance — the broke->rich seed. Read by NO gate this chunk (a deferred
 # Act-2 seed with a named address: Kess collects when the berth re-opens). Named in the verdict prose.
 kess_debt         = 0
+# SALVAGE v2 (rework) — the repeatable repair-grind (design_salvage_v2.md). repair_armed: 0/1, set 1 by the
+# "Start a repair session" hub (which costs 20 coin), consumed (set 0) by the band scene's exit. repair_session:
+# the session counter, +1 per scene = master progress — 12 sessions carry core_strain 96->0 (-8 each); the
+# verdict fires at repair_session gte 12. Both hidden. (kess_debt above is RETIRED as a mechanic in v2 — key
+# kept for save-safety, but nothing feeds it; the repair is coin-cost-per-session, not debt-accrual.)
+repair_armed      = 0
+repair_session    = 0
 
 # ─── NPCs ─────────────────────────────────────────────────────────────────────
 
@@ -223,16 +230,16 @@ start_time = "20:00"
 end_time   = "23:59"
 activity   = "his standing Sunday booking"
 
-# ── Kess — the off-books fixer (Salvage) — beat_0049 ─────────────────────────────
-# The dockside synth-mechanic / ship-breaker who repairs Wren's core. Reads bodies as HARDWARE. NOT a
-# conquest (no relation/corruption climb, no meters). NO [[npcs.schedules]] — chunk-scripted at kess_berth,
-# so getNpcsWithSchedules can't leak her onto the Schedule page (Step-6 G3; npc-intro step 7). Dialog
-# speaker (npcId=npc_kess) renders "Kess:"; she's "Stranger:" (speaker=unknown) in her intro until she names
-# herself (Step-6 G10). Recurs as the kess_debt holder (Act-2 seed). Minimal, like npc_bastien.
+# ── Kess — the off-books fixer (Salvage v2) — beat_0049. MALE. ────────────────────
+# The dockside synth-mechanic / ship-breaker who repairs Wren's core. Reads bodies as HARDWARE, not people.
+# NOT a conquest (no relation/corruption climb, no meters). NO [[npcs.schedules]] — chunk-scripted at
+# kess_berth, so getNpcsWithSchedules can't leak him onto the Schedule page (Step-6 G3; npc-intro step 7).
+# Dialog speaker (npcId=npc_kess) renders "Kess:"; he's "Stranger:" (speaker=unknown) in his intro until he
+# names himself (Step-6 G10). Recurs as the leash-reader (Act-2 seed; kess_debt retired, v2 §10). Like npc_bastien.
 [[npcs]]
 id          = "npc_kess"
 name        = "Kess"
-description = "An off-books ship-breaker in the Reach — cuts decommissioned machines down for parts and does quiet illegal repair on the side. Reads a body the way she reads a hull: what it's made of, what's failing, what it costs to hold. Won't touch company work (company work touches back) — until a frame she can't put a book to walks in and she can't help herself. Wants coin, and the problem nobody else can solve."
+description = "An off-books ship-breaker in the Reach — cuts decommissioned machines down for parts and does quiet illegal repair on the side. Reads a body the way he reads a hull: what it's made of, what's failing, what it costs to hold. Won't touch company work (company work touches back) — until a frame he can't put a book to walks in and he can't help himself. Wants coin, and the problem nobody else can solve."
 portrait    = "kess.jpg"
 core_traits = { relation = 0 }
 flag_keys   = []

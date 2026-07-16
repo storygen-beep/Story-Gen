@@ -144,17 +144,17 @@ bands = [
   { min = 72,           text = "Core: Failing",  icon = "◕" },   # NO max — survives the frozen 96
 ]
 
-# ─── Core: Locked (SALVAGE) — the sealed-partition fault, post-repair. beat_0046. ─────────────
-# At the verdict Kess relieves the acute overload (core_strain -> 0), so the "Core: Failing" row above
-# VANISHES (the renderer emits nothing when no band matches), and THIS row lights in its place: the permanent
-# fault she cannot open — the standing promise only the Site pays. Driven by core_sealed (0 until the verdict
-# sets it 1); band from min=1 so the row is ABSENT the whole game until repair lights it. Honors
-# "no cure shipped": function restored, the true fault Locked. Additive — core_strain's bands are untouched.
+# ─── Leash: Uncut (SALVAGE v2) — the control chip, revealed at the verdict. beat_0046. ─────────────
+# By the verdict the 12 repair sessions have drained core_strain to 0, so the "Core: Failing"..."Nominal" row
+# VANISHES (the renderer emits nothing when no band matches), and THIS row lights in its place: the control
+# governor Kess found but can't pull — why she can never turn her power on the man who owns her. Driven by
+# core_sealed (0 until the verdict sets it 1); band from min=1 so the row is ABSENT the whole game until the
+# verdict lights it. "Uncut" = the chip's still in, needs its controller. Additive — core_strain's bands untouched.
 [[sidebar_items]]
 type  = "trait_status_text"
 trait = "core_sealed"
 bands = [
-  { min = 1, text = "Core: Locked", icon = "🔒" },
+  { min = 1, text = "Leash: Uncut", icon = "🔒" },
 ]
 
 # ─── NPC panel — REMOVED per LO (2026-07-01) ──────────────────────────────────
@@ -250,4 +250,15 @@ key    = "core_sealed"
 hidden = true
 [[traits.labels]]
 key    = "kess_debt"
+hidden = true
+# SALVAGE v2 (rework) — the repeatable repair-grind machinery. Both hidden from the dump; neither draws a
+# sidebar row (no trait_status_text). repair_armed: 0/1 arm flag — the "Start a repair session" hub choice
+# sets it 1 + costs 20 coin, the band scene consumes it (set 0) on its exit. repair_session: the session
+# counter (+1 per scene) = the master progress signal; the verdict fires at gte 12. TRAITS not flags: the arm
+# is set on a NAVIGATING choice + read by scene TRIGGERS, and a trait dodges the flag-chain validator entirely.
+[[traits.labels]]
+key    = "repair_armed"
+hidden = true
+[[traits.labels]]
+key    = "repair_session"
 hidden = true
