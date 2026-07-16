@@ -25,6 +25,8 @@ title       = "Vesper"
 description = "An owned half-human weapon who feels nothing but the sex she's used for. Inside Vance Dynamics she's the company's slave; outside, under a false face, she slips into powerful men's lives and drains them while they think they're using her — sent to hunt a rogue called Cain."
 quests_engine   = "v2"
 starting_canvas = "canvas_opening_office"   # the cold open (Beat 1 — the office)
+version         = "0.1.4"          # sidebar footer — bump in the same commit as the games-data.js portal entry
+release_date    = "2026-07-16"     # sidebar footer — date this build ships
 
 [time]
 starting_hour = 20        # the opening opens in the evening (Beat 1 — Mercer's office)
@@ -140,30 +142,26 @@ bands = [
 #      (96) still matches. A closed 72-95 band would make "Core: Failing" VANISH at exactly the moment the
 #      design promises it becomes permanent — the row IS the promise the repair chunk pays.
 #
-# Edges are set so each band names the shelf that comes NEXT (+12 per use): at "Core: Nominal" (12) the
-# next scene is still Nominal; at "Core: Hot" (24) the crew comes in. The read-out is a countdown.
+# Edges are set so each band names the shelf that comes NEXT (+12 per use): at "Core: Strained" (12) the
+# next scene is still that band; at "Core: Damaged" (24) the crew comes in. The read-out is a countdown.
+# Words = a plain severity ladder (Strained -> Damaged -> Critical -> Failing), LO 2026-07-16 (was the
+# opaque Nominal/Hot/Faulting/Failing — "Nominal" misread as "fine" when she's still broken).
 [[sidebar_items]]
 type  = "trait_status_text"
 trait = "core_strain"
 bands = [
-  { min = 1,  max = 23, text = "Core: Nominal",  icon = "○" },
-  { min = 24, max = 47, text = "Core: Hot",      icon = "◔" },
-  { min = 48, max = 71, text = "Core: Faulting", icon = "◑" },
+  { min = 1,  max = 23, text = "Core: Strained", icon = "○" },
+  { min = 24, max = 47, text = "Core: Damaged",  icon = "◔" },
+  { min = 48, max = 71, text = "Core: Critical", icon = "◑" },
   { min = 72,           text = "Core: Failing",  icon = "◕" },   # NO max — survives the frozen 96
 ]
 
-# ─── Leash: Uncut (SALVAGE v2) — the control chip, revealed at the verdict. beat_0046. ─────────────
-# By the verdict the 12 repair sessions have drained core_strain to 0, so the "Core: Failing"..."Nominal" row
-# VANISHES (the renderer emits nothing when no band matches), and THIS row lights in its place: the control
-# governor Kess found but can't pull — why she can never turn her power on the man who owns her. Driven by
-# core_sealed (0 until the verdict sets it 1); band from min=1 so the row is ABSENT the whole game until the
-# verdict lights it. "Uncut" = the chip's still in, needs its controller. Additive — core_strain's bands untouched.
-[[sidebar_items]]
-type  = "trait_status_text"
-trait = "core_sealed"
-bands = [
-  { min = 1, text = "Leash: Uncut", icon = "🔒" },
-]
+# ─── (Leash sidebar row REMOVED — LO's call 2026-07-16) ────────────────────────────────────────────
+# The v2 "Leash: Uncut" row (driven by core_sealed, lit at the verdict) is GONE — LO wanted the chip reveal
+# to live in the SCENE (Kess's dialogue at the verdict), not as a standing sidebar line. core_sealed is still
+# set 1 at the verdict + still declared (save-safe; v1 shipped it), but nothing displays it now. So post-verdict
+# that sidebar slot is simply blank (core_strain already drained to 0 -> its "Core:" row vanished too). To
+# restore: re-add a trait_status_text sidebar_item on core_sealed with a { min = 1, text = "...", icon = "..." } band.
 
 # ─── NPC panel — REMOVED per LO (2026-07-01) ──────────────────────────────────
 # The Renner sidebar npc_panel (corruption / location / quest-goal rows) was removed — early
@@ -250,9 +248,9 @@ hidden = true
 [[traits.labels]]
 key    = "cell_door"
 hidden = true
-# SALVAGE (beat_0046) — both hidden from the <<playerTraits>> dump. Like core_strain, core_sealed still
-# draws its sidebar row (the trait_status_text renderer ignores `hidden`). kess_debt is the owed-coin
-# accumulator — named in the verdict prose, read by no gate this chunk (a deferred Act-2 seed).
+# SALVAGE (beat_0046) — both hidden from the <<playerTraits>> dump. core_sealed is still set 1 at the verdict
+# but its sidebar row was REMOVED (LO 2026-07-16, see above) — it now displays nothing; kept declared for
+# save-safety. kess_debt is the owed-coin accumulator — named in the verdict prose, read by no gate this chunk.
 [[traits.labels]]
 key    = "core_sealed"
 hidden = true
@@ -269,6 +267,12 @@ key    = "repair_armed"
 hidden = true
 [[traits.labels]]
 key    = "repair_session"
+hidden = true
+# SALVAGE emitter recovery — emitter_broken (0/1, hidden). 0=works. Set 1 at the captivity release, 0 at
+# repair session 12; ANDed into the 4 emitter fire gates as `emitter_broken lt 1` (yard guards + underworld
+# gate). TRAIT not flag = dodges the flag-chain validator (the fire gates are exit-block choice conditions).
+[[traits.labels]]
+key    = "emitter_broken"
 hidden = true
 
 # ══════════════════════════════════════════════════════════════════
@@ -371,6 +375,11 @@ kess_debt         = 0
 # kept for save-safety, but nothing feeds it; the repair is coin-cost-per-session, not debt-accrual.)
 repair_armed      = 0
 repair_session    = 0
+# SALVAGE emitter recovery — emitter_broken: 0=works (default; pre-captivity yard/gate use), set 1 at the
+# captivity release (core dead -> the emitter draws off the SAME core, so it's dead too), set 0 at repair
+# session 12 (core restored). The 4 emitter fire gates AND `emitter_broken lt 1`. Default 0 = save-safe
+# (missing/0 both read "not broken", so shipped saves keep a working emitter — no regression).
+emitter_broken    = 0
 
 # ─── NPCs ─────────────────────────────────────────────────────────────────────
 
@@ -700,25 +709,27 @@ entry_conditions = { version = "1.0", items = [
 ] }
 blocked_message = "You've no reason to be out at his burned yard — not yet. Get inside his world first."
 
-# ── kess_berth — the Salvage repair hub (the off-books fixer's dry-dock) ────────────────────────
-# SALVAGE (beat_0047). Kess's drained dry-dock in the Reach. entry_from=the_waterfront -> a free Leave-exit
-# + a nav card on the docks. LIFECYCLE (Step-6 G3): entry_conditions {salvage_entered AND !salvage_done} +
-# blocked_message -> greyed-visible before she goes off-books, ENTERABLE during the repair, LOCKED-visible
-# again after the verdict (which teleports her to the_waterfront). NO seal; Kess carries NO schedule
-# (chunk-scripted, so no Schedule-page leak). Name is BARE ("The Berth") so the nav card doesn't spoil Kess
-# before she names herself. version="1.0" or the lock fails OPEN.
+# ── kess_berth — the Salvage repair hub (the off-books fixer's breaking-dock) ─────────────────────
+# SALVAGE (beat_0047). Kess's flooded breaking-dock UNDER THE DOCKS, off the underworld strip (rev: moved
+# down the gate so the coin EARN (House/Pit) and the SPEND (Kess) sit in one zone — the whole repair now
+# lives past the gate, one trip). entry_from=underworld_strip -> a free Leave-exit back onto the strip + a
+# nav card among the underworld venues (same gated pattern as crew_den). LIFECYCLE (Step-6 G3):
+# entry_conditions {salvage_entered AND !salvage_done} + blocked_message -> greyed-visible before she goes
+# off-books, ENTERABLE during the repair, LOCKED-visible again after the verdict (which teleports her UP to
+# the_waterfront). NO seal; Kess carries NO schedule (chunk-scripted, so no Schedule-page leak). Name is BARE
+# ("The Berth") so the nav card doesn't spoil Kess before she names herself. version="1.0" or the lock fails OPEN.
 [[locations]]
 id          = "kess_berth"
 name        = "The Berth"
-description = "A drained dry-dock off the waterfront, a stripped hull still up on the blocks, cutting-gear and parts bins and a work-cradle rigged for something bigger than a person. Whoever works here takes machines apart for a living — and, for the right coin, puts them back."
+description = "A flooded breaking-dock cut in under the docks, off the strip — a stripped hull up on the blocks in black water, cutting-gear and parts bins and a work-cradle rigged for something bigger than a person. Whoever works down here takes machines apart for a living — and, for the right coin, puts them back."
 image       = "locations/kess_berth.jpg"
-image_search_queries = ["drained dry dock ship breaking yard night", "gutted hull workshop cutting torch dark"]
-entry_from  = "the_waterfront"
+image_search_queries = ["flooded ship breaking dock underground night", "gutted hull workshop cutting torch dark"]
+entry_from  = "underworld_strip"
 entry_conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "salvage_entered", operator = "is_true" },
   { type = "flag", subject = "player", flag_key = "salvage_done",    operator = "is_false" },
 ] }
-blocked_message = "A dry-dock berth off the waterfront, chained and dark. Whoever strips ships down here doesn't take walk-ins."
+blocked_message = "A breaking-dock off the strip, chained and dark. Whoever strips ships down here doesn't take walk-ins."
 
 # ── THE UNDERWORLD — the dark city the hunt points to (her second life) ────────────────────────
 # Always available (gated only opening_done). The gate is cleared EVERY visit (pay coin / fight / weapon —
@@ -747,7 +758,7 @@ name             = "The Underground"
 description      = "Down past the gate the city turns inside out — wet brick, red light, stalls selling what the Spire outlaws and bodies selling what it pretends to. Nobody here knows what she is, and nobody here owns her. For the length of a visit she's just another face with coin to make. The way back up is the gate."
 image            = "locations/underworld_strip.jpg"
 image_search_queries = ["underground night market red light crowd", "cyberpunk black market alley neon"]
-navigation_order = ["underworld_bar", "underworld_brothel", "underworld_pit", "underworld_market", "crew_den", "the_site"]
+navigation_order = ["underworld_bar", "underworld_brothel", "underworld_pit", "underworld_market", "kess_berth", "crew_den", "the_site"]
 
 [[locations]]
 id          = "underworld_brothel"
@@ -1784,7 +1795,7 @@ flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 text       = "Use the weapon on him."
 targetType = "node"
 nodeId     = "yard_crawl.weapon_scene"
-conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 10 }, { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 } ] }
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 10 }, { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 }, { type = "trait", subject = "player", trait_key = "emitter_broken", operator = "lt", value = 1 } ] }
 effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -1820,7 +1831,7 @@ flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 text       = "Use the weapon on them."
 targetType = "node"
 nodeId     = "yard_crawl.weapon_scene"
-conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 25 }, { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 } ] }
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 25 }, { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 }, { type = "trait", subject = "player", trait_key = "emitter_broken", operator = "lt", value = 1 } ] }
 effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -1856,7 +1867,7 @@ flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 text       = "Use the weapon on them."
 targetType = "node"
 nodeId     = "yard_crawl.weapon_scene"
-conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 40 }, { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 } ] }
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 40 }, { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 }, { type = "trait", subject = "player", trait_key = "emitter_broken", operator = "lt", value = 1 } ] }
 effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -2174,7 +2185,7 @@ conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subje
 text       = "Put the weapon on him."
 targetType = "node"
 nodeId     = "underworld_gate_check.weapon_scene"
-conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" } ] }
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "emitter_broken", operator = "lt", value = 1 } ] }
 costs      = [{ trait = "arousal_charge", value = 1 }]
 effects    = [{ targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
 [[canvases.nodes.exit_block.choices]]
@@ -6558,6 +6569,8 @@ effects = [
   { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0 },
   { targetType = "player", trait = "anal_active",       op = "set", value = 0 },
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0 },
+  # The core's cooked — the emitter draws off the same core, so it's dead too until Kess restores it (salvage session 12).
+  { targetType = "player", trait = "emitter_broken",    op = "set", value = 1 },
 ]
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -6572,8 +6585,9 @@ effects = [
 # captivity_done + dumped her here). NO contention with captivity_recovery (that needs captivity_entered
 # is_false; captivity_done implies it's TRUE). SOLO scene -> NARRATED is the correct mode (Step-6 G2
 # exemption; RTS Rule 4 solo exemption). Third person, RTS-flat, body-forward. Single FORCED exit (Step-6
-# G6 — no report branch): SETS salvage_entered (opens kess_berth's nav card) + lands her back at the
-# waterfront so she walks into the now-open berth (avoids a teleport-into-a-gated-location race).
+# G6 — no report branch): SETS salvage_entered (opens kess_berth's nav card, now down off the underworld
+# strip) + lands her back at the waterfront so she descends the gate herself into the now-open berth
+# (avoids a teleport-into-a-gated-location race + keeps the gate guard unavoidable).
 [[canvases]]
 id          = "salvage_body_wont_hold"
 name        = "The body won't hold"
@@ -6613,7 +6627,7 @@ blocks = [
         { type = "paragraph", content = "So she doesn't call it in. The summons rings out unanswered — the first order in her life she's let go dark. No one's watching. No one will know until it's already done." },
     ] },
     { advance_text = "Go off the books.", blocks = [
-        { type = "paragraph", content = "There's underworld talk of hardware worked off the books: a ship-breaker down in the Reach who takes machines the company can't see, and asks the wrong questions for the right coin. She has a berth to find." },
+        { type = "paragraph", content = "There's underworld talk of hardware worked off the books: a ship-breaker down past the gate, in the underground, who takes machines the company can't see and asks the wrong questions for the right coin. The berth's down there, off the strip. She goes to find it." },
     ] },
   ] } },
 ]
@@ -6636,12 +6650,12 @@ flagEffects = [
 # with npc= renders nowhere, v2.py:4677). DIALOGUE-DOMINANT (Step-6 G2 — Kess's clinical reads are SPOKEN).
 # Kess is MALE (v2). He is "Stranger:" (speaker=unknown) until he names himself, then npc_kess ("Kess:")
 # (Step-6 G10). Third person for the connective narration. v2 TERMS: session-by-session, coin UP FRONT every
-# visit (20/session), no owing (kess_debt retired) — broke => go earn it down the gate. SETS kess_met on exit
+# visit (20/session), no owing (kess_debt retired) — broke => go earn it up the strip (House/Pit). SETS kess_met on exit
 # -> kess_berth, where salvage_repair_hub renders the "Start a repair session" menu.
 [[canvases]]
 id          = "salvage_kess_intro"
 name        = "The Berth"
-description = "beat_0049 (v2). Kess's first-contact + the SESSION terms. Auto-fire @kess_berth, pri 10, one-shot, gated salvage_entered is_true + kess_met is_false. He clocks the Vance steel and moves to eject (company heat = the one thing a ship-breaker won't touch), then the CORE read flips him greedy — custom/bespoke/hand-built one at a time (the mystery crumb, no Cain) — and he names himself. v2 terms: session by session, coin UP FRONT every visit (20/session, untraceable coin not Credits), no owing — broke means earn it down the gate between sessions. Dialogue-dominant; Stranger->Kess (male) handoff. SETS kess_met."
+description = "beat_0049 (v2). Kess's first-contact + the SESSION terms. Auto-fire @kess_berth, pri 10, one-shot, gated salvage_entered is_true + kess_met is_false. He clocks the Vance steel and moves to eject (company heat = the one thing a ship-breaker won't touch), then the CORE read flips him greedy — custom/bespoke/hand-built one at a time (the mystery crumb, no Cain) — and he names himself. v2 terms: session by session, coin UP FRONT every visit (20/session, untraceable coin not Credits), no owing — broke means earn it up the strip (House/Pit) between sessions. Dialogue-dominant; Stranger->Kess (male) handoff. SETS kess_met."
 
 [canvases.trigger]
 location      = "kess_berth"
@@ -6657,8 +6671,8 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The Berth"
 blocks = [
-  { type = "image", props = { file = "scenes/kess_berth_intro.jpg", description = "A woman ship-breaker on a work-cradle inside a drained dry-dock, cutting-torch in hand, a stripped hull behind her, turning to look at someone who's just walked in.", search_queries = ["woman welder cutting torch industrial night", "female mechanic workshop torch sparks"] } },
-  { type = "paragraph", content = "The berth's colder than the dock, all cut steel and sparks. Someone's up on the work-cradle with a torch. It cuts out when Wren's boots hit the floor." },
+  { type = "image", props = { file = "scenes/kess_berth_intro.jpg", description = "A male ship-breaker on a work-cradle inside a drained dry-dock, cutting-torch in hand, a stripped hull behind him, turning to look at someone who's just walked in.", search_queries = ["man welder cutting torch industrial night", "male mechanic workshop torch sparks"] } },
+  { type = "paragraph", content = "The berth's colder than the strip, all cut steel and sparks, the red light of the underground shut out behind a hull. Someone's up on the work-cradle with a torch. It cuts out when Wren's boots hit the floor." },
   { type = "dialog", props = { speaker = "unknown" }, content = "Yard's shut. Turn around." },
   { type = "cascade", props = { beats = [
     { advance_text = "Don't leave.", blocks = [
@@ -6669,7 +6683,7 @@ blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "I can't operate. Something in the core." },
         { type = "paragraph", content = "The word core turns the man's head. He comes down off the cradle, a gauge already in his hand, and holds it to the base of Wren's spine." },
     ] },
-    { advance_text = "Let her read it.", blocks = [
+    { advance_text = "Let him read it.", blocks = [
         { type = "dialog", props = { speaker = "unknown" }, content = "...that's not a Vance core. That's not anybody's core I've got a book for. Bespoke. Hand-built — somebody made you one at a time." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "I'm Kess. Sit down." },
     ] },
@@ -6681,7 +6695,7 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Coin. Not company scrip — I can't spend Vance money without Vance noticing, and neither can you. Twenty a session, and you're on the cradle." },
     ] },
     { advance_text = "Hear the catch.", blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "And it's up front — every session, before I open you. You're broke, I can read that off you too, so you'll be earning it down past the gate between visits. No coin, no session. That part's yours." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "And it's up front — every session, before I open you. You're broke, I can read that off you too, so you'll be earning it up the strip between visits — the House, the Pit, whoever's paying. No coin, no session. That part's yours." },
     ] },
   ] } },
 ]
@@ -6710,11 +6724,11 @@ flagEffects = [
 # Location-hub @kess_berth, repeatable, priority 3, gated kess_met + !salvage_done + core_strain gte 1
 # (still broken) + repair_armed lt 1 (not mid-session). "Start a repair session" costs 20 coin (greyed when
 # short) + SETS repair_armed=1 -> kess_berth, where the band scene (pri 10) fires. NO kess_debt (v2 §10 — coin
-# paid up front). "Not today" -> the_waterfront (go earn coin down the gate).
+# paid up front). "Not today" -> underworld_strip (go earn coin up the strip: House/Pit).
 [[canvases]]
 id          = "salvage_repair_hub"
 name        = "The Berth"
-description = "beat_0050 (v2). The repeatable repair-session menu @kess_berth. Location-hub, repeatable, pri 3, gated kess_met is_true + salvage_done is_false + core_strain gte 1 + repair_armed lt 1. 'Start a repair session' costs 20 coin + SETS repair_armed=1 -> kess_berth (the band scene fires); 'Not today' -> the_waterfront. Coin paid up front, no owing."
+description = "beat_0050 (v2). The repeatable repair-session menu @kess_berth. Location-hub, repeatable, pri 3, gated kess_met is_true + salvage_done is_false + core_strain gte 1 + repair_armed lt 1. 'Start a repair session' costs 20 coin + SETS repair_armed=1 -> kess_berth (the band scene fires); 'Not today' -> underworld_strip. Coin paid up front, no owing."
 
 [canvases.trigger]
 location      = "kess_berth"
@@ -6749,7 +6763,7 @@ effects = [
 [[canvases.nodes.exit_block.choices]]
 text       = "Not today."
 targetType = "location"
-locationId = "the_waterfront"
+locationId = "underworld_strip"
 
 [[canvases]]
 id          = "salvage_session_1"
@@ -6771,7 +6785,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The first body"
 blocks = [
-  { type = "image", props = { file = "scenes/salvage_session_1.jpg", description = "A broad-shouldered dock hand standing bare-chested by an industrial work-cradle in a dim dry-dock, a woman mechanic at a bench with a handheld readout, a naked woman waiting.", search_queries = ["shirtless man standing workshop", "nude woman industrial dry dock dim"] } },
+  { type = "image", props = { file = "scenes/salvage_session_1.jpg", description = "A broad-shouldered dock hand standing bare-chested by an industrial work-cradle in a dim dry-dock, a man mechanic at a bench with a handheld readout, a naked woman waiting.", search_queries = ["shirtless man standing workshop", "nude woman industrial dry dock dim"] } },
   { type = "paragraph", content = "Kess has the first one waiting when Wren comes in — a dock hand off the cargo runs, paid, told nothing. Big through the shoulders, half-stripped, easy about the coin and the quiet." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "First body. Don't expect anything off him — the take's dead, I know it's dead. But I can't read a drain that isn't turning over, and yours has been cold since they hauled you in. So turn it over. Use him however you like — rough, slow, doesn't matter to me, only to the readout." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "And reach for the take at the finish. Every time, hard as you can. I want to watch exactly how it fails — the shape of the failure tells me what's left to fix." },
@@ -6820,7 +6834,7 @@ nodeId = "n3"
 id   = "n3"
 name = "Nothing comes"
 blocks = [
-  { type = "video", props = { file = "sex/salvage_session_1_finish.webm", description = "A man finishes inside a woman bent over a work-cradle, a woman mechanic behind them watching a handheld readout.", search_queries = ["creampie from behind", "man cumming inside bent over"] } },
+  { type = "video", props = { file = "sex/salvage_session_1_finish.webm", description = "A man finishes inside a woman bent over a work-cradle, a man mechanic behind them watching a handheld readout.", search_queries = ["creampie from behind", "man cumming inside bent over"] } },
   { type = "paragraph", content = "He empties into her and she does what Kess said — reaches down inside herself for the old pull, the thing that used to open a man at the base of the spine and walk his secrets into her hands. Reaches, and closes on nothing." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Dead. Right through the finish — no charge, no pull, flat line the whole way. A cold empty socket where the weapon used to sit. Good. That's clean data, though — the first clean thing I've got off you." },
 ]
@@ -6871,7 +6885,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The rigger"
 blocks = [
-  { type = "image", props = { file = "scenes/salvage_session_2.jpg", description = "A man sitting on the edge of an industrial work-cradle with his boots off, a woman mechanic at a bench nearby, a naked woman standing in a dim dry-dock.", search_queries = ["man sitting edge table waiting", "nude woman industrial workshop dim"] } },
+  { type = "image", props = { file = "scenes/salvage_session_2.jpg", description = "A man sitting on the edge of an industrial work-cradle with his boots off, a man mechanic at a bench nearby, a naked woman standing in a dim dry-dock.", search_queries = ["man sitting edge table waiting", "nude woman industrial workshop dim"] } },
   { type = "paragraph", content = "Kess has a body waiting when Wren comes in — a rigger off the night boats, paid, told nothing. Boots already off, easy about the wait." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Core's cold. You'll pull nothing off him — I know that. I need it turning over so I can find what's seized. So turn it over. Use him however you like." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "And reach for the take at the finish. Every time. I want to watch it fail — I need to see where the charge dies." },
@@ -6902,7 +6916,7 @@ nodeId = "n3"
 id   = "n3"
 name = "Nothing comes"
 blocks = [
-  { type = "video", props = { file = "sex/salvage_session_2_finish.webm", description = "A man finishes inside a woman on a work-cradle, a woman mechanic watching a handheld readout behind them.", search_queries = ["creampie finish pov", "man cumming inside woman close"] } },
+  { type = "video", props = { file = "sex/salvage_session_2_finish.webm", description = "A man finishes inside a woman on a work-cradle, a man mechanic watching a handheld readout behind them.", search_queries = ["creampie finish pov", "man cumming inside woman close"] } },
   { type = "paragraph", content = "He empties into her. She reaches down inside herself for the old pull — the thing that used to open a man at the base of the spine. Nothing answers. A cold socket where the weapon sat." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Dead. Right through the finish — no charge, no pull, nothing. The socket's there, the driver just won't turn it over. Good. Clean data." },
 ]
@@ -6952,7 +6966,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The welder"
 blocks = [
-  { type = "image", props = { file = "scenes/salvage_session_3.jpg", description = "A big rough man in work coveralls standing in a dim dry-dock, a woman mechanic crouched at an open engine housing with a part in her hand, a naked woman waiting by a steel bench.", search_queries = ["big man workshop coveralls standing", "nude woman industrial dry dock dim"] } },
+  { type = "image", props = { file = "scenes/salvage_session_3.jpg", description = "A big rough man in work coveralls standing in a dim dry-dock, a man mechanic crouched at an open engine housing with a part in his hand, a naked woman waiting by a steel bench.", search_queries = ["big man workshop coveralls standing", "nude woman industrial dry dock dim"] } },
   { type = "paragraph", content = "Kess has another body waiting — a welder off the night shift, big through the shoulders, paid and told nothing. He stands there rolling his neck, impatient the way big men get when they're being kept from the work they came to do." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Core's still cold. You'll pull nothing off him — same as last time. But I've got a part to swap while it's turning, so keep it turning. Turn it over, use him however you like." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "And reach for the take at the finish. Every time. I want to watch it fail while I've got my hands in the seam." },
@@ -6968,7 +6982,7 @@ nodeId = "n2"
 id   = "n2"
 name = "The welder fucks her"
 blocks = [
-  { type = "video", props = { file = "sex/salvage_session_3_fuck.webm", description = "A big man bends a woman over a steel bench and fucks her hard from behind, fast, while a woman mechanic works at an open housing nearby.", search_queries = ["bent over bench doggystyle rough", "man fucking woman hard from behind"] } },
+  { type = "video", props = { file = "sex/salvage_session_3_fuck.webm", description = "A big man bends a woman over a steel bench and fucks her hard from behind, fast, while a man mechanic works at an open housing nearby.", search_queries = ["bent over bench doggystyle rough", "man fucking woman hard from behind"] } },
   { type = "paragraph", content = "No easing about the welder. He bends her over the bench, gets a hand flat on her back and works into her hard and fast, all shoulder. \"Quick job, then,\" he grunts, not asking. Kess ignores them, elbow-deep in the housing, prying a seized part loose." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Keep it turning. I've got the driver half out — don't stop till the finish." },
 ]
@@ -6983,7 +6997,7 @@ nodeId = "n3"
 id   = "n3"
 name = "Still nothing"
 blocks = [
-  { type = "video", props = { file = "sex/salvage_session_3_finish.webm", description = "A big man finishes deep in a woman bent over a bench, gripping her hips, a woman mechanic behind them holding a seized part up to the light.", search_queries = ["creampie from behind finish", "man cumming deep doggystyle"] } },
+  { type = "video", props = { file = "sex/salvage_session_3_finish.webm", description = "A big man finishes deep in a woman bent over a bench, gripping her hips, a man mechanic behind them holding a seized part up to the light.", search_queries = ["creampie from behind finish", "man cumming deep doggystyle"] } },
   { type = "paragraph", content = "He finishes deep and holds her there, spent. She does what Kess said — reaches down inside for the old pull, the thing that used to break a man at the spine. Nothing to reach with. The socket's still cold, still empty." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Dead. Clean through the finish, no charge — and there it is, the part in my hand, seized solid. That's your fault. That's the whole fault." },
 ]
@@ -7034,7 +7048,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The regular"
 blocks = [
-  { type = "image", props = { file = "scenes/salvage_session_4.jpg", description = "A relaxed older man lying back on an industrial work-cradle with his hands behind his head, a woman mechanic at a bench with a handheld readout, a naked woman standing in a dim dry-dock.", search_queries = ["man lying back waiting workshop", "nude woman industrial dry dock dim"] } },
+  { type = "image", props = { file = "scenes/salvage_session_4.jpg", description = "A relaxed older man lying back on an industrial work-cradle with his hands behind his head, a man mechanic at a bench with a handheld readout, a naked woman standing in a dim dry-dock.", search_queries = ["man lying back waiting workshop", "nude woman industrial dry dock dim"] } },
   { type = "paragraph", content = "Kess has a body waiting when Wren comes in — an old regular of his, already stripped, already on the cradle. Hands behind his head. He's done this before and it shows. Bored, easy, patient." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "This one's a regular. Knows the drill, won't spook, won't ask. Core's still cold — you'll pull nothing off him. But I want it turning over so I can read the driver." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "So turn it over. Use him however you like — ride him, finish him. And reach for the take at the finish. Every time. Eyes on the gauge." },
@@ -7050,7 +7064,7 @@ nodeId = "n2"
 id   = "n2"
 name = "She rides him"
 blocks = [
-  { type = "video", props = { file = "sex/salvage_session_4_fuck.webm", description = "A woman straddles a man on an industrial work-cradle and rides him at a steady working pace, a woman mechanic watching a readout nearby.", search_queries = ["cowgirl riding pov", "woman on top riding man"] } },
+  { type = "video", props = { file = "sex/salvage_session_4_fuck.webm", description = "A woman straddles a man on an industrial work-cradle and rides him at a steady working pace, a man mechanic watching a readout nearby.", search_queries = ["cowgirl riding pov", "woman on top riding man"] } },
   { type = "paragraph", content = "She climbs on and takes him herself — sets the pace, works him at a flat steady grind, nothing performed about it. \"Same as always,\" he says to the ceiling. \"Wake me if I'm needed.\" Kess doesn't look up from the readout." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Keep it steady. I don't need him loud, I need him finishing. Watch the needle when he goes." },
 ]
@@ -7065,7 +7079,7 @@ nodeId = "n3"
 id   = "n3"
 name = "The needle moves"
 blocks = [
-  { type = "video", props = { file = "sex/salvage_session_4_finish.webm", description = "A man finishes inside a woman riding him on a work-cradle, a woman mechanic leaning in over a handheld readout that flickers.", search_queries = ["creampie riding finish pov", "man cumming inside woman on top"] } },
+  { type = "video", props = { file = "sex/salvage_session_4_finish.webm", description = "A man finishes inside a woman riding him on a work-cradle, a man mechanic leaning in over a handheld readout that flickers.", search_queries = ["creampie riding finish pov", "man cumming inside woman on top"] } },
   { type = "paragraph", content = "He empties into her and she reaches — down inside for the old pull, the thing that used to crack a man open at the spine and walk his secrets out. Nothing catches. Cold socket, dead as before." },
   { type = "paragraph", content = "But the gauge on Kess's readout twitches. Once. A single flick of the needle, then flat." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "There. You see that? Dead through the finish — no charge, no pull — but the needle moved. First time it's moved at all." },
@@ -7283,7 +7297,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The freighter hand"
 blocks = [
-  { type = "image", props = { file = "scenes/salvage_session_7.jpg", description = "A weathered man standing silent by an industrial workbench, a woman mechanic at a readout, a naked woman waiting in a dim dry-dock.", search_queries = ["rugged man standing workshop", "nude woman industrial dock dim"] } },
+  { type = "image", props = { file = "scenes/salvage_session_7.jpg", description = "A weathered man standing silent by an industrial workbench, a man mechanic at a readout, a naked woman waiting in a dim dry-dock.", search_queries = ["rugged man standing workshop", "nude woman industrial dock dim"] } },
   { type = "paragraph", content = "Kess has the next one waiting — a hand off the freighters, weathered, silent, paid up front. He doesn't ask what the job is. Men who work boats that long stop asking." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Core's warmer than last time. You'll feel it try. It won't hold, but it'll try — and that's the part I need to watch. So turn it over. Use him however you like." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "And reach for the take at the finish. Push it this time. Don't be gentle with it." },
@@ -7314,7 +7328,7 @@ nodeId = "n3"
 id   = "n3"
 name = "It sputters"
 blocks = [
-  { type = "video", props = { file = "sex/salvage_session_7_finish.webm", description = "A man finishes deep in a woman bent over a workbench, a woman mechanic watching a handheld readout behind them.", search_queries = ["creampie from behind bent over", "man cumming inside doggystyle"] } },
+  { type = "video", props = { file = "sex/salvage_session_7_finish.webm", description = "A man finishes deep in a woman bent over a workbench, a man mechanic watching a handheld readout behind them.", search_queries = ["creampie from behind bent over", "man cumming inside doggystyle"] } },
   { type = "paragraph", content = "He finishes deep and she reaches — hard, furious, willing the old pull to catch. It flickers. Something at the base of the spine stirs, the weapon coughing awake half a second. She drags at it and it dies anyway. Nothing walks out of him." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Did you feel that? It lit. Half a beat, then it dropped. That's not dead — that's a bad connection." },
 ]
@@ -7365,7 +7379,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The mark"
 blocks = [
-  { type = "image", props = { file = "scenes/salvage_session_8.jpg", description = "A man sitting back on a low industrial bench with his shirt off, a woman mechanic at a workbench watching, a naked woman standing in a dim dry-dock.", search_queries = ["man sitting back bench waiting", "nude woman industrial workshop dim"] } },
+  { type = "image", props = { file = "scenes/salvage_session_8.jpg", description = "A man sitting back on a low industrial bench with his shirt off, a man mechanic at a workbench watching, a naked woman standing in a dim dry-dock.", search_queries = ["man sitting back bench waiting", "nude woman industrial workshop dim"] } },
   { type = "paragraph", content = "Kess has a mark waiting — a dockside john she pulled off the coin-boards, shirt already off, sitting back on the bench like he owns the hour. He doesn't. He's meat with a pulse and a day in his head." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Core's warmer than last time. It'll turn over now — might even bite. Get on top of him. Run it your way, not his. You've done the lying-back work; I want you driving." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "And reach for the take at the finish. Every time. This one I think you catch." },
@@ -7396,7 +7410,7 @@ nodeId = "n3"
 id   = "n3"
 name = "A thread comes"
 blocks = [
-  { type = "video", props = { file = "sex/salvage_session_8_finish.webm", description = "A man finishes inside a woman riding him on a bench, a woman mechanic behind them reading a handheld meter that flickers.", search_queries = ["creampie riding finish pov", "man cumming inside woman on top"] } },
+  { type = "video", props = { file = "sex/salvage_session_8_finish.webm", description = "A man finishes inside a woman riding him on a bench, a man mechanic behind them reading a handheld meter that flickers.", search_queries = ["creampie riding finish pov", "man cumming inside woman on top"] } },
   { type = "paragraph", content = "He empties under her and she reaches — down inside for the old pull, the thing that used to open a man and walk his secrets out. It catches. Weak, a flicker, but it grabs." },
   { type = "paragraph", content = "One thread of him comes loose — a wharf name, a crate he moved that morning, the low door behind it. Then it slips and guts out. Gone. But it fired." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "That — there. You felt that? It caught. Only a thread, only a scrap of his day, then it dropped. Doesn't matter. It fired. That's the first real take." },
@@ -7448,7 +7462,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The talker"
 blocks = [
-  { type = "image", props = { file = "scenes/salvage_session_9.jpg", description = "A talkative man sitting on an industrial work-cradle mid-sentence, hands moving, a woman mechanic at a bench watching a readout, a naked woman standing in a dim dry-dock.", search_queries = ["man talking sitting edge table", "nude woman industrial workshop dim"] } },
+  { type = "image", props = { file = "scenes/salvage_session_9.jpg", description = "A talkative man sitting on an industrial work-cradle mid-sentence, hands moving, a man mechanic at a bench watching a readout, a naked woman standing in a dim dry-dock.", search_queries = ["man talking sitting edge table", "nude woman industrial workshop dim"] } },
   { type = "paragraph", content = "Kess has a body waiting when Wren comes in — a talker, dockside, paid up front and already three sentences deep about the weather, the boats, his cousin's boat. The kind of man who fills a room to keep from thinking." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "This one runs his mouth. Good. The drain likes a man who's already leaking — easier to catch the thread and pull it. Core's warmer now. I think it'll hold this time." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "So turn it over, use him however you like — and reach for the take at the finish. If it catches, don't fight it. Let it walk a whole sentence out of him." },
@@ -7480,7 +7494,7 @@ nodeId = "n3"
 id   = "n3"
 name = "It catches"
 blocks = [
-  { type = "video", props = { file = "sex/salvage_session_9_finish.webm", description = "A man finishes inside a woman on a work-cradle, her hand gripping his forearm, a woman mechanic reading a handheld meter behind them.", search_queries = ["creampie finish pov", "man cumming inside woman close"] } },
+  { type = "video", props = { file = "sex/salvage_session_9_finish.webm", description = "A man finishes inside a woman on a work-cradle, her hand gripping his forearm, a man mechanic reading a handheld meter behind them.", search_queries = ["creampie finish pov", "man cumming inside woman close"] } },
   { type = "paragraph", content = "She pulls his cock up into her cunt and rides it out, and when he empties she reaches — the old pull, down at the base of his spine — and this time it grabs. Holds." },
   { type = "paragraph", content = "A word comes up through him and out his mouth like it was hers to take: \"Nobody knows I sank the Marda. I cut her loose myself. For the coin.\" Then the thread drops." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "There it is. Held right through the finish — a whole sentence, clean, true. He didn't even feel it leave. Good. That's the drain working." },
@@ -7567,6 +7581,13 @@ blocks = [
   { type = "paragraph", content = "He finishes deep, spills up into her cunt, a long shudder of all that weight. She reaches down inside for the old pull, and this time it catches. Grabs." },
   { type = "paragraph", content = "The socket floods and takes. The shape of the man comes up her spine near whole — his years, his ledger, his quiet. Most of him, in one long draw." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "There — there it is. Strong catch, socket flooding, meter near the top. That's nearly the full take; almost the whole man pulled off one finish. His years, his weight, all of it up the trace. That's the readout I wanted." },
+  # EMITTER RECOVERY — try 1 of 3 (FIZZLE). Gated on owning a bench-fixed emitter; renders nothing otherwise.
+  # The emitter draws off the same core; at Hot band the core can't spare a second draw -> nothing fires.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" } ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "While he's still standing — that emitter of yours runs off this same core. If the drain's catching, the other one might wake too. Thumb it at him. Let's see." },
+    { type = "paragraph", content = "She pulls the emitter, levels it at the spent dock-hand, and keys it. Nothing rolls off it — no field, no heat, no give. The big man just blinks at her, waiting. Dead weight in her hand." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Nothing. Figured as much. Core's barely driving the one draw — it's got nothing spare for a second yet. Leave it. It'll come back when the drain's all the way trim." },
+  ] },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -7615,7 +7636,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The regular"
 blocks = [
-  { type = "image", props = { file = "scenes/salvage_session_11.jpg", description = "A man standing easy against an industrial workbench, a woman mechanic at a readout nearby, a naked woman facing him in a dim dry-dock.", search_queries = ["man standing waiting workshop", "nude woman industrial dry dock dim"] } },
+  { type = "image", props = { file = "scenes/salvage_session_11.jpg", description = "A man standing easy against an industrial workbench, a man mechanic at a readout nearby, a naked woman facing him in a dim dry-dock.", search_queries = ["man standing waiting workshop", "nude woman industrial dry dock dim"] } },
   { type = "paragraph", content = "Kess has a body waiting — a dockside regular she's used before, paid up front, unbothered. He knows the shape of the job by now. Stands loose against the bench, waiting to be told nothing." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Core's warm today. Warmer than it's been. So don't be careful with it — take him how you want him, top to bottom, all your call. I want the drive under load, not idling." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "And reach for the take at the finish. Every time. I think this one gives you something back." },
@@ -7631,7 +7652,7 @@ nodeId = "n2"
 id   = "n2"
 name = "She takes him"
 blocks = [
-  { type = "video", props = { file = "sex/salvage_session_11_fuck.webm", description = "A woman rides a man on an industrial cradle, hands on his chest, setting the pace herself while a woman mechanic watches a readout.", search_queries = ["cowgirl riding pov", "woman on top pace control"] } },
+  { type = "video", props = { file = "sex/salvage_session_11_fuck.webm", description = "A woman rides a man on an industrial cradle, hands on his chest, setting the pace herself while a man mechanic watches a readout.", search_queries = ["cowgirl riding pov", "woman on top pace control"] } },
   { type = "paragraph", content = "She puts him down on the cradle and climbs on, sets the pace off her own hips — slow, then flat and hard, exactly the rhythm she wants and not his. \"Fine by me,\" he says, hands off, letting her. Kess watches the meter climb." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "That's it. Needle's moving — real charge this time. Don't stop, don't ease it. Run him." },
 ]
@@ -7646,9 +7667,15 @@ nodeId = "n3"
 id   = "n3"
 name = "It fires"
 blocks = [
-  { type = "video", props = { file = "sex/salvage_session_11_finish.webm", description = "A man finishes inside a woman riding him on a work-cradle, her head tipped back, a woman mechanic staring at a spiking readout behind them.", search_queries = ["creampie cowgirl finish", "man cumming inside woman on top"] } },
+  { type = "video", props = { file = "sex/salvage_session_11_finish.webm", description = "A man finishes inside a woman riding him on a work-cradle, her head tipped back, a man mechanic staring at a spiking readout behind them.", search_queries = ["creampie cowgirl finish", "man cumming inside woman on top"] } },
   { type = "paragraph", content = "She wrings him dry and reaches — down inside for the old pull that used to open a man at the base of the spine. This time it catches. It fires clean, full take, and the whole shape of him lays open in her hands." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "There it is. Full pull, clean through the finish, no sputter — that's the weapon. That's you. Welcome back." },
+  # EMITTER RECOVERY — try 2 of 3 (SPUTTER). Core drives the second draw now but can't hold it -> a weak field.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" } ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Drain's clean now. Try the other one again — same as before, thumb it at him." },
+    { type = "paragraph", content = "She keys the emitter at the regular. This time a field rolls off it, thin and stuttering. His eyes glass, his breath drags, his knees dip — then it guts out and he catches the bench, swaying, still up on his feet." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "There — it drove that time. Weak, half a field, didn't put him down. But the core spilled into the second draw. Can't hold it yet. One more session and it lands full." },
+  ] },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -7731,6 +7758,14 @@ blocks = [
   { type = "video", props = { file = "sex/salvage_session_12_finish.webm", description = "A man finishes on a woman bent over a cradle, a man mechanic behind them watching a readout spike.", search_queries = ["cumshot finish from behind", "man cumming on woman ass"] } },
   { type = "paragraph", content = "He finishes on her and she reaches — the old pull, down at the base of the spine. No cold socket this time, no clawing after a dead thing. His secrets walk out of him in one clean draw. It opens easy; the take barely costs her a want." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "There. Full pull, right through the finish, no strain on the readout at all. That's whole. That's a clean core." },
+  # EMITTER RECOVERY — try 3 of 3 (FIRE). Core's trim -> it drives the second draw clean. The exit clears
+  # emitter_broken=0, re-enabling the world-fire. Video slot new (silent-skips until the 0.1.4 media harvest).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" } ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Core's trim now, holding under load. So — the other one, last time. Put it on him and mean it." },
+    { type = "video", props = { file = "sex/salvage_emitter_fire.webm", description = "A man goes slack and dazed on his feet in a dim industrial workshop as a woman lowers a small handheld emitter, a mechanic watching a readout.", search_queries = ["man dazed limp standing workshop", "woman handheld device man slack amateur"] } },
+    { type = "paragraph", content = "She levels the emitter at the dock-hand and keys it. The field rolls out full and even and drops over him like weather. He goes slack where he stands, eyes gone, a dead weight held up by nothing — under, and staying under." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "That's it. Full field, clean drop. Both weapons live off one good core, and it's good now. You came in here with a dead drain and a dead emitter. You walk out with two." },
+  ] },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -7757,6 +7792,8 @@ effects = [
   { targetType = "player", trait = "core_strain",    op = "add", value = -8, clamp = true },
   { targetType = "player", trait = "repair_session", op = "add", value =  1, clamp = true },
   { targetType = "player", trait = "repair_armed",   op = "set", value =  0, clamp = true },
+  # Core restored -> the emitter drives again (world-fire re-enabled; harmless if she never had the emitter).
+  { targetType = "player", trait = "emitter_broken", op = "set", value =  0, clamp = true },
 ]
 
 # ═══ salvage_chip_snag — beat_0050b (v2), the mid-repair chip-snag (one-shot frame) ═══

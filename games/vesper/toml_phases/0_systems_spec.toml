@@ -17,6 +17,8 @@ title       = "Vesper"
 description = "An owned half-human weapon who feels nothing but the sex she's used for. Inside Vance Dynamics she's the company's slave; outside, under a false face, she slips into powerful men's lives and drains them while they think they're using her — sent to hunt a rogue called Cain."
 quests_engine   = "v2"
 starting_canvas = "canvas_opening_office"   # the cold open (Beat 1 — the office)
+version         = "0.1.4"          # sidebar footer — bump in the same commit as the games-data.js portal entry
+release_date    = "2026-07-16"     # sidebar footer — date this build ships
 
 [time]
 starting_hour = 20        # the opening opens in the evening (Beat 1 — Mercer's office)
@@ -132,30 +134,26 @@ bands = [
 #      (96) still matches. A closed 72-95 band would make "Core: Failing" VANISH at exactly the moment the
 #      design promises it becomes permanent — the row IS the promise the repair chunk pays.
 #
-# Edges are set so each band names the shelf that comes NEXT (+12 per use): at "Core: Nominal" (12) the
-# next scene is still Nominal; at "Core: Hot" (24) the crew comes in. The read-out is a countdown.
+# Edges are set so each band names the shelf that comes NEXT (+12 per use): at "Core: Strained" (12) the
+# next scene is still that band; at "Core: Damaged" (24) the crew comes in. The read-out is a countdown.
+# Words = a plain severity ladder (Strained -> Damaged -> Critical -> Failing), LO 2026-07-16 (was the
+# opaque Nominal/Hot/Faulting/Failing — "Nominal" misread as "fine" when she's still broken).
 [[sidebar_items]]
 type  = "trait_status_text"
 trait = "core_strain"
 bands = [
-  { min = 1,  max = 23, text = "Core: Nominal",  icon = "○" },
-  { min = 24, max = 47, text = "Core: Hot",      icon = "◔" },
-  { min = 48, max = 71, text = "Core: Faulting", icon = "◑" },
+  { min = 1,  max = 23, text = "Core: Strained", icon = "○" },
+  { min = 24, max = 47, text = "Core: Damaged",  icon = "◔" },
+  { min = 48, max = 71, text = "Core: Critical", icon = "◑" },
   { min = 72,           text = "Core: Failing",  icon = "◕" },   # NO max — survives the frozen 96
 ]
 
-# ─── Leash: Uncut (SALVAGE v2) — the control chip, revealed at the verdict. beat_0046. ─────────────
-# By the verdict the 12 repair sessions have drained core_strain to 0, so the "Core: Failing"..."Nominal" row
-# VANISHES (the renderer emits nothing when no band matches), and THIS row lights in its place: the control
-# governor Kess found but can't pull — why she can never turn her power on the man who owns her. Driven by
-# core_sealed (0 until the verdict sets it 1); band from min=1 so the row is ABSENT the whole game until the
-# verdict lights it. "Uncut" = the chip's still in, needs its controller. Additive — core_strain's bands untouched.
-[[sidebar_items]]
-type  = "trait_status_text"
-trait = "core_sealed"
-bands = [
-  { min = 1, text = "Leash: Uncut", icon = "🔒" },
-]
+# ─── (Leash sidebar row REMOVED — LO's call 2026-07-16) ────────────────────────────────────────────
+# The v2 "Leash: Uncut" row (driven by core_sealed, lit at the verdict) is GONE — LO wanted the chip reveal
+# to live in the SCENE (Kess's dialogue at the verdict), not as a standing sidebar line. core_sealed is still
+# set 1 at the verdict + still declared (save-safe; v1 shipped it), but nothing displays it now. So post-verdict
+# that sidebar slot is simply blank (core_strain already drained to 0 -> its "Core:" row vanished too). To
+# restore: re-add a trait_status_text sidebar_item on core_sealed with a { min = 1, text = "...", icon = "..." } band.
 
 # ─── NPC panel — REMOVED per LO (2026-07-01) ──────────────────────────────────
 # The Renner sidebar npc_panel (corruption / location / quest-goal rows) was removed — early
@@ -242,9 +240,9 @@ hidden = true
 [[traits.labels]]
 key    = "cell_door"
 hidden = true
-# SALVAGE (beat_0046) — both hidden from the <<playerTraits>> dump. Like core_strain, core_sealed still
-# draws its sidebar row (the trait_status_text renderer ignores `hidden`). kess_debt is the owed-coin
-# accumulator — named in the verdict prose, read by no gate this chunk (a deferred Act-2 seed).
+# SALVAGE (beat_0046) — both hidden from the <<playerTraits>> dump. core_sealed is still set 1 at the verdict
+# but its sidebar row was REMOVED (LO 2026-07-16, see above) — it now displays nothing; kept declared for
+# save-safety. kess_debt is the owed-coin accumulator — named in the verdict prose, read by no gate this chunk.
 [[traits.labels]]
 key    = "core_sealed"
 hidden = true
@@ -261,4 +259,10 @@ key    = "repair_armed"
 hidden = true
 [[traits.labels]]
 key    = "repair_session"
+hidden = true
+# SALVAGE emitter recovery — emitter_broken (0/1, hidden). 0=works. Set 1 at the captivity release, 0 at
+# repair session 12; ANDed into the 4 emitter fire gates as `emitter_broken lt 1` (yard guards + underworld
+# gate). TRAIT not flag = dodges the flag-chain validator (the fire gates are exit-block choice conditions).
+[[traits.labels]]
+key    = "emitter_broken"
 hidden = true

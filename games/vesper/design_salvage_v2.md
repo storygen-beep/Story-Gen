@@ -15,6 +15,46 @@
 > dials resolved (§18); one reversal from the first lock — coin-cost-per-session, not debt-accrual (§3, §10).
 > `design_book.md` + `authoring_state.json` to be updated on the deploy go.
 >
+> **Rev 2026-07-16 (post-build) — the berth moved into the underworld.** `kess_berth` is no longer a
+> `the_waterfront` card; it is now a child of `underworld_strip` (`entry_from = underworld_strip`, in the
+> strip nav after the market — same gated pattern as `crew_den`). Re-fictioned as a flooded breaking-dock
+> **under the docks**, off the strip (the "dry-dock" interior imagery stays — same room). Rationale: the coin
+> EARN (House/Pit) and the SPEND (Kess) now sit in one zone past the gate, so the 12-session grind is one trip
+> down instead of a yo-yo up-and-down; and Kess-as-underworld-figure + the company's-leash-found-off-the-grid
+> both land harder there. The repair now lives **behind the gate** (she clears the guard to get fixed). Exits
+> re-routed to keep her under: the hub "Not today" and the berth Leave → `underworld_strip`. UNCHANGED: the
+> cold-open still lands her on the surface (`the_waterfront`) to descend herself (no teleport-into-gated race);
+> the verdict still teleports her UP to `the_waterfront` (she surfaces, Mercer re-launches). Live-verified:
+> berth reachable-during / blocked-before-and-after on the strip, "Not today" → strip, zero page errors.
+>
+> **Rev 2026-07-16 (post-build) — the EMITTER recovers too (builds the deferred "Stage C").** Wren has two
+> weapons off one core: the drain (weapon 1, repaired by the 12-session grind) and the **emitter** (weapon 2,
+> the arousal-field weapon, `equipped_weapon=2`/`arousal_charge`, found + bench-fixed in the burned yard). Both
+> draw off the SAME core, so captivity killed both — and the emitter now **comes back in stages like the
+> drain**, riding the tail of the existing grind (LO's call; this is the "Stage C — light emitter proof" the
+> original design deferred, `design_book.md:1241,1265,1885`). Two parts: **(1) 3 narrative recovery beats**
+> appended to sessions 10/11/12 (**fizzle → sputter → fire**, one notch behind the drain's catch/clean/
+> effortless — the emitter is the harder second draw), each a `group` gated on `arousal_weapon_ready is_true`
+> so they render only for players who own a working emitter (drain-only otherwise). **(2) A world-fire disable**
+> — new hidden trait `emitter_broken` (default 0=works; TRAIT not flag → validator-safe + save-safe): the
+> captivity release (`captivity_cain`, `captive_room`) sets it **1**, session 12's exit sets it **0**, and the
+> 4 emitter fire gates (`3_activities.toml` yard guards @560/596/632 + underworld gate @950) AND
+> `emitter_broken lt 1`. So the emitter is dead in the world through the whole break (she can't zap the gate
+> with a not-working-yet weapon) and lights back up exactly when the last recovery beat fires. No trap (salvage
+> is mandatory → session 12 always clears it). +1 media slot (`sex/salvage_emitter_fire.webm`, deferred to
+> 0.1.4). Live-verified: 3 beats render-with / absent-without the emitter; gate fire choice blocked at
+> `emitter_broken=1`, present at `=0`; green build (flag chains valid), zero page errors, register clean.
+>
+> **Rev 2026-07-16 (post-build) — sidebar cleanup (LO's call).** (1) The **"Leash: Uncut" sidebar row is
+> REMOVED** — the chip reveal now lives ONLY in Kess's verdict dialogue, not as a standing sidebar line
+> (reverses the original "meter VISIBLY FLIPS" fork). `core_sealed` is still set 1 at the verdict + declared
+> (save-safe), but displays nothing; post-verdict that slot is blank. (2) The **"Core:" band words are
+> simplified** to a plain severity ladder — **Strained → Damaged → Critical → Failing** (was
+> Nominal/Hot/Faulting/Failing; "Nominal" misread as "fine" when she's still broken, and the old order wasn't
+> legible). Icons (○◔◑◕) + the min=1 vanish-at-0 behavior unchanged; "Failing" (the frozen 96 end-state) kept.
+> Live-verified: bands render Strained/Damaged/Critical/Failing at 10/30/60/96, no row at 0, no Leash row at
+> `core_sealed=1`, zero old words, zero page errors.
+>
 > **Provenance.** Reworked with LO 2026-07-16 across a design conversation. Engine claims reuse the verified
 > captivity model (`design_captivity_the_room.md` §9; the `core_strain` band renderer, the band-gated shelf
 > scenes) and the v1 SALVAGE build. Anything not yet verified is **⚠️ verify at build**.
@@ -180,8 +220,8 @@ Fires when the repair completes (`core_strain = 0`). Kess delivers it (SPOKEN, d
 
 **Mechanic:** by the verdict `core_strain` is already 0 (the sessions drained it), so the "Core: Failing" row
 is already gone. The verdict sets **`core_sealed = 1`** → a standing sidebar row **`Leash: Uncut`** (relabel
-of v1's `Core: Locked`; trait key unchanged). She walks out owing the `kess_debt` balance. Teleport to
-`the_waterfront`.
+of v1's `Core: Locked`; trait key unchanged). She walks out **paid clean** (no owing — the debt model retired,
+§10). Teleport **up** to `the_waterfront` (she surfaces from the underworld berth; Mercer re-launches there).
 
 ---
 
@@ -222,7 +262,8 @@ save-breaking way; add the shocked state as a higher-priority conditional layer.
 
 ## 11. Kess — the fixer (now MALE)
 
-- **Who:** an off-books dockside **synth-mechanic / ship-breaker** in the Reach, `kess_berth`. Reads bodies
+- **Who:** an off-books **synth-mechanic / ship-breaker** working a flooded breaking-dock **under the docks**,
+  off the underworld strip (`kess_berth`; moved down the gate 2026-07-16 — see the header rev note). Reads bodies
   as **hardware, not people** (was "not women" in v1). Blunt, clinical, transactional; won't touch company
   work until a frame he can't put a book to walks in. Wants **coin** and the interesting problem.
 - **Role:** the fixer AND the cold channel — he reads *what's in her* (the re-seated drain; the leash) and
@@ -230,7 +271,8 @@ save-breaking way; add the shocked state as a higher-priority conditional layer.
 - **Slug `npc_kess`** (already built). **NO schedule** (chunk-scripted at the berth; verified the schedule
   block must NOT sit under his `[[npcs]]` or it orphans Marsh's — memory
   `npc_schedule_orphan_on_insert`). Dialog speaker renders "Kess:"; "Stranger:" until he names himself.
-  Recurs as the debt-holder. **All narration pronouns he/him.**
+  Recurs as **the man who knows what's in her** (the leash-reader — on knowledge, not money; debt retired, §10).
+  **All narration pronouns he/him.**
 - Tolly / Reeves / the other test-bodies: narration-level, no `npc_` objects (quoted speech, like the
   captivity crew).
 

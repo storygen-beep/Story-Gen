@@ -94,6 +94,11 @@ kess_debt         = 0
 # kept for save-safety, but nothing feeds it; the repair is coin-cost-per-session, not debt-accrual.)
 repair_armed      = 0
 repair_session    = 0
+# SALVAGE emitter recovery — emitter_broken: 0=works (default; pre-captivity yard/gate use), set 1 at the
+# captivity release (core dead -> the emitter draws off the SAME core, so it's dead too), set 0 at repair
+# session 12 (core restored). The 4 emitter fire gates AND `emitter_broken lt 1`. Default 0 = save-safe
+# (missing/0 both read "not broken", so shipped saves keep a working emitter — no regression).
+emitter_broken    = 0
 
 # ─── NPCs ─────────────────────────────────────────────────────────────────────
 
@@ -423,25 +428,27 @@ entry_conditions = { version = "1.0", items = [
 ] }
 blocked_message = "You've no reason to be out at his burned yard — not yet. Get inside his world first."
 
-# ── kess_berth — the Salvage repair hub (the off-books fixer's dry-dock) ────────────────────────
-# SALVAGE (beat_0047). Kess's drained dry-dock in the Reach. entry_from=the_waterfront -> a free Leave-exit
-# + a nav card on the docks. LIFECYCLE (Step-6 G3): entry_conditions {salvage_entered AND !salvage_done} +
-# blocked_message -> greyed-visible before she goes off-books, ENTERABLE during the repair, LOCKED-visible
-# again after the verdict (which teleports her to the_waterfront). NO seal; Kess carries NO schedule
-# (chunk-scripted, so no Schedule-page leak). Name is BARE ("The Berth") so the nav card doesn't spoil Kess
-# before she names herself. version="1.0" or the lock fails OPEN.
+# ── kess_berth — the Salvage repair hub (the off-books fixer's breaking-dock) ─────────────────────
+# SALVAGE (beat_0047). Kess's flooded breaking-dock UNDER THE DOCKS, off the underworld strip (rev: moved
+# down the gate so the coin EARN (House/Pit) and the SPEND (Kess) sit in one zone — the whole repair now
+# lives past the gate, one trip). entry_from=underworld_strip -> a free Leave-exit back onto the strip + a
+# nav card among the underworld venues (same gated pattern as crew_den). LIFECYCLE (Step-6 G3):
+# entry_conditions {salvage_entered AND !salvage_done} + blocked_message -> greyed-visible before she goes
+# off-books, ENTERABLE during the repair, LOCKED-visible again after the verdict (which teleports her UP to
+# the_waterfront). NO seal; Kess carries NO schedule (chunk-scripted, so no Schedule-page leak). Name is BARE
+# ("The Berth") so the nav card doesn't spoil Kess before she names herself. version="1.0" or the lock fails OPEN.
 [[locations]]
 id          = "kess_berth"
 name        = "The Berth"
-description = "A drained dry-dock off the waterfront, a stripped hull still up on the blocks, cutting-gear and parts bins and a work-cradle rigged for something bigger than a person. Whoever works here takes machines apart for a living — and, for the right coin, puts them back."
+description = "A flooded breaking-dock cut in under the docks, off the strip — a stripped hull up on the blocks in black water, cutting-gear and parts bins and a work-cradle rigged for something bigger than a person. Whoever works down here takes machines apart for a living — and, for the right coin, puts them back."
 image       = "locations/kess_berth.jpg"
-image_search_queries = ["drained dry dock ship breaking yard night", "gutted hull workshop cutting torch dark"]
-entry_from  = "the_waterfront"
+image_search_queries = ["flooded ship breaking dock underground night", "gutted hull workshop cutting torch dark"]
+entry_from  = "underworld_strip"
 entry_conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "salvage_entered", operator = "is_true" },
   { type = "flag", subject = "player", flag_key = "salvage_done",    operator = "is_false" },
 ] }
-blocked_message = "A dry-dock berth off the waterfront, chained and dark. Whoever strips ships down here doesn't take walk-ins."
+blocked_message = "A breaking-dock off the strip, chained and dark. Whoever strips ships down here doesn't take walk-ins."
 
 # ── THE UNDERWORLD — the dark city the hunt points to (her second life) ────────────────────────
 # Always available (gated only opening_done). The gate is cleared EVERY visit (pay coin / fight / weapon —
@@ -470,7 +477,7 @@ name             = "The Underground"
 description      = "Down past the gate the city turns inside out — wet brick, red light, stalls selling what the Spire outlaws and bodies selling what it pretends to. Nobody here knows what she is, and nobody here owns her. For the length of a visit she's just another face with coin to make. The way back up is the gate."
 image            = "locations/underworld_strip.jpg"
 image_search_queries = ["underground night market red light crowd", "cyberpunk black market alley neon"]
-navigation_order = ["underworld_bar", "underworld_brothel", "underworld_pit", "underworld_market", "crew_den", "the_site"]
+navigation_order = ["underworld_bar", "underworld_brothel", "underworld_pit", "underworld_market", "kess_berth", "crew_den", "the_site"]
 
 [[locations]]
 id          = "underworld_brothel"

@@ -345,7 +345,7 @@ See the reconcile note under the Casting table.)*
 | **Sol** | ambient anchor · **the informant** (leads-color made concrete) | The Long Hour's bartender who's seen everything and asks nothing — the one face in the city who treats you like a regular. Bring him a dead man's name and he knows who ran it, and where the survivor still turns up. | light warmth, no conquest | light island | **leads-color → the hunt's talk-hub** (no lock, no arc) | **the pointer** — turns Renner's two names into a lead on the fixer; opens the Underworld Hunt |
 | **Marsh** *(new)* | the fixer — the Underworld Hunt's mark | Doss's surviving partner from the crew Renner gutted; a dockside fixer who books the same girl at The House every Sunday. Take her slot, serve him, drain him, and he gives up where the crew lived. | transactional / one-off | light (one beat) | **one-off drain** — NO relation/corruption climb; his Sunday window *is* his pacing | **the rung** — the living thread from the two dead men up to Bastien (drain → the crew's place → the grab) |
 | **Rue** *(new)* | the House girl (Axis A) · a person, not filler | The worker Marsh books. Pay her to skip one Sunday and the slot is yours — and Rue **stays**, wary and owed, a named face in the brothel who isn't just a client's hole. | light warmth, no conquest | light island | **obstacle → standing thread** — schemed off the slot with coin, then persists as an underworld contact | **the way in** — clears the Sunday slot so the player can reach Marsh; her *staying* is the roster fix in miniature |
-| **Kess** *(new)* | the off-books fixer — Salvage's anchor | A dockside synth-mechanic in the Reach who strips decommissioned machines for parts and does quiet illegal repair on the side; reads bodies as **hardware, not women**. Clocks your company steel and nearly throws you out, then can't resist a frame nobody's supposed to be able to afford. Wants coin and the interesting problem. | supplicant / test-bench (**she** works on you) | light → **recurring** (debt-holder into Act 2) | **staged repair-and-test** — NO relation/corruption climb; each fix proven on a brought body; the fixer **and** the cold channel that reads *who re-seated your drain* (never learns his name) | **the repair node** — pays the Core: Failing promise (→ Core: Locked), drops the Calloway file-room lead, leaves a `kess_debt` (broke→rich seed); re-launches at Mission 3 |
+| **Kess** *(new)* | the off-books fixer — Salvage's anchor | A dockside synth-mechanic in the Reach who strips decommissioned machines for parts and does quiet illegal repair on the side; reads bodies as **hardware, not women**. Clocks your company steel and nearly throws you out, then can't resist a frame nobody's supposed to be able to afford. Wants coin and the interesting problem. | supplicant / test-bench (**he** works on you) | light → **recurring** (debt-holder into Act 2) | **staged repair-and-test** — NO relation/corruption climb; each fix proven on a brought body; the fixer **and** the cold channel that reads *who re-seated your drain* (never learns his name) | **the repair node** — pays the Core: Failing promise (→ Core: Locked), drops the Calloway file-room lead, leaves a `kess_debt` (broke→rich seed); re-launches at Mission 3 |
 
 > **Underworld-Hunt reconcile (rev 52).** This is the reconcile the drain lore-swap parked ("D2 — reconcile
 > when those targets are built"). The drain already stopped naming Bastien/Calloway as leads and points at the
@@ -1275,7 +1275,7 @@ clinical/opened-up look is thin on the standard harvest → some scenes go text-
   is_false`. Each `_done` set on the terminal exit → a strict DAG.
 - **Voice carriage — present bodies SPEAK** (the captivity crew-narration exemption does NOT transfer; it
   rode on dissociation, now gone). beat 2 / Stage-A Kess reads / Stage B / verdict = **PLAYED** (≤1.5:1;
-  >3:1 FAILS). Kess's clinical reads ARE her lines; **Reeves says where the files are** (spoken, not
+  >3:1 FAILS). Kess's clinical reads ARE his lines; **Reeves says where the files are** (spoken, not
   narrated); Tolly = one terse line; test-bodies render `speaker="unknown"` → "Stranger:". Narrated
   exemptions: the Stage-A leak, beat 1 (solo), interior end-cards.
 - **Berth lifecycle — CLOSE-after (no dead room).** `kess_berth entry_conditions = { salvage_entered is_true
@@ -1914,7 +1914,7 @@ No deliberate first-want. Her only stir is the involuntary leak she can't hold; 
 the chip" inversion. The first *chosen* want is saved for a later beat.
 
 ### Register
-RTS-flat for the berth, the terms, and the body-tests (Kess's voice **clinical** — she narrates a body the
+RTS-flat for the berth, the terms, and the body-tests (Kess's voice **clinical** — he narrates a body the
 way a mechanic narrates an engine; the bodies are consensual and hot, no ceiling on explicitness). The
 Stage-A glitch-leak is the single **Tier-3** spend, and it spends by *reusing* the release beat's devices —
 recurrence, not new purple. Everything else flat.

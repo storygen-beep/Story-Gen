@@ -557,7 +557,7 @@ flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 text       = "Use the weapon on him."
 targetType = "node"
 nodeId     = "yard_crawl.weapon_scene"
-conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 10 }, { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 } ] }
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 10 }, { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 }, { type = "trait", subject = "player", trait_key = "emitter_broken", operator = "lt", value = 1 } ] }
 effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -593,7 +593,7 @@ flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 text       = "Use the weapon on them."
 targetType = "node"
 nodeId     = "yard_crawl.weapon_scene"
-conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 25 }, { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 } ] }
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 25 }, { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 }, { type = "trait", subject = "player", trait_key = "emitter_broken", operator = "lt", value = 1 } ] }
 effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -629,7 +629,7 @@ flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 text       = "Use the weapon on them."
 targetType = "node"
 nodeId     = "yard_crawl.weapon_scene"
-conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 40 }, { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 } ] }
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 40 }, { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 }, { type = "trait", subject = "player", trait_key = "emitter_broken", operator = "lt", value = 1 } ] }
 effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -947,7 +947,7 @@ conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subje
 text       = "Put the weapon on him."
 targetType = "node"
 nodeId     = "underworld_gate_check.weapon_scene"
-conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" } ] }
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "emitter_broken", operator = "lt", value = 1 } ] }
 costs      = [{ trait = "arousal_charge", value = 1 }]
 effects    = [{ targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
 [[canvases.nodes.exit_block.choices]]

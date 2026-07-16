@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 64,
+  "book_revision": 66,
   "register": {
     "person": "third"
   },
@@ -943,80 +943,134 @@
       "status": "validated",
       "target_phase": "7",
       "title": "Salvage 1 — engine + systems (core_sealed, kess_debt, Core: Locked row)",
-      "introduces": ["core_sealed trait (0->1)", "kess_debt trait (0, accrues per stage)", "the 'Core: Locked' trait_status_text sidebar row"],
-      "canvases": ["0_systems_spec.toml: declare core_sealed + kess_debt in player.core_traits, both hidden from the <<playerTraits>> dump. Add a new trait_status_text row driven by core_sealed (bands from min=1 -> 'Core: Locked'), ABSENT until repair lights it. core_strain row unchanged (still min=72 -> Failing). Extend-only, no renames."]
+      "introduces": [
+        "core_sealed trait (0->1)",
+        "kess_debt trait (0, accrues per stage)",
+        "the 'Core: Locked' trait_status_text sidebar row"
+      ],
+      "canvases": [
+        "0_systems_spec.toml: declare core_sealed + kess_debt in player.core_traits, both hidden from the <<playerTraits>> dump. Add a new trait_status_text row driven by core_sealed (bands from min=1 -> 'Core: Locked'), ABSENT until repair lights it. core_strain row unchanged (still min=72 -> Failing). Extend-only, no renames."
+      ]
     },
     {
       "id": "beat_0047",
       "status": "validated",
       "target_phase": "7",
       "title": "Salvage 2 — geography (kess_berth) + inits",
-      "introduces": ["kess_berth location (entry_from=the_waterfront)", "salvage_entered + per-stage flags init"],
-      "canvases": ["1_metadata_and_locations.toml: kess_berth, entry_from=the_waterfront (free ungated exit link), ordinary (no seal). Init salvage_entered/salvage_stage_a_done/salvage_stage_b_done/salvage_done = false; core_sealed/kess_debt default 0."]
+      "introduces": [
+        "kess_berth location (entry_from=the_waterfront)",
+        "salvage_entered + per-stage flags init"
+      ],
+      "canvases": [
+        "1_metadata_and_locations.toml: kess_berth, entry_from=the_waterfront (free ungated exit link), ordinary (no seal). Init salvage_entered/salvage_stage_a_done/salvage_stage_b_done/salvage_done = false; core_sealed/kess_debt default 0."
+      ]
     },
     {
       "id": "beat_0048",
       "status": "validated",
       "target_phase": "7",
       "title": "Salvage 3 — Beat 1: the body won't hold (auto-fire @the_waterfront)",
-      "introduces": ["the break-on-input opening", "the don't-report choice -> salvage_entered"],
-      "canvases": ["Auto-fire @the_waterfront, is_repeatable=false, gated captivity_done is_true + salvage_entered is_false (version='1.0'). Two loop-attempts break ON INPUT (leg buckles, drain misfires cold, Core: Failing red). Choice: don't report (refit=wipe) -> sets salvage_entered, opens kess_berth. Lane 4 capstone-shape. Her first un-ordered choice."]
+      "introduces": [
+        "the break-on-input opening",
+        "the don't-report choice -> salvage_entered"
+      ],
+      "canvases": [
+        "Auto-fire @the_waterfront, is_repeatable=false, gated captivity_done is_true + salvage_entered is_false (version='1.0'). Two loop-attempts break ON INPUT (leg buckles, drain misfires cold, Core: Failing red). Choice: don't report (refit=wipe) -> sets salvage_entered, opens kess_berth. Lane 4 capstone-shape. Her first un-ordered choice."
+      ]
     },
     {
       "id": "beat_0049",
       "status": "validated",
       "target_phase": "7",
       "title": "Salvage 4 — Kess: intro + the terms",
-      "introduces": ["npc_kess (portrait, berth)", "the staged-repair terms + kess_debt"],
-      "canvases": ["npc_kess NPC entry + her intro/terms canvas @kess_berth (npc-intro 7-step). She nearly ejects her (company heat), then flips greedy at the read (custom/bespoke, NEVER 'old/decommissioned'). Terms: staged, each stage costs coin (untraceable, NOT Credits); she's short -> kess_debt accrues. Lane 1 hub-shape. Clinical, consensual register."]
+      "introduces": [
+        "npc_kess (portrait, berth)",
+        "the staged-repair terms + kess_debt"
+      ],
+      "canvases": [
+        "npc_kess NPC entry + her intro/terms canvas @kess_berth (npc-intro 7-step). She nearly ejects her (company heat), then flips greedy at the read (custom/bespoke, NEVER 'old/decommissioned'). Terms: staged, each stage costs coin (untraceable, NOT Credits); she's short -> kess_debt accrues. Lane 1 hub-shape. Clinical, consensual register."
+      ]
     },
     {
       "id": "beat_0050",
       "status": "validated",
       "target_phase": "7",
       "title": "Salvage 5 — Stage A: core & charge (Tier-3 leak + Tolly test)",
-      "introduces": ["the seam + the forensic read", "the Tier-3 glitch-leak", "the Tolly charge-test"],
-      "canvases": ["@kess_berth, is_repeatable=false. Kess opens the seam; the forensic read ('somebody who'd had their fingers in you before, who didn't need to look' — tender hand = the RECENT re-seat). Mid-charge the involuntary glitch-leak (REUSES beat_0042 devices; name-syllable OFF-page; sets NO chip fragment); she reaches + fails to hold it. TEST: charge on Tolly. Terminal exit ONLY: core_strain eased, kess_debt += cost, salvage_stage_a_done. Tier-3 for the leak, RTS-flat for the test."]
+      "introduces": [
+        "the seam + the forensic read",
+        "the Tier-3 glitch-leak",
+        "the Tolly charge-test"
+      ],
+      "canvases": [
+        "@kess_berth, is_repeatable=false. Kess opens the seam; the forensic read ('somebody who'd had their fingers in you before, who didn't need to look' — tender hand = the RECENT re-seat). Mid-charge the involuntary glitch-leak (REUSES beat_0042 devices; name-syllable OFF-page; sets NO chip fragment); she reaches + fails to hold it. TEST: charge on Tolly. Terminal exit ONLY: core_strain eased, kess_debt += cost, salvage_stage_a_done. Tier-3 for the leak, RTS-flat for the test."
+      ]
     },
     {
       "id": "beat_0051",
       "status": "validated",
       "target_phase": "7",
       "title": "Salvage 6 — Stage B: the drain-test on Reeves (+ the Calloway clue)",
-      "introduces": ["the drain weapon-test", "the Calloway file-room lead", "(optional) Stage C emitter"],
-      "canvases": ["@kess_berth, is_repeatable=false. Drain re-check -> TEST: the drain fires on the anal finish with Reeves (a Vance courier); the payload drops 'the build-files are in Calloway's file room'. The weapon-test IS the intel beat (anal finish = how the drain takes; REUSE the equipped_weapon=1 path). Terminal exit ONLY: kess_debt += cost, salvage_stage_b_done. Stage C (emitter) only if it earns a canvas, else folded here. Reset shared sex-loop traits on entry/exit."]
+      "introduces": [
+        "the drain weapon-test",
+        "the Calloway file-room lead",
+        "(optional) Stage C emitter"
+      ],
+      "canvases": [
+        "@kess_berth, is_repeatable=false. Drain re-check -> TEST: the drain fires on the anal finish with Reeves (a Vance courier); the payload drops 'the build-files are in Calloway's file room'. The weapon-test IS the intel beat (anal finish = how the drain takes; REUSE the equipped_weapon=1 path). Terminal exit ONLY: kess_debt += cost, salvage_stage_b_done. Stage C (emitter) only if it earns a canvas, else folded here. Reset shared sex-loop traits on entry/exit."
+      ]
     },
     {
       "id": "beat_0052",
       "status": "validated",
       "target_phase": "7",
       "title": "Salvage 7 — the verdict (Core: Failing -> Locked; walk owing)",
-      "introduces": ["the meter flip (core_strain->0, core_sealed=1)", "the 'you need your build file' line", "salvage_done"],
-      "canvases": ["@kess_berth, one-shot. Function bought back: core_strain->0 (Failing row VANISHES — renderer emits nothing at no-match), core_sealed=1 (Core: Locked lights). Kess: 'the real fault's in a partition somebody sealed when they built you... you'd need your own build file — and Vance keeps those classified.' She walks OWING the kess_debt balance. Sets salvage_done. Tier-3 end card. Medical crisis -> identity mystery."]
+      "introduces": [
+        "the meter flip (core_strain->0, core_sealed=1)",
+        "the 'you need your build file' line",
+        "salvage_done"
+      ],
+      "canvases": [
+        "@kess_berth, one-shot. Function bought back: core_strain->0 (Failing row VANISHES — renderer emits nothing at no-match), core_sealed=1 (Core: Locked lights). Kess: 'the real fault's in a partition somebody sealed when they built you... you'd need your own build file — and Vance keeps those classified.' She walks OWING the kess_debt balance. Sets salvage_done. Tier-3 end card. Medical crisis -> identity mystery."
+      ]
     },
     {
       "id": "beat_0053",
       "status": "validated",
       "target_phase": "7",
       "title": "Salvage 8 — re-launch: Mercer's Mission-3 (Calloway) dispatch",
-      "introduces": ["the Calloway dispatch", "private want + company order at one address"],
-      "canvases": ["Mercer pings Mission 3 (Calloway, the internal Cain-hunt, the classified file), gated salvage_done. For the first time the order and her own reason share one address (Calloway's file room = the record of the hand that saved her AND her build file). Sandbox re-opens. Lane 1. Does NOT build Calloway's arc (that is the next chunk) — only the dispatch/lead."]
+      "introduces": [
+        "the Calloway dispatch",
+        "private want + company order at one address"
+      ],
+      "canvases": [
+        "Mercer pings Mission 3 (Calloway, the internal Cain-hunt, the classified file), gated salvage_done. For the first time the order and her own reason share one address (Calloway's file room = the record of the hand that saved her AND her build file). Sandbox re-opens. Lane 1. Does NOT build Calloway's arc (that is the next chunk) — only the dispatch/lead."
+      ]
     },
     {
       "id": "beat_0054",
       "status": "validated",
       "target_phase": "7",
       "title": "Salvage 9 — Quests page re-gate",
-      "introduces": ["the Salvage status card", "the frontier card update (Calloway lit)"],
-      "canvases": ["Upper-gate the post-captivity frontier card; add a Salvage STATUS card (while broken: get fixed off the books) that closes on salvage_done; then the frontier card points at Calloway/Mission 3. Sidebar-next == Quests-page renderer parity (pickQuestsCard -> renderQuestsGoalBlock)."]
+      "introduces": [
+        "the Salvage status card",
+        "the frontier card update (Calloway lit)"
+      ],
+      "canvases": [
+        "Upper-gate the post-captivity frontier card; add a Salvage STATUS card (while broken: get fixed off the books) that closes on salvage_done; then the frontier card points at Calloway/Mission 3. Sidebar-next == Quests-page renderer parity (pickQuestsCard -> renderQuestsGoalBlock)."
+      ]
     },
     {
       "id": "beat_0055",
       "status": "planned",
       "target_phase": "7",
       "title": "Salvage 10 — media pass + clean publish (0.1.4)",
-      "introduces": ["find-media for the new clips", "clean production build 0.1.4"],
-      "canvases": ["find-media: Kess portrait, the Stage-A seam, the Tolly charge-test, the Reeves drain-test (+ emitter). Clinical/opened-up look thin on the harvest -> some text-forward/machine-framed; engine silent-skips missing. Clean rebuild (NO --dev/--debug), verify no DEV JUMPS/Canvas-Review/full-map, cut releases/v0.1.4.html, update ledger + book_revision."]
+      "introduces": [
+        "find-media for the new clips",
+        "clean production build 0.1.4"
+      ],
+      "canvases": [
+        "find-media: Kess portrait, the Stage-A seam, the Tolly charge-test, the Reeves drain-test (+ emitter). Clinical/opened-up look thin on the harvest -> some text-forward/machine-framed; engine silent-skips missing. Clean rebuild (NO --dev/--debug), verify no DEV JUMPS/Canvas-Review/full-map, cut releases/v0.1.4.html, update ledger + book_revision."
+      ]
     }
   ],
   "structure_registry": {
@@ -2061,6 +2115,11 @@
       "turn": 84,
       "book_revision": 65,
       "note": "SALVAGE CONSISTENCY AUDIT (4-lens adversarial Workflow: numbers/timing/prose-vs-mechanic/canon) + 2 dev jumps + 4 fixes. Ran because LO asked to fix the debt 'thoroughly + find similar issues'. Added 2 dev jumps to 6_dev_shortcuts.toml (▶ Salvage: the waterfront = seeds captivity-complete state, drops @the_waterfront so the cold-open fires; ▶ Salvage: the verdict = seeds through Stage B, drops @kess_berth so the verdict/flip fires — kess_debt=40). Audit CONFIRMED 4 issues, ALL FIXED: (1) DEBT sixty->forty at 3 sites (verdict dialog, the Calloway frontier card tip, the verdict description comment) — real accrual = 2 stages x +20 = 40 ('That's one'/'That's two' + the dev seed confirm; no 3rd stage). (2) *** SERIOUS REGRESSION I INTRODUCED (caught by the audit, NOT the green build) ***: when npc_kess was added (beat_0049) it was inserted BETWEEN npc_marsh's arc_stages and Marsh's [[npcs.schedules]] block, so TOML re-attached Marsh's Sunday-night schedule (underworld_brothel, weekdays=[6], 20:00-23:59, 'his standing Sunday booking') to npc_kess. Effect: Kess LEAKED onto the Schedule page (violating her no-schedule design) AND Marsh lost his Sunday presence -> hunt_marsh_sunday (requires_npc=npc_marsh) never fires -> crew_known never sets -> the WHOLE underworld hunt -> captivity -> SALVAGE chain UNREACHABLE in normal play (dev jumps skip it, which is why testing missed it). This was live in the pushed build b979332. FIXED: moved the schedule block back above the Kess comment so it re-attaches to npc_marsh (verified: source + built HTML = Marsh scheduled @underworld_brothel, Kess unscheduled). (3) CANON LEAK: Reeves' Stage-B clue said 'everything on the Cain program in there' — co-locating Wren's build file with the Cain program pre-welds the LOCKED Wren-Cain shared-origin reveal + disagreed with the verdict's Cain-free retelling; dropped the Cain clause ('the sealed ones, all of them, in there'). (4) MINOR: the verdict's 'you went somewhere on my cradle and came back holding a name' conflated the un-holdable glitch leak-name with the Calloway name (from Reeves); re-pointed it at the courier ('That courier gave it up on my cradle'). Audit DISMISSED (correctly): the Day two/three narrative time-compression + Mercer's 'three days' (no on-page numeric contradiction) + the 'sits lower' sternum prose (intentional). VERIFIED: merge OK; rebuild --dev --debug green (491,070 bytes); 0 'sixty' / 0 'Cain program' left; schedule re-attached. LESSON -> memory npc_schedule_orphan_on_insert. NEXT: commit + push the fixes + dev jumps (re-deploy over b979332)."
+    },
+    {
+      "turn": 85,
+      "book_revision": 66,
+      "note": "KESS → MALE, change COMPLETED (LO: 'complete change kess to men, delete his portrait first, identify content issues'; then 'align to author-game skill'). Loaded the author-game skill first. Kess NPC def was ALREADY male (description 'he reads a hull'); the conversion was ~2/3 done (sessions 5/6/10/12 already 'man mechanic', the rest not). (1) Deleted kess.jpg portrait (source+output), re-sourced a MALE ship-breaker (Pexels 6264376 — beard, welder goggles pushed up, appraising gaze; 'reads a body like a hull'). (2) 5_scenes.toml content fix (mechanical, assertion-checked): 19x 'a woman mechanic'->'a man mechanic' (now 25 total, 0 woman), kess_berth_intro 'A woman ship-breaker...behind her'->'A male ship-breaker...behind him' + queries female/woman->male/man, session_3 'a part in her hand'->'his hand', and the ONE player-facing one: advance_text 'Let her read it.'->'Let him read it.' (5_scenes:3807). (3) design_book.md (the review surface) had 3 real Kess-female spots (all other she/her = Vesper, correct): casting :348 '(she works on you)'->'(he...)', :1278 'ARE her lines'->'his lines', :1917 'she narrates a body'->'he narrates' — fixed. design_salvage_v2.md already consistent (annotates 'Kess (male)'); design_salvage_the_repair.md left (marked SUPERSEDED). SKILL-ALIGNED: media.md (description=narrative/find-list, queries=physical vocab), save-safety = prose/display-only, NO id/flag/trait-key/title change (npc_kess + 'Kess' unchanged) so shipped saves survive. Merge OK (565,990 bytes) + rebuild --dev --debug GREEN (Failed 0, 0 'woman mechanic'/25 'a man mechanic', 'Let him read it', kess.jpg portrait resolves). NOT committed/pushed (offered). Open: the 19-item media re-review round from earlier this session is STILL disapproved (untouched, LO re-reviews)."
     }
   ]
 }
