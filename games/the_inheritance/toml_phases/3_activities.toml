@@ -142,11 +142,15 @@ effects = [ { targetType = "player", trait = "energy", op = "add", value = 15, c
 # raises corruption — her own fall); the mirror raises exhibitionism. Corr 0 start.
 # ══════════════════════════════════════════════════════════════════════════════
 
-# ── The channel nobody admits to (warms arousal) ──────────────────────────────
+# ── The channel-surf TV (5 channels, next / off; the last one warms arousal) ───
+# The old set in Your Old Room. Surf with "Next channel ->" (node routing), or "Turn
+# the TV off." to leave. Channels 1-4 are flavour (no effect); channel 5 is the porn
+# channel -- either exit off it grants +4 arousal (LO: no per-channel climb, the porn
+# channel is the warm-up), which clears feeder_get_off's arousal>=4 gate in one surf.
 [[canvases]]
 id          = "feeder_channel"
 name        = "The channel"
-description = "Player-solo. Your Old Room. The old TV / the phone — warms arousal (throttle self-limits at cap 10). The warm-up before get-off."
+description = "Player-solo, Your Old Room. A 5-channel channel-surf TV (multi-node: base=news -> ch2 shop -> ch3 film -> ch4 late-night -> ch5 PORN, which loops back to base). Every channel offers Next channel + Turn the TV off. Only the porn channel warms arousal (+4, cap 10) -- the bootstrap warm-up before feeder_get_off. Solo -> Rule-4 exempt."
 
 [canvases.trigger]
 location      = "loc_player_room"
@@ -154,23 +158,107 @@ is_repeatable = true
 priority      = 3
 is_active     = true
 
+# ── Channel 1 — the news (base) ───────────────────────────────────────────────
 [[canvases.nodes]]
 id   = "base"
 name = "The channel"
 blocks = [
-  { type = "image", props = { file = "activities/channel.jpg", description = "a woman in bed at night, face lit blue by a screen, watching", search_queries = ["woman watching phone in bed at night blue light", "late night tv glow bedroom"] } },
-  { type = "paragraph", content = "The old set still pulls the channels nobody admits to. Sound low, lamp off — and you don't pretend it's to help you sleep. You're wet before you've decided to be." },
+  { type = "video", props = { file = "activities/channel_news.webm", description = "a late-night tv news broadcast, an anchor at a desk, a weather map, low light of a bedroom", search_queries = ["late night tv news broadcast anchor loop", "tv news weather map screen night"] } },
+  { type = "paragraph", content = "The old set warms up slow. A late bulletin — a man in a bad tie over a weather map, nothing you came up here for." },
 ]
-
 [canvases.nodes.exit_block]
 type = "choices"
-
 [[canvases.nodes.exit_block.choices]]
-text       = "Keep watching."
+text       = "Next channel →"
+targetType = "node"
+nodeId     = "feeder_channel.ch2"
+[[canvases.nodes.exit_block.choices]]
+text       = "Turn the TV off."
+targetType = "location"
+locationId = "loc_player_room"
+time_progression_minutes = 10
+
+# ── Channel 2 — the shopping channel ──────────────────────────────────────────
+[[canvases.nodes]]
+id   = "ch2"
+name = "The channel"
+blocks = [
+  { type = "video", props = { file = "activities/channel_shop.webm", description = "a home shopping channel host presenting costume jewellery to camera late at night", search_queries = ["home shopping channel host jewellery presenting", "late night tv shopping channel loop"] } },
+  { type = "paragraph", content = "A shopping channel. Costume jewellery sold to nobody at one in the morning, a host whose voice could strip paint. Not it either." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Next channel →"
+targetType = "node"
+nodeId     = "feeder_channel.ch3"
+[[canvases.nodes.exit_block.choices]]
+text       = "Turn the TV off."
+targetType = "location"
+locationId = "loc_player_room"
+time_progression_minutes = 10
+
+# ── Channel 3 — an old film ───────────────────────────────────────────────────
+[[canvases.nodes]]
+id   = "ch3"
+name = "The channel"
+blocks = [
+  { type = "video", props = { file = "activities/channel_film.webm", description = "a black-and-white classic film playing on an old tv screen, flickering, night", search_queries = ["black and white old film tv screen flicker", "classic movie playing on old tv night"] } },
+  { type = "paragraph", content = "An old film, black-and-white, the kind your mother left running in this house for thirty years. You almost stop on it. You don't." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Next channel →"
+targetType = "node"
+nodeId     = "feeder_channel.ch4"
+[[canvases.nodes.exit_block.choices]]
+text       = "Turn the TV off."
+targetType = "location"
+locationId = "loc_player_room"
+time_progression_minutes = 10
+
+# ── Channel 4 — late-night cable (implied, not shown) ─────────────────────────
+[[canvases.nodes]]
+id   = "ch4"
+name = "The channel"
+blocks = [
+  { type = "video", props = { file = "activities/channel_latenight.webm", description = "a late-night cable programme, suggestive but coy, bodies implied and the camera cutting away, dim", search_queries = ["late night cable softcore suggestive tv glow", "suggestive late night tv couple silhouette"] } },
+  { type = "paragraph", content = "Late-night cable, two shades past daylight — bodies implied, the camera cutting away just before. Warmer. Your thumb slows on the button." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Next channel →"
+targetType = "node"
+nodeId     = "feeder_channel.ch5"
+[[canvases.nodes.exit_block.choices]]
+text       = "Turn the TV off."
+targetType = "location"
+locationId = "loc_player_room"
+time_progression_minutes = 10
+
+# ── Channel 5 — the channel nobody admits to (PORN; warms arousal, loops) ─────
+[[canvases.nodes]]
+id   = "ch5"
+name = "The channel"
+blocks = [
+  { type = "video", props = { file = "activities/channel_porn.webm", description = "explicit adult content playing on the tv, the room dark, the screen the only light", search_queries = ["pov hardcore amateur couple", "explicit porn couple bedroom pov"] } },
+  { type = "paragraph", content = "The channel nobody admits the set still pulls. No cutting away up here, no pretense — sound low, lamp off, and you're wet before you've decided to be." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Next channel →"
+targetType = "node"
+nodeId     = "feeder_channel.base"
+effects = [ { targetType = "player", trait = "arousal", op = "add", value = 4, cap = 10 } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Turn the TV off."
 targetType = "location"
 locationId = "loc_player_room"
 time_progression_minutes = 30
-effects = [ { targetType = "player", trait = "arousal", op = "add", value = 3, cap = 10 } ]
+effects = [ { targetType = "player", trait = "arousal", op = "add", value = 4, cap = 10 } ]
 
 # ── Get yourself off (arousal>=4 -> climax: resets arousal, raises corruption) ──
 [[canvases]]
