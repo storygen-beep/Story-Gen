@@ -28,7 +28,6 @@ One more thing wrong going here, there is no sex loop with this guy, drain can o
 
 Underworld available from the renner's depot is a bit wierd, what do you think?? Answer honestly, dont make any code changes yet.
 
-
 Underworld man at the door, turn back, takes player to the renners place not the actual place that canvas was in.
 **[DONE]**
 
@@ -38,4 +37,27 @@ Bringing down the renner grind
 
 
 
+**16th July**
 
+
+[Vesper]
+
+Review Media
+
+[DONE]Move berth to underworld
+
+[DONE]With weapon drain should it also repair the other weapon [same method, repair and test]
+
+test mercer response to the different stages of wren
+
+[DONE]understand core / leash sidebar item, see if it properly done or not.
+
+
+[Inheritance]
+[DONE]Change player portrait to some other character, sidebar portrait to have topless and bottom less both. I would say first lets cast a younger girl and more beautiful one, and on her we do thorough research on bringing photos of her on different states of clothing, bring more cloths. Dont worry about those product images, we will simply use those images send them to gemini and generate a product image out of it.
+
+[DONE]Channel to be a proper TV channel.
+
+
+
+[DONE]sidebar bottom: add few details like game version and date of release
