@@ -15090,6 +15090,18 @@ $(document).on(':passagestart', function(ev) {
         # State-reactive player portrait — mounts just below the time display (time stays at the
         # very top of the sidebar), above the HUD/stat items. Opt-in.
         portrait_line = "<<playerPortrait>>\n" if self.player_portrait_enabled else ""
+        # Sidebar version/release-date footer — build-time constants baked as literal
+        # markup (same style as <<patreonButton>>'s static URL). html.escape guards
+        # build-breaking chars. Renders nothing when both empty, but the widget is
+        # ALWAYS defined (SugarCube throws on an undefined <<versionFooter>> call).
+        _ver = html.escape((self.project.metadata or {}).get("version", "") or "")
+        _rel = html.escape((self.project.metadata or {}).get("release_date", "") or "")
+        _footer_parts = ([f"v{_ver}"] if _ver else []) + ([_rel] if _rel else [])
+        _footer_text = " · ".join(_footer_parts)
+        version_footer_widget = (
+            f'\n<<widget "versionFooter">>\n<div class="sidebar-version">{_footer_text}</div>\n<</widget>>\n'
+            if _footer_text else '\n<<widget "versionFooter">><</widget>>\n'
+        )
         if self.dev_mode:
             story_caption = f""":: StoryCaption
 <<devIndicator>>
@@ -15106,7 +15118,8 @@ $(document).on(':passagestart', function(ev) {
 <<flagsButton>>
 <<playerTraits>>
 <<npcTraits>>
-<<patreonButton>>"""
+<<patreonButton>>
+<<versionFooter>>"""
         else:
             story_caption = f""":: StoryCaption
 <<missingMediaButton>>
@@ -15118,7 +15131,8 @@ $(document).on(':passagestart', function(ev) {
 <<statsButton>>
 <<scheduleButton>>
 <<playerTraits>>
-<<patreonButton>>"""
+<<patreonButton>>
+<<versionFooter>>"""
 
         # Stats page with optional dev controls for NPC traits
         # Get video path for portrait URLs
@@ -15988,7 +16002,7 @@ if (clothingMsg) {
 </div>
 <</widget>>
 
-""" + story_caption + """
+""" + version_footer_widget + story_caption + """
 
 <style>
 #time-widget {
@@ -16198,6 +16212,14 @@ if (clothingMsg) {
     margin: 15px 0 0 0;
     padding: 15px 0 0 0;
     border-top: 1px solid #444;
+    text-align: center;
+}
+
+/* Version / release-date footer at the very bottom of the sidebar */
+.sidebar-version {
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--theme-text-muted, #8a8a8a);
     text-align: center;
 }
 

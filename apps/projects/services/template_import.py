@@ -48,6 +48,10 @@ class TemplateProject:
     # [[story_arc.hints.templates]] engine. "v2" → new [[quests.cards]]
     # engine. Per-game opt-in; other games stay on v1 untouched.
     quests_engine: str = "v1"
+    # Optional sidebar-footer metadata; default "" so games without these keys
+    # render no footer. Purely additive.
+    version: str = ""
+    release_date: str = ""
 
 
 @dataclass
@@ -1515,6 +1519,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         title=_require_str(p, "title"),
         description=_require_str(p, "description"),
         quests_engine=_require_str(p, "quests_engine", "v1"),
+        version=_require_str(p, "version", ""),
+        release_date=_require_str(p, "release_date", ""),
     )
 
     # Optional: [time] section (has sensible defaults)
@@ -5688,6 +5694,9 @@ def _assemble_project_metadata(project, template):
     # Narrative person — the generator reads this to label the player's own dialog
     # and thought-bubble blocks ("You:" / "Me:" / the character's name).
     project.metadata["narration_person"] = template.narration_person
+    # Optional sidebar version/release-date footer (new top-level metadata keys).
+    project.metadata["version"] = template.project.version
+    project.metadata["release_date"] = template.project.release_date
     # PRD 48 — serialize V2 cards onto project.metadata. Empty list for v1
     # games (their hints stay in project.metadata["story_arc"]["hints"]).
     if template.project.quests_engine == "v2":
