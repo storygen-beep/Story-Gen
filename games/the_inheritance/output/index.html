@@ -8338,7 +8338,10 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;div id=&quot;flags-btn-widget&quot;&gt;
   &lt;&lt;if passage() isnot &quot;FlagsPage&quot;&gt;&gt;&lt;&lt;link &quot;Flags&quot; &quot;FlagsPage&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;else&gt;&gt;&lt;span class=&quot;nav-row&quot;&gt;Flags&lt;/span&gt;&lt;&lt;/if&gt;&gt;&lt;span class=&quot;nav-i&quot;&gt;🚩&lt;/span&gt;
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="StoryCaption" tags="" position="725,100" size="100,100">&lt;&lt;devIndicator&gt;&gt;
+&lt;&lt;/widget&gt;&gt;
+
+
+&lt;&lt;widget &quot;versionFooter&quot;&gt;&gt;&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="StoryCaption" tags="" position="725,100" size="100,100">&lt;&lt;devIndicator&gt;&gt;
 &lt;&lt;reviewButton&gt;&gt;
 &lt;&lt;devJumps&gt;&gt;
 &lt;&lt;missingMediaButton&gt;&gt;
@@ -8355,6 +8358,7 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;playerTraits&gt;&gt;
 &lt;&lt;npcTraits&gt;&gt;
 &lt;&lt;patreonButton&gt;&gt;
+&lt;&lt;versionFooter&gt;&gt;
 
 &lt;style&gt;
 #time-widget {
@@ -8564,6 +8568,14 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
     margin: 15px 0 0 0;
     padding: 15px 0 0 0;
     border-top: 1px solid #444;
+    text-align: center;
+}
+
+/* Version / release-date footer at the very bottom of the sidebar */
+.sidebar-version {
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--theme-text-muted, #8a8a8a);
     text-align: center;
 }
 
