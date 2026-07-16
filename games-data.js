@@ -26,9 +26,15 @@ window.GAMES = [
     title: "Mother's Place",
     summary: `Cora, mid-twenties and broke, moves back into the house she grew up in a year after her mother walked out — and starts becoming the woman everyone's still waiting for.`,
   },
-  // "the_inheritance" de-listed 2026-07-14 — the v1 build is archived at
-  // archive/the_inheritance_v1/ while the game is re-authored from its design book.
-  // Re-list once the new build ships.
+  {
+    // Re-listed 2026-07-16 after the full re-author (v1 archived at archive/the_inheritance_v1/).
+    // Current output/ is a --dev --debug build (dev stat controls visible, media not yet harvested);
+    // add `version` + drop the dev flags on output/ when the production build + art ship.
+    slug: "the_inheritance",
+    title: "The Inheritance",
+    badge: "New",
+    summary: `Written out of the will and dragged home for the reading, you find your aunt already running your dead mother's failing hotel — and every relative certain you're nobody. Take the hotel in hand, and take every person under its roof, until the family that underestimated you answers to you.`,
+  },
   {
     slug: "last_call",
     title: "Last Call",
