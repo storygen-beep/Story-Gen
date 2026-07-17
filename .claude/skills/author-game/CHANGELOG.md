@@ -13,6 +13,81 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-07-17
+- **`references/engine-reference.md` §location table — NEW engine field `auto_exit` (bool, default true).**
+  Root cause: the engine assumes every location sits in a tree — a root-with-children or a child-with-a-parent
+  — and Vesper's `underworld_gate` is neither. It's a **transit stop**: arrived at by canvas (the travel car)
+  and left by canvas, and it is the only location in that game with **zero children** (spire←1, waterfront←5,
+  strip←7, gate←0). A nav-less location trips the list-every-location fallback, so `entry_from` had been bolted
+  onto the gate purely to feed the nav check a link, and `parent` added right after to undo `entry_from`'s side
+  effect — two hacks cancelling out, with `[[Leave The Underworld Gate]]` as their exhaust. LO's diagnosis, and
+  the right one: the engine had no *word* for this shape. `auto_exit=false` is that word — it skips the
+  hardcoded `[[Leave <name>]]` **and** reads an empty nav list as intentional. Both halves are required; with
+  only the first, the location dumps the entire map.
+  - Engine: `TemplateLocation.auto_exit` (`template_import.py`) + carried via `loc.properties` in **both** build
+    paths (`game_graph.py` no-DB default and `template_import.py` `--use-db`) + two guards in `v2.py`
+    `_generate_hierarchical_navigation`. Additive default → existing games byte-identical. **Regression-verified:**
+    `late_shifts`, which never heard of the field, rebuilds green and still emits all 15 of its `[[Leave ]]` links.
+  - Worth knowing for future authoring, both found while doing this: the `[[Leave {location.name}]]` label is a
+    **hardcoded f-string** with no TOML override — and the importer **silently ignores unknown location keys**,
+    so an author writing `exit_text = "…"` gets no error and no effect. Also: `entry_conditions` gate the
+    **passage**, not just the nav card (the emitted `Location_` passage wraps its whole body in
+    `<<if setup.triggerConditionsSatisfied(...)>>`), so they cannot be used to grey a nav card while leaving a
+    canvas-exit route open.
+  - ⚠️ **A doc claim I got wrong, recorded so nobody repeats it:** I told LO `getNpcsWithSchedules` gates on
+    `_isCanvasAvailable`, so a scheduled-but-unmet NPC wouldn't leak onto the Schedule page. **False** — I read
+    the first loop and stopped. A second loop adds every NPC in the declared `setup.npcSchedules` registry
+    *"regardless of whether any of its canvases are unlocked yet"*; the canvas scan is only a back-compat
+    fallback for games declaring no schedules. **Declaring a schedule lists that NPC from turn 1.** That is a
+    real design consequence of `[[npcs.schedules]]` and the skill does not currently say so anywhere.
+- **`references/prose-truth.md` — NEW. The skill mandated a copy of every field into prose and never said the
+  copy was a maintenance obligation.** Root cause: two same-day Vesper bugs of one class — Kess *said* "Twenty a
+  session" after `costs` went 20→10, and a quest `tip` said "the Berth off the waterfront" after `kess_berth` was
+  re-parented to `underworld_strip` (it also taught the deleted two-zone map). **Both builds stayed green** —
+  flag chains valid, no warning; the game just lied to the player. Passes CLAUDE.md's "would a correct skill have
+  prevented this?" test, so the skill gets fixed, not just the game.
+  - **The framing matters more than the rule, and my first two designs were wrong.** (1) I proposed a "prefer
+    derived over hand-copied" tier — **dangerous, killed.** `renderQuestsGoalBlock` gates the derived `📍`/`🕒`
+    behind `goalState.allMet && card.ready_canvas` (`v2.py:14479`); the whole climb takes Frame 3 (`!allMet`,
+    `:14494`) which renders goal bullets only. `getCostBlockedMessage` (`v2.py:4527`) prints only into
+    `<span class="locked-choice">` (`:12233`) — silent when affordable. `_formatCanvasSchedule` (`v2.py:6842`)
+    emits machine register ("Mon–Fri", "every day") and *cannot* write "evenings 6 pm–close". An author told
+    "the engine derives it" would strip the tip and leave the player nothing. **The legibility mandate
+    (`step-2-toplevel.md` §5) is correct and load-bearing — left untouched.** Derivation is reframed as an
+    *oracle that checks the copy*, never a substitute. (2) A prose scanner — **killed**: a field-scoped digit
+    grep is ~164 hits / ~2 true positives on Vesper, and value-matching reports **clean on the real bugs**
+    because the prose form is deliberately a different register (`125` → "Hundred and twenty-five";
+    `09:00` → "Nine sharp"). So the skill's sin is narrow and precise: it **creates an obligation it never
+    names**. "Causes the bug" → "copy less" (wrong); "names the obligation" → "re-read on change" (right).
+  - **The audit scopes by the diff, not the prose.** `games/` is git-tracked, so `git diff` knows which coupled
+    fields moved AND their OLD value — the search key, otherwise unrecoverable once saved. Inline fenced block
+    (no `scripts/` dir — this skill has none by design; audits are inline per `rts-flat-prose.md` §7), excludes
+    generated `7_final_game.toml` + `#` comments + canvas `description`. Verified against all four real cases:
+    the uncommitted re-price surfaces `costs value 20 → 10`; `7dc5e36^..7dc5e36` surfaces
+    `entry_from "the_waterfront" → "underworld_strip"` (the OLD value being exactly the grep key that finds the
+    stale tip); a rebuild-only commit and a prose-only commit both report **0** — a real false-positive floor.
+  - **Worked example is the block this skill ships as canonical**, not Vesper: `rent.md` calls
+    `late_shifts/toml_phases/0_systems_spec.toml` the "verbatim shipped block to copy" — `amount = 125` with a
+    hand-authored `greeting = "Rent. Hundred and twenty-five. …"`. Verified `v2.py:15367`: the default
+    interpolates `_rent`, an **authored override is a literal**, and the live value prints two lines below
+    (`Rent is $<<print _rent>>`) + on the `Pay $N rent` button. Re-price → the NPC contradicts the UI in one
+    screenshot. Named `prose-truth` (not `*-drift`: "drift" already carries four senses — literary, citation,
+    design, `ledger-schema.md`'s anti-drift invariant; not `*-sync`: implies a mechanical reconciliation that
+    provably cannot exist). Modelled on `save-safety.md` — same "green build, quiet break" shape; save-safety
+    guards the player's *save*, this guards the game's *truth*. States the limit of the engine-citation analogy
+    it generalises: that protocol tolerates staleness because the reader can re-grep — **the reader of prose is
+    the player, who cannot.**
+  - wired it in: `SKILL.md` (stable-and-extensible bullet — "changing what already exists is an amendment too";
+    KB pointer beside save-safety) · `references/beat-authoring.md` step 3 "Amend structure — WHOLE" extended
+    from **ADD-only** to cover MOVE / RE-PRICE / RE-SCHEDULE / RENAME-label (the site `save-safety.md` misses,
+    and where the bug actually fires — pointers at the ~14 *creation* sites were rejected as counterproductive:
+    the author is doing the right thing there) · `references/beat-authoring.md` legibility self-audit row
+    amended from an **existence** check ("a goal-only card with no place+window fails this") to existence+truth
+    ("…and so does one whose place+window no longer MATCHES the canvas's `location`/`schedules`") — closes the
+    "no audit checks TRUTH" gap in one clause, no 26th row · `references/rent.md` §4 gains the
+    authored-override-is-literal fact (a genuine factual gap, independent of this doctrine).
+    Doc-only — no TOML, no engine, no game rebuilt. grep-verified every new pointer resolves.
+
 ## 2026-07-14
 - **`references/rts-flat-prose.md` — REWRITTEN. The register doctrine was partly false, and it had never once
   been obeyed.** Root cause found by re-measuring the register claims against the **real** Road-to-Success

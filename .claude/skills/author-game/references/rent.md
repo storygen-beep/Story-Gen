@@ -95,6 +95,18 @@ real validation block is `:4306-4331`.)*
 **Rule: author every printed line — the engine defaults are generic. Use the EXACT keys below; the
 corpus once listed fictional ones.**
 
+**⚠️ An authored line is a LITERAL — the default interpolates, your override does not.** The engine emits
+`<<print _rt.greeting || "Rent. $" + _rent + ". You know how this works.">>` (`v2.py:15367`): the fallback
+builds the live `amount` into the string, but the moment you author `greeting` you get your exact bytes and no
+substitution. Two lines below it the engine prints the live number **unconditionally** — `Rent is $<<print
+_rent>>` — and again on the `Pay $N rent` button. So a shipped block that spells the price out (`late_shifts`:
+`amount = 125` + `greeting = "Rent. Hundred and twenty-five. …"` — the §9 block below) is **correct today and a
+trap tomorrow**: re-price to 150 and the collector says *"Hundred and twenty-five"* directly above *"Rent is
+$150"*, contradicting the UI in one screenshot. The same coupling binds `title`/`paid_response`/`warning_response`
+to `due_day` ("Same Friday next week") and `warning_response` to `grace_periods` ("One week"). Spelling the number
+out in voice is right — just re-read this table whenever you touch `amount`, `due_day`, or `grace_periods`
+(`references/prose-truth.md`).
+
 These are the complete set of `_rt.<key>` reads across the RentDay passages (`v2.py:14986-15100`,
 extracted live). Authored as a **`[settings.rent.text]` sub-table** (a header, not a multi-line inline
 table — inline `{…}` across newlines breaks `tomllib`, see `toml-gotchas.md`). The importer reads the

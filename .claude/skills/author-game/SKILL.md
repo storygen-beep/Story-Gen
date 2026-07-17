@@ -84,7 +84,9 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
   (`references/run-mode.md` "Systems grow through iteration"), reaching for a ready recipe in
   `references/system-patterns.md`. And on a **shipped** game (players may have saves) *extend* only — never
   **rename** an existing `id`, live flag/trait key, stat scale, or the title, or you orphan their saves
-  (`references/save-safety.md`).
+  (`references/save-safety.md`). **Changing what already exists is an amendment too:** MOVE (re-parent) /
+  RE-PRICE / RE-SCHEDULE / RENAME-a-display-label each invalidate the **prose that quotes** the old value —
+  green build, lying game. Do those whole, prose included (`references/prose-truth.md`).
 - **Engine-forced changes bounce UP to the design book**, surfaced — never silently patched into TOML.
 - **Register authority lives here, not in CLAUDE.md.** Lane 1/2/3 = RTS-flat default; Lane 4
   capstones = Tier-3 earned. The CLAUDE.md ENI persona does **not** set canvas register — if a literary
@@ -202,6 +204,11 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
   flag & trait keys, stat scales & tier thresholds, the game title) so an update doesn't orphan players'
   saves. Build-breakers fail loudly; these pass the build and only break a *returning player's* save. **Read
   before editing an already-released game** (the Dispatch "continue writing" path on a published game).
+- `references/prose-truth.md` — the sibling of save-safety, for the game's **truth** rather than the player's
+  save. The legibility mandate makes every `tip`/`label`/`blocked_message`/dialogue line a **copy of a field**;
+  MOVE / RE-PRICE / RE-SCHEDULE / RENAME-a-label silently invalidates the copy while the build stays green and
+  the game lies to the player. Carries the git-diff coupled-field detector. **Read before changing a `costs`,
+  `amount`, `due_day`, `entry_from`/`parent`, or a schedule on content that already ships prose.**
 - `references/engine-reference.md` — the **code-verified** engine field/trigger/effect/condition tables.
   The source of truth for what knobs exist; ground every option here, and never invent a field the engine
   lacks. (This is now the skill's own source of truth — it no longer depends on any external corpus.)

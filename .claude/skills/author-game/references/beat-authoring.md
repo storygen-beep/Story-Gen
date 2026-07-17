@@ -122,6 +122,13 @@ NPC arcs/hubs/ambients/capstones are beats. Only the skeleton + boot + sleep + s
    + the unlock beat that reaches it; NPC → schedule + an OPEN on-ramp where the player first meets it;
    flag → ensure a reachable setter exists before anything gates on it. Add each to `structure_registry`;
    if already there, that's a conflict — don't silently re-add.
+   **Changing something that already exists is an amendment too** — and its *whole*-ness includes the prose
+   that quotes it. Four edits carry this bill: **MOVE** (re-parent `entry_from`/`parent`) · **RE-PRICE**
+   (`costs`, rent `amount`) · **RE-SCHEDULE** (`start_time`/`end_time`/`weekdays`, `due_day`) · **RENAME a
+   display label** (a trait/NPC `name`). Each silently invalidates every `tip`/`text`/`goals[].label`/
+   `blocked_message`/dialogue naming the old value — the build stays green and the game lies to the player.
+   Re-read that prose in the same turn; `references/prose-truth.md` has the git-diff detector that tells you
+   which coupled fields you just moved (and their OLD values — the search key).
 4. **Author the canvases across the right lanes.** First read TWO things:
    - the scene's row in the **blueprint** + the NPC's **story brief** in `design_book.md` — the blueprint
      already decided the lane, the gate (the spine + thresholds), the placement, and the capstone triggers;
@@ -258,7 +265,10 @@ Run with the repo venv active, in order; emit a PASS/FAIL line for each:
      naming where + when + what's needed in words** ("work the floor for tips at the bar, evenings 6 pm–close"
      — not "make rent"). This is mandatory, not polish (the field's strongest device — Gakko's
      walkthrough-as-sidebar). Put the action in the card `text`/`tip`. A goal-only card with no place+window
-     fails this. **Cross-gated rung →** its locked-visible `locked_text` **names the gating arc's state**
+     fails this — **and so does one whose place+window no longer MATCHES the canvas's `location`/`schedules`.**
+     A card naming last week's place is worse than a vague one: it sends the player somewhere real that's now
+     wrong. Existence isn't enough; the copy has to still be true (`references/prose-truth.md`).
+     **Cross-gated rung →** its locked-visible `locked_text` **names the gating arc's state**
      ("Sal won't go further while the bar's still in jeopardy" — the machine D3); a silent
      cross-lock is a soft-lock.
    - **lane coverage vs arc shape** — the NPC's content spans the lanes its shape calls for (not
