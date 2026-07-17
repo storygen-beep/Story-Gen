@@ -772,16 +772,19 @@ image_search_queries = ["bouncer unmarked door night", "guard freight door dark 
 # fallback — which is the ONLY reason entry_from was ever bolted on here, and "Leave The Underworld Gate" was
 # its exhaust. auto_exit=false is the engine finally having a word for this shape: no auto Leave link, and an
 # empty nav list understood as intentional. Result: the man at the door (down) + Take the car (up). Nothing else.
-# KEEP BOTH of these — they are NOT vestigial:
-#   parent     = the_waterfront -> the gate INHERITS the waterfront's "Take the car" canvas (v2.py renders it
-#                "Take the car (from The Waterfront)"). Drop parent and the way OUT vanishes with it.
-#                It also excludes the gate from the_waterfront's nav grid (_ordered_navigation drops children
-#                whose parent == the hub) — so it is NOT a door on Renner's street, and she CANNOT walk in.
-#   entry_from = the_waterfront -> inert now (auto_exit suppresses its link), but it is what the emitted
-#                passage-entry guard reads for its go-back target if this location is ever locked.
+# rev 67b — parent + entry_from BOTH REMOVED. The earlier rev-67 note here said to KEEP parent because the
+# gate INHERITED the waterfront's "Take the car" — that was wrong on inspection: inheritance copies an
+# ancestor's canvas VERBATIM (v2.py walks the parent chain), so the gate got the waterfront's MENU, which
+# offered "Down under the docks — the Underworld" while she stands IN the underworld and could not offer the
+# Reach. There is no per-canvas opt-out and no player-location condition (only npc_at_location), so a shared
+# menu cannot adapt. The gate now owns activity_travel_from_gate (3_activities) — Spire or the Reach — so
+# parent buys nothing and costs three leaks: captivity_recovery / salvage_body_wont_hold / salvage_relaunch
+# are one-shots scoped "@the_waterfront" and were inheriting down here too. entry_from goes with it (already
+# inert under auto_exit, and the gate has no entry_conditions for the passage guard to need a go-back target).
+# She still CANNOT walk in: with no entry_from the gate is nobody's child, so it never lands on the
+# waterfront's nav grid. auto_exit=false is what keeps the now-genuinely-nav-less gate from tripping the
+# list-every-location fallback — it is doing the whole job now, not half of it.
 auto_exit   = false
-entry_from  = "the_waterfront"
-parent      = "the_waterfront"
 
 # The strip — the underworld hub. ROOT location (no entry_from): reached ONLY via the gate canvas's exit,
 # so the guard is unavoidable. Its own children are the brothel/pit/market + the locked deep end (the_site).
@@ -1407,6 +1410,70 @@ text = "Down to the gate."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "underworld_gate"
+time_progression_minutes = 10
+
+# ── activity_travel_from_gate — the ride OUT of the underworld (rev 67b) ─────────────────────────
+# The THIRD picker, and the gate's OWN. It used to INHERIT the waterfront's car via parent, which handed it
+# that canvas VERBATIM — so the menu was wrong in two directions: it offered "Down under the docks — the
+# Underworld" while she is STANDING in the underworld, and could not offer the Reach (pointless from the
+# waterfront, which is where that canvas lives). Canvas inheritance walks the parent chain and copies every
+# ancestor canvas as-is (v2.py), there is no per-canvas opt-out, and the engine has NO player-location
+# condition — only npc_at_location — so a shared menu cannot adapt to where it's rendered. The gate owns its
+# own picker instead, and underworld_gate drops parent + entry_from (see 1_metadata).
+[[canvases]]
+id          = "activity_travel_from_gate"
+name        = "Take the car"
+description = "Wren-solo travel picker @ underworld_gate (rev 67b). The ride OUT: up to the Spire (spire_plaza) or up to the Reach (the_waterfront). Replaces the waterfront's car, which the gate used to inherit with the WRONG menu (offered the Underworld she was standing in; couldn't offer the Reach). Time only, no Charge."
+
+[canvases.trigger]
+location      = "underworld_gate"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Take the car"
+blocks = [
+  { type = "paragraph", content = "She gives the address of a door that isn't on any manifest and waits. The car comes down for her the way it came down before — no questions, no record of the fare. Up to the towers, or only as far as the docks." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Ride up to the Spire."
+targetType = "node"
+nodeId     = "activity_travel_from_gate.riding_up"
+[[canvases.nodes.exit_block.choices]]
+text       = "Up to the Reach."
+targetType = "node"
+nodeId     = "activity_travel_from_gate.riding_reach"
+
+[[canvases.nodes]]
+id   = "riding_up"
+name = "Ride up"
+blocks = [
+  { type = "paragraph", content = "The freight door shuts behind her and the red light goes with it. The car climbs out of the dark, past the docks, up until the glass takes the sky again and she's the company's problem to look at." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Ride up to the Plaza."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "spire_plaza"
+time_progression_minutes = 30
+
+[[canvases.nodes]]
+id   = "riding_reach"
+name = "Up to the docks"
+blocks = [
+  { type = "paragraph", content = "The car takes her the short way — out from under the boards and back onto the waterfront, where the Reach keeps its daylight face and nobody down there knows her by it." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out onto the docks."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_waterfront"
 time_progression_minutes = 10
 
 # ─── beat_0006 — Home base: the cradle ────────────────────────────────────────
