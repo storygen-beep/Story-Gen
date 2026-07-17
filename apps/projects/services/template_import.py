@@ -150,6 +150,12 @@ class TemplateLocation:
     navigation_order: List[str] = field(default_factory=list)
     entry_conditions: Dict[str, Any] = field(default_factory=dict)
     blocked_message: str = ""
+    # A TRANSIT STOP opts out of engine-built navigation: no auto "Leave <name>" link, and an
+    # empty nav list is treated as intentional rather than as a stranded location (so the
+    # list-every-location fallback stays quiet). For a location the player arrives at and leaves
+    # by CANVAS — a car drop-off, a lift — where the engine's tree model doesn't apply. The author
+    # owns the way out; there is no safety net. Default True = every existing game unchanged.
+    auto_exit: bool = True
     # Per-ENTRY travel friction charged when the player moves INTO this location.
     # `time` (minutes) advances the day-cycle clock; every other key deducts that
     # player trait (e.g. energy). Empty = a free move (today's behavior).
@@ -1684,6 +1690,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 navigation_order=[str(x) for x in _require_list(l, "navigation_order")],
                 entry_conditions=_require_dict(l, "entry_conditions"),
                 blocked_message=_require_str(l, "blocked_message", ""),
+                auto_exit=bool(l.get("auto_exit", True)),
                 costs=_require_dict(l, "costs"),
                 clothing_rules=l.get("clothing_rules", []) or [],
             )
@@ -6198,6 +6205,9 @@ def create_project_from_template(
             loc.properties["entry_conditions"] = l.entry_conditions
         if l.blocked_message:
             loc.properties["blocked_message"] = l.blocked_message
+        if not l.auto_exit:
+            # Transit stop — the author owns the way out (see TemplateLocation.auto_exit).
+            loc.properties["auto_exit"] = False
         if l.costs:
             # int-coerce (TOML may give floats); the generator reads entry_costs.
             loc.properties["entry_costs"] = {k: int(v) for k, v in l.costs.items()}

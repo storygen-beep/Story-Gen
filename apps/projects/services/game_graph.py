@@ -192,6 +192,9 @@ def build_game_graph(
             loc.properties["entry_conditions"] = l.entry_conditions
         if l.blocked_message:
             loc.properties["blocked_message"] = l.blocked_message
+        if not l.auto_exit:
+            # Transit stop — the author owns the way out (see TemplateLocation.auto_exit).
+            loc.properties["auto_exit"] = False
         if l.costs:
             loc.properties["entry_costs"] = {k: int(v) for k, v in l.costs.items()}
         if l.clothing_rules:

@@ -18717,6 +18717,10 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
         # Offscreen locations are never navigable destinations (NPC "away" labels).
         def _loc_offscreen(_l):
             return bool((getattr(_l, 'properties', None) or {}).get('offscreen'))
+        # A TRANSIT STOP (auto_exit=false) is arrived at and left by CANVAS — a car drop-off, a
+        # lift. The engine's tree model doesn't describe it, so it takes no auto "Leave <name>"
+        # link and its empty nav list is intentional, not a stranding to be rescued.
+        auto_exit = (getattr(location, 'properties', None) or {}).get('auto_exit', True) is not False
         ordered_destinations = [d for d in self._ordered_navigation(location) if not _loc_offscreen(d)]
 
         if ordered_destinations:
@@ -18744,7 +18748,7 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
         exit_links = []
 
         # Generate automatic exit (go back to where we came from)
-        if location.entry_from:
+        if location.entry_from and auto_exit:
             exit_location = location.entry_from
             # Use smart exit destination that avoids infinite loops
             smart_destination = self._get_smart_exit_destination(exit_location)
@@ -18780,7 +18784,9 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
 
         # Fallback: if no hierarchical connections, list all other locations
         # (excluding offscreen "away" labels — they're never navigable).
-        if not navigation_html:
+        # A transit stop is nav-less ON PURPOSE (its canvases carry the exits), so the rescue
+        # would dump the whole map onto it — skip.
+        if not navigation_html and auto_exit:
             other_locations = [loc for loc in self.locations if loc.id != location.id and not _loc_offscreen(loc)]
             if other_locations:
                 # Check if any has image path defined for fallback visual mode
