@@ -2507,10 +2507,18 @@ when = [
 # why she can't touch Mercer; the sidebar reads Leash: Uncut) and telegraphs the twin drives: Mercer's plain
 # Calloway job (next chapter's frontier) + the real want, find the controller and cut the leash. No build-file
 # (reserved). Never blank, never dev-speak (frontier + quests.md).
+# rev 68 — THE TIP NAMES THE BUILD BOUNDARY OUT LOUD. It used to end "...that's the next chapter, the way in
+# not open yet", which reads as an IN-GAME lock she hasn't found: the player goes hunting for a door that was
+# never built, and that manufactured hunt IS the "grind not content" complaint. quests.md §7 sanctions the
+# meta ("...picks up from here in a future update") — the game just never said it anywhere, in any card. The
+# boundary + the Patreon ask live in the TIP only (system voice); the `text` stays in-world. One ask, at the
+# one moment it's earned — the player just finished and wants more; the sidebar Support Us button is passive
+# and has been ignorable all playthrough. Patreon URL is hardcoded engine-side (one campaign, every game — LO
+# confirmed that's intended), so there's nothing to configure here.
 [[quest_cards]]
 priority   = 10
 text       = "Your body runs again — but the fixer found the real thing wrong with you, and it isn't damage. It's a governor built into you: the reason you can never turn your power on the man who owns you. It doesn't come out without its controller, and you don't have to guess who's held that key the whole time. The sidebar calls it what it is now — Leash: Uncut."
-tip        = "Two drives ride together now. Mercer's handed you a plain job — Calloway, Vance Securities, a file room nobody audits — and that's the next chapter, the way in not open yet. Under it: find the controller for the leash, and cut it. The man who signs your orders is holding it."
+tip        = "Two drives ride together now. Mercer's handed you a plain job — Calloway, Vance Securities, a file room nobody audits. Under it: find the controller for the leash, and cut it. The man who signs your orders is holding it. That's where this build ends — the Calloway job opens in the next release. If you want it sooner, Support Us in the sidebar."
 when = [
   { flag = "salvage_done", op = "is_true" },
 ]
