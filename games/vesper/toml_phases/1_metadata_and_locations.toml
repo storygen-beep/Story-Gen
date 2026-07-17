@@ -88,7 +88,7 @@ core_sealed       = 0
 # Act-2 seed with a named address: Kess collects when the berth re-opens). Named in the verdict prose.
 kess_debt         = 0
 # SALVAGE v2 (rework) — the repeatable repair-grind (design_salvage_v2.md). repair_armed: 0/1, set 1 by the
-# "Start a repair session" hub (which costs 20 coin), consumed (set 0) by the band scene's exit. repair_session:
+# "Start a repair session" hub (which costs 10 coin), consumed (set 0) by the band scene's exit. repair_session:
 # the session counter, +1 per scene = master progress — 12 sessions carry core_strain 96->0 (-8 each); the
 # verdict fires at repair_session gte 12. Both hidden. (kess_debt above is RETIRED as a mechanic in v2 — key
 # kept for save-safety, but nothing feeds it; the repair is coin-cost-per-session, not debt-accrual.)
@@ -237,8 +237,23 @@ activity   = "his standing Sunday booking"
 
 # ── Kess — the off-books fixer (Salvage v2) — beat_0049. MALE. ────────────────────
 # The dockside synth-mechanic / ship-breaker who repairs Wren's core. Reads bodies as HARDWARE, not people.
-# NOT a conquest (no relation/corruption climb, no meters). NO [[npcs.schedules]] — chunk-scripted at
-# kess_berth, so getNpcsWithSchedules can't leak him onto the Schedule page (Step-6 G3; npc-intro step 7).
+# NOT a conquest (no relation/corruption climb, no meters).
+# SCHEDULE (rev 67 — REVERSES the old "NO [[npcs.schedules]]" call): he now keeps yard hours, 10:00-22:00.
+# The old call left him schedule-less to keep him off the Schedule page — but it cost him his PORTRAIT: the
+# engine hard-refuses a clickable portrait to any NPC without a declared schedule (v2.py "Schedule-only
+# presence gate", `if (!npcSched || npcSched.length === 0) return false;` — no canvas-derived fallback), so he
+# rendered as a bare text link while every other NPC got a card. The fiction always said the yard had hours —
+# his FIRST line is "Yard's shut. Turn around." — so hours are characterisation, not a workaround for a picture.
+# ⚠️ The Schedule-page leak the old comment feared is REAL — and it is PRE-EXISTING AND UNIVERSAL, which is
+# why we accept it. getNpcsWithSchedules runs a canvas scan gated on _isCanvasAvailable, but then a SECOND
+# loop adds every NPC in the declared setup.npcSchedules registry "regardless of whether any of its canvases
+# are unlocked yet" — the canvas scan is only a back-compat fallback for games declaring no schedules. So on a
+# FRESH Vesper the page already lists Mercer/Renner/Sol/Rue/Marsh — including Sol/Rue/Marsh, who live past a
+# gate she cannot open yet. Kess was the ONLY cast member exempted, and the exemption cost him his portrait.
+# He is now consistent with his peers. The reveal that MUST stay hidden (Bastien) still is — he has no
+# schedule, which is the actual mechanism Vesper uses to hide a reveal, and it is untouched.
+# One entry, no midnight wrap (Rue needs two). Kess is the LAST [[npcs]] declared, so this schedule cannot
+# orphan onto another NPC. Off-hours -> berth_offhours guards the dead room (5_scenes).
 # Dialog speaker (npcId=npc_kess) renders "Kess:"; he's "Stranger:" (speaker=unknown) in his intro until he
 # names himself (Step-6 G10). Recurs as the leash-reader (Act-2 seed; kess_debt retired, v2 §10). Like npc_bastien.
 [[npcs]]
@@ -249,6 +264,13 @@ portrait    = "kess.jpg"
 core_traits = { relation = 0 }
 flag_keys   = []
 arc_stages  = ["The fixer"]
+
+[[npcs.schedules]]
+location   = "kess_berth"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "10:00"
+end_time   = "22:00"
+activity   = "cutting a hull down"
 
 # ─── Clothing — the worn-state COVER catalog (beat_0015) ──────────────────────
 # Two "dress"-slot looks she swaps between at the rack (wardrobe page @ wren_room):
@@ -462,10 +484,21 @@ description = "A freight door under the docks that isn't on any manifest, and a 
 image       = "locations/underworld_gate.jpg"
 image_search_queries = ["bouncer unmarked door night", "guard freight door dark dockside"]
 # rev 60: reached via the travel car (activity_travel_to_reach / activity_travel_to_spire drop you here).
-# entry_from + parent BOTH = the_waterfront: entry_from gives the gate a "Leave -> the docks" exit (so its
-# nav is a real back-link, not the engine's full-map fallback that fires on a nav-less location);
-# parent (the_waterfront is NOT a container) EXCLUDES the gate from the_waterfront's nav grid
-# (_ordered_navigation drops children whose parent == the hub) — so it is NOT a door on Renner's street.
+# rev 67 — THE GATE IS A TRANSIT STOP (auto_exit=false). She arrives by CANVAS (the car) and leaves by CANVAS
+# (the car up / the guard down); the gate sits in no location tree, and it is the ONLY location in the game
+# with ZERO children (spire<-1, waterfront<-5, strip<-7, gate<-0). The engine assumes every location is a
+# root-with-children or a child-with-a-parent, so a nav-less gate used to trip the list-every-location
+# fallback — which is the ONLY reason entry_from was ever bolted on here, and "Leave The Underworld Gate" was
+# its exhaust. auto_exit=false is the engine finally having a word for this shape: no auto Leave link, and an
+# empty nav list understood as intentional. Result: the man at the door (down) + Take the car (up). Nothing else.
+# KEEP BOTH of these — they are NOT vestigial:
+#   parent     = the_waterfront -> the gate INHERITS the waterfront's "Take the car" canvas (v2.py renders it
+#                "Take the car (from The Waterfront)"). Drop parent and the way OUT vanishes with it.
+#                It also excludes the gate from the_waterfront's nav grid (_ordered_navigation drops children
+#                whose parent == the hub) — so it is NOT a door on Renner's street, and she CANNOT walk in.
+#   entry_from = the_waterfront -> inert now (auto_exit suppresses its link), but it is what the emitted
+#                passage-entry guard reads for its go-back target if this location is ever locked.
+auto_exit   = false
 entry_from  = "the_waterfront"
 parent      = "the_waterfront"
 

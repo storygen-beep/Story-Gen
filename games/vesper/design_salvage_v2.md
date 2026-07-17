@@ -8,7 +8,7 @@
 > reveal instead of a build-file. Kess is now **male**.
 >
 > **Status:** ✅ **BUILT + live-verified 2026-07-16** — green build (flag chains valid) + headless test of the
-> full spine: hub → pay 20 coin → arm → band scene → `core_strain -8`; band routing; chip-snag @ Hot; verdict
+> full spine: hub → pay 10 coin → arm → band scene → `core_strain -8`; band routing; chip-snag @ Hot; verdict
 > @ session 12 → chip-as-leash reveal → `core_sealed=1` lights **Leash: Uncut** + bands clear → teleport →
 > `salvage_relaunch` (Mercer wary + Calloway); Mercer shocked @ penthouse mid-repair. Zero page errors.
 > **NOT yet committed/pushed** — awaiting LO's deploy go. Media (~30 assets) deferred to the 0.1.4 pass. All
@@ -338,7 +338,7 @@ Source phases → `merge_toml_phases.py` → `package_from_toml`. Never hand-edi
 1. **Systems:** relabel `core_sealed`'s row `Core: Locked` → `Leash: Uncut` (label only); confirm `core_strain`
    bands read as repair-progress. (`kess_debt`, `core_sealed` already declared.)
 2. **Kess → male:** pronoun flip across the SALVAGE canvases + npc_kess desc ("not women" → "not people").
-3. **The coin-gated repair-session activity** ("Start a repair session" @ kess_berth: `costs` 20 coin, gated
+3. **The coin-gated repair-session activity** ("Start a repair session" @ kess_berth: `costs` 10 coin, gated
    `core_strain gte 1` + `salvage_done is_false`, repeatable) arming the **12-scene band-shelf** (one-shot +
    band-gated `trigger_mode` random, captivity engine in reverse; `core_strain -= 8` on each scene's exit;
    sex-loop reset). NO `kess_debt` feed (§10).
@@ -379,7 +379,12 @@ Green build each piece. Headless live-test:
    +120 min) *is* the days-long ordeal — no separate energy meter.
 3. **Scene pool** — **12 scenes, one per session, banded 4/3/3/2**, one-shot + band-gated for zero repeat (§6).
 4. **Sidebar label** — **`Leash: Uncut`**.
-5. **Cost per session** — **20 coin, flat** (~240 total; kept vague in prose).
+5. **Cost per session** — **10 coin, flat** (~120 total). Set so ONE brothel client (+10) buys exactly one
+   session: a 1:1 rule the player reads in a single loop, and it keeps Kess's "no coin, no session" literally
+   true every visit. (Was 20 → a 240-coin/24-client spine = the grind; 5 was rejected as under the door toll
+   (5) and one low pit bout (+8), which would retire the gate.) ⚠️ The number is **spoken, not vague**: Kess
+   says it aloud (`5_scenes.toml` kess_intro, "Ten a session") and it's in the choice text — any future
+   re-price must move the dialogue, the choice label, and `costs` together.
 6. **Berth post-repair** — **locks** (defer Kess's return to the chunk that re-opens him).
 
 The one reversal from the first lock: repair is **coin-cost-per-session**, not debt-accrual (§3, §10).

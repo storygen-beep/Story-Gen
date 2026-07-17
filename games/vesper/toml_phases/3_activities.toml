@@ -55,10 +55,11 @@ text = "Down to the Waterfront."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "the_waterfront"
+# rev 67: the car costs TIME, not Charge. The 30 min is the real friction — it rolls the clock, which is what
+# makes NPC schedules bite. The old energy -10 was a tax the author already distrusted (it carried
+# "never block (locomotion mustn't soft-lock)" and, on the ride up, "the ONLY way back to the cradle") and
+# clamped around; dropping it retires the soft-lock worry instead of papering over it.
 time_progression_minutes = 30
-effects = [
-  { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true },   # travel: floor at 0, never block (locomotion mustn't soft-lock)
-]
 
 [[canvases.nodes]]
 id   = "riding_underworld"
@@ -72,10 +73,7 @@ text = "Out at the gate."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "underworld_gate"
-time_progression_minutes = 30
-effects = [
-  { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true },
-]
+time_progression_minutes = 30   # rev 67: time only — no Charge cost on the car (see the ride-to-Reach note)
 
 # ─── Travel: Reach -> Spire ───────────────────────────────────────────────────
 [[canvases]]
@@ -123,9 +121,8 @@ text = "Ride up to the Plaza."
 destinationType          = "specific"
 locationId               = "spire_plaza"
 time_progression_minutes = 30
-effects = [
-  { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true },   # travel: floor at 0, never block — the ONLY way back to the cradle
-]
+# rev 67: no Charge cost — this is the ONLY way back to the cradle, so a tax here was always a soft-lock
+# risk the clamp merely hid. Time still rolls (see the ride-to-Reach note).
 
 [[canvases.nodes]]
 id   = "riding_under"
@@ -972,11 +969,17 @@ destinationType          = "specific"
 locationId               = "underworld_strip"
 time_progression_minutes = 60
 
-# ── The strip hub — flavor + the way back out (the children brothel/pit/market/the_site are nav) ─
+# ── The way back out (the children brothel/pit/market/the_site are nav) ──────────────────────────
+# rev 67: was "The Underground" — a link named after the room it sits in, rendering as a 6th entry in a row of
+# real destinations (Undertow/House/Pit/Market/Berth), so it read as somewhere to GO. Renamed to what it does.
+# It also used to offer TWO exits that both SKIPPED the gate she came through: a free climb to the_waterfront
+# and a car-call teleporting to spire_plaza. Both retired. Now ONE exit -> underworld_gate: in through the
+# door, out through the door. The ride up is the gate's own car (inherited from the_waterfront via parent),
+# so this canvas doesn't duplicate it. No return toll — the guard only tolls the way IN.
 [[canvases]]
 id          = "underworld_strip_hub"
-name        = "The Underground"
-description = "Hub flavor at underworld_strip + the leave-route back up to the_waterfront. The brothel/pit/market/the_site are nav children."
+name        = "Exit Underworld"
+description = "The leave-route at underworld_strip -> underworld_gate (rev 67; was 'The Underground' + two gate-skipping exits). One beat of walking back up the strip, then out at the freight door where the car waits. The brothel/pit/market/the_site are nav children."
 [canvases.trigger]
 location      = "underworld_strip"
 is_repeatable = true
@@ -984,36 +987,17 @@ priority      = 3
 is_active     = true
 [[canvases.nodes]]
 id   = "base"
-name = "The Underground"
+name = "Exit Underworld"
 blocks = [
   { type = "image", props = { file = "locations/underworld_strip.jpg", description = "A crowded underground market street at night, red light, stalls, bodies, neon in a language that isn't quite any language.", search_queries = ["underground night market red light crowd", "cyberpunk black market alley neon"] } },
-  { type = "paragraph", content = "The strip runs under the docks for as far as the light does — the house, the pit, the market, and past them the dark where the real city keeps its teeth. Up here nobody's looking for her. It's the closest thing to free she's felt." },
-]
-# Two ways back out (rev 60): climb up to the docks (the Reach, free/local) OR call the car straight up
-# to the Spire (time + charge). No return toll — the guard only tolls the way IN.
-[canvases.nodes.exit_block]
-type = "choices"
-[[canvases.nodes.exit_block.choices]]
-text       = "Climb back up to the docks."
-targetType = "location"
-locationId = "the_waterfront"
-[[canvases.nodes.exit_block.choices]]
-text       = "Call the car up to the Spire."
-targetType = "node"
-nodeId     = "underworld_strip_hub.to_spire"
-
-[[canvases.nodes]]
-id   = "to_spire"
-name = "Up and out"
-blocks = [
-  { type = "paragraph", content = "She climbs up out of the red light and the noise, back to the docks, and calls the car. The underworld closes over behind her; the towers rise up ahead until the glass takes the sky again." },
+  { type = "paragraph", content = "She walks back up the strip — the house, the pit, the market closing behind her, and past them the dark where the real city keeps its teeth. Down here nobody was looking for her. It's the closest thing to free she's felt." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Ride up to the Spire."
+text = "Out to the gate."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "spire_plaza"
+locationId               = "underworld_gate"
 time_progression_minutes = 30
 effects = [
   { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true },

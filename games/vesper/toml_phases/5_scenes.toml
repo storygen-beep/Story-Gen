@@ -1646,19 +1646,45 @@ when = [
   { trait = "names_known", subject = "player", op = "lt", value = 1 },
 ]
 
-# The Trail — the burned-yard crawl (a parallel goal to the seduction). Active once she's in Renner's
-# orbit (renner_hired); the goal tracks yard_depth (0->3). Flips to its payoff (ready_text) at depth 3,
-# where the deep find sets found_dead_men (the thread to the Underworld, which is reachable off the Waterfront).
+# ── The Trail — TWO rungs (milestone chain, quests.md §5A). Rev 67: was ONE card that never retired.
+# WHY THE SPLIT: the old single card carried a ready_text payoff naming "Doss and Rourke" — written when the
+# yard WAS the finale (pre-rev-54). Rev 54 moved the names behind the Renner drain (names_known, set on the
+# loop finisher's first-drain choice -> renner_control_canvas.intro, where he SPEAKS them). The card was never
+# revisited, so it (a) printed the names before Renner could — and the yard opens at renner_hired while the
+# drain sits at the END of his arc (corruption 50 + fucked + weapon + charge + anal finish), so it scooped his
+# confession for nearly every player; (b) CONTRADICTED its own payoff scene (yard_find_3 deliberately withholds
+# them: "the same name twice"); (c) never retired — `when` was renner_hired ALONE, and found_dead_men (set by
+# its own find, 3_activities) was read by ZERO gates, so it survived past bastien_revealed still saying
+# "sneak in". A tip CANNOT flip on its own — renderQuestsCard swaps text->ready_text on allMet (v2.py:14526)
+# but prints `tip` unconditionally and there is no `ready_tip`. Splitting is the ONLY way to get a true tip
+# per state. Rung 1 retires at the find; rung 2 carries the handoff and stops where the SCENE stops (no names).
+# Exclusive on found_dead_men; rung 2 also gated renner_leads_extracted is_false so it can't double up with the
+# returning-player re-drain nudge (priority 9) which owns the already-drained-but-no-names case.
+
+# ═══ Rung 1 — the crawl (searching; retires the moment the strongroom find fires) ═══
 [[quest_cards]]
 priority   = 8
 text       = "Renner's old yard — the one Cain torched — is still watched by his men. Guarded means there's something out there worth finding. Get in past the guards and work deeper."
-ready_text = "The yard gave up its heart: two of Renner's own people, killed with their families, and the thread that ties them to the underworld. Doss and Rourke — that's where the trail runs now, down past the gate."
 tip        = "Sneak into the Burned Yard, off the Waterfront. Slip past the guards (Stealth) or beat them (Fighting) — drill at your room if you can't get past. Each push gets you deeper; the arousal weapon's down there too."
 when = [
-  { flag = "renner_hired", op = "is_true" },
+  { flag = "renner_hired",   op = "is_true"  },
+  { flag = "found_dead_men", op = "is_false" },
 ]
 goals = [
   { trait = "yard_depth", subject = "player", op = "gte", value = 3, label = "Search the burned yard" },
+]
+
+# ═══ Rung 2 — the handoff (found the files, hasn't the names; points at Renner) ═══
+# NO names here — stops exactly where yard_find_3 stops. Goal-less status card (flavor + tip only, quests.md
+# §7): the drain is Renner's own ladder, not this card's goal. Retires at names_known>=1 -> hunt rung 1.
+[[quest_cards]]
+priority   = 8
+text       = "Two of Renner's own — files stamped CLOSED, their families dead the same night. Clipped to the back: where they came from before Vance, the same name twice, a place down in the city that isn't on any map. Renner knows their names. He hasn't said them."
+tip        = "The yard gave you the thread, not the names. Renner has those — take him to the drain and make him say them."
+when = [
+  { flag  = "found_dead_men",          op = "is_true"  },
+  { flag  = "renner_leads_extracted",  op = "is_false" },
+  { trait = "names_known", subject = "player", op = "lt", value = 1 },
 ]
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -2462,10 +2488,15 @@ when = [
 # salvage_done is_false). beat_0054 (v2). A status card (text + tip, no goals — the session hub + band scenes
 # drive it). Names the place + the grind loop; coin UP FRONT (no debt, v2 §10). Mutually exclusive with the
 # captivity frontier (salvage_entered) and the post-salvage frontier (salvage_done), so exactly one shows.
+# ⚠️ The tip names the PLACE verbatim (author-game beat-authoring.md:374 — mandatory), so it is COUPLED to the
+# map: it said "off the waterfront" until the berth was re-parented to underworld_strip and nothing re-grepped
+# the tips. Re-parent kess_berth again => rewrite this tip. It also teaches the ONE-ZONE shape (earn at
+# House/Pit + spend at Kess, both past the gate) — the whole point of that move. Deliberately NUMBERLESS on the
+# session cost: the choice label carries "(10 coin)", so the price lives in one place and can't drift here.
 [[quest_cards]]
 priority   = 10
 text       = "The company can't fix you — a refit means a wipe, and you're not walking into that. So you've gone off the books, down to a ship-breaker in the Reach who works on hardware nobody's supposed to afford. He puts you back together a session at a time, and your drain comes back with the work — dead at first, then a flicker, then teeth. He reads something off your guts, too, that you didn't know was written there."
-tip        = "Get to the Berth off the waterfront and pay for a repair session — coin up front, every time. You're broke, so the coin comes from the underworld, down the gate. Keep at it until the core reads clean; there's no other road back to operational."
+tip        = "The Berth's down the gate, off the underworld strip — the coin and the cradle in one trip. Earn at the House or the Pit, then pay the box up front, every session. Keep at it until the core reads clean; there's no other road back to operational."
 when = [
   { flag = "salvage_entered", op = "is_true"  },
   { flag = "salvage_done",    op = "is_false" },
@@ -3771,12 +3802,12 @@ flagEffects = [
 # with npc= renders nowhere, v2.py:4677). DIALOGUE-DOMINANT (Step-6 G2 — Kess's clinical reads are SPOKEN).
 # Kess is MALE (v2). He is "Stranger:" (speaker=unknown) until he names himself, then npc_kess ("Kess:")
 # (Step-6 G10). Third person for the connective narration. v2 TERMS: session-by-session, coin UP FRONT every
-# visit (20/session), no owing (kess_debt retired) — broke => go earn it up the strip (House/Pit). SETS kess_met on exit
+# visit (10/session), no owing (kess_debt retired) — broke => go earn it up the strip (House/Pit). SETS kess_met on exit
 # -> kess_berth, where salvage_repair_hub renders the "Start a repair session" menu.
 [[canvases]]
 id          = "salvage_kess_intro"
 name        = "The Berth"
-description = "beat_0049 (v2). Kess's first-contact + the SESSION terms. Auto-fire @kess_berth, pri 10, one-shot, gated salvage_entered is_true + kess_met is_false. He clocks the Vance steel and moves to eject (company heat = the one thing a ship-breaker won't touch), then the CORE read flips him greedy — custom/bespoke/hand-built one at a time (the mystery crumb, no Cain) — and he names himself. v2 terms: session by session, coin UP FRONT every visit (20/session, untraceable coin not Credits), no owing — broke means earn it up the strip (House/Pit) between sessions. Dialogue-dominant; Stranger->Kess (male) handoff. SETS kess_met."
+description = "beat_0049 (v2). Kess's first-contact + the SESSION terms. Auto-fire @kess_berth, pri 10, one-shot, gated salvage_entered is_true + kess_met is_false. He clocks the Vance steel and moves to eject (company heat = the one thing a ship-breaker won't touch), then the CORE read flips him greedy — custom/bespoke/hand-built one at a time (the mystery crumb, no Cain) — and he names himself. v2 terms: session by session, coin UP FRONT every visit (10/session, untraceable coin not Credits), no owing — broke means earn it up the strip (House/Pit) between sessions. Dialogue-dominant; Stranger->Kess (male) handoff. SETS kess_met."
 
 [canvases.trigger]
 location      = "kess_berth"
@@ -3813,7 +3844,7 @@ blocks = [
     ] },
     { advance_text = "Ask the price.", blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "What's it cost." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Coin. Not company scrip — I can't spend Vance money without Vance noticing, and neither can you. Twenty a session, and you're on the cradle." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Coin. Not company scrip — I can't spend Vance money without Vance noticing, and neither can you. Ten a session, and you're on the cradle." },
     ] },
     { advance_text = "Hear the catch.", blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "And it's up front — every session, before I open you. You're broke, I can read that off you too, so you'll be earning it up the strip between visits — the House, the Pit, whoever's paying. No coin, no session. That part's yours." },
@@ -3834,7 +3865,7 @@ flagEffects = [
 
 # ═══════════════════════════════════════════════════════════════════════════════════
 # SALVAGE v2 — THE REPAIR GRIND (design_salvage_v2.md). Replaces v1's linear Stage A/B.
-# A coin-gated repeatable loop: salvage_repair_hub (session menu, 20 coin/session) arms a band-gated scene
+# A coin-gated repeatable loop: salvage_repair_hub (session menu, 10 coin/session) arms a band-gated scene
 # (repair_armed), which drops core_strain -8 + repair_session +1 on exit. 12 sessions carry 96 -> 0 through
 # the sidebar bands (Failing 1-4 / Faulting 5-7 / Hot 8-10 / Nominal 11-12); the drain-test escalates by band
 # (dead -> sputter -> catch -> fire). One-shot + band-gated = zero repeat. salvage_chip_snag fires once in the
@@ -3843,16 +3874,18 @@ flagEffects = [
 
 # ═══ salvage_repair_hub — beat_0050 (v2), the repeatable repair-session menu ═══════
 # Location-hub @kess_berth, repeatable, priority 3, gated kess_met + !salvage_done + core_strain gte 1
-# (still broken) + repair_armed lt 1 (not mid-session). "Start a repair session" costs 20 coin (greyed when
+# (still broken) + repair_armed lt 1 (not mid-session). "Start a repair session" costs 10 coin (greyed when
 # short) + SETS repair_armed=1 -> kess_berth, where the band scene (pri 10) fires. NO kess_debt (v2 §10 — coin
 # paid up front). "Not today" -> underworld_strip (go earn coin up the strip: House/Pit).
 [[canvases]]
 id          = "salvage_repair_hub"
-name        = "The Berth"
-description = "beat_0050 (v2). The repeatable repair-session menu @kess_berth. Location-hub, repeatable, pri 3, gated kess_met is_true + salvage_done is_false + core_strain gte 1 + repair_armed lt 1. 'Start a repair session' costs 20 coin + SETS repair_armed=1 -> kess_berth (the band scene fires); 'Not today' -> underworld_strip. Coin paid up front, no owing."
+name        = "Kess"
+description = "beat_0050 (v2). The repeatable repair-session menu @kess_berth. NPC-PORTRAIT hub (rev 67: requires_npc + npc = npc_kess, matching rue_hub) — was a bare text link named after its own room ('The Berth' inside The Berth) because Kess had no schedule and the engine hard-refuses a portrait to a schedule-less NPC; he keeps yard hours now (1_metadata), so the card renders like every other NPC's. Repeatable, pri 3, gated kess_met is_true + salvage_done is_false + core_strain gte 1 + repair_armed lt 1. 'Start a repair session' costs 10 coin + SETS repair_armed=1 -> kess_berth (the band scene fires); 'Not today' -> underworld_strip. Coin paid up front, no owing. Outside 10:00-22:00 he is absent -> this hub does not render -> berth_offhours guards the room."
 
 [canvases.trigger]
 location      = "kess_berth"
+requires_npc  = "npc_kess"
+npc           = "npc_kess"
 is_repeatable = true
 priority      = 3
 is_active     = true
@@ -3874,10 +3907,10 @@ blocks = [
 [canvases.nodes.exit_block]
 type = "choices"
 [[canvases.nodes.exit_block.choices]]
-text       = "Pay the box and get on the cradle. (20 coin)"
+text       = "Pay the box and get on the cradle. (10 coin)"
 targetType = "location"
 locationId = "kess_berth"
-costs      = [{ trait = "coin", value = 20 }]
+costs      = [{ trait = "coin", value = 10 }]
 effects = [
   { targetType = "player", trait = "repair_armed", op = "set", value = 1, clamp = true },
 ]
@@ -3885,6 +3918,40 @@ effects = [
 text       = "Not today."
 targetType = "location"
 locationId = "underworld_strip"
+
+# ═══ berth_offhours — DEAD-ROOM GUARD for Kess's off-hours (rev 67) ══════════════
+# Kess keeps yard hours 10:00-22:00 (1_metadata), so 22:00-10:00 the berth has NO portrait and NO repair hub
+# (both presence-gated) — a dead room. Same shape as brothel_offhours (Rue's 03:00-08:00 gap, this file): the
+# shipped precedent, copied not invented. Priority 1 so it loses to every real canvas; is_absent so it can
+# never collide with the hub; salvage_done is_false retires it with the chunk. version="1.0" is MANDATORY —
+# a versionless conditions block FAILS OPEN and this would render while he's standing right there.
+# NOTE it renders as a LINK, not room prose (auto-fire skips repeatable canvases) — location descriptions are
+# static, so a click-through is the only mechanism the engine has for a state-varying room.
+[[canvases]]
+id          = "berth_offhours"
+name        = "The yard's shut"
+description = "Off-hours flavor at The Berth when Kess is away (22:00-10:00) — keeps the room from reading dead now that he's schedule-gated. Gated npc_kess is_absent + salvage_done is_false. Priority 1."
+[canvases.trigger]
+location      = "kess_berth"
+is_repeatable = true
+priority      = 1
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "salvage_done", operator = "is_false" },
+  { type = "npc_at_location", location_id = "kess_berth", npc_id = "npc_kess", operator = "is_absent" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "The yard's shut"
+blocks = [
+  { type = "paragraph", content = "The torch is cold on its hook and the cradle sits empty, the hull up on its blocks going nowhere. Kess keeps hours like any other working man. The black water under the walkway doesn't move. Come back when he's cutting." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back up the ramp."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_strip"
 
 [[canvases]]
 id          = "salvage_session_1"

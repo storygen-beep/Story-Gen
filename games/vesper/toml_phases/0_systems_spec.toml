@@ -251,7 +251,7 @@ key    = "kess_debt"
 hidden = true
 # SALVAGE v2 (rework) — the repeatable repair-grind machinery. Both hidden from the dump; neither draws a
 # sidebar row (no trait_status_text). repair_armed: 0/1 arm flag — the "Start a repair session" hub choice
-# sets it 1 + costs 20 coin, the band scene consumes it (set 0) on its exit. repair_session: the session
+# sets it 1 + costs 10 coin, the band scene consumes it (set 0) on its exit. repair_session: the session
 # counter (+1 per scene) = the master progress signal; the verdict fires at gte 12. TRAITS not flags: the arm
 # is set on a NAVIGATING choice + read by scene TRIGGERS, and a trait dodges the flag-chain validator entirely.
 [[traits.labels]]
