@@ -406,7 +406,7 @@ entry_from = "loc_hotel"
 
 [[locations]]
 id         = "loc_grand_stair"
-name       = "The Grand Stair"
+name       = "Stairs"
 description = "The stair behind the desk, up to the family floor. Where the woman who works below meets the daughter who lives above."
 image       = "locations/grand_stair.jpg"
 image_search_queries = ["grand staircase old building worn elegance", "sweeping interior staircase mansion"]
@@ -473,7 +473,7 @@ entry_from = "loc_residence"
 
 [[locations]]
 id         = "loc_common_bathroom"
-name       = "The Upstairs Bath"
+name       = "Bathroom"
 description = "One door, and it has never locked."
 image       = "locations/upstairs_bath.jpg"
 image_search_queries = ["old fashioned bathroom freestanding tub", "vintage bathroom door ajar"]
@@ -1667,6 +1667,8 @@ name        = "Lorna"
 description = "Lorna's repeatable hub (Bar, evenings). Base talk (relation feeder) + routed unlock nodes she SPEAKS: the books (-> lorna_books), the comp-a-room idea (-> lorna_favor_idea), Grayson's gambling (-> grayson_debt_known, after the books). Tiered locked-visible."
 
 [canvases.trigger]
+npc           = "npc_lorna"
+requires_npc  = "npc_lorna"
 location      = "loc_hotel_bar"
 is_repeatable = true
 priority      = 4
@@ -1997,6 +1999,7 @@ name        = "Audrey"
 description = "Audrey's repeatable hub (her room, evenings, requires_npc). Base talk (relation feeder) + the tuition PAY choice (locked-visible: gated aud_tuition_known + money>=800 -> audrey_tuition_paid, deducts 800). The lesson rungs (kiss/toy/down + coax) attach as nodes in beat_0012."
 
 [canvases.trigger]
+npc           = "npc_audrey"
 location      = "loc_audrey_room"
 requires_npc  = "npc_audrey"
 is_repeatable = true
@@ -3067,6 +3070,7 @@ name        = "With Audrey"
 description = "The repeatable explicit layer (opens post-capstone-3). Her room, requires_npc, repeatable, gated audrey_stage>=3 (surrendered). No pretext left — she just wants you. Two options; raise her corruption/arousal + player arousal. Flat register (repeatable, not a capstone)."
 
 [canvases.trigger]
+npc           = "npc_audrey"
 location      = "loc_audrey_room"
 requires_npc  = "npc_audrey"
 is_repeatable = true
@@ -3430,7 +3434,7 @@ id   = "base"
 name = "Cornered on the stair"
 blocks = [
   { type = "image", props = { file = "scenes/gray_prey_stair.jpg", description = "a man blocking a woman's path on a grand staircase, arm braced against the wall", search_queries = ["man blocking woman path staircase arm on wall", "cornered on stairs arm braced wall dim"] } },
-  { type = "paragraph", content = "He catches you on the Grand Stair where it turns and puts an arm to the wall, so you'd have to duck under it to pass. Close enough to smell the drink on him." },
+  { type = "paragraph", content = "He catches you on the stairs where they turn and puts an arm to the wall, so you'd have to duck under it to pass. Close enough to smell the drink on him." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_grayson" }, content = "In a hurry? You're always in a hurry lately. Busy little thing. Where's the fire." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_grayson" }, content = "I could make things very hard for you here, you know. One word to the solicitor. So let's be friends. Friendly." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_grayson" }, content = "Come on. One smile. That so much to ask, from someone living on my goodwill?" },
@@ -3571,6 +3575,7 @@ name        = "Grayson"
 description = "Grayson's servitude hub (Drawing Room, requires_npc, repeatable, gated grayson_flipped is_true). Base 'remind him' feeder + routed rungs: menial (sub>=1) / degrading (sub>=3 + Slutty) / pegging (sub>=5 + Slutty + strap) / chastity (sub>=5 + Slutty). Each raises grayson_sub toward the caps (beat_0017). He complies resentfully; the unmaking is repeated."
 
 [canvases.trigger]
+npc           = "npc_grayson"
 location      = "loc_drawing_room"
 requires_npc  = "npc_grayson"
 is_repeatable = true
@@ -4130,6 +4135,7 @@ name        = "Richard"
 description = "Richard's companionship hub (Study, requires_npc, repeatable). Base 'sit with him' (UNGATED on-ramp, +richard_want) + node_confide (he leans on you; gated richard_want>=2). The charge/pursue rungs + capstones attach in beats 0019-0020. richard_want = npc_richard.corruption."
 
 [canvases.trigger]
+npc           = "npc_richard"
 location      = "loc_study"
 requires_npc  = "npc_richard"
 is_repeatable = true
@@ -5158,6 +5164,7 @@ name        = "Warm him back"
 description = "Clawback for richard_cooled (repeatable while set). Study, requires_npc Richard, gated richard_cooled is_true. You re-warm him with patience + not-needing. Unsets richard_cooled (warm rungs back on) + richard_want +1. Margaret's move, undone."
 
 [canvases.trigger]
+npc           = "npc_richard"
 location      = "loc_study"
 requires_npc  = "npc_richard"
 is_repeatable = true
@@ -5305,6 +5312,7 @@ name        = "Steady her"
 description = "Clawback for audrey_skittish (repeatable while set). Audrey's room, requires_npc Audrey, gated audrey_skittish is_true. You reassure her -- it's just love, just sisters, just you two. Unsets audrey_skittish + npc_audrey corruption +1. Margaret's doubt, dissolved."
 
 [canvases.trigger]
+npc           = "npc_audrey"
 location      = "loc_audrey_room"
 requires_npc  = "npc_audrey"
 is_repeatable = true
@@ -5609,6 +5617,8 @@ name        = "The family slave"
 description = "Margaret TERMINAL loop (repeatable, gated margaret_broken). The queen who came to own everyone, reduced to the household's communal slave, working the floor she schemed to own. WORDLESS by design -- she has no voice left; the emptied-out silence IS the point (narration-only, Rule-4 exempt). The total inversion."
 
 [canvases.trigger]
+npc           = "npc_margaret"
+requires_npc  = "npc_margaret"
 location      = "loc_hotel"
 is_repeatable = true
 priority      = 4
@@ -5762,6 +5772,7 @@ name        = "The child"
 description = "Richard terminal capstone (Lane-4 Tier-3, the pregnancy system). Study, requires_npc, repeatable, gated richard_signed + corr>=Whore + pregnant lt 1. He asks for a child, carefully, ready for no. PLAYER-CHOSEN: 'Give him the child' -> pregnant=1 (portrait *Preg) = the SUPPLANTING (you ended Eleanor; the child is the seal), or 'Not yet' (returns). NOT impersonation."
 
 [canvases.trigger]
+npc           = "npc_richard"
 location      = "loc_study"
 requires_npc  = "npc_richard"
 is_repeatable = true
@@ -5806,6 +5817,7 @@ name        = "The everything under the everything"
 description = "Grayson terminal capstone (Lane-4 Tier-3, the pregnancy system). Drawing Room, requires_npc, repeatable, gated grayson_bought_out + corr>=Whore + pregnant lt 1. The breeding taboo -- blood half-brother, bred on command. PLAYER-CHOSEN (a thing YOU want): 'Let him breed you' -> pregnant=2 (portrait *Preg), or 'Not him' (returns)."
 
 [canvases.trigger]
+npc           = "npc_grayson"
 location      = "loc_drawing_room"
 requires_npc  = "npc_grayson"
 is_repeatable = true

@@ -403,12 +403,12 @@ The Hotel — Lobby   (entry_from Town)           ← the public stage. Costs TI
 ├── The Guest Rooms                              (where a comped favor has somewhere to happen)
 ├── 🔒 The Back Office                           (the books)
 ├── 🔒 The Private Floor                         (the vice-house apex)
-└── The Grand Stair                              ← the threshold between your two selves
+└── Stairs                                       ← the threshold between your two selves
     └── The Residence  (the landing)             ← who's home; who's behind which door
         ├── The Drawing Room                     (Margaret holds court)
         ├── The Study                            (Richard; the deed)
         ├── The Kitchen                          (the neutral ground)
-        ├── The Upstairs Bath                    (the shared private space)
+        ├── Bathroom                             (the shared private space)
         ├── Your Old Room                        (your base)
         ├── Audrey's Room
         ├── Grayson's Room
@@ -426,14 +426,14 @@ ship.** (v1 shipped four rooms that failed this and one that couldn't be entered
 | **The Hotel — Lobby** | Work the floor. The public stage where the fall happens in front of people — and where, on frame one, **Margaret is behind your mother's front desk giving orders to your mother's staff.** The reactive world bites hardest here early. | open |
 | **The Bar** | Find Lorna — the one person glad you're back, and the only one who'll tell you how bad it really is. Loosen guests. Take the drink that makes the next thing easier. | open |
 | **The Guest Rooms** | Cross the transactional line. A comped room is the first favor that has somewhere to happen. | open |
-| **The Grand Stair** | **Collide with your two selves.** You come off a shift in a bold outfit and meet family coming down. She *is* the woman who works the floor below and the daughter who lives above; this is the one place those two meet. Charged crossings, both directions. | open |
+| **Stairs** | **Collide with your two selves.** You come off a shift in a bold outfit and meet family coming down. She *is* the woman who works the floor below and the daughter who lives above; this is the one place those two meet. Charged crossings, both directions. | open |
 | **🔒 The Back Office** | Take the hotel's purse in hand. The books, the accounts, the roof everyone sleeps under. **Unlock beat:** Richard hands you the ledger because he can no longer face it. | locked-visible |
 | **🔒 The Private Floor** | Run the vice-house. The dirtiest money and the best. **Unlock beat:** hotel control + the upgrade bought. | locked-visible |
 | **The Residence** (landing) | See who's home. Which doors are shut, who's behind them, who's in the bath. The presence surface the peep/caught/occupied content is built on. | open |
 | **The Drawing Room** | Watch Margaret hold court **in your mother's chair.** The status humiliation stage — the thing you want to erase. | open |
 | **The Study** | Find Richard where his grief lives, with the deed in the drawer beside him. | open |
 | **The Kitchen** | Catch the family unarmored, at odd hours. **The one room where they're people instead of positions** — which is exactly what makes it usable. | open |
-| **The Upstairs Bath** | Occupy, walk in on, be walked in on. The shared private space — the door is never locked and the schedule decides who's behind it. | open |
+| **Bathroom** | Occupy, walk in on, be walked in on. The shared private space — the door is never locked and the schedule decides who's behind it. | open |
 | **Your Old Room** | Sleep. Dress. Look at yourself. Use the phone. Do the things to yourself that open the door. | open |
 | **Audrey's Room** | Work the sister who has the most to lose and the least power to refuse. | open |
 | **Grayson's Room** | Work the brother. **v1 gave this room ONE scene for a core target — the single worst hole in the map.** | open |

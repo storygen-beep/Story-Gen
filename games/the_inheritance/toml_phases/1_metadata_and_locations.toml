@@ -199,7 +199,7 @@ entry_from = "loc_hotel"
 
 [[locations]]
 id         = "loc_grand_stair"
-name       = "The Grand Stair"
+name       = "Stairs"
 description = "The stair behind the desk, up to the family floor. Where the woman who works below meets the daughter who lives above."
 image       = "locations/grand_stair.jpg"
 image_search_queries = ["grand staircase old building worn elegance", "sweeping interior staircase mansion"]
@@ -266,7 +266,7 @@ entry_from = "loc_residence"
 
 [[locations]]
 id         = "loc_common_bathroom"
-name       = "The Upstairs Bath"
+name       = "Bathroom"
 description = "One door, and it has never locked."
 image       = "locations/upstairs_bath.jpg"
 image_search_queries = ["old fashioned bathroom freestanding tub", "vintage bathroom door ajar"]
