@@ -13,6 +13,23 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-07-19
+- **NEW `scripts/check_render_buckets.py` (the skill's first bundled script) + wired into the per-beat validation
+  (`references/beat-authoring.md`, new step 3) + delivered the long-promised grep guard (`references/toml-gotchas.md`
+  npc section; `references/lanes.md:366`).** Root cause — the "gate-gap": the skill *taught* the `npc` vs
+  `requires_npc` render-bucket rule correctly and redundantly, but nothing *enforced* it. An author who sets
+  `requires_npc` and forgets `npc` ships an NPC hub that renders as a flat solo LINK (not a portrait) with a GREEN
+  build; it shipped across every hub in The Inheritance, and `lanes.md:366` even promised a "grep guard:
+  toml-gotchas.md" that was never written. The script parses a merged `7_final_game.toml` and flags every
+  repeatable/manual/non-substitution canvas with `requires_npc` and no `npc` (one signature = the Lane-1 hub trap
+  AND the Lane-2 ambient-missing-`random` trap). It is a **review** guard, not a hard gate — a deliberately
+  presence-gated flat link is a rare legit exception (e.g. vesper's `react_renner_threat`, whose own description
+  says "Solo-link"). Also corrected the toml-gotchas note's unverified "8 hubs + 7 ambients" to the verified **8**
+  (0 mis-bucketed ambients in the final game). **Verified:** exit-0 / 0 flags on the fixed Inheritance `7_final`,
+  exit-1 / 8 flags on the pre-fix (`HEAD~1` 617d899); cross-game sweep clean on `last_call`/`mothers_place`, and it
+  surfaced latent hits in `late_shifts` (2) + `vesper` (1) to review. Documented limit: it can't catch a hub
+  authored with NEITHER field (mechanically identical to a real solo activity — needs a content read).
+
 ## 2026-07-17
 - **`references/engine-reference.md` §location table — NEW engine field `auto_exit` (bool, default true).**
   Root cause: the engine assumes every location sits in a tree — a root-with-children or a child-with-a-parent

@@ -363,7 +363,8 @@ The location screen renders four separate paths; a canvas only appears if it mat
   (`selectNpcPortraitCanvasesForLocation` skips `!c.npcId`, `v2.py:4201`). A repeatable hub with
   `requires_npc` but no `npc` renders as a flat **solo link**, not a portrait. Lane 2 ambients likewise
   need `trigger_mode = "random"` + `chance` or they render as links instead of rolling on entry. Set
-  both on hubs; random+chance on ambients. (Full engine trace + grep guard: `toml-gotchas.md`.)
+  both on hubs; random+chance on ambients. (Full engine trace + grep guard: `toml-gotchas.md`; the runnable
+  guard is `scripts/check_render_buckets.py`, wired into the per-beat validation in `beat-authoring.md`.)
 - **NPC first-contact one-shot → make it AUTO-FIRE**, NOT an NPC-portrait canvas. `renderNpcPortraits`
   skips non-repeatable canvases, so a one-shot *with* `npc`/`requires_npc` set renders NOWHERE (it's
   neither a repeatable portrait nor an auto-fire). Author it like the boot canvas: `is_repeatable=false`,

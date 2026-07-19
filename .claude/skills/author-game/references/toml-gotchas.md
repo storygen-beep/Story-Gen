@@ -98,8 +98,16 @@ set inside a triggerless canvas — use a **hidden trait counter** and gate the 
   `v2.py:4232`) — a flat activity link, not the portrait. **No build error; only live-play shows it.**
   Lane 2 ambients have the twin trap: they need `trigger_mode = "random"` + `chance` or they render as
   solo links instead of rolling on entry (`checkRandomEncounters`). Set BOTH on every Lane 1 hub; set
-  random+chance on every ambient. HTML-grep the built game for `npcId` to confirm portraits emitted.
-  (Live-caught in The Inheritance: 8 hubs + 7 ambients mis-bucketed as links.)
+  random+chance on every ambient.
+  **Grep guard before build** (runnable): `python .claude/skills/author-game/scripts/check_render_buckets.py
+  games/<slug>/toml_phases/7_final_game.toml` — flags every repeatable, manual, non-substitution canvas that has
+  `requires_npc` but no `npc`. **Review** each hit (this is not a "must be ZERO" gate like the guards above — a
+  deliberately presence-gated flat link is a rare, legit exception): a Lane-1 hub → add `npc`; a Lane-2 ambient →
+  add `trigger_mode="random"` + `chance`. It **cannot** catch a hub authored with NEITHER field (mechanically
+  identical to a real solo activity) — confirm those by content. Secondary post-build confirm: HTML-grep the built
+  game for `npcId`. (Live-caught in The Inheritance: **8 hubs** with `requires_npc` and no `npc` — exactly what
+  this guard flags; fixed 2026-07-19, commit `d516bbf`. The cross-game sweep also surfaced latent hits in
+  `late_shifts` and `vesper` to review.)
 
 ## Resource gating — `costs`, not `effects` (the cosmetic-energy trap)
 - **Spending energy/hygiene with `effects { op = "add", value = -N }` deducts but NEVER gates.**

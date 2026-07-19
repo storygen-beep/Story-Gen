@@ -180,7 +180,15 @@ Run with the repo venv active, in order; emit a PASS/FAIL line for each:
    broken references, flag chains, plus it builds `index.html`. Never skip it. (No-DB is the default — no
    `--owner-id` needed; `--video-folder` keeps clips from 404ing. To publish, drop `--dev`/`--debug` — see the
    Step-7 ENTRY build-flags note above.)
-3. **Doctrine self-audit** — check each against what THIS beat authored (the in-skill `references/*.md`
+3. **Render-bucket guard** (mechanical) —
+   `python .claude/skills/author-game/scripts/check_render_buckets.py games/<slug>/toml_phases/7_final_game.toml`.
+   Flags every repeatable, manual, non-substitution canvas that has `requires_npc` but no `npc` — the silent
+   trap where an NPC hub drops to a **flat solo LINK** instead of a portrait (it shipped across every hub in
+   The Inheritance; the build was green). Review each hit: a Lane-1 hub needs `npc = "npc_x"`; a Lane-2 ambient
+   needs `trigger_mode = "random"` + `chance`; a deliberately presence-gated flat link is a rare, legitimate
+   exception (confirm and move on). It **cannot** see a hub authored with NEITHER field — verify by content that
+   every present-NPC surface has `npc` set. Full trap + engine trace: `references/toml-gotchas.md`.
+4. **Doctrine self-audit** — check each against what THIS beat authored (the in-skill `references/*.md`
    own each rule cited below):
    - **the beat serves a WANT** — name the desire-ladder rung it pursues; a beat
      whose only justification is "raises a meter" is grind — cut or reframe.
