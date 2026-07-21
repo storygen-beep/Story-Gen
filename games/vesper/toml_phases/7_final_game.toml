@@ -268,6 +268,11 @@ hidden = true
 [[traits.labels]]
 key    = "repair_session"
 hidden = true
+# THE ARCHIVE 1a (beat_0056) — the Calloway drain counter. Hidden from the <<playerTraits>> dump; no sidebar
+# row. A TRAIT (gte-read) because the drain setter is triggerless; downstream reads calloway_drains_done gte 2.
+[[traits.labels]]
+key    = "calloway_drains_done"
+hidden = true
 # SALVAGE emitter recovery — emitter_broken (0/1, hidden). 0=works. Set 1 at the captivity release, 0 at
 # repair session 12; ANDed into the 4 emitter fire gates as `emitter_broken lt 1` (yard guards + underworld
 # gate). TRAIT not flag = dodges the flag-chain validator (the fire gates are exit-block choice conditions).
@@ -375,6 +380,11 @@ kess_debt         = 0
 # kept for save-safety, but nothing feeds it; the repair is coin-cost-per-session, not debt-accrual.)
 repair_armed      = 0
 repair_session    = 0
+# THE ARCHIVE 1a (beat_0056) — the Calloway drain counter (hidden). +1 per drain on the triggerless finisher:
+# 0->1 = "where?/nothing", then 1 + theft2_done ->2 = "big chunk stolen". A TRAIT (gte-read), NOT a flag — the
+# drain setter is triggerless, so a flag would hard-fail the flag-chain validator; a gte trait is exempt.
+# Downstream (the deal-place spy W4, the "find the buyer" Quest card) reads calloway_drains_done gte 2.
+calloway_drains_done = 0
 # SALVAGE emitter recovery — emitter_broken: 0=works (default; pre-captivity yard/gate use), set 1 at the
 # captivity release (core dead -> the emitter draws off the SAME core, so it's dead too), set 0 at repair
 # session 12 (core restored). The 4 emitter fire gates AND `emitter_broken lt 1`. Default 0 = save-safe
@@ -553,6 +563,50 @@ start_time = "10:00"
 end_time   = "22:00"
 activity   = "cutting a hull down"
 
+# ── Calloway — the mark: Vance Securities rogue-hunter (belief-lever seduce-in; The Archive 1a) ──
+# NEW (beat_0056). The disbelieved company hunter; she infiltrates his un-indexed file room, plants the bug,
+# seduces on the belief-lever, drains him twice, ends her nemesis. FULL triad (relation=belief/access odometer,
+# corruption=surrender ladder, arousal=loop throttle) — the Renner double-lock. SCHEDULE ADDED beat_0058 (below,
+# @vance_securities 08:00-20:00). ENGINE FACT (verified v2.py:3417-3424): a DECLARED [[npcs.schedules]] surfaces
+# the NPC on the Schedule PAGE regardless of any canvas gate — so Calloway is listed there from a fresh save.
+# ACCEPTED (the Kess-doctrine leak): he's the assigned MARK like Sol/Rue/Marsh, and the portrait REQUIRES a
+# schedule (v2.py:4864). The greyed Spire nav card shows NO badge pre-unlock (vance_securities locked on
+# salvage_relaunched). First name OPEN ("Calloway" = his canon surname, freely renameable). Appended AFTER Kess
+# (the last prior NPC + his schedule) — no schedule-orphan.
+[[npcs]]
+id          = "npc_calloway"
+name        = "Calloway"
+description = "The company man who runs the hunt for the rogue from inside Vance Securities — and keeps a file room nobody audits. Humiliated, sidelined, the audit closing on him; everyone treats him as a crank chasing a ghost. Starving to be believed. She's the first to take his hunt seriously."
+portrait    = "calloway.jpg"
+core_traits = { relation = 0, corruption = 0, arousal = 0 }
+flag_keys   = []
+arc_stages  = ["Guarded", "Believer", "Attached", "Betrayed"]
+
+# Calloway's schedule (beat_0058) — one entry, all week, no midnight wrap (08:00 < 20:00). WIDE window: a
+# hunter working a shutting-down division is reliably at his desk, so cap_calloway_meet + hub_calloway_fileroom
+# fire whenever she's dispatched — no bounded-window dead room to guard. MUST sit HERE, between npc_calloway's
+# arc_stages and the npc_vane block below, or it orphans onto Vane (the mole must stay schedule-less).
+[[npcs.schedules]]
+location   = "vance_securities"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "20:00"
+activity   = "working the rogue-hunt files"
+
+# ── Vane — the mole/thief (mercenary; unseen in 1a, revealed at the 1b deal) ──
+# NEW (beat_0056). Calloway's own man, secretly the thief. Unseen in 1a (felt only via the bug moving); a 1b
+# dialog speaker at the deal reveal. Declared minimal + schedule-less, exactly like npc_bastien — he must NOT
+# use npc=/requires_npc (which gate on a schedule he doesn't have), and staying off-schedule keeps him off the
+# Schedule page. No meters, no hub. Name OPEN (placeholder "Vane"; renameable).
+[[npcs]]
+id          = "npc_vane"
+name        = "Vane"
+description = "A spy for hire — money only, no cause. Secretly one of Calloway's own team: the ghost Calloway hunts is his own man, hidden in plain sight. Lifts the docs, moves them into the underworld, and sells to the buyer. Barely seen until the deal."
+portrait    = "vane.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = ["The mole"]
+
 # ─── Clothing — the worn-state COVER catalog (beat_0015) ──────────────────────
 # Two "dress"-slot looks she swaps between at the rack (wardrobe page @ wren_room):
 #   • her DEFAULT "asset self" (initial=true, equipped at start) = the out-of-cover state
@@ -620,6 +674,23 @@ description      = "The chrome public level at the foot of Vance Tower. Suits cr
 image            = "locations/spire_plaza.jpg"
 navigation_order = ["atrium"]
 # Top-level street hub (NO entry_from) — the Spire's living surface + the travel anchor.
+
+# ── vance_securities — Calloway's division + the un-indexed file room (The Archive 1a) ──
+# NEW (beat_0056). Topside/Spire, off spire_plaza. LOCKED until the mission is dispatched — gated on the shipped
+# salvage_relaunched (Mercer's Calloway re-launch, 5_scenes) is_true; version="1.0" or the lock fails OPEN. The
+# file-room register FOLDS INTO the hub (one location, one window; portrait renders once Calloway's schedule +
+# hub land at beat_0058) — NOT a separate navigable room. entry_from=spire_plaza re-adds it as a Spire card,
+# greyed with the blocked_message inline until unlocked.
+[[locations]]
+id          = "vance_securities"
+name        = "Vance Securities"
+description = "An internal division high in Vance Tower — Calloway's floor, and the file room nobody audits. Quiet, over-lit, under-staffed: a man chasing a ghost through paper the company would rather forget."
+image       = "locations/vance_securities.jpg"
+entry_from  = "spire_plaza"
+entry_conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "salvage_relaunched", operator = "is_true" },
+] }
+blocked_message = "Mercer hasn't sent her up there yet. The Calloway job opens when he gives the word."
 
 [[locations]]
 id               = "atrium"
@@ -5478,12 +5549,17 @@ when = [
 # one moment it's earned — the player just finished and wants more; the sidebar Support Us button is passive
 # and has been ignorable all playthrough. Patreon URL is hardcoded engine-side (one campaign, every game — LO
 # confirmed that's intended), so there's nothing to configure here.
+# Archive Story-Goal A (was the Salvage frontier end card, rev 68). RE-TARGETED beat_0064: Calloway is BUILT now,
+# so the "this build ends / next release" boundary + the Patreon ask MOVED to the real 1a end card (qc_archive_end,
+# below). Keeps the leash reveal (standing context); points at the active Calloway mission; RETIRES at
+# calloway_believes (the bug earns access -> Story-Goal B takes over).
 [[quest_cards]]
 priority   = 10
 text       = "Your body runs again — but the fixer found the real thing wrong with you, and it isn't damage. It's a governor built into you: the reason you can never turn your power on the man who owns you. It doesn't come out without its controller, and you don't have to guess who's held that key the whole time. The sidebar calls it what it is now — Leash: Uncut."
-tip        = "Two drives ride together now. Mercer's handed you a plain job — Calloway, Vance Securities, a file room nobody audits. Under it: find the controller for the leash, and cut it. The man who signs your orders is holding it. That's where this build ends — the Calloway job opens in the next release. If you want it sooner, Support Us in the sidebar."
+tip        = "Two drives ride together. The company's job: get into Calloway's file room at Vance Securities and take what he's guarding. Your own reason rides under it — the truth of what you are, and, somewhere up the chain, the controller that cuts your leash. But first you need the man who keeps the room. Get to the Spire. Get to Calloway."
 when = [
-  { flag = "salvage_done", op = "is_true" },
+  { flag = "salvage_done",      op = "is_true"  },
+  { flag = "calloway_believes", op = "is_false" },
 ]
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -8188,6 +8264,1027 @@ destinationType = "specific"
 locationId      = "the_waterfront"
 flagEffects = [
   { targetType = "player", flag = "salvage_relaunched", op = "set" },
+]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# THE ARCHIVE (Act 2 · 1a) — the Calloway infiltration. Design: design_book.md
+# `### The Archive blueprint`. Built beat-by-beat from beat_0056 (scaffold). Extend-only.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# beat_0057 — THE COVER (the onboarding / arrival beat). Auto-fire @vance_securities, pri 11, one-shot, gated
+# salvage_relaunched is_true + archive_started is_false (version=1.0). Fires the first time she enters Vance
+# Securities after Mercer's shipped re-launch dispatched the Calloway job. Establishes the junior-analyst cover
+# + the un-indexed file room + names Calloway (the disbelieved hunter); a PLAIN company errand to her (she does
+# NOT know Mercer's private-leverage motive — the unwitting 1a setup). Names the next action. Narration + one
+# thought_bubble (NO NPC present — Calloway not met; the meet is beat_0058). SETS archive_started (read is_false
+# in this trigger + is_true by cap_calloway_meet). Touches NO shipped byte.
+[[canvases]]
+id          = "cap_archive_cover"
+name        = "The cover"
+description = "beat_0057. THE COVER — first entry @vance_securities after salvage_relaunched. Auto-fire, pri 11, one-shot, gated salvage_relaunched is_true + archive_started is_false. She's in under Mercer's junior-analyst cover; the un-indexed file room; Calloway named (the disbelieved hunter, a crank chasing a ghost). A plain company errand to her (unwitting of Mercer's real motive). Names the next action. SETS archive_started."
+
+[canvases.trigger]
+location      = "vance_securities"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "salvage_relaunched", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "archive_started",    operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The cover"
+blocks = [
+  { type = "image", props = { file = "scenes/archive_cover.jpg", description = "A half-lit corporate office floor at night, most desks empty, tall filing stacks along one wall.", search_queries = ["empty corporate office floor half lit night", "dim office cubicles abandoned filing room"] } },
+  { type = "paragraph", content = "The cover holds all the way up — a junior-analyst badge Mercer bought clean, a desk in a division being quietly shut down. The lift opens on Vance Securities: half the lights off, half the desks empty, the audit already eating it from inside." },
+  { type = "paragraph", content = "The file room is Calloway's. He runs the company's hunt for the rogue out of it, and the floor treats him like a crank chasing a ghost. The paper he keeps has no index — the only map of it lives in his head." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "A plain company errand, the way Mercer put it. Get in, take the room, bring it back. She doesn't turn over what might sit under a job this simple. First she needs the man who keeps it." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get to work."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "vance_securities"
+flagEffects = [
+  { targetType = "player", flag = "archive_started", op = "set" },
+]
+
+# beat_0058 — #1 cap_calloway_meet: the guarded FIRST CONTACT @vance_securities (auto-fire one-shot). Fires the
+# entry right after the cover (chains: cover pri 11 -> meet pri 10). NO requires_npc — vance_securities is his
+# floor and the cover already fires on plain entry, so a plain-entry meet is guaranteed; requires_npc would
+# couple it to his 08:00-20:00 window and soft-lock an off-hours entrant (archive_started set, calloway_met
+# never set). Name KNOWN (the cover named him) -> speaker=npc from line 1, NO "Stranger:" handoff. Belief-lever:
+# his hook-as-WANT (starving to be believed) is SPOKEN first, not narrated. Dialog-carried (<=1.5:1). SETS
+# calloway_met -> the hub renders. Name "The file room" DISTINCT from the hub "Calloway" (shared names collide
+# in the name-group selector).
+[[canvases]]
+id          = "cap_calloway_meet"
+name        = "The file room"
+description = "beat_0058. Calloway first-contact @vance_securities. Auto-fire, pri 10, one-shot, gated archive_started is_true + calloway_met is_false. He reads her as one more minder Mercer sent to watch the crank fail; his want (starving to be believed) is spoken first. She takes the hunt seriously (the belief-lever opening); his guard cracks a hair, still testing. SETS calloway_met -> opens hub_calloway_fileroom."
+
+[canvases.trigger]
+location      = "vance_securities"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "archive_started", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "calloway_met",    operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The file room"
+blocks = [
+  { type = "image", props = { file = "scenes/calloway_meet.jpg", description = "A man at a wall of unlabelled file boxes in a half-lit office, not turning around.", search_queries = ["man filing boxes dim office back turned", "cluttered records room man working late"] } },
+  { type = "paragraph", content = "He's at the file wall when she comes in, and he doesn't turn — just clocks the badge in the dark glass and files her under the same heading as everyone else Mercer's sent down here." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Let him talk.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "Nobody reads the file. They read the summary, sign the close order, and go to lunch. That what you're here to do — sign it?" },
+        { type = "paragraph", content = "He says it the way he's said it a hundred times, to a hundred minders." },
+    ] },
+    { advance_text = "Take the hunt seriously.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "The rogue's real. You're the only one still looking. That's the file I'd want to read." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "...Huh. They usually don't bother learning the words. Sit down. Don't touch anything." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get to work."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "vance_securities"
+flagEffects = [
+  { targetType = "player", flag = "calloway_met", op = "set" },
+]
+
+# beat_0058 — #2 hub_calloway_fileroom: the Lane-1 PORTRAIT hub @vance_securities (rue_hub shape). requires_npc
+# AND npc BOTH set (npc= = the portrait card; check_render_buckets flags requires_npc-without-npc). Gated
+# calloway_met is_true; presence governed by npc_calloway's [[npcs.schedules]] (08:00-20:00, 1_metadata). Base =
+# the file-room register + the UNGATED "Believe him" relation feeder (belief = the access-builder, Calloway's
+# analog of Renner's work): -> .believe -> exit ADDS npc_calloway.relation (the belief/access odometer) + costs
+# 60 min (paces it against his window). The seduction rungs surface HERE later (beat_0061), locked-visible.
+[[canvases]]
+id          = "hub_calloway_fileroom"
+name        = "Calloway"
+description = "beat_0058. Calloway's portrait hub @vance_securities. requires_npc + npc = npc_calloway, gated calloway_met is_true. Base 'Believe him' UNGATED relation feeder (raises npc_calloway.relation, the belief/access odometer; costs 60 min). The file-room register. The seduction rungs surface here later (beat_0061)."
+
+[canvases.trigger]
+location      = "vance_securities"
+requires_npc  = "npc_calloway"
+npc           = "npc_calloway"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "calloway_met", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Calloway"
+blocks = [
+  { type = "image", props = { file = "scenes/calloway_fileroom.jpg", description = "A man among floor-to-ceiling unlabelled file boxes, working alone under a desk lamp.", search_queries = ["man archive boxes desk lamp night alone", "records room floor to ceiling files man"] } },
+  { type = "paragraph", content = "Calloway's file room. Boxes to the ceiling, an index on none of them, a man who knows where everything is and trusts no one else to touch it. He works like the audit isn't three streets away with a shredder." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Believe him."
+targetType = "node"
+nodeId     = "hub_calloway_fileroom.believe"
+
+# ── The seduction rungs (beat_0061). Locked-visible (show_when_locked); DOUBLE-LOCKED on calloway_believes
+# (access, earned at the bug proposal) + npc_calloway.corruption (his surrender band). Each +3 corruption,
+# costs 15 Charge (here) + 180 min (on the rung canvas's own exit) — the paced campaign against his 08:00-20:00
+# window. Belief-lever, cold. The loop entry (#7) + loop + drains = beat_0062. ──
+[[canvases.nodes.exit_block.choices]]
+text       = "Get close to him."
+targetType = "node"
+nodeId     = "rung_calloway_contact.base"
+show_when_locked = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "calloway_believes", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_calloway", trait_key = "corruption", operator = "gte", value = 0 },
+] }
+costs = [{ trait = "energy", value = 15 }]
+effects = [
+  { targetType = "npc", npcId = "npc_calloway", trait = "corruption", op = "add", value = 3 },
+  { targetType = "npc", npcId = "npc_calloway", trait = "arousal",    op = "add", value = 3 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him in your mouth."
+targetType = "node"
+nodeId     = "rung_calloway_oral.base"
+show_when_locked = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "calloway_believes", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_calloway", trait_key = "corruption", operator = "gte", value = 6 },
+] }
+costs = [{ trait = "energy", value = 15 }]
+effects = [
+  { targetType = "npc", npcId = "npc_calloway", trait = "corruption", op = "add", value = 3 },
+  { targetType = "npc", npcId = "npc_calloway", trait = "arousal",    op = "add", value = 4 },
+]
+flagEffects = [
+  { targetType = "player", flag = "calloway_oral_once", op = "set" },
+]
+
+# ── #7 the loop entry (beat_0062). Gated calloway_flinch_resolved (the throttle passed) + corruption>=18
+# (sex-tier). Resets the 5 loop traits + SETS calloway_fucked_once; routes into loop_calloway_sex. NOT
+# daily-capped (the loop is the repeatable surface). The anal finish is the drain. ──
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him — all the way."
+targetType = "node"
+nodeId     = "loop_calloway_sex.intro"
+show_when_locked = true
+locked_text = "Not yet — he has to trust you all the way down first."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "calloway_believes",        operator = "is_true" },
+  { type = "flag",  subject = "player", flag_key = "calloway_flinch_resolved", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_calloway", trait_key = "corruption", operator = "gte", value = 18 },
+] }
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
+flagEffects = [
+  { targetType = "player", flag = "calloway_fucked_once", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave him to the paper."
+targetType = "location"
+locationId = "vance_securities"
+
+[[canvases.nodes]]
+id   = "believe"
+name = "Calloway"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "Walk me through the ghost. From the start — the parts nobody let you finish." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "...Fine. You keep up, and you keep it in this room. I've had enough people carry half of it out and call me paranoid." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Keep at it."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "vance_securities"
+time_progression_minutes = 60
+effects = [
+  { targetType = "npc", npcId = "npc_calloway", trait = "relation", op = "add", value = 3 },
+]
+
+# beat_0059 — #3 cap_calloway_bug: the BUG PROPOSAL (auto-fire capstone). Fires once the belief odometer crosses
+# the believer-tier — pri 9 (above the hub's 4, below the meet's 10), so at relation >= 15 it fires instead of
+# the hub, then retires (guard bug_planted is_false). She's earned enough trust to pitch a real method: bug the
+# sensitive docs with locators, let the thief carry one out. A starving, disbelieved hunter — handed the first
+# tool anyone's let him use + taken seriously — approves. The belief-lever PEAK of the setup (his "thanks, for
+# treating it like it's real" = being believed, NOT warmth). SETS bug_planted (opens the trace thread, beat_0060)
+# + calloway_believes (ACCESS — the double-lock axis the lewd rungs gate on, beat_0061). Dialog-carried. relation
+# >= 15 = 5 "Believe him" feeds (belief-fast); only the hub feeder raises npc_calloway.relation.
+[[canvases]]
+id          = "cap_calloway_bug"
+name        = "The trackers"
+description = "beat_0059. The bug proposal @vance_securities. Auto-fire capstone, pri 9, one-shot, gated calloway_met is_true + npc_calloway.relation gte 15 + bug_planted is_false. She pitches locator-tags on the sensitive docs (tag it, let the thief carry it out); the disbelieved hunter, handed a real method + finally believed, approves. SETS bug_planted + calloway_believes (access)."
+
+[canvases.trigger]
+location      = "vance_securities"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "calloway_met",  operator = "is_true"  },
+  { type = "trait", subject = "npc", npc_id = "npc_calloway", trait_key = "relation", operator = "gte", value = 15 },
+  { type = "flag",  subject = "player", flag_key = "bug_planted",   operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The trackers"
+blocks = [
+  { type = "image", props = { file = "scenes/calloway_bug.jpg", description = "A small electronic tag held over an open case file on a cluttered desk.", search_queries = ["small tracker chip document file desk", "hand placing electronic tag on paperwork"] } },
+  { type = "paragraph", content = "She's in the room enough now that he talks while he works, and she's seen the hole in how he hunts: he chases the docs after they're already gone." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Pitch the trackers.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Stop chasing the paper. Tag it. Put a locator in the files worth stealing and let the thief carry one out for you — he'll walk it right to wherever it goes." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "...A tracer in the docs. Nobody's let me put a nail in this place in two years. Said it'd tip the rogue off." },
+    ] },
+    { advance_text = "Tell him it's the only way in.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "The rogue's already inside. He's not watching for a nail. He's watching for you to give up." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "...Do it. Quietly. You bug them, you tell me the second one moves. And — thanks. For treating it like it's real." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Plant the bugs."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "vance_securities"
+flagEffects = [
+  { targetType = "player", flag = "bug_planted",       op = "set" },
+  { targetType = "player", flag = "calloway_believes", op = "set" },
+]
+
+# beat_0060 — #W1a cap_bug_moved: the bug MOVES (auto-fire @vance_securities). Fires a day+ after bug_planted,
+# while she's back at his office. Calloway's trap works for the first time in two years (his elation) — but the
+# dot crosses into the Reach, off the company's map, where a company man CAN'T follow. She can (her off-books
+# world = the whole reason the leak keeps working). Hands her the trail. Dialog-carried (Calloway present).
+# SETS bug_moving -> directs her to underworld_market. pri 8 (below the bug proposal's 9). days_since_flag on
+# bug_planted (shipped shape, cf. renner_oral_once :836).
+[[canvases]]
+id          = "cap_bug_moved"
+name        = "One of them woke up"
+description = "beat_0060 (W1a). The bug moves @vance_securities. Auto-fire, pri 8, one-shot, gated bug_planted is_true + days_since_flag bug_planted gte 1 + bug_moving is_false. A tag goes live; Calloway's trap worked (first win in 2 years); but it's heading into the Reach where the company can't go, and she can. SETS bug_moving -> she traces it at underworld_market."
+
+[canvases.trigger]
+location      = "vance_securities"
+is_repeatable = false
+priority      = 8
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",            subject = "player", flag_key = "bug_planted", operator = "is_true"  },
+  { type = "days_since_flag", subject = "player", flag_key = "bug_planted", operator = "gte", value = 1 },
+  { type = "flag",            subject = "player", flag_key = "bug_moving",  operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "One of them woke up"
+blocks = [
+  { type = "image", props = { file = "scenes/bug_moved.jpg", description = "A moving dot on a dark city map on a monitor, crossing a river.", search_queries = ["gps tracker dot moving city map screen", "surveillance monitor blip crossing map dark"] } },
+  { type = "paragraph", content = "The day after she seeds the files, one of the tags wakes up mid-afternoon and starts to move, and Calloway is out of his chair before she's said a word." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Watch it go.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "It's live. Two years and somebody finally reached into the wrong drawer. Where's it going — come on, show me where it goes." },
+        { type = "paragraph", content = "The dot crosses the river and keeps going, down, off the edge of the company's map." },
+    ] },
+    { advance_text = "Tell him where it's headed.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "The Reach. It's going into the underworld." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "...I'll flag it, escalate it, get someone assigned — there's nobody to assign, is there. The company doesn't go down there. That's the whole reason it keeps happening to me." },
+        { type = "dialog", props = { speaker = "player" }, content = "I do. I'll follow it." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Follow it down."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "vance_securities"
+flagEffects = [
+  { targetType = "player", flag = "bug_moving", op = "set" },
+]
+
+# beat_0060 — #W1b inv_underworld_drop: the TRACE (auto-fire @underworld_market, REUSE). She follows the dead
+# signal to the market and finds the tag CRUSHED — the thief knew exactly what to look for. The docs went
+# through here and kept going; the market keeps no ledger. She learns the docs go UNDER, but NOT who buys them
+# (the bug was never going to name the buyer) — seeds the "find the buyer the old way" instinct (beat_0063,
+# Bastien-spying). Solo beat (no NPC at the drop) -> narration + one thought_bubble (dialog-ratio exempt).
+# SETS bug_traced. pri 10, one-shot, gated bug_moving is_true + bug_traced is_false.
+[[canvases]]
+id          = "inv_underworld_drop"
+name        = "Where the signal died"
+description = "beat_0060 (W1b). The trace @underworld_market. Auto-fire, pri 10, one-shot, gated bug_moving is_true + bug_traced is_false. The tag died at a market stall — found, pried out, crushed by someone who knew what to look for. The docs went through and kept going; no ledger of the buyer. The docs go UNDER, buyer UNKNOWN. Seeds the find-the-buyer-the-old-way instinct. SETS bug_traced."
+
+[canvases.trigger]
+location      = "underworld_market"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "bug_moving", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "bug_traced", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Where the signal died"
+blocks = [
+  { type = "image", props = { file = "scenes/underworld_drop.jpg", description = "A crushed electronic tag on the ground beside an empty market stall.", search_queries = ["crushed electronic chip ground market stall", "broken tracker device dirty floor dim"] } },
+  { type = "paragraph", content = "The signal dies in the Black Market, at a stall that sells nothing anymore, and she stands where it stopped and knows she's a day too late." },
+  { type = "paragraph", content = "The tag's on the ground under a boot-heel's worth of pressure — found, pried out, crushed. Whoever lifted the docs knew exactly what to look for and where. The paper went through here and kept going, and the market keeps no ledger of what passes." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "So the docs go under. That much she's got. Who's buying them at the far end — that, the tag was never going to tell her. She'll find the buyer the old way." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back to it."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_market"
+flagEffects = [
+  { targetType = "player", flag = "bug_traced", op = "set" },
+]
+
+# beat_0061 — #4 rung_calloway_contact: TRIGGERLESS seduction rung (reached from the hub 'Get close to him').
+# corruption + Charge cost live on the hub CHOICE; +180 min on this exit. Belief-lever, cold: he lets it happen
+# because someone finally treats him as real, not because he's seduced. [group] bands deepen by his corruption.
+[[canvases]]
+id          = "rung_calloway_contact"
+name        = "Get close to him"
+description = "Triggerless rung. Reaction climbs by npc_calloway.corruption band (wary < 6 / letting-go >= 6). Sets nothing (corruption + Charge on the hub choice; +180 min on this exit)."
+[[canvases.nodes]]
+id   = "base"
+name = "Get close to him"
+blocks = [
+  { type = "image", props = { file = "scenes/rung_calloway_contact.jpg", description = "A woman leaning in close to a seated man in a dim file-room, a hand on his chest; both clothed.", search_queries = ["woman hand on mans chest office close", "seated man woman leaning in dim office"] } },
+  { type = "paragraph", content = "The file room, late. He's stopped pretending to work; she's stopped pretending to file. When she puts a hand flat on his chest he goes still." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_calloway", trait_key = "corruption", operator = "lt", value = 6 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Not the still of a man being seduced — the still of a man who's forgotten what it is to be touched by someone who isn't about to take something from him. She is, of course. He just doesn't know it yet." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "...What are you doing." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_calloway", trait_key = "corruption", operator = "gte", value = 6 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "You don't have to do this part. Whatever he's paying you to get out of me — not this part." },
+    { type = "paragraph", content = "He says it like a man hoping to be argued with. She doesn't argue. She just doesn't stop, and he lets her not stop." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave it there for tonight."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "vance_securities"
+time_progression_minutes = 180
+
+# beat_0061 — #5 rung_calloway_oral: TRIGGERLESS rung (from the hub 'Take him in your mouth', gated corruption>=6;
+# the hub choice sets calloway_oral_once). Explicit at the ceiling (belief-lever peak — RELIEF not lust). Cold
+# instrumental close. [group] bands: still-talking < 12 / wordless >= 12.
+[[canvases]]
+id          = "rung_calloway_oral"
+name        = "Take him in your mouth"
+description = "Triggerless rung. Explicit (belief-lever: relief, being finally wanted). Bands: still-in-his-head < 12 / wordless >= 12. Sets nothing here (calloway_oral_once + corruption + Charge on the hub choice; +180 min on this exit)."
+[[canvases.nodes]]
+id   = "base"
+name = "Take him in your mouth"
+blocks = [
+  { type = "video", props = { file = "scenes/rung_calloway_oral_t3.webm", description = "A woman on her knees giving oral to a seated man in an office; explicit.", search_queries = ["office blowjob under desk pov", "woman kneeling oral seated man suit"] } },
+  { type = "paragraph", content = "She takes him out from behind the desk and puts her mouth on him, and the sound he makes isn't lust — it's relief, like something clenched for two years finally letting go." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_calloway", trait_key = "corruption", operator = "lt", value = 12 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He tries to stay in his head — keeps talking, the case, the ghost, the names — even with his cock in her throat, because the work is the only place he's ever been safe. She lets him. She's good at making a man feel safe while she takes him apart." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_calloway", trait_key = "corruption", operator = "gte", value = 12 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Now he doesn't talk. He holds the back of her head, not pushing, just needing to know she's real, and she lets him fill her mouth and swallows it and calls it access." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Wipe your mouth. Go."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "vance_securities"
+time_progression_minutes = 180
+
+# beat_0061 — #6 cap_calloway_flinch: the THROTTLE (auto-fire @vance_securities). Fires after oral at the mid-band
+# — the disbelieved man's terror surfaces (this is too good, she'll be like all of them). NON-lewd: she re-anchors
+# his belief, and the suspicion stops winning. The ONE hard gate before the loop (beat_0062 gates on
+# calloway_flinch_resolved). Dialog-carried. pri 6. gated calloway_oral_once + corruption gte 12 + guard.
+[[canvases]]
+id          = "cap_calloway_flinch"
+name        = "The catch"
+description = "beat_0061. The throttle @vance_securities. Auto-fire, pri 6, one-shot, gated calloway_oral_once is_true + npc_calloway.corruption gte 12 + calloway_flinch_resolved is_false. The disbelieved man pulls back in terror (why you, who sent you — closest he's come to the truth). She re-anchors his belief; the suspicion stops winning. SETS calloway_flinch_resolved (unlocks the loop, beat_0062). Non-lewd."
+[canvases.trigger]
+location      = "vance_securities"
+is_repeatable = false
+priority      = 6
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "calloway_oral_once",        operator = "is_true"  },
+  { type = "trait", subject = "npc", npc_id = "npc_calloway", trait_key = "corruption", operator = "gte", value = 12 },
+  { type = "flag",  subject = "player", flag_key = "calloway_flinch_resolved",  operator = "is_false" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "The catch"
+blocks = [
+  { type = "image", props = { file = "scenes/calloway_flinch.jpg", description = "A man gripping a woman's wrist in a dim office, holding her off, wary.", search_queries = ["man holding womans wrist wary office", "tense confrontation dim office man woman"] } },
+  { type = "paragraph", content = "He stops her hand mid-reach and holds it — not gentle." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Let him say it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "Why you. Why now. Nobody in this building has been decent to me in two years and then you walk in and you're this. What do you actually want. Who sent you." },
+        { type = "paragraph", content = "It's the closest he's come to the truth, and he doesn't even know it." },
+    ] },
+    { advance_text = "Re-anchor him.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "You've been right for two years, and alone for two years. I'm not here to make you alone. I'm here because you're the only one who was ever right." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "...God. I want that to be true." },
+        { type = "paragraph", content = "He lets her hand go, and keeps it. The suspicion doesn't leave him. It just stops winning." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let him have it."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "vance_securities"
+flagEffects = [
+  { targetType = "player", flag = "calloway_flinch_resolved", op = "set" },
+]
+
+# beat_0061 — #W3 cap_theft2: the BIG THEFT (auto-fire @vance_securities, mid-band). Vane, spooked she's getting
+# IN close to Calloway, makes his move and lifts the big chunk. OBLIQUE — Wren sees only a minor anomaly (a gap
+# on a shelf) and files it under nothing; she does NOT know the scale or that her own build file rode out (that
+# is the DRAIN reveal, beat_0062). Solo (no NPC) -> narration + thought_bubble. pri 7. gated corruption gte 9
+# (mid-band, below the loop's tier) + bug_traced + guard. SETS theft2_done (hard-gates drain 2's payload).
+[[canvases]]
+id          = "cap_theft2"
+name        = "A gap on the shelf"
+description = "beat_0061 (W3). The big theft @vance_securities. Auto-fire, pri 7, one-shot, gated npc_calloway.corruption gte 9 + bug_traced is_true + theft2_done is_false. Vane, spooked she's getting close to Calloway, lifts the big chunk (her build file + Mercer's target). OBLIQUE: Wren registers only a minor anomaly and files it under nothing — she learns the scale + her stake at the drain (beat_0062). Solo. SETS theft2_done."
+[canvases.trigger]
+location      = "vance_securities"
+is_repeatable = false
+priority      = 7
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_calloway", trait_key = "corruption", operator = "gte", value = 9 },
+  { type = "flag",  subject = "player", flag_key = "bug_traced",  operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "theft2_done", operator = "is_false" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "A gap on the shelf"
+blocks = [
+  { type = "image", props = { file = "scenes/theft2_gap.jpg", description = "An empty gap on a shelf of file boxes, a propped fire door beyond.", search_queries = ["gap missing boxes shelf archive", "propped fire door records room dim"] } },
+  { type = "paragraph", content = "She leaves his office late, warm off the work of getting close to him, and on the way out she passes the file room and the shelf by the door is wrong — a gap in it, boxes gone that were there this morning." },
+  { type = "paragraph", content = "Somebody moved a lot of paper today, quietly, while the one man who'd have noticed was busy having someone finally believe in him. She could say something. She's an analyst three weeks in; analysts don't. She lets the door swing shut behind her." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Not her problem tonight. She files it under nothing, the way she files most things — and doesn't yet know she's just filed away her own." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go home."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "vance_securities"
+flagEffects = [
+  { targetType = "player", flag = "theft2_done", op = "set" },
+]
+
+# ═══ beat_0062 — the sex loop + the two drains ═══════════════════════════════════════════════════
+# loop_calloway_sex: TRIGGERLESS, reached from the hub '#7 Take him — all the way' (which resets the 5 loop
+# traits + SETS calloway_fucked_once). Poses oral(0)/vaginal(1)/anal(2); pleasure climbs; climax-elect at
+# loop_npc_pleasure>=50. Belief-lever/cold. The ANAL finish IS the drain. Mirrors loop_renner_office_sex.
+[[canvases]]
+id          = "loop_calloway_sex"
+name        = "Take him"
+description = "Triggerless Calloway sex loop. oral/vaginal/anal; climax-elect pleasure>=50. The anal finish fires the drain (loop_calloway_finisher). Reached from the hub #7 loop-entry rung (resets loop traits + SETS calloway_fucked_once)."
+[[canvases.nodes]]
+id   = "intro"
+name = "Take him"
+blocks = [
+  { type = "video", props = { file = "sex/calloway_loop_t5.webm", description = "A man and woman coming together against a desk in a dim file-room, clothes coming off.", search_queries = ["office sex desk clothes off dim", "man woman against desk records room"] } },
+  { type = "paragraph", content = "She shuts the file-room door for the last time as an analyst. He's already got his hands in her hair — the disbelieved man gone, just someone who's decided to trust the one person who ever let him." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Get on your knees."
+targetType = "node"
+nodeId     = "base_oral_c"
+
+# Pose: oral (sex_stage 0)
+[[canvases.nodes]]
+id   = "base_oral_c"
+name = "On your knees"
+blocks = [
+  { type = "video", props = { file = "sex/calloway_loop_oral_t5.webm", description = "A woman kneeling with a seated man's cock in her mouth in a dim office.", search_queries = ["office blowjob kneeling desk", "kneeling oral seated man records room"] } },
+  { type = "paragraph", content = "On her knees with his cock in her mouth, and even now he half-talks — the ghost, the case, the shape of the thing he's chased for two years — because the work is the only place he's ever felt safe, and she's made herself the second." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep him in your mouth."
+targetType = "node"
+nodeId     = "base_oral_c"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Climb on."
+targetType = "node"
+nodeId     = "base_vaginal_c"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish in your mouth."
+targetType = "node"
+nodeId     = "loop_calloway_finisher.climax"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false } ]
+
+# Pose: vaginal (sex_stage 1)
+[[canvases.nodes]]
+id   = "base_vaginal_c"
+name = "Ride him"
+blocks = [
+  { type = "video", props = { file = "sex/calloway_loop_vaginal_t5.webm", description = "A woman riding a man in a desk chair, face to face, in a dim office.", search_queries = ["office chair riding cowgirl dim", "girl on top man desk chair"] } },
+  { type = "paragraph", content = "She rides him in the desk chair, slow, and he holds her face in both hands like he's checking she's real. He tells her the true name of the rogue he's chasing. She files it. She files everything." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him."
+targetType = "node"
+nodeId     = "base_vaginal_c"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Back down on him."
+targetType = "node"
+nodeId     = "base_oral_c"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 0, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Turn around — give him your ass."
+targetType = "node"
+nodeId     = "base_anal_c"
+effects = [
+  { targetType = "player", trait = "sex_stage",   op = "set", value = 2, clamp = false },
+  { targetType = "player", trait = "anal_active", op = "set", value = 1, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish inside you."
+targetType = "node"
+nodeId     = "loop_calloway_finisher.climax"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 1, clamp = false } ]
+
+# Pose: anal (sex_stage 2) — the drain pose. The anal finish IS the drain.
+[[canvases.nodes]]
+id   = "base_anal_c"
+name = "Give him your ass"
+blocks = [
+  { type = "video", props = { file = "sex/calloway_loop_anal_t5.webm", description = "A woman bent over a desk taken from behind in a dim file-room.", search_queries = ["office desk sex from behind dim", "bent over desk records room behind"] } },
+  { type = "paragraph", content = "Bent over the desk he's guarded for two years, his cock in her ass, both his hands gripping like she's the last solid thing in a building that's been cutting him loose. This is the act that opens the drain — the one place her power still works freely, on a man who isn't the one who owns her." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Take it in the ass."
+targetType = "node"
+nodeId     = "base_anal_c"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Back on him."
+targetType = "node"
+nodeId     = "base_vaginal_c"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish — and take what he knows."
+targetType = "node"
+nodeId     = "loop_calloway_finisher.climax"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+  { type = "trait", subject = "player", trait_key = "anal_active",       operator = "gte", value = 1  },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 2, clamp = false } ]
+
+# ═══ loop_calloway_finisher — facial/inside END; anal -> the two drains (calloway_drain_canvas) ══════
+# The counter calloway_drains_done is a TRAIT bumped HERE on the anal-finish choice (validator-exempt; the
+# audit discipline — no flag on a triggerless canvas). NO weapon-charge gate (the two drains are load-bearing
+# plot beats — reliable, no soft-lock). Anal branches cover all (drains_done, theft2_done) states, exactly one
+# exit each: 0 -> drain 1 (d0); 1 + theft2_done -> drain 2 (d1); 1 + !theft2_done -> d0_again (nothing new, no
+# bump); >=2 -> done. facial/inside just reset + exit.
+[[canvases]]
+id          = "loop_calloway_finisher"
+name        = "He finishes"
+description = "Triggerless finisher. [group] by sex_finisher_type. facial(0)/inside(1) reset+exit. anal(2) IS the drain: 0->d0 (where?/nothing) bump; 1+theft2_done->d1 (big chunk stolen) bump; 1+!theft2_done->d0_again (no bump); >=2->done. counter = TRAIT bumped here."
+[[canvases.nodes]]
+id   = "climax"
+name = "He finishes"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He finishes on her face with a sound that's half relief, one hand cradling her head like she's the first good thing in two years. He'd give her anything now. He doesn't know what she's about to take." },
+    { type = "video", props = { file = "sex/calloway_finish_facial_t5.webm", description = "A man finishing on a kneeling woman's face in a dim office.", search_queries = ["office facial kneeling", "man finishing on face office"] } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He finishes inside her, holding her down on him, shaking, and after he just breathes into her neck — wrecked, grateful, believed. She lets him have it. Letting him have it is how she keeps him." },
+    { type = "video", props = { file = "sex/calloway_finish_inside_t5.webm", description = "A man finishing inside a woman riding him in a desk chair.", search_queries = ["office chair creampie riding", "finishing inside girl on top"] } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He finishes in her ass, and the drain opens under it the way it's built to — his whole self coming loose through the contact, the last few minutes already going soft and white behind his eyes." },
+    { type = "video", props = { file = "sex/calloway_finish_anal_t5.webm", description = "A man finishing in a woman's ass as she's bent over a desk.", search_queries = ["office desk anal creampie behind", "finishing anal bent over desk"] } },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+# facial/inside — just reset + exit
+[[canvases.nodes.exit_block.choices]]
+text       = "Straighten up."
+targetType = "location"
+locationId = "vance_securities"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "lt", value = 2 },
+] }
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
+# DRAIN 1 — "where are the docs?" -> nothing. drains_done 0 -> 1.
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him where the documents are."
+targetType = "node"
+nodeId     = "calloway_drain_canvas.d0"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "sex_finisher_type",   operator = "eq", value = 2 },
+  { type = "trait", subject = "player", trait_key = "calloway_drains_done", operator = "lt", value = 1 },
+] }
+effects = [
+  { targetType = "player", trait = "calloway_drains_done", op = "add", value = 1 },
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
+# DRAIN 2 — "big chunk stolen, your target's in it." Requires theft2_done. drains_done 1 -> 2 = the discovery.
+[[canvases.nodes.exit_block.choices]]
+text       = "Drain him deeper."
+targetType = "node"
+nodeId     = "calloway_drain_canvas.d1"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "sex_finisher_type",   operator = "eq",  value = 2 },
+  { type = "trait", subject = "player", trait_key = "calloway_drains_done", operator = "eq",  value = 1 },
+  { type = "flag",  subject = "player", flag_key = "theft2_done",           operator = "is_true" },
+] }
+effects = [
+  { targetType = "player", trait = "calloway_drains_done", op = "add", value = 1 },
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
+# DRAIN edge — drained once but theft #2 hasn't fired yet: still nothing new. NO bump (stays at 1).
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask again."
+targetType = "node"
+nodeId     = "calloway_drain_canvas.d0_again"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "sex_finisher_type",   operator = "eq",  value = 2 },
+  { type = "trait", subject = "player", trait_key = "calloway_drains_done", operator = "eq",  value = 1 },
+  { type = "flag",  subject = "player", flag_key = "theft2_done",           operator = "is_false" },
+] }
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
+# DRAIN done — both taken; the repeatable anal finish, no new info. >=2.
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him. There's nothing left to ask."
+targetType = "node"
+nodeId     = "calloway_drain_canvas.done"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "sex_finisher_type",   operator = "eq",  value = 2 },
+  { type = "trait", subject = "player", trait_key = "calloway_drains_done", operator = "gte", value = 2 },
+] }
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
+
+# ═══ calloway_drain_canvas — the drain payloads (triggerless; prose only, effects live on the finisher choice) ══
+[[canvases]]
+id          = "calloway_drain_canvas"
+name        = "What he knows"
+description = "Triggerless drain payloads, reached from loop_calloway_finisher's anal-finish choices (which carry the counter bump + resets). d0 = drain 1 (where? -> nothing). d1 = drain 2 (a big chunk was stolen, her build file was in it — the discovery; drains_done reaches 2). d0_again = edge (theft not fired). done = both taken."
+[[canvases.nodes]]
+id   = "d0"
+name = "Nothing"
+blocks = [
+  { type = "paragraph", content = "She holds one question steady in the flood coming loose out of him: where are the documents. And she reaches in after the answer and there is nothing — no map, no drop, no name. He chases a ghost through paper he can't index, and the paper's already gone, and he never knew where. She surfaces holding air." },
+  { type = "paragraph", content = "He blinks, the minutes wiped, disoriented in his own chair. 'Sorry — I lost the thread. Where were we.' She tells him it's nothing. It nearly is." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Come back for it."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "vance_securities"
+[[canvases.nodes]]
+id   = "d1"
+name = "The big pull"
+blocks = [
+  { type = "paragraph", content = "She drains him deeper this time, past the surface, and the thing she couldn't find before is there after all — not where the docs went, but what went. A whole section of the archive, lifted in one piece, days ago. The big pull. The gap on the shelf she filed under nothing." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "And in it, under a case number he never opened — her. Her build. The record of what she is, walked out the door inside the chunk her target was in. She doesn't get to read it. Someone else will, unless she gets there first." },
+  { type = "paragraph", content = "He surfaces blank, rubbing his temple. She's already gone somewhere behind her own face — already doing the math on who in this whole rotten city buys a thing like that, and already sure she knows the answer." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go find the buyer."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "vance_securities"
+[[canvases.nodes]]
+id   = "d0_again"
+name = "Still nothing"
+blocks = [
+  { type = "paragraph", content = "Same question, same nothing. He still doesn't know where the paper goes, and nothing new has surfaced in him since the last time she took it. Whatever she's waiting for hasn't happened yet — the ghost hasn't made its big move." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Keep working it."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "vance_securities"
+[[canvases.nodes]]
+id   = "done"
+name = "Nothing left"
+blocks = [
+  { type = "paragraph", content = "She's taken everything he had on this. The drain fires, the minutes go, and there's nothing in him left to pull. Just the act now, and the quiet after, and his hand finding hers like it's the only true thing in the room. She lets him think it is." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave him to it."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "vance_securities"
+
+# ═══ beat_0063 — the Bastien-spying (Fork B, re-mechanized OFF npc_at_location) ═══════════════════
+# W2 amb_bastien_overhear: SOLO-LINK atmosphere @underworld_bar (The Undertow, Bastien's front). STORY-FLAG
+# gated on bug_traced (NOT npc_at_location — Bastien is schedule-less by design; he stays UNSEEN). Repeatable;
+# she works his bar/his people/the bartender, scheming in a thought_bubble; overheard fragments as speaker=
+# "unknown". No hard flag (texture). Retires at deal_place_known. +60 min. This is the instinct-building; the
+# PAYOFF is W4, gated on the discovery (calloway_drains_done gte 2).
+[[canvases]]
+id          = "amb_bastien_overhear"
+name        = "Work the Undertow"
+description = "beat_0063 (W2). Solo-link atmosphere @underworld_bar. Repeatable, gated bug_traced is_true + deal_place_known is_false. She spies on Bastien's operation (he's the unseen owner), building the instinct he's the buyer. Overheard fragments; no hard flag. +60 min. Retires at deal_place_known."
+[canvases.trigger]
+location      = "underworld_bar"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "bug_traced",      operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "deal_place_known", operator = "is_false" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Work the Undertow"
+blocks = [
+  { type = "image", props = { file = "scenes/undertow_spying.jpg", description = "A woman alone at a dim underworld bar, nursing a drink, watching the back rooms.", search_queries = ["woman alone dim bar watching night", "solo drink underground bar back rooms"] } },
+  { type = "paragraph", content = "She takes a stool at the Undertow and nurses something she won't drink. The owner's never in front — the whole place runs on people who work for a man nobody sees, which is exactly the kind of man who'd buy what walked out of Calloway's room." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Bastien. It has to be Bastien. He took her once and traded her onward; he deals in things people would kill to keep quiet. She doesn't have proof. She has a feeling that has never once been wrong, a bar full of his people, and time." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "—not here, you idiot. He doesn't touch a handoff himself, and never where he drinks—" },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Nurse the drink a while longer."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 60
+
+# W4 cap_deal_place: the PAYOFF (auto-fire @underworld_bar). Gated calloway_drains_done gte 2 (the drain gave her
+# the discovery — what got taken, and the certainty of the buyer) + bug_traced + guard. Now she knows what to
+# listen for, and the deal drops: time + place. The deal-place comes from SPYING, not the bug. Bastien still
+# UNSEEN. SETS deal_place_known = the 1a->1b handoff. pri 10, one-shot. Solo (voyeur — dialog-ratio exempt).
+[[canvases]]
+id          = "cap_deal_place"
+name        = "The drop"
+description = "beat_0063 (W4). The Bastien-spying payoff @underworld_bar. Auto-fire, pri 10, one-shot, gated calloway_drains_done gte 2 + bug_traced is_true + deal_place_known is_false. With the discovery she knows what to listen for; two of Bastien's people get careless and she catches the deal (time + place — the old cannery off the Pit). Buyer NOT confirmed here (only at the 1b deal). SETS deal_place_known -> 1b handoff."
+[canvases.trigger]
+location      = "underworld_bar"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "calloway_drains_done", operator = "gte", value = 2 },
+  { type = "flag",  subject = "player", flag_key = "bug_traced",            operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "deal_place_known",      operator = "is_false" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "The drop"
+blocks = [
+  { type = "image", props = { file = "scenes/deal_pinned.jpg", description = "A woman at the bar catching a low conversation between two men near a back door.", search_queries = ["woman eavesdropping bar two men back door", "overhearing conversation dim bar corner"] } },
+  { type = "paragraph", content = "Now she knows what she's listening for. Not chatter — a schedule. After the drain, after she's felt the shape of the thing that got taken, she sits in the Undertow long enough for two of his people to get careless near the back." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "—the old cannery off the Pit, night after next. Full lot, one buyer, in and out. Seller's bringing the whole pull—" },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "The old cannery. Night after next. One buyer. She doesn't need the name said out loud; she's known it since the market. She'll be inside before the seller is — and she'll have her own file back before anyone reads a word of it." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go get ready."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_bar"
+flagEffects = [
+  { targetType = "player", flag = "deal_place_known", op = "set" },
+]
+
+# ═══ beat_0064 — the 1a-close: the betrayal seed (the 1b fuse) + the Quests page ═══════════════════
+# cap_calloway_reported: the 1a END beat (auto-fire @vance_securities). She returns one last time before the
+# cannery; he believes, no idea. She knows what leaving does: he'll do the math, and a right-and-disbelieved man
+# won't sit quiet — he'll report the analyst who used him, and that report climbs toward whoever bought her the
+# cover (Mercer). She lights the fuse just by walking out. NOT engineered (she doesn't yet know Mercer's motive —
+# that's the 1b build-file read); it's fallout she's leaving behind. RTS-flat (1a spends ZERO Tier-3). SETS
+# calloway_reported. Capstone interior (her realization) -> narration-carried is doctrine-sanctioned here.
+# pri 5, one-shot, gated deal_place_known is_true + calloway_reported is_false. 1a-complete = both flags.
+[[canvases]]
+id          = "cap_calloway_reported"
+name        = "The last good night"
+description = "beat_0064. The 1a-close @vance_securities. Auto-fire, pri 5, one-shot, gated deal_place_known is_true + calloway_reported is_false. She sees Calloway one last time before the deal; he believes; she leaves knowing he'll do the math and report the analyst who played him, and the report will climb toward Mercer (the cover-trail = the 1b fuse). Fallout, not engineered (Mercer's motive is the 1b reveal). SETS calloway_reported. The 1a end."
+[canvases.trigger]
+location      = "vance_securities"
+is_repeatable = false
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "deal_place_known",  operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "calloway_reported", operator = "is_false" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "The last good night"
+blocks = [
+  { type = "image", props = { file = "scenes/calloway_last.jpg", description = "A man looking up hopeful from a desk in a dim file-room as a woman stands in the doorway.", search_queries = ["man hopeful desk dim office doorway", "woman in doorway leaving man at desk night"] } },
+  { type = "paragraph", content = "She goes back to the file room one more time before the cannery. He lights up when he sees her, the way he's started to — like the day gets easier when she's in it." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Let him have the night.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "You're here late. Good — I think I've got a thread, the pattern on the last pull. We could actually get ahead of him for once." },
+        { type = "dialog", props = { speaker = "player" }, content = "Show me tomorrow." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "Tomorrow. God, it's good to have a tomorrow that isn't just me and the boxes." },
+    ] },
+    { advance_text = "Leave while he still believes.", blocks = [
+        { type = "paragraph", content = "He says we now, and tomorrow, and he built both out of the one person sent to take him apart — and he doesn't know it's the last night of it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Come morning she's gone into the Reach with his trap and his trail, and neither comes back. He'll sit with it and do the math — the analyst who brought the one idea that worked, then vanished the second it did — and a man who's been right and disbelieved for two years won't sit quiet. He'll report her. Loudly. And a report like that doesn't stop at her; it climbs, toward whoever bought her a badge and a desk." },
+        { type = "paragraph", content = "She lets him keep the thread and the we and the good version of the night. Then she leaves, and lights the fuse just by walking out the door." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "vance_securities"
+flagEffects = [
+  { targetType = "player", flag = "calloway_reported", op = "set" },
+]
+
+# ── Quests page — Story-Goals spine (Tier 1, no npc_id). A = the retargeted Salvage card (above). B/C/D here.
+# Flag-milestone chain, one card live at a time (exclusive by flags). ──
+# B — trace the stolen docs (from access until the bug is traced)
+[[quest_cards]]
+priority   = 10
+text       = "The bug is in his files. Now the trail: wait for a tag to move, and follow it wherever it goes — the docs leave through a door the company won't walk through, but you will."
+tip        = "The tracker's planted. Work the seduction while it sits; when a tag wakes up, Calloway will tell you it's moving. Follow it down into the underworld — the Black Market — and see where it died."
+when = [
+  { flag = "calloway_believes", op = "is_true"  },
+  { flag = "bug_traced",        op = "is_false" },
+]
+# C — find who's buying (from the trace until the deal is pinned)
+[[quest_cards]]
+priority   = 10
+text       = "The docs go under and the buyer stays a ghost — the bug never named him. Get it out of Calloway the only way left, and work the one bar down here his kind of money drinks at."
+tip        = "Take Calloway all the way and drain him: ask where the docs are, then drain deeper — he'll tell you a big chunk was lifted, and your own file with it. Then work the Undertow until Bastien's people let the deal slip."
+when = [
+  { flag = "bug_traced",       op = "is_true"  },
+  { flag = "deal_place_known", op = "is_false" },
+]
+# D — the 1a END card (frontier/handoff). deal_place_known is_true. Carries the build boundary + the Patreon ask
+# (moved off the old Salvage card). A flag-goal handoff, NOT a met-numeric -> no Frame-3 blank (quests.md §6).
+[[quest_cards]]
+priority   = 10
+text       = "You have it: the old cannery off the Pit, night after next, one buyer, the whole pull on the table. Everything you've chased is going to be in one room — your target, your own build file, and the man who's been buying Vance's secrets. Get there before the seller does."
+tip        = "That's where this build ends — the deal, and everything it walks into, is the next release. If you want it sooner, Support Us in the sidebar."
+when = [
+  { flag = "deal_place_known", op = "is_true" },
+]
+
+# ── Quests page — Calloway's section (Tier 2, npc_id). Stepped, one card at a time (exclusive by flags); the
+# goal LABEL carries the current lever (the sidebar 'next' row renders only the goal block). ──
+[[quest_cards]]
+priority   = 11
+npc_id     = "npc_calloway"
+text       = "The disbelieved hunter. He's starving to be believed — that's the door, not his body. Take his hunt seriously until he lets you all the way in."
+tip        = "In the file room: Believe him — every time pushes his trust. At enough of it he'll take your bug idea, and you're in."
+when = [
+  { flag = "calloway_met",      op = "is_true"  },
+  { flag = "calloway_believes", op = "is_false" },
+]
+goals = [
+  { trait = "relation", subject = "npc", npc_id = "npc_calloway", op = "gte", value = 15, label = "Earn his belief (trust)" },
+]
+[[quest_cards]]
+priority   = 11
+npc_id     = "npc_calloway"
+text       = "He trusts you now. Get under the guard — a hand, your mouth — until the disbelieved man's terror surfaces and he tries to bolt. Talk him back down."
+tip        = "Run the rungs — Get close to him, take him in your mouth. Each pushes his corruption. At the catch, re-anchor his belief; the suspicion stops winning."
+when = [
+  { flag = "calloway_believes",       op = "is_true"  },
+  { flag = "calloway_flinch_resolved", op = "is_false" },
+]
+goals = [
+  { trait = "corruption", subject = "npc", npc_id = "npc_calloway", op = "gte", value = 12, label = "Get under his guard" },
+]
+[[quest_cards]]
+priority   = 11
+npc_id     = "npc_calloway"
+text       = "The catch is past. Take him all the way — the one place your power still works, on a man who isn't the one who owns you."
+tip        = "The loop's open: Take him — all the way. The anal finish is the drain."
+when = [
+  { flag = "calloway_flinch_resolved", op = "is_true"  },
+  { flag = "calloway_fucked_once",     op = "is_false" },
+]
+goals = [
+  { trait = "corruption", subject = "npc", npc_id = "npc_calloway", op = "gte", value = 18, label = "Break him all the way open" },
+]
+[[quest_cards]]
+priority   = 11
+npc_id     = "npc_calloway"
+text       = "He's yours. Drain him for what he knows — where the docs went, and what walked out with them."
+tip        = "In the loop, finish in his ass to fire the drain. First: ask where the documents are (nothing). Then drain deeper for the big pull — your file's in it."
+when = [
+  { flag = "calloway_fucked_once", op = "is_true" },
+  { trait = "calloway_drains_done", subject = "player", op = "lt", value = 2 },
+]
+goals = [
+  { trait = "calloway_drains_done", subject = "player", op = "gte", value = 2, label = "Drain him — twice" },
 ]
 
 # ══════════════════════════════════════════════════════════════════

@@ -260,6 +260,11 @@ hidden = true
 [[traits.labels]]
 key    = "repair_session"
 hidden = true
+# THE ARCHIVE 1a (beat_0056) — the Calloway drain counter. Hidden from the <<playerTraits>> dump; no sidebar
+# row. A TRAIT (gte-read) because the drain setter is triggerless; downstream reads calloway_drains_done gte 2.
+[[traits.labels]]
+key    = "calloway_drains_done"
+hidden = true
 # SALVAGE emitter recovery — emitter_broken (0/1, hidden). 0=works. Set 1 at the captivity release, 0 at
 # repair session 12; ANDed into the 4 emitter fire gates as `emitter_broken lt 1` (yard guards + underworld
 # gate). TRAIT not flag = dodges the flag-chain validator (the fire gates are exit-block choice conditions).

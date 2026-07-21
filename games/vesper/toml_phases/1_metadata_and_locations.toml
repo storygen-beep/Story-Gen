@@ -94,6 +94,11 @@ kess_debt         = 0
 # kept for save-safety, but nothing feeds it; the repair is coin-cost-per-session, not debt-accrual.)
 repair_armed      = 0
 repair_session    = 0
+# THE ARCHIVE 1a (beat_0056) — the Calloway drain counter (hidden). +1 per drain on the triggerless finisher:
+# 0->1 = "where?/nothing", then 1 + theft2_done ->2 = "big chunk stolen". A TRAIT (gte-read), NOT a flag — the
+# drain setter is triggerless, so a flag would hard-fail the flag-chain validator; a gte trait is exempt.
+# Downstream (the deal-place spy W4, the "find the buyer" Quest card) reads calloway_drains_done gte 2.
+calloway_drains_done = 0
 # SALVAGE emitter recovery — emitter_broken: 0=works (default; pre-captivity yard/gate use), set 1 at the
 # captivity release (core dead -> the emitter draws off the SAME core, so it's dead too), set 0 at repair
 # session 12 (core restored). The 4 emitter fire gates AND `emitter_broken lt 1`. Default 0 = save-safe
@@ -272,6 +277,50 @@ start_time = "10:00"
 end_time   = "22:00"
 activity   = "cutting a hull down"
 
+# ── Calloway — the mark: Vance Securities rogue-hunter (belief-lever seduce-in; The Archive 1a) ──
+# NEW (beat_0056). The disbelieved company hunter; she infiltrates his un-indexed file room, plants the bug,
+# seduces on the belief-lever, drains him twice, ends her nemesis. FULL triad (relation=belief/access odometer,
+# corruption=surrender ladder, arousal=loop throttle) — the Renner double-lock. SCHEDULE ADDED beat_0058 (below,
+# @vance_securities 08:00-20:00). ENGINE FACT (verified v2.py:3417-3424): a DECLARED [[npcs.schedules]] surfaces
+# the NPC on the Schedule PAGE regardless of any canvas gate — so Calloway is listed there from a fresh save.
+# ACCEPTED (the Kess-doctrine leak): he's the assigned MARK like Sol/Rue/Marsh, and the portrait REQUIRES a
+# schedule (v2.py:4864). The greyed Spire nav card shows NO badge pre-unlock (vance_securities locked on
+# salvage_relaunched). First name OPEN ("Calloway" = his canon surname, freely renameable). Appended AFTER Kess
+# (the last prior NPC + his schedule) — no schedule-orphan.
+[[npcs]]
+id          = "npc_calloway"
+name        = "Calloway"
+description = "The company man who runs the hunt for the rogue from inside Vance Securities — and keeps a file room nobody audits. Humiliated, sidelined, the audit closing on him; everyone treats him as a crank chasing a ghost. Starving to be believed. She's the first to take his hunt seriously."
+portrait    = "calloway.jpg"
+core_traits = { relation = 0, corruption = 0, arousal = 0 }
+flag_keys   = []
+arc_stages  = ["Guarded", "Believer", "Attached", "Betrayed"]
+
+# Calloway's schedule (beat_0058) — one entry, all week, no midnight wrap (08:00 < 20:00). WIDE window: a
+# hunter working a shutting-down division is reliably at his desk, so cap_calloway_meet + hub_calloway_fileroom
+# fire whenever she's dispatched — no bounded-window dead room to guard. MUST sit HERE, between npc_calloway's
+# arc_stages and the npc_vane block below, or it orphans onto Vane (the mole must stay schedule-less).
+[[npcs.schedules]]
+location   = "vance_securities"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "20:00"
+activity   = "working the rogue-hunt files"
+
+# ── Vane — the mole/thief (mercenary; unseen in 1a, revealed at the 1b deal) ──
+# NEW (beat_0056). Calloway's own man, secretly the thief. Unseen in 1a (felt only via the bug moving); a 1b
+# dialog speaker at the deal reveal. Declared minimal + schedule-less, exactly like npc_bastien — he must NOT
+# use npc=/requires_npc (which gate on a schedule he doesn't have), and staying off-schedule keeps him off the
+# Schedule page. No meters, no hub. Name OPEN (placeholder "Vane"; renameable).
+[[npcs]]
+id          = "npc_vane"
+name        = "Vane"
+description = "A spy for hire — money only, no cause. Secretly one of Calloway's own team: the ghost Calloway hunts is his own man, hidden in plain sight. Lifts the docs, moves them into the underworld, and sells to the buyer. Barely seen until the deal."
+portrait    = "vane.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = ["The mole"]
+
 # ─── Clothing — the worn-state COVER catalog (beat_0015) ──────────────────────
 # Two "dress"-slot looks she swaps between at the rack (wardrobe page @ wren_room):
 #   • her DEFAULT "asset self" (initial=true, equipped at start) = the out-of-cover state
@@ -339,6 +388,23 @@ description      = "The chrome public level at the foot of Vance Tower. Suits cr
 image            = "locations/spire_plaza.jpg"
 navigation_order = ["atrium"]
 # Top-level street hub (NO entry_from) — the Spire's living surface + the travel anchor.
+
+# ── vance_securities — Calloway's division + the un-indexed file room (The Archive 1a) ──
+# NEW (beat_0056). Topside/Spire, off spire_plaza. LOCKED until the mission is dispatched — gated on the shipped
+# salvage_relaunched (Mercer's Calloway re-launch, 5_scenes) is_true; version="1.0" or the lock fails OPEN. The
+# file-room register FOLDS INTO the hub (one location, one window; portrait renders once Calloway's schedule +
+# hub land at beat_0058) — NOT a separate navigable room. entry_from=spire_plaza re-adds it as a Spire card,
+# greyed with the blocked_message inline until unlocked.
+[[locations]]
+id          = "vance_securities"
+name        = "Vance Securities"
+description = "An internal division high in Vance Tower — Calloway's floor, and the file room nobody audits. Quiet, over-lit, under-staffed: a man chasing a ghost through paper the company would rather forget."
+image       = "locations/vance_securities.jpg"
+entry_from  = "spire_plaza"
+entry_conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "salvage_relaunched", operator = "is_true" },
+] }
+blocked_message = "Mercer hasn't sent her up there yet. The Calloway job opens when he gives the word."
 
 [[locations]]
 id               = "atrium"

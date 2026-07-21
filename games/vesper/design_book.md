@@ -4,7 +4,7 @@
 > translation of what's written here. Grown one section per pipeline step.
 >
 > Working title: **Vesper** (also the PC's buried true name — hidden in plain sight; rename freely).
-> Book revision 65 (Step 5 + authoring. **Header changelog resumed at 52.** Latest: **SALVAGE — THE REPAIR BRIDGE, design folded into the book (rev 65 — see `## Salvage — The Repair` + `### Salvage blueprint`)** — the chunk after captivity, and the one that PAYS the frozen `Core: Failing` promise. Wren wakes broken and, for the first time, seeks help OFF the books (a company refit would WIPE her): **KESS**, an off-books dockside synth-mechanic, repairs her in **STAGED** fixes, each proven on a **brought body — a weapon-test** (Tolly = the charge/core test · Reeves = the drain-test whose payload drops the **Calloway file-room** lead — the test IS the intel beat). New verb = **supplicant / test-bench** (the first NON-conquest on the roster). The rescuer hook pays off through a **cold channel** — Kess reads the re-seated drain (*"somebody who'd had their fingers in you before, who didn't need to look"*) + a once-only **Tier-3 glitch-leak** that reuses `beat_0042`'s exact devices so it reads as the *same* memory surfacing — with Cain never on-page, **"Vesper" off-page**, the alliance unreportable, the Site closed. Meter **FLIPS**: `core_strain`→0 (Failing clears — the renderer emits nothing at no-match) + a new hidden `core_sealed` driving a **"Core: Locked"** row (the sealed partition only the Site opens; honors "no cure shipped"). She walks **owing** a growing `kess_debt` (untraceable `coin`, never company Credits — the broke→rich seed; Kess recurs) and re-launches at Mercer's **Mission-3 (Calloway)** order, private want + company order now at one address. **Six forks LOCKED with LO 2026-07-15** (visible flip · staged weapon-tests · Kess recurs · walk owing · awakening KEPT STILL · Reeves names Calloway). **Grind-guard:** staged scenes are count-locked + `is_repeatable=false` — staged-and-distinct is the point, a repeatable loop re-ships the review. Extend-only (new: `kess`/`kess_berth`/`core_sealed`/`kess_debt`/`salvage_*`). Design/story folded; blueprint placed (`beat_0046–0055`; 0045 is the parked captivity undo-hatch); no TOML yet. Prior: **CAPTIVITY SCENES → DEEP, HOT, PURE-WITNESS CHAINS (rev 64 — TOML build)** — the eight cell shelf scenes (+ the `cell_sleep` night-use) rewritten from flat one-clip captions into **scripted multi-beat, pure-witness chains** (approach → strip → invasive inspection → the acts → finish → read-out; advanced on `Continue`, one clip per beat, no player agency — *rape doesn't start at penetration; the helpless click is the point*). The captivity ceiling is **RE-SPEC'd on LO's three calls**: Bastien **and** the crew are now **hot and degrading** (the earlier *clinical / operates-not-degrades* ceiling struck; the crew's register decoupled into a jeering pack); the floor **widened** to spit/drool/face-use · marks & rough handling · piss/heavier degradation; and *damage-to-the-machine-not-the-meat* loosened to permit **surface marks** (the core-break stays the only lasting damage). Her interior stays **rationed to one `thought_bubble` per scene** — the loud degrading room around a flat blank is the horror. Media = **full clip-per-beat depth**, ~30–40 NEW clips = the open find-media harvest (scenes build with `[VIDEO MISSING]` until filled). Doctrine gap flagged for skill capture: the `author-game` skill has **no pure-witness / no-agency scene pattern** (the reason they shipped as captions) — write it back as a `sex-loop.md` counterpart once the pattern proves out. Prior: **CAPTIVITY — THE ROOM (Act 2 · Bastien's arc, part 1) — the STORY folded into the book (see `## Captivity — The Room`)** — the chunk where the mopoga *"grind not content"* cure fully lands: the densest erotic stretch in the game, zero grind, and the third distinct conquest verb (**she is taken**). Bastien's grab no longer releases her — it ports her into a **sealed cell** with two verbs (sleep · attend), where he and a **faceless crew** use her across three days while `core_strain` climbs (sex *charges* her; he stripped the drain, so the input has nowhere to go and the core cooks). At the break, **Cain** arrives, argues with Bastien behind a door **we never show**, and frees her without saying why. She leaves with her gear back and a fault that does not heal — the `Core: Failing` row in her sidebar is the promise the repair chunk pays. Two ceilings **declared** this revision (both previously blank): **Bastien's vocab register** — *ownership-as-curiosity*, maximum from the first scene, clinical rather than hot (he doesn't degrade her, he **operates** her) — and a scoped **RE-SPEC of the non-con floor**, which until now read *"no torture/mutilation unless re-specced."* Inside the cell the ceiling lifts to restraint/BDSM, gangbang, sustained non-con, and her machine broken; **the damage is to the machine, not the meat**, and the lift is scoped to the cell only. Design/story only — no TOML this revision; the blueprint (the named scene table) is next. Prior: **UNDERWORLD HUNT — Act-2 on-ramp, DESIGN landed (Steps 3+5 — casting + blueprint)** — the fix for the mopoga *"grind not content / lacks content"* review, whose real cause was **roster**: only 2 developed NPCs and Act 2 designed-but-unbuilt, so the story ran out of people. Locked the **Underworld Hunt** (the trail that *reveals* Bastien) and did its casting. Beats: Renner's drain will hand her **two dead men's names** (Doss + Rourke, NEW) → **Sol promoted from placeholder to the informant** (resolves his add/cut fork) → the fixer **Marsh** (one-off drain) books **Rue** at The House on Sundays → she pays Rue off the slot (the underworld coin's first real *use*), serves + drains Marsh → the crew's place → finds **Bastien**, whose people **grab her**. **Bastien re-cast**: dealer→owner (bar + brothel), submissive-cover→**capture-and-flip**, supply-transaction→secret Cain-alliance (saved reveal). His *arc* (flip/drain) = next chunk; this one only reveals him. The underworld is a **breadcrumb, not a new grind** (no second currency; every stop is a scene). Casting table + sketches reconciled; deeper "submissive dealer" arc-refs marked superseded-pending-Step-4. **Blueprint seeded (Step 5): 5 scenes (plan beat_0030–0034) gated on `names_known` (a TRAIT — triggerless drain setter) + a located flag chain (`hunt_lead`/`crew_known`/`bastien_found`); Sunday via a canvas `trigger.schedules weekdays=[6]` (NOT an NPC schedule row — spoiler); the grab = an auto-fire capstone that ends the chunk; one new room `crew_den`; Rue pay-off = the coin's first real sink. Design-only; Step-6 quick-check next; no TOML yet.** Prior: **RENNER QUEST → STEPPED CORRUPTION LADDER** — the single Renner objective (*Break him to the drain — N / 50*) is replaced by a chain of corruption-banded quest cards that name the CURRENT lever, so the goal finally matches the real stepped unlock (tease 0 / flash 10 / grope 20 / first-oral 30 / loop 40 / anal-drain 50) instead of hiding it behind one far-off number. Six rungs, one live at a time — the picker swaps as `npc_renner.corruption` crosses each band; ranges are exclusive via `gte`+`lt` so exactly one matches: R1 tease → R2 flash → R3 grope → R4 he-cracks → R5 break-to-50 → R6 *take him to bed* (the 50-but-not-yet-bedded step, the only numberless rung — it also closes a pre-existing blank-*next*-row dead-spot where a met goal + no `ready_canvas` rendered nothing, engine `renderQuestsGoalBlock` Frame 3 v2.py:13988). The **sidebar *next* row and the Quests page are the same renderer** (`pickQuestsCard`→`renderQuestsGoalBlock`, v2.py:15137-15145) — there was never a separate "sidebar quest" to align; both step together for free. Per LO: **keep the number** (each rung shows *N / next-threshold*; the coaching verb rides in the goal LABEL because the sidebar renders only the goal block, not text/tip). READY pair + Story-Goal tier untouched. Authoring-only, zero engine change; build green (no new flags → flag chains still valid) + 28/28 headless live-test. Prior: **DRAIN FOLDED INTO THE HUB SEX LOOP + underworld lore** — the first Renner drain is no longer a separate cold auto-fire anal scene (retired `cap_renner_anal_drain` + its standalone clip `sex/renner_anal_t5.webm`). It now happens INSIDE the office sex loop like every repeat: oral→vaginal→anal, and the **anal finish IS the drain** — she builds up instead of jump-cutting straight to anal. It's **player-driven** (no longer force-fired) and gated on the drain weapon being **worn** (`equipped_weapon=1`) + **charged** (`drain_charge>=1`); carry the emitter or run dry and the anal still resolves but doesn't drain (reload at the cradle). **First** drain = the full Q&A extraction; every **repeat** = the short "ask again." The anal pose opens on his corruption≥50 + in cover (was gated on the retired first-anal flag). **Lore swap:** the drain no longer names the two unbuilt targets (Bastien/Calloway) — Renner now confesses the real feud (two of his own people betrayed him, feeding Cain supplies off his own floor; he killed them and their families; Cain torched his yard for it) and points her at the **underworld** (already built + reachable off the Waterfront), converging with the burned-yard evidence thread (the two dead men + the underworld origin). *(D2: the broader Bastien/Calloway Mission 2/3 references elsewhere in this book stay as future-frontier intent, now underworld-first — reconcile when those targets are built.)* Engine note: the post-drain awakening (glitch II) was re-gated onto a new hidden `drains_done` trait counter so the flag-chain validator doesn't demand a located setter (the drain now fires in a triggerless loop). Authoring-only, zero engine change; build green + 22/22 headless live-test. Prior: **EMITTER-FIRE VIDEOS SPLIT** — the two arousal-weapon fire beats no longer share one clip: the **gate** doorman keeps `sex/arousal_weapon_use.webm`, and the **burned-yard** area-fire now points at a new `sex/yard_emitter_fire_t5.webm`. The prose already differed (one bored doorman vs. a knot of men going slack); now the video does too. Engine silent-skips the missing yard clip → the yard beat shows its prose + the find-media search-links until the clip is harvested (the slot joins the next find-media pass). Authoring-only, one TOML video block retargeted, gate left as-is. Prior: **WEAPON LOADOUT — one weapon carried at a time** (new hidden trait `equipped_weapon`: 1 = drain, 2 = emitter; one core feeds one weapon). She swaps at the bench in her room (*Switch weapon*, free); which she carries gates use — the drain only fires the Renner extraction, the emitter only zaps guards (yard/gate). The **first drain is not exempt** — the capstone trigger waits until the drain is carried, and the quest page directs her (flipping to "switch back to the drain" if she's on the emitter). The **two weapon reloads are now separate dedicated cradle actions** (*Recharge the drain* / *Recharge the emitter*); **Power down / Charge up no longer reload weapons** (Charge only). Authoring-only, zero engine change (a literal clothing-slot weapon was engine-blocked — `VALID_CLOTHING_SLOTS` is hardcoded to 7). Prior: **BROTHEL → FULL SEX LOOP** — The House promoted from a single-variant repeat to the Renner/Mercer pose-ladder shape (oral/vaginal/anal → his pleasure climbs → elected finish: mouth/inside/ass), and **coin moved to finish-only** (it was paid on the entry choice — a faucet). Two new triggerless canvases (`underworld_brothel_loop` + `underworld_brothel_finisher`), authoring-only, cold register kept. 5 new t5 clips pending find-media (engine silent-skips → plays text-only meanwhile; vaginal reuses the existing ride clip). Prior: **LOCKED-CHOICE LABELS — the 4 Renner depot seduction rungs now show their own action label greyed when locked** (was distinct prose via `locked_text`), so the locked and unlocked text agree and it matches the energy gate's "(Requires 15 …)" look. Per LO (Option A): bare same-label, no hand-written requirement — the engine can't auto-derive a reason from `conditions` (only resource `costs` do, via `getCostBlockedMessage`). The 7 sex-loop/serve finishers keep their prose `locked_text` (reads better mid-scene). Prior: **ONBOARDING (audit P3, minimal)** — coin is now established in-fiction at the Underworld gate as closed underworld-only scrip (earned/spent only down there, worthless up top); this also explains why the toll can't be paid on a cold first visit. Per LO, the other P3 touches were dropped (the sidebar already surfaces Condition/Fighting/Stealth/Coin from frame one). Prior: **CLEANUP (audit P5 A+B)** — removed the dead `underworld_known` flag (set, read by nothing — the Underworld shipped reachable) and corrected the stale "underworld is deferred" notes to "reachable" (its deep end / Cain still locked). Prior: **PROSE PASS — Underworld sex rewritten to a declared cold-but-explicit register** (graphic at the ceiling, transactional/detached — the opposite of the Renner/Mercer heat; see *## The Underworld*), and the two interior tics ("files it under nothing" / "the way she does everything") **rationed** to their load-bearing beats. Prior: **BUGFIX — Condition (hygiene) was over-capping past 100 (Wash) and going negative (sex drops)**, both making the banded Condition card vanish; clamped all 9 hygiene effects so Condition is bounded 0–100 like Charge (the Charge-bug twin the content-depth audit caught; see *## Reset & reload*). Prior: **Quests restructured into two tiers** — the top **Story Goals** carry the mission (Mission 1 + the Burned Yard); **Renner's own section** carries his seduction as a one-card-at-a-time chain (*Earn the office* → *Break him to the drain*), which also lights the Renner sidebar panel's *next* row (see *### Quests page — two tiers*). Prior: **BUGFIX — Charge (energy) was sliding negative**; spends moved onto gated `costs`/clamp so Charge is now bounded 0–100 and the rungs/work block when too tired (travel never blocks; see *## Reset & reload*). Prior: the **arousal weapon's use is now a real beat** — arouse → fuck → he *passes out* (non-lethal) → she slips by; it's sex, so it drops Condition (see *## Reset & reload*). Prior: **reset & reload** (Condition + the two weapon reloads + Charge up); **The Underworld** (coin economy / second life); The Burned Yard; the Training activity; the Renner grind retune.)
+> Book revision 69 (Step 5 + authoring. **Header changelog resumed at 52.** Latest: **THE ARCHIVE (Act 2) — design fold IN PROGRESS (Step-5 blueprint, propose-first; rev 69).** The chapter after Salvage, built **fresh** from the shipped 0.1.4 end-state (leashed, paid-clean, Mercer wary); the old Phase-1 Calloway/Site/Cain ladder is **set aside** for the forward story. Full locked spine + cast + rules + canon anchors: `games/vesper/design_beat_archive.md`. Split into two shippable chunks — **1a · The Archive** (topside: infiltrate Calloway's un-indexed file room, plant a doc-bug, seduce+drain, discover the big theft, get burned — **build first**) and **1b · The Deal** (underworld: the deal, **Vane** the hidden mole + **Bastien** the buyer, read the build file, trade Mercer his escape for the leash key). Two NEW NPCs: **`npc_calloway`** (the mark → nemesis) + **`npc_vane`** (Calloway's mole → her kept asset). **Pass 1 (player thread) folded:** the **used→user** turn now ADVANCES — she takes the **leash controller** (1b) but stays leashed (still-Failing core + needs Kess); the controller is **purely in-fiction** (no meter/marker — LO); her **build file ("what she is")** is set up in 1a (the discovery it was stolen) and read in 1b (Tier-3, rationed); the Calloway seduction is a **cold belief-lever** (no warmth breached — reserved for Cain). **All four passes folded** (player · Calloway/Vane on the belief-lever · world + the Bastien-overhear (Fork B) · wiring); **plan seeded `beat_0056`–`beat_0065`** (1a; Step-7 authoring next — the scaffold first). Forks A + B locked with LO 2026-07-21. See `## The Archive` + `### The Archive blueprint`. Prior: **SALVAGE — THE REPAIR BRIDGE, design folded into the book (rev 65 — see `## Salvage — The Repair` + `### Salvage blueprint`)** — the chunk after captivity, and the one that PAYS the frozen `Core: Failing` promise. Wren wakes broken and, for the first time, seeks help OFF the books (a company refit would WIPE her): **KESS**, an off-books dockside synth-mechanic, repairs her in **STAGED** fixes, each proven on a **brought body — a weapon-test** (Tolly = the charge/core test · Reeves = the drain-test whose payload drops the **Calloway file-room** lead — the test IS the intel beat). New verb = **supplicant / test-bench** (the first NON-conquest on the roster). The rescuer hook pays off through a **cold channel** — Kess reads the re-seated drain (*"somebody who'd had their fingers in you before, who didn't need to look"*) + a once-only **Tier-3 glitch-leak** that reuses `beat_0042`'s exact devices so it reads as the *same* memory surfacing — with Cain never on-page, **"Vesper" off-page**, the alliance unreportable, the Site closed. Meter **FLIPS**: `core_strain`→0 (Failing clears — the renderer emits nothing at no-match) + a new hidden `core_sealed` driving a **"Core: Locked"** row (the sealed partition only the Site opens; honors "no cure shipped"). She walks **owing** a growing `kess_debt` (untraceable `coin`, never company Credits — the broke→rich seed; Kess recurs) and re-launches at Mercer's **Mission-3 (Calloway)** order, private want + company order now at one address. **Six forks LOCKED with LO 2026-07-15** (visible flip · staged weapon-tests · Kess recurs · walk owing · awakening KEPT STILL · Reeves names Calloway). **Grind-guard:** staged scenes are count-locked + `is_repeatable=false` — staged-and-distinct is the point, a repeatable loop re-ships the review. Extend-only (new: `kess`/`kess_berth`/`core_sealed`/`kess_debt`/`salvage_*`). Design/story folded; blueprint placed (`beat_0046–0055`; 0045 is the parked captivity undo-hatch); no TOML yet. Prior: **CAPTIVITY SCENES → DEEP, HOT, PURE-WITNESS CHAINS (rev 64 — TOML build)** — the eight cell shelf scenes (+ the `cell_sleep` night-use) rewritten from flat one-clip captions into **scripted multi-beat, pure-witness chains** (approach → strip → invasive inspection → the acts → finish → read-out; advanced on `Continue`, one clip per beat, no player agency — *rape doesn't start at penetration; the helpless click is the point*). The captivity ceiling is **RE-SPEC'd on LO's three calls**: Bastien **and** the crew are now **hot and degrading** (the earlier *clinical / operates-not-degrades* ceiling struck; the crew's register decoupled into a jeering pack); the floor **widened** to spit/drool/face-use · marks & rough handling · piss/heavier degradation; and *damage-to-the-machine-not-the-meat* loosened to permit **surface marks** (the core-break stays the only lasting damage). Her interior stays **rationed to one `thought_bubble` per scene** — the loud degrading room around a flat blank is the horror. Media = **full clip-per-beat depth**, ~30–40 NEW clips = the open find-media harvest (scenes build with `[VIDEO MISSING]` until filled). Doctrine gap flagged for skill capture: the `author-game` skill has **no pure-witness / no-agency scene pattern** (the reason they shipped as captions) — write it back as a `sex-loop.md` counterpart once the pattern proves out. Prior: **CAPTIVITY — THE ROOM (Act 2 · Bastien's arc, part 1) — the STORY folded into the book (see `## Captivity — The Room`)** — the chunk where the mopoga *"grind not content"* cure fully lands: the densest erotic stretch in the game, zero grind, and the third distinct conquest verb (**she is taken**). Bastien's grab no longer releases her — it ports her into a **sealed cell** with two verbs (sleep · attend), where he and a **faceless crew** use her across three days while `core_strain` climbs (sex *charges* her; he stripped the drain, so the input has nowhere to go and the core cooks). At the break, **Cain** arrives, argues with Bastien behind a door **we never show**, and frees her without saying why. She leaves with her gear back and a fault that does not heal — the `Core: Failing` row in her sidebar is the promise the repair chunk pays. Two ceilings **declared** this revision (both previously blank): **Bastien's vocab register** — *ownership-as-curiosity*, maximum from the first scene, clinical rather than hot (he doesn't degrade her, he **operates** her) — and a scoped **RE-SPEC of the non-con floor**, which until now read *"no torture/mutilation unless re-specced."* Inside the cell the ceiling lifts to restraint/BDSM, gangbang, sustained non-con, and her machine broken; **the damage is to the machine, not the meat**, and the lift is scoped to the cell only. Design/story only — no TOML this revision; the blueprint (the named scene table) is next. Prior: **UNDERWORLD HUNT — Act-2 on-ramp, DESIGN landed (Steps 3+5 — casting + blueprint)** — the fix for the mopoga *"grind not content / lacks content"* review, whose real cause was **roster**: only 2 developed NPCs and Act 2 designed-but-unbuilt, so the story ran out of people. Locked the **Underworld Hunt** (the trail that *reveals* Bastien) and did its casting. Beats: Renner's drain will hand her **two dead men's names** (Doss + Rourke, NEW) → **Sol promoted from placeholder to the informant** (resolves his add/cut fork) → the fixer **Marsh** (one-off drain) books **Rue** at The House on Sundays → she pays Rue off the slot (the underworld coin's first real *use*), serves + drains Marsh → the crew's place → finds **Bastien**, whose people **grab her**. **Bastien re-cast**: dealer→owner (bar + brothel), submissive-cover→**capture-and-flip**, supply-transaction→secret Cain-alliance (saved reveal). His *arc* (flip/drain) = next chunk; this one only reveals him. The underworld is a **breadcrumb, not a new grind** (no second currency; every stop is a scene). Casting table + sketches reconciled; deeper "submissive dealer" arc-refs marked superseded-pending-Step-4. **Blueprint seeded (Step 5): 5 scenes (plan beat_0030–0034) gated on `names_known` (a TRAIT — triggerless drain setter) + a located flag chain (`hunt_lead`/`crew_known`/`bastien_found`); Sunday via a canvas `trigger.schedules weekdays=[6]` (NOT an NPC schedule row — spoiler); the grab = an auto-fire capstone that ends the chunk; one new room `crew_den`; Rue pay-off = the coin's first real sink. Design-only; Step-6 quick-check next; no TOML yet.** Prior: **RENNER QUEST → STEPPED CORRUPTION LADDER** — the single Renner objective (*Break him to the drain — N / 50*) is replaced by a chain of corruption-banded quest cards that name the CURRENT lever, so the goal finally matches the real stepped unlock (tease 0 / flash 10 / grope 20 / first-oral 30 / loop 40 / anal-drain 50) instead of hiding it behind one far-off number. Six rungs, one live at a time — the picker swaps as `npc_renner.corruption` crosses each band; ranges are exclusive via `gte`+`lt` so exactly one matches: R1 tease → R2 flash → R3 grope → R4 he-cracks → R5 break-to-50 → R6 *take him to bed* (the 50-but-not-yet-bedded step, the only numberless rung — it also closes a pre-existing blank-*next*-row dead-spot where a met goal + no `ready_canvas` rendered nothing, engine `renderQuestsGoalBlock` Frame 3 v2.py:13988). The **sidebar *next* row and the Quests page are the same renderer** (`pickQuestsCard`→`renderQuestsGoalBlock`, v2.py:15137-15145) — there was never a separate "sidebar quest" to align; both step together for free. Per LO: **keep the number** (each rung shows *N / next-threshold*; the coaching verb rides in the goal LABEL because the sidebar renders only the goal block, not text/tip). READY pair + Story-Goal tier untouched. Authoring-only, zero engine change; build green (no new flags → flag chains still valid) + 28/28 headless live-test. Prior: **DRAIN FOLDED INTO THE HUB SEX LOOP + underworld lore** — the first Renner drain is no longer a separate cold auto-fire anal scene (retired `cap_renner_anal_drain` + its standalone clip `sex/renner_anal_t5.webm`). It now happens INSIDE the office sex loop like every repeat: oral→vaginal→anal, and the **anal finish IS the drain** — she builds up instead of jump-cutting straight to anal. It's **player-driven** (no longer force-fired) and gated on the drain weapon being **worn** (`equipped_weapon=1`) + **charged** (`drain_charge>=1`); carry the emitter or run dry and the anal still resolves but doesn't drain (reload at the cradle). **First** drain = the full Q&A extraction; every **repeat** = the short "ask again." The anal pose opens on his corruption≥50 + in cover (was gated on the retired first-anal flag). **Lore swap:** the drain no longer names the two unbuilt targets (Bastien/Calloway) — Renner now confesses the real feud (two of his own people betrayed him, feeding Cain supplies off his own floor; he killed them and their families; Cain torched his yard for it) and points her at the **underworld** (already built + reachable off the Waterfront), converging with the burned-yard evidence thread (the two dead men + the underworld origin). *(D2: the broader Bastien/Calloway Mission 2/3 references elsewhere in this book stay as future-frontier intent, now underworld-first — reconcile when those targets are built.)* Engine note: the post-drain awakening (glitch II) was re-gated onto a new hidden `drains_done` trait counter so the flag-chain validator doesn't demand a located setter (the drain now fires in a triggerless loop). Authoring-only, zero engine change; build green + 22/22 headless live-test. Prior: **EMITTER-FIRE VIDEOS SPLIT** — the two arousal-weapon fire beats no longer share one clip: the **gate** doorman keeps `sex/arousal_weapon_use.webm`, and the **burned-yard** area-fire now points at a new `sex/yard_emitter_fire_t5.webm`. The prose already differed (one bored doorman vs. a knot of men going slack); now the video does too. Engine silent-skips the missing yard clip → the yard beat shows its prose + the find-media search-links until the clip is harvested (the slot joins the next find-media pass). Authoring-only, one TOML video block retargeted, gate left as-is. Prior: **WEAPON LOADOUT — one weapon carried at a time** (new hidden trait `equipped_weapon`: 1 = drain, 2 = emitter; one core feeds one weapon). She swaps at the bench in her room (*Switch weapon*, free); which she carries gates use — the drain only fires the Renner extraction, the emitter only zaps guards (yard/gate). The **first drain is not exempt** — the capstone trigger waits until the drain is carried, and the quest page directs her (flipping to "switch back to the drain" if she's on the emitter). The **two weapon reloads are now separate dedicated cradle actions** (*Recharge the drain* / *Recharge the emitter*); **Power down / Charge up no longer reload weapons** (Charge only). Authoring-only, zero engine change (a literal clothing-slot weapon was engine-blocked — `VALID_CLOTHING_SLOTS` is hardcoded to 7). Prior: **BROTHEL → FULL SEX LOOP** — The House promoted from a single-variant repeat to the Renner/Mercer pose-ladder shape (oral/vaginal/anal → his pleasure climbs → elected finish: mouth/inside/ass), and **coin moved to finish-only** (it was paid on the entry choice — a faucet). Two new triggerless canvases (`underworld_brothel_loop` + `underworld_brothel_finisher`), authoring-only, cold register kept. 5 new t5 clips pending find-media (engine silent-skips → plays text-only meanwhile; vaginal reuses the existing ride clip). Prior: **LOCKED-CHOICE LABELS — the 4 Renner depot seduction rungs now show their own action label greyed when locked** (was distinct prose via `locked_text`), so the locked and unlocked text agree and it matches the energy gate's "(Requires 15 …)" look. Per LO (Option A): bare same-label, no hand-written requirement — the engine can't auto-derive a reason from `conditions` (only resource `costs` do, via `getCostBlockedMessage`). The 7 sex-loop/serve finishers keep their prose `locked_text` (reads better mid-scene). Prior: **ONBOARDING (audit P3, minimal)** — coin is now established in-fiction at the Underworld gate as closed underworld-only scrip (earned/spent only down there, worthless up top); this also explains why the toll can't be paid on a cold first visit. Per LO, the other P3 touches were dropped (the sidebar already surfaces Condition/Fighting/Stealth/Coin from frame one). Prior: **CLEANUP (audit P5 A+B)** — removed the dead `underworld_known` flag (set, read by nothing — the Underworld shipped reachable) and corrected the stale "underworld is deferred" notes to "reachable" (its deep end / Cain still locked). Prior: **PROSE PASS — Underworld sex rewritten to a declared cold-but-explicit register** (graphic at the ceiling, transactional/detached — the opposite of the Renner/Mercer heat; see *## The Underworld*), and the two interior tics ("files it under nothing" / "the way she does everything") **rationed** to their load-bearing beats. Prior: **BUGFIX — Condition (hygiene) was over-capping past 100 (Wash) and going negative (sex drops)**, both making the banded Condition card vanish; clamped all 9 hygiene effects so Condition is bounded 0–100 like Charge (the Charge-bug twin the content-depth audit caught; see *## Reset & reload*). Prior: **Quests restructured into two tiers** — the top **Story Goals** carry the mission (Mission 1 + the Burned Yard); **Renner's own section** carries his seduction as a one-card-at-a-time chain (*Earn the office* → *Break him to the drain*), which also lights the Renner sidebar panel's *next* row (see *### Quests page — two tiers*). Prior: **BUGFIX — Charge (energy) was sliding negative**; spends moved onto gated `costs`/clamp so Charge is now bounded 0–100 and the rungs/work block when too tired (travel never blocks; see *## Reset & reload*). Prior: the **arousal weapon's use is now a real beat** — arouse → fuck → he *passes out* (non-lethal) → she slips by; it's sex, so it drops Condition (see *## Reset & reload*). Prior: **reset & reload** (Condition + the two weapon reloads + Charge up); **The Underworld** (coin economy / second life); The Burned Yard; the Training activity; the Renner grind retune.)
 
 ---
 
@@ -166,7 +166,8 @@ Naming set: **grounded near-future noir.**
   - **Bastien** — docks **dealer**, Cain's supply line. *Cover:* a useful new player in his world;
     *register:* **submissive** (the newcomer he thinks he's using). → where Cain's been operating.
   - **Calloway** — Vance **insider** with the classified file; publicly a control freak, **secretly craves
-    submission.** *Cover:* his new personal assistant; *register:* **domme** (his secret is the door). →
+    submission.** *Cover:* his new personal assistant; *register:* **domme** *(SUPERSEDED → belief-lever; see
+    `## The Archive`)* (his secret is the door). →
     Cain's last movements + the company is hiding something.
 
 > Step 3 (casting) fleshes these into full briefs. Listed here as people — no stats yet.
@@ -269,7 +270,8 @@ the reveal (kill → maybe love). Every mission quietly shows the opposite of th
    gutted his business and he's covering it up. *Cover: hired hands to rebuild → seduce the cold boss.* → what
    the gear did **+** what Cain freed **+** the first crack in "evil rogue." Opens threads 2 and 3.
 2. **Bastien (supply).** Cain's gear comes through dealers like him. *Submissive cover.* → where Cain's been.
-3. **Calloway (the file).** The insider with the dossier; secretly wants to submit. *Domme cover.* → Cain's
+3. **Calloway (the file).** The insider with the dossier; secretly wants to submit. *Domme cover.*
+   *(SUPERSEDED → belief-lever seduce-in; see `## The Archive`.)* → Cain's
    last movements **+** "the company's hiding something."
 - **Order:** Renner first; then Bastien / Calloway in **either order** (player's freedom); enough pieces →
   **the site** → Cain's gone but **left the chip for her** → first memory bleeds → **Phase 1 ends.**
@@ -327,8 +329,9 @@ late-act pressure = **none external by design** — Mercer stays **oblivious** (
 escalation is *internal* (her glitches, hidden) + the inverting mystery. *(Whether Pell catches a faint seed
 is open — decided at Pell's design.)*
 The desire span (submission→agency) is delivered across the three targets: **the underling who seduces the cold
-boss (Renner) / the one who catches her and gets flipped (Bastien) / the domme (Calloway)** — the last a first
-taste of the user she's becoming. *(Bastien's shape changed at the **Underworld-Hunt reconcile** (rev 52):
+boss (Renner) / the one who catches her and gets flipped (Bastien) / the *belief-lever seduce-in* (Calloway)** —
+the last a first
+taste of the user she's becoming. *(Calloway's "domme" register is SUPERSEDED → belief-lever; see `## The Archive`.)* *(Bastien's shape changed at the **Underworld-Hunt reconcile** (rev 52):
 **capture-and-flip**, not a submissive-newcomer cover — three near-identical seduce-ins would be the exact
 repetition this chunk exists to kill. His submission→agency beat is *earned by being caught, then turning it*.
 See the reconcile note under the Casting table.)*
@@ -338,7 +341,7 @@ See the reconcile note under the Casting table.)*
 | **Mercer** | pressure source · on-ramp · the inside relationship | Your owner and handler — fucks you on a whim, hands you his chores, knows every secret you have; wants his prize weapon flawless and obedient (his own standing rides on you). | dominant / owner | core (not a Phase-1 conquest) | **owner/authority — flag-driven, UNCHANGING/OBLIVIOUS** (the leash; no arc, no relation/corruption lock — he never notices her crack; that danger is Act-2) | **inside hub** — issues the order, consumes the service, gates the day; turns "back inside" into "next target out" |
 | **Renner** | core target (Mission 1, the way in) | The **equipment supplier** whose gear built the facility Cain burned — now a cold, mean wreck clawing at his gutted business; he hires you as cheap hands, ignores you, then can't hold his discipline as you tease your way up. | the underling who seduces the cold boss | core | **infiltration — relation (earn access) + corruption (break him)**; cold-boss-cracks, NO emotional arc | **entry node** — draining him (anal) opens Bastien + Calloway and lands the first crack in "evil rogue" |
 | **Bastien** | core target (Mission 2) · the underworld's quiet owner | Owns the bar **and** The House both, down in the Reach, and runs everything through a web of connections — never in front. By the time the trail reaches him he already knows she's Mercer's and what she's been doing. Not a mark she seduces: the man who catches her. | **capture-and-flip** (her cover is dead from the jump) | core | **capture-first, NOT infiltration** — no relation/corruption seduce-in climb; he's *revealed* at the kidnap that caps the Underworld Hunt, his flip + drain are the **next chunk** | **the wall the hunt hits** — the underworld trail dead-ends on *him grabbing her*; secretly Cain's ally (a **saved reveal**, kept off the kidnap — the second crack in "Cain is evil") |
-| **Calloway** | core target (Mission 3, the file) | The company man running the Cain-hunt — rigid, controlling, privately starving to be made to kneel; you're his new assistant and his secret is the door. | dominant / power-flip (**she** runs the register) | core | **infiltration — relation + corruption**; spine = control → release | **file node** — the richest source; drain unlocks **the site** ("the company's hiding something") |
+| **Calloway** *(re-cast, The Archive)* | core target (Mission 3 · the file room) | The disbelieved company rogue-hunter — humiliated, sidelined, his un-indexed file room being audited shut; everyone treats him as a crank. She's the first to take his hunt seriously (the bug). His secret isn't a kink — he's **starving to be believed**. | seduce-in on the **belief-lever** (surrender = being believed / allowed to stop hunting — **NOT** domme) | core | **infiltration — his relation (belief/access) + his corruption (surrender)**, the Renner double-lock; anal finish = the drain; ends her **nemesis** | **the file node** — the un-indexed archive; the drain yields "big chunk stolen"; his **report is the 1b fuse** to the Chairman (Aldous Vance) |
 | **Cain** | the hunt's object · the reserved end (kill-or-love) · truth-bearer | The "vicious rogue" you're sent to kill — actually the one who loved you, at war with the company that owns you, leaving you a trail home. | the one reserved warmth (mostly deferred) | core to the STORY, **light on-screen in Phase 1** | **mystery/reveal spine** (chip fragments + inverting briefings; no lock) | **convergence** — the three target-nodes feed leads that point at him → the site → the chip → the fracture |
 | **Dr. Pell** *(placeholder)* | seeded Act-2 origin/upgrade thread | The company roboticist who keeps you running — the one man who could read your build and realize what you are. | (not a desire target in P1) | light / seeded | **thread NPC** (flag) + upgrade vendor | **upgrade sink** (capability items) + an **(open)** glitch-flag — *does he notice in P1 at all? nobody vs one faint seed, decided at Pell's design* |
 | **Vega · Lyra · Nova** (the units) | mirror / dread — the company's ideal tool (no self) | The company's own three operatives — complete machines, sleeker and stronger and *empty*; better hardware than you, no human base, no real feeling. The proof of what the company wishes you were. | (dread mirror, no desire) | light / seeded — **opening mention only** | **ambient dread** (named, no arc) | none in P1 (Act-2) |
@@ -346,6 +349,7 @@ See the reconcile note under the Casting table.)*
 | **Marsh** *(new)* | the fixer — the Underworld Hunt's mark | Doss's surviving partner from the crew Renner gutted; a dockside fixer who books the same girl at The House every Sunday. Take her slot, serve him, drain him, and he gives up where the crew lived. | transactional / one-off | light (one beat) | **one-off drain** — NO relation/corruption climb; his Sunday window *is* his pacing | **the rung** — the living thread from the two dead men up to Bastien (drain → the crew's place → the grab) |
 | **Rue** *(new)* | the House girl (Axis A) · a person, not filler | The worker Marsh books. Pay her to skip one Sunday and the slot is yours — and Rue **stays**, wary and owed, a named face in the brothel who isn't just a client's hole. | light warmth, no conquest | light island | **obstacle → standing thread** — schemed off the slot with coin, then persists as an underworld contact | **the way in** — clears the Sunday slot so the player can reach Marsh; her *staying* is the roster fix in miniature |
 | **Kess** *(new)* | the off-books fixer — Salvage's anchor | A dockside synth-mechanic in the Reach who strips decommissioned machines for parts and does quiet illegal repair on the side; reads bodies as **hardware, not women**. Clocks your company steel and nearly throws you out, then can't resist a frame nobody's supposed to be able to afford. Wants coin and the interesting problem. | supplicant / test-bench (**he** works on you) | light → **recurring** (debt-holder into Act 2) | **staged repair-and-test** — NO relation/corruption climb; each fix proven on a brought body; the fixer **and** the cold channel that reads *who re-seated your drain* (never learns his name) | **the repair node** — pays the Core: Failing promise (→ Core: Locked), drops the Calloway file-room lead, leaves a `kess_debt` (broke→rich seed); re-launches at Mission 3 |
+| **Vane** *(new, The Archive)* | the mole / thief — Calloway's own man | A spy for hire: money only, no cause. **Secretly one of Calloway's own team** — the ghost Calloway hunts is his own man, hidden in plain sight. Two thefts (small moves the bug; big = the chunk with her build file). She barely sees him until the deal. | mercenary — **no conquest**; an unseen hand in 1a, a dialog reveal in 1b | minor (unseen → 1b reveal → kept asset) | **NON-conquest** — no relation/corruption climb, schedule-less (hidden, like Bastien); the two thefts + the 1b seller reveal + caught/kept | **the theft node** — his thefts move the bug (→ underworld drop) and lift the big chunk (→ the 1b deal); caught → her **kept asset** |
 
 > **Underworld-Hunt reconcile (rev 52).** This is the reconcile the drain lore-swap parked ("D2 — reconcile
 > when those targets are built"). The drain already stopped naming Bastien/Calloway as leads and points at the
@@ -380,6 +384,9 @@ See the reconcile note under the Casting table.)*
   **domme** → he submits → control canvas → drains the dossier (Cain's last trail + the cover-up). The domme
   register **foreshadows her awakening.** *Thread:* he's inside the Spire, so this brushes **Mercer** and the
   company's surveillance — the riskiest infiltration (working under her owners' noses).
+  **⚠️ SUPERSEDED (The Archive, rev 69):** this domme / dossier sketch is the **discarded Phase-1 design.**
+  Calloway is now a **belief-lever** seduce-in (**not** domme), and his drain yields *"a big chunk was stolen —
+  your target's in it"* (not Cain's dossier). See the re-cast Casting row (above) + `## The Archive`.
 - **Cain** — present in Phase 1 only as: the company's **briefings** (the lie), the **wrong-notes** each
   target reveals (the inversion), and the **site** (he's gone, left the chip *for her, by name*). The chip is
   the first time the hunt turns personal — he's been reaching for *her*, not running.
@@ -608,6 +615,13 @@ the evidence-vs-briefing contradiction is felt every mission; the chip is the on
 
 **Deferred (Act 2 / the "for now"):** the solo want (sex for *herself*, once awake) · personal exhibitionism ·
 the dominance / used→user turned on Mercer · the broke→rich economy ignition.
+
+> **Act 2 · The Archive advances the used→user turn — in motion, not resolved.** Salvage leashed her (a control
+> chip blocks her power on her owner, Mercer). The Archive has her take the **leash controller** (the key that
+> makes a later cut safe) — but she **stays leashed**: the cut risks her still-**Failing** core and needs
+> **Kess's** hand. She ends holding her own key, unable to use it yet. **Purely in-fiction** — no sidebar
+> marker, no new meter (LO); the dormant `corruption` stays dead, the fiction is the ladder. Solo want /
+> personal exhibitionism / broke→rich ignition stay deferred. Full arc: `## The Archive`.
 
 **None, by design (Phase 1):** no solo-sexual content · no personal corruption meter (dormant) · no
 feeling/humanity meter (cut) · no player-named identity · no warmth.
@@ -1293,6 +1307,199 @@ clinical/opened-up look is thin on the standard harvest → some scenes go text-
 `beat_0053` (re-launch) · `beat_0054` (quests re-gate) · `beat_0055` (clean publish 0.1.4). All
 `status=planned`. *(0045 is the parked captivity undo-hatch — not a Salvage beat.)*
 
+---
+
+### The Archive blueprint (Step 5, rev 69)
+
+> Full record: `games/vesper/design_beat_archive.md` (spine + cast + locked rules + canon anchors). **Fork A
+> locked with LO 2026-07-21.** Two chunks — **1a The Archive** (topside/Calloway; **build first**) and **1b The
+> Deal** (underworld/Bastien; second). Entry **extends the shipped `salvage_relaunched` re-launch** (Mercer's
+> Calloway / Vance-Securities dispatch, `5_scenes.toml:5182`, line `:5208`); extend-only, no shipped byte
+> retouched. Built across passes — **Calloway + Vane here (Pass 2)**; the bug/theft world + the Bastien-overhear
+> + the Quests page (Pass 3); the DAG + the plan seed `beat_0056+` (Pass 4). Estimate ~1a: **~16–18 canvases.**
+
+**The verbs.** 1a = **seduce-in on the belief-lever** (Calloway) + **investigate** (the bug-trace + the
+Bastien-spying). 1b = the collision/reveal + the trade. Calloway = the roster's return to conquest; Vane =
+mercenary asset (no conquest, no meters).
+
+**Calloway spine — two axes on HIS meters (the Renner double-lock, reused).** She has no corruption door (dead),
+so both axes are Calloway's own: **AXIS 1 — belief/access** = `npc_calloway.relation` (an odometer built by the
+*ungated* believe-him beats + the bug proposal) earns his openness; **AXIS 2 — surrender** =
+`npc_calloway.corruption` (+N per charged rung) gates the lewd rungs; `npc_calloway.arousal` = the loop throttle
+only (never gates progression). Every lewd rung double-locks on **belief-open (access) + his corruption (the
+tier)**. **Pacing: belief-fast** (he opens quickly — starving to be believed), **surrender a paced campaign**
+(×2.5). The **one hard throttle** is diegetic — the *he-flinches* beat (the paranoia of the disbelieved man)
+gates the full surrender behind a non-lewd re-anchor, plus each charged rung costs Charge + time against the
+file-room window (caps rungs/day, à la Renner). No daily-flag cap.
+
+**The scenes (1a · Calloway):**
+
+| # | Scene | Lane | Gate | Place |
+|---|---|---|---|---|
+| 1 | **cap_calloway_meet** | L4 auto-fire | entry `vance_securities` + `salvage_relaunched is_true` + guard `calloway_met is_false` → **SETS `calloway_met`** | vance_securities |
+| 2 | **hub_calloway_fileroom** | L1 hub | `calloway_met`; `npc=npc_calloway` (portrait); base "believe him" (ungated relation feeder) + the file-room register | vance_securities (window) |
+| 3 | **cap_calloway_bug** | L4 capstone | `calloway_met` + `npc_calloway.relation ≥ believer-tier` + guard → she pitches the tracker; he approves → **SETS `bug_planted` + `calloway_believes`** (access) | vance_securities |
+| 4 | **rung_calloway_contact** | L1 rung | `calloway_believes` + corruption ≥ contact-tier; locked-visible; reaction-band [group] | file-room register |
+| 5 | **rung_calloway_oral** | L1 rung | + corruption ≥ oral-tier → **SETS `calloway_oral_once`** | file-room register |
+| 6 | **cap_calloway_flinch** *(THROTTLE)* | L4 capstone | `calloway_oral_once` + corruption ≥ flinch-tier + guard → the disbelieved man pulls back; she re-anchors belief → **SETS `calloway_flinch_resolved`** (non-lewd; the one hard gate) | file-room register |
+| 7 | **rung_calloway_fuck** | L1 rung (loop entry) | `calloway_flinch_resolved` + corruption ≥ sex-tier → **SETS `calloway_fucked_once`**, resets loop traits, routes into the loop | file-room register |
+| 8 | **loop_calloway_sex** | sex-loop | triggerless; poses oral→vaginal→anal (anal gated `anal_active`); pleasure climb; climax-elect | file-room register |
+| 9 | **loop_calloway_finisher** | sex-loop | [group] by `sex_finisher_type`; inside/oral → reset + exit; **anal → the drain canvas** | file-room register |
+| 10 | **calloway_drain_canvas** *(the two drains live HERE)* | control (triggerless) | reached from the anal finish; payload + counter bump by `calloway_drains_done`: **0** → *"where are the docs?"* → **nothing** (bump → 1) · **1 + `theft2_done`** → *"a big chunk was just stolen — your target's in it"* (bump → 2) · **≥ 2** → done. The counter is a **trait bumped here** (validator-exempt); **no flag is set on this canvas** | file-room register |
+| 11 | **cap_calloway_reported** *(1a end)* | L4 auto-fire | entry `vance_securities` + `deal_place_known is_true` (she's gone with the trail) + guard `calloway_reported is_false` → he does the math, turns nemesis, reports the analyst → **SETS `calloway_reported`** (the 1b fuse) | vance_securities |
+
+**The sex loop + the two drains (Renner's pattern, reused; two payloads by a durable counter).** Triggerless,
+node-routed from "Fuck him." State = numeric traits only (`sex_stage` / `loop_npc_pleasure` / `sex_finisher_type`
+/ `anal_active` / `sex_entry_origin`), hidden, **reset to 0 on entry AND on every finisher exit** (or state
+bleeds into the Renner / Marsh / Salvage loops). Anal finish → the drain canvas (#10). **The two drains differ
+only in payload, selected by the hidden counter `calloway_drains_done`** — and the counter is a **trait bumped
+on the triggerless finisher** (traits are exempt from the flag-chain validator; this is the *actual* Renner
+discipline — Renner bumps `drains_done` inside the loop, **never** a flag; a flag required `is_true` by a
+trigger but set in a triggerless canvas HARD-FAILS the build). Advancing to payload 2 ("big chunk stolen")
+**hard-requires `theft2_done`** (the theft must have fired — this is `theft2_done`'s reader, and it enforces
+theft-before-reveal). Everything **downstream** (W4, the "find the buyer" Quest card, the betrayal #11 via
+`deal_place_known`) reads the **durable trait `calloway_drains_done >= 2`**, never a flag set mid-loop. Gated on
+the **counter + corruption band, never arousal** (resets at climax). After counter 2 the extraction is done.
+
+**Calloway gates & state (extend-only).**
+- **NPC (new):** `npc_calloway` (portrait hub @`vance_securities`; the standard relation/corruption/arousal
+  triad — corruption **is** the seduction ladder, à la Renner). **`npc_vane`** — minimal, a 1b dialog speaker;
+  schedule-less (hidden); no hub, no meters.
+- **Trait (new, hidden):** `calloway_drains_done` (0 → 2; gates the two drain payloads; the Renner `drains_done`
+  twin — a **counter, not a triggerless flag**).
+- **Flags (new):** `calloway_met` · `bug_planted` · `calloway_believes` · `calloway_oral_once` ·
+  `calloway_flinch_resolved` · `calloway_fucked_once` · `calloway_reported` (the 1b fuse; set at #11 on
+  `deal_place_known`). Each with **one located setter**, acyclic. **The discovery is a TRAIT, not a flag** —
+  downstream reads `calloway_drains_done >= 2` (there is **no** `big_chunk_known` flag: a flag set mid-loop would
+  hard-fail the validator).
+- **Location (new):** `vance_securities` (topside/Spire; a **registered frontier stub** + named in prose — **no
+  TOML location object yet**, so a clean new build; re-spec'd `reachable` → **locked**). Its file-room register
+  **folds into the hub** (one location, one window, the
+  portrait always renders — Renner's Fork-A lesson), not a separate navigable room. **Locked until
+  `salvage_relaunched`** (`entry_conditions` + `blocked_message`, `version="1.0"`).
+- **Every new conditions block `version="1.0"`; new gates are per-NPC meters + located flags, never triggerless
+  flags. Reset the shared sex-loop traits on entry & exit of the Calloway loop.**
+
+**Vane / the two thefts (world placement → Pass 3).** Vane is an unseen hand in 1a: **theft #1** moves the bug
+(→ the underworld drop → the bug destroyed); **theft #2** (the big chunk) fires when the seduction crosses its
+mid-band (`npc_calloway.corruption ≥ mid` — Wren visibly close). Both are scripted world one-shots placed in
+Pass 3; their flags (`bug_traced`, `theft2_done`) and the underworld-drop location land there.
+
+**The scenes (1a · the world — investigation, the Bastien-spying, Quests).**
+
+| # | Scene | Lane | Gate | Place |
+|---|---|---|---|---|
+| W1 | **inv_underworld_drop** | L4 one-shot | `bug_planted` + (a day passes / next underworld visit) → the bug pinged here, now **destroyed**; docs go into the underworld, buyer UNKNOWN → **SETS `bug_traced`** | underworld_market (REUSE — the drop) |
+| W2 | **amb_bastien_overhear** | L3 overhear | `bug_traced is_true` (story-gated, **NOT** NPC-presence — Bastien is schedule-less by design); at The Undertow she works his front — the traffic, the bartender Sol, his people; audio-only, her scheme in a `thought_bubble`; repeatable atmosphere, no hard flag. Optional time-feel via a **canvas** `trigger.schedules` (à la `hunt_marsh_scheme`), never an NPC schedule | underworld_bar (The Undertow) |
+| W3 | **cap_theft2** | L4 auto-fire | entry `vance_securities` + `npc_calloway.corruption ≥ mid-band` (she's visibly close) + `bug_traced` + guard `theft2_done is_false` → Vane, spooked, lifts the **big chunk** (her build file + Mercer's target) → **SETS `theft2_done`** | vance_securities |
+| W4 | **cap_deal_place** | L4 capstone | `calloway_drains_done >= 2` (the discovery) + `bug_traced` (she's been working the Undertow) + guard `deal_place_known is_false` → she pins the deal off the spying → **SETS `deal_place_known`** (the 1b handoff) | underworld_bar |
+
+**Fork B — the Bastien-spying (locked with LO; re-mechanized OFF NPC-presence).** The deal location comes from
+**spying on Bastien, not the bug.** **Why Bastien:** he's her **old kidnapper who trades in company secrets**, so
+when W1 says "the docs go into the underworld," her hunch is *him.* But Bastien is **schedule-less by design** —
+the shipped trick that hides his buyer reveal for 1b — so `npc_at_location(npc_bastien, is_present)` is hardwired
+**false** and cannot gate the overhear (and "fixing" it with a schedule would list him on the Schedule page +
+render his portrait, blowing the reveal). Instead W2/W4 are **story-flag gated** at his front, The Undertow:
+**W2** opens on `bug_traced` (she starts watching), **W4** on `calloway_drains_done >= 2` (after the drain
+confirms the chunk's gone). The fiction keeps Bastien **unseen** — she reads his *operation* (the traffic, the
+bartender, his people), never the man — preserving the 1b reveal. So: bug → the underworld (W1), hunch → work
+the Undertow (W2), the drain confirms the theft (#10 → counter 2), the spying pins the place (W4). The **buyer is
+confirmed only at the 1b deal**, never here.
+
+**Theft ordering (band-enforced + hard-gated).** Theft #2 (W3) fires at `corruption ≥ mid-band` — **below** the
+loop's sex-tier (Calloway #7) — so the big chunk is normally gone **before** the drains ("a few days before the
+drain"). Belt-and-braces: the drain's payload-2 ("big chunk stolen") **hard-requires `theft2_done`** (#10), so a
+player who rushes the seduction still can't be told the chunk's gone before it is — the drain won't advance to
+payload 2 until W3 has fired. No soft-lock: W3's corruption gate stays satisfied, so returning to `vance_securities`
+fires it and unblocks the drain.
+
+**The discovery is not a separate scene** — it *is* the drain reaching **counter 2** (#10 →
+`calloway_drains_done >= 2`, payload "big chunk stolen"). The un-indexed archive means only Calloway's head, via
+the drain, can confirm the material's gone and that her target rode in the stolen chunk. Downstream (W4, the
+Quest card) reads the durable counter.
+
+**The Quests page (1a — `quests_engine="v2"`, the shipped surface).**
+- **Story-Goals (the mission spine — one card live at a time, a flag-milestone chain):** *Get inside Calloway's
+  archive* (`salvage_relaunched` → `calloway_believes`) → *Trace the stolen docs* (`bug_planted` → `bug_traced`)
+  → *The big chunk's gone — find the buyer* (`calloway_drains_done >= 2`) → *Follow it to the deal* (`deal_place_known`;
+  the **1a end card**, points at 1b / next release, à la the Salvage end card). Each row's `next` = the same
+  renderer as the sidebar; the last row is a flag-goal / handoff card, **never a bare met-numeric** (dodges the
+  Frame-3 blank).
+- **Calloway's section (the seduction — stepped on `npc_calloway.corruption` bands, one card at a time, the
+  Renner ladder shape):** believe him → the bug → contact → oral → *he pulls back (re-anchor)* → the loop / the
+  drain. The coaching verb rides in the goal LABEL (the sidebar renders only the goal block).
+
+**World gates & state (extend-only; adds to the Calloway list above).**
+- **Flags (new):** `bug_traced` (W1) · `theft2_done` (W3; read by the drain #10 advance) · `deal_place_known`
+  (W4 — the 1b handoff; also gates the betrayal #11). Each one located setter; `version="1.0"` on every
+  conditions block.
+- **Locations — REUSE only:** `underworld_market` (the drop, W1) + `underworld_bar` / The Undertow (the
+  Bastien-spying, W2/W4). **No new 1a location** beyond `vance_securities`. (The deal site + the controller
+  room are 1b.)
+- **Bastien stays hidden — NO NPC-presence gate.** W2/W4 must **not** use `npc_at_location(npc_bastien)` — he's
+  schedule-less by design (hardwired false; a schedule would blow the 1b reveal). They gate on **story flags** at
+  `underworld_bar` (W2=`bug_traced`, W4=`calloway_drains_done >= 2`); any time-of-day feel uses a **canvas**
+  `trigger.schedules` (like `hunt_marsh_scheme`), never an NPC schedule. `version="1.0"` on every block.
+
+**Media (per placed scene; the intended visual named now — `search_queries` written at authoring, beat_0065; engine
+silent-skips missing → text-forward until harvested).** Calloway portrait (the hub) · the file room (establishing)
+· the bug-plant beat · the ladder rungs (contact / oral — escalating intimacy stills) · the loop (oral → vaginal →
+anal **act-clips**) + the anal-finish **drain** · the underworld drop (W1 — the destroyed bug) · theft #2 (W3 —
+aftermath / an emptied shelf; the thief stays off-screen) · the deal-place pin (W4). **W2 (the Undertow overhear)
+is audio-only — NO image** (voyeur / unseen, per Fork B). The belief-lever seduction leans on the standard harvest
+(office / desk / a suited man) — plenty of corpus; the drain reuses the shipped drain-finish framing.
+
+### The Archive — wiring & plan (Step 5 · Pass 4)
+
+**The DAG (acyclic; every arc cold-start-reachable; every cross-gate telegraphed; every flag one located
+setter).** Entry: `salvage_relaunched` (shipped) → unlocks `vance_securities`.
+- **Spine:** `salvage_relaunched` → `calloway_met` (#1) → `calloway_believes` + `bug_planted` (#3) →
+  `calloway_oral_once` (#5) → `calloway_flinch_resolved` (#6) → `calloway_fucked_once` (#7) →
+  `calloway_drains_done` 0→1→2 (#10; the 1→2 advance **hard-gated on `theft2_done`**).
+- **Investigation (parallel, off `bug_planted`):** `bug_planted` → `bug_traced` (W1) → `theft2_done`
+  (W3, gated corruption mid-band, @`vance_securities`); `bug_traced` also opens `amb_bastien_overhear` (W2).
+- **Handoff:** `calloway_drains_done >= 2` → `deal_place_known` (W4) → `calloway_reported` (#11, the 1a betrayal
+  / the 1b fuse). Acyclic — `calloway_reported` gates nothing upstream.
+- **D1 (no entry gated):** `cap_calloway_meet` (#1) is auto-fire on `salvage_relaunched` alone — the arc
+  cold-starts from the shipped re-launch.
+- **D2 (no cycle):** strictly forward; each `_done` / milestone flag set on a terminal exit.
+- **D3 (cross-gates telegraphed):** theft #2 (W3) is telegraphed by the seduction Quest card + the bug thread;
+  the drain rungs cite the loop; W4 cites `calloway_drains_done >= 2` (the "find the buyer" Quest card).
+- **1a-complete = `deal_place_known` + `calloway_reported`** → the 1b handoff (the deal; next release). No 1b
+  scene authored in 1a; `deal_place_known` sits as the frontier flag (its 1b readers greyed / telegraphed).
+
+**Frontier (telegraphed, deferred — never silent).** `deal_place_known` opens **1b** (the deal: seller = Vane,
+buyer = Bastien *confirmed*, the collision, the build-file read, the Mercer trade for the leash controller).
+`calloway_reported` is the **fuse**: Calloway's report → the cover-trail → the Chairman (**Aldous Vance**) →
+Mercer blown. Both seeded here, built in 1b. The **build-file read** + the **Mercer trade** are 1b's two Tier-3
+licenses.
+
+**Plan seed** (`status=planned`; 1a only — 1b seeds at its own build):
+- `beat_0056` — **scaffold + systems** (declare `npc_calloway` / `npc_vane`, `vance_securities` + its lock, the
+  new flags + `calloway_drains_done`; green build, **no story canvas**).
+- `beat_0057` — **the cover** (extend the shipped `salvage_relaunched`: arm the mission + unlock
+  `vance_securities`; touch no shipped byte). To Wren it reads as a **plain company errand** — she does **not**
+  know Mercer's private-leverage motive (its 1b reveal lands harder for the unwitting 1a setup).
+- `beat_0058` — **Calloway meet + hub** (`cap_calloway_meet` + `hub_calloway_fileroom` + portrait / schedule).
+- `beat_0059` — **the bug proposal** (`cap_calloway_bug` → `bug_planted` + `calloway_believes`).
+- `beat_0060` — **the bug-trace + underworld drop** (W1 → `bug_traced`; the destroyed bug, buyer unknown).
+- `beat_0061` — **the seduction ladder + theft #2** (rungs #4–#7 + the flinch throttle; W3 `cap_theft2` at the
+  mid-band → `theft2_done`).
+- `beat_0062` — **the sex loop + the two drains** (#8–#10; the triggerless loop + drain canvas; `calloway_drains_done`
+  0→1→2, the 1→2 advance gated on `theft2_done` — the discovery; **no `big_chunk_known` flag**).
+- `beat_0063` — **the Bastien-spying** (W2 atmosphere on `bug_traced` + W4 payoff on `calloway_drains_done >= 2`
+  → `deal_place_known`; **story-flag gated at The Undertow, Bastien unseen** — no NPC-presence gate).
+- `beat_0064` — **the 1a betrayal seed + Quests page** (`cap_calloway_reported` → `calloway_reported`; the
+  Story-Goals spine card + Calloway's stepped card; the 1a end card → 1b).
+- `beat_0065` — **media pass + clean 1a ship** (find-media for the new scenes; the SHIP build — `--video-folder`,
+  no `--dev` / `--debug`; the 0-missing-media grep gate).
+
+**Self-check (before Step 7).** Every 1a story moment has a placed home; every lewd rung double-locks
+(belief-open + corruption band), non-lewd beats (meet, bug, flinch, overhear) ungated; the DAG is acyclic +
+cold-start-enterable from `salvage_relaunched`; every flag has one located setter (the drains as a hidden
+counter); the opening is concrete (the cover one-shot); the plan is seeded + ordered; **no TOML / no scene prose
+written** (Step 7).
+
 ### Content register & ceilings (the authoring contract)
 
 > The crudeness ceiling + the non-con floor, declared before authoring (`kink-ceilings.md` — a scene that
@@ -1322,6 +1529,13 @@ clinical/opened-up look is thin on the standard harvest → some scenes go text-
   carry **no degradation and no "she wanted it"** — the point is she is being *operated*, not desired.
   Explicit, no non-con, no ownership-diction. The one exception is the **Stage-A glitch-leak**, the chunk's
   single Tier-3 spend (reuses the release beat's devices).
+- **Calloway — the belief-lever seduce-in** *(rev 69; see `## The Archive` + `### Calloway`)* — **maximum /
+  RTS-flat at the peaks** (real anatomical words — cock, cunt, cum, ass — at the oral rung, the loop, and the
+  anal-finish drain). The soft rungs (believe-him, contact) stay **un-crude** — earned by the climb. His register
+  is the **belief-lever**: surrender = *being believed / allowed to stop being the hunter* — **cold and grateful,
+  never a domme performance and never warm** (§2's "no warmth" holds; reserved for Cain). The **anal finish IS
+  the drain** (canon). **No** degradation-diction (that's Mercer / Bastien), **no** "she wanted it." 1a spends
+  **zero Tier-3.** *(Vane = N/A — no sexual content.)*
 - **The soft / non-sexual surfaces** (hubs, ambients, work, the cradle) stay flat and clean — no gratuitous
   crude on a re-readable everyday beat.
 
@@ -1929,3 +2143,83 @@ Kess recurs).
 Calloway / Mission 3 · the Site → the chip → the fracture (the Phase-1 finale; the sealed partition Kess named
 but couldn't cross) · the company-notices chunk (the wipe threat with teeth) · the first *deliberate* solo-want
 · Bastien's alignment with Cain · Cain on-page / "Vesper" / warmth (reserved).
+
+---
+
+## The Archive (Act 2 · the Calloway infiltration + the deal) — added during authoring
+
+> Built **fresh** from the shipped 0.1.4 end-state (leashed, paid-clean, Mercer wary, back in the sandbox);
+> the old Phase-1 Calloway/Site/Cain ladder (§2 / *Top-level* / *The opening*) is **set aside** for the forward
+> story. Full locked spine + cast + locked rules + canon anchors: `games/vesper/design_beat_archive.md`.
+> Two shippable chunks — **1a · The Archive** (topside/Calloway — infiltrate, bug, seduce+drain, discover the
+> big theft, get burned; **build first**) and **1b · The Deal** (underworld/Bastien — the deal, Vane the mole +
+> Bastien the buyer, read the build file, the Mercer trade). Two NEW NPCs: **`npc_calloway`** (the mark →
+> nemesis) and **`npc_vane`** (Calloway's hidden mole → her kept asset). This section grows one subject per
+> blueprint pass; the placed/gated scene list is built into `### The Archive blueprint` across the NPC + world
+> passes.
+
+### The player thread in this chapter (Step 5 · Pass 1)
+
+The Archive advances her one standing want — **used → user** — without resolving it. It adds **no new
+player-wide system**; her daily systems, the drain, and (since Salvage) the leash are already shipped.
+
+- **The leash is the live constraint.** The control chip blocks her power (drain/emitter) on her owner, Mercer
+  — the *weapon*, not lies or trade. She can still seduce, drain, and negotiate everyone else.
+- **She takes the key, not the cut.** In 1b she gets the **leash controller** — the key that makes a later cut
+  safe/fast — but the cut waits: it risks her still-**Failing** core and needs **Kess's** hand. She ends
+  **holding her own key, still leashed.** The turn is in motion, not done.
+- **Purely in-fiction** (LO, Pass 1) — no sidebar marker, no new meter. Her §2 lean holds: the dormant
+  `corruption` stays dead; the fiction / inventory is the ladder.
+- **Identity — set up in 1a, paid in 1b.** Her **build file ("what she is")** rides in the big stolen chunk.
+  1a delivers only the *discovery* that it's gone (a cold gut-drop — her own file rode out in the theft); the
+  **read** — *what she is*, **dread-first and rationed** — is a **1b Tier-3** beat, not a full origin dump. (Salvage already handed the seed: Calloway's file room holds *both* the record she
+  wants and her own build file — see *## Salvage → What she carries out*.)
+- **The seduction is cold — no warmth breached.** Calloway gets the **belief-lever** (finally being believed,
+  allowed to stop being the hunter), never her warmth; §2's "no warmth / reserved for Cain" stands.
+- **Register:** RTS-flat, third person. **1a spends zero Tier-3**; both Tier-3 licenses (the build-file read,
+  the Mercer trade) live in **1b**.
+
+### Calloway — the disbelieved hunter (Step 5 · Pass 2)
+
+**The shape — the roster's return to conquest, on a new lever.** Renner broke from contempt to want; Bastien
+**took** her; Kess never wanted her. Calloway is a **seduce-in**, but the lever isn't lust — it's **belief.**
+He's a company rogue-hunter, humiliated and sidelined, his un-indexed file room being audited shut; everyone
+treats him as a crank. She's the first to take his hunt seriously (she brings the bug). His surrender is
+**being believed — being allowed, for once, to stop being the hunter.** RTS-flat, cold: she gives him the
+belief, never her warmth (§2's "no warmth" holds; reserved for Cain).
+
+**The arc — guarded → believer → attached → betrayed.**
+- **Guarded** — he reads her as one more minder sent to watch the crank fail.
+- **Believer** — she proposes bugging the docs; a starving hunter jumps at the first person who takes his ghost
+  seriously → she's in (his openness, then access).
+- **Attached** — the seduction: a lonely, disbelieved man given the two things he's starving for. The
+  belief-lever climb into the loop.
+- **Betrayed** — she used his own trap to find the docs, the trail ran into the underworld where only she could
+  follow, and she vanished after it. He does the math, turns **nemesis**, and reports the "analyst" up the
+  chain — the fuse that reaches the Chairman in 1b. Circumstantial (no memory-gap track).
+
+**What he yields — the two drains (load-bearing).** The drain needs the intimacy to fire and returns only
+what's in his head; the archive is un-indexed, so only he — not any catalog — can point her at the material.
+**Drain 1:** *"where are the docs?"* → **nothing** (already stolen). **Drain 2:** *"a big chunk was just stolen
+— your target's probably in it."* That reveal opens the discovery and the Bastien-spying payoff.
+
+**Kink ceiling.** Max-explicit, RTS-flat; the register is the **belief-lever** (surrender = relief, not thrill),
+never a domme performance. The anal finish **is** the drain (canon: how the drain takes).
+
+### Vane — the mole (Step 5 · Pass 2)
+
+**The shape — the first mercenary on the roster (no conquest).** Vane is a spy for hire: money only, no cause.
+He is **secretly one of Calloway's own team** — the ghost Calloway is hunting is his own man, hidden in plain
+sight. She never seduces him and rarely sees him in 1a; he's an **unseen hand**, felt through the bug moving.
+
+**His two thefts.**
+- **Theft #1 (small)** — an ordinary lift; it **moves the planted bug** → she traces it to an underworld drop →
+  he finds and **destroys** the bug there. She learns the docs go *into the underworld* — never *who buys them.*
+- **Theft #2 (the big chunk)** — **triggered by Wren getting visibly close to Calloway** (the seduction crossing
+  its mid-band spooks him), a few days before the drain. This chunk holds **Mercer's target bundle + her own
+  build file.**
+
+**His 1b turn.** At the deal he's the **seller** (the mole reveal); the buyer is Bastien. When the deal
+collapses she **catches him and keeps him alive** — an asset and her thread toward the buyer. Minimal NPC: a
+**dialog speaker at the 1b reveal**, schedule-less (hidden, like Bastien in his reveal chunk); no portrait hub,
+no relation/corruption climb.
