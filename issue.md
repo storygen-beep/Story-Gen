@@ -58,6 +58,57 @@ test mercer response to the different stages of wren
 
 [DONE]Channel to be a proper TV channel.
 
-
-
 [DONE]sidebar bottom: add few details like game version and date of release
+
+
+
+**17th July**
+
+[DONE]Change the house earning to 30 coins per customer, changed repair cost to 10 coins.
+
+[DONE]The company can't fix you — a refit means a wipe, and you're not walking into that. So you've gone off the books, down to a ship-breaker in the Reach who works on hardware nobody's supposed to afford. He puts you back together a session at a time, and your drain comes back with the work — dead at first, then a flicker, then teeth. He reads something off your guts, too, that you didn't know was written there.
+💡 Get to the Berth off the waterfront and pay for a repair session — coin up front, every time. You're broke, so the coin comes from the underworld, down the gate. Keep at it until the core reads clean; there's no other road back to operational.
+Could be wrong as we have moved it to the underworld
+And Skill update Gap Fix
+
+[DONE]The yard gave up its heart: two of Renner's own people, killed with their families, and the thread that ties them to the underworld. Doss and Rourke — that's where the trail runs now, down past the gate.
+💡 Sneak into the Burned Yard, off the Waterfront. Slip past the guards (Stealth) or beat them (Fighting) — drill at your room if you can't get past. Each push gets you deeper; the arousal weapon's down there too.  
+Always shows up
+
+[DONE]Should we change the name of the berth?? Unchanged
+
+
+
+
+**18 July**
+
+**The Inheritence**
+
+[DONE]Rename: Grand Stairs to Stairs, Upstair Bathroom to Bathroom
+
+Going Upstairs 
+
+[DONE]change lorna portrait
+
+[DONE]There are npc activities / canvases, player sees it as links like lorna not as npc portraits. See what is going on and share your honest thoughts.
+
+
+**Vesper**
+
+
+She now also needs to learn to fight, she cant just move on and use same weapons. I think now she should also be able to combine both weapon drainer and emitter.
+
+Calloway is the target given by mercer but he doesnt know about what wren is going through
+
+What the chip is holding is she cant use her weapons on mercer and vaince (whatever his name is and the company)
+or what might chip can hold that is hidden that she might not know, right?? 
+
+what matters now
+
+who is calloway
+
+so the answer is:
+mercer has been plotted by cain for calloway, mercer sees it as his own benefits (not company's), player doesnt know any of it. Getting these files becomes the wren's own benefits she gets the file and wonders what is it for, she reads it and finds her build files(what she finds here needs to be decided), she doesnt give all of it to mercer maybe she gives only meaning less ones, she only tricks mercer here. She might also need to know what is the mercer's motive to get these files.
+
+
+here I think just an idea, chip also holds a memory transmitter to the chairmen himself, not mercer, she can know about it after reading her build files(it will contain more but this is also an important information), moving on to, now chairmen knows that wren now knows about him and about mercer's own purpose. Chairmen is coming to the city, to eliminate mercer and reset wren. Before he comes back she needs to find that remote controller and fix her chip, how she does it, thats is a question now. So we have many questions here, honestly share your thoughts on the different part of this plan.
