@@ -201,71 +201,20 @@ flagEffects = [
   { targetType = "player", flag = "captivity_done",    op = "set" },
 ]
 
-# ─── ▶ Salvage: the grind — mid-repair at the berth, coin pre-seeded (v2) ───
-# beat_0055 (v2). Seeds the captivity-complete chain + through Kess's intro (salvage_entered, kess_met) with
-# core_strain=96 (grind not started, repair_session=0) and 300 coin (enough for all 12 sessions), drops at
-# kess_berth so salvage_repair_hub renders — click "Start a repair session" to run the loop end to end (band
-# scenes -> chip-snag @ Hot -> verdict @ session 12). Gated dev_mode_enabled; inert in shipped builds.
-[[canvases]]
-id          = "dev_jump_salvage_grind"
-name        = "▶ Salvage: the grind (coin seeded)"
-description = "DEV JUMP (v2). Seeds SALVAGE through Kess's intro (salvage_entered, kess_met, core_strain=96, repair_session=0) + 300 coin, drops at kess_berth so the repair-session hub renders — run the 12-session grind loop directly. Gated dev_mode_enabled; inert in shipped builds."
-
-[canvases.trigger]
-location      = "kess_berth"
-is_repeatable = true
-is_active     = true
-conditions = { version = "1.0", items = [
-  { type = "flag", subject = "player", flag_key = "dev_mode_enabled", operator = "is_true" },
-] }
-
-[[canvases.nodes]]
-id   = "seed"
-name = "Salvage grind (dev)"
-blocks = [
-  { type = "paragraph", content = "Dev jump: seeding the intro done, core_strain 96, and 300 coin, dropping at the berth. Start a repair session to run the grind." },
-]
-[canvases.nodes.exit_block]
-type = "location"
-text = "To the berth."
-[canvases.nodes.exit_block.config]
-destinationType = "specific"
-locationId      = "kess_berth"
-effects = [
-  { targetType = "player", trait = "equipped_weapon", op = "set", value = 1 },
-  { targetType = "player", trait = "core_strain",     op = "set", value = 96 },
-  { targetType = "player", trait = "core_sealed",     op = "set", value = 0 },
-  { targetType = "player", trait = "repair_session",  op = "set", value = 0 },
-  { targetType = "player", trait = "coin",            op = "set", value = 300 },
-  { targetType = "player", trait = "energy",          op = "set", value = 80 },
-  { targetType = "player", trait = "names_known",     op = "set", value = 1 },
-]
-flagEffects = [
-  { targetType = "player", flag = "opening_done",      op = "set" },
-  { targetType = "player", flag = "renner_drained",    op = "set" },
-  { targetType = "player", flag = "hunt_lead",         op = "set" },
-  { targetType = "player", flag = "crew_known",        op = "set" },
-  { targetType = "player", flag = "bastien_found",     op = "set" },
-  { targetType = "player", flag = "bastien_revealed",  op = "set" },
-  { targetType = "player", flag = "captivity_entered", op = "set" },
-  { targetType = "player", flag = "captivity_broken",  op = "set" },
-  { targetType = "player", flag = "captivity_done",    op = "set" },
-  { targetType = "player", flag = "salvage_entered",   op = "set" },
-  { targetType = "player", flag = "kess_met",          op = "set" },
-]
-
-# ─── ▶ Salvage: the verdict — one click from the chip-as-leash reveal (v2) ───
-# beat_0055 (v2 rework). Seeds the grind COMPLETE (salvage_entered, kess_met, repair_session=12,
-# core_strain=0, core_sealed=0) and drops at kess_berth so the verdict fires next -> its exit lights
-# core_sealed=1 (the "Leash: Uncut" row). No kess_debt (retired in v2 — coin is paid per session, not owed).
+# ─── ▶ The Archive: start — post-Salvage / pre-Archive (the sandbox threshold) ───
+# Sets the game exactly where the LAST RELEASE (Salvage 0.1.4) left off and the NEW chapter (The Archive 1a)
+# begins: the full through-Salvage state (salvage_done + mission_3_active + salvage_relaunched + core_sealed=1 =
+# "Leash: Uncut"), the Calloway job dispatched, vance_securities unlocked, Charge full for the seduction, coin in
+# hand. ZERO Archive progress (every Archive flag unset, npc_calloway.corruption 0, calloway_drains_done 0).
+# Drops at spire_plaza — one click into Vance Securities, where cap_archive_cover (the first Archive beat) fires.
 # Gated dev_mode_enabled; inert in shipped builds.
 [[canvases]]
-id          = "dev_jump_salvage_verdict"
-name        = "▶ Salvage: the verdict"
-description = "DEV JUMP (v2). Seeds the SALVAGE grind complete (repair_session=12, core_strain=0, core_sealed=0, salvage_entered, kess_met) and drops at kess_berth so the verdict fires next — testing the chip-as-leash reveal + the 'Leash: Uncut' light in one step. Gated dev_mode_enabled; inert in shipped builds."
+id          = "dev_jump_archive_start"
+name        = "▶ The Archive: start"
+description = "DEV JUMP. Post-Salvage / pre-Archive: seeds the full through-Salvage state (salvage_done, mission_3_active, salvage_relaunched, core_sealed=1) + full Charge + coin, drops at spire_plaza one click from Vance Securities where the Archive 1a opens (cap_archive_cover). Zero Archive progress. Gated dev_mode_enabled; inert in shipped builds."
 
 [canvases.trigger]
-location      = "kess_berth"
+location      = "spire_plaza"
 is_repeatable = true
 is_active     = true
 conditions = { version = "1.0", items = [
@@ -274,34 +223,39 @@ conditions = { version = "1.0", items = [
 
 [[canvases.nodes]]
 id   = "seed"
-name = "Salvage verdict (dev)"
+name = "The Archive start (dev)"
 blocks = [
-  { type = "paragraph", content = "Dev jump: seeding the repair complete (12 sessions) and dropping at the berth. The verdict — and the chip-as-leash reveal — fires next." },
+  { type = "paragraph", content = "Dev jump: seeding the post-Salvage state (Leash: Uncut, Calloway dispatched) and dropping at the Spire. Step into Vance Securities to open the Archive." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "To the verdict."
+text = "To the Spire."
 [canvases.nodes.exit_block.config]
 destinationType = "specific"
-locationId      = "kess_berth"
+locationId      = "spire_plaza"
 effects = [
-  { targetType = "player", trait = "equipped_weapon", op = "set", value = 1 },
-  { targetType = "player", trait = "core_strain",     op = "set", value = 0 },
-  { targetType = "player", trait = "core_sealed",     op = "set", value = 0 },
-  { targetType = "player", trait = "repair_session",  op = "set", value = 12 },
-  { targetType = "player", trait = "energy",          op = "set", value = 60 },
-  { targetType = "player", trait = "names_known",     op = "set", value = 1 },
+  { targetType = "player", trait = "equipped_weapon",      op = "set", value = 1 },
+  { targetType = "player", trait = "core_strain",          op = "set", value = 0 },
+  { targetType = "player", trait = "core_sealed",          op = "set", value = 1 },
+  { targetType = "player", trait = "repair_session",       op = "set", value = 12 },
+  { targetType = "player", trait = "calloway_drains_done", op = "set", value = 0 },
+  { targetType = "player", trait = "coin",                 op = "set", value = 100 },
+  { targetType = "player", trait = "energy",               op = "set", value = 100 },
+  { targetType = "player", trait = "names_known",          op = "set", value = 1 },
 ]
 flagEffects = [
-  { targetType = "player", flag = "opening_done",         op = "set" },
-  { targetType = "player", flag = "renner_drained",       op = "set" },
-  { targetType = "player", flag = "hunt_lead",            op = "set" },
-  { targetType = "player", flag = "crew_known",           op = "set" },
-  { targetType = "player", flag = "bastien_found",        op = "set" },
-  { targetType = "player", flag = "bastien_revealed",     op = "set" },
-  { targetType = "player", flag = "captivity_entered",    op = "set" },
-  { targetType = "player", flag = "captivity_broken",     op = "set" },
-  { targetType = "player", flag = "captivity_done",       op = "set" },
-  { targetType = "player", flag = "salvage_entered",      op = "set" },
-  { targetType = "player", flag = "kess_met",             op = "set" },
+  { targetType = "player", flag = "opening_done",       op = "set" },
+  { targetType = "player", flag = "renner_drained",     op = "set" },
+  { targetType = "player", flag = "hunt_lead",          op = "set" },
+  { targetType = "player", flag = "crew_known",         op = "set" },
+  { targetType = "player", flag = "bastien_found",      op = "set" },
+  { targetType = "player", flag = "bastien_revealed",   op = "set" },
+  { targetType = "player", flag = "captivity_entered",  op = "set" },
+  { targetType = "player", flag = "captivity_broken",   op = "set" },
+  { targetType = "player", flag = "captivity_done",     op = "set" },
+  { targetType = "player", flag = "salvage_entered",    op = "set" },
+  { targetType = "player", flag = "kess_met",           op = "set" },
+  { targetType = "player", flag = "salvage_done",       op = "set" },
+  { targetType = "player", flag = "mission_3_active",   op = "set" },
+  { targetType = "player", flag = "salvage_relaunched", op = "set" },
 ]
