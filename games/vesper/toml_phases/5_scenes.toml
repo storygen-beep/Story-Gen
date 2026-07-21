@@ -4955,10 +4955,10 @@ blocks = [
   { type = "paragraph", content = "He finishes on her and she reaches — the old pull, down at the base of the spine. No cold socket this time, no clawing after a dead thing. His secrets walk out of him in one clean draw. It opens easy; the take barely costs her a want." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "There. Full pull, right through the finish, no strain on the readout at all. That's whole. That's a clean core." },
   # EMITTER RECOVERY — try 3 of 3 (FIRE). Core's trim -> it drives the second draw clean. The exit clears
-  # emitter_broken=0, re-enabling the world-fire. Video slot new (silent-skips until the 0.1.4 media harvest).
+  # emitter_broken=0, re-enabling the world-fire. No media slot: the beat needs a man switched off on his
+  # feet, and no corpus films a non-volitional body — stock only sells people performing. The prose carries it.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" } ] } }, blocks = [
     { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Core's trim now, holding under load. So — the other one, last time. Put it on him and mean it." },
-    { type = "video", props = { file = "sex/salvage_emitter_fire.webm", description = "A man goes slack and dazed on his feet in a dim industrial workshop as a woman lowers a small handheld emitter, a mechanic watching a readout.", search_queries = ["man dazed limp standing workshop", "woman handheld device man slack amateur"] } },
     { type = "paragraph", content = "She levels the emitter at the dock-hand and keys it. The field rolls out full and even and drops over him like weather. He goes slack where he stands, eyes gone, a dead weight held up by nothing — under, and staying under." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "That's it. Full field, clean drop. Both weapons live off one good core, and it's good now. You came in here with a dead drain and a dead emitter. You walk out with two." },
   ] },
