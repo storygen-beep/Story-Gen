@@ -480,15 +480,18 @@ image      = "clothing/cover_dockhand.jpg"
 beauty     = 0
 corruption = 0
 
-# The Vance-floor cover (Calloway cover port). NO type tag (like company_grays) — the gates key on
-# item_id, and an unruled type trips the "type has no rule" build warning. Granted UN-worn (no initial):
-# Mercer issues it at the salvage_relaunch dispatch (wardrobeEffects add, 5_scenes); she equips it at the
-# rack (wren_room) to become "the analyst." company_grays (her sharper asset-self) is the OUT-OF-COVER
-# tell. The Vance content gates on `clothing_item cover_analyst equipped`.
+# The Vance-floor cover (Calloway cover port). type = "cover_analyst" -> its own player_portrait outfit
+# rule (portraits/wren_cover_analyst.jpg = the analyst face), distinct from cover_dockhand's "cover" (the
+# dock face). Both the type and its matching rule exist, so neither side of the player_portrait audit warns.
+# Gates key on item_id (`clothing_item cover_analyst equipped`), NOT type — adding the type is portrait-only.
+# Granted UN-worn (no initial): Mercer issues it at the salvage_relaunch dispatch (wardrobeEffects add,
+# 5_scenes); she equips it at the rack (wren_room) to become "the analyst." company_grays (her sharper
+# asset-self) is the OUT-OF-COVER tell.
 [[clothing]]
 id         = "cover_analyst"
 name       = "Junior-analyst kit"
 slot       = "dress"
+type       = "cover_analyst"                # portrait axis: the analyst face (own outfit rule)
 image      = "clothing/cover_analyst.jpg"
 beauty     = 0
 corruption = 0

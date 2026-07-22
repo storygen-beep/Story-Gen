@@ -6892,18 +6892,32 @@ flagEffects = [
   { targetType = "player", flag = "archive_1a_done", op = "set" },
 ]
 
-# ── Quests page — Story-Goals spine (Tier 1, no npc_id). A = the retargeted Salvage card (above). B/C/D here.
+# ── Quests page — Story-Goals spine (Tier 1, no npc_id). A = the retargeted Salvage card (above). B1/B2/C/D here.
 # Flag-milestone chain, one card live at a time (exclusive by flags). ──
-# B — find the leak (v2): after access, the next goal = confirm the how + the who. Gated calloway_believes is_true
-# + vane_confirmed is_false (the setter = hub_colm_undertow's back-room choice, beat_0066). C (get the file) + D
-# (the 1a end + Patreon boundary) REBUILD with their beats (0067 / the ending rework).
+# B1/B2 — the leak leg, SPLIT at pipe_known (the work-case -> underworld hinge). Before this was ONE card spanning
+# calloway_believes -> vane_confirmed with a compound "work the case THEN the Undertow THEN Colm" tip that never
+# stepped — live-render bug: byte-identical text whether she should stay at the desk or leave for the underworld.
+# Now B1 = still work the case (find the HOW), B2 = go to the underworld (find the WHO). pipe_known is set by
+# case-reveal #3 (beat_0058) that points her at the Undertow, and is the exact gate that opens the Sol->Colm leg,
+# so the split IS the skill's stepped ladder, not a special case. C (get the file) + D (the 1a end) below.
+# B1 — still work the case: calloway_believes is_true + pipe_known is_false.
 [[quest_cards]]
 priority   = 10
-text       = "You're all the way into his hunt now. Two years he's chased a leak with nothing to show — no theft, no gap, just secrets bleeding out of a company that never loses a page. Find the how, and the who."
-tip        = "Work the case with Calloway until the shape shows — an inside man, an off-book pipe. Then take it to your own turf: down at the Undertow, ask Sol who runs the carry — he'll name Colm. Drink the courier loose over a few nights, then take him in the back; his drained memory hands you the rogue's face."
+text       = "You're all the way into his hunt now. Two years he's chased a leak with nothing to show — no theft, no gap, just secrets bleeding out of a company that never loses a page. First, find the how."
+tip        = "Work the case with Calloway in the file room. Keep at it until the bleeding finally has a shape — an inside man, and an off-book pipe carrying it out."
 when = [
   { flag = "calloway_believes", op = "is_true"  },
-  { flag = "vane_confirmed",    op = "is_false" },
+  { flag = "pipe_known",        op = "is_false" },
+]
+# B2 — go to the underworld: pipe_known is_true + vane_confirmed is_false. (pipe_known implies calloway_believes
+# by construction — its reveal beat gates on calloway_believes — so no A/B2 overlap.)
+[[quest_cards]]
+priority   = 10
+text       = "You've got the shape now — an off-book courier, running the leak down to the Reach where a company man can't follow. But you can. Now find the who."
+tip        = "Leave the desk to Calloway. Take it to your own turf — the Undertow — and ask Sol who runs the carry between the worlds. He'll name Colm. Drink the courier loose over a few nights, then take him in the back; his drained memory hands you the rogue's face."
+when = [
+  { flag = "pipe_known",     op = "is_true"  },
+  { flag = "vane_confirmed", op = "is_false" },
 ]
 # C — get the file + get it out (v2): after Vane's confirmed, until the 1a close. Gated vane_confirmed is_true +
 # archive_1a_done is_false (spans the retrieval AND the run to Mercer, so no blank sidebar-next between them).

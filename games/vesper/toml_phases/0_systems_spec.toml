@@ -91,11 +91,15 @@ topless_image    = "portraits/wren_topless.jpg"
 bottomless_image = "portraits/wren_bottomless.jpg"
 underwear_image  = "portraits/wren_underwear.jpg"
 
-# THE TWO FACES — in the dock-work cover, show the cover face (dominant dress type = "cover");
-# otherwise she falls through to default_image (the company-grays asset-self face).
+# THE THREE FACES — dock-work cover -> the dock face; analyst cover -> the analyst face; otherwise she
+# falls through to default_image (the company-grays asset-self face). Keyed on the dominant dress type.
 [[player_portrait.outfits]]
 image = "portraits/wren_cover.jpg"
 when  = { worn_type = "cover" }
+
+[[player_portrait.outfits]]
+image = "portraits/wren_cover_analyst.jpg"
+when  = { worn_type = "cover_analyst" }
 
 # ─── Sidebar items — the live HUD (Charge ONLY) ───────────────────────────────
 # Credits is tracked internally (the depot economy uses `money`) but NOT surfaced in the

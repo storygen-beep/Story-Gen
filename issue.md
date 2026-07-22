@@ -166,3 +166,6 @@ Skill Gap
 **23 July**
 
 The inheritance is one way built from the old inheritance game. The way we build vesper is we have shaped the first chapter and then we continue to add more and more, which makes it easy for us to write, test, iterate, verify and ship. But with the game like inheritance it becomes soo difficult to test, iterate, verify and ship it. What should we do now??
+
+
+story ideas

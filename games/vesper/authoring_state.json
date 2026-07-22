@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 90,
+  "book_revision": 91,
   "register": {
     "person": "third"
   },
@@ -2654,6 +2654,11 @@
       "book_revision": 90,
       "turn": 128,
       "note": "THE ARCHIVE 1a — CALLOWAY ONBOARDING: placement beat + flat floor sweep (LO: 'add the hiring and the intro, per the skill + Vesper-aligned'). Reframed honestly: Wren is PLANTED top-down (not hired — old 'Hired as PA' superseded), so NO job interview -> a PLACEMENT beat (slotted into the division), and the 4 analysts are TEXTURE (no hubs) so per npc-intro.md they get ONE FLAT SWEEP, not four dramatized meets. LO chose: a floor-lead does the placement, implemented as REYES's cynical orientation (existing texture NPC -> NO new NPC / no schedule-orphan; featuring the cynic misdirects away from Vane). CHANGES (5_scenes): (1) NEW cap_archive_placement 'The desk' — auto-fire @vance_securities, one-shot, pri 11, gated archive_started is_true + floor_placed is_false + cover_analyst equipped. Badge-desk placement + Reyes names the floor FLAT (Voss/Marr/Vane/herself), VANE buried mid-list ('you'll barely notice, keeps his head down') = mole stays flat, re-read reveal survives. Grounds the cover + makes make-the-rounds legible. SETS floor_placed. (2) cap_calloway_meet gated + floor_placed is_true (funnel: cover 11 -> placement 11 -> meet 10, order-safe regardless of priority). New flag floor_placed (located setter = the placement beat -> flag-chain validator satisfied; no declaration needed). GUARDRAILS: no hire scene (planted), Vane flat, no new NPC, placement gated cover-equipped (cover port intact, out-of-cover still -> react_calloway_precover). Skill doctrine gap (flat-ensemble intro not taught) deferred. Build+live-test to follow."
+    },
+    {
+      "book_revision": 91,
+      "turn": 131,
+      "note": "THE ARCHIVE 1a — QUESTS PAGE: split Story-Goal B at the work-case -> underworld hinge (LO: the Quests page 'doesn't properly show whether the player has to go to the underworld or still work the case'). CONFIRMED via Playwright QuestsPage render — one card (B, 5_scenes:6900) spanned the whole calloway_believes->vane_confirmed range with a COMPOUND tip ('work the case THEN the Undertow THEN Colm') that rendered byte-identical whether she should stay at the desk or leave for the underworld (never stepped). Violated the skill's own stepped-ladder rule (quests.md §5; step-2-toplevel §5 'one current want, never stale'). FIX: split B into two exclusive banded cards on pipe_known (the case-reveal flag that points her at the Undertow + gates the Sol->Colm leg) — B1 = still work the case (find the HOW; calloway_believes is_true + pipe_known is_false), B2 = go to the underworld (find the WHO; pipe_known is_true + vane_confirmed is_false). B2's 'Leave the desk to Calloway' opening neutralizes the warm-tap card's pull-to-stay. Spine now A->B1->B2->C->D, exclusive/gap-free/monotonic (pipe_known can't precede calloway_believes). No new flags, no version on when. Skill doctrine follow-up (Story-Goal cards must band at each phase flag, never a compound spine tip) deferred to the batched skill pass. Build+live-render to follow."
     }
   ]
 }
