@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 79,
+  "book_revision": 80,
   "register": {
     "person": "third"
   },
@@ -1163,7 +1163,8 @@
       ],
       "canvases": [
         "cap_calloway_meet (auto-fire @vance_securities, pri 10, one-shot, gated archive_started is_true + calloway_met is_false, NO requires_npc so it fires on plain entry post-cover — no off-hours soft-lock): the guarded first contact; his want (starving to be believed) spoken first, she takes the hunt seriously, guard cracks a hair; dialog-carried 0.94:1; SETS calloway_met.",
-        "hub_calloway_fileroom (L1 PORTRAIT hub @vance_securities, requires_npc + npc = npc_calloway, is_repeatable, pri 4, gated calloway_met is_true; presence via the schedule): file-room register + TWO UNGATED relation feeders into the belief/access odometer (Calloway's analog of Renner's work; paces vs his window): 'Talk to him' -> .talk (+2 relation, he opens up about the ghost) and 'Work the case' -> .work (+3 relation, she does the analyst cover-work no minder bothered with; belief-in-action). Each 60 min. The seduction rungs surface here at beat_0061.",
+        "hub_calloway_fileroom (L1 PORTRAIT hub @vance_securities, requires_npc + npc = npc_calloway, is_repeatable, pri 4, gated calloway_met is_true; presence via the schedule): file-room register + the 'Talk to him' relation feeder (-> .talk, +2 relation, NPC-object verb) + the seduction rungs (beat_0061). NOTE (refactor turn 116): 'Work the case' was MOVED OUT of the hub into a SEPARATE Lane-3 solo activity (work_the_case) per the skill's hub-vs-solo-work rule + Renner's work_depot_haul pattern.",
+        "work_the_case (Wren-solo Lane-3 host @vance_securities, is_repeatable, pri 3, gated calloway_met is_true + schedule 08:00-20:00; solo-link, no requires_npc, Calloway = dialog speaker in the fiction): the analyst cover-work (dig the boxes, cross-reference the pulls) -> +3 relation (belief/access feeder) + case_progress +1 (drives the staged case-reveals) + 60 min. The hub = the seduction; the case-work = the job (two verbs, two places). Mirrors work_depot_haul.",
         "1_metadata: npc_calloway [[npcs.schedules]] @vance_securities 08:00-20:00 all week (orphan-safe, after arc_stages).",
         "CASE-WORK STAGED REVEALS (v2 extend, beat_0058): case_progress (hidden trait, +1 per 'Work the case' .work exit) drives 3 auto-fire one-shots @vance_securities (pri 7): cap_case_insider (cp>=2, dialog: 'nobody broke in -> an inside job') -> cap_case_curated (cp>=4, PRIVATE thought_bubble: the hunt's been curated from inside by a trusted teammate, she conceals it) -> cap_case_pipe (cp>=6 + calloway_believes, her underworld read: an off-book courier pipe to the Reach -> the Undertow; SETS pipe_known = the hook to the Colm work, beat_0066). The detective legwork that makes the leak legible; incremental, grind-driven, no gadget."
       ]
@@ -2553,6 +2554,11 @@
       "book_revision": 79,
       "turn": 115,
       "note": "THE ARCHIVE 1a REWORK — Phase 1 increment 7 (the 1a close / ending) BUILT + GREEN. The LAST content increment — the full 1a story is now built end-to-end. cap_1a_close (v2, REPLACES the old cap_calloway_reported; auto-fire capstone @penthouse, pri 9, one-shot, gated docs_retrieved is_true + archive_1a_done is_false): she brings Mercer the file to hand over -> he's PANICKING (the deep-vault flag climbed with his asset's fingerprints, the Chairman's eye turned, the trail lands on HIM); he doesn't want the docs anymore, wants to RUN ('keep it, burn it, I'm gone'); she KEEPS it (hers now — 'what she is, or close to it'; she does NOT open it, the SUBJECT-reveal stays 1b); the 1b hook = Mercer holds her leash controller, so she's NOT running from the Chairman, she's getting Mercer out + 'taking the key on the way'. SETS archive_1a_done. Dialog-carried (Mercer present). Quests REDONE: Story-Goals A/B/C/D on the v2 flags, verified EXACTLY ONE live per state (A retires at calloway_believes; B calloway_believes->vane_confirmed; C vane_confirmed->archive_1a_done, spans retrieval+run-to-Mercer so no blank sidebar; D archive_1a_done = the end card w/ build boundary + Patreon). Calloway ladder unchanged. merge OK; package --dev GREEN, ALL FLAG CHAINS VALID, cap_1a_close in build, A/B/C/D exclusive. Ledger: beat_0064 -> validated. NOT committed. THE FULL 1a ARC IS BUILT: cover -> meet -> hub(talk/work) -> access -> case-reveals(insider/curated/pipe) -> rungs -> flinch -> loop -> drains(WHERE+access) -> Undertow(Colm->confirm Vane) -> blackmail Vane -> retrieve -> Mercer panics -> she keeps it -> close. ONLY beat_0065 (media harvest + clean SHIP) remains. book_revision 78->79."
+    },
+    {
+      "book_revision": 80,
+      "turn": 116,
+      "note": "THE ARCHIVE 1a — REFACTOR (LO-requested): 'Work the case' MOVED OUT of the Calloway hub into a SEPARATE Lane-3 solo activity (work_the_case). Per the skill's hub-vs-solo-work rule ('a menu verb with no NPC object is solo work -> its own canvas') + Renner's work_depot_haul pattern. The hub (hub_calloway_fileroom) now holds only NPC-object verbs: 'Talk to him' (.talk, +2 relation) + the seduction rungs + Leave. work_the_case = Wren-solo Lane-3 host @vance_securities (is_repeatable, pri 3, gated calloway_met + schedule 08:00-20:00; solo-link no requires_npc, Calloway = dialog speaker in the fiction of his file room): the analyst cover-work -> +3 relation + case_progress +1 + 60 min (same effects as the old .work hub node). The case-reveals (case_progress bands) + everything downstream UNCHANGED. Removed the 'Work the case' hub CHOICE + the .work node; prose-truth swept (hub comment+description, the access-capstone comment). Save-safe (Archive test-portal only). merge OK; package --dev --debug GREEN, ALL FLAG CHAINS VALID, render-bucket clean (work_the_case = clean solo-link), Node_work gone from the hub, work_the_case its own canvas. book_revision 79->80."
     }
   ]
 }

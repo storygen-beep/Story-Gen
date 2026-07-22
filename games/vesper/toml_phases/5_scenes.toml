@@ -5336,14 +5336,14 @@ flagEffects = [
 # beat_0058 — #2 hub_calloway_fileroom: the Lane-1 PORTRAIT hub @vance_securities (rue_hub shape). requires_npc
 # AND npc BOTH set (npc= = the portrait card; check_render_buckets flags requires_npc-without-npc). Gated
 # calloway_met is_true; presence governed by npc_calloway's [[npcs.schedules]] (08:00-20:00, 1_metadata). Base =
-# the file-room register + TWO UNGATED relation feeders into the belief/access odometer (Calloway's analog of
-# Renner's work): "Talk to him" (-> .talk, +2 relation — he opens up about the ghost) and "Work the case"
-# (-> .work, +3 relation — she does the analyst cover-work no minder bothered with; belief-in-action). Each
-# costs 60 min (paces them against his window). The seduction rungs surface HERE later (beat_0061), locked-visible.
+# the file-room register + the "Talk to him" relation feeder (-> .talk, +2 relation — he opens up about the ghost;
+# an NPC-object verb, so it lives in the hub). The OTHER access feeder, "Work the case" (+3 relation + case_progress),
+# is now a SEPARATE Lane-3 solo activity (work_the_case, below) per the skill's hub-vs-solo-work rule + Renner's
+# work_depot_haul pattern. The seduction rungs surface HERE later (beat_0061), locked-visible.
 [[canvases]]
 id          = "hub_calloway_fileroom"
 name        = "Calloway"
-description = "beat_0058. Calloway's portrait hub @vance_securities. requires_npc + npc = npc_calloway, gated calloway_met is_true. TWO UNGATED relation feeders into the belief/access odometer: 'Talk to him' (.talk, +2) and 'Work the case' (.work, +3, the analyst cover-work). Each costs 60 min. The file-room register. The seduction rungs surface here later (beat_0061)."
+description = "beat_0058. Calloway's portrait hub @vance_securities. requires_npc + npc = npc_calloway, gated calloway_met is_true. Holds the NPC-object verbs: 'Talk to him' (.talk, +2 relation, 60 min) + the seduction rungs (beat_0061). The file-room register. 'Work the case' (+3 relation + case_progress) is a SEPARATE Lane-3 activity (work_the_case), NOT a hub choice."
 
 [canvases.trigger]
 location      = "vance_securities"
@@ -5372,11 +5372,8 @@ text       = "Talk to him."
 targetType = "node"
 nodeId     = "hub_calloway_fileroom.talk"
 
-[[canvases.nodes.exit_block.choices]]
-text       = "Work the case."
-targetType = "node"
-nodeId     = "hub_calloway_fileroom.work"
-
+# ("Work the case" is NOT here — it's a SEPARATE Lane-3 solo activity (work_the_case, below), per the skill's
+# hub-vs-solo-work rule + the Renner work_depot_haul pattern. The hub holds only NPC-object verbs.)
 # ── The seduction rungs (beat_0061). Locked-visible (show_when_locked); DOUBLE-LOCKED on calloway_believes
 # (access, earned at the access capstone) + npc_calloway.corruption (his surrender band). Each +3 corruption,
 # costs 15 Charge (here) + 180 min (on the rung canvas's own exit) — the paced campaign against his 08:00-20:00
@@ -5464,23 +5461,41 @@ effects = [
   { targetType = "npc", npcId = "npc_calloway", trait = "relation", op = "add", value = 2 },
 ]
 
-# ── "Work the case" — the cover-work feeder. She does the actual analyst job (dig the boxes, cross-reference
-# the pulls) that no minder before her bothered with; belief-in-action earns him harder than words do. +3
-# relation (cover-work counts for more toward access) + 60 min. Feeds the SAME belief/access odometer as .talk.
+# ═══ work_the_case — Lane-3 solo host @vance_securities (the analyst cover-work; SEPARATE from the Calloway hub) ═══
+# Wren-solo task activity (mirrors Renner's work_depot_haul): she does the actual analyst job -> +3 relation (the
+# belief/access feeder) + case_progress +1 (drives the staged case-reveals) + 60 min. SEPARATE from
+# hub_calloway_fileroom (which holds only the NPC-object verbs: Talk to him + the seduction rungs). "Work the case"
+# = work, not an NPC interaction (skill: hub = NPC verbs; solo work = its own host). Repeatable, pri 3, gated
+# calloway_met + the file-room window (08:00-20:00, so Calloway's in the room to comment). Solo-link (no
+# requires_npc), Calloway present in the fiction (his file room) as a dialog speaker.
+[[canvases]]
+id          = "work_the_case"
+name        = "Work the case"
+description = "Wren-solo Lane-3 host @vance_securities. The analyst cover-work (dig the boxes, cross-reference the pulls) -> +3 relation (the belief/access feeder) + case_progress +1 (drives the staged case-reveals) + 60 min. SEPARATE from the Calloway portrait hub (Talk to him + the rungs stay there). Repeatable, gated calloway_met + schedule 08:00-20:00. Calloway present in the fiction, but mechanically a task, not the hub (like Renner's work_depot_haul)."
+[canvases.trigger]
+location      = "vance_securities"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "calloway_met", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "20:00"
 [[canvases.nodes]]
-id   = "work"
-name = "Calloway"
+id   = "base"
+name = "Work the case"
 blocks = [
   { type = "paragraph", content = "She pulls a box he hasn't reached and starts cross-referencing the dates against the pulls he's flagged — the actual work, the part every other minder skipped straight past on the way to the close order." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "You're... actually reading them. Huh. Left column's the ones that went missing clean. Right's the ones somebody dressed up after. Don't mix them or I lose a week." },
   { type = "dialog", props = { speaker = "player" }, content = "Then I won't mix them." },
   { type = "paragraph", content = "He goes quiet and works beside her — not warming to her, exactly. Warming to not being alone in it." },
 ]
-
 [canvases.nodes.exit_block]
 type = "location"
 text = "Keep at it."
-
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "vance_securities"
@@ -5496,7 +5511,7 @@ effects = [
 # disbelieved man stops treating her as a minder and brings her ALL the way into his hunt — the sealed side, the
 # real access. The belief-lever PEAK ("someone I can finally trust with it" = being believed, NOT warmth). SETS
 # calloway_believes (ACCESS — the double-lock axis the lewd rungs gate on, beat_0061). Dialog-carried. relation
-# >= 15 = the two hub feeders ("Talk to him" +2 / "Work the case" +3, ~3-5 sessions); only the hub feeders raise npc_calloway.relation.
+# >= 15 = the "Talk to him" hub feeder (+2) + the "Work the case" activity (+3), ~3-5 sessions; both raise npc_calloway.relation.
 [[canvases]]
 id          = "cap_calloway_access"
 name        = "All the way in"
