@@ -265,10 +265,21 @@ hidden = true
 key    = "repair_session"
 hidden = true
 # THE ARCHIVE 1a (beat_0056) — the Calloway drain counter. Hidden from the <<playerTraits>> dump; no sidebar
-# row. A TRAIT (gte-read) because the drain setter is triggerless. INTERNAL-ONLY: read solely to pick the drain
-# payload branch (d0 the drain / done the repeat); ONE drain now (second removed rev 83), gates no content — pure power.
+# row. A TRAIT (gte-read) because the drain setter is triggerless. The first drain gives THE WHERE; gte 1 GATES
+# cap_docs_first_look (rev 84) + picks the drain branch (d0/done). ONE drain (second removed rev 83).
 [[traits.labels]]
 key    = "calloway_drains_done"
+hidden = true
+# THE ARCHIVE 1a (beat_0066) — the Colm hub counters. Hidden; no sidebar rows. colm_drinks/colm_kisses (0->3 ladders)
+# + colm_drains_done (0->1, drain branch). TRAITS (gte-reads) — the drink/kiss rungs bump on choices; validator-exempt.
+[[traits.labels]]
+key    = "colm_drinks"
+hidden = true
+[[traits.labels]]
+key    = "colm_kisses"
+hidden = true
+[[traits.labels]]
+key    = "colm_drains_done"
 hidden = true
 # THE ARCHIVE 1a (beat_0058, v2) — the case-work counter. Hidden; no sidebar row. +1 per "Work the case"; its
 # bands fire the staged case-reveals (insider -> curated -> pipe).

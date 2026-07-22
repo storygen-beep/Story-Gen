@@ -259,3 +259,7 @@ flagEffects = [
   { targetType = "player", flag = "mission_3_active",   op = "set" },
   { targetType = "player", flag = "salvage_relaunched", op = "set" },
 ]
+# Cover port — land testers IN cover so "one click into Vance -> cap_archive_cover" (the jump's promise) holds.
+wardrobeEffects = [
+  { action = "equip", item_id = "cover_analyst" },
+]

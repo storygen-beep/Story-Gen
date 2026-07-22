@@ -139,11 +139,30 @@ I think we should decide on docs, calloway, rogue and bastien but redesign the s
 
 [DONE]Work the case should be a separate activity like work in the renner. Not in the same hub menu.
 
-vane drain not built properly, should be like a hub menu too, also she should have asked bartender about if he knows a guy can transfer anything from outerworld to underworld and vice versa, from he shows there is the guy colm. Now player should see the colm portrait in the bar at a fixed schedule every night, the work on him should not be like the way it is currently, instead it should also be a proper hub menu, where drain in the ass only triggers drain and informations.
+[DONE]vane drain not built properly, should be like a hub menu too, also she should have asked bartender about if he knows a guy can transfer anything from outerworld to underworld and vice versa, from he shows there is the guy colm. Now player should see the colm portrait in the bar at a fixed schedule every night, the work on him should not be like the way it is currently, instead it should also be a proper hub menu, where drain in the ass only triggers drain and informations.
 
 Quests Page written properly or can be written better, analyze thoroughly and share your honest thoughts. Its like it doesnt properly shows that now player has to go to underworld or he still has to work on the case.
 
-calloway second drain is the one gating the further content (vane blackmail and everything), I dont like it. First What is this second drain does explain in simple words.
+[DONE]calloway second drain is the one gating the further content (vane blackmail and everything), I dont like it. First What is this second drain does explain in simple words.
 
-Instead the problem should be seen by wren herself properly, we havent built things properly. So we needs to add calloway team we decided earlier, it isnt just calloway and vane, and just one room.
+[DONE]Instead the problem should be seen by wren herself properly, we havent built things properly. So we needs to add calloway team we decided earlier, it isnt just calloway and vane, and just one room.
 
+
+[DONE]it is the first drain right, that should wren asking where are the docs?? right?? honestly answer                                                                                                           
+
+[DONE]Get it out of him is stupidly written.
+Same with Collecy on the rogue.
+Same with Nobody want it now.
+Skill Gap
+
+[DONE]Calloway and make the rounds, interactions should change, like when vane give her the docs, she has to run, but now she can still go back to them and interact normally, it sounds wrong.
+
+[DONE]intro to the team and hiring.
+
+[DONE]Cover like a dock cover
+
+
+
+**23 July**
+
+The inheritance is one way built from the old inheritance game. The way we build vesper is we have shaped the first chapter and then we continue to add more and more, which makes it easy for us to write, test, iterate, verify and ship. But with the game like inheritance it becomes soo difficult to test, iterate, verify and ship it. What should we do now??

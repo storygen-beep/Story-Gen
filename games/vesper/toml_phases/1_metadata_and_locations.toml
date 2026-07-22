@@ -95,12 +95,19 @@ kess_debt         = 0
 repair_armed      = 0
 repair_session    = 0
 # THE ARCHIVE 1a (beat_0056) — the Calloway drain counter (hidden). +1 on the FIRST anal-finish drain (0->1); ONE
-# drain now (the SECOND drain was removed rev 83 — Wren figures the access out herself; Calloway never tells her).
-# A TRAIT (gte-read), NOT a flag — the drain setter is triggerless, so a flag would hard-fail the flag-chain
-# validator; a gte trait is exempt. INTERNAL-ONLY: read solely to pick the drain payload branch (d0 the drain /
-# done the repeat) in loop_calloway_finisher. Gates NO content — the drain is PURE POWER (blackmail rides on
-# access_problem_seen + vane_confirmed, not this count).
+# drain (the second was removed rev 83). A TRAIT (gte-read), NOT a flag — the drain setter is triggerless, so a
+# flag would hard-fail the flag-chain validator; a gte trait is exempt. The first drain = her power + THE WHERE
+# (he gives up the deep vault in docs). calloway_drains_done gte 1 GATES cap_docs_first_look (rev 84) — the drain
+# is the ONLY road to the where (Wren still sees the WALL herself at docs). Also picks the drain branch (d0/done).
 calloway_drains_done = 0
+# THE ARCHIVE 1a (beat_0066) — the Colm hub counters (hidden). colm_drinks: +1 per "Drink with him" night (0->3, one
+# per night via max_triggers_per_day; its bands render the 3 escalating drink beats; gte 3 opens the hub). colm_kisses:
+# +1 per "Kiss him" rung (0->3; its bands run hesitant->warming->done; gte 3 opens "Take him in the back"). colm_drains_done:
+# +1 on the FIRST back-room drain (0->1; picks the drain branch d0/done). TRAITS not flags (gte-reads, validator-exempt);
+# the drink/kiss rungs bump on choices, and vane_confirmed rides the hub's back-room choice (located via the triggered hub).
+colm_drinks       = 0
+colm_kisses       = 0
+colm_drains_done  = 0
 # THE ARCHIVE 1a (beat_0058, v2) — the case-work counter (hidden). +1 per "Work the case" session (the .work hub
 # feeder only, NOT "Talk to him"); its bands fire the staged case-reveals (cap_case_insider >=2, cap_case_curated
 # >=4, cap_case_pipe >=6). A TRAIT (gte-read) — the detective legwork that surfaces the leak's shape, distinct
@@ -350,11 +357,13 @@ start_time = "18:00"
 end_time   = "23:00"
 activity   = "his routine in the docs department"
 
-# ── Colm — the courier (NEW v2, beat_0056; Bastien's off-record man) ──
-# Bastien's off-record courier (never on paper), a regular at the Undertow. Carries Vane's copies out to Bastien.
-# She works him COLD + FAST at the bar (drinks -> drunk -> back-room fuck -> drain); his drained memory of the
-# handoffs gives her Vane's FACE (-> vane_confirmed). Declared minimal here (forward declaration); his SCHEDULE
-# @underworld_bar + his seduce/drain hub arrive WHOLE with beat_0066 (so no dead presence now). NON-conquest.
+# ── Colm — the courier (beat_0066; Bastien's off-record man) ──
+# Bastien's off-record courier (never on paper), a nightly regular at the Undertow. Carries Vane's copies out to
+# Bastien. She works him as a proper hub over several nights (Sol names him -> drink 3 nights -> kiss until he stops
+# flinching -> take him in the back = the drain); his drained memory of the handoffs gives her Vane's FACE
+# (-> vane_confirmed). Trust-gated (relation/counters), NOT corruption — he's already dirty, she loosens him. His
+# SCHEDULE is below (19:00-23:59, evening only — deliberately NOT spanning midnight, so the once-a-night drink cap
+# can't be straddled across the day-key flip). Colm IS the conquest here (Vane stays NON-conquest).
 [[npcs]]
 id          = "npc_colm"
 name        = "Colm"
@@ -363,6 +372,13 @@ portrait    = "colm.jpg"
 core_traits = { relation = 0, corruption = 0, arousal = 0 }
 flag_keys   = []
 arc_stages  = ["The courier"]
+
+[[npcs.schedules]]
+location   = "underworld_bar"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time   = "23:59"
+activity   = "drinking careful in the corner"
 
 # ── Enns — the docs-department front-desk clerk (NEW, division build-out) ──
 # Schedule-less dialog speaker (appears only in the docs_department scenes). The polite human face of the wall:
@@ -464,6 +480,19 @@ image      = "clothing/cover_dockhand.jpg"
 beauty     = 0
 corruption = 0
 
+# The Vance-floor cover (Calloway cover port). NO type tag (like company_grays) — the gates key on
+# item_id, and an unruled type trips the "type has no rule" build warning. Granted UN-worn (no initial):
+# Mercer issues it at the salvage_relaunch dispatch (wardrobeEffects add, 5_scenes); she equips it at the
+# rack (wren_room) to become "the analyst." company_grays (her sharper asset-self) is the OUT-OF-COVER
+# tell. The Vance content gates on `clothing_item cover_analyst equipped`.
+[[clothing]]
+id         = "cover_analyst"
+name       = "Junior-analyst kit"
+slot       = "dress"
+image      = "clothing/cover_analyst.jpg"
+beauty     = 0
+corruption = 0
+
 # ─── Locations — THE SPIRE (root: spire_plaza) ────────────────────────────────
 
 [[locations]]
@@ -485,10 +514,14 @@ id          = "vance_securities"
 name        = "Vance Securities"
 description = "An internal division high in Vance Tower — Calloway's floor, and the file room nobody audits. Quiet, over-lit, under-staffed: a man chasing a ghost through paper the company would rather forget."
 image       = "locations/vance_securities.jpg"
+image_search_queries = ["over-lit corporate office floor empty cubicles daytime", "quiet understaffed office division fluorescent filing stacks"]
 entry_from  = "spire_plaza"
 navigation_order = ["docs_department"]
 entry_conditions = { version = "1.0", items = [
   { type = "flag", subject = "player", flag_key = "salvage_relaunched", operator = "is_true" },
+  # THE ARCHIVE 1a seal (Phase 2) — backstop lock (AND): open only while NOT blown. Post-blowup the whole Spire is
+  # already unreachable (cut ride up), so this message is effectively never seen; it's insurance against a stray path.
+  { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
 ] }
 blocked_message = "Mercer hasn't sent her up there yet. The Calloway job opens when he gives the word."
 
@@ -501,6 +534,7 @@ id               = "docs_department"
 name             = "The Docs Department"
 description      = "The division's official archive — glass walls, a front desk with a bored clerk, two guards who don't blink. Nothing like Calloway's paper hoard down the hall: every badge is logged, every drawer is watched, and the files that actually matter sit behind a vault door nobody without clearance walks through."
 image            = "locations/docs_department.jpg"
+image_search_queries = ["high security corporate records archive glass walls front desk", "secure document archive office locked filing cabinets wide"]
 entry_from       = "vance_securities"
 navigation_order = ["docs_vault"]
 
@@ -512,6 +546,7 @@ id          = "docs_vault"
 name        = "The Vault"
 description = "The deep archive. Two-man clearance, biometric on the door, a guard either side who's been told her badge doesn't reach. Whatever Mercer sent her for is in there — ten feet away and a world out of reach."
 image       = "locations/docs_vault.jpg"
+image_search_queries = ["secure archive vault heavy steel door biometric lock", "sealed records vault dim corporate deep archive door"]
 entry_from  = "docs_department"
 entry_conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "vault_cleared", operator = "gte", value = 1 },
@@ -532,6 +567,14 @@ name        = "Mercer's Penthouse"
 description = "The top floor. Glass on three sides, the city laid out below like something he owns. This is where she's summoned, and where she serves."
 image       = "locations/penthouse.jpg"
 entry_from  = "atrium"
+# THE ARCHIVE 1a seal (Phase 2) — backstop lock. The zone-seal (cut ride up, 3_activities) already makes the whole
+# Spire unreachable post-blowup; this is defense-in-depth so the penthouse can't leak even through a stray path.
+# version="1.0" or the lock fails OPEN. Note: the blowup (cap_1a_close) fires WHILE archive_1a_done is still false,
+# so it isn't self-blocked; the lock only bites on any RETURN, and its exit ejects her to the_waterfront.
+entry_conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
+] }
+blocked_message = "Not anymore. The penthouse is the Chairman's ground now, and her face is on every list in the building."
 
 [[locations]]
 id               = "wren_floor"

@@ -273,10 +273,21 @@ hidden = true
 key    = "repair_session"
 hidden = true
 # THE ARCHIVE 1a (beat_0056) — the Calloway drain counter. Hidden from the <<playerTraits>> dump; no sidebar
-# row. A TRAIT (gte-read) because the drain setter is triggerless. INTERNAL-ONLY: read solely to pick the drain
-# payload branch (d0 the drain / done the repeat); ONE drain now (second removed rev 83), gates no content — pure power.
+# row. A TRAIT (gte-read) because the drain setter is triggerless. The first drain gives THE WHERE; gte 1 GATES
+# cap_docs_first_look (rev 84) + picks the drain branch (d0/done). ONE drain (second removed rev 83).
 [[traits.labels]]
 key    = "calloway_drains_done"
+hidden = true
+# THE ARCHIVE 1a (beat_0066) — the Colm hub counters. Hidden; no sidebar rows. colm_drinks/colm_kisses (0->3 ladders)
+# + colm_drains_done (0->1, drain branch). TRAITS (gte-reads) — the drink/kiss rungs bump on choices; validator-exempt.
+[[traits.labels]]
+key    = "colm_drinks"
+hidden = true
+[[traits.labels]]
+key    = "colm_kisses"
+hidden = true
+[[traits.labels]]
+key    = "colm_drains_done"
 hidden = true
 # THE ARCHIVE 1a (beat_0058, v2) — the case-work counter. Hidden; no sidebar row. +1 per "Work the case"; its
 # bands fire the staged case-reveals (insider -> curated -> pipe).
@@ -391,12 +402,19 @@ kess_debt         = 0
 repair_armed      = 0
 repair_session    = 0
 # THE ARCHIVE 1a (beat_0056) — the Calloway drain counter (hidden). +1 on the FIRST anal-finish drain (0->1); ONE
-# drain now (the SECOND drain was removed rev 83 — Wren figures the access out herself; Calloway never tells her).
-# A TRAIT (gte-read), NOT a flag — the drain setter is triggerless, so a flag would hard-fail the flag-chain
-# validator; a gte trait is exempt. INTERNAL-ONLY: read solely to pick the drain payload branch (d0 the drain /
-# done the repeat) in loop_calloway_finisher. Gates NO content — the drain is PURE POWER (blackmail rides on
-# access_problem_seen + vane_confirmed, not this count).
+# drain (the second was removed rev 83). A TRAIT (gte-read), NOT a flag — the drain setter is triggerless, so a
+# flag would hard-fail the flag-chain validator; a gte trait is exempt. The first drain = her power + THE WHERE
+# (he gives up the deep vault in docs). calloway_drains_done gte 1 GATES cap_docs_first_look (rev 84) — the drain
+# is the ONLY road to the where (Wren still sees the WALL herself at docs). Also picks the drain branch (d0/done).
 calloway_drains_done = 0
+# THE ARCHIVE 1a (beat_0066) — the Colm hub counters (hidden). colm_drinks: +1 per "Drink with him" night (0->3, one
+# per night via max_triggers_per_day; its bands render the 3 escalating drink beats; gte 3 opens the hub). colm_kisses:
+# +1 per "Kiss him" rung (0->3; its bands run hesitant->warming->done; gte 3 opens "Take him in the back"). colm_drains_done:
+# +1 on the FIRST back-room drain (0->1; picks the drain branch d0/done). TRAITS not flags (gte-reads, validator-exempt);
+# the drink/kiss rungs bump on choices, and vane_confirmed rides the hub's back-room choice (located via the triggered hub).
+colm_drinks       = 0
+colm_kisses       = 0
+colm_drains_done  = 0
 # THE ARCHIVE 1a (beat_0058, v2) — the case-work counter (hidden). +1 per "Work the case" session (the .work hub
 # feeder only, NOT "Talk to him"); its bands fire the staged case-reveals (cap_case_insider >=2, cap_case_curated
 # >=4, cap_case_pipe >=6). A TRAIT (gte-read) — the detective legwork that surfaces the leak's shape, distinct
@@ -646,11 +664,13 @@ start_time = "18:00"
 end_time   = "23:00"
 activity   = "his routine in the docs department"
 
-# ── Colm — the courier (NEW v2, beat_0056; Bastien's off-record man) ──
-# Bastien's off-record courier (never on paper), a regular at the Undertow. Carries Vane's copies out to Bastien.
-# She works him COLD + FAST at the bar (drinks -> drunk -> back-room fuck -> drain); his drained memory of the
-# handoffs gives her Vane's FACE (-> vane_confirmed). Declared minimal here (forward declaration); his SCHEDULE
-# @underworld_bar + his seduce/drain hub arrive WHOLE with beat_0066 (so no dead presence now). NON-conquest.
+# ── Colm — the courier (beat_0066; Bastien's off-record man) ──
+# Bastien's off-record courier (never on paper), a nightly regular at the Undertow. Carries Vane's copies out to
+# Bastien. She works him as a proper hub over several nights (Sol names him -> drink 3 nights -> kiss until he stops
+# flinching -> take him in the back = the drain); his drained memory of the handoffs gives her Vane's FACE
+# (-> vane_confirmed). Trust-gated (relation/counters), NOT corruption — he's already dirty, she loosens him. His
+# SCHEDULE is below (19:00-23:59, evening only — deliberately NOT spanning midnight, so the once-a-night drink cap
+# can't be straddled across the day-key flip). Colm IS the conquest here (Vane stays NON-conquest).
 [[npcs]]
 id          = "npc_colm"
 name        = "Colm"
@@ -659,6 +679,13 @@ portrait    = "colm.jpg"
 core_traits = { relation = 0, corruption = 0, arousal = 0 }
 flag_keys   = []
 arc_stages  = ["The courier"]
+
+[[npcs.schedules]]
+location   = "underworld_bar"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time   = "23:59"
+activity   = "drinking careful in the corner"
 
 # ── Enns — the docs-department front-desk clerk (NEW, division build-out) ──
 # Schedule-less dialog speaker (appears only in the docs_department scenes). The polite human face of the wall:
@@ -760,6 +787,19 @@ image      = "clothing/cover_dockhand.jpg"
 beauty     = 0
 corruption = 0
 
+# The Vance-floor cover (Calloway cover port). NO type tag (like company_grays) — the gates key on
+# item_id, and an unruled type trips the "type has no rule" build warning. Granted UN-worn (no initial):
+# Mercer issues it at the salvage_relaunch dispatch (wardrobeEffects add, 5_scenes); she equips it at the
+# rack (wren_room) to become "the analyst." company_grays (her sharper asset-self) is the OUT-OF-COVER
+# tell. The Vance content gates on `clothing_item cover_analyst equipped`.
+[[clothing]]
+id         = "cover_analyst"
+name       = "Junior-analyst kit"
+slot       = "dress"
+image      = "clothing/cover_analyst.jpg"
+beauty     = 0
+corruption = 0
+
 # ─── Locations — THE SPIRE (root: spire_plaza) ────────────────────────────────
 
 [[locations]]
@@ -781,10 +821,14 @@ id          = "vance_securities"
 name        = "Vance Securities"
 description = "An internal division high in Vance Tower — Calloway's floor, and the file room nobody audits. Quiet, over-lit, under-staffed: a man chasing a ghost through paper the company would rather forget."
 image       = "locations/vance_securities.jpg"
+image_search_queries = ["over-lit corporate office floor empty cubicles daytime", "quiet understaffed office division fluorescent filing stacks"]
 entry_from  = "spire_plaza"
 navigation_order = ["docs_department"]
 entry_conditions = { version = "1.0", items = [
   { type = "flag", subject = "player", flag_key = "salvage_relaunched", operator = "is_true" },
+  # THE ARCHIVE 1a seal (Phase 2) — backstop lock (AND): open only while NOT blown. Post-blowup the whole Spire is
+  # already unreachable (cut ride up), so this message is effectively never seen; it's insurance against a stray path.
+  { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
 ] }
 blocked_message = "Mercer hasn't sent her up there yet. The Calloway job opens when he gives the word."
 
@@ -797,6 +841,7 @@ id               = "docs_department"
 name             = "The Docs Department"
 description      = "The division's official archive — glass walls, a front desk with a bored clerk, two guards who don't blink. Nothing like Calloway's paper hoard down the hall: every badge is logged, every drawer is watched, and the files that actually matter sit behind a vault door nobody without clearance walks through."
 image            = "locations/docs_department.jpg"
+image_search_queries = ["high security corporate records archive glass walls front desk", "secure document archive office locked filing cabinets wide"]
 entry_from       = "vance_securities"
 navigation_order = ["docs_vault"]
 
@@ -808,6 +853,7 @@ id          = "docs_vault"
 name        = "The Vault"
 description = "The deep archive. Two-man clearance, biometric on the door, a guard either side who's been told her badge doesn't reach. Whatever Mercer sent her for is in there — ten feet away and a world out of reach."
 image       = "locations/docs_vault.jpg"
+image_search_queries = ["secure archive vault heavy steel door biometric lock", "sealed records vault dim corporate deep archive door"]
 entry_from  = "docs_department"
 entry_conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "vault_cleared", operator = "gte", value = 1 },
@@ -828,6 +874,14 @@ name        = "Mercer's Penthouse"
 description = "The top floor. Glass on three sides, the city laid out below like something he owns. This is where she's summoned, and where she serves."
 image       = "locations/penthouse.jpg"
 entry_from  = "atrium"
+# THE ARCHIVE 1a seal (Phase 2) — backstop lock. The zone-seal (cut ride up, 3_activities) already makes the whole
+# Spire unreachable post-blowup; this is defense-in-depth so the penthouse can't leak even through a stray path.
+# version="1.0" or the lock fails OPEN. Note: the blowup (cap_1a_close) fires WHILE archive_1a_done is still false,
+# so it isn't self-blocked; the lock only bites on any RETURN, and its exit ejects her to the_waterfront.
+entry_conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
+] }
+blocked_message = "Not anymore. The penthouse is the Chairman's ground now, and her face is on every list in the building."
 
 [[locations]]
 id               = "wren_floor"
@@ -1566,6 +1620,14 @@ type = "choices"
 text       = "Ride up to the Spire."
 targetType = "node"
 nodeId     = "activity_travel_to_spire.riding_spire"
+# THE ARCHIVE 1a seal (Phase 2): once she's blown (archive_1a_done), the ride up is dead — greyed-visible with the
+# security line so the block reads on the try. locked_text is written FOR the locked (post-blowup) state, so it's
+# never stale (cf. toml-gotchas show_when_locked trap — that trap is a consumed is_false clause showing a PRE-state).
+show_when_locked = true
+locked_text = "The Spire's sealed to her now — sweeps on every floor, her face on every camera at the curb. Going up is walking into the net. There's no ride back."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
+] }
 # Down under the docks to the underworld gate — local descent, no car; gated opening_done.
 [[canvases.nodes.exit_block.choices]]
 text       = "Down under the docks — the Underworld."
@@ -1636,6 +1698,12 @@ type = "choices"
 text       = "Ride up to the Spire."
 targetType = "node"
 nodeId     = "activity_travel_from_gate.riding_up"
+# THE ARCHIVE 1a seal (Phase 2): blown = no way back up to the Spire. Greyed-visible; the Reach ride below stays open.
+show_when_locked = true
+locked_text = "Not up there. The Spire's locked down over her — the towers are the one place she can't go now."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
+] }
 [[canvases.nodes.exit_block.choices]]
 text       = "Up to the Reach."
 targetType = "node"
@@ -8368,6 +8436,7 @@ blocks = [
     ] },
     { advance_text = "Take the order.", blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "New target. Calloway — Vance Securities, internal division. He runs the hunt for the rogue from the inside, and he keeps a file room nobody audits. Get in. Bring me what's in it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "There's a junior-analyst kit in your quarters. Wear it onto that floor — badge, plain grays, the whole nothing look. Not your own face. A division under audit remembers anyone who looks worth remembering." },
     ] },
     { advance_text = "Say yes.", blocks = [
         { type = "paragraph", content = "She says yes the way she says yes to everything. But it sits on a new floor now. Every order he gives her, he gives holding the one key that can cut the thing at the root of her — and he's never once had to say so, because until three days ago she didn't know it was there. Now she does. It doesn't change the yes. It changes what she's saying yes for." },
@@ -8387,6 +8456,11 @@ destinationType = "specific"
 locationId      = "the_waterfront"
 flagEffects = [
   { targetType = "player", flag = "salvage_relaunched", op = "set" },
+]
+# Issue the analyst cover UN-worn (mirror Renner's briefing, 2_one_shots) — she equips it at the rack in
+# wren_room before the Vance floor reads her as the analyst; out of cover -> react_calloway_precover.
+wardrobeEffects = [
+  { action = "add", item_id = "cover_analyst" },
 ]
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -8414,6 +8488,7 @@ is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "salvage_relaunched", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "archive_started",    operator = "is_false" },
+  { type = "clothing_item", item_id = "cover_analyst", operator = "equipped" },   # in cover only; out of cover -> react_calloway_precover
 ] }
 
 [[canvases.nodes]]
@@ -8421,7 +8496,7 @@ id   = "base"
 name = "The cover"
 blocks = [
   { type = "image", props = { file = "scenes/archive_cover.jpg", description = "A half-lit corporate office floor at night, most desks empty, tall filing stacks along one wall.", search_queries = ["empty corporate office floor half lit night", "dim office cubicles abandoned filing room"] } },
-  { type = "paragraph", content = "The cover holds all the way up — a junior-analyst badge Mercer bought clean, a desk in a division being quietly shut down. The lift opens on Vance Securities: half the lights off, half the desks empty, the audit already eating it from inside." },
+  { type = "paragraph", content = "The plain kit holds all the way up — the junior-analyst badge Mercer bought clean, the grays that make her no one worth a second look, a desk in a division being quietly shut down. The lift opens on Vance Securities: half the lights off, half the desks empty, the audit already eating it from inside." },
   { type = "paragraph", content = "The file room is Calloway's. He runs the company's hunt for the rogue out of it, and the floor treats him like a crank chasing a ghost. The paper he keeps has no index — the only map of it lives in his head." },
   { type = "thought_bubble", props = { speaker = "player" }, content = "A plain company errand, the way Mercer put it. Get in, take the room, bring it back. She doesn't turn over what might sit under a job this simple. First she needs the man who keeps it." },
 ]
@@ -8435,6 +8510,53 @@ destinationType = "specific"
 locationId      = "vance_securities"
 flagEffects = [
   { targetType = "player", flag = "archive_started", op = "set" },
+]
+
+# beat_0057b — cap_archive_placement: the PLACEMENT + flat floor sweep (onboarding funnel). Auto-fire
+# @vance_securities, one-shot, pri 11, gated archive_started is_true + floor_placed is_false + cover_analyst
+# equipped. Chains: cover (11) -> placement (11) -> meet (10, now also gated floor_placed is_true). A floor-lead
+# slots her into Calloway's dying division (badge desk); REYES (scripted texture speaker, the cynic who orients
+# the newbie) names the floor FLAT — Voss / Marr / Vane / herself, nobody featured, VANE buried mid-list (the
+# mole stays flat, no spotlight -> the re-read reveal survives). Grounds the cover socially + makes chat_the_floor
+# legible. Dialogue-forward RTS-flat. SETS floor_placed. NO new NPC (npc_reyes exists). Touches no shipped byte.
+[[canvases]]
+id          = "cap_archive_placement"
+name        = "The desk"
+description = "beat_0057b. THE PLACEMENT + flat floor sweep. Auto-fire @vance_securities, pri 11, one-shot, gated archive_started is_true + floor_placed is_false + cover_analyst equipped. A floor-lead slots her into Calloway's dying division (badge desk); Reyes (scripted, the cynic) gives the flat tour of the team (Voss/Marr/Vane/herself) — nobody featured, Vane buried mid-list (mole stays flat). Grounds the cover + makes make-the-rounds legible. SETS floor_placed -> cap_calloway_meet."
+
+[canvases.trigger]
+location      = "vance_securities"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "archive_started", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "floor_placed",    operator = "is_false" },
+  { type = "clothing_item", item_id = "cover_analyst", operator = "equipped" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The desk"
+blocks = [
+  { type = "image", props = { file = "scenes/archive_placement.jpg", description = "A half-empty corporate bullpen, a woman being pointed to an empty desk among boxed-up cubicles.", search_queries = ["woman new desk empty office cubicles boxes", "half packed corporate bullpen day"] } },
+  { type = "paragraph", content = "The badge desk scans her lanyard without looking up and waves her at an empty chair — one of a dozen, most already boxed. She's on Calloway's division now, or what the audit's left of it." },
+  { type = "paragraph", content = "The woman at the next desk clocks the new badge and doesn't bother pretending she's working." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_reyes" }, content = "Nobody told you what you walked into. Fine — since I'm the only one who's going to." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_reyes" }, content = "Voss over there's done thirty years and still thinks Calloway hung the moon. Marr does the crossword — that's the whole job now. Vane you'll barely notice, keeps his head down, does it clean. And me, I'm gone the second something better calls back." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_reyes" }, content = "Advice? Answer the auditors, not him. Calloway's chasing a ghost, and half of us think the ghost is just him coming apart. Don't catch it." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Four people running out the clock on a dead floor. To them she's one more temp badge, gone before the boxes are. Exactly what the cover needs — no one worth remembering." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Find the file room."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "vance_securities"
+flagEffects = [
+  { targetType = "player", flag = "floor_placed", op = "set" },
 ]
 
 # beat_0058 — #1 cap_calloway_meet: the guarded FIRST CONTACT @vance_securities (auto-fire one-shot). Fires the
@@ -8457,6 +8579,7 @@ priority      = 10
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "archive_started", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "floor_placed",    operator = "is_true"  },   # placement fires first (onboarding funnel)
   { type = "flag", subject = "player", flag_key = "calloway_met",    operator = "is_false" },
 ] }
 
@@ -8512,6 +8635,15 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "calloway_met", operator = "is_true" },
 ] }
 
+# Cover port — out of cover, clicking the hub goes to the squint (Calloway reads it as danger, not
+# recognition). chance 1.0 = always when not in cover; in cover the condition is false and the hub renders.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "react_calloway_nocover"
+chance           = 1.0
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "clothing_item", item_id = "cover_analyst", operator = "unequipped" },
+] }
+
 [[canvases.nodes]]
 id   = "base"
 name = "Calloway"
@@ -8538,10 +8670,13 @@ nodeId     = "hub_calloway_fileroom.talk"
 text       = "Get close to him."
 targetType = "node"
 nodeId     = "rung_calloway_contact.base"
-show_when_locked = true
+# POST-DRAIN SWAP (Phase 1): once she owns him (calloway_drains_done gte 1) the seduction rungs HIDE — she's past
+# seducing him. NO show_when_locked here on purpose: an unmet gate must REMOVE the choice, not grey it (greying a
+# consumed clause is the stale-locked_text trap, toml-gotchas). Shown only in the belief -> pre-drain window.
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "calloway_believes", operator = "is_true" },
   { type = "trait", subject = "npc", npc_id = "npc_calloway", trait_key = "corruption", operator = "gte", value = 0 },
+  { type = "trait", subject = "player", trait_key = "calloway_drains_done", operator = "lt", value = 1 },
 ] }
 costs = [{ trait = "energy", value = 15 }]
 effects = [
@@ -8553,10 +8688,11 @@ effects = [
 text       = "Take him in your mouth."
 targetType = "node"
 nodeId     = "rung_calloway_oral.base"
-show_when_locked = true
+# POST-DRAIN SWAP (Phase 1): hides once she owns him (see the "Get close to him" note above — no show_when_locked).
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "calloway_believes", operator = "is_true" },
   { type = "trait", subject = "npc", npc_id = "npc_calloway", trait_key = "corruption", operator = "gte", value = 6 },
+  { type = "trait", subject = "player", trait_key = "calloway_drains_done", operator = "lt", value = 1 },
 ] }
 costs = [{ trait = "energy", value = 15 }]
 effects = [
@@ -8600,9 +8736,23 @@ locationId = "vance_securities"
 [[canvases.nodes]]
 id   = "talk"
 name = "Calloway"
+# POST-DRAIN SWAP (Phase 1) — [group] by calloway_drains_done: pre-drain = the trust-building talk; post-drain = a
+# possessive check-in (she owns him). This is the .talk DESTINATION node, not the hub opener (the opener stays one
+# constant paragraph, lanes.md:136-140). [group] shape matches loop_calloway_finisher.
 blocks = [
-  { type = "dialog", props = { speaker = "player" }, content = "Walk me through the ghost. From the start — the parts nobody let you finish." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "...Fine. You keep up, and you keep it in this room. I've had enough people carry half of it out and call me paranoid." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "calloway_drains_done", operator = "lt", value = 1 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "player" }, content = "Walk me through the ghost. From the start — the parts nobody let you finish." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "...Fine. You keep up, and you keep it in this room. I've had enough people carry half of it out and call me paranoid." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "calloway_drains_done", operator = "gte", value = 1 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "player" }, content = "Anything new on the ghost?" },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "For you? Everything I've got. Don't know what I ran this on before you walked in." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "He hands it over before she's done asking. He'll never know the file room's been hers since the night his own current gave up where the vault is." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -8635,6 +8785,7 @@ priority      = 3
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "calloway_met", operator = "is_true" },
+  { type = "clothing_item", item_id = "cover_analyst", operator = "equipped" },   # cover port — no working the case out of cover
 ] }
 [[canvases.trigger.schedules]]
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
@@ -8643,11 +8794,24 @@ end_time   = "20:00"
 [[canvases.nodes]]
 id   = "base"
 name = "Work the case"
+# POST-DRAIN SWAP (Phase 1) — [group] by calloway_drains_done: pre-drain = the belief/courtship cover-work; post-drain
+# = same desk, cover not courtship (she owns him). Solo-work base node (not a hub opener), so [group] is allowed.
 blocks = [
-  { type = "paragraph", content = "She pulls a box he hasn't reached and starts cross-referencing the dates against the pulls he's flagged — the actual work, the part every other minder skipped straight past on the way to the close order." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "You're... actually reading them. Huh. Left column's the ones that went missing clean. Right's the ones somebody dressed up after. Don't mix them or I lose a week." },
-  { type = "dialog", props = { speaker = "player" }, content = "Then I won't mix them." },
-  { type = "paragraph", content = "He goes quiet and works beside her — not warming to her, exactly. Warming to not being alone in it." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "calloway_drains_done", operator = "lt", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She pulls a box he hasn't reached and starts cross-referencing the dates against the pulls he's flagged — the actual work, the part every other minder skipped straight past on the way to the close order." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "You're... actually reading them. Huh. Left column's the ones that went missing clean. Right's the ones somebody dressed up after. Don't mix them or I lose a week." },
+    { type = "dialog", props = { speaker = "player" }, content = "Then I won't mix them." },
+    { type = "paragraph", content = "He goes quiet and works beside her — not warming to her, exactly. Warming to not being alone in it." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "calloway_drains_done", operator = "gte", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She works the boxes beside him the same as before — except it's cover now, not courtship. He believes every inch of her; she's the one who decides what the case turns up, and when." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "Left column clean, right column dressed. You know the drill by now. Don't know what I did before you." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "Nothing. He did nothing before her and he'll remember nothing after. She logs another hour at the desk of a man who's already hers." },
+  ] },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -8678,6 +8842,7 @@ priority      = 3
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "calloway_met", operator = "is_true" },
+  { type = "clothing_item", item_id = "cover_analyst", operator = "equipped" },   # cover port — no walking the floor out of cover
 ] }
 [[canvases.trigger.substitutions]]
 target_canvas_id = "walkin_chat_voss"
@@ -8824,6 +8989,81 @@ text = "Let him get back to it."
 destinationType          = "specific"
 locationId               = "vance_securities"
 time_progression_minutes = 30
+
+# ═══ THE COVER — wrong-reactions (Calloway cover port) ══════════════════════════════════════════════
+# The Vance floor content now requires the junior-analyst kit equipped. These are what she gets out of cover:
+# the PRE-cover cold path (before the cover beat — an auto-fire that ejects her off the floor) + the POST-cover
+# squint (the substitution target of the Calloway hub). Both set NOTHING — a stall + a wrong look, never a
+# fail-state. Mirrors Renner's beat_0015 (react_renner_threat + react_renner_nocover_depot).
+
+# react_calloway_precover — PRE-COVER, out of cover. A repeatable SOLO-LINK @vance_securities (mirror
+# react_renner_threat's cold-shoulder role). The engine classes a repeatable, requires_npc-less, no-trigger_mode
+# canvas as a Lane-3 solo-link (live-verified: it lands in the solo bucket), so it renders as the one thing she
+# can do on the floor out of cover — click it to back out. Gated archive_started is_false + cover UNEQUIPPED
+# (mutually exclusive with cap_archive_cover's cover-EQUIPPED gate, so IN cover the cover beat fires instead).
+# Exit -> spire_plaza (off the floor, go change). Repeatable so it re-checks EVERY out-of-cover entry (a one-shot
+# auto-fire would fire only once). Sets nothing.
+[[canvases]]
+id          = "react_calloway_precover"
+name        = "Wrong face for the floor"
+description = "Pre-cover out-of-cover reaction @vance_securities. Repeatable solo-link (like react_renner_threat), gated archive_started is_false + cover_analyst UNEQUIPPED. She walks the audited floor in her own sharp line, gets clocked, backs out to the plaza. Points her at the kit in wren_room. Sets nothing."
+
+[canvases.trigger]
+location      = "vance_securities"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "archive_started", operator = "is_false" },
+  { type = "clothing_item", item_id = "cover_analyst", operator = "unequipped" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Wrong face for the floor"
+blocks = [
+  { type = "image", props = { file = "scenes/archive_cover.jpg", description = "A half-lit corporate office floor at night, most desks empty, a woman in a sharp coat out of place among them.", search_queries = ["woman in sharp coat empty office floor night", "well-dressed woman out of place corporate floor"] } },
+  { type = "paragraph", content = "She comes onto the Vance floor in her own face — the sharp company line, not the plain kit — and it lands wrong the second the light finds her. A junior analyst doesn't dress like she's worth more than the floor she's standing on. A head comes up. On a division being audited, a turned head is how a question starts." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Wrong skin for this floor. Nothing gets done looking like this. The kit's on the rack up in her quarters — where it does her no good." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back out before it's a question."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "spire_plaza"
+
+# react_calloway_nocover — POST-COVER squint (substitution target of hub_calloway_fileroom when out of cover).
+# Calloway KNOWS her (calloway_met) — so it's danger, not "who are you": she can't wander an audited floor
+# dressed above the role. Sets nothing. Exit -> vance_securities.
+[[canvases]]
+id          = "react_calloway_nocover"
+name        = "Not in that coat"
+description = "Substitution-only. Reached from hub_calloway_fileroom when cover_analyst is NOT equipped. Calloway reads it as danger (he knows her; the floor doesn't know she's nobody) and sends her to change. Sets nothing. Exit -> vance_securities."
+
+[canvases.trigger]
+location          = "vance_securities"
+requires_npc      = "npc_calloway"
+substitution_only = true
+is_repeatable     = true
+is_active         = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Not in that coat"
+blocks = [
+  { type = "paragraph", content = "She comes onto the floor out of the kit, back in her own sharp line, and Calloway catches it before she's three steps in. He knows her — that's not the problem. The problem is everyone else who knows a junior analyst doesn't dress like that." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "What are you doing up here looking like that. You want the audit asking who the analyst in the good coat is? Go. Change. Come back nobody." },
+  { type = "paragraph", content = "He's right and they both know it. Nothing she needs off this floor happens while she's wearing the wrong face. The kit's back on the rack in her quarters." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go change."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "vance_securities"
 
 # ═══ THE FLOOR — dying-division ambients (division build-out) ═══════════════════════════════════════
 # 3 Lane-2 random ambients @vance_securities (trigger_mode=random, per-day cap), pure texture — the audit eating
@@ -9050,9 +9290,9 @@ id   = "base"
 name = "Where it goes"
 blocks = [
   { type = "paragraph", content = "With the sealed side of the hunt open to her now, she can finally see the far end — and the far end is a place Calloway has never once been." },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "The pulls don't get sold up here. They go DOWN — into the Reach, through the kind of courier who never touches a ledger and never shows on a manifest. A company man could audit this room ten more years and never find him, because he isn't in any record there is. But she knows that world. She knows exactly which bar his kind drinks at." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "The pulls don't get sold up here. They go DOWN — into the Reach, through the kind of courier who never touches a ledger and never shows on a manifest. A company man could audit this room ten more years and never find him, because he isn't in any record there is. But she knows that world — and she knows who to ask. Down at the Undertow, Sol has poured for every carrier who ever worked the Reach; he'll know the man who runs this." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "I'll re-run the logistics side tomorrow. There's something in the courier contracts I keep missing — I can feel it." },
-  { type = "paragraph", content = "She tells him that sounds right, and lets him keep chasing the ghost through paper. She already knows where she's going tonight: the Undertow, to find the man who carries it." },
+  { type = "paragraph", content = "She tells him that sounds right, and lets him keep chasing the ghost through paper. She already knows where she's going tonight: the Undertow, to put Sol's word to the man who carries it." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -9109,7 +9349,7 @@ description = "Triggerless rung. Explicit (belief-lever: relief, being finally w
 id   = "base"
 name = "Take him in your mouth"
 blocks = [
-  { type = "video", props = { file = "scenes/rung_calloway_oral_t3.webm", description = "A woman on her knees giving oral to a seated man in an office; explicit.", search_queries = ["office blowjob under desk pov", "woman kneeling oral seated man suit"] } },
+  { type = "video", props = { file = "scenes/rung_calloway_oral_t5.webm", description = "A woman on her knees giving oral to a seated man in an office; explicit.", search_queries = ["office blowjob under desk pov", "woman kneeling oral seated man suit"] } },
   { type = "paragraph", content = "She takes him out from behind the desk and puts her mouth on him, and the sound he makes isn't lust — it's relief, like something clenched for two years finally letting go." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "npc", npc_id = "npc_calloway", trait_key = "corruption", operator = "lt", value = 12 },
@@ -9296,14 +9536,15 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 
 # ═══ loop_calloway_finisher — facial/inside END; anal -> THE drain (calloway_drain_canvas) ══════
 # The counter calloway_drains_done is a TRAIT bumped HERE on the anal-finish choice (validator-exempt; the
-# audit discipline — no flag on a triggerless canvas). NO weapon-charge gate (reliable, no soft-lock). The drain
-# is PURE POWER — her hold over Calloway, NOT plot: it gates nothing (the WHERE + access are SEEN at the docs
-# department, not drained; Calloway NEVER tells her). ONE drain now — the old SECOND drain was removed (rev 83);
-# Wren figures the access out herself. Anal branches: 0 -> the drain (d0, bump to 1); >=1 -> done (repeatable). facial/inside reset + exit.
+# audit discipline — no flag on a triggerless canvas). NO weapon-charge gate (reliable, no soft-lock). The first
+# drain = her power over him + THE WHERE: drained and open, he gives up where her file's kept (the deep vault in
+# docs). calloway_drains_done gte 1 then GATES cap_docs_first_look (the wall reveal) — so the full seduction is
+# the only road to the where (rev 84; Wren still sees the WALL herself at docs). ONE drain (the old second was
+# removed rev 83). Anal branches: 0 -> the drain (d0, bump to 1); >=1 -> done (repeatable). facial/inside reset + exit.
 [[canvases]]
 id          = "loop_calloway_finisher"
 name        = "He finishes"
-description = "Triggerless finisher. [group] by sex_finisher_type. facial(0)/inside(1) reset+exit. anal(2) IS the drain (PURE POWER — her hold over him): 0->d0 (THE drain) bump to 1; >=1->done (repeatable). counter = TRAIT bumped here. ONE drain only — the second was removed (rev 83). Gates NO plot (the WHERE + access are seen at the docs department; the leak is cracked by the case-work + Colm) — this drain = power + keeping him blind."
+description = "Triggerless finisher. [group] by sex_finisher_type. facial(0)/inside(1) reset+exit. anal(2) IS the drain: 0->d0 (THE drain — her power + THE WHERE, he gives up where her file's kept) bump to 1; >=1->done (repeatable, pure power). counter = TRAIT bumped here. ONE drain (second removed rev 83). calloway_drains_done gte 1 GATES cap_docs_first_look (rev 84) — the drain is the ONLY road to the where; Wren still sees the WALL herself at docs."
 [[canvases.nodes]]
 id   = "climax"
 name = "He finishes"
@@ -9382,13 +9623,14 @@ effects = [
 [[canvases]]
 id          = "calloway_drain_canvas"
 name        = "What he knows"
-description = "Triggerless drain payloads, reached from loop_calloway_finisher's anal-finish choices (counter bump + resets live on the choice). PURE POWER — her hold over Calloway, no plot: d0 = THE drain (first anal finish; the second drain was REMOVED rev 83), done = the repeatable use after. Does NOT gate anything (the WHERE + access are seen at the docs department; Calloway never tells her). Power + keeping him blind; NOT detection."
+description = "Triggerless drain payloads, reached from loop_calloway_finisher's anal-finish choices (counter bump + resets live on the choice). d0 = THE drain (first anal finish) = her power + THE WHERE (drained + open, he gives up where her file's kept: the deep vault in docs); done = the repeatable pure-power use after. calloway_drains_done gte 1 GATES cap_docs_first_look (rev 84 — the drain is the road to the where). The WALL (can't get in) she still sees herself at docs. Second drain REMOVED rev 83."
 [[canvases.nodes]]
 id   = "d0"
 name = "The drain"
 blocks = [
   { type = "paragraph", content = "The drain opens all the way and she takes him properly — not a skim, the whole live current of him coming loose through the contact. His Charge, his week, the last hour, going soft and white while she holds the pull steady and drinks it down." },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "This is the part that keeps her running — not what he knows, what he is, drawn off warm and given up gladly. She leaves him the belief, the gratitude, the not-knowing, and takes the rest. There's a leash on him now: she can open him whenever the drain's hungry, and he'll thank her for it. Easier to keep than any lock in this building." },
+  { type = "paragraph", content = "And while he's this open, this undefended, she asks him the one thing she came for: where a company that never loses a page keeps what it can't afford to lose. He gives it up without knowing he's giving it — the deep vault, down in the docs department, the sealed archive nobody at her level ever badges into. Whatever Mercer planted her to fetch is sitting behind that door." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "So now she has the where — and a leash on the man who gave it to her. She can open him whenever the drain's hungry and he'll thank her for it; he'll never remember telling her a thing. Easier to keep him than to open that vault — and that part she'll have to solve herself." },
   { type = "paragraph", content = "He blinks, the minutes wiped, disoriented in his own chair. 'Sorry — lost the thread. Where were we.' She tells him it's nothing. Drink some water." },
 ]
 [canvases.nodes.exit_block]
@@ -9410,21 +9652,27 @@ text = "Leave him to it."
 destinationType = "specific"
 locationId      = "vance_securities"
 
-# ═══ beat_0066 — the Colm sub-arc (the underworld half: confirm Vane) ═══════════════════════════════
-# Colm = Bastien's off-record courier (npc_colm, schedule-less; capstone/activity dialog only, like Vane/Bastien —
-# so no dead-presence + fits a use-and-toss NPC with no arc). Gated on pipe_known (the case-reveal that points her
-# at the Undertow). #1 cap_colm_meet: auto-fire @underworld_bar, she clocks the courier -> colm_found. #2
-# act_colm_drain: player-initiated solo-link (repeatable + vane_confirmed-is_false guard = effectively one-shot),
-# the COLD/FAST seduce+drain -> his drained memory of the handoffs gives her the inside man's FACE -> she
-# recognizes VANE -> vane_confirmed (blackmail leverage, beat_0067; retires Story-Goal B). Tonal opposite of the
-# Calloway slow-con: transactional, explicit at the ceiling, she uses him and leaves.
+# ═══ beat_0066 — the Colm sub-arc (the underworld half: work the courier, confirm Vane) ═══════════════
+# Colm = Bastien's off-record courier (npc_colm), rebuilt from a rails-y one-shot into a proper nightly hub
+# (issue.md 142). Gated on pipe_known (the case-reveal that points her at the Undertow). The arc:
+#   (1) hunt_colm_lead — she asks SOL who moves things between the worlds; Sol names Colm -> colm_found.
+#   (2) act_colm_drink — drink with him 3 nights (requires_npc + max_triggers_per_day=1 + colm_drinks lt 3; the
+#       [group] bands escalate business->testing->comfortable); colm_drinks gte 3 opens the hub.
+#   (3) hub_colm_undertow — the portrait hub: "Kiss him" (colm_kisses 0->3, hesitant->done) then "Take him in the
+#       back" = the drain. vane_confirmed is set on the back-room CHOICE (located via this triggered hub).
+#   (4) colm_drain_canvas — d0 (first: the ass-drain + Vane's FACE) / done (repeat: pure power).
+# Trust-gated, NO pose loop (kiss straight to the back). Vane stays NON-conquest; Colm IS the conquest. The drain
+# still yields vane_confirmed -> blackmail leverage (beat_0067; retires Story-Goal B).
+# (1) hunt_colm_lead — the Sol on-ramp (player-initiated location beat @underworld_bar, hunt_sol_lead shape). Gated
+# pipe_known is_true + colm_found is_false. She asks Sol who runs the outer/underworld carry; Sol names Colm (a
+# nightly regular). SETS colm_found (located) -> Colm's portrait lights + act_colm_drink opens.
 [[canvases]]
-id          = "cap_colm_meet"
-name        = "The man who carries"
-description = "beat_0066. Colm first-contact @underworld_bar. Auto-fire, pri 8, one-shot, gated pipe_known is_true + colm_found is_false. She comes to the Undertow knowing what she's hunting now — not a name, a type: the man who carries. She clocks Colm (a regular, a courier's seat) and opens him. SETS colm_found."
+id          = "hunt_colm_lead"
+name        = "The bartender"
+description = "beat_0066. The Colm on-ramp @underworld_bar (Sol info-broker, hunt_sol_lead shape). Player-initiated, gated pipe_known is_true + colm_found is_false. She asks Sol who moves freight between the worlds; Sol names Colm — the careful nightly drinker who carries for her kind of buyer. SETS colm_found (located) -> Colm's nightly portrait + act_colm_drink open."
 [canvases.trigger]
 location      = "underworld_bar"
-is_repeatable = false
+is_repeatable = true
 priority      = 8
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
@@ -9433,68 +9681,219 @@ conditions = { version = "1.0", logic = "AND", items = [
 ] }
 [[canvases.nodes]]
 id   = "base"
-name = "The man who carries"
+name = "The bartender"
 blocks = [
-  { type = "image", props = { file = "scenes/colm_undertow.jpg", description = "A wary man drinking alone at a dim underworld bar, back to the wall.", search_queries = ["man alone dim bar back to wall night", "wary drinker underground bar corner"] } },
-  { type = "paragraph", content = "She comes down to the Undertow knowing what she's after now — not a name, a type. The man who carries. She finds him inside the hour: a regular three stools down, drinking careful, a bag with a boot hooked through the strap." },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "That's a courier's seat. Back to the wall, eyes on the door out of habit, hands never far from the freight. He runs for someone — and down here only one kind of run is worth this much care. He's her thread up out of Calloway's file room and straight to whoever's buying." },
-  { type = "cascade", props = { beats = [
-    { advance_text = "Take the stool beside him.", blocks = [
-        { type = "dialog", props = { speaker = "player" }, content = "You're the only man in here working. Everybody else is drinking to forget the job. You're drinking to keep it steady." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "...Steady's the whole job, sweetheart. You buying, or reading?" },
-    ] },
-    { advance_text = "Buy the next round.", blocks = [
-        { type = "dialog", props = { speaker = "player" }, content = "Buying. Two of whatever keeps you steady." },
-        { type = "paragraph", content = "He lets her. Careful men let a lot of things happen when the woman doing them looks like her and asks for nothing yet. She has the seat, the round, and a whole night to walk him back to a face." },
-    ] },
-  ] } },
+  { type = "image", props = { file = "scenes/underworld_bar_bartender.jpg", description = "A dim underground bar, red light, an old bartender working the taps at the quiet end.", search_queries = ["dim underground speakeasy bartender red light", "noir back-alley bar bartender low light"] } },
+  { type = "paragraph", content = "She's come down to the Undertow knowing what she's hunting now — not a name, a type: the man who carries the firm's leak down into the Reach. And the man who knows every carrier who ever worked this end of the city is the one wiping an already-clean glass at the dark end of the bar. Sol knows. Sol always knows." },
 ]
 [canvases.nodes.exit_block]
-type = "location"
-text = "Work him."
-[canvases.nodes.exit_block.config]
-destinationType = "specific"
-locationId      = "underworld_bar"
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask Sol who moves things between the worlds."
+targetType = "node"
+nodeId     = "hunt_colm_lead.ask"
+[[canvases.nodes.exit_block.choices]]
+text       = "Not tonight."
+targetType = "location"
+locationId = "underworld_bar"
+
+[[canvases.nodes]]
+id   = "ask"
+name = "The bartender"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "I need a carrier. Somebody who moves freight both ways — outer world to under, under to outer — and never leaves it on paper. Company work, the kind that never happened." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Short list down here, and a shorter one that's any good. The one you want's called Colm. Runs sealed packets for a buyer who pays too well to name, and hasn't let a thing show up in a ledger in all the years I've watched him drink. Careful to a fault." },
+  { type = "dialog", props = { speaker = "player" }, content = "Where do I find him." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Right here, most nights — corner stool, back to the wall, drinking slow so he stays sharp. In around seven, nurses it till close. Buy the man a drink. He warms slower than he'll ever admit, but he warms." },
+  { type = "paragraph", content = "A name, a stool, a habit — the whole of it. She looks down the bar and finds him without trying: a wary regular three stools down, a bag with a boot hooked through the strap, eyes on the door out of pure reflex. Her thread up out of Calloway's file room and straight to whoever's buying." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Colm, then. Start with a drink."
+targetType = "location"
+locationId = "underworld_bar"
 flagEffects = [
   { targetType = "player", flag = "colm_found", op = "set" },
 ]
 
-# #2 act_colm_drain — the cold seduce + drain (player-initiated solo-link @underworld_bar; is_repeatable + the
-# vane_confirmed-is_false guard = effectively one-shot). No requires_npc (Colm = dialog speaker). Explicit at the
-# ceiling, transactional. His drained memory of the handoffs -> the inside man's FACE -> VANE. SETS vane_confirmed.
+# (2) act_colm_drink — the 3-night drink ramp. A LOCATION canvas (NOT npc-bound — the engine allows only one repeatable
+# canvas per location+NPC+window, and the portrait bucket belongs to the hub; so the drink rides an npc_at_location
+# condition to stay present-gated to Colm's 19:00-23:59 window without competing for his portrait). is_repeatable +
+# max_triggers_per_day=1 = one drink per night; colm_drinks lt 3 retires it after 3. The [group] bands escalate:
+# 0 = business, 1 = testing, 2 = comfortable. Exit bumps colm_drinks +1, 60 min. At colm_drinks gte 3 the drink
+# retires and hub_colm_undertow (Colm's portrait) opens.
 [[canvases]]
-id          = "act_colm_drain"
-name        = "Get it out of him"
-description = "beat_0066. The Colm drain @underworld_bar. Player-initiated solo-link, is_repeatable + gated colm_found is_true + vane_confirmed is_false (one-shot in effect). Cold + fast: drinks -> drunk -> back room -> anal -> drain; his memory of the handoffs -> the inside man's FACE -> she recognizes VANE. Explicit at the ceiling, use-and-toss. SETS vane_confirmed (blackmail leverage, beat_0067; retires Story-Goal B)."
+id          = "act_colm_drink"
+name        = "Drink with Colm"
+description = "beat_0066. The 3-night drink ramp @underworld_bar. LOCATION canvas gated colm_found is_true + colm_drinks lt 3 + npc_at_location npc_colm is_present (present-gated without competing for the portrait bucket). is_repeatable + max_triggers_per_day=1 (one/night). [group] bands by colm_drinks (0 business / 1 testing / 2 comfortable). Exit +1 colm_drinks, 60 min. At colm_drinks gte 3 the drink retires and hub_colm_undertow opens."
 [canvases.trigger]
-location      = "underworld_bar"
-is_repeatable = true
-priority      = 3
-is_active     = true
+location             = "underworld_bar"
+is_repeatable        = true
+max_triggers_per_day = 1
+priority             = 5
+is_active            = true
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "colm_found",    operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "vane_confirmed", operator = "is_false" },
+  { type = "flag",  subject = "player", flag_key  = "colm_found",  operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "colm_drinks", operator = "lt", value = 3 },
+  { type = "npc_at_location", location_id = "underworld_bar", npc_id = "npc_colm", operator = "is_present" },
 ] }
 [[canvases.nodes]]
 id   = "base"
-name = "Get it out of him"
+name = "Colm"
 blocks = [
-  { type = "image", props = { file = "sex/colm_backroom.jpg", description = "A drunk man and a woman slipping into a dim back room of a bar.", search_queries = ["couple slipping into bar back room dim", "drunk man led away by woman bar hallway"] } },
-  { type = "paragraph", content = "It takes three rounds and a fourth he doesn't finish. Careful men drink careful right up until a warm hand walks up their thigh and tells them they've earned a night off. By the fourth he's laughing too loud and steering her toward the back like it was his idea." },
-  { type = "cascade", props = { beats = [
-    { advance_text = "Let him think he's winning.", blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "God, you're — nobody down here looks at me like— you sure? Because I'm nobody, I just run a route—" },
-        { type = "dialog", props = { speaker = "player" }, content = "A man who moves the whole city's secrets. Nobody's the last thing you are. Turn around." },
-    ] },
-    { advance_text = "Take him in the back.", blocks = [
-        { type = "paragraph", content = "She bends him over a case of empties and takes him from behind, one hand flat between his shoulders holding him down, and he's too drunk and too grateful to feel her other palm settle at the base of his skull — the way the drain likes to sit before it opens." },
-        { type = "paragraph", content = "He fucks like a man having the best night of his year. She lets him have it. She isn't here for the fuck." },
-    ] },
-    { advance_text = "Open the drain.", blocks = [
-        { type = "paragraph", content = "She takes him in the ass and lets the drain open under the shudder, and the whole compartmented, careful little mind of him comes loose down her arm — routes and drops and hand-offs, months of them, every pickup he's ever made." },
-        { type = "thought_bubble", props = { speaker = "player" }, content = "There. The inside contact. Not a name — Colm was never trusted with a name — a FACE, handing him a sealed packet at a loading dock, month after month. Narrow, nervous, careful. The face she sits three feet from at Calloway's elbow every single day. Vane. It's Vane." },
-    ] },
-  ] } },
+  { type = "image", props = { file = "scenes/colm_undertow.jpg", description = "A wary man drinking careful at a dim underworld bar, back to the wall.", search_queries = ["man alone dim bar back to wall night", "wary drinker underground bar corner"] } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "colm_drinks", operator = "eq", value = 0 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "First night, she takes the stool beside him and buys the round. Colm's all business — polite, careful, giving her nothing but the weather and the price of the drink." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "Appreciate the drink. But if you're selling something I'm not buying, and if you're asking something I'm not that either. Just a man having a quiet one." },
+    { type = "dialog", props = { speaker = "player" }, content = "No sell, no ask. Just the only man in here who still looks like he has a job worth keeping his mouth shut about." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "colm_drinks", operator = "eq", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Second night he clocks her before she sits — and lets her sit anyway. He's testing now: what she wants, why a woman like her keeps spending her evenings on a courier three stools from the door." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "Twice now. Nobody buys a man two nights running for the conversation. So what is it — you want something moved, or you want me?" },
+    { type = "dialog", props = { speaker = "player" }, content = "Would it cost me more if it were both?" },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "colm_drinks", operator = "eq", value = 2 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Third night he's saved her the stool. The guard's not gone — a careful man's guard never fully goes — but he's loose now, warm, leaning in to hear her over the room." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "You're the best part of my week, you know that. Whatever it is you actually want out of me, I'm starting not to care. Ask me nice enough and I'll probably just say yes." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "There it is. Three nights and the careful man's leaning into her hand. One more push and he isn't careful at all." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let him buy the last one."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 60
+effects = [
+  { targetType = "player", trait = "colm_drinks", op = "add", value = 1 },
+]
+
+# (3) hub_colm_undertow — the portrait hub (hub_calloway_fileroom shape). requires_npc + npc = npc_colm, gated
+# colm_found is_true + colm_drinks gte 3 (opens after the 3 drink nights). "Kiss him" -> .kiss (the colm_kisses 0->3
+# ramp, hesitant->done; retires at gte 3) then "Take him in the back" (the drain: first -> d0 setting vane_confirmed
+# + colm_drains_done->1; repeat -> done). vane_confirmed set on the CHOICE = LOCATED via this triggered hub.
+[[canvases]]
+id          = "hub_colm_undertow"
+name        = "Colm"
+description = "beat_0066. Colm's portrait hub @underworld_bar. requires_npc + npc = npc_colm, gated colm_found is_true + colm_drinks gte 3 (after the 3 drink nights). 'Kiss him' -> .kiss (colm_kisses 0->3 ramp: he stiffens -> warms -> stops flinching; retires at gte 3). 'Take him in the back' (colm_kisses gte 3): first (colm_drains_done lt 1) -> colm_drain_canvas.d0, SETS vane_confirmed (located via this triggered hub) + bumps colm_drains_done; repeat (gte 1) -> .done (pure power). No pose loop."
+[canvases.trigger]
+location      = "underworld_bar"
+requires_npc  = "npc_colm"
+npc           = "npc_colm"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "colm_found",  operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "colm_drinks", operator = "gte", value = 3 },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Colm"
+blocks = [
+  { type = "image", props = { file = "scenes/colm_undertow.jpg", description = "A wary man drinking with a woman leaning close at a dim underworld bar.", search_queries = ["man and woman close at dim bar night", "couple talking low underground bar"] } },
+  { type = "paragraph", content = "Colm's corner, and the stool he saves her now. Three nights of careful drinking have worn the careful most of the way off him; he watches the door out of habit and her out of want." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Kiss him."
+targetType = "node"
+nodeId     = "hub_colm_undertow.kiss"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "colm_kisses", operator = "lt", value = 3 },
+] }
+costs = [{ trait = "energy", value = 10 }]
+# ── Take him in the back = the drain. First (colm_drains_done lt 1) -> d0: SETS vane_confirmed (located here) + bumps
+# colm_drains_done. Repeat (gte 1) -> done (pure power). Gated colm_kisses gte 3 (he's stopped flinching). ──
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him in the back."
+targetType = "node"
+nodeId     = "colm_drain_canvas.d0"
+# NOT show_when_locked: hidden whenever its conditions fail — during the kiss grind (colm_kisses lt 3) AND after the
+# first drain (colm_drains_done gte 1, when the "again" repeat takes over). show_when_locked here re-emitted a stale
+# "he still flinches" line in the post-drain state (the lt-1 clause fails); the kiss node + the Colm ladder card
+# already signpost the back room, so no preview is lost.
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "colm_kisses",      operator = "gte", value = 3 },
+  { type = "trait", subject = "player", trait_key = "colm_drains_done", operator = "lt",  value = 1 },
+] }
+effects = [
+  { targetType = "player", trait = "colm_drains_done", op = "add", value = 1 },
+]
+flagEffects = [
+  { targetType = "player", flag = "vane_confirmed", op = "set" },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him in the back again."
+targetType = "node"
+nodeId     = "colm_drain_canvas.done"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "colm_drains_done", operator = "gte", value = 1 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave him to his drink."
+targetType = "location"
+locationId = "underworld_bar"
+
+[[canvases.nodes]]
+id   = "kiss"
+name = "Colm"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "colm_kisses", operator = "eq", value = 0 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She leans in and kisses him, slow, in the middle of the crowded bar. He goes stiff — a careful man's whole body saying not here, not smart, not safe — and pulls back an inch before he lets himself have even a second of it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "—not here. People see. You don't know who drinks in this room." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "colm_kisses", operator = "eq", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Second time he doesn't pull back as far. His hand comes up to her jaw like it decided on its own, and the careful takes a beat longer to win. He's warming — she can feel exactly where the guard thins." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "You're going to get me killed. ...Do it again." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "colm_kisses", operator = "eq", value = 2 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Third time he stops flinching entirely. He kisses her back like the room isn't there, one hand fisted in her coat, the careful drinker gone under a want he isn't managing anymore." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "There. The guard's off. One more lean and he'll follow her anywhere she points him — including the back, where the drain likes to work." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let him breathe."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "colm_kisses", op = "add", value = 1 },
+]
+
+# (4) colm_drain_canvas — the drain payloads (triggerless; prose only, effects live on the hub choice). d0 = the FIRST
+# back-room drain: he follows her back, she takes him and opens the drain, and his memory of the hand-offs gives her the
+# inside man's FACE -> she recognizes VANE (the vane_confirmed flag + colm_drains_done bump are set on the hub's
+# "Take him in the back" choice, located there). done = the repeatable pure-power use. NO pose loop — kiss straight to the back.
+[[canvases]]
+id          = "colm_drain_canvas"
+name        = "What he carries"
+description = "beat_0066. Triggerless Colm drain payloads, reached from hub_colm_undertow's 'Take him in the back' choices (vane_confirmed + colm_drains_done bump live on the choice). d0 = the first drain (back room + ass-drain -> his hand-off memory -> the inside man's FACE = VANE). done = the repeatable pure-power use. No effects on the nodes."
+[[canvases.nodes]]
+id   = "d0"
+name = "What he carries"
+blocks = [
+  { type = "image", props = { file = "sex/colm_backroom.jpg", description = "A man and a woman slipping into the dim back room of a bar.", search_queries = ["couple slipping into bar back room dim", "man led away by woman bar hallway night"] } },
+  { type = "paragraph", content = "He follows her into the back like it's his idea, past the empties and the dark. She bends him over a stacked case and takes him from behind, one hand flat between his shoulders holding him down, the other settling at the base of his skull — the way the drain likes to sit before it opens. He's too gone on her to feel the difference." },
+  { type = "paragraph", content = "She takes him in the ass and lets the drain open under the shudder, and the whole compartmented, careful little mind of him comes loose down her arm — routes and drops and hand-offs, months of them, every pickup he's ever made." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "There. The inside contact. Not a name — Colm was never trusted with a name — a FACE, handing him a sealed packet at a loading dock, month after month. Narrow, nervous, careful. The face she sits three feet from at Calloway's elbow every single day. Vane. It's Vane." },
   { type = "paragraph", content = "She leaves him face-down and snoring on the empties, his route still spilling out of him into nobody, and walks back up into the night with the one thing she came for. She has the rogue now. She just has to make him hand her the vault." },
 ]
 [canvases.nodes.exit_block]
@@ -9503,33 +9902,43 @@ text = "Go collect on Vane."
 [canvases.nodes.exit_block.config]
 destinationType = "specific"
 locationId      = "underworld_bar"
-flagEffects = [
-  { targetType = "player", flag = "vane_confirmed", op = "set" },
+[[canvases.nodes]]
+id   = "done"
+name = "The warm tap"
+blocks = [
+  { type = "paragraph", content = "He follows her back again because he can't not, and the drain fires the way it does now — no discovery left in it, just his Charge coming loose down her arm and the night going soft behind his eyes. He'll wake on the empties grateful and none the wiser, sure he had the best night of his week. In a way he did." },
 ]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave him to it."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_bar"
 
 # ═══ THE DOCS DEPARTMENT — the access problem, SEEN (division build-out; replaces the drain-2 access reveal) ═══
-# cap_docs_first_look: auto-fire @docs_department, first time she walks in (guard access_problem_seen is_false).
-# The front desk (Enns), the guards, the sealed vault past her clearance -> she SEES she can't get her file
-# herself. SETS access_problem_seen — the blackmail's new gate (replaces calloway_drains_done gte 2). Enns dialog.
+# cap_docs_first_look: auto-fire @docs_department, AFTER the first Calloway drain named the vault (gate
+# calloway_drains_done gte 1 + access_problem_seen is_false). She acts on his lead: goes to the vault he gave up,
+# and sees the WALL herself — front desk (Enns), guards, two-man clearance. SETS access_problem_seen (the blackmail
+# gate). rev 84: gated behind the drain so the WHERE comes from Calloway, the WALL from Wren. Enns dialog.
 [[canvases]]
 id          = "cap_docs_first_look"
 name        = "As far as her badge goes"
-description = "Division build-out. First look at the docs department @docs_department. Auto-fire, pri 9, one-shot, gated calloway_met is_true + access_problem_seen is_false. Enns at the desk, guards, the sealed vault past her clearance -> she sees she can't get the file herself; needs one of the cleared few. SETS access_problem_seen (the blackmail gate). Dialog-carried."
+description = "First look at the docs department @docs_department. Auto-fire, pri 9, one-shot, gated calloway_drains_done gte 1 (the first drain named the vault) + access_problem_seen is_false. She acts on Calloway's lead -> sees the WALL herself: Enns at the desk, guards, two-man clearance, can't get the file alone; needs one of the cleared few. SETS access_problem_seen (the blackmail gate). rev 84 re-gate: WHERE from Calloway's drain, WALL from Wren. Dialog-carried."
 [canvases.trigger]
 location      = "docs_department"
 is_repeatable = false
 priority      = 9
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "calloway_met",        operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "access_problem_seen", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "calloway_drains_done", operator = "gte", value = 1 },
+  { type = "flag",  subject = "player", flag_key  = "access_problem_seen",  operator = "is_false" },
 ] }
 [[canvases.nodes]]
 id   = "base"
 name = "As far as her badge goes"
 blocks = [
   { type = "image", props = { file = "scenes/docs_department.jpg", description = "A glass archive department with a front desk, guards, and a sealed vault door.", search_queries = ["secure archive room glass front desk guard", "vault door corporate records office night"] } },
-  { type = "paragraph", content = "The docs department is everything Calloway's file room isn't: glass, logged, watched. This is where the files that matter actually live — the official archive, the deep vault — and the natural place to look for a thing Mercer wanted badly enough to plant her for." },
+  { type = "paragraph", content = "Calloway gave it up under the drain — the deep vault, down here — so she comes to see it for herself. The docs department is everything his file room isn't: glass, logged, watched. This is where the files that matter actually live, and where whatever Mercer planted her to fetch is sitting, behind a door with her name nowhere near the list." },
   { type = "cascade", props = { beats = [
     { advance_text = "Try the vault.", blocks = [
         { type = "paragraph", content = "She badges toward the vault like she belongs there. The reader blinks red. A guard steps half a pace to fill the gap — not even unfriendly about it." },
@@ -9612,8 +10021,11 @@ name = "Collect on the rogue"
 blocks = [
   { type = "image", props = { file = "scenes/vane_cornered.jpg", description = "A nervous man cornered in a dim stairwell by a woman blocking the way.", search_queries = ["man cornered dim stairwell tense night", "woman blocking nervous man office stairwell"] } },
   { type = "paragraph", content = "She catches Vane on the back stairs, where the cameras don't reach and Calloway never goes, and doesn't waste the opening on hello." },
+  # ONE cascade, exit LAST (rev 86): the two old cascades + the wedged paragraph + the trailing thought are folded into a
+  # single drip so nothing renders below the "Get to Mercer" link (and the exit splices ONCE, not twice). beat[0] = no
+  # advance (renders as lead); the closing thought = the terminal beat (no advance). See toml-gotchas "cascade must be last".
   { type = "cascade", props = { beats = [
-    { advance_text = "Name what you know.", blocks = [
+    { blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "A courier at the Undertow gave you up. Not your name — he never had it — your face. Handing him sealed pulls at the loading dock, month after month. Two years Calloway's chased his ghost, and it's been at the next desk the whole time." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_vane" }, content = "You don't— that's nothing. That's a drunk in a bar, you've got a face and a feeling and no—" },
     ] },
@@ -9625,9 +10037,9 @@ blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "You pull my file, or the auditor gets your face by morning and it climbs to the Chairman by noon. You know what he does with a leak. My way, you're a man who did a quiet favour. The other way, you're an example." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_vane" }, content = "...One file. One. And then I have never met you." },
     ] },
-  ] } },
-  { type = "paragraph", content = "It takes him two days and a clearance that isn't his to use. He brings it to the same dead stairwell — a thin sealed folder — and his hands aren't steady." },
-  { type = "cascade", props = { beats = [
+    { advance_text = "Wait for the file.", blocks = [
+        { type = "paragraph", content = "It takes him two days and a clearance that isn't his to use. He brings it to the same dead stairwell — a thin sealed folder — and his hands aren't steady." },
+    ] },
     { advance_text = "Take the file.", blocks = [
         { type = "paragraph", content = "She has it: the thing Mercer sent her for, and the thing she's wanted in her own hands since she learned it was in this building. A Vance humanoid-program file — about her kind, maybe about her. Light enough to be nothing. She doesn't open it. Not here." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_vane" }, content = "Don't read it here. And listen — pulling that tripped something. There's a flag on the deep-vault log I can't clear, and somebody's already asking who signed it out." },
@@ -9636,8 +10048,10 @@ blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "Calloway's watcher. He never trusted me either." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_vane" }, content = "Whoever it is, it climbs — and it climbs to the man who ends people for less than this. I'm gone tonight. The Reach, then further. You should be too. What you just did isn't the kind of thing you get to stay for." },
     ] },
+    { blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "So it's blown. Fine. She has the file and a night's head start, and a man who ends betrayers is now aimed at everyone who touched this — Vane, and the fool up the chain who sent her in. She'd better reach Mercer before the news does." },
+    ] },
   ] } },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "So it's blown. Fine. She has the file and a night's head start, and a man who ends betrayers is now aimed at everyone who touched this — Vane, and the fool up the chain who sent her in. She'd better reach Mercer before the news does." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -9675,8 +10089,10 @@ name = "Nobody wants it now"
 blocks = [
   { type = "image", props = { file = "scenes/mercer_panic.jpg", description = "A sweating man in an expensive apartment stuffing papers into a bag, city lights behind him.", search_queries = ["man packing bag panic luxury apartment night", "nervous man shredding papers penthouse city lights"] } },
   { type = "paragraph", content = "She comes up to the penthouse with the file to close the job — and finds Mercer on the wrong side of his own desk, a bag open on the glass, feeding paper into a shredder that can't keep up." },
+  # ONE cascade, exit LAST (rev 86): the trailing thought + closing paragraph are folded in as a final beat so nothing
+  # renders below the "End of the line" link. beat[0] = no advance (renders as lead). See toml-gotchas "cascade must be last".
   { type = "cascade", props = { beats = [
-    { advance_text = "Hold up the file.", blocks = [
+    { blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "It's done. Deep vault, clean pull. Everything you sent me in there for." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Get it away from me. God — do you have any idea what you kicked over? A deep-vault flag with my asset's fingerprints on it, and it is climbing, and it does not stop until it reaches Vance himself." },
     ] },
@@ -9684,16 +10100,18 @@ blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "You wanted this file for a year. Now you won't touch it." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "I wanted it when it was a clever little edge. It's a noose now. The Chairman doesn't discipline, he disappears people — I've watched him do it. I will not be standing here when he comes asking who ran an asset into his archive. Keep the file. Burn it. I don't care. I'm gone." },
     ] },
+    { advance_text = "Take the file and go.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "So the man who owns her is running, and the thing he sent her to steal is in her hands with nowhere to go — which suits her, because she was never going to hand it over. It's hers. What she is, or close to it. She'll read it when there's time to bleed." },
+        { type = "paragraph", content = "She watches Mercer pack his whole life into one bag and does the only math that matters: he still holds the controller for the leash sealed into her core. She can't cut it, and she can't lose him. So she isn't running from the Chairman. She's getting Mercer out — and taking the key on the way. They take the car down — out of the tower, past the docks, into the half of the city that doesn't come up in daylight. The Spire locks shut behind them: sweeps on every floor now, her face on every camera. No ride back up. Only down, from here." },
+    ] },
   ] } },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "So the man who owns her is running, and the thing he sent her to steal is in her hands with nowhere to go — which suits her, because she was never going to hand it over. It's hers. What she is, or close to it. She'll read it when there's time to bleed." },
-  { type = "paragraph", content = "She watches Mercer pack his whole life into one bag and does the only math that matters: he still holds the controller for the leash sealed into her core. She can't cut it, and she can't lose him. So she isn't running from the Chairman. She's getting Mercer out — and taking the key on the way." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "End of the line — for now."
+text = "Get Mercer out — down to the Reach."
 [canvases.nodes.exit_block.config]
 destinationType = "specific"
-locationId      = "penthouse"
+locationId      = "the_waterfront"
 flagEffects = [
   { targetType = "player", flag = "archive_1a_done", op = "set" },
 ]
@@ -9701,12 +10119,12 @@ flagEffects = [
 # ── Quests page — Story-Goals spine (Tier 1, no npc_id). A = the retargeted Salvage card (above). B/C/D here.
 # Flag-milestone chain, one card live at a time (exclusive by flags). ──
 # B — find the leak (v2): after access, the next goal = confirm the how + the who. Gated calloway_believes is_true
-# + vane_confirmed is_false (the setter = act_colm_drain, beat_0066, BUILT). C (get the file) + D (the 1a end +
-# Patreon boundary) REBUILD with their beats (0067 / the ending rework).
+# + vane_confirmed is_false (the setter = hub_colm_undertow's back-room choice, beat_0066). C (get the file) + D
+# (the 1a end + Patreon boundary) REBUILD with their beats (0067 / the ending rework).
 [[quest_cards]]
 priority   = 10
 text       = "You're all the way into his hunt now. Two years he's chased a leak with nothing to show — no theft, no gap, just secrets bleeding out of a company that never loses a page. Find the how, and the who."
-tip        = "Work the case with Calloway until the shape shows — an inside man, an off-book pipe. Walk Vance's own archive too, the docs department, so you see the wall between you and your file. Then take it to your own turf: the Undertow, down in the Reach, where the kind of courier who'd run it drinks."
+tip        = "Work the case with Calloway until the shape shows — an inside man, an off-book pipe. Then take it to your own turf: down at the Undertow, ask Sol who runs the carry — he'll name Colm. Drink the courier loose over a few nights, then take him in the back; his drained memory hands you the rogue's face."
 when = [
   { flag = "calloway_believes", op = "is_true"  },
   { flag = "vane_confirmed",    op = "is_false" },
@@ -9716,7 +10134,7 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "You have the rogue: Vane, at Calloway's elbow the whole time, cleared for the deep vault where your file's kept. Make him pull it — then get it out of the building and up to Mercer before the Chairman's people ask who signed out the vault."
-tip        = "At Vance Securities, corner Vane — you've got him cold (the courier, the dock, the dates), and he's cleared for the vault you can't enter. Trade his silence for your file, then take it to Mercer at the penthouse. (If you haven't stood at that vault yet, walk the docs department first — you need to know what you're making him open.)"
+tip        = "At Vance Securities, corner Vane — you've got him cold (the courier, the dock, the dates), and he's cleared for the vault you can't enter. Trade his silence for your file, then take it to Mercer at the penthouse. (Need the vault first? Take Calloway all the way — the drain is where he gives up where your file's kept — then go stand at that vault yourself.)"
 when = [
   { flag = "vane_confirmed",  op = "is_true"  },
   { flag = "archive_1a_done", op = "is_false" },
@@ -9761,7 +10179,7 @@ goals = [
 priority   = 11
 npc_id     = "npc_calloway"
 text       = "The catch is past. Take him all the way — the one place your power still works, on a man who isn't the one who owns you."
-tip        = "The loop's open: Take him — all the way. The anal finish is the drain."
+tip        = "The loop's open: Take him — all the way. The anal finish is the drain — and the drain is how you get him to give up where your file's kept."
 when = [
   { flag = "calloway_flinch_resolved", op = "is_true"  },
   { flag = "calloway_fucked_once",     op = "is_false" },
@@ -9772,10 +10190,57 @@ goals = [
 [[quest_cards]]
 priority   = 11
 npc_id     = "npc_calloway"
-text       = "He's yours — the last true believer in a dying division, and he'll never know the woman he trusts is the reason it's ending. Keep him blind, keep him close, and open the drain whenever it's hungry."
-tip        = "The loop's open — take him whenever you want. The anal finish fires the drain: pure power, your warm tap. It's not how you get the file (that's Vane's clearance and the vault) — it's how you keep Calloway yours while you work everyone else."
+text       = "He's yours — the last true believer in a dying division, and he'll never know the woman he trusts handed you the way to your own file. Keep him blind, keep him close, and open the drain whenever it's hungry."
+tip        = "The loop's open — take him whenever you want. The first drain already gave you the where (the deep vault in docs); every one after is pure power — your warm tap, and your hold on him while you work everyone else."
 when = [
   { flag = "calloway_fucked_once", op = "is_true" },
+]
+
+# ── Quests page — Colm's section (Tier 2, npc_id). Stepped by the drink/kiss/drain counters, one card at a time
+# (exclusive). Starts once Sol names him (colm_found); before that the Story-Goal B card carries the "ask Sol" step. ──
+[[quest_cards]]
+priority   = 11
+npc_id     = "npc_colm"
+text       = "The careful courier. He carries the leak down to the buyer — and he's the one man who's seen the inside contact's face. He won't be rushed and won't be bought; he has to be worn down. Start by drinking with him."
+tip        = "At the Undertow, buy Colm a drink — but he only nurses one a night, so come back on separate evenings (he's in from seven). Three nights of it and the careful comes down."
+when = [
+  { flag  = "colm_found",  op = "is_true" },
+  { trait = "colm_drinks", subject = "player", op = "lt", value = 3 },
+]
+goals = [
+  { trait = "colm_drinks", subject = "player", op = "gte", value = 3, label = "Drink him loose (three nights)" },
+]
+[[quest_cards]]
+priority   = 11
+npc_id     = "npc_colm"
+text       = "Three nights in and the careful man leans into your hand. Get past the guard now — kiss him, in the middle of his own bar, until he stops flinching at it."
+tip        = "In Colm's hub: Kiss him. He stiffens the first time, warms the second, stops flinching the third. Then the back room opens."
+when = [
+  { trait = "colm_drinks", subject = "player", op = "gte", value = 3 },
+  { trait = "colm_kisses", subject = "player", op = "lt",  value = 3 },
+]
+goals = [
+  { trait = "colm_kisses", subject = "player", op = "gte", value = 3, label = "Kiss the careful out of him" },
+]
+[[quest_cards]]
+priority   = 11
+npc_id     = "npc_colm"
+text       = "He'll follow you anywhere now. Take him in the back — the drain's the point, and his drained memory of the hand-offs is the one thing he carries that you actually came for: the inside man's face."
+tip        = "In Colm's hub: Take him in the back. The drain opens on the finish and his memory gives up the rogue — you'll know the face."
+when = [
+  { trait = "colm_kisses",      subject = "player", op = "gte", value = 3 },
+  { trait = "colm_drains_done", subject = "player", op = "lt",  value = 1 },
+]
+goals = [
+  { trait = "colm_drains_done", subject = "player", op = "gte", value = 1, label = "Take him in the back (the drain)" },
+]
+[[quest_cards]]
+priority   = 11
+npc_id     = "npc_colm"
+text       = "You have the rogue's face, and a courier who'll never know he gave it to you. Colm's a warm tap now — come back and open the drain whenever it's hungry. Your business is with Vane."
+tip        = "Colm's done as a lead — the back room's yours whenever you want it, pure power now. Take what you learned to Vane at Vance Securities."
+when = [
+  { trait = "colm_drains_done", subject = "player", op = "gte", value = 1 },
 ]
 
 # ══════════════════════════════════════════════════════════════════
@@ -10042,5 +10507,9 @@ flagEffects = [
   { targetType = "player", flag = "salvage_done",       op = "set" },
   { targetType = "player", flag = "mission_3_active",   op = "set" },
   { targetType = "player", flag = "salvage_relaunched", op = "set" },
+]
+# Cover port — land testers IN cover so "one click into Vance -> cap_archive_cover" (the jump's promise) holds.
+wardrobeEffects = [
+  { action = "equip", item_id = "cover_analyst" },
 ]
 

@@ -99,6 +99,14 @@ type = "choices"
 text       = "Ride up to the Spire."
 targetType = "node"
 nodeId     = "activity_travel_to_spire.riding_spire"
+# THE ARCHIVE 1a seal (Phase 2): once she's blown (archive_1a_done), the ride up is dead — greyed-visible with the
+# security line so the block reads on the try. locked_text is written FOR the locked (post-blowup) state, so it's
+# never stale (cf. toml-gotchas show_when_locked trap — that trap is a consumed is_false clause showing a PRE-state).
+show_when_locked = true
+locked_text = "The Spire's sealed to her now — sweeps on every floor, her face on every camera at the curb. Going up is walking into the net. There's no ride back."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
+] }
 # Down under the docks to the underworld gate — local descent, no car; gated opening_done.
 [[canvases.nodes.exit_block.choices]]
 text       = "Down under the docks — the Underworld."
@@ -169,6 +177,12 @@ type = "choices"
 text       = "Ride up to the Spire."
 targetType = "node"
 nodeId     = "activity_travel_from_gate.riding_up"
+# THE ARCHIVE 1a seal (Phase 2): blown = no way back up to the Spire. Greyed-visible; the Reach ride below stays open.
+show_when_locked = true
+locked_text = "Not up there. The Spire's locked down over her — the towers are the one place she can't go now."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
+] }
 [[canvases.nodes.exit_block.choices]]
 text       = "Up to the Reach."
 targetType = "node"
