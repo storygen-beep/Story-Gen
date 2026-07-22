@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 69,
+  "book_revision": 79,
   "register": {
     "person": "third"
   },
@@ -182,7 +182,7 @@
         "the belief-lever spine (Renner double-lock reused: relation=belief/access, corruption=surrender, arousal=loop throttle)",
         "the 5-rung locked-visible ladder + the he-flinches throttle (the one hard non-lewd gate)",
         "the sex loop → anal-finish drain (Renner pattern reused)",
-        "the two load-bearing drains via calloway_drains_done, a TRAIT bumped on the triggerless drain canvas (0→\"where?/nothing\"; 1 + theft2_done→\"big chunk stolen\"; counter reaches 2); downstream reads calloway_drains_done>=2 — NO big_chunk_known flag (a flag set mid-loop would hard-fail the validator)",
+        "the two load-bearing drains via calloway_drains_done, a TRAIT bumped on the triggerless drain canvas (0→surface: he's certain the section's safe; 1→depths: it's already gone, lifted days ago by an inside job, her file in it; counter reaches 2); downstream reads calloway_drains_done>=2 — NO theft2_done, NO big_chunk_known flag (a flag set mid-loop would hard-fail the validator)",
         "the bug proposal (cap_calloway_bug → bug_planted + calloway_believes/access)",
         "the betrayal → calloway_reported (the 1b fuse)"
       ],
@@ -202,7 +202,7 @@
       "arc": "mercenary mole — two thefts → caught at the 1b deal → kept as asset",
       "designed": [
         "theft #1 (moves the bug → underworld drop → destroys the bug there)",
-        "theft #2 (the big chunk w/ her build file; triggered by her closeness to Calloway, seduction mid-band)",
+        "theft #2 (the big chunk w/ her build file; an inside job Vane covered, days before — NO scene, NO flag; surfaces only in Wren's drain #2)",
         "the 1b seller / mole reveal (Calloway's own man)",
         "caught + kept alive as asset (the thread toward the buyer)"
       ],
@@ -1115,7 +1115,7 @@
     },
     {
       "id": "beat_0056",
-      "title": "The Archive 1a — scaffold + systems",
+      "title": "The Archive 1a — scaffold rework (v2): npc_vane recast + npc_colm declared  [flag-drops moved to beat_0059 demolition]",
       "status": "validated",
       "target_phase": "5_scenes.toml",
       "introduces": [
@@ -1130,12 +1130,11 @@
         "calloway_fucked_once",
         "calloway_reported",
         "bug_traced",
-        "theft2_done",
         "deal_place_known",
         "calloway_drains_done (trait)"
       ],
       "canvases": [
-        "scaffold ONLY — declare npc_calloway (portrait triad) + npc_vane (minimal, schedule-less); vance_securities location + its salvage_relaunched lock (entry_conditions + blocked_message, version=1.0); the new flags (NO big_chunk_known) + the calloway_drains_done hidden counter. NO story canvas. Green build; locations LOCKED."
+        "SCAFFOLD REWORK (v2, rev 73, GREEN): npc_vane RECAST to v2 (trusted teammate, on-screen/blackmailed, copies-not-thefts — description+comment rewritten) + npc_colm DECLARED (courier: def + relation/corruption/arousal triad + arc_stages, schedule-less forward declaration; his schedule@underworld_bar + hub come WHOLE at beat_0066). npc_calloway + vance_securities lock + calloway_drains_done kept as-is. The bug_*/deal_place flag DROPS + old-canvas DELETIONS are PAIRED with their content beats (the demolition rides the belief-capstone rework, beat_0059). merge OK (648KB), package --dev GREEN, flag chains valid, both NPCs in $npcs."
       ]
     },
     {
@@ -1152,32 +1151,38 @@
     },
     {
       "id": "beat_0058",
-      "title": "The Archive 1a — Calloway meet + hub",
+      "title": "The Archive 1a — Calloway meet + hub + the case-work staged reveals (v2)",
       "status": "validated",
       "target_phase": "5_scenes.toml",
       "introduces": [
-        "npc_calloway schedule @vance_securities 08:00-20:00"
+        "npc_calloway schedule @vance_securities 08:00-20:00",
+        "case_progress (trait)",
+        "case_insider_seen",
+        "case_curated_seen",
+        "pipe_known"
       ],
       "canvases": [
         "cap_calloway_meet (auto-fire @vance_securities, pri 10, one-shot, gated archive_started is_true + calloway_met is_false, NO requires_npc so it fires on plain entry post-cover — no off-hours soft-lock): the guarded first contact; his want (starving to be believed) spoken first, she takes the hunt seriously, guard cracks a hair; dialog-carried 0.94:1; SETS calloway_met.",
-        "hub_calloway_fileroom (L1 PORTRAIT hub @vance_securities, requires_npc + npc = npc_calloway, is_repeatable, pri 4, gated calloway_met is_true; presence via the schedule): file-room register + the UNGATED 'Believe him' relation feeder -> .believe node -> exit ADDS npc_calloway.relation +3 + 60 min (the belief/access odometer, Calloway's analog of Renner's work; paces vs his window). The seduction rungs surface here at beat_0061.",
-        "1_metadata: npc_calloway [[npcs.schedules]] @vance_securities 08:00-20:00 all week (orphan-safe, after arc_stages)."
+        "hub_calloway_fileroom (L1 PORTRAIT hub @vance_securities, requires_npc + npc = npc_calloway, is_repeatable, pri 4, gated calloway_met is_true; presence via the schedule): file-room register + TWO UNGATED relation feeders into the belief/access odometer (Calloway's analog of Renner's work; paces vs his window): 'Talk to him' -> .talk (+2 relation, he opens up about the ghost) and 'Work the case' -> .work (+3 relation, she does the analyst cover-work no minder bothered with; belief-in-action). Each 60 min. The seduction rungs surface here at beat_0061.",
+        "1_metadata: npc_calloway [[npcs.schedules]] @vance_securities 08:00-20:00 all week (orphan-safe, after arc_stages).",
+        "CASE-WORK STAGED REVEALS (v2 extend, beat_0058): case_progress (hidden trait, +1 per 'Work the case' .work exit) drives 3 auto-fire one-shots @vance_securities (pri 7): cap_case_insider (cp>=2, dialog: 'nobody broke in -> an inside job') -> cap_case_curated (cp>=4, PRIVATE thought_bubble: the hunt's been curated from inside by a trusted teammate, she conceals it) -> cap_case_pipe (cp>=6 + calloway_believes, her underworld read: an off-book courier pipe to the Reach -> the Undertow; SETS pipe_known = the hook to the Colm work, beat_0066). The detective legwork that makes the leak legible; incremental, grind-driven, no gadget."
       ]
     },
     {
       "id": "beat_0059",
-      "title": "The Archive 1a — the bug proposal",
+      "title": "The Archive 1a — the access capstone (v2, replaces the bug proposal) + the gadget-chain demolition",
       "status": "validated",
       "target_phase": "5_scenes.toml",
       "introduces": [],
       "canvases": [
-        "cap_calloway_bug (auto-fire capstone @vance_securities, pri 9, one-shot, gated calloway_met is_true + npc_calloway.relation gte 15 + bug_planted is_false, version=1.0): she pitches locator-tags on the sensitive docs (tag it, let the thief carry it out); the disbelieved hunter, handed a real method + finally believed, approves — the belief-lever peak ('thanks, for treating it like it's real' = being believed, NOT warmth). SETS bug_planted (opens beat_0060's trace) + calloway_believes (the access axis beat_0061's lewd rungs double-lock on). Dialog-carried 0.31:1. relation>=15 = 5 'Believe him' feeds (belief-fast)."
+        "cap_calloway_access (v2, REPLACES cap_calloway_bug; auto-fire capstone @vance_securities, pri 9, one-shot, gated calloway_met is_true + npc_calloway.relation gte 15 + calloway_believes is_false): NO gadget — after weeks of belief + case-work the disbelieved man brings her ALL the way into his hunt (the sealed side, the real access); the belief-lever peak (finally trusting someone with it). SETS calloway_believes ONLY (access; unlocks the rungs, beat_0061). Dialog-carried. relation>=15 via the two hub feeders.",
+        "DEMOLITION (paired, same increment, GREEN): DELETED cap_calloway_bug (the bug proposal) + cap_bug_moved + inv_underworld_drop (beat_0060 bug-trace) + amb_bastien_overhear + cap_deal_place (beat_0063 overhear/deal-spy) + cap_calloway_reported (the old 1a-close). The bug_planted/bug_moving/bug_traced/deal_place_known flags are GONE (0 in 5_scenes); calloway_reported has no reader (clean). Quests: Story-Goal B REWORKED (find-the-leak, gated calloway_believes is_true + vane_confirmed is_false); C+D DELETED (rebuild with beat_0067 / the ending); the Calloway ladder card-1 tip de-bugged. calloway_believes re-homed to cap_calloway_access so the rungs (beat_0061) stay green."
       ]
     },
     {
       "id": "beat_0060",
-      "title": "The Archive 1a — bug-trace + underworld drop",
-      "status": "validated",
+      "title": "The Archive 1a — bug-trace + underworld drop  ⚠️ REMOVED in v2 (the whole tracker chain is cut — copies-not-theft)",
+      "status": "removed",
       "target_phase": "5_scenes.toml",
       "introduces": [
         "bug_moving"
@@ -1189,34 +1194,33 @@
     },
     {
       "id": "beat_0061",
-      "title": "The Archive 1a — the seduction ladder + theft #2",
+      "title": "The Archive 1a — the seduction ladder",
       "status": "validated",
       "target_phase": "5_scenes.toml",
       "introduces": [],
       "canvases": [
         "hub_calloway_fileroom (EXTENDED): +2 locked-visible rung choices, double-locked on calloway_believes + npc_calloway.corruption band, each +3 corruption + 15 Charge; 'Get close to him' (corruption gte 0) -> rung_calloway_contact; 'Take him in your mouth' (gte 6, sets calloway_oral_once) -> rung_calloway_oral.",
         "rung_calloway_contact + rung_calloway_oral (TRIGGERLESS rungs, +180 min exit, [group] bands deepen by corruption): belief-lever, cold-instrumental; contact = the hand on his chest (RELIEF not lust); oral explicit at the ceiling ('makes a man feel safe while she takes him apart' / 'swallows it and calls it access').",
-        "cap_calloway_flinch (#6 THROTTLE, auto-fire @vance_securities pri 6, gated calloway_oral_once + corruption gte 12 + guard): the disbelieved man's terror ('why you, who sent you' = closest to the truth) -> she re-anchors his belief, the suspicion stops winning -> SETS calloway_flinch_resolved (unlocks the loop, beat_0062). Non-lewd, dialog-carried 0.62:1.",
-        "cap_theft2 (#W3 BIG THEFT, auto-fire @vance_securities pri 7, gated corruption gte 9 [mid-band] + bug_traced + theft2_done is_false): Vane, spooked she's getting close, lifts the big chunk; OBLIQUE (Wren sees a minor gap, files it under nothing, 'doesn't yet know she's just filed away her own' — the drain reveals the scale + her stake); solo; SETS theft2_done (hard-gates drain 2)."
+        "cap_calloway_flinch (#6 THROTTLE, auto-fire @vance_securities pri 6, gated calloway_oral_once + corruption gte 12 + guard): the disbelieved man's terror ('why you, who sent you' = closest to the truth) -> she re-anchors his belief, the suspicion stops winning -> SETS calloway_flinch_resolved (unlocks the loop, beat_0062). Non-lewd, dialog-carried 0.62:1."
       ]
     },
     {
       "id": "beat_0062",
-      "title": "The Archive 1a — the sex loop + the two drains",
+      "title": "The Archive 1a — the sex loop + the two drains (payloads reworked v2: power + WHERE, not the theft)",
       "status": "validated",
       "target_phase": "5_scenes.toml",
       "introduces": [],
       "canvases": [
         "hub #7 loop-entry rung 'Take him — all the way' (gated calloway_believes + calloway_flinch_resolved + corruption gte 18; resets 5 loop traits + SETS calloway_fucked_once) -> loop_calloway_sex.",
         "loop_calloway_sex (triggerless: intro + oral/vaginal/anal poses, loop_npc_pleasure climb, climax-elect >=50; belief-lever/cold; the anal finish IS the drain).",
-        "loop_calloway_finisher (triggerless; [group] by sex_finisher_type; facial/inside reset+exit; ANAL branches — counter calloway_drains_done bumped HERE as a TRAIT, all (drains_done,theft2_done) states covered exactly once: 0->d0 (bump), 1+theft2_done->d1 (bump=the discovery, drains_done reaches 2), 1+!theft2_done->d0_again (no bump, edge), >=2->done; NO weapon-charge gate (plot-reliable); NO big_chunk_known flag).",
-        "calloway_drain_canvas (triggerless payloads: d0 'where?->nothing' + the ~10-min wipe; d1 'a big chunk was stolen, her build file was in it' = the discovery, dread-first, she's sure who buys it = Bastien instinct; d0_again edge nudge; done)."
+        "loop_calloway_finisher (triggerless; [group] by sex_finisher_type; facial/inside reset+exit; ANAL branches — counter calloway_drains_done bumped HERE as a TRAIT, every drains_done state covered exactly once: 0->d0 (bump), 1->d1 (bump, drains_done reaches 2), >=2->done; NO weapon-charge gate). v2: the drain is HER POWER, NOT detection.",
+        "calloway_drain_canvas (triggerless payloads, v2 REWORK — power + WHERE + keeping him blind, NOT the theft-discovery): d0 = WHERE her file is (the sealed vault under the division, past what she can badge into); d1 = the access problem (two-man clearance rotates weekly, past even his level -> she can't reach it alone, she'll need an insider she can bend = the hook to blackmailing Vane); done = both taken. Card-4 tip + finisher choice labels re-pointed to the WHERE/access, not the old theft."
       ]
     },
     {
       "id": "beat_0063",
-      "title": "The Archive 1a — the Bastien-spying",
-      "status": "validated",
+      "title": "The Archive 1a — the Bastien-spying  ⚠️ REMOVED in v2 (overhear/deal-spy cut; replaced by the Colm sub-arc + blackmail-Vane)",
+      "status": "removed",
       "target_phase": "5_scenes.toml",
       "introduces": [],
       "canvases": [
@@ -1226,14 +1230,14 @@
     },
     {
       "id": "beat_0064",
-      "title": "The Archive 1a — betrayal seed + Quests page",
+      "title": "The Archive 1a — the 1a close (Mercer panics, she keeps the file) + Quests spine (v2)",
       "status": "validated",
       "target_phase": "5_scenes.toml",
       "introduces": [],
       "canvases": [
-        "cap_calloway_reported (the 1a-CLOSE, auto-fire @vance_securities pri 5, one-shot, gated deal_place_known is_true + calloway_reported is_false): she sees Calloway one last time (he believes, no idea); she leaves knowing he'll do the math + report the analyst who used him, and the report climbs toward whoever bought her the cover (Mercer) = the 1b fuse; fallout NOT engineered (Mercer's motive is the 1b build-file read); RTS-flat capstone interior; SETS calloway_reported. 1a-complete = deal_place_known + calloway_reported.",
-        "Quests page: Story-Goals spine A/B/C/D (A = the RE-TARGETED Salvage frontier card — leash context kept, 'next release'+Patreon MOVED to D, retires at calloway_believes; B trace docs; C find the buyer; D = the 1a END card w/ the build boundary + Patreon, a flag-goal handoff not a met-numeric). Verified EXACTLY ONE live per state.",
-        "Calloway's stepped ladder (4 cards, npc_id=npc_calloway, exclusive by flags): earn his belief (relation gte 15) -> get under his guard (corruption gte 12) -> break him open (gte 18) -> drain him twice (calloway_drains_done gte 2). Lever in each goal label (sidebar next-row parity)."
+        "cap_1a_close (v2, REPLACES cap_calloway_reported; auto-fire capstone @penthouse, pri 9, one-shot, gated docs_retrieved is_true + archive_1a_done is_false): she brings Mercer the file to hand over, but he's PANICKING (the deep-vault flag climbed with his asset's fingerprints, the Chairman's eye turned, the trail lands on HIM); he doesn't want the docs, wants to run ('keep it, burn it, I'm gone'); she KEEPS it (hers now — 'what she is, or close to it'; she does NOT open it, the SUBJECT-reveal is 1b); the 1b hook = Mercer holds her leash controller so she's not running from the Chairman, she's getting Mercer out + 'taking the key on the way'. SETS archive_1a_done (the 1a-complete signal). Dialog-carried.",
+        "Quests page: Story-Goals spine A/B/C/D REDONE for the v2 flags, exactly one live per state (verified): A = retargeted Salvage frontier card (retires at calloway_believes); B = find-the-leak (calloway_believes is_true -> vane_confirmed is_false); C = get-the-file+get-it-out (vane_confirmed is_true -> archive_1a_done is_false, spans the retrieval AND the run to Mercer = no blank sidebar); D = the 1a END card w/ the build boundary + Patreon (archive_1a_done is_true), a flag-goal handoff.",
+        "Calloway's stepped ladder (4 cards, npc_id=npc_calloway, exclusive by flags) UNCHANGED + survives: earn his belief (relation gte 15) -> get under his guard (corruption gte 12) -> break him open (gte 18) -> drain him twice (calloway_drains_done gte 2). Card-1 tip de-bugged + card-4 re-pointed to WHERE/access at earlier increments."
       ]
     },
     {
@@ -1244,6 +1248,34 @@
       "introduces": [],
       "canvases": [
         "find-media for the new Calloway + world scenes (search_queries at authoring; engine silent-skips missing); the SHIP build (--video-folder, NO --dev/--debug); grep output/index.html for IMAGE/VIDEO MISSING == 0 before any deploy."
+      ]
+    },
+    {
+      "id": "beat_0066",
+      "title": "The Archive 1a — the Colm sub-arc (NEW, v2)",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "introduces": [
+        "npc_colm",
+        "colm_found",
+        "vane_confirmed"
+      ],
+      "canvases": [
+        "cap_colm_meet (auto-fire @underworld_bar, pri 8, one-shot, gated pipe_known is_true + colm_found is_false): she comes to the Undertow hunting the pipe, clocks the courier Colm (schedule-less, dialog speaker like Vane/Bastien), opens him; SETS colm_found.",
+        "act_colm_drain (solo-link @underworld_bar, is_repeatable + colm_found is_true + vane_confirmed is_false = one-shot): the COLD/FAST seduce+drain (drinks -> drunk -> back room -> anal -> drain), explicit at the ceiling, use-and-toss; his drained memory of the handoffs -> the inside man's FACE -> she recognizes VANE (the man at Calloway's elbow); SETS vane_confirmed (blackmail leverage beat_0067; retires Story-Goal B). npc_colm stays SCHEDULE-LESS (no dead-presence; refined from the 'scheduled hub' framing since he's a use-and-toss NPC with no arc). The DETECTION CHAIN now COMPLETES: case-work -> pipe_known -> Colm meet -> Colm drain -> vane_confirmed."
+      ]
+    },
+    {
+      "id": "beat_0067",
+      "title": "The Archive 1a — blackmail Vane + retrieve the file (NEW, v2)",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "introduces": [
+        "docs_retrieved"
+      ],
+      "canvases": [
+        "cap_vane_blackmail (auto-fire capstone @vance_securities, pri 9, one-shot, gated vane_confirmed is_true + calloway_drains_done gte 2 + docs_retrieved is_false): the two-men payoff converges — WHO (Vane, via Colm) + WHERE + need-an-insider (via the drain) + leverage (burn him to the Chairman). She corners Vane on the back stairs, he resists then folds, pulls her file from the deep vault (2 days, a clearance not his), hands over a Vance humanoid-program file ('about her kind, maybe about her' — she does NOT open it; the SUBJECT reveal is 1b), and WARNS her the pull tripped a deep-vault flag, it's blown, the Chairman ends betrayers, run (= the flush conveyed THROUGH Vane's warning). SETS docs_retrieved -> feeds the ending (beat_0064).",
+        "Story-Goal C ('You have the rogue... make him pull it', gated vane_confirmed is_true + docs_retrieved is_false; shows after B retires at vane_confirmed)."
       ]
     }
   ],
@@ -1449,7 +1481,7 @@
         "id": "npc_calloway",
         "role": "the mark — Vance Securities rogue-hunter, humiliated + sidelined, un-indexed file room; she infiltrates as a junior analyst, plants the bug, seduces on the belief-lever, drains him twice; ends her nemesis (reports the analyst up → the 1b fuse)",
         "depth": "core (1a mark → recurring nemesis into 1b / Act 2)",
-        "arc_shape": "RE-CAST (The Archive, rev 69, from 'Mission-3 domme cover'): seduce-in on the BELIEF-LEVER (not domme) — two axes on his OWN meters (relation = belief/access odometer, corruption = surrender ladder), the Renner double-lock; anal finish IS the drain; two load-bearing drain payloads (nothing → big chunk stolen). Cold, no warmth.",
+        "arc_shape": "RE-CAST (The Archive, rev 69, from 'Mission-3 domme cover'): seduce-in on the BELIEF-LEVER (not domme) — two axes on his OWN meters (relation = belief/access odometer, corruption = surrender ladder), the Renner double-lock; anal finish IS the drain; two load-bearing drain payloads (surface: he's certain → depths: the big pull, days ago, her file in it). Cold, no warmth.",
         "status": "RE-CAST for The Archive — blueprinted (Pass 2, rev 69); NOT built. First name OPEN."
       },
       {
@@ -1517,10 +1549,17 @@
       },
       {
         "id": "npc_vane",
-        "role": "the mole/thief — mercenary spy (money only), secretly on Calloway's own team; two thefts (small → moves the bug; big → the chunk with her build file, spooked by her closeness to Calloway); the 1b deal seller; caught + kept as asset",
-        "depth": "minor (unseen hand in 1a → 1b dialog reveal → kept asset)",
-        "arc_shape": "NON-conquest, mercenary. Unseen in 1a (felt via the bug moving); a 1b dialog speaker at the deal reveal; schedule-less (hidden, like Bastien). No relation/corruption climb, no meters, no portrait hub.",
-        "status": "NEW — blueprinted (Pass 2, rev 69); NOT built. Name OPEN (placeholder: Vane)."
+        "role": "the rogue — Calloway's TRUSTED teammate, secretly the leak: he COPIES files (nothing goes missing) + feeds Colm -> Bastien; steers Calloway off his own trail. 1a: confirmed via Colm's drain, BLACKMAILED to retrieve her file, warns her + flees at the flush. 1b: kept asset.",
+        "depth": "minor (on-screen in 1a capstones -> 1b kept asset)",
+        "arc_shape": "NON-conquest (blackmail leverage, not seduction). Schedule-less by design — appears ONLY in auto-fire capstones (dialog speaker), never a portrait hub, so needs no schedule. No relation/corruption climb.",
+        "status": "RECAST v2 (rev 72); DECLARED in TOML (beat_0056, rev 73) — def upgraded to v2 (schedule-less, on-screen). Name OPEN (placeholder: Vane)."
+      },
+      {
+        "id": "npc_colm",
+        "role": "the courier — Bastien's OFF-RECORD man (never on paper), a regular at the Undertow; carries Vane's copies out to Bastien. She works him COLD+FAST (drinks -> drunk -> anal -> drain); his drained memory of the handoffs gives her Vane's FACE (-> vane_confirmed).",
+        "depth": "minor (one-two scenes; a cold underworld use, no arc)",
+        "arc_shape": "NON-conquest — the underworld drain (tonal opposite of the Calloway slow-con). Declared schedule-less at beat_0056 (forward declaration); his SCHEDULE @underworld_bar + seduce/drain hub arrive WHOLE at beat_0066 (no dead presence).",
+        "status": "NEW v2 (rev 73); DECLARED in TOML (beat_0056) — def + core_traits triad + arc_stages, schedule-less. Content = beat_0066."
       }
     ],
     "flags": [
@@ -1677,12 +1716,7 @@
       {
         "key": "bug_traced",
         "set_by": "inv_underworld_drop (W1, @underworld_market)",
-        "gates": "amb_bastien_overhear (W2) + cap_theft2 (W3)"
-      },
-      {
-        "key": "theft2_done",
-        "set_by": "cap_theft2 (W3, auto-fire @vance_securities; gated npc_calloway.corruption mid-band + bug_traced)",
-        "gates": "the drain #10 advance to payload 2 ('big chunk stolen') — theft-before-reveal; the ONLY reader"
+        "gates": "amb_bastien_overhear (W2)"
       },
       {
         "key": "deal_place_known",
@@ -1700,7 +1734,7 @@
         "gates": "inv_underworld_drop (W1b @underworld_market); read is_false in W1a's own trigger (fire-once)"
       }
     ],
-    "_new_trait_note": "names_known (TRAIT, default 0, hidden) — set=1 on BOTH loop_renner_finisher drain choices (.intro first-drain + .again repeat); gates the whole hunt (Sol lead reads names_known>=1). A TRAIT not a flag because the drain setter is triggerless (flag-chain validator). Not in the flags[] list above; registered here + in beat_0030 introduces. Other unregistered trait counters (coin/drain_charge/arousal_charge/etc.) remain known-incomplete in this registry.  || CAPTIVITY (rev 63): core_strain (TRAIT, default 0, hidden from the traits dump, surfaced ONLY as a banded trait_status_text sidebar row). Bands start at min=1 so the row is INVISIBLE for the whole game before captivity (v2.py:15516 renders nothing when no band matches) and the TOP band carries NO max (unset max defaults to 1e9, v2.py:15508) so 'Core: Failing' persists forever at the frozen 96. +12 per use, clamp=true (clamp bounds 0-100 at BOTH ends, v2.py:5563-5567; OMITTING clamp passes false -> unbounded, v2.py:2123). 8 uses -> 96 -> the break. || cell_door (TRAIT, default 0, hidden, NEVER SET) = the sealed door's entry_conditions gate (gte 1). A TRAIT because a flag is_true gate demands a located setter or the flag-chain validator hard-fails. | THE ARCHIVE (rev 69): calloway_drains_done (hidden counter, 0→2; the Renner drains_done twin — a TRAIT bumped on the TRIGGERLESS drain canvas (calloway_drain_canvas #10, the sex-loop finisher), which is why it is validator-exempt (traits are); it selects the two drain payloads (0->\"where?/nothing\"; 1 + theft2_done->\"big chunk stolen\") — there are NO located cap_calloway_drain1/2 capstones. Gated on the counter + corruption band, never arousal. The 1->2 advance HARD-REQUIRES theft2_done (theft-before-reveal). DOWNSTREAM (W4 cap_deal_place, the 'find the buyer' Quest card) reads the durable trait calloway_drains_done>=2 directly — there is NO big_chunk_known flag (a flag set mid-loop would hard-fail the flag-chain validator; this is the actual Renner discipline).",
+    "_new_trait_note": "names_known (TRAIT, default 0, hidden) — set=1 on BOTH loop_renner_finisher drain choices (.intro first-drain + .again repeat); gates the whole hunt (Sol lead reads names_known>=1). A TRAIT not a flag because the drain setter is triggerless (flag-chain validator). Not in the flags[] list above; registered here + in beat_0030 introduces. Other unregistered trait counters (coin/drain_charge/arousal_charge/etc.) remain known-incomplete in this registry.  || CAPTIVITY (rev 63): core_strain (TRAIT, default 0, hidden from the traits dump, surfaced ONLY as a banded trait_status_text sidebar row). Bands start at min=1 so the row is INVISIBLE for the whole game before captivity (v2.py:15516 renders nothing when no band matches) and the TOP band carries NO max (unset max defaults to 1e9, v2.py:15508) so 'Core: Failing' persists forever at the frozen 96. +12 per use, clamp=true (clamp bounds 0-100 at BOTH ends, v2.py:5563-5567; OMITTING clamp passes false -> unbounded, v2.py:2123). 8 uses -> 96 -> the break. || cell_door (TRAIT, default 0, hidden, NEVER SET) = the sealed door's entry_conditions gate (gte 1). A TRAIT because a flag is_true gate demands a located setter or the flag-chain validator hard-fails. | THE ARCHIVE (rev 69): calloway_drains_done (hidden counter, 0→2; the Renner drains_done twin — a TRAIT bumped on the TRIGGERLESS drain canvas (calloway_drain_canvas #10, the sex-loop finisher), which is why it is validator-exempt (traits are); it selects the two drain payloads (0->surface: he's certain the section's safe; 1->depths: the big pull, days ago, her file in it) — there are NO located cap_calloway_drain1/2 capstones. Gated on the counter + corruption band, never arousal. The 1->2 advance needs only the counter (theft2_done was REMOVED 7-22; the big theft is off-screen, uncovered in the drain). DOWNSTREAM (W4 cap_deal_place, the 'find the buyer' Quest card) reads the durable trait calloway_drains_done>=2 directly — there is NO big_chunk_known flag (a flag set mid-loop would hard-fail the flag-chain validator; this is the actual Renner discipline).",
     "schedules": [
       {
         "npc": "npc_calloway",
@@ -1746,14 +1780,14 @@
     }
   },
   "next_up": [
-    "THE ARCHIVE 1a — Step-5 blueprint DONE (rev 69, Passes 1-4; Forks A+B locked with LO 2026-07-21). Folded into design_book.md (`## The Archive` story section + `### The Archive blueprint` + reconciled Calloway casting row + new Vane row + §2 used->user note) and this ledger (npc_calloway RE-CAST + npc_vane + vance_securities re-spec + 10 new flags + calloway_drains_done + intent blocks + plan beat_0056-0065). NEXT = Step-7 authoring, one verified increment per turn, extend-only: beat_0056 (scaffold + green build) FIRST, then the cover -> Calloway meet/hub -> bug -> bug-trace -> ladder+theft2 -> loop+two-drains -> Bastien-spying -> betrayal+Quests -> media+ship. 1b (The Deal) stays locked in design_beat_archive.md, blueprinted at its own build. NO TOML until LO greenlights the build.",
+    "THE ARCHIVE 1a — REDESIGNED (v2, 2026-07-22) + REWORK STARTED. Authoritative design: games/vesper/design_beat_archive_v2.md (supersedes design_beat_archive.md). SAVE-SAFETY CLEAR — the Archive was NEVER publicly shipped (releases/ stops at v0.1.3, zero Archive content; Archive = --dev --debug test-portal only), so beats 0056-0064 rework CLEANLY: delete/rewrite old bug/theft ids+flags outright, no deprecate-and-add. Real players' saves (<=v0.1.3) untouched. PHASE 0 (reconcile the review surface): next_up/_active_beat/decisions_log + the plan[] statuses reconciled here; design_book Archive sections collapsed to the v2 pointer. REWORK BUILD ORDER (one verified increment/turn; pair each removal with its replacement to stay green): (1) beat_0056 scaffold rework [upgrade npc_vane to on-screen, add npc_colm, drop bug_*/deal_place flags, add v2 flags]; (2) beat_0059 no-bug belief capstone [re-home calloway_believes]; (3) beat_0058 'Work the case' staged case-reveals; (4) beat_0062 drain payloads -> power/blind + WHERE; (5) beat_0066 Colm sub-arc [Undertow seduce+drain -> vane_confirmed]; (6) beat_0067 blackmail Vane -> retrieve [docs_retrieved]; (7) beat_0064 rework: the flush + Vane-warns + Mercer-panic ending + Quests redo; DELETE beat_0060 (bug-trace) + beat_0063 (overhear) canvases along the way; (8) beat_0065 media + clean ship LAST. Reworked beats' detailed plan[] descriptions get rewritten AS each is built (beat loop). SURVIVE ~as-is: beat_0057 cover, beat_0061 rungs+flinch. ONE open design detail: the experiment's age (years) — 1b flavor, non-blocking.",
     "SALVAGE — THE REPAIR (Act 2 · the repair bridge) — SHIPPED (authored + committed through rev 68, ship-gated). Beats beat_0046-0054 VALIDATED; folded into design_book.md (`## Salvage — The Repair` + `### Salvage blueprint` + Kess casting row + rev-65 changelog) and this ledger (npc_kess, kess_berth, salvage_* flags; core_sealed/kess_debt traits). Full record: games/vesper/design_salvage_v2.md (supersedes design_salvage_the_repair.md). OPEN: beat_0055 = the 0.1.4 portal DEPLOY (storygen-beep/Story-Gen), still local — the only outstanding Salvage item.",
     "CAPTIVITY — THE ROOM (Bastien's arc; SHIPPED 0.1.3 — only beat_0045 undo-hatch remains PARKED). Locked design: games/vesper/design_captivity_the_room.md (546 lines) — it IS the Step-4 story pass. Bastien kidnaps her -> a SEALED cell (no exits) -> he + a faceless crew use her across 3 days -> `core_strain` overloads (sex CHARGES her; he stripped the drain, so the input cooks the core) -> the break -> Cain arrives, argues with Bastien behind a door we never show, frees her without saying why. She leaves with her gear back and a fault that does not heal. LO's 4 locked calls (turn 82): crew = ALL FACELESS (no names, no npc defs; the room has exactly one face, Bastien's) · Cain drops her at the_waterfront · 8 uses / 3 days, +12 strain per use, break at >= 96 (two distinct scenes per band, nothing repeats) · media AFTER the TOML is green. THREE CORRECTIONS the doctrine sweep forced (each bounces UP to the book): (1) `Core: Failing` VANISHES exactly when it must persist — doc §4.2 bands it 75-99 and §7 freezes strain at/above the break; the renderer needs a matching band (v2.py:15508-15511, unset `max` defaults 1e9), so the top band MUST be { min = 73 } with NO max. (2) The Quests page LIES for the whole chunk — the end-of-content card (5_scenes:2395-2401) is gated on nothing but `bastien_revealed is_true`, which the rewritten grab still sets on the way INTO the cell; must be upper-gated + replaced. (3) `random_cooldowns` is NOT an author knob — runtime state hardcoded to 3 (v2.py:5105), never parsed from TOML; only `max_triggers_per_day` is settable (v2.py:10676). Interruption pacing has ONE lever. ENGINE FACT (faceless): speaker='unknown' renders a hardcoded 'Stranger:' label (v2.py:14020-14026) — so crew speech is QUOTED SPEECH inside `paragraph` blocks; only Bastien gets `dialog` blocks. Same logic: NO npc_cain def this chunk. ONE ENGINE CHANGE: Config.history.controls = false (v2.py:2929 area) — SugarCube's undo button is the only hatch TOML cannot close on a sealed room. Do NOT use maxStates=1 (previous() feeds the Lane-2 random entry gate, v2.py:5056). SAVE-SAFETY: extend-only. The grab keeps its id + keeps setting bastien_revealed; only its tail prose + exit target change. Existing players already hold bastien_revealed and stand on the waterfront -> a recovery auto-fire there (bastien_revealed is_true + captivity_entered is_false) is MANDATORY or they never reach the chunk. equipped_weapon=0 is an unrecoverable dead state (3_activities:899) -> the release MUST restore it to 1. Reset the 5 shared sex-loop traits on BOTH entry and release. SEPARATE non-blocking track: patch the author-game skill (still-point cast-floor §1B, thin-day exemption §2F, lewd-payoff cadence floor §5E) + teach the agency-less-room doctrine the skill lacks.",
     "PLAYER PORTRAIT open items: (1) DECIDE the 3 dormant partials (pp_underwear/topless/bottomless) — add a tease/strip beat that sets pp_underwear before the naked pose (uses 1-2 more of LO's images), or drop them. (2) Topless pick is low-res (296px Google thumbnail) — swap for a sharper one if kept. (3) The naked/undress stills are downloaded amateurs = a DIFFERENT woman than the blonde-cyborg SFW faces (accepted mismatch). (4) NOT committed; NOT deployed to the portal.",
     "PLAYER PORTRAIT reactive art (follow-on, NOT AI-gen): source 4 DOWNLOADED photos of the SAME woman as wren.jpg (naked/topless/bottomless/underwear), drop into videos/portraits/, uncomment the 4 image lines in the [player_portrait] block (0_systems_spec.toml), re-merge+rebuild. They resolve immediately + degrade via onerror. Optional two-faces later: add worn_type tags to company_grays/cover_dockhand + a distinct in-cover portrait.",
     "beat_0015 DONE + green + live-verified + WARDROBE ART sourced+live-verified (turn 38). Open: DEPLOY to the portal (storygen-beep/Story-Gen) when LO wants it live (still local). FUTURE Act work (the A.5->B frontier): Bastien/Calloway deep-design+build (covers granted + tagged by worn_type so wrong-cover-at-wrong-mark = wrong reaction), the_site/chip ending, the disguise SHOP + Pell upgrades (the credits sink)."
   ],
-  "_active_beat": "THE ARCHIVE 1a — Step-7: beat_0064 (the 1a-close + Quests page) BUILT + GREEN (turn 105, rev 69). 9/10. The 1a STORY + SYSTEMS ARE COMPLETE: cap_calloway_reported (the betrayal fuse -> calloway_reported) + the full Quests page (Story-Goals A/B/C/D one-at-a-time + Calloway's 4-card ladder). RECONCILED the shipped Salvage frontier card (rev 68): re-targeted its tip to the active mission + retire at calloway_believes; MOVED the 'build ends/next release'+Patreon boundary onto the new 1a end card D (the one non-append edit, 2 lines). 1a-complete = deal_place_known + calloway_reported. Whole funnel reachable, flag chains valid, quest chain resolves 1-per-state (no Frame-3 blank), pure-append except the reconcile. NOT committed. NEXT + LAST = beat_0065 (media pass + clean 1a SHIP): find-media for the ~20 new visuals (calloway/vane portraits + scene images + the sex clips), then the SHIP build (--video-folder, NO --dev/--debug) + grep index.html for IMAGE/VIDEO MISSING == 0. 1a is PLAYABLE NOW text-forward (media silent-skips).",
+  "_active_beat": "THE ARCHIVE 1a — REWORK to v2 (copies-not-theft), Phase 0 reconcile. The old bug/theft/overhear build (beats 0056-0064, test-portal only, NEVER publicly shipped) is being corrected to the design in design_beat_archive_v2.md. Phase 0 (this turn): ledger next_up + plan[] statuses + decisions_log reconciled; design_book Archive sections collapsed to the v2 pointer + casting rows reworked. NEXT = Phase 1 increment 1: beat_0056 scaffold rework — upgrade npc_vane to a full on-screen NPC, add npc_colm + the Undertow work-space + the high-security compartment, DROP bug_planted/bug_moving/bug_traced/deal_place_known, ADD the v2 flags (colm_found/vane_confirmed/docs_retrieved/vane_exposed + the case-reveal stages + the Mercer/ending flags), green build. Pair each removal with its replacement to keep the flag chain valid.",
   "decisions_log": [
     {
       "turn": 1,
@@ -2469,6 +2503,56 @@
       "book_revision": 69,
       "turn": 105,
       "note": "THE ARCHIVE 1a — beat_0064 (the 1a-close: betrayal seed + Quests page) BUILT + GREEN. cap_calloway_reported (auto-fire @vance_securities pri 5, gated deal_place_known is_true + calloway_reported is_false): the 1a END beat — she sees Calloway one last time before the deal (he believes, says 'we' and 'tomorrow', no idea); she leaves knowing a right-and-disbelieved man won't sit quiet — he'll do the math and report the analyst who played him, and the report climbs toward whoever bought her the cover (Mercer) = the 1b fuse; FALLOUT not engineered (she doesn't yet know Mercer's motive -> the 1b build-file read); RTS-flat (1a spends zero Tier-3), capstone interior (narration-carried is doctrine-sanctioned for a capstone's interior); SETS calloway_reported. Quests page (quests_engine v2): RECONCILED the shipped Salvage frontier card (rev 68 'this build ends / Calloway next release / Patreon') -> re-targeted its tip to the ACTIVE Calloway mission + added a retire (calloway_believes is_false); MOVED the build-boundary + Patreon ask onto the new 1a end card D. Story-Goals spine A/B/C/D (flag-milestone, verified EXACTLY ONE live per state A->B->C->D, D is a flag-goal handoff not a met-numeric -> no Frame-3 blank) + Calloway's 4-card stepped ladder (npc_id, exclusive by flags, the lever in each goal label). The ONE non-append edit this session = the reconciled Salvage card (2 lines; text/when, save-safe, not deployed). merge OK (651KB); package --dev GREEN, flag chains valid, self-verified. NOT committed. 9/10 — 1a story + systems COMPLETE + playable text-forward. NEXT+LAST = beat_0065 (media harvest + clean SHIP build)."
+    },
+    {
+      "book_revision": 70,
+      "turn": 106,
+      "note": "THE ARCHIVE 1a — Calloway hub POLISH (LO-requested) BUILT + GREEN. Split the single 'Believe him' relation feeder on hub_calloway_fileroom into TWO ungated feeders, both -> npc_calloway.relation (same belief/access odometer, no new stat): 'Talk to him' (-> .talk, +2 — he opens up about the ghost; the old .believe node relabeled + retuned 3->2) and 'Work the case' (NEW .work node, +3 — she does the analyst cover-work no minder bothered with = belief-in-action; grounds the junior-analyst cover in play). Motive: 'Believe him' read as an instruction to the player, and the cover job was invisible in play; the two verbs carry the belief-lever harder than a label does. Each 60 min; the bug proposal still gates relation>=15 (~3-5 sessions). PROSE-TRUTH swept: hub comment+description, the bug-canvas comment, the player-facing Calloway quest tip, design_book L1340 scene-table row + L1429 ladder line, plan[] beat_0058/0059 specs — all now name the two feeders (7_final regenerates from merge, left untouched). Save-safe: all-new Archive content (never publicly shipped), choice labels are display text, relation scale unchanged. merge OK (651KB); package --dev --debug GREEN, flag chains valid; verified in the built HTML — Node_talk +2 / Node_work +3, both labels live, 'Believe him' == 0, quest tip updated. NOT committed."
+    },
+    {
+      "book_revision": 71,
+      "turn": 107,
+      "note": "THE ARCHIVE 1a — REMOVED the cap_theft2 'gap on the shelf' theft beat (LO call) + re-homed the big-theft discovery entirely into the two drains. BUILT + GREEN + adversarially audited. Motive: a spotted gap is illogical both ways — Wren (3 wks in) noticing was a stretch, and Calloway (2yr obsessed archivist) NOT noticing was worse; and cap_theft2 auto-fired at corruption 9, BEFORE the loop unlocks at 18, so the player saw the 'theft' before any drain and drain 2's reveal was a recap. New design: the big pull happened days before, an inside job Vane covered (no visible gap), surfaced ONLY via the drain — more logical (a pro cover leaves no gap), on-brand (Wren's power IS the drain), hides Vane for 1b, sharpens theft #1 (traced) vs #2 (drained). 5_scenes: DELETED cap_theft2; drain 2 (d1) re-gated from 'drains_done==1 + theft2_done is_true' -> just 'drains_done==1'; DROPPED the d0_again edge choice+node; REWROTE d0 (surface: he's certain the section's safe, too clean, telegraphs 'go past what he knows') + d1 (depths: already gone days ago, counts squared by someone he trusts = Vane seed, her build file in it). RETIRED theft2_done (no setter/reader left). Chain still completes: drain 1 -> drain 2 (drains_done hits 2) -> Undertow W4 cap_deal_place -> deal_place_known -> 1a-close. PROSE-TRUTH swept across 5 files (1_metadata drain comment; design_book drain-table row/W3 row deleted/'theft ordering' paragraph replaced/flags-new/media/DAG spine+investigation+D3/plan beat_0061-0062; ledger designed[]/arc_shape/beat_0056 introduces/beat_0061 title+canvases/beat_0062 canvases/structure_registry theft2_done entry removed + bug_traced.gates/_new_trait_note/next_up; memory). VERIFIED in built HTML: 0 cap_theft2/theft2_done/d0_again/theft2_gap, drain nodes d0/d1/done present (d0_again gone), drain2 ungated from theft2_done, surface/depths prose live; merge OK 647KB (was 651), package --dev --debug GREEN, flag chains valid. ADVERSARIAL AUDIT (5 lenses x per-finding verify, 6 agents): 4 lenses CLEAN (orphans/reachability/narrative/regression), 1 confirmed finding (design_book:1433 'Flags (new)' bullet still listed theft2_done — a MISSED sweep edit, doc-only, no runtime impact) -> FIXED same turn. decisions_log history left intact (append-only). Save-safe (Archive-only test-portal content; no shipped id/flag/scale touched). NOT committed. book_revision 70->71."
+    },
+    {
+      "book_revision": 72,
+      "turn": 108,
+      "note": "THE ARCHIVE 1a — REDESIGN v2 + REWORK KICKOFF (Phase 0 reconcile). The whole 1a discovery was redesigned with LO 2026-07-22 (see design_beat_archive_v2.md, authoritative): COPIES-not-theft (Vane, a TRUSTED teammate, copies files; pipe Vane -> Colm [off-record courier, Bastien's man] -> Bastien; nothing missing = why 2yr unsolved + why Calloway looks a crank). Detection = grind + her underworld nature (NOT gadgets, NOT the Calloway drain): work-the-case staged reveals + the Colm sub-arc (Undertow seduce+drain -> sees Vane's face in Colm's memory -> confirm). Docs = her build file = Vance humanoid-experiment records (she's the guinea pig; subject-reveal DEFERRED to 1b; Mercer went after it for his OWN advantage [NOT Cain] + NEVER knows she's the subject). Two men for the file: Calloway=WHERE, blackmail Vane=ACCESS/retrieve. The flush: Calloway's watcher (on Wren from the start) catches Vane's retrieval -> Vane exposed -> warns her (the Chairman ends betrayers) -> both run; she takes the file to Mercer, who's panicking + bails -> she KEEPS it. Chairman (Aldous Vance) inbound + the Mercer fuse. DROPPED: the bug/tracker, honeypot, gap/two-theft, Bastien-overhear/deal-spy. SAVE-SAFETY VERIFIED CLEAR: the Archive was NEVER publicly shipped (releases/ stops at v0.1.3, 0 Archive content; Archive is --dev --debug test-portal only) -> beats 0056-0064 rework CLEANLY (delete/rewrite old ids+flags; only disposable test saves reset; real saves <=v0.1.3 untouched). PHASE 0 (this turn): reconciled next_up[0] + _active_beat + the plan[] statuses (0056/0058/0059/0062/0064 -> planned/REWORK; 0060+0063 -> removed; added beat_0066 Colm + beat_0067 blackmail); design_book Archive blueprint/wiring/story sections collapsed to the v2 pointer + Calloway/Vane casting rows reworked + a new Colm row + a header changelog entry. NO TOML yet. Reworked beats' detailed plan descriptions get rewritten AS each is built (beat loop). NEXT = Phase 1 increment 1: beat_0056 scaffold rework, green build. book_revision 71->72."
+    },
+    {
+      "book_revision": 73,
+      "turn": 109,
+      "note": "THE ARCHIVE 1a REWORK — Phase 1 increment 1 (scaffold) BUILT + GREEN. Added npc_colm (the off-record courier: def + relation/corruption/arousal triad + arc_stages 'The courier', schedule-less forward declaration — his schedule@underworld_bar + seduce/drain hub come WHOLE at beat_0066 so NO dead presence) + RECAST npc_vane to v2 (trusted teammate / copies-not-thefts / on-screen-blackmailed — description + comment rewritten, still schedule-less capstone-only NON-conquest). npc_calloway + vance_securities lock + calloway_drains_done untouched. Compartment = NARRATIVE-ONLY (LO: she never enters, Vane retrieves) -> no new location; Undertow = reuse underworld_bar. The interlinked bug/theft chain (0059->0060->0063->0064 via bug_planted/bug_moving/bug_traced/deal_place_known + calloway_believes) can't be peeled one flag at a time -> the DEMOLITION + belief-gate re-home is the NEXT increment. merge OK (648KB); package --dev GREEN, flag chains valid; npc_colm + npc_vane both in $npcs; old vane 'spy for hire/mole' prose gone. 3 missing-portrait warnings (calloway/vane/colm .jpg — silent-skip, harvested at beat_0065). Ledger: registered npc_colm + recast npc_vane in structure_registry; beat_0056 -> validated. NOT committed. NEXT = increment 2: beat_0059 belief-capstone rewrite + gut the gadget chain (delete cap_calloway_bug/cap_bug_moved/inv_underworld_drop/amb_bastien_overhear/cap_deal_place; re-home calloway_believes to the no-bug capstone), keep green. book_revision 72->73."
+    },
+    {
+      "book_revision": 74,
+      "turn": 110,
+      "note": "THE ARCHIVE 1a REWORK — Phase 1 increment 2 (belief capstone + gadget-chain DEMOLITION) BUILT + GREEN. Wrote cap_calloway_access (v2, replaces cap_calloway_bug): NO gadget — at relation>=15 the disbelieved man brings her ALL the way into his hunt (the sealed side/real access), the belief-lever peak; SETS calloway_believes ONLY (no bug flag). DELETED the whole interlinked gadget chain in one paired increment (kept green): cap_calloway_bug, cap_bug_moved, inv_underworld_drop (bug-trace), amb_bastien_overhear, cap_deal_place (overhear/deal-spy), cap_calloway_reported (old 1a-close). Flags bug_planted/bug_moving/bug_traced/deal_place_known GONE (0 in 5_scenes); calloway_reported now unread (clean, no orphan). Quests: Story-Goal B REWORKED to the v2 find-the-leak goal (gated calloway_believes is_true + vane_confirmed is_false; is_false exempt so vane_confirmed's missing setter is fine); Story-Goals C+D DELETED (rebuild with beat_0067 / the ending rework); the Calloway ladder card-1 tip de-bugged; 2 stale comments (Story-Goal A, the rungs') corrected. INTERIM STATE (green, incomplete, NOT shipped): the 1a flow now runs cover -> meet -> hub -> access capstone -> rungs -> flinch -> loop -> drains, then dead-ends (the new detection + ending come next). Big block deletions via a marker-based python splice (94+123 lines) since 90-line verbatim Edits are fragile. merge OK (631KB, was 648); package --dev GREEN, ALL FLAG CHAINS VALID, cap_calloway_access in build. STRAGGLERS (deferred, correct): the drain PAYLOADS (d0/d1) + ladder card-4 still describe the old theft-discovery -> fixed at the beat_0062 drain-payload rework. Ledger: beat_0059 -> validated; 0060/0063 stay 'removed' (canvases now actually deleted). NOT committed. NEXT = increment 3: beat_0058 'Work the case' staged case-reveals. book_revision 73->74."
+    },
+    {
+      "book_revision": 75,
+      "turn": 111,
+      "note": "THE ARCHIVE 1a REWORK — Phase 1 increment 3 (the case-work staged reveals) BUILT + GREEN. First piece of the v2 copies-not-theft DETECTION. Declared case_progress (hidden trait, [player.core_traits] + hidden [[traits.labels]]) + wired +1 onto the hub 'Work the case' (.work) exit (alongside relation +3; 'Talk to him' does NOT bump it — the detective legwork is distinct from trust). 3 auto-fire one-shots @vance_securities (pri 7), gated on case_progress bands: cap_case_insider (cp>=2, dialog with Calloway: leaks too clean -> an inside job) -> cap_case_curated (cp>=4 + case_insider_seen, her PRIVATE thought_bubble: the dead ends are curated from inside by a trusted teammate; she CONCEALS it — naming it ends his usefulness; Calloway oblivious/trusts his people = the irony) -> cap_case_pipe (cp>=6 + case_curated_seen + calloway_believes, her UNDERWORLD read: an off-book courier pipe to the Reach, invisible to a company man; SETS pipe_known -> the hook to the Colm work, beat_0066). Register: dialog where shared (reveal 1), concealment-interior thought_bubble where private (2/3, doctrine-sanctioned); Calloway gets a line in each (present). Stagger vs the spine: cp +1/work, relation +3/work, access at relation 15 -> reveal1(cp2) before access, reveal2(cp4) around, reveal3(cp6+believes) after. NEW flags case_insider_seen/case_curated_seen/pipe_known (setters exist; pipe_known's reader is beat_0066 = harmless orphan-setter now). merge OK; package --dev GREEN, ALL FLAG CHAINS VALID, all 3 reveals in build. Ledger: beat_0058 -> validated. NOT committed. NEXT = increment 4: beat_0062 drain-payload rework (Calloway drain -> power/blind + reveal WHERE the file is, NOT the theft; fixes the d0/d1 stragglers + ladder card-4). book_revision 74->75."
+    },
+    {
+      "book_revision": 76,
+      "turn": 112,
+      "note": "THE ARCHIVE 1a REWORK — Phase 1 increment 4 (drain-payload rework) BUILT + GREEN. Repointed the Calloway drains from the old theft-discovery to their v2 job = HER POWER + keeping him blind + WHERE her file is + the access problem (which forces her to need an insider = the hook to blackmailing Vane). The loop + finisher STRUCTURE untouched (survives); only the PAYLOADS + labels/comments reworked. d0 (drain 1) 'Where it's kept': she pulls WHERE her build file lives — the sealed vault under the division, past what she can badge into. d1 (drain 2) 'Past his clearance': the vault's two-man clearance rotates weekly, past even Calloway's level -> she can't reach it alone -> she'll find an insider she can bend (sets up Vane). Reworked: the finisher comment + description, the DRAIN 1/2 choice labels ('Ask him where they keep the deep files' / d1 exit 'Now for the man who can reach it'), the drain-canvas description, and Calloway ladder card-4 (text/tip -> WHERE + can't-reach-alone, not the theft). Counter calloway_drains_done still 0->1->2 (unchanged); no theft2_done/big_chunk_known. This CLEARS the last theft-discovery stragglers flagged at increment 2. merge OK; package --dev GREEN, ALL FLAG CHAINS VALID, d0/d1/done nodes intact; no theft prose remains (lone grep hit = false positive, 'already gone' = mentally checked out). Ledger: beat_0062 -> validated. NOT committed. NEXT = increment 5: beat_0066 the Colm sub-arc (Undertow: npc_colm schedule + hub, seduce+drain COLD/FAST -> sees Vane's face -> vane_confirmed; gated pipe_known). book_revision 75->76."
+    },
+    {
+      "book_revision": 77,
+      "turn": 113,
+      "note": "THE ARCHIVE 1a REWORK — Phase 1 increment 5 (the Colm sub-arc) BUILT + GREEN. The underworld half of the detection. cap_colm_meet (auto-fire @underworld_bar, pri 8, one-shot, gated pipe_known is_true + colm_found is_false): she comes to the Undertow hunting the pipe the case-reveals pointed her at, clocks Colm (Bastien's off-record courier) by his courier's seat, opens him -> colm_found. act_colm_drain (player-initiated SOLO-LINK @underworld_bar, is_repeatable + colm_found is_true + vane_confirmed is_false guard = one-shot in effect, pri 3): the COLD/FAST seduce+drain (3-4 rounds -> drunk -> back room -> anal -> the drain opens) — transactional, explicit at the ceiling, use-and-toss (tonal opposite of the Calloway slow-con); his drained memory of the handoffs gives her the inside contact's FACE (Colm never had a name) -> she recognizes VANE, the man at Calloway's elbow -> vane_confirmed. DESIGN REFINEMENT: npc_colm kept SCHEDULE-LESS (dialog speaker in the two scenes, like Vane/Bastien) rather than the earlier 'scheduled portrait hub' framing — avoids a dead-presence window before pipe_known + fits a use-and-toss NPC with no arc; noted to LO. The DETECTION CHAIN now COMPLETES: case-work (case_progress) -> cap_case_pipe -> pipe_known -> cap_colm_meet -> colm_found -> act_colm_drain -> vane_confirmed. vane_confirmed now has a REAL setter -> Story-Goal B (gated vane_confirmed is_false) retires correctly. merge OK; package --dev GREEN, ALL FLAG CHAINS VALID, render-bucket clean (solo-link, no requires_npc trap), both Colm canvases in build. Ledger: beat_0066 -> validated. NOT committed. NEXT = increment 6: beat_0067 blackmail Vane + retrieve the file (gated vane_confirmed + calloway_drains_done>=2 -> docs_retrieved; the two-men payoff). book_revision 76->77."
+    },
+    {
+      "book_revision": 78,
+      "turn": 114,
+      "note": "THE ARCHIVE 1a REWORK — Phase 1 increment 6 (blackmail Vane + retrieve the file) BUILT + GREEN. The two-men payoff. cap_vane_blackmail (auto-fire capstone @vance_securities, pri 9, one-shot, gated vane_confirmed is_true [Colm named him] + calloway_drains_done gte 2 [the drain gave WHERE + need-an-insider] + docs_retrieved is_false): the two threads converge -> WHO (Vane) + WHERE (the vault) + leverage (burn him to the Chairman). She corners Vane on the back stairs; he resists ('a drunk in a bar, a face and a feeling') then folds under the Chairman threat; pulls her file from the deep vault (2 days, a clearance not his); hands over a thin Vance humanoid-program folder ('about her kind, maybe about her' — she does NOT open it, the SUBJECT reveal stays 1b); and WARNS her the pull tripped a deep-vault flag, someone's asking who signed it out, it's blown, he's running tonight (= the FLUSH conveyed THROUGH Vane's warning, not a separate watcher beat). SETS docs_retrieved -> feeds the ending. + Story-Goal C ('make him pull it', gated vane_confirmed is_true + docs_retrieved is_false; B retires at vane_confirmed -> C shows). Dialog-carried (confrontation). merge OK; package --dev GREEN, ALL FLAG CHAINS VALID, capstone + card C in build, docs_retrieved setter live. Ledger: beat_0067 -> validated. The full 1a arc is now built THROUGH the retrieval; only the ENDING remains. NOT committed. NEXT = increment 7: beat_0064 rework (she takes the file to Mercer -> Mercer panics/bails -> she KEEPS it -> the 1a close: the Mercer fuse + the frontier/Patreon end card D). book_revision 77->78."
+    },
+    {
+      "book_revision": 79,
+      "turn": 115,
+      "note": "THE ARCHIVE 1a REWORK — Phase 1 increment 7 (the 1a close / ending) BUILT + GREEN. The LAST content increment — the full 1a story is now built end-to-end. cap_1a_close (v2, REPLACES the old cap_calloway_reported; auto-fire capstone @penthouse, pri 9, one-shot, gated docs_retrieved is_true + archive_1a_done is_false): she brings Mercer the file to hand over -> he's PANICKING (the deep-vault flag climbed with his asset's fingerprints, the Chairman's eye turned, the trail lands on HIM); he doesn't want the docs anymore, wants to RUN ('keep it, burn it, I'm gone'); she KEEPS it (hers now — 'what she is, or close to it'; she does NOT open it, the SUBJECT-reveal stays 1b); the 1b hook = Mercer holds her leash controller, so she's NOT running from the Chairman, she's getting Mercer out + 'taking the key on the way'. SETS archive_1a_done. Dialog-carried (Mercer present). Quests REDONE: Story-Goals A/B/C/D on the v2 flags, verified EXACTLY ONE live per state (A retires at calloway_believes; B calloway_believes->vane_confirmed; C vane_confirmed->archive_1a_done, spans retrieval+run-to-Mercer so no blank sidebar; D archive_1a_done = the end card w/ build boundary + Patreon). Calloway ladder unchanged. merge OK; package --dev GREEN, ALL FLAG CHAINS VALID, cap_1a_close in build, A/B/C/D exclusive. Ledger: beat_0064 -> validated. NOT committed. THE FULL 1a ARC IS BUILT: cover -> meet -> hub(talk/work) -> access -> case-reveals(insider/curated/pipe) -> rungs -> flinch -> loop -> drains(WHERE+access) -> Undertow(Colm->confirm Vane) -> blackmail Vane -> retrieve -> Mercer panics -> she keeps it -> close. ONLY beat_0065 (media harvest + clean SHIP) remains. book_revision 78->79."
     }
   ]
 }

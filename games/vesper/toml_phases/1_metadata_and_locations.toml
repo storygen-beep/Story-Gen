@@ -95,10 +95,16 @@ kess_debt         = 0
 repair_armed      = 0
 repair_session    = 0
 # THE ARCHIVE 1a (beat_0056) — the Calloway drain counter (hidden). +1 per drain on the triggerless finisher:
-# 0->1 = "where?/nothing", then 1 + theft2_done ->2 = "big chunk stolen". A TRAIT (gte-read), NOT a flag — the
-# drain setter is triggerless, so a flag would hard-fail the flag-chain validator; a gte trait is exempt.
-# Downstream (the deal-place spy W4, the "find the buyer" Quest card) reads calloway_drains_done gte 2.
+# 0->1 = surface (he's certain the section's safe), then 1->2 = depths (the big pull, lifted days ago by an
+# inside job, her file in it). A TRAIT (gte-read), NOT a flag — the drain setter is triggerless, so a flag would
+# hard-fail the flag-chain validator; a gte trait is exempt. Downstream (the deal-place spy W4, the "find the
+# buyer" Quest card) reads calloway_drains_done gte 2.
 calloway_drains_done = 0
+# THE ARCHIVE 1a (beat_0058, v2) — the case-work counter (hidden). +1 per "Work the case" session (the .work hub
+# feeder only, NOT "Talk to him"); its bands fire the staged case-reveals (cap_case_insider >=2, cap_case_curated
+# >=4, cap_case_pipe >=6). A TRAIT (gte-read) — the detective legwork that surfaces the leak's shape, distinct
+# from relation (trust/access).
+case_progress = 0
 # SALVAGE emitter recovery — emitter_broken: 0=works (default; pre-captivity yard/gate use), set 1 at the
 # captivity release (core dead -> the emitter draws off the SAME core, so it's dead too), set 0 at repair
 # session 12 (core restored). The 4 emitter fire gates AND `emitter_broken lt 1`. Default 0 = save-safe
@@ -307,19 +313,34 @@ start_time = "08:00"
 end_time   = "20:00"
 activity   = "working the rogue-hunt files"
 
-# ── Vane — the mole/thief (mercenary; unseen in 1a, revealed at the 1b deal) ──
-# NEW (beat_0056). Calloway's own man, secretly the thief. Unseen in 1a (felt only via the bug moving); a 1b
-# dialog speaker at the deal reveal. Declared minimal + schedule-less, exactly like npc_bastien — he must NOT
-# use npc=/requires_npc (which gate on a schedule he doesn't have), and staying off-schedule keeps him off the
-# Schedule page. No meters, no hub. Name OPEN (placeholder "Vane"; renameable).
+# ── Vane — the rogue (Calloway's trusted teammate; RECAST v2, on-screen in 1a) ──
+# beat_0056/v2. Calloway's own trusted man, secretly the leak: he COPIES sensitive files (nothing ever goes
+# missing) and feeds them to Colm -> Bastien. On-screen in 1a (capstones only): she confirms him via Colm's
+# drain, BLACKMAILS him to retrieve her file, and he warns her + flees at the flush. Schedule-less by design —
+# he appears only in auto-fire capstones (dialog speaker), never a portrait hub, so he needs no schedule and
+# stays off the Schedule page. NON-conquest (blackmail leverage, not seduction). Name OPEN ("Vane", renameable).
 [[npcs]]
 id          = "npc_vane"
 name        = "Vane"
-description = "A spy for hire — money only, no cause. Secretly one of Calloway's own team: the ghost Calloway hunts is his own man, hidden in plain sight. Lifts the docs, moves them into the underworld, and sells to the buyer. Barely seen until the deal."
+description = "Calloway's trusted teammate — and secretly the leak. He copies sensitive files (nothing ever goes missing) and feeds the copies to the courier Colm, who runs them to Bastien. The ghost Calloway's hunted for two years is the man at his elbow. She catches him, blackmails him to pull her file, and he runs when it all comes apart."
 portrait    = "vane.jpg"
 core_traits = { relation = 0 }
 flag_keys   = []
-arc_stages  = ["The mole"]
+arc_stages  = ["The rogue"]
+
+# ── Colm — the courier (NEW v2, beat_0056; Bastien's off-record man) ──
+# Bastien's off-record courier (never on paper), a regular at the Undertow. Carries Vane's copies out to Bastien.
+# She works him COLD + FAST at the bar (drinks -> drunk -> back-room fuck -> drain); his drained memory of the
+# handoffs gives her Vane's FACE (-> vane_confirmed). Declared minimal here (forward declaration); his SCHEDULE
+# @underworld_bar + his seduce/drain hub arrive WHOLE with beat_0066 (so no dead presence now). NON-conquest.
+[[npcs]]
+id          = "npc_colm"
+name        = "Colm"
+description = "Bastien's courier — the off-record kind that never shows up in any ledger. He drinks at the Undertow every night and carries what the firm's leak feeds him down to the buyer. She works him for one thing: the face of the man inside who hands him the copies."
+portrait    = "colm.jpg"
+core_traits = { relation = 0, corruption = 0, arousal = 0 }
+flag_keys   = []
+arc_stages  = ["The courier"]
 
 # ─── Clothing — the worn-state COVER catalog (beat_0015) ──────────────────────
 # Two "dress"-slot looks she swaps between at the rack (wardrobe page @ wren_room):

@@ -265,6 +265,11 @@ hidden = true
 [[traits.labels]]
 key    = "calloway_drains_done"
 hidden = true
+# THE ARCHIVE 1a (beat_0058, v2) — the case-work counter. Hidden; no sidebar row. +1 per "Work the case"; its
+# bands fire the staged case-reveals (insider -> curated -> pipe).
+[[traits.labels]]
+key    = "case_progress"
+hidden = true
 # SALVAGE emitter recovery — emitter_broken (0/1, hidden). 0=works. Set 1 at the captivity release, 0 at
 # repair session 12; ANDed into the 4 emitter fire gates as `emitter_broken lt 1` (yard guards + underworld
 # gate). TRAIT not flag = dodges the flag-chain validator (the fire gates are exit-block choice conditions).
