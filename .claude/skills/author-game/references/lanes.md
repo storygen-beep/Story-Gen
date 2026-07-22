@@ -322,6 +322,49 @@ meter the hub builds that the milestone never reads (LC's Marcus — relation ga
 explicit surface that follows (opened from the hub once the first-night flag is set) is the
 **sex-loop menu** — its own pattern, see `references/sex-loop.md`.
 
+## Retire the standing surface on the terminal flag
+
+The self-retire above closes the *capstone*. But when the beat is a **terminal, one-way turning
+point** — she's blown and flees, the mark is owned, the house falls — its setter flag `F` is more than
+that: it's the **audit key for the whole NPC.** The moment the beat lands, walk *every* standing surface
+that NPC still offers and ask of each: does the fiction the beat just committed make this read as **stale
+or a lie** now? If yes, gate it on `F`. The bug is always the surface you forgot to sweep — the reason
+Vesper shipped courtship offered to a man she already owned, and a hub for a man who had fled the city.
+
+**Sweep the whole cluster, not just the hub:**
+- **Lane-1 hub choices** — retire the ones the beat makes pointless (still-seducing a man she now owns;
+  still-earning belief she already has). Close them (`F`-gate, **hidden not greyed** — a consumed gate
+  with `show_when_locked` leaks stale `locked_text`, `references/toml-gotchas.md`) or **swap the
+  destination node's prose** via `[group]` gated on `F`. Leave the **opener paragraph** constant (the
+  presence-floor rule below) — reactivity lives in the choices and the nodes they reach, never the greeting.
+- **Lane-2 ambient pool** — the room-mood ambients still play the old status quo.
+- **Lane-3 walk-in / drain / work buckets** — the "make the rounds," the cover-work grind, the repeatable
+  drain (unless the fiction keeps it — a memory-wiped mark can still be a warm tap).
+- **`[[npcs.schedules]]` presence** — if the beat sends the NPC away, drop their post-`F` schedule window,
+  or they linger "present" in a place they've fled (dead presence the player can see but can't act on).
+- **The surrounding floor cluster** — the *other* NPCs' walk-ins/ambients that share the location.
+
+**Two mechanisms — pick by shape:**
+- **Per-canvas gate** — add `F` to each surface's `conditions` (close) or `[group]`-swap its body (change).
+  Right when the surfaces are scattered or only *some* retire.
+- **Zone-seal the chokepoint (the cheap, un-leakable one)** — when the whole cluster hangs off **one
+  location tree behind a single chokepoint** (a travel activity, a location's `entry_conditions`), gate the
+  **chokepoint** on `F` instead. One gate retires the entire cluster at once — hub, ambients, walk-ins,
+  work, presence — because the player can't reach any of it. Prefer this when the beat means "she can never
+  go back there": it can't half-work the way a dozen scattered per-canvas edits can, and a blocked-entry /
+  greyed-ride message carries the "why." (Vesper's Archive-1a seal is exactly this: cut the one ride up and
+  the whole corporate floor retires in a single edit.)
+
+**Reconcile with the presence floor.** "A zero-choice hub is a valid hub; never flag-gate the base node"
+(above) still holds — a hub that's simply *quiet* because the arc is spent is fine, and you leave it
+standing. This rule bites **only** when the beat makes a surface **contradict the story it just told**:
+courtship for a man she owns, a hub for a man who fled. That's the cluster-scale version of the
+single-choice stale-copy hazard the `show_when_locked` trap names — same defect, whole NPC.
+
+**The test:** after a terminal beat, name every way the player can still reach this NPC, and for each say
+either *"still true in-fiction — keep"* or *"stale — gate on `F`."* The surface you didn't name is the one
+that ships the bug.
+
 ## Voice register
 
 > **This section is the lane → value LOOKUP.** The three register axes are **defined** in

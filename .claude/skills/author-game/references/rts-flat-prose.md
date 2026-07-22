@@ -1,7 +1,9 @@
 # RTS-flat prose — the mechanical register rules
 
 Read this before you write any scene body — the `paragraph` / `dialog` / `cascade` blocks inside a
-canvas. It is the **HOW** of register: the three axes, the eight numbered rules, the tiers, and the
+canvas. (For the `cascade` block's buildable shape + the **cascade-last** ordering rule — a `cascade` must be a
+node's last content block, or trailing prose renders below the reveal link — see `references/engine-reference.md`,
+the cascade section.) It is the **HOW** of register: the three axes, the eight numbered rules, the tiers, and the
 pre-emit checklist. The **WHY** (density of decision-pressure over density of prose, the
 throttle/odometer model) lives in `references/rts-design-philosophy.md` — don't re-derive it here.
 

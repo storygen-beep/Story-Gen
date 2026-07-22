@@ -91,7 +91,8 @@ NPC arcs/hubs/ambients/capstones are beats. Only the skeleton + boot + sleep + s
    appear in the merged TOML. If any are missing, STOP and report — the ledger and build diverged; fix
    before authoring anything new. *(Counting rendered clicks to sanity-check a `cascade`? Its beat[0] merges
    into the node lead and shows no advance link, so visible clicks = beats − 1 — a "dropped first beat" is the
-   expected merge, not drift. See `engine-reference.md` cascade contract.)*
+   expected merge, not drift. See `engine-reference.md` cascade contract — which also carries the buildable shape +
+   the **cascade-last** rule, mechanically checked by the cascade-order guard below.)*
 4. **Ledger hygiene (reverse sweep):** beyond the ledger→TOML drift check, sweep the other direction —
    (a) a `structure_registry` flag **set but read by NO** trigger/choice/group condition or quest `when` is an
    **orphan**, safe to prune; (b) a `deferred`/`next_up`/`decisions_log` note **contradicted by since-shipped
@@ -180,14 +181,20 @@ Run with the repo venv active, in order; emit a PASS/FAIL line for each:
    broken references, flag chains, plus it builds `index.html`. Never skip it. (No-DB is the default — no
    `--owner-id` needed; `--video-folder` keeps clips from 404ing. To publish, drop `--dev`/`--debug` — see the
    Step-7 ENTRY build-flags note above.)
-3. **Render-bucket guard** (mechanical) —
-   `python .claude/skills/author-game/scripts/check_render_buckets.py games/<slug>/toml_phases/7_final_game.toml`.
-   Flags every repeatable, manual, non-substitution canvas that has `requires_npc` but no `npc` — the silent
-   trap where an NPC hub drops to a **flat solo LINK** instead of a portrait (it shipped across every hub in
-   The Inheritance; the build was green). Review each hit: a Lane-1 hub needs `npc = "npc_x"`; a Lane-2 ambient
-   needs `trigger_mode = "random"` + `chance`; a deliberately presence-gated flat link is a rare, legitimate
-   exception (confirm and move on). It **cannot** see a hub authored with NEITHER field — verify by content that
-   every present-NPC surface has `npc` set. Full trap + engine trace: `references/toml-gotchas.md`.
+3. **Mechanical guards** — two lint scripts (both exit 1 to gate the build; run under the venv):
+   - **Render-bucket guard** — `python .claude/skills/author-game/scripts/check_render_buckets.py games/<slug>/toml_phases/7_final_game.toml`.
+     Flags every repeatable, manual, non-substitution canvas that has `requires_npc` but no `npc` — the silent
+     trap where an NPC hub drops to a **flat solo LINK** instead of a portrait (it shipped across every hub in
+     The Inheritance; the build was green). Review each hit: a Lane-1 hub needs `npc = "npc_x"`; a Lane-2 ambient
+     needs `trigger_mode = "random"` + `chance`; a deliberately presence-gated flat link is a rare, legitimate
+     exception (confirm and move on). It **cannot** see a hub authored with NEITHER field — verify by content that
+     every present-NPC surface has `npc` set. Full trap + engine trace: `references/toml-gotchas.md`.
+   - **Cascade-order guard** — `python .claude/skills/author-game/scripts/check_cascade_order.py games/<slug>/toml_phases/7_final_game.toml`.
+     Flags any node with a content block AFTER a `cascade` (or more than one `cascade`) — the silent trap where
+     trailing prose renders **below** the reveal link (`[content][link][content][link]`) and two cascades
+     duplicate the spliced exit link (both shipped green in Vesper's capstones). Fix: a `cascade` is the node's
+     **last** content block; fold a bridge or a closing beat INTO it (an `advance_text` or terminal beat). Full
+     contract + shape: `references/engine-reference.md` (the cascade section).
 4. **Doctrine self-audit** — check each against what THIS beat authored (the in-skill `references/*.md`
    own each rule cited below):
    - **the beat serves a WANT** — name the desire-ladder rung it pursues; a beat
@@ -237,6 +244,12 @@ Run with the repo venv active, in order; emit a PASS/FAIL line for each:
    - **frontier** — beats beyond the current frontier are **telegraphed
      locked-visible seeds**, never silent gaps; the frontier beat does its three jobs (payoff · drop into
      steady-state · greyed next-hook) and its quest card narrates the frontier **honestly**, never blank.
+   - **retire the standing surface on a terminal beat** — if this beat is a **terminal one-way turning
+     point** (she's blown/flees, the mark is owned, the house falls), its setter flag is the audit key:
+     sweep this NPC's *standing* surfaces — hub choices · Lane-2 ambients · Lane-3 walk-in/drain/work · schedule
+     presence · the floor cluster — and gate each on that flag (close, `[group]`-swap, or **zone-seal the
+     chokepoint** if the cluster is one location tree). A surface left running offers courtship to a man she
+     owns / a hub for a man who fled. → `references/lanes.md` "Retire the standing surface on the terminal flag."
    - **endgame stays carnal** — a late/empire beat cashes out as
      **content**: a recruit is a **full new arc** (back through Step 4 story → Step 5 blueprint — own double-lock + capstone + loop), an
      "upgrade" unlocks **new scene types**, the apex is the **hottest beats** — never a `+income` widget or

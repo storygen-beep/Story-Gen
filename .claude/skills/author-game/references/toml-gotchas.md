@@ -237,5 +237,31 @@ set inside a triggerless canvas — use a **hidden trait counter** and gate the 
   Same for `[phone.posts.trigger]`. Grep guard: the line after every `[phone.*.trigger]` header should
   be `conditions = {`. (Live-caught in The Inheritance: 3 end-state threads all fired turn 1.)
 
+## `show_when_locked` + a first-time-only gate (the stale locked_text trap)
+- **A choice gated on a consumed / first-time clause (`X lt 1`, a `flag is_false`) must NOT carry
+  `show_when_locked` + `locked_text`.** `show_when_locked` re-renders the choice greyed **whenever its
+  conditions are false — including after the gate is permanently consumed.** So a first-drain / first-time
+  rung (`… drains_done lt 1`, routing to the once-only reveal) keeps re-emitting its `locked_text` in the
+  *post-consumption* state, where it's stale and contradictory (e.g. a "kiss him first" line still showing
+  after she's already taken him), stacked above the working repeat choice. **No build error** — it's
+  non-clickable and blocks nothing, just wrong copy leaking.
+  - **Safe:** `show_when_locked` belongs on rungs gated on **monotonic** state that stays true once reached
+    (`corruption gte 18`) — a ladder preview that never un-satisfies.
+  - **Fix:** on a first-time-only rung, **drop `show_when_locked`** — the choice then hides whenever its
+    conditions fail (both *before* the ladder step is earned AND *after* it's consumed); carry the "this is
+    next" preview in the prior beat's prose or the Quests ladder card instead. (Live-caught in Vesper's Colm
+    hub: the "Take him in the back" first-drain rung leaked "he still flinches" after the drain.)
+
+## Cascade must be the LAST content block (the [content][link] trap)
+- **A `cascade` must be the last content block in its node — only `exit_block` may follow it, one cascade per
+  node.** The engine draws blocks eagerly in order and a cascade reveals only its own beats, so any block placed
+  AFTER a cascade renders immediately **below** the advance link (`[content][link][content][link]`), and two
+  cascades splice the exit twice (a **duplicate nav link**). **No build error** — only live-play shows it.
+  - **Runnable guard:** `python .claude/skills/author-game/scripts/check_cascade_order.py games/<slug>/toml_phases/7_final_game.toml`
+    (exit 1 if any node has a block after a cascade). Wired into the per-beat validation in `beat-authoring.md`.
+  - Full contract + the buildable shape + the fix (fold a "two days later" bridge or a closing thought INTO the
+    cascade as its own `advance_text` beat or a no-`advance_text` terminal beat): `references/engine-reference.md`
+    (the cascade section). (Live-caught in Vesper's `cap_vane_blackmail` / `cap_1a_close`, rev 86.)
+
 When in doubt about a shape, read the authoritative table in `references/engine-reference.md`
 and copy the analogous block from `games/late_shifts/toml_phases/`.

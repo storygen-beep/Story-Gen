@@ -151,12 +151,39 @@ did-you-mean hint (`dialogue`→`dialog`, `speech`→`dialog`) — `_validate_co
 the build path. **Dialogue MUST be `type="dialog"`** — `type="dialogue"`/`"speech"` fail the build
 (`references/toml-gotchas.md` for the grep guard).
 
+**The `cascade` block (click-to-reveal drip).** Reach for a `cascade` when a scene should be *dripped* one click
+at a time — a confrontation, a staged reveal, a time-jump — instead of dumped as one wall of prose. A static
+scene doesn't need one: plain `paragraph`/`dialog` blocks → `exit_block` is fine and simpler. Buildable shape:
+```toml
+{ type = "cascade", props = { beats = [
+    { blocks = [ ... ] },                               # beat 0 — renders on entry with the node's lead, NO click
+    { advance_text = "Press him.", blocks = [ ... ] },  # a click-gated beat (per-beat `effects` fire on the click)
+    { advance_text = "Wait for it.", blocks = [ ... ], conditions = { ... } },  # optional gated beat
+    { blocks = [ ... ] },                               # terminal beat — NO advance_text, renders after the last click
+] } }
+```
+`advance_text` is the click label (bare, RTS register — `references/rts-flat-prose.md`). The cascade is a
+**content block inside a node's `blocks`**; the node's `exit_block` is a *separate* key that lands after it. Two
+hard contracts govern it (both below): beat-0 merges into the lead, and **the cascade must be the node's last
+content block**.
+
 **The `cascade` beat-0 contract.** A `cascade` reveals its beats one click at a time, but **beat[0] is special:
 it renders unconditionally as part of the node's opening prose and its `advance_text` (the click label) is
 silently ignored** — only beats[1..] are click-gated. So visible click count = **(number of beats − 1)**. Two
 consequences: (1) don't author a click-gated payload as beat[0] — it merges into the lead and its advance label
 never shows; put the first *gated* reveal in beat[1]. (2) a beat-count spot-check expecting one click per beat
 will **false-alarm** on the merge — a "dropped first beat" is the expected behavior, not a bug.
+
+**The `cascade`-last contract (the `[content][link][content][link]` trap).** A node renders **every top-level block
+eagerly, in source order** (`_convert_blocks_to_game_html`, `v2.py:13649`); a `cascade` reveals only *its own*
+beats and can **not** defer, hide, or reorder a sibling block. The **only** thing the engine holds back for an
+unfinished cascade is the `exit_block` nav links (spliced into the cascade's tail). So **a `cascade` must be the
+LAST content block in its node — only `exit_block` may follow it, and use at most ONE cascade per node.** Put a
+`paragraph`/`thought_bubble`/second `cascade` *after* one and it renders **immediately, below the advance link**
+(the `[content][link][content][link]` layout); two cascades in a node splice the exit **twice** (a duplicate nav
+link). Fold a mid-scene bridge or a closing beat *into* the cascade — as its own `advance_text` beat, or as a
+no-`advance_text` **terminal** beat (renders after the last click). Builds green, renders wrong — grep guard in
+`references/toml-gotchas.md`. (Live-caught in Vesper's blackmail + 1a-close capstones, rev 86.)
 
 `exit_block` (`TemplateExitBlock` at `:662`): `type` = `"location"` or `"choices"`.
 - `type="location"` → single return button; `config = {destinationType, locationId, time_progression_minutes}`.
