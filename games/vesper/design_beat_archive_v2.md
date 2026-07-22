@@ -280,11 +280,12 @@ badging through the vault she couldn't. The day/night rhythm carries the reveal.
   Vane is that man.
 - **`cap_vane_blackmail` now gates on `vane_confirmed + access_problem_seen`** (was `vane_confirmed +
   calloway_drains_done ≥ 2`). The blackmail rides on what she's **seen and confirmed**, never the sex-grind count.
-- **The Calloway drains are pure power.** `calloway_drain_canvas` d0/d1 repayloaded from "WHERE / the access
-  problem" to **first-full-pull / deeper-he's-leashed** — her hold over him, gating nothing. The
-  `calloway_drains_done` counter survives but is **internal-only** (picks the drain payload branch). The
-  "Drain him — twice" quest goal is retired; the last Calloway card is now his **end-state** ("he's yours —
-  keep him blind").
+- **The Calloway drain is pure power — and there's only ONE.** The old two-drain structure (built to deliver
+  "WHERE / the access problem") collapsed to a **single** drain (`calloway_drain_canvas.d0` = *the drain*; `done`
+  = the repeatable warm-tap after). The **second drain was removed** (rev 83) — Calloway must never *tell* her the
+  access; she figures that out herself at the docs department. The `calloway_drains_done` counter survives but is
+  **internal-only** (first anal finish → the drain; after → the repeat). The "Drain him — twice" quest goal is
+  retired; the last Calloway card is his **end-state** ("he's yours — keep him blind").
 
 **New structure registered:** locations `docs_department`, `docs_vault`; NPCs `npc_enns`, `npc_voss`,
 `npc_reyes`, `npc_marr`; trait `vault_cleared` (never-set vault gate); flag `access_problem_seen`.

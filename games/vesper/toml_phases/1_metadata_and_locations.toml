@@ -94,11 +94,12 @@ kess_debt         = 0
 # kept for save-safety, but nothing feeds it; the repair is coin-cost-per-session, not debt-accrual.)
 repair_armed      = 0
 repair_session    = 0
-# THE ARCHIVE 1a (beat_0056) — the Calloway drain counter (hidden). +1 per anal-finish drain on the triggerless
-# finisher: 0->1 = first full pull, 1->2 = deeper (he's leashed). A TRAIT (gte-read), NOT a flag — the drain
-# setter is triggerless, so a flag would hard-fail the flag-chain validator; a gte trait is exempt. INTERNAL-ONLY
-# now: read solely to pick the drain payload branch (d0/d1/done) in loop_calloway_finisher. It gates NO downstream
-# content — the drains are PURE POWER (the blackmail rides on access_problem_seen + vane_confirmed, not this count).
+# THE ARCHIVE 1a (beat_0056) — the Calloway drain counter (hidden). +1 on the FIRST anal-finish drain (0->1); ONE
+# drain now (the SECOND drain was removed rev 83 — Wren figures the access out herself; Calloway never tells her).
+# A TRAIT (gte-read), NOT a flag — the drain setter is triggerless, so a flag would hard-fail the flag-chain
+# validator; a gte trait is exempt. INTERNAL-ONLY: read solely to pick the drain payload branch (d0 the drain /
+# done the repeat) in loop_calloway_finisher. Gates NO content — the drain is PURE POWER (blackmail rides on
+# access_problem_seen + vane_confirmed, not this count).
 calloway_drains_done = 0
 # THE ARCHIVE 1a (beat_0058, v2) — the case-work counter (hidden). +1 per "Work the case" session (the .work hub
 # feeder only, NOT "Talk to him"); its bands fire the staged case-reveals (cap_case_insider >=2, cap_case_curated

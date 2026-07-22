@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 82,
+  "book_revision": 83,
   "register": {
     "person": "third"
   },
@@ -182,7 +182,7 @@
         "the belief-lever spine (Renner double-lock reused: relation=belief/access, corruption=surrender, arousal=loop throttle)",
         "the 5-rung locked-visible ladder + the he-flinches throttle (the one hard non-lewd gate)",
         "the sex loop → anal-finish drain (Renner pattern reused)",
-        "the two drains (d0/d1) via calloway_drains_done, a TRAIT bumped on the triggerless drain canvas — PURE POWER (her hold over him): d0 first-full-pull, d1 deeper/he's-leashed. INTERNAL-ONLY branch selector (picks d0/d1/done), gates NOTHING; the WHERE + access are SEEN at the docs department (access_problem_seen), not drained (v2 rework, rev 81). NO theft2_done/big_chunk_known (validator)",
+        "the drain (ONE, rev 83 — the second drain was removed) via calloway_drains_done, a TRAIT bumped on the triggerless drain canvas — PURE POWER (her hold over him): d0 = the drain, done = the repeatable warm-tap after. INTERNAL-ONLY branch selector (first anal finish -> the drain, after -> the repeat), gates NOTHING; the WHERE + access are SEEN at the docs department (access_problem_seen), not drained; Calloway never tells her. NO theft2_done/big_chunk_known (validator)",
         "the belief-lever access capstone (cap_calloway_access → calloway_believes; the disbelieved man brings her all the way into his hunt — NO bug/gadget; v2 replaces the old bug proposal, rev 74)",
         "the 1a fuse (v2): the retrieval → docs_retrieved → the watcher-flush (Vane's unauthorized pull is caught) + Mercer panic → archive_1a_done (the Chairman fuse into 1b; the old calloway_reported flag was dropped in v2)"
       ],
@@ -1207,7 +1207,7 @@
     },
     {
       "id": "beat_0062",
-      "title": "The Archive 1a — the sex loop + the two drains (payloads = PURE POWER; ⚠️ superseded rev 81: WHERE/access moved to the docs department, drains gate nothing)",
+      "title": "The Archive 1a — the sex loop + the drain (⚠️ superseded rev 81 pure-power / rev 83 collapsed to ONE drain: WHERE/access moved to the docs department, drain gates nothing)",
       "status": "validated",
       "target_phase": "5_scenes.toml",
       "introduces": [],
@@ -1215,7 +1215,7 @@
         "hub #7 loop-entry rung 'Take him — all the way' (gated calloway_believes + calloway_flinch_resolved + corruption gte 18; resets 5 loop traits + SETS calloway_fucked_once) -> loop_calloway_sex.",
         "loop_calloway_sex (triggerless: intro + oral/vaginal/anal poses, loop_npc_pleasure climb, climax-elect >=50; belief-lever/cold; the anal finish IS the drain).",
         "loop_calloway_finisher (triggerless; [group] by sex_finisher_type; facial/inside reset+exit; ANAL branches — counter calloway_drains_done bumped HERE as a TRAIT, every drains_done state covered exactly once: 0->d0 (bump), 1->d1 (bump, drains_done reaches 2), >=2->done; NO weapon-charge gate). v2: the drain is HER POWER, NOT detection.",
-        "calloway_drain_canvas (triggerless payloads — ⚠️ REPAYLOADED rev 81 to PURE POWER, gating nothing): d0 = the first full pull; d1 = deeper, he's leashed; done = nothing left. INTERNAL-ONLY branch selector via calloway_drains_done. The WHERE + access are SEEN at the docs department (cap_docs_first_look -> access_problem_seen), NOT drained; the 'Drain him — twice' quest goal was retired (last Calloway card = his end-state). See decisions_log rev 81."
+        "calloway_drain_canvas (triggerless payloads — ⚠️ REPAYLOADED rev 81 to PURE POWER, then COLLAPSED to ONE drain rev 83): d0 = the drain; done = the repeatable warm-tap after (the second drain d1 was removed). INTERNAL-ONLY branch selector via calloway_drains_done. The WHERE + access are SEEN at the docs department (cap_docs_first_look -> access_problem_seen), NOT drained (Calloway never tells her); the 'Drain him — twice' quest goal was retired (last Calloway card = his end-state). See decisions_log rev 81/83."
       ]
     },
     {
@@ -1490,10 +1490,10 @@
       },
       {
         "id": "npc_calloway",
-        "role": "the mark — Vance Securities rogue-hunter, humiliated + sidelined, un-indexed file room; she infiltrates as a junior analyst, plants the bug, seduces on the belief-lever, drains him twice; ends her nemesis (reports the analyst up → the 1b fuse)",
+        "role": "the mark — Vance Securities rogue-hunter, humiliated + sidelined, un-indexed file room; she infiltrates as a junior analyst, works his case + seduces on the belief-lever, drains him (ONE drain, PURE POWER); the leak (Vane) is what she burns to reach her file. The 1a fuse = the retrieval (docs_retrieved) → watcher-flush + Mercer panic (the Chairman fuse into 1b)",
         "depth": "core (1a mark → recurring nemesis into 1b / Act 2)",
-        "arc_shape": "RE-CAST (The Archive, rev 69, from 'Mission-3 domme cover'): seduce-in on the BELIEF-LEVER (not domme) — two axes on his OWN meters (relation = belief/access odometer, corruption = surrender ladder), the Renner double-lock; anal finish IS the drain; two load-bearing drain payloads (surface: he's certain → depths: the big pull, days ago, her file in it). Cold, no warmth.",
-        "status": "RE-CAST for The Archive — blueprinted (Pass 2, rev 69); NOT built. First name OPEN."
+        "arc_shape": "RE-CAST (The Archive, rev 69, from 'Mission-3 domme cover'): seduce-in on the BELIEF-LEVER (not domme) — two axes on his OWN meters (relation = belief/access odometer, corruption = surrender ladder), the Renner double-lock; anal finish IS the drain — ONE drain, PURE POWER (rev 83; gates nothing, the WHERE/access are SEEN at the docs department, not drained). Cold, no warmth.",
+        "status": "RE-CAST for The Archive — BUILT (v2 copies-not-theft, rev 72-83). First name OPEN (placeholder: Calloway)."
       },
       {
         "id": "npc_cain",
@@ -2607,6 +2607,11 @@
       "book_revision": 82,
       "turn": 118,
       "note": "THE ARCHIVE 1a — division build-out ADVERSARIAL REVIEW + fixes. Ran a 27-agent workflow (5 dimension finders x adversarial-verify + a headless live-test) against rev 81. LIVE-TEST PASSED (npx playwright+chromium, served output/ on :8777): (1) SETTER — Engine.play(Location_docs_department) fires cap_docs_first_look -> State.variables.flags.access_problem_seen reads back TRUE; (2) RE-WIRE — with vane_confirmed+access_problem_seen true, docs_retrieved false, calloway_drains_done=0, vance_securities redirects to Canvas_cap_vane_blackmail (and STILL fires at drains=5) -> the old drains>=2 gate is PROVEN GONE at runtime; small-talk dispatcher + amb_floor_* render; NO soft-lock/unreachable/breakage (only expected media 404s on --dev). 8 findings CONFIRMED / 13 dismissed. FIXED (7): (a) [logic bug I introduced] cap_docs_vane_routine had NO upper guard -> the 'Vane is your way in' night-beat could fire AFTER she'd confirmed+blackmailed him (contradictory prose); added vane_confirmed is_false + docs_retrieved is_false guards (is_false = validator-exempt) so it's PRE-confirmation texture only. (b) [register] trimmed cap_docs_vane_routine thought_bubble 60w->~44w (dropped the near-verbatim objective-restatement). (c) [prose-truth] 1_metadata Calloway NPC-def comment 'plants the bug' -> the v2 no-gadget spine. (d) [ledger] npc_calloway.designed[] 3 stale bullets (drains-as-load-bearing-plot + downstream drains_done>=2; the dropped cap_calloway_bug/bug_planted; the dropped calloway_reported fuse) -> rewritten to pure-power internal-only drains + cap_calloway_access + the docs_retrieved/watcher-flush->archive_1a_done fuse. (e) [ledger] plan[] beat_0062 title + the calloway_drain_canvas echo marked '⚠️ superseded/REPAYLOADED rev 81' (pure power; WHERE moved to the docs dept). HELD for LO's explicit yes (design_book.md propose-first rule): design_book.md:344 live Casting row still says the drain 'reveals WHERE her file is (v2)' — proposed one-line strike, NOT yet applied. merge OK; package --dev GREEN, ALL FLAG CHAINS VALID; cap_docs_vane_routine guards confirmed in build. NOT committed. book_revision 81->82."
+    },
+    {
+      "book_revision": 83,
+      "turn": 119,
+      "note": "THE ARCHIVE 1a — REMOVE THE SECOND CALLOWAY DRAIN (LO call: 'remove the second drain itself; Calloway shouldn't be the one telling that, Wren should figure that out'). Collapsed the two-drain structure to ONE drain (pure power). Since the division build-out already moved the WHERE + access reveal to the docs department (Wren sees it herself), a second drain had no job. 5_scenes: loop_calloway_finisher — DELETED the middle anal-finish choice (the d1 'Drain him deeper' branch, drains_done eq 1 -> +1 -> d1); re-threaded the 'done' branch from drains_done gte 2 -> gte 1 (label 'Take him. There's nothing left to take' -> 'Take him again'). calloway_drain_canvas — DELETED node d1 ('Deeper'); renamed d0 'The first full pull' -> 'The drain' (dropped 'for the first time', folded the d1 leash line into d0's thought_bubble); recast 'done' node 'Nothing left' -> 'The warm tap' (the repeatable pure-power use, no 'nothing left to pull' contradiction). Counter calloway_drains_done kept but now only two states (0 -> the drain/bump to 1; >=1 -> the repeat/no bump); still a TRAIT (validator-exempt), still INTERNAL-ONLY, gates nothing. Loop covers every state exactly once (facial/inside lt2; anal lt1 -> drain; anal gte1 -> repeat) — no dead-end, no orphan (no gte-2 reader remains). Comments updated (finisher header + description, 1_metadata drain-counter, 0_systems label). Prose-truth/ledger reconcile: design_beat_archive_v2.md §15 (d0/d1 two-drain -> ONE drain); authoring_state npc_calloway.designed[] drains bullet + structure_registry.npcs npc_calloway (role 'plants the bug/drains him twice/reports-fuse' + arc_shape 'two load-bearing drain payloads' + status 'NOT built' -> BUILT, one pure-power drain, docs_retrieved fuse — a stale rev-69-blueprint entry my rev-81/82 reconcile had MISSED); plan[] beat_0062 title + calloway_drain_canvas echo. STILL HELD (design_book.md propose-first): design_book.md:344 drain 'reveals WHERE' clause. merge OK; package --dev --debug GREEN, ALL FLAG CHAINS VALID; d1 node/reference = 0 in build, drain nodes = d0+done, no gte-2 drains_done reader. NOT committed. book_revision 82->83."
     }
   ]
 }

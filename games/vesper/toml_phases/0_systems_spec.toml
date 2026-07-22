@@ -266,7 +266,7 @@ key    = "repair_session"
 hidden = true
 # THE ARCHIVE 1a (beat_0056) — the Calloway drain counter. Hidden from the <<playerTraits>> dump; no sidebar
 # row. A TRAIT (gte-read) because the drain setter is triggerless. INTERNAL-ONLY: read solely to pick the drain
-# payload branch (d0/d1/done); gates no downstream content — the drains are pure power now.
+# payload branch (d0 the drain / done the repeat); ONE drain now (second removed rev 83), gates no content — pure power.
 [[traits.labels]]
 key    = "calloway_drains_done"
 hidden = true

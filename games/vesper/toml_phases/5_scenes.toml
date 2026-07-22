@@ -6138,16 +6138,16 @@ conditions = { version = "1.0", logic = "AND", items = [
 ] }
 effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 2, clamp = false } ]
 
-# ═══ loop_calloway_finisher — facial/inside END; anal -> the two drains (calloway_drain_canvas) ══════
+# ═══ loop_calloway_finisher — facial/inside END; anal -> THE drain (calloway_drain_canvas) ══════
 # The counter calloway_drains_done is a TRAIT bumped HERE on the anal-finish choice (validator-exempt; the
-# audit discipline — no flag on a triggerless canvas). NO weapon-charge gate (reliable, no soft-lock). The drains
-# are PURE POWER now — her hold over Calloway, NOT plot: they no longer gate anything (the WHERE + the access
-# problem are SEEN at the docs department, not drained). Anal branches cover every drains_done state, one exit each:
-# 0 -> drain 1 (d0 — first full pull); 1 -> drain 2 (d1 — deeper, he's leashed); >=2 -> done. facial/inside reset + exit.
+# audit discipline — no flag on a triggerless canvas). NO weapon-charge gate (reliable, no soft-lock). The drain
+# is PURE POWER — her hold over Calloway, NOT plot: it gates nothing (the WHERE + access are SEEN at the docs
+# department, not drained; Calloway NEVER tells her). ONE drain now — the old SECOND drain was removed (rev 83);
+# Wren figures the access out herself. Anal branches: 0 -> the drain (d0, bump to 1); >=1 -> done (repeatable). facial/inside reset + exit.
 [[canvases]]
 id          = "loop_calloway_finisher"
 name        = "He finishes"
-description = "Triggerless finisher. [group] by sex_finisher_type. facial(0)/inside(1) reset+exit. anal(2) IS the drain (PURE POWER — her hold over him): 0->d0 (first full pull) bump; 1->d1 (deeper, he's leashed) bump; >=2->done. counter = TRAIT bumped here. Does NOT gate the plot (the WHERE + access are seen at the docs department; the leak is cracked by the case-work + Colm) — this drain = power + keeping him blind."
+description = "Triggerless finisher. [group] by sex_finisher_type. facial(0)/inside(1) reset+exit. anal(2) IS the drain (PURE POWER — her hold over him): 0->d0 (THE drain) bump to 1; >=1->done (repeatable). counter = TRAIT bumped here. ONE drain only — the second was removed (rev 83). Gates NO plot (the WHERE + access are seen at the docs department; the leak is cracked by the case-work + Colm) — this drain = power + keeping him blind."
 [[canvases.nodes]]
 id   = "climax"
 name = "He finishes"
@@ -6188,7 +6188,7 @@ effects = [
   { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
 ]
-# DRAIN 1 — first full pull (pure power). drains_done 0 -> 1.
+# THE DRAIN — the first anal finish (pure power). drains_done 0 -> 1.
 [[canvases.nodes.exit_block.choices]]
 text       = "Open the drain on him."
 targetType = "node"
@@ -6205,31 +6205,14 @@ effects = [
   { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
 ]
-# DRAIN 2 — deeper; he's leashed now (pure power). drains_done 1 -> 2.
+# DRAIN done — already drained once; the repeatable anal finish (pure power, no new beat). >=1.
 [[canvases.nodes.exit_block.choices]]
-text       = "Drain him deeper."
-targetType = "node"
-nodeId     = "calloway_drain_canvas.d1"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "sex_finisher_type",   operator = "eq",  value = 2 },
-  { type = "trait", subject = "player", trait_key = "calloway_drains_done", operator = "eq",  value = 1 },
-] }
-effects = [
-  { targetType = "player", trait = "calloway_drains_done", op = "add", value = 1 },
-  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
-]
-# DRAIN done — both taken; the repeatable anal finish, no new info. >=2.
-[[canvases.nodes.exit_block.choices]]
-text       = "Take him. There's nothing left to take."
+text       = "Take him again."
 targetType = "node"
 nodeId     = "calloway_drain_canvas.done"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "sex_finisher_type",   operator = "eq",  value = 2 },
-  { type = "trait", subject = "player", trait_key = "calloway_drains_done", operator = "gte", value = 2 },
+  { type = "trait", subject = "player", trait_key = "calloway_drains_done", operator = "gte", value = 1 },
 ] }
 effects = [
   { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
@@ -6243,13 +6226,13 @@ effects = [
 [[canvases]]
 id          = "calloway_drain_canvas"
 name        = "What he knows"
-description = "Triggerless drain payloads, reached from loop_calloway_finisher's anal-finish choices (counter bump + resets live on the choice). PURE POWER — her hold over Calloway, no plot: d0 = drain 1 (first full pull), d1 = drain 2 (deeper, he's leashed), done = nothing left. Does NOT gate anything (the WHERE + access are seen at the docs department). Power + keeping him blind; NOT detection."
+description = "Triggerless drain payloads, reached from loop_calloway_finisher's anal-finish choices (counter bump + resets live on the choice). PURE POWER — her hold over Calloway, no plot: d0 = THE drain (first anal finish; the second drain was REMOVED rev 83), done = the repeatable use after. Does NOT gate anything (the WHERE + access are seen at the docs department; Calloway never tells her). Power + keeping him blind; NOT detection."
 [[canvases.nodes]]
 id   = "d0"
-name = "The first full pull"
+name = "The drain"
 blocks = [
-  { type = "paragraph", content = "The drain opens all the way for the first time and she takes him properly — not a skim, the whole live current of him coming loose through the contact. His Charge, his week, the last hour, going soft and white while she holds the pull steady and drinks it down." },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "This is the part that keeps her running. Not what he knows — what he is, drawn off warm and given up gladly. She takes what she needs and leaves him the rest: the belief, the gratitude, the not-knowing. He's easier to keep than any lock in this building." },
+  { type = "paragraph", content = "The drain opens all the way and she takes him properly — not a skim, the whole live current of him coming loose through the contact. His Charge, his week, the last hour, going soft and white while she holds the pull steady and drinks it down." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "This is the part that keeps her running — not what he knows, what he is, drawn off warm and given up gladly. She leaves him the belief, the gratitude, the not-knowing, and takes the rest. There's a leash on him now: she can open him whenever the drain's hungry, and he'll thank her for it. Easier to keep than any lock in this building." },
   { type = "paragraph", content = "He blinks, the minutes wiped, disoriented in his own chair. 'Sorry — lost the thread. Where were we.' She tells him it's nothing. Drink some water." },
 ]
 [canvases.nodes.exit_block]
@@ -6259,24 +6242,10 @@ text = "Straighten up."
 destinationType = "specific"
 locationId      = "vance_securities"
 [[canvases.nodes]]
-id   = "d1"
-name = "Deeper"
-blocks = [
-  { type = "paragraph", content = "She goes deeper this time, past the surface and into the reserve of him, and takes more than she needs — enough that he sways after, gray, hollowed, running on whatever she left him. There's a leash on him now. She can open him whenever the drain's hungry and he'll thank her for it." },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "That's the use of a true believer. He never counts what's gone because he never doubts the woman taking it. She works the rest of them for the file; she keeps Calloway for this — a warm, willing tap she never has to break into twice." },
-  { type = "paragraph", content = "He surfaces blank, rubbing his temple, grateful and hollowed and none the wiser. She straightens her clothes while he finds his feet. Whatever's left of him is still, without question, on her side." },
-]
-[canvases.nodes.exit_block]
-type = "location"
-text = "Leave him grateful."
-[canvases.nodes.exit_block.config]
-destinationType = "specific"
-locationId      = "vance_securities"
-[[canvases.nodes]]
 id   = "done"
-name = "Nothing left"
+name = "The warm tap"
 blocks = [
-  { type = "paragraph", content = "She's taken everything he had on this. The drain fires, the minutes go, and there's nothing in him left to pull. Just the act now, and the quiet after, and his hand finding hers like it's the only true thing in the room. She lets him think it is." },
+  { type = "paragraph", content = "The drain fires the way it always does now — no drama, no discovery, just his Charge coming loose into her and the minutes going with it. He surfaces grateful and none the wiser, his hand finding hers like it's the only true thing in the room. She lets him think it is." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
