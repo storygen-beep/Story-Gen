@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 80,
+  "book_revision": 82,
   "register": {
     "person": "third"
   },
@@ -182,9 +182,9 @@
         "the belief-lever spine (Renner double-lock reused: relation=belief/access, corruption=surrender, arousal=loop throttle)",
         "the 5-rung locked-visible ladder + the he-flinches throttle (the one hard non-lewd gate)",
         "the sex loop → anal-finish drain (Renner pattern reused)",
-        "the two load-bearing drains via calloway_drains_done, a TRAIT bumped on the triggerless drain canvas (0→surface: he's certain the section's safe; 1→depths: it's already gone, lifted days ago by an inside job, her file in it; counter reaches 2); downstream reads calloway_drains_done>=2 — NO theft2_done, NO big_chunk_known flag (a flag set mid-loop would hard-fail the validator)",
-        "the bug proposal (cap_calloway_bug → bug_planted + calloway_believes/access)",
-        "the betrayal → calloway_reported (the 1b fuse)"
+        "the two drains (d0/d1) via calloway_drains_done, a TRAIT bumped on the triggerless drain canvas — PURE POWER (her hold over him): d0 first-full-pull, d1 deeper/he's-leashed. INTERNAL-ONLY branch selector (picks d0/d1/done), gates NOTHING; the WHERE + access are SEEN at the docs department (access_problem_seen), not drained (v2 rework, rev 81). NO theft2_done/big_chunk_known (validator)",
+        "the belief-lever access capstone (cap_calloway_access → calloway_believes; the disbelieved man brings her all the way into his hunt — NO bug/gadget; v2 replaces the old bug proposal, rev 74)",
+        "the 1a fuse (v2): the retrieval → docs_retrieved → the watcher-flush (Vane's unauthorized pull is caught) + Mercer panic → archive_1a_done (the Chairman fuse into 1b; the old calloway_reported flag was dropped in v2)"
       ],
       "deferred_cross_npc": [
         "the 1b Chairman confrontation (Calloway's report → cover-trail → Mercer blown)",
@@ -1207,7 +1207,7 @@
     },
     {
       "id": "beat_0062",
-      "title": "The Archive 1a — the sex loop + the two drains (payloads reworked v2: power + WHERE, not the theft)",
+      "title": "The Archive 1a — the sex loop + the two drains (payloads = PURE POWER; ⚠️ superseded rev 81: WHERE/access moved to the docs department, drains gate nothing)",
       "status": "validated",
       "target_phase": "5_scenes.toml",
       "introduces": [],
@@ -1215,7 +1215,7 @@
         "hub #7 loop-entry rung 'Take him — all the way' (gated calloway_believes + calloway_flinch_resolved + corruption gte 18; resets 5 loop traits + SETS calloway_fucked_once) -> loop_calloway_sex.",
         "loop_calloway_sex (triggerless: intro + oral/vaginal/anal poses, loop_npc_pleasure climb, climax-elect >=50; belief-lever/cold; the anal finish IS the drain).",
         "loop_calloway_finisher (triggerless; [group] by sex_finisher_type; facial/inside reset+exit; ANAL branches — counter calloway_drains_done bumped HERE as a TRAIT, every drains_done state covered exactly once: 0->d0 (bump), 1->d1 (bump, drains_done reaches 2), >=2->done; NO weapon-charge gate). v2: the drain is HER POWER, NOT detection.",
-        "calloway_drain_canvas (triggerless payloads, v2 REWORK — power + WHERE + keeping him blind, NOT the theft-discovery): d0 = WHERE her file is (the sealed vault under the division, past what she can badge into); d1 = the access problem (two-man clearance rotates weekly, past even his level -> she can't reach it alone, she'll need an insider she can bend = the hook to blackmailing Vane); done = both taken. Card-4 tip + finisher choice labels re-pointed to the WHERE/access, not the old theft."
+        "calloway_drain_canvas (triggerless payloads — ⚠️ REPAYLOADED rev 81 to PURE POWER, gating nothing): d0 = the first full pull; d1 = deeper, he's leashed; done = nothing left. INTERNAL-ONLY branch selector via calloway_drains_done. The WHERE + access are SEEN at the docs department (cap_docs_first_look -> access_problem_seen), NOT drained; the 'Drain him — twice' quest goal was retired (last Calloway card = his end-state). See decisions_log rev 81."
       ]
     },
     {
@@ -1333,7 +1333,17 @@
       {
         "id": "vance_securities",
         "category": "locked",
-        "note": "The Archive 1a (rev 69, RE-SPEC from the 'Calloway / Mission 3 (Spire)' frontier stub): Calloway's topside division + un-indexed file room. Registered stub + named in prose, but NO location object in TOML yet → a clean new build. File-room register FOLDS INTO the hub (one location, one window, portrait always renders — Renner Fork-A lesson). LOCKED until salvage_relaunched (entry_conditions + blocked_message, version=1.0)."
+        "note": "The Archive 1a (rev 69, RE-SPEC from the 'Calloway / Mission 3 (Spire)' frontier stub): Calloway's topside division + un-indexed file room. Registered stub + named in prose, but NO location object in TOML yet → a clean new build. File-room register FOLDS INTO the hub (one location, one window, portrait always renders — Renner Fork-A lesson). LOCKED until salvage_relaunched (entry_conditions + blocked_message, version=1.0). Rev 81 (division build-out): the floor now hosts the chat_the_floor small-talk pool + the dying-office ambients + a child docs_department; framed as a division being audited shut."
+      },
+      {
+        "id": "docs_department",
+        "category": "reachable",
+        "note": "The Archive 1a (division build-out, rev 81): child office off vance_securities (entry_from). The guarded records archive — front desk (npc_enns), guards, the sealed docs_vault. cap_docs_first_look (first visit, auto-fire, gated calloway_met + access_problem_seen is_false) SETS access_problem_seen = she sees she can't reach her file herself. Also Vane's night-schedule location (his routine); cap_docs_vane_routine = she watches him badge the vault."
+      },
+      {
+        "id": "docs_vault",
+        "category": "locked",
+        "note": "The Archive 1a (division build-out, rev 81): locked-visible child of docs_department (entry_from). entry_conditions require vault_cleared gte 1 — a hidden trait with NO setter, so PERMANENTLY locked (she sees it, never enters; Vane retrieves it via the blackmail). blocked_message = the two-man clearance. The 'wall' the whole access re-wire rides on."
       },
       {
         "id": "the_eyrie",
@@ -1552,8 +1562,8 @@
         "id": "npc_vane",
         "role": "the rogue — Calloway's TRUSTED teammate, secretly the leak: he COPIES files (nothing goes missing) + feeds Colm -> Bastien; steers Calloway off his own trail. 1a: confirmed via Colm's drain, BLACKMAILED to retrieve her file, warns her + flees at the flush. 1b: kept asset.",
         "depth": "minor (on-screen in 1a capstones -> 1b kept asset)",
-        "arc_shape": "NON-conquest (blackmail leverage, not seduction). Schedule-less by design — appears ONLY in auto-fire capstones (dialog speaker), never a portrait hub, so needs no schedule. No relation/corruption climb.",
-        "status": "RECAST v2 (rev 72); DECLARED in TOML (beat_0056, rev 73) — def upgraded to v2 (schedule-less, on-screen). Name OPEN (placeholder: Vane)."
+        "arc_shape": "NON-conquest (blackmail leverage, not seduction). No relation/corruption climb. SCHEDULED (rev 81, division build-out): day at vance_securities (in the chat_the_floor small-talk pool; his walk-in guards vane_confirmed is_false, retires when exposed) + night at docs_department (his routine — where she observes him badge the vault to learn he's her way in).",
+        "status": "RECAST v2 (rev 72); DECLARED in TOML (beat_0056, rev 73). GAINED a 2-row schedule (rev 81) — was schedule-less. Name OPEN (placeholder: Vane)."
       },
       {
         "id": "npc_colm",
@@ -1561,6 +1571,34 @@
         "depth": "minor (one-two scenes; a cold underworld use, no arc)",
         "arc_shape": "NON-conquest — the underworld drain (tonal opposite of the Calloway slow-con). Declared schedule-less at beat_0056 (forward declaration); his SCHEDULE @underworld_bar + seduce/drain hub arrive WHOLE at beat_0066 (no dead presence).",
         "status": "NEW v2 (rev 73); DECLARED in TOML (beat_0056) — def + core_traits triad + arc_stages, schedule-less. Content = beat_0066."
+      },
+      {
+        "id": "npc_enns",
+        "role": "docs-department front-desk clerk — gatekeeper of the guarded archive. Delivers the access wall (two-man clearance, senior custody only) in cap_docs_first_look. Schedule-less dialog speaker.",
+        "depth": "background (one scene, texture)",
+        "arc_shape": "NON-conquest — pure gatekeeper/exposition, no arc, no climb.",
+        "status": "NEW (rev 81, division build-out); DECLARED in TOML (schedule-less)."
+      },
+      {
+        "id": "npc_voss",
+        "role": "analyst on Calloway's dying team — small-talk texture only (chat_the_floor walk-in). Populates the floor; carries no vault clues.",
+        "depth": "background (small-talk pool)",
+        "arc_shape": "NON-conquest — ambient teammate, no arc.",
+        "status": "NEW (rev 81, division build-out); DECLARED in TOML (schedule-less; surfaced via the small-talk dispatcher)."
+      },
+      {
+        "id": "npc_reyes",
+        "role": "analyst on Calloway's dying team — small-talk texture only (chat_the_floor walk-in).",
+        "depth": "background (small-talk pool)",
+        "arc_shape": "NON-conquest — ambient teammate, no arc.",
+        "status": "NEW (rev 81, division build-out); DECLARED in TOML (schedule-less)."
+      },
+      {
+        "id": "npc_marr",
+        "role": "analyst on Calloway's dying team — small-talk texture only (chat_the_floor walk-in).",
+        "depth": "background (small-talk pool)",
+        "arc_shape": "NON-conquest — ambient teammate, no arc.",
+        "status": "NEW (rev 81, division build-out); DECLARED in TOML (schedule-less)."
       }
     ],
     "flags": [
@@ -2559,6 +2597,16 @@
       "book_revision": 80,
       "turn": 116,
       "note": "THE ARCHIVE 1a — REFACTOR (LO-requested): 'Work the case' MOVED OUT of the Calloway hub into a SEPARATE Lane-3 solo activity (work_the_case). Per the skill's hub-vs-solo-work rule ('a menu verb with no NPC object is solo work -> its own canvas') + Renner's work_depot_haul pattern. The hub (hub_calloway_fileroom) now holds only NPC-object verbs: 'Talk to him' (.talk, +2 relation) + the seduction rungs + Leave. work_the_case = Wren-solo Lane-3 host @vance_securities (is_repeatable, pri 3, gated calloway_met + schedule 08:00-20:00; solo-link no requires_npc, Calloway = dialog speaker in the fiction of his file room): the analyst cover-work -> +3 relation + case_progress +1 + 60 min (same effects as the old .work hub node). The case-reveals (case_progress bands) + everything downstream UNCHANGED. Removed the 'Work the case' hub CHOICE + the .work node; prose-truth swept (hub comment+description, the access-capstone comment). Save-safe (Archive test-portal only). merge OK; package --dev --debug GREEN, ALL FLAG CHAINS VALID, render-bucket clean (work_the_case = clean solo-link), Node_work gone from the hub, work_the_case its own canvas. book_revision 79->80."
+    },
+    {
+      "book_revision": 81,
+      "turn": 117,
+      "note": "THE ARCHIVE 1a — DIVISION BUILD-OUT (LO-requested: make Vance Securities a real DYING workplace + SEE the access wall, not drain it). Decouples the Vane blackmail from the Calloway sex-grind. Six increments, each green. (1) docs_department (child of vance_securities, entry_from) + docs_vault (locked-visible, vault_cleared never-set gate, two-man-clearance blocked_message) + npc_enns (front-desk clerk, schedule-less). (2) 4-analyst team npc_voss/reyes/marr + RECAST small-talk: chat_the_floor Lane-3 dispatcher @vance_securities (gated calloway_met) cycling 4 substitution_only walk-ins (one exclusive_group 'floor_chat', ONE roll — Pattern B); Vane's walk-in guards vane_confirmed is_false (retires when exposed). npc_vane GAINED a 2-row schedule (day @vance_securities floor / night @docs_department) — was schedule-less (orphan-schedule trap avoided: rows placed right after npc_vane's def). (3) 3 dying-office ambients amb_floor_dying/audit/goodbye (trigger_mode random one-shots, room-only, set nothing, gated calloway_met). (4) the docs visit: cap_docs_first_look (auto-fire, first visit, gated calloway_met + access_problem_seen is_false) SETS access_problem_seen via exit flagEffects (Enns dialog: sealed vault, guards, two-man clearance, she needs a cleared insider); cap_docs_vane_routine (night random one-shot, gated access_problem_seen + npc_at_location docs_department npc_vane is_present) = she watches Vane badge the vault -> he's her way in (pure texture, gates nothing). (5) THE RE-WIRE (core fix, LO's objection): cap_vane_blackmail gate CHANGED vane_confirmed + calloway_drains_done gte 2 -> vane_confirmed + access_problem_seen (keeps docs_retrieved is_false); Calloway drains repayloaded from WHERE/access to PURE POWER (d0 first-full-pull, d1 deeper-he's-leashed) — calloway_drains_done now INTERNAL-ONLY (picks the drain branch), gates NOTHING; the 'Drain him — twice' quest goal RETIRED (last Calloway card = his end-state 'he's yours, keep him blind'); Story-Goals B/C guidance now name the docs department (so the player knows the blackmail needs access_problem_seen); stale drain-consumer comments fixed (1_metadata:97-101, 0_systems:267-268, the blackmail header:6463). NEW flag access_problem_seen (setter cap_docs_first_look, proven flagEffects-on-location-exit pattern ~dozens of precedents; reader = the blackmail) + hidden trait vault_cleared (never-set vault gate). (6) design_beat_archive_v2.md: §4/5/6/7/10 de-'Calloway=WHERE'd (WHERE now SEEN at docs dept) + new §15 division build-out; this ledger reconcile (registered docs_department/docs_vault, npc_enns/voss/reyes/marr, npc_vane schedule; noted access_problem_seen + vault_cleared). merge OK; package --dev GREEN, ALL FLAG CHAINS VALID, render-bucket clean (walk-ins = substitution targets, docs scenes no requires_npc; lone flag = pre-existing react_renner_threat disguise canvas, not mine). NOT committed. NEXT (deferred): live click-through proof + beat_0065 media harvest/clean ship + 1b. book_revision 80->81."
+    },
+    {
+      "book_revision": 82,
+      "turn": 118,
+      "note": "THE ARCHIVE 1a — division build-out ADVERSARIAL REVIEW + fixes. Ran a 27-agent workflow (5 dimension finders x adversarial-verify + a headless live-test) against rev 81. LIVE-TEST PASSED (npx playwright+chromium, served output/ on :8777): (1) SETTER — Engine.play(Location_docs_department) fires cap_docs_first_look -> State.variables.flags.access_problem_seen reads back TRUE; (2) RE-WIRE — with vane_confirmed+access_problem_seen true, docs_retrieved false, calloway_drains_done=0, vance_securities redirects to Canvas_cap_vane_blackmail (and STILL fires at drains=5) -> the old drains>=2 gate is PROVEN GONE at runtime; small-talk dispatcher + amb_floor_* render; NO soft-lock/unreachable/breakage (only expected media 404s on --dev). 8 findings CONFIRMED / 13 dismissed. FIXED (7): (a) [logic bug I introduced] cap_docs_vane_routine had NO upper guard -> the 'Vane is your way in' night-beat could fire AFTER she'd confirmed+blackmailed him (contradictory prose); added vane_confirmed is_false + docs_retrieved is_false guards (is_false = validator-exempt) so it's PRE-confirmation texture only. (b) [register] trimmed cap_docs_vane_routine thought_bubble 60w->~44w (dropped the near-verbatim objective-restatement). (c) [prose-truth] 1_metadata Calloway NPC-def comment 'plants the bug' -> the v2 no-gadget spine. (d) [ledger] npc_calloway.designed[] 3 stale bullets (drains-as-load-bearing-plot + downstream drains_done>=2; the dropped cap_calloway_bug/bug_planted; the dropped calloway_reported fuse) -> rewritten to pure-power internal-only drains + cap_calloway_access + the docs_retrieved/watcher-flush->archive_1a_done fuse. (e) [ledger] plan[] beat_0062 title + the calloway_drain_canvas echo marked '⚠️ superseded/REPAYLOADED rev 81' (pure power; WHERE moved to the docs dept). HELD for LO's explicit yes (design_book.md propose-first rule): design_book.md:344 live Casting row still says the drain 'reveals WHERE her file is (v2)' — proposed one-line strike, NOT yet applied. merge OK; package --dev GREEN, ALL FLAG CHAINS VALID; cap_docs_vane_routine guards confirmed in build. NOT committed. book_revision 81->82."
     }
   ]
 }

@@ -240,6 +240,10 @@ hidden = true
 [[traits.labels]]
 key    = "cell_door"
 hidden = true
+# vault_cleared: the docs vault door's gate (division build-out). Never set — the vault stays locked-visible.
+[[traits.labels]]
+key    = "vault_cleared"
+hidden = true
 # SALVAGE (beat_0046) — both hidden from the <<playerTraits>> dump. core_sealed is still set 1 at the verdict
 # but its sidebar row was REMOVED (LO 2026-07-16, see above) — it now displays nothing; kept declared for
 # save-safety. kess_debt is the owed-coin accumulator — named in the verdict prose, read by no gate this chunk.
@@ -261,7 +265,8 @@ hidden = true
 key    = "repair_session"
 hidden = true
 # THE ARCHIVE 1a (beat_0056) — the Calloway drain counter. Hidden from the <<playerTraits>> dump; no sidebar
-# row. A TRAIT (gte-read) because the drain setter is triggerless; downstream reads calloway_drains_done gte 2.
+# row. A TRAIT (gte-read) because the drain setter is triggerless. INTERNAL-ONLY: read solely to pick the drain
+# payload branch (d0/d1/done); gates no downstream content — the drains are pure power now.
 [[traits.labels]]
 key    = "calloway_drains_done"
 hidden = true

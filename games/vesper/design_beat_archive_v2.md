@@ -62,7 +62,7 @@ real, but it points the wrong way.
 
 | Who | Role | What they are to Wren |
 |---|---|---|
-| **Calloway** | The disbelieved investigator | Her **mark**. Belief-lever seduction. Gives her **access + WHERE the docs are.** His drain = her **power + keeping him blind.** |
+| **Calloway** | The disbelieved investigator | Her **mark**. Belief-lever seduction. Gives her the **cover, the trust, and the case-shape** (there's an inside pipe). His drain = **pure power + keeping him blind** (no plot — it gates nothing). |
 | **Vane** | The trusted-teammate **rogue** | She confirms him, then **blackmails him to retrieve the docs.** Warns her at the end, then flees. |
 | **Colm** | The **courier** (Bastien's man) | A **cold, fast underworld use.** His drain = the **pipe intel + Vane's face.** |
 | **Bastien** | The **buyer**; her old captor | **Off-screen in 1a** (IDed via Colm's drained memory). The 1b target. |
@@ -94,12 +94,14 @@ gut-punch** (§12).
   leave it in that archive. *Sent to fetch a secret for her master, she walks out holding the truth of herself.*
 
 **Where it lives:** the humanoid records are the **deepest** secret in the vault — far more locked-down than the
-day-to-day files Vane casually leaks to Bastien (high-security compartment, guards). That's *exactly why* she needs
-both men (§10): Calloway for **where**, Vane's access for the **high-security** compartment. The urgency is
+day-to-day files Vane casually leaks to Bastien (the sealed vault off the **docs department**, guards, two-man
+clearance). That's *exactly why* she needs Vane (§10): she **sees the wall herself** at the docs department (the
+vault, the guards, that her badge won't pass), and Vane's clearance is the way through it. The urgency is
 **Mercer's window + the Chairman closing in**, not "grab it before it leaks."
 
-Her file sits in the **high-security archive** (guarded — she can't reach it herself). That constraint is what
-forces the two-men structure at §10.
+Her file sits in the **sealed vault** off the docs department (guarded, two-man clearance — she can't reach it
+herself). She **sees** that wall in person (not drained, not told); that constraint is what forces the Vane
+blackmail at §10.
 
 ---
 
@@ -111,8 +113,9 @@ forces the two-men structure at §10.
 3. **Hunt the pipe on her turf.** At the Undertow she finds **Colm** and works him — drinks, drunk, back-room fuck,
    **drain.** The drain pulls his *memory of the handoffs* → the inside man's **face** → she recognizes **Vane**
    (the man at Calloway's elbow). Confirmation, not a hunch.
-4. **Both men for the docs.** Calloway tells her **where** the file is; she can't enter (guards); she **blackmails
-   the confirmed Vane** to pull it out.
+4. **See the wall, then Vane.** The **docs department** shows her where the file lives — the sealed vault, guards,
+   two-man clearance she can't pass; by night she watches **Vane** badge through it. She **blackmails the confirmed
+   Vane** (one of the cleared few) to pull it out.
 5. **The turn.** Calloway never trusted the stranger Mercer sent — he's had a man **watching Wren** all along.
    Vane's unauthorized retrieval is the slip the watcher catches → **Vane exposed.**
 6. **The ending.** Vane hands her the file but **warns her**: it's gone bad, run — the **Chairman ends betrayers**,
@@ -131,9 +134,10 @@ forces the two-men structure at §10.
 - **The case-work IS the detective legwork.** As relation climbs, staged reveals unlock: *the leaks are too clean*
   → *it's an inside job* → *there's an off-book pipe with no paper.* She never gets Vane's name from Calloway —
   she gets the **shape.**
-- **Seduction rungs → the sex loop → the drain.** His drain = **her power (Charge) + keeping him wrapped and
-  blind.** **NOT** the detective beat.
-- **What she extracts from Calloway (non-drain):** **WHERE** her file is stored (he knows the archive cold).
+- **Seduction rungs → the sex loop → the drain.** His drain = **pure power (Charge) + keeping him wrapped and
+  blind.** **NOT** the detective beat, **NOT** the WHERE — it gates nothing (it's her warm, willing tap).
+- **What Calloway gives (non-drain):** the **cover, the trust, and the case-shape** (there's an off-book pipe, an
+  inside man). He is **not** the WHERE-source — she sees the vault herself at the **docs department** (§10).
 
 ---
 
@@ -168,13 +172,17 @@ being what she is.
 
 ## 10. Getting the docs (both men required)
 
-She can't reach the file herself (high-security, guards). So the two men she's been playing each hold half:
+She can't reach the file herself (sealed vault, guards, two-man clearance). She learns this the honest way and
+turns Vane into the key:
 
-- **Calloway = WHERE.** He tells her which compartment (he knows the archive).
+- **The docs department = WHERE + the wall.** She walks the guarded archive on the floor and **sees** the sealed
+  vault, the guards, the clearance her badge won't pass — and watches **Vane** badge through it on his night
+  routine (one of the cleared few). *Seen, not told.* (`access_problem_seen`.)
 - **Vane = ACCESS.** Blackmailed (she's got him cold from Colm's drain), he **retrieves** the file for her.
 
-This is the clean lock: neither man alone gets her the file; she needs both, and she's earned both through the
-grind + the underworld work.
+This is the clean lock: she **sees** the wall herself, then forces the one man who can pass it. The blackmail
+gates on **`access_problem_seen` + `vane_confirmed`** — what she's seen and confirmed — never on the Calloway
+drain count.
 
 ---
 
@@ -239,3 +247,44 @@ no coincidences.
     retrieval, the watcher/flush, the Vane-warns + Mercer-panic ending.
 - **Next steps:** (1) pick the program's age (years); (2) fold this into `design_book.md` + reconcile
   `authoring_state.json`; (3) rebuild 1a, one verified increment per turn.
+
+---
+
+## 15. Division build-out (amendment, 2026-07-22)
+
+The first rebuild ran the whole discovery in **one abstract room** and *told* Wren the access problem via the
+second Calloway drain — which then hard-gated the back half (`cap_vane_blackmail` required `calloway_drains_done ≥
+2`). LO killed both. This amendment makes Vance Securities a **real, dying workplace** and makes the wall
+**seen**, not drained.
+
+**The world — one dying floor, not one room:**
+- **`vance_securities`** stays the floor (bullpen + Calloway's file room; all existing content survives). The
+  frame is a division being **audited shut** — empty desks, sealed offices, boxes going out. That death is the
+  texture.
+- **`docs_department`** — a child office off the floor: glass, a front desk (**Enns**), guards, and the sealed
+  **`docs_vault`** she can approach but never enter (locked-visible; `vault_cleared` gate with no setter).
+- **The team = 4 analysts under Calloway** — **Vane + Voss + Reyes + Marr** — sharing **one small-talk activity**
+  (`chat_the_floor`, a Lane-3 dispatcher cycling four `substitution_only` walk-ins, one `exclusive_group`, one
+  roll). Pure texture, no vault clues. **Vane blends in with the same small talk until `vane_confirmed`**, then
+  his walk-in retires and he's only the blackmail target.
+- **Dying-office ambients** (`amb_floor_dying / _audit / _goodbye`) — random one-shots, room-only, set nothing.
+
+**Vane is scheduled (LO's call):** **day at the floor** (`vance_securities`, in the small-talk pool) + **night at
+`docs_department`** (his routine). By day she chats him up with the team; by night she catches his real job —
+badging through the vault she couldn't. The day/night rhythm carries the reveal.
+
+**The access re-wire (the core fix):**
+- New flag **`access_problem_seen`**, set by **`cap_docs_first_look`** (auto-fire, first visit to the docs
+  department): the front desk, the guards, the sealed vault past her clearance → she *sees* she needs one of the
+  cleared few. **`cap_docs_vane_routine`** (night, gated `npc_at_location(docs_department, npc_vane)`) shows her
+  Vane is that man.
+- **`cap_vane_blackmail` now gates on `vane_confirmed + access_problem_seen`** (was `vane_confirmed +
+  calloway_drains_done ≥ 2`). The blackmail rides on what she's **seen and confirmed**, never the sex-grind count.
+- **The Calloway drains are pure power.** `calloway_drain_canvas` d0/d1 repayloaded from "WHERE / the access
+  problem" to **first-full-pull / deeper-he's-leashed** — her hold over him, gating nothing. The
+  `calloway_drains_done` counter survives but is **internal-only** (picks the drain payload branch). The
+  "Drain him — twice" quest goal is retired; the last Calloway card is now his **end-state** ("he's yours —
+  keep him blind").
+
+**New structure registered:** locations `docs_department`, `docs_vault`; NPCs `npc_enns`, `npc_voss`,
+`npc_reyes`, `npc_marr`; trait `vault_cleared` (never-set vault gate); flag `access_problem_seen`.

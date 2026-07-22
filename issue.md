@@ -112,3 +112,38 @@ mercer has been plotted by cain for calloway, mercer sees it as his own benefits
 
 
 here I think just an idea, chip also holds a memory transmitter to the chairmen himself, not mercer, she can know about it after reading her build files(it will contain more but this is also an important information), moving on to, now chairmen knows that wren now knows about him and about mercer's own purpose. Chairmen is coming to the city, to eliminate mercer and reset wren. Before he comes back she needs to find that remote controller and fix her chip, how she does it, thats is a question now. So we have many questions here, honestly share your thoughts on the different part of this plan.
+
+
+
+**22 July**
+[DONE]calloway beleive him sounds wierd, what does it means??
+
+grind is very less.
+
+[DONE]A gap on the shelf canvas, does it means to be the second big theft by vain.
+somethings sounds messed up with the first drain and second drain. And First theft, second theft and the undertow bar hearing. Lets focus on one thing at a time, A gap on the shelf canvas directly triggers after she finds the bug to the underworld black market, right?? if this is correct then it shouldnt be like this, wren doesnt get that beat, she drains calloway the first time he tells her the place and the chunk in the pile where the docs should be, and when she goes and checks she cant find anything out, she goes back to calloway again drains him and finds out it is gone with the big theft happens few days back. 
+
+I never suggested hearing the two guys in the undertow location, this was a shitty idea.
+The tough part here is she will have to find out bastien place and then bug him and then hear him and find out the place of the deal but this is bad, I think, just my instinct. 
+--the theft has already happened three days back and bug has been found out from the black market from the first theft, I think we can drop that part, the part which says the bug was destroyed and last tracked to the black market, but I think I would say bug was never destroyed, she saw that its goes from underworld blackmarket to a mension, she follows it and find out that it is the same place as bastien's place. Hell, we are simply making things more and more complicated, and this is getting pretty messed up. What are our options here on to make things simple better content logical and interesting. I think after the first theft she traces everything and it goes to the black market, where she sees the rogue identifies him, but also sees the buyer and this is bastien himself. She knows who is rogue, but she might have to hide it with calloway, if she tells him about the rogue then his work is done and he will be gone, so she has to play along for a while. In between she can also confront the rogue vain about his theft, so he has to stop until she is done with calloway, she also asks him about the doc but he doesnt know anything or heard of such things,
+
+
+
+
+I think we should decide on docs, calloway, rogue and bastien but redesign the story here completely. I want to add that rogue is not thefting the docs instead he is making copies and selling them to the underworld bastien. But from here and now considering only these factors, how would you redesign the story logically, simply with calloway grind in it too.
+
+
+
+**Everything Redesigned THE ARCHIVE V2**
+
+
+[DONE]Work the case should be a separate activity like work in the renner. Not in the same hub menu.
+
+vane drain not built properly, should be like a hub menu too, also she should have asked bartender about if he knows a guy can transfer anything from outerworld to underworld and vice versa, from he shows there is the guy colm. Now player should see the colm portrait in the bar at a fixed schedule every night, the work on him should not be like the way it is currently, instead it should also be a proper hub menu, where drain in the ass only triggers drain and informations.
+
+Quests Page written properly or can be written better, analyze thoroughly and share your honest thoughts. Its like it doesnt properly shows that now player has to go to underworld or he still has to work on the case.
+
+calloway second drain is the one gating the further content (vane blackmail and everything), I dont like it. First What is this second drain does explain in simple words.
+
+Instead the problem should be seen by wren herself properly, we havent built things properly. So we needs to add calloway team we decided earlier, it isnt just calloway and vane, and just one room.
+

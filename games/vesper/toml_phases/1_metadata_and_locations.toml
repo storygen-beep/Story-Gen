@@ -94,17 +94,21 @@ kess_debt         = 0
 # kept for save-safety, but nothing feeds it; the repair is coin-cost-per-session, not debt-accrual.)
 repair_armed      = 0
 repair_session    = 0
-# THE ARCHIVE 1a (beat_0056) — the Calloway drain counter (hidden). +1 per drain on the triggerless finisher:
-# 0->1 = surface (he's certain the section's safe), then 1->2 = depths (the big pull, lifted days ago by an
-# inside job, her file in it). A TRAIT (gte-read), NOT a flag — the drain setter is triggerless, so a flag would
-# hard-fail the flag-chain validator; a gte trait is exempt. Downstream (the deal-place spy W4, the "find the
-# buyer" Quest card) reads calloway_drains_done gte 2.
+# THE ARCHIVE 1a (beat_0056) — the Calloway drain counter (hidden). +1 per anal-finish drain on the triggerless
+# finisher: 0->1 = first full pull, 1->2 = deeper (he's leashed). A TRAIT (gte-read), NOT a flag — the drain
+# setter is triggerless, so a flag would hard-fail the flag-chain validator; a gte trait is exempt. INTERNAL-ONLY
+# now: read solely to pick the drain payload branch (d0/d1/done) in loop_calloway_finisher. It gates NO downstream
+# content — the drains are PURE POWER (the blackmail rides on access_problem_seen + vane_confirmed, not this count).
 calloway_drains_done = 0
 # THE ARCHIVE 1a (beat_0058, v2) — the case-work counter (hidden). +1 per "Work the case" session (the .work hub
 # feeder only, NOT "Talk to him"); its bands fire the staged case-reveals (cap_case_insider >=2, cap_case_curated
 # >=4, cap_case_pipe >=6). A TRAIT (gte-read) — the detective legwork that surfaces the leak's shape, distinct
 # from relation (trust/access).
 case_progress = 0
+# THE ARCHIVE 1a (division build-out) — the docs vault gate (hidden, NEVER SET). docs_vault's entry_conditions
+# require vault_cleared gte 1; nothing sets it, so the vault is permanently locked-visible — she sees it, never
+# enters (Vane retrieves). A TRAIT not a flag (a flag is_true gate needs a located setter).
+vault_cleared = 0
 # SALVAGE emitter recovery — emitter_broken: 0=works (default; pre-captivity yard/gate use), set 1 at the
 # captivity release (core dead -> the emitter draws off the SAME core, so it's dead too), set 0 at repair
 # session 12 (core restored). The 4 emitter fire gates AND `emitter_broken lt 1`. Default 0 = save-safe
@@ -284,8 +288,8 @@ end_time   = "22:00"
 activity   = "cutting a hull down"
 
 # ── Calloway — the mark: Vance Securities rogue-hunter (belief-lever seduce-in; The Archive 1a) ──
-# NEW (beat_0056). The disbelieved company hunter; she infiltrates his un-indexed file room, plants the bug,
-# seduces on the belief-lever, drains him twice, ends her nemesis. FULL triad (relation=belief/access odometer,
+# NEW (beat_0056; v2 copies-not-theft — NO bug/gadget). The disbelieved company hunter; she works his case + seduces
+# on the belief-lever, drains him (PURE POWER, gates nothing), and burns the leak (Vane) to reach her file. FULL triad (relation=belief/access odometer,
 # corruption=surrender ladder, arousal=loop throttle) — the Renner double-lock. SCHEDULE ADDED beat_0058 (below,
 # @vance_securities 08:00-20:00). ENGINE FACT (verified v2.py:3417-3424): a DECLARED [[npcs.schedules]] surfaces
 # the NPC on the Schedule PAGE regardless of any canvas gate — so Calloway is listed there from a fresh save.
@@ -314,11 +318,12 @@ end_time   = "20:00"
 activity   = "working the rogue-hunt files"
 
 # ── Vane — the rogue (Calloway's trusted teammate; RECAST v2, on-screen in 1a) ──
-# beat_0056/v2. Calloway's own trusted man, secretly the leak: he COPIES sensitive files (nothing ever goes
-# missing) and feeds them to Colm -> Bastien. On-screen in 1a (capstones only): she confirms him via Colm's
-# drain, BLACKMAILS him to retrieve her file, and he warns her + flees at the flush. Schedule-less by design —
-# he appears only in auto-fire capstones (dialog speaker), never a portrait hub, so he needs no schedule and
-# stays off the Schedule page. NON-conquest (blackmail leverage, not seduction). Name OPEN ("Vane", renameable).
+# beat_0056/v2 + division build-out. Calloway's own trusted man, secretly the leak: he COPIES sensitive files
+# (nothing ever goes missing) and feeds them to Colm -> Bastien. On-screen: he BLENDS IN with the team (the floor
+# small-talk pool, same easy small talk as the rest) until vane_confirmed, then she blackmails him. 2-ROW SCHEDULE
+# (LO): daytime at vance_securities (the floor / small-talk), NIGHTTIME at docs_department (his routine job — she
+# observes him badge the vault). No portrait hub — surfaced via the small-talk walk-in + the docs observation +
+# the blackmail capstone. NON-conquest (blackmail leverage). Name OPEN ("Vane", renameable).
 [[npcs]]
 id          = "npc_vane"
 name        = "Vane"
@@ -327,6 +332,22 @@ portrait    = "vane.jpg"
 core_traits = { relation = 0 }
 flag_keys   = []
 arc_stages  = ["The rogue"]
+
+# Vane's 2-row schedule (day floor / night docs) — MUST sit here, right after his def, or the rows orphan onto
+# the wrong NPC (the orphan trap). Day = on the floor (the small-talk pool). Night = the docs department (his
+# routine; she watches him at the vault, gated npc_at_location docs_department is_present). No midnight wrap.
+[[npcs.schedules]]
+location   = "vance_securities"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "18:00"
+activity   = "at his desk on the floor"
+[[npcs.schedules]]
+location   = "docs_department"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time   = "23:00"
+activity   = "his routine in the docs department"
 
 # ── Colm — the courier (NEW v2, beat_0056; Bastien's off-record man) ──
 # Bastien's off-record courier (never on paper), a regular at the Undertow. Carries Vane's copies out to Bastien.
@@ -341,6 +362,48 @@ portrait    = "colm.jpg"
 core_traits = { relation = 0, corruption = 0, arousal = 0 }
 flag_keys   = []
 arc_stages  = ["The courier"]
+
+# ── Enns — the docs-department front-desk clerk (NEW, division build-out) ──
+# Schedule-less dialog speaker (appears only in the docs_department scenes). The polite human face of the wall:
+# knows every reg, checks every badge, apologizes while telling her no. NON-conquest, no hub, no schedule.
+[[npcs]]
+id          = "npc_enns"
+name        = "Enns"
+description = "The docs department's front desk. Thirty years of forms and not one bent rule; she'll apologize twice while telling you your clearance doesn't reach the vault, and mean both. The polite face of a wall."
+portrait    = "enns.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = ["The clerk"]
+
+# ── The division team (NEW, division build-out) — schedule-less dialog speakers, surfaced ONLY via the floor
+# small-talk pool (chat_the_floor, 5_scenes). Pure texture, no vault clues. The "trusted few" the leak hides
+# among (Vane is one of them, scheduled above). No portrait hubs -> no dead presence. ──
+[[npcs]]
+id          = "npc_voss"
+name        = "Voss"
+description = "Thirty-one years in the division; still calls Calloway the only honest man on the floor. Boxing up a career he thought would end in a pension, not an audit."
+portrait    = "voss.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = ["The lifer"]
+
+[[npcs]]
+id          = "npc_reyes"
+name        = "Reyes"
+description = "Young, sharp, already interviewing out. Answers the auditors fully and Calloway not at all; thinks the ghost is Calloway cracking up, and isn't quiet about it."
+portrait    = "reyes.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = ["The cynic"]
+
+[[npcs]]
+id          = "npc_marr"
+name        = "Marr"
+description = "Checked out two promotions ago. Does the crossword, runs the clock, jokes that the shredder's the busiest thing on the floor. Not wrong."
+portrait    = "marr.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = ["The burnout"]
 
 # ─── Clothing — the worn-state COVER catalog (beat_0015) ──────────────────────
 # Two "dress"-slot looks she swaps between at the rack (wardrobe page @ wren_room):
@@ -422,10 +485,37 @@ name        = "Vance Securities"
 description = "An internal division high in Vance Tower — Calloway's floor, and the file room nobody audits. Quiet, over-lit, under-staffed: a man chasing a ghost through paper the company would rather forget."
 image       = "locations/vance_securities.jpg"
 entry_from  = "spire_plaza"
+navigation_order = ["docs_department"]
 entry_conditions = { version = "1.0", items = [
   { type = "flag", subject = "player", flag_key = "salvage_relaunched", operator = "is_true" },
 ] }
 blocked_message = "Mercer hasn't sent her up there yet. The Calloway job opens when he gives the word."
+
+# ── docs_department — the official high-security archive (another office on the Vance Securities floor) ──
+# NEW (division build-out). Child of vance_securities (same floor). The OFFICIAL archive — glass, a front desk
+# (Enns), guards, and the sealed vault (docs_vault, below) where her build file actually lives. She gets onto the
+# department floor; the vault is past her clearance. Vane's night routine runs through here (his 2-row schedule).
+[[locations]]
+id               = "docs_department"
+name             = "The Docs Department"
+description      = "The division's official archive — glass walls, a front desk with a bored clerk, two guards who don't blink. Nothing like Calloway's paper hoard down the hall: every badge is logged, every drawer is watched, and the files that actually matter sit behind a vault door nobody without clearance walks through."
+image            = "locations/docs_department.jpg"
+entry_from       = "vance_securities"
+navigation_order = ["docs_vault"]
+
+# ── docs_vault — the sealed vault (LOCKED-VISIBLE: she sees it, never enters; Vane retrieves) ──
+# Gated on the trait vault_cleared (declared 0, NEVER SET) so the door never opens — she can look at the wall she
+# can't cross. version="1.0" or the lock fails OPEN. Needs an image or nav drops to text mode.
+[[locations]]
+id          = "docs_vault"
+name        = "The Vault"
+description = "The deep archive. Two-man clearance, biometric on the door, a guard either side who's been told her badge doesn't reach. Whatever Mercer sent her for is in there — ten feet away and a world out of reach."
+image       = "locations/docs_vault.jpg"
+entry_from  = "docs_department"
+entry_conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "vault_cleared", operator = "gte", value = 1 },
+] }
+blocked_message = "Two-man clearance, and hers isn't one of them. The guards don't even look up. Not a door she opens — not herself."
 
 [[locations]]
 id               = "atrium"
