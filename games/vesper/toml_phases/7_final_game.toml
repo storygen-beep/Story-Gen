@@ -282,14 +282,9 @@ hidden = true
 [[traits.labels]]
 key    = "calloway_drains_done"
 hidden = true
-# THE ARCHIVE 1a (beat_0066) — the Colm hub counters. Hidden; no sidebar rows. colm_drinks/colm_kisses (0->3 ladders)
-# + colm_drains_done (0->1, drain branch). TRAITS (gte-reads) — the drink/kiss rungs bump on choices; validator-exempt.
-[[traits.labels]]
-key    = "colm_drinks"
-hidden = true
-[[traits.labels]]
-key    = "colm_kisses"
-hidden = true
+# THE ARCHIVE 1a (beat_0066) — the Colm drain counter. Hidden; no sidebar row. colm_drains_done (0->1, drain
+# branch) TRAIT — gte-read, bumped on the finisher choice, validator-exempt. (rev 98: colm_drinks/colm_kisses
+# retired — Colm's on-ramp now gates on npc_colm.relation, so the ladders are gone.)
 [[traits.labels]]
 key    = "colm_drains_done"
 hidden = true
@@ -411,15 +406,13 @@ repair_session    = 0
 # (he gives up the deep vault in docs). calloway_drains_done gte 1 GATES cap_docs_first_look (rev 84) — the drain
 # is the ONLY road to the where (Wren still sees the WALL herself at docs). Also picks the drain branch (d0/done).
 calloway_drains_done = 0
-# THE ARCHIVE 1a (beat_0066) — the Colm hub counters (hidden). colm_drinks: +1 per "Drink with him" night (0->3, one
-# per night via max_triggers_per_day; its bands render the 3 escalating drink beats; gte 3 opens the hub). colm_kisses:
-# +1 per "Kiss him" rung (0->3; its bands run hesitant->warming->done; gte 3 opens "Take him in the back"). colm_drains_done:
-# +1 on the FIRST ASS-FINISH drain, bumped on loop_colm_finisher's ass-finish choice (0->1; picks the drain branch
-# d0/done). TRAITS not flags (gte-reads, validator-exempt); the drink/kiss rungs bump on choices. rev 92: colm_drains_done
-# gte 1 REPLACED the retired vane_confirmed flag at all 5 of its gates — the drain setter moved onto the triggerless
-# finisher, where an is_true FLAG would hard-fail the flag-chain validator (same reason as names_known above).
-colm_drinks       = 0
-colm_kisses       = 0
+# THE ARCHIVE 1a (beat_0066) — the Colm drain counter (hidden). rev 98: Colm's on-ramp now gates on
+# npc_colm.RELATION (drinks/talks/kisses bump it in hub_colm_undertow; kiss unlocks at relation>=12, the back room
+# at relation>=24), so the old colm_drinks/colm_kisses ladder counters are RETIRED. colm_drains_done: +1 on the
+# FIRST ASS-FINISH drain, bumped on loop_colm_finisher's ass-finish choice (0->1; picks the drain branch d0/done).
+# A TRAIT not a flag (gte-read, validator-exempt) — the drain setter is on the triggerless finisher, where an
+# is_true flag would hard-fail the flag-chain validator (same reason as names_known above). rev 92: colm_drains_done
+# gte 1 REPLACED the retired vane_confirmed flag at all 5 of its gates.
 colm_drains_done  = 0
 # THE ARCHIVE 1a (beat_0058, v2) — the case-work counter (hidden). +1 per "Work the case" session (the .work hub
 # feeder only, NOT "Talk to him"); its bands fire the staged case-reveals (cap_case_insider >=2, cap_case_curated
@@ -4955,62 +4948,11 @@ when = [
 # ═══════════════════════════════════════════════════════════════════════════════
 
 # ═══ beat_0031 — THE LEAD (Sol at the underworld bar) ═════════════════════════
-# Plain location canvas at underworld_bar = The Undertow (NOT requires_npc — Sol is scenery + the
-# speaker), gated names_known>=1 + hunt_lead is_false. Sol knew Doss; points at the surviving fixer
-# Marsh (The House, Sundays) + the carry-the-drain telegraph (soft-lock guard). SETS hunt_lead (located).
-# Priority 8. (Moved from the_anchor -> the underworld bar so the whole hunt is one underworld descent.)
-[[canvases]]
-id          = "hunt_sol_lead"
-name        = "The bartender"
-description = "The Underworld Hunt lead. Off Doss's name, Sol names the surviving fixer Marsh (The House, Sundays) + tells her to carry the drain. SETS hunt_lead; retires once taken. Gated names_known>=1 + hunt_lead is_false."
-
-[canvases.trigger]
-location      = "underworld_bar"
-is_repeatable = true
-priority      = 8
-is_active     = true
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "names_known", operator = "gte", value = 1 },
-  { type = "flag",  subject = "player", flag_key  = "hunt_lead",   operator = "is_false" },
-] }
-
-[[canvases.nodes]]
-id   = "base"
-name = "The bartender"
-blocks = [
-  { type = "image", props = { file = "scenes/underworld_bar_bartender.jpg", description = "A dim underground bar, red light, an old bartender working the taps at the quiet end, unhurried.", search_queries = ["dim underground speakeasy bartender red light", "noir back-alley bar bartender low light"] } },
-  { type = "paragraph", content = "Sol works the taps at the dim end of the bar, wiping a glass that's already clean. He's outlasted every owner this place has had — and it's had a few, though the one it answers to now never shows his face. He looks at her the way he looks at regulars, not an owner, not a mark. He hears everything said over his counter down here and repeats none of it, unless you're the kind he's decided he likes." },
-]
-[canvases.nodes.exit_block]
-type = "choices"
-[[canvases.nodes.exit_block.choices]]
-text       = "Ask him about Doss and Rourke."
-targetType = "node"
-nodeId     = "hunt_sol_lead.ask"
-[[canvases.nodes.exit_block.choices]]
-text       = "Not tonight."
-targetType = "location"
-locationId = "underworld_bar"
-
-[[canvases.nodes]]
-id   = "ask"
-name = "The bartender"
-blocks = [
-  { type = "dialog", props = { speaker = "player" }, content = "Two men. Doss and Rourke. They came up out of the underworld before they ever ran for Renner. You'd have known them." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Doss I knew. Ran cargo for the company back when it still pretended it didn't. Renner made an example of him — him and Rourke both, and it took. But Doss ran with a third. A fixer, name of Marsh. Careful little man, and still breathing." },
-  { type = "dialog", props = { speaker = "player" }, content = "Where." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "He keeps one habit. The House, every Sunday — same girl, like clockwork. That's the only place Marsh surfaces. A man with one habit's got one weakness." },
-  { type = "paragraph", content = "He sets the clean glass down. A name, a day, a door — the whole of it. Then, not looking up: \"Whatever you carry that does your quiet work — carry it Sunday. Marsh doesn't talk twice.\"" },
-]
-[canvases.nodes.exit_block]
-type = "choices"
-[[canvases.nodes.exit_block.choices]]
-text       = "Sundays, then. Carry the drain."
-targetType = "location"
-locationId = "underworld_bar"
-flagEffects = [
-  { targetType = "player", flag = "hunt_lead", op = "set" },
-]
+# rev 98 — the standalone hunt_sol_lead canvas was FOLDED into Sol's portrait hub (hub_sol_undertow, beat_0066
+# region below). The "Ask him about Doss and Rourke" ask (names_known gte1 + hunt_lead is_false -> Sol names Marsh
+# -> SETS hunt_lead) is now a conditional choice in that hub, with its dialog preserved verbatim. Sol renders as a
+# portrait across both acts instead of two separate "The bartender" links. The Rung-1 breadcrumb card below is
+# unchanged — it still points her to the bar; she now finds Sol's portrait there.
 
 # ── Hunt breadcrumb — Rung 1 (Story-Goals tier, priority 9). Points to the underworld bar. Mutually
 # exclusive with the returning-player re-drain card (names_known<1) via names_known>=1; retires
@@ -8920,7 +8862,7 @@ blocks = [
       { type = "flag",  subject = "player", flag_key  = "pipe_known",       operator = "is_true" },
       { type = "trait", subject = "player", trait_key = "colm_drains_done", operator = "lt", value = 1 },
     ] } }, blocks = [
-    { type = "paragraph", content = "The paper's finished. It gave up the how and it gave up where, and it will never give up a name — the man carrying it was never written down. That answer's in the Reach, not this room." },
+    { type = "paragraph", content = "The paper's finished. It gave up the how and it gave up where, and it will never give up a name — the man carrying it was never written down. That answer's down in the underworld, at the Undertow, not in this room." },
   ] },
   # 6 — she already has the rogue (Colm's drain named Vane). The desk can't confirm it and never could.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
@@ -9770,57 +9712,91 @@ destinationType = "specific"
 locationId      = "vance_securities"
 
 # ═══ beat_0066 — the Colm sub-arc (the underworld half: work the courier, confirm Vane) ═══════════════
-# Colm = Bastien's off-record courier (npc_colm), rebuilt from a rails-y one-shot into a proper nightly hub
-# (issue.md 142). Gated on pipe_known (the case-reveal that points her at the Undertow). The arc:
-#   (1) hunt_colm_lead — she asks SOL who moves things between the worlds; Sol names Colm -> colm_found.
-#   (2) act_colm_drink — drink with him 3 nights (requires_npc + max_triggers_per_day=1 + colm_drinks lt 3; the
-#       [group] bands escalate business->testing->comfortable); colm_drinks gte 3 opens the hub.
-#   (3) hub_colm_undertow — the portrait hub: "Kiss him" (colm_kisses 0->3, hesitant->done) then "Take him in the
-#       back" = the LOOP ENTRY (rev 92), which resets the 5 loop traits.
-#   (3b) loop_colm_backroom — the sex loop: oral/vaginal/anal, climax-elect at loop_npc_pleasure>=50.
-#   (3c) loop_colm_finisher — facial/inside end with NOTHING; the ASS finish IS the drain (bumps colm_drains_done).
-#   (4) colm_drain_canvas — d0 (first: the memory + Vane's FACE) / done (repeat: pure power).
-# Trust-gated. Vane stays NON-conquest; Colm IS the conquest. rev 92: colm_drains_done gte 1 REPLACED the retired
-# vane_confirmed flag everywhere (the setter moved to the triggerless finisher, where a flag would hard-fail the
-# flag-chain validator — same reason as names_known / calloway_drains_done). It still yields the blackmail leverage
-# (beat_0067; retires Story-Goal B).
-# (1) hunt_colm_lead — the Sol on-ramp (player-initiated location beat @underworld_bar, hunt_sol_lead shape). Gated
-# pipe_known is_true + colm_found is_false. She asks Sol who runs the outer/underworld carry; Sol names Colm (a
-# nightly regular). SETS colm_found (located) -> Colm's portrait lights + act_colm_drink opens.
+# Colm = Bastien's off-record courier (npc_colm). Gated on pipe_known (the case-reveal that points her at the
+# Undertow). rev 98 — the Undertow reworked into TWO portrait hubs (LO: "the bartender should be a portrait, not a
+# link"; "drink with Colm should be the same portrait"):
+#   (1) hub_sol_undertow — SOL's portrait hub (absorbs the old hunt_colm_lead + hunt_sol_lead links). Talk (the
+#       standing feel) + conditional info-asks: "who moves things between the worlds" (pipe_known -> colm_found) and
+#       "Doss and Rourke" (names_known -> hunt_lead, the earlier underworld hunt). Sol renders as a portrait across
+#       both acts; the asks are choices.
+#   (2) hub_colm_undertow — COLM's portrait hub (absorbs the old act_colm_drink ramp). First meet (colm_met) then
+#       Talk/Drink/Kiss/Back, all on the RELATION axis (no drink-count; time throttles). See its own header below.
+#   (3) loop_colm_backroom -> (4) loop_colm_finisher (ass finish = the drain) -> (5) colm_drain_canvas (d0 = Vane's
+#       FACE / done = pure power). UNCHANGED. colm_drains_done gte 1 is the Vane-blackmail leverage (beat_0067).
+# (1) hub_sol_undertow — Sol's portrait hub @underworld_bar. requires_npc + npc = npc_sol (present-gated to his
+# 10:00-23:59 schedule; always at the bar). No trigger conditions — always available when present; the asks gate
+# themselves. Both info-asks preserve their old dialog verbatim; only the surface changed (portrait, not link).
 [[canvases]]
-id          = "hunt_colm_lead"
-name        = "The bartender"
-description = "beat_0066. The Colm on-ramp @underworld_bar (Sol info-broker, hunt_sol_lead shape). Player-initiated, gated pipe_known is_true + colm_found is_false. She asks Sol who moves freight between the worlds; Sol names Colm — the careful nightly drinker who carries for her kind of buyer. SETS colm_found (located) -> Colm's nightly portrait + act_colm_drink open."
+id          = "hub_sol_undertow"
+name        = "Sol"
+description = "beat_0066 (rev 98). Sol's portrait hub @underworld_bar (absorbs hunt_colm_lead + hunt_sol_lead). requires_npc + npc = npc_sol, present-gated. Talk (block_pool flavor, the standing feel-maintainer) + two conditional info-asks: 'who moves things between the worlds' (pipe_known is_true + colm_found is_false -> names Colm -> SETS colm_found) and 'Doss and Rourke' (names_known gte1 + hunt_lead is_false -> names Marsh -> SETS hunt_lead). Sol = info-broker, no arc/conquest; his portrait persists across acts, Talk is why it's never empty."
 [canvases.trigger]
 location      = "underworld_bar"
+requires_npc  = "npc_sol"
+npc           = "npc_sol"
 is_repeatable = true
-priority      = 8
+priority      = 4
 is_active     = true
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "pipe_known", operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "colm_found", operator = "is_false" },
-] }
 [[canvases.nodes]]
 id   = "base"
-name = "The bartender"
+name = "Sol"
 blocks = [
   { type = "image", props = { file = "scenes/underworld_bar_bartender.jpg", description = "A dim underground bar, red light, an old bartender working the taps at the quiet end.", search_queries = ["dim underground speakeasy bartender red light", "noir back-alley bar bartender low light"] } },
-  { type = "paragraph", content = "She's come down to the Undertow knowing what she's hunting now — not a name, a type: the man who carries the firm's leak down into the Reach. And the man who knows every carrier who ever worked this end of the city is the one wiping an already-clean glass at the dark end of the bar. Sol knows. Sol always knows." },
+  { type = "paragraph", content = "Sol works the taps at the dim end of the bar, wiping a glass that's already clean. He's outlasted every owner this place has had — and it's had a few, though the one it answers to now never shows his face. He hears everything said over his counter down here and repeats none of it, unless you're the kind he's decided he likes. He's decided he likes her. Mostly." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
 [[canvases.nodes.exit_block.choices]]
-text       = "Ask Sol who moves things between the worlds."
+text       = "Pass a word with Sol."
 targetType = "node"
-nodeId     = "hunt_colm_lead.ask"
+nodeId     = "hub_sol_undertow.talk"
+# Ask about a carrier — the Colm lead. pipe_known (the case points her here) + colm_found is_false. Names Colm.
 [[canvases.nodes.exit_block.choices]]
-text       = "Not tonight."
+text       = "Ask who moves things between the worlds."
+targetType = "node"
+nodeId     = "hub_sol_undertow.carrier"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "pipe_known", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "colm_found", operator = "is_false" },
+] }
+# Ask about Doss and Rourke — the earlier underworld hunt. names_known gte1 + hunt_lead is_false. Names Marsh.
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him about Doss and Rourke."
+targetType = "node"
+nodeId     = "hub_sol_undertow.crew"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "names_known", operator = "gte", value = 1 },
+  { type = "flag",  subject = "player", flag_key  = "hunt_lead",   operator = "is_false" },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Nothing tonight."
 targetType = "location"
 locationId = "underworld_bar"
 
+# TALK — the standing feel (LO). block_pool flavor, atmosphere only; sets nothing, ~15 min. Why Sol's portrait never goes empty.
 [[canvases.nodes]]
-id   = "ask"
-name = "The bartender"
+id   = "talk"
+name = "Sol"
+blocks = [
+  { type = "block_pool", props = { blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Rule of the Undertow: down here nobody's who they were up there. Man walks in, whatever he did in the daylight stays at the door. Keeps the peace. Keeps my bar standing." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Bar's owned by somebody now who never comes down to look at it. Suits me. An owner you never see is an owner who never asks questions you can't answer." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "You want to last down here, you learn what I learned: hear it all, hold it all, hand out none of it for free. That's not being cold. That's the rent." },
+  ] } },
+  { type = "paragraph", content = "He talks the way a man talks who's decided you're all right — not warm, exactly, but no longer watching his own mouth. Down here that's most of the way to a friend." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let him work."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 15
+
+# CARRIER — the Colm lead (was hunt_colm_lead.ask). Sol names Colm. SETS colm_found -> Colm's portrait lights.
+[[canvases.nodes]]
+id   = "carrier"
+name = "Sol"
 blocks = [
   { type = "dialog", props = { speaker = "player" }, content = "I need a carrier. Somebody who moves freight both ways — outer world to under, under to outer — and never leaves it on paper. Company work, the kind that never happened." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Short list down here, and a shorter one that's any good. The one you want's called Colm. Runs sealed packets for a buyer who pays too well to name, and hasn't let a thing show up in a ledger in all the years I've watched him drink. Careful to a fault." },
@@ -9829,83 +9805,51 @@ blocks = [
   { type = "paragraph", content = "A name, a stool, a habit — the whole of it. She looks down the bar and finds him without trying: a wary regular three stools down, a bag with a boot hooked through the strap, eyes on the door out of pure reflex. Her thread up out of Calloway's file room and straight to whoever's buying." },
 ]
 [canvases.nodes.exit_block]
-type = "choices"
-[[canvases.nodes.exit_block.choices]]
-text       = "Colm, then. Start with a drink."
-targetType = "location"
-locationId = "underworld_bar"
+type = "location"
+text = "Colm, then."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_bar"
 flagEffects = [
   { targetType = "player", flag = "colm_found", op = "set" },
 ]
 
-# (2) act_colm_drink — the 3-night drink ramp. A LOCATION canvas (NOT npc-bound — the engine allows only one repeatable
-# canvas per location+NPC+window, and the portrait bucket belongs to the hub; so the drink rides an npc_at_location
-# condition to stay present-gated to Colm's 19:00-23:59 window without competing for his portrait). is_repeatable +
-# max_triggers_per_day=1 = one drink per night; colm_drinks lt 3 retires it after 3. The [group] bands escalate:
-# 0 = business, 1 = testing, 2 = comfortable. Exit bumps colm_drinks +1, 60 min. At colm_drinks gte 3 the drink
-# retires and hub_colm_undertow (Colm's portrait) opens.
-[[canvases]]
-id          = "act_colm_drink"
-name        = "Drink with Colm"
-description = "beat_0066. The 3-night drink ramp @underworld_bar. LOCATION canvas gated colm_found is_true + colm_drinks lt 3 + npc_at_location npc_colm is_present (present-gated without competing for the portrait bucket). is_repeatable + max_triggers_per_day=1 (one/night). [group] bands by colm_drinks (0 business / 1 testing / 2 comfortable). Exit +1 colm_drinks, 60 min. At colm_drinks gte 3 the drink retires and hub_colm_undertow opens."
-[canvases.trigger]
-location             = "underworld_bar"
-is_repeatable        = true
-max_triggers_per_day = 1
-priority             = 5
-is_active            = true
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag",  subject = "player", flag_key  = "colm_found",  operator = "is_true" },
-  { type = "trait", subject = "player", trait_key = "colm_drinks", operator = "lt", value = 3 },
-  { type = "npc_at_location", location_id = "underworld_bar", npc_id = "npc_colm", operator = "is_present" },
-] }
+# CREW — the earlier underworld hunt (was hunt_sol_lead.ask). Sol names Marsh (The House, Sundays). SETS hunt_lead.
 [[canvases.nodes]]
-id   = "base"
-name = "Colm"
+id   = "crew"
+name = "Sol"
 blocks = [
-  { type = "image", props = { file = "scenes/colm_undertow.jpg", description = "A wary man drinking careful at a dim underworld bar, back to the wall.", search_queries = ["man alone dim bar back to wall night", "wary drinker underground bar corner"] } },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "colm_drinks", operator = "eq", value = 0 },
-    ] } }, blocks = [
-    { type = "paragraph", content = "First night, she takes the stool beside him and buys the round. Colm's all business — polite, careful, giving her nothing but the weather and the price of the drink." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "Appreciate the drink. But if you're selling something I'm not buying, and if you're asking something I'm not that either. Just a man having a quiet one." },
-    { type = "dialog", props = { speaker = "player" }, content = "No sell, no ask. Just the only man in here who still looks like he has a job worth keeping his mouth shut about." },
-  ] },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "colm_drinks", operator = "eq", value = 1 },
-    ] } }, blocks = [
-    { type = "paragraph", content = "Second night he clocks her before she sits — and lets her sit anyway. He's testing now: what she wants, why a woman like her keeps spending her evenings on a courier three stools from the door." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "Twice now. Nobody buys a man two nights running for the conversation. So what is it — you want something moved, or you want me?" },
-    { type = "dialog", props = { speaker = "player" }, content = "Would it cost me more if it were both?" },
-  ] },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "colm_drinks", operator = "eq", value = 2 },
-    ] } }, blocks = [
-    { type = "paragraph", content = "Third night he's saved her the stool. The guard's not gone — a careful man's guard never fully goes — but he's loose now, warm, leaning in to hear her over the room." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "You're the best part of my week, you know that. Whatever it is you actually want out of me, I'm starting not to care. Ask me nice enough and I'll probably just say yes." },
-    { type = "thought_bubble", props = { speaker = "player" }, content = "There it is. Three nights and the careful man's leaning into her hand. One more push and he isn't careful at all." },
-  ] },
+  { type = "dialog", props = { speaker = "player" }, content = "Two men. Doss and Rourke. They came up out of the underworld before they ever ran for Renner. You'd have known them." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Doss I knew. Ran cargo for the company back when it still pretended it didn't. Renner made an example of him — him and Rourke both, and it took. But Doss ran with a third. A fixer, name of Marsh. Careful little man, and still breathing." },
+  { type = "dialog", props = { speaker = "player" }, content = "Where." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "He keeps one habit. The House, every Sunday — same girl, like clockwork. That's the only place Marsh surfaces. A man with one habit's got one weakness." },
+  { type = "paragraph", content = "He sets the clean glass down. A name, a day, a door — the whole of it. Then, not looking up: \"Whatever you carry that does your quiet work — carry it Sunday. Marsh doesn't talk twice.\"" },
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Let him buy the last one."
+text = "Sundays, then. Carry the drain."
 [canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "underworld_bar"
-time_progression_minutes = 60
-effects = [
-  { targetType = "player", trait = "colm_drinks", op = "add", value = 1 },
+destinationType = "specific"
+locationId      = "underworld_bar"
+flagEffects = [
+  { targetType = "player", flag = "hunt_lead", op = "set" },
 ]
 
-# (3) hub_colm_undertow — the portrait hub (hub_calloway_fileroom shape). requires_npc + npc = npc_colm, gated
-# colm_found is_true + colm_drinks gte 3 (opens after the 3 drink nights). "Kiss him" -> .kiss (the colm_kisses 0->3
-# ramp, hesitant->done; retires at gte 3), then "Take him in the back" -> loop_colm_backroom (rev 92: the LOOP,
-# not the drain). The hub sets nothing but the loop-trait reset — the ass finish in loop_colm_finisher is what
-# bumps colm_drains_done and routes to the drain payload.
+# (2) hub_colm_undertow — ONE persistent portrait hub (rev 98, absorbs the old act_colm_drink 3-night ramp). The
+# Undertow's Colm surface, hub_calloway_fileroom shape: requires_npc + npc = npc_colm, gated colm_found is_true (Sol
+# named him). NO max_triggers_per_day — TIME is the throttle (each drink = 60 min; the 19:00-23:59 window caps ~5/night).
+# RELATION is the single axis (npc_colm.relation, dead until now): the first meet + Talk + Drink + Kiss all bump it,
+# and the escalation gates on relation thresholds (Calloway's relation>=15 access shape), so the grind is EARNING him,
+# not counting rounds (LO's call; colm_drinks/colm_kisses retired).
+#   base node: [group] colm_met is_false = THE MEET (wary, gives nothing; only choice "Buy him a drink" -> sets colm_met);
+#              colm_met is_true = the standing hub, prose banded on relation (cold < 12 / warming 12-23 / hers >= 24).
+#   choices (colm_met is_true): Talk (+2, 30m, the feel-maintainer) · Drink (+3, 60m) · Kiss (relation>=12, +4, 30m;
+#              reactions band on relation) · Take him in the back (relation>=24) -> loop_colm_backroom (UNCHANGED).
+# The loop/drain payload (loop_colm_backroom -> loop_colm_finisher -> colm_drain_canvas -> Vane) is untouched.
 [[canvases]]
 id          = "hub_colm_undertow"
 name        = "Colm"
-description = "beat_0066. Colm's portrait hub @underworld_bar. requires_npc + npc = npc_colm, gated colm_found is_true + colm_drinks gte 3 (after the 3 drink nights). 'Kiss him' -> .kiss (colm_kisses 0->3 ramp: he stiffens -> warms -> stops flinching; retires at gte 3). 'Take him in the back' (colm_kisses gte 3) -> loop_colm_backroom.intro, resetting the 5 loop traits (rev 92 — the loop entry, permanently repeatable; the finisher's anal finish is the drain and picks d0 vs done off colm_drains_done)."
+description = "beat_0066 (rev 98). Colm's persistent portrait hub @underworld_bar (absorbs the retired act_colm_drink ramp). requires_npc + npc = npc_colm, gated colm_found is_true. NO day cap (time throttles). RELATION is the axis: first meet (colm_met is_false -> 'Buy him a drink' sets colm_met) then the hub — Talk (+2)/Drink (+3)/Kiss (relation>=12, +4)/Take him in the back (relation>=24 -> loop_colm_backroom, 5-trait reset). Base + kiss prose band on relation. colm_drinks/colm_kisses retired."
 [canvases.trigger]
 location      = "underworld_bar"
 requires_npc  = "npc_colm"
@@ -9914,38 +9858,95 @@ is_repeatable = true
 priority      = 4
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag",  subject = "player", flag_key  = "colm_found",  operator = "is_true" },
-  { type = "trait", subject = "player", trait_key = "colm_drinks", operator = "gte", value = 3 },
+  { type = "flag", subject = "player", flag_key = "colm_found", operator = "is_true" },
 ] }
 [[canvases.nodes]]
 id   = "base"
 name = "Colm"
 blocks = [
-  { type = "image", props = { file = "scenes/colm_undertow.jpg", description = "A wary man drinking with a woman leaning close at a dim underworld bar.", search_queries = ["man and woman close at dim bar night", "couple talking low underground bar"] } },
-  { type = "paragraph", content = "Colm's corner, and the stool he saves her now. Three nights of careful drinking have worn the careful most of the way off him; he watches the door out of habit and her out of want." },
+  { type = "image", props = { file = "scenes/colm_undertow.jpg", description = "A wary man drinking careful at a dim underworld bar, back to the wall.", search_queries = ["man alone dim bar back to wall night", "wary drinker underground bar corner"] } },
+  # THE MEET (colm_met is_false) — they meet for the first time. He's careful, gives nothing. The only action is to buy him a drink.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "colm_met", operator = "is_false" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Three stools down: the man Sol pointed her to. Corner seat, back to the wall, a bag with a boot hooked through the strap, eyes going to the door out of pure reflex. She takes the stool beside him. He clocks her, weighs her, and gives her exactly nothing — polite, careful, a man having a quiet one and meaning to keep it that way." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "If you're selling, I'm not buying. If you're asking, I'm that even less. Nothing personal — just how I've stayed a man who gets to keep having quiet ones." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "Careful to a fault, exactly like Sol said. You don't crack a man like this with a question. You crack him with time — and the first hour starts with a drink he didn't have to pay for." },
+  ] },
+  # THE STANDING HUB (colm_met is_true) — banded on relation. cold < 12 / warming 12-23 / hers >= 24.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",  subject = "player", flag_key  = "colm_met", operator = "is_true" },
+      { type = "trait", subject = "npc", npc_id = "npc_colm", trait_key = "relation", operator = "lt", value = 12 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He's still all business, but he lets her take the stool now without the once-over. A careful man testing the shape of her — what she wants, why a woman like her keeps spending her evenings on a courier three seats from the door." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "Nobody buys a man this many rounds for the conversation. So what is it — you want something moved, or you want me?" },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",  subject = "player", flag_key  = "colm_met", operator = "is_true" },
+      { type = "trait", subject = "npc", npc_id = "npc_colm", trait_key = "relation", operator = "gte", value = 12 },
+      { type = "trait", subject = "npc", npc_id = "npc_colm", trait_key = "relation", operator = "lt", value = 24 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He saves her the stool now. The guard's not gone — a careful man's never fully goes — but he's loose, warm, leaning in to hear her over the room. He watches the door out of habit and her out of want." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "You're the best part of my week, you know that. Whatever it is you actually came for, I'm starting not to care." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",  subject = "player", flag_key  = "colm_met", operator = "is_true" },
+      { type = "trait", subject = "npc", npc_id = "npc_colm", trait_key = "relation", operator = "gte", value = 24 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The careful's all the way off him now. He's up off the stool before she's fully in the door, hand at the small of her back, steering her to the dark end of the bar like the room's already theirs. He'll follow her anywhere she points him — and she knows exactly where that is." },
+  ] },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
+# THE MEET — the first drink. Only choice while colm_met is_false. Sets colm_met (the intro is done) + relation.
+[[canvases.nodes.exit_block.choices]]
+text       = "Can I buy you a drink?"
+targetType = "node"
+nodeId     = "hub_colm_undertow.meet_drink"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "colm_met", operator = "is_false" },
+] }
+# Escape from the meet (so clicking his portrait doesn't trap you into buying) — only while colm_met is_false.
+[[canvases.nodes.exit_block.choices]]
+text       = "Not tonight."
+targetType = "location"
+locationId = "underworld_bar"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "colm_met", operator = "is_false" },
+] }
+# ── The standing hub choices (colm_met is_true). Talk + Drink always; Kiss at relation>=12; Back room at relation>=24. ──
+[[canvases.nodes.exit_block.choices]]
+text       = "Pass the time with him."
+targetType = "node"
+nodeId     = "hub_colm_undertow.talk"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "colm_met", operator = "is_true" },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Buy him another."
+targetType = "node"
+nodeId     = "hub_colm_undertow.drink"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "colm_met", operator = "is_true" },
+] }
 [[canvases.nodes.exit_block.choices]]
 text       = "Kiss him."
 targetType = "node"
 nodeId     = "hub_colm_undertow.kiss"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "colm_kisses", operator = "lt", value = 3 },
+  { type = "flag",  subject = "player", flag_key  = "colm_met", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_colm", trait_key = "relation", operator = "gte", value = 12 },
 ] }
-costs = [{ trait = "energy", value = 10 }]
-# ── Take him in the back = the LOOP ENTRY (rev 92). Gated colm_kisses gte 3 (he's stopped flinching) and NOTHING
-# else — the loop is the permanent repeatable surface, so there's no drains_done clause and no separate "again"
-# choice; loop_colm_finisher picks d0 vs done off the counter. Resets the 5 loop traits on the way in, exactly
-# like Calloway's #7 rung. No energy cost: an energy gate here could soft-lock the beat's only payout.
-# NOT show_when_locked: hidden during the kiss grind (colm_kisses lt 3) — the kiss node and the Colm ladder card
-# already signpost the back room, so no preview is lost. ──
+# ── Take him in the back = the LOOP ENTRY (rev 92/98). Gated relation >= 24 (he'll follow her anywhere) — the loop is
+# the permanent repeatable surface, so no drains_done clause; loop_colm_finisher picks d0 vs done off the counter.
+# Resets the 5 loop traits on the way in, exactly like Calloway's #7 rung. ──
 [[canvases.nodes.exit_block.choices]]
 text       = "Take him in the back."
 targetType = "node"
 nodeId     = "loop_colm_backroom.intro"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "colm_kisses", operator = "gte", value = 3 },
+  { type = "flag",  subject = "player", flag_key  = "colm_met", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_colm", trait_key = "relation", operator = "gte", value = 24 },
 ] }
 effects = [
   { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
@@ -9959,26 +9960,95 @@ text       = "Leave him to his drink."
 targetType = "location"
 locationId = "underworld_bar"
 
+# THE MEET drink — the first time. Sets colm_met + relation, 60 min. (Its own node so the meet reads distinct.)
+[[canvases.nodes]]
+id   = "meet_drink"
+name = "Colm"
+blocks = [
+  { type = "paragraph", content = "She flags Sol for two and slides one in front of him before he can wave it off. Colm looks at the glass, looks at her, and does the arithmetic of a man who trusts nothing free — then drinks, because refusing would be its own kind of tell." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "...Appreciated. Doesn't buy you anything but the drink, understand. But — appreciated." },
+  { type = "dialog", props = { speaker = "player" }, content = "No sell, no ask. Just the only man in here who still looks like he's got a job worth keeping his mouth shut about." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "One drink in and he's still all edges. Fine. She's got nowhere to be and he's here every night. She'll wear the careful down a round at a time." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let him nurse it. Come back."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 60
+flagEffects = [
+  { targetType = "player", flag = "colm_met", op = "set" },
+]
+effects = [
+  { targetType = "npc", npcId = "npc_colm", trait = "relation", op = "add", value = 3 },
+]
+
+# TALK — the feel-maintainer (LO). Cheap (30 min), +2 relation, always available. block_pool for a little variety.
+[[canvases.nodes]]
+id   = "talk"
+name = "Colm"
+blocks = [
+  { type = "block_pool", props = { blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "You want to know how you last down here? You never carry what you can't drop and you never learn a name you don't need. I've forgotten more people than this bar's seen. On purpose." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "Buyer up top pays on time, never asks how, never says thanks. Best kind of work there is — the kind nobody wants to be caught talking about, me included. So we won't." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "Sol vouches for exactly nobody, and he lets you sit here. That's the only reference in this room worth a damn, and it's the only reason I haven't moved stools." },
+  ] } },
+  { type = "paragraph", content = "He talks around the work, never through it — but he talks, which for Colm is a door coming open a finger's width at a time. Each hour she spends not asking him for anything is an hour he trusts her a little more." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let it ride."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 30
+effects = [
+  { targetType = "npc", npcId = "npc_colm", trait = "relation", op = "add", value = 2 },
+]
+
+# DRINK — the standing round (60 min, +3 relation). Repeatable, no day cap; time throttles.
+[[canvases.nodes]]
+id   = "drink"
+name = "Colm"
+blocks = [
+  { type = "paragraph", content = "Another round, and the night wears on the way nights do down here — slow, red-lit, the room thinning around them. He drinks careful, always careful, but he drinks with her now, and somewhere in the hours the wary courier keeps forgetting to watch the door." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "Third one and I'm still counting them. Habit. You'd have to work a lot harder than this to get me sloppy — but I'll give you that you're the reason I keep letting you try." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "One more, then."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 60
+effects = [
+  { targetType = "npc", npcId = "npc_colm", trait = "relation", op = "add", value = 3 },
+]
+
+# KISS — unlocked at relation >= 12. Reactions band on RELATION (12-15 stiffens / 16-19 warms / >=20 stops flinching).
+# +4 relation, 30 min — so ~3 kisses from unlock (12) carry him to the back room (24).
 [[canvases.nodes]]
 id   = "kiss"
 name = "Colm"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "colm_kisses", operator = "eq", value = 0 },
+      { type = "trait", subject = "npc", npc_id = "npc_colm", trait_key = "relation", operator = "lt", value = 16 },
     ] } }, blocks = [
     { type = "paragraph", content = "She leans in and kisses him, slow, in the middle of the crowded bar. He goes stiff — a careful man's whole body saying not here, not smart, not safe — and pulls back an inch before he lets himself have even a second of it." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "—not here. People see. You don't know who drinks in this room." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "colm_kisses", operator = "eq", value = 1 },
+      { type = "trait", subject = "npc", npc_id = "npc_colm", trait_key = "relation", operator = "gte", value = 16 },
+      { type = "trait", subject = "npc", npc_id = "npc_colm", trait_key = "relation", operator = "lt", value = 20 },
     ] } }, blocks = [
-    { type = "paragraph", content = "Second time he doesn't pull back as far. His hand comes up to her jaw like it decided on its own, and the careful takes a beat longer to win. He's warming — she can feel exactly where the guard thins." },
+    { type = "paragraph", content = "This time he doesn't pull back as far. His hand comes up to her jaw like it decided on its own, and the careful takes a beat longer to win. He's warming — she can feel exactly where the guard thins." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "You're going to get me killed. ...Do it again." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "colm_kisses", operator = "eq", value = 2 },
+      { type = "trait", subject = "npc", npc_id = "npc_colm", trait_key = "relation", operator = "gte", value = 20 },
     ] } }, blocks = [
-    { type = "paragraph", content = "Third time he stops flinching entirely. He kisses her back like the room isn't there, one hand fisted in her coat, the careful drinker gone under a want he isn't managing anymore." },
+    { type = "paragraph", content = "Now he stops flinching entirely. He kisses her back like the room isn't there, one hand fisted in her coat, the careful drinker gone under a want he isn't managing anymore." },
     { type = "thought_bubble", props = { speaker = "player" }, content = "There. The guard's off. One more lean and he'll follow her anywhere she points him — including the back, where the drain likes to work." },
   ] },
 ]
@@ -9990,7 +10060,7 @@ destinationType          = "specific"
 locationId               = "underworld_bar"
 time_progression_minutes = 30
 effects = [
-  { targetType = "player", trait = "colm_kisses", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_colm", trait = "relation", op = "add", value = 4 },
 ]
 
 # ═══ (3b) loop_colm_backroom — the sex loop (rev 92). TRIGGERLESS, reached from the hub's "Take him in the back"
@@ -10491,7 +10561,7 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "You've got the shape now — an off-book courier, running the leak down to the Reach where a company man can't follow. But you can. Now find the who."
-tip        = "Leave the desk to Calloway. Take it to your own turf — the Undertow — and ask Sol who runs the carry between the worlds. He'll name Colm. Drink the courier loose over a few nights, then take him in the back; his drained memory hands you the rogue's face."
+tip        = "Leave the desk to Calloway. Take it to your own turf — the Undertow — and ask Sol who runs the carry between the worlds. He'll name Colm. Earn the careful courier's trust over a few evenings (buy him drinks, talk him warm), then take him in the back; his drained memory hands you the rogue's face."
 when = [
   { flag = "pipe_known",     op = "is_true"  },
   { trait = "colm_drains_done", subject = "player", op = "lt", value = 1 },
@@ -10577,31 +10647,33 @@ when = [
   { flag = "calloway_fucked_once", op = "is_true" },
 ]
 
-# ── Quests page — Colm's section (Tier 2, npc_id). Stepped by the drink/kiss/drain counters, one card at a time
-# (exclusive). Starts once Sol names him (colm_found); before that the Story-Goal B card carries the "ask Sol" step. ──
+# ── Quests page — Colm's section (Tier 2, npc_id). rev 98: stepped by npc_colm.RELATION, not drink/kiss counts —
+# earning the careful courier, not counting rounds. One card at a time (exclusive by relation bands). Starts once
+# Sol names him (colm_found); before that the Story-Goal B card carries the "ask Sol" step. Kiss unlocks at
+# relation>=12, the back room at relation>=24 (the hub gates). ──
 [[quest_cards]]
 priority   = 11
 npc_id     = "npc_colm"
-text       = "The careful courier. He carries the leak down to the buyer — and he's the one man who's seen the inside contact's face. He won't be rushed and won't be bought; he has to be worn down. Start by drinking with him."
-tip        = "At the Undertow, buy Colm a drink — but he only nurses one a night, so come back on separate evenings (he's in from seven). Three nights of it and the careful comes down."
+text       = "The careful courier. He carries the leak down to the buyer — and he's the one man who's seen the inside contact's face. He won't be rushed and won't be bought; he has to be earned, an evening at a time."
+tip        = "At the Undertow, buy Colm a drink and pass the time with him — both wear the careful down (he's in from seven). It takes a few evenings on him; when he trusts you enough, you can get your hands on him."
 when = [
-  { flag  = "colm_found",  op = "is_true" },
-  { trait = "colm_drinks", subject = "player", op = "lt", value = 3 },
+  { flag  = "colm_found", op = "is_true" },
+  { trait = "relation", subject = "npc", npc_id = "npc_colm", op = "lt", value = 12 },
 ]
 goals = [
-  { trait = "colm_drinks", subject = "player", op = "gte", value = 3, label = "Drink him loose (three nights)" },
+  { trait = "relation", subject = "npc", npc_id = "npc_colm", op = "gte", value = 12, label = "Earn the courier's trust" },
 ]
 [[quest_cards]]
 priority   = 11
 npc_id     = "npc_colm"
-text       = "Three nights in and the careful man leans into your hand. Get past the guard now — kiss him, in the middle of his own bar, until he stops flinching at it."
-tip        = "In Colm's hub: Kiss him. He stiffens the first time, warms the second, stops flinching the third. Then the back room opens."
+text       = "The careful man leans into your hand now. Get past the last of the guard — kiss him, in the middle of his own bar, and keep at him until he'll follow you anywhere."
+tip        = "In Colm's hub: Kiss him — he stiffens at first, then warms, then stops flinching. Keep buying his trust up (drink, talk, kiss) and the back room opens."
 when = [
-  { trait = "colm_drinks", subject = "player", op = "gte", value = 3 },
-  { trait = "colm_kisses", subject = "player", op = "lt",  value = 3 },
+  { trait = "relation", subject = "npc", npc_id = "npc_colm", op = "gte", value = 12 },
+  { trait = "relation", subject = "npc", npc_id = "npc_colm", op = "lt",  value = 24 },
 ]
 goals = [
-  { trait = "colm_kisses", subject = "player", op = "gte", value = 3, label = "Kiss the careful out of him" },
+  { trait = "relation", subject = "npc", npc_id = "npc_colm", op = "gte", value = 24, label = "Get under his guard" },
 ]
 [[quest_cards]]
 priority   = 11
@@ -10609,7 +10681,7 @@ npc_id     = "npc_colm"
 text       = "He'll follow you anywhere now. Take him in the back — the drain's the point, and his drained memory of the hand-offs is the one thing he carries that you actually came for: the inside man's face."
 tip        = "In Colm's hub: Take him in the back, then work him until he's ready. The drain only opens one way — let him finish in your ass. Any other finish and you get the night and nothing else."
 when = [
-  { trait = "colm_kisses",      subject = "player", op = "gte", value = 3 },
+  { trait = "relation",         subject = "npc", npc_id = "npc_colm", op = "gte", value = 24 },
   { trait = "colm_drains_done", subject = "player", op = "lt",  value = 1 },
 ]
 goals = [

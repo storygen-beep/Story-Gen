@@ -100,15 +100,13 @@ repair_session    = 0
 # (he gives up the deep vault in docs). calloway_drains_done gte 1 GATES cap_docs_first_look (rev 84) — the drain
 # is the ONLY road to the where (Wren still sees the WALL herself at docs). Also picks the drain branch (d0/done).
 calloway_drains_done = 0
-# THE ARCHIVE 1a (beat_0066) — the Colm hub counters (hidden). colm_drinks: +1 per "Drink with him" night (0->3, one
-# per night via max_triggers_per_day; its bands render the 3 escalating drink beats; gte 3 opens the hub). colm_kisses:
-# +1 per "Kiss him" rung (0->3; its bands run hesitant->warming->done; gte 3 opens "Take him in the back"). colm_drains_done:
-# +1 on the FIRST ASS-FINISH drain, bumped on loop_colm_finisher's ass-finish choice (0->1; picks the drain branch
-# d0/done). TRAITS not flags (gte-reads, validator-exempt); the drink/kiss rungs bump on choices. rev 92: colm_drains_done
-# gte 1 REPLACED the retired vane_confirmed flag at all 5 of its gates — the drain setter moved onto the triggerless
-# finisher, where an is_true FLAG would hard-fail the flag-chain validator (same reason as names_known above).
-colm_drinks       = 0
-colm_kisses       = 0
+# THE ARCHIVE 1a (beat_0066) — the Colm drain counter (hidden). rev 98: Colm's on-ramp now gates on
+# npc_colm.RELATION (drinks/talks/kisses bump it in hub_colm_undertow; kiss unlocks at relation>=12, the back room
+# at relation>=24), so the old colm_drinks/colm_kisses ladder counters are RETIRED. colm_drains_done: +1 on the
+# FIRST ASS-FINISH drain, bumped on loop_colm_finisher's ass-finish choice (0->1; picks the drain branch d0/done).
+# A TRAIT not a flag (gte-read, validator-exempt) — the drain setter is on the triggerless finisher, where an
+# is_true flag would hard-fail the flag-chain validator (same reason as names_known above). rev 92: colm_drains_done
+# gte 1 REPLACED the retired vane_confirmed flag at all 5 of its gates.
 colm_drains_done  = 0
 # THE ARCHIVE 1a (beat_0058, v2) — the case-work counter (hidden). +1 per "Work the case" session (the .work hub
 # feeder only, NOT "Talk to him"); its bands fire the staged case-reveals (cap_case_insider >=2, cap_case_curated

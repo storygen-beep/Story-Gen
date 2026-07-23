@@ -274,14 +274,9 @@ hidden = true
 [[traits.labels]]
 key    = "calloway_drains_done"
 hidden = true
-# THE ARCHIVE 1a (beat_0066) — the Colm hub counters. Hidden; no sidebar rows. colm_drinks/colm_kisses (0->3 ladders)
-# + colm_drains_done (0->1, drain branch). TRAITS (gte-reads) — the drink/kiss rungs bump on choices; validator-exempt.
-[[traits.labels]]
-key    = "colm_drinks"
-hidden = true
-[[traits.labels]]
-key    = "colm_kisses"
-hidden = true
+# THE ARCHIVE 1a (beat_0066) — the Colm drain counter. Hidden; no sidebar row. colm_drains_done (0->1, drain
+# branch) TRAIT — gte-read, bumped on the finisher choice, validator-exempt. (rev 98: colm_drinks/colm_kisses
+# retired — Colm's on-ramp now gates on npc_colm.relation, so the ladders are gone.)
 [[traits.labels]]
 key    = "colm_drains_done"
 hidden = true
