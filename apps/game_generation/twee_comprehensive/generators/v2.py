@@ -14618,22 +14618,42 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
   </div>
 <</if>>
 
-<<set _helpData = setup.help_data || {}>>
-<<set _hasNpcs = _helpData.npcs && Object.keys(_helpData.npcs).length > 0>>
-<<if _hasNpcs>>
-  <<for _npcId, _npcData range _helpData.npcs>>
-    <<set _slug = setup.npcSlugForId(_npcId)>>
-    <<set _card = _slug ? setup.pickQuestsCard(_slug) : null>>
-    <<if _card>>
-      <div class="quests-section">
-        <h3><<print ($npcs[_npcId] && $npcs[_npcId].name) || _npcData.name>></h3>
-        <<renderQuestsCard _card>>
-      </div>
+/* The NPC sections come from the CARDS, not from setup.help_data.npcs. help_data.npcs is
+   populated only by canvases carrying targetType="npc" trait effects (_build_help_data), so an
+   NPC with a full quest ladder but no stat bumps — one whose arc runs on player counters — was
+   silently absent and its cards never rendered (Vesper's Colm: 4 cards, 0 renders). quests_cards
+   IS the source of truth for who has cards, and pickQuestsCard() matches card.npc_id directly,
+   so no slug/uuid translation is needed and this behaves the same in --use-db builds. */
+<<set _allCards = setup.quests_cards || []>>
+<<set _hidden = setup.hiddenNpcs || {}>>
+<<set _slugMap = setup.npc_slug_map || {}>>
+<<set _npcSlugs = []>>
+<<for _c range _allCards>>
+  <<if _c && _c.npc_id && _npcSlugs.indexOf(_c.npc_id) === -1>>
+    /* hiddenNpcs is UUID-keyed (hidden_npcs_map); check both forms so hidden_from_ui still
+       suppresses a section whichever build mode this is. */
+    <<if !_hidden[_c.npc_id] && !_hidden[_slugMap[_c.npc_id]]>>
+      <<run _npcSlugs.push(_c.npc_id)>>
     <</if>>
-  <</for>>
-<</if>>
+  <</if>>
+<</for>>
 
-<<if _goals.length === 0 && !_hasNpcs>>
+<<set _rendered = 0>>
+<<for _slug range _npcSlugs>>
+  <<set _card = setup.pickQuestsCard(_slug)>>
+  <<if _card>>
+    <<set _nid = _slugMap[_slug] || _slug>>
+    <<set _rendered = _rendered + 1>>
+    <div class="quests-section">
+      <h3><<print ($npcs[_nid] && $npcs[_nid].name) || ($npcs[_slug] && $npcs[_slug].name) || _slug.replace("npc_", "")>></h3>
+      <<renderQuestsCard _card>>
+    </div>
+  <</if>>
+<</for>>
+
+/* "did we draw a card", not "does help_data list anybody" — the old test could leave a bare
+   Story-Goals heading with nothing under it. */
+<<if _goals.length === 0 && _rendered === 0>>
   <div class="no-quests">No active quests.</div>
 <</if>>
 <</nobr>>

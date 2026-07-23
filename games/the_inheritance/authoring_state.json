@@ -1,7 +1,7 @@
 {
   "game_slug": "the_inheritance",
   "schema_version": 2,
-  "book_revision": 20,
+  "book_revision": 21,
   "register": {
     "person": "second"
   },
@@ -1300,6 +1300,10 @@
       "step": "FEATURE — the channel-surf TV",
       "decision": "Reworked feeder_channel from a single flat beat into a 5-node channel-surf TV (3_activities.toml). Channels: base=news -> ch2 shop -> ch3 old film -> ch4 late-night -> ch5 PORN (loops to base). Every channel offers 'Next channel ->' (targetType=node) + 'Turn the TV off.' (location exit). LO rejected a per-channel arousal climb: only the porn channel warms arousal (+4, cap 10, on BOTH its exits) -- one surf-to-porn clears feeder_get_off's arousal>=4 gate. VERIFIED: green build + flag chains valid; 5 nodes, all nodeId targets resolve (no dangling), register 22-28w/caption + 0 leaks (solo Rule-4 exempt). NEW MEDIA (deferred to /find-media): 5 videos activities/channel_{news,shop,film,latenight,porn}.webm (porn=NSFW harvest); old activities/channel.jpg now orphaned.",
       "why": "LO: make the TV a proper 5-channel surf, last channel porn, next+off on each channel. 'Go ahead implement it.'"
+    },
+    {
+      "book_revision": 21,
+      "note": "ENGINE FIX inherited (no game TOML change) — QuestsPage now builds its NPC sections from setup.quests_cards instead of setup.help_data.npcs. help_data.npcs is populated only by canvases carrying targetType='npc' trait effects, so npc_margaret — 6 authored quest cards, no NPC-targeted trait bumps — was silently absent and her whole tier never rendered. Diagnosed and fixed while working on Vesper (same defect hit its npc_colm). Rebuilt with --dev --debug: merge OK, Validation passed, All flag chains valid, Package ready. Playwright QuestsPage now renders Grayson / Richard / MARGARET / Lorna with correct display names, no duplicate sections and no bare headings. Audrey's cards still gate on flags this probe didn't seed — card matching, not the renderer. Only games/the_inheritance/output was regenerated; the TOML is untouched."
     }
   ],
   "_active_beat": "FINISH (fix-pass done; media harvest + production build + re-list remain)",

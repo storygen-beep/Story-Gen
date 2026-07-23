@@ -10406,22 +10406,42 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
   &lt;/div&gt;
 &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;set _helpData = setup.help_data || {}&gt;&gt;
-&lt;&lt;set _hasNpcs = _helpData.npcs &amp;&amp; Object.keys(_helpData.npcs).length &gt; 0&gt;&gt;
-&lt;&lt;if _hasNpcs&gt;&gt;
-  &lt;&lt;for _npcId, _npcData range _helpData.npcs&gt;&gt;
-    &lt;&lt;set _slug = setup.npcSlugForId(_npcId)&gt;&gt;
-    &lt;&lt;set _card = _slug ? setup.pickQuestsCard(_slug) : null&gt;&gt;
-    &lt;&lt;if _card&gt;&gt;
-      &lt;div class=&quot;quests-section&quot;&gt;
-        &lt;h3&gt;&lt;&lt;print ($npcs[_npcId] &amp;&amp; $npcs[_npcId].name) || _npcData.name&gt;&gt;&lt;/h3&gt;
-        &lt;&lt;renderQuestsCard _card&gt;&gt;
-      &lt;/div&gt;
+/* The NPC sections come from the CARDS, not from setup.help_data.npcs. help_data.npcs is
+   populated only by canvases carrying targetType=&quot;npc&quot; trait effects (_build_help_data), so an
+   NPC with a full quest ladder but no stat bumps — one whose arc runs on player counters — was
+   silently absent and its cards never rendered (Vesper&#39;s Colm: 4 cards, 0 renders). quests_cards
+   IS the source of truth for who has cards, and pickQuestsCard() matches card.npc_id directly,
+   so no slug/uuid translation is needed and this behaves the same in --use-db builds. */
+&lt;&lt;set _allCards = setup.quests_cards || []&gt;&gt;
+&lt;&lt;set _hidden = setup.hiddenNpcs || {}&gt;&gt;
+&lt;&lt;set _slugMap = setup.npc_slug_map || {}&gt;&gt;
+&lt;&lt;set _npcSlugs = []&gt;&gt;
+&lt;&lt;for _c range _allCards&gt;&gt;
+  &lt;&lt;if _c &amp;&amp; _c.npc_id &amp;&amp; _npcSlugs.indexOf(_c.npc_id) === -1&gt;&gt;
+    /* hiddenNpcs is UUID-keyed (hidden_npcs_map); check both forms so hidden_from_ui still
+       suppresses a section whichever build mode this is. */
+    &lt;&lt;if !_hidden[_c.npc_id] &amp;&amp; !_hidden[_slugMap[_c.npc_id]]&gt;&gt;
+      &lt;&lt;run _npcSlugs.push(_c.npc_id)&gt;&gt;
     &lt;&lt;/if&gt;&gt;
-  &lt;&lt;/for&gt;&gt;
-&lt;&lt;/if&gt;&gt;
+  &lt;&lt;/if&gt;&gt;
+&lt;&lt;/for&gt;&gt;
 
-&lt;&lt;if _goals.length === 0 &amp;&amp; !_hasNpcs&gt;&gt;
+&lt;&lt;set _rendered = 0&gt;&gt;
+&lt;&lt;for _slug range _npcSlugs&gt;&gt;
+  &lt;&lt;set _card = setup.pickQuestsCard(_slug)&gt;&gt;
+  &lt;&lt;if _card&gt;&gt;
+    &lt;&lt;set _nid = _slugMap[_slug] || _slug&gt;&gt;
+    &lt;&lt;set _rendered = _rendered + 1&gt;&gt;
+    &lt;div class=&quot;quests-section&quot;&gt;
+      &lt;h3&gt;&lt;&lt;print ($npcs[_nid] &amp;&amp; $npcs[_nid].name) || ($npcs[_slug] &amp;&amp; $npcs[_slug].name) || _slug.replace(&quot;npc_&quot;, &quot;&quot;)&gt;&gt;&lt;/h3&gt;
+      &lt;&lt;renderQuestsCard _card&gt;&gt;
+    &lt;/div&gt;
+  &lt;&lt;/if&gt;&gt;
+&lt;&lt;/for&gt;&gt;
+
+/* &quot;did we draw a card&quot;, not &quot;does help_data list anybody&quot; — the old test could leave a bare
+   Story-Goals heading with nothing under it. */
+&lt;&lt;if _goals.length === 0 &amp;&amp; _rendered === 0&gt;&gt;
   &lt;div class=&quot;no-quests&quot;&gt;No active quests.&lt;/div&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
