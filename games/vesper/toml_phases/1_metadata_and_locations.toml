@@ -103,8 +103,10 @@ calloway_drains_done = 0
 # THE ARCHIVE 1a (beat_0066) — the Colm hub counters (hidden). colm_drinks: +1 per "Drink with him" night (0->3, one
 # per night via max_triggers_per_day; its bands render the 3 escalating drink beats; gte 3 opens the hub). colm_kisses:
 # +1 per "Kiss him" rung (0->3; its bands run hesitant->warming->done; gte 3 opens "Take him in the back"). colm_drains_done:
-# +1 on the FIRST back-room drain (0->1; picks the drain branch d0/done). TRAITS not flags (gte-reads, validator-exempt);
-# the drink/kiss rungs bump on choices, and vane_confirmed rides the hub's back-room choice (located via the triggered hub).
+# +1 on the FIRST ASS-FINISH drain, bumped on loop_colm_finisher's ass-finish choice (0->1; picks the drain branch
+# d0/done). TRAITS not flags (gte-reads, validator-exempt); the drink/kiss rungs bump on choices. rev 92: colm_drains_done
+# gte 1 REPLACED the retired vane_confirmed flag at all 5 of its gates — the drain setter moved onto the triggerless
+# finisher, where an is_true FLAG would hard-fail the flag-chain validator (same reason as names_known above).
 colm_drinks       = 0
 colm_kisses       = 0
 colm_drains_done  = 0
@@ -328,7 +330,7 @@ activity   = "working the rogue-hunt files"
 # ── Vane — the rogue (Calloway's trusted teammate; RECAST v2, on-screen in 1a) ──
 # beat_0056/v2 + division build-out. Calloway's own trusted man, secretly the leak: he COPIES sensitive files
 # (nothing ever goes missing) and feeds them to Colm -> Bastien. On-screen: he BLENDS IN with the team (the floor
-# small-talk pool, same easy small talk as the rest) until vane_confirmed, then she blackmails him. 2-ROW SCHEDULE
+# small-talk pool, same easy small talk as the rest) until colm_drains_done gte 1, then she blackmails him. 2-ROW SCHEDULE
 # (LO): daytime at vance_securities (the floor / small-talk), NIGHTTIME at docs_department (his routine job — she
 # observes him badge the vault). No portrait hub — surfaced via the small-talk walk-in + the docs observation +
 # the blackmail capstone. NON-conquest (blackmail leverage). Name OPEN ("Vane", renameable).
@@ -360,8 +362,9 @@ activity   = "his routine in the docs department"
 # ── Colm — the courier (beat_0066; Bastien's off-record man) ──
 # Bastien's off-record courier (never on paper), a nightly regular at the Undertow. Carries Vane's copies out to
 # Bastien. She works him as a proper hub over several nights (Sol names him -> drink 3 nights -> kiss until he stops
-# flinching -> take him in the back = the drain); his drained memory of the handoffs gives her Vane's FACE
-# (-> vane_confirmed). Trust-gated (relation/counters), NOT corruption — he's already dirty, she loosens him. His
+# flinching -> take him in the back = the sex loop, whose ASS finish opens the drain); his drained memory of the
+# handoffs gives her Vane's FACE (-> colm_drains_done gte 1). Trust-gated (relation/counters), NOT corruption — he's
+# already dirty, she loosens him. His
 # SCHEDULE is below (19:00-23:59, evening only — deliberately NOT spanning midnight, so the once-a-night drink cap
 # can't be straddled across the day-key flip). Colm IS the conquest here (Vane stays NON-conquest).
 [[npcs]]
