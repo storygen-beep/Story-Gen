@@ -6626,9 +6626,10 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "colm_met", operator = "is_false" },
     ] } }, blocks = [
-    { type = "paragraph", content = "Three stools down: the man Sol pointed her to. Corner seat, back to the wall, a bag with a boot hooked through the strap, eyes going to the door out of pure reflex. She takes the stool beside him. He clocks her, weighs her, and gives her exactly nothing — polite, careful, a man having a quiet one and meaning to keep it that way." },
+    { type = "paragraph", content = "Three stools down: the man Sol pointed her to. Corner seat, back to the wall, a bag with a boot hooked through the strap so it never leaves his ankle. He's nursing one drink like it has to last till dawn, and his eyes go to the door on a clock she can't hear — every ninety seconds, reflex, the tic of a man who's counted the exits in every room he's ever sat in. She takes the stool beside him. He clocks her, weighs her, and gives her exactly nothing — polite, careful, a man having a quiet one and meaning to keep it that way." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "If you're selling, I'm not buying. If you're asking, I'm that even less. Nothing personal — just how I've stayed a man who gets to keep having quiet ones." },
-    { type = "thought_bubble", props = { speaker = "player" }, content = "Careful to a fault, exactly like Sol said. You don't crack a man like this with a question. You crack him with time — and the first hour starts with a drink he didn't have to pay for." },
+    { type = "paragraph", content = "But he doesn't move stools, and he doesn't tell her to leave. He just goes back to watching the door, letting her sit inside the arm's length he gives nobody — which is its own kind of answer. Careful men notice careful people. She hasn't asked him for a single thing; that's the only reason she's still got the seat." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "Careful to a fault, exactly like Sol said — and lonely with it, under all that guard. You don't crack a man like this with a question. You crack him with time. The first hour starts with a drink he didn't have to pay for." },
   ] },
   # THE STANDING HUB (colm_met is_true) — banded on relation. cold < 12 / warming 12-23 / hers >= 24.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
@@ -6722,10 +6723,11 @@ locationId = "underworld_bar"
 id   = "meet_drink"
 name = "Colm"
 blocks = [
-  { type = "paragraph", content = "She flags Sol for two and slides one in front of him before he can wave it off. Colm looks at the glass, looks at her, and does the arithmetic of a man who trusts nothing free — then drinks, because refusing would be its own kind of tell." },
+  { type = "paragraph", content = "She flags Sol for two and slides one in front of him before he can wave it off. Colm looks at the glass, looks at her, and does the arithmetic of a man who trusts nothing free — what it costs him to drink it against what it costs him to refuse. Refusing is the louder tell. He drinks." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "...Appreciated. Doesn't buy you anything but the drink, understand. But — appreciated." },
-  { type = "dialog", props = { speaker = "player" }, content = "No sell, no ask. Just the only man in here who still looks like he's got a job worth keeping his mouth shut about." },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "One drink in and he's still all edges. Fine. She's got nowhere to be and he's here every night. She'll wear the careful down a round at a time." },
+  { type = "dialog", props = { speaker = "player" }, content = "No sell, no ask. Just the only man in here who looks like he'd still be alive this time next year — and I'm tired of drinking alone." },
+  { type = "paragraph", content = "That earns her a look, a real one, held a beat longer than he means to give it — two careful people clocking the same wariness in each other. He says nothing else worth keeping. But he lets a whole minute pass without checking the door, and for a man like Colm that's most of a confession." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "One drink in and he's still all edges. Fine — she's got nowhere to be and he's here every night. Somewhere under the careful there's a courier who moves things between the worlds for a buyer who pays on time. That's the thread. She just has to be patient enough to pull it, a round at a time." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -6769,8 +6771,24 @@ effects = [
 id   = "drink"
 name = "Colm"
 blocks = [
-  { type = "paragraph", content = "Another round, and the night wears on the way nights do down here — slow, red-lit, the room thinning around them. He drinks careful, always careful, but he drinks with her now, and somewhere in the hours the wary courier keeps forgetting to watch the door." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "Third one and I'm still counting them. Habit. You'd have to work a lot harder than this to get me sloppy — but I'll give you that you're the reason I keep letting you try." },
+  { type = "paragraph", content = "Another round, and the night wears on the way nights do down here — slow, red-lit, the room thinning around them. He drinks careful, always careful. But he drinks with her now, which for a man who's made a life of drinking alone is not nothing." },
+  # Relation-banded — the standing round deepens as she earns him. NO ordinals (the old "Third one" count died with act_colm_drink; the drink is uncapped now). cold < 12 / warming 12-23 / hers >= 24; three adjacent groups = ONE exclusive if/elseif chain (mutually exclusive on relation).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_colm", trait_key = "relation", operator = "lt", value = 12 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "I don't get sloppy — never have, not the job for it. But I'll drink what you're pouring. Beats the wall, and you don't talk half as much as the others who try to sit here." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_colm", trait_key = "relation", operator = "gte", value = 12 },
+      { type = "trait", subject = "npc", npc_id = "npc_colm", trait_key = "relation", operator = "lt", value = 24 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "You're turning into a habit. Only good kind there is, in my line — the sort nobody's supposed to know I've got. Don't make me regret it." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_colm", trait_key = "relation", operator = "gte", value = 24 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "Keep buying and I keep forgetting to watch that door. Reckon you know that. Reckon that's the point — and I've stopped minding either way." },
+  ] },
 ]
 [canvases.nodes.exit_block]
 type = "location"
