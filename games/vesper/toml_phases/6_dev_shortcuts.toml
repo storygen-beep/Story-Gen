@@ -258,8 +258,87 @@ flagEffects = [
   { targetType = "player", flag = "salvage_done",       op = "set" },
   { targetType = "player", flag = "mission_3_active",   op = "set" },
   { targetType = "player", flag = "salvage_relaunched", op = "set" },
+  # rev 93 — by Archive-start Wren has been serving Mercer the whole game, so his hub must be OPEN. Leaving it
+  # shut made every dev-jump run hit the penthouse capstone collision: cap_first_penthouse_service (pri 11, gated
+  # mercer_hub_open is_false) out-ranked cap_1a_close, so testers got the "world without end" arrangement beat
+  # immediately before Mercer panics and runs. The real fix is the docs_retrieved guard on that capstone; this
+  # line makes the jump stop lying about the state it claims to land you in.
+  { targetType = "player", flag = "mercer_hub_open",    op = "set" },
 ]
 # Cover port — land testers IN cover so "one click into Vance -> cap_archive_cover" (the jump's promise) holds.
 wardrobeEffects = [
   { action = "equip", item_id = "cover_analyst" },
+]
+
+# ─── DEV JUMP: 1b start — post-1a-close, dropped in the underworld (rev 96) ────────────────────────
+# Seeds the full THROUGH-ARCHIVE state (the whole Calloway/case/Colm/Vane chain done) + the close outcome
+# (archive_1a_done, docs_retrieved, controller_held) and drops at underworld_strip — one step into the breaking-dock
+# fires kess_1b_open (the Kess handoff). NO cover equip (she's out of the Spire; the underworld reads her in grays).
+# Coin seeded so the tester can exercise the paid cot tier. Gated dev_mode_enabled; inert in shipped builds.
+[[canvases]]
+id          = "dev_jump_1b_start"
+name        = "▶ 1b: after the close (to Kess)"
+description = "DEV JUMP. Post-1a-close: seeds the full through-Archive state + the close outcome (archive_1a_done, docs_retrieved, controller_held) and drops at underworld_strip, one step from Kess's berth where kess_1b_open (the docs+controller handoff + rent) fires. Coin seeded for the paid cot. reach_safehouse left unset so the Kess scene + the 'go to Kess' card show. Gated dev_mode_enabled; inert in shipped builds."
+
+[canvases.trigger]
+location      = "underworld_strip"
+is_repeatable = true
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "dev_mode_enabled", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "seed"
+name = "1b start (dev)"
+blocks = [
+  { type = "paragraph", content = "Dev jump: seeding the post-close state (file + controller in hand, both locked; Spire sealed) and dropping in the underworld. Step into the breaking-dock off the strip to reach Kess." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Into the Reach."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_strip"
+effects = [
+  { targetType = "player", trait = "equipped_weapon",  op = "set", value = 1 },
+  { targetType = "player", trait = "core_strain",      op = "set", value = 0 },
+  { targetType = "player", trait = "core_sealed",      op = "set", value = 1 },
+  { targetType = "player", trait = "repair_session",   op = "set", value = 12 },
+  { targetType = "player", trait = "colm_drains_done", op = "set", value = 1 },
+  { targetType = "player", trait = "case_progress",    op = "set", value = 6 },
+  { targetType = "player", trait = "coin",             op = "set", value = 50 },
+  { targetType = "player", trait = "energy",           op = "set", value = 100 },
+  { targetType = "player", trait = "names_known",      op = "set", value = 1 },
+]
+flagEffects = [
+  { targetType = "player", flag = "opening_done",       op = "set" },
+  { targetType = "player", flag = "renner_drained",     op = "set" },
+  { targetType = "player", flag = "hunt_lead",          op = "set" },
+  { targetType = "player", flag = "crew_known",         op = "set" },
+  { targetType = "player", flag = "bastien_found",      op = "set" },
+  { targetType = "player", flag = "bastien_revealed",   op = "set" },
+  { targetType = "player", flag = "captivity_entered",  op = "set" },
+  { targetType = "player", flag = "captivity_broken",   op = "set" },
+  { targetType = "player", flag = "captivity_done",     op = "set" },
+  { targetType = "player", flag = "salvage_entered",    op = "set" },
+  { targetType = "player", flag = "kess_met",           op = "set" },
+  { targetType = "player", flag = "salvage_done",       op = "set" },
+  { targetType = "player", flag = "mission_3_active",   op = "set" },
+  { targetType = "player", flag = "salvage_relaunched", op = "set" },
+  { targetType = "player", flag = "mercer_hub_open",    op = "set" },
+  # ── Archive 1a chain, all resolved (so the world + quests read coherent post-close) ──
+  { targetType = "player", flag = "calloway_met",         op = "set" },
+  { targetType = "player", flag = "calloway_believes",    op = "set" },
+  { targetType = "player", flag = "case_insider_seen",    op = "set" },
+  { targetType = "player", flag = "case_curated_seen",    op = "set" },
+  { targetType = "player", flag = "pipe_known",           op = "set" },
+  { targetType = "player", flag = "colm_found",           op = "set" },
+  { targetType = "player", flag = "access_problem_seen",  op = "set" },
+  { targetType = "player", flag = "docs_retrieved",       op = "set" },
+  # ── the close outcome: 1a done, key in her pocket (locked). reach_safehouse EXPLICITLY UNSET so the jump always
+  #    lands PRE-Kess (the handoff + the 'go to Kess' card show) regardless of any prior session state. ──
+  { targetType = "player", flag = "archive_1a_done",      op = "set" },
+  { targetType = "player", flag = "controller_held",      op = "set" },
+  { targetType = "player", flag = "reach_safehouse",      op = "unset" },
 ]

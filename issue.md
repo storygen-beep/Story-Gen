@@ -141,7 +141,7 @@ I think we should decide on docs, calloway, rogue and bastien but redesign the s
 
 [DONE]vane drain not built properly, should be like a hub menu too, also she should have asked bartender about if he knows a guy can transfer anything from outerworld to underworld and vice versa, from he shows there is the guy colm. Now player should see the colm portrait in the bar at a fixed schedule every night, the work on him should not be like the way it is currently, instead it should also be a proper hub menu, where drain in the ass only triggers drain and informations.
 
-Quests Page written properly or can be written better, analyze thoroughly and share your honest thoughts. Its like it doesnt properly shows that now player has to go to underworld or he still has to work on the case.
+[DONE]Quests Page written properly or can be written better, analyze thoroughly and share your honest thoughts. Its like it doesnt properly shows that now player has to go to underworld or he still has to work on the case.
 
 [DONE]calloway second drain is the one gating the further content (vane blackmail and everything), I dont like it. First What is this second drain does explain in simple words.
 
@@ -168,4 +168,17 @@ Skill Gap
 The inheritance is one way built from the old inheritance game. The way we build vesper is we have shaped the first chapter and then we continue to add more and more, which makes it easy for us to write, test, iterate, verify and ship. But with the game like inheritance it becomes soo difficult to test, iterate, verify and ship it. What should we do now??
 
 
-story ideas
+story ideas, one review says that the vesper looks more like a black noir not like a porn game.
+
+One review says that the video arent as good as writing.
+
+
+[DONE]colm drain have no sex loop, it gets straight to drain, it is wrong.
+
+
+[DONE]at the end, when we go to the mercer with docs, there is a mercer canvas in his place, where wren gives him her mouth, the other one mercer panic also trigger but after that, see if I am correct or not.
+IT SAW MORE ISSUES
+
+[DONE]The Work on case, can it be a bit more aware of the state, it confuses player to work more and more. I think it can sort of give some hints, like if it require more to work to reveal something then it can say you might need to work more on it to find out more, and if nothing more to reveal in it, it can say you have figured this out (to verify for the rogue and find out the courier guy from underworld). It can say current state and also a hint if there is more work needed. But if no work is needed it should say that you can already find that out.
+
+The question is, should we lock the car ride to spire and vance security?? We are trying to figure out what is correct and what is wrong??
