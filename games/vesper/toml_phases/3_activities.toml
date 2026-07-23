@@ -352,84 +352,17 @@ effects = [
   { targetType = "player", trait = "arousal_charge", op = "set", value = 3 },
 ]
 
-# ─── beat_0069 (rev 96) — THE REACH REST-BED: the cradle-substitute at Kess's berth ───────────────
-# The post-1a-close problem: the cradle (the ONLY Charge restore + the ONLY bed) is Spire-side, and the close
-# seals the Spire. Dropped in the Reach with a live sandbox that costs Charge, the player had no way to refill it
-# -> a silent dead-end (Charge -> 0, everything greys, no death screen). This bed fixes it. Gated reach_safehouse
-# (set by kess_1b_open, 5_scenes) so it only exists once Kess has taken her in. TWO tiers, deliberately:
-#   • "Crash rough" — FREE, always available, +40 Charge, 120 min, no day-advance. The survivability FLOOR: it kills
-#     the coin soft-lock (a coin-only bed would strand her — no Charge -> can't earn coin at the brothel/pit ->
-#     can't pay to sleep). 40 > the 15-Charge action floor, so she can always scrape back to functional.
-#   • "A night on the feed line" — the RENT: costs 10 coin, +100 Charge (full), 540 min day-advance, AND reloads the
-#     drain (Kess's feed line is the natural home for it; the cradle's weapon-reload is Spire-side + now sealed off).
-# Rougher than the cradle by design (LO's lean): comfort costs Reach coin every night; the free option is a genuinely
-# rough half-charge. Also gives the coin economy (brothel/pit earn) a real sink. Emitter reload left for a later 1b
-# beat. Choices carry costs+effects (market pattern, underworld_market_shop); the result nodes carry the time.
-[[canvases]]
-id          = "activity_kess_cot"
-name        = "The cot"
-description = "Wren-solo @kess_berth (rev 96). The Reach rest-bed — the cradle-substitute after the Spire seals. Gated reach_safehouse is_true. TWO tiers: 'Crash rough' (FREE, +40 Charge, 120 min, no day-advance — the soft-lock floor) and 'A night on the feed line' (the RENT: 10 coin, +100 Charge, 540 min day-advance, reload the drain). Repeatable, pri 3. Fixes the post-close dead-end (no Charge restore in the Reach); rougher than the cradle by design."
-[canvases.trigger]
-location      = "kess_berth"
-is_repeatable = true
-priority      = 3
-is_active     = true
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "reach_safehouse", operator = "is_true" },
-] }
-[[canvases.nodes]]
-id   = "base"
-name = "The cot"
-blocks = [
-  { type = "paragraph", content = "The cot sits along the wall by Kess's feed line — a stripped bench with a pad on it and a tap off the same rig he uses to wake dead machines. Not the cradle. But it holds a charge, and down here that's the whole of what she needs a bed to do." },
-]
-[canvases.nodes.exit_block]
-type = "choices"
-[[canvases.nodes.exit_block.choices]]
-text       = "Crash rough — a couple hours, no coin. (Half a charge.)"
-targetType = "node"
-nodeId     = "activity_kess_cot.rough"
-effects    = [{ targetType = "player", trait = "energy", op = "add", value = 40, clamp = true }]
-[[canvases.nodes.exit_block.choices]]
-text       = "A night on the feed line. (10 coin — full charge, drain reloaded.)"
-targetType = "node"
-nodeId     = "activity_kess_cot.night"
-costs      = [{ trait = "coin", value = 10 }]
-effects    = [
-  { targetType = "player", trait = "energy",       op = "add", value = 100, clamp = true },
-  { targetType = "player", trait = "drain_charge",  op = "set", value = 1 },
-]
-[[canvases.nodes.exit_block.choices]]
-text       = "Leave it."
-targetType = "location"
-locationId = "kess_berth"
-
-[[canvases.nodes]]
-id   = "rough"
-name = "Crash rough"
-blocks = [
-  { type = "paragraph", content = "She doesn't pay for the line — just drops onto the pad and lets the cot's trickle-tap do what it can. A couple hours of half-sleep, one eye on the water, and her cells claw back partway. Not full. Enough to move. She's up before she's rested, the way the Reach teaches you to be." },
-]
-[canvases.nodes.exit_block]
-type = "location"
-text = "Up."
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "kess_berth"
-time_progression_minutes = 120
-[[canvases.nodes]]
-id   = "night"
-name = "A night on the feed line"
-blocks = [
-  { type = "paragraph", content = "She pays Kess his coin and hooks into the feed line proper. It's not the cradle's clean pull — it's a breaking-dock rig meant for hulls — but it takes her down the whole way and holds her there till morning. Charge full, the drain rebuilt its one shot off the same current, the night walked back into her. She unhooks into a new day." },
-]
-[canvases.nodes.exit_block]
-type = "location"
-text = "Morning."
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "kess_berth"
-time_progression_minutes = 540
+# ═══════════════════ 1b DEFERRED (rev 97) — activity_kess_cot (the Reach rest-bed) shelved ═════════════════
+# THE REACH REST-BED (beat_0069, rev 96): the cradle-substitute @kess_berth, gated reach_safehouse (set by the
+# shelved kess_1b_open). TWO tiers — "Crash rough" (FREE, +40 Charge, the soft-lock floor) + "A night on the feed
+# line" (RENT: 10 coin, +100 Charge, 540 min day-advance, drain reload). It FIXED the post-close stranded-battery
+# dead-end. REMOVED because 1b isn't releasing (the whole Kess safehouse arc is shelved, and reach_safehouse never
+# sets now). ⚠️ CONSEQUENCE: with this out, the post-close Reach sandbox has NO Charge restore again — the latent
+# pre-1b dead-end returns for a player who ignores the terminal frontier card (D) and keeps grinding. Acceptable for
+# a 1a-only test-portal release (this is the exact pre-rev-96 state), but it comes BACK the moment 1b ships this bed.
+# Full block preserved in commit 08ec2e1 (rev 96). RE-ENABLE: restore this canvas alongside kess_1b_open + the berth
+# reopen + dev_jump_1b_start + the E frontier card.
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════
 
 # The chip / memories view — seeded-empty, the greyed FRAGMENT 01 slot (the visible next
 # rung; fills at the_site, frontier). The unconscious self-labelling = the awakening seed.

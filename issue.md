@@ -169,6 +169,7 @@ The inheritance is one way built from the old inheritance game. The way we build
 
 
 story ideas, one review says that the vesper looks more like a black noir not like a porn game.
+I think, in mopoga, filterout the top 10 html sandbox games like ours built with twine, study how they are written, what experience do they give to their players. Then see is it just because vesper is like that, if yes, then is inheritance properly giving that experience. What is that experience, how is that built, analyze thoroughly and share your thoughts honestly.
 
 One review says that the video arent as good as writing.
 
@@ -182,3 +183,10 @@ IT SAW MORE ISSUES
 [DONE]The Work on case, can it be a bit more aware of the state, it confuses player to work more and more. I think it can sort of give some hints, like if it require more to work to reveal something then it can say you might need to work more on it to find out more, and if nothing more to reveal in it, it can say you have figured this out (to verify for the rogue and find out the courier guy from underworld). It can say current state and also a hint if there is more work needed. But if no work is needed it should say that you can already find that out.
 
 The question is, should we lock the car ride to spire and vance security?? We are trying to figure out what is correct and what is wrong??
+
+the work on case says the answer's in the reach, but it is in the underworld if I m correct??
+
+Things to correct:
+    Undertow:
+        The bartender: should be the npc portrait, not the link
+        Drink with Colm: should be same npc portrait. First it should not show direct menu of choice, first they meet and introduce, colm doesnt share much, she says can she buy him a drink, that is the first time they meet. Further we show the colm portrait, with two choices talk to him, drink with him [with more drink more and more choices like linear, every drink cost time], should be triggable more then one time, simply within the schedule triggerable everytime in the colm bar schedule.

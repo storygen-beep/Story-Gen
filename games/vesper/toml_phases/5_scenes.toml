@@ -5130,73 +5130,15 @@ effects = [
   { targetType = "player", trait = "core_sealed", op = "set", value = 1 },
 ]
 
-# ═══ kess_1b_open — beat_0068 (rev 96), THE 1b ON-RAMP: hand off docs + controller, rent the cot ═════════
-# Auto-fire @kess_berth, pri 11, one-shot, gated archive_1a_done is_true + reach_safehouse is_false. The first beat
-# AFTER the 1a close (which now drops her at underworld_strip; she walks to the berth). Three moves in one scene:
-#   (1) THE READ TEASE — she cracks the file she carried out and gets far enough to know it's about HER, then hits
-#       the same lock as the controller. The subject-reveal stays deferred to the crack payoff (next release).
-#   (2) THE HANDOFF — she puts the file AND the controller on Kess's bench. He reads them both keyed to the same
-#       hand and says he'll need time. No timeline, no promises — Kess doesn't make them.
-#   (3) THE RENT — she can't surface (the Spire's sealed over her); she needs a place and will pay. Kess agrees,
-#       transactional. Exit SETS reach_safehouse -> unlocks the Reach rest-bed (activity_kess_cot, 3_activities) and
-#       flips the Story-Goal from "go to Kess" (D) to the frontier card (E). controller_held stays set (it's hers,
-#       Kess is working it). State-exclusive with salvage_verdict (pri 11) — that needs salvage_done is_false, dead
-#       here. RTS-flat on-ramp register (Kess terse/transactional); NOT Tier-3 (this is a hinge, not a capstone).
-[[canvases]]
-id          = "kess_1b_open"
-name        = "Keyed to the same hand"
-description = "beat_0068 (rev 96). The 1b on-ramp @kess_berth. Auto-fire, pri 11, one-shot, gated archive_1a_done is_true + reach_safehouse is_false. She reads the file (tease — it's about her, locked), puts the file AND the leash controller on Kess's bench; he reads them keyed to the same hand and says he needs time (no timeline). She explains she's blown topside and needs a place; she'll pay rent. Kess agrees. SETS reach_safehouse (unlocks the Reach rest-bed activity_kess_cot + flips Story-Goal D->E). controller_held stays set. Dialog-forward."
-[canvases.trigger]
-location      = "kess_berth"
-is_repeatable = false
-priority      = 11
-is_active     = true
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "archive_1a_done",  operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "reach_safehouse",  operator = "is_false" },
-] }
-[[canvases.nodes]]
-id   = "base"
-name = "Keyed to the same hand"
-blocks = [
-  { type = "image", props = { file = "scenes/kess_berth_night.jpg", description = "A woman standing in a flooded ship-breaking dock at night, a male mechanic looking up from a work-cradle, a stripped hull on the blocks behind them.", search_queries = ["woman standing flooded ship breaking dock night mechanic", "gutted hull workshop cutting torch dark figure"] } },
-  { type = "paragraph", content = "The berth is where she left it — black water, the stripped hull up on the blocks, Kess at the cradle with a torch in his hand. He doesn't ask why she's back. He reads the topside off her the way he read the wrongness off her core, and goes still." },
-  # ONE cascade, exit LAST (cascade-must-be-last gotcha): the read tease -> the handoff -> his terms, closing beat folded in.
-  { type = "cascade", props = { beats = [
-    # (1) THE READ TEASE — she tries the file first, in front of him, and can't get in.
-    { blocks = [
-        { type = "paragraph", content = "Before she says a word she pulls the file out and thumbs it open under his work-light — because she has to know. She gets three pages in. Long enough to see her own designation on it, older than she is, and the word BUILD where a birth would go. Then the pages turn to garble: keyed, sealed, a wall dropped exactly where the answer starts." },
-        { type = "thought_bubble", props = { speaker = "player" }, content = "It's about her. It's the whole of her. And she can't read a line of the part that matters." },
-    ] },
-    { advance_text = "Put both on his bench.", blocks = [
-        { type = "paragraph", content = "She sets two things down on the steel beside him: the sealed file, and the little controller she took off Mercer on the way down. Kess wipes his hands, picks up the controller, turns it in the light. Then he thumbs the file, sees the same locked garble, and sets them side by side like two parts off the same machine." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Huh. Same lock. This little key and that file are cut to the same hand — whoever sealed one sealed the other. Makes sense. Same people built you and wrote you up." },
-    ] },
-    { advance_text = "Ask if he can open them.", blocks = [
-        { type = "dialog", props = { speaker = "player" }, content = "Can you get into them." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Into the key, eventually — it's hardware, and hardware I can beat. Get that reading his hand instead of the dead man's and it cuts your leash from your side. The file rides on the same crack, so it opens when the key does. But it's not a night's work, and I don't guess at timelines on a thing that takes you with it if I'm wrong. It takes what it takes." },
-    ] },
-    # (2/3) THE RENT — she names the other problem. She can't go up.
-    { advance_text = "Tell him the other problem.", blocks = [
-        { type = "dialog", props = { speaker = "player" }, content = "Then take the time. I've got nowhere to be. The Spire's shut over me — I can't go back up, and I can't be seen looking for a bed. I need somewhere down here. I'll pay for it. Coin, not favors." },
-        { type = "paragraph", content = "Kess looks at the hull, at the cradle rigged for something bigger than a person, at her. Doing the sum a man does before he lets a problem sleep under his roof." },
-    ] },
-    { advance_text = "Wait for his terms.", blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "There's a cot by the feed line. It's not the box you're used to — half a charge if you're cheap, a full night on the line if you pay for it. You pay per night, in coin, and you keep your hands off my gear. Coin dries up, so does the arrangement. We clear?" },
-        { type = "dialog", props = { speaker = "player" }, content = "Clear." },
-        { type = "thought_bubble", props = { speaker = "player" }, content = "A cot in a breaking-dock, rented by the night off a man who owes her nothing. It's the safest she's been in two years — because for the first time the key to her is on a bench she can watch instead of in a pocket she can't reach. She'll pay his coin and wait him out. Down here, waiting is a thing she owns." },
-    ] },
-  ] } },
-]
-[canvases.nodes.exit_block]
-type = "location"
-text = "Set down. This is home now, for a while."
-[canvases.nodes.exit_block.config]
-destinationType = "specific"
-locationId      = "kess_berth"
-flagEffects = [
-  { targetType = "player", flag = "reach_safehouse", op = "set" },
-]
+# ═══════════════════ 1b DEFERRED (rev 97) — kess_1b_open shelved for this release ══════════════════════════
+# THE 1b ON-RAMP (beat_0068, rev 96): auto-fire @kess_berth — she reads the file (tease: her designation + "BUILD",
+# then keyed garble), hands the file + controller to Kess (keyed to the same hand, he needs time), rents the cot.
+# SET reach_safehouse (which unlocked activity_kess_cot + flipped Story-Goal D->E). REMOVED from the build because
+# 1b isn't releasing yet; the 1a close now ends terminally on card D instead. Full block preserved verbatim in
+# commit 08ec2e1 (rev 96). RE-ENABLE for 1b: restore this canvas + activity_kess_cot (3_activities) +
+# dev_jump_1b_start (6_dev_shortcuts) + the E frontier card (above) + the berth reopen (1_metadata: drop the
+# salvage_done is_false clause). Media slot: scenes/kess_berth_night.jpg (unharvested).
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════
 
 # ═══ salvage_mercer_shocked — beat_0053b (v2), Mercer won't use a broken asset (mid-repair) ═══
 # Auto-fire @penthouse, pri 12, ONE-SHOT (is_repeatable=false — the engine renders auto-fire events as
@@ -7259,13 +7201,16 @@ blocks = [
     ] },
     { advance_text = "Take the key. Take him down.", blocks = [
         { type = "thought_bubble", props = { speaker = "player" }, content = "He's wrong, and he'll die never knowing how wrong. Keyed to him, sure — until a man who takes machines apart for a living gets it under a light. She closes her hand around it and it's the first thing in two years that's hers and about her at once. The file in her coat, the key in her fist. Both locked. Both hers." },
-        { type = "paragraph", content = "She gets him into the car and gives the driver an address that isn't on any manifest. The tower falls away, the city goes lower and wetter, and the Spire seals itself shut behind them — sweeps on every floor now, her face on every camera at the curb. No ride back up. At the bottom, where the last light gives out, Mercer goes his own way into the dark to find whatever hole a running man finds, and doesn't look back to thank her. The deal's paid; they're quits. She turns the other way — toward the one door down here that owes her nothing and might still help. Kess." },
+        # rev 97 — TERMINAL for this release (1b deferred): the tail no longer tees up the Kess handoff (that scene +
+        # the rest-bed are commented below). She lands in the underworld holding the locked key + file; the frontier
+        # card (D) says the crack is next release. The "man who takes machines apart" hint above stays as the cliffhanger.
+        { type = "paragraph", content = "She gets him into the car and gives the driver an address that isn't on any manifest. The tower falls away, the city goes lower and wetter, and the Spire seals itself shut behind them — sweeps on every floor now, her face on every camera at the curb. No ride back up. At the bottom, where the last light gives out, Mercer goes his own way into the dark to find whatever hole a running man finds, and doesn't look back to thank her. The deal's paid; they're quits. She's alone in the underworld now with a locked key in her fist and a locked file in her coat — the whole of herself sealed in two objects she can't open. That's where her road runs out, for now." },
     ] },
   ] } },
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Down under the city — go to Kess."
+text = "Down into the Reach."
 [canvases.nodes.exit_block.config]
 destinationType = "specific"
 locationId      = "underworld_strip"
@@ -7311,27 +7256,29 @@ when = [
   { trait = "colm_drains_done", subject = "player", op = "gte", value = 1 },
   { flag = "archive_1a_done", op = "is_false" },
 ]
-# D — the ACTIVE post-close card (rev 96): archive_1a_done is_true + reach_safehouse is_false. After the close she's
-# in the underworld with a real next step — the close no longer dead-ends here. She has the file AND the controller,
-# both locked; get to Kess and get a bed. Flips to E once Kess takes her in.
+# D — the 1a END card (rev 97): TERMINAL frontier, gated archive_1a_done is_true. This release ends at the close —
+# 1b (the Kess handoff + rest-bed + the crack) is DEFERRED, so D is the build boundary again, not a "go to Kess"
+# step. She holds the locked key + file; the crack is next release. Carries the Patreon ask. (rev 96's active
+# "go to Kess" version + the E frontier card are shelved with the rest of 1b — see the commented E block below.)
 [[quest_cards]]
 priority   = 10
-text       = "You made the trade: Mercer's key for Mercer's ride down. The controller for your leash is in your pocket now — and dead in your hand, keyed to a man who just walked off into the dark. The file's yours too, and just as locked. You're blown topside, and you need a way into both, and a place to sleep while it happens."
-tip        = "You're in the underworld now, and the Spire's shut behind you. Find Kess at the breaking-dock off the strip — he cut your core open once, he can beat the lock on the key and the file. Hand him both. And settle somewhere down here: you can't go back up."
+text       = "You made the trade: Mercer's key for Mercer's ride down. The controller for your leash is in your pocket now — dead in your hand, keyed to a man who just vanished into the dark. The file's yours too, and just as locked. You're blown topside, alone in the underworld with the whole of yourself sealed in two objects you can't open."
+tip        = "That's where this build ends. Cracking the key — cutting your leash, opening the file, and finally reading what you are — plus what becomes of Mercer loose in the Reach, is the next release. If you want it sooner, Support Us in the sidebar."
 when = [
-  { flag = "archive_1a_done", op = "is_true"  },
-  { flag = "reach_safehouse", op = "is_false" },
+  { flag = "archive_1a_done", op = "is_true" },
 ]
-# E — the 1b FRONTIER / next-release card (rev 96): reach_safehouse is_true. Kess has the file + the key and is
-# working it; the crack + the subject-reveal are the next release. Carries the build boundary + the Patreon ask
-# (moved off old D). A flag-goal handoff, NOT a met-numeric -> no Frame-3 blank.
-[[quest_cards]]
-priority   = 10
-text       = "Kess has the key and the file, both cut to the same hand, and he's beating the lock — his own time, no promises. You've got a rented cot on his feed line and coin to keep it. For the first time in two years the thing that owns you is on a bench you can watch, not a pocket you can't reach. Now you wait him out, and stay alive down here while he works."
-tip        = "That's where this build ends. The crack — cutting the leash, opening the file, and finally reading what you are — plus what becomes of Mercer loose in the Reach, is the next release. Keep the cot paid and hold the underworld in the meantime. If you want the next chapter sooner, Support Us in the sidebar."
-when = [
-  { flag = "reach_safehouse", op = "is_true" },
-]
+# ═══════════════════ 1b DEFERRED (rev 97) — E frontier card commented out for this release ══════════════════
+# The E card fired on reach_safehouse (set by the Kess handoff, kess_1b_open — also commented). With 1b out of this
+# release, D above is the terminal frontier instead. Re-enable this block (and kess_1b_open + activity_kess_cot +
+# dev_jump_1b_start + the berth reopen) when 1b ships. reach_safehouse is unreferenced while these stay commented.
+# [[quest_cards]]
+# priority   = 10
+# text       = "Kess has the key and the file, both cut to the same hand, and he's beating the lock — his own time, no promises. You've got a rented cot on his feed line and coin to keep it. For the first time in two years the thing that owns you is on a bench you can watch, not a pocket you can't reach. Now you wait him out, and stay alive down here while he works."
+# tip        = "That's where this build ends. The crack — cutting the leash, opening the file, and finally reading what you are — plus what becomes of Mercer loose in the Reach, is the next release. Keep the cot paid and hold the underworld in the meantime. If you want the next chapter sooner, Support Us in the sidebar."
+# when = [
+#   { flag = "reach_safehouse", op = "is_true" },
+# ]
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════
 
 # ── Quests page — Calloway's section (Tier 2, npc_id). Stepped, one card at a time (exclusive by flags); the
 # goal LABEL carries the current lever (the sidebar 'next' row renders only the goal block). ──

@@ -693,14 +693,13 @@ description = "A flooded breaking-dock cut in under the docks, off the strip —
 image       = "locations/kess_berth.jpg"
 image_search_queries = ["flooded ship breaking dock underground night", "gutted hull workshop cutting torch dark"]
 entry_from  = "underworld_strip"
-# rev 96 — DROPPED the `salvage_done is_false` clause. It made the berth a one-time salvage window that locked the
-# instant the verdict fired (salvage_verdict sets salvage_done). Post-1a-close she comes BACK to Kess (the 1b
-# on-ramp: hand off docs + controller, rent the cot), so the berth must reopen. Gating on salvage_entered alone
-# keeps it open across the salvage grind AND after. The salvage auto-fires keep their own salvage_done/repair_session
-# guards so nothing re-fires; the only delta is post-verdict reachability, which is the point. Cosmetic: during the
-# Spire/Archive phase the berth is openable-but-quiet (a place she has no reason to visit then) — acceptable.
+# rev 97 — RESTORED the `salvage_done is_false` clause. rev 96 dropped it to reopen the berth post-close for the 1b
+# Kess on-ramp; with 1b deferred (kess_1b_open + activity_kess_cot shelved, see 5_scenes/3_activities), the berth is
+# a salvage-only window again — it locks at the verdict as it did pre-1b. RE-ENABLE for 1b: drop the salvage_done
+# clause again (revert to salvage_entered alone).
 entry_conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "salvage_entered", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "salvage_done",    operator = "is_false" },
 ] }
 blocked_message = "A breaking-dock off the strip, chained and dark. Whoever strips ships down here doesn't take walk-ins."
 

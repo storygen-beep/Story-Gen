@@ -1004,14 +1004,13 @@ description = "A flooded breaking-dock cut in under the docks, off the strip —
 image       = "locations/kess_berth.jpg"
 image_search_queries = ["flooded ship breaking dock underground night", "gutted hull workshop cutting torch dark"]
 entry_from  = "underworld_strip"
-# rev 96 — DROPPED the `salvage_done is_false` clause. It made the berth a one-time salvage window that locked the
-# instant the verdict fired (salvage_verdict sets salvage_done). Post-1a-close she comes BACK to Kess (the 1b
-# on-ramp: hand off docs + controller, rent the cot), so the berth must reopen. Gating on salvage_entered alone
-# keeps it open across the salvage grind AND after. The salvage auto-fires keep their own salvage_done/repair_session
-# guards so nothing re-fires; the only delta is post-verdict reachability, which is the point. Cosmetic: during the
-# Spire/Archive phase the berth is openable-but-quiet (a place she has no reason to visit then) — acceptable.
+# rev 97 — RESTORED the `salvage_done is_false` clause. rev 96 dropped it to reopen the berth post-close for the 1b
+# Kess on-ramp; with 1b deferred (kess_1b_open + activity_kess_cot shelved, see 5_scenes/3_activities), the berth is
+# a salvage-only window again — it locks at the verdict as it did pre-1b. RE-ENABLE for 1b: drop the salvage_done
+# clause again (revert to salvage_entered alone).
 entry_conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "salvage_entered", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "salvage_done",    operator = "is_false" },
 ] }
 blocked_message = "A breaking-dock off the strip, chained and dark. Whoever strips ships down here doesn't take walk-ins."
 
@@ -1888,84 +1887,17 @@ effects = [
   { targetType = "player", trait = "arousal_charge", op = "set", value = 3 },
 ]
 
-# ─── beat_0069 (rev 96) — THE REACH REST-BED: the cradle-substitute at Kess's berth ───────────────
-# The post-1a-close problem: the cradle (the ONLY Charge restore + the ONLY bed) is Spire-side, and the close
-# seals the Spire. Dropped in the Reach with a live sandbox that costs Charge, the player had no way to refill it
-# -> a silent dead-end (Charge -> 0, everything greys, no death screen). This bed fixes it. Gated reach_safehouse
-# (set by kess_1b_open, 5_scenes) so it only exists once Kess has taken her in. TWO tiers, deliberately:
-#   • "Crash rough" — FREE, always available, +40 Charge, 120 min, no day-advance. The survivability FLOOR: it kills
-#     the coin soft-lock (a coin-only bed would strand her — no Charge -> can't earn coin at the brothel/pit ->
-#     can't pay to sleep). 40 > the 15-Charge action floor, so she can always scrape back to functional.
-#   • "A night on the feed line" — the RENT: costs 10 coin, +100 Charge (full), 540 min day-advance, AND reloads the
-#     drain (Kess's feed line is the natural home for it; the cradle's weapon-reload is Spire-side + now sealed off).
-# Rougher than the cradle by design (LO's lean): comfort costs Reach coin every night; the free option is a genuinely
-# rough half-charge. Also gives the coin economy (brothel/pit earn) a real sink. Emitter reload left for a later 1b
-# beat. Choices carry costs+effects (market pattern, underworld_market_shop); the result nodes carry the time.
-[[canvases]]
-id          = "activity_kess_cot"
-name        = "The cot"
-description = "Wren-solo @kess_berth (rev 96). The Reach rest-bed — the cradle-substitute after the Spire seals. Gated reach_safehouse is_true. TWO tiers: 'Crash rough' (FREE, +40 Charge, 120 min, no day-advance — the soft-lock floor) and 'A night on the feed line' (the RENT: 10 coin, +100 Charge, 540 min day-advance, reload the drain). Repeatable, pri 3. Fixes the post-close dead-end (no Charge restore in the Reach); rougher than the cradle by design."
-[canvases.trigger]
-location      = "kess_berth"
-is_repeatable = true
-priority      = 3
-is_active     = true
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "reach_safehouse", operator = "is_true" },
-] }
-[[canvases.nodes]]
-id   = "base"
-name = "The cot"
-blocks = [
-  { type = "paragraph", content = "The cot sits along the wall by Kess's feed line — a stripped bench with a pad on it and a tap off the same rig he uses to wake dead machines. Not the cradle. But it holds a charge, and down here that's the whole of what she needs a bed to do." },
-]
-[canvases.nodes.exit_block]
-type = "choices"
-[[canvases.nodes.exit_block.choices]]
-text       = "Crash rough — a couple hours, no coin. (Half a charge.)"
-targetType = "node"
-nodeId     = "activity_kess_cot.rough"
-effects    = [{ targetType = "player", trait = "energy", op = "add", value = 40, clamp = true }]
-[[canvases.nodes.exit_block.choices]]
-text       = "A night on the feed line. (10 coin — full charge, drain reloaded.)"
-targetType = "node"
-nodeId     = "activity_kess_cot.night"
-costs      = [{ trait = "coin", value = 10 }]
-effects    = [
-  { targetType = "player", trait = "energy",       op = "add", value = 100, clamp = true },
-  { targetType = "player", trait = "drain_charge",  op = "set", value = 1 },
-]
-[[canvases.nodes.exit_block.choices]]
-text       = "Leave it."
-targetType = "location"
-locationId = "kess_berth"
-
-[[canvases.nodes]]
-id   = "rough"
-name = "Crash rough"
-blocks = [
-  { type = "paragraph", content = "She doesn't pay for the line — just drops onto the pad and lets the cot's trickle-tap do what it can. A couple hours of half-sleep, one eye on the water, and her cells claw back partway. Not full. Enough to move. She's up before she's rested, the way the Reach teaches you to be." },
-]
-[canvases.nodes.exit_block]
-type = "location"
-text = "Up."
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "kess_berth"
-time_progression_minutes = 120
-[[canvases.nodes]]
-id   = "night"
-name = "A night on the feed line"
-blocks = [
-  { type = "paragraph", content = "She pays Kess his coin and hooks into the feed line proper. It's not the cradle's clean pull — it's a breaking-dock rig meant for hulls — but it takes her down the whole way and holds her there till morning. Charge full, the drain rebuilt its one shot off the same current, the night walked back into her. She unhooks into a new day." },
-]
-[canvases.nodes.exit_block]
-type = "location"
-text = "Morning."
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "kess_berth"
-time_progression_minutes = 540
+# ═══════════════════ 1b DEFERRED (rev 97) — activity_kess_cot (the Reach rest-bed) shelved ═════════════════
+# THE REACH REST-BED (beat_0069, rev 96): the cradle-substitute @kess_berth, gated reach_safehouse (set by the
+# shelved kess_1b_open). TWO tiers — "Crash rough" (FREE, +40 Charge, the soft-lock floor) + "A night on the feed
+# line" (RENT: 10 coin, +100 Charge, 540 min day-advance, drain reload). It FIXED the post-close stranded-battery
+# dead-end. REMOVED because 1b isn't releasing (the whole Kess safehouse arc is shelved, and reach_safehouse never
+# sets now). ⚠️ CONSEQUENCE: with this out, the post-close Reach sandbox has NO Charge restore again — the latent
+# pre-1b dead-end returns for a player who ignores the terminal frontier card (D) and keeps grinding. Acceptable for
+# a 1a-only test-portal release (this is the exact pre-rev-96 state), but it comes BACK the moment 1b ships this bed.
+# Full block preserved in commit 08ec2e1 (rev 96). RE-ENABLE: restore this canvas alongside kess_1b_open + the berth
+# reopen + dev_jump_1b_start + the E frontier card.
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════
 
 # The chip / memories view — seeded-empty, the greyed FRAGMENT 01 slot (the visible next
 # rung; fills at the_site, frontier). The unconscious self-labelling = the awakening seed.
@@ -8448,73 +8380,15 @@ effects = [
   { targetType = "player", trait = "core_sealed", op = "set", value = 1 },
 ]
 
-# ═══ kess_1b_open — beat_0068 (rev 96), THE 1b ON-RAMP: hand off docs + controller, rent the cot ═════════
-# Auto-fire @kess_berth, pri 11, one-shot, gated archive_1a_done is_true + reach_safehouse is_false. The first beat
-# AFTER the 1a close (which now drops her at underworld_strip; she walks to the berth). Three moves in one scene:
-#   (1) THE READ TEASE — she cracks the file she carried out and gets far enough to know it's about HER, then hits
-#       the same lock as the controller. The subject-reveal stays deferred to the crack payoff (next release).
-#   (2) THE HANDOFF — she puts the file AND the controller on Kess's bench. He reads them both keyed to the same
-#       hand and says he'll need time. No timeline, no promises — Kess doesn't make them.
-#   (3) THE RENT — she can't surface (the Spire's sealed over her); she needs a place and will pay. Kess agrees,
-#       transactional. Exit SETS reach_safehouse -> unlocks the Reach rest-bed (activity_kess_cot, 3_activities) and
-#       flips the Story-Goal from "go to Kess" (D) to the frontier card (E). controller_held stays set (it's hers,
-#       Kess is working it). State-exclusive with salvage_verdict (pri 11) — that needs salvage_done is_false, dead
-#       here. RTS-flat on-ramp register (Kess terse/transactional); NOT Tier-3 (this is a hinge, not a capstone).
-[[canvases]]
-id          = "kess_1b_open"
-name        = "Keyed to the same hand"
-description = "beat_0068 (rev 96). The 1b on-ramp @kess_berth. Auto-fire, pri 11, one-shot, gated archive_1a_done is_true + reach_safehouse is_false. She reads the file (tease — it's about her, locked), puts the file AND the leash controller on Kess's bench; he reads them keyed to the same hand and says he needs time (no timeline). She explains she's blown topside and needs a place; she'll pay rent. Kess agrees. SETS reach_safehouse (unlocks the Reach rest-bed activity_kess_cot + flips Story-Goal D->E). controller_held stays set. Dialog-forward."
-[canvases.trigger]
-location      = "kess_berth"
-is_repeatable = false
-priority      = 11
-is_active     = true
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "archive_1a_done",  operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "reach_safehouse",  operator = "is_false" },
-] }
-[[canvases.nodes]]
-id   = "base"
-name = "Keyed to the same hand"
-blocks = [
-  { type = "image", props = { file = "scenes/kess_berth_night.jpg", description = "A woman standing in a flooded ship-breaking dock at night, a male mechanic looking up from a work-cradle, a stripped hull on the blocks behind them.", search_queries = ["woman standing flooded ship breaking dock night mechanic", "gutted hull workshop cutting torch dark figure"] } },
-  { type = "paragraph", content = "The berth is where she left it — black water, the stripped hull up on the blocks, Kess at the cradle with a torch in his hand. He doesn't ask why she's back. He reads the topside off her the way he read the wrongness off her core, and goes still." },
-  # ONE cascade, exit LAST (cascade-must-be-last gotcha): the read tease -> the handoff -> his terms, closing beat folded in.
-  { type = "cascade", props = { beats = [
-    # (1) THE READ TEASE — she tries the file first, in front of him, and can't get in.
-    { blocks = [
-        { type = "paragraph", content = "Before she says a word she pulls the file out and thumbs it open under his work-light — because she has to know. She gets three pages in. Long enough to see her own designation on it, older than she is, and the word BUILD where a birth would go. Then the pages turn to garble: keyed, sealed, a wall dropped exactly where the answer starts." },
-        { type = "thought_bubble", props = { speaker = "player" }, content = "It's about her. It's the whole of her. And she can't read a line of the part that matters." },
-    ] },
-    { advance_text = "Put both on his bench.", blocks = [
-        { type = "paragraph", content = "She sets two things down on the steel beside him: the sealed file, and the little controller she took off Mercer on the way down. Kess wipes his hands, picks up the controller, turns it in the light. Then he thumbs the file, sees the same locked garble, and sets them side by side like two parts off the same machine." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Huh. Same lock. This little key and that file are cut to the same hand — whoever sealed one sealed the other. Makes sense. Same people built you and wrote you up." },
-    ] },
-    { advance_text = "Ask if he can open them.", blocks = [
-        { type = "dialog", props = { speaker = "player" }, content = "Can you get into them." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Into the key, eventually — it's hardware, and hardware I can beat. Get that reading his hand instead of the dead man's and it cuts your leash from your side. The file rides on the same crack, so it opens when the key does. But it's not a night's work, and I don't guess at timelines on a thing that takes you with it if I'm wrong. It takes what it takes." },
-    ] },
-    # (2/3) THE RENT — she names the other problem. She can't go up.
-    { advance_text = "Tell him the other problem.", blocks = [
-        { type = "dialog", props = { speaker = "player" }, content = "Then take the time. I've got nowhere to be. The Spire's shut over me — I can't go back up, and I can't be seen looking for a bed. I need somewhere down here. I'll pay for it. Coin, not favors." },
-        { type = "paragraph", content = "Kess looks at the hull, at the cradle rigged for something bigger than a person, at her. Doing the sum a man does before he lets a problem sleep under his roof." },
-    ] },
-    { advance_text = "Wait for his terms.", blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "There's a cot by the feed line. It's not the box you're used to — half a charge if you're cheap, a full night on the line if you pay for it. You pay per night, in coin, and you keep your hands off my gear. Coin dries up, so does the arrangement. We clear?" },
-        { type = "dialog", props = { speaker = "player" }, content = "Clear." },
-        { type = "thought_bubble", props = { speaker = "player" }, content = "A cot in a breaking-dock, rented by the night off a man who owes her nothing. It's the safest she's been in two years — because for the first time the key to her is on a bench she can watch instead of in a pocket she can't reach. She'll pay his coin and wait him out. Down here, waiting is a thing she owns." },
-    ] },
-  ] } },
-]
-[canvases.nodes.exit_block]
-type = "location"
-text = "Set down. This is home now, for a while."
-[canvases.nodes.exit_block.config]
-destinationType = "specific"
-locationId      = "kess_berth"
-flagEffects = [
-  { targetType = "player", flag = "reach_safehouse", op = "set" },
-]
+# ═══════════════════ 1b DEFERRED (rev 97) — kess_1b_open shelved for this release ══════════════════════════
+# THE 1b ON-RAMP (beat_0068, rev 96): auto-fire @kess_berth — she reads the file (tease: her designation + "BUILD",
+# then keyed garble), hands the file + controller to Kess (keyed to the same hand, he needs time), rents the cot.
+# SET reach_safehouse (which unlocked activity_kess_cot + flipped Story-Goal D->E). REMOVED from the build because
+# 1b isn't releasing yet; the 1a close now ends terminally on card D instead. Full block preserved verbatim in
+# commit 08ec2e1 (rev 96). RE-ENABLE for 1b: restore this canvas + activity_kess_cot (3_activities) +
+# dev_jump_1b_start (6_dev_shortcuts) + the E frontier card (above) + the berth reopen (1_metadata: drop the
+# salvage_done is_false clause). Media slot: scenes/kess_berth_night.jpg (unharvested).
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════
 
 # ═══ salvage_mercer_shocked — beat_0053b (v2), Mercer won't use a broken asset (mid-repair) ═══
 # Auto-fire @penthouse, pri 12, ONE-SHOT (is_repeatable=false — the engine renders auto-fire events as
@@ -10577,13 +10451,16 @@ blocks = [
     ] },
     { advance_text = "Take the key. Take him down.", blocks = [
         { type = "thought_bubble", props = { speaker = "player" }, content = "He's wrong, and he'll die never knowing how wrong. Keyed to him, sure — until a man who takes machines apart for a living gets it under a light. She closes her hand around it and it's the first thing in two years that's hers and about her at once. The file in her coat, the key in her fist. Both locked. Both hers." },
-        { type = "paragraph", content = "She gets him into the car and gives the driver an address that isn't on any manifest. The tower falls away, the city goes lower and wetter, and the Spire seals itself shut behind them — sweeps on every floor now, her face on every camera at the curb. No ride back up. At the bottom, where the last light gives out, Mercer goes his own way into the dark to find whatever hole a running man finds, and doesn't look back to thank her. The deal's paid; they're quits. She turns the other way — toward the one door down here that owes her nothing and might still help. Kess." },
+        # rev 97 — TERMINAL for this release (1b deferred): the tail no longer tees up the Kess handoff (that scene +
+        # the rest-bed are commented below). She lands in the underworld holding the locked key + file; the frontier
+        # card (D) says the crack is next release. The "man who takes machines apart" hint above stays as the cliffhanger.
+        { type = "paragraph", content = "She gets him into the car and gives the driver an address that isn't on any manifest. The tower falls away, the city goes lower and wetter, and the Spire seals itself shut behind them — sweeps on every floor now, her face on every camera at the curb. No ride back up. At the bottom, where the last light gives out, Mercer goes his own way into the dark to find whatever hole a running man finds, and doesn't look back to thank her. The deal's paid; they're quits. She's alone in the underworld now with a locked key in her fist and a locked file in her coat — the whole of herself sealed in two objects she can't open. That's where her road runs out, for now." },
     ] },
   ] } },
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Down under the city — go to Kess."
+text = "Down into the Reach."
 [canvases.nodes.exit_block.config]
 destinationType = "specific"
 locationId      = "underworld_strip"
@@ -10629,27 +10506,29 @@ when = [
   { trait = "colm_drains_done", subject = "player", op = "gte", value = 1 },
   { flag = "archive_1a_done", op = "is_false" },
 ]
-# D — the ACTIVE post-close card (rev 96): archive_1a_done is_true + reach_safehouse is_false. After the close she's
-# in the underworld with a real next step — the close no longer dead-ends here. She has the file AND the controller,
-# both locked; get to Kess and get a bed. Flips to E once Kess takes her in.
+# D — the 1a END card (rev 97): TERMINAL frontier, gated archive_1a_done is_true. This release ends at the close —
+# 1b (the Kess handoff + rest-bed + the crack) is DEFERRED, so D is the build boundary again, not a "go to Kess"
+# step. She holds the locked key + file; the crack is next release. Carries the Patreon ask. (rev 96's active
+# "go to Kess" version + the E frontier card are shelved with the rest of 1b — see the commented E block below.)
 [[quest_cards]]
 priority   = 10
-text       = "You made the trade: Mercer's key for Mercer's ride down. The controller for your leash is in your pocket now — and dead in your hand, keyed to a man who just walked off into the dark. The file's yours too, and just as locked. You're blown topside, and you need a way into both, and a place to sleep while it happens."
-tip        = "You're in the underworld now, and the Spire's shut behind you. Find Kess at the breaking-dock off the strip — he cut your core open once, he can beat the lock on the key and the file. Hand him both. And settle somewhere down here: you can't go back up."
+text       = "You made the trade: Mercer's key for Mercer's ride down. The controller for your leash is in your pocket now — dead in your hand, keyed to a man who just vanished into the dark. The file's yours too, and just as locked. You're blown topside, alone in the underworld with the whole of yourself sealed in two objects you can't open."
+tip        = "That's where this build ends. Cracking the key — cutting your leash, opening the file, and finally reading what you are — plus what becomes of Mercer loose in the Reach, is the next release. If you want it sooner, Support Us in the sidebar."
 when = [
-  { flag = "archive_1a_done", op = "is_true"  },
-  { flag = "reach_safehouse", op = "is_false" },
+  { flag = "archive_1a_done", op = "is_true" },
 ]
-# E — the 1b FRONTIER / next-release card (rev 96): reach_safehouse is_true. Kess has the file + the key and is
-# working it; the crack + the subject-reveal are the next release. Carries the build boundary + the Patreon ask
-# (moved off old D). A flag-goal handoff, NOT a met-numeric -> no Frame-3 blank.
-[[quest_cards]]
-priority   = 10
-text       = "Kess has the key and the file, both cut to the same hand, and he's beating the lock — his own time, no promises. You've got a rented cot on his feed line and coin to keep it. For the first time in two years the thing that owns you is on a bench you can watch, not a pocket you can't reach. Now you wait him out, and stay alive down here while he works."
-tip        = "That's where this build ends. The crack — cutting the leash, opening the file, and finally reading what you are — plus what becomes of Mercer loose in the Reach, is the next release. Keep the cot paid and hold the underworld in the meantime. If you want the next chapter sooner, Support Us in the sidebar."
-when = [
-  { flag = "reach_safehouse", op = "is_true" },
-]
+# ═══════════════════ 1b DEFERRED (rev 97) — E frontier card commented out for this release ══════════════════
+# The E card fired on reach_safehouse (set by the Kess handoff, kess_1b_open — also commented). With 1b out of this
+# release, D above is the terminal frontier instead. Re-enable this block (and kess_1b_open + activity_kess_cot +
+# dev_jump_1b_start + the berth reopen) when 1b ships. reach_safehouse is unreferenced while these stay commented.
+# [[quest_cards]]
+# priority   = 10
+# text       = "Kess has the key and the file, both cut to the same hand, and he's beating the lock — his own time, no promises. You've got a rented cot on his feed line and coin to keep it. For the first time in two years the thing that owns you is on a bench you can watch, not a pocket you can't reach. Now you wait him out, and stay alive down here while he works."
+# tip        = "That's where this build ends. The crack — cutting the leash, opening the file, and finally reading what you are — plus what becomes of Mercer loose in the Reach, is the next release. Keep the cot paid and hold the underworld in the meantime. If you want the next chapter sooner, Support Us in the sidebar."
+# when = [
+#   { flag = "reach_safehouse", op = "is_true" },
+# ]
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════
 
 # ── Quests page — Calloway's section (Tier 2, npc_id). Stepped, one card at a time (exclusive by flags); the
 # goal LABEL carries the current lever (the sidebar 'next' row renders only the goal block). ──
@@ -11021,76 +10900,11 @@ wardrobeEffects = [
   { action = "equip", item_id = "cover_analyst" },
 ]
 
-# ─── DEV JUMP: 1b start — post-1a-close, dropped in the underworld (rev 96) ────────────────────────
-# Seeds the full THROUGH-ARCHIVE state (the whole Calloway/case/Colm/Vane chain done) + the close outcome
-# (archive_1a_done, docs_retrieved, controller_held) and drops at underworld_strip — one step into the breaking-dock
-# fires kess_1b_open (the Kess handoff). NO cover equip (she's out of the Spire; the underworld reads her in grays).
-# Coin seeded so the tester can exercise the paid cot tier. Gated dev_mode_enabled; inert in shipped builds.
-[[canvases]]
-id          = "dev_jump_1b_start"
-name        = "▶ 1b: after the close (to Kess)"
-description = "DEV JUMP. Post-1a-close: seeds the full through-Archive state + the close outcome (archive_1a_done, docs_retrieved, controller_held) and drops at underworld_strip, one step from Kess's berth where kess_1b_open (the docs+controller handoff + rent) fires. Coin seeded for the paid cot. reach_safehouse left unset so the Kess scene + the 'go to Kess' card show. Gated dev_mode_enabled; inert in shipped builds."
-
-[canvases.trigger]
-location      = "underworld_strip"
-is_repeatable = true
-is_active     = true
-conditions = { version = "1.0", items = [
-  { type = "flag", subject = "player", flag_key = "dev_mode_enabled", operator = "is_true" },
-] }
-
-[[canvases.nodes]]
-id   = "seed"
-name = "1b start (dev)"
-blocks = [
-  { type = "paragraph", content = "Dev jump: seeding the post-close state (file + controller in hand, both locked; Spire sealed) and dropping in the underworld. Step into the breaking-dock off the strip to reach Kess." },
-]
-[canvases.nodes.exit_block]
-type = "location"
-text = "Into the Reach."
-[canvases.nodes.exit_block.config]
-destinationType = "specific"
-locationId      = "underworld_strip"
-effects = [
-  { targetType = "player", trait = "equipped_weapon",  op = "set", value = 1 },
-  { targetType = "player", trait = "core_strain",      op = "set", value = 0 },
-  { targetType = "player", trait = "core_sealed",      op = "set", value = 1 },
-  { targetType = "player", trait = "repair_session",   op = "set", value = 12 },
-  { targetType = "player", trait = "colm_drains_done", op = "set", value = 1 },
-  { targetType = "player", trait = "case_progress",    op = "set", value = 6 },
-  { targetType = "player", trait = "coin",             op = "set", value = 50 },
-  { targetType = "player", trait = "energy",           op = "set", value = 100 },
-  { targetType = "player", trait = "names_known",      op = "set", value = 1 },
-]
-flagEffects = [
-  { targetType = "player", flag = "opening_done",       op = "set" },
-  { targetType = "player", flag = "renner_drained",     op = "set" },
-  { targetType = "player", flag = "hunt_lead",          op = "set" },
-  { targetType = "player", flag = "crew_known",         op = "set" },
-  { targetType = "player", flag = "bastien_found",      op = "set" },
-  { targetType = "player", flag = "bastien_revealed",   op = "set" },
-  { targetType = "player", flag = "captivity_entered",  op = "set" },
-  { targetType = "player", flag = "captivity_broken",   op = "set" },
-  { targetType = "player", flag = "captivity_done",     op = "set" },
-  { targetType = "player", flag = "salvage_entered",    op = "set" },
-  { targetType = "player", flag = "kess_met",           op = "set" },
-  { targetType = "player", flag = "salvage_done",       op = "set" },
-  { targetType = "player", flag = "mission_3_active",   op = "set" },
-  { targetType = "player", flag = "salvage_relaunched", op = "set" },
-  { targetType = "player", flag = "mercer_hub_open",    op = "set" },
-  # ── Archive 1a chain, all resolved (so the world + quests read coherent post-close) ──
-  { targetType = "player", flag = "calloway_met",         op = "set" },
-  { targetType = "player", flag = "calloway_believes",    op = "set" },
-  { targetType = "player", flag = "case_insider_seen",    op = "set" },
-  { targetType = "player", flag = "case_curated_seen",    op = "set" },
-  { targetType = "player", flag = "pipe_known",           op = "set" },
-  { targetType = "player", flag = "colm_found",           op = "set" },
-  { targetType = "player", flag = "access_problem_seen",  op = "set" },
-  { targetType = "player", flag = "docs_retrieved",       op = "set" },
-  # ── the close outcome: 1a done, key in her pocket (locked). reach_safehouse EXPLICITLY UNSET so the jump always
-  #    lands PRE-Kess (the handoff + the 'go to Kess' card show) regardless of any prior session state. ──
-  { targetType = "player", flag = "archive_1a_done",      op = "set" },
-  { targetType = "player", flag = "controller_held",      op = "set" },
-  { targetType = "player", flag = "reach_safehouse",      op = "unset" },
-]
+# ═══════════════════ 1b DEFERRED (rev 97) — dev_jump_1b_start shelved for this release ═════════════════════
+# DEV JUMP (rev 96): seeded the full through-Archive + close state and dropped at underworld_strip, one step from
+# Kess's berth, to test the 1b handoff. REMOVED with the rest of 1b — there's no Kess scene to land on now, and its
+# promise ("step into the breaking-dock -> kess_1b_open fires") is no longer true. To test the 1a ending in this
+# release, use dev_jump_archive_start above and play through to cap_1a_close. Full block preserved in commit 08ec2e1
+# (rev 96); RE-ENABLE alongside kess_1b_open + activity_kess_cot + the berth reopen + the E frontier card.
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════
 
