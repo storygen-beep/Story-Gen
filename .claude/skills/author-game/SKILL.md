@@ -182,6 +182,12 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
 - `references/trait-design.md` — the gating spine by arc-shape; throttle vs odometer; per-NPC odometer;
   dead-meter/split-spine; reserve the rich model for the core.
 - `references/rts-design-philosophy.md` — the WHY (player-corruption-as-tier, two-axis gate, P1–P11).
+- `references/pitching.md` — **how to propose the next thing so it lands hot**: the five parts every content
+  pitch carries (charge · ladder · person · deposit · cost) + the heat test (can the reader see the erotic
+  trajectory from the pitch alone, or is it a plot idea wearing lingerie?). `run-mode.md` owns *when* you
+  propose; this owns *what the proposal contains*. Read at every junction where you pitch content — a beat,
+  an arc, an NPC, an expansion. (Step 0's 3-part bar governs the GAME's founding fantasy; this governs every
+  pitch after it.)
 - `references/rts-flat-prose.md` — the HOW of register: the 9 mechanical prose rules (incl. **Rule 9 — write
   to arouse**: player-as-erotic-subject, camera on the body, show the act, hot ≠ purple), the three density
   tiers, choice-label discipline, the `thought_bubble` primitive. Read before writing any scene body.

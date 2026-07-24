@@ -42,6 +42,9 @@ stumbled into** — a player who came for one register shouldn't be ambushed by 
   your stable until you're the madam the city answers to." POV-fit ✓; sharp charge (power reversal +
   seduction-as-weapon) ✓; built-in two acts (take the man → build the empire) ✓.
 
+*(This bar fires ONCE, on the game's founding fantasy. Every pitch after it — a beat, an arc, an NPC, an
+expansion — answers to `references/pitching.md` instead: the five parts + the heat test.)*
+
 **The 8 qualities (carried as a check through EVERY later step, not just here):** sharp fantasy · legible
 pull · no grind · reward drip + payoff · desirable characters · paced escalation · the charge · reactive
 coherent world. The core: **the genre runs on DESIRE.** Anything downstream that fails one of these is cut

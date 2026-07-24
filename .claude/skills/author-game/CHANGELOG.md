@@ -14,6 +14,38 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 -->
 
 ## 2026-07-24
+- **Batch C of the mopoga-study doctrine pass — PITCHING: how to propose the next thing so it lands hot.**
+  NEW `references/pitching.md` (125 lines) — the quality bar for every content pitch *after the seed* (a
+  beat, an arc, an NPC, a chunk): **the five parts — charge · ladder · person · deposit · cost** — plus
+  **the heat test** ("can the reader see the erotic trajectory from the pitch alone, or is it a plot idea
+  wearing lingerie?"), a worked ✗/✓ contrast from `vesper`, the present-it-as-editable-prose rule (LO's
+  standing preference), and the two anti-patterns the five parts don't already catch (the systems pitch,
+  the costless pitch). The five parts deliberately hook the rest of the skill: part 1 names kink areas from
+  `kink-ceilings.md` §2, part 4 deposits into Batch B's accumulation object / machine, part 5 names Batch
+  B's fail-state form. Wiring: `SKILL.md` knowledge index, `references/run-mode.md` ("Navigation at
+  junctions" — *when* you propose stays there, *what the proposal contains* is pitching.md; they compose on
+  Mode A forks), `references/step-6-feedback.md` (gap-fixes that propose new content), `references/
+  step-2-toplevel.md` §6 (a frontier next-hook seed is a promise of desire, not plot), `references/
+  step-0-1-seed.md` (Step 0's 3-part bar fires ONCE on the founding fantasy; pitching.md governs every
+  pitch after). **Why:** LO's ask — "the main part is the story… I want good hot ideas, the story ideas
+  that work, that give the experience of the level that matches the top games." The study found the field's
+  winners pitch a legible desire trajectory (ordinary person + instrument of power + institution), that
+  players praise characters and never plots, and that our own instinct is to pitch intrigue with the sex
+  attached afterward — Vesper's best beat worked *because* it accidentally inverted that. Step 0 already
+  gated the GAME's fantasy; nothing gated the pitches after it. **Verified:** adversarial coherence agent
+  confirmed 4 real defects, all fixed pre-commit — most seriously **the worked example invented `vesper`
+  facts**: it gave Calloway an "estate" (he works at `vance_securities` + a file room), inverted his
+  characterization (the TOML says *humiliated, sidelined… starving to be believed*, not a controlled man
+  who's never been out-played), mis-gendered Vane (male) and inverted his function (he's the mole who gets
+  caught, not a watcher), and cited the doc-bug that was DEMOLISHED from the game. Example rewritten from
+  the actual NPC blocks — and it's a better example, since Calloway's real lever (belief, not charm) is
+  exactly the "one trait that makes this corruption theirs" the doctrine asks for; also rewritten into
+  third person to match vesper's locked register. Other fixes: a `kink-ceilings.md` §3→§2 pointer (the file
+  cited both for one rule; §3 is the near-inverse "default to most explicit" rule), a Mode-A contradiction
+  (run-mode makes core-target/hook pitches an ASK; the no-menu rule now explicitly governs option *content*,
+  not whether you ask — stated in both files), and an anti-pattern list that restated the body (trimmed
+  6→2, keeping only what the five parts don't already catch). Plan:
+  `~/.claude/plans/lets-make-these-changes-sprightly-teacup.md` (batches D–F + one eval round pending).
 - **Batch B of the mopoga-study doctrine pass — THE MACHINE: what compounds · deposit legibility · the
   fail-state FORM.** (a) **`references/step-2-toplevel.md` §4 OWNS "What compounds — declare it"**: name the
   ONE thing that grows and becomes hers, its sinks, and its states — *each state unlocking CONTENT* (a room,

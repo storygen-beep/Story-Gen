@@ -39,7 +39,8 @@ These were the load-bearing parts of the old Step 5; they survive as framework c
   the day-depth menu (`references/system-patterns.md` §7).
 
 ## Surfacing & fixing gaps (the navigation)
-**Propose the gaps as choices** (`run-mode.md` → "Navigation at junctions"): which gap to fix first — **Mode A**
+**Propose the gaps as choices** (`run-mode.md` → "Navigation at junctions"; when a fix means proposing new
+CONTENT, pitch it per `references/pitching.md` — five parts, heat test): which gap to fix first — **Mode A**
 on any gap whose fix changes the game's identity (e.g. "no fail-state was declared — wire a soft-fail clock, or
 declare no-failure on purpose?"), **Mode B** for routine fixes. A fix **bounces UP** to the blueprint (Step 5),
 the story (Step 4), or to Step 2 — it's never silently patched into TOML. Log each to `feedback.open_gaps` with a

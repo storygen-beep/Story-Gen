@@ -184,7 +184,8 @@ We build **endless sandboxes** (like RTS), not limited games with a win-screen. 
   its rung does **three jobs**: (1) land a real payoff at the charge ceiling; (2) drop into a **livable
   steady-state** (the repeatable loops + stable + reactive world + income stay playable); (3) leave a
   **greyed next-hook seed** ("a rival madam across town has noticed you") — the clip-point a later extension
-  bolts onto.
+  bolts onto. When that extension is actually pitched, it goes through the five parts + the heat test
+  (`references/pitching.md`) — a frontier seed is a promise of *desire*, not of plot.
 - **Endless ≠ aimless** — at the frontier the tracker says so **honestly** ("you've reached the current peak
   — run your empire; more to come"), never a blank screen (the RTS sin).
 

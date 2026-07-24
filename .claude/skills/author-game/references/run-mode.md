@@ -107,6 +107,13 @@ The point: never barrel down a locked plan — show the board (what's done / wha
 piece, keep the choice with the user. The proposal is always offered; accepting it is one word, so it never
 becomes death-by-questions.
 
+**What the proposal has to CONTAIN is a separate question from when you offer it — and it's the one that
+decides whether the game is hot or merely well-built.** Any pitch of *content* (a beat, an arc, an NPC, a
+chunk) carries the five parts and passes the heat test in `references/pitching.md`. This section owns the
+junction mechanics; that file owns the pitch quality. They compose: when a Mode A fork above is *also* a
+content pitch (core targets + their hooks, the frontier shape), still ASK — but the options you offer are
+**fully-written pitches**, never abstract labels.
+
 ## Systems grow through iteration — playable ≠ done
 The pipeline gets you to a **playable** game; it does not get you to a **finished** one. A playable build is
 *"playable, keep iterating,"* not *"done."* You will NOT have decided every system at the seed — most **emerge**
