@@ -135,13 +135,17 @@ lewd-high-pay as she falls, so **making money and corrupting herself are the sam
 ## 5. Legibility + pacing
 - **Legibility is a discipline on the quest cards we already have, not a new tracker.** The top "Story
   Goals" card always shows the **current want** (the active desire-ladder rung) AND **the next concrete
-  action, naming the PLACE + TIME-WINDOW + REQUIREMENT verbatim** ("Make rent ($120) — work the floor for
-  tips at the bar, evenings 6 pm–close", not just "make rent") — RTS's failure was naming the goal, not the
-  step; the field's best games (Gakko's walkthrough-as-sidebar) always name where + when. **Mandatory for
-  the active card**, and for each NPC's `next` block (`npc_panel`, `systems.md`). Telegraph the next rung
-  (locked-visible). Never stale (one current want shown). Per-NPC wants legible in each NPC's quest section.
-  **A cross-gated rung names the OTHER arc's state** ("Sal won't go further while the bar's in jeopardy" —
-  the machine §7 D3); a silent cross-lock is a soft-lock.
+  action, per the walkthrough-line standard — place + person + verb, + window when scheduled** ("Make rent
+  ($120) — work the floor for tips at the bar, evenings 6 pm–close", not just "make rent") — RTS's failure
+  was naming the goal, not the step; the field's best games (Gakko's walkthrough-as-sidebar) always name
+  where + when. **Mandatory for the active card**, and for each NPC's `next` block (`npc_panel`,
+  `systems.md`). Telegraph the next rung (locked-visible). Never stale (one current want shown). Per-NPC
+  wants legible in each NPC's quest section. **A cross-gated rung names the OTHER arc's state** ("Sal won't
+  go further while the bar's in jeopardy" — the machine §7 D3); a silent cross-lock is a soft-lock. The same
+  law covers trait gates: a rung waiting on a meter names the **feeder** that raises it. The standard and
+  the card mechanics — the label carries the step (the sidebar renders only the goal block), the
+  gate-tell/feeder rule (§3), the blank-row trap (§6) — are **owned by `quests.md`**; this section only
+  applies them to the top-level design.
 - **Pacing = tension → release, escalating, then PLATEAU.** Every want ends in a **payoff** (no want without
   one); payoffs escalate up the ladder, then flatten into a **wide livable plateau** at the frontier
   (climb → plateau → climb). Alternate big and small beats; cap the gap between payoffs (always a near

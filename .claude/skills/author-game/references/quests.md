@@ -77,6 +77,26 @@ so the per-step verb ("Flash him at the depot") must live in the goal's `label`,
 `label || trait || flag` (`:14252`), so you may also bake the trait key in (`Break him to the drain (corruption)`)
 if you want the meter named.
 
+**The label is a walkthrough line — place + person + verb (+ window).** "Flash him at the depot" passes; "Prove
+yourself to Renner" fails (no place, no clickable verb). If the step is schedule-gated the window rides too
+("Catch Sol at the bar — evenings"). This is survival, not style: across the 2026-07 top-30 mopoga Twine-sandbox
+study, lostness is the genre's dominant complaint (median 4.7% of ALL player comments; grind: 0.9% — players
+quit lost, not bored), and the field's winners ship literal in-game walkthroughs (New Lust: per-girl pages with
+progress bars + "Locked" cross-dependency labels; Course of Temptation: hint cards each ending in one concrete
+"go to X, do Y"; the loudest counter-example is Corpo Life, whose off-site walkthrough died and left "how do I
+trigger X" as its #1 comment theme). Atmosphere lives in the card's `text`; the label is load-bearing
+navigation. (Evidence: `~/Documents/Mopoga_Twine_Sandbox_Research_20260724/report.md` §F1.)
+
+**A meter-gated rung names its FEEDER, not just its number.** When the next rung waits on a trait, the label or
+`tip` says — in-world — which repeatable moves that meter: not "she isn't ready" but "she won't go further until
+the lessons do — bring her a new word (her room, evenings)". The HUD already shows the number; the ROUTE to
+raising it is what the player can't see. (Cross-ARC gates already obey this law via the locked-visible telegraph
+naming the other arc's state — `step-2-toplevel.md` §7 D3; this extends it to trait feeders.)
+
+**`tip` may speak in the NPC's own voice** where the register fits — "Buy a phone. Then find me in the kitchen."
+(Destroyer ships ~151 one-line staged hints in NPC voice; its players ask for cheat codes, never for directions.)
+Plain system-voice stays the sanctioned default (`onboarding.md` §5).
+
 ## §4 — Sidebar `next` == Quests page (one renderer)
 The sidebar `npc_panel` **next** row calls the *identical* functions as the page: `pickQuestsCard(slug)`
 (`v2.py:15454`) → `renderQuestsGoalBlock` (`:15456`) — the code even labels it "EXACT Quests-page parity"
@@ -142,10 +162,12 @@ At blueprint (Step 5), lay out the **whole page** in the design book, before aut
 1. **The Story-Goals column** — from the desire ladder (`step-2-toplevel.md`): the mission's current want + next
    action, plus any mission investigation threads. One live card, advanced by story flags.
 2. **One section per arc'd NPC** — choose the shape (§5): milestone-chain (discrete beats) or stepped trait-band
-   (one climbing trait). Write the rungs, each with its `when` band and its `goals[].label` coaching verb.
+   (one climbing trait). Write the rungs, each with its `when` band and its `goals[].label` **walkthrough line**
+   (place + person + verb — §3); a meter-gated rung names its feeder (§3).
 3. **The end-of-content card** (§7) — where the current build stops.
-4. **Check it as a surface:** every NPC section is non-stale (§6 — no met-numeric dead end), parity-matched to its
-   `npc_panel` next row (§4), and free of dev-speak. Confirm at Step 6.
+4. **Check it as a surface:** every NPC section is non-stale (§6 — no met-numeric dead end), every live label
+   passes the walkthrough standard (§3), parity-matched to its `npc_panel` next row (§4), and free of dev-speak.
+   Confirm at Step 6.
 
 ---
 

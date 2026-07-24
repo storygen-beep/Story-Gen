@@ -74,8 +74,9 @@ via `setup.npc_slug_map` (`v2.py:15415`); if it can't resolve, the whole card is
 | **`location`** | `setup.getNpcLocation(npc_id)` → the location name (`v2.py:3141`). **Same schedule source as the Schedule page** — both read `setup.npcSchedules` (Schedule page via `getNpcDaySchedule`/`getNpcAllSchedulesSorted`, `v2.py:3212`,`:3373`). Null-safe → `away_label` (default `"Away"`). Label `📍 Location`. | `v2.py:15445-15448` |
 | **`next`** | The **Quests-page goal block, verbatim** — reuses `setup.renderQuestsGoalBlock` (`v2.py:15449-15461`), so the card shows the identical block the Quests page shows, minus flavor/tip prose. | `v2.py:15449-15461` |
 
-**The `next` row is the planning payload** — it names PLACE + TIME-WINDOW + REQUIREMENT, not a vague "get
-closer." It IS the Quests page (the same renderer, one card) — design both surfaces together in
+**The `next` row is the planning payload** — its `goals[].label` carries the walkthrough line (place +
+person + verb, + window when scheduled — the standard is owned by `references/quests.md` §3), not a vague
+"get closer." It IS the Quests page (the same renderer, one card) — design both surfaces together in
 `references/quests.md`. `renderQuestsGoalBlock` (`v2.py:14217-14269`) emits exactly three frames:
 
 - **🎯 To advance:** + a `◯`/`✓` bullet per goal, each with **live progress** while climbing
@@ -224,7 +225,8 @@ before hiding a key that an `npc_panel` also reads.)*
       `template_import.py:3377-3385`).
 - [ ] Set a flavored `away_label`; pair with an `offscreen=true` schedule block so the NPC always reads
       somewhere (§4.4).
-- [ ] Author the `next` row's source quest card so its goals name PLACE + WINDOW + REQUIREMENT (§2).
+- [ ] Author the `next` row's source quest card so each live `goals[].label` passes the walkthrough-line
+      standard (`references/quests.md` §3) (§2).
 - [ ] Never add a `stage` or `awareness` surface (not selectable rows; keep them `hidden=true`).
 - [ ] Check the §5 name-collision before hiding a key any `npc_panel` reads.
 

@@ -244,6 +244,10 @@ Run with the repo venv active, in order; emit a PASS/FAIL line for each:
    - **frontier** — beats beyond the current frontier are **telegraphed
      locked-visible seeds**, never silent gaps; the frontier beat does its three jobs (payoff · drop into
      steady-state · greyed next-hook) and its quest card narrates the frontier **honestly**, never blank.
+   - **quest-card walkthrough line** — if this beat authored/advanced a card: the live rung's `goals[].label`
+     names **place + person + verb (+ window)**; a meter-gated rung names its **feeder**; and the band the
+     beat leaves behind cannot render blank (the Frame-3 trap — met numeric goal, no `ready_canvas`, not
+     `terminal`). Owner: `references/quests.md` §3/§6.
    - **retire the standing surface on a terminal beat** — if this beat is a **terminal one-way turning
      point** (she's blown/flees, the mark is owned, the house falls), its setter flag is the audit key:
      sweep this NPC's *standing* surfaces — hub choices · Lane-2 ambients · Lane-3 walk-in/drain/work · schedule
@@ -279,16 +283,15 @@ Run with the repo venv active, in order; emit a PASS/FAIL line for each:
      `daily_tick` flag only `unset`. Only `is_true` gates are checked; `is_false` guards exempt.
    - **Quests page reflects current goals** — if this beat is a trackable goal, a `[[quest_cards]]` shows it
      at the right time (and the prior milestone's card retires via its `when` gate). Never empty, never
-     stale. Each `goals` label **NAMES THE TRAIT** ("Corruption" / "<NPC> Relation"), matching the sidebar —
-     never a raw key path. Repeatable ambients/flavor: no card.
-   - **legibility — name PLACE + TIME-WINDOW + REQUIREMENT verbatim** — the **active** card
-     (and each NPC's `npc_panel` `next` block) must show not just the goal but the **next concrete action,
-     naming where + when + what's needed in words** ("work the floor for tips at the bar, evenings 6 pm–close"
-     — not "make rent"). This is mandatory, not polish (the field's strongest device — Gakko's
-     walkthrough-as-sidebar). Put the action in the card `text`/`tip`. A goal-only card with no place+window
-     fails this — **and so does one whose place+window no longer MATCHES the canvas's `location`/`schedules`.**
-     A card naming last week's place is worse than a vague one: it sends the player somewhere real that's now
-     wrong. Existence isn't enough; the copy has to still be true (`references/prose-truth.md`).
+     stale. If a label names the meter, it uses the sidebar's display name ("Corruption" / "<NPC> Relation"),
+     never a raw key path — but naming the meter is optional garnish; the label's job is the walkthrough line
+     (`quests.md` §3). Repeatable ambients/flavor: no card.
+   - **legibility — the walkthrough line stays TRUE** — the **active** card's `goals[].label` (the surface
+     both the page AND the `npc_panel` `next` row render) carries the next concrete action per the
+     walkthrough standard (`quests.md` §3). A goal-only card with no place+verb fails this — **and so does
+     one whose place+window no longer MATCHES the canvas's `location`/`schedules`.** A card naming last
+     week's place is worse than a vague one: it sends the player somewhere real that's now wrong. Existence
+     isn't enough; the copy has to still be true (`references/prose-truth.md`).
      **Cross-gated rung →** its locked-visible `locked_text` **names the gating arc's state**
      ("Sal won't go further while the bar's still in jeopardy" — the machine D3); a silent
      cross-lock is a soft-lock.
@@ -402,11 +405,11 @@ status (the quests-vs-sidebar split); the card shape follows the capstone/mechan
   the current peak honestly, never blank. *(One of two chain shapes — for an arc riding ONE climbing trait use a
   **stepped trait-band ladder** instead. The whole-page design (Story-Goals spine + per-NPC sections + end card),
   both ladder shapes, and the Frame-3-blank trap live in `references/quests.md`, designed at Step 5.)*
-- **Name place + time-window + requirement verbatim.** The active card's `text`/`tip` (and
-  the `npc_panel` `next` block, `references/systems.md`) carries the **next concrete action** with the
-  location + the schedule window + what's needed, in words ("work the floor for tips at the bar, evenings
-  6 pm–close"), not just the abstract goal. Mandatory. A **cross-gated** rung (gated on another arc — the
-  machine) is **locked-visible with `locked_text` naming the gating arc's state**; never a
+- **The walkthrough line rides `goals[].label`, not only `text`/`tip`.** The sidebar `next` row renders ONLY
+  the goal block, so a step written only into `text`/`tip` vanishes from the sidebar; a **meter-gated** rung
+  names its **feeder**. Mandatory — the standard (place + person + verb (+ window)), the gate-tell rule, and
+  the blank-row trap are owned by `references/quests.md` §3/§6. A **cross-gated** rung (gated on another
+  arc — the machine) is **locked-visible with `locked_text` naming the gating arc's state**; never a
   silent cross-lock.
 - Author quest cards into the beat's `target_phase` (or `5_scenes.toml`), alongside its canvases.
 

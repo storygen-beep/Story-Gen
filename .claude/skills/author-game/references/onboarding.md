@@ -128,11 +128,38 @@ states why:
 - a place she can't enter yet → `blocked_message` on the greyed nav card (`v2.py:4465` `navDestBlockedReason`) ("You don't know where
   he went — yet").
 
-### 2.9 State the win/fail contract up front
+### 2.9 State the win/fail contract up front — and the sandbox contract
 The opening names what winning and losing look like. Step 2 §8 §1C already declares **whether** failure exists
 (a forward-only ratchet is legitimate, but *on purpose*); the funnel's job is to **surface that declaration to
 the player** — RTS-style honesty ("this is a grind/sandbox; here's the climb, here's what bites if you let it").
 A player who doesn't know whether anything can go wrong can't read the stakes.
+
+Two siblings of the same honesty, both from the 2026-07 top-30 mopoga study's winners:
+- **The sandbox contract on the first screen.** The #1 game by engagement (Apocalyptic World) opens with the
+  promise stated flat: *"You want to be a farmer, a trader, a bounty hunter, a cage fighter, a warlord — or
+  something far darker? The choice is yours"* … *"Play at your own pace — the world keeps going either way."*
+  One or two lines of what-you-can-become + the-world-moves; it frames every system the funnel is about to
+  teach. Ours rides the **title/boot screen** — an out-of-fiction surface the player crosses before the
+  fiction starts (§5 sanctions exactly this surface; the contract line must never leak into the prose).
+- **Announce the content ceiling early — at PREMISE level, never arc register.** The same game puts an "Eat
+  your grandfather" fork BEFORE free-roam: the darkness is shown, not sprung, so the player who stays has
+  opted in. This is `content-framework.md` §1D's "content the player should know is coming" made into a
+  funnel beat. Scope it to the **premise's** darkness (what kind of game this is); do NOT demonstrate any
+  arc's gated vocab register early — that is the tier-linear leak `kink-ceilings.md` §4/§8 forbids (AW's fork
+  is premise-level cannibalism, not a corruption arc's crude register). A beat touching a kink area whose
+  ceiling row is blank doesn't ship until the ceiling is declared (`kink-ceilings.md` §3).
+
+### 2.10 If there is a chargen, every pick pays
+Course of Temptation's opening is a character sheet disguised as a story: each backstory pick is an archetype
+card with **visible stat grants** ("Dated Innocently — Sexual Knowledge+1 Disinhibition+1 Hand+1"), the
+sexual-history pick sets the starting sex-skill values, and body customization is **diegetic** — a mirror scene
+with inline pickers, not a form. The rule: a chargen pick that changes nothing is a form field; every pick
+either pays mechanically, sets a starting state, or declares a content preference — and SAYS so where the pick
+is made. **The mechanism split (ours):** stat-granting picks are ordinary **funnel choice-beats with
+`effects`** (a lifepath is scripted scenes, fully supported today); the **customize screen's fields**
+(`references/customization.md` — `text`/`select`/`image_select`) write identity values (`$player.<id>`,
+spoken back as `@`-tokens) and cannot grant stats — so anything that should PAY belongs in a beat, not the
+form. Don't bend the customize screen into a stat allocator; put the paying picks in the fiction.
 
 ---
 
@@ -160,6 +187,17 @@ authoring. The **advisory** rows are judgment, flagged not blocked.
 - The day-router proves the dead-window can't happen — a daytime-only presence is reachable only after sleep
   (§2.7).
 - The Day-1 content budget feels like a taste of the core charge, not just chores (a tunable target — see §6).
+- **First lewd content is reachable within ~15 clicks on the recommended path** (opt-in is fine; hidden is not).
+  The study's winners front-load: CoT offers a full optional encounter ~12 clicks in and an explicit beat ~30;
+  Apocalyptic World's first lewd verb lands at ~14. A funnel that stays cold past its first sitting teaches the
+  player the game is cold. (A stricter onboarding-side cousin of Rule 9's "**A floor, not a quota**" —
+  `rts-flat-prose.md` §3. That floor also passes charged slow-burn TEXTURE with no early lewd beat; this row
+  only asks that something lewd be *in reach*, opt-in, for the player who goes looking. A slow-burn game that
+  charges its funnel hot and offers a solo valve passes both.)
+- **The sandbox contract rides the title/boot screen**, and one early beat touches the premise's darkness —
+  at premise level, never an arc's gated register (§2.9).
+- **Every chargen pick pays** — stat-paying picks live in funnel choice-beats with `effects`; the customize
+  screen carries identity only (§2.10).
 
 ---
 
@@ -179,9 +217,11 @@ opening sets its flag (§2.3). Don't read "rent" as mandatory; read "the first t
   works, here's the map, here's the day-cycle" is the tutorial-wall this whole file exists to avoid. Surface
   each system in a fiction beat (§2.3) or on the sidebar (§2.4) instead. (The RTS `GameMechanics` card is the
   thing *not* to copy.)
-- **The one sanctioned out-of-fiction line: the quest-card `tip`.** The `tip` field (§2.5) is allowed to speak
-  plainly in system-voice ("Deposit at the bank to grow the fund") — it is the single legibility affordance that
-  may break fiction. Keep that voice *in the tip field*; it must never leak into the prose.
+- **Two sanctioned out-of-fiction surfaces — and only these two.** (1) The quest-card `tip` (§2.5) may speak
+  plainly in system-voice ("Deposit at the bank to grow the fund"). (2) The **title/boot screen** — already
+  out-of-fiction (disclaimer, Start) — may carry the one-line sandbox contract (§2.9). Neither voice ever
+  leaks into the prose; a mechanics LIST on the title screen is still the banned dump-shape (the contract is
+  a promise, not a manual).
 
 ---
 
@@ -216,7 +256,13 @@ inventing facts:
 - **Earning loop = the first repeatable action**, teaching spend→earn→locked-tier through one button.
 - **Day-cycle teaches by necessity** — sleep is the only way past 24h; no jump-to-morning exists.
 - **Every gate states its reason** — `locked_text` / cost message / `blocked_message`.
-- **State the win/fail contract** in the opening (§8 §1C declares whether failure exists).
+- **State the win/fail contract** in the opening (§8 §1C declares whether failure exists) — plus the
+  **sandbox contract** on the title/boot screen and one early beat touching the **premise's darkness**
+  (premise level, never an arc's gated register — §2.9).
+- **Every chargen pick pays** — paying picks are funnel choice-beats with `effects`; the customize screen
+  carries identity only (§2.10).
+- **First lewd within ~15 clicks** on the recommended path (advisory row — the stricter onboarding cousin of
+  Rule 9's "a floor, not a quota").
 - **Hard-gate rubric:** every system surfaced · named next action · no reason-less gate · every condition
   `version="1.0"` · onboarding canvases off containers.
 - The first pressure is **whatever the spine's currency is** — not always rent.
