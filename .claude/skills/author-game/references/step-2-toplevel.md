@@ -120,13 +120,31 @@ lewd-high-pay as she falls, so **making money and corrupting herself are the sam
 - **Income is a corruption ladder** (legit-low → lewd-high; the better money is always down the lewd path).
 - **Multiple paths** (anti-grind) — several *different* income activities; blocked on X → do Y.
 - **Earning = content** — every paying activity IS a lewd / reactive-world / story scene (work the floor
-  revealing, cam, escort), never a chore-click that only adds cash.
+  revealing, cam, escort), never a chore-click that only adds cash. And the player **sees what it banked** —
+  coin on the HUD, a readable odometer tick, a quest goal's live `current / value` line
+  (`references/lanes.md` Lane 3 owns the deposit rule).
 - **Pressure kept alive by SINKS, not a tax** — climbing rent/debt + clothing (the reactive-world dial
   costs money) + the empire itself + gifts. The sinks are *wanted* buys (pressure via desire).
 - **Pressure ESCALATES across acts** — survival debt → a bigger late threat (rival madam / crooked cop /
   the shark's boss) that still costs money. The *form* escalates; the *presence* of pressure is constant.
 - **Recruits are ARCS, not income widgets** — every recruited girl is a full corruption arc (her own
   double-lock + capstone + loop, a Step-4 NPC); her income is a byproduct of playing her content.
+- **What compounds — declare it.** Name the ONE thing that GROWS and becomes hers (the house whose rooms
+  reopen, the stable, the block she runs), what it costs to grow (the sinks above), and its **states** —
+  each state unlocking CONTENT: a room, a person, a kind of scene. "Visible" means *the player sees the
+  world change*, not that a bar appears. This is the **noun** §7's core loop deposits into, not a second
+  loop. Build the states as **flags / a hidden `<thing>_stage` player trait**, gated with ordinary `gte`
+  thresholds; surface a count only if the player should read it, and then as a plain `trait_bar`
+  (`hide_value=false`, **no `bands`** — `trait-catalog.md` §5; `bands` are a sidebar *render* field, never
+  the gate, and a banded value that leaves its bands vanishes from the sidebar, §4). It locks into the
+  Step-2 stat set like anything else: every state opens content **in the act you're building now**. Whoever
+  joins it is still an **ARC**, never a slot (above); a *finished* arc becoming a resource is form 3 —
+  **G6, deferred** (§7). The management test itself is **owned by `content-framework.md` §1F** — defer,
+  don't re-argue. **Or declare "nothing compounds" on purpose** — a spend-and-vanish economy is legitimate
+  (an arc-only game, a captivity spine), but chosen, not defaulted. *(Why: across the field's top sandboxes
+  the owned, growing thing is what makes repetition read as conquest — buildings gate content in Apocalyptic
+  World, per-girl ladders nest inside Patriarch's city, Free Cities' management IS the fantasy. Our own two
+  games have nothing that compounds; money is only rent-pressure.)*
 - Engine reuse: one `money` trait + the rent system (`[settings.rent]`, the climbing deadline) + Lane-3
   work hosts that earn + the clothing shop as a sink. Rates/path-counts authored per game.
 
@@ -227,8 +245,16 @@ paper; each closes a real blind spot.
   `references/run-mode.md` "Systems grow through iteration").
 - **The fail-state declaration (§1C).** Declare whether **failure exists at all**: when she refuses a beat,
   neglects a person for days, lets the deadline lapse, or runs out of money, does anything get **worse**, **close
-  off**, or **push back** — or is forward the only direction? A forward-only ratchet is a legitimate
-  power-fantasy floor, but **declare it on purpose** ("no fail-state by design"), not by default. *(The ripples
+  off**, or **push back** — or is forward the only direction? If it exists, name the **form**: **danger** (a
+  place or person can catch her — the place-specific outcomes are §5C's), **debt** (a number that grows),
+  **deadline** (a clock that lands — the clock itself is §5E's), **decay** (a state that cools when
+  neglected). Decay is **off by default but first-class**: per-NPC `trait_decay` is neglect-keyed (it skips
+  any NPC the player saw that day, floors at 0) and a player-side `trait_decay` runs daily —
+  `references/engine-reference.md`; use it rather than hand-building a neglect flag on `[engine.daily_tick]`.
+  A forward-only ratchet is a legitimate power-fantasy floor, but **declare it on purpose** ("no fail-state by
+  design") **and name what that costs** — a world that can never touch her reads as safe, and safe reads as
+  dead (Course of Temptation, the field's most simulation-deep sandbox, draws its sharpest complaint exactly
+  there: *"I can go out anywhere and nothing happens to me"*). *(The ripples
   are named at Step 4 Pass 4 and wired at Step 5 Pass 4 / framework §4F; here just declare whether the negative axis exists — the
   inheritance's biggest gap was an advertised foreclosure clock that could never actually bite.)*
 
@@ -238,10 +264,12 @@ paper; each closes a real blind spot.
 A **World setup / engine** section carrying: the cascade + double-lock + the stat set (with each leg's job
 + which are built-in vs Tier-3 custom); the **desire ladder** (the chain of named wants from open to
 frontier); the **reactive-world** model (which places get which ceiling, which NPCs are predatory); the
-**economy** (the income paths + the sinks + the late-act pressure); **the machine** (the core loop + which
+**economy** (the income paths + the sinks + the late-act pressure + **what compounds**, or the declared
+"nothing"); **the machine** (the core loop + which
 arcs wire to which / to the economy — form 1/2, the disciplines); the **pacing** intent; the
 **frontier** (the top rung's 3 jobs + the seeded next-hook); and the **§8 declarations** (the opening / cold
-start + the systems-in-play + the fail-state). Set `pipeline_phase = "map_design"` when done (Step 2b
+start + the systems-in-play + the fail-state **with its form, or the costed "none"**). Set
+`pipeline_phase = "map_design"` when done (Step 2b
 designs the world's spatial graph before casting places characters onto it).
 *(The full `## The machine` block in the design book is finalized at Step 5 (blueprint) — the synthesis of
 every arc's wiring contract — but the core loop + who's a node is fixed here.)*
@@ -254,11 +282,14 @@ every arc's wiring contract — but the core loop + who's a node is fixed here.)
   a want.
 - The reactive world keys on **clothing** (Lane 2/3, public content), never an NPC arc spine; forced =
   auto-fire capstone; ceiling = per-canvas conditions.
-- One wallet; income is a corruption ladder; earning = content; pressure escalates via scaling sinks.
+- One wallet; income is a corruption ladder; earning = content **with a deposit the player sees**; pressure
+  escalates via scaling sinks; **what compounds** is named with content-unlocking states — or "nothing
+  compounds" is declared on purpose.
 - Pacing is climb → plateau → climb; the **endgame escalates in content, not management**.
 - The **frontier** is designed (3 jobs + honest narration); local arc endings kept; no hard game-ending.
 - The **§8 declarations** are explicit: the opening (first-session + first want + speak-back), the systems
-  on/off list, and the fail-state (failure exists *or* "no fail-state by design" — chosen, not defaulted).
+  on/off list, and the fail-state (failure exists — with its form named: danger / debt / deadline / decay —
+  *or* "no fail-state by design" with its cost named; chosen, not defaulted).
 - **The machine** (§7): the core loop is designed; every core NPC has a place; the wires are form 1/2 (form
   3 = G6, deferred); D1 (no entry gated) · D2 (DAG) · D3 (cross-gates telegraphed) hold. Legibility (§5) is
   mandatory verbatim (place + time-window) + cross-gates name the other arc.

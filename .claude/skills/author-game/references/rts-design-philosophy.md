@@ -26,7 +26,14 @@ own corruption never climbs; then both axes live on the NPC. See `trait-design.m
 
 ## P2 — Two KINDS of meter: ODOMETER (permanent) vs THROTTLE (resets)
 **Verified:** `arousal` resets to 0 at climax (`finishSex`→`ResetArousal`); `corruption`/`relation`
-never reset; **no decay anywhere** in the engine.
+never reset **by default** — nothing decays unless you opt in. *(Correction, 2026-07-24: the older
+"no decay anywhere in the engine" reading was wrong and mis-taught a doctrine edit. Decay is **off by
+default but IS a first-class primitive**: per-NPC `trait_decay` is **neglect-keyed** — it skips any NPC
+the player interacted with that day and floors at 0 (`v2.py` daily tick, "Trait decay: reduce NPC traits
+if player didn't interact today") — and a player-side `trait_decay` runs every day unconditionally. Both
+are importer-validated and the sidebar auto-emits `trait_decay_warning`. See
+`references/engine-reference.md`. The RTS *design* choice is to leave it off; that is a choice, not an
+engine limit.)*
 **Intent:** an **odometer** tracks irreversible progress (lines crossed that can't be uncrossed); a
 **throttle** tracks transient readiness ("in the mood now") and forces re-engagement each session.
 Different jobs — they can't be collapsed onto one number. (This is THE distinction that drove most of

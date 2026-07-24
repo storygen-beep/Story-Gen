@@ -7,7 +7,7 @@ and its **ONE signature trap**. Every TOML home + engine field is in `references
 and the scoping gotchas in `references/toml-gotchas.md`; **read the linked reference before wiring.**
 
 > **This file = the ENGINE systems (built-in toggles).** For the **authored** subsystems a game grows into as
-> you iterate — disguise, capability, crawl, second economy, reload, loadout, day-depth — see
+> you iterate — disguise, capability, crawl, second economy, reload, loadout, day-depth, accumulation — see
 > `references/system-patterns.md`. Those aren't picked at the seed; you reach for one when play reveals a gap.
 
 | System | TOML home | Full model | Signature trap (the thing that bites) |

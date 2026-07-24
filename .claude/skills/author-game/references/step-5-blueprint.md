@@ -57,9 +57,12 @@ Take Step 4's player story and decide its structure. Output: a **`### Player blu
 - **Gate** — the actual `corruption`/`exhibitionism` value each rung needs (§2D thresholds); the resource
   `costs`; the locked-visible telegraph text. **The trait-spine decision lives here** — odometer vs throttle,
   which trait drives, per `trait-design.md`. Space repeatable rungs (~×2.5, increments fixed) + pick a throttle
-  from the menu (`trait-design.md` "Slow-burn pacing"); never leave one free + instant.
+  from the menu (`trait-design.md` "Slow-burn pacing"); never leave one free + instant — **or unpaid**: name
+  what each charged repeatable deposits and where the player SEES it (`references/lanes.md` Lane 3).
 - **Economy made real** — the income-ladder values, the wanted sinks, the key-item costs + what each unlocks,
-  the pressure clock **and whether it bites** (the fail-state — wire it or write the one-line "no failure").
+  the pressure clock **and whether it bites** (the fail-state — wire it, naming its form, or write the
+  one-line "no failure" with its cost). **+ the accumulation object** (Step 2 §4): each growth state, its
+  price, and the concrete content it opens — or carry forward the declared "nothing compounds".
 - **Seed the feeder count** (§2E) — start the band-by-band tally; close it at the end of Pass 2. **+ the
   day-breadth count** (§2F) — list the distinct non-grind daily threads (solo / exhibition / capability / economy
   / exploration); confirm ≥2–3 are live at a representative day, not just the main grind.

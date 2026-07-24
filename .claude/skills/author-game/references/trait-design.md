@@ -205,7 +205,8 @@ one deleted line, nothing left throttling it.) So **don't lean on one throttle �
    machine's own energy powering her). A `costs` spend is gate-enforced (`checkCostsAffordable` greys the rung
    when short), pacing it against the sleep/recharge loop. See `references/trait-catalog.md` §4.
 
-**The recipe:** spacing (always) **+ at least one hard throttle** (a window-sized time cost, or a counted cap).
+**The recipe:** spacing (always) **+ at least one hard throttle** (a window-sized time cost, or a counted cap)
+**+ the rung PAYS, visibly** — brake-only is grind (`references/lanes.md` Lane 3 owns the deposit rule).
 Vesper's fixed climb stacked all four → a ~7–10 in-game-day campaign (live-verified).
 
 ## Cross-cutting axes (not per-NPC)

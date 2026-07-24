@@ -4,7 +4,9 @@ This is **not** a checklist you fill at the seed. You do **not** decide a game's
 most of them **emerge** once the game is concrete and you've played it and *felt* a gap ("this day is thin,"
 "she needs a way to pass as staff," "the fight needs stakes"). That's normal, good design. This file is the
 **cookbook you open when the itch hits** — so you grab a proven shape instead of reinventing one live (which is
-how the early games burned whole sessions).
+how the early games burned whole sessions). *(One exception, flagged where it lives: **§8 accumulation** is
+DECLARED at Step 2 §4 with the stat set — a core meter can't be introduced mid-game. Its recipe lives here;
+its decision does not.)*
 
 > **Distinct from `references/systems.md`.** That file is the five **ENGINE** systems (clothing / rent / phone /
 > customization / HUD) — coarse on/off toggles you *can* decide early. This file is the finer **AUTHORED**
@@ -76,6 +78,24 @@ the menu grows.
   player stat toward content) or a **texture beat**. This is the "walk a representative day" breadth the day
   should pass.
 - **The trap:** don't add a bar without content behind it. Ship the DO **and** its reward together.
+
+## 8. Accumulation / holding — *the thing that grows and becomes hers*
+**The one entry on this menu you do NOT reach for mid-stream.** What compounds is *declared at Step 2 §4*
+with the rest of the stat set (`references/step-2-toplevel.md` — and a core meter may not be introduced
+mid-game). This is the build recipe once you've named it, not a system to discover in play.
+- **When:** you declared a thing that compounds and now have to build it.
+- **The shape:** a **hidden `<thing>_stage` trait** (0→N) + a flag per stage. Money buys the next stage at a
+  fixed **sink**; a story flag gates *permission* to buy it — money buys speed, the story buys the right.
+  Each stage **rewrites the world in place**: conditional hub prose, a room that opens, a person who
+  appears, a hotter ambient pool. Gate on the stage with ordinary `gte` thresholds. Price the sinks against
+  measured mid-game income so stage 1 lands in Act 1.
+- **The trap:** every stage must open **content** — a room, a person, a kind of scene. A stage that only
+  raises a number (or grants passive income and nothing else) is the dashboard `content-framework.md` §1F
+  forbids; §1F owns that test. This is a *sink and its states*, not Form 3 — "a finished arc becomes a
+  resource" is still deferred (`step-2-toplevel.md` §7) — and whoever joins the holding is an **ARC**, never
+  a slot. If you surface a count at all, **clamp it**: hiding a trait does NOT stop a band rendering, so an
+  unclamped banded value that leaves its bands silently vanishes from the sidebar.
+  → `references/trait-catalog.md` §4.
 
 ---
 

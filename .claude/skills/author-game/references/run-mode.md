@@ -125,7 +125,7 @@ where you are:
 4. **Fold the ripple back** — update the design book + ledger so the record still matches the game.
 
 Before inventing a system live, open `references/system-patterns.md` — the menu of common ones (disguise,
-capability, crawl, second economy, reload, loadout, day-depth) with a ready recipe each. Grab the recipe, run
+capability, crawl, second economy, reload, loadout, day-depth, accumulation) with a ready recipe each. Grab the recipe, run
 it through the four passes above.
 
 On a **shipped** game (players may hold saves), a mid-stream system may only ADD — never rename a live

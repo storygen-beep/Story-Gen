@@ -199,7 +199,8 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
   `customization.md` · `player-portrait.md` · `hud.md`), and signature trap.
 - `references/system-patterns.md` — the **grow-a-system menu**: reach-for-it recipes for the AUTHORED
   subsystems a game grows into as you iterate (disguise/cover · capability track · crawl · second economy ·
-  reload upkeep · loadout · day-depth). Distinct from `systems.md` (the ENGINE toggles) — these you do NOT pick
+  reload upkeep · loadout · day-depth · accumulation/holding — that last one alone is DECLARED at Step 2 §4,
+  not discovered in play). Distinct from `systems.md` (the ENGINE toggles) — these you do NOT pick
   at the seed; you reach for one when play reveals a gap, then fold it in via `run-mode.md` "Systems grow
   through iteration." Read when a game feels like it needs a new system.
 - `references/trait-catalog.md` — every built-in trait's range/default/decay/bands + the encode-by-type

@@ -198,7 +198,9 @@ Run with the repo venv active, in order; emit a PASS/FAIL line for each:
 4. **Doctrine self-audit** — check each against what THIS beat authored (the in-skill `references/*.md`
    own each rule cited below):
    - **the beat serves a WANT** — name the desire-ladder rung it pursues; a beat
-     whose only justification is "raises a meter" is grind — cut or reframe.
+     whose only justification is "raises a meter" is grind — cut or reframe. If it's a **charged
+     repeatable**, it also **deposits something the player SEES** this turn and carries a brake
+     (`references/lanes.md` Lane 3).
    - **reachability triad** — the canvas fires only where NPC-schedule ∩ canvas-window ∩
      player-present-and-awake overlap.
    - **dead-presence / presence floor** — every scheduled NPC has a reachable hub at each **reachable**
@@ -256,7 +258,8 @@ Run with the repo venv active, in order; emit a PASS/FAIL line for each:
      owns / a hub for a man who fled. → `references/lanes.md` "Retire the standing surface on the terminal flag."
    - **endgame stays carnal** — a late/empire beat cashes out as
      **content**: a recruit is a **full new arc** (back through Step 4 story → Step 5 blueprint — own double-lock + capstone + loop), an
-     "upgrade" unlocks **new scene types**, the apex is the **hottest beats** — never a `+income` widget or
+     "upgrade" / accumulation stage unlocks **new scene types** — ship the stage and the scene it opens in
+     the **same** increment — the apex is the **hottest beats** — never a `+income` widget or
      a stat-bump. Support a **late-act pressure beat** (rival/cop/boss) so the squeeze never dies.
    - **late-act own pacing** — a **late-introduced** NPC carries a complete self-contained rung
      ladder; it can't borrow pacing from the (now-maxed) MC-corruption door.

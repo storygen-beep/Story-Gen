@@ -74,6 +74,9 @@ a silent cut.
   objective, no dev-speak. The `npc_panel` `next` row mirrors it for free.
 - **Tiers populated** — bootstrap (`corr 0`) + flash (`corr 15`) feeders exist, not just deep capstones.
 - **Economy balanced** (§2E confirmed) — every NPC floor reachable through ordinary feeder play.
+- **What compounds is declared** (§2C · Step 2 §4) — the growing owned thing is named with content-unlocking
+  states, or "nothing compounds" is on the page as a choice · every progress-repeatable lands a deposit the
+  player can SEE (`references/lanes.md` Lane 3) · the presence floor and Lane-2 texture stay exempt.
 - **The machine verified** (§4E — a REAL check): core loop closed · every core NPC placed · DAG no cycle · no
   arc ENTRY gated · every cross-gate telegraphed.
 - **Reactivity present & wired** (§4) — state-crossings, outfit reactions, and the **loses-ground** axis (§4F)
@@ -85,6 +88,8 @@ a silent cut.
   (solo, unseen voyeur, a capstone's interior stretches); an ambient where the NPC is *present* should still
   give them a line.
 - **Systems declared** (§1E) — every optional system is on/off on purpose; none half-wired.
+- **Fail-state form named** (§1C) — if failure exists, its form is named (danger · debt · deadline · decay)
+  and wired to bite (§4F); if it doesn't, "no fail-state by design" is on the page **with its cost stated**.
 - **Onboarding teaches the machine** (`references/onboarding.md`) — the opening is a linear funnel that
   surfaces each live system once (a fiction beat or a value-zero sidebar item), names the next action on
   frame one, shows a reason on every greyed gate, and states the win/fail contract. HARD rows: every system

@@ -14,6 +14,49 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 -->
 
 ## 2026-07-24
+- **Batch B of the mopoga-study doctrine pass — THE MACHINE: what compounds · deposit legibility · the
+  fail-state FORM.** (a) **`references/step-2-toplevel.md` §4 OWNS "What compounds — declare it"**: name the
+  ONE thing that grows and becomes hers, its sinks, and its states — *each state unlocking CONTENT* (a room,
+  a person, a kind of scene), built as flags / a hidden `<thing>_stage` gated by ordinary `gte` thresholds —
+  **or declare "nothing compounds" on purpose** (the house style of the fail-state / systems-ON-OFF /
+  thin-on-purpose declarations; LO's call — a declared choice, not a blanket mandate). Positioned as the
+  *noun* §7's core loop deposits into (NOT a second loop, NOT Form 3 — still G6-deferred), deferring the
+  management-collapse test to its owner `content-framework.md` §1F. Recipe appended as
+  `references/system-patterns.md` **§8** (never inserted — `content-framework.md`/`step-6-feedback.md` cite
+  "§7" by number), with the file's "not picked at the seed" premise explicitly excepted for it. (b)
+  **`references/lanes.md` Lane 3 OWNS the deposit rule**: a charged repeatable lands something the player can
+  SEE it bank *that turn* (coin on the HUD · a readable odometer tick · a quest goal's live `current / value`
+  line), **pay-AND-brake**, with the presence floor / Lane-2 texture / zero budget cells **exempt on
+  purpose**. (c) **`references/content-framework.md` §1C** (already the single OWNER of "does failure
+  exist") gains the four form-names — **danger · debt · deadline · decay** — plus the requirement that a "no
+  failure" answer **state its cost**; deliberately NOT a new doctrine and NOT named "teeth" (that term
+  already means NPC pushback at §3A). Sync surfaces: step-2 §7→§4 back-pointer, Output sentence ×2,
+  Self-check ×2, `content-framework.md` §2C question + **both mechanism-bridge-table rows** (§1 fail-state
+  forms, §2 accumulation object — the file's own law is that a question whose answer can't land on a real
+  knob doesn't ship), `step-5-blueprint.md` Pass-1 Gate + "Economy made real" (without which the Step-2
+  declaration never got blueprinted), `trait-design.md` throttle recipe (+ "the rung PAYS, visibly"),
+  `beat-authoring.md` ×2 self-audit rows, `step-6-feedback.md` ×2 echo rows, `SKILL.md` / `systems.md` /
+  `run-mode.md` recipe enumerations. **Why:** the mopoga top-30 study (report §F2/F4/F9) found the winners
+  are engines of accumulation with arcs hanging off them (buildings gate content in Apocalyptic World;
+  per-girl ladders nest in Patriarch's city; Free Cities logs 1 grind complaint in 831 because management IS
+  the fantasy; Destroyer mints perk currency for replay), that legibility — not payout size — is what makes
+  repetition read as progress, and that players beg for consequence over scenes. Vesper (133 canvases) and
+  The Inheritance (105) have nothing that compounds; money is only rent-pressure. **Verified:** 2 adversarial
+  coherence agents + 1 design agent reviewed the cut and confirmed **9 defects**, all fixed pre-commit — most
+  seriously **a hallucinated engine fact of mine**: I wrote "the engine has no built-in decay" on the
+  strength of `rts-design-philosophy.md` P2's absolute-sounding line, then verified in code that
+  **`trait_decay` is a first-class, neglect-keyed primitive** (`v2.py` daily tick skips any NPC the player
+  interacted with that day and floors at 0; player-side variant runs daily; importer-validated; sidebar
+  auto-emits `trait_decay_warning`; documented at `engine-reference.md`). Both the new text and **the P2
+  source line that misled it** are corrected (P2 now reads "never reset **by default** — nothing decays
+  unless you opt in", with a dated correction note). Also fixed: `bands` conflated with gate thresholds
+  (bands are a sidebar *render* field); "hiding a trait prevents the banded-stat vanish" (it does NOT —
+  `trait-catalog.md` §5 says the band renders regardless; only clamping fixes it); "nightly ledger" invented
+  as an engine surface (replaced with real knobs); §1C linted against a "decay" label it never defined; a
+  "Pushback named" review row colliding with §3A's "teeth"; §1C reaching into §5C/§5E territory without
+  defer-pointers; the "empty cell" term smeared onto payless-but-filled surfaces; and one-directional
+  ownership (step-2 named lanes.md as owner while lanes.md never claimed it). Plan:
+  `~/.claude/plans/lets-make-these-changes-sprightly-teacup.md` (batches C–F + one eval round pending).
 - **Batch A of the mopoga-study doctrine pass — GUIDANCE: walkthrough-grade quest cards + onboarding
   winner-patterns.** Files: `references/quests.md` (§3 gains three rules — the **walkthrough-line standard**
   for `goals[].label` (place + person + verb (+ window)), the **gate-tell/feeder rule** (a meter-gated rung

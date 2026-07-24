@@ -286,6 +286,18 @@ The hardest lane; RTS's biggest. Two canvases per activity:
   worth is designed in the **player thread** (Step 4 story → Step 5 blueprint, `content-framework.md` §2E
   count); they then live **on the host canvas** as its solo branch. A game with rich NPC arcs but no feeder
   floor on its daily loop starves its player odometer (the Last Call finding).
+- **The deposit is VISIBLE — pay and brake.** *(This file owns the deposit rule.)* That payout above must
+  also be **legible**: a repeatable the player chooses *for progress* (a feeder, an earning/work host, a
+  charged hub rung) lands something she can SEE it bank **that turn** — coin on the HUD, an odometer tick
+  she can read, or a quest goal's live `current / value` line (`references/quests.md`). Raising a number
+  silently reads to the player as raising nothing; legibility, not the size of the payout, is what makes
+  repetition read as progress instead of grind (the field's zero-grind games all mint something visible —
+  replaying a scene buys perk currency in Destroyer). **Pair it with the brake** (`trait-design.md`, the
+  throttle menu; `step-5-blueprint.md`) — a charged repeatable is never free + instant, and never
+  brake-only. **Exempt on purpose:** the **presence floor** (base + exit with zero unlocked choices is a
+  complete hub — above), **Lane 2 texture ambients**, and a budget cell the shape leaves at zero — none of
+  them charges the player, so none of them owes. *(§2's want-test says WHY she clicks; this says what she
+  has to show for it.)*
 
 ## Lane 4 — capstone (how to write)
 **Fingerprint:** `priority ≥ 9` (typically 9–12), `trigger_mode = "manual"`, auto-fire on location
