@@ -82,6 +82,9 @@ else (store page, a `$display_title` line), never the story title.
 ---
 
 ## §5 — Pre-update checklist (before you re-ship)
+*(This file owns what may not CHANGE between releases. The rest of what a release has to clear — meter
+ceilings, unpaid promises, the cheat page, the publish flags, the scanners — is `references/ship-gate.md`;
+run both.)*
 Diff the merged TOML against the **last shipped** one and confirm none of the join keys moved:
 
 ```bash

@@ -13,6 +13,50 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-07-25
+- **Batch D of the mopoga-study doctrine pass — SHIP GATE + the player cheat page.** NEW
+  `references/ship-gate.md` — the skill's **first whole-game, post-authoring gate**. Every other audit fires
+  earlier (Step 6 reviews the *blueprint*, before prose exists), narrower (per beat / canvas / location), or
+  only on a *re*-ship (`save-safety.md` presupposes a last-shipped baseline; nothing covered a first
+  release). Six sections: **§1 meter-ceiling audit** (`max reachable` ≤ `highest authored gate`, or an
+  honest terminal band — a bar that fills past what it can buy) · **§2 dangling-promise sweep** (every named
+  person/place/teased act is paid, cut, or *logged* as a telegraphed seed; a scanner, not a verdict) ·
+  **§3 the cheat page** (player-facing, free, diegetically skinned — grants money + declared climbing meters
+  ONLY, never a story flag, never a `<slug>_stage`/`awareness`/loop-counter trait, routed
+  `targetType="location"` so gates re-evaluate) **+ the `dev_mode_enabled` dev-shortcut contrast** ·
+  **§4 build gate** (drop `--dev`/`--debug`, keep `--video-folder`; MISSING-placeholder grep == 0; no dev
+  surface leaked; `type="video"`-shipping-`.jpg` mismatch) · **§5 re-run the whole-game scanners** (both lint
+  scripts, `prose-truth.md` §4 over the release range, `rts-flat-prose.md` §7 checks 3+7,
+  `location-design.md` §6) · **§6 release discipline** (`save-safety.md` §5 + the `releases/vX.Y[.Z].html`
+  convention, documented for the first time). **Deliberately NOT a new pipeline phase** (LO's call): the
+  `pipeline_phase` enum ends at `authoring` and shipping recurs — Vesper has shipped v0.1→v0.1.3 and is
+  still authoring — so the gate is invoked per release, which also reconciles with `run-mode.md`'s
+  "playable ≠ done". Wiring: `SKILL.md` (index + the step-2 declarations row), `beat-authoring.md` (step 8
+  milestone build = the invocation point, + the Step-7 ENTRY flags note), `media.md` §3, `save-safety.md`
+  §5, `systems.md`, `step-2-toplevel.md` §8 + Output + Self-check, `trait-catalog.md` §4, `run-mode.md`.
+  **Why:** the study found cheat-code demand is the genre's most universal player behaviour (the #1 game
+  ships a free default-on menu and draws essentially no grind complaints; the ones that sell codes monetise
+  their own friction — we don't monetise), that a meter exceeding its content reads as a paywalled insult,
+  and that players quote unpaid named hooks years later. Plus our own live `--debug` ship that baked 147
+  MISSING placeholders into a public Vesper build. **Verified:** 2 adversarial agents; the highest-risk
+  area — §3's engine claims — **verified clean in code** (`v2.py:8285-8311` `_is_dev_shortcut_canvas`: the
+  `dev_mode_enabled` marker detection, five skip sites across the flag-chain validator / hint index /
+  flag-setter index, the `--dev`-only StoryInit flag, the `<<devJumps>>` render). **12 confirmed defects
+  fixed pre-commit**, notably: two citations pointing at `notes/*.md` files that live OUTSIDE the skill
+  (restated narratively — `SKILL.md` promises you never need to leave the skill); the `trait_effects`
+  preview claim overstated (value>0 filtering is the FLAT path only — the tiered path is an unfiltered
+  all-tiers flatten, `v2.py:10514-10519`); **the cited cheat-page template would have failed my own §4**
+  (`mothers_place`'s file is a dev page labelled `[DEV] Shortcuts` — now cited for its SHAPE only, with an
+  explicit re-skin instruction); "each with the `cap` its band expects" contradicted by money being
+  correctly uncapped; **three gate-free publish exits** (`media.md` §3 — the file ship-gate delegates the
+  command to — plus the Step-7 ENTRY note and `save-safety.md` §5, all now carrying back-pointers); a
+  `systems.md` paragraph that was a second copy of §3 in a file whose own scope statement excludes authored
+  canvases (cut to a pointer); an unenforced Step-2 §8 declaration (added to Output + Self-check + the
+  SKILL row); a `trait-catalog.md` insert that split a two-item list; a mis-placed `run-mode.md` corollary;
+  a `quests.md` §6 over-claim (same code path, different trigger — now worded as an extension); and
+  section-name drift. Plan: `~/.claude/plans/lets-make-these-changes-sprightly-teacup.md` (E, F + the eval
+  round pending).
+
 ## 2026-07-24
 - **Batch C of the mopoga-study doctrine pass — PITCHING: how to propose the next thing so it lands hot.**
   NEW `references/pitching.md` (125 lines) — the quality bar for every content pitch *after the seed* (a

@@ -127,7 +127,9 @@ and `search_queries` so the missing-media page is a usable list, and check cover
   the Missing-Media nav button). Always pass **`--video-folder <media-dir>`** or every clip 404s — the src
   resolves to an unpopulated copy path in ANY build (folder-independent; `--debug` does NOT switch folders —
   that older belief is wrong).
-- **PUBLISH (for players):** DROP `--dev` AND `--debug` (keep `--video-folder`). `--debug` freezes the
+- **PUBLISH (for players):** DROP `--dev` AND `--debug` (keep `--video-folder`). *(A build that goes to
+  players also runs the whole-game checklist first — `references/ship-gate.md`. This section owns the
+  command; that file owns everything else a release has to clear.)* `--debug` freezes the
   `[IMAGE MISSING]`/`[VIDEO MISSING]` text into the file; `--dev` leaks dev controls. Minimal publish build:
   `python manage.py package_from_toml --file <toml> --output <dir> --video-folder <media-dir>` (no `--owner-id`
   — the no-DB build is the default).

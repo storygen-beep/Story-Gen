@@ -120,6 +120,10 @@ The pipeline gets you to a **playable** game; it does not get you to a **finishe
 only once the game is concrete and you've played it and *felt* a gap ("this day is thin," "she needs a way to
 pass as staff," "the fight needs stakes"). That is normal, good design — not a planning failure.
 
+**Corollary: shipping is an event, not an ending.** A release is a milestone you cut and keep authoring
+past, which is why there is no "done" phase and the pipeline never leaves `authoring`. Each release does
+have to clear a gate, though — run `references/ship-gate.md` at every build that goes to players.
+
 What matters is HOW a discovered system gets folded in. The failure mode (the first games) is jamming it
 straight into TOML as a raw Step-7 beat — skipping the design passes — after the project has quietly decided
 it's "done." Instead, give a mid-stream system the **same quick passes a day-one system gets**, just entered

@@ -243,7 +243,9 @@ paper; each closes a real blind spot.
   reload loop, day-depth) are **not** all decided here — most EMERGE once the game is concrete and you've played
   it and felt a gap. Name any you already know you want; **leave the rest to grow in through play** — don't
   force a full systems list at the seed (the menu + the fold-in loop: `references/system-patterns.md` +
-  `references/run-mode.md` "Systems grow through iteration").
+  `references/run-mode.md` "Systems grow through iteration"). Also name the **cheat page's diegetic skin**
+  here (a master-key cabinet, a pocket notebook) — the page itself is standard and ships to players; only
+  its dressing is a design choice (`references/ship-gate.md` §3).
 - **The fail-state declaration (§1C).** Declare whether **failure exists at all**: when she refuses a beat,
   neglects a person for days, lets the deadline lapse, or runs out of money, does anything get **worse**, **close
   off**, or **push back** — or is forward the only direction? If it exists, name the **form**: **danger** (a
@@ -269,7 +271,8 @@ frontier); the **reactive-world** model (which places get which ceiling, which N
 "nothing"); **the machine** (the core loop + which
 arcs wire to which / to the economy — form 1/2, the disciplines); the **pacing** intent; the
 **frontier** (the top rung's 3 jobs + the seeded next-hook); and the **§8 declarations** (the opening / cold
-start + the systems-in-play + the fail-state **with its form, or the costed "none"**). Set
+start + the systems-in-play + the cheat page's diegetic skin + the fail-state **with its form, or the
+costed "none"**). Set
 `pipeline_phase = "map_design"` when done (Step 2b
 designs the world's spatial graph before casting places characters onto it).
 *(The full `## The machine` block in the design book is finalized at Step 5 (blueprint) — the synthesis of
@@ -289,8 +292,9 @@ every arc's wiring contract — but the core loop + who's a node is fixed here.)
 - Pacing is climb → plateau → climb; the **endgame escalates in content, not management**.
 - The **frontier** is designed (3 jobs + honest narration); local arc endings kept; no hard game-ending.
 - The **§8 declarations** are explicit: the opening (first-session + first want + speak-back), the systems
-  on/off list, and the fail-state (failure exists — with its form named: danger / debt / deadline / decay —
-  *or* "no fail-state by design" with its cost named; chosen, not defaulted).
+  on/off list, the **cheat page's diegetic skin** (`ship-gate.md` §3 — the page itself is standard), and the
+  fail-state (failure exists — with its form named: danger / debt / deadline / decay — *or* "no fail-state
+  by design" with its cost named; chosen, not defaulted).
 - **The machine** (§7): the core loop is designed; every core NPC has a place; the wires are form 1/2 (form
   3 = G6, deferred); D1 (no entry gated) · D2 (DAG) · D3 (cross-gates telegraphed) hold. Legibility (§5) is
   mandatory verbatim (place + time-window) + cross-gates name the other arc.

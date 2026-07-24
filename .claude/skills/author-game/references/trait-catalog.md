@@ -165,6 +165,11 @@ reads as a *missing HUD element*, not a wrong number, so a quick playtest sails 
   band to cover wherever it lands: `trait_status_text` can omit the top `max` (open top); `trait_words` needs an
   explicit high `max` (or `cap` the terminal add), or the word vanishes past the top band.
 
+*(All of the above governs whether the HUD **draws**. Whether the climb still **buys** anything is a
+different question, asked at ship time — `references/ship-gate.md` §1: widening a top band so the card keeps
+rendering can *hide* a bar that fills past its last authored gate. Both apply; `cap` the terminal add and
+you satisfy each.)*
+
 ---
 
 ## §5 — Encode-by-type sidebar mapping (and the doubling trap)

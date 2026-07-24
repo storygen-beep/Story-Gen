@@ -19,6 +19,10 @@ and the scoping gotchas in `references/toml-gotchas.md`; **read the linked refer
 | **Player portrait** | top-level **`[player_portrait]`** | `references/player-portrait.md` | **Corruption is a LEVEL, not points.** `outfits[].when.corruption.value` compares `getCorruptionLevel()` (0–4), so `value = 30` never fires — use `value = 3`. Rules are **first-match on the dominant garment's `type`** (`dress\|\|top\|\|bottom`) → order specific→general. Undress overrides (naked/topless/…) need `clothing_enabled`. Every image must be **declared in the block** or it won't copy into the build. |
 | **HUD / sidebar** *(always on)* | `[[sidebar_items]]` | `references/hud.md` + `references/trait-catalog.md` §5 | **HUD = world model:** surface each in-scope NPC's location + arousal so the player can plan Lane 3. Use **`type = "npc_panel"`** (`rows = ["arousal","corruption","location","next"]`) or `trait_owner="npc"` trait items. **PLAYER bands — encode by type** (`trait-catalog.md` §5): `trait_words` = identity (corruption) · `trait_bar`+`bands`+`hide_value=true` = mood (arousal) · `trait_status_text` = body-need (hygiene/energy) · money stays a NUMBER. Band only where the word beats the number, and `[[traits.labels]] hidden=true` any banded stat so it doesn't print twice — but mind the NPC-panel name collision (`hud.md` §5). `stage`/`awareness` NEVER surface; energy/hygiene MUST. |
 
+*(Not on this table but shipped in every game: the **cheat page** — an authored canvas, not an engine
+toggle, so its rule lives at `references/ship-gate.md` §3 along with the `dev_mode_enabled` dev-shortcut
+contrast.)*
+
 ## How this lands in the workflow
 - **Seed** (`references/step-0-1-seed.md`): decide which optional systems the game uses (clothing / rent /
   phone / **player portrait** — yes/no) and record it in the design book; **ask explicitly whether the

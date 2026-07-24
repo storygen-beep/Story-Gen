@@ -66,7 +66,8 @@ NPC arcs/hubs/ambients/capstones are beats. Only the skeleton + boot + sleep + s
    path — folder-independent, `--debug` does NOT switch folders). **To PUBLISH for players, drop `--dev` AND
    `--debug`** (keep `--video-folder`): `--debug` bakes `[IMAGE MISSING]`/`[VIDEO MISSING]` TEXT into the HTML at
    build time, so a debug build ships those placeholders even after the media is added; `--dev` leaks dev
-   controls (`references/media.md` "QA vs publish build").
+   controls (`references/media.md` "QA vs publish build"). A build that actually goes to players runs
+   `references/ship-gate.md` first — dropping the flags is one row of that checklist, not the whole of it.
 
 **Which phase file a beat's content goes in** (set `target_phase`; when unsure, check where
 `games/late_shifts/toml_phases/` put the analogous content):
@@ -166,7 +167,10 @@ NPC arcs/hubs/ambients/capstones are beats. Only the skeleton + boot + sleep + s
 6. **Validate** (below). Fix red BEFORE marking done.
 7. **Mark validated + persist** — set `status` to `validated`, append a `decisions_log` entry, write
    `authoring_state.json` back.
-8. **Build at milestones** — run the full HTML build at end of an arc / session / on demand.
+8. **Build at milestones** — run the full HTML build at end of an arc / session / on demand. **When the
+   milestone is a RELEASE** (a build that goes to players), run `references/ship-gate.md` first — the
+   whole-game checklist (meter ceilings · dangling promises · the cheat page · the publish flags · the
+   scanners re-run at whole-game scope). It is recurring, not a phase: shipping doesn't end authoring.
 
 **If an engine limit/gotcha forces a design change:** it **bounces UP to `design_book.md`** (the review
 surface) — to the **blueprint** if it's a structural change (a gate, a lane, a placement), to the **story** if

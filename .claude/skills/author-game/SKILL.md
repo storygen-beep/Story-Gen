@@ -40,7 +40,7 @@ tools (Read / Write / Edit / Bash). There is no helper module to call.
 | `pipeline_phase` | Step | Reference | Output (into `design_book.md` unless noted) |
 |---|---|---|---|
 | *(no ledger)* | 0+1 — fantasy + seed | `references/step-0-1-seed.md` | the fantasy + the bare seed; **the ledger is born** |
-| `top_level` | 2 — top-level design | `references/step-2-toplevel.md` | the cascade/double-lock/stats + economy + desire ladder + reactive world + frontier + **the machine** + the §8 opening/systems/fail-state declarations |
+| `top_level` | 2 — top-level design | `references/step-2-toplevel.md` | the cascade/double-lock/stats + economy + desire ladder + reactive world + frontier + **the machine** + **what compounds** + the §8 opening/systems/cheat-skin/fail-state declarations |
 | `map_design` | 2b — map design | `references/step-2b-map-design.md` | the **spatial graph** — topology archetype + roots/layering + per-location dramatic job & access + naming + travel friction (the `## Spatial graph & location model` section); seeds `structure_registry.locations` |
 | `casting` | 3 — casting | `references/step-3-casting.md` | the `## Casting` table (role + hook + rough sketch) |
 | `deep_design` | 4 — design (story, one subject at a time) | `references/step-4-deep-design.md` | the player thread (§2) → each NPC's story brief (§3) → the world (§5) → reactivity-as-experience (§4) — STORY only |
@@ -213,6 +213,11 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
   sidebar mapping (the DATA layer; `trait-design.md` is the design layer).
 - `references/kink-ceilings.md` — the per-arc kink/vocabulary explicit-ceiling model (default-to-maximum).
 - `references/toml-gotchas.md` — emission build-breakers. CHECK before emitting TOML.
+- `references/ship-gate.md` — **the whole-game checklist before any release** (recurring, not a phase —
+  shipping doesn't end authoring): the meter-ceiling audit (no bar that fills past what it can buy), the
+  dangling-promise sweep, the player-facing **cheat page** (+ the `dev_mode_enabled` dev-shortcut contrast),
+  the publish-flag gate (`--debug` bakes MISSING placeholders into the file), and the whole-game re-run of
+  the scanners. Read at every milestone build that goes to players.
 - `references/save-safety.md` — what you may NOT change once a game has shipped (immutable slugs / ids, live
   flag & trait keys, stat scales & tier thresholds, the game title) so an update doesn't orphan players'
   saves. Build-breakers fail loudly; these pass the build and only break a *returning player's* save. **Read
