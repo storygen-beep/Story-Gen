@@ -24,6 +24,7 @@ called out — the corpus is recovered for its craft, not trusted for its engine
 5. Image vs video — the tier contract (authoring, not engine)
 6. Placing media — the text-media-text rhythm + the 6 dimensions
 7. Folder + naming convention (+ variant chains & random pools)
+7b. Media insurance — the corpus is the content plan, so protect it
 8. Where media lives in the pipeline
 9. Exemplar + anti-example
 10. Cheat sheet
@@ -52,9 +53,16 @@ Optional props the engine also reads: `url` (a verbatim external URL instead of 
     description = "...", search_queries = ["...", "..."] } }
 ```
 `files` (a string array) **wins over `file`** and emits `either(...)` so a different image shows on each visit —
-replay variety for a repeatable scene. Image-only; a non-image entry in the pool is skipped. `v2.py:13463-13543` (`files` pool wins over `file` → `either()`).
+replay variety for a repeatable scene. `v2.py:13702-13790` (`files` pool wins over `file` → `either()`).
 
-**`video`** — a looping clip from a file (renders `<video autoplay muted loop>`). `v2.py:13661-13769` (`block_type == "video"` handler; `<video autoplay muted loop>` at `:13758`). Same props as
+> ⚠️ **The pool is IMAGE-ONLY, and it drops video SILENTLY.** Every entry is extension-checked and
+> non-images are skipped with no warning (`v2.py:13728`), so a `files` pool of `.mp4`/`.webm` resolves on
+> disk, gets emptied, and renders **nothing** — no error, and nothing in the importer validates media props
+> at all. `.gif` and `.webp` DO work (they count as images). **For rotating CLIPS use a `block_pool` of
+> `video` blocks** (§7) — its children recurse through the normal dispatch, so the real video handler runs.
+> Full trap: `references/toml-gotchas.md`.
+
+**`video`** — a looping clip from a file (renders `<video autoplay muted loop>`). `v2.py:13908+` (`block_type == "video"` handler; `<video autoplay muted loop>` at `:14005`). Same props as
 image minus `files`/`alt`/`caption`:
 ```toml
 { type = "video", props = {
@@ -249,8 +257,47 @@ stay legible:
 Two engine features worth using:
 - **Variant chains** — inside a `group`/`block_pool` (the conditional-content containers), give each branch its
   *own* media block (a different `.webm` per path) so the picture re-renders as state changes.
-- **Random pools** — the `files = [...]` array on an image block (§1) shows a different still each visit. Use it
-  on a repeatable scene for replay variety.
+- **Random pools — two kinds, and only one plays video.** The `files = [...]` array on an image block (§1)
+  shows a different **still** each visit (images only — see the §1 warning). To rotate **clips**, use a
+  **`block_pool`**: the engine emits `<<set _bp to random(0,N)>>` + an if/elseif chain and renders one child
+  set per visit, and because children recurse through the normal block dispatch, a `video` child hits the
+  real video handler (`v2.py:13664-13684`). **A branch renders exactly ONE block** (`[pool_item]`), and
+  `video` carries no caption — so a pool rotates the *clip* while the beat's prose stays put. Two pools in
+  one node do NOT stay in sync (both write `_bp`, rolled independently), so don't try to pair a clip pool
+  with a text pool; if clip and prose must vary together, use N separate canvases instead. Constraints: a
+  nested `block_pool` is silently stripped by the importer, depth caps at 4, and mixed child types log a
+  warning. *(`block_pool` itself ships in three games with text children; a pool of **video** children is
+  code-verified but not yet ship-proven.)* This is the mechanism behind the Lane-2 glimpse pool
+  (`references/lanes.md`).
+
+---
+
+## 7b. Media insurance — the corpus is the content plan, so protect it
+
+For a real-porn game the performer corpus **is** the content plan, and it is the least stable thing you
+own. The field has three cautionary cases from the 2026-07 top-30 study: one top-20 game was legally forced
+to replace all its real-porn media with dev-made AI art and its audience revolted overnight (every
+top-liked comment was the revolt); another rebuilt its story and **recast its performer-NPCs**, and players
+who had bonded with specific faces left ("I want my mom back"); a third had to **rewrite quests** because
+the actresses had retired. None of those was a design failure. Four cheap habits:
+
+- **The repo is NOT a backup.** Media is git-ignored by extension (a couple of portal-live games re-include
+  their `output/videos/`, but that's the exception), so a tracked `games/<slug>/` proves almost nothing
+  about the assets. Keep the media folder mirrored outside the build tree; a lost harvest is weeks of
+  find-media work, not an afternoon.
+- **The provenance record must survive — and it's ignored too.** The find-media pass writes a run manifest
+  under the game (`.find-media/`) recording, per asset, the winning source + URL, the queries that found
+  it, the tier and its scores. That's the only record of *where an asset came from* — and the repo ignores
+  that directory as transient working evidence, so it needs the same off-tree mirror the media does.
+- **Frame identity slots so a performer is replaceable.** For the **scene** slots that make an NPC *that
+  person* — their signature beats, the shots a player reads as "her" — prefer framing you could crop or
+  swap without the character dying (the field's fem-protagonist exemplar crops faces deliberately so
+  players project onto the PC instead of onto a performer). **The portrait slots are exempt** — both the
+  player sidebar portrait (`references/player-portrait.md`: subject centred, face upper-third) and the NPC
+  portrait card (an 80px `object-fit: cover` circle) exist to be a recognisable face; that IS the identity
+  anchor. The rule is about the scene corpus, not the two portrait surfaces.
+- **Never name a performer in prose.** The game outlives any performer's availability; a name in the text
+  turns a swapped asset into a continuity error you have to rewrite around.
 
 ---
 

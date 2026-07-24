@@ -20,7 +20,8 @@ throttle/odometer model) lives in `references/rts-design-philosophy.md` — don'
 **The contract is "specificity, not literary density."** Specific ("the runner Diana picked out") without
 being literary (no extended metaphor, no narrator-supplied backstory). This is adult content: at sexual
 register be direct and crude with real anatomical terms — the flat rules govern *shape*, never *whether
-the content is explicit*.
+the content is explicit*. And it isn't only a house preference — §1E records the same economy at the top
+of the market.
 
 **And "specific" serves "hot."** These are shape rules for a **porn game**: the player is the erotic subject
 and the prose exists to **arouse** them. Flat is how the writing stays re-readable and crude — never a
@@ -95,6 +96,22 @@ scene bodies. Body sensation runs to 127 narration lines. See Rule 3.
 ### D. Labels are two populations, and it isn't close.
 **686 nav/menu buttons: 74% carry emoji, median 2 words.** **1,559 in-cascade beat labels: 4% carry
 emoji, median 4 words.** See §4.
+
+### E. A SECOND evidence class — the field, not RTS.
+§1A–D are one corpus measured deeply (n = 1 game, 364 passages). This is different evidence, labelled so
+you don't confuse them, and unlike A–D it is **not re-derivable from inside the skill** — it's a field
+observation recorded here so the register rule has a market anchor rather than only a house one.
+
+A 2026-07 study of the 30 most-engaged Twine sandboxes on mopoga (read by story, systems, and ~11k player
+comments) found the same economy at the top of the market. One of the set's most-played real-porn
+sandboxes runs a **median ~36 words per passage** (400 sampled) across **~3,700 passages**, and its players
+call it addictive with zero grind complaints in 704 comments. Nothing in the top tier reads as literary —
+one winner markets the point outright ("ditches tedious walls of text"), and others simply practise it
+(prose as connective tissue between images; 1–3-sentence hubs). Text-only games survive up there **only**
+when a simulation replaces the media, and even the best of those has "needs pictures" as its top complaint.
+
+**So: literary pressure on Lane 1/2/3 prose is a regression, not an improvement** — those beats repeat, and
+density that reads well once reads as performance by the third pass (§2). See Rule 2 and §5.
 
 ---
 

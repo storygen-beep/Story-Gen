@@ -263,5 +263,17 @@ set inside a triggerless canvas — use a **hidden trait counter** and gate the 
     cascade as its own `advance_text` beat or a no-`advance_text` terminal beat): `references/engine-reference.md`
     (the cascade section). (Live-caught in Vesper's `cap_vane_blackmail` / `cap_1a_close`, rev 86.)
 
+## A `files = [...]` pool is IMAGE-ONLY — video entries vanish silently
+- **Putting `.mp4`/`.webm` in an image block's `files` pool renders NOTHING.** Every entry is
+  extension-checked and non-images are skipped with no warning (`v2.py:13728`), so a pool of clips resolves
+  on disk, empties itself, and the block disappears — the same "ships blank" failure a missing file causes.
+  **No build error, and no validation at all**: the importer never inspects media props (it validates the
+  block *type* only), so `file` vs `files` typos and mp4-in-an-image-pool both sail through.
+  - `.gif` and `.webp` **do** work (they count as images) — an animated-GIF pool is legal.
+  - **To rotate CLIPS, use a `block_pool` of `video` blocks** — its children recurse through the normal
+    block dispatch, so the real video handler runs (`v2.py:13664-13684`). Note a branch renders exactly
+    ONE block, so the pool varies the clip while the surrounding prose stays fixed. Shape + constraints
+    (no nesting, depth 4, mixed child types warn): `references/media.md` §7.
+
 When in doubt about a shape, read the authoritative table in `references/engine-reference.md`
 and copy the analogous block from `games/late_shifts/toml_phases/`.

@@ -149,6 +149,28 @@ IS the menu.
 - **In-fiction interruption:** lower-tier endings must stop on a real beat — external
   (a kettle, a door), internal (she stops herself), or NPC-stopping (he lets go). Higher tiers blow through.
 - Cooldown is engine-handled (3 visits) — don't author your own.
+- **Give the set N faces — an ambient is a POOL, not one canvas.** These repeat for the life of the game,
+  so one fixed beat+clip goes stale fast; the field's densest games rotate per-location clip pools
+  (Destroyer runs dozens per room) so the world is never visually dry between authored scenes. Two shapes,
+  and they do different jobs:
+  - **N separate random canvases at one location** — clip *and* prose vary together, because each canvas
+    is its own beat. Proven: `vesper` ships eight at `captive_room`. The engine's cooldown paces them, so
+    expect roughly one glimpse every 4–6 entries depending on your `chance` values.
+  - **One canvas whose media is a `block_pool`** — rotates the **clip** on every render while the beat's
+    prose stays put (a pool branch renders exactly ONE block, and `video` carries no caption). Good when
+    the words should be stable and only the picture should vary. → `references/media.md` §7.
+- **It's an interstitial, not a backdrop.** A random ambient `<<goto>>`s away from the room and takes the
+  screen; the location page carries no media of its own (a location's `image` is a CSS background on its
+  **nav card**). "Never visually cold" means entering a room often throws a short clip-beat — never that
+  the room has something playing behind it.
+- **An ambient with no NPC in it is WORLD texture, not this lane.** The fingerprint above lists
+  `requires_npc` because Lane 2 is *coexistence with a person*. The engine is happy to run a random canvas
+  with no NPC at all — a street event, weather, a sound through the wall — and that's a fine thing to
+  build; it's just owned by `references/location-design.md` (the map's ambient life), and it's the shape
+  `vesper` uses at `captive_room`. Same mechanism, different question: is a *person* in the beat?
+- **The pool can heat up with the house.** Gate the pool canvas on the accumulation object's state
+  (`references/step-2-toplevel.md` §4) and swap in a hotter pool as the place turns — same room, read
+  differently because the player changed it.
 
 ## Lane 3 — dispatcher substitution (how to write)
 The hardest lane; RTS's biggest. Two canvases per activity:

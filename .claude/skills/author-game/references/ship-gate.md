@@ -134,6 +134,10 @@ gate, not a second copy of the doctrine.
       silent mis-ship (`media.md` §2 — the bytes win). Nothing checks this; look.
 - [ ] Coverage was actually reviewed — build `--debug` **once, separately**, walk the Missing-Media page,
       then rebuild clean to ship. In a player build the gaps are invisible by design.
+- [ ] **No performer named in prose** — grep the merged TOML; the game outlives any performer's
+      availability (`media.md` §7b). *(The other two insurance habits — mirroring the media folder and the
+      find-media manifest off-tree — are off-repo state this gate can't witness; confirm them by hand at
+      the same time.)*
 
 ## §5 — Re-run the whole-game scanners
 

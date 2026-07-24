@@ -14,6 +14,45 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 -->
 
 ## 2026-07-25
+- **Batch E of the mopoga-study doctrine pass — TEXTURE: glimpse rotation · media insurance · the register
+  guard.** (a) `references/lanes.md` Lane 2 gains four additive bullets (no new heading — Lane 2 already IS
+  the glimpse ambient): **an ambient is a POOL, not one canvas**, with the two buildable shapes and what
+  each is for (N random canvases = clip *and* prose vary together, proven; one canvas with a `block_pool`
+  = the clip rotates while the prose stays put); **it's an interstitial, not a backdrop** (a random ambient
+  `<<goto>>`s away and takes the screen — the location page carries no media of its own; a location's
+  `image` is a CSS background on its *nav card*); the **no-NPC boundary** (same mechanism, but world
+  texture is `location-design.md`'s question); and **the pool can heat up with the accumulation state**
+  (Batch B). (b) `references/media.md`: `block_pool` documented as the **video-capable** rotation (§7),
+  the `files`-pool **image-only silent-drop** warning (§1), stale `v2.py` refs corrected, and NEW **§7b
+  media insurance** — the repo is not a backup, the find-media manifest needs the same off-tree mirror,
+  scene identity slots want replaceable framing (**both portrait surfaces exempt**), never name a
+  performer in prose. (c) NEW `references/toml-gotchas.md` entry for the `files`-pool landmine. (d)
+  `references/rts-flat-prose.md` NEW **§1E** — a *second evidence class*, explicitly labelled and
+  explicitly not re-derivable inside the skill, recording the field study's finding that the flat
+  caption-over-clip economy is what the market's top tier ships, ending in the regression clause. One
+  checkbox in `references/ship-gate.md` §4. **Why:** the study's porn-as-wallpaper finding (the densest
+  games rotate per-location clip pools so the world is never dry between authored scenes) + three media
+  cautionary cases (a top-20 game legally forced to swap real porn for AI art and its audience revolted;
+  another recast its performer-NPCs — "I want my mom back"; a third had to rewrite quests when actresses
+  retired) + the register needing a market anchor, not just a house one. **Verified:** 2 adversarial
+  agents, engine claims re-read in code. **The design was overturned twice and both saves mattered.**
+  Pre-write exploration killed the original "wallpaper behind the room" concept — a random ambient
+  `<<goto>>`s AWAY from the location and the location passage emits no media block, so that shape is
+  unbuildable; the doctrine was rewritten around what the engine actually does. Then the coherence pass
+  killed my replacement shape: I prescribed "each pool entry = a clip + its ~30-word beat", but a
+  `block_pool` branch renders **exactly one block** (`v2.py:13681` passes `[pool_item]`) and `video`
+  carries no caption prop — so that pool would have emitted N silent clips. Rewritten to what works, with
+  the two-pools-don't-sync trap (`_bp` is rolled independently per pool) named. Other fixes: "no shipped
+  game uses `block_pool`" was false (it ships in three games with text children — only *video* children
+  are unproven); **two factual errors in my own numbers** — I called the measured game "the single
+  most-played real-porn sandbox" when it's rank 12 of 30, and said "several winners market the opposite"
+  when exactly one does; the ~36-word median is a 400-passage sample, not the full 3,694; a
+  self-contradiction where my no-NPC rule disqualified the very `vesper` canvases I cited as the proven
+  shape; `.find-media/` being git-ignored (so "treat it as part of the game" needed the mirror caveat);
+  the NPC portrait card missing from the framing exemption; the claim landing three times in one file
+  (preamble + §1E + a §7 check-6 bullet that duplicated the bullet three lines above — cut); and a stale
+  video-handler line ref. Plan: `~/.claude/plans/lets-make-these-changes-sprightly-teacup.md` (F + the
+  eval round pending).
 - **Batch D of the mopoga-study doctrine pass — SHIP GATE + the player cheat page.** NEW
   `references/ship-gate.md` — the skill's **first whole-game, post-authoring gate**. Every other audit fires
   earlier (Step 6 reviews the *blueprint*, before prose exists), narrower (per beat / canvas / location), or
