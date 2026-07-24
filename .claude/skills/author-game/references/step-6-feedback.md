@@ -67,6 +67,7 @@ a silent cut.
   one `thought_bubble`, **no interior-monologue aphorisms on a daily-repeat surface** (`references/rts-flat-prose.md`);
   dialog + density only at the once-per-arc deepest tier.
 - **Every scene serves a WANT** (the desire ladder) — no meter-exercise content.
+- **The player is the erotic subject, and the heat is on the page** (the arousal gate, `references/rts-flat-prose.md` Rule 9 + §7 check 7) — the everyday texture keeps the player aroused-and-acting (words on her body, not the room/plot/apparatus); no payoff or repeatable sex surface is elided to a closed door + a stat bump; the person/PC isn't an accidental third-person spectator (a declared still-point/owned PC per §1B is fine only if said on purpose). Catches the cold game that passes person/density/mode and still reads as noir — `vesper` (watched, plot-lexicon) and `the_inheritance` (clean ratio, every act skipped) both fail here.
 - **The Quests page reads as one surface** (`references/quests.md`) — the Story-Goals spine + a section per arc'd
   NPC (each a one-live-at-a-time milestone or stepped-band chain) + an end-of-content card; **no card sits on a
   met numeric goal with no `ready_canvas`/`terminal`** (the Frame-3 blank-sidebar trap), no dangling fake

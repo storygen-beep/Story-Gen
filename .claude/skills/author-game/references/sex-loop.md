@@ -95,10 +95,20 @@ inside you`) — no emoji on cascade beats (that's RTS's `<<linkreplace>>` regis
 choice-vocab). The hub *entry* rung is a normal menu button (emoji per the hub style). Prose per act
 stays RTS-flat (~30–50 words, re-readable) — this repeats, so don't spend Tier-3 here.
 
+**The prose must SHOW the act (anti-elision).** The whole point of the loop is a *repeatable explicit
+surface* — so each act-result beat depicts the act: her mouth, his cock, the sensation, in the crude diction
+of the NPC's ceiling (`rts-flat-prose.md` Rule 6 + Rule 9B). A rung that fades to a closed door, a one-line
+time-skip, and a `loop_*_pleasure` bump has **failed** — that is the "digital blue balls" that makes the hub
+read as a story with a sex-shaped hole, not a porn game (`the_inheritance`'s repeatable "sex-loops" ship this
+way and depict no sex). Fade-to-black is only ever a *declared ceiling* made in the open
+(`kink-ceilings.md` §5), never a default.
+
 ## Self-check before validating
 - Loop + finisher canvases have **no** `[canvases.trigger]` (reached only via `nodeId`).
 - All loop state is **traits**, declared in `core_traits` + hidden; **no flags** set inside the loop.
 - Entry rung AND finisher exits both reset every loop trait to 0.
 - Climax-elect appears only past the pleasure threshold; finisher prose group-blocks cover every
   `sex_finisher_type` value; anal variants gate on `anal_active`.
+- **Every act-result beat DEPICTS the act** — not a closed door + a meter bump (anti-elision, `## Voice`
+  above; `rts-flat-prose.md` Rule 9B).
 - Every `conditions` block carries `version = "1.0"` (`toml-gotchas.md`).

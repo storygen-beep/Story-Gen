@@ -3,7 +3,7 @@
 Read this before you write any scene body — the `paragraph` / `dialog` / `cascade` blocks inside a
 canvas. (For the `cascade` block's buildable shape + the **cascade-last** ordering rule — a `cascade` must be a
 node's last content block, or trailing prose renders below the reveal link — see `references/engine-reference.md`,
-the cascade section.) It is the **HOW** of register: the three axes, the eight numbered rules, the tiers, and the
+the cascade section.) It is the **HOW** of register: the three axes, the nine numbered rules, the tiers, and the
 pre-emit checklist. The **WHY** (density of decision-pressure over density of prose, the
 throttle/odometer model) lives in `references/rts-design-philosophy.md` — don't re-derive it here.
 
@@ -22,6 +22,11 @@ being literary (no extended metaphor, no narrator-supplied backstory). This is a
 register be direct and crude with real anatomical terms — the flat rules govern *shape*, never *whether
 the content is explicit*.
 
+**And "specific" serves "hot."** These are shape rules for a **porn game**: the player is the erotic subject
+and the prose exists to **arouse** them. Flat is how the writing stays re-readable and crude — never a
+licence to write a cold literary thriller that merely contains sex. **Rule 9 owns that target; the other
+eight serve it.**
+
 > **When in doubt: fewer words per beat, and MORE beats.** (The old advice — "fewer words *and* fewer
 > beats" — was wrong on the second half, and it is what produced our three-beat capstones.)
 
@@ -30,7 +35,7 @@ the content is explicit*.
 ## Contents
 - §1 — The measured shape of RTS (ground truth)
 - §2 — Register is THREE axes: person · density · mode
-- §3 — The 8 mechanical prose rules
+- §3 — The 9 mechanical prose rules
 - §4 — Choice-label discipline
 - §5 — The three tiers = three beat counts
 - §6 — Canvas budget = beats × 35–40
@@ -130,10 +135,10 @@ repetition erodes intensity.)
 
 ---
 
-## §3 — The 8 mechanical prose rules
+## §3 — The 9 mechanical prose rules
 
-Every Lane 1/2/3 scene body satisfies all 8. (Lane 4 capstones relax Rules 3/5/7 — see §5 Tier-3.
-**Rules 1, 2 and 4 never relax.**)
+Every Lane 1/2/3 scene body satisfies all 9. (Lane 4 capstones relax Rules 3/5/7 — see §5 Tier-3.
+**Rules 1, 2, 4 and 9 never relax.**)
 
 ### Rule 1 — Write in the game's DECLARED person
 
@@ -147,7 +152,10 @@ rewrites prose players have already read.
   the NPC is "he" / "Frank" / "him". Pick it unless the game has a stated reason not to.
 - **`first` — "I take the stool."** A confessional / diary-voiced protagonist.
 - **`third` — "She takes the stool."** A protagonist the player *watches* rather than *inhabits* — the
-  still-point / owned-weapon PC (`vesper`). It costs you second-person immediacy. Buy it deliberately.
+  still-point / owned-weapon PC (`vesper`). It costs you second-person immediacy — and immediacy is what
+  makes the aroused body *the player's own*, so third person **cools the porn**: the player spectates
+  someone else's heat instead of being the subject of their own (Rule 9). Buy it deliberately, and only for a
+  story-first dark game where that cooling is the point.
 
 **Whatever is declared, EVERY `paragraph` and `thought_bubble` block in the game is in it.** `dialog`
 blocks are exempt — a speaker says "you" to the person in front of them regardless of the narration.
@@ -235,6 +243,11 @@ SPEAKS.**
 > - **Whole game: ≤ 2 : 1.** (RTS's 0.73:1 is the north star; 1.5–2:1 is the tolerance for our more
 >   paragraph-forward engine. There is no version of this where 7:1 is acceptable.)
 > - Run it: §7 check 3.
+
+**Passing this makes the prose SPOKEN, not HOT.** The ratio is necessary, not sufficient — a noir author
+hits ≤1.5:1 with clipped hardboiled exchanges and still writes nothing arousing. Dialogue-dominance is the
+*shape*; whether the scene turns the player on is **Rule 9** (audited separately, §7 check 7). Don't read a
+green ratio as a hot scene.
 
 **The move is mechanical.** Find every narrated sentence that *reports* what a character said, felt at
 someone, or decided at someone — and hand it to them as a line.
@@ -327,6 +340,52 @@ The `[image: …]` above is **shorthand for this rule only** — the engine has 
 TOML media block (`{ type = "image", props = { file, description, search_queries } }`) with its
 `search_queries` acquisition layer per `references/media.md`.
 
+### Rule 9 — Write to AROUSE. The player is the erotic subject; the sex is the subject of the scene.
+
+Rules 1–8 make prose *clean, spoken, specific.* None makes it **hot** — a game can pass all eight and read as
+a cold literary thriller that happens to contain sex. (`vesper`: third person, 3.67:1, every interiority beat
+about the plot. `the_inheritance`: a clean 1.47:1 and second person, yet zero explicit words and every act
+skipped behind a closed door. Both pass the shape rules; both read cold.) This rule names the target the
+other eight serve: **this is a porn game — the prose exists to arouse the player, and the player is the one
+it happens to.**
+
+**A. The player is the erotic SUBJECT, not a spectator.** The heat lands on *her body, her arousal, her
+exposure* — the thing the player is inside of — not on a figure the player watches from outside. That is what
+`second` person buys (Rule 1): the aroused body is *yours*. `third` + a still-point/owned PC spend that
+immediacy on distance and make the player a **watcher** — a real cooling, legitimate only for a story-first
+dark game bought on purpose (`content-framework.md` §1B). And the body Rule 3 mandates is, by default,
+**desire** — arousal, want, exposure — not only reluctance, and never the plot's mood or the scene's
+apparatus. In a sex scene the camera stays on the sex: her sensation, his body, the act. The instant the
+words leave the bodies for the conspiracy or the machine, the scene stops being porn (`vesper`'s
+drain/plate/socket lexicon is the anti-pattern — words spent on the device, not the fuck).
+
+**B. Show the act; don't bank it and skip it.** When a beat is the sexual payoff, **put the act on the
+page** — Rule 4 (play it) and Rule 6 (crude diction) say how; this makes it non-negotiable *at the payoff.* A
+repeatable sex surface that shows a closed door, a one-line time-skip, and a pleasure-meter bump has **failed
+the rung** — the "digital blue balls" that reads as a story with a sex-shaped hole (`sex-loop.md` `## Voice`).
+Fade-to-black is a *declared ceiling* made in the open (`kink-ceilings.md` §5), never a default reflex.
+
+**A floor, not a quota.** Something hot is always within a few actions in the ordinary hubs — the player is
+never marched through long plot or grind to reach any erotic beat. This is **not** "constant sex." Two loved
+shapes both pass: **ambient** (sex is the weather, a roll away — DoL) and **earned slow-burn** (the buildup is
+the heat, resistance eroding over real time — Being a DIK, Karryn's Prison). What they share, and what this
+protects, is that arousal lives in the **texture** the whole climb — a slow burn is still *charged*, never
+dry. Protect the floor; pick the shape on purpose at Step 2.
+
+> **Cold → hot, same act (charge, not adjectives — still RTS-flat):**
+> ✗ *She goes down without a word. He takes the call one-handed, his other hand in her hair the way a man
+>   rests his hand on a tool he isn't using yet.* — distant ("she"), words on the power and the simile, the
+>   body a prop. Admirable; cold.
+> ✓ *You go to your knees. His cock's already out — one hand fists your hair, the other lifts the phone,
+>   "Yeah, I'm here," and he uses your mouth through the whole call without looking down. Your jaw aches.
+>   You're wet anyway, and you hate that you are.* — second person, words on your mouth, his cock, your own
+>   traitor arousal. Same beat, same crudeness budget, hot.
+
+**Hot ≠ purple.** The hot version is *specific and crude,* not *literary and thick* (§preamble). DoL reads as
+hardcore porn on flat, terse, second-person prose — the heat is the **camera** (on the body, on the act) and
+the **systems** (arousal/exposure always live), not richer sentences. Adding adjectives is the wrong fix;
+Rule 2 still binds. **Audited by §7 check 7.**
+
 ---
 
 ## §4 — Choice-label discipline
@@ -409,7 +468,8 @@ beat** when the honest fix is **cut a beat**.
 ## §7 — Pre-emit checklist (run these; do not eyeball them)
 
 Run **1–3** on the beat you just wrote, before `merge_toml_phases`. Run **3** on the whole game at every
-milestone build and **report the number**.
+milestone build and **report the number**; run **7** at every milestone too — it is the arousal gate, and
+nothing else in this list can see a cold game.
 
 ### 1 — Declared person (Rule 1)
 Read `authoring_state.json` → `register.person`. For `person = "second"` (the default), list every
@@ -478,6 +538,22 @@ it a Lane-2 ambient with more than **9**? Then it will grate on the third re-rea
 - *"Could this exact beat appear in an RTS scene of the same tier?"* If the honest answer is "RTS would
   never ship this — it reads like a literary novel," rewrite it flat.
 - *"Would RTS have given this moment this FEW clicks?"* If no — add beats.
+
+### 7 — Written to arouse (Rule 9) — not greppable; read it
+Arousal is not a word count, so this one is a read, not a grep — run it at every milestone. Read three
+ordinary (non-payoff) beats and one sex scene and ask:
+- **Body or world?** Do the narration words land on the player's body / arousal / exposure, or on the room,
+  the mood, the plot, the apparatus? An ordinary beat whose words are about the world is drifting to story
+  (Rules 3, 9A).
+- **Subject or spectator?** Is the heat happening to *the player* (second person, her body), or is she a
+  third-person figure the player watches? A declared still-point/owned PC is fine *if bought on purpose*
+  (Rule 1); an accidental spectator stance is the `vesper` cooling.
+- **Shown or skipped?** Does every repeatable sex surface and every payoff **depict the act**, or does one
+  fade to a closed door + a stat bump? A skipped act is a failed rung (Rule 9B), not restraint — unless the
+  ceiling declared it (`kink-ceilings.md` §5).
+
+The failure this catches passes checks 1–6: `the_inheritance` is clean on person, density, and mode and
+still elides every act. Clean shape, no heat.
 
 ---
 

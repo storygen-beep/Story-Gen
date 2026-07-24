@@ -39,7 +39,7 @@ dead trait is legal, `engine-reference.md`). In an **infiltration / honeypot / o
 the **still point** (she starts maxed or owned; her global `corruption` is legitimately DEAD), and the double lock
 becomes **both locks on the NPC**: `npc.relation` = access-earned **+** `npc.corruption` = willingness-tier, with
 zero player floor. Then the self-corruption feeders don't exist and §2's feeder economy dissolves by design
-(`content-framework.md §1B` "Who climbs?" + §2F). Choose the model here at Step 2.
+(`content-framework.md §1B` "Who climbs?" + §2F). Choose the model here at Step 2. **And know its cost:** the still-point/owned model usually pairs with `third` person, which makes the player *watch* the heat instead of being its subject — a real cooling of the porn (`rts-flat-prose.md` Rule 9). Legitimate for a story-first dark game; take it on purpose, not by default.
 
 ### The stat set (each leg owns ONE job — no dead stats)
 A stat exists ONLY to gate a content domain the game actually has. **Test for any proposed stat: "name the

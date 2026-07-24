@@ -370,7 +370,8 @@ that ships the bug.
 > **This section is the lane → value LOOKUP.** The three register axes are **defined** in
 > `references/rts-flat-prose.md` §2 (person · density · mode) — that file owns them, with the measured
 > numbers and the runnable audits. Read it before writing any scene body; read this for which value
-> *your lane* takes.
+> *your lane* takes. And the axes serve one end — **Rule 9** (write to arouse; the player is the erotic
+> subject): flat is the shape, hot is the job.
 
 - **Person (whole game, not per-lane):** every `paragraph` and `thought_bubble` is in the game's declared
   `register.person` — `second` (default) / `first` / `third`, locked at Step 0+1 and recorded in

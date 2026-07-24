@@ -108,6 +108,11 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
 
   All three have runnable audits — `references/rts-flat-prose.md` §7. Run them; don't eyeball them.
 
+  **The three axes serve one end.** This is a porn game: the prose is written to **arouse** the player, and
+  the player is its **erotic subject** — not a protagonist she watches. Flat is the shape; hot is the job.
+  Person/still-point choices that make the player a spectator **cool the porn** — buy them on purpose, never
+  by default. The target + its audit: `references/rts-flat-prose.md` **Rule 9 + §7 check 7**.
+
 ## Engine ground-truth (verified — so no reference reinvents a knob)
 1. **Real built-in player traits:** `corruption`, `arousal`, `energy`, `hygiene`, `money` (engine-privileged,
    but NOT auto-created — you still declare each in `[player.core_traits]`; `references/trait-catalog.md`) +
@@ -177,7 +182,8 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
 - `references/trait-design.md` — the gating spine by arc-shape; throttle vs odometer; per-NPC odometer;
   dead-meter/split-spine; reserve the rich model for the core.
 - `references/rts-design-philosophy.md` — the WHY (player-corruption-as-tier, two-axis gate, P1–P11).
-- `references/rts-flat-prose.md` — the HOW of register: the 8 mechanical prose rules, the three density
+- `references/rts-flat-prose.md` — the HOW of register: the 9 mechanical prose rules (incl. **Rule 9 — write
+  to arouse**: player-as-erotic-subject, camera on the body, show the act, hot ≠ purple), the three density
   tiers, choice-label discipline, the `thought_bubble` primitive. Read before writing any scene body.
 - `references/media.md` — the image-first layer: the three media block types (`image`/`video`/`clip`), the
   extension-agnostic resolve law, the silent-skip-when-missing model, and **how to write `search_queries`**

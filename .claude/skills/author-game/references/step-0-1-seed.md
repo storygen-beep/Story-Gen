@@ -71,7 +71,10 @@ technical:
      rule and example in `references/rts-flat-prose.md` is written in. Pick it unless there's a real reason.
    - **`first` — "I take the stool."** A confessional / diary-voiced protagonist.
    - **`third` — "She takes the stool."** A protagonist the player *watches* rather than *inhabits* (the
-     still-point / owned-weapon PC — `vesper`). It costs second-person immediacy; buy it on purpose.
+     still-point / owned-weapon PC — `vesper`). It costs second-person immediacy — and that immediacy is what
+     makes the aroused body *the player's own*, so third person **cools the porn** (the player spectates
+     someone else's heat, `rts-flat-prose.md` Rule 9). Buy it on purpose, and only for a story-first dark game
+     where that cooling is the point.
 
    > **"Person" is NOT "POV."** In this skill **POV** means the protagonist's **gender** (Step 0 above).
    > This is the *grammar*. They're different questions and both get asked.

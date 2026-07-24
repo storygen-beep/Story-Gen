@@ -50,6 +50,9 @@ One soft-pedal disguises itself as good writing: using a character's nature to *
 — she feels nothing but the sex" becomes the excuse to collapse a cheer-him-up-with-sex beat into "cold help
 only," or to bolt a *"but never 'I care about you'"* asterisk onto a hot scene for character-purity. That reflex
 is a **brake on the product** — this is an adult game built for player experience; **lead with the hot version.**
+(This "deliver at the ceiling" instinct is the per-scene corollary of the game-wide arousal rule —
+`rts-flat-prose.md` **Rule 9**: the player is the erotic subject, the prose is written to arouse, and the act
+gets shown, not skipped.)
 
 The split: a character's emotional truth (cold, detached, broken, feels only the sex) is a **LENS** — it colors
 HOW a scene reads (her interior blankness, the flat register, no tenderness in her *voice*). It is **never a
