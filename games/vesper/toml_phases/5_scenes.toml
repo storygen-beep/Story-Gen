@@ -6131,7 +6131,7 @@ description = "Triggerless rung. Reaction climbs by npc_calloway.corruption band
 id   = "base"
 name = "Get close to him"
 blocks = [
-  { type = "image", props = { file = "scenes/rung_calloway_contact.jpg", description = "A woman leaning in close to a seated man in a dim file-room, a hand on his chest; both clothed.", search_queries = ["woman hand on mans chest office close", "seated man woman leaning in dim office"] } },
+  { type = "video", props = { file = "scenes/rung_calloway_contact_t4.webm", description = "A woman leaning forward toward the viewer, teasing — low-cut top, downblouse cleavage, clothed and withheld.", search_queries = ["downblouse cleavage tease lean"] } },
   { type = "paragraph", content = "The file room, late. He's stopped pretending to work; she's stopped pretending to file. When she puts a hand flat on his chest he goes still." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "npc", npc_id = "npc_calloway", trait_key = "corruption", operator = "lt", value = 6 },
@@ -7187,7 +7187,6 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "Collect on the rogue"
 blocks = [
-  { type = "image", props = { file = "scenes/vane_cornered.jpg", description = "A nervous man cornered in a dim stairwell by a woman blocking the way.", search_queries = ["man cornered dim stairwell tense night", "woman blocking nervous man office stairwell"] } },
   { type = "paragraph", content = "She catches Vane on the back stairs, where the cameras don't reach and Calloway never goes, and doesn't waste the opening on hello." },
   # ONE cascade, exit LAST (rev 86): the two old cascades + the wedged paragraph + the trailing thought are folded into a
   # single drip so nothing renders below the "Get to Mercer" link (and the exit splices ONCE, not twice). beat[0] = no
