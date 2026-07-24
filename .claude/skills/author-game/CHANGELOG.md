@@ -14,6 +14,53 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 -->
 
 ## 2026-07-25
+- **Batch F — PROMOTED 8 proven gaps from The Inheritance's staging log into the skill** (the last batch of
+  the doctrine pass). Sources: `games/the_inheritance/skill_gaps_observed.md`, whose entries are written
+  against the standing test *"would a correct author-game skill have prevented this?"*. Landed:
+  **GAP 4** → `step-5-blueprint.md` Pass 4, the **mechanical READS ⊆ SETS trace** (Pass 4 used to accept a
+  prose "verified"; on this game it certified `hotel_in_hand` reachable while it was read by three arcs and
+  set by zero canvases) · **GAP 5** → Pass 2's per-NPC self-check, the **lane mix-table must equal its
+  enumerated sections** (a header promised 4 ambients that were the same beats already counted in Lane 3) ·
+  **GAP 6** → `toml-gotchas.md`, **CORRECTED** (below) · **GAP 7** → `rts-flat-prose.md` §7 check 1, the
+  person-grep fix, **both branches** (the third-person branch used the same pattern as an *inclusion*, so
+  changing one alone would have desynced them) · **GAP 9** → a new `beat-authoring.md` row +
+  Pass 4: **sequenced auto-fire capstones need a strict stage BAND**, because auto-fire picks the
+  highest-priority eligible canvas and never consults your intended order — an ungated feeder (the
+  *recommended* on-ramp shape) pumped the odometer and handed over the keys at stage 0 · **GAP 10** →
+  **merged into** the existing terminal-flag doctrine rather than duplicated (`beat-authoring.md`'s
+  "retire the standing surface" row + Pass 4 now carry the **mechanical post-flip check**: set the flag,
+  confirm no pre-flip canvas is eligible) · **GAP 11** (skill half) → `location-design.md` §6 ×2 rows +
+  `toml-gotchas.md`: `entry_conditions` are **never scanned** by the flag-chain validator, and a room with
+  a declared job needs a canvas actually LOCATED in it (`grep trigger.location`) — the v1 Dining Room bug
+  shipped twice, the second time in the rebuild written to prevent it · **GAP 12** → `clothing.md` §9 as
+  OWNER (never enable clothing before an `initial=true` garment; the empty catalog pins the portrait to
+  `naked_image` from turn 0, permanently) with pointers from `step-0-1-seed.md` and `beat-authoring.md`.
+  **GAP 1 HELD** (LO's call — its own gate is a subjective read of built prose nobody has made); GAPs 2/3/8
+  stay staged. All eight statuses updated in the game log.
+  **⚠️ GAP 6 was FALSE as recorded, and that is the batch's real lesson.** The log blamed the flag-chain
+  validator for not seeing `location`-type exits. Code says the opposite: it scans them
+  (`v2.py:11138-11152`), the setter index scans them (`:8363`), the importer scans them
+  (`template_import.py:2834`), and they apply at runtime (`:12888-12893`). The actual bug is that
+  `exit_block` is parsed with exactly four keys — `type`/`text`/`config`/`choices`
+  (`template_import.py:2045-2060`) — with **no unknown-key rejection**, so the game's
+  `[exit_block.effects] flagEffects` was **silently discarded at import**: the flag was set by nothing and
+  `NEVER SET` was a **true positive** wearing a confusing message. The game's fix (move to a choices exit)
+  worked *by accident*. Promoted as the corrected rule; the log entry now carries a dated correction block
+  preserving the wrong diagnosis as a record. The meta-lesson, written into that block: the old promotion
+  gate ("proven — it hard-failed a real build") proved a **symptom, not a mechanism** — a red build tells
+  you something is wrong, never why. **Verified:** one adversarial agent re-checked all six engine claims
+  in code and found **five defects**, all fixed pre-commit: (1) **my `\byou` prefix grep introduced 8 real
+  false negatives** — it also matches *young*/*youth*, silently swallowing genuine third-person paragraphs;
+  corrected to `\byou\b|\byour` (empirically tested: catches yours/yourself/you're, ignores young/youth),
+  and my stated rationale was itself wrong since `\byou\b` already matched `you're`/`you'll`/`you've`;
+  (2) "the packager silently drops empty rooms" was unsupported — an empty room *renders* as a navigable
+  dead end, which is worse and truer; (3) "`entry_conditions` fail open ONLY on an empty item list" missed
+  the second fail-open (a missing `version = "1.0"`, `v2.py:3683`); (4) a new `clothing.md` row restated
+  two rows directly above it — folded the three novel sentences into the existing owner row; (5) the GAP-6
+  block claimed the original was "kept verbatim" while the diff had removed its proposed-edit paragraph —
+  wording corrected to say what was removed and why. Plan:
+  `~/.claude/plans/lets-make-these-changes-sprightly-teacup.md` — doctrine pass COMPLETE; the eval round
+  against `skill-snapshot-v2` is the remaining step.
 - **Batch E of the mopoga-study doctrine pass — TEXTURE: glimpse rotation · media insurance · the register
   guard.** (a) `references/lanes.md` Lane 2 gains four additive bullets (no new heading — Lane 2 already IS
   the glimpse ambient): **an ambient is a POOL, not one canvas**, with the two buildable shapes and what

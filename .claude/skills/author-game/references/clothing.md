@@ -281,9 +281,18 @@ mis-scoped (a bare top-level key reads as disabled with no error).
 - [ ] **Items exist.** The catalog is the **top-level `[[clothing]]` array** (`data.get("clothing")`,
   `template_import.py:2247` — NOT under `[settings]`), parsed only when `clothing_enabled` is true. Enabled
   with zero items = empty wardrobe/shop + every `worn_*` reads 0 (`getWornStatMax` returns 0 when no equipped
-  item matches). The importer does NOT warn — author the catalog (§7).
+  item matches). The importer does NOT warn — author the catalog (§7). **So never enable clothing before a
+  garment exists, and never close a clothing beat "validated" with zero items:** the seven equipped slots
+  stay null, `getUndressLevel()` returns `'naked'` **from turn 0 permanently**, and a `[player_portrait]`
+  with a `naked_image` shows that as the marquee portrait forever, because nothing can ever be equipped to
+  change it. (The importer validates each item but never asserts the list is non-empty — unlike the
+  *adjacent* portrait check, which does error on "enabled but declares no images." Shipped exactly this way
+  on The Inheritance, where a dead-rule warning got the portrait outfit rule deleted instead of the garment
+  supplied.)
 - [ ] **Full starting outfit** — every slot has an `initial = true` item (§7), so the player is never
   naked/blocked and the coverage gate (§8) is satisfiable from turn one.
+- [ ] **Don't build a buy-canvas** — the shop and wardrobe UI are engine-auto-rendered from the `[[clothing]]`
+  catalog. A clothing shop needs priced items and a `shop_location`, nothing else.
 - [ ] **Wardrobe + shop locations exist and are navigable** — `wardrobe_location` / `shop_location` slugs
   must be real `[[locations]]` the player can reach (the engine injects the wardrobe/shop page there; a
   missing or unreachable slug = dead UI). The shop JS only emits when a `shop_location` is set

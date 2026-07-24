@@ -92,7 +92,12 @@ Take one NPC's Step-4 story and compile it. This is the **mechanism half of the 
   mutual lock) / D3 (every cross-gate telegraphed naming the other arc).
 - **The repeatable menu** — for a core NPC, spec the sex-loop menu (`sex-loop.md`); peripheral/service get none.
 - **Per-NPC self-check** — spine fits the shape (no dead/split meter); double-lock present; late-act target
-  carries its own complete ladder; depth matches casting (no gold-plating); wiring written; traits named.
+  carries its own complete ladder; depth matches casting (no gold-plating); wiring written; traits named;
+  **the lane mix-table adds up** — every lane in the header total has a matching enumerated section and no
+  beat is counted under two lanes (sum the sections; it must equal the header). On The Inheritance a
+  Grayson header promised "L1 7 · L2 4 · L3 13" with **no Lane-2 section at all** — the four "ambients"
+  were the same beats already counted inside Lane 3, so the budget read as met while ~4 scenes didn't
+  exist. It's design-book arithmetic; the build never sees it.
 - **Ledger:** when the cast is done, **close the feeder count** (every NPC floor reachable from the player
   supply through ordinary play) and set `blueprint.npcs = "done"`.
 
@@ -128,6 +133,29 @@ Invents no new scenes. It **orders and wires the whole inventory**, and seeds th
   cold-start-reachable) · D3 every cross-gate telegraphed · the core money→access→conquest loop **closes** ·
   every gate has a reachable setter. Wire the §4 reactivity ("when she falls the sister gets easier") as
   ordinary `cross_npc`/`economic` deps.
+- **Trace READS ⊆ SETS mechanically — don't write "verified" from memory.** List every flag read in any
+  trigger/choice/gate; list every flag some canvas SETS; confirm the set difference is **empty**. A prose
+  self-assessment is exactly as reliable as your attention that day: on The Inheritance, Pass 4 certified
+  `hotel_in_hand` "verified reachable" while it was READ by three arcs and SET by **zero** canvases — the
+  flag was gestured at in prose and no handle produced it. The Step-6 review caught what this step was
+  supposed to. Also check the **location** side, which no validator sees at all: a location gated on
+  `entry_conditions` for a never-set flag builds green and is a permanently-locked dead room
+  (`references/location-design.md` §6).
+- **Order the sequenced auto-fire capstones — a threshold alone is not order-safe.** Auto-fire picks the
+  **highest-priority** eligible canvas, one per location entry; it never consults your intended stage
+  order. So an ungated feeder that pumps the spine odometer can make a *later* capstone eligible first and
+  fire it out of sequence (The Inheritance: spamming the on-ramp reached the "keys" threshold at stage 0,
+  handing over the kingdom before the two beats that earn it). Gate each rung on a strict **stage band** —
+  `stage gte <prev>` AND `stage lt <this>` — so it can only fire from the state immediately before it, and
+  trace the order by hand; the flag-chain validator checks that setters exist, never that they fire in
+  order. *(The tiered selector does the opposite by design — lowest unvisited tier first; auto-fire has no
+  such progression rule, which is exactly why you must band it.)*
+- **Recede the pre-flip content on every terminal state.** For each NPC with a one-way state flip, confirm
+  every canvas belonging to the *earlier* state carries the terminal flag `is_false`, then **verify by
+  simulation**: set the terminal flag and check no pre-flip canvas is still eligible. There is no engine
+  auto-retirement — eligibility is schedule + your conditions + repeatability, full stop — so this is
+  entirely the author's job, and the validator can't see it (`is_false` guards are exempt from the
+  flag-chain scan by design). → `references/lanes.md` "Retire the standing surface on the terminal flag."
 - **The opening as concrete scenes** — the boot, the start location, the 2–3 things doable at zero, the first
   named want, the 10-minute taste, and every arc's ungated cold-start on-ramp. Author it as the **linear
   funnel** that surfaces each live system once — `references/onboarding.md` (the method + the Step-6 rubric).

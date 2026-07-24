@@ -219,6 +219,15 @@ Run this before delivery — none of it is caught by the build:
 - [ ] Reachability triad holds for every NPC ambient/capstone; portrait hubs are schedule-present (§4).
 - [ ] Every schedule row is exactly one category — reachable (hub) / locked (unlock contract) /
       offscreen — and no away block points at a reachable location without a hub.
+- [ ] **Every locked location's unlock flag has a real setter** — `entry_conditions` are **never scanned**
+      by the flag-chain validator (it reads canvas triggers + choices only), so a room gated on a flag
+      nothing sets builds green, reports "All flag chains valid," and is permanently unenterable. Grep the
+      flag; find the canvas that sets it. Mechanism + the fail-open caveats: `references/toml-gotchas.md`.
+      *(Shipped twice: v1's Dining Room, then again in the rebuild written to prevent it.)*
+- [ ] **Every room with a declared job has a canvas LOCATED in it** — `grep 'trigger.location = "<id>"'`
+      and confirm ≥1 hit. A job asserted in prose while the scene is authored in another room is a dead
+      room wearing a promise: the room still renders and stays walkable, so the player arrives at a
+      navigable nothing and nothing in the build warns you.
 - [ ] Every locked location's `entry_conditions` carries `version = "1.0"` (else it fails open, §5).
 - [ ] If travel-friction is used: the costed moves are the *bridges*, and a fast-travel release valve
       exists so friction isn't tedium (§5).

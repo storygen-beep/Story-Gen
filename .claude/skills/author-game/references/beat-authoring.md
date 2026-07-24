@@ -247,6 +247,14 @@ Run with the repo venv active, in order; emit a PASS/FAIL line for each:
      an **auto-fire capstone-shape canvas** (`priority ≥ 9`, `is_repeatable = false`, single Continue, no
      refuse/accept branch — there is no zero-choice primitive), **act-scoped** (present early, gated off
      above a power tier); the *choice* mode = a normal refuse/accept exit block.
+   - **sequenced auto-fire — band the stage** — if this beat is one of a chain of auto-fire capstones that
+     must play IN ORDER, gate it on a strict **stage band** (`stage gte <prev>` AND `stage lt <this>`), not
+     a lone threshold + "fires once". Auto-fire picks the **highest-priority** eligible canvas (one per
+     location entry) and never consults your intended order, so an **ungated feeder** — which is the
+     recommended on-ramp shape — can pump the spine odometer past a later capstone's threshold and fire it
+     first. The Inheritance handed over the keys at stage 0, before the two beats that earn them; the build
+     was green and the flag-chain validator passed, because it checks that setters exist, never that they
+     fire in order.
    - **frontier** — beats beyond the current frontier are **telegraphed
      locked-visible seeds**, never silent gaps; the frontier beat does its three jobs (payoff · drop into
      steady-state · greyed next-hook) and its quest card narrates the frontier **honestly**, never blank.
@@ -259,7 +267,12 @@ Run with the repo venv active, in order; emit a PASS/FAIL line for each:
      sweep this NPC's *standing* surfaces — hub choices · Lane-2 ambients · Lane-3 walk-in/drain/work · schedule
      presence · the floor cluster — and gate each on that flag (close, `[group]`-swap, or **zone-seal the
      chokepoint** if the cluster is one location tree). A surface left running offers courtship to a man she
-     owns / a hub for a man who fled. → `references/lanes.md` "Retire the standing surface on the terminal flag."
+     owns / a hub for a man who fled. **Verify by simulation, not by memory:** set the terminal flag and
+     confirm no pre-flip canvas is still eligible — there is no engine auto-retirement (eligibility is
+     schedule + your conditions + repeatability, full stop) and the flag-chain validator can't see it,
+     since `is_false` guards are exempt from its scan. The Inheritance applied this correctly to one NPC
+     and forgot it on the apex, leaving a broken slave still "catching" the player at work.
+     → `references/lanes.md` "Retire the standing surface on the terminal flag."
    - **endgame stays carnal** — a late/empire beat cashes out as
      **content**: a recruit is a **full new arc** (back through Step 4 story → Step 5 blueprint — own double-lock + capstone + loop), an
      "upgrade" / accumulation stage unlocks **new scene types** — ship the stage and the scene it opens in
@@ -279,7 +292,10 @@ Run with the repo venv active, in order; emit a PASS/FAIL line for each:
      phone + player-portrait → **top-level `[phone]` / `[player_portrait]`**. Never bare keys under `[time]`.
    - **optional-system doctrine** — if this beat wires clothing / rent / phone / customization / player-portrait,
      honor its signature trap (`references/systems.md`): clothing's **two-part rule** (triggers public reactive
-     events; never gates an NPC arc spine); rent arms after an income flag; phone triggers can't use `day`/`time`/
+     events; never gates an NPC arc spine; and it is **never enabled before an `initial = true` garment
+     exists** — an empty catalog pins the portrait to naked from turn 0 and ships dead menus, so a
+     clothing beat can't be marked validated with zero items, `references/clothing.md` §9); rent arms
+     after an income flag; phone triggers can't use `day`/`time`/
      `location`/`random`; customizable names emit as `@`-tokens, never hardcoded; player-portrait `corruption` is a
      **LEVEL 0–4, not points** + outfit rules are first-match on the dominant garment (`dress||top||bottom`).
    - **`is_container` swallow** — no activity/ambient/capstone attached to a container location.

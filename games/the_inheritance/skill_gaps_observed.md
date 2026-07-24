@@ -100,7 +100,7 @@ life") carry through cleanly → the fix is just "make §7 a standard section," 
 
 ## GAP 4 — Step-5 Pass-4's machine self-verify can ASSERT "reachable" for a flag that has no setter
 
-**Status:** OPEN — surfaced by the Step-6 review on THIS game (the one major gap it found).
+**Status:** ✅ PROMOTED 2026-07-25 → `step-5-blueprint.md` Pass 4 (the mechanical READS ⊆ SETS trace, plus the location-side `entry_conditions` blind spot). Originally: surfaced by the Step-6 review on THIS game (the one major gap it found).
 
 **The defect.** Step-5 Pass 4 says "every gate has a reachable setter (verified)" and the author writes that
 line — but nothing forces the verification to be *mechanical*. On this game, Pass 4 certified `hotel_in_hand`
@@ -126,7 +126,7 @@ missed). Promote when the skill patch is next opened — it is the highest-value
 
 ## GAP 5 — A lane mix-table can promise ambients that no scene section lists (double-counting)
 
-**Status:** OPEN — surfaced by the Step-6 review (a notable gap on Grayson's arc).
+**Status:** ✅ PROMOTED 2026-07-25 → `step-5-blueprint.md` Pass 2 per-NPC self-check (mix-table total must equal the enumerated sections). Originally: surfaced by the Step-6 review (a notable gap on Grayson's arc).
 
 **The defect.** An NPC blueprint's header states a lane mix ("L1 7 · L2 4 · L3 13 = 28"), but the body has no
 Lane-2 section — the 4 "ambients" were the same beats already counted inside Lane 3's 13. The budget looked
@@ -142,34 +142,49 @@ game's review. Together they'd have prevented 2 of the 8 gaps this review found.
 
 ---
 
-## GAP 6 — `location`-type exit that sets a flag is invisible to the flag-chain validator
+## GAP 6 — ~~`location`-type exit that sets a flag is invisible to the flag-chain validator~~ → **`exit_block` silently DROPS unknown keys**
 
-**Status:** OPEN — hit live at beat_0004 (authoring). Candidate `toml-gotchas.md` addition.
+**Status:** ✅ PROMOTED 2026-07-25 → `toml-gotchas.md`, as a **CORRECTED** rule. ⚠️ **The original diagnosis
+below was WRONG** — see the correction. The defect/fix text is kept as a record of how the wrong lesson
+nearly shipped; the old "Proposed skill edit" paragraph (which stated the false mechanism as doctrine) and
+its promotion gate were removed rather than promoted.
 
-**The defect.** A `[canvases.nodes.exit_block]` of `type = "location"` that sets a flag via
+> ### ⚠️ CORRECTION (2026-07-25, verified in code before promotion)
+> The validator does **not** miss location-type exits. `_build_flag_unlock_map` scans them explicitly
+> (`v2.py:11138-11152`, the branch commented "Check flagEffects in config (for 'location' type exit
+> blocks)"), so does the setter index (`:8363`), so does the importer (`template_import.py:2834`), and the
+> flag **is** applied at runtime from a location exit (`v2.py:12568` → `:12888-12893`).
+>
+> **The real bug:** `exit_block` is parsed with exactly four keys — `type`, `text`, `config`, `choices`
+> (`template_import.py:2045-2060`) — and there is **no unknown-key rejection**. Our TOML wrote
+> `[canvases.nodes.exit_block.effects] flagEffects = [...]`, an unrecognised key, which was **silently
+> discarded at import**. The flag was therefore set by nothing, and `✗ NEVER SET` was a **TRUE POSITIVE**
+> wearing a confusing message — not a validator blind spot.
+>
+> **Correct shapes:** location-type → `[canvases.nodes.exit_block.config] flagEffects`; choices-type →
+> per-choice `flagEffects`. Our fix (moving to a choices exit) worked, but **by accident** — it moved the
+> flag onto a path the parser actually reads, rather than fixing the key.
+>
+> **Lesson worth more than the original:** the promotion gate ("proven now — it hard-failed a real build")
+> proved a *symptom*, not a *mechanism*. A green/red build tells you something is wrong, never why. Verify
+> the mechanism in code before promoting it, or the skill teaches a fiction that happens to work.
+
+**The defect (AS ORIGINALLY RECORDED — superseded).** A `[canvases.nodes.exit_block]` of `type = "location"` that sets a flag via
 `[canvases.nodes.exit_block.effects] flagEffects = [...]` **does not register with the flag-chain
 validator** — the build hard-fails with `✗ <flag> NEVER SET - no canvas sets this flag`, even though a
 properly-located canvas sets it. (Hit on `opening_done`, set by the located starting canvas, read by the
 will-reading trigger.)
 
-**The fix (the shape the validator scans):** set the flag on a **choice** — `type = "choices"` exit_block
+**The fix (as originally recorded):** set the flag on a **choice** — `type = "choices"` exit_block
 with the flag on `[[canvases.nodes.exit_block.choices]] flagEffects`. `late_shifts` uses exactly this for
 `first_morning_done`. A single forced "Continue"-style choice is the idiom for a one-shot that must set a
-flag on the way out.
-
-**Proposed skill edit** (`toml-gotchas.md`, "Flag-chain hard-fail" section): *"A flag SET must live on a
-`[[exit_block.choices]] flagEffects` (choices-type exit) to be seen by the flag-chain validator — a
-`location`-type exit's `effects.flagEffects` is not scanned, and the build reports the flag as NEVER SET.
-For a one-shot that just needs to set a flag and move on, use a single forced choice."*
-
-**PROMOTION GATE:** proven now (it hard-failed a real build). Promote to `toml-gotchas.md` in the next skill
-pass — it will bite every one-shot/opening/capstone that sets a flag on a location exit.
+flag on the way out. *(Still a valid shape — just not for the stated reason.)*
 
 ---
 
 ## GAP 7 — the §7 check-1 declared-person grep false-positives on `yours` / `you're` / `you'll`
 
-**Status:** OPEN — hit live at beat_0008 (a clean paragraph flagged as a leak). Trivial `rts-flat-prose.md` fix.
+**Status:** ✅ PROMOTED 2026-07-25 → `rts-flat-prose.md` §7 check 1, BOTH greps switched to the `\byou` prefix (the third-person branch used the same pattern as an inclusion, so changing one alone would have desynced them), + a note that the calibration table predates the fix.
 
 **The defect.** The §7 check-1 command excludes player-addressing lines with `grep -Eiv '\byou\b|\byour\b'`.
 But `\byour\b` does NOT match `yours` (no word boundary before the `s`), nor `you're` / `you'll` / `you've`.
@@ -215,7 +230,7 @@ But the **affirmative build doctrine** — how to author a forced beat so it rea
 
 ## GAP 9 — sequenced auto-fire capstones need strict stage-BAND gating, or an ungated feeder skips them
 
-**Status:** OPEN — caught by the Richard-arc milestone sim (beat_0020); fixed in this game.
+**Status:** ✅ PROMOTED 2026-07-25 → `beat-authoring.md` (new **sequenced auto-fire — band the stage** row) + `step-5-blueprint.md` Pass 4. ⚠️ Reworded on promotion: code shows auto-fire returns exactly ONE canvas per location entry (not several at once) and selects on **highest priority**, never authored stage order (`v2.py:4310-4330`) — the tiered selector deliberately does the opposite (lowest unvisited), which is the real root cause.
 
 **The defect.** A capstone chain that auto-fires in order (cap1 → cap2 → cap3), sequenced by an odometer
 (`richard_want` = `npc_richard.corruption`) + a "fires once" guard (`richard_stage lt N`), can fire **OUT OF
@@ -248,7 +263,7 @@ next skill pass — it's the third case where a reachability SIM caught what the
 
 ## GAP 10 — winning-era NPC content must gate on the terminal-state flag, or it fires after the NPC is transformed
 
-**Status:** FIXED IN GAME (recede pass, 2026-07-16) — proven: added `margaret_broken is_false` to all 15 winning-era canvases (6 catches + 5 ambients + 4 moves); a pre/post sim confirms 15/15 eligible pre-breaking, 0/15 post. Ready to promote.
+**Status:** ✅ PROMOTED 2026-07-25 → merged into the EXISTING terminal-flag doctrine rather than duplicated: `beat-authoring.md`'s "retire the standing surface" row + `step-5-blueprint.md` Pass 4 now carry the **mechanical post-flip verification** (set the terminal flag; confirm no pre-flip canvas is eligible). Verified in code: there is no engine auto-retirement — eligibility is schedule + authored conditions + repeatability only. Originally: FIXED IN GAME (recede pass, 2026-07-16), 15/15 eligible pre-breaking → 0/15 post.
 
 **The defect.** An NPC whose STATE changes terminally (prey→lapdog at `grayson_flipped`; queen→slave at
 `margaret_broken`) has "before" content — ambient presence, the catches, the war moves — that must **recede**
@@ -284,7 +299,7 @@ skill note.
 
 ## GAP 11 — a location gated on a never-set flag (or a reachable room with zero canvases) ships GREEN — two engine/validator holes
 
-**Status:** PROVEN + FIXED IN GAME (pre-ship audit + fix-pass, 2026-07-16). Highest-teeth of the whole re-author — it's the exact v1 "Dining Room" bug reshipped, and the build could not see it.
+**Status:** ✅ PROMOTED (skill half) 2026-07-25 → `location-design.md` §6 (two new rows: the unlock flag needs a real setter; every room with a declared job needs a LOCATED canvas — `grep 'trigger.location'`) + `toml-gotchas.md` (a new section on the unscanned `entry_conditions`). Both holes confirmed in code (scan scope is `v2.py:11318-11391`, triggers + choices only; and no build check exists for a reachable zero-canvas room — it renders as a navigable dead end). **The ENGINE half — extending the validator — remains open and is NOT done.** Originally: PROVEN + FIXED IN GAME (pre-ship audit + fix-pass, 2026-07-16).
 
 **The defect (two holes, same class).**
 1. **Location `entry_conditions` are NOT scanned by the flag-chain validator.** It hard-fails only on flags read by a canvas *trigger/choice* (GAP 4/6). A location locked on `entry_conditions {flag is_true}` for a flag **no canvas sets** builds green and is a **permanently-locked, unenterable dead room**. On this game `loc_hotel_private_floor` was locked on `private_floor_open`, set 0 times — byte-for-byte v1's Dining Room, which the design-book postmortem itself named "the purest specimen of the disease… it does not come back." It came back, invisibly.
@@ -304,7 +319,7 @@ skill note.
 
 ## GAP 12 — `clothing_enabled=true` + a `naked_image` portrait + zero `[[clothing]]` items = forced-naked from turn 0; never scaffold clothing before an initial garment exists
 
-**Status:** PROVEN + FIXED IN GAME (pre-ship fix-pass, 2026-07-16).
+**Status:** ✅ PROMOTED 2026-07-25 → `clothing.md` §9 as the OWNER (never enable before an `initial=true` garment; can't close the beat validated with zero items; the shop/wardrobe UI is engine-auto-rendered), with pointers from `step-0-1-seed.md` item 4 and `beat-authoring.md`'s optional-system row. Code corrections applied: `equipped` initializes to seven NULL slots (not `{}`), and the Shop page additionally requires `shop_location` — so it's two dead menus only when one is declared. Originally: PROVEN + FIXED IN GAME (pre-ship fix-pass, 2026-07-16).
 
 **The defect.** The scaffold turned on `clothing_enabled=true` + a full `[player_portrait]` (naked/topless/bottomless/underwear images) but the "clothing beat" (beat_0007) was closed with **zero `[[clothing]]` items** — the author hit a "worn_type has no matching item" dead-rule warning and **deleted the portrait outfit rule instead of supplying the garment**, then marked the beat validated. Consequences the build never flagged:
 - `equipped` initializes to `{}` → `getUndressLevel()` returns `'naked'` (nothing covers top/bottom) → the marquee player portrait resolves to `naked_image` **from turn 0, forever** (blank now only because media is un-harvested; naked the moment art lands).

@@ -493,18 +493,26 @@ Read `authoring_state.json` → `register.person`. For `person = "second"` (the 
 paragraph that narrates in third with no second-person pronoun anywhere in it:
 ```bash
 grep -ho 'type = "paragraph".*content = "[^"]*"' games/<slug>/toml_phases/*.toml \
-  | grep -Ei '\b(she|her|he|him|his)\b' | grep -Eiv '\byou\b|\byour\b'
+  | grep -Ei '\b(she|her|he|him|his)\b' | grep -Eiv '\byou\b|\byour'
 ```
 For `person = "third"`, invert — list paragraphs that leak second person:
 ```bash
-grep -ho 'type = "paragraph".*content = "[^"]*"' games/<slug>/toml_phases/*.toml | grep -Ei '\byou\b|\byour\b'
+grep -ho 'type = "paragraph".*content = "[^"]*"' games/<slug>/toml_phases/*.toml | grep -Ei '\byou\b|\byour'
 ```
 **Reading the output — the grep is a scanner, not a verdict.** A hit is a **FAIL** only if the pronoun
 refers to **the player character**. A paragraph purely about the NPC ("He sets the mug down.") is a
 legitimate hit and fine; an impersonal "the way you'd…" is a **Rule 5** violation instead. So judge the
 *rate*, then read the hits.
 
-**Real calibration** (these exact commands, run 2026-07-14):
+*(The second alternative is `\byour` — **no closing `\b`** — on purpose: the old `\byour\b` missed `yours`
+and `yourself`, so a clean second-person paragraph ending "…like it's **yours** now" got flagged as a
+third-person leak (The Inheritance beat_0008). Don't "simplify" it to a bare `\byou` prefix: that also
+matches **young** and **youth**, which measurably swallows 8 genuine third-person paragraphs in our own
+corpus. `you're`/`you'll`/`you've` were never the problem — an apostrophe is already a word boundary.
+Both branches carry the same pattern so they measure the same token set.)*
+
+**Real calibration** (these exact commands, run 2026-07-14 — before the prefix fix, so the counts below
+are a slight over-read of the flagged column):
 
 | game | declared | flagged | read |
 |---|---|---|---|

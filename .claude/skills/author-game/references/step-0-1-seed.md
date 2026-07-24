@@ -68,7 +68,10 @@ technical:
 4. **Which systems exist — yes/no only.** Does the game use **phone** / **clothing** / **rent** /
    **player portrait** (a state-reactive sidebar image)? A pure scope choice ("this game has a phone").
    Not the wiring/TOML homes (those are authoring). Clothing is worth flagging early since the
-   **reactive world** (Step 2) — and the player portrait's undress axis — ride it.
+   **reactive world** (Step 2) — and the player portrait's undress axis — ride it. *(Answering "yes" to
+   clothing commits the game to a full starting outfit before any `worn_*` gate is authored — enabling it
+   with an empty catalog forces the portrait to naked from turn 0 and ships two dead menus.
+   `references/clothing.md` §9.)*
 5. **Voice — the PERSON the game is written in.** One word, and it is **locked for the life of the game**:
    - **`second` — "You take the stool."** The DEFAULT. It's what Road to Success does, and it's what every
      rule and example in `references/rts-flat-prose.md` is written in. Pick it unless there's a real reason.

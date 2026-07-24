@@ -58,6 +58,35 @@ set inside a triggerless canvas — use a **hidden trait counter** and gate the 
 (`references/sex-loop.md` rule 1). Only trigger-`is_true` and choice-`is_true` flag gates are checked;
 `is_false` guards, `[group]` conds, quest `when`, and trait conditions are exempt.
 
+## `exit_block` silently DROPS unknown keys — the phantom `NEVER SET`
+An `exit_block` is parsed with exactly four keys — **`type`, `text`, `config`, `choices`**
+(`template_import.py:2045-2060`) — and there is **no unknown-key rejection**. So
+`[canvases.nodes.exit_block.effects] flagEffects = [...]` is **discarded at import**: no error, no warning,
+the flag is set by nothing, and the build hard-fails downstream with `✗ <flag> NEVER SET` pointing at a
+canvas you can see setting it. The failure is a **true positive** wearing a confusing message.
+- **Correct shapes:** a `location`-type exit sets flags in **`[canvases.nodes.exit_block.config]
+  flagEffects`**; a `choices`-type exit sets them per choice in `[[...exit_block.choices]] flagEffects`.
+  For a one-shot that just needs to set a flag and move on, a single forced "Continue" choice is the idiom
+  (`late_shifts` does this for `first_morning_done`).
+- **Location exits are NOT the problem** — the validator scans them (`v2.py:11138-11152`, the
+  config-flagEffects branch), the setter index scans them (`:8363`), and they apply at runtime
+  (`:12888-12893`). *(This entry originally recorded the opposite; the code says otherwise — the bug was
+  always the dropped `effects` key.)*
+- **One real scan gap, narrower:** cycle detection reads `effects` but not `flagEffects`
+  (`v2.py:11413-11422`), so a circular dependency among `flagEffects`-set flags is invisible. It does not
+  cause `NEVER SET`.
+
+## A location's `entry_conditions` are NOT flag-chain checked — the permanently-locked room
+The validator's scan covers canvas **triggers** and **choices** only (`v2.py:11318-11391`); `entry_conditions`
+appear in parsing, emission, and runtime nav but at **zero validation sites**. So a location gated on a flag
+**nothing sets** builds green, reports "All flag chains valid," and is an unenterable dead room forever.
+Runtime fails open two ways — an empty item list (`v2.py:4605`) **and** a missing `version = "1.0"`
+(`:3683`, the same fail-open that bites canvas conditions) — so it is specifically a *versioned* gate on a
+never-set flag that locks permanently, and a versionless one that silently stands wide open. This shipped
+twice: v1's Dining Room, then again as `loc_hotel_private_floor` in the rebuild written to prevent it. Check it by hand at Step 5 Pass 4 and at
+`references/location-design.md` §6 — no build check exists. *(Note the validator also only checks
+`is_true`; `is_false` guards are exempt by design.)*
+
 ## Right shapes (get these exact)
 - **Choice (`exit_block.choices`) field set** — see `references/engine-reference.md` §3 for the full `TemplateChoice`
   table (`targetType` + `locationId`/`nodeId`, `conditions`, `effects`, `flagEffects`,
