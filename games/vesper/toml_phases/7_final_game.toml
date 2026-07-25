@@ -5724,7 +5724,7 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "Your body runs again — but the fixer found the real thing wrong with you, and it isn't damage. It's a governor built into you: the reason you can never turn your power on the man who owns you. It doesn't come out without its controller, and you don't have to guess who's held that key the whole time. The sidebar calls it what it is now — Leash: Uncut."
-tip        = "Two drives ride together. The company's job: get into Calloway's file room at Vance Securities and take what he's guarding. Your own reason rides under it — the truth of what you are, and, somewhere up the chain, the controller that cuts your leash. But first you need the man who keeps the room. Get to the Spire. Get to Calloway."
+tip        = "Two drives ride together. The company's job: get into Calloway's file room at Vance Securities and take what he's guarding. Your own reason rides under it — the truth of what you are, and, somewhere up the chain, the controller that cuts your leash. But first you need the man who keeps the room. Wear the junior-analyst kit from your room before you set foot on the Vance floor — out of cover you're a stranger who doesn't belong, and an audited division remembers a turned head. Then get to the Spire, and get to Calloway."
 when = [
   { flag = "salvage_done",      op = "is_true"  },
   { flag = "calloway_believes", op = "is_false" },
