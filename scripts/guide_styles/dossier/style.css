@@ -1,0 +1,831 @@
+/* =====================================================================
+   VESPER — "THE COMPANY DOSSIER"
+   A leaked internal document. Strict grid, hairlines, one accent.
+
+   PAGE SIZE: A4 (210 x 297 mm). Chosen over US Letter because the taller,
+   narrower sheet suits a records-system document and gives the threshold
+   tables more rows per sheet.
+
+   THE GRID
+     content area ......... 170 mm  (A4 less 20 mm side margins)
+     label rail ............ 40 mm  (section numbers, run-in labels)
+     gutter ................. 8 mm
+     text column .......... 122 mm  (~73 characters at 10 pt Charter)
+   Tables, rules and plates span the full 170 mm; running text is inset to
+   the 122 mm column. That difference IS the grid.
+
+   TYPE
+     text ....... Charter        (macOS system serif; sturdy, high x-height)
+     label ...... Helvetica Neue (uppercase, tracked)
+     data ....... Menlo          (values, flags, folios)
+
+   ACCENT: #9C3A15 oxide. Section numbers, classification marks, cautions.
+   Nothing else is coloured.
+
+   NOTE ON THE HANGING RAIL: headings use padding-left + negative
+   text-indent, and text-indent INHERITS into the ::before inline-block —
+   which throws the number off the left edge of the sheet. Every ::before
+   in this file therefore resets text-indent to 0. (Found by rendering.)
+   ===================================================================== */
+
+/* ------------------------------------------------------------- page */
+
+@page {
+  size: A4;
+  margin: 24mm 20mm 22mm 20mm;
+  padding-top: 4mm;                 /* air between the header rule and content */
+  background: #FAF9F5;
+
+  /* the page box carries the hairlines, so they span exactly the 170 mm
+     measure and sit clear of the margin boxes */
+  border-top: 0.5pt solid #B9B4A8;
+  border-bottom: 0.5pt solid #B9B4A8;
+
+  @top-left {
+    content: string(chapter);
+    font: 400 7pt/1 Menlo, "PT Mono", "Courier New", monospace;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #4C4A45;
+    vertical-align: bottom;
+    padding-bottom: 3mm;
+  }
+  @top-right {
+    content: "VD-VSP-0105";
+    font: 400 7pt/1 Menlo, "PT Mono", "Courier New", monospace;
+    letter-spacing: 0.14em;
+    color: #8A857A;
+    vertical-align: bottom;
+    padding-bottom: 3mm;
+    text-align: right;
+  }
+  @bottom-left {
+    content: "Vance Dynamics — Internal";
+    font: 400 6.6pt/1 Menlo, "PT Mono", "Courier New", monospace;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8A857A;
+    vertical-align: top;
+    padding-top: 3.4mm;
+  }
+  @bottom-right {
+    content: "Sheet " counter(page) " / " counter(pages);
+    font: 400 7.4pt/1 Menlo, "PT Mono", "Courier New", monospace;
+    letter-spacing: 0.08em;
+    color: #2B2A27;
+    vertical-align: top;
+    padding-top: 3.4mm;
+    text-align: right;
+  }
+}
+
+/* the cover carries no header, no folio, no rules */
+@page cover {
+  margin: 0;
+  padding: 0;
+  border: none;
+  @top-left { content: none; }
+  @top-right { content: none; }
+  @bottom-left { content: none; }
+  @bottom-right { content: none; }
+}
+
+/* ------------------------------------------------------- foundations */
+
+html {
+  font-family: Charter, "Bitstream Charter", "PT Serif", Georgia, serif;
+  font-size: 10pt;
+  line-height: 1.4;                 /* 14 pt baseline */
+  color: #16181A;
+  background: #FAF9F5;
+  hyphens: auto;
+  hyphenate-limit-chars: 7 3 3;
+  /* the hyphenator's default break character is U+2010 HYPHEN, which
+     Charter lacks — it was being drawn out of Hiragino Mincho. Force the
+     ASCII hyphen-minus so the break mark comes from the text face. */
+  hyphenate-character: "-";
+}
+
+body { margin: 0; }
+
+a { color: inherit; text-decoration: none; }
+
+strong { font-weight: 700; }
+em { font-style: italic; }
+
+code, kbd {
+  font-family: Menlo, "PT Mono", "Andale Mono", "Courier New", monospace;
+  font-size: 0.80em;
+  letter-spacing: -0.01em;
+  background: #EEEBE2;
+  border: 0.4pt solid #DAD5C9;
+  padding: 0.3pt 1.6pt;
+  white-space: nowrap;
+}
+
+/* ============================================================== COVER
+
+   Full-bleed subject photograph. `@page cover` has margin 0, so the section
+   is set to the exact trim and everything on it is positioned against that.
+   The art has to survive being seen at 200 px in a post grid — that is the
+   first thing a patron ever sees of this document — so the file furniture is
+   reduced to a top rule and a corner stamp, and the control form moved to the
+   contents sheet. */
+
+.cover {
+  page: cover;
+  break-after: page;
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  overflow: hidden;
+  background: #0B0D10;
+}
+
+.cover-art {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 210mm;
+  height: 297mm;
+  object-fit: cover;
+  object-position: 50% 28%;      /* keep her head clear of the top rule */
+}
+
+/* Legibility scrim: dark at the two ends where type sits, fully clear across
+   the middle third so the subject is never veiled. It exists to make text
+   readable, not to look moody. */
+.cover-scrim {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 210mm;
+  height: 297mm;
+  background: linear-gradient(to bottom,
+      rgba(6, 8, 11, 0.82) 0%,
+      rgba(6, 8, 11, 0.34) 15%,
+      rgba(6, 8, 11, 0.00) 33%,
+      rgba(6, 8, 11, 0.38) 58%,
+      rgba(6, 8, 11, 0.86) 78%,
+      rgba(6, 8, 11, 0.97) 100%);
+}
+
+/* masthead, overlaid ------------------------------------------------- */
+
+.cover-top {
+  position: absolute;
+  top: 15mm;
+  left: 18mm;
+  width: 174mm;
+  padding-bottom: 2.8mm;
+  border-bottom: 0.5pt solid rgba(242, 239, 231, 0.38);
+  font: 400 6.9pt/1 Menlo, "PT Mono", "Courier New", monospace;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  color: rgba(242, 239, 231, 0.74);
+}
+.cover-top .c-mark {
+  float: right;
+  color: #E2703A;               /* the oxide accent, lifted to hold on black */
+}
+
+/* filing stamp, top right -------------------------------------------- */
+
+table.cover-stamp {
+  position: absolute;
+  top: 26mm;
+  right: 18mm;
+  width: 66mm;
+  border-collapse: collapse;
+}
+table.cover-stamp th,
+table.cover-stamp td {
+  padding: 1.5mm 0;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 0.4pt solid rgba(242, 239, 231, 0.20);
+}
+table.cover-stamp th {
+  width: 22mm;
+  font: 400 6.2pt/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(242, 239, 231, 0.52);
+}
+table.cover-stamp td {
+  font: 400 7.2pt/1.4 Menlo, "PT Mono", "Courier New", monospace;
+  color: rgba(242, 239, 231, 0.88);
+  hyphens: none;
+}
+
+/* title, bottom left -------------------------------------------------- */
+
+.cover-title-block {
+  position: absolute;
+  left: 18mm;
+  bottom: 26mm;
+  width: 174mm;
+}
+.c-eyebrow {
+  margin: 0 0 6mm 0;
+  font: 400 7.8pt/1 Menlo, "PT Mono", "Courier New", monospace;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(242, 239, 231, 0.80);
+}
+h1.c-title {
+  margin: 0;
+  font: 400 58pt/0.92 Charter, "Bitstream Charter", Georgia, serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-indent: 0;
+  color: #F6F3EC;
+}
+.c-rule {
+  width: 28mm;
+  margin: 7mm 0 5mm 0;
+  border-top: 1.4pt solid #E2703A;
+}
+.c-issue {
+  margin: 0;
+  font: 400 8pt/1.5 Menlo, "PT Mono", "Courier New", monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(242, 239, 231, 0.86);
+}
+.c-byline {
+  margin: 2.4mm 0 0 0;
+  font-size: 8.4pt;
+  font-style: italic;
+  color: rgba(242, 239, 231, 0.60);
+}
+
+/* ------------------- the control form, now on the contents sheet ---- */
+
+.block-label {
+  margin: 0 0 2.2mm 0;
+  padding-bottom: 1.5mm;
+  border-bottom: 1.1pt solid #16181A;
+  font: 500 7.4pt/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.dist-label { margin-top: 8mm; }
+
+table.ctrl-table,
+table.dist-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+table.ctrl-table th,
+table.ctrl-table td,
+table.dist-table th,
+table.dist-table td {
+  border-bottom: 0.4pt solid #D5D0C4;
+  padding: 1.9mm 0;
+  vertical-align: top;
+  text-align: left;
+}
+table.ctrl-table th {
+  width: 24mm;
+  font: 400 6.8pt/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6E6A62;
+}
+table.ctrl-table td {
+  font: 400 8.2pt/1.5 Menlo, "PT Mono", "Courier New", monospace;
+  color: #16181A;
+  hyphens: none;
+}
+table.dist-table th {
+  width: 10mm;
+  font: 400 7.4pt/1.5 Menlo, "PT Mono", "Courier New", monospace;
+  color: #8A857A;
+}
+table.dist-table td {
+  font-size: 8.4pt;
+  line-height: 1.5;
+  hyphens: none;
+}
+table.dist-table tr.unlisted th,
+table.dist-table tr.unlisted td { color: #9C3A15; }
+table.dist-table tr:last-child th,
+table.dist-table tr:last-child td { border-bottom: none; }
+
+/* the file card — the control form, floated into the label rail of the
+   contents sheet. That rail was unworked white on every front-matter page;
+   the form is exactly the right width to live in it. */
+
+/* the control fields as a running band under the Contents title */
+.fileline {
+  margin: 3.4mm 0 0 48mm;
+  padding-bottom: 3mm;
+  border-bottom: 0.4pt solid #D5D0C4;
+  font: 400 7pt/1.9 Menlo, "PT Mono", "Courier New", monospace;
+  letter-spacing: 0.04em;
+  color: #8A857A;
+  hyphens: none;
+}
+.fileline span { white-space: nowrap; }
+.fileline span::after {
+  content: "   ·   ";
+  color: #C6C1B4;
+}
+.fileline span:last-child::after { content: ""; }
+.fileline b {
+  font-weight: 400;
+  text-transform: none;
+  color: #35342F;
+}
+
+/* the distribution schedule, inline under the control band */
+.distline {
+  margin: 2.6mm 0 0 48mm;
+  padding-bottom: 3mm;
+  border-bottom: 0.4pt solid #D5D0C4;
+  font: 400 6.9pt/1.9 Menlo, "PT Mono", "Courier New", monospace;
+  letter-spacing: 0.04em;
+  color: #35342F;
+  hyphens: none;
+}
+.distline span { white-space: nowrap; }
+.distline span:first-child {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 6.4pt;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6E6A62;
+}
+.distline span::after {
+  content: "   ·   ";
+  color: #C6C1B4;
+}
+.distline span:last-child::after { content: ""; }
+.distline i {
+  font-style: normal;
+  color: #8A857A;
+  padding-right: 0.8mm;
+}
+.distline .unlisted,
+.distline .unlisted i { color: #9C3A15; }
+.filecard-note {
+  margin: 3.2mm 0 0 0;
+  font: 400 6.6pt/1.4 Menlo, "PT Mono", "Courier New", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9C3A15;
+  hyphens: none;
+}
+
+/* =========================================================== CONTENTS */
+
+.contents { break-before: page; }
+
+h1.fm-title {
+  margin: 0;
+  padding: 4mm 0 3.2mm 48mm;
+  text-indent: -48mm;
+  border-bottom: 1.4pt solid #16181A;
+  font: 400 19pt/1.15 Charter, "Bitstream Charter", Georgia, serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  string-set: chapter "Contents";
+  bookmark-level: 1;
+  bookmark-label: content(text);
+  break-after: avoid;
+}
+h1.fm-title::before {
+  content: "00";
+  display: inline-block;
+  width: 40mm;
+  padding-right: 8mm;
+  text-indent: 0;
+  font: 400 19pt/1 Menlo, "PT Mono", "Courier New", monospace;
+  letter-spacing: 0;
+  color: #9C3A15;
+}
+
+.fm-note {
+  margin: 3.6mm 0 7mm 48mm;
+  font: 400 7.4pt/1.5 Menlo, "PT Mono", "Courier New", monospace;
+  letter-spacing: 0.06em;
+  color: #8A857A;
+}
+
+/* the table of contents itself --------------------------------------
+   NOTE: no negative text-indent on the anchors — a negative indent
+   shortens the line box, and leader() then stops 48 mm short of the
+   right edge instead of running to the folio. */
+
+.toc ul { list-style: none; margin: 0; padding: 0; }
+
+.toc > ul { counter-reset: tsec; }
+.toc > ul > li {
+  counter-increment: tsec;
+  counter-reset: tsub;
+  margin-top: 5mm;
+  break-inside: avoid;
+}
+.toc > ul > li > a {
+  display: block;
+  padding-bottom: 1.5mm;
+  border-bottom: 0.5pt solid #C6C2B8;
+  font: 500 9.2pt/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: #16181A;
+  hyphens: none;
+}
+.toc > ul > li > a::before {
+  content: counter(tsec, decimal-leading-zero);
+  display: inline-block;
+  width: 40mm;
+  padding-right: 8mm;
+  text-indent: 0;
+  font: 400 9.2pt/1.5 Menlo, "PT Mono", "Courier New", monospace;
+  letter-spacing: 0;
+  color: #9C3A15;
+}
+
+.toc ul ul { margin: 1.4mm 0 0 0; }
+.toc ul ul > li { counter-increment: tsub; }
+.toc ul ul > li > a {
+  display: block;
+  font-size: 9.4pt;
+  line-height: 1.62;
+  color: #35342F;
+  hyphens: none;
+}
+.toc ul ul > li > a::before {
+  content: counter(tsec) "." counter(tsub);
+  display: inline-block;
+  width: 40mm;
+  padding-right: 8mm;
+  text-indent: 0;
+  font: 400 7.6pt/1.62 Menlo, "PT Mono", "Courier New", monospace;
+  letter-spacing: 0.04em;
+  color: #8A857A;
+}
+
+/* dot leaders + real page numbers */
+.toc a::after {
+  content: "\00A0\00A0" leader('. ') "\00A0\00A0" target-counter(attr(href url), page);
+  font: 400 7.8pt/1 Menlo, "PT Mono", "Courier New", monospace;
+  letter-spacing: 0.04em;
+  color: #6E6A62;
+}
+.toc > ul > li > a::after { color: #16181A; font-size: 8.4pt; }
+
+/* legend ------------------------------------------------------------- */
+
+/* 5 mm, not 14: the legend has to clear the foot of the contents sheet or it
+   takes a sheet of its own for four rows. Measured -- the TOC ends at 623 pt
+   and the content box bottom is 779 pt. */
+.legend { margin-top: 5mm; break-inside: avoid; }
+
+table.legend-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+table.legend-table th,
+table.legend-table td {
+  border-bottom: 0.4pt solid #D5D0C4;
+  padding: 1.9mm 0;
+  vertical-align: top;
+  text-align: left;
+}
+table.legend-table th {
+  width: 40mm;                      /* + 8 mm gutter = the 48 mm rail */
+  padding-right: 8mm;
+  font-weight: 400;
+  hyphens: none;
+}
+table.legend-table th code {
+  font-size: 8pt;
+  white-space: nowrap;
+}
+table.legend-table td {
+  font-size: 8.8pt;
+  line-height: 1.45;
+  color: #35342F;
+}
+table.legend-table tr:last-child th,
+table.legend-table tr:last-child td { border-bottom: none; }
+.legend-table .k-warn {
+  color: #9C3A15;
+  font: 500 7.4pt/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.legend-table .k-seal {
+  color: #FAF9F5;
+  font: 400 7.2pt/1.5 Menlo, "PT Mono", "Courier New", monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.legend-table .k-seal::before {
+  content: "Sealed";
+  background: #1C1E20;
+  padding: 0.8mm 2.4mm;
+}
+.legend-table .k-seal { font-size: 0; }
+.legend-table .k-seal::before { font-size: 7.2pt; }
+
+/* =============================================================== BODY */
+
+main { counter-reset: sec; }
+
+/* -- section heads --------------------------------------------------- */
+
+main h1 {
+  break-before: page;
+  break-after: avoid;
+  counter-increment: sec;
+  counter-reset: sub;
+  margin: 0 0 5.5mm 0;
+  padding: 4mm 0 3.2mm 48mm;
+  text-indent: -48mm;
+  border-bottom: 1.4pt solid #16181A;
+  font: 400 19pt/1.15 Charter, "Bitstream Charter", Georgia, serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  hyphens: none;
+  string-set: chapter counter(sec, decimal-leading-zero) "  " content(text);
+  bookmark-level: 1;
+  bookmark-label: content(text);
+}
+main h1::before {
+  content: counter(sec, decimal-leading-zero);
+  display: inline-block;
+  width: 40mm;
+  padding-right: 8mm;
+  text-indent: 0;
+  font: 400 19pt/1 Menlo, "PT Mono", "Courier New", monospace;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #9C3A15;
+}
+
+main h2 {
+  break-after: avoid;
+  break-inside: avoid;
+  counter-increment: sub;
+  margin: 7mm 0 2.6mm 0;
+  padding-left: 48mm;
+  text-indent: -48mm;
+  font: 500 9.4pt/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #16181A;
+  hyphens: none;
+  bookmark-level: 2;
+  bookmark-label: content(text);
+}
+main h2::before {
+  content: counter(sec) "." counter(sub);
+  display: inline-block;
+  width: 40mm;
+  padding-right: 8mm;
+  text-indent: 0;
+  font: 400 8.4pt/1.5 Menlo, "PT Mono", "Courier New", monospace;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: #8A857A;
+}
+main h2 em { font-style: italic; text-transform: none; }
+
+main h3 {
+  break-after: avoid;
+  margin: 5.5mm 0 2mm 48mm;
+  font: 700 10pt/1.4 Charter, "Bitstream Charter", Georgia, serif;
+}
+
+/* -- running text ---------------------------------------------------- */
+
+main p {
+  margin: 0 0 3.4mm 48mm;
+  text-align: justify;
+  orphans: 2;
+  widows: 2;
+}
+
+/* markers hang into the gutter so that list text keeps the 48 mm
+   text-column edge shared with every paragraph */
+main ol, main ul {
+  margin: 0 0 3.8mm 48mm;
+  padding: 0;
+  orphans: 2;
+  widows: 2;
+}
+main li { margin-bottom: 1.6mm; text-align: justify; }
+
+main ol { list-style: none; counter-reset: item; }
+main ol > li { counter-increment: item; }
+main ol > li::before {
+  content: counter(item, decimal-leading-zero);
+  display: inline-block;
+  width: 6.5mm;
+  margin-left: -6.5mm;
+  text-indent: 0;
+  font: 400 8pt/1 Menlo, "PT Mono", "Courier New", monospace;
+  color: #9C3A15;
+}
+
+main ul { list-style: none; }
+main ul > li { text-align: left; }
+/* the marker is a drawn box, not a glyph: U+25AA rendered as a speck at
+   text size and U+25A0 was only available from a fallback face. A
+   background box is the same square on every machine. */
+main ul > li::before {
+  content: "";
+  display: inline-block;
+  width: 1.4mm;
+  height: 1.4mm;
+  margin-left: -4.6mm;
+  margin-right: 3.2mm;
+  vertical-align: 0.35mm;
+  text-indent: 0;
+  background: #9C3A15;
+}
+
+/* -- the note appended to this copy (blockquote) ---------------------- */
+
+main blockquote {
+  margin: 5mm 0 5mm 48mm;
+  padding: 3.2mm 4.5mm;
+  border-top: 1.1pt solid #16181A;
+  border-bottom: 0.5pt solid #C6C2B8;
+  background: #F2F0E8;
+  break-inside: avoid;
+}
+main blockquote::before {
+  content: "Note appended to this copy";
+  display: block;
+  margin-bottom: 1.6mm;
+  font: 400 6.8pt/1 Menlo, "PT Mono", "Courier New", monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #9C3A15;
+}
+main blockquote p {
+  margin: 0;
+  font-size: 8.8pt;
+  line-height: 1.45;
+  color: #35342F;
+}
+
+/* -- plates -----------------------------------------------------------
+   the containing <p> already carries the 48 mm inset; the image must not
+   add it a second time. */
+
+main img {
+  display: block;
+  width: 74mm;
+  margin: 4.5mm 0 0 0;
+  border: 0.5pt solid #B9B4A8;
+  break-inside: avoid;
+  break-after: avoid;
+}
+main img + em {
+  display: block;
+  width: 74mm;
+  margin: 2.2mm 0 4mm 0;
+  font: 400 6.9pt/1.5 Menlo, "PT Mono", "Courier New", monospace;
+  font-style: normal;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #6E6A62;
+  break-before: avoid;
+  hyphens: none;
+}
+
+/* -- data tables ------------------------------------------------------ */
+
+main table {
+  width: 100%;
+  margin: 4.2mm 0 6.5mm 0;
+  border-collapse: collapse;
+  border-top: 1.1pt solid #16181A;
+  border-bottom: 1.1pt solid #16181A;
+  font-size: 8.9pt;
+  line-height: 1.35;
+  hyphens: none;
+}
+main thead { display: table-header-group; }
+main thead th {
+  border-bottom: 0.5pt solid #16181A;
+  padding: 2.2mm 3mm;
+  text-align: left;
+  vertical-align: bottom;
+  font: 500 6.9pt/1.3 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #35342F;
+}
+main tbody tr { break-inside: avoid; }
+main tbody tr:nth-child(even) { background: #F2F0E8; }
+main tbody td {
+  border-bottom: 0.4pt solid #D5D0C4;
+  padding: 2.1mm 3mm;
+  vertical-align: top;
+}
+main tbody tr:last-child td { border-bottom: none; }
+
+/* Column 1 is the row label, column 2 the value, column 3 the gloss —
+   true of every table in this document. Column 2 is centred: it carries
+   ranges and flag expressions, which read as form fields.
+
+   Widths are deliberately left to auto layout. Percentage widths were
+   tried and were worse — one fixed set cannot serve a numeric value
+   column ("0–24") and a prose one ("whatever the underworld reads as
+   harmless") at the same time; the prose cell broke to three centred
+   lines and read like verse. Auto sizing gives each table the split its
+   own content asks for. The original mis-set column was caused by
+   white-space:nowrap, not by auto layout — nowrap starved column 1. */
+main thead th:nth-child(2),
+main tbody td:nth-child(2) { text-align: center; }
+main tbody td:nth-child(2) code { background: none; border: none; padding: 0; }
+
+/* -- callouts --------------------------------------------------------- */
+
+.admonition {
+  margin: 4.5mm 0 5mm 48mm;
+  padding: 3.2mm 4.5mm 3.4mm 4.5mm;
+  break-inside: avoid;
+  orphans: 2;
+  widows: 2;
+}
+.admonition p { margin: 0; text-align: left; }
+.admonition-title {
+  margin: 0 0 1.8mm 0;
+  font: 500 8pt/1.35 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 0.03em;
+}
+
+/* warning: an operational caution, in the one accent colour */
+.admonition.warning {
+  border: 0.5pt solid #D8CBBF;
+  border-left: 2.4pt solid #9C3A15;
+  background: #F7F1EA;
+}
+.admonition.warning p { font-size: 8.9pt; line-height: 1.45; color: #2E2A26; }
+.admonition.warning .admonition-title {
+  color: #9C3A15;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 7.2pt;
+}
+.admonition.warning .admonition-title::before {
+  content: "Caution\00A0\00A0·\00A0\00A0";
+  color: #B98263;
+}
+.admonition.warning .admonition-title::after {
+  content: "";
+  display: block;
+  margin-top: 1.6mm;
+  border-top: 0.4pt solid #E0CFC0;
+}
+
+/* spoiler: withheld material, set as a sealed block */
+.admonition.spoiler {
+  background: #1C1E20;
+  border: none;
+  padding: 3.8mm 4.5mm 4.2mm 4.5mm;
+}
+.admonition.spoiler p { font-size: 8.9pt; line-height: 1.5; color: #D9D6CE; }
+.admonition.spoiler .admonition-title {
+  color: #FAF9F5;
+  font: 400 7.2pt/1 Menlo, "PT Mono", "Courier New", monospace;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 2.2mm;
+  padding-bottom: 2mm;
+  border-bottom: 0.5pt solid #4A4C4E;
+}
+.admonition.spoiler .admonition-title::before {
+  content: "Sealed\00A0\00A0·\00A0\00A0";
+  color: #8E9092;
+}
+.admonition.spoiler code {
+  background: #2A2C2E;
+  border-color: #45474A;
+  color: #EDEAE2;
+}
+
+/* -- terminal mark ---------------------------------------------------- */
+
+main > p:last-of-type {
+  margin-top: 6mm;
+  padding-top: 3.2mm;
+  border-top: 0.5pt solid #C6C2B8;
+}
+main::after {
+  content: "End of document · VD-VSP-0105 · Vance Dynamics, Records & Compliance";
+  display: block;
+  margin: 5mm 0 0 48mm;
+  font: 400 6.8pt/1 Menlo, "PT Mono", "Courier New", monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8A857A;
+}

@@ -100,6 +100,12 @@ the-persistent-husband_720m.mp4
 *.flv
 *.wmv
 
+# Rendered player guides. This repo is PUBLIC and serves the GitHub Pages
+# portal, so a committed guide PDF is a free download and the Patreon gate
+# stops meaning anything. Commit games/<slug>/guide/guide.md, upload the PDF.
+*.pdf
+games/*/guide/*.html
+
 # images
 *.jpg
 *.jpeg

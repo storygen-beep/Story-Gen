@@ -70,3 +70,9 @@ yt-dlp>=2024.1.0
 
 # Media Search (dev tools)
 duckduckgo-search>=8.0.0
+
+# Player-guide PDF rendering (manage.py build_guide)
+# weasyprint needs native pango/harfbuzz: `brew install pango` on macOS,
+# `apt-get install libpango-1.0-0 libpangoft2-1.0-0` on Debian images.
+markdown==3.10
+weasyprint==69.0

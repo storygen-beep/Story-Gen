@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{title}} — {{subtitle}}</title>
+<style>
+{{stylesheet}}
+</style>
+</head>
+<body>
+
+<!-- ============================================================ COVER
+     Full-bleed subject photograph with the file furniture overlaid. The art
+     has to carry the thumbnail — a patron sees this at 200 px in a post grid
+     before they see anything else — so the document-control form moved to the
+     contents rail and only its three identifying rows stay here.           -->
+<section class="cover">
+
+  <img class="cover-art" src="{{cover}}" alt="Subject photograph">
+  <div class="cover-scrim"></div>
+
+  <div class="cover-top">
+    <span class="c-org">Vance&nbsp;Dynamics · Records &amp; Compliance</span>
+    <span class="c-mark">Internal — Distribution Controlled</span>
+  </div>
+
+  <div class="cover-title-block">
+    <p class="c-eyebrow">{{subtitle}}</p>
+    <h1 class="c-title">{{title}}</h1>
+    <p class="c-rule"></p>
+    <p class="c-issue">Revision {{version}} · Issued {{release}}</p>
+    <p class="c-byline">{{byline}}</p>
+  </div>
+
+  <table class="cover-stamp">
+    <tr><th>Document</th><td>VD&#8209;VSP&#8209;0105</td></tr>
+    <tr><th>Subject</th><td>Wren,&nbsp;V. — Asset&nbsp;0041</td></tr>
+    <tr><th>Status</th><td>Active — unresolved</td></tr>
+  </table>
+
+</section>
+
+<!-- ========================================================= CONTENTS -->
+<section class="contents">
+  <h1 class="fm-title">Contents</h1>
+
+  <!-- the control fields, compressed to a two-line band: the form as a whole
+       cost a sheet of its own, and a records header is meant to be terse -->
+  <p class="fileline">
+    <span>Document <b>VD&#8209;VSP&#8209;0105</b></span>
+    <span>Revision <b>{{version}}</b></span>
+    <span>Issued <b>{{release}}</b></span>
+    <span>Subject <b>Wren,&nbsp;V. — Asset&nbsp;0041</b></span>
+    <span>Status <b>Active — unresolved</b></span>
+    <span>Sites <b>Spire&nbsp;Plaza · Waterfront · Underground</b></span>
+  </p>
+
+  <p class="distline">
+    <span>Distribution</span>
+    <span><i>01</i> Compliance — records copy</span>
+    <span><i>02</i> Chairman's office — one copy</span>
+    <span><i>03</i> Asset file — sealed</span>
+    <span class="unlisted"><i>04</i> Unlisted — this sheet</span>
+  </p>
+
+  <p class="fm-note">Sheet numbers refer to the printed sheet, bottom right of every page.</p>
+
+  <nav class="toc">
+{{toc}}
+  </nav>
+
+  <!-- Full width, one line per row. This must NOT float beside the TOC: a
+       float shortens the leader() line boxes and the dot rules collide. -->
+  <div class="legend">
+    <p class="block-label">Reading Conventions</p>
+    <table class="legend-table">
+      <tr>
+        <th><code>renner_hired</code></th>
+        <td>A system flag, spelled exactly as the build spells it. Either set or not set — nothing in between.</td>
+      </tr>
+      <tr>
+        <th><code>relation &#8805; 21</code></th>
+        <td>A threshold on a meter. The stated number is inclusive.</td>
+      </tr>
+      <tr>
+        <th class="k-warn">Caution</th>
+        <td>An operational hazard — a gate that can strand you, or a state that hides an exit.</td>
+      </tr>
+      <tr>
+        <th class="k-seal">Sealed</th>
+        <td>Withheld material. Printed here anyway; read it only if you want it spoiled.</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============================================================= BODY -->
+<main>
+{{body}}
+</main>
+
+</body>
+</html>
