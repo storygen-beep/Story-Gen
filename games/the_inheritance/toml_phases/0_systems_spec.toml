@@ -73,6 +73,12 @@ traitEffects = [
   { targetType = "npc", npcId = "npc_audrey",  trait = "arousal", op = "add", value = 1, cap = 3 },
   { targetType = "npc", npcId = "npc_grayson", trait = "arousal", op = "add", value = 1, cap = 3 },
   { targetType = "npc", npcId = "npc_richard", trait = "arousal", op = "add", value = 1, cap = 3 },
+  # Item 6 — the house earns while you sleep, scaled by hotel_level. eq 2 / gte 3 are mutually
+  # exclusive on purpose: daily_tick items don't short-circuit (a failed gate just `continue`s),
+  # so gating +100 on gte 2 would double-pay a level-3 house. Ticks only on a midnight-crossing
+  # sleep (rides the same nightly cycle as the arousal/energy drift above).
+  { targetType = "player", trait = "money", op = "add", value = 100, conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "hotel_level", operator = "eq",  value = 2 } ] } },
+  { targetType = "player", trait = "money", op = "add", value = 300, conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "hotel_level", operator = "gte", value = 3 } ] } },
 ]
 
 # ─── Sidebar items — the live HUD ─────────────────────────────────────────────
@@ -191,4 +197,10 @@ hidden = true
 
 [[traits.labels]]
 key = "pregnant"
+hidden = true
+
+# Item 6 — the house dial (the display/economy mirror of the hotel_in_hand / private_floor_open /
+# margaret_broken spine). Never shown: the hubs + income read it, the player reads the house.
+[[traits.labels]]
+key = "hotel_level"
 hidden = true

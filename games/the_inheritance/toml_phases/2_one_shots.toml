@@ -139,14 +139,27 @@ flagEffects = [
 # RTS-flat directives (UI text, not narrative canvases).
 # ══════════════════════════════════════════════════════════════════════════════
 
-# ── Story-Goals spine: Act-2 (fires on hotel_in_hand; the deferred card) ───────
+# ── Story-Goals spine: Act-2 EARLY (hotel_in_hand .. richard_signed) — take the family ─
 [[quest_cards]]
 text       = "The house answers to you now. But Margaret's still in your mother's chair, Grayson still sneers, and Richard still holds the deed. Take them, one by one, until every soul under this roof answers to you."
 ready_text = "Start with the one who needs you most."
-tip        = "Audrey needs saving. Richard needs waking. Grayson needs breaking. Margaret needs all of it done first."
+tip        = "Audrey needs saving. Grayson needs breaking. Richard needs waking — and his signature is the key that opens the rest of the house."
 priority   = 100
 when = [
   { flag = "hotel_in_hand",  op = "is_true"  },
+  { flag = "richard_signed", op = "is_false" },
+]
+
+# ── Story-Goals spine: Act-2 LATE (richard_signed .. margaret_broken) — make it earn + finish ─
+# Item 6 — split from the single Act-2 card on richard_signed (the real phase boundary: the back
+# office unlocks there). Names the private-floor purchase = what the money is FOR.
+[[quest_cards]]
+text       = "Richard's signed the house over. The back office is yours — and the private floor with it, once you pay to open it. Two still stand: Grayson, and Margaret in your mother's chair."
+ready_text = "Make the house earn, then finish them."
+tip        = "Put $2000 into the private floor from the back office — the house starts paying you nightly. Then buy Grayson out and corner Margaret."
+priority   = 100
+when = [
+  { flag = "richard_signed",  op = "is_true"  },
   { flag = "margaret_broken", op = "is_false" },
 ]
 

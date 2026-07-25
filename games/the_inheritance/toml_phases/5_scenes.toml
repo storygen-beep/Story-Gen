@@ -233,6 +233,8 @@ text       = "Take the books in hand."
 targetType = "location"
 locationId = "loc_hotel_bar"
 flagEffects = [ { targetType = "player", flag = "hotel_in_hand", op = "set" } ]
+# Item 6 — the books in your name: hotel_level 0 → 1.
+effects = [ { targetType = "player", trait = "hotel_level", op = "set", value = 1 } ]
 
 # ── p_floor_favor — the transactional earn (repeatable, Guest Rooms) ───────────
 [[canvases]]
@@ -4001,6 +4003,8 @@ targetType = "location"
 locationId = "loc_drawing_room"
 flagEffects = [ { targetType = "player", flag = "margaret_broken", op = "set" } ]
 itemEffects = [ { item_id = "intoxicant", action = "remove", quantity = 1 } ]
+# Item 6 — the house full: hotel_level → 3 (the apex; everyone's fallen, it's all yours).
+effects = [ { targetType = "player", trait = "hotel_level", op = "set", value = 3 } ]
 
 # ── marg_slave — "The family slave" (terminal; wordless, emptied-out silence) ──
 [[canvases]]
@@ -4379,9 +4383,16 @@ show_when_locked = true
 conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 2000 },
   { type = "flag",  subject = "player", flag_key = "private_floor_open", operator = "is_false" },
+  { type = "flag",  subject = "player", flag_key = "margaret_broken", operator = "is_false" },
 ] }
+# ^ Item 6 regression guard: the margaret_broken is_false item hides this $2000 buy post-apex,
+#   so hotel_level 3 can never be set back to 2.
 flagEffects = [ { targetType = "player", flag = "private_floor_open", op = "set" } ]
-effects = [ { targetType = "player", trait = "money", op = "add", value = -2000 } ]
+# Item 6 — the private floor earns: hotel_level → 2 (money buys the tier the story permitted).
+effects = [
+  { targetType = "player", trait = "money", op = "add", value = -2000 },
+  { targetType = "player", trait = "hotel_level", op = "set", value = 2 },
+]
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Just balance the books."

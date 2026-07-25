@@ -23,6 +23,7 @@ audrey_stage  = 0     # set by Audrey capstones (gateway for Wave-2 threesomes)
 grayson_stage = 0     # set at "On his knees" = heeled (Wave-2)
 richard_stage = 0     # set at "The first night" = open (Wave-2)
 pregnant      = 0     # 0 none / 1 Richard's / 2 Grayson's (frontier; portrait suffix)
+hotel_level   = 0     # hidden house dial (Item 6); 1 books-in-hand, 2 private-floor, 3 house-full. Only ever SET.
 
 [[player.customization_fields]]
 id      = "name"
@@ -176,7 +177,7 @@ offscreen  = true      # non-navigable away-label (Audrey's daytime block)
 [[locations]]
 id          = "loc_hotel"
 name        = "The Hotel — Lobby"
-description = "Your mother's boutique hotel, gone thin. The front desk, the public floor — and Margaret behind it, giving the staff their orders."
+description = "<<if $player.core_traits.hotel_level gte 3>>Full most nights. The staff take the evening's orders from you. Margaret keeps to her room. The house is yours, and it looks it.<<elseif $player.core_traits.hotel_level gte 2>>The lobby runs warm after dark. Guests you don't recognise, asking for the other floor. Margaret watches from the stairs and says nothing.<<elseif $player.core_traits.hotel_level gte 1>>The desk is yours now. The staff still glance at Margaret first — but the ledger's in your name, and the floor fills when you work it.<<else>>Your mother's boutique hotel, gone thin. The front desk, the public floor — and Margaret behind it, giving the staff their orders.<</if>>"
 image       = "locations/hotel_lobby.jpg"
 image_search_queries = ["faded grand boutique hotel lobby reception", "old hotel front desk elegant worn"]
 entry_from  = "loc_town"
@@ -184,7 +185,7 @@ entry_from  = "loc_town"
 [[locations]]
 id         = "loc_hotel_bar"
 name       = "The Bar"
-description = "Lorna's counter. The one person in the building glad you're back."
+description = "<<if $player.core_traits.hotel_level gte 3>>A proper bar again — full, loud, the money crossing it all night. Lorna catches your eye when a good one comes in.<<elseif $player.core_traits.hotel_level gte 2>>The bar does real trade after dark. Lorna works the till and nods the right guests toward the stairs. Your arrangement, running smooth.<<elseif $player.core_traits.hotel_level gte 1>>Lorna's counter, busier now. She pours like the place is yours — because on paper it is — and doesn't hide that she's pleased.<<else>>Lorna's counter. The one person in the building glad you're back.<</if>>"
 image       = "locations/hotel_bar.jpg"
 image_search_queries = ["dim moody hotel cocktail bar empty", "vintage hotel bar interior low light"]
 entry_from = "loc_hotel"
@@ -192,7 +193,7 @@ entry_from = "loc_hotel"
 [[locations]]
 id         = "loc_hotel_guest_rooms"
 name       = "The Guest Rooms"
-description = "The let rooms. Where a comped favour has somewhere to happen."
+description = "<<if $player.core_traits.hotel_level gte 3>>The rooms run full and quiet. Everyone who works this floor answers to you, and no one asks what the guests pay for.<<elseif $player.core_traits.hotel_level gte 2>>The discreet rooms earn their keep. Regulars who tip the desk to look the other way, and it does.<<elseif $player.core_traits.hotel_level gte 1>>The let rooms turn over now — a few paying, a few comped, the beds warm by midnight.<<else>>The let rooms. Where a comped favour has somewhere to happen.<</if>>"
 image       = "locations/guest_rooms.jpg"
 image_search_queries = ["dim hotel guest room interior", "hotel corridor of doors dim"]
 entry_from = "loc_hotel"

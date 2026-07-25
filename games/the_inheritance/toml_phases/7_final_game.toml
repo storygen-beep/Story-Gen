@@ -81,6 +81,12 @@ traitEffects = [
   { targetType = "npc", npcId = "npc_audrey",  trait = "arousal", op = "add", value = 1, cap = 3 },
   { targetType = "npc", npcId = "npc_grayson", trait = "arousal", op = "add", value = 1, cap = 3 },
   { targetType = "npc", npcId = "npc_richard", trait = "arousal", op = "add", value = 1, cap = 3 },
+  # Item 6 — the house earns while you sleep, scaled by hotel_level. eq 2 / gte 3 are mutually
+  # exclusive on purpose: daily_tick items don't short-circuit (a failed gate just `continue`s),
+  # so gating +100 on gte 2 would double-pay a level-3 house. Ticks only on a midnight-crossing
+  # sleep (rides the same nightly cycle as the arousal/energy drift above).
+  { targetType = "player", trait = "money", op = "add", value = 100, conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "hotel_level", operator = "eq",  value = 2 } ] } },
+  { targetType = "player", trait = "money", op = "add", value = 300, conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "hotel_level", operator = "gte", value = 3 } ] } },
 ]
 
 # ─── Sidebar items — the live HUD ─────────────────────────────────────────────
@@ -201,6 +207,12 @@ hidden = true
 key = "pregnant"
 hidden = true
 
+# Item 6 — the house dial (the display/economy mirror of the hotel_in_hand / private_floor_open /
+# margaret_broken spine). Never shown: the hubs + income read it, the player reads the house.
+[[traits.labels]]
+key = "hotel_level"
+hidden = true
+
 # ══════════════════════════════════════════════════════════════════
 # Phase: 1_metadata_and_locations.toml
 # ══════════════════════════════════════════════════════════════════
@@ -230,6 +242,7 @@ audrey_stage  = 0     # set by Audrey capstones (gateway for Wave-2 threesomes)
 grayson_stage = 0     # set at "On his knees" = heeled (Wave-2)
 richard_stage = 0     # set at "The first night" = open (Wave-2)
 pregnant      = 0     # 0 none / 1 Richard's / 2 Grayson's (frontier; portrait suffix)
+hotel_level   = 0     # hidden house dial (Item 6); 1 books-in-hand, 2 private-floor, 3 house-full. Only ever SET.
 
 [[player.customization_fields]]
 id      = "name"
@@ -383,7 +396,7 @@ offscreen  = true      # non-navigable away-label (Audrey's daytime block)
 [[locations]]
 id          = "loc_hotel"
 name        = "The Hotel — Lobby"
-description = "Your mother's boutique hotel, gone thin. The front desk, the public floor — and Margaret behind it, giving the staff their orders."
+description = "<<if $player.core_traits.hotel_level gte 3>>Full most nights. The staff take the evening's orders from you. Margaret keeps to her room. The house is yours, and it looks it.<<elseif $player.core_traits.hotel_level gte 2>>The lobby runs warm after dark. Guests you don't recognise, asking for the other floor. Margaret watches from the stairs and says nothing.<<elseif $player.core_traits.hotel_level gte 1>>The desk is yours now. The staff still glance at Margaret first — but the ledger's in your name, and the floor fills when you work it.<<else>>Your mother's boutique hotel, gone thin. The front desk, the public floor — and Margaret behind it, giving the staff their orders.<</if>>"
 image       = "locations/hotel_lobby.jpg"
 image_search_queries = ["faded grand boutique hotel lobby reception", "old hotel front desk elegant worn"]
 entry_from  = "loc_town"
@@ -391,7 +404,7 @@ entry_from  = "loc_town"
 [[locations]]
 id         = "loc_hotel_bar"
 name       = "The Bar"
-description = "Lorna's counter. The one person in the building glad you're back."
+description = "<<if $player.core_traits.hotel_level gte 3>>A proper bar again — full, loud, the money crossing it all night. Lorna catches your eye when a good one comes in.<<elseif $player.core_traits.hotel_level gte 2>>The bar does real trade after dark. Lorna works the till and nods the right guests toward the stairs. Your arrangement, running smooth.<<elseif $player.core_traits.hotel_level gte 1>>Lorna's counter, busier now. She pours like the place is yours — because on paper it is — and doesn't hide that she's pleased.<<else>>Lorna's counter. The one person in the building glad you're back.<</if>>"
 image       = "locations/hotel_bar.jpg"
 image_search_queries = ["dim moody hotel cocktail bar empty", "vintage hotel bar interior low light"]
 entry_from = "loc_hotel"
@@ -399,7 +412,7 @@ entry_from = "loc_hotel"
 [[locations]]
 id         = "loc_hotel_guest_rooms"
 name       = "The Guest Rooms"
-description = "The let rooms. Where a comped favour has somewhere to happen."
+description = "<<if $player.core_traits.hotel_level gte 3>>The rooms run full and quiet. Everyone who works this floor answers to you, and no one asks what the guests pay for.<<elseif $player.core_traits.hotel_level gte 2>>The discreet rooms earn their keep. Regulars who tip the desk to look the other way, and it does.<<elseif $player.core_traits.hotel_level gte 1>>The let rooms turn over now — a few paying, a few comped, the beds warm by midnight.<<else>>The let rooms. Where a comped favour has somewhere to happen.<</if>>"
 image       = "locations/guest_rooms.jpg"
 image_search_queries = ["dim hotel guest room interior", "hotel corridor of doors dim"]
 entry_from = "loc_hotel"
@@ -869,14 +882,27 @@ flagEffects = [
 # RTS-flat directives (UI text, not narrative canvases).
 # ══════════════════════════════════════════════════════════════════════════════
 
-# ── Story-Goals spine: Act-2 (fires on hotel_in_hand; the deferred card) ───────
+# ── Story-Goals spine: Act-2 EARLY (hotel_in_hand .. richard_signed) — take the family ─
 [[quest_cards]]
 text       = "The house answers to you now. But Margaret's still in your mother's chair, Grayson still sneers, and Richard still holds the deed. Take them, one by one, until every soul under this roof answers to you."
 ready_text = "Start with the one who needs you most."
-tip        = "Audrey needs saving. Richard needs waking. Grayson needs breaking. Margaret needs all of it done first."
+tip        = "Audrey needs saving. Grayson needs breaking. Richard needs waking — and his signature is the key that opens the rest of the house."
 priority   = 100
 when = [
   { flag = "hotel_in_hand",  op = "is_true"  },
+  { flag = "richard_signed", op = "is_false" },
+]
+
+# ── Story-Goals spine: Act-2 LATE (richard_signed .. margaret_broken) — make it earn + finish ─
+# Item 6 — split from the single Act-2 card on richard_signed (the real phase boundary: the back
+# office unlocks there). Names the private-floor purchase = what the money is FOR.
+[[quest_cards]]
+text       = "Richard's signed the house over. The back office is yours — and the private floor with it, once you pay to open it. Two still stand: Grayson, and Margaret in your mother's chair."
+ready_text = "Make the house earn, then finish them."
+tip        = "Put $2000 into the private floor from the back office — the house starts paying you nightly. Then buy Grayson out and corner Margaret."
+priority   = 100
+when = [
+  { flag = "richard_signed",  op = "is_true"  },
   { flag = "margaret_broken", op = "is_false" },
 ]
 
@@ -1089,6 +1115,10 @@ name = "Sleep"
 blocks = [
   { type = "image", props = { file = "activities/sleep.jpg", description = "the room she grew up in, dark, the old TV off", search_queries = ["dark bedroom night lamp off", "woman lying in bed dark room"] } },
   { type = "paragraph", content = "You draw the curtain and lie down in the room you grew up in. The hotel's quiet. Tomorrow there's the floor to work and the family to handle. You go under." },
+  # Item 6 — the nightly house-income line. gte 3 FIRST (first-match-wins). Only ONE group ladder
+  # in this node (income lives in daily_tick), so no adjacent-group merge. Levels 0-1 print nothing.
+  { type = "group", props = { conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "hotel_level", operator = "gte", value = 3 } ] }, blocks = [ { type = "paragraph", content = "The house earned while you slept — three hundred, counted and clipped, waiting at the desk by morning." } ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "hotel_level", operator = "eq", value = 2 } ] }, blocks = [ { type = "paragraph", content = "The house earned while you slept — a hundred, waiting at the desk by morning." } ] } },
 ]
 
 [canvases.nodes.exit_block]
@@ -1841,6 +1871,8 @@ text       = "Take the books in hand."
 targetType = "location"
 locationId = "loc_hotel_bar"
 flagEffects = [ { targetType = "player", flag = "hotel_in_hand", op = "set" } ]
+# Item 6 — the books in your name: hotel_level 0 → 1.
+effects = [ { targetType = "player", trait = "hotel_level", op = "set", value = 1 } ]
 
 # ── p_floor_favor — the transactional earn (repeatable, Guest Rooms) ───────────
 [[canvases]]
@@ -5609,6 +5641,8 @@ targetType = "location"
 locationId = "loc_drawing_room"
 flagEffects = [ { targetType = "player", flag = "margaret_broken", op = "set" } ]
 itemEffects = [ { item_id = "intoxicant", action = "remove", quantity = 1 } ]
+# Item 6 — the house full: hotel_level → 3 (the apex; everyone's fallen, it's all yours).
+effects = [ { targetType = "player", trait = "hotel_level", op = "set", value = 3 } ]
 
 # ── marg_slave — "The family slave" (terminal; wordless, emptied-out silence) ──
 [[canvases]]
@@ -5987,9 +6021,16 @@ show_when_locked = true
 conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 2000 },
   { type = "flag",  subject = "player", flag_key = "private_floor_open", operator = "is_false" },
+  { type = "flag",  subject = "player", flag_key = "margaret_broken", operator = "is_false" },
 ] }
+# ^ Item 6 regression guard: the margaret_broken is_false item hides this $2000 buy post-apex,
+#   so hotel_level 3 can never be set back to 2.
 flagEffects = [ { targetType = "player", flag = "private_floor_open", op = "set" } ]
-effects = [ { targetType = "player", trait = "money", op = "add", value = -2000 } ]
+# Item 6 — the private floor earns: hotel_level → 2 (money buys the tier the story permitted).
+effects = [
+  { targetType = "player", trait = "money", op = "add", value = -2000 },
+  { targetType = "player", trait = "hotel_level", op = "set", value = 2 },
+]
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Just balance the books."
