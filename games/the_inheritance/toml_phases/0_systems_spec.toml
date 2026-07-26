@@ -59,6 +59,7 @@ when  = { worn_type = "bold" }
 # beats introduce them (unset of an unset flag is harmless).
 [engine.daily_tick]
 flagEffects = [
+  { targetType = "player", flag = "worked_floor_today", op = "unset" },  # Item 5 — ledger consumer
   { targetType = "player", flag = "photos_sold_today",  op = "unset" },
   { targetType = "player", flag = "bathed_today",       op = "unset" },
   { targetType = "player", flag = "ate_today",          op = "unset" },

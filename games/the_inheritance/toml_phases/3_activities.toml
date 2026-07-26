@@ -28,10 +28,27 @@ name = "Sleep"
 blocks = [
   { type = "image", props = { file = "activities/sleep.jpg", description = "the room she grew up in, dark, the old TV off", search_queries = ["dark bedroom night lamp off", "woman lying in bed dark room"] } },
   { type = "paragraph", content = "You draw the curtain and lie down in the room you grew up in. The hotel's quiet. Tomorrow there's the floor to work and the family to handle. You go under." },
-  # Item 6 — the nightly house-income line. gte 3 FIRST (first-match-wins). Only ONE group ladder
-  # in this node (income lives in daily_tick), so no adjacent-group merge. Levels 0-1 print nothing.
+  # Item 6 — the nightly house-income line. gte 3 FIRST (first-match-wins). These two hotel groups
+  # are ADJACENT on purpose: a house is exactly one level, so one exclusive <<if>>/<<elseif>> is
+  # correct here. Levels 0-1 print nothing.
   { type = "group", props = { conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "hotel_level", operator = "gte", value = 3 } ] }, blocks = [ { type = "paragraph", content = "The house earned while you slept — three hundred, counted and clipped, waiting at the desk by morning." } ] } },
   { type = "group", props = { conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "hotel_level", operator = "eq", value = 2 } ] }, blocks = [ { type = "paragraph", content = "The house earned while you slept — a hundred, waiting at the desk by morning." } ] } },
+  # Item 5 — the nightly ledger: one flat line per daily action the player took today. Unlike the
+  # hotel pair above, each *_today flag is INDEPENDENT (several can be true at once), so these groups
+  # must NOT coalesce into an exclusive chain. The empty-paragraph separators between every group
+  # (and before the first, to break off the hotel pair) render nothing but stop the generator's
+  # adjacent-group sweep — each ledger line becomes its own <<if>>. Flags are still true here;
+  # daily_tick unsets them only after "Wake up." crosses midnight. (memory: adjacent-groups-merge)
+  { type = "paragraph", content = "" },
+  { type = "group", props = { conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "worked_floor_today", operator = "is_true" } ] }, blocks = [ { type = "paragraph", content = "You worked the floor. The night's take is banked." } ] } },
+  { type = "paragraph", content = "" },
+  { type = "group", props = { conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "photos_sold_today", operator = "is_true" } ] }, blocks = [ { type = "paragraph", content = "Photos went out. Somewhere, someone's paying to look." } ] } },
+  { type = "paragraph", content = "" },
+  { type = "group", props = { conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "bathed_today", operator = "is_true" } ] }, blocks = [ { type = "paragraph", content = "You washed the day off." } ] } },
+  { type = "paragraph", content = "" },
+  { type = "group", props = { conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "ate_today", operator = "is_true" } ] }, blocks = [ { type = "paragraph", content = "You ate. The body keeps." } ] } },
+  { type = "paragraph", content = "" },
+  { type = "group", props = { conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "preened_today", operator = "is_true" } ] }, blocks = [ { type = "paragraph", content = "You worked the mirror — the display comes easier now." } ] } },
 ]
 
 [canvases.nodes.exit_block]
@@ -374,6 +391,7 @@ targetType = "location"
 locationId = "loc_hotel"
 time_progression_minutes = 120
 costs   = [ { trait = "energy", value = 15 } ]
+flagEffects = [ { targetType = "player", flag = "worked_floor_today", op = "set" } ]
 effects = [
   { targetType = "player", trait = "money", op = "add", value = 15 },
   { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 100 },
@@ -390,6 +408,7 @@ conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
 ] }
 costs   = [ { trait = "energy", value = 15 } ]
+flagEffects = [ { targetType = "player", flag = "worked_floor_today", op = "set" } ]
 effects = [
   { targetType = "player", trait = "money", op = "add", value = 40 },
   { targetType = "player", trait = "exhibitionism", op = "add", value = 2, cap = 100 },
@@ -406,6 +425,7 @@ conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 50 },
 ] }
 costs   = [ { trait = "energy", value = 20 } ]
+flagEffects = [ { targetType = "player", flag = "worked_floor_today", op = "set" } ]
 effects = [
   { targetType = "player", trait = "money", op = "add", value = 120 },
   { targetType = "player", trait = "exhibitionism", op = "add", value = 3, cap = 100 },

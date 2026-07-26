@@ -34,7 +34,7 @@
 | 2 | Player cheat page | P1 pre-ship | TODO | — |
 | 3 | Ambient-heat layer (elision fix + wallpaper) | P1 pre-ship | TODO | media harvest |
 | 4 | Meter-ceiling audit | P1 pre-ship | TODO | — |
-| 5 | Nightly ledger at sleep | P1 pre-ship | TODO | (grows with #6) |
+| 5 | Nightly ledger at sleep | P1 pre-ship | ✅ DONE 2026-07-26 (rev 24; 5 flag-gated ledger lines + re-added `worked_floor_today`; live-tested 58/58) | (grows with #6) |
 | 6 | Hotel accumulation loop | P2 design-change | ✅ DONE 2026-07-26 (rev 22; derived `hotel_level`; live-tested 26/26) | #5 helps |
 | 7 | Soft consequences (world with teeth) | P2 **PENDING LO CALL** | BLOCKED on decision | — |
 | 8 | Breadth: guest/staff light ladders | P3 post-ship | TODO | ship |
@@ -244,6 +244,17 @@ climb past the last authored payoff. Build green.
 ---
 
 ## Item 5 — Nightly ledger at sleep
+
+> **✅ BUILT 2026-07-26 (rev 24).** 5 flat ledger lines in the `activity_sleep` node, one per
+> daily action taken today (worked_floor / photos / bath / eat / preen), appended after Item 6's
+> house-income pair. Two corrections to the scope below: **(1) `worked_floor_today` did not exist**
+> — it was deleted earlier as an orphan; the floor is the daily money spine, so I **re-added it**
+> with a real consumer (set on the 3 floor rungs → unset in `daily_tick` → read by the ledger;
+> validator green). **(2)** Item 6's house line is an *adjacent* group pair (a correct exclusive
+> chain — a house is one level); the 5 ledger flags are **independent** (several fire at once), so
+> each ledger group is isolated by an **empty-paragraph separator** `{type="paragraph",content=""}`
+> that renders nothing but defeats the adjacent-group merge (v2.py:13879-13888). Live-tested 58/58
+> (busy / per-flag-solo / all-5-at-once anti-merge / lazy-none / house-level regression). Media-neutral.
 
 **Why.** Apocalyptic World prints a categorized morning report every sleep ("Net change,
 produced(+) and consumed(-)... -1 Food") — it's half of why its systems feel alive; the
