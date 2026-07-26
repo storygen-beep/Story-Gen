@@ -17,8 +17,8 @@ title       = "Vesper"
 description = "An owned half-human weapon who feels nothing but the sex she's used for. Inside Vance Dynamics she's the company's slave; outside, under a false face, she slips into powerful men's lives and drains them while they think they're using her — sent to hunt a rogue called Cain."
 quests_engine   = "v2"
 starting_canvas = "canvas_opening_office"   # the cold open (Beat 1 — the office)
-version         = "0.1.4"          # sidebar footer — bump in the same commit as the games-data.js portal entry
-release_date    = "2026-07-16"     # sidebar footer — date this build ships
+version         = "0.1.5"          # sidebar footer — bump in the same commit as the games-data.js portal entry
+release_date    = "2026-07-25"     # sidebar footer — date this build ships
 
 [time]
 starting_hour = 20        # the opening opens in the evening (Beat 1 — Mercer's office)
@@ -291,3 +291,107 @@ hidden = true
 [[traits.labels]]
 key    = "emitter_broken"
 hidden = true
+
+# ══════════════════════════════════════════════════════════════════
+# THE LEDGER — the player cheat page ([ui.cheat_page])
+# ══════════════════════════════════════════════════════════════════
+# Sidebar page, free and never gated by a code. Which VARIANT ships is a BUILD
+# argument, never a value in here — two builds come from this one commit:
+#   free:  package_from_toml … --output games/vesper/output            (the default)
+#   paid:  package_from_toml … --build paid --output games/vesper/output-paid
+# The free build emits these rows as padlocked LABELS with no working effects and
+# no hint text in the file; the paid build emits live rows with the hints.
+#
+# Register: flat and mechanical. The container carries the fiction ("The Ledger" —
+# numbers she keeps for herself); the rows stay legible, because this page is read
+# as a list of levers, not as prose.
+#
+# The five rows are DERIVED from Vesper's own gates (design_cheat_page.md §2), not
+# chosen: each step is small enough that it cannot skip a band of authored content.
+[ui.cheat_page]
+title        = "The Ledger"
+intro        = "She keeps her own numbers."
+button_label = "Cheat"
+button_icon  = "🔓"
+locked_note  = "Supporters unlock these."
+
+# COIN — the only near-essential row. Starts at 0, the underworld toll is 5 and is
+# charged on EVERY entry, and all three coin faucets (brothel, pit, Marsh) sit behind
+# that door. The salvage repair then wants 120 (12 sessions × 10). No gate reads coin,
+# so there are no bands to break; clamp = false because a wallet is unbounded (the
+# engine's 0-100 clamp would silently cap it at 100).
+[[ui.cheat_page.grants]]
+label       = "Coin"
+trait       = "coin"
+op          = "add"
+value       = 25
+clamp       = false
+hint        = "five trips through the gate, or two salvage sessions"
+button_text = "Coin +25"
+
+# FIGHTING — the widest-reaching key in the game: 15 forces the underworld door, 30
+# opens the hard pit bouts (+20 coin instead of +8), 40 clears yard guard 3. Step 5 =
+# the smallest gap between its gates, so it can never jump one. Cap 40 = the last gate.
+[[ui.cheat_page.grants]]
+label       = "Fighting"
+trait       = "fighting"
+op          = "add"
+value       = 5
+cap         = 40
+clamp       = true
+hint        = "the door at 15 · hard bouts at 30 · the yard at 40"
+at_cap_text = "As sharp as this will make her."
+
+# STEALTH — capped at 9 ON PURPOSE, below guard 1's threshold of 10. The burned yard
+# gates every NON-stealth route on `stealth lt N`, so raising stealth DELETES "take him
+# down", "break and run", and the Tier-5 emitter scene at that guard. Only three guard
+# encounters exist per save, so a stealth-40 player could never see the emitter scene.
+# The yard teaches the rest; this row only opens the door to it.
+[[ui.cheat_page.grants]]
+label       = "Stealth"
+trait       = "stealth"
+op          = "add"
+value       = 5
+cap         = 9
+clamp       = true
+hint        = "enough to start the yard — the yard itself teaches the rest"
+at_cap_text = "Any sharper and she stops needing the quiet routes."
+
+# RENNER — the 8-day wall, and it is mandatory: his drain sets names_known, which gates
+# the whole Underworld Hunt. Rungs give +2 each and cost 180 in-game minutes against a
+# 540-minute window, so 3/day and ~24 clicks. His corruption gates sit at 0/10/20/30/
+# 40/50, evenly spaced, so +10 lands exactly on each band and skips nothing.
+# The hint says what 50 ACTUALLY buys — corruption alone opens nothing.
+[[ui.cheat_page.grants]]
+label       = "Renner"
+targetType  = "npc"
+npcId       = "npc_renner"
+trait       = "corruption"
+op          = "add"
+value       = 10
+cap         = 50
+clamp       = true
+hint        = "opens the anal pose in the office loop — in cover, carrying the charged drain. The rungs still have to be run."
+button_text = "Renner +10"
+at_cap_text = "He is as far gone as the rungs will take him."
+
+# CHARGE — a pool, so it is SET to full rather than incremented (the way the cradle
+# does it). Free in normal play; this row exists because after the Archive beat every
+# charge point seals, which is the one place the game can strand a player.
+[[ui.cheat_page.grants]]
+label       = "Charge"
+trait       = "energy"
+op          = "set"
+value       = 100
+cap         = 100
+clamp       = true
+hint        = "back to full — the cradle does this for free while the Spire is still open"
+button_text = "Charge → full"
+at_cap_text = "Already full."
+
+# Build labels for the sidebar footer badge. TEXT ONLY — nothing here selects which
+# build is active; that is `--build free|paid`.
+[builds.free]
+label = "Free Build"
+[builds.paid]
+label = "🎯 Beta Nut Build"

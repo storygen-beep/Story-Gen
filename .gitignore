@@ -106,6 +106,14 @@ the-persistent-husband_720m.mp4
 *.pdf
 games/*/guide/*.html
 
+# NOTE on paid ("supporter") builds — games/<slug>/output-paid/ is deliberately NOT
+# ignored (LO's call, 2026-07-26): the local portal opens it, and the build is worth
+# versioning and diffing alongside the free one. Be clear-eyed about what that means —
+# this repo is PUBLIC and serves Pages, so a committed paid build is publicly playable.
+# Patreon is the DISTRIBUTION channel for it, not an access gate. Media is still
+# ignored by extension, same as the free build. Build with:
+#   manage.py package_from_toml ... --build paid --output games/<slug>/output-paid
+
 # images
 *.jpg
 *.jpeg

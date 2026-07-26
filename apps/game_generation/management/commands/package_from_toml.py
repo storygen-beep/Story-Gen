@@ -142,6 +142,18 @@ class Command(BaseCommand):
             action="store_true",
             help="Generate Mermaid markdown chart of story structure (story_chart.md)",
         )
+        parser.add_argument(
+            "--build",
+            type=str,
+            choices=["free", "paid"],
+            default="free",
+            help=(
+                "Cheat-page build variant. 'free' (the default) emits the cheat page's rows "
+                "as padlocked labels with NO working effects in the file; 'paid' emits live "
+                "rows. Omitting this flag always produces the safe free build. Games without "
+                "a [ui.cheat_page] are unaffected either way."
+            ),
+        )
 
     def handle(self, *args, **options):
         from pathlib import Path
@@ -163,6 +175,7 @@ class Command(BaseCommand):
         dry_run = options["dry_run"]
         dev_mode = options["dev"]
         generate_chart = options.get("chart", False)
+        build_variant = options.get("build", "free") or "free"
         # No-DB (in-memory graph) is the DEFAULT; --use-db opts into the legacy
         # database build path (which requires an owner and persists rows).
         no_db = not options.get("use_db", False)
@@ -201,6 +214,27 @@ class Command(BaseCommand):
 
         # Phase 1: Validate owner (DB path only — no owner needed for the no-DB default)
         owner = None if no_db else self._get_owner(owner_id)
+
+        # Phase 1.9: Build-variant guard. Deliberately BEFORE the dry-run exit, so
+        # `--dry-run --build paid` still reports the mistake (and so it is testable
+        # without running a full package).
+        #
+        # A paid build carries live cheat grants. games/<slug>/output/ is git-tracked
+        # and the repo is public, so writing a paid build there publishes the grants
+        # and undoes the whole free/paid split. One wrong --output is all it takes.
+        if build_variant == "paid":
+            self.stdout.write(
+                self.style.WARNING(
+                    "🔓 PAID build — live cheat grants WILL be present in the output file. "
+                    "Do not commit or publish this artifact."
+                )
+            )
+            if Path(output_dir).name == "output":
+                raise CommandError(
+                    "--build paid must not write into a directory named 'output' — that path is "
+                    "git-tracked and public, which would publish the cheat grants. Use a "
+                    "gitignored sibling such as games/<slug>/output-paid/ instead."
+                )
 
         # Phase 2: Load and validate TOML
         template = self._load_toml(file_path)
@@ -241,6 +275,7 @@ class Command(BaseCommand):
                 video_folder=video_folder, video_path=video_path, debug=debug, dev_mode=dev_mode,
                 game_folder=game_folder_name,  # Pass resolved game folder name for approvals
                 graph=graph,
+                build_variant=build_variant,
             )
         except Exception as e:
             # Keep project for debugging on packaging failure (DB path only —
@@ -415,6 +450,7 @@ class Command(BaseCommand):
         dev_mode: bool = False,
         game_folder: str = None,
         graph=None,
+        build_variant: str = "free",
     ) -> dict:
         """Package game using GameService."""
         self.stdout.write("")
@@ -440,6 +476,10 @@ class Command(BaseCommand):
             options["dev_mode"] = True
         if game_folder:
             options["game_folder"] = game_folder
+        # Always passed, not conditionally: the generator's own default is "free", and
+        # sending the value every time means the emitted variant is never ambiguous.
+        # Harmless for games with no cheat page — nothing reads it.
+        options["build"] = build_variant
 
         service = GameService()
         return service.package_game(

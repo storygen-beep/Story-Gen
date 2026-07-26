@@ -6293,7 +6293,7 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 
 
 &lt;&lt;widget &quot;versionFooter&quot;&gt;&gt;
-&lt;div class=&quot;sidebar-version&quot;&gt;v0.1.5 · 2026-07-25 · &lt;span class=&quot;build-badge&quot;&gt;Free Build&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;sidebar-version&quot;&gt;v0.1.5 · 2026-07-25 · &lt;span class=&quot;build-badge&quot;&gt;🎯 Beta Nut Build&lt;/span&gt;&lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="StoryCaption" tags="" position="600,100" size="100,100">&lt;&lt;missingMediaButton&gt;&gt;
 &lt;&lt;timeDisplay&gt;&gt;
 &lt;&lt;playerPortrait&gt;&gt;
@@ -12768,15 +12768,30 @@ try {
   &lt;&lt;if passage() isnot &quot;CheatPage&quot;&gt;&gt;&lt;&lt;link &quot;Cheat&quot; &quot;CheatPage&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;else&gt;&gt;&lt;span class=&quot;nav-row&quot;&gt;Cheat&lt;/span&gt;&lt;&lt;/if&gt;&gt;&lt;span class=&quot;nav-i&quot;&gt;🔓&lt;/span&gt;
 &lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="315" name="CheatPage" tags="" position="600,3975" size="100,100">&lt;&lt;nobr&gt;&gt;
-&lt;h2&gt;The Ledger &lt;span class=&quot;build-badge&quot;&gt;Free Build&lt;/span&gt;&lt;/h2&gt;
+&lt;h2&gt;The Ledger &lt;span class=&quot;build-badge&quot;&gt;🎯 Beta Nut Build&lt;/span&gt;&lt;/h2&gt;
 &lt;div class=&quot;npc-section&quot;&gt;
 &lt;div class=&quot;cheat-intro&quot;&gt;She keeps her own numbers.&lt;/div&gt;
-  &lt;div class=&quot;cheat-row is-locked&quot;&gt;&lt;span class=&quot;cheat-label&quot;&gt;Coin&lt;/span&gt;&lt;span class=&quot;cheat-lock&quot;&gt;🔒&lt;/span&gt;&lt;/div&gt;
-  &lt;div class=&quot;cheat-row is-locked&quot;&gt;&lt;span class=&quot;cheat-label&quot;&gt;Fighting&lt;/span&gt;&lt;span class=&quot;cheat-lock&quot;&gt;🔒&lt;/span&gt;&lt;/div&gt;
-  &lt;div class=&quot;cheat-row is-locked&quot;&gt;&lt;span class=&quot;cheat-label&quot;&gt;Stealth&lt;/span&gt;&lt;span class=&quot;cheat-lock&quot;&gt;🔒&lt;/span&gt;&lt;/div&gt;
-  &lt;div class=&quot;cheat-row is-locked&quot;&gt;&lt;span class=&quot;cheat-label&quot;&gt;Renner&lt;/span&gt;&lt;span class=&quot;cheat-lock&quot;&gt;🔒&lt;/span&gt;&lt;/div&gt;
-  &lt;div class=&quot;cheat-row is-locked&quot;&gt;&lt;span class=&quot;cheat-label&quot;&gt;Charge&lt;/span&gt;&lt;span class=&quot;cheat-lock&quot;&gt;🔒&lt;/span&gt;&lt;/div&gt;
-&lt;div class=&quot;cheat-locked-note&quot;&gt;Supporters unlock these.&lt;/div&gt;
+  &lt;div class=&quot;cheat-row&quot;&gt;&lt;&lt;link &quot;Coin +25&quot; &quot;CheatPage&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];setup.applyAndNotifyTrait(&quot;player&quot;, null, &quot;coin&quot;, &quot;add&quot;, 25, false, null);setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;div class=&quot;cheat-hint&quot;&gt;five trips through the gate, or two salvage sessions&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;cheat-row&quot;&gt;
+    &lt;&lt;if setup.getTraitValue(&quot;player&quot;, null, &quot;fighting&quot;) lt 40&gt;&gt;&lt;&lt;link &quot;Fighting +5&quot; &quot;CheatPage&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];setup.applyAndNotifyTrait(&quot;player&quot;, null, &quot;fighting&quot;, &quot;add&quot;, 5, true, 40);setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;div class=&quot;cheat-hint&quot;&gt;the door at 15 · hard bouts at 30 · the yard at 40&lt;/div&gt;
+    &lt;&lt;else&gt;&gt;&lt;span class=&quot;cheat-row-maxed&quot;&gt;Fighting +5&lt;/span&gt;&lt;div class=&quot;cheat-at-cap&quot;&gt;As sharp as this will make her.&lt;/div&gt;
+    &lt;&lt;/if&gt;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;cheat-row&quot;&gt;
+    &lt;&lt;if setup.getTraitValue(&quot;player&quot;, null, &quot;stealth&quot;) lt 9&gt;&gt;&lt;&lt;link &quot;Stealth +5&quot; &quot;CheatPage&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];setup.applyAndNotifyTrait(&quot;player&quot;, null, &quot;stealth&quot;, &quot;add&quot;, 5, true, 9);setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;div class=&quot;cheat-hint&quot;&gt;enough to start the yard — the yard itself teaches the rest&lt;/div&gt;
+    &lt;&lt;else&gt;&gt;&lt;span class=&quot;cheat-row-maxed&quot;&gt;Stealth +5&lt;/span&gt;&lt;div class=&quot;cheat-at-cap&quot;&gt;Any sharper and she stops needing the quiet routes.&lt;/div&gt;
+    &lt;&lt;/if&gt;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;cheat-row&quot;&gt;
+    &lt;&lt;if setup.getTraitValue(&quot;npc&quot;, &quot;npc_renner&quot;, &quot;corruption&quot;) lt 50&gt;&gt;&lt;&lt;link &quot;Renner +10&quot; &quot;CheatPage&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];setup.applyAndNotifyTrait(&quot;npc&quot;, &quot;npc_renner&quot;, &quot;corruption&quot;, &quot;add&quot;, 10, true, 50);setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;div class=&quot;cheat-hint&quot;&gt;opens the anal pose in the office loop — in cover, carrying the charged drain. The rungs still have to be run.&lt;/div&gt;
+    &lt;&lt;else&gt;&gt;&lt;span class=&quot;cheat-row-maxed&quot;&gt;Renner +10&lt;/span&gt;&lt;div class=&quot;cheat-at-cap&quot;&gt;He is as far gone as the rungs will take him.&lt;/div&gt;
+    &lt;&lt;/if&gt;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;cheat-row&quot;&gt;
+    &lt;&lt;if setup.getTraitValue(&quot;player&quot;, null, &quot;energy&quot;) isnot 100&gt;&gt;&lt;&lt;link &quot;Charge → full&quot; &quot;CheatPage&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];setup.applyAndNotifyTrait(&quot;player&quot;, null, &quot;energy&quot;, &quot;set&quot;, 100, true, 100);setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;div class=&quot;cheat-hint&quot;&gt;back to full — the cradle does this for free while the Spire is still open&lt;/div&gt;
+    &lt;&lt;else&gt;&gt;&lt;span class=&quot;cheat-row-maxed&quot;&gt;Charge → full&lt;/span&gt;&lt;div class=&quot;cheat-at-cap&quot;&gt;Already full.&lt;/div&gt;
+    &lt;&lt;/if&gt;&gt;
+  &lt;/div&gt;
 &lt;/div&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;link &quot;← Back&quot;&gt;&gt;&lt;&lt;run setup.smartBack()&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata></tw-storydata>

@@ -68,6 +68,15 @@ NPC arcs/hubs/ambients/capstones are beats. Only the skeleton + boot + sleep + s
    build time, so a debug build ships those placeholders even after the media is added; `--dev` leaks dev
    controls (`references/media.md` "QA vs publish build"). A build that actually goes to players runs
    `references/ship-gate.md` first — dropping the flags is one row of that checklist, not the whole of it.
+   **`--build free|paid`** selects the cheat-page variant and **defaults to `free`**, so an ordinary build
+   is always the safe one. It only matters for a game that authors `[ui.cheat_page]`; a `free` build emits
+   the rows as padlocked labels with **no working effects in the file**, a `paid` build emits live rows.
+   The paid artifact must go to a **gitignored** `games/<slug>/output-paid/` — the command refuses to write
+   a paid build into any directory named `output`, because that path is tracked in a PUBLIC repo:
+   ```bash
+   python manage.py package_from_toml --file games/<slug>/toml_phases/7_final_game.toml \
+     --build paid --output games/<slug>/output-paid --video-folder games/<slug>/videos
+   ```
 
 **Which phase file a beat's content goes in** (set `target_phase`; when unsure, check where
 `games/late_shifts/toml_phases/` put the analogous content):

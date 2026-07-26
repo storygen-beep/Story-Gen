@@ -54,6 +54,16 @@ class Command(BaseCommand):
             action="store_true",
             help="Enable dev mode with stat adjustment controls in sidebar",
         )
+        parser.add_argument(
+            "--build",
+            type=str,
+            choices=["free", "paid"],
+            default="free",
+            help=(
+                "Cheat-page build variant (parity with package_from_toml). 'free' (default) "
+                "emits padlocked labels with no working effects; 'paid' emits live rows."
+            ),
+        )
 
     def handle(self, *args, **options):
         project_id = options["project_id"]
@@ -63,6 +73,7 @@ class Command(BaseCommand):
         force_copy = options["force_copy"]
         verify_checksums = options["verify_checksums"]
         dev_mode = options["dev"]
+        build_variant = options.get("build", "free") or "free"
 
         # Load project
         try:
@@ -86,7 +97,9 @@ class Command(BaseCommand):
                 version=version,
                 force_copy=force_copy,
                 verify_checksums=verify_checksums,
-                options={"dev_mode": dev_mode} if dev_mode else None,
+                options=(
+                    {"build": build_variant, **({"dev_mode": True} if dev_mode else {})}
+                ),
             )
         except Exception as e:
             raise CommandError(f"Packaging failed: {e}")

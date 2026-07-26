@@ -392,11 +392,24 @@ class GameTemplate:
     # affects diner tips, etc.). Authored under [ui.tips_page] in TOML. None
     # = page + sidebar button not emitted; runtime-conditional.
     tips_page: Optional["TemplateTipsPage"] = None
+    # Player cheat page — authored under [ui.cheat_page]. None = page + sidebar
+    # button not emitted. Which VARIANT ships is a build-time choice
+    # (`package_from_toml --build free|paid`), never a TOML value: two builds come
+    # from one commit, so a committed selector is necessarily false for one of them.
+    cheat_page: Optional["TemplateCheatPage"] = None
+    # Build labels for the sidebar footer badge, authored under [builds.free] /
+    # [builds.paid]. None = no badge, which keeps every pre-existing game's output
+    # byte-identical (the reproducibility property test_nodb_equivalence guards).
+    build_labels: Optional["TemplateBuildLabels"] = None
     # Doc 69 Item 3 — parse-time errors collected during normalize() for the
     # field-name mismatch validator. validate() prepends these to its own
     # error list. Populated only by normalize(); never mutated downstream.
     # Empty list = no parse-time errors detected.
     _parse_errors: List[str] = field(default_factory=list)
+    # Raw [[ui.cheat_page.grants]] dicts as authored, carried through so validate()
+    # can run the shared effect validators against the ORIGINAL keys — the
+    # normalized dataclass has already discarded a misspelled field name.
+    _cheat_raw_rows: List[Dict[str, Any]] = field(default_factory=list)
 
 
 @dataclass
@@ -435,6 +448,63 @@ class TemplateTipsPage:
     """
     title: str = "Tips"
     content: str = ""
+
+
+@dataclass
+class TemplateCheatGrant:
+    """One row on the player cheat page — a single trait write, nothing else.
+
+    Field names deliberately mirror the choice-effect schema
+    (targetType/npcId/trait/op/value/clamp/cap) so a raw row dict can be fed to
+    the existing effect validators for free.
+
+    `label` is the ONLY string that reaches a free build — `hint`, `button_text`
+    and `at_cap_text` are paid-only, so a free player learns no threshold, place
+    or route from the page.
+
+    `clamp` defaults True here (unlike the choice path, which passes an explicit
+    False when omitted) because this page emits its own calls and a banded meter
+    must never escape its bands. An unbounded resource — money, coin — must set
+    `clamp = false`, or the engine's hardcoded 0-100 clamp silently caps a wallet
+    at 100.
+    """
+    label: str
+    trait: str
+    value: float
+    targetType: str = "player"
+    npcId: str = ""
+    op: str = "add"
+    cap: Optional[float] = None
+    clamp: bool = True
+    hint: str = ""            # paid only
+    button_text: str = ""     # paid only; default composed from label + op + value
+    at_cap_text: str = ""     # paid only
+
+
+@dataclass
+class TemplateCheatPage:
+    """The [ui.cheat_page] surface: a sidebar button plus a standalone passage.
+
+    Unlike TemplateTipsPage this is NOT dropped when empty — an authored-but-empty
+    block is a validate() error. The tips_page silent drop is the documented cause
+    of a game shipping with its 💡 button permanently absent.
+    """
+    title: str = "Cheats"
+    intro: str = ""           # ships in BOTH builds
+    button_label: str = ""    # defaults to title
+    button_icon: str = ""
+    locked_note: str = ""     # FREE build only
+    grants: List["TemplateCheatGrant"] = field(default_factory=list)
+
+
+@dataclass
+class TemplateBuildLabels:
+    """Per-variant labels for the sidebar footer badge ([builds.free] / [builds.paid]).
+
+    Text only. Which variant is active is a CLI argument — nothing here selects it.
+    """
+    free: str = "Free Build"
+    paid: str = "Paid Build"
 
 
 @dataclass
@@ -1511,6 +1581,10 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     # prepends these to its own errors list). Local-scope to this normalize()
     # invocation; assigned to template._parse_errors before return.
     _parse_errors: List[str] = []
+    # Raw [[ui.cheat_page.grants]] dicts, kept so validate() can run the shared
+    # effect validators (_validate_effect_field_names / _validate_trait_declaration_
+    # in_effect) against the authored keys rather than the normalized dataclass.
+    _cheat_raw_rows: List[Dict[str, Any]] = []
 
     schema_version = _require_str(data, "schema_version", "0.1")
 
@@ -2697,6 +2771,82 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     content=tp_content,
                 )
 
+    # Player cheat page. Authored under [ui.cheat_page] + [[ui.cheat_page.grants]].
+    # NOTE the deliberate divergence from tips_page above: an authored-but-empty
+    # block is NOT silently dropped here. It is constructed and left for validate()
+    # to reject, because a silently-dropped page is invisible until someone notices
+    # the sidebar button never appeared.
+    cheat_page_obj: Optional[TemplateCheatPage] = None
+    if isinstance(ui_raw, dict):
+        cp_raw = ui_raw.get("cheat_page")
+        if cp_raw is not None:
+            if not isinstance(cp_raw, dict):
+                raise TypeError(f"[ui.cheat_page] must be a table, got {type(cp_raw).__name__}")
+            # Reject a TOML-side variant selector. The active variant is a build
+            # argument; a value committed here can only ever describe one of the
+            # two builds, and a forgotten `true` publishes the paid file.
+            for _bad_key in ("enabled", "paid", "free", "grants_enabled", "cheat_grants"):
+                if _bad_key in cp_raw:
+                    _parse_errors.append(
+                        f"[ui.cheat_page] must not declare '{_bad_key}' — the build variant is "
+                        f"chosen at build time with `manage.py package_from_toml --build free|paid` "
+                        f"(default: free). Remove it."
+                    )
+            grants: List[TemplateCheatGrant] = []
+            for gi, g_raw in enumerate(cp_raw.get("grants", []) or []):
+                if not isinstance(g_raw, dict):
+                    raise TypeError(
+                        f"ui.cheat_page.grants[{gi}] must be a table, got {type(g_raw).__name__}"
+                    )
+                _cap = g_raw.get("cap")
+                grants.append(
+                    TemplateCheatGrant(
+                        label=_require_str(g_raw, "label", ""),
+                        trait=_require_str(g_raw, "trait", ""),
+                        value=g_raw.get("value"),
+                        targetType=_require_str(g_raw, "targetType", "player") or "player",
+                        npcId=_require_str(g_raw, "npcId", ""),
+                        op=_require_str(g_raw, "op", "add") or "add",
+                        cap=_cap if isinstance(_cap, (int, float)) else None,
+                        clamp=bool(g_raw.get("clamp", True)),
+                        hint=_require_str(g_raw, "hint", ""),
+                        button_text=_require_str(g_raw, "button_text", ""),
+                        at_cap_text=_require_str(g_raw, "at_cap_text", ""),
+                    )
+                )
+                # Keep the raw dict for the shared effect validators in validate().
+                _cheat_raw_rows.append(g_raw)
+            cheat_page_obj = TemplateCheatPage(
+                title=_require_str(cp_raw, "title", "Cheats") or "Cheats",
+                intro=_require_str(cp_raw, "intro", ""),
+                button_label=_require_str(cp_raw, "button_label", ""),
+                button_icon=_require_str(cp_raw, "button_icon", ""),
+                locked_note=_require_str(cp_raw, "locked_note", ""),
+                grants=grants,
+            )
+
+    # Build labels for the sidebar footer badge — [builds.free] / [builds.paid].
+    # Text only. Nothing here selects the active variant.
+    build_labels_obj: Optional[TemplateBuildLabels] = None
+    builds_raw = data.get("builds")
+    if builds_raw is not None:
+        if not isinstance(builds_raw, dict):
+            raise TypeError(f"[builds] must be a table, got {type(builds_raw).__name__}")
+        for _bad_key in ("variant", "active", "selected", "default", "build"):
+            if _bad_key in builds_raw:
+                _parse_errors.append(
+                    f"[builds] must not declare which variant is active ('{_bad_key}') — that is "
+                    f"the `--build free|paid` CLI argument, not a TOML value."
+                )
+        _free_raw = builds_raw.get("free") or {}
+        _paid_raw = builds_raw.get("paid") or {}
+        if not isinstance(_free_raw, dict) or not isinstance(_paid_raw, dict):
+            raise TypeError("[builds.free] and [builds.paid] must be tables")
+        build_labels_obj = TemplateBuildLabels(
+            free=_require_str(_free_raw, "label", "Free Build") or "Free Build",
+            paid=_require_str(_paid_raw, "label", "Paid Build") or "Paid Build",
+        )
+
     # Pattern 2: label registries — top-level [[traits.labels]] / [[flags.labels]]
     trait_labels: List[TemplateTraitLabel] = []
     traits_raw = data.get("traits")
@@ -2776,9 +2926,14 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         trait_labels=trait_labels,
         flag_labels=flag_labels,
         tips_page=tips_page_obj,
+        # These two kwargs are the silent-no-op step: parse the block, forget the
+        # kwarg, and the feature vanishes with no error anywhere. Covered by a test.
+        cheat_page=cheat_page_obj,
+        build_labels=build_labels_obj,
         # Doc 69 Item 3 — parse-time field-name mismatch errors collected
         # by the effect-context validators at the 5 effect parse sites.
         _parse_errors=_parse_errors,
+        _cheat_raw_rows=_cheat_raw_rows,
     )
 
 
@@ -3498,6 +3653,180 @@ def validate(template: GameTemplate) -> List[str]:
                             f"{ctx}: row '{r}' but NPC '{np_npc_id}' has no '{r}' in core_traits "
                             f"(declare it before use)"
                         )
+
+    # ── Cheat page ([ui.cheat_page]) ───────────────────────────────────────────
+    # Placed here so the sidebar-item scan above is still in scope: "is this trait
+    # banded?" is answered from [[sidebar_items]], and an uncapped grant on a banded
+    # trait is the one failure that silently DELETES a HUD row.
+    if template.cheat_page is not None:
+        cp = template.cheat_page
+
+        # (owner, trait) -> top band max. inf when a band omits 'max' (open-ended
+        # top band), which means no cap can be derived and none is required.
+        _banded: Dict[tuple, float] = {}
+        for item in template.sidebar_items or []:
+            if not isinstance(item, dict):
+                continue
+            if item.get("type") not in ("trait_words", "trait_bar", "trait_status_text"):
+                continue
+            _bands = item.get("bands")
+            if not isinstance(_bands, list) or not _bands:
+                continue
+            _bt = item.get("trait")
+            if not isinstance(_bt, str) or not _bt:
+                continue
+            _owner = item.get("trait_owner", "player")
+            _key = (item.get("npc_id") or "player") if _owner == "npc" else "player"
+            _maxes = [b.get("max") for b in _bands if isinstance(b, dict)]
+            _top = float("inf") if (_maxes and _maxes[-1] is None) else max(
+                (m for m in _maxes if isinstance(m, (int, float))), default=float("inf")
+            )
+            prev = _banded.get((_key, _bt))
+            _banded[(_key, _bt)] = _top if prev is None else max(prev, _top)
+
+        _hidden_traits = {tl.key for tl in template.trait_labels if tl.hidden}
+
+        if not cp.grants:
+            errors.append(
+                "[ui.cheat_page] is authored but declares no [[ui.cheat_page.grants]] rows — "
+                "the page would render a title and nothing else (add rows or remove the block)"
+            )
+        if not template.build_labels:
+            errors.append(
+                "[ui.cheat_page] is authored but [builds.free].label / [builds.paid].label are "
+                "missing — every build must be identifiable in the sidebar footer (declare both; "
+                "`--build free|paid` picks which one ships)"
+            )
+        # The sidebar, setup.infoPages and setup.commitMoment are all emitted inside
+        # the time-system section, which the generator only appends when time is
+        # enabled. Without it the button has nowhere to live and a grant could not
+        # commit — so this is a hard requirement, not a warning.
+        if template.time is not None and not template.time.enabled:
+            errors.append(
+                "[ui.cheat_page] requires [time] enabled = true — the sidebar button and the "
+                "info-page machinery the grants commit through are only emitted for "
+                "time-enabled games"
+            )
+
+        _seen_rows: Dict[tuple, int] = {}
+        _raw_rows = template._cheat_raw_rows or []
+        for i, g in enumerate(cp.grants):
+            ctx = f"ui.cheat_page.grants[{i}]"
+            raw = _raw_rows[i] if i < len(_raw_rows) else {}
+
+            if not g.label:
+                errors.append(
+                    f"{ctx}: 'label' is required (non-empty string) — it is the ONLY row text "
+                    f"the free build emits"
+                )
+            if not g.trait:
+                errors.append(f"{ctx}: 'trait' is required (string)")
+            if g.targetType not in ("player", "npc"):
+                errors.append(
+                    f"{ctx}: 'targetType' must be 'player' or 'npc', got '{g.targetType}' "
+                    f"(the cheat page writes traits only)"
+                )
+            if g.op not in ("add", "set"):
+                errors.append(
+                    f"{ctx}: 'op' must be 'add' or 'set', got '{g.op}' "
+                    f"(the cheat page writes traits only)"
+                )
+            if not isinstance(g.value, (int, float)) or isinstance(g.value, bool):
+                errors.append(f"{ctx}: 'value' must be a number, got {g.value!r}")
+
+            # owner resolution + NPC existence
+            _owner_key = "player"
+            if g.targetType == "npc":
+                if not g.npcId:
+                    errors.append(f"{ctx}: 'npcId' is required when targetType='npc'")
+                elif g.npcId not in _npc_ids_for_sidebar:
+                    errors.append(f"{ctx}: npcId '{g.npcId}' not found in NPC definitions")
+                else:
+                    _owner_key = g.npcId
+                    _npc = next((n for n in template.npcs if n.id == g.npcId), None)
+                    if _npc is not None and g.trait and g.trait not in (_npc.core_traits or {}):
+                        errors.append(
+                            f"{ctx}: NPC '{g.npcId}' has no '{g.trait}' in core_traits "
+                            f"(declare it before use)"
+                        )
+            elif g.trait and g.trait not in _player_trait_keys:
+                errors.append(
+                    f"{ctx}: trait '{g.trait}' not found in [player.core_traits] "
+                    f"(declare it with an initial value before use)"
+                )
+
+            # duplicates — two rows writing the same meter is a UI bug, not a feature
+            if g.trait:
+                _dup_key = (_owner_key, g.trait, g.op)
+                if _dup_key in _seen_rows:
+                    errors.append(
+                        f"{ctx}: duplicate cheat row for trait '{g.trait}' "
+                        f"(already declared at ui.cheat_page.grants[{_seen_rows[_dup_key]}])"
+                    )
+                else:
+                    _seen_rows[_dup_key] = i
+
+            # authored-key hygiene — catches subject/trait_key/operator mixups
+            errors.extend(_validate_effect_field_names(raw, ctx))
+
+            # causal state is out of bounds, by design
+            for _bad in (
+                "flag", "flagEffects", "flag_effects", "quest", "questEffects",
+                "questId", "stage", "nodeId", "targetPassage", "effects", "costs",
+                "time_progression_minutes", "itemEffects",
+            ):
+                if _bad in raw:
+                    errors.append(
+                        f"{ctx}: field '{_bad}' is not allowed on a cheat-page row — the page "
+                        f"grants TRAITS ONLY (no flags, no quests, no items, no scene jumps). "
+                        f"Causality lives in the game, not in a cheat row."
+                    )
+
+            if g.trait:
+                # <slug>_stage and friends are arc counters wearing a number
+                if _classify_stage_trait(g.trait, _trait_registries_for_validate) is not None:
+                    errors.append(
+                        f"{ctx}: trait '{g.trait}' is a stage/arc counter — never grant one from "
+                        f"the cheat page (advance the arc, don't set the number). Exclusive bands "
+                        f"and first-time clauses skip forever once jumped."
+                    )
+                if g.trait in _hidden_traits:
+                    errors.append(
+                        f"{ctx}: trait '{g.trait}' is declared hidden in [[traits.labels]] (an "
+                        f"internal counter) — the cheat page grants player-facing traits only"
+                    )
+
+                # banding: the cap rules
+                _ceiling = _banded.get((_owner_key, g.trait))
+                if _ceiling is not None and _ceiling != float("inf"):
+                    if g.cap is None:
+                        errors.append(
+                            f"{ctx}: trait '{g.trait}' is banded by a sidebar item but the row "
+                            f"declares no 'cap' — an uncapped grant can push the value past the "
+                            f"top band, which makes a trait_status_text row VANISH from the "
+                            f"sidebar and drops a trait_bar's band overlay. Add cap = {int(_ceiling)}."
+                        )
+                    elif g.cap > _ceiling:
+                        errors.append(
+                            f"{ctx}: cap {g.cap} exceeds the top band max ({int(_ceiling)}) for "
+                            f"trait '{g.trait}' — a cap above the last band leaves the value unbanded"
+                        )
+                    if not g.clamp:
+                        errors.append(
+                            f"{ctx}: clamp = false is not allowed on banded trait '{g.trait}' — "
+                            f"without the 0-100 clamp the value escapes every band"
+                        )
+                    if g.op == "set" and isinstance(g.value, (int, float)) and g.value > _ceiling:
+                        errors.append(
+                            f"{ctx}: op = 'set' writes {g.value} to banded trait '{g.trait}', "
+                            f"above its top band max ({int(_ceiling)}) — the sidebar row would vanish"
+                        )
+                if g.cap is not None and g.cap > 100 and g.clamp:
+                    errors.append(
+                        f"{ctx}: cap {g.cap} is above 100 but clamp is true — the engine clamps to "
+                        f"0-100 BEFORE applying the cap, so the cap is unreachable "
+                        f"(set clamp = false for an unbounded resource)"
+                    )
 
     # locations
     loc_ids = [l.id for l in template.locations]
@@ -5859,6 +6188,41 @@ def _assemble_project_metadata(project, template):
         project.metadata["tips_page"] = {
             "title": template.tips_page.title,
             "content": template.tips_page.content,
+        }
+    # Player cheat page. The FULL row data goes here — hints, values, caps and all.
+    # Metadata never reaches the output file; the free/paid split happens at
+    # emission, so this dict is safe to carry everything the paid build needs.
+    if template.cheat_page:
+        cp = template.cheat_page
+        project.metadata["cheat_page"] = {
+            "title": cp.title,
+            "intro": cp.intro,
+            "button_label": cp.button_label,
+            "button_icon": cp.button_icon,
+            "locked_note": cp.locked_note,
+            "grants": [
+                {
+                    "label": g.label,
+                    "trait": g.trait,
+                    "value": g.value,
+                    "targetType": g.targetType,
+                    "npcId": g.npcId,
+                    "op": g.op,
+                    "cap": g.cap,
+                    "clamp": g.clamp,
+                    "hint": g.hint,
+                    "button_text": g.button_text,
+                    "at_cap_text": g.at_cap_text,
+                }
+                for g in cp.grants
+            ],
+        }
+    # Build labels for the sidebar footer badge. Absent = no badge, which keeps
+    # every game that predates this feature byte-identical.
+    if template.build_labels:
+        project.metadata["build_labels"] = {
+            "free": template.build_labels.free,
+            "paid": template.build_labels.paid,
         }
     # Store theme if defined
     if template.theme:

@@ -13,6 +13,27 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-07-26
+- **Documented the new `--build free|paid` flag** in the two places that publish the build command line —
+  `references/beat-authoring.md` (the "Prove green" block) and `references/media.md` §3 (QA vs publish
+  build). **Why:** the flag ships the engine's new first-class cheat page (`[ui.cheat_page]`), and it
+  **defaults to `free`** — so an author who never reads about it still produces the safe artifact, but one
+  who wants the supporter build needs to know it exists. These two files are the *real* callers: the skills
+  shell out to `manage.py package_from_toml`, so a flag missing from here is a flag nobody uses. Both notes
+  record the tripwire — a `paid` build is refused into any directory named `output` (git-tracked, PUBLIC
+  repo) and must go to a gitignored `games/<slug>/output-paid/` — and that both builds come from ONE merged
+  TOML, never an edited source. **Verified:** `package_from_toml --build paid --output games/vesper/output
+  --dry-run` raises the CommandError; `--build bogus` dies in argparse; `git check-ignore` confirms
+  `games/*/output-paid/` is ignored.
+- ⚠️ **Still owed (tracked, not yet done): `ship-gate.md` §3 is stale.** The supply/demand studies of
+  2026-07-26 refuted four of its eight claims, and it still specifies the cheat page as hand-authored TOML
+  with a `[settings] cheat_grants` switch — both superseded by the engine feature. Two new doctrine rules
+  also need a home: **an `lt`-only gate is a WINDOW too** (raising a trait past it deletes the alternative
+  route — measured in Vesper's burned yard, where buying stealth removes the fight/emitter/flee routes), and
+  **random/substitution bands are never step-safe** (reachability is chance × in-band dwell, so any step can
+  skip them). Evidence: `games/vesper/design_cheat_page.md` §13 + the memory notes
+  `cheat_page_mechanism_study` / `cheat_demand_study`.
+
 ## 2026-07-25
 - **Batch F — PROMOTED 8 proven gaps from The Inheritance's staging log into the skill** (the last batch of
   the doctrine pass). Sources: `games/the_inheritance/skill_gaps_observed.md`, whose entries are written

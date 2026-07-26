@@ -141,6 +141,11 @@ and `search_queries` so the missing-media page is a usable list, and check cover
   `[IMAGE MISSING]`/`[VIDEO MISSING]` text into the file; `--dev` leaks dev controls. Minimal publish build:
   `python manage.py package_from_toml --file <toml> --output <dir> --video-folder <media-dir>` (no `--owner-id`
   — the no-DB build is the default).
+- **`--build free|paid`** — cheat-page variant, **default `free`**, so a publish build is the safe one unless
+  you say otherwise. Only affects games that author `[ui.cheat_page]`. A **paid** build carries live cheat
+  grants and must be written to a gitignored `games/<slug>/output-paid/`; the command refuses to write one
+  into any directory named `output` (that path is tracked in a PUBLIC repo). Two builds come from ONE
+  merged TOML — never edit the source between them.
 
 ---
 

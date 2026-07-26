@@ -62,6 +62,14 @@ class TweeComprehensiveGeneratorV2:
     Completely isolated from other generation systems.
     """
 
+    # Build variant for the cheat page — "free" (padlocked labels, no effects in the
+    # output) or "paid" (live rows). Class-level so the throwaway instances that only
+    # call validate_flag_chains(), which never set options, can still read it.
+    # Default-free is enforced HERE as well as in argparse: several callers reach
+    # generate() without passing a build, and none of them should be able to produce
+    # a paid file by accident.
+    build_variant = "free"
+
     def __init__(self):
         self.project = None
         # No-DB build (the DEFAULT): when set, the generator reads this in-memory
@@ -124,6 +132,9 @@ class TweeComprehensiveGeneratorV2:
         self.video_path = self.options.get("video_path")  # Direct path mode
         self.debug = self.options.get("debug", False)
         self.dev_mode = self.options.get("dev_mode", False)
+        # Only the exact string "paid" opts in. Anything else — missing, None, a typo
+        # that slipped past argparse, a caller that never heard of this flag — is free.
+        self.build_variant = "paid" if self.options.get("build") == "paid" else "free"
         if self.video_folder:
             self._load_media_files()
 
@@ -185,6 +196,12 @@ class TweeComprehensiveGeneratorV2:
         # Add missing media page (always generated, but button only shows in debug mode)
         twee_sections.append(self._generate_missing_media_page())
 
+        # Player cheat page + its sidebar button widget. Emitted as its OWN section,
+        # deliberately not inside _generate_time_system() — that section is only
+        # appended when [time] enabled, and the widget must be defined unconditionally
+        # (SugarCube throws on an undefined widget call from StoryCaption).
+        twee_sections.append(self._generate_cheat_page())
+
         # Add canvas review pages (only in dev mode)
         if self.dev_mode:
             twee_sections.append(self._generate_canvas_review_pages())
@@ -204,7 +221,63 @@ class TweeComprehensiveGeneratorV2:
         # the underlying JS functions are dead code — purge them.
         output = self._strip_sidebar_mechanism_if_v2(output)
 
+        # Last gate before the file leaves the generator: prove the emitted cheat page
+        # matches the variant we were asked to build. Raises rather than returning a
+        # quietly-wrong file.
+        self._assert_build_variant_integrity(output)
+
         return output
+
+    def _assert_build_variant_integrity(self, output: str) -> None:
+        """Fail the build if the cheat page doesn't match self.build_variant.
+
+        Why an assertion and not a regex strip: a strip that under-matches ships a
+        leaked file that still looks green. An assertion cannot fail quietly — and the
+        thing being protected (a free build containing working cheat grants, in a
+        PUBLIC repo) is not something to discover after publishing.
+
+        Cheap belt-and-braces over `_generate_cheat_page`, which already emits the
+        right thing. This catches a future edit that breaks it.
+        """
+        if not self.cheat_page:
+            return
+
+        grants = self.cheat_page.get("grants") or []
+        # Scope to the CheatPage passage. Splitting on the passage delimiter keeps a
+        # canvas's legitimate applyAndNotifyTrait calls out of the comparison.
+        section = ""
+        for chunk in output.split("\n:: "):
+            if chunk.startswith("CheatPage\n") or chunk == "CheatPage":
+                section = chunk
+                break
+
+        if self.build_variant == "paid":
+            found = section.count("setup.applyAndNotifyTrait(")
+            if found != len(grants):
+                raise RuntimeError(
+                    f"cheat page integrity: paid build emitted {found} grant call(s) for "
+                    f"{len(grants)} authored row(s). A paid build with dead rows must not ship."
+                )
+            return
+
+        # FREE build — nothing executable, and no paid-only copy anywhere in the file.
+        for token in ("setup.applyAndNotifyTrait", "<<script>>", "advanceTime", "cheat-hint"):
+            if token in section:
+                raise RuntimeError(
+                    f"cheat page integrity: FREE build contains '{token}' in the CheatPage "
+                    f"passage. The free build must carry padlocked labels only — no working "
+                    f"effects can be present in a file that ships publicly."
+                )
+        # The paid-only strings are unique authored copy; if any reached the output, the
+        # free/paid split has leaked somewhere other than the page body.
+        for i, g in enumerate(grants):
+            for field in ("hint", "button_text", "at_cap_text"):
+                text = (g.get(field) or "").strip()
+                if text and text in output:
+                    raise RuntimeError(
+                        f"cheat page integrity: FREE build leaked paid-only copy — "
+                        f"grants[{i}].{field} appears in the output."
+                    )
 
     def _strip_sidebar_mechanism_if_v2(self, output: str) -> str:
         """PRD 48 — Remove sidebar hint JS functions and widget branch
@@ -1117,6 +1190,13 @@ class TweeComprehensiveGeneratorV2:
         # Tips page — game-level mechanics surface. Empty dict = page + sidebar
         # button not emitted. Authored under [ui.tips_page] in TOML.
         self.tips_page = (self.project.metadata or {}).get("tips_page", {}) or {}
+        # Player cheat page — empty dict = page + sidebar button not emitted.
+        # Authored under [ui.cheat_page]. WHICH VARIANT ships is self.build_variant,
+        # a build-time argument, never a value in here.
+        self.cheat_page = (self.project.metadata or {}).get("cheat_page", {}) or {}
+        # Sidebar footer build badge, from [builds.free] / [builds.paid]. Empty =
+        # no badge at all, which keeps pre-existing games' output byte-identical.
+        self.build_labels = (self.project.metadata or {}).get("build_labels", {}) or {}
         # Theme (visual customization)
         raw_theme = (self.project.metadata or {}).get("theme", {})
         self.theme = self._resolve_theme(raw_theme)
@@ -9573,6 +9653,152 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 
         return content
 
+    def _generate_cheat_page(self) -> str:
+        """Emit the player cheat page + its sidebar button widget.
+
+        Two variants, chosen by self.build_variant (a BUILD argument, never a TOML
+        value — two builds come from one commit):
+
+          free — each row is a label and a padlock. No macros, no effects, and no
+                 runtime config object. The row's `hint` never reaches the file, so a
+                 free player learns no threshold, place or route from the page.
+          paid — each row is a link that writes its trait, with the hint text and an
+                 at-cap guard.
+
+        The `cheatButton` widget is ALWAYS defined (empty when there is no cheat page),
+        because StoryCaption calls it unconditionally and SugarCube throws on an
+        undefined widget.
+
+        NOTE the deliberate absence of a `setup.cheat_page = {...}` ship line. Mirroring
+        the tips_page pattern here would put every trait, value, cap and hint string
+        into the FREE file — the house pattern is exactly the wrong thing to copy. All
+        text is baked into the passage markup instead.
+        """
+        cp = self.cheat_page or {}
+        # Widget first — defined in both cases so StoryCaption never calls a ghost.
+        if not cp:
+            return ':: CheatWidgets [widget nobr]\n<<widget "cheatButton">><</widget>>\n'
+
+        title = html.escape(cp.get("title") or "Cheats")
+        btn_label = html.escape(cp.get("button_label") or cp.get("title") or "Cheats")
+        btn_icon = html.escape(cp.get("button_icon") or "")
+        intro = cp.get("intro") or ""            # ships in BOTH variants
+        locked_note = cp.get("locked_note") or ""  # free only
+        grants = cp.get("grants") or []
+        is_paid = self.build_variant == "paid"
+
+        icon_span = f'<span class="nav-i">{btn_icon}</span>' if btn_icon else ""
+        widget = (
+            ':: CheatWidgets [widget nobr]\n'
+            '<<widget "cheatButton">>\n'
+            '<div id="cheat-btn-widget">\n'
+            f'  <<if passage() isnot "CheatPage">><<link "{btn_label}" "CheatPage">><</link>>'
+            f'<<else>><span class="nav-row">{btn_label}</span><</if>>{icon_span}\n'
+            '</div>\n'
+            '<</widget>>\n'
+        )
+
+        # The badge tells a supporter which file they are holding — the commonest
+        # complaint in the studied games was people unable to tell.
+        badge_label = ""
+        if self.build_labels:
+            badge_label = (
+                self.build_labels.get("paid") or "Paid Build" if is_paid
+                else self.build_labels.get("free") or "Free Build"
+            )
+        badge = f' <span class="build-badge">{html.escape(badge_label)}</span>' if badge_label else ""
+
+        rows = [self._cheat_row_markup(g, is_paid) for g in grants]
+
+        body = [
+            ":: CheatPage",
+            "<<nobr>>",
+            f"<h2>{title}{badge}</h2>",
+            '<div class="npc-section">',
+        ]
+        if intro:
+            body.append(f'<div class="cheat-intro">{html.escape(intro)}</div>')
+        body.extend(rows)
+        if not is_paid and locked_note:
+            body.append(f'<div class="cheat-locked-note">{html.escape(locked_note)}</div>')
+        body.append("</div>")
+        body.append("<</nobr>>")
+        # The back link is the ONLY macro on a free page.
+        body.append('<<link "← Back">><<run setup.smartBack()>><</link>>')
+
+        return widget + "\n" + "\n".join(body) + "\n"
+
+    def _cheat_row_markup(self, g: dict, is_paid: bool) -> str:
+        """One cheat row. Free = a padlocked label; paid = a live self-navigating link."""
+        label = html.escape(str(g.get("label") or ""))
+        if not is_paid:
+            # Label + padlock. Nothing executable, and no hint text — a free player
+            # learns no threshold, place or route from this page.
+            return (
+                f'  <div class="cheat-row is-locked">'
+                f'<span class="cheat-label">{label}</span>'
+                f'<span class="cheat-lock">🔒</span></div>'
+            )
+
+        target = "npc" if g.get("targetType") == "npc" else "player"
+        npc_js = f'"{g.get("npcId")}"' if target == "npc" else "null"
+        trait = g.get("trait")
+        op = g.get("op") or "add"
+        value = g.get("value")
+        cap = g.get("cap")
+        clamp_js = "true" if g.get("clamp", True) else "false"
+        cap_js = "null" if cap is None else self._fmt_num(cap)
+        val_js = self._fmt_num(value)
+
+        # Button text: authored, or composed so it reads like the effect it applies.
+        btn = g.get("button_text") or (
+            f"{g.get('label')} → {self._fmt_num(value)}" if op == "set"
+            else f"{g.get('label')} {'+' if (value or 0) >= 0 else '−'}{self._fmt_num(abs(value or 0))}"
+        )
+        btn = html.escape(str(btn))
+
+        # At-cap guard, evaluated at RENDER — which is why every row navigates to
+        # itself: only a re-render can grey a row the instant it reaches its ceiling.
+        # Without this the row stays lit and silently does nothing, which is the
+        # failure the studied games generate support threads over.
+        read = f'setup.getTraitValue("{target}", {npc_js}, "{trait}")'
+        if op == "set":
+            guard = f"{read} isnot {val_js}"
+        elif cap is not None:
+            guard = f"{read} lt {cap_js}"
+        else:
+            guard = ""   # unbounded resource — always available
+
+        grant = (
+            f'<<link "{btn}" "CheatPage">><<script>>setup.pendingEffects = [];'
+            f'setup.applyAndNotifyTrait("{target}", {npc_js}, "{trait}", "{op}", '
+            f'{val_js}, {clamp_js}, {cap_js});setup.showEffectNotification();'
+            f'<</script>><</link>>'
+        )
+        hint = g.get("hint") or ""
+        hint_div = f'<div class="cheat-hint">{html.escape(hint)}</div>' if hint else ""
+        at_cap = html.escape(str(g.get("at_cap_text") or "Already at the ceiling."))
+
+        if not guard:
+            return f'  <div class="cheat-row">{grant}{hint_div}</div>'
+        return (
+            f'  <div class="cheat-row">\n'
+            f'    <<if {guard}>>{grant}{hint_div}\n'
+            f'    <<else>><span class="cheat-row-maxed">{btn}</span>'
+            f'<div class="cheat-at-cap">{at_cap}</div>\n'
+            f'    <</if>>\n'
+            f'  </div>'
+        )
+
+    @staticmethod
+    def _fmt_num(n) -> str:
+        """Render a number for SugarCube without a stray trailing .0 on whole values."""
+        try:
+            f = float(n)
+        except (TypeError, ValueError):
+            return "0"
+        return str(int(f)) if f == int(f) else str(f)
+
     def _generate_missing_media_page(self) -> str:
         """Generate the Missing Media Page passage for debug mode."""
         if not self.missing_media:
@@ -14812,6 +15038,11 @@ window.devGoBack = function() {
             info_pages_list += ', "RentDay", "RentDay_Paid", "RentDay_Short"'
         if has_location_costs:
             info_pages_list += ', "TravelBlock"'
+        # The cheat page MUST be registered: setup.commitMoment refuses to publish a
+        # moment on any passage isRerenderSafe() rejects, so without this every grant
+        # is lost on save/refresh. Membership also keeps Back from landing on it.
+        if self.cheat_page:
+            info_pages_list += ', "CheatPage"'
         info_pages_list += ']'
 
         info_nav_script = """:: InfoPageNav [script]
@@ -15118,9 +15349,29 @@ $(document).on(':passagestart', function(ev) {
         _rel = html.escape((self.project.metadata or {}).get("release_date", "") or "")
         _footer_parts = ([f"v{_ver}"] if _ver else []) + ([_rel] if _rel else [])
         _footer_text = " · ".join(_footer_parts)
+        # Build badge — which file the player is holding.
+        #
+        # Emitted ONLY when [builds] is authored, for BOTH variants. That looks like it
+        # risks an unlabelled paid file, but it can't: validate() requires [builds]
+        # whenever [ui.cheat_page] is authored, so every build that has cheats to
+        # protect is labelled. Gating both variants the same way buys the property that
+        # actually matters — a game without this feature produces byte-identical output
+        # no matter what --build says, so the 14 existing games cannot be disturbed.
+        _badge_label = ""
+        if self.build_labels:
+            _badge_label = (
+                self.build_labels.get("paid") or "Paid Build"
+                if self.build_variant == "paid"
+                else self.build_labels.get("free") or "Free Build"
+            )
+        _badge = (
+            f'<span class="build-badge">{html.escape(_badge_label)}</span>'
+            if _badge_label else ""
+        )
+        _footer_inner = " · ".join(x for x in [_footer_text, _badge] if x)
         version_footer_widget = (
-            f'\n<<widget "versionFooter">>\n<div class="sidebar-version">{_footer_text}</div>\n<</widget>>\n'
-            if _footer_text else '\n<<widget "versionFooter">><</widget>>\n'
+            f'\n<<widget "versionFooter">>\n<div class="sidebar-version">{_footer_inner}</div>\n<</widget>>\n'
+            if _footer_inner else '\n<<widget "versionFooter">><</widget>>\n'
         )
         if self.dev_mode:
             story_caption = f""":: StoryCaption
@@ -15133,6 +15384,7 @@ $(document).on(':passagestart', function(ev) {
 <<activeModifiers>>
 <<journalButton>>
 <<tipsButton>>
+<<cheatButton>>
 <<statsButton>>
 <<scheduleButton>>
 <<flagsButton>>
@@ -15148,6 +15400,7 @@ $(document).on(':passagestart', function(ev) {
 <<activeModifiers>>
 <<journalButton>>
 <<tipsButton>>
+<<cheatButton>>
 <<statsButton>>
 <<scheduleButton>>
 <<playerTraits>>
@@ -16170,6 +16423,7 @@ if (clothingMsg) {
 #quests-btn-widget,
 #journal-btn-widget,
 #tips-btn-widget,
+#cheat-btn-widget,
 #stats-btn-widget,
 #schedule-btn-widget,
 #flags-btn-widget {
@@ -16181,8 +16435,8 @@ if (clothingMsg) {
 }
 /* the clickable fill: <a> in nav state, .nav-row span on the current page */
 #phone-sidebar-btn a,
-#quests-btn-widget a, #journal-btn-widget a, #tips-btn-widget a, #stats-btn-widget a, #schedule-btn-widget a, #flags-btn-widget a,
-#quests-btn-widget .nav-row, #journal-btn-widget .nav-row, #tips-btn-widget .nav-row, #stats-btn-widget .nav-row, #schedule-btn-widget .nav-row, #flags-btn-widget .nav-row {
+#quests-btn-widget a, #journal-btn-widget a, #tips-btn-widget a, #cheat-btn-widget a, #stats-btn-widget a, #schedule-btn-widget a, #flags-btn-widget a,
+#quests-btn-widget .nav-row, #journal-btn-widget .nav-row, #tips-btn-widget .nav-row, #cheat-btn-widget .nav-row, #stats-btn-widget .nav-row, #schedule-btn-widget .nav-row, #flags-btn-widget .nav-row {
     display: block;
     width: 100%;
     box-sizing: border-box;
@@ -16193,7 +16447,7 @@ if (clothingMsg) {
     font-weight: 600;
 }
 #phone-sidebar-btn a:hover,
-#quests-btn-widget a:hover, #journal-btn-widget a:hover, #tips-btn-widget a:hover, #stats-btn-widget a:hover, #schedule-btn-widget a:hover, #flags-btn-widget a:hover {
+#quests-btn-widget a:hover, #journal-btn-widget a:hover, #tips-btn-widget a:hover, #cheat-btn-widget a:hover, #stats-btn-widget a:hover, #schedule-btn-widget a:hover, #flags-btn-widget a:hover {
     color: var(--theme-accent);
     text-decoration: none;
 }
@@ -16241,6 +16495,54 @@ if (clothingMsg) {
     font-size: 11px;
     color: var(--theme-text-muted, #8a8a8a);
     text-align: center;
+}
+/* Cheat page rows. Flat and mechanical by design — this page is read as a list of
+   levers, not as prose, so the fiction lives on the container and the rows stay legible. */
+.cheat-intro {
+    margin-bottom: 12px;
+    color: var(--theme-text-muted, #8a8a8a);
+    font-size: 13px;
+}
+.cheat-row {
+    padding: 7px 0;
+    border-bottom: 1px solid var(--theme-border, #2a2a2a);
+}
+.cheat-row:last-of-type { border-bottom: none; }
+.cheat-row.is-locked {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0.55;
+}
+.cheat-label { font-weight: 600; }
+.cheat-lock { font-size: 12px; }
+.cheat-hint, .cheat-at-cap {
+    margin-top: 2px;
+    color: var(--theme-text-muted, #8a8a8a);
+    font-size: 12px;
+}
+.cheat-row-maxed {
+    font-weight: 600;
+    opacity: 0.5;
+}
+.cheat-locked-note {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--theme-border, #2a2a2a);
+    color: var(--theme-text-muted, #8a8a8a);
+    font-size: 12px;
+}
+/* Build badge — names which file the player is holding (free vs supporter build).
+   Rides inside .sidebar-version and is reused on the cheat page's heading. */
+.build-badge {
+    display: inline-block;
+    padding: 0 5px;
+    border: 1px solid var(--theme-border, #3a3a3a);
+    border-radius: 3px;
+    font-size: 10px;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    color: var(--theme-text-muted, #8a8a8a);
 }
 
 /* Reduce gap between StoryCaption and Save/Restart menu */

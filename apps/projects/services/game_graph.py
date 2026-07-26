@@ -547,6 +547,7 @@ def build_game_from_toml(
     name_override: Optional[str] = None,
     system_type: str = "twee_comprehensive",
     version: str = "v2",
+    build: str = "free",
 ) -> dict:
     """Build a game HTML package from a single TOML file with ZERO database interaction.
 
@@ -584,7 +585,12 @@ def build_game_from_toml(
         if fc_errors:
             raise ValueError(f"Flag chain validation failed: {fc_errors}")
 
-    options = {"dev_mode": True} if dev_mode else None
+    # Rewritten from `{"dev_mode": True} if dev_mode else None` — it could only ever
+    # carry one key. `build` defaults to "free", so a caller that has never heard of
+    # the cheat page cannot produce a paid file.
+    options = {"build": "paid" if build == "paid" else "free"}
+    if dev_mode:
+        options["dev_mode"] = True
     return GameService().package_game(
         project=graph.project,
         system_type=system_type,
