@@ -30,7 +30,7 @@
 
 | # | Item | Priority | Status | Depends on |
 |---|------|----------|--------|------------|
-| 1 | Walkthrough-grade quest cards | P1 pre-ship | TODO | — |
+| 1 | Walkthrough-grade quest cards | P1 pre-ship | ✅ DONE 2026-07-26 (rev 23; goals[] labels + terminal frames; live-tested 46/46) | — |
 | 2 | Player cheat page | P1 pre-ship | TODO | — |
 | 3 | Ambient-heat layer (elision fix + wallpaper) | P1 pre-ship | TODO | media harvest |
 | 4 | Meter-ceiling audit | P1 pre-ship | TODO | — |
@@ -48,6 +48,18 @@ final media harvest if LO wants it in the ship build (it adds canvases + media s
 ---
 
 ## Item 1 — Walkthrough-grade quest cards
+
+> **✅ BUILT 2026-07-26 (rev 23).** A render-model audit refined the scope: the Quests *page*
+> already carried `ready_text` + `tip` (mostly walkthrough-grade), but the always-visible sidebar
+> per-NPC "next" panel renders ONLY the goal block, so with almost no `goals[]` it was **dark for
+> the whole game** — and the one `goals[]` (Audrey b2) **leaked a raw meter** ("Surrender — N/8").
+> Per skill `quests.md` §3 (walkthrough rides `goals[].label`): added a **numberless flag goal** to
+> each of the 13 active bands (goal flag = the band's own advance milestone → goal-met and band-exit
+> coincide, no blank rows) and **`terminal = true`** to the 6 final bands (→ "✓ Arc complete"); fixed
+> the Audrey b2 leak; added 2 cosmetic hidden flags (`aud_surrendered`, `ric_wants_you`) so the 2
+> stage-gated bands light the sidebar without a number; tightened 2 tips. Edited `2_one_shots.toml`
+> + `5_scenes.toml` only. Live-tested **46/46**. The scope below (append a line to card `text`) was
+> superseded — on this engine `text` mostly doesn't render for active cards; the goal block does.
 
 **Why.** Guidance-lostness is the genre's #1 complaint (median 4.7% of ALL comments;
 report F1). Winners ship literal walkthroughs in-game: New Lust has per-NPC pages with

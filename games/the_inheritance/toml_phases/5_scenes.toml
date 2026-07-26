@@ -1356,6 +1356,9 @@ effects = [
   { targetType = "npc", npcId = "npc_audrey", trait = "corruption", op = "add", value = 1, cap = 10 },
   { targetType = "player", trait = "arousal", op = "add", value = 1, cap = 10 },
 ]
+flagEffects = [
+  { targetType = "player", flag = "aud_surrendered", op = "set" },
+]
 
 # ── Capstone 4 — "She got the boy" (the real win; the knife) -> danny_here ─────
 [[canvases]]
@@ -2976,6 +2979,9 @@ effects = [
   { targetType = "player", trait = "richard_stage", op = "set", value = 2 },
   { targetType = "npc", npcId = "npc_richard", trait = "corruption", op = "add", value = 1, cap = 10 },
   { targetType = "player", trait = "arousal", op = "add", value = 1, cap = 10 },
+]
+flagEffects = [
+  { targetType = "player", flag = "ric_wants_you", op = "set" },
 ]
 
 # ══════════════════════════════════════════════════════════════════════════════

@@ -74,6 +74,9 @@ priority   = 100
 when = [
   { flag = "hotel_in_hand", op = "is_false" },
 ]
+goals = [
+  { flag = "hotel_in_hand", op = "is_true", label = "Earn on the floor in the Lobby, then get Lorna talking at the Bar — evenings." },
+]
 
 # ─── The will reading (beat_0004) — the wound made concrete ────────────────────
 # Auto-fires when you go up to the Drawing Room on day 1 (Margaret invited you to sit
@@ -149,6 +152,9 @@ when = [
   { flag = "hotel_in_hand",  op = "is_true"  },
   { flag = "richard_signed", op = "is_false" },
 ]
+goals = [
+  { flag = "richard_signed", op = "is_true", label = "Warm Richard in the Study, daytime, until he signs the deed over." },
+]
 
 # ── Story-Goals spine: Act-2 LATE (richard_signed .. margaret_broken) — make it earn + finish ─
 # Item 6 — split from the single Act-2 card on richard_signed (the real phase boundary: the back
@@ -162,6 +168,9 @@ when = [
   { flag = "richard_signed",  op = "is_true"  },
   { flag = "margaret_broken", op = "is_false" },
 ]
+goals = [
+  { flag = "margaret_broken", op = "is_true", label = "Buy Grayson out, then break Margaret in the Drawing Room — afternoons." },
+]
 
 # ── Story-Goals spine: the frontier card (the current peak + the greyed next-hook) ─
 [[quest_cards]]
@@ -172,6 +181,7 @@ priority   = 90
 when = [
   { flag = "margaret_broken", op = "is_true" },
 ]
+terminal = true
 
 # ── AUDREY — stepped climb (the lessons) ──────────────────────────────────────
 [[quest_cards]]
@@ -183,6 +193,9 @@ priority   = 50
 when = [
   { flag = "aud_opened_up",   op = "is_true"  },
   { flag = "aud_lessons_open", op = "is_false" },
+]
+goals = [
+  { flag = "aud_lessons_open", op = "is_true", label = "Pay Audrey's tuition ($800) in her room, evenings — then let her ask to be taught." },
 ]
 
 [[quest_cards]]
@@ -196,7 +209,7 @@ when = [
   { trait = "audrey_stage", subject = "player", op = "lt", value = 3 },
 ]
 goals = [
-  { trait = "corruption", subject = "npc", npc_id = "npc_audrey", op = "gte", value = 8, label = "Surrender" },
+  { flag = "aud_surrendered", op = "is_true", label = "Take Audrey up the ladder in her room, evenings — kiss, toy, going down." },
 ]
 
 [[quest_cards]]
@@ -209,6 +222,9 @@ when = [
   { trait = "audrey_stage", subject = "player", op = "gte", value = 3 },
   { flag = "group_open", op = "is_false" },
 ]
+goals = [
+  { flag = "group_open", op = "is_true", label = "Let Audrey have Danny, then open the study group — her room, evenings." },
+]
 
 [[quest_cards]]
 text       = "She shares everyone, cheerfully, and never once minds. The gateway's open — the family threesomes wait only on the men being yours."
@@ -219,16 +235,20 @@ priority   = 50
 when = [
   { flag = "group_open", op = "is_true" },
 ]
+terminal = true
 
 # ── GRAYSON — milestone chain (prey → flipped → bought out) ────────────────────
 [[quest_cards]]
 text       = "Your half-brother thinks the estate is his and you're beneath him — beneath enough to put his hands on you while you're still nobody. Let him. Bank every liberty."
 ready_text = "You can't touch him yet. Get the money, learn his debts, then name the price."
-tip        = "Needs the hotel in hand + Lorna's tip on his gambling."
+tip        = "Bank his liberties for now — you can't move until the hotel's yours and Lorna's told you his debts (the Bar, evenings)."
 npc_id     = "npc_grayson"
 priority   = 45
 when = [
   { flag = "grayson_flipped", op = "is_false" },
+]
+goals = [
+  { flag = "grayson_flipped", op = "is_true", label = "Get his debts from Lorna at the Bar (evenings), then corner Grayson in the Drawing Room — afternoons." },
 ]
 
 [[quest_cards]]
@@ -241,6 +261,9 @@ when = [
   { flag = "grayson_flipped",    op = "is_true"  },
   { flag = "grayson_bought_out", op = "is_false" },
 ]
+goals = [
+  { flag = "grayson_bought_out", op = "is_true", label = "Put Grayson to work in the Drawing Room, afternoons — menial, then degrading." },
+]
 
 [[quest_cards]]
 text       = "Yours for nothing. The man who pawed at you when you were nobody holds your coat while you take the rest of the family, and says thank you."
@@ -251,6 +274,7 @@ priority   = 45
 when = [
   { flag = "grayson_bought_out", op = "is_true" },
 ]
+terminal = true
 
 # ── RICHARD — milestone chain (warming → wanting → the keys) ───────────────────
 [[quest_cards]]
@@ -263,6 +287,9 @@ when = [
   { trait = "richard_stage", subject = "player", op = "lt", value = 2 },
   { flag = "richard_signed", op = "is_false" },
 ]
+goals = [
+  { flag = "ric_wants_you", op = "is_true", label = "Sit with Richard in the Study, daytime — get him eating, let it turn warm." },
+]
 
 [[quest_cards]]
 text       = "He's alive again, and he wants you, and he throws himself at the hotel to deserve you. He'd rather support you than lead. The keys are close."
@@ -274,6 +301,9 @@ when = [
   { trait = "richard_stage", subject = "player", op = "gte", value = 2 },
   { flag = "richard_signed", op = "is_false" },
 ]
+goals = [
+  { flag = "richard_signed", op = "is_true", label = "Take Richard the whole way in the Study — he'll sign the deed over." },
+]
 
 [[quest_cards]]
 text       = "He signed the kingdom over and asked only to stay at your side. Yours, and glad of it. You never lied to him — you just let him be right about everything except you."
@@ -284,6 +314,7 @@ priority   = 44
 when = [
   { flag = "richard_signed", op = "is_true" },
 ]
+terminal = true
 
 # ── MARGARET — WAR-framed (watching → cornered → broken), NO seduction bar ─────
 [[quest_cards]]
@@ -294,6 +325,9 @@ npc_id     = "npc_margaret"
 priority   = 43
 when = [
   { flag = "margaret_cornered", op = "is_false" },
+]
+goals = [
+  { flag = "margaret_cornered", op = "is_true", label = "You can't touch Margaret yet — sign Richard and buy Grayson out; she falls when they do." },
 ]
 
 [[quest_cards]]
@@ -306,6 +340,9 @@ when = [
   { flag = "margaret_cornered", op = "is_true"  },
   { flag = "margaret_broken",   op = "is_false" },
 ]
+goals = [
+  { flag = "margaret_broken", op = "is_true", label = "Break Margaret in the Drawing Room, afternoons — bring the intoxicant from the Adult Shop." },
+]
 
 [[quest_cards]]
 text       = "The queen who came to own everyone, owned by all of them. Working the vice-floor she schemed to run, in silence, eyes down when you pass."
@@ -316,6 +353,7 @@ priority   = 43
 when = [
   { flag = "margaret_broken", op = "is_true" },
 ]
+terminal = true
 
 # ── LORNA — the on-ramp (light) ───────────────────────────────────────────────
 [[quest_cards]]
@@ -327,13 +365,17 @@ priority   = 40
 when = [
   { flag = "lorna_opened_up", op = "is_false" },
 ]
+goals = [
+  { flag = "lorna_opened_up", op = "is_true", label = "See Lorna at the Bar — evenings, 6 to midnight." },
+]
 
 [[quest_cards]]
 text       = "Your one real ally, and the only person on your side. She hands you the ideas and the knife — the comped favours, the real books, your brother's debts. She's never bedded, never bought."
 ready_text = "Keep her close. She's the on-ramp to everything."
-tip        = "The bar, evenings. Her hub tiers up as the business grows."
+tip        = "The bar, evenings. Once the house is yours, she'll talk partnership."
 npc_id     = "npc_lorna"
 priority   = 40
 when = [
   { flag = "lorna_opened_up", op = "is_true" },
 ]
+terminal = true
