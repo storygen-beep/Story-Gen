@@ -103,11 +103,15 @@ type  = "trait_bar"
 trait = "exhibitionism"
 label = "Exhibitionism"
 max   = 100
+# Item 4 (meter-ceiling audit) — 3 tiers, each mapping to a DELIVERED town-reaction beat: base /
+# Daring (gte 25) / Bold (gte 50). The old 4th band "Shameless" (75-100) promised a tier the game
+# never ships (nothing keys off exhibitionism above 50; the portrait bands on corruption+clothing,
+# not this meter). DO NOT re-add a top band without authoring content above 50 (logged as an Item-8
+# candidate: a gte-75 reader for p_react_town). The bar still fills to 100 = Bold.
 bands = [
-  { min = 0,  max = 24,  text = "Covered"   },
-  { min = 25, max = 49,  text = "Daring"    },
-  { min = 50, max = 74,  text = "Bold"      },
-  { min = 75, max = 100, text = "Shameless" },
+  { min = 0,  max = 24,  text = "Covered" },
+  { min = 25, max = 49,  text = "Daring"  },
+  { min = 50, max = 100, text = "Bold"    },
 ]
 
 [[sidebar_items]]

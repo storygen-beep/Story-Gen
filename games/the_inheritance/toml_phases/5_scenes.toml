@@ -84,7 +84,7 @@ type = "choices"
 text       = "Have a word."
 targetType = "location"
 locationId = "loc_hotel_bar"
-effects = [ { targetType = "npc", npcId = "npc_lorna", trait = "relation", op = "add", value = 1 } ]
+effects = [ { targetType = "npc", npcId = "npc_lorna", trait = "relation", op = "add", value = 1, cap = 100 } ]
 
 [[canvases.nodes.exit_block.choices]]
 text          = "\"Show me the real books.\""
@@ -417,7 +417,7 @@ type = "choices"
 text       = "Sit with her a while."
 targetType = "location"
 locationId = "loc_audrey_room"
-effects = [ { targetType = "npc", npcId = "npc_audrey", trait = "relation", op = "add", value = 1 } ]
+effects = [ { targetType = "npc", npcId = "npc_audrey", trait = "relation", op = "add", value = 1, cap = 100 } ]
 
 # The tuition pay — locked-visible until she's confessed AND you can cover it. The
 # money>=800 condition gates + greys the display; the effect deducts. Sets the hook.
@@ -761,7 +761,7 @@ text = "Keep her company a minute."
 destinationType          = "specific"
 locationId               = "loc_audrey_room"
 time_progression_minutes = 10
-effects = [ { targetType = "npc", npcId = "npc_audrey", trait = "relation", op = "add", value = 1 } ]
+effects = [ { targetType = "npc", npcId = "npc_audrey", trait = "relation", op = "add", value = 1, cap = 100 } ]
 
 # ── aud_amb_phone — on the phone to Danny (her room, eve) ──────────────────────
 [[canvases]]
@@ -879,7 +879,7 @@ text = "Sit with her."
 destinationType          = "specific"
 locationId               = "loc_kitchen"
 time_progression_minutes = 15
-effects = [ { targetType = "npc", npcId = "npc_audrey", trait = "relation", op = "add", value = 1 } ]
+effects = [ { targetType = "npc", npcId = "npc_audrey", trait = "relation", op = "add", value = 1, cap = 100 } ]
 
 # ── aud_amb_kitchen — up late, unarmored (kitchen, late) ───────────────────────
 [[canvases]]
@@ -922,7 +922,7 @@ text = "Keep her company."
 destinationType          = "specific"
 locationId               = "loc_kitchen"
 time_progression_minutes = 20
-effects = [ { targetType = "npc", npcId = "npc_audrey", trait = "relation", op = "add", value = 1 } ]
+effects = [ { targetType = "npc", npcId = "npc_audrey", trait = "relation", op = "add", value = 1, cap = 100 } ]
 
 # ══════════════════════════════════════════════════════════════════════════════
 # beat_0011b — AUDREY: the Lane-3 "HOMEWORK" (the DOMINANT lane; the arc's real
@@ -1406,7 +1406,7 @@ text       = "Go and meet Danny."
 targetType = "location"
 locationId = "loc_audrey_room"
 flagEffects = [ { targetType = "player", flag = "danny_here", op = "set" } ]
-effects = [ { targetType = "npc", npcId = "npc_audrey", trait = "relation", op = "add", value = 1 } ]
+effects = [ { targetType = "npc", npcId = "npc_audrey", trait = "relation", op = "add", value = 1, cap = 100 } ]
 
 # ── Capstone 5 — "Study group" (Wave-1 threesome you+Audrey+Danny) -> group_open ─
 [[canvases]]

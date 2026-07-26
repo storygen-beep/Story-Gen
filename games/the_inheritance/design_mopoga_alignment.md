@@ -33,7 +33,7 @@
 | 1 | Walkthrough-grade quest cards | P1 pre-ship | ✅ DONE 2026-07-26 (rev 23; goals[] labels + terminal frames; live-tested 46/46) | — |
 | 2 | Player cheat page | P1 pre-ship | TODO | — |
 | 3 | Ambient-heat layer (elision fix + wallpaper) | P1 pre-ship | TODO | media harvest |
-| 4 | Meter-ceiling audit | P1 pre-ship | TODO | — |
+| 4 | Meter-ceiling audit | P1 pre-ship | ✅ DONE 2026-07-26 (rev 25; audit clean on seduction ladders; exhibitionism rebanded + 2 unbounded meters capped; live-tested 16/16) | — |
 | 5 | Nightly ledger at sleep | P1 pre-ship | ✅ DONE 2026-07-26 (rev 24; 5 flag-gated ledger lines + re-added `worked_floor_today`; live-tested 58/58) | (grows with #6) |
 | 6 | Hotel accumulation loop | P2 design-change | ✅ DONE 2026-07-26 (rev 22; derived `hotel_level`; live-tested 26/26) | #5 helps |
 | 7 | Soft consequences (world with teeth) | P2 **PENDING LO CALL** | BLOCKED on decision | — |
@@ -204,6 +204,18 @@ build has NO --debug/--dev and greps MISSING==0).
 ---
 
 ## Item 4 — Meter-ceiling audit
+
+> **✅ BUILT 2026-07-26 (rev 25).** 3-pass read-only audit of all 25 traits (global / per-NPC /
+> stage+derived, source TOML not the filtered `trait_effects` preview). **Headline: the game is
+> CLEAN on the insult that matters** — no seduction/corruption ladder gates a scene above its
+> reachable ceiling (grayson `gte 10`==cap 10; audrey/richard `gte 8` cap 10 overshoot-but-satisfied;
+> margaret leverage `gte 5` cap 10). Band coverage complete, no gaps. **One visible flag fixed:**
+> exhibitionism's bar filled to a "Shameless" band (75-100) that gated nothing above 50 and had no
+> portrait payoff → rebanded to 3 delivered tiers (Covered/Daring/**Bold** 50-100), display-only, the
+> `p_react_town` gates untouched (live-tested 16/16). **Two unbounded invisible integers capped:**
+> `npc_audrey.relation` + `npc_lorna.relation` were uncapped+repeatable (climbed forever) → `cap = 100`
+> (matching the trait's existing convention at 5_scenes:4606/4685; functionally inert — audrey gates at
+> `gte 1`, lorna at nothing). Dead-but-bounded meters logged to Item 8 below. Build green, media-neutral.
 
 **Why.** Family Business: players accept brutal repetition while every bar-fill buys a
 new act — the moment a maxed meter returns "she is not ready," the loop reads as a
@@ -403,6 +415,15 @@ house grows — natural fit ON TOP of Item 6's levels: new faces appear at level
 Each: 2–3 canvas micro-ladders (feeder-economy shapes per content-design.md), portrait
 bucket, schedule row. NOT core arcs, no quests beyond maybe one shared "the house's
 people" card.
+
+**▸ Candidates logged from the Item-4 audit (dead-but-bounded meters — a meter that drives
+nothing; either author a gate that consumes it or remove it):**
+- `npc_audrey.arousal`, `npc_grayson.arousal`, `npc_richard.arousal` — daily +1 drift (cap 3),
+  zero gates anywhere. Designed throttle ("resets at climax") but nothing reads them.
+- `npc_richard.relation` — grantable to cap 100, zero gates.
+- **exhibitionism `gte 75` reader for `p_react_town`** — Item 4 rebanded the sidebar to stop at
+  Bold; if the ratchet deserves a real top beat, author a Shameless-band town-reaction rung and
+  restore the 4th band (the reband comment in `0_systems_spec.toml` flags this).
 
 **Gotchas.** Inserting `[[npcs]]` — a new NPC inserted BETWEEN an existing NPC and its
 `[[npcs.schedules]]` silently re-attaches the schedule to the wrong NPC and the build
