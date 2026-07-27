@@ -89,4 +89,10 @@ window.GAMES = [
     dev: true,
     summary: `A short test build for NPC name/relationship customization and variable syntax.`,
   },
+  {
+    slug: "media_lab",
+    title: "Media Lab",
+    dev: true,
+    summary: `Not a game — a rig. One page, ten media slots, each probing a different way a media search fails: eye contact, withheld tease, flash-vs-strip, a load-bearing dark setting, an unshown finish, an affect gate, a people count, a position, a partner who must stay visible, and one SFW still. Round 2 of the find-media query study; three slots carry old-doctrine queries as a hidden control.`,
+  },
 ];
