@@ -13,6 +13,52 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-07-27 (later still) — `scene_semantics.py` classifier: vocabulary hole + two weak-evidence bugs
+
+Reported symptom was one slot: `blowbang ring of men standing around one woman` classified
+**static + vanilla**, so the validator recommended a `.jpg` for a gangbang clip and asked to
+down-grade it to `_base`. The symptom was one slot; the cause was three.
+
+- **Root cause — the multi-partner family was entirely absent from the vocabulary.**
+  `blowbang`, `gangbang`, `bukkake`, `threesome`, `foursome`, `orgy`, `double penetration`,
+  `spitroast` were unknown to BOTH `ANIMATED_KEYWORDS` and `RATING_HARD_NSFW`. With no strong
+  signal anywhere in the blob, a single incidental word decided both axes. Also added
+  `cumshot`, and added `anal`/`deepthroat`/`rimjob`/`titjob`/`squirt`/`pegging`/`doggystyle`
+  to the ANIMATED set — those were rated NSFW but never marked as motion, so a `.jpg` version
+  of any of them passed the format check unflagged. Tease band (`downblouse`, `upskirt`,
+  `nipslip`) added as animated + borderline.
+  **Bare `facial` is deliberately animated-only, NOT rated** — it is a spa treatment in a
+  domestic beat, and the rating set drives an AUTO retag. Verified: a spa-facial beat now
+  reads `unknown` → `leave`, while `facial cumshot` auto-retags correctly.
+- **Bug 2 — a lone posture word could decide both axes.** New `WEAK_STATIC_KEYWORDS`
+  (`standing`, `sitting`, `watching`): they classify static only when corroborated by a real
+  static keyword, and they are **out of `RATING_SFW` entirely**. Alone they now yield
+  `ambiguous` / `unknown`, which means "accept the author's extension, leave the tag".
+  This is the fail-safe: an act word we have not thought of can no longer be overruled by
+  the word "standing".
+- **Bug 3 — found while regression-testing, same class, worse.** `LOCATION_KEYWORDS`
+  (`kitchen`, `bedroom`, `office`, …) were in `RATING_SFW`, so a room name was treated as
+  evidence a scene is vanilla. Live example: `sex/calloway_finish_facial_t5.webm` — "a man
+  finishing on a kneeling woman's face in a dim office" — rated **SFW on the single word
+  `office`**, and the validator asked to down-grade it to `_base`. Its sibling
+  `renner_finish_facial_t5` escaped only by accident, because its query happened to contain
+  `cumshot`. `STATIC_KEYWORDS` is now `ACTIVITY_STATIC_KEYWORDS | LOCATION_KEYWORDS` and
+  `RATING_SFW` is built from the ACTIVITY set only — locations still drive FORMAT (an empty
+  kitchen is a still) and no longer touch RATING.
+
+**Verified across 287 real items in two shipped games, old vs new:**
+vesper format-OK **151→157/172**, "need your call" **4→0** (all four were false positives,
+including two facial slots the old code wanted to make SFW); the_inheritance gained exactly
+one format flag, `scenes/gray_pegging.jpg`, which is a **true** positive the old vocabulary
+could not see. Domestic regressions hold (dinner/reading/empty-room still static+sfw).
+media_lab now Format OK **10/10** with no retag prompts. `validate_queries.py` re-exports
+still resolve; the other three scripts unaffected.
+
+**Note for a later pass, not acted on:** vesper's confident auto-retags went 50→66, i.e. 16
+more untagged-but-explicit files are now detected (`sex/salvage_session_*_fuck.webm`,
+`sex/cell_turns_used_and_pissed_on.webm` …). That is real tagging debt in the game, not a
+classifier problem. `apply_retags.py` was deliberately NOT run — that is an authoring call.
+
 ## 2026-07-27 (later) — doctrine corrected by the media_lab 10-slot study
 
 The v2 rewrite below shipped with a query-craft rationale that turned out to be **partly

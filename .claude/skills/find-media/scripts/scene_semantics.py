@@ -38,15 +38,34 @@ SEXUAL_TERMS_FOR_SFW_CHECK = {
 # Content-family classification — drives format (image vs animated) independent of tier.
 # Tier gates explicitness (what can be shown). Family gates motion (how it should be shown).
 
-STATIC_KEYWORDS = {
+# Activities that are genuinely still AND genuinely vanilla — the only words that are
+# valid evidence on BOTH the format axis and the rating axis.
+ACTIVITY_STATIC_KEYWORDS = {
     "dinner", "lunch", "breakfast", "meal", "cooking", "cook", "eating",
     "chores", "cleaning", "dishes", "laundry", "tidying",
-    "talking", "conversation", "chat", "sitting", "standing", "watching",
+    "talking", "conversation", "chat",
     "reading", "studying", "working",
     "greeting", "arrival", "departure", "goodbye",
-    "kitchen", "bedroom", "office", "garage", "backyard", "porch",
     "coffee", "wine", "food",
 }
+
+# Where the scene happens. Valid evidence for FORMAT (an establishing shot of a kitchen
+# is a still) and NO evidence at all for RATING — a bedroom is where sex happens, and an
+# office hosted both vesper facial beats. Measured 2026-07-27: `calloway_finish_facial_t5`
+# ("a man finishing on a kneeling woman's face in a dim office") rated SFW on the single
+# word "office" and the validator asked to down-grade it to _base. Its sibling
+# `renner_finish_facial_t5` escaped only because its query happened to contain "cumshot".
+LOCATION_KEYWORDS = {"kitchen", "bedroom", "office", "garage", "backyard", "porch"}
+
+STATIC_KEYWORDS = ACTIVITY_STATIC_KEYWORDS | LOCATION_KEYWORDS
+
+# Posture / attention words that mean "still" ONLY when nothing stronger is present.
+# They are NOT evidence of a static scene on their own: "standing" appears in standing
+# sex, standing doggy, and "a ring of men standing around one woman". Measured 2026-07-27:
+# the query `blowbang ring of men standing around one woman` classified as static+vanilla
+# on the strength of this single word, recommending a .jpg for a gangbang clip and
+# proposing a down-grade to _base. A lone posture word must never decide either axis.
+WEAK_STATIC_KEYWORDS = {"standing", "sitting", "watching"}
 
 ANIMATED_KEYWORDS = {
     # Kisses — motion = chemistry
@@ -66,8 +85,20 @@ ANIMATED_KEYWORDS = {
     "sex", "fuck", "fucking", "thrusting",
     "riding", "grinding",
     "blowjob", "handjob", "fingering", "cunnilingus", "oral", "eating out",
-    "missionary", "doggy", "cowgirl", "spooning", "bent over",
+    "missionary", "doggy", "doggystyle", "cowgirl", "spooning", "bent over",
     "cum", "creampie", "orgasm", "climax",
+    # Finish acts — the aftermath is motion, and a still cannot show it happening
+    "cumshot", "cum shot", "facial", "bukkake",
+    # Multi-partner family — was entirely absent, which is how a gangbang query got
+    # classified as a static domestic scene off the word "standing" (2026-07-27)
+    "blowbang", "gangbang", "gang bang", "threesome", "foursome", "orgy",
+    "double penetration", "spitroast", "spit roast",
+    # Acts that were rated NSFW but never marked as motion, so a .jpg version of one
+    # would pass the format check unflagged
+    "anal", "deepthroat", "rimjob", "rimming", "titjob", "titfuck",
+    "squirt", "squirting", "pegging",
+    # Tease band — withholding only reads in motion; a still of a lean is just a photo
+    "downblouse", "upskirt", "nipslip",
 }
 
 # Content-RATING buckets — drive the SFW/NSFW routing decision (which pipeline).
@@ -80,16 +111,31 @@ RATING_NUDITY = {
     "undress", "undressing", "strip", "stripping", "flash", "flashing",
 }
 # Stock genuinely can't serve these → confident NSFW.
-RATING_HARD_NSFW = SEXUAL_TERMS_FOR_SFW_CHECK | RATING_NUDITY | {"anal", "deepthroat"}
+# NOTE: bare "facial" is deliberately NOT here — it is a spa treatment in a domestic
+# beat, and this set drives an AUTO retag. It lives in ANIMATED_KEYWORDS (format) only;
+# the rating signal comes from "cumshot", which is unambiguous.
+RATING_HARD_NSFW = SEXUAL_TERMS_FOR_SFW_CHECK | RATING_NUDITY | {
+    "anal", "deepthroat", "cumshot", "cum shot",
+    "blowbang", "gangbang", "gang bang", "bukkake", "threesome", "foursome", "orgy",
+    "double penetration", "spitroast", "spit roast",
+    "rimjob", "rimming", "titjob", "titfuck", "squirt", "squirting", "pegging",
+    "doggystyle",
+}
 # Clothed→explicit span; only the author knows the heat → default to ASK.
 RATING_BORDERLINE = {
     "kiss", "kissing", "makeout", "make out", "making out", "snog", "french kiss",
     "tease", "teasing", "seduce", "seducing", "grind", "grinding",
     "caress", "grope", "fondle", "straddle", "in bed", "lingerie",
     "bathe", "bathing", "bath", "shower", "showering", "washing",
+    # Tease band: clothed, withheld — explicit enough that stock can't serve it,
+    # not explicit enough to grade the heat without the author. See media_sources.md.
+    "downblouse", "upskirt", "cleavage", "nipslip",
 }
-# Vanilla → stock is fine.
-RATING_SFW = STATIC_KEYWORDS | {
+# Vanilla → stock is fine. Deliberately built from ACTIVITY_STATIC_KEYWORDS, NOT
+# STATIC_KEYWORDS: LOCATION_KEYWORDS and WEAK_STATIC_KEYWORDS are excluded because
+# neither a room nor a posture is evidence that a scene is vanilla. Both exclusions were
+# earned by a real false down-grade prompt on an explicit t5 slot.
+RATING_SFW = ACTIVITY_STATIC_KEYWORDS | {
     "flirt", "flirting", "hug", "hugging", "embrace", "holding hands", "hold hands",
     "cuddle", "cuddling", "smile", "date", "greet", "wave",
 }
@@ -151,14 +197,22 @@ def classify_content_family(description: str, search_queries: list[str]) -> tupl
     Any animated-keyword hit wins — kiss/tease/nudity/sex scenes need motion to land.
     Static scenes (domestic, conversational, location shots) only classify as static when
     they match static keywords AND don't match any animated keyword.
+
+    A WEAK_STATIC_KEYWORDS hit alone is NOT enough to call a scene static — it returns
+    'ambiguous', which the format check treats as "accept the author's extension". This
+    fails safe: an unrecognised act word can no longer be overruled by the word "standing".
     """
     blob = " ".join([description] + list(search_queries)).lower()
-    animated_hits = sorted({kw for kw in ANIMATED_KEYWORDS if re.search(rf"\b{re.escape(kw)}\b", blob)})
+
+    def hits(words: set[str]) -> list[str]:
+        return sorted({kw for kw in words if re.search(rf"\b{re.escape(kw)}\b", blob)})
+
+    animated_hits = hits(ANIMATED_KEYWORDS)
     if animated_hits:
         return "animated", animated_hits
-    static_hits = sorted({kw for kw in STATIC_KEYWORDS if re.search(rf"\b{re.escape(kw)}\b", blob)})
+    static_hits = hits(STATIC_KEYWORDS)
     if static_hits:
-        return "static", static_hits
+        return "static", static_hits + hits(WEAK_STATIC_KEYWORDS)
     return "ambiguous", []
 
 
@@ -210,6 +264,10 @@ def classify_content_rating(description: str, search_queries: list[str]) -> tupl
     signal ∈ {hard_nsfw, borderline, sfw, unknown}. This is the ROUTING evidence
     (which pipeline) — separate from classify_content_family (the still-vs-animated
     FORMAT axis). hard_nsfw wins, then borderline, then sfw, else unknown.
+
+    WEAK_STATIC_KEYWORDS are not in RATING_SFW, so a lone posture word yields 'unknown'
+    and propose_tag leaves the author's tag alone — rather than asking to down-grade a
+    t5 to base because the description contained the word "standing".
     """
     blob = " ".join([description] + list(search_queries)).lower()
 
