@@ -152,8 +152,11 @@
     }
 
     // ---- proxy preview (browser never hits the source domain directly) ----
+    // A local option (a previously-installed pick, url "/games/…") is same-origin and
+    // must NOT go through the proxy — the proxy's SSRF guard blocks loopback hosts.
     function proxied(u) {
       if (!u) return u;
+      if (u.charAt(0) === "/") return API + u;
       var src = /redgifs\.com/i.test(u) ? "redgifs" : "";
       return API + "/api/v1/dev/media-finder/proxy?url=" + encodeURIComponent(u) + "&source=" + src;
     }
@@ -221,7 +224,9 @@
       var body = el("div", "tile-body");
       var meta = el("div", "tile-meta");
       meta.appendChild(el("span", "type-badge" + (isVideo ? " vid" : ""), opt.type || "image"));
-      meta.appendChild(document.createTextNode(" " + domainOf(opt.url)));
+      // A demoted former pick has no source domain — label it so it reads as an undo.
+      meta.appendChild(document.createTextNode(
+        " " + (opt.origin === "previous" ? "previous pick" : domainOf(opt.url))));
       body.appendChild(meta);
 
       var status = el("div", "tile-status");
@@ -249,7 +254,10 @@
       var source = /redgifs\.com/i.test(opt.url) ? "redgifs" : "";
       fetch(API + "/api/v1/dev/media-finder/grab", {
         method: "POST",
-        body: JSON.stringify({ game: GAME, file: FILE, url: opt.url, source: source })
+        body: JSON.stringify({
+          game: GAME, file: FILE, url: opt.url,
+          local_path: opt.local_path || "", source: source
+        })
       }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
         .then(function (res) {
           if (!res.ok || !res.j.success) {
@@ -263,7 +271,10 @@
           statusEl.textContent = "saved → " + res.j.file_path;
           btn.textContent = "Saved ✓";
           toast("Saved to " + res.j.file_path, "ok");
-          clearReviewStatus();
+          // grab now clears the verdict and shelves the replaced file server-side;
+          // reload so the demoted pick shows up as an option straight away.
+          lastSig = null;
+          loadOptions();
         })
         .catch(function () {
           statusEl.className = "tile-status err";

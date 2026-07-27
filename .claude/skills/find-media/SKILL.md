@@ -1,95 +1,162 @@
 ---
 name: find-media
-description: Find and download missing media (images and video clips) for a story game. Reads the game's TOML, detects per-item content rating from tier (base/t2/t3 = SFW, t4+ = NSFW), validates and rewrites search queries, retrieves candidates in parallel (WebSearch for SFW, Playwright+Tor+PornHub for NSFW), scores candidates with a visual rubric, runs a critique loop on failures, and downloads via the game's dev API. Use this skill whenever the user says "find media for <game>", "download missing media", "populate media", "/find-media", or when a game TOML has media blocks with search_queries and the corresponding files don't exist on disk. Also use when an existing run needs to resume — the skill persists evidence and state to disk so crashed or interrupted runs recover cleanly.
+description: Find missing media (images and animated clips) for a story game AND stock a shelf of alternates for the human to pick from. Enumerates missing files from the game's TOML plus the game-review API, detects per-item content rating from the `_tN` tier suffix, hunts the vocabulary the beat is actually named by, searches by driving the user's own Chrome (Google Images — the only retrieval route), extracts original CDN urls with one regex, stocks 6+ candidate options per slot in the media-finder options store, frame-strip verifies animated finalists, and installs one best-guess pick via the game's dev API so the game always renders. Use whenever the user says "find media for <game>", "download missing media", "populate media", "missing media", "/find-media", or when a game TOML has media blocks whose files don't exist on disk. Also use to resume an interrupted run, to refetch a slot whose installed pick the user rejected (a refetch stocks the fresh candidates, then prunes the stale ones), or to audit the media a game already has.
 ---
 
 # find-media
 
-Find missing media for one game, run-to-run recoverable, with deterministic query rewriting and a critique loop for failures.
+**You are a scout stocking a shelf, not a judge handing down a verdict.**
+
+The old version of this skill searched, scored, installed, and threw everything else away.
+It was wrong in a specific, measurable way: the user's winning clip was POV, wrong room,
+black-and-white and 264px wide, and the old rubric would have binned it at zero before he
+ever saw it. The spec-perfect clip it installed instead was correct and dead.
+
+So the job changed. You are not here to prove a clip is hot with a number. You are here to
+**stop discarding hot clips before the human sees them.**
+
+## The deliverable contract
+
+Every worked slot ends with **both**:
+
+1. **A working file installed** — the game never renders a hole. This is your best guess,
+   frame-strip verified if it's animated, and you say out loud in your report that it is a
+   guess.
+2. **≥6 options stocked** in the media-finder options store — the human flips through them
+   in the review UI and picks.
+
+Six is a floor, not a target. A slot with 3 options is a rubber stamp with extra steps.
+NSFW slots stock 12 because the frame strip kills roughly half (measured: 3 of 5 and 4 of
+6, two independent rounds). Per-mode counts live in one place — §Mode.
+
+You may never: auto-pick silently, present a single candidate, install an **animated** file
+you have not frame-stripped, or drop a candidate for any reason other than a named gate
+failure. A static `.jpg` — a location, a garment — cannot be stripped; those finalists are
+judged from the contact sheet, and that is the whole exception.
+
+**A refetch REBUILDS the shelf, it never appends — but it STOCKS FIRST and PRUNES AFTER.**
+Take `t0 = now()` as ISO-8601, stock the new candidates, *then*
+`POST options/clear {game, file, before: t0}`. Never clear on the way in: a clear-first
+refetch whose search then comes back thin leaves the slot with nothing and the old pool
+gone. That exact ordering once silently ate three harvests. **Never destroy a candidate
+pool before its replacement exists.** Pruning afterwards still gets you the thing appending
+would cost — the human never flips past a clip he already rejected, so he keeps trusting
+the shelf, which is the only decider you have.
 
 ## When this triggers
 
-Trigger conditions (any one):
-- User says "find media for <game>", "/find-media <game>", "populate media", "missing media"
-- A TOML file at `games/<game>/toml_phases/6_final_game.toml` or `apps/game_generation/games_toml_files/<game>.toml` contains `search_queries` fields with no matching file on disk
-- User asks to resume a prior find-media run (state lives in `games/<game>/.find-media/`)
+Any one of:
+- User says "find media for \<game>", "/find-media \<game>", "populate media", "missing media"
+- A game TOML declares media whose files don't exist on disk
+- User asks to resume a prior run (state lives in `games/<game>/.find-media/`)
+- User rejected an installed pick and wants the slot refetched
+- User wants an existing game's media audited → `references/audit_mode.md`
 
-Do NOT trigger on: general questions about game design, TOML schema questions, questions about the tier system that aren't about downloading. Answer those directly.
+Do NOT trigger on: game-design questions, TOML schema questions, or tier-system questions
+that aren't about downloading. Answer those directly.
 
 ## Decision tree — before any work
 
-1. Is there a resolvable TOML for this game? If not, ask for the path and stop.
-2. Is the Django dev server running on `localhost:8000`? If not, remind the user to run `python manage.py runserver` and stop.
-3. Fetch the authoritative missing-media list from the game-review API:
+1. **Resolve the TOML.** `games/<game>/toml_phases/*_final_game.toml` — `7_final_game.toml`
+   in current games, `6_` in older ones (`under_one_roof`, `two_weeks`). Glob it, don't
+   hardcode the number. If nothing resolves, ask for the path and stop.
+2. **Is the Django dev server up on `localhost:8000`?** If not, tell the user to run
+   `python manage.py runserver` and stop. Everything downstream — the missing list, the
+   options store, the install — is an HTTP call to it. The in-page `fetch` that stocks
+   options fails *silently* against a dead server, so check first rather than discover it
+   after a harvest.
+3. **Fetch the missing list:**
    ```bash
    mkdir -p games/<game>/.find-media
-   curl -s "http://localhost:8000/api/v1/dev/game-review/load?game=<game>" > games/<game>/.find-media/game_review.json
+   curl -s "http://localhost:8000/api/v1/dev/game-review/load?game=<game>" \
+     > games/<game>/.find-media/game_review.json
    ```
-   Extract `missing_media` — if empty, report and stop. The API enumerates all 5 categories (canvas blocks, locations, clothing, phone posts, dating profiles) and checks three disk roots (`output/`, game root, `videos/`) to confirm absence. The list is authoritative; don't re-scan. See `references/game_review_api.md` for the contract. **Fallback** if Django is unreachable: use `scripts/validate_queries.py --toml games/<game>/toml_phases/6_final_game.toml` (walker mode; misses locations, clothing, and phone posts without queries — the 58-item blind spot the API fixes).
-4. Classify each missing item by `type` (from the API). If any have tier t5+ (canvas NSFW) — derived from the canvas items' filename `_tN` suffix — also verify Tor + Playwright + ffmpeg prerequisites (see `references/nsfw_pipeline.md` §Prerequisites). Non-canvas types (`location_image`, `clothing_image`, `social_post_image`, `dating_profile_photo`) are always SFW.
-5. **Tier audit + retag (before SCOPE).** Routing rides on the author's `_tN` suffix, which can be missing or wrong. Run `validate_queries.py` and read its `tag_proposals`: take the confident `auto_retag`s, **ASK the user** on every `ask` (borderline / down-grade), then `apply_retags.py` writes the corrected `_tN` into `toml_phases/*.toml` → re-merge + re-package + re-fetch the missing list. The corrected suffix then drives all routing. Full buckets, matrix, and commands in `references/content_rating.md`. Skip if the audit returns no proposals.
+   **No trailing slash on `load`** — a trailing slash 404s. Extract `missing_media`. It
+   enumerates 6 categories (canvas blocks, location images, clothing, phone posts, dating
+   profile photos, portraits) and confirms absence on disk. Contract in
+   `references/game_review_api.md`.
+4. **Cross-check with the TOML walker** (next section). The API is authoritative, but a
+   cheap independent walk catches anything a future TOML shape introduces before it ships
+   missing.
+5. **Classify by type.** Non-canvas types (`location_image`, `clothing_image`,
+   `social_post_image`, `dating_profile_photo`, `portrait_image`) are always SFW — they are
+   UI chrome, not scenes. Canvas `image`/`video` inherit their rating from the filename
+   `_tN` suffix.
+6. **Tier audit + retag, before SCOPE.** Routing rides on the author's `_tN` suffix, which
+   can be missing or wrong. Run `validate_queries.py`, read `tag_proposals`: take the
+   confident `auto_retag`s, **ASK the user** on every `ask`, then `apply_retags.py` writes
+   the corrected suffix into `toml_phases/*.toml` → re-merge → re-package → re-fetch the
+   missing list. Full matrix and commands in `references/content_rating.md`. Skip if there
+   are no proposals.
+
+## The TOML walk — an independent cross-check
+
+**Portraits are enumerated now.** NPC `portrait=`, `[player_portrait]` states and outfits,
+and `customization_fields` image options all arrive from the API as `portrait_image`
+(`api/v1/game_review.py`, `_add_portrait`). Verified live on vesper: 224 refs including 21
+portraits, 0 missing.
+
+That was NOT true until 2026-07-27, and the history is the reason this section still exists.
+Those assets were invisible to the API for its whole life — they surfaced only as packaging
+"File not found" errors, long after you thought you were done, which is how a new NPC's face
+kept shipping absent. Repo-wide there are **81 `portrait =` declarations** across merged
+TOMLs.
+
+So: trust the API, and still run the walk below as a cheap second opinion. It costs one
+command and it is what would have caught the portrait class years earlier.
+
+Walk the merged TOML with the full regex and diff against disk **extension-agnostically** —
+the TOML may say `.jpg` while the disk holds `.webm`, and that is normal, not a miss:
+
+```bash
+GAME=vesper
+python3 - "$GAME" <<'PY'
+import re, sys, pathlib
+game = sys.argv[1]
+root = pathlib.Path("games") / game
+toml = sorted(root.glob("toml_phases/*_final_game.toml"))[-1]
+refs = set(re.findall(r'(?:file|image|video|nav_image)\s*=\s*"([^"]+)"', toml.read_text()))
+have = {p.relative_to(root / "videos").with_suffix("").as_posix()
+        for p in (root / "videos").rglob("*") if p.is_file()}
+missing = sorted(r for r in refs if pathlib.PurePosixPath(r).with_suffix("").as_posix() not in have)
+print(f"{toml.name}: {len(refs)} refs, {len(missing)} missing")
+print("\n".join(missing))
+PY
+```
+
+**Use that exact key set.** A bare `image=` regex finds 38 of 202 refs on `vesper` —
+it misses `file=`, `video=` and `nav_image=`, which is most of the game.
+
+Anything this pass finds gets a scope brief and goes through the same phases as an
+API-listed item. Record `discovered_by: toml_walker` in the brief so a later audit can tell
+a coverage gap from a genuine miss.
 
 ## Paths — source vs compiled
 
 Two folders look similar and get confused. Keep them separate:
 
-- **`games/<game>/videos/`** — the SOURCE of truth for media. The API (`/api/v1/dev/media-capture`) writes here. Scan here when checking which items are missing. The `scene_id` you pass to the API is relative to this folder — e.g., `scenes/kiss`, not `videos/scenes/kiss` (the API strips the `videos/` prefix) and NEVER `output/videos/scenes/kiss` (the API does NOT strip `output/`, and the file would land nested wrongly at `games/<game>/videos/output/videos/scenes/kiss.ext`).
-- **`games/<game>/output/`** — the COMPILED HTML game produced by `package_from_toml`. Contains `index.html` plus a copy of `videos/`. Regenerated on every package run. Never write media here directly; it will be overwritten.
+- **`games/<game>/videos/`** — the SOURCE of truth. Every download lands here. Scan here to
+  check what's missing.
+- **`games/<game>/output/`** — the COMPILED game produced by `package_from_toml`: `index.html`
+  plus a copy of `videos/`. Regenerated on every package run. **Never write media here** —
+  it survives until the next package and then silently vanishes.
 
-When a direct curl download is required (rare — only the NSFW age-gate-expired fallback in `references/nsfw_pipeline.md`), the target is always `games/<game>/videos/<subfolder>/<file>`, never `games/<game>/output/...`.
+**The `scene_id` / `file` you pass the API is relative to `videos/`.** Say `scenes/kiss`,
+not `videos/scenes/kiss` (the API strips the `videos/` prefix), and **never**
+`output/videos/scenes/kiss` — the API does NOT strip `output/`, and the file lands nested
+wrongly at `games/<game>/videos/output/videos/scenes/kiss.ext`, where nothing will ever
+find it.
 
-## Mode selection
-
-Pick the lightest mode that fits the batch:
-
-| Mode | When | Phase budget |
-|------|------|--------------|
-| **quick** | All items are SFW base/t2/t3 tier, under 10 items | SCOPE → PLAN → RETRIEVE → EVALUATE → PACKAGE (no critique loop unless everything fails) |
-| **standard** | Mixed SFW + t4 borderline, or SFW-only over 10 items | All 5 phases including one critique cycle on failures |
-| **deep** | Any t5+ NSFW items present | All 5 phases, up to 3 critique cycles per failed item |
-
-The mode decision is per-batch. Split the batch by content rating and run SFW-first in parallel while NSFW-deep runs sequentially.
-
-**Batch cap: 5 items per pipeline slice.** `scripts/nsfw_harvest.js` enforces this at runtime for NSFW harvest. The same cap applies to SFW (per-subagent dispatch).
-
-## Batching — the batch is a pipeline slice, not just a RETRIEVE slice
-
-When the total work is bigger than the cap (say 50 missing items), do NOT run RETRIEVE 10 times in a row for all 50 before starting EVALUATE. Do NOT harvest everything first, then evaluate everything, then package everything. That's the wrong shape.
-
-**Correct shape**: each batch of 5 runs end-to-end through phases 3–6 before the next batch starts.
-
-```
-Phases 1-2 (SCOPE + PLAN)
-  run UPFRONT for all 50 items
-  ↓ they're cheap, network-free, TOML-only, no expiration concerns
-
-Batched loop (phases 3-6)
-  for each group of 5:
-    RETRIEVE (5)  →  EVALUATE (5)  →  CRITIQUE+REFINE (any that fail)  →  PACKAGE (5)
-  then next group of 5.
-```
-
-### Why the batch-as-pipeline-slice
-
-- **Harvest-to-eval gap stays tight.** If you harvest 50 NSFW items and then evaluate 50, you're looking at thumbnails 30+ minutes after they were harvested. If CRITIQUE decides an item needs a re-harvest with a new query, you're also re-harvesting under a stale Tor circuit with possibly-dead cookies. Batch-of-5 keeps that gap to minutes.
-- **Progress is durable.** After each batch completes, 5 items are fully downloaded, verified, deduped, and written to `run_manifest.json`. If the session crashes or the user interrupts, you have 5/10/15 complete — not 50 half-processed items with no final files on disk.
-- **Critique loops stay local.** When CRITIQUE triggers a delta-query and re-harvest, it's for items WITHIN the current batch, running against a still-warm Tor circuit. Across batches, the critique loop counter resets.
-- **Token budget stays sane.** CLIP ranks each item's ≤15 candidates and you view ONE montage of the top-K — so a batch of 5 is ~5 montage reads, not the ~75 individual thumbnail reads the old flow required. The 5-item cap stays for the reasons above (Tor circuits, durable progress, critique locality), but the token driver is now montage reads. See `references/clip_preranking.md`.
-- **Tor circuits match the work unit.** One circuit should ideally complete one batch. Across batches, you can request a fresh circuit (`kill -HUP $(pgrep tor)`) between groups if needed — clean rotation.
-
-### Explicit rule
-
-If N items remain to process:
-- `ceil(N / 5)` total batches
-- Each batch: RETRIEVE → EVALUATE → CRITIQUE (up to 3 cycles) → PACKAGE
-- Between batches: update `run_manifest.json`, then start the next group
-- Never start a new RETRIEVE while the previous batch's PACKAGE is incomplete
+When a manual `curl` is required, the target is always
+`games/<game>/videos/<subfolder>/<file>`.
 
 ## Format classification — image vs animated
 
-Tier gates what can be shown (base/t2/t3 SFW → t5+ NSFW). **Format gates how it's shown — and it's driven by action, not by tier.**
+Tier gates what can be *shown*. **Format gates how it's shown — and it's driven by ACTION,
+not by tier.**
 
-The rule: **motion-worthy scenes use animated (.webm / .gif / .mp4). Static scenes use images (.jpg).**
+The rule: **motion-worthy scenes use animated (`.webm` / `.gif` / `.mp4`). Static scenes use
+images (`.jpg`).**
 
 | Content class | Examples | Format |
 |---|---|---|
@@ -100,169 +167,438 @@ The rule: **motion-worthy scenes use animated (.webm / .gif / .mp4). Static scen
 | Solo body | undressing, flashing, bathing, showering, nude posing | **animated** |
 | Intimate / explicit | any NSFW act (t5+) | **animated** |
 
-A t4 kiss scene is `.webm`, not `.jpg`. A t5 tease is `.webm`. A t3 dinner is `.jpg`. A t4 "romantic candlelit dinner" can stay `.jpg` if no physical intimacy is shown.
+A t4 kiss is `.webm`, not `.jpg`. A t5 tease is `.webm`. A t3 dinner is `.jpg`. A t4
+"romantic candlelit dinner" stays `.jpg` if no physical intimacy is shown.
 
-`scripts/validate_queries.py` runs this check during PLAN phase. Keyword detection on description + search_queries. If a scene's description says "kiss" but the filename is `.jpg`, the validator flags it under FORMAT MISMATCH and surfaces the issue before RETRIEVE starts.
+`scripts/validate_queries.py` runs this check during PLAN (keyword detection over
+description + queries) and flags mismatches under FORMAT MISMATCH.
 
-**Important**: the API ignores your TOML extension and saves files using the SOURCE URL's extension (see `references/api_behavior.md`). So the format mismatch warning is really a hint to **pick the right KIND of source** during RETRIEVE — an animated URL for kiss scenes, a static image URL for dinner scenes. If you do that, the saved file will be the right type regardless of what the TOML said, and the renderer's extension-agnostic lookup handles the mismatch.
+**But the download API ignores your TOML extension and saves using the SOURCE URL's
+extension** (`references/api_behavior.md`). So a FORMAT MISMATCH warning is really a hint
+about **which KIND of source to pick** — an animated URL for the kiss, a still for the
+dinner. Do that and the saved file is right regardless of what the TOML said; the renderer
+picks `<video>` vs `<img>` from what is actually on disk. Fixing the TOML extension is
+worth doing for human clarity, but it is not a download blocker.
 
-TOML cleanup (fixing `.jpg` → `.webm` for kiss scenes) is still worth doing for human clarity, but it's not a download blocker.
+---
 
-## The five phases
+# The phase flow
 
-**Phase ordering across items**:
-- Phases 1–2 (SCOPE, PLAN) run UPFRONT for all missing items — they read the TOML, produce briefs, and rewrite queries. No network, no batching needed.
-- Phases 3–6 (RETRIEVE, EVALUATE, CRITIQUE, PACKAGE) run in pipeline slices of 5 items. See §Batching above.
+Phases 1–2 run **upfront for every item** — they're cheap, network-free, TOML-only.
+Phases 3–6 run in **pipeline slices of 5 items** (see §Batching).
 
-### 1. SCOPE (per item)
+## 1. SCOPE — write the brief
 
-Iterate `missing_media` entries from `games/<game>/.find-media/game_review.json`. For each entry, produce a scope brief using `templates/scope_brief.md`. The brief contains:
-- `item_id`, `file_path`, `type` (one of 6 API values), `category`, `canvas_id`, `order`
-- `tier` (canvas: infer from filename `_tN` suffix; non-canvas: always `base`)
-- `content_rating` (non-canvas types are always SFW; canvas inherits from tier)
-- `required_format` from `scripts/tier_format_check.py` (tier-driven for canvas, `.jpg` for non-canvas static types)
-- Narrative context — **branches by type** (see `templates/scope_brief.md`):
-  - Canvas `image`/`video`: read 2–3 TOML paragraphs before/after the block (from `games/<game>/toml_phases/6_final_game.toml`)
-  - `social_post_image`: use `description` directly (shape: `"@poster: caption"`), parse hashtags/nouns as cues
-  - `location_image`: use `description` directly (shape: `"Navigation image for {name}"`)
-  - `clothing_image`: use `description` directly (shape: `"{name} ({slot})"`)
-  - `dating_profile_photo`: use `description` + look up NPC in API response's `npcs` array for age/traits
-- `rejection_criteria` (derived from type + tier — see `references/scoring_rubric.md` and `templates/scope_brief.md`)
+For each missing item, fill `templates/scope_brief.md` → `games/<game>/.find-media/scope/<item_id>.md`.
 
-Write the brief to `games/<game>/.find-media/scope/<item_id>.md`. If the scope phase crashes, it resumes from here. The API already confirmed file absence — don't re-scan disk.
+The brief is **the only thing the search and the frame-strip check get to read.** Whatever
+you leave out, you re-derive badly two hours later in front of 40 thumbnails, from memory.
 
-### 2. PLAN
+The part that carries is **§Demand**:
 
-**Step A — synthesize queries for items with empty `search_queries`.** Phone posts, and occasionally other categories, arrive from the API with no queries declared. For each such item, write 2–3 queries from `description` + `type` + `category` using the worked examples in `references/query_rewriting.md` §Synthesizing queries. Hard constraints: `location_image` and `clothing_image` are always SFW regardless of player state. Write synthesized queries back into the item entry in `game_review.json`.
+| Field | Why it exists |
+|---|---|
+| `setting_is_load_bearing` | Decides whether the query spends words on the room AND whether the setting axis is scored at all. Test: does the setting carry **danger, secrecy, or squalor**? A dark-alley beat rejected bright clips twice; a different beat, the user said the setting "doesn't matter much here". |
+| `intended_heat` | Names the *carrier* — eye contact, being used, power, squalor, exposure. This is what makes a spec-perfect clip dead when it's missing. |
+| `must_show` / `avoid` | Frame-checkable lists. Each entry must be verifiable in one frame, because these become the strip checklist. |
+| POV case | Decided **now**, not at judging time. POV is a defect when the meaning needs the partner's body seen (a slack, watching, restrained man cannot be the camera). POV is fine, often stronger, when the power is her face and eyes aimed at the viewer. |
 
-**Step B — validate.** Run:
+The API already confirmed the file is absent — don't re-scan disk.
+
+## 2. PLAN — hunt the word, then write the queries
+
+**Step A — the word hunt.** This step did not exist in the old skill, and its absence is
+exactly why the skill never found `downblouse` for a lean-forward-cleavage beat that the
+user named in about a minute on Reddit.
+
+Trigger: **you can describe the beat in a sentence but you cannot NAME it in one word.**
+Stop and hunt. A query built from your own paraphrase inherits your own blind spot.
+Ranked yield, procedure, and the lexicon format are in `references/chrome_route.md` §1 —
+short version: Google's own result labels are the richest mine, an LLM is good only for
+modifiers and community names, and `WebSearch` and Reddit's JSON API are both dead ends.
+
+**Step B — synthesize queries for items that have none.** Phone posts and occasionally
+other categories arrive with `search_queries = []`. Write 2–3 from `description` + `type` +
+`category` using the worked examples in `references/query_rewriting.md` §Synthesizing.
+`location_image` and `clothing_image` are **always SFW**, no exceptions — they render in UI
+chrome and an adult result there is a bug in the wardrobe screen.
+
+**Step C — validate:**
 ```bash
-python .claude/skills/find-media/scripts/validate_queries.py --from-api-json games/<game>/.find-media/game_review.json
+python3 .claude/skills/find-media/scripts/validate_queries.py \
+  --from-api-json games/<game>/.find-media/game_review.json
+```
+Deterministic rewrites (banned feeling-words, direction disambiguation, solo/same-sex trap),
+tier alignment, format family. Never run a query it flags as unfixable — surface it instead.
+Offline fallback: `--toml games/<game>/toml_phases/7_final_game.toml` (canvas items only;
+misses the non-canvas categories the API covers).
+
+**Step D — write per-source query slots.** The dialects are **opposites** and ranking them
+against each other is meaningless. Google takes verbose natural language but story and
+character words poison the intent (`back alley blowjob gif drunk guy night` returned Reddit
+movie stills, Facebook and TikTok; the same query minus `drunk guy` worked). PornHub's own
+search box takes 2–3 tags and returns literally 0 at 4+ — that dialect still matters because
+its tag vocabulary is what you mine, but PornHub is **discovery-only** and you never retrieve
+a file from it (§3). Full split in `references/query_rewriting.md` Part 2.
+
+## 3. SEARCH — drive the user's own Chrome
+
+**Chrome is the only retrieval route.** You drive a browser that is already logged in with
+SafeSearch already off; you never handle a login or an age gate.
+
+One Google query surfaced nine hosts the previous route could never touch. The fetchable
+corpus below. That route only ever reached PornHub, whose media sits behind a signed url our
+extraction strips (see the next paragraph). That single source was the real ceiling, and no
+amount of query tuning was going to raise it.
+
+Two facts that make this cheap:
+- Google's result-page HTML carries the **original CDN urls**. One JS regex over
+  `document.documentElement.innerHTML` returned **54 direct URLs in a single call**.
+- The results grid **is already a contact sheet** — one screenshot shows 20–40 tiles.
+
+**PornHub is DISCOVERY-ONLY. Never queue a phncdn url for download.** A PornHub-hosted
+Google result is worth reading for its title and tags — that is where the vocabulary lives —
+and worth nothing as a candidate. Measured: `egl.phncdn.com/gif/<id>.gif` returns **470 on
+clearnet and over Tor alike**, every id tried; it is not a fetch endpoint. The real media url,
+read off a gif page, lives on `el2.phncdn.com/pics/gifs/` and is **signed, time-limited and
+IP-locked** (`validfrom` / `validto` / `ipa` / `hash` query params) — and our extraction
+strips query strings by construction, which destroys that signature. `pornhub.com` itself is
+unreachable on clearnet from this machine. Of the 54 urls in that one harvest, **exactly the
+4 phncdn ones failed**; the other 50 yielded 40 files. Skip `*.phncdn.com` as a candidate.
+
+**The fetchable corpus** — measured 200 on plain clearnet GET, no Tor, no signing, no expiry:
+`blovjob.com`, `cdn.nsfwgify.com`, `xgroovy.com`, `porngif.co`, `cdn.hardcoregify.com`,
+`cdn.xgifer.com`, `imagex1.sx.cdn.live` (sex.com), `flashingjungle.com`,
+`static-ca-cdn.eporner.com`. That is the one host list; a host Google surfaces that isn't on
+it is *surfaced, not yet characterised* — try it, record what it did, don't assume.
+
+Do NOT call `read_page` / `get_page_text` on a results page; accessibility snapshots are the
+whole reason the old browser-automation path cost ~30× the tokens per action. Exact tool
+calls, the regex, the mandatory `.split('?')[0]`, and the scroll-then-re-extract self-check
+are in `references/chrome_route.md` §§2–4. Which hosts serve what is in
+`references/media_sources.md`.
+
+Run **2–3 sibling queries per slot**, never one — different phrasings land on partly
+different host clusters, and that's how you reach 6+ options.
+
+## 4. STOCK — the step that keeps runner-ups alive
+
+**Stocking happens exactly ONCE, here, and it happens BEFORE you judge.** POST every relevant
+candidate straight from the results page to the options store — it costs nothing, it is urls
+only, and it is the single thing that keeps runner-ups alive. Verified: 54 of 54 accepted,
+CORS fine, in-page `fetch`. Nothing downstream stocks anything: JUDGE ranks, INSTALL installs.
+
+```
+POST /api/v1/dev/media-finder/options/add    {game, file, url, type, media_kind}
+GET  /api/v1/dev/media-finder/options/list   ?game=&file=              → {"options":[…]}
+POST /api/v1/dev/media-finder/options/remove {game, file, url}
+POST /api/v1/dev/media-finder/options/clear  {game, file, before}      (api/v1/media_finder.py:331)
+POST /api/v1/dev/media-finder/grab           {game, file, url, source}
 ```
 
-The validator applies deterministic rewrites (banned words, gender direction, setting-first, vague terms), tier alignment checks, and format family checks — same rules as before, now applied to both author-written and LLM-synthesized queries uniformly. Full rule set in `references/query_rewriting.md`. Rank the rewritten queries: top query uses setting-first formula, backups broaden progressively.
+Ledger: `games/<game>/.find-media/media_options.json`.
 
-Never run a query the validator flagged as unfixable — surface it to the user instead.
+- **`file` is the slot's TOML-declared path, character for character** — it is the key the
+  review UI reads. A typo stocks an orphan slot nobody opens.
+- **`game` rides in the BODY on every media-finder POST**, and in the **QUERY STRING** on
+  `options/list` (it's a GET) and on every media-review endpoint. It is *not* a clean
+  "finder = body, review = query" split — `options/list` is the exception that breaks that
+  mnemonic. Put it in the wrong place and you get `400 Invalid or missing game`.
+- **`media_kind` is exactly `img` or `video` — never `"image"`.** `.gif` → `img` (it previews
+  inside an `<img>`), `.webm` / `.mp4` → `video`. The backend lowercases the value and
+  defaults to `img`, so a bad value renders blank, which reads to the human as a dead candidate.
+- Dedup is by exact URL, so re-running a query is harmless.
+- **Refetch: stock first, prune after.** `t0 = now()` → stock → `options/clear {game, file,
+  before: t0}`. `before` keeps everything this run just stocked; `origin: "previous"` entries
+  (the slot's undo history) survive regardless. Do **not** walk `options/list` and fire
+  `options/remove` url by url — that deletes the undo history along with the stale options.
 
-**Offline fallback**: if the server isn't running, `--toml games/<game>/toml_phases/6_final_game.toml` still works for canvas items. Won't catch the non-canvas categories (locations, clothing, phone posts, profile photos) — those require the API.
+This is the phase the whole redesign exists for. Under the old shape you evaluated ~15
+candidates, installed 1, and the other 14 died on `/tmp` — everything the human might have
+preferred was destroyed before he saw it.
 
-### 3. RETRIEVE
+## 5. JUDGE — contact sheet, then the mandatory strip
 
-Route by content_rating:
-- **SFW** → inline WebSearch (2–3 queries, **no per-source subagents**) → download candidates to `evidence/<item_id>/candidates/`. Details in `references/sfw_pipeline.md`.
-- **NSFW** → batch 3–5 items into `scripts/nsfw_harvest.js` (Playwright + Tor + PornHub GIF search, single-page harvest extracts thumbnails + video URLs in one load). Details in `references/nsfw_pipeline.md`.
+**Stage A — contact sheet.** CLIP pre-ranks so you Read **one image** instead of 15
+thumbnails. CLIP is a pre-filter that decides what gets *looked at*; it never replaces a
+gate and never makes the pick. It is a strong SFW shortlister (top-3 = 88%) and **25–31% on
+NSFW acts** — that number is the entire argument for this skill's shape. Everything is
+already on the shelf by the time you get here, so `--top-k` is purely about how many tiles
+you look at: **set it to the mode's option count** (§Mode — 6 / 12 / 18). Invocations, the
+pinned interpreter, and the mixed-input contract (raw `.gif` must be rep-framed before CLIP
+will touch it) are in `references/clip_preranking.md`.
 
-All candidates persist to `games/<game>/.find-media/evidence/<item_id>/candidates.jsonl` as they arrive (SFW: downloaded JPGs; NSFW: harvested thumbs + clips). This makes Tor circuit drops and mid-batch crashes recoverable. CLIP then pre-ranks them before EVALUATE — see §EVALUATE and `references/clip_preranking.md`.
+Note the input split: the Chrome route returns `.gif` as often as `.mp4`. `.gif` is a video
+to `video_frames.py` and invisible to `clip_shortlist.py` — point CLIP at raw gifs and it
+exits 1 "no candidate images found", which misreads as an empty harvest.
 
-### 4. EVALUATE
+**Stage B — the frame strip. Every ANIMATED finalist, route-independent, no exceptions.**
+`.webm` / `.mp4` / `.gif` get stripped; a static `.jpg` finalist has no frames to strip and
+is judged from the contact sheet instead. Strip the **top 6 by rank** (§Mode).
 
-CLIP pre-ranks the candidates so you view ONE montage instead of every thumbnail.
-CLIP is a pre-filter — it never replaces a gate and never makes the final pick. Full
-doctrine + exact script invocations in `references/clip_preranking.md`.
+```bash
+python3 .claude/skills/find-media/scripts/video_frames.py \
+  --video <candidate> --mode strip --frames 4 \
+  --out games/<game>/.find-media/evidence/<item>/strip_<id>.jpg
+```
 
-1. **Dedup** — `scripts/dedup_tracker.py --check <gif_id_or_url> --game <game>`; drop already-used candidates before ranking.
-2. **Pre-rank with CLIP** (exit 3 → CLIP/ffmpeg unavailable → fall back to viewing thumbnails directly, exactly as the old flow did — never crash the run):
-   - **SFW** → `clip_shortlist.py --candidates-dir evidence/<item>/candidates --caption "<top validated query>" --top-k 5 --montage-out evidence/<item>/montage_shortlist.jpg`. CLIP is a strong SFW shortlister (top-3 = 88%).
-   - **NSFW** → first `video_frames.py --mode rep` (a still per clip), then `clip_shortlist.py --caption "<setting + people, NOT the act>" --top-k 6 --montage-out evidence/<item>/montage_cull.jpg`. CLIP only **culls** 15→6 here (25–31% on acts).
-3. **View the ONE montage.** Apply hard-rejection filters from `references/scoring_rubric.md` (3+ people, solo, wrong setting, etc.) across the tiles; on NSFW **judge the act yourself** — CLIP did not.
-4. **Score** each surviving tile with the rubric (SFW 40/30/30, NSFW 30/40/20/10); write to `games/<game>/.find-media/evidence/<item_id>/scores.jsonl`. Map the chosen tile letter back to its candidate id via the `clip_shortlist.py` JSON `ranked[].montage_label`.
-5. **Pick** the highest above threshold (60 NSFW / 70 SFW). For an NSFW video pick, build a `video_frames.py --mode strip` and confirm the act holds across the loop before PACKAGE.
+`video_frames.py` is stdlib-only but shells out to ffmpeg; no ffmpeg on PATH and it exits **3
+— degrade, don't crash**: fall back to the harvest poster and say so in the report.
 
-Do NOT auto-pick the top-titled result, and do NOT treat CLIP's #1 as the winner — CLIP ranks, you decide. PornHub/GIPHY titles are user-generated noise. The visual score is the decision.
+**Thumbnails lie, constantly.** Measured this session: the strip killed **3 of 5** in one
+round and **4 of 6** in the next. Real kills: a thumbnail that read as a perfect cluttered
+back room whose loop was standing *kissing* with no blowjob in it at all; a "dark outdoor"
+thumbnail whose loop was a bright daytime laundromat; a thumbnail that read
+bent-over-from-behind whose clip was a blowjob. A single frame is a claim about one instant.
+The strip is a claim about the loop, and the loop is what ships.
 
-### 5. CRITIQUE + REFINE (only on failure)
+**Eye contact must HOLD ACROSS THE WHOLE STRIP.** Two candidates died on wandering eyes
+their thumbnails hid. One lucky frame is DEAD, not WORKING.
 
-Trigger when no candidate scores above threshold after the first RETRIEVE pass. Dispatch the `fail-triage` subagent with these diagnostic questions:
-1. **Query wrong?** Re-read narrative, check against `references/query_rewriting.md` rules, generate delta-queries.
-2. **Source wrong?** Try an alternate (SFW: switch GIPHY→Pexels; NSFW: try `setting+action` reversed or body-type variant).
-3. **Tier wrong?** If narrative actually warrants a lower tier, flag the TOML for review instead of downloading wrong content.
+**Stage C — rank into a shelf.** The one law: **correctness is a binary GATE, quality is
+scored.** Act, position, people count, affect, cast, and POV-when-the-scene-requires-the-
+partner-visible are **gates** — pass or out. Being correct earns no points, ever, because
+points are exactly how a correct-dead clip out-totals a flawed-alive one.
 
-Loop back to RETRIEVE with the delta-queries. Cap at **3 critique cycles per item**. If still failing, write the best-below-threshold candidate to the failure report and surface it to the user — do NOT silently skip.
+What's left is scored on **three axes and only three: HEAT 60 / SETTING 25 / CRAFT 15.**
+When the setting is not load-bearing — no danger, no secrecy, no squalor — **SETTING is
+skipped and recorded as `null`.** Not scored low, not scored zero: skipped. The ranking is
+then HEAT and CRAFT alone. `setting_is_load_bearing` is a per-slot call made back in the
+SCOPE brief, so every candidate in a slot is scored the same way and the ranking stays
+comparable.
 
-### 6. PACKAGE
+**There is no accept threshold.** No bar, no auto-accept score, no "below_bar" — candidates
+are ranked and stocked, and the human decides. The re-search trigger is **shelf depth:
+fewer than 6 survivors → search more.** Never lower a gate to fill the shelf.
 
-For each winning candidate:
-1. POST to `http://localhost:8000/api/v1/dev/media-capture` with `{url, scene_id, game}`. The API auto-detects the file extension from the source URL (or its Content-Type) and strips any TOML-declared extension — see `references/api_behavior.md` for the full detection chain.
-2. Run `scripts/tier_format_check.py --file <actual_downloaded_path> --tier <tier>` on the file the API actually wrote. Magic-byte check catches mismatches (e.g., `.mp4` URL that served a JPEG). Blocks PACKAGE on any violation.
-3. Update `games/<game>/.find-media/used_assets.jsonl` via `scripts/dedup_tracker.py --record`.
-4. Append to `games/<game>/.find-media/run_manifest.json` (schema in `templates/run_manifest.schema.json`).
+`wrong_setting` is **not** a valid rejection reason. If you write it, you have reintroduced
+the bug the rubric was rewritten to kill. Full gates, bands, the dead-clip veto, and
+`scores.jsonl` in `references/scoring_rubric.md`.
 
-**Why check format AFTER download, not before**: the API decides the saved extension from the source, not from your request. A `.jpg` TOML pointer with a `.webm` source URL → the API saves `.webm`. The generator's extension-agnostic lookup still finds it. So FORMAT MISMATCH warnings during PLAN are advisory — the post-download check is what matters.
+## 6. INSTALL — best guess in, everything else on the shelf
 
-**Iteration is safe**: when `game` is provided, the API deletes any existing file with the same stem before writing (regardless of extension). Re-downloading with a better source silently replaces the previous file. No orphan `_1` suffix files, no manual cleanup.
+```bash
+curl -sS -X POST http://localhost:8000/api/v1/dev/media-finder/grab \
+  -H 'Content-Type: application/json' \
+  -d '{"game":"<game>","file":"scenes/alley_bj_t5.webm","url":"<source-url>","source":""}'
+```
+
+`grab` derives the target path from the slot's declared `file`, so it cannot put the file in
+the wrong place. `POST /api/v1/dev/media-capture` with `{url, scene_id, game}` is the
+equivalent for a raw path.
+
+**Iteration is safe and idempotent.** When `game` is provided, the API deletes any existing
+file with the same stem before writing, regardless of extension. Re-downloading with a
+better source silently replaces the previous file — no orphan `_1` suffixes, no manual
+cleanup. That is what makes a refetch cheap.
+
+Then, in order:
+1. **Fetch sanity** on the file the API actually wrote: anything under **1024 bytes**, or
+   whose bytes are HTML, is an error page, not media. Check the bytes, never the url.
+2. Run the pre-install quality gates (below) on that same file.
+3. `dedup_tracker.py --record`.
+4. Append to `games/<game>/.find-media/run_manifest.json`
+   (schema: `templates/run_manifest.schema.json`).
+5. Report the install as **a best guess, not a verdict.**
+
+Nothing gets stocked here. The pick and every runner-up went onto the shelf back in STOCK,
+and the store dedupes by URL — there is no second stocking pass, and an INSTALL that thinks
+it needs one has skipped STOCK.
+
+---
+
+## Quality gates — run AFTER download, before you call the slot done
+
+**There are two size checks and they are not the same check.** *Fetch sanity* fires the
+instant a byte stream lands: under **1024 bytes**, or HTML bytes, means an error page — throw
+it away. *The pre-install gate* fires once the file is in place: `tier_format_check.py`,
+images ≥ **1024 B**, animated ≥ **51200 B**. There is no 5KB rule anywhere in this skill.
+
+| Gate | Tool | Threshold |
+|---|---|---|
+| Format matches tier | `python3 scripts/tier_format_check.py --file <path> --tier <tier>` | t5+ MUST be `.webm`/`.mp4`/`.gif`, never JPG. Valid tiers: `base`, `location`, `t0`–`t8` |
+| Not already used in this game | `python3 scripts/dedup_tracker.py --check <id_or_url> --game <game>` | add `--global` to check the cross-game set too |
+| Real bytes | `tier_format_check.py` (magic bytes) | images ≥ 1024 B, animated ≥ 51200 B; anything reporting `text/html` is an error page |
+| Strip-verified | `video_frames.py --mode strip` | every ANIMATED finalist; static `.jpg` finalists are judged from the contact sheet instead |
+
+`tier_format_check.py` checks magic bytes, not just the extension — the only check that
+survives a third-party CDN, since any of a dozen hosts can serve a JPEG behind a `.gif` URL
+or an HTML error page behind either.
+
+**Why after download, not before:** the API decides the saved extension from the source, not
+from your request. A `.jpg` TOML pointer with a `.webm` source URL saves `.webm`, and the
+renderer's extension-agnostic lookup still finds it. PLAN-phase FORMAT MISMATCH warnings are
+advisory; the post-download check is what matters.
+
+**A failed gate drops the candidate back to JUDGE, not back to SEARCH.** The candidate was
+already evaluated visually — the problem is the file, not the query. Take the next ranked
+option off the shelf.
+
+---
+
+## Batching — the batch is a pipeline slice, not a search slice
+
+When the total work is bigger than the slice (say 50 missing items), do NOT search all 50,
+then judge all 50, then install all 50.
+
+```
+Phases 1–2 (SCOPE + PLAN)   →  upfront for all 50; cheap, network-free, TOML-only
+
+Batched loop (phases 3–6)
+  for each group of 5:
+    SEARCH (5) → STOCK (5) → JUDGE (5) → re-query any slot under 6 options → INSTALL (5)
+  then the next group of 5.
+```
+
+**Slice size: 5 items.** Nothing enforces it; it is a judgment default. The reasons:
+
+- **Progress is durable.** After each batch, 5 slots have a working file installed, a stocked
+  shelf, and a `run_manifest.json` entry. A crash leaves you at 5/10/15 complete, not 50
+  half-processed items with nothing on disk.
+- **The harvest-to-judge gap stays tight.** Search 50 slots first and you're looking at
+  contact sheets long after the pages that produced them, with no cheap way to go back and
+  run a sibling query for the slot in front of you. A batch of 5 keeps the browser one step
+  away from the judgment.
+- **Re-query loops stay local.** A slot that comes up short of 6 options gets its sibling
+  query run *now*, inside the current batch, while the tab and the vocabulary are warm.
+- **Token budget.** One contact sheet per item ≈ 5 image Reads per batch, versus the ~75
+  individual thumbnail Reads the old flow required — that was 0.5–1M tokens per game spent
+  purely looking. See `references/clip_preranking.md`.
+
+Never start a new SEARCH while the previous batch's INSTALL is incomplete.
+
+## Mode — how tall to stock the shelf
+
+Mode is an **option count**, not a retry budget. These are the only option counts in this
+skill; every other section defers here rather than restating a number.
+
+| Mode | Options stocked = `--top-k` | Stripped | When |
+|---|---|---|---|
+| `fill` | 6 | none — static `.jpg`, judged from the contact sheet | SFW static slots: location, clothing, social post, dating profile. Low variance, cheap to eyeball. |
+| `wide` | 12 | top 6 by rank | Any NSFW canvas slot. The strip kills ~half, so a 6-deep shelf can arrive as 2 survivors. Stock 12 to land 6. |
+| `deep` | 18 | top 6 by rank | Capstones, hero assets reused across canvases, and any refetch after the human disapproved the installed pick — that shelf already proved wrong. |
 
 ## Subagent dispatch
 
-Spawn subagents with focused briefs per Anthropic's multi-agent guidance — objective, output format, tool guidance, task boundaries. Vague briefs cause duplicate work. **SFW retrieval no longer uses a per-source subagent** — run WebSearch inline on the main thread (see §RETRIEVE). The table below is the current set.
+**Do NOT spawn one subagent per source.** The old fan-out (4 per item) multiplied token cost
+with no benefit — every agent paid to look at its own pile and none could compare across
+piles. One page, one regex, one sheet, one look. The nine-host spread came from **one**
+search, not nine.
 
-| Subagent | Objective | Output format | Tool guidance | Boundaries |
-|----------|-----------|---------------|---------------|------------|
-| `query-rewriter` | Read narrative context + raw queries, produce ranked rewrites | JSON list `[{query, rank, reason}]` | Read, validate_queries.py | Don't search, don't invent facts |
-| `nsfw-harvester` | Run harvest script for 3–5 items | Paths to `/tmp/nsfw_previews/<item>/` | Bash (node nsfw_harvest.js) | Never edits scoring — that's EVALUATE |
-| `candidate-evaluator` | View the CLIP montage, score, pick winner | `{winner_id, score, rubric_breakdown}` | Read (the montage JPG), dedup_tracker.py | CLIP pre-ranked the tiles; reject hard-fails and **judge the act yourself** |
-| `fail-triage` | Diagnose why no candidate passed | `{diagnosis, delta_queries, retry_source}` | Read (TOML), sequential-thinking if available | Only spawned after first RETRIEVE fails |
+Run the Chrome route on the main thread: it drives one shared browser session, and the
+screenshot you take is the thing you immediately need to look at.
+
+| Subagent | Objective | Output | Boundaries |
+|---|---|---|---|
+| `query-rewriter` | Read narrative + raw queries, produce per-source query slots | JSON `[{source, query, reason}]` | Doesn't search, doesn't invent facts |
+| `candidate-evaluator` | Read the contact sheet, apply gates, rank survivors | `{ranked[], installed_id, gate_rejects[]}` | CLIP pre-ranked the tiles; **judge the act yourself** |
+| `shelf-triage` | Diagnose a slot that came up short of 6 options | `{diagnosis, sibling_queries, alt_terms}` | Only after the first search pass returns thin |
+
+Give each a focused brief — objective, output format, tool guidance, task boundaries. Vague
+briefs cause duplicate work.
 
 ## Evidence and persistence
 
-Every phase writes to `games/<game>/.find-media/`:
-
 ```
-.find-media/
-├── scope/<item_id>.md                   # SCOPE output
+games/<game>/.find-media/
+├── game_review.json                     # cached missing list
+├── lexicon.md                           # terms confirmed this run (compounds across runs)
+├── scope/<item_id>.md                   # SCOPE briefs, with resume markers
 ├── evidence/<item_id>/
-│   ├── candidates.jsonl                 # all harvested candidates
-│   ├── scores.jsonl                     # scored candidates
-│   └── decisions.jsonl                  # picks + rejections + reasons
+│   ├── candidates/                      # raw downloads
+│   ├── frames/                          # one rep still per animated candidate
+│   ├── contact_sheet.jpg                # the sheet you Read
+│   ├── strip_<id>.jpg                   # per-finalist frame strip
+│   └── scores.jsonl                     # gates + axes + decision, winners AND losers
+├── media_options.json                   # the shelf (written by the options API)
+├── media_reviews.json                   # the human's verdicts (written by media-review)
 ├── used_assets.jsonl                    # dedup tracker state
 └── run_manifest.json                    # final summary
 ```
 
-To resume a crashed run: re-invoke the skill on the same game. It reads `scope/` and `evidence/` and skips items that already have decisions.
+**Evidence never lives in `/tmp`.** It got wiped twice in one session and took the candidate
+pool with it both times. Scratch bytes may transit `/tmp/fm/<slot>/`; anything worth keeping
+lands under the game.
+
+To resume: re-invoke the skill on the same game. Read each brief's resume marker —
+`OPTIONS_STOCKED` is the real progress signal. An item with an installed pick and 0 stocked
+options is **not done**, because the human has nothing to choose from.
+
+Terms that prove out across more than one game get copied up to `games/.find-media/lexicon.md`.
+That is the one part of a run that compounds: every future run starts with a bigger
+vocabulary than this one did.
+
+**Keep `scores.jsonl` even for losers.** `scores.jsonl` is your *prediction*;
+`media_reviews.json` (approved / disapproved, written by the review UI) is the human's
+*ground truth*. When he disapproves your install and grabs stocked option #4, that pair is a
+labeled heat error — the only dataset that will ever validate or kill the provisional rows in
+the rubric's Confidence table. Note also that POSTing a review status without re-sending
+`note` **wipes the note**, and that reviews are per-ASSET after dedupe: one decision covers
+every canvas reusing that file.
 
 ## Stop conditions
 
 Hard limits — never exceed:
-- **3 critique cycles per item** (counted in `decisions.jsonl`)
-- **10 total query variations per item** across all cycles
-- **Skip items marked `[FAIL]` twice in the run_manifest** — don't infinite-loop on cursed items
+- **3 sibling-query rounds per slot.** If three differently-phrased Google queries can't put
+  6 gate-survivors on the shelf, the problem is the term, not the query — go back to the word
+  hunt or tell the user the beat may not have a name in this vocabulary.
+- **10 total query variations per item**, across all rounds.
+- **Skip items marked `[FAIL]` twice in `run_manifest.json`** — don't infinite-loop on cursed
+  slots.
 
-When hitting a stop condition, always surface the best-below-threshold candidate with its score. Silent failures waste human debugging time.
+**Never end a slot silently.** When you hit a stop condition or the shelf comes up short,
+surface the best of what you rejected — name the candidates, their gate reasons, and how many
+options actually made it onto the shelf. If the entire surviving pool reads DEAD, install the
+best of it, mark `pool_all_dead`, and say so plainly; a dead shelf is a query problem the user
+can fix in ten seconds if you tell him, and an hour of debugging if you don't.
 
-## Execution rule — always foreground, never background
+## Execution rule — always foreground
 
-**Run all commands in the foreground.** Do NOT use `run_in_background=true` on any Bash call within this skill.
+**Never use `run_in_background=true` in this skill.**
 
-Reasons:
-- **Harvest → evaluate is interactive.** `scripts/nsfw_harvest.js` writes thumbnails to `/tmp/nsfw_previews/`; you immediately View them with the Read tool to score. Backgrounding the harvest means you can't evaluate until you poll for completion — wasted round-trips.
-- **Tor failures surface late.** A backgrounded harvest that hits a dead Tor circuit silently returns empty results. Foreground execution shows the error output in the same step.
-- **PornHub video URLs expire in ~4 hours.** If a harvest runs in the background and you move on to other work, the video URLs in `/tmp/nsfw_previews/*/*.json` may be dead by the time you return to evaluate.
-- **The critique loop needs stdout.** CRITIQUE phase reads harvest output (candidate counts, error messages) to decide delta-queries. Background tasks hide that.
-- **API downloads are fast.** `curl` to `/api/v1/dev/media-capture` is typically under 5 seconds per item. No benefit to backgrounding.
+- **Search → judge is interactive.** You take a screenshot and immediately need to look at
+  it. A backgrounded browser call hands you nothing to read.
+- **Failures surface late in the background.** A silently-empty extract, a dead server, a
+  0-byte fetch — all of them return "success" and you find out three steps later.
+- **The re-query decision needs stdout.** Deciding whether a slot needs a sibling query means
+  reading candidate counts and error text from the call you just made.
+- **The calls are fast.** A `grab` is seconds. There is nothing to hide latency behind.
 
-The only command that could legitimately background is `tor &` itself (the daemon) — and that's a one-time setup step the user runs, not something find-media orchestrates.
+If a batch feels too slow for the foreground, the fix is **smaller batches**, not background
+execution.
 
-If a harvest batch is too slow for foreground execution, the fix is **smaller batches** (already capped at 5), not background execution.
+---
 
-## Quality gates
+## Progressive disclosure — load on demand
 
-Before PACKAGE, three gates must pass:
-1. `tier_format_check.py` — format matches tier (t5+ MUST be .webm/.mp4/.gif, never JPG)
-2. `dedup_tracker.py` — GIF ID not used in this game (and not in global used set if `--strict-dedup`)
-3. File size check — images > 1KB, videos > 50KB
+The router above is enough to start. Load these when you reach the work they describe:
 
-Failing any gate drops the candidate back to EVALUATE with an explanation, not to RETRIEVE. The candidate was evaluated visually — the problem is the file, not the query.
+| Read this | When |
+|---|---|
+| `references/chrome_route.md` | Running the actual search: word hunt, browser tools, the extraction regex, stocking, fetching, judging. **The procedural spine — read it before your first query.** |
+| `references/media_sources.md` | Choosing which shelf to point at: NSFW host catalog, tease/flash/explicit bands, the SFW stock shelf, the direct-fetch contract (headers, failure signatures, size floors) |
+| `references/query_rewriting.md` | Writing or validating a query, synthesizing queries for empty `search_queries`, or reconciling the Google vs PornHub dialects |
+| `references/scoring_rubric.md` | Judging candidates: the gates, HEAT/SETTING/CRAFT, the dead-clip veto, `scores.jsonl` |
+| `references/clip_preranking.md` | Running `clip_shortlist.py` / `video_frames.py`, building a contact sheet, choosing a CLIP caption |
+| `references/content_rating.md` | Deciding SFW vs NSFW, or fixing a missing/wrong `_tN` tag (the audit + retag flow) |
+| `references/api_behavior.md` | Confused about why the API saved a different extension than the TOML declared |
+| `references/game_review_api.md` | Need the full `missing_media` entry schema or the API's category vocabulary |
+| `references/audit_mode.md` | Auditing media a game **already has**, rather than filling holes |
+| `templates/scope_brief.md` | Writing a SCOPE brief (the §Demand fields are the load-bearing part) |
+| `templates/run_manifest.schema.json` | Writing the run manifest |
 
-## Progressive disclosure
+Scripts, all under `scripts/`: `validate_queries.py` (queries + format + tag proposals),
+`scene_semantics.py` (tier / family / rating classification — imported, no CLI),
+`apply_retags.py` (write corrected `_tN` into the phase TOMLs), `clip_shortlist.py`
+(rank + contact sheet), `video_frames.py` (rep frames + strips), `tier_format_check.py`
+(pre-install gate), `dedup_tracker.py` (used-asset ledger).
 
-Load additional context on demand:
-- Running SFW batch → read `references/sfw_pipeline.md`
-- Running NSFW batch → read `references/nsfw_pipeline.md`
-- Pre-ranking candidates with CLIP, building a montage, or extracting video frames → read `references/clip_preranking.md`
-- Deciding SFW vs NSFW, or handling a missing/wrong tier tag (the audit + retag) → read `references/content_rating.md`
-- Writing or validating a query, or synthesizing queries for empty `search_queries` → read `references/query_rewriting.md`
-- Scoring candidates → read `references/scoring_rubric.md`
-- Something broke and you need to debug a site → read `references/playwright_diagnostic.md`
-- Confused about why the API saved a different extension than the TOML asked for → read `references/api_behavior.md`
-- Confused about what fields the game-review API returns, or need the full `missing_media` entry schema → read `references/game_review_api.md`
+**Interpreter.** All of them are stdlib-only and run under plain `python3`. The single
+exception is `clip_shortlist.py`, which needs the pinned torch interpreter:
+`"${FIND_MEDIA_PY:-/Library/Frameworks/Python.framework/Versions/3.10/bin/python3}"`.
 
-Don't load all nine upfront. The router above is enough to start.
+**Exit code 3 means DEGRADE GRACEFULLY, never crash.** A script exits 3 when an *optional*
+dependency is missing — `clip_shortlist.py` without torch/transformers/PIL or an uncached
+model, `video_frames.py` without ffmpeg on PATH. Fall back (Read the thumbnails directly; use
+the harvest poster), keep going, and name the degradation in your report. Exit 1 is a real
+gate failure; exit 2 is a usage error.

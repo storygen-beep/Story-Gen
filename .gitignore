@@ -245,3 +245,6 @@ game_explorations/vesper_wardrobe/
 
 # playwright-skill temp execution files (transient)
 **/.temp-execution-*.js
+
+# python bytecode inside the skills tree (the !.claude/skills/** negation above un-ignores it)
+.claude/skills/**/__pycache__/

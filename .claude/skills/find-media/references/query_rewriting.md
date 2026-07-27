@@ -1,48 +1,63 @@
 # Query Rewriting
 
-This file documents the deterministic rewrite rules that `scripts/validate_queries.py` encodes. The script runs BEFORE any search. Read this file when you need to understand why a query was rewritten, or when extending the rule set.
+Two things live in this file and they are NOT the same thing:
 
-## Why rewrite queries
+- **Part 1 — route-neutral semantics.** Rules about MEANING: which direction the act
+  goes, whether the pool is secretly solo, which word names the act. These are true
+  no matter what you type them into, because they are about what you are asking for.
+- **Part 2 — per-source dialect.** Rules about ENGINES: how many tokens survive, what
+  reclassifies your intent, which modifiers steer. These are source-specific, and Google's
+  rules and PornHub's contradict each other, hard.
 
-Search engines — PornHub especially — are keyword-biased and context-blind. A query like "passionate manual stimulation kitchen" returns mostly solo content and trending garbage. The narrative might describe "his hand between her thighs on the kitchen counter" which is `men fingering girl kitchen counter`. The rewrite gap is what produces bad matches.
+Keep them separate. Collapse them — state PornHub tokenizer behaviour as universal search
+law — and the rules come out wrong or actively harmful on Google: a query PornHub returns
+0 results for works fine on Google, and a query PornHub merely wastes tokens on can
+reclassify your whole Google search as mainstream.
 
-The validator handles the deterministic rewrites (regex-level). Narrative-context rewrites (which direction is the hand going? what's the setting?) need the LLM with the narrative in context.
+**Enforcement legend.** `[ENFORCED]` = implemented in `scripts/validate_queries.py`, runs
+before SEARCH, deterministic. `[ADVISORY]` = your judgment, nothing checks it. Never
+promote advisory prose into "the validator does X": `morning`, `evening`, `hot` and
+`night` are stripped by nothing in this skill, and a rule set that claims otherwise has
+drifted off the code and stopped being trustworthy.
 
-## Banned words (always strip)
+---
 
-These add noise to keyword search without improving relevance. PornHub ignores them. SFW sources often interpret them as style tags that mismatch the scene.
+# Part 1 — Route-neutral semantics
 
-Emotional fillers:
-- `passionate`, `tender`, `urgent`, `loving`, `intimate`, `sensual`, `seductive`, `emotional`, `forbidden`
+## What the script actually strips `[ENFORCED — and it depends on --target]`
 
-Story fillers:
-- `morning`, `evening`, `first time`, `secret`, `lazy` (unless the setting genuinely is morning — then OK)
+Stripping is the one **target-dependent** half of the validator, so read this section with
+Part 2 open. `validate_query()` picks the list from `--target`: the default `google` — the
+route we actually search — runs `strip_story_words()`; `--target pornhub` runs
+`strip_banned()`. Nothing else is removed, in either mode.
 
-Vague quality words:
-- `beautiful`, `gorgeous`, `perfect`, `hot`, `amazing`
+| Target | Function | Members |
+|---|---|---|
+| `google` (default) | `strip_story_words()` | `drunk` `wasted` `tipsy` `hungover` `angry` `nervous` `scared` `crying` `sad` `shy` `embarrassed` `reluctant` `unwilling` `hesitant` `exhausted` `tired` + phrases `passed out`, `first time` |
+| `pornhub` | `strip_banned()` | `passionate` `tender` `urgent` `loving` `intimate` `sensual` `seductive` `emotional` `forbidden` `beautiful` `gorgeous` `perfect` `amazing` + phrases `first time`, `secret`, `lazy` |
 
-Rewrite: strip these words, keep the nouns and actions.
+The two lists strip for opposite reasons and share exactly one member (`first time`).
+Google's list is character-STATE words, which flip its intent classifier — Part 2 has the
+measurement. PornHub's is flowery adjectives that match no tag. Running the wrong list is
+not fatal; it just throws away tokens that were doing no harm and keeps the ones that were.
 
-## Gender-direction required (anti-solo/lesbian trap)
+Both are matched **word-bounded** — single tokens whole and punctuation-insensitive,
+phrases wrapped in `\b…\b` (`_strip_words()` in `validate_queries.py`). An earlier version
+did a raw substring replace, which ate the middle of `secretary` and shipped `ary hand on
+man crotch`; that is fixed in the code (the code comment sits right on top of the fix). A
+query that comes back with a word chewed through the middle is a bug report, not expected
+behaviour.
 
-Actions that can be performed solo or same-sex MUST include gender indicators. PornHub's category pages for these terms are dominated by solo/lesbian content.
+**NOT stripped by either list:** `morning`, `evening`, `night`, `hot`. Do not add them.
+`morning`/`evening`/`night` are real visual facts (light level, which the setting axis cares
+about). `hot` is load-bearing vocabulary on the heat axis — stripping it would fight the
+rubric (`references/scoring_rubric.md`).
 
-| Ambiguous | Required rewrite |
-|-----------|------------------|
-| `fingering` | `men fingering girl <setting>` |
-| `cunnilingus` / `eating out` | `guy eating out girl <setting>` |
-| `touching` / `rubbing` | `man <action> woman <setting>` or `couple <action>` |
-| `masturbation` | Never use for M/F — it's inherently solo |
+## Direction disambiguation `[ENFORCED as a flag — you resolve it]`
 
-Actions that DON'T need gender direction (already imply M/F):
-- `blowjob`, `handjob` — implies M/F by convention
-- `sex`, `fuck`, `missionary`, `doggy`, `riding` — implies couple
-
-For quality filtering on these, add `couple` or `amateur` as a suffix.
-
-## Direction disambiguation (who's doing what to whom)
-
-The TOML may contain direction-ambiguous terms. The narrative paragraphs before/after the media block tell you which direction. The validator flags these for the LLM to resolve with narrative context:
+Direction-ambiguous terms cannot be regexed into the right act; the narrative paragraphs
+before and after the media block are the only evidence for which way the act is going.
+The validator detects them and stops, setting `needs_direction_from_narrative`.
 
 | Ambiguous term | Clue in narrative | Rewrite |
 |----------------|-------------------|---------|
@@ -50,50 +65,90 @@ The TOML may contain direction-ambiguous terms. The narrative paragraphs before/
 | `oral` | "his mouth finds you" | `cunnilingus` |
 | `manual stimulation` / `manual` | "his hand between your" | `fingering` |
 | `manual stimulation` / `manual` | "your hand wraps around him" | `handjob` |
-| `hand job` (two words) | any | `handjob` (one word — PornHub tokenizes on spaces) |
+| `hand job` (two words) | any | `handjob` — auto-rewritten, one word `[ENFORCED]` |
 
-The validator can't do this rewrite — it needs narrative context. It flags the query with `needs_direction_from_narrative` and the LLM fills it in during PLAN.
+`oral`, `manual`, `manual stimulation` flag; `hand job` → `handjob` is the one member of
+`AUTO_REWRITES` that resolves without you. Resolve the flags during PLAN, from the TOML.
 
-## Setting-first formula
+## The solo / same-sex trap `[ENFORCED]`
 
-PornHub weights the first keyword heavily. Setting is the hardest constraint to match (any blowjob looks similar; a kitchen must actually look like a kitchen). So:
+Actions a person can perform alone, or with a same-sex partner, return exactly that pool
+unless you name the direction. `check_gender_direction()` substitutes in place:
 
-- `kitchen+blowjob` — GOOD
-- `blowjob+kitchen` — WORSE (weights blowjob over kitchen)
-- `blowjob+amateur+kitchen` — WORST (setting relegated to tail)
+| Trigger | Becomes | Note |
+|---|---|---|
+| `fingering` | `men fingering girl` | substituted where it sits in the query |
+| `cunnilingus` | `guy eating out girl` | |
+| `eating out` | `guy eating out girl` | |
+| `masturbation` | — | returns `None`, query marked `unusable_query` — it is inherently solo, there is no M/F rewrite |
 
-Rewrite: move the setting to position 1 unless gender direction needs to come first (see rule above).
+Actions that already imply M/F and need no direction: `blowjob`, `handjob` (convention),
+`sex`, `fuck`, `missionary`, `doggy`, `riding` (imply a couple).
 
-For gender-ambiguous actions, the pattern becomes: `<gender1> <action> <gender2> <setting>` — the gender direction takes precedence over setting-first because solo-trap results are worse than setting-mismatch results.
+**Caveat, stated honestly:** this trap was measured on PornHub's category pages, whose
+`fingering`/`cunnilingus` pools are solo- and lesbian-dominated. It has NOT been
+re-measured on Google image results, where the index is a different shape. Treat the
+rewrite as cheap insurance rather than proven necessity, and if a Google run for a
+directed query comes back thin, try the bare term once and look — that is a one-query
+experiment, not a rule change.
 
-## Tier-appropriate vocabulary
+## Canonical action vocabulary `[ADVISORY]`
 
-Queries MUST match the tier. A t2 (SFW) query with sexual terms will pull NSFW results from safe-search-optional sources. A t5 (NSFW) query with sanitized terms will pull SFW noise.
+Use these exact forms; variants split the pool across synonyms.
 
-| Tier | Allowed vocabulary | Example good | Example bad |
+- `fingering` — his hand on/in her (NOT `manual stimulation`, `manual`)
+- `handjob` — her hand on him (one word, NOT `hand job`)
+- `blowjob` — her mouth on him
+- `cunnilingus` / `eating out` — his mouth on her
+- `sex` / `fuck` — penetration; always pair with a position (`missionary`, `doggy`,
+  `riding`, `standing`, `bent over`) because position is a documented rejection class —
+  standing when the beat says kneeling gets thrown back.
+
+## Tier-appropriate vocabulary `[PARTLY ENFORCED]`
+
+Vocabulary must match the tier or you search the wrong half of the internet: a t2 query
+carrying sexual terms pulls porn into a UI slot; a t5 query written in vanilla-romance
+words pulls stock couples into a sex beat.
+
+| Tier | Allowed vocabulary | Good | Bad |
 |------|-------------------|--------------|-------------|
-| base, t2, t3 | domestic, lifestyle, emotion-light | `couple morning coffee kitchen` | `sexual tension dinner` (t3 with sexual term) |
+| base, t2, t3 | domestic, lifestyle, emotion-light | `couple morning coffee kitchen` | `sexual tension dinner` |
 | t4 | suggestive, partial undress, kissing | `couple kissing bedroom` | `kitchen blowjob` (too explicit) |
 | t5, t6 | explicit acts, positions, settings | `kitchen counter sex couple` | `romantic love bedroom` (too vanilla) |
 | t7, t8 | graphic, specific acts | `doggy counter amateur` | any vague emotional term |
 
-The validator checks query-tier alignment. A t2 query with `sex`/`fuck`/`blowjob` → flagged. A t5 query with only `romantic`/`intimate` → flagged.
+What `check_tier_alignment()` actually enforces, and only this:
 
-## Action vocabulary (canonical forms)
+- tier ∈ {`base`,`t2`,`t3`,`location`} + any `SEXUAL_TERMS_FOR_SFW_CHECK` hit →
+  `tier_mismatch:sfw_query_has_sexual_term`.
+- tier ∈ {`t5`…`t8`} + no sexual term + a `VANILLA_TERMS_FOR_NSFW_CHECK` hit
+  (`romantic` `sweet` `tender` `loving`) → `tier_mismatch:nsfw_query_too_vanilla`.
 
-Use these exact terms. Variants produce worse results:
+Three blind spots to hold in your head, because the report will not mention them:
 
-- `fingering` — his hand on/in her (NOT `manual stimulation`, `manual`, `hand job`)
-- `handjob` — her hand on him (one word — NOT `hand job`)
-- `blowjob` — her mouth on him
-- `cunnilingus` — his mouth on her (or `eating out`)
-- `sex` / `fuck` — penetration (always add position: `missionary`, `doggy`, `riding`, `standing`, `bent over`)
+1. **t4 is checked by neither rule** — it is in `BORDERLINE_TIERS`, which appears in
+   neither branch. The whole clothed→explicit span passes tier check silently.
+2. **t0 and t1 are checked by neither rule either.** `infer_tier_tagged` returns them
+   happily, but `scene_semantics.SFW_TIERS` is `{base, t2, t3, location}` — t0/t1 sit in no
+   tier set, so a t0 slot carrying `blowjob` passes silently. (`tier_format_check.py` does
+   know t0/t1 at the pre-install gate; the query validator does not.)
+3. **On `--target pornhub`, the vanilla check can only ever fire on `romantic` or
+   `sweet`** — `strip_banned()` runs first inside `validate_query()` and `tender`/`loving`
+   are banned words, so they are gone before `check_tier_alignment()` sees the string. On
+   the default Google target nothing strips them, so all four vanilla terms stay live.
+
+Tier itself comes from the FILENAME (`infer_tier_tagged`: `_t0`…`_t8`, or `_base`,
+else base-and-untagged). A wrong or missing suffix is a content-rating problem, not a
+query problem — see `references/content_rating.md`.
 
 ## Synthesizing queries when `search_queries` is empty
 
-Phone posts frequently arrive from the API with `search_queries = []`. Locations, clothing items, and dating profile photos can too. The skill synthesizes 2–3 queries from the entry's `description` + `type` + `category` before validation runs.
+Phone posts frequently arrive from the API with `search_queries = []`. Locations,
+clothing items, and dating profile photos can too. Synthesize 2–3 queries from the
+entry's `description` + `type` + `category` before validation runs.
 
-This is LLM judgment, not templates. Descriptions carry enough cue to write grounded queries; hardcoded templates would drift as new TOML shapes appear. Show the model these worked examples and let it write queries for new items.
+This is judgment, not templates. Descriptions carry enough cue to write grounded queries;
+hardcoded templates would drift as new TOML shapes appear. Work from these examples.
 
 ### Worked examples per type
 
@@ -133,7 +188,7 @@ This is LLM judgment, not templates. Descriptions carry enough cue to write grou
   - Queries: `"black athletic leggings product photo flat lay"`, `"women workout leggings product shot"`, `"athletic leggings bottom clothing catalog"`
   - Tier: **always SFW**
 
-**4. `dating_profile_photo`** — description is `"Dating profile photo for {npc}"` + look up NPC in the API response's `npcs` array for age/traits:
+**4. `dating_profile_photo`** — description is `"Dating profile photo for {npc}"` + look up the NPC in the API response's `npcs` array for age/traits:
 
 - desc `"Dating profile photo for Jake"`, NPC lookup: Jake, 22, athletic, artist
   - Parse: young male, athletic build, creative
@@ -142,46 +197,188 @@ This is LLM judgment, not templates. Descriptions carry enough cue to write grou
 
 **5. `image` / `video` (canvas)** — already carries queries from `props.search_queries`:
 
-No synthesis needed. The TOML author wrote the queries directly on the canvas block. If these ever arrive empty (unusual), read the 2–3 narrative paragraphs before/after the block in the TOML and synthesize from those cues — same rules as the canonical §Setting-first formula.
+No synthesis needed; the TOML author wrote them on the block. If they do arrive empty
+(unusual), read the 2–3 narrative paragraphs before and after the block and synthesize
+from those cues — name the act, the position, the count of bodies, and the setting only
+if the setting carries meaning.
 
 ### Synthesis hard constraints
 
-- `location_image` and `clothing_image` are **always SFW**, no exceptions — they render in UI chrome, not in scenes
-- Synthesized queries must still pass `validate_queries.py` checks (banned-word strip, tier alignment, format family) — feed synthesis output back through the validator, same pipeline as author-written queries
-- If synthesis yields a query that would trigger a tier mismatch (e.g., accidentally sexual language on a `clothing_image` entry), the validator flags it and the LLM rewrites
+- `location_image` and `clothing_image` are **always SFW**, no exceptions — they render
+  in UI chrome, not in scenes, and an adult result there is a bug in the wardrobe screen.
+- Synthesized queries face the same checks as author-written ones — feed them back
+  through `validate_queries.py`; the validator does not know or care which is which.
+- If synthesis yields language that trips tier alignment (accidentally sexual phrasing on
+  a `clothing_image`), the validator flags it and you rewrite.
 
-### The synthesis step in the pipeline
+### Where synthesis sits — inside PLAN, before SEARCH
 
-1. Fetch API → get `missing_media` array
-2. For each entry with `search_queries = []`, synthesize 2–3 queries using these examples as guidance
-3. Write synthesized queries back into the entry's `search_queries` field
+1. Fetch the API → `missing_media` array
+2. For each entry with `search_queries = []`, synthesize 2–3 queries from these examples
+3. Write them back into the entry's `search_queries` field
 4. Save the augmented list to `games/<game>/.find-media/game_review.json`
-5. Run `validate_queries.py --from-api-json <path>` — validator runs unchanged rules
+5. Run it through the validator — stdlib only, so plain `python3`:
 
-The validator doesn't distinguish between author-written and synthesized queries. All queries face the same banned-word/tier/format checks.
+```bash
+python3 .claude/skills/find-media/scripts/validate_queries.py \
+  --from-api-json games/<game>/.find-media/game_review.json
+```
+
+---
+
+# Part 2 — Per-source dialect
+
+Google is the search route, and the only one (driven through your own Chrome — see
+`references/chrome_route.md`).
+
+**PornHub is DISCOVERY-ONLY — never a fetch target.** A PornHub-hosted Google result is
+worth reading for its TITLE and TAGS, because that is where the canonical act vocabulary
+lives, but it must not be queued for download. Measured: `egl.phncdn.com/gif/<id>.gif`
+returns **470 on clearnet and over Tor**, every id tried — it is not a fetch endpoint at
+all. The real media url, read off a gif page, is
+`el2.phncdn.com/pics/gifs/<nnn>/<nnn>/<nnn>/<id>a.webm?validfrom=<ts>&validto=<ts>&ipa=1&hash=<sig>` —
+signed, time-limited and IP-locked — and our extraction strips query strings, so the
+signature is destroyed by construction. `pornhub.com` itself is unreachable on clearnet from
+this machine. Skip phncdn urls as candidates: harvest the words, not the file.
+
+So the tokenizer rules below are for **reading PornHub-sourced vocabulary**, and for the
+validator's `--target pornhub` strip list. They are not instructions for a box you type
+into. They are kept because they are measured, and because they explain why an
+authoring-layer "fix" would be wrong — see the doctrine note at the end.
+
+| | **Google** (the search route) | **PornHub tags** (vocabulary you read) |
+|---|---|---|
+| Length | 6–10 tokens is fine | tags come 2–3 wide; **4+ tokens returned literally 0 results** |
+| Grammar | loose grammar works — `on kneel blowjob` returned usable results | grammar is noise; tags only |
+| Rare words | fine, and they steer the result set | **silently dropped from compounds** |
+| Story / character words | **poison** — reclassify the query as mainstream | dropped, so merely wasted |
+| Setting words | only when the setting carries meaning | costs a token from a 3-token budget |
+| Anti-studio modifiers | `amateur` `real` `voyeur` `hidden cam` steer off bright studio | the same words are legitimate tags |
+| Failure mode | wrong *neighbourhood* — Reddit, TikTok, Facebook, movie stills | 0 results, or 37 generic ones |
+
+## Google dialect
+
+**Verbose is fine. Natural language is fine.** The descriptive multi-word queries game
+authors write work here as written. Do not compress them into tags.
+
+**Story and character words destroy porn intent.** Measured this session:
+`back alley blowjob gif drunk guy night` returned Reddit movie stills, Facebook and
+TikTok. Removing `drunk guy` is what put it back in the porn neighbourhood. The mechanism
+is intent classification, not keyword dilution — Google reads "drunk guy" as narrative
+language, decides you want a story about a drunk guy, and serves mainstream social. So:
+strip who the person IS (drunk, stepbrother, boss, stranger, nervous) and keep what the
+body DOES. This is the opposite reason from PornHub's rule, and it bites harder.
+
+**Anti-studio modifiers are the fix for the most-repeated defect.** `amateur`, `real`,
+`voyeur`, `hidden cam` push results away from bright, lit, three-camera studio porn. The
+single most repeated rejection in this game's history is "bright studio when the beat
+wants grimy". Add one of these whenever the beat is squalid, stolen, or hidden.
+
+**Setting words only when the setting carries meaning.** For one beat the user said the
+setting "doesn't matter much here"; for a dark-alley beat he rejected bright clips twice,
+because the darkness carried the danger. Spend a token on setting when it carries danger,
+secrecy or squalor — otherwise let act + position + heat lead.
+
+**Read the labels, not just the pictures.** Google's own result labels and URLs are the
+richest term mine available — this session they taught `dogging` (public/outdoor sex) and
+`back alley` unprompted. When a label uses a word you did not know, that word is your
+next query. (General web search is useless for this — sanitized, returns encyclopedia and
+spam. Reddit's anonymous JSON API is blocked. Both were tried.)
+
+## PornHub dialect (how to read its vocabulary — not a route)
+
+These were measured against PornHub's own search box while the site was reachable. They
+survive here as facts about **its tag taxonomy**, which is what you are borrowing when you
+read a PornHub title off a Google result.
+
+**Its vocabulary is 2–3 canonical tags wide.** 4+ token queries returned literally 0
+results — a hard cliff, not a degradation. So when you mine a PornHub title for terms,
+what you are looking for is the 1–2 canonical tags inside it (`dogging`, `back alley`),
+not the whole title as a phrase.
+
+**Rare words get silently dropped from compounds — a bigger number means a worse pool.**
+Measured: `stockroom` alone returned 5 gifs; `stockroom blowjob` returned 37, and those 37
+were generic blowjob, because the rare word was dropped and only `blowjob` survived. The
+transferable lesson: a compound containing an unusual word is no evidence that a pool for
+that unusual word exists. On Google the equivalent check is free — read the result labels
+and see whether the rare word actually appears in them.
+
+---
+
+## Doctrine note — the authoring skill was never the bug
+
+It is tempting, after seeing a descriptive `search_queries` entry return garbage, to
+"fix" it upstream by making the authoring skill emit two-word tags. Don't. Those
+descriptive queries only ever failed against **PornHub's search tokenizer**, which is not a
+route here at all. On Google the same verbose, natural-language queries work.
+The defect lived in one engine's tokenizer, and it has been routed around. Mandating
+tag-shaped queries in the authoring layer would throw away the narrative specificity that
+makes a query steerable, to satisfy a search box we stopped typing into.
+
+Also retired with it: the old **setting-first formula** (`kitchen+blowjob` over
+`blowjob+kitchen`). Its entire justification was "PornHub weights the first keyword
+heavily". The validator never enforced it, and no measurement supports word order
+mattering on Google. Do not reorder queries for its own sake; decide whether the setting
+word belongs in the query at all, which is the question that actually changes results.
+
+---
 
 ## The validation report
 
-Output format when the validator flags queries:
+`validate_queries.py` prints these sections, in this order, and exits **1** if any of
+FLAGGED / TIER MISMATCH / FORMAT MISMATCH / TIER RETAG is non-empty (0 otherwise):
 
 ```
 === Query Validation Report ===
-Checked {N} items.
+Checked 47 queries across 19 items (target: google).
 
-⚠️ FLAGGED ({N} items need narrative-context rewrite):
+⚠️  FLAGGED (2 queries need narrative-context rewrite):
 
-| # | file | tier | current query | issue | proposed |
-|---|------|------|---------------|-------|----------|
-| 1 | breakfast_ethan_t6 | t6 | "manual stimulation kitchen" | needs_direction_from_narrative + solo_trap | (resolve with narrative; probable: "men fingering girl kitchen counter") |
-| 2 | scene_taste2 | t5 | "blowjob couch night" | banned_word:night, needs_direction_check | "couch blowjob amateur" if she→him; else fix |
+  [NEEDS NARRATIVE] scenes/breakfast_ethan_t6.webm (t6)
+    Original: 'oral kitchen counter'
+    Issues:   needs_direction_from_narrative:oral
 
-✅ AUTO-REWRITTEN ({N} items):
+  [UNUSABLE] scenes/solo_t5.webm (t5)
+    Original: 'masturbation bedroom'
+    Issues:   unusable_query, unusable:masturbation_is_solo_only
 
-| # | file | original | rewritten | rules applied |
-|---|------|----------|-----------|---------------|
-| 3 | breakfast_base | "passionate morning coffee" | "couple morning coffee kitchen" | stripped:passionate, added:couple+kitchen |
+⚠️  TIER MISMATCH (1 queries):
 
-✅ OK ({N} items — no changes needed)
+  [t3] locations/kitchen_t3.jpg
+    Query:    'kitchen blowjob morning'
+    Issues:   tier_mismatch:sfw_query_has_sexual_term
+
+✅ AUTO-REWRITTEN (1 queries):
+
+  scenes/couch_t5.webm (t5)
+    Original:  'hand job on the couch'
+    Rewritten: 'handjob on the couch'
+    Rules:     rewrote:hand job→handjob
+
+⚠️  FORMAT MISMATCH (1 items — motion vs static):
+
+  scenes/riding_t6.jpg
+    Current:     .jpg
+    Detected:    animated (riding, thrusting)
+    Recommended: .webm
+    description/queries suggest motion (riding, thrusting) but file is .jpg — use .webm or .gif
+
+⚠️  TIER RETAG (1 confident auto, 1 need your call):
+
+  [AUTO → _t5] scenes/hallway.webm
+    untagged but description is explicit (blowjob) → NSFW
+  [ASK  → suggest _t4] scenes/porch.jpg
+    untagged borderline (kissing) — confirm heat: t3 peck / t4 makeout / t5+ explicit
+
+✅ OK: 39 queries pass without changes.
+   Format OK: 18/19 items.
 ```
 
-The LLM reads this report, resolves the FLAGGED items using narrative context (reads the TOML), and produces the final ranked query list for RETRIEVE.
+`--json` emits `{target, exit_code, queries, format_checks, tag_proposals}` instead of the
+human report — the same exit code rides in the payload, so a caller reading stdout does not
+have to shell out for `$?`. Use it when you are feeding the retag flow in
+`references/content_rating.md`.
+
+Read the report, resolve every FLAGGED item from the TOML narrative, and carry the
+rewritten queries into SEARCH. FORMAT MISMATCH and TIER RETAG are separate axes handled
+elsewhere; they ride along in the same run because they need the same parse.

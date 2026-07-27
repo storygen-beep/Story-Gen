@@ -1,18 +1,43 @@
 # Scope Brief — `{{item_id}}`
 
-Fill this template during SCOPE phase. Write to `games/{{game}}/.find-media/scope/{{item_id}}.md`. Source for every field: the API response at `games/{{game}}/.find-media/game_review.json` (see `references/game_review_api.md`).
+Fill this template during SCOPE — the first phase of SCOPE → PLAN → SEARCH → STOCK → JUDGE →
+INSTALL. Write to `games/{{game}}/.find-media/scope/{{item_id}}.md`.
+
+Sources: the API response cached at `games/{{game}}/.find-media/game_review.json` (see
+`references/game_review_api.md`) for the item list, plus the game's merged TOML for canvas
+narrative — `games/{{game}}/toml_phases/*_final_game.toml` (`7_final_game.toml` in current
+games, `6_final_game.toml` in older ones like `under_one_roof` and `two_weeks`).
+
+**This brief is the only thing the search and the frame-strip check get to read.** Whatever
+you leave out here you re-derive badly two hours later, in front of 40 thumbnails, from
+memory. §Demand is the part that carries: it feeds the heat axis in
+`references/scoring_rubric.md` and it becomes the literal checklist you hold against the
+frame strip.
 
 ## Identity
 
 - **item_id**: `{{item_id}}` (derived from `file` field, filesystem-safe)
-- **file_path**: `{{file}}` (verbatim from API)
-- **type**: `{{type}}` — one of `image`, `video`, `location_image`, `clothing_image`, `social_post_image`, `dating_profile_photo`
-- **category**: `{{category}}` — one of `Activities`, `Story`, `Locations`, `Clothing`, `Social Media`, `Other`
+- **file_path**: `{{file}}` (verbatim — this is the key for the options store, the review
+  store, and dedupe; every API call uses it unchanged)
+- **type**: `{{type}}` — one of `image`, `video`, `location_image`, `clothing_image`,
+  `social_post_image`, `dating_profile_photo`, `portrait_image`
+- **category**: `{{category}}` — one of `Activities`, `Story`, `Locations`, `Clothing`,
+  `Social Media`, `Portraits`, `Other`
 - **canvas_id**: `{{canvas_id}}`
 - **order**: `{{order}}`
-- **tier**: `{{tier}}` (for canvas items: infer from filename `_tN` suffix; for location/clothing/social_post/dating_profile: always `base`)
-- **content_rating**: `{{sfw|nsfw}}` (location/clothing/social_post/dating_profile: always `sfw`)
-- **required_format**: (from `scripts/tier_format_check.py` rules — tier-driven for canvas items, `.jpg` for static non-canvas categories)
+- **tier**: `{{tier}}` (canvas items: infer from the filename `_tN` suffix; location /
+  clothing / social_post / dating_profile: always `base`)
+- **content_rating**: `{{sfw|nsfw}}` (non-canvas types: always `sfw`)
+- **required_format**: from `scripts/tier_format_check.py` rules — but note the download API
+  decides the saved extension from the SOURCE URL, not from the TOML, so this is what you
+  *want*, not what you will necessarily get. Verify after install.
+- **discovered_by**: `{{game_review|toml_walker}}` — record which list found this item, so a
+  future coverage gap in the API shows up as a walker-only item instead of hiding. (The
+  portrait classes were exactly such a gap until 2026-07-27; the API enumerates them now.)
+  Walker regex: `(?:file|image|video|nav_image)\s*=\s*"([^"]+)"`.
+- **scene_id for capture**: `{{scene_id}}` — the directory part of `file_path`, relative to
+  `videos/`. `scenes/kiss`, never `videos/scenes/kiss`, never `output/videos/scenes/kiss`
+  (the API strips `videos/` but not `output/`, and the file lands nested wrongly).
 
 ## Narrative context — branches by type
 
@@ -20,7 +45,9 @@ Fill ONE of the following subsections based on `{{type}}`.
 
 ### If `type` is `image` or `video` (canvas block)
 
-Read the TOML at `games/{{game}}/toml_phases/6_final_game.toml`. Find the canvas block by matching `file = "{{file}}"` inside the canvas with id `{{canvas_id}}`. Extract the 2–3 narrative paragraphs/dialog blocks that appear BEFORE and AFTER this block in the same node.
+Find the canvas block by matching `file = "{{file}}"` inside the canvas with id
+`{{canvas_id}}` in the merged TOML. Extract the 2–3 narrative paragraphs / dialog blocks
+that appear BEFORE and AFTER this block in the same node.
 
 **Before:**
 > {{before_paragraph_1}}
@@ -39,14 +66,15 @@ Description shape: `"@poster_name: caption"`.
 - **Poster**: `{{poster_name}}` (the `@handle` from description)
 - **Caption**: `{{caption}}` (everything after the first `:`)
 - **Hashtags** (extracted from caption): `{{hashtags}}`
-- **Content cues** (nouns/verbs from caption that ground the scene): `{{cues}}`
+- **Content cues** (nouns/verbs from the caption that ground the scene): `{{cues}}`
 
 ### If `type` is `location_image`
 
 Description shape: `"Navigation image for {location_name}"`.
 
 - **Location name**: `{{location_name}}`
-- **Location TOML metadata** (read from `games/{{game}}/toml_phases/` — find `[[locations]]` entry with matching `image` field): indoor/outdoor, type, tone
+- **Location TOML metadata** (find the `[[locations]]` entry whose `image` field matches):
+  indoor/outdoor, type, tone
 
 ### If `type` is `clothing_image`
 
@@ -61,63 +89,219 @@ Description shape: `"{item_name} ({slot})"`.
 Description shape: `"Dating profile photo for {npc_name or id}"`.
 
 - **NPC**: `{{npc_name_or_id}}`
-- **NPC lookup** — find the NPC in `game_review.json` → `npcs` array by matching id or name. Extract:
+- **NPC lookup** — find the NPC in `game_review.json` → `npcs` by id or name. Extract:
   - **age**: `{{npc_age}}`
   - **traits**: `{{npc_traits}}` (physical build, profession, hobbies)
+
+## Demand — what this slot has to deliver
+
+The four fields the rubric cannot reconstruct later. Write them from the beat prose, not
+from the filename.
+
+### setting_is_load_bearing: `{{true|false}}`
+
+> Why: {{one line}}
+
+The test: **does the setting carry danger, secrecy, or squalor?** If it does, it is part of
+the meaning and both the query and the score spend on it — a dark alley beat died twice on
+bright clips because the darkness *was* the danger. If it does not, the setting is
+disposable: the query must not spend words on it (words spent on setting are words stolen
+from act and heat), and the setting axis in `references/scoring_rubric.md` is **skipped and
+recorded as `null`** — one answer only, never "scored low". Measured precedent: on one
+blowjob beat the user said the setting "doesn't matter much here" and picked on the eyes.
+
+### intended_heat: `{{one or two clauses}}`
+
+What makes this beat land — the thing that, if missing, makes a spec-perfect clip dead.
+Name the carrier, not the act. Known carriers, in the order they have actually won:
+
+| Carrier | Reads on screen as |
+|---|---|
+| Eye contact | She holds the camera for the whole loop, not one frame |
+| Being used | Passive body, someone else setting the pace |
+| Power | Who is standing, who is kneeling, who is holding the head |
+| Squalor / grime | The room is wrong for this and it is happening anyway |
+| Exposure / risk | Public, half-dressed, someone could walk in |
+
+The user's winning pick over the assistant's was chosen explicitly because "the eyes made
+it win" — it beat a spec-correct alternative that was correct and dead. That is what this
+field exists to protect.
+
+### must_show: `{{concrete, checkable list}}`
+
+Pull straight from the beat prose. Each entry must be verifiable in a single frame.
+
+- e.g. `man standing`, `woman kneeling`, `his hand not his cock`, `3+ men visible`,
+  `she holds camera eye contact`
+
+### avoid: `{{concrete, checkable list}}`
+
+The hard gates. Every entry here is a documented rejection class from this game's history:
+wrong count, wrong position, wrong act, wrong affect, extra people, face filters, finishes
+that never show the finish.
+
+- e.g. `more than one man`, `POV`, `bright studio lighting`, `smiling performer`,
+  `face filter`
+
+**POV is two cases, not one rule.** POV is a defect when the scene's meaning needs the
+partner's body seen — a slack, limp, or watching man cannot also be the camera. POV is fine,
+often stronger, when the clip's power is her face and eyes aimed at the viewer. Decide which
+case this beat is and write it into `must_show` or `avoid`; do not leave it to judging time.
+
+### strip checklist (derived)
+
+Copy `must_show` + `avoid` into a numbered list here. This is what you hold against the
+evidence: **every animated finalist (`.webm` / `.mp4` / `.gif`) is strip-verified; a static
+finalist (a location or clothing `.jpg`, which cannot be stripped) is judged from the contact
+sheet.** The strip is route-independent and it kills roughly half of what looked good:
+3 of 5 in one round this session, 4 of 6 in the next. Kills included a
+"perfect cluttered back room" thumbnail whose loop was standing kissing with no blowjob at
+all, and a "dark outdoor" thumbnail whose loop was a bright daytime laundromat. Eye contact
+in particular must HOLD ACROSS THE WHOLE STRIP — two candidates died on wandering eyes their
+thumbnails hid.
+
+1. {{check}}
+2. {{check}}
 
 ## Derived facts for query planning
 
 Fill by type:
 
-- **canvas (image/video)**: setting, action, direction if ambiguous, people count (1|2|0), mood
-- **social_post_image**: poster persona (e.g., `fit woman`, `travel influencer`), scene subject (activity implied by hashtags/caption), setting if implied, selfie-style required
+- **canvas (image/video)**: act, position, people count (1|2|3+), direction if ambiguous,
+  affect, setting *only if load-bearing*
+- **social_post_image**: poster persona (e.g. `fit woman`, `travel influencer`), scene
+  subject (activity implied by hashtags/caption), setting if implied, selfie-style required
 - **location_image**: wide-angle vs interior, empty (no people), time of day if implied
-- **clothing_image**: flat-lay product photo (no person), style tag, color (from name if declared)
+- **clothing_image**: flat-lay product photo (no person), style tag, colour (from name if
+  declared)
 - **dating_profile_photo**: selfie or candid, age range, gender, key trait hint
+
+## Queries — one slot per source
+
+Not a single ranked ladder. The dialects are **opposite**, so a query written for one source
+is wrong on the other and ranking them against each other is meaningless.
+
+### Google (Chrome) — primary route
+
+- **google_query**: `{{query}}`
+- **variant_2**: `{{query}}`
+- **variant_3**: `{{query}}`
+
+Rules that produced these (see `references/query_rewriting.md` for the full set):
+
+- Verbose is fine. Natural language is fine. Loose grammar is fine — `on kneel blowjob`
+  worked.
+- **Strip story and character words.** Measured: `back alley blowjob gif drunk guy night`
+  returned Reddit movie stills, Facebook, and TikTok — "drunk guy" reclassified the whole
+  query as mainstream. Character words don't dilute here, they *change the intent class*.
+- Add an anti-studio modifier when the beat is grimy: `amateur`, `real`, `voyeur`,
+  `hidden cam`. This is the fix for the most-repeated defect in this game's history —
+  bright studio porn arriving for a beat that wanted dirt.
+- Only name the setting if `setting_is_load_bearing` is true.
+
+### PornHub tag — vocabulary only, never a download
+
+- **bare_word**: `{{rare_word}}` → **pool size**: `{{n}}` results
+- **pornhub_query**: `{{query}}` (≤3 tokens)
+- **tags harvested**: `{{tags}}`
+
+**A PornHub-hosted result is read for its title and its tags and then dropped.** It is never
+queued as a candidate: `egl.phncdn.com/gif/<id>.gif` returns 470 on clearnet *and* over Tor,
+and the real media URL is signed, time-limited and IP-locked — a signature our extraction
+destroys by construction, because it strips query strings. Full measurement in
+`references/media_sources.md` §"PornHub is discovery-only". So fill this section to learn the
+word, then go spend the word on Google.
+
+PornHub's search silently drops rare words from compound queries and returns literally 0
+results for 4+ tokens. Measured: `stockroom` alone = 5 gifs; `stockroom blowjob` = 37, and
+those 37 are generic blowjob — the rare word was dropped and the count went UP. **Always
+count the bare word's pool before trusting a compound query**, and record the number above,
+because a 5-result pool means the word is thin and the tag route is not worth a second query.
+
+### Term discovery
+
+Skip only if the beat is plain vanilla. This step is why `downblouse` was never found: the
+skill had no term-discovery step at all.
+
+- **candidate terms**: `{{terms}}`
+- **where from**: `{{source}}`
+
+Where terms actually come from, ranked by what worked:
+
+1. **Google's own result labels and URLs** — the richest mine. They taught `dogging` and
+   `back alley` this session, unprompted. Read the labels, not just the pictures.
+2. **Grok / an LLM, for modifiers and community names only.** Its headline "best search
+   terms" are near-useless — it paraphrases your sentence into 4–5 token phrases, which
+   return 0 on PornHub. Verify any community it names before trusting it: `r/OutdoorBlowjobs`
+   is real but nearly dead (2.2k weekly visitors, 4 posts/week).
+3. **Not WebSearch.** Sanitised, returns encyclopedia and spam. Reddit's anonymous JSON API
+   is blocked. Both were tried this session; both failed.
 
 ## Rejection criteria (auto-populated from type + tier)
 
-### SFW types (always: location_image, clothing_image, social_post_image default, dating_profile_photo)
+These are the hard gates that run before scoring. `avoid` above is per-beat; this is
+per-type and always applies.
+
+### SFW types (location_image, clothing_image, social_post_image default, dating_profile_photo)
 
 - Reject 3+ people on activity canvases (canvas items only)
-- Reject commercial/restaurant when narrative says home (canvas only)
-- **location_image**: reject lifestyle shots with people dominating the frame — the point is the space
-- **clothing_image**: reject fashion editorial with model — the point is the item
-- **social_post_image**: reject group shots, content that doesn't match the caption's persona
-- **dating_profile_photo**: reject professional studio portraits — dating profiles are candid selfies/casual shots
+- Reject commercial/restaurant when the narrative says home (canvas only)
+- **location_image**: reject lifestyle shots with people dominating the frame — the point is
+  the space
+- **clothing_image**: reject fashion editorial with a model — the point is the item
+- **social_post_image**: reject group shots, and anything that doesn't match the caption's
+  persona
+- **dating_profile_photo**: reject professional studio portraits — dating profiles are
+  candid selfies and casual shots
 
 ### NSFW types (canvas image/video at t4+)
 
-Full NSFW hard-reject list from `references/scoring_rubric.md` §Hard rejection filters.
+Full gate list in `references/scoring_rubric.md` §Gate 1 — CAST and §Gate 3 — the BEAT, plus
+this brief's `avoid` list. Every one of them is binary: a gate failure ends the candidate and
+is recorded with a named reason. None of them is worth points.
 
-## Ranked queries (filled after PLAN phase)
+## Mode — how deep to stock the shelf
 
-After the synthesis step (for empty `search_queries`) and after `validate_queries.py --from-api-json` runs:
+Mode is an **option count**, not a retry budget. Every slot ships one installed best-guess
+pick plus a stocked shelf in the options store for the human to flip through; the mode only
+sets how tall the shelf is.
 
-1. `{{top_query}}` — primary
-2. `{{backup_1}}` — alternate
-3. `{{backup_2}}` — broadened
-4. `{{backup_3}}` — last resort
-
-## Mode
-
-- **Quick**: SFW base tier only, no critique loop
-- **Standard**: mixed SFW or t4, one critique cycle on failure
-- **Deep**: any t5+, up to 3 critique cycles
-
-For location/clothing/social_post/dating_profile categories: always quick mode (they're all SFW, low-complexity).
+| Mode | Options to stock | When |
+|---|---|---|
+| `fill` | 6 | SFW static slots — location, clothing, social post, dating profile. Low variance, cheap to eyeball, 6 is plenty. |
+| `wide` | 12 | Any NSFW canvas slot. The strip kills ~half, so a 6-deep shelf can arrive as 2 survivors. Stock 12 to land 6. |
+| `deep` | 18 | Capstones, hero assets reused across canvases, and any refetch after the human disapproved the installed pick — the first shelf already proved wrong. |
 
 Selected mode for this item: `{{mode}}`
+Option target: `{{n}}`
+
+Mode sets shelf depth only. How many of that shelf get strip-verified is **one number for
+every mode** — the top 6 by contact-sheet rank (`references/scoring_rubric.md` §Gate 2). The
+rest stay stocked and unproven, which is honest and useful; they are alternates, not installs.
+
+**A refetch rebuilds the shelf — stock first, prune after.** Never clear on the way in;
+wiping first once silently ate three harvests. The order is:
+
+1. `t0 = now()` in ISO-8601, recorded before you stock anything.
+2. Stock the new candidates with `options/add`, exactly as on a first run.
+3. `POST /api/v1/dev/media-finder/options/clear {game, file, before: t0}` — `before` drops
+   only entries added before that instant, so the fresh set survives, and entries carrying
+   `origin: "previous"` (the slot's undo history) survive regardless.
+
+Do not walk `options/list` and `options/remove` each stale URL: that deletes the undo history
+too, and it destroys the pool before its replacement exists.
 
 ## Resume marker
 
-Write these as the last line of the brief file:
+Write these as the last lines of the brief file:
 
 ```
 PHASE: scope_complete
 NEXT_PHASE: plan
-SCORED: no
-PACKAGED: no
+OPTIONS_STOCKED: 0
+INSTALLED: no
 ```
 
-On resume, the skill reads this to decide whether to redo SCOPE or skip to the next phase.
+On resume, the skill reads this to decide whether to redo SCOPE or skip ahead.
+`OPTIONS_STOCKED` is the real progress signal — an item with an installed pick but 0 stocked
+options is not done, because the human has nothing to choose from.

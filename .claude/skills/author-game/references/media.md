@@ -157,12 +157,29 @@ find-media skill runs them to fetch the asset, so vague or literary queries retu
 just stores the array verbatim (it never validates it), so this is pure craft — and it's the half Vesper, Last
 Call, and Late Shifts all skipped.
 
-**The rules (recovered from `prompts/toml_generation_prompt_v4.txt:905-1001`, engine-verified neutral):**
+> **⚠️ Corrected 2026-07-27 after a measured A/B.** The old rules here were tuned for searching PornHub's
+> own index directly, and they were taught as if they were universal search law. They are not. find-media now
+> searches **Google Images**, which behaves almost oppositely: it handles long natural-language queries fine,
+> but it re-classifies a query as mainstream the moment you put *story* words in it. The old "3-5 words,
+> setting first" law is retired. What follows is what actually measured better.
 
-- **Two queries per block: a primary + one fallback.** **3-5 words each.** **Setting word goes FIRST** (the
-  setting is the hardest thing to match, so anchor on it).
-- **Queries are physical, not emotional.** The search index ignores story/feeling words — they add noise, not
-  signal.
+**The rules:**
+
+- **Two queries per block: a primary + one fallback.** Length is not the constraint — *content* is. A
+  descriptive query is fine; a story-flavoured one is not.
+- **Lead with the ACT and the POSITION, and say who does what to whom.** That is what the searcher must match
+  and what the reviewer will check. `woman kneeling man standing blowjob` beats `back room encounter`.
+- **⚠️ Name the setting ONLY when the setting carries meaning** — danger, secrecy, squalor, being somewhere
+  you shouldn't be. Otherwise leave it out entirely and spend the words on the act.
+  Measured: for a dim-storeroom beat, six setting-led queries returned 72 candidates and only 2 usable ones;
+  one act-led query returned 28 and 5 usable. But for a dark-alley beat the darkness *was* the point, and
+  bright clips were rejected twice — there, the setting word earns its place. Ask which kind of beat it is.
+- **⚠️ NEVER put story or character words in a query** — names, "drunk", "nervous", "her boss", plot state.
+  These do not merely add noise; on a general image index they flip the whole result set to mainstream
+  content. Measured: adding `drunk guy` to a working query returned film stills, news and social-media posts
+  and zero usable candidates. The narrative lives in `description`; the query is physical only.
+- **Mood adjectives are still wasted words** (see the list below) but for the milder reason: they just don't
+  index. The story-word rule above is the one that actually breaks a search.
 - **Vocabulary mapping — use these exact terms:**
   | Narrative | Query term |
   |---|---|
@@ -176,16 +193,34 @@ Call, and Late Shifts all skipped.
 - **⚠️ Gender-direction rule.** For acts that have heavy solo/lesbian results (fingering, cunnilingus,
   touching, rubbing), **always include `men`/`guy` + `girl`** or you get the wrong content.
   `kitchen fingering` → solo girls; `men fingering girl kitchen` → the M/F couple you meant.
-- **⚠️ Banned words (noise — never put them in a query):** passionate, desperate, urgent, emotional, intimate,
+- **⚠️ Wasted words (they don't index — leave them out):** passionate, desperate, urgent, emotional, intimate,
   lingering, forbidden, tender, intense, domestic, tension, longing, devoted, savoring, seductive, sensual,
   secret, lazy, beautiful, gorgeous, perfect, hot. Also "manual", "manual stimulation", "sexual tension".
+- **Push away from studio porn when the beat is grimy.** `amateur`, `real`, `voyeur`, `hidden cam` are the
+  words that do it. Bright-studio-when-the-beat-wants-dim is the single most common rejection we get, and
+  these are the only reliable lever against it.
 - **Tier-appropriate (see §5):** base/t2/t3 (SFW) = couple/action/setting, **no sex terms**; t4 = kissing /
   making out / hands on body; t5+ = the explicit vocabulary above.
 
-**Good:** `["men fingering girl kitchen counter", "kitchen couple morning"]` · `["doorway blowjob kneeling",
-"hallway oral standing"]` · `["couple wine patio night", "two people balcony evening"]`
+**Good:** `["men fingering girl kitchen counter", "kitchen couple morning"]` · `["woman kneeling man standing
+blowjob amateur", "kneeling blowjob eye contact"]` · `["couple wine patio night", "two people balcony evening"]`
 **Bad:** `"manual stimulation kitchen morning light"` (unsearchable) · `"passionate fuck against wall urgent"`
-(noise words) · `"oral kitchen morning"` (ambiguous — say blowjob or cunnilingus).
+(wasted words) · `"oral kitchen morning"` (ambiguous — say blowjob or cunnilingus) · `"back alley blowjob
+drunk guy night"` (**"drunk guy" flips the whole search to mainstream results** — measured).
+
+### The `description` is a checklist, not a caption
+
+find-media derives its accept/reject gates from your `description`, and the reviewer checks the clip against
+it. So write it **physically checkable**: who is where, in what position, who is visible, what act. "On her
+knees on dirty concrete behind a bar, a slumped man above her" gives a gate. "A grim little transaction in the
+dark" gives nothing, and whatever gets installed cannot be judged wrong.
+
+A real cost of getting this wrong: a shipped clip in `vesper` showed the woman **standing** while its beat
+said "on her knees" — it passed unnoticed for months because nothing was checkable enough to fail.
+
+**Say what makes the beat land, too.** If the charge is her holding eye contact, or that she's being used and
+not enjoying it, or that he's visibly wrecked — put it in the description. That is the one thing a searcher
+cannot infer from an act name, and it is what separates a clip that is *correct* from a clip that *works*.
 
 > ⚠️ **The key-name trap:** a **content block** uses bare `search_queries`. A **`[[locations]]`** entry uses a
 > *different* key, **`image_search_queries`**, for its `image`. Same craft, different key — don't cross them.

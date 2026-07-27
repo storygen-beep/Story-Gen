@@ -449,6 +449,66 @@ def _extract_missing_media(data: dict, game_name: str) -> dict:
             else:
                 missing.append(entry)
 
+    # 6. Portraits — NPC faces, the player-portrait states, and any image-valued
+    # customization option.
+    #
+    # These were invisible to this API for its whole life, so they never appeared in
+    # the review page, the missing list, or the finder. They surfaced only as
+    # "File not found" lines during packaging, which is why a new NPC's face kept
+    # shipping absent and getting discovered late. 21 such assets in vesper alone.
+    def _add_portrait(image, description, canvas_id):
+        nonlocal order_idx
+        if not image or not isinstance(image, str):
+            return
+        entry = {
+            "file": image,
+            "type": "portrait_image",
+            "category": "Portraits",
+            "description": description,
+            # Portraits are UI chrome (a face in the sidebar), never a scene, so they
+            # are always SFW regardless of how explicit the game is.
+            "search_queries": [],
+            "canvas_id": canvas_id,
+            "order": order_idx,
+        }
+        order_idx += 1
+        actual_name, actual_ext, serve_path = find_file(image)
+        if actual_name is not None:
+            entry["actual_file"] = actual_name
+            entry["actual_type"] = "image" if actual_ext in IMAGE_EXTS else "video"
+            entry["serve_path"] = serve_path
+            found.append(entry)
+        else:
+            missing.append(entry)
+
+    for npc in data.get("npcs", []) or []:
+        name = npc.get("name") or npc.get("id") or ""
+        _add_portrait(npc.get("portrait"), f"Portrait for {name}", "portraits")
+
+    player_portrait = data.get("player_portrait") or {}
+    if isinstance(player_portrait, dict):
+        for key, value in player_portrait.items():
+            if key.endswith("_image") and isinstance(value, str):
+                state = key[: -len("_image")].replace("_", " ")
+                _add_portrait(value, f"Player portrait — {state}", "portraits")
+        for outfit in player_portrait.get("outfits", []) or []:
+            if isinstance(outfit, dict):
+                label = outfit.get("name") or outfit.get("id") or "outfit"
+                _add_portrait(
+                    outfit.get("image"), f"Player portrait — {label}", "portraits"
+                )
+
+    for field in (data.get("player", {}) or {}).get("customization_fields", []) or []:
+        if not isinstance(field, dict) or field.get("type") != "image_select":
+            continue
+        label = field.get("label") or field.get("id") or "customization"
+        for option in field.get("options", []) or []:
+            if isinstance(option, dict):
+                opt_name = option.get("label") or option.get("value") or ""
+                _add_portrait(
+                    option.get("image"), f"{label} — {opt_name}", "portraits"
+                )
+
     return {"missing": missing, "found": found}
 
 

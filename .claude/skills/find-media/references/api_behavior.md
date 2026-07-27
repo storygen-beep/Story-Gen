@@ -19,14 +19,15 @@ Request body:
 }
 ```
 
-Implementation: `api/v1/dev.py:451-589`.
+Implementation: `api/v1/dev.py:455-593` (`media_capture`).
 
 ### Extension detection order
 
-From `dev.py:543-556`:
+From `dev.py:547-560`:
 
 1. **`get_extension_from_url(url)`** — parses the URL path for a known extension
-2. **Fallback**: `requests.head(url)` → read `Content-Type` header → `MIME_TO_EXT` lookup
+2. **Fallback**: `requests.head(url, headers={"User-Agent": "Mozilla/5.0"})` → read
+   `Content-Type` → `get_extension_from_content_type` → `MIME_TO_EXT` lookup
 3. **Last resort**: `"jpg"`
 
 `MIME_TO_EXT` (from `dev.py:65-76`):
@@ -48,7 +49,7 @@ Anything outside this map → fallback `.jpg`.
 
 ### The TOML extension is stripped, not honored
 
-From `dev.py:116-123`, inside `parse_scene_path(scene_id)`:
+From `dev.py:119-123`, inside `parse_scene_path(scene_id)`:
 
 ```python
 known_extensions = {'.mp4', '.webm', '.mov', '.mkv', '.avi', '.m4v',
@@ -62,7 +63,7 @@ The scene_id you pass (including from TOML file paths) gets its extension stripp
 
 ### Overwrite-on-match (game workflow only)
 
-From `dev.py:558-564`, when `game` is provided:
+From `dev.py:562-569`, when `game` is provided:
 
 ```python
 for existing in output_dir.iterdir() if output_dir.exists() else []:
@@ -85,10 +86,13 @@ This behavior is **game-only**. Without a `game` parameter, files go to `DOWNLOA
 
 ## The renderer's extension-agnostic lookup
 
-From `apps/game_generation/twee_comprehensive/generators/v1.py:8040-8079`:
+From the shipping renderer, `apps/game_generation/twee_comprehensive/generators/v2.py:11751-11792`
+(v1 is deprecated/rollback-only — don't read it for current behavior):
 
 ```python
 def _find_media_file(self, requested_path: str) -> tuple[str | None, str | None]:
+    normalized = requested_path.replace('\\', '/')
+
     # 1. Exact match first (backward compat)
     if normalized in self.video_files:
         ext = Path(normalized).suffix.lower()
@@ -96,14 +100,29 @@ def _find_media_file(self, requested_path: str) -> tuple[str | None, str | None]
 
     # 2. Extension-agnostic search
     base_path = str(Path(normalized).with_suffix(''))
-    for file_path in self.video_files.keys():
-        file_base = str(Path(file_path).with_suffix(''))
-        if file_base == base_path:
-            ext = Path(file_path).suffix.lower()
-            return file_path, ext
+
+    # Try the original path, then again with any leading "videos/" stripped —
+    # the video_folder root IS "videos/", so indexed keys never carry it
+    candidates = [base_path]
+    if base_path.startswith('videos/'):
+        candidates.append(base_path[len('videos/'):])
+
+    for candidate in candidates:
+        for file_path in self.video_files.keys():
+            file_base = str(Path(file_path).with_suffix(''))
+            if file_base == candidate:
+                ext = Path(file_path).suffix.lower()
+                return file_path, ext
+
+    return None, None
 ```
 
 Returns `(actual_path, actual_extension)`. The **actual extension drives rendering** — the generator decides `<video>` vs `<img>` from what's on disk, not what's in the TOML.
+
+The `videos/` strip has a mirror on the write side: `media_capture` strips a leading
+`videos/` off the scene_id subfolder before building the output path (`dev.py:510-515`),
+so `videos/activities/x.mp4` and `activities/x.mp4` both land in
+`games/<game>/videos/activities/`. Declaring the prefix or not is harmless in both directions.
 
 ## End-to-end flow
 
@@ -159,14 +178,27 @@ RENDERER: emits <video src="scenes/kiss.webm">
 - `yt-dlp` decides the final extension based on its format selection
 - File lands with whatever `yt-dlp` chose — not necessarily what the URL path suggested
 
-**Age-gate redirect to HTML** (common for adult sites without proper headers):
-- `download_direct` detects `text/html` Content-Type and aborts
+**Age-gate / interstitial redirect to HTML** (adult hosts that gate the asset behind a page):
+- `download_direct` checks `Content-Type` on both the HEAD and the GET and aborts on
+  `text/html` (`dev.py:224-225` and `dev.py:263-264`)
 - Returns error: `"URL returned HTML instead of media"`
-- NSFW pipeline must handle this — retry with Tor-routed URL, check referer header requirements
+- **Do not chase it.** There is no retry that fixes this — an HTML body means the url is a
+  page, not the asset. Drop the candidate and install the next one off the stocked shelf;
+  that shelf exists precisely so a dead url costs a pick, not a re-search. Hosts that
+  behave this way belong in `media_sources.md`, not in a retry loop
+- Signed/expiring urls (a signature in the query string, an IP lock) are the same class of
+  dead end — a stripped-query url from one of those hosts is unfetchable by construction.
+  `*.phncdn.com` is the one you will meet most: PornHub serves its real asset from a
+  signed, time-limited, IP-locked url, and our extraction strips query strings, so the
+  signature is gone by the time you hold the url. Don't queue a PornHub-hosted result for
+  download at all — read it for its title and tags, then drop it (`media_sources.md`)
 
 **Source URL returns an error page with 200 OK**:
 - No fallback detection — file lands with whatever extension the URL/CT indicated
-- Size check (`> 1KB` images, `> 50KB` videos) in `tier_format_check.py` catches tiny error-page bodies
+- Two separate guards catch it. **Fetch sanity**, right after download: discard anything
+  under **1024 bytes** or whose bytes are HTML — always check the bytes, never the url.
+  **Pre-install gate**, `tier_format_check.py`: images ≥ **1024 B**
+  (`MIN_IMAGE_BYTES`), animated ≥ **51200 B** (`MIN_VIDEO_BYTES`)
 
 ## What this means practically
 
@@ -182,4 +214,4 @@ You do NOT need to:
 - Clean up old files between iterations
 - Specify extensions in requests to the API (it ignores them)
 
-This is why the skill's format-classification logic targets **the SOURCE you pick** during PLAN/RETRIEVE, not the TOML declaration. The TOML is a hint for humans; the source URL is the contract.
+This is why the skill's format-classification logic targets **the SOURCE you pick** during PLAN/SEARCH, not the TOML declaration. The TOML is a hint for humans; the source URL is the contract.

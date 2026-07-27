@@ -1,94 +1,243 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "find-media run manifest",
-  "description": "Final summary written to games/<game>/.find-media/run_manifest.json after a find-media run completes. Cumulative across critique cycles. Used for telemetry and resume.",
+  "description": "Summary written to games/<game>/.find-media/run_manifest.json as a find-media run progresses, across SCOPE → PLAN → SEARCH → STOCK → JUDGE → INSTALL. One entry per media slot. A slot is DONE when it has an installed pick AND a stocked shelf of options in the options store — the manifest records both, plus every candidate a gate killed, so a later audit can tell a thin source from a bad query. Two invariants this schema enforces by shape: correctness is recorded as BINARY gates and never as points (see references/scoring_rubric.md), and there is NO accept threshold — candidates are ranked and stocked, the human decides. Used for resume, for audit_mode (references/audit_mode.md), and for the cross-run source ranking in by_source.",
   "type": "object",
-  "required": ["game", "started_at", "ended_at", "mode", "totals", "items", "by_source", "by_tier"],
+  "required": ["game", "started_at", "mode", "totals", "items", "by_source", "by_tier"],
   "properties": {
-    "game": { "type": "string", "description": "Game slug, e.g. two_weeks" },
+    "game": { "type": "string", "description": "Game slug, e.g. vesper" },
     "started_at": { "type": "string", "format": "date-time" },
     "ended_at": { "type": "string", "format": "date-time" },
     "duration_seconds": { "type": "number" },
-    "mode": { "type": "string", "enum": ["quick", "standard", "deep"] },
+    "mode": {
+      "type": "string",
+      "enum": ["fill", "wide", "deep"],
+      "description": "Run-level default option target: fill=6, wide=12, deep=18. Mode is a shelf depth, not a retry budget. Per-item overrides live in items[].mode."
+    },
     "skill_version": { "type": "string", "description": "Version of find-media skill that produced this manifest" },
+
     "totals": {
       "type": "object",
-      "required": ["total", "downloaded", "skipped", "failed"],
+      "required": ["total", "installed", "failed", "options_stocked"],
       "properties": {
-        "total": { "type": "integer" },
-        "downloaded": { "type": "integer" },
-        "skipped": { "type": "integer", "description": "Already existed or deduped" },
-        "failed": { "type": "integer" },
-        "critique_cycles_total": { "type": "integer" }
+        "total": { "type": "integer", "description": "Slots in scope for this run" },
+        "installed": { "type": "integer", "description": "Slots with a file on disk — the game works" },
+        "stocked_only": { "type": "integer", "description": "Slots with options on the shelf but no install (rare; means every candidate failed the strip)" },
+        "failed": { "type": "integer", "description": "Slots with neither an install nor a usable shelf" },
+        "skipped": { "type": "integer", "description": "Already present on disk, or deduped against used_assets.jsonl" },
+        "options_stocked": { "type": "integer", "description": "Total options posted across all slots. Divided by `installed`, this is the real shelf depth the human sees." },
+        "strip_kills": { "type": "integer", "description": "ANIMATED candidates (.webm/.mp4/.gif) that passed the thumbnail read and then failed frame-strip verification. Historically ~half (3 of 5, then 4 of 6, in two rounds). A run of animated slots where this is near zero means the strip was skipped, not that the candidates were good. Static slots (.jpg location/clothing) cannot be stripped and never contribute here." }
       }
     },
+
     "items": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["item_id", "file_path", "tier", "status"],
+        "required": ["item_id", "file_path", "status", "options"],
         "properties": {
           "item_id": { "type": "string" },
-          "file_path": { "type": "string" },
-          "tier": { "type": "string" },
+          "file_path": { "type": "string", "description": "TOML-declared path, verbatim. The key for the options store, the review store, and dedupe." },
+          "type": { "type": "string", "enum": ["image", "video", "location_image", "clothing_image", "social_post_image", "dating_profile_photo", "portrait_image"], "description": "The game-review item type (references/game_review_api.md). Not the same field as an option's media_kind, whose only legal values are img and video." },
+          "category": { "type": "string" },
+          "canvas_id": { "type": "string" },
+          "tier": { "type": "string", "enum": ["base", "location", "t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8"], "description": "The tier tag scripts/tier_format_check.py gates on — t0 and t1 are legal there, not 'unknown_tier'." },
           "content_rating": { "type": "string", "enum": ["sfw", "nsfw"] },
-          "status": { "type": "string", "enum": ["downloaded", "skipped", "failed"] },
-          "winner": {
+          "discovered_by": {
+            "type": "string",
+            "enum": ["game_review", "toml_walker"],
+            "description": "Which list surfaced this slot. Recording it separates a future API coverage gap from a genuine miss — the portrait classes were exactly such a gap until 2026-07-27, and the API enumerates them now."
+          },
+          "route": {
+            "type": "string",
+            "description": "Primary search route for this slot. Names must match references/chrome_route.md — typically google_images (Chrome — the only search route) or manual (URL supplied by the human). A PornHub-hosted result is a VOCABULARY source only (its title and tags), never a download candidate — see references/media_sources.md — so it is not a retrieval route here."
+          },
+          "mode": { "type": "string", "enum": ["fill", "wide", "deep"] },
+          "option_target": { "type": "integer", "description": "Options this slot was supposed to stock. Compare against options_stocked to spot thin sources." },
+          "options_stocked": { "type": "integer", "description": "Options actually accepted by options/add for this file" },
+          "status": {
+            "type": "string",
+            "enum": ["installed", "stocked_only", "failed", "skipped"],
+            "description": "installed = a file is on disk AND options are stocked; stocked_only = shelf exists but nothing survived to install; failed = neither"
+          },
+
+          "brief": {
             "type": "object",
+            "description": "Echo of the demand block from templates/scope_brief.md. Carried here so an audit can judge a pick without re-reading the beat prose.",
             "properties": {
-              "source": { "type": "string" },
-              "url": { "type": "string" },
-              "score_total": { "type": "integer" },
-              "score_breakdown": {
-                "type": "object",
-                "properties": {
-                  "setting": { "type": "integer" },
-                  "action": { "type": "integer" },
-                  "appearance": { "type": "integer" },
-                  "quality": { "type": "integer" },
-                  "relevance": { "type": "integer" },
-                  "mood": { "type": "integer" },
-                  "composition": { "type": "integer" }
-                }
+              "setting_is_load_bearing": { "type": "boolean" },
+              "setting_why": { "type": "string" },
+              "intended_heat": { "type": "string", "description": "The carrier that makes the beat land — eye contact, being used, power, squalor, exposure" },
+              "must_show": { "type": "array", "items": { "type": "string" } },
+              "avoid": { "type": "array", "items": { "type": "string" } }
+            }
+          },
+
+          "queries": {
+            "type": "array",
+            "description": "Per-source query slots, not a ranked ladder — the Google and PornHub dialects are opposite, so ranking them against each other is meaningless.",
+            "items": {
+              "type": "object",
+              "required": ["query", "route"],
+              "properties": {
+                "query": { "type": "string" },
+                "route": { "type": "string" },
+                "candidates_returned": { "type": "integer", "description": "Downloadable urls harvested. Zero for a PornHub-dialect query by construction — that dialect returns vocabulary, not candidates." },
+                "bare_word_pool": { "type": "integer", "description": "PornHub dialect only: result count for the rare word ALONE. A compound query whose count exceeds this had the rare word silently dropped. Recorded because the tag pool sizes the WORD's usefulness; the results themselves are read for titles and tags, never queued for download." }
               }
             }
           },
-          "critique_cycles": { "type": "integer", "description": "How many critique cycles this item needed" },
-          "queries_used": { "type": "array", "items": { "type": "string" } },
-          "fail_reason": { "type": "string", "description": "Present only when status=failed" },
-          "best_below_threshold": {
-            "type": "object",
-            "description": "Best candidate that did not pass threshold — surfaced to user for manual review",
-            "properties": {
-              "source": { "type": "string" },
-              "url": { "type": "string" },
-              "score_total": { "type": "integer" }
+
+          "terms_discovered": {
+            "type": "array",
+            "description": "Vocabulary learned during this slot (e.g. downblouse, dogging, back alley). Google result labels and URLs are the richest source. Worth persisting: the term is reusable across games, the clip is not.",
+            "items": {
+              "type": "object",
+              "required": ["term"],
+              "properties": {
+                "term": { "type": "string" },
+                "learned_from": { "type": "string" },
+                "produced_a_keeper": { "type": "boolean" }
+              }
             }
-          }
+          },
+
+          "options": {
+            "type": "array",
+            "description": "Every candidate that reached the shelf or died on the way. Stocked options are what the human flips through in the review UI; killed ones stay here as evidence. Stocking happens ONCE, right after extraction and BEFORE judging, so most options land here unjudged (no gates, no scores) and that is correct — judging only ranks and installs.",
+            "items": {
+              "type": "object",
+              "required": ["option_id", "url", "source", "route", "decision", "installed"],
+              "properties": {
+                "option_id": { "type": "string", "description": "Stable candidate id — e.g. porngif.co/8f31c2, or a hash of the URL for hosts without ids" },
+                "url": { "type": "string", "description": "Original CDN URL with the query string STRIPPED — the browser JS tool blocks results carrying query-string data, and options/add dedupes on exact URL. This stripping is also why a signed, time-limited, IP-locked PornHub media url can never be a candidate: the signature lives in the query string we drop." },
+                "page_url": { "type": "string", "description": "Where the candidate was found, if different from the media URL" },
+                "source": { "type": "string", "description": "Host that served the media. Keys by_source. Characterised fetchable hosts: blovjob.com, cdn.nsfwgify.com, xgroovy.com, porngif.co, cdn.hardcoregify.com, cdn.xgifer.com, imagex1.sx.cdn.live (sex.com), flashingjungle.com, static-ca-cdn.eporner.com. Any other host is 'surfaced, not yet characterised' — record it and let by_source tell you what it is worth. *.phncdn.com must never appear here: PornHub is discovery-only." },
+                "route": { "type": "string" },
+                "media_kind": { "type": "string", "enum": ["img", "video"], "description": "As posted to options/add — the two legal values, never 'image'. .gif → img (it previews as an <img>), .webm/.mp4 → video. The backend lowercases the field and defaults to img (api/v1/media_finder.py, options_add). The renderer picks <video> vs <img> from what is actually on disk, not from the TOML extension." },
+                "thumbnail_path": { "type": "string", "description": "Local evidence path under .find-media/evidence/<item_id>/" },
+                "strip_path": { "type": "string", "description": "Local frame-strip path. Absent on an animated candidate means the strip was never built — which means unverified, not clean. Absent on a static candidate is normal; a .jpg cannot be stripped." },
+
+                "gates": {
+                  "type": "object",
+                  "description": "Correctness, recorded as BINARY gates. Act, position, people count, affect, cast, and POV-when-the-scene-requires-the-partner-visible are pass/fail — they may NEVER be scored, because points are how a correct-but-dead clip out-totals a flawed-but-alive one. A null on any gate means it does not apply to this beat (e.g. no finish is called for). Absent whole object = the option was stocked but never judged.",
+                  "required": ["passed"],
+                  "properties": {
+                    "passed": { "type": "boolean", "description": "False if ANY gate below failed. A false here ends the candidate; it is not a low score." },
+                    "cast": { "type": ["boolean", "null"], "description": "Who may be on screen, per the TOML character definitions" },
+                    "act": { "type": ["boolean", "null"], "description": "The described act — his hand is not his cock" },
+                    "position": { "type": ["boolean", "null"], "description": "Kneeling vs standing, from-behind vs supine" },
+                    "count": { "type": ["boolean", "null"], "description": "The beat's declared people count, in EITHER direction — two when the beat says three fails, and so does three when it says two" },
+                    "affect": { "type": ["boolean", "null"], "description": "Right affect. Right-but-limp is not a gate failure; it scores low on HEAT." },
+                    "extra_people": { "type": ["boolean", "null"], "description": "Nobody present the beat doesn't have" },
+                    "finish": { "type": ["boolean", "null"], "description": "Only when the beat calls for a finish and the loop must show it" },
+                    "pov": { "type": ["boolean", "null"], "description": "Only when the scene's meaning needs the partner's body seen — a slack or watching man cannot also be the camera. POV is fine, often stronger, when the power is her face; when it is not a failure it must not be penalized on any axis." },
+                    "failed_gate": {
+                      "type": ["string", "null"],
+                      "enum": ["cast", "act", "position", "count", "affect", "extra_people", "finish", "pov", null],
+                      "description": "Which gate ended it. Null when passed=true."
+                    },
+                    "reason": { "type": ["string", "null"], "description": "Slug matching scores.jsonl gate_reason — cast:*, act:*, position:*, count:*, affect:*, finish:*, pov:*. `wrong_setting` is NOT a valid reason: setting is scored, never gated." }
+                  }
+                },
+
+                "scores": {
+                  "type": "object",
+                  "description": "Per-axis scores from references/scoring_rubric.md. EXACTLY three axes — nothing about what is depicted is scoreable, that lives in `gates`. Present only for options that were actually judged.",
+                  "required": ["heat"],
+                  "properties": {
+                    "heat": { "type": "integer", "description": "Dominant axis (60 when setting is load-bearing, 85 when it isn't). Does the intended_heat carrier read on screen, held ACROSS the loop? On SFW items this same slot holds the LIFE score — lived-in and specific vs a stock render of the concept." },
+                    "setting": { "type": ["integer", "null"], "description": "Weight 25 when the setting carries danger, secrecy, or squalor. When it does not, the axis is SKIPPED and recorded as null — never scored low. Scoring a disposable setting low is the bug that discarded hot clips." },
+                    "craft": { "type": "integer", "description": "Weight 15: can you read what is happening? Resolution is not a gate and barely an axis — a 264px clip won. Corner watermarks cost nothing." }
+                  }
+                },
+                "heat_band": {
+                  "type": ["string", "null"],
+                  "enum": ["alive", "working", "dead", null],
+                  "description": "Which HEAT band the evidence put it in — the frame strip for animated candidates, the contact sheet for static ones. Drives the dead-clip veto at install time: a top-ranked DEAD option is not installed, the best ALIVE or WORKING one is."
+                },
+                "score_total": { "type": "integer", "description": "heat + setting + craft, out of 100. A rank key for the shelf — never a pass mark. No accept threshold exists." },
+
+                "verified": {
+                  "type": "string",
+                  "enum": ["strip", "contact_sheet", "thumbnail"],
+                  "description": "How this candidate was actually looked at. `strip` = frame strip (every ANIMATED finalist). `contact_sheet` = a static finalist, which is judged from the sheet because a .jpg cannot be stripped. `thumbnail` = stocked alternate, unproven — legitimate on the shelf, never for the install."
+                },
+                "strip_verdict": {
+                  "type": "string",
+                  "enum": ["pass", "fail", "not_run", "not_applicable"],
+                  "description": "Frame-strip verification for animated candidates (.webm/.mp4/.gif) — route-independent, and mandatory for every animated finalist. Thumbnails lie constantly: a 'cluttered back room blowjob' thumbnail whose loop was standing kissing, a 'dark outdoor' thumbnail whose loop was a bright daytime laundromat. `not_applicable` = static candidate. `not_run` = an unstripped stocked alternate, which is fine; on an installed animated pick it is a defect."
+                },
+                "strip_notes": { "type": "string", "description": "What the strip showed that the thumbnail hid. Required when strip_verdict=fail." },
+
+                "decision": {
+                  "type": "string",
+                  "enum": ["installed", "stocked", "gate_reject"],
+                  "description": "The three real outcomes. installed = written to disk as the best-guess pick; stocked = on the shelf for the human, whether or not it was judged; gate_reject = a named gate failed. There is no score-based rejection and no bar — a low total ranks last, it does not eliminate."
+                },
+                "reject_reason": { "type": "string", "description": "Echo of gates.reason for the rejected candidates — e.g. count:1_man, affect:smiling_when_used, pov:partner_needed. Never a setting complaint." },
+
+                "installed": { "type": "boolean", "description": "True for the one option written to disk via the grab/capture API" },
+                "posted_to_store": { "type": "boolean", "description": "Accepted by POST /api/v1/dev/media-finder/options/add. Deduped by exact URL, so a false here usually means a duplicate, not an error." }
+              }
+            }
+          },
+
+          "human_selection": {
+            "type": ["object", "null"],
+            "description": "Recorded after the human reviews the shelf. Null until then — the run does not wait on it. This is the only place the manifest learns whether the installed best-guess was actually right.",
+            "properties": {
+              "option_id": { "type": "string" },
+              "url": { "type": "string" },
+              "matched_installed_pick": { "type": "boolean", "description": "False means the skill's pick lost to a stocked alternate — the signal worth mining across runs" },
+              "review_status": { "type": ["string", "null"], "enum": ["approved", "disapproved", null], "description": "From media-review/reviews, where `game` is a QUERY param — as it also is on media-finder's options/list (GET); the media-finder POST endpoints take it in the BODY. Re-send the note on every status POST; posting a status without it WIPES the note. One decision covers every canvas reusing the asset." },
+              "note": { "type": "string" },
+              "selected_at": { "type": "string", "format": "date-time" }
+            }
+          },
+
+          "pool_all_dead": {
+            "type": "boolean",
+            "description": "True when every gate-surviving option landed in the DEAD heat band. Install the best of them anyway — the game must render — and say so plainly in the report. This is a query problem, not a verdict, and it is the honest replacement for the old accept threshold: nothing is withheld from the human, the shelf is just flagged."
+          },
+          "pool_note": {
+            "type": "string",
+            "description": "Free text for what the shelf is actually like when it needs a caveat — e.g. 'thin: 4 options, all one host', 'all DEAD, re-query with an anti-studio modifier'. Surface it rather than silently dropping the slot; a named flaw beats a blank shelf."
+          },
+
+          "fail_reason": { "type": "string", "description": "Present only when status=failed" }
         }
       }
     },
+
     "by_source": {
       "type": "object",
-      "description": "Per-source hit rate. Over time, informs which sources to prioritize.",
+      "description": "Per-host yield, keyed by the `source` field on each option. This is the mechanism for empirically ranking the sites the Chrome route reaches — the fetchable corpus is nine hosts the old single-source route never saw, gathered across queries and each measured fetchable on clearnet with no signing and no expiry: blovjob.com, cdn.nsfwgify.com, xgroovy.com, porngif.co, cdn.hardcoregify.com, cdn.xgifer.com, imagex1.sx.cdn.live (sex.com), flashingjungle.com, static-ca-cdn.eporner.com. Accumulate it across runs; after a few games it tells you which hosts to read first, and it is where a newly-surfaced, not-yet-characterised host earns or loses its place.",
       "additionalProperties": {
         "type": "object",
         "properties": {
-          "attempts": { "type": "integer" },
-          "hits": { "type": "integer" },
-          "hit_rate": { "type": "number" }
+          "candidates": { "type": "integer", "description": "URLs harvested from this host" },
+          "stocked": { "type": "integer", "description": "Reached the shelf" },
+          "strip_passed": { "type": "integer", "description": "Animated candidates that survived frame-strip verification — the honest quality signal" },
+          "installed": { "type": "integer" },
+          "human_selected": { "type": "integer", "description": "Chosen by the human over the alternates. The only ground truth here." },
+          "hit_rate": { "type": "number", "description": "strip_passed / candidates, over animated candidates only. Meaningless for a host that only ever served static images — leave it absent there." }
         }
       }
     },
+
     "by_tier": {
       "type": "object",
-      "description": "Per-tier success rate. Reveals whether failures cluster at specific tiers.",
+      "description": "Per-tier outcome, keyed by tier (base, location, t0–t8). Reveals whether failures cluster at specific tiers — a t5 column of stocked_only means the query dialect is wrong for explicit beats, not that the run was unlucky.",
       "additionalProperties": {
         "type": "object",
         "properties": {
           "total": { "type": "integer" },
-          "downloaded": { "type": "integer" },
-          "failed": { "type": "integer" }
+          "installed": { "type": "integer" },
+          "stocked_only": { "type": "integer" },
+          "failed": { "type": "integer" },
+          "avg_options_stocked": { "type": "number" },
+          "strip_kill_rate": { "type": "number", "description": "strip_kills / animated candidates evaluated at this tier" }
         }
       }
     }

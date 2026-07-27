@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 """
-tier_format_check.py — hard gate before PACKAGE
+tier_format_check.py — hard gate before INSTALL
 
-Enforces two rules:
-  1. Tier rule — t5+ must be animated video (.webm/.mp4/.gif), never a static JPG
-  2. Family rule (optional via --description) — motion-worthy scenes (kiss/tease/
-     undress/bathe/nudity/explicit) must be animated regardless of tier
+Enforces one rule, per tier: t5+ must be animated video (.webm/.mp4/.gif), never a
+static JPG.
 
-Checks file extension, file size, and magic bytes. The description check runs
-during PLAN phase via validate_queries.py and is re-applied here as a final gate.
+Checks file extension, file size, and magic bytes at EVERY tier. Magic bytes are the
+only check that survives a third-party CDN — the Chrome/Google route fetches from a
+dozen hosts, any of which can serve an HTML error page or a JPEG behind a .gif URL,
+and neither shows up in the extension or the size.
+
+The motion-vs-static content-family question is a separate axis and lives in
+scene_semantics.py / validate_queries.py, which run during PLAN.
 
 Usage:
     python tier_format_check.py --file <path> --tier <tier> [--json]
@@ -27,12 +30,19 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 
 
-SFW_TIERS = {"base", "t2", "t3", "location"}
+# t0/t1 are legal tags (scene_semantics.infer_tier_tagged accepts _t0.._t8); without
+# them here a correctly-tagged low-tier slot failed the pre-install gate as
+# "unknown_tier" — a rejection that described nothing wrong with the file.
+SFW_TIERS = {"base", "t0", "t1", "t2", "t3", "location"}
 BORDERLINE_TIERS = {"t4"}
 NSFW_VIDEO_TIERS = {"t5", "t6", "t7", "t8"}
 
-SFW_ALLOWED_EXT = {".jpg", ".jpeg", ".png", ".webp"}
+SFW_STATIC_EXT = {".jpg", ".jpeg", ".png", ".webp"}
 NSFW_ANIMATED_EXT = {".webm", ".mp4", ".gif"}
+# .gif is allowed at SFW tiers as of the Chrome/Google route. Google Images hands back
+# gifs for SFW beats too, and the renderer picks <video> vs <img> from the bytes on
+# disk — so a SFW gif is a valid asset, not a mis-fetch to reject.
+SFW_ALLOWED_EXT = SFW_STATIC_EXT | {".gif"}
 NSFW_T4_ALLOWED_EXT = SFW_ALLOWED_EXT | NSFW_ANIMATED_EXT
 
 MIN_IMAGE_BYTES = 1024
@@ -46,6 +56,23 @@ MAGIC_BYTES = {
     b"GIF87a": "gif",
     b"GIF89a": "gif",
 }
+
+# Magic names grouped the same way extensions are, so "the bytes agree with the name"
+# is one comparison instead of a per-tier allow-list that drifts.
+ANIMATED_MAGIC = {"webm", "mp4", "gif"}
+STATIC_MAGIC = {"jpeg", "png", "webp_or_wav"}
+
+
+def ext_family(extension: str) -> str:
+    return "animated" if extension in NSFW_ANIMATED_EXT else "static"
+
+
+def magic_family(magic: str | None) -> str | None:
+    if magic in ANIMATED_MAGIC:
+        return "animated"
+    if magic in STATIC_MAGIC:
+        return "static"
+    return None  # unrecognised → almost always an HTML error page saved as media
 
 
 @dataclass
@@ -99,9 +126,13 @@ def check(path: Path, tier: str) -> CheckResult:
     if tier in SFW_TIERS:
         if result.extension not in SFW_ALLOWED_EXT:
             failures.append(f"sfw_tier_wrong_extension:{result.extension}")
+        # A SFW .gif keeps the image floor, not the video floor: the floor exists to
+        # catch 0-byte and error-page stubs, and a short SFW gif is legitimately small.
         if result.size_bytes < MIN_IMAGE_BYTES:
             failures.append(f"image_too_small:{result.size_bytes}B")
-        if result.magic_type not in {"jpeg", "png", "webp_or_wav"}:
+        # Family comparison rather than a flat allow-list — now that .gif is legal at
+        # SFW, a flat list would let gif BYTES pass inside a .jpg name.
+        if magic_family(result.magic_type) != ext_family(result.extension):
             failures.append(f"magic_mismatch:{result.magic_type}")
 
     elif tier in BORDERLINE_TIERS:
@@ -110,6 +141,13 @@ def check(path: Path, tier: str) -> CheckResult:
         min_size = MIN_VIDEO_BYTES if result.extension in NSFW_ANIMATED_EXT else MIN_IMAGE_BYTES
         if result.size_bytes < min_size:
             failures.append(f"file_too_small:{result.size_bytes}B")
+        # t4 used to skip magic bytes entirely — it was the one tier where an HTML
+        # error page or a JPEG served behind a .gif URL sailed through to INSTALL.
+        if result.magic_type is None:
+            failures.append("magic_mismatch:None")
+        elif magic_family(result.magic_type) != ext_family(result.extension):
+            failures.append(
+                f"magic_ext_family_mismatch:{result.extension}_holds_{result.magic_type}")
 
     elif tier in NSFW_VIDEO_TIERS:
         if result.extension not in NSFW_ANIMATED_EXT:

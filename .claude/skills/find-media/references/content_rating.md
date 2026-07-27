@@ -9,9 +9,12 @@ SFW vs NSFW comes from the `_tN` suffix in the filename (`infer_tier`,
 `validate_queries.py`). That's a manual flag the author can forget or set wrong:
 
 - **No tag** silently defaults to `base` = SFW. A passionate kiss with no suffix gets
-  pulled as a tame stock photo.
-- **Wrong tag** misroutes: a sex scene tagged `_t2` → stock (gets nothing); a dinner
-  tagged `_t6` → PornHub (absurd).
+  hunted with the SFW vocabulary and comes back a tame stock photo.
+- **Wrong tag** misroutes: a sex scene tagged `_t2` gets the SFW query dialect and the
+  SFW sources, which have nothing for it; a dinner tagged `_t6` gets the adult dialect
+  and the adult corpus (absurd). Same Chrome route either way — what changes is the
+  vocabulary you search with and which hosts you accept a candidate from
+  (`media_sources.md`).
 
 So: **content leads the routing; the tag grades the heat.** The *description* is more
 reliable than one keystroke for the binary "does this need an adult source?"; the tag is
@@ -59,22 +62,38 @@ never audited.
 
 ## How to run it (ordering matters)
 
+Both scripts are stdlib-only — plain `python3`, no pinned interpreter.
+
 ```bash
 # 1. audit — proposals come out of the normal validate run
-"$VALIDATE_PY" .../validate_queries.py --from-api-json games/<game>/.find-media/game_review.json --json
+python3 .claude/skills/find-media/scripts/validate_queries.py \
+  --from-api-json games/<game>/.find-media/game_review.json --json
 #    read tag_proposals[]: action ∈ {auto_retag, ask, leave}
 
 # 2. take the auto_retags as-is; ASK the user the tier for every `ask`; build accepted.json
-#    [{"file":"activities/couch_kiss.jpg","tier":"t4"}, ...]
+#    one object per accepted proposal:
+#    [{"file": "activities/couch_kiss.jpg", "tier": "t4"}]
 
 # 3. write the corrected suffixes into the SOURCE phases (dry-run first)
-"$VALIDATE_PY" .../apply_retags.py --phases-dir games/<game>/toml_phases --accepted accepted.json --dry-run
-"$VALIDATE_PY" .../apply_retags.py --phases-dir games/<game>/toml_phases --accepted accepted.json
+python3 .claude/skills/find-media/scripts/apply_retags.py \
+  --phases-dir games/<game>/toml_phases --accepted accepted.json --dry-run
+python3 .claude/skills/find-media/scripts/apply_retags.py \
+  --phases-dir games/<game>/toml_phases --accepted accepted.json
 
-# 4. re-merge + re-package so the rename lands, then RE-FETCH the missing-media list
-python scripts/merge_toml_phases.py ...   &&   python manage.py package_from_toml ...
-#    re-run the game-review load — now the missing list reflects the corrected names
+# 4. re-merge + re-package so the rename lands (repo venv active), then RE-FETCH the list
+python scripts/merge_toml_phases.py games/<game> --validate
+python manage.py package_from_toml \
+  --file games/<game>/toml_phases/7_final_game.toml \
+  --output games/<game>/output --video-folder games/<game>/videos
+curl -s "http://localhost:8000/api/v1/dev/game-review/load?game=<game>" \
+  > games/<game>/.find-media/game_review.json
+#    the missing list now reflects the corrected names
 ```
+
+The `7_` in the package path is the merged-final phase number for current games; older
+games merge to `6_final_game.toml`. The backend picks the highest numeric prefix
+(`_resolve_final_toml`, `api/v1/game_review.py`) — match whatever is actually in
+`games/<game>/toml_phases/`.
 
 After that, routing/format/SCOPE all derive from the corrected `_tN` through the
 **unchanged** `infer_tier`→pipeline path — no runtime override. `apply_retags.py` never

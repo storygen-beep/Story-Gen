@@ -18,9 +18,26 @@ Two input modes, same validation pipeline:
 Both modes feed the same validate_query() + check_format_alignment() pipeline,
 applying rules from references/query_rewriting.md.
 
+Query dialect is SOURCE-SPECIFIC, so rewriting is gated behind --target:
+
+  google (default)  Natural language and loose grammar are fine — a 7-token query
+                    works. What breaks Google is CHARACTER/STORY words: they flip the
+                    intent classifier and the whole query reclassifies as mainstream.
+  pornhub           Compound queries dilute: rare words get silently dropped, and 4+
+                    tokens can return literally 0 results. Flowery adjectives are dead
+                    weight and get stripped.
+
+The route-neutral half — what the scene IS (motion vs still, SFW vs NSFW, the _tN tag)
+— lives in scene_semantics.py and is re-exported here for existing callers.
+
 Usage:
-    python validate_queries.py --from-api-json <path> [--item <substring>] [--json]
-    python validate_queries.py --toml <path> [--item <substring>] [--json]
+    python validate_queries.py --from-api-json <path> [--target google|pornhub] [--item <substring>] [--json]
+    python validate_queries.py --toml <path> [--target google|pornhub] [--item <substring>] [--json]
+
+Exit codes:
+    0  nothing needs attention
+    1  something was flagged, rewritten, mis-formatted, or wants a retag (JSON mode too)
+    2  invalid arguments / input file missing
 """
 from __future__ import annotations
 
@@ -37,7 +54,43 @@ try:
 except ImportError:
     import tomli as tomllib  # type: ignore
 
+# scene_semantics.py sits beside this file. Running by path already puts scripts/ on
+# sys.path; importing validate_queries from anywhere else does not — so anchor it.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+# Imported wholesale and RE-EXPORTED on purpose: SKILL.md, content_rating.md and
+# apply_retags.py all reach for these through validate_queries, so the split must not
+# move a name out from under an existing caller. Hence the unused-import waiver.
+from scene_semantics import (  # noqa: E402,F401
+    ANIMATED_EXTENSIONS,
+    ANIMATED_KEYWORDS,
+    BORDERLINE_TIERS,
+    FormatCheck,
+    NON_CANVAS_TYPES,
+    NSFW_TIERS,
+    RATING_BORDERLINE,
+    RATING_HARD_NSFW,
+    RATING_NUDITY,
+    RATING_SFW,
+    SEXUAL_TERMS_FOR_SFW_CHECK,
+    SFW_TIERS,
+    STATIC_EXTENSIONS,
+    STATIC_KEYWORDS,
+    TagProposal,
+    check_format_alignment,
+    classify_content_family,
+    classify_content_rating,
+    infer_tier,
+    infer_tier_tagged,
+    propose_tag,
+)
+
+TARGETS = ("google", "pornhub")
+DEFAULT_TARGET = "google"
+
+# --- PornHub dialect ---------------------------------------------------------
+# PornHub matches TAGS. A flowery adjective is a token that matches no tag, and every
+# extra token narrows the result set — a 4+ token query can return literally 0.
 BANNED_WORDS = {
     "passionate", "tender", "urgent", "loving", "intimate",
     "sensual", "seductive", "emotional", "forbidden",
@@ -45,6 +98,27 @@ BANNED_WORDS = {
 }
 
 STORY_FILLERS = {"first time", "secret", "lazy"}
+
+# --- Google dialect ----------------------------------------------------------
+# Google does NOT mind adjectives or length; it minds INTENT. Measured: the query
+# `back alley blowjob gif drunk guy night` came back Reddit movie stills, Facebook and
+# TikTok — "drunk guy" alone reclassified a working porn query as mainstream. So the
+# harmful tokens here are character-STATE words, the opposite of the PornHub list.
+# Extrapolated from that one measurement, so kept to affect/state words that no porn
+# taxonomy uses as a category name. `sleeping`, `asleep` and `unconscious` are
+# DELIBERATELY absent: those ARE canonical category tags, so on Google they read as
+# porn intent, not story intent — the exact opposite of "drunk guy".
+GOOGLE_STORY_WORDS = {
+    "drunk", "wasted", "tipsy", "hungover",
+    "angry", "nervous", "scared", "crying", "sad", "shy", "embarrassed",
+    "reluctant", "unwilling", "hesitant", "exhausted", "tired",
+}
+# Multi-word equivalents, stripped as phrases.
+GOOGLE_STORY_PHRASES = {"passed out", "first time"}
+# NOT stripped on Google: setting words. A dark alley or a grimy back room is often the
+# only token carrying the beat's danger or squalor, and the user has rejected bright
+# clips twice on exactly that ground. Anti-studio modifiers (amateur / real / voyeur /
+# hidden cam) are ADDITIONS the author makes, not something to strip.
 
 AUTO_REWRITES = {
     "hand job": "handjob",
@@ -60,83 +134,9 @@ SOLO_TRAP_ACTIONS = {
     "masturbation": "__UNUSABLE_FOR_MF__",
 }
 
-SEXUAL_TERMS_FOR_SFW_CHECK = {
-    "sex", "fuck", "blowjob", "handjob", "fingering", "cunnilingus",
-    "oral", "pussy", "cock", "cum", "creampie", "penetration",
-    "missionary", "doggy", "cowgirl",
-}
-
 VANILLA_TERMS_FOR_NSFW_CHECK = {
     "romantic", "sweet", "tender", "loving",
 }
-
-SFW_TIERS = {"base", "t2", "t3", "location"}
-BORDERLINE_TIERS = {"t4"}
-NSFW_TIERS = {"t5", "t6", "t7", "t8"}
-
-# Content-family classification — drives format (image vs animated) independent of tier.
-# Tier gates explicitness (what can be shown). Family gates motion (how it should be shown).
-
-STATIC_KEYWORDS = {
-    "dinner", "lunch", "breakfast", "meal", "cooking", "cook", "eating",
-    "chores", "cleaning", "dishes", "laundry", "tidying",
-    "talking", "conversation", "chat", "sitting", "standing", "watching",
-    "reading", "studying", "working",
-    "greeting", "arrival", "departure", "goodbye",
-    "kitchen", "bedroom", "office", "garage", "backyard", "porch",
-    "coffee", "wine", "food",
-}
-
-ANIMATED_KEYWORDS = {
-    # Kisses — motion = chemistry
-    "kiss", "kissing", "makeout", "make out", "snog", "french kiss", "making out",
-    # Teasing / flirting (physical)
-    "tease", "teasing", "seduce", "seducing", "flirt",
-    # Undressing / exposure
-    "undress", "undressing", "strip", "stripping", "naked", "nude",
-    "flash", "flashing", "expose", "exposing", "topless",
-    # Bathing / washing (solo visible body)
-    "bathe", "bathing", "bath", "shower", "showering", "washing",
-    # Touch / intimate (erotic context)
-    "grope", "fondle", "caress",
-    # Core sex acts — prefer -ing forms where the bare verb has daily-life
-    # meaning ("ride the bus", "5am grind") to avoid false positives on
-    # fitness/lifestyle captions
-    "sex", "fuck", "fucking", "thrusting",
-    "riding", "grinding",
-    "blowjob", "handjob", "fingering", "cunnilingus", "oral", "eating out",
-    "missionary", "doggy", "cowgirl", "spooning", "bent over",
-    "cum", "creampie", "orgasm", "climax",
-}
-
-# Content-RATING buckets — drive the SFW/NSFW routing decision (which pipeline).
-# PURPOSE-BUILT and deliberately NOT the format ANIMATED_KEYWORDS set: format lumps
-# "kiss"/"bath" with "fuck" because all three are motion; rating must keep them apart
-# because a clothed kiss is stock-findable while a sex act is not. The routing question
-# is "is there nudity or a sex act?" — not "is it motion?".
-RATING_NUDITY = {
-    "nude", "naked", "topless", "bottomless",
-    "undress", "undressing", "strip", "stripping", "flash", "flashing",
-}
-# Stock genuinely can't serve these → confident NSFW.
-RATING_HARD_NSFW = SEXUAL_TERMS_FOR_SFW_CHECK | RATING_NUDITY | {"anal", "deepthroat"}
-# Clothed→explicit span; only the author knows the heat → default to ASK.
-RATING_BORDERLINE = {
-    "kiss", "kissing", "makeout", "make out", "making out", "snog", "french kiss",
-    "tease", "teasing", "seduce", "seducing", "grind", "grinding",
-    "caress", "grope", "fondle", "straddle", "in bed", "lingerie",
-    "bathe", "bathing", "bath", "shower", "showering", "washing",
-}
-# Vanilla → stock is fine.
-RATING_SFW = STATIC_KEYWORDS | {
-    "flirt", "flirting", "hug", "hugging", "embrace", "holding hands", "hold hands",
-    "cuddle", "cuddling", "smile", "date", "greet", "wave",
-}
-
-NON_CANVAS_TYPES = {"location_image", "clothing_image", "social_post_image", "dating_profile_photo"}
-
-ANIMATED_EXTENSIONS = {".webm", ".mp4", ".gif"}
-STATIC_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp"}
 
 
 @dataclass
@@ -149,72 +149,42 @@ class ValidationResult:
     rules_applied: list[str] = field(default_factory=list)
     tier_check_passed: bool = True
     needs_narrative_context: bool = False
+    target: str = DEFAULT_TARGET  # which dialect the rewrite was made for
 
 
-@dataclass
-class FormatCheck:
-    file: str
-    current_extension: str
-    detected_family: str  # "static" | "animated" | "ambiguous"
-    matched_keywords: list[str]
-    recommended_extension: str | None
-    passed: bool
-    message: str
-
-
-@dataclass
-class TagProposal:
-    file: str
-    current_tag: str
-    was_tagged: bool
-    content_signal: str  # "hard_nsfw" | "borderline" | "sfw" | "unknown"
-    matched: list[str]
-    proposed_tag: str | None  # the _tN to write (or suggested default for an ask); None for leave
-    action: str  # "auto_retag" | "ask" | "leave"
-    reason: str
-
-
-def infer_tier_tagged(file_path: str) -> tuple[str, bool]:
-    """Extract tier from a filename → (tier, was_tagged).
-
-    breakfast_ethan_t5.webm → ("t5", True); couch_kiss_base.jpg → ("base", True);
-    couch_kiss.webm → ("base", False). was_tagged distinguishes an untagged file
-    (which silently defaults to base) from one deliberately tagged _base — the whole
-    point of the audit, so a forgotten tag can be told apart from an intentional one.
-    """
-    stem = Path(file_path).stem
-    m = re.search(r"_t([0-8])$", stem)
-    if m:
-        return f"t{m.group(1)}", True
-    if stem.endswith("_base"):
-        return "base", True
-    return "base", False
-
-
-def infer_tier(file_path: str) -> str:
-    """Back-compat wrapper — tier only."""
-    return infer_tier_tagged(file_path)[0]
-
-
-def strip_banned(query: str) -> tuple[str, list[str]]:
-    """Remove banned words and story fillers. Returns (cleaned, applied_rules)."""
+def _strip_words(query: str, words: set[str], phrases: set[str]) -> tuple[str, list[str]]:
+    """Drop whole-token words and multi-word phrases. Returns (cleaned, applied_rules)."""
     applied = []
-    tokens = query.lower().split()
     kept = []
-    for tok in tokens:
+    for tok in query.lower().split():
         stripped = re.sub(r"[^\w]", "", tok)
-        if stripped in BANNED_WORDS:
+        if stripped in words:
             applied.append(f"stripped:{stripped}")
             continue
         kept.append(tok)
-    # Multi-word fillers
     cleaned = " ".join(kept)
-    for phrase in STORY_FILLERS:
-        if phrase in cleaned:
-            cleaned = cleaned.replace(phrase, "").strip()
-            cleaned = re.sub(r"\s+", " ", cleaned)
+    for phrase in phrases:
+        # Word-bounded, not a raw substring replace: `"secret"` in STORY_FILLERS used to
+        # eat the middle of "secretary" and ship the query as "ary hand on man crotch".
+        pattern = rf"\b{re.escape(phrase)}\b"
+        if re.search(pattern, cleaned):
+            cleaned = re.sub(r"\s+", " ", re.sub(pattern, "", cleaned)).strip()
             applied.append(f"stripped:{phrase}")
     return cleaned, applied
+
+
+def strip_banned(query: str) -> tuple[str, list[str]]:
+    """PornHub dialect: remove flowery adjectives and story fillers.
+
+    Deliberately NOT applied on Google, where "passionate" costs nothing and the
+    aggressive strip only threw away tokens that were doing no harm.
+    """
+    return _strip_words(query, BANNED_WORDS, STORY_FILLERS)
+
+
+def strip_story_words(query: str) -> tuple[str, list[str]]:
+    """Google dialect: remove character-STATE words that flip the intent classifier."""
+    return _strip_words(query, GOOGLE_STORY_WORDS, GOOGLE_STORY_PHRASES)
 
 
 def check_gender_direction(query: str) -> tuple[str | None, list[str], bool]:
@@ -262,11 +232,21 @@ def check_tier_alignment(query: str, tier: str) -> tuple[bool, list[str]]:
     return len(issues) == 0, issues
 
 
-def validate_query(original: str, tier: str, file_path: str) -> ValidationResult:
-    result = ValidationResult(file=file_path, tier=tier, original=original, rewritten=original)
+def validate_query(original: str, tier: str, file_path: str,
+                   target: str = DEFAULT_TARGET) -> ValidationResult:
+    """Rewrite one query for one retrieval target.
 
-    cleaned, banned_rules = strip_banned(original)
-    result.rules_applied.extend(banned_rules)
+    Only the WORD-STRIPPING half is target-dependent — the two surfaces punish opposite
+    vocabularies. check_gender_direction runs on both: "fingering" and "cunnilingus"
+    return solo-female results on any surface, and "oral"/"manual" are directionless
+    on any surface, so those fixes are about the ACT, not the search engine.
+    """
+    result = ValidationResult(file=file_path, tier=tier, original=original,
+                              rewritten=original, target=target)
+
+    strip = strip_banned if target == "pornhub" else strip_story_words
+    cleaned, strip_rules = strip(original)
+    result.rules_applied.extend(strip_rules)
 
     rewritten, gender_rules, needs_narrative = check_gender_direction(cleaned)
     result.rules_applied.extend(gender_rules)
@@ -284,125 +264,6 @@ def validate_query(original: str, tier: str, file_path: str) -> ValidationResult
 
     result.rewritten = rewritten.strip()
     return result
-
-
-def classify_content_family(description: str, search_queries: list[str]) -> tuple[str, list[str]]:
-    """Return (family, matched_keywords) where family is 'static', 'animated', or 'ambiguous'.
-
-    Any animated-keyword hit wins — kiss/tease/nudity/sex scenes need motion to land.
-    Static scenes (domestic, conversational, location shots) only classify as static when
-    they match static keywords AND don't match any animated keyword.
-    """
-    blob = " ".join([description] + list(search_queries)).lower()
-    animated_hits = sorted({kw for kw in ANIMATED_KEYWORDS if re.search(rf"\b{re.escape(kw)}\b", blob)})
-    if animated_hits:
-        return "animated", animated_hits
-    static_hits = sorted({kw for kw in STATIC_KEYWORDS if re.search(rf"\b{re.escape(kw)}\b", blob)})
-    if static_hits:
-        return "static", static_hits
-    return "ambiguous", []
-
-
-def check_format_alignment(file_path: str, description: str, search_queries: list[str]) -> FormatCheck:
-    """Check that the file extension matches the content family.
-
-    Kiss/tease/nudity/sex scenes written as .jpg → flagged (motion needed).
-    Dinner/chores/location scenes written as .webm → flagged (static fine, animation overkill).
-    """
-    ext = Path(file_path).suffix.lower()
-    family, keywords = classify_content_family(description, search_queries)
-
-    if family == "animated" and ext in STATIC_EXTENSIONS:
-        return FormatCheck(
-            file=file_path,
-            current_extension=ext,
-            detected_family=family,
-            matched_keywords=keywords,
-            recommended_extension=".webm",
-            passed=False,
-            message=f"description/queries suggest motion ({', '.join(keywords[:3])}) but file is {ext} — use .webm or .gif",
-        )
-
-    if family == "static" and ext in ANIMATED_EXTENSIONS:
-        return FormatCheck(
-            file=file_path,
-            current_extension=ext,
-            detected_family=family,
-            matched_keywords=keywords,
-            recommended_extension=".jpg",
-            passed=False,
-            message=f"description suggests static scene ({', '.join(keywords[:3])}) but file is {ext} — use .jpg",
-        )
-
-    return FormatCheck(
-        file=file_path,
-        current_extension=ext,
-        detected_family=family,
-        matched_keywords=keywords,
-        recommended_extension=None,
-        passed=True,
-        message="format matches content family" if family != "ambiguous" else "content family unclear — format accepted as-is",
-    )
-
-
-def classify_content_rating(description: str, search_queries: list[str]) -> tuple[str, list[str]]:
-    """Suggest the SFW/NSFW rating from scene meaning. Returns (signal, matched).
-
-    signal ∈ {hard_nsfw, borderline, sfw, unknown}. This is the ROUTING evidence
-    (which pipeline) — separate from classify_content_family (the still-vs-animated
-    FORMAT axis). hard_nsfw wins, then borderline, then sfw, else unknown.
-    """
-    blob = " ".join([description] + list(search_queries)).lower()
-
-    def hits(words: set[str]) -> list[str]:
-        return sorted({w for w in words if re.search(rf"\b{re.escape(w)}\b", blob)})
-
-    hard = hits(RATING_HARD_NSFW)
-    if hard:
-        return "hard_nsfw", hard
-    border = hits(RATING_BORDERLINE)
-    if border:
-        return "borderline", border
-    sfw = hits(RATING_SFW)
-    if sfw:
-        return "sfw", sfw
-    return "unknown", []
-
-
-def propose_tag(file_path: str, tier: str, was_tagged: bool, signal: str,
-                matched: list[str], item_type: str | None = None) -> TagProposal:
-    """Reconcile the author's tag against the content signal → a retag proposal.
-
-    Content leads the SFW/NSFW routing; the tag grades the heat. Up-grades on explicit
-    content are confident (auto); down-grades and all borderline calls are asked (the
-    author owns the heat grade). See references/content_rating.md for the full matrix.
-    """
-    def mk(proposed: str | None, action: str, reason: str) -> TagProposal:
-        return TagProposal(file=file_path, current_tag=tier, was_tagged=was_tagged,
-                           content_signal=signal, matched=matched,
-                           proposed_tag=proposed, action=action, reason=reason)
-
-    if item_type in NON_CANVAS_TYPES:
-        return mk(None, "leave", "non-canvas type — always SFW, never retagged")
-
-    cue = ", ".join(matched[:3])
-    tag_is_sfw = tier in SFW_TIERS
-    tag_is_nsfw = tier in BORDERLINE_TIERS or tier in NSFW_TIERS
-
-    if not was_tagged:
-        if signal == "hard_nsfw":
-            return mk("t5", "auto_retag", f"untagged but description is explicit ({cue}) → NSFW")
-        if signal == "borderline":
-            return mk("t4", "ask", f"untagged borderline ({cue}) — confirm heat: t3 peck / t4 makeout / t5+ explicit")
-        return mk(None, "leave", "untagged, reads SFW — default base is correct")
-
-    if tag_is_sfw and signal == "hard_nsfw":
-        return mk("t5", "auto_retag", f"tagged {tier} (SFW) but description is explicit ({cue}) → NSFW")
-    if tag_is_sfw and signal == "borderline":
-        return mk("t4", "ask", f"tagged {tier} (SFW) but borderline content ({cue}) — confirm")
-    if tag_is_nsfw and signal == "sfw":
-        return mk("base", "ask", f"tagged {tier} (NSFW) but content reads vanilla ({cue}) — confirm down-grade")
-    return mk(None, "leave", "tag consistent with content")
 
 
 def load_items_from_api_json(json_path: Path, item_filter: str | None = None) -> list[dict]:
@@ -491,6 +352,8 @@ def main() -> int:
     input_group.add_argument("--from-api-json", type=Path, dest="from_api_json",
                              help="Primary mode: read missing_media from a JSON file produced by the game-review API")
     p.add_argument("--item", default=None, help="Filter to items containing this substring")
+    p.add_argument("--target", choices=TARGETS, default=DEFAULT_TARGET,
+                   help=f"Retrieval surface the queries are written for (default: {DEFAULT_TARGET})")
     p.add_argument("--json", action="store_true", help="Emit JSON instead of human report")
     args = p.parse_args()
 
@@ -517,7 +380,7 @@ def main() -> int:
     for item in items:
         tier, was_tagged = infer_tier_tagged(item["file"])
         for q in item["search_queries"]:
-            all_results.append(validate_query(q, tier, item["file"]))
+            all_results.append(validate_query(q, tier, item["file"], args.target))
         format_checks.append(
             check_format_alignment(item["file"], item.get("description", ""), item["search_queries"])
         )
@@ -536,16 +399,24 @@ def main() -> int:
     retag_auto = [p for p in proposals if p.action == "auto_retag"]
     retag_ask = [p for p in proposals if p.action == "ask"]
 
+    # Computed ONCE, before the output branch. JSON mode used to hardcode `return 0`,
+    # so any orchestration that checked the exit code got a green light no matter what
+    # the payload said — the whole signal was discarded in the one mode a script reads.
+    exit_code = 1 if flagged or tier_issues or format_issues or retag_auto or retag_ask else 0
+
     if args.json:
         print(json.dumps({
+            "target": args.target,
+            "exit_code": exit_code,
             "queries": [asdict(r) for r in all_results],
             "format_checks": [asdict(fc) for fc in format_checks],
             "tag_proposals": [asdict(p) for p in proposals],
         }, indent=2))
-        return 0
+        return exit_code
 
     print("=== Query Validation Report ===")
-    print(f"Checked {len(all_results)} queries across {len(items)} items.\n")
+    print(f"Checked {len(all_results)} queries across {len(items)} items "
+          f"(target: {args.target}).\n")
 
     if flagged:
         print(f"⚠️  FLAGGED ({len(flagged)} queries need narrative-context rewrite):\n")
@@ -596,7 +467,7 @@ def main() -> int:
     print(f"✅ OK: {len(unchanged)} queries pass without changes.")
     print(f"   Format OK: {sum(1 for fc in format_checks if fc.passed)}/{len(format_checks)} items.")
 
-    return 1 if flagged or tier_issues or format_issues or retag_auto or retag_ask else 0
+    return exit_code
 
 
 if __name__ == "__main__":

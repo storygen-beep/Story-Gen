@@ -733,13 +733,18 @@ class GameService:
                 # Create parent directories for nested paths
                 dest_path.parent.mkdir(parents=True, exist_ok=True)
 
-                # Check if copy/compress needed
+                # Check if copy/compress needed.
+                # Size is NOT a usable freshness signal here: images are downscaled to
+                # max width 800 below, so the destination is always smaller than its
+                # source after the first copy. A size-based skip therefore matched every
+                # time and a REPLACED source image could never reach the built game —
+                # the long-standing "I swapped the art but the game still shows the old
+                # one" bug. Compare modification time instead: re-copy whenever the
+                # source is newer than what was last written out.
                 should_copy = True
                 file_size = source_path.stat().st_size
                 if not force_copy and dest_path.exists():
-                    dest_size = dest_path.stat().st_size
-                    # Skip if dest exists and is same size (raw copy) or smaller (already compressed)
-                    if dest_size == file_size or dest_size < file_size:
+                    if source_path.stat().st_mtime <= dest_path.stat().st_mtime:
                         should_copy = False
 
                 if should_copy:

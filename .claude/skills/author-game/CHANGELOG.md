@@ -13,6 +13,32 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-07-27
+- **Rewrote the `search_queries` craft** (`references/media.md` §4) after a measured A/B against the live
+  search route. **Why:** every rule in that section was tuned for querying PornHub's own index directly and
+  was taught as universal search law. find-media now searches Google Images, which behaves close to
+  oppositely — long descriptive queries are fine, but *story* words wreck them. Retired "3-5 words,
+  **setting word goes FIRST**"; the setting is now spent only when it carries meaning (danger / secrecy /
+  squalor). Measured: on a dim-storeroom beat, six setting-led queries → 72 candidates / 2 usable; one
+  act-led query → 28 / 5. Counter-case kept honest: on a dark-alley beat the darkness *was* the point and
+  bright clips were rejected twice, so the setting word earned its place there.
+- **Added the story-word prohibition** (same section) — names, "drunk", "nervous", plot state. These do not
+  merely add noise; on a general image index they reclassify the query as mainstream. Measured: adding
+  `drunk guy` to a working query returned film stills, news and social posts, zero usable candidates.
+  Re-framed the old "banned words" list as merely *wasted* words, since that was the milder problem all along.
+- **Added the anti-studio modifiers** (`amateur` / `real` / `voyeur` / `hidden cam`) — bright-studio-when-the-
+  beat-wants-grimy is our most repeated rejection and these are the only reliable lever against it.
+- **Added "the `description` is a checklist, not a caption"** (same section). **Why:** find-media derives its
+  accept/reject gates from the description, so an unphysical description means whatever gets installed can
+  never be judged wrong. Cost of getting it wrong, found this session: `vesper`'s
+  `sex/renner_cheerup_alley_t5.webm` shows the woman **standing** while its beat says "on her knees" — it
+  survived months because nothing was checkable enough to fail. Also asks the author to state what makes the
+  beat *land* (eye contact / being used / him visibly wrecked), which is the one thing a searcher cannot
+  infer from an act name.
+- **NOT done deliberately:** did not introduce `must_show` / `avoid` as new TOML props. The engine tolerance
+  for unknown props under `props` is unverified, and teaching a key that might fail a build is worse than
+  teaching description craft that cannot. Revisit only with a green build behind it.
+
 ## 2026-07-26
 - **Documented the new `--build free|paid` flag** in the two places that publish the build command line —
   `references/beat-authoring.md` (the "Prove green" block) and `references/media.md` §3 (QA vs publish

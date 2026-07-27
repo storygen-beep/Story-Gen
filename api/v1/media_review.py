@@ -29,7 +29,16 @@ from django.views.decorators.http import require_GET, require_POST
 from .game_review import GAMES_ROOT, _extract_missing_media, _resolve_final_toml
 
 # Display order for lanes in the review UI. Lanes not listed fall to the end.
-LANE_ORDER = ["location", "npc", "solo", "story", "clothing", "phone", "other"]
+LANE_ORDER = [
+    "location",
+    "npc",
+    "solo",
+    "story",
+    "clothing",
+    "phone",
+    "portrait",
+    "other",
+]
 
 
 # =============================================================================
@@ -92,6 +101,10 @@ def _lane_for(item: dict, canvas_by_id: dict, npc_name_by_id: dict) -> dict:
 
     if mtype == "location_image":
         return {"lane": "location"}
+    if mtype == "portrait_image":
+        # Faces and player-portrait states are UI chrome, not scene media — they have
+        # no backing canvas to classify against, so they get their own lane.
+        return {"lane": "portrait"}
     if cid == "wardrobe":
         return {"lane": "clothing"}
     if cid == "phone":

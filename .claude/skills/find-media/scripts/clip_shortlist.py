@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-clip_shortlist.py — local CLIP pre-ranking + labeled montage for find-media EVALUATE
+clip_shortlist.py — local CLIP pre-ranking + labeled montage for find-media JUDGE
 
 Embeds every candidate image with openai/clip-vit-base-patch32, ranks by cosine
 similarity to a text caption, prints the ranked list as JSON, and writes ONE
