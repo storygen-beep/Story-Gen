@@ -144,8 +144,8 @@ rules across (those live in `query_rewriting.md` and apply only to a site's own 
 | **Verbose is fine. Loose grammar is fine.** | `on kneel blowjob` worked. Google normalizes; it doesn't drop rare words the way a site search does. |
 | **ZERO story or character words.** | Intent classification, not keyword dilution. One story word flips the entire result page out of porn. |
 | **Add an anti-studio modifier when the beat is grimy:** `amateur`, `real`, `voyeur`, `hidden cam`. | The single most-repeated defect in this game's history is bright studio lighting on a beat that wanted squalor. This is the first systematic fix for it. |
-| **Append `gif` or `webm`.** | Biases toward loops instead of stills or 40-minute scenes. Loops are what the engine ships. |
-| **Spend words on setting ONLY when setting carries meaning** (danger / secrecy / squalor). | For one beat the user said the setting "doesn't matter much here"; for a dark alley he rejected bright clips twice, because the darkness carried the danger. Otherwise: act + position + heat lead. |
+| **Append `gif` or `webm`. NOT optional — this is the highest-leverage token in the query.** | Measured 3×, same query ± one token: **7→59, 1→54, 0→91** fetchable urls. All six pages carried ~200 tiles either way: without the token Google serves **stills**, and the §4 extractor only matches `gif\|mp4\|webm`, so a full-looking grid harvests as ~nothing. A single-digit extract off a rich grid means this token is missing — check it before rewriting anything else. Full table: `query_rewriting.md` §Google dialect. |
+| **Spend words on setting ONLY when setting carries meaning** (danger / secrecy / squalor) — **and cap it at ~2 setting tokens.** | For one beat the user said the setting "doesn't matter much here"; for a dark alley he rejected bright clips twice, because the darkness carried the danger. But `back alley sex at night streetlight gif real` returned **Shutterstock and Getty stock footage of empty streets** — stacking place+time+light words reclassifies the query as stock photography. Name the place once and stop. |
 | **Run 2–3 sibling queries per slot, never one.** | Different phrasings land on different host clusters. One query surfaced nine hosts; a second reaches a partly different set. This is how you get to ≥6 stocked options. |
 
 **The measured failure:** `back alley blowjob gif drunk guy night` returned Reddit movie
@@ -209,6 +209,9 @@ Object.entries(by).map(([h, v]) => `${v.length}  ${h}`).sort().reverse()
 - `gstatic` / `googleusercontent` entries are Google's re-encoded thumbnails. Fine as a
   preview, **never as the installed file** — they're small and they expire.
 - Anything from an analytics or Chrome-UI host is furniture. Drop it.
+- **Require a real path**, e.g. `new URL(u).pathname.length > 4`. The regex happily matches
+  the bare string `www.gif` inside page text, yielding a url with an empty path that stocks
+  as a permanently-dead option.
 - A host outside the nine is **surfaced, not yet characterised**. Stock it and fetch it —
   the fetch sanity check in §6 tells you what it actually served. Don't assume behaviour
   for it in either direction, and don't skip it on suspicion.
@@ -340,6 +343,28 @@ curl -sS -L --max-time 30 \
   -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36' \
   -o /tmp/fm/<slot>/03.webm 'https://<host>/<path>.webm'
 ```
+
+> ### ⚠️ NEVER send `Referer: https://www.google.com/` — it is hotlink protection bait
+> You just came from a Google results page, so attaching a Google referer feels like the
+> honest thing to do. It is the one header that breaks the fetch. Measured 2026-07-27:
+>
+> | Host | no referer | `google.com` referer | own-origin referer |
+> |---|---|---|---|
+> | `cdn.sexxxgif.com` | 200 | **403** | 200 |
+> | `cdn.nsfwgify.com` | 200 | **403** | 200 |
+> | `porngif.co` | 200 | **403** | 200 |
+> | `cdn.xgifer.com` | 200 | **403** | 200 |
+> | `cdn.hardcoregify.com` | 200 | **403** | 200 |
+> | `blovjob.com` | 200 | 200 | 200 |
+>
+> Five of six catalogued hosts serve a 403 to an off-site referer. In the run that found
+> this, **13 of 29 fetches died on it**, and the failure reads exactly like "those hosts are
+> down" — it is per-host and total, so you will blame the catalog instead of your headers.
+>
+> **The backend is already correct and needs no change**: `_fetch_headers`
+> (`api/v1/media_finder.py:158-159`) falls back to the URL's own origin, which measured 200
+> everywhere. Only a hand-rolled fetcher is exposed. Send no `Referer`, or send the URL's own
+> origin — never the search engine's.
 
 **Do not spend a fetch on `*.phncdn.com`.** It is discovery-only — see the box at the top.
 The header lore around phncdn (410 Gone without a User-Agent, 0-byte files at exit 0) is real

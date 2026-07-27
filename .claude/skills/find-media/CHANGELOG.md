@@ -13,6 +13,54 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-07-27 (later) — doctrine corrected by the media_lab 10-slot study
+
+The v2 rewrite below shipped with a query-craft rationale that turned out to be **partly
+wrong about its own mechanism**. `games/media_lab/` ran it as a controlled experiment (10
+slots, 27 queries, 3 slots carrying deliberately old-doctrine queries as a hidden control;
+write-up in `games/media_lab/.find-media/FINDINGS.md`). These edits are what it forced.
+
+- **`references/query_rewriting.md`** — §Google dialect: promoted the format token to the
+  first and most emphatic rule, with the 3× measurement (`7→59`, `1→54`, `0→91` fetchable
+  urls, same query ± the word `gif`). Added the ≤2-setting-token ceiling and the
+  load-bearing-setting-slot-is-hardest corollary. Added a new subsection to the doctrine note,
+  "What the 2026-07-27 control actually proved", stating plainly that the 21× old-vs-new gap
+  is real but is **NOT** evidence for act-led word order — it decomposes into the missing
+  format token and story-word intent-flipping, which are independent, and `gif` fixes only
+  the first. **Why:** the old text let a reader credit word order for a gap caused by two
+  other things, which would have survived the next rewrite as folklore. Two dialect-table
+  rows updated to match. **Verified:** every number cited is a counter I recorded live.
+- **`references/chrome_route.md`** — §3 same two query rules restated at the router level
+  (they are the first thing a run reads). §4: require `pathname.length > 4`, because the
+  extraction regex matches the bare string `www.gif` in page text and stocks a dead option.
+  §6: new warning box — **never send `Referer: https://www.google.com/`**, with the per-host
+  403/200 table. **Why:** attaching a Google referer is the natural thing to do right after
+  scraping a Google results page, and it 403s five of six catalogued hosts; it cost 13 of 29
+  fetches in this run and presents as "those hosts are down". Notes explicitly that
+  `_fetch_headers` (`media_finder.py:158-159`) is already correct, so **no engine change was
+  made** — the exposure is hand-rolled fetchers only.
+- **`references/media_sources.md`** — added the referer rule to the direct-fetch contract
+  table. **Downgraded slugs**: still a term mine, now explicitly worth **zero** as a
+  correctness claim, with the two counter-examples (`back-alley-slut` is a street flash;
+  `three-men-fuck-one-woman` shows two). Added the second-wave host list (15 new hosts, all
+  measured 200) and flagged that `static-ca-cdn.eporner.com` failed every fetch this run
+  despite being in the corpus. Added direct evidence for the band model (`downblouse` reaches
+  a host cluster no explicit-act query touched) and **corrected `dogging`** — it returns
+  beach/daylight, it is not a night/alley term, and the old mapping pushed dark-alley beats
+  the wrong way.
+- **`references/scoring_rubric.md`** — Confidence table: the "thumbnails lie ~2 of 3" row now
+  reports both measurements (65% early, **30% across 54 strip finalists here**) and explains
+  the denominator difference rather than pretending one supersedes the other — gate hard on
+  the contact sheet and the strip kills less, without ever becoming optional. Replaced "a
+  fresh 10-query study will refill this table" with the study's actual status: it refilled the
+  **query-craft** rows and **not** the heat rows, because heat calibration needs the human's
+  verdicts. Records the deliberate probe planted on the tease slot, where the install and
+  rank-2 option disagree between two rules in that file.
+
+**Not changed, on purpose:** the HEAT weights and bands. Nothing in this study measured them,
+and tuning them here would be exactly the "do not tune the weights to make a past pick come
+out right" failure the file warns about.
+
 ## 2026-07-27 — v2: rebuilt as an options-stocking scout on the Chrome route
 
 **Why the whole rewrite.** Players reported the videos were bad. A live A/B against LO

@@ -189,7 +189,7 @@ Call, and Late Shifts all skipped.
   | her mouth on him | `blowjob` or `kneeling oral` |
   | penetration | `sex` / `fuck` (+ position) |
   | positions | `missionary` (face-to-face), `doggy` (behind), `riding` / `girl on top` (not "cowgirl"), `standing` |
-  | settings (index these — put FIRST) | kitchen, counter, couch, pool, table, shower, bed, bathroom, doorway, hallway, patio, outdoor, car, office, floor, desk |
+  | settings (index — but see the ⚠️ above: only when load-bearing, and **at most two**) | kitchen, counter, couch, pool, table, shower, bed, bathroom, doorway, hallway, patio, outdoor, car, office, floor, desk |
 - **⚠️ Gender-direction rule.** For acts that have heavy solo/lesbian results (fingering, cunnilingus,
   touching, rubbing), **always include `men`/`guy` + `girl`** or you get the wrong content.
   `kitchen fingering` → solo girls; `men fingering girl kitchen` → the M/F couple you meant.
@@ -386,8 +386,11 @@ the missing-media list is muddied. Tag matches asset matches intent, or don't ta
 - **The on-disk file decides `<img>` vs `<video>`** — your extension/`type` is advisory. Match all three.
 - **Missing file = renders nothing** in a normal build (silent). Build `--debug` to see `[IMAGE MISSING]`
   placeholders + the Missing-Media page.
-- **Every media block gets a `description` + 2 `search_queries`.** Queries: 3-5 words, **setting first**,
-  physical vocabulary only, the gender-direction rule for solo-prone acts, no banned/emotional words.
+- **Every media block gets a `description` + 2 `search_queries`.** Queries: **act and position lead**;
+  physical vocabulary only; name the setting only when it carries danger/secrecy/squalor and then with
+  **at most two** setting words; the gender-direction rule for solo-prone acts; no banned/emotional words.
+  (The "3-5 words, setting first" formula is **retired** — see the ⚠️ box in §4. Descriptive
+  natural-language queries are correct here; `find-media` handles the search-engine dialect.)
 - Locations use **`image_search_queries`**; content blocks use **`search_queries`**. Different key.
 - SFW beats = `.jpg`; explicit beats = `.webm`. Quality contract, not an engine gate.
 - Text before (specific) → media (mood, broad match) → text after (reaction). Don't describe what the media

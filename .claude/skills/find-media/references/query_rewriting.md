@@ -252,11 +252,31 @@ authoring-layer "fix" would be wrong — see the doctrine note at the end.
 | Grammar | loose grammar works — `on kneel blowjob` returned usable results | grammar is noise; tags only |
 | Rare words | fine, and they steer the result set | **silently dropped from compounds** |
 | Story / character words | **poison** — reclassify the query as mainstream | dropped, so merely wasted |
-| Setting words | only when the setting carries meaning | costs a token from a 3-token budget |
+| Format token (`gif`) | **mandatory** — without it Google serves stills and the extract harvests ~0 from a full page (7→59, 1→54, 0→91) | irrelevant; the tag taxonomy has no format axis |
+| Setting words | only when the setting carries meaning, and **≤2 tokens** — more reclassifies the query as stock photography | costs a token from a 3-token budget |
 | Anti-studio modifiers | `amateur` `real` `voyeur` `hidden cam` steer off bright studio | the same words are legitimate tags |
 | Failure mode | wrong *neighbourhood* — Reddit, TikTok, Facebook, movie stills | 0 results, or 37 generic ones |
 
 ## Google dialect
+
+**Append `gif` (or `webm`). This is the single highest-leverage token in the whole file —
+put it in every query.** Measured three times on 2026-07-27, same query, one token added:
+
+| Query | Fetchable urls |
+|---|---|
+| `bedroom flashing tits playful quick reveal` | 7 |
+| `bedroom flashing tits playful quick reveal **gif**` | **59** |
+| `bedroom tender facial cumshot gentle` | 1 |
+| `bedroom tender facial cumshot gentle **gif**` | **54** |
+| `bedroom woman riding passive man slow` | 0 |
+| `bedroom woman riding passive man slow **gif**` | **91** |
+
+**The failure is invisible from the screenshot.** All six pages carried ~200 image tiles.
+The token-less queries were never starved of results — they were served **stills**, from
+photo-gallery sites, and the §4 extractor only matches `gif|mp4|webm`. So a page that looks
+rich harvests as approximately nothing, and it reads exactly like "the query was bad".
+If an extract comes back in single digits off a full-looking grid, check for this token
+before you rewrite anything else.
 
 **Verbose is fine. Natural language is fine.** The descriptive multi-word queries game
 authors write work here as written. Do not compress them into tags.
@@ -274,10 +294,24 @@ body DOES. This is the opposite reason from PornHub's rule, and it bites harder.
 single most repeated rejection in this game's history is "bright studio when the beat
 wants grimy". Add one of these whenever the beat is squalid, stolen, or hidden.
 
-**Setting words only when the setting carries meaning.** For one beat the user said the
-setting "doesn't matter much here"; for a dark-alley beat he rejected bright clips twice,
-because the darkness carried the danger. Spend a token on setting when it carries danger,
-secrecy or squalor — otherwise let act + position + heat lead.
+**Setting words only when the setting carries meaning — and at most about two of them.**
+For one beat the user said the setting "doesn't matter much here"; for a dark-alley beat he
+rejected bright clips twice, because the darkness carried the danger. Spend a token on
+setting when it carries danger, secrecy or squalor — otherwise let act + position + heat
+lead.
+
+But there is a **ceiling**, and it was missed until 2026-07-27:
+`back alley sex at night streetlight gif real` returned **Shutterstock and Getty licensable
+stock footage of empty streets at night**, plus Medium, Wattpad, The Atlantic and Decider.
+Pool collapsed to 33, mostly unusable. Piling up place-and-time words (`alley` + `at night`
++ `streetlight`) reclassifies the query as **stock photography** — the same intent flip that
+story words cause, arriving from the words this rule tells you to spend. Name the place once,
+add the light/time only if the place alone is ambiguous, and stop.
+
+Corollary worth planning around: the load-bearing-setting slot is reliably **the hardest one
+in any batch**. On the 10-slot study it was the only slot to need a sibling round and it
+still finished with 3 survivors from 14 fetched, while non-setting slots cleared 6 easily.
+Budget the extra round up front instead of treating it as a surprise.
 
 **Read the labels, not just the pictures.** Google's own result labels and URLs are the
 richest term mine available — this session they taught `dogging` (public/outdoor sex) and
@@ -320,6 +354,31 @@ Also retired with it: the old **setting-first formula** (`kitchen+blowjob` over
 heavily". The validator never enforced it, and no measurement supports word order
 mattering on Google. Do not reorder queries for its own sake; decide whether the setting
 word belongs in the query at all, which is the question that actually changes results.
+
+### What the 2026-07-27 control actually proved — read this before crediting word order
+
+A ten-slot rig (`games/media_lab/`) ran three slots with deliberately OLD-doctrine queries
+against seven new-style ones. **OLD: 18 fetchable urls across 6 queries (7, 9, 1, 0, 0, 1).
+NEW: ~63 per query across 14.** A ~21× gap, so the doctrine change is earned.
+
+**But the gap is not evidence for act-led word order, and must not be cited as such.**
+Disambiguation queries decomposed it into two independent causes, neither of which is order:
+
+1. **The missing format token** — the table at the top of the Google dialect section. Worth
+   roughly an order of magnitude on its own.
+2. **Story / mood words flipping the intent class** — `loving facial girlfriend soft`
+   returned TikTok, Instagram, Shutterstock, Temu and Amazon, with **zero** pornographic
+   results on the page. `bedroom woman riding passive man slow` returned Cosmopolitan,
+   Bustle, Men's Health and cartoon position diagrams.
+
+**These are independent, and the format token fixes only the first.** The `+gif` rerun of the
+riding query returned 91 urls, and half the contact sheet was Tenor reaction memes, a bull
+rider, a bicycle and TV clips — 7 of 14 fetched candidates were mainstream gifs. `gif` made
+the poison *fetchable*; it did not remove the poison. Diagnose which failure you have before
+reaching for a fix: a full grid harvesting near-zero is (1); a full harvest of off-band
+content is (2).
+
+Full write-up and per-query counts: `games/media_lab/.find-media/FINDINGS.md`.
 
 ---
 

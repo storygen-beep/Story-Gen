@@ -47,8 +47,22 @@ skill the same hosts appear as registrable domains (`flashingjungle.com`, `xgroo
 | `cdn.hardcoregify.com` | 2 | `/<id>/<slug>.gif` | `.gif` | Descriptive slugs — term mine |
 | `cdn.nsfwgify.com` | 1 | `/<id>/<slug>.gif` | `.gif` | Descriptive slugs — term mine |
 | `static-ca-cdn.eporner.com` | 1 | `/gallery/<h>/<h>/<id>/<slug>.gif` | `.gif` | Tube-site gallery gifs, descriptive slugs |
-| `porngif.co` | — | — | — | Fetch verified (200). URL shape, catalog and tag depth unprofiled — read what you harvest |
-| `cdn.xgifer.com` | — | — | — | Fetch verified (200). URL shape, catalog and tag depth unprofiled — read what you harvest |
+| `porngif.co` | — | `/wp-content/uploads/<yyyy>/<mm>/<id>-<slug>.gif` | `.gif` | Fetch verified (200). Deep, very descriptive slugs — strong term mine |
+| `cdn.xgifer.com` | — | `/<id>/<slug>.gif` | `.gif` | Fetch verified (200). Descriptive slugs |
+
+### Second wave — added 2026-07-27, all measured 200 on clearnet
+
+Surfaced by the 10-slot study (27 queries). Fetch-verified, not yet catalog-profiled:
+`cdn.sexxxgif.com` (very high volume, descriptive slugs — appeared on nearly every query),
+`myteenwebcam.com`, `cumception.com`, `porngifs.ca`, `porngifs4u.com`, `pornogifs.net`,
+`cdn.fapville.com`, `femdom-pov.me` (**tease band**), `cdn.asianporngif.com`,
+`freakydeakygifs.com`, `gifcandy.net`, `img1.thatpervert.com`, `xxxpicss.com`,
+`cdn.pictocum.com`, `bestadultgifs.com`. Tease-band extras: `media.tenor.com`,
+`upskirt.pantiesless.com`, `pornogifs.net` — note tenor also carries a large SFW/meme
+catalog, so it arrives as pollution on any query with story words in it.
+
+**⚠️ `static-ca-cdn.eporner.com` failed every fetch attempted in that run** (URLError),
+despite being in the corpus above. Re-measure before relying on it.
 
 ### PornHub is discovery-only — never a download
 
@@ -85,6 +99,17 @@ Three things this table teaches beyond the counts:
    sex.com's numeric ids hand you nothing, and neither does a phncdn URL — but the
    PornHub *page* behind it does, in its title and tags. That is the whole of what
    discovery-only buys you.
+
+   **⚠️ A slug is worth a lot as VOCABULARY and exactly ZERO as a correctness claim.**
+   It is uploader-written and routinely describes a different clip. Measured 2026-07-27:
+   - `back-alley-slut.gif` → the loop is a woman pulling her top down on a **lit street**.
+     No alley, no sex.
+   - `three-men-fuck-one-woman_<hash>.gif` → only **two** men are ever in frame together,
+     which fails the exact count gate its name promises.
+
+   Both would have shipped if the name had been trusted. Rank candidates by slug if you
+   like — that is what it is for — but **the frame strip is what decides**, and a slug that
+   states the gate condition is not evidence the gate passes.
 2. **The serving host is not the result host.** sex.com's 16 gifs all arrive from
    `imagex1.sx.cdn.live`, which contains neither "sex" nor "com" as a registrable domain.
    Any allowlist keyed to the site names you saw on the results page throws away your
@@ -117,6 +142,22 @@ The tease band is also where term discovery pays most: the vocabulary is narrow,
 and community-coined (`downblouse` had to be found on Reddit — the skill had no way to
 guess it). Budget a discovery pass for tease beats specifically. See
 `references/query_rewriting.md`.
+
+**The band model now has direct evidence, not just a rationale.** On the 2026-07-27 study,
+`downblouse cleavage lean forward tease clothed gif` returned a host cluster that **no
+explicit-act query in the run touched**: `femdom-pov.me` ×12, `media.tenor.com` ×12,
+`upskirt.pantiesless.com`, `cdn.fapville.com`, `pornogifs.net`, giphy. Meanwhile the
+hardcore aggregators that dominated every other slot (blovjob, hardcoregify, imagex1) were
+nearly absent. The tease shelf is a genuinely different shelf, and **only the community term
+reaches it** — a paraphrase like "woman leaning forward cleavage" lands you back on the
+explicit shelf with the band silently wrong.
+
+**Lexicon correction — `dogging` is mis-mapped.** It is catalogued here and in older notes
+as the public/outdoor term, and it does return public/outdoor — but weighted heavily to
+**beach and daylight**. It is *not* a night or alley term, and using it for a dark-alley beat
+pulls the setting in exactly the wrong direction. For night/urban/grimy, `back alley` +
+`amateur` is the pairing that works (and see the ≤2-setting-token ceiling in
+`query_rewriting.md` before adding `at night` and `streetlight` on top of it).
 
 ## SFW shelf
 
@@ -186,6 +227,7 @@ capture endpoint, and manual `curl`.
 | Rule | Why |
 |---|---|
 | Always send a browser `User-Agent` | Picky CDNs answer a bare request with 410/470 — a 0-byte file that looks like a successful download. `download_direct` already sends one on every request including the HEAD (`api/v1/dev.py:213-217`), so `grab` is covered; **your manual `curl` is not** |
+| **Never send `Referer: https://www.google.com/`. Send none, or the URL's own origin.** | Off-site referer = hotlink protection. Measured 403 on `cdn.sexxxgif.com`, `cdn.nsfwgify.com`, `porngif.co`, `cdn.xgifer.com`, `cdn.hardcoregify.com`; 200 on all five with no referer and with their own origin. **13 of 29 fetches died on this in one run**, and it presents as "those hosts are down". `_fetch_headers` (`api/v1/media_finder.py:158-159`) already falls back to the URL's own origin, so `grab` is safe — a hand-rolled fetcher is not. Full table in `chrome_route.md` §6 |
 | Don't hand-fetch phncdn at all | The backend already attaches the UA *and* the pornhub `Referer` and it still returns 470. There is no header that fixes it — see "PornHub is discovery-only" above |
 | `source` is a free label except `"redgifs"` | Only `redgifs` triggers the Bearer-token fetch (`api/v1/media_finder.py:475-478` on grab, `:591-594` on proxy). No source needs Tor — `_TOR_SOURCES` is empty (`media_finder.py:551`) |
 

@@ -340,13 +340,39 @@ overwrite.
 | Rule | Evidence | Status |
 |---|---|---|
 | Eye contact held across the loop carries heat | One direct A/B: the user's pick beat a spec-perfect alternative explicitly on the eyes; two further candidates rejected for wandering eyes their thumbnails hid | **Confirmed**, n=3 events, one of them a clean head-to-head |
-| Thumbnails lie ~2 of 3 times | 3/5 and 4/6 killed on the strip, two independent rounds | **Confirmed**, n=11 |
+| Thumbnails lie — the strip kills a large fraction | 3/5 and 4/6 in two early rounds (~65%); **16 of 54 (30%) across the 10-slot study** | **Confirmed as a class, rate is denominator-dependent** — see note below |
 | Setting is conditional | Two beats, opposite calls, both explicit from the user (alley = load-bearing, other = "doesn't matter much here") | **Confirmed**, n=2 |
 | Gate-3 checks (act / position / count / affect / extra people / finish) | Every one is a logged rejection from this game's history | **Confirmed** as rejection classes |
 | Heat signals 2, 3, 4 (affect intensity, energy, framing) | Inferred from the rejection history, never A/B tested | **Provisional** |
 | Band boundaries and the 60 / 25 / 15 split (85 / 15 when setting is skipped) | Chosen to make the documented win beat the documented loss | **Provisional** |
 
-A fresh 10-query study will refill this table. Until it lands, follow the two survival rules:
+**Note on the strip kill rate.** The two figures are not in conflict; they have different
+denominators. The ~65% rounds stripped a lightly-filtered shortlist. The 30% figure comes
+from a run that gated hard on the contact sheet *first* — binning side-views, wrong counts,
+daylight-when-night-was-required and celebrity gifs before stripping anything — so the 54
+that reached the strip were already filtered. **Read it as: the earlier you gate, the less
+the strip kills, and the strip never stops being mandatory.** It was still decisive where it
+mattered: a night-balcony clip whose loop was clothed *kissing*, two performers who start
+neutral and end up grinning at the lens, a man who reads passive in the thumbnail and is
+sitting up and engaged in motion, a clip that cuts to a different woman mid-loop, and a
+"reveal" that lifts the hem for four frames and never reveals.
+
+### Status of the 10-query study (ran 2026-07-27)
+
+It ran: `games/media_lab/`, ten slots, 27 queries, write-up in `.find-media/FINDINGS.md`.
+**It refilled the QUERY-CRAFT rows, not the HEAT rows.** What it produced was the format-token
+and story-word mechanism, the setting-token ceiling, and the slug-lies rule — all now in
+`query_rewriting.md` and `media_sources.md`.
+
+**The heat axis is still seeded, not finished.** Signals 2–4 remain provisional, because heat
+calibration needs the human's verdicts, not the scout's predictions — and those arrive only
+when the installed picks get approved or swapped in the review UI. `scores.jsonl` for all ten
+slots is committed and holds the losers with gate reasons, so every swap becomes a labelled
+heat error the moment it happens. One deliberate probe is planted: on the tease slot the
+install and the rank-2 option disagree *between two rules in this file* — eye-contact-held
+(proven) versus band-correctness (inferred). Whichever the human picks resolves that ordering.
+
+Until those verdicts land, follow the two survival rules:
 **when heat is ambiguous, stock more options rather than deciding** — the shelf exists exactly
 for the cases the rubric can't call — and **do not tune the weights to make a past pick come
 out right.** These numbers order a shelf. They don't prove anything.
