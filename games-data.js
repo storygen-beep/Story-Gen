@@ -98,8 +98,9 @@ window.GAMES = [
   {
     slug: "media_lab_d",
     title: "Media Lab D",
+    badge: "Filled",
     dev: true,
-    summary: `Cloud-session replication of arm B. Same ten beats and the same candidate shelf, to be filled by find-media-b — correctness gates only, installing the first clip that passes. Empty until that run happens; see games/media_lab_d/RUN_BRIEF.md.`,
+    summary: `Cloud-session replication of arm B, run 2026-07-28: all ten slots filled by find-media-b — correctness gates plus the frame strip, installing the first clip that passes, no ranking. 10/10 installed in 17m09s from 32 image reads, 54 candidates examined, 44 gate rejects. Two installs are gate-correct and visibly rough (a 3-panel collage, a watermarked stock still) and the facial slot found nothing correct in 24 candidates — exactly the cost of deleting the ranking step. Numbers in games/media_lab_d/RUN_RESULT.md.`,
   },
   {
     slug: "media_lab_b",
