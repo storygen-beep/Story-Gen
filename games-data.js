@@ -90,6 +90,12 @@ window.GAMES = [
     summary: `A short test build for NPC name/relationship customization and variable syntax.`,
   },
   {
+    slug: "media_lab_b",
+    title: "Media Lab B",
+    dev: true,
+    summary: `Arm B of the ranking experiment. The same ten beats and the same candidate shelf as Media Lab, filled by the find-media-b skill: correctness checks only — gates plus the frame strip — then it installs the FIRST clip that passes. No heat scoring, no ranking, no taste. Compare its picks against Media Lab's to see whether the ranking step earns its keep.`,
+  },
+  {
     slug: "media_lab",
     title: "Media Lab",
     dev: true,
