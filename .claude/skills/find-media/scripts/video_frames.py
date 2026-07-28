@@ -39,7 +39,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
 VIDEO_EXTS = {".webm", ".mp4", ".gif", ".mov", ".mkv"}
@@ -73,6 +73,7 @@ class FrameResult:
     passed: bool
     failures: list[str]
     sheet: str | None = None
+    boards: list[str] = field(default_factory=list)
 
 
 def _deps_present() -> bool:
@@ -292,6 +293,82 @@ def contact_sheet(frames: list[Path], out_path: Path, tile_px: int, cols: int = 
     return out_path.exists() and out_path.stat().st_size >= MIN_FRAME_BYTES
 
 
+def strip_board(strips: list[Path], out_path: Path, tile_px: int, cols: int = 4,
+                rows_per_board: int = 6) -> list[Path]:
+    """Stack per-candidate STRIPS into labelled boards — one row per candidate.
+
+    This is the strip-mode analogue of contact_sheet(), and it is what makes JUDGE
+    affordable. A contact sheet answers "which candidates are worth a strip"; a board
+    answers "which candidate passes the gates", because every row is a whole LOOP, not
+    one instant. Six rows of four frames at 320px is 1280x1920 — the geometry that
+    carried the 2026-07-27 run, still ~260px per frame after the reader's downscale,
+    which is enough to call eye contact.
+
+    History, so this is not dropped a second time: the 2026-07-28 promotion of the
+    ad-hoc `strips.sh` into this script kept `--sheet` for rep mode ONLY and silently
+    lost strip boarding. The next run therefore read strips one at a time — 52 image
+    reads where 15 would have done — and the lost minutes were misattributed to the
+    experiment being measured rather than to the missing feature. Boards are not a
+    nicety; without them batch JUDGE costs 3x for nothing.
+
+    Returns the boards written (>6 candidates spills to <stem>_2.jpg, _3.jpg, ...).
+    """
+    if not strips:
+        return []
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    width = cols * tile_px
+    written: list[Path] = []
+    chunks = [strips[i:i + rows_per_board] for i in range(0, len(strips), rows_per_board)]
+    for b, chunk in enumerate(chunks):
+        target = out_path if b == 0 else out_path.with_name(f"{out_path.stem}_{b + 1}{out_path.suffix}")
+        with tempfile.TemporaryDirectory() as td:
+            seq = Path(td)
+            rows: list[Path] = []
+            for i, src in enumerate(chunk):
+                # "08_strip" -> "08"; the label is the candidate index, so a verdict can
+                # name row 08 and it maps straight back to 08.gif and to manifest.json.
+                label = src.stem.split("_")[0]
+                # Strips differ in width when a clip yields fewer frames than asked
+                # (3 frames = 960px, 4 = 1280px). vstack demands identical widths, so
+                # pad every row to cols*tile_px before stacking or ffmpeg drops them.
+                vf = (f"scale={width}:{tile_px}:force_original_aspect_ratio=decrease,"
+                      f"pad={width}:{tile_px}:0:(oh-ih)/2:color=black,"
+                      f"drawtext=text='{label}':x=8:y=8:fontsize={max(20, tile_px // 6)}:"
+                      f"fontcolor=yellow:box=1:boxcolor=black@0.75:boxborderw=6")
+                row = seq / f"r{i:03d}.jpg"
+                try:
+                    subprocess.run(["ffmpeg", "-y", "-i", str(src), "-vf", vf,
+                                    "-frames:v", "1", "-q:v", "3", str(row)],
+                                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                                   timeout=30, check=False)
+                except subprocess.SubprocessError:
+                    continue
+                if row.exists() and row.stat().st_size >= MIN_FRAME_BYTES:
+                    rows.append(row)
+            if not rows:
+                continue
+            if len(rows) == 1:
+                shutil.copy(rows[0], target)
+            else:
+                # vstack, not tile= — same reason contact_sheet() avoids it (measured
+                # 2026-07-28: tile= silently emitted one input of eight).
+                inputs: list[str] = []
+                for r in rows:
+                    inputs += ["-i", str(r)]
+                refs = "".join(f"[{i}:v]" for i in range(len(rows)))
+                cmd = ["ffmpeg", "-y", *inputs, "-filter_complex",
+                       f"{refs}vstack=inputs={len(rows)}[out]", "-map", "[out]",
+                       "-frames:v", "1", "-update", "1", "-q:v", "3", str(target)]
+                try:
+                    subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                                   timeout=120, check=False)
+                except subprocess.SubprocessError:
+                    continue
+        if target.exists() and target.stat().st_size >= MIN_FRAME_BYTES:
+            written.append(target)
+    return written
+
+
 def rep_frame(video: Path, n: int, out_path: Path) -> bool:
     """Median-by-size of N samples in the middle of the clip (skips black/seam)."""
     dur, nb = probe_clip_geometry(video)
@@ -354,11 +431,21 @@ def main() -> int:
                    help="batch rep mode only: also tile every rep frame into ONE numbered "
                         "contact sheet at this path — the single image JUDGE reads")
     p.add_argument("--sheet-cols", type=int, default=4, dest="sheet_cols")
+    p.add_argument("--board", type=Path, default=None,
+                   help="batch STRIP mode only: also stack every candidate's strip into ONE "
+                        "labelled board (one row per candidate) — the single image JUDGE "
+                        "reads. Spills to <stem>_2.jpg beyond --board-rows candidates.")
+    p.add_argument("--board-rows", type=int, default=6, dest="board_rows",
+                   help="candidates per board (default 6 — the 1280x1920 geometry that is "
+                        "still legible after the reader's downscale)")
     p.add_argument("--json", action="store_true")
     args = p.parse_args()
 
     if args.sheet and not (args.videos_dir is not None and args.mode == "rep"):
         print("ERROR: --sheet requires --videos-dir with --mode rep", file=sys.stderr)
+        return 2
+    if args.board and not (args.videos_dir is not None and args.mode == "strip"):
+        print("ERROR: --board requires --videos-dir with --mode strip", file=sys.stderr)
         return 2
 
     if not _deps_present():
@@ -406,6 +493,14 @@ def main() -> int:
                 result.sheet = str(args.sheet)
             else:
                 result.failures.append("no_sheet")
+
+        if args.board:
+            boards = strip_board(rep_paths, args.board, args.tile_px,
+                                 args.sheet_cols, args.board_rows)
+            if boards:
+                result.boards = [str(b) for b in boards]
+            else:
+                result.failures.append("no_board")
     else:
         if not args.out:
             print("ERROR: --video requires --out", file=sys.stderr)
@@ -430,6 +525,8 @@ def main() -> int:
             print(f"  -> {o}")
         if result.sheet:
             print(f"  CONTACT SHEET -> {result.sheet}   (Read this one image, not the tiles)")
+        for b in result.boards:
+            print(f"  STRIP BOARD -> {b}   (Read this one image, not the per-clip strips)")
         if result.failures:
             print(f"  failures: {', '.join(result.failures)}")
 

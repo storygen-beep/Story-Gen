@@ -1,3 +1,35 @@
+# Q2 A/B — arm B, 2026-07-28 (run 1) and 2026-07-29 (run 2)
+
+> ## ⚠️ Run 2 supersedes run 1's TIMING. The picks are unchanged.
+>
+> Run 1 judged strips **one at a time**. That was a self-imposed bias guard, not a requirement,
+> and it cost ~3× the image reads — which I then wrongly reported as evidence that removing
+> question 2 doesn't make the skill faster. Root cause: the **strip-board** capability had been
+> silently lost when the tooling was promoted into the skill on 07-28, so there was no cheap way
+> to look at a batch. Restored as `video_frames.py --board`.
+>
+> Run 2 re-judged the **identical candidate files** with boards:
+>
+> | | run 1 | run 2 |
+> |---|---|---|
+> | image reads | **52** | **14** |
+> | judging wall-clock | ~45 min | **9 min 17 s** |
+> | picks | — | **10/10 IDENTICAL** (md5-verified vs `run1_picks.json`) |
+>
+> **The procedure change moved no decision.** Every gate call, every rejection reason, and the
+> `POOL_GATE_UNSATISFIABLE` miss on `lab_finish_facial_t5` reproduced exactly. So run 1's
+> *verdicts* stand as written below; only the speed claim was wrong.
+>
+> **Corrected speed read:** on the judging step, removing question 2 is genuinely faster —
+> ~9 min against arm A's ~35 min — once both arms use boards. Still confounded for a full
+> arm-A-vs-arm-B total: arm A also paid ~9 min of searching and ~20 min of building the fetch
+> harness, and that ~20 min figure is a reconstruction, not a stopwatch. Treat "≈3× faster on
+> judging" as the defensible claim and the end-to-end ratio as unsettled.
+>
+> One tool limitation found: a **390×909** source (`lab_group_t5/00`) is unreadable squeezed into
+> a 320 px board row — the men could not be counted. Re-checked at `--tile-px 480` and it passed.
+> Boards need a re-check hatch for extreme aspect ratios.
+
 # Q2 A/B — arm B run, 2026-07-28
 
 Arm B (`find-media-b`) filled all ten `media_lab_b` slots. **Arm A is untouched**

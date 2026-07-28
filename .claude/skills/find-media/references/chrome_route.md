@@ -494,11 +494,27 @@ nearest alternates. No animated option gets installed, and none gets recommended
 as your pick, until you have read its strip. Everything below the top 6 stays stocked and
 unverified, which is correct: unproven on the shelf beats binned.
 
+**Strip the whole batch and read ONE board — never one strip at a time.** `--board` stacks
+every candidate's strip into a single labelled image, one row per candidate, six rows to a
+board (1280×1920), spilling to `_2.jpg` beyond that:
+
 ```bash
 python3 .claude/skills/find-media/scripts/video_frames.py \
-  --video /tmp/fm/<slot>/03.webm --mode strip --frames 4 \
-  --out games/<game>/.find-media/evidence/<slot>/strip_03.jpg
+  --videos-dir /tmp/fm/<slot> --mode strip --frames 4 \
+  --out-dir games/<game>/.find-media/evidence/<slot>/strips \
+  --board games/<game>/.find-media/evidence/<slot>/board.jpg
 ```
+
+Single-clip form (`--video … --out strip_03.jpg`) still exists, for re-checking one candidate
+after the board — not for working through a batch.
+
+> **Why this is a rule and not a preference.** Boards were an ad-hoc `strips.sh` until the
+> 2026-07-28 promotion, which kept `--sheet` for rep mode and **silently lost strip boarding**.
+> The next run read strips one at a time: **52 image reads where ~15 would have done**, roughly
+> tripling JUDGE, and the lost time was initially blamed on the thing being measured rather
+> than on the missing feature. Re-verified 2026-07-29 on the same 16 candidates — one board
+> reproduced all six per-candidate verdicts, including two eye-contact breaks, at ~260px per
+> frame after the reader's downscale.
 
 **Thumbnails lie, constantly.** Measured this session: the strip killed **3 of 5** shortlisted
 candidates in one round and **4 of 6** in another. The actual kills:

@@ -342,6 +342,20 @@ exits 1 "no candidate images found", which misreads as an empty harvest.
 `.webm` / `.mp4` / `.gif` get stripped; a static `.jpg` finalist has no frames to strip and
 is judged from the contact sheet instead. Strip the **top 6 by rank** (§Mode).
 
+**Strip the batch, then read ONE board.** `--board` stacks every candidate's strip into a
+single labelled image — one row per candidate, six rows per board. Reading strips one at a
+time costs ~3× the image reads for identical verdicts (measured 2026-07-28/29), and it is the
+default people fall into whenever the flag is forgotten:
+
+```bash
+python3 .claude/skills/find-media/scripts/video_frames.py \
+  --videos-dir <candidates-dir> --mode strip --frames 4 \
+  --out-dir games/<game>/.find-media/evidence/<item>/strips \
+  --board games/<game>/.find-media/evidence/<item>/board.jpg
+```
+
+Single-clip form — for re-checking one candidate after the board, not for a batch:
+
 ```bash
 python3 .claude/skills/find-media/scripts/video_frames.py \
   --video <candidate> --mode strip --frames 4 \
@@ -597,8 +611,10 @@ Scripts, all under `scripts/`: `validate_queries.py` (queries + format + tag pro
 `scene_semantics.py` (tier / family / rating classification — imported, no CLI),
 `apply_retags.py` (write corrected `_tN` into the phase TOMLs), `clip_shortlist.py`
 (rank + contact sheet), **`fetch_candidates.py` (stocked URLs → bytes on disk, in waves —
-the only fetcher; never hand-roll one)**, `video_frames.py` (rep frames + strips +
-`--sheet`), `tier_format_check.py` (pre-install gate), `dedup_tracker.py` (used-asset ledger).
+the only fetcher; never hand-roll one)**, `video_frames.py` (rep frames + strips + `--sheet`
+for the rep contact sheet and **`--board` for the strip board — batch JUDGE reads a board,
+never one strip at a time**), `tier_format_check.py` (pre-install gate), `dedup_tracker.py`
+(used-asset ledger).
 
 **Interpreter.** All of them are stdlib-only and run under plain `python3`. The single
 exception is `clip_shortlist.py`, which needs the pinned torch interpreter:

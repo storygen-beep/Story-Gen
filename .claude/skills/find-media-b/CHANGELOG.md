@@ -9,6 +9,34 @@ from `find-media` in exactly ONE documented way (question 2 removed). **Any chan
 a second difference invalidates the A/B** — if you edit this file, say explicitly whether the
 diff against `find-media` is still one axis.
 
+## 2026-07-29 — judging procedure fixed; run 1 invalidated as a SPEED measurement
+
+**Diff against `find-media` is still exactly one axis** (question 2 removed). Both changes
+below are procedure and gate definition, not new differences — the board is a shared-tool
+feature available to both arms, and the `must_show` rule is question 1 and binds both.
+
+- **`SKILL.md`** — Override 2 now mandates reading a **strip BOARD top-to-bottom** and taking
+  the topmost passing row, and explicitly forbids working through a batch one strip at a time.
+  **Why:** run 1 read strips singly to guard against a real bias risk (I knew arm A's picks, and
+  seeing a better row 5 could tempt me to invent a fault in row 1). The guard was unnecessary —
+  row order is fixed *before* looking, so a later row cannot change whether an earlier one
+  passed — and it cost **52 image reads instead of ~15**. That inflated arm B's judging time and
+  led me to report "removing question 2 doesn't make it faster", which the data did not support.
+  **Run 1's picks stand; run 1's TIMING does not.** The note now says what to do with the
+  temptation instead: log it in `scores.jsonl`, since noticing it is the arm's actual job.
+- **`SKILL.md`** — added the `must_show` rule as its own section: *fails when the strip shows it
+  ABSENT or CONTRADICTED; framing that merely doesn't cover it is UNVERIFIED, not failed —
+  except gaze/affect items, which fail when their carrier is cropped.* Promoted out of the
+  changelog because without it "the first that passes" is not deterministic. Flagged as
+  belonging in `find-media` proper.
+- **Depends on** `find-media`'s 2026-07-29 `video_frames.py --board` entry — the capability had
+  been silently lost in the 07-28 promotion, which is the root cause of the whole detour.
+
+**Verified:** board built over the 16 `lab_eyecontact_t5` candidates reproduced all six run-1
+verdicts from one image. Run 1's ten picks snapshotted to
+`games/media_lab_b/.find-media/run1_picks.json` so run 2 can be diffed against them — identical
+picks would prove the procedure change is speed-only.
+
 ## 2026-07-28 — first run executed (no skill files changed)
 
 - **No file in this skill was edited.** The diff against `find-media` is still exactly one axis.

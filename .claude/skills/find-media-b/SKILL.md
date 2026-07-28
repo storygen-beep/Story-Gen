@@ -56,9 +56,25 @@ question, and one we have already answered.
 ### Override 2 — install the FIRST candidate that passes
 
 Walk the fetched candidates in `fetch_candidates.py` order (slug rank — deterministic, and
-identical to what arm A used). Strip each in turn. **The moment one passes Gate 1 and Gate 3,
-install it and stop judging that slot.** No looking ahead to see whether something better is
-coming; that impulse *is* question 2.
+identical to what arm A used). **The moment one passes Gate 1 and Gate 3, install it and stop
+judging that slot.** No looking ahead to see whether something better is coming; that impulse
+*is* question 2.
+
+**Read a strip BOARD, top to bottom — do not strip one candidate at a time.** Build the whole
+batch's board in one call (`video_frames.py --videos-dir … --mode strip --board …`), read the
+one image, and take the **topmost row that passes**. Rows below it are `not_examined` and stay
+that way.
+
+> **This was got wrong on run 1 and it cost ~40 minutes.** The reasoning was that seeing later
+> candidates might tempt a reviewer to invent a fault in an earlier one, so strips were read
+> singly — **52 image reads instead of ~15**, and the lost time was then misread as evidence
+> that removing question 2 does not make the skill faster. It was evidence of nothing but the
+> procedure. **A board does not weaken the rule**: "first row that passes" is decided by row
+> order, which is fixed before you look. Seeing row 5 cannot change whether row 1 passed — and
+> if you find yourself re-litigating row 1 after admiring row 5, that is the exact impulse this
+> arm exists to detect, so log it in `scores.jsonl` rather than acting on it.
+
+Re-strip a single candidate only to re-check one you have already judged from the board.
 
 If nothing in wave 1 passes, top up with `fetch_candidates.py --more` and continue down the
 list. If nothing at all passes, install the least-bad and say so plainly — same as arm A.
@@ -66,6 +82,23 @@ list. If nothing at all passes, install the least-bad and say so plainly — sam
 The shelf still gets stocked (it already is: `media_lab_b`'s options store was copied from
 arm A so both arms see the identical candidates), but it is **unranked** here. Order carries
 no claim.
+
+### The `must_show` rule — question 1, so it binds BOTH arms
+
+"Install the first that passes" is not deterministic until you say what *passes* means when a
+`must_show` item is simply outside the frame. Settled during run 1, applied to all ten slots:
+
+> A `must_show` fails when the strip shows it **ABSENT or CONTRADICTED**. Framing that merely
+> doesn't cover it leaves it **UNVERIFIED, not failed** — *except* **gaze and affect** items,
+> which **fail** when their carrier is cropped out, because affect has exactly one carrier and
+> a cropped face means the beat's content is absent, not merely unproven.
+
+Worked both ways in run 1: `lab_eyecontact_t5/08` **passed** on unverifiable posture (a tight
+crop, POV marked FINE for that slot, and the eyes — the carrier — held in every frame), while
+`lab_tease_t4/00` **failed** because it is a covert downblouse whose face is never in frame, so
+"aware of the camera" can never be shown at all.
+
+This belongs to `find-media` proper too; it lives here only until it is folded in.
 
 ## Evidence format
 

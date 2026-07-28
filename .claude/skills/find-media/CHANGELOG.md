@@ -13,6 +13,33 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-07-29 — strip BOARDS restored to `video_frames.py` (regression fix from the 07-28 promotion)
+
+- **`scripts/video_frames.py`** — added `strip_board()` plus `--board` / `--board-rows`, and a
+  `boards` field on `FrameResult`. Batch strip mode now stacks every candidate's strip into one
+  labelled image, one row per candidate, six rows per board (1280×1920), spilling to
+  `<stem>_2.jpg`. Guarded: `--board` without `--videos-dir --mode strip` exits 2.
+  **Why — this is a REGRESSION I introduced.** Per-slot strip boards existed as an ad-hoc
+  `strips.sh` and produced the 1280×1920 images that carried the 2026-07-27 media_lab run. The
+  2026-07-28 promotion of that script into the skill kept `--sheet` for **rep mode only** and
+  silently dropped strip boarding. Nothing failed loudly; the next run simply read strips one
+  at a time — **52 image reads where ~15 would have done**, roughly 3× the cost of JUDGE.
+  Worse, the lost time was first attributed to the experiment under test (`find-media-b`
+  "not being faster") rather than to the missing feature — a wrong conclusion that stood until
+  the user pushed back on it.
+  **Implementation notes:** rows are padded to `cols*tile_px` before `vstack` because strips
+  differ in width when a clip yields 3 frames instead of 4, and unequal widths make ffmpeg drop
+  inputs; `vstack` is used rather than `tile=` for the reason already recorded in
+  `contact_sheet()` (measured 07-28: `tile=` emitted one input of eight).
+  **Verified 2026-07-29:** ran it over the 16 `lab_eyecontact_t5` candidates → 3 boards
+  (1280×1920, 1280×1920, 1280×1280), both guard paths exit 2, and **reading board 1 reproduced
+  all six run-1 per-candidate verdicts** — including the eye-contact breaks at 00/frame-2 and
+  02/frame-1 — at ~260px per frame after the reader's downscale.
+- **`SKILL.md`** §5 Stage B and the scripts inventory — batch JUDGE now reads a board; the
+  single-clip form is explicitly demoted to "re-checking one candidate after the board".
+- **`references/chrome_route.md`** §7 Stage B — same, with the regression history in a warning
+  box so the feature is not dropped a second time.
+
 ## 2026-07-28 — the fetch harness becomes skill infrastructure + two-wave fetching
 
 The media_lab run took 81 min, but batch 2 ran at **5.6 min/slot against batch 1's 10.6** —
