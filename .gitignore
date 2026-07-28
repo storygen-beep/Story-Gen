@@ -219,6 +219,9 @@ game_explorations/*/.live/
 # ============================================================
 !games/vesper/output/videos/
 !games/vesper/output/videos/**
+# Paid build ships as a self-contained folder (own ./videos), same structure as the free build.
+!games/vesper/output-paid/videos/
+!games/vesper/output-paid/videos/**
 !games/the_inheritance/output/videos/
 !games/the_inheritance/output/videos/**
 
