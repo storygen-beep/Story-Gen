@@ -9,6 +9,31 @@ from `find-media` in exactly ONE documented way (question 2 removed). **Any chan
 a second difference invalidates the A/B** — if you edit this file, say explicitly whether the
 diff against `find-media` is still one axis.
 
+## 2026-07-28 — first run executed (no skill files changed)
+
+- **No file in this skill was edited.** The diff against `find-media` is still exactly one axis.
+  Logged here because the ledger should record that the arm was *exercised*, not just written.
+- Ran it on `games/media_lab_b/` end to end: 10/10 installed, all 10 green on
+  `tier_format_check.py`, 31 strip kills, 1342 options left unranked on the shelf, and
+  `game-review/load?game=media_lab` still 0 missing / 10 found (arm A untouched).
+  **0 of 10 slots tied** — every arm-B pick is a different file from arm A's.
+  Result write-up: `games/media_lab_b/AB_RESULT.md`.
+- **One ambiguity in the spec surfaced and was resolved during the run** — worth folding into
+  `find-media` proper if it survives review, because it is a *question-1* rule and therefore
+  applies to both arms: what to do when a `must_show` item is outside the frame rather than
+  visibly absent. Rule applied uniformly across all ten slots: *a `must_show` fails when the
+  strip shows it ABSENT or CONTRADICTED; framing that merely doesn't cover it is UNVERIFIED,
+  not failed — except for gaze/affect items, which fail when their carrier is cropped, since
+  affect has one carrier and a cropped face means the content is absent.* Without this,
+  "install the first that passes" is not actually deterministic.
+  **Verified:** stated in `AB_RESULT.md` with the two slots that forced it
+  (`lab_eyecontact_t5/08` passed on unverifiable posture, `lab_tease_t4/00` failed on an
+  unshowable affect gate) so the calls can be audited against arm A.
+- **Known miss recorded, not papered over:** `lab_finish_facial_t5` is
+  `POOL_GATE_UNSATISFIABLE` — 16 of 16 stripped, none shows his hand at the back of her head.
+  Least-bad installed and flagged. The gate is identical in both arms, so this slot carries no
+  information about ranking and should be discounted when judging the A/B.
+
 ## 2026-07-28 — created
 
 - **`SKILL.md`** — new. A thin *delegating* skill: it instructs the runner to read and follow
