@@ -128,6 +128,19 @@ gate, not a second copy of the doctrine.
       a debug build ships those placeholders even after the media lands. *(This shipped live once: 147
       baked placeholders in a public Vesper build.)*
 - [ ] `grep -c 'IMAGE MISSING\|VIDEO MISSING'` on the built `index.html` == **0**.
+- [ ] **Media actually DEPLOYS, not just sits on disk** — every media path the built `index.html` references
+      resolves to a **git-tracked** file. Gitignored media (a build whose `videos/` isn't whitelisted) plays
+      fine from `file://` and **404s on Pages**; the gap is invisible in any local check. Run per built dir:
+      ```bash
+      d=games/<slug>/output-paid          # repeat for output/, and output-paid/ only if it exists
+      for p in $(grep -oE '\./videos/[A-Za-z0-9_./-]+\.(jpg|jpeg|png|webp|gif|webm|mp4)' "$d/index.html" | sort -u); do
+        f="$d/${p#./}"; git ls-files --error-unmatch "$f" >/dev/null 2>&1 || echo "NOT TRACKED -> 404 live: $f"
+      done
+      ```
+      Zero output = every clip ships. *(This shipped live once: the paid build's `output-paid/videos/` was
+      gitignored, so its media 404'd on Pages though every file sat on disk — the fix is the `.gitignore`
+      whitelist in `media.md` §3. A paid build that instead borrows via `--video-path ../output/videos` points
+      at `output/`'s tracked media, so this check should be run against the path the HTML actually references.)*
 - [ ] No dev surface leaked — no `<<devJumps>>` links, no canvas-review or full-map affordance, no
       `[DEV]`-labelled choice.
 - [ ] Media type matches the bytes: a block declared `type = "video"` whose file on disk is a `.jpg` is a

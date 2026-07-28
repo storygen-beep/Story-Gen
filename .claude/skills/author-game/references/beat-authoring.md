@@ -71,8 +71,12 @@ NPC arcs/hubs/ambients/capstones are beats. Only the skeleton + boot + sleep + s
    **`--build free|paid`** selects the cheat-page variant and **defaults to `free`**, so an ordinary build
    is always the safe one. It only matters for a game that authors `[ui.cheat_page]`; a `free` build emits
    the rows as padlocked labels with **no working effects in the file**, a `paid` build emits live rows.
-   The paid artifact must go to a **gitignored** `games/<slug>/output-paid/` — the command refuses to write
-   a paid build into any directory named `output`, because that path is tracked in a PUBLIC repo:
+   The paid artifact goes to `games/<slug>/output-paid/` — the command refuses to write a paid build into any
+   directory named `output` (so it can't overwrite the free public build). Ship it **self-contained, same
+   structure as the free build** (its own `output-paid/videos/`, the plain command below — **not**
+   `--video-path`); **whitelist its media in `.gitignore` (`!games/<slug>/output-paid/videos/` + `/**`) or it
+   404s live**, and commit both builds' HTML + media together. `media.md` §3 owns the full model;
+   `ship-gate.md` §4 has the git-tracked deploy check that catches a missing whitelist:
    ```bash
    python manage.py package_from_toml --file games/<slug>/toml_phases/7_final_game.toml \
      --build paid --output games/<slug>/output-paid --video-folder games/<slug>/videos

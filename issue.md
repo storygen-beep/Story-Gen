@@ -182,11 +182,63 @@ IT SAW MORE ISSUES
 
 [DONE]The Work on case, can it be a bit more aware of the state, it confuses player to work more and more. I think it can sort of give some hints, like if it require more to work to reveal something then it can say you might need to work more on it to find out more, and if nothing more to reveal in it, it can say you have figured this out (to verify for the rogue and find out the courier guy from underworld). It can say current state and also a hint if there is more work needed. But if no work is needed it should say that you can already find that out.
 
-The question is, should we lock the car ride to spire and vance security?? We are trying to figure out what is correct and what is wrong??
+[DONE]The question is, should we lock the car ride to spire and vance security?? We are trying to figure out what is correct and what is wrong??
 
-the work on case says the answer's in the reach, but it is in the underworld if I m correct??
+[DONE]the work on case says the answer's in the reach, but it is in the underworld if I m correct??
 
-Things to correct:
+[DONE]Things to correct:
     Undertow:
         The bartender: should be the npc portrait, not the link
         Drink with Colm: should be same npc portrait. First it should not show direct menu of choice, first they meet and introduce, colm doesnt share much, she says can she buy him a drink, that is the first time they meet. Further we show the colm portrait, with two choices talk to him, drink with him [with more drink more and more choices like linear, every drink cost time], should be triggable more then one time, simply within the schedule triggerable everytime in the colm bar schedule.
+
+
+
+
+
+
+
+
+
+
+
+People pays for the membership but then cancel it
+add cheats and walkthrough pdf
+
+Study top patreons
+
+
+add cheat page to the game. And PDF format so to add there cheats and a walkthrough for our patreon members.
+
+
+
+
+
+
+
+
+**25 July**
+
+[DONE]PDF Research
+
+[DONE]Game Cheat Page add
+now we need to update the skill to know how to write cheats, plus it should know the two builds and commands.
+
+[DONE]Inheritance
+
+
+[DONE]video quality enhance: find media v2 and using chrome extension
+
+Why so slow, is it working one by one on each media, or it can work parallely, internet connectivity matters.
+
+
+release vesper 0.1.6 free and beta build on patreon, free one on mopoga and gamcore both.
+
+Also updating the cheat page to knowing the benefits of becoming our patreon member.
+
+patreon skill
+
+start working on inheritance, making sure it doesnt have any fucking issues like in the vesper 0.0 verson
+
+[DONE]strategy changes to latest build release for chill nut and all paid one for only beta nut and higher. 
+
+

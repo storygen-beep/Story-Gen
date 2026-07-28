@@ -143,9 +143,24 @@ and `search_queries` so the missing-media page is a usable list, and check cover
   — the no-DB build is the default).
 - **`--build free|paid`** — cheat-page variant, **default `free`**, so a publish build is the safe one unless
   you say otherwise. Only affects games that author `[ui.cheat_page]`. A **paid** build carries live cheat
-  grants and must be written to a gitignored `games/<slug>/output-paid/`; the command refuses to write one
-  into any directory named `output` (that path is tracked in a PUBLIC repo). Two builds come from ONE
-  merged TOML — never edit the source between them.
+  grants and goes to `games/<slug>/output-paid/` (the command refuses to write a paid build into any directory
+  named `output`, so it can never overwrite the free public build). Two builds come from ONE merged TOML —
+  never edit the source between them.
+  **Ship the paid build SELF-CONTAINED — same structure as the free build:** its own `output-paid/videos/`,
+  built with the PLAIN command (`--video-folder <media-dir>`, and **NOT** `--video-path`), so the folder stands
+  alone when archived/distributed. **Media is gitignored by default, so you MUST whitelist the paid build's
+  media in `.gitignore` or every clip 404s on Pages** — fine from `file://`, broken live. Mirror the free
+  build's two lines:
+  ```
+  !games/<slug>/output-paid/videos/
+  !games/<slug>/output-paid/videos/**
+  ```
+  Commit BOTH builds' HTML **and** media in the same commit so they never drift, and clear `ship-gate.md` §4's
+  deploy check (referenced media must be git-**tracked**, not just on disk). *(⚠️ `--video-path <dir>` is a
+  niche weight-saver — it points the paid HTML at ANOTHER build's media with **no copy**, e.g.
+  `--video-path ../output/videos` to borrow the free build's tracked assets and avoid a second copy near the
+  1 GB Pages cap. It yields a **non-standalone** folder, so **don't use it for a normal paid ship** — it exists
+  only for the weight-constrained case.)*
 
 ---
 

@@ -14,6 +14,20 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 -->
 
 ## 2026-07-28
+- **Rewrote the paid-build media doctrine to SELF-CONTAINED** (`references/media.md` §3 + `references/beat-authoring.md`)
+  and **added a git-tracked deploy check to the ship gate** (`references/ship-gate.md` §4). **Why:** both files
+  taught "a paid build must go to a **gitignored** `output-paid/`" — stale. In practice the paid build is
+  committed, served publicly (portal `paidBuild: true` → Beta Nut Build), and LO wants it **self-contained**
+  (own `output-paid/videos/`, same structure as the free build, so the folder archives standalone). Following
+  the old doctrine 404'd every paid clip on Pages: the media was on disk but gitignored, so it never deployed.
+  New doctrine: build paid with the plain command (own `./videos`, NOT `--video-path`), **whitelist
+  `output-paid/videos/` in `.gitignore` (required or it 404s live)**, commit both builds' HTML + media
+  together; `--video-path` demoted to a niche weight-saver (borrows another build's tracked media, yields a
+  non-standalone folder — don't use for a normal paid ship). The ship-gate check is the class-kill: every media
+  path in the built HTML must resolve to a **git-tracked** file, not just a file on disk — catches
+  "fine locally, 404s live" for any build/model. **Verified:** ran the check against both live vesper builds →
+  0 not-tracked each (matches the live 200s); it flags gitignored media because `git ls-files --error-unmatch`
+  fails on it. Engine untouched (the flags already existed since Apr; no `apps/` change).
 - **Added save-safety §5 — "a gate-item's grant must be re-assertable, not a one-shot a carried save already
   burned"** (`references/save-safety.md`; renumbered the old §5 Pre-update checklist → §6, fixed the two live
   cross-refs in `references/ship-gate.md` and `references/prose-truth.md`, and added a §2 caveat that "adding is

@@ -251,3 +251,11 @@ game_explorations/vesper_wardrobe/
 
 # python bytecode inside the skills tree (the !.claude/skills/** negation above un-ignores it)
 .claude/skills/**/__pycache__/
+
+# ============================================================
+# Patreon posting folder — on disk, deliberately NOT tracked.
+# This repo is PUBLIC (storygen-beep/Story-Gen) and serves GitHub Pages, so
+# tier/pricing strategy, cadence analysis and the compliance notes must not be
+# pushed. Same treatment as game_explorations/ above: kept locally, out of git.
+# ============================================================
+patreon/
