@@ -8,7 +8,7 @@ bytes.
 - **How to run the hunt** → `references/chrome_route.md`
 - **How to judge what comes back** → `references/scoring_rubric.md` (heat, setting, craft — after the binary correctness gate)
 - **What to type** → `references/query_rewriting.md` (the dialect is source-specific)
-- **Contact sheets instead of raw thumbnails** → `references/clip_preranking.md`
+- **Contact sheets instead of raw thumbnails** → `references/sheets_and_boards.md`
 
 ## The invariant
 
@@ -277,7 +277,7 @@ Two measured lessons from this skill's own history, both about the same thing:
 
 - **Viewing raw thumbnails was the dominant token sink** — roughly 0.5–1M tokens per game
   spent purely *looking*. This is why candidates get assembled into a contact sheet and
-  read as one image (`references/clip_preranking.md`), not opened one by one.
+  read as one image (`references/sheets_and_boards.md`), not opened one by one.
 - **Do NOT spawn one subagent per source.** The old fan-out (4 subagents per item)
   multiplied token cost with no benefit — every agent paid to look at its own pile and
   none of them could compare across piles. One page, one regex, one sheet, one look.

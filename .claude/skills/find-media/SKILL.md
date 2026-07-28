@@ -325,18 +325,24 @@ preferred was destroyed before he saw it.
 **144 files to strip 60** — the surplus only padded a sheet. This trims *fetching*, never
 judging: every animated finalist and every install is still stripped.
 
-**Stage A — contact sheet.** CLIP pre-ranks so you Read **one image** instead of 15
-thumbnails. CLIP is a pre-filter that decides what gets *looked at*; it never replaces a
-gate and never makes the pick. It is a strong SFW shortlister (top-3 = 88%) and **25–31% on
-NSFW acts** — that number is the entire argument for this skill's shape. Everything is
-already on the shelf by the time you get here, so `--top-k` is purely about how many tiles
-you look at: **set it to the mode's option count** (§Mode — 6 / 12 / 18). Invocations, the
-pinned interpreter, and the mixed-input contract (raw `.gif` must be rep-framed before CLIP
-will touch it) are in `references/clip_preranking.md`.
+**Stage A — contact sheet.** Build it with `video_frames.py --videos-dir … --mode rep
+--sheet …`: one representative frame per candidate, tiled and numbered, so you Read **one
+image** instead of 15 thumbnails.
 
-Note the input split: the Chrome route returns `.gif` as often as `.mp4`. `.gif` is a video
-to `video_frames.py` and invisible to `clip_shortlist.py` — point CLIP at raw gifs and it
-exits 1 "no candidate images found", which misreads as an empty harvest.
+**You are the shortlister. There is no model in this loop.** ffmpeg cuts, resizes, labels and
+glues; it judges nothing. Every call — the act, the count, the gaze, the affect — is made by
+reading the assembled image. So **tile order carries no claim**: the sheet is in
+`fetch_candidates.py` order, which is a stable index for naming a tile, not a ranking. Because
+nothing can be re-run to check a call, the written `gate_reason` in `scores.jsonl` is the
+verification mechanism and the sheet is the exhibit.
+
+Everything is already on the shelf by the time you get here, so the tile count is purely how
+many you *look at*: **show the mode's full option count** (§Mode — 6 / 12 / 18), or you ship
+an option no eye ever landed on.
+
+Note the input split: the Chrome route returns `.gif` as often as `.mp4`, plus ordinary stills.
+Animated files get a rep frame extracted; **a still IS its own rep frame** and needs no
+extraction. Full contract in `references/sheets_and_boards.md`.
 
 **Stage B — the frame strip. Every ANIMATED finalist, route-independent, no exceptions.**
 `.webm` / `.mp4` / `.gif` get stripped; a static `.jpg` finalist has no frames to strip and
@@ -483,7 +489,8 @@ Batched loop (phases 3–6)
   query run *now*, inside the current batch, while the tab and the vocabulary are warm.
 - **Token budget.** One contact sheet per item ≈ 5 image Reads per batch, versus the ~75
   individual thumbnail Reads the old flow required — that was 0.5–1M tokens per game spent
-  purely looking. See `references/clip_preranking.md`.
+  purely looking. Measured again 2026-07-29 on identical files: **52 image reads one strip at
+  a time vs 14 from boards**, same verdicts. See `references/sheets_and_boards.md`.
 
 Never start a new SEARCH while the previous batch's INSTALL is incomplete.
 
@@ -492,7 +499,7 @@ Never start a new SEARCH while the previous batch's INSTALL is incomplete.
 Mode is an **option count**, not a retry budget. These are the only option counts in this
 skill; every other section defers here rather than restating a number.
 
-| Mode | Options stocked = `--top-k` | Stripped | When |
+| Mode | Options stocked | Stripped | When |
 |---|---|---|---|
 | `fill` | 6 | none — static `.jpg`, judged from the contact sheet | SFW static slots: location, clothing, social post, dating profile. Low variance, cheap to eyeball. |
 | `wide` | 12 | top 6 by rank | Any NSFW canvas slot. The strip kills ~half, so a 6-deep shelf can arrive as 2 survivors. Stock 12 to land 6. |
@@ -511,7 +518,7 @@ screenshot you take is the thing you immediately need to look at.
 | Subagent | Objective | Output | Boundaries |
 |---|---|---|---|
 | `query-rewriter` | Read narrative + raw queries, produce per-source query slots | JSON `[{source, query, reason}]` | Doesn't search, doesn't invent facts |
-| `candidate-evaluator` | Read the contact sheet, apply gates, rank survivors | `{ranked[], installed_id, gate_rejects[]}` | CLIP pre-ranked the tiles; **judge the act yourself** |
+| `candidate-evaluator` | Read the contact sheet, apply gates, rank survivors | `{ranked[], installed_id, gate_rejects[]}` | Tiles are in fetch order, **not** ranked; **judge the act yourself** |
 | `shelf-triage` | Diagnose a slot that came up short of 6 options | `{diagnosis, sibling_queries, alt_terms}` | Only after the first search pass returns thin |
 
 Give each a focused brief — objective, output format, tool guidance, task boundaries. Vague
@@ -599,7 +606,7 @@ The router above is enough to start. Load these when you reach the work they des
 | `references/media_sources.md` | Choosing which shelf to point at: NSFW host catalog, tease/flash/explicit bands, the SFW stock shelf, the direct-fetch contract (headers, failure signatures, size floors) |
 | `references/query_rewriting.md` | Writing or validating a query, synthesizing queries for empty `search_queries`, or reconciling the Google vs PornHub dialects |
 | `references/scoring_rubric.md` | Judging candidates: the gates, HEAT/SETTING/CRAFT, the dead-clip veto, `scores.jsonl` |
-| `references/clip_preranking.md` | Running `clip_shortlist.py` / `video_frames.py`, building a contact sheet, choosing a CLIP caption |
+| `references/sheets_and_boards.md` | Building the image JUDGE reads: `video_frames.py`, the contact sheet (`--sheet`), the strip board (`--board`), the mixed still/animated contract, evidence layout. **You are the shortlister — no model ranks the tiles.** |
 | `references/content_rating.md` | Deciding SFW vs NSFW, or fixing a missing/wrong `_tN` tag (the audit + retag flow) |
 | `references/api_behavior.md` | Confused about why the API saved a different extension than the TOML declared |
 | `references/game_review_api.md` | Need the full `missing_media` entry schema or the API's category vocabulary |
@@ -609,19 +616,18 @@ The router above is enough to start. Load these when you reach the work they des
 
 Scripts, all under `scripts/`: `validate_queries.py` (queries + format + tag proposals),
 `scene_semantics.py` (tier / family / rating classification — imported, no CLI),
-`apply_retags.py` (write corrected `_tN` into the phase TOMLs), `clip_shortlist.py`
-(rank + contact sheet), **`fetch_candidates.py` (stocked URLs → bytes on disk, in waves —
-the only fetcher; never hand-roll one)**, `video_frames.py` (rep frames + strips + `--sheet`
-for the rep contact sheet and **`--board` for the strip board — batch JUDGE reads a board,
-never one strip at a time**), `tier_format_check.py` (pre-install gate), `dedup_tracker.py`
-(used-asset ledger).
+`apply_retags.py` (write corrected `_tN` into the phase TOMLs), **`fetch_candidates.py`
+(stocked URLs → bytes on disk, in waves — the only fetcher; never hand-roll one)**,
+`video_frames.py` (rep frames + strips + `--sheet` for the rep contact sheet and **`--board`
+for the strip board — batch JUDGE reads a board, never one strip at a time**),
+`tier_format_check.py` (pre-install gate), `dedup_tracker.py` (used-asset ledger).
 
-**Interpreter.** All of them are stdlib-only and run under plain `python3`. The single
-exception is `clip_shortlist.py`, which needs the pinned torch interpreter:
-`"${FIND_MEDIA_PY:-/Library/Frameworks/Python.framework/Versions/3.10/bin/python3}"`.
+**Interpreter.** Every script is **stdlib-only** and runs under plain `python3` — no pip
+install, no virtualenv requirement, no pinned interpreter. The skill's **only** external
+dependency is `ffmpeg`/`ffprobe` on PATH, which `video_frames.py` shells out to. Keep it that
+way: a script that needs a package is a script that silently stops running.
 
 **Exit code 3 means DEGRADE GRACEFULLY, never crash.** A script exits 3 when an *optional*
-dependency is missing — `clip_shortlist.py` without torch/transformers/PIL or an uncached
-model, `video_frames.py` without ffmpeg on PATH. Fall back (Read the thumbnails directly; use
-the harvest poster), keep going, and name the degradation in your report. Exit 1 is a real
-gate failure; exit 2 is a usage error.
+dependency is missing — in practice that is `video_frames.py` without ffmpeg on PATH. Fall
+back (Read the thumbnails directly; use the harvest poster), keep going, and name the
+degradation in your report. Exit 1 is a real gate failure; exit 2 is a usage error.

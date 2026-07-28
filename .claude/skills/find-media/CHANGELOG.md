@@ -13,6 +13,52 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-07-29 (later) — CLIP DELETED; the shortlister is named as Claude's vision
+
+- **`scripts/clip_shortlist.py` — DELETED** (232 lines). **Why:** it never ran. Verified zero
+  CLIP outputs anywhere in `games/media_lab/` or `games/media_lab_b/` across three full
+  ten-slot runs. Its own docstring labelled its numbers **"Demo evidence"** — 88% top-3 on SFW,
+  **25–31% on explicit acts**, and explicit acts are this skill's primary content. It was also
+  the skill's **only** non-stdlib dependency (torch + transformers + Pillow on a pinned
+  Framework interpreter outside the venv, plus a ~600MB model cache).
+- **`scripts/requirements.txt` — DELETED.** It existed solely to install those three packages.
+  **The skill now has no Python dependencies at all** — every script is stdlib-only under plain
+  `python3`, and the single external dependency is `ffmpeg`/`ffprobe`. Side benefit that now
+  matters: the skill runs unchanged in a cloud session, where torch and the model cache are
+  absent (relevant to `media_lab_c` / `media_lab_d`).
+- **`references/clip_preranking.md` → `references/sheets_and_boards.md`** — rewritten, not just
+  renamed. Dropped: what CLIP is for, caption policy, torch prerequisites, the pinned-interpreter
+  section, the `clip_shortlist.py` invocation. Kept and updated: the `video_frames.py` section
+  (rep frames, strips, `--sheet`, `--board`), evidence-under-the-game, "the sheet is evidence
+  not a decision", the fallback contract (now ffmpeg-only), and "auto-accept stays OFF".
+  The two-column `video_frames.py` vs `clip_shortlist.py` input table collapsed to the one rule
+  that survives: **a still IS its own rep frame; `--mode strip` refuses stills because there is
+  no loop to make a claim about.**
+- **The replacement doctrine**, now stated in `SKILL.md` §5 Stage A and in the new reference:
+  **the shortlister is Claude's vision reading one assembled image.** ffmpeg only cuts, resizes,
+  labels and glues — it judges nothing. Therefore (a) **tile order carries no claim** — the
+  sheet/board is in `fetch_candidates.py` order, a stable index for naming a tile, not a
+  ranking; and (b) because no algorithm can be re-run to check a call, **the written
+  `gate_reason` in `scores.jsonl` IS the verification mechanism** and the board is the exhibit.
+  Supporting evidence for (b): re-judging the same ten slots from boards reproduced **10/10** of
+  the previous run's picks.
+- **`SKILL.md`** — eight sites: Stage A rewritten; §Mode column header `Options stocked =
+  --top-k` → `Options stocked` (`--top-k` was a `clip_shortlist.py` flag); §Batching pointer
+  repointed and given the 52-vs-14 read measurement; `candidate-evaluator` subagent boundary
+  now says tiles are in fetch order, not pre-ranked; disclosure-table row replaced; scripts
+  inventory pruned; the Interpreter paragraph now asserts stdlib-only with ffmpeg as the sole
+  external dependency; the exit-3 paragraph drops the torch clause.
+- **`references/media_sources.md` (×2), `references/scoring_rubric.md` (×1)** — pointers
+  repointed at `sheets_and_boards.md`.
+- **Deliberately NOT touched:** older CHANGELOG entries mentioning CLIP. A changelog is the
+  record of what was believed and when; rewriting it destroys the trail that makes drift
+  visible.
+- **Verified:** `grep -rniE "clip|torch|transformers|FIND_MEDIA_PY|montage|top-k"` over both
+  skills returns hits in `CHANGELOG.md` only; no dangling `clip_preranking.md` reference; every
+  reference named in the disclosure table exists on disk; `video_frames.py --sheet` and
+  `--board` both still exit 0 and write their images against a real candidate dir; all six
+  remaining scripts respond to `--help` under plain `python3`.
+
 ## 2026-07-29 — strip BOARDS restored to `video_frames.py` (regression fix from the 07-28 promotion)
 
 - **`scripts/video_frames.py`** — added `strip_board()` plus `--board` / `--board-rows`, and a

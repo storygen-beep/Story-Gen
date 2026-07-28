@@ -9,6 +9,17 @@ from `find-media` in exactly ONE documented way (question 2 removed). **Any chan
 a second difference invalidates the A/B** — if you edit this file, say explicitly whether the
 diff against `find-media` is still one axis.
 
+## 2026-07-29 (later) — CLIP removal inherited; diff is still ONE axis
+
+- **No file in this skill changed.** Recorded because `find-media` deleted `clip_shortlist.py`
+  and `requirements.txt` the same day, and this skill **delegates** — so the change lands here
+  by inheritance and the ledger should show it was considered rather than missed.
+- **Confirmed by grep: this skill never referenced CLIP at all** — not in `SKILL.md`, not in
+  frontmatter. So there was nothing to remove, and **the A/B diff against `find-media` remains
+  exactly one axis** (question 2 deleted). Nothing about the experiment is invalidated.
+- Net effect for a run of this arm: the shared tooling is now stdlib-only with `ffmpeg` as its
+  sole external dependency, which is what makes a cloud-session run of `media_lab_d` viable.
+
 ## 2026-07-29 — judging procedure fixed; run 1 invalidated as a SPEED measurement
 
 **Diff against `find-media` is still exactly one axis** (question 2 removed). Both changes

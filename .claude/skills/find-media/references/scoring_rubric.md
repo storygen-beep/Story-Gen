@@ -107,7 +107,7 @@ unqualified "never install anything you have not frame-stripped", read it as tha
 - a thumbnail that read bent-over-from-behind but whose loop was a **blowjob**
 
 So: **for animated candidates you score the strip, never the thumbnail.** Build it with
-`video_frames.py --mode strip --frames 4` (see `references/clip_preranking.md`). This applies
+`video_frames.py --mode strip --frames 4` (see `references/sheets_and_boards.md`). This applies
 to every retrieval route without exception — the strip is about what the file contains, and
 files lie the same way whatever site they came from.
 

@@ -5,20 +5,29 @@ video_frames.py — ffmpeg frame extraction for find-media (NSFW shortlist + ver
 Harvested clips have no meaningful poster frame, and a single frame is a
 misleading way to judge a clip. Two modes solve that:
 
-  rep    Representative still for CLIP ranking. Samples N evenly-spaced frames,
-         picks the MEDIAN-by-file-size one (black/seam frames are tiny → they
-         sort to the bottom and get skipped). Writes one .jpg.
+  rep    Representative still, one per candidate — the tile of a CONTACT SHEET.
+         Samples N evenly-spaced frames and picks the MEDIAN-by-file-size one
+         (black/seam frames are tiny → they sort to the bottom and get skipped).
+         Writes one .jpg.
   strip  Act-verification strip. Tiles N evenly-spaced frames into one 1xN image
-         so the LLM/human can confirm the act holds across the loop, not just at
-         one instant.
+         so the act can be confirmed across the loop, not just at one instant.
 
-ffmpeg/ffprobe only — NO OpenCV, NO PIL, NO torch. Matches the skill's existing
-lightweight inline ffmpeg usage so it runs under any python3 with ffmpeg on PATH.
+Both batch modes assemble ONE image for review: --sheet tiles rep frames into a
+contact sheet, --board stacks strips into a labelled board. That assembled image
+is what gets read; reading per-candidate strips one at a time measured 3x the
+cost for identical verdicts (2026-07-29).
+
+Nothing here ranks or scores. ffmpeg cuts, resizes, labels and glues — the
+judging is done by whoever reads the output, so tile order is the caller's fetch
+order and carries no claim about quality.
+
+ffmpeg/ffprobe only — NO OpenCV, NO PIL, NO torch, no model of any kind. Runs
+under any python3 with ffmpeg on PATH.
 
 Usage:
     # one representative still
     video_frames.py --video <clip> --mode rep --frames 3 --out <still.jpg> [--json]
-    # batch: one rep still per clip in a dir (mirrors candidates for clip_shortlist)
+    # batch: one rep still per clip in a dir (+ --sheet for the contact sheet)
     video_frames.py --videos-dir <dir> --mode rep --frames 3 --out-dir <frames_dir> [--json]
     # verification strip for one chosen clip
     video_frames.py --video <clip> --mode strip --frames 4 --out <strip.jpg> [--tile-px 320] [--json]
