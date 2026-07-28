@@ -90,6 +90,18 @@ window.GAMES = [
     summary: `A short test build for NPC name/relationship customization and variable syntax.`,
   },
   {
+    slug: "media_lab_c",
+    title: "Media Lab C",
+    dev: true,
+    summary: `Cloud-session replication of arm A. Same ten beats and the same candidate shelf as Media Lab, to be filled by the full find-media skill — gates, frame strip, and HEAT/SETTING/CRAFT ranking. Empty until that run happens; see games/media_lab_c/RUN_BRIEF.md.`,
+  },
+  {
+    slug: "media_lab_d",
+    title: "Media Lab D",
+    dev: true,
+    summary: `Cloud-session replication of arm B. Same ten beats and the same candidate shelf, to be filled by find-media-b — correctness gates only, installing the first clip that passes. Empty until that run happens; see games/media_lab_d/RUN_BRIEF.md.`,
+  },
+  {
     slug: "media_lab_b",
     title: "Media Lab B",
     dev: true,
