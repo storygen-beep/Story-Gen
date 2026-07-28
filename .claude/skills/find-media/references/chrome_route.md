@@ -333,13 +333,62 @@ place. A dead URL therefore fails without emptying the slot.
   `output/videos/scenes/kiss` — `output/` is NOT stripped, and the file lands nested wrongly
   at `games/<game>/videos/output/videos/scenes/kiss.ext`.
 
-### Manual download, when you need the bytes locally to judge
+### Getting the bytes down — `fetch_candidates.py`
 
-The nine hosts in §4 are plain clearnet fetches — no Tor, no auth, no signed URL, no expiry.
-Send a browser User-Agent anyway; it costs nothing and some CDNs are picky about it:
+The store holds URLs; JUDGE needs bytes. **Use the shipped script — do not hand-roll a
+fetch loop.** Everything below was learned by hand-rolling one and getting it wrong; the
+script has those lessons compiled in, so a fresh run starts where the last one finished
+instead of rediscovering 403s and stall behaviour.
 
 ```bash
-curl -sS -L --max-time 30 \
+# WAVE 1 — the 8 best by slug rank
+python3 .claude/skills/find-media/scripts/fetch_candidates.py \
+  --game <game> --file 'scenes/alley_bj_t5.webm' \
+  --want alley,night,outdoor,wall --avoid daylight,studio --top 8
+```
+
+It reads the slot's stocked URLs straight from `media_options.json`, ranks by slug, fetches
+concurrently, applies fetch sanity, writes `NN.<ext>` plus `manifest.json`, and reports every
+drop with a reason. Exit 0 ok / 1 nothing landed / 2 usage.
+
+**Fetch in TWO WAVES — this is the default, not an optimisation.** The media_lab run
+downloaded **144 files and frame-stripped 60**: the surplus existed only to pad a contact
+sheet. So:
+
+1. `--top 8` → sheet → apply the Gate-1/Gate-3 checks → strip the survivors.
+2. Only if gate-survivors land **under the 6-option shelf floor**, top up with `--more`
+   (skips what is already on disk, keeps numbering contiguous, never re-fetches a URL).
+3. Still short after that? The problem is the *query*, not the shelf — run a sibling query (§3).
+
+Easy slots stop at wave 1 and save ~40% of the bytes. Hard slots pay exactly what they always
+paid — the alley slot finished with 3 survivors from 14 and would simply run wave 2. **Nothing
+about the strip changes**: every animated finalist and every install is still stripped. This
+trims fetching, never judging.
+
+`--workers` defaults to **3** and should stay there — see the weather box below.
+`--max-tries` (default 4×`--top`) stops the script walking a 140-deep shelf when the network
+is broken; if it trips, the report says so.
+
+> ### ⚠️ Network timing is WEATHER — never build rules from one day's numbers
+> Every instinct here is wrong, and each was measured wrong on 2026-07-27/28:
+> - **"These hosts are slow, deprioritise them."** The hosts measured at 30–44s were **1–2s**
+>   an hour later. A blacklist built that afternoon would have permanently avoided good
+>   sources for no reason. There is no slow-host list in this skill, deliberately.
+> - **"Download in parallel, it'll be much faster."** These CDNs throttle concurrency: at 8
+>   workers per-file time went **7.8s → 34.1s** for only ~1.5× total. Five benchmarks in one
+>   afternoon disagreed (0.8× / 1.5× / 2.6×). Concurrency is a hedge against one stalled
+>   straggler, **not** a speed feature.
+> - **"Cap total download time to kill slow files."** A flat 20s cap threw away good clips:
+>   `101534-sultry-bj-on-knees.gif` is 6.6 MB and takes **36.8s at 0.18 MB/s with a worst
+>   chunk gap of 4.9s** — never stalled, just big. Kill **stalls** (`--timeout`, the socket
+>   gate), not slowness; `--deadline` is a runaway backstop at 120s.
+>
+> If you measure something here and want to act on it, measure it again hours later first.
+
+**Manual `curl`, single-file fallback** (the script is the route; this is for one-offs):
+
+```bash
+curl -sS -L --max-time 60 \
   -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36' \
   -o /tmp/fm/<slot>/03.webm 'https://<host>/<path>.webm'
 ```
@@ -412,18 +461,28 @@ The Google results grid is already a contact sheet: one `computer {action:"scree
 20–40 tiles. Use it to decide which URLs are worth fetching at all.
 
 For clips already on disk, build a local sheet — one representative still each, tiled into one
-image you Read once:
+**numbered** image you Read once. One command, no hand-written ffmpeg:
 
 ```bash
 # median-of-3 by file size, so black frames and seams (which are tiny) sort out
 # video_frames.py is stdlib + ffmpeg only — plain python3, no pinned interpreter
 python3 .claude/skills/find-media/scripts/video_frames.py \
-  --videos-dir /tmp/fm/<slot> --mode rep --frames 3 --out-dir /tmp/fm/<slot>/rep
-
-ffmpeg -y -framerate 1 -pattern_type glob -i '/tmp/fm/<slot>/rep/*.jpg' \
-  -vf "scale=256:256:force_original_aspect_ratio=decrease,pad=256:256:(ow-iw)/2:(oh-ih)/2:color=black,tile=4x3" \
-  -frames:v 1 /tmp/fm/<slot>/sheet.jpg
+  --videos-dir /tmp/fm/<slot> --mode rep --frames 3 \
+  --out-dir /tmp/fm/<slot>/rep --sheet /tmp/fm/<slot>/sheet.jpg
 ```
+
+The number burned into each tile is the candidate index, so `07` on the sheet is `07.gif`
+on disk and entry `07` in `manifest.json` — that is what lets a judgement be acted on. Read
+the **sheet**, not the tiles.
+
+`--sheet` is rep-mode only. Batch rep also accepts **stills** (`.jpg/.png/.webp`), because a
+mixed pool is normal — a location slot fetches images while a scene slot fetches clips — and
+silently dropping the images reads as "the harvest found nothing". Batch **strip** still takes
+clips only: a still has no loop to make a claim about.
+
+Do NOT hand-roll the tiling with ffmpeg's `tile=` filter. Measured 2026-07-28: given eight
+correct 320×320 tiles it emitted a sheet containing only **one** of them, reproduced in pure
+shell. `video_frames.py` uses explicit `hstack`/`vstack` instead, which was verified correct.
 
 `video_frames.py` exits **3** when ffmpeg isn't on PATH — then fall back to reading the
 thumbnails individually. Exit 3 always means *degrade gracefully*, never crash the run.

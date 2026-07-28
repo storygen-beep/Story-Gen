@@ -138,6 +138,24 @@ Where the strip still earned its keep, it was decisive:
 - The regex `\.(gif|mp4|webm)` matches the bare string `www.gif`, producing a junk URL with an
   empty path. Filter on `pathname.length > 4`.
 
+## 8. The harness was promoted into the skill (2026-07-28)
+
+This run built its own fetch/sheet/strip tooling (`hunt.py`, `sheet.sh`, `strips.sh`) because
+the skill shipped none — that cost ~20 minutes, and batch 2 ran at **5.6 min/slot vs batch 1's
+10.6** once it existed. Leaving it here would have made every future game re-pay that, and
+re-discover the google-referer 403.
+
+Those three files are now **deleted** (git history keeps them) and replaced by:
+- **`scripts/fetch_candidates.py`** — the skill's only fetcher. Slug ranking, own-origin
+  referer, stall-vs-slow gating, two-wave `--top`/`--more`, `--max-tries`.
+- **`scripts/video_frames.py --sheet`** — numbered contact sheet in one command, and batch
+  rep mode now accepts stills so mixed pools sheet correctly.
+
+Two things measured here changed the doctrine rather than the tooling: a flat download
+deadline throws away good big files (6.6 MB / 36.8s / 0.18 MB/s, never stalling), and
+ffmpeg's `tile=` filter dropped 7 of 8 valid tiles, so the sheet builder uses
+`hstack`/`vstack`. Both are written up in `chrome_route.md` §6–7.
+
 ## 7. Where my judgement is least certain — watch these in review
 
 - **slot 2 (tease).** I installed the true downblouse (she is bent over a task, the view is

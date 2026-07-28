@@ -13,6 +13,58 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-07-28 — the fetch harness becomes skill infrastructure + two-wave fetching
+
+The media_lab run took 81 min, but batch 2 ran at **5.6 min/slot against batch 1's 10.6** —
+the difference was that the tooling existed by then. That tooling lived in
+`games/media_lab/.find-media/`, so every future game would re-pay ~20 min building it and
+re-discover the same failures. The skill shipped **no fetcher at all** (only a "manual curl"
+line). This entry fixes that, and records the fixes that did NOT survive measurement.
+
+- **NEW `scripts/fetch_candidates.py`** — the skill's only fetcher; hand-rolling one is now
+  explicitly wrong. Ports `hunt.py`'s slug `rank()` and own-origin-Referer `fetch()` (the
+  403 lesson is now *code*, not prose), adds: two-wave `--top` / `--more` (skips what is on
+  disk, contiguous numbering, never re-fetches a URL), `--max-tries` (default 4×`--top`, so a
+  broken network cannot walk a 140-deep shelf — it walked 128 in testing before this), chunked
+  reads, staging files so a partial download never lands as a candidate, and `--json`.
+  **Verified live** against the media_lab shelf: wave 1 8/11, wave 2 6/9, 20 entries / 20
+  unique URLs / contiguous `00`–`19` / no leftover staging; exit 1 on nothing-fetched, 2 on a
+  bad slot.
+- **`scripts/video_frames.py`** — `--sheet` builds the numbered contact sheet in one command
+  (was a hand-written ffmpeg line in the docs), and batch **rep** mode now accepts stills
+  (`STILL_EXTS`, `still_rep()`): a mixed pool is normal and dropping its images read as an
+  empty harvest. Batch **strip** still refuses stills — no loop, no claim. `--sheet` is
+  guarded to rep+batch (exit 2 otherwise); `FrameResult.sheet` added for `--json`.
+  Regression-checked: single `--video` rep/strip and batch strip unchanged.
+- **`references/chrome_route.md` §6** rewritten around the script, with the **two-wave
+  pattern** as the default (measured: 144 files fetched to strip 60 — the surplus only padded
+  a sheet; easy slots save ~40%, hard slots run wave 2 and pay what they always paid). §7
+  Stage A now calls `--sheet`. Manual curl demoted to a single-file fallback (`--max-time`
+  30 → 60, since 36.8s downloads are real). SKILL.md: script list + a two-wave line in JUDGE.
+
+**Two "obvious" optimisations were MEASURED AND REJECTED — both are now warnings, because
+the instinct to re-add them is strong:**
+- **Slow-host deprioritisation is dead.** Hosts measured at 30–44s were **1–2s** an hour
+  later. A blacklist built that afternoon would permanently avoid good sources. There is
+  deliberately no slow-host list in this skill.
+- **Parallelism is a hedge, not a speed feature.** These CDNs throttle: at 8 workers per-file
+  went **7.8s → 34.1s** for ~1.5× total, and five benchmarks in one afternoon gave 0.8× /
+  1.5× / 2.6×. `--workers` defaults to 3 and the docstring forbids raising it on one good
+  measurement.
+- **A flat download deadline is wrong.** 20s looked sane and threw away good clips:
+  `101534-sultry-bj-on-knees.gif` is 6.6 MB, takes 36.8s at 0.18 MB/s, worst chunk gap 4.9s —
+  slow, never stalled. Wave 2 went **1/9 → 6/9** once gating moved to stall-detection
+  (`--timeout`, the socket gate) with `--deadline` demoted to a 120s runaway backstop.
+- **ffmpeg's `tile=` filter is not trustworthy here.** Given eight verified 320×320 tiles it
+  emitted a sheet containing **one**, reproduced in pure shell. `contact_sheet()` uses
+  explicit `hstack`/`vstack`.
+
+All of it is condensed into a "**Network timing is weather**" box in §6: if you measure
+something here and want to act on it, measure it again hours later first.
+
+Also: `games/media_lab/.find-media/{hunt.py,sheet.sh,strips.sh}` deleted (git history keeps
+them) and `FINDINGS.md` §8 records the promotion.
+
 ## 2026-07-27 (later still) — `scene_semantics.py` classifier: vocabulary hole + two weak-evidence bugs
 
 Reported symptom was one slot: `blowbang ring of men standing around one woman` classified

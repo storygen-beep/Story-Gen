@@ -319,6 +319,12 @@ preferred was destroyed before he saw it.
 
 ## 5. JUDGE — contact sheet, then the mandatory strip
 
+**First, get bytes down — in TWO WAVES.** `fetch_candidates.py --top 8` (see
+`references/chrome_route.md` §6), sheet it, gate it, strip the survivors; only top up with
+`--more` if gate-survivors land under the 6-option shelf floor. The media_lab run fetched
+**144 files to strip 60** — the surplus only padded a sheet. This trims *fetching*, never
+judging: every animated finalist and every install is still stripped.
+
 **Stage A — contact sheet.** CLIP pre-ranks so you Read **one image** instead of 15
 thumbnails. CLIP is a pre-filter that decides what gets *looked at*; it never replaces a
 gate and never makes the pick. It is a strong SFW shortlister (top-3 = 88%) and **25–31% on
@@ -590,8 +596,9 @@ The router above is enough to start. Load these when you reach the work they des
 Scripts, all under `scripts/`: `validate_queries.py` (queries + format + tag proposals),
 `scene_semantics.py` (tier / family / rating classification — imported, no CLI),
 `apply_retags.py` (write corrected `_tN` into the phase TOMLs), `clip_shortlist.py`
-(rank + contact sheet), `video_frames.py` (rep frames + strips), `tier_format_check.py`
-(pre-install gate), `dedup_tracker.py` (used-asset ledger).
+(rank + contact sheet), **`fetch_candidates.py` (stocked URLs → bytes on disk, in waves —
+the only fetcher; never hand-roll one)**, `video_frames.py` (rep frames + strips +
+`--sheet`), `tier_format_check.py` (pre-install gate), `dedup_tracker.py` (used-asset ledger).
 
 **Interpreter.** All of them are stdlib-only and run under plain `python3`. The single
 exception is `clip_shortlist.py`, which needs the pinned torch interpreter:

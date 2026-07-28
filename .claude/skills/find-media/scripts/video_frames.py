@@ -43,6 +43,12 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 
 VIDEO_EXTS = {".webm", ".mp4", ".gif", ".mov", ".mkv"}
+# A still IS its own representative frame. Candidate pools are mixed — a location or
+# clothing slot fetches .jpg while a scene slot fetches .gif — and excluding stills from
+# batch rep mode meant those candidates silently vanished from the contact sheet, which
+# reads as "the harvest found nothing" rather than "this tool skipped them".
+# rep mode only: a still has no loop, so there is nothing for strip mode to claim.
+STILL_EXTS = {".jpg", ".jpeg", ".png", ".webp"}
 MIN_FRAME_BYTES = 500
 
 # Measured: the CDN gifs this skill fetches run ~2s (1.9s and 3.8s on two sampled
@@ -66,6 +72,7 @@ class FrameResult:
     frames_per_input: int
     passed: bool
     failures: list[str]
+    sheet: str | None = None
 
 
 def _deps_present() -> bool:
@@ -202,6 +209,89 @@ def extract_frame(video: Path, ts: float, out_path: Path, tile_px: int | None = 
     return out_path.exists() and out_path.stat().st_size >= MIN_FRAME_BYTES
 
 
+def still_rep(image: Path, out_path: Path) -> bool:
+    """A still's rep frame is itself — just normalise it so it tiles with the clips.
+
+    No -ss: seeking a single-image input lands past EOF and yields no frame at all,
+    which is how a mixed pool loses exactly its image candidates.
+    """
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    cmd = ["ffmpeg", "-y", "-i", str(image), "-frames:v", "1", "-q:v", "3", str(out_path)]
+    try:
+        subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                       timeout=30, check=False)
+    except subprocess.SubprocessError:
+        return False
+    return out_path.exists() and out_path.stat().st_size >= MIN_FRAME_BYTES
+
+
+def contact_sheet(frames: list[Path], out_path: Path, tile_px: int, cols: int = 4) -> bool:
+    """Tile rep frames into ONE numbered sheet — the image JUDGE actually Reads.
+
+    The number burned into each tile is the candidate's index, so a judgement can name
+    "tile 07" and that maps straight back to 07.gif and to manifest.json. Without the
+    label you are reading an anonymous grid and cannot act on what you see.
+    """
+    if not frames:
+        return False
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    rows = (len(frames) + cols - 1) // cols
+    with tempfile.TemporaryDirectory() as td:
+        seq = Path(td)
+        for i, src in enumerate(sorted(frames)):
+            label = src.stem.split("_")[0]
+            # pad to a uniform tile first: tile= requires every input to match exactly
+            vf = (f"scale={tile_px}:{tile_px}:force_original_aspect_ratio=decrease,"
+                  f"pad={tile_px}:{tile_px}:(ow-iw)/2:(oh-ih)/2:color=black,"
+                  f"drawtext=text='{label}':x=6:y=6:fontsize={max(18, tile_px // 7)}:"
+                  f"fontcolor=yellow:box=1:boxcolor=black@0.7:boxborderw=5")
+            cmd = ["ffmpeg", "-y", "-i", str(src), "-vf", vf,
+                   "-frames:v", "1", "-q:v", "3", str(seq / f"t{i:03d}.jpg")]
+            try:
+                subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                               timeout=30, check=False)
+            except subprocess.SubprocessError:
+                return False
+        made = sorted(seq.glob("t*.jpg"))
+        if not made:
+            return False
+        # blank filler so the final row is complete
+        for j in range(len(made), rows * cols):
+            filler = seq / f"t{j:03d}.jpg"
+            subprocess.run(["ffmpeg", "-y", "-f", "lavfi", "-i",
+                            f"color=c=black:s={tile_px}x{tile_px}:d=1",
+                            "-frames:v", "1", "-update", "1", str(filler)],
+                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                           timeout=30, check=False)
+        tiles = sorted(seq.glob("t*.jpg"))
+
+        # hstack rows then vstack them, NOT the tile= filter. Measured 2026-07-28: fed 8
+        # correct 320x320 tiles, `tile=4x2` emitted a sheet containing only ONE of them
+        # (reproduced in pure shell, so it is ffmpeg's behaviour here, not this script).
+        # hstack/vstack is explicit about which input goes where and was verified correct.
+        inputs: list[str] = []
+        for t in tiles:
+            inputs += ["-i", str(t)]
+        parts = []
+        for r in range(rows):
+            refs = "".join(f"[{r * cols + c}:v]" for c in range(cols))
+            parts.append(f"{refs}hstack=inputs={cols}[r{r}]")
+        if rows > 1:
+            refs = "".join(f"[r{r}]" for r in range(rows))
+            parts.append(f"{refs}vstack=inputs={rows}[out]")
+            final = "[out]"
+        else:
+            final = "[r0]"
+        cmd = ["ffmpeg", "-y", *inputs, "-filter_complex", ";".join(parts),
+               "-map", final, "-frames:v", "1", "-update", "1", "-q:v", "3", str(out_path)]
+        try:
+            subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                           timeout=120, check=False)
+        except subprocess.SubprocessError:
+            return False
+    return out_path.exists() and out_path.stat().st_size >= MIN_FRAME_BYTES
+
+
 def rep_frame(video: Path, n: int, out_path: Path) -> bool:
     """Median-by-size of N samples in the middle of the clip (skips black/seam)."""
     dur, nb = probe_clip_geometry(video)
@@ -260,8 +350,16 @@ def main() -> int:
     p.add_argument("--out", type=Path, help="output file (single-clip modes)")
     p.add_argument("--out-dir", type=Path, dest="out_dir", help="output dir (--videos-dir batch)")
     p.add_argument("--tile-px", type=int, default=320, dest="tile_px", help="per-tile size for strip")
+    p.add_argument("--sheet", type=Path, default=None,
+                   help="batch rep mode only: also tile every rep frame into ONE numbered "
+                        "contact sheet at this path — the single image JUDGE reads")
+    p.add_argument("--sheet-cols", type=int, default=4, dest="sheet_cols")
     p.add_argument("--json", action="store_true")
     args = p.parse_args()
+
+    if args.sheet and not (args.videos_dir is not None and args.mode == "rep"):
+        print("ERROR: --sheet requires --videos-dir with --mode rep", file=sys.stderr)
+        return 2
 
     if not _deps_present():
         msg = "ffmpeg/ffprobe not found on PATH"
@@ -282,18 +380,32 @@ def main() -> int:
         if not args.out_dir:
             print("ERROR: --videos-dir requires --out-dir", file=sys.stderr)
             return 2
-        clips = sorted(c for c in args.videos_dir.iterdir() if c.suffix.lower() in VIDEO_EXTS)
+        # rep mode also accepts stills (a still is its own rep frame); strip mode cannot —
+        # there is no loop to make a claim about.
+        accepted = VIDEO_EXTS | STILL_EXTS if args.mode == "rep" else VIDEO_EXTS
+        clips = sorted(c for c in args.videos_dir.iterdir() if c.suffix.lower() in accepted)
+        rep_paths: list[Path] = []
         for clip in clips:
             result.inputs.append(str(clip))
             # Distinct suffix so a strip run and a rep run can share one out-dir.
             out = args.out_dir / (f"{clip.stem}.jpg" if args.mode == "rep"
                                   else f"{clip.stem}_strip.jpg")
-            ok = (rep_frame(clip, n, out) if args.mode == "rep"
-                  else strip_frames(clip, n, out, args.tile_px))
+            if args.mode == "rep":
+                ok = (still_rep(clip, out) if clip.suffix.lower() in STILL_EXTS
+                      else rep_frame(clip, n, out))
+            else:
+                ok = strip_frames(clip, n, out, args.tile_px)
             if ok:
                 result.outputs.append(str(out))
+                rep_paths.append(out)
             else:
                 result.failures.append(f"no_frame:{clip.name}")
+
+        if args.sheet:
+            if contact_sheet(rep_paths, args.sheet, args.tile_px, args.sheet_cols):
+                result.sheet = str(args.sheet)
+            else:
+                result.failures.append("no_sheet")
     else:
         if not args.out:
             print("ERROR: --video requires --out", file=sys.stderr)
@@ -316,6 +428,8 @@ def main() -> int:
               f"({n} frames sampled each)")
         for o in result.outputs:
             print(f"  -> {o}")
+        if result.sheet:
+            print(f"  CONTACT SHEET -> {result.sheet}   (Read this one image, not the tiles)")
         if result.failures:
             print(f"  failures: {', '.join(result.failures)}")
 
