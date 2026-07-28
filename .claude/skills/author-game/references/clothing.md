@@ -189,6 +189,12 @@ corruption.
 (`v2.py:1014-1027`, the `initial_wardrobe`/`initial_equipped` build) — cover every slot or she starts under-equipped and the coverage gate (§8) can't be
 satisfied from turn one.
 
+**A story-granted gate garment's grant must be re-assertable, not a lone one-shot.** A cover/disguise (or any
+garment the next beat requires `equipped`) is usually handed over by a `wardrobeEffects` `add` on a story beat,
+not by `initial`/shop. If that beat is a burn-once grant, a save that added the item in a *later* release than the
+granting flag never gets it (the migration backfill carries flags/traits, **not** wardrobe items) and soft-locks.
+Put an idempotent `add` on the repeatable canvas that reacts to "not wearing it" too — see **`save-safety.md` §5**.
+
 **Pricing & the buy-gate.** Price the whole catalog against the game's income (a worked example: $60 start /
 $45 a shift / $125 rent → basics affordable in 1–2 shifts, revealing tier a multi-shift save). The buy-gate
 is the item's own `conditions` block, checked at purchase AND at equip:

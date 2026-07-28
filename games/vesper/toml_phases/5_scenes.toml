@@ -5849,6 +5849,16 @@ text = "Back out before it's a question."
 [canvases.nodes.exit_block.config]
 destinationType = "specific"
 locationId      = "spire_plaza"
+# Save-heal: re-grant the cover for saves that set salvage_relaunched under a build where cover_analyst didn't
+# exist yet (0.1.4 crossed SALVAGE, the kit + its one-shot grant only landed in 0.1.5, and the save-migration
+# backfill has no wardrobe branch — so the carried save reaches this floor stranded). addToWardrobe is a no-op
+# if already owned, so a normal player (owns it, just unequipped) is untouched and gets no notification. This
+# exit is type=location, so the grant compiles into the passage BODY and fires on RENDER — the kit lands the
+# instant this "Wrong face for the floor" screen shows, and she can carry it to the rack in wren_room. Any
+# gate-item's grant must be re-assertable like this, never a lone one-shot — see author-game save-safety §5.
+wardrobeEffects = [
+  { action = "add", item_id = "cover_analyst" },
+]
 
 # react_calloway_nocover — POST-COVER squint (substitution target of hub_calloway_fileroom when out of cover).
 # Calloway KNOWS her (calloway_met) — so it's danger, not "who are you": she can't wander an audited floor

@@ -8,7 +8,7 @@ Everything here **passes the build**: flag chains validate, no warning fires, a 
 damage is that the game **tells the player something that isn't true**.
 
 Sibling file: `save-safety.md` guards the player's *save*. This one guards the game's *truth*. (Note
-`save-safety.md` §5 lists "fix prose" and "rename any display `name`/`title`" as ship-freely — correct, for
+`save-safety.md` §6 lists "fix prose" and "rename any display `name`/`title`" as ship-freely — correct, for
 saves. Those same edits are exactly what desynchronises a `goals[].label` that named the old trait.)
 
 ## Why prose goes stale (the model)

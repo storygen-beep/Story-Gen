@@ -24,7 +24,7 @@ window.GAMES = [
     slug: "vesper",
     title: "Vesper",
     badge: "New",
-    version: "0.1.5",
+    version: "0.1.5.1",
     paidBuild: true,
     summary: `An owned half-human weapon — the company's slave inside its tower, a false face outside — slips into powerful men's lives and drains them while they think they're using her, hunting a "rogue" who may be the one person who ever loved her. Phase 1: the cold open, her owner, and the wrecked boss she seduces and drains for the truth.`,
   },

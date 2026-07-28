@@ -25,8 +25,8 @@ title       = "Vesper"
 description = "An owned half-human weapon who feels nothing but the sex she's used for. Inside Vance Dynamics she's the company's slave; outside, under a false face, she slips into powerful men's lives and drains them while they think they're using her — sent to hunt a rogue called Cain."
 quests_engine   = "v2"
 starting_canvas = "canvas_opening_office"   # the cold open (Beat 1 — the office)
-version         = "0.1.5"          # sidebar footer — bump in the same commit as the games-data.js portal entry
-release_date    = "2026-07-25"     # sidebar footer — date this build ships
+version         = "0.1.5.1"        # sidebar footer — bump in the same commit as the games-data.js portal entry
+release_date    = "2026-07-28"     # sidebar footer — date this build ships
 
 [time]
 starting_hour = 20        # the opening opens in the evening (Beat 1 — Mercer's office)
@@ -9196,6 +9196,16 @@ text = "Back out before it's a question."
 [canvases.nodes.exit_block.config]
 destinationType = "specific"
 locationId      = "spire_plaza"
+# Save-heal: re-grant the cover for saves that set salvage_relaunched under a build where cover_analyst didn't
+# exist yet (0.1.4 crossed SALVAGE, the kit + its one-shot grant only landed in 0.1.5, and the save-migration
+# backfill has no wardrobe branch — so the carried save reaches this floor stranded). addToWardrobe is a no-op
+# if already owned, so a normal player (owns it, just unequipped) is untouched and gets no notification. This
+# exit is type=location, so the grant compiles into the passage BODY and fires on RENDER — the kit lands the
+# instant this "Wrong face for the floor" screen shows, and she can carry it to the rack in wren_room. Any
+# gate-item's grant must be re-assertable like this, never a lone one-shot — see author-game save-safety §5.
+wardrobeEffects = [
+  { action = "add", item_id = "cover_analyst" },
+]
 
 # react_calloway_nocover — POST-COVER squint (substitution target of hub_calloway_fileroom when out of cover).
 # Calloway KNOWS her (calloway_met) — so it's danger, not "who are you": she can't wander an audited floor

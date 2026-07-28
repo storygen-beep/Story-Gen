@@ -159,7 +159,7 @@ game**, not just the beat you last touched.
 
 ## §6 — Release discipline
 
-- [ ] **Re-shipping?** `save-safety.md` §5 first — diff the merged TOML against the last shipped one and
+- [ ] **Re-shipping?** `save-safety.md` §6 first — diff the merged TOML against the last shipped one and
       confirm no join key moved (ids, live flag/trait keys, stat ranges and tier thresholds, the title). A
       rename is a major version with an announced save reset, never a silent update.
 - [ ] Cut the artifact: keep the built HTML as `games/<slug>/releases/v<X.Y[.Z]>.html` so every shipped

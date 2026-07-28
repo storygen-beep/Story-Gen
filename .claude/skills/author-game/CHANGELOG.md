@@ -13,6 +13,23 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-07-28
+- **Added save-safety §5 — "a gate-item's grant must be re-assertable, not a one-shot a carried save already
+  burned"** (`references/save-safety.md`; renumbered the old §5 Pre-update checklist → §6, fixed the two live
+  cross-refs in `references/ship-gate.md` and `references/prose-truth.md`, and added a §2 caveat that "adding is
+  safe" covers flags/traits only). Cross-ref added in `references/clothing.md` §7 (story-granted gate garments).
+  **Why:** a live Vesper player on 0.1.5 soft-locked — "wrong face for the floor, but I only have two outfits and
+  neither is correct." Root cause (13-agent diagnosis, survived adversarial refutation): the disguise item
+  `cover_analyst` was granted only on a one-shot dispatch that also set its gating flag, and the item landed a
+  release *after* that dispatch shipped; the save-migration backfill (`setup.backfillStateDefaults`) carries
+  flags/traits but has **no wardrobe branch**, so every 0.1.4→0.1.5 carry-over had the flag set, never received
+  the kit, and jammed forever (the out-of-cover reaction gates on `unequipped`, not ownership). A correct skill
+  would have taught putting the grant on the repeatable point-of-need reaction (idempotent `add` = no-op if owned)
+  from the start, so this is a class-kill, not just a one-off. **Verified:** the doctrine matches the shipped
+  Vesper fix (idempotent `add cover_analyst` on `react_calloway_precover`'s `exit_block.config`); grep confirms
+  no dangling `§5`/`§6` references remain in the skill; the game hotfix built green (both free + paid, 0 media
+  missing, `addToWardrobe(cover_analyst)` 2→3) and passed a live Playwright heal repro.
+
 ## 2026-07-27
 - **Rewrote the `search_queries` craft** (`references/media.md` §4) after a measured A/B against the live
   search route. **Why:** every rule in that section was tuned for querying PornHub's own index directly and

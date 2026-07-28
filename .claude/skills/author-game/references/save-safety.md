@@ -49,6 +49,9 @@ The save-migration backfill (`setup.backfillStateDefaults`, `v2.py:14549`) **add
 an old save at its default — so *adding* a flag or trait is safe — but it **cannot follow a rename**: to it, the
 old key is orphaned data and the new key is just another addition.
 
+*(This "adding is safe" guarantee covers **flags and traits only.** The backfill has no wardrobe/inventory branch,
+so **adding a clothing/inventory item** that gates progression is a separate hazard — see §5.)*
+
 **The rule:** on a shipped game, **deprecate-and-add** — leave the old key (or keep its name), add a new one;
 never rename or repurpose a live flag/trait key.
 
@@ -81,7 +84,36 @@ else (store page, a `$display_title` line), never the story title.
 
 ---
 
-## §5 — Pre-update checklist (before you re-ship)
+## §5 — A gate-item's grant must be re-assertable, not a one-shot a carried save already burned
+The backfill (§2) adds new **flags and traits** to an old save — but it touches `$flags`, player core traits, and
+`$npcs` only (`setup.backfillStateDefaults`, `v2.py:14549`); it has **no wardrobe/inventory branch**. So a
+**clothing / inventory item you add in a later release than the beat that grants it never reaches a save that
+already passed that beat.** Three things line up to strand the player: the flag the grant rides on is already set;
+the grant is usually a **one-shot** gated on that very flag (`is_repeatable=false` + `flag is_false`, then it
+*sets* the flag), so it can never re-fire; and nothing hands the item over on load. If that item merely flavors a
+scene, the returning player loses a costume. If it **gates progression** — a cover, a key, a tool the next beat
+requires `equipped` or owned — the save is **soft-locked**: every forward canvas stays shut, and the "go get it"
+reaction points at an item that isn't in the wardrobe.
+
+Live-shipped example. Vesper's `cover_analyst` (the Vance disguise) was granted only on the one-shot
+`salvage_relaunch` dispatch, which also sets `salvage_relaunched`. The item + its grant landed a release *after*
+that dispatch shipped, so every 0.1.4→0.1.5 carry-over had the flag set, never received the kit, and jammed on the
+floor forever — `react_calloway_precover` fires on `cover_analyst unequipped` with **no ownership check**, so the
+never-granted case looks identical to the took-it-off case, and there was no path to the missing kit.
+
+**The rule:** any item that GATES progression must have its grant **re-assertable at the point of need**, never a
+lone burn-once grant. Put an idempotent `wardrobeEffects = [ { action = "add", item_id = "…" } ]` on the
+**repeatable** canvas that already reacts to "you don't have it / it's not equipped" (the out-of-cover reaction,
+the locked-door bounce, the wardrobe room). `addToWardrobe` is a **no-op if the item is already owned** (the runtime
+returns early on a present key), so a normal player who simply took the item off is untouched and sees no
+notification — only the stranded save is healed, the instant it lands on that screen. Vesper's fix added exactly
+that `add` to `react_calloway_precover`'s `exit_block.config` — the sole canvas a stranded player can reach on that
+floor, `is_repeatable=true`, so the heal is guaranteed to find them. Ship the grant on the point-of-need reaction
+from the start and the version boundary can never strand it.
+
+---
+
+## §6 — Pre-update checklist (before you re-ship)
 *(This file owns what may not CHANGE between releases. The rest of what a release has to clear — meter
 ceilings, unpaid promises, the cheat page, the publish flags, the scanners — is `references/ship-gate.md`;
 run both.)*
