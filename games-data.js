@@ -93,7 +93,7 @@ window.GAMES = [
     slug: "media_lab_c",
     title: "Media Lab C",
     dev: true,
-    summary: `Cloud-session replication of arm A. Same ten beats and the same candidate shelf as Media Lab, to be filled by the full find-media skill — gates, frame strip, and HEAT/SETTING/CRAFT ranking. Empty until that run happens; see games/media_lab_c/RUN_BRIEF.md.`,
+    summary: `Cloud-session replication of arm A: the same ten beats and the same candidate shelf as Media Lab, filled by the full find-media skill — gates, frame strip, and HEAT/SETTING/CRAFT ranking. Filled 2026-07-28, 10/10 slots, 16 min and 19 board reads; the strip rejected 55 of 98 candidates. Slot 6 came back POOL_GATE_UNSATISFIABLE, reproducing arm B independently. Write-up in games/media_lab_c/.find-media/FINDINGS.md.`,
   },
   {
     slug: "media_lab_d",
