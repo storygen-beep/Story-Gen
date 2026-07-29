@@ -224,6 +224,10 @@ game_explorations/*/.live/
 !games/vesper/output-paid/videos/**
 !games/the_inheritance/output/videos/
 !games/the_inheritance/output/videos/**
+# Media Lab D — the arm-B experiment rig is listed on the portal, so its ten
+# harvested slots ship with it or the page renders ten broken refs.
+!games/media_lab_d/output/videos/
+!games/media_lab_d/output/videos/**
 
 # ============================================================
 # find-media working evidence (harvest dumps, montages, candidate
