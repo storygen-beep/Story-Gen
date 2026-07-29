@@ -13,6 +13,82 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-07-29 (latest) — `find-media-b` DELETED; the Q2 A/B is closed, ranking stays
+
+Recorded here because the arm's own ledger went with it. The experiment asked one question:
+**does question 2 — HEAT/SETTING/CRAFT ranking — earn its keep?** Answer: yes. Ranking stays.
+
+- **`.claude/skills/find-media-b/` — DELETED** (`SKILL.md` 132 lines, `CHANGELOG.md` 113).
+  **Why, on the measurement:** arm B existed to test whether deleting ranking made the skill
+  faster. The only clean head-to-head — two cloud sessions, same day, same container shape,
+  same pre-stocked 1352-option shelf, neither with Django — says **no**:
+
+  | | wall-clock | image reads |
+  |---|---|---|
+  | arm A (`media_lab_c`) | **16m25s** | **19** |
+  | arm B (`media_lab_d`) | 17m09s | 32 |
+
+  The earlier local pair (11.4 min vs ~81 min) looked like a landslide for arm B and was never
+  a fair comparison: arm A's local run included the search *and* building the harness for the
+  first time. **Honest qualifier:** the read gap is not ranking's doing — 15 of arm B's 32 reads
+  were single-clip re-checks for fine gates (gaze, a hand, who is lying down), and gates are
+  question 1, identical in both arms. Arm B's fair best case is "about the same speed."
+  **Why, on the output:** same speed is still fine if the picks are equal — they are not. Arm B
+  shipped two installs that are gate-correct and visibly rough, both named in its own report:
+  `lab_group_t5` is a **3-panel stacked collage** (every panel has three men, so the count gate
+  passes clean) and `lab_room` carries a **large diagonal Alamy watermark** (interior, no people,
+  heavy wear — all three `must_show` pass). A watermark and a collage format are *craft*, and
+  craft is exactly the axis arm B deleted. No speed gain + measured quality cost = no case.
+  **Why, on doctrine:** a skill nobody should invoke is drift bait — the same reasoning that
+  deleted `clip_shortlist.py` below. A losing arm sitting in `.claude/skills/` is something a
+  future run can pick up by accident.
+
+- **Salvaged before deletion, verified present here:** the `must_show` ABSENT/CONTRADICTED rule
+  (entry below — this was the blocking item, since arm B held the only copy); the strip-board
+  lesson (`SKILL.md` §5 and §Batching, `references/sheets_and_boards.md` — 52 reads one-at-a-time
+  vs 14 from boards); and the finding that the rubric's heat signals are mostly unvalidated,
+  with LO's winning POV/wrong-room/B&W/264px clip as the counterexample
+  (`references/scoring_rubric.md`). Nothing unique died with the file.
+
+- **Deliberately NOT deleted — the evidence, which is the actual asset:** `games/media_lab_b/`
+  and `games/media_lab_d/` with their `AB_RESULT.md` / `RUN_RESULT.md`, their `scores.jsonl`
+  trees, and the `games-data.js` portal entries that say those games were filled by
+  `find-media-b`. Those are accurate history, not instructions to use a skill that no longer
+  exists. The arm was the instrument; the runs are the result.
+
+**Open and unresolved, stated so it is not mistaken for settled:** LO never rendered his own
+eye-verdict on which arm's picks he would keep, and **0 of 10 slots tied** — every pick differs.
+This deletion rests on the timing measurement plus two self-reported rough installs, not on his
+comparison. All four builds are playable on the portal if he ever wants to close it properly.
+
+## 2026-07-29 — the `must_show` "can't see it" rule promoted in from arm B
+
+- **`SKILL.md` §5 JUDGE Stage C** — added the rule that settles what a gate call means when a
+  `must_show` item is **outside the frame** rather than visibly wrong: *fails on ABSENT or
+  CONTRADICTED; framing that merely doesn't cover it is UNVERIFIED, not failed — except gaze
+  and affect, which fail when their carrier is cropped, because the face is their only carrier.*
+  Placed beside the binary-gate law, since that paragraph already names `affect` as a gate and
+  the exception turns on exactly that.
+  **Why:** without it "does this candidate pass?" is **not deterministic** — a tight crop reads
+  as a failure to one judge and as a non-issue to another, and the written `gate_reason` stops
+  being auditable, which is the only verification this skill has now that no algorithm can be
+  re-run (see the CLIP entry below). It also silently discards correct clips for how the shot
+  was framed.
+  **Provenance:** discovered during `find-media-b`'s run 1 and written down only there, by
+  accident of where it surfaced. It is **question 1** — a correctness gate — so it always bound
+  both arms; it was never an arm-B-specific rule. Promoted now so it survives independently of
+  that experiment arm.
+  **Evidence it cuts both ways** (from the run that produced it): `lab_eyecontact_t5/08`
+  **passed** on unverifiable posture because its eyes held the lens in all four frames, while
+  `lab_tease_t4/00` **failed** because it is a covert downblouse whose face never appears, so
+  "aware of the camera" can never be shown at all.
+- **`find-media-b/SKILL.md`** — its copy now points here and states that `find-media` wins on
+  any disagreement, so the two cannot drift into two different rules. Logged in that skill's
+  own ledger too; the A/B diff against this skill is still exactly one axis.
+
+**Verified:** `grep -n must_show` resolves in `SKILL.md` at the gate law; the arm-B copy no
+longer claims to be the rule's home.
+
 ## 2026-07-29 (later) — CLIP DELETED; the shortlister is named as Claude's vision
 
 - **`scripts/clip_shortlist.py` — DELETED** (232 lines). **Why:** it never ran. Verified zero

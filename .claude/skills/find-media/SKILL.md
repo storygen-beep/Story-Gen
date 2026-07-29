@@ -386,6 +386,17 @@ scored.** Act, position, people count, affect, cast, and POV-when-the-scene-requ
 partner-visible are **gates** — pass or out. Being correct earns no points, ever, because
 points are exactly how a correct-dead clip out-totals a flawed-alive one.
 
+**A gate fails on ABSENT or CONTRADICTED — never on "can't see it."** A `must_show` item the
+framing simply doesn't cover is **UNVERIFIED, not failed**. A tight crop is a camera choice,
+not a defect, and rejecting on it throws away correct clips for how the shot was composed.
+The **one exception is gaze and affect**, which **fail** when their carrier is cropped out:
+the face is their only carrier, so a face that is never in frame means the beat's content is
+**absent**, not merely unproven. Measured both ways in one run — a tight-crop candidate
+**passed** on unverifiable posture because its eyes held the lens in all four frames, while a
+covert downblouse **failed** because "aware of the camera" can never be shown by a clip whose
+face never appears. Without this, "does it pass?" is not deterministic: two readings of the
+same strip disagree, and the `gate_reason` stops being auditable.
+
 What's left is scored on **three axes and only three: HEAT 60 / SETTING 25 / CRAFT 15.**
 When the setting is not load-bearing — no danger, no secrecy, no squalor — **SETTING is
 skipped and recorded as `null`.** Not scored low, not scored zero: skipped. The ranking is
