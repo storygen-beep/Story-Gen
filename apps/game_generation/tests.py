@@ -72,37 +72,61 @@ class GameServiceTestCase(TestCase):
         self.assertIsInstance(comp_service, TweeComprehensiveService)
 
     @patch("apps.game_generation.services.game_service.subprocess.run")
-    def test_tweego_compilation(self, mock_subprocess):
-        """Test Tweego compilation when available."""
-        # Mock successful Tweego execution
+    def test_tweego_is_located_and_invoked(self, mock_subprocess):
+        """Tweego is discovered from the search paths and actually run."""
         mock_subprocess.return_value = Mock(
-            returncode=0, stdout="Tweego version 2.1.1", stderr=""
+            returncode=0, stdout="tweego, version 2.1.1+81d1d71", stderr=""
         )
 
-        twee_content = ":: Start\nWelcome to the game!"
+        path, banner = self.service._find_tweego()
 
-        # Test compilation (will use fallback since we're mocking)
+        self.assertTrue(mock_subprocess.called)
+        self.assertIn("tweego", path)
+        self.assertIn("2.1.1", banner)
+
+    @patch("apps.game_generation.services.game_service.subprocess.run")
+    def test_missing_tweego_raises_instead_of_falling_back(self, mock_subprocess):
+        """No Tweego => hard failure.
+
+        This is the regression guard for 2026-07-28, when a missing binary silently
+        produced a 324,722-byte page of raw Twee source that shipped to the portal
+        wearing a success message. A build must never degrade quietly.
+        """
+        mock_subprocess.side_effect = FileNotFoundError()
+
+        with self.assertRaises(RuntimeError) as ctx:
+            self.service.compile_twee_to_html(":: Start\nhi", "Test Game")
+
+        # The message has to be actionable in a fresh container, where this fires first.
+        self.assertIn("Tweego not found", str(ctx.exception))
+        self.assertIn("no preview fallback", str(ctx.exception).lower())
+
+    def test_no_preview_fallback_exists(self):
+        """The fallback generator is gone and must not come back."""
+        self.assertFalse(hasattr(self.service, "_generate_html_fallback"))
+
+    @patch("apps.game_generation.services.game_service.subprocess.run")
+    def test_compile_rejects_output_without_passages(self, mock_subprocess):
+        """Exit 0 is not enough — an artifact with no passages is refused.
+
+        Catches any future way the compile could degrade quietly, not just a missing
+        binary: whatever comes back must actually be a playable SugarCube build.
+        """
+        mock_subprocess.return_value = Mock(
+            returncode=0, stdout="tweego, version 2.1.1+81d1d71", stderr=""
+        )
+
         with patch("builtins.open", create=True) as mock_open:
-            mock_open.return_value.__enter__ = Mock()
-            mock_open.return_value.__exit__ = Mock()
+            handle = mock_open.return_value.__enter__.return_value
+            handle.read.return_value = "<html><body>not a game</body></html>"
+            with patch(
+                "apps.game_generation.services.game_service.os.path.exists",
+                return_value=True,
+            ), patch("apps.game_generation.services.game_service.os.unlink"):
+                with self.assertRaises(RuntimeError) as ctx:
+                    self.service.compile_twee_to_html(":: Start\nhi", "Test Game")
 
-            result = self.service._try_tweego_compilation(twee_content, "Test Game")
-
-            # Should attempt to run Tweego
-            self.assertTrue(mock_subprocess.called)
-
-    def test_html_fallback_generation(self):
-        """Test HTML fallback when Tweego is not available."""
-        twee_content = ":: Start\nThis is test content."
-        project_name = "Test Game"
-
-        html = self.service._generate_html_fallback(twee_content, project_name)
-
-        # Check basic HTML structure
-        self.assertIn("<!DOCTYPE html>", html)
-        self.assertIn(f"<title>{project_name}</title>", html)
-        self.assertIn(twee_content, html)
-        self.assertIn("Basic Preview Mode", html)
+        self.assertIn("no SugarCube story data", str(ctx.exception))
 
 
 class TweeNavigationServiceTestCase(TestCase):

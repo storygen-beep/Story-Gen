@@ -19,6 +19,32 @@ from apps.projects.models import Project
 
 logger = logging.getLogger(__name__)
 
+# The compiler is REQUIRED. There is no fallback: a build either comes out of Tweego
+# as a real SugarCube game or it does not come out at all.
+#
+# Why this is not negotiable — 2026-07-28, two cloud-session builds: Tweego was absent,
+# compilation returned None, and the packager silently wrote a "Basic Preview Mode" page
+# that renders the raw Twee source as text. 324,722 bytes of source dump, announced as
+# "🎉 Package ready!", merged and shipped to the portal. Verification missed it because
+# every media reference still resolved — they were in the source being printed.
+#
+# These are what every game on the portal was built with. A mismatch is logged, not
+# fatal (an upgrade must stay possible), but it must never pass unnoticed: Tweego bundles
+# its own story format, so a different Tweego silently changes the SugarCube every future
+# game ships against.
+EXPECTED_TWEEGO_VERSION = "2.1.1"
+EXPECTED_SUGARCUBE_VERSION = "2.30.0"
+
+# Searched in order. `~/bin` covers the local install; /usr/bin and /usr/local/bin cover
+# a container that installed it by hand or by apt.
+TWEEGO_SEARCH_PATHS = (
+    "tweego",  # anything already on PATH wins
+    "/usr/local/bin/tweego",
+    "/usr/bin/tweego",
+    "/opt/homebrew/bin/tweego",
+    os.path.expanduser("~/bin/tweego"),
+)
+
 
 class GameService:
     """
@@ -155,7 +181,7 @@ class GameService:
         self, twee_content: str, project_name: str = "Game"
     ) -> str:
         """
-        Compile Twee content to HTML using Tweego or fallback method.
+        Compile Twee content to a real SugarCube game with Tweego.
 
         Args:
             twee_content: Raw Twee content
@@ -163,15 +189,14 @@ class GameService:
 
         Returns:
             str: Complete HTML game content
+
+        Raises:
+            RuntimeError: Tweego is missing, fails, or produces something that is not a
+                SugarCube build. There is deliberately no fallback — see the module
+                header. A build that cannot be compiled must fail loudly rather than
+                quietly ship a page of source text that looks like success.
         """
-        # Try to use Tweego if available
-        html_content = self._try_tweego_compilation(twee_content, project_name)
-
-        if html_content:
-            return html_content
-
-        # Fallback to basic HTML wrapper
-        return self._generate_html_fallback(twee_content, project_name)
+        return self._compile_with_tweego(twee_content, project_name)
 
     def _get_system_service(self, system_type: str):
         """
@@ -201,51 +226,71 @@ class GameService:
         self._service_cache[system_type] = service
         return service
 
-    def _try_tweego_compilation(
-        self, twee_content: str, project_name: str
-    ) -> Optional[str]:
+    def _find_tweego(self) -> tuple[str, str]:
         """
-        Try to compile Twee using Tweego command-line tool.
+        Locate the Tweego binary and read its version banner.
+
+        Returns:
+            tuple[str, str]: (path invoked, version banner as reported by `--version`)
+
+        Raises:
+            RuntimeError: no usable Tweego on this machine. The message names every
+                path tried and how to fix it, because this is the error a container
+                run hits first and it must be self-explanatory there.
+        """
+        for tweego_path in TWEEGO_SEARCH_PATHS:
+            try:
+                result = subprocess.run(
+                    [tweego_path, "--version"],
+                    capture_output=True,
+                    text=True,
+                    timeout=5,
+                )
+            except (subprocess.TimeoutExpired, FileNotFoundError, PermissionError):
+                continue
+            # Tweego prints its banner and exits 1 on a bare --version; treat both as found.
+            if result.returncode in (0, 1):
+                banner = (result.stdout or result.stderr or "").strip().splitlines()
+                return tweego_path, (banner[0] if banner else "unknown")
+
+        raise RuntimeError(
+            "Tweego not found — cannot compile. Tried: "
+            + ", ".join(TWEEGO_SEARCH_PATHS)
+            + f". Install Tweego {EXPECTED_TWEEGO_VERSION} (https://www.motoslave.net/tweego/) "
+            "and re-run. There is no preview fallback: a build without Tweego would be a "
+            "page of raw Twee source, which has shipped to the portal before and must not again."
+        )
+
+    def _compile_with_tweego(self, twee_content: str, project_name: str) -> str:
+        """
+        Compile Twee to a SugarCube game. Raises rather than degrading.
 
         Args:
             twee_content: Raw Twee content
             project_name: Name for the compiled game
 
         Returns:
-            Optional[str]: Compiled HTML or None if Tweego not available
+            str: Compiled SugarCube HTML
+
+        Raises:
+            RuntimeError: Tweego missing, compilation failed, or the output is not a
+                SugarCube build.
         """
-        try:
-            # Check if Tweego is available
-            tweego_paths = [
-                "tweego",  # In PATH
-                "/usr/local/bin/tweego",
-                "/opt/homebrew/bin/tweego",
-                os.path.expanduser("~/bin/tweego"),
-                "/Users/a0000/bin/tweego",
-            ]
+        tweego_cmd, version_banner = self._find_tweego()
 
-            tweego_cmd = None
-            for tweego_path in tweego_paths:
-                try:
-                    result = subprocess.run(
-                        [tweego_path, "--version"], capture_output=True, timeout=5
-                    )
-                    if result.returncode in [0, 1]:
-                        tweego_cmd = tweego_path
-                        break
-                except (subprocess.TimeoutExpired, FileNotFoundError):
-                    continue
-
-            if not tweego_cmd:
-                return None
-
-        except FileNotFoundError:
-            logger.warning("Tweego binary not found in any standard location")
-            return None
-        except PermissionError as e:
-            raise RuntimeError(f"Tweego binary not executable: {e}") from e
-        except Exception as e:
-            raise RuntimeError(f"Error checking Tweego binary: {e}") from e
+        if EXPECTED_TWEEGO_VERSION not in version_banner:
+            # Not fatal — upgrading must stay possible — but never silent, because the
+            # story format is bundled with the compiler, not with our source.
+            logger.warning(
+                "Tweego version mismatch: expected %s, got %r (from %s). Every existing "
+                "game on the portal was built with %s / SugarCube %s; verify the new build "
+                "before shipping it.",
+                EXPECTED_TWEEGO_VERSION,
+                version_banner,
+                tweego_cmd,
+                EXPECTED_TWEEGO_VERSION,
+                EXPECTED_SUGARCUBE_VERSION,
+            )
 
         try:
             # Create temporary files
@@ -273,6 +318,29 @@ class GameService:
                 os.unlink(twee_path)
                 os.unlink(html_path)
 
+                # Exit 0 is necessary and not sufficient. Assert the artifact is
+                # actually a playable SugarCube build before handing it back — this is
+                # the check that would have caught the 2026-07-28 source-dump builds,
+                # and it holds for any future way the compile could quietly degrade.
+                if "tw-storydata" not in html_content:
+                    raise RuntimeError(
+                        f"Tweego exited 0 but produced no SugarCube story data "
+                        f"({len(html_content)} bytes, no <tw-storydata>). Refusing to "
+                        f"ship it — this is what a broken build looks like."
+                    )
+                if "tw-passagedata" not in html_content:
+                    raise RuntimeError(
+                        f"Tweego exited 0 but the build contains ZERO passages "
+                        f"({len(html_content)} bytes). Refusing to ship it."
+                    )
+
+                logger.info(
+                    "Compiled %r with %s (%s), %d bytes",
+                    project_name,
+                    tweego_cmd,
+                    version_banner,
+                    len(html_content),
+                )
                 return html_content
             else:
                 # Clean up on failure
@@ -297,64 +365,6 @@ class GameService:
             raise  # Re-raise our own RuntimeError from above
         except Exception as e:
             raise RuntimeError(f"Unexpected error during Tweego compilation: {e}") from e
-
-    def _generate_html_fallback(self, twee_content: str, project_name: str) -> str:
-        """
-        Generate basic HTML wrapper when Tweego is not available.
-
-        Args:
-            twee_content: Raw Twee content
-            project_name: Name for the game
-
-        Returns:
-            str: Basic HTML with embedded Twee content
-        """
-        return f"""<!DOCTYPE html>
-<html>
-<head>
-    <title>{project_name}</title>
-    <meta charset="utf-8">
-    <style>
-        body {{
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            line-height: 1.6;
-        }}
-        .warning {{
-            background-color: #fff3cd;
-            border: 1px solid #ffeaa7;
-            color: #856404;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 20px 0;
-        }}
-        pre {{
-            background: #f4f4f4;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }}
-    </style>
-</head>
-<body>
-    <div class="warning">
-        <h3>⚠️ Basic Preview Mode</h3>
-        <p>This is a basic preview. For full interactive gameplay, install <a href="https://www.motoslave.net/tweego/" target="_blank">Tweego</a> on your system.</p>
-    </div>
-
-    <div id="game-content">
-        <h1>{project_name}</h1>
-        <p><strong>Generated Twee Content:</strong></p>
-        <pre>{twee_content}</pre>
-    </div>
-
-    <div class="warning">
-        <p><em>This preview shows the raw Twee code. Install Tweego to see the compiled interactive game.</em></p>
-    </div>
-</body>
-</html>"""
 
     def package_game(
         self,
