@@ -175,7 +175,12 @@ When working with the game generation systems:
 ### Testing Strategy
 - **Unit Tests**: Test individual functions and methods in isolation
 - **Integration Tests**: Test component interactions and API endpoints
-- **Game Generation Tests**: Comprehensive tests in `apps/game_generation/tests.py`
+- **Game Generation Tests**: `apps/game_generation/tests/` — a package, NOT a `tests.py`.
+  A sibling `tests.py` is shadowed by it and silently collects zero tests, which is exactly
+  what happened to the legacy suite for 140 commits (see `tests/test_legacy_engine.py`).
+  Put new suites in the package as `test_<feature>.py` and run them by explicit path:
+  `pytest apps/game_generation/tests/ -q` (pyproject sets `testpaths = ["tests"]`, so a
+  bare `pytest` does not collect app suites).
 - **System Isolation Tests**: Verify complete isolation between generation systems
 - **Fixtures**: Use `factory_boy` for test data creation
 - **Coverage**: Maintain 80%+ test coverage requirement
