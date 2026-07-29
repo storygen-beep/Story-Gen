@@ -7,21 +7,45 @@ topmost row that passes**, then stop judging that slot. Rows below it are `not_e
 This is the **arm-B replication**, re-run in a cloud session to measure the crippled arm's cost
 independently of the local machine.
 
-**Read `.claude/skills/find-media-b/SKILL.md` first** — it delegates to `find-media` with
-exactly two documented overrides — minus SEARCH (see below).
+> **⚠️ This brief is HISTORICAL — do not re-run it.** It described `find-media-b`, the
+> experiment arm with question 2 (HEAT/SETTING/CRAFT ranking) deleted. That arm was
+> **retired on 2026-07-29** and its skill removed: the clean cloud head-to-head had it
+> *slower* than arm A (17m09s / 32 image reads vs 16m25s / 19) while shipping two
+> gate-correct but visibly rough installs. The results of this run are kept as evidence in
+> `RUN_RESULT.md`. For any real work use `.claude/skills/find-media/SKILL.md`.
 
-## Before you touch anything — start the API
-
-Every step below talks to the Django dev server. Nothing works without it.
+## Before you touch anything — set up the toolchain
 
 ```bash
-cd story_gen_django
-source venv/bin/activate                  # create it + pip install -r requirements.txt if absent
+bash scripts/container-init.sh
+```
+
+Installs and verifies **ffmpeg** (find-media's one hard dependency — without it
+`video_frames.py` exits 3 and no animated slot can legally be filled) and **Tweego 2.1.1 +
+storyformats** (the compiler). It ends in a real smoke compile and exits non-zero if
+anything is missing. Safe to re-run.
+
+> **This matters more than it looks.** The 2026-07-28 run of this brief had no Tweego. The
+> packager silently emitted a "Basic Preview Mode" page of raw Twee source, said
+> "Package ready!", and 324,722 bytes of source dump were merged to the public portal.
+> That fallback is now deleted — a build without Tweego exits 1 and writes nothing — but
+> you still have to install it.
+
+**You are already at the repo root.** `manage.py` sits here; there is no `story_gen_django`
+subdirectory to `cd` into and no `venv` to activate. (An earlier version of this brief said
+otherwise and that is why the first cloud run never got the API up.)
+
+### Optional — the Django API
+
+Only if you want `game-review/load`, the options store, or `media-finder/grab`. The
+toolchain script deliberately does not set this up.
+
+```bash
 python manage.py runserver 8000 --noreload &
 curl -s "http://localhost:8000/api/v1/dev/game-review/load?game=media_lab_d" | head -c 200
 ```
 
-That last call must return JSON with **10 missing_media entries**. If it 404s, check the
+That call must return JSON with **10 missing_media entries**. If it 404s, check the
 trailing slash (there must be none on `load`).
 
 ## ⚠️ Do NOT run the SEARCH phase
