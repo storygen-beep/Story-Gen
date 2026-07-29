@@ -166,6 +166,26 @@ def _fetch_headers(url: str, extra: dict | None = None) -> dict:
     return headers
 
 
+def _is_ua_rejection(error: str) -> bool:
+    """True when a fetch failed the way an anti-bot filter rejects a SPOOFED browser.
+
+    Cloudflare-style bot management scores a full Chrome User-Agent that arrives
+    without the rest of a real browser's fingerprint (TLS signature, sec-ch-ua,
+    Accept-Language) as a lying client and returns 403 — while letting an honest
+    library UA straight through. So our browser-shaped headers are not universally
+    safer: they help hotlink-checking CDNs like phncdn and actively hurt these.
+
+    Measured 2026-07-29 on images.stockcake.com (Cloudflare):
+        full Chrome UA -> 403      download_direct's plain UA -> 200
+        no UA at all   -> 200      python-requests default    -> 200
+
+    Deliberately narrow: only 403/Forbidden. A 401 is a real credential failure
+    and retrying without headers would just fail again, more slowly.
+    """
+    e = (error or "").lower()
+    return "403" in e or "forbidden" in e
+
+
 def _read_options(game_dir: Path) -> dict:
     path_ = _options_path(game_dir)
     if not path_.exists():
@@ -462,6 +482,7 @@ def grab(request):
     # no network, no expiry, and the exact previously-approved file comes back.
     src_file = None
     extra_headers = None
+    auth = None  # kept in scope so a UA-rejection retry can still carry the bearer
     if local_path:
         candidate = GAMES_ROOT / local_path
         if not _safe_path(GAMES_ROOT, candidate) or not candidate.is_file():
@@ -469,9 +490,10 @@ def grab(request):
         src_file = candidate
         ext = candidate.suffix.lstrip(".").lower() or "jpg"
     else:
-        # RedGIFs media needs the bearer token; others are open. Every fetch gets a
-        # full browser UA + host-appropriate Referer or picky CDNs reject it.
-        auth = None
+        # RedGIFs media needs the bearer token; others are open. Every fetch STARTS
+        # with a full browser UA + host-appropriate Referer, which hotlink-checking
+        # CDNs require — but see _is_ua_rejection: bot-managed hosts reject exactly
+        # that, so a 403 falls back to the plain UA rather than failing the slot.
         if source == "redgifs":
             token = _redgifs_token()
             if token:
@@ -511,6 +533,13 @@ def grab(request):
             success, error = False, str(exc)
     else:
         success, error = download_direct(url, tmp_path, extra_headers=extra_headers)
+        # A 403 here often means the opposite of what it looks like: the host did not
+        # refuse the file, it refused a client CLAIMING to be Chrome without a
+        # browser's fingerprint. Drop the browser UA/Referer and let download_direct
+        # use its own plain UA — the bearer, if any, still rides along. One retry.
+        if not success and _is_ua_rejection(error):
+            tmp_path.unlink(missing_ok=True)
+            success, error = download_direct(url, tmp_path, extra_headers=auth)
 
     if not success:
         tmp_path.unlink(missing_ok=True)
