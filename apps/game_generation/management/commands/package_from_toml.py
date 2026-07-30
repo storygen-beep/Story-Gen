@@ -143,6 +143,17 @@ class Command(BaseCommand):
             help="Generate Mermaid markdown chart of story structure (story_chart.md)",
         )
         parser.add_argument(
+            "--no-prune",
+            action="store_true",
+            help=(
+                "Keep media in output/ that this build no longer references. By default "
+                "the packager removes it: output/ is regenerated but never wiped, so a "
+                "clip you unselected from a pool would otherwise sit there forever — and "
+                "for a game whose output media is git-tracked, get committed forever. "
+                "Only the OUTPUT copy is ever touched; the source media folder is not."
+            ),
+        )
+        parser.add_argument(
             "--build",
             type=str,
             choices=["free", "paid"],
@@ -273,6 +284,7 @@ class Command(BaseCommand):
             package_result = self._package_game(
                 project, str(output_path), system_type, version, force_copy, verify_checksums, local_media,
                 video_folder=video_folder, video_path=video_path, debug=debug, dev_mode=dev_mode,
+                prune_orphans=not options["no_prune"],
                 game_folder=game_folder_name,  # Pass resolved game folder name for approvals
                 graph=graph,
                 build_variant=build_variant,
@@ -448,6 +460,7 @@ class Command(BaseCommand):
         video_path: str = None,
         debug: bool = False,
         dev_mode: bool = False,
+        prune_orphans: bool = True,
         game_folder: str = None,
         graph=None,
         build_variant: str = "free",
@@ -493,6 +506,7 @@ class Command(BaseCommand):
             video_folder=video_folder,
             video_path=video_path,
             debug=debug,
+            prune_orphans=prune_orphans,
             options=options if options else None,
             graph=graph,
         )
@@ -535,6 +549,18 @@ class Command(BaseCommand):
             self.stdout.write(f"   Skipped: {video_stats['skipped']}")
             self.stdout.write(f"   Failed: {video_stats['failed']}")
             self.stdout.write(f"   Bytes copied: {video_stats.get('bytes_copied', 0):,}")
+            prune = video_stats.get("prune") or {}
+            if prune.get("removed"):
+                # Say it out loud: these were real files a moment ago. Silent
+                # deletion is how you find out the hard way that a rule was wrong.
+                self.stdout.write(
+                    f"   Pruned (no longer referenced): {prune['removed']} file(s), "
+                    f"{prune['bytes_freed']:,} bytes freed"
+                )
+                for f in prune["files"][:10]:
+                    self.stdout.write(f"      - {f}")
+                if len(prune["files"]) > 10:
+                    self.stdout.write(f"      ... and {len(prune['files']) - 10} more")
 
         # Loud warning: external assets referenced but not copied (no --video-folder given).
         # The build otherwise looks green while every portrait / NPC / location image 404s.

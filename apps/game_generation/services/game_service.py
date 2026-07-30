@@ -380,6 +380,7 @@ class GameService:
         video_path: Optional[str] = None,
         debug: bool = False,
         graph: Optional[object] = None,
+        prune_orphans: bool = True,
     ) -> dict[str, Any]:
         """
         Generate complete game package with HTML + media assets.
@@ -503,6 +504,14 @@ class GameService:
                 output_dir=video_output_dir,
                 force_copy=force_copy,
             )
+            # Only prune once the copy has actually put this build's media in
+            # place. Pruning before (or after a failed copy) would delete the
+            # previous build's files and leave nothing — output is regenerable,
+            # but not from an empty directory.
+            if prune_orphans and not external_video_stats.get("errors"):
+                external_video_stats["prune"] = self._prune_orphaned_media(
+                    video_output_dir, external_files
+                )
         elif external_files and not video_folder:
             # The game references external images/videos (portraits, NPC/location art, clothing)
             # but no source folder was given, so NONE were copied — the build LOOKS green while
@@ -675,6 +684,65 @@ class GameService:
                         {"poster_clip_id": str(clip.id), "error": str(e)}
                     )
 
+        return stats
+
+    # Media extensions the prune is allowed to delete. Deliberately explicit: the
+    # output dir also holds index.html and any hand-added asset, and a prune that
+    # deletes "everything unknown" is one bad path away from eating the build.
+    _PRUNABLE_SUFFIXES = {
+        ".mp4", ".webm", ".mov", ".m4v", ".avi", ".mkv",
+        ".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".bmp",
+    }
+
+    def _prune_orphaned_media(self, output_dir, keep_relpaths: list) -> dict:
+        """Delete media in the OUTPUT copy that this build does not reference.
+
+        `output/` is regenerated but never wiped, so anything a previous build
+        copied stays forever. That used to be harmless clutter; it stopped being
+        harmless once media pools made file churn routine — every clip unselected
+        from a pool leaves a multi-MB orphan — and once a game's output media
+        became git-tracked, which turns each orphan into a permanent commit.
+
+        Keyed on what the build actually REFERENCES (`used_assets`), not on what
+        was unselected. An unselect is only one of the ways a file goes stale; a
+        rename, a tier retag, a deleted slot, or a changed extension all orphan a
+        file too, and none of them leave a trace anywhere to detect. "Not
+        referenced" covers every case with one rule.
+
+        Scoped strictly to `output_dir` and to media suffixes. The SOURCE folder is
+        never touched — this only ever removes a copy that can be regenerated.
+        """
+        from pathlib import Path as _P
+
+        output_dir = _P(output_dir)
+        stats = {"removed": 0, "bytes_freed": 0, "files": []}
+        if not output_dir.is_dir():
+            return stats
+
+        keep = {str(_P(p)) for p in keep_relpaths}
+        for path_ in sorted(output_dir.rglob("*"), reverse=True):
+            if path_.is_dir():
+                # Sweep up a directory the prune just emptied (a whole pool folder
+                # can go away). rmdir only succeeds when it really is empty.
+                try:
+                    path_.rmdir()
+                except OSError:
+                    pass
+                continue
+            if path_.suffix.lower() not in self._PRUNABLE_SUFFIXES:
+                continue
+            rel = str(path_.relative_to(output_dir))
+            if rel in keep:
+                continue
+            try:
+                size = path_.stat().st_size
+                path_.unlink()
+            except OSError as exc:  # noqa: PERF203 - one bad file must not abort the build
+                logger.warning("Could not prune orphaned media %s: %s", rel, exc)
+                continue
+            stats["removed"] += 1
+            stats["bytes_freed"] += size
+            stats["files"].append(rel)
         return stats
 
     def _copy_video_files(
