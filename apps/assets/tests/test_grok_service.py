@@ -160,7 +160,9 @@ class TestGrokClipDescriptionClient:
         mock_settings_module.GROK_CLIP_DESCRIPTIONS = mock_settings
 
         # Delete frames to have only 2
-        clip_with_frames.frames.all()[2:].delete()
+        # Django forbids .delete() on a sliced queryset; resolve the ids first.
+        keep_ids = list(clip_with_frames.frames.values_list('pk', flat=True)[:2])
+        clip_with_frames.frames.exclude(pk__in=keep_ids).delete()
 
         with patch('apps.assets.services.grok_clip_service.OpenAI'):
             client = GrokClipDescriptionClient()

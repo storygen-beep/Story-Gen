@@ -7,6 +7,7 @@ from unittest import mock
 
 import pytest
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 
 from apps.assets.models import AssetGroup, AssetVideo, AssetClip, ClipFrame, AssetVideoStatus
@@ -19,10 +20,17 @@ class TestFrameCaptioningService(TestCase):
 
     def setUp(self):
         """Set up test fixtures."""
-        self.user = None  # For testing without auth
+        # AssetGroup.owner is a non-null FK — there is no "without auth" path. The
+        # sibling suites (test_grok_service.py, test_generate_clip_description_command.py)
+        # already create a real user; match them rather than inventing a second pattern.
+        User = get_user_model()
+        self.user = User.objects.create_user(
+            email="frame-captioning@example.com", password="testpass123"
+        )
         self.group = AssetGroup.objects.create(
             name="Test Group",
-            description="Test group for frame captioning"
+            description="Test group for frame captioning",
+            owner=self.user,
         )
         self.video = AssetVideo.objects.create(
             group=self.group,

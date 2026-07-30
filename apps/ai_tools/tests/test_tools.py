@@ -50,16 +50,16 @@ class ProjectAnalysisToolsTestCase(TestCase):
 
         self.node1 = StoryNode.objects.create(
             canvas=self.canvas,
-            title='Opening Scene',
-            content='This is the opening scene of our test story. It sets the stage for adventure and introduces the main character who will face many challenges.',
-            node_type='story_content'
+            name='Opening Scene',
+            node_data={'content': 'This is the opening scene of our test story. It sets the stage for adventure and introduces the main character who will face many challenges.',
+                       'node_type': 'story_content'},
         )
 
         self.node2 = StoryNode.objects.create(
             canvas=self.canvas,
-            title='Decision Point',
-            content='The hero must choose their path. This is a crucial moment in the story that will determine the outcome of their journey.',
-            node_type='story_content'
+            name='Decision Point',
+            node_data={'content': 'The hero must choose their path. This is a crucial moment in the story that will determine the outcome of their journey.',
+                       'node_type': 'story_content'},
         )
 
         # Create characters
@@ -69,17 +69,15 @@ class ProjectAnalysisToolsTestCase(TestCase):
             description='The main character'
         )
 
-        self.character2 = Character.objects.create(
-            project=self.project,
-            name='Test Villain',
-            description='The antagonist'
-        )
+        # Only ONE Character per project: Character.project is a OneToOneField
+        # (related_name="player_character"), so a project has a single player character.
+        # NPC.project is the ForeignKey — that is where a cast of many belongs.
 
         self.project_id = str(self.project.id)
 
     def test_analyze_project_tool_minimal(self):
         """Test analyze_project tool with minimal depth."""
-        result = analyze_project(self.project_id, "minimal")
+        result = analyze_project.invoke({"project_id": self.project_id, "analysis_depth": "minimal"})
 
         # Should be a string with analysis content
         self.assertIsInstance(result, str)
@@ -91,7 +89,7 @@ class ProjectAnalysisToolsTestCase(TestCase):
 
     def test_analyze_project_tool_standard(self):
         """Test analyze_project tool with standard depth."""
-        result = analyze_project(self.project_id, "standard")
+        result = analyze_project.invoke({"project_id": self.project_id, "analysis_depth": "standard"})
 
         # Should be a string with detailed analysis
         self.assertIsInstance(result, str)
@@ -105,7 +103,7 @@ class ProjectAnalysisToolsTestCase(TestCase):
 
     def test_analyze_project_tool_comprehensive(self):
         """Test analyze_project tool with comprehensive depth."""
-        result = analyze_project(self.project_id, "comprehensive")
+        result = analyze_project.invoke({"project_id": self.project_id, "analysis_depth": "comprehensive"})
 
         # Should be a string with comprehensive analysis
         self.assertIsInstance(result, str)
@@ -115,7 +113,7 @@ class ProjectAnalysisToolsTestCase(TestCase):
 
     def test_analyze_project_tool_expert(self):
         """Test analyze_project tool with expert depth."""
-        result = analyze_project(self.project_id, "expert")
+        result = analyze_project.invoke({"project_id": self.project_id, "analysis_depth": "expert"})
 
         # Should be a string with expert-level analysis
         self.assertIsInstance(result, str)
@@ -126,7 +124,7 @@ class ProjectAnalysisToolsTestCase(TestCase):
 
     def test_get_project_summary_tool(self):
         """Test get_project_summary tool."""
-        result = get_project_summary(self.project_id)
+        result = get_project_summary.invoke({"project_id": self.project_id})
 
         # Should be a string with project summary
         self.assertIsInstance(result, str)
@@ -140,7 +138,7 @@ class ProjectAnalysisToolsTestCase(TestCase):
 
     def test_assess_project_complexity_tool(self):
         """Test assess_project_complexity tool."""
-        result = assess_project_complexity(self.project_id)
+        result = assess_project_complexity.invoke({"project_id": self.project_id})
 
         # Should be a string with complexity assessment
         self.assertIsInstance(result, str)
@@ -171,17 +169,17 @@ class ProjectAnalysisToolsTestCase(TestCase):
 
         StoryNode.objects.create(
             canvas=canvas2,
-            title='Simple Scene',
-            content='A simple scene.',
-            node_type='story_content'
+            name='Simple Scene',
+            node_data={'content': 'A simple scene.',
+                       'node_type': 'story_content'},
         )
 
         project_ids = [self.project_id, str(project2.id)]
-        result = analyze_multiple_projects(project_ids, "overview")
+        result = analyze_multiple_projects.invoke({"project_ids": project_ids, "comparison_focus": "overview"})
 
         # Should be a string with comparison analysis
         self.assertIsInstance(result, str)
-        self.assertIn('Multi-Project Comparison', result)
+        self.assertIn('Project Portfolio Overview', result)  # heading for focus='overview'
         self.assertIn('Project Rankings', result)
         self.assertIn(self.project.name, result)
         self.assertIn(project2.name, result)
@@ -199,7 +197,7 @@ class ProjectAnalysisToolsTestCase(TestCase):
         )
 
         project_ids = [self.project_id, str(project2.id)]
-        result = analyze_multiple_projects(project_ids, "complexity")
+        result = analyze_multiple_projects.invoke({"project_ids": project_ids, "comparison_focus": "complexity"})
 
         self.assertIsInstance(result, str)
         self.assertIn('Complexity Comparison', result)
@@ -212,13 +210,13 @@ class ProjectAnalysisToolsTestCase(TestCase):
         fake_id = str(uuid.uuid4())
 
         # All tools should handle invalid IDs gracefully
-        result1 = analyze_project(fake_id)
+        result1 = analyze_project.invoke({"project_id": fake_id})
         self.assertIn('❌ Failed', result1)
 
-        result2 = get_project_summary(fake_id)
+        result2 = get_project_summary.invoke({"project_id": fake_id})
         self.assertIn('❌ Failed', result2)
 
-        result3 = assess_project_complexity(fake_id)
+        result3 = assess_project_complexity.invoke({"project_id": fake_id})
         self.assertIn('❌ Failed', result3)
 
     def test_analyze_multiple_projects_too_many(self):
@@ -226,30 +224,31 @@ class ProjectAnalysisToolsTestCase(TestCase):
         # Create list of 11 project IDs (more than max of 10)
         project_ids = [str(uuid.uuid4()) for _ in range(11)]
 
-        result = analyze_multiple_projects(project_ids)
+        result = analyze_multiple_projects.invoke({"project_ids": project_ids})
 
         self.assertIn('Too many projects', result)
         self.assertIn('❌', result)
 
     def test_analyze_multiple_projects_empty_list(self):
         """Test analyze_multiple_projects with empty list."""
-        result = analyze_multiple_projects([])
+        result = analyze_multiple_projects.invoke({"project_ids": []})
 
         self.assertIn('No projects could be analyzed', result)
         self.assertIn('❌', result)
 
     def test_tool_output_format_consistency(self):
         """Test that all tools return properly formatted strings."""
-        tools_and_args = [
-            (analyze_project, [self.project_id]),
-            (get_project_summary, [self.project_id]),
-            (assess_project_complexity, [self.project_id]),
-            (analyze_multiple_projects, [[self.project_id]]),
+        # StructuredTools take a dict via .invoke() and expose .name, not .__name__.
+        tools_and_payloads = [
+            (analyze_project, {"project_id": self.project_id}),
+            (get_project_summary, {"project_id": self.project_id}),
+            (assess_project_complexity, {"project_id": self.project_id}),
+            (analyze_multiple_projects, {"project_ids": [self.project_id]}),
         ]
 
-        for tool_func, args in tools_and_args:
-            with self.subTest(tool=tool_func.__name__):
-                result = tool_func(*args)
+        for tool_func, payload in tools_and_payloads:
+            with self.subTest(tool=tool_func.name):
+                result = tool_func.invoke(payload)
 
                 # Should be a string
                 self.assertIsInstance(result, str)
@@ -263,12 +262,12 @@ class ProjectAnalysisToolsTestCase(TestCase):
     def test_tool_error_handling(self):
         """Test that tools handle various error conditions gracefully."""
         # Test with malformed UUID
-        result1 = analyze_project("not-a-uuid")
+        result1 = analyze_project.invoke({"project_id": "not-a-uuid"})
         self.assertIn('❌', result1)
 
         # Test with None (should be handled by tool validation)
         try:
-            result2 = get_project_summary(None)
+            result2 = get_project_summary.invoke({"project_id": None})
             # If it doesn't raise an exception, it should return an error message
             self.assertIn('❌', result2)
         except (TypeError, ValueError):
@@ -312,17 +311,17 @@ class ToolIntegrationTestCase(TestCase):
         for i in range(3):
             StoryNode.objects.create(
                 canvas=canvas1,
-                title=f'Act 1 Scene {i+1}',
-                content=f"{substantial_content} Scene {i+1} specific details.",
-                node_type='story_content'
+                name=f'Act 1 Scene {i+1}',
+                node_data={'content': f"{substantial_content} Scene {i+1} specific details.",
+                           'node_type': 'story_content'},
             )
 
         for i in range(3):
             StoryNode.objects.create(
                 canvas=canvas2,
-                title=f'Act 2 Scene {i+1}',
-                content=f"{substantial_content} Act 2 scene {i+1} developments.",
-                node_type='story_content'
+                name=f'Act 2 Scene {i+1}',
+                node_data={'content': f"{substantial_content} Act 2 scene {i+1} developments.",
+                           'node_type': 'story_content'},
             )
 
         # Create characters
@@ -332,23 +331,13 @@ class ToolIntegrationTestCase(TestCase):
             description='A brave warrior princess with a mysterious heritage'
         )
 
-        Character.objects.create(
-            project=self.rich_project,
-            name='Thorek Ironbeard',
-            description='A wise dwarf smith who forges magical weapons'
-        )
-
-        Character.objects.create(
-            project=self.rich_project,
-            name='Lady Shadowmere',
-            description='An enigmatic sorceress with unclear motives'
-        )
+        # Thorek and Lady Shadowmere removed: Character.project is OneToOne.
 
         self.rich_project_id = str(self.rich_project.id)
 
     def test_rich_project_analysis(self):
         """Test analysis of a project with rich content."""
-        result = analyze_project(self.rich_project_id, "comprehensive")
+        result = analyze_project.invoke({"project_id": self.rich_project_id, "analysis_depth": "comprehensive"})
 
         # Should reflect the rich content
         self.assertIn(self.rich_project.name, result)
@@ -356,18 +345,20 @@ class ToolIntegrationTestCase(TestCase):
 
         # Should show higher complexity due to rich content
         # (We can't test exact values, but we can test structure)
-        self.assertIn('Structural Complexity:', result)
-        self.assertIn('Content Complexity:', result)
-        self.assertIn('Relationship Complexity:', result)
+        # analyze_project labels these Structural:/Content:/Relationships:;
+        # '<X> Complexity:' is assess_project_complexity's wording.
+        self.assertIn('Structural:', result)
+        self.assertIn('Content:', result)
+        self.assertIn('Relationships:', result)
 
     def test_summary_with_rich_content(self):
         """Test project summary with rich content."""
-        result = get_project_summary(self.rich_project_id)
+        result = get_project_summary.invoke({"project_id": self.rich_project_id})
 
         # Should reflect the rich statistics
         self.assertIn('2 story canvases', result)
         self.assertIn('6 story nodes', result)
-        self.assertIn('3 characters', result)
+        self.assertIn('1 characters', result)  # OneToOne: one player character
 
         # Should indicate this is a well-developed project
         # (Content length should be substantial)
@@ -375,7 +366,7 @@ class ToolIntegrationTestCase(TestCase):
 
     def test_complexity_assessment_rich_project(self):
         """Test complexity assessment with rich project."""
-        result = assess_project_complexity(self.rich_project_id)
+        result = assess_project_complexity.invoke({"project_id": self.rich_project_id})
 
         # Should show detailed breakdown
         self.assertIn('Canvas organization:', result)
@@ -386,4 +377,4 @@ class ToolIntegrationTestCase(TestCase):
         # Should show substantial project statistics
         self.assertIn('Canvases: 2', result)
         self.assertIn('Story nodes: 6', result)
-        self.assertIn('Characters: 3', result)
+        self.assertIn('Characters: 1', result)  # OneToOne: one player character

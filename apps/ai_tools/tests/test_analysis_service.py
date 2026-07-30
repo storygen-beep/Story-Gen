@@ -46,16 +46,16 @@ class AnalysisServiceTestCase(TestCase):
 
         self.node1 = StoryNode.objects.create(
             canvas=self.canvas,
-            title='Opening Scene',
-            content='This is the opening scene of our test story. It sets the stage for adventure.',
-            node_type='story_content'
+            name='Opening Scene',
+            node_data={'content': 'This is the opening scene of our test story. It sets the stage for adventure.',
+                       'node_type': 'story_content'},
         )
 
         self.node2 = StoryNode.objects.create(
             canvas=self.canvas,
-            title='Decision Point',
-            content='The hero must choose their path. This is a crucial moment in the story.',
-            node_type='story_content'
+            name='Decision Point',
+            node_data={'content': 'The hero must choose their path. This is a crucial moment in the story.',
+                       'node_type': 'story_content'},
         )
 
         # Create characters
@@ -65,11 +65,9 @@ class AnalysisServiceTestCase(TestCase):
             description='The main character'
         )
 
-        self.character2 = Character.objects.create(
-            project=self.project,
-            name='Test Villain',
-            description='The antagonist'
-        )
+        # Only ONE Character per project: Character.project is a OneToOneField
+        # (related_name="player_character"), so a project has a single player character.
+        # NPC.project is the ForeignKey — that is where a cast of many belongs.
 
         # Create location
         self.location = Location.objects.create(
@@ -111,7 +109,7 @@ class AnalysisServiceTestCase(TestCase):
         stats = result['project_stats']
         self.assertEqual(stats['canvas_count'], 1)
         self.assertEqual(stats['node_count'], 2)
-        self.assertEqual(stats['character_count'], 2)
+        self.assertEqual(stats['character_count'], 1)  # OneToOne: 0 or 1
         self.assertEqual(stats['location_count'], 1)
         self.assertGreater(stats['total_content_length'], 0)
 
@@ -283,17 +281,17 @@ class AnalysisServiceIntegrationTestCase(TestCase):
         for i in range(5):
             StoryNode.objects.create(
                 canvas=self.canvas1,
-                title=f'Scene {i+1}',
-                content=f'This is scene {i+1} with detailed content about the story progression. ' * 20,
-                node_type='story_content'
+                name=f'Scene {i+1}',
+                node_data={'content': f'This is scene {i+1} with detailed content about the story progression. ' * 20,
+                           'node_type': 'story_content'},
             )
 
         for i in range(3):
             StoryNode.objects.create(
                 canvas=self.canvas2,
-                title=f'Chapter 2 Scene {i+1}',
-                content=f'Chapter 2 scene {i+1} continues the story with rich narrative content. ' * 15,
-                node_type='story_content'
+                name=f'Chapter 2 Scene {i+1}',
+                node_data={'content': f'Chapter 2 scene {i+1} continues the story with rich narrative content. ' * 15,
+                           'node_type': 'story_content'},
             )
 
         # Create multiple characters
@@ -305,12 +303,15 @@ class AnalysisServiceIntegrationTestCase(TestCase):
             ('Grunk the Mighty', 'Dwarf warrior with a heart of gold')
         ]
 
-        for name, desc in characters_data:
-            Character.objects.create(
-                project=self.complex_project,
-                name=name,
-                description=desc
-            )
+        # One player character only — Character.project is OneToOne. The remaining
+        # entries in characters_data stay as narrative colour for the NPC cast; if this
+        # test ever needs a crowd it should create NPCs, whose project FK allows many.
+        first_name, first_desc = characters_data[0]
+        Character.objects.create(
+            project=self.complex_project,
+            name=first_name,
+            description=first_desc,
+        )
 
         # Create multiple locations
         locations_data = [
@@ -341,7 +342,7 @@ class AnalysisServiceIntegrationTestCase(TestCase):
         stats = result['project_stats']
         self.assertEqual(stats['canvas_count'], 2)
         self.assertEqual(stats['node_count'], 8)
-        self.assertEqual(stats['character_count'], 5)
+        self.assertEqual(stats['character_count'], 1)  # OneToOne: 0 or 1
         self.assertEqual(stats['location_count'], 4)
         self.assertGreater(stats['total_content_length'], 1000)  # Substantial content
 
@@ -370,9 +371,9 @@ class AnalysisServiceIntegrationTestCase(TestCase):
 
         StoryNode.objects.create(
             canvas=canvas,
-            title='Simple Scene',
-            content='A simple scene with basic content.',
-            node_type='story_content'
+            name='Simple Scene',
+            node_data={'content': 'A simple scene with basic content.',
+                       'node_type': 'story_content'},
         )
 
         # Test user insights

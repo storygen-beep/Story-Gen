@@ -91,7 +91,9 @@ class TestGenerateClipDescriptionCommand:
     def test_insufficient_frames(self, clip_with_frames):
         """Test handling of clips with insufficient frames."""
         # Delete all but 2 frames
-        clip_with_frames.frames.all()[2:].delete()
+        # Django forbids .delete() on a sliced queryset; resolve the ids first.
+        keep_ids = list(clip_with_frames.frames.values_list('pk', flat=True)[:2])
+        clip_with_frames.frames.exclude(pk__in=keep_ids).delete()
 
         with patch('apps.assets.management.commands.generate_clip_description.get_grok_client') as mock_client:
             mock_service = Mock()
