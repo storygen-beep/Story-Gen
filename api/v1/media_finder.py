@@ -288,22 +288,40 @@ def _add_option(
         entry["local_path"] = local_path
     if origin:
         entry["origin"] = origin
-    lst.append(entry)
+
+    if origin == "previous":
+        # A just-demoted pick goes to the FRONT. Appending buried it: media_lab's
+        # shelf is 148 deep, so an unselected clip landed at position 149 and the
+        # "one click to undo" this is supposed to give you meant scrolling past
+        # everything first. Fresh candidates still append — their order is the
+        # harvest order, which the fetcher re-ranks anyway.
+        lst.insert(0, entry)
+    else:
+        lst.append(entry)
     data["game"] = game
     data["updated_at"] = now
     _write_options(game_dir, data)
     return True, len(lst)
 
 
-def _drop_option(game_dir: Path, game: str, file_: str, url: str) -> None:
-    """Remove one option by url — used after it has been installed into the slot."""
-    if not url:
+def _drop_option(game_dir: Path, game: str, file_: str, url: str, local_path: str = "") -> None:
+    """Remove one option, by url or by local_path — it has just been installed.
+
+    `local_path` matters because a previously-demoted pick is re-selected by COPY:
+    its `url` is empty, so matching on url alone left it sitting on the shelf as an
+    available option while it was already back in the slot.
+    """
+    if not url and not local_path:
         return
     data = _read_options(game_dir)
     lst = data["options"].get(file_)
     if not lst:
         return
-    kept = [o for o in lst if o.get("url") != url]
+    kept = [
+        o for o in lst
+        if not ((url and o.get("url") == url)
+                or (local_path and o.get("local_path") == local_path))
+    ]
     if len(kept) == len(lst):
         return
     data["options"][file_] = kept
@@ -666,7 +684,9 @@ def grab(request):
         os.replace(tmp_path, output_path)
 
     # The option just consumed is no longer an alternative.
-    _drop_option(game_dir, game, slot_key_, url=url)
+    # Pass both: a re-selected previous pick carries a local_path and no url, so
+    # dropping by url alone would leave it listed as an option it no longer is.
+    _drop_option(game_dir, game, slot_key_, url=url, local_path=local_path)
     # A single slot now holds bytes nobody has judged, so its old verdict must not
     # carry over. A POOL keeps its verdict: adding a fourth clip does not un-judge
     # the three already approved.

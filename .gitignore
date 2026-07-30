@@ -237,6 +237,15 @@ game_explorations/*/.live/
 !games/media_lab_c/output/videos/
 !games/media_lab_c/output/videos/**
 
+# Media Lab is the ORIGINAL query-study rig and the arm-A baseline every later run
+# is compared against — and since 2026-07-31 it also carries the first live
+# `pool_dir` slot (lab_behind_t5, four clips the engine cycles). Its media was
+# never whitelisted, so every one of its refs 404'd on the portal while _c and _d
+# rendered fine. 13 files, 24 MB. The source games/media_lab/videos/ stays ignored —
+# only the output copy the portal actually serves is tracked.
+!games/media_lab/output/videos/
+!games/media_lab/output/videos/**
+
 
 # ============================================================
 # find-media working evidence (harvest dumps, montages, candidate

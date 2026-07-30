@@ -211,3 +211,39 @@ def test_clean_pool_dir_does_not_mangle_a_real_folder_name():
     pool with no error. `_clean_pool_dir` must preserve the name verbatim."""
     assert mf._clean_pool_dir("sex/oral.t5") == "sex/oral.t5"
     assert mf._clean_pool_dir("sex/clip.webm") == "sex/clip.webm"
+
+
+# ── shelf ordering + re-select bookkeeping ───────────────────────────────────
+
+def test_an_unselected_clip_goes_to_the_FRONT_of_the_shelf(games_root):
+    """Appending buried it. media_lab's shelf is 148 deep, so a just-unselected
+    clip landed at position 149 — "one click to undo" meant scrolling past
+    everything first. Fresh candidates still append."""
+    for i in range(5):
+        mf._add_option(games_root / "g", "g", "p", url=f"https://x.test/{i}.gif")
+    d = games_root / "g" / "videos" / "p"
+    d.mkdir(parents=True)
+    (d / "gone.webm").write_bytes(b"x")
+
+    _post(mf.pool_unselect, {"game": "g", "dir": "p", "filename": "gone.webm"})
+
+    opts = mf._read_options(games_root / "g")["options"]["p"]
+    assert opts[0]["origin"] == "previous", "the undo is buried at the bottom again"
+    assert len(opts) == 6
+
+
+def test_reselecting_a_previous_pick_removes_it_from_the_shelf(games_root):
+    """It is back in the slot, so listing it as an available option is a lie —
+    and it is matched by local_path because a local re-select carries no url."""
+    d = games_root / "g" / "videos" / "p"
+    d.mkdir(parents=True)
+    (d / "clip.webm").write_bytes(b"x" * 60000)
+    _post(mf.pool_unselect, {"game": "g", "dir": "p", "filename": "clip.webm"})
+
+    opt = mf._read_options(games_root / "g")["options"]["p"][0]
+    assert opt["origin"] == "previous"
+
+    _post(mf.grab, {"game": "g", "file": "p", "pool_dir": "p",
+                    "local_path": opt["local_path"], "url": ""})
+
+    assert mf._read_options(games_root / "g")["options"]["p"] == []
