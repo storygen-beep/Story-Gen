@@ -52,6 +52,14 @@ class TemplateProject:
     # render no footer. Purely additive.
     version: str = ""
     release_date: str = ""
+    # Optional studio identity baked into the build: the funding link (sidebar
+    # button + both intro/age-gate links) and the "Developed by X" credit under
+    # the age gate. Default "" — the GENERATOR supplies the fallback
+    # (v2.DEFAULT_SUPPORT_URL / DEFAULT_STUDIO_NAME), deliberately not this
+    # dataclass, so the second [project] reader (build_guide.py, raw tomllib)
+    # cannot resolve a different value than the sidebar does.
+    support_url: str = ""
+    studio_name: str = ""
 
 
 @dataclass
@@ -1601,6 +1609,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         quests_engine=_require_str(p, "quests_engine", "v1"),
         version=_require_str(p, "version", ""),
         release_date=_require_str(p, "release_date", ""),
+        support_url=_require_str(p, "support_url", ""),
+        studio_name=_require_str(p, "studio_name", ""),
     )
 
     # Optional: [time] section (has sensible defaults)
@@ -3255,6 +3265,14 @@ def validate(template: GameTemplate) -> List[str]:
         errors.append("project.title is required")
     if not _is_valid_slug(template.project.slug):
         errors.append("project.id must be lowercase snake_case (^[a-z0-9_]+$)")
+    # support_url lands in an href on EVERY passage of a published file. html.escape
+    # already stops the build-break (a `"` closes nothing, `<<` fires no macro), but
+    # it does not stop `javascript:` or `data:text/html,` — those would ship as a
+    # live click target. Scheme-gate at import time; empty means "use the default".
+    if template.project.support_url and not template.project.support_url.startswith(
+        ("http://", "https://")
+    ):
+        errors.append("project.support_url must start with http:// or https://")
 
     # time
     if template.time.starting_day not in VALID_DAYS:
@@ -6033,6 +6051,10 @@ def _assemble_project_metadata(project, template):
     # Optional sidebar version/release-date footer (new top-level metadata keys).
     project.metadata["version"] = template.project.version
     project.metadata["release_date"] = template.project.release_date
+    # Optional studio identity — the generator falls back to its own defaults when
+    # these are "" (see v2.DEFAULT_SUPPORT_URL / DEFAULT_STUDIO_NAME).
+    project.metadata["support_url"] = template.project.support_url
+    project.metadata["studio_name"] = template.project.studio_name
     # PRD 48 — serialize V2 cards onto project.metadata. Empty list for v1
     # games (their hints stay in project.metadata["story_arc"]["hints"]).
     if template.project.quests_engine == "v2":

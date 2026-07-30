@@ -19,6 +19,16 @@ quests_engine   = "v2"
 starting_canvas = "canvas_opening_office"   # the cold open (Beat 1 — the office)
 version         = "0.1.6"          # sidebar footer — bump in the same commit as the games-data.js portal entry
 release_date    = "2026-07-28"     # sidebar footer — date this build ships
+# The funding link baked into the build at THREE sites (sidebar button + both intro/age-gate links).
+# Same URL the engine falls back to when this is unset (v2.DEFAULT_SUPPORT_URL), so it is stated here
+# only to make the key visible and editable — the built output is byte-identical either way.
+#
+# Deliberately UNTAGGED. A per-venue query tag would buy provenance (which upload a re-hosted copy
+# came from) but NOT signup attribution — Patreon reports no referrer or UTM to creators (measured
+# 2026-07-29 across 425 help-centre articles). If a tag is ever added, note that this value is GLOBAL:
+# it goes into every build made from this TOML, so it must be changed before cutting a build for a
+# different venue, or that venue ships the wrong tag.
+support_url     = "https://www.patreon.com/cw/nutgames844"
 
 [time]
 starting_hour = 20        # the opening opens in the evening (Beat 1 — Mercer's office)

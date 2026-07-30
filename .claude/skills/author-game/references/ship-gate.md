@@ -73,8 +73,9 @@ telegraphed locked-visible seed, "counted and logged"). The sweep's question isn
 most-liked comment on the large majority of those games was a request for cheat codes — it is the genre's
 most universal player behaviour. The #1 game by engagement ships a free, default-on cheat menu from day one
 and draws essentially no grind complaints across its whole comment corpus; the games that *sell* the codes
-convert their own friction into resentment. We don't monetise, so the choice is easy. A game may skip it,
-but on purpose — like the fail-state declaration, not by default.
+convert their own friction into resentment. We take support, we don't sell access — a Patreon link in the
+sidebar asks; a paywalled cheat code charges for relief from friction we authored. So the choice is easy.
+A game may skip it, but on purpose — like the fail-state declaration, not by default.
 
 **What it may grant — monotonic, non-exclusive, non-causal state only:**
 - ✅ **money**, and the declared climbing meters (`corruption` · `exhibitionism` · `arousal` · `energy` and
@@ -180,6 +181,12 @@ game**, not just the beat you last touched.
       granularity the game started with, and don't skip a release).
 - [ ] Set `[project] version` + `release_date` if the game surfaces the sidebar footer, and bump
       `book_revision` + log the release in `authoring_state.json`'s `decisions_log`.
+- [ ] **Check the funding link points where you think it does.** `[project] support_url` /
+      `studio_name` are engine defaults unless the game sets them (`engine-reference.md` §8), and the
+      link ships at **three** sites — sidebar button plus both intro/age-gate links. This matters most
+      off-portal: sites that re-host the free build strip page-level credit but copy the file verbatim,
+      so the in-build link is often the only funnel that survives. Grep the built HTML for the host and
+      confirm the count is 3.
 - [ ] The ledger's `_active_beat` names what ships next, so the following session opens with the frontier
       in hand rather than re-deriving it.
 

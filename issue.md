@@ -227,11 +227,10 @@ now we need to update the skill to know how to write cheats, plus it should know
 
 
 [DONE]video quality enhance: find media v2 and using chrome extension
-
 Why so slow, is it working one by one on each media, or it can work parallely, internet connectivity matters.
 
 
-release vesper 0.1.6 free and beta build on patreon, free one on mopoga and gamcore both.
+[DONE]release vesper 0.1.6 free and beta build on patreon, free one on mopoga and gamcore both.
 
 Also updating the cheat page to knowing the benefits of becoming our patreon member.
 
@@ -242,3 +241,17 @@ start working on inheritance, making sure it doesnt have any fucking issues like
 [DONE]strategy changes to latest build release for chill nut and all paid one for only beta nut and higher. 
 
 
+**29th July**
+
+Inheritance
+
+The house is given so easily.
+
+
+
+Vesper:
+Going random videos from a set of videos.
+And we are already working on good videos as we are working on find media skill.
+
+
+[DONE]claude cloud container init.sh for find media, but claude cloud cant make google search.

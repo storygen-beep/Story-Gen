@@ -11,6 +11,7 @@ Comprehensive game generator that creates sophisticated interactive experiences.
 This is the isolated, self-contained comprehensive game generation system.
 """
 
+import hashlib
 import json
 import html
 import logging
@@ -19,6 +20,7 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 
 from pathlib import Path
 
+from apps.common.media_blocks import block_media_pool
 from apps.projects.models import Project
 
 logger = logging.getLogger(__name__)
@@ -47,6 +49,23 @@ _CASCADE_EXIT_INJECT_SENTINEL = "<!--__CASCADE_EXIT_INJECT__-->"
 # render exits at passage bottom, not inside cascade. See _render_cascade
 # `has_gated_beats` check + cascade-aware exit substitution branch.
 _CASCADE_EXIT_INJECT_SAFE_SENTINEL = "<!--__CASCADE_EXIT_INJECT_SAFE__-->"
+
+# Studio identity baked into every build: the funding link (sidebar button + both
+# intro/age-gate links) and the credit line under the age gate. These were literals
+# in the generator until 2026-07-29; they are now `[project] support_url` /
+# `studio_name`, so a game can ship under a different campaign or studio without a
+# code change.
+#
+# The fallback lives HERE, generator-side, not as a TemplateProject default — the
+# TOML has a second, independent reader (build_guide.py parses [project] with
+# tomllib, bypassing template_import entirely), and an importer-side default would
+# leave that reader seeing an empty string and quietly disagreeing with the sidebar.
+# One constant, one resolver, three call sites.
+#
+# Unset => these exact bytes, so every game built before this change still builds
+# byte-identical (html.escape is a no-op on both — no &, <, >, " or ').
+DEFAULT_SUPPORT_URL = "https://www.patreon.com/cw/nutgames844"
+DEFAULT_STUDIO_NAME = "NutGames"
 
 
 class TweeComprehensiveGeneratorV2:
@@ -733,10 +752,42 @@ class TweeComprehensiveGeneratorV2:
     "start": "Start"
 }}"""
 
+    def _project_metadata(self) -> dict:
+        """`self.project.metadata` as a real dict, or {} — never a Mock.
+
+        Some test callers pass a MagicMock project (apps/projects/tests.py), where a
+        bare attribute read returns a truthy Mock whose .get() yields another Mock;
+        html.escape() then raises. isinstance is the only read that survives both.
+        """
+        meta = getattr(self, "project", None)
+        meta = getattr(meta, "metadata", None)
+        return meta if isinstance(meta, dict) else {}
+
+    def _resolve_support_url(self) -> str:
+        """HTML-escaped funding URL for the sidebar button and both intro links.
+
+        Authored as `[project] support_url`; falls back to DEFAULT_SUPPORT_URL so a
+        game that never sets it emits the bytes it always has. Escaped for an href
+        attribute: a `&` in a query string becomes `&amp;` here, which is correct —
+        Tweego stores passage text escaped, the browser decodes it once, and the DOM
+        href ends up with a real `&` (same round-trip as the known `&amp;#x27;`
+        apostrophe behaviour; the missing-media search links at _build_search_url
+        already ship this exact urlencode -> html.escape -> href pattern).
+        """
+        url = str(self._project_metadata().get("support_url", "") or "").strip()
+        return html.escape(url or DEFAULT_SUPPORT_URL)
+
+    def _resolve_studio_name(self) -> str:
+        """HTML-escaped studio credit for the age-gate footer ("Developed by X")."""
+        name = str(self._project_metadata().get("studio_name", "") or "").strip()
+        return html.escape(name or DEFAULT_STUDIO_NAME)
+
     def _generate_initialization(self) -> str:
         """Generate simple initialization with time system."""
         project_name = self.game_config.get('project_name', 'Interactive Game')
         project_description = getattr(self.project, 'description', '') or 'An interactive story experience'
+        support_url = self._resolve_support_url()
+        studio_name = self._resolve_studio_name()
 
         # Get time settings from project
         time_settings = self.project.get_time_settings()
@@ -8133,7 +8184,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 <p class="game-description">{project_description}</p>
 <div class="developer-intro">
 <p class="developer-about">We're a small indie studio crafting intimate, story-driven experiences. Every game is made with care, and your support helps us keep creating. If you enjoy our work, consider supporting us!</p>
-<p class="support-link">👉 <a href="https://www.patreon.com/cw/nutgames844" target="_blank" rel="noopener">Support us on Patreon</a></p>
+<p class="support-link">👉 <a href="{support_url}" target="_blank" rel="noopener">Support us on Patreon</a></p>
 </div>
 <div class="age-gate">
 <p class="age-warning">⚠️ This game contains adult content intended for players 18 years of age or older.</p>
@@ -8143,8 +8194,8 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 </div>
 </div>
 <div class="developer-footer">
-<p class="developer-credit">Developed by <strong>NutGames</strong></p>
-<p class="support-link">👉 <a href="https://www.patreon.com/cw/nutgames844" target="_blank" rel="noopener">Support us on Patreon</a></p>
+<p class="developer-credit">Developed by <strong>{studio_name}</strong></p>
+<p class="support-link">👉 <a href="{support_url}" target="_blank" rel="noopener">Support us on Patreon</a></p>
 </div>
 </div>
 <</nobr>>"""
@@ -11799,6 +11850,231 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         """Check if extension is an image format (including GIF)."""
         return ext.lower() in IMAGE_EXTENSIONS
 
+    # ── Media pools ───────────────────────────────────────────────────────────
+    #
+    # A pool is a media block that shows a DIFFERENT clip on each visit. It
+    # CYCLES: visit 1 shows clip 1, visit 2 clip 2, wrapping back round.
+    # Repeatable beats (activities, ambients, brothel loops) are what a player
+    # sees most, and one fixed clip per beat goes stale fast.
+    #
+    # Cycle, NOT random. `either()`/`random()` over four clips repeats
+    # back-to-back 25% of the time — exactly the staleness a pool exists to
+    # remove. A cycle therefore has to remember where it got to, so the counter
+    # lives in $game_state and not in a `_temp` that dies with the render.
+    #
+    # Two ways to declare one, both landing in `_render_media_pool`:
+    #   pool_dir = "sex/oral_t5"        — a FOLDER; contents discovered from disk
+    #   files    = ["a.webm", …]        — an explicit list (legacy)
+    # `pool_dir` is preferred: the count is never hardcoded, so the human curates
+    # by adding/removing files instead of editing TOML. Precedence and the shapes
+    # live in `apps/common/media_blocks.py`.
+
+    @staticmethod
+    def _natural_key(path: str):
+        """Sort key that orders `clip_2` before `clip_10`.
+
+        Folder contents are ordered by name, and plain lexical sort puts `_10`
+        before `_2` — which silently reorders a pool the moment it passes nine
+        entries.
+        """
+        return [int(t) if t.isdigit() else t.lower() for t in re.split(r'(\d+)', path)]
+
+    def _resolve_pool_dir(self, pool_dir: str) -> List[str]:
+        """Every media file inside a pool folder, in natural-sort order.
+
+        Reads the media index built by `_load_media_files` (an rglob of the media
+        root, `:403-408`) rather than touching disk again — the folder's contents
+        are already in `self.video_files`.
+
+        Matching is prefix-on-a-path-boundary, so `sex/oral_t5` picks up
+        `sex/oral_t5/1.webm` but never `sex/oral_t5_alt/1.webm`.
+        """
+        prefix = pool_dir.replace('\\', '/').strip().rstrip('/') + '/'
+        found = [p for p in self.video_files if p.startswith(prefix)]
+        return sorted(found, key=self._natural_key)
+
+    def _media_pool_key(self, pool_files: List[str], pool_dir: Optional[str] = None) -> str:
+        """Stable per-pool identity for the cycle counter.
+
+        For a FOLDER pool the key is the folder — stable by design. That matters:
+        the contents change every time the human selects or unselects a clip in
+        the review UI, and keying on the contents would change the key, reset
+        `$game_state.media_cycle`, and snap every player back to clip 1.
+
+        For a legacy `files = [...]` pool there is no folder, so the key is
+        derived from the declared list — a block dict is anonymous
+        (`_convert_blocks_to_game_html` sees no id and no ordinal), and the TOML
+        is the only stable thing to hash.
+
+        Two nodes declaring the same pool share one counter either way. That is
+        deliberate: the player gets variety across both rather than clip 1 at each.
+        """
+        if pool_dir:
+            slug = re.sub(r'[^A-Za-z0-9_]', '_', pool_dir.strip().rstrip('/'))
+            return slug[-48:] or 'pool'
+        digest = hashlib.md5(",".join(pool_files).encode("utf-8")).hexdigest()[:8]
+        stem = re.sub(r'[^A-Za-z0-9_]', '_', Path(pool_files[0]).stem)[:32]
+        return f"{stem}_{digest}"
+
+    def _pool_missing_placeholder(self, props: dict, label: str, kind: str) -> str:
+        """The dashed-border '[… POOL MISSING]' block, debug builds only.
+
+        Returns '' in a normal build — a player must never see build scaffolding.
+        Shared by the image, video and folder-pool paths so the three cannot drift.
+        """
+        if not self.debug:
+            return ''
+        desc = props.get("description", "") or props.get("alt", "")
+        out = (
+            f'<div style="border:2px dashed #666;padding:20px;'
+            f'margin:10px 0;border-radius:8px;background:#f5f5f5;">'
+            f'<p style="margin:0;font-weight:bold;color:#333;">'
+            f'[{kind.upper()} POOL MISSING] {html.escape(label)}</p>'
+        )
+        if desc:
+            out += (
+                f'<p style="margin:5px 0 0;color:#666;font-style:italic;">'
+                f'{html.escape(desc)}</p>'
+            )
+        queries = props.get("search_queries", [])
+        if queries and isinstance(queries, list):
+            game_name = self.options.get("game_folder") or self._slugify(self.project.name)
+            out += '<div style="margin-top:10px;">'
+            for query in queries:
+                if query and isinstance(query, str):
+                    search_url = self._build_search_url(query.strip(), game_name, label)
+                    out += (
+                        f'<a href="{html.escape(search_url)}" target="_blank" '
+                        f'style="display:inline-block;margin:4px 8px 4px 0;'
+                        f'padding:6px 12px;background:#3b82f6;color:white;'
+                        f'text-decoration:none;border-radius:4px;font-size:13px;">'
+                        f'🔍 {html.escape(query.strip())}</a>'
+                    )
+            out += '</div>'
+        return out + '</div>'
+
+    def _render_media_pool(
+        self, props: dict, pool_files: List[str], block_kind: str,
+        pool_dir: Optional[str] = None,
+    ) -> Optional[str]:
+        """Resolve a media pool and emit the cycling SugarCube markup.
+
+        Returns None when NOTHING resolved, so the caller emits its own "pool
+        missing" placeholder. A partial pool cycles over the survivors only.
+
+        `block_kind` ('image' | 'video') sets the missing-media label and the
+        format rule: a VIDEO pool accepts any resolved media, because the video
+        handler has always rendered a `.gif` through `<img>`; an IMAGE pool keeps
+        its image-only rule but now WARNS instead of dropping the file in silence.
+        """
+        desc = props.get("description", "") or props.get("alt", "")
+        entries: List[Tuple[str, bool]] = []   # (escaped src, is_video)
+
+        if pool_dir and not pool_files:
+            # An empty (or absent) pool folder. Record the FOLDER as the missing
+            # thing — there are no declared filenames to report, and a pool that
+            # silently vanished from the missing list is the exact regression
+            # `apps/common/media_blocks.py` was written to stop.
+            self.missing_media.append({
+                'file': pool_dir,
+                'type': block_kind,
+                'description': desc,
+                'search_queries': props.get("search_queries", []),
+                'canvas_id': self.current_canvas_id or 'unknown',
+                'category': self._categorize_media(self.current_canvas_id or '', pool_dir),
+            })
+            return None
+
+        for pool_file in pool_files:
+            normalized = str(pool_file).replace('\\', '/')
+            actual_path, actual_ext = self._find_media_file(normalized)
+
+            if actual_path is None:
+                # One row PER missing entry — the missing-media page and
+                # find-media must see the real shortfall, not just "a block".
+                self.missing_media.append({
+                    'file': normalized,
+                    'type': block_kind,
+                    'description': desc,
+                    'search_queries': props.get("search_queries", []),
+                    'canvas_id': self.current_canvas_id or 'unknown',
+                    'category': self._categorize_media(self.current_canvas_id or '', normalized),
+                })
+                continue
+
+            if block_kind == 'image' and not self._is_image_extension(actual_ext):
+                # This used to `continue` in silence: the file was not rendered,
+                # not recorded as missing, and not copied — it just vanished.
+                logger.warning(
+                    "Image pool entry '%s' resolved to non-image '%s' and was dropped. "
+                    "Use a video block for clips.", normalized, actual_path
+                )
+                continue
+
+            is_video = self._is_video_extension(actual_ext)
+            if is_video:
+                self.used_assets['external_videos'].add(actual_path)
+            else:
+                self.used_assets['external_images'].add(actual_path)
+
+            if self.video_path:
+                src = f"{self.video_path.rstrip('/')}/{html.escape(actual_path)}"
+            else:
+                src = f"media/{'videos' if is_video else 'images'}/{html.escape(actual_path)}"
+            entries.append((src, is_video))
+
+        if not entries:
+            return None
+
+        alt = html.escape(str(props.get("alt", "") or desc))
+        poster = html.escape(str(props.get("poster", ""))) if props.get("poster") else ""
+
+        def _tag(src: str, is_video: bool) -> str:
+            # Chosen per ENTRY, not once for the pool: `_find_media_file` is
+            # extension-agnostic, so a pool asking for .webm can legitimately
+            # resolve to a .gif on disk, and <video src="x.gif"> renders nothing.
+            # One shared `@src` attribute-directive cannot straddle both tags.
+            if is_video:
+                poster_attr = f' poster="{poster}"' if poster else ""
+                return (
+                    f'<video src="{src}" autoplay muted loop playsinline controls '
+                    f'preload="metadata"{poster_attr} '
+                    f'style="max-width:100%;max-height:70vh;object-fit:contain;'
+                    f'height:auto;border-radius:8px;"></video>'
+                )
+            return (
+                f'<img src="{src}" alt="{alt}" loading="lazy" decoding="async" '
+                f'style="max-width:100%;max-height:70vh;object-fit:contain;'
+                f'height:auto;border-radius:8px;" />'
+            )
+
+        if len(entries) == 1:
+            # Nothing to cycle — don't burn a state key on it.
+            return _tag(*entries[0])
+
+        ref = f'$game_state.media_cycle["{self._media_pool_key(pool_files, pool_dir)}"]'
+        max_idx = len(entries) - 1
+
+        # An `ndef` guard rather than a default in the `:: Start` init passage:
+        # setup.backfillStateDefaults only backfills flags / player.core_traits /
+        # npcs, so a NEW $game_state sub-map is undefined in every save written
+        # before this build. Guarding here heals old saves on first render.
+        parts = [
+            '<<if ndef $game_state.media_cycle>><<set $game_state.media_cycle to {}>><</if>>',
+            f'<<set {ref} to ({ref} === undefined ? 0 : ({ref} + 1) % {len(entries)})>>',
+            f'<<set _mc to {ref}>>',
+        ]
+        for idx, (src, is_video) in enumerate(entries):
+            if idx == 0:
+                parts.append('<<if _mc is 0>>')
+            elif idx < max_idx:
+                parts.append(f'<<elseif _mc is {idx}>>')
+            else:
+                parts.append('<<else>>')
+            parts.append(_tag(src, is_video))
+        parts.append('<</if>>')
+        return ''.join(parts)
+
     def _categorize_media(self, canvas_id: str, file_path: str) -> str:
         """Categorize a media file by section for the missing media page."""
         file_lower = file_path.lower()
@@ -13926,93 +14202,47 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 
                 # Media blocks: render even if text content is empty
                 if block_type == "image":
-                    # ─── L1-2 image pool: <<set _img to either(...)>> + <img @src="_img"> ──
-                    # If `files = [...]` array present, emit a pool that SugarCube picks
-                    # from randomly per render. Resolution: `files` wins over `file` when
-                    # both present. Missing-media policy: emit either() over found files
-                    # only (resilient to partial pools); fall through to placeholder if
-                    # ALL pool files missing. Uses SugarCube attribute-directive
-                    # @src="_img" (NOT src="@_img") for variable interpolation.
+                    # ─── Image pool: CYCLES through the stills ──────────────────
+                    # Two shapes, `pool_dir` (a folder, contents from disk) winning
+                    # over `files` (an explicit list) winning over `file` — the
+                    # precedence lives in apps/common/media_blocks.py. A partial
+                    # pool cycles over whatever resolved; an empty one falls
+                    # through to the debug placeholder. See _render_media_pool for
+                    # why this cycles rather than picking at random.
+                    pool_spec = block_media_pool(props)
                     image_files = props.get("files")
-                    if isinstance(image_files, list) and len(image_files) > 0 and all(isinstance(f, str) for f in image_files):
-                        image_desc = props.get("description", "") or props.get("alt", "")
-                        resolved_paths = []
-                        for pool_file in image_files:
-                            pool_file_normalized = str(pool_file).replace('\\', '/')
-                            actual_path, actual_ext = self._find_media_file(pool_file_normalized)
-                            if actual_path is None:
-                                # Track missing pool entry for the missing-media UI
-                                self.missing_media.append({
-                                    'file': pool_file_normalized,
-                                    'type': 'image',
-                                    'description': image_desc,
-                                    'search_queries': props.get("search_queries", []),
-                                    'canvas_id': self.current_canvas_id or 'unknown',
-                                    'category': self._categorize_media(self.current_canvas_id or '', pool_file_normalized),
-                                })
-                                continue
-                            # Pool is image-only — skip non-image format entries silently
-                            if not self._is_image_extension(actual_ext):
-                                continue
-                            self.used_assets['external_images'].add(actual_path)
-                            if self.video_path:
-                                base = self.video_path.rstrip('/')
-                                resolved_paths.append(f"{base}/{html.escape(actual_path)}")
-                            else:
-                                resolved_paths.append(f"media/images/{html.escape(actual_path)}")
 
-                        if len(resolved_paths) == 0:
-                            # All pool files missing → placeholder (debug only) using
-                            # the first pool entry as the representative missing file
-                            if self.debug:
-                                first_file_normalized = str(image_files[0]).replace('\\', '/')
-                                placeholder = (
-                                    f'<div style="border:2px dashed #666;padding:20px;'
-                                    f'margin:10px 0;border-radius:8px;background:#f5f5f5;">'
-                                    f'<p style="margin:0;font-weight:bold;color:#333;">'
-                                    f'[IMAGE POOL MISSING — {len(image_files)} files] {html.escape(first_file_normalized)}</p>'
-                                )
-                                if image_desc:
-                                    placeholder += (
-                                        f'<p style="margin:5px 0 0;color:#666;font-style:italic;">'
-                                        f'{html.escape(image_desc)}</p>'
-                                    )
-                                search_queries_pool = props.get("search_queries", [])
-                                if search_queries_pool and isinstance(search_queries_pool, list):
-                                    game_name = self.options.get("game_folder") or self._slugify(self.project.name)
-                                    placeholder += '<div style="margin-top:10px;">'
-                                    for query in search_queries_pool:
-                                        if query and isinstance(query, str):
-                                            search_url = self._build_search_url(query.strip(), game_name, first_file_normalized)
-                                            placeholder += (
-                                                f'<a href="{html.escape(search_url)}" target="_blank" '
-                                                f'style="display:inline-block;margin:4px 8px 4px 0;'
-                                                f'padding:6px 12px;background:#3b82f6;color:white;'
-                                                f'text-decoration:none;border-radius:4px;font-size:13px;">'
-                                                f'🔍 {html.escape(query.strip())}</a>'
-                                            )
-                                    placeholder += '</div>'
-                                placeholder += '</div>'
+                    if pool_spec is not None:
+                        resolved = self._resolve_pool_dir(pool_spec["dir"])
+                        pool_html = self._render_media_pool(
+                            props, resolved, 'image', pool_dir=pool_spec["dir"]
+                        )
+                        label = f'{pool_spec["dir"]}/ (0 of {pool_spec["target"]})'
+                    elif isinstance(image_files, list) and len(image_files) > 0 and all(isinstance(f, str) for f in image_files):
+                        pool_html = self._render_media_pool(props, image_files, 'image')
+                        label = f'{str(image_files[0]).replace(chr(92), "/")} ({len(image_files)} files)'
+                    else:
+                        pool_html = None
+                        label = None
+
+                    if label is not None:
+                        if pool_html is None:
+                            placeholder = self._pool_missing_placeholder(props, label, 'image')
+                            if placeholder:
                                 html_parts.append(placeholder)
                             continue
 
-                        # 1+ pool files found — emit either() macro + @src directive
-                        alt_pool = html.escape(str(props.get("alt", "")))
+                        # 1+ pool files found. The caption wraps the whole cycle
+                        # chain so the figcaption renders once, not once per branch.
                         caption_pool = html.escape(str(props.get("caption", "")))
-                        quoted_paths = ', '.join(f'"{p}"' for p in resolved_paths)
-                        set_macro = f'<<set _img to either({quoted_paths})>>'
-                        media_tag_pool = (
-                            f'<img @src="_img" alt="{alt_pool}" loading="lazy" decoding="async" '
-                            f'style="max-width:100%;max-height:70vh;object-fit:contain;height:auto;border-radius:8px;" />'
-                        )
                         if caption_pool:
                             html_parts.append(
-                                f'{set_macro}<figure style="margin:10px 0;">{media_tag_pool}'
+                                f'<figure style="margin:10px 0;">{pool_html}'
                                 f'<figcaption style="font-size:12px;color:#6b7280;margin-top:4px;">{caption_pool}</figcaption>'
                                 f'</figure>'
                             )
                         else:
-                            html_parts.append(f'{set_macro}{media_tag_pool}')
+                            html_parts.append(pool_html)
                         continue
 
                     image_file = props.get("file")  # File-based image
@@ -14135,6 +14365,41 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     video_file = props.get("file")       # File-based video
                     video_url = props.get("url")         # URL-based video
                     video_desc = props.get("description", "")  # Description for debug
+
+                    # ─── Clip pool: CYCLES through the clips ────────────────────
+                    # One description and one `search_queries` set covering N
+                    # clips, so find-media searches ONCE and keeps the gate-
+                    # survivors it already paid to judge. `pool_dir` (a folder)
+                    # wins over `files` wins over `file`.
+                    #
+                    # This is why `block_pool` of N video blocks is the wrong shape
+                    # for replay variety: N blocks means N descriptions and N
+                    # searches for a single beat.
+                    pool_spec = block_media_pool(props)
+                    video_files = props.get("files")
+
+                    if pool_spec is not None:
+                        resolved = self._resolve_pool_dir(pool_spec["dir"])
+                        pool_html = self._render_media_pool(
+                            props, resolved, 'video', pool_dir=pool_spec["dir"]
+                        )
+                        label = f'{pool_spec["dir"]}/ (0 of {pool_spec["target"]})'
+                    elif isinstance(video_files, list) and len(video_files) > 0 and all(isinstance(f, str) for f in video_files):
+                        pool_html = self._render_media_pool(props, video_files, 'video')
+                        label = f'{str(video_files[0]).replace(chr(92), "/")} ({len(video_files)} files)'
+                    else:
+                        pool_html = None
+                        label = None
+
+                    if label is not None:
+                        if pool_html is None:
+                            placeholder = self._pool_missing_placeholder(props, label, 'video')
+                            if placeholder:
+                                html_parts.append(placeholder)
+                            continue
+
+                        html_parts.append(pool_html)
+                        continue
 
                     media_src = None
                     is_video_format = True  # Default to video tag
@@ -16188,6 +16453,22 @@ if (clothingMsg) {
 
 """
 
+        # Sidebar funding button. Spliced in as its own variable rather than left in
+        # the surrounding literal, because that literal is a PLAIN string and the one
+        # that follows it (the <style> block) carries ~300 unescaped braces — the
+        # <<versionFooter>> widget is composed the same way, a few lines down, for the
+        # same reason. Everything but the href is fixed markup.
+        patreon_button_widget = f"""<<widget "patreonButton">>
+<div id="patreon-btn-widget">
+  <a href="{self._resolve_support_url()}" target="_blank" rel="noopener" class="patreon-link">
+    <svg class="patreon-icon" viewBox="0 0 24 24" width="16" height="16">
+      <path fill="currentColor" d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/>
+    </svg>
+    Support Us
+  </a>
+</div>
+<</widget>>"""
+
         return info_nav_script + dev_script_passage + time_widgets_start + dev_indicator + review_button + dev_jumps_widget + time_display_widget + sidebar_items_widget + phone_widget + player_portrait_widget + active_modifiers_widget + counter_widgets + player_traits_widget + npc_traits_widget + """
 
 <<widget "playerFlags">>
@@ -16258,16 +16539,7 @@ if (clothingMsg) {
 <</if>>
 <</widget>>
 
-<<widget "patreonButton">>
-<div id="patreon-btn-widget">
-  <a href="https://www.patreon.com/cw/nutgames844" target="_blank" rel="noopener" class="patreon-link">
-    <svg class="patreon-icon" viewBox="0 0 24 24" width="16" height="16">
-      <path fill="currentColor" d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/>
-    </svg>
-    Support Us
-  </a>
-</div>
-<</widget>>
+""" + patreon_button_widget + """
 
 <<widget "flagsButton">>
 <div id="flags-btn-widget">
