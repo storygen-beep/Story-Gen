@@ -141,7 +141,8 @@ Each rule is a free-form dict (parsed `:1715-1735`):
 ### §2.5 — `[[canvases.nodes]]` body blocks + `exit_block`
 
 Block vocabulary (`canvases.nodes.blocks`, each `{type, …}`) — only these types are real: `paragraph`,
-`dialog` (`{type="dialog", npcId, content}`), `thought_bubble`, `image`/`video` (`{props.file}`) / `clip`
+`dialog` (`{type="dialog", npcId, content}`), `thought_bubble`, `image`/`video` (`{props.file}`, or
+`{props.files}` — a pool that CYCLES 1→2→3→1 for replay variety, on either type) / `clip`
 (`{props.clipId}` — a DB asset, NOT a file; full media shapes + the `search_queries` craft in
 `references/media.md`), `heading`, `group` (`{props.conditions, props.blocks}`), `block_pool`, `cascade`. A mistyped `type` does
 **NOT** ship silently: the importer **HARD-FAILS the build** on an unrecognized content block type, with a
@@ -451,6 +452,18 @@ enabled = true
 
 - **`[project]`** (`TemplateProject` `:43`): TOML key is **`id`** (stored internally as `slug`, read
   `:1473`) — not `slug`. `title`, `description`, `quests_engine` (`"v2"` enables `[[quest_cards]]`).
+  **The complete recognised set is nine keys, read at two sites** — the constructor (`:1597`) takes eight,
+  and `starting_canvas` is read separately (`:1773`). Nothing rejects an unknown `[project]` key: merge,
+  `--validate` and `package` all pass and the key is silently dropped, so a typo here fails *silently*.
+  - `starting_canvas` — the canvas the game opens on (`:1773`).
+  - `version` + `release_date` — the sidebar footer (`v2.py:15348`). Both empty ⇒ no footer.
+  - `support_url` — the funding link, used at **three** sites: the sidebar `<<patreonButton>>` and both
+    intro/age-gate links. Unset ⇒ `v2.DEFAULT_SUPPORT_URL`. Must start `http://` or `https://` —
+    `validate()` hard-fails otherwise, because the value lands in an `href` on every passage.
+  - `studio_name` — the "Developed by **X**" credit under the age gate. Unset ⇒ `v2.DEFAULT_STUDIO_NAME`.
+  Both identity keys fall back **independently**, and the fallback lives generator-side on purpose:
+  `build_guide.py` reads `[project]` straight from the TOML, so an importer-side default would let the
+  guide PDF and the sidebar disagree.
 - **`[engine.daily_tick]`** (`TemplateDailyTick` `:415`): `flagEffects` (clear daily-cooldown flags) +
   `traitEffects` (per-day deltas, each a §4.1 effect with optional per-entry `conditions`). This is where you
   author the arousal climb / hygiene decay — **the engine hardcodes no daily passive**. (`trait-catalog.md`.)

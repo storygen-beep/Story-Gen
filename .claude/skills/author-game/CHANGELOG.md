@@ -13,6 +13,145 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-07-31 (later)
+- **Documented the optional media-block `id`** (`references/media.md` §1). **Why:** a slot's
+  stocked options and its approve/disapprove verdict are both filed under a *string*, and by
+  default that string is the declared path — so a tier retag or a pool conversion silently orphans
+  both. Measured live: **148 stocked options stranded** the first time a slot was converted to a
+  pool. An authored `id` becomes the key instead and doesn't move.
+  - **Taught as OPT-IN, deliberately.** ~560 media blocks exist repo-wide; untagged stays the
+    default and behaves exactly as before. The guidance is to tag what you expect to *edit* —
+    anything you plan to pool, anything whose tier is still settling, hero assets.
+  - **Warned that the id must be a real name, not `b3`-shaped.** The importer assigns every block
+    a positional fallback id of that form; it shifts when a block is inserted above, so keying a
+    shelf on one would be worse than keying on the path. The engine refuses them.
+  - Pointed at `manage.py check_shelves [--repair]` for a slot whose shelf was stocked before it
+    was tagged.
+
+## 2026-07-31
+- **Pools are declared as a FOLDER now — `pool_dir` + `pool`, replacing `files = [...]`**
+  (`references/media.md` §1 + §7 + cheat sheet, `references/toml-gotchas.md`).
+  **Why:** an explicit list forces the author to guess the count *before seeing a single clip*,
+  and every entry it can't fill sits on the missing list forever. A folder inverts that: the
+  contents play, so curation is adding/removing files in the review UI rather than editing TOML.
+  `pool = 4` survives as a **target for find-media, not a manifest** — the folder is the truth,
+  so 3 clips play a 3-cycle and the audit says "3 of 4" instead of a half-filled pool passing as
+  finished. Engine: `v2.py:11871` `_resolve_pool_dir`, `:11895` key-on-folder, `:14290` video branch.
+  - **The folder shape removes a silent bug rather than working around it.** Numbering *filenames*
+    (`oral_t5_1.webm`) pushes the `_tN` tier tag off the end of the stem, and tier detection is
+    `$`-anchored (`_(t[0-8]|base)$`, `apply_retags.py:36`) — explicit content would have gone
+    untagged and been routed as SFW. On a folder the tag stays last on the folder name. Documented
+    in `toml-gotchas.md` so nobody re-invents the numbered-filename version.
+  - **The cycle counter is keyed on the folder**, not the contents — so selecting/unselecting a
+    clip never resets a player's position mid-playthrough.
+  - **`files = [...]` demoted to legacy**, not removed: `the_long_summer_test` ships 30, and
+    precedence (`pool_dir` > `files` > `file`) is declared once in `apps/common/media_blocks.py`.
+- **Restructured §7 as three ordered GATES, and deleted the duplication.**
+  **Why:** the 07-30 pass stated the same facts 2–3× each across §1 and §7 (`"3–4"` 3×,
+  `"searches once"` 3×), and it taught *how many* before *whether*. §7 now asks, in order:
+  (1) **is it NSFW and on a repeatable canvas** — both, per LO; (2) **are the clips
+  interchangeable** under one description (the fillability gate); (3) **should it rotate or
+  escalate** (a `group` chain, not a pool). Sizing and cost come after. §1 keeps the block shape
+  plus one pointer.
+- **⚠️ Corrected two wrong numbers from the 07-30 entry below.**
+  - *"How many: 3–4, not a taste call"* — that was a **clip** figure (frame-strip survival
+    3-of-5 / 4-of-6) applied to stills as well, and stills are never stripped. It also
+    contradicted the only shipped precedent, whose image pools hold **5–11**. Moot now that the
+    count lives in `pool = N` rather than in the author's head, but the doctrine said something
+    false and the ledger should not preserve it.
+  - *"+320 MB"* — real arithmetic on an invented premise ("pool a third of a game"). Replaced
+    with the marginal figure: `vesper` averages **2.9 MB/clip** (380 MB / 113), so a 4-clip pool
+    costs **~8.7 MB** more than a single clip. Multiply by your own count.
+- **Wired the doctrine into where authors actually decide** (`references/beat-authoring.md` Step-7
+  `**Media:**` hook, `references/lanes.md` Lane 1 + Lane 3). **Why:** measured reachability before
+  this change — `beat-authoring.md` **0** mentions, `content-design.md` **0**, `SKILL.md` **0**,
+  `lanes.md` **1** (Lane 2 only), while `lanes.md:57` records Lane 3 as **~47%** of canvases. The
+  guidance existed only in the file consulted for block *shapes*, so an author following the
+  skill's own workflow authored a singular `file` every time and never met the question.
+
+## 2026-07-30
+- **Taught WHEN and WHERE to pool — the first pass only taught the mechanism**
+  (`references/media.md` §1 pointer, §7, cheat sheet). **Why:** the morning's rewrite shipped a single
+  line of usage guidance ("repeatable beats only"), which is a slogan, not doctrine — it left four real
+  decisions unmade and one claim wrong.
+  - **How many: 3–4, and it's not a taste call.** The author declares `files = [...]` *before*
+    find-media ever runs, and measured strip survival is **3-of-5 / 4-of-6**. Declaring 8 writes four
+    slots that will never fill and will read as unfinished work in every future audit.
+  - **Corrected "Cost: near zero"** → **free to FIND, expensive to SHIP**. True for search effort, false
+    for bytes: `vesper` is **380 MB / 113 clips / 2.9 MB avg** (measured `du`), so pooling a third of a
+    game that size at 4 entries adds ~**+320 MB** — near enough to double the download for a game
+    distributed as a zip. The original wording would have encouraged reflexive pooling.
+  - **"Repeatable" replaced by expected VIEW COUNT** as the axis. A beat hit three times does not earn
+    four clips — that's three files found, shipped and paid for so one can be seen once.
+  - **Interchangeability test added — it decides whether a pool is fillable at all.** All N entries must
+    satisfy the *same* `description`, so loose descriptions pool and tight ones can't. Grounded in the
+    measured `lab_finish_facial_t5` result: *"his hand gentle at her head"* → `pool_all_dead`, **24
+    candidates, all rejected**. A 4-entry pool there is 4× impossible, not 4× the variety.
+  - **Pool vs. variant chain framed as the real decision.** Rotation ≠ progression: a pool asserts the
+    entries are interchangeable and nothing changed but a counter. If the 4th viewing should differ
+    because *state* differs, that's a `group` chain. Called out as the more dangerous error because it
+    looks like it worked — it silently swaps character development for a slideshow.
+  - Noted the residual: a pool freezes the prose, so on a heavily-repeated beat the words become the
+    stale thing (→ N separate canvases, `lanes.md`).
+  - **Deliberately NOT added:** a ship-gate check for "declared N, filled 1" (silent degradation is
+    real but it's a different piece of work), and any new §. This is ~5 sentences into existing sections.
+- **Media pools rewritten: `files = [...]` works on `video` too, and pools CYCLE**
+  (`references/media.md` §1 + §7 + cheat sheet, `references/toml-gotchas.md`,
+  `references/lanes.md`, `references/engine-reference.md` block vocabulary).
+  **Why:** an engine change this day (`v2.py:11878` `_render_media_pool`, image branch `:14111`,
+  video branch `:14290`) made three of this skill's claims **false**:
+  1. *"The pool is IMAGE-ONLY, and it drops video SILENTLY"* (`media.md` §1, `toml-gotchas.md`) —
+     a `video` block now takes `files` and applies no format filter at all. An `image` pool still
+     refuses clips but now emits a `logger.warning` instead of vanishing unrendered/unrecorded.
+  2. *"To rotate CLIPS, use a `block_pool` of `video` blocks"* (`media.md` §1/§7,
+     `toml-gotchas.md`, `lanes.md:159`) — this is now the **wrong** advice, and expensively so:
+     N video children means N `description`s and N `search_queries` sets for one beat, i.e. **4×
+     the find-media cost** of a `files` pool for the same result. `block_pool` is retained and
+     re-scoped in the docs to what it is actually good at — varying **prose** (Lane-2 ambient
+     text) — and it deliberately stays random.
+  3. *"emits `either(...)`"* / random selection (`media.md` §1/§7) — pools now **cycle**
+     (1→2→3→1) off a counter in `$game_state.media_cycle`. Random was the bug, not the feature:
+     over four clips `random()` repeats back-to-back 25% of the time, which is exactly the
+     staleness a pool exists to remove.
+  Added, because the skill never taught it: **where** pools belong (repeatable beats only —
+  activities, ambients, sex loops; never a one-shot capstone, which plays once), the
+  `<stem>_1 … <stem>_N` naming already shipping in `the_long_summer_test`, and the cost argument
+  (one description + one query set ⇒ one find-media search; measured strip survival is 3-of-5 /
+  4-of-6, so a slot already ends with 3–4 clean clips that used to be discarded).
+  **Also corrected** the stale `v2.py` line refs in the passages touched (`image` handler was
+  cited as `:13455-13659`, now `:14110`; `video` as `:13908+`, now `:14285`).
+  **Verified:** 28 new v2-targeted unit tests + a real Tweego build + a headless Chromium probe
+  showing `1,2,3,1,2,3,1,2` across eight visits; `vesper` rebuilt **byte-identical** at 2,154,638,
+  so the feature is inert for every game that doesn't opt in.
+
+## 2026-07-29
+- **Documented the studio-identity keys and closed a recurring `[project]` drift**
+  (`references/engine-reference.md` §8 + `references/ship-gate.md` §3 and the release checklist).
+  **Why:** an engine change this session made the funding link and studio credit data
+  (`[project] support_url` / `studio_name`, defaulting to the old literals so all 14 existing games build
+  byte-identical). But §8 was the *third* instance of the same bug class, not a one-off: it listed only
+  `id`/`title`/`description`/`quests_engine`, and `version`, `release_date` (shipped 7-16) and
+  `starting_canvas` had never been added. Since `SKILL.md:76` makes §8 binding ("never invent a field the
+  engine lacks"), a key missing from §8 is a key the skill actively tells authors *not* to use — and
+  nothing rejects an unknown `[project]` key, so the failure is silent at merge, `--validate` and package
+  alike. Fixed all of them: §8 now states the full nine-key set, both read sites (`:1597` constructor +
+  `:1773` for `starting_canvas`), the silent-drop warning, and why the identity fallback lives
+  generator-side (`build_guide.py` reads `[project]` raw, so an importer-side default would let the guide
+  PDF and the sidebar disagree). ship-gate §3's "We don't monetise, so the choice is easy" was made false
+  by the same engine change — reworded to the distinction that actually carries the argument (we take
+  support, we don't sell access), so the cheat-page-is-free conclusion still stands on its own reasoning.
+  Added a release-checklist item to verify the link's host and its 3-site count in the built HTML, with
+  the reason it matters (re-hosting portals strip page credit but copy the file verbatim, so the in-build
+  link is often the only surviving funnel). **Verified:** rebuilt Vesper before and after the engine change
+  — both `index.html` hash `1c1a989f…`, identical to the shipped file, so the doctrine describes a change
+  that provably moves zero bytes for games that don't author the keys; 24 new tests
+  (`apps/game_generation/tests/test_support_url.py`) + 61 in `apps/game_generation/tests/` green; the 4
+  failures in `apps/projects/tests.py` are pre-existing V1-generator tests, confirmed by re-running them
+  against a stashed baseline. Live-checked the escaping in Chrome (a `&` in the URL round-trips to one real
+  `&` and two parsed query params — the `&amp;amp;` in the source bytes is the normal SugarCube
+  source-byte behaviour, not a bug). Note `generators/v1.py` keeps the old literals by design — it is
+  frozen, so `--gen-version v1` and the DRF preview views still emit the hardcoded URL.
+
 ## 2026-07-28
 - **Rewrote the paid-build media doctrine to SELF-CONTAINED** (`references/media.md` §3 + `references/beat-authoring.md`)
   and **added a git-tracked deploy check to the ship gate** (`references/ship-gate.md` §4). **Why:** both files

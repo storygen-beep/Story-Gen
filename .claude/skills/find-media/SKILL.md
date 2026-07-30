@@ -1,6 +1,6 @@
 ---
 name: find-media
-description: Find missing media (images and animated clips) for a story game AND stock a shelf of alternates for the human to pick from. Enumerates missing files from the game's TOML plus the game-review API, detects per-item content rating from the `_tN` tier suffix, hunts the vocabulary the beat is actually named by, searches by driving the user's own Chrome (Google Images — the only retrieval route), extracts original CDN urls with one regex, stocks 6+ candidate options per slot in the media-finder options store, frame-strip verifies animated finalists, and installs one best-guess pick via the game's dev API so the game always renders. Use whenever the user says "find media for <game>", "download missing media", "populate media", "missing media", "/find-media", or when a game TOML has media blocks whose files don't exist on disk. Also use to resume an interrupted run, to refetch a slot whose installed pick the user rejected (a refetch stocks the fresh candidates, then prunes the stale ones), or to audit the media a game already has.
+description: Find missing media (images and animated clips) for a story game AND stock a shelf of alternates for the human to pick from. Enumerates missing files from the game's TOML plus the game-review API, detects per-item content rating from the `_tN` tier suffix, hunts the vocabulary the beat is actually named by, searches by driving the user's own Chrome (Google Images — the only retrieval route), extracts original CDN urls with one regex, stocks 6+ candidate options per slot in the media-finder options store, frame-strip verifies animated finalists, and installs one best-guess pick via the game's dev API so the game always renders — or, for a POOL slot (`pool_dir` — a folder the engine cycles one clip per visit), one gate-surviving pick per target. Use whenever the user says "find media for <game>", "download missing media", "populate media", "missing media", "/find-media", or when a game TOML has media blocks whose files don't exist on disk. Also use to resume an interrupted run, to refetch a slot whose installed pick the user rejected (a refetch stocks the fresh candidates, then prunes the stale ones), or to audit the media a game already has.
 ---
 
 # find-media
@@ -28,6 +28,39 @@ Every worked slot ends with **both**:
 Six is a floor, not a target. A slot with 3 options is a rubber stamp with extra steps.
 NSFW slots stock 12 because the frame strip kills roughly half (measured: 3 of 5 and 4 of
 6, two independent rounds). Per-mode counts live in one place — §Mode.
+
+### A POOL slot wants N files, not one
+
+A media block can declare a **pool** — `pool_dir = "sex/brothel_oral_t5"` + `pool = 4`
+instead of `file`. The pool is a **folder**: everything inside it plays, and the engine
+**cycles** it — visit 1 shows clip 1, visit 2 clip 2, wrapping. Repeatable NSFW beats use
+this so the player isn't looking at the same clip forever.
+
+**The slot is the FOLDER, not the files.** One row on the missing list, one shelf, one
+review verdict, all keyed by `pool_dir` — the same string the picker opens with. It arrives
+as a single item carrying `pool_dir`, `pool_target` and `pool_count`. The filenames inside
+are invented at install time and mean nothing; never key anything on them, or an unselect
+re-keys the shelf and orphans the verdict.
+
+`pool = 4` is a **target**, not a manifest. The folder is the truth, so a pool that ends at
+3 renders a 3-cycle and audits as "3 of 4" — a real state, not a failure.
+
+One `description` and one `search_queries` set cover the whole folder, so a pool costs
+**one search and one judging pass**. You are not doing N times the work — you are keeping
+work you already did: today the top-ranked survivor installs and ranks 2–4 go on the shelf
+and are never used. A pool spends them.
+
+**Install every survivor that PASSES the gate, up to `pool_target` — never "the top N
+regardless."** Rank 4 of 6 may be the one that scraped past on a technicality; three good
+clips beat four where one is visibly wrong, and the player sees that fourth one every fourth
+visit forever. So a 4-target pool legitimately finishes at 4, 3, or 1. Report which.
+
+Everything else is unchanged: still ≥6 stocked (on the pool's own shelf), still frame-strip
+every animated install, still a best guess and not a verdict.
+
+> **Legacy:** `files = ["a.webm", "b.webm"]` — an explicit list, still supported. There each
+> declared path IS its own slot with its own shelf. `the_long_summer_test` ships 30 of these.
+> Anything new should use `pool_dir`.
 
 You may never: auto-pick silently, present a single candidate, install an **animated** file
 you have not frame-stripped, or drop a candidate for any reason other than a named gate
@@ -115,17 +148,37 @@ import re, sys, pathlib
 game = sys.argv[1]
 root = pathlib.Path("games") / game
 toml = sorted(root.glob("toml_phases/*_final_game.toml"))[-1]
-refs = set(re.findall(r'(?:file|image|video|nav_image)\s*=\s*"([^"]+)"', toml.read_text()))
+src = toml.read_text()
+# Singular keys: file = "…", image = "…", video = "…", nav_image = "…"
+refs = set(re.findall(r'(?:file|image|video|nav_image)\s*=\s*"([^"]+)"', src))
+# POOLS: files = ["a.webm", "b.webm", …] — N separate slots, one per entry.
+# The singular regex CANNOT see these (`file` then hits `s`, not `=`), so a game
+# whose repeatable beats all use pools audits as "0 missing" while shipping blank.
+for arr in re.findall(r'files\s*=\s*\[([^\]]*)\]', src):
+    refs.update(re.findall(r'"([^"]+)"', arr))
+# FOLDER pools: pool_dir = "sex/oral_t5" — the slot is the folder, and it is
+# unfilled only when the folder holds nothing. Reported separately below.
+pools = re.findall(r'pool_dir\s*=\s*"([^"]+)"', src)
 have = {p.relative_to(root / "videos").with_suffix("").as_posix()
         for p in (root / "videos").rglob("*") if p.is_file()}
 missing = sorted(r for r in refs if pathlib.PurePosixPath(r).with_suffix("").as_posix() not in have)
-print(f"{toml.name}: {len(refs)} refs, {len(missing)} missing")
-print("\n".join(missing))
+empty_pools = sorted(d for d in set(pools)
+                     if not any(h.startswith(d.rstrip("/") + "/") for h in have))
+print(f"{toml.name}: {len(refs)} refs, {len(missing)} missing; "
+      f"{len(set(pools))} pools, {len(empty_pools)} empty")
+print("\n".join(missing + [d + "/  (empty pool)" for d in empty_pools]))
 PY
 ```
 
 **Use that exact key set.** A bare `image=` regex finds 38 of 202 refs on `vesper` —
 it misses `file=`, `video=` and `nav_image=`, which is most of the game.
+
+**And keep the `files` pass.** A pool declares N paths under `files = [...]` and no singular
+`file`, so the first regex returns **nothing** for it — measured, not assumed. That blind spot
+is why ~30 image pools in `the_long_summer_test` sat unfilled for months while every audit
+said "0 missing". The API-side enumerators had the same bug and were fixed the same day
+(`apps/common/media_blocks.py::block_media_paths`, used by `api/v1/game_review.py` and
+`manage.py check_media`) — this walk is your independent check on them, so it must see pools too.
 
 Anything this pass finds gets a scope brief and goes through the same phases as an
 API-listed item. Record `discovered_by: toml_walker` in the brief so a later audit can tell
@@ -298,8 +351,16 @@ POST /api/v1/dev/media-finder/grab           {game, file, url, source}
 
 Ledger: `games/<game>/.find-media/media_options.json`.
 
-- **`file` is the slot's TOML-declared path, character for character** — it is the key the
-  review UI reads. A typo stocks an orphan slot nobody opens.
+- **⚠️ The shelf key is `slot_key`, which is NOT always the path.** Every item from
+  `game-review/load` carries one. It equals `file` for an untagged slot (nearly all of
+  them), but a block that authored an `id` keys its shelf and its verdict on that
+  instead — so the ledgers survive the path moving (a tier retag, a pool conversion).
+  **Send both**: `file` says where the bytes go, `slot_key` says which shelf you are
+  touching. Pass `slot_key` on `options/*`, on `grab`, and on a review POST. Omit it and
+  it falls back to `file`, which is correct only for untagged slots. Use the item's own
+  `slot_key` verbatim; never reconstruct it.
+- **`file` is the slot's TOML-declared path, character for character** — it decides where a
+  `grab` writes. A typo puts media somewhere nothing will ever find.
 - **`game` rides in the BODY on every media-finder POST**, and in the **QUERY STRING** on
   `options/list` (it's a GET) and on every media-review endpoint. It is *not* a clean
   "finder = body, review = query" split — `options/list` is the exception that breaks that
@@ -441,6 +502,35 @@ Then, in order:
 Nothing gets stocked here. The pick and every runner-up went onto the shelf back in STOCK,
 and the store dedupes by URL — there is no second stocking pass, and an INSTALL that thinks
 it needs one has skipped STOCK.
+
+**Pool slots: pass `pool_dir` and call `grab` once per survivor.** With `pool_dir` set, `grab`
+**adds** to the folder instead of replacing the slot — it invents a unique filename from the
+source url and skips the same-stem delete that a single-slot install does:
+
+```bash
+for u in "<survivor-1-url>" "<survivor-2-url>" "<survivor-3-url>"; do
+  curl -sS -X POST http://localhost:8000/api/v1/dev/media-finder/grab \
+    -H 'Content-Type: application/json' \
+    -d "{\"game\":\"<game>\",\"file\":\"sex/brothel_oral_t5\",\"pool_dir\":\"sex/brothel_oral_t5\",\"url\":\"$u\",\"source\":\"\"}"
+done
+```
+
+⚠️ **Omit `pool_dir` and the install path deletes every same-stem file in the target folder** —
+installing clip 2 would wipe clip 1, silently. Guarded by
+`tests/test_media_finder_pools.py::test_two_pool_installs_coexist`.
+
+Re-grabbing the same url replaces that clip rather than duplicating it (the filename is derived
+from the source), so a refetch stays idempotent.
+
+**Stop when the survivors stop, not when the target does** (§The deliverable contract). Every
+installed clip runs the same per-file gates: fetch sanity, `tier_format_check.py`, frame strip
+if animated, `dedup_tracker.py --record`. A pool is exactly where an unstripped clip would ride
+in behind a good one.
+
+Two more routes exist for the human's curation pass, which you do not normally call:
+`GET pool/list?game=&dir=` (what's currently in the folder) and
+`POST pool/unselect {game, dir, filename}` (move one clip out; it returns to the shelf as an
+`origin: "previous"` option).
 
 ---
 

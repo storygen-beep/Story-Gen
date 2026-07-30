@@ -23,9 +23,11 @@ only once that succeeds does the file currently in the slot get copied into
 the slot exactly as it was.
 """
 
+import hashlib
 import ipaddress
 import json
 import os
+import re
 import shutil
 import time
 from datetime import datetime, timezone
@@ -132,6 +134,9 @@ def _previous_dir(game_dir: Path) -> Path:
 # Suffixes that need a <video> element in the picker; .gif previews as an <img>,
 # matching how the capture extension labels its own captures.
 _VIDEO_SUFFIXES = {".webm", ".mp4", ".mov", ".mkv"}
+# Everything else a pool folder may legitimately hold. Kept separate from
+# _VIDEO_SUFFIXES because that set drives the <video>-vs-<img> choice.
+_IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp", ".svg"}
 
 # Media CDNs that reject a request lacking a full browser UA *and* a matching site
 # Referer. phncdn answers 410/470 to a bare UA, which lands as a 0-byte file or a
@@ -207,6 +212,54 @@ def _write_options(game_dir: Path, data: dict) -> None:
     with tmp.open("w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
     os.replace(tmp, path_)
+
+
+def _clean_pool_dir(raw: str) -> str:
+    """Normalise a pool folder to a games-relative path, or '' if unusable.
+
+    Deliberately NOT `parse_scene_path`: that sanitizes every segment with
+    `[^a-zA-Z0-9_-] -> _` and strips a trailing media extension, so a real folder
+    name would silently become one that does not exist — a permanently-missing
+    pool with no error anywhere. Here we reject bad input instead of mangling it.
+    """
+    if not isinstance(raw, str):
+        return ""
+    rel = raw.replace("\\", "/").strip().strip("/")
+    if not rel:
+        return ""
+    parts = [p for p in rel.split("/") if p]
+    if any(p in (".", "..") for p in parts):
+        return ""
+    if parts and parts[0] == "videos":
+        parts = parts[1:]
+    return "/".join(parts)
+
+
+def _pool_member_stem(source: str) -> str:
+    """A stable, collision-resistant filename stem for one clip inside a pool.
+
+    Derived from the source URL so re-grabbing the SAME source is idempotent
+    rather than piling up near-duplicates. Members are peers with no ordering
+    meaning, so the name only has to be unique and stable — the review UI is
+    where a human sees them, not the filename.
+    """
+    digest = hashlib.md5((source or "").encode("utf-8")).hexdigest()[:10]
+    return f"c{digest}"
+
+
+def _pool_members(pool_path: Path) -> list:
+    """Every media file inside a pool folder, natural-sorted (clip_2 < clip_10)."""
+    if not pool_path.is_dir():
+        return []
+
+    def natural(name: str):
+        return [int(t) if t.isdigit() else t.lower() for t in re.split(r"(\d+)", name)]
+
+    out = []
+    for f in sorted(pool_path.iterdir(), key=lambda p: natural(p.name)):
+        if f.is_file() and f.suffix.lower() in (_VIDEO_SUFFIXES | _IMAGE_SUFFIXES):
+            out.append(f)
+    return out
 
 
 def _add_option(
@@ -326,7 +379,10 @@ def options_add(request):
 
     body = _parse_body(request)
     game = body.get("game", "")
-    file_ = body.get("file", "")
+    # The shelf is keyed by `slot_key` — the slot's STABLE identity. It defaults
+    # to `file`, so an untagged slot behaves exactly as before; a slot whose block
+    # authored an `id` keeps its shelf when its path moves (pool conversion, retag).
+    file_ = body.get("slot_key") or body.get("file", "")
     url = body.get("url", "")
     type_ = (body.get("type") or "image").lower()
     media_kind = (body.get("media_kind") or "img").lower()
@@ -369,7 +425,10 @@ def options_clear(request):
 
     body = _parse_body(request)
     game = body.get("game", "")
-    file_ = body.get("file", "")
+    # The shelf is keyed by `slot_key` — the slot's STABLE identity. It defaults
+    # to `file`, so an untagged slot behaves exactly as before; a slot whose block
+    # authored an `id` keeps its shelf when its path moves (pool conversion, retag).
+    file_ = body.get("slot_key") or body.get("file", "")
     drop_all = bool(body.get("all"))
     before = (body.get("before") or "").strip()
 
@@ -402,7 +461,10 @@ def options_clear(request):
 def options_list(request):
     """GET options/list?game=&file= — the collected option URLs for one slot."""
     game = request.GET.get("game", "")
-    file_ = request.GET.get("file", "")
+    # The shelf is keyed by `slot_key` — the slot's STABLE identity. It defaults
+    # to `file`, so an untagged slot behaves exactly as before; a slot whose block
+    # authored an `id` keeps its shelf when its path moves (pool conversion, retag).
+    file_ = request.GET.get("slot_key") or request.GET.get("file", "")
     game_dir = _safe_game_dir(game)
     if game_dir is None:
         return JsonResponse({"error": "Invalid or missing game"}, status=400)
@@ -418,7 +480,10 @@ def options_remove(request):
 
     body = _parse_body(request)
     game = body.get("game", "")
-    file_ = body.get("file", "")
+    # The shelf is keyed by `slot_key` — the slot's STABLE identity. It defaults
+    # to `file`, so an untagged slot behaves exactly as before; a slot whose block
+    # authored an `id` keeps its shelf when its path moves (pool conversion, retag).
+    file_ = body.get("slot_key") or body.get("file", "")
     url = body.get("url", "")
     game_dir = _safe_game_dir(game)
     if game_dir is None or not game_dir.is_dir():
@@ -451,10 +516,25 @@ def grab(request):
 
     body = _parse_body(request)
     game = body.get("game", "")
+    # ⚠️ TWO DIFFERENT STRINGS, and conflating them corrupts a game.
+    #
+    #   file_     — the slot's declared PATH. Decides WHERE THE BYTES GO
+    #               (`parse_scene_path` below). Must stay a real path.
+    #   slot_key_ — the slot's stable IDENTITY. Decides which SHELF and which
+    #               VERDICT this install touches.
+    #
+    # They are the same string for an untagged slot, which is nearly all of them.
+    # They differ once a block authors an `id`: then `slot_key_` is e.g.
+    # "renner_oral" while the bytes still belong at "sex/renner_oral_t5.webm".
+    # Key the write on the id and the file lands at videos/renner_oral.gif.
     file_ = body.get("file", "")
+    slot_key_ = body.get("slot_key") or file_
     url = body.get("url", "")
     local_path = body.get("local_path", "")
     source = body.get("source", "")
+    # A pool install ADDS a clip to a folder instead of REPLACING a single slot.
+    # `file` is then the folder, and the filename is invented here.
+    pool_dir = _clean_pool_dir(body.get("pool_dir", ""))
 
     if not game or not file_ or not (url or local_path):
         return JsonResponse(
@@ -464,17 +544,25 @@ def grab(request):
     if not local_path and urlparse(url).scheme not in ("http", "https"):
         return JsonResponse({"error": "Invalid URL scheme"}, status=400)
 
-    game_dir = GAMES_ROOT / game
-    if not game_dir.is_dir():
+    game_dir = _safe_game_dir(game)
+    if game_dir is None or not game_dir.is_dir():
         return JsonResponse({"error": f"Game '{game}' not found"}, status=404)
 
-    # file -> (subfolder, stem); collapse a leading videos/ so we never double it.
-    subfolder, filename_base = parse_scene_path(file_)
-    if subfolder.startswith("videos/"):
-        subfolder = subfolder[len("videos/"):]
-    elif subfolder == "videos":
-        subfolder = ""
-    output_dir = (game_dir / "videos" / subfolder) if subfolder else (game_dir / "videos")
+    if pool_dir:
+        # NEVER route a pool_dir through parse_scene_path: it sanitizes every
+        # segment with [^a-zA-Z0-9_-] -> "_" and strips a trailing media
+        # extension, so a folder name would silently become one that does not
+        # exist on disk — a permanently-missing pool with no error anywhere.
+        output_dir = game_dir / "videos" / pool_dir
+        filename_base = None  # invented below, once the extension is known
+    else:
+        # file -> (subfolder, stem); collapse a leading videos/ so we never double it.
+        subfolder, filename_base = parse_scene_path(file_)
+        if subfolder.startswith("videos/"):
+            subfolder = subfolder[len("videos/"):]
+        elif subfolder == "videos":
+            subfolder = ""
+        output_dir = (game_dir / "videos" / subfolder) if subfolder else (game_dir / "videos")
     if not _safe_path(GAMES_ROOT, output_dir):
         return JsonResponse({"error": "Invalid path"}, status=400)
 
@@ -515,6 +603,11 @@ def grab(request):
             ext = "jpg"
 
     output_dir.mkdir(parents=True, exist_ok=True)
+    if pool_dir:
+        # Every clip in a pool coexists, so each needs a name of its own. The stem
+        # is derived from the SOURCE, which makes a refetch of the same url
+        # idempotent (it replaces) while a different url lands beside it.
+        filename_base = _pool_member_stem(url or local_path)
     output_path = output_dir / f"{filename_base}.{ext}"
 
     # Fetch to a temp file FIRST. Until this succeeds the slot is not touched, so a
@@ -545,22 +638,42 @@ def grab(request):
         tmp_path.unlink(missing_ok=True)
         return JsonResponse({"success": False, "error": error}, status=400)
 
-    # The replacement exists. Demote the incumbent to an option, THEN clear the slot
-    # (any extension, so the generator never sees an orphan it can't match).
-    preserved = _preserve_current_as_option(
-        game, game_dir, file_, output_dir, filename_base
-    )
-    for existing in output_dir.iterdir():
-        if existing.is_file() and existing.stem == filename_base:
-            existing.unlink()
-    os.replace(tmp_path, output_path)
+    preserved: list = []
+    if pool_dir:
+        # ⚠️ A pool install ADDS; it must never run the replace path below.
+        # There is no incumbent to demote (every clip in the folder is a peer),
+        # and that path's same-stem delete loop would wipe a SIBLING clip —
+        # installing clip 2 would silently delete clip 1.
+        #
+        # The one same-stem file we DO clear is this url's own earlier download
+        # under a different extension (the stem is url-derived, so nothing else
+        # can collide with it). Without this a re-grab that resolves .webm where
+        # it once resolved .gif would leave both, and the pool would play the
+        # same clip twice.
+        for existing in output_dir.iterdir():
+            if existing.is_file() and existing.stem == filename_base and existing != output_path:
+                existing.unlink()
+        os.replace(tmp_path, output_path)
+    else:
+        # The replacement exists. Demote the incumbent to an option, THEN clear the slot
+        # (any extension, so the generator never sees an orphan it can't match).
+        preserved = _preserve_current_as_option(
+            game, game_dir, slot_key_, output_dir, filename_base
+        )
+        for existing in output_dir.iterdir():
+            if existing.is_file() and existing.stem == filename_base:
+                existing.unlink()
+        os.replace(tmp_path, output_path)
 
-    # The option just consumed is no longer an alternative, and the slot now holds
-    # bytes nobody has judged — so the old verdict must not carry over.
-    _drop_option(game_dir, game, file_, url=url)
-    _clear_review_status(
-        game_dir, game, file_, note=f"replaced via finder {datetime.now(timezone.utc).date()}"
-    )
+    # The option just consumed is no longer an alternative.
+    _drop_option(game_dir, game, slot_key_, url=url)
+    # A single slot now holds bytes nobody has judged, so its old verdict must not
+    # carry over. A POOL keeps its verdict: adding a fourth clip does not un-judge
+    # the three already approved.
+    if not pool_dir:
+        _clear_review_status(
+            game_dir, game, slot_key_, note=f"replaced via finder {datetime.now(timezone.utc).date()}"
+        )
 
     return JsonResponse(
         {
@@ -650,6 +763,99 @@ def proxy(request):
 
 
 # =============================================================================
+# Pool folders — the SELECTED half of the picker
+# =============================================================================
+#
+# A pool block names a folder; everything inside it plays, cycling one clip per
+# visit. So "selected" is not a field anywhere — it is simply "the file is in the
+# folder". That makes select/unselect a move, and it means there is no second
+# source of truth to drift out of sync with the build.
+
+
+@require_GET
+def pool_list(request):
+    """GET ?game=&dir= → the clips currently IN a pool folder (i.e. selected).
+
+    Reads `videos/`, never `output/`: the packager wipes and regenerates output/,
+    so listing from there would show contents that vanish on the next build.
+    """
+    game = request.GET.get("game", "")
+    pool_dir = _clean_pool_dir(request.GET.get("dir", ""))
+    game_dir = _safe_game_dir(game)
+    if game_dir is None or not pool_dir:
+        return JsonResponse({"error": "game and dir are required"}, status=400)
+
+    pool_path = game_dir / "videos" / pool_dir
+    if not _safe_path(GAMES_ROOT, pool_path):
+        return JsonResponse({"error": "Invalid path"}, status=400)
+
+    items = []
+    for f in _pool_members(pool_path):
+        rel = str(f.relative_to(game_dir))
+        items.append({
+            "filename": f.name,
+            "url": f"/games/{game}/{rel}",
+            "media_kind": "video" if f.suffix.lower() in _VIDEO_SUFFIXES else "img",
+            "bytes": f.stat().st_size,
+        })
+    return JsonResponse({"game": game, "dir": pool_dir, "items": items, "count": len(items)})
+
+
+@csrf_exempt
+def pool_unselect(request):
+    """POST {game, dir, filename} → move one clip OUT of the pool folder.
+
+    The clip stops playing immediately (the folder is the truth) and reappears on
+    the shelf as an `origin: "previous"` option, so the decision is reversible in
+    one click. This is `_preserve_current_as_option` narrowed to a single named
+    file and made a MOVE rather than a copy.
+    """
+    if request.method != "POST":
+        return JsonResponse({"error": "Method not allowed"}, status=405)
+
+    body = _parse_body(request)
+    game = body.get("game", "")
+    pool_dir = _clean_pool_dir(body.get("dir", ""))
+    filename = str(body.get("filename", "") or "").strip()
+
+    game_dir = _safe_game_dir(game)
+    if game_dir is None or not pool_dir or not filename:
+        return JsonResponse({"error": "game, dir and filename are required"}, status=400)
+    # A filename is exactly one path segment — never a traversal.
+    if "/" in filename or "\\" in filename or filename in (".", ".."):
+        return JsonResponse({"error": "Invalid filename"}, status=400)
+
+    src = game_dir / "videos" / pool_dir / filename
+    if not _safe_path(GAMES_ROOT, src) or not src.is_file():
+        return JsonResponse({"error": "Not found in pool"}, status=404)
+
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+    prev_dir = _previous_dir(game_dir)
+    prev_dir.mkdir(parents=True, exist_ok=True)
+    dest = prev_dir / f"{src.stem}-{stamp}{src.suffix}"
+    try:
+        shutil.move(str(src), str(dest))
+    except Exception as exc:  # noqa: BLE001 - surfaced to the caller as-is
+        return JsonResponse({"error": f"move failed: {exc}"}, status=500)
+
+    rel = str(dest.relative_to(GAMES_ROOT))
+    is_video = dest.suffix.lower() in _VIDEO_SUFFIXES
+    # Re-shelve it keyed by the POOL — the same key the picker and the review
+    # ledger use — so it shows up as an option for this pool, not an orphan.
+    _add_option(
+        game_dir,
+        game,
+        pool_dir,
+        url=f"/games/{rel}",  # same-origin; the picker serves it without the proxy
+        type_="video" if is_video else "image",
+        media_kind="video" if is_video else "img",
+        local_path=rel,
+        origin="previous",
+    )
+    return JsonResponse({"success": True, "moved_to": rel})
+
+
+# =============================================================================
 # URL patterns
 # =============================================================================
 urlpatterns = [
@@ -657,6 +863,8 @@ urlpatterns = [
     path("options/list", options_list, name="media_finder_options_list"),
     path("options/remove", options_remove, name="media_finder_options_remove"),
     path("options/clear", options_clear, name="media_finder_options_clear"),
+    path("pool/list", pool_list, name="media_finder_pool_list"),
+    path("pool/unselect", pool_unselect, name="media_finder_pool_unselect"),
     path("grab", grab, name="media_finder_grab"),
     path("proxy", proxy, name="media_finder_proxy"),
 ]

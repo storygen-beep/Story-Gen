@@ -174,7 +174,8 @@ def _enumerate(game: str, game_dir: Path) -> dict | None:
                 item["media_url"] = f"/games/{quote(game)}/{quote(item['serve_path'])}"
 
             # merge saved review (keyed by the declared file path)
-            rev = reviews.get(item.get("file"), {})
+            # Read the verdict under the same key it was written with.
+            rev = reviews.get(item.get("slot_key") or item.get("file"), {})
             item["status"] = rev.get("status")  # "approved" | "disapproved" | None
             item["note"] = rev.get("note", "")
 
@@ -251,7 +252,10 @@ def post_review(request):
     except Exception:
         return JsonResponse({"error": "Invalid JSON body"}, status=400)
 
-    file_ = body.get("file")
+    # Verdicts file under `slot_key` — the slot's STABLE identity — defaulting to
+    # `file` so an untagged slot is unchanged. A tagged slot keeps its verdict when
+    # its path moves (pool conversion, tier retag).
+    file_ = body.get("slot_key") or body.get("file")
     if not file_:
         return JsonResponse({"error": "Missing 'file'"}, status=400)
     status = body.get("status")

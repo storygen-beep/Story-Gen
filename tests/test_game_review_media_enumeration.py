@@ -9,6 +9,7 @@ content without art — sex-loop finishers (group), opening/first-time sex
 """
 
 from api.v1.game_review import _iter_media_blocks, _extract_missing_media
+from apps.common.media_blocks import block_media_paths, block_media_pool
 
 
 def _files(blocks):
@@ -89,6 +90,187 @@ def test_iter_is_robust_to_malformed_blocks():
     # No crash; the file-less image is still yielded (caller skips empty file paths).
     out = list(_iter_media_blocks(blocks))
     assert {"type": "video", "props": {"file": "ok.webm"}} in out
+
+
+# ── `files = [...]` pools ────────────────────────────────────────────────────
+#
+# A pool block declares N media paths for ONE slot and no singular `file`. The
+# consumer read `props["file"]` only and `continue`d on empty, so every pool
+# entry was invisible: a game could declare forty empty pool slots and the audit
+# would report "0 missing". ~30 image pools in the_long_summer_test were dark.
+
+
+def test_block_media_paths_expands_a_pool():
+    assert block_media_paths({"files": ["a.webm", "b.webm", "c.webm"]}) == [
+        "a.webm", "b.webm", "c.webm",
+    ]
+
+
+def test_block_media_paths_still_reads_a_singular_file():
+    assert block_media_paths({"file": "a.webm"}) == ["a.webm"]
+
+
+def test_block_media_paths_prefers_files_over_file():
+    """Must match the generator, which renders the pool and ignores `file`."""
+    assert block_media_paths({"files": ["a.webm"], "file": "b.webm"}) == ["a.webm"]
+
+
+def test_block_media_paths_ignores_malformed_pools():
+    for bad in ([], "notalist", [1, 2], None, [""], ["  "]):
+        assert block_media_paths({"files": bad}) == []
+    assert block_media_paths({}) == []
+    assert block_media_paths(None) == []
+
+
+def test_extract_missing_media_reports_every_pool_entry_as_its_own_row(tmp_path, monkeypatch):
+    """Four empty slots are four files to hunt. Collapsing them to one row would
+    let find-media install a single clip and mark the whole pool done."""
+    import api.v1.game_review as gr
+    monkeypatch.setattr(gr, "GAMES_ROOT", tmp_path)
+    (tmp_path / "fakegame").mkdir()
+
+    pool = ["sex/oral_1.webm", "sex/oral_2.webm", "sex/oral_3.webm", "sex/oral_4.webm"]
+    data = {
+        "canvases": [
+            {"id": "c1", "name": "C1", "nodes": [
+                {"id": "n1", "blocks": [
+                    {"type": "video", "props": {
+                        "files": pool,
+                        "description": "d",
+                        "search_queries": ["q"],
+                    }},
+                ]},
+            ]},
+        ],
+    }
+    res = gr._extract_missing_media(data, "fakegame")
+    assert [m["file"] for m in res["missing"]] == pool
+    # Each row carries the block's shared description + queries — one search
+    # covering N clips is the whole economic argument for pools.
+    assert all(m["search_queries"] == ["q"] for m in res["missing"])
+    assert all(m["type"] == "video" for m in res["missing"])
+
+
+# ── folder pools (`pool_dir`) ────────────────────────────────────────────────
+#
+# A folder pool yields ONE row for the whole block, keyed by the folder. Never one
+# row per discovered filename: the options store, the review verdicts and the
+# options-page URL all hang off that key, so keying on contents would re-key the
+# shelf and orphan every verdict each time the human unselects a clip.
+
+
+def test_block_media_pool_reads_dir_and_target():
+    assert block_media_pool({"pool_dir": "sex/oral_t5", "pool": 3}) == {
+        "dir": "sex/oral_t5", "target": 3,
+    }
+
+
+def test_block_media_pool_normalises_the_key():
+    """Two spellings of one folder must not fork the shelf."""
+    for spelling in ("sex/oral_t5/", "sex\\oral_t5", "  sex/oral_t5  "):
+        assert block_media_pool({"pool_dir": spelling})["dir"] == "sex/oral_t5"
+
+
+def test_block_media_pool_defaults_and_rejects_junk_targets():
+    assert block_media_pool({"pool_dir": "a/b"})["target"] == 4
+    for junk in (0, -2, "4", True, None):
+        assert block_media_pool({"pool_dir": "a/b", "pool": junk})["target"] == 4
+
+
+def test_block_media_pool_is_none_without_a_dir():
+    assert block_media_pool({"file": "a.webm"}) is None
+    assert block_media_pool({"files": ["a.webm"]}) is None
+    assert block_media_pool({"pool_dir": "   "}) is None
+    assert block_media_pool(None) is None
+
+
+def test_pool_dir_wins_over_files_and_file_in_the_shared_reader():
+    """Precedence declared once, here — every consumer inherits it."""
+    props = {"pool_dir": "sex/oral_t5", "files": ["x.webm"], "file": "y.webm"}
+    assert block_media_pool(props)["dir"] == "sex/oral_t5"
+    assert block_media_paths(props) == [], "a folder pool declares no static paths"
+
+
+def test_extract_missing_media_gives_a_pool_one_row_populated_from_disk(tmp_path, monkeypatch):
+    import api.v1.game_review as gr
+    monkeypatch.setattr(gr, "GAMES_ROOT", tmp_path)
+    pool = tmp_path / "fakegame" / "videos" / "sex" / "oral_t5"
+    pool.mkdir(parents=True)
+    for name in ("clip_1.webm", "clip_2.webm", "clip_10.webm"):
+        (pool / name).write_bytes(b"x")
+
+    data = {"canvases": [{"id": "c1", "name": "C1", "nodes": [{"id": "n1", "blocks": [
+        {"type": "video", "props": {"pool_dir": "sex/oral_t5", "pool": 4}},
+    ]}]}]}
+    res = gr._extract_missing_media(data, "fakegame")
+
+    assert len(res["found"]) == 1 and res["missing"] == []
+    row = res["found"][0]
+    assert row["file"] == "sex/oral_t5", "the row's identity is the folder"
+    assert row["pool_count"] == 3 and row["pool_target"] == 4
+    # Natural order — lexical sort would put clip_10 second.
+    assert [i["actual_file"] for i in row["pool_items"]] == [
+        "clip_1.webm", "clip_2.webm", "clip_10.webm",
+    ]
+    assert row["pool_items"][0]["serve_path"] == "videos/sex/oral_t5/clip_1.webm"
+
+
+def test_an_empty_pool_folder_still_produces_a_row(tmp_path, monkeypatch):
+    """The row comes from the TOML and is merely POPULATED from disk. Deriving it
+    from disk contents would make an unstocked pool vanish from the audit — the
+    exact bug apps/common/media_blocks.py was written to stop."""
+    import api.v1.game_review as gr
+    monkeypatch.setattr(gr, "GAMES_ROOT", tmp_path)
+    (tmp_path / "fakegame").mkdir()
+
+    data = {"canvases": [{"id": "c1", "name": "C1", "nodes": [{"id": "n1", "blocks": [
+        {"type": "video", "props": {"pool_dir": "sex/oral_t5", "pool": 4,
+                                    "search_queries": ["q"]}},
+    ]}]}]}
+    res = gr._extract_missing_media(data, "fakegame")
+
+    assert [m["file"] for m in res["missing"]] == ["sex/oral_t5"]
+    assert res["missing"][0]["pool_count"] == 0
+    assert res["missing"][0]["search_queries"] == ["q"]
+
+
+def test_pool_row_identity_is_never_empty(tmp_path, monkeypatch):
+    """media_review.py dedupes on `file`; if a pool row left it unset, every pool
+    in the game would collapse into one row keyed by None."""
+    import api.v1.game_review as gr
+    monkeypatch.setattr(gr, "GAMES_ROOT", tmp_path)
+    (tmp_path / "fakegame").mkdir()
+
+    data = {"canvases": [{"id": "c1", "name": "C1", "nodes": [{"id": "n1", "blocks": [
+        {"type": "video", "props": {"pool_dir": "sex/a_t5"}},
+        {"type": "video", "props": {"pool_dir": "sex/b_t5"}},
+    ]}]}]}
+    res = gr._extract_missing_media(data, "fakegame")
+
+    keys = [m["file"] for m in res["missing"]]
+    assert keys == ["sex/a_t5", "sex/b_t5"]
+    assert len(set(keys)) == 2
+
+
+def test_extract_missing_media_finds_a_pool_nested_in_a_group(tmp_path, monkeypatch):
+    """Both blind spots at once: nested container AND a pool inside it."""
+    import api.v1.game_review as gr
+    monkeypatch.setattr(gr, "GAMES_ROOT", tmp_path)
+    (tmp_path / "fakegame").mkdir()
+
+    data = {
+        "canvases": [
+            {"id": "c1", "name": "C1", "nodes": [
+                {"id": "n1", "blocks": [
+                    {"type": "group", "props": {}, "blocks": [
+                        {"type": "image", "props": {"files": ["a.jpg", "b.jpg"]}},
+                    ]},
+                ]},
+            ]},
+        ],
+    }
+    res = gr._extract_missing_media(data, "fakegame")
+    assert [m["file"] for m in res["missing"]] == ["a.jpg", "b.jpg"]
 
 
 def test_extract_missing_media_reports_nested_files_as_missing(tmp_path, monkeypatch):

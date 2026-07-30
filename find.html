@@ -72,6 +72,11 @@
     .use-btn:hover { border-color: var(--accent); color: var(--accent); }
     .rm-btn { color: var(--muted); }
     .rm-btn:hover { border-color: #c2554e; color: #c2554e; }
+    /* Unselect is the only action on a selected tile, so it takes the full row. */
+    .rm-btn.wide { flex: 1; }
+    /* Selected tiles are IN the game — mark them so the two zones never blur. */
+    .sel-tile { border-color: #4ade8055; }
+    .sel-tile .tile-media { border-bottom-color: #4ade8033; }
     .use-btn:disabled { opacity: 0.6; cursor: default; }
     .tile-status { font-size: 0.7rem; }
     .tile-status.ok { color: #5fae6e; }
@@ -99,6 +104,16 @@
     <div class="find-head"><h1>Find media</h1></div>
     <div class="find-sub" id="sub"></div>
 
+    <!-- SELECTED — pool slots only. These are the clips currently IN the folder,
+         i.e. the ones the game cycles. Sits above the search box because it is the
+         answer, not the search. Clicking one moves it back down into Options. -->
+    <div id="selected-zone" hidden>
+      <div class="opt-head">
+        <span>Selected — plays in-game</span><span class="opt-count" id="sel-count"></span>
+      </div>
+      <div id="selected"></div>
+    </div>
+
     <div class="toolbar">
       <div class="searchrow">
         <input id="q" type="text" placeholder="Search query…" autocomplete="off">
@@ -125,12 +140,25 @@
     var GAME = P.get("id") || "";
     var FILE = P.get("file") || "";
     var QUERIES = (P.get("q") || "").split(" | ").map(function (s) { return s.trim(); }).filter(Boolean);
+    // A POOL slot is a folder: every clip inside it plays, cycling one per visit.
+    // `pool` carries the folder (same string as FILE, and the same key the options
+    // store and the review ledger use — so nothing forks). Absent = single slot,
+    // and this whole page behaves exactly as it always did.
+    // The slot's stable identity — the key for its shelf and verdict. Defaults to
+    // FILE, which is the declared path. They differ once a block authors an `id`:
+    // FILE still says WHERE THE BYTES GO, KEY says WHICH SHELF this is.
+    var KEY = P.get("slot_key") || FILE;
+    var POOL = P.get("pool") || "";
+    var POOL_TARGET = parseInt(P.get("target") || "0", 10) || 0;
 
     var backEl = document.getElementById("back");
     var subEl = document.getElementById("sub");
     var qEl = document.getElementById("q");
     var countEl = document.getElementById("count");
     var optionsEl = document.getElementById("options");
+    var selZoneEl = document.getElementById("selected-zone");
+    var selEl = document.getElementById("selected");
+    var selCountEl = document.getElementById("sel-count");
 
     function el(tag, cls, text) {
       var e = document.createElement(tag);
@@ -176,7 +204,7 @@
     var lastSig = null;
     function loadOptions() {
       fetch(API + "/api/v1/dev/media-finder/options/list?game=" +
-        encodeURIComponent(GAME) + "&file=" + encodeURIComponent(FILE))
+        encodeURIComponent(GAME) + "&file=" + encodeURIComponent(KEY))
         .then(function (r) { return r.json(); })
         .then(function (j) { renderOptions(j.options || []); })
         .catch(function () {
@@ -231,7 +259,9 @@
 
       var status = el("div", "tile-status");
       var row = el("div", "tile-actions");
-      var use = el("button", "use-btn", "Use this");
+      // A pool ADDS; a single slot REPLACES. Say which, so nobody clicks
+      // "Use this" on a pool expecting the previous clip to be swapped out.
+      var use = el("button", "use-btn", POOL ? "Select" : "Use this");
       if (!FILE) { use.disabled = true; use.title = "No target slot"; }
       use.addEventListener("click", function () { useOption(opt, use, status); });
       var rm = el("button", "rm-btn", "✕");
@@ -255,7 +285,10 @@
       fetch(API + "/api/v1/dev/media-finder/grab", {
         method: "POST",
         body: JSON.stringify({
-          game: GAME, file: FILE, url: opt.url,
+          game: GAME, file: FILE, slot_key: KEY, url: opt.url,
+          // Present => grab ADDS to the folder instead of replacing the slot,
+          // and skips the same-stem delete that would eat a sibling clip.
+          pool_dir: POOL,
           local_path: opt.local_path || "", source: source
         })
       }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
@@ -269,12 +302,14 @@
           }
           statusEl.className = "tile-status ok";
           statusEl.textContent = "saved → " + res.j.file_path;
-          btn.textContent = "Saved ✓";
+          btn.textContent = POOL ? "Selected ✓" : "Saved ✓";
           toast("Saved to " + res.j.file_path, "ok");
           // grab now clears the verdict and shelves the replaced file server-side;
           // reload so the demoted pick shows up as an option straight away.
+          // For a pool, also refresh the SELECTED strip — the clip just moved up.
           lastSig = null;
           loadOptions();
+          if (POOL) { lastSelSig = null; loadSelected(); }
         })
         .catch(function () {
           statusEl.className = "tile-status err";
@@ -284,10 +319,99 @@
         });
     }
 
+    // ---- SELECTED zone (pool slots only) ----
+    //
+    // "Selected" is not a flag anywhere — it is literally "the file is in the
+    // folder". So selecting is a grab INTO the folder and unselecting is a move
+    // OUT of it, and there is no second source of truth to drift from the build.
+    var lastSelSig = null;
+
+    function loadSelected() {
+      if (!POOL) return;
+      fetch(API + "/api/v1/dev/media-finder/pool/list?game=" + encodeURIComponent(GAME)
+            + "&dir=" + encodeURIComponent(POOL))
+        .then(function (r) { return r.json(); })
+        .then(function (j) { renderSelected(j.items || []); })
+        .catch(function () { /* non-fatal: the options zone still works */ });
+    }
+
+    function renderSelected(items) {
+      var sig = items.map(function (i) { return i.filename; }).join("|");
+      if (sig === lastSelSig) return;   // unchanged — don't rebuild (avoids flicker)
+      lastSelSig = sig;
+
+      selZoneEl.hidden = false;
+      selCountEl.textContent = POOL_TARGET ? "(" + items.length + " of " + POOL_TARGET + ")"
+                                           : "(" + items.length + ")";
+      selEl.innerHTML = "";
+      if (!items.length) {
+        selEl.appendChild(el("p", "empty",
+          "Nothing selected yet. Pick from Options below — it downloads into the pool folder and starts playing."));
+        return;
+      }
+      var grid = el("div", "find-grid");
+      items.forEach(function (m, i) { grid.appendChild(buildSelectedTile(m, i)); });
+      selEl.appendChild(grid);
+    }
+
+    function buildSelectedTile(m, idx) {
+      var isVideo = m.media_kind === "video";
+      var tile = el("div", "tile sel-tile");
+
+      var thumb = el(isVideo ? "video" : "img", "tile-media");
+      thumb.src = API + m.url;   // already installed — same-origin, no proxy needed
+      if (isVideo) { thumb.muted = true; thumb.loop = true; thumb.playsInline = true; thumb.preload = "metadata"; }
+      else { thumb.loading = "lazy"; }
+      thumb.addEventListener("click", function () {
+        preview({ media_kind: m.media_kind, url: API + m.url, local_path: "x" });
+      });
+      tile.appendChild(thumb);
+
+      var body = el("div", "tile-body");
+      body.appendChild(el("div", "tile-meta", "#" + (idx + 1) + " · " + m.filename));
+      var status = el("div", "tile-status");
+      var row = el("div", "tile-actions");
+      var out = el("button", "rm-btn wide", "Unselect");
+      out.title = "Move out of the pool — it stops playing and returns to Options";
+      out.addEventListener("click", function () { unselect(m, out, status); });
+      row.appendChild(out);
+      body.append(row, status);
+      tile.appendChild(body);
+      return tile;
+    }
+
+    function unselect(m, btn, statusEl) {
+      btn.disabled = true;
+      statusEl.className = "tile-status";
+      statusEl.textContent = "removing…";
+      fetch(API + "/api/v1/dev/media-finder/pool/unselect", {
+        method: "POST",
+        body: JSON.stringify({ game: GAME, dir: POOL, filename: m.filename })
+      }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) {
+          if (!res.ok || !res.j.success) {
+            statusEl.className = "tile-status err";
+            statusEl.textContent = (res.j && res.j.error) ? res.j.error : "failed";
+            btn.disabled = false;
+            return;
+          }
+          toast("Unselected — back in Options", "ok");
+          // It reappears below as an `origin: "previous"` option, so the decision
+          // is one click away from being undone.
+          lastSelSig = null; lastSig = null;
+          loadSelected(); loadOptions();
+        })
+        .catch(function () {
+          statusEl.className = "tile-status err";
+          statusEl.textContent = "server unreachable";
+          btn.disabled = false;
+        });
+    }
+
     function removeOption(opt) {
       fetch(API + "/api/v1/dev/media-finder/options/remove", {
         method: "POST",
-        body: JSON.stringify({ game: GAME, file: FILE, url: opt.url })
+        body: JSON.stringify({ game: GAME, file: FILE, slot_key: KEY, url: opt.url })
       }).then(function () { lastSig = null; loadOptions(); })
         .catch(function () { toast("Remove failed", "err"); });
     }
@@ -298,7 +422,7 @@
       var note = "replaced via finder " + new Date().toISOString().slice(0, 10);
       fetch(API + "/api/v1/dev/media-review/reviews?game=" + encodeURIComponent(GAME), {
         method: "POST",
-        body: JSON.stringify({ file: FILE, status: null, note: note })
+        body: JSON.stringify({ file: FILE, slot_key: KEY, status: null, note: note })
       }).catch(function () { /* non-fatal: the grab already landed */ });
     }
 
@@ -330,8 +454,17 @@
       subEl.textContent = "No game id. Open this from a review card.";
       return;
     }
+    if (POOL) {
+      // A pool block names a folder; every clip inside it plays, cycling one per
+      // visit. Say so, because "Select" adds a clip here rather than replacing one.
+      subEl.textContent = "Pool: " + POOL + "/ — every clip inside plays, one per visit"
+                        + (POOL_TARGET ? " (aiming for " + POOL_TARGET + ")" : "");
+      loadSelected();
+    }
     loadOptions();
-    setInterval(loadOptions, 3000);  // captures from the Google tab appear within a few seconds
+    // One timer for both zones: captures from the Google tab appear within a few
+    // seconds, and the pool folder can also change from outside this page.
+    setInterval(function () { loadOptions(); if (POOL) loadSelected(); }, 3000);
   })();
   </script>
 </body>

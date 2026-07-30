@@ -326,3 +326,49 @@ footer {
 .media-note:focus { outline: none; border-color: var(--accent); }
 .saved-tick { font-size: 0.72rem; color: #5fae6e; height: 14px; }
 .empty { color: var(--muted); font-size: 1rem; padding: 40px 0; }
+
+/* ── Pool cards ────────────────────────────────────────────────────────────
+   A pool is a FOLDER of clips the game cycles one per visit, so its card shows
+   the whole set as small tiles rather than one big preview — a near-duplicate or
+   an off-tone clip is only visible when they sit side by side. */
+.pool-box {
+  background: #0b0c10;
+  padding: 10px;
+  border-bottom: 1px solid var(--border, #24262e);
+}
+.pool-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.pool-count {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #5fae6e;
+  background: #5fae6e18;
+  border: 1px solid #5fae6e40;
+  border-radius: 4px;
+  padding: 1px 7px;
+}
+/* Under target still PLAYS — it is thinner than intended, not broken. */
+.pool-count.short { color: #d5a247; background: #d5a24718; border-color: #d5a24740; }
+.pool-count.empty { color: #c2554e; background: #c2554e18; border-color: #c2554e40; }
+.pool-dir { font-size: 0.68rem; color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.pool-none { font-size: 0.78rem; color: var(--muted); font-style: italic; padding: 18px 0; text-align: center; }
+.pool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+.pool-cell { min-width: 0; }
+.pool-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #000;
+  object-fit: cover;
+  display: block;
+  border-radius: 4px;
+  border: 1px solid var(--border, #24262e);
+  cursor: pointer;
+}
+.pool-thumb:hover { border-color: var(--accent); }
+.pool-cap {
+  font-size: 0.62rem;
+  color: var(--muted);
+  margin-top: 3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

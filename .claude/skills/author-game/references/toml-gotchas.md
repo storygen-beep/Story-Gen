@@ -292,17 +292,29 @@ twice: v1's Dining Room, then again as `loc_hotel_private_floor` in the rebuild 
     cascade as its own `advance_text` beat or a no-`advance_text` terminal beat): `references/engine-reference.md`
     (the cascade section). (Live-caught in Vesper's `cap_vane_blackmail` / `cap_1a_close`, rev 86.)
 
-## A `files = [...]` pool is IMAGE-ONLY — video entries vanish silently
-- **Putting `.mp4`/`.webm` in an image block's `files` pool renders NOTHING.** Every entry is
-  extension-checked and non-images are skipped with no warning (`v2.py:13728`), so a pool of clips resolves
-  on disk, empties itself, and the block disappears — the same "ships blank" failure a missing file causes.
-  **No build error, and no validation at all**: the importer never inspects media props (it validates the
-  block *type* only), so `file` vs `files` typos and mp4-in-an-image-pool both sail through.
-  - `.gif` and `.webp` **do** work (they count as images) — an animated-GIF pool is legal.
-  - **To rotate CLIPS, use a `block_pool` of `video` blocks** — its children recurse through the normal
-    block dispatch, so the real video handler runs (`v2.py:13664-13684`). Note a branch renders exactly
-    ONE block, so the pool varies the clip while the surrounding prose stays fixed. Shape + constraints
-    (no nesting, depth 4, mixed child types warn): `references/media.md` §7.
+## Pools: name a FOLDER, and put clips in a `video` pool
+- **A pool is `pool_dir = "sex/oral_t5"` + `pool = 4`** — the folder's contents play, cycling one per
+  visit (`v2.py:11878` `_render_media_pool`, `:11871` `_resolve_pool_dir`). `pool` is a **target for
+  find-media, not a manifest**; the folder is the truth, so 3 clips play a 3-cycle and the audit says
+  "3 of 4". Precedence `pool_dir` > `files` > `file`, declared once in `apps/common/media_blocks.py`.
+  - **Put clips in a `video` pool.** It has no format filter and picks `<video>` vs `<img>` per entry,
+    which matters because the resolver is extension-agnostic — a pool asking for `.webm` can land on a
+    `.gif` on disk, and `<video src="x.gif">` renders nothing.
+  - **An `image` pool still drops a `.mp4`/`.webm`** — but it now logs a `logger.warning` instead of
+    vanishing in total silence (unrendered, unrecorded, uncopied). `.gif`/`.webp` count as images and work.
+  - **Still no validation at all**: the importer never inspects media props (it validates the block *type*
+    only), so a `file` vs `pool_dir` typo sails straight through to a blank block.
+  - **Don't reach for `block_pool` to rotate clips.** It still works, but N video children means N
+    descriptions and N `search_queries` sets for one beat — 4× the find-media cost for the same result.
+    `block_pool`'s job is varying **prose**, and it deliberately stays random. `references/media.md` §7.
+  - **The tier tag must stay last on the FOLDER name** (`sex/oral_t5/`, not `sex/oral/..._t5`). Tier
+    detection is `$`-anchored — `_(t[0-8]|base)$`, `apply_retags.py:36` — and routing SFW-vs-NSFW search
+    behaviour rides on it. This is the trap the folder shape avoids: appending an index to a *filename*
+    (`oral_t5_1.webm`) pushes the tag off the end and silently untags explicit content.
+
+> ⚠️ **Historical (fixed 2026-07-30):** a `files` pool used to be image-only and dropped video **silently** —
+> a pool of clips resolved on disk, emptied itself, and the block disappeared with no error anywhere. If you
+> are reading an older game's TOML, that is why a clip pool shipped blank.
 
 When in doubt about a shape, read the authoritative table in `references/engine-reference.md`
 and copy the analogous block from `games/late_shifts/toml_phases/`.

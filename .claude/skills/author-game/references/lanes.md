@@ -124,6 +124,11 @@ IS the menu.
   greyed span** showing the action text (the TLS look, the default); set `locked_text_threshold` → a
   clickable **button** that toasts the gate value (RTS `<<NotifyCorruption>>` style). Use the toast
   only if you actually want it — by default omit it.
+- **Explicit rungs want a MEDIA POOL, not a fixed clip.** A hub is `is_repeatable = true` by
+  fingerprint, so its `_t4`/`_t5` scenes are among the most-replayed content in the game — the same clip
+  every time is the fastest way to make an escalation ladder feel dead. Author those blocks as
+  `pool_dir = "<folder>"` + `pool = 4` and the player gets a different clip per visit for one search.
+  Base/SFW rungs stay single files. → `references/media.md` §7.
 - **Grey vs hide.** Only *escalation rungs* get `show_when_locked` (they telegraph the ladder).
   Daily-capped rungs, intra-loop beats, and conditional narrative branches **hide** (gated, no
   `show_when_locked`) — you don't telegraph "talk again tomorrow" or a pose inside the sex loop.
@@ -156,9 +161,12 @@ IS the menu.
   - **N separate random canvases at one location** — clip *and* prose vary together, because each canvas
     is its own beat. Proven: `vesper` ships eight at `captive_room`. The engine's cooldown paces them, so
     expect roughly one glimpse every 4–6 entries depending on your `chance` values.
-  - **One canvas whose media is a `block_pool`** — rotates the **clip** on every render while the beat's
-    prose stays put (a pool branch renders exactly ONE block, and `video` carries no caption). Good when
-    the words should be stable and only the picture should vary. → `references/media.md` §7.
+  - **One canvas whose media is a `files = [...]` pool** — rotates the **clip** while the beat's prose
+    stays put, and it **cycles** (1→2→3→1) rather than re-rolling, so the player never sees the same clip
+    twice running. Good when the words should be stable and only the picture should vary. One description
+    and one `search_queries` set covers all N, so it costs one find-media search. → `references/media.md` §7.
+    *(This used to say `block_pool`. Use the `files` pool instead — `block_pool` means N descriptions and
+    N searches for one beat, and it stays random.)*
 - **It's an interstitial, not a backdrop.** A random ambient `<<goto>>`s away from the room and takes the
   screen; the location page carries no media of its own (a location's `image` is a CSS background on its
   **nav card**). "Never visually cold" means entering a room often throws a short clip-beat — never that
@@ -182,6 +190,10 @@ The hardest lane; RTS's biggest. Two canvases per activity:
    NEVER put the energy spend in `exit_block.effects` (that decrements without gating → cosmetic
    meter) or gate it with `conditions`+`locked_text_threshold` (blue toast-button). `effects` carries
    only the *gains* (money/relation) + `time_progression_minutes`. See `toml-gotchas.md` "Resource gating".
+   **Its NSFW media wants a POOL.** This is the dominant lane (~47% of canvases) and the host is
+   `is_repeatable = true` by fingerprint, so a walk-in scene here is replayed more than anything else
+   in the game. Author its `_t4`/`_t5` blocks as `pool_dir = "<folder>"` + `pool = 4` — one search, a
+   different clip per visit. The solo/SFW content stays a single file. → `references/media.md` §7.
 2. **Dispatcher:** rolls dice + checks NPC conditions → HIT routes to the NPC scene, MISS plays solo
    content. The host declares its `substitutions = [...]` rules in `[canvases.trigger]` metadata; on
    entry the engine rolls them (`setup.checkAndSubstituteCanvas`, `v2.py:5011`) and, on a hit, jumps to

@@ -23,7 +23,7 @@ called out — the corpus is recovered for its craft, not trusted for its engine
 4. Writing `search_queries` — the craft
 5. Image vs video — the tier contract (authoring, not engine)
 6. Placing media — the text-media-text rhythm + the 6 dimensions
-7. Folder + naming convention (+ variant chains & random pools)
+7. Folder + naming convention (+ variant chains & cycling media pools)
 7b. Media insurance — the corpus is the content plan, so protect it
 8. Where media lives in the pipeline
 9. Exemplar + anti-example
@@ -38,7 +38,7 @@ Media is authored as a content block inside a canvas node's `blocks = [...]`, al
 silently dropped — the importer **hard-fails the build** with a did-you-mean hint; `img`/`picture` → `image`.
 `template_import.py:2786-2831` (`_CONTENT_BLOCK_TYPE_SUGGESTIONS` img/picture→image + did-you-mean hint). So a typo is caught at build, not in the shipped HTML.)
 
-**`image`** — a still (renders `<img>`). `v2.py:13455-13659` (`block_type == "image"` handler).
+**`image`** — a still (renders `<img>`). `v2.py:14110` (`block_type == "image"` handler).
 ```toml
 { type = "image", props = {
     file = "scenes/penthouse_morning.jpg",   # path under the media folder (extension is advisory — see §2)
@@ -47,23 +47,68 @@ silently dropped — the importer **hard-fails the build** with a did-you-mean h
 } }
 ```
 Optional props the engine also reads: `url` (a verbatim external URL instead of `file`), `alt`, `caption`
-(wraps the image in `<figure><figcaption>`), and **`files`** — a *pool*:
+(wraps the image in `<figure><figcaption>`), and **`pool_dir`** — a *pool*:
 ```toml
-{ type = "image", props = { files = ["sex/loop_a.jpg", "sex/loop_b.jpg", "sex/loop_c.jpg"],
+{ type = "video", props = { pool_dir = "sex/brothel_oral_t5", pool = 4,
     description = "...", search_queries = ["...", "..."] } }
 ```
-`files` (a string array) **wins over `file`** and emits `either(...)` so a different image shows on each visit —
-replay variety for a repeatable scene. `v2.py:13702-13790` (`files` pool wins over `file` → `either()`).
+**A pool is a FOLDER.** Everything inside `videos/sex/brothel_oral_t5/` plays, and the block **CYCLES**
+through it: visit 1 shows clip 1, visit 2 clip 2, wrapping back round. Files inside can be named
+anything — the name only fixes the order (natural sort, so `clip_2` precedes `clip_10`).
+`v2.py:11878` (`_render_media_pool`), `:11871` (`_resolve_pool_dir`), video branch `:14290`.
 
-> ⚠️ **The pool is IMAGE-ONLY, and it drops video SILENTLY.** Every entry is extension-checked and
-> non-images are skipped with no warning (`v2.py:13728`), so a `files` pool of `.mp4`/`.webm` resolves on
-> disk, gets emptied, and renders **nothing** — no error, and nothing in the importer validates media props
-> at all. `.gif` and `.webp` DO work (they count as images). **For rotating CLIPS use a `block_pool` of
-> `video` blocks** (§7) — its children recurse through the normal dispatch, so the real video handler runs.
-> Full trap: `references/toml-gotchas.md`.
+**`pool = 4` is a TARGET, not a manifest.** The folder is the truth. They are allowed to disagree —
+3 clips in a 4-target pool plays a 3-cycle and the audit reports **"3 of 4"**. That split is the point:
+the count is never hardcoded, so you curate by adding/removing files in the review UI instead of
+editing TOML, *and* a half-filled pool still can't pass as finished. Omit `pool` and it defaults to 4.
 
-**`video`** — a looping clip from a file (renders `<video autoplay muted loop>`). `v2.py:13908+` (`block_type == "video"` handler; `<video autoplay muted loop>` at `:14005`). Same props as
-image minus `files`/`alt`/`caption`:
+> **Works on `image` and `video` blocks alike, and it is the right shape for rotating clips.** One
+> `description` and one `search_queries` set covering the whole folder — which is the whole point:
+> find-media searches **once** and keeps the gate-survivors it already paid to judge. A `block_pool` of
+> N `video` blocks means N descriptions and N searches for a single beat: the *wrong* tool (§7).
+
+**Cycle, not random.** `random()` over four clips repeats back-to-back 25% of the time — exactly the
+staleness a pool exists to remove. The counter persists in `$game_state.media_cycle`, keyed on the
+**folder** (`v2.py:11895`), which is why curating never resets a player's position mid-playthrough.
+
+**Decide *whether* to pool before you decide what goes in it — §7.** Short version: NSFW media on a
+repeatable canvas, whose clips are honestly interchangeable under one `description`. If the beat should
+*escalate* rather than rotate, you want a `group` variant chain, not a pool.
+
+**Optional `id` — tag a slot whose path you expect to move.** A media block's stocked options and
+its approve/disapprove verdict are both filed under a string. By default that string is the
+declared path, so **moving the path loses both** — a tier retag rewrites it, and converting to a
+pool drops the extension. Measured: 148 stocked options stranded on the first pool conversion.
+An authored `id` becomes the key instead, and it doesn't move:
+
+```toml
+{ type = "video", id = "renner_oral", props = { pool_dir = "sex/renner_oral_t5", pool = 4, … } }
+```
+
+- **Opt-in, and untagged is fine** — that is what ~560 existing blocks do. Tag the ones you expect
+  to edit: anything you plan to pool, anything whose tier is still settling, hero assets.
+- **Must be a real name**, not `b3`-shaped — the importer's own positional fallback ids look like
+  that and are refused, because they shift when you insert a block above.
+- Already stocked a shelf before tagging it? `python manage.py check_shelves --repair` moves it.
+  `check_shelves` with no flags is the audit that tells you a shelf went missing at all.
+
+> **Legacy: `files = ["a.webm", "b.webm"]`** — an explicit list, still supported and still cycling
+> (`the_long_summer_test` ships 30 of them). Precedence is `pool_dir` > `files` > `file`, declared once
+> in `apps/common/media_blocks.py`. Prefer `pool_dir` for anything new: an explicit list hardcodes a
+> count you have to guess before seeing a single clip, and every entry it can't fill stays on the
+> missing list forever.
+
+> ⚠️ **An `image` pool still refuses clips — but it now says so.** Every entry is extension-checked and a
+> `.mp4`/`.webm` in an *image* pool is dropped with a `logger.warning` (it used to vanish in total silence,
+> unrendered and unrecorded). `.gif` and `.webp` count as images and work fine. **A `video` pool has no
+> format filter at all** — it takes clips and stills alike and picks the right tag per entry, because the
+> resolver is extension-agnostic and a pool asking for `.webm` can legitimately land on a `.gif`.
+> Nothing in the importer validates media props, so a `file`/`files` typo still sails through.
+
+**`video`** — a looping clip from a file (renders `<video autoplay muted loop>`). `v2.py:14285`
+(`block_type == "video"` handler). Same props as image minus `alt`/`caption` — it **does** take
+`files` (the cycling pool above, `v2.py:14290`), and that is the shape to reach for on any beat
+the player replays:
 ```toml
 { type = "video", props = {
     file = "sex/renner_anal.webm",
@@ -298,7 +343,7 @@ When you (or find-media) judge whether a found asset fits, the **6 dimensions, i
 
 ---
 
-## 7. Folder + naming convention (+ variant chains & random pools)
+## 7. Folder + naming convention (+ variant chains & cycling media pools)
 
 The engine is path-agnostic (it joins your `file` under the media root and sorts by resolved type), so the
 folders are a **house convention**, but keep it consistent so the find-media pass and the missing-media page
@@ -312,18 +357,53 @@ stay legible:
 Two engine features worth using:
 - **Variant chains** — inside a `group`/`block_pool` (the conditional-content containers), give each branch its
   *own* media block (a different `.webm` per path) so the picture re-renders as state changes.
-- **Random pools — two kinds, and only one plays video.** The `files = [...]` array on an image block (§1)
-  shows a different **still** each visit (images only — see the §1 warning). To rotate **clips**, use a
-  **`block_pool`**: the engine emits `<<set _bp to random(0,N)>>` + an if/elseif chain and renders one child
-  set per visit, and because children recurse through the normal block dispatch, a `video` child hits the
-  real video handler (`v2.py:13664-13684`). **A branch renders exactly ONE block** (`[pool_item]`), and
-  `video` carries no caption — so a pool rotates the *clip* while the beat's prose stays put. Two pools in
-  one node do NOT stay in sync (both write `_bp`, rolled independently), so don't try to pair a clip pool
-  with a text pool; if clip and prose must vary together, use N separate canvases instead. Constraints: a
-  nested `block_pool` is silently stripped by the importer, depth caps at 4, and mixed child types log a
-  warning. *(`block_pool` itself ships in three games with text children; a pool of **video** children is
-  code-verified but not yet ship-proven.)* This is the mechanism behind the Lane-2 glimpse pool
-  (`references/lanes.md`).
+- **Media pools — `pool_dir` + `pool`, and they CYCLE.** A folder of clips shown one per visit. The
+  shape is in §1; this is **when to reach for one**. Answer the gates in order — the first two decide
+  whether a pool is even the right thing, and no amount of clips fixes a wrong answer to either.
+
+  **Gate 1 — is it NSFW, on a repeatable canvas?** Both, not either.
+    - *NSFW* (`_t4`/`_t5`): this is what the player replays *for*, so this is where staleness costs you.
+      A location or establishing shot is **wayfinding** — the player reads it to know where they are —
+      so rotating it is worse than useless. The engine agrees: a `[[locations]] image` resolves through
+      a separate single-path route (`v2.py:485`) and **cannot** pool at all.
+    - *Repeatable*: judge by expected **view count**, not by the flag. An ambient crossed fifty times
+      earns four clips; a beat hit three times does not — that is three files found, shipped and paid
+      for so one can be seen once. A Lane-4 capstone plays exactly once; a pool there is pure waste.
+    - Evidence this is the real line: **27 of the 30** pools shipping in `the_long_summer_test` are
+      under `sex/`.
+
+  **Gate 2 — are the clips INTERCHANGEABLE?** This decides whether the pool is *fillable*. Every clip
+  must satisfy the *same* `description`, so a loose one (a generic act) pools well and a tight one (a
+  specific named gesture) cannot. Measured: `lab_finish_facial_t5` — *"his hand gentle at her head"* —
+  came back **`pool_all_dead`, 24 candidates, every one rejected**. A 4-clip pool there wouldn't have
+  been 4× the variety, it'd have been 4× impossible. If you can't write one description honestly true
+  of all of them, you don't want a pool.
+
+  **Gate 3 — should it ROTATE or ESCALATE?** A pool asserts the clips are interchangeable: nothing
+  changed between visit 1 and visit 4 except a counter. If the 4th viewing should differ because
+  **state** differs — corruption climbed, a flag flipped, a stage advanced — that is a `group` variant
+  chain (above), not a pool. Reaching for a pool on a beat that should escalate quietly swaps character
+  development for a slideshow, and it *looks* like it worked, which is what makes it the worse mistake.
+
+  Then, and only then:
+  - **How many — set `pool = 4` and stop thinking about it.** It is a target for find-media, not a
+    manifest; the folder is what actually plays. 4 is the default because that is what the pipeline
+    yields (measured strip survival **3-of-5 / 4-of-6**). You are not committing to it: 3 clips play a
+    3-cycle and the audit says "3 of 4". Stills survive the strip at a much higher rate than clips, so
+    an image pool can comfortably run larger — `the_long_summer_test`'s image pools hold 5–11.
+  - **Cost — free to FIND, real to SHIP.** One `description` + one `search_queries` set covers the whole
+    folder, so it is one search and one judging pass. The bytes are not free: `vesper` averages
+    **2.9 MB per clip** (380 MB / 113), so **a 4-clip pool costs ~8.7 MB more than a single clip**.
+    Multiply by however many you pool — and pool the beats the player actually lives in, not by reflex.
+  - A pool rotates the **picture** while the beat's prose stays put — so on a heavily-repeated beat the
+    words become the stale thing. If clip and prose must vary together, use N separate canvases
+    (`lanes.md` — `vesper` ships eight at `captive_room`).
+- **`block_pool` is a different tool, and it stays RANDOM.** It picks whole *blocks*, so its job is
+  varying **prose** (the Lane-2 ambient text pool): `<<set _bp to random(0,N)>>` + an if/elseif chain,
+  children recursing through the normal dispatch. **Do not reach for it to rotate clips** — N video
+  children means N descriptions and N searches for one beat, which is 4× the find-media cost of a `files`
+  pool for the same result. Constraints: a nested `block_pool` is silently stripped by the importer, depth
+  caps at 4, mixed child types log a warning, and two pools in one node do not stay in sync (both roll `_bp`).
 
 ---
 
@@ -395,9 +475,15 @@ the missing-media list is muddied. Tag matches asset matches intent, or don't ta
 
 ## 10. Cheat sheet
 
-- Three real blocks: `image` `{file|files|url, alt, caption, description, search_queries}` · `video`
-  `{file|url, description, search_queries}` · `clip` `{clipId}` (DB asset, owner-scoped, no file/queries).
-  Unknown type = build-fatal.
+- Three real blocks: `image` `{file|files|pool_dir+pool|url, alt, caption, description, search_queries}` ·
+  `video` `{file|files|pool_dir+pool|url, description, search_queries}` · `clip` `{clipId}` (DB asset,
+  owner-scoped, no file/queries). Unknown type = build-fatal.
+- **`pool_dir = "<folder>"` + `pool = 4` = a pool that CYCLES** (1→2→3→1), on either block type. The
+  folder's contents play; `pool` is only find-media's target, so "3 of 4" is a healthy state, not a hole.
+  Use it when the beat is **NSFW *and* on a repeatable canvas**, and only if the clips are
+  interchangeable under one description — if they aren't, or if the beat should *escalate*, use a
+  `group` variant chain instead. One search either way; ~2.9 MB per extra clip to ship.
+  `files = [...]` is the legacy explicit form. `block_pool` varies *prose* and stays random.
 - **The on-disk file decides `<img>` vs `<video>`** — your extension/`type` is advisory. Match all three.
 - **Missing file = renders nothing** in a normal build (silent). Build `--debug` to see `[IMAGE MISSING]`
   placeholders + the Missing-Media page.

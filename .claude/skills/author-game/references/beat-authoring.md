@@ -170,7 +170,11 @@ NPC arcs/hubs/ambients/capstones are beats. Only the skeleton + boot + sleep + s
    line, even a terse one (a mood glimpse can be a single spoken beat). **Media:** if the beat carries a
    visual (most scene beats should — these games are image-first), author the `image`/`video` block per
    `references/media.md` — in the text-media-text rhythm, with a `description` + 2 `search_queries` (a missing
-   media block with no queries renders nothing AND leaves no acquisition trail). **Before emitting, check
+   media block with no queries renders nothing AND leaves no acquisition trail).
+   **Is the beat NSFW *and* on a repeatable canvas?** Then it wants a POOL — `pool_dir = "<folder>"` +
+   `pool = 4` instead of `file` — so the player sees a different clip each visit instead of the same one
+   forever. Costs one search either way. Gates + the escalate-vs-rotate trap: `media.md` §7.
+   **Before emitting, check
    `references/toml-gotchas.md`.** Append ONLY to the beat's `target_phase` file. Record new canvas ids in
    `produced_canvas_ids`.
 5. **Author/update the quest card** — if the beat introduces/advances a *player-facing goal* (an NPC arc

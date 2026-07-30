@@ -13,7 +13,91 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
-## 2026-07-29 (latest) — `find-media-b` DELETED; the Q2 A/B is closed, ranking stays
+## 2026-07-31 (later) — the shelf key is `slot_key`, not necessarily the path
+
+- **`SKILL.md` §STOCK — the key bullet rewritten.** **Why:** a slot's shelf AND its verdict were
+  filed under the declared path, so any edit moving the path orphaned both. Converting one slot to
+  a pool stranded **148 stocked options** (measured live). A block can now author an `id`, which
+  becomes the key and doesn't move. Every `game-review/load` item carries a `slot_key`; it equals
+  `file` for an untagged slot, so nothing changes for the ~560 blocks that have no id.
+  **Send both** — `file` decides where a `grab` writes, `slot_key` decides which shelf it touches.
+  Conflating them writes a tagged slot's media to the wrong path; pinned by
+  `tests/test_slot_key.py::test_grab_writes_to_the_PATH_and_drops_from_the_KEY_shelf`.
+- New: `python manage.py check_shelves [--all] [--repair]` — audits for orphaned shelves/verdicts
+  and re-files the confidently-matched ones. It found 3 on first run, one of which was a hand
+  re-key I had done an hour earlier and got half-right (shelf moved, verdict left behind).
+
+## 2026-07-31 — a pool is a FOLDER now, not a list of filenames
+
+The engine's pool declaration changed under us the day after the pool section was written.
+`files = ["a_1.webm", "a_2.webm", …]` is replaced by `pool_dir = "sex/oral_t5"` + `pool = 4`:
+the folder's contents play, and `pool` is only a target for THIS skill. That removes the count
+from the TOML entirely, so the human curates by adding/removing files in the review UI instead
+of editing source.
+
+- **`SKILL.md` §"A POOL slot wants N files" rewritten.** **Why:** the previous text said "each
+  entry is **its own slot**: its own path, its own row, its own install" *and* "≥6 stocked for
+  the slot as a whole" four lines apart — those contradict, and the folder shape settles it.
+  **The slot is the FOLDER.** One row, one shelf, one verdict, all keyed by `pool_dir`. The
+  filenames inside are invented at install time and mean nothing; keying anything on them makes
+  an unselect re-key the shelf and orphan the verdict. Also states that `pool` is a target and
+  not a manifest, so ending at 3 of 4 is a real state rather than a failure.
+- **`SKILL.md` §6 INSTALL — pass `pool_dir` on the grab.** **Why:** with it set, `grab` ADDS to
+  the folder and skips the same-stem delete a single-slot install does. **Omit it and installing
+  clip 2 silently deletes clip 1** — the loop unlinks every same-stem file in the target dir.
+  Called out with the ⚠️ it deserves and pinned by
+  `tests/test_media_finder_pools.py::test_two_pool_installs_coexist`. Also documents that a
+  re-grab of the same url replaces rather than duplicates (the filename is url-derived), and
+  names the two curation routes (`pool/list`, `pool/unselect`) as human-facing, not scout-facing.
+- **`SKILL.md` — the second-opinion TOML walk now sees folder pools too.** **Why:** yesterday's
+  fix taught it `files = [...]`; a `pool_dir` block has neither a singular `file` nor a `files`
+  array, so it was invisible again by a different route. Added a `pool_dir` pass that reports a
+  pool as unfilled only when its folder holds nothing. **Verified** by running the block verbatim
+  against a real pooled game: `2 pools, 1 empty`, matching what `game-review/load` reports.
+- **`SKILL.md` frontmatter `description`** — "per declared entry" → "per target", since there are
+  no declared entries any more.
+
+Superseded from the 07-30 entry below: the `files = [...]` guidance is now the LEGACY path.
+It still works and `the_long_summer_test` still ships 30 of them, but nothing new should use it —
+an explicit list hardcodes a count you must guess before seeing a clip, and every entry it can't
+fill stays on the missing list forever.
+
+## 2026-07-30 — media POOLS: a slot can want N files, and the walk was blind to them
+
+An engine change this day made `files = [...]` work on `video` blocks as well as `image`, and made
+pools **cycle** (visit 1 → entry 1, visit 2 → entry 2, wrapping) instead of picking at random. A
+repeatable beat can now hold 3–4 clips. That changes this skill's job, because a pool entry is a
+separate file to find and install.
+
+- **`SKILL.md` — the second-opinion TOML walk now sees pools** (the `python3` block under
+  "trust the API, and still run the walk"). **Why:** its regex is
+  `(?:file|image|video|nav_image)\s*=\s*"…"` — against `files = ["a.webm", …]` the `file` alternative
+  hits `s`, not `=`, so it matched **nothing**. Measured, not assumed:
+  `rx.findall(pool_block)` → `[]`. A game whose repeatable beats all used pools would audit as
+  "0 missing" while shipping blank — and ~30 image pools in `the_long_summer_test` have been dark
+  for months for exactly this reason. Added a second pass over `files\s*=\s*\[([^\]]*)\]`.
+  **Verified:** a fixture with 2 singular refs + 5 pool entries → singular pass finds 2, both passes
+  find 7. The API-side enumerators (`api/v1/game_review.py`, `manage.py check_media`) had the
+  identical bug and were fixed the same day behind `apps/common/media_blocks.py::block_media_paths`;
+  this walk is the independent check on them, so it had to be fixed too, not just deferred to them.
+- **`SKILL.md` — new "A POOL slot wants N files, not one" under the deliverable contract.**
+  **Why:** the contract said "a working file installed" (singular) with no notion that one block can
+  declare N paths. The load-bearing rule is **install every gate SURVIVOR up to N, never "the top N
+  regardless"** — rank 4 of 6 may be the one that scraped past, and in a pool the player sees it
+  every fourth visit forever. Also states the economics: a pool shares one `description` and one
+  `search_queries` set, so it is one search and one judging pass — you are not doing N× the work,
+  you are spending survivors you already paid to judge and currently throw away.
+- **`SKILL.md` §6 INSTALL — "one `grab` per entry"** with the loop, and an explicit note that every
+  entry runs the same per-file gates. **Why:** `grab` derives its path from the `file` passed in, so
+  a pool is N calls; without saying so, the obvious failure is installing one clip and calling a
+  4-entry pool done. The gate note exists because a pool is exactly where an unstripped clip would
+  ride in behind a good one.
+- **`SKILL.md` frontmatter `description`** — "installs one best-guess pick … — or, for a
+  `files = [...]` pool slot, one gate-surviving pick per declared entry." **Why:** the description is
+  the trigger surface and also the skill's own summary of its contract; leaving "one pick" there
+  contradicts the new §. Trigger phrases left untouched.
+
+## 2026-07-29 — `find-media-b` DELETED; the Q2 A/B is closed, ranking stays
 
 Recorded here because the arm's own ledger went with it. The experiment asked one question:
 **does question 2 — HEAT/SETTING/CRAFT ranking — earn its keep?** Answer: yes. Ranking stays.

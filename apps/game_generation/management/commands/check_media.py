@@ -14,6 +14,8 @@ from collections import defaultdict
 
 from django.core.management.base import BaseCommand, CommandError
 
+from apps.common.media_blocks import block_media_paths, block_media_pool
+
 try:
     import tomllib
 except ImportError:
@@ -120,32 +122,8 @@ class Command(BaseCommand):
             # Check all nodes
             nodes = canvas.get('nodes', [])
             for node in nodes:
-                blocks = node.get('blocks', [])
-                for block in blocks:
-                    block_type = block.get('type')
-                    props = block.get('props', {}) or {}
-
-                    if block_type == 'video':
-                        file_path = props.get('file')
-                        if file_path:
-                            refs.append({
-                                'type': 'video',
-                                'file': file_path,
-                                'description': props.get('description', ''),
-                                'canvas_id': canvas_id,
-                                'canvas_name': canvas_name,
-                            })
-
-                    elif block_type == 'image':
-                        file_path = props.get('file')
-                        if file_path:
-                            refs.append({
-                                'type': 'image',
-                                'file': file_path,
-                                'description': props.get('alt', '') or props.get('description', ''),
-                                'canvas_id': canvas_id,
-                                'canvas_name': canvas_name,
-                            })
+                for block in node.get('blocks', []):
+                    self._extract_from_block(block, canvas_id, canvas_name, refs)
 
                 # Also check exit_block
                 exit_block = node.get('exit_block', {})
@@ -153,60 +131,56 @@ class Command(BaseCommand):
                     self._extract_from_block(exit_block, canvas_id, canvas_name, refs)
 
             # Check canvas-level blocks
-            canvas_blocks = canvas.get('blocks', [])
-            for block in canvas_blocks:
-                block_type = block.get('type')
-                props = block.get('props', {}) or {}
-
-                if block_type == 'video':
-                    file_path = props.get('file')
-                    if file_path:
-                        refs.append({
-                            'type': 'video',
-                            'file': file_path,
-                            'description': props.get('description', ''),
-                            'canvas_id': canvas_id,
-                            'canvas_name': canvas_name,
-                        })
-
-                elif block_type == 'image':
-                    file_path = props.get('file')
-                    if file_path:
-                        refs.append({
-                            'type': 'image',
-                            'file': file_path,
-                            'description': props.get('alt', '') or props.get('description', ''),
-                            'canvas_id': canvas_id,
-                            'canvas_name': canvas_name,
-                        })
+            for block in canvas.get('blocks', []):
+                self._extract_from_block(block, canvas_id, canvas_name, refs)
 
         return refs
 
     def _extract_from_block(self, block: dict, canvas_id: str, canvas_name: str, refs: list):
-        """Helper to extract media from a block."""
+        """Extract every media reference a single block declares.
+
+        The three call sites above were hand-duplicated copies of this, all
+        reading `props['file']` — so a pool block (`files = [...]`, no `file`)
+        was invisible in all three and its slots never appeared as missing.
+        `block_media_paths` returns one path per pool entry, and each becomes its
+        own row because each is a separate file to find and install.
+        """
         block_type = block.get('type')
+        if block_type not in ('video', 'image'):
+            return
         props = block.get('props', {}) or {}
 
         if block_type == 'video':
-            file_path = props.get('file')
-            if file_path:
-                refs.append({
-                    'type': 'video',
-                    'file': file_path,
-                    'description': props.get('description', ''),
-                    'canvas_id': canvas_id,
-                    'canvas_name': canvas_name,
-                })
-        elif block_type == 'image':
-            file_path = props.get('file')
-            if file_path:
-                refs.append({
-                    'type': 'image',
-                    'file': file_path,
-                    'description': props.get('alt', '') or props.get('description', ''),
-                    'canvas_id': canvas_id,
-                    'canvas_name': canvas_name,
-                })
+            description = props.get('description', '')
+        else:
+            description = props.get('alt', '') or props.get('description', '')
+
+        # A FOLDER pool contributes ONE ref for the whole block — its filenames
+        # live on disk, not in the TOML. `pool_target` is what we were aiming for,
+        # so a half-filled pool reports "2/4" instead of passing as complete.
+        # Must match api/v1/game_review.py's treatment or the two enumerators
+        # drift apart again, which is what apps/common/media_blocks.py exists to stop.
+        pool_spec = block_media_pool(props)
+        if pool_spec is not None:
+            refs.append({
+                'type': block_type,
+                'file': pool_spec['dir'],
+                'description': description,
+                'canvas_id': canvas_id,
+                'canvas_name': canvas_name,
+                'pool_dir': pool_spec['dir'],
+                'pool_target': pool_spec['target'],
+            })
+            return
+
+        for file_path in block_media_paths(props):
+            refs.append({
+                'type': block_type,
+                'file': file_path,
+                'description': description,
+                'canvas_id': canvas_id,
+                'canvas_name': canvas_name,
+            })
 
     def _categorize(self, canvas_id: str, file_path: str) -> tuple[str, str]:
         """Categorize a media reference by section and subsection."""
@@ -242,6 +216,27 @@ class Command(BaseCommand):
 
         for ref in media_refs:
             file_path = ref['file']
+
+            if ref.get('pool_dir'):
+                # A folder pool is satisfied by CONTENTS, not by one filename.
+                # `_scan_media_folder` already returns a flat set of relative
+                # paths, so counting the folder's members needs no extra I/O.
+                prefix = ref['pool_dir'].rstrip('/') + '/'
+                count = sum(1 for p in available_files if p.startswith(prefix))
+                target = ref['pool_target']
+                category, subsection = self._categorize(ref['canvas_id'], file_path)
+                results[category][subsection].append({
+                    'file': f"{ref['pool_dir']}/  [pool {count}/{target}]",
+                    # Anything in the folder renders, so it is FOUND. Falling
+                    # short of target is a shortfall, not a hole — reported in
+                    # the label rather than as a missing file.
+                    'found': count > 0,
+                    'found_as': f"{count} file{'' if count == 1 else 's'}" if count else None,
+                    'description': ref['description'][:50] if ref['description'] else '',
+                    'type': ref['type'],
+                })
+                continue
+
             found_as = self._find_media_file(file_path, available_files)
 
             category, subsection = self._categorize(ref['canvas_id'], file_path)

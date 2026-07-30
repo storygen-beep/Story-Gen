@@ -60,6 +60,55 @@
 
     function mediaUrl(item) { return API + item.media_url; }
 
+    // A pool card's preview: one small tile per clip currently in the folder, in
+    // the order the game will cycle them, under an "n of target" badge. The
+    // shortfall is a SOFT signal — a 2-of-4 pool plays fine, it is just thinner
+    // than intended — so it is stated, not flagged as broken.
+    function poolBox(item) {
+      var items = item.pool_items || [];
+      var target = item.pool_target || 0;
+      var box = el("div", "pool-box");
+
+      var head = el("div", "pool-head");
+      var cls = "pool-count" + (items.length === 0 ? " empty"
+                              : (target && items.length < target ? " short" : ""));
+      head.appendChild(el("span", cls, items.length + " of " + target));
+      head.appendChild(el("span", "pool-dir", item.pool_dir + "/"));
+      box.appendChild(head);
+
+      if (!items.length) {
+        box.appendChild(el("div", "pool-none", "empty — nothing installed yet"));
+        return box;
+      }
+
+      var grid = el("div", "pool-grid");
+      items.forEach(function (m, i) {
+        var wrap = el("div", "pool-cell");
+        var url = API + "/games/" + GAME + "/" + m.serve_path;
+        var node;
+        if (m.actual_type === "video") {
+          node = el("video", "pool-thumb");
+          // #t=0.1 forces the first frame to paint as a poster. `preload="none"`
+          // renders a black rectangle, which makes a contact sheet useless — the
+          // whole point here is comparing the clips at a glance.
+          node.src = url + "#t=0.1";
+          node.muted = true; node.loop = true;
+          node.playsInline = true; node.preload = "metadata";
+          node.addEventListener("mouseover", function () { node.play(); });
+          node.addEventListener("mouseout", function () { node.pause(); });
+        } else {
+          node = el("img", "pool-thumb");
+          node.src = url; node.loading = "lazy";
+        }
+        node.addEventListener("click", function () { window.open(url); });
+        wrap.appendChild(node);
+        wrap.appendChild(el("div", "pool-cap", (i + 1) + ". " + m.actual_file));
+        grid.appendChild(wrap);
+      });
+      box.appendChild(grid);
+      return box;
+    }
+
     // ---- save a review (simple request: no custom headers -> no CORS preflight) ----
     // Optimistic, but rolls back item state on failure and only fires onOk (the UI
     // flip) when the server actually persisted — so the card never lies about what's saved.
@@ -70,7 +119,8 @@
       if (tickEl) tickEl.textContent = "saving…";
       return fetch(API + "/api/v1/dev/media-review/reviews?game=" + encodeURIComponent(GAME), {
         method: "POST",
-        body: JSON.stringify({ file: item.file, status: status, note: note })
+        body: JSON.stringify({ file: item.file, slot_key: item.slot_key || item.file,
+                               status: status, note: note })
       }).then(function (r) {
         if (!r.ok) throw new Error("save failed");
         if (tickEl) { tickEl.textContent = "saved ✓"; setTimeout(function () { tickEl.textContent = ""; }, 1400); }
@@ -90,7 +140,14 @@
       }
 
       // media / placeholder
-      if (item.found && item.media_url) {
+      //
+      // A POOL is a folder of clips the game cycles one per visit, so the question
+      // to answer here is "does this SET work" — which one big preview cannot show.
+      // Render every member as a small tile instead, in cycle order, so a
+      // near-duplicate or an off-tone clip is visible at a glance.
+      if (item.pool_dir) {
+        card.appendChild(poolBox(item));
+      } else if (item.found && item.media_url) {
         if (item.media_type === "video") {
           var v = el("video", "media-thumb");
           v.src = mediaUrl(item);
@@ -174,8 +231,20 @@
       var fparams = new URLSearchParams({
         id: GAME,
         file: item.file || "",
+        // The slot's stable identity — what its shelf and verdict file under.
+        // Equals `file` unless the block authored an `id`, in which case `file`
+        // still says where the bytes go and this says which shelf it is.
+        slot_key: item.slot_key || item.file || "",
         q: (item.search_queries || []).join(" | ")
       });
+      // A POOL slot is a folder of clips the game cycles, so the picker opens in
+      // two-zone mode: selected on top, options below. `pool` is the same string
+      // as `file` (the folder), which is also the options-store and review key —
+      // one identity, so the shelf and the verdicts can never fork.
+      if (item.pool_dir) {
+        fparams.set("pool", item.pool_dir);
+        if (item.pool_target) fparams.set("target", String(item.pool_target));
+      }
       findLink.href = "find.html?" + fparams.toString();
       findRow.appendChild(findLink);
       body.appendChild(findRow);
