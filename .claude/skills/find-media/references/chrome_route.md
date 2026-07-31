@@ -153,7 +153,36 @@ stills, Facebook, and TikTok. `drunk guy` reclassified the whole query as mainst
 query was not too long — it had a character in it. `back alley blowjob gif amateur`, the same
 length, worked.
 
-**Shape:** `<act> <position> [setting-if-load-bearing] [anti-studio modifier] gif`
+**Shape:** `<act> <her posture> <HIS posture — only when it is not the act's default> [setting-if-load-bearing] [anti-studio modifier] gif`
+
+**An act phrase carries a DEFAULT PARTNER POSTURE, and it wins unless you override it.** This is
+the single largest source of rejections in this skill's recorded history, and until 2026-08-01 the
+shape above had one `<position>` slot that never said whose body it named.
+
+`kneeling blowjob` retrieves **she-kneels-he-STANDS**. That is the canonical composition on this
+corpus. If your beat needs him **seated, reclining, lying down, or bent over**, that is not the
+default and the query has to say so — `office chair`, `under the desk`, `sitting in chair`,
+`on the couch`.
+
+**Measured on `vesper`, 2026-07-31 — three slots, same act, different queries:**
+
+| slot | beat needs | did the query name HIS posture? | seated/chair/desk slugs returned | dominant rejection |
+|---|---|---|---|---|
+| `colm` | standing — *the default* | yes | n/a | position was fine |
+| `renner` | **seated** | yes — `office chair`, `under the desk`, `man sitting in chair` | **13 of 43** | reduced |
+| `calloway` | **seated** | **no** — `glasses`, `close up`, `pov` only | **0 of 10** | `him_standing`, in three separate runs: 11/15, 12/26, 15/19 |
+
+Calloway's queries asked for wardrobe and framing and never asked for a seated man, so the corpus
+gave it the default one, over and over, and the judging step dutifully rejected every one.
+
+**Be honest about which half of this is proven.** The *omission* is measured — naming his posture
+correlates with getting it, and not naming it correlates with not getting it. Whether adding the
+token to calloway's queries would have fixed that slot has **not** been tested. Treat the missing
+token as the established defect and the extra token as the obvious remedy, not a proven one.
+
+**Corollary — you cannot judge your way out of this.** A wrong partner posture is a legitimate
+`position:` gate failure, so a bad query here does not produce bad picks; it produces an expensive
+empty shelf. Fix it in the query or pay for it three rounds later.
 
 **The URL:** build it as `https://www.google.com/search?q=<url-encoded terms>&tbm=isch`, then
 **confirm from the screenshot that you are on the image grid**, not the web tab. If you see a

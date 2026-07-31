@@ -1,5 +1,76 @@
 # find-media — CHANGELOG
 
+## 2026-08-01 — the query names BOTH bodies; vesper gets the first real lexicon
+
+Follows directly from yesterday's A/B null result. If judging was not the bottleneck, retrieval was
+— and this skill already said so without acting on it (`scoring_rubric.md`: *"**Provisional.** The
+mechanism is query-side, not gate-side."*).
+
+- **`references/chrome_route.md` §3 — the query SHAPE now names both bodies.** **Why:** the shape was
+  `<act> <position> …` with **one** position slot that never said whose posture it meant, and an act
+  phrase silently fixes the partner's. `kneeling blowjob` retrieves she-kneels-he-**STANDS**.
+  **Measured on `vesper`, three slots, same act:** `renner` needed him seated, its queries said
+  `office chair` / `under the desk` / `man sitting in chair`, and **13 of 43** fetched slugs came back
+  seated/chair/desk. `calloway` needed the same posture, its queries said `glasses` / `close up` /
+  `pov` and named no posture at all — **0 of 10**, with `him_standing` the dominant rejection across
+  three separate runs (11/15, then 12/26 and 15/19 in the A/B arms). `colm` needed the default and
+  was fine. Shape is now
+  `<act> <her posture> <HIS posture — only when it is not the act's default> …`.
+  - **Stated honestly:** the *omission* is measured. Whether adding the token would have rescued
+    calloway is **not** tested. Written up as an established defect with an obvious-but-unproven
+    remedy, not as a fix with evidence behind it.
+  - Recorded the corollary that makes it expensive: a wrong partner posture is a legitimate
+    `position:` gate failure, so a bad query here does not produce bad picks — it produces an
+    expensive empty shelf, three rounds later.
+- **`references/query_rewriting.md` §Canonical action vocabulary — position guidance moved off
+  `sex`/`fuck` and onto every act.** **Why:** the list bound positions only to penetration; `blowjob`
+  — the act in every slot that failed — carried no posture guidance at all. Added a defaults table
+  (what each act phrase retrieves unprompted, and the tokens that override it). **Also corrected a
+  worked example that pointed the wrong way:** it read *"standing when the beat says kneeling gets
+  thrown back"*, which assumes **her** posture is the variable. Every failure actually recorded in
+  this repo is the opposite — her posture was right and *his* was wrong.
+- **`templates/scope_brief.md` §Queries — closed two gaps against `chrome_route.md` §3.** The brief's
+  own rule list was missing **the `gif`/`webm` token** (which `chrome_route.md` calls *"the
+  highest-leverage token in the query"*, measured 3× at 7→59 / 1→54 / 0→91 fetchable urls) and the
+  **~2-token setting cap**. Both added, plus the posture rule and the shape line, so the three
+  statements of the Google rule set now agree.
+- **`games/vesper/.find-media/lexicon.md` — CREATED.** **Why:** the mechanism has been specified since
+  the chrome-route rewrite and used exactly twice, both times in a `media_lab` test rig. The
+  cross-game roll-up `games/.find-media/` **does not exist**, and no real game had a lexicon at all —
+  so every term measured yesterday would have died with the session. Seeded with what was measured:
+  the posture defaults, which settings this corpus does and does not shoot, the slug-blindness
+  finding, and one open gap carried over from `media_lab_c` (*the gentle cradling hand at the back of
+  the head* still has no working name, and it killed a pool).
+  - **It also records a correction.** A prior run reported "zero storerooms exist in this corpus"
+    after 225 urls. False: `colm`'s wave-1 **did** retrieve a linen store
+    (`cdn.nsfwgify.com/44903/kneeling-blowjob.gif`), later ranked #1 by *both* A/B arms. The claim was
+    made after the clip disproving it had already been pulled from the pool.
+- **`SKILL.md` §Evidence — `query_ledger.jsonl` documented.** **Why:** it exists, it is the only
+  machine-written record of what was searched, and it appeared in **no instruction file** — a prose
+  summary claiming "4 rounds" was caught contradicting a ledger showing 7. Rule added: when they
+  disagree, the ledger is right. Recorded with it: **`urls_yielded` is not a quality signal** — 31
+  queries returned 40–92 urls with no relationship to whether the query worked.
+- **`SKILL.md` §Stop conditions — reconciled a live contradiction.** The global cap said 3 sibling
+  rounds; `scoring_rubric.md` told a setting-driven slot to stop at 2. Now stated together with the
+  reason the setting cap is tighter (a missing room costs points and never a rejection; a missing
+  posture costs the whole shelf). Also added: **before blaming the term at round 3, check the
+  shape** — the recorded failure is rarely an unnameable beat, it is a query that let the corpus
+  choose the partner's posture.
+- **Deliberately NOT changed.** `scripts/validate_queries.py` gains no position vocabulary — this
+  skill's own rule is that advisory prose must never be promoted into "the validator does X", so the
+  posture rule stays `[ADVISORY]`. `scripts/fetch_candidates.py` untouched, though the finding is
+  recorded in the lexicon: the one genuine storeroom in 47 clips is slugged `kneeling-blowjob.gif`,
+  so `--want <room-word>` ranks *down* exactly the clips that have the room. The repo's two
+  exemplars already disagree about whether those flags take setting or body vocabulary; body wins.
+- **Verified:** the three Google rule lists (`chrome_route.md` §3, `scope_brief.md` §Queries,
+  `query_rewriting.md` Part 2) now state the same rules; `grep -n "position\|posture"
+  scripts/validate_queries.py` still returns nothing, confirming no doctrine drifted onto the code;
+  the lexicon parses as the documented 4-column pipe format.
+  **NOT verified, and cannot be from disk:** this is a *retrieval* change. The honest test is the next
+  slot needing a non-default partner posture — write its queries under the new shape and compare its
+  seated-slug rate against the baselines now recorded in the lexicon (calloway 0/10, renner 13/43).
+  Until that number exists, this is a reasoned change, not a proven one.
+
 ## 2026-07-31 (A/B result) — the must_show/avoid deletion has NO measurable effect on picks
 
 The controlled comparison promised in the entry below was run. **It is a null result, and the

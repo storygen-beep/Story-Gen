@@ -101,8 +101,33 @@ Use these exact forms; variants split the pool across synonyms.
 - `blowjob` — her mouth on him
 - `cunnilingus` / `eating out` — his mouth on her
 - `sex` / `fuck` — penetration; always pair with a position (`missionary`, `doggy`,
-  `riding`, `standing`, `bent over`) because position is a documented rejection class —
-  standing when the beat says kneeling gets thrown back.
+  `riding`, `standing`, `bent over`) because position is a documented rejection class.
+
+### Every act phrase has a DEFAULT PARTNER POSTURE — name his only when you need to override it
+
+Position is not one token. It is **two bodies**, and the act phrase silently fixes the second one.
+Ask for the act plus her posture and you get the corpus's canonical composition for that pair; if
+your beat needs a different partner posture, the query has to say so or the default wins.
+
+| act phrase | what it retrieves by default | say this to override |
+|---|---|---|
+| `kneeling blowjob` | she kneels, **he STANDS** | `office chair`, `under the desk`, `sitting in chair`, `seated`, `on the couch` |
+| `blowjob` (bare) | unconstrained — expect both, in unknown proportion | name the posture you want |
+| `sex` / `fuck` | nothing — genuinely ambiguous | always pair with a position; this act was already right |
+
+**Measured** (`vesper`, 2026-07-31): a slot whose queries named his posture returned **13 of 43**
+seated-slugged results; a sibling slot needing the same posture, whose queries named only wardrobe
+and framing, returned **0 of 10** — and `him_standing` was its dominant rejection across three
+separate runs (11 of 15, then 12 of 26 and 15 of 19). Full table in `chrome_route.md` §3.
+
+Two things this does **not** claim. It has not been tested whether adding the token would have
+rescued that slot — the omission is what is measured, not the remedy. And the ratio is a slug count,
+not a frame check: a slug saying `chair` is a term-mine hint, never a correctness claim
+(`scripts/fetch_candidates.py` `rank()`), so the strip still decides.
+
+**The old worked example here pointed the wrong way.** It read *"standing when the beat says
+kneeling gets thrown back"* — which assumes **her** posture is the variable. Every failure actually
+recorded in this repo is the opposite: her posture was right and **his** was wrong.
 
 ## Tier-appropriate vocabulary `[PARTLY ENFORCED]`
 

@@ -667,6 +667,7 @@ briefs cause duplicate work.
 games/<game>/.find-media/
 ├── game_review.json                     # cached missing list
 ├── lexicon.md                           # terms confirmed this run (compounds across runs)
+├── query_ledger.jsonl                   # EVERY query run, one line each — see below
 ├── scope/<item_id>.md                   # SCOPE briefs, with resume markers
 ├── evidence/<item_id>/
 │   ├── candidates/                      # raw downloads
@@ -692,6 +693,19 @@ Terms that prove out across more than one game get copied up to `games/.find-med
 That is the one part of a run that compounds: every future run starts with a bigger
 vocabulary than this one did.
 
+**`query_ledger.jsonl` — log every query, as you run it.** One JSON line per query:
+`{"slot", "query", "date", "round", "source", "urls_yielded", "status"}`. It is the only
+machine-written record of what was actually searched, and that matters more than it sounds: a prose
+run summary claiming "4 rounds" has already been caught contradicting a ledger showing 7. When the
+two disagree, **the ledger is right.**
+
+⚠️ **`urls_yielded` is NOT a quality signal.** Measured across 31 vesper queries: 40–92 urls, with no
+relationship to whether the query found anything usable. Record the number because it is free; never
+tune a query on it, and never report it as evidence a query worked.
+
+The ledger is also what makes the lexicon honest — it is the raw log the lexicon's verdicts are
+derived from, so a lexicon entry that no ledger line supports is a guess.
+
 **Keep `scores.jsonl` even for losers.** `scores.jsonl` is your *prediction*;
 `media_reviews.json` (approved / disapproved, written by the review UI) is the human's
 *ground truth*. When he disapproves your install and grabs stocked option #4, that pair is a
@@ -706,6 +720,16 @@ Hard limits — never exceed:
 - **3 sibling-query rounds per slot.** If three differently-phrased Google queries can't put
   6 gate-survivors on the shelf, the problem is the term, not the query — go back to the word
   hunt or tell the user the beat may not have a name in this vocabulary.
+  - **⚠️ Before blaming the term, check the SHAPE** (`references/chrome_route.md` §3). The
+    recorded failure is almost never an exotic beat with no name; it is a query that named the
+    act and *her* posture and let the corpus pick *his*. A slot can burn all three rounds on
+    perfectly good terms and still return nothing usable because every result has the partner
+    standing. That is a shape defect, and re-hunting the term will not find it.
+  - **A setting-driven slot stops at 2, not 3** (`references/scoring_rubric.md` §SETTING). If two
+    rounds come back with the room absent from *every* candidate, the room is not retrievable —
+    score it `null` and rank on heat rather than spending the third round. The cap is tighter here
+    because a missing room is cheap to work around (it costs SETTING points, never a rejection),
+    while a missing act or posture is not.
 - **10 total query variations per item**, across all rounds.
 - **Skip items marked `[FAIL]` twice in `run_manifest.json`** — don't infinite-loop on cursed
   slots.

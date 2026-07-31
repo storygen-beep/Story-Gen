@@ -212,17 +212,34 @@ is wrong on the other and ranking them against each other is meaningless.
 - **variant_2**: `{{query}}`
 - **variant_3**: `{{query}}`
 
-Rules that produced these (see `references/query_rewriting.md` for the full set):
+**Shape:** `<act> <her posture> <HIS posture — only when it is not the act's default> [setting-if-load-bearing] [anti-studio modifier] gif`
+
+Rules that produced these — this list must stay in sync with `references/chrome_route.md` §3 and
+`references/query_rewriting.md` Part 2:
 
 - Verbose is fine. Natural language is fine. Loose grammar is fine — `on kneel blowjob`
   worked.
+- **Append `gif` or `webm`. NOT optional — the highest-leverage token in the query.** Measured
+  3×, same query ± that one token: **7→59, 1→54, 0→91** fetchable urls.
+- **Name HIS posture when it is not the act's default.** `kneeling blowjob` retrieves
+  she-kneels-he-**STANDS**; if the beat needs him seated or reclining, say `office chair`,
+  `under the desk`, `sitting in chair`. Measured: the slot that named it got **13 of 43**
+  seated-slugged results; the sibling slot that named only wardrobe and framing got **0 of 10**,
+  and `him_standing` was its dominant rejection across three runs. A wrong partner posture is a
+  legitimate gate failure, so this buys you an empty shelf, not a bad pick.
 - **Strip story and character words.** Measured: `back alley blowjob gif drunk guy night`
   returned Reddit movie stills, Facebook, and TikTok — "drunk guy" reclassified the whole
   query as mainstream. Character words don't dilute here, they *change the intent class*.
 - Add an anti-studio modifier when the beat is grimy: `amateur`, `real`, `voyeur`,
   `hidden cam`. This is the fix for the most-repeated defect in this game's history —
   bright studio porn arriving for a beat that wanted dirt.
-- Only name the setting if `setting_is_load_bearing` is true.
+- Only name the setting if `setting_is_load_bearing` is true — **and cap it at ~2 setting
+  tokens.** Stacking place + time + light (`alley` + `at night` + `streetlight`) reclassifies the
+  query as stock photography and returns Shutterstock. Name the place once and stop.
+- **Log every query to `games/<game>/.find-media/query_ledger.jsonl`** — the only machine-written
+  record of what was searched. Prose summaries of a run have already been caught contradicting it.
+  ⚠️ **`urls_yielded` is NOT a quality signal:** 31 queries on `vesper` returned 40–92 urls with no
+  relationship to whether the query worked. Record the number; never tune on it.
 
 ### PornHub tag — vocabulary only, never a download
 
