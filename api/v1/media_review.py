@@ -14,7 +14,6 @@ Endpoints (under /api/v1/dev/media-review/):
 """
 
 import json
-import os
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import quote
@@ -25,6 +24,8 @@ from django.http import JsonResponse
 from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
+
+from apps.common.json_ledger import ledger_lock, write_json_atomic
 
 from .game_review import GAMES_ROOT, _extract_missing_media, _resolve_final_toml
 
@@ -79,14 +80,20 @@ def _read_reviews(game_dir: Path) -> dict:
 
 
 def _write_reviews(game_dir: Path, data: dict) -> None:
-    """Atomically replace the ledger (tmp file + os.replace) so a crash mid-write
-    can't truncate it — a truncated ledger reads back as empty = total review loss."""
-    path_ = _reviews_path(game_dir)
-    path_.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path_.with_name(path_.name + ".tmp")
-    with tmp.open("w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
-    os.replace(tmp, path_)
+    """Atomically replace the ledger so a crash mid-write can't truncate it — a
+    truncated ledger reads back as empty = total review loss.
+
+    Call this INSIDE `_reviews_lock`. This ledger has TWO writers in different
+    modules — the review UI here, and `media_finder._clear_review_status`, which
+    blanks a verdict when `grab` replaces the bytes — so an unlocked
+    read-modify-write can drop one of them.
+    """
+    write_json_atomic(_reviews_path(game_dir), data)
+
+
+def _reviews_lock(game_dir: Path):
+    """Serialise a read-modify-write of the review ledger. See `apps.common.json_ledger`."""
+    return ledger_lock(_reviews_path(game_dir))
 
 
 def _lane_for(item: dict, canvas_by_id: dict, npc_name_by_id: dict) -> dict:
@@ -263,14 +270,15 @@ def post_review(request):
         return JsonResponse({"error": "status must be approved, disapproved, or null"}, status=400)
     note = body.get("note", "")
 
-    ledger = _read_reviews(game_dir)
-    now = datetime.now(timezone.utc).isoformat()
-    entry = ledger["reviews"].get(file_, {})
-    entry.update({"status": status, "note": note, "updated_at": now})
-    ledger["reviews"][file_] = entry
-    ledger["game"] = game
-    ledger["updated_at"] = now
-    _write_reviews(game_dir, ledger)
+    with _reviews_lock(game_dir):
+        ledger = _read_reviews(game_dir)
+        now = datetime.now(timezone.utc).isoformat()
+        entry = ledger["reviews"].get(file_, {})
+        entry.update({"status": status, "note": note, "updated_at": now})
+        ledger["reviews"][file_] = entry
+        ledger["game"] = game
+        ledger["updated_at"] = now
+        _write_reviews(game_dir, ledger)
 
     return JsonResponse({"ok": True, "file": file_, "review": entry})
 
