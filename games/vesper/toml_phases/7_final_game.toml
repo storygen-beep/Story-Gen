@@ -3521,7 +3521,14 @@ nodeId     = "base_knees"
 id   = "base_knees"
 name = "On your knees"
 blocks = [
-  { type = "video", props = { file = "sex/mercer_serve_knees_t5.webm", description = "On her knees on the floor, his cock in her mouth, his hand setting the pace by her hair while he watches the city and not her, using her like a tool he isn't paying attention to.", search_queries = ["office floor blowjob hair pull", "penthouse kneeling blowjob girl"] } },
+  # POOL (rev 103) — the loop's most-seen clip: "Keep sucking his cock." below re-targets this
+  # same node, so the player watches it repeatedly INSIDE one visit (that self-loop is how
+  # loop_npc_pleasure reaches 50) and again every later visit. Everything in the folder cycles
+  # one clip per visit. `pool` is find-media's TARGET, not a manifest — the folder is the truth,
+  # so "3 of 4" is a healthy state. Must-show/avoid are inline because every clip in a pool has
+  # to satisfy the SAME description; his INATTENTION is the heat carrier, which is what rules
+  # out eye contact and his-POV here.
+  { type = "video", props = { pool_dir = "sex/mercer_serve_knees_t5", pool = 4, description = "On her knees on the floor, his cock in her mouth, his hand setting the pace by her hair while he watches the city and not her, using her like a tool he isn't paying attention to. Must show: her on her knees, his cock in her mouth, his hand at her hair or the back of her head setting the pace. Avoid: him looking down at her, her looking up into his eyes, POV from his eyes, her on top or riding, a switch to another act partway through.", search_queries = ["office floor blowjob hair pull", "penthouse kneeling blowjob girl"] } },
   { type = "paragraph", content = "On her knees on the floor, his cock in her mouth, his hand setting the pace by her hair. He watches the city and not her, talking to no one — a maintenance note, a time he wants a thing done. She services him." },
 ]
 [canvases.nodes.exit_block]
