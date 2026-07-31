@@ -208,7 +208,10 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 id   = "base_desk"
 name = "Over the desk"
 blocks = [
-  { type = "video", props = { file = "sex/mercer_serve_desk_t5.webm", description = "Bent over the desk, his hand flat between her shoulder blades holding her down, he fucks her from behind unhurried and proprietary while her body answers the way it always does.", search_queries = ["office desk sex from behind", "man fucking girl bent desk"] } },
+  # POOL (rev 105) — self-loop pose node: the "keep going" choice re-targets this same node, so
+  # this clip plays 4-6x inside ONE visit (that grind is how loop_npc_pleasure reaches 50) and
+  # again every later visit. Folder is the truth; `pool` is only find-media's target.
+  { type = "video", props = { pool_dir = "sex/mercer_serve_desk_t5", pool = 4, description = "Bent over the desk, his hand flat between her shoulder blades holding her down, he fucks her from behind unhurried and proprietary while her body answers the way it always does.", search_queries = ["office desk sex from behind", "man fucking girl bent desk"] } },
   { type = "paragraph", content = "Bent over the desk, his hand flat between her shoulder blades to keep her down, he fucks her from behind — unhurried, proprietary. Her body answers the way it always does, and he notes that it does, the way you'd note a gauge reading true." },
 ]
 [canvases.nodes.exit_block]
@@ -245,7 +248,10 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 id   = "base_glass"
 name = "Against the glass"
 blocks = [
-  { type = "video", props = { file = "sex/mercer_serve_glass_t5.webm", description = "Against the floor-to-ceiling glass with the lit city below, he takes her ass in long deliberate strokes, both hands on her hips, while she braces on the glass and waits for a give that never comes.", search_queries = ["window anal sex standing behind", "man fucking girl ass glass"] } },
+  # POOL (rev 105) — self-loop pose node: the "keep going" choice re-targets this same node, so
+  # this clip plays 4-6x inside ONE visit (that grind is how loop_npc_pleasure reaches 50) and
+  # again every later visit. Folder is the truth; `pool` is only find-media's target.
+  { type = "video", props = { pool_dir = "sex/mercer_serve_glass_t5", pool = 4, description = "Against the floor-to-ceiling glass with the lit city below, he takes her ass in long deliberate strokes, both hands on her hips, while she braces on the glass and waits for a give that never comes.", search_queries = ["window anal sex standing behind", "man fucking girl ass glass"] } },
   { type = "paragraph", content = "Against the glass wall, the lit city laid out under them, he takes her ass in long deliberate strokes, both hands on her hips. This is the act that hands her the controls of any other man alive. She braces on the glass and waits to feel it start — the give, the opening. It doesn't come. It never comes with him." },
 ]
 [canvases.nodes.exit_block]
@@ -906,7 +912,10 @@ nodeId     = "base_oral_r"
 id   = "base_oral_r"
 name = "On your knees"
 blocks = [
-  { type = "video", props = { file = "sex/renner_loop_oral_t5.webm", description = "A woman on her knees between an office chair and desk with the seated man's cock in her mouth, his hand gentle in her hair.", search_queries = ["office blowjob kneeling chair", "desk blowjob man seated office"] } },
+  # POOL (rev 105) — self-loop pose node: the "keep going" choice re-targets this same node, so
+  # this clip plays 4-6x inside ONE visit (that grind is how loop_npc_pleasure reaches 50) and
+  # again every later visit. Folder is the truth; `pool` is only find-media's target.
+  { type = "video", props = { pool_dir = "sex/renner_loop_oral_t5", pool = 4, description = "A woman on her knees between an office chair and desk with the seated man's cock in her mouth, his hand in her hair.", search_queries = ["office blowjob kneeling chair", "desk blowjob man seated office"] } },
   { type = "paragraph", content = "On her knees between the chair and the desk, his cock in her mouth, his hand gentler in her hair than Mercer's hand has ever been. Renner holds on like he's afraid she'll stop." },
 ]
 [canvases.nodes.exit_block]
@@ -935,7 +944,10 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 id   = "base_vaginal_r"
 name = "Ride him"
 blocks = [
-  { type = "video", props = { file = "sex/renner_loop_vaginal_t5.webm", description = "A woman riding a man in an office chair, slow, face to face, the man's composure gone.", search_queries = ["office chair riding cowgirl", "girl on top man office chair"] } },
+  # POOL (rev 105) — self-loop pose node: the "keep going" choice re-targets this same node, so
+  # this clip plays 4-6x inside ONE visit (that grind is how loop_npc_pleasure reaches 50) and
+  # again every later visit. Folder is the truth; `pool` is only find-media's target.
+  { type = "video", props = { pool_dir = "sex/renner_loop_vaginal_t5", pool = 4, description = "A woman riding a man in an office chair, slow, face to face, the man's composure gone.", search_queries = ["office chair riding cowgirl", "girl on top man office chair"] } },
   { type = "paragraph", content = "She rides him in the office chair, slow, watching the last of his composure go. He says things he'll be ashamed of — please, and the false name she works under, and don't stop, don't ever stop." },
 ]
 [canvases.nodes.exit_block]
@@ -984,7 +996,10 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 id   = "base_doggy_r"
 name = "Give him your ass"
 blocks = [
-  { type = "video", props = { file = "sex/renner_loop_doggy_t5.webm", description = "A woman bent over an office desk taken from behind, the man's hands shaking on her hips.", search_queries = ["office desk sex from behind", "doggy bent over desk office"] } },
+  # POOL (rev 105) — self-loop pose node: the "keep going" choice re-targets this same node, so
+  # this clip plays 4-6x inside ONE visit (that grind is how loop_npc_pleasure reaches 50) and
+  # again every later visit. Folder is the truth; `pool` is only find-media's target.
+  { type = "video", props = { pool_dir = "sex/renner_loop_doggy_t5", pool = 4, description = "A woman bent over an office desk taken from behind, the man's hands shaking on her hips.", search_queries = ["office desk sex from behind", "doggy bent over desk office"] } },
   { type = "paragraph", content = "Bent over his own desk, his cock in her ass, his hands shaking on her hips. This is the act that hands her the keys — and now that she's turned it on him once, she can take them again whenever she likes." },
 ]
 [canvases.nodes.exit_block]
@@ -1357,14 +1372,18 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "renner_anal_once", operator = "is_true" },
     ] } }, blocks = [
-    { type = "video", props = { file = "sex/renner_cheerup_alley_t5.webm", description = "A woman on her knees on dirty concrete behind a bar giving a slumped man oral in the dark, a crate beside them.", search_queries = ["alley blowjob outdoor night kneeling", "behind bar outdoor oral concrete"] } },
+    # POOL (rev 105) — Lane-2 random ambient (chance 0.2, max 1/day) at the Anchor. Crossed often
+    # enough to earn four clips. Folder is the truth; `pool` is only find-media's target.
+    { type = "video", props = { pool_dir = "sex/renner_cheerup_alley_t5", pool = 4, description = "A woman on her knees on dirty concrete behind a bar giving a slumped man oral in the dark, a crate beside them.", search_queries = ["alley blowjob outdoor night kneeling", "behind bar outdoor oral concrete"] } },
     { type = "paragraph", content = "He's wrecked tonight, and she does the thing that works. She gets him out of the bar and into the dark behind it and gives him whatever he needs — on her knees on the filthy concrete, or bent over a crate, the cold boss falling apart and the help putting him back together with her mouth and her ass. It's the one real thing she has, and she spends it on him like it's nothing, because it is." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "renner_oral_once", operator = "is_true"  },
       { type = "flag", subject = "player", flag_key = "renner_anal_once", operator = "is_false" },
     ] } }, blocks = [
-    { type = "video", props = { file = "sex/renner_cheerup_oral_t5.webm", description = "A woman kneeling beside a cigarette machine in a dim bar giving a seated man fast oral, his hand in her hair.", search_queries = ["bar blowjob kneeling dim", "indoor bar oral man seated"] } },
+    # POOL (rev 105) — Lane-2 random ambient (chance 0.2, max 1/day) at the Anchor. Crossed often
+    # enough to earn four clips. Folder is the truth; `pool` is only find-media's target.
+    { type = "video", props = { pool_dir = "sex/renner_cheerup_oral_t5", pool = 4, description = "A woman kneeling beside a cigarette machine in a dim bar giving a seated man fast oral, his hand in her hair.", search_queries = ["bar blowjob kneeling dim", "indoor bar oral man seated"] } },
     { type = "paragraph", content = "He's low tonight. She slips off the stool and into the dark beside the cigarette machine and takes his cock in her mouth right there, fast and devoted, the bartender pointedly not looking. He comes with his hand in her hair saying her work-name like a man saying his prayers wrong." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
@@ -2025,7 +2044,10 @@ locationId = "underworld_strip"
 id   = "oral"
 name = "On your knees"
 blocks = [
-  { type = "video", props = { file = "sex/marsh_oral_t5.webm", description = "A woman on her knees in a dim red-lit room servicing a small neat client, her hands and mouth working him while she watches his face.", search_queries = ["brothel blowjob kneeling red room pov", "escort kneeling blowjob client dim"] } },
+  # POOL (rev 105) — self-loop pose node: the "keep going" choice re-targets this same node, so
+  # this clip plays 4-6x inside ONE visit (that grind is how loop_npc_pleasure reaches 50) and
+  # again every later visit. Folder is the truth; `pool` is only find-media's target.
+  { type = "video", props = { pool_dir = "sex/marsh_oral_t5", pool = 4, description = "A woman on her knees in a dim red-lit room servicing a small neat client, her hands and mouth working him while she watches his face.", search_queries = ["brothel blowjob kneeling red room pov", "escort kneeling blowjob client dim"] } },
   { type = "paragraph", content = "On her knees, she takes him in her mouth and works him the way the trade taught her, but slower, watching — reading where the careful in him loosens and where it doesn't. He rests a hand in her hair, polite even here, and lets his head go back. Getting there." },
 ]
 [canvases.nodes.exit_block]
@@ -2062,7 +2084,10 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 id   = "vaginal"
 name = "Ride him"
 blocks = [
-  { type = "video", props = { file = "sex/marsh_ride_t5.webm", description = "A woman riding a small neat client on a bed in a dim red-lit room, setting the pace, watching his composure go.", search_queries = ["brothel riding cowgirl red room pov", "escort riding client bed dim light"] } },
+  # POOL (rev 105) — self-loop pose node: the "keep going" choice re-targets this same node, so
+  # this clip plays 4-6x inside ONE visit (that grind is how loop_npc_pleasure reaches 50) and
+  # again every later visit. Folder is the truth; `pool` is only find-media's target.
+  { type = "video", props = { pool_dir = "sex/marsh_ride_t5", pool = 4, description = "A woman riding a small neat client on a bed in a dim red-lit room, setting the pace, watching his composure go.", search_queries = ["brothel riding cowgirl red room pov", "escort riding client bed dim light"] } },
   { type = "paragraph", content = "She climbs on and rides him slow, keeping the pace hers, watching the careful man forget to be careful. He grips her hips and lets go of something — not much, but she's not after much. She's after the one thing men give up when she takes them the last way." },
 ]
 [canvases.nodes.exit_block]
@@ -2099,7 +2124,10 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 id   = "anal"
 name = "Give him your ass"
 blocks = [
-  { type = "video", props = { file = "sex/marsh_anal_t5.webm", description = "A woman bent over the edge of a bed in a dim red-lit room, taken from behind by a small neat client gripping her hips.", search_queries = ["brothel anal from behind red room", "escort anal bent over bed dim"] } },
+  # POOL (rev 105) — self-loop pose node: the "keep going" choice re-targets this same node, so
+  # this clip plays 4-6x inside ONE visit (that grind is how loop_npc_pleasure reaches 50) and
+  # again every later visit. Folder is the truth; `pool` is only find-media's target.
+  { type = "video", props = { pool_dir = "sex/marsh_anal_t5", pool = 4, description = "A woman bent over the edge of a bed in a dim red-lit room, taken from behind by a small neat client gripping her hips.", search_queries = ["brothel anal from behind red room", "escort anal bent over bed dim"] } },
   { type = "paragraph", content = "She turns and gives him her ass, and he takes it the way careful men take the thing they'd never ask for out loud — slow, greedy, undone by it. This is the act that opens him. Bent over the bed with his hands clamped on her hips, she waits for the moment his whole guarded weight goes soft, and reaches, if she's carrying it, for the drain." },
 ]
 [canvases.nodes.exit_block]
@@ -6276,7 +6304,10 @@ nodeId     = "base_oral_c"
 id   = "base_oral_c"
 name = "On your knees"
 blocks = [
-  { type = "video", props = { file = "sex/calloway_loop_oral_t5.webm", description = "A woman kneeling with a seated man's cock in her mouth in a dim office.", search_queries = ["office blowjob kneeling desk", "kneeling oral seated man records room"] } },
+  # POOL (rev 105) — self-loop pose node: the "keep going" choice re-targets this same node, so
+  # this clip plays 4-6x inside ONE visit (that grind is how loop_npc_pleasure reaches 50) and
+  # again every later visit. Folder is the truth; `pool` is only find-media's target.
+  { type = "video", props = { pool_dir = "sex/calloway_loop_oral_t5", pool = 4, description = "A woman kneeling with a seated man's cock in her mouth in a dim office.", search_queries = ["office blowjob kneeling desk", "kneeling oral seated man records room"] } },
   { type = "paragraph", content = "On her knees with his cock in her mouth, and even now he half-talks — the ghost, the case, the shape of the thing he's chased for two years — because the work is the only place he's ever felt safe, and she's made herself the second." },
 ]
 [canvases.nodes.exit_block]
@@ -6305,7 +6336,10 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 id   = "base_vaginal_c"
 name = "Ride him"
 blocks = [
-  { type = "video", props = { file = "sex/calloway_loop_vaginal_t5.webm", description = "A woman riding a man in a desk chair, face to face, in a dim office.", search_queries = ["office chair riding cowgirl dim", "girl on top man desk chair"] } },
+  # POOL (rev 105) — self-loop pose node: the "keep going" choice re-targets this same node, so
+  # this clip plays 4-6x inside ONE visit (that grind is how loop_npc_pleasure reaches 50) and
+  # again every later visit. Folder is the truth; `pool` is only find-media's target.
+  { type = "video", props = { pool_dir = "sex/calloway_loop_vaginal_t5", pool = 4, description = "A woman riding a man in a desk chair, face to face, in a dim office.", search_queries = ["office chair riding cowgirl dim", "girl on top man desk chair"] } },
   { type = "paragraph", content = "She rides him in the desk chair, slow, and he holds her face in both hands like he's checking she's real. He tells her the true name of the rogue he's chasing. She files it. She files everything." },
 ]
 [canvases.nodes.exit_block]
@@ -6342,7 +6376,10 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 id   = "base_anal_c"
 name = "Give him your ass"
 blocks = [
-  { type = "video", props = { file = "sex/calloway_loop_anal_t5.webm", description = "A woman bent over a desk taken from behind in a dim file-room.", search_queries = ["office desk sex from behind dim", "bent over desk records room behind"] } },
+  # POOL (rev 105) — self-loop pose node: the "keep going" choice re-targets this same node, so
+  # this clip plays 4-6x inside ONE visit (that grind is how loop_npc_pleasure reaches 50) and
+  # again every later visit. Folder is the truth; `pool` is only find-media's target.
+  { type = "video", props = { pool_dir = "sex/calloway_loop_anal_t5", pool = 4, description = "A woman bent over a desk taken from behind in a dim file-room.", search_queries = ["office desk sex from behind dim", "bent over desk records room behind"] } },
   { type = "paragraph", content = "Bent over the desk he's guarded for two years, his cock in her ass, both his hands gripping like she's the last solid thing in a building that's been cutting him loose. This is the act that opens the drain — the one place her power still works freely, on a man who isn't the one who owns her." },
 ]
 [canvases.nodes.exit_block]
@@ -6883,7 +6920,10 @@ nodeId     = "base_oral_colm"
 id   = "base_oral_colm"
 name = "On your knees"
 blocks = [
-  { type = "video", props = { file = "sex/colm_loop_oral_t5.webm", description = "A woman kneeling on concrete with a standing man's cock in her mouth in a dim storeroom.", search_queries = ["kneeling blowjob storeroom standing man", "back room blowjob kneeling dim"] } },
+  # POOL (rev 105) — self-loop pose node: the "keep going" choice re-targets this same node, so
+  # this clip plays 4-6x inside ONE visit (that grind is how loop_npc_pleasure reaches 50) and
+  # again every later visit. Folder is the truth; `pool` is only find-media's target.
+  { type = "video", props = { pool_dir = "sex/colm_loop_oral_t5", pool = 4, description = "A woman kneeling on concrete with a standing man's cock in her mouth in a dim storeroom.", search_queries = ["kneeling blowjob storeroom standing man", "back room blowjob kneeling dim"] } },
   { type = "paragraph", content = "On her knees on the concrete with his cock in her mouth, both his hands braced on the case behind him. He watches the door out of thirty years of habit, and loses the habit fast." },
 ]
 [canvases.nodes.exit_block]
@@ -6912,7 +6952,10 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 id   = "base_vaginal_colm"
 name = "Put him in you"
 blocks = [
-  { type = "video", props = { file = "sex/colm_loop_vaginal_t5.webm", description = "A man fucking a woman standing against shelving in a dim bar storeroom, one of her legs hooked up.", search_queries = ["standing sex against wall storeroom", "leg up standing fuck back room"] } },
+  # POOL (rev 105) — self-loop pose node: the "keep going" choice re-targets this same node, so
+  # this clip plays 4-6x inside ONE visit (that grind is how loop_npc_pleasure reaches 50) and
+  # again every later visit. Folder is the truth; `pool` is only find-media's target.
+  { type = "video", props = { pool_dir = "sex/colm_loop_vaginal_t5", pool = 4, description = "A man fucking a woman standing against shelving in a dim bar storeroom, one of her legs hooked up.", search_queries = ["standing sex against wall storeroom", "leg up standing fuck back room"] } },
   { type = "paragraph", content = "She takes him standing, one leg hooked up on a stacked case, his cock working into her cunt while the bar noise comes through the wall. He says her false name into her hair like it's a real one." },
 ]
 [canvases.nodes.exit_block]
@@ -6950,7 +6993,10 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 id   = "base_anal_colm"
 name = "Give him your ass"
 blocks = [
-  { type = "video", props = { file = "sex/colm_loop_anal_t5.webm", description = "A woman bent over stacked cases taken in the ass from behind in a dim storeroom.", search_queries = ["anal from behind bent over storeroom", "rough anal bent over crates dim room"] } },
+  # POOL (rev 105) — self-loop pose node: the "keep going" choice re-targets this same node, so
+  # this clip plays 4-6x inside ONE visit (that grind is how loop_npc_pleasure reaches 50) and
+  # again every later visit. Folder is the truth; `pool` is only find-media's target.
+  { type = "video", props = { pool_dir = "sex/colm_loop_anal_t5", pool = 4, description = "A woman bent over stacked cases taken in the ass from behind in a dim storeroom.", search_queries = ["anal from behind bent over storeroom", "rough anal bent over crates dim room"] } },
   { type = "paragraph", content = "Bent over the stacked cases with his cock in her ass, his hands white-knuckled on her hips. He's forgotten the door, the room, the job — everything but the fact that she let him." },
   { type = "paragraph", content = "She reaches back and gets a hand around his forearm, skin on skin, and holds it there. That's the seat. The drain sits in the contact and waits for the shudder to open it." },
 ]

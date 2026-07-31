@@ -1162,7 +1162,10 @@ nodeId     = "base_oral"
 id   = "base_oral"
 name = "On your knees"
 blocks = [
-  { type = "video", props = { file = "sex/brothel_oral_t5.webm", description = "On her knees in a dim red-lit room, an anonymous client's cock in her mouth, his hand fisted in her hair setting the pace while she services him flatly.", search_queries = ["brothel blowjob red room pov", "escort kneeling blowjob dim light"] } },
+  # POOL (rev 105) — self-loop pose node: the "keep going" choice re-targets this same node, so
+  # this clip plays 4-6x inside ONE visit (that grind is how loop_npc_pleasure reaches 50) and
+  # again every later visit. Folder is the truth; `pool` is only find-media's target.
+  { type = "video", props = { pool_dir = "sex/brothel_oral_t5", pool = 4, description = "On her knees in a dim red-lit room, an anonymous client's cock in her mouth, his hand fisted in her hair setting the pace while she services him flatly.", search_queries = ["brothel blowjob red room pov", "escort kneeling blowjob dim light"] } },
   { type = "paragraph", content = "On her knees between his, she takes his cock in her mouth and works it the way the trade taught her — steady, practiced, her eyes somewhere past his hip. He fists a hand in her hair and sets the pace. She lets him. None of it reaches her." },
 ]
 [canvases.nodes.exit_block]
@@ -1199,7 +1202,10 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 id   = "base_vaginal"
 name = "Ride him"
 blocks = [
-  { type = "video", props = { file = "sex/brothel_client.webm", description = "A woman straddling and riding a man on a bed in a dim red-lit room, sex from the side.", search_queries = ["brothel sex riding pov red room", "escort client sex bed dim light"] } },
+  # POOL (rev 105) — self-loop pose node: the "keep going" choice re-targets this same node, so
+  # this clip plays 4-6x inside ONE visit (that grind is how loop_npc_pleasure reaches 50) and
+  # again every later visit. Folder is the truth; `pool` is only find-media's target.
+  { type = "video", props = { pool_dir = "sex/brothel_vaginal_t5", pool = 4, description = "A woman straddling and riding a man on a bed in a dim red-lit room, sex from the side.", search_queries = ["brothel sex riding pov red room", "escort client sex bed dim light"] } },
   { type = "paragraph", content = "She climbs on and takes his cock without ceremony, sinks down and rides, hips keeping a rhythm that has nothing to do with her. He paws at her tits and fucks up into her; she gives him the small sounds the trade expects and feels none of them." },
 ]
 [canvases.nodes.exit_block]
@@ -1236,7 +1242,10 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 id   = "base_anal"
 name = "Give him your ass"
 blocks = [
-  { type = "video", props = { file = "sex/brothel_anal_t5.webm", description = "Bent over the edge of a bed in a dim red-lit room, an anonymous client takes her ass in long flat strokes, both hands clamped on her hips.", search_queries = ["brothel anal from behind red room", "escort anal bent over bed dim"] } },
+  # POOL (rev 105) — self-loop pose node: the "keep going" choice re-targets this same node, so
+  # this clip plays 4-6x inside ONE visit (that grind is how loop_npc_pleasure reaches 50) and
+  # again every later visit. Folder is the truth; `pool` is only find-media's target.
+  { type = "video", props = { pool_dir = "sex/brothel_anal_t5", pool = 4, description = "Bent over the edge of a bed in a dim red-lit room, an anonymous client takes her ass in long flat strokes, both hands clamped on her hips.", search_queries = ["brothel anal from behind red room", "escort anal bent over bed dim"] } },
   { type = "paragraph", content = "Bent over the edge of the bed, she takes him in the ass in long flat strokes, both his hands clamped on her hips. Just more friction down a body that gives nothing back. She braces and waits it out, counting somewhere behind her own face what the hour's worth." },
 ]
 [canvases.nodes.exit_block]
