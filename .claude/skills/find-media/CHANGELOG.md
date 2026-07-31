@@ -1,5 +1,79 @@
 # find-media — CHANGELOG
 
+## 2026-07-31 (A/B result) — the must_show/avoid deletion has NO measurable effect on picks
+
+The controlled comparison promised in the entry below was run. **It is a null result, and the
+change should be understood at that size.**
+
+**Design.** Two slots (`colm_loop_oral_t5` 47 clips, `calloway_loop_oral_t5` 26). Per slot, every
+clip on disk — pool + `.find-media/previous/` + fetched candidates — merged, **md5-deduplicated**
+(57→47 and 29→26; 13 byte-identical repeats collapsed) and renamed opaquely so no filename, slug or
+url could leak a prior verdict. Arm A = the pre-change skill (`git show HEAD:` before commit
+`9c07228`). Arm B = the committed version. **Identical clip sets, identical briefs, and `pov_case`
+PINNED to the same value in both arms** — POV was the confound that drove the earlier n=1 result, so
+it was held fixed rather than merely "instrumented". Metric = the per-clip PASS/FAIL vector, never
+the reason string.
+
+**Result — 67 of 73 decisions identical (91%).**
+
+| slot | agreement | B stricter | B looser | shared installs |
+|---|---|---|---|---|
+| colm | 44/47 (93%) | `clip_06`, `clip_12` — `position:him_seated` | `clip_29` — `count:additional_men` | 3 of 4 |
+| calloway | 23/26 (88%) | `clip_15`, `clip_18` — `position:him_reclining` | `clip_24` — `act:licking_not_insertion` | 3 of 4 |
+
+**Not one of the six disagreements is about a room, a light or a floor.** Four are arm B being
+*stricter* on position; two are arm B being *looser* on a correctness gate.
+
+**Why the effect is zero: arm A never gated on the room either.** Both arm-A agents hit the
+template-vs-rubric contradiction, named it, and resolved it in favour of the rubric unprompted.
+Colm's arm A: *"the scope brief files 'a bed or bedroom' and 'soft or domestic surroundings' under
+`avoid`, which the brief template calls 'the hard gates', but this rubric deletes `wrong_setting`…
+I followed the rubric. **That single call flips roughly ten clips** from FAIL to PASS-but-bottom-ranked."*
+
+**So the honest value of the change is that it removes a coin flip, not that it improves picks.**
+The contradiction was real and load-bearing — resolved the other way it would have flipped ~10 of 47
+clips on colm and finished calloway's pool at 3 instead of 4 — but every agent in this test resolved
+it correctly anyway. The deletion makes that outcome guaranteed instead of dependent on judgement.
+Worth keeping on determinism grounds. **Not** worth the "recovers clips the old rule binned" claim
+made earlier, which this test does not support.
+
+**⚠️ Small adverse signal, recorded rather than buried.** Two of the six disagreements are arm B
+being **looser on correctness** — `act:licking_not_insertion` and `count:additional_men`. Neither
+clip reached an install list, so no pool was harmed, and colm's arm A flagged its own `clip_29` call
+as *"the one FAIL I would want a second eye on"*. But 2 of 6 divergences running toward permissive
+on act and count is exactly the risk of deleting a checklist, and it should be watched, not
+explained away.
+
+**Incidental findings, all independently confirmed by more than one arm:**
+- **The demanded room existed after all.** `clip_09` — *"utility/linen storeroom doorway — shelving,
+  stacked linens, bare wood floor, man standing in plaid with jeans down"* — was on disk the whole
+  time, and **both** arms ranked it a top-4 install. Wave-2 searched 225 urls, reported "zero bar
+  clips" and concluded the vein was empty. It was judging on the wrong axis, not facing an empty
+  corpus.
+- **The strip earns its cost.** `clip_02` is the only true bar interior in 47 and would have been
+  rank-1 from a contact sheet; both arms zoomed the strip and found **a third woman lying on the bar
+  counter** through the whole loop. Dies on `count`.
+- **Duplicate SCENES, not just duplicate bytes.** `clip_05`/`clip_22` and `clip_06`/`clip_12` are one
+  shoot at two crops — different bytes, so every hash check this session would miss them. Arm B
+  refused to install both halves; arm A installed both and flagged it. Sixth duplicate event today,
+  first caught by eye.
+- **Pool coherence surfaced on its own** — the hole this skill still cannot express. Arm B: *"clip_43's
+  man is Black and the other three are white, so the pool's 'Colm' visibly changes race every fourth
+  visit"*, with a coherent swap offered. Per-clip gates cannot see this; a good agent catches it
+  manually, which is not the same as the skill catching it.
+- **Retrieval, not judging, is the real bottleneck.** Dominant kill on calloway is `him_standing`
+  (12/26 and 15/19 across arms), matching wave-1's 11/15. Both arms called it a query-vocabulary
+  problem: the canonical office blowjob on this corpus is she-kneels-he-stands.
+
+**Methodology flaw in this test, disclosed:** naming the frozen clips `clip_01…` broke
+`video_frames.py`'s board labels (`stem.split("_")[0]` → every row reads "clip"), so row identity was
+positional only. Detected by cross-checking each arm's one-phrase room description per clip:
+**26/26 and 47/47 matched**, so no misalignment occurred — but the labels should be bare numbers next
+time. Both arms also re-read individual strips for contested calls rather than trusting the board.
+Separately, this test forced all 47 clips to be stripped, overriding the 12-clip pool budget added
+the same day; that token cost is the test's, not the skill's.
+
+
 The ledger for this skill. Record **every** change to any file in this skill
 (`SKILL.md`, `references/*`, `scripts/*`, etc.) — including small fixes and wording.
 Newest first. One bullet per change; group bullets under the date they were made.
