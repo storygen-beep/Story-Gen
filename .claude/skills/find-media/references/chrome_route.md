@@ -155,6 +155,19 @@ length, worked.
 
 **Shape:** `<act> <her posture> <HIS posture — only when it is not the act's default> [setting-if-load-bearing] [anti-studio modifier] gif`
 
+**⚠️ `<act>` must be a REAL ACT WORD — and a position is not one.** `riding`, `cowgirl`, `missionary`
+and `doggy` are ordinary English (a horse, a ranch, a religion, a dog). A query built only from them
+does not return *bad* porn; it returns **none**. Measured 2026-08-01, same query minus one token:
+
+| query | urls | on a porn host |
+|---|---|---|
+| `riding cowgirl man in office chair gif` | 83 | **0** — Tenor, BBC, Wikipedia, NFL, Warhol |
+| `cowgirl riding fuck office chair gif` | 73 | **69 (95%)** |
+
+`blowjob` anchors a query by itself, which is why every oral slot worked and this stayed invisible
+until the first penetrative beat. `validate_queries.py` flags it as `no_act_anchor` on `t5`–`t8`;
+the word list and its membership rule are in `scripts/scene_semantics.py` (`ACT_ANCHORS`).
+
 **An act phrase carries a DEFAULT PARTNER POSTURE, and it wins unless you override it.** This is
 the single largest source of rejections in this skill's recorded history, and until 2026-08-01 the
 shape above had one `<position>` slot that never said whose body it named.

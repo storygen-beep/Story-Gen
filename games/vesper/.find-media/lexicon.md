@@ -12,6 +12,13 @@ kneeling blowjob | she kneels and **he STANDS** — the canonical composition on
 office chair / under the desk / man sitting in chair | retrieves a **SEATED** partner | renner: **13 of 43** fetched slugs carried seated/chair/desk | **CONFIRMED as a retrieval lever.** Untested whether it *rescues* a slot that lacked it
 glasses / close up / pov (with NO posture token) | retrieves the act's default partner posture, i.e. him standing | calloway: **0 of 43→10** fetched slugs seated; wardrobe and framing words do not constrain posture at all | **CONFIRMED.** Naming wardrobe is not naming position
 
+## Act tokens — a query needs an unambiguous one or it leaves porn entirely
+
+riding / cowgirl (alone) | **NOT act tokens — they are POSITIONS, and both are ambiguous with equestrian** | `riding cowgirl man in office chair gif` returned 83 urls and **zero** porn hosts: tenor, BBC, Wikipedia, Billboard, NFL, Shutterstock, Warhol | **CONFIRMED**
++ fuck / sex | adding one explicit act token flips the same query back into porn | `cowgirl riding fuck office chair gif` -> 73 urls, **69 on porn hosts (95%)**, 7 seated/chair slugs. Only difference is the act word | **CONFIRMED — one token, 0% -> 95%**
+blowjob | already an unambiguous act token; needs no reinforcement | every oral slot | **CONFIRMED.** The asymmetry matters: `blowjob` anchors a query by itself, `riding` does not
+urls_yielded (again) | the FAILED query returned MORE urls than the one that worked | 83 (0% usable) vs 73 (95% usable) | **CONFIRMED twice.** Never read yield as quality
+
 ## Settings — what this corpus actually shoots
 
 storeroom / stockroom | **DOES** retrieve utility/linen stores | colm wave-1 retrieved `cdn.nsfwgify.com/44903/kneeling-blowjob.gif` — a linen store with shelving and stacked linens, later ranked #1 by both A/B arms | **CONFIRMED — and a prior claim that "zero storerooms exist" was FALSE.** It was made after the clip proving otherwise had already been removed from the pool

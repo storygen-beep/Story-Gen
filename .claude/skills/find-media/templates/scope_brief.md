@@ -221,6 +221,12 @@ Rules that produced these — this list must stay in sync with `references/chrom
   worked.
 - **Append `gif` or `webm`. NOT optional — the highest-leverage token in the query.** Measured
   3×, same query ± that one token: **7→59, 1→54, 0→91** fetchable urls.
+- **⚠️ The query needs a real ACT word, and a POSITION is not one.** `riding`, `cowgirl`,
+  `missionary`, `doggy` are ordinary English — a horse, a ranch, a religion, a dog — so a query
+  built only from them reaches no porn at all. Measured: `riding cowgirl man in office chair gif`
+  → 83 urls, **zero** on a porn host; `+ fuck` → **69 of 73**. `blowjob` anchors by itself; that
+  asymmetry is why oral slots never exposed this. **`validate_queries.py` flags it**
+  (`no_act_anchor`, `t5`–`t8` only).
 - **Name HIS posture when it is not the act's default.** `kneeling blowjob` retrieves
   she-kneels-he-**STANDS**; if the beat needs him seated or reclining, say `office chair`,
   `under the desk`, `sitting in chair`. Measured: the slot that named it got **13 of 43**

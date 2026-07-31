@@ -1,5 +1,63 @@
 # find-media — CHANGELOG
 
+## 2026-08-01 (later) — a position word is not an act word; first ENFORCED query rule, first tests
+
+Found by running `calloway_loop_vaginal_t5` under yesterday's new query shape. The first query
+failed outright:
+
+| query | urls | on a porn host |
+|---|---|---|
+| `riding cowgirl man in office chair gif` | 83 | **0** — Tenor, BBC, Wikipedia, Billboard, NFL, Warhol |
+| `cowgirl riding fuck office chair gif` | 73 | **69 (95%)** |
+
+One token. `riding` and `cowgirl` are *positions* and both are ordinary English, so the query had no
+sexual word in it and Google classified it as mainstream. `gif` does not rescue that. **`blowjob`
+anchors a query by itself** — which is why every oral slot filled fine and this stayed invisible
+until the first penetrative beat.
+
+- **The validator was actively passing the broken query.** `SEXUAL_TERMS_FOR_SFW_CHECK` contains
+  `missionary`, `doggy`, **`cowgirl`** next to `sex`/`fuck`/`blowjob`, so `has_sexual` was true and
+  nothing fired. That set answers *"is a sexual word leaking into an SFW query?"* — for which those
+  three belong — not *"will this reach porn?"*
+- **`scripts/scene_semantics.py` — added `ACT_ANCHORS`**, a narrower set beside the existing one,
+  which is **unchanged**. Membership rule, stated in the code: a word qualifies only if it has no
+  common non-sexual reading. `cum`/`cumshot` are in. **`facial` (a spa treatment), `swallow` (a
+  bird), `load` (freight) and `finish` (a verb) are deliberately out** — recorded in a comment so
+  nobody "fixes" them later. Inflections are explicit members, because `\bfuck\b` does not match
+  "fucking" and prefix-matching would make `sex` swallow "sexy".
+- **`scripts/validate_queries.py` — one new check** in `check_tier_alignment()`:
+  `no_act_anchor:position_or_setting_words_only`, on `NSFW_TIERS` only. **`t4` is exempt** — a tease
+  beat must never be forced to carry a penetrative word. Advisory, like everything else here.
+- **⚠️ This REVERSES yesterday's entry**, which said *"validate_queries.py gains no position
+  vocabulary."* It gains **act** vocabulary, and the distinction is the whole justification: *"is his
+  posture the act's default?"* is a judgement about a beat and stays `[ADVISORY]`; *"does this string
+  contain an act word?"* is a lookup, and only a lookup is safely enforceable.
+- **`scripts/test_query_anchor.py` — NEW, the first tests these scripts have ever had.** 11 cases
+  pinning both measured queries, the oral asymmetry, t4/SFW exemption, the two-sets-are-different
+  invariant, and the two word-boundary traps found while writing them.
+- **🐛 Fixed a crash I caused yesterday.** `validate_queries.py --toml` died with `KeyError: 'file'`
+  on the first block it met that had `pool_dir` instead of `file` — so converting vesper's 19 slots
+  to pools silently made the entire offline validator unusable on that game. Confirmed pre-existing
+  by stashing. Now follows the same precedence as `apps/common/media_blocks.py`:
+  **`pool_dir` > `files` > `file`**. Without this the verification below was impossible to run.
+- **Verified on real data, not synthetic.** Over `games/vesper/toml_phases/7_final_game.toml`: 89
+  NSFW queries, **21 flagged (23%), zero false positives** — every flag is a genuinely anchorless
+  query. It caught **eight** slots about to waste a search round, not the four predicted:
+  `office chair riding cowgirl dim`, `girl on top man desk chair`, `doggy bent over desk office`,
+  `man woman against desk records room`, `brothel riding cowgirl red room pov`. All five already
+  filled oral slots came back clean.
+  - **Corrects a claim in the plan for this change.** It said all four riding slots lacked an anchor.
+    Two do not — `colm_loop_vaginal` says `leg up standing **fuck** back room` and `brothel_vaginal`
+    says `brothel **sex** riding pov red room` — and both correctly passed. The check discriminates
+    better than the author did.
+  - Widening the set for `cum`/`cumshot` moved it from 29 flags to 21; the drop is all true-positive
+    preservation, not threshold-loosening.
+- Docs: the rule is stated in `query_rewriting.md` (as the **reciprocal** of the existing
+  "always pair an act with a position" line — the failure was the inverse), `chrome_route.md` §3
+  (what counts as `<act>`), and `templates/scope_brief.md`. Marked `[ENFORCED]`, which it now
+  genuinely is — this file's own rule is that advisory prose must never be *claimed* as enforced, and
+  the inverse drift is just as bad.
+
 ## 2026-08-01 — the query names BOTH bodies; vesper gets the first real lexicon
 
 Follows directly from yesterday's A/B null result. If judging was not the bottleneck, retrieval was

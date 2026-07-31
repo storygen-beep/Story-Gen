@@ -62,6 +62,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 # apply_retags.py all reach for these through validate_queries, so the split must not
 # move a name out from under an existing caller. Hence the unused-import waiver.
 from scene_semantics import (  # noqa: E402,F401
+    ACT_ANCHORS,
     ANIMATED_EXTENSIONS,
     ANIMATED_KEYWORDS,
     BORDERLINE_TIERS,
@@ -223,11 +224,22 @@ def check_tier_alignment(query: str, tier: str) -> tuple[bool, list[str]]:
     lower = query.lower()
     has_sexual = any(re.search(rf"\b{re.escape(t)}\b", lower) for t in SEXUAL_TERMS_FOR_SFW_CHECK)
     has_vanilla = any(re.search(rf"\b{re.escape(t)}\b", lower) for t in VANILLA_TERMS_FOR_NSFW_CHECK)
+    has_act_anchor = any(re.search(rf"\b{re.escape(t)}\b", lower) for t in ACT_ANCHORS)
 
     if tier in SFW_TIERS and has_sexual:
         issues.append(f"tier_mismatch:sfw_query_has_sexual_term")
     if tier in NSFW_TIERS and not has_sexual and has_vanilla:
         issues.append(f"tier_mismatch:nsfw_query_too_vanilla")
+
+    # An NSFW query with no ACT word does not reach porn at all — it gets classified as a
+    # mainstream search and returns stock photography. Position names do not save it: they are
+    # ordinary English, which is exactly why ACT_ANCHORS excludes them. Note this fires
+    # INDEPENDENTLY of has_sexual, because has_sexual is true for `cowgirl` and that is the
+    # case that went undetected (measured: 0 of 83 results on a porn host).
+    # Deliberately NSFW_TIERS only — t4 is BORDERLINE and a tease beat must never be forced to
+    # carry a penetrative word.
+    if tier in NSFW_TIERS and not has_act_anchor:
+        issues.append("no_act_anchor:position_or_setting_words_only")
 
     return len(issues) == 0, issues
 
@@ -325,10 +337,23 @@ def extract_queries_from_toml(toml_path: Path, item_filter: str | None = None) -
                     })
                     return
             if "props" in obj and isinstance(obj["props"], dict) and "search_queries" in obj["props"]:
+                props = obj["props"]
+                # A POOL block declares `pool_dir` (a folder) and has NO `file` key at all.
+                # This used to be a bare props["file"] lookup, which raised KeyError and killed
+                # the whole --toml walk on the first pool it met — so a game that had converted
+                # any slot to a pool could not be offline-validated at all. Precedence matches
+                # apps/common/media_blocks.py: pool_dir > files > file.
+                path = props.get("pool_dir") or props.get("file") or props.get("image")
+                if not path:
+                    files = props.get("files")
+                    if isinstance(files, list) and files:
+                        path = files[0]
+                if not path:
+                    return
                 items.append({
-                    "file": obj["props"]["file"],
-                    "search_queries": obj["props"]["search_queries"],
-                    "description": obj["props"].get("description") or obj["props"].get("alt", ""),
+                    "file": path,
+                    "search_queries": props["search_queries"],
+                    "description": props.get("description") or props.get("alt", ""),
                 })
                 return
             for v in obj.values():

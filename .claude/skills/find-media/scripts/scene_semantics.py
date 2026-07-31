@@ -35,6 +35,35 @@ SEXUAL_TERMS_FOR_SFW_CHECK = {
     "missionary", "doggy", "cowgirl",
 }
 
+# Words that mean SEX to a GENERAL WEB SEARCH ENGINE, with no other common reading.
+#
+# This answers a different question from SEXUAL_TERMS_FOR_SFW_CHECK above. That set asks
+# "is a sexual word leaking into an SFW query?" — and for that job `cowgirl` belongs in it.
+# This set asks "will this query land in porn at all?", and for THAT job the three position
+# names are worse than useless: `cowgirl` is a ranch, `missionary` is a religion, `doggy` is
+# a dog. A query anchored only on one of them leaves porn entirely.
+#
+# MEASURED 2026-08-01, same query minus one token:
+#   `riding cowgirl man in office chair gif`  -> 83 urls, ZERO on a porn host
+#                                               (Tenor, BBC, Wikipedia, Billboard, NFL, Warhol)
+#   `cowgirl riding fuck office chair gif`    -> 73 urls, 69 on porn hosts (95%)
+# The validator passed the first one, because `cowgirl` made has_sexual true.
+#
+# MEMBERSHIP RULE: a word belongs here only if it has no common non-sexual reading.
+# Position names never qualify. Inflections are listed explicitly rather than matched by
+# prefix — `\bfuck\b` does not match "fucking", and loosening to a prefix would make `sex`
+# match "sexy", which is a mood and not an act.
+# NOTE on near-misses, decided by the same membership rule and worth recording so nobody
+# "fixes" them later: `facial` is a spa treatment, `swallow` is a bird, `load` is freight and
+# `finish` is a verb. None of them anchors a query in porn on its own, so none is a member —
+# which is why `escort facial mouth red room` still flags. That is a correct flag, not a gap.
+ACT_ANCHORS = {
+    "sex", "fuck", "fucking", "fucked", "fucks",
+    "blowjob", "blowjobs", "handjob", "fingering", "cunnilingus",
+    "oral", "penetration", "creampie", "deepthroat", "anal",
+    "sucking", "cum", "cumshot", "cumming",
+}
+
 # Content-family classification — drives format (image vs animated) independent of tier.
 # Tier gates explicitness (what can be shown). Family gates motion (how it should be shown).
 

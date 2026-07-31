@@ -103,6 +103,41 @@ Use these exact forms; variants split the pool across synonyms.
 - `sex` / `fuck` — penetration; always pair with a position (`missionary`, `doggy`,
   `riding`, `standing`, `bent over`) because position is a documented rejection class.
 
+### ⚠️ And the reciprocal: a POSITION without an ACT is not a query `[ENFORCED]`
+
+The rule above is stated one way — pair the act with a position. The failure that actually
+happened is the inverse: **the position was there and the act was missing.**
+
+`riding`, `cowgirl`, `missionary` and `doggy` are ordinary English — a horse, a ranch, a religion,
+a dog. They carry no sexual meaning to a general search engine, so a query anchored only on one of
+them does not return bad porn; **it returns no porn at all.**
+
+**Measured 2026-08-01, same query minus one token:**
+
+| query | urls | on a porn host |
+|---|---|---|
+| `riding cowgirl man in office chair gif` | 83 | **0** — Tenor, BBC, Wikipedia, Billboard, NFL, Warhol |
+| `cowgirl riding fuck office chair gif` | 73 | **69 (95%)** |
+
+**Why this hid for so long:** `blowjob` is an act word and anchors a query by itself, so every oral
+slot worked and nothing exposed the gap. It only appears on a penetrative beat.
+
+`scripts/validate_queries.py` now flags an NSFW query (`t5`–`t8`) carrying no member of
+`ACT_ANCHORS` as `no_act_anchor:position_or_setting_words_only`. `t4` is exempt — a tease beat must
+never be forced to carry a penetrative word.
+
+**Membership rule for `ACT_ANCHORS`** (`scripts/scene_semantics.py`): a word qualifies only if it has
+no common non-sexual reading. `cum` and `cumshot` are in. `facial` (a spa treatment), `swallow` (a
+bird), `load` (freight) and `finish` (a verb) are **out**, which is why `escort facial mouth red
+room` still flags — correctly.
+
+⚠️ Note the deliberate split between two sets that look interchangeable and are not.
+`SEXUAL_TERMS_FOR_SFW_CHECK` **keeps** `cowgirl`/`missionary`/`doggy`, because it answers *"is a
+sexual word leaking into an SFW query?"* — and for that job they belong. `ACT_ANCHORS` excludes them
+because it answers *"will this query reach porn at all?"* Conflating the two is what let the broken
+query through: `cowgirl` made `has_sexual` true and the validator passed a query that returned zero
+usable results.
+
 ### Every act phrase has a DEFAULT PARTNER POSTURE — name his only when you need to override it
 
 Position is not one token. It is **two bodies**, and the act phrase silently fixes the second one.
