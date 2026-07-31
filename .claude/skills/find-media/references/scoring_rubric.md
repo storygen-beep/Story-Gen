@@ -116,6 +116,14 @@ Budget rule, because stripping is the expensive step:
 1. **Animated mode: strip the top 6 by contact-sheet rank.** Six is the canonical number —
    it is the same six as the minimum shelf depth, and it reliably covers the installed pick
    and its nearest alternates. If another file names a different count, this one is right.
+1b. **POOL slots get a second board, and only a second.** Six was chosen for a slot that installs
+   **one** clip. A `pool_dir` slot installs up to `pool_target` (normally 4) from a step that kills
+   30–65%, so six candidates yields roughly 2–4 survivors — arithmetically short of the target on a
+   bad day. So: strip the top 6; **if survivors < `pool_target`, strip one more board of 6, then
+   stop at 12.** Not "keep stripping until the pool is full" — 12 is the ceiling, and a pool that
+   ends at 3 is a real state, not a failure (§SKILL.md "install every survivor up to the target").
+   Why the ceiling is written down: without it, agents on a 4-target pool stripped 20+ candidates
+   each, which is where the tokens went and none of it improved the pick.
 2. **Static mode: strip nothing.** Zero is the canonical number there. Judge `.jpg`
    finalists from the contact sheet and install from that.
 3. If fewer than 2 of those 6 survive Gate 3, your query is wrong, not your luck — re-query
@@ -232,6 +240,40 @@ secrecy, or squalor** — would the beat *mean something different* in a clean b
   costs a wrong room exactly nothing, which is the point — and it leaves no small residue for
   a spec-perfect dead clip to win on.
 
+**Even load-bearing, the room is scored and never gated — and answering `true` is a bet on the
+corpus.** The test above asks whether the room carries meaning *in the fiction*. It does not ask
+whether this corpus ever shoots that room, and those are different questions. Adult sources shoot
+bedrooms, offices, bathrooms, cars, couches, bars, gloryholes and POV-anywhere. They do not shoot
+red-lit brothel rooms, industrial storerooms, or dim after-hours archives — so a beat can have a
+genuinely load-bearing room that simply cannot be retrieved.
+
+Observed on `vesper`, 2026-07-31, four NSFW pool slots in one wave. **Read the mechanism carefully —
+it is not what it first looks like:**
+
+| slot | room the brief demanded | rounds run | did the corpus yield that room? |
+|---|---|---|---|
+| `brothel_oral_t5` | red-lit paid room | 7 queries | no — 1 red-lit clip found, and it failed on affect |
+| `colm_loop_oral_t5` | concrete storeroom, crates | 6 queries | no — zero storerooms across all rounds |
+| `calloway_loop_oral_t5` | dim after-hours records room | 6 queries | no — its own run notes *"none of the three installs is genuinely dim"* |
+| `marsh_oral_t5` | *(none — hands and gaze only)* | 3 queries | n/a |
+
+**The harm was in the QUERIES and the wasted rounds, not in rejections.** Every one of those slots
+still installed 3 clips plus its incumbent — a full pool. The recorded kill classes are bodies:
+calloway's dominant reject was `him_standing` (11 of 15), second `wrong_act` (3). Brothel's own run
+note says it *scored* the red light on the SETTING axis rather than gating it, citing the
+`wrong_setting` ban below. **The room requirements were unsatisfiable but largely inert** — authors
+wrote them into the demand and then, correctly, did not enforce them. What they cost was search
+rounds spent hunting a room that does not exist on these hosts.
+
+Strip-survival, where it was recorded: colm **4 of 20** (20%), marsh **5 of 16** (31%). A real
+efficiency gap in retrieval vocabulary, and a modest one.
+
+So when you answer `true`, spend the query words (capped at ~2 setting tokens) and score the axis —
+but if two rounds come back with the room absent from every candidate, **the room is not findable
+and that is not the clips' fault.** Fall back to scoring it `null` and rank on heat, rather than
+burning a third and fourth round. A neutral room contradicts nothing; the beat's prose already
+placed the player.
+
 When you write queries, this flag also tells you where to spend words: spend on setting only
 when it's load-bearing, otherwise act + position + heat lead. See `references/query_rewriting.md`.
 
@@ -342,6 +384,8 @@ overwrite.
 | Eye contact held across the loop carries heat | One direct A/B: the user's pick beat a spec-perfect alternative explicitly on the eyes; two further candidates rejected for wandering eyes their thumbnails hid | **Confirmed**, n=3 events, one of them a clean head-to-head |
 | Thumbnails lie — the strip kills a large fraction | 3/5 and 4/6 in two early rounds (~65%); **16 of 54 (30%) across the 10-slot study** | **Confirmed as a class, rate is denominator-dependent** — see note below |
 | Setting is conditional | Two beats, opposite calls, both explicit from the user (alley = load-bearing, other = "doesn't matter much here") | **Confirmed**, n=2 |
+| A required ROOM is unfillable where the corpus doesn't shoot it | `vesper` wave 1: three slots demanded a red-lit brothel room / concrete storeroom / dim records room. Across 6–7 query rounds each, none of those rooms was retrieved; calloway's own run note reads *"none of the three installs is genuinely dim."* | **Confirmed** — the rooms genuinely were not there |
+| …and therefore gating on it is harmful | **NOT established.** The room gates demonstrably **did not fire**: recorded kill classes are bodies (calloway `him_standing` 11/15, `wrong_act` 3/15), every slot still filled 4-of-4, and brothel's author already scored the room rather than gating it, citing the `wrong_setting` ban. The cost was wasted search rounds, not lost clips. | **Provisional.** The mechanism is query-side, not gate-side. A controlled A/B has not been run. An earlier version of this row claimed "0 usable clips from ~670 urls" graded *Confirmed as a class* — that was wrong on both the count (all four slots filled) and the url total (`query_ledger.jsonl` records 7/6/6 rounds, not 4/3/3), and it is corrected here. |
 | Gate-3 checks (act / position / count / affect / extra people / finish) | Every one is a logged rejection from this game's history | **Confirmed** as rejection classes |
 | Heat signals 2, 3, 4 (affect intensity, energy, framing) | Inferred from the rejection history, never A/B tested | **Provisional** |
 | Band boundaries and the 60 / 25 / 15 split (85 / 15 when setting is skipped) | Chosen to make the documented win beat the documented loss | **Provisional** |

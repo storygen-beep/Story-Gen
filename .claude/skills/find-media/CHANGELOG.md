@@ -13,6 +13,151 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-07-31 (latest) — `must_show` / `avoid` deleted; the rubric owns the gates alone
+
+- **Deleted `must_show` and `avoid` from `templates/scope_brief.md`** (§Demand), and with them the
+  "copy both into the strip checklist" instruction. **Why:** they were a *second, unconstrained gate
+  channel* that overrode the rubric. `references/scoring_rubric.md` has said since its rewrite that a
+  wrong room can never reject a clip (`:24-26`, and `:332` — *"`wrong_setting` is not a valid
+  `gate_reason`"*), and its Gate 3 list is bodies only — act, position, count, affect, extra people,
+  finish. But the brief told the author to fill `must_show` *"straight from the beat prose"*, and beat
+  prose says things like *"in a dim red-lit room"*; `avoid` was captioned **"The hard gates"** with
+  **`bright studio lighting`** among its own examples. Both were then copied into the JUDGE checklist,
+  so the room became binary — the exact bug the rubric was rewritten to kill, reintroduced through the
+  template. `must_show` never appeared in any of the rubric's enumerated gates; its whole binary force
+  came from `SKILL.md:459`, `scope_brief.md:153` and `scope_brief.md:260`.
+  **⚠️ CORRECTED SAME DAY — the first version of this bullet overclaimed, and the correction matters
+  more than the original claim.** It said the three room-demanding slots "returned 0 usable clips from
+  ~670 fresh urls" while the body-only slot "filled 4 of 4 on the first pass", and graded that
+  *Confirmed as a class, the strongest evidence in this table*. An adversarial review of the
+  experiment checked the run records and it is wrong on three counts:
+  - **All four slots filled 4-of-4.** Each installed 3 clips plus its incumbent. "0 usable" silently
+    meant "0 that exhibit the demanded room" — a different and much weaker statement.
+  - **The room gates did not fire.** Recorded kill classes are bodies: calloway's dominant reject was
+    `him_standing` (11 of 15), second `wrong_act` (3). Brothel's own author wrote that the red light
+    was *"scored on the SETTING axis, NOT gated"*, citing this skill's `wrong_setting` ban — i.e. the
+    old skill already complied with the rule this change enforces.
+  - **The url/round counts were wrong.** `query_ledger.jsonl`, the only machine-written log, records
+    **7 / 6 / 6** rounds for brothel / calloway / colm, not the 4 / 3 / 3 claimed.
+  **What survives, stated at its true size:** the rooms demanded genuinely were not in the corpus
+  (verified — 6–7 rounds each, none retrieved), and the template genuinely invited them into the
+  demand (colm's list required *"a hard floor — concrete / bare / tile, not carpet"*, calloway's
+  *"a dim indoor office / records setting"*). So the change removes an **unsatisfiable demand that
+  wasted search rounds** — a query-side harm. It is *not* established that gating on the room was
+  binning good clips, because the gates were largely inert. Strip-survival where recorded: colm 4/20,
+  marsh 5/16 — a 20% vs 31% efficiency gap, not 0 vs 4.
+  - **Replaced by what already existed.** `## Derived facts for query planning` → `## Gate inputs —
+    and the query's raw material`. Its canvas row already enumerated Gate 3's inputs exactly (act,
+    position, count, direction, affect). It is now explicitly a **closed** list: a fixed set of named
+    body facts has no free-form slot for a room to hide in. `setting` stays in it flagged
+    *query-only, never a gate*.
+  - **`pov_case` promoted to its own field.** The old text said to write the POV call "into
+    `must_show` or `avoid`"; with both gone it needed a home, and deciding it at SCOPE rather than at
+    judging time is a rule worth keeping.
+  - **`SKILL.md` §1 Demand table** — `must_show`/`avoid` row replaced by `pov_case` + §Gate inputs,
+    with a paragraph stating that the brief supplies gate *inputs* and never gates of its own.
+- **Re-anchored the ABSENT/CONTRADICTED rule** (`SKILL.md` §5 Stage C). **Why:** it was the best rule
+  in the gating doctrine and it was written about the deleted field. It now governs the Gate-3 checks,
+  and gained a worked example for the room as a three-way test — **confirms / neutral / contradicts** —
+  where only "contradicts" costs anything, and only as SETTING points. A neutral room (bare wall,
+  plain floor, cropped background) is a normal correct clip. Rationale recorded: the beat's prose
+  already told the player where they are, so the clip has to not argue with it, not prove it.
+- **`references/scoring_rubric.md` — two additions, no rewrites.** §SETTING gained the corpus-bet
+  warning: answering `setting_is_load_bearing = true` asks whether the room carries meaning *in the
+  fiction*, which is a different question from whether this corpus ever shoots it (it shoots bedrooms,
+  offices, bathrooms, cars, bars, gloryholes, POV-anywhere — not red-lit brothel rooms or industrial
+  storerooms), with the four-slot table. Confidence table gained the row, marked **Confirmed as a
+  class, n=4 slots with one clean contrast**.
+- **Pool-aware strip budget** (`scoring_rubric.md` §Gate 2, new rule 1b). **Why:** "strip the top 6"
+  was set for a slot that installs **one** clip. A `pool_dir` slot installs up to `pool_target`
+  (normally 4) from a step that kills 30–65%, so six yields ~2–4 survivors — short of target on a bad
+  day. Rule: strip 6; if survivors < `pool_target`, strip one more board of 6; **stop at 12**. Without
+  a written ceiling, wave-1 agents stripped 20+ per slot at 120–142K tokens each, and none of it
+  improved the pick.
+- **Consistency sweep.** `templates/run_manifest.schema.json` — `brief.must_show`/`brief.avoid`
+  replaced by `brief.pov_case` + `brief.gate_inputs` (with the why recorded in its `description`).
+  `references/audit_mode.md:208` MED row now names the Gate-3 checks instead of "a named `must_show`
+  element". `references/sheets_and_boards.md:31` repeatability claim now credits the checks being
+  concrete *and closed* rather than the deleted lists.
+- **Untouched on purpose:** `setting_is_load_bearing` (correct, and does two real jobs); Gate 1 CAST
+  in full, including wardrobe, face filters, AI artifacts and heavy watermarks (cast and provenance,
+  not setting); the mandatory frame strip on every animated install; mode counts 6/12/18; and
+  `scripts/fetch_candidates.py --avoid`, which is a **−25 ranking penalty** (`:83-85`), not a gate —
+  it was already the model this change adopts.
+- **Verified — grep.** `grep -rn must_show` outside this CHANGELOG returns only the two deliberate
+  historical mentions (`SKILL.md:261`, `scope_brief.md:161`) that explain the removal, plus the
+  rationale text inside `run_manifest.schema.json`'s new `gate_inputs.description`.
+- **Verified — behavioural, and this is the load-bearing check.** An independent agent re-judged
+  `sex/brothel_oral_t5` under the revised skill from material already on disk — **no new searches**,
+  25 clips judged across the pool, `.find-media/previous/` and `/tmp/fm/`. It was not told what to
+  expect.
+  - **Every gate reason it recorded is about a body:** `act:solo_no_partner`,
+    `act:from_behind_vaginal_not_oral`, `act:no_oral_contact_in_loop`, `count:1_not_2_gloryhole`,
+    `affect:performed_arousal_not_flat`, `affect:face_never_readable_absent`. **None about a room, a
+    light or a piece of furniture.** On this slot the change took.
+  - **The risk did NOT materialise.** Removing the free-form checklist was supposed to risk wrong-act
+    clips leaking. The closed act gate killed **six**, and **five of them arrived from `hair pulling`
+    queries** — the exact vocabulary trap a grip-focused demand invites. Every clip it would install
+    shows the act in *every* sampled frame, checked on the strip.
+  - **Four clips recovered that a room rule bins on sight**, three of them the best on disk: an
+    ordinary daylight living room with a blue couch (the cleanest hand-in-hair kneeling blowjob in
+    the set), a bright dining room with a floral rug (verbatim the rubric's own "contradicts"
+    example), a bare grey wall, and a dim candlelit room. **Two had been sitting unused in
+    `previous/` the whole time, harvested for a different slot.**
+  - **It also removed the clip the room rule had installed.** `c1d16864eac` is the only genuinely
+    red-lit clip in all 25 — slug `madison-ivy-red-light-burlesque-blowjob` — and it was installed
+    *because* of that. With the red light earning nothing, what remains is a posed burlesque loop with
+    no grip and an arched, head-back performance: `affect:performed_arousal_not_flat`. Correct
+    direction.
+  - **⚠️ But this run is NOT a controlled comparison, and should not be read as one.** It has no
+    arm A. Its headline metric — "zero room-based gate reasons" — has a **pre-measured control value
+    of zero**: the old skill's own records show no room/lighting/furniture reject either, because
+    `gate_reason` is a closed namespace (`cast:`/`act:`/`position:`/`count:`/`affect:`/`finish:`/`pov:`)
+    with no room slot to emit. A room-motivated rejection gets written as `affect:*` or `craft:*` and
+    the instrument still reads clean — which is plausibly what the one removal here was, since
+    `c1d16864eac` died on `affect:performed_arousal_not_flat` *"once the room stopped earning credit."*
+  - **And the recovery is confounded with POV, not isolated to the room.** This run flipped `pov_case`
+    from the stale brief's `defect` to `either`, and that flip is single-handedly what surfaced the
+    best clip. The room change and the POV change were not separated.
+  - A planned 3-slot replication was **cancelled before running** for these reasons: it would have
+    returned green checks against a criterion whose control value is zero, on a slot set where one
+    member (`renner_loop_oral_t5`, `setting_is_load_bearing: false`) had no room gate to remove at
+    all. The correct design is a **paired A/B** — same frozen clip set, `git show HEAD:` skill vs
+    working-tree skill, `pov_case` pinned in both arms, metric = the per-clip decision vector rather
+    than the reason string, plus a blind judge choosing between the two assembled pools. Not yet run.
+- **⚠️ Two risks the re-judge surfaced — unmeasured, flagged rather than fixed.**
+  - **`pov_case` is now doing very heavy lifting.** Flipping this one slot's call from `defect` to
+    `either` is single-handedly what recovered the best clip in the set — and the field has no
+    measured backing at all. It is the most likely place for a slot to go bad quietly. Related: the
+    old brief justified `defect` with "anonymity needs his body seen as a separate thing", which is
+    **not one of the two cases the rubric admits** (`scoring_rubric.md:148-160`). Inventing a third
+    POV case is now a known failure mode; the rubric's test is whether the partner is *slack, limp,
+    passed-out, watching, restrained or pointedly-still* — a man actively driving her head is none of
+    those.
+  - **The gaze/affect crop exception is where a room-shaped gate can grow back.** It is the one
+    framing-derived rejection the rubric still authorises, and the re-judge used it **3 times in 25** —
+    making it the busiest reason after `act`. Worth a measurement before it is worth trusting.
+  - **⚠️ POOL COHERENCE — the harm this change could actually cause, and nothing here detects it.**
+    Every gate and every axis in this skill judges **one clip at a time**. A pool is 4 clips the engine
+    cycles *in one location*. Take the room out of the per-clip channel and it becomes strictly more
+    likely that a pool ships a red-lit room, a daylight living room with a blue couch, a floral-rug
+    dining room and a bare grey wall — each individually defensible on HEAT, collectively telling the
+    player the brothel is four different houses. `calloway_loop_oral_t5` already shows the shape: its
+    own run note says *"none of the three installs is genuinely dim"* while its brief called the dim
+    records room the meaning of the scene. **No check in this skill looks at the assembled pool.**
+    Cheap fix when someone gets to it: one contact sheet of the finished folder, one question — *does
+    this read as one place?* Until then, treat a pool's coherence as unverified.
+  - Incidental, fourth run in a row: byte-identical duplicates behind different urls. Of "10 fetched
+    candidates", two were the same file twice and two more were already installed — **7 new files, not
+    10.** URL-dedup does not see this. The re-judge's "25 judgements" therefore covers ~21 distinct
+    clips.
+- **Known follow-up, out of scope by decision:** `author-game/references/media.md` carries the same
+  contradiction upstream — `:329-338` grades **Setting as `critical`, "the background location MUST be
+  recognizable"**, while `:232-236` in the same file says name the setting only when it carries
+  meaning. That is what makes authors write rooms into `description` in the first place. Likely fix is
+  narrow rather than a reversal of image-first doctrine: setting is critical when the image's job IS
+  the place (a `location_image`, an establishing shot) and incidental when its job is the act.
+
 ## 2026-07-31 (later) — the shelf key is `slot_key`, not necessarily the path
 
 - **`SKILL.md` §STOCK — the key bullet rewritten.** **Why:** a slot's shelf AND its verdict were

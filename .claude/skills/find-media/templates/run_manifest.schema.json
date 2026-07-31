@@ -68,8 +68,18 @@
               "setting_is_load_bearing": { "type": "boolean" },
               "setting_why": { "type": "string" },
               "intended_heat": { "type": "string", "description": "The carrier that makes the beat land — eye contact, being used, power, squalor, exposure" },
-              "must_show": { "type": "array", "items": { "type": "string" } },
-              "avoid": { "type": "array", "items": { "type": "string" } }
+              "pov_case": { "enum": ["defect", "fine", "either"], "description": "Decided at SCOPE, never at judging time. 'defect' when the meaning needs the partner's body seen; 'fine' when the power is her face and eyes at the lens." },
+              "gate_inputs": {
+                "type": "object",
+                "description": "The CLOSED list Gate 3 checks against — bodies only. Replaced the free-form must_show/avoid lists on 2026-07-31: those were filled 'straight from the beat prose', so rooms entered them and began rejecting clips, which scoring_rubric.md forbids. A fixed set of named fields has nowhere for a room to hide. Note `setting` is absent here on purpose — it lives in `queries` and on the SETTING axis, and is never a gate.",
+                "properties": {
+                  "act": { "type": "string" },
+                  "position": { "type": "string" },
+                  "people_count": { "type": "integer" },
+                  "direction": { "type": "string", "description": "Only when the act is ambiguous about who does what to whom" },
+                  "affect": { "type": "string" }
+                }
+              }
             }
           },
 

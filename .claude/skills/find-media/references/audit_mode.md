@@ -205,7 +205,7 @@ Severity, and what each one means for the human:
 | Severity | Meaning | Action he takes |
 |---|---|---|
 | **HIGH** | A correctness gate fails — the media contradicts the beat | Disapprove and refetch |
-| **MED** | Gates hold, but a named `must_show` element is absent, or a mechanical gate fails (tier/format/size/dedup) | His call; often a re-crop or a re-grab |
+| **MED** | Gates hold, but a Gate-3 element (act / position / count / affect / extra people / finish) is weakly served, or a mechanical gate fails (tier/format/size/dedup) | His call; often a re-crop or a re-grab |
 | **LOW** | Drift no gate covers (beat says "seated", man is standing), or a craft defect like a burned-in watermark | Usually note-and-move-on |
 
 Sort HIGH first. Report the count of each, and **name the evidence path** on every row — a

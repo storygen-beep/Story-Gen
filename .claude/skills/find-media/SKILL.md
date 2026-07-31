@@ -253,8 +253,18 @@ The part that carries is **§Demand**:
 |---|---|
 | `setting_is_load_bearing` | Decides whether the query spends words on the room AND whether the setting axis is scored at all. Test: does the setting carry **danger, secrecy, or squalor**? A dark-alley beat rejected bright clips twice; a different beat, the user said the setting "doesn't matter much here". |
 | `intended_heat` | Names the *carrier* — eye contact, being used, power, squalor, exposure. This is what makes a spec-perfect clip dead when it's missing. |
-| `must_show` / `avoid` | Frame-checkable lists. Each entry must be verifiable in one frame, because these become the strip checklist. |
-| POV case | Decided **now**, not at judging time. POV is a defect when the meaning needs the partner's body seen (a slack, watching, restrained man cannot be the camera). POV is fine, often stronger, when the power is her face and eyes aimed at the viewer. |
+| `pov_case` | Decided **now**, not at judging time. POV is a defect when the meaning needs the partner's body seen (a slack, watching, restrained man cannot be the camera). POV is fine, often stronger, when the power is her face and eyes aimed at the viewer. |
+| §Gate inputs | The closed list Gate 3 checks against — act, position, count, direction, affect. Bodies only. `setting` sits here too but feeds the **query** alone. |
+
+**The brief does not carry its own gate list.** Gates live in one place —
+`references/scoring_rubric.md` §Gate 1 (CAST) and §Gate 3 (BEAT) — and the brief supplies their
+inputs. The brief used to carry free-form `must_show` / `avoid` lists that became the strip
+checklist, and because they were filled "straight from the beat prose" they filled with rooms —
+one slot's list required *"a hard floor — concrete / bare / tile, not carpet"*, another *"a dim
+indoor office / records setting"*. The rubric forbids rejecting on a room, so those entries were
+either ignored (making the demand theatre) or obeyed (breaking the rubric). Both are bad, and on
+`vesper` both happened. A closed input list has nowhere for a room to hide, which is why it is
+closed.
 
 The API already confirmed the file is absent — don't re-scan disk.
 
@@ -447,16 +457,42 @@ scored.** Act, position, people count, affect, cast, and POV-when-the-scene-requ
 partner-visible are **gates** — pass or out. Being correct earns no points, ever, because
 points are exactly how a correct-dead clip out-totals a flawed-alive one.
 
-**A gate fails on ABSENT or CONTRADICTED — never on "can't see it."** A `must_show` item the
-framing simply doesn't cover is **UNVERIFIED, not failed**. A tight crop is a camera choice,
-not a defect, and rejecting on it throws away correct clips for how the shot was composed.
-The **one exception is gaze and affect**, which **fail** when their carrier is cropped out:
-the face is their only carrier, so a face that is never in frame means the beat's content is
-**absent**, not merely unproven. Measured both ways in one run — a tight-crop candidate
-**passed** on unverifiable posture because its eyes held the lens in all four frames, while a
-covert downblouse **failed** because "aware of the camera" can never be shown by a clip whose
-face never appears. Without this, "does it pass?" is not deterministic: two readings of the
-same strip disagree, and the `gate_reason` stops being auditable.
+**A gate fails on ABSENT or CONTRADICTED — never on "can't see it."** A Gate-3 check the framing
+simply doesn't cover is **UNVERIFIED, not failed**. A tight crop is a camera choice, not a defect,
+and rejecting on it throws away correct clips for how the shot was composed. The **one exception is
+gaze and affect**, which **fail** when their carrier is cropped out: the face is their only carrier,
+so a face that is never in frame means the beat's content is **absent**, not merely unproven.
+Measured both ways in one run — a tight-crop candidate **passed** on unverifiable posture because
+its eyes held the lens in all four frames, while a covert downblouse **failed** because "aware of
+the camera" can never be shown by a clip whose face never appears. Without this, "does it pass?" is
+not deterministic: two readings of the same strip disagree, and the `gate_reason` stops being
+auditable.
+
+**The same three-way test applies to the room, and it is the case that has cost the most.** A room
+either *confirms* the beat, is *neutral* toward it, or *contradicts* it — and only the third is
+worth anything, as **points off the SETTING axis, never a rejection**:
+
+| | example against a "dim back room" beat | what it costs |
+|---|---|---|
+| confirms | a real dim storeroom | full SETTING score. Rare — do not wait for it |
+| **neutral** | a bare wall, a plain floor, a cropped background | **nothing. This is a normal, correct clip** |
+| contradicts | a sunlit living room with a floral rug | SETTING 0–5. Still not a gate |
+
+The failure mode this kills: the beat prose says *"in a dim red-lit room"*, that phrase gets treated
+as a required element, and the search then spends round after round hunting a room these hosts do
+not shoot. Observed on `vesper`: three slots demanded a red-lit brothel room, a concrete storeroom
+and a dim records room; across 6–7 rounds each, none was retrieved, and calloway's own run note
+reads *"none of the three installs is genuinely dim."*
+
+**Be precise about the mechanism, because it is easy to overstate** (an earlier version of this
+paragraph did): those slots still filled. The rooms in the demand were largely *inert* — authors
+wrote them down and then correctly declined to reject on them, so the recorded kills are bodies
+(`him_standing` 11 of 15 on calloway). The cost was wasted search rounds and a demand nobody could
+satisfy, not good clips thrown away. That is reason enough to keep rooms out of the gate list, and
+it is a smaller claim than "the room gate binned everything."
+
+Remember what the picture is for — the beat's prose already told the player where they are, so the
+clip has to *not argue with it*, not prove it independently.
 
 What's left is scored on **three axes and only three: HEAT 60 / SETTING 25 / CRAFT 15.**
 When the setting is not load-bearing — no danger, no secrecy, no squalor — **SETTING is

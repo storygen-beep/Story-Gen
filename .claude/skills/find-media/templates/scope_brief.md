@@ -95,8 +95,13 @@ Description shape: `"Dating profile photo for {npc_name or id}"`.
 
 ## Demand — what this slot has to deliver
 
-The four fields the rubric cannot reconstruct later. Write them from the beat prose, not
+The three fields the rubric cannot reconstruct later. Write them from the beat prose, not
 from the filename.
+
+Note what is **not** here: a list of things the clip must contain. The gates are owned by
+`references/scoring_rubric.md` (§Gate 1 CAST, §Gate 3 BEAT) and their inputs are the closed list in
+§Gate inputs below. This section carries only the three judgement calls the rubric genuinely cannot
+make on its own.
 
 ### setting_is_load_bearing: `{{true|false}}`
 
@@ -127,48 +132,68 @@ The user's winning pick over the assistant's was chosen explicitly because "the 
 it win" — it beat a spec-correct alternative that was correct and dead. That is what this
 field exists to protect.
 
-### must_show: `{{concrete, checkable list}}`
+### pov_case: `{{defect|fine|either}}`
 
-Pull straight from the beat prose. Each entry must be verifiable in a single frame.
+> Why: {{one line}}
 
-- e.g. `man standing`, `woman kneeling`, `his hand not his cock`, `3+ men visible`,
-  `she holds camera eye contact`
+**POV is two cases, not one rule** — so decide it here, in advance, rather than at judging time
+when forty thumbnails are in front of you and the argument goes whichever way you're leaning.
 
-### avoid: `{{concrete, checkable list}}`
+- **`defect`** — the scene's meaning needs the partner's body seen. A slack, limp, passed-out,
+  watching or restrained man **cannot also be the camera**: if he is the camera, the thing the
+  beat depicts is off-screen. Counting a crew you can't see fails the same way.
+- **`fine`** — the clip's power is her face and her eyes aimed at the viewer. POV puts the camera
+  where the player is, so eye contact into the lens is eye contact with the player. This is the
+  strongest heat signal we have confirmed, and the one clip the user picked over a spec-perfect
+  alternative was POV.
 
-The hard gates. Every entry here is a documented rejection class from this game's history:
-wrong count, wrong position, wrong act, wrong affect, extra people, face filters, finishes
-that never show the finish.
-
-- e.g. `more than one man`, `POV`, `bright studio lighting`, `smiling performer`,
-  `face filter`
-
-**POV is two cases, not one rule.** POV is a defect when the scene's meaning needs the
-partner's body seen — a slack, limp, or watching man cannot also be the camera. POV is fine,
-often stronger, when the clip's power is her face and eyes aimed at the viewer. Decide which
-case this beat is and write it into `must_show` or `avoid`; do not leave it to judging time.
+Full treatment in `references/scoring_rubric.md` §Gate 3. When POV is not a Gate-3 failure it
+must not be penalised on any axis.
 
 ### strip checklist (derived)
 
-Copy `must_show` + `avoid` into a numbered list here. This is what you hold against the
-evidence: **every animated finalist (`.webm` / `.mp4` / `.gif`) is strip-verified; a static
-finalist (a location or clothing `.jpg`, which cannot be stripped) is judged from the contact
-sheet.** The strip is route-independent and it kills roughly half of what looked good:
-3 of 5 in one round this session, 4 of 6 in the next. Kills included a
-"perfect cluttered back room" thumbnail whose loop was standing kissing with no blowjob at
-all, and a "dark outdoor" thumbnail whose loop was a bright daytime laundromat. Eye contact
-in particular must HOLD ACROSS THE WHOLE STRIP — two candidates died on wandering eyes their
-thumbnails hid.
+Do **not** invent a checklist here. It is `references/scoring_rubric.md` §Gate 3 — act, position,
+count, affect, extra people, finish — filled in from **§Gate inputs** (the next section down), plus
+your `pov_case` call. Copy those in as a numbered list so the check is concrete when you're holding
+it against an image. Fill §Gate inputs first, then come back and copy.
+
+> **Why the checklist is a fixed list and not a free-form one.** It used to be free-form
+> (`must_show` / `avoid`), pulled "straight from the beat prose" — and beat prose says things like
+> *"in a dim red-lit room"*. Rooms went into the checklist, which the rubric explicitly forbids
+> (`scoring_rubric.md` — *"`wrong_setting` is not a valid `gate_reason`"*). Observed on `vesper`:
+> one slot's list required *"kneeling on a **hard floor** — concrete / bare / tile, not carpet"*,
+> another required *"a dim indoor office / records setting"*. Neither room existed in the corpus, so
+> both slots burned 6 query rounds hunting one.
+> **What it did NOT do, so don't overstate it:** those gates mostly never fired — the recorded kills
+> are bodies, and every slot still filled. The damage was an unsatisfiable demand and wasted rounds,
+> not good clips binned. A closed list has nowhere for a room to hide in the first place.
+
+**Every animated finalist (`.webm` / `.mp4` / `.gif`) is strip-verified; a static finalist (a
+location or clothing `.jpg`, which cannot be stripped) is judged from the contact sheet.** The
+strip is route-independent and it kills roughly half of what looked good: 3 of 5 in one round this
+session, 4 of 6 in the next. Kills included a "perfect cluttered back room" thumbnail whose loop
+was standing kissing with no blowjob at all, and a "dark outdoor" thumbnail whose loop was a bright
+daytime laundromat. Eye contact in particular must HOLD ACROSS THE WHOLE STRIP — two candidates
+died on wandering eyes their thumbnails hid.
 
 1. {{check}}
 2. {{check}}
 
-## Derived facts for query planning
+## Gate inputs — and the query's raw material
+
+This section does two jobs: it is what the queries are built from, **and** it is what
+`references/scoring_rubric.md` §Gate 3 checks a candidate against. Same facts, both uses.
+
+**The list is closed on purpose.** Every field below is a fact about *bodies* — who is there, what
+they are doing, who is standing or kneeling, where the hands and eyes are. There is no free-form
+slot, because the free-form version is what let rooms become gates. `setting` appears here as a
+**query input only** and is marked as such: it can lose points on the SETTING axis, it can never
+reject a candidate.
 
 Fill by type:
 
 - **canvas (image/video)**: act, position, people count (1|2|3+), direction if ambiguous,
-  affect, setting *only if load-bearing*
+  affect, setting *only if load-bearing — and for the QUERY only, never a gate*
 - **social_post_image**: poster persona (e.g. `fit woman`, `travel influencer`), scene
   subject (activity implied by hashtags/caption), setting if implied, selfie-style required
 - **location_image**: wide-angle vs interior, empty (no people), time of day if implied
@@ -256,9 +281,14 @@ per-type and always applies.
 
 ### NSFW types (canvas image/video at t4+)
 
-Full gate list in `references/scoring_rubric.md` §Gate 1 — CAST and §Gate 3 — the BEAT, plus
-this brief's `avoid` list. Every one of them is binary: a gate failure ends the candidate and
-is recorded with a named reason. None of them is worth points.
+Full gate list in `references/scoring_rubric.md` §Gate 1 — CAST and §Gate 3 — the BEAT. **Those two
+sections are the complete set** — this brief contributes the *inputs* to Gate 3 (§Gate inputs) and
+the `pov_case` call, never additional gates of its own. Every gate is binary: a failure ends the
+candidate and is recorded with a named reason. None of them is worth points.
+
+A gate that is not on that list does not exist. In particular the room, the lighting and the
+furniture are **scored on the SETTING axis, never gated** — `wrong_setting` is not a legal
+`gate_reason` (`scoring_rubric.md:332`).
 
 ## Mode — how deep to stock the shelf
 

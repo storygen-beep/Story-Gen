@@ -28,8 +28,10 @@ Three consequences that matter:
   gate call with no reason recorded is unauditable and therefore worthless.
 - **Repeatability is a property of the checklist, not the tool.** Measured 2026-07-29: the same
   ten slots re-judged from boards reproduced **10/10 of the previous run's picks**. That is the
-  evidence the gates are stable — it comes from the `must_show`/`avoid` lists being concrete,
-  not from anything ffmpeg did.
+  evidence the gates are stable — it comes from the checks being concrete and *closed*
+  (`scoring_rubric.md` §Gate 3, fed by the brief's §Gate inputs), not from anything ffmpeg did.
+  Concreteness is what makes two readings agree; the list being closed is what stops a room
+  sneaking in as a gate.
 
 > **History.** This skill used to ship `clip_shortlist.py`, a local CLIP model meant to pre-rank
 > the tiles. It was deleted 2026-07-29: it had never run in any recorded run, its own header
