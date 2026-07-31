@@ -139,14 +139,70 @@ blowjob+kneeling                              (pornhub dialect, June)
 **Burned tokens that no later slot may anchor on:** `hand in hair`, `hair pull`, `penthouse`,
 `office floor`, `standing over her`.
 
-### 3.2 Result-level isolation (the second half of the law)
+### 3.2 Result-level isolation — and the hole the law does NOT cover
 
-Distinct queries can still converge on one file. Two checks, both cheap:
+Distinct queries can still converge on one file. Two cheap checks:
 
 - `python3 .claude/skills/find-media/scripts/dedup_tracker.py --check <id_or_url> --game vesper`
-  before every install. 230 assets already recorded.
+  before every install.
 - **No URL may be stocked on two vesper slots.** Check `media_options.json` at stock time; the
   store dedupes per-slot, not across them.
+
+> ### ⚠️ MEASURED 2026-07-31 — the fresh-search law does not prevent duplicate FOOTAGE
+>
+> Wave 1 obeyed §3 exactly: `renner_loop_oral_t5` searched `office chair` / `under the desk`,
+> `calloway_loop_oral_t5` searched `file room` / `after hours` / `secretary working late`.
+> Different words, different grids, different hosts. **Both installed the same source video.**
+>
+> Confirmed visually and numerically: identical glass-top desk and blue cabinets, identical white
+> top and burgundy skirt, identical red heels kicked off at the same spot on the floor, identical
+> man/watch/chair angle/camera position. Alignment-searched grayscale diff **16.75 mean-abs**
+> (unrelated clips run 40–70). The two differ only as *rips*: 590 KB clean vs 1 MB with a
+> `gif-porn.net` stamp.
+>
+> **Nothing in the pipeline could catch it.** Different URLs → URL dedup passes. Different bytes,
+> sizes and watermarks → file dedup passes. Each harvest agent sees only its own pile → neither
+> could know. Left in, it would have shipped the same woman in the same clothes in the same room
+> as **two different NPCs** — an NPC-identity collapse, worse than a repetitive pool.
+>
+> **The law prevents shared harvests. It does not prevent the same footage arriving by two roads.**
+> Only a cross-folder visual comparison finds it. That is a REQUIRED Stage-3 step, and every
+> harvest brief must tell the agent to eyeball its candidate against its named collision partner
+> before installing.
+
+### 3.3 ⚠️ THE ROOM TRAP — `setting_is_load_bearing: YES` is a corpus bet
+
+Wave 1's clean result: **three of three slots that gated on a ROOM failed. The one that gated on
+the BODY succeeded.**
+
+| slot | demand | outcome |
+|---|---|---|
+| brothel | red-lit paid room | 0 red-lit clips in 4 rounds → bright living room, white-tiled room, POV couch |
+| colm | concrete storeroom, crates | 0 in 3 rounds → hallway, **gloryhole**, white bathroom |
+| calloway | dim after-hours records room | 0 in 3 rounds → bright open-plan offices, `BANGBROS` watermarks |
+| **marsh** | **her hands on him, her eyes up** | **4 coherent clips — the only shippable pool of the four** |
+
+`media.md` §7 Gate 2 warns that a too-specific *gesture* cannot fill a pool (`lab_finish_facial`,
+`pool_all_dead` at 24 candidates). **A room the corpus does not shoot is unfillable for exactly the
+same reason, and nothing warns about it.** Worse, the doctrine's danger/secrecy/squalor test
+actively *causes* the failure: it says "this setting is meaningful", the author writes it into
+`must_show`, and the search then hunts a room that does not exist on these hosts.
+
+**The corpus shoots:** offices, bedrooms, bathrooms, kitchens, cars, outdoors, bars, gloryholes,
+and POV-anywhere. **It does not shoot:** red-lit brothel rooms, industrial storerooms, dim
+after-hours archives.
+
+**Rule going forward — gate on the BODY, score the ROOM.** `must_show` holds bodies, hands, gaze,
+posture and who is standing or seated. A setting belongs on the SETTING axis where it can *lose
+points*, never in `must_show` where it *rejects*. Add one question to the SCOPE brief before
+`setting_is_load_bearing` is ever answered YES: **"does this corpus actually shoot this room?"**
+If the answer is no, the setting is not load-bearing no matter what the beat means.
+
+Corollary: when two slots share an act and a room by construction (the five oral slots here), the
+durable separator is **camera distance and wardrobe**, not the room. Wave 2 splits the two office
+slots that way — calloway takes tight face-level crops and the corporate `cover_analyst` styling,
+renner takes the wide tripod side-shot and `cover_dockhand` casual. Both separators are diegetic:
+the game really does dress her differently in those two places.
 
 ---
 
