@@ -23,7 +23,12 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
 
 from apps.common.media_band import band_for_entry
-from apps.common.media_blocks import block_media_paths, block_media_pool, block_slot_key
+from apps.common.media_blocks import (
+    block_media_paths,
+    block_media_pool,
+    block_slot_key,
+    iter_media_blocks,
+)
 
 GAMES_ROOT = Path(settings.BASE_DIR) / "games"
 
@@ -241,33 +246,11 @@ def _process_canvas(canvas: dict) -> dict:
     return result
 
 
-def _iter_media_blocks(blocks: list[dict]):
-    """Yield every image/video block reachable in `blocks`, descending into the
-    nested-block containers the game generator actually renders.
-
-    A flat walk over `node["blocks"]` only sees media that are DIRECT children of a
-    node. But the hottest content is always nested one level deeper:
-      - sex-loop FINISHERS + ambient sex  → `group` blocks   (`block["blocks"]`)
-      - OPENING / first-time sex          → `cascade` beats   (`props["beats"][*]["blocks"]`)
-      - random-still pools                → `block_pool`      (`props["blocks"]`)
-    The flat walk missed all of it, so those files never reached the missing-media
-    list and shipped without art while the audit reported "0 missing". This mirrors
-    v2.py `_convert_blocks_to_game_html`'s descent so the list matches the real build.
-    """
-    for block in blocks:
-        if not isinstance(block, dict):
-            continue
-        if (block.get("type") or "").strip() in ("image", "video"):
-            yield block
-        props = block.get("props") or {}
-        # group (and any block carrying a direct child list)
-        yield from _iter_media_blocks(block.get("blocks") or [])
-        # block_pool — children under props.blocks
-        yield from _iter_media_blocks(props.get("blocks") or [])
-        # cascade — children under props.beats[*].blocks
-        for beat in (props.get("beats") or []):
-            if isinstance(beat, dict):
-                yield from _iter_media_blocks(beat.get("blocks") or [])
+# The nested-block descent now lives in apps/common/media_blocks.py so this API and
+# `manage.py check_media` cannot drift again — they already had, and the audit went
+# blind to 16% of vesper's media blocks. Kept under the old private name because it
+# is the published import for the enumeration tests.
+_iter_media_blocks = iter_media_blocks
 
 
 def _extract_missing_media(data: dict, game_name: str) -> dict:

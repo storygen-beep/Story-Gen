@@ -154,3 +154,41 @@ def block_media_paths(props: Dict[str, Any]) -> List[str]:
     if isinstance(single, str) and single.strip():
         return [single]
     return []
+
+
+def iter_media_blocks(blocks: List[Any]):
+    """Yield every image/video block reachable in `blocks`, descending into the
+    nested-block containers the game generator actually renders.
+
+    A flat walk over `node["blocks"]` only sees media that are DIRECT children of a
+    node. But the hottest content is always nested one level deeper:
+      - sex-loop FINISHERS + ambient sex  -> `group` blocks   (`block["blocks"]`)
+      - OPENING / first-time sex          -> `cascade` beats  (`props["beats"][*]["blocks"]`)
+      - random-still pools                -> `block_pool`     (`props["blocks"]`)
+    The flat walk missed all of it, so those files never reached the missing-media
+    list and shipped without art while the audit reported "0 missing". This mirrors
+    v2.py `_convert_blocks_to_game_html`'s descent so the list matches the real build.
+
+    **It lives here, not in one enumerator, because the drift already happened
+    twice.** `block_media_paths` above was extracted after three hand-copied walks
+    all read `props["file"]` and went blind to pools. This descent was then written
+    in `api/v1/game_review.py` and never propagated to `manage.py check_media`,
+    whose own docstring says it "must match api/v1/game_review.py's treatment or
+    the two enumerators drift apart again" — and it did: measured on vesper,
+    28 of 177 media blocks (16%) were invisible to the audit, including both
+    pools inside Marsh's `finish_soft` group chain. Import it; do not re-write it.
+    """
+    for block in blocks:
+        if not isinstance(block, dict):
+            continue
+        if (block.get("type") or "").strip() in ("image", "video"):
+            yield block
+        props = block.get("props") or {}
+        # group (and any block carrying a direct child list)
+        yield from iter_media_blocks(block.get("blocks") or [])
+        # block_pool — children under props.blocks
+        yield from iter_media_blocks(props.get("blocks") or [])
+        # cascade — children under props.beats[*].blocks
+        for beat in (props.get("beats") or []):
+            if isinstance(beat, dict):
+                yield from iter_media_blocks(beat.get("blocks") or [])

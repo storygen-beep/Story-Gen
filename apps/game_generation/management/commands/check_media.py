@@ -14,7 +14,11 @@ from collections import defaultdict
 
 from django.core.management.base import BaseCommand, CommandError
 
-from apps.common.media_blocks import block_media_paths, block_media_pool
+from apps.common.media_blocks import (
+    block_media_paths,
+    block_media_pool,
+    iter_media_blocks,
+)
 
 try:
     import tomllib
@@ -124,10 +128,18 @@ class Command(BaseCommand):
             canvas_id = canvas.get('id', 'unknown')
             canvas_name = canvas.get('name', canvas_id)
 
-            # Check all nodes
+            # Check all nodes.
+            #
+            # `iter_media_blocks` rather than a flat loop: this walk used to see only
+            # DIRECT children of a node, so every media block nested in a `group`,
+            # `cascade` beat or `block_pool` was invisible — and that is where the
+            # hottest content lives (sex-loop finishers, opening sex, still pools).
+            # Measured on vesper: 28 of 177 media blocks, 16%, missing from this
+            # audit, including both pools in Marsh's finish_soft group chain, which
+            # is how a beat can report "found" while shipping blank.
             nodes = canvas.get('nodes', [])
             for node in nodes:
-                for block in node.get('blocks', []):
+                for block in iter_media_blocks(node.get('blocks', [])):
                     self._extract_from_block(block, canvas_id, canvas_name, refs)
 
                 # Also check exit_block
@@ -136,7 +148,7 @@ class Command(BaseCommand):
                     self._extract_from_block(exit_block, canvas_id, canvas_name, refs)
 
             # Check canvas-level blocks
-            for block in canvas.get('blocks', []):
+            for block in iter_media_blocks(canvas.get('blocks', [])):
                 self._extract_from_block(block, canvas_id, canvas_name, refs)
 
         return refs
