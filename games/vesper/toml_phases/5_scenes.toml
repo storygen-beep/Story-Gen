@@ -1043,13 +1043,13 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes inside her, holding her down on him, shaking. For a moment after he just breathes into her shoulder, wrecked and grateful, and she lets him have the moment because letting him have it is how she keeps him." },
-    { type = "video", props = { pool_dir = "sex/renner_finish_inside_t5", pool = 4, description = "A man finishing inside a woman riding him in an office chair, holding her down on him, both shaking.", search_queries = ["office chair creampie riding", "man finishing inside girl on top"] } },
+    { type = "video", props = { pool_dir = "sex/renner_finish_inside_t5", pool = 4, description = "A heavyset older man finishing inside a woman riding him in the chair of a cramped warehouse back office, holding her down on him, both shaking.", search_queries = ["heavyset older man creampie girl riding him gif", "warehouse back office chair finish inside woman on top"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes in her ass, and the controls slide warm into her hand — the give, the opening, his whole ruined weight gone pliant against her back. The same act that hands her nothing with Mercer hands her everything with him." },
-    { type = "video", props = { pool_dir = "sex/renner_finish_anal_t5", pool = 4, description = "A man finishing in a woman's ass as she's bent over an office desk, gripping her hips.", search_queries = ["office desk anal creampie behind", "man finishing anal bent over desk"] } },
+    { type = "video", props = { pool_dir = "sex/renner_finish_anal_t5", pool = 4, description = "A heavyset older man finishing in a woman's ass as she's bent over a warehouse office desk piled with paperwork, gripping her hips.", search_queries = ["anal creampie bent over a desk piled with papers gif", "heavyset man anal finish woman bent over warehouse desk"] } },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -6204,7 +6204,7 @@ description = "Triggerless rung. Reaction climbs by npc_calloway.corruption band
 id   = "base"
 name = "Get close to him"
 blocks = [
-  { type = "video", props = { pool_dir = "scenes/rung_calloway_contact_t4", pool = 4, description = "A woman leaning forward toward the viewer, teasing — low-cut top, downblouse cleavage, clothed and withheld.", search_queries = ["downblouse cleavage tease lean"] } },
+  { type = "video", props = { pool_dir = "scenes/rung_calloway_contact_t4", pool = 4, description = "A woman leaning forward toward the viewer, teasing — low-cut top, downblouse cleavage, clothed and withheld.", search_queries = ["downblouse cleavage tease lean", "low cut top leaning forward over a desk tease gif"] } },
   { type = "paragraph", content = "The file room, late. He's stopped pretending to work; she's stopped pretending to file. When she puts a hand flat on his chest he goes still." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "npc", npc_id = "npc_calloway", trait_key = "corruption", operator = "lt", value = 6 },
@@ -6457,13 +6457,13 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes inside her, holding her down on him, shaking, and after he just breathes into her neck — wrecked, grateful, believed. She lets him have it. Letting him have it is how she keeps him." },
-    { type = "video", props = { pool_dir = "sex/calloway_finish_inside_t5", pool = 4, description = "A man finishing inside a woman riding him in a desk chair.", search_queries = ["office chair creampie riding", "finishing inside girl on top"] } },
+    { type = "video", props = { pool_dir = "sex/calloway_finish_inside_t5", pool = 4, description = "A man finishing inside a woman riding him in a desk chair in a half-lit records room, stacked file boxes behind them.", search_queries = ["creampie riding him in a desk chair archive room gif", "girl on top finish inside filing room dim boxes"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes in her ass, and the drain opens under it the way it's built to — his whole self coming loose through the contact, the last few minutes already going soft and white behind his eyes." },
-    { type = "video", props = { pool_dir = "sex/calloway_finish_anal_t5", pool = 4, description = "A man finishing in a woman's ass as she's bent over a desk.", search_queries = ["office desk anal creampie behind", "finishing anal bent over desk"] } },
+    { type = "video", props = { pool_dir = "sex/calloway_finish_anal_t5", pool = 4, description = "A man finishing in a woman's ass as she's bent over a desk in a records room, unlabelled file boxes stacked behind them.", search_queries = ["anal creampie bent over desk file room gif", "anal finish from behind archive boxes dim office"] } },
   ] },
 ]
 [canvases.nodes.exit_block]
