@@ -28,19 +28,71 @@
     var filtersEl = document.getElementById("filters");
     var contentEl = document.getElementById("content");
 
+    // Every key in LANE_ORDER (api/v1/media_review.py) needs an entry — a missing one
+    // falls through to the raw lane id, which is how "portrait" shipped lowercase and
+    // unlabelled since the portrait lane was added.
     var LANE_LABEL = {
-      location: "Locations", npc: "NPC", solo: "Solo",
-      story: "Story", clothing: "Clothing", phone: "Phone", other: "Other"
+      location: "Locations", npc: "NPC", solo: "Solo", story: "Story",
+      clothing: "Clothing", phone: "Phone", portrait: "Portraits", other: "Other"
     };
-    var FILTERS = [
-      { key: "all", label: "All", test: function () { return true; } },
-      { key: "approved", label: "Approved", test: function (i) { return i.status === "approved"; } },
-      { key: "disapproved", label: "Disapproved", test: function (i) { return i.status === "disapproved"; } },
-      { key: "needs", label: "Needs review", test: function (i) { return i.found && !i.status; } },
-      { key: "missing", label: "Missing", test: function (i) { return !i.found; } }
+    // ---- filters: three INDEPENDENT axes, ANDed ----
+    // These used to be one radio list. Appending nsfw/pool to it would have made
+    // "NSFW pools that still need review" — the question actually worth asking —
+    // unaskable, because picking a content filter would clear the status filter.
+    // Each axis keeps its own selection and every axis has an "all" that opts out.
+    var NSFW_BANDS = { explicit: 1, nudity: 1, borderline: 1 };
+    function isNsfw(i) { return !!NSFW_BANDS[i.band]; }
+
+    var AXES = [
+      { id: "status", label: "Status", options: [
+        { key: "all", label: "All", test: function () { return true; } },
+        { key: "approved", label: "Approved", test: function (i) { return i.status === "approved"; } },
+        { key: "disapproved", label: "Disapproved", test: function (i) { return i.status === "disapproved"; } },
+        { key: "needs", label: "Needs review", test: function (i) { return i.found && !i.status; } },
+        { key: "missing", label: "Missing", test: function (i) { return !i.found; } }
+      ]},
+      { id: "band", label: "Content", options: [
+        { key: "all", label: "All", test: function () { return true; } },
+        { key: "sfw", label: "SFW", test: function (i) { return !isNsfw(i); } },
+        { key: "nsfw", label: "NSFW", test: isNsfw }
+      ]},
+      { id: "shape", label: "Shape", options: [
+        { key: "all", label: "All", test: function () { return true; } },
+        { key: "pool", label: "Pool", test: function (i) { return !!i.pool_dir; } },
+        { key: "single", label: "Single", test: function (i) { return !i.pool_dir; } }
+      ]}
     ];
 
-    var state = { items: [], laneOrder: [], filter: "all", toml: "", expanded: new Set() };
+    // The band a card shows. Only `clean` is SFW; the other three are all NSFW but
+    // say different things, so the chip is finer-grained than the filter is.
+    var BAND_LABEL = {
+      explicit: "explicit", nudity: "nudity", borderline: "suggestive", clean: "sfw"
+    };
+
+    var state = {
+      items: [], laneOrder: [], toml: "", expanded: new Set(),
+      filters: { status: "all", band: "all", shape: "all" }
+    };
+
+    function axisById(id) {
+      return AXES.find(function (a) { return a.id === id; });
+    }
+
+    // An item passes when EVERY axis passes. `except` skips one axis, which is how a
+    // button count reports "what would I get if I clicked this" rather than a global
+    // total that promises results the other axes will filter away.
+    function passes(item, except) {
+      return AXES.every(function (a) {
+        if (a.id === except) return true;
+        var sel = state.filters[a.id];
+        var opt = a.options.find(function (o) { return o.key === sel; });
+        return opt ? opt.test(item) : true;
+      });
+    }
+
+    function anyFilterActive() {
+      return AXES.some(function (a) { return state.filters[a.id] !== "all"; });
+    }
 
     document.title = (game ? game.title : GAME) + " — Media Review";
     titleEl.textContent = (game ? game.title : GAME);
@@ -67,7 +119,7 @@
     function saveUi() {
       try {
         sessionStorage.setItem(UI_KEY, JSON.stringify({
-          filter: state.filter,
+          filters: state.filters,
           expanded: Array.from(state.expanded),
           scrollY: window.scrollY
         }));
@@ -77,9 +129,22 @@
     // Read ONCE, before anything renders: later saves overwrite the stored blob, so
     // the restore has to hold its own copy of what was there on arrival.
     var savedUi = loadUi();
-    // Validate the filter key — a stale one makes FILTERS.find() return undefined
-    // and `f.test` throw in render().
-    if (FILTERS.some(function (f) { return f.key === savedUi.filter; })) state.filter = savedUi.filter;
+    // Validate every restored key against the axis that owns it. An unknown key makes
+    // options.find() return undefined, and the old single-axis code then threw on
+    // `f.test`; here it would silently disable the axis instead, which is worse —
+    // the button bar would show "All" while the list stayed filtered.
+    if (savedUi.filters && typeof savedUi.filters === "object") {
+      AXES.forEach(function (a) {
+        var k = savedUi.filters[a.id];
+        if (a.options.some(function (o) { return o.key === k; })) state.filters[a.id] = k;
+      });
+    } else if (savedUi.filter) {
+      // Blob written before the axis split, when `filter` was one status string.
+      var statusAxis = axisById("status");
+      if (statusAxis.options.some(function (o) { return o.key === savedUi.filter; })) {
+        state.filters.status = savedUi.filter;
+      }
+    }
     if (Array.isArray(savedUi.expanded)) state.expanded = new Set(savedUi.expanded);
 
     function el(tag, cls, text) {
@@ -325,6 +390,18 @@
       fileLine.appendChild(document.createTextNode(item.file + " "));
       var badge = el("span", "type-badge" + (item.media_type === "video" ? " vid" : ""), item.media_type);
       fileLine.appendChild(badge);
+
+      // Band chip. The band is DERIVED, never authored (nothing in the corpus carries
+      // a tier), so the tooltip names the evidence and a caption-derived band is
+      // marked `weak`. Without that the filter would present a guess as a fact.
+      var band = item.band || "clean";
+      var chip = el("span", "band-badge " + band +
+                    (item.band_source === "description" ? " weak" : ""),
+                    BAND_LABEL[band] || band);
+      chip.title = "content band: " + band + " — from " + (item.band_source || "default") +
+                   (item.band_source === "description" ? " (inferred from the caption)" : "");
+      fileLine.appendChild(document.createTextNode(" "));
+      fileLine.appendChild(chip);
       meta.appendChild(fileLine);
       body.appendChild(meta);
 
@@ -395,24 +472,37 @@
       // releaseVideos(). Dropping the elements alone leaks them.
       releaseVideos();
       contentEl.innerHTML = "";
-      var f = FILTERS.find(function (x) { return x.key === state.filter; });
-      var visible = state.items.filter(f.test);
+      var visible = state.items.filter(function (i) { return passes(i); });
 
-      // filter bar with live counts
+      // filter bar: one row per axis, live counts
       filtersEl.innerHTML = "";
       filtersEl.hidden = false;
-      FILTERS.forEach(function (flt) {
-        var n = state.items.filter(flt.test).length;
-        var b = el("button", "filter-btn" + (state.filter === flt.key ? " active" : ""));
-        b.appendChild(document.createTextNode(flt.label));
-        b.appendChild(el("span", "count", String(n)));
-        // saveUi AFTER render, so it records the offset the new content settled at.
-        b.addEventListener("click", function () { state.filter = flt.key; render(); saveUi(); });
-        filtersEl.appendChild(b);
+      AXES.forEach(function (axis) {
+        var row = el("div", "filter-row");
+        row.appendChild(el("span", "filter-legend", axis.label));
+        axis.options.forEach(function (opt) {
+          // Counted with the OTHER axes applied, so the number on a button is what
+          // clicking it actually yields. A global count here would advertise 129
+          // NSFW while the active status filter leaves three.
+          var n = state.items.filter(function (i) {
+            return passes(i, axis.id) && opt.test(i);
+          }).length;
+          var b = el("button", "filter-btn" + (state.filters[axis.id] === opt.key ? " active" : ""));
+          b.appendChild(document.createTextNode(opt.label));
+          b.appendChild(el("span", "count", String(n)));
+          // saveUi AFTER render, so it records the offset the new content settled at.
+          b.addEventListener("click", function () {
+            state.filters[axis.id] = opt.key;
+            render();
+            saveUi();
+          });
+          row.appendChild(b);
+        });
+        filtersEl.appendChild(row);
       });
 
       if (!visible.length) {
-        contentEl.appendChild(el("p", "empty", "Nothing matches this filter."));
+        contentEl.appendChild(el("p", "empty", "Nothing matches these filters."));
         return;
       }
 
@@ -420,8 +510,8 @@
         var laneItems = visible.filter(function (i) { return i.lane === lane; });
         if (!laneItems.length) return;
 
-        // Collapsed by default; a non-"All" filter force-expands so results show.
-        var expanded = (state.filter !== "all") || state.expanded.has(lane);
+        // Collapsed by default; ANY axis off "All" force-expands so results show.
+        var expanded = anyFilterActive() || state.expanded.has(lane);
 
         var section = el("div", "lane-section");
         var header = el("button", "lane-title" + (expanded ? " open" : ""));
@@ -517,7 +607,9 @@
         state.toml = data.toml || "";
         var c = data.counts || {};
         subEl.textContent = (c.found || 0) + " media · " + (c.missing || 0) + " missing · " +
-          (c.approved || 0) + " approved · " + (c.disapproved || 0) + " disapproved" +
+          (c.approved || 0) + " approved · " + (c.disapproved || 0) + " disapproved · " +
+          (c.nsfw || 0) + " nsfw / " + (c.sfw || 0) + " sfw · " +
+          (c.pool || 0) + " pools / " + (c.single || 0) + " single" +
           (state.toml ? "  ·  " + state.toml : "");
         render();
         // After render, not before: the page is empty until this fetch resolves, so

@@ -321,3 +321,90 @@ def test_extract_missing_media_reports_nested_files_as_missing(tmp_path, monkeyp
     res = gr._extract_missing_media(data, "fakegame")
     missing_files = [m["file"] for m in res["missing"]]
     assert "sex/finish.webm" in missing_files
+
+
+# ── content band on every entry ──────────────────────────────────────────────
+#
+# The band is attached at the same choke point as `slot_key`, and for the same
+# reason: six categories build entries independently, so banding at any one of
+# them means a seventh ships unbanded. See apps/common/media_band.py.
+
+
+def test_every_entry_carries_a_band_whatever_category_built_it(tmp_path, monkeypatch):
+    import api.v1.game_review as gr
+    monkeypatch.setattr(gr, "GAMES_ROOT", tmp_path)
+    (tmp_path / "fakegame").mkdir()
+
+    data = {
+        "locations": [{"id": "l1", "name": "Atrium", "image": "locations/atrium.jpg"}],
+        "clothing": [{"id": "c1", "name": "Bra", "slot": "bra", "image": "clothing/bra.jpg"}],
+        "npcs": [{"id": "n1", "name": "Mercer", "portrait": "mercer.jpg"}],
+        "player_portrait": {"default_image": "portraits/w.jpg",
+                            "naked_image": "portraits/w_naked.jpg"},
+        "phone": {"posts": [{"id": "p1", "image": "phone/post.jpg", "caption": "hi"}]},
+        "canvases": [
+            {"id": "c1", "name": "C1", "nodes": [
+                {"id": "n1", "blocks": [
+                    {"type": "video", "props": {"file": "sex/act_t5.webm"}},
+                ]},
+            ]},
+        ],
+    }
+    res = gr._extract_missing_media(data, "fakegame")
+    entries = res["missing"] + res["found"]
+    assert entries, "fixture built nothing"
+    for e in entries:
+        assert e.get("band"), f"{e['file']} has no band"
+        assert e.get("band_source"), f"{e['file']} has no band_source"
+
+    by_file = {e["file"]: e for e in entries}
+    assert by_file["sex/act_t5.webm"]["band"] == "explicit"
+    assert by_file["locations/atrium.jpg"]["band"] == "clean"
+    assert by_file["mercer.jpg"]["band"] == "clean"
+    # The player portrait undresses; the NPC face does not. Banded from the state
+    # key the engine already parses, so no authoring is required.
+    assert by_file["portraits/w_naked.jpg"]["band"] == "nudity"
+    assert by_file["portraits/w_naked.jpg"]["band_source"] == "portrait_state"
+
+
+def test_an_authored_tier_on_a_block_overrides_the_derived_band(tmp_path, monkeypatch):
+    """Nothing in the repo authors a tier yet. This is the escape hatch that lets a
+    human correct a wrong derivation without renaming the file or moving the folder."""
+    import api.v1.game_review as gr
+    monkeypatch.setattr(gr, "GAMES_ROOT", tmp_path)
+    (tmp_path / "fakegame").mkdir()
+
+    data = {"canvases": [
+        {"id": "c1", "name": "C1", "nodes": [
+            {"id": "n1", "blocks": [
+                # Path says nothing; the author says it is explicit.
+                {"type": "image", "props": {"file": "scenes/quiet.jpg", "tier": "t5"}},
+                # Path says sex/, the author overrules it downward.
+                {"type": "image", "props": {"file": "sex/establishing.jpg", "tier": "t2"}},
+            ]},
+        ]},
+    ]}
+    by_file = {e["file"]: e for e in gr._extract_missing_media(data, "fakegame")["missing"]}
+    assert by_file["scenes/quiet.jpg"]["band"] == "explicit"
+    assert by_file["scenes/quiet.jpg"]["band_source"] == "authored"
+    assert by_file["sex/establishing.jpg"]["band"] == "clean"
+
+
+def test_a_pool_row_is_banded_from_its_folder(tmp_path, monkeypatch):
+    """A pool's `file` IS the folder, so the tier suffix on the dir does the work."""
+    import api.v1.game_review as gr
+    monkeypatch.setattr(gr, "GAMES_ROOT", tmp_path)
+    game = tmp_path / "fakegame"
+    (game / "videos" / "sex" / "oral_t5").mkdir(parents=True)
+    (game / "videos" / "sex" / "oral_t5" / "a.webm").write_bytes(b"x")
+
+    data = {"canvases": [
+        {"id": "c1", "name": "C1", "nodes": [
+            {"id": "n1", "blocks": [
+                {"type": "video", "props": {"pool_dir": "sex/oral_t5", "pool": 4}},
+            ]},
+        ]},
+    ]}
+    row = gr._extract_missing_media(data, "fakegame")["found"][0]
+    assert row["pool_dir"] == "sex/oral_t5"
+    assert (row["band"], row["band_source"]) == ("explicit", "tier_suffix")

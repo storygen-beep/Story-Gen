@@ -167,28 +167,40 @@ footer {
   color: var(--text);
   font-size: 0.88em;
 }
+/* Three stacked axes (status / content / shape), each its own row. The bar is
+   sticky, so every row costs permanent vertical space on a long review — hence the
+   tight padding and the small buttons. One wrapping line was the alternative and it
+   orphans a legend at a line break, which is worse than 40 extra pixels. */
 .filters {
   position: sticky;
   top: 0;
   z-index: 5;
   display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: column;
+  gap: 6px;
   background: rgba(14, 15, 19, 0.92);
   backdrop-filter: blur(6px);
-  padding: 14px 0 16px;
+  padding: 11px 0 12px;
   margin-bottom: 8px;
   border-bottom: 1px solid var(--border);
 }
+.filter-row { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; }
+.filter-legend {
+  font-size: 0.64rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  color: #7c8492;
+  min-width: 58px;          /* aligns the three rows' first button */
+}
 .filter-btn {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--muted);
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 999px;
-  padding: 6px 14px;
+  padding: 5px 13px;
   cursor: pointer;
   transition: background .15s ease, color .15s ease, border-color .15s ease;
 }
@@ -327,6 +339,31 @@ footer {
   vertical-align: middle;
 }
 .type-badge.vid { background: #7a9ec8; }
+
+/* Content band, shown on every card beside the type badge. Outlined rather than
+   filled so it reads as a label about the media, not as a second type. The heat
+   ramp is deliberate: only .clean is SFW, and the other three should be legible as
+   "not that" at a glance without four unrelated hues. */
+.band-badge {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: 0 5px;
+  vertical-align: middle;
+  border: 1px solid currentColor;
+  background: transparent;
+}
+.band-badge.clean      { color: #6b7280; }
+.band-badge.borderline { color: #b8934e; }
+.band-badge.nudity     { color: #c07a4e; }
+.band-badge.explicit   { color: #c2554e; }
+/* Derived from the caption rather than from a path or an authored tier — the
+   weakest evidence this page has, so it says so instead of passing as fact. */
+.band-badge.weak { border-style: dashed; opacity: 0.85; }
+
 .review-row { display: flex; gap: 8px; margin-top: auto; padding-top: 6px; }
 .rev-btn {
   flex: 1;

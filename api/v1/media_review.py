@@ -3,7 +3,8 @@ Media Review — dev tool for reviewing a game's media (approve / disapprove / n
 
 Auto-detects every image and video a game declares (reusing the game-review media
 enumeration), classifies each into a lane (location / npc / solo / story / clothing /
-phone), and persists per-item review decisions to a JSON ledger on disk.
+phone) and a content band (explicit / nudity / borderline / clean — see
+`apps.common.media_band`), and persists per-item review decisions to a JSON ledger.
 
 No authentication, no database. Pure filesystem + TOML parsing — same shape as
 game_review.py. Local authoring tool; relies on DEBUG media serving + open CORS.
@@ -26,6 +27,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
 
 from apps.common.json_ledger import ledger_lock, write_json_atomic
+from apps.common.media_band import is_nsfw
 
 from .game_review import GAMES_ROOT, _extract_missing_media, _resolve_final_toml
 
@@ -219,6 +221,12 @@ def _enumerate(game: str, game_dir: Path) -> dict | None:
             "missing": sum(1 for i in items if not i["found"]),
             "approved": sum(1 for i in items if i["status"] == "approved"),
             "disapproved": sum(1 for i in items if i["status"] == "disapproved"),
+            # Content band and slot shape. Both are per-SLOT: a pool is one row
+            # holding N clips, so `pool` counts folders, not files.
+            "nsfw": sum(1 for i in items if is_nsfw(i.get("band", "clean"))),
+            "sfw": sum(1 for i in items if not is_nsfw(i.get("band", "clean"))),
+            "pool": sum(1 for i in items if i.get("pool_dir")),
+            "single": sum(1 for i in items if not i.get("pool_dir")),
         },
         "items": items,
     }

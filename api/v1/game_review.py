@@ -22,6 +22,7 @@ from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
 
+from apps.common.media_band import band_for_entry
 from apps.common.media_blocks import block_media_paths, block_media_pool, block_slot_key
 
 GAMES_ROOT = Path(settings.BASE_DIR) / "games"
@@ -418,6 +419,11 @@ def _extract_missing_media(data: dict, game_name: str) -> dict:
                         "slot_key": block_slot_key(block),
                         "type": btype,
                         "category": cat,
+                        # An authored content tier, when the block carries one. Nothing
+                        # in the repo does yet; it is the override that lets a human
+                        # correct a derived band without renaming the file. See
+                        # apps/common/media_band.py.
+                        "tier": props.get("tier"),
                         "description": props.get("description", ""),
                         "search_queries": props.get("search_queries", []),
                         "canvas_id": canvas_id,
@@ -467,6 +473,7 @@ def _extract_missing_media(data: dict, game_name: str) -> dict:
                         ),
                         "type": btype,
                         "category": cat,
+                        "tier": props.get("tier"),
                         "description": props.get("description", ""),
                         "search_queries": props.get("search_queries", []),
                         "canvas_id": canvas_id,
@@ -564,7 +571,7 @@ def _extract_missing_media(data: dict, game_name: str) -> dict:
     # the review page, the missing list, or the finder. They surfaced only as
     # "File not found" lines during packaging, which is why a new NPC's face kept
     # shipping absent and getting discovered late. 21 such assets in vesper alone.
-    def _add_portrait(image, description, canvas_id):
+    def _add_portrait(image, description, canvas_id, portrait_state=None):
         nonlocal order_idx
         if not image or not isinstance(image, str):
             return
@@ -573,8 +580,12 @@ def _extract_missing_media(data: dict, game_name: str) -> dict:
             "type": "portrait_image",
             "category": "Portraits",
             "description": description,
-            # Portraits are UI chrome (a face in the sidebar), never a scene, so they
-            # are always SFW regardless of how explicit the game is.
+            # A portrait is UI chrome (a face in the sidebar) rather than a scene —
+            # but that does NOT make it SFW, which this comment used to claim. A
+            # player portrait undresses with the player: vesper ships naked, topless
+            # and bottomless states. `portrait_state` is the raw state key, and
+            # apps/common/media_band.py bands it structurally from that.
+            "portrait_state": portrait_state,
             "search_queries": [],
             "canvas_id": canvas_id,
             "order": order_idx,
@@ -597,8 +608,12 @@ def _extract_missing_media(data: dict, game_name: str) -> dict:
     if isinstance(player_portrait, dict):
         for key, value in player_portrait.items():
             if key.endswith("_image") and isinstance(value, str):
-                state = key[: -len("_image")].replace("_", " ")
-                _add_portrait(value, f"Player portrait — {state}", "portraits")
+                raw_state = key[: -len("_image")]
+                state = raw_state.replace("_", " ")
+                _add_portrait(
+                    value, f"Player portrait — {state}", "portraits",
+                    portrait_state=raw_state,
+                )
         for outfit in player_portrait.get("outfits", []) or []:
             if isinstance(outfit, dict):
                 label = outfit.get("name") or outfit.get("id") or "outfit"
@@ -625,6 +640,10 @@ def _extract_missing_media(data: dict, game_name: str) -> dict:
     for entry in missing + found:
         if not entry.get("slot_key"):
             entry["slot_key"] = entry.get("file", "")
+        # Band every entry at the same choke point, and for the same reason: a new
+        # category can then never ship unbanded. Derived, never authoritative —
+        # `band_source` says which evidence produced it.
+        entry["band"], entry["band_source"] = band_for_entry(entry)
 
     return {"missing": missing, "found": found}
 
