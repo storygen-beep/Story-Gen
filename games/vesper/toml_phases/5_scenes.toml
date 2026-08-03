@@ -290,19 +290,19 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
     ] } }, blocks = [
     { type = "paragraph", content = "He pulls out and finishes on her face, holding her there by the jaw until he's done, then letting go the way you drop a thing back in a drawer. He's already turned to the window." },
-    { type = "video", props = { file = "sex/mercer_finish_facial_t5.webm", description = "He pulls out and finishes on her face, holding her by the jaw until he's done, then lets go and turns back to the window without a word.", search_queries = ["office facial cumshot jaw hold", "man cum face girl penthouse"] } },
+    { type = "video", props = { pool_dir = "sex/mercer_finish_facial_t5", pool = 4, description = "He pulls out and finishes on her face, holding her by the jaw until he's done, then lets go and turns back to the window without a word.", search_queries = ["office facial cumshot jaw hold", "man cum face girl penthouse"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes inside her, holds, pulls out without comment. His cum slides down the inside of her thigh. He wipes himself on a cloth from the drawer and checks the time." },
-    { type = "video", props = { file = "sex/mercer_finish_inside_t5.webm", description = "He finishes inside her and holds, then pulls out without comment, his cum sliding down the inside of her thigh as he wipes himself on a cloth and checks the time.", search_queries = ["office creampie from behind desk", "man cum inside girl pull out"] } },
+    { type = "video", props = { pool_dir = "sex/mercer_finish_inside_t5", pool = 4, description = "He finishes inside her and holds, then pulls out without comment, his cum sliding down the inside of her thigh as he wipes himself on a cloth and checks the time.", search_queries = ["office creampie from behind desk", "man cum inside girl pull out"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes in her ass — and nothing comes. No give, no opening, no man-belonging-to-her. Just his weight and his cum and then his absence as he steps back. The same nothing as every time. She sets it aside with the other things she isn't allowed to ask, and straightens up." },
-    { type = "video", props = { file = "sex/mercer_finish_ass_t5.webm", description = "He finishes in her ass and steps back, his weight and his cum and then his absence — the same nothing as every time, no give, no opening, the immunity made concrete.", search_queries = ["window anal creampie standing behind", "man cum ass girl glass"] } },
+    { type = "video", props = { pool_dir = "sex/mercer_finish_ass_t5", pool = 4, description = "He finishes in her ass and steps back, his weight and his cum and then his absence — the same nothing as every time, no give, no opening, the immunity made concrete.", search_queries = ["window anal creampie standing behind", "man cum ass girl glass"] } },
   ] },
 ]
 
@@ -699,7 +699,7 @@ description = "Triggerless seduction rung. Reaction climbs by npc_renner.corrupt
 id   = "base"
 name = "Tease him"
 blocks = [
-  { type = "video", props = { file = "scenes/rung_renner_tease_t2.webm", description = "In a cramped office a woman teases close — lifting her skirt to flash the underwear beneath while a seated man tries not to look (stays clothed, withheld).", search_queries = ["clothed skirt lift tease panties", "office tease skirt flash underwear"] } },
+  { type = "video", props = { pool_dir = "scenes/rung_renner_tease_t2", pool = 4, description = "In a cramped office a woman teases close — lifting her skirt to flash the underwear beneath while a seated man tries not to look (stays clothed, withheld).", search_queries = ["clothed skirt lift tease panties", "office tease skirt flash underwear"] } },
   { type = "paragraph", content = "In the office now, the door shut. She works close — leans across him for a file she doesn't need, lets her body say the thing her mouth won't." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 10 },
@@ -731,7 +731,7 @@ description = "Triggerless seduction rung (commando). Reaction band: looks-then-
 id   = "base"
 name = "Flash him"
 blocks = [
-  { type = "video", props = { file = "scenes/rung_renner_flash_t3.webm", description = "A woman in unzipped warehouse coveralls bending forward over a low crate, exposing herself, a seated man watching from his desk.", search_queries = ["woman flashing tits bending over", "girl undressing coveralls strip tease"] } },
+  { type = "video", props = { pool_dir = "scenes/rung_renner_flash_t3", pool = 4, description = "A woman in unzipped warehouse coveralls bending forward over a low crate, exposing herself, a seated man watching from his desk.", search_queries = ["woman flashing tits bending over", "girl undressing coveralls strip tease"] } },
   { type = "paragraph", content = "She's wearing nothing under the coveralls today, and she makes sure the moment comes where he can't not see it — bending slow for a low crate while he's looking." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 20 },
@@ -763,7 +763,7 @@ description = "Triggerless seduction rung (contact). Reaction band: catches-hims
 id   = "base"
 name = "Get your hands on him"
 blocks = [
-  { type = "video", props = { file = "scenes/rung_renner_grope_t4.webm", description = "A woman's hand on a seated man's thigh, sliding toward his crotch while he signs paperwork in an office, his body going still.", search_queries = ["office handjob desk stockings", "secretary hand on man crotch office"] } },
+  { type = "video", props = { pool_dir = "scenes/rung_renner_grope_t4", pool = 4, description = "A woman's hand on a seated man's thigh, sliding toward his crotch while he signs paperwork in an office, his body going still.", search_queries = ["office handjob desk stockings", "secretary hand on man crotch office"] } },
   { type = "paragraph", content = "She stops pretending the contact is accidental — a hand on his thigh while he signs something, sliding up, letting him feel that she means it." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 30 },
@@ -897,7 +897,7 @@ description = "Triggerless Renner sex loop. oral/vaginal/doggy(anal opens at npc
 id   = "intro"
 name = "Take him"
 blocks = [
-  { type = "video", props = { file = "sex/renner_loop_t5.webm", description = "A man and woman in a locked office, his hands on her as the clothes come off.", search_queries = ["office sex couple desk", "office quickie clothes off"] } },
+  { type = "video", props = { pool_dir = "sex/renner_loop_t5", pool = 4, description = "A man and woman in a locked office, his hands on her as the clothes come off.", search_queries = ["office sex couple desk", "office quickie clothes off"] } },
   { type = "paragraph", content = "She locks the office door. He's already reaching for her — the cold boss gone, just a wrecked man who's spent all day waiting for the help to come and take him apart." },
 ]
 [canvases.nodes.exit_block]
@@ -1037,19 +1037,19 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes on her face with a groan that's half a sob, one hand cradling the back of her head like she's something he can't believe he's allowed. He'd give her anything right now. He doesn't know yet how much that's going to cost him." },
-    { type = "video", props = { file = "sex/renner_finish_facial_t5.webm", description = "A man finishing on a kneeling woman's face in an office, one hand cradling the back of her head.", search_queries = ["office facial kneeling cumshot", "man finishing face kneeling office"] } },
+    { type = "video", props = { pool_dir = "sex/renner_finish_facial_t5", pool = 4, description = "A man finishing on a kneeling woman's face in an office, one hand cradling the back of her head.", search_queries = ["office facial kneeling cumshot", "man finishing face kneeling office"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes inside her, holding her down on him, shaking. For a moment after he just breathes into her shoulder, wrecked and grateful, and she lets him have the moment because letting him have it is how she keeps him." },
-    { type = "video", props = { file = "sex/renner_finish_inside_t5.webm", description = "A man finishing inside a woman riding him in an office chair, holding her down on him, both shaking.", search_queries = ["office chair creampie riding", "man finishing inside girl on top"] } },
+    { type = "video", props = { pool_dir = "sex/renner_finish_inside_t5", pool = 4, description = "A man finishing inside a woman riding him in an office chair, holding her down on him, both shaking.", search_queries = ["office chair creampie riding", "man finishing inside girl on top"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes in her ass, and the controls slide warm into her hand — the give, the opening, his whole ruined weight gone pliant against her back. The same act that hands her nothing with Mercer hands her everything with him." },
-    { type = "video", props = { file = "sex/renner_finish_anal_t5.webm", description = "A man finishing in a woman's ass as she's bent over an office desk, gripping her hips.", search_queries = ["office desk anal creampie behind", "man finishing anal bent over desk"] } },
+    { type = "video", props = { pool_dir = "sex/renner_finish_anal_t5", pool = 4, description = "A man finishing in a woman's ass as she's bent over an office desk, gripping her hips.", search_queries = ["office desk anal creampie behind", "man finishing anal bent over desk"] } },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -6204,7 +6204,7 @@ description = "Triggerless rung. Reaction climbs by npc_calloway.corruption band
 id   = "base"
 name = "Get close to him"
 blocks = [
-  { type = "video", props = { file = "scenes/rung_calloway_contact_t4.webm", description = "A woman leaning forward toward the viewer, teasing — low-cut top, downblouse cleavage, clothed and withheld.", search_queries = ["downblouse cleavage tease lean"] } },
+  { type = "video", props = { pool_dir = "scenes/rung_calloway_contact_t4", pool = 4, description = "A woman leaning forward toward the viewer, teasing — low-cut top, downblouse cleavage, clothed and withheld.", search_queries = ["downblouse cleavage tease lean"] } },
   { type = "paragraph", content = "The file room, late. He's stopped pretending to work; she's stopped pretending to file. When she puts a hand flat on his chest he goes still." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "npc", npc_id = "npc_calloway", trait_key = "corruption", operator = "lt", value = 6 },
@@ -6238,7 +6238,7 @@ description = "Triggerless rung. Explicit (belief-lever: relief, being finally w
 id   = "base"
 name = "Take him in your mouth"
 blocks = [
-  { type = "video", props = { file = "scenes/rung_calloway_oral_t5.webm", description = "A woman on her knees giving oral to a seated man in an office; explicit.", search_queries = ["office blowjob under desk pov", "woman kneeling oral seated man suit"] } },
+  { type = "video", props = { pool_dir = "scenes/rung_calloway_oral_t5", pool = 4, description = "A woman on her knees giving oral to a seated man in an office; explicit.", search_queries = ["office blowjob under desk pov", "woman kneeling oral seated man suit"] } },
   { type = "paragraph", content = "She takes him out from behind the desk and puts her mouth on him, and the sound he makes isn't lust — it's relief, like something clenched for two years finally letting go." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "npc", npc_id = "npc_calloway", trait_key = "corruption", operator = "lt", value = 12 },
@@ -6317,7 +6317,7 @@ description = "Triggerless Calloway sex loop. oral/vaginal/anal; climax-elect pl
 id   = "intro"
 name = "Take him"
 blocks = [
-  { type = "video", props = { file = "sex/calloway_loop_t5.webm", description = "A man and woman coming together against a desk in a dim file-room, clothes coming off.", search_queries = ["office sex desk clothes off dim", "man woman against desk records room"] } },
+  { type = "video", props = { pool_dir = "sex/calloway_loop_t5", pool = 4, description = "A man and woman coming together against a desk in a dim file-room, clothes coming off.", search_queries = ["office sex desk clothes off dim", "man woman against desk records room"] } },
   { type = "paragraph", content = "She shuts the file-room door for the last time as an analyst. He's already got his hands in her hair — the disbelieved man gone, just someone who's decided to trust the one person who ever let him." },
 ]
 [canvases.nodes.exit_block]
@@ -6451,19 +6451,19 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes on her face with a sound that's half relief, one hand cradling her head like she's the first good thing in two years. He'd give her anything now. He doesn't know what she's about to take." },
-    { type = "video", props = { file = "sex/calloway_finish_facial_t5.webm", description = "A man finishing on a kneeling woman's face in a dim office.", search_queries = ["office facial kneeling", "man finishing on face office"] } },
+    { type = "video", props = { pool_dir = "sex/calloway_finish_facial_t5", pool = 4, description = "A man finishing on a kneeling woman's face in a dim office.", search_queries = ["office facial kneeling", "man finishing on face office"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes inside her, holding her down on him, shaking, and after he just breathes into her neck — wrecked, grateful, believed. She lets him have it. Letting him have it is how she keeps him." },
-    { type = "video", props = { file = "sex/calloway_finish_inside_t5.webm", description = "A man finishing inside a woman riding him in a desk chair.", search_queries = ["office chair creampie riding", "finishing inside girl on top"] } },
+    { type = "video", props = { pool_dir = "sex/calloway_finish_inside_t5", pool = 4, description = "A man finishing inside a woman riding him in a desk chair.", search_queries = ["office chair creampie riding", "finishing inside girl on top"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes in her ass, and the drain opens under it the way it's built to — his whole self coming loose through the contact, the last few minutes already going soft and white behind his eyes." },
-    { type = "video", props = { file = "sex/calloway_finish_anal_t5.webm", description = "A man finishing in a woman's ass as she's bent over a desk.", search_queries = ["office desk anal creampie behind", "finishing anal bent over desk"] } },
+    { type = "video", props = { pool_dir = "sex/calloway_finish_anal_t5", pool = 4, description = "A man finishing in a woman's ass as she's bent over a desk.", search_queries = ["office desk anal creampie behind", "finishing anal bent over desk"] } },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -6932,7 +6932,7 @@ description = "beat_0066 rev 92. Triggerless Colm sex loop @the Undertow's back 
 id   = "intro"
 name = "Take him in the back"
 blocks = [
-  { type = "image", props = { file = "sex/colm_backroom.jpg", description = "A man and a woman slipping into the dim back room of a bar.", search_queries = ["couple slipping into bar back room dim", "man led away by woman bar hallway night"] } },
+  { type = "image", props = { pool_dir = "sex/colm_backroom", pool = 4, description = "A man and a woman slipping into the dim back room of a bar.", search_queries = ["couple slipping into bar back room dim", "man led away by woman bar hallway night"] } },
   { type = "paragraph", content = "The back room is empties and stacked cases and one bad bulb. He has her against the shelving before the door's shut — mouth on her neck, hands going everywhere at once, a careful man with nothing careful left in him." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "Three weeks I've been telling myself you were being kind. Tell me to stop and I'll stop. Don't, and I won't." },
 ]
@@ -7069,19 +7069,19 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes on her face with one hand shaking in her hair, apologising while he does it. Nothing comes loose but him. The drain stays shut — it only opens the one way." },
-    { type = "video", props = { file = "sex/colm_finish_facial_t5.webm", description = "A man finishing on a kneeling woman's face in a dim storeroom.", search_queries = ["facial kneeling storeroom", "cumshot on face back room dim"] } },
+    { type = "video", props = { pool_dir = "sex/colm_finish_facial_t5", pool = 4, description = "A man finishing on a kneeling woman's face in a dim storeroom.", search_queries = ["facial kneeling storeroom", "cumshot on face back room dim"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes inside her, holding her up against the shelving, breathing like a man who's just been given something. He has been. She hasn't taken anything — not this way." },
-    { type = "video", props = { file = "sex/colm_finish_inside_t5.webm", description = "A man finishing inside a woman held up against shelving in a storeroom.", search_queries = ["creampie standing against wall", "finishing inside standing sex back room"] } },
+    { type = "video", props = { pool_dir = "sex/colm_finish_inside_t5", pool = 4, description = "A man finishing inside a woman held up against shelving in a storeroom.", search_queries = ["creampie standing against wall", "finishing inside standing sex back room"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes in her ass, and the drain opens under it the way it's built to — the shudder cracking him wide, her hand still locked on his forearm, everything he is starting to come loose down her arm." },
-    { type = "video", props = { file = "sex/colm_finish_anal_t5.webm", description = "A man finishing in a woman's ass as she's bent over crates in a dim storeroom.", search_queries = ["anal creampie bent over from behind", "finishing anal bent over crates"] } },
+    { type = "video", props = { pool_dir = "sex/colm_finish_anal_t5", pool = 4, description = "A man finishing in a woman's ass as she's bent over crates in a dim storeroom.", search_queries = ["anal creampie bent over from behind", "finishing anal bent over crates"] } },
   ] },
 ]
 [canvases.nodes.exit_block]

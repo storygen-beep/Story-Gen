@@ -756,7 +756,7 @@ time_progression_minutes = 120
 id   = "weapon_scene"
 name = "Put them under"
 blocks = [
-  { type = "video", props = { file = "sex/yard_emitter_fire_t5.webm", description = "A woman riding a slack, dazed man on the ground in a dim industrial yard while other limp men slump nearby.", search_queries = ["dark warehouse riding limp man amateur", "dim garage cowgirl riding slumped man", "night alley riding man on the ground amateur"] } },
+  { type = "video", props = { pool_dir = "sex/yard_emitter_fire_t5", pool = 4, description = "A woman riding a slack, dazed man on the ground in a dim industrial yard while other limp men slump nearby.", search_queries = ["dark warehouse riding limp man amateur", "dim garage cowgirl riding slumped man", "night alley riding man on the ground amateur"] } },
   { type = "paragraph", content = "She thumbs the emitter and the field rolls out ahead of her. Whoever's in reach goes stupid with it inside a breath — pupils blown, breath ragged, the gun forgotten in a slack hand. She picks the nearest, drags his cock out of his fatigues, and sinks down onto it against the crates, riding him in hard flat strokes while the others sway on their feet. There's nothing in it on her side — just leverage; she works him until he spills into her and drops boneless and out. The rest fold a beat later. By the time any of them surface she's gone, deeper in, his cum drying on her thigh and nothing in her face at all." },
 ]
 [canvases.nodes.exit_block]
@@ -1048,7 +1048,7 @@ locationId = "the_waterfront"
 id   = "weapon_scene"
 name = "Put him under"
 blocks = [
-  { type = "video", props = { file = "sex/arousal_weapon_use.webm", description = "A woman straddling and riding a slumped, half-conscious man against a wall in a dim space, his head lolling back.", search_queries = ["woman riding dazed man against wall", "femdom limp man dark"] } },
+  { type = "video", props = { pool_dir = "sex/arousal_weapon_use", pool = 4, description = "A woman straddling and riding a slumped, half-conscious man against a wall in a dim space, his head lolling back.", search_queries = ["woman riding dazed man against wall", "femdom limp man dark"] } },
   { type = "paragraph", content = "She thumbs the emitter and the doorman's whole face changes — the bored menace gone, breath short, the hand that wanted coin wanting something else now. She walks him back into the shadow of the stair, gets his cock out, and rides him against the wall in quick flat strokes, fast and clinical, giving him nothing but the friction. He spills into her with his eyes rolling white and sags down the bricks, under. He'll wake on the steps in an hour with no memory, and never know she walked past him. The stairs are open." },
 ]
 [canvases.nodes.exit_block]
@@ -1285,19 +1285,19 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
     ] } }, blocks = [
     { type = "paragraph", content = "He holds her head still and finishes in her mouth; she takes it, swallows because the trade expects it, and sits back on her heels. He's already reaching for his drink." },
-    { type = "video", props = { file = "sex/brothel_finish_facial_t5.webm", description = "An anonymous client holds her head still and finishes in her mouth in a dim red-lit room; she swallows and sits back on her heels as he reaches for his drink.", search_queries = ["brothel cum in mouth swallow pov", "escort facial mouth red room"] } },
+    { type = "video", props = { pool_dir = "sex/brothel_finish_facial_t5", pool = 4, description = "An anonymous client holds her head still and finishes in her mouth in a dim red-lit room; she swallows and sits back on her heels as he reaches for his drink.", search_queries = ["brothel cum in mouth swallow pov", "escort facial mouth red room"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes inside her with a grunt, holds, then pulls out. His cum slides down the inside of her thigh. She waits the polite beat and lifts off, and counts the coin into her palm." },
-    { type = "video", props = { file = "sex/brothel_finish_inside_t5.webm", description = "An anonymous client finishes inside her and pulls out in a dim red-lit room, his cum sliding down the inside of her thigh as she lifts off.", search_queries = ["brothel creampie pull out thigh", "escort cum inside red room"] } },
+    { type = "video", props = { pool_dir = "sex/brothel_finish_inside_t5", pool = 4, description = "An anonymous client finishes inside her and pulls out in a dim red-lit room, his cum sliding down the inside of her thigh as she lifts off.", search_queries = ["brothel creampie pull out thigh", "escort cum inside red room"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes in her ass and stays a moment, breathing, then steps back. His weight and his cum and then nothing — the same nothing as every man down here. She straightens. The next one's already on the stairs." },
-    { type = "video", props = { file = "sex/brothel_finish_ass_t5.webm", description = "An anonymous client finishes in her ass and steps back in a dim red-lit room, his cum and his weight and then his absence as she straightens up.", search_queries = ["brothel anal creampie from behind", "escort anal cum red room"] } },
+    { type = "video", props = { pool_dir = "sex/brothel_finish_ass_t5", pool = 4, description = "An anonymous client finishes in her ass and steps back in a dim red-lit room, his cum and his weight and then his absence as she straightens up.", search_queries = ["brothel anal creampie from behind", "escort anal cum red room"] } },
   ] },
 ]
 
