@@ -87,6 +87,35 @@ class ReachabilityReport:
     warnings: List[str]
 
 
+def _numeric_effect_value(value: Any) -> Optional[float]:
+    """Resolve a trait effect's `value` to a number this analyzer can add or set.
+
+    Usually it already is one. But the engine also accepts a **random range** —
+    ``value = { type = "random", min = 8, max = 14 }`` — which every sex-loop
+    self-loop uses (`loop_npc_pleasure += random(8,14)` against a threshold of 50).
+    This walker did `current + value` unguarded, so it died with
+    ``TypeError: unsupported operand type(s) for +: 'int' and 'dict'`` on any game
+    using one, and vesper has used them since the loops were written: the command
+    has never completed on it.
+
+    Reachability explicitly *"assumes the player takes the best path"*, so a random
+    range resolves to its **max** — the fastest a player can reach the gate. Using
+    min would under-report reachability and invent trait gaps that do not exist.
+
+    Any other non-numeric shape returns None and the caller skips the effect: a
+    walker that cannot model an effect should leave the trait alone, not crash and
+    take the whole validation with it.
+    """
+    if isinstance(value, bool):          # bool is an int subclass; not a trait delta
+        return None
+    if isinstance(value, (int, float)):
+        return value
+    if isinstance(value, dict) and value.get("type") == "random":
+        best = value.get("max", value.get("min"))
+        return best if isinstance(best, (int, float)) else None
+    return None
+
+
 class ReachabilityAnalyzer:
     """Analyzes game template for reachability issues."""
 
@@ -285,7 +314,9 @@ class ReachabilityAnalyzer:
             target_type = effect.targetType
             trait = effect.trait
             op = effect.op
-            value = effect.value
+            value = _numeric_effect_value(effect.value)
+            if value is None:
+                continue  # shape this analyzer can't reason about — see the helper
 
             if target_type == "player":
                 if op == "add":
@@ -327,14 +358,20 @@ class ReachabilityAnalyzer:
                 if node.exit_block and node.exit_block.type == "choices":
                     for choice in node.exit_block.choices:
                         for effect in choice.effects:
-                            if effect.op == "add" and effect.value > 0:
+                            # Same guard as _apply_choice_effects: a `random` range is a
+                            # dict, and comparing one to 0 raised TypeError here even
+                            # after the add site was fixed. Resolve first, then compare.
+                            value = _numeric_effect_value(effect.value)
+                            if value is None:
+                                continue
+                            if effect.op == "add" and value > 0:
                                 if effect.targetType == "player":
                                     current = max_player_traits.get(effect.trait, 0)
-                                    max_player_traits[effect.trait] = current + effect.value
+                                    max_player_traits[effect.trait] = current + value
                                 elif effect.targetType == "npc" and effect.npcId:
                                     if effect.npcId in max_npc_traits:
                                         current = max_npc_traits[effect.npcId].get(effect.trait, 0)
-                                        max_npc_traits[effect.npcId][effect.trait] = current + effect.value
+                                        max_npc_traits[effect.npcId][effect.trait] = current + value
 
         # Check all canvases for unreachable thresholds
         for canvas_id, canvas in self.canvas_map.items():
