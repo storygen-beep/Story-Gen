@@ -62,6 +62,16 @@ ACT_ANCHORS = {
     "blowjob", "blowjobs", "handjob", "fingering", "cunnilingus",
     "oral", "penetration", "creampie", "deepthroat", "anal",
     "sucking", "cum", "cumshot", "cumming",
+    # `bj` — the corpus's OWN abbreviation, added 2026-08-03. It is not a synonym you reach
+    # for when `blowjob` fails; it retrieves DIFFERENT and better material. Measured on two
+    # vesper slots: it beat `blowjob` outdoors (real alleys — dumpsters, graffiti — where
+    # `blowjob` returned indoor studio kneeling), then again indoors, where `bj chair` and
+    # `bj couch` turned out to be Sex.com's own tag names and solved `him_standing` — the
+    # dominant rejection across four prior runs on that slot.
+    # Before this, `validate_queries.py` flagged every `bj` query `no_act_anchor`, i.e. the
+    # enforced rule penalised the better query. Safe under `\b…\b`: the boundary means
+    # "objects" and "subject" cannot match, since the `b` there is preceded by a word char.
+    "bj",
 }
 
 # Content-family classification — drives format (image vs animated) independent of tier.

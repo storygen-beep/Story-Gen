@@ -1,5 +1,82 @@
 # find-media — CHANGELOG
 
+## 2026-08-03 (later) — `bj` added to ACT_ANCHORS: the enforced rule was penalising the better query
+
+The act-anchor rule shipped 08-01 is sound, but its vocabulary was incomplete in a way that bit.
+`bj` was absent, so `validate_queries.py` flagged `bar bj chair seated gif` as
+`no_act_anchor:position_or_setting_words_only` — an enforced gate telling the author to rewrite the
+query that actually worked.
+
+`bj` is not a synonym you reach for when `blowjob` fails. **It retrieves different and better
+material**, measured on two vesper slots in the same batch:
+
+| slot | finding |
+|---|---|
+| `renner_cheerup_alley_t5` | `blowjob` returned indoor studio kneeling (~3 outdoor tiles in 40). `public alley bj gif amateur` — built from a label Google itself surfaced, "Public Alley BJ" — returned real alleys: dumpsters, graffiti walls, `alleyway-fuck-after-club`. It was the payoff round. |
+| `renner_cheerup_oral_t5` | `bj chair` / `bj couch` turned out to be **Sex.com's own tag names**, and solved `him_standing` — the dominant rejection across *four* prior runs on that slot. Seated went from "hard to retrieve" to easy. |
+
+That is the same lesson as the 08-03 lexicon correction that an act anchor is necessary but not
+sufficient: **porn-native jargon is what holds a query in the corpus.** `bj` IS that jargon; the
+validator was rejecting it for not being English.
+
+- **`scripts/scene_semantics.py`** — `bj` added to `ACT_ANCHORS`, with the measurement and the
+  safety argument in a comment. It is the first 2-letter member, so the comment records why
+  `\bbj\b` is safe: the boundary means "objects"/"subject" cannot match, since the `b` there is
+  preceded by a word character.
+- **`scripts/test_query_anchor.py`** — two new tests: `bj` anchors both measured query shapes, and
+  an explicit substring-trap test over `objects` / `subject` / `objection`. A 2-letter anchor is the
+  riskiest kind to add, so the false-positive case is pinned rather than argued.
+
+**Verified:** `python3 -m pytest scripts/test_query_anchor.py -q` → **13 passed**. Both previously
+false-flagged queries now anchor; `objects on the desk gif` still flags, so the boundary holds.
+Regression on the live game (`validate_queries.py --toml games/vesper/toml_phases/7_final_game.toml`)
+→ `no_act_anchor` count unchanged at 15, as expected: no authored vesper query uses `bj`, so this
+widens what passes without silencing anything already flagged.
+
+Requested by LO after the batch surfaced it.
+
+
+## 2026-08-03 — a disconnected extension had no failure row, and the nearest one pointed the wrong way
+
+Ran a 9-agent batch to fill vesper's remaining media pools. The Chrome extension was disconnected;
+`list_connected_browsers` returned `[]`. All 9 agents failed, and the cost was not the outage — it
+was that **the skill never told them what a dead route looks like**, so each one independently
+invented a workaround before diagnosing it.
+
+`chrome_route.md`'s failure table had **no row for a disconnected extension**, and its nearest
+symptom — *"Extract returns `[]`"* — attributes that to query-string stripping. That row sends an
+agent rewriting perfectly good queries for hours against a route that cannot answer.
+
+Two fallbacks were measured, both wrong, both recorded:
+
+| Fallback | Measured result |
+|---|---|
+| `curl` Google Images directly | **HTTP 200, ~90 KB, ZERO extractable urls** — the grid is JS-rendered. A rich-looking 200 that harvests as nothing is indistinguishable from "my query was bad." |
+| Mine a sibling slot's stocked shelf | Cross-slot collision — those urls were harvested against a *different* slot's demand. One agent correctly refused to do this and reported a blocked run instead; several others were pivoting toward it when they were stopped. |
+
+- **`references/chrome_route.md` §2.0 (NEW)** — a PREFLIGHT section: call `list_connected_browsers`
+  before anything else; on `[]`, **STOP and tell the human so they can reconnect it**. Records that
+  Chrome's own process may still be running (that proves nothing — the pairing link is what is down),
+  both measured non-fallbacks, and that an honest blocked report IS the deliverable. Also records the
+  mid-run corollary: install incrementally (`grab` + `--record` per clip) rather than batching, which
+  is what turned a later round of stalls from total losses into partial wins.
+- **`references/chrome_route.md` §Failure table** — new first row for the disconnected extension, and
+  a cross-reference added to the `Extract returns []` row pointing at §2.0 first, so the misleading
+  row can no longer be reached before the correct one.
+
+Requested directly by LO: *"if chrome is disconnected I want it to tell me, so I will launch the
+chrome and make it work."* The human can fix this in seconds; an agent cannot fix it at all.
+
+**Verified:** `list_connected_browsers` reproduced `[]` from the main session during the outage, and
+`[{deviceId…}]` after LO reconnected — the same call the new §2.0 mandates. `media_options.json` had
+not been written since Aug 1 02:56, corroborating that no agent stocked anything. All 9 pools were
+confirmed still at 1 file, so the batch left no partial state.
+
+**Still open, not changed here:** `bj` is absent from `scene_semantics.ACT_ANCHORS`, so
+`validate_queries.py` false-flags `bar bj chair seated gif` as `no_act_anchor` — measured this batch,
+where `bj` outperformed `blowjob` on two slots. Awaiting LO's call.
+
+
 ## 2026-08-01 (later) — a position word is not an act word; first ENFORCED query rule, first tests
 
 Found by running `calloway_loop_vaginal_t5` under yesterday's new query shape. The first query

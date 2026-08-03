@@ -96,3 +96,21 @@ def test_inflections_are_listed_not_prefix_matched():
 def test_sexy_is_not_an_act():
     """The reason prefix matching was rejected: `sex` would swallow "sexy", a mood."""
     assert ANCHOR_ISSUE in _issues("sexy secretary office chair gif", "t5")
+
+
+# ── `bj`, added 2026-08-03 after the enforced rule flagged the BETTER query ──────────────
+
+def test_bj_anchors_a_query():
+    """The corpus's own abbreviation. It beat `blowjob` on two vesper slots — outdoors
+    (real alleys vs indoor studio kneeling) and indoors (`bj chair`/`bj couch` are
+    Sex.com's own tag names). Before this it was flagged `no_act_anchor`, i.e. the rule
+    penalised the query that worked."""
+    assert ANCHOR_ISSUE not in _issues("bar bj chair seated gif", "t5")
+    assert ANCHOR_ISSUE not in _issues("public alley bj gif amateur", "t5")
+
+
+def test_bj_does_not_match_inside_other_words():
+    """A 2-letter anchor is the riskiest kind, so pin the substring case explicitly.
+    `\\bbj\\b` cannot match "objects"/"subject" — the `b` there follows a word char."""
+    for innocent in ("objects on the desk", "subject of the photo", "objection"):
+        assert ANCHOR_ISSUE in _issues(innocent, "t5"), innocent

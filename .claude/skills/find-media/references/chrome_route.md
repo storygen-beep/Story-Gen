@@ -95,6 +95,40 @@ than this one did.
 
 ## 2. Browser tooling
 
+### 2.0 PREFLIGHT — is the extension even connected? Ask the HUMAN, don't work around it.
+
+**`list_connected_browsers` before anything else.** It costs one call. If it returns `[]`,
+**STOP and tell the human, in your very next message, that the Chrome extension is
+disconnected and you need them to reconnect it.** They can fix it in seconds. You cannot fix
+it at all, and every minute you spend not saying so is wasted.
+
+```
+mcp__claude-in-chrome__list_connected_browsers   → []   ⇒ STOP. Tell the human. Do not proceed.
+```
+
+**Chrome's own process may still be running** — `pgrep "Google Chrome"` succeeding proves
+nothing. What is down is the extension's pairing link, not the browser. Do not report "Chrome
+is running" as though it means the route is alive.
+
+**There is no fallback. Both plausible ones were measured and both are wrong:**
+
+| Tempting fallback | What actually happens |
+|---|---|
+| `curl` the Google Images URL directly | **HTTP 200, ~90 KB, and ZERO extractable media urls** — the grid is JS-rendered. The danger is the *signature*: a rich-looking 200 that harvests as nothing reads exactly like "my query was bad," and sends you rewriting perfectly good queries for hours. |
+| Mine a sibling slot's already-stocked shelf | Those urls were harvested against a **different slot's demand**. Installing from them is the exact cross-slot collision the scope brief exists to prevent. Three wrong clips on a self-loop node the player sees 4–6× per visit is worse than an honest 1-of-4. |
+
+**An honest blocked report IS the correct deliverable here.** Report `pool_count_final` as-is,
+say the route is down, and stop. This cost a 9-agent batch roughly an hour on 2026-08-03:
+every agent independently invented a workaround before diagnosing the real cause, and one
+nearly installed wrong-composition clips to hit its target.
+
+If the route dies **mid-run**, the same rule applies — but everything you already installed
+stays on disk, so `grab` + `dedup_tracker --record` each clip *the moment it passes its gates*
+rather than batching installs to the end. That is what turned a later round of failures from
+total losses into partial wins.
+
+---
+
 **`tabs_context_mcp` first, always.** Call it once per session with `{createIfEmpty: true}`
 before any other browser tool — every other tool needs a `tabId` and this is the only thing
 that hands you one. Work in a **new** tab (`tabs_create_mcp`), not one the user is reading.
@@ -657,7 +691,8 @@ run where the only unfetchable URLs were the ones that route was built around.
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| Extract returns `[]` or is refused | URLs still carry query strings | `.map(u => u.split('?')[0])` — the JS tool blocks query-string data |
+| **Any browser tool says "Browser extension is not connected", or `list_connected_browsers` returns `[]`** | **The extension's pairing link is down. Chrome's own process may still be running — that proves nothing.** | **STOP and tell the human in your next message so they can reconnect it. Do NOT curl (200 + 0 urls, reads like a bad query) and do NOT mine a sibling shelf (cross-slot collision). An honest blocked report is the deliverable. See §2.0** |
+| Extract returns `[]` or is refused | URLs still carry query strings | `.map(u => u.split('?')[0])` — the JS tool blocks query-string data. **Check §2.0 FIRST — a dead extension presents almost identically and this row will send you rewriting good queries for hours** |
 | Extract returns only `gstatic` / `googleusercontent` | You're on the web tab, not Images | Confirm the tile grid in a screenshot; click Images, re-extract |
 | Results are Reddit / TikTok / Facebook | A story or character word flipped the intent classification | Strip every story word; keep act + position + modifier |
 | Bright studio when the beat wants grimy | No anti-studio modifier | Add `amateur` / `real` / `voyeur` / `hidden cam` |
