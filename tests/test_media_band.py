@@ -31,8 +31,43 @@ def test_an_authored_tier_beats_every_other_signal():
 
 
 def test_an_authored_tier_can_also_cool_a_path_down():
-    band, source = band_for("sex/misfiled_establishing_shot.jpg", tier="t2")
+    """`base` — not `t2` — is what cools a slot all the way to clean; see the tease tests."""
+    band, source = band_for("sex/misfiled_establishing_shot.jpg", tier="base")
     assert (band, source) == ("clean", "authored")
+
+
+# --------------------------------------------------------------------------
+# ⚠️ a tease is never SFW — LO, 2026-08-04
+# --------------------------------------------------------------------------
+
+@pytest.mark.parametrize("tier", ["t2", "t3", "t4"])
+def test_every_tease_tier_is_nsfw(tier):
+    """Any authored tier means the author put the beat on the sexual ladder.
+
+    This deliberately diverges from find-media's SFW_TIERS, which lists t2/t3 as SFW —
+    a set written as if SFW meant *wayfinding*. `rung_renner_tease_t2` sits on a
+    repeatable hub gated `corruption >= 0` with no ceiling: clickable from the first
+    minute of the game to the last. Calling that SFW is what let it ship as one
+    unrotated clip.
+    """
+    band, source = band_for(f"scenes/rung_tease_{tier}.webm")
+    assert (band, source) == ("borderline", "tier_suffix")
+    assert is_nsfw(band)
+
+
+@pytest.mark.parametrize("tier,expected", [
+    ("base", "clean"), ("location", "clean"),
+    ("t2", "borderline"), ("t3", "borderline"), ("t4", "borderline"),
+    ("t5", "explicit"), ("t8", "explicit"),
+])
+def test_the_whole_tier_vocabulary_maps(tier, expected):
+    """Only base / location / no-suffix is clean. Pins the full map in one place."""
+    assert band_for("scenes/x.webm", tier=tier)[0] == expected
+
+
+def test_an_untiered_non_sexual_path_is_still_clean():
+    """The rule is about authored tiers, not a blanket promotion of everything."""
+    assert band_for("locations/atrium.jpg") == ("clean", "default")
 
 
 def test_an_unknown_tier_falls_through_rather_than_crashing():

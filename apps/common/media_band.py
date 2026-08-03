@@ -10,12 +10,17 @@ Bands, ordered hottest first:
 
     explicit    a sex act is depicted
     nudity      bare body, no act
-    borderline  underwear / suggestive
+    borderline  underwear, tease, suggestive — anything on the sexual ladder
     clean       everything else
 
 `explicit`, `nudity` and `borderline` are all NSFW; only `clean` is SFW. The three-way
 split above the line exists so a card can show what it actually is while the filter
 still offers the two buckets a human asks for.
+
+**A tease is never SFW** (LO, 2026-08-04). A tier suffix of any kind — t2 through t8 —
+means the author placed that beat on the sexual ladder, so it lands in `borderline` at
+the coolest. See the note on `TIER_BAND` for why this deliberately diverges from
+find-media's `SFW_TIERS`.
 
 **Evidence precedence**, strongest first — the first rule that fires wins:
 
@@ -47,12 +52,25 @@ from typing import Any, Dict, Iterable, Optional, Tuple
 BANDS = ("explicit", "nudity", "borderline", "clean")
 NSFW_BANDS = ("explicit", "nudity", "borderline")
 
-# find-media's tier vocabulary (.claude/skills/find-media/scripts/scene_semantics.py:28-30),
-# mapped onto the bands above. Kept as a literal map rather than a numeric comparison so
-# the non-numeric tiers ("base", "location") have somewhere to land.
+# The tier vocabulary, mapped onto the bands above. A literal map rather than a numeric
+# comparison so the non-numeric tiers ("base", "location") have somewhere to land.
+#
+# ⚠️ This DIVERGES from find-media's `SFW_TIERS`
+# (.claude/skills/find-media/scripts/scene_semantics.py:28-30), which puts t2 and t3 in the
+# SFW set. LO's ruling, 2026-08-04: **a tease is never SFW.** Any authored tier suffix means
+# the author put the beat on the sexual ladder; only `base` / `location` / no suffix is clean.
+#
+# The skill's set was written as if SFW meant *wayfinding* — a location or establishing shot
+# the player reads to know where they are. A t2 tease on a permanent hub rung is nothing like
+# a room shot: vesper's `rung_renner_tease_t2` sits on a repeatable hub gated `corruption >= 0`
+# with no upper bound, so it is clickable from the first minute to the last. Calling that SFW
+# is what let it ship as a single unrotated clip.
+#
+# `scene_semantics.py` is the other half of this fix and is not yet updated — until it is,
+# find-media will still route t2/t3 searches as SFW. See the plan's Part 3.
 TIER_BAND = {
-    "base": "clean", "location": "clean", "t2": "clean", "t3": "clean",
-    "t4": "borderline",
+    "base": "clean", "location": "clean",
+    "t2": "borderline", "t3": "borderline", "t4": "borderline",
     "t5": "explicit", "t6": "explicit", "t7": "explicit", "t8": "explicit",
 }
 

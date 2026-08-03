@@ -379,8 +379,9 @@ def test_an_authored_tier_on_a_block_overrides_the_derived_band(tmp_path, monkey
             {"id": "n1", "blocks": [
                 # Path says nothing; the author says it is explicit.
                 {"type": "image", "props": {"file": "scenes/quiet.jpg", "tier": "t5"}},
-                # Path says sex/, the author overrules it downward.
-                {"type": "image", "props": {"file": "sex/establishing.jpg", "tier": "t2"}},
+                # Path says sex/, the author overrules it downward. `base`, not `t2` —
+                # a tease tier is still NSFW, so only base/location reaches clean.
+                {"type": "image", "props": {"file": "sex/establishing.jpg", "tier": "base"}},
             ]},
         ]},
     ]}
