@@ -400,8 +400,14 @@ class TweeComprehensiveGeneratorV2:
         image_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'}
         media_extensions = video_extensions | image_extensions
 
-        # Recursive scan using rglob
+        # Recursive scan using rglob. NOTE rglob('*') DOES return dotfiles, and this
+        # index is what _resolve_pool_dir prefix-matches to decide what the shipped game
+        # plays — so a dot-prefixed name (find-media staging, an editor swap file, or
+        # macOS AppleDouble `._clip.gif`, which carries a real media suffix) would ship
+        # a partial clip to a player. This is the one guard that reaches the build.
         for file in media_path.rglob('*'):
+            if file.name.startswith('.'):
+                continue
             if file.is_file() and file.suffix.lower() in media_extensions:
                 # Store relative path as key (e.g., "chapter1/intro.mp4" or "images/bg.jpg")
                 relative_path = file.relative_to(media_path)

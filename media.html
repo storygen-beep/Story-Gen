@@ -51,6 +51,37 @@
       return;
     }
 
+    // ---- UI state that survives a reload ----
+    // A reload drops `expanded` (a Set) and the scroll offset, which restarts a long
+    // review at the top with every lane shut. Anything watching the workspace can
+    // cause one — Live Server reloads this page on any file write under its root —
+    // so park the three things that cost time to rebuild. Keyed per game, so two
+    // games can't inherit each other's scroll position.
+    var UI_KEY = "mediaReview:" + GAME;
+
+    function loadUi() {
+      try { return JSON.parse(sessionStorage.getItem(UI_KEY) || "{}") || {}; }
+      catch (e) { return {}; }
+    }
+
+    function saveUi() {
+      try {
+        sessionStorage.setItem(UI_KEY, JSON.stringify({
+          filter: state.filter,
+          expanded: Array.from(state.expanded),
+          scrollY: window.scrollY
+        }));
+      } catch (e) { /* private mode / quota — the page still works, it just forgets */ }
+    }
+
+    // Read ONCE, before anything renders: later saves overwrite the stored blob, so
+    // the restore has to hold its own copy of what was there on arrival.
+    var savedUi = loadUi();
+    // Validate the filter key — a stale one makes FILTERS.find() return undefined
+    // and `f.test` throw in render().
+    if (FILTERS.some(function (f) { return f.key === savedUi.filter; })) state.filter = savedUi.filter;
+    if (Array.isArray(savedUi.expanded)) state.expanded = new Set(savedUi.expanded);
+
     function el(tag, cls, text) {
       var e = document.createElement(tag);
       if (cls) e.className = cls;
@@ -59,6 +90,78 @@
     }
 
     function mediaUrl(item) { return API + item.media_url; }
+
+    // ---- three states, three visuals ----
+    // A near-black tile answers three different questions identically: "not started",
+    // "still coming", and "will never arrive". Only the last one should be flat.
+    // Listeners go on BEFORE .src is assigned: a cached image can fire `load` in the
+    // same task, and a listener added afterwards never runs — which would leave a
+    // skeleton sitting over a perfectly good image, the same bug inverted.
+    function markLoadState(node, label, onBroken) {
+      node.classList.add("loading");
+      node.title = label;
+      function settle() { node.classList.remove("loading"); }
+      node.addEventListener("load", settle);        // <img>
+      // loadeddata, NOT loadedmetadata: metadata arrives before anything paints, so
+      // clearing on it would relabel a still-black box as "loaded".
+      node.addEventListener("loadeddata", settle);  // <video>: a frame exists
+      node.addEventListener("error", function () { settle(); onBroken(); });
+      // Belt and braces for an <img> already complete from the memory cache.
+      return function recheck() {
+        if (node.complete && node.naturalWidth) settle();
+      };
+    }
+
+    // ---- the pool's video tile ----
+    // Every pool's last tile is its only <video>; tiles 1..n-1 are GIF <img> that
+    // animate by themselves, so a paused video beside them reads as broken rather
+    // than as a video. Play it when it is actually on screen — muted + playsInline
+    // satisfies Chrome's autoplay policy — and pause it when it leaves, so a long
+    // review never holds more than a screenful of live decoders.
+    // Every <video> this page builds, pool or not — see releaseVideos().
+    var liveVideos = [];
+    var videoWatcher = ("IntersectionObserver" in window) && new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) { e.target.pause(); return; }
+          e.target.preload = "metadata";
+          // play() rejects with AbortError whenever a scroll crosses the threshold
+          // twice in quick succession. Without the catch that is one unhandled
+          // rejection per tile per scroll.
+          var started = e.target.play();
+          if (started && started.catch) started.catch(function () {});
+        });
+      }, { threshold: 0.25 });
+
+    function observeVideo(node) {
+      if (!videoWatcher) { node.preload = "metadata"; return; }  // no IO: load eagerly
+      videoWatcher.observe(node);
+    }
+
+    // Detaching a <video> does NOT free its WebMediaPlayer, and Chrome caps how many
+    // can exist at once. render() rebuilds every card on every filter click and lane
+    // toggle, so without this each toggle stranded another ~100 players; past the cap
+    // Chrome refuses to create new ones ("too many WebMediaPlayers already in
+    // existence") and those elements fire `error` — which this page would then label
+    // "won't load", turning resource exhaustion into a permanent-looking dead file.
+    // Measured: 16 lane toggles produced 94 falsely-broken tiles before this existed.
+    // Clearing src and calling load() is what actually releases the player.
+    function releaseVideos() {
+      liveVideos.forEach(function (v) {
+        try {
+          v.pause();
+          v.removeAttribute("src");
+          v.load();
+        } catch (e) { /* already torn down — nothing to release */ }
+      });
+      liveVideos = [];
+      if (videoWatcher) videoWatcher.disconnect();
+    }
+
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden) return;
+      liveVideos.forEach(function (v) { v.pause(); });
+    });
 
     // A pool card's preview: one small tile per clip currently in the folder, in
     // the order the game will cycle them, under an "n of target" badge. The
@@ -85,21 +188,39 @@
       items.forEach(function (m, i) {
         var wrap = el("div", "pool-cell");
         var url = API + "/games/" + GAME + "/" + m.serve_path;
-        var node;
+        var node, recheck;
+
+        // A tile whose bytes are gone used to render as a featureless black
+        // rectangle with no signal at all — indistinguishable from one still loading.
+        function onBroken() {
+          if (videoWatcher) videoWatcher.unobserve(node);
+          var gone = el("div", "pool-thumb broken", "⚠ won't load");
+          gone.addEventListener("click", function () { window.open(url); });
+          if (node.parentNode) node.parentNode.replaceChild(gone, node);
+          wrap.classList.add("dead");   // turns the caption, which names the file, red
+        }
+
         if (m.actual_type === "video") {
           node = el("video", "pool-thumb");
-          // #t=0.1 forces the first frame to paint as a poster. `preload="none"`
-          // renders a black rectangle, which makes a contact sheet useless — the
-          // whole point here is comparing the clips at a glance.
+          wrap.classList.add("is-video");
+          node.muted = true; node.loop = true; node.playsInline = true;
+          // "none", not "metadata": this tile used to join the initial stampede of
+          // ~275 requests and lose it. Alone it paints in well under a second; under
+          // load it was systematically last, which is why it read as broken. The
+          // observer loads and plays it once it is actually on screen. #t=0.1 still
+          // governs the first painted frame if play() is ever blocked.
+          node.preload = "none";
+          recheck = markLoadState(node, m.actual_file, onBroken);
           node.src = url + "#t=0.1";
-          node.muted = true; node.loop = true;
-          node.playsInline = true; node.preload = "metadata";
-          node.addEventListener("mouseover", function () { node.play(); });
-          node.addEventListener("mouseout", function () { node.pause(); });
+          liveVideos.push(node);
+          observeVideo(node);
         } else {
           node = el("img", "pool-thumb");
+          node.alt = m.actual_file;   // so even a default broken-image glyph names it
+          recheck = markLoadState(node, m.actual_file, onBroken);
           node.src = url; node.loading = "lazy";
         }
+        recheck();
         node.addEventListener("click", function () { window.open(url); });
         wrap.appendChild(node);
         wrap.appendChild(el("div", "pool-cap", (i + 1) + ". " + m.actual_file));
@@ -148,14 +269,29 @@
       if (item.pool_dir) {
         card.appendChild(poolBox(item));
       } else if (item.found && item.media_url) {
+        // Same three states as a pool tile. These are left eager and keep their
+        // controls — this is the asset being judged, and `controls` is already an
+        // always-visible "this is a video" marker that no image has.
+        var swapInDead = function (elm) {
+          return function () {
+            var gone = el("div", "media-thumb broken", "⚠ won't load — " + item.file);
+            if (elm.parentNode) elm.parentNode.replaceChild(gone, elm);
+          };
+        };
         if (item.media_type === "video") {
           var v = el("video", "media-thumb");
-          v.src = mediaUrl(item);
           v.controls = true; v.loop = true; v.muted = true; v.playsInline = true; v.preload = "metadata";
+          var recheckV = markLoadState(v, item.file, swapInDead(v));
+          v.src = mediaUrl(item);
+          recheckV();
+          liveVideos.push(v);
           card.appendChild(v);
         } else {
           var img = el("img", "media-thumb");
-          img.src = mediaUrl(item); img.loading = "lazy"; img.alt = item.description || item.file;
+          img.alt = item.description || item.file;
+          var recheckI = markLoadState(img, item.file, swapInDead(img));
+          img.src = mediaUrl(item); img.loading = "lazy";
+          recheckI();
           card.appendChild(img);
         }
       } else {
@@ -255,6 +391,9 @@
     }
 
     function render() {
+      // Every card is about to be replaced, so free the media players first — see
+      // releaseVideos(). Dropping the elements alone leaks them.
+      releaseVideos();
       contentEl.innerHTML = "";
       var f = FILTERS.find(function (x) { return x.key === state.filter; });
       var visible = state.items.filter(f.test);
@@ -267,7 +406,8 @@
         var b = el("button", "filter-btn" + (state.filter === flt.key ? " active" : ""));
         b.appendChild(document.createTextNode(flt.label));
         b.appendChild(el("span", "count", String(n)));
-        b.addEventListener("click", function () { state.filter = flt.key; render(); });
+        // saveUi AFTER render, so it records the offset the new content settled at.
+        b.addEventListener("click", function () { state.filter = flt.key; render(); saveUi(); });
         filtersEl.appendChild(b);
       });
 
@@ -292,6 +432,7 @@
           if (state.expanded.has(lane)) state.expanded.delete(lane);
           else state.expanded.add(lane);
           render();
+          saveUi();
         });
         section.appendChild(header);
 
@@ -347,6 +488,17 @@
       contentEl.appendChild(box);
     }
 
+    // Throttled: scrolling a long lane fires constantly and the blob is tiny, but
+    // there's no reason to write it 60 times a second. `pagehide` catches the final
+    // offset on the way out — it fires on reload AND on ordinary navigation, so
+    // clicking "🔎 Find media" and coming back lands you where you left.
+    var scrollTimer = null;
+    window.addEventListener("scroll", function () {
+      if (scrollTimer) return;
+      scrollTimer = setTimeout(function () { scrollTimer = null; saveUi(); }, 250);
+    }, { passive: true });
+    window.addEventListener("pagehide", saveUi);
+
     // ---- load ----
     fetch(API + "/api/v1/dev/media-review/list?game=" + encodeURIComponent(GAME))
       .then(function (r) {
@@ -368,6 +520,12 @@
           (c.approved || 0) + " approved · " + (c.disapproved || 0) + " disapproved" +
           (state.toml ? "  ·  " + state.toml : "");
         render();
+        // After render, not before: the page is empty until this fetch resolves, so
+        // the browser's own scroll restoration has nothing to scroll to. Tiles
+        // reserve their height via `aspect-ratio` (portal.css .pool-thumb /
+        // .media-thumb), so the layout is already full size before any media loads
+        // and a plain scrollTo lands in the right place.
+        if (savedUi.scrollY) window.scrollTo(0, savedUi.scrollY);
       })
       .catch(function (err) {
         if (err && err.http) showError(err.message); else showOffline();

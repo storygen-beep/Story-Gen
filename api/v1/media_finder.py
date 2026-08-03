@@ -29,6 +29,7 @@ import json
 import os
 import re
 import shutil
+import threading
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -130,6 +131,65 @@ def _previous_dir(game_dir: Path) -> Path:
     """Where a replaced asset is parked so it stays selectable. Under .find-media/
     (not videos/) so the packager never treats an old pick as a live game asset."""
     return game_dir / ".find-media" / "previous"
+
+
+def _incoming_dir(game_dir: Path) -> Path:
+    """Where a download is staged before it is installed — NOT the target folder.
+
+    Every enumerator that lists a media folder filters on SUFFIX ONLY, so a partial
+    file staged inside a live pool gets advertised as a real clip while it is still
+    growing (measured: 3,350,528 -> 4,235,264 bytes across consecutive polls), and it
+    holds tile #1 because "." sorts before "c" in natural order. Worse, the build-time
+    index does the same, so a staging file present at build time can ship a truncated
+    clip to a player.
+
+    .find-media/ is the right home for exactly the reason `_previous_dir` gives: same
+    filesystem as videos/ (so installing stays one atomic os.replace) but never walked
+    as game media.
+    """
+    return game_dir / ".find-media" / "incoming"
+
+
+# download_direct retries up to 5 times at TIMEOUT=60s per socket read (api/v1/dev.py),
+# so no grab that is still alive can own a file this old.
+_INCOMING_MAX_AGE = 6 * 3600
+
+
+def _reap_stale_incoming(staging: Path) -> None:
+    """Delete staging files that no in-flight grab could still own.
+
+    A crash between download and install leaks the temp forever, and nothing else in
+    this repo ever looks in that directory — so the leak is invisible and unbounded.
+    The sweep lives here rather than on a schedule because this is the only code that
+    creates them, the directory normally holds zero or one file, and it costs one
+    iterdir. mtime rather than ctime: a live download rewrites the file continuously.
+    """
+    cutoff = time.time() - _INCOMING_MAX_AGE
+    for leftover in staging.iterdir():
+        try:
+            if leftover.is_file() and leftover.stat().st_mtime < cutoff:
+                leftover.unlink()
+        except OSError:
+            continue  # best effort — never fail a grab over housekeeping
+
+
+def _install(tmp_path: Path, output_path: Path) -> str:
+    """Move the staged file into place. Returns "" on success, else the reason.
+
+    os.replace is atomic only within one filesystem. .find-media/incoming/ and videos/
+    are both children of games/<game>/, so this is same-filesystem by construction —
+    asserted by a test rather than assumed, because a game whose videos/ was symlinked
+    onto another volume would raise EXDEV here.
+
+    Deliberately no shutil.move fallback: that is copy-then-delete, i.e. a growing
+    partial inside the live pool, i.e. the exact bug this staging split exists to kill.
+    A loud error beats a silent regression on a path nobody exercises.
+    """
+    try:
+        os.replace(tmp_path, output_path)
+        return ""
+    except OSError as exc:  # noqa: BLE001 - surfaced to the caller as-is
+        return f"install failed: {exc}"
 
 
 # Suffixes that need a <video> element in the picker; .gif previews as an <img>,
@@ -267,6 +327,12 @@ def _pool_members(pool_path: Path) -> list:
 
     out = []
     for f in sorted(pool_path.iterdir(), key=lambda p: natural(p.name)):
+        # A dot-prefixed name is never a clip somebody selected: it is staging, an
+        # editor swap file, or macOS AppleDouble (`._clip.gif` — a REAL media suffix,
+        # so the suffix test alone lets it through). Listing one shifts every caption
+        # and offers a partial file as pickable.
+        if f.name.startswith("."):
+            continue
         if f.is_file() and f.suffix.lower() in (_VIDEO_SUFFIXES | _IMAGE_SUFFIXES):
             out.append(f)
     return out
@@ -606,6 +672,12 @@ def grab(request):
     auth = None  # kept in scope so a UA-rejection retry can still carry the bearer
     if local_path:
         candidate = GAMES_ROOT / local_path
+        # A dot-prefixed basename is staging or OS metadata, never a pick. One such
+        # entry reached a shelf before the guards above existed, so an open picker tab
+        # can still be holding a rendered tile for it — refuse the click rather than
+        # reinstall a truncated file.
+        if candidate.name.startswith("."):
+            return JsonResponse({"error": "Refusing a dot-prefixed local_path"}, status=400)
         if not _safe_path(GAMES_ROOT, candidate) or not candidate.is_file():
             return JsonResponse({"error": "local_path not found"}, status=400)
         src_file = candidate
@@ -644,79 +716,107 @@ def grab(request):
     output_path = output_dir / f"{filename_base}.{ext}"
 
     # Fetch to a temp file FIRST. Until this succeeds the slot is not touched, so a
-    # dead URL can never leave the game with an empty slot and no way back. The temp
-    # name deliberately does not share `filename_base` as its stem, so the cleanup
-    # loop below cannot delete the very file it is about to install.
-    tmp_path = output_dir / f".incoming-{filename_base}.{ext}"
-    # download_direct resumes onto an existing partial when the server supports Range,
-    # so a leftover temp from an earlier crash would be appended to, not replaced.
-    tmp_path.unlink(missing_ok=True)
-    if src_file is not None:
-        try:
-            shutil.copy2(src_file, tmp_path)
-            success, error = True, None
-        except Exception as exc:  # noqa: BLE001 - surfaced to the caller as-is
-            success, error = False, str(exc)
-    else:
-        success, error = download_direct(url, tmp_path, extra_headers=extra_headers)
-        # A 403 here often means the opposite of what it looks like: the host did not
-        # refuse the file, it refused a client CLAIMING to be Chrome without a
-        # browser's fingerprint. Drop the browser UA/Referer and let download_direct
-        # use its own plain UA — the bearer, if any, still rides along. One retry.
-        if not success and _is_ua_rejection(error):
-            tmp_path.unlink(missing_ok=True)
-            success, error = download_direct(url, tmp_path, extra_headers=auth)
-
-    if not success:
+    # dead URL can never leave the game with an empty slot and no way back.
+    #
+    # The temp lives in .find-media/incoming/, NOT in output_dir. It used to sit in the
+    # target folder under a ".incoming-<stem>" name, and the ONLY thing stopping the
+    # cleanup loops below from deleting the file they were about to install was that the
+    # dotted stem happened not to equal `filename_base` — a lexical coincidence. Staging
+    # elsewhere makes that structural: the loops cannot reach it under any name, and no
+    # enumerator can advertise a half-written file as a real clip. Do not move it back.
+    staging = _incoming_dir(game_dir)
+    staging.mkdir(parents=True, exist_ok=True)
+    _reap_stale_incoming(staging)
+    # pid + thread id, the same collision-safe convention write_json_atomic uses
+    # (apps/common/json_ledger.py). `filename_base` alone is NOT unique: _pool_member_stem
+    # is md5(url), so the same url grabbed into two different pools yields the same base,
+    # and the dev server is thread-per-request.
+    tmp_path = staging / f"{filename_base}.{os.getpid()}.{threading.get_ident()}.{ext}.part"
+    try:
+        # download_direct resumes onto an existing partial when the server supports Range,
+        # so a leftover temp from an earlier crash would be appended to, not replaced.
         tmp_path.unlink(missing_ok=True)
-        return JsonResponse({"success": False, "error": error}, status=400)
+        if src_file is not None:
+            try:
+                shutil.copy2(src_file, tmp_path)
+                success, error = True, None
+            except Exception as exc:  # noqa: BLE001 - surfaced to the caller as-is
+                success, error = False, str(exc)
+        else:
+            success, error = download_direct(url, tmp_path, extra_headers=extra_headers)
+            # A 403 here often means the opposite of what it looks like: the host did not
+            # refuse the file, it refused a client CLAIMING to be Chrome without a
+            # browser's fingerprint. Drop the browser UA/Referer and let download_direct
+            # use its own plain UA — the bearer, if any, still rides along. One retry.
+            if not success and _is_ua_rejection(error):
+                tmp_path.unlink(missing_ok=True)
+                success, error = download_direct(url, tmp_path, extra_headers=auth)
 
-    preserved: list = []
-    if pool_dir:
-        # ⚠️ A pool install ADDS; it must never run the replace path below.
-        # There is no incumbent to demote (every clip in the folder is a peer),
-        # and that path's same-stem delete loop would wipe a SIBLING clip —
-        # installing clip 2 would silently delete clip 1.
-        #
-        # The one same-stem file we DO clear is this url's own earlier download
-        # under a different extension (the stem is url-derived, so nothing else
-        # can collide with it). Without this a re-grab that resolves .webm where
-        # it once resolved .gif would leave both, and the pool would play the
-        # same clip twice.
-        for existing in output_dir.iterdir():
-            if existing.is_file() and existing.stem == filename_base and existing != output_path:
-                existing.unlink()
-        os.replace(tmp_path, output_path)
-    else:
-        # The replacement exists. Demote the incumbent to an option, THEN clear the slot
-        # (any extension, so the generator never sees an orphan it can't match).
-        preserved = _preserve_current_as_option(
-            game, game_dir, slot_key_, output_dir, filename_base
+        if not success:
+            return JsonResponse({"success": False, "error": error}, status=400)
+
+        preserved: list = []
+        if pool_dir:
+            # ⚠️ A pool install ADDS; it must never run the replace path below.
+            # There is no incumbent to demote (every clip in the folder is a peer),
+            # and that path's same-stem delete loop would wipe a SIBLING clip —
+            # installing clip 2 would silently delete clip 1.
+            #
+            # The one same-stem file we DO clear is this url's own earlier download
+            # under a different extension (the stem is url-derived, so nothing else
+            # can collide with it). Without this a re-grab that resolves .webm where
+            # it once resolved .gif would leave both, and the pool would play the
+            # same clip twice.
+            #
+            # The staged download is NOT in this folder, so this loop cannot reach it.
+            for existing in output_dir.iterdir():
+                if existing.is_file() and existing.stem == filename_base and existing != output_path:
+                    existing.unlink(missing_ok=True)  # a concurrent unselect may have won
+            reason = _install(tmp_path, output_path)
+        else:
+            # The replacement exists. Demote the incumbent to an option, THEN clear the slot
+            # (any extension, so the generator never sees an orphan it can't match).
+            preserved = _preserve_current_as_option(
+                game, game_dir, slot_key_, output_dir, filename_base
+            )
+            for existing in output_dir.iterdir():
+                if existing.is_file() and existing.stem == filename_base:
+                    existing.unlink(missing_ok=True)
+            reason = _install(tmp_path, output_path)
+        if reason:
+            # JSON, not an uncaught raise: find.html parses every response body
+            # unconditionally, so Django's HTML debug 500 page would surface as the
+            # misleading "server unreachable" instead of the real reason.
+            return JsonResponse({"success": False, "error": reason}, status=500)
+
+        # The option just consumed is no longer an alternative.
+        # Pass both: a re-selected previous pick carries a local_path and no url, so
+        # dropping by url alone would leave it listed as an option it no longer is.
+        _drop_option(game_dir, game, slot_key_, url=url, local_path=local_path)
+        # A single slot now holds bytes nobody has judged, so its old verdict must not
+        # carry over. A POOL keeps its verdict: adding a fourth clip does not un-judge
+        # the three already approved.
+        if not pool_dir:
+            _clear_review_status(
+                game_dir, game, slot_key_, note=f"replaced via finder {datetime.now(timezone.utc).date()}"
+            )
+
+        return JsonResponse(
+            {
+                "success": True,
+                "file_path": str(output_path.relative_to(GAMES_ROOT)),
+                "previous_kept_as_option": preserved,
+            }
         )
-        for existing in output_dir.iterdir():
-            if existing.is_file() and existing.stem == filename_base:
-                existing.unlink()
-        os.replace(tmp_path, output_path)
-
-    # The option just consumed is no longer an alternative.
-    # Pass both: a re-selected previous pick carries a local_path and no url, so
-    # dropping by url alone would leave it listed as an option it no longer is.
-    _drop_option(game_dir, game, slot_key_, url=url, local_path=local_path)
-    # A single slot now holds bytes nobody has judged, so its old verdict must not
-    # carry over. A POOL keeps its verdict: adding a fourth clip does not un-judge
-    # the three already approved.
-    if not pool_dir:
-        _clear_review_status(
-            game_dir, game, slot_key_, note=f"replaced via finder {datetime.now(timezone.utc).date()}"
-        )
-
-    return JsonResponse(
-        {
-            "success": True,
-            "file_path": str(output_path.relative_to(GAMES_ROOT)),
-            "previous_kept_as_option": preserved,
-        }
-    )
+    finally:
+        # Every exit path — success, refusal, exception — leaves nothing behind. After a
+        # successful install the temp is already gone, so this is a no-op there. The inner
+        # guard is not decoration: a raise inside `finally` REPLACES the pending exception,
+        # so a permissions hiccup here would mask the actual download failure.
+        try:
+            tmp_path.unlink(missing_ok=True)
+        except OSError:
+            pass  # a leaked staging file is the reaper's problem, not the caller's
 
 
 # =============================================================================
@@ -856,8 +956,11 @@ def pool_unselect(request):
     game_dir = _safe_game_dir(game)
     if game_dir is None or not pool_dir or not filename:
         return JsonResponse({"error": "game, dir and filename are required"}, status=400)
-    # A filename is exactly one path segment — never a traversal.
-    if "/" in filename or "\\" in filename or filename in (".", ".."):
+    # A filename is exactly one path segment — never a traversal, and never a dotfile.
+    # A leading dot means staging or OS metadata, and shelving one as a "previous pick"
+    # is how a truncated 2 MB GIF became a one-click option. startswith(".") subsumes
+    # the old `filename in (".", "..")` check.
+    if "/" in filename or "\\" in filename or filename.startswith("."):
         return JsonResponse({"error": "Invalid filename"}, status=400)
 
     src = game_dir / "videos" / pool_dir / filename

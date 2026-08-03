@@ -337,6 +337,12 @@ def _extract_missing_media(data: dict, game_name: str) -> dict:
 
         items = []
         for f in sorted(candidate_dir.iterdir(), key=lambda p: _natural_key(p.name)):
+            # A dot-prefixed name is never a clip somebody selected: it is staging, an
+            # editor swap file, or macOS AppleDouble (`._clip.gif` — a REAL media
+            # suffix, so the suffix test alone lets it through). Listing one shifts
+            # every caption and offers a partial file as pickable.
+            if f.name.startswith("."):
+                continue
             if not f.is_file() or f.suffix.lower() not in ALL_MEDIA_EXTS:
                 continue
             items.append({

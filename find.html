@@ -84,6 +84,14 @@
 
     .empty { color: var(--muted); font-size: 0.9rem; padding: 28px 4px; line-height: 1.6; }
 
+    .more-row { display: flex; justify-content: center; padding: 18px 0 4px; }
+    .more-btn {
+      font-size: 0.82rem; font-weight: 600; color: var(--text);
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 999px; padding: 9px 22px; cursor: pointer;
+    }
+    .more-btn:hover { border-color: var(--accent); color: var(--accent); }
+
     .overlay {
       position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 1000;
       display: flex; align-items: center; justify-content: center; cursor: zoom-out; padding: 24px;
@@ -201,6 +209,36 @@
     document.getElementById("refresh").addEventListener("click", loadOptions);
 
     // ---- options list (polled; only rebuilds when the set changes) ----
+    //
+    // The grid is CAPPED. Every remote tile is a full download through the proxy,
+    // which has no server-side cache — measured 0.81-1.96 s and 724 KB-2.16 MB per
+    // tile, all queued behind the browser's six-connections-per-origin limit. The
+    // deepest shelf here holds 430 options; rendering them all is ~300 MB and a page
+    // that never settles.
+    var PAGE = 60;
+    // Never reset. KEY is fixed from the query string at load, so the slot cannot
+    // change under us, and every forced re-render (`lastSig = null` after a Select or
+    // Unselect) must keep whatever the user has already expanded to.
+    var shown = PAGE;
+    var lastOpts = [];
+    var tileByUrl = {};          // url -> live tile, reused across re-renders
+    var optionsGrid = el("div", "find-grid");
+    var moreRow = null;
+
+    // <video> has no `loading="lazy"`, so without this every video option fetches a
+    // full remote file through the proxy the moment the page opens — ahead of the
+    // image tiles the user can actually see. One-shot: once metadata is in, the
+    // element is left alone.
+    var videoPreloader = ("IntersectionObserver" in window) && new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          e.target.preload = "metadata";
+          e.target.load();
+          videoPreloader.unobserve(e.target);
+        });
+      }, { rootMargin: "200px" });
+
     var lastSig = null;
     function loadOptions() {
       fetch(API + "/api/v1/dev/media-finder/options/list?game=" +
@@ -217,20 +255,72 @@
     }
 
     function renderOptions(opts) {
-      var sig = opts.map(function (o) { return o.url; }).join("|");
+      // `shown` belongs in the signature: without it "Show more" is a dead button
+      // until the option set happens to change on its own — up to 3 s of nothing.
+      var sig = shown + "|" + opts.map(function (o) { return o.url; }).join("|");
       if (sig === lastSig) return;  // unchanged — don't rebuild (avoids preview flicker)
       lastSig = sig;
+      lastOpts = opts;
 
-      countEl.textContent = opts.length ? "(" + opts.length + ")" : "";
-      optionsEl.innerHTML = "";
       if (!opts.length) {
+        tileByUrl = {};
+        optionsGrid.innerHTML = "";
+        if (moreRow) { moreRow.remove(); moreRow = null; }
+        countEl.textContent = "";
+        optionsEl.innerHTML = "";
         optionsEl.appendChild(el("p", "empty",
           "No options yet. Click “Search Google Images”, then capture results with the extension — they appear here."));
         return;
       }
-      var grid = el("div", "find-grid");
-      opts.forEach(function (opt) { grid.appendChild(buildTile(opt)); });
-      optionsEl.appendChild(grid);
+
+      var want = opts.slice(0, shown);
+      countEl.textContent = want.length < opts.length
+        ? "(showing " + want.length + " of " + opts.length + ")"
+        : "(" + opts.length + ")";
+
+      // Reconcile, don't rebuild. Re-parenting a live <img>/<video> with appendChild
+      // MOVES the node without re-fetching it; wiping the grid would re-download
+      // every visible tile through the uncached proxy on every single Select — at
+      // shown=240 that is minutes of pointless traffic.
+      var keep = {};
+      want.forEach(function (opt) {
+        keep[opt.url] = true;
+        var tile = tileByUrl[opt.url];
+        if (!tile) { tile = buildTile(opt); tileByUrl[opt.url] = tile; }
+        optionsGrid.appendChild(tile);
+      });
+      Object.keys(tileByUrl).forEach(function (url) {
+        if (keep[url]) return;
+        tileByUrl[url].remove();
+        delete tileByUrl[url];
+      });
+
+      // The offline branch empties optionsEl, which DETACHES the grid while tileByUrl
+      // still holds every node. Without this re-attach the next successful poll would
+      // render into a detached tree and the zone would stay blank forever — looking
+      // exactly like "the server is still down".
+      if (optionsGrid.parentNode !== optionsEl) {
+        optionsEl.innerHTML = "";
+        optionsEl.appendChild(optionsGrid);
+      }
+      renderMore(opts);
+    }
+
+    // Deliberately no "Show all": on the deepest shelf that is one click for ~300 MB
+    // of proxied downloads and a hung tab.
+    function renderMore(opts) {
+      if (moreRow) { moreRow.remove(); moreRow = null; }
+      var left = opts.length - shown;
+      if (left <= 0) return;
+      moreRow = el("div", "more-row");
+      var btn = el("button", "more-btn",
+        "Show " + Math.min(PAGE, left) + " more  ·  " + left + " remaining");
+      btn.addEventListener("click", function () {
+        shown += PAGE;
+        renderOptions(lastOpts);
+      });
+      moreRow.appendChild(btn);
+      optionsEl.appendChild(moreRow);
     }
 
     function buildTile(opt) {
@@ -239,7 +329,14 @@
 
       var thumb = el(isVideo ? "video" : "img", "tile-media");
       thumb.src = proxied(opt.url);
-      if (isVideo) { thumb.muted = true; thumb.loop = true; thumb.playsInline = true; thumb.preload = "metadata"; }
+      if (isVideo) {
+        thumb.muted = true; thumb.loop = true; thumb.playsInline = true;
+        // "none" until the tile is near the viewport — see videoPreloader. The <img>
+        // tiles get that for free from loading="lazy"; <video> has no equivalent.
+        thumb.preload = "none";
+        if (videoPreloader) videoPreloader.observe(thumb);
+        else thumb.preload = "metadata";
+      }
       else { thumb.loading = "lazy"; thumb.referrerPolicy = "no-referrer"; }
       thumb.addEventListener("click", function () { preview(opt); });
       thumb.addEventListener("error", function () {
@@ -463,8 +560,15 @@
     }
     loadOptions();
     // One timer for both zones: captures from the Google tab appear within a few
-    // seconds, and the pool folder can also change from outside this page.
-    setInterval(function () { loadOptions(); if (POOL) loadSelected(); }, 3000);
+    // seconds, and the pool folder can also change from outside this page. Skipped
+    // while the tab is hidden — a backgrounded picker polled forever for a list
+    // nobody was looking at, and those requests share the same six connections the
+    // Google tab's captures need.
+    setInterval(function () {
+      if (document.hidden) return;
+      loadOptions();
+      if (POOL) loadSelected();
+    }, 3000);
   })();
   </script>
 </body>

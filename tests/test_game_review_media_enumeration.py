@@ -215,6 +215,29 @@ def test_extract_missing_media_gives_a_pool_one_row_populated_from_disk(tmp_path
     assert row["pool_items"][0]["serve_path"] == "videos/sex/oral_t5/clip_1.webm"
 
 
+def test_find_pool_ignores_dot_prefixed_files(tmp_path, monkeypatch):
+    """A dot-prefixed name is staging or OS metadata, never a selected clip.
+
+    `.incoming-c1.gif` carries a real media suffix, so a suffix-only filter lets it
+    through — and "." sorts before "c", so it took tile #1 and shifted every ordinal
+    caption on the review page while the file was still being written to.
+    """
+    import api.v1.game_review as gr
+    monkeypatch.setattr(gr, "GAMES_ROOT", tmp_path)
+    pool = tmp_path / "fakegame" / "videos" / "sex" / "oral_t5"
+    pool.mkdir(parents=True)
+    for name in ("clip_1.webm", "clip_2.webm", ".incoming-c1.gif", "._clip_1.webm"):
+        (pool / name).write_bytes(b"x")
+
+    data = {"canvases": [{"id": "c1", "name": "C1", "nodes": [{"id": "n1", "blocks": [
+        {"type": "video", "props": {"pool_dir": "sex/oral_t5", "pool": 4}},
+    ]}]}]}
+    row = gr._extract_missing_media(data, "fakegame")["found"][0]
+
+    assert [i["actual_file"] for i in row["pool_items"]] == ["clip_1.webm", "clip_2.webm"]
+    assert row["pool_count"] == 2, "a partial download was counted as a pool member"
+
+
 def test_an_empty_pool_folder_still_produces_a_row(tmp_path, monkeypatch):
     """The row comes from the TOML and is merely POPULATED from disk. Deriving it
     from disk contents would make an unstocked pool vanish from the audit — the

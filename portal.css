@@ -278,6 +278,38 @@ footer {
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
+/* A tile that has not loaded yet and a tile that never will used to be pixel-
+   identical at #000 — an unstarted lazy <img>, a 404, and an undecoded video frame
+   all measured mean luma ~9.7. Give "not yet" a texture so only "broken" is flat.
+   Static hatch rather than a shimmer keyframe: ~277 tiles animating a background
+   would be permanent compositor work on a page whose real job is decoding ~185
+   GIFs — it would compete with the very thing that made tiles slow. */
+.media-thumb.loading,
+.pool-thumb.loading {
+  background-color: var(--surface-hover);
+  background-image: repeating-linear-gradient(
+    135deg, transparent 0 7px, rgba(255, 255, 255, 0.035) 7px 14px);
+}
+/* #c2554e is already this page's failure red (.media-card.disapproved,
+   .pool-count.empty) — reuse it rather than introduce a second one. */
+.media-thumb.broken {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 12px;
+  color: #c2554e;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+.pool-thumb.broken {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c2554e;
+  font-size: 0.6rem;
+}
+.pool-cell.dead .pool-cap { color: #c2554e; }
 .media-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
 .media-query { font-size: 0.95rem; color: var(--text); font-weight: 600; line-height: 1.35; }
 .media-meta { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
@@ -352,7 +384,19 @@ footer {
 .pool-dir { font-size: 0.68rem; color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
 .pool-none { font-size: 0.78rem; color: var(--muted); font-style: italic; padding: 18px 0; text-align: center; }
 .pool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
-.pool-cell { min-width: 0; }
+.pool-cell { min-width: 0; position: relative; }
+/* A paused <video> tile must still read as "video" rather than as a failed image.
+   A pseudo-element on the cell costs no extra node across ~185 tiles, and it borrows
+   .type-badge.vid's blue so it speaks the page's existing "this is video" language.
+   pointer-events:none keeps the click-to-open-in-a-tab behaviour intact. */
+.pool-cell.is-video::after {
+  content: "▶";
+  position: absolute; right: 5px; top: 5px;
+  font-size: 0.58rem; line-height: 1;
+  padding: 2px 4px; border-radius: 3px;
+  color: #7a9ec8; background: rgba(0, 0, 0, 0.62);
+  pointer-events: none;
+}
 .pool-thumb {
   width: 100%;
   aspect-ratio: 16 / 10;

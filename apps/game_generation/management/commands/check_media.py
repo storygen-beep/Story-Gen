@@ -87,6 +87,11 @@ class Command(BaseCommand):
         """Scan media folder and return set of relative paths."""
         files = set()
         for file in media_path.rglob('*'):
+            # Skipped for the same reason the generator's own index skips them
+            # (v2.py _load_media_files): a dot-prefixed name is staging or OS metadata,
+            # never a selected clip. Kept identical so the audit and the build agree.
+            if file.name.startswith('.'):
+                continue
             if file.is_file() and file.suffix.lower() in ALL_MEDIA_EXTENSIONS:
                 relative = file.relative_to(media_path)
                 # Normalize to forward slashes

@@ -446,3 +446,34 @@ def test_pool_does_not_swallow_the_block_that_follows_it():
     out = g._convert_blocks_to_game_html(blocks)
 
     assert "after the pool" in out
+
+
+# ── 8. the media index that decides what SHIPS ───────────────────────────────
+
+def test_load_media_files_ignores_dot_prefixed_files(tmp_path):
+    """A dot-prefixed file must never enter the index the build plays from.
+
+    `_load_media_files` scans with rglob('*'), which DOES return dotfiles, and it
+    filters on suffix alone. `_resolve_pool_dir` then prefix-matches that index to
+    decide what the shipped game cycles — so find-media's staging file, an editor
+    swap file, or a macOS AppleDouble (`._clip.webm`, a real media suffix) would ship
+    a partial clip to a player.
+
+    Every other test in this file injects `video_files` directly and never touches
+    disk, so this blind spot had no coverage at all.
+    """
+    pool = tmp_path / "sex" / "oral_t5"
+    pool.mkdir(parents=True)
+    for name in ("clip_1.webm", "clip_2.webm", ".incoming-c1.webm", "._clip_1.webm"):
+        (pool / name).write_bytes(b"x")
+
+    g = TweeComprehensiveGeneratorV2()
+    g.video_files = {}
+    g.video_folder = str(tmp_path)
+    g._load_media_files()
+
+    assert sorted(g.video_files) == ["sex/oral_t5/clip_1.webm", "sex/oral_t5/clip_2.webm"]
+    # The path that actually reaches the player.
+    assert g._resolve_pool_dir("sex/oral_t5") == [
+        "sex/oral_t5/clip_1.webm", "sex/oral_t5/clip_2.webm",
+    ], "a partial download would have been cycled in the shipped game"
