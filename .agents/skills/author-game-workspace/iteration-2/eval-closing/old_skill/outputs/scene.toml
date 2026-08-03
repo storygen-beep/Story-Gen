@@ -1,0 +1,84 @@
+# ═══ scene_renner_confront — Wren corners Renner in his office ═════════════════
+# A charged one-shot: she drops the cheap-hands act and turns the skim into leverage.
+# Advanced one line at a time (cascade), closing on her rationed interior (the shipped
+# Wren thought_bubble convention). Double-gated: office access (renner_office_open) +
+# in cover (cover_dockhand). Third person, RTS-flat, dialogue-dominant. SETS renner_confronted.
+[[canvases]]
+id          = "scene_renner_confront"
+name        = "The arrangement"
+description = "One-shot office confrontation at the depot. Wren names Renner's skim, takes the threat off his mouth, and trades silence for his key. Advances line by line; ends on her private thought before she leaves. Gated renner_hired + renner_office_open + cover_dockhand equipped; SETS renner_confronted."
+
+[canvases.trigger]
+location      = "renner_depot"
+requires_npc  = "npc_renner"
+is_repeatable = false
+priority      = 6
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "renner_hired",       operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "renner_office_open",  operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "renner_confronted",   operator = "is_false" },
+  { type = "clothing_item", item_id = "cover_dockhand", operator = "equipped" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "09:00"
+end_time   = "18:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The arrangement"
+blocks = [
+  { type = "image", props = { file = "scenes/renner_office_confront.jpg", description = "A cramped glass-walled office on a warehouse floor, a heavyset man behind a cluttered desk, a woman standing over him with the door shut.", search_queries = ["man behind office desk warehouse", "woman standing over seated man office"] } },
+  { type = "paragraph", content = "The office is a glass box on the depot floor. She steps in and pulls the door shut behind her." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Floor's out there. Whatever it is, it waits." },
+        { type = "paragraph", content = "He doesn't get up." },
+    ] },
+    { advance_text = "Stand over him.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "You've been short-counting Cain's crates. Skimming the manifests, keeping the difference." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "The temp counts boxes. The temp doesn't count mine." },
+        { type = "dialog", props = { speaker = "player" }, content = "I counted mine and yours. Yours are light." },
+        { type = "paragraph", content = "The pen stops." },
+    ] },
+    { advance_text = "Don't blink.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Cain sees a short count, that's my neck, not yours. Why're you doing this." },
+        { type = "dialog", props = { speaker = "player" }, content = "Because Cain's slower than me. He'll get there. I'm offering you the version where he doesn't." },
+        { type = "paragraph", content = "His hand finds the bottle. It isn't steady." },
+    ] },
+    { advance_text = "Let him threaten.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "You breathe a word, I break your hands and ship you out in one of his crates." },
+        { type = "dialog", props = { speaker = "player" }, content = "You won't. You need the hands. Mine most — I don't ask, I don't tire, and I know where the light crates went." },
+    ] },
+    { advance_text = "Closer.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "And you've watched me on the racks all week. I know the exact look. It's not the counting you'll miss." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "...Christ. What are you." },
+        { type = "paragraph", content = "He's flushed, and it isn't the drink. Wanting her and hating that he does — she watches both land." },
+    ] },
+    { advance_text = "Name the price.", effects = [
+        { targetType = "npc", npcId = "npc_renner", trait = "corruption", op = "add", value = 2 },
+        { targetType = "npc", npcId = "npc_renner", trait = "arousal",    op = "add", value = 2 },
+    ], blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "So — the office key. Your silence on my counts. And I come in here whenever I want." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "...And if I say no." },
+        { type = "dialog", props = { speaker = "player" }, content = "Then Cain gets a tidy little audit by morning. Your call." },
+        { type = "paragraph", content = "He slides the key across the desk." },
+    ] },
+    { blocks = [
+        { type = "paragraph", content = "She pockets the key and turns for the door." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Walked in as cheap hands, walking out with his key. He'll remember her now — the one thing the cover can't afford. She did it anyway. It was faster than being no one." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave the office."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "renner_depot"
+flagEffects = [
+  { targetType = "player", flag = "renner_confronted", op = "set" },
+]

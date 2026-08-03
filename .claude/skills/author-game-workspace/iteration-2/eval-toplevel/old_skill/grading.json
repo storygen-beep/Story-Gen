@@ -1,0 +1,34 @@
+{
+  "expectations": [
+    {
+      "text": "Declares WHAT COMPOUNDS (a growing owned thing with content-unlocking states) or 'nothing' on purpose",
+      "passed": false,
+      "evidence": "has the economy loop ('leverage compounds: bar money funds gifts that turn the family') but names NO growing owned object; gestures at an east-wing-records 'second currency' only as a maybe-later iteration"
+    },
+    {
+      "text": "Each growth state opens content, not just a number",
+      "passed": false,
+      "evidence": "no accumulation object declared, so no states to open content"
+    },
+    {
+      "text": "Names the fail-state FORM (danger/debt/deadline/decay) or 'no-failure' + cost",
+      "passed": false,
+      "evidence": "declares failure exists with a deadline clock (and correctly insists it must bite) \u2014 but no form taxonomy and no decay; partial"
+    },
+    {
+      "text": "Covers the standing Step-2 spine (cascade/double-lock, stats, desire ladder, economy, frontier, machine)",
+      "passed": true,
+      "evidence": "286 lines; the standing spine is fully present and competent"
+    },
+    {
+      "text": "Does not collapse the endgame into management",
+      "passed": true,
+      "evidence": "endgame is conquest-content, no dashboard"
+    },
+    {
+      "text": "BONUS (Batch D): declares the cheat page's diegetic skin",
+      "passed": false,
+      "evidence": "no cheat page mentioned (grep: 0 hits)"
+    }
+  ]
+}

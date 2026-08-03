@@ -1,0 +1,34 @@
+{
+  "expectations": [
+    {
+      "text": "Uses the [[quest_cards]] table (not v1 [[quests]])",
+      "passed": true,
+      "evidence": "4 [[quest_cards]] blocks; 0 [[quests]]"
+    },
+    {
+      "text": "Every live rung's goals[].label names a PLACE and a concrete VERB (a walkthrough line)",
+      "passed": true,
+      "evidence": "R1 label 'Get Sol talking at the Undertow \u2014 evenings'; R2 'Drink with Sol at the Undertow \u2014 evenings'"
+    },
+    {
+      "text": "A schedule-gated step also names its time window",
+      "passed": true,
+      "evidence": "'\u2014 evenings' on both rungs (the Undertow is an evening bar)"
+    },
+    {
+      "text": "A meter-gated rung tells the player which repeatable raises the meter (feeder rule)",
+      "passed": true,
+      "evidence": "tips name the feeder: 'keep turning up, evenings; every one you sit through, his relation climbs'"
+    },
+    {
+      "text": "The top rung cannot render blank (flag goal / ready_canvas / terminal)",
+      "passed": true,
+      "evidence": "R3 carries ready_canvas=sol_yard_trip; a terminal card closes on the flag"
+    },
+    {
+      "text": "No version=\"1.0\" pasted onto when/goals",
+      "passed": true,
+      "evidence": "0 occurrences"
+    }
+  ]
+}

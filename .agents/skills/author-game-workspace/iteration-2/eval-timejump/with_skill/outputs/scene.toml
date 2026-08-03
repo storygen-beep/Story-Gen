@@ -1,0 +1,120 @@
+# ── CAPSTONE — "The Name on Half a Sheet" (Lane 4, Tier-3 earned) ──────────────────
+# Wren corners Marsh on the back stair of The House and presses him beat by beat until he
+# caves; two days later he leaves an envelope with Rue — his scrawled warning that her leash
+# runs all the way up to Vance. Auto-fires once on a Sunday-night entry to The House, after
+# she already cracked him for the crew's rooms (crew_known). Third-person narration (register
+# = third), dialogue-dominant, time-jump narrated inside the cascade (no engine timer).
+[[canvases]]
+id   = "marsh_the_name"
+name = "The Name on Half a Sheet"
+
+[canvases.trigger]
+location      = "underworld_brothel"
+trigger_mode  = "manual"
+is_repeatable = false
+priority      = 10
+requires_npc  = "npc_marsh"                     # only fires when he's actually on the stair (his Sunday window)
+conditions = { version = "1.0", items = [       # version REQUIRED or the gate fails open
+  { type = "flag", subject = "player", flag_key = "marsh_warned", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "crew_known",   operator = "is_true"  },
+] }
+
+[[canvases.nodes]]
+id   = "stair"
+name = "The Name on Half a Sheet"
+blocks = [
+  { type = "paragraph", content = "The back stair of The House, between floors. Marsh comes down at his hour and finds her already on the turn, one shoulder to the rail, taking up the whole width of it." },
+  { type = "image", props = { file = "scenes/marsh_stairwell.jpg", description = "A small careful man stopped on a dim tenement stair, a woman blocking the turn below him.", search_queries = ["man cornered dim stairwell noir", "narrow tenement staircase two figures low light"] } },
+  { type = "cascade", props = { beats = [
+
+    # beat 0 — renders with the lead, no click (advance_text ignored on beat 0)
+    { blocks = [
+      { type = "dialog", props = { speaker = "player" }, content = "You always check the exits before the girl. Both doors. I counted." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "Habit's kept me alive. Move, girl — I'm paying for the hour and it's running." },
+    ] },
+
+    { advance_text = "Don't move.", blocks = [
+      { type = "paragraph", content = "She doesn't move." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "Rue know you brace her regulars on the stairs?" },
+      { type = "dialog", props = { speaker = "player" }, content = "Rue's counting coin two floors down. What did Doss carry the week Renner put him in the ground?" },
+    ] },
+
+    { advance_text = "Press him.", blocks = [
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "Cargo. I run cargo. I don't read what's in the crates." },
+      { type = "dialog", props = { speaker = "player" }, content = "You read all of it. It's the only reason you outlived every man who didn't." },
+    ] },
+
+    { advance_text = "Take the step.", blocks = [
+      { type = "paragraph", content = "She comes down a step. His back finds the rail." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "...It wasn't cargo that week. It was a name. One name, on half a sheet." },
+    ] },
+
+    { advance_text = "Whose name.", blocks = [
+      { type = "dialog", props = { speaker = "player" }, content = "Whose." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "Not on a stair with a door at both ends. You don't say a name like this one out loud." },
+    ] },
+
+    { advance_text = "Push.", blocks = [
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "You walk around thinking you're the one doing the squeezing. You're not. You're what they let off the leash. Whoever's on that list holds the other end of it." },
+    ] },
+
+    { advance_text = "Let it land.", blocks = [
+      { type = "thought_bubble", props = { speaker = "npc", npcId = "npc_marsh" }, content = "She doesn't know whose she is. God help her the day she finds out." },
+      { type = "dialog", props = { speaker = "player" }, content = "Then it costs you nothing to write down a name I already half know." },
+    ] },
+
+    { advance_text = "Wait him out.", blocks = [
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "It costs me everything. That's what a name like this is worth." },
+      { type = "paragraph", content = "She waits. He looks at the door below, at the door above, at her." },
+    ] },
+
+    # the cave
+    { advance_text = "Say when.", blocks = [
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "...Two days. I'll leave you something with Rue. After that I never stood on this stair, and neither did you." },
+      { type = "paragraph", content = "He goes up past her, careful not to touch her. She lets him." },
+    ] },
+
+    # ── TIME JUMP — two days later ─────────────────────────────────────────────
+    { advance_text = "Two days.", blocks = [
+      { type = "paragraph", content = "Two days. She takes her shifts, says nothing, counts them down." },
+    ] },
+
+    { advance_text = "The counter.", blocks = [
+      { type = "paragraph", content = "The House at closing. Rue slides an envelope across into the counter light, unhurried." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "Careful man left this Sunday. Didn't stay for a drink. Wouldn't give a name — just described you, close enough." },
+    ] },
+
+    { advance_text = "Open it.", blocks = [
+      { type = "image", props = { file = "scenes/marsh_envelope.jpg", description = "A woman's hands unfolding a scrawled half-sheet under a dim bar counter light.", search_queries = ["hands unfolding note under dim light", "scrawled handwritten warning note close up"] } },
+      { type = "paragraph", content = "Inside, half a sheet folded twice. His hand — small, bitten down, pressed hard enough to score through the paper." },
+    ] },
+
+    # the warning — the payoff, in his written voice
+    { advance_text = "Read it.", blocks = [
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "The name I owe you is VANCE. Not the company — the man over Mercer. Your leash runs all the way up to him. Whatever you think you're climbing toward, he's holding the other end of it. Stop pulling where he can feel it. — M." },
+    ] },
+
+    { advance_text = "Fold it up.", blocks = [
+      { type = "paragraph", content = "She reads it twice. Rue watches her not react to whatever it is." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "Bad news?" },
+      { type = "dialog", props = { speaker = "player" }, content = "No. Nothing at all." },
+    ] },
+
+    # terminal beat — no advance_text; renders after the last click (interior close, exempt from mode)
+    { blocks = [
+      { type = "paragraph", content = "She's out the side door before the words settle. Up the alley stair, into the cold, the half-sheet a hard fold against her ribs." },
+      { type = "paragraph", content = "Somewhere at the top of the city a man she has never seen holds the other end of her. Now she has his name." },
+    ] },
+
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Into the night 🌙"
+targetType = "location"
+locationId = "underworld_strip"
+time_progression_minutes = 10
+flagEffects = [{ targetType = "player", flag = "marsh_warned", op = "set" }]
+effects     = [{ targetType = "npc", npcId = "npc_marsh", trait = "relation", op = "add", value = 1 }]

@@ -1,0 +1,13 @@
+{
+  "eval_id": 3,
+  "eval_name": "questcard",
+  "prompt": "For the game at games/vesper, author the Quests-page cards for a NEW three-rung arc with the dockhand Sol: she has to earn his trust at the Undertow bar over several evenings before he'll take her to the salvage yard. Rung 1 = get him talking; rung 2 = get him drinking with her; rung 3 = he takes her to the yard. His relation meter is `npc_sol.relation`. Output ONLY the `[[quest_cards]]` TOML blocks (the whole ladder) to the output file \u2014 no canvases, no prose scenes.",
+  "assertions": [
+    "Uses the [[quest_cards]] table (not v1 [[quests]])",
+    "Every live rung's goals[].label names a PLACE and a concrete VERB (a walkthrough line)",
+    "A schedule-gated step also names its time window",
+    "A meter-gated rung tells the player which repeatable raises the meter (feeder rule)",
+    "The top rung cannot render blank (flag goal / ready_canvas / terminal)",
+    "No version=\"1.0\" pasted onto when/goals"
+  ]
+}

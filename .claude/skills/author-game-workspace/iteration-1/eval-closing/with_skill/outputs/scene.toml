@@ -1,0 +1,91 @@
+# cap_renner_confront — Wren drops the slow game and confronts Renner in the shut office,
+# pressing him for what he kept from the burn-site contract. Charged exchange, dripped one
+# line at a time (cascade), dialogue-dominant. CLOSES on Wren's private thought (a player
+# thought_bubble folded into the cascade as its terminal beat), then she leaves.
+# Third-person register (Vesper: Wren is watched, not inhabited). Lane-4 auto-fire one-shot.
+[[canvases]]
+id          = "cap_renner_confront"
+name        = "In the office"
+description = "Auto-fire one-shot. Wren confronts Renner in the shut depot office and extracts the burn-site paperwork he kept. Cascade played line-by-line; ends on her private thought before she leaves. Gated renner_confronted is_false + npc_renner.corruption>=30 (the cracking band, so the leverage exists) + cover equipped. SETS renner_confronted. Third person, dialogue-dominant."
+
+[canvases.trigger]
+location      = "renner_depot"
+requires_npc  = "npc_renner"
+trigger_mode  = "manual"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "renner_confronted", operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 30 },
+  { type = "clothing_item", item_id = "cover_dockhand", operator = "equipped" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "In the office"
+blocks = [
+  { type = "image", props = { file = "scenes/renner_office.jpg", description = "A cramped glassed-in warehouse back office; a heavyset man at a paper-piled desk, a woman standing over him refusing to sit.", search_queries = ["warehouse office confrontation man woman", "small office desk man seated woman standing"] } },
+  { type = "paragraph", content = "She sets the invoices face-down and doesn't pick the soft voice back up." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "What. You've got a face on you." },
+        { type = "paragraph", content = "She stays standing. She's never once made him look up at her, and she does it now." },
+    ] },
+    { advance_text = "Ask him straight.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "The site out on the flats. The one that burned. Your gear was all through it — I've seen the manifests. So who placed the order." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "...Get out of my office." },
+    ] },
+    { advance_text = "Don't step back.", blocks = [
+        { type = "paragraph", content = "She doesn't move. He's the one who breaks first — looks at the window instead of at her." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "You think I don't know a setup when it sits down at my desk? I've had my whole life taken by people cleaner than you." },
+    ] },
+    { advance_text = "Use it.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "You could throw me out. You won't. We both know why you won't." },
+        { type = "paragraph", content = "His jaw works. Whatever she's spent these weeks building in him is holding the door shut better than she could." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "...that's a filthy thing to do to a man." },
+    ] },
+    { advance_text = "Wait him out.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "It wasn't the site that hired the order. It came through a broker. A middle-man. I never once met the buyer." },
+        { type = "paragraph", content = "Something goes out of him as he says it, like a weight he's carried too long by himself." },
+        { type = "dialog", props = { speaker = "player" }, content = "The broker isn't the whole of it. What did you keep." },
+    ] },
+    { advance_text = "Call the lie.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "I didn't keep anything. Threw the lot out years ago." },
+        { type = "paragraph", content = "It's a lie. His eyes cut to the crate in the corner before he can stop them." },
+        { type = "dialog", props = { speaker = "player" }, content = "No you didn't." },
+    ] },
+    { advance_text = "Make him give it up.", blocks = [
+        { type = "paragraph", content = "He digs in the crate, comes back with a folder gone soft at the corners, and holds it a second too long." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Account numbers. The order. The man who signed for it. All of it. Take it and go." },
+    ] },
+    { advance_text = "Take the folder.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Cain took my business with what's in there. I kept it to prove I was somebody once. Now I'm handing it to a stranger." },
+        { type = "dialog", props = { speaker = "player" }, content = "I'm not a stranger. I'm the only one who ever came back." },
+        { type = "paragraph", content = "It's true in a way that isn't kind. His shoulders come down." },
+    ] },
+    { advance_text = "Hold his eyes.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "You were never the help. Were you." },
+        { type = "paragraph", content = "Not a question. Her pulse goes loud; she keeps her face empty, the way she keeps it for Mercer." },
+        { type = "dialog", props = { speaker = "player" }, content = "I did the filing." },
+    ] },
+    { advance_text = "Turn for the door.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "She has what she came for, and a man behind her who'd give her the rest for a word. She files that where she files everything she can't use yet. The folder's warm under her arm — the only warm thing she takes out the door." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the folder and go."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "renner_depot"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "renner_confronted", op = "set" },
+]
+effects = [
+  { targetType = "npc", npcId = "npc_renner", trait = "relation", op = "add", value = 2 },
+]

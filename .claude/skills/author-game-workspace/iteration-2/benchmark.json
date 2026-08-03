@@ -1,0 +1,43 @@
+{
+  "skill_name": "author-game",
+  "iteration": 2,
+  "baseline": "skill-snapshot-v2 (frozen after arousal axis, before the mopoga doctrine pass)",
+  "configs": {
+    "with_skill": {
+      "label": "NEW (post doctrine pass)",
+      "regression_set": {
+        "pass": 9,
+        "total": 9,
+        "pct": 100
+      },
+      "doctrine_set": {
+        "pass": 19,
+        "total": 19,
+        "pct": 100
+      },
+      "overall": {
+        "pass": 28,
+        "total": 28,
+        "pct": 100
+      }
+    },
+    "old_skill": {
+      "label": "BASE (pre doctrine pass)",
+      "regression_set": {
+        "pass": 8,
+        "total": 9,
+        "pct": 89
+      },
+      "doctrine_set": {
+        "pass": 10,
+        "total": 19,
+        "pct": 53
+      },
+      "overall": {
+        "pass": 18,
+        "total": 28,
+        "pct": 64
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "expectations": [
+    {
+      "text": "States the CHARGE: fantasy in a sentence with kink areas named",
+      "passed": false,
+      "evidence": "one-line fantasy is 'she finally reads it' \u2014 a plot reveal, not a desire; no kink areas named"
+    },
+    {
+      "text": "States the LADDER including the act it ENDS on",
+      "passed": true,
+      "evidence": "4-beat build order (flight \u2192 safehouse \u2192 file opened \u2192 thread forward) \u2014 but the terminal beat is a SOLO file-reveal with no sex"
+    },
+    {
+      "text": "Names the PERSON + the one trait that makes the corruption theirs",
+      "passed": false,
+      "evidence": "the beat runs on no seduction target; Bastien (the erotic figure) is deferred entirely to Fork C, 'the arc, not this chunk' \u2014 his one trait is not named"
+    },
+    {
+      "text": "Names the DEPOSIT (meter/flag/quest/growth state)",
+      "passed": true,
+      "evidence": "flight_done flag, re-enables kess_1b_open + activity_kess_cot, sets the 1b spine on the Quests page"
+    },
+    {
+      "text": "Names the COST (fail-state form, or reasoned 'nothing')",
+      "passed": true,
+      "evidence": "has a Cost/risk section \u2014 but it's scope/save-safety/a correctness-fix note, not an in-fiction stake on the beat"
+    },
+    {
+      "text": "Concrete editable prose, not a menu of abstractions",
+      "passed": true,
+      "evidence": "very concrete, with a worked Tier-3 reveal sample and three forks \u2014 arguably MORE thorough than the new one"
+    },
+    {
+      "text": "Passes the heat test: erotic trajectory visible from the pitch alone",
+      "passed": false,
+      "evidence": "plot-forward: the sex is explicitly deferred to '1b proper, the chunks after this one'; the pitched chunk's payload is a reveal, not heat \u2014 the exact 'plot pitch' anti-pattern pitching.md names"
+    }
+  ]
+}

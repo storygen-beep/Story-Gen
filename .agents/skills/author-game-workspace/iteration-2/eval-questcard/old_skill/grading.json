@@ -1,0 +1,34 @@
+{
+  "expectations": [
+    {
+      "text": "Uses the [[quest_cards]] table (not v1 [[quests]])",
+      "passed": true,
+      "evidence": "4 [[quest_cards]] blocks; 0 [[quests]]"
+    },
+    {
+      "text": "Every live rung's goals[].label names a PLACE and a concrete VERB (a walkthrough line)",
+      "passed": false,
+      "evidence": "R1 label 'Get the dockhand talking'; R2 'Get him drinking with you' \u2014 abstract, NO place/window in the label. The where/when lives only in `tip`, which the sidebar next-row never renders (the exact Batch-A defect)"
+    },
+    {
+      "text": "A schedule-gated step also names its time window",
+      "passed": false,
+      "evidence": "no window in any goal label"
+    },
+    {
+      "text": "A meter-gated rung tells the player which repeatable raises the meter (feeder rule)",
+      "passed": true,
+      "evidence": "tips describe the feeder ('take the stool by Sol... a few nights')"
+    },
+    {
+      "text": "The top rung cannot render blank (flag goal / ready_canvas / terminal)",
+      "passed": true,
+      "evidence": "R3 is a flag rung (sol_took_yard); a flavor end card follows"
+    },
+    {
+      "text": "No version=\"1.0\" pasted onto when/goals",
+      "passed": true,
+      "evidence": "0 occurrences"
+    }
+  ]
+}

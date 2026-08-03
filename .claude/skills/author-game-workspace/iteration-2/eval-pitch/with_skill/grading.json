@@ -1,0 +1,39 @@
+{
+  "expectations": [
+    {
+      "text": "States the CHARGE: fantasy in a sentence with kink areas named",
+      "passed": true,
+      "evidence": "'the captive walks back in as the operator'; areas named: captor/captive power reversal, coerced-composure/dubcon; ceiling handled (carried from Captivity, re-open flagged)"
+    },
+    {
+      "text": "States the LADDER including the act it ENDS on",
+      "passed": true,
+      "evidence": "5 rungs, ending 'on her walking out having let him put a hand back on what he used to own \u2014 and calling it the price of the job'"
+    },
+    {
+      "text": "Names the PERSON + the one trait that makes the corruption theirs",
+      "passed": true,
+      "evidence": "Bastien; the trait: 'incurious about her defiance' \u2014 he never needed her to break, so her composure amuses rather than threatens him"
+    },
+    {
+      "text": "Names the DEPOSIT (meter/flag/quest/growth state)",
+      "passed": true,
+      "evidence": "opens npc_bastien on-screen, sets 1b thread flags (controller trade in motion, core still Failing \u2192 Kess still required), primes the build-file read; advances used\u2192user"
+    },
+    {
+      "text": "Names the COST (fail-state form, or reasoned 'nothing')",
+      "passed": true,
+      "evidence": "form = danger (Chairman Vance inbound; being seen dealing in the Reach), plus the personal cost 'authored, not implied'"
+    },
+    {
+      "text": "Concrete editable prose, not a menu of abstractions",
+      "passed": true,
+      "evidence": "includes a worked RTS-flat opening in register; forks offered as fully-written A1/A2/B1/B2 with a recommendation"
+    },
+    {
+      "text": "Passes the heat test: erotic trajectory visible from the pitch alone",
+      "passed": true,
+      "evidence": "the reversal IS the pitch; sex is the method not a deferred reward"
+    }
+  ]
+}

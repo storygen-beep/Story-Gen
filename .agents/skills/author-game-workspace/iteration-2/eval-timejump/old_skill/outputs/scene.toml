@@ -1,0 +1,97 @@
+# ═══ cap_marsh_stairwell — Lane 4 capstone (Type A, linear) ═══════════════════
+# Wren corners Marsh in the back stairwell of the House and presses him beat by beat
+# until he caves; TWO DAYS LATER he leaves a warning envelope with Rue. The time-jump
+# is folded INTO the one cascade as its own advance_text beat (cascade-must-be-last).
+# Third person (register.person = "third"); dialogue-dominant Tier-3 (12 beats).
+# Auto-fires once at The House when she's on the hunt (hunt_lead) and hasn't cornered
+# him yet; sets marsh_cornered (self-gate) + marsh_warned (the payload she now carries).
+[[canvases]]
+id          = "cap_marsh_stairwell"
+name        = "The stairwell"
+description = "Lane 4 capstone, pri 9. Wren corners Marsh on the back stairs of The House and extracts a cave, then a two-days-later envelope. One cascade, 12 beats, dialogue-dominant. Gated hunt_lead is_true + marsh_cornered is_false; SETS marsh_cornered + marsh_warned. Exit -> underworld_strip (out into the night)."
+
+[canvases.trigger]
+location      = "underworld_brothel"
+trigger_mode  = "manual"
+is_repeatable = false
+is_active     = true
+priority      = 9
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "hunt_lead", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "marsh_cornered", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "corner"
+name = "The stairwell"
+blocks = [
+  { type = "image", props = { file = "scenes/marsh_stairwell.jpg", description = "Wren blocking the one way down on a dim stairwell landing; Marsh a step above, checking the exit before her face.", search_queries = ["dim concrete stairwell landing figure noir", "back stairwell confrontation shadow dim light"] } },
+  { type = "paragraph", content = "The back stairwell of the House. Marsh on the landing above her, and the one way down is where she's standing. He checks the stairs before he checks her face — careful, even now." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Doss. Rourke. You're the third name off that job — and the only one still breathing." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "I don't do business on stairs. I like knowing where the doors are before I open my mouth." },
+        { type = "paragraph", content = "She doesn't step out of his door. He reads the whole answer in it and stops smiling." },
+    ] },
+    { advance_text = "Name the dead.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Doss and Rourke went the same night — them and everyone in their houses. Not Renner. So who's careful enough for that?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "You want that name for free, on a staircase, from the one man who stayed alive by never saying it. Hear yourself." },
+    ] },
+    { advance_text = "Close the distance.", blocks = [
+        { type = "paragraph", content = "She takes the step up. Slow. Close enough that the exit he keeps measuring stops being a number he can reach." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "There it is. I wondered how long the company would send someone who still asks nicely." },
+    ] },
+    { advance_text = "Press him.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "I'm not company down here. Down here I'm just the thing between you and the street. Talk to that." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "Careful's the only reason I'm old. You lean on me, you're leaning on what leans on me." },
+        { type = "paragraph", content = "Something moves under the careful, then. Not the words — the sweat on him." },
+    ] },
+    { advance_text = "Push.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "What leans on you." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "No. No, that one you don't get to say out loud. Not here, not to me, not if you want to keep the face you've got." },
+        { type = "paragraph", content = "Fear, clean and specific. He's not afraid of her. He's afraid of being seen talking to her." },
+    ] },
+    { advance_text = "Make it cost.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Then here's the trade. Give me something true, or I stand here until your Sunday girl comes up and finds a fixer who talks to Vance's people." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "That's ugly." },
+        { type = "dialog", props = { speaker = "player" }, content = "It's Tuesday. I've got all night." },
+    ] },
+    { advance_text = "Wait.", blocks = [
+        { type = "paragraph", content = "He looks at the stairs one more time. The careful man doing the last careful math, and coming up short." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "Not here. I'll leave you something — at the House, with Rue, where I'm just another regular. Two days. Then we never had this." },
+    ] },
+    { advance_text = "Let him go.", blocks = [
+        { type = "paragraph", content = "She steps aside. He goes down past her without turning his back, the way a careful man takes stairs he's been threatened on." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "You didn't get a name off me. Remember that. Whatever's in it — you found it. Not me." },
+    ] },
+    { advance_text = "Two days later.", blocks = [
+        { type = "paragraph", content = "Two days. Sunday, the House loud below. Rue catches her at the door with a folded envelope and a look that says she didn't read it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "He left it Thursday. Said you'd know. I don't want it in my house past tonight." },
+    ] },
+    { advance_text = "Open it.", blocks = [
+        { type = "paragraph", content = "No name on it. Inside, one sheet, folded twice, in a hand that pressed hard enough to score the paper." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "You wanted who's careful enough to erase two crews and leave a witness. Nobody is. That's the point — he doesn't have to be." },
+    ] },
+    { advance_text = "Read it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "The crew you want is down past the market. Go, if you like. They're not what's got you." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "He owns the House. He owns the bar. He owns me. He's had your name longer than you've had his — stop pulling, or the thread pulls you." },
+    ] },
+    { advance_text = "Put it away.", blocks = [
+        { type = "paragraph", content = "She reads it twice. Then she folds it back along Marsh's creases and puts it away, somewhere the cradle can't reach." },
+        { type = "paragraph", content = "Then she goes down the stairs and out, into the dark off the strip — carrying a name she still hasn't been given." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Out into the night."
+flagEffects = [
+  { targetType = "player", flag = "marsh_cornered", op = "set" },
+  { targetType = "player", flag = "marsh_warned", op = "set" },
+]
+targetType               = "location"
+locationId               = "underworld_strip"
+time_progression_minutes = 15

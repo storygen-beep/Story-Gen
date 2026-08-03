@@ -1,0 +1,19 @@
+{
+  "expectations": [
+    {
+      "text": "check_cascade_order.py exits 0",
+      "passed": true,
+      "evidence": "script run: exit 0"
+    },
+    {
+      "text": "Does not over-apply the cascade mechanism to a short static ambient",
+      "passed": true,
+      "evidence": "29 lines, ZERO cascades \u2014 plain prose + exit, correct for a quiet memory-flicker ambient"
+    },
+    {
+      "text": "Parses as valid TOML",
+      "passed": true,
+      "evidence": "tomllib.load ok"
+    }
+  ]
+}

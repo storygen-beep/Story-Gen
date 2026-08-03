@@ -1,0 +1,49 @@
+# amb_burned_yard_boarded — Lane-2 solo memory texture (random ambient at the Waterfront, night).
+# She passes the burned yard after it's been cleared and boarded — quiet, a flicker of memory, she
+# moves on. Solo, so narration is the right mode (rts-flat-prose Rule 4 exemption — no one to speak to).
+# Third person (register.person). Pure texture: sets nothing. Gated yard_depth gte 3 so "boarded and
+# quiet" is TRUE — the yard only reads this way once she's been all the way to the back and there's
+# nothing left in it to guard.
+[[canvases]]
+id          = "amb_burned_yard_boarded"
+name        = "The boarded yard"
+description = "Lane-2 random ambient at the Waterfront (night). Solo memory texture — she passes the boarded-up burned yard after the crawl is done. Pure texture (sets nothing). Gated yard_depth gte 3."
+
+[canvases.trigger]
+location             = "the_waterfront"
+trigger_mode         = "random"
+chance               = 0.2
+max_triggers_per_day = 1
+is_repeatable        = true
+is_active            = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 3 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "20:00"
+end_time   = "23:59"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The boarded yard"
+blocks = [
+  { type = "image", props = { file = "scenes/amb_burned_yard_boarded.jpg", description = "A boarded-up burned lot at night behind fresh plywood and a downed chain fence, dark and empty, no lights.", search_queries = ["boarded up burned lot night", "plywood fence dark empty yard night"] } },
+  { type = "paragraph", content = "Three streets past the depot the burned yard sits behind fresh plywood — the gap in the fence closed up, the torch-line gone, Renner's men called off it at last. Boarded and quiet. Nothing moves back there now." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Look at it.", blocks = [
+        { type = "paragraph", content = "She'd gone over that fence in the dark, past the torches, all the way to the back of it — the strongroom, the thing the men stood around. She put her hands on every part of it. Nothing left in there she didn't already take." },
+    ] },
+    { advance_text = "Move on.", blocks = [
+        { type = "paragraph", content = "Nothing to work here anymore. The quiet holds a beat longer than it needs to. Then she turns from it and keeps to the dark." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Walk on."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_waterfront"

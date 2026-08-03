@@ -1,0 +1,11 @@
+# Targets that SHOULD produce clean_completion on zaras-school-life when
+# the daemon is anchored at the "Room" passage (post-Phase-0 after
+# advancing through the intro dream to wakeup_dream → Get out of bed).
+#
+# Every entry is a single-hop reachable passage with unambiguous click
+# text — the static graph can plan a path and the runtime should execute
+# it deterministically. If the harness reports anything other than 100%
+# clean on this file, the harness itself has a bug (peek parse, click
+# classification, or snap/restore leak).
+Wardrobe
+Living room

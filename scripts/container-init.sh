@@ -1,7 +1,11 @@
-#!/usr/bin/env bash
+# It is for claude cloud container to run this script to install the dependencies for the project.
+# Not for local agents
+
+
+# !/usr/bin/env bash
 #
 # container-init.sh — make a fresh container able to BUILD games.
-#
+#   
 # Installs the two external binaries this repo cannot work without:
 #
 #   ffmpeg/ffprobe  find-media's only hard dependency. Without it video_frames.py exits 3
@@ -243,3 +247,6 @@ fi
 printf '\n  NOT READY — fix the MISSING rows above before building or running find-media.\n'
 printf '  A build without Tweego now exits non-zero and writes nothing (by design).\n\n'
 exit 1
+
+
+

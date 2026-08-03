@@ -1,0 +1,206 @@
+# /find-media - Find and Download Missing Media
+
+## Purpose
+
+Automatically find and download missing media assets for a game by:
+1. Reading TOML and detecting content type (SFW vs NSFW) from search_queries
+2. Routing to appropriate sources (GIPHY/Tenor for SFW, Google filtered for NSFW)
+3. Evaluating matches and downloading via API
+
+## Usage
+
+```
+/find-media [game_folder]
+```
+
+**Examples:**
+```
+/find-media two_weeks
+/find-media step_sister_wedding
+```
+
+**With specific TOML path:**
+```
+/find-media --toml apps/game_generation/games_toml_files/weekend_together.toml --game weekend_together
+```
+
+---
+
+## What This Command Does
+
+### Phase 1: Load Game Context
+1. Read the TOML file (`[game_folder]/[game_folder].toml`)
+2. Extract all media blocks that have `search_queries` defined
+3. **Detect content type** (SFW/NSFW) from keywords in search_queries and descriptions
+
+### Phase 2: Identify Missing Media
+1. Scan the `[game_folder]/media/` folder for existing files
+2. Use extension-agnostic matching (if TOML says `.mp4`, also check for `.gif`, `.webm`)
+3. Build list of missing media items
+4. Report: "Found X media items, Y missing (Z SFW, W NSFW)"
+
+### Phase 3: Search and Download (for each missing item)
+
+**Content Type Detection:**
+- Analyzes search_queries for NSFW keywords (sex, missionary, cowgirl, oral, etc.)
+- Routes SFW content to GIPHY/Tenor
+- Routes NSFW content to Google with site filters
+
+**SFW Search Path:**
+1. GIPHY → Tenor → Unsplash/Pexels
+2. Max 5 attempts before flagging for review
+
+**NSFW Search Path:**
+1. Google `{query} site:redgifs.com gif`
+2. Google `{query} site:pornhub.com gif`
+3. Direct RedGIFs search
+4. Handle age gates automatically
+5. Max 5 attempts before flagging for review
+
+**Evaluate & Download:**
+- Use sequential thinking to assess match quality
+- If confidence >= 80%: Auto-download via API
+- If confidence < 80%: Present top 3 options for human selection
+
+---
+
+## Content Type Detection
+
+**NSFW Keywords** (routes to Google filtered):
+```
+sex, fuck, cum, creampie, pussy, cock, blowjob, oral
+missionary, cowgirl, doggy, spooning, riding (sexual)
+thrusting, orgasm, penetration, naked, nude
+```
+
+**SFW Content** (routes to GIPHY/Tenor):
+```
+hug, embrace, kiss, romantic, intimate
+kitchen, dinner, confession, crying
+```
+
+---
+
+## Multi-Source Strategy
+
+| Content Type | Priority 1 | Priority 2 | Priority 3 |
+|-------------|------------|------------|------------|
+| SFW GIFs | GIPHY | Tenor | Google Images |
+| SFW Images | Unsplash | Pexels | Google Images |
+| NSFW | Google (site:redgifs.com) | Google (site:pornhub.com) | RedGIFs direct |
+
+---
+
+## Required Tools
+
+This command uses:
+- **browsermcp** (`mcp__browsermcp__*`): Web browsing for all sources
+- **sequential-thinking** (`mcp__sequential-thinking__*`): Evaluating media fit
+- **Read/Glob/Grep**: File operations
+- **Bash**: API calls and file checks
+
+## Prerequisites
+
+1. **Django server running**: `python manage.py runserver`
+2. **browsermcp MCP server connected**
+3. **sequential-thinking MCP server connected**
+
+---
+
+## Example Session
+
+```
+> /find-media two_weeks
+
+Reading two_weeks/two_weeks.toml...
+Found 45 media items with search_queries.
+Analyzing content types: 15 SFW, 30 NSFW
+Checking two_weeks/media/ folder...
+Found 33 existing files, 12 are missing (4 SFW, 8 NSFW)
+
+Processing missing media:
+
+[1/12] scenes/scene_arrival.gif (SFW)
+  Search: "couple reunion hug emotional"
+  → Routing to GIPHY...
+  → Found on GIPHY: https://giphy.com/gifs/...
+  → Evaluating fit... 87% confidence
+  → Downloading... SUCCESS
+  → Saved to: two_weeks/media/scenes/scene_arrival.gif
+
+[2/12] scenes/scene_first_night.mp4 (NSFW)
+  Search: "missionary first time emotional"
+  → Detected NSFW keywords: "missionary"
+  → Routing to Google (site:redgifs.com)...
+  → Found result, clicking...
+  → Age gate detected, clicking "I am 18+"...
+  → Evaluating fit... 82% confidence
+  → Downloading... SUCCESS
+  → Saved to: two_weeks/media/scenes/scene_first_night.gif
+
+[3/12] scenes/scene_rare_moment.gif (SFW)
+  Search: "specific rare scene"
+  → Tried GIPHY, Tenor, Unsplash - best match 65%
+  → Please select:
+    1. [URL] - Option A (65%)
+    2. [URL] - Option B (60%)
+    3. [URL] - Option C (55%)
+  > User selects: 1
+  → Downloading... SUCCESS
+
+...
+
+Complete! Downloaded 10/12 items. 2 items flagged for manual search.
+```
+
+---
+
+## TOML Format Expected
+
+Media blocks should have `search_queries`:
+
+**SFW Example:**
+```toml
+{ type = "image", props = {
+    file = "scenes/scene_arrival.gif",
+    alt = "First embrace - a hug that lingers",
+    search_queries = ["couple reunion hug emotional", "warm embrace doorway greeting"]
+} }
+```
+
+**NSFW Example:**
+```toml
+{ type = "video", props = {
+    file = "scenes/scene_first_night.mp4",
+    description = "First time sex - missionary, slow and emotional",
+    search_queries = ["missionary first time emotional", "romantic bedroom sex"]
+} }
+```
+
+---
+
+## API Endpoint Used
+
+Same endpoint as Chrome extension:
+
+```
+POST http://localhost:8000/api/v1/dev/media-capture
+Content-Type: application/json
+
+{
+  "url": "https://media.giphy.com/media/xxx/giphy.gif",
+  "scene_id": "scenes/scene_arrival",
+  "game": "two_weeks"
+}
+```
+
+---
+
+## Tips
+
+- **Batch processing**: The command processes all missing media sequentially
+- **Resume**: If interrupted, re-run the command - it skips already downloaded files
+- **Manual override**: For low-confidence matches, you can provide your own URL
+- **Rate limits**: The command waits 1-2 seconds between requests to avoid being blocked
+- **Age gates**: The agent automatically clicks through "I am 18+" buttons
+- **Alternate sources**: If one source fails, it automatically tries others

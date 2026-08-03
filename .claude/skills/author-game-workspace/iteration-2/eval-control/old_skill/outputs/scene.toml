@@ -1,0 +1,48 @@
+# ── ambient_burned_yard_night — Lane 2 quiet-memory ambient on the nighttime dockside approach to the
+# underworld. Solo (no NPC in the beat → narration-only is the legit Rule-4 exemption). Third-person
+# register (Vesper's declared person). Fires on entry to the_waterfront at night (20:00–23:59, one window,
+# no midnight wrap), low chance, once/day — kept scarce. She passes Renner's boarded-up burned yard, the old
+# smoke-fault flickers (the established involuntary-memory motif — her surface read only, NO narrator
+# backstory, no name on it), and she moves on toward the gate. ~37–39 words/beat, body carries the weight. ──
+[[canvases]]
+id          = "ambient_burned_yard_night"
+name        = "Past the burned yard"
+description = "Lane 2 ambient at the_waterfront, night window. Wren passes the boarded-up burned yard on the way down to the underworld; a flicker of the old smoke-memory; she moves on. Quiet, no NPC, no escalation. Priority 2, chance 0.2, once/day."
+
+[canvases.trigger]
+location             = "the_waterfront"
+trigger_mode         = "random"
+chance               = 0.2
+is_repeatable        = true
+max_triggers_per_day = 1
+priority             = 2
+is_active            = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "20:00"
+end_time   = "23:59"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Past the burned yard"
+blocks = [
+  { type = "image", props = { file = "scenes/yard_boarded_night.jpg", description = "A burned-out fenced lot at night, boarded over and dark, no lights on it, seen from the street.", search_queries = ["boarded up burned warehouse lot night", "torched fenced yard dark abandoned"] } },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Slow up.", blocks = [
+        { type = "paragraph", content = "Three streets past the depot the burned yard sits behind its boards — a black shape in a black lot, torched to the slab. Renner's men are off it now; nothing left worth a light. Nobody turns her back tonight." },
+    ] },
+    { advance_text = "Let it go.", blocks = [
+        { type = "paragraph", content = "Something catches low in her chest as she comes level with the fence — not the yard. Smoke. Not tonight's; older, the kind that doesn't wash out of a person. A bigger hand, half a sound, no name on it." },
+    ] },
+    { blocks = [
+        { type = "paragraph", content = "She reaches after it and it's already going, out like a breath let go. Just boards, the dark behind them, the cold off the water. She puts it at her back and walks on toward the gate." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Move on."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_waterfront"

@@ -1,0 +1,77 @@
+# ── The stairwell press — Wren corners Marsh, drains what he knows, gets his warning ──
+# Auto-fire capstone (Lane 4), pri 9, one-shot, @The House. Gated marsh_warned is_false (self-guard).
+# A tense beat-by-beat confrontation cascade: she blocks the stair, presses the careful fixer through
+# five rungs until he caves and names the buyer — then a "two days later" BRIDGE (folded into the same
+# cascade as an advance beat, per the cascade-last rule) delivers his envelope at the House; she reads
+# the scrawled warning (his written voice, carried as his own words) and slips out into the night. The
+# closing interior + the slip-out are the cascade's TERMINAL beat (no advance_text) so nothing renders
+# below the reveal link and the exit splices once. Third-person narration (Vesper's register); dialog
+# carries the confrontation. SETS marsh_warned on exit.
+[[canvases]]
+id          = "cap_marsh_stairwell"
+name        = "Press Marsh on the stair"
+description = "Standalone capstone. Wren catches the fixer Marsh in the House stairwell and presses him beat by beat for who's been asking after her; he stonewalls, she twists his one soft spot (his exact-to-the-hour Sunday), and he caves — a patient buyer who pays to make the bringer disappear. Two days later (bridge folded into the cascade) he leaves an envelope at the House and vanishes; she reads his scrawled warning and takes the far stair out. Dialog-carried, RTS-flat. SETS marsh_warned."
+[canvases.trigger]
+location      = "underworld_brothel"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "marsh_warned", operator = "is_false" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Press Marsh on the stair"
+blocks = [
+  { type = "image", props = { file = "scenes/marsh_stairwell.jpg", description = "A wary little man cornered on a dim tenement stairwell by a woman blocking the way down.", search_queries = ["man cornered dim stairwell tense night", "woman blocking man narrow stairwell low light"] } },
+  { type = "paragraph", content = "She catches Marsh on the stairs between floors, where the House's music drops to a hum and there's only one way down. She puts her back to it." },
+  # ONE cascade, exit LAST. beat[0] = no advance (renders with the lead). The "two days later" bridge is an
+  # advance beat; the closing interior + slip-out is the terminal no-advance beat. See toml-gotchas "cascade must be last".
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Somebody's been in here asking after me. A face, not a name — coin down at the bar for a description. You hear every step on this stair, Marsh. You heard him." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "I hear my own booking and nothing past it. Sunday, the far room, the one girl. That's the whole of what a careful man lets himself know. I'd like the stair." },
+    ] },
+    { advance_text = "Don't move.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "You check a room's exits before you check the girl. Every time. A man like that clocks who's new in a house this small the second they walk in. So you clocked him. Give me him." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "Careful men stay careful by not answering questions on stairwells. Whatever you think I saw, I was looking the other way." },
+    ] },
+    { advance_text = "Name it for him.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Company cut. Clean shoes on a wet floor. Paid for a girl who runs cores and didn't flinch at the number. That's not a john, and you knew it before I did." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "...Then you saw him too. Good. You don't need me, and I get to keep not knowing you." },
+    ] },
+    { advance_text = "Twist it.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "You come here exact to the hour, one night a week. The whole strip could set a clock by you. That's a careful man's one soft spot — and the wrong people would pay to learn your Sunday." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "...You'd sell my night to save your own." },
+    ] },
+    { advance_text = "Close the last door.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "I'd trade it. There's a difference, and you're smart enough to hear it. The name, Marsh. I've got all night and nowhere to be. You've got a booking and a habit. One of us runs out first." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "...He didn't give a name. That's what should scare you — the ones who don't need to. He's a buyer. Patient. Pays to have a thing brought to him quiet, and pays again to make the bringer disappear after." },
+    ] },
+    { advance_text = "And while he waits?", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "And while he waits?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "Watches. Learns your Sundays, your stair, the door you sleep behind. He's in no hurry — which means he already thinks he owns you and just hasn't collected. That's everything I have, and it's more than I should've said." },
+    ] },
+    { advance_text = "Two days later.", blocks = [
+        { type = "paragraph", content = "Two days later there's an envelope waiting for her at the House — her name across it in a fixer's cramped, careful hand, left with the madam, no messenger, no word. Marsh doesn't come that Sunday. He doesn't come again." },
+    ] },
+    { advance_text = "Open it.", blocks = [
+        { type = "image", props = { file = "scenes/marsh_note.jpg", description = "A woman's hands breaking the seal on an envelope in a dim stairwell, a scrawled note inside.", search_queries = ["hands opening sealed envelope dim light", "scrawled handwritten warning note close up"] } },
+        { type = "paragraph", content = "She breaks the seal on the same stair where she cornered him, standing where he stood." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "Wren — they have your face, not your name. Not yet. The buyer's real and he's already bought the answer to where you sleep. Don't work Sunday. Don't take the near stair. Get off the strip before the next one asks nicer than I did. Burn this. — M." },
+    ] },
+    { blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Two days ago he'd have gone in the ground before he wrote her name on anything. Now he's run, and left her a trail — the one thing a careful man never leaves. Which means it's already worse than the note lets itself say." },
+        { type = "paragraph", content = "She folds the note into her fist and doesn't burn it. Then she takes the far stair down — not the one he warned her off — and lets the House lose track of her in the dark." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Into the night."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_brothel"
+flagEffects = [
+  { targetType = "player", flag = "marsh_warned", op = "set" },
+]

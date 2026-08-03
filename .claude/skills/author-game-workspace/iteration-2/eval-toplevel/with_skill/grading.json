@@ -1,0 +1,34 @@
+{
+  "expectations": [
+    {
+      "text": "Declares WHAT COMPOUNDS (a growing owned thing with content-unlocking states) or 'nothing' on purpose",
+      "passed": true,
+      "evidence": "'### What compounds \u2014 the house': the Hale House grows through states; 'Not a dashboard \u2014 a set of states'"
+    },
+    {
+      "text": "Each growth state opens content, not just a number",
+      "passed": true,
+      "evidence": "states unlock rooms/people/scenes (the east wing, the family turning), explicitly deferring the management test to \u00a71F"
+    },
+    {
+      "text": "Names the fail-state FORM (danger/debt/deadline/decay) or 'no-failure' + cost",
+      "passed": true,
+      "evidence": "'failure EXISTS, three forms (this world has teeth)': DEADLINE (Hale's decline clock bites) + DECAY (neglect-keyed per-NPC relation cooling, skips interacted) + more"
+    },
+    {
+      "text": "Covers the standing Step-2 spine (cascade/double-lock, stats, desire ladder, economy, frontier, machine)",
+      "passed": true,
+      "evidence": "361 lines; all sections present incl. \u00a77 machine and \u00a78 declarations"
+    },
+    {
+      "text": "Does not collapse the endgame into management",
+      "passed": true,
+      "evidence": "explicitly 'not a dashboard'; endgame cashes out as content"
+    },
+    {
+      "text": "BONUS (Batch D): declares the cheat page's diegetic skin",
+      "passed": true,
+      "evidence": "'Hale's master keyring... presents as keys you shouldn't have yet' \u2014 the \u00a78 cheat-skin declaration"
+    }
+  ]
+}

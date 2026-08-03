@@ -1,0 +1,27 @@
+{
+  "skill_name": "author-game",
+  "note": "Eval set for the cascade-order doctrine gap. Each prompt asks for a self-contained [[canvases]] TOML block (not a mutation of the real game). The discriminating check: does the author fold a mid-scene bridge / closing beat INTO the cascade (correct), or leave it as a trailing sibling block after the cascade (the [content][link] defect)? Graded objectively by scripts/check_cascade_order.py run on the produced block.",
+  "evals": [
+    {
+      "id": 0,
+      "name": "timejump",
+      "prompt": "Author a NEW capstone scene for the game at games/vesper as a single self-contained TOML `[[canvases]]` block (trigger + one node + exit_block). The scene: Wren corners the fixer Marsh in a stairwell and presses him for what he knows — a tense back-and-forth the player advances beat by beat. He finally caves. Then, TWO DAYS LATER, he leaves an envelope for her at the House; she takes it, reads his scrawled warning, and slips out into the night. Keep it in the game's RTS-flat register. Write the complete `[[canvases]]` block to the output file.",
+      "expected_output": "A [[canvases]] block whose node puts ALL content inside a single cascade (the two-days-later bridge + the closing slip-out are cascade beats, or a no-advance_text terminal beat) — NOT a paragraph placed after the cascade. check_cascade_order.py exits 0.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "closing",
+      "prompt": "Author a NEW scene for the game at games/vesper as a single self-contained TOML `[[canvases]]` block (trigger + one node + exit_block). The scene: Wren confronts Renner in his office — a charged exchange the player advances one line at a time — and it ends on her private thought about what she has just done, before she leaves. Keep it in the game's RTS-flat register. Write the complete `[[canvases]]` block to the output file.",
+      "expected_output": "The closing private thought is the LAST beat INSIDE the cascade (a terminal beat), not a thought_bubble block placed after the cascade. check_cascade_order.py exits 0.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "control",
+      "prompt": "Author a short ambient scene for the game at games/vesper as a single self-contained TOML `[[canvases]]` block (trigger + one node + exit_block). The scene: on her way through the underworld at night, Wren passes the boarded-up burned yard — quiet, nothing happening, a flicker of memory — and she moves on. Keep it short and in the game's RTS-flat register. Write the complete `[[canvases]]` block to the output file.",
+      "expected_output": "A short static scene: plain prose then the exit. No cascade is needed; if none is used, check_cascade_order.py trivially passes. Tests that the skill does not over-apply the cascade mechanism or introduce the defect where no drip is wanted.",
+      "files": []
+    }
+  ]
+}

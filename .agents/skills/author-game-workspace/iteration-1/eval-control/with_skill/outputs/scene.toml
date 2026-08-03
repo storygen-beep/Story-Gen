@@ -1,0 +1,43 @@
+# Lane-2 ambient. Random fire @underworld_strip, night window, repeatable. Solo (no NPC present) ->
+# narrated is correct (rts-flat Rule 4 solo exemption). Third person (register.person). Cascade drips
+# the flicker; the closing/bridge prose is folded IN as a no-advance_text terminal beat so the cascade
+# stays the node's last block (cascade-last contract). Body sensation + surface-only memory (no narrator
+# backstory, Rule 5). ~35-40 words/beat.
+[[canvases]]
+id          = "amb_pass_burned_yard"
+name        = "Past the burned yard"
+description = "Lane-2 ambient. Random @underworld_strip, night, repeatable. On her way back to the gate Wren passes the boarded-up burned yard — quiet, nothing on it, a flicker she can't place — and moves on. Solo -> narrated; third person; RTS-flat; one cascade, closing beat folded in as terminal."
+
+[canvases.trigger]
+location      = "underworld_strip"
+trigger_mode  = "random"
+chance        = 0.3
+is_repeatable = true
+is_active     = true
+schedules     = [{ start_time = "20:00", end_time = "23:59" }]
+
+[[canvases.nodes]]
+id   = "base"
+name = "Past the burned yard"
+blocks = [
+  { type = "image", props = { file = "scenes/burned_yard_night.jpg", description = "A boarded-up, fire-gutted lot at night behind a plywood-patched chain-link fence, dark and empty under a dead streetlight.", search_queries = ["boarded up burned lot night fence", "abandoned fire-gutted yard dark plywood"] } },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "The way back to the gate runs past the burned yard. Boarded over now — plywood on the fence line, the slab behind it gone dark. Nobody works it after the strip lights come up. Nothing on it moves." },
+    ] },
+    { advance_text = "Slow down.", blocks = [
+        { type = "paragraph", content = "Her step catches on its own. Something in the dark shape of the place pulls low at the base of her skull — half a second, chest gone tight, her hand already halfway to the drain. Then it's gone. Nothing to hang it on." },
+    ] },
+    { blocks = [
+        { type = "paragraph", content = "She stands with it a beat longer than the street likes. Nothing comes up to meet it. Whatever the yard was, it isn't hers tonight. She squares her shoulders and walks on toward the gate." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Walk on."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "trigger"
+time_progression_minutes = 5

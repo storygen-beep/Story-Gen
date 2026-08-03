@@ -1,0 +1,91 @@
+# ═══ scene_renner_office_confront — Wren presses Renner in his office ══════════
+# A scripted charged confrontation. Wren stops playing the meek dockhand and turns
+# his want against him, one line at a time, to pull the buyer's name (Bastien) off
+# him — then leaves him hungry. Auto-fire scripted beat (mirrors cap_renner_hired's
+# trigger shape): renner_depot / office register open / she's got leverage
+# (npc_renner.corruption gte 20 = "Cracking"). One-shot.
+#
+# Register (Vesper, declared THIRD person): paragraphs narrate her in third ("She…");
+# the exchange is PLAYED in dialog (Wren voiced as speaker="player", per the game's own
+# interrogation convention, 5_scenes.toml:1156-1170), not narrated. The scene closes on
+# the shipped Wren convention — ONE clipped FIRST-person thought_bubble carrying her
+# private interior — the still-point PC watched from outside, cracking to "I" only here.
+# RTS-flat: dialogue-dominant (~0.5 narration : 1 dialogue), ~35-40 words/beat, crude at
+# Renner's ceiling, body written / room left to the location card.
+[[canvases]]
+id          = "scene_renner_office_confront"
+name        = "What she came for"
+description = "Scripted one-shot confrontation at the depot office. Wren drops the willing-help register and works Renner's want to pull the buyer's name off him, then walks out leaving him hungry. Closes on her one first-person thought. Gated renner_office_open + npc_renner corruption>=20."
+
+[canvases.trigger]
+location      = "renner_depot"
+requires_npc  = "npc_renner"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "renner_office_open", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 20 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "09:00"
+end_time   = "18:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "What she came for"
+blocks = [
+  { type = "image", props = { file = "scenes/renner_office.jpg", description = "A cramped warehouse office, a heavyset tired man at a paper-stacked desk, a woman standing just inside the shut door not dropping her eyes.", search_queries = ["man at desk warehouse office night", "woman standing office doorway tense"] } },
+  { type = "paragraph", content = "She shuts the office door behind her. Renner looks up from the manifest already sour, already reaching for the thing he'll find wrong with her — and stops, because tonight she doesn't drop her eyes." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "The burned yard.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "You're on my clock. Floor's the other way." },
+        { type = "dialog", props = { speaker = "player" }, content = "The yard three streets past the depot. Your men, your lights, every night. What are you pulling out of there, Renner?" },
+    ] },
+    { advance_text = "Let him swing.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Nothing out here is your business. You haul crates and you keep your mouth shut." },
+        { type = "paragraph", content = "His hand goes flat on the desk. It doesn't hold still." },
+    ] },
+    { advance_text = "Say what she knows.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "You supplied a facility in the Reach. It burned. Now you're out at night burying what's left of the man you were." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Get out." },
+    ] },
+    { advance_text = "Come around the desk.", blocks = [
+        { type = "paragraph", content = "She doesn't. She comes around the desk instead, slow, until nothing's left between them." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "...What do you want." },
+    ] },
+    { advance_text = "Name his want.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "The same thing you've wanted since I took the stool at the Anchor. I'm the only part of your week that isn't a bill." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Don't." },
+    ] },
+    { advance_text = "Make him say it.", blocks = [
+        { type = "image", props = { file = "scenes/renner_office_close.jpg", description = "Close on the heavyset man half-risen from his chair, flushed and undone, the woman unmoving and cold in front of him.", search_queries = ["angry flushed man leaning over desk", "calm woman facing man close tense"] } },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "You want me to say it? I think about bending you over that desk and fucking you quiet every shift you're on my floor. That what you came down here for?" },
+        { type = "dialog", props = { speaker = "player" }, content = "I came for the yard. But don't let me stop you." },
+    ] },
+    { advance_text = "Trade.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "So talk. What's in the yard." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "...Containment rigs. Pulled off the facility floor before it went up. Cain thinks they burned with it. Nobody knows they didn't." },
+    ] },
+    { advance_text = "And the buyer.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Who's buying." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "A broker off the water. Bastien. That's it — that's all you get out of me." },
+    ] },
+    { advance_text = "Step back.", blocks = [
+        { type = "paragraph", content = "She steps back. Just that. The want stays on his face with nowhere to land, and she leaves it there." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "...That's it? You come in here, you work me over, and you just—" },
+    ] },
+    { advance_text = "Leave it.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "That was easy. It's always easy. A tool doesn't flinch — that used to be the proof I was made right. Something in me flinched tonight, and I don't have the word for it." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Walk out."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_waterfront"

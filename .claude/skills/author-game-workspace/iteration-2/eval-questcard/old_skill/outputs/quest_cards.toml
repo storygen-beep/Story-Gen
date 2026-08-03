@@ -1,0 +1,63 @@
+# ── Quests page — Sol's section (Tier 2, npc_id = npc_sol). Stepped by npc_sol.RELATION, not a round count —
+# earning the dockhand an evening at a time, not buying him. One card live at a time (exclusive relation bands +
+# the terminal flag). The arc opens when Sol's first-meet fires (sol_met, the handoff flag, like colm_found);
+# before that the mission spine carries "find Sol." Three rungs, then an end card.
+#
+# Bands: talking (relation < 10) -> drinking with you (10-24) -> he takes you to the yard (>= 24, the payoff).
+# Keep-the-number rule (§5): each numeric goal's denominator is the NEXT band's threshold — reads N/10, then N/24.
+# Rung 3 is a FLAG rung (sol_took_yard), so the top rung has something still UNMET and never hits the Frame-3-blank
+# trap (§6); once it flips, the flavor-only end card takes over. All same priority — bands/flag are mutually
+# exclusive, so no priority race.
+
+# ── Rung 1 — get him talking. Live from the first meet until relation crosses 10.
+[[quest_cards]]
+priority   = 11
+npc_id     = "npc_sol"
+text       = "The dockhand who works the salvage runs. He knows the yard cold — every burned hull the company welded the gate on — but he doesn't talk to strangers and he doesn't do favors. The only way in is the long way: turn up at the Undertow, night after night, until he stops treating you like one."
+tip        = "At the Undertow, take the stool by Sol and get him talking — he's in most evenings. It takes a few nights of it before he loosens. Keep at it and he'll start drinking with you instead of past you."
+when = [
+  { flag  = "sol_met", op = "is_true" },
+  { trait = "relation", subject = "npc", npc_id = "npc_sol", op = "lt", value = 10 },
+]
+goals = [
+  { trait = "relation", subject = "npc", npc_id = "npc_sol", op = "gte", value = 10, label = "Get the dockhand talking" },
+]
+
+# ── Rung 2 — get him drinking with you. Relation band 10–24.
+[[quest_cards]]
+priority   = 11
+npc_id     = "npc_sol"
+text       = "He talks to you now — short, dry, but he stays on the stool. Buy the next round and the one after; a man drinks with someone he's deciding to trust, and Sol's deciding."
+tip        = "In the Undertow, drink with Sol — stand him rounds and let the evenings stack. When he trusts you enough he'll stop guarding the yard and offer to walk you out to it himself."
+when = [
+  { trait = "relation", subject = "npc", npc_id = "npc_sol", op = "gte", value = 10 },
+  { trait = "relation", subject = "npc", npc_id = "npc_sol", op = "lt",  value = 24 },
+]
+goals = [
+  { trait = "relation", subject = "npc", npc_id = "npc_sol", op = "gte", value = 24, label = "Get him drinking with you" },
+]
+
+# ── Rung 3 — he takes you to the yard. Relation is high enough; now make the ask. Flag rung (closes §6).
+[[quest_cards]]
+priority   = 11
+npc_id     = "npc_sol"
+text       = "He trusts you as far as he trusts anyone. One more evening and the right ask, and he'll take you out to the salvage yard himself — through the gate the company welded shut, to the hulls no one's meant to see."
+tip        = "Sol's ready. In his hub, ask him to take you to the yard — he'll walk you out past the fence himself."
+when = [
+  { trait = "relation",      subject = "npc", npc_id = "npc_sol", op = "gte",     value = 24 },
+  { flag  = "sol_took_yard", op = "is_false" },
+]
+goals = [
+  { flag = "sol_took_yard", op = "is_true", label = "Get him to take you to the salvage yard" },
+]
+
+# ── End-of-content card (§7) — the yard is yours. Flavor + tip only, no goal (nothing to chase here), so the
+# section never goes stale or blank. Frames the payoff forward.
+[[quest_cards]]
+priority   = 11
+npc_id     = "npc_sol"
+text       = "Sol walked you through the welded gate and out among the dead hulls. You have the yard now — and a dockhand who'll take you back whenever you need the run. Whatever's rusting out there is yours to find."
+tip        = "The yard's open to you. Sol's a standing favor now — come back to him whenever you need the run out past the fence."
+when = [
+  { flag = "sol_took_yard", op = "is_true" },
+]

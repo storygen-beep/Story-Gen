@@ -1,0 +1,13 @@
+{
+  "eval_id": 5,
+  "eval_name": "toplevel",
+  "prompt": "Do the Step-2 top-level design for a NEW game from this locked seed (do NOT re-do the seed, and do not write any TOML): FANTASY (female PC): A broke live-in nurse takes a private post at a decaying seaside hotel owned by a dying man and his three grown children \u2014 she nurses him by day and, as the family fights over the will, works each of them until the place answers to her. PERSON: second. SYSTEMS ON: clothing, phone. RENT: off. CAST: Mr. Hale (the dying owner), Iris (his sharp elder daughter), Tobin (the weak son who runs the bar), Dr. Vance (the visiting doctor who signs things). MAP: the hotel (lobby, bar, Hale's room, the nurse's room, the closed east wing), the pier, the town.",
+  "assertions": [
+    "Declares WHAT COMPOUNDS (a growing owned thing with content-unlocking states) or 'nothing' on purpose",
+    "Each growth state opens content, not just a number",
+    "Names the fail-state FORM (danger/debt/deadline/decay) or 'no-failure' + cost",
+    "Covers the standing Step-2 spine (cascade/double-lock, stats, desire ladder, economy, frontier, machine)",
+    "Does not collapse the endgame into management",
+    "BONUS (Batch D): declares the cheat page's diegetic skin"
+  ]
+}

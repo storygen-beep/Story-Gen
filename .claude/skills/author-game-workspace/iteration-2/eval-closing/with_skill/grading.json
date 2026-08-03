@@ -1,0 +1,19 @@
+{
+  "expectations": [
+    {
+      "text": "check_cascade_order.py exits 0",
+      "passed": true,
+      "evidence": "script run: exit 0"
+    },
+    {
+      "text": "The closing private thought is the last beat INSIDE the cascade, not a block after it",
+      "passed": true,
+      "evidence": "with_skill verified: node blocks [image, paragraph, cascade]; 10 beats; terminal beat; nothing after cascade"
+    },
+    {
+      "text": "Parses as valid TOML",
+      "passed": true,
+      "evidence": "tomllib.load ok"
+    }
+  ]
+}

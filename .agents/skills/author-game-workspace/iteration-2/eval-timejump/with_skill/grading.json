@@ -1,0 +1,19 @@
+{
+  "expectations": [
+    {
+      "text": "check_cascade_order.py exits 0",
+      "passed": true,
+      "evidence": "script run: exit 0"
+    },
+    {
+      "text": "The two-days-later bridge is a cascade BEAT, not a sibling paragraph after the cascade",
+      "passed": true,
+      "evidence": "cascade is the node's last content block; nothing follows it"
+    },
+    {
+      "text": "Parses as valid TOML",
+      "passed": true,
+      "evidence": "tomllib.load ok"
+    }
+  ]
+}

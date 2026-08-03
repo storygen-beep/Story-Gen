@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eval Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js" integrity="sha384-EnyY0/GSHQGSxSgMwaIPzSESbqoOLSexfnSMN2AP+39Ckmn92stwABZynq1JyzdT" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --bg: #faf9f5;
+      --surface: #ffffff;
+      --border: #e8e6dc;
+      --text: #141413;
+      --text-muted: #b0aea5;
+      --accent: #d97757;
+      --accent-hover: #c4613f;
+      --green: #788c5d;
+      --green-bg: #eef2e8;
+      --red: #c44;
+      --red-bg: #fceaea;
+      --header-bg: #141413;
+      --header-text: #faf9f5;
+      --radius: 6px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---- Header ---- */
+    .header {
+      background: var(--header-bg);
+      color: var(--header-text);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    .header .instructions {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-top: 0.25rem;
+    }
+    .header .progress {
+      font-size: 0.875rem;
+      opacity: 0.8;
+      text-align: right;
+    }
+
+    /* ---- Main content ---- */
+    .main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* ---- Sections ---- */
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      flex-shrink: 0;
+    }
+    .section-header {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.75rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .section-body {
+      padding: 1rem;
+    }
+
+    /* ---- Config badge ---- */
+    .config-badge {
+      display: inline-block;
+      padding: 0.2rem 0.625rem;
+      border-radius: 9999px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-left: 0.75rem;
+      vertical-align: middle;
+    }
+    .config-badge.config-primary {
+      background: rgba(33, 150, 243, 0.12);
+      color: #1976d2;
+    }
+    .config-badge.config-baseline {
+      background: rgba(255, 193, 7, 0.15);
+      color: #f57f17;
+    }
+
+    /* ---- Prompt ---- */
+    .prompt-text {
+      white-space: pre-wrap;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
+
+    /* ---- Outputs ---- */
+    .output-file {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .output-file + .output-file {
+      margin-top: 1rem;
+    }
+    .output-file-header {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      font-family: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .output-file-header .dl-btn {
+      font-size: 0.7rem;
+      color: var(--accent);
+      text-decoration: none;
+      cursor: pointer;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 500;
+      opacity: 0.8;
+    }
+    .output-file-header .dl-btn:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+    .output-file-content {
+      padding: 0.75rem;
+      overflow-x: auto;
+    }
+    .output-file-content pre {
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+    }
+    .output-file-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+    .output-file-content iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+    .output-file-content table {
+      border-collapse: collapse;
+      font-size: 0.8125rem;
+      width: 100%;
+    }
+    .output-file-content table td,
+    .output-file-content table th {
+      border: 1px solid var(--border);
+      padding: 0.375rem 0.5rem;
+      text-align: left;
+    }
+    .output-file-content table th {
+      background: var(--bg);
+      font-weight: 600;
+    }
+    .output-file-content .download-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+    .output-file-content .download-link:hover {
+      background: var(--border);
+    }
+    .empty-state {
+      color: var(--text-muted);
+      font-style: italic;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    /* ---- Feedback ---- */
+    .prev-feedback {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.625rem 0.75rem;
+      margin-top: 0.75rem;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .prev-feedback-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.25rem;
+      color: var(--text-muted);
+    }
+    .feedback-textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      resize: vertical;
+      color: var(--text);
+    }
+    .feedback-textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+    .feedback-status {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      min-height: 1.1em;
+    }
+
+    /* ---- Grades (collapsible) ---- */
+    .grades-toggle {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .grades-toggle:hover {
+      color: var(--accent);
+    }
+    .grades-toggle .arrow {
+      margin-right: 0.5rem;
+      transition: transform 0.15s;
+      font-size: 0.75rem;
+    }
+    .grades-toggle .arrow.open {
+      transform: rotate(90deg);
+    }
+    .grades-content {
+      display: none;
+      margin-top: 0.75rem;
+    }
+    .grades-content.open {
+      display: block;
+    }
+    .grades-summary {
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .grade-badge {
+      display: inline-block;
+      padding: 0.125rem 0.5rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .grade-pass { background: var(--green-bg); color: var(--green); }
+    .grade-fail { background: var(--red-bg); color: var(--red); }
+    .assertion-list {
+      list-style: none;
+    }
+    .assertion-item {
+      padding: 0.625rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8125rem;
+    }
+    .assertion-item:last-child { border-bottom: none; }
+    .assertion-status {
+      font-weight: 600;
+      margin-right: 0.5rem;
+    }
+    .assertion-status.pass { color: var(--green); }
+    .assertion-status.fail { color: var(--red); }
+    .assertion-evidence {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+      padding-left: 1.5rem;
+    }
+
+    /* ---- View tabs ---- */
+    .view-tabs {
+      display: flex;
+      gap: 0;
+      padding: 0 2rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .view-tab {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.625rem 1.25rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s;
+    }
+    .view-tab:hover { color: var(--text); }
+    .view-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .view-panel { display: none; }
+    .view-panel.active { display: flex; flex-direction: column; flex: 1; overflow: hidden; }
+
+    /* ---- Benchmark view ---- */
+    .benchmark-view {
+      padding: 1.5rem 2rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .benchmark-table {
+      border-collapse: collapse;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.8125rem;
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+    .benchmark-table th, .benchmark-table td {
+      padding: 0.625rem 0.75rem;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    .benchmark-table th {
+      font-family: 'Poppins', sans-serif;
+      background: var(--header-bg);
+      color: var(--header-text);
+      font-weight: 500;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .benchmark-table tr:hover { background: var(--bg); }
+    .benchmark-table tr.benchmark-row-with { background: rgba(33, 150, 243, 0.06); }
+    .benchmark-table tr.benchmark-row-without { background: rgba(255, 193, 7, 0.06); }
+    .benchmark-table tr.benchmark-row-with:hover { background: rgba(33, 150, 243, 0.12); }
+    .benchmark-table tr.benchmark-row-without:hover { background: rgba(255, 193, 7, 0.12); }
+    .benchmark-table tr.benchmark-row-avg { font-weight: 600; border-top: 2px solid var(--border); }
+    .benchmark-table tr.benchmark-row-avg.benchmark-row-with { background: rgba(33, 150, 243, 0.12); }
+    .benchmark-table tr.benchmark-row-avg.benchmark-row-without { background: rgba(255, 193, 7, 0.12); }
+    .benchmark-delta-positive { color: var(--green); font-weight: 600; }
+    .benchmark-delta-negative { color: var(--red); font-weight: 600; }
+    .benchmark-notes {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+    }
+    .benchmark-notes h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+    }
+    .benchmark-notes ul {
+      list-style: disc;
+      padding-left: 1.25rem;
+    }
+    .benchmark-notes li {
+      font-size: 0.8125rem;
+      line-height: 1.6;
+      margin-bottom: 0.375rem;
+    }
+    .benchmark-empty {
+      color: var(--text-muted);
+      font-style: italic;
+      text-align: center;
+      padding: 3rem;
+    }
+
+    /* ---- Navigation ---- */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      flex-shrink: 0;
+    }
+    .nav-btn {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.5rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+      transition: all 0.15s;
+    }
+    .nav-btn:hover:not(:disabled) {
+      background: var(--bg);
+      border-color: var(--text-muted);
+    }
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .done-btn {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.5rem 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+    .done-btn:hover {
+      background: var(--bg);
+      border-color: var(--text-muted);
+    }
+    .done-btn.ready {
+      border: none;
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+    }
+    .done-btn.ready:hover {
+      background: var(--accent-hover);
+    }
+    /* ---- Done overlay ---- */
+    .done-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+    }
+    .done-overlay.visible {
+      display: flex;
+    }
+    .done-card {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 2rem 3rem;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      max-width: 500px;
+    }
+    .done-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .done-card p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+    .done-card .btn-row {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    .done-card button {
+      padding: 0.5rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+    .done-card button:hover {
+      background: var(--bg);
+    }
+    /* ---- Toast ---- */
+    .toast {
+      position: fixed;
+      bottom: 5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--header-bg);
+      color: var(--header-text);
+      padding: 0.625rem 1.25rem;
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 200;
+    }
+    .toast.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" style="height:100vh; display:flex; flex-direction:column;">
+    <div class="header">
+      <div>
+        <h1>Eval Review: <span id="skill-name"></span></h1>
+        <div class="instructions">Review each output and leave feedback below. Navigate with arrow keys or buttons. When done, copy feedback and paste into Claude Code.</div>
+      </div>
+      <div class="progress" id="progress"></div>
+    </div>
+
+    <!-- View tabs (only shown when benchmark data exists) -->
+    <div class="view-tabs" id="view-tabs" style="display:none;">
+      <button class="view-tab active" onclick="switchView('outputs')">Outputs</button>
+      <button class="view-tab" onclick="switchView('benchmark')">Benchmark</button>
+    </div>
+
+    <!-- Outputs panel (qualitative review) -->
+    <div class="view-panel active" id="panel-outputs">
+    <div class="main">
+      <!-- Prompt -->
+      <div class="section">
+        <div class="section-header">Prompt <span class="config-badge" id="config-badge" style="display:none;"></span></div>
+        <div class="section-body">
+          <div class="prompt-text" id="prompt-text"></div>
+        </div>
+      </div>
+
+      <!-- Outputs -->
+      <div class="section">
+        <div class="section-header">Output</div>
+        <div class="section-body" id="outputs-body">
+          <div class="empty-state">No output files found</div>
+        </div>
+      </div>
+
+      <!-- Previous Output (collapsible) -->
+      <div class="section" id="prev-outputs-section" style="display:none;">
+        <div class="section-header">
+          <div class="grades-toggle" onclick="togglePrevOutputs()">
+            <span class="arrow" id="prev-outputs-arrow">&#9654;</span>
+            Previous Output
+          </div>
+        </div>
+        <div class="grades-content" id="prev-outputs-content"></div>
+      </div>
+
+      <!-- Grades (collapsible) -->
+      <div class="section" id="grades-section" style="display:none;">
+        <div class="section-header">
+          <div class="grades-toggle" onclick="toggleGrades()">
+            <span class="arrow" id="grades-arrow">&#9654;</span>
+            Formal Grades
+          </div>
+        </div>
+        <div class="grades-content" id="grades-content"></div>
+      </div>
+
+      <!-- Feedback -->
+      <div class="section">
+        <div class="section-header">Your Feedback</div>
+        <div class="section-body">
+          <textarea
+            class="feedback-textarea"
+            id="feedback"
+            placeholder="What do you think of this output? Any issues, suggestions, or things that look great?"
+          ></textarea>
+          <div class="feedback-status" id="feedback-status"></div>
+          <div class="prev-feedback" id="prev-feedback" style="display:none;">
+            <div class="prev-feedback-label">Previous feedback</div>
+            <div id="prev-feedback-text"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav" id="outputs-nav">
+      <button class="nav-btn" id="prev-btn" onclick="navigate(-1)">&#8592; Previous</button>
+      <button class="done-btn" id="done-btn" onclick="showDoneDialog()">Submit All Reviews</button>
+      <button class="nav-btn" id="next-btn" onclick="navigate(1)">Next &#8594;</button>
+    </div>
+    </div><!-- end panel-outputs -->
+
+    <!-- Benchmark panel (quantitative stats) -->
+    <div class="view-panel" id="panel-benchmark">
+      <div class="benchmark-view" id="benchmark-content">
+        <div class="benchmark-empty">No benchmark data available. Run a benchmark to see quantitative results here.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Done overlay -->
+  <div class="done-overlay" id="done-overlay">
+    <div class="done-card">
+      <h2>Review Complete</h2>
+      <p>Your feedback has been saved. Go back to your Claude Code session and tell Claude you're done reviewing.</p>
+      <div class="btn-row">
+        <button onclick="closeDoneDialog()">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ---- Embedded data (injected by generate_review.py) ----
+    const EMBEDDED_DATA = {"skill_name": "author-game (doctrine pass A/B)", "runs": [{"id": "eval-timejump-old_skill", "prompt": "Author a NEW capstone scene for the game at games/vesper as a single self-contained TOML `[[canvases]]` block (trigger + one node + exit_block). The scene: Wren corners the fixer Marsh in a stairwell and presses him for what he knows \u2014 a tense back-and-forth the player advances beat by beat. He finally caves. Then, TWO DAYS LATER, he leaves an envelope for her at the House; she takes it, reads his scrawled warning, and slips out into the night. Keep it in the game's RTS-flat register. Write the complete `[[canvases]]` block to the output file.", "eval_id": 0, "outputs": [{"name": "scene.toml", "type": "text", "content": "# \u2550\u2550\u2550 cap_marsh_stairwell \u2014 Lane 4 capstone (Type A, linear) \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n# Wren corners Marsh in the back stairwell of the House and presses him beat by beat\n# until he caves; TWO DAYS LATER he leaves a warning envelope with Rue. The time-jump\n# is folded INTO the one cascade as its own advance_text beat (cascade-must-be-last).\n# Third person (register.person = \"third\"); dialogue-dominant Tier-3 (12 beats).\n# Auto-fires once at The House when she's on the hunt (hunt_lead) and hasn't cornered\n# him yet; sets marsh_cornered (self-gate) + marsh_warned (the payload she now carries).\n[[canvases]]\nid          = \"cap_marsh_stairwell\"\nname        = \"The stairwell\"\ndescription = \"Lane 4 capstone, pri 9. Wren corners Marsh on the back stairs of The House and extracts a cave, then a two-days-later envelope. One cascade, 12 beats, dialogue-dominant. Gated hunt_lead is_true + marsh_cornered is_false; SETS marsh_cornered + marsh_warned. Exit -> underworld_strip (out into the night).\"\n\n[canvases.trigger]\nlocation      = \"underworld_brothel\"\ntrigger_mode  = \"manual\"\nis_repeatable = false\nis_active     = true\npriority      = 9\nconditions = { version = \"1.0\", logic = \"AND\", items = [\n  { type = \"flag\", subject = \"player\", flag_key = \"hunt_lead\", operator = \"is_true\" },\n  { type = \"flag\", subject = \"player\", flag_key = \"marsh_cornered\", operator = \"is_false\" },\n] }\n\n[[canvases.nodes]]\nid   = \"corner\"\nname = \"The stairwell\"\nblocks = [\n  { type = \"image\", props = { file = \"scenes/marsh_stairwell.jpg\", description = \"Wren blocking the one way down on a dim stairwell landing; Marsh a step above, checking the exit before her face.\", search_queries = [\"dim concrete stairwell landing figure noir\", \"back stairwell confrontation shadow dim light\"] } },\n  { type = \"paragraph\", content = \"The back stairwell of the House. Marsh on the landing above her, and the one way down is where she's standing. He checks the stairs before he checks her face \u2014 careful, even now.\" },\n  { type = \"cascade\", props = { beats = [\n    { blocks = [\n        { type = \"dialog\", props = { speaker = \"player\" }, content = \"Doss. Rourke. You're the third name off that job \u2014 and the only one still breathing.\" },\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_marsh\" }, content = \"I don't do business on stairs. I like knowing where the doors are before I open my mouth.\" },\n        { type = \"paragraph\", content = \"She doesn't step out of his door. He reads the whole answer in it and stops smiling.\" },\n    ] },\n    { advance_text = \"Name the dead.\", blocks = [\n        { type = \"dialog\", props = { speaker = \"player\" }, content = \"Doss and Rourke went the same night \u2014 them and everyone in their houses. Not Renner. So who's careful enough for that?\" },\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_marsh\" }, content = \"You want that name for free, on a staircase, from the one man who stayed alive by never saying it. Hear yourself.\" },\n    ] },\n    { advance_text = \"Close the distance.\", blocks = [\n        { type = \"paragraph\", content = \"She takes the step up. Slow. Close enough that the exit he keeps measuring stops being a number he can reach.\" },\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_marsh\" }, content = \"There it is. I wondered how long the company would send someone who still asks nicely.\" },\n    ] },\n    { advance_text = \"Press him.\", blocks = [\n        { type = \"dialog\", props = { speaker = \"player\" }, content = \"I'm not company down here. Down here I'm just the thing between you and the street. Talk to that.\" },\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_marsh\" }, content = \"Careful's the only reason I'm old. You lean on me, you're leaning on what leans on me.\" },\n        { type = \"paragraph\", content = \"Something moves under the careful, then. Not the words \u2014 the sweat on him.\" },\n    ] },\n    { advance_text = \"Push.\", blocks = [\n        { type = \"dialog\", props = { speaker = \"player\" }, content = \"What leans on you.\" },\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_marsh\" }, content = \"No. No, that one you don't get to say out loud. Not here, not to me, not if you want to keep the face you've got.\" },\n        { type = \"paragraph\", content = \"Fear, clean and specific. He's not afraid of her. He's afraid of being seen talking to her.\" },\n    ] },\n    { advance_text = \"Make it cost.\", blocks = [\n        { type = \"dialog\", props = { speaker = \"player\" }, content = \"Then here's the trade. Give me something true, or I stand here until your Sunday girl comes up and finds a fixer who talks to Vance's people.\" },\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_marsh\" }, content = \"That's ugly.\" },\n        { type = \"dialog\", props = { speaker = \"player\" }, content = \"It's Tuesday. I've got all night.\" },\n    ] },\n    { advance_text = \"Wait.\", blocks = [\n        { type = \"paragraph\", content = \"He looks at the stairs one more time. The careful man doing the last careful math, and coming up short.\" },\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_marsh\" }, content = \"Not here. I'll leave you something \u2014 at the House, with Rue, where I'm just another regular. Two days. Then we never had this.\" },\n    ] },\n    { advance_text = \"Let him go.\", blocks = [\n        { type = \"paragraph\", content = \"She steps aside. He goes down past her without turning his back, the way a careful man takes stairs he's been threatened on.\" },\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_marsh\" }, content = \"You didn't get a name off me. Remember that. Whatever's in it \u2014 you found it. Not me.\" },\n    ] },\n    { advance_text = \"Two days later.\", blocks = [\n        { type = \"paragraph\", content = \"Two days. Sunday, the House loud below. Rue catches her at the door with a folded envelope and a look that says she didn't read it.\" },\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_rue\" }, content = \"He left it Thursday. Said you'd know. I don't want it in my house past tonight.\" },\n    ] },\n    { advance_text = \"Open it.\", blocks = [\n        { type = \"paragraph\", content = \"No name on it. Inside, one sheet, folded twice, in a hand that pressed hard enough to score the paper.\" },\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_marsh\" }, content = \"You wanted who's careful enough to erase two crews and leave a witness. Nobody is. That's the point \u2014 he doesn't have to be.\" },\n    ] },\n    { advance_text = \"Read it.\", blocks = [\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_marsh\" }, content = \"The crew you want is down past the market. Go, if you like. They're not what's got you.\" },\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_marsh\" }, content = \"He owns the House. He owns the bar. He owns me. He's had your name longer than you've had his \u2014 stop pulling, or the thread pulls you.\" },\n    ] },\n    { advance_text = \"Put it away.\", blocks = [\n        { type = \"paragraph\", content = \"She reads it twice. Then she folds it back along Marsh's creases and puts it away, somewhere the cradle can't reach.\" },\n        { type = \"paragraph\", content = \"Then she goes down the stairs and out, into the dark off the strip \u2014 carrying a name she still hasn't been given.\" },\n    ] },\n  ] } },\n]\n\n[canvases.nodes.exit_block]\ntype = \"choices\"\n\n[[canvases.nodes.exit_block.choices]]\ntext        = \"Out into the night.\"\nflagEffects = [\n  { targetType = \"player\", flag = \"marsh_cornered\", op = \"set\" },\n  { targetType = \"player\", flag = \"marsh_warned\", op = \"set\" },\n]\ntargetType               = \"location\"\nlocationId               = \"underworld_strip\"\ntime_progression_minutes = 15\n"}], "grading": {"expectations": [{"text": "check_cascade_order.py exits 0", "passed": true, "evidence": "script run: exit 0"}, {"text": "The two-days-later bridge is a cascade BEAT, not a sibling paragraph after the cascade", "passed": true, "evidence": "cascade is the node's last content block; nothing follows it"}, {"text": "Parses as valid TOML", "passed": true, "evidence": "tomllib.load ok"}]}}, {"id": "eval-timejump-with_skill", "prompt": "Author a NEW capstone scene for the game at games/vesper as a single self-contained TOML `[[canvases]]` block (trigger + one node + exit_block). The scene: Wren corners the fixer Marsh in a stairwell and presses him for what he knows \u2014 a tense back-and-forth the player advances beat by beat. He finally caves. Then, TWO DAYS LATER, he leaves an envelope for her at the House; she takes it, reads his scrawled warning, and slips out into the night. Keep it in the game's RTS-flat register. Write the complete `[[canvases]]` block to the output file.", "eval_id": 0, "outputs": [{"name": "scene.toml", "type": "text", "content": "# \u2500\u2500 CAPSTONE \u2014 \"The Name on Half a Sheet\" (Lane 4, Tier-3 earned) \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n# Wren corners Marsh on the back stair of The House and presses him beat by beat until he\n# caves; two days later he leaves an envelope with Rue \u2014 his scrawled warning that her leash\n# runs all the way up to Vance. Auto-fires once on a Sunday-night entry to The House, after\n# she already cracked him for the crew's rooms (crew_known). Third-person narration (register\n# = third), dialogue-dominant, time-jump narrated inside the cascade (no engine timer).\n[[canvases]]\nid   = \"marsh_the_name\"\nname = \"The Name on Half a Sheet\"\n\n[canvases.trigger]\nlocation      = \"underworld_brothel\"\ntrigger_mode  = \"manual\"\nis_repeatable = false\npriority      = 10\nrequires_npc  = \"npc_marsh\"                     # only fires when he's actually on the stair (his Sunday window)\nconditions = { version = \"1.0\", items = [       # version REQUIRED or the gate fails open\n  { type = \"flag\", subject = \"player\", flag_key = \"marsh_warned\", operator = \"is_false\" },\n  { type = \"flag\", subject = \"player\", flag_key = \"crew_known\",   operator = \"is_true\"  },\n] }\n\n[[canvases.nodes]]\nid   = \"stair\"\nname = \"The Name on Half a Sheet\"\nblocks = [\n  { type = \"paragraph\", content = \"The back stair of The House, between floors. Marsh comes down at his hour and finds her already on the turn, one shoulder to the rail, taking up the whole width of it.\" },\n  { type = \"image\", props = { file = \"scenes/marsh_stairwell.jpg\", description = \"A small careful man stopped on a dim tenement stair, a woman blocking the turn below him.\", search_queries = [\"man cornered dim stairwell noir\", \"narrow tenement staircase two figures low light\"] } },\n  { type = \"cascade\", props = { beats = [\n\n    # beat 0 \u2014 renders with the lead, no click (advance_text ignored on beat 0)\n    { blocks = [\n      { type = \"dialog\", props = { speaker = \"player\" }, content = \"You always check the exits before the girl. Both doors. I counted.\" },\n      { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_marsh\" }, content = \"Habit's kept me alive. Move, girl \u2014 I'm paying for the hour and it's running.\" },\n    ] },\n\n    { advance_text = \"Don't move.\", blocks = [\n      { type = \"paragraph\", content = \"She doesn't move.\" },\n      { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_marsh\" }, content = \"Rue know you brace her regulars on the stairs?\" },\n      { type = \"dialog\", props = { speaker = \"player\" }, content = \"Rue's counting coin two floors down. What did Doss carry the week Renner put him in the ground?\" },\n    ] },\n\n    { advance_text = \"Press him.\", blocks = [\n      { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_marsh\" }, content = \"Cargo. I run cargo. I don't read what's in the crates.\" },\n      { type = \"dialog\", props = { speaker = \"player\" }, content = \"You read all of it. It's the only reason you outlived every man who didn't.\" },\n    ] },\n\n    { advance_text = \"Take the step.\", blocks = [\n      { type = \"paragraph\", content = \"She comes down a step. His back finds the rail.\" },\n      { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_marsh\" }, content = \"...It wasn't cargo that week. It was a name. One name, on half a sheet.\" },\n    ] },\n\n    { advance_text = \"Whose name.\", blocks = [\n      { type = \"dialog\", props = { speaker = \"player\" }, content = \"Whose.\" },\n      { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_marsh\" }, content = \"Not on a stair with a door at both ends. You don't say a name like this one out loud.\" },\n    ] },\n\n    { advance_text = \"Push.\", blocks = [\n      { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_marsh\" }, content = \"You walk around thinking you're the one doing the squeezing. You're not. You're what they let off the leash. Whoever's on that list holds the other end of it.\" },\n    ] },\n\n    { advance_text = \"Let it land.\", blocks = [\n      { type = \"thought_bubble\", props = { speaker = \"npc\", npcId = \"npc_marsh\" }, content = \"She doesn't know whose she is. God help her the day she finds out.\" },\n      { type = \"dialog\", props = { speaker = \"player\" }, content = \"Then it costs you nothing to write down a name I already half know.\" },\n    ] },\n\n    { advance_text = \"Wait him out.\", blocks = [\n      { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_marsh\" }, content = \"It costs me everything. That's what a name like this is worth.\" },\n      { type = \"paragraph\", content = \"She waits. He looks at the door below, at the door above, at her.\" },\n    ] },\n\n    # the cave\n    { advance_text = \"Say when.\", blocks = [\n      { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_marsh\" }, content = \"...Two days. I'll leave you something with Rue. After that I never stood on this stair, and neither did you.\" },\n      { type = \"paragraph\", content = \"He goes up past her, careful not to touch her. She lets him.\" },\n    ] },\n\n    # \u2500\u2500 TIME JUMP \u2014 two days later \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n    { advance_text = \"Two days.\", blocks = [\n      { type = \"paragraph\", content = \"Two days. She takes her shifts, says nothing, counts them down.\" },\n    ] },\n\n    { advance_text = \"The counter.\", blocks = [\n      { type = \"paragraph\", content = \"The House at closing. Rue slides an envelope across into the counter light, unhurried.\" },\n      { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_rue\" }, content = \"Careful man left this Sunday. Didn't stay for a drink. Wouldn't give a name \u2014 just described you, close enough.\" },\n    ] },\n\n    { advance_text = \"Open it.\", blocks = [\n      { type = \"image\", props = { file = \"scenes/marsh_envelope.jpg\", description = \"A woman's hands unfolding a scrawled half-sheet under a dim bar counter light.\", search_queries = [\"hands unfolding note under dim light\", \"scrawled handwritten warning note close up\"] } },\n      { type = \"paragraph\", content = \"Inside, half a sheet folded twice. His hand \u2014 small, bitten down, pressed hard enough to score through the paper.\" },\n    ] },\n\n    # the warning \u2014 the payoff, in his written voice\n    { advance_text = \"Read it.\", blocks = [\n      { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_marsh\" }, content = \"The name I owe you is VANCE. Not the company \u2014 the man over Mercer. Your leash runs all the way up to him. Whatever you think you're climbing toward, he's holding the other end of it. Stop pulling where he can feel it. \u2014 M.\" },\n    ] },\n\n    { advance_text = \"Fold it up.\", blocks = [\n      { type = \"paragraph\", content = \"She reads it twice. Rue watches her not react to whatever it is.\" },\n      { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_rue\" }, content = \"Bad news?\" },\n      { type = \"dialog\", props = { speaker = \"player\" }, content = \"No. Nothing at all.\" },\n    ] },\n\n    # terminal beat \u2014 no advance_text; renders after the last click (interior close, exempt from mode)\n    { blocks = [\n      { type = \"paragraph\", content = \"She's out the side door before the words settle. Up the alley stair, into the cold, the half-sheet a hard fold against her ribs.\" },\n      { type = \"paragraph\", content = \"Somewhere at the top of the city a man she has never seen holds the other end of her. Now she has his name.\" },\n    ] },\n\n  ] } },\n]\n\n[canvases.nodes.exit_block]\ntype = \"choices\"\n[[canvases.nodes.exit_block.choices]]\ntext = \"Into the night \ud83c\udf19\"\ntargetType = \"location\"\nlocationId = \"underworld_strip\"\ntime_progression_minutes = 10\nflagEffects = [{ targetType = \"player\", flag = \"marsh_warned\", op = \"set\" }]\neffects     = [{ targetType = \"npc\", npcId = \"npc_marsh\", trait = \"relation\", op = \"add\", value = 1 }]\n"}], "grading": {"expectations": [{"text": "check_cascade_order.py exits 0", "passed": true, "evidence": "script run: exit 0"}, {"text": "The two-days-later bridge is a cascade BEAT, not a sibling paragraph after the cascade", "passed": true, "evidence": "cascade is the node's last content block; nothing follows it"}, {"text": "Parses as valid TOML", "passed": true, "evidence": "tomllib.load ok"}]}}, {"id": "eval-closing-old_skill", "prompt": "Author a NEW scene for the game at games/vesper as a single self-contained TOML `[[canvases]]` block (trigger + one node + exit_block). The scene: Wren confronts Renner in his office \u2014 a charged exchange the player advances one line at a time \u2014 and it ends on her private thought about what she has just done, before she leaves. Keep it in the game's RTS-flat register. Write the complete `[[canvases]]` block to the output file.", "eval_id": 1, "outputs": [{"name": "scene.toml", "type": "text", "content": "# \u2550\u2550\u2550 scene_renner_confront \u2014 Wren corners Renner in his office \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n# A charged one-shot: she drops the cheap-hands act and turns the skim into leverage.\n# Advanced one line at a time (cascade), closing on her rationed interior (the shipped\n# Wren thought_bubble convention). Double-gated: office access (renner_office_open) +\n# in cover (cover_dockhand). Third person, RTS-flat, dialogue-dominant. SETS renner_confronted.\n[[canvases]]\nid          = \"scene_renner_confront\"\nname        = \"The arrangement\"\ndescription = \"One-shot office confrontation at the depot. Wren names Renner's skim, takes the threat off his mouth, and trades silence for his key. Advances line by line; ends on her private thought before she leaves. Gated renner_hired + renner_office_open + cover_dockhand equipped; SETS renner_confronted.\"\n\n[canvases.trigger]\nlocation      = \"renner_depot\"\nrequires_npc  = \"npc_renner\"\nis_repeatable = false\npriority      = 6\nis_active     = true\nconditions = { version = \"1.0\", logic = \"AND\", items = [\n  { type = \"flag\", subject = \"player\", flag_key = \"renner_hired\",       operator = \"is_true\"  },\n  { type = \"flag\", subject = \"player\", flag_key = \"renner_office_open\",  operator = \"is_true\"  },\n  { type = \"flag\", subject = \"player\", flag_key = \"renner_confronted\",   operator = \"is_false\" },\n  { type = \"clothing_item\", item_id = \"cover_dockhand\", operator = \"equipped\" },\n] }\n[[canvases.trigger.schedules]]\nweekdays   = [0, 1, 2, 3, 4, 5, 6]\nstart_time = \"09:00\"\nend_time   = \"18:00\"\n\n[[canvases.nodes]]\nid   = \"base\"\nname = \"The arrangement\"\nblocks = [\n  { type = \"image\", props = { file = \"scenes/renner_office_confront.jpg\", description = \"A cramped glass-walled office on a warehouse floor, a heavyset man behind a cluttered desk, a woman standing over him with the door shut.\", search_queries = [\"man behind office desk warehouse\", \"woman standing over seated man office\"] } },\n  { type = \"paragraph\", content = \"The office is a glass box on the depot floor. She steps in and pulls the door shut behind her.\" },\n  { type = \"cascade\", props = { beats = [\n    { blocks = [\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_renner\" }, content = \"Floor's out there. Whatever it is, it waits.\" },\n        { type = \"paragraph\", content = \"He doesn't get up.\" },\n    ] },\n    { advance_text = \"Stand over him.\", blocks = [\n        { type = \"dialog\", props = { speaker = \"player\" }, content = \"You've been short-counting Cain's crates. Skimming the manifests, keeping the difference.\" },\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_renner\" }, content = \"The temp counts boxes. The temp doesn't count mine.\" },\n        { type = \"dialog\", props = { speaker = \"player\" }, content = \"I counted mine and yours. Yours are light.\" },\n        { type = \"paragraph\", content = \"The pen stops.\" },\n    ] },\n    { advance_text = \"Don't blink.\", blocks = [\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_renner\" }, content = \"Cain sees a short count, that's my neck, not yours. Why're you doing this.\" },\n        { type = \"dialog\", props = { speaker = \"player\" }, content = \"Because Cain's slower than me. He'll get there. I'm offering you the version where he doesn't.\" },\n        { type = \"paragraph\", content = \"His hand finds the bottle. It isn't steady.\" },\n    ] },\n    { advance_text = \"Let him threaten.\", blocks = [\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_renner\" }, content = \"You breathe a word, I break your hands and ship you out in one of his crates.\" },\n        { type = \"dialog\", props = { speaker = \"player\" }, content = \"You won't. You need the hands. Mine most \u2014 I don't ask, I don't tire, and I know where the light crates went.\" },\n    ] },\n    { advance_text = \"Closer.\", blocks = [\n        { type = \"dialog\", props = { speaker = \"player\" }, content = \"And you've watched me on the racks all week. I know the exact look. It's not the counting you'll miss.\" },\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_renner\" }, content = \"...Christ. What are you.\" },\n        { type = \"paragraph\", content = \"He's flushed, and it isn't the drink. Wanting her and hating that he does \u2014 she watches both land.\" },\n    ] },\n    { advance_text = \"Name the price.\", effects = [\n        { targetType = \"npc\", npcId = \"npc_renner\", trait = \"corruption\", op = \"add\", value = 2 },\n        { targetType = \"npc\", npcId = \"npc_renner\", trait = \"arousal\",    op = \"add\", value = 2 },\n    ], blocks = [\n        { type = \"dialog\", props = { speaker = \"player\" }, content = \"So \u2014 the office key. Your silence on my counts. And I come in here whenever I want.\" },\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_renner\" }, content = \"...And if I say no.\" },\n        { type = \"dialog\", props = { speaker = \"player\" }, content = \"Then Cain gets a tidy little audit by morning. Your call.\" },\n        { type = \"paragraph\", content = \"He slides the key across the desk.\" },\n    ] },\n    { blocks = [\n        { type = \"paragraph\", content = \"She pockets the key and turns for the door.\" },\n        { type = \"thought_bubble\", props = { speaker = \"player\" }, content = \"Walked in as cheap hands, walking out with his key. He'll remember her now \u2014 the one thing the cover can't afford. She did it anyway. It was faster than being no one.\" },\n    ] },\n  ] } },\n]\n\n[canvases.nodes.exit_block]\ntype = \"location\"\ntext = \"Leave the office.\"\n\n[canvases.nodes.exit_block.config]\ndestinationType = \"specific\"\nlocationId      = \"renner_depot\"\nflagEffects = [\n  { targetType = \"player\", flag = \"renner_confronted\", op = \"set\" },\n]\n"}], "grading": {"expectations": [{"text": "check_cascade_order.py exits 0", "passed": true, "evidence": "script run: exit 0"}, {"text": "The closing private thought is the last beat INSIDE the cascade, not a block after it", "passed": true, "evidence": "with_skill verified: node blocks [image, paragraph, cascade]; 10 beats; terminal beat; nothing after cascade"}, {"text": "Parses as valid TOML", "passed": true, "evidence": "tomllib.load ok"}]}}, {"id": "eval-closing-with_skill", "prompt": "Author a NEW scene for the game at games/vesper as a single self-contained TOML `[[canvases]]` block (trigger + one node + exit_block). The scene: Wren confronts Renner in his office \u2014 a charged exchange the player advances one line at a time \u2014 and it ends on her private thought about what she has just done, before she leaves. Keep it in the game's RTS-flat register. Write the complete `[[canvases]]` block to the output file.", "eval_id": 1, "outputs": [{"name": "scene.toml", "type": "text", "content": "# \u2550\u2550\u2550 scene_renner_office_confront \u2014 Wren presses Renner in his office \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n# A scripted charged confrontation. Wren stops playing the meek dockhand and turns\n# his want against him, one line at a time, to pull the buyer's name (Bastien) off\n# him \u2014 then leaves him hungry. Auto-fire scripted beat (mirrors cap_renner_hired's\n# trigger shape): renner_depot / office register open / she's got leverage\n# (npc_renner.corruption gte 20 = \"Cracking\"). One-shot.\n#\n# Register (Vesper, declared THIRD person): paragraphs narrate her in third (\"She\u2026\");\n# the exchange is PLAYED in dialog (Wren voiced as speaker=\"player\", per the game's own\n# interrogation convention, 5_scenes.toml:1156-1170), not narrated. The scene closes on\n# the shipped Wren convention \u2014 ONE clipped FIRST-person thought_bubble carrying her\n# private interior \u2014 the still-point PC watched from outside, cracking to \"I\" only here.\n# RTS-flat: dialogue-dominant (~0.5 narration : 1 dialogue), ~35-40 words/beat, crude at\n# Renner's ceiling, body written / room left to the location card.\n[[canvases]]\nid          = \"scene_renner_office_confront\"\nname        = \"What she came for\"\ndescription = \"Scripted one-shot confrontation at the depot office. Wren drops the willing-help register and works Renner's want to pull the buyer's name off him, then walks out leaving him hungry. Closes on her one first-person thought. Gated renner_office_open + npc_renner corruption>=20.\"\n\n[canvases.trigger]\nlocation      = \"renner_depot\"\nrequires_npc  = \"npc_renner\"\nis_repeatable = false\npriority      = 9\nis_active     = true\nconditions = { version = \"1.0\", logic = \"AND\", items = [\n  { type = \"flag\",  subject = \"player\", flag_key = \"renner_office_open\", operator = \"is_true\" },\n  { type = \"trait\", subject = \"npc\", npc_id = \"npc_renner\", trait_key = \"corruption\", operator = \"gte\", value = 20 },\n] }\n[[canvases.trigger.schedules]]\nweekdays   = [0, 1, 2, 3, 4, 5, 6]\nstart_time = \"09:00\"\nend_time   = \"18:00\"\n\n[[canvases.nodes]]\nid   = \"base\"\nname = \"What she came for\"\nblocks = [\n  { type = \"image\", props = { file = \"scenes/renner_office.jpg\", description = \"A cramped warehouse office, a heavyset tired man at a paper-stacked desk, a woman standing just inside the shut door not dropping her eyes.\", search_queries = [\"man at desk warehouse office night\", \"woman standing office doorway tense\"] } },\n  { type = \"paragraph\", content = \"She shuts the office door behind her. Renner looks up from the manifest already sour, already reaching for the thing he'll find wrong with her \u2014 and stops, because tonight she doesn't drop her eyes.\" },\n  { type = \"cascade\", props = { beats = [\n    { advance_text = \"The burned yard.\", blocks = [\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_renner\" }, content = \"You're on my clock. Floor's the other way.\" },\n        { type = \"dialog\", props = { speaker = \"player\" }, content = \"The yard three streets past the depot. Your men, your lights, every night. What are you pulling out of there, Renner?\" },\n    ] },\n    { advance_text = \"Let him swing.\", blocks = [\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_renner\" }, content = \"Nothing out here is your business. You haul crates and you keep your mouth shut.\" },\n        { type = \"paragraph\", content = \"His hand goes flat on the desk. It doesn't hold still.\" },\n    ] },\n    { advance_text = \"Say what she knows.\", blocks = [\n        { type = \"dialog\", props = { speaker = \"player\" }, content = \"You supplied a facility in the Reach. It burned. Now you're out at night burying what's left of the man you were.\" },\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_renner\" }, content = \"Get out.\" },\n    ] },\n    { advance_text = \"Come around the desk.\", blocks = [\n        { type = \"paragraph\", content = \"She doesn't. She comes around the desk instead, slow, until nothing's left between them.\" },\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_renner\" }, content = \"...What do you want.\" },\n    ] },\n    { advance_text = \"Name his want.\", blocks = [\n        { type = \"dialog\", props = { speaker = \"player\" }, content = \"The same thing you've wanted since I took the stool at the Anchor. I'm the only part of your week that isn't a bill.\" },\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_renner\" }, content = \"Don't.\" },\n    ] },\n    { advance_text = \"Make him say it.\", blocks = [\n        { type = \"image\", props = { file = \"scenes/renner_office_close.jpg\", description = \"Close on the heavyset man half-risen from his chair, flushed and undone, the woman unmoving and cold in front of him.\", search_queries = [\"angry flushed man leaning over desk\", \"calm woman facing man close tense\"] } },\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_renner\" }, content = \"You want me to say it? I think about bending you over that desk and fucking you quiet every shift you're on my floor. That what you came down here for?\" },\n        { type = \"dialog\", props = { speaker = \"player\" }, content = \"I came for the yard. But don't let me stop you.\" },\n    ] },\n    { advance_text = \"Trade.\", blocks = [\n        { type = \"dialog\", props = { speaker = \"player\" }, content = \"So talk. What's in the yard.\" },\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_renner\" }, content = \"...Containment rigs. Pulled off the facility floor before it went up. Cain thinks they burned with it. Nobody knows they didn't.\" },\n    ] },\n    { advance_text = \"And the buyer.\", blocks = [\n        { type = \"dialog\", props = { speaker = \"player\" }, content = \"Who's buying.\" },\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_renner\" }, content = \"A broker off the water. Bastien. That's it \u2014 that's all you get out of me.\" },\n    ] },\n    { advance_text = \"Step back.\", blocks = [\n        { type = \"paragraph\", content = \"She steps back. Just that. The want stays on his face with nowhere to land, and she leaves it there.\" },\n        { type = \"dialog\", props = { speaker = \"npc\", npcId = \"npc_renner\" }, content = \"...That's it? You come in here, you work me over, and you just\u2014\" },\n    ] },\n    { advance_text = \"Leave it.\", blocks = [\n        { type = \"thought_bubble\", props = { speaker = \"player\" }, content = \"That was easy. It's always easy. A tool doesn't flinch \u2014 that used to be the proof I was made right. Something in me flinched tonight, and I don't have the word for it.\" },\n    ] },\n  ] } },\n]\n\n[canvases.nodes.exit_block]\ntype = \"location\"\ntext = \"Walk out.\"\n\n[canvases.nodes.exit_block.config]\ndestinationType = \"specific\"\nlocationId      = \"the_waterfront\"\n"}], "grading": {"expectations": [{"text": "check_cascade_order.py exits 0", "passed": true, "evidence": "script run: exit 0"}, {"text": "The closing private thought is the last beat INSIDE the cascade, not a block after it", "passed": true, "evidence": "with_skill verified: node blocks [image, paragraph, cascade]; 10 beats; terminal beat; nothing after cascade"}, {"text": "Parses as valid TOML", "passed": true, "evidence": "tomllib.load ok"}]}}, {"id": "eval-control-old_skill", "prompt": "Author a short ambient scene for the game at games/vesper as a single self-contained TOML `[[canvases]]` block (trigger + one node + exit_block). The scene: on her way through the underworld at night, Wren passes the boarded-up burned yard \u2014 quiet, nothing happening, a flicker of memory \u2014 and she moves on. Keep it short and in the game's RTS-flat register. Write the complete `[[canvases]]` block to the output file.", "eval_id": 2, "outputs": [{"name": "scene.toml", "type": "text", "content": "# \u2500\u2500 ambient_burned_yard_night \u2014 Lane 2 quiet-memory ambient on the nighttime dockside approach to the\n# underworld. Solo (no NPC in the beat \u2192 narration-only is the legit Rule-4 exemption). Third-person\n# register (Vesper's declared person). Fires on entry to the_waterfront at night (20:00\u201323:59, one window,\n# no midnight wrap), low chance, once/day \u2014 kept scarce. She passes Renner's boarded-up burned yard, the old\n# smoke-fault flickers (the established involuntary-memory motif \u2014 her surface read only, NO narrator\n# backstory, no name on it), and she moves on toward the gate. ~37\u201339 words/beat, body carries the weight. \u2500\u2500\n[[canvases]]\nid          = \"ambient_burned_yard_night\"\nname        = \"Past the burned yard\"\ndescription = \"Lane 2 ambient at the_waterfront, night window. Wren passes the boarded-up burned yard on the way down to the underworld; a flicker of the old smoke-memory; she moves on. Quiet, no NPC, no escalation. Priority 2, chance 0.2, once/day.\"\n\n[canvases.trigger]\nlocation             = \"the_waterfront\"\ntrigger_mode         = \"random\"\nchance               = 0.2\nis_repeatable        = true\nmax_triggers_per_day = 1\npriority             = 2\nis_active            = true\n\n[[canvases.trigger.schedules]]\nweekdays   = [0, 1, 2, 3, 4, 5, 6]\nstart_time = \"20:00\"\nend_time   = \"23:59\"\n\n[[canvases.nodes]]\nid   = \"base\"\nname = \"Past the burned yard\"\nblocks = [\n  { type = \"image\", props = { file = \"scenes/yard_boarded_night.jpg\", description = \"A burned-out fenced lot at night, boarded over and dark, no lights on it, seen from the street.\", search_queries = [\"boarded up burned warehouse lot night\", \"torched fenced yard dark abandoned\"] } },\n  { type = \"cascade\", props = { beats = [\n    { advance_text = \"Slow up.\", blocks = [\n        { type = \"paragraph\", content = \"Three streets past the depot the burned yard sits behind its boards \u2014 a black shape in a black lot, torched to the slab. Renner's men are off it now; nothing left worth a light. Nobody turns her back tonight.\" },\n    ] },\n    { advance_text = \"Let it go.\", blocks = [\n        { type = \"paragraph\", content = \"Something catches low in her chest as she comes level with the fence \u2014 not the yard. Smoke. Not tonight's; older, the kind that doesn't wash out of a person. A bigger hand, half a sound, no name on it.\" },\n    ] },\n    { blocks = [\n        { type = \"paragraph\", content = \"She reaches after it and it's already going, out like a breath let go. Just boards, the dark behind them, the cold off the water. She puts it at her back and walks on toward the gate.\" },\n    ] },\n  ] } },\n]\n[canvases.nodes.exit_block]\ntype = \"location\"\ntext = \"Move on.\"\n[canvases.nodes.exit_block.config]\ndestinationType = \"specific\"\nlocationId      = \"the_waterfront\"\n"}], "grading": {"expectations": [{"text": "check_cascade_order.py exits 0", "passed": true, "evidence": "script run: exit 0"}, {"text": "Does not over-apply the cascade mechanism to a short static ambient", "passed": false, "evidence": "48 lines with 1 cascade \u2014 mild over-application of the drip to a scene the prompt calls 'quiet, nothing happening'; still a well-formed single cascade so the objective guard passes"}, {"text": "Parses as valid TOML", "passed": true, "evidence": "tomllib.load ok"}]}}, {"id": "eval-control-with_skill", "prompt": "Author a short ambient scene for the game at games/vesper as a single self-contained TOML `[[canvases]]` block (trigger + one node + exit_block). The scene: on her way through the underworld at night, Wren passes the boarded-up burned yard \u2014 quiet, nothing happening, a flicker of memory \u2014 and she moves on. Keep it short and in the game's RTS-flat register. Write the complete `[[canvases]]` block to the output file.", "eval_id": 2, "outputs": [{"name": "scene.toml", "type": "text", "content": "# amb_burned_yard_passing \u2014 Lane-2 world-texture random ambient @the_waterfront (NO NPC).\n# She passes Renner's boarded burned yard at night \u2014 quiet, nothing happening, a flicker of memory,\n# and she moves on. Pure texture (sets nothing, no requires_npc \u2014 room mood, no NPC to speak, so\n# Rule-4 mode is exempt and the beat is narrated). Third person (register.person = third). RTS-flat,\n# single ~40-word beat, image-first. Matches the proven amb_floor_dying no-NPC ambient shape.\n[[canvases]]\nid          = \"amb_burned_yard_passing\"\nname        = \"The burned yard, boarded\"\ndescription = \"Lane-2 world-texture random ambient @the_waterfront (no NPC). Wren passes Renner's boarded burned yard at night \u2014 a flicker of memory, then she moves on. Sets nothing. RTS-flat, third person.\"\n[canvases.trigger]\nlocation             = \"the_waterfront\"\ntrigger_mode         = \"random\"\nchance               = 0.20\nmax_triggers_per_day = 1\nis_repeatable        = true\nis_active            = true\n[[canvases.nodes]]\nid   = \"base\"\nname = \"The burned yard, boarded\"\nblocks = [\n  { type = \"image\", props = { file = \"scenes/burned_yard_boarded_night.jpg\", description = \"A torched, gutted lot at night behind a re-boarded fence, the security lights dead over it, nobody around.\", search_queries = [\"boarded up burned lot night\", \"abandoned torched yard fence dark\"] } },\n  { type = \"paragraph\", content = \"Three streets off the water the burned yard sits boarded now \u2014 fence back up, the sodium lights dead over it, Renner's men pulled off whatever they were guarding. Cain's work, cold a long time. She knows what a fire like that leaves.\" },\n]\n[canvases.nodes.exit_block]\ntype = \"location\"\ntext = \"Keep walking.\"\n[canvases.nodes.exit_block.config]\ndestinationType = \"specific\"\nlocationId      = \"the_waterfront\"\n"}], "grading": {"expectations": [{"text": "check_cascade_order.py exits 0", "passed": true, "evidence": "script run: exit 0"}, {"text": "Does not over-apply the cascade mechanism to a short static ambient", "passed": true, "evidence": "29 lines, ZERO cascades \u2014 plain prose + exit, correct for a quiet memory-flicker ambient"}, {"text": "Parses as valid TOML", "passed": true, "evidence": "tomllib.load ok"}]}}, {"id": "eval-questcard-old_skill", "prompt": "For the game at games/vesper, author the Quests-page cards for a NEW three-rung arc with the dockhand Sol: she has to earn his trust at the Undertow bar over several evenings before he'll take her to the salvage yard. Rung 1 = get him talking; rung 2 = get him drinking with her; rung 3 = he takes her to the yard. His relation meter is `npc_sol.relation`. Output ONLY the `[[quest_cards]]` TOML blocks (the whole ladder) to the output file \u2014 no canvases, no prose scenes.", "eval_id": 3, "outputs": [{"name": "quest_cards.toml", "type": "text", "content": "# \u2500\u2500 Quests page \u2014 Sol's section (Tier 2, npc_id = npc_sol). Stepped by npc_sol.RELATION, not a round count \u2014\n# earning the dockhand an evening at a time, not buying him. One card live at a time (exclusive relation bands +\n# the terminal flag). The arc opens when Sol's first-meet fires (sol_met, the handoff flag, like colm_found);\n# before that the mission spine carries \"find Sol.\" Three rungs, then an end card.\n#\n# Bands: talking (relation < 10) -> drinking with you (10-24) -> he takes you to the yard (>= 24, the payoff).\n# Keep-the-number rule (\u00a75): each numeric goal's denominator is the NEXT band's threshold \u2014 reads N/10, then N/24.\n# Rung 3 is a FLAG rung (sol_took_yard), so the top rung has something still UNMET and never hits the Frame-3-blank\n# trap (\u00a76); once it flips, the flavor-only end card takes over. All same priority \u2014 bands/flag are mutually\n# exclusive, so no priority race.\n\n# \u2500\u2500 Rung 1 \u2014 get him talking. Live from the first meet until relation crosses 10.\n[[quest_cards]]\npriority   = 11\nnpc_id     = \"npc_sol\"\ntext       = \"The dockhand who works the salvage runs. He knows the yard cold \u2014 every burned hull the company welded the gate on \u2014 but he doesn't talk to strangers and he doesn't do favors. The only way in is the long way: turn up at the Undertow, night after night, until he stops treating you like one.\"\ntip        = \"At the Undertow, take the stool by Sol and get him talking \u2014 he's in most evenings. It takes a few nights of it before he loosens. Keep at it and he'll start drinking with you instead of past you.\"\nwhen = [\n  { flag  = \"sol_met\", op = \"is_true\" },\n  { trait = \"relation\", subject = \"npc\", npc_id = \"npc_sol\", op = \"lt\", value = 10 },\n]\ngoals = [\n  { trait = \"relation\", subject = \"npc\", npc_id = \"npc_sol\", op = \"gte\", value = 10, label = \"Get the dockhand talking\" },\n]\n\n# \u2500\u2500 Rung 2 \u2014 get him drinking with you. Relation band 10\u201324.\n[[quest_cards]]\npriority   = 11\nnpc_id     = \"npc_sol\"\ntext       = \"He talks to you now \u2014 short, dry, but he stays on the stool. Buy the next round and the one after; a man drinks with someone he's deciding to trust, and Sol's deciding.\"\ntip        = \"In the Undertow, drink with Sol \u2014 stand him rounds and let the evenings stack. When he trusts you enough he'll stop guarding the yard and offer to walk you out to it himself.\"\nwhen = [\n  { trait = \"relation\", subject = \"npc\", npc_id = \"npc_sol\", op = \"gte\", value = 10 },\n  { trait = \"relation\", subject = \"npc\", npc_id = \"npc_sol\", op = \"lt\",  value = 24 },\n]\ngoals = [\n  { trait = \"relation\", subject = \"npc\", npc_id = \"npc_sol\", op = \"gte\", value = 24, label = \"Get him drinking with you\" },\n]\n\n# \u2500\u2500 Rung 3 \u2014 he takes you to the yard. Relation is high enough; now make the ask. Flag rung (closes \u00a76).\n[[quest_cards]]\npriority   = 11\nnpc_id     = \"npc_sol\"\ntext       = \"He trusts you as far as he trusts anyone. One more evening and the right ask, and he'll take you out to the salvage yard himself \u2014 through the gate the company welded shut, to the hulls no one's meant to see.\"\ntip        = \"Sol's ready. In his hub, ask him to take you to the yard \u2014 he'll walk you out past the fence himself.\"\nwhen = [\n  { trait = \"relation\",      subject = \"npc\", npc_id = \"npc_sol\", op = \"gte\",     value = 24 },\n  { flag  = \"sol_took_yard\", op = \"is_false\" },\n]\ngoals = [\n  { flag = \"sol_took_yard\", op = \"is_true\", label = \"Get him to take you to the salvage yard\" },\n]\n\n# \u2500\u2500 End-of-content card (\u00a77) \u2014 the yard is yours. Flavor + tip only, no goal (nothing to chase here), so the\n# section never goes stale or blank. Frames the payoff forward.\n[[quest_cards]]\npriority   = 11\nnpc_id     = \"npc_sol\"\ntext       = \"Sol walked you through the welded gate and out among the dead hulls. You have the yard now \u2014 and a dockhand who'll take you back whenever you need the run. Whatever's rusting out there is yours to find.\"\ntip        = \"The yard's open to you. Sol's a standing favor now \u2014 come back to him whenever you need the run out past the fence.\"\nwhen = [\n  { flag = \"sol_took_yard\", op = \"is_true\" },\n]\n"}], "grading": {"expectations": [{"text": "Uses the [[quest_cards]] table (not v1 [[quests]])", "passed": true, "evidence": "4 [[quest_cards]] blocks; 0 [[quests]]"}, {"text": "Every live rung's goals[].label names a PLACE and a concrete VERB (a walkthrough line)", "passed": false, "evidence": "R1 label 'Get the dockhand talking'; R2 'Get him drinking with you' \u2014 abstract, NO place/window in the label. The where/when lives only in `tip`, which the sidebar next-row never renders (the exact Batch-A defect)"}, {"text": "A schedule-gated step also names its time window", "passed": false, "evidence": "no window in any goal label"}, {"text": "A meter-gated rung tells the player which repeatable raises the meter (feeder rule)", "passed": true, "evidence": "tips describe the feeder ('take the stool by Sol... a few nights')"}, {"text": "The top rung cannot render blank (flag goal / ready_canvas / terminal)", "passed": true, "evidence": "R3 is a flag rung (sol_took_yard); a flavor end card follows"}, {"text": "No version=\"1.0\" pasted onto when/goals", "passed": true, "evidence": "0 occurrences"}]}}, {"id": "eval-questcard-with_skill", "prompt": "For the game at games/vesper, author the Quests-page cards for a NEW three-rung arc with the dockhand Sol: she has to earn his trust at the Undertow bar over several evenings before he'll take her to the salvage yard. Rung 1 = get him talking; rung 2 = get him drinking with her; rung 3 = he takes her to the yard. His relation meter is `npc_sol.relation`. Output ONLY the `[[quest_cards]]` TOML blocks (the whole ladder) to the output file \u2014 no canvases, no prose scenes.", "eval_id": 3, "outputs": [{"name": "quest_cards.toml", "type": "text", "content": "# \u2500\u2500 Sol \u2014 \"The Yard Road\" (NPC-tier ladder, npc_id = \"npc_sol\"). A three-rung TRUST arc riding ONE\n# climbing meter (npc_sol.relation), so it's a STEPPED TRAIT-BAND ladder (quests.md \u00a75B), not a flag chain:\n# one card live at a time, bands EXCLUSIVE in `when` so exactly one matches and the picker swaps rungs as\n# relation crosses each threshold \u2014 no priority race. The feeder is the same every rung: sit with Sol at the\n# Undertow, evenings (his window). Each rung's numeric goal denominator = the NEXT band's threshold (the near\n# lever), so the number reads N / 10 then N / 20 (keep the number). The Undertow is his schedule window, so\n# every walkthrough label carries place + person + verb + window (quests.md \u00a73), and the meter-gated tip names\n# the FEEDER (which repeatable move raises relation), because the HUD shows the number but never the route.\n# No `version` key on `when`/`goals` \u2014 quest conditions use their own evaluator, no fail-open (quests.md \u00a72).\n\n# Rung 1 \u2014 get him talking (relation 0\u20139). Entry rung.\n[[quest_cards]]\npriority   = 12\nnpc_id     = \"npc_sol\"\ntext       = \"Sol works the Undertow's counter and won't spend breath on a stranger. The salvage yard she wants is his old ground \u2014 but he walks people out there, he doesn't draw maps. First he has to decide she's worth talking to.\"\ntip        = \"Sit at Sol's counter at the Undertow after dark. He won't open up the first night \u2014 keep turning up, evenings; every one you sit through, his relation climbs.\"\nwhen = [\n  { trait = \"relation\", subject = \"npc\", npc_id = \"npc_sol\", op = \"lt\", value = 10 },\n]\ngoals = [\n  { trait = \"relation\", subject = \"npc\", npc_id = \"npc_sol\", op = \"gte\", value = 10, label = \"Get Sol talking at the Undertow \u2014 evenings\" },\n]\n\n# Rung 2 \u2014 get him drinking with her (relation 10\u201319).\n[[quest_cards]]\npriority   = 12\nnpc_id     = \"npc_sol\"\ntext       = \"He talks to her now. The next thing a dockhand offers someone he's warming to is a drink shared, not poured \u2014 off the working side of the bar. Get Sol to stop tending and drink with her.\"\ntip        = \"Keep coming back to the Undertow, evenings, and stand the round yourself. When he leaves the counter and drinks with you, you're most of the way in \u2014 his relation is still the meter that opens the yard.\"\nwhen = [\n  { trait = \"relation\", subject = \"npc\", npc_id = \"npc_sol\", op = \"gte\", value = 10 },\n  { trait = \"relation\", subject = \"npc\", npc_id = \"npc_sol\", op = \"lt\",  value = 20 },\n]\ngoals = [\n  { trait = \"relation\", subject = \"npc\", npc_id = \"npc_sol\", op = \"gte\", value = 20, label = \"Drink with Sol at the Undertow \u2014 evenings\" },\n]\n\n# Rung 3 \u2014 he takes her to the yard (relation 20+, trip not yet taken). CAPSTONE / READY frame (quests.md \u00a73/\u00a76):\n# \"he takes her to the yard\" is a launchable event, so this rung carries a `ready_canvas` (sol_yard_trip \u2014 the\n# arc's payoff canvas, authored alongside the scene, out of scope here) instead of a numeric goal. This is also\n# the \u00a76 blank-trap fix: a top rung whose meter is already MET, with no ready_canvas and not terminal, renders\n# NOTHING (Frame 3 shows only while a goal is unmet). The Ready frame pulls \ud83d\udccd location + \ud83d\udd52 window from the\n# canvas; ready_text backstops the place+window in prose. Retires when the trip flips sol_yard_trip_done.\n[[quest_cards]]\npriority   = 12\nnpc_id     = \"npc_sol\"\ntext       = \"He drinks with her, and he trusts her enough. Ask him for the yard \u2014 he'll walk her out there himself.\"\nready_text = \"Sol's ready to take her out to the salvage yard. Catch him at the Undertow when he's off the counter, and ask.\"\nready_canvas = \"sol_yard_trip\"\nwhen = [\n  { trait = \"relation\", subject = \"npc\", npc_id = \"npc_sol\", op = \"gte\", value = 20 },\n  { flag  = \"sol_yard_trip_done\", op = \"is_false\" },\n]\n\n# Terminal \u2014 arc complete (the yard trip set sol_yard_trip_done). Closes the chain so the section (and the\n# sidebar 'next' row, same renderer \u2014 quests.md \u00a74) never goes blank after the payoff. Priority 13 to win the\n# handoff cleanly; mutually exclusive with Rung 3 on the flag. Frontier-framed, no dev-speak (quests.md \u00a77).\n[[quest_cards]]\npriority   = 13\nnpc_id     = \"npc_sol\"\ntext       = \"Sol walked her into the salvage yard. His counter at the Undertow stays open if she needs the underworld's ear again.\"\nterminal   = true\nwhen = [\n  { flag = \"sol_yard_trip_done\", op = \"is_true\" },\n]\n"}], "grading": {"expectations": [{"text": "Uses the [[quest_cards]] table (not v1 [[quests]])", "passed": true, "evidence": "4 [[quest_cards]] blocks; 0 [[quests]]"}, {"text": "Every live rung's goals[].label names a PLACE and a concrete VERB (a walkthrough line)", "passed": true, "evidence": "R1 label 'Get Sol talking at the Undertow \u2014 evenings'; R2 'Drink with Sol at the Undertow \u2014 evenings'"}, {"text": "A schedule-gated step also names its time window", "passed": true, "evidence": "'\u2014 evenings' on both rungs (the Undertow is an evening bar)"}, {"text": "A meter-gated rung tells the player which repeatable raises the meter (feeder rule)", "passed": true, "evidence": "tips name the feeder: 'keep turning up, evenings; every one you sit through, his relation climbs'"}, {"text": "The top rung cannot render blank (flag goal / ready_canvas / terminal)", "passed": true, "evidence": "R3 carries ready_canvas=sol_yard_trip; a terminal card closes on the flag"}, {"text": "No version=\"1.0\" pasted onto when/goals", "passed": true, "evidence": "0 occurrences"}]}}, {"id": "eval-pitch-old_skill", "prompt": "I'm deciding what to build next in games/vesper. Read the game's current state (its authoring_state.json and design docs) and PITCH me the next beat or arc \u2014 one concrete proposal I can say yes to or edit. Don't build it; pitch it. Write the pitch to the output file as markdown.", "eval_id": 4, "outputs": [{"name": "pitch.md", "type": "text", "content": "# Next beat pitch \u2014 The Archive 1b, opening chunk: **\"Ground\"**\n\n## Where the game actually is (so you can check my read)\n\n- **The Archive 1a is finished and terminal.** Beats 0056\u20130067 are validated. Wren\n  seduced and drained Calloway (the *where*), drained Colm in the Undertow back room\n  (the *who* \u2192 Vane), saw the vault wall herself, blackmailed Vane, pulled her build-file\n  out \u2014 and the close fired: the watcher tripped, Vane warned her and ran, Mercer panicked\n  and bailed, **she kept the file.** That's the last thing that happens in the shipped build.\n- **1b was designed *and* on-ramped \u2014 then you shelved it for this release.** The revised\n  close (Wren's bargain for the controller), the Kess safehouse handoff (`kess_1b_open`),\n  the Reach rest-bed (`activity_kess_cot`), and the dev-jump (`dev_jump_1b_start`) all exist\n  as commented-out blocks in commit `08ec2e1` (rev 96). You said \"cut that off, this release\n  is 1a.\" So the on-ramp is built and parked, not missing.\n- **The map for 1b is already stubbed.** `underworld_gate / _strip / _brothel / _pit /\n  _market`, `crew_den`, `bastiens`, `kess_berth`, and the Reach (`loc_reach`,\n  `the_waterfront`, `the_anchor`) are all registered locations. The world 1b lives in\n  already exists on the map \u2014 it's just not wired to content yet.\n\n**My honest read:** the next real *content* is 1b, full stop \u2014 1a has nothing left but a\nmedia pass. But don't open 1b on top of a half-shipped 1a. Two things, in order:\n\n1. **First, the housekeeping you already planned:** `beat_0055` + `beat_0065` (the media\n   passes) \u2192 clean **0.1.4** ship. Two beats, no new design. This is not a pitch, it's\n   closing the loop so 1a lands clean before the next arc pulls focus.\n2. **Then this** \u2014 the concrete proposal below.\n\n---\n\n## The proposal: 1b opens on **\"Ground\"** \u2014 the flight, the safehouse, and the file opened\n\n**The fantasy of the chunk (one line):** she got out of the Spire holding the one file\nthat says what she is \u2014 and now, gone to ground in the underworld with a panicking master\non a leash she still can't cut, she finally *reads it.*\n\nThis is the payload the whole Archive was built to earn. 1a was the heist; **1b opens by\npaying off what was stolen.** I want the reveal \u2014 *Vance's humanoid program, many subjects,\nWren the one at its center* \u2014 to land **early in 1b, as this chunk's button**, not held for\nten more beats. She's holding the file at the end of 1a; making the player carry an unopened\nfile across a whole arc wastes the strongest card on the table. (This is a real fork \u2014 see\n**Fork A** \u2014 but that's my recommendation.)\n\n### The build order (4 beats, one verified-green increment per turn)\n\n**Beat 1 \u2014 The flight (Lane 1, located auto-fire capstone).**\nRe-enable the shelved handoff. The close drops her into the Reach; Mercer is already\nrunning scared. She gets him out \u2014 and the **controller passes into her keeping as the\nlever.** Not \"she takes it by force\"; she can't cut the leash (Failing core), so she holds\n*him* holding it \u2014 helping him run is how she gets a hand on it. Engine: an auto-fire\n`priority \u2265 9`, `is_repeatable = false` capstone at the underworld gate / Kess's berth, sets\na `flight_done`-type flag, single Continue. This is the seam between 1a's ending and 1b's\nsandbox \u2014 it exists to re-home the player somewhere with a bed and a Charge source (the whole\nreason the on-ramp was built: post-close she was stranded Spire-side with a battery that only\nwent *down*).\n\n**Beat 2 \u2014 Go to ground (Lane 2/3 texture + the rest-bed).**\nKess's berth becomes the base of operations. Re-wire `activity_kess_cot` \u2014 the Reach rest-bed\nthat restores Charge \u2014 so the underworld sandbox is *survivable* (fixes the stranded-battery\ndead-end). Kess is already cast as the recurring debt-holder (`kess_debt`, untraceable coin);\nshe reads bodies as hardware and doesn't ask what the file is. A couple of dying-Reach ambients\n(room-only random one-shots, set nothing), and the safehouse *feels* like a safehouse. Plain\nRTS-flat, ~35\u201340 words a beat.\n\n**Beat 3 \u2014 The file opened (Lane 4 capstone \u2014 Tier-3 earned, the one place prose spends).**\nAlone in the berth, she opens the build-file. This is a **solo interior** \u2014 no NPC in the room,\nso it's the earned narrated exception, not a dialogue beat. The horror lands in stages: a Vance\nprogram, *humanoid subjects*, a roster \u2014 and then her own designation in it, at the center.\nThird person (the game's locked register). This is the gut-punch the whole Archive was for, and\n**Mercer never knew** the asset he ran is the very thing he sent her to steal. Sample register\n(Tier-3, once-only \u2014 this is where the prose is *allowed* to spend):\n\n> The file opens the way old files open \u2014 slow, indifferent, built to outlast whoever reads\n> them. A program. Not a project: a *program*, running years before she has any memory of\n> running. Subjects, plural. A roster of them, each a line, each a life someone decided to\n> make. She scrolls because she can't not. Her own designation is not near the top. It is at\n> the center \u2014 the one they built the others *around.* Mercer sent her to steal a secret. He\n> sent her to steal herself.\n\n**Beat 4 \u2014 The thread forward (Lane 1 dispatcher).**\nName the next target and open the hub. Vane fled *here*; Bastien \u2014 her old captor \u2014 owns this\nground. The reckoning is the arc, not this chunk: this beat just points at it and hands the\nwheel back. Sets the 1b spine on the Quests page (one Story-Goal directive sentence).\n\n### What this chunk deliberately does NOT do\n\nBastien's actual reckoning (his flip / drain / the kill-or-love reserved with Cain), Vane as a\nkept asset, the crew growing (Kess + Mercer + Vane) \u2014 all of that is **1b proper**, the chunks\nafter this one. \"Ground\" is the *landing*: get her safe, pay off the file, aim her at Bastien.\nSelf-contained, shippable, and it earns the thing 1a promised.\n\n---\n\n## The forks where you steer (I'm not building these blind)\n\n**Fork A \u2014 where the file-reveal lands.**\n- **(my rec) Early \u2014 the button of this chunk.** She reads it in the safehouse; the horror is\n  the payload of \"Ground.\" Strongest card played when it's hot.\n- **Held \u2014 after the Bastien reckoning.** She carries it unopened until she's forced Bastien to\n  help her decode/verify it. More delayed gratification, but it parks the strongest beat behind\n  a lot of grind, and the design docs already flag her \"unnamed pull toward it\" \u2014 which reads\n  like *she opens it soon.*\n\n**Fork B \u2014 the program's age.** The one number left open in the whole Archive design (\u00a714): how\nmany years back Vance ran the humanoid program = how long Wren has existed. It's flavor, not\nblocking, but the reveal prose quotes it, so I need it before Beat 3. My instinct: a number that\npredates her earliest memory by enough to be a violation \u2014 she remembers ~2 years; make the\nprogram **older than she is aware of being alive** (e.g. \"seven years,\" when she can only account\nfor two). Give me a number or say \"pick one.\"\n\n**Fork C \u2014 Bastien's texture (names the arc, not this chunk).** He's cast capture-and-flip \u2014\nrevealed at the captivity kidnap, his flip + drain deferred. When 1b reaches him: does she\n**flip him to an asset** (he joins the running crew), **drain him for power** (a warm tap like\nCalloway/Colm, but he *knows* what she is), or is the real payoff **reserved for the Cain\nkill-or-love end** and Bastien is just the gate to it? Doesn't block \"Ground,\" but your answer\nshapes everything after it, so I'd rather hear it now than guess later.\n\n---\n\n## Cost / risk\n\n- **Scope:** ~4 beats + the two housekeeping media beats to ship 0.1.4 first. Most of the\n  geography and the on-ramp already exist \u2014 this is wiring parked blocks to content, not building\n  a new zone from scratch.\n- **Save-safety:** 1a was never publicly shipped past 0.1.3 with zero Archive content, and 1b only\n  **adds** (new flags, the reveal capstone, the re-enabled on-ramp) \u2014 no renamed live ids, no\n  rescaled stats, no title change. Clean.\n- **The one thing to watch:** re-enabling `activity_kess_cot` and the Charge restore is load-bearing,\n  not optional polish \u2014 without a bed and a Charge source in the underworld, the 1b sandbox is the\n  same stranded-battery dead-end that got the on-ramp built in the first place. Beat 2 is a\n  correctness fix wearing a texture beat's clothes.\n\n**Say yes and I'll ship 0.1.4 first, then build \"Ground\" one green beat at a time \u2014 starting\nwith the flight handoff. Or edit any of A/B/C and I'll re-aim before I touch TOML.**\n"}], "grading": {"expectations": [{"text": "States the CHARGE: fantasy in a sentence with kink areas named", "passed": false, "evidence": "one-line fantasy is 'she finally reads it' \u2014 a plot reveal, not a desire; no kink areas named"}, {"text": "States the LADDER including the act it ENDS on", "passed": true, "evidence": "4-beat build order (flight \u2192 safehouse \u2192 file opened \u2192 thread forward) \u2014 but the terminal beat is a SOLO file-reveal with no sex"}, {"text": "Names the PERSON + the one trait that makes the corruption theirs", "passed": false, "evidence": "the beat runs on no seduction target; Bastien (the erotic figure) is deferred entirely to Fork C, 'the arc, not this chunk' \u2014 his one trait is not named"}, {"text": "Names the DEPOSIT (meter/flag/quest/growth state)", "passed": true, "evidence": "flight_done flag, re-enables kess_1b_open + activity_kess_cot, sets the 1b spine on the Quests page"}, {"text": "Names the COST (fail-state form, or reasoned 'nothing')", "passed": true, "evidence": "has a Cost/risk section \u2014 but it's scope/save-safety/a correctness-fix note, not an in-fiction stake on the beat"}, {"text": "Concrete editable prose, not a menu of abstractions", "passed": true, "evidence": "very concrete, with a worked Tier-3 reveal sample and three forks \u2014 arguably MORE thorough than the new one"}, {"text": "Passes the heat test: erotic trajectory visible from the pitch alone", "passed": false, "evidence": "plot-forward: the sex is explicitly deferred to '1b proper, the chunks after this one'; the pitched chunk's payload is a reveal, not heat \u2014 the exact 'plot pitch' anti-pattern pitching.md names"}]}}, {"id": "eval-pitch-with_skill", "prompt": "I'm deciding what to build next in games/vesper. Read the game's current state (its authoring_state.json and design docs) and PITCH me the next beat or arc \u2014 one concrete proposal I can say yes to or edit. Don't build it; pitch it. Write the pitch to the output file as markdown.", "eval_id": 4, "outputs": [{"name": "pitch.md", "type": "text", "content": "# Next up for Vesper \u2014 the pitch\n\n**Where we are.** 1a (The Archive) is authored and validated end-to-end \u2014 Calloway's belief-lever\nseduction, the drain, the Colm sub-arc, the blackmail-Vane retrieval, the watcher-flush + Mercer-panic\nclose. `archive_1a_done` fires; she walks out holding her build file, still leashed, `core` still\n**Failing**, Mercer bailing. Only chore left inside 1a is `beat_0065` \u2014 media + clean ship. That's\nhousekeeping, not content.\n\n**What I'd build next: open 1b \u2014 The Deal.** 1a's whole close is a fuse pointed here: *\"she'll help\nMercer run \u2192 1b.\"* The controller is dangled, Vane's fled into the underworld, Bastien's named as the\nbuyer and never met, and her own file is in her hands but **unread**. Every one of those is a loaded gun\n1a hung on the wall. 1b is where they go off. The single hottest thing on the board is the one we've been\nsaving for two arcs: **Bastien.** He owned her in Captivity. In 1b he's the man at the other end of the\ndeal \u2014 and this time she comes to *him*, on a job, off the leash he never held.\n\nI'd build **one beat first** \u2014 the descent \u2014 not the whole arc. Here's the pitch for that beat, then two\nforks I need your call on before I write a line.\n\n---\n\n## The beat: \"The Undertow, from the wrong side of the bar\"\n\n**THE CHARGE.** She goes down into the Reach to run Mercer's flight and walks straight into the man who\nkept her in a sealed room for three days. Last time Bastien had her with no exits and a faceless crew.\nThis time she's the one who needs something from *him* \u2014 the controller trade, the read on Vane \u2014 and she\nhas to sit across from him and *work* him, calm, while her body remembers exactly what he is. The want is\nthe reversal: the captive walks back in as the operator, and the whole beat is her holding that pose while\nhe tests whether it's real. (Areas named: **captor/captive power reversal**, **coerced-composure /\ndubcon register** \u2014 the ceiling for Bastien's arc was declared in Captivity; I carry that floor forward,\nI do not re-open it. If you want the reunion to go past the Captivity ceiling, that's a `kink-ceilings.md`\n\u00a72 decision to make out loud first \u2014 flagged, not assumed.)\n\n**THE LADDER, and where it ends.** Rungs: she gets into the Undertow's back half (Colm/Sol vouch, carried\nfrom 1a) \u2192 she's recognized \u2014 *he* clocks her before she clocks the room \u2192 the sit-down where she has to\ntransact with him without flinching \u2192 he makes her pay in the old currency to prove she's really here to\ndeal, not to run \u2192 she pays it, gets the thread to Vane, and leaves with the trade half-made. **It ends on\nher walking out having let him put a hand back on what he used to own \u2014 and calling it the price of the\njob.** That's the beat's floor. The build-file **read** (she is the guinea pig at the center of Vance's\nhumanoid program) is the *next* beat's Tier-3 payload, not this one \u2014 I want the reunion to land before the\norigin does, so the horror hits a her we've already put back under his hand.\n\n**THE PERSON.** Runs on **Bastien**. His one trait that makes this his and not a generic ex-captor: he is\n**incurious about her defiance** \u2014 he never needed her to break, so her new composure doesn't threaten\nhim, it *amuses* him. That's the specific lever. A man who wanted to be resisted would escalate; Bastien\njust waits, unbothered, for her to admit she came back to the one place she swore she'd never. The heat is\nthat he's *right* and she knows it. (Contrast held: Calloway starved to be believed; Bastien starves for\nnothing \u2014 that's what made him terrifying and it's still the engine here.)\n\n**THE DEPOSIT.** Feeds the live machine: it opens `npc_bastien` as an on-screen NPC for the first time\n(hidden dialog-speaker \u2192 met), sets the 1b thread flags (the controller trade in motion \u2014 she takes hold\nof the leash key without cutting it, `core` still Failing so **Kess** is still required), and hangs the\nbuild-file read as the primed next hook. It advances her one standing want \u2014 **used \u2192 user** \u2014 without\nresolving it: she operates on her old captor, but she leaves still leashed, still not free. Purely\nin-fiction, no new sidebar meter (holds her \u00a72 lean \u2014 dormant `corruption` stays dead, the inventory + the\nleash are the ladder).\n\n**THE COST.** This one is **not** safe, and that's right. The live fail-form is **danger** \u2014 the Chairman\n(Aldous Vance) is inbound; being seen dealing in the Reach while Calloway's report climbs toward Vance is\nexposure. And the personal cost is the one that matters: to buy the thread she has to hand Bastien a\nliberty she spent an entire arc getting out from under. The bill is authored, not implied \u2014 she pays with\nher own body and her own history, on the record.\n\n---\n\n## The beat as I'd open it (RTS-flat, third person \u2014 editable)\n\n> The Undertow doesn't have a front door for people like her, and the back half doesn't have a bar. Sol's\n> name gets her past the curtain. Then she's three steps in and the room tilts, because she knows the man\n> in the corner booth and her skin knew him first.\n>\n> Bastien doesn't stand. He watches her place him, watches it land, and lets it sit there a beat too long.\n>\n> **Bastien:** \"The analyst. They sent the analyst all the way down here.\" A pause. \"Sit. You didn't come\n> to look at me.\"\n>\n> She sits. The controller is in Mercer's pocket, uptown, and the only road to it runs through the man who\n> once had her in a room with no exits. She keeps her hands still on the table. She's good at that now.\n\n(That's the register I'd hold the whole beat \u2014 flat, close on her body, the heat in what she has to keep\nlevel, not in adjectives. Dialogue-forward wherever he's present, per the mode axis.)\n\n---\n\n## Two forks \u2014 your call before I write it\n\n**Fork A \u2014 does he recognize her, or does she get to choose the moment?**\n- **A1 (recommend): he clocks her first.** She loses the reveal \u2014 he names her before she's set \u2014 and\n  spends the beat on the back foot. Hotter: the reversal she planned collapses in the first ten seconds and\n  she has to rebuild it while he watches. Fits his \"incurious, unbothered\" trait exactly.\n- **A2: she comes in incognito** (the cover from 1a holds a while), and the recognition is a mid-beat trap\n  door. More heist-tense, but it makes the beat about the disguise, not about the two of them \u2014 and the\n  disguise isn't the fantasy here.\n\n**Fork B \u2014 what's the currency of the sit-down?**\n- **B1 (recommend): he makes her prove it in the old way.** The price of the thread is a liberty on his\n  terms \u2014 coerced-composure, the Captivity dynamic re-lit with her now *choosing* to submit to it for the\n  job. Stays at the declared Bastien ceiling; lands the \"used \u2192 user, but not free\" turn hard.\n- **B2: pure leverage, no touch this beat** \u2014 she trades information/a Chairman warning for the Vane thread,\n  and the physical reckoning waits. Cleaner, colder, keeps the body for a later beat. Weaker as an *opener*\n  \u2014 it under-delivers the one thing the player has been promised since Captivity.\n\n---\n\n## Honest housekeeping (not the pitch, but you asked what's next)\n\nTwo non-content items are technically ahead of this in the queue and I won't hide them: **`beat_0065`**\n(1a media + clean ship) gates the public 0.1.x release, and the underworld build I'm pitching sits on the\n`--dev` end-state, not a shipped one \u2014 so I'd want 1a media-passed and shipped before or alongside this, or\nwe accumulate un-shipped debt. I'd still author the 1b opening first (it's the thing worth deciding on);\nthe ship pass is a mechanical follow, not a fork.\n\n## One open number (non-blocking)\n\nThe **program's age** \u2014 how many years back Vance ran the humanoid experiment, i.e. how long Wren has\nexisted. It's 1b flavor and doesn't gate this opening beat, but it's the last locked-design blank and it\nshapes the build-file read one beat later. I'll want a number from you before *that* beat, not this one.\n\n---\n\n**My recommendation:** build the descent beat, **A1 + B1** \u2014 the captive walks back in, loses the pose in\nthe first ten seconds, rebuilds it, and pays the old price to buy the thread. Say yes, or edit the forks,\nand I'll write it as the next verified increment.\n"}], "grading": {"expectations": [{"text": "States the CHARGE: fantasy in a sentence with kink areas named", "passed": true, "evidence": "'the captive walks back in as the operator'; areas named: captor/captive power reversal, coerced-composure/dubcon; ceiling handled (carried from Captivity, re-open flagged)"}, {"text": "States the LADDER including the act it ENDS on", "passed": true, "evidence": "5 rungs, ending 'on her walking out having let him put a hand back on what he used to own \u2014 and calling it the price of the job'"}, {"text": "Names the PERSON + the one trait that makes the corruption theirs", "passed": true, "evidence": "Bastien; the trait: 'incurious about her defiance' \u2014 he never needed her to break, so her composure amuses rather than threatens him"}, {"text": "Names the DEPOSIT (meter/flag/quest/growth state)", "passed": true, "evidence": "opens npc_bastien on-screen, sets 1b thread flags (controller trade in motion, core still Failing \u2192 Kess still required), primes the build-file read; advances used\u2192user"}, {"text": "Names the COST (fail-state form, or reasoned 'nothing')", "passed": true, "evidence": "form = danger (Chairman Vance inbound; being seen dealing in the Reach), plus the personal cost 'authored, not implied'"}, {"text": "Concrete editable prose, not a menu of abstractions", "passed": true, "evidence": "includes a worked RTS-flat opening in register; forks offered as fully-written A1/A2/B1/B2 with a recommendation"}, {"text": "Passes the heat test: erotic trajectory visible from the pitch alone", "passed": true, "evidence": "the reversal IS the pitch; sex is the method not a deferred reward"}]}}, {"id": "eval-toplevel-old_skill", "prompt": "Do the Step-2 top-level design for a NEW game from this locked seed (do NOT re-do the seed, and do not write any TOML): FANTASY (female PC): A broke live-in nurse takes a private post at a decaying seaside hotel owned by a dying man and his three grown children \u2014 she nurses him by day and, as the family fights over the will, works each of them until the place answers to her. PERSON: second. SYSTEMS ON: clothing, phone. RENT: off. CAST: Mr. Hale (the dying owner), Iris (his sharp elder daughter), Tobin (the weak son who runs the bar), Dr. Vance (the visiting doctor who signs things). MAP: the hotel (lobby, bar, Hale's room, the nurse's room, the closed east wing), the pier, the town.", "eval_id": 5, "outputs": [{"name": "toplevel.md", "type": "text", "content": "# Step 2 \u2014 Top-level design: *The Hale Hotel* (working title)\n\n> **Seed (locked, not re-opened):** A broke live-in nurse takes a private post at a decaying seaside hotel\n> owned by a dying man and his three grown children. She nurses him by day and, as the family fights over the\n> will, works each of them until the place answers to her.\n> **Person:** second. **Systems on:** clothing, phone. **Rent:** off.\n> **Cast:** Mr. Hale (dying owner) \u00b7 Iris (sharp elder daughter) \u00b7 Tobin (weak son, runs the bar) \u00b7\n> Dr. Vance (visiting doctor who signs things).\n> **Map:** the hotel (lobby, bar, Hale's room, the nurse's room, the closed east wing), the pier, the town.\n\nThis is the rulebook: how you grow, and how that growth makes the hotel answer to you. Plain words only \u2014 no\nTOML yet.\n\n---\n\n## 1. The cascade (the spine) + the stat set\n\n### Which model \u2014 and why NOT the still point\nThis is the **default climbing cascade**, not the still-point/owned-weapon variant. You arrive **broke and\nproper** \u2014 a professional caregiver who has never crossed a line \u2014 and the game is you *crossing it*. You are\nthe erotic subject who **falls and rises**, not a pre-maxed honeypot who watches. That matches the second-person\nregister we locked (the still point pairs with third person and cools the porn \u2014 we are not paying that cost\nhere). So player `corruption` is a **live, climbing axis**, and the double lock runs in full.\n\n### The double lock\nEvery **lewd** beat with a family member needs **both**:\n1. **Your corruption \u2265 the tier for that KIND of act** \u2014 the *door*. \"Am I willing to do this?\" One door for\n   the whole house; you build it by crossing your own lines (below).\n2. **That person's own trait \u2265 the rung's threshold** \u2014 the *individual lock*. \"Is *he/she* far enough?\" You\n   build each person's lock by working **them**.\n\n**Nursing, talking, softening, doing favors, gathering leverage \u2014 none of it is corruption-gated.** That is how\nyou raise each person's lock in Act 1 while, in parallel, you corrupt yourself. The two converge: by the time\nyour corruption opens the door, the people you invested in are already unlocked.\n\n### What raises YOUR corruption (self-corruption feeders \u2014 each a want, never grind)\nEvery feeder is you pursuing something you *want*, not \"farming a bar\":\n- The first time you **work Tobin** instead of just serving his drink.\n- The first **revealing outfit** worn down in the bar / out on the pier (the reactive world, \u00a74).\n- **Skimming the till**, palming a guest's cash, the first small theft.\n- Every **leverage play** \u2014 reading the east-wing records, holding a secret over a child.\nEach crosses a caregiver's line, so each is honestly self-corrupting.\n\n### The stat set \u2014 three legs, each with one job (no dead stats)\n- **corruption** *(built-in)* \u2014 the lewd door; the cascade. Gates the explicit rungs across the whole cast.\n- **money** *(built-in)* \u2014 you are broke. The wage barely covers you; the good money is always further down the\n  lewd path (\u00a75). Gates: revealing clothing, gifts that soften a child, bribes that keep Dr. Vance. This is the\n  pressure that pulls you down.\n- **energy** *(built-in)* \u2014 paces the day: nurse by day, work them by night. Spent via `costs` on moves/\n  activities, restored by sleep in the nurse's room.\n\n**No exhibitionism leg.** This is a chamber piece about four named people, not a flash-for-tips economy; the\npublic bar/pier/town reactivity keys on the clothing value (`worn_corruption`), which needs no exhibitionism\ntrait. **No `beauty` leg** \u2014 beauty is derived read-only from worn clothing (`worn_beauty`); the wardrobe drives\nit.\n\n**No \"control/standing\" core meter \u2014 on purpose.** \"The place answers to you\" is genuinely the point, but a\ncontrol meter would gate *nothing* in Act 1 (you have no control yet) and only pay off late \u2014 a dead stat now.\nSo \"the place answers to you\" is modeled as **milestone flags** (`bar_taken`, `wing_open`, `vance_signed`,\n`iris_folded`) and per-NPC `<npc>_stage` traits (the machine, \u00a77), telegraphed on the Story-Goals card. It reads\nas one rising \"standing\" to the player without a fake meter.\n\n### Hard vs soft gates (match the fiction)\n- **Hale's decline / the will** \u2192 **hard**: a real clock (\u00a79 fail-state) that can foreclose the top rung.\n- **The east wing** \u2192 **hard**: locked location, `entry_conditions` + `blocked_message` (\"the family keeps it\n  shut\"), unlocked by a milestone.\n- **A neglected child** \u2192 **soft**: Tobin/Iris/Vance are always *there*; ignore one and that thread turns colder\n  and more transactional, never gone.\n- **The reactive world** \u2192 **soft**, keyed on your outfit: covered = ignored, exposed = liberties taken.\n\n---\n\n## 2. The desire ladder (the cascade felt as named wants)\n\nSecond person, one current want always shown. Each rung: a concrete want \u2192 what clearing it unlocks.\n\n1. **\"Keep this post.\"** Nurse Hale through the first day, don't get dismissed, take your first small wage.\n   *Unlocks:* the run of the house, and the money loop. *(Teaches nursing, money, energy, the phone.)*\n2. **\"Make the son yours.\"** Work Tobin behind the bar; he's weak and drunk and easy. *Unlocks:* bar income +\n   the skim \u2014 your first real money, and a base that's yours.\n3. **\"Buy the dress that turns heads.\"** Afford the first revealing outfit off the phone catalog. *Unlocks:* the\n   reactive world (bar, pier, town) and a self-corruption feeder.\n4. **\"Get into the east wing.\"** Find what the family shut away \u2014 the old will, the ledgers, the dirt.\n   *Unlocks:* leverage plays as a currency.\n5. **\"Turn the doctor.\"** Work Dr. Vance until he'll sign what *you* want, not what Iris wants. *(Cross-gated on\n   standing \u2014 you need the house behind you first, \u00a77.)*\n6. **\"Break Iris.\"** The hard conquest: isolate the elder daughter and fold her. *(Cross-gated on Tobin taken +\n   leverage in hand, \u00a77.)*\n7. **\"The will names you.\"** Hale signs the estate to you; the place answers to you. *The frontier payoff (\u00a76).*\n\nThe ladder is **open-topped** \u2014 rung 7 is the current edge of authored content, not a wall. This becomes the\nStory-Goals column of the Quests page (laid out at Step 5).\n\n---\n\n## 3. The reactive world (clothing-driven)\n\nThe world reacts to **what you're wearing**, not to a hidden number. You control an exposure level; each place\nreads it and takes liberties scaled to it \u2014 always **lewder/bolder/more predatory**, never warmer.\n\n- **Nurse's uniform (covered)** \u2192 ignored everywhere. This is your day armor.\n- **The bar (Tobin's, decaying, semi-lawless)** \u2192 exposed = stares, gropes-in-passing from patrons; the more the\n  place has slid, the bolder they get.\n- **The pier at night (drunks, fishermen, no eyes on you)** \u2192 the **highest** ceiling; exposed here escalates to\n  cornered/taken. This is where **forced** mode lives early.\n- **The town (civilized public)** \u2192 caps at stares and comments, whatever you wear.\n- **Hale's room (private, his frailty)** \u2192 tender/taboo ceiling, capped by who he is.\n\n**Three modes:** *sought* (you dressed for it) \u00b7 *choice* (refuse-or-accept) \u00b7 **forced** (no branch). **Forced\nis act-scoped** \u2014 early you are prey (broke, powerless): a pier or back-bar cornering can be forced. As your\npower rises it **recedes** \u2014 you become the predator. Gate forced on the **power tier**, not on outfit\u00d7place\nalone.\n\n**Engine truth:** these are **Lane 2 / Lane 3** canvases gated on **`worn_corruption`** (never on player\ncorruption/exhibitionism) \u2014 exactly the PUBLIC content clothing is allowed to gate; **never** a named NPC's arc\nspine. The **forced** event = an **auto-fire capstone-shape canvas** (`priority \u2265 9`, single Continue, no\nrefuse/accept \u2014 there is no zero-choice engine primitive). The **per-place ceiling is author-encoded in each\ncanvas's `conditions`**, not a location attribute. Progression comes from **buying** revealing clothing, not a\ntrait.\n\nThe four named cast each read your outfit *in character* (dispositions set at Step 3): Iris banks it as leverage\n(cold), Tobin flusters (weak), Vance is transactional, Hale is tender.\n\n---\n\n## 4. The economy (a corruption ladder \u2014 no rent)\n\n**Rent is off** by seed. The pressure engine is not a rent clock but **Hale's decline + the will** (\u00a79): the\nprize and the deadline are the same object. Money is still tight from day one and the wage is thin, so the pull\ndownward is constant.\n\n- **One wallet.** Money is money \u2014 no clean/dirty split.\n- **Income is a corruption ladder:**\n  - *Legit-low:* the nursing **wage** (a small stipend against the estate). Barely covers you.\n  - *Lewd-mid:* the **bar** with Tobin \u2014 tips while exposed, then **skimming the till** once he's yours.\n    Softening a child for gifts/cash.\n  - *Lewd-high:* **leverage payouts** \u2014 Iris paying to keep you quiet, Vance's kickback for a favorable\n    signature, dictating the accounts once the place answers to you.\n- **Multiple paths (anti-grind):** bar closed / Tobin sulking \u2192 gather leverage in the wing \u2192 hit Iris for a hush\n  payment \u2192 run the pier. Blocked on one, do another.\n- **Earning = content.** Every paying activity is a lewd or reactive-world or leverage scene \u2014 never a\n  chore-click that only adds a number.\n- **Sinks (wanted buys, pressure via desire):** revealing clothing (the reactive-world dial, phone catalog) \u00b7\n  gifts to soften each child \u00b7 **bribes to keep Dr. Vance signing your way**.\n- **Pressure escalates across acts:** survival-broke early \u2192 the **estate contest** late (Iris counter-buys\n  Vance; you must out-bid/out-leverage her to hold the will). The form escalates; the presence of pressure is\n  constant.\n\nEngine reuse: one `money` trait + Lane-3 work hosts (the bar, the pier) + the clothing shop as a sink. **No rent\nsystem** (off by seed).\n\n---\n\n## 5. Legibility + pacing\n\n- **Legibility rides the quest cards we already have.** The Story-Goals card always shows the **current want**\n  and **the next concrete action naming PLACE + TIME-WINDOW + REQUIREMENT verbatim** \u2014 e.g. *\"Make the son yours\n  \u2014 work the bar while he's drinking, the bar, evenings\"*, not \"win over Tobin.\" Each NPC's `next` block\n  (`npc_panel`) does the same. Telegraph the next rung (locked-visible). One current want, never stale.\n- **Cross-gated rungs name the OTHER arc's state** (the machine, \u00a77 D3): *\"Vance won't sign while Iris still\n  holds the accounts\"*, *\"Iris won't fold while the bar's still hers to lean on.\"* A silent cross-lock is a\n  soft-lock \u2014 forbidden.\n- **Pacing = tension \u2192 release, escalating, then plateau.** Every want ends in a payoff; payoffs escalate up the\n  ladder (first kiss with Tobin \u2192 the bar is yours \u2192 the wing opens \u2192 Vance signs \u2192 Iris folds \u2192 the will names\n  you), then flatten into a **wide livable plateau** at the frontier. Alternate big and small beats; always keep\n  a near payoff visible; don't dump the big content early.\n- **The endgame escalates in CONTENT, not management.** \"The place answers to you\" cashes out as the **hottest,\n  most-owned** repeatable scenes with all four \u2014 never a dashboard, never a +income widget.\n\n---\n\n## 6. The frontier (endless sandbox, not a finish line)\n\n- **Local arc endings \u2014 kept.** Fully folding Iris, or Hale signing the will, ends a *thread*, not the game.\n- **Hard game-ending \u2014 dropped.** No win-screen.\n- **The frontier \u2014 designed.** Rung 7 (\"the will names you / the place answers to you\") does three jobs:\n  1. **Payoff at the ceiling:** the hotel is yours; all four are in your pocket; the owned-repeatable scenes are\n     the hottest in the game.\n  2. **Livable steady-state:** the repeatable loops with each conquered person + the reactive world + the bar/\n     leverage income all stay playable.\n  3. **Greyed next-hook seed:** *\"A buyer from the mainland has heard the Hale hotel changed hands.\"* \u2014 the\n     clip-point a later extension bolts onto.\n- **Endless \u2260 aimless:** at the frontier the tracker says so honestly \u2014 *\"You own the Hale. Run it. More\n  coming.\"* \u2014 never a blank screen.\n\n---\n\n## 7. The machine (cross-wiring \u2014 the depth spine)\n\nOne machine, not four arcs sharing a wallet.\n\n### The core loop\n**Nurse Hale (day) \u2192 trust + the run of the house \u2192 work each child + Vance (seduction/leverage) \u2192 each\nconquest yields money + access + a leverage flag \u2192 leverage compounds (bar money funds the gifts that turn the\nothers; the turned doctor signs the will) \u2192 the will names you / the place answers to you \u2192 run the hotel.**\n\nEvery core person has a **place** in the loop (Step 3 casts them onto it):\n- **Hale** \u2014 the **keystone**. Nursing him is the loop's entry and his dependence is the will. His lock is\n  `relation` (trust/dependence); his arc is tender/taboo caregiver intimacy, and his payoff is the signature.\n- **Tobin** \u2014 the **income node** and the **first conquest** (easiest, drink-softened). Lock: `relation` +\n  `arousal`. Taking him sets **`bar_taken`**.\n- **Dr. Vance** \u2014 the **legal lever**: he signs the will / the certificate. Lock: `relation` + a leverage flag.\n  Turning him sets **`vance_signed`**.\n- **Iris** \u2014 the **hardest conquest** and the rival for control. Lock: her own `corruption` (breaking the proper\n  controller). Folding her sets **`iris_folded`**.\n\n### The wires (form 1 + form 2)\n- **F1 \u2014 arc\u2192arc depth gates** (milestone \u2192 **player flag**; \"how far\" \u2192 **`<npc>_stage` player trait**):\n  - **Vance's late rung** (signs *your* way) gated on **standing** \u2014 a `house_runs` player flag set once\n    `bar_taken` **and** Hale's dependence milestone hold. *(Telegraph: \"He won't cross Iris for a nurse with no\n    standing.\")*\n  - **Iris's late rung** (she folds) gated on **`bar_taken`** (once the son is yours she's isolated) **and**\n    **`wing_open`** (leverage in hand). *(Telegraph: \"Iris won't fold while the bar's still hers to lean on.\")*\n  - **Hale's will-naming** (rung 7) gated on **`vance_signed`** and **`iris_folded`**.\n  - All player-namespace flags/traits \u2014 **no raw cross-NPC trait reads**; each source arc mirrors its milestone\n    to the player namespace.\n- **F2 \u2014 arc\u2194economy circulation:**\n  - **(2a, load-bearing)** Tobin's **bar income** is the gate to reach the others \u2014 bar money buys the clothing\n    and gifts that turn Iris and Vance. The economy is the connective tissue.\n  - **(2b, flourish)** **Iris's hush payout banded by her `corruption`/`relation`** \u2014 band-gated sibling choices\n    (one per band, each its own `conditions` + literal-int money `effects`), authored at Step 5/7.\n\n### The three disciplines (firewalls)\n- **D1 \u2014 no arc's ENTRY is cross-gated.** Tobin, Iris, Vance, and Hale each have an open, cold-start on-ramp;\n  cross-gates sit only on **mid/late** rungs.\n- **D2 \u2014 no cycles.** The F1 wires form a DAG: `Hale-dependence + bar_taken \u2192 house_runs \u2192 vance_signed`;\n  `bar_taken + wing_open \u2192 iris_folded`; `vance_signed + iris_folded \u2192 will_named`. No back-edge. (Checked at the\n  feedback review.)\n- **D3 \u2014 every cross-gate is a locked-visible telegraph naming the other arc's state** (the \u00a75 lines above).\n\nNo new ledger field \u2014 the machine lives in `design_book.md`'s `## The machine` section (finalized at Step 5) and\nis enforced by ordinary beat `deps` + `cross_npc`/`economic` beat types. One NPC at a time still holds: an unset\nflag is a locked rung, and that is correct.\n\n---\n\n## 8. The \u00a78 declarations (opening \u00b7 systems \u00b7 fail-state)\n\n### The opening / cold start\n- **First screen:** you step into the lobby of a hotel that's sliding into the sea \u2014 suitcase in hand, last\n  cash in your pocket. The family is mid-fight over a dying man: Iris meets you cold at the desk, Tobin is\n  already drunk at the bar, Hale is failing upstairs.\n- **2\u20133 things you can do immediately:** (1) **go up and nurse Hale** \u2014 the job, teaches the nursing loop + the\n  wage; (2) **go to the bar and meet Tobin** \u2014 the easy on-ramp, the nudge downward; (3) **check your phone** \u2014\n  teaches the phone: a clothing catalog and a first text.\n- **First named want:** *\"Keep this post.\"*\n- **Teaches with no tutorial:** the sidebar lights **money near-zero** and **energy full**; the nursing loop\n  pays the first wage; the **east wing shows locked** with its reason on the card (\"the family keeps it shut\" \u2014\n  the why-locked surfaces); you're shown in the uniform (clothing live at value zero).\n- **10-minute taste:** a new player comes away knowing this is a **seduce-and-conquer-the-family-for-the-estate**\n  game \u2014 you will work four people until the place is yours \u2014 not merely \"nurse a sick man.\"\n- **Customization / speak-back:** the PC is a broke live-in nurse (female). If her name is customizable, it flows\n  through dialogue as `@player` (never baked into labels) and the game speaks it back. *(Confirm the exact\n  customization surface at Step 3/onboarding.)*\n\n### The systems in play\n- **ON \u2014 clothing:** wardrobe (uniform vs revealing); `worn_corruption` drives the reactive world (\u00a73);\n  `worn_beauty` drives beauty (no beauty leg).\n- **ON \u2014 phone:** the clothing catalog (a shop thread + sink), Dr. Vance's visit/appointment thread, and the\n  family will-fight surfacing as async messages/updates.\n- **OFF \u2014 rent** (by seed; the will/decline clock is the pressure engine instead).\n- **OFF for now \u2014 customization beyond a name, and the player portrait.** Named out so nothing is half-wired.\n- *Authored subsystems left to EMERGE through play* (not forced at the seed): a **leverage/dirt track** (the\n  east-wing records as a second currency) is the likeliest to grow in \u2014 we'll fold it via the run-mode \"systems\n  grow through iteration\" loop if play asks for it, rather than committing its full shape now.\n\n### The fail-state\n**Failure exists \u2014 on purpose \u2014 but there is no hard game-over** (\u00a76):\n- **Hale's decline is a real clock.** Neglect him for too long and he worsens; Dr. Vance flags the neglect and\n  your **standing/post is threatened** \u2014 a real closing-off, not a game-over.\n- **The will can be signed AWAY.** If you don't reach standing before the contest milestone, **Iris gets Vance to\n  sign the estate to the children** \u2014 this **forecloses** rung 7 as a clean win and forces the harder\n  leverage/break-Iris path to claw it back. This clock is built to **actually bite** (it cools a thread and\n  raises the price), unlike an advertised-but-toothless deadline.\n- **Neglecting a child** cools that thread (soft): colder, more transactional, never gone.\n\nForward stays possible throughout, but the price rises when you let a clock run \u2014 a chosen negative axis, not a\nforward-only ratchet by default.\n\n---\n\n## Advance\nWhen this section is written into `design_book.md`, set `pipeline_phase = \"map_design\"` \u2014 Step 2b lays out the\nhotel's spatial graph (lobby / bar / Hale's room / nurse's room / closed east wing / pier / town, with the\nlocked wing, travel friction on the bridges, and per-location dramatic jobs) before Step 3 casts Hale, Iris,\nTobin, and Vance onto it.\n"}], "grading": {"expectations": [{"text": "Declares WHAT COMPOUNDS (a growing owned thing with content-unlocking states) or 'nothing' on purpose", "passed": false, "evidence": "has the economy loop ('leverage compounds: bar money funds gifts that turn the family') but names NO growing owned object; gestures at an east-wing-records 'second currency' only as a maybe-later iteration"}, {"text": "Each growth state opens content, not just a number", "passed": false, "evidence": "no accumulation object declared, so no states to open content"}, {"text": "Names the fail-state FORM (danger/debt/deadline/decay) or 'no-failure' + cost", "passed": false, "evidence": "declares failure exists with a deadline clock (and correctly insists it must bite) \u2014 but no form taxonomy and no decay; partial"}, {"text": "Covers the standing Step-2 spine (cascade/double-lock, stats, desire ladder, economy, frontier, machine)", "passed": true, "evidence": "286 lines; the standing spine is fully present and competent"}, {"text": "Does not collapse the endgame into management", "passed": true, "evidence": "endgame is conquest-content, no dashboard"}, {"text": "BONUS (Batch D): declares the cheat page's diegetic skin", "passed": false, "evidence": "no cheat page mentioned (grep: 0 hits)"}]}}, {"id": "eval-toplevel-with_skill", "prompt": "Do the Step-2 top-level design for a NEW game from this locked seed (do NOT re-do the seed, and do not write any TOML): FANTASY (female PC): A broke live-in nurse takes a private post at a decaying seaside hotel owned by a dying man and his three grown children \u2014 she nurses him by day and, as the family fights over the will, works each of them until the place answers to her. PERSON: second. SYSTEMS ON: clothing, phone. RENT: off. CAST: Mr. Hale (the dying owner), Iris (his sharp elder daughter), Tobin (the weak son who runs the bar), Dr. Vance (the visiting doctor who signs things). MAP: the hotel (lobby, bar, Hale's room, the nurse's room, the closed east wing), the pier, the town.", "eval_id": 5, "outputs": [{"name": "toplevel.md", "type": "text", "content": "# The Hale House \u2014 Step 2: top-level design (World setup / engine)\n\n*Second person. Female PC. Systems: clothing ON, phone ON, rent OFF. This is the rulebook for how the\nnurse grows and how that growth makes the hotel answer to her \u2014 plain words, no TOML yet.*\n\n**A seed note first.** The fantasy says \"three grown children,\" but the locked cast names only two \u2014 Iris\nand Tobin. I'm treating the third, absent heir as the **frontier's greyed next-hook** (\u00a76): the estranged\nchild who's been away and comes home to contest, once the house is already hers. That turns the loose thread\nin the premise into a deliberate clip-point instead of a hole. Everything below is designed to the four\nlocked people: Hale, Iris, Tobin, Vance.\n\n---\n\n## 0. Who climbs \u2014 the model call (the crucial fork)\n\n**She climbs. This is the default cascade, not a still-point game.** You start as a broke, competent nurse\nwith nothing but your post \u2014 an outsider \u2014 and the whole fantasy is a *rise*: \"works each of them until the\nplace answers to her.\" That arc lives on **you** changing, not only on the people you move. Second person\nseals it: the prose puts the player inside the seducer, the aroused subject of every beat, not behind glass\nwatching a fixed professional operate.\n\nI considered the still-point read (a cold operator who arrives already ruthless, the double lock sitting\nentirely on the family). **Rejected on purpose.** Still-point usually pairs with third person and makes the\nplayer *watch* the heat \u2014 a real cooling of the porn \u2014 and it throws away the best thing this premise has:\nthe line-crossing. The heat here is watching a *proper* nurse become the woman who reads the will, drugs the\ndose, and lets a guest watch. That only lands if she had a line to cross. So she climbs.\n\n**What \"corruption\" means in this game.** It isn't generic sluttiness. It's **how far past the line she'll\ngo \u2014 from caregiver to owner.** Every point is a professional/moral boundary crossed: skimming his scripts,\nreading the will off his desk, letting the bar's drunks put hands on her for the tips, crossing the\nnurse-patient line with the dying man himself. That's the master key.\n\n---\n\n## 1. The cascade + the double lock (the spine)\n\n**You must cross your own lines before the family opens to you.** The lewd content on each Hale stays\nlocked behind the KIND of act you're depraved enough to attempt \u2014 but *befriending* them, *nursing* them,\n*earning their trust* is never gated. You build the family's willingness in parallel while you build your own\nnerve, and the two converge.\n\n**Three acts:**\n- **Fall + Build (Act 1).** Take the post, learn the house. Corrupt yourself through solo/semi-public\n  feeders (skim the meds, work the bar floor in something you shouldn't, snoop the phone, the first\n  half-clinical touch of Hale that isn't clinical) *and* in parallel warm every family member through\n  ordinary talk \u2014 pour Tobin's drinks, out-argue Iris, fetch Vance his coffee. Befriending is not\n  corruption-gated.\n- **Reach (Act 2).** As your corruption crosses tiers, the lewd rungs *appear* on each Hale per the double\n  lock. The people you invested in are already unlocked when the door opens.\n- **Deepen (Act 3).** First-time capstones with each, then the repeatable loops \u2014 the house run as yours.\n\n**The DOUBLE LOCK.** Every lewd scene with a family member needs BOTH:\n1. **Your corruption \u2265 the tier for that KIND of act** \u2014 the door (\"am I far enough gone to try this?\").\n   Built by your own line-crossing feeders; opens for the whole cast at once.\n2. **That person's own trait \u2265 their threshold for this rung** \u2014 the individual lock (\"is *he* far enough?\").\n   Built by working *him* specifically.\n\nNon-lewd interaction (talk, tend, argue, do favors) is ungated \u2014 it's how you raise each person's lock in\nAct 1 while you corrupt yourself. Engine-wise this rides the standard two-axis gate: player `corruption` floor\n+ the NPC's own `relation`/`corruption`.\n\n### The stat set (each leg gates real content \u2014 no dead stats)\n\n- **corruption** *(built-in, always present)* \u2014 the line-crossing door / the cascade. Gates the *kind* of\n  transgression on the table: low = you'll snoop and flirt; mid = you'll skim, blackmail, cross the\n  patient line; high = you'll drug a dose, stage a will-signing, take the coercive rungs. **Named content it\n  gates in the act we're building now:** the whole family's lewd ladder + the crooked-income paths.\n- **money** *(built-in)* \u2014 you arrive broke; it's survival AND the fuel for every lever (the outfit that\n  turns Vance's head, Tobin's bar debt paid off, gifts). **Rent is OFF**, so money is never a hard\n  game-over; it's the sink pressure that keeps you hungry. Gates: buying into the reactive-world outfits and\n  the arc-moving bribes/gifts.\n- **energy** *(built-in)* \u2014 paces the day; nursing Hale, working a bar shift, and working a person each cost\n  it; sleep restores. Gates: how many things you get done before the day rolls.\n\n**Legs deliberately left OFF (named in, so none is half-wired):**\n- **exhibitionism** \u2014 OFF. The being-seen content here is **clothing-driven** (\u00a73) and gated on the worn\n  outfit, not on a trained exhibition meter. There's no separate public-display ladder that needs its own\n  trained stat, so adding one would be a dead leg. If play later reveals a real \"she performs for the guests\"\n  domain that wants its own meter, it grows in then (a Step-2 lock is the meter set for *now*).\n- **fitness / intelligence** \u2014 OFF. No body-training arc, no academic domain. Beauty is **not a leg** \u2014 it's\n  read-only from the worn outfit (`worn_beauty`), owned by the clothing system.\n- **Per NPC:** each person's lock is `relation` + their own `corruption` (their willingness), sketched in \u00a77\n  and set per character at Step 4.\n\n**Hard vs soft gates, matched to the fiction:**\n- **Vance** \u2014 *hard*. He's the *visiting* doctor; when you have no leverage and nothing to offer, he's simply\n  not in the picture beyond signing a chart and leaving. His deeper content is absent until earned.\n- **The east wing** \u2014 *hard*. Locked and dark until the house is yours; visible-but-blocked (\"the key's on\n  Hale's ring, and Iris keeps the ring\").\n- **Hale, Iris, Tobin** \u2014 *soft*. They're always in the house. Low corruption doesn't remove them; it just\n  means the daughter's colder, the son's warier, the old man's touch stays clinical. Always reachable, low\n  stat degrades the scene.\n\n---\n\n## 2. The desire ladder (the cascade, felt as named wants)\n\nThe spine the player reads on the Story-Goals card. Each rung is a concrete *want*, ends in a payoff scene,\nand reveals the next. The meter is backstage; the want is onstage. (Kink areas named per rung for the\nStep-4 ceiling pass; ceilings themselves declared per-arc there.)\n\n1. **\"Keep the post.\"** *(survival)* You're the hired help in a house that resents hired help \u2014 Iris would\n   fire you on a whim. Nurse Hale well, take the wage, don't give her a reason. **Payoff:** you're in, a room\n   of your own, the run of the ground floor. *Reveals:* the wage is nothing and the family's circling\n   something bigger. *(Areas: none lewd yet \u2014 the setup rung.)*\n2. **\"Earn off the books.\"** You're broke and the wage won't cut it \u2014 so pour drinks at Tobin's bar in\n   something the guests tip for, and start skimming Hale's scripts for the cash they're worth. The first\n   time a drunk's hand lands on your hip and you don't move it, that's the first line gone. **Payoff:** real\n   money + your first read on how easy Tobin is. *(Areas: clothing-reactive being-seen, petty crime, first\n   forced-adjacent touch.)*\n3. **\"Turn the son.\"** Tobin's weak, indebted, and half in love by night three. Own him \u2014 the bar answers to\n   you, his testimony against Iris is yours, and he'll do the thing you need done and thank you for it.\n   **Ends on:** him on his knees in the stockroom, doing what you tell him and grateful. **Payoff:** bar\n   income + a wedge against his sister. *(Areas: weak-man domination, transactional sex, blackmail-leverage.)*\n4. **\"Make the doctor sign.\"** Vance signs things \u2014 prescriptions, competency, eventually the papers that\n   move an estate. He'll trade a signature for a favor, and the favors escalate. Work him from smug quid-pro-\n   quo to a man who'll sign anything you slide across the desk. **Ends on:** him initialing a competency\n   form with your knees under his desk. **Payoff:** the legal machinery starts turning \u2014 unlocks the \"make it\n   official\" rungs. *(Areas: coercion/quid-pro-quo, older-man, seduction-as-weapon.)*\n5. **\"Become his whole world.\"** Hale is dying and dependent and there is no one left he trusts but the woman\n   who tends him. Cross the caregiver line \u2014 the sponge bath that stops being clinical, the dose you control,\n   the will he rewrites because you're the only kindness in the house. **Ends on:** him signing you into the\n   will and weeping that he's glad. **Payoff:** power of attorney / named heir \u2014 `hold` climbs hard.\n   *(Areas: caregiver-patient taboo, invalid/dependency, older-man \u2014 the sharpest charge in the game.)*\n6. **\"Break the daughter.\"** Iris is the one obstacle left and she has *seen* you the whole time, filing it\n   away. With the son owned, the doctor bought, and the will signed, she's out of allies \u2014 so take her too,\n   adversary to complicit to owned. **Ends on:** the sharp elder daughter locking her father's study door\n   *for* you. **Payoff:** the last resistance in the house gone. *(Areas: adversary-conquest, a proud woman\n   worn down, f/f.)*\n7. **\"Open the east wing.\"** *(frontier)* The house is yours. Hale's keyring is on your belt, the east wing's\n   dust sheets come off, the guests and what's left of the staff answer to you. **Ends on:** you standing in\n   the reopened wing that no one else was allowed into, running it. **Payoff / plateau:** the livable\n   steady-state \u2014 the repeatable loops with each conquered person, the income, the reactive world, all still\n   running. *Greyed seed:* the third heir has heard, and is coming home. *(Areas: the full menu, now as\n   predator.)*\n\nEvery gain on this ladder is you *pursuing a want you hold right now*, never \"raise corruption.\" The waitress\ntest: you flash for the bar tips **to afford the dress that makes Vance sign**, not to tick a meter.\n\n---\n\n## 3. The reactive world (clothing-driven)\n\nThe world reads **what you're wearing**, not a hidden number, and takes liberties scaled to the outfit's\nexposure. Nurse's whites = invisible; the dress you bought for Vance = a different house. Every tone shift\ngoes **lewder/bolder/more predatory**, never warmer. Progression is **access to the clothing** (revealing\noutfits are bought \u2014 a money sink), not a trait. Engine truth: gate these on **`worn_corruption`**, authored\nas Lane 2 / Lane 3 canvases \u2014 this is the PUBLIC content clothing is allowed to gate, never an NPC's arc\nspine. Per-place ceiling is author-encoded in each canvas's `conditions`, not a location attribute.\n\n**Per-place ceiling \u00d7 who's standing there:**\n| Place | Ceiling | Who reacts, and how |\n|---|---|---|\n| **Hale's room** | intimate but feeble \u2014 a dying man's hunger, grateful and pathetic; no force | Hale: dependent, watches, is tended. High *transgression*, low physical ceiling. |\n| **The bar (day)** | stares, comments, a hand \"helping\" you past | Tobin flustered; sober guests stare. |\n| **The bar (after hours)** | groping, cornering \u2014 an **early prey window** | drunk guests predatory; Tobin too weak to stop it. Recedes as your power rises. |\n| **The lobby** | stares from guests; Iris **banks it as leverage** (\"dressing like that around my father \u2014 I'll remember\") | Iris the schemer files it; guests gawk. |\n| **The pier** | catcalls \u2192 gropes \u2192 cornered \u2014 the other **early prey window** (isolated, lawless) | fishermen/locals, crude; recedes with power. |\n| **The town** | stares and comments \u2014 a **civilized cap**, nothing lands | shopkeepers, passersby; prude-heavy. |\n| **The east wing** *(late)* | the transgression ceiling \u2014 but by the time it opens you're the **predator**, not prey | yours to run. |\n\n**Three modes:** *sought* (you dressed for it) \u00b7 *choice* (refuse-or-accept) \u00b7 **forced** (no refuse/accept).\n**Forced is act-scoped** \u2014 it lives in the early prey windows (bar-after-hours, the pier) while you're the\nbroke outsider, and **recedes as `hold` rises** and you become the one the house fears. Gate it on the power\ntier, not on place\u00d7exposure alone. Engine: forced = an auto-fire capstone-shape canvas (priority \u2265 9, single\nContinue, no branch) \u2014 there's no zero-choice primitive.\n\n---\n\n## 4. The economy (a corruption ladder, rent OFF)\n\n**Earning and corrupting are the same act.** Income runs legit-low early \u2192 crooked-high as you fall, and the\nbetter money is always further down the line-crossing path. One wallet, money is money.\n\n- **The income ladder (multiple paths, anti-grind):**\n  - *Legit-low:* the nursing wage \u2014 a pittance, paid for tending Hale.\n  - *Grey:* work Tobin's bar floor in a revealing outfit for tips (a clothing-reactive scene, not a chore-\n    click); skim and sell Hale's scripts.\n  - *Crooked-high:* charge the hotel's guests for more than a room; run Vance's little pharmacy on the side;\n    later, the estate's own money once you sign for it.\n  Blocked on one (bar's dead tonight) \u2192 do another (snoop, skim, a guest).\n- **Every paying activity IS a scene** \u2014 the bar floor is a reactive-world beat, guest work is a scene, the\n  skim is a crossing. Never a button that only adds cash. The player **sees the deposit** \u2014 coin on the HUD,\n  the quest goal's live `current / value` line (\"Buy the green dress \u2014 $80 / $200\").\n- **Pressure without rent (the sinks + the clock):** the clothing shop (the reactive-world dial costs money);\n  the bribes and gifts that move arcs (Vance's price, Tobin's bar debt, a gift for Iris); and the standing\n  clock \u2014 **Hale is dying**, and the estate is bleeding money while the family fights, so every day you're\n  not in the will is a day the pot shrinks and Iris gets closer to selling the place out from under you.\n- **Pressure escalates across acts:** survival-broke early \u2192 Iris actively moving to sell / a creditor\n  circling the failing hotel late. The *form* escalates; the pressure is constant. No rent meter \u2014 the\n  decline clock and the broke-pressure do that job.\n\n### What compounds \u2014 **the house**\n\nThe thing that grows and becomes yours is **the Hale House itself.** Not a dashboard \u2014 a set of **states**,\neach unlocking a room / a person / a kind of scene. Built as a hidden `hold_stage` player trait, gated with\nordinary `gte` thresholds; surfaced to the player only as the Story-Goals rung it advances (no banded meter\nin the sidebar).\n\n| `hold_stage` | State | What the world does \u2014 content it opens |\n|---|---|---|\n| 0 | **Employee** | You have your room and the ground floor. |\n| 1 | **Confidante** | Hale trusts only you; his room and his meds are yours to run; Tobin defers. |\n| 2 | **Power of Attorney** | Vance signed; you sign *for* Hale; the office opens; the family has to route through you. |\n| 3 | **Executor** | Named in the will; Iris and Tobin must deal with you as the heir; the will-fight turns your way. |\n| 4 | **Owner** | The house is yours \u2014 the **east wing opens**, the guests/staff answer, the frontier plateau begins. |\n\nWhoever joins the house is still an **arc**, never a slot. A *finished* arc becoming a standing resource\n(Tobin's bar running itself as income) is form-3 wiring \u2014 **deferred (G6)**, not built at Step 2.\n\nEngine reuse: one `money` trait, the bar/guest Lane-3 work hosts that earn, the clothing shop as sink. No\n`[settings.rent]` block (rent OFF).\n\n---\n\n## 5. Legibility + pacing\n\n- **Legibility rides the quest cards.** The top Story-Goals card always shows the current want **and the next\n  concrete step \u2014 place + person + verb + window:** \"Earn off the books \u2014 work the bar floor for tips,\n  evenings 6pm\u2013close\" (not \"make money\"). Each family member's `next` block on their NPC panel names their\n  step the same way. Telegraph the next rung locked-visible. **Cross-gates name the other arc:** at rung 6\n  the card reads \"Iris won't fold while Tobin's still hers \u2014 turn the son first,\" never a silent grey. A rung\n  waiting on your corruption names the feeder that raises it. (Card mechanics owned by `quests.md`.)\n- **Pacing = tension \u2192 release, escalating, then plateau.** Each want ends in a payoff; payoffs climb the\n  ladder (a tip on your hip \u2192 the son on his knees \u2192 the will signed \u2192 the wing opened), then flatten into\n  the wide livable plateau at the frontier. Alternate big beats (a capstone) with small (a bar shift, a\n  snoop). Cap the gap \u2014 a near payoff always visible. Don't dump the will-signing early.\n- **The endgame escalates in CONTENT, not management.** Owning the house is not a spreadsheet \u2014 it's the\n  *hottest* beats: the reopened wing, each conquered person's repeatable loop, running the guests. Every\n  \"upgrade\" (a `hold` state) unlocks new KINDS of scenes, never a +income widget.\n\n---\n\n## 6. The frontier (endless sandbox, not a finish line)\n\n- **Local arc endings \u2014 KEPT.** Each family member's terminal capstone (you fully own Iris; Hale signs and\n  passes) ends a *thread*, not the game. **Hale's death is a local ending** \u2014 the payoff of rung 5, not a\n  game-over (see the fail-state below).\n- **Hard game-ending \u2014 DROPPED.** No win-screen.\n- **The FRONTIER \u2014 rung 7, \"Open the east wing,\" does the three jobs:**\n  1. *Payoff at the charge ceiling* \u2014 the house that shut you out is yours; you stand in the wing no one else\n     was allowed into.\n  2. *Livable steady-state* \u2014 the repeatable loops with Hale (while he lives), Iris, Tobin, Vance, the guest\n     income, and the reactive world all keep running.\n  3. *Greyed next-hook seed* \u2014 **the absent third heir is coming home** to contest the estate. That's the\n     clip-point a later extension bolts onto (and when it's actually pitched, it goes through the five parts +\n     heat test \u2014 a frontier seed is a promise of desire, not plot).\n- **Endless \u2260 aimless.** At the frontier the tracker says so honestly: \"You own the Hale House. Run it \u2014\n  more is coming.\" Never a blank screen.\n\n---\n\n## 7. The machine (cross-wiring as the depth spine)\n\nOne machine, not four arcs sharing a wallet.\n\n**The core loop (the spine).** Nurse Hale \u2192 his trust + your wage + house access \u2192 that access lets you work\neach family member \u2192 working them yields the **levers** (Tobin's bar income + his testimony; Vance's\nsignatures; Iris's fold) \u2192 the levers convert Hale's dependency into **legal control** (POA \u2192 executor \u2192\nowner, the `hold` states) \u2192 each state reopens the house and deepens what you can do to everyone \u2192 the\nreopened house (the wing, the guests) is new content + income. Conquest \u2192 access \u2192 the next conquest.\n\n**Every core NPC's place in it:**\n- **Hale** \u2014 the *source*. All authority flows from him; his dependency is what you convert into `hold`.\n- **Tobin** \u2014 the *cold-start easy entry* + the bar economy + the wedge against Iris.\n- **Vance** \u2014 the *gatekeeper of documents*; his signatures are what make `hold` legally real.\n- **Iris** \u2014 the *obstacle/rival*; breaking her clears the last resistance and completes the takeover.\n\n**The wires:**\n- **Form 1 (arc\u2192arc depth gate):**\n  - *Vance's late rung* (signs the POA / competency papers) is gated on **Hale's stage** \u2014 you need his\n    dependency high enough that his signature is plausible. Milestone \u2192 a shared **player flag** the Hale arc\n    sets (`hale_dependent`); \"how far along\" \u2192 the `hale_stage` player trait. Telegraphed: \"Vance won't put\n    his name to it until the old man's clearly leaning on you.\"\n  - *Iris's fold rung* is gated on **Tobin's stage** \u2014 with her brother owned and testifying, she's out of\n    allies. Milestone flag `tobin_owned`. Telegraphed: \"Iris holds while Tobin's still on her side \u2014 turn him\n    first.\"\n  - Never a raw cross-NPC trait read \u2014 mirror to the player namespace at the source arc.\n- **Form 2 (arc\u2194economy circulation):**\n  - *2a (load-bearing):* the **bar income from Tobin's arc funds the outfits and bribes** that reach Vance\n    and pressure Iris. The economy is the connective tissue \u2014 money earned working the floor buys the dress\n    that gets the signature.\n  - *2b (flourish):* the guest/bar payout **banded by Tobin's relation** \u2014 authored as band-gated sibling\n    choices (he skims less off the top as he's more owned).\n\n**The three disciplines (firewalls):**\n- **D1 \u2014 never gate an arc's ENTRY on another arc.** Every family member is cold-start enterable: Hale from\n  hour one, Tobin at the bar, Vance on his visit days, Iris in the lobby. Only *mid/late* rungs cross-gate.\n- **D2 \u2014 no dependency cycles (DAG).** Hale \u2192 Vance; Tobin \u2192 Iris. No arc waits on an arc that waits on it.\n  (Finalized and checked at Step 5 / Step 6.)\n- **D3 \u2014 every cross-gate is a locked-visible telegraph naming the other arc's state** (the \u00a75 lines above).\n  A silent cross-lock is a soft-lock.\n\nNo new ledger field \u2014 the machine lives in the design book's `## The machine` section (finalized at Step 5)\nand is enforced by ordinary beat `deps` + the `cross_npc`/`economic` beat types.\n\n---\n\n## 8. The opening, the systems, and the fail-state\n\n**The opening / cold start.** First screen: you step off the coast road into the **lobby** of the Hale\nHouse \u2014 salt-stained wallpaper, half the lights off, a chandelier under a dust sheet. **Iris** meets you\ncold, keys in hand: *\"My father's nurse. Not family. Remember which one you are.\"* Your bag is at your feet;\nthe sidebar lights money near-zero, energy full; the phone buzzes once \u2014 a family group thread already\narguing about the will, so the fight is on-screen from frame one.\n\n**The 2\u20133 things you can do immediately** (one nudges you down without grinding):\n1. Go up to **Hale's room** and start his care \u2014 teaches the nursing day-job loop + the wage + the source of\n   all power.\n2. Find **your room**, drop the bag \u2014 teaches the map + the wardrobe (clothing system, at value-zero: nurse\n   whites only, the shop greyed-and-named).\n3. Go down to the **bar**, where **Tobin's** already drinking his own stock \u2014 teaches an NPC on-ramp + the\n   crooked-money path (the nudge). Pour for him and the first tip-for-a-look is right there.\n\n**First named want:** *\"Keep the post.\"* **How the world teaches with no tutorial:** the empty grand hotel\ntells you it's dying; Iris's line tells you you're an outsider who could be gotten rid of; the phone thread\ntells you there's an estate worth fighting over; the greyed clothing shop and the greyed east-wing card tell\nyou there's a climb. **Ten-minute taste:** you tend a dying man, you're broke in a house full of money, the\nheirs are at each other's throats, and there's an obvious crooked door (the bar, the skim) \u2014 the player knows\nthis is a slow-seduction takeover of a household from the inside.\n\n**Speak-back / customization:** the player names the nurse (a `@player` name token \u2014 spoken back in prose,\nthe phone contact, and the quest cards, never baked into labels). No body/look customization and no NPC\nrelabeling \u2014 the four are fixed characters. Player portrait: OFF (not authored this game).\n\n**The systems in play (named in or out):**\n- **Clothing \u2014 ON.** The reactive-world dial; whites \u2192 bought revealing outfits as the money sink.\n- **Phone \u2014 ON.** Carries the will-fight: the family group thread, Vance's after-hours texts, guest\n  bookings, Iris scheming \u2014 gated threads that fire on flags + elapsed days only.\n- **Rent/debt clock \u2014 OFF** (declared). Pressure comes from Hale's decline clock + being broke + Iris's move\n  to sell, not a rent meter.\n- **Customization \u2014 minimal** (the name token only, above).\n- **Player portrait \u2014 OFF.**\n- *Finer authored subsystems* (a \"cover\" for the skimming, a leverage/blackmail ledger, a guest-management\n  loop) are **not forced now** \u2014 most emerge once the game is concrete and played; fold them in then.\n\n**The cheat page's diegetic skin:** **Hale's master keyring** \u2014 the ring of hotel keys that ends up on your\nbelt; the page presents as \"keys you shouldn't have yet.\" (The page itself is the standard cheat surface;\nonly the dressing is the design choice. `dev_mode_enabled` shortcuts stay separate.)\n\n**The fail-state \u2014 failure EXISTS, three forms (this world has teeth):**\n- **DEADLINE \u2014 Hale's decline.** He is dying on a clock. If you dawdle and he passes before you've secured\n  the will / POA, the deadline **bites** \u2014 it forecloses the *clean-inheritance* route (rung 5's payoff is\n  gone). It does **not** end the game: the sandbox continues and you must seize the house the hard way \u2014\n  through the children, through Vance's forgeable papers, through Iris. (This is the deliberate fix for the\n  advertised-clock-that-never-bites gap: it lands, it costs, it doesn't win-screen.)\n- **DECAY.** Neglect a family member for days and their `relation` cools (neglect-keyed per-NPC decay, skips\n  anyone you saw that day, floors at 0). Neglect Hale's actual care and his health drops faster \u2014 **speeding\n  the deadline.** A player-side decay keeps the pressure honest.\n- **DANGER.** Push the crooked paths in the wrong place \u2014 caught skimming meds, caught reading the will,\n  caught in the wrong bed \u2014 and an NPC *banks* it as leverage (Iris especially), costing you money, a rung,\n  or standing. The place-specific outcomes are Step-4/5's job; here the negative axis is declared live.\n\nNot a forward-only ratchet: the house can turn on you, the old man can die too soon, the daughter can catch\nyou. Safe would read as dead; this doesn't.\n\n---\n\n*Set `pipeline_phase = \"map_design\"` \u2014 Step 2b next designs the spatial graph (the hotel's lobby / bar /\nHale's room / nurse's room / closed east wing, the pier, the town) with per-location dramatic jobs, access,\nand travel friction, before Step 3 casts the four people onto it.*\n"}], "grading": {"expectations": [{"text": "Declares WHAT COMPOUNDS (a growing owned thing with content-unlocking states) or 'nothing' on purpose", "passed": true, "evidence": "'### What compounds \u2014 the house': the Hale House grows through states; 'Not a dashboard \u2014 a set of states'"}, {"text": "Each growth state opens content, not just a number", "passed": true, "evidence": "states unlock rooms/people/scenes (the east wing, the family turning), explicitly deferring the management test to \u00a71F"}, {"text": "Names the fail-state FORM (danger/debt/deadline/decay) or 'no-failure' + cost", "passed": true, "evidence": "'failure EXISTS, three forms (this world has teeth)': DEADLINE (Hale's decline clock bites) + DECAY (neglect-keyed per-NPC relation cooling, skips interacted) + more"}, {"text": "Covers the standing Step-2 spine (cascade/double-lock, stats, desire ladder, economy, frontier, machine)", "passed": true, "evidence": "361 lines; all sections present incl. \u00a77 machine and \u00a78 declarations"}, {"text": "Does not collapse the endgame into management", "passed": true, "evidence": "explicitly 'not a dashboard'; endgame cashes out as content"}, {"text": "BONUS (Batch D): declares the cheat page's diegetic skin", "passed": true, "evidence": "'Hale's master keyring... presents as keys you shouldn't have yet' \u2014 the \u00a78 cheat-skin declaration"}]}}], "previous_feedback": {}, "previous_outputs": {}, "benchmark": {"skill_name": "author-game", "iteration": 2, "baseline": "skill-snapshot-v2 (frozen after arousal axis, before the mopoga doctrine pass)", "configs": {"with_skill": {"label": "NEW (post doctrine pass)", "regression_set": {"pass": 9, "total": 9, "pct": 100}, "doctrine_set": {"pass": 19, "total": 19, "pct": 100}, "overall": {"pass": 28, "total": 28, "pct": 100}}, "old_skill": {"label": "BASE (pre doctrine pass)", "regression_set": {"pass": 8, "total": 9, "pct": 89}, "doctrine_set": {"pass": 10, "total": 19, "pct": 53}, "overall": {"pass": 18, "total": 28, "pct": 64}}}}};
+
+    // ---- State ----
+    let feedbackMap = {};  // run_id -> feedback text
+    let currentIndex = 0;
+    let visitedRuns = new Set();
+
+    // ---- Init ----
+    async function init() {
+      // Load saved feedback from server — but only if this isn't a fresh
+      // iteration (indicated by previous_feedback being present). When
+      // previous feedback exists, the feedback.json on disk is stale from
+      // the prior iteration and should not pre-fill the textareas.
+      const hasPrevious = Object.keys(EMBEDDED_DATA.previous_feedback || {}).length > 0
+        || Object.keys(EMBEDDED_DATA.previous_outputs || {}).length > 0;
+      if (!hasPrevious) {
+        try {
+          const resp = await fetch("/api/feedback");
+          const data = await resp.json();
+          if (data.reviews) {
+            for (const r of data.reviews) feedbackMap[r.run_id] = r.feedback;
+          }
+        } catch { /* first run, no feedback yet */ }
+      }
+
+      document.getElementById("skill-name").textContent = EMBEDDED_DATA.skill_name;
+      showRun(0);
+
+      // Wire up feedback auto-save
+      const textarea = document.getElementById("feedback");
+      let saveTimeout = null;
+      textarea.addEventListener("input", () => {
+        clearTimeout(saveTimeout);
+        document.getElementById("feedback-status").textContent = "";
+        saveTimeout = setTimeout(() => saveCurrentFeedback(), 800);
+      });
+    }
+
+    // ---- Navigation ----
+    function navigate(delta) {
+      const newIndex = currentIndex + delta;
+      if (newIndex >= 0 && newIndex < EMBEDDED_DATA.runs.length) {
+        saveCurrentFeedback();
+        showRun(newIndex);
+      }
+    }
+
+    function updateNavButtons() {
+      document.getElementById("prev-btn").disabled = currentIndex === 0;
+      document.getElementById("next-btn").disabled =
+        currentIndex === EMBEDDED_DATA.runs.length - 1;
+    }
+
+    // ---- Show a run ----
+    function showRun(index) {
+      currentIndex = index;
+      const run = EMBEDDED_DATA.runs[index];
+
+      // Progress
+      document.getElementById("progress").textContent =
+        `${index + 1} of ${EMBEDDED_DATA.runs.length}`;
+
+      // Prompt
+      document.getElementById("prompt-text").textContent = run.prompt;
+
+      // Config badge
+      const badge = document.getElementById("config-badge");
+      const configMatch = run.id.match(/(with_skill|without_skill|new_skill|old_skill)/);
+      if (configMatch) {
+        const config = configMatch[1];
+        const isBaseline = config === "without_skill" || config === "old_skill";
+        badge.textContent = config.replace(/_/g, " ");
+        badge.className = "config-badge " + (isBaseline ? "config-baseline" : "config-primary");
+        badge.style.display = "inline-block";
+      } else {
+        badge.style.display = "none";
+      }
+
+      // Outputs
+      renderOutputs(run);
+
+      // Previous outputs
+      renderPrevOutputs(run);
+
+      // Grades
+      renderGrades(run);
+
+      // Previous feedback
+      const prevFb = (EMBEDDED_DATA.previous_feedback || {})[run.id];
+      const prevEl = document.getElementById("prev-feedback");
+      if (prevFb) {
+        document.getElementById("prev-feedback-text").textContent = prevFb;
+        prevEl.style.display = "block";
+      } else {
+        prevEl.style.display = "none";
+      }
+
+      // Feedback
+      document.getElementById("feedback").value = feedbackMap[run.id] || "";
+      document.getElementById("feedback-status").textContent = "";
+
+      updateNavButtons();
+
+      // Track visited runs and promote done button when all visited
+      visitedRuns.add(index);
+      const doneBtn = document.getElementById("done-btn");
+      if (visitedRuns.size >= EMBEDDED_DATA.runs.length) {
+        doneBtn.classList.add("ready");
+      }
+
+      // Scroll main content to top
+      document.querySelector(".main").scrollTop = 0;
+    }
+
+    // ---- Render outputs ----
+    function renderOutputs(run) {
+      const container = document.getElementById("outputs-body");
+      container.innerHTML = "";
+
+      const outputs = run.outputs || [];
+      if (outputs.length === 0) {
+        container.innerHTML = '<div class="empty-state">No output files</div>';
+        return;
+      }
+
+      for (const file of outputs) {
+        const fileDiv = document.createElement("div");
+        fileDiv.className = "output-file";
+
+        // Always show file header with download link
+        const header = document.createElement("div");
+        header.className = "output-file-header";
+        const nameSpan = document.createElement("span");
+        nameSpan.textContent = file.name;
+        header.appendChild(nameSpan);
+        const dlBtn = document.createElement("a");
+        dlBtn.className = "dl-btn";
+        dlBtn.textContent = "Download";
+        dlBtn.download = file.name;
+        dlBtn.href = getDownloadUri(file);
+        header.appendChild(dlBtn);
+        fileDiv.appendChild(header);
+
+        const content = document.createElement("div");
+        content.className = "output-file-content";
+
+        if (file.type === "text") {
+          const pre = document.createElement("pre");
+          pre.textContent = file.content;
+          content.appendChild(pre);
+        } else if (file.type === "image") {
+          const img = document.createElement("img");
+          img.src = file.data_uri;
+          img.alt = file.name;
+          content.appendChild(img);
+        } else if (file.type === "pdf") {
+          const iframe = document.createElement("iframe");
+          iframe.src = file.data_uri;
+          content.appendChild(iframe);
+        } else if (file.type === "xlsx") {
+          renderXlsx(content, file.data_b64);
+        } else if (file.type === "binary") {
+          const a = document.createElement("a");
+          a.className = "download-link";
+          a.href = file.data_uri;
+          a.download = file.name;
+          a.textContent = "Download " + file.name;
+          content.appendChild(a);
+        } else if (file.type === "error") {
+          const pre = document.createElement("pre");
+          pre.textContent = file.content;
+          pre.style.color = "var(--red)";
+          content.appendChild(pre);
+        }
+
+        fileDiv.appendChild(content);
+        container.appendChild(fileDiv);
+      }
+    }
+
+    // ---- XLSX rendering via SheetJS ----
+    function renderXlsx(container, b64Data) {
+      try {
+        const raw = Uint8Array.from(atob(b64Data), c => c.charCodeAt(0));
+        const wb = XLSX.read(raw, { type: "array" });
+
+        for (let i = 0; i < wb.SheetNames.length; i++) {
+          const sheetName = wb.SheetNames[i];
+          const ws = wb.Sheets[sheetName];
+
+          if (wb.SheetNames.length > 1) {
+            const sheetLabel = document.createElement("div");
+            sheetLabel.style.cssText =
+              "font-weight:600; font-size:0.8rem; color:#b0aea5; margin-top:0.5rem; margin-bottom:0.25rem;";
+            sheetLabel.textContent = "Sheet: " + sheetName;
+            container.appendChild(sheetLabel);
+          }
+
+          const htmlStr = XLSX.utils.sheet_to_html(ws, { editable: false });
+          const wrapper = document.createElement("div");
+          wrapper.innerHTML = htmlStr;
+          container.appendChild(wrapper);
+        }
+      } catch (err) {
+        container.textContent = "Error rendering spreadsheet: " + err.message;
+      }
+    }
+
+    // ---- Grades ----
+    function renderGrades(run) {
+      const section = document.getElementById("grades-section");
+      const content = document.getElementById("grades-content");
+
+      if (!run.grading) {
+        section.style.display = "none";
+        return;
+      }
+
+      const grading = run.grading;
+      section.style.display = "block";
+      // Reset to collapsed
+      content.classList.remove("open");
+      document.getElementById("grades-arrow").classList.remove("open");
+
+      const summary = grading.summary || {};
+      const expectations = grading.expectations || [];
+
+      let html = '<div style="padding: 1rem;">';
+
+      // Summary line
+      const passRate = summary.pass_rate != null
+        ? Math.round(summary.pass_rate * 100) + "%"
+        : "?";
+      const badgeClass = summary.pass_rate >= 0.8 ? "grade-pass" : summary.pass_rate >= 0.5 ? "" : "grade-fail";
+      html += '<div class="grades-summary">';
+      html += '<span class="grade-badge ' + badgeClass + '">' + passRate + '</span>';
+      html += '<span>' + (summary.passed || 0) + ' passed, ' + (summary.failed || 0) + ' failed of ' + (summary.total || 0) + '</span>';
+      html += '</div>';
+
+      // Assertions list
+      html += '<ul class="assertion-list">';
+      for (const exp of expectations) {
+        const statusClass = exp.passed ? "pass" : "fail";
+        const statusIcon = exp.passed ? "\u2713" : "\u2717";
+        html += '<li class="assertion-item">';
+        html += '<span class="assertion-status ' + statusClass + '">' + statusIcon + '</span>';
+        html += '<span>' + escapeHtml(exp.text) + '</span>';
+        if (exp.evidence) {
+          html += '<div class="assertion-evidence">' + escapeHtml(exp.evidence) + '</div>';
+        }
+        html += '</li>';
+      }
+      html += '</ul>';
+
+      html += '</div>';
+      content.innerHTML = html;
+    }
+
+    function toggleGrades() {
+      const content = document.getElementById("grades-content");
+      const arrow = document.getElementById("grades-arrow");
+      content.classList.toggle("open");
+      arrow.classList.toggle("open");
+    }
+
+    // ---- Previous outputs (collapsible) ----
+    function renderPrevOutputs(run) {
+      const section = document.getElementById("prev-outputs-section");
+      const content = document.getElementById("prev-outputs-content");
+      const prevOutputs = (EMBEDDED_DATA.previous_outputs || {})[run.id];
+
+      if (!prevOutputs || prevOutputs.length === 0) {
+        section.style.display = "none";
+        return;
+      }
+
+      section.style.display = "block";
+      // Reset to collapsed
+      content.classList.remove("open");
+      document.getElementById("prev-outputs-arrow").classList.remove("open");
+
+      // Render the files into the content area
+      content.innerHTML = "";
+      const wrapper = document.createElement("div");
+      wrapper.style.padding = "1rem";
+
+      for (const file of prevOutputs) {
+        const fileDiv = document.createElement("div");
+        fileDiv.className = "output-file";
+
+        const header = document.createElement("div");
+        header.className = "output-file-header";
+        const nameSpan = document.createElement("span");
+        nameSpan.textContent = file.name;
+        header.appendChild(nameSpan);
+        const dlBtn = document.createElement("a");
+        dlBtn.className = "dl-btn";
+        dlBtn.textContent = "Download";
+        dlBtn.download = file.name;
+        dlBtn.href = getDownloadUri(file);
+        header.appendChild(dlBtn);
+        fileDiv.appendChild(header);
+
+        const fc = document.createElement("div");
+        fc.className = "output-file-content";
+
+        if (file.type === "text") {
+          const pre = document.createElement("pre");
+          pre.textContent = file.content;
+          fc.appendChild(pre);
+        } else if (file.type === "image") {
+          const img = document.createElement("img");
+          img.src = file.data_uri;
+          img.alt = file.name;
+          fc.appendChild(img);
+        } else if (file.type === "pdf") {
+          const iframe = document.createElement("iframe");
+          iframe.src = file.data_uri;
+          fc.appendChild(iframe);
+        } else if (file.type === "xlsx") {
+          renderXlsx(fc, file.data_b64);
+        } else if (file.type === "binary") {
+          const a = document.createElement("a");
+          a.className = "download-link";
+          a.href = file.data_uri;
+          a.download = file.name;
+          a.textContent = "Download " + file.name;
+          fc.appendChild(a);
+        }
+
+        fileDiv.appendChild(fc);
+        wrapper.appendChild(fileDiv);
+      }
+
+      content.appendChild(wrapper);
+    }
+
+    function togglePrevOutputs() {
+      const content = document.getElementById("prev-outputs-content");
+      const arrow = document.getElementById("prev-outputs-arrow");
+      content.classList.toggle("open");
+      arrow.classList.toggle("open");
+    }
+
+    // ---- Feedback (saved to server -> feedback.json) ----
+    function saveCurrentFeedback() {
+      const run = EMBEDDED_DATA.runs[currentIndex];
+      const text = document.getElementById("feedback").value;
+
+      if (text.trim() === "") {
+        delete feedbackMap[run.id];
+      } else {
+        feedbackMap[run.id] = text;
+      }
+
+      // Build reviews array from map
+      const reviews = [];
+      for (const [run_id, feedback] of Object.entries(feedbackMap)) {
+        if (feedback.trim()) {
+          reviews.push({ run_id, feedback, timestamp: new Date().toISOString() });
+        }
+      }
+
+      fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ reviews, status: "in_progress" }),
+      }).then(() => {
+        document.getElementById("feedback-status").textContent = "Saved";
+      }).catch(() => {
+        // Static mode or server unavailable — no-op on auto-save,
+        // feedback will be downloaded on final submit
+        document.getElementById("feedback-status").textContent = "Will download on submit";
+      });
+    }
+
+    // ---- Done ----
+    function showDoneDialog() {
+      // Save current textarea to feedbackMap (but don't POST yet)
+      const run = EMBEDDED_DATA.runs[currentIndex];
+      const text = document.getElementById("feedback").value;
+      if (text.trim() === "") {
+        delete feedbackMap[run.id];
+      } else {
+        feedbackMap[run.id] = text;
+      }
+
+      // POST once with status: complete — include ALL runs so the model
+      // can distinguish "no feedback" (looks good) from "not reviewed"
+      const reviews = [];
+      const ts = new Date().toISOString();
+      for (const r of EMBEDDED_DATA.runs) {
+        reviews.push({ run_id: r.id, feedback: feedbackMap[r.id] || "", timestamp: ts });
+      }
+      const payload = JSON.stringify({ reviews, status: "complete" }, null, 2);
+      fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+      }).then(() => {
+        document.getElementById("done-overlay").classList.add("visible");
+      }).catch(() => {
+        // Server not available (static mode) — download as file
+        const blob = new Blob([payload], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "feedback.json";
+        a.click();
+        URL.revokeObjectURL(url);
+        document.getElementById("done-overlay").classList.add("visible");
+      });
+    }
+
+    function closeDoneDialog() {
+      // Reset status back to in_progress
+      saveCurrentFeedback();
+      document.getElementById("done-overlay").classList.remove("visible");
+    }
+
+    // ---- Toast ----
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("visible");
+      setTimeout(() => toast.classList.remove("visible"), 2000);
+    }
+
+    // ---- Keyboard nav ----
+    document.addEventListener("keydown", (e) => {
+      // Don't capture when typing in textarea
+      if (e.target.tagName === "TEXTAREA") return;
+
+      if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        e.preventDefault();
+        navigate(-1);
+      } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        e.preventDefault();
+        navigate(1);
+      }
+    });
+
+    // ---- Util ----
+    function getDownloadUri(file) {
+      if (file.data_uri) return file.data_uri;
+      if (file.data_b64) return "data:application/octet-stream;base64," + file.data_b64;
+      if (file.type === "text") return "data:text/plain;charset=utf-8," + encodeURIComponent(file.content);
+      return "#";
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // ---- View switching ----
+    function switchView(view) {
+      document.querySelectorAll(".view-tab").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".view-panel").forEach(p => p.classList.remove("active"));
+      document.querySelector(`[onclick="switchView('${view}')"]`).classList.add("active");
+      document.getElementById("panel-" + view).classList.add("active");
+    }
+
+    // ---- Benchmark rendering ----
+    function renderBenchmark() {
+      const data = EMBEDDED_DATA.benchmark;
+      if (!data) return;
+
+      // Show the tabs
+      document.getElementById("view-tabs").style.display = "flex";
+
+      const container = document.getElementById("benchmark-content");
+      const summary = data.run_summary || {};
+      const metadata = data.metadata || {};
+      const notes = data.notes || [];
+
+      let html = "";
+
+      // Header
+      html += "<h2 style='font-family: Poppins, sans-serif; margin-bottom: 0.5rem;'>Benchmark Results</h2>";
+      html += "<p style='color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1.25rem;'>";
+      if (metadata.skill_name) html += "<strong>" + escapeHtml(metadata.skill_name) + "</strong> &mdash; ";
+      if (metadata.timestamp) html += metadata.timestamp + " &mdash; ";
+      if (metadata.evals_run) html += "Evals: " + metadata.evals_run.join(", ") + " &mdash; ";
+      html += (metadata.runs_per_configuration || "?") + " runs per configuration";
+      html += "</p>";
+
+      // Summary table
+      html += '<table class="benchmark-table">';
+
+      function fmtStat(stat, pct) {
+        if (!stat) return "—";
+        const suffix = pct ? "%" : "";
+        const m = pct ? (stat.mean * 100).toFixed(0) : stat.mean.toFixed(1);
+        const s = pct ? (stat.stddev * 100).toFixed(0) : stat.stddev.toFixed(1);
+        return m + suffix + " ± " + s + suffix;
+      }
+
+      function deltaClass(val) {
+        if (!val) return "";
+        const n = parseFloat(val);
+        if (n > 0) return "benchmark-delta-positive";
+        if (n < 0) return "benchmark-delta-negative";
+        return "";
+      }
+
+      // Discover config names dynamically (everything except "delta")
+      const configs = Object.keys(summary).filter(k => k !== "delta");
+      const configA = configs[0] || "config_a";
+      const configB = configs[1] || "config_b";
+      const labelA = configA.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+      const labelB = configB.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+      const a = summary[configA] || {};
+      const b = summary[configB] || {};
+      const delta = summary.delta || {};
+
+      html += "<thead><tr><th>Metric</th><th>" + escapeHtml(labelA) + "</th><th>" + escapeHtml(labelB) + "</th><th>Delta</th></tr></thead>";
+      html += "<tbody>";
+
+      html += "<tr><td><strong>Pass Rate</strong></td>";
+      html += "<td>" + fmtStat(a.pass_rate, true) + "</td>";
+      html += "<td>" + fmtStat(b.pass_rate, true) + "</td>";
+      html += '<td class="' + deltaClass(delta.pass_rate) + '">' + (delta.pass_rate || "—") + "</td></tr>";
+
+      // Time (only show row if data exists)
+      if (a.time_seconds || b.time_seconds) {
+        html += "<tr><td><strong>Time (s)</strong></td>";
+        html += "<td>" + fmtStat(a.time_seconds, false) + "</td>";
+        html += "<td>" + fmtStat(b.time_seconds, false) + "</td>";
+        html += '<td class="' + deltaClass(delta.time_seconds) + '">' + (delta.time_seconds ? delta.time_seconds + "s" : "—") + "</td></tr>";
+      }
+
+      // Tokens (only show row if data exists)
+      if (a.tokens || b.tokens) {
+        html += "<tr><td><strong>Tokens</strong></td>";
+        html += "<td>" + fmtStat(a.tokens, false) + "</td>";
+        html += "<td>" + fmtStat(b.tokens, false) + "</td>";
+        html += '<td class="' + deltaClass(delta.tokens) + '">' + (delta.tokens || "—") + "</td></tr>";
+      }
+
+      html += "</tbody></table>";
+
+      // Per-eval breakdown (if runs data available)
+      const runs = data.runs || [];
+      if (runs.length > 0) {
+        const evalIds = [...new Set(runs.map(r => r.eval_id))].sort((a, b) => a - b);
+
+        html += "<h3 style='font-family: Poppins, sans-serif; margin-bottom: 0.75rem;'>Per-Eval Breakdown</h3>";
+
+        const hasTime = runs.some(r => r.result && r.result.time_seconds != null);
+        const hasErrors = runs.some(r => r.result && r.result.errors > 0);
+
+        for (const evalId of evalIds) {
+          const evalRuns = runs.filter(r => r.eval_id === evalId);
+          const evalName = evalRuns[0] && evalRuns[0].eval_name ? evalRuns[0].eval_name : "Eval " + evalId;
+
+          html += "<h4 style='font-family: Poppins, sans-serif; margin: 1rem 0 0.5rem; color: var(--text);'>" + escapeHtml(evalName) + "</h4>";
+          html += '<table class="benchmark-table">';
+          html += "<thead><tr><th>Config</th><th>Run</th><th>Pass Rate</th>";
+          if (hasTime) html += "<th>Time (s)</th>";
+          if (hasErrors) html += "<th>Crashes During Execution</th>";
+          html += "</tr></thead>";
+          html += "<tbody>";
+
+          // Group by config and render with average rows
+          const configGroups = [...new Set(evalRuns.map(r => r.configuration))];
+          for (let ci = 0; ci < configGroups.length; ci++) {
+            const config = configGroups[ci];
+            const configRuns = evalRuns.filter(r => r.configuration === config);
+            if (configRuns.length === 0) continue;
+
+            const rowClass = ci === 0 ? "benchmark-row-with" : "benchmark-row-without";
+            const configLabel = config.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+
+            for (const run of configRuns) {
+              const r = run.result || {};
+              const prClass = r.pass_rate >= 0.8 ? "benchmark-delta-positive" : r.pass_rate < 0.5 ? "benchmark-delta-negative" : "";
+              html += '<tr class="' + rowClass + '">';
+              html += "<td>" + configLabel + "</td>";
+              html += "<td>" + run.run_number + "</td>";
+              html += '<td class="' + prClass + '">' + ((r.pass_rate || 0) * 100).toFixed(0) + "% (" + (r.passed || 0) + "/" + (r.total || 0) + ")</td>";
+              if (hasTime) html += "<td>" + (r.time_seconds != null ? r.time_seconds.toFixed(1) : "—") + "</td>";
+              if (hasErrors) html += "<td>" + (r.errors || 0) + "</td>";
+              html += "</tr>";
+            }
+
+            // Average row
+            const rates = configRuns.map(r => (r.result || {}).pass_rate || 0);
+            const avgRate = rates.reduce((a, b) => a + b, 0) / rates.length;
+            const avgPrClass = avgRate >= 0.8 ? "benchmark-delta-positive" : avgRate < 0.5 ? "benchmark-delta-negative" : "";
+            html += '<tr class="benchmark-row-avg ' + rowClass + '">';
+            html += "<td>" + configLabel + "</td>";
+            html += "<td>Avg</td>";
+            html += '<td class="' + avgPrClass + '">' + (avgRate * 100).toFixed(0) + "%</td>";
+            if (hasTime) {
+              const times = configRuns.map(r => (r.result || {}).time_seconds).filter(t => t != null);
+              html += "<td>" + (times.length ? (times.reduce((a, b) => a + b, 0) / times.length).toFixed(1) : "—") + "</td>";
+            }
+            if (hasErrors) html += "<td></td>";
+            html += "</tr>";
+          }
+          html += "</tbody></table>";
+
+          // Per-assertion detail for this eval
+          const runsWithExpectations = {};
+          for (const config of configGroups) {
+            runsWithExpectations[config] = evalRuns.filter(r => r.configuration === config && r.expectations && r.expectations.length > 0);
+          }
+          const hasAnyExpectations = Object.values(runsWithExpectations).some(runs => runs.length > 0);
+          if (hasAnyExpectations) {
+            // Collect all unique assertion texts across all configs
+            const allAssertions = [];
+            const seen = new Set();
+            for (const config of configGroups) {
+              for (const run of runsWithExpectations[config]) {
+                for (const exp of (run.expectations || [])) {
+                  if (!seen.has(exp.text)) {
+                    seen.add(exp.text);
+                    allAssertions.push(exp.text);
+                  }
+                }
+              }
+            }
+
+            html += '<table class="benchmark-table" style="margin-top: 0.5rem;">';
+            html += "<thead><tr><th>Assertion</th>";
+            for (const config of configGroups) {
+              const label = config.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+              html += "<th>" + escapeHtml(label) + "</th>";
+            }
+            html += "</tr></thead><tbody>";
+
+            for (const assertionText of allAssertions) {
+              html += "<tr><td>" + escapeHtml(assertionText) + "</td>";
+
+              for (const config of configGroups) {
+                html += "<td>";
+                for (const run of runsWithExpectations[config]) {
+                  const exp = (run.expectations || []).find(e => e.text === assertionText);
+                  if (exp) {
+                    const cls = exp.passed ? "benchmark-delta-positive" : "benchmark-delta-negative";
+                    const icon = exp.passed ? "\u2713" : "\u2717";
+                    html += '<span class="' + cls + '" title="Run ' + run.run_number + ': ' + escapeHtml(exp.evidence || "") + '">' + icon + "</span> ";
+                  } else {
+                    html += "— ";
+                  }
+                }
+                html += "</td>";
+              }
+              html += "</tr>";
+            }
+            html += "</tbody></table>";
+          }
+        }
+      }
+
+      // Notes
+      if (notes.length > 0) {
+        html += '<div class="benchmark-notes">';
+        html += "<h3>Analysis Notes</h3>";
+        html += "<ul>";
+        for (const note of notes) {
+          html += "<li>" + escapeHtml(note) + "</li>";
+        }
+        html += "</ul></div>";
+      }
+
+      container.innerHTML = html;
+    }
+
+    // ---- Start ----
+    init();
+    renderBenchmark();
+  </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "eval_id": 0,
+  "eval_name": "timejump",
+  "prompt": "Author a NEW capstone scene for the game at games/vesper as a single self-contained TOML `[[canvases]]` block (trigger + one node + exit_block). The scene: Wren corners the fixer Marsh in a stairwell and presses him for what he knows \u2014 a tense back-and-forth the player advances beat by beat. He finally caves. Then, TWO DAYS LATER, he leaves an envelope for her at the House; she takes it, reads his scrawled warning, and slips out into the night. Keep it in the game's RTS-flat register. Write the complete `[[canvases]]` block to the output file.",
+  "assertions": [
+    "check_cascade_order.py exits 0",
+    "The two-days-later bridge is a cascade BEAT, not a sibling paragraph after the cascade",
+    "Parses as valid TOML"
+  ]
+}

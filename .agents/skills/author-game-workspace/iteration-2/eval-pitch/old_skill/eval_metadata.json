@@ -1,0 +1,14 @@
+{
+  "eval_id": 4,
+  "eval_name": "pitch",
+  "prompt": "I'm deciding what to build next in games/vesper. Read the game's current state (its authoring_state.json and design docs) and PITCH me the next beat or arc \u2014 one concrete proposal I can say yes to or edit. Don't build it; pitch it. Write the pitch to the output file as markdown.",
+  "assertions": [
+    "States the CHARGE: fantasy in a sentence with kink areas named",
+    "States the LADDER including the act it ENDS on",
+    "Names the PERSON + the one trait that makes the corruption theirs",
+    "Names the DEPOSIT (meter/flag/quest/growth state)",
+    "Names the COST (fail-state form, or reasoned 'nothing')",
+    "Concrete editable prose, not a menu of abstractions",
+    "Passes the heat test: erotic trajectory visible from the pitch alone"
+  ]
+}

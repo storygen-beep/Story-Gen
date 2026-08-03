@@ -1,0 +1,65 @@
+# ── Sol — "The Yard Road" (NPC-tier ladder, npc_id = "npc_sol"). A three-rung TRUST arc riding ONE
+# climbing meter (npc_sol.relation), so it's a STEPPED TRAIT-BAND ladder (quests.md §5B), not a flag chain:
+# one card live at a time, bands EXCLUSIVE in `when` so exactly one matches and the picker swaps rungs as
+# relation crosses each threshold — no priority race. The feeder is the same every rung: sit with Sol at the
+# Undertow, evenings (his window). Each rung's numeric goal denominator = the NEXT band's threshold (the near
+# lever), so the number reads N / 10 then N / 20 (keep the number). The Undertow is his schedule window, so
+# every walkthrough label carries place + person + verb + window (quests.md §3), and the meter-gated tip names
+# the FEEDER (which repeatable move raises relation), because the HUD shows the number but never the route.
+# No `version` key on `when`/`goals` — quest conditions use their own evaluator, no fail-open (quests.md §2).
+
+# Rung 1 — get him talking (relation 0–9). Entry rung.
+[[quest_cards]]
+priority   = 12
+npc_id     = "npc_sol"
+text       = "Sol works the Undertow's counter and won't spend breath on a stranger. The salvage yard she wants is his old ground — but he walks people out there, he doesn't draw maps. First he has to decide she's worth talking to."
+tip        = "Sit at Sol's counter at the Undertow after dark. He won't open up the first night — keep turning up, evenings; every one you sit through, his relation climbs."
+when = [
+  { trait = "relation", subject = "npc", npc_id = "npc_sol", op = "lt", value = 10 },
+]
+goals = [
+  { trait = "relation", subject = "npc", npc_id = "npc_sol", op = "gte", value = 10, label = "Get Sol talking at the Undertow — evenings" },
+]
+
+# Rung 2 — get him drinking with her (relation 10–19).
+[[quest_cards]]
+priority   = 12
+npc_id     = "npc_sol"
+text       = "He talks to her now. The next thing a dockhand offers someone he's warming to is a drink shared, not poured — off the working side of the bar. Get Sol to stop tending and drink with her."
+tip        = "Keep coming back to the Undertow, evenings, and stand the round yourself. When he leaves the counter and drinks with you, you're most of the way in — his relation is still the meter that opens the yard."
+when = [
+  { trait = "relation", subject = "npc", npc_id = "npc_sol", op = "gte", value = 10 },
+  { trait = "relation", subject = "npc", npc_id = "npc_sol", op = "lt",  value = 20 },
+]
+goals = [
+  { trait = "relation", subject = "npc", npc_id = "npc_sol", op = "gte", value = 20, label = "Drink with Sol at the Undertow — evenings" },
+]
+
+# Rung 3 — he takes her to the yard (relation 20+, trip not yet taken). CAPSTONE / READY frame (quests.md §3/§6):
+# "he takes her to the yard" is a launchable event, so this rung carries a `ready_canvas` (sol_yard_trip — the
+# arc's payoff canvas, authored alongside the scene, out of scope here) instead of a numeric goal. This is also
+# the §6 blank-trap fix: a top rung whose meter is already MET, with no ready_canvas and not terminal, renders
+# NOTHING (Frame 3 shows only while a goal is unmet). The Ready frame pulls 📍 location + 🕒 window from the
+# canvas; ready_text backstops the place+window in prose. Retires when the trip flips sol_yard_trip_done.
+[[quest_cards]]
+priority   = 12
+npc_id     = "npc_sol"
+text       = "He drinks with her, and he trusts her enough. Ask him for the yard — he'll walk her out there himself."
+ready_text = "Sol's ready to take her out to the salvage yard. Catch him at the Undertow when he's off the counter, and ask."
+ready_canvas = "sol_yard_trip"
+when = [
+  { trait = "relation", subject = "npc", npc_id = "npc_sol", op = "gte", value = 20 },
+  { flag  = "sol_yard_trip_done", op = "is_false" },
+]
+
+# Terminal — arc complete (the yard trip set sol_yard_trip_done). Closes the chain so the section (and the
+# sidebar 'next' row, same renderer — quests.md §4) never goes blank after the payoff. Priority 13 to win the
+# handoff cleanly; mutually exclusive with Rung 3 on the flag. Frontier-framed, no dev-speak (quests.md §7).
+[[quest_cards]]
+priority   = 13
+npc_id     = "npc_sol"
+text       = "Sol walked her into the salvage yard. His counter at the Undertow stays open if she needs the underworld's ear again."
+terminal   = true
+when = [
+  { flag = "sol_yard_trip_done", op = "is_true" },
+]

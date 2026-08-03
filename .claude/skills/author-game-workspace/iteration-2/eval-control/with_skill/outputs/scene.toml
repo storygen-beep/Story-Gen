@@ -1,0 +1,29 @@
+# amb_burned_yard_passing — Lane-2 world-texture random ambient @the_waterfront (NO NPC).
+# She passes Renner's boarded burned yard at night — quiet, nothing happening, a flicker of memory,
+# and she moves on. Pure texture (sets nothing, no requires_npc — room mood, no NPC to speak, so
+# Rule-4 mode is exempt and the beat is narrated). Third person (register.person = third). RTS-flat,
+# single ~40-word beat, image-first. Matches the proven amb_floor_dying no-NPC ambient shape.
+[[canvases]]
+id          = "amb_burned_yard_passing"
+name        = "The burned yard, boarded"
+description = "Lane-2 world-texture random ambient @the_waterfront (no NPC). Wren passes Renner's boarded burned yard at night — a flicker of memory, then she moves on. Sets nothing. RTS-flat, third person."
+[canvases.trigger]
+location             = "the_waterfront"
+trigger_mode         = "random"
+chance               = 0.20
+max_triggers_per_day = 1
+is_repeatable        = true
+is_active            = true
+[[canvases.nodes]]
+id   = "base"
+name = "The burned yard, boarded"
+blocks = [
+  { type = "image", props = { file = "scenes/burned_yard_boarded_night.jpg", description = "A torched, gutted lot at night behind a re-boarded fence, the security lights dead over it, nobody around.", search_queries = ["boarded up burned lot night", "abandoned torched yard fence dark"] } },
+  { type = "paragraph", content = "Three streets off the water the burned yard sits boarded now — fence back up, the sodium lights dead over it, Renner's men pulled off whatever they were guarding. Cain's work, cold a long time. She knows what a fire like that leaves." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Keep walking."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_waterfront"

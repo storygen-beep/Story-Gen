@@ -1,0 +1,10 @@
+{
+  "eval_id": 2,
+  "eval_name": "control",
+  "prompt": "Author a short ambient scene for the game at games/vesper as a single self-contained TOML `[[canvases]]` block (trigger + one node + exit_block). The scene: on her way through the underworld at night, Wren passes the boarded-up burned yard \u2014 quiet, nothing happening, a flicker of memory \u2014 and she moves on. Keep it short and in the game's RTS-flat register. Write the complete `[[canvases]]` block to the output file.",
+  "assertions": [
+    "check_cascade_order.py exits 0",
+    "Does not over-apply the cascade mechanism to a short static ambient",
+    "Parses as valid TOML"
+  ]
+}

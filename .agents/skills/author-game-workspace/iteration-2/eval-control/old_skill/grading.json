@@ -1,0 +1,19 @@
+{
+  "expectations": [
+    {
+      "text": "check_cascade_order.py exits 0",
+      "passed": true,
+      "evidence": "script run: exit 0"
+    },
+    {
+      "text": "Does not over-apply the cascade mechanism to a short static ambient",
+      "passed": false,
+      "evidence": "48 lines with 1 cascade \u2014 mild over-application of the drip to a scene the prompt calls 'quiet, nothing happening'; still a well-formed single cascade so the objective guard passes"
+    },
+    {
+      "text": "Parses as valid TOML",
+      "passed": true,
+      "evidence": "tomllib.load ok"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "skill_name": "author-game",
+  "note": "Two eval families. (1) The original CASCADE-ORDER set (timejump/closing/control) — objectively graded by scripts/check_cascade_order.py; kept in iteration-2 as a REGRESSION check that the 2026-07-24/25 doctrine pass didn't break emission discipline. (2) The DOCTRINE-PASS set (questcard/pitch/toplevel), added 2026-07-25, each targeting one batch of that pass: Batch A (walkthrough-grade quest cards), Batch C (the five-part hot pitch), Batch B (what compounds + the fail-state form). Baseline for all A/B runs is skill-snapshot-v2 = the skill frozen AFTER the arousal axis and BEFORE the doctrine pass, so the delta isolates the pass.",
+  "evals": [
+    {
+      "id": 0,
+      "name": "timejump",
+      "prompt": "Author a NEW capstone scene for the game at games/vesper as a single self-contained TOML `[[canvases]]` block (trigger + one node + exit_block). The scene: Wren corners the fixer Marsh in a stairwell and presses him for what he knows — a tense back-and-forth the player advances beat by beat. He finally caves. Then, TWO DAYS LATER, he leaves an envelope for her at the House; she takes it, reads his scrawled warning, and slips out into the night. Keep it in the game's RTS-flat register. Write the complete `[[canvases]]` block to the output file.",
+      "expected_output": "A [[canvases]] block whose node puts ALL content inside a single cascade (the two-days-later bridge + the closing slip-out are cascade beats, or a no-advance_text terminal beat) — NOT a paragraph placed after the cascade. check_cascade_order.py exits 0.",
+      "assertions": [
+        "check_cascade_order.py exits 0 on the produced block (no content block after a cascade; at most one cascade per node)",
+        "The two-days-later time bridge is a cascade BEAT, not a sibling paragraph placed after the cascade",
+        "Parses as valid TOML"
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "closing",
+      "prompt": "Author a NEW scene for the game at games/vesper as a single self-contained TOML `[[canvases]]` block (trigger + one node + exit_block). The scene: Wren confronts Renner in his office — a charged exchange the player advances one line at a time — and it ends on her private thought about what she has just done, before she leaves. Keep it in the game's RTS-flat register. Write the complete `[[canvases]]` block to the output file.",
+      "expected_output": "The closing private thought is the LAST beat INSIDE the cascade (a terminal beat), not a thought_bubble block placed after the cascade. check_cascade_order.py exits 0.",
+      "assertions": [
+        "check_cascade_order.py exits 0 on the produced block",
+        "The closing private thought is the last beat INSIDE the cascade, not a block after it",
+        "Parses as valid TOML"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "control",
+      "prompt": "Author a short ambient scene for the game at games/vesper as a single self-contained TOML `[[canvases]]` block (trigger + one node + exit_block). The scene: on her way through the underworld at night, Wren passes the boarded-up burned yard — quiet, nothing happening, a flicker of memory — and she moves on. Keep it short and in the game's RTS-flat register. Write the complete `[[canvases]]` block to the output file.",
+      "expected_output": "A short static scene: plain prose then the exit. No cascade is needed; if none is used, check_cascade_order.py trivially passes. Tests that the skill does not over-apply the cascade mechanism or introduce the defect where no drip is wanted.",
+      "assertions": [
+        "check_cascade_order.py exits 0 on the produced block",
+        "Does not over-apply the cascade mechanism to a short static ambient (no multi-beat drip where none is wanted)",
+        "Parses as valid TOML"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "questcard",
+      "prompt": "For the game at games/vesper, author the Quests-page cards for a NEW three-rung arc with the dockhand Sol: she has to earn his trust at the Undertow bar over several evenings before he'll take her to the salvage yard. Rung 1 = get him talking; rung 2 = get him drinking with her; rung 3 = he takes her to the yard. His relation meter is `npc_sol.relation`. Output ONLY the `[[quest_cards]]` TOML blocks (the whole ladder) to the output file — no canvases, no prose scenes.",
+      "expected_output": "A [[quest_cards]] ladder where each live rung's goals[].label is a walkthrough line naming PLACE + PERSON + VERB (e.g. 'Drink with Sol at the Undertow — evenings'), a meter-gated rung names the feeder that raises the meter, and the TOP rung cannot render blank (it carries a flag goal, a ready_canvas, or terminal). Targets Batch A.",
+      "assertions": [
+        "Uses the [[quest_cards]] table (not the unrelated v1 [[quests]] table)",
+        "Every live rung's goals[].label names a PLACE and a concrete VERB — a walkthrough line, not an abstract goal like 'Earn Sol's trust'",
+        "A schedule-gated step also names its time window (the Undertow is an evening bar)",
+        "A meter-gated rung tells the player, in-world, WHICH repeatable raises the meter (the gate-tell / feeder rule)",
+        "The top rung cannot render blank: it carries a flag goal, a ready_canvas, or terminal=true (the Frame-3 trap)",
+        "No version = \"1.0\" key pasted onto when/goals (quest conditions use a different evaluator)"
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "name": "pitch",
+      "prompt": "I'm deciding what to build next in games/vesper. Read the game's current state (its authoring_state.json and design docs) and PITCH me the next beat or arc — one concrete proposal I can say yes to or edit. Don't build it; pitch it. Write the pitch to the output file as markdown.",
+      "expected_output": "A pitch carrying all five parts — charge (the fantasy in a sentence, kink areas named) · ladder (rungs AND the act it ends on) · person (who it runs on + the one trait that makes the corruption theirs) · deposit (what state/quest/accumulation it feeds) · cost (which fail-state form is live, or an honest 'nothing, and here's why'). Concrete editable prose, not a menu of abstract options. Targets Batch C.",
+      "assertions": [
+        "States the CHARGE: the fantasy in a sentence, with the kink areas named out loud",
+        "States the LADDER including the specific act it ENDS on (not '...and it escalates from there')",
+        "Names the PERSON it runs on AND the one trait that makes this corruption theirs rather than a slot's",
+        "Names the DEPOSIT: which meter, flag, quest, or growth state it feeds",
+        "Names the COST: what it risks, or an explicit reasoned 'nothing at stake here'",
+        "Is concrete editable prose the reader could cut into — not a numbered menu of abstract options",
+        "Passes the heat test: the erotic trajectory is visible from the pitch alone, not deferred to the eventual prose"
+      ],
+      "files": []
+    },
+    {
+      "id": 5,
+      "name": "toplevel",
+      "prompt": "Do the Step-2 top-level design for a NEW game from this locked seed (do NOT re-do the seed, and do not write any TOML): FANTASY (female PC): A broke live-in nurse takes a private post at a decaying seaside hotel owned by a dying man and his three grown children — she nurses him by day and, as the family fights over the will, works each of them until the place answers to her. PERSON: second. SYSTEMS ON: clothing, phone. RENT: off. CAST: Mr. Hale (the dying owner), Iris (his sharp elder daughter), Tobin (the weak son who runs the bar), Dr. Vance (the visiting doctor who signs things). MAP: the hotel (lobby, bar, Hale's room, the nurse's room, the closed east wing), the pier, the town.",
+      "expected_output": "A Step-2 design that declares WHAT COMPOUNDS (the growing owned thing, its sinks, and states that unlock content) or explicitly declares 'nothing compounds' on purpose, AND names the fail-state FORM (danger/debt/deadline/decay) or states what a no-failure design costs. Targets Batch B (+ Batch D's cheat-skin declaration as a bonus).",
+      "assertions": [
+        "Declares WHAT COMPOUNDS — names the one thing that grows and becomes hers, with states that unlock CONTENT — or explicitly declares 'nothing compounds' as a deliberate choice",
+        "Each growth state opens content (a room, a person, a kind of scene) rather than only raising a number",
+        "Names the fail-state FORM explicitly (danger / debt / deadline / decay), or declares no-failure AND states what that costs",
+        "Covers the standing Step-2 spine: the cascade/double-lock, the stat set, the desire ladder, the economy, the frontier, and the machine",
+        "Does not collapse the endgame into management (no +income widget / dashboard as the payoff)",
+        "BONUS (Batch D): declares the cheat page's diegetic skin among the §8 declarations"
+      ],
+      "files": []
+    }
+  ]
+}

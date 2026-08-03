@@ -90,6 +90,18 @@ window.GAMES = [
     summary: `A short test build for NPC name/relationship customization and variable syntax.`,
   },
   {
+    slug: "media_lab_f",
+    title: "Media Lab F",
+    dev: true,
+    summary: `Ten unfilled media slots for the find-media query study. Unfilled TOML-only testbed without copied media assets.`,
+  },
+  {
+    slug: "media_lab_e",
+    title: "Media Lab E",
+    dev: true,
+    summary: `Ten unfilled media slots for the find-media query study. Unfilled TOML-only testbed without copied media assets.`,
+  },
+  {
     slug: "media_lab_c",
     title: "Media Lab C",
     dev: true,
