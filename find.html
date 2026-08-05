@@ -11,24 +11,101 @@
     .find-head h1 { font-size: 1.5rem; }
     .find-sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 18px; }
     .find-sub .mono { font-family: ui-monospace, Menlo, monospace; color: var(--accent); }
+    /* The slot's authored brief — what the clip has to SHOW. Every pick below is
+       judged against it, and until now it only existed on the review card. */
+    .slot-brief {
+      margin-top: 8px; padding-left: 10px; border-left: 2px solid var(--border);
+      color: var(--muted); font-size: 0.85rem; line-height: 1.55; max-width: 78ch;
+    }
 
     .toolbar {
       display: flex; flex-direction: column; gap: 12px;
       padding: 14px; margin-bottom: 18px;
       background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
     }
-    .searchrow { display: flex; gap: 8px; }
-    .searchrow input {
-      flex: 1; background: var(--bg); border: 1px solid var(--border);
-      border-radius: 9px; padding: 11px 14px; color: var(--text); font-size: 0.95rem; outline: none;
+    /* ── the search selector ──────────────────────────────────────────────
+       This replaced a text box and a "Search Google Images" button. That pair
+       served hand-capture — type a query, hover results, click the extension's
+       button one at a time — and nothing works that way now: an agent runs the
+       searches and stocks hundreds of candidates. What was missing was the
+       opposite affordance, telling the searches APART, so the page reads as
+       "look and pick" instead of "go find something". */
+    .qbar { flex-direction: row; align-items: center; gap: 8px; }
+    /* Nowrap + its own scroller: chips must stay on ONE line so "newest is
+       leftmost" survives, which a wrapping row silently breaks. */
+    .qrail {
+      display: flex; flex-wrap: nowrap; gap: 7px; overflow-x: auto;
+      scrollbar-width: none; scroll-behavior: smooth; flex: 1; min-width: 0;
     }
-    .searchrow input:focus { border-color: var(--accent); }
-    .go-btn {
-      font-weight: 700; font-size: 0.9rem; border: none; border-radius: 9px;
-      padding: 0 20px; cursor: pointer; background: var(--accent); color: var(--accent-text); white-space: nowrap;
+    .qrail::-webkit-scrollbar { display: none; }
+    .qchip { white-space: nowrap; flex: 0 0 auto; }
+    .qchip .qh { opacity: 0.55; margin-left: 6px; font-weight: 600; }
+    /* A search that stocked nothing still gets a chip — it is the record that
+       stops a dead query being re-run. Dimmed, never hidden. */
+    .qchip.barren { opacity: 0.55; }
+    .qscroll {
+      flex: 0 0 auto; width: 26px; height: 28px; border-radius: 7px; cursor: pointer;
+      background: var(--surface-hover); border: 1px solid var(--border); color: var(--muted);
+      font-size: 0.9rem; line-height: 1;
     }
-    .hint { color: var(--muted); font-size: 0.8rem; line-height: 1.5; }
-    .hint b { color: var(--text); }
+    .qscroll:hover:not(:disabled) { color: var(--text); border-color: var(--accent); }
+    .qscroll:disabled { opacity: 0.3; cursor: default; }
+    .qbar-empty { color: var(--muted); font-size: 0.82rem; }
+    /* A related-fetch bucket — dashed so "searched for words" and "grew from a
+       clip" read as different kinds of chip at a glance. */
+    .qchip.related { border-style: dashed; }
+    /* ⇢ on a tile: fetch this clip's Google related-feed, or jump to its chip. */
+    .rel-btn {
+      font-size: 0.78rem; border: 1px solid var(--border); border-radius: 7px;
+      padding: 7px; cursor: pointer; background: var(--surface-hover);
+      color: var(--muted); white-space: nowrap;
+    }
+    .rel-btn:hover:not(:disabled), .rel-btn.has-rel { color: var(--accent); border-color: var(--accent); }
+    .rel-btn:disabled { opacity: 0.5; cursor: default; }
+    /* ── the related panel — Google's right tab, for OUR related fetches ─────
+       Related buckets do NOT live in the searches rail: that rail answers
+       "which SEARCH found this", and a related fetch is not a search — it grew
+       from a clip. The panel lists every related fetch by its seed's THUMBNAIL
+       (a ⇢ label is meaningless as text) and opens each bucket inside itself,
+       so the main shelf never changes underneath you. */
+    .relpane {
+      position: fixed; top: 0; right: 0; bottom: 0; width: 420px; max-width: 92vw;
+      background: var(--bg, #101216); border-left: 1px solid var(--border);
+      box-shadow: -14px 0 36px rgba(0, 0, 0, 0.5); z-index: 60;
+      display: flex; flex-direction: column;
+    }
+    .relpane[hidden] { display: none; }
+    .relpane-head {
+      display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+      border-bottom: 1px solid var(--border); flex: 0 0 auto;
+    }
+    .relpane-head .ttl {
+      font-weight: 600; flex: 1; min-width: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .relpane-head img, .relpane-head video {
+      width: 46px; height: 32px; object-fit: cover; border-radius: 5px;
+      background: #000; flex: 0 0 auto;
+    }
+    .relpane-body { overflow-y: auto; padding: 12px; flex: 1; }
+    .relrow {
+      display: flex; gap: 10px; align-items: center; width: 100%; padding: 8px;
+      border: 1px solid var(--border); border-radius: 10px; background: none;
+      cursor: pointer; margin-bottom: 8px; text-align: left; color: inherit;
+      font: inherit;
+    }
+    .relrow:hover { border-color: var(--accent); }
+    .relrow img, .relrow video {
+      width: 92px; height: 60px; object-fit: cover; border-radius: 6px;
+      background: #000; flex: 0 0 auto;
+    }
+    .relrow .meta { min-width: 0; }
+    .relrow .meta .name {
+      font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .relrow .meta .sub { color: var(--muted); font-size: 0.8rem; }
+    /* tiles inside the panel reuse the shelf's tile styling on a narrower grid */
+    .relpane .find-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 
     .opt-head {
       display: flex; align-items: center; gap: 10px; margin: 6px 0 12px;
@@ -84,6 +161,28 @@
 
     .empty { color: var(--muted); font-size: 0.9rem; padding: 28px 4px; line-height: 1.6; }
 
+    /* The installed file is the asset being JUDGED — the verdict panel sits right
+       under it — so it gets room and is never cropped. The options grid crops to
+       4/3 on purpose (60 tiles have to align, and a click previews the real thing);
+       carrying that crop up here would hide the framing the verdict is about. */
+    .installed-wrap { max-width: 420px; }
+    .installed-wrap .tile-media { aspect-ratio: auto; max-height: 340px; object-fit: contain; }
+
+    /* The review panel borrows portal.css's .review-row / .rev-btn / .media-note /
+       .saved-tick wholesale, so a verdict looks identical on both pages. Only the
+       surrounding box is local — on media.html those controls sit inside a card. */
+    .review-box {
+      display: flex; flex-direction: column; gap: 8px;
+      padding: 14px; margin-bottom: 18px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    }
+    .review-box .review-row { margin-top: 0; padding-top: 0; }
+    .review-box .media-note { min-height: 46px; }
+    /* Mirrors media.html's card tint: the panel itself carries the verdict, so the
+       state is readable without hunting for which button is lit. */
+    .review-box.approved { border-color: #3f7d4c; }
+    .review-box.disapproved { border-color: #7d3f3f; }
+
     .more-row { display: flex; justify-content: center; padding: 18px 0 4px; }
     .more-btn {
       font-size: 0.82rem; font-weight: 600; color: var(--text);
@@ -112,33 +211,67 @@
     <div class="find-head"><h1>Find media</h1></div>
     <div class="find-sub" id="sub"></div>
 
-    <!-- SELECTED — pool slots only. These are the clips currently IN the folder,
-         i.e. the ones the game cycles. Sits above the search box because it is the
-         answer, not the search. Clicking one moves it back down into Options. -->
+    <!-- SELECTED — what is in the game RIGHT NOW. A pool shows every clip in the
+         folder, in cycle order; a single slot shows the one installed file. Sits
+         above the search box because it is the answer, not the search. On a pool,
+         clicking Unselect moves a clip back down into Options. -->
     <div id="selected-zone" hidden>
       <div class="opt-head">
-        <span>Selected — plays in-game</span><span class="opt-count" id="sel-count"></span>
+        <span id="sel-label">Selected — plays in-game</span><span class="opt-count" id="sel-count"></span>
       </div>
       <div id="selected"></div>
     </div>
 
-    <div class="toolbar">
-      <div class="searchrow">
-        <input id="q" type="text" placeholder="Search query…" autocomplete="off">
-        <button class="go-btn" id="go">🔎 Search Google Images ↗</button>
+    <!-- REVIEW — the slot's verdict, written to the SAME ledger media.html writes
+         (media_reviews.json, keyed on slot_key). Deliberately NOT gated on the slot
+         having media: an empty slot is exactly the one worth leaving a note on
+         ("her eyes must stay up"), and under v3 an unpicked slot is a hole in the
+         game, so it is the state that most needs a decision recorded against it. -->
+    <div id="review-zone" hidden>
+      <div class="opt-head">
+        <span>Review this slot</span><span class="opt-count" id="rev-state"></span>
       </div>
-      <div class="hint">
-        Opens Google Images in a new tab (the slot is passed along). Hover any result, click the
-        blue capture button, pick a <b>type</b> — it lands in <b>Options</b> below. Then <b>Use this</b>
-        downloads it into the game, replacing the current media.
+      <div class="review-box">
+        <div class="review-row">
+          <button class="rev-btn approve" id="rev-approve">Approve</button>
+          <button class="rev-btn disapprove" id="rev-disapprove">Disapprove</button>
+        </div>
+        <textarea class="media-note" id="rev-note" placeholder="note…"></textarea>
+        <div class="saved-tick" id="rev-tick"></div>
       </div>
+    </div>
+
+    <!-- SEARCHES — one chip per search that ran, newest leftmost. Clicking one
+         shows only what that search found. `All` lives OUTSIDE the rail, which is
+         what pinning has to mean mechanically: a chip inside a scrolling row
+         scrolls away, and the one bucket that must never be unreachable is the
+         one holding everything. -->
+    <div class="opt-head" id="qbar-head" hidden>
+      <span>Searches</span><span class="opt-count" id="q-note"></span>
+    </div>
+    <div class="toolbar qbar" id="qbar" hidden>
+      <button class="qscroll" id="q-left" hidden>‹</button>
+      <button class="filter-btn qchip active" id="q-all">All <span class="count">0</span></button>
+      <div class="qrail" id="q-rail"></div>
+      <button class="qscroll" id="q-right" hidden>›</button>
     </div>
 
     <div class="opt-head">
       <span>Options</span><span class="opt-count" id="count"></span>
+      <button class="refresh-btn" id="rel-open" hidden>⇢ Related</button>
       <button class="refresh-btn" id="refresh">↻ Refresh</button>
     </div>
     <div id="options"></div>
+
+    <!-- The related panel — see the .relpane CSS note for why this is not a rail chip. -->
+    <div class="relpane" id="relpane" hidden>
+      <div class="relpane-head" id="rel-head">
+        <button class="qscroll" id="rel-back" hidden>‹</button>
+        <span class="ttl" id="rel-title">Related</span>
+        <button class="qscroll" id="rel-close">✕</button>
+      </div>
+      <div class="relpane-body" id="rel-body"></div>
+    </div>
   </div>
 
   <script>
@@ -147,7 +280,6 @@
     var P = new URLSearchParams(location.search);
     var GAME = P.get("id") || "";
     var FILE = P.get("file") || "";
-    var QUERIES = (P.get("q") || "").split(" | ").map(function (s) { return s.trim(); }).filter(Boolean);
     // A POOL slot is a folder: every clip inside it plays, cycling one per visit.
     // `pool` carries the folder (same string as FILE, and the same key the options
     // store and the review ledger use — so nothing forks). Absent = single slot,
@@ -161,12 +293,26 @@
 
     var backEl = document.getElementById("back");
     var subEl = document.getElementById("sub");
-    var qEl = document.getElementById("q");
     var countEl = document.getElementById("count");
+    var qBarEl = document.getElementById("qbar");
+    var qBarHeadEl = document.getElementById("qbar-head");
+    var qNoteEl = document.getElementById("q-note");
+    var qRailEl = document.getElementById("q-rail");
+    var qAllEl = document.getElementById("q-all");
+    var qLeftEl = document.getElementById("q-left");
+    var qRightEl = document.getElementById("q-right");
     var optionsEl = document.getElementById("options");
     var selZoneEl = document.getElementById("selected-zone");
     var selEl = document.getElementById("selected");
     var selCountEl = document.getElementById("sel-count");
+    var selLabelEl = document.getElementById("sel-label");
+    var revZoneEl = document.getElementById("review-zone");
+    var revBoxEl = document.querySelector(".review-box");
+    var revStateEl = document.getElementById("rev-state");
+    var revApproveEl = document.getElementById("rev-approve");
+    var revDisapproveEl = document.getElementById("rev-disapprove");
+    var revNoteEl = document.getElementById("rev-note");
+    var revTickEl = document.getElementById("rev-tick");
 
     function el(tag, cls, text) {
       var e = document.createElement(tag);
@@ -177,12 +323,17 @@
 
     backEl.href = "media.html?id=" + encodeURIComponent(GAME);
     document.title = (FILE || GAME) + " — Find media";
-    qEl.value = QUERIES[0] || "";
 
     if (FILE) {
       subEl.appendChild(document.createTextNode("Filling slot "));
       subEl.appendChild(el("span", "mono", FILE));
       subEl.appendChild(document.createTextNode(" in " + (GAME || "—")));
+      // The slot's BRIEF goes here, filled by loadSlot(). It replaced the TOML's
+      // authored `search_queries`, which used to prefill the deleted search box:
+      // those are design-time guesses the agent rewrites anyway (on the eye-contact
+      // slot none of the three queries that actually ran matched them), whereas the
+      // brief is the thing every pick is judged against — and it was invisible here.
+      subEl.appendChild(el("div", "slot-brief"));
     } else {
       subEl.textContent = "No target slot — open this from a review card.";
     }
@@ -193,19 +344,16 @@
     function proxied(u) {
       if (!u) return u;
       if (u.charAt(0) === "/") return API + u;
+      // Already absolute against the dev server — an installed file, not a remote
+      // candidate. It must skip the proxy for the same reason "/…" does: the SSRF
+      // guard refuses loopback (`_blocked_host`, media_finder.py) and answers 400,
+      // which the lightbox renders as a broken tile. The selected-pool tiles pass
+      // exactly this shape, so their preview overlay was dead until this branch.
+      if (u.indexOf(API + "/") === 0) return u;
       var src = /redgifs\.com/i.test(u) ? "redgifs" : "";
       return API + "/api/v1/dev/media-finder/proxy?url=" + encodeURIComponent(u) + "&source=" + src;
     }
 
-    // ---- Google Images launcher (hands the slot to the capture extension) ----
-    document.getElementById("go").addEventListener("click", function () {
-      var q = (qEl.value || "").trim();
-      if (!q) { toast("Type a search query first", "err"); return; }
-      var url = "https://www.google.com/search?tbm=isch&q=" + encodeURIComponent(q) +
-        "&_tmc_game=" + encodeURIComponent(GAME) + "&_tmc_scene=" + encodeURIComponent(FILE);
-      window.open(url, "_blank");
-    });
-    qEl.addEventListener("keydown", function (e) { if (e.key === "Enter") document.getElementById("go").click(); });
     document.getElementById("refresh").addEventListener("click", loadOptions);
 
     // ---- options list (polled; only rebuilds when the set changes) ----
@@ -239,12 +387,214 @@
         });
       }, { rootMargin: "200px" });
 
+    // ---- which search is selected ----
+    //
+    // `null` = All. The two other bucket kinds are sentinels rather than query text,
+    // and they are objects nobody can collide with by naming a search that string.
+    var Q_ALL = null;
+    var Q_UNLABELLED = " older";
+    var activeQ = Q_ALL;
+    var queries = [];            // the slot's query records, oldest-first as stored
+
+    // ---- related-fetch status, DERIVED every poll, never stored ----
+    //
+    // An option "has related" iff a query record exists with source:"related" and
+    // seed_url === its url. A stored flag could lie after a repair or a partial
+    // run; this map cannot — it is rebuilt from the same response that renders
+    // the chips, so the button and the chip can never disagree.
+    var relBySeed = {};          // seed url -> that fetch's query record
+    var docidByUrl = {};         // url -> Google's id, when the harvest captured one
+    var relInFlight = {};        // url -> true while THIS page has a fetch running
+    // ONE fetch at a time, page-wide: the runner is a single browser, and rapid
+    // ⇢ clicks measurably broke its debug websocket (code=1000 mid-connect).
+    // The server enforces the same rule with a 429; this flag just keeps honest
+    // users from ever seeing that error.
+    var relBusy = false;
+
+    function rebuildRelMap() {
+      relBySeed = {};
+      queries.forEach(function (r) {
+        if (r.source === "related" && r.seed_url) relBySeed[r.seed_url] = r;
+      });
+    }
+
+    function foundBy(o) { return o.found_by || []; }
+
+    function isRelLabel(l) { return l.indexOf("⇢ ") === 0; }
+
+    // Found ONLY by related fetches → lives in the right panel, not the shelf.
+    // The main grid answers "what did the SEARCHES find"; mixing grown-from-a-clip
+    // results into it is exactly what the panel exists to avoid. An option a
+    // search ALSO found shows in both places — both claims are true.
+    function relOnly(o) {
+      var labels = foundBy(o);
+      if (!labels.length || o.origin === "previous") return false;
+      for (var i = 0; i < labels.length; i++) if (!isRelLabel(labels[i])) return false;
+      return true;
+    }
+
+    function inBucket(o, q) {
+      if (q === Q_ALL) return !relOnly(o);
+      // Undo history belongs to no search — it is reachable through All only.
+      // Filing a demoted pick under a query would be a category error.
+      if (q === Q_UNLABELLED) return !foundBy(o).length && o.origin !== "previous";
+      return foundBy(o).indexOf(q) >= 0;
+    }
+
+    // Counts are DERIVED, never read from the stored `stocked`. That number is the
+    // agent's honest report at harvest time, and dedup plus every removal makes it
+    // drift — a chip advertising 84 that opens onto 12 tiles destroys trust in the
+    // whole strip.
+    function bucketCount(q) {
+      var n = 0;
+      for (var i = 0; i < lastOpts.length; i++) if (inBucket(lastOpts[i], q)) n++;
+      return n;
+    }
+
+    // The machine's verdict on a query, which until now was computed during the
+    // harvest and thrown away. "100% porn" vs "41% tenor" says which search poisoned
+    // the shelf without opening a single tile.
+    var _FURNITURE = /(^|\.)(tenor|giphy|pinterest|tumblr|reddit|redd|gstatic|wikipedia|bbc|istockphoto|shutterstock|gettyimages|alamy|dreamstime)\./i;
+    function hostVerdict(rec) {
+      var hosts = rec.hosts || [];
+      if (!hosts.length) return "";
+      var total = 0, junk = 0;
+      hosts.forEach(function (h) {
+        var n = h[1] || 0;
+        total += n;
+        if (_FURNITURE.test("." + h[0] + ".")) junk += n;
+      });
+      if (!total) return "";
+      var pct = Math.round((1 - junk / total) * 100);
+      return pct + "% porn hosts";
+    }
+
+    function renderQueryBar() {
+      var hasUnlabelled = bucketCount(Q_UNLABELLED) > 0;
+      if (!queries.length && !hasUnlabelled) {
+        qBarEl.hidden = qBarHeadEl.hidden = true;
+        return;
+      }
+      qBarEl.hidden = qBarHeadEl.hidden = false;
+
+      // Newest leftmost. Storage is append-only oldest-first, so the display order
+      // is a reverse — never the storage order, which `at` monotonicity depends on.
+      // Related fetches are NOT searches — they live in the right panel, keyed by
+      // their seed's thumbnail, never as a text chip here.
+      var recs = queries.filter(function (r) { return r.source !== "related"; })
+                        .slice().reverse();
+      var sig = String(activeQ) + " " + recs.map(function (r) {
+        return r.q + ":" + bucketCount(r.q) + ":" + (r.hosts ? r.hosts.length : 0);
+      }).join(" ") + " " + (hasUnlabelled ? bucketCount(Q_UNLABELLED) : "");
+      if (sig === lastQSig) { syncArrows(); return; }   // don't rebuild — it resets scrollLeft
+      lastQSig = sig;
+
+      var keepScroll = qRailEl.scrollLeft;
+      qRailEl.innerHTML = "";
+      qAllEl.classList.toggle("active", activeQ === Q_ALL);
+      qAllEl.querySelector(".count").textContent = String(bucketCount(Q_ALL));
+
+      recs.forEach(function (rec) { qRailEl.appendChild(buildChip(rec.q, rec)); });
+      if (hasUnlabelled) {
+        // Everything stocked before searches were recorded. Rightmost because it is
+        // the least interesting bucket, so it is the right thing to scroll away.
+        qRailEl.appendChild(buildChip(Q_UNLABELLED, null, "Older searches"));
+      }
+      qRailEl.scrollLeft = keepScroll;
+      qNoteEl.textContent = recs.length
+        ? "(" + recs.length + " search" + (recs.length === 1 ? "" : "es") + " on this slot)"
+        : "";
+      syncArrows();
+    }
+
+    function buildChip(q, rec, labelOverride) {
+      var n = bucketCount(q);
+      var isRel = !!(rec && rec.source === "related" && rec.seed_url);
+      var b = el("button", "filter-btn qchip" + (activeQ === q ? " active" : "") +
+                           (n === 0 ? " barren" : "") + (isRel ? " related" : ""));
+      b.appendChild(document.createTextNode(labelOverride || q));
+      b.appendChild(el("span", "count", String(n)));
+      var verdict = rec ? hostVerdict(rec) : "";
+      if (verdict) b.appendChild(el("span", "qh", verdict));
+      if (isRel) {
+        b.title = "Related to " + basename(rec.seed_url) + "\n" +
+                  q + "\n" + (rec.urls || 0) + " urls extracted · " + (rec.stocked || 0) +
+                  " stocked · " + (rec.runs || 1) + " run(s), last " + (rec.last_at || rec.at || "").slice(0, 10) +
+                  ((rec.hosts || []).length
+                    ? "\n\n" + rec.hosts.slice(0, 8).map(function (h) { return h[1] + "  " + h[0]; }).join("\n")
+                    : "");
+      } else if (rec) {
+        b.title = q + "\n" + (rec.urls || 0) + " urls extracted · " + (rec.stocked || 0) +
+                  " stocked · " + (rec.runs || 1) + " run(s), last " + (rec.last_at || rec.at || "").slice(0, 10) +
+                  ((rec.hosts || []).length
+                    ? "\n\n" + rec.hosts.slice(0, 8).map(function (h) { return h[1] + "  " + h[0]; }).join("\n")
+                    : "");
+      } else {
+        b.title = "Stocked before searches were recorded — no search can be attributed to these.";
+      }
+      b.addEventListener("click", function () { selectQuery(q); });
+      return b;
+    }
+
+    function selectQuery(q) {
+      if (activeQ === q) return;
+      activeQ = q;
+      lastQSig = null;
+      lastSig = null;          // force the grid to re-derive its view
+      renderOptions(lastOpts);
+      renderQueryBar();
+    }
+
+    qAllEl.addEventListener("click", function () { selectQuery(Q_ALL); });
+
+    function syncArrows() {
+      var over = qRailEl.scrollWidth > qRailEl.clientWidth + 1;
+      qLeftEl.hidden = qRightEl.hidden = !over;
+      if (!over) return;
+      qLeftEl.disabled = qRailEl.scrollLeft <= 0;
+      qRightEl.disabled = qRailEl.scrollLeft + qRailEl.clientWidth >= qRailEl.scrollWidth - 1;
+    }
+    qLeftEl.addEventListener("click", function () { qRailEl.scrollBy({ left: -qRailEl.clientWidth * 0.8 }); });
+    qRightEl.addEventListener("click", function () { qRailEl.scrollBy({ left: qRailEl.clientWidth * 0.8 }); });
+    qRailEl.addEventListener("scroll", syncArrows, { passive: true });
+    window.addEventListener("resize", syncArrows);
+    if ("ResizeObserver" in window) new ResizeObserver(syncArrows).observe(qRailEl);
+
+    var lastQSig = null;
     var lastSig = null;
     function loadOptions() {
       fetch(API + "/api/v1/dev/media-finder/options/list?game=" +
         encodeURIComponent(GAME) + "&file=" + encodeURIComponent(KEY))
         .then(function (r) { return r.json(); })
-        .then(function (j) { renderOptions(j.options || []); })
+        .then(function (j) {
+          queries = j.queries || [];
+          rebuildRelMap();
+          // Which options can be fetched in ONE navigation. An option stocked
+          // before docid capture (2026-08-05) has none, and its fetch has to run
+          // a text search first to hunt one down — slow, visible, and usually
+          // fruitless on an aged shelf. The button says so rather than looking
+          // identical to the fast path.
+          docidByUrl = {};
+          (j.options || []).forEach(function (o) {
+            if (o.docid) docidByUrl[o.url] = o.docid;
+          });
+          // A selected chip that vanished from the server list (a hand edit, a
+          // check_shelves repair) would leave the grid permanently empty with no way
+          // back. Fall back rather than show a dead view.
+          if (activeQ !== Q_ALL && activeQ !== Q_UNLABELLED &&
+              !queries.some(function (r) { return r.q === activeQ; })) {
+            activeQ = Q_ALL;
+            lastSig = null;
+          }
+          renderOptions(j.options || []);
+          renderQueryBar();
+          // The ⇢ buttons live on CACHED tiles: the grid's signature is urls-only,
+          // so a queries-only change (a related record landing) repaints nothing.
+          // Walk them instead — this is the one piece of tile state that changes
+          // without the shelf changing.
+          updateRelatedButtons();
+          syncRelPanel();
+        })
         .catch(function () {
           if (lastSig !== "__offline__") {
             lastSig = "__offline__";
@@ -254,29 +604,58 @@
         });
     }
 
+    // Three different facts, three different sentences. "Nothing here" used to be one
+    // string that told you to click a button; the interesting case is the third —
+    // a search that RAN and came back with nothing is not the same as no search.
+    function emptyText() {
+      if (activeQ !== Q_ALL && activeQ !== Q_UNLABELLED) {
+        var rec = queries.filter(function (r) { return r.q === activeQ; })[0] || {};
+        return "“" + activeQ + "” ran on " + String(rec.last_at || rec.at || "").slice(0, 10) +
+               " and stocked nothing. Nothing was removed — this search came back empty.";
+      }
+      var textSearches = queries.filter(function (r) { return r.source !== "related"; });
+      if (textSearches.length) {
+        return textSearches.length + " search" + (textSearches.length === 1 ? "" : "es") +
+               " ran on this slot and nothing is on the shelf. Every one of them is still listed above.";
+      }
+      if (relRecords().length) {
+        return "No text searches on this slot — its clips all came from related " +
+               "fetches. They live in the ⇢ Related panel (top right of Options).";
+      }
+      return "Nothing has been searched for this slot yet. Run the media agent on it — " +
+             "every search it runs appears above as its own bucket.";
+    }
+
     function renderOptions(opts) {
-      // `shown` belongs in the signature: without it "Show more" is a dead button
-      // until the option set happens to change on its own — up to 3 s of nothing.
-      var sig = shown + "|" + opts.map(function (o) { return o.url; }).join("|");
+      lastOpts = opts;                       // always the FULL server list
+      // Even All goes through inBucket — related-only options are the panel's,
+      // and a bare `opts` here once showed them on the grid while the All count
+      // said otherwise.
+      var view = opts.filter(function (o) { return inBucket(o, activeQ); });
+
+      // `activeQ` in the signature is REQUIRED, not defensive: on a slot with one
+      // search, All and that chip yield an identical url list, so without it the sig
+      // would not change and the chip would be a dead button. `shown` is here for the
+      // same class of reason — see the "Show more" note on the paging cap.
+      var sig = String(activeQ) + "|" + shown + "|" +
+                view.map(function (o) { return o.url; }).join("|");
       if (sig === lastSig) return;  // unchanged — don't rebuild (avoids preview flicker)
       lastSig = sig;
-      lastOpts = opts;
 
-      if (!opts.length) {
+      if (!view.length) {
         tileByUrl = {};
         optionsGrid.innerHTML = "";
         if (moreRow) { moreRow.remove(); moreRow = null; }
         countEl.textContent = "";
         optionsEl.innerHTML = "";
-        optionsEl.appendChild(el("p", "empty",
-          "No options yet. Click “Search Google Images”, then capture results with the extension — they appear here."));
+        optionsEl.appendChild(el("p", "empty", emptyText()));
         return;
       }
 
-      var want = opts.slice(0, shown);
-      countEl.textContent = want.length < opts.length
-        ? "(showing " + want.length + " of " + opts.length + ")"
-        : "(" + opts.length + ")";
+      var want = view.slice(0, shown);
+      countEl.textContent = want.length < view.length
+        ? "(showing " + want.length + " of " + view.length + ")"
+        : "(" + view.length + ")";
 
       // Reconcile, don't rebuild. Re-parenting a live <img>/<video> with appendChild
       // MOVES the node without re-fetching it; wiping the grid would re-download
@@ -289,11 +668,27 @@
         if (!tile) { tile = buildTile(opt); tileByUrl[opt.url] = tile; }
         optionsGrid.appendChild(tile);
       });
+      // DETACH, don't forget. Filtering means most tiles leave the view on every chip
+      // click; deleting them from the cache would rebuild each one on the way back —
+      // a new `src`, and a fresh download through the uncached proxy (0.81-1.96 s and
+      // 724 KB-2.16 MB apiece). A retained detached node re-attaches by pure
+      // appendChild with no request at all, which is the same property the comment
+      // above relies on for Select.
+      var onShelf = {};
+      opts.forEach(function (o) { onShelf[o.url] = true; });
+      var parked = [];
       Object.keys(tileByUrl).forEach(function (url) {
         if (keep[url]) return;
         tileByUrl[url].remove();
-        delete tileByUrl[url];
+        if (!onShelf[url]) { delete tileByUrl[url]; return; }  // gone from the shelf entirely
+        parked.push(url);
       });
+      // Retention is bounded: without a cap the ceiling stops being `shown` and
+      // becomes "everything ever viewed across every chip" — 8 chips x 60 live 2 MB
+      // gifs is a real memory problem, and Chrome caps WebMediaPlayers besides.
+      // FIFO, and never an attached tile.
+      var overBy = parked.length - PAGE * 4;
+      for (var i = 0; i < overBy; i++) delete tileByUrl[parked[i]];
 
       // The offline branch empties optionsEl, which DETACHES the grid while tileByUrl
       // still holds every node. Without this re-attach the next successful poll would
@@ -303,14 +698,14 @@
         optionsEl.innerHTML = "";
         optionsEl.appendChild(optionsGrid);
       }
-      renderMore(opts);
+      renderMore(view);
     }
 
     // Deliberately no "Show all": on the deepest shelf that is one click for ~300 MB
     // of proxied downloads and a hung tab.
-    function renderMore(opts) {
+    function renderMore(view) {
       if (moreRow) { moreRow.remove(); moreRow = null; }
-      var left = opts.length - shown;
+      var left = view.length - shown;
       if (left <= 0) return;
       moreRow = el("div", "more-row");
       var btn = el("button", "more-btn",
@@ -364,14 +759,256 @@
       var rm = el("button", "rm-btn", "✕");
       rm.title = "Remove from options";
       rm.addEventListener("click", function () { removeOption(opt); });
-      row.append(use, rm);
+      // ⇢ related — only for options Google could have seen: a demoted local pick
+      // has a same-origin /games/ url that no index knows.
+      if (/^https?:/i.test(opt.url)) {
+        var rel = el("button", "rel-btn", "⇢");
+        tile._relBtn = rel;
+        tile._optUrl = opt.url;
+        tile._status = status;
+        rel.addEventListener("click", function () {
+          var rec = relBySeed[opt.url];
+          if (rec) { openRelPanel("detail", rec); return; }  // fetched → its panel
+          if (!relInFlight[opt.url]) fetchRelated(opt, tile);
+        });
+        row.append(use, rel, rm);
+        syncRelBtn(tile);
+      } else {
+        row.append(use, rm);
+      }
       body.append(row, status);
       tile.appendChild(body);
       return tile;
     }
 
+    // The ⇢ button's three states, derived fresh each call — never cached, so the
+    // button can't disagree with the chip rail it points into.
+    function syncRelBtn(tile) {
+      var b = tile._relBtn;
+      if (!b) return;
+      if (relInFlight[tile._optUrl]) {
+        b.disabled = true;
+        b.textContent = "⇢ fetching…";
+        return;
+      }
+      var rec = relBySeed[tile._optUrl];
+      if (relBusy && !rec) {
+        // Another tile's fetch is running — jumping to an existing chip is still
+        // fine, but starting a second fetch is not.
+        b.disabled = true;
+        b.textContent = "⇢ get related";
+        b.title = "Another related fetch is running — one at a time.";
+        return;
+      }
+      b.disabled = false;
+      b.classList.toggle("has-rel", !!rec);
+      if (rec) {
+        b.textContent = "⇢ " + bucketCount(rec.q) + " related";
+        b.title = "Open this clip's related bucket in the side panel";
+      } else if (docidByUrl[tile._optUrl]) {
+        b.textContent = "⇢ get related";
+        b.title = "Fetch Google's related-images feed for this clip (~10s). " +
+                  "Results open in the Related panel.";
+      } else {
+        // No id, no offer. This used to run a text search to hunt one down; it
+        // opened a Google tab on a guessed query and failed anyway on aged
+        // shelves. Refusing up front is the honest state — the cure is a new
+        // search on the slot, which attaches ids to the options it re-finds.
+        b.disabled = true;
+        b.textContent = "⇢ no id";
+        b.title = "No Google id stored for this clip, so its related feed can't " +
+                  "be opened. Run a search on this slot — any search that " +
+                  "re-finds this clip attaches an id to it.";
+      }
+    }
+
+    function updateRelatedButtons() {
+      Object.keys(tileByUrl).forEach(function (u) { syncRelBtn(tileByUrl[u]); });
+      Object.keys(relTileByUrl).forEach(function (u) { syncRelBtn(relTileByUrl[u]); });
+    }
+
+    // ---- the related panel ----
+    //
+    // List view: every related fetch on this slot, newest first, titled by the
+    // SEED'S THUMBNAIL — a ⇢ label is meaningless as text, the clip is the name.
+    // Detail view: that fetch's bucket, rendered inside the panel. The main shelf
+    // never changes underneath either view.
+    var relPaneEl = document.getElementById("relpane");
+    var relBodyEl = document.getElementById("rel-body");
+    var relTitleEl = document.getElementById("rel-title");
+    var relBackEl = document.getElementById("rel-back");
+    var relOpenEl = document.getElementById("rel-open");
+    var relView = { mode: "list", label: null };
+    var relTileByUrl = {};       // the panel's OWN tile cache — a DOM node can only
+                                 // live in one place, and options a search ALSO
+                                 // found are already on the main grid.
+    var lastRelSig = null;
+    var pendingOpenSeed = null;  // set by a successful fetch; opened on next poll
+
+    function relRecords() {
+      return queries.filter(function (r) { return r.source === "related" && r.seed_url; })
+                    .slice().reverse();
+    }
+
+    function seedThumb(url, cls) {
+      var isVideo = /\.(mp4|webm)$/i.test(url);
+      var m = el(isVideo ? "video" : "img", cls || "");
+      m.src = proxied(url);
+      if (isVideo) { m.muted = true; m.playsInline = true; m.preload = "metadata"; }
+      else { m.loading = "lazy"; m.referrerPolicy = "no-referrer"; }
+      return m;
+    }
+
+    function openRelPanel(mode, rec) {
+      relView = { mode: mode, label: rec ? rec.q : null };
+      lastRelSig = null;
+      relPaneEl.hidden = false;
+      renderRelPanel();
+    }
+
+    function closeRelPanel() {
+      relPaneEl.hidden = true;
+      // Parked panel tiles stay cached (bounded below) so reopening is free.
+    }
+
+    function renderRelPanel() {
+      if (relPaneEl.hidden) return;
+      var recs = relRecords();
+      var rec = relView.label
+        ? recs.filter(function (r) { return r.q === relView.label; })[0]
+        : null;
+      if (relView.mode === "detail" && !rec) { relView = { mode: "list", label: null }; }
+
+      var sig = relView.mode + "|" + (relView.label || "") + "|" +
+                recs.map(function (r) { return r.q + ":" + bucketCount(r.q); }).join("|");
+      if (sig === lastRelSig) return;
+      lastRelSig = sig;
+
+      // detach panel tiles rather than destroying them (same lesson as the grid:
+      // a forgotten tile is a re-download through the uncached proxy)
+      relBodyEl.innerHTML = "";
+      relBackEl.hidden = relView.mode !== "detail";
+
+      if (relView.mode === "list") {
+        relTitleEl.textContent = "Related fetches (" + recs.length + ")";
+        if (!recs.length) {
+          relBodyEl.appendChild(el("p", "empty",
+            "No related fetches on this slot yet. Click ⇢ on any clip to grow a bucket from it."));
+          return;
+        }
+        recs.forEach(function (r) {
+          var row = el("button", "relrow");
+          row.appendChild(seedThumb(r.seed_url));
+          var meta = el("div", "meta");
+          meta.appendChild(el("div", "name", basename(r.seed_url)));
+          meta.appendChild(el("div", "sub",
+            bucketCount(r.q) + " clips · " + String(r.last_at || r.at || "").slice(0, 10) +
+            (r.runs > 1 ? " · " + r.runs + " runs" : "")));
+          row.appendChild(meta);
+          row.addEventListener("click", function () { openRelPanel("detail", r); });
+          relBodyEl.appendChild(row);
+        });
+        return;
+      }
+
+      // detail
+      relTitleEl.textContent = basename(rec.seed_url);
+      var head = relTitleEl.parentNode;
+      var oldThumb = head.querySelector("img, video");
+      if (oldThumb) oldThumb.remove();
+      head.insertBefore(seedThumb(rec.seed_url), relTitleEl);
+
+      var bucket = lastOpts.filter(function (o) {
+        return foundBy(o).indexOf(rec.q) >= 0;
+      });
+      if (!bucket.length) {
+        relBodyEl.appendChild(el("p", "empty",
+          "This fetch ran on " + String(rec.last_at || rec.at || "").slice(0, 10) +
+          " and its bucket is empty. Nothing was removed."));
+        return;
+      }
+      var grid = el("div", "find-grid");
+      bucket.forEach(function (opt) {
+        var tile = relTileByUrl[opt.url];
+        if (!tile) { tile = buildTile(opt); relTileByUrl[opt.url] = tile; }
+        grid.appendChild(tile);
+      });
+      relBodyEl.appendChild(grid);
+      // Bound the cache: parked (detached) tiles only, FIFO, never an attached one.
+      var parked = Object.keys(relTileByUrl).filter(function (u) {
+        return !relTileByUrl[u].isConnected;
+      });
+      for (var i = 0; i < parked.length - PAGE * 2; i++) delete relTileByUrl[parked[i]];
+    }
+
+    function syncRelPanel() {
+      var n = relRecords().length;
+      relOpenEl.hidden = n === 0;
+      relOpenEl.textContent = "⇢ Related (" + n + ")";
+      if (pendingOpenSeed && relBySeed[pendingOpenSeed]) {
+        var rec = relBySeed[pendingOpenSeed];
+        pendingOpenSeed = null;
+        openRelPanel("detail", rec);
+        return;
+      }
+      renderRelPanel();
+    }
+
+    relOpenEl.addEventListener("click", function () { openRelPanel("list", null); });
+    relBackEl.addEventListener("click", function () { openRelPanel("list", null); });
+    document.getElementById("rel-close").addEventListener("click", closeRelPanel);
+
+    function fetchRelated(opt, tile) {
+      relInFlight[opt.url] = true;
+      relBusy = true;
+      updateRelatedButtons();          // gray every other ⇢ for the duration
+      tile._status.className = "tile-status";
+      tile._status.textContent = "fetching related — ~10s…";
+      fetch(API + "/api/v1/dev/media-finder/related/fetch", {
+        method: "POST",
+        body: JSON.stringify({ game: GAME, file: FILE, slot_key: KEY, url: opt.url })
+      }).then(function (r) { return r.json().then(function (j) { return { st: r.status, j: j }; }); })
+        .then(function (res) {
+          delete relInFlight[opt.url];
+          relBusy = false;
+          updateRelatedButtons();
+          if (res.j && res.j.ok) {
+            tile._status.className = "tile-status ok";
+            tile._status.textContent = "stocked " + (res.j.stocked || 0) + " related";
+            toast("Related stocked: " + (res.j.stocked || 0) + " clips", "ok");
+            // The shelf and the query table both grew — pull them now rather than
+            // at the next poll tick. syncRelPanel() then opens the new bucket in
+            // the side panel, which is the whole point of having clicked.
+            pendingOpenSeed = opt.url;
+            lastSig = null;
+            loadOptions();
+            return;
+          }
+          var msg = (res.j && res.j.error) || ("related fetch failed (" + res.st + ")");
+          // 503 = runner not up (or wrong Chrome) — the one case with a second door.
+          if (res.st === 503) msg += " You can also ask the agent to fetch related for this option.";
+          tile._status.className = "tile-status err";
+          tile._status.textContent = msg;
+          toast("Related fetch failed", "err");
+          syncRelBtn(tile);
+        })
+        .catch(function () {
+          delete relInFlight[opt.url];
+          relBusy = false;
+          updateRelatedButtons();
+          tile._status.className = "tile-status err";
+          tile._status.textContent = "dev server unreachable";
+          toast("Server unreachable", "err");
+        });
+    }
+
     function domainOf(u) {
       try { return new URL(u).hostname.replace(/^www\./, ""); } catch (e) { return ""; }
+    }
+
+    function basename(u) {
+      try { return decodeURIComponent(new URL(u).pathname.split("/").pop() || u); }
+      catch (e) { return u; }
     }
 
     function useOption(opt, btn, statusEl) {
@@ -407,6 +1044,10 @@
           lastSig = null;
           loadOptions();
           if (POOL) { lastSelSig = null; loadSelected(); }
+          // Re-read the slot row: on a SINGLE slot grab just replaced the installed
+          // file AND blanked the verdict server-side (`_clear_review_status`), so
+          // without this the panel above would keep showing both of the old ones.
+          loadSlot();
         })
         .catch(function () {
           statusEl.className = "tile-status err";
@@ -416,7 +1057,186 @@
         });
     }
 
-    // ---- SELECTED zone (pool slots only) ----
+    // ---- the slot's own row: what is installed, and what was decided ----
+    //
+    // Both answers come from ONE fetch of media-review/list — the same enumeration
+    // media.html renders — so "what is in this slot" and "what did I decide about
+    // it" cannot drift between the two pages. Read on load and after every mutation,
+    // never on the 3 s poll: it is a full TOML walk (measured 8 ms / 10 KB on
+    // media_lab_f, 211 ms / 217 KB on vesper) and nothing outside this page installs.
+    var slotItem = null;
+    var slotStamp = 0;
+    // Set when the row could not be READ. Without it an unreachable server rendered
+    // as a confident "nothing installed" — the one claim this zone must never make
+    // on no evidence, since it is the difference between a filled slot and a hole.
+    var slotUnknown = true;
+
+    function loadSlot() {
+      if (!FILE) return;
+      fetch(API + "/api/v1/dev/media-review/list?game=" + encodeURIComponent(GAME))
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (j) {
+          slotUnknown = !j;
+          // Match on the slot's stable identity first; fall back to the declared
+          // path, because _enumerate dedupes rows by `file` and a tagged slot
+          // sharing an asset with an untagged one keeps only the first row's key.
+          var items = (j && j.items) || [];
+          slotItem = items.filter(function (i) { return (i.slot_key || i.file) === KEY; })[0]
+                  || items.filter(function (i) { return i.file === FILE; })[0]
+                  || null;
+          slotStamp = Date.now();
+          renderSlot();
+        })
+        // Server down: the options zone already says so. Render the review controls
+        // anyway — saveReview reports its own failure rather than pretending.
+        .catch(function () { slotUnknown = true; slotItem = null; renderSlot(); });
+    }
+
+    function renderSlot() {
+      renderReview();
+      var brief = document.querySelector(".slot-brief");
+      if (brief) brief.textContent = (slotItem && slotItem.description) || "";
+      if (!POOL) renderInstalled();   // a pool's zone is driven by loadSelected()
+    }
+
+    // ---- SELECTED, single slot: the one file currently in the game ----
+    var lastInstalledSig = null;
+
+    function renderInstalled() {
+      var it = slotItem;
+      var has = !!(it && it.found && it.media_url);
+      var sig = slotUnknown ? "unknown" : (has ? it.media_url + "|" + slotStamp : "none");
+      if (sig === lastInstalledSig) return;   // unchanged — don't reload the preview
+      lastInstalledSig = sig;
+
+      selZoneEl.hidden = false;
+      selLabelEl.textContent = "In the game now";
+      selCountEl.textContent = slotUnknown ? "(unknown)" : (has ? "" : "(nothing installed)");
+      selEl.innerHTML = "";
+      if (slotUnknown) {
+        selEl.appendChild(el("p", "empty",
+          "Couldn't read this slot — the dev server didn't answer. This is not the same as empty."));
+        return;
+      }
+      if (!has) {
+        // Under v3 nothing is auto-installed, so this is not a neutral "empty" —
+        // the slot renders as a literal hole until a pick lands. Say that.
+        selEl.appendChild(el("p", "empty",
+          "Nothing installed — this slot renders as a hole in the game. Pick one from Options below."));
+        return;
+      }
+      var wrap = el("div", "installed-wrap");
+      wrap.appendChild(buildInstalledTile(it));
+      selEl.appendChild(wrap);
+    }
+
+    // No Unselect here, unlike a pool tile: a single slot has nowhere to move to,
+    // and replacing it is one click on any option below — grab shelves the
+    // incumbent as an `origin: "previous"` option, so the swap is already reversible.
+    function buildInstalledTile(it) {
+      var isVideo = it.media_type === "video";
+      var tile = el("div", "tile sel-tile");
+      // Cache-buster: a replacement usually lands at the SAME path (same stem, same
+      // extension), so without it the browser keeps showing the file it just replaced.
+      var src = API + it.media_url + "?t=" + slotStamp;
+
+      var thumb = el(isVideo ? "video" : "img", "tile-media");
+      thumb.src = src;
+      if (isVideo) { thumb.muted = true; thumb.loop = true; thumb.playsInline = true; thumb.autoplay = true; thumb.preload = "metadata"; }
+      else { thumb.loading = "lazy"; }
+      thumb.addEventListener("click", function () {
+        preview({ media_kind: isVideo ? "video" : "img", url: src });
+      });
+      thumb.addEventListener("error", function () {
+        var gone = el("div", "tile-media broken", "⚠ won't load");
+        gone.addEventListener("click", function () { window.open(src); });
+        tile.replaceChild(gone, thumb);
+      });
+      tile.appendChild(thumb);
+
+      var body = el("div", "tile-body");
+      var meta = el("div", "tile-meta");
+      meta.appendChild(el("span", "type-badge" + (isVideo ? " vid" : ""), it.media_type || "image"));
+      meta.appendChild(document.createTextNode(" " + (it.serve_path || it.file)));
+      body.appendChild(meta);
+      tile.appendChild(body);
+      return tile;
+    }
+
+    // ---- REVIEW: the slot's verdict, on the same ledger media.html writes ----
+    //
+    // Shown whether or not anything is installed. That is the point of having it
+    // here: the picker is where a slot is looked at hardest, and a slot with no
+    // pick is still a decision ("nothing on this shelf works — re-search").
+    var REV_STATE = { approved: "approved ✓", disapproved: "disapproved ✕" };
+
+    function renderReview() {
+      if (!FILE) return;
+      revZoneEl.hidden = false;
+      var status = slotItem ? slotItem.status : null;
+      revApproveEl.classList.toggle("on", status === "approved");
+      revDisapproveEl.classList.toggle("on", status === "disapproved");
+      revBoxEl.classList.toggle("approved", status === "approved");
+      revBoxEl.classList.toggle("disapproved", status === "disapproved");
+      // Never clobber a note being typed — the poll-free refresh still fires after
+      // a grab, which can happen while the cursor is in the box.
+      if (document.activeElement !== revNoteEl) {
+        revNoteEl.value = (slotItem && slotItem.note) || "";
+      }
+      revStateEl.textContent = REV_STATE[status] ||
+        (slotUnknown ? "verdict unread — the server didn't answer"
+                     : (slotItem && slotItem.found ? "needs review" : "no media yet — review anyway"));
+    }
+
+    // Saves are CHAINED, never issued in parallel. Clicking a verdict button blurs
+    // the note box, so one click fires the note save and the verdict save
+    // microseconds apart — two read-modify-writes on the same ledger key, racing.
+    // Measured: the pair landed in either order, so a click on Disapprove could
+    // persist the note with the OLD verdict and drop the new one. The server's
+    // `_reviews_lock` serialises the writes but cannot know which the user meant
+    // last; chaining here makes the later intent the last word, always.
+    var savePending = Promise.resolve();
+
+    // Optimistic like media.html's, and it rolls back on failure so the panel can
+    // never show a verdict the ledger does not hold.
+    function saveReview(status) {
+      var prev = slotItem ? slotItem.status : null;
+      if (!slotItem) slotItem = { status: null, note: "" };
+      slotItem.status = status;
+      slotItem.note = revNoteEl.value;
+      var note = revNoteEl.value;   // captured now; the box may change before our turn
+      renderReview();
+      revTickEl.textContent = "saving…";
+      savePending = savePending.then(function () {
+        return fetch(API + "/api/v1/dev/media-review/reviews?game=" + encodeURIComponent(GAME), {
+          method: "POST",
+          body: JSON.stringify({ file: FILE, slot_key: KEY, status: status, note: note })
+        }).then(function (r) {
+          if (!r.ok) throw new Error("save failed");
+          revTickEl.textContent = "saved ✓";
+          setTimeout(function () { revTickEl.textContent = ""; }, 1400);
+        }).catch(function () {
+          slotItem.status = prev;   // nothing was persisted
+          renderReview();
+          revTickEl.textContent = "save failed — is the server up?";
+        });
+      });
+      return savePending;
+    }
+
+    revApproveEl.addEventListener("click", function () {
+      saveReview(slotItem && slotItem.status === "approved" ? null : "approved");
+    });
+    revDisapproveEl.addEventListener("click", function () {
+      saveReview(slotItem && slotItem.status === "disapproved" ? null : "disapproved");
+    });
+    revNoteEl.addEventListener("blur", function () {
+      if (revNoteEl.value !== ((slotItem && slotItem.note) || "")) {
+        saveReview(slotItem ? slotItem.status || null : null);
+      }
+    });
+
+    // ---- SELECTED zone (pool slots) ----
     //
     // "Selected" is not a flag anywhere — it is literally "the file is in the
     // folder". So selecting is a grab INTO the folder and unselecting is a move
@@ -438,6 +1258,7 @@
       lastSelSig = sig;
 
       selZoneEl.hidden = false;
+      selLabelEl.textContent = "Selected — plays in-game";
       selCountEl.textContent = POOL_TARGET ? "(" + items.length + " of " + POOL_TARGET + ")"
                                            : "(" + items.length + ")";
       selEl.innerHTML = "";
@@ -496,7 +1317,7 @@
           // It reappears below as an `origin: "previous"` option, so the decision
           // is one click away from being undone.
           lastSelSig = null; lastSig = null;
-          loadSelected(); loadOptions();
+          loadSelected(); loadOptions(); loadSlot();
         })
         .catch(function () {
           statusEl.className = "tile-status err";
@@ -511,16 +1332,6 @@
         body: JSON.stringify({ game: GAME, file: FILE, slot_key: KEY, url: opt.url })
       }).then(function () { lastSig = null; loadOptions(); })
         .catch(function () { toast("Remove failed", "err"); });
-    }
-
-    // Reset the slot's review decision so the replacement shows as "needs review".
-    function clearReviewStatus() {
-      if (!FILE) return;
-      var note = "replaced via finder " + new Date().toISOString().slice(0, 10);
-      fetch(API + "/api/v1/dev/media-review/reviews?game=" + encodeURIComponent(GAME), {
-        method: "POST",
-        body: JSON.stringify({ file: FILE, slot_key: KEY, status: null, note: note })
-      }).catch(function () { /* non-fatal: the grab already landed */ });
     }
 
     function preview(opt) {
@@ -558,12 +1369,16 @@
                         + (POOL_TARGET ? " (aiming for " + POOL_TARGET + ")" : "");
       loadSelected();
     }
+    // Fills BOTH the "in the game now" zone (single slots) and the review panel
+    // (every slot). Once, plus after each mutation — see loadSlot().
+    loadSlot();
     loadOptions();
-    // One timer for both zones: captures from the Google tab appear within a few
-    // seconds, and the pool folder can also change from outside this page. Skipped
-    // while the tab is hidden — a backgrounded picker polled forever for a list
-    // nobody was looking at, and those requests share the same six connections the
-    // Google tab's captures need.
+    // One timer for both zones: a media agent stocks options through the API while
+    // this page is open, so a shelf fills and new search chips appear under you, and
+    // the pool folder can also change from outside this page. Skipped while the tab
+    // is hidden — a backgrounded picker polled forever for a list nobody was looking
+    // at, and those requests share the browser's six connections per origin with the
+    // proxied tile previews.
     setInterval(function () {
       if (document.hidden) return;
       loadOptions();

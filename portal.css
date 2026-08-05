@@ -364,6 +364,23 @@ footer {
    weakest evidence this page has, so it says so instead of passing as fact. */
 .band-badge.weak { border-style: dashed; opacity: 0.85; }
 
+/* Shelf state, shown only on slots with nothing selected. It answers "whose move
+   is it": amber = candidates are stocked and waiting on ME (actionable, and
+   deliberately NOT red — red on this page means broken/empty), grey = no search
+   has run yet, which is a fact about progress rather than a problem. Filled
+   pills, borrowing .pool-count's metrics so the two read as one family. */
+.shelf-badge {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: 4px;
+  padding: 1px 6px;
+  vertical-align: middle;
+}
+.shelf-badge.ready    { color: #d5a247; background: #d5a24718; border: 1px solid #d5a24740; }
+.shelf-badge.unworked { color: #6b7280; background: #6b728018; border: 1px solid #6b728040; }
+
 .review-row { display: flex; gap: 8px; margin-top: auto; padding-top: 6px; }
 .rev-btn {
   flex: 1;

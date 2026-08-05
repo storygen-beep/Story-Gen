@@ -71,12 +71,16 @@ def game(tmp_path, monkeypatch):
     (root / ".find-media").mkdir(parents=True)
     (root / "videos").mkdir(parents=True)
 
-    def write(blocks_toml, *, shelf=None, verdicts=None):
+    def write(blocks_toml, *, shelf=None, verdicts=None, queries=None):
         (root / "toml_phases" / "7_final_game.toml").write_text(TOML % blocks_toml)
-        if shelf is not None:
-            (root / ".find-media" / "media_options.json").write_text(
-                json.dumps({"game": "g", "options": shelf})
-            )
+        if shelf is not None or queries is not None:
+            # `queries` omitted entirely when not asked for — that is the shape of
+            # every ledger written before query provenance existed, and a repair
+            # must not invent the root.
+            blob = {"game": "g", "options": shelf if shelf is not None else {}}
+            if queries is not None:
+                blob["queries"] = queries
+            (root / ".find-media" / "media_options.json").write_text(json.dumps(blob))
         if verdicts is not None:
             (root / ".find-media" / "media_reviews.json").write_text(
                 json.dumps({"reviews": verdicts})
@@ -258,6 +262,71 @@ def test_repair_fixes_a_tier_retag(game, capsys):
     assert code == 0
     assert "sex/a_t5.webm" in _ledger(root, "media_options.json", "options")
     assert _ledger(root, "media_reviews.json", "reviews")["sex/a_t5.webm"]["status"] == "approved"
+
+
+# ── a shelf is TWO roots now: candidates + which search found them ───────────
+
+def test_repair_moves_the_query_table_with_the_shelf(game, capsys):
+    """A shelf that outlived its labels reads as "everything came from an unknown
+    search" — silently, with nothing anywhere able to tell that the link was lost."""
+    root = game(POOL,
+                shelf={"sex/a_t5.webm": [{"url": "u1", "found_by": ["q one"]}]},
+                queries={"sex/a_t5.webm": [{"q": "q one", "urls": 84}]})
+    code, out = _run(capsys, repair=True)
+
+    assert code == 0, out
+    blob = json.loads((root / ".find-media" / "media_options.json").read_text())
+    assert blob["options"]["sex/a_t5"][0]["found_by"] == ["q one"]
+    assert blob["queries"]["sex/a_t5"][0]["q"] == "q one"
+    assert "sex/a_t5.webm" not in blob["options"]
+    assert "sex/a_t5.webm" not in blob["queries"]
+
+
+def test_repair_refuses_when_only_the_query_table_collides(game, capsys):
+    """The destination has no shelf but DOES have a zero-yield search recorded
+    against it. Checking only `options` would clobber that record."""
+    root = game(POOL,
+                shelf={"sex/a_t5.webm": [{"url": "old"}]},
+                queries={"sex/a_t5": [{"q": "already here"}]})
+    code, out = _run(capsys, repair=True)
+
+    assert "refusing to merge" in out and "queries" in out
+    assert code == 1
+    blob = json.loads((root / ".find-media" / "media_options.json").read_text())
+    assert blob["options"]["sex/a_t5.webm"] == [{"url": "old"}], "the source was consumed anyway"
+    assert blob["queries"]["sex/a_t5"] == [{"q": "already here"}], "the destination was overwritten"
+
+
+def test_a_queries_only_orphan_is_still_found_and_moved(game, capsys):
+    """A search that yielded NOTHING leaves a record and no options. It is still a
+    real orphan once the slot's path moves — and it reports honestly as 0 stranded."""
+    root = game(POOL, shelf={}, queries={"sex/a_t5.webm": [{"q": "leaning forward gif", "urls": 0}]})
+    code, out = _run(capsys, repair=True)
+
+    assert "0 options stranded" in out
+    assert code == 0, out
+    blob = json.loads((root / ".find-media" / "media_options.json").read_text())
+    assert blob["queries"]["sex/a_t5"][0]["q"] == "leaning forward gif"
+
+
+def test_repair_does_not_invent_a_queries_root(game, capsys):
+    """Every ledger written before 2026-08-05 has exactly {game, options, updated_at}.
+    A re-key must not restructure a file it was only asked to re-label."""
+    root = game(POOL, shelf={"sex/a_t5.webm": [{"url": "u"}]})
+    _run(capsys, repair=True)
+
+    blob = json.loads((root / ".find-media" / "media_options.json").read_text())
+    assert "queries" not in blob
+
+
+def test_repair_writes_atomically_and_backs_up_what_it_mutated(game, capsys):
+    root = game(POOL, shelf={"sex/a_t5.webm": [{"url": "u"}]},
+                queries={"sex/a_t5.webm": [{"q": "q one"}]})
+    before = (root / ".find-media" / "media_options.json").read_bytes()
+    _run(capsys, repair=True)
+
+    assert (root / ".find-media" / "media_options.json.bak").read_bytes() == before
+    assert not list((root / ".find-media").glob("*.tmp")), "a staging file was stranded"
 
 
 # ── suggestion helper, directly ──────────────────────────────────────────────

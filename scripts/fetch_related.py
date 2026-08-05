@@ -1,0 +1,381 @@
+#!/usr/bin/env python3
+"""Fetch Google's related-images feed for one stocked option and shelve it.
+
+Why this works at all (measured live, 2026-08-05): Google Images result pages
+embed, in script metadata, triples `"<docid>",["<thumbnail>",h,w],["<file>",h,w]`
+pairing every result's index id with its original media URL. The related feed for
+an image is then a plain URL — `?udm=2&q=<query>&tbs=rimg:<blob>` — where the blob
+is protobuf `field 1 (fixed64) = first 8 bytes of the base64url-decoded docid`,
+base64url-encoded. A TRUNCATED blob built from the docid alone serves the real
+feed (verified by host-signature match against Google's own full blob; the seed is
+excluded from its own results). Ground truth: docid FvF5n0MlBjcrfM → CRbxeZ9DJQY3.
+
+The fetch must run inside a real Chrome profile with SafeSearch off — Google
+serves nothing usable to curl or a fresh headless profile. This script attaches
+over CDP to a DEDICATED automation profile so the daily browser stays untouched:
+
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \\
+        --user-data-dir="$HOME/.chrome-find-media" --remote-debugging-port=9222
+
+One-time setup in that profile, by hand: open google.com, accept/dismiss consent,
+turn SafeSearch OFF (google.com/safesearch). Nothing else.
+
+Results land through the same dev API the harvest skill uses: one options/add per
+url (labelled, with its own docid so every stocked clip can seed the next hop) and
+one queries/add closing record carrying `source:"related"` + `seed_url` — the pair
+the picker derives "related fetched" from. Re-running the same seed TOPS UP the
+same bucket; nothing is ever cleared.
+
+On a 409 from queries/add (label claimed by a different seed mid-run), the options
+this run stocked carry the collided label — so the recovery is not just a rename:
+re-pick a suffixed label, RE-STOCK every url under it (dedup makes that N cheap
+found_by appends), then record. Done once; a second collision is reported, not
+retried.
+
+Exit codes:
+  0  ok — one JSON result line on stdout
+  3  Google captcha / unusual-traffic page — wait and retry later; NEVER solved here
+  4  no stored Google id for the seed — refused WITHOUT touching the browser
+  5  CDP connect failed (is the dedicated Chrome running with the debug port?)
+  6  dev API unreachable or refused
+  7  feed suspiciously clean (almost no urls, none on porn hosts) — likely the
+     WRONG Chrome on the port, or SafeSearch is back on in the profile
+
+Usage:
+    python scripts/fetch_related.py --game media_lab_f \\
+        --slot-key scenes/lab_eyecontact_t5.webm \\
+        --seed-url https://cdn.nsfwgify.com/44903/kneeling-blowjob.gif
+"""
+
+import argparse
+import base64
+import json
+import re
+import sys
+from collections import Counter
+from pathlib import PurePosixPath
+from urllib.parse import quote_plus, urlparse
+
+import requests
+
+DEFAULT_API = "http://localhost:8000"
+DEFAULT_PORT = 9222
+
+# The metadata triple: docid, thumbnail tuple, original-file tuple. Same-day join
+# coverage measured at 84/97 — misses are lazy-loaded results, which the scroll
+# pass below mostly recovers.
+DOCID_TRIPLE_RE = re.compile(
+    r'"([A-Za-z0-9_-]{10,20})",'
+    r'\["https://encrypted-tbn[^"]+",\d+,\d+\],'
+    r'\["(https?:[^"]+?)",\d+,\d+\]'
+)
+
+MEDIA_RE = re.compile(r'https?://[^"\'\s\\]+?\.(?:gif|mp4|webm)', re.IGNORECASE)
+
+# Hosts that mean the result is furniture, not porn — the picker's chip verdict
+# uses the same list. Only the sanity guard reads this here.
+FURNITURE_RE = re.compile(
+    r"(^|\.)(tenor|giphy|pinterest|tumblr|reddit|redd|gstatic|wikipedia|bbc|"
+    r"istockphoto|shutterstock|gettyimages|alamy|dreamstime)\.",
+    re.IGNORECASE,
+)
+
+CAPTCHA_RE = re.compile(r"unusual traffic|not a robot", re.IGNORECASE)
+
+
+# ---------------------------------------------------------------------------
+# Pure functions — unit-tested, importable without playwright installed.
+# ---------------------------------------------------------------------------
+
+def docid_to_blob(docid: str) -> str:
+    """Build the `tbs=rimg:` blob from a docid. Ground truth in the module docstring."""
+    raw = base64.urlsafe_b64decode(docid + "=" * (-len(docid) % 4))
+    if len(raw) < 8:
+        raise ValueError(f"docid {docid!r} decodes to {len(raw)} bytes — need ≥8")
+    return base64.urlsafe_b64encode(b"\x09" + raw[:8]).rstrip(b"=").decode("ascii")
+
+
+def related_url(q: str, blob: str) -> str:
+    return f"https://www.google.com/search?udm=2&q={quote_plus(q)}&tbs=rimg:{blob}"
+
+
+def _stem(url: str) -> str:
+    return PurePosixPath(urlparse(url).path).stem
+
+
+def slug_query(seed_url: str) -> str:
+    """Filename slug words as a last-resort query. `kneeling-blowjob.gif` →
+    `kneeling blowjob gif` — the words the host itself filed the clip under."""
+    words = [w for w in re.split(r"[^A-Za-z]+", _stem(seed_url)) if len(w) >= 3]
+    return " ".join(words + ["gif"]) if words else ""
+
+
+def pick_q(option: dict, queries: list, seed_url: str) -> str:
+    """The text q for the feed URL. The feed is seeded by query AND image; keeping
+    the slot's proven query pins the act while the visuals wander — which is what
+    keeps a related hop from drifting off the slot's brief."""
+    # A clip stocked BY a related fetch carries the ⇢ label in found_by — that is
+    # a bucket name, never a Google query. Only real text searches qualify.
+    found = [q for q in (option.get("found_by") or []) if not q.startswith("⇢ ")]
+    if found:
+        return found[0]
+    for rec in reversed(queries):  # stored oldest-first → newest wins
+        q = rec.get("q") or ""
+        if rec.get("source") != "related" and not q.startswith("⇢ "):
+            return q
+    return slug_query(seed_url)
+
+
+def pick_label(seed_url: str, queries: list, taken: set | None = None) -> str:
+    """The chip label for this seed's bucket. Same seed reuses its label (top-up);
+    a label owned by a DIFFERENT seed gets suffixed — two seeds can legitimately
+    share a basename. `taken` forces extra labels off-limits (the 409 retry)."""
+    base = "⇢ " + (_stem(seed_url) or "related")
+    taken = taken or set()
+
+    def owner(label):
+        for rec in queries:
+            if rec.get("q") == label:
+                return rec.get("seed_url") or ""
+        return None
+
+    candidate, n = base, 1
+    while True:
+        own = owner(candidate)
+        if candidate not in taken and (own is None or own == "" or own == seed_url):
+            return candidate
+        n += 1
+        candidate = f"{base} ·{n}"
+
+
+def clean_media_urls(html: str) -> list:
+    """§4's extract, in Python: dedupe, strip querystrings, cut google/gstatic
+    hosts, cut phncdn (discovery-only — not fetchable), cut empty paths."""
+    seen, out = set(), []
+    for m in MEDIA_RE.finditer(html):
+        u = m.group(0).split("?")[0]
+        if u in seen:
+            continue
+        seen.add(u)
+        host = urlparse(u).netloc.lower()
+        if not host or host.endswith("google.com") or host.endswith("gstatic.com"):
+            continue
+        if host.endswith("phncdn.com"):
+            continue
+        # Empty-path cut: the filename must be more than a bare extension —
+        # `https://host/.gif` is a truncated match, not a clip.
+        name = urlparse(u).path.rsplit("/", 1)[-1].rsplit(".", 1)[0]
+        if not name:
+            continue
+        out.append(u)
+    return out
+
+
+def _unescape(url: str) -> str:
+    return url.replace("\\u003d", "=").replace("\\u0026", "&").replace("\\/", "/")
+
+
+def docid_join(html: str) -> dict:
+    """{file-url (querystring-stripped) → docid} from the page's metadata triples."""
+    out = {}
+    for m in DOCID_TRIPLE_RE.finditer(html):
+        out[_unescape(m.group(2)).split("?")[0]] = m.group(1)
+    return out
+
+
+def host_histogram(urls: list) -> list:
+    counts = Counter(urlparse(u).netloc.replace("www.", "", 1) for u in urls)
+    return [[h, n] for h, n in counts.most_common()]
+
+
+def looks_suspiciously_clean(urls: list) -> bool:
+    """<5 urls and none on a non-furniture host = the profile on the port is
+    almost certainly SafeSearch-on (or the wrong Chrome entirely). A genuinely
+    barren related feed still serves furniture; a sanitized one serves nothing."""
+    porn = [u for u in urls if not FURNITURE_RE.search("." + urlparse(u).netloc + ".")]
+    return len(urls) < 5 and not porn
+
+
+# ---------------------------------------------------------------------------
+# The run
+# ---------------------------------------------------------------------------
+
+def _fail(code: int, msg: str):
+    print(msg, file=sys.stderr)
+    sys.exit(code)
+
+
+def _api_post(api: str, endpoint: str, body: dict):
+    try:
+        return requests.post(f"{api}/api/v1/dev/media-finder/{endpoint}", json=body, timeout=15)
+    except requests.RequestException as exc:
+        _fail(6, f"dev API unreachable ({endpoint}): {exc}")
+
+
+def _ensure_page_target(port: int) -> None:
+    """Give the runner at least one page target before attaching.
+
+    Measured 2026-08-05: with every window closed, Chrome keeps serving
+    `/json/version` — so the port looks healthy — but `connect_over_cdp` dies at
+    handshake with "Browser context management is not supported" and a websocket
+    log that reads exactly like a flaky connection. It isn't flaky; there is
+    simply nothing to attach to. `PUT /json/new` creates one, and the same
+    connect then succeeds. This is why the runner window may be closed to the
+    human and the fetch still works.
+    """
+    try:
+        targets = requests.get(f"http://localhost:{port}/json/list", timeout=5).json()
+    except (requests.RequestException, ValueError):
+        return  # let connect_over_cdp report the real problem
+    if any(t.get("type") == "page" for t in targets):
+        return
+    try:
+        requests.put(f"http://localhost:{port}/json/new?about:blank", timeout=5)
+    except requests.RequestException:
+        return
+
+
+def _settle(page, wheels: int = 4):
+    """Scroll to pull lazy-loaded results into the DOM, then return the HTML."""
+    for _ in range(wheels):
+        page.mouse.wheel(0, 2400)
+        page.wait_for_timeout(650)
+    page.wait_for_timeout(400)
+    return page.content()
+
+
+def _check_captcha(page, html: str):
+    if "/sorry/" in page.url or CAPTCHA_RE.search(html):
+        _fail(3, "Google served a captcha / unusual-traffic page. Not solving it. "
+                 "Wait a while before retrying, and slow the pace if it recurs.")
+
+
+def _stock(api: str, game: str, file_: str, slot_key: str, label: str,
+           urls: list, docids: dict) -> int:
+    ok = 0
+    for u in urls:
+        is_vid = re.search(r"\.(mp4|webm)$", u, re.IGNORECASE)
+        r = _api_post(api, "options/add", {
+            "game": game, "file": file_, "slot_key": slot_key, "url": u,
+            "query": label,
+            "type": "video" if is_vid else "gif",
+            "media_kind": "video" if is_vid else "img",
+            "docid": docids.get(u, ""),
+        })
+        if r.status_code == 200 and r.json().get("ok"):
+            ok += 1
+    return ok
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(description=__doc__.split("\n", 1)[0])
+    ap.add_argument("--game", required=True)
+    ap.add_argument("--slot-key", required=True)
+    ap.add_argument("--seed-url", required=True)
+    ap.add_argument("--file", default="", help="bytes-destination path; defaults to --slot-key")
+    ap.add_argument("--port", type=int, default=DEFAULT_PORT)
+    ap.add_argument("--api", default=DEFAULT_API)
+    args = ap.parse_args()
+    file_ = args.file or args.slot_key
+    seed = args.seed_url.split("?")[0]
+
+    # -- the shelf: find the seed option, choose q + label BEFORE stocking -----
+    try:
+        r = requests.get(
+            f"{args.api}/api/v1/dev/media-finder/options/list",
+            params={"game": args.game, "file": args.slot_key}, timeout=15,
+        )
+        shelf = r.json()
+    except (requests.RequestException, ValueError) as exc:
+        _fail(6, f"dev API unreachable (options/list): {exc}")
+    options, queries = shelf.get("options") or [], shelf.get("queries") or []
+    option = next((o for o in options if (o.get("url") or "").split("?")[0] == seed), None)
+    if option is None:
+        # Not fatal: allow fetching related for a url the caller knows about even
+        # if it is not on this shelf yet (it will be, as part of the harvest).
+        option = {"url": seed}
+        print("note: seed url is not on this slot's shelf", file=sys.stderr)
+
+    # NO ID, NO RUN — refused before the browser is even touched.
+    #
+    # This used to fall back to hunting the id: run a text search, look for the
+    # seed among the results, steal its id. LO killed it 2026-08-05 and he was
+    # right. The guess-query ladder bottoms out at filename slug words, so on an
+    # aged shelf it opened a Google tab, searched something nobody asked for, and
+    # failed anyway — the clip no longer ranked. It read as a bug every time.
+    # The real cure is a new search on the slot, which attaches ids to the
+    # existing options it re-finds.
+    docid = option.get("docid") or ""
+    if not docid:
+        _fail(4, "no Google id stored for this clip — not fetching. Run a search "
+                 "on this slot; any search that re-finds it attaches an id.")
+
+    q = pick_q(option, queries, seed)
+    if not q:
+        _fail(4, "no usable query for the feed URL: seed has no found_by, slot has "
+                 "no searches, and the filename has no slug words")
+    label = pick_label(seed, queries)
+    print(f"q={q!r}  label={label!r}", file=sys.stderr)
+
+    # -- the browser ----------------------------------------------------------
+    from playwright.sync_api import sync_playwright  # deferred: pure fns import clean
+
+    with sync_playwright() as p:
+        _ensure_page_target(args.port)
+        try:
+            browser = p.chromium.connect_over_cdp(f"http://localhost:{args.port}")
+        except Exception as exc:
+            # Keep this SHORT. The endpoint relays the last ~400 chars of stderr,
+            # so a pasted playwright traceback would push the actual sentence out
+            # of the window and leave the human reading websocket ids.
+            reason = str(exc).splitlines()[0][:120]
+            _fail(5, f"Could not attach to the Chrome on :{args.port} — {reason}")
+        ctx = browser.contexts[0] if browser.contexts else browser.new_context()
+        page = ctx.new_page()
+        try:
+            # -- the related feed — the ONLY navigation this script makes ------
+            page.goto(related_url(q, docid_to_blob(docid)),
+                      wait_until="domcontentloaded", timeout=45000)
+            html = _settle(page)
+            _check_captcha(page, html)
+            urls = clean_media_urls(html)
+            docids = docid_join(html)
+            hosts = host_histogram(urls)
+            if looks_suspiciously_clean(urls):
+                _fail(7, f"only {len(urls)} urls, none on porn hosts — suspiciously "
+                         f"clean. Check the profile on :{args.port}: is SafeSearch "
+                         "still OFF, and is it the dedicated find-media Chrome?")
+
+            # -- stock, then record — §5 order, never reversed ----------------
+            stocked = _stock(args.api, args.game, file_, args.slot_key, label, urls, docids)
+            rec = _api_post(args.api, "queries/add", {
+                "game": args.game, "file": file_, "slot_key": args.slot_key,
+                "query": label, "source": "related", "seed_url": seed,
+                "urls": len(urls), "stocked": stocked, "hosts": hosts,
+            })
+            if rec.status_code == 409:
+                # Another seed claimed the label mid-run, so OUR options carry a
+                # label that is not ours. Re-pick, RE-STOCK (dedup → cheap found_by
+                # appends), re-record. Once.
+                label2 = pick_label(seed, queries, taken={label})
+                print(f"label collision — restocking under {label2!r}", file=sys.stderr)
+                stocked = _stock(args.api, args.game, file_, args.slot_key, label2, urls, docids)
+                rec = _api_post(args.api, "queries/add", {
+                    "game": args.game, "file": file_, "slot_key": args.slot_key,
+                    "query": label2, "source": "related", "seed_url": seed,
+                    "urls": len(urls), "stocked": stocked, "hosts": hosts,
+                })
+                label = label2
+            if rec.status_code != 200:
+                _fail(6, f"queries/add refused: {rec.status_code} {rec.text[:300]}")
+
+            print(json.dumps({
+                "ok": True, "label": label, "urls": len(urls),
+                "stocked": stocked, "docid_source": "stored",
+            }))
+        finally:
+            page.close()
+
+
+if __name__ == "__main__":
+    main()

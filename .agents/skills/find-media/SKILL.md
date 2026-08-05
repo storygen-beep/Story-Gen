@@ -352,12 +352,19 @@ only, and it is the single thing that keeps runner-ups alive. Verified: 54 of 54
 CORS fine, in-page `fetch`. Nothing downstream stocks anything: JUDGE ranks, INSTALL installs.
 
 ```
-POST /api/v1/dev/media-finder/options/add    {game, file, url, type, media_kind}
-GET  /api/v1/dev/media-finder/options/list   ?game=&file=              → {"options":[…]}
+POST /api/v1/dev/media-finder/options/add    {game, file, slot_key, url, type, media_kind, query, docid?}
+POST /api/v1/dev/media-finder/queries/add    {game, file, slot_key, query, source, urls, stocked, hosts, seed_url?}
+POST /api/v1/dev/media-finder/related/fetch  {game, file, slot_key, url}   (runs scripts/fetch_related.py)
+GET  /api/v1/dev/media-finder/options/list   ?game=&file=   → {"options":[…], "queries":[…]}
 POST /api/v1/dev/media-finder/options/remove {game, file, url}
 POST /api/v1/dev/media-finder/options/clear  {game, file, before}      (api/v1/media_finder.py:331)
 POST /api/v1/dev/media-finder/grab           {game, file, url, source}
 ```
+
+`docid` = Google's index id for the image, paired by §4's join in `chrome_route.md` —
+send it on every stock; it is what makes "fetch related" (§5b there) one navigation.
+`seed_url` (+ `source: "related"`) marks a related-fetch's closing record — the pair
+the picker's ⇢ button derives its state from.
 
 Ledger: `games/<game>/.find-media/media_options.json`.
 
@@ -693,11 +700,16 @@ Terms that prove out across more than one game get copied up to `games/.find-med
 That is the one part of a run that compounds: every future run starts with a bigger
 vocabulary than this one did.
 
-**`query_ledger.jsonl` — log every query, as you run it.** One JSON line per query:
-`{"slot", "query", "date", "round", "source", "urls_yielded", "status"}`. It is the only
-machine-written record of what was actually searched, and that matters more than it sounds: a prose
-run summary claiming "4 rounds" has already been caught contradicting a ledger showing 7. When the
-two disagree, **the ledger is right.**
+**`query_ledger.jsonl` — written FOR you, by `queries/add`.** One JSON line per query:
+`{"slot", "query", "date", "round", "source", "urls_yielded", "status"}`. Do not hand-write it any
+more: the endpoint that records a search appends this line as a side effect, which is the first time
+this file has actually been what it always claimed to be — a machine-written record. That matters
+more than it sounds: a prose run summary claiming "4 rounds" has already been caught contradicting a
+ledger showing 7. When the two disagree, **the ledger is right.**
+
+It is also the DURABLE copy. The same facts live in `media_options.json`'s `queries` root, which is
+rewritten whole on every write and which `_read_options` reads back as EMPTY if a write ever tears —
+so one bad write could take the entire query history with it. This file is only ever appended to.
 
 ⚠️ **`urls_yielded` is NOT a quality signal.** Measured across 31 vesper queries: 40–92 urls, with no
 relationship to whether the query found anything usable. Record the number because it is free; never

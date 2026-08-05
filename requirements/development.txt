@@ -20,6 +20,9 @@ pre-commit==3.6.0
 ipython==8.19.0
 django-debug-toolbar==4.2.0
 django-extensions==3.2.3
+# scripts/fetch_related.py drives the dedicated find-media Chrome over CDP.
+# connect_over_cdp attaches to a running Chrome — no `playwright install` needed.
+playwright==1.62.0
 
 # Documentation
 mkdocs==1.5.3

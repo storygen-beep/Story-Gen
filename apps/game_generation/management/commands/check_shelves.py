@@ -22,8 +22,13 @@ Nothing anywhere re-keys either ledger, so the options are still on disk — jus
 filed under a label nobody looks up. You open the picker, see an empty shelf,
 and re-run a search you did not need.
 
-This command is the alarm. It is strictly READ-ONLY: it never moves anything.
-Diagnosing loudly is the whole job; repairing is a separate, deliberate step.
+This command is the alarm. It DEFAULTS to read-only — diagnosing loudly is the
+whole job — and `--repair` is the separate, deliberate step that acts on it.
+
+A shelf is now two roots of one file: `options` (the candidates) and `queries`
+(which search found each of them). They are keyed on the same slot string and a
+repair moves BOTH or neither — a shelf that outlived its labels would show every
+option under "older searches" with no way to tell that anything was lost.
 
     python manage.py check_shelves --game vesper
     python manage.py check_shelves --all
@@ -127,15 +132,28 @@ class Command(BaseCommand):
             self.stdout.write(self.style.WARNING(f"{slug}: no merged TOML — skipped"))
             return 0
 
+        # A label can span several roots of ONE file. `options` and `queries` are two
+        # halves of a shelf; the first root is the primary — it is what "N options
+        # stranded" counts — and the rest ride along so a repair can never separate
+        # a shelf from its query labels.
         ledgers = {
-            "shelf": (game_dir / ".find-media" / "media_options.json", "options"),
-            "verdict": (game_dir / ".find-media" / "media_reviews.json", "reviews"),
+            "shelf": (game_dir / ".find-media" / "media_options.json", ("options", "queries")),
+            "verdict": (game_dir / ".find-media" / "media_reviews.json", ("reviews",)),
         }
 
         rows = []
         n_keys = 0
-        for label, (path_, root_key) in ledgers.items():
-            entries = self._read_ledger(path_, root_key)
+        for label, (path_, root_keys) in ledgers.items():
+            per_root = {rk: self._read_ledger(path_, rk) for rk in root_keys}
+            # UNION of keys, depth from the primary root only. Walking the roots
+            # separately would report every slot once per root, doubling both the
+            # orphan count and the exit-code signal. The union is also what catches a
+            # queries-only orphan — a search that yielded nothing on a slot whose path
+            # later moved — which reports honestly as "0 options stranded".
+            entries = {
+                k: per_root[root_keys[0]].get(k, [])
+                for k in sorted(set().union(*(d.keys() for d in per_root.values())))
+            }
             n_keys += len(entries)
             for key, value in sorted(entries.items()):
                 # An orphan is an EXACT-match failure. A key whose stem matches a
@@ -173,8 +191,8 @@ class Command(BaseCommand):
                 unresolved += 1
                 continue
 
-            path_, root_key = ledgers[label]
-            moved, why = self._move_key(path_, root_key, key, suggestion)
+            path_, root_keys = ledgers[label]
+            moved, why = self._move_key(path_, root_keys, key, suggestion)
             if moved:
                 self.stdout.write(self.style.SUCCESS(f"            MOVED -> {suggestion}"))
             else:
@@ -183,30 +201,52 @@ class Command(BaseCommand):
         return unresolved
 
     @staticmethod
-    def _move_key(path_: Path, root_key: str, old: str, new: str):
-        """Re-file one ledger entry. Returns (moved, reason_if_not).
+    def _move_key(path_: Path, root_keys: tuple, old: str, new: str):
+        """Re-file one SLOT across every root of a ledger. Returns (moved, reason).
 
-        Backs the ledger up beside itself first — these files are the only record of
-        a shelf, and a bad merge is unrecoverable otherwise.
+        A slot, not a root key: `media_options.json` holds a shelf's candidates and
+        the searches that produced them under two roots keyed on the same string, and
+        moving one without the other is worse than moving neither.
+
+        Backs the ledger up beside itself first — these files are the only record of a
+        shelf, and a bad merge is unrecoverable otherwise. Locked and atomic, because
+        the dev server may be writing this same file: the old truncate-then-write could
+        strand a torn 2.9 MB ledger, which `_read_options` then reads back as EMPTY.
         """
         import json
-        try:
-            data = json.loads(path_.read_text())
-        except Exception as exc:  # noqa: BLE001
-            return False, f"unreadable ({type(exc).__name__})"
 
-        entries = data.get(root_key)
-        if not isinstance(entries, dict) or old not in entries:
-            return False, "key vanished between audit and repair"
-        if new in entries:
-            # Merging two shelves would silently mix two beats' candidates, and
-            # merging two verdicts would pick one arbitrarily. Refuse; a human decides.
-            return False, f"'{new}' already exists — refusing to merge"
+        from apps.common.json_ledger import ledger_lock, write_json_atomic
 
-        path_.with_suffix(path_.suffix + ".bak").write_text(path_.read_text())
-        entries[new] = entries.pop(old)
-        path_.write_text(json.dumps(data, indent=2))
-        return True, ""
+        with ledger_lock(path_):
+            try:
+                raw = path_.read_text()
+                data = json.loads(raw)
+            except Exception as exc:  # noqa: BLE001
+                return False, f"unreadable ({type(exc).__name__})"
+
+            present = [rk for rk in root_keys
+                       if isinstance(data.get(rk), dict) and old in data[rk]]
+            if not present:
+                return False, "key vanished between audit and repair"
+            # Refuse across ALL roots, not just the ones holding `old`. A slot can
+            # legitimately have `queries[new]` (a zero-yield search recorded against
+            # the new key) while `options[new]` is absent; checking only the root
+            # being moved would silently clobber it.
+            for rk in root_keys:
+                if isinstance(data.get(rk), dict) and new in data[rk]:
+                    # Merging two shelves would mix two beats' candidates, and merging
+                    # two verdicts would pick one arbitrarily. Refuse; a human decides.
+                    return False, f"'{new}' already exists in {rk} — refusing to merge"
+
+            # Back up from the bytes we actually read, so the .bak provably matches the
+            # state being mutated rather than whatever a concurrent writer left behind.
+            path_.with_suffix(path_.suffix + ".bak").write_text(raw)
+            for rk in present:
+                data[rk][new] = data[rk].pop(old)
+            # Never invent a root: a legacy ledger with no `queries` key must not gain
+            # one from an operation that was only asked to re-key a slot.
+            write_json_atomic(path_, data)
+            return True, ""
 
     # ------------------------------------------------------------- collectors
 

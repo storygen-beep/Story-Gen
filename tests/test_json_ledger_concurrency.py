@@ -190,6 +190,39 @@ def test_reviews_ledger_survives_concurrent_writers(game_dir: Path):
     assert len(_read_reviews(game_dir)["reviews"]) == 30
 
 
+def test_concurrent_adds_across_two_queries_keep_every_attribution(game_dir: Path):
+    """Two searches racing over the SAME urls — the shape a re-harvest actually takes.
+
+    Every url ends up stocked once with BOTH labels. This is the test that catches a
+    `found_by` append written outside the options lock: the second query's credit is a
+    read-modify-write on an entry the first query is also touching, so an unlocked
+    append silently drops one label and the picker then hides, under one chip, results
+    that search genuinely produced.
+    """
+    n_urls = 20
+    queries = ["alley blowjob gif", "kneeling alley bj gif"]
+    errors = _run_concurrently(
+        [
+            (lambda i=i, q=q: _add_option(
+                game_dir, "g", "sex/a_t5.webm",
+                url=f"https://example.com/{i}.gif", query=q,
+            ))
+            for q in queries
+            for i in range(n_urls)
+        ]
+    )
+
+    assert errors == [], f"writers raised: {errors!r}"
+    shelf = _read_options(game_dir)["options"]["sex/a_t5.webm"]
+    assert len(shelf) == n_urls, f"dedup broke: {len(shelf)} entries for {n_urls} urls"
+    for entry in shelf:
+        assert sorted(entry["found_by"]) == sorted(queries), entry
+
+    # Both searches are registered exactly once, however the adds interleaved.
+    recs = _read_options(game_dir)["queries"]["sex/a_t5.webm"]
+    assert sorted(r["q"] for r in recs) == sorted(queries)
+
+
 def test_lock_creates_missing_parent_dir(tmp_path: Path):
     """A first-ever write for a game has no `.find-media/` yet."""
     target = tmp_path / "brand_new" / ".find-media" / "media_options.json"

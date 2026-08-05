@@ -43,12 +43,30 @@
     var NSFW_BANDS = { explicit: 1, nudity: 1, borderline: 1 };
     function isNsfw(i) { return !!NSFW_BANDS[i.band]; }
 
+    // ---- shelf state: who owes the next move on this slot ----
+    // `options_count` (api/v1/media_review.py) is the slot's stocked candidates,
+    // already excluding `origin: "previous"` undo history. It splits what used to
+    // read as one undifferentiated "Missing" into work waiting on ME (a shelf is
+    // stocked, go pick) and work waiting on the SEARCH (nothing found yet).
+    function shelfDepth(i) { return i.options_count || 0; }
+
+    // A pool is judged on its FOLDER being empty, not on `found` — a pool holding
+    // 1 of 4 clips already plays, and keeps its own `n of target` badge instead.
+    function nothingSelected(i) {
+      if (i.pool_dir) return !(i.pool_items && i.pool_items.length);
+      return !i.found;
+    }
+    function readyToPick(i) { return shelfDepth(i) > 0 && nothingSelected(i); }
+    function unworked(i) { return !i.found && shelfDepth(i) === 0; }
+
     var AXES = [
       { id: "status", label: "Status", options: [
         { key: "all", label: "All", test: function () { return true; } },
         { key: "approved", label: "Approved", test: function (i) { return i.status === "approved"; } },
         { key: "disapproved", label: "Disapproved", test: function (i) { return i.status === "disapproved"; } },
         { key: "needs", label: "Needs review", test: function (i) { return i.found && !i.status; } },
+        { key: "ready", label: "Ready to pick", test: readyToPick },
+        { key: "unworked", label: "Not worked", test: unworked },
         { key: "missing", label: "Missing", test: function (i) { return !i.found; } }
       ]},
       { id: "band", label: "Content", options: [
@@ -245,7 +263,12 @@
       box.appendChild(head);
 
       if (!items.length) {
-        box.appendChild(el("div", "pool-none", "empty — nothing installed yet"));
+        // An empty pool with a stocked shelf is not the same state as an empty pool
+        // nobody has searched — the first one is waiting on a pick, and saying so
+        // here is what turns the card into an instruction instead of a complaint.
+        box.appendChild(el("div", "pool-none", shelfDepth(item)
+          ? "nothing selected — " + shelfDepth(item) + " options waiting"
+          : "empty — nothing installed yet"));
         return box;
       }
 
@@ -360,7 +383,9 @@
           card.appendChild(img);
         }
       } else {
-        card.appendChild(el("div", "media-thumb missing", "no media yet"));
+        card.appendChild(el("div", "media-thumb missing", shelfDepth(item)
+          ? "nothing selected — " + shelfDepth(item) + " option" + (shelfDepth(item) === 1 ? "" : "s") + " waiting"
+          : "no media yet — not worked"));
       }
 
       var body = el("div", "media-body");
@@ -402,6 +427,22 @@
                    (item.band_source === "description" ? " (inferred from the caption)" : "");
       fileLine.appendChild(document.createTextNode(" "));
       fileLine.appendChild(chip);
+
+      // Shelf chip — only on slots with nothing selected, where it names the next
+      // move. A slot that already has media says nothing here; its state is the
+      // review buttons below.
+      if (readyToPick(item)) {
+        var shelfChip = el("span", "shelf-badge ready",
+                           shelfDepth(item) + " options — pick");
+        shelfChip.title = "candidates are stocked; open Find media to choose";
+        fileLine.appendChild(document.createTextNode(" "));
+        fileLine.appendChild(shelfChip);
+      } else if (unworked(item)) {
+        var noneChip = el("span", "shelf-badge unworked", "not worked");
+        noneChip.title = "no candidates stocked yet — this slot still needs a search";
+        fileLine.appendChild(document.createTextNode(" "));
+        fileLine.appendChild(noneChip);
+      }
       meta.appendChild(fileLine);
       body.appendChild(meta);
 
@@ -447,8 +488,12 @@
         // The slot's stable identity — what its shelf and verdict file under.
         // Equals `file` unless the block authored an `id`, in which case `file`
         // still says where the bytes go and this says which shelf it is.
-        slot_key: item.slot_key || item.file || "",
-        q: (item.search_queries || []).join(" | ")
+        slot_key: item.slot_key || item.file || ""
+        // No `q`: the picker no longer has a search box to prefill. These authored
+        // queries are design-time guesses that the media agent rewrites anyway — on
+        // vesper's eye-contact slot, none of the three queries that actually ran
+        // matched either of them — so the picker shows the searches that DID run
+        // (media_options.json's query table) and the slot's brief instead.
       });
       // A POOL slot is a folder of clips the game cycles, so the picker opens in
       // two-zone mode: selected on top, options below. `pool` is the same string
@@ -608,6 +653,7 @@
         var c = data.counts || {};
         subEl.textContent = (c.found || 0) + " media · " + (c.missing || 0) + " missing · " +
           (c.approved || 0) + " approved · " + (c.disapproved || 0) + " disapproved · " +
+          (c.ready_to_pick || 0) + " ready to pick / " + (c.unworked || 0) + " not worked · " +
           (c.nsfw || 0) + " nsfw / " + (c.sfw || 0) + " sfw · " +
           (c.pool || 0) + " pools / " + (c.single || 0) + " single" +
           (state.toml ? "  ·  " + state.toml : "");

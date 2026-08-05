@@ -10,12 +10,19 @@ into the game's videos/ source-of-truth — replacing the slot's media.
 No auth, no DB — filesystem + JSON ledger. Local dev tool; relies on open CORS.
 
 Endpoints (under /api/v1/dev/media-finder/):
-- POST options/add     {game, file, url, type, media_kind}  -> append an option
-- GET  options/list    ?game=&file=                          -> options for a slot
+- POST options/add     {game, file, url, type, media_kind, query?, docid?} -> append an option
+- POST queries/add     {game, file, query, urls, stocked, hosts, seed_url?} -> record a SEARCH
+- POST related/fetch   {game, file, url}  -> run the related-feed fetch for one option
+- GET  options/list    ?game=&file=                          -> options + queries for a slot
 - POST options/remove  {game, file, url}                     -> drop an option
 - POST options/clear   {game, file, all}                     -> empty the shelf (refetch)
 - POST grab            {game, file, url|local_path, source}  -> install -> videos/
 - GET  proxy           ?url=&source=                         -> stream a remote URL
+
+Every stocked option remembers WHICH SEARCH found it (`found_by`), and every search
+that ran is recorded whether or not it yielded anything (the `queries` root). That is
+what lets the picker show one bucket per search instead of one undifferentiated pile,
+and it is why nothing here ever needs to destroy a shelf to make a refetch legible.
 
 Replacement is a SWAP, never a destruction: grab fetches to a temp file first, and
 only once that succeeds does the file currently in the slot get copied into
@@ -29,6 +36,8 @@ import json
 import os
 import re
 import shutil
+import subprocess
+import sys
 import threading
 import time
 from datetime import datetime, timezone
@@ -118,8 +127,17 @@ def _redgifs_token(force=False):
 
 # =============================================================================
 # Options store — per-game JSON ledger of candidate URLs, keyed by slot file.
-# Shape: {game, updated_at, options: {<file>: [{url, type, media_kind, added_at}]}}
-# Same atomic read/write + path-guard discipline as api/v1/media_review.py.
+# Shape: {game, updated_at,
+#         options: {<slot>: [{url, type, media_kind, added_at,
+#                             found_by?:[q,…], docid?}]},
+#         queries: {<slot>: [{q, at, last_at, runs, source, urls, stocked, hosts,
+#                             seed_url?}]}}
+# `docid` = Google's index id for the image (harvested with the url); `seed_url`
+# on a source:"related" record = the option whose related-feed that run was. The
+# picker derives "related fetched" from the (seed_url ↔ option.url) join.
+# Both roots are keyed on the same slot identity, so they move together — see
+# check_shelves._move_key. Same atomic read/write + path-guard discipline as
+# api/v1/media_review.py.
 # =============================================================================
 
 
@@ -253,15 +271,26 @@ def _is_ua_rejection(error: str) -> bool:
 
 
 def _read_options(game_dir: Path) -> dict:
-    path_ = _options_path(game_dir)
-    if not path_.exists():
-        return {"game": game_dir.name, "options": {}}
+    """Load the options ledger, always fully shaped.
+
+    ONE normalizer, deliberately — the missing-file and unparseable-file paths used to
+    return their own hand-written `{"game": …, "options": {}}` literals, so every new
+    root key had to be added in three places and a caller touching one the literals
+    forgot would KeyError only on a game that had never been searched. Now a new root
+    is one `setdefault`.
+    """
     try:
-        with path_.open(encoding="utf-8") as f:
-            data = json.load(f)
+        data = json.loads(_options_path(game_dir).read_text(encoding="utf-8"))
     except Exception:
-        return {"game": game_dir.name, "options": {}}
+        data = {}
+    if not isinstance(data, dict):
+        data = {}
+    data.setdefault("game", game_dir.name)
     data.setdefault("options", {})
+    # Which SEARCH produced each option. Absent on every ledger written before
+    # 2026-08-05 — those options carry no `found_by` and the picker files them
+    # under "older searches".
+    data.setdefault("queries", {})
     return data
 
 
@@ -338,6 +367,64 @@ def _pool_members(pool_path: Path) -> list:
     return out
 
 
+def _canon_query(raw) -> str:
+    """The one canonical form of a query string.
+
+    Whitespace-collapsed, case PRESERVED. An option's `found_by` label and the record
+    in the `queries` table are joined on this string, so canonicalizing makes the join
+    a pure function of the text and `options/add` never has to read the query table to
+    resolve an id. Case-folding would merge "Renner oral" with "renner oral" — but the
+    agent authors both sides, so that merge buys nothing and costs the pure join.
+    """
+    return " ".join(str(raw or "").split())
+
+
+def _ensure_query(data: dict, slot: str, q: str, now: str) -> bool:
+    """Open a stub record for a query seen on an option but never declared.
+
+    A `found_by` label with no record is an INVISIBLE BUCKET — the picker groups by
+    the query table, so those options would only ever be reachable through "All".
+    Auto-registering here makes `queries/add` an enrichment call rather than a
+    prerequisite, so an agent that crashes mid-loop still produces a coherent strip.
+    Never bumps `runs`: this fires once per option, not once per search.
+    """
+    lst = data["queries"].setdefault(slot, [])
+    if any(rec.get("q") == q for rec in lst):
+        return False
+    lst.append({"q": q, "at": now, "last_at": now, "runs": 1, "auto": True})
+    return True
+
+
+def _upsert_query(data: dict, slot: str, q: str, now: str, fields: dict) -> tuple[dict, bool]:
+    """Record one SEARCH against a slot. Caller holds the options lock.
+
+    Stored oldest-first — the picker reverses for display; `_add_option`'s
+    `lst.insert(0, …)` below is an undo affordance, not an ordering convention, and
+    reversing storage here would make "append" a lie and break `at` monotonicity.
+
+    `at` is when this query FIRST ran and never moves. The yield fields are
+    overwritten rather than summed: the newest evidence is the interesting one, and
+    a total across runs would describe no search that ever happened.
+    """
+    lst = data["queries"].setdefault(slot, [])
+    for rec in lst:
+        if rec.get("q") != q:
+            continue
+        # A stub opened by the stock loop is THIS run, not a previous one — enriching
+        # it must not read as a second run.
+        if rec.pop("auto", None):
+            pass
+        else:
+            rec["runs"] = int(rec.get("runs") or 1) + 1
+        rec["last_at"] = now
+        rec.update(fields)
+        return rec, True
+    rec = {"q": q, "at": now, "last_at": now, "runs": 1}
+    rec.update(fields)
+    lst.append(rec)
+    return rec, False
+
+
 def _add_option(
     game_dir: Path,
     game: str,
@@ -347,24 +434,67 @@ def _add_option(
     media_kind: str = "img",
     local_path: str = "",
     origin: str = "",
+    query: str = "",
+    docid: str = "",
 ) -> tuple[bool, int]:
     """Append one option to a slot's shelf. Deduped by url. Returns (added, count).
 
     `local_path` (games-relative) marks an option whose bytes are already on disk —
     a previously-installed pick. Those install by copy, so they never depend on a
     remote URL that may have expired.
+
+    `query` is the search that produced this url. It lands in `found_by`, which is a
+    LIST because dedup is by url: when a sibling query legitimately returns a url an
+    earlier one already stocked, a single-valued field would record nothing and the
+    picker would hide, under the second query's chip, a result that search really did
+    produce. Cross-query duplicates are the common case, not the edge.
+
+    `docid` is Google's index id for this image, harvested from the results page it
+    appeared on. It is what makes "fetch related" a one-navigation lookup later
+    (`tbs=rimg:` is built from its first 8 bytes), so it is stored FIRST-WRITE-WINS:
+    a later harvest carrying a different docid for the same url never churns the
+    file — the related feed any stored docid reaches is equivalent evidence.
     """
     now = datetime.now(timezone.utc).isoformat()
+    q = _canon_query(query)
     with _options_lock(game_dir):
         data = _read_options(game_dir)
         lst = data["options"].setdefault(file_, [])
-        if any(o.get("url") == url for o in lst):
+        dup = next((o for o in lst if o.get("url") == url), None)
+        if dup is not None:
+            # Already shelved. Credit the query that just re-found it and keep a
+            # docid we did not have — but ONLY write if something actually changed.
+            # Without this short-circuit a re-harvest of 400 already-stocked urls
+            # becomes 400 whole-file rewrites of a 2.9 MB ledger under the lock.
+            # NOTE the docid branch must work with an EMPTY q: the legacy-shelf
+            # lookup enriches a bare url with its docid and sends no query.
+            changed = False
+            if q and q not in (dup.get("found_by") or []):
+                dup.setdefault("found_by", []).append(q)
+                _ensure_query(data, file_, q, now)
+                changed = True
+            if docid and not dup.get("docid"):
+                dup["docid"] = docid
+                changed = True
+            if not changed:
+                return False, len(lst)
+            data["game"] = game
+            data["updated_at"] = now
+            _write_options(game_dir, data)
             return False, len(lst)
+
         entry = {"url": url, "type": type_, "media_kind": media_kind, "added_at": now}
         if local_path:
             entry["local_path"] = local_path
         if origin:
             entry["origin"] = origin
+        if docid:
+            entry["docid"] = docid
+        # A demoted pick has no search behind it, so it never gets a label — it is
+        # undo history, and filing it under a query would be a category error.
+        if q and origin != "previous":
+            entry["found_by"] = [q]
+            _ensure_query(data, file_, q, now)
 
         if origin == "previous":
             # A just-demoted pick goes to the FRONT. Appending buried it: media_lab's
@@ -379,6 +509,88 @@ def _add_option(
         data["updated_at"] = now
         _write_options(game_dir, data)
         return True, len(lst)
+
+
+class _MangledHost(ValueError):
+    """A hostname arrived carrying the display-only `" DOT "` transform."""
+
+
+def _clean_hosts(raw):
+    """Validate an agent-supplied host histogram. Returns [[host, count], …] or None.
+
+    None means "unusable, drop the field" — a malformed histogram must not fail the
+    whole query record, because the record is still worth having without it.
+
+    Raises `_MangledHost` on a `" DOT "`-separated name. That transform exists ONLY to
+    keep bare dotted CDN hostnames out of a tool's RETURN VALUE, where a secret-scanner
+    redacts them as `[BLOCKED: JWT token]` — a POST body never passes through that
+    filter. If a transformed name ever reaches the store the damage is permanent: a
+    hostname that legitimately contains " DOT " is indistinguishable from a mangled
+    one, so nothing downstream could ever undo it. Hard refusal, never a silent repair.
+    """
+    if raw is None:
+        return None
+    if not isinstance(raw, list):
+        return None
+    out = []
+    for pair in raw[:64]:
+        if not isinstance(pair, list | tuple) or len(pair) != 2:
+            return None
+        host, count = pair
+        if not isinstance(host, str) or not host or len(host) > 253:
+            return None
+        if " DOT " in host:
+            raise _MangledHost(host)
+        try:
+            out.append([host, int(count)])
+        except (TypeError, ValueError):
+            return None
+    return out
+
+
+def _append_query_ledger(
+    game_dir: Path,
+    slot: str,
+    q: str,
+    source: str,
+    urls: int,
+    round_,
+    status: str,
+    seed_url: str = "",
+) -> None:
+    """Mirror one query into `.find-media/query_ledger.jsonl` — the durable copy.
+
+    `media_options.json` is rewritten whole on every write, and `_read_options` reads a
+    torn file back as EMPTY, so one bad write can take the entire query history with
+    it. This file is only ever appended to, which makes it the copy that survives —
+    and it is the raw log the lexicon's verdicts are derived from, so it has to outlive
+    the shelf.
+
+    Writing it here rather than by hand is also what finally makes the skill's
+    long-standing "the only machine-written record" claim true, and removes the drift
+    that two hand-maintained logs of one fact guarantee.
+
+    Best-effort: a logging failure must never fail the call that did the real work.
+    """
+    try:
+        path_ = game_dir / ".find-media" / "query_ledger.jsonl"
+        path_.parent.mkdir(parents=True, exist_ok=True)
+        row = {
+            "slot": slot,
+            "query": q,
+            "date": datetime.now(timezone.utc).date().isoformat(),
+            "round": round_,
+            "source": source,
+            "urls_yielded": urls,
+            "status": status,
+        }
+        if seed_url:
+            row["seed_url"] = seed_url
+        # O_APPEND: concurrent per-slot agents interleave whole lines, never bytes.
+        with path_.open("a", encoding="utf-8") as f:
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+    except Exception:
+        return
 
 
 def _drop_option(game_dir: Path, game: str, file_: str, url: str, local_path: str = "") -> None:
@@ -468,9 +680,13 @@ def _clear_review_status(game_dir: Path, game: str, file_: str, note: str) -> No
 
 @csrf_exempt
 def options_add(request):
-    """POST options/add {game, file, url, type, media_kind} — store a candidate URL
-    (no download). `type` is the user's label (image/gif/video); `media_kind`
-    (img/video) drives how the option previews. Deduped by url."""
+    """POST options/add {game, file, url, type, media_kind, query?} — store a candidate
+    URL (no download). `type` is the user's label (image/gif/video); `media_kind`
+    (img/video) drives how the option previews. Deduped by url.
+
+    `query` is optional and the request is byte-identical to the pre-2026-08-05
+    behaviour without it — the capture extension still posts without one, and ~19,300
+    already-stocked options carry no label."""
     if request.method != "POST":
         return JsonResponse({"error": "Method not allowed"}, status=405)
 
@@ -492,12 +708,130 @@ def options_add(request):
     if urlparse(url).scheme not in ("http", "https"):
         return JsonResponse({"error": "Invalid URL scheme"}, status=400)
 
+    # docid: Google's index id for this image, when the harvest could pair it.
+    # Malformed → drop the FIELD and store the option anyway (the `_clean_hosts`
+    # precedent, not `_MangledHost`'s): a bad docid is recoverable later via the
+    # grid lookup, so it is never worth losing the option over.
+    docid = str(body.get("docid") or "")
+    if docid and not re.fullmatch(r"[A-Za-z0-9_-]{8,64}", docid):
+        docid = ""
+
     added, count = _add_option(
-        game_dir, game, file_, url=url, type_=type_, media_kind=media_kind
+        game_dir, game, file_, url=url, type_=type_, media_kind=media_kind,
+        query=body.get("query", ""), docid=docid,
     )
     if not added:
         return JsonResponse({"ok": True, "duplicate": True, "count": count})
     return JsonResponse({"ok": True, "count": count})
+
+
+@csrf_exempt
+def queries_add(request):
+    """POST queries/add — record one SEARCH against a slot, whatever it yielded.
+
+    Body: {game, file|slot_key, query, source?, urls?, stocked?, hosts?, round?,
+           status?, seed_url?}
+
+    `seed_url` marks a RELATED fetch (source "related"): the stocked option whose
+    Google related-feed this run harvested. It is the join key the picker derives
+    "related fetched or not" from, so it is validated hard (400) and guarded against
+    label collisions (409) — a record that silently lost or swapped its seed is a
+    related bucket that can never again be attributed to its seed.
+
+    This is what turns a slot's shelf from one undifferentiated pile into labelled
+    buckets. Two things here are not obvious:
+
+    - **Zero-yield queries are the point, not an edge case.** A search that came back
+      with nothing is the record that stops the same dead query being re-run three
+      rounds later, and it is unrecoverable if not written down at the moment it fails.
+    - **The response carries no hostnames.** The caller is a `javascript_tool` REPL
+      whose return value passes through a secret-scanner that redacts bare dotted
+      hostnames; echoing the histogram back would blank the very confirmation the
+      agent needs to know the POST landed.
+    """
+    if request.method != "POST":
+        return JsonResponse({"error": "Method not allowed"}, status=405)
+
+    body = _parse_body(request)
+    game = body.get("game", "")
+    # Same key discipline as every other options endpoint: the shelf and its query
+    # table are both keyed on the slot's STABLE identity.
+    file_ = body.get("slot_key") or body.get("file", "")
+    q = _canon_query(body.get("query", ""))
+
+    game_dir = _safe_game_dir(game)
+    if game_dir is None or not game_dir.is_dir():
+        return JsonResponse({"error": "Invalid or missing game"}, status=400)
+    if not file_ or not q:
+        return JsonResponse({"error": "file and query are required"}, status=400)
+
+    try:
+        hosts = _clean_hosts(body.get("hosts"))
+    except _MangledHost as exc:
+        return JsonResponse(
+            {
+                "error": f"host '{exc}' carries the display-only ' DOT ' transform. "
+                "POST real hostnames; apply that transform only to the value your "
+                "script RETURNS, never to what it sends."
+            },
+            status=400,
+        )
+
+    seed_url = str(body.get("seed_url") or "")
+    if seed_url and (
+        urlparse(seed_url).scheme not in ("http", "https") or len(seed_url) > 2048
+    ):
+        return JsonResponse(
+            {"error": "seed_url must be http(s) and ≤2048 chars"}, status=400
+        )
+
+    fields = {
+        "source": str(body.get("source") or "google"),
+        "urls": int(body.get("urls") or 0),
+        "stocked": int(body.get("stocked") or 0),
+    }
+    if hosts is not None:
+        fields["hosts"] = hosts
+    if seed_url:
+        fields["seed_url"] = seed_url
+    if body.get("round") is not None:
+        fields["round"] = body.get("round")
+    if body.get("status"):
+        fields["status"] = str(body.get("status"))
+
+    now = datetime.now(timezone.utc).isoformat()
+    with _options_lock(game_dir):
+        data = _read_options(game_dir)
+        # Label-collision guard: `_upsert_query` matches on q and `rec.update(fields)`
+        # would silently RESEAT an existing label onto a new seed — merging two seeds'
+        # buckets and corrupting the first seed's derived status. The runner suffixes
+        # labels client-side, but two concurrent fetches can race; this makes the
+        # invariant server-owned.
+        existing = next(
+            (r for r in data["queries"].get(file_, []) if r.get("q") == q), None
+        )
+        if (
+            existing is not None
+            and seed_url
+            and existing.get("seed_url")
+            and existing["seed_url"] != seed_url
+        ):
+            return JsonResponse(
+                {"error": f"label '{q}' already belongs to a different seed — "
+                          "suffix the label and retry"},
+                status=409,
+            )
+        _rec, duplicate = _upsert_query(data, file_, q, now, fields)
+        data["game"] = game
+        data["updated_at"] = now
+        _write_options(game_dir, data)
+        count = len(data["queries"].get(file_, []))
+
+    _append_query_ledger(
+        game_dir, file_, q, fields["source"], fields["urls"],
+        body.get("round"), str(body.get("status") or "ok"), seed_url=seed_url,
+    )
+    return JsonResponse({"ok": True, "duplicate": duplicate, "count": count})
 
 
 @csrf_exempt
@@ -557,7 +891,12 @@ def options_clear(request):
 
 @require_GET
 def options_list(request):
-    """GET options/list?game=&file= — the collected option URLs for one slot."""
+    """GET options/list?game=&file= — one slot's option URLs AND the searches that
+    produced them.
+
+    `queries` is additive; a caller that only reads `options` is unaffected. It is
+    ~2-4 KB per slot against an options array that reaches 816 entries, so it rides
+    the picker's existing poll for free."""
     game = request.GET.get("game", "")
     # The shelf is keyed by `slot_key` — the slot's STABLE identity. It defaults
     # to `file`, so an untagged slot behaves exactly as before; a slot whose block
@@ -567,7 +906,10 @@ def options_list(request):
     if game_dir is None:
         return JsonResponse({"error": "Invalid or missing game"}, status=400)
     data = _read_options(game_dir)
-    return JsonResponse({"options": data["options"].get(file_, [])})
+    return JsonResponse({
+        "options": data["options"].get(file_, []),
+        "queries": data["queries"].get(file_, []),
+    })
 
 
 @csrf_exempt
@@ -591,6 +933,10 @@ def options_remove(request):
         data = _read_options(game_dir)
         kept = [o for o in data["options"].get(file_, []) if o.get("url") != url]
         data["options"][file_] = kept
+        # `game` too — every other write site stamps both, and this one silently
+        # didn't, so a ledger that ever lost its `game` key could never regain it
+        # through the one endpoint a human clicks most.
+        data["game"] = game
         data["updated_at"] = datetime.now(timezone.utc).isoformat()
         _write_options(game_dir, data)
     return JsonResponse({"ok": True, "count": len(kept)})
@@ -993,11 +1339,128 @@ def pool_unselect(request):
     return JsonResponse({"success": True, "moved_to": rel})
 
 
+_RUNNER_LAUNCH = (
+    '"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" '
+    '--user-data-dir="$HOME/.chrome-find-media" --remote-debugging-port=9222'
+)
+
+# ONE related fetch at a time. The runner is a single browser: concurrent CDP
+# clients contend on its one debug websocket and lose intermittently (measured
+# live 2026-08-05 — rapid ⇢ clicks produced `<ws disconnected> code=1000` connect
+# failures). The picker also gates client-side; this lock is the guarantee.
+_RELATED_FETCH_LOCK = threading.Lock()
+
+
+@csrf_exempt
+def related_fetch(request):
+    """POST related/fetch {game, file|slot_key, url} — shelve one option's Google
+    related-feed as a new labelled bucket, via scripts/fetch_related.py.
+
+    The fetch runs in the dedicated find-media Chrome (CDP on :9222); this view is
+    only the orchestrator: preflight the port so a dead runner fails in 1.5s with
+    the launch command instead of a 180s hang, shell the script, map its exit codes
+    onto HTTP. 180s not 120: a legacy option without a stored docid costs an extra
+    grid navigation for the lookup.
+
+    NOTE the script POSTs back to THIS server (one options/add per url), so a
+    single-threaded server (--nothreading, 1-worker sync) deadlocks here until the
+    timeout. The threaded dev runserver is fine — run it threaded.
+    """
+    if request.method != "POST":
+        return JsonResponse({"error": "Method not allowed"}, status=405)
+
+    body = _parse_body(request)
+    game = body.get("game", "")
+    slot_key = body.get("slot_key") or body.get("file", "")
+    file_ = body.get("file") or slot_key
+    url = body.get("url", "")
+
+    game_dir = _safe_game_dir(game)
+    if game_dir is None or not game_dir.is_dir():
+        return JsonResponse({"error": "Invalid or missing game"}, status=400)
+    if not slot_key or not url:
+        return JsonResponse({"error": "file and url are required"}, status=400)
+    if urlparse(url).scheme not in ("http", "https"):
+        return JsonResponse({"error": "Invalid URL scheme"}, status=400)
+
+    try:
+        requests.get("http://localhost:9222/json/version", timeout=1.5)
+    except requests.RequestException:
+        return JsonResponse(
+            {"error": "Related-fetch runner is not connected — no Chrome on :9222. "
+                      f"Launch the dedicated profile: {_RUNNER_LAUNCH}"},
+            status=503,
+        )
+
+    if not _RELATED_FETCH_LOCK.acquire(blocking=False):
+        return JsonResponse(
+            {"error": "Another related fetch is already running — the runner is one "
+                      "browser, one fetch at a time. Retry when it finishes."},
+            status=429,
+        )
+    script = Path(settings.BASE_DIR) / "scripts" / "fetch_related.py"
+    try:
+        proc = subprocess.run(  # noqa: S603 - fixed script path, validated args
+            [sys.executable, str(script), "--game", game, "--slot-key", slot_key,
+             "--file", file_, "--seed-url", url],
+            capture_output=True, text=True, timeout=180,
+        )
+    except subprocess.TimeoutExpired:
+        return JsonResponse({"error": "Related fetch timed out after 180s"}, status=504)
+    finally:
+        _RELATED_FETCH_LOCK.release()
+
+    tail = (proc.stderr or "").strip()[-400:]
+    if proc.returncode == 3:
+        return JsonResponse(
+            {"error": "Google served a captcha — wait a while and retry, or ask "
+                      "the agent to fetch instead.", "detail": tail},
+            status=502,
+        )
+    if proc.returncode == 4:
+        return JsonResponse(
+            {"error": "No Google id stored for this clip — nothing was fetched. "
+                      "Run a search on this slot; any search that re-finds this "
+                      "clip attaches an id to it in place.",
+             "detail": tail},
+            status=404,
+        )
+    if proc.returncode == 5:
+        # The runner answered the preflight but could not be driven. Own the
+        # message here rather than relaying a stderr tail — that tail is a
+        # websocket log, and it reads as gibberish on a tile.
+        return JsonResponse(
+            {"error": "The find-media Chrome answered but could not be driven. "
+                      f"Quit it and relaunch: {_RUNNER_LAUNCH}", "detail": tail},
+            status=503,
+        )
+    if proc.returncode == 7:
+        return JsonResponse(
+            {"error": "The related feed came back empty of porn hosts — that is "
+                      "usually the wrong Chrome on :9222, or SafeSearch back ON in "
+                      "the find-media profile.", "detail": tail},
+            status=503,
+        )
+    if proc.returncode != 0:
+        return JsonResponse(
+            {"error": f"runner exited {proc.returncode}", "detail": tail}, status=500
+        )
+    try:
+        result = json.loads((proc.stdout or "").strip().splitlines()[-1])
+    except (ValueError, IndexError):
+        return JsonResponse(
+            {"error": "runner returned no result line", "detail": tail}, status=500
+        )
+    return JsonResponse(result)
+
+
 # =============================================================================
 # URL patterns
 # =============================================================================
 urlpatterns = [
     path("options/add", options_add, name="media_finder_options_add"),
+    path("queries/add", queries_add, name="media_finder_queries_add"),
+    path("related/fetch", related_fetch, name="media_finder_related_fetch"),
     path("options/list", options_list, name="media_finder_options_list"),
     path("options/remove", options_remove, name="media_finder_options_remove"),
     path("options/clear", options_clear, name="media_finder_options_clear"),

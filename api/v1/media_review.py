@@ -11,6 +11,7 @@ game_review.py. Local authoring tool; relies on DEBUG media serving + open CORS.
 
 Endpoints (under /api/v1/dev/media-review/):
 - GET  list?game=<slug>     -> enriched media items with lane + names + media_url + status
+                               + shelf depth (options_count / options_total)
 - POST reviews?game=<slug>  -> upsert one {file, status, note} into media_reviews.json
 """
 
@@ -141,6 +142,33 @@ def _lane_for(item: dict, canvas_by_id: dict, npc_name_by_id: dict) -> dict:
     return info
 
 
+def _read_shelf(game_dir: Path) -> dict:
+    """Candidate URLs stocked per slot, from media_finder's options ledger.
+
+    Imported lazily: media_finder already imports THIS module (from
+    `_clear_review_status`), so a module-level import here would be a cycle. A
+    broken import must not take the list endpoint down with it — the shelf is
+    extra context on every row, not the row itself.
+    """
+    try:
+        from .media_finder import _read_options
+    except Exception:
+        return {}
+    return _read_options(game_dir).get("options", {})
+
+
+def _nothing_selected(item: dict) -> bool:
+    """No asset chosen for this slot yet — the state a stocked shelf can resolve.
+
+    A pool is judged on its FOLDER being empty, not on `found`: a pool holding 1
+    of 4 clips is already `found` (game_review._extract_missing_media), and it
+    keeps the softer `n of target` signal instead of reading as unstarted.
+    """
+    if item.get("pool_dir"):
+        return not item.get("pool_count")
+    return not item["found"]
+
+
 def _enumerate(game: str, game_dir: Path) -> dict | None:
     """Parse the game and return enriched, review-merged media items. None if no TOML."""
     toml_path = _resolve_final_toml(game_dir)
@@ -156,6 +184,7 @@ def _enumerate(game: str, game_dir: Path) -> dict | None:
 
     media = _extract_missing_media(data, game)
     reviews = _read_reviews(game_dir).get("reviews", {})
+    shelf = _read_shelf(game_dir)
 
     items = []
     for found, group in (("found", media["found"]), ("missing", media["missing"])):
@@ -187,6 +216,14 @@ def _enumerate(game: str, game_dir: Path) -> dict | None:
             rev = reviews.get(item.get("slot_key") or item.get("file"), {})
             item["status"] = rev.get("status")  # "approved" | "disapproved" | None
             item["note"] = rev.get("note", "")
+
+            # Shelf depth, read under the same key as the verdict. Attached BEFORE
+            # the dedupe below so the surviving row of a reused asset keeps its own
+            # counts. `origin: "previous"` entries are the slot's undo history, not
+            # candidates to pick from — a shelf holding only those is unworked.
+            opts = shelf.get(item.get("slot_key") or item.get("file")) or []
+            item["options_total"] = len(opts)
+            item["options_count"] = sum(1 for o in opts if o.get("origin") != "previous")
 
             items.append(item)
 
@@ -221,6 +258,13 @@ def _enumerate(game: str, game_dir: Path) -> dict | None:
             "missing": sum(1 for i in items if not i["found"]),
             "approved": sum(1 for i in items if i["status"] == "approved"),
             "disapproved": sum(1 for i in items if i["status"] == "disapproved"),
+            # Shelf state: work waiting on the HUMAN vs work waiting on the SEARCH.
+            "ready_to_pick": sum(
+                1 for i in items if i["options_count"] and _nothing_selected(i)
+            ),
+            "unworked": sum(
+                1 for i in items if not i["found"] and not i["options_count"]
+            ),
             # Content band and slot shape. Both are per-SLOT: a pool is one row
             # holding N clips, so `pool` counts folders, not files.
             "nsfw": sum(1 for i in items if is_nsfw(i.get("band", "clean"))),
