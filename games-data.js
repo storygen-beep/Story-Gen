@@ -90,6 +90,19 @@ window.GAMES = [
     summary: `A short test build for NPC name/relationship customization and variable syntax.`,
   },
   {
+    slug: "media_lab_h",
+    title: "Media Lab H",
+    badge: "Shelved",
+    dev: true,
+    summary: `Ten unfilled media slots — a byte-identical copy of Media Lab F's beats (ten singles, no pool), built empty 2026-08-05 as the rig for the first DUMP-ALL find-media-v3 run. 30 queries stocked 1,932 options and installed nothing, so all ten slots read "N options — pick" and the game renders ten holes until they are picked by hand. Against Media Lab G's 195 options on the same beats, this is the measurement that the triage step was destroying the shelf. The run also killed the skill's "the browser cannot fan out" rule: three Chrome tabs harvested three slots at once, 6 round trips instead of 30.`,
+  },
+  {
+    slug: "media_lab_g",
+    title: "Media Lab G",
+    dev: true,
+    summary: `Ten unfilled media slots for the find-media query study — the clean rig for the first end-to-end find-media-v3 run. Nine single slots plus one pool (slot 8, target 4), so the run exercises the pool path that made vesper expensive. Beats copied from Media Lab F; TOML and build only, no media and no shelf, so every slot starts as "Not worked".`,
+  },
+  {
     slug: "media_lab_f",
     title: "Media Lab F",
     dev: true,

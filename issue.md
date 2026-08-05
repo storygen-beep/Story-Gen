@@ -257,3 +257,21 @@ And we are already working on good videos as we are working on find media skill.
 [DONE]claude cloud container init.sh for find media, but claude cloud cant make google search.
 
 
+[DONE]now run find media v3 on media_lab_g
+
+
+[DONE]the browser cannot fan out
+
+[DONE]related media functionality
+
+[DONE]multiple search query results
+
+pornhub search too as it has been giving us good data all along the way.
+
+[DONE] First in this page, in the top, we want to add the selected one, like we have for the media pool. Also bring the review feature in this page, review is also allowed even when there is none selected.                                               
+
+
+We have analyze media lab f results and results are more SFW medias, not hot or NSFW or intense medias.
+
+
+GIF being fetched are very short, why is that, like is it some preview or low quality gifs, or what?? we also previously used to download pornhub gif [actually they turn out to be downloaded as video but searched as gifs], and they were actually good.
