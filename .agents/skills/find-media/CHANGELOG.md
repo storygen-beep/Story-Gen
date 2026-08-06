@@ -1,5 +1,55 @@
 # find-media — CHANGELOG
 
+## 2026-08-06 (latest) — the stock loop was fixed twice; the second fix removed 22,000 of the writes
+
+Chunking the loop (entry below) stopped it timing out. It did not touch the reason the loop was
+expensive: **every `options/add` rewrites the entire ledger, and `_options_lock` is global to
+the game.** Chunking made the *client* concurrent while the *server* stayed strictly serial.
+
+Measured on vesper's live 5.7 MB store:
+
+    json.load 35 ms + json.dumps 34 ms = ~69 ms of pure serialize per add
+    projected at 12 MB (post-88-slot-run) ................ ~145 ms per add
+    88 slots x ~250 options = ~22,000 adds ....... ~39 MINUTES of lock time
+
+That 39 minutes is serialized by construction — six concurrent agents cannot overlap a single
+lock, so it is a floor under the whole run, not a cost per agent. At 24 slots it was ~8 minutes
+and invisible, which is why chunking looked like a complete fix.
+
+**Fixed:** `api/v1/media_finder.py` grows `options/add_bulk` — the same shelf semantics applied
+to a whole query's results under **one** lock acquisition and **one** file write. ~22,000 writes
+become ~264. `options/add` is untouched and stays the single-url path the capture extension uses.
+
+**Measured end-to-end**, live server, scratch game seeded from vesper's real 4.4 MB store:
+
+    250 urls, sequential options/add ... 53.53 s   (214 ms/url)
+    250 urls, one options/add_bulk ....  0.21 s   (0.8 ms/url)   -> 253x
+
+214 ms/url is three times the 69 ms of raw serialize, because the round trip also pays HTTP,
+Django, lock acquisition and the *read* of the whole ledger. Projected over the 88-slot run:
+**~78 minutes of API time against ~20 seconds.** The arithmetic estimate that justified building
+this said ~39 min — it was conservative by half, because it counted only the write.
+
+- `chrome_route.md` §5 — the snippet now posts one `options/add_bulk` per query. The chunked
+  `Promise.all` rule survives as the fallback for anyone still on the per-url path.
+- `chrome_route.md` failure table — three rows: the timeout row now points at bulk first, plus
+  "the whole run feels slow and agents sit idle" (the lock) and the 2000-item cap.
+- Both mirrors hand-applied block-by-block. Delta between `.agents` and `.claude` still exactly
+  42 lines, all of it the pre-existing §2.0 block, and **0 lines of the new text** — verified by
+  diff, which is the check that proves the mirror took.
+
+**The cap REFUSES rather than truncates.** A silently dropped tail reads downstream as "the
+query was thin", and that is what sends an agent rewriting a query that was fine — the same
+failure signature as curling Google and getting a rich-looking 200 with no urls in it.
+
+**Verified:** `tests/test_media_finder_bulk.py`, 23 tests. The load-bearing one asserts the bulk
+shelf is byte-identical to the same urls added one at a time (modulo `added_at`) — if those ever
+diverge the fast path is silently a different feature. Also pinned: exactly 1 write for 50 items
+against 5 writes for 5 singles; a re-harvest of already-stocked urls writes **zero** times; one
+bad row costs only itself and is counted under `invalid`. Existing suites green (136 passed
+across queries/pools/fetch_related; full `tests/` 291 passed, the 6 `test_world_*` failures
+pre-date this work and are a `create_user()` signature issue).
+
 ## 2026-08-06 (later) — §5's stocking loop cannot finish inside a `javascript_tool` call, and the histogram it POSTs was being thrown away
 
 Two defects in the same code block, both found by running it, not by reading it. A 24-slot v3

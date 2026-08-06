@@ -11,6 +11,7 @@ No auth, no DB — filesystem + JSON ledger. Local dev tool; relies on open CORS
 
 Endpoints (under /api/v1/dev/media-finder/):
 - POST options/add     {game, file, url, type, media_kind, query?, docid?, thumb?} -> append an option
+- POST options/add_bulk {game, file, query?, items:[…]} -> append N options in ONE write
 - POST queries/add     {game, file, query, urls, stocked, hosts, seed_url?} -> record a SEARCH
 - POST pornhub/fetch   {game, file, query} -> run a PornHub-scoped image search, stock it
 - POST related/fetch   {game, file, url}  -> run the related-feed fetch for one option
@@ -426,6 +427,108 @@ def _upsert_query(data: dict, slot: str, q: str, now: str, fields: dict) -> tupl
     return rec, False
 
 
+def _apply_option(
+    data: dict,
+    file_: str,
+    url: str,
+    type_: str,
+    media_kind: str,
+    now: str,
+    q: str,
+    local_path: str = "",
+    origin: str = "",
+    docid: str = "",
+    thumb: str = "",
+) -> tuple[bool, bool, int]:
+    """One shelf mutation, in memory only. Returns (added, changed, count).
+
+    Split out of `_add_option` on 2026-08-06 so `options/add_bulk` can apply N of
+    these under ONE lock acquisition and ONE file write. Every rule about how an
+    option lands on a shelf lives here exactly once; the two callers differ only in
+    how often they read and write the ledger.
+
+    `added` is True only for a brand-new row. `changed` is True whenever the ledger
+    needs writing at all — a duplicate that gained a `found_by` label or a `docid`
+    it did not have changes the file without adding a row.
+    """
+    lst = data["options"].setdefault(file_, [])
+    dup = next((o for o in lst if o.get("url") == url), None)
+    if dup is not None:
+        # Already shelved. Credit the query that just re-found it and keep a docid
+        # we did not have — but report `changed` only if something actually moved.
+        # Without that short-circuit a re-harvest of 400 already-stocked urls
+        # becomes 400 whole-file rewrites. NOTE the docid branch must work with an
+        # EMPTY q: the legacy-shelf lookup enriches a bare url and sends no query.
+        changed = False
+        if q and q not in (dup.get("found_by") or []):
+            dup.setdefault("found_by", []).append(q)
+            _ensure_query(data, file_, q, now)
+            changed = True
+        if docid and not dup.get("docid"):
+            dup["docid"] = docid
+            changed = True
+        if thumb and not dup.get("thumb"):
+            dup["thumb"] = thumb
+            changed = True
+        return False, changed, len(lst)
+
+    entry = {"url": url, "type": type_, "media_kind": media_kind, "added_at": now}
+    if local_path:
+        entry["local_path"] = local_path
+    if origin:
+        entry["origin"] = origin
+    if docid:
+        entry["docid"] = docid
+    if thumb:
+        entry["thumb"] = thumb
+    # A demoted pick has no search behind it, so it never gets a label — it is undo
+    # history, and filing it under a query would be a category error.
+    if q and origin != "previous":
+        entry["found_by"] = [q]
+        _ensure_query(data, file_, q, now)
+
+    if origin == "previous":
+        # A just-demoted pick goes to the FRONT. Appending buried it: media_lab's
+        # shelf is 148 deep, so an unselected clip landed at position 149 and the
+        # "one click to undo" this is supposed to give you meant scrolling past
+        # everything first. Fresh candidates still append — their order is the
+        # harvest order, which the fetcher re-ranks anyway.
+        lst.insert(0, entry)
+    else:
+        lst.append(entry)
+    return True, True, len(lst)
+
+
+def _clean_docid(raw) -> str:
+    """Google's index id for an image, or '' if unusable.
+
+    Malformed → drop the FIELD and keep the option (the `_clean_hosts` precedent,
+    not `_MangledHost`'s): a bad docid is recoverable later via the grid lookup, so
+    it is never worth losing the option over.
+    """
+    docid = str(raw or "")
+    return docid if re.fullmatch(r"[A-Za-z0-9_-]{8,64}", docid) else ""
+
+
+def _clean_thumb(raw) -> str:
+    """Google's `encrypted-tbn` still, or '' if unusable. Same drop-the-field rule.
+
+    The gstatic HOST pin is load-bearing, not cosmetic: unlike `docid`, this value is
+    rendered AND proxied by the picker, so an unconstrained field would make the shelf
+    a way to aim `proxy` at an arbitrary host. `_blocked_host` only stops IP literals,
+    so it would not catch that.
+    """
+    thumb = str(raw or "")
+    if not thumb:
+        return ""
+    parsed = urlparse(thumb)
+    host = (parsed.hostname or "").lower()
+    if (parsed.scheme not in ("http", "https") or len(thumb) > 2048
+            or not (host == "gstatic.com" or host.endswith(".gstatic.com"))):
+        return ""
+    return thumb
+
+
 def _add_option(
     game_dir: Path,
     game: str,
@@ -468,61 +571,71 @@ def _add_option(
     q = _canon_query(query)
     with _options_lock(game_dir):
         data = _read_options(game_dir)
-        lst = data["options"].setdefault(file_, [])
-        dup = next((o for o in lst if o.get("url") == url), None)
-        if dup is not None:
-            # Already shelved. Credit the query that just re-found it and keep a
-            # docid we did not have — but ONLY write if something actually changed.
-            # Without this short-circuit a re-harvest of 400 already-stocked urls
-            # becomes 400 whole-file rewrites of a 2.9 MB ledger under the lock.
-            # NOTE the docid branch must work with an EMPTY q: the legacy-shelf
-            # lookup enriches a bare url with its docid and sends no query.
-            changed = False
-            if q and q not in (dup.get("found_by") or []):
-                dup.setdefault("found_by", []).append(q)
-                _ensure_query(data, file_, q, now)
-                changed = True
-            if docid and not dup.get("docid"):
-                dup["docid"] = docid
-                changed = True
-            if thumb and not dup.get("thumb"):
-                dup["thumb"] = thumb
-                changed = True
-            if not changed:
-                return False, len(lst)
+        added, changed, count = _apply_option(
+            data, file_, url, type_, media_kind, now, q,
+            local_path=local_path, origin=origin, docid=docid, thumb=thumb,
+        )
+        if changed:
             data["game"] = game
             data["updated_at"] = now
             _write_options(game_dir, data)
-            return False, len(lst)
+        return added, count
 
-        entry = {"url": url, "type": type_, "media_kind": media_kind, "added_at": now}
-        if local_path:
-            entry["local_path"] = local_path
-        if origin:
-            entry["origin"] = origin
-        if docid:
-            entry["docid"] = docid
-        if thumb:
-            entry["thumb"] = thumb
-        # A demoted pick has no search behind it, so it never gets a label — it is
-        # undo history, and filing it under a query would be a category error.
-        if q and origin != "previous":
-            entry["found_by"] = [q]
-            _ensure_query(data, file_, q, now)
 
-        if origin == "previous":
-            # A just-demoted pick goes to the FRONT. Appending buried it: media_lab's
-            # shelf is 148 deep, so an unselected clip landed at position 149 and the
-            # "one click to undo" this is supposed to give you meant scrolling past
-            # everything first. Fresh candidates still append — their order is the
-            # harvest order, which the fetcher re-ranks anyway.
-            lst.insert(0, entry)
+def _add_options_bulk(
+    game_dir: Path, game: str, file_: str, query: str, items: list[dict]
+) -> dict:
+    """Apply many options to ONE slot under one lock acquisition and one file write.
+
+    Why this exists, measured 2026-08-06: every `options/add` rewrites the whole
+    ledger, and the lock is global to the game. Against a 4.4 MB store, live:
+
+        250 urls, sequential options/add ... 53.53 s   (214 ms/url)
+        250 urls, one options/add_bulk ....  0.21 s   ->  253x
+
+    An 88-slot harvest posts ~22,000 urls, so the per-url path costs ~78 minutes of
+    API time, much of it holding a lock that six concurrent agents cannot overlap.
+    Bulk costs ~20 seconds.
+
+    A malformed row is SKIPPED, never fatal: a harvest of 250 urls must not lose 249
+    because one carried a `data:` scheme. Returns {added, duplicates, invalid, count}
+    so a caller can tell "the shelf already had these" from "the shelf refused these"
+    — a single total cannot, and a silent skip is how a short shelf reads as a bad
+    query for the rest of the run.
+    """
+    now = datetime.now(timezone.utc).isoformat()
+    q = _canon_query(query)
+    added = duplicates = invalid = 0
+    changed_any = False
+    count = 0
+    with _options_lock(game_dir):
+        data = _read_options(game_dir)
+        for item in items:
+            if not isinstance(item, dict):
+                invalid += 1
+                continue
+            url = str(item.get("url") or "")
+            if not url or urlparse(url).scheme not in ("http", "https"):
+                invalid += 1
+                continue
+            was_added, changed, count = _apply_option(
+                data, file_, url,
+                str(item.get("type") or "image").lower(),
+                str(item.get("media_kind") or "img").lower(),
+                now, q,
+                docid=_clean_docid(item.get("docid")),
+                thumb=_clean_thumb(item.get("thumb")),
+            )
+            added += was_added
+            duplicates += (not was_added)
+            changed_any = changed_any or changed
+        if changed_any:
+            data["game"] = game
+            data["updated_at"] = now
+            _write_options(game_dir, data)
         else:
-            lst.append(entry)
-        data["game"] = game
-        data["updated_at"] = now
-        _write_options(game_dir, data)
-        return True, len(lst)
+            count = len(data["options"].get(file_) or [])
+    return {"added": added, "duplicates": duplicates, "invalid": invalid, "count": count}
 
 
 class _MangledHost(ValueError):
@@ -724,34 +837,60 @@ def options_add(request):
     if urlparse(url).scheme not in ("http", "https"):
         return JsonResponse({"error": "Invalid URL scheme"}, status=400)
 
-    # docid: Google's index id for this image, when the harvest could pair it.
-    # Malformed → drop the FIELD and store the option anyway (the `_clean_hosts`
-    # precedent, not `_MangledHost`'s): a bad docid is recoverable later via the
-    # grid lookup, so it is never worth losing the option over.
-    docid = str(body.get("docid") or "")
-    if docid and not re.fullmatch(r"[A-Za-z0-9_-]{8,64}", docid):
-        docid = ""
-
-    # thumb: Google's encrypted-tbn still, same drop-the-field-not-the-option rule.
-    # The HOST pin is load-bearing and not cosmetic: unlike `docid`, this value is
-    # rendered AND proxied by the picker, so an unconstrained field would make the
-    # shelf a way to aim `proxy` at an arbitrary host. `_blocked_host` only stops
-    # IP literals, so it would not catch that.
-    thumb = str(body.get("thumb") or "")
-    if thumb:
-        _t = urlparse(thumb)
-        _thost = (_t.hostname or "").lower()
-        if (_t.scheme not in ("http", "https") or len(thumb) > 2048
-                or not (_thost == "gstatic.com" or _thost.endswith(".gstatic.com"))):
-            thumb = ""
-
     added, count = _add_option(
         game_dir, game, file_, url=url, type_=type_, media_kind=media_kind,
-        query=body.get("query", ""), docid=docid, thumb=thumb,
+        query=body.get("query", ""),
+        docid=_clean_docid(body.get("docid")),
+        thumb=_clean_thumb(body.get("thumb")),
     )
     if not added:
         return JsonResponse({"ok": True, "duplicate": True, "count": count})
     return JsonResponse({"ok": True, "count": count})
+
+
+# One request may not carry more than this many rows. A Google query yields ~400 urls
+# at full depth, so this is generous; over it we REJECT rather than truncate, because
+# a silently-dropped tail reads downstream as "the query was thin" and sends an agent
+# rewriting a query that was fine.
+_BULK_MAX_ITEMS = 2000
+
+
+@csrf_exempt
+def options_add_bulk(request):
+    """POST options/add_bulk {game, file|slot_key, query?, items:[{url, type?,
+    media_kind?, docid?, thumb?}, …]} — stock a whole query's results in one write.
+
+    Identical shelf semantics to `options/add`, which is unchanged and stays the
+    single-url path (the capture extension posts one at a time). The difference is
+    purely how many times the ledger is read and rewritten: once, instead of once
+    per url. See `_add_options_bulk` for the measurement that motivated it.
+
+    Returns {ok, added, duplicates, invalid, count}. `invalid` is never silent.
+    """
+    if request.method != "POST":
+        return JsonResponse({"error": "Method not allowed"}, status=405)
+
+    body = _parse_body(request)
+    game = body.get("game", "")
+    # Same key discipline as every other options endpoint: the shelf is keyed by
+    # `slot_key`, which defaults to `file`.
+    file_ = body.get("slot_key") or body.get("file", "")
+    items = body.get("items")
+
+    game_dir = _safe_game_dir(game)
+    if game_dir is None or not game_dir.is_dir():
+        return JsonResponse({"error": "Invalid or missing game"}, status=400)
+    if not file_:
+        return JsonResponse({"error": "file is required"}, status=400)
+    if not isinstance(items, list):
+        return JsonResponse({"error": "items must be a list"}, status=400)
+    if len(items) > _BULK_MAX_ITEMS:
+        return JsonResponse(
+            {"error": f"items exceeds {_BULK_MAX_ITEMS}; split the request"}, status=400
+        )
+
+    result = _add_options_bulk(game_dir, game, file_, body.get("query", ""), items)
+    return JsonResponse({"ok": True, **result})
 
 
 @csrf_exempt
@@ -1598,6 +1737,7 @@ def pornhub_fetch(request):
 # =============================================================================
 urlpatterns = [
     path("options/add", options_add, name="media_finder_options_add"),
+    path("options/add_bulk", options_add_bulk, name="media_finder_options_add_bulk"),
     path("queries/add", queries_add, name="media_finder_queries_add"),
     path("related/fetch", related_fetch, name="media_finder_related_fetch"),
     path("pornhub/fetch", pornhub_fetch, name="media_finder_pornhub_fetch"),

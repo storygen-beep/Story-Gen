@@ -370,19 +370,19 @@ const { q: Q, urls, hosts, docids } = window.__fm;   // from §4 — do not re-d
 
 // 1. stock, tagging every candidate with the search that produced it AND its
 //    docid when §4's join paired one — that id is what powers "fetch related".
-// ⚠️ CHUNKED AND CONCURRENT, never a sequential await-per-url loop — see the note below.
+// ⚠️ ONE request for the whole query. options/add_bulk applies every row under a
+//    single lock acquisition and a single file write — see the note below.
 const isVid = u => /\.(mp4|webm)$/i.test(u);
-let ok = 0;
-const post = async u => {
-  const r = await fetch(`${API}/options/add`, J({
-    game: GAME, file: FILE, slot_key: KEY, url: u, query: Q,
+const res = await (await fetch(`${API}/options/add_bulk`, J({
+  game: GAME, file: FILE, slot_key: KEY, query: Q,
+  items: urls.map(u => ({
+    url: u,
     type: isVid(u) ? 'video' : 'gif',
     media_kind: isVid(u) ? 'video' : 'img',
     docid: (docids || {})[u] || ''
-  }));
-  if ((await r.json()).ok) ok++;
-};
-for (let i = 0; i < urls.length; i += 10) await Promise.all(urls.slice(i, i + 10).map(post));
+  }))
+}))).json();
+const ok = res.added;                      // {added, duplicates, invalid, count}
 
 // 2. record the SEARCH — its real counts and its histogram. ALWAYS run this, INCLUDING
 //    when `urls` is empty: a query that came back with nothing is still a query that ran,
@@ -397,17 +397,26 @@ await fetch(`${API}/queries/add`, J({
 
 Rules, each with the reason it exists:
 
-- ⚠️ **Stock CHUNKED AND CONCURRENT. A sequential `for … await fetch` loop over 60+ urls
-  ALWAYS times out.** `Runtime.evaluate` has a hard **45 s** ceiling and `options/add` costs
-  ~0.6 s, so ~75 sequential POSTs cannot finish inside one `javascript_tool` call. Measured
-  2026-08-06 on vesper: **five of six slot agents hit it independently**, at 74, 79, 83 and 85
-  urls. `Promise.all` in chunks of 10 finishes the same 74 in ~20 s.
-  **The failure is worse than a timeout, because it is not atomic.** The renderer keeps
-  running the loop after the tool gives up, so the shelf goes on filling while you hold an
-  error and no return value — you cannot tell how many landed. Recovery is safe (`options/add`
-  dedupes by url and answers `{"ok":true,"duplicate":true}`, so re-posting the whole list
-  costs nothing and creates no duplicates) but you must re-read the shelf to learn the count.
-  Above ~60 urls, split the list across TWO `javascript_tool` calls rather than betting on it.
+- ⚠️ **Stock with ONE `options/add_bulk`, not a loop of `options/add`.** Both write the same
+  shelf; they differ in how many times the ledger is rewritten. **Every `options/add` rewrites
+  the whole file, and the lock is global to the game** — measured on vesper's 5.7 MB store
+  (2026-08-06): ~69 ms of pure serialize per call, ~145 ms projected at 12 MB. **Measured
+  end-to-end against a 4.4 MB store: 250 urls cost 53.5 s per-url (214 ms each) against 0.21 s
+  as one bulk call — 253×.** An 88-slot harvest posts ~22,000 urls, so the per-url path burns
+  ~78 minutes of API time, much of it holding a lock no agent can overlap; bulk costs ~20
+  seconds. It also drops the call well under the 45 s `Runtime.evaluate` ceiling
+  instead of racing it. Cap is 2000 items — over that the endpoint **refuses**, because a
+  silently truncated tail reads downstream as "the query was thin" and sends you rewriting a
+  query that was fine. Read `{added, duplicates, invalid, count}`; `invalid` is never silent.
+- ⚠️ **If you ever fall back to per-url `options/add`, it MUST be chunked and concurrent. A
+  sequential `for … await fetch` loop over 60+ urls ALWAYS times out.** `Runtime.evaluate` has
+  a hard **45 s** ceiling and each POST costs ~0.6 s, so ~75 sequential POSTs cannot finish in
+  one `javascript_tool` call. Measured 2026-08-06 on vesper: **five of six slot agents hit it
+  independently**, at 74, 79, 83 and 85 urls. `Promise.all` in chunks of 10 finishes 74 in ~20 s.
+  **The failure is worse than a timeout, because it is not atomic.** The renderer keeps running
+  the loop after the tool gives up, so the shelf goes on filling while you hold an error and no
+  return value — you cannot tell how many landed. Recovery is safe (both endpoints dedupe by
+  url) but you must re-read the shelf to learn the count.
 - ⚠️ **POST `hosts` RAW — it is already `[[host, count], …]`, and that is the only shape the
   server accepts.** `_clean_hosts` (`api/v1/media_finder.py:551`) requires a list of 2-element
   pairs and returns `None` — silently **dropping the field, keeping the record** — for anything
@@ -863,7 +872,9 @@ run where the only unfetchable URLs were the ones that route was built around.
 | `video_frames.py` exits 3 | ffmpeg not on PATH | Read thumbnails individually — exit 3 means degrade, never crash |
 | Histogram rows come back `[BLOCKED: JWT token]` | Bare dotted hostnames in a RETURN VALUE trip the secret-scanner | Join the labels with `" DOT "` — but only in what you *return*, never in what you POST (§4) |
 | `queries/add` → `400 … ' DOT ' transform` | You transformed the hosts before POSTing them | Keep `hosts` real; the transform belongs on the returned array alone. The endpoint is fine |
-| `options/add` loop returns a **45 s timeout** and no counts | Sequential `await` per url — `Runtime.evaluate` caps at 45 s and each POST is ~0.6 s | Chunked `Promise.all` (10 at a time); split >60 urls across two calls. **The loop keeps running after the timeout**, so re-read the shelf for the true count rather than assuming zero (§5) |
+| `options/add` loop returns a **45 s timeout** and no counts | Sequential `await` per url — `Runtime.evaluate` caps at 45 s and each POST is ~0.6 s | Use **`options/add_bulk`**: one request per query, one lock, one write. If you must use the per-url path, chunk it `Promise.all` 10 at a time. **The loop keeps running after the timeout**, so re-read the shelf for the true count rather than assuming zero (§5) |
+| The whole run feels slow and agents sit idle | ~22,000 per-url `options/add` calls, each rewriting the whole ledger under a **game-global** lock — 214 ms per url measured against a 4.4 MB store | `options/add_bulk`: same 250 urls in 0.21 s against 53.5 s, **253×**. Over a full 88-slot run, ~78 min of API time → ~20 s (§5) |
+| `options/add_bulk` → `400 items exceeds 2000` | One query yielded more rows than the cap | Split the list. The endpoint refuses rather than truncating on purpose — a dropped tail reads as a thin query (§5) |
 | `queries/add` returns 200 but the chip has **no hosts** | You reshaped `hosts` to `[{host,n}]` — `_clean_hosts` accepts only `[[host,count],…]` and drops the field silently | POST `hosts` raw from `Object.entries()`. Re-read one chip to confirm it stored (§5) |
 | Picker shows every option under "Older searches" | You stocked without `query` | Send `query` on every `options/add`. There is NO retroactive attribution — unlabelled is permanent |
 | A chip is missing for a query that ran | You skipped `queries/add` | Call it once per query, including zero-yield ones |
