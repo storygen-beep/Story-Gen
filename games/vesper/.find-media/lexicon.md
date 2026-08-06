@@ -214,3 +214,352 @@ posture words for the DEFAULT posture, re-measured | `--want ...,knees` buried e
 `homemade` | a second anti-studio modifier that behaves like `amateur` | `couch bj amateur homemade gif` → 68 urls, 100% porn, and it produced the DIMMEST clip of the run (`hot-bj-on-the-couch-jjrr88`) | **CONFIRMED** — stack it with `amateur` when the beat wants dark; it did not reclassify the query
 his face IS retrievable when you ask for a chair | contradicts the alley row ("his state is never in frame — 27 of 28 crop the man") | of my 3 installs, **all 3 show his face**; the armchair clip shows him reclined, head tipped back, visibly low | **the crop problem is a PROPERTY OF THE OUTDOOR/STANDING BAND, not of the corpus.** Seated-partner queries frame both bodies, because the chair anchors the shot. Worth knowing for any beat whose register depends on HIS affect
 a caption/slug naming your exact beat, again | 2 more kills | `on-her-knees-sucking-cock_001.gif` (handed over as a strong lead) is an OFFICE clip captioned "WOMEN in the workplace" whose loop never shows her face; "A GOOD WIFE KNOWS HER PLACE!" was a caption gif | **RE-CONFIRMED.** Both were rejected on pixels after passing on words
+
+## 2026-08-06 — 88-slot approved-NSFW run, wave 1 findings
+
+CONFIRMED VOCABULARY (measured on a real grid this run):
+ragdoll    | limp/inert body mid-act, "past collapse" | google served literal `Limp Ragdoll Porn GIFs` slugs | highest-purity query of its slot's set
+cmnf       | clothed male, nude female                | repaired a slot whose prose query returned 53% Shutterstock | 100% porn hosts, zero stock
+enf        | embarrassed/exposed nude female          | pins female nudity where `nude` alone drifts | ~89% porn hosts
+bukkake    | cum-covered aftermath, kneeling          | reached an almost entirely DIFFERENT host cluster from `covered in cum` | this is where shelf variety came from
+
+POISON — measured, do not use (add beside `orgasm` / `leaning forward` / `taking turns`):
+dazed      | it is DAZED MAGAZINE's brand name. Pulled dazeddigital's own CDN, dazedprod,
+           | Teen Vogue, Slate, Metro, IFFR — and it did that while standing next to `fuck`,
+           | so an act anchor does NOT protect you from it.
+bruises    | drags impact-play BDSM *and* journalism — ProPublica, New Yorker, Wiley, an FGM
+           | campaign poster, a spa-supply store. Dropping the single token repaired the query.
+humiliation| pulls the FEMDOM aisle and REVERSES direction — cfnm.net, femdomdestiny,
+           | cuckold.info. ~40% of that grid was clothed-female/naked-male.
+
+SHAPE RULE RE-CONFIRMED: a prose description of the beat is not a query. Both of
+`cell_inventory_the_order`'s authored queries were condemned on the histogram and stocked
+ZERO — they were sentences with no act anchor, so Google reclassified one as stock
+photography and the other (via `dim cell`) as prison journalism (hrw.org, aljazeera, NYT).
+
+⚠️ CONCURRENCY GAP FOUND 2026-08-06 (not vocabulary — doctrine): v3 mandates ONE AGENT PER SLOT
+with a rolling cap, and its evidence tree tells each agent to append to `run_manifest.json`.
+That file has NO lock, unlike `media_options.json` (`_options_lock`, api/v1/media_finder.py:307).
+Six concurrent agents doing read-modify-write on it will silently drop entries. Wave 1 survived
+only because its six agents finished minutes apart. One agent refused the write and flagged it
+rather than racing. FIX: the driver writes every slot's row in ONE pass at the end of the run;
+per-slot agents must not touch the manifest. Owed to SKILL.md §Evidence-and-persistence.
+
+## 2026-08-06 — t4 industrial-nude slots: the genre-tag trap (two agents, opposite calls)
+
+⚠️ CORRECTION to the `cmnf`/`enf` entries above. Both agents ran a `cmnf` query and both saw
+~100% porn hosts. `salvage_session_11` STOCKED it (noting "the room is domestic/bar/office —
+the `warehouse` token barely survived"). `salvage_session_10` CONDEMNED it: the grid was
+CFNM-genre — sex parties, offices, cartoons, a Manet painting, and NAKED MEN. Caught only by
+the screenshot.
+
+**The rule that explains both:** on a t4 setting slot the histogram cannot tell
+"porn hosts, industrial aisle" from "porn hosts, CFNM-party aisle". `cmnf`/`enf` are GENRE
+tokens, not setting tokens — they pass the host gate and eat the setting.
+
+BEST SHAPE MEASURED for these slots: a plain nudity word + ONE place noun.
+  nude woman industrial warehouse   -> proven, nude figures in real warehouse interiors
+  nude woman machine shop           -> proven, real lathes and mill machinery; closest to the beat
+  naked woman abandoned factory floor -> proven, real derelict interiors (not studio backdrops)
+  naked woman garage mechanic amateur -> proven, slugs carried BOTH halves
+Setting-anchored + plain nudity outperformed EVERY genre-tagged variant. Use `cmnf` as at most
+one sibling, and only if the grid glance clears it.
+
+POISON for this slot family:
+workers    | reclassifies to HISTORICAL SHIPYARD ARCHIVE photography — alamy(22), getty(15),
+           | nps.gov, nationalww2museum, BBC, Scottish Maritime Museum. Nudity drops out entirely.
+
+WATERMARK REALITY, t4 industrial nudes: 22.7% stamped (vs 0-3.7% on t5 act slots). These beats
+sit next to art-nude and stock territory in a way the explicit ones never do.
+
+## 2026-08-06 — the cmnf rule, reconciled (third agent settles it)
+
+`cmnf` pulls a ~100% porn crowd on its own but carries NO SETTING. Pair it with an
+OCCUPATION word, not a ROOM word:
+  cmnf nude woman machine shop mechanic  -> PASS, best bucket; hit native vocabulary
+                                            (enf-cmnf.cc, nudeworldorder), real garages
+  cmnf clothed man sitting nude woman warehouse -> composition dead-on, but `warehouse`
+                                            did NOT land — rooms came back domestic/retail
+That is why two earlier agents disagreed: one paired it with a room, one with an occupation.
+
+POISON (new): `standing` on a t4 nudity slot behaves exactly like the documented
+`leaning forward` — it reads as stock-photography / art-nude vocabulary and OUTVOTES `naked`.
+  naked woman standing industrial workshop -> 60/105 stock+wiki+art-gallery, CONDEMNED
+  naked woman amateur industrial workshop  -> ~65% porn hosts. One token was the whole fix.
+`amateur` is the anti-studio modifier that repairs a stock-drifting nudity query.
+
+## 2026-08-06 — two more setting-token poisons, both invisible to the histogram
+
+dock   | SFW HOMOGRAPH. `shirtless dock worker naked woman amateur` returned a porn-dominant
+       | histogram with real nudity — and a grid of bright outdoor lakeside JETTY/PIER nudism.
+       | The histogram would have passed it. Only the grid glance caught it. Use
+       | `warehouse` / `factory` instead. (Note the irony: the beat IS a dry-dock.)
+hangar | NOT IN GOOGLE'S PORN-QUERY VOCABULARY AT ALL. It gets AUTOCORRECTED — the page
+       | offered "Did you mean: cmnf naked woman ANGRY workers" — so the setting token
+       | silently vanishes and you are left with the bare genre aisle (CMNF offices, desks,
+       | museums) behind a ~100%-porn histogram. Repaired by one token: `hangar`->`factory`.
+
+⚠️ GENERALISED FAILURE CLASS worth teaching: a setting token Google does not know is not
+merely weak — it is DROPPED, and the query silently becomes the genre token alone. The
+histogram cannot show you this because the genre token still lands on porn hosts. Watch the
+"Did you mean" line, and do the grid glance.
+
+CONFIRMED BEST TOKEN for this slot family: `cmnf` names the exact composition (naked woman
+among clothed working men) and pulls its own dedicated corpus — enf-cmnf.cc, cmnf-stories.info,
+nudeworldorder — with zero stock-agency contamination. It just needs a real occupation/place
+noun beside it that Google actually knows: factory, machine shop, garage, scrap yard, mechanic.
+
+## 2026-08-06 — male-body tokens are ALL stock magnets (corrects my own guidance)
+
+I told two agents `shirtless` was usable if it travelled with the woman's nudity word.
+MEASURED FALSE, one agent, same slot, back to back:
+  nude woman muscular man shipyard amateur   -> shutterstock(19) + artblart + human-anatomy-for-artist. REJECT
+  naked woman shirtless man shipyard amateur -> 44% stock, shutterstock(24) + dreamstime(16). REJECT
+  cmnf naked woman shipyard men              -> ~zero stock, cleanest crowd of that run. PASS
+**The man only lands through the scene-native tag `cmnf` + `men`, with NO male-body word at
+all.** `muscular` and `shirtless` are stock-photo staples and they outvote the nudity word.
+
+dry dock  | HOMOGRAPH TRAP. Google splits it: `dry` -> dry-humping aisle, `dock` -> boat jetty.
+          | Passed the host histogram; only the grid glance caught it. (The beat IS a dry-dock.)
+abandoned | the poison in `nude woman abandoned dry dock` (pure stock: dreamstime 22,
+          | shutterstock 15, alamy, istock). Dropping it + restoring `amateur` flipped the
+          | histogram back to porn hosts in ONE round trip. NOTE this contradicts an earlier
+          | entry where `naked woman abandoned factory floor` passed — `abandoned` is safe
+          | beside `factory`, poison beside `dry dock`. Setting pairs matter, not words alone.
+
+⚠️ HONEST LIMIT REACHED: the dry-dock / work-cradle INTERIOR is probably not retrievable at
+t4. Two agents spent their 2-round setting budget on it. `shipyard` and `engine room` hold the
+porn crowd but deliver garages, machine shops and workshops. Per the setting-driven stop rule
+that is a stop, not a query bug — the room is not in the corpus at this band.
+
+shirtless man | beside `naked woman` this is a NATURIST/nudist-resort magnet — full-frontal
+              | nude MEN, beach/colony content, group flashing, "naked wrestle". It passes the
+              | host histogram at ~100% porn and ONLY the grid glance catches it. Third
+              | independent confirmation today that no male-body token is usable on this
+              | family; the man is only retrievable through `cmnf` + `men`.
+
+welder | same failure mode as `workers` — reclassifies to industrial-trade + stock photography
+       | (a welding trade magazine AND a welding foundation both charted). Nudity drops out.
+       | Repaired by one token: `welder` -> `auto repair shop`, stock hosts 43 -> 8.
+
+⚠️ THE RULE THAT EXPLAINS THE WHOLE CLASS: an occupation word only works if it is
+PORN-NATIVE (`mechanic`, `auto repair shop`, `garage`) rather than TRADE-NATIVE (`welder`,
+`workers`, `dock worker`). Porn-native occupations have their own tag corpora; trade-native
+ones belong to stock agencies and trade journalism, and they outvote the nudity word.
+
+ENGINEERING NOTE: the `queries/add` response echo does NOT return the stored `hosts` array,
+so a successful POST reads back as hostsStored=0. Re-read the CHIP via options/list to verify
+hosts landed — do not trust the POST response on this field.
+
+EFFICIENCY (measured 2026-08-06): on an ANIMATED slot, click "More results" ONCE. A second
+click added ~400 tiles and returned a FLAT url count (81->81) because the extra tiles are
+.jpg/.webp, which the `gif|mp4|webm` regex cannot use. On a STILL slot the second click does
+pay. Costs ~30-40s per query on the wrong slot kind.
+
+## 2026-08-06 — SILENT place-noun drops (worse than `hangar`) + which nouns actually bind
+
+⚠️ WORST FAILURE MODE FOUND TODAY: a place noun that is not in the porn corpus is DROPPED
+silently — 100% porn hosts, no "Did you mean" line, nothing wrong anywhere in the histogram —
+and the grid comes back as the bare genre aisle (bedrooms, a gyno office, living rooms, a bar,
+a picnic, a kitchen). `hangar` at least warned you via autocorrect. These did not:
+  engine room  (with `cmnf`) | foundry | boatyard-class words
+**I (the driver) suggested engine room / boatyard / foundry to an agent. All were wrong.**
+
+⚠️ NUANCE that reconciles a contradiction: `naked woman engine room amateur` PASSED on one
+slot while `cmnf naked woman engine room amateur` FAILED on another. The GENRE token competes
+with the PLACE token — `cmnf` is strong enough to consume the place. Use cmnf OR a place noun
+as the load-bearing term, not both hoping each does half.
+
+PROVEN BINDERS (t4 nudity + real working space), best first:
+  construction site | best of all — unfinished interiors, scaffolding, ladders, brick, and a
+                    | clothed man in overalls holding a plan beside a nude woman
+  warehouse         | binds ("Caught naked in warehouse", "Exhibitionist Naked Warehouse")
+  basement          | binds ("Secretly Naked Girl Basement"), bare brick/timber cellars
+  garage / mechanic / auto repair shop / junkyard / salvage yard | all previously proven
+
+NEW POISON:
+shipyard | SAME homograph class as `dock` — the WATER sense wins: boats, a speedboat wake,
+         | lakeside bathing, a beach, DeviantArt art. flashingjungle(17) is the outdoor-nudism
+         | tell. Settles the open family question: shipyard is NOT a safe stand-in for dry-dock.
+handyman | DIRECTION REVERSAL. It parses as the NAKED person's occupation — "Naked Handyman"
+         | tiles show the MAN nude (CFNM). 91% porn hosts, histogram clean, grid wrong on BOTH
+         | axes. RULE: avoid occupation nouns that can attach to the nude subject; prefer bare
+         | PLACE nouns.
+
+TRADE-OFF measured 2026-08-06: aisle precision and animated-url YIELD can be inversely
+related. `gangbang manhandled held down rough amateur gif` hit the most on-beat aisle of its
+slot (PornHub's own "Held Down Gangbang", Sex.com's "Manhandled GIFs" tag pages, zero
+mainstream leak) but returned only 43 urls against 85 for a looser sibling — those tag pages
+are PornHub-tile heavy and serve .jpg/.webp thumbs the `gif|mp4|webm` regex cannot use.
+A THIN shelf on a precise query is not a query failure; do not "repair" it into a looser one.
+
+throat | LIVE vocabulary for choking (`throat grabbed and fucked`, `Choking Doggystyle`), NOT
+       | poison — but `throat` beside `fucked` reads as ORAL: half the grid came back
+       | deep-throat / face-fuck. It needs a POSITION word outranking it. Measured fix:
+       | `hand on throat fucked from behind gif` (~50% on-act, oral drift)
+       |   -> `choking doggy style rough fuck amateur gif` (~100% on-act, exact beat).
+
+spanking | AISLE-SHIFTER that survives a perfect 100%-porn histogram. `restrained face down
+         | spanking bench fuck gif` -> caning, pussy-whipping, a fuckmachine, "Slave/Spanked/
+         | Paddled/Caned", femdom clip-store hosts (iwantclips, clips4sale, fetishfemdom,
+         | msdanakane). CONDEMNED at the grid, stocked 0. Dropping the ONE token repaired it:
+         | `restrained face down bench fuck from behind gif` -> clean act grid.
+         | NOTE: `bench` / `bondage bench` / `fuck bench` are SAFE — they return the ACT, not
+         | product photography (1 furniture tile across 3 grids). The driver warned about a
+         | gear-catalogue failure mode; that warning was WRONG. `spanking` was the poison.
+
+limp   | HOMOGRAPH — alone it drifts into the limp-dick / sissy-caption aisle. Measured fix:
+       | pair it with `ragdoll`, which disambiguates it to the inert-body-mid-act sense.
+       | `ragdoll limp fuck amateur gif` -> 100% porn hosts, literal slugs "Ragdoll NSFW Gif",
+       | "fucked like a rag doll", "GIFs Porno Limp Ragdoll". Zero cat-breed leak. `ragdoll`
+       | has now reproduced on TWO independent slots.
+
+⚠️ SHELF-QUALITY NOTE, phncdn: the browser extract strips query strings by construction
+(`u.split('?')[0]`), and phncdn's real urls carry their signature IN the query string. So
+phncdn urls harvested this way are PATH-ONLY and will mostly be DEAD on the shelf — ~17 per
+slot on one measured run. They are stocked per the 2026-08-06 rule change, but the human will
+find them broken. `scripts/fetch_pornhub.py` (committed today) is the route that captures the
+COMPLETE signed url; the browser route cannot. Worth a janitor sweep or a doctrine note.
+
+pinned down | WRESTLING homograph (cagesideseats / SB Nation fired on it). Survivable beside a
+            | real act anchor — one agent measured only 1 wrestling url in 71 — but check the
+            | tail after the More-results click.
+
+GENERAL, measured 2026-08-06: the DEEP TAIL of any animated query degrades into generic
+gif-magazine editorial (FT, Atlantic, Pitchfork, Vox, Medium, a cat gif, anime) — that is
+Google's exhausted-relevance depth, not a query fault. It is largely self-filtering because
+those tiles are .jpg/.webp the `gif|mp4|webm` regex cannot extract (~4 of 71 urls got through).
+Judge a query on its FIRST SCREEN and its histogram, not on its tail.
+
+## 2026-08-06 — `enf` is CONDITIONAL, not simply good or poison (reconciling 3 agents)
+
+MEASURED BOTH WAYS on the same day:
+  enf nude woman construction site workers  -> WORKED (~88% porn hosts)
+  enf nude woman bare room man in chair voyeur -> WORKED (~89% porn hosts)
+  enf forced to strip naked gif             -> CATASTROPHIC. ZERO porn hosts. Returned
+                                               ars.els-cdn (Elsevier), journals.asm.org,
+                                               pubs.acs.org, media.springernature.com.
+                                               Google read `enf` as a SCIENTIFIC ACRONYM.
+**Reconciliation:** `enf` is a weak tag with a strong non-porn homonym. It survives only when
+something else porn-native holds the query up — `nude woman` did, `forced to strip` (all
+process words) did not. **Never let `enf` be the load-bearing token.** `cmnf` is the safer
+sibling: it held on its own beside `stripped naked` + `amateur` with no act anchor at all.
+
+pussy exposed | DRIFTING PAIR — sends the query to the nude-DISPLAY aisle (already-naked,
+              | spread, petting) instead of the action asked for. 100% porn hosts, wrong
+              | aisle, caught ONLY by the screenshot.
+undressing    | GOOD vocabulary for clothes-mid-removal: "Undressing Porn Gifs", "Amateur
+              | Stripping", tops being pulled down. Repaired the query above.
+clothes ripped off / stripped naked | both genuine porn tag phrases, both landed 100% porn.
+
+## 2026-08-06 — TECHNIQUE: quoting defuses a poisoned word inside a bound genre phrase
+
+`orgasm` is measured poison (health-explainer aisle; it survives a porn-exclusive neighbour).
+But `"post orgasm torture" overstimulation gif` — with the phrase in EXPLICIT QUOTES — returned
+ZERO health-aisle hosts and put pleasuretorture.com at the TOP (13/40). The quoting is what did
+it: it binds the tokens to a genre tag instead of letting Google read `orgasm` as a topic.
+**Rule: a poisoned word can be used if it is quoted INSIDE a real genre phrase.** Unquoted, it
+poisons; quoted-and-bound, it retrieves the genre. Worth teaching — it recovers vocabulary the
+poison list would otherwise cost you.
+Caveat measured on the same query: the bound-tag route has an ILLUSTRATED tail (e621, rule34,
+furry/hentai) because genre tags are shared with drawn corpora. Live-action is the top ~10
+tiles; pair it with a live-action sibling like `ragdoll`.
+
+wrecked / senseless | POISON, a NEW CLASS: written-erotica / prose-review vocabulary. Google
+                    | served the FICTION aisle — magazine.atavist.com (longform journalism),
+                    | wanderinginn.com (a web serial), Goodreads cover assets, tumblr reposts.
+                    | Only 12 urls total, and the act anchor `fucked` was OUTRANKED. Rejected
+                    | at the gate, 0 stocked.
+⚠️ THE CLASS: words that belong to how people WRITE about sex rather than how sites TAG it.
+They read as literary and retrieve prose, not footage. Suspect any word you'd find in erotica
+but not on a tag page. (`ragdoll` is the counter-example — it looks literary but IS a tag.)
+
+used hard | CONFIRMED SAFE — clean histograms in two separate queries.
+ragdoll   | third independent confirmation. Strongest term found all run for limp/inert
+          | mid-act, and it disambiguates the `limp` homograph when paired with it.
+
+## 2026-08-06 — a SHAPE rule, not a token rule (and it caught one of the driver's own queries)
+
+  she cums hard WHILE fucked and held down gif  -> 13 urls, ZERO porn hosts. New Yorker x6,
+                                                   Guardian, Wired, Slate, Wikipedia, Tenor.
+  she cums hard fucked and held down gif        -> 82 urls, ~100% porn hosts.
+  fucked hard WHILE a man watches gif           -> 78 urls, 100% porn hosts.
+
+`while` is NOT poison — the third query uses it and lands. **The poison is QUERY SHAPE: at ~9
+tokens with TWO connectives (`while` + `and`) the string reads as a natural-language SENTENCE
+and Google falls back to long-form-essay image matching.** No "Did you mean" line was shown
+(the agent checked) — this is the silent anchor-drop mode, caught only by the histogram.
+
+RULE: keep queries to ~6-7 tokens and AT MOST ONE connective. Tag-shaped, not sentence-shaped.
+This one is the driver's own authored query, and it is the more valuable finding of the day
+because it generalises past any single word.
+
+sleeping | POISON on Google Images, proved by clean one-token isolation:
+         |   sleeping fucked from behind amateur gif -> 25 urls, ZERO porn hosts
+         |   fucked from behind amateur gif          -> 78 urls, 100% porn hosts
+         | Two unrelated query shapes both landed in the MAGAZINE-EDITORIAL crowd (Slate, GQ,
+         | New Yorker, Pitchfork, Guardian, Glamour, Vanity Fair, Hollywood Reporter, Tenor
+         | "MAN... FUCK U" reaction gifs). The tag DOES exist on porn hosts — Google demotes
+         | the porn corpus for it. Silent-failure mode 1, no "Did you mean" shown.
+         | ⚠️ THE DRIVER TOLD THE AGENT "sleeping is a well-populated porn tag, it will land."
+         | That was WRONG and the agent disproved it with a control query.
+prone bone | THE replacement — best on-beat query for a face-down, still partner. 100% porn
+           | hosts, grid near-uniform: woman flat/face-down on a bed, head on pillow, one man
+           | from behind. The "sleeping" quality is recoverable BY EYE from this bucket.
+           | (Keep the skill's existing rule: `prone bone` with `desk` = ergonomics; use `bed`.)
+spooning   | clean, 100% porn hosts, no cuddle aisle at all; adds a side-lying POV camera.
+           | Largest adjacent bucket is spooning ANAL — a position variant, not a wrong aisle.
+
+⚠️ QUALIFICATION to the shape rule above (measured same day, opposite direction):
+`fucked from behind while a man watches from a chair gif` — 11 tokens, one connective —
+degraded into only a ~10% editorial tail (New Yorker 2, Hearst 2, Tenor 3) and its FIRST
+SCREEN was squarely the right aisle. It was kept, correctly: binning 71 candidates over a
+10% tail is the over-rejection the contract names.
+So sentence-shape is a GRADIENT, not a cliff. The total collapse measured at 9 tokens
+(13 urls, zero porn hosts) had TWO connectives; this one has one. Working rule stands —
+~6-7 tokens, at most one connective — but a long query that lands on its first screen is a
+PASS, not a repair candidate. Judge the grid, not the token count.
+
+bare room | NEAR-WORTHLESS setting token — Google offered "Did you mean: … BASE room", i.e. it
+          | does not recognise the phrase. The act anchor does all the work. Same class as
+          | `dim concrete room` and `dark`: the ROOM is not retrievable at t5, full stop.
+          | Correct handling: keep the query if the grid is right, and do not spend a repair
+          | round trying to buy the room back.
+
+## 2026-08-06 — ⚠️ CORRECTION: `ragdoll` is a CAT BREED without a hard anchor
+
+  limp ragdoll used hard bed gif   -> 78 urls, ZERO porn hosts. Giphy/Tenor/Pinterest/Steam,
+                                      literal Ragdoll KITTENS on beds.
+  limp ragdoll FUCKED hard bed gif -> 69 urls of limp-body porn. One token was the difference.
+
+`used hard`, `limp`, `hard`, `bed` are NOT anchors — none of them holds the query.
+**THE RULE: `ragdoll` requires `fuck`/`fucked` present, or it is a cat.** This is the exact
+`cowgirl` precedent (a name-word with a strong non-porn sense leaves porn entirely on its own).
+The driver had been telling agents "pair `limp` with `ragdoll`" for five slots — that is the
+WEAKER rule and it would eventually have produced a shelf of kittens. `ragdoll` is still the
+best term of the run for a limp/inert body mid-act; it just is not self-anchoring.
+
+prone bone | STRONG addition, confirmed twice now: porn-native for face-down-flat-fucked-from
+           | -behind, i.e. the collapse end-state. Co-fires cleanly with `ragdoll`.
+           | (Keep the existing rule: `prone bone` + `desk` = ergonomics; use `bed`.)
+
+desk | NARROWER than the existing rule. `cumshot on ass bent over desk gif` returned ZERO
+     | Getty/Shutterstock and a grid of real office desks ("bent over desk at office",
+     | "Secretary bent over desk sex gif"). The skill's prefer-`table` rule is specifically
+     | about `desk` + `prone bone` (ergonomics collision). With a CUM anchor on a genuinely
+     | office beat, `desk` binds fine.
+pull out + creampie | reconfirmed as THE aftermath combo (third slot).
+cum dripping        | strong aftermath tag — "Cum Drip Porn Gifs", "Standing Doggy DRIPPING
+                    | CREAMPIE". Note Google may offer a plural correction (thigh->thighs)
+                    | without dropping your token; that is benign, not a failure signal.
+
+balls deep / breeding | CONFIRMED live mined porn tags. Grid slugs "Balls deep creampie",
+                      | "Cum Inside Me: Breeting Creampie", "Red and Bred Creampie",
+                      | "life's too short to pull out". Good finish-aisle variety when the
+                      | obvious `creampie from behind` is already spent by a sibling.
+
+⚠️ A BINDING SETTING TOKEN CAN OUTRANK THE ACT TOKEN. `garage mechanic creampie fuck gif`:
+the occupation BOUND (real garages, grimy, industrial-adjacent — porn-native allow-list
+confirmed) but the aisle became mid-act STUDIO (Brazzers/Dorcel "Car Mechanic Porn GIFs")
+and yield HALVED to 28. So "the setting word works" and "the query still says what you meant"
+are two different questions. Buying the room can cost you the beat.

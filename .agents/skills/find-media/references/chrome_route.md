@@ -830,6 +830,7 @@ run where the only unfetchable URLs were the ones that route was built around.
 | Results are Reddit / TikTok / Facebook | A story or character word flipped the intent classification | Strip every story word; keep act + position + modifier |
 | Bright studio when the beat wants grimy | No anti-studio modifier | Add `amateur` / `real` / `voyeur` / `hidden cam` |
 | Extract count doesn't grow after scrolling | You reached the ~200-tile boundary — scrolling cannot cross it | **Click "More results"** (§4), then re-extract. Measured: 4 dead scrolls → 0 new tiles; each click → +~200. Never call the pool exhausted before the click |
+| A SECOND "More results" click adds ~400 tiles and **zero** extractable urls | You are on an ANIMATED slot. The deeper tiles are `.jpg`/`.webp`, which the `gif\|mp4\|webm` regex cannot use — measured flat, 81→81 | **Animated slots: click ONCE.** Still slots: the second click does pay. Costs ~30–40 s per query on the wrong slot kind (§4) |
 | Grid still flat after clicking "More results" | Pool genuinely exhausted for this phrasing | Run a sibling query — different phrasing, different hosts |
 | A candidate 470s / 410s / lands 0 bytes at exit 0 | A phncdn URL that LOST ITS TICKET | 470 means the query string was stripped. Unescape before extracting and keep `?validfrom&validto&hash` — the bare path is always dead |
 | File is under 1024 B, or `file` says `text/html` | Error page, not media | Delete it AND `options/remove` its URL |

@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 109,
+  "book_revision": 110,
   "register": {
     "person": "third"
   },
@@ -89,7 +89,12 @@
         "sev": "MINOR",
         "what": "credits zero in-chunk sink (idle counter)",
         "status": "DEFERRED-AS-SEED -- primed-but-dormant gauge, first spend = Mission-2 disguise shop"
-      }
+      },
+      "MEDIA 2026-08-06 rev110 — v3 harvest of the 88 approved-NSFW slots: 49 COMPLETE, 1 partial (salvage_session_12_fuck, 149 opts/2 chips), 38 NOT RUN. Stopped by an API session limit, not by any failure. Store 19,939 -> 31,246 options (+11,307); stocked slots 64 -> 114; chip keys 45 -> 95. ZERO installs, ZERO prunes, ZERO slots shrank, approvals unchanged at 177. Resume rule: a slot is done if media_options.json queries[slot_key] is non-empty. See .find-media/RUN_STATE_88.md and v3_run_88_brief.json.",
+      "MEDIA GAP — the dry-dock/work-cradle INTERIOR is not retrievable at t4/t5. Every maritime word is a trap (dock/dry dock/shipyard = homographs; engine room/foundry/hangar drop silently behind a perfect histogram). The 12 salvage_session shelves are right on BODY STATE, approximate on ROOM. Not a query bug.",
+      "MEDIA GAP — 'the crew man balks' (cell_he_does_not_stop_a_crew_man_balks_t5) is a NARRATIVE beat with no porn corpus behind it. Nearest proxy stocked = the observer/cuckold aisle. Agent's suggestion worth LO's call: re-cut so the media carries the gangbang and the PROSE carries the balk.",
+      "MEDIA — ~17 dead phncdn urls per slot sit on the shelves. The browser route strips query strings by construction and phncdn carries its signature THERE, so those tiles render broken in the picker. scripts/fetch_pornhub.py (committed today) captures the signed url; the browser route structurally cannot. Open call: janitor sweep vs leave them.",
+      "NOT COMMITTED — 367 MB of new rung_* pool clips still untracked in games/vesper/output*/. LO's own picks; the repo is public, so it is his call."
     ]
   },
   "player": {

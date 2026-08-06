@@ -1,5 +1,55 @@
 # find-media-v3 — CHANGELOG
 
+## 2026-08-06 (run) — 49 slots harvested; the poison list roughly triples, and two structural gaps close
+
+An 88-slot approved-NSFW run on `vesper` (49 complete when the session limit stopped it,
+31,246 options in the store, +11,307 on the day). Zero installs, zero prunes, zero captchas
+across ~150 Google searches at concurrency 6.
+
+**The through-line: almost every real failure was INVISIBLE to the host histogram.** CFNM
+reversals, naturist content, a magazine brand name, an autocorrected noun, a homograph, an oral
+aisle wearing a choking query's clothes, a shelf of literal cats. All of them returned ~100%
+porn hosts. Only the grid screenshot caught them. The two-pass gate — diagnose BEFORE writing
+the shelf — was added to this file the day before and paid for itself a dozen times over.
+
+**Vocabulary (§Iteration).** ~15 new measured poison tokens, plus three findings that outrank
+any single word:
+- **Name-words need an anchor or they leave porn entirely.** `cowgirl` is a ranch, `doggy` is a
+  dog, and `ragdoll` is a CAT BREED — `limp ragdoll used hard bed gif` returned 78 urls of
+  Giphy/Steam kittens; adding `fucked` flipped it to 69 urls of limp-body porn.
+- **A setting noun not in the corpus is DROPPED, not weak** — often with no "Did you mean" to
+  warn you (`engine room`, `foundry` silent; `hangar` → *"ANGRY workers"*; `bare room` → *"BASE
+  room"*).
+- **Query SHAPE, not just vocabulary.** ~9 tokens with two connectives reads as a sentence and
+  Google falls back to essay matching: 13 urls, zero porn hosts. One function word was the
+  difference. But an 11-token one-connective query cost only a 10% tail — judge the grid.
+- And the recovery: **a poisoned word survives inside an explicitly QUOTED genre phrase.**
+  `"post orgasm torture"` put `pleasuretorture.com` top with zero health-aisle leak.
+
+**Two structural gaps closed (§Evidence-and-persistence).**
+1. `run_manifest.json` has no lock while this skill *mandates* a fan-out. N concurrent agents
+   appending silently drop entries. Caught by an agent that **refused the write and flagged
+   it**; the run's first wave survived only because its six agents finished minutes apart.
+   Now: driver-only, one pass at the end.
+2. `queries/add` does not echo `hosts` back — a successful POST reads as `hostsStored: 0`,
+   indistinguishable from the silent-drop bug. Verify by re-reading the chip.
+
+**Also:** on an ANIMATED slot the second "More results" click adds ~400 tiles and zero
+extractable urls (the deeper tiles are `.jpg`); a THIN shelf on a PRECISE query is not a
+failure; and buying the ROOM can cost you the BEAT — `garage mechanic` binds cleanly and still
+outranked the act, halving yield and moving the aisle from finish to mid-act studio.
+
+**On the driver's own record, since it is the honest part:** agents disproved *five* things the
+driver told them — that `shirtless` works beside a nudity word, that `enf` is safe generally,
+that bondage-furniture queries return gear catalogues, that `sleeping` is a well-populated porn
+tag, and that `ragdoll` only needed `limp` beside it. Each was corrected by measurement, twice
+by a deliberate control query. The driver was reasoning from what *ought* to retrieve; the
+agents measured what does.
+
+**Verified:** 49/49 completed slots carry chips with `hosts` stored; every option carries
+`found_by`; nothing installed, nothing pruned. Full evidence in
+`games/vesper/.find-media/lexicon.md` and `RUN_STATE_88.md`.
+
 ## 2026-08-06 (latest) — the fix below forked on the wrong axis; caught before it ran
 
 **The entry underneath is right about the disease and wrong about the test.** It forked the gate

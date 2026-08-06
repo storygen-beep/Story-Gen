@@ -449,9 +449,62 @@ contract permits, and it is the natural customer for the rolling pool
     and it passes the host histogram, so only the grid glance catches it); `holding hips`
     (posture word, pulls Tenor ass-grabbing and couples-kissing); `motel room` (a setting
     pair that reclassifies the query to generic hotel-room sex).
+  - **Added 2026-08-06, from an 88-slot vesper run — every one measured on a live grid, and
+    every one INVISIBLE to the host histogram unless noted:**
+    `dazed` (it is *Dazed magazine* — pulled dazeddigital, Teen Vogue, Slate, IFFR **while
+    standing next to `fuck`**, so an act anchor does not protect you); `bruises` (impact-play
+    BDSM *and* journalism — ProPublica, New Yorker, an FGM campaign poster); `humiliation`
+    (femdom aisle, REVERSES direction — cfnm.net, femdomdestiny, cuckold.info); `spanking`
+    (aisle-shifter to impact-play/femdom behind a perfect 100%-porn histogram; note `bench` /
+    `bondage bench` / `fuck bench` are SAFE and return the act, not furniture); `standing`
+    alone (art-nude/stock vocabulary that OUTVOTES `naked` — 60/105 stock+wiki+galleries;
+    `standing doggy` is fine); `workers` / `welder` / `dock worker` (trade-native → historical
+    ARCHIVE photography and trade journalism: Alamy, Getty, NPS, the WW2 museum, a welding
+    foundry magazine); `shirtless` / `muscular` (stock-photo staples that outvote a nudity
+    word, and `shirtless man` beside `naked woman` pulls the NATURIST aisle — both parties
+    nude); `dock` / `dry dock` / `shipyard` (homographs — lakeside jetties, boats, a
+    speedboat wake; `dry dock` splits into `dry` + `dock`); `handyman` (parses as the NAKED
+    person's occupation → CFNM reversal); `sleeping` (magazine-editorial — Slate, GQ, New
+    Yorker, Pitchfork; **proved by one-token isolation**: with it, 25 urls / 0 porn hosts;
+    without, 78 urls / 100%); `wrecked` / `senseless` (written-erotica vocabulary → the
+    FICTION aisle: Atavist, a web serial, Goodreads cover assets); `pussy exposed` (drifts to
+    the nude-DISPLAY aisle instead of the action asked for); `enf` **unless** something
+    porn-native holds the query up (it resolves to a SCIENTIFIC ACRONYM — Elsevier, ACS,
+    SpringerNature, zero porn hosts — but it works fine beside `nude woman`).
+  - ⚠️ **NAME-WORDS NEED AN ANCHOR OR THEY LEAVE PORN ENTIRELY.** `cowgirl` is a ranch,
+    `doggy` is a dog, and — measured 2026-08-06 — **`ragdoll` is a CAT BREED**: `limp ragdoll
+    used hard bed gif` returned 78 urls of Giphy/Tenor/Steam *kittens*, zero porn hosts, and
+    adding `fucked` flipped the identical query to 69 urls of limp-body porn. `ragdoll` is
+    otherwise the best term found for an inert body mid-act (six independent confirmations) —
+    it simply is not self-anchoring. `used hard`, `limp`, `hard`, `bed` are NOT anchors.
+  - ⚠️ **A SETTING TOKEN NOT IN THE PORN CORPUS IS DROPPED, NOT WEAK** — and often with **no
+    "Did you mean" line to warn you**. Measured: `engine room`, `foundry` (silent);
+    `hangar` (visibly autocorrected to *"ANGRY workers"*); `bare room` (offered *"BASE
+    room"*). The query silently becomes the bare genre tag, behind a 100%-porn histogram.
+    **Watch the "Did you mean" line, and do the grid glance.**
+  - ⚠️ **QUERY SHAPE, not just vocabulary.** At ~9 tokens with TWO connectives a query reads
+    as a natural-language SENTENCE and Google falls back to long-form-essay matching:
+    `she cums hard WHILE fucked and held down gif` → 13 urls, ZERO porn hosts (New Yorker ×6,
+    Guardian, Wired, Slate, Wikipedia). Dropping the one function word → 82 urls at ~100%.
+    But `while` is not itself poison — `fucked hard while a man watches gif` lands 100%.
+    **Aim for ~6–7 tokens and at most one connective; then judge the GRID, not the count** —
+    an 11-token one-connective query cost only a ~10% editorial tail and was correctly kept.
+  - ⚠️ **A poisoned word is recoverable inside an explicitly QUOTED genre phrase.**
+    `"post orgasm torture" overstimulation gif` returned zero health-aisle hosts and put
+    `pleasuretorture.com` top, despite `orgasm` being right there. Quoting binds the tokens to
+    a tag instead of a topic. Caveat: bound genre tags are shared with drawn corpora, so the
+    tail runs into e621/rule34 — pair with a live-action sibling.
   - **A `hotwifecaps.com`-dominated histogram is a soft warning**, not a pass: that host
     serves caption images rather than act footage, so the query has drifted toward
     text-overlay content.
+  - **A THIN shelf on a PRECISE query is not a failure — do not loosen it.** The most on-beat
+    aisle of one slot returned 43 urls against 85 for a looser sibling, because precise tag
+    pages (PornHub's own "Held Down Gangbang", Sex.com's "Manhandled GIFs") are tile-heavy and
+    serve `.jpg`/`.webp` thumbs the animated regex cannot use.
+  - **Buying the ROOM can cost you the BEAT.** `garage mechanic` is porn-native and binds
+    cleanly — and it still outranked the act token: yield halved to 28 and the aisle moved
+    from *finish* to generic mid-act studio. "The setting word works" and "the query still
+    says what you meant" are two different questions.
   - A setting-driven slot stops at **2** rounds: if the room is absent from the entire grid,
     it is not retrievable, and in v3 that costs nothing at all.
 - **Skip a slot marked `[FAIL]` twice** in `run_manifest.json`.
@@ -539,8 +592,22 @@ games/<game>/.find-media/
 ├── scope/<item_id>.md          # lite briefs
 ├── media_options.json          # the shelf AND its query table, both written by the options API
 ├── media_reviews.json          # the human's verdicts
-└── run_manifest.json           # generator: "v3"
+└── run_manifest.json           # generator: "v3"  ⚠️ DRIVER-ONLY — see below
 ```
+
+⚠️ **`run_manifest.json` has NO LOCK, and this skill mandates a fan-out — so PER-SLOT AGENTS
+MUST NOT WRITE IT.** `media_options.json` is safe under concurrency because every mutation goes
+through `_options_lock` (`api/v1/media_finder.py:307`); the manifest is a plain read-modify-write
+JSON file with no such guard, so N concurrent agents appending to it silently drop entries.
+Caught 2026-08-06 by an agent that **refused the write and flagged it** rather than racing; that
+run's first wave survived only because its six agents happened to finish minutes apart.
+**The DRIVER writes every slot's row in ONE pass at the end of the run**, from the agents'
+returned reports. Per-slot agents report their numbers in the return value and touch nothing.
+
+⚠️ **`queries/add` does NOT echo the stored `hosts` array back.** A successful POST reads back
+as `hostsStored: 0`, which looks exactly like the silent-drop failure. **Verify by re-reading
+the CHIP via `options/list`, never by trusting the POST response** — otherwise an agent
+re-posts a histogram that already landed, or reports a loss that never happened.
 
 **Not written by v3:** `scores.jsonl`, `strips/`, `board*.jpg`, `evidence/<item>/candidates/`,
 `contact_sheet.jpg`. The first three are v2's JUDGE; the last two are v3's own deleted triage
