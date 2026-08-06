@@ -1,5 +1,45 @@
 # find-media-v3 — CHANGELOG
 
+## 2026-08-06 (latest) — the fix below forked on the wrong axis; caught before it ran
+
+**The entry underneath is right about the disease and wrong about the test.** It forked the gate
+on `type: image` vs `type: video`. But **format and content are independent axes, and `type` —
+along with the review panel's derived `media_type` — reports the format one.** So the fix worked
+only where the two happened to agree.
+
+Measured against vesper's 88-slot approved-NSFW run, staged the same day: **32 of the 88 are act
+beats that a `type`-based test calls stills.**
+
+| Slots | TOML `type` | Files on disk | Panel `media_type` | What the `type` test said |
+|---|---|---|---|---|
+| 56 | video | `.webm` | video | act reading — correct |
+| **18** | video | **`.gif`** | **image** | *"is this the right PLACE?"* — asked of a `_t5` sex pool |
+| **14** | image | `.jpg` | image | place reading — but these are `salvage_session_*_t4` and `cell_turns_the_read_out_t5`, act content in still format |
+
+The `.gif` pools are the sharp edge: nothing about them is a still except the container, and the
+panel is what reports `image`. An agent handed *"is this the right room?"* for hardcore porn does
+what `colm_backroom` did in reverse.
+
+**Fixed:**
+
+- `SKILL.md` §3 — new **"The two axes"** block. FORMAT (read from the file extension) decides the
+  extraction regex *and nothing else*; CONTENT (read from the band / tier suffix) decides the
+  query dialect, the histogram reading and the grid glance. Worked examples for all three real
+  combinations, including still+act, which had no home before.
+- `SKILL.md` §3 — the widened-regex paragraph now states that widening carries **no** gate change
+  with it, and that `.gif` is already animated so a gif pool never needs it.
+- `SKILL.md` §4 step 3 — the grid glance selects on CONTENT, with an explicit line that a
+  still-format act slot still has to be *mid-act*, not a post-coital portrait.
+- The stock payload needed nothing: `chrome_route.md` §5 already derives `type`/`media_kind`
+  per url from the url's own extension.
+
+**Verified:** `grep -n "type: image\|media_type"` returns only historical/explanatory mentions —
+no live rule keys on `type` any more. Not yet exercised on a run; the 88-slot harvest is its test.
+
+**The lesson, since this is twice in one day on the same paragraph:** the first fix reached for
+the field that was *visible in the payload* rather than the property it actually meant. When a
+rule needs to know what a beat IS, the tier and the band are the evidence — the container never was.
+
 ## 2026-08-06 (later) — the gate was written for porn and stated as universal; on a still slot it binned the right answer
 
 **"Getty/Shutterstock means the setting words reclassified it as stock photography" was law for

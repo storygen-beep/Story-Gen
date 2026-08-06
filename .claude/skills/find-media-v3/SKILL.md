@@ -206,21 +206,44 @@ re-extracting. Scrolling alone never crosses it — measured 2026-08-06, four sc
 added zero tiles while each click added ~200 and the button persisted (chrome_route.md §4).
 
 **Read the host histogram — it is the query's diagnosis, and it is free.** But ⚠️ **"wrong
-crowd" INVERTS between an act slot and a still slot. Decide which reading applies BEFORE you
-look, from the slot's `type`.**
+crowd" INVERTS between slot kinds, so decide which reading applies BEFORE you look.**
 
-*On an ACT slot (`type: video`, a tiered beat):* Tenor/Wikipedia/BBC means no act anchor.
-Reddit stills/TikTok means a story word leaked in. Getty/Shutterstock means the setting words
-reclassified it as stock photography.
+### The two axes — select on CONTENT, never on `type`
 
-*On a STILL slot (`type: image`, usually `base`/`location`):* **that same stock crowd is the
-TARGET, not the failure.** iStock / Alamy / Dreamstime / Shutterstock / Getty / StockCake /
-Pexels / Unsplash is a query that landed. The wrong crowd here is the opposite one — porn
-aggregators (a sexual word leaked into an SFW slot), or Pinterest/Tumblr/Yelp repost farms
-dominating, which means the query found chatter about the place rather than photographs of it.
+⚠️ **FORMAT and CONTENT are INDEPENDENT, and `type` / the panel's `media_type` report the
+FORMAT one.** Reading the gate off `type` is the bug that shipped 2026-08-06 and was caught
+before it ran.
+
+| Axis | Read it from | Decides |
+|---|---|---|
+| **FORMAT** — animated or still | the declared file **extension** — `.webm/.mp4/.gif` animated, `.jpg/.png/.webp` still; for a pool, what is inside it | the §4 extraction **regex**, and nothing else |
+| **CONTENT** — act or place | the **band / tier suffix** — `_t2`…`_t8` or a `sex/` path = **act**; `base` / `location` / no suffix = **place** | the query dialect, the histogram reading below, and the §4 grid glance |
+
+They do not move together:
+
+- a `_t5` pool of `.gif` files → **animated + act**
+- `scenes/salvage_session_3_t4.jpg` → **still + act**
+- `locations/kess_berth.jpg` → **still + place**
+
+This file said *"STILL slot (`type: image`)"* until 2026-08-06, which sends the first two to
+the place reading — hardcore porn judged on whether it found the right room. Measured against
+vesper's 88-slot run: **32 of the 88** are act beats that a `type`-based test calls stills (18
+`_t5` `.gif` pools the panel reports as `media_type: image`, plus 14 NSFW `.jpg` stills). The
+stock payload needs no fork at all — §5 derives `type`/`media_kind` per url from the url's own
+extension.
+
+*CONTENT = act:* Tenor/Wikipedia/BBC means no act anchor. Reddit stills/TikTok means a story
+word leaked in. Getty/Shutterstock means the setting words reclassified it as stock
+photography.
+
+*CONTENT = place:* **that same stock crowd is the TARGET, not the failure.** iStock / Alamy /
+Dreamstime / Shutterstock / Getty / StockCake / Pexels / Unsplash is a query that landed. The
+wrong crowd here is the opposite one — porn aggregators (a sexual word leaked into an SFW
+slot), or Pinterest/Tumblr/Yelp repost farms dominating, which means the query found chatter
+about the place rather than photographs of it.
 
 ⚠️ **Read the wrong rule and you will bin the right answer.** Measured 2026-08-06 on
-`sex/colm_backroom`, the one still slot in a 24-slot run: the agent had only the act-slot rule,
+`sex/colm_backroom`, the one **place** slot in a 24-slot run: the agent had only the act rule,
 so it **rejected `man and woman dim bar back room doorway` — 80 urls, dreamstime(17)
 shutterstock(12) alamy(10) istockphoto(7) gettyimages(3) — as "reclassified as stock
 photography."** Its four *accepted* queries returned those same hosts. Eighty good candidates
@@ -242,19 +265,21 @@ clusters. v3 spends part of its saved time here: when a slot is comfortably over
 after two queries, **run a third distinct query anyway** — shelf variety comes from query
 variety, and this is the step that produces it.
 
-**Still-image slots (`type: image`, usually the SFW ones) need a WIDENED extract.** The §4
-regex matches `gif|mp4|webm` only, so an image slot harvests as ZERO from a completely full
-grid — measured on `media_lab_g` slot 10: 0 urls with the animated regex, 93 with
-`(?:jpg|jpeg|png|webp)`. Widen the extension group for that slot only, keep every other
-filter, and stock with `type: "image", media_kind: "img"`. Expect the stock-photo crowd
-rather than the porn aggregators: iStock/Alamy/Dreamstime/Shutterstock watermark their
-previews; Pexels/StockCake/Freerange are the clean end. The watermarks land on the shelf
-with everything else — the human sees them on the tiles and picks around them.
+**FORMAT = still → WIDEN the extract, and change nothing else.** The §4 regex matches
+`gif|mp4|webm` only, so a still slot harvests as ZERO from a completely full grid — measured
+on `media_lab_g` slot 10: 0 urls with the animated regex, 93 with `(?:jpg|jpeg|png|webp)`.
+Widen the extension group for that slot only and keep every other filter. `.gif` is already
+in the animated group, so an animated slot never needs this — including a `_t5` pool whose
+files happen to be gifs.
 
-**The whole GATE inverts for these slots, not just the regex** — the stock crowd is the
-target (histogram fork above) and the grid glance asks *"is this the right PLACE?"*, not
-*"does it show the act?"* (§4 step 3). Widening the regex without inverting the gate is the
-half-fix that cost `colm_backroom` 80 candidates.
+**Widening the regex is a FORMAT decision and carries no gate change with it.** A still slot
+that is also an *act* slot keeps the act dialect, the act histogram reading and the act grid
+glance; only its regex moves. Coupling the two is what this file did until 2026-08-06.
+
+*On a still slot whose CONTENT is `place`*, expect the stock-photo crowd rather than the porn
+aggregators: iStock/Alamy/Dreamstime/Shutterstock watermark their previews; Pexels/StockCake/
+Freerange are the clean end. The watermarks land on the shelf with everything else — the human
+sees them on the tiles and picks around them.
 
 ⚠️ **The watermark share is a REPORTABLE number, not a filter.** Dump-all still governs: never
 drop a candidate for carrying a stamp. But say in your close what fraction of the shelf came
@@ -280,20 +305,21 @@ So, per query:
 
 1. **Pass 1 — extract + histogram, write NOTHING.** Return the url list and the host counts.
 2. **Read the histogram.** Wrong crowd → fix one token, re-run pass 1. Do not stock.
-3. **The grid glance — one screenshot, one question.** The question depends on the slot kind,
-   the same fork as the histogram (§3):
-   - **ACT slot (`type: video`): does the first screen mostly SHOW the act?** The histogram
-     cannot see aisles (§3): `media_lab_f` facial passed it on porn hosts and shelved romance
-     couples. Couples kissing on a facial query, editorial stills on a riding query → wrong
-     AISLE.
-   - **STILL slot (`type: image`): is this the right PLACE / SUBJECT?** Match the room, the
-     object, the light and the era against the description. Wrong aisle for a still is a
-     *recognisable landmark* where the beat wants an anonymous room, a bright modern interior
-     where the beat says dim and industrial, a people-first crowd shot where the beat wants
-     the empty space — or a grid of diagrams, floor plans and listings instead of
-     photographs. "Does it show the act" is unanswerable here; an agent given only that
-     question improvises, and improvising is what binned 80 good candidates on
-     `colm_backroom`.
+3. **The grid glance — one screenshot, one question.** The question comes off the **CONTENT
+   axis** (§3), never off `type` — a `_t5` `.gif` pool and a `_t4` `.jpg` still are both
+   `act`, whatever the panel calls their `media_type`:
+   - **CONTENT = act: does the first screen mostly SHOW the act?** The histogram cannot see
+     aisles (§3): `media_lab_f` facial passed it on porn hosts and shelved romance couples.
+     Couples kissing on a facial query, editorial stills on a riding query → wrong AISLE.
+     This holds for a still-format act slot too — the frame has to be *mid-act*, not a
+     post-coital portrait or a clothed lead-in.
+   - **CONTENT = place: is this the right PLACE / SUBJECT?** Match the room, the object, the
+     light and the era against the description. Wrong aisle here is a *recognisable landmark*
+     where the beat wants an anonymous room, a bright modern interior where the beat says dim
+     and industrial, a people-first crowd shot where the beat wants the empty space — or a
+     grid of diagrams, floor plans and listings instead of photographs. "Does it show the
+     act" is unanswerable here; an agent given only that question improvises, and improvising
+     is what binned 80 good candidates on `colm_backroom`.
 
    Either way, treat a wrong aisle exactly like a wrong crowd: change a token (on an act slot
    the mood word is the usual culprit; on a still slot it is the most *specific* setting word),
