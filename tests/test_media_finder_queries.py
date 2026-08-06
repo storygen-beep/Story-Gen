@@ -374,6 +374,66 @@ def test_malformed_docid_is_dropped_but_option_stored(games_root, bad):
     assert "docid" not in entry
 
 
+# ── thumb: the gstatic still the picker renders instead of a 15 MB gif ───────
+
+TBN = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ABC123"
+
+
+def test_add_with_thumb_stores_it(games_root):
+    _add(games_root, "https://x.test/a.gif", query="q one", thumb=TBN)
+    assert _ledger(games_root)["options"]["sex/a_t5.webm"][0]["thumb"] == TBN
+
+
+def test_add_without_thumb_leaves_no_thumb_key(games_root):
+    """A caller that never heard of thumbnails must write a byte-identical row."""
+    _add(games_root, "https://x.test/a.gif", query="q one")
+    assert "thumb" not in _ledger(games_root)["options"]["sex/a_t5.webm"][0]
+
+
+def test_duplicate_add_enriches_a_missing_thumb(games_root):
+    _add(games_root, "https://x.test/a.gif", query="q one")
+    _add(games_root, "https://x.test/a.gif", query="q one", thumb=TBN)
+    entry = _ledger(games_root)["options"]["sex/a_t5.webm"][0]
+    assert entry["thumb"] == TBN
+    assert entry["found_by"] == ["q one"]  # no double-append
+
+
+def test_thumb_is_never_overwritten(games_root):
+    _add(games_root, "https://x.test/a.gif", thumb=TBN)
+    _add(games_root, "https://x.test/a.gif", thumb=TBN + "-different")
+    assert _ledger(games_root)["options"]["sex/a_t5.webm"][0]["thumb"] == TBN
+
+
+def test_identical_duplicate_add_with_thumb_writes_nothing(games_root):
+    _add(games_root, "https://x.test/a.gif", query="q one", thumb=TBN)
+    before = _ledger(games_root)["updated_at"]
+    _add(games_root, "https://x.test/a.gif", query="q one", thumb=TBN)
+    assert _ledger(games_root)["updated_at"] == before
+
+
+@pytest.mark.parametrize("bad", [
+    "https://evil.test/x.jpg",                    # not gstatic — the SSRF pin
+    "https://gstatic.com.evil.test/x.jpg",        # suffix-spoof of the pin
+    "http://169.254.169.254/latest/meta-data/",   # link-local, and not gstatic
+    "file:///etc/passwd",                         # non-http scheme
+    "javascript:alert(1)",
+    "https://encrypted-tbn0.gstatic.com/" + "x" * 2048,   # over the length cap
+])
+def test_untrusted_thumb_is_dropped_but_option_stored(games_root, bad):
+    """`thumb` is rendered AND proxied, unlike `docid`. An unconstrained value
+    would make the shelf a way to aim `proxy` at an arbitrary host — and
+    `_blocked_host` only stops IP literals, so it would not catch a hostname."""
+    res = _add(games_root, "https://x.test/a.gif", query="q one", thumb=bad)
+    assert json.loads(res.content)["ok"]            # the OPTION survives
+    entry = _ledger(games_root)["options"]["sex/a_t5.webm"][0]
+    assert "thumb" not in entry                     # only the FIELD is dropped
+
+
+def test_a_gstatic_subdomain_is_accepted(games_root):
+    _add(games_root, "https://x.test/a.gif", thumb="https://t2.gstatic.com/x.jpg")
+    assert _ledger(games_root)["options"]["sex/a_t5.webm"][0]["thumb"]
+
+
 # ── seed_url: what marks a related-fetch record, and the 409 guard ───────────
 
 def test_queries_add_stores_seed_url(games_root):

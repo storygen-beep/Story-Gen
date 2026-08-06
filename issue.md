@@ -250,7 +250,7 @@ The house is given so easily.
 
 
 Vesper:
-Going random videos from a set of videos.
+[DONE]Going random videos from a set of videos.
 And we are already working on good videos as we are working on find media skill.
 
 
@@ -266,12 +266,24 @@ And we are already working on good videos as we are working on find media skill.
 
 [DONE]multiple search query results
 
-pornhub search too as it has been giving us good data all along the way.
+[DONE]pornhub search too as it has been giving us good data all along the way.
 
 [DONE] First in this page, in the top, we want to add the selected one, like we have for the media pool. Also bring the review feature in this page, review is also allowed even when there is none selected.                                               
 
 
-We have analyze media lab f results and results are more SFW medias, not hot or NSFW or intense medias.
+[DONE]We have analyzed media lab f results and results are more SFW medias, not hot or NSFW or intense medias.
+glance grid and follow search query rules for writing them.
 
 
-GIF being fetched are very short, why is that, like is it some preview or low quality gifs, or what?? we also previously used to download pornhub gif [actually they turn out to be downloaded as video but searched as gifs], and they were actually good.
+
+[DONE]GIF being fetched are very short, why is that, like is it some preview or low quality gifs, or what?? we also previously used to download pornhub gif [actually they turn out to be downloaded as video but searched as gifs], and they were actually good.
+nothing can be done about it
+
+Vesper:
+
+Fill options for all medias.
+
+review each medias again.
+
+We have zero clips from RedGIFs. Zero, out of 26,528.
+

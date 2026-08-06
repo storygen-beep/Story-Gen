@@ -10,8 +10,9 @@ into the game's videos/ source-of-truth — replacing the slot's media.
 No auth, no DB — filesystem + JSON ledger. Local dev tool; relies on open CORS.
 
 Endpoints (under /api/v1/dev/media-finder/):
-- POST options/add     {game, file, url, type, media_kind, query?, docid?} -> append an option
+- POST options/add     {game, file, url, type, media_kind, query?, docid?, thumb?} -> append an option
 - POST queries/add     {game, file, query, urls, stocked, hosts, seed_url?} -> record a SEARCH
+- POST pornhub/fetch   {game, file, query} -> run a PornHub-scoped image search, stock it
 - POST related/fetch   {game, file, url}  -> run the related-feed fetch for one option
 - GET  options/list    ?game=&file=                          -> options + queries for a slot
 - POST options/remove  {game, file, url}                     -> drop an option
@@ -436,6 +437,7 @@ def _add_option(
     origin: str = "",
     query: str = "",
     docid: str = "",
+    thumb: str = "",
 ) -> tuple[bool, int]:
     """Append one option to a slot's shelf. Deduped by url. Returns (added, count).
 
@@ -454,6 +456,13 @@ def _add_option(
     (`tbs=rimg:` is built from its first 8 bytes), so it is stored FIRST-WRITE-WINS:
     a later harvest carrying a different docid for the same url never churns the
     file — the related feed any stored docid reaches is equivalent evidence.
+
+    `thumb` is Google's `encrypted-tbn` still for this result, from the same
+    metadata triple as `docid`. The picker renders it in place of the real file so
+    a panel of PornHub gifs costs ~20 KB a tile instead of ~15 MB. Same
+    first-write-wins rule as `docid`, and same "never lose the option over it"
+    rule: a malformed value drops the FIELD, never the row (validated in
+    `options_add`, which also pins the host — this becomes a url we proxy).
     """
     now = datetime.now(timezone.utc).isoformat()
     q = _canon_query(query)
@@ -476,6 +485,9 @@ def _add_option(
             if docid and not dup.get("docid"):
                 dup["docid"] = docid
                 changed = True
+            if thumb and not dup.get("thumb"):
+                dup["thumb"] = thumb
+                changed = True
             if not changed:
                 return False, len(lst)
             data["game"] = game
@@ -490,6 +502,8 @@ def _add_option(
             entry["origin"] = origin
         if docid:
             entry["docid"] = docid
+        if thumb:
+            entry["thumb"] = thumb
         # A demoted pick has no search behind it, so it never gets a label — it is
         # undo history, and filing it under a query would be a category error.
         if q and origin != "previous":
@@ -680,9 +694,11 @@ def _clear_review_status(game_dir: Path, game: str, file_: str, note: str) -> No
 
 @csrf_exempt
 def options_add(request):
-    """POST options/add {game, file, url, type, media_kind, query?} — store a candidate
-    URL (no download). `type` is the user's label (image/gif/video); `media_kind`
-    (img/video) drives how the option previews. Deduped by url.
+    """POST options/add {game, file, url, type, media_kind, query?, docid?, thumb?} —
+    store a candidate URL (no download). `type` is the user's label
+    (image/gif/video); `media_kind` (img/video) drives how the option previews.
+    `thumb` is an optional gstatic-hosted still the picker renders instead of the
+    real file. Deduped by url.
 
     `query` is optional and the request is byte-identical to the pre-2026-08-05
     behaviour without it — the capture extension still posts without one, and ~19,300
@@ -716,9 +732,22 @@ def options_add(request):
     if docid and not re.fullmatch(r"[A-Za-z0-9_-]{8,64}", docid):
         docid = ""
 
+    # thumb: Google's encrypted-tbn still, same drop-the-field-not-the-option rule.
+    # The HOST pin is load-bearing and not cosmetic: unlike `docid`, this value is
+    # rendered AND proxied by the picker, so an unconstrained field would make the
+    # shelf a way to aim `proxy` at an arbitrary host. `_blocked_host` only stops
+    # IP literals, so it would not catch that.
+    thumb = str(body.get("thumb") or "")
+    if thumb:
+        _t = urlparse(thumb)
+        _thost = (_t.hostname or "").lower()
+        if (_t.scheme not in ("http", "https") or len(thumb) > 2048
+                or not (_thost == "gstatic.com" or _thost.endswith(".gstatic.com"))):
+            thumb = ""
+
     added, count = _add_option(
         game_dir, game, file_, url=url, type_=type_, media_kind=media_kind,
-        query=body.get("query", ""), docid=docid,
+        query=body.get("query", ""), docid=docid, thumb=thumb,
     )
     if not added:
         return JsonResponse({"ok": True, "duplicate": True, "count": count})
@@ -1344,10 +1373,14 @@ _RUNNER_LAUNCH = (
     '--user-data-dir="$HOME/.chrome-find-media" --remote-debugging-port=9222'
 )
 
-# ONE related fetch at a time. The runner is a single browser: concurrent CDP
-# clients contend on its one debug websocket and lose intermittently (measured
-# live 2026-08-05 — rapid ⇢ clicks produced `<ws disconnected> code=1000` connect
-# failures). The picker also gates client-side; this lock is the guarantee.
+# ONE runner fetch at a time, across EVERY runner. The runner is a single browser:
+# concurrent CDP clients contend on its one debug websocket and lose intermittently
+# (measured live 2026-08-05 — rapid ⇢ clicks produced `<ws disconnected> code=1000`
+# connect failures). The picker also gates client-side; this lock is the guarantee.
+#
+# `pornhub_fetch` shares it deliberately. A second lock would let a ⇢ fetch and a ◆
+# search drive the same websocket at once, which is the exact failure this exists to
+# stop. Name kept for history; read it as "the runner lock".
 _RELATED_FETCH_LOCK = threading.Lock()
 
 
@@ -1454,6 +1487,112 @@ def related_fetch(request):
     return JsonResponse(result)
 
 
+@csrf_exempt
+def pornhub_fetch(request):
+    """POST pornhub/fetch {game, file|slot_key, query} — shelve a PornHub-scoped
+    Google Images search as a new labelled bucket, via scripts/fetch_pornhub.py.
+
+    Deliberately a COPY of `related_fetch` rather than a shared helper. The two
+    differ in their exit-code sentences, their argv, and their request contract,
+    and the shared parts are ~15 lines of preflight. Factoring them together
+    before either has run in anger would couple the new path's failure modes to
+    the proven one's; the merge is cheap later and irreversible-feeling now.
+
+    Shares `_RELATED_FETCH_LOCK` — one browser, one fetch, whichever runner.
+    Same threaded-server requirement as `related_fetch`: the script POSTs back
+    into this process once per url.
+    """
+    if request.method != "POST":
+        return JsonResponse({"error": "Method not allowed"}, status=405)
+
+    body = _parse_body(request)
+    game = body.get("game", "")
+    slot_key = body.get("slot_key") or body.get("file", "")
+    file_ = body.get("file") or slot_key
+    query = " ".join(str(body.get("query") or "").split())
+
+    game_dir = _safe_game_dir(game)
+    if game_dir is None or not game_dir.is_dir():
+        return JsonResponse({"error": "Invalid or missing game"}, status=400)
+    if not slot_key or not query:
+        return JsonResponse({"error": "file and query are required"}, status=400)
+    if len(query) > 200:
+        return JsonResponse({"error": "query must be 200 chars or fewer"}, status=400)
+    # argv goes through subprocess.run as a LIST with no shell, so this is hygiene
+    # rather than injection defence — a control character in a Google query is a
+    # copy-paste accident, and it would land in a bucket label nobody can retype.
+    if any(ord(c) < 32 for c in query):
+        return JsonResponse({"error": "query contains control characters"}, status=400)
+
+    try:
+        requests.get("http://localhost:9222/json/version", timeout=1.5)
+    except requests.RequestException:
+        return JsonResponse(
+            {"error": "PornHub-search runner is not connected — no Chrome on :9222. "
+                      f"Launch the dedicated profile: {_RUNNER_LAUNCH}"},
+            status=503,
+        )
+
+    if not _RELATED_FETCH_LOCK.acquire(blocking=False):
+        return JsonResponse(
+            {"error": "Another runner fetch is already going — the runner is one "
+                      "browser, one fetch at a time. Retry when it finishes."},
+            status=429,
+        )
+    script = Path(settings.BASE_DIR) / "scripts" / "fetch_pornhub.py"
+    try:
+        proc = subprocess.run(  # noqa: S603 - fixed script path, validated args
+            [sys.executable, str(script), "--game", game, "--slot-key", slot_key,
+             "--file", file_, "--query", query],
+            capture_output=True, text=True, timeout=180,
+        )
+    except subprocess.TimeoutExpired:
+        return JsonResponse({"error": "PornHub search timed out after 180s"}, status=504)
+    finally:
+        _RELATED_FETCH_LOCK.release()
+
+    tail = (proc.stderr or "").strip()[-400:]
+    if proc.returncode == 3:
+        return JsonResponse(
+            {"error": "Google served a captcha — wait a while and retry. Never "
+                      "solved here.", "detail": tail},
+            status=502,
+        )
+    if proc.returncode == 4:
+        return JsonResponse(
+            {"error": "That search returned nothing on PornHub. Try different "
+                      "terms — one unmistakable act word is what makes a query "
+                      "land.", "detail": tail},
+            status=404,
+        )
+    if proc.returncode == 5:
+        # Answered the preflight but could not be driven. Own the sentence rather
+        # than relaying the stderr tail — that tail is a websocket log.
+        return JsonResponse(
+            {"error": "The find-media Chrome answered but could not be driven. "
+                      f"Quit it and relaunch: {_RUNNER_LAUNCH}", "detail": tail},
+            status=503,
+        )
+    if proc.returncode == 7:
+        return JsonResponse(
+            {"error": "The search came back empty of porn hosts — that is usually "
+                      "the wrong Chrome on :9222, or SafeSearch back ON in the "
+                      "find-media profile.", "detail": tail},
+            status=503,
+        )
+    if proc.returncode != 0:
+        return JsonResponse(
+            {"error": f"runner exited {proc.returncode}", "detail": tail}, status=500
+        )
+    try:
+        result = json.loads((proc.stdout or "").strip().splitlines()[-1])
+    except (ValueError, IndexError):
+        return JsonResponse(
+            {"error": "runner returned no result line", "detail": tail}, status=500
+        )
+    return JsonResponse(result)
+
+
 # =============================================================================
 # URL patterns
 # =============================================================================
@@ -1461,6 +1600,7 @@ urlpatterns = [
     path("options/add", options_add, name="media_finder_options_add"),
     path("queries/add", queries_add, name="media_finder_queries_add"),
     path("related/fetch", related_fetch, name="media_finder_related_fetch"),
+    path("pornhub/fetch", pornhub_fetch, name="media_finder_pornhub_fetch"),
     path("options/list", options_list, name="media_finder_options_list"),
     path("options/remove", options_remove, name="media_finder_options_remove"),
     path("options/clear", options_clear, name="media_finder_options_clear"),

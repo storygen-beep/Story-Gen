@@ -54,6 +54,19 @@
     /* A related-fetch bucket — dashed so "searched for words" and "grew from a
        clip" read as different kinds of chip at a glance. */
     .qchip.related { border-style: dashed; }
+    /* chip + PH as ONE control. They are SIBLINGS, never nested: buildChip
+       returns a <button>, and a button inside a button is invalid HTML and
+       double-fires the click. */
+    .qchip-group { display: inline-flex; flex: 0 0 auto; }
+    .qchip-group .qchip { border-top-right-radius: 0; border-bottom-right-radius: 0; }
+    .ph-btn {
+      flex: 0 0 auto; cursor: pointer; font: inherit; font-size: 0.72rem;
+      padding: 0 7px; color: var(--muted);
+      background: var(--panel, #16181d); border: 1px solid var(--border);
+      border-left: none; border-top-right-radius: 6px; border-bottom-right-radius: 6px;
+    }
+    .ph-btn:hover:not(:disabled) { color: var(--accent); border-color: var(--accent); }
+    .ph-btn:disabled { opacity: 0.4; cursor: default; }
     /* ⇢ on a tile: fetch this clip's Google related-feed, or jump to its chip. */
     .rel-btn {
       font-size: 0.78rem; border: 1px solid var(--border); border-radius: 7px;
@@ -259,6 +272,7 @@
     <div class="opt-head">
       <span>Options</span><span class="opt-count" id="count"></span>
       <button class="refresh-btn" id="rel-open" hidden>⇢ Related</button>
+      <button class="refresh-btn" id="ph-open" hidden>◆ PornHub</button>
       <button class="refresh-btn" id="refresh">↻ Refresh</button>
     </div>
     <div id="options"></div>
@@ -405,36 +419,58 @@
     var relBySeed = {};          // seed url -> that fetch's query record
     var docidByUrl = {};         // url -> Google's id, when the harvest captured one
     var relInFlight = {};        // url -> true while THIS page has a fetch running
-    // ONE fetch at a time, page-wide: the runner is a single browser, and rapid
-    // ⇢ clicks measurably broke its debug websocket (code=1000 mid-connect).
+    // ONE fetch at a time, page-wide, ACROSS EVERY RUNNER: the runner is a single
+    // browser, and rapid ⇢ clicks measurably broke its debug websocket (code=1000
+    // mid-connect). ◆ PornHub searches drive the same browser, so they share this
+    // flag — two of them would reproduce exactly the failure it exists to stop.
     // The server enforces the same rule with a 429; this flag just keeps honest
     // users from ever seeing that error.
-    var relBusy = false;
+    var runnerBusy = false;
 
     function rebuildRelMap() {
       relBySeed = {};
       queries.forEach(function (r) {
-        if (r.source === "related" && r.seed_url) relBySeed[r.seed_url] = r;
+        if (r.source === "related" && r.seed_url) relBySeed[seedKey(r.seed_url)] = r;
       });
     }
 
     function foundBy(o) { return o.found_by || []; }
 
-    function isRelLabel(l) { return l.indexOf("⇢ ") === 0; }
+    // A bucket that lives in the side PANEL — off the shelf and out of the
+    // Searches rail. Keyed on the LABEL PREFIX, never on the query record's
+    // `source`, and that is load-bearing: the server's _ensure_query opens a
+    // SOURCE-LESS stub the moment the first option is stocked, ~10s before
+    // queries/add closes the run. A source-keyed test would leak the whole bucket
+    // onto the grid for 2-4 poll ticks. found_by is correct from the first write.
+    var PANEL_KIND = { "⇢ ": "related", "◆ ": "pornhub" };
+    var PANEL_SOURCES = { related: 1, pornhub: 1 };
 
-    // Found ONLY by related fetches → lives in the right panel, not the shelf.
+    function panelKind(l) {
+      for (var p in PANEL_KIND) if (String(l || "").indexOf(p) === 0) return PANEL_KIND[p];
+      return null;
+    }
+    function isPanelLabel(l) { return panelKind(l) !== null; }
+    function isPanelRecord(r) {
+      return !!PANEL_SOURCES[r.source] || isPanelLabel(r.q);
+    }
+
+    // The server stores seed_url query-stripped, so a SIGNED option url (which
+    // keeps its ticket) would never match. Both sides normalize through here.
+    function seedKey(u) { return String(u || "").split("?")[0]; }
+
+    // Found ONLY by panel fetches → lives in the right panel, not the shelf.
     // The main grid answers "what did the SEARCHES find"; mixing grown-from-a-clip
     // results into it is exactly what the panel exists to avoid. An option a
     // search ALSO found shows in both places — both claims are true.
-    function relOnly(o) {
+    function panelOnly(o) {
       var labels = foundBy(o);
       if (!labels.length || o.origin === "previous") return false;
-      for (var i = 0; i < labels.length; i++) if (!isRelLabel(labels[i])) return false;
+      for (var i = 0; i < labels.length; i++) if (!isPanelLabel(labels[i])) return false;
       return true;
     }
 
     function inBucket(o, q) {
-      if (q === Q_ALL) return !relOnly(o);
+      if (q === Q_ALL) return !panelOnly(o);
       // Undo history belongs to no search — it is reachable through All only.
       // Filing a demoted pick under a query would be a category error.
       if (q === Q_UNLABELLED) return !foundBy(o).length && o.origin !== "previous";
@@ -481,7 +517,7 @@
       // is a reverse — never the storage order, which `at` monotonicity depends on.
       // Related fetches are NOT searches — they live in the right panel, keyed by
       // their seed's thumbnail, never as a text chip here.
-      var recs = queries.filter(function (r) { return r.source !== "related"; })
+      var recs = queries.filter(function (r) { return !isPanelRecord(r); })
                         .slice().reverse();
       var sig = String(activeQ) + " " + recs.map(function (r) {
         return r.q + ":" + bucketCount(r.q) + ":" + (r.hosts ? r.hosts.length : 0);
@@ -494,7 +530,7 @@
       qAllEl.classList.toggle("active", activeQ === Q_ALL);
       qAllEl.querySelector(".count").textContent = String(bucketCount(Q_ALL));
 
-      recs.forEach(function (rec) { qRailEl.appendChild(buildChip(rec.q, rec)); });
+      recs.forEach(function (rec) { qRailEl.appendChild(buildChipGroup(rec)); });
       if (hasUnlabelled) {
         // Everything stocked before searches were recorded. Rightmost because it is
         // the least interesting bucket, so it is the right thing to scroll away.
@@ -534,6 +570,26 @@
       }
       b.addEventListener("click", function () { selectQuery(q); });
       return b;
+    }
+
+    // chip + PH as siblings inside a wrapper. NOT nested: buildChip returns a
+    // <button>, and a <button> inside a <button> is invalid HTML that double-fires.
+    // Only a real text search gets one — Q_UNLABELLED is not a query, so it stays
+    // a bare chip.
+    function buildChipGroup(rec) {
+      var g = el("span", "qchip-group");
+      g.appendChild(buildChip(rec.q, rec));
+      var ph = el("button", "ph-btn", "PH");
+      ph.title = "Search PornHub for this query\n" +
+                 "site:pornhub.com " + rec.q + " gif\n\n" +
+                 "Results land in the ◆ PornHub panel, not on this shelf.";
+      ph.disabled = runnerBusy;
+      ph.addEventListener("click", function (e) {
+        e.stopPropagation();                       // never also select the chip
+        if (!runnerBusy) fetchPornhub(rec.q, ph);
+      });
+      g.appendChild(ph);
+      return g;
     }
 
     function selectQuery(q) {
@@ -594,6 +650,7 @@
           // without the shelf changing.
           updateRelatedButtons();
           syncRelPanel();
+          syncPhPanel();
         })
         .catch(function () {
           if (lastSig !== "__offline__") {
@@ -613,12 +670,12 @@
         return "“" + activeQ + "” ran on " + String(rec.last_at || rec.at || "").slice(0, 10) +
                " and stocked nothing. Nothing was removed — this search came back empty.";
       }
-      var textSearches = queries.filter(function (r) { return r.source !== "related"; });
+      var textSearches = queries.filter(function (r) { return !isPanelRecord(r); });
       if (textSearches.length) {
         return textSearches.length + " search" + (textSearches.length === 1 ? "" : "es") +
                " ran on this slot and nothing is on the shelf. Every one of them is still listed above.";
       }
-      if (relRecords().length) {
+      if (panelRecords("related").length) {
         return "No text searches on this slot — its clips all came from related " +
                "fetches. They live in the ⇢ Related panel (top right of Options).";
       }
@@ -722,6 +779,11 @@
       var isVideo = opt.media_kind === "video";
       var tile = el("div", "tile");
 
+      // Always the REAL file — in the panel too. A static thumbnail is not enough
+      // to judge a clip on: our own measurement says so (a frame strip killed 3 of
+      // 5 already-shortlisted candidates, chrome_route.md:727), and the loop IS the
+      // thing being judged. Weight is handled by paging + loading="lazy" instead,
+      // so only the tiles actually scrolled past ever fetch. See REL_PAGE.
       var thumb = el(isVideo ? "video" : "img", "tile-media");
       thumb.src = proxied(opt.url);
       if (isVideo) {
@@ -767,8 +829,8 @@
         tile._optUrl = opt.url;
         tile._status = status;
         rel.addEventListener("click", function () {
-          var rec = relBySeed[opt.url];
-          if (rec) { openRelPanel("detail", rec); return; }  // fetched → its panel
+          var rec = relBySeed[seedKey(opt.url)];
+          if (rec) { openRelPanel("related", "detail", rec); return; }  // fetched → its panel
           if (!relInFlight[opt.url]) fetchRelated(opt, tile);
         });
         row.append(use, rel, rm);
@@ -791,8 +853,8 @@
         b.textContent = "⇢ fetching…";
         return;
       }
-      var rec = relBySeed[tile._optUrl];
-      if (relBusy && !rec) {
+      var rec = relBySeed[seedKey(tile._optUrl)];
+      if (runnerBusy && !rec) {
         // Another tile's fetch is running — jumping to an existing chip is still
         // fine, but starting a second fetch is not.
         b.disabled = true;
@@ -825,6 +887,11 @@
     function updateRelatedButtons() {
       Object.keys(tileByUrl).forEach(function (u) { syncRelBtn(tileByUrl[u]); });
       Object.keys(relTileByUrl).forEach(function (u) { syncRelBtn(relTileByUrl[u]); });
+      // Same one-browser rule as ⇢: a PH click mid-fetch would 429. Walk the live
+      // buttons rather than repainting the rail — renderQueryBar early-returns on
+      // an unchanged signature, so a repaint is not guaranteed to happen at all.
+      var phs = qRailEl.querySelectorAll(".ph-btn");
+      for (var i = 0; i < phs.length; i++) phs[i].disabled = runnerBusy;
     }
 
     // ---- the related panel ----
@@ -838,15 +905,30 @@
     var relTitleEl = document.getElementById("rel-title");
     var relBackEl = document.getElementById("rel-back");
     var relOpenEl = document.getElementById("rel-open");
-    var relView = { mode: "list", label: null };
+    var phOpenEl = document.getElementById("ph-open");
+    var relView = { kind: "related", mode: "list", label: null };
     var relTileByUrl = {};       // the panel's OWN tile cache — a DOM node can only
                                  // live in one place, and options a search ALSO
                                  // found are already on the main grid.
     var lastRelSig = null;
     var pendingOpenSeed = null;  // set by a successful fetch; opened on next poll
+    var pendingOpenPh = null;    // same, for a ◆ search (keyed by label, not seed)
+    // The panel needs its OWN cap for the same measured reason the grid has one
+    // (see PAGE): every tile is a proxied download with no server-side cache.
+    // Measured on a real PornHub bucket 2026-08-06: median 2.0 MB, mean 4.1 MB,
+    // max 24.1 MB a clip. So a page of 12 is ~49 MB if every tile is scrolled
+    // past — and loading="lazy" means only the ones actually reached ever fetch.
+    // Half the old 24, because that number was chosen when tiles were 20 KB stills.
+    var REL_PAGE = 12;
+    var relShown = REL_PAGE;
 
-    function relRecords() {
-      return queries.filter(function (r) { return r.source === "related" && r.seed_url; })
+    // Prefix-keyed, NOT source-keyed: a run that crashed after stocking but
+    // before queries/add left a source-less stub, and a source-keyed filter would
+    // make those options invisible everywhere — off the grid (prefix), out of the
+    // rail (prefix), and out of the panel too. The seed_url guard lives in the
+    // related RENDERER, where seedThumb(undefined) would actually throw.
+    function panelRecords(kind) {
+      return queries.filter(function (r) { return panelKind(r.q) === kind; })
                     .slice().reverse();
     }
 
@@ -859,8 +941,9 @@
       return m;
     }
 
-    function openRelPanel(mode, rec) {
-      relView = { mode: mode, label: rec ? rec.q : null };
+    function openRelPanel(kind, mode, rec) {
+      relView = { kind: kind, mode: mode, label: rec ? rec.q : null };
+      relShown = REL_PAGE;       // a freshly opened bucket always starts capped
       lastRelSig = null;
       relPaneEl.hidden = false;
       renderRelPanel();
@@ -873,13 +956,14 @@
 
     function renderRelPanel() {
       if (relPaneEl.hidden) return;
-      var recs = relRecords();
+      var recs = panelRecords(relView.kind);
       var rec = relView.label
         ? recs.filter(function (r) { return r.q === relView.label; })[0]
         : null;
-      if (relView.mode === "detail" && !rec) { relView = { mode: "list", label: null }; }
+      if (relView.mode === "detail" && !rec) { relView = { kind: relView.kind, mode: "list", label: null }; }
 
-      var sig = relView.mode + "|" + (relView.label || "") + "|" +
+      var sig = relView.kind + "|" + relView.mode + "|" + (relView.label || "") + "|" +
+                relShown + "|" +
                 recs.map(function (r) { return r.q + ":" + bucketCount(r.q); }).join("|");
       if (sig === lastRelSig) return;
       lastRelSig = sig;
@@ -889,34 +973,51 @@
       relBodyEl.innerHTML = "";
       relBackEl.hidden = relView.mode !== "detail";
 
+      var isPh = relView.kind === "pornhub";
       if (relView.mode === "list") {
-        relTitleEl.textContent = "Related fetches (" + recs.length + ")";
+        relTitleEl.textContent = (isPh ? "PornHub searches (" : "Related fetches (") +
+                                 recs.length + ")";
         if (!recs.length) {
-          relBodyEl.appendChild(el("p", "empty",
-            "No related fetches on this slot yet. Click ⇢ on any clip to grow a bucket from it."));
+          relBodyEl.appendChild(el("p", "empty", isPh
+            ? "No PornHub searches on this slot yet. Click PH on any search chip to run one."
+            : "No related fetches on this slot yet. Click ⇢ on any clip to grow a bucket from it."));
           return;
         }
         recs.forEach(function (r) {
+          // A ⇢ run that crashed after stocking but before queries/add left a
+          // seedless record. It is reachable here (panelRecords is prefix-keyed)
+          // but seedThumb(undefined) would throw, so skip the ROW, not the record.
+          if (!isPh && !r.seed_url) return;
           var row = el("button", "relrow");
-          row.appendChild(seedThumb(r.seed_url));
+          if (isPh) {
+            // No seed: stand the bucket's first clip in for it, thumb if we have one.
+            var first = lastOpts.filter(function (o) { return foundBy(o).indexOf(r.q) >= 0; })[0];
+            if (first) row.appendChild(seedThumb(first.thumb || first.url));
+          } else {
+            row.appendChild(seedThumb(r.seed_url));
+          }
           var meta = el("div", "meta");
-          meta.appendChild(el("div", "name", basename(r.seed_url)));
+          meta.appendChild(el("div", "name",
+            isPh ? String(r.q).replace(/^◆\s*/, "") : basename(r.seed_url)));
           meta.appendChild(el("div", "sub",
             bucketCount(r.q) + " clips · " + String(r.last_at || r.at || "").slice(0, 10) +
             (r.runs > 1 ? " · " + r.runs + " runs" : "")));
           row.appendChild(meta);
-          row.addEventListener("click", function () { openRelPanel("detail", r); });
+          row.addEventListener("click", function () { openRelPanel(relView.kind, "detail", r); });
           relBodyEl.appendChild(row);
         });
         return;
       }
 
       // detail
-      relTitleEl.textContent = basename(rec.seed_url);
+      relTitleEl.textContent = isPh ? String(rec.q).replace(/^◆\s*/, "")
+                                    : basename(rec.seed_url);
       var head = relTitleEl.parentNode;
+      // Removal is deliberately ABOVE the kind branch: scoped to the related path
+      // it would leave the last seed's thumbnail stuck in a PornHub header.
       var oldThumb = head.querySelector("img, video");
       if (oldThumb) oldThumb.remove();
-      head.insertBefore(seedThumb(rec.seed_url), relTitleEl);
+      if (!isPh) head.insertBefore(seedThumb(rec.seed_url), relTitleEl);
 
       var bucket = lastOpts.filter(function (o) {
         return foundBy(o).indexOf(rec.q) >= 0;
@@ -928,12 +1029,25 @@
         return;
       }
       var grid = el("div", "find-grid");
-      bucket.forEach(function (opt) {
+      var want = bucket.slice(0, relShown);
+      want.forEach(function (opt) {
         var tile = relTileByUrl[opt.url];
         if (!tile) { tile = buildTile(opt); relTileByUrl[opt.url] = tile; }
         grid.appendChild(tile);
       });
       relBodyEl.appendChild(grid);
+      if (want.length < bucket.length) {
+        // Panel-local paging. Deliberately NOT renderMore(): that one appends into
+        // optionsEl and mutates the module-level `shown`, so reusing it here would
+        // page the main grid from inside the panel.
+        var more = el("button", "refresh-btn",
+          "Show " + Math.min(REL_PAGE, bucket.length - want.length) +
+          " more (" + want.length + " of " + bucket.length + ")");
+        more.addEventListener("click", function () {
+          relShown += REL_PAGE; lastRelSig = null; renderRelPanel();
+        });
+        relBodyEl.appendChild(more);
+      }
       // Bound the cache: parked (detached) tiles only, FIFO, never an attached one.
       var parked = Object.keys(relTileByUrl).filter(function (u) {
         return !relTileByUrl[u].isConnected;
@@ -942,25 +1056,69 @@
     }
 
     function syncRelPanel() {
-      var n = relRecords().length;
+      var n = panelRecords("related").length;
       relOpenEl.hidden = n === 0;
       relOpenEl.textContent = "⇢ Related (" + n + ")";
-      if (pendingOpenSeed && relBySeed[pendingOpenSeed]) {
-        var rec = relBySeed[pendingOpenSeed];
+      if (pendingOpenSeed && relBySeed[seedKey(pendingOpenSeed)]) {
+        var rec = relBySeed[seedKey(pendingOpenSeed)];
         pendingOpenSeed = null;
-        openRelPanel("detail", rec);
+        openRelPanel("related", "detail", rec);
         return;
       }
       renderRelPanel();
     }
 
-    relOpenEl.addEventListener("click", function () { openRelPanel("list", null); });
-    relBackEl.addEventListener("click", function () { openRelPanel("list", null); });
+    function syncPhPanel() {
+      var recs = panelRecords("pornhub");
+      phOpenEl.hidden = recs.length === 0;
+      phOpenEl.textContent = "◆ PornHub (" + recs.length + ")";
+      if (pendingOpenPh) {
+        var rec = recs.filter(function (r) { return r.q === pendingOpenPh; })[0];
+        if (rec) { pendingOpenPh = null; openRelPanel("pornhub", "detail", rec); return; }
+      }
+      renderRelPanel();
+    }
+
+    function fetchPornhub(terms, btn) {
+      runnerBusy = true;
+      updateRelatedButtons();
+      btn.textContent = "…";
+      toast("Searching PornHub — ~15s…", "ok");
+      fetch(API + "/api/v1/dev/media-finder/pornhub/fetch", {
+        method: "POST",
+        body: JSON.stringify({ game: GAME, file: FILE, slot_key: KEY, query: terms })
+      }).then(function (r) { return r.json().then(function (j) { return { st: r.status, j: j }; }); })
+        .then(function (res) {
+          runnerBusy = false;
+          btn.textContent = "PH";
+          updateRelatedButtons();
+          if (res.j && res.j.ok) {
+            toast("PornHub: stocked " + (res.j.stocked || 0) + " clips", "ok");
+            // Open the bucket we just made, same as ⇢ does — that is the point of
+            // having clicked. The label is the runner's, so take it from the reply.
+            pendingOpenPh = res.j.label || null;
+            lastSig = null;
+            loadOptions();
+            return;
+          }
+          toast((res.j && res.j.error) || ("PornHub search failed (" + res.st + ")"), "err");
+        })
+        .catch(function () {
+          runnerBusy = false;
+          btn.textContent = "PH";
+          updateRelatedButtons();
+          toast("Server unreachable", "err");
+        });
+    }
+
+    relOpenEl.addEventListener("click", function () { openRelPanel("related", "list", null); });
+    phOpenEl.addEventListener("click", function () { openRelPanel("pornhub", "list", null); });
+    relBackEl.addEventListener("click", function () { openRelPanel(relView.kind, "list", null); });
     document.getElementById("rel-close").addEventListener("click", closeRelPanel);
 
     function fetchRelated(opt, tile) {
       relInFlight[opt.url] = true;
-      relBusy = true;
+      runnerBusy = true;
       updateRelatedButtons();          // gray every other ⇢ for the duration
       tile._status.className = "tile-status";
       tile._status.textContent = "fetching related — ~10s…";
@@ -970,7 +1128,7 @@
       }).then(function (r) { return r.json().then(function (j) { return { st: r.status, j: j }; }); })
         .then(function (res) {
           delete relInFlight[opt.url];
-          relBusy = false;
+          runnerBusy = false;
           updateRelatedButtons();
           if (res.j && res.j.ok) {
             tile._status.className = "tile-status ok";
@@ -994,7 +1152,7 @@
         })
         .catch(function () {
           delete relInFlight[opt.url];
-          relBusy = false;
+          runnerBusy = false;
           updateRelatedButtons();
           tile._status.className = "tile-status err";
           tile._status.textContent = "dev server unreachable";

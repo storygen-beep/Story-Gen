@@ -64,13 +64,35 @@ DEFAULT_PORT = 9222
 # The metadata triple: docid, thumbnail tuple, original-file tuple. Same-day join
 # coverage measured at 84/97 — misses are lazy-loaded results, which the scroll
 # pass below mostly recovers.
+# Groups: 1 = docid, 2 = encrypted-tbn thumbnail, 3 = original file url. The
+# thumbnail was matched-but-UNCAPTURED until 2026-08-06; the picker now renders it
+# so triaging a 15 MB signed gif costs ~20 KB instead.
 DOCID_TRIPLE_RE = re.compile(
     r'"([A-Za-z0-9_-]{10,20})",'
-    r'\["https://encrypted-tbn[^"]+",\d+,\d+\],'
+    r'\["(https://encrypted-tbn[^"]+)",\d+,\d+\],'
     r'\["(https?:[^"]+?)",\d+,\d+\]'
 )
 
-MEDIA_RE = re.compile(r'https?://[^"\'\s\\]+?\.(?:gif|mp4|webm)', re.IGNORECASE)
+# The trailing `(?:\?…)?` lets a SIGNED url arrive whole; `normalize_media_url`
+# then decides whether to keep the query. Backslash stays OUT of the class because
+# Google escapes `=` as `=` — `_unescape` runs first, so by match time there
+# are none left. Without that ordering the match dies at the first escape.
+MEDIA_RE = re.compile(
+    r'https?://[^\s"\'<>\\]+?\.(?:gif|mp4|webm)(?:\?[^\s"\'<>\\]*)?',
+    re.IGNORECASE,
+)
+
+# Hosts whose media url is a signed TICKET, where the bare path is 470/173 bytes.
+# Measured 2026-08-06: egl.phncdn.com/gif/<id>.gif serves 200/206 carrying
+# ?validfrom&validto&hash on a 2025→2125 window, and 470 with the query removed.
+# The "PornHub is discovery-only, never a download" doctrine came from fetching
+# the stripped form — i.e. from urls this very function had already broken.
+SIGNED_QUERY_HOSTS = ("phncdn.com",)
+
+# Buckets that live in a side PANEL rather than on the shelf. A prefix is a bucket
+# NAME, never a Google query, so pick_q must skip every one of them.
+PANEL_PREFIXES = ("⇢ ", "◆ ")      # ⇢ related, ◆ pornhub
+PANEL_SOURCES = ("related", "pornhub")
 
 # Hosts that mean the result is furniture, not porn — the picker's chip verdict
 # uses the same list. Only the sanity guard reads this here.
@@ -114,14 +136,15 @@ def pick_q(option: dict, queries: list, seed_url: str) -> str:
     """The text q for the feed URL. The feed is seeded by query AND image; keeping
     the slot's proven query pins the act while the visuals wander — which is what
     keeps a related hop from drifting off the slot's brief."""
-    # A clip stocked BY a related fetch carries the ⇢ label in found_by — that is
-    # a bucket name, never a Google query. Only real text searches qualify.
-    found = [q for q in (option.get("found_by") or []) if not q.startswith("⇢ ")]
+    # A clip stocked BY a panel fetch carries that panel's label in found_by — a
+    # bucket name, never a Google query. Only real text searches qualify. Missing
+    # the ◆ case would send `◆ site:pornhub.com …` to Google as literal query text.
+    found = [q for q in (option.get("found_by") or []) if not is_panel_label(q)]
     if found:
         return found[0]
     for rec in reversed(queries):  # stored oldest-first → newest wins
         q = rec.get("q") or ""
-        if rec.get("source") != "related" and not q.startswith("⇢ "):
+        if rec.get("source") not in PANEL_SOURCES and not is_panel_label(q):
             return q
     return slug_query(seed_url)
 
@@ -148,19 +171,46 @@ def pick_label(seed_url: str, queries: list, taken: set | None = None) -> str:
         candidate = f"{base} ·{n}"
 
 
+def is_panel_label(label: str) -> bool:
+    """True for a bucket that belongs to a side panel rather than the shelf."""
+    return any((label or "").startswith(p) for p in PANEL_PREFIXES)
+
+
+def normalize_media_url(url: str) -> str:
+    """The ONE canonical form of a media url.
+
+    The query string is dropped unless the host SIGNS its urls, where the query
+    IS the fetch ticket and dropping it yields a 470. Host-keyed, never
+    caller-keyed: two runners sharing this module must agree on the key, or the
+    same clip double-stocks as two rows — one dead, one alive, indistinguishable
+    in the picker. `clean_media_urls` and `media_triples` must also agree, or
+    every signed clip is stocked with an empty docid, which permanently disables
+    its ⇢ button.
+    """
+    host = urlparse(url).netloc.lower()
+    if any(host == h or host.endswith("." + h) for h in SIGNED_QUERY_HOSTS):
+        return url
+    return url.split("?")[0]
+
+
 def clean_media_urls(html: str) -> list:
-    """§4's extract, in Python: dedupe, strip querystrings, cut google/gstatic
-    hosts, cut phncdn (discovery-only — not fetchable), cut empty paths."""
+    """§4's extract, in Python: unescape, dedupe, canonicalize, cut google/gstatic
+    hosts, cut empty paths.
+
+    The phncdn cut that lived here until 2026-08-06 is GONE. It rested on a 470
+    measured against urls this very function had already stripped the ticket from,
+    so it was self-confirming: strip the signature, fetch the corpse, record the
+    host as unfetchable. Signed phncdn urls fetch 200 and last until 2125.
+    """
+    html = _unescape(html)
     seen, out = set(), []
     for m in MEDIA_RE.finditer(html):
-        u = m.group(0).split("?")[0]
+        u = normalize_media_url(m.group(0))
         if u in seen:
             continue
         seen.add(u)
         host = urlparse(u).netloc.lower()
         if not host or host.endswith("google.com") or host.endswith("gstatic.com"):
-            continue
-        if host.endswith("phncdn.com"):
             continue
         # Empty-path cut: the filename must be more than a bare extension —
         # `https://host/.gif` is a truncated match, not a clip.
@@ -171,16 +221,33 @@ def clean_media_urls(html: str) -> list:
     return out
 
 
-def _unescape(url: str) -> str:
-    return url.replace("\\u003d", "=").replace("\\u0026", "&").replace("\\/", "/")
+def _unescape(html: str) -> str:
+    """Google JSON-escapes embedded urls. Idempotent, so running it on the whole
+    page and again on a single url is harmless."""
+    return html.replace("\\u003d", "=").replace("\\u0026", "&").replace("\\/", "/")
+
+
+def media_triples(html: str) -> list:
+    """[(file url, docid, thumbnail url)] from the page's metadata triples.
+
+    One parser, two thin readers below — DOCID_TRIPLE_RE's group indices are
+    named in exactly one place so a regex change cannot silently shift them.
+    """
+    html = _unescape(html)
+    return [
+        (normalize_media_url(m.group(3)), m.group(1), m.group(2))
+        for m in DOCID_TRIPLE_RE.finditer(html)
+    ]
 
 
 def docid_join(html: str) -> dict:
-    """{file-url (querystring-stripped) → docid} from the page's metadata triples."""
-    out = {}
-    for m in DOCID_TRIPLE_RE.finditer(html):
-        out[_unescape(m.group(2)).split("?")[0]] = m.group(1)
-    return out
+    """{file url → docid}. Keys are `normalize_media_url`d to match the shelf."""
+    return {url: docid for url, docid, _thumb in media_triples(html)}
+
+
+def thumb_join(html: str) -> dict:
+    """{file url → encrypted-tbn url} — a ~20 KB stand-in for a 15 MB gif."""
+    return {url: thumb for url, _docid, thumb in media_triples(html) if thumb}
 
 
 def host_histogram(urls: list) -> list:
@@ -251,16 +318,20 @@ def _check_captcha(page, html: str):
 
 
 def _stock(api: str, game: str, file_: str, slot_key: str, label: str,
-           urls: list, docids: dict) -> int:
+           urls: list, docids: dict, thumbs: dict | None = None) -> int:
+    thumbs = thumbs or {}
     ok = 0
     for u in urls:
-        is_vid = re.search(r"\.(mp4|webm)$", u, re.IGNORECASE)
+        # Anchor on `(\?|$)` so a SIGNED .webm is still typed as video — a signed
+        # url no longer ends at its extension.
+        is_vid = re.search(r"\.(mp4|webm)(\?|$)", u, re.IGNORECASE)
         r = _api_post(api, "options/add", {
             "game": game, "file": file_, "slot_key": slot_key, "url": u,
             "query": label,
             "type": "video" if is_vid else "gif",
             "media_kind": "video" if is_vid else "img",
             "docid": docids.get(u, ""),
+            "thumb": thumbs.get(u, ""),
         })
         if r.status_code == 200 and r.json().get("ok"):
             ok += 1
@@ -340,6 +411,7 @@ def main() -> None:
             _check_captcha(page, html)
             urls = clean_media_urls(html)
             docids = docid_join(html)
+            thumbs = thumb_join(html)
             hosts = host_histogram(urls)
             if looks_suspiciously_clean(urls):
                 _fail(7, f"only {len(urls)} urls, none on porn hosts — suspiciously "
@@ -347,7 +419,8 @@ def main() -> None:
                          "still OFF, and is it the dedicated find-media Chrome?")
 
             # -- stock, then record — §5 order, never reversed ----------------
-            stocked = _stock(args.api, args.game, file_, args.slot_key, label, urls, docids)
+            stocked = _stock(args.api, args.game, file_, args.slot_key, label,
+                             urls, docids, thumbs)
             rec = _api_post(args.api, "queries/add", {
                 "game": args.game, "file": file_, "slot_key": args.slot_key,
                 "query": label, "source": "related", "seed_url": seed,
@@ -359,7 +432,8 @@ def main() -> None:
                 # appends), re-record. Once.
                 label2 = pick_label(seed, queries, taken={label})
                 print(f"label collision — restocking under {label2!r}", file=sys.stderr)
-                stocked = _stock(args.api, args.game, file_, args.slot_key, label2, urls, docids)
+                stocked = _stock(args.api, args.game, file_, args.slot_key, label2,
+                                 urls, docids, thumbs)
                 rec = _api_post(args.api, "queries/add", {
                     "game": args.game, "file": file_, "slot_key": args.slot_key,
                     "query": label2, "source": "related", "seed_url": seed,

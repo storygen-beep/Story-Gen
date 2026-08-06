@@ -110,15 +110,97 @@ def test_clean_media_urls_applies_every_cut():
     html = " ".join([
         '"https://cdn.porn.test/a/b.gif?x=1"',      # keep, querystring stripped
         '"https://cdn.porn.test/a/b.gif"',          # duplicate after strip
-        '"https://egl.phncdn.com/z.gif"',           # phncdn cut
+        '"https://egl.phncdn.com/z.gif"',           # phncdn is NO LONGER cut
         '"https://encrypted-tbn0.gstatic.com/t.gif"',  # google furniture cut
         '"https://host.test/.gif"',                 # bare-extension cut
         '"https://host.test/real/clip.webm"',       # keep
     ])
     assert fr.clean_media_urls(html) == [
         "https://cdn.porn.test/a/b.gif",
+        "https://egl.phncdn.com/z.gif",
         "https://host.test/real/clip.webm",
     ]
+
+
+# ── signed urls: the ticket is the difference between 200 and 470 ────────────
+
+SIGNED = ("https://egl.phncdn.com/gif/12345678.gif"
+          "?validfrom=1754000000&validto=4882439600&hash=AbC%3D")
+
+# how Google actually writes it into the results page
+SIGNED_ESCAPED = ("https://egl.phncdn.com/gif/12345678.gif"
+                  "?validfrom\\u003d1754000000\\u0026validto\\u003d4882439600"
+                  "\\u0026hash\\u003dAbC%3D")
+
+
+def test_a_signed_phncdn_url_survives_extraction_whole():
+    """The ticket is what makes it fetchable — measured 200 with, 470 without."""
+    got = fr.clean_media_urls(f'"{SIGNED_ESCAPED}"')
+    assert got == [SIGNED]
+    assert "validfrom=" in got[0] and "hash=" in got[0]
+
+
+def test_a_signed_url_does_not_also_emit_its_stripped_twin():
+    """Two rows for one clip — one alive, one 470 — would be indistinguishable
+    in the picker. Dedup is on the exact byte string, so this must not happen."""
+    html = f'"{SIGNED_ESCAPED}" "https://egl.phncdn.com/gif/12345678.gif"'
+    got = fr.clean_media_urls(html)
+    assert got == [SIGNED, "https://egl.phncdn.com/gif/12345678.gif"]
+    assert len([u for u in got if u == SIGNED]) == 1
+
+
+def test_an_unsigned_host_still_loses_its_query_string():
+    """The regression guard for every existing host. SIGNED_QUERY_HOSTS has one
+    entry, so nothing outside phncdn may change behaviour."""
+    html = '"https://cdn.porn.test/a/b.gif?utm_source=x&sid=99"'
+    assert fr.clean_media_urls(html) == ["https://cdn.porn.test/a/b.gif"]
+
+
+def test_clean_media_urls_and_docid_join_agree_on_the_key():
+    """If these disagree, docids.get(url) misses for every signed clip and the
+    whole bucket is stocked with no docid — ⇢ dead forever, silently."""
+    triple = (f'"FvF5n0MlBjcrfM",["https://encrypted-tbn0.gstatic.com/t",1,1],'
+              f'["{SIGNED_ESCAPED}",290,500]')
+    [url] = fr.clean_media_urls(triple)
+    assert url in fr.docid_join(triple)
+    assert fr.docid_join(triple)[url] == "FvF5n0MlBjcrfM"
+
+
+def test_thumb_join_returns_the_encrypted_tbn_url():
+    triple = ('"FvF5n0MlBjcrfM",["https://encrypted-tbn0.gstatic.com/t?id=9",290,499],'
+              '["https://cdn.nsfwgify.com/1/a.gif",290,500]')
+    assert fr.thumb_join(triple) == {
+        "https://cdn.nsfwgify.com/1/a.gif": "https://encrypted-tbn0.gstatic.com/t?id=9"
+    }
+
+
+def test_media_triples_keeps_docid_and_thumb_aligned():
+    """The tbn group became capturing on 2026-08-06, shifting the file url from
+    group 2 to group 3. This is the test that notices if they ever slip."""
+    triple = ('"AbCdEfGh12Xx",["https://encrypted-tbn0.gstatic.com/t",1,1],'
+              '["https://cdn.nsfwgify.com/1/a.gif",1,1]')
+    assert fr.media_triples(triple) == [
+        ("https://cdn.nsfwgify.com/1/a.gif",
+         "AbCdEfGh12Xx",
+         "https://encrypted-tbn0.gstatic.com/t"),
+    ]
+
+
+# ── panel labels are bucket names, never queries ─────────────────────────────
+
+def test_is_panel_label_covers_every_panel_prefix():
+    assert fr.is_panel_label("⇢ kneeling-blowjob")
+    assert fr.is_panel_label("◆ blowjob eye contact")
+    assert not fr.is_panel_label("kneeling blowjob gif")
+    assert not fr.is_panel_label("")
+
+
+def test_pick_q_never_uses_a_pornhub_label_as_a_query():
+    """The ◆ twin of the ⇢ case below. Without it, a related hop from a PornHub
+    clip sends `◆ site:pornhub.com …` to Google as literal query text."""
+    opt = {"found_by": ["◆ blowjob eye contact"]}
+    qs = [{"q": "◆ blowjob eye contact", "source": "pornhub"}]
+    assert fr.pick_q(opt, qs, "https://a.b/830899-ponytail.gif") == "ponytail gif"
 
 
 def test_docid_join_reads_the_metadata_triple():
