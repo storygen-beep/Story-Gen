@@ -1048,7 +1048,7 @@ locationId = "the_waterfront"
 id   = "weapon_scene"
 name = "Put him under"
 blocks = [
-  { type = "video", props = { pool_dir = "sex/arousal_weapon_use", pool = 4, description = "A woman straddling and riding a slumped, half-conscious man against a wall in a dim space, his head lolling back.", search_queries = ["woman riding dazed man against wall", "femdom limp man dark"] } },
+  { type = "video", props = { pool_dir = "sex/arousal_weapon_use_t5", pool = 4, description = "A woman straddling and riding a slumped, half-conscious man against a wall in a dim space, his head lolling back.", search_queries = ["woman riding dazed man against wall", "femdom limp man dark"] } },
   { type = "paragraph", content = "She thumbs the emitter and the doorman's whole face changes — the bored menace gone, breath short, the hand that wanted coin wanting something else now. She walks him back into the shadow of the stair, gets his cock out, and rides him against the wall in quick flat strokes, fast and clinical, giving him nothing but the friction. He spills into her with his eyes rolling white and sags down the bricks, under. He'll wake on the steps in an hour with no memory, and never know she walked past him. The stairs are open." },
 ]
 [canvases.nodes.exit_block]
@@ -1548,7 +1548,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", items = [
       { type = "trait", subject = "player", trait_key = "core_strain", operator = "lt", value = 24 },
     ] } }, blocks = [
-    { type = "video", props = { file = "sex/cell_sleep_nominal.webm", description = "man fucking sleeping woman from behind in dark bedroom pov", search_queries = ["man fucking sleeping woman from behind in dark bedroom pov"] } },
+    { type = "video", props = { file = "sex/cell_sleep_nominal_t5.webm", description = "man fucking sleeping woman from behind in dark bedroom pov", search_queries = ["man fucking sleeping woman from behind in dark bedroom pov"] } },
     { type = "paragraph", content = "She's down on the mat with her back to the wall, trying to drop under, when the weight settles in behind her and Bastien starts using her before she's all the way awake — cock worked into her cunt from behind, unhurried, one hand laid flat on the sternum plate so he can feel it tick while he does it. The charge climbs with every slow shove and runs down to the empty socket at the base of her spine and stops there, nowhere to go, stacking behind the plate in the dark." },
     { type = "paragraph", content = "He finishes inside her and the read-out clicks up one notch and holds — it never drops — and he wipes off on the small of her back and leaves her where she lies. *Logged as rest. It isn't.*" },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Don't mind me. Go back under, filthy thing — I'm just reading you." },
@@ -1560,7 +1560,7 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "core_strain", operator = "gte", value = 24 },
       { type = "trait", subject = "player", trait_key = "core_strain", operator = "lt",  value = 48 },
     ] } }, blocks = [
-    { type = "video", props = { file = "sex/cell_sleep_hot.webm", description = "multiple men using woman in bed at night gangbang dark pov", search_queries = ["multiple men using woman in bed at night gangbang dark pov"] } },
+    { type = "video", props = { file = "sex/cell_sleep_hot_t5.webm", description = "multiple men using woman in bed at night gangbang dark pov", search_queries = ["multiple men using woman in bed at night gangbang dark pov"] } },
     { type = "paragraph", content = "She surfaces because there are hands on her that aren't one man's — the crew have let themselves in in the dark, and she wakes already being used, a cock working her cunt while another feeds itself into her mouth and a third pair of hands just paws her tits like they're checking she's still warm. She can't tell how many; they pass her between them in the black, laughing low, and every load that goes in stacks up behind the plate with the drain gone and the socket empty, filling and filling with nowhere to send it." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Left the door open for the lads. She sleeps better with a hole full — don't you, slut." },
     { type = "paragraph", content = "\"She's awake — watch, the little machine's awake.\"" },
@@ -1573,7 +1573,7 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "core_strain", operator = "gte", value = 48 },
       { type = "trait", subject = "player", trait_key = "core_strain", operator = "lt",  value = 72 },
     ] } }, blocks = [
-    { type = "video", props = { file = "sex/cell_sleep_faulting.webm", description = "rough gangbang woman held down spitroast marked bed dark", search_queries = ["rough gangbang woman held down spitroast marked bed dark"] } },
+    { type = "video", props = { file = "sex/cell_sleep_faulting_t5.webm", description = "rough gangbang woman held down spitroast marked bed dark", search_queries = ["rough gangbang woman held down spitroast marked bed dark"] } },
     { type = "paragraph", content = "They don't let her stay under at all now — every time she starts to slip they haul her back onto her knees and use her hard, one fisting her hair down onto his cock till she gags and drools, another driving into her from behind, handprints coming up on her ass and a set of fingermarks banding her throat. Then they flip her and take her in the ass — the drain inverted, the thing that used to TAKE from a man now only pouring INTO her — and Bastien holds her jaw and makes her come on it because forcing it spikes the read-out fastest, and the number jumps two, three, climbing in the dark while she can't tell sleep from being fucked." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Make her come — that's what moves the count, not the fucking. Force it. Watch the plate, not her." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Up it goes. Look at that. Passed round all night and still filling." },
@@ -1586,7 +1586,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", items = [
       { type = "trait", subject = "player", trait_key = "core_strain", operator = "gte", value = 72 },
     ] } }, blocks = [
-    { type = "video", props = { file = "sex/cell_sleep_failing.webm", description = "exhausted limp woman used rough gangbang dark heavy", search_queries = ["exhausted limp woman used rough gangbang dark heavy"] } },
+    { type = "video", props = { file = "sex/cell_sleep_failing_t5.webm", description = "exhausted limp woman used rough gangbang dark heavy", search_queries = ["exhausted limp woman used rough gangbang dark heavy"] } },
     { type = "paragraph", content = "By the small hours her body's half-quitting under them — legs gone loose, breath sawing, the sternum plate flickering its read-out where it should hold steady — and none of them slow down for it. The charge has stacked up so high with nowhere to drain that every load now lands as a wet flare of pain instead of anything else, and they force her over the edge anyway, again, the pleasure coming out the wrong way and hurting, the plate stuttering the number up past where the light stays on. She's limp between them, used front and back, drooled-on and slack, and Bastien just leans in close to read the flicker off her chest and not her face at all." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "It's browning out. Good — keep going. I want to see how high it climbs before the light won't hold." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Not her, idiot — the plate. Watch the plate. She's just the socket." },
