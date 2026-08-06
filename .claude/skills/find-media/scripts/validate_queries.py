@@ -66,7 +66,6 @@ from scene_semantics import (  # noqa: E402,F401
     ANIMATED_EXTENSIONS,
     ANIMATED_KEYWORDS,
     BORDERLINE_TIERS,
-    FormatCheck,
     NON_CANVAS_TYPES,
     NSFW_TIERS,
     RATING_BORDERLINE,
@@ -77,6 +76,7 @@ from scene_semantics import (  # noqa: E402,F401
     SFW_TIERS,
     STATIC_EXTENSIONS,
     STATIC_KEYWORDS,
+    FormatCheck,
     TagProposal,
     check_format_alignment,
     classify_content_family,
@@ -137,6 +137,10 @@ SOLO_TRAP_ACTIONS = {
 
 VANILLA_TERMS_FOR_NSFW_CHECK = {
     "romantic", "sweet", "tender", "loving",
+    # media_lab_f 2026-08-05: these four rode along beside a hard act anchor and still
+    # dragged the results to the romance/stock cluster (facial slot: 17% on-act vs the
+    # act-first control's 50%, 45 Dreamstime stills vs 0).
+    "gentle", "intimate", "passionate", "sensual",
 }
 
 
@@ -227,9 +231,25 @@ def check_tier_alignment(query: str, tier: str) -> tuple[bool, list[str]]:
     has_act_anchor = any(re.search(rf"\b{re.escape(t)}\b", lower) for t in ACT_ANCHORS)
 
     if tier in SFW_TIERS and has_sexual:
-        issues.append(f"tier_mismatch:sfw_query_has_sexual_term")
-    if tier in NSFW_TIERS and not has_sexual and has_vanilla:
-        issues.append(f"tier_mismatch:nsfw_query_too_vanilla")
+        issues.append("tier_mismatch:sfw_query_has_sexual_term")
+    # For the vanilla branches, "has an act word" must consult BOTH lists: `cumshot`, `bj`,
+    # `anal`, `deepthroat` live only in ACT_ANCHORS, so has_sexual alone calls a
+    # cumshot query act-less. (has_sexual keeps its original narrow job in the SFW branch
+    # above: `cowgirl` leaking into a t2 slot must still flag, and cowgirl is
+    # deliberately not an anchor.)
+    has_any_act = has_sexual or has_act_anchor
+
+    if tier in NSFW_TIERS and not has_any_act and has_vanilla:
+        issues.append("tier_mismatch:nsfw_query_too_vanilla")
+
+    # A mood word BESIDE an act word is not saved by the act word — Google weights every
+    # token, and the vanilla ones have a vastly larger SFW cluster to fall into. Measured
+    # on media_lab_f (2026-08-05): `passionate real couple cumshot gif` passed this
+    # validator clean and shelved romance couples at a 17% on-act rate (45 Dreamstime
+    # stills; the act-first control ran 50%). Distinct issue string on purpose:
+    # too_vanilla = no act word at all; dilution = act word present but outvoted.
+    if tier in NSFW_TIERS and has_any_act and has_vanilla:
+        issues.append("vanilla_dilution:mood_words_pull_stock_results")
 
     # An NSFW query with no ACT word does not reach porn at all — it gets classified as a
     # mainstream search and returns stock photography. Position names do not save it: they are

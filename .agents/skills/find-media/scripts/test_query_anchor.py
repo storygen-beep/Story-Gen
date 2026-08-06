@@ -96,3 +96,79 @@ def test_inflections_are_listed_not_prefix_matched():
 def test_sexy_is_not_an_act():
     """The reason prefix matching was rejected: `sex` would swallow "sexy", a mood."""
     assert ANCHOR_ISSUE in _issues("sexy secretary office chair gif", "t5")
+
+
+# ── `bj`, added 2026-08-03 after the enforced rule flagged the BETTER query ──────────────
+
+def test_bj_anchors_a_query():
+    """The corpus's own abbreviation. It beat `blowjob` on two vesper slots — outdoors
+    (real alleys vs indoor studio kneeling) and indoors (`bj chair`/`bj couch` are
+    Sex.com's own tag names). Before this it was flagged `no_act_anchor`, i.e. the rule
+    penalised the query that worked."""
+    assert ANCHOR_ISSUE not in _issues("bar bj chair seated gif", "t5")
+    assert ANCHOR_ISSUE not in _issues("public alley bj gif amateur", "t5")
+
+
+def test_bj_does_not_match_inside_other_words():
+    """A 2-letter anchor is the riskiest kind, so pin the substring case explicitly.
+    `\\bbj\\b` cannot match "objects"/"subject" — the `b` there follows a word char."""
+    for innocent in ("objects on the desk", "subject of the photo", "objection"):
+        assert ANCHOR_ISSUE in _issues(innocent, "t5"), innocent
+
+
+# ── mood words, added 2026-08-05 after media_lab_f shelved romance on a facial slot ──────
+#
+# Measured: `tender intimate facial gif`-class queries built a 17% on-act shelf vs 50% for
+# the act-first control (media_lab_h), 36% romance slugs, 45 Dreamstime stills vs 0. Google
+# weights every token; the mood words have a vastly larger SFW cluster to fall into, so
+# they outvote the act word. Two branches now cover it: `too_vanilla` (mood words, no act
+# word) and `vanilla_dilution` (mood words BESIDE an act word — the case the old check
+# waved through).
+
+DILUTION_ISSUE = "vanilla_dilution:mood_words_pull_stock_results"
+TOO_VANILLA_ISSUE = "tier_mismatch:nsfw_query_too_vanilla"
+
+
+def test_the_query_that_passed_clean_now_flags():
+    """media_lab_f ran `passionate real couple cumshot gif` — the old validator passed it
+    with zero issues (`passionate` unlisted, `cumshot` anchoring) and the shelf went
+    Dreamstime. The exact query must flag now."""
+    assert DILUTION_ISSUE in _issues("passionate real couple cumshot gif", "t5")
+
+
+def test_mood_beside_act_anchor_flags():
+    """`gentle` joined the vanilla list, and `cumshot` (ACT_ANCHORS-only, absent from
+    SEXUAL_TERMS_FOR_SFW_CHECK) now counts as act presence for the vanilla branches."""
+    assert DILUTION_ISSUE in _issues("gentle loving cumshot gif", "t5")
+
+
+def test_mood_beside_sexual_term_flags():
+    """The original hole: with `blowjob` in SEXUAL_TERMS_FOR_SFW_CHECK, has_sexual was
+    true and the old `not has_sexual` guard suppressed the vanilla check entirely."""
+    assert DILUTION_ISSUE in _issues("tender loving blowjob gif", "t5")
+
+
+def test_mood_without_act_word_is_still_too_vanilla():
+    """`facial` is deliberately NOT an act anchor (it is a spa treatment), so f's
+    `tender intimate facial gif` is the no-act case, not the dilution case."""
+    issues = _issues("tender intimate facial gif", "t5")
+    assert TOO_VANILLA_ISSUE in issues
+    assert DILUTION_ISSUE not in issues
+
+
+def test_old_too_vanilla_branch_is_intact():
+    assert TOO_VANILLA_ISSUE in _issues("romantic bedroom couple", "t5")
+
+
+def test_act_first_query_passes_both_mood_checks():
+    """The shape the doctrine wants: act + position + anti-studio + gif."""
+    issues = _issues("facial cumshot amateur gif", "t5")
+    assert DILUTION_ISSUE not in issues
+    assert TOO_VANILLA_ISSUE not in issues
+
+
+def test_sfw_tiers_are_exempt_from_mood_checks():
+    """`sweet` in a base-tier slot is a lifestyle word, not a leak."""
+    issues = _issues("sweet couple morning kitchen", "base")
+    assert DILUTION_ISSUE not in issues
+    assert TOO_VANILLA_ISSUE not in issues

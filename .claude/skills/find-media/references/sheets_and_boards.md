@@ -118,7 +118,7 @@ python3 .claude/skills/find-media/scripts/video_frames.py \
   ≥ 51200 B).
 - A whole batch of `no_frame:` means the **fetch** was refused or empty, not that the clips are
   bad: check the bytes on disk for an HTML error page saved under a media name. It will not be a
-  phncdn refusal, because phncdn urls are never queued — PornHub is discovery-only
+  phncdn refusal — but note phncdn IS queueable since 2026-08-06 (signed urls fetch 200)
   (`egl.phncdn.com/gif/<id>.gif` returns 470 on clearnet and over Tor, and the real media url is
   signed, time-limited and IP-locked). Read those results for vocabulary, never for a file.
 

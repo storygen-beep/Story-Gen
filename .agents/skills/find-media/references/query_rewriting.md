@@ -181,8 +181,17 @@ What `check_tier_alignment()` actually enforces, and only this:
 
 - tier ∈ {`base`,`t2`,`t3`,`location`} + any `SEXUAL_TERMS_FOR_SFW_CHECK` hit →
   `tier_mismatch:sfw_query_has_sexual_term`.
-- tier ∈ {`t5`…`t8`} + no sexual term + a `VANILLA_TERMS_FOR_NSFW_CHECK` hit
-  (`romantic` `sweet` `tender` `loving`) → `tier_mismatch:nsfw_query_too_vanilla`.
+- tier ∈ {`t5`…`t8`} + a `VANILLA_TERMS_FOR_NSFW_CHECK` hit (`romantic` `sweet` `tender`
+  `loving` `gentle` `intimate` `passionate` `sensual`) → one of two issues, split by
+  whether the query carries an act word (`SEXUAL_TERMS_FOR_SFW_CHECK` ∪ `ACT_ANCHORS` —
+  both lists, because `cumshot`/`bj`/`anal` live only in the second):
+  - no act word → `tier_mismatch:nsfw_query_too_vanilla`.
+  - act word present → `vanilla_dilution:mood_words_pull_stock_results`. Added 2026-08-05
+    after `media_lab_f`: the old check was suppressed by any act presence, so `passionate
+    real couple cumshot gif` validated clean and shelved a 17%-on-act romance pile (45
+    Dreamstime stills; the act-first control ran 50%). A mood word is never saved by the
+    act word beside it — Google weights every token and the mood words have the bigger
+    SFW cluster.
 
 Three blind spots to hold in your head, because the report will not mention them:
 
@@ -192,10 +201,11 @@ Three blind spots to hold in your head, because the report will not mention them
    happily, but `scene_semantics.SFW_TIERS` is `{base, t2, t3, location}` — t0/t1 sit in no
    tier set, so a t0 slot carrying `blowjob` passes silently. (`tier_format_check.py` does
    know t0/t1 at the pre-install gate; the query validator does not.)
-3. **On `--target pornhub`, the vanilla check can only ever fire on `romantic` or
-   `sweet`** — `strip_banned()` runs first inside `validate_query()` and `tender`/`loving`
-   are banned words, so they are gone before `check_tier_alignment()` sees the string. On
-   the default Google target nothing strips them, so all four vanilla terms stay live.
+3. **On `--target pornhub`, the vanilla checks can only ever fire on `romantic`, `sweet`
+   or `gentle`** — `strip_banned()` runs first inside `validate_query()` and
+   `tender`/`loving`/`intimate`/`passionate`/`sensual` are banned words, so they are gone
+   before `check_tier_alignment()` sees the string. On the default Google target nothing
+   strips them, so all eight vanilla terms stay live.
 
 Tier itself comes from the FILENAME (`infer_tier_tagged`: `_t0`…`_t8`, or `_base`,
 else base-and-untagged). A wrong or missing suffix is a content-rating problem, not a

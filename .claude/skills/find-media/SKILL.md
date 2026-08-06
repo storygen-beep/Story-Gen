@@ -301,7 +301,7 @@ against each other is meaningless. Google takes verbose natural language but sto
 character words poison the intent (`back alley blowjob gif drunk guy night` returned Reddit
 movie stills, Facebook and TikTok; the same query minus `drunk guy` worked). PornHub's own
 search box takes 2–3 tags and returns literally 0 at 4+ — that dialect still matters because
-its tag vocabulary is what you mine, but PornHub is **discovery-only** and you never retrieve
+its tag vocabulary is what you mine, and since 2026-08-06 PornHub is **also fetchable** — you retrieve
 a file from it (§3). Full split in `references/query_rewriting.md` Part 2.
 
 ## 3. SEARCH — drive the user's own Chrome
@@ -337,7 +337,8 @@ it is *surfaced, not yet characterised* — try it, record what it did, don't as
 
 Do NOT call `read_page` / `get_page_text` on a results page; accessibility snapshots are the
 whole reason the old browser-automation path cost ~30× the tokens per action. Exact tool
-calls, the regex, the mandatory `.split('?')[0]`, and the scroll-then-re-extract self-check
+calls, the regex, the mandatory `.split('?')[0]`, and the extract → click "More results" →
+re-extract self-check (scrolling alone never crosses Google's ~200-tile boundary)
 are in `references/chrome_route.md` §§2–4. Which hosts serve what is in
 `references/media_sources.md`.
 
@@ -360,6 +361,13 @@ POST /api/v1/dev/media-finder/options/remove {game, file, url}
 POST /api/v1/dev/media-finder/options/clear  {game, file, before}      (api/v1/media_finder.py:331)
 POST /api/v1/dev/media-finder/grab           {game, file, url, source}
 ```
+
+⚠️ **`options/list` returns stored records verbatim, and the stored names are NOT the names you
+POST.** The `query` you send on `options/add` comes back as **`found_by`, a list** (a url two
+sibling queries both returned carries both labels); query records are keyed **`q`**. Neither
+carries a `query` key, and no legacy one exists — an unlabelled option simply has no
+`found_by`. Checking an option for `query` reports 100% unattributed on a perfect shelf. Full
+shape in `references/chrome_route.md` §5.
 
 `docid` = Google's index id for the image, paired by §4's join in `chrome_route.md` —
 send it on every stock; it is what makes "fetch related" (§5b there) one navigation.

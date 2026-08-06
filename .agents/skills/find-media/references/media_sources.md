@@ -64,23 +64,47 @@ catalog, so it arrives as pollution on any query with story words in it.
 **⚠️ `static-ca-cdn.eporner.com` failed every fetch attempted in that run** (URLError),
 despite being in the corpus above. Re-measure before relying on it.
 
-### PornHub is discovery-only — never a download
+### PornHub is FETCHABLE — the ticket is the whole story
 
-`egl.phncdn.com/gif/<id>.gif` is **not a fetch endpoint.** Measured: **470 on clearnet and
-470 over Tor**, every id tried. It is not a header problem — the backend already sends a
-full browser UA *and* `Referer: https://www.pornhub.com/` for phncdn hosts
-(`_REFERER_BY_HOST` / `_fetch_headers`, `api/v1/media_finder.py:139-166`) and still gets
-nothing back.
+⚠️ **This section said the exact opposite until 2026-08-06.** The reversal matters more
+than the rule, so read it first: the old "470 on clearnet and over Tor, every id tried"
+measurement was REAL, and it was taken on urls this skill had already broken itself.
 
-The real PornHub media URL, read off a gif page, is
-`el2.phncdn.com/pics/gifs/<nnn>/<nnn>/<nnn>/<id>a.webm?validfrom=…&validto=…&ipa=1&hash=…`
-— **signed, time-limited, IP-locked.** Our extraction strips query strings (the browser JS
-tool blocks URLs carrying query data), so the signature is destroyed by construction. And
-`pornhub.com` itself is unreachable on clearnet from this machine (curl exit: 000).
+The url Google's results page actually carries is **signed**:
 
-⇒ **A PornHub-hosted Google result is worth reading for its title and its tags — that is
-free vocabulary — and must not be queued for download.** Read it, mine it, skip it as a
-candidate.
+    https://egl.phncdn.com/gif/<id>.gif?validfrom=<n>&validto=<n>&hash=<sig>
+
+Measured 2026-08-06 across 53 urls from one query:
+
+| | |
+|---|---|
+| signed url, GET | **200**, GIF89a, 1–40 MB (avg ~15), up to 1280x720, 240 frames @25fps = 10.0s |
+| signed url, HEAD — with Referer / without / bare | **200 / 200 / 200** |
+| same url, query string removed | **470**, 173 bytes — 100% dead |
+| ticket window | `validfrom` 2025 → `validto` **2125**. Ninety-nine years. NOT perishable |
+
+`MEDIA_RE` was lazy and terminated at the file extension, so the ticket was never
+captured. We fetched the bare path, got 470, and wrote "not a fetch endpoint" into eight
+files. Three further rules were then built on that conclusion — the phncdn extract cut,
+"no header fixes it", and `_REFERER_BY_HOST`'s phncdn row. **None of them was ever the
+problem.** No header is needed at all: a signed url serves with no UA and no Referer.
+
+Google JSON-escapes the url in its HTML (`=` as `\u003d`, `&` as `\u0026`), so
+`_unescape` must run **before** extraction — widening the regex alone is not enough,
+because the character class stops at the backslash. `normalize_media_url`
+(`scripts/fetch_related.py`) keeps the query string for hosts in `SIGNED_QUERY_HOSTS`
+and strips it everywhere else, so nothing outside phncdn changed behaviour.
+
+**The 2-hour ticket is a DIFFERENT url class.** `kl*.phncdn.com/pics/gifs/…/<id>.webm?…`,
+minted on a live PornHub page, expires in 7200s. This route never touches it — and never
+touches `pornhub.com`, which is DNS-sinkholed *and* SNI-reset (9 of 10 connections die,
+and the survivor returns a 302, not content) and separately refused by the
+claude-in-chrome extension. Only the CDN is used, and the CDN is open without a VPN.
+
+⇒ **Stock phncdn like any other host.** Run a PornHub-scoped search with the ◆ PH button
+on any query chip in the picker, or `scripts/fetch_pornhub.py` directly. The clips are
+large GIFs; `.gif` renders animated in a built game through `<img>`
+(`generators/v2.py:29-30`), so nothing here is blocked on a transcode.
 
 **Surfaced, not yet characterised**: `porngipfy.com` (1 hit in the query above — a
 WordPress gif blog with descriptive slugs; whether it serves us bytes is unmeasured).
@@ -228,7 +252,7 @@ capture endpoint, and manual `curl`.
 |---|---|
 | Always send a browser `User-Agent` | Picky CDNs answer a bare request with 410/470 — a 0-byte file that looks like a successful download. `download_direct` already sends one on every request including the HEAD (`api/v1/dev.py:213-217`), so `grab` is covered; **your manual `curl` is not** |
 | **Never send `Referer: https://www.google.com/`. Send none, or the URL's own origin.** | Off-site referer = hotlink protection. Measured 403 on `cdn.sexxxgif.com`, `cdn.nsfwgify.com`, `porngif.co`, `cdn.xgifer.com`, `cdn.hardcoregify.com`; 200 on all five with no referer and with their own origin. **13 of 29 fetches died on this in one run**, and it presents as "those hosts are down". `_fetch_headers` (`api/v1/media_finder.py:158-159`) already falls back to the URL's own origin, so `grab` is safe — a hand-rolled fetcher is not. Full table in `chrome_route.md` §6 |
-| Don't hand-fetch phncdn at all | The backend already attaches the UA *and* the pornhub `Referer` and it still returns 470. There is no header that fixes it — see "PornHub is discovery-only" above |
+| phncdn needs NO headers at all | Measured 2026-08-06: a SIGNED url serves 200/206 with no UA and no Referer. The old "no header fixes it" note was diagnosing a stripped ticket, not a header — see "PornHub is FETCHABLE" above |
 | `source` is a free label except `"redgifs"` | Only `redgifs` triggers the Bearer-token fetch (`api/v1/media_finder.py:475-478` on grab, `:591-594` on proxy). No source needs Tor — `_TOR_SOURCES` is empty (`media_finder.py:551`) |
 
 **Failure signatures**

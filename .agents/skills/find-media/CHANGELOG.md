@@ -1,5 +1,200 @@
 # find-media — CHANGELOG
 
+## 2026-08-06 (later) — §5's stocking loop cannot finish inside a `javascript_tool` call, and the histogram it POSTs was being thrown away
+
+Two defects in the same code block, both found by running it, not by reading it. A 24-slot v3
+fan-out on `vesper` surfaced the first **five separate times** — five of the six agents that
+completed hit it independently and each wrote the same fix in its report before I looked.
+
+**1. The stock loop is sequential and `Runtime.evaluate` caps at 45 s.** `options/add` costs
+~0.6 s, so ~75 POSTs cannot fit in one call. Measured failures at **74, 79, 83 and 85 urls**;
+chunked `Promise.all` (10 at a time) finished the same 74 in ~20 s.
+
+The important half is that **the failure is not atomic.** The renderer keeps executing after
+the tool gives up, so the shelf goes on filling while the agent holds an error and no return
+value — one agent recorded "46 of 74 had landed" mid-loop. It reads exactly like "the stock
+failed", and the recovery an agent would reach for first (re-post everything) is in fact the
+correct one, because `options/add` dedupes by url and answers `{"ok":true,"duplicate":true}`.
+Nothing was lost on any of the five; but nothing told them that either.
+
+**2. `hosts` was being POSTed in a shape the server silently discards.** `_clean_hosts`
+(`api/v1/media_finder.py:551`) accepts only `[[host, count], …]` and returns `None` for
+anything else — **dropping the field while keeping the record, with a 200**. Reshaping
+`Object.entries()` output to `[{host, n}]` is the obvious-looking mistake and I made it in the
+run's driver: **all 34 chips from that run stored no `hosts` at all.** The histogram is v3's
+only quality gate and its stated deliverable on the chip, so this is a gate that reached the
+store and evaporated. Note the asymmetry that hid it: the `" DOT "` mangling is refused
+loudly with a 400, so the one malformation anybody had met before fails safe, and this one
+does not.
+
+Filed:
+- `references/chrome_route.md` §5 — the code block now chunks `Promise.all` by 10, plus two
+  new rules: the 45 s ceiling with its measurements and the non-atomic recovery, and the raw
+  `[[host,count],…]` shape with "re-read one chip and confirm".
+- `references/chrome_route.md` §2 tool table — `javascript_tool` now carries the 45 s ceiling
+  and the keeps-executing-after-timeout behaviour, so it is visible before §5 is reached.
+- `references/chrome_route.md` failure table — two new rows (timeout-with-no-counts;
+  200-but-no-hosts).
+
+Both trees edited block-by-block, never `cp`.
+
+**Verified:** the 24-slot run's journal (6 formal results, 12 slots written) is the evidence
+for defect 1; `media_options.json` showed 0 of 34 chips with a `hosts` key for defect 2; the
+relaunch over the remaining 18 slots carries both fixes and reports `hosts_recorded` per slot
+so the next run proves it rather than assuming.
+
+## 2026-08-06 — PornHub is fetchable; the 470 was our own extractor, and it was law in eight files
+
+**"PornHub is discovery-only — never a download" is REVERSED.** The measurement behind it was
+real — `egl.phncdn.com/gif/<id>.gif` returns **470 on clearnet and over Tor, every id tried** —
+and it was taken on urls this skill had already broken. Google's results HTML carries the
+**signed** form, `…/gif/<id>.gif?validfrom=…&validto=…&hash=…`. `MEDIA_RE` was lazy and
+terminated at the file extension, so the ticket was never captured; we fetched the corpse and
+recorded it as a property of the host.
+
+Measured today, 53 urls from one `site:pornhub.com` query on `media_lab_h`:
+
+| | |
+|---|---|
+| signed url, GET / HEAD (with Referer, without, bare) | **200** every way |
+| same url, query string removed | **470**, 173 bytes — 100% dead |
+| ticket window | `validfrom` 2025 → `validto` **2125**. 99 years, not 2 hours |
+| payload | GIF89a, up to 1280x720, 240 frames @25fps = **10.0s**, 1–40 MB |
+| Django `proxy` on a signed url | **200 / 8.9 MB / image/gif** |
+
+**Three further rules were built on the bad conclusion and all three are wrong:** the
+`*.phncdn.com` extract cut, "there is no header that fixes it", and the reason attached to
+`_REFERER_BY_HOST`'s phncdn row. No header is needed at all — a signed url serves with no UA
+and no Referer. (The cut was also a DEAD VARIABLE in `chrome_route.md`'s own code block: §4
+computed `pool` and §5 iterated the unfiltered `urls`, which is why 4 phncdn rows sat on
+vesper's shelf despite the rule.)
+
+**The 2-hour ticket in the older notes is a different url class** — `kl*/pics/gifs/*.webm`,
+minted on a live PornHub page. This route never touches it, and never touches pornhub.com,
+which is DNS-sinkholed *and* SNI-reset (9/10 connections die; the survivor returns 302, not
+content). Only the CDN is used, and it is open without a VPN.
+
+**Changed:** `scripts/fetch_related.py` — `_unescape` now runs before extraction (Google
+JSON-escapes `=`/`&`, so the old character class stopped at the backslash); `MEDIA_RE` widened
+to keep a query string; new `normalize_media_url` + `SIGNED_QUERY_HOSTS = ("phncdn.com",)`
+keeps the ticket for signed hosts and strips it everywhere else, so **no non-phncdn url
+changed**; the phncdn cut deleted; `DOCID_TRIPLE_RE`'s thumbnail group made capturing and
+split into `media_triples` / `docid_join` / `thumb_join`; `PANEL_PREFIXES` + `is_panel_label`
+so `pick_q` never sends a bucket label to Google as query text.
+
+**New:** `scripts/fetch_pornhub.py` (imports every pure function from `fetch_related.py` — a
+copied extractor is one that stops getting the other's fixes), `pornhub/fetch` endpoint
+sharing `_RELATED_FETCH_LOCK`, a `thumb` field on the option row, and a thumbnails-first ◆
+PornHub panel in `find.html`.
+
+**Verified:** `pytest tests/ -q` → 268 passed (6 pre-existing `test_world_*` failures,
+reproduced with these changes stashed). New tests cover the signed-url round trip, the
+no-double-row rule, the unsigned-host regression guard, and the `clean_media_urls`/`docid_join`
+same-key invariant — that last one because a mismatch would stock every PornHub clip with an
+empty docid and silently kill its ⇢ button forever.
+
+**The class this belongs to.** Third time an untested claim hardened into doctrine and cost
+real work — after "the browser cannot fan out" and the concurrency-of-20. Here one bad
+measurement propagated into eight files and three derived rules. The cure is not another
+correction: it is that a doctrine line must carry `measured <date>` or say `asserted`, so the
+asserted ones stay challengeable.
+
+## 2026-08-06 — scrolling never expanded the grid, and the failure table taught the opposite of the fix
+
+**"Scroll to the bottom… if the set didn't grow, you've hit the pool's edge" was wrong, and
+the failure table turned it into a diagnosis.** Google renders ~200 tiles and stops; scrolling
+past that adds nothing at all. What adds tiles is the **"More results" button**, which this
+corpus never mentioned once — grep for the string across all three trees returned zero before
+today. So every run that followed §4 harvested one screen's worth and was told, by
+`chrome_route.md`'s own failure table, that the pool was exhausted.
+
+Surfaced by a v3 agent during the 20-slot vesper harvest (2026-08-05): fourteen
+scroll-to-bottom passes, zero new tiles, then one click took its grid from ~200 to 800+.
+Re-measured by hand today on a fresh grid so the numbers in the doc are ours, not a report:
+**205 → click → 405 → click → 605**, ~200 a click, **and the button is still present after
+each click** — it is repeatable, not a one-shot. Four scroll passes in between: **405 → 405**.
+
+**Root cause of the wrong text:** the original claim conflated two real mechanisms. Google
+*does* lazy-load tiles on scroll, and a scroll-then-re-extract pass *does* recover them — that
+part was true and observable, which is exactly why nobody questioned the inference bolted onto
+it. "Set didn't grow" was read as "pool is empty" when it actually means "you reached the
+button." A true premise carried a false conclusion.
+
+- **`references/chrome_route.md`** (both copies) —
+  - §4's `**Scroll, then re-extract.**` block replaced: the two mechanisms separated, the
+    ~200 boundary named, the repeatable-click measurement, and a **text-matching** selector
+    (`/^more results$/i` over `a[role=button]`/`div[role=button]`/`button`/`input`) with an
+    explicit "never a class — Google's rotate". Verified live: the real element is
+    `<a role="button" jsname="oHxHid">`, but `jsname` rotates too, so text is the handle.
+  - ⚠️ **New caveat, measured:** the yield is thin on an ANIMATED slot. At 605 tiles that grid
+    gave **80** extractable `.gif`/`.mp4` urls (~13%) — depth is mostly `.jpg`/`.webp` page
+    thumbnails a `gif|mp4|webm` extract cannot use. Two or three clicks is the sweet spot.
+    Recorded so nobody reads "6× the tiles" as "6× the shelf".
+  - Failure table: the `Pool exhausted, not a bug` row **rewritten** to send the reader to the
+    click, plus a NEW row for the genuinely-exhausted case (flat *after* clicking → sibling
+    query). The old row was the highest-cost line in the file: it gave a confident wrong
+    diagnosis for the exact symptom the bug produces.
+  - §2 tool table: `computer {action:"scroll"}` no longer claims to "force tiles in" — it
+    pulls lazy tiles already on the page and explicitly does **not** load more results.
+  - §4 docid comment and §5b step 3 updated to name the click alongside the scroll.
+  - §5 `query` bullet now states the round-trip rename (below).
+- **`SKILL.md`** (both copies) —
+  - §3's pointer renamed from "the scroll-then-re-extract self-check" to "extract → click
+    'More results' → re-extract", with the boundary named inline.
+  - ⚠️ **New note under the endpoint block:** `options/list` returns stored records
+    **verbatim, and the stored names are not the names you POST**. `query` → **`found_by`, a
+    list**; chips keyed **`q`**; no `query` key on either, and no legacy one. Line 358's
+    `→ {"options":[…], "queries":[…]}` was the only response schema a v2 reader ever saw, and
+    that elision is what let a v3 agent check `o.query` and conclude it had destroyed 197
+    correctly-labelled options. The doctrine half of that is in find-media-v3's CHANGELOG,
+    same date.
+
+**Verified:** `grep -rn "scroll and re-extract to find the page's edge\|scroll-then-re-extract
+self-check\|Pool exhausted, not a bug\|Force Google's lazy-loaded tiles" .claude/skills
+.agents/skills` → **0**. `More results` now present 7× in each `chrome_route.md`, 1× in each
+`SKILL.md`. Both trees edited block-by-block, never `cp`: the diff still shows **exactly the 42
+pre-existing lines** (36 `<` = §2.0 PREFLIGHT + 2 failure rows, 6 `>` = the Antigravity CDP
+blockquote + 1 failure row), and **zero** of today's edits appear in it — which is the proof
+they landed identically. The click measurement was taken in the user's own Chrome on a live
+`&tbm=isch` grid (note: Google now redirects that to `&udm=2`; the URL the skill builds still
+works).
+
+## 2026-08-05 (3rd today) — mood words flag even beside an act word; mirror drift healed
+
+Root-caused `media_lab_f`'s SFW-skewed shelves (facial slot: 17% on-act vs 50% for
+`media_lab_h`'s act-first control, 45 Dreamstime stills vs 0). The doctrine fix lives in
+find-media-v3's SKILL.md (see its CHANGELOG, same date); the enforcement fix lives here:
+
+- **`scripts/validate_queries.py`** — two changes to the vanilla machinery:
+  - `VANILLA_TERMS_FOR_NSFW_CHECK` gains `gentle` `intimate` `passionate` `sensual` — f's
+    measured offenders. `passionate real couple cumshot gif` validated CLEAN before this.
+  - The vanilla branches now judge act presence on `SEXUAL_TERMS_FOR_SFW_CHECK` ∪
+    `ACT_ANCHORS` (`has_any_act`), not `has_sexual` alone — `cumshot`/`bj`/`anal` live only
+    in ACT_ANCHORS, so the old predicate called a cumshot query act-less. Split verdicts:
+    no act word → `tier_mismatch:nsfw_query_too_vanilla` (as before); act word present →
+    NEW `vanilla_dilution:mood_words_pull_stock_results`, because the old
+    `not has_sexual` guard let any sexual term suppress the vanilla check entirely
+    (`tender loving blowjob gif` passed). Both hard-fail through the existing
+    `tier_issues` exit-1 path. Known consequence, intended: `tender cumshot gif`-shape
+    queries that used to flag `too_vanilla` now flag `vanilla_dilution` — same failure,
+    truer name.
+- **`references/query_rewriting.md`** — the "what check_tier_alignment() actually
+  enforces" list rewritten for the two-branch split + the eight-word list; blind-spot #3
+  updated (on the pornhub target, strip_banned now eats five of the eight first, so the
+  vanilla checks there can only fire on `romantic`/`sweet`/`gentle`).
+- **`scripts/test_query_anchor.py`** — 7 new tests: the exact f query that passed clean,
+  gentle-beside-anchor, mood-beside-sexual-term, the facial-is-not-an-anchor case
+  (too_vanilla, NOT dilution — `facial` stays a spa treatment by the membership rule),
+  old branch intact, act-first control clean, SFW-tier exemption. 20 passed.
+- **Mirror heal:** the 08-03 `bj` change had never reached `.agents/` (stale
+  `scene_semantics.py`, `test_query_anchor.py`, missing CHANGELOG entry), and the 08-01
+  Antigravity entry existed only in `.agents/`. Both trees now carry both histories, and
+  the four code/reference files are byte-identical again — verified by diff. Intentional
+  divergence remains only in `chrome_route.md` (§2.0 preflight, 42 lines).
+
+**Verified:** `python3 -m pytest` on the test file in BOTH trees; `check_tier_alignment`
+run directly over media_lab_f's four real facial queries — all four now flag.
+
 ## 2026-08-05 (later) — related lives in a PANEL, and no id means no fetch
 
 Two rulings from LO after using the feature on a real slot.
@@ -88,6 +283,83 @@ this skill's file, so the edits land here.
 Both copies (`.claude/` and `.agents/`) were edited block by block and diffed afterwards: they
 still differ by exactly the 42 lines they differed by before — §2.0 PREFLIGHT and one
 failure-table row. A `cp` would have silently reverted one of them.
+
+## 2026-08-03 (later) — `bj` added to ACT_ANCHORS: the enforced rule was penalising the better query
+
+The act-anchor rule shipped 08-01 is sound, but its vocabulary was incomplete in a way that bit.
+`bj` was absent, so `validate_queries.py` flagged `bar bj chair seated gif` as
+`no_act_anchor:position_or_setting_words_only` — an enforced gate telling the author to rewrite the
+query that actually worked.
+
+`bj` is not a synonym you reach for when `blowjob` fails. **It retrieves different and better
+material**, measured on two vesper slots in the same batch:
+
+| slot | finding |
+|---|---|
+| `renner_cheerup_alley_t5` | `blowjob` returned indoor studio kneeling (~3 outdoor tiles in 40). `public alley bj gif amateur` — built from a label Google itself surfaced, "Public Alley BJ" — returned real alleys: dumpsters, graffiti walls, `alleyway-fuck-after-club`. It was the payoff round. |
+| `renner_cheerup_oral_t5` | `bj chair` / `bj couch` turned out to be **Sex.com's own tag names**, and solved `him_standing` — the dominant rejection across *four* prior runs on that slot. Seated went from "hard to retrieve" to easy. |
+
+That is the same lesson as the 08-03 lexicon correction that an act anchor is necessary but not
+sufficient: **porn-native jargon is what holds a query in the corpus.** `bj` IS that jargon; the
+validator was rejecting it for not being English.
+
+- **`scripts/scene_semantics.py`** — `bj` added to `ACT_ANCHORS`, with the measurement and the
+  safety argument in a comment. It is the first 2-letter member, so the comment records why
+  `\bbj\b` is safe: the boundary means "objects"/"subject" cannot match, since the `b` there is
+  preceded by a word character.
+- **`scripts/test_query_anchor.py`** — two new tests: `bj` anchors both measured query shapes, and
+  an explicit substring-trap test over `objects` / `subject` / `objection`. A 2-letter anchor is the
+  riskiest kind to add, so the false-positive case is pinned rather than argued.
+
+**Verified:** `python3 -m pytest scripts/test_query_anchor.py -q` → **13 passed**. Both previously
+false-flagged queries now anchor; `objects on the desk gif` still flags, so the boundary holds.
+Regression on the live game (`validate_queries.py --toml games/vesper/toml_phases/7_final_game.toml`)
+→ `no_act_anchor` count unchanged at 15, as expected: no authored vesper query uses `bj`, so this
+widens what passes without silencing anything already flagged.
+
+Requested by LO after the batch surfaced it.
+
+
+## 2026-08-03 — a disconnected extension had no failure row, and the nearest one pointed the wrong way
+
+Ran a 9-agent batch to fill vesper's remaining media pools. The Chrome extension was disconnected;
+`list_connected_browsers` returned `[]`. All 9 agents failed, and the cost was not the outage — it
+was that **the skill never told them what a dead route looks like**, so each one independently
+invented a workaround before diagnosing it.
+
+`chrome_route.md`'s failure table had **no row for a disconnected extension**, and its nearest
+symptom — *"Extract returns `[]`"* — attributes that to query-string stripping. That row sends an
+agent rewriting perfectly good queries for hours against a route that cannot answer.
+
+Two fallbacks were measured, both wrong, both recorded:
+
+| Fallback | Measured result |
+|---|---|
+| `curl` Google Images directly | **HTTP 200, ~90 KB, ZERO extractable urls** — the grid is JS-rendered. A rich-looking 200 that harvests as nothing is indistinguishable from "my query was bad." |
+| Mine a sibling slot's stocked shelf | Cross-slot collision — those urls were harvested against a *different* slot's demand. One agent correctly refused to do this and reported a blocked run instead; several others were pivoting toward it when they were stopped. |
+
+- **`references/chrome_route.md` §2.0 (NEW)** — a PREFLIGHT section: call `list_connected_browsers`
+  before anything else; on `[]`, **STOP and tell the human so they can reconnect it**. Records that
+  Chrome's own process may still be running (that proves nothing — the pairing link is what is down),
+  both measured non-fallbacks, and that an honest blocked report IS the deliverable. Also records the
+  mid-run corollary: install incrementally (`grab` + `--record` per clip) rather than batching, which
+  is what turned a later round of stalls from total losses into partial wins.
+- **`references/chrome_route.md` §Failure table** — new first row for the disconnected extension, and
+  a cross-reference added to the `Extract returns []` row pointing at §2.0 first, so the misleading
+  row can no longer be reached before the correct one.
+
+Requested directly by LO: *"if chrome is disconnected I want it to tell me, so I will launch the
+chrome and make it work."* The human can fix this in seconds; an agent cannot fix it at all.
+
+**Verified:** `list_connected_browsers` reproduced `[]` from the main session during the outage, and
+`[{deviceId…}]` after LO reconnected — the same call the new §2.0 mandates. `media_options.json` had
+not been written since Aug 1 02:56, corroborating that no agent stocked anything. All 9 pools were
+confirmed still at 1 file, so the batch left no partial state.
+
+**Still open, not changed here:** `bj` is absent from `scene_semantics.ACT_ANCHORS`, so
+`validate_queries.py` false-flags `bar bj chair seated gif` as `no_act_anchor` — measured this batch,
+where `bj` outperformed `blowjob` on two slots. Awaiting LO's call.
+
 
 ## 2026-08-01 — Antigravity CDP browser tooling support
 - **`references/chrome_route.md`**: Added Antigravity / CDP environment instructions for connecting via `http://localhost:9222` (`chromium.connectOverCDP`).

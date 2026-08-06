@@ -62,7 +62,7 @@ freeze v2 as the rollback — the same pattern the generator uses for v2/v1.
 Every worked slot ends with **both**:
 
 1. **A query-verified FULL shelf** in the options store — everything the **proven** queries'
-   results pages offered, after the extract-time filters only (phncdn cut, empty-path cut,
+   results pages offered, after the extract-time filters only (empty-path cut,
    furniture-host cut, correct `media_kind`). Expect 150–350 options on a healthy slot with
    3 sibling queries (measured across `media_lab_f`/`_h`, 20 slots).
    Verification is per-QUERY — the host histogram, read **before** the shelf is written
@@ -122,7 +122,7 @@ Fill `templates/scope_brief.md` (v2's), but only these fields carry now:
 | act, position, people count, direction | the query shape — nothing downstream judges candidates anymore |
 | `setting_is_load_bearing` | whether the query spends 2 tokens on the room |
 | `pov_case` | the query only: when the beat needs the partner's body seen, keep `pov` out of the terms |
-| `intended_heat` | the query's flavour words |
+| `intended_heat` | nothing at query time — mood words are unsearchable (see §2); recorded so the human knows what to pick on the shelf |
 
 Everything v2's brief carried for *scoring* is dead weight here — there is no HEAT/SETTING/CRAFT
 axis to feed. Do not write one.
@@ -152,6 +152,18 @@ The two rules that decide whether a query lands at all, both measured:
 Plus: zero story or character words, `gif` appended (measured 7→59, 1→54, 0→91 fetchable
 urls), an anti-studio modifier (`amateur`, `real`, `voyeur`) when the beat is grimy, and at
 most ~2 setting tokens.
+
+- **Zero mood words — the third measured rule.** `gentle` `tender` `loving` `romantic`
+  `intimate` `passionate` `sensual` `sweet` are stock-photo magnets even when a hard act
+  anchor stands right next to them. Measured on `media_lab_f` facial (2026-08-05): `tender
+  intimate facial gif`-class queries built a shelf that was **17% on-act vs 50%** for the
+  act-first control (`media_lab_h`), with 36% romance slugs and 45 Dreamstime stills against
+  the control's 0 — the mood words outvoted the act word and Google served the romance
+  aisle. The scope's `intended_heat` NEVER becomes tokens; affect is judged by eyes on the
+  shelf, never searched. A query is act + position + anti-studio + `gif`, ~4–6 tokens.
+  `validate_queries.py` now hard-fails a mood word beside an act word
+  (`vanilla_dilution:mood_words_pull_stock_results`) as well as one without
+  (`nsfw_query_too_vanilla`).
 
 ## 3. SEARCH — drive the user's own Chrome
 
@@ -188,13 +200,42 @@ circumventing it, which this skill does not do at any scale.
 
 Then: build `https://www.google.com/search?q=<terms>&tbm=isch`, confirm from the screenshot
 you are on the image grid, extract with the one regex (`.split('?')[0]` is not optional),
-group by host, cut `*.phncdn.com` (not fetchable — discovery only), scroll and re-extract to
-find the page's edge.
+group by host (phncdn is STOCKED now, not cut — its signed urls fetch 200), then scroll to pull in
+lazy tiles and **click "More results"** to get past Google's ~200-tile boundary before
+re-extracting. Scrolling alone never crosses it — measured 2026-08-06, four scroll passes
+added zero tiles while each click added ~200 and the button persisted (chrome_route.md §4).
 
-**Read the host histogram — it is the query's diagnosis, and it is free.** Tenor/Wikipedia/BBC
-means no act anchor. Reddit stills/TikTok means a story word leaked in. Getty/Shutterstock
-means the setting words reclassified it as stock photography. Each wrong crowd names the exact
-token to change, which is what makes iteration cheap.
+**Read the host histogram — it is the query's diagnosis, and it is free.** But ⚠️ **"wrong
+crowd" INVERTS between an act slot and a still slot. Decide which reading applies BEFORE you
+look, from the slot's `type`.**
+
+*On an ACT slot (`type: video`, a tiered beat):* Tenor/Wikipedia/BBC means no act anchor.
+Reddit stills/TikTok means a story word leaked in. Getty/Shutterstock means the setting words
+reclassified it as stock photography.
+
+*On a STILL slot (`type: image`, usually `base`/`location`):* **that same stock crowd is the
+TARGET, not the failure.** iStock / Alamy / Dreamstime / Shutterstock / Getty / StockCake /
+Pexels / Unsplash is a query that landed. The wrong crowd here is the opposite one — porn
+aggregators (a sexual word leaked into an SFW slot), or Pinterest/Tumblr/Yelp repost farms
+dominating, which means the query found chatter about the place rather than photographs of it.
+
+⚠️ **Read the wrong rule and you will bin the right answer.** Measured 2026-08-06 on
+`sex/colm_backroom`, the one still slot in a 24-slot run: the agent had only the act-slot rule,
+so it **rejected `man and woman dim bar back room doorway` — 80 urls, dreamstime(17)
+shutterstock(12) alamy(10) istockphoto(7) gettyimages(3) — as "reclassified as stock
+photography."** Its four *accepted* queries returned those same hosts. Eighty good candidates
+destroyed by a correct diagnosis applied to the wrong kind of slot; it was also the slowest
+agent of the day (27.7 min, 8 navigations) because it kept "fixing" queries that had already
+landed.
+
+Each wrong crowd names the exact token to change, which is what makes iteration cheap.
+
+**But the histogram is colorblind INSIDE the porn crowd.** Porn-gif sites have a romance
+aisle, and a mood-diluted query gets served from it while the histogram still reads "landed"
+— measured on `media_lab_f` facial (2026-08-05): `tender intimate facial gif`-class queries
+passed the host check on blovjob/porngifmag-grade hosts and shelved romance couples at a 17%
+on-act rate. Same shops, wrong aisle. The GRID GLANCE in §4 step 3 is the check that sees
+aisles; the histogram alone is not proof the query landed.
 
 **Run 2–3 sibling queries per slot, never one.** Different phrasings land on different host
 clusters. v3 spends part of its saved time here: when a slot is comfortably over the floor
@@ -209,6 +250,18 @@ filter, and stock with `type: "image", media_kind: "img"`. Expect the stock-phot
 rather than the porn aggregators: iStock/Alamy/Dreamstime/Shutterstock watermark their
 previews; Pexels/StockCake/Freerange are the clean end. The watermarks land on the shelf
 with everything else — the human sees them on the tiles and picks around them.
+
+**The whole GATE inverts for these slots, not just the regex** — the stock crowd is the
+target (histogram fork above) and the grid glance asks *"is this the right PLACE?"*, not
+*"does it show the act?"* (§4 step 3). Widening the regex without inverting the gate is the
+half-fix that cost `colm_backroom` 80 candidates.
+
+⚠️ **The watermark share is a REPORTABLE number, not a filter.** Dump-all still governs: never
+drop a candidate for carrying a stamp. But say in your close what fraction of the shelf came
+from the watermarking four (iStock/Alamy/Dreamstime/Shutterstock/Getty) versus the clean end,
+because on a stills-heavy run that ratio is a decision the human has to make once and cannot
+make from a total. If the clean end is thin, the lever is a SIBLING QUERY aimed at it — never
+a prune.
 
 ## 4. STOCK — everything a PROVEN query offered. Two passes, gate first.
 
@@ -227,10 +280,35 @@ So, per query:
 
 1. **Pass 1 — extract + histogram, write NOTHING.** Return the url list and the host counts.
 2. **Read the histogram.** Wrong crowd → fix one token, re-run pass 1. Do not stock.
-3. **Pass 2 — stock the list you already hold**, only once the query is proven.
+3. **The grid glance — one screenshot, one question.** The question depends on the slot kind,
+   the same fork as the histogram (§3):
+   - **ACT slot (`type: video`): does the first screen mostly SHOW the act?** The histogram
+     cannot see aisles (§3): `media_lab_f` facial passed it on porn hosts and shelved romance
+     couples. Couples kissing on a facial query, editorial stills on a riding query → wrong
+     AISLE.
+   - **STILL slot (`type: image`): is this the right PLACE / SUBJECT?** Match the room, the
+     object, the light and the era against the description. Wrong aisle for a still is a
+     *recognisable landmark* where the beat wants an anonymous room, a bright modern interior
+     where the beat says dim and industrial, a people-first crowd shot where the beat wants
+     the empty space — or a grid of diagrams, floor plans and listings instead of
+     photographs. "Does it show the act" is unanswerable here; an agent given only that
+     question improvises, and improvising is what binned 80 good candidates on
+     `colm_backroom`.
 
-One extra round trip per query. It reintroduces no per-candidate judgment whatsoever — the
-gate is still per-QUERY, it simply now runs in time to matter.
+   Either way, treat a wrong aisle exactly like a wrong crowd: change a token (on an act slot
+   the mood word is the usual culprit; on a still slot it is the most *specific* setting word),
+   re-run pass 1. One screenshot per query, pass/fail the QUERY. It is not a look at any
+   candidate.
+   ⚠️ **A term with a common SFW homograph needs the TAIL checked, not just the first
+   screen.** Measured 2026-08-05: `golden shower multiple men gif` opened on real piss tiles
+   and drifted into literal showers, soap and bathing deeper down. One screenshot proves the
+   query landed; it does not prove the whole grid did. When a token has an everyday meaning,
+   glance again after the first "More results" click.
+4. **Pass 2 — stock the list you already hold**, only once the query is proven.
+
+One extra round trip and one screenshot per query. It reintroduces no per-candidate judgment
+whatsoever — the gate is still per-QUERY, it simply now runs in time to matter and looks at
+what the grid shows, not just where it's hosted.
 
 ⚠️ **Join the hostname labels with `" DOT "` in what the script RETURNS — and nowhere else.**
 Bare dotted CDN hostnames trip a secret-scanner in the tool output filter and come back as
@@ -282,9 +360,19 @@ Non-negotiables (each has a recorded failure behind it):
 No install step. Per slot:
 
 1. Confirm the shelf: `GET options/list?game=<game>&file=<slot_key>` → it returns
-   `{options, queries}`. **Check both.** `queries` is the picker's chip strip; a slot with
-   200 options and one chip means you stocked most of them without a `query` and they are
-   unattributable forever.
+   `{options, queries}`, both verbatim from the store. **Check both.** `queries` is the
+   picker's chip strip; a slot with 200 options and one chip means most of them went in
+   without their search label and are unattributable forever.
+
+   ⚠️ **The label round-trips under a DIFFERENT NAME. Check `found_by`, never `query`.** You
+   POST `query`; the store files it as **`found_by`, a LIST** (a url two sibling queries both
+   returned carries both labels), and chip records are keyed **`q`**. **There is no `query`
+   key on an option, ever** — an unlabelled option simply has no `found_by`, and no legacy
+   `query` key exists to fall back on. Checking `o.query` reports 100% unattributed on a
+   perfect shelf: that is the check being wrong, not the shelf. Measured 2026-08-05 — an
+   agent ran it, saw "197 of 197 unattributed", and believed it had destroyed its own slot.
+   All 197 were labelled correctly. Ground truth: `api/v1/media_finder.py:496` and `:473`
+   write `found_by`; `:422` keys chips `q`; `find.html:421` and `:497` read exactly those.
 2. Append to `games/<game>/.find-media/run_manifest.json`:
    `{"slot", "generator": "v3", "status": "shelf_ready", "options": N, "queries": M}`.
 3. Report: **N options across M labelled searches, nothing installed, waiting on the human's
@@ -327,7 +415,14 @@ contract permits, and it is the natural customer for the rolling pool
     (all pull sex-advice and magazine editorial *even with a real act anchor*); `cowgirl`
     alone (zero porn hosts — needs `fuck` present); `facial` beside vanilla affect words
     (reads as skincare — use `cumshot`); `desk` with `prone bone` (ergonomics — use `table`);
-    `leaning forward` (sports/fashion).
+    `leaning forward` (sports/fashion); `orgasm` (the health-explainer aisle — BBC, Planned
+    Parenthood, NYT, Netflix, GQ — and it survives a porn-exclusive neighbour: swapping
+    `cunt` in beside it *still* returned BBC and GQ, which is what proved `orgasm` was the
+    poison and `squirting` was innocent; name the act instead); `taking turns` (a
+    CFNM/Dancing-Bear magnet that REVERSES the gender direction — many women on one man —
+    and it passes the host histogram, so only the grid glance catches it); `holding hips`
+    (posture word, pulls Tenor ass-grabbing and couples-kissing); `motel room` (a setting
+    pair that reclassifies the query to generic hotel-room sex).
   - **A `hotwifecaps.com`-dominated histogram is a soft warning**, not a pass: that host
     serves caption images rather than act footage, so the query has drifted toward
     text-overlay content.
@@ -339,7 +434,7 @@ contract permits, and it is the natural customer for the rolling pool
 what crowd (the host histogram says), and how many options actually made it. A thin shelf is
 a query problem the human can fix in ten seconds if you tell him.
 
-## Execution model — ONE AGENT PER SLOT, rolling cap 20
+## Execution model — ONE AGENT PER SLOT, rolling cap 10
 
 **This section said the opposite until 2026-08-05.** It claimed "the find run is SERIAL" and
 "the browser cannot fan out: one Chrome, one extension pairing, one driver," and it forbade
@@ -358,10 +453,19 @@ What is actually true:
 
 ### The model
 
-**Fan out ONE AGENT PER SLOT, with a rolling cap of 20 — a concurrency CAP, never batches.**
-Queue every slot, keep ≤20 agents in flight, backfill the moment one finishes. No barriers:
+**Fan out ONE AGENT PER SLOT, with a rolling cap of 10 — a concurrency CAP, never batches.**
+Queue every slot, keep ≤10 agents in flight, backfill the moment one finishes. No barriers:
 never "launch 5, wait for all 5, launch 5 more" — a barrier wastes every fast finisher's idle
 time on the slowest straggler. Workflow's `pipeline()`/queue implements exactly this.
+
+**Why 10 and not more: 10 is the largest concurrency ever MEASURED captcha-free** (the
+2026-08-05 media_lab_f fan-out; 3 again on the same day's re-run). This section said 20
+until 2026-08-05 — a number nobody had tested, in the same file whose untested "the browser
+cannot fan out" rule cost the most. The binding constraint is Google's bot tolerance, not
+Chrome or the store lock: a captcha is a HARD STOP for the whole run, not a slowdown, so
+minutes saved above 10 are bet against losing the run. Raising the cap is a deliberate
+probe, LO's call, run while he is watching: try 12–15 once, and on any captcha halve and
+record the ceiling here.
 
 **Each agent owns its slot end to end**: read the beat → author its own queries → probe
 (§3 PREFLIGHT) → its own tab → gate → stock → close its tab → return a structured report.
@@ -392,7 +496,7 @@ driver's attention.
 
 ### Byte-work (§Janitor, audit mode)
 
-Same rolling cap of 20. Any agent fetching bytes uses `--workers 2` — N agents share the same
+Same rolling cap of 10. Any agent fetching bytes uses `--workers 2` — N agents share the same
 few throttling CDNs. v2's weather box measured the throttle (7.8s → 34.1s per file at 8
 workers), and this file taught `--workers 6` for one day, which cost a full wave of masked
 `ERR URLError`s. If ≥⅓ of an agent's wave dies `URLError`, it reruns once with `--workers 1`

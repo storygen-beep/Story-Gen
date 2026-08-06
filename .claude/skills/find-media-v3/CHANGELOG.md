@@ -1,6 +1,246 @@
 # find-media-v3 — CHANGELOG
 
-## 2026-08-05 (latest) — docid capture joins the deliverable contract
+## 2026-08-06 (later) — the gate was written for porn and stated as universal; on a still slot it binned the right answer
+
+**"Getty/Shutterstock means the setting words reclassified it as stock photography" was law for
+every slot.** It is correct for an act beat and exactly backwards for a still, where that crowd
+is the target. The same universality broke the grid glance: *"does the first screen mostly SHOW
+the act?"* cannot be answered about a photograph of a dry-dock, so an agent handed only that
+question improvises.
+
+§3 already carried the correct exception — `:225-232`, widen the regex, *"expect the stock-photo
+crowd"* — but it sat **fifteen lines below the rule it contradicts** and never said the gate
+inverts. An agent reads the universal rule, then the exception, and follows the first. That is
+the root cause: not a missing fact, a mis-ordered one.
+
+**Measured, one slot.** `sex/colm_backroom` was the only `type: image` slot in a 24-slot vesper
+run. It **rejected** a query that had landed perfectly:
+
+    [rejected] 80 urls  "man and woman dim bar back room doorway"
+               dreamstime(17) shutterstock(12) alamy(10) istockphoto(7) gettyimages(3)
+
+Its four *accepted* queries returned those same hosts. Eighty candidates destroyed by a correct
+diagnosis applied to the wrong kind of slot. It was also the slowest agent of the day — **27.7
+min against a 9.0 min median, 8 navigations against 3–4** — because it kept "fixing" queries that
+had already landed. Both costs came from one mis-scoped sentence.
+
+**Why it matters now, not later:** of vesper's 112 slots still holding an empty shelf, **57 are
+`type: image` and 43 are `base` tier**. The next run is majority-stills, so this rule would have
+fired on most of the work.
+
+Filed, all in `SKILL.md` (**no `.agents/skills/find-media-v3/` exists** — single tree, verified):
+- **§3 histogram** — forked into an ACT reading and a STILL reading, chosen from the slot's
+  `type` *before* looking. Names the still slot's real wrong-crowd (porn aggregators = a sexual
+  word leaked into an SFW slot; Pinterest/Tumblr/Yelp repost farms = chatter about the place, not
+  photographs of it), and cites the `colm_backroom` rejection by number.
+- **§4 gate step 3** — the still variant of the glance: *"is this the right PLACE / SUBJECT?"*,
+  with its own wrong-aisle catalogue (recognisable landmark where the beat wants anonymity,
+  bright modern where it says dim industrial, people-first where it wants the empty room,
+  diagrams/floor plans instead of photographs). Also names which token to change first: the mood
+  word on an act slot, the most *specific* setting word on a still.
+- **§3 image paragraph** — now points up at the fork ("widening the regex without inverting the
+  gate is the half-fix"), and makes the watermark share a **reportable number, never a filter**.
+  Dump-all still governs; the only lever on a stamped shelf is a sibling query aimed at the clean
+  end, never a prune.
+
+**Deliberately NOT touched:** `chrome_route.md:182` (and its `.agents` twin at `:153`) records
+that stacking place+time+light words reclassified a *sex* query as stock footage. That is a
+query-construction rule for an NSFW beat, it is correct in context, and changing it would break
+a rule that works.
+
+**Verified live** on `locations/kess_berth.jpg` (empty shelf, `base`, `type: image`), driven
+call-by-call rather than delegated, 4 queries:
+
+| | |
+|---|---|
+| options stocked | **144**, 144 labelled, all `media_kind: "img"`, 142 carrying a `docid` |
+| chips | 4, **4 carrying `hosts`** as `[[host,count],…]` |
+| stocked queries' histograms | shutterstock / alamy / dreamstime / getty / istock — **the exact crowd the old rule rejected** |
+
+Both directions proved, which is the point — the fix is not "accept everything":
+
+- **Accepted** `drained dry dock stripped ship hull work lamps` (67) and `empty graving dock at
+  night floodlights ship hull` (85) on stock-host histograms. Under the old rule both are
+  `wrong_crowd` and this slot ends at zero.
+- **Rejected** `ship breaking yard stripped hull on blocks workshop` (72 urls binned) — histogram
+  led by `i.ytimg.com`, Guardian, NatGeo, shipbreaking NGOs; the grid was Alang/Chittagong *beach*
+  scrapping in daylight, i.e. documentary **about** the industry. The still-slot wrong-crowd rule
+  (repost/chatter farms) caught it.
+- **Rejected** `dry dock interior hull on keel blocks scaffolding dim` (57 binned) — ~40% keel-block
+  schematics, "how a dry dock supports a ship" infographics and Taylor & Francis figures. The
+  *diagrams-instead-of-photographs* wrong-aisle case, caught by the new glance question. `keel
+  blocks` is the poisoned token: a marine-engineering term that retrieves textbooks.
+
+Both rejections came from the most **specific setting word**, exactly as the new §4 text predicts.
+`check_media` 177 found / 0 missing, `check_shelves` 0 orphaned, `kess_berth.jpg` untouched on disk
+(mtime unchanged) — nothing installed, nothing pruned.
+
+**Watermark evidence for the pending 57-slot decision** (report, do not act): of the 144 stocked,
+**45% came from the watermarking four+Getty, 9% from the clean stock end (Pexels/StockCake), and
+46% from industry/editorial hosts that stamp nothing.** So a non-watermarked majority exists, but
+the clean *stock* aisle alone is thin — biasing a sibling query toward it is worth doing and will
+not by itself carry a shelf.
+
+## 2026-08-06 — PornHub is fetchable; the 470 was our own extractor, and it was law in eight files
+
+**"PornHub is discovery-only — never a download" is REVERSED.** The measurement behind it was
+real — `egl.phncdn.com/gif/<id>.gif` returns **470 on clearnet and over Tor, every id tried** —
+and it was taken on urls this skill had already broken. Google's results HTML carries the
+**signed** form, `…/gif/<id>.gif?validfrom=…&validto=…&hash=…`. `MEDIA_RE` was lazy and
+terminated at the file extension, so the ticket was never captured; we fetched the corpse and
+recorded it as a property of the host.
+
+Measured today, 53 urls from one `site:pornhub.com` query on `media_lab_h`:
+
+| | |
+|---|---|
+| signed url, GET / HEAD (with Referer, without, bare) | **200** every way |
+| same url, query string removed | **470**, 173 bytes — 100% dead |
+| ticket window | `validfrom` 2025 → `validto` **2125**. 99 years, not 2 hours |
+| payload | GIF89a, up to 1280x720, 240 frames @25fps = **10.0s**, 1–40 MB |
+| Django `proxy` on a signed url | **200 / 8.9 MB / image/gif** |
+
+**Three further rules were built on the bad conclusion and all three are wrong:** the
+`*.phncdn.com` extract cut, "there is no header that fixes it", and the reason attached to
+`_REFERER_BY_HOST`'s phncdn row. No header is needed at all — a signed url serves with no UA
+and no Referer. (The cut was also a DEAD VARIABLE in `chrome_route.md`'s own code block: §4
+computed `pool` and §5 iterated the unfiltered `urls`, which is why 4 phncdn rows sat on
+vesper's shelf despite the rule.)
+
+**The 2-hour ticket in the older notes is a different url class** — `kl*/pics/gifs/*.webm`,
+minted on a live PornHub page. This route never touches it, and never touches pornhub.com,
+which is DNS-sinkholed *and* SNI-reset (9/10 connections die; the survivor returns 302, not
+content). Only the CDN is used, and it is open without a VPN.
+
+**Changed:** `scripts/fetch_related.py` — `_unescape` now runs before extraction (Google
+JSON-escapes `=`/`&`, so the old character class stopped at the backslash); `MEDIA_RE` widened
+to keep a query string; new `normalize_media_url` + `SIGNED_QUERY_HOSTS = ("phncdn.com",)`
+keeps the ticket for signed hosts and strips it everywhere else, so **no non-phncdn url
+changed**; the phncdn cut deleted; `DOCID_TRIPLE_RE`'s thumbnail group made capturing and
+split into `media_triples` / `docid_join` / `thumb_join`; `PANEL_PREFIXES` + `is_panel_label`
+so `pick_q` never sends a bucket label to Google as query text.
+
+**New:** `scripts/fetch_pornhub.py` (imports every pure function from `fetch_related.py` — a
+copied extractor is one that stops getting the other's fixes), `pornhub/fetch` endpoint
+sharing `_RELATED_FETCH_LOCK`, a `thumb` field on the option row, and a thumbnails-first ◆
+PornHub panel in `find.html`.
+
+**Verified:** `pytest tests/ -q` → 268 passed (6 pre-existing `test_world_*` failures,
+reproduced with these changes stashed). New tests cover the signed-url round trip, the
+no-double-row rule, the unsigned-host regression guard, and the `clean_media_urls`/`docid_join`
+same-key invariant — that last one because a mismatch would stock every PornHub clip with an
+empty docid and silently kill its ⇢ button forever.
+
+**The class this belongs to.** Third time an untested claim hardened into doctrine and cost
+real work — after "the browser cannot fan out" and the concurrency-of-20. Here one bad
+measurement propagated into eight files and three derived rules. The cure is not another
+correction: it is that a doctrine line must carry `measured <date>` or say `asserted`, so the
+asserted ones stay challengeable.
+
+## 2026-08-06 — the CLOSE check named a field that does not exist; four new poisoned terms
+
+From the first full production run of this skill: 20 vesper slots, one agent each, 67 queries,
+**7 gated out before any write**, 4,012 options stocked, 0 agent errors, 0 installs, and all
+378 pre-existing pool options survived. The contract held. Two instructions did not.
+
+### §5's confirmation step sent agents to a field that has never existed
+
+The check itself was right — `{options, queries}`, count the chips. The **trailing clause** was
+not: *"you stocked most of them without a `query`"* names `query` as the thing missing **from
+the options**, so an agent implementing it per-candidate reaches for `o.query`. There is no
+such key. You POST `query`; the store files it as **`found_by`, a LIST**
+(`api/v1/media_finder.py:496` new, `:473` appends on a duplicate url, so a url two sibling
+queries both returned carries both labels), and chip records are keyed **`q`** (`:422`).
+`find.html:421` and `:497` read exactly those. Only the doc disagreed.
+
+Measured cost: an agent ran the check on a finished slot, got **197 of 197 unattributed**, and
+reported that it had destroyed its own work. All 197 were labelled perfectly. The check is a
+smoke alarm that fires on every run, and the natural response — re-harvest the slot — would
+burn an hour redoing work that was already correct.
+
+**Root cause:** `query` genuinely IS the request field, and every other mention in the corpus
+is about the request, where it is correct. Nothing was wrong except the one clause that let
+the request name leak into a claim about the response. The response schema that would have
+caught it exists (`chrome_route.md:429-432`, correct since it was written) but is framed as
+the *on-disk ledger*, so nobody following §5 ever connects the two.
+
+- `SKILL.md` §5 — the confirmation step keeps its check and gains a ⚠️ block: **check
+  `found_by`, never `query`**, the list semantics, "no legacy key to fall back on", the
+  197-of-197 measurement, and `media_finder.py` / `find.html` line refs so the next reader can
+  verify instead of trusting. The incumbent skill's `SKILL.md` gained the matching response-shape
+  note under its endpoint table — see find-media's CHANGELOG, same date.
+
+### §3's "scroll to find the page's edge" — fixed here, root-caused in the incumbent
+
+v3 inherits `chrome_route.md` §§1–5 and its failure table, so this one line was five more
+wrong readings away through inheritance. §3 now names the ~200-tile boundary and the **"More
+results" click** with today's measurement (four scrolls → 0 tiles; 205 → 405 → 605, ~200 a
+click, button persists). Full teaching and the animated-slot yield caveat live in the
+incumbent's §4.
+
+### Four poisoned terms, each earned by a gated-out query
+
+- `SKILL.md` §Iteration poison list —
+  - **`orgasm`** — the health-explainer aisle: BBC, Planned Parenthood, NYT, Netflix, GQ,
+    TikTok, tiles reading *"Is squirting pee?"*. The instructive part is the **second** round:
+    the agent swapped in `cunt`, a porn-exclusive word, and **still** got BBC and GQ. That is
+    what proved `orgasm` was the poison and `squirting` was innocent — the same
+    drop-the-obvious-suspect trap as `leaning forward` vs `cleavage`, now with a second
+    instance behind it.
+  - **`taking turns`** — a CFNM/Dancing-Bear magnet that **reverses the gender direction**
+    (~40% of the first screen was many-women-on-one-man). It **passed the host histogram** on
+    all-porn hosts; only the grid glance caught it. Best evidence yet for why §4 step 3 exists.
+  - **`holding hips`** — posture word, pulled Tenor ass-grabbing and couples kissing. Third
+    confirming instance of posture-before-anatomy.
+  - **`motel room`** — a setting pair that reclassified an anal-creampie query into generic
+    hotel-room sex.
+- `SKILL.md` §4 step 3 — new ⚠️: **a term with a common SFW homograph needs the TAIL checked,
+  not just the first screen.** `golden shower multiple men gif` opened on real piss tiles and
+  drifted into literal showers and soap deeper down. One screenshot proves the query landed; it
+  does not prove the whole grid did. Glance again after the first click.
+
+**Verified:** `grep -rn "scroll and re-extract to find the page's edge" .claude/skills
+.agents/skills` → 0; `found_by` now appears 4× in this SKILL.md; the poison list carries all
+four new terms. Field names checked against `api/v1/media_finder.py` and `find.html` rather
+than against the run's report. The terms are **prose-only, not validator-enforced** —
+`scripts/test_query_anchor.py` is untouched and still passes; hard-failing them in
+`validate_queries.py` is a separate call, not taken here.
+
+## 2026-08-05 (5th today) — fan-out cap 20 → 10: cap what was measured, not what was guessed
+
+LO's call after the 3-slot re-run. 10 is the largest concurrency ever measured captcha-free
+(the media_lab_f 10-agent fan-out; 3 concurrent again today); 20 was asserted without a
+test — in the same section whose untested "browser cannot fan out" rule already cost the
+most. The binding constraint is Google's bot tolerance: a captcha is a hard stop for the
+run, so minutes saved above 10 are bet against losing the whole run. §Execution model now
+records the measurement basis and the probe protocol for ever raising it (12–15 once,
+watched; on captcha halve and record the ceiling). §Byte-work cap matched. Verified: grep
+shows no remaining "cap of 20"/"cap 20" in the skill.
+
+## 2026-08-05 (4th today) — mood words banned from queries; the grid glance becomes real
+
+Root-caused `media_lab_f`'s SFW-skewed shelves: the §1 scope table said `intended_heat` →
+"the query's flavour words", so the per-slot agents dutifully searched `gentle loving
+cumshot` / `tender intimate facial` — and Google resolved the mood words to the
+romance/stock cluster. Measured: f facial 17% on-act vs 50% for `media_lab_h`'s act-first
+control, 36% romance slugs, 45 Dreamstime stills vs 0. The host histogram passed those
+queries (porn hosts, romance aisle), and validate_queries' vanilla check only fired when a
+query had NO act word — `tender intimate facial` had one, so it sailed through.
+
+- `SKILL.md` §1: `intended_heat` row rewritten — it feeds NOTHING at query time; recorded
+  only so the human knows what to pick on the shelf.
+- `SKILL.md` §2: new measured rule — **zero mood words**; a query is act + position +
+  anti-studio + `gif`, ~4–6 tokens; affect is judged by eyes on the shelf, never searched.
+- `SKILL.md` §3+§4: the "one grid look" the description always promised is now a real step —
+  §4 gate step 3, one screenshot per query answering "does the first screen mostly SHOW the
+  act?", wrong aisle handled exactly like wrong crowd. Still per-QUERY; no candidate
+  judging. §3 documents why: the histogram is colorblind inside the porn crowd.
+
+Verified: URL-slug measurements over f/h shelves (this session's analysis); the paired
+validator fix (`vanilla_dilution`) is pinned by tests in the incumbent skill's
+`scripts/test_query_anchor.py` — see find-media's CHANGELOG same date.
+
+## 2026-08-05 — docid capture joins the deliverable contract
 
 `SKILL.md` §"The deliverable contract" item 2 now also requires every stocked candidate to
 carry its `docid` when §4's join paired one. Why here and not just in v2's chrome_route.md

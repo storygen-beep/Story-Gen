@@ -141,9 +141,9 @@ mcp__claude-in-chrome__tabs_context_mcp  { createIfEmpty: true }   → tab ids
 |---|---|
 | `navigate` | Go to the query URL. `tabId` optional standalone, **required inside `browser_batch`**. |
 | `computer` `{action:"screenshot"}` | The contact sheet. Google's results grid already IS a contact sheet — one screenshot shows 20–40 tiles. |
-| `javascript_tool` `{action:"javascript_exec", tabId, text}` | The workhorse: the URL extract (§4) and the options POSTs (§5). REPL semantics — the last expression is the return value, and top-level `await` works, so an inline `await fetch()` call is fine. |
+| `javascript_tool` `{action:"javascript_exec", tabId, text}` | The workhorse: the URL extract (§4) and the options POSTs (§5). REPL semantics — the last expression is the return value, and top-level `await` works, so an inline `await fetch()` call is fine. ⚠️ **One call has a hard 45 s ceiling** (`Runtime.evaluate`), and on timeout the page KEEPS EXECUTING while you get an error and no value — so any loop of network calls must be chunked/concurrent and idempotent (§5). |
 | `browser_batch` | Collapse navigate + wait + screenshot into ONE round trip. |
-| `computer` `{action:"scroll"}` | Force Google's lazy-loaded tiles in before extracting. |
+| `computer` `{action:"scroll"}` | Pull in lazy-loaded tiles already on the page. Does **not** load more results — that needs a "More results" click (§4). |
 
 **Do not call `read_page` or `get_page_text` on a results page.** Accessibility snapshots are
 the entire reason the old Playwright MCP path cost ~30× the tokens per action. One regex over
@@ -273,7 +273,8 @@ const hosts = Object.entries(by).sort((a, b) => b[1] - a[1]);   // REAL hostname
 // docid join — Google's index id per result, from the page's metadata triples
 // ["<docid>",["<thumb>",h,w],["<file>",h,w]]. It is what makes "fetch related" a
 // one-navigation lookup later (§5b), so capture it on EVERY harvest. Misses are
-// lazy-loaded tiles — the scroll-and-re-extract pass below recovers most of them.
+// lazy-loaded tiles — the scroll pass below recovers those already in the page;
+// the "More results" click is what adds new ones.
 const docids = {};
 for (const m of html.matchAll(/"([A-Za-z0-9_-]{10,20})",\["https:\/\/encrypted-tbn[^"]+",\d+,\d+\],\["(https?:[^"]+?)",\d+,\d+\]/g))
   docids[m[2].replace(/\\u003d/g, '=').replace(/\\u0026/g, '&').replace(/\\\//g, '/').split('?')[0]] = m[1];
@@ -300,7 +301,8 @@ re-run this block rather than guessing the url list.
   on clearnet: no Tor, no signing, no expiry. Exact host strings — some are subdomains,
   e.g. `public.flashingjungle.com`, `i.xgroovy.com` — in `references/media_sources.md`;
   match on the registrable domain, not the full host, or a filter misses half of them.
-- **Cut every `*.phncdn.com` URL before you stock anything.** They are not fetchable (see
+- **Stock `*.phncdn.com` like any other host** — the cut that used to live here was
+  removed 2026-08-06; its urls are signed and fetch 200 (see
   the box at the top of this file), so stocking one puts a guaranteed-broken option on the
   human's shelf:
 
@@ -318,10 +320,28 @@ re-run this block rather than guessing the url list.
   the fetch sanity check in §6 tells you what it actually served. Don't assume behaviour
   for it in either direction, and don't skip it on suspicion.
 
-**Scroll, then re-extract.** Google lazy-loads tiles. Scroll to the bottom, wait, run the
-extract again, and compare counts — if the set didn't grow, the page was already fully loaded
-and you've hit the pool's edge. That self-check costs one call and tells you whether to run a
-sibling query.
+**Scroll pulls in lazy tiles; only the "More results" CLICK adds new ones.** Two different
+mechanisms, and confusing them costs you most of the grid. Google renders ~200 tiles and
+stops. Scrolling past that does nothing — measured 2026-08-06: four scroll-to-bottom passes
+moved the page and added **zero** tiles. What adds tiles is the **"More results" button** at
+the foot of the grid, and it is **repeatable**: 205 → click → 405 → click → 605, roughly 200
+a click, with the button still present afterwards. Click until you have enough.
+
+Grab it by visible TEXT, never a class — Google's class names are obfuscated and rotate:
+
+```js
+const btn = [...document.querySelectorAll('a[role="button"],div[role="button"],button,input')]
+  .find(el => /^more results$/i.test((el.innerText || el.value || '').trim())
+              && el.getBoundingClientRect().width > 0);
+```
+
+So the self-check is extract → click → re-extract. **A flat count after scrolling means you
+reached the button — never that the pool is exhausted.**
+
+⚠️ **The yield is thin on an ANIMATED slot.** At 605 tiles that same grid gave **80**
+extractable `.gif`/`.mp4` urls (~13%) — the depth is mostly `.jpg`/`.webp` page thumbnails a
+`gif|mp4|webm` extract cannot use. Two or three clicks is the sweet spot; grinding deeper is
+not worth the calls.
 
 ---
 
@@ -350,9 +370,10 @@ const { q: Q, urls, hosts, docids } = window.__fm;   // from §4 — do not re-d
 
 // 1. stock, tagging every candidate with the search that produced it AND its
 //    docid when §4's join paired one — that id is what powers "fetch related".
+// ⚠️ CHUNKED AND CONCURRENT, never a sequential await-per-url loop — see the note below.
 const isVid = u => /\.(mp4|webm)$/i.test(u);
 let ok = 0;
-for (const u of urls) {
+const post = async u => {
   const r = await fetch(`${API}/options/add`, J({
     game: GAME, file: FILE, slot_key: KEY, url: u, query: Q,
     type: isVid(u) ? 'video' : 'gif',
@@ -360,7 +381,8 @@ for (const u of urls) {
     docid: (docids || {})[u] || ''
   }));
   if ((await r.json()).ok) ok++;
-}
+};
+for (let i = 0; i < urls.length; i += 10) await Promise.all(urls.slice(i, i + 10).map(post));
 
 // 2. record the SEARCH — its real counts and its histogram. ALWAYS run this, INCLUDING
 //    when `urls` is empty: a query that came back with nothing is still a query that ran,
@@ -375,13 +397,35 @@ await fetch(`${API}/queries/add`, J({
 
 Rules, each with the reason it exists:
 
+- ⚠️ **Stock CHUNKED AND CONCURRENT. A sequential `for … await fetch` loop over 60+ urls
+  ALWAYS times out.** `Runtime.evaluate` has a hard **45 s** ceiling and `options/add` costs
+  ~0.6 s, so ~75 sequential POSTs cannot finish inside one `javascript_tool` call. Measured
+  2026-08-06 on vesper: **five of six slot agents hit it independently**, at 74, 79, 83 and 85
+  urls. `Promise.all` in chunks of 10 finishes the same 74 in ~20 s.
+  **The failure is worse than a timeout, because it is not atomic.** The renderer keeps
+  running the loop after the tool gives up, so the shelf goes on filling while you hold an
+  error and no return value — you cannot tell how many landed. Recovery is safe (`options/add`
+  dedupes by url and answers `{"ok":true,"duplicate":true}`, so re-posting the whole list
+  costs nothing and creates no duplicates) but you must re-read the shelf to learn the count.
+  Above ~60 urls, split the list across TWO `javascript_tool` calls rather than betting on it.
+- ⚠️ **POST `hosts` RAW — it is already `[[host, count], …]`, and that is the only shape the
+  server accepts.** `_clean_hosts` (`api/v1/media_finder.py:551`) requires a list of 2-element
+  pairs and returns `None` — silently **dropping the field, keeping the record** — for anything
+  else. Reshaping it to `[{host, n}]` is the natural-looking mistake, and it costs the histogram
+  without any error: measured 2026-08-06, all 34 chips of a vesper run stored `hosts: absent`
+  and every query lost its diagnosis. The only mangling the endpoint *refuses* loudly is the
+  `" DOT "` transform (400). Re-read one chip after your first `queries/add` and confirm
+  `hosts` is actually stored.
 - **`file` is the slot's TOML-declared path, character for character.** It is where the bytes
   will go. A typo installs to a path the game never reads.
 - **`slot_key` is the item's own key, verbatim — the SHELF is filed under it.** They are the
   same string for an untagged slot, which is nearly all of them; they differ the moment a
   block authors an `id`. Send both. This snippet omitted `slot_key` for months while three
   prose rules demanded it, and code always beats prose it contradicts.
-- **`query` is the search you ran, verbatim.** It is what puts this candidate in a labelled
+- **`query` is the search you ran, verbatim — and it comes BACK as `found_by`, a list.**
+  That rename is the one field trap in this API: you POST `query`, the store files it under
+  `found_by`, and there is no `query` key on an option ever. It is what puts this candidate
+  in a labelled
   bucket in the picker instead of an undifferentiated pile. Omit it and the option lands
   under "older searches" with no way, ever, to work out where it came from — there is no
   retroactive attribution, which is exactly why ~19,300 already-stocked options can never
@@ -464,7 +508,7 @@ serves the real feed (~50 direct urls, seed excluded).
    `Q` = the seed's `found_by[0]`, else the slot's newest non-related query, else
    the filename's slug words. Keeping the slot's proven query pins the ACT while
    the visuals wander — it is what stops a related hop drifting off the brief.
-3. **Navigate, scroll, extract** — §4's blocks verbatim, including the docid join:
+3. **Navigate, scroll, click "More results", extract** — §4's blocks verbatim, including the docid join:
    every clip this stocks carries its own docid, so any of them can seed the next
    hop. Recursion is the human clicking again, never a loop you run.
 4. **Stock under a related LABEL, then record.** Label = `⇢ ` + the seed's filename
@@ -601,7 +645,7 @@ curl -sS -L --max-time 60 \
 > everywhere. Only a hand-rolled fetcher is exposed. Send no `Referer`, or send the URL's own
 > origin — never the search engine's.
 
-**Do not spend a fetch on `*.phncdn.com`.** It is discovery-only — see the box at the top.
+**`*.phncdn.com` is fetchable** when the signed query string survives extraction — see the box at the top.
 The header lore around phncdn (410 Gone without a User-Agent, 0-byte files at exit 0) is real
 for any phncdn request you attempt, but the correct guidance is simply not to attempt one.
 
@@ -806,8 +850,9 @@ run where the only unfetchable URLs were the ones that route was built around.
 | Extract returns only `gstatic` / `googleusercontent` | You're on the web tab, not Images | Confirm the tile grid in a screenshot; click Images, re-extract |
 | Results are Reddit / TikTok / Facebook | A story or character word flipped the intent classification | Strip every story word; keep act + position + modifier |
 | Bright studio when the beat wants grimy | No anti-studio modifier | Add `amateur` / `real` / `voyeur` / `hidden cam` |
-| Extract count doesn't grow after scrolling | Pool exhausted, not a bug | Run a sibling query — different phrasing, different hosts |
-| A candidate 470s / 410s / lands 0 bytes at exit 0 | It's a `*.phncdn.com` URL | Don't fetch phncdn at all — discovery-only. Cut it at §4 |
+| Extract count doesn't grow after scrolling | You reached the ~200-tile boundary — scrolling cannot cross it | **Click "More results"** (§4), then re-extract. Measured: 4 dead scrolls → 0 new tiles; each click → +~200. Never call the pool exhausted before the click |
+| Grid still flat after clicking "More results" | Pool genuinely exhausted for this phrasing | Run a sibling query — different phrasing, different hosts |
+| A candidate 470s / 410s / lands 0 bytes at exit 0 | A phncdn URL that LOST ITS TICKET | 470 means the query string was stripped. Unescape before extracting and keep `?validfrom&validto&hash` — the bare path is always dead |
 | File is under 1024 B, or `file` says `text/html` | Error page, not media | Delete it AND `options/remove` its URL |
 | `tier_format_check.py` fails a file that downloaded fine | Pre-install gate is stricter than fetch sanity | Animated needs ≥ 51200 B — refetch a real clip, don't lower the gate |
 | `options/add` → `400 Invalid or missing game` | Sent `game` the wrong way for that endpoint | **Body** on every media-finder POST; **query param** on `options/list` (GET) and on all media-review endpoints |
@@ -818,6 +863,8 @@ run where the only unfetchable URLs were the ones that route was built around.
 | `video_frames.py` exits 3 | ffmpeg not on PATH | Read thumbnails individually — exit 3 means degrade, never crash |
 | Histogram rows come back `[BLOCKED: JWT token]` | Bare dotted hostnames in a RETURN VALUE trip the secret-scanner | Join the labels with `" DOT "` — but only in what you *return*, never in what you POST (§4) |
 | `queries/add` → `400 … ' DOT ' transform` | You transformed the hosts before POSTing them | Keep `hosts` real; the transform belongs on the returned array alone. The endpoint is fine |
+| `options/add` loop returns a **45 s timeout** and no counts | Sequential `await` per url — `Runtime.evaluate` caps at 45 s and each POST is ~0.6 s | Chunked `Promise.all` (10 at a time); split >60 urls across two calls. **The loop keeps running after the timeout**, so re-read the shelf for the true count rather than assuming zero (§5) |
+| `queries/add` returns 200 but the chip has **no hosts** | You reshaped `hosts` to `[{host,n}]` — `_clean_hosts` accepts only `[[host,count],…]` and drops the field silently | POST `hosts` raw from `Object.entries()`. Re-read one chip to confirm it stored (§5) |
 | Picker shows every option under "Older searches" | You stocked without `query` | Send `query` on every `options/add`. There is NO retroactive attribution — unlabelled is permanent |
 | A chip is missing for a query that ran | You skipped `queries/add` | Call it once per query, including zero-yield ones |
 | ⇢ button never flips to "N related" after a related run | The closing `queries/add` lacked `source: 'related'` or `seed_url` | Both fields, always — they are the join the button derives its state from (§5b) |
