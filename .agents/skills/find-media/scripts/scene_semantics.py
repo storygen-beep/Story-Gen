@@ -61,7 +61,19 @@ ACT_ANCHORS = {
     "sex", "fuck", "fucking", "fucked", "fucks",
     "blowjob", "blowjobs", "handjob", "fingering", "cunnilingus",
     "oral", "penetration", "creampie", "deepthroat", "anal",
-    "sucking", "cum", "cumshot", "cumming",
+    "sucking", "cum", "cums", "cumshot", "cumming",
+    # `gangbang` — added 2026-08-06 while authoring vesper's captivity beats, where the
+    # validator flagged `gangbang bare room man watching gif` as `no_act_anchor` and would
+    # have sent the author rewriting a query that was already right. Same shape as the `bj`
+    # case below: the enforced rule penalising the better query.
+    # MEASURED, the bare word carrying the whole query, no `fuck` present:
+    #   `gangbang bare room gif` -> 78 urls, EVERY host a porn host (myteenwebcam,
+    #   porngif.co, freakydeakygifs, sexxxgif, phncdn, porngifmag, hardcoregify, xgroovy,
+    #   nsfwgify, xgifer). Nothing mainstream in the extract at all.
+    # Passes the membership rule on its own terms — no common non-sexual reading — unlike
+    # the position names, which is why `doggystyle` is still NOT here: it is a position, the
+    # `cowgirl` measurement governs it, and nobody has measured it bare.
+    "gangbang", "gangbanged", "gangbangs",
     # `bj` — the corpus's OWN abbreviation, added 2026-08-03. It is not a synonym you reach
     # for when `blowjob` fails; it retrieves DIFFERENT and better material. Measured on two
     # vesper slots: it beat `blowjob` outdoors (real alleys — dumpsters, graffiti — where
