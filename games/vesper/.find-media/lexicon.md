@@ -563,3 +563,267 @@ the occupation BOUND (real garages, grimy, industrial-adjacent — porn-native a
 confirmed) but the aisle became mid-act STUDIO (Brazzers/Dorcel "Car Mechanic Porn GIFs")
 and yield HALVED to 28. So "the setting word works" and "the query still says what you meant"
 are two different questions. Buying the room can cost you the beat.
+
+## 2026-08-07 — PACE vocabulary DOES retrieve (the driver predicted it would drop; wrong)
+
+I expected `slow`/`steady`/`long strokes` to be a process-word class that drops silently, like
+`positioning`, `inspecting`, `pulls out`. **Measured false.** `slow deep strokes fuck doggystyle
+amateur gif` → 77 urls, 100% porn hosts, 15 host rows, zero stock/editorial/Tenor.
+
+Google's OWN result labels prove the tag is live:
+  "Nothing like slow deep strokes from…", "Sensual Slow Strokes That Drive" (FapVille),
+  "Deep Stroking Doggystyle porn gifs", "Slow Doggystyle Porn GIFs | Pornhub" (x2),
+  "Deep Strokes Makes Her Cum", "Long stroke", "Back strokes for days!"
+
+⚠️ Note `stroke` is a STRONG SFW homograph (swimming, golf, medical) and produced **zero** drift
+at head or tail — the `fuck` + `doggystyle` anchors held it completely. Consistent with the
+name-word rule: a homograph is safe when a hard anchor outranks it.
+
+CONFIRMED PACE TERMS: `slow deep strokes`, `deep stroking`, `long stroke`, `slow and easy`.
+These are the differentiator for beats distinguished only by TEMPO — several remain.
+
+back shots | FRESH porn-native slang for from-behind, mined by an agent rather than supplied.
+           | 100% porn hosts, and a host cluster almost DISJOINT from `bent over` / `pounded
+           | from behind` queries (84 of 85 urls new) — so it is a real variety lever, not a
+           | synonym. No basketball / photography homograph drift. Aisle skews kneeling-on-bed
+           | rather than bent-over-an-edge: direction-correct, furniture-neutral.
+pounded from behind | clean, 100% porn hosts, grid showed the over-an-edge geometry.
+
+## 2026-08-07 — pace confirmed twice, plus a REGISTER warning and a verification technique
+
+SECOND independent confirmation: `slow deep fuck missionary gif` -> 88 urls, 100% porn hosts,
+result titles literally "Slow Deep Pumps", "Slow Missionary Loving", "#passionate sex #slow
+deep fuck". `slow` and `deep` are live tag words.
+
+⚠️ VERIFICATION TECHNIQUE worth teaching: to prove a token was HONOURED rather than silently
+dropped, compare the shelf's OVERLAP with the same query minus that token. Only **7 of 88**
+urls collided with plain `missionary fuck amateur gif` — a dropped token would have returned
+near-identical results. Cheap, and it settles the silent-drop question the histogram cannot.
+
+⚠️ REGISTER WARNING FOR LO — `slow` recruits the slow / romantic / loving / PASSIONATE aisle
+inside porn. Still real hardcore, but the affect runs WARMER than vesper's cold-noir arousal
+axis (see the arousal-axis doctrine). The pace buckets are on-act and off-tone; worth knowing
+before picking from them.
+
+table | SAFE and porn-native, and — unlike `garage mechanic` — it does NOT outrank the act.
+      | `missionary fuck on table amateur gif` kept yield at 78 AND stayed on the beat, while
+      | buying the surface the beat needs (laid back on a cradle, not a bed). The other three
+      | grids were bed-heavy. **A SURFACE noun is cheap; a SETTING noun is expensive.**
+mating press | works but is the WEAKEST bucket — thinnest yield (56) and a ~10-15% 3D/CGI tail,
+             | because the tag is shared with drawn corpora.
+missionary   | behaves like `cowgirl`/`ragdoll` — needs `fuck` beside it, and then it is clean.
+             | No religious/vocation crowd appeared in any of four histograms.
+
+## 2026-08-07 — the cmnf setting rule, now with FOUR confirmations + a new failure mode
+
+INERT beside `cmnf` (bind nothing, grid returns the bare genre aisle — bathrooms, clinics, a
+library, a boat, a beach, bowling, a disco, housework — behind a ~100%-porn histogram and NO
+"Did you mean"): `warehouse`, `factory floor`, **`boiler room`**, **`repair bay`**.
+**THE PATTERN, 4 confirmations: beside `cmnf` a bare ROOM/SPACE noun is INERT. Only a
+porn-native trade-WORKPLACE compound binds.**
+
+loading dock | does NOT repair the `dock` homograph — the COMPOUND SPLITS and the waterside
+             | sense wins: lakeside decking, CMNF beach, woods, poolside. Zero industrial docks.
+
+⚠️ NEW FAILURE MODE — **a noun can BIND PERFECTLY and still be the wrong picture.**
+`cmnf naked woman truck stop amateur`: the token bound (every tile truck-stop-labelled), 100%
+porn hosts — and the aisle is SOLO ROADSIDE / IN-CAB FLASHING in daylight. No working men, no
+machinery interior. This is the inverse of "buying the ROOM can cost you the BEAT": there the
+noun outranked the act; here the noun did exactly what it said and said the wrong thing.
+Only the grid glance catches it.
+
+NEW PROVEN BINDERS for the t4 industrial-nude family:
+  auto shop                     | 98/98 stocked, CLEANEST grid of that run, 0% watermark.
+                                | Real garages, open engine bays, clothed men present.
+  enf ... industrial garage     | 83 stocked, a genuinely DIFFERENT aisle from `auto shop` —
+                                | garages, workshops, parking structures, tool walls. `enf` held
+                                | fine beside `nude woman` (no scientific-acronym drift),
+                                | consistent with the earlier reconciliation.
+
+PACE + RIDING | third confirmation, and the compound is a REAL corpus tag rather than a hopeful
+              | join. Google's own labels returned: "slow RIDING", "Hot Slow Riding", "Slow
+              | Ride", "A nice, slow deep ride!", "Slow Ride Deep Strokes for Tight...",
+              | "Steamy Slow Ride With A Hot MILF", "Long stroke".
+              | Best aisle of that slot: `riding slow deep strokes fuck gif`.
+              | Tails to expect: `slow riding` ~10-15% romance/couple; `grinding on his cock`
+              | ~20% clothed dry-hump/handjob; `riding slow deep strokes` ~20% doggystyle
+              | (bleed from the `deep strokes` half). All kept per dump-all.
+
+## 2026-08-07 — ⚠️ TAGS THAT EACH WORK CAN STILL FIGHT: pace does NOT compose with finish
+
+  slow deep strokes cum inside her gif -> 71 urls, 100% porn hosts, GATE-FAILED, stocked 0.
+  Grid was generic mid-act missionary/prone ("Deep Strokes Makes Her Cum", "Long Stroke",
+  "Prone Bone") — no finish, no her-on-top. **The PACE tokens OUTRANKED the finish anchor.**
+
+Both `slow deep strokes` and `cum inside` are independently PROVEN live tags. Together they
+lose. **This is a COMPOSITION rule, not a token rule** — the first of its kind found in this
+run, and it is invisible to the histogram. Pace belongs on a MID-ACT beat; a FINISH beat wants
+finish vocabulary and nothing competing with it.
+(The driver listed `deep stroking creampie` to a later agent before this landed — its gate
+should catch it; noted so the guidance is corrected rather than repeated.)
+
+cum leaking out | reads as the nude-DISPLAY / aftermath aisle (solo drip, ass-up close-ups),
+                | NOT the act. Gate-failed at 84 urls / 100% porn hosts.
+
+✅ NEW TERM FAMILY, harvested from Google's own labels — **the finish MOMENT, as distinct from
+creampie AFTERMATH**: `pulsating creampie`, `throbbing creampie`, `pumping cum inside`.
+Labels returned: "pulsating cum inside", "Cum inside pussy (pulsating visible)", "Still
+Pumping Hot Loads Into Her". 100% porn hosts, and the ONLY term of that slot's five that put
+the ejaculation itself on screen. Promote it — every other finish term returns before-or-after.
+
+## 2026-08-07 — the composition rule confirmed twice, and `bench` corrected
+
+PACE x FINISH — SECOND independent confirmation, different agent, different tokens:
+  long stroke creampie from behind gif -> 100% porn hosts, correct act/direction/posture, but
+  `long stroke` OUTRANKED `creampie` and the grid slid from FINISH to MID-STROKE
+  ("Long Stroke", "Stroking creampie", "Deep Strokes Makes Her Cum").
+**Rule stands: pace belongs on a PACE/mid-act beat, never on a FINISH beat.**
+
+⚠️ `bench` CORRECTED — the driver told several agents it was a safe surface noun like `table`.
+Measured: `bench` is porn-native for the ACT but resolves to **PARK BENCH** (outdoor/public:
+"Outdoor bench cowgirl fuck", "Cute Babe Fucks on Park Bench", "picnic bench fuck") and to
+**gym BENCH-PRESS**. Right aisle, wrong room. **`table` buys an indoor raised surface; `bench`
+buys a park.** Use `table`.
+
+⚠️ `slow` has a SECOND sense Google honours: in ~1/3 of titles it reads as SLOW-MOTION footage,
+not slow pace. Harmless (still on-act) but it dilutes the tempo bucket.
+
+NEW PROVEN FINISH ANCHORS: `internal cumshot` (best-on-beat of its slot — "INTENSE Doggystyle
+Creampie", "throbbing doggystyle cumshot"), `pumped full of cum` (no gym/fitness leak from
+`pumped`, grid dominated by internal-finish).
+
+TONE REPORT for LO across the riding/pace buckets: none is grimy-industrial. `slow deep fuck
+cowgirl` = warm, domestic, homemade bedrooms, soft daylight. `grinding on his cock` = glossier,
+studio-leaning, named performers. `cowgirl fuck on bench` = outdoor/public. **The tighter
+close-up crops in the `grinding` bucket are the nearest thing to cold on offer.**
+
+riding him | THE cheapest way to buy HIS underneath-posture. `cowgirl` alone does NOT guarantee
+           | it. Grid returned the beat literally: "riding him until he cums", "Riding to
+           | creampie", "amateur wife rides cock and gets cum".
+⚠️ PACE VOCABULARY IS DIRECTIONAL: `deep stroking` / `long stroke` describe HIM thrusting, so
+they are wrong on a SHE-RIDES-HIM beat regardless of tempo. An agent worked this out unaided
+and declined the family. Pace terms carry an implicit actor — check whose body is moving.
+internal cumshot | binds as a genre tag and works, BUT recruits STUDIO footage (ALLINTERNAL
+                 | watermarks) despite `amateur`, plus a ~10-15% facial/cum-on-body tail.
+                 | Least grimy of its slot's three buckets.
+table | THIRD independent confirmation — honoured, on-beat, did not outrank the act.
+
+## 2026-08-07 — the FAST end of pace: the best term found in the run
+
+hard and fast | A LIVE PORNHUB TAG STRING, not merely tolerated. Google echoed it back almost
+              | verbatim as titles: "rough hard fast wild doggystyle", "rough fast hard
+              | doggystyle fuck", "Fast Tough Doggy Pound". 100% porn hosts (18/18), 66/66
+              | stocked, ZERO overlap with either sibling query on the same slot.
+              | ⚠️ TONE: the fast end has NO romantic/passionate contamination — the exact
+              | opposite of `slow`. It recruits the ROUGH aisle (rough/wild/tough/pound
+              | cluster with it), which suits vesper's cold register far better.
+              | One cost: an ANAL sub-aisle in the tail.
+jackhammer    | CONFIRMED SAFE and porn-native. No power-tool homograph at all — even on a
+              | slot whose setting IS industrial. Labels bound it as an act: "jackhammer pussy
+              | pounding", "jackhammered", "Jackhammer Porn Gif | Pornhub".
+
+⚠️ SIZE NEEDS TO LEAD. `monster cock bent over bench fuck gif` — the size token was only
+WEAKLY honoured; `bent over` + `bench` outvoted it and the grid came back near-identical to a
+plain surface query. To make size dominate, LEAD with the size phrase and DROP one surface noun.
+
+`bench`, further nuance (two more grids): safe for the ACT, but it pulls a BONDAGE-bench
+sub-aisle when an aggression token sits beside it, and an OUTDOOR PARK-bench sub-aisle when one
+does not. `table` remains the clean indoor surface.
+
+💡 THE OVERLAP TEST, used unprompted and for free: two queries differing only in their LEAD
+token but sharing the rest overlapped just 16 of 71 (23%) — proving both lead tokens were
+honoured rather than dropped. Cheapest available proof against the silent-drop failure mode.
+
+## 2026-08-07 — ⚠️ `table` IS CONDITIONAL: the `milking table` trap
+
+  cowgirl fuck on table amateur gif        -> 84 STOCKED. Safe.
+  pumping cum inside bent over table gif   -> 0 STOCKED, condemned at the grid.
+  pumped full of cum amateur table gif     -> 0 STOCKED, condemned at the grid.
+Same word, same slot family, same day — a clean natural experiment.
+
+**Beside a CUM / CREAMPIE / FINISH word, `table` stops being a surface noun and becomes the
+genre tag `MILKING TABLE`** — man supine on the table, woman servicing him. **DIRECTION
+REVERSED.** 100% porn hosts, no "Did you mean", six of ~18 first-screen tiles labelled
+"Milking table cumshot" / "Milking Table Porn Gifs". Only the grid screenshot catches it.
+
+THE RULE:
+  `table` + fuck / cowgirl / a position word  -> SAFE (4 confirmations, buys an indoor surface)
+  `table` + cum / creampie / any finish word  -> POISON (milking table, reversed direction)
+  `bench` on a finish beat                    -> the safe substitute (0 milking mentions,
+                                                 yield held at 78) but it is ABSORBED rather
+                                                 than honoured — buys the act, not the surface.
+⚠️ The raised work-cradle appears NOT to be buyable on a finish beat at all. Stop spending on it.
+
+ALSO VALIDATED THIS ROUND:
+  workbench | behaves as a SURFACE, not a dead space noun — `bent over workbench fuck from
+            | behind gif` stocked 47. Thin but real; it is not in the `workshop` dead class.
+  throbbing creampie | 81 stocked first try. The finish-MOMENT family holds up.
+  hard and fast      | 85 stocked on a second independent slot. Best fast-end term, confirmed.
+  balls deep from behind fuck amateur | 0 stocked — condemned. `balls deep` needs a CUM word
+            | beside it (`balls deep creampie` / `balls deep cum inside` both landed); on a
+            | bare mid-act beat it does not carry.
+
+## 2026-08-07 — CLINICAL vs VERNACULAR, measured on one oral slot
+
+  eating pussy       -> 71 urls / 71 stocked (100% kept)
+  licking her pussy  -> 85 urls / 82 stocked (96%)  <- 12 hosts NEITHER other query reached
+  cunnilingus        -> 76 urls / 60 stocked (79%)  <- 16 already shelved from the vernacular
+
+**VERNACULAR WINS, and the tell is the DUPE RATE, not the url count.** `cunnilingus` largely
+RE-SERVED the vernacular crowd instead of opening a new one, and it dragged in the slot's only
+drawn/hentai hosts (rule34, thatpervert) which neither vernacular query produced.
+`cunnilingus` IS a real act anchor — it landed and stocked 60 — it is just the weakest of the
+three on this beat.
+⚠️ `eating pussy` and `licking her pussy` are NOT synonyms: only 19 of 232 label-attributions
+overlap across all three chips. Run BOTH.
+
+GENERAL: when two phrasings look synonymous, judge them on the DUPE RATE against the shelf
+already built, not on raw yield. A high-dupe query is re-serving a crowd you already have.
+
+`amateur` re-confirmed as a clean porn-native crowd word — dropping the surface noun for it
+cost nothing on geometry (tail tiles still showed the leaned-back-on-a-counter composition).
+
+straddling + seated | LANDED (76 stocked). Names HIS posture, which the skill identifies as the
+                    | largest rejection class — `him` does not. An agent found this string
+                    | already measured clean on sex/renner_loop_vaginal_t5 (2026-08-05, 76 urls)
+                    | by READING query_ledger.jsonl, and preferred it over the driver's
+                    | suggestion on that evidence. The ledger is a reusable asset across slots,
+                    | not just an audit trail — worth teaching.
+                    | Tail: facesitting/femdom + Tenor SFW "straddle" gifs, a minority.
+
+⚠️ OPERATIONAL — measured 2026-08-07: **`curl` to `localhost:8000` returns connection-refused
+from inside an agent sandbox even when the Django server is up and listening.** All API work
+must go through the PAGE's `fetch` (which works). Consequence: the STEP-0 dedupe guard cannot
+actually run "before Chrome" as briefed — an agent needs a tab first. The driver-side todo
+computation (a slot is done if `queries[slot_key]` is non-empty) is the real guard; the
+agent-side check is a backstop and must be ordered AFTER tab creation.
+
+## 2026-08-07 — server-outage hypothesis TESTED against the milking-table finding: REJECTED
+
+An agent found the Django dev server down and restarted it (correct catch, real outage), and
+hypothesised the `table` zeros were silent stock failures rather than a genuine gate.
+**Checked against the chip timeline — the hypothesis does not hold:**
+  04:15:02  stocked 81  <- server demonstrably UP
+  04:15:26  stocked ok
+  04:15:40  stocked 0   <- `pumped full of cum amateur table gif`
+  04:16:08 / 04:16:37 / 04:16:52  all stocked ok
+  04:16:57  stocked 0   <- `pumping cum inside bent over table gif`
+  04:17:42  last chip, then a 50-MINUTE GAP to 05:08:04  <- THE ACTUAL OUTAGE
+The outage window contained NO agent activity (the driver process had exited), so it cost
+nothing. The milking-table zeros were deliberate gates, not failures.
+
+⚠️ DRIVER'S OWN OVERSTATEMENT, corrected: I wrote "measured three times today." It is TWO
+zeros, of which ONE carries explicit grid evidence (six labelled "Milking table cumshot" /
+"Milking Table Porn Gifs" tiles described by the agent) and one is a consistent but
+unverified zero from an agent killed before it reported. The corroboration that makes it
+solid is the REPAIR, not the repetition: `pumped full of cum amateur BENCH gif` -> 78 stocked
+at 04:13, same slot, same minute-scale window. One token, two outcomes.
+
+## 2026-08-07 — the finish-MOMENT family beats plain `creampie`, with a proper CONTROL
+An agent ran a deliberate plain-anchor control on one slot, same session:
+  pulsating creampie amateur close up gif -> 80 urls, wall-to-wall finish MOMENT
+  bred creampie cum inside her amateur    -> 92 urls, widest host spread (22 hosts)
+  creampie amateur homemade gif (CONTROL) -> 74 urls, 100% porn, GENERIC MID-ACT aisle
+**The loosest query returned the FEWEST urls and the wrong aisle.** Plain `creampie` buys the
+GENRE, not the MOMENT. `bred` is a third viable member (non-poisonous beside a real anchor).
+With no surface noun and no position token, the milking-table trap cannot fire at all.

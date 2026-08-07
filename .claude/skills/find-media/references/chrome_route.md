@@ -20,16 +20,27 @@ source was the real ceiling, and no amount of query tuning was going to raise it
 ships an accessibility snapshot on every call. That is the whole argument for §4: you
 extract Google's results with one JS regex instead of clicking through tiles.
 
-> ### PornHub is DISCOVERY-ONLY — never queue a phncdn URL for download
-> `egl.phncdn.com/gif/<id>.gif` returns **470 on clearnet AND over Tor**, every id tried. It
-> is not a fetch endpoint. The real media URL, read off a gif page, has the shape
-> `el2.phncdn.com/pics/gifs/<nnn>/<nnn>/<nnn>/<id>a.webm?validfrom=<ts>&validto=<ts>&ipa=1&hash=<sig>` —
-> **signed, time-limited, IP-locked** — and our extraction strips query strings by
-> construction (§4, and it must), which destroys the signature. `pornhub.com` itself is
-> unreachable on clearnet from this machine (curl reports `000`).
+> ### phncdn: STOCK it from the browser route, FETCH it only via `fetch_pornhub.py`
+> ⚠️ **This box said "DISCOVERY-ONLY — never queue a phncdn URL" until 2026-08-07, and it
+> contradicted §4's own code (`:304`, "Stock `*.phncdn.com` like any other host") and `:657`
+> ("**`*.phncdn.com` is fetchable** when the signed query string survives extraction"). An
+> agent mid-run spotted the contradiction. Both halves were half-right; here is the whole:**
 >
-> So: a PornHub-hosted Google result is worth **reading** — its title and tags are free
-> vocabulary for §1. Read the word, log it, and **skip the URL as a candidate.**
+> `egl.phncdn.com/gif/<id>.gif` — the PATH-ONLY form — really does return 470. The real url
+> carries its signature IN THE QUERY STRING
+> (`…?validfrom=…&validto=…&hash=…`), and the browser extractor strips query strings by
+> construction (§4, and it must). So **a phncdn url harvested through the browser route is
+> path-only and will mostly be DEAD on the shelf** — measured ~17 per slot on this run.
+>
+> **STOCK them anyway** (dump-all governs; the human sees a broken tile and moves on), but know
+> they are the shelf's dead weight. **`scripts/fetch_pornhub.py` is the route that captures the
+> COMPLETE signed url** — Google's results HTML carries it, JSON-escaped, and the old regex
+> terminated at the file extension, which is what produced the "470 always" measurement in the
+> first place. Signed, the same url serves 200; the tickets run `validfrom` 2025 → `validto`
+> 2125, so they are not perishable.
+>
+> A PornHub-hosted Google result is also worth **reading** — its title and tags are free
+> vocabulary for §1.
 
 **What you deliver per slot:** one installed best-guess pick, plus **≥6 stocked options**
 in the options store for the human to flip through in the review UI (NSFW slots stock 12,
