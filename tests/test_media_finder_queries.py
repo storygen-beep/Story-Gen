@@ -316,7 +316,9 @@ def test_options_list_returns_both_arrays(games_root):
 
 def test_options_list_on_an_unknown_slot_returns_empty_arrays(games_root):
     body = json.loads(_get(mf.options_list, "game=g&file=nope").content)
-    assert body == {"options": [], "queries": []}
+    # Exact equality on purpose: this pins the response CONTRACT, so a new root has
+    # to be added here deliberately. `picks` joined `queries` on 2026-08-09.
+    assert body == {"options": [], "queries": [], "picks": []}
 
 
 # ── docid: Google's index id, captured at harvest, first-write-wins ──────────

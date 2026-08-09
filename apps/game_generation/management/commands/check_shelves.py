@@ -25,10 +25,13 @@ and re-run a search you did not need.
 This command is the alarm. It DEFAULTS to read-only — diagnosing loudly is the
 whole job — and `--repair` is the separate, deliberate step that acts on it.
 
-A shelf is now two roots of one file: `options` (the candidates) and `queries`
-(which search found each of them). They are keyed on the same slot string and a
-repair moves BOTH or neither — a shelf that outlived its labels would show every
-option under "older searches" with no way to tell that anything was lost.
+A shelf is now three roots of one file: `options` (the candidates), `queries`
+(which search found each of them) and `picks` (what the files ALREADY INSTALLED off
+this slot were, back when they were options). They are keyed on the same slot string
+and a repair moves ALL or none — a shelf that outlived its labels would show every
+option under "older searches" with no way to tell that anything was lost, and one
+that outlived its picks would strand the only record of where its installed clips
+came from.
 
     python manage.py check_shelves --game vesper
     python manage.py check_shelves --all
@@ -51,8 +54,19 @@ GAMES_ROOT = Path(settings.BASE_DIR) / "games"
 # ignoring the extension — the resolver is extension-agnostic, so "a/b.webm" and
 # "a/b.gif" name the same slot.
 _MEDIA_EXTS = {
-    ".mp4", ".webm", ".mov", ".m4v", ".avi", ".mkv",
-    ".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".bmp",
+    ".mp4",
+    ".webm",
+    ".mov",
+    ".m4v",
+    ".avi",
+    ".mkv",
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".gif",
+    ".webp",
+    ".svg",
+    ".bmp",
 }
 # Tier suffix, e.g. "sex/oral_t5" -> "sex/oral". Stripped only when SUGGESTING a
 # match, never when deciding whether something is an orphan.
@@ -76,13 +90,17 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument("--game", type=str, help="Game slug (folder under games/)")
-        parser.add_argument("--all", action="store_true", help="Every game that has a ledger")
         parser.add_argument(
-            "--quiet-ok", action="store_true",
+            "--all", action="store_true", help="Every game that has a ledger"
+        )
+        parser.add_argument(
+            "--quiet-ok",
+            action="store_true",
             help="Print nothing for games with no orphans",
         )
         parser.add_argument(
-            "--repair", action="store_true",
+            "--repair",
+            action="store_true",
             help="Move each confidently-matched orphan onto its slot (backs up first)",
         )
 
@@ -98,7 +116,8 @@ class Command(BaseCommand):
             )
             # A game can have verdicts but no shelf yet.
             games += sorted(
-                p.parts[-3] for p in GAMES_ROOT.glob("*/.find-media/media_reviews.json")
+                p.parts[-3]
+                for p in GAMES_ROOT.glob("*/.find-media/media_reviews.json")
                 if p.parts[-3] not in games
             )
         else:
@@ -112,11 +131,15 @@ class Command(BaseCommand):
 
         self.stdout.write("")
         if total_orphans:
-            hint = "" if options.get("repair") else "  Re-run with --repair to move them."
-            self.stdout.write(self.style.ERROR(
-                f"{total_orphans} orphaned ledger key(s) remain. Their options/verdicts are still "
-                f"on disk but unreachable — the picker opens on an empty shelf.{hint}"
-            ))
+            hint = (
+                "" if options.get("repair") else "  Re-run with --repair to move them."
+            )
+            self.stdout.write(
+                self.style.ERROR(
+                    f"{total_orphans} orphaned ledger key(s) remain. Their options/verdicts are still "
+                    f"on disk but unreachable — the picker opens on an empty shelf.{hint}"
+                )
+            )
             raise SystemExit(1)
         self.stdout.write(self.style.SUCCESS("No orphaned shelves or verdicts."))
 
@@ -132,12 +155,16 @@ class Command(BaseCommand):
             self.stdout.write(self.style.WARNING(f"{slug}: no merged TOML — skipped"))
             return 0
 
-        # A label can span several roots of ONE file. `options` and `queries` are two
-        # halves of a shelf; the first root is the primary — it is what "N options
-        # stranded" counts — and the rest ride along so a repair can never separate
-        # a shelf from its query labels.
+        # A label can span several roots of ONE file. `options`, `queries` and
+        # `picks` are three parts of a shelf; the first root is the primary — it is
+        # what "N options stranded" counts — and the rest ride along so a repair can
+        # never separate a shelf from its query labels or from the provenance of the
+        # files already installed off it.
         ledgers = {
-            "shelf": (game_dir / ".find-media" / "media_options.json", ("options", "queries")),
+            "shelf": (
+                game_dir / ".find-media" / "media_options.json",
+                ("options", "queries", "picks"),
+            ),
             "verdict": (game_dir / ".find-media" / "media_reviews.json", ("reviews",)),
         }
 
@@ -170,9 +197,11 @@ class Command(BaseCommand):
                 self.stdout.write(f"{slug}: {n_keys} ledger key(s), 0 orphaned")
             return 0
 
-        self.stdout.write(self.style.WARNING(
-            f"\n{slug}: {n_keys} ledger key(s), {len(rows)} ORPHANED"
-        ))
+        self.stdout.write(
+            self.style.WARNING(
+                f"\n{slug}: {n_keys} ledger key(s), {len(rows)} ORPHANED"
+            )
+        )
         unresolved = 0
         for label, key, depth, suggestion in rows:
             unit = "options" if label == "shelf" else "verdict"
@@ -182,11 +211,15 @@ class Command(BaseCommand):
                 # Never invent a destination. vesper's `sex/renner_anal_t5.webm` is a
                 # slot the author DELETED (the TOML says so in a comment) — moving its
                 # verdict somewhere would fabricate a decision about a different beat.
-                self.stdout.write("            no obvious match — slot may have been deleted")
+                self.stdout.write(
+                    "            no obvious match — slot may have been deleted"
+                )
                 unresolved += 1
                 continue
 
-            self.stdout.write(self.style.SUCCESS(f"            probably meant: {suggestion}"))
+            self.stdout.write(
+                self.style.SUCCESS(f"            probably meant: {suggestion}")
+            )
             if not repair:
                 unresolved += 1
                 continue
@@ -194,7 +227,9 @@ class Command(BaseCommand):
             path_, root_keys = ledgers[label]
             moved, why = self._move_key(path_, root_keys, key, suggestion)
             if moved:
-                self.stdout.write(self.style.SUCCESS(f"            MOVED -> {suggestion}"))
+                self.stdout.write(
+                    self.style.SUCCESS(f"            MOVED -> {suggestion}")
+                )
             else:
                 self.stdout.write(self.style.ERROR(f"            NOT moved: {why}"))
                 unresolved += 1
@@ -224,8 +259,11 @@ class Command(BaseCommand):
             except Exception as exc:  # noqa: BLE001
                 return False, f"unreadable ({type(exc).__name__})"
 
-            present = [rk for rk in root_keys
-                       if isinstance(data.get(rk), dict) and old in data[rk]]
+            present = [
+                rk
+                for rk in root_keys
+                if isinstance(data.get(rk), dict) and old in data[rk]
+            ]
             if not present:
                 return False, "key vanished between audit and repair"
             # Refuse across ALL roots, not just the ones holding `old`. A slot can
@@ -283,6 +321,7 @@ class Command(BaseCommand):
             return {}
         try:
             import json
+
             data = json.loads(path_.read_text())
         except Exception:
             return {}

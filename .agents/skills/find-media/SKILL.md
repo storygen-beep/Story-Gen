@@ -376,6 +376,16 @@ the picker's ⇢ button derives its state from.
 
 Ledger: `games/<game>/.find-media/media_options.json`.
 
+**`picks` — an installed clip is still traceable (2026-08-09).** Installing DROPS the option
+row, so the `docid` used to die with it and a selected clip could never seed a `⇢` again. The
+`picks` root now keeps what each install consumed — `{filename, url, docid, thumb, found_by}`,
+keyed by the installed file's basename — and `fetch_related.py` resolves a seed across three
+places in order: an option's `url`, an option's `source_url` (a DEMOTED pick, whose `url` is a
+local `/games/…` serve path), then `picks`. **So never refuse a related fetch on the grounds
+that the clip is already installed or was previously installed** — try it; only a genuinely
+absent id is exit 4. `manage.py backfill_picks` recovers older installs by md5-joining the pool
+filename against urls still on a shelf; it opens no socket and guesses nothing.
+
 - **⚠️ The shelf key is `slot_key`, which is NOT always the path.** Every item from
   `game-review/load` carries one. It equals `file` for an untagged slot (nearly all of
   them), but a block that authored an `id` keys its shelf and its verdict on that

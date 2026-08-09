@@ -26,6 +26,12 @@ one queries/add closing record carrying `source:"related"` + `seed_url` — the 
 the picker derives "related fetched" from. Re-running the same seed TOPS UP the
 same bucket; nothing is ever cleared.
 
+The seed does not have to still be ON the shelf. Installing a clip consumes its
+option row, so the id is looked up across three places, in order: the option's own
+`url`, an option's `source_url` (a demoted pick, whose `url` is a local serve path),
+and finally the slot's `picks` — what its INSTALLED files were before they were
+installed. That is what lets a selected clip seed the next hop.
+
 On a 409 from queries/add (label claimed by a different seed mid-run), the options
 this run stocked carry the collided label — so the recovery is not just a rename:
 re-pick a suffixed label, RE-STOCK every url under it (dedup makes that N cheap
@@ -35,7 +41,8 @@ retried.
 Exit codes:
   0  ok — one JSON result line on stdout
   3  Google captcha / unusual-traffic page — wait and retry later; NEVER solved here
-  4  no stored Google id for the seed — refused WITHOUT touching the browser
+  4  no usable seed — no stored Google id, no query, or an empty --seed-url.
+     Refused WITHOUT touching the browser
   5  CDP connect failed (is the dedicated Chrome running with the debug port?)
   6  dev API unreachable or refused
   7  feed suspiciously clean (almost no urls, none on porn hosts) — likely the
@@ -82,6 +89,23 @@ MEDIA_RE = re.compile(
     re.IGNORECASE,
 )
 
+# The STILL counterpart. A slot whose declared file is `.jpg` harvests ZERO from a
+# COMPLETELY FULL grid against MEDIA_RE — the extension group is the only thing
+# between it and the very same results, and the failure reads as "bad query"
+# because the error the caller gets is "no urls extracted".
+#
+# A second compiled constant rather than a group spliced in at call time: the two
+# patterns sitting side by side is what makes the difference legible, and the
+# animated path stays the exact object it has always been.
+#
+# `.gif` is deliberately NOT here. It is the animated set's, and a slot that
+# wanted gifs would have declared one — see the FORMAT axis in the find-media
+# skill (§3): the declared extension decides, never the MIME or the media_kind.
+STILL_MEDIA_RE = re.compile(
+    r'https?://[^\s"\'<>\\]+?\.(?:jpg|jpeg|png|webp)(?:\?[^\s"\'<>\\]*)?',
+    re.IGNORECASE,
+)
+
 # Hosts whose media url is a signed TICKET, where the bare path is 470/173 bytes.
 # Measured 2026-08-06: egl.phncdn.com/gif/<id>.gif serves 200/206 carrying
 # ?validfrom&validto&hash on a 2025→2125 window, and 470 with the query removed.
@@ -91,7 +115,7 @@ SIGNED_QUERY_HOSTS = ("phncdn.com",)
 
 # Buckets that live in a side PANEL rather than on the shelf. A prefix is a bucket
 # NAME, never a Google query, so pick_q must skip every one of them.
-PANEL_PREFIXES = ("⇢ ", "◆ ")      # ⇢ related, ◆ pornhub
+PANEL_PREFIXES = ("⇢ ", "◆ ")  # ⇢ related, ◆ pornhub
 PANEL_SOURCES = ("related", "pornhub")
 
 # Hosts that mean the result is furniture, not porn — the picker's chip verdict
@@ -108,6 +132,7 @@ CAPTCHA_RE = re.compile(r"unusual traffic|not a robot", re.IGNORECASE)
 # ---------------------------------------------------------------------------
 # Pure functions — unit-tested, importable without playwright installed.
 # ---------------------------------------------------------------------------
+
 
 def docid_to_blob(docid: str) -> str:
     """Build the `tbs=rimg:` blob from a docid. Ground truth in the module docstring."""
@@ -193,9 +218,15 @@ def normalize_media_url(url: str) -> str:
     return url.split("?")[0]
 
 
-def clean_media_urls(html: str) -> list:
+def clean_media_urls(html: str, still: bool = False) -> list:
     """§4's extract, in Python: unescape, dedupe, canonicalize, cut google/gstatic
     hosts, cut empty paths.
+
+    `still=True` swaps the animated extension group for the still one — see
+    STILL_MEDIA_RE. Everything downstream of the match is shared, so the two
+    formats cannot drift apart on canonicalization or on which hosts get cut.
+    The default is the animated set, which keeps every existing caller byte-
+    identical.
 
     The phncdn cut that lived here until 2026-08-06 is GONE. It rested on a 470
     measured against urls this very function had already stripped the ticket from,
@@ -204,7 +235,7 @@ def clean_media_urls(html: str) -> list:
     """
     html = _unescape(html)
     seen, out = set(), []
-    for m in MEDIA_RE.finditer(html):
+    for m in (STILL_MEDIA_RE if still else MEDIA_RE).finditer(html):
         u = normalize_media_url(m.group(0))
         if u in seen:
             continue
@@ -267,6 +298,7 @@ def looks_suspiciously_clean(urls: list) -> bool:
 # The run
 # ---------------------------------------------------------------------------
 
+
 def _fail(code: int, msg: str):
     print(msg, file=sys.stderr)
     sys.exit(code)
@@ -274,7 +306,9 @@ def _fail(code: int, msg: str):
 
 def _api_post(api: str, endpoint: str, body: dict):
     try:
-        return requests.post(f"{api}/api/v1/dev/media-finder/{endpoint}", json=body, timeout=15)
+        return requests.post(
+            f"{api}/api/v1/dev/media-finder/{endpoint}", json=body, timeout=15
+        )
     except requests.RequestException as exc:
         _fail(6, f"dev API unreachable ({endpoint}): {exc}")
 
@@ -313,26 +347,44 @@ def _settle(page, wheels: int = 4):
 
 def _check_captcha(page, html: str):
     if "/sorry/" in page.url or CAPTCHA_RE.search(html):
-        _fail(3, "Google served a captcha / unusual-traffic page. Not solving it. "
-                 "Wait a while before retrying, and slow the pace if it recurs.")
+        _fail(
+            3,
+            "Google served a captcha / unusual-traffic page. Not solving it. "
+            "Wait a while before retrying, and slow the pace if it recurs.",
+        )
 
 
-def _stock(api: str, game: str, file_: str, slot_key: str, label: str,
-           urls: list, docids: dict, thumbs: dict | None = None) -> int:
+def _stock(
+    api: str,
+    game: str,
+    file_: str,
+    slot_key: str,
+    label: str,
+    urls: list,
+    docids: dict,
+    thumbs: dict | None = None,
+) -> int:
     thumbs = thumbs or {}
     ok = 0
     for u in urls:
         # Anchor on `(\?|$)` so a SIGNED .webm is still typed as video — a signed
         # url no longer ends at its extension.
         is_vid = re.search(r"\.(mp4|webm)(\?|$)", u, re.IGNORECASE)
-        r = _api_post(api, "options/add", {
-            "game": game, "file": file_, "slot_key": slot_key, "url": u,
-            "query": label,
-            "type": "video" if is_vid else "gif",
-            "media_kind": "video" if is_vid else "img",
-            "docid": docids.get(u, ""),
-            "thumb": thumbs.get(u, ""),
-        })
+        r = _api_post(
+            api,
+            "options/add",
+            {
+                "game": game,
+                "file": file_,
+                "slot_key": slot_key,
+                "url": u,
+                "query": label,
+                "type": "video" if is_vid else "gif",
+                "media_kind": "video" if is_vid else "img",
+                "docid": docids.get(u, ""),
+                "thumb": thumbs.get(u, ""),
+            },
+        )
         if r.status_code == 200 and r.json().get("ok"):
             ok += 1
     return ok
@@ -343,24 +395,45 @@ def main() -> None:
     ap.add_argument("--game", required=True)
     ap.add_argument("--slot-key", required=True)
     ap.add_argument("--seed-url", required=True)
-    ap.add_argument("--file", default="", help="bytes-destination path; defaults to --slot-key")
+    ap.add_argument(
+        "--file", default="", help="bytes-destination path; defaults to --slot-key"
+    )
     ap.add_argument("--port", type=int, default=DEFAULT_PORT)
     ap.add_argument("--api", default=DEFAULT_API)
     args = ap.parse_args()
     file_ = args.file or args.slot_key
     seed = args.seed_url.split("?")[0]
+    # An empty seed would match every row whose url key is absent, and hand the
+    # lookup below somebody else's docid.
+    if not seed:
+        _fail(4, "--seed-url is empty — nothing to fetch a related feed for")
 
     # -- the shelf: find the seed option, choose q + label BEFORE stocking -----
     try:
         r = requests.get(
             f"{args.api}/api/v1/dev/media-finder/options/list",
-            params={"game": args.game, "file": args.slot_key}, timeout=15,
+            params={"game": args.game, "file": args.slot_key},
+            timeout=15,
         )
         shelf = r.json()
     except (requests.RequestException, ValueError) as exc:
         _fail(6, f"dev API unreachable (options/list): {exc}")
     options, queries = shelf.get("options") or [], shelf.get("queries") or []
-    option = next((o for o in options if (o.get("url") or "").split("?")[0] == seed), None)
+
+    def matches(row: dict) -> bool:
+        """Either url a row can be seeded by. `source_url` is where a DEMOTED pick's
+        local bytes originally came from — its `url` is a `/games/…` serve path, so
+        matching on that alone would miss every clip that was once installed."""
+        return any(
+            (row.get(key) or "").split("?")[0] == seed for key in ("url", "source_url")
+        )
+
+    option = next((o for o in options if matches(o)), None)
+    if option is None:
+        # Not on the shelf — but it may be INSTALLED. Grab consumes the option row
+        # and copies its docid into `picks`, which is the whole reason a selected
+        # clip can still seed a hop. Look there before giving up on the id.
+        option = next((p for p in (shelf.get("picks") or []) if matches(p)), None)
     if option is None:
         # Not fatal: allow fetching related for a url the caller knows about even
         # if it is not on this shelf yet (it will be, as part of the harvest).
@@ -378,13 +451,19 @@ def main() -> None:
     # existing options it re-finds.
     docid = option.get("docid") or ""
     if not docid:
-        _fail(4, "no Google id stored for this clip — not fetching. Run a search "
-                 "on this slot; any search that re-finds it attaches an id.")
+        _fail(
+            4,
+            "no Google id stored for this clip — not fetching. Run a search "
+            "on this slot; any search that re-finds it attaches an id.",
+        )
 
     q = pick_q(option, queries, seed)
     if not q:
-        _fail(4, "no usable query for the feed URL: seed has no found_by, slot has "
-                 "no searches, and the filename has no slug words")
+        _fail(
+            4,
+            "no usable query for the feed URL: seed has no found_by, slot has "
+            "no searches, and the filename has no slug words",
+        )
     label = pick_label(seed, queries)
     print(f"q={q!r}  label={label!r}", file=sys.stderr)
 
@@ -405,8 +484,11 @@ def main() -> None:
         page = ctx.new_page()
         try:
             # -- the related feed — the ONLY navigation this script makes ------
-            page.goto(related_url(q, docid_to_blob(docid)),
-                      wait_until="domcontentloaded", timeout=45000)
+            page.goto(
+                related_url(q, docid_to_blob(docid)),
+                wait_until="domcontentloaded",
+                timeout=45000,
+            )
             html = _settle(page)
             _check_captcha(page, html)
             urls = clean_media_urls(html)
@@ -414,39 +496,78 @@ def main() -> None:
             thumbs = thumb_join(html)
             hosts = host_histogram(urls)
             if looks_suspiciously_clean(urls):
-                _fail(7, f"only {len(urls)} urls, none on porn hosts — suspiciously "
-                         f"clean. Check the profile on :{args.port}: is SafeSearch "
-                         "still OFF, and is it the dedicated find-media Chrome?")
+                _fail(
+                    7,
+                    f"only {len(urls)} urls, none on porn hosts — suspiciously "
+                    f"clean. Check the profile on :{args.port}: is SafeSearch "
+                    "still OFF, and is it the dedicated find-media Chrome?",
+                )
 
             # -- stock, then record — §5 order, never reversed ----------------
-            stocked = _stock(args.api, args.game, file_, args.slot_key, label,
-                             urls, docids, thumbs)
-            rec = _api_post(args.api, "queries/add", {
-                "game": args.game, "file": file_, "slot_key": args.slot_key,
-                "query": label, "source": "related", "seed_url": seed,
-                "urls": len(urls), "stocked": stocked, "hosts": hosts,
-            })
+            stocked = _stock(
+                args.api, args.game, file_, args.slot_key, label, urls, docids, thumbs
+            )
+            rec = _api_post(
+                args.api,
+                "queries/add",
+                {
+                    "game": args.game,
+                    "file": file_,
+                    "slot_key": args.slot_key,
+                    "query": label,
+                    "source": "related",
+                    "seed_url": seed,
+                    "urls": len(urls),
+                    "stocked": stocked,
+                    "hosts": hosts,
+                },
+            )
             if rec.status_code == 409:
                 # Another seed claimed the label mid-run, so OUR options carry a
                 # label that is not ours. Re-pick, RE-STOCK (dedup → cheap found_by
                 # appends), re-record. Once.
                 label2 = pick_label(seed, queries, taken={label})
                 print(f"label collision — restocking under {label2!r}", file=sys.stderr)
-                stocked = _stock(args.api, args.game, file_, args.slot_key, label2,
-                                 urls, docids, thumbs)
-                rec = _api_post(args.api, "queries/add", {
-                    "game": args.game, "file": file_, "slot_key": args.slot_key,
-                    "query": label2, "source": "related", "seed_url": seed,
-                    "urls": len(urls), "stocked": stocked, "hosts": hosts,
-                })
+                stocked = _stock(
+                    args.api,
+                    args.game,
+                    file_,
+                    args.slot_key,
+                    label2,
+                    urls,
+                    docids,
+                    thumbs,
+                )
+                rec = _api_post(
+                    args.api,
+                    "queries/add",
+                    {
+                        "game": args.game,
+                        "file": file_,
+                        "slot_key": args.slot_key,
+                        "query": label2,
+                        "source": "related",
+                        "seed_url": seed,
+                        "urls": len(urls),
+                        "stocked": stocked,
+                        "hosts": hosts,
+                    },
+                )
                 label = label2
             if rec.status_code != 200:
                 _fail(6, f"queries/add refused: {rec.status_code} {rec.text[:300]}")
 
-            print(json.dumps({
-                "ok": True, "label": label, "urls": len(urls),
-                "stocked": stocked, "docid_source": "stored",
-            }))
+            print(
+                json.dumps(
+                    {
+                        "ok": True,
+                        "label": label,
+                        "urls": len(urls),
+                        "stocked": stocked,
+                        "docid_source": "stored",
+                    }
+                )
+            )
         finally:
             page.close()
 

@@ -258,3 +258,74 @@ def test_no_stored_docid_means_no_run(monkeypatch):
     with pytest.raises(SystemExit) as e:
         fr.main()
     assert e.value.code == 4
+
+
+# ── the seed does not have to still be an OPTION ─────────────────────────────
+#
+# Installing consumes the option row, so a SELECTED clip's id survives only in the
+# `picks` root and a DEMOTED one's only in `source_url`. Both of these used to exit 4
+# — "no Google id stored" — on a clip whose id the ledger was holding the whole time.
+
+class _Trap(Exception):
+    """Raised in place of touching Chrome: reaching it proves the id resolved."""
+
+
+def _run_main(monkeypatch, shelf, seed="https://x.test/a.gif"):
+    import sys as _sys
+    monkeypatch.setattr(_sys, "argv", [
+        "fetch_related.py", "--game", "g", "--slot-key", "s/a.webm", "--seed-url", seed,
+    ])
+    monkeypatch.setattr(fr.requests, "get", lambda *a, **k: type(
+        "R", (), {"json": lambda self: shelf})())
+
+    def trap(*a, **k):
+        raise _Trap()
+
+    monkeypatch.setattr(fr, "_ensure_page_target", trap)
+    return fr.main
+
+
+def test_a_seed_that_is_only_a_pick_still_resolves_its_docid(monkeypatch):
+    main = _run_main(monkeypatch, {
+        "options": [], "queries": [{"q": "kneeling gif", "source": "manual"}],
+        "picks": [{"filename": "a.gif", "url": "https://x.test/a.gif",
+                   "docid": "FvF5n0MlBjcrfM", "found_by": ["kneeling gif"]}],
+    })
+    with pytest.raises(_Trap):
+        main()
+
+
+def test_a_seed_that_is_only_a_source_url_still_resolves_its_docid(monkeypatch):
+    """A demoted pick's `url` is a /games/ serve path — matching on that alone is
+    what left every previously-installed clip refusing to fetch."""
+    main = _run_main(monkeypatch, {
+        "options": [{"url": "/games/g/.find-media/previous/a-1.gif",
+                     "source_url": "https://x.test/a.gif", "docid": "FvF5n0MlBjcrfM",
+                     "origin": "previous"}],
+        "queries": [{"q": "kneeling gif", "source": "manual"}],
+    })
+    with pytest.raises(_Trap):
+        main()
+
+
+def test_a_pick_without_a_docid_is_still_refused(monkeypatch):
+    """Recovering the url is not recovering the id. The refusal has to survive a
+    half-populated pick, or the browser opens on a feed that cannot be built."""
+    main = _run_main(monkeypatch, {
+        "options": [], "queries": [],
+        "picks": [{"filename": "a.gif", "url": "https://x.test/a.gif"}],
+    })
+    with pytest.raises(SystemExit) as e:
+        main()
+    assert e.value.code == 4
+
+
+def test_an_empty_seed_url_never_borrows_another_rows_id(monkeypatch):
+    """`--seed-url=` would match every row whose url key is absent, and hand the
+    lookup somebody else's docid — a related feed for a clip nobody asked about."""
+    main = _run_main(monkeypatch, {
+        "options": [{"docid": "FvF5n0MlBjcrfM"}], "queries": [],
+    }, seed="")
+    with pytest.raises(SystemExit) as e:
+        main()
+    assert e.value.code == 4

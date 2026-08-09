@@ -279,11 +279,41 @@ glance grid and follow search query rules for writing them.
 [DONE]GIF being fetched are very short, why is that, like is it some preview or low quality gifs, or what?? we also previously used to download pornhub gif [actually they turn out to be downloaded as video but searched as gifs], and they were actually good.
 nothing can be done about it
 
-Vesper:
 
-Fill options for all medias.
 
-review each medias again.
+[DONE]custom query feature and delete a query
+
+on open multiple tab for media review, it doesnt load there videos for the later tabs only, only the first tab loads videos
+
+pornhub search for medias, doesnt bring pornhub medias, the tab that opens does shows pornhub medias but the right panel for pornhub medias show medias from where the fuck we dont know. Here is the bullshit search.
+http://127.0.0.1:5500/story_gen_web_app/story_gen_django/find.html?id=vesper&file=sex%2Fma_renner_blowjob_t5.webm&slot_key=sex%2Fma_renner_blowjob_t5.webm
+
+
+[PROGRESS]Selected media related feature
 
 We have zero clips from RedGIFs. Zero, out of 26,528.
+
+
+
+Vesper:
+
+[DONE]Fill options for all medias.
+
+[DONE]review each medias again.
+
+
+21 in review | [DONE]7 didnt run through the find media v3 | [DONE]others needs some attention there search querues might have been too specific which the agent or even me with those search queries cant find medias for them. 
+
+[DONE]test out a vesper sex loop to see what has been made into a pool
+
+Why pornhub query search is fast and the related search is slowx
+
+[DONE]figure out a way to run it on phone without github pages, the root index.html
+tailscale
+
+Vesper Release 0.1.7 to patreon
+
+Linear Story Chapters to Game Experiment
+
+Vesper next chapter
 

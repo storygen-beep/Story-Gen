@@ -29,7 +29,11 @@
        button one at a time — and nothing works that way now: an agent runs the
        searches and stocks hundreds of candidates. What was missing was the
        opposite affordance, telling the searches APART, so the page reads as
-       "look and pick" instead of "go find something". */
+       "look and pick" instead of "go find something".
+       (There IS a text box again, `.qsearch` below — but it is not that one
+       coming back. The old one opened a tab for the human to click through; this
+       one drives the runner and stocks the whole harvest in one shot. Same
+       control, opposite mechanism.) */
     .qbar { flex-direction: row; align-items: center; gap: 8px; }
     /* Nowrap + its own scroller: chips must stay on ONE line so "newest is
        leftmost" survives, which a wrapping row silently breaks. */
@@ -54,19 +58,30 @@
     /* A related-fetch bucket — dashed so "searched for words" and "grew from a
        clip" read as different kinds of chip at a glance. */
     .qchip.related { border-style: dashed; }
-    /* chip + PH as ONE control. They are SIBLINGS, never nested: buildChip
+    /* chip + PH + ✕ as ONE control. They are SIBLINGS, never nested: buildChip
        returns a <button>, and a button inside a button is invalid HTML and
-       double-fires the click. */
+       double-fires the click.
+       The seam rules are POSITIONAL rather than per-class, so the group went from
+       two controls to three without a single new radius rule — and a fourth would
+       cost none either. */
     .qchip-group { display: inline-flex; flex: 0 0 auto; }
-    .qchip-group .qchip { border-top-right-radius: 0; border-bottom-right-radius: 0; }
-    .ph-btn {
+    .qchip-group > :not(:last-child) {
+      border-top-right-radius: 0; border-bottom-right-radius: 0;
+    }
+    .qchip-group > :not(:first-child) {
+      border-left: none; border-top-left-radius: 0; border-bottom-left-radius: 0;
+    }
+    .ph-btn, .qdel-btn {
       flex: 0 0 auto; cursor: pointer; font: inherit; font-size: 0.72rem;
       padding: 0 7px; color: var(--muted);
       background: var(--panel, #16181d); border: 1px solid var(--border);
-      border-left: none; border-top-right-radius: 6px; border-bottom-right-radius: 6px;
+      border-radius: 6px;
     }
     .ph-btn:hover:not(:disabled) { color: var(--accent); border-color: var(--accent); }
-    .ph-btn:disabled { opacity: 0.4; cursor: default; }
+    .ph-btn:disabled, .qdel-btn:disabled { opacity: 0.4; cursor: default; }
+    /* Destructive, so it takes the page's established red (.rm-btn) rather than
+       the accent every other hover uses. */
+    .qdel-btn:hover:not(:disabled) { color: #c2554e; border-color: #c2554e; }
     /* ⇢ on a tile: fetch this clip's Google related-feed, or jump to its chip. */
     .rel-btn {
       font-size: 0.78rem; border: 1px solid var(--border); border-radius: 7px;
@@ -162,8 +177,18 @@
     .use-btn:hover { border-color: var(--accent); color: var(--accent); }
     .rm-btn { color: var(--muted); }
     .rm-btn:hover { border-color: #c2554e; color: #c2554e; }
-    /* Unselect is the only action on a selected tile, so it takes the full row. */
+    /* Unselect shares the row with ⇢ now, so `wide` means "take what is left"
+       rather than "take the whole row" — same flex rule either way, because the ⇢
+       is intrinsic-width. On a clip with no stored provenance there is no ⇢ and it
+       goes back to filling the row on its own. */
     .rm-btn.wide { flex: 1; }
+    /* Where a selected clip CAME FROM: the pick's host and the search that found
+       it. Only rendered when the ledger actually knows — an install that predates
+       the picks table shows nothing rather than a guess. */
+    .tile-src {
+      font-size: 0.66rem; color: var(--muted); line-height: 1.4;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
     /* Selected tiles are IN the game — mark them so the two zones never blur. */
     .sel-tile { border-color: #4ade8055; }
     .sel-tile .tile-media { border-bottom-color: #4ade8033; }
@@ -216,6 +241,59 @@
     }
     .toast.ok { background: #2f5d39; color: #d7f0dd; }
     .toast.err { background: #5d2f2f; color: #f0d7d7; }
+
+    /* ── the human's own search ──────────────────────────────────────────────
+       Lives in its OWN .toolbar row, not inside .qbar: renderQueryBar hides that
+       bar entirely while a slot has no searches, which is precisely the slot
+       where this box matters most. portal.css has no <input> rule at all, so the
+       look is taken from .media-note — the page's only other text entry — rather
+       than invented a second time. */
+    .qsearch { flex-direction: row; align-items: center; gap: 8px; }
+    .qsearch input {
+      flex: 1; min-width: 0; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 7px; color: var(--text); font: inherit; font-size: 0.85rem;
+      padding: 9px 11px;
+    }
+    .qsearch input:focus { outline: none; border-color: var(--accent); }
+    .qsearch input:disabled { opacity: 0.5; }
+    .qsearch .refresh-btn { margin-left: 0; }   /* the class pushes right by default */
+
+    /* ── the page's one destructive confirmation ─────────────────────────────
+       Not window.confirm(): a native dialog cannot show the blast radius, and the
+       blast radius IS the decision — deleting a search drops the options only it
+       found. (It also blocks the Chrome extension's event loop, which is how the
+       runner is driven.)
+       z-index 1500 is chosen against the two neighbours it must sit between: ABOVE
+       .overlay (1000) so a lightbox can never cover a decision, and BELOW .toast
+       (2000) so the result sentence is never swallowed by the thing that caused
+       it. .relpane (60) is below both, so a delete raised from the panel works. */
+    .confirm-back {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.72); z-index: 1500;
+      display: flex; align-items: center; justify-content: center; padding: 24px;
+    }
+    .confirm-box {
+      width: 460px; max-width: 100%; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 12px; padding: 18px;
+      box-shadow: 0 18px 48px rgba(0,0,0,0.6);
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    /* NOT an <h2>: portal.css styles bare h2 globally as the filter-row label
+       (uppercase, muted, min-width) — wrong here in three ways at once. */
+    .confirm-ttl { font-weight: 700; font-size: 0.95rem; }
+    .confirm-q {
+      font-family: ui-monospace, Menlo, monospace; color: var(--accent);
+      font-size: 0.85rem; word-break: break-word;
+    }
+    .confirm-body { color: var(--muted); font-size: 0.85rem; line-height: 1.55; }
+    .confirm-row { display: flex; gap: 8px; justify-content: flex-end; }
+    .confirm-btn {
+      font-size: 0.82rem; font-weight: 700; border-radius: 7px; padding: 8px 16px;
+      cursor: pointer; border: 1px solid var(--border);
+      background: var(--surface-hover); color: var(--text);
+    }
+    .confirm-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .confirm-btn.danger { background: #5d2f2f; color: #f0d7d7; border-color: #7d3f3f; }
+    .confirm-btn.danger:hover { border-color: #c2554e; color: #f0d7d7; }
   </style>
 </head>
 <body>
@@ -254,6 +332,20 @@
       </div>
     </div>
 
+    <!-- SEARCH — the human's own query. Runs an UNSCOPED Google Images search in
+         the dedicated find-media Chrome and stocks the whole harvest onto this
+         slot's shelf as an ordinary bucket, which is what the agent has always
+         been able to do and the person looking at the shelf could not.
+         Deliberately OUTSIDE #qbar: renderQueryBar hides that bar while a slot has
+         no searches, and a slot with no searches is exactly when this is wanted.
+         maxlength mirrors the server's 200-char guard, so that failure is
+         prevented rather than reported. -->
+    <div class="toolbar qsearch" id="searchbar" hidden>
+      <input id="q-input" type="text" maxlength="200" autocomplete="off"
+             placeholder="search terms…">
+      <button class="refresh-btn" id="q-go">Search</button>
+    </div>
+
     <!-- SEARCHES — one chip per search that ran, newest leftmost. Clicking one
          shows only what that search found. `All` lives OUTSIDE the rail, which is
          what pinning has to mean mechanically: a chip inside a scrolling row
@@ -282,6 +374,15 @@
       <div class="relpane-head" id="rel-head">
         <button class="qscroll" id="rel-back" hidden>‹</button>
         <span class="ttl" id="rel-title">Related</span>
+        <!-- Delete the OPEN bucket. Here rather than on a .relrow because a
+             .relrow is itself a <button>, and this file already learned what a
+             button inside a button does (see the .qchip-group note). Detail view
+             only, same visibility rule as rel-back — which also puts the
+             destructive action one level in from the list, where it belongs. -->
+        <!-- Reads "Delete", not a second ✕: an icon-only destructive button
+             sitting beside the close button is two identical glyphs meaning
+             "throw this away forever" and "put it down". -->
+        <button class="rm-btn" id="rel-del" hidden title="Delete this bucket and the options only it found">Delete</button>
         <button class="qscroll" id="rel-close">✕</button>
       </div>
       <div class="relpane-body" id="rel-body"></div>
@@ -315,6 +416,9 @@
     var qAllEl = document.getElementById("q-all");
     var qLeftEl = document.getElementById("q-left");
     var qRightEl = document.getElementById("q-right");
+    var searchBarEl = document.getElementById("searchbar");
+    var qInputEl = document.getElementById("q-input");
+    var qGoEl = document.getElementById("q-go");
     var optionsEl = document.getElementById("options");
     var selZoneEl = document.getElementById("selected-zone");
     var selEl = document.getElementById("selected");
@@ -417,8 +521,19 @@
     // run; this map cannot — it is rebuilt from the same response that renders
     // the chips, so the button and the chip can never disagree.
     var relBySeed = {};          // seed url -> that fetch's query record
-    var docidByUrl = {};         // url -> Google's id, when the harvest captured one
+    var docidByUrl = {};         // seed url -> Google's id, when one was captured
     var relInFlight = {};        // url -> true while THIS page has a fetch running
+    // What each INSTALLED file was, back when it was an option. Installing consumes
+    // the option row, so this is the ONLY surviving copy of a selected clip's docid
+    // — it is what lets the Selected zone wear a ⇢ at all. Keyed by filename, the
+    // join key that zone already holds: a pool item carries it outright and a
+    // single slot is basename(media_url).
+    var pickByFile = {};
+    var lastPicksSig = null;
+    // The Selected zone's own tile cache. updateRelatedButtons walks REGISTRIES,
+    // not the DOM, so a selected tile that is not in one here would keep saying
+    // "⇢ get related" forever after its fetch landed.
+    var selTileByUrl = {};
     // ONE fetch at a time, page-wide, ACROSS EVERY RUNNER: the runner is a single
     // browser, and rapid ⇢ clicks measurably broke its debug websocket (code=1000
     // mid-connect). ◆ PornHub searches drive the same browser, so they share this
@@ -457,6 +572,47 @@
     // The server stores seed_url query-stripped, so a SIGNED option url (which
     // keeps its ticket) would never match. Both sides normalize through here.
     function seedKey(u) { return String(u || "").split("?")[0]; }
+
+    // The url a row can seed a related fetch FROM, or "". Normally its own url —
+    // but a demoted pick's url is a same-origin /games/ serve path that no index
+    // has ever seen, and the remote it was installed from lives in `source_url`.
+    // Reading only `url` is what made every previously-installed clip a dead tile.
+    function seedOf(o) {
+      if (!o) return "";
+      if (/^https?:/i.test(o.url || "")) return o.url;
+      if (/^https?:/i.test(o.source_url || "")) return o.source_url;
+      return "";
+    }
+
+    // "redgifs.com · kneeling blowjob gif" — a selected clip's origin, in one line.
+    // The label is the first NON-panel found_by: a ⇢/◆ bucket name is a bucket
+    // name, not a query anyone typed, so printing it here would read as nonsense.
+    function pickSubtitle(pick) {
+      var bits = [];
+      var host = domainOf(pick.url || "");
+      if (host) bits.push(host);
+      var typed = (pick.found_by || []).filter(function (q) { return !isPanelLabel(q); });
+      if (typed.length) bits.push(typed[0]);
+      return bits.join(" · ");
+    }
+
+    // Hang a ⇢ on any tile that has a remote seed. `reg` is the tile cache this
+    // tile lives in, so updateRelatedButtons can find it again — pass null when
+    // the caller registers the tile itself (the options grid keys on opt.url).
+    function wireRelBtn(tile, seed, statusEl, reg) {
+      tile._optUrl = seed;
+      tile._status = statusEl;
+      var rel = el("button", "rel-btn", "⇢");
+      tile._relBtn = rel;
+      rel.addEventListener("click", function () {
+        var rec = relBySeed[seedKey(seed)];
+        if (rec) { openRelPanel("related", "detail", rec); return; }  // fetched → its panel
+        if (!relInFlight[seed]) fetchRelated(seed, tile);
+      });
+      if (reg) reg[seed] = tile;
+      syncRelBtn(tile);
+      return rel;
+    }
 
     // Found ONLY by panel fetches → lives in the right panel, not the shelf.
     // The main grid answers "what did the SEARCHES find"; mixing grown-from-a-clip
@@ -589,6 +745,17 @@
         if (!runnerBusy) fetchPornhub(rec.q, ph);
       });
       g.appendChild(ph);
+      // Delete this whole search. Only a chip GROUP gets one — Q_UNLABELLED is
+      // built through buildChip directly and has no record to delete, which makes
+      // that correct by construction rather than by a special case.
+      var del = el("button", "qdel-btn", "✕");
+      del.title = "Delete this search and the options only it found";
+      del.disabled = runnerBusy;
+      del.addEventListener("click", function (e) {
+        e.stopPropagation();                       // never also select the chip
+        confirmDeleteQuery(rec);
+      });
+      g.appendChild(del);
       return g;
     }
 
@@ -625,6 +792,18 @@
         .then(function (j) {
           queries = j.queries || [];
           rebuildRelMap();
+          // Select the bucket a just-finished search made. Consumed HERE, and
+          // only once the record actually exists — setting activeQ optimistically
+          // in runSearch would bounce straight back to All on the very next poll,
+          // because the fallback below runs against a `queries` array that may not
+          // carry the new record yet. Must stay ABOVE that fallback.
+          if (pendingSelectQ &&
+              queries.some(function (r) { return r.q === pendingSelectQ; })) {
+            activeQ = pendingSelectQ;
+            pendingSelectQ = null;
+            lastSig = null;
+            lastQSig = null;
+          }
           // Which options can be fetched in ONE navigation. An option stocked
           // before docid capture (2026-08-05) has none, and its fetch has to run
           // a text search first to hunt one down — slow, visible, and usually
@@ -632,8 +811,29 @@
           // identical to the fast path.
           docidByUrl = {};
           (j.options || []).forEach(function (o) {
-            if (o.docid) docidByUrl[o.url] = o.docid;
+            var seed = seedOf(o);
+            if (o.docid && seed) docidByUrl[seed] = o.docid;
           });
+          // A SELECTED clip is off the shelf entirely — grab consumed its option
+          // row — so `picks` is the only place its id still exists.
+          pickByFile = {};
+          (j.picks || []).forEach(function (p) {
+            if (p.filename) pickByFile[p.filename] = p;
+            if (p.docid && p.url) docidByUrl[p.url] = p.docid;
+          });
+          // Provenance arrived, or changed. The Selected zone renders off a
+          // DIFFERENT fetch and early-returns on an unchanged signature, so
+          // without this its ⇢ would never appear: on first load the picks always
+          // land after those tiles were built. Repaints only when picks really
+          // move — a grab or an unselect — not on every 3 s poll.
+          var picksSig = JSON.stringify(j.picks || []);
+          if (picksSig !== lastPicksSig) {
+            lastPicksSig = picksSig;
+            lastInstalledSig = null;
+            lastSelSig = null;
+            if (!POOL) renderInstalled();
+            else if (selLoaded) renderSelected(lastSelItems);
+          }
           // A selected chip that vanished from the server list (a hand edit, a
           // check_shelves repair) would leave the grid permanently empty with no way
           // back. Fall back rather than show a dead view.
@@ -679,8 +879,9 @@
         return "No text searches on this slot — its clips all came from related " +
                "fetches. They live in the ⇢ Related panel (top right of Options).";
       }
-      return "Nothing has been searched for this slot yet. Run the media agent on it — " +
-             "every search it runs appears above as its own bucket.";
+      return "Nothing has been searched for this slot yet. Type a query in the box " +
+             "above, or run the media agent on it — every search either of you " +
+             "runs appears as its own bucket.";
     }
 
     function renderOptions(opts) {
@@ -821,20 +1022,15 @@
       var rm = el("button", "rm-btn", "✕");
       rm.title = "Remove from options";
       rm.addEventListener("click", function () { removeOption(opt); });
-      // ⇢ related — only for options Google could have seen: a demoted local pick
-      // has a same-origin /games/ url that no index knows.
-      if (/^https?:/i.test(opt.url)) {
-        var rel = el("button", "rel-btn", "⇢");
-        tile._relBtn = rel;
-        tile._optUrl = opt.url;
-        tile._status = status;
-        rel.addEventListener("click", function () {
-          var rec = relBySeed[seedKey(opt.url)];
-          if (rec) { openRelPanel("related", "detail", rec); return; }  // fetched → its panel
-          if (!relInFlight[opt.url]) fetchRelated(opt, tile);
-        });
-        row.append(use, rel, rm);
-        syncRelBtn(tile);
+      // ⇢ related — only for options Google could have seen. A demoted local pick
+      // has a same-origin /games/ url that no index knows, but it now carries the
+      // remote it was installed FROM, and that one Google does know.
+      var seed = seedOf(opt);
+      if (seed) {
+        // Registered by the caller under opt.url, so no registry here: the tile
+        // cache is keyed on identity, `_optUrl` on what Google can be asked about,
+        // and for a demoted pick those are two different strings.
+        row.append(use, wireRelBtn(tile, seed, status, null), rm);
       } else {
         row.append(use, rm);
       }
@@ -887,11 +1083,23 @@
     function updateRelatedButtons() {
       Object.keys(tileByUrl).forEach(function (u) { syncRelBtn(tileByUrl[u]); });
       Object.keys(relTileByUrl).forEach(function (u) { syncRelBtn(relTileByUrl[u]); });
+      // The Selected zone repaints on its OWN signature, which a landing related
+      // fetch does not change — so its buttons only ever update from here.
+      Object.keys(selTileByUrl).forEach(function (u) { syncRelBtn(selTileByUrl[u]); });
       // Same one-browser rule as ⇢: a PH click mid-fetch would 429. Walk the live
       // buttons rather than repainting the rail — renderQueryBar early-returns on
       // an unchanged signature, so a repaint is not guaranteed to happen at all.
       var phs = qRailEl.querySelectorAll(".ph-btn");
       for (var i = 0; i < phs.length; i++) phs[i].disabled = runnerBusy;
+      // Same reasoning for the delete caps and the search box — this function is
+      // the page's ONLY chokepoint for controls that must not fire mid-fetch.
+      // A delete is not a runner op, but it rewrites the rail the running fetch
+      // is about to stock into, so it waits too.
+      var dels = qRailEl.querySelectorAll(".qdel-btn");
+      for (var j = 0; j < dels.length; j++) dels[j].disabled = runnerBusy;
+      relDelEl.disabled = runnerBusy;
+      qInputEl.disabled = runnerBusy;
+      qGoEl.disabled = runnerBusy || !KEY || !qInputEl.value.trim();
     }
 
     // ---- the related panel ----
@@ -904,6 +1112,7 @@
     var relBodyEl = document.getElementById("rel-body");
     var relTitleEl = document.getElementById("rel-title");
     var relBackEl = document.getElementById("rel-back");
+    var relDelEl = document.getElementById("rel-del");
     var relOpenEl = document.getElementById("rel-open");
     var phOpenEl = document.getElementById("ph-open");
     var relView = { kind: "related", mode: "list", label: null };
@@ -972,6 +1181,10 @@
       // a forgotten tile is a re-download through the uncached proxy)
       relBodyEl.innerHTML = "";
       relBackEl.hidden = relView.mode !== "detail";
+      // Detail view only — a delete needs one named bucket, and the list view
+      // names none. `rec` is guaranteed non-null here by the reset above.
+      relDelEl.hidden = relView.mode !== "detail";
+      relDelEl.onclick = rec ? function () { confirmDeleteQuery(rec); } : null;
 
       var isPh = relView.kind === "pornhub";
       if (relView.mode === "list") {
@@ -1079,6 +1292,58 @@
       renderRelPanel();
     }
 
+    // The human's own search. Same one-browser protocol as fetchPornhub: set the
+    // flag, sweep every runner-driving control, and clear on ALL exit paths.
+    // Unlike ◆ and ⇢ this bucket lands on the SHELF, so what it opens is a chip,
+    // not a panel.
+    var pendingSelectQ = null;
+
+    function runSearch() {
+      var terms = qInputEl.value.trim();
+      if (!terms || runnerBusy || !KEY) return;
+      runnerBusy = true;
+      updateRelatedButtons();
+      qGoEl.textContent = "…";
+      toast("Searching Google Images — ~20s…", "ok");
+      fetch(API + "/api/v1/dev/media-finder/search/fetch", {
+        method: "POST",
+        body: JSON.stringify({ game: GAME, file: FILE, slot_key: KEY, query: terms })
+      }).then(function (r) { return r.json().then(function (j) { return { st: r.status, j: j }; }); })
+        .then(function (res) {
+          runnerBusy = false;
+          qGoEl.textContent = "Search";
+          if (res.j && res.j.ok) {
+            qInputEl.value = "";
+            toast("Stocked " + (res.j.stocked || 0) + " from “" + res.j.label + "”", "ok");
+            // Select the bucket we just made — that is the point of having
+            // clicked. The label is the runner's (it may carry an appended
+            // `gif`), so take it from the reply rather than guessing.
+            pendingSelectQ = res.j.label || null;
+            lastSig = null;
+            loadOptions();
+            updateRelatedButtons();
+            return;
+          }
+          updateRelatedButtons();
+          toast((res.j && res.j.error) || ("Search failed (" + res.st + ")"), "err");
+        })
+        .catch(function () {
+          runnerBusy = false;
+          qGoEl.textContent = "Search";
+          updateRelatedButtons();
+          toast("Server unreachable", "err");
+        });
+    }
+
+    qGoEl.addEventListener("click", runSearch);
+    // Enter submits. Scoped to the input, so it never competes with the modal's
+    // document-level Escape (which only exists while the modal is open).
+    qInputEl.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { e.preventDefault(); runSearch(); }
+    });
+    // Go enables as you type — updateRelatedButtons owns that rule.
+    qInputEl.addEventListener("input", updateRelatedButtons);
+
     function fetchPornhub(terms, btn) {
       runnerBusy = true;
       updateRelatedButtons();
@@ -1116,18 +1381,21 @@
     relBackEl.addEventListener("click", function () { openRelPanel(relView.kind, "list", null); });
     document.getElementById("rel-close").addEventListener("click", closeRelPanel);
 
-    function fetchRelated(opt, tile) {
-      relInFlight[opt.url] = true;
+    // Takes the SEED URL, not the option: a demoted pick and a selected clip both
+    // seed from a url that is not their own `url` field, and passing the row would
+    // put three different "which url is this really" decisions in here.
+    function fetchRelated(seedUrl, tile) {
+      relInFlight[seedUrl] = true;
       runnerBusy = true;
       updateRelatedButtons();          // gray every other ⇢ for the duration
       tile._status.className = "tile-status";
       tile._status.textContent = "fetching related — ~10s…";
       fetch(API + "/api/v1/dev/media-finder/related/fetch", {
         method: "POST",
-        body: JSON.stringify({ game: GAME, file: FILE, slot_key: KEY, url: opt.url })
+        body: JSON.stringify({ game: GAME, file: FILE, slot_key: KEY, url: seedUrl })
       }).then(function (r) { return r.json().then(function (j) { return { st: r.status, j: j }; }); })
         .then(function (res) {
-          delete relInFlight[opt.url];
+          delete relInFlight[seedUrl];
           runnerBusy = false;
           updateRelatedButtons();
           if (res.j && res.j.ok) {
@@ -1137,7 +1405,7 @@
             // The shelf and the query table both grew — pull them now rather than
             // at the next poll tick. syncRelPanel() then opens the new bucket in
             // the side panel, which is the whole point of having clicked.
-            pendingOpenSeed = opt.url;
+            pendingOpenSeed = seedUrl;
             lastSig = null;
             loadOptions();
             return;
@@ -1151,7 +1419,7 @@
           syncRelBtn(tile);
         })
         .catch(function () {
-          delete relInFlight[opt.url];
+          delete relInFlight[seedUrl];
           runnerBusy = false;
           updateRelatedButtons();
           tile._status.className = "tile-status err";
@@ -1271,6 +1539,7 @@
       selLabelEl.textContent = "In the game now";
       selCountEl.textContent = slotUnknown ? "(unknown)" : (has ? "" : "(nothing installed)");
       selEl.innerHTML = "";
+      selTileByUrl = {};   // the tiles about to be destroyed must leave the sweep
       if (slotUnknown) {
         selEl.appendChild(el("p", "empty",
           "Couldn't read this slot — the dev server didn't answer. This is not the same as empty."));
@@ -1317,8 +1586,33 @@
       meta.appendChild(el("span", "type-badge" + (isVideo ? " vid" : ""), it.media_type || "image"));
       meta.appendChild(document.createTextNode(" " + (it.serve_path || it.file)));
       body.appendChild(meta);
+      // Where this file came from, and a ⇢ to grow more like it. Both hang off the
+      // pick: installing consumed the option row, so a clip installed before the
+      // picks table existed has nothing to show and gets neither. `media_url` is a
+      // relative path, so basename() (which parses a URL) is the wrong tool here.
+      appendProvenance(body, tile, pickByFile[String(it.media_url || "").split("/").pop()]);
       tile.appendChild(body);
       return tile;
+    }
+
+    // The origin line + ⇢, shared by the two Selected-zone tile builders. Silent
+    // when the ledger does not know — a guess about where a clip came from is
+    // worse here than an absence, because this line is what a re-pick is judged on.
+    // A pool tile already owns an action row and a status line (Unselect writes into
+    // them); the installed tile has neither, so pass nothing and it makes its own.
+    // Sharing the status element matters — a second one would leave the ⇢ writing
+    // its progress into a div that was never attached to anything.
+    function appendProvenance(body, tile, pick, row, statusEl) {
+      if (!pick) return;
+      var sub = pickSubtitle(pick);
+      if (sub) body.appendChild(el("div", "tile-src", sub));
+      if (!pick.url) return;   // filename only — nothing to seed a fetch with
+      var own = !row;
+      if (own) { row = el("div", "tile-actions"); statusEl = el("div", "tile-status"); }
+      // Prepended so the order matches an options tile: ⇢ before the control that
+      // takes the clip away, which is where the muscle memory already puts it.
+      row.prepend(wireRelBtn(tile, pick.url, statusEl, selTileByUrl));
+      if (own) body.append(row, statusEl);
     }
 
     // ---- REVIEW: the slot's verdict, on the same ledger media.html writes ----
@@ -1400,6 +1694,12 @@
     // folder". So selecting is a grab INTO the folder and unselecting is a move
     // OUT of it, and there is no second source of truth to drift from the build.
     var lastSelSig = null;
+    // The last pool listing, kept so a picks change can repaint these tiles without
+    // re-fetching pool/list. `selLoaded` guards the repaint: rendering an empty
+    // `lastSelItems` before the first listing lands would flash "Nothing selected
+    // yet" over a pool that is in fact full.
+    var lastSelItems = [];
+    var selLoaded = false;
 
     function loadSelected() {
       if (!POOL) return;
@@ -1411,6 +1711,8 @@
     }
 
     function renderSelected(items) {
+      lastSelItems = items;
+      selLoaded = true;
       var sig = items.map(function (i) { return i.filename; }).join("|");
       if (sig === lastSelSig) return;   // unchanged — don't rebuild (avoids flicker)
       lastSelSig = sig;
@@ -1420,6 +1722,7 @@
       selCountEl.textContent = POOL_TARGET ? "(" + items.length + " of " + POOL_TARGET + ")"
                                            : "(" + items.length + ")";
       selEl.innerHTML = "";
+      selTileByUrl = {};   // the tiles about to be destroyed must leave the sweep
       if (!items.length) {
         selEl.appendChild(el("p", "empty",
           "Nothing selected yet. Pick from Options below — it downloads into the pool folder and starts playing."));
@@ -1451,6 +1754,9 @@
       out.title = "Move out of the pool — it stops playing and returns to Options";
       out.addEventListener("click", function () { unselect(m, out, status); });
       row.appendChild(out);
+      // Before the row goes in, so the origin line reads under the filename rather
+      // than under the buttons.
+      appendProvenance(body, tile, pickByFile[m.filename], row, status);
       body.append(row, status);
       tile.appendChild(body);
       return tile;
@@ -1509,6 +1815,106 @@
       document.body.appendChild(overlay);
     }
 
+    // ---- the page's one confirmation ----
+    //
+    // JS-built and body-appended, matching every other transient surface here
+    // (preview()'s overlay, toast()) rather than markup parked inside .wrap.
+    // Deliberately not window.confirm(): a native dialog cannot show the blast
+    // radius, and it blocks the extension event loop the runner is driven through.
+    function confirmDialog(opts) {
+      var prevFocus = document.activeElement;
+      var back = el("div", "confirm-back");
+      var box = el("div", "confirm-box");
+      box.appendChild(el("div", "confirm-ttl", opts.title));
+      box.appendChild(el("div", "confirm-q", opts.query));   // textContent, never innerHTML
+      opts.lines.forEach(function (t) { box.appendChild(el("div", "confirm-body", t)); });
+      var row = el("div", "confirm-row");
+      var no = el("button", "confirm-btn", "Cancel");
+      var yes = el("button", "confirm-btn danger", opts.confirmLabel || "Delete");
+
+      function close(ok) {
+        document.removeEventListener("keydown", onKey);
+        back.remove();
+        if (prevFocus && prevFocus.focus) prevFocus.focus();
+        if (ok) opts.onConfirm();
+      }
+      // Escape only. Enter is deliberately NOT bound: this is the one action on
+      // the page that cannot be undone from the UI, so it costs a real click.
+      function onKey(e) { if (e.key === "Escape") { e.stopPropagation(); close(false); } }
+
+      no.addEventListener("click", function () { close(false); });
+      yes.addEventListener("click", function () { close(true); });
+      // Only a click ON the backdrop. preview()'s overlay closes on any bubbled
+      // click, which is right for a lightbox and catastrophic here — a click on
+      // the warning text would confirm the delete.
+      back.addEventListener("click", function (e) { if (e.target === back) close(false); });
+      // Added on open, removed on close. A permanent document-level handler would
+      // be this page's first, and it would fire while the review textarea has focus.
+      document.addEventListener("keydown", onKey);
+
+      row.append(no, yes);
+      box.appendChild(row);
+      back.appendChild(box);
+      document.body.appendChild(back);
+      no.focus();                       // the SAFE control takes focus
+    }
+
+    // Delete one search: its record, and the options only it found. The blast
+    // radius is computed client-side with EXACTLY the server's rule, so the
+    // sentence and the outcome cannot disagree.
+    function confirmDeleteQuery(rec) {
+      var drop = 0, keep = 0;
+      lastOpts.forEach(function (o) {
+        if (foundBy(o).indexOf(rec.q) < 0 || o.origin === "previous") return;
+        if (foundBy(o).length > 1) { keep++; return; }
+        // Sole label — but only DROPPED if this search introduced it. A search
+        // that re-finds an already-shelved url adopts it by appending its label,
+        // so a sole label is not proof of ownership. Same test the server runs.
+        if (rec.at && (o.added_at || "") >= rec.at) drop++; else keep++;
+      });
+      var lines = [
+        "Deletes this search from the slot and drops the " + drop + " option" +
+        (drop === 1 ? "" : "s") + " it brought in.",
+      ];
+      if (keep) {
+        lines.push(keep + " option" + (keep === 1 ? "" : "s") +
+                   " that were already on the shelf, or that another search also " +
+                   "found, " + (keep === 1 ? "is" : "are") + " kept.");
+      }
+      lines.push("Anything already installed in the game is untouched. " +
+                 "This cannot be undone from this page.");
+      confirmDialog({
+        title: "Delete this search?",
+        query: rec.q,
+        lines: lines,
+        confirmLabel: "Delete search",
+        onConfirm: function () { deleteQuery(rec.q); }
+      });
+    }
+
+    function deleteQuery(q) {
+      fetch(API + "/api/v1/dev/media-finder/queries/remove", {
+        method: "POST",
+        body: JSON.stringify({ game: GAME, file: FILE, slot_key: KEY, query: q })
+      }).then(function (r) { return r.json().then(function (j) { return { st: r.status, j: j }; }); })
+        .then(function (res) {
+          if (!res.j || !res.j.ok) {
+            toast((res.j && res.j.error) || ("Delete failed (" + res.st + ")"), "err");
+            return;
+          }
+          // The SERVER's numbers, not the modal's: the 3 s poll can move the shelf
+          // between opening the dialog and confirming it.
+          toast("Deleted — " + res.j.removed + " removed, " +
+                (res.j.relabelled + res.j.unlabelled) + " kept", "ok");
+          // The rail's signature is built from the record list, so a deleted
+          // record changes it by construction; the grid's is urls-only, so it
+          // needs the nudge. activeQ falls back to All on its own in loadOptions.
+          lastSig = null;
+          loadOptions();
+        })
+        .catch(function () { toast("Server unreachable", "err"); });
+    }
+
     function toast(msg, kind) {
       var t = el("div", "toast " + (kind || "ok"), msg);
       document.body.appendChild(t);
@@ -1528,6 +1934,25 @@
       loadSelected();
     }
     // Fills BOTH the "in the game now" zone (single slots) and the review panel
+    // The search box needs a slot to stock into; without one it would have nowhere
+    // to put results. The placeholder carries the FORMAT hint the server will
+    // resolve anyway — a `.jpg` slot gets no appended `gif`, and saying so up front
+    // is cheaper than explaining an empty harvest afterwards. A pool has no
+    // extension of its own, so it says nothing rather than guessing; the server
+    // reads the folder's members and the reply's label shows what actually ran.
+    if (KEY) {
+      searchBarEl.hidden = false;
+      var ext = (FILE.match(/\.([a-z0-9]+)$/i) || [])[1];
+      var stillExt = /^(jpg|jpeg|png|webp|bmp|svg)$/i;
+      qInputEl.placeholder = !ext ? "search terms…"
+        : stillExt.test(ext) ? "search terms… (stills — no “gif” added)"
+        : "search terms… (“gif” added automatically)";
+      // Paint the initial disabled state now rather than waiting for the first
+      // poll — loadOptions' catch branch never reaches updateRelatedButtons, so an
+      // offline server would otherwise leave Search enabled over an empty box.
+      updateRelatedButtons();
+    }
+
     // (every slot). Once, plus after each mutation — see loadSlot().
     loadSlot();
     loadOptions();

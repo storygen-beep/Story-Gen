@@ -13,9 +13,11 @@ Endpoints (under /api/v1/dev/media-finder/):
 - POST options/add     {game, file, url, type, media_kind, query?, docid?, thumb?} -> append an option
 - POST options/add_bulk {game, file, query?, items:[…]} -> append N options in ONE write
 - POST queries/add     {game, file, query, urls, stocked, hosts, seed_url?} -> record a SEARCH
+- POST queries/remove  {game, file, query} -> delete a SEARCH and the options only it found
 - POST pornhub/fetch   {game, file, query} -> run a PornHub-scoped image search, stock it
+- POST search/fetch    {game, file, query, format?} -> run the HUMAN's free-text search
 - POST related/fetch   {game, file, url}  -> run the related-feed fetch for one option
-- GET  options/list    ?game=&file=                          -> options + queries for a slot
+- GET  options/list    ?game=&file=                  -> options + queries + picks for a slot
 - POST options/remove  {game, file, url}                     -> drop an option
 - POST options/clear   {game, file, all}                     -> empty the shelf (refetch)
 - POST grab            {game, file, url|local_path, source}  -> install -> videos/
@@ -30,6 +32,12 @@ Replacement is a SWAP, never a destruction: grab fetches to a temp file first, a
 only once that succeeds does the file currently in the slot get copied into
 .find-media/previous/ and registered as an option of its own. A failed fetch leaves
 the slot exactly as it was.
+
+Installing consumes the option row, so the `picks` root keeps what it consumed —
+the source url, the `docid`, the search that found it — keyed by the installed
+file's basename. Without it the one action meaning "I want this most" was also the
+only one that erased where the clip came from, and a selected clip could never seed
+a related fetch again.
 """
 
 import hashlib
@@ -114,7 +122,11 @@ def _parse_body(request):
 def _redgifs_token(force=False):
     """Fetch/cache a RedGIFs temporary bearer token (clearnet, no account)."""
     now = time.time()
-    if not force and _REDGIFS_TOKEN["token"] and now - _REDGIFS_TOKEN["ts"] < _REDGIFS_TTL:
+    if (
+        not force
+        and _REDGIFS_TOKEN["token"]
+        and now - _REDGIFS_TOKEN["ts"] < _REDGIFS_TTL
+    ):
         return _REDGIFS_TOKEN["token"]
     resp = requests.get(
         "https://api.redgifs.com/v2/auth/temporary",
@@ -219,6 +231,19 @@ _VIDEO_SUFFIXES = {".webm", ".mp4", ".mov", ".mkv"}
 # _VIDEO_SUFFIXES because that set drives the <video>-vs-<img> choice.
 _IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp", ".svg"}
 
+# ── the FORMAT axis: does this slot want ANIMATION? ──────────────────────────
+# A THIRD partition of the same suffixes, and the `.gif` placement is the whole
+# reason it exists. The two sets above answer "<video> or <img>", where a .gif is
+# an <img> — so a .gif pool reports media_kind "img". This pair answers "should
+# the search hunt animation", where a .gif belongs with the videos.
+#
+# Reading the FORMAT off `media_kind` is therefore a bug waiting to happen: it
+# would search a `_t5` .gif pool as stills and drop `gif` from the query, which
+# is the exact query-poisoning the axis exists to prevent. Suffix, never kind.
+_ANIMATED_SUFFIXES = {".gif", ".webm", ".mp4", ".mov", ".mkv"}
+_STILL_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp", ".bmp", ".svg"}
+FORMAT_ANIMATED, FORMAT_STILL = "animated", "still"
+
 # Media CDNs that reject a request lacking a full browser UA *and* a matching site
 # Referer. phncdn answers 410/470 to a bare UA, which lands as a 0-byte file or a
 # HEAD failure — the single most-rediscovered gotcha in this pipeline.
@@ -293,6 +318,12 @@ def _read_options(game_dir: Path) -> dict:
     # 2026-08-05 — those options carry no `found_by` and the picker files them
     # under "older searches".
     data.setdefault("queries", {})
+    # What each INSTALLED file was, back when it was an option. Installing consumes
+    # the option row (`_drop_option`), and with it the only copy of the clip's
+    # `docid` — so without this root a selected clip can never seed a related fetch
+    # again. Absent on every ledger written before 2026-08-09; `backfill_picks`
+    # recovers what it can prove from the md5 in a pool member's filename.
+    data.setdefault("picks", {})
     return data
 
 
@@ -397,7 +428,9 @@ def _ensure_query(data: dict, slot: str, q: str, now: str) -> bool:
     return True
 
 
-def _upsert_query(data: dict, slot: str, q: str, now: str, fields: dict) -> tuple[dict, bool]:
+def _upsert_query(
+    data: dict, slot: str, q: str, now: str, fields: dict
+) -> tuple[dict, bool]:
     """Record one SEARCH against a slot. Caller holds the options lock.
 
     Stored oldest-first — the picker reverses for display; `_add_option`'s
@@ -439,6 +472,7 @@ def _apply_option(
     origin: str = "",
     docid: str = "",
     thumb: str = "",
+    source_url: str = "",
 ) -> tuple[bool, bool, int]:
     """One shelf mutation, in memory only. Returns (added, changed, count).
 
@@ -470,6 +504,9 @@ def _apply_option(
         if thumb and not dup.get("thumb"):
             dup["thumb"] = thumb
             changed = True
+        if source_url and not dup.get("source_url"):
+            dup["source_url"] = source_url
+            changed = True
         return False, changed, len(lst)
 
     entry = {"url": url, "type": type_, "media_kind": media_kind, "added_at": now}
@@ -481,6 +518,8 @@ def _apply_option(
         entry["docid"] = docid
     if thumb:
         entry["thumb"] = thumb
+    if source_url:
+        entry["source_url"] = source_url
     # A demoted pick has no search behind it, so it never gets a label — it is undo
     # history, and filing it under a query would be a category error.
     if q and origin != "previous":
@@ -523,8 +562,11 @@ def _clean_thumb(raw) -> str:
         return ""
     parsed = urlparse(thumb)
     host = (parsed.hostname or "").lower()
-    if (parsed.scheme not in ("http", "https") or len(thumb) > 2048
-            or not (host == "gstatic.com" or host.endswith(".gstatic.com"))):
+    if (
+        parsed.scheme not in ("http", "https")
+        or len(thumb) > 2048
+        or not (host == "gstatic.com" or host.endswith(".gstatic.com"))
+    ):
         return ""
     return thumb
 
@@ -541,12 +583,20 @@ def _add_option(
     query: str = "",
     docid: str = "",
     thumb: str = "",
+    source_url: str = "",
 ) -> tuple[bool, int]:
     """Append one option to a slot's shelf. Deduped by url. Returns (added, count).
 
     `local_path` (games-relative) marks an option whose bytes are already on disk —
     a previously-installed pick. Those install by copy, so they never depend on a
     remote URL that may have expired.
+
+    `source_url` is where those local bytes ORIGINALLY came from, carried back from
+    the pick when an install is undone. It is deliberately NOT `url`: `url` is what
+    the picker installs from, and a demoted pick must install by copy from
+    `local_path` so the exact approved bytes come back rather than whatever the
+    remote serves today. It exists so a demoted pick can still seed a related
+    fetch — before it, every one of them was a permanently dead `⇢ no id` tile.
 
     `query` is the search that produced this url. It lands in `found_by`, which is a
     LIST because dedup is by url: when a sibling query legitimately returns a url an
@@ -572,8 +622,18 @@ def _add_option(
     with _options_lock(game_dir):
         data = _read_options(game_dir)
         added, changed, count = _apply_option(
-            data, file_, url, type_, media_kind, now, q,
-            local_path=local_path, origin=origin, docid=docid, thumb=thumb,
+            data,
+            file_,
+            url,
+            type_,
+            media_kind,
+            now,
+            q,
+            local_path=local_path,
+            origin=origin,
+            docid=docid,
+            thumb=thumb,
+            source_url=source_url,
         )
         if changed:
             data["game"] = game
@@ -619,15 +679,18 @@ def _add_options_bulk(
                 invalid += 1
                 continue
             was_added, changed, count = _apply_option(
-                data, file_, url,
+                data,
+                file_,
+                url,
                 str(item.get("type") or "image").lower(),
                 str(item.get("media_kind") or "img").lower(),
-                now, q,
+                now,
+                q,
                 docid=_clean_docid(item.get("docid")),
                 thumb=_clean_thumb(item.get("thumb")),
             )
             added += was_added
-            duplicates += (not was_added)
+            duplicates += not was_added
             changed_any = changed_any or changed
         if changed_any:
             data["game"] = game
@@ -635,7 +698,12 @@ def _add_options_bulk(
             _write_options(game_dir, data)
         else:
             count = len(data["options"].get(file_) or [])
-    return {"added": added, "duplicates": duplicates, "invalid": invalid, "count": count}
+    return {
+        "added": added,
+        "duplicates": duplicates,
+        "invalid": invalid,
+        "count": count,
+    }
 
 
 class _MangledHost(ValueError):
@@ -720,31 +788,133 @@ def _append_query_ledger(
         return
 
 
-def _drop_option(game_dir: Path, game: str, file_: str, url: str, local_path: str = "") -> None:
+def _drop_option(
+    game_dir: Path, game: str, file_: str, url: str, local_path: str = ""
+) -> list:
     """Remove one option, by url or by local_path — it has just been installed.
 
     `local_path` matters because a previously-demoted pick is re-selected by COPY:
     its `url` is empty, so matching on url alone left it sitting on the shelf as an
     available option while it was already back in the slot.
+
+    Returns the rows it removed (usually one, [] if nothing matched). The caller
+    needs them: the row about to be deleted is the ONLY copy of this clip's `docid`,
+    `thumb` and `found_by`, and `_record_pick` writes them into the picks table so
+    the install does not erase where the clip came from. Returning is a read the
+    caller would otherwise have to redo under its own lock, racing this one.
     """
     if not url and not local_path:
-        return
+        return []
     with _options_lock(game_dir):
         data = _read_options(game_dir)
         lst = data["options"].get(file_)
         if not lst:
-            return
-        kept = [
-            o for o in lst
-            if not ((url and o.get("url") == url)
-                    or (local_path and o.get("local_path") == local_path))
-        ]
-        if len(kept) == len(lst):
-            return
+            return []
+        kept, removed = [], []
+        for o in lst:
+            match = (url and o.get("url") == url) or (
+                local_path and o.get("local_path") == local_path
+            )
+            (removed if match else kept).append(o)
+        if not removed:
+            return []
         data["options"][file_] = kept
         data["game"] = game
         data["updated_at"] = datetime.now(timezone.utc).isoformat()
         _write_options(game_dir, data)
+        return removed
+
+
+def _remote(url) -> str:
+    """The url if it is fetchable off the internet, else ''. A `/games/…` path is a
+    local option's serve path, which no index has ever seen."""
+    return (
+        str(url or "")
+        if str(url or "").lower().startswith(("http://", "https://"))
+        else ""
+    )
+
+
+def _record_pick(
+    game_dir: Path,
+    game: str,
+    file_: str,
+    filename: str,
+    url: str,
+    row: dict | None = None,
+    *,
+    pool: bool = False,
+) -> None:
+    """Remember what an install consumed, so the installed file can still be traced.
+
+    Installing DROPS the option row, and that row held the only copy of the clip's
+    `docid` — the id a related fetch is built from. Nothing downstream could recover
+    it: a pool member is named `c<md5(url)>` (one-way) and a single slot's file is
+    named after the SLOT, carrying no provenance at all. So the row is copied here
+    on its way out.
+
+    Keyed on `filename` because that is the join key both readers already hold: a
+    pool item carries it, and a single slot is `basename(media_url)`.
+
+    Bookkeeping, never a gate: the bytes are already on disk by the time this runs,
+    so a failure here must not turn a successful install into an error. Same
+    contract as `_clear_review_status`.
+    """
+    if not filename:
+        return
+    row = row or {}
+    seed = _remote(url) or _remote(row.get("source_url"))
+    try:
+        with _options_lock(game_dir):
+            data = _read_options(game_dir)
+            now = datetime.now(timezone.utc).isoformat()
+            entry = {"filename": filename, "at": now}
+            if seed:
+                entry["url"] = seed
+            for key in ("docid", "thumb", "found_by"):
+                if row.get(key):
+                    entry[key] = row[key]
+            # A SINGLE slot holds exactly one file, so a new pick replaces the list
+            # outright — otherwise a replacement that resolves a different extension
+            # would leave the old row behind, pointing at a file that no longer
+            # exists. A POOL keeps its peers and replaces only this member, matched
+            # on filename OR url: a re-grab of the same source can land under a
+            # different extension, which changes the filename but not the identity.
+            lst = data["picks"].get(file_, []) if pool else []
+            lst = [
+                p
+                for p in lst
+                if p.get("filename") != filename and not (seed and p.get("url") == seed)
+            ]
+            lst.append(entry)
+            data["picks"][file_] = lst
+            data["game"] = game
+            data["updated_at"] = now
+            _write_options(game_dir, data)
+    except Exception:  # noqa: BLE001 - provenance is never worth failing an install
+        return
+
+
+def _forget_pick(game_dir: Path, game: str, file_: str, filename: str) -> dict | None:
+    """Drop the pick for one installed file and return it — the file is leaving the
+    slot. The caller hands its contents to the option it is demoted into, so undoing
+    an install restores the provenance the install consumed."""
+    if not filename:
+        return None
+    try:
+        with _options_lock(game_dir):
+            data = _read_options(game_dir)
+            lst = data["picks"].get(file_) or []
+            gone = next((p for p in lst if p.get("filename") == filename), None)
+            if gone is None:
+                return None
+            data["picks"][file_] = [p for p in lst if p is not gone]
+            data["game"] = game
+            data["updated_at"] = datetime.now(timezone.utc).isoformat()
+            _write_options(game_dir, data)
+            return gone
+    except Exception:  # noqa: BLE001 - same rule as _record_pick
+        return None
 
 
 def _preserve_current_as_option(
@@ -769,6 +939,10 @@ def _preserve_current_as_option(
             continue  # a preserve failure must not block the swap
         rel = str(dest.relative_to(GAMES_ROOT))
         is_video = existing.suffix.lower() in _VIDEO_SUFFIXES
+        # Carry the outgoing file's provenance onto the option it becomes. Without
+        # it the demoted pick is a dead `⇢ no id` tile forever — measured 276 of
+        # them on vesper before this existed.
+        was = _forget_pick(game_dir, game, file_, existing.name) or {}
         _add_option(
             game_dir,
             game,
@@ -778,6 +952,9 @@ def _preserve_current_as_option(
             media_kind="video" if is_video else "img",
             local_path=rel,
             origin="previous",
+            source_url=was.get("url", ""),
+            docid=was.get("docid", ""),
+            thumb=was.get("thumb", ""),
         )
         kept.append(rel)
     return kept
@@ -838,7 +1015,12 @@ def options_add(request):
         return JsonResponse({"error": "Invalid URL scheme"}, status=400)
 
     added, count = _add_option(
-        game_dir, game, file_, url=url, type_=type_, media_kind=media_kind,
+        game_dir,
+        game,
+        file_,
+        url=url,
+        type_=type_,
+        media_kind=media_kind,
         query=body.get("query", ""),
         docid=_clean_docid(body.get("docid")),
         thumb=_clean_thumb(body.get("thumb")),
@@ -985,8 +1167,10 @@ def queries_add(request):
             and existing["seed_url"] != seed_url
         ):
             return JsonResponse(
-                {"error": f"label '{q}' already belongs to a different seed — "
-                          "suffix the label and retry"},
+                {
+                    "error": f"label '{q}' already belongs to a different seed — "
+                    "suffix the label and retry"
+                },
                 status=409,
             )
         _rec, duplicate = _upsert_query(data, file_, q, now, fields)
@@ -996,8 +1180,14 @@ def queries_add(request):
         count = len(data["queries"].get(file_, []))
 
     _append_query_ledger(
-        game_dir, file_, q, fields["source"], fields["urls"],
-        body.get("round"), str(body.get("status") or "ok"), seed_url=seed_url,
+        game_dir,
+        file_,
+        q,
+        fields["source"],
+        fields["urls"],
+        body.get("round"),
+        str(body.get("status") or "ok"),
+        seed_url=seed_url,
     )
     return JsonResponse({"ok": True, "duplicate": duplicate, "count": count})
 
@@ -1057,14 +1247,182 @@ def options_clear(request):
     )
 
 
+@csrf_exempt
+def queries_remove(request):
+    """POST queries/remove {game, file|slot_key, query} — delete ONE search from a
+    slot: its record, and the options that only it found.
+
+    The query table's first delete path, and deliberately NOT a new flag on
+    `options/clear`. Three reasons, none stylistic. `options/clear`'s contract is
+    that the query table survives it — there is a test pinning that. It is also
+    the endpoint the harvest skill calls on every refetch, so a destructive
+    `query` parameter there would sit one typo away from the hottest automated
+    path in the system. And decisively, `options/clear` is a pure FILTER
+    (`_keep(option) -> bool`), which cannot express the operation this needs: a
+    PARTIAL mutation of a row that survives.
+
+    The four cases:
+
+      - `q` not in `found_by`             -> untouched
+      - `found_by` has others             -> the row stays, minus this one label
+      - sole label, search INTRODUCED it  -> the row is DROPPED
+      - sole label, search ADOPTED it     -> the row stays, with no label at all
+
+    A `picks` row is a fifth case and always survives: it is a file already in the
+    game, so it only loses the label.
+
+    That last case is the one that is not obvious, and getting it wrong destroys
+    data. `_apply_option` adopts an already-shelved url by appending the new label
+    to the EXISTING row, and ~19,300 options repo-wide predate provenance and
+    carry no label. A search that re-finds one therefore makes it look sole-owned
+    by a search that did not put it there. The `added_at` >= `at` test below is
+    what tells the two apart.
+
+    Dropping the sole-owner row is NOT interchangeable with emptying its
+    `found_by`. The picker coalesces a missing key and an empty list to the same
+    `[]`, and reads that as the Q_UNLABELLED bucket — whose chip says "Stocked
+    before searches were recorded — no search can be attributed to these". So
+    relabelling-to-empty would silently migrate every deleted option into a
+    bucket that then lies about it, and a delete would visibly delete nothing.
+    The invariant to hold is: NO option in the store ever carries `found_by: []`.
+
+    `origin: "previous"` rows are skipped explicitly. They never carry a label, so
+    the membership test already spares them — the guard is here because that is a
+    fact about `_apply_option`, and this endpoint should not silently inherit it.
+
+    Idempotent by design: an unknown query is 200 with `removed: 0`, not a 404. A
+    double-click plus the 3 s poll makes a second call likely, and a red toast for
+    a successful operation is worse than a no-op. Running the option pass anyway
+    also repairs an ORPHAN LABEL — a `found_by` entry whose record is missing,
+    reachable after a hand edit or a crash between `_ensure_query` and
+    `queries/add`.
+
+    Destroying a record is legitimate here despite the module's "a swap, never a
+    destruction" discipline: that rule guards against IMPLICIT loss by unrelated
+    write paths, and `query_ledger.jsonl` is append-only and outlives this file by
+    design. The deletion appends its own `status: "deleted"` line, so the durable
+    log keeps "this search ran, yielded N, and was later deleted".
+    """
+    if request.method != "POST":
+        return JsonResponse({"error": "Method not allowed"}, status=405)
+
+    body = _parse_body(request)
+    game = body.get("game", "")
+    file_ = body.get("slot_key") or body.get("file", "")
+    q = _canon_query(body.get("query", ""))
+
+    game_dir = _safe_game_dir(game)
+    if game_dir is None or not game_dir.is_dir():
+        return JsonResponse({"error": "Invalid or missing game"}, status=400)
+    if not file_ or not q:
+        return JsonResponse({"error": "file and query are required"}, status=400)
+
+    now = datetime.now(timezone.utc).isoformat()
+    with _options_lock(game_dir):
+        data = _read_options(game_dir)
+
+        # Read the record FIRST: `at` (when this search first ran) is what
+        # separates an option the search INTRODUCED from one it merely ADOPTED.
+        records = data["queries"].get(file_, [])
+        record = next((r for r in records if r.get("q") == q), None)
+        first_ran = (record or {}).get("at") or ""
+
+        kept, removed, relabelled, unlabelled = [], 0, 0, 0
+        for option in data["options"].get(file_, []):
+            found_by = option.get("found_by") or []
+            if q not in found_by or option.get("origin") == "previous":
+                kept.append(option)
+                continue
+            remaining = [label for label in found_by if label != q]
+            if remaining:
+                option["found_by"] = remaining
+                relabelled += 1
+                kept.append(option)
+                continue
+            # ⚠️ Sole label, so the row would be dropped — but ONLY if this search
+            # actually put it there. `_apply_option` ADOPTS a url that is already
+            # on the shelf by appending the label to the existing row, and ~19,300
+            # options repo-wide predate provenance and carry no label at all. So a
+            # new search that re-finds one makes it look sole-owned, and a naive
+            # delete then destroys an option that was on the shelf before the
+            # search ever ran. Measured the hard way on media_lab (2026-08-09):
+            # two searches, then two deletes, and a 137-option shelf came back 82.
+            #
+            # `added_at` never moves after creation and `at` never moves after the
+            # first run, so the comparison is sound. Strictly `<`: a bulk stock
+            # stamps the option and opens the query stub from the SAME timestamp,
+            # so an option this search really did introduce compares equal.
+            #
+            # No record (an orphan label) means we cannot prove ownership, so we
+            # keep — this endpoint deletes only what it can show it created.
+            introduced = bool(first_ran) and (option.get("added_at") or "") >= first_ran
+            if introduced:
+                removed += 1
+                continue
+            # POP the key rather than leaving []: an option with no labels reads as
+            # the Q_UNLABELLED bucket, whose chip says "stocked before searches were
+            # recorded" — which for this row is now true again.
+            option.pop("found_by", None)
+            unlabelled += 1
+            kept.append(option)
+        data["options"][file_] = kept
+
+        # A pick is an INSTALLED file, so no search deletion ever removes one — the
+        # bytes are in the game. But it must not keep crediting a search that no
+        # longer exists, so the label is stripped under the same `found_by: []`
+        # invariant the options above hold: pop the key, never empty it.
+        for pick in data["picks"].get(file_, []):
+            if q not in (pick.get("found_by") or []):
+                continue
+            labels = [x for x in pick["found_by"] if x != q]
+            if labels:
+                pick["found_by"] = labels
+            else:
+                pick.pop("found_by", None)
+
+        data["queries"][file_] = [r for r in records if r.get("q") != q]
+
+        data["game"] = game
+        data["updated_at"] = now
+        _write_options(game_dir, data)
+
+    # The deleted record's own source/round, so the durable line reads as the end
+    # of that search's story rather than as a new one.
+    _append_query_ledger(
+        game_dir,
+        file_,
+        q,
+        (record or {}).get("source") or "manual",
+        0,
+        (record or {}).get("round"),
+        "deleted",
+        seed_url=(record or {}).get("seed_url", ""),
+    )
+    return JsonResponse(
+        {
+            "ok": True,
+            "query": q,
+            "removed": removed,
+            "relabelled": relabelled,
+            "unlabelled": unlabelled,
+            "kept": len(kept),
+            "record_removed": record is not None,
+        }
+    )
+
+
 @require_GET
 def options_list(request):
-    """GET options/list?game=&file= — one slot's option URLs AND the searches that
-    produced them.
+    """GET options/list?game=&file= — one slot's option URLs, the searches that
+    produced them, AND what its installed files were before they were installed.
 
-    `queries` is additive; a caller that only reads `options` is unaffected. It is
-    ~2-4 KB per slot against an options array that reaches 816 entries, so it rides
-    the picker's existing poll for free."""
+    `queries` and `picks` are both additive; a caller that only reads `options` is
+    unaffected. Together they are ~2-4 KB per slot against an options array that
+    reaches 816 entries, so they ride the picker's existing poll for free.
+
+    `picks` is here rather than on `pool/list` deliberately: the picker joins it by
+    filename, which a pool item and a single slot's `basename(media_url)` both
+    already carry, so neither of those endpoints has to learn about provenance."""
     game = request.GET.get("game", "")
     # The shelf is keyed by `slot_key` — the slot's STABLE identity. It defaults
     # to `file`, so an untagged slot behaves exactly as before; a slot whose block
@@ -1074,10 +1432,13 @@ def options_list(request):
     if game_dir is None:
         return JsonResponse({"error": "Invalid or missing game"}, status=400)
     data = _read_options(game_dir)
-    return JsonResponse({
-        "options": data["options"].get(file_, []),
-        "queries": data["queries"].get(file_, []),
-    })
+    return JsonResponse(
+        {
+            "options": data["options"].get(file_, []),
+            "queries": data["queries"].get(file_, []),
+            "picks": data["picks"].get(file_, []),
+        }
+    )
 
 
 @csrf_exempt
@@ -1172,10 +1533,12 @@ def grab(request):
         # file -> (subfolder, stem); collapse a leading videos/ so we never double it.
         subfolder, filename_base = parse_scene_path(file_)
         if subfolder.startswith("videos/"):
-            subfolder = subfolder[len("videos/"):]
+            subfolder = subfolder[len("videos/") :]
         elif subfolder == "videos":
             subfolder = ""
-        output_dir = (game_dir / "videos" / subfolder) if subfolder else (game_dir / "videos")
+        output_dir = (
+            (game_dir / "videos" / subfolder) if subfolder else (game_dir / "videos")
+        )
     if not _safe_path(GAMES_ROOT, output_dir):
         return JsonResponse({"error": "Invalid path"}, status=400)
 
@@ -1191,7 +1554,9 @@ def grab(request):
         # can still be holding a rendered tile for it — refuse the click rather than
         # reinstall a truncated file.
         if candidate.name.startswith("."):
-            return JsonResponse({"error": "Refusing a dot-prefixed local_path"}, status=400)
+            return JsonResponse(
+                {"error": "Refusing a dot-prefixed local_path"}, status=400
+            )
         if not _safe_path(GAMES_ROOT, candidate) or not candidate.is_file():
             return JsonResponse({"error": "local_path not found"}, status=400)
         src_file = candidate
@@ -1215,7 +1580,9 @@ def grab(request):
                 head = requests.head(
                     url, timeout=10, headers=extra_headers, allow_redirects=True
                 )
-                ext = get_extension_from_content_type(head.headers.get("Content-Type", ""))
+                ext = get_extension_from_content_type(
+                    head.headers.get("Content-Type", "")
+                )
             except Exception:
                 pass
         if not ext:
@@ -1245,7 +1612,9 @@ def grab(request):
     # (apps/common/json_ledger.py). `filename_base` alone is NOT unique: _pool_member_stem
     # is md5(url), so the same url grabbed into two different pools yields the same base,
     # and the dev server is thread-per-request.
-    tmp_path = staging / f"{filename_base}.{os.getpid()}.{threading.get_ident()}.{ext}.part"
+    tmp_path = (
+        staging / f"{filename_base}.{os.getpid()}.{threading.get_ident()}.{ext}.part"
+    )
     try:
         # download_direct resumes onto an existing partial when the server supports Range,
         # so a leftover temp from an earlier crash would be appended to, not replaced.
@@ -1284,8 +1653,14 @@ def grab(request):
             #
             # The staged download is NOT in this folder, so this loop cannot reach it.
             for existing in output_dir.iterdir():
-                if existing.is_file() and existing.stem == filename_base and existing != output_path:
-                    existing.unlink(missing_ok=True)  # a concurrent unselect may have won
+                if (
+                    existing.is_file()
+                    and existing.stem == filename_base
+                    and existing != output_path
+                ):
+                    existing.unlink(
+                        missing_ok=True
+                    )  # a concurrent unselect may have won
             reason = _install(tmp_path, output_path)
         else:
             # The replacement exists. Demote the incumbent to an option, THEN clear the slot
@@ -1306,13 +1681,30 @@ def grab(request):
         # The option just consumed is no longer an alternative.
         # Pass both: a re-selected previous pick carries a local_path and no url, so
         # dropping by url alone would leave it listed as an option it no longer is.
-        _drop_option(game_dir, game, slot_key_, url=url, local_path=local_path)
+        removed = _drop_option(
+            game_dir, game, slot_key_, url=url, local_path=local_path
+        )
+        # …but "no longer an alternative" is not "never happened". The row just
+        # deleted held the only copy of this clip's docid, so it is copied into the
+        # picks table on its way out and the installed file stays traceable.
+        _record_pick(
+            game_dir,
+            game,
+            slot_key_,
+            filename=output_path.name,
+            url=url,
+            row=removed[0] if removed else None,
+            pool=bool(pool_dir),
+        )
         # A single slot now holds bytes nobody has judged, so its old verdict must not
         # carry over. A POOL keeps its verdict: adding a fourth clip does not un-judge
         # the three already approved.
         if not pool_dir:
             _clear_review_status(
-                game_dir, game, slot_key_, note=f"replaced via finder {datetime.now(timezone.utc).date()}"
+                game_dir,
+                game,
+                slot_key_,
+                note=f"replaced via finder {datetime.now(timezone.utc).date()}",
             )
 
         return JsonResponse(
@@ -1441,13 +1833,17 @@ def pool_list(request):
     items = []
     for f in _pool_members(pool_path):
         rel = str(f.relative_to(game_dir))
-        items.append({
-            "filename": f.name,
-            "url": f"/games/{game}/{rel}",
-            "media_kind": "video" if f.suffix.lower() in _VIDEO_SUFFIXES else "img",
-            "bytes": f.stat().st_size,
-        })
-    return JsonResponse({"game": game, "dir": pool_dir, "items": items, "count": len(items)})
+        items.append(
+            {
+                "filename": f.name,
+                "url": f"/games/{game}/{rel}",
+                "media_kind": "video" if f.suffix.lower() in _VIDEO_SUFFIXES else "img",
+                "bytes": f.stat().st_size,
+            }
+        )
+    return JsonResponse(
+        {"game": game, "dir": pool_dir, "items": items, "count": len(items)}
+    )
 
 
 @csrf_exempt
@@ -1469,7 +1865,9 @@ def pool_unselect(request):
 
     game_dir = _safe_game_dir(game)
     if game_dir is None or not pool_dir or not filename:
-        return JsonResponse({"error": "game, dir and filename are required"}, status=400)
+        return JsonResponse(
+            {"error": "game, dir and filename are required"}, status=400
+        )
     # A filename is exactly one path segment — never a traversal, and never a dotfile.
     # A leading dot means staging or OS metadata, and shelving one as a "previous pick"
     # is how a truncated 2 MB GIF became a one-click option. startswith(".") subsumes
@@ -1492,6 +1890,9 @@ def pool_unselect(request):
 
     rel = str(dest.relative_to(GAMES_ROOT))
     is_video = dest.suffix.lower() in _VIDEO_SUFFIXES
+    # The clip is leaving the pool, so its pick goes with it — onto the option it
+    # becomes, which is what keeps its `⇢` alive on the shelf.
+    was = _forget_pick(game_dir, game, pool_dir, filename) or {}
     # Re-shelve it keyed by the POOL — the same key the picker and the review
     # ledger use — so it shows up as an option for this pool, not an orphan.
     _add_option(
@@ -1503,6 +1904,9 @@ def pool_unselect(request):
         media_kind="video" if is_video else "img",
         local_path=rel,
         origin="previous",
+        source_url=was.get("url", ""),
+        docid=was.get("docid", ""),
+        thumb=was.get("thumb", ""),
     )
     return JsonResponse({"success": True, "moved_to": rel})
 
@@ -1521,6 +1925,98 @@ _RUNNER_LAUNCH = (
 # search drive the same websocket at once, which is the exact failure this exists to
 # stop. Name kept for history; read it as "the runner lock".
 _RELATED_FETCH_LOCK = threading.Lock()
+
+
+def _run_runner(
+    script_name: str, argv_tail: list, *, label: str, codes: dict, timeout: int = 180
+):
+    """Preflight :9222, take the one runner lock, shell a runner script, and map
+    its exit codes onto HTTP. Returns a JsonResponse either way.
+
+    `pornhub_fetch` was written as a deliberate COPY of `related_fetch` rather
+    than a shared helper, and that was right at the time: the note said not to
+    couple a new path's failure modes to the proven one's "before either has run
+    in anger", and that "the merge is cheap later". Both have since run in anger,
+    and the THIRD caller is what makes the copy indefensible — the three differ
+    only in a script name, an argv tail and four sentences. That is a table, not
+    a control flow.
+
+    The cost of the copies was already visible: exit 5's message had to be fixed
+    once (see the regression test), and the fix landed in only one of the two
+    places it lived.
+
+    `codes` carries just the parts that differ, as {exit_code: (status, sentence)}.
+    Everything below is OWNED here because it describes the RUNNER rather than the
+    search — a third copy would be a third place to fix the same bug:
+
+      - exit 5, which must own its sentence rather than relay a stderr tail (that
+        tail is playwright's websocket log and reads as gibberish on a tile)
+      - the non-zero fallback and the missing-result-line parse
+      - the 503 preflight, the 429, and the 504
+
+    The stderr tail rides in `detail` on every failure, never in `error`.
+    """
+    try:
+        requests.get("http://localhost:9222/json/version", timeout=1.5)
+    except requests.RequestException:
+        return JsonResponse(
+            {
+                "error": f"{label} runner is not connected — no Chrome on :9222. "
+                f"Launch the dedicated profile: {_RUNNER_LAUNCH}"
+            },
+            status=503,
+        )
+
+    if not _RELATED_FETCH_LOCK.acquire(blocking=False):
+        return JsonResponse(
+            {
+                "error": f"Another {label.lower()} fetch is already running — the "
+                "runner is one browser, one fetch at a time. Retry when it "
+                "finishes."
+            },
+            status=429,
+        )
+    script = Path(settings.BASE_DIR) / "scripts" / script_name
+    try:
+        proc = subprocess.run(  # noqa: S603 - fixed script path, validated args
+            [sys.executable, str(script), *argv_tail],
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+        )
+    except subprocess.TimeoutExpired:
+        return JsonResponse(
+            {"error": f"{label} timed out after {timeout}s"}, status=504
+        )
+    finally:
+        _RELATED_FETCH_LOCK.release()
+
+    tail = (proc.stderr or "").strip()[-400:]
+    if proc.returncode in codes:
+        status, sentence = codes[proc.returncode]
+        return JsonResponse({"error": sentence, "detail": tail}, status=status)
+    if proc.returncode == 5:
+        # Answered the preflight but could not be driven. Own the sentence rather
+        # than relaying the stderr tail — that tail is a websocket log.
+        return JsonResponse(
+            {
+                "error": "The find-media Chrome answered but could not be driven. "
+                f"Quit it and relaunch: {_RUNNER_LAUNCH}",
+                "detail": tail,
+            },
+            status=503,
+        )
+    if proc.returncode != 0:
+        return JsonResponse(
+            {"error": f"runner exited {proc.returncode}", "detail": tail}, status=500
+        )
+    try:
+        result = json.loads((proc.stdout or "").strip().splitlines()[-1])
+    except (ValueError, IndexError):
+        return JsonResponse(
+            {"error": "runner returned no result line", "detail": tail}, status=500
+        )
+    return JsonResponse(result)
 
 
 @csrf_exempt
@@ -1555,75 +2051,30 @@ def related_fetch(request):
     if urlparse(url).scheme not in ("http", "https"):
         return JsonResponse({"error": "Invalid URL scheme"}, status=400)
 
-    try:
-        requests.get("http://localhost:9222/json/version", timeout=1.5)
-    except requests.RequestException:
-        return JsonResponse(
-            {"error": "Related-fetch runner is not connected — no Chrome on :9222. "
-                      f"Launch the dedicated profile: {_RUNNER_LAUNCH}"},
-            status=503,
-        )
-
-    if not _RELATED_FETCH_LOCK.acquire(blocking=False):
-        return JsonResponse(
-            {"error": "Another related fetch is already running — the runner is one "
-                      "browser, one fetch at a time. Retry when it finishes."},
-            status=429,
-        )
-    script = Path(settings.BASE_DIR) / "scripts" / "fetch_related.py"
-    try:
-        proc = subprocess.run(  # noqa: S603 - fixed script path, validated args
-            [sys.executable, str(script), "--game", game, "--slot-key", slot_key,
-             "--file", file_, "--seed-url", url],
-            capture_output=True, text=True, timeout=180,
-        )
-    except subprocess.TimeoutExpired:
-        return JsonResponse({"error": "Related fetch timed out after 180s"}, status=504)
-    finally:
-        _RELATED_FETCH_LOCK.release()
-
-    tail = (proc.stderr or "").strip()[-400:]
-    if proc.returncode == 3:
-        return JsonResponse(
-            {"error": "Google served a captcha — wait a while and retry, or ask "
-                      "the agent to fetch instead.", "detail": tail},
-            status=502,
-        )
-    if proc.returncode == 4:
-        return JsonResponse(
-            {"error": "No Google id stored for this clip — nothing was fetched. "
-                      "Run a search on this slot; any search that re-finds this "
-                      "clip attaches an id to it in place.",
-             "detail": tail},
-            status=404,
-        )
-    if proc.returncode == 5:
-        # The runner answered the preflight but could not be driven. Own the
-        # message here rather than relaying a stderr tail — that tail is a
-        # websocket log, and it reads as gibberish on a tile.
-        return JsonResponse(
-            {"error": "The find-media Chrome answered but could not be driven. "
-                      f"Quit it and relaunch: {_RUNNER_LAUNCH}", "detail": tail},
-            status=503,
-        )
-    if proc.returncode == 7:
-        return JsonResponse(
-            {"error": "The related feed came back empty of porn hosts — that is "
-                      "usually the wrong Chrome on :9222, or SafeSearch back ON in "
-                      "the find-media profile.", "detail": tail},
-            status=503,
-        )
-    if proc.returncode != 0:
-        return JsonResponse(
-            {"error": f"runner exited {proc.returncode}", "detail": tail}, status=500
-        )
-    try:
-        result = json.loads((proc.stdout or "").strip().splitlines()[-1])
-    except (ValueError, IndexError):
-        return JsonResponse(
-            {"error": "runner returned no result line", "detail": tail}, status=500
-        )
-    return JsonResponse(result)
+    return _run_runner(
+        "fetch_related.py",
+        ["--game", game, "--slot-key", slot_key, "--file", file_, f"--seed-url={url}"],
+        label="Related-fetch",
+        codes={
+            3: (
+                502,
+                "Google served a captcha — wait a while and retry, or ask "
+                "the agent to fetch instead.",
+            ),
+            4: (
+                404,
+                "No Google id stored for this clip — nothing was fetched. "
+                "Run a search on this slot; any search that re-finds this "
+                "clip attaches an id to it in place.",
+            ),
+            7: (
+                503,
+                "The related feed came back empty of porn hosts — that is "
+                "usually the wrong Chrome on :9222, or SafeSearch back ON in "
+                "the find-media profile.",
+            ),
+        },
+    )
 
 
 @csrf_exempt
@@ -1631,15 +2082,15 @@ def pornhub_fetch(request):
     """POST pornhub/fetch {game, file|slot_key, query} — shelve a PornHub-scoped
     Google Images search as a new labelled bucket, via scripts/fetch_pornhub.py.
 
-    Deliberately a COPY of `related_fetch` rather than a shared helper. The two
-    differ in their exit-code sentences, their argv, and their request contract,
-    and the shared parts are ~15 lines of preflight. Factoring them together
-    before either has run in anger would couple the new path's failure modes to
-    the proven one's; the merge is cheap later and irreversible-feeling now.
+    This was a deliberate COPY of `related_fetch` until a third runner arrived and
+    the note's own expiry condition came due — see `_run_runner`, which now owns
+    the preflight, the lock, the shell and the exit-code mapping. What stays here
+    is what genuinely differs: the request contract, the validation, and the
+    sentences.
 
-    Shares `_RELATED_FETCH_LOCK` — one browser, one fetch, whichever runner.
-    Same threaded-server requirement as `related_fetch`: the script POSTs back
-    into this process once per url.
+    Shares `_RELATED_FETCH_LOCK` via the helper — one browser, one fetch,
+    whichever runner. Same threaded-server requirement as `related_fetch`: the
+    script POSTs back into this process once per url.
     """
     if request.method != "POST":
         return JsonResponse({"error": "Method not allowed"}, status=405)
@@ -1663,73 +2114,161 @@ def pornhub_fetch(request):
     if any(ord(c) < 32 for c in query):
         return JsonResponse({"error": "query contains control characters"}, status=400)
 
-    try:
-        requests.get("http://localhost:9222/json/version", timeout=1.5)
-    except requests.RequestException:
+    return _run_runner(
+        "fetch_pornhub.py",
+        # `--query=` joined, never a separate argv element: argparse rejects a
+        # value that starts with `-` ("expected one argument") and exits 2, which
+        # would surface as a bare `500 runner exited 2`. `-word` is ordinary
+        # Google negation syntax, so this is reachable, not theoretical.
+        ["--game", game, "--slot-key", slot_key, "--file", file_, f"--query={query}"],
+        label="PornHub-search",
+        codes={
+            3: (
+                502,
+                "Google served a captcha — wait a while and retry. Never "
+                "solved here.",
+            ),
+            4: (
+                404,
+                "That search returned nothing on PornHub. Try different "
+                "terms — one unmistakable act word is what makes a query "
+                "land.",
+            ),
+            7: (
+                503,
+                "The search came back empty of porn hosts — that is usually "
+                "the wrong Chrome on :9222, or SafeSearch back ON in the "
+                "find-media profile.",
+            ),
+        },
+    )
+
+
+def _resolve_format(game_dir: Path, slot_key: str, file_: str, declared) -> str:
+    """Animated or still, for one slot — the axis that decides both the search
+    terms and the extraction regex (see `_ANIMATED_SUFFIXES`).
+
+    Resolved HERE rather than in the browser or the script because the server is
+    the only party that can see the disk: a pool slot is a FOLDER, so it has no
+    extension of its own and only its members can answer.
+
+    Four falling steps, most-specific first:
+      1. an explicit `format` in the request — the caller knows something we don't
+      2. the declared slot path's suffix — the normal single-slot case
+      3. the first member of the pool folder, if this is a pool
+      4. animated — today's behaviour and the overwhelming majority
+    """
+    declared = str(declared or "").strip().lower()
+    if declared in (FORMAT_ANIMATED, FORMAT_STILL):
+        return declared
+
+    for candidate in (slot_key, file_):
+        suffix = os.path.splitext(str(candidate or ""))[1].lower()
+        if suffix in _ANIMATED_SUFFIXES:
+            return FORMAT_ANIMATED
+        if suffix in _STILL_SUFFIXES:
+            return FORMAT_STILL
+
+    # A pool: first member wins. A mixed pool is not something the engine can
+    # render two ways anyway, so there is no better answer to look for.
+    for member in _pool_members(game_dir / "videos" / _clean_pool_dir(slot_key)):
+        suffix = member.suffix.lower()
+        if suffix in _ANIMATED_SUFFIXES:
+            return FORMAT_ANIMATED
+        if suffix in _STILL_SUFFIXES:
+            return FORMAT_STILL
+
+    return FORMAT_ANIMATED
+
+
+@csrf_exempt
+def search_fetch(request):
+    """POST search/fetch {game, file|slot_key, query, format?} — run the HUMAN's
+    own free-text Google Images search and shelve it, via scripts/fetch_search.py.
+
+    Unscoped, unlike `pornhub_fetch`, and unprefixed: the bucket lands on the
+    shelf as an ordinary search chip rather than in a side panel, which is what
+    makes it inherit its count, its host verdict and its PH button from the code
+    that already draws them.
+
+    Shares `_RELATED_FETCH_LOCK` through `_run_runner` — one browser, one fetch,
+    whichever runner. Same threaded-server requirement as the other two.
+    """
+    if request.method != "POST":
+        return JsonResponse({"error": "Method not allowed"}, status=405)
+
+    body = _parse_body(request)
+    game = body.get("game", "")
+    slot_key = body.get("slot_key") or body.get("file", "")
+    file_ = body.get("file") or slot_key
+    query = " ".join(str(body.get("query") or "").split())
+
+    game_dir = _safe_game_dir(game)
+    if game_dir is None or not game_dir.is_dir():
+        return JsonResponse({"error": "Invalid or missing game"}, status=400)
+    if not slot_key or not query:
+        return JsonResponse({"error": "file and query are required"}, status=400)
+    if len(query) > 200:
+        return JsonResponse({"error": "query must be 200 chars or fewer"}, status=400)
+    if any(ord(c) < 32 for c in query):
+        return JsonResponse({"error": "query contains control characters"}, status=400)
+    # A typed panel sigil would file this bucket into the ⇢/◆ side panel purely on
+    # its label prefix — off the shelf it was meant to land on, with no error
+    # anywhere. Only a human can type one, so only this endpoint has to refuse it.
+    # The prefix list also lives in scripts/fetch_related.py (PANEL_PREFIXES) and
+    # find.html (PANEL_KIND); the script re-checks so a drift fails loudly.
+    if query[0] in ("⇢", "◆"):
         return JsonResponse(
-            {"error": "PornHub-search runner is not connected — no Chrome on :9222. "
-                      f"Launch the dedicated profile: {_RUNNER_LAUNCH}"},
-            status=503,
+            {
+                "error": "A query cannot start with ⇢ or ◆ — those mark the Related "
+                "and PornHub panels, and the search would vanish into one."
+            },
+            status=400,
         )
 
-    if not _RELATED_FETCH_LOCK.acquire(blocking=False):
-        return JsonResponse(
-            {"error": "Another runner fetch is already going — the runner is one "
-                      "browser, one fetch at a time. Retry when it finishes."},
-            status=429,
-        )
-    script = Path(settings.BASE_DIR) / "scripts" / "fetch_pornhub.py"
-    try:
-        proc = subprocess.run(  # noqa: S603 - fixed script path, validated args
-            [sys.executable, str(script), "--game", game, "--slot-key", slot_key,
-             "--file", file_, "--query", query],
-            capture_output=True, text=True, timeout=180,
-        )
-    except subprocess.TimeoutExpired:
-        return JsonResponse({"error": "PornHub search timed out after 180s"}, status=504)
-    finally:
-        _RELATED_FETCH_LOCK.release()
-
-    tail = (proc.stderr or "").strip()[-400:]
-    if proc.returncode == 3:
-        return JsonResponse(
-            {"error": "Google served a captcha — wait a while and retry. Never "
-                      "solved here.", "detail": tail},
-            status=502,
-        )
-    if proc.returncode == 4:
-        return JsonResponse(
-            {"error": "That search returned nothing on PornHub. Try different "
-                      "terms — one unmistakable act word is what makes a query "
-                      "land.", "detail": tail},
-            status=404,
-        )
-    if proc.returncode == 5:
-        # Answered the preflight but could not be driven. Own the sentence rather
-        # than relaying the stderr tail — that tail is a websocket log.
-        return JsonResponse(
-            {"error": "The find-media Chrome answered but could not be driven. "
-                      f"Quit it and relaunch: {_RUNNER_LAUNCH}", "detail": tail},
-            status=503,
-        )
-    if proc.returncode == 7:
-        return JsonResponse(
-            {"error": "The search came back empty of porn hosts — that is usually "
-                      "the wrong Chrome on :9222, or SafeSearch back ON in the "
-                      "find-media profile.", "detail": tail},
-            status=503,
-        )
-    if proc.returncode != 0:
-        return JsonResponse(
-            {"error": f"runner exited {proc.returncode}", "detail": tail}, status=500
-        )
-    try:
-        result = json.loads((proc.stdout or "").strip().splitlines()[-1])
-    except (ValueError, IndexError):
-        return JsonResponse(
-            {"error": "runner returned no result line", "detail": tail}, status=500
-        )
-    return JsonResponse(result)
+    fmt = _resolve_format(game_dir, slot_key, file_, body.get("format"))
+    return _run_runner(
+        "fetch_search.py",
+        [
+            "--game",
+            game,
+            "--slot-key",
+            slot_key,
+            "--file",
+            file_,
+            "--format",
+            fmt,
+            f"--query={query}",
+        ],
+        label="Image-search",
+        codes={
+            3: (
+                502,
+                "Google served a captcha — wait a while and retry. Never "
+                "solved here.",
+            ),
+            4: (
+                404,
+                "That search came back with nothing this slot can use. "
+                + (
+                    "This is a STILL slot, so only .jpg/.png/.webp results "
+                    "count — a query that returns only gifs lands empty."
+                    if fmt == FORMAT_STILL
+                    else "This is an ANIMATED slot, so only .gif/.mp4/.webm "
+                    "results count — a query that returns only stills lands "
+                    "empty."
+                ),
+            ),
+            7: (
+                503,
+                "Thin results, and nothing but stock-photo/meme hosts. "
+                "Usually that means SafeSearch is back ON in the find-media "
+                "profile on :9222, or that is not the dedicated Chrome. If "
+                "the terms really are that vanilla, it may just be a thin "
+                "query.",
+            ),
+        },
+    )
 
 
 # =============================================================================
@@ -1739,8 +2278,10 @@ urlpatterns = [
     path("options/add", options_add, name="media_finder_options_add"),
     path("options/add_bulk", options_add_bulk, name="media_finder_options_add_bulk"),
     path("queries/add", queries_add, name="media_finder_queries_add"),
+    path("queries/remove", queries_remove, name="media_finder_queries_remove"),
     path("related/fetch", related_fetch, name="media_finder_related_fetch"),
     path("pornhub/fetch", pornhub_fetch, name="media_finder_pornhub_fetch"),
+    path("search/fetch", search_fetch, name="media_finder_search_fetch"),
     path("options/list", options_list, name="media_finder_options_list"),
     path("options/remove", options_remove, name="media_finder_options_remove"),
     path("options/clear", options_clear, name="media_finder_options_clear"),

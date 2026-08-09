@@ -1,6 +1,103 @@
 # find-media — CHANGELOG
 
-## 2026-08-06 (latest) — the stock loop was fixed twice; the second fix removed 22,000 of the writes
+## 2026-08-09 (latest) — selecting a clip no longer erases where it came from
+
+LO asked why a selected clip loses its `⇢`. It is not a missing button: `grab` calls
+`_drop_option` (media_finder.py:1532) and the row it deletes held the ONLY copy of the clip's
+`docid`. Selecting was the single action in this tool that destroyed provenance — removing a
+tile, unselecting and deleting a query all preserve or re-shelve. Measured on vesper: 182
+installed pool clips with no record, and 276 demoted `origin: "previous"` rows, **0 of which
+carried a docid or a found_by** — every one a permanently dead `⇢ no id` tile.
+
+**Engine, not doctrine.** The skill taught nothing wrong here; the ledger simply had no place to
+put the fact. Fixed at the ledger so it kills the class rather than the symptom.
+
+**New:** a `picks` root in `media_options.json` — `{filename, url, docid, thumb, found_by}` per
+installed file, written by `grab` from the row it consumes, keyed by basename so the picker joins
+it client-side (neither `pool/list` nor `media-review/list` had to change). `options/list` returns
+it. `pool_unselect` and `_preserve_current_as_option` hand it back to the option they demote it
+into, as a new `source_url` field — deliberately NOT `url`, because a demoted pick must reinstall
+by COPY from `local_path` so the exact approved bytes return.
+
+**New:** `manage.py backfill_picks` — a pool member is named `c<md5(source_url)[:10]>`, so recovery
+is a JOIN, not a search: hash every url still on any shelf and match stems. **Opens no socket.**
+Live on vesper: 101 of 182 pool clips recovered (95 with a docid), 127 demoted rows repaired, and
+it reports the 95 unmatched + 172 single-slot installs rather than guessing. Single slots are
+unrecoverable by construction — `grab` names them after the SLOT, so no join key ever existed.
+Cross-slot on purpose: only 15 of the 101 were on their own shelf.
+
+**Changed:** `fetch_related.py` resolves a seed across `url` → `source_url` → `picks`, and refuses
+an empty `--seed-url` (it would have matched every row missing a url key and borrowed a stranger's
+docid). `check_shelves` re-keys `picks` alongside `options`/`queries`.
+
+**Verified live** on `sex/arousal_weapon_use_t5`: ⇢ from an already-selected clip stocked 51, the
+button flipped to `⇢ 51 related` with no page reload (the `selTileByUrl` sweep — the Selected zone
+repaints on its own signature, which a landing fetch does not change), and deleting the test bucket
+returned the shelf 472 → 520 → 472 with urls byte-identical. Tiles with no recoverable origin show
+neither a ⇢ nor an origin line — it fails closed. 34 new tests; suite 432 passed / 6 pre-existing
+`test_world_*` failures.
+
+## 2026-08-09 — the human can run his own search, and delete one
+
+The picker could re-run a chip's terms against PornHub (`PH`) and grow a bucket off one clip
+(`⇢`), but the person looking at the shelf could not type a query of his own — every "try THIS
+instead" cost a round trip through an agent. And nothing in the codebase had ever deleted a query
+record, so a poisoned shelf had two doors: `✕` per tile, or `options/clear`, which empties the
+slot. A search box without a bucket delete is a loaded gun with no safety, so both shipped together.
+
+**New:** `scripts/fetch_search.py` — an UNSCOPED Google Images search, no `site:`, and crucially
+**no label prefix**: `renderQueryBar` files `⇢ `/`◆ ` labels into side panels and everything else
+onto the shelf, so an unprefixed label inherits the chip, the count, the host verdict and the PH
+button from code that already draws them. Records `source: "manual"` so `query_ledger.jsonl` can
+tell a human-typed search from an agent's.
+
+**New:** `search/fetch` and `queries/remove` in `api/v1/media_finder.py`; a search box and the
+page's first confirmation modal in `find.html` (z-index 1500 — above `.overlay`, below `.toast`;
+Escape and backdrop-only cancel, no Enter-to-confirm).
+
+**Changed:** the FORMAT axis is now first-class. A slot is animated or still, and that one fact
+decides both whether `gif` is appended to the query and which extension group the extractor
+matches. `clean_media_urls` grows `still=True` (default path byte-identical). ⚠️ It is read off
+the declared **suffix**, never `media_kind` — `_IMAGE_SUFFIXES` contains `.gif`, so a `_t5` gif
+pool reports as "img" while being animated. **Measured live: a `.jpg` slot that returns ZERO
+today harvested 94 urls.**
+
+**Changed:** `related_fetch` / `pornhub_fetch` / `search_fetch` now share `_run_runner`. The
+"deliberately a COPY" note on `pornhub_fetch` carried its own expiry condition ("before either
+has run in anger"); a third caller came due on it. All ten existing `related_fetch` tests pass
+unchanged, which is the proof the factoring preserved behaviour.
+
+### Three bugs found while building this
+
+**1. `--query -cartoon` crashed the runner.** argparse rejects a value that starts with `-`
+("expected one argument") and exits 2, surfacing as a bare `500 runner exited 2`. `-word` is
+ordinary Google negation syntax, so a free-text box makes it reachable. Every runner argv now
+uses `--flag=value`, which argparse never re-scans. Pre-existing in `pornhub_fetch`.
+
+**2. `looks_suspiciously_clean([])` is True**, so checking it before `if not urls` made exit 4
+UNREACHABLE from the browser path and reported a zero-yield search as a broken Chrome profile.
+Still live in `fetch_pornhub.py:143-148`; `fetch_search.py` asks "empty?" first.
+
+**3. ⚠️ The delete destroyed 55 real options on `games/media_lab`.** `_apply_option` ADOPTS an
+already-shelved url by appending the new label to the EXISTING row, and 1294 of media_lab's 1296
+options predate provenance and carry no label at all. So a search that merely re-found one made
+it look sole-owned, and deleting that search destroyed a row that had been on the shelf for
+weeks — a 137-option shelf came back 82. **Fixed** with `added_at >= record.at`: an option
+stamped before the search first ran cannot have been introduced by it, so it survives with its
+`found_by` key POPPED (not set to `[]` — an empty list reads as the Q_UNLABELLED bucket, whose
+chip says "stocked before searches were recorded", which for that row is true again). No record
+means no proof of ownership, so an orphan label is stripped and the option kept.
+
+**Verified:** `pytest tests/ -q` → 398 passed, 6 failed (the pre-existing `test_world_*`
+`create_user()` failures, reproduced on a clean tree first). 107 new tests across
+`tests/test_media_finder_search.py`, `tests/test_media_finder_delete_query.py`,
+`tests/test_fetch_search.py` — including a parametrized `_RUNNERS` suite that retroactively
+covers `pornhub_fetch`, which had ZERO tests. Live on the runner: a still slot 0→94 urls, an
+animated slot 91 urls with `gif` auto-appended, stocking in 0.0 s via `add_bulk`, a 29/62
+sole-vs-shared delete split, and a search→delete round trip that returns a shelf to its exact
+prior count.
+
+## 2026-08-06 — the stock loop was fixed twice; the second fix removed 22,000 of the writes
 
 Chunking the loop (entry below) stopped it timing out. It did not touch the reason the loop was
 expensive: **every `options/add` rewrites the entire ledger, and `_options_lock` is global to
