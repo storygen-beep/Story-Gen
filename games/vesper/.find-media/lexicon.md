@@ -827,3 +827,168 @@ An agent ran a deliberate plain-anchor control on one slot, same session:
 **The loosest query returned the FEWEST urls and the wrong aisle.** Plain `creampie` buys the
 GENRE, not the MOMENT. `bred` is a third viable member (non-poisonous beside a real anchor).
 With no surface noun and no position token, the milking-table trap cannot fire at all.
+
+---
+
+## 2026-08-09 — the 7 needs-review POOL slots, v3 chip-and-label pass
+
+Seven slots that already carried DEEP but 100% UNLABELLED v2-era shelves (1,869 options, zero
+`found_by`, zero chips). 22 queries, 7 agents, 10.3 min, no captcha, nothing installed or pruned.
+Shelves 1,869 -> 2,812. **449 pre-existing options were RETRO-LABELLED** by duplicates.
+
+### ⚠️ NEW POISON — `bar` (the ROOM word), measured on TWO slots with two DIFFERENT failure modes
+
+`bar` | **POISON, and it generalises the old `bar stool` row from the OBJECT to the ROOM** | (1) renner_cheerup_oral: `bj chair bar amateur gif` -> 71 urls, 8 Tenor + 3 Giphy + 2 reddit; dropping `bar` for `sloppy` on the same anchor went to 100% porn. (2) renner_cheerup_alley: `public blowjob behind the bar amateur gif` -> 71 urls at **100% porn hosts** and the grid was entirely BAR INTERIOR (pub, nightclub stage, pool table, bar bathroom, slugs `Bj pub` / `Blowjob in a bar`). **Zero alley.** | **CONFIRMED TWICE.** Naming the beat's landmark venue puts the camera INSIDE the venue. Mode (2) is a textbook wrong-AISLE-inside-a-RIGHT-CROWD: the histogram was 100% clean and completely blind; only the grid screenshot caught it
+`bar` is NOT silently dropped | no "Did you mean" / "Showing results for" line appeared | renner_cheerup_oral | **worse than being ignored** — it is accepted and actively retrieves the wrong crowd
+`parking lot` | **POISON — it indexes the CAR, not the pavement** | 71 urls, 100% porn hosts, grid is driver's seat / passenger seat / back seat, slugs `Public Blowjob Parking Lot CAR`, `Blowjob at Parking Garage w/ cars` | **CONFIRMED.** Useless for a concrete-and-wall beat. Same shape as `bar`: right crowd, wrong aisle, histogram blind
+`outdoor` | **a WEAK holder that cannot carry `bj` alone** | `back alley bj outdoor gif` leaked ~13 of 49 urls to **academic journals** — pubs.acs.org, science.org, pnas.org, cell.com, bmjpublichealth.bmj.com, tandfonline.com, journals.uchicago.edu, plus cdn.climbing.com. **`bj` reads as a journal/author initialism.** Swapping the single token `outdoor` -> `amateur` removed the leak 100% (49 urls, ZERO non-porn) | **CONFIRMED, single-variable.** Extends the `amateur` doctrine: `bj` specifically NEEDS an anti-studio holder or it decays into an abbreviation
+`glass` | **POLYSEMOUS and self-diluting** — three senses on one grid: glass SURFACE (wanted), glass INSERTION TOY (`glass in anal`, `Ass on the glass gif`), and EYEGLASSES (`sexy girl in glasses gets dick in her...`) | mercer_serve_glass q2 | the act anchor held so the CROWD stayed porn — this is aisle dilution invisible to the histogram. **`window` is the unambiguous token; prefer it.** Keep `glass` as a widener you accept dilution for
+`wall` (bare) | **SAFE — the poison is the two-token `brick wall`, not `wall`** | rode along in `dogging blowjob alley wall voyeur gif` with zero degradation | **CORRECTS a possible over-read of the 08-03 `brick wall` row**
+`desk` | **SAFE on a bent-over / doggy beat — the general poison entry is scoped to `prone bone` ONLY** | three independent agents: mercer_serve_desk (69 urls, 100% porn, zero ergonomic drift), renner_loop_doggy (grids full of office desks), renner_loop_oral (`under the desk` = 100% porn, tightest grid of its three) | **CONFIRMED x3.** Do not generalise the prone-bone scoping
+
+### Tokens that WORK — new, measured
+
+`dogging` | **the strongest single token measured on the alley slot** | `dogging blowjob alley wall voyeur gif` = 89 urls / **76 NEW** against a 299-deep pile, only 13 duplicates — better new-yield than both alley queries combined. **Fully self-anchoring**: paired with `blowjob`, not one dog result | **CONFIRMED.** Caveat: skews roadside / woods / beach / car-adjacent, so it buys public-outdoor VARIETY, not alley precision
+`sloppy` | a clean shelf-widener on an already-proven anchor | `sloppy bj chair homemade gif` = 64 urls / 44 new (20 dup) where the two seeds returned 51/80 and 46/66 dup | **CONFIRMED.** Porn-native INTENSITY jargon reaches corpus that plain act+furniture does not
+`secretary` | **a live porn-corpus OCCUPATION token — office-role words behave NOTHING like labor-role words** | `secretary bj chair amateur gif` = 80 urls, **0 non-porn hosts**, most new options of its slot (48) | **CONFIRMED, and it scopes the 08-06 occupation poison.** `workers`/`welder`/`dock worker` pull trade-journal ARCHIVE photography; `secretary` is corpus-native. The poison is LABOR-role, not occupation-as-such
+`creampie` | **a DISTINCT AISLE, not a rewording** | `anal creampie bent over bed amateur gif` opened cumception(11), thatpervert(6), xxxpicz — host clusters none of the three bent-over/side-view seeds touched across 201 urls | **CONFIRMED.** When a beat's carrier is HIS orgasm, the climax token is worth a whole round
+`exhibionist` | **confirmed LIVE and NOT auto-corrected** (no "Did you mean"), and the **highest-VARIETY token** for a window beat | 83 urls / 30 porn hosts; the only seed to surface the xhamster CDN family (thumb-p2/p4/p6/p8/p9.xhcdn.com) plus flashingjungle, exhibitioniststrangers, cumception | **CONFIRMED.** Reach for it when a window shelf needs a DIFFERENT crowd, not more of one
+`homemade` vs `amateur` | **NOT retrieval synonyms** | on the same bed beat `homemade` uniquely surfaced i.xgroovy.com(9) and freepornsiterips.com(4), which the two `amateur` queries returned at 0-5 and 0 | **Running both words over one beat is a cheap way to buy shelf variety**
+
+### ⚠️ REFINEMENT — `side view` on a BED buys his face and PAYS IN POSTURE
+
+`side view` + `bed` | the 08-03 "side view puts his head in frame" fact **HELD** (his torso/head in ~1/3 of first-screen tiles vs near-zero on the plain bent-over seed) — **but it SHIFTS THE POSTURE** | first screen returned four tiles literally titled `Anal sideways` plus `Anal sex on a massage bed, side view` | **REFINED.** On a bed, `side view` retrieves sideways/spooning, not bent-over-the-edge. Still worth running for his face; know it is a posture-VARIANT bucket
+anal, third independent confirmation | **still not retrievable as a NAMED act bent over** | four queries all carrying explicit `anal`/`ass fucked`: analporngifs never exceeded 4 urls; grid slugs read `bent over the bed`, `Amateur Doggy Style Fucking` | **CONFIRMED 3x.** And from the OTHER direction on renner_loop_doggy: **dropping `anal` entirely** (`doggystyle fuck office desk amateur gif`) gave the cleanest histogram AND the highest new-yield (54/76) of its three. Carrying `anal` cost host purity and gained nothing
+
+### ⚠️ THE TWO GATES ARE NOT REDUNDANT — measured in BOTH directions this run
+
+the histogram catches what one screenshot cannot | `bj chair bar` showed seated-man-receiving-oral across the whole visible grid while **18% of its hosts** were generic-gif sites. **The dilution lives in the TAIL** | renner_cheerup_oral | screenshot alone would have passed it
+the screenshot catches what the histogram cannot | `public blowjob behind the bar` and `public blowjob parking lot` were **100% porn hosts** and both were the wrong room entirely | renner_cheerup_alley | histogram alone would have passed both
+**Google's own tile CAPTIONS are a free aisle signal the skill does not use** | `Anal sideways` x4 is what revealed seed 2's posture shift while the histogram read 100% porn and was blind | marsh_anal | **PROPOSED.** Reading captions off the SAME pass-3 screenshot costs nothing and catches wrong-AISLE faster than the picture alone
+the New Yorker long-form fallback, **first live sighting** | `anal from behind over the desk homemade couple gif` = 9 tokens / two connectives -> media.newyorker.com appeared beside 4 tenor and an i.redd.it | renner_loop_doggy | **the fallback DEGRADES a query gradually rather than killing it** — the query still landed on the grid. Worth knowing the tell before it is fatal
+`hotwifecaps.com` + `captions.hotwifecaps.com` + `upskirt.pantiesless.com` + `flashingjungle.com` co-occurring | candidate signature for a **CAPTION/STILL aisle inside the porn crowd** — histogram reads ~100% porn while serving text-overlay stills, useless on an animated slot | renner_loop_doggy | **WATCH-LIST tell**
+`thatpervert.com` (img0/img1) | a **HENTAI/cartoon host that rides in on `creampie`** | ~6 tiles per creampie query | not poison (the query landed) — just budget the dead-for-live-action tiles
+
+### ⚠️ TOOLING — three findings the driver had to verify, not the agents
+
+**"More results" is NEAR-WORTHLESS on an ANIMATED slot** | **SEVEN agents, ~20 independent measurements, every one +0 / +1 / +2 urls** — 70->71, 74->74, 65->65, 83->83, 68->68, 73->73, 66->68, 79->80, and on marsh all four clicks gave +1/+1/+0/+1 where **every gain was an encrypted-tbn gstatic thumb, not a CDN original** | page height did grow (to ~8,800-9,600px), so the click DID fire — page 2 is simply jpg/webp thumbs the animated regex cannot use | **STRONG CANDIDATE FOR A DOCTRINE CHANGE.** The skill currently says "animated slots: click once." Measured, the click costs ~4-5s per query and buys nothing. **The SCROLL is what pulls the tiles.** Owed to `chrome_route.md` §4
+**`options/add_bulk` BACK-LABELS duplicates — it does not skip them** | four agents independently: renner_cheerup_oral posted 210 urls across 3 queries, `added` counted only 93 genuinely new rows, and **labelled options went 0 -> 185**. mercer_glass went 144 unlabelled -> 105 while the total rose to 319 | **CONFIRMED x4, and it is the whole mechanism that made this run worth doing.** A high duplicate count is NOT wasted work on an unlabelled shelf — it is how the old pile gets attributed. **449 of the 1,869 pre-existing options were retro-labelled this way**
+**A CHIP keys its query text as `q` — never `query`, never `found_by`** | **FIVE of seven agents tripped on this**, each reading `c.query`, getting `""` on every chip, and each briefly believing `queries/add` had stored blanks. All chips were stored correctly | chip keys are `[q, at, last_at, runs, source, urls, stocked, hosts]` | **The skill documents it in one clause and it is not loud enough.** It is the exact twin of the `found_by`-not-`query` trap on OPTIONS, and it deserves the same ⚠️ treatment. `hosts` verified persisted on **22 of 22 chips** (13-26 real hostnames each) when POSTed raw
+
+### ⚠️ DOCTRINE GAP — a GATE-REJECTED query leaves NO record on disk
+
+measured | the 4 condemned queries above (`bj chair bar`, `back alley bj outdoor`, `public blowjob behind the bar`, `public blowjob parking lot`) produced **zero `queries/add` calls, zero chips and zero `query_ledger.jsonl` lines**. 22 ledger lines for 22 chips — the rejects are simply absent | **The two rules collide:** §4's two-pass gate says pass 1 "writes NOTHING" and a wrong crowd must "not stock"; §4's non-negotiables say "one `queries/add` per query, INCLUDING one that yielded ZERO ... the record that stops you re-running a dead query." A gate-rejected query falls straight through the gap | **REAL GAP.** These four are exactly the queries a future run most needs to not repeat, and they survived only because the agents reported them in their return values. SKILL.md §5's "name any wrong-crowd query — it is on his shelf under its own chip" is ALSO stale: it predates the gate moving earlier (2026-08-05), and a condemned query now has no chip at all. **Proposed fix: `queries/add` with `stocked: 0` and the verdict, no options — the record without the shelf pollution.** Owed to `find-media-v3/SKILL.md` §4
+
+---
+
+## 2026-08-09 — the 3 format-converted slots (still → video), FRESH animated harvest
+
+Context: `cell_inventory_the_order_t4`, `cell_turns_the_read_out_t5` and `colm_backroom` were
+stills until today. Converted to video, old media retired, old shelves orphaned (1,166 options,
+**11 animated**). This is the first harvest of these beats with the ANIMATED regex.
+Result: **734 options / 16 chips / 100% labelled / 0 still-contamination**. 5 of 16 queries
+condemned at the gate.
+
+### ⚠️ THE FRAMING WORD IS A SEARCHABLE PROXY FOR AFFECT (the biggest finding here)
+
+Affect cannot be queried — that rule stands. But **the FACE-vs-TORSO framing word can be, and it
+predicts affect reliably**:
+
+| framing vocabulary | what the grid serves |
+|---|---|
+| `bukkake` · `kneeling` · `facial` | performative — open mouth, tongue out, eyes up, **smiling into camera** |
+| `cumshot on tits` · `cum on body` | slack, eyes closed, head back, **no camera address** |
+
+Measured on `cell_turns_the_read_out_t5`, whose standing human reject is literally *"she is happy
+smiling, doesnt fit the context."* The shelf ran ~60/40 performative over spent, and the split
+fell exactly along that axis. **On any beat whose register is spent/hollow/post-act, spend a
+query on TORSO framing.** It is the first lever found that moves affect without naming it.
+
+### Cum-aftermath: the divergence set is THREE queries, not two
+
+`bukkake` vs `covered in cum` was already known to reach different host clusters. Confirmed again
+on animated (0 duplicates), and a **third** cluster found:
+
+```
+bukkake kneeling floor cum covered amateur gif      93 urls, 10/10 porn   (performative)
+used woman covered in cum aftermath gangbang gif    75 urls, 0 dupes vs #1 (most on-beat)
+cum dripping aftermath gangbang amateur gif         69 urls, 13 dupes     (saturating)
+cumshot on tits cum covered body amateur gif        81 urls, 0 dupes vs 224 ← NEW CLUSTER
+```
+The 4th opened porngif.co / pictoa / pictocum / porngifmag / gifcandy — none of which the three
+seeds touched. `aftermath` reads like a mood word but **measures like a tag word** (literal
+"Aftermath Porn Gifs" tag pages on two separate queries).
+`kneeling` behaves as a posture word here: it drags aftermath back to blowjob-IN-PROGRESS.
+
+### The clothed-foreplay band — `quickie`, `dry humping`, `groping`
+
+`colm_backroom_t4` is the first clothed, non-penetrative beat harvested on this game.
+
+- ⚠️ **`making out` is POISON.** 81 urls, **ZERO porn hosts** (media.tenor.com top at 24, plus
+  gifdb, New Yorker, Vogue, Lowes). It reads as an act word to an English speaker; it is pure
+  reaction-gif vocabulary. Swapping that ONE token to `quickie` flipped the same 7-token query to
+  **~97% porn hosts**.
+- ⚠️ **`clothed` cannot anchor a query.** A query carrying `clothed` AND `amateur` AND
+  `against wall` still scored **zero** porn hosts. It only works bolted to a porn-native partner:
+  `clothed dry humping`, `clothed groping`, `clothes on quickie` all landed.
+- **`dry humping` is the corpus term** for clothed, non-penetrative, urgent contact. Cost is the
+  INVERSE of the quickie fact: it retrieves waist-down crops, so heads leave frame. Use it for
+  the clothes, not for the face.
+- **`groping` is the best token for "hands going everywhere"** and, unlike `dry humping`, keeps
+  faces in frame. Paired safely with the anatomy word `tits` — no sports/fitness leakage, the
+  anatomy-over-posture rule held.
+- **`quickie` + `clothes on` CONFIRMED at full strength** — returned fully-dressed, full-height,
+  FACE-VISIBLE men (one in waistcoat and shirt). Best single lever for any clothed-man slot.
+- **`storeroom` CONFIRMED again** — "Quickie in storage unit", cardboard boxes and shelving. No
+  silent drop, no "Did you mean". The old "zero storerooms exist" claim stays retracted.
+- **`against wall` has a SECOND cost beyond standing-doggy**: it drags in the NUDE penetrative
+  wall-fuck cluster and full carries. `quickie` alone did not hold the clothes on against it —
+  the clothed axis only arrived once an explicitly clothed token rode alongside. (The
+  standing-doggy budget itself reconfirmed at ~1/3 of tiles, matching the sibling slot's 7-in-20.)
+
+### The CMNF band, refined
+
+- **`cmnf` reconfirmed top-tier** — three separate cmnf queries, 100% porn hosts, zero stock.
+  `chair` binds as FURNITURE (furniture is not a room noun; the inert-room-noun rule does not
+  reach it).
+- ⚠️ **NEW: the CASTING corpus is a DISJOINT and better structural match.**
+  `casting couch nude girl undressing clothed agent gif` → 68 urls, **0 duplicates** against 113
+  already-shelved cmnf options. Structurally it IS the beat: clothed man seated, woman standing
+  and stripping to be appraised. One tile carried the on-screen caption *"just stand up where you
+  are there, and strip off for me."* **Go-to sibling for any inspection/appraisal beat.**
+- ⚠️ **`standing` is poison even beside `cmnf`.** It swaps the standing-EXPOSURE aisle for the
+  standing-SEX aisle (carry-fucks, "Standing Sex Porn Gifs") while the histogram stays a flawless
+  11/11 porn. Textbook colourblind-histogram case; only the grid glance caught it. Repair was to
+  drop the POSTURE word and keep `sitting` — the suspect-posture-before-anatomy rule, again.
+- ⚠️ **`enf` DEMOTED from conditional to avoid-on-indoor-beats.** It failed here *even with*
+  `voyeur` and `chair` holding it up, contradicting this slot's own prior STILL-slot measurement.
+  Unanchored by `cmnf` it resolves to the public-flashing/sharking corpus (flashingjungle,
+  juicycash), never to indoor watched-stripping.
+- **`bare room` is a TYPO MAGNET, not merely inert** — Google offers to respell it as `bathroom`.
+- **NEW POISON for ownership/appraisal beats:** `bdsm` + `slave` + `master` pulls
+  rope/bondage/flogging/gags and drags in drawn 3D-render hosts (hentai-foundry, neocities fan
+  sites). Does not retrieve unrestrained inspection.
+
+### Two new histogram tells
+
+- **Caption-porn hosts (`hotwifecaps.com`, `captions.*`, `humiliationpov`) = a descriptive-English
+  token leaked in.** Same diagnostic class as the Getty/stock tell. `used woman` stayed ~90% porn
+  but bought ~9 text-overlay memes.
+- **A FRAGMENTED histogram is an early warning by itself** — 25 hosts across 70 urls, with
+  fan-sites and hentai hosts in the tail, flagged the bdsm query before the screenshot did.
+- **Duplicate rate is a cheap corpus-identity signal.** 33/72 duplicates = same corpus, stop.
+  0/68 = new territory, keep going. Use it to decide whether another sibling query is worth the
+  round.
+
+### Process findings owed to the skill
+
+1. ⚠️ **`validate_queries.py` does NOT enforce the measured poison lexicon.** It passed all three
+   hand-written `colm_backroom` seeds "clean, zero rewrites" — and two of them scored ZERO porn
+   hosts, while the third carried `dim`, a token the same brief lists as poison twice. **A clean
+   validator verdict cannot be read as "not poisoned."** The validator and the lexicon are out of
+   sync and will keep emitting poisoned seeds until one of them learns the other.
+2. **Skipping the "More results" click cost nothing, again.** Never clicked across 16 queries;
+   every landed query returned 55-93 animated urls from page 1 and one shelf overshot the
+   150-350 expectation at 305. The measurement now has two independent runs behind it.
+3. **A cum-aftermath shelf is gif-dominant even on the animated axis** — 305 options split
+   270 gif / 35 true video (~11%). Set expectations accordingly.

@@ -17,8 +17,8 @@ title       = "Vesper"
 description = "An owned half-human weapon who feels nothing but the sex she's used for. Inside Vance Dynamics she's the company's slave; outside, under a false face, she slips into powerful men's lives and drains them while they think they're using her — sent to hunt a rogue called Cain."
 quests_engine   = "v2"
 starting_canvas = "canvas_opening_office"   # the cold open (Beat 1 — the office)
-version         = "0.1.6"          # sidebar footer — bump in the same commit as the games-data.js portal entry
-release_date    = "2026-07-28"     # sidebar footer — date this build ships
+version         = "0.1.7"          # sidebar footer — bump in the same commit as the games-data.js portal entry
+release_date    = "2026-08-09"     # sidebar footer — date this build ships
 # The funding link baked into the build at THREE sites (sidebar button + both intro/age-gate links).
 # Same URL the engine falls back to when this is unset (v2.DEFAULT_SUPPORT_URL), so it is stated here
 # only to make the key visible and editable — the built output is byte-identical either way.

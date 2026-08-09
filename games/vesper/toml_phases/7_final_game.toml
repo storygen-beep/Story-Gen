@@ -25,8 +25,8 @@ title       = "Vesper"
 description = "An owned half-human weapon who feels nothing but the sex she's used for. Inside Vance Dynamics she's the company's slave; outside, under a false face, she slips into powerful men's lives and drains them while they think they're using her — sent to hunt a rogue called Cain."
 quests_engine   = "v2"
 starting_canvas = "canvas_opening_office"   # the cold open (Beat 1 — the office)
-version         = "0.1.6"          # sidebar footer — bump in the same commit as the games-data.js portal entry
-release_date    = "2026-07-28"     # sidebar footer — date this build ships
+version         = "0.1.7"          # sidebar footer — bump in the same commit as the games-data.js portal entry
+release_date    = "2026-08-09"     # sidebar footer — date this build ships
 # The funding link baked into the build at THREE sites (sidebar button + both intro/age-gate links).
 # Same URL the engine falls back to when this is unset (v2.DEFAULT_SUPPORT_URL), so it is stated here
 # only to make the key visible and editable — the built output is byte-identical either way.
@@ -6065,7 +6065,10 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The order"
 blocks = [
-  { type = "image", props = { file = "scenes/cell_inventory_the_order_t4.jpg", description = "clothed man sitting in chair facing naked woman bare concrete room", search_queries = ["clothed man sitting in chair facing naked woman bare concrete room", "man seated watching woman stand undress dim cell"] } },
+  # 2026-08-09: .jpg -> .webm. Completes the 2026-07-12 still->video conversion of the captivity
+  # read-out/order beats, which converted 7 of 9 and missed this one. The arc is 35 video / 2 still
+  # and these were the 2. Old jpg retired to .find-media/_removed_2026-08-09/. Media NOT yet found.
+  { type = "video", props = { file = "scenes/cell_inventory_the_order_t4.webm", description = "clothed man sitting in chair facing naked woman bare concrete room", search_queries = ["clothed man sitting in chair facing naked woman bare concrete room", "man seated watching woman stand undress dim cell"] } },
   { type = "paragraph", content = "The door lets him in and no one else. He has a folding chair under one arm; he snaps it open a body-length from her and drops into it like a man come to look over stock he already owns. No hurry in him. He sits with his knees apart and looks her up and down the way you'd look at a crate you paid too much for and mean to get your money's worth out of, and lets the quiet sit until it's clear the quiet is his too." },
   { type = "paragraph", content = "She stands where the room keeps her. He takes his time getting to the point, because taking his time is part of it." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Take it off. All of it. Let's see what I paid for." },
@@ -6522,7 +6525,11 @@ nodeId     = "readout"
 id   = "readout"
 name = "The read-out"
 blocks = [
-  { type = "image", props = { file = "scenes/cell_turns_the_read_out_t5.jpg", description = "used woman covered in cum kneeling aftermath gangbang exhausted", search_queries = ["used woman covered in cum kneeling aftermath gangbang exhausted", "woman covered cum and marks bruises after group bare concrete room"] } },
+  # 2026-08-09: .jpg -> .webm. Was the last t5 still in the game — it FAILED tier_format_check.py
+  # outright (t5plus_must_be_animated). Its own twins cell_stutter_the_read_out_t5 and
+  # cell_he_does_not_stop_the_read_out_the_break_t5 were converted 2026-07-12; this one was missed.
+  # Old jpg retired to .find-media/_removed_2026-08-09/. Media NOT yet found.
+  { type = "video", props = { file = "scenes/cell_turns_the_read_out_t5.webm", description = "used woman covered in cum kneeling aftermath gangbang exhausted", search_queries = ["used woman covered in cum kneeling aftermath gangbang exhausted", "woman covered cum and marks bruises after group bare concrete room"] } },
   { type = "paragraph", content = "When the last of them steps back the room goes quiet except for her breathing. Bastien crouches in front of her — the only time he gets close — and wipes the plate under her sternum clean with his thumb so he can read it. The number's higher than when they started. A lot higher. It went up with every load and it jumped with the ones they forced, and it hasn't shed a single point, because there's nothing left in her that lets it." },
   { type = "paragraph", content = "He looks at it a long moment. Not at her — through her, at the reading, the way you'd check a gauge creeping toward a line you drew yourself. He clicks the pen and writes it down. He caps it. He doesn't look at her face once." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Higher than the last count, and it didn't drop a point. Nothing drains out of you anymore, does it. Good." },
@@ -10298,7 +10305,14 @@ description = "beat_0066 rev 92. Triggerless Colm sex loop @the Undertow's back 
 id   = "intro"
 name = "Take him in the back"
 blocks = [
-  { type = "image", props = { pool_dir = "sex/colm_backroom", pool = 4, description = "A man and a woman slipping into the dim back room of a bar.", search_queries = ["couple slipping into bar back room dim", "man led away by woman bar hallway night"] } },
+  # 2026-08-09: still -> video, and the description now matches the PROSE below it rather than the
+  # doorway. The old description ("slipping into the back room") described a moment this node never
+  # shows — he already has her against the shelving — which sent every harvest after empty-bar stock
+  # photos. Untagged `sex/colm_backroom` also inferred tier `base` (SFW) while its PATH forced act
+  # dialect, so the two disagreed; `_t4` settles it as borderline/clothed, which validate_queries.py
+  # deliberately exempts from carrying a penetrative word. Old shelf stays under the old key in the
+  # options store. Media NOT yet found; incumbent.jpg retired to .find-media/_removed_2026-08-09/.
+  { type = "video", props = { pool_dir = "sex/colm_backroom_t4", pool = 4, description = "A clothed couple against shelving in a dim bar storeroom, his mouth on her neck, his hands under her clothes.", search_queries = ["couple making out against wall storeroom amateur gif", "man kissing woman neck against wall clothed amateur gif", "clothed grinding against wall dim room amateur gif"] } },
   { type = "paragraph", content = "The back room is empties and stacked cases and one bad bulb. He has her against the shelving before the door's shut — mouth on her neck, hands going everywhere at once, a careful man with nothing careful left in him." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "Three weeks I've been telling myself you were being kind. Tell me to stop and I'll stop. Don't, and I won't." },
 ]
