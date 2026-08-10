@@ -1,0 +1,150 @@
+# =============================================================================
+# Back Home — 0_systems_spec
+# Built with author-game-v2. Spec: games/back_home/the_want.md
+#
+# METERS, THREE LAYERS (references/the-board.md §3):
+#   1  RATCHETING TIERS  nerve · exposure · need   — rungs at 15/35/55/75
+#   2  VOLATILE STATE    arousal · energy · hygiene · money
+#   3  PER-CHARACTER     relation · lust           — on each [[npcs]] block
+#   +  COUNTERWEIGHT     pride — starts at 100, buys nothing, is what she pays with
+# =============================================================================
+
+schema_version = "1.0"
+
+[project]
+id              = "back_home"
+title           = "Back Home"
+description     = "She left for a city job and a man, lost both, and came back on a coach with two bags. Her room is half a storage room, there is one bathroom, and her bedroom door has no lock. The people who only ever saw her as the kid get to watch her come down."
+starting_canvas = "canvas_arrival"
+quests_engine   = "v2"
+
+[time]
+starting_hour = 17
+starting_day  = "Sunday"   # Monday morning is day 2 — the weekday bathroom rush
+starting_week = 1
+
+[settings]
+narration_person  = "second"        # IMMUTABLE once v0.1 ships
+clothing_enabled  = true
+wardrobe_location = "her_room"
+
+# ─── The keep — the ENGINE under the `need` tier ──────────────────────────────
+# She can earn at the shop (30/shift, once daily). Nothing demanded that money
+# until now, so "what she'll trade for" had nothing to bite on. 120/week is four
+# shifts — most of her week, survivable, and one bad week forces the ask.
+#
+# ⚠️ eviction_mode = "flag_set", NOT the default "game_end". A product that never
+#    ends must not have a lose-state that stops play. Missing the keep sets
+#    `keep_unpaid` and the terms change; the game continues. The engine's own soft
+#    prose says it exactly: "You're still here. But the terms have changed."
+#
+# Ray collects. He hates doing it, which is the point — this is a man invoicing
+# his stepdaughter, and neither of them has anywhere else to put that.
+[settings.rent]
+enabled          = true
+amount           = 120
+due_day          = "Monday"
+collector_npc    = "npc_ray"
+grace_periods    = 1
+start_after_flag = "first_night_done"
+eviction_mode    = "flag_set"
+eviction_flag    = "keep_unpaid"
+
+[settings.rent.text]
+title            = "Monday"
+scene            = "He does it in the kitchen, standing up, with the kettle going — the one place in the house where a conversation can be pretended to be about something else. He has the envelope in his hand before he says anything."
+greeting         = "Right. It's Monday."
+paid_scene       = "You count it out onto the counter and he does not touch it until you have finished, and then he folds it once and puts it in his back pocket without counting it himself, which is somehow worse than if he had."
+paid_response    = "Ta. That's — good. That's fine."
+paid_closing     = "He says it like a man closing a file, and he leaves the kitchen quickly, and neither of you mentions it again until next Monday."
+cant_pay         = "You haven't got it."
+warning_scene    = "You tell him you're short. He looks at the kettle for a while. Whatever he is doing with his face, he is doing it deliberately, and it takes him a moment."
+warning_response = "It's not me. It's the boiler and the council and — look. Next Monday. Sort it by next Monday."
+warning_closing  = "He goes out to the garage. You hear him not doing anything out there for about an hour."
+eviction_scene_soft    = "The second Monday he does not get the envelope out. He makes the tea, and hands you one, and leans back against the counter with his arms folded, and looks at you properly for the first time since you came home."
+eviction_response_soft = "I'm not going to ask again. We'll sort it another way. You and me'll sort it."
+eviction_closing_soft  = "He does not say what the other way is. He does not have to — you both heard it, sitting in the room like a third person, and he goes to work, and you stand in the kitchen holding a cup of tea you did not want."
+
+
+[theme]
+mode = "dark"
+
+
+# ─── The ascent tiers ────────────────────────────────────────────────────────
+# Three, each a different kind of going-further, so a player who does not want
+# one can still climb another. Bands are the 15/35/55/75 ladder measured off the
+# reference game (promiscuity and exhibitionism both gate at exactly those rungs).
+#
+# ⚠️ The top band's `max` is a PROMISE: content must exist up to it, or gate 8 fails.
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "nerve"
+bands = [
+  { min = 0,  max = 14,  text = "Careful with them" },
+  { min = 15, max = 34,  text = "Not covering up" },
+  { min = 35, max = 54,  text = "Letting it happen" },
+  { min = 55, max = 74,  text = "Starting it herself" },
+  { min = 75, text = "This is just the house now" },   # unbounded: 75 IS the top rung
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "exposure"
+bands = [
+  { min = 0,  max = 14,  text = "Covered" },
+  { min = 15, max = 34,  text = "Door left ajar" },
+  { min = 35, max = 54,  text = "Past bothering" },
+  { min = 55, max = 74,  text = "Bare in the house" },
+  { min = 75, text = "Wants the walking-in" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "need"
+bands = [
+  { min = 0,  max = 14,  text = "Paying her own way" },
+  { min = 15, max = 34,  text = "Asking for it" },
+  { min = 35, max = 54,  text = "Taking what's offered" },
+  { min = 55, max = 74,  text = "Trading for it" },
+  { min = 75, text = "It's the arrangement" },
+]
+
+# The counterweight. Falls as she asks and accepts. Buys nothing by design —
+# it is the price, not a currency, so it has no gates and owes no content.
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "pride"
+bands = [
+  { min = 0,  max = 24,  text = "Nothing left to protect" },
+  { min = 25, max = 49,  text = "Stopped pretending" },
+  { min = 50, max = 74,  text = "Still keeping up appearances" },
+  { min = 75, max = 100, text = "The one who got out" },
+]
+
+
+# ─── Trait labels ────────────────────────────────────────────────────────────
+[[traits.labels]]
+key   = "energy"
+label = "Rested"
+
+[[traits.labels]]
+key   = "hygiene"
+label = "Clean"
+
+[[traits.labels]]
+key   = "money"
+label = "Cash"
+
+# Internals — never surfaced to the player.
+[[traits.labels]]
+key    = "arousal"
+hidden = true
+
+[[traits.labels]]
+key    = "shift_done_today"
+hidden = true
+
+[[traits.labels]]
+key    = "lodger_slot"
+hidden = true

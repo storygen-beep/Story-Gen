@@ -1,0 +1,139 @@
+# =============================================================================
+# Back Home — 2_one_shots
+# The opening chain. Linear on purpose: it teaches the house, the cast and the
+# one bathroom, then lets go.
+#
+# FIRST CHARGED BEAT ON NIGHT ONE. Measured: the strongest-retained game in the
+# comparison set is explicit on its first night, two clicks from free roam. This
+# opening does not fake a sex scene out of a woman who has just got off a coach —
+# it makes the bathroom mean something before she has unpacked, which is the
+# contract this game is actually selling.
+# =============================================================================
+
+
+# ── The arrival ──────────────────────────────────────────────────────────────
+[[canvases]]
+id          = "canvas_arrival"
+name        = "Back Home"
+description = "Opening. Friday, 17:00, the front room. Establishes the reversal (she was the one who got out), the three men, and the fact that nothing in this house is hers any more. Linear. SETS arrival_done."
+
+[canvases.trigger]
+location      = "the_front_room"
+is_repeatable = false
+priority      = 12
+is_active     = true
+
+[[canvases.nodes]]
+id   = "door"
+name = "The door"
+blocks = [
+  { type = "image", props = { file = "scenes/arrival_door.jpg", description = "A young woman standing in the doorway of a small terraced house at dusk with two bags at her feet.", search_queries = ["woman standing doorway terraced house evening bags", "young woman suitcase front door suburban house dusk"] } },
+  { type = "paragraph", content = "The coach got in at half four and you walked the rest because the fare from the station is four pounds and you have twelve. Your key still works. That is the part you were not expecting — that after two years the lock would just turn, like the house had been holding the door for you the whole time." },
+  { type = "paragraph", content = "It smells the same. That is worse than if it had smelled different." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Go in.", targetType = "node", nodeId = "ray" },
+] }
+
+[[canvases.nodes]]
+id   = "ray"
+name = "Ray"
+blocks = [
+  { type = "paragraph", content = "Ray is in his chair with the telly on and the sound low. He looks up and you watch him do the arithmetic — two bags, no car, Friday. He does it fast and he does not let it show, which is somehow the most humiliating part of the whole day." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "You should have rung. I'd have come and got you." },
+  { type = "paragraph", content = "You say you didn't want to put him out. He says it's not putting him out, it's a car, and then neither of you has anything, so you both look at the telly for a second." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "Your room's still your room. There's a bit of my stuff in it. I'll shift it." },
+  { type = "paragraph", content = "He will not shift it. You both know that too." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Say it's fine.", targetType = "node", nodeId = "dean" },
+] }
+
+[[canvases.nodes]]
+id   = "dean"
+name = "Dean"
+blocks = [
+  { type = "paragraph", content = "Dean comes through from the kitchen with a plate he is eating off standing up, sees you, and grins around the fork. He has been waiting two years for this and he is not going to waste it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_dean" }, content = "There she is. London chewed you up, then." },
+  { type = "paragraph", content = "You tell him it was Bristol. He says he knows, he just likes saying London, and Ray says his name once in the voice that used to work when they were twelve." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_dean" }, content = "What? I'm being nice. She's home. Everyone's home." },
+  { type = "paragraph", content = "There is a beat where you could say something that would land, and you have three or four of them ready, and you use none of them, because you are sleeping under his father's roof tonight and you are twelve pounds from nothing." },
+  { type = "paragraph", content = "That is the arithmetic he was doing. He got there before you did." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Take your bags up.", targetType = "node", nodeId = "upstairs" },
+] }
+
+[[canvases.nodes]]
+id   = "upstairs"
+name = "Upstairs"
+blocks = [
+  { type = "paragraph", content = "Four doors off the landing. Cal's, with music through it. The bathroom. Your room. And the box room, which has a bag outside it that is not yours and a strip of light under the door." },
+  { type = "paragraph", content = "You had forgotten about the lodger. Ray mentioned him on the phone months ago, in the same voice he uses for the boiler." },
+  { type = "paragraph", content = "Your room has your bed in it and your father's weight bench where the desk used to be, and four boxes of your mother's things that nobody has opened in two years. You put your bags down in the gap that is left. The door does not shut properly — the catch went years ago and nobody fixed it, because until tonight nobody in this house needed a door that shut." },
+]
+exit_block = { type = "location", text = "Sit down on the bed.", config = { destinationType = "specific", locationId = "her_room", flagEffects = [
+  { targetType = "player", flag = "arrival_done", op = "set" },
+] } }
+
+
+# ── Night one — the bathroom starts meaning something ────────────────────────
+[[canvases]]
+id          = "canvas_first_night"
+name        = "The first night"
+description = "Auto-fire at the_bathroom, gated arrival_done. Night one. She showers off the coach; the door does not sit flush and the extractor is loud enough that she does not hear the landing. The first charged beat of the game, on the exposure axis — nobody touches anybody. SETS first_night_done, +6 exposure. Teaches the bathroom's two facts: the gap in the door, and that the extractor makes her deaf."
+
+[canvases.trigger]
+location      = "the_bathroom"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "arrival_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "first_night_done", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "shower"
+name = "The shower"
+blocks = [
+  { type = "image", props = { file = "scenes/first_night_shower.jpg", description = "A steamed-up small bathroom mirror with a shower running behind it.", search_queries = ["small bathroom steam mirror shower running", "steamy bathroom mirror condensation night"] } },
+  { type = "paragraph", content = "Half eleven and the house has gone quiet enough that you can hear the fridge. You have been in the same clothes since half seven this morning and you can smell the coach on yourself." },
+  { type = "paragraph", content = "The bathroom is exactly as it was. The bath with the shower over it, the grouting nobody has ever got clean, the extractor that comes on with the light and roars like a small aircraft. You lock the door because you are the kind of person who locks the door." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Get in.", blocks = [
+        { type = "paragraph", content = "The water takes a minute to run hot and then runs too hot, which is also exactly as it was. You stand under it with your forehead against the tiles and do not think about Bristol, in the specific effortful way that means thinking about nothing else." },
+    ] },
+    { advance_text = "Stay in it.", blocks = [
+        { type = "paragraph", content = "You stay in longer than you need to, because when you get out you will be twenty-four and living in your father's house, and while the water is running you are just a person in a shower." },
+    ] },
+  ] } },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Get out.", targetType = "node", nodeId = "the_door" },
+] }
+
+[[canvases.nodes]]
+id   = "the_door"
+name = "The door"
+blocks = [
+  { type = "paragraph", content = "You get out and the extractor is still roaring and the mirror is gone entirely. You dry off standing on the mat, and when you reach for the towel you notice the thing you had forgotten about this room." },
+  { type = "paragraph", content = "The door is locked. The door does not sit flush. There is a gap down the hinge side, a finger's width at the top where the frame has dropped, and through it you can see the landing light is on." },
+  { type = "paragraph", content = "It was on when you came in. You are almost sure it was on when you came in." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Look.", blocks = [
+        { type = "paragraph", content = "You do not move for a second. Then you lean, slowly, and put your eye to the gap, and there is nobody on the landing — just the light, and four doors, and the carpet you learned to walk on." },
+    ] },
+    { advance_text = "Listen.", blocks = [
+        { type = "paragraph", content = "And you realise you would not have heard anything anyway. The extractor is loud enough that you did not hear the fridge, the stairs, or a door. You have been standing naked in a room with a gap in the door and no hearing at all, for twenty minutes, in a house with three men in it." },
+        { type = "thought_bubble", content = "That is a stupid thing to think. It is your family." },
+        { type = "paragraph", content = "You think it anyway. And underneath the stupidity of it, something turns over in you that is not fear, and you stand there long enough to notice that it is not fear, and that is the part you take to bed with you." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Go to bed.", config = { destinationType = "specific", locationId = "her_room", effects = [
+  { targetType = "player", trait = "exposure", op = "add", value = 6, clamp = true },
+  { targetType = "player", trait = "hygiene", op = "add", value = 40, clamp = true },
+], flagEffects = [
+  { targetType = "player", flag = "first_night_done", op = "set" },
+] } }

@@ -1,0 +1,1875 @@
+# =============================================================================
+# Back Home — 5_scenes
+#
+# THE STANDING SURFACES. One hub per character, each a repeatable NPC-bound
+# canvas whose menu is the ladder. `requires_npc` does the presence work, so the
+# hub needs no schedule of its own — the character's own rows already gate it.
+#
+# Rungs are TRIGGERLESS canvases (no [canvases.trigger]) reached from a hub
+# choice via nodeId = "<canvas_id>.base", exiting back to the room.
+#
+# RUNGS SIT AT 15 / 35 / 55 / 75 — the ladder measured off the reference game,
+# where promiscuity and exhibitionism both gate at exactly those values.
+#
+# ⚠️ KEY ASYMMETRY, third instance of this trap:
+#      CONDITION → trait_key, npc_id      EFFECT → trait, npcId
+#
+# ── CAL ──────────────────────────────────────────────────────────────────────
+# Nineteen. The easy rung. She finds out what she is willing to do on someone
+# who will never once say no, and the ugliness of that is the point, not a bug.
+# His crude ceiling (the Want): tier 1 he can barely speak; tier 2 borrowed words,
+# badly; tier 3 he is still asking permission mid-act and never stops.
+# =============================================================================
+
+
+[[canvases]]
+id          = "hub_cal_frontroom"
+name        = "Cal"
+description = "Lane-1 standing hub @the_front_room, afternoons (his 16:00-19:30 rows do the gating via requires_npc). Repeatable. Opener is ONE constant paragraph — only the choices change as she climbs. Ladder gates on player nerve at 15/35/55 with a locked 75 rung."
+
+[canvases.trigger]
+location      = "the_front_room"
+requires_npc  = "npc_cal"
+npc           = "npc_cal"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "arrival_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Cal"
+blocks = [
+  { type = "paragraph", content = "Cal is on the sofa with his legs over the arm of it and his phone held above his face, and he does the thing he has done every afternoon since you got back: he clocks you coming in, and then he very carefully does not look up again." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Talk to him."
+targetType = "node"
+nodeId     = "rung_cal_talk.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him look."
+targetType = "node"
+nodeId     = "rung_cal_look.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 15 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit closer than you need to."
+targetType = "node"
+nodeId     = "rung_cal_close.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 35 },
+  { type = "trait", subject = "npc", npc_id = "npc_cal", trait_key = "lust", operator = "gte", value = 12 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit on him."
+targetType = "node"
+nodeId     = "rung_cal_lap.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 45 },
+  { type = "trait", subject = "npc", npc_id = "npc_cal", trait_key = "lust", operator = "gte", value = 20 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him upstairs."
+targetType = "node"
+nodeId     = "loop_cal_sex.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 55 },
+  { type = "trait", subject = "npc", npc_id = "npc_cal", trait_key = "lust", operator = "gte", value = 30 },
+] }
+
+# ── The door. Gate 9: every release ends on a visible locked thing ───────────
+[[canvases.nodes.exit_block.choices]]
+text             = "Stop pretending it's a secret."
+targetType       = "node"
+nodeId           = "loop_cal_sex.base"
+show_when_locked = true
+locked_text      = "Not yet — he still thinks he's getting away with it."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 75 },
+] }
+
+
+# ── Rung 0 — talk. The presence floor: always available, always something. ────
+[[canvases]]
+id          = "rung_cal_talk"
+name        = "Talk to Cal"
+description = "Triggerless rung off hub_cal_frontroom. The relational base — no gate, available from a cold start. Banded on his lust so the same click reads differently as he gets worse at hiding it. +2 his lust, +1 nerve, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Talk"
+blocks = [
+  { type = "paragraph", content = "You take the other end of the sofa and ask him something ordinary — what he's doing with the year, whether he's still with the girl from the sixth form, whether Ray has said anything about the car." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_cal", trait_key = "lust", operator = "lt", value = 12 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He answers in the shortest possible units and keeps his eyes on the phone the whole time, and about a minute in you understand that he is not being rude. He is concentrating. Being in a room with you is a task he is performing." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cal" }, content = "Dunno. It's fine. He hasn't said." },
+    { type = "paragraph", content = "When you get up he says your name — just that, just to have said it — and then has nothing to follow it with, and you leave him going red at his own phone." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_cal", trait_key = "lust", operator = "gte", value = 12 },
+    { type = "trait", subject = "npc", npc_id = "npc_cal", trait_key = "lust", operator = "lt", value = 30 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He puts the phone down now when you sit. That is new, and it happened without either of you mentioning that it happened." },
+    { type = "paragraph", content = "He talks about the year and the girl from sixth form, who it turns out is not the girl from sixth form any more, and about the car, and the whole time he is doing an enormous amount of work to keep his eyes above your collarbone. He is not good at it. He was never going to be good at it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cal" }, content = "It's — no, it's good you're back. It's better with you here." },
+    { type = "paragraph", content = "He means it in the way nineteen means things, which is entirely and without any idea what he is admitting." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_cal", trait_key = "lust", operator = "gte", value = 30 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He has stopped pretending to be busy when you come in. He shifts his legs off the sofa arm to make room before you have asked for any, and he watches you cross the carpet the entire way, and neither of you says a word about it." },
+    { type = "paragraph", content = "You talk about nothing. It is the most charged conversation about a car that has ever happened in this room." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cal" }, content = "You know I'd — if you ever needed anything. Money or. Anything." },
+    { type = "paragraph", content = "There it is. Nineteen years old and offering you his savings account, in a front room, over a programme about people buying a house in Spain." },
+    { type = "thought_bubble", content = "He would. That is the whole problem with him. He would." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave him to it."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_front_room"
+time_progression_minutes = 30
+effects = [
+  { targetType = "npc", npcId = "npc_cal", trait = "lust", op = "add", value = 2 },
+  { targetType = "npc", npcId = "npc_cal", trait = "relation", op = "add", value = 3 },
+  { targetType = "player", trait = "nerve", op = "add", value = 1, clamp = true },
+]
+
+
+# ── Rung 15 — let him look ───────────────────────────────────────────────────
+[[canvases]]
+id          = "rung_cal_look"
+name        = "Let him look"
+description = "Triggerless rung, gate nerve>=15. She stops managing what he can see. Exposure rung — explicit vocabulary, repeatable, media pool. +4 his lust, +3 exposure, +2 nerve, -1 pride, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Let him look"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/cal_frontroom_look_t4", pool = 4, description = "Young woman lying on a sofa in a short vest and knickers while a young man on the other end pretends to watch television.", search_queries = ["woman lounging sofa vest knickers living room", "girl stretched out couch shorts man watching"] } },
+  { type = "paragraph", content = "You do not go and change. That is all it takes — you come down in the vest and the knickers you slept in, because it is your house too and it is four in the afternoon, and you lie along the sofa with your feet near his leg and let the evening happen." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_cal", trait_key = "lust", operator = "lt", value = 30 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "It takes him four minutes to break. You count it. He looks at your legs, then away, then at your tits under the vest — there is nothing under the vest and he has worked that out — then away, then a long one at your arse when you turn over, and then he puts a cushion on his lap with a casualness that would fool nobody alive." },
+    { type = "paragraph", content = "You do not turn back over. You lie there with your face in the sofa arm and let your brother look at you, and you can feel it on your skin like a hand not quite touching, all the way down." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_cal", trait_key = "lust", operator = "gte", value = 30 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He does not bother with the four minutes any more. He looks the moment you lie down and he keeps looking, and when you stretch and the vest rides up over your stomach he makes a sound that he tries to turn into clearing his throat." },
+    { type = "paragraph", content = "The cushion goes on his lap immediately now. It is a ritual. You have started thinking of it as the cushion, definite article, and you have started arranging yourself in ways that require it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cal" }, content = "You're doing that on purpose." },
+    { type = "paragraph", content = "You ask him doing what. He does not answer, because to answer he would have to say the word for what he has been looking at, and he cannot, and both of you know he cannot, and that is the game now." },
+  ] },
+  { type = "paragraph", content = "When you finally get up, you take your time about it." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go and put something on."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_front_room"
+time_progression_minutes = 30
+effects = [
+  { targetType = "npc", npcId = "npc_cal", trait = "lust", op = "add", value = 4 },
+  { targetType = "player", trait = "exposure", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "nerve", op = "add", value = 2, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 10, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -1, clamp = true },
+]
+
+
+# ── Rung 35 — contact ────────────────────────────────────────────────────────
+[[canvases]]
+id          = "rung_cal_close"
+name        = "Sit closer than you need to"
+description = "Triggerless rung, gate nerve>=35 AND his lust>=12. First contact. Cal's tier-2 register: borrowed words, badly. +6 his lust, +3 nerve, +2 exposure, -2 pride, 45 min. SETS cal_touched."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Closer"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/cal_frontroom_close_t4", pool = 4, description = "A woman pressed close against a young man on a sofa, his hand on her thigh, television light.", search_queries = ["couple close together sofa hand on thigh dim room", "woman leaning against man couch touching"] } },
+  { type = "paragraph", content = "There is a whole sofa. You sit down in the eight inches next to him, hip against his hip, and put your feet up on the table like it is nothing, and you feel every muscle in his leg go rigid against yours." },
+  { type = "paragraph", content = "Neither of you moves for about a minute. The telly carries on about Spain." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Stay there.", blocks = [
+        { type = "paragraph", content = "Then you put your hand on his thigh — high, casual, the way you'd steady yourself — and leave it there, and he stops breathing in any organised way at all." },
+        { type = "paragraph", content = "You can see his cock through his joggers from here. There is no version of this where he could hide that and he is not even trying now, and the fact that he is not trying is doing something to you that you did not budget for." },
+    ] },
+    { advance_text = "Move your hand.", blocks = [
+        { type = "paragraph", content = "You move it, slowly, up, and take hold of him through the fabric, and Cal makes a noise into the back of his own hand like something coming apart." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cal" }, content = "June — fuck — is this — can I —" },
+        { type = "paragraph", content = "He cannot finish any of the sentences. He has borrowed the words from somewhere and they do not fit in his mouth. You tell him to be quiet, and he is instantly, completely quiet, and you work him slowly through his joggers with your eyes on the television." },
+    ] },
+    { advance_text = "Finish him.", blocks = [
+        { type = "paragraph", content = "It takes almost nothing. Four minutes, maybe, of your hand and his ragged breathing and a woman on the telly saying the kitchen needs work, and then he grips the sofa cushion and comes in his joggers like a boy, shaking, saying your name into his own shoulder." },
+        { type = "paragraph", content = "You take your hand back. He is scarlet to the ears and cannot look at you and cannot stop looking at you." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cal" }, content = "Sorry. Sorry, I—" },
+        { type = "paragraph", content = "You tell him to go and change, and he goes, and you sit on the good sofa in your father's front room with the telly on and your hand still warm, working out exactly how easy that was and exactly how little you feel bad about it." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sit there a minute."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_front_room"
+time_progression_minutes = 45
+effects = [
+  { targetType = "npc", npcId = "npc_cal", trait = "lust", op = "add", value = 6 },
+  { targetType = "npc", npcId = "npc_cal", trait = "relation", op = "add", value = 2 },
+  { targetType = "player", trait = "nerve", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "exposure", op = "add", value = 2, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 25, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -2, clamp = true },
+]
+flagEffects = [
+  { targetType = "player", flag = "cal_touched", op = "set" },
+]
+
+
+# ── Rung 55 — the loop. Repeatable, pooled, and where the crude register lives ─
+[[canvases]]
+id          = "loop_cal_sex"
+name        = "Take him upstairs"
+description = "Triggerless rung, gate nerve>=55 AND his lust>=30. THE repeatable explicit surface for Cal — pooled, tier 5, re-enterable, which is where the crude register belongs. Cal's tier-3 register: he is still asking permission mid-act and it never stops. +8 his lust, +4 nerve, +3 exposure, -3 pride, 90 min. SETS cal_arrangement."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Upstairs"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/cal_bedroom_t5", pool = 6, description = "Explicit — a young man and a woman on a small bed in a cramped bedroom, her on top, daylight through thin curtains.", search_queries = ["young couple sex small bedroom amateur", "woman riding man single bed bedroom"] } },
+  { type = "paragraph", content = "You get up and go to the door and stand in it until he follows you, which takes about two seconds, and neither of you says a word going up the stairs past the bathroom and past Ray's door and into your room where the catch has never worked." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Shut the door.", blocks = [
+        { type = "paragraph", content = "You push the door to. It does not latch. It has never latched. You stopped caring about that somewhere around the second week and you have not examined when, and Cal is looking at the gap in the door with his hands at his sides like a boy waiting to be told." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cal" }, content = "It doesn't shut. Is that — do you want me to—" },
+        { type = "paragraph", content = "You tell him to take his joggers off." },
+    ] },
+    { advance_text = "Get on him.", blocks = [
+        { type = "paragraph", content = "He is hard before the fabric is past his knees, cock up against his stomach, and he keeps trying to look at your face instead of your tits like there is politeness available in this situation. You pull the vest over your head to make it easier for him and his mouth actually falls open." },
+        { type = "paragraph", content = "You push him back onto the bed that was too short for you at seventeen and get over him, and take his cock in your hand, and put it where it is going." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cal" }, content = "Oh — fuck — June, is this okay, is this—" },
+        { type = "paragraph", content = "You sink down onto him and he stops being able to ask anything at all." },
+    ] },
+    { advance_text = "Take it.", blocks = [
+        { type = "paragraph", content = "You ride him slowly because slowly is unbearable for him, hands flat on his chest, and he holds your hips like they might be taken away and watches your tits move and swears at the ceiling in a small helpless voice." },
+        { type = "paragraph", content = "Every thirty seconds he asks if it is alright. Mid-fuck, wrecked, hands full of your arse — *is this alright, is this okay, tell me if* — and there is a version of you that finds it unbearable and a version that has started needing it, and you have stopped being able to tell which one is driving." },
+        { type = "thought_bubble", content = "He is nineteen. He would do anything you said. That is not an excuse, it is the reason." },
+    ] },
+    { advance_text = "Finish it.", blocks = [
+        { type = "paragraph", content = "You feel him go — the whole body locking under you — and you put a hand over his mouth because the house is not empty and the door does not shut, and he comes inside you making a sound into your palm that you are going to hear at three in the morning for a week." },
+        { type = "paragraph", content = "After, he lies there with his arm over his eyes and says sorry twice for nothing at all, and asks, again, whether that was alright." },
+        { type = "paragraph", content = "You say yes. You get up, and step over his joggers, and go and stand under the shower with the extractor roaring, and you do not think about Bristol once." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go and wash."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_front_room"
+time_progression_minutes = 90
+effects = [
+  { targetType = "npc", npcId = "npc_cal", trait = "lust", op = "add", value = 8 },
+  { targetType = "npc", npcId = "npc_cal", trait = "relation", op = "add", value = 4 },
+  { targetType = "player", trait = "nerve", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "exposure", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "hygiene", op = "add", value = -25, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 40, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -3, clamp = true },
+]
+flagEffects = [
+  { targetType = "player", flag = "cal_arrangement", op = "set" },
+]
+
+
+# =============================================================================
+# ── RAY ───────────────────────────────────────────────────────────────────────
+# Her stepfather. The proud one. His ladder gates on `need`, not `nerve` — that
+# is the whole point of him: the keep comes due, she cannot cover it, and the
+# asking is the climb. He is careful, so an inch off him is worth a mile off
+# anyone else.
+#
+# CRUDE CEILING (the Want): tier 1 names nothing — her chest, her legs, the shape
+# of her. Tier 2 is flat and once, like an admission. Tier 3 is full crude but
+# still quiet and still his. It BREAKS INSIDE the explicit scenes, never before.
+# =============================================================================
+
+[[canvases]]
+id          = "hub_ray_frontroom"
+name        = "Ray"
+description = "Lane-1 standing hub @the_front_room, 20:00-23:30 daily (his rows gate it via requires_npc). The main Ray ladder, gated on `need` at 15/35/55 with a locked 75 rung. Opener is ONE constant paragraph."
+
+[canvases.trigger]
+location      = "the_front_room"
+requires_npc  = "npc_ray"
+npc           = "npc_ray"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "arrival_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Ray"
+blocks = [
+  { type = "paragraph", content = "Ray is in the chair with the sound down, the way he has sat in that chair every evening of your life. He does not look over when you come in. He shifts the paper off the arm to make room on the sofa, which is the only invitation this man has ever issued." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit with him."
+targetType = "node"
+nodeId     = "rung_ray_sit.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him for a bit extra."
+targetType = "node"
+nodeId     = "rung_ray_ask.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "need", operator = "gte", value = 15 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him do you the favour."
+targetType = "node"
+nodeId     = "rung_ray_favour.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "need", operator = "gte", value = 35 },
+  { type = "trait", subject = "npc", npc_id = "npc_ray", trait_key = "lust", operator = "gte", value = 10 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit with him after."
+targetType = "node"
+nodeId     = "rung_ray_after.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "ray_arrangement", operator = "is_true" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stop pretending it's a favour."
+targetType = "node"
+nodeId     = "loop_ray_arrangement.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "need", operator = "gte", value = 55 },
+  { type = "trait", subject = "npc", npc_id = "npc_ray", trait_key = "lust", operator = "gte", value = 28 },
+] }
+# Setter lives on this LOCATED choice, not on the triggerless rung it opens —
+# the flag-chain validator needs somewhere to point the player. Applies to flags
+# read by a CHOICE as well as by a trigger.
+flagEffects = [
+  { targetType = "player", flag = "ray_arrangement", op = "set" },
+]
+
+# ── The door. locked_text OMITTED on purpose: the greyed row shows the ACTION,
+#    which is a want the player can name, rather than a reason they cannot act.
+[[canvases.nodes.exit_block.choices]]
+text             = "Ask him for it in front of the others."
+targetType       = "node"
+nodeId           = "loop_ray_arrangement.base"
+show_when_locked = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "need", operator = "gte", value = 75 },
+] }
+
+
+# ── Rung 0 — sit with him. Presence floor. ───────────────────────────────────
+[[canvases]]
+id          = "rung_ray_sit"
+name        = "Sit with Ray"
+description = "Triggerless rung. No gate — the relational base, available cold. Banded on his lust. +2 his relation, +1 his lust, 45 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Sit"
+blocks = [
+  { type = "paragraph", content = "You sit on the end of the sofa and the two of you watch about forty minutes of a programme neither of you chose. It is the most time you have spent in a room with your stepfather since you were nineteen." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_ray", trait_key = "lust", operator = "lt", value = 10 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He asks about the shop. You say it's fine. He asks whether they're giving you enough hours and you say they're giving you what they've got, and he nods at the telly for a while." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "You were always going to land on your feet. You know that." },
+    { type = "paragraph", content = "It is meant kindly and it lands like a hand on a bruise, because you have not landed on your feet, you have landed on his sofa, and both of you are looking at the evidence." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_ray", trait_key = "lust", operator = "gte", value = 10 },
+    { type = "trait", subject = "npc", npc_id = "npc_ray", trait_key = "lust", operator = "lt", value = 28 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He has started leaving the paper off the sofa arm before you get there. It is not a big thing. It is a man rearranging a room slightly, every evening, on the assumption that you will be in it." },
+    { type = "paragraph", content = "You tuck your feet up. His eyes go to your legs and come back to the screen at a speed that would be undetectable if you were not watching for it, and you have started watching for it, and the fact that you have started watching for it is the actual news of the last fortnight." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "It's alright, this. Having someone in the house of an evening." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_ray", trait_key = "lust", operator = "gte", value = 28 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "There is a distance the two of you used to keep on that sofa and it has been quietly shortening for weeks, and tonight your knee is against his leg and neither of you moves for the length of a programme about a house in Spain." },
+    { type = "paragraph", content = "He is not watching the telly. He has not been watching the telly for some time. He is sat very still with his jaw set, the way a man sits when the thing he is doing is not moving." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "You should go up." },
+    { type = "paragraph", content = "You ask why. He does not answer. You stay another twenty minutes and he does not ask again, and when you finally go up you can feel him not watching you the whole way to the door." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Say goodnight."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_front_room"
+time_progression_minutes = 45
+effects = [
+  { targetType = "npc", npcId = "npc_ray", trait = "relation", op = "add", value = 2 },
+  { targetType = "npc", npcId = "npc_ray", trait = "lust", op = "add", value = 1 },
+]
+
+
+# ── Rung 15 (need) — the ask ─────────────────────────────────────────────────
+[[canvases]]
+id          = "rung_ray_ask"
+name        = "Ask him for a bit extra"
+description = "Triggerless rung, gate need>=15. The first ask. Costs pride, pays money — and teaches that asking works, which is how `need` climbs. +25 money, -6 pride, +2 need, +2 his lust, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The ask"
+blocks = [
+  { type = "paragraph", content = "You wait for the adverts, because you have become the kind of person who plans this, and then you ask him whether there is any chance of a bit extra this week. You hear your own voice do the thing where it goes light at the end." },
+  { type = "paragraph", content = "He does not say anything for a moment. He does not look at you either, which you understand later is him being kind." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "How much is a bit." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Tell him.", blocks = [
+        { type = "paragraph", content = "You tell him. He gets his wallet out with the resigned economy of a man who has been getting a wallet out for other people his entire adult life, and counts it onto the arm of the sofa, and pushes it two inches towards you rather than handing it over." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "Don't tell your brothers." },
+    ] },
+    { advance_text = "Take it.", blocks = [
+        { type = "paragraph", content = "You take it. You say thank you twice, which is once too many, and he waves it off and turns the telly up." },
+        { type = "thought_bubble", content = "That was easy. That was so much easier than it should have been." },
+        { type = "paragraph", content = "And here is the thing about it being easy: something in you has already worked out that it will be easier the second time, and has already started thinking about the second time, before you have even left the room." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go up before he changes his mind."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_front_room"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "money", op = "add", value = 25, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -6, clamp = true },
+  { targetType = "player", trait = "need", op = "add", value = 2, clamp = true },
+  { targetType = "npc", npcId = "npc_ray", trait = "lust", op = "add", value = 2 },
+]
+
+
+# ── Rung 35 (need) — the favour that stops being free ────────────────────────
+[[canvases]]
+id          = "rung_ray_favour"
+name        = "Let him do you the favour"
+description = "Triggerless rung, gate need>=35 AND his lust>=10. His register cracks for the first time — tier 2, flat and once, like an admission. Media pool. +40 money, -8 pride, +4 need, +3 exposure, +5 his lust, 45 min. SETS ray_admitted."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The favour"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/ray_frontroom_favour_t4", pool = 4, description = "An older man on a sofa watching a younger woman in a vest and knickers, lamp-lit living room, tension.", search_queries = ["older man watching younger woman living room lamp", "mature man couch woman standing vest knickers"] } },
+  { type = "paragraph", content = "You come down for it in what you sleep in, and you do not pretend to yourself that this is an accident, and you stand between him and the telly while you ask." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Wait.", blocks = [
+        { type = "paragraph", content = "He does not reach for the wallet. He sits back and looks at you for a long moment — properly, all the way down and back up, the first time this man has ever let himself do that in front of you — and then rubs his hand over his mouth." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "You know what you look like, standing there." },
+    ] },
+    { advance_text = "Say nothing.", blocks = [
+        { type = "paragraph", content = "You do not answer. The silence goes on long enough to become a different kind of silence." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "You've got your mother's legs and you know it, and you come down here dressed like that and ask me for money." },
+        { type = "paragraph", content = "It is the first crude thing he has said in front of you in twenty-four years, and it is barely crude, and it costs him visibly to have said it — his ears have gone red and his hand has not come away from his mouth." },
+    ] },
+    { advance_text = "Let it stand.", blocks = [
+        { type = "paragraph", content = "You could laugh it off. There is a version of the next four seconds where you laugh it off and this evening goes back in its box." },
+        { type = "paragraph", content = "You do not laugh. You stand there and let him look at your tits through the vest and let it be true, and after a while he gets the wallet out and counts out a lot more than you asked for, and puts it on the arm of the sofa without looking up." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "Go on. Go up." },
+        { type = "paragraph", content = "You go up. Nothing happened. Both of you will be able to say, truthfully, for weeks, that nothing happened." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go up."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_front_room"
+time_progression_minutes = 45
+effects = [
+  { targetType = "player", trait = "money", op = "add", value = 40, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -8, clamp = true },
+  { targetType = "player", trait = "need", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "exposure", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 20, clamp = true },
+  { targetType = "npc", npcId = "npc_ray", trait = "lust", op = "add", value = 5 },
+]
+flagEffects = [
+  { targetType = "player", flag = "ray_admitted", op = "set" },
+]
+
+
+# ── Rung 55 (need) — the arrangement. The repeatable explicit surface. ───────
+[[canvases]]
+id          = "loop_ray_arrangement"
+name        = "Stop pretending it's a favour"
+description = "Triggerless rung, gate need>=55 AND his lust>=28. THE repeatable explicit surface for Ray — pooled, t5, re-enterable, which is where the crude register belongs. His tier-3 ceiling: full crude, still quiet, still his. +60 money, -10 pride, +5 need, +8 his lust, 90 min. SETS ray_arrangement."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The arrangement"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/ray_frontroom_t5", pool = 6, description = "Explicit — an older man and a younger woman on a living room sofa at night, lamp light, her over him.", search_queries = ["mature man younger woman sofa sex living room", "older man woman riding him couch night"] } },
+  { type = "paragraph", content = "The house has been quiet for an hour. You do not ask this time. You take the money off the arm of the sofa where he has started leaving it, and then you do not go up." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Stay.", blocks = [
+        { type = "paragraph", content = "You put your knee on the sofa beside his leg and he says your name — once, low, in the voice he used when you were small and about to do something dangerous." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "June." },
+        { type = "paragraph", content = "You ask him if he wants you to go up. He does not answer, and his hand comes onto the back of your thigh, and that is the answer." },
+    ] },
+    { advance_text = "Get on him.", blocks = [
+        { type = "paragraph", content = "He is quiet about it. That is the thing you did not expect — that a man who has said perhaps four hundred words to you since you came home would take his cock out with this much calm, and hold your hip while you get over him, and watch your face the entire time." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "Christ. Look at you." },
+        { type = "paragraph", content = "You take him inside you slowly and his jaw goes and his hand comes up over your tits, and there it is — the crude coming out of him at last, quietly, into the side of your neck." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "Fucking hell. Your cunt. Go on." },
+    ] },
+    { advance_text = "Take it.", blocks = [
+        { type = "paragraph", content = "You ride him on the sofa nobody was ever allowed on, in the room the whole family sits in, with the telly still going and the sound down and both your hands flat on his chest. He does not close his eyes once." },
+        { type = "paragraph", content = "He does not perform any of it. There is no noise out of him but breathing and the occasional word, and every word is filthy and flat and entirely serious, and you find that you have never in your life been fucked by somebody paying this much attention." },
+        { type = "thought_bubble", content = "He was the proud one. He is still the proud one. That is what this is." },
+    ] },
+    { advance_text = "Finish it.", blocks = [
+        { type = "paragraph", content = "When he goes he pulls you down onto him and holds you there and comes inside you without a sound, and stays exactly like that for a long moment afterwards with his face against your shoulder and his hand still spread over your back." },
+        { type = "paragraph", content = "Then he lets go, and you get up, and he tucks himself away and picks the paper back up off the floor." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "There's more in the tin if you're short." },
+        { type = "paragraph", content = "You take the money. You go up past the bathroom and past Cal's door and into your room with the catch that has never worked, and you lie in the dark and do the arithmetic of what just happened, and the arithmetic does not come out the way it is supposed to." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go up."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_front_room"
+time_progression_minutes = 90
+effects = [
+  { targetType = "player", trait = "money", op = "add", value = 60, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -10, clamp = true },
+  { targetType = "player", trait = "need", op = "add", value = 5, clamp = true },
+  { targetType = "player", trait = "nerve", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "hygiene", op = "add", value = -25, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 40, clamp = true },
+  { targetType = "npc", npcId = "npc_ray", trait = "lust", op = "add", value = 8 },
+  { targetType = "npc", npcId = "npc_ray", trait = "relation", op = "add", value = 3 },
+]
+
+
+# ── Ray's second surface: the garage. Different register — his room, not hers. ─
+[[canvases]]
+id          = "hub_ray_garage"
+name        = "Ray (the garage)"
+description = "Second Lane-1 surface @the_garage, 18:00-20:00 weekdays. Lighter than the front room — one relational rung and one exposure rung. Exists because a character with two schedule rows earns two surfaces, and because the garage was an empty location."
+
+[canvases.trigger]
+location      = "the_garage"
+requires_npc  = "npc_ray"
+npc           = "npc_ray"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "arrival_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The garage"
+blocks = [
+  { type = "paragraph", content = "The garage is cold and smells of oil and old carpet, and Ray is out here doing the thing he calls sorting out, which has never in living memory resulted in anything being sorted out. There is a radio on a shelf playing to nobody." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him a cup of tea."
+targetType = "node"
+nodeId     = "rung_ray_tea.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Come out in what you've got on."
+targetType = "node"
+nodeId     = "rung_ray_garage_cold.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 15 },
+] }
+
+
+[[canvases]]
+id          = "rung_ray_tea"
+name        = "Take him a cup of tea"
+description = "Triggerless rung off hub_ray_garage. No gate. The garage register: two people who cannot talk indoors, managing it outdoors. +3 his relation, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Tea"
+blocks = [
+  { type = "paragraph", content = "You bring it out and he takes it and says ta and puts it down on the bench where it will go cold, which is what happens to every cup of tea that has ever entered this garage." },
+  { type = "paragraph", content = "He tells you about the boiler, and then about the council, and then — because there is a lot of cold air and a radio and no telly to look at — about your mother, briefly, in three sentences, and then stops as though he has caught himself doing something." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "Anyway. You're not out here to hear all that." },
+  { type = "paragraph", content = "You are, though. It is the most he has said to you in two years and you stand in a cold garage to get it, and you understand, standing there, that this man has been extremely lonely for a long time in a house with three other people in it." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave him to it."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_garage"
+time_progression_minutes = 30
+effects = [
+  { targetType = "npc", npcId = "npc_ray", trait = "relation", op = "add", value = 3 },
+]
+
+
+[[canvases]]
+id          = "rung_ray_garage_cold"
+name        = "Come out in what you've got on"
+description = "Triggerless rung, gate exposure>=15. Deliberate, deniable, and cold — the garage version of the front-room look. Media pool. +4 exposure, +2 need, +4 his lust, -2 pride, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Cold"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/ray_garage_cold_t4", pool = 4, description = "A woman in a thin vest standing in a cold garage doorway, older man at a workbench, harsh strip light.", search_queries = ["woman thin vest garage doorway cold", "girl standing garage workbench man strip light"] } },
+  { type = "paragraph", content = "It is four degrees out here and you come out in the vest anyway, holding your arms, and stand about a foot closer to him than the size of the garage requires." },
+  { type = "paragraph", content = "The cold does what the cold does. You watch him notice, and watch him decide not to say anything about it, and watch that decision cost him something." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "You'll freeze out here dressed like that." },
+  { type = "paragraph", content = "You agree that you will. You do not go in. He goes back to sorting out the thing that has never been sorted out, and gets it wrong twice, and you stand there in the cold with your arms folded under your tits letting a man not look at you." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go in when you've made your point."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_garage"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "exposure", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "need", op = "add", value = 2, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -2, clamp = true },
+  { targetType = "npc", npcId = "npc_ray", trait = "lust", op = "add", value = 4 },
+]
+
+
+# =============================================================================
+# ── DEAN ──────────────────────────────────────────────────────────────────────
+# Twenty-seven. He was the disappointment while she was the success, and he has
+# not stopped enjoying that they are level now. His ladder gates on `exposure` —
+# he is the one who says the quiet thing, so the climb is his commentary becoming
+# contact, and what she is willing to be seen in is what gives him the material.
+#
+# CRUDE CEILING (the Want): tier 1 crude ABOUT her, as jokes she is meant to hear.
+# Tier 2 crude TO her. Tier 3 anything, narrated while it happens.
+#
+# TWO SURFACES, TWO REGISTERS: the kitchen at 08:00 is daylight and verbal; the
+# front room at 23:00-01:30 is dark and physical. Same man, different licence.
+# =============================================================================
+
+[[canvases]]
+id          = "hub_dean_kitchen"
+name        = "Dean"
+description = "Lane-1 hub @the_kitchen, 08:00-09:00 daily. The verbal surface. Gates on `exposure` at 15 and 35 — the 35 rung is what fills the empty exposure band the meter-ceiling gate names."
+
+[canvases.trigger]
+location      = "the_kitchen"
+requires_npc  = "npc_dean"
+npc           = "npc_dean"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "arrival_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Dean"
+blocks = [
+  { type = "paragraph", content = "Dean is eating standing up at the counter, which is the only way he has ever eaten anything, and he says something at you before you have got the cupboard open. There is one chair that does not wobble and he is not sitting in it either." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Give him it back."
+targetType = "node"
+nodeId     = "rung_dean_spar.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stop shutting him down."
+targetType = "node"
+nodeId     = "rung_dean_letit.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 15 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Neither of you mentions it."
+targetType = "node"
+nodeId     = "rung_dean_after.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 25 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Come down in what you slept in."
+targetType = "node"
+nodeId     = "rung_dean_morning.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 35 },
+] }
+# ⚠️ The setter lives HERE, on the hub choice, not on the triggerless rung it opens.
+#    A flag read by a TRIGGER must be set by a canvas that has a location/schedule, or
+#    the flag-chain validator hard-fails the build with "MISSING HINT" — it cannot tell
+#    the player where to go to earn a flag set inside a link target.
+flagEffects = [
+  { targetType = "player", flag = "dean_open", op = "set" },
+]
+
+
+[[canvases]]
+id          = "rung_dean_spar"
+name        = "Give him it back"
+description = "Triggerless rung. No gate — the relational base. Banded on his lust. She is still winning these, which is the point of the low band. +2 his relation, +1 his lust, 20 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Spar"
+blocks = [
+  { type = "paragraph", content = "He starts it. He always starts it — something about Bristol, or the coach, or how long a person can stay on a sofa before it counts as living there." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_dean", trait_key = "lust", operator = "lt", value = 14 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "You give it back with interest, because you have been giving it back with interest since you were eleven and you are still, on the whole, better at it than he is. He takes it grinning with his mouth full." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_dean" }, content = "There she is. Thought they'd knocked it out of you down there." },
+    { type = "paragraph", content = "It is almost affection. With Dean it is always almost affection, delivered at an angle, so that if you took offence he could say he was joking and you would both know he was and was not." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_dean", trait_key = "lust", operator = "gte", value = 14 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "It has stopped being about Bristol. It is about you now — what you are wearing, what time you came down, whether you slept alright, all of it in the same flat funny voice so that none of it can be objected to individually." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_dean" }, content = "You want to put a jumper on. You'll catch something, walking round like that." },
+    { type = "paragraph", content = "You tell him to look somewhere else then. He says he is only saying. He is never only saying, and he watches you the whole way out of the kitchen, and the worst part is that you slowed down." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take your coffee up."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_kitchen"
+time_progression_minutes = 20
+effects = [
+  { targetType = "npc", npcId = "npc_dean", trait = "relation", op = "add", value = 2 },
+  { targetType = "npc", npcId = "npc_dean", trait = "lust", op = "add", value = 1 },
+]
+
+
+# ── exposure 15 ──────────────────────────────────────────────────────────────
+[[canvases]]
+id          = "rung_dean_letit"
+name        = "Stop shutting him down"
+description = "Triggerless rung, gate exposure>=15. She stops closing the comments off, which is all the licence he needs. His tier-2 register begins — crude TO her rather than about her. +4 his lust, +3 exposure, -2 pride, 20 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Let it stand"
+blocks = [
+  { type = "paragraph", content = "He says the thing. You have a reply ready — you have had a reply ready every morning for six weeks — and you drink your coffee instead and let it sit in the kitchen air between you, unanswered." },
+  { type = "paragraph", content = "It changes the room in about two seconds. He puts the bowl down." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Say nothing.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dean" }, content = "No comeback? That's new." },
+        { type = "paragraph", content = "You shrug and get the milk. He watches you bend into the fridge in a vest and knickers and does not pretend he is doing anything else, and when you straighten up he is leaning back against the counter with his arms folded, openly looking." },
+    ] },
+    { advance_text = "Let him look.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dean" }, content = "Fucking hell, June. You've got no idea, have you. Or you have." },
+        { type = "paragraph", content = "He says it in the flat funny voice but it does not come out funny, and that is the first time in six weeks that the angle has failed him." },
+        { type = "paragraph", content = "You take your coffee and go. You do not hurry. Behind you the kitchen is completely silent, which in a room with Dean in it has never once happened before." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go up."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_kitchen"
+time_progression_minutes = 20
+effects = [
+  { targetType = "npc", npcId = "npc_dean", trait = "lust", op = "add", value = 4 },
+  { targetType = "player", trait = "exposure", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -2, clamp = true },
+]
+
+
+# ── exposure 35 — fills the empty band the meter-ceiling gate names ──────────
+[[canvases]]
+id          = "rung_dean_morning"
+name        = "Come down in what you slept in"
+description = "Triggerless rung, gate exposure>=35. The morning kitchen with nowhere to go. Media pool, explicit. +6 his lust, +4 exposure, +2 nerve, -3 pride, 30 min. SETS dean_open."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The morning"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/dean_kitchen_morning_t4", pool = 4, description = "A woman in a thin vest and knickers making coffee in a small kitchen while a man watches from the counter.", search_queries = ["woman vest knickers kitchen morning coffee", "girl in underwear kitchen man watching counter"] } },
+  { type = "paragraph", content = "You stop dressing for the kitchen. That is the whole decision and you make it upstairs, in about four seconds, standing in front of a door that does not shut." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Go down.", blocks = [
+        { type = "paragraph", content = "He is at the counter and he stops chewing. You get the cupboard open and reach for the top shelf, which you do not need to reach for, and the vest goes with you." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dean" }, content = "Christ. Right." },
+    ] },
+    { advance_text = "Take your time.", blocks = [
+        { type = "paragraph", content = "You make the coffee slowly. He does not go to work. He stands there with his arms folded and narrates it, because narrating it is what he has instead of doing anything, and this morning he has decided not to bother with the angle." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dean" }, content = "You've got a fucking arse on you. That's not — I'm not being funny, that's a serious problem, that." },
+        { type = "paragraph", content = "You ask whose problem. He laughs, once, with no humour in it at all." },
+    ] },
+    { advance_text = "Let him finish.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dean" }, content = "Mine. Obviously mine. You know what I've been doing every morning since you turned up? Go on, have a guess." },
+        { type = "paragraph", content = "You do not have to guess. There is a wall between your room and the bathroom and it is not a thick wall, and you have known for about a fortnight, and you have never once said so." },
+        { type = "paragraph", content = "You stand in the kitchen in your knickers holding a cup of coffee and tell your stepbrother that you know. He goes very still. Then he picks up his keys and goes to work without another word, and you stand there listening to the van pull off, extremely pleased with yourself in a way that is going to be a problem." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Drink your coffee."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_kitchen"
+time_progression_minutes = 30
+effects = [
+  { targetType = "npc", npcId = "npc_dean", trait = "lust", op = "add", value = 6 },
+  { targetType = "player", trait = "exposure", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "nerve", op = "add", value = 2, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 20, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -3, clamp = true },
+]
+
+
+# ── Dean's second surface: the front room after eleven ───────────────────────
+[[canvases]]
+id          = "hub_dean_late"
+name        = "Dean (late)"
+description = "Lane-1 hub @the_front_room, 23:00-01:30 — the overnight-wrap schedule row. Dark, quiet, physical: the register the kitchen cannot host. Gated dean_open so the late surface only opens after the morning has broken."
+
+[canvases.trigger]
+location      = "the_front_room"
+requires_npc  = "npc_dean"
+npc           = "npc_dean"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "dean_open", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "After eleven"
+blocks = [
+  { type = "paragraph", content = "Gone eleven and the house has dropped into the quiet it does — Ray up, Cal's music off, the fridge going. Dean is on the sofa in the dark with the telly down to almost nothing, and he does not say anything funny when you come in, which is how you know what kind of evening this is." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit down in the dark with him."
+targetType = "node"
+nodeId     = "rung_dean_dark.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Make him say what it's worth."
+targetType = "node"
+nodeId     = "rung_dean_bargain.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "need", operator = "gte", value = 45 },
+  { type = "trait", subject = "npc", npc_id = "npc_dean", trait_key = "lust", operator = "gte", value = 30 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him do what he's been describing."
+targetType = "node"
+nodeId     = "loop_dean_late.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 35 },
+  { type = "trait", subject = "npc", npc_id = "npc_dean", trait_key = "lust", operator = "gte", value = 26 },
+] }
+
+# ── The door. Action shown, not the reason — a want the player can name. ─────
+[[canvases.nodes.exit_block.choices]]
+text             = "Let him do it where someone could come down."
+targetType       = "node"
+nodeId           = "loop_dean_late.base"
+show_when_locked = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 75 },
+] }
+
+
+[[canvases]]
+id          = "rung_dean_dark"
+name        = "Sit down in the dark with him"
+description = "Triggerless rung off hub_dean_late. No gate. The late register: no jokes, no angle. +3 his lust, +1 nerve, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The dark"
+blocks = [
+  { type = "paragraph", content = "You sit at the other end and neither of you says anything for a while. The telly light does what telly light does. Somewhere upstairs a floorboard goes and you both look at the ceiling and then at each other and then away." },
+  { type = "paragraph", content = "This is the version of him nobody else in the house gets. No audience, no angle, just a man of twenty-seven who never left, sat in his father's front room at midnight." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_dean" }, content = "I'm not the one who did anything wrong, you know. I just stayed." },
+  { type = "paragraph", content = "You say you know. He says that is not the same as thinking it, and he is right, and neither of you takes that any further tonight." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go up."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_front_room"
+time_progression_minutes = 30
+effects = [
+  { targetType = "npc", npcId = "npc_dean", trait = "lust", op = "add", value = 3 },
+  { targetType = "npc", npcId = "npc_dean", trait = "relation", op = "add", value = 2 },
+  { targetType = "player", trait = "nerve", op = "add", value = 1, clamp = true },
+]
+
+
+[[canvases]]
+id          = "loop_dean_late"
+name        = "Let him do what he's been describing"
+description = "Triggerless rung, gate exposure>=35 AND his lust>=26. THE repeatable explicit surface for Dean — pooled, t5, re-enterable. His tier-3 register: anything, narrated while it happens. +8 his lust, +5 exposure, +4 nerve, -4 pride, 60 min. SETS dean_arrangement."
+
+[[canvases.nodes]]
+id   = "base"
+name = "After eleven"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/dean_frontroom_t5", pool = 6, description = "Explicit — a couple on a sofa in a dark living room lit only by a television, her bent over the arm of it.", search_queries = ["couple sex dark living room tv light sofa", "woman bent over sofa arm man behind night"] } },
+  { type = "paragraph", content = "You do not sit at the other end tonight. You cross the two feet of carpet and stand over him in the telly light, and he looks up at you and for once in his life says absolutely nothing." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Tell him to say it.", blocks = [
+        { type = "paragraph", content = "You tell him to say the thing he says every morning. Out loud, in this room, with the house asleep upstairs." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dean" }, content = "You want me to — right. Fine. I want to fuck you. I've wanted to fuck you since the night you got off that coach with your bags, and I've thought about your cunt every single morning in that bathroom, and you knew, and you kept coming down in your knickers anyway." },
+        { type = "paragraph", content = "There it is. Six weeks of angle, gone in one breath." },
+    ] },
+    { advance_text = "Let him.", blocks = [
+        { type = "paragraph", content = "He gets your knickers down while you are still standing and turns you over the arm of the good sofa, and he does not stop talking — he has never stopped talking, it is the only thing he does — but the register has gone from jokes to filth, low, right at the back of your neck." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dean" }, content = "Look at the state of you. Go on. Quiet, though — Dad's right up there." },
+        { type = "paragraph", content = "He fucks you over the arm of the sofa in the dark with the telly still going, one hand flat between your shoulder blades, and every thirty seconds he tells you exactly what he is doing to you in case you had somehow missed it." },
+    ] },
+    { advance_text = "Keep quiet.", blocks = [
+        { type = "paragraph", content = "The stairs are eight feet away. The bannister is right there. Any one of them could come down for a glass of water and see his sister bent over the sofa taking it, and Dean knows that, and Dean is enjoying that considerably more than he is enjoying being quiet." },
+        { type = "thought_bubble", content = "You are not being quiet either. Notice that. Notice that and do it anyway." },
+    ] },
+    { advance_text = "Let him finish.", blocks = [
+        { type = "paragraph", content = "He comes with his hand over your mouth and his forehead against the back of your head, swearing into your hair, and then he stands there getting his breath while you straighten up and find your knickers on the carpet." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dean" }, content = "Same time tomorrow, is it." },
+        { type = "paragraph", content = "He has the angle back already. You tell him to shut up and go to bed, and going up the stairs past his father's door you are smiling in the dark, which is the part you will not be telling anybody." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go up."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_front_room"
+time_progression_minutes = 60
+effects = [
+  { targetType = "npc", npcId = "npc_dean", trait = "lust", op = "add", value = 8 },
+  { targetType = "npc", npcId = "npc_dean", trait = "relation", op = "add", value = 3 },
+  { targetType = "player", trait = "exposure", op = "add", value = 5, clamp = true },
+  { targetType = "player", trait = "nerve", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "hygiene", op = "add", value = -25, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 40, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -4, clamp = true },
+]
+flagEffects = [
+  { targetType = "player", flag = "dean_arrangement", op = "set" },
+]
+
+
+# =============================================================================
+# ── MAREK — THE ROTATING SLOT ────────────────────────────────────────────────
+# The lodger. Thirty-something, nights on the industrial estate, sleeps badly,
+# in the box room on the other side of her wall. He owes this family nothing and
+# is owed nothing, and in four months he will be somewhere else.
+#
+# WHY HE EXISTS STRUCTURALLY: he is the premise's answer to never-ending. Ray
+# rents the box room to cover the shortfall, so every few releases a new stranger
+# lives in the house — a NEW CHARACTER AT AN EXISTING LOCATION, which is the
+# measured release shape built into the fiction instead of bolted on. Replacing
+# him should touch nothing but this block and his [[npcs]] entry.
+#
+# HIS WINDOW IS THE EMPTY HOUSE. 09:00-16:00, when Ray and Dean are at work and
+# Cal is out — the one window no family member competes for, and the reason his
+# ladder needs no privacy management at all.
+#
+# GATES ON `need` x `exposure` TOGETHER, and takes the empty 55 band.
+# CRUDE CEILING (the Want): transactional and plain from the start. No build, no
+# history, no register to break — he says what he means in tier 1.
+# =============================================================================
+
+[[canvases]]
+id          = "hub_marek_boxroom"
+name        = "Marek"
+description = "Lane-1 hub @the_box_room, 09:00-16:00 daily — the empty-house window. Gates on need x exposure; the explicit rung takes the empty 55 exposure band. Transactional register throughout: he is the only man in this house who is not family and does not pretend the situation is anything other than what it is."
+
+[canvases.trigger]
+location      = "the_box_room"
+requires_npc  = "npc_marek"
+npc           = "npc_marek"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "first_night_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Marek"
+blocks = [
+  { type = "paragraph", content = "The box room door is half open, which is how it always is — there is no room in there to shut it against. Marek is on the bed with his back to the wall and a paperback, in a room the size of the airing cupboard, at eleven in the morning in a house with nobody else in it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stand in the doorway a minute."
+targetType = "node"
+nodeId     = "rung_marek_doorway.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him what he's paying Ray."
+targetType = "node"
+nodeId     = "rung_marek_rent.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "need", operator = "gte", value = 15 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him make you an offer."
+targetType = "node"
+nodeId     = "loop_marek_boxroom.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "need", operator = "gte", value = 35 },
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 55 },
+] }
+flagEffects = [
+  { targetType = "player", flag = "marek_arrangement", op = "set" },
+]
+
+# ── The door. Action shown, not the reason. ──────────────────────────────────
+[[canvases.nodes.exit_block.choices]]
+text             = "Tell him what it costs now."
+targetType       = "node"
+nodeId           = "loop_marek_boxroom.base"
+show_when_locked = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "need", operator = "gte", value = 75 },
+] }
+
+
+# ── Rung 0 — the doorway. Presence floor, and the only warmth in the house. ──
+[[canvases]]
+id          = "rung_marek_doorway"
+name        = "Stand in the doorway a minute"
+description = "Triggerless rung. No gate. He is the only person here who did not know her before, which makes him the only one she can be a stranger to. +3 his relation, +2 his lust, 20 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The doorway"
+blocks = [
+  { type = "paragraph", content = "You lean on the frame because there is nowhere to sit that is not the bed. He marks his page with his thumb and waits, which is a thing nobody else in this house does — Ray talks over you, Dean talks at you, Cal cannot talk at all." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_marek", trait_key = "relation", operator = "lt", value = 12 },
+  ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_marek" }, content = "You're the daughter." },
+    { type = "paragraph", content = "You say you are, and he nods and goes back to the page, and that is the whole conversation. It is the least anyone has wanted from you in six weeks and you find you stand there another minute for no reason at all." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_marek", trait_key = "relation", operator = "gte", value = 12 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He tells you about the estate — twelve-hour nights, the machine that stops for no reason, the manager who is twenty-four. He does not ask you a single question about Bristol, or the coach, or why you are here at eleven on a Tuesday." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_marek" }, content = "Everybody in this house is waiting for something. You, him, the young one. I am just here until spring." },
+    { type = "paragraph", content = "It is the first accurate thing anyone has said out loud since you got back, and he says it to a paperback, and then he offers you half a packet of biscuits he keeps on the windowsill because there is no room for a table." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let him read."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_box_room"
+time_progression_minutes = 20
+effects = [
+  { targetType = "npc", npcId = "npc_marek", trait = "relation", op = "add", value = 3 },
+  { targetType = "npc", npcId = "npc_marek", trait = "lust", op = "add", value = 2 },
+]
+
+
+# ── need 15 — the money conversation nobody in the family will have ─────────
+[[canvases]]
+id          = "rung_marek_rent"
+name        = "Ask him what he's paying Ray"
+description = "Triggerless rung, gate need>=15. The transactional register arrives with no build at all — he answers a money question with a money answer, and that is the whole difference between him and the three men she is related to. +3 need, +3 his lust, 20 min. SETS marek_terms."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The terms"
+blocks = [
+  { type = "paragraph", content = "You ask him straight out what the room costs. Nobody in this family has said a number out loud since you got here — Ray does it in an envelope, Dean does it as a joke — and Marek answers in about a second and a half." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_marek" }, content = "Two hundred. Cash, first of the month. Why?" },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Tell him why.", blocks = [
+        { type = "paragraph", content = "You tell him you are paying a hundred and twenty a week for a room half the size of his, and that you had not, until this moment, done that piece of arithmetic." },
+        { type = "paragraph", content = "He does not say anything about it being unfair. He does not say anything about family. He looks at you for a moment and then says the thing nobody else in this house is willing to say." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marek" }, content = "So he is not charging you rent. He is charging you something else and calling it rent. You know that, yes?" },
+    ] },
+    { advance_text = "Say nothing.", blocks = [
+        { type = "paragraph", content = "You do not answer. He shrugs and goes back to his page, entirely unbothered, a man who has said a true thing in a room he is leaving in four months." },
+        { type = "thought_bubble", content = "He is right. He has been in this house eleven weeks and he is right." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go and think about that."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_box_room"
+time_progression_minutes = 20
+effects = [
+  { targetType = "player", trait = "need", op = "add", value = 3, clamp = true },
+  { targetType = "npc", npcId = "npc_marek", trait = "lust", op = "add", value = 3 },
+  { targetType = "npc", npcId = "npc_marek", trait = "relation", op = "add", value = 2 },
+]
+flagEffects = [
+  { targetType = "player", flag = "marek_terms", op = "set" },
+]
+
+
+# ── need 35 x exposure 55 — the arrangement. Fills the empty 55 band. ───────
+[[canvases]]
+id          = "loop_marek_boxroom"
+name        = "Let him make you an offer"
+description = "Triggerless rung, gate need>=35 AND exposure>=55 — the exposure 55 band the meter-ceiling gate names. THE repeatable explicit surface for Marek: pooled, t5, re-enterable. Transactional, no history, no family register. He pays and he leaves in spring, and both of those are the point. +50 money, +5 need, +4 exposure, -6 pride, +8 his lust, 60 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The offer"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/marek_boxroom_t5", pool = 6, description = "Explicit — a man and a woman on a single bed in a very small bare room, daylight through a thin curtain.", search_queries = ["couple sex small bare bedroom daylight amateur", "man woman single bed tiny room afternoon"] } },
+  { type = "paragraph", content = "The house is empty until four. You come in and shut the door as far as it goes, which is most of the way, and stand at the end of the bed in a room where there is nowhere to stand except the end of the bed." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Wait for him to say it.", blocks = [
+        { type = "paragraph", content = "He puts the book down properly this time. He does not pretend to misunderstand and he does not make you say it first, which after six weeks of this house is very nearly a kindness." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marek" }, content = "Fifty. Every time, not a favour, and I do not talk to anyone in this house about it. That is the whole offer." },
+        { type = "paragraph", content = "No angle. No arrangement dressed as an envelope. A number, and terms, and a man waiting for an answer with his thumb still in his book." },
+    ] },
+    { advance_text = "Take it.", blocks = [
+        { type = "paragraph", content = "You take your top off standing where you are, because there is no room to do it anywhere else, and he watches you do it without a single word about your tits or your arse or what you look like — which is somehow filthier than Dean's entire vocabulary." },
+        { type = "paragraph", content = "He is unhurried getting his cock out. He is unhurried about all of it. He puts his hands on your hips and moves you where he wants you and you go, and the whole thing is being conducted at the pace of a man who has done this before and expects to again." },
+    ] },
+    { advance_text = "Let him.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marek" }, content = "Turn round. Hands on the wall." },
+        { type = "paragraph", content = "He fucks you against the wall of the box room with your palms flat on the wallpaper and the whole partition going, and on the other side of that wall is your bed, eighteen inches away, where you have been lying every night listening to him not sleep." },
+        { type = "paragraph", content = "He is quiet and he is thorough and he says almost nothing, and when he does speak it is instruction rather than commentary — *like that, stay there, good* — and you find that you like being told, out loud, in a house where nobody says anything." },
+    ] },
+    { advance_text = "Let him finish.", blocks = [
+        { type = "paragraph", content = "He comes over your arse and the small of your back rather than in you, without discussing it, and then hands you the towel off the radiator, and then counts fifty out of a tin on the windowsill and puts it on the bed." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marek" }, content = "Same again whenever. I am here till spring." },
+        { type = "paragraph", content = "You take the fifty. Going out past the bathroom you do the arithmetic and it comes out clean for once: this is the only money in this house that has a price on it, and it is the only money you have not had to feel anything about." },
+        { type = "thought_bubble", content = "That is the part to be frightened of. Not the fifty. That it was easier than asking Ray." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the money and go."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_box_room"
+time_progression_minutes = 60
+effects = [
+  { targetType = "player", trait = "money", op = "add", value = 50, clamp = true },
+  { targetType = "player", trait = "need", op = "add", value = 5, clamp = true },
+  { targetType = "player", trait = "exposure", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "hygiene", op = "add", value = -25, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 35, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -6, clamp = true },
+  { targetType = "npc", npcId = "npc_marek", trait = "lust", op = "add", value = 8 },
+]
+
+
+# =============================================================================
+# THE KITCHEN — the crossing point. Everyone passes through, nobody stays, and
+# there is one chair that does not wobble and it is not hers.
+#
+# Four surfaces against the schedule already built:
+#   Cal   07:40-08:00  twenty minutes, cereal too fast, late again
+#   Dean  08:00-09:00  down from the bathroom she just watched him in
+#   Marek 16:00-17:30  the only two adults in the house at that hour
+#   Ray   Mondays      the keep, as a standing scene beyond the engine passage
+#
+# Written against references/register.md: explicit beats stay on the body for
+# their whole length; the interiority gets its own beat, after.
+# =============================================================================
+
+[[canvases]]
+id          = "hub_cal_kitchen"
+name        = "Cal (breakfast)"
+description = "Lane-1 hub @the_kitchen, 07:40-08:00 weekdays. Twenty minutes and he cannot look at her. The low-tier surface for the character who has no defences at all."
+
+[canvases.trigger]
+location      = "the_kitchen"
+requires_npc  = "npc_cal"
+npc           = "npc_cal"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "arrival_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Cal at the counter"
+blocks = [
+  { type = "paragraph", content = "Twenty past seven and Cal is eating cereal standing at the counter at a speed that suggests he is already late, which he is, every single morning, in a way that has been true since he was eleven." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Make him wait."
+targetType = "node"
+nodeId     = "rung_cal_breakfast.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Reach past him for the cupboard."
+targetType = "node"
+nodeId     = "rung_cal_reach.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 15 },
+] }
+
+
+[[canvases]]
+id          = "rung_cal_breakfast"
+name        = "Make him wait"
+description = "Triggerless rung. No gate. He is late and she is between him and the door, and he will stand there as long as she talks. +3 his relation, +2 his lust, 15 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Late"
+blocks = [
+  { type = "paragraph", content = "You stand in the doorway with your tea and ask him about the year, the course, whether he has heard from the girl from sixth form. He answers all of it. He is nine minutes late by the end and he answers all of it, because you are in the doorway and he would have to ask you to move." },
+  { type = "paragraph", content = "He never asks you to move. That is the whole of Cal in one sentence, and you have started using it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cal" }, content = "I've got to — it's fine. It's fine, they don't mind." },
+  { type = "paragraph", content = "They do mind. He goes anyway, sideways past you through a gap you did not widen, and you drink your tea in a kitchen that smells of him." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let him go."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_kitchen"
+time_progression_minutes = 15
+effects = [
+  { targetType = "npc", npcId = "npc_cal", trait = "relation", op = "add", value = 3 },
+  { targetType = "npc", npcId = "npc_cal", trait = "lust", op = "add", value = 2 },
+]
+
+
+[[canvases]]
+id          = "rung_cal_reach"
+name        = "Reach past him for the cupboard"
+description = "Triggerless rung, gate exposure>=15. The cupboard is above his head and there is one way to get to it. Explicit beat stays on the body; the interiority is a separate beat after. +5 his lust, +3 exposure, -1 pride, 15 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The cupboard"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/cal_kitchen_reach_t4", pool = 4, description = "A woman in a vest reaching for a high kitchen cupboard beside a young man at the counter.", search_queries = ["woman reaching high cupboard kitchen vest", "girl stretching up kitchen cabinet man beside"] } },
+  { type = "paragraph", content = "The mugs are on the top shelf and Cal is directly under it, and there is exactly one way to get to them." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Reach.", blocks = [
+        { type = "paragraph", content = "You come in against his shoulder and go up on your toes, and the vest goes with you — up over your stomach, up under your tits, and your nipples come out from under the hem about four inches from his face. Your bare stomach is against his arm. Your thigh is against his hip. He has stopped chewing entirely." },
+        { type = "paragraph", content = "You take your time finding a mug. There are four mugs. You look at all four while your tits sit level with his mouth and his ears go scarlet and his hand grips the edge of the counter hard enough to whiten." },
+    ] },
+    { advance_text = "Come down slowly.", blocks = [
+        { type = "paragraph", content = "You come down off your toes an inch at a time, which drags your nipples and the whole front of the vest down the length of his arm, and you feel his cock go hard against your hip through his joggers on the way past. Neither of you says anything about it. You put the mug on the counter." },
+    ] },
+    { advance_text = "Then go.", blocks = [
+        { type = "thought_bubble", content = "He is nineteen and he is going to think about that for a week." },
+        { type = "paragraph", content = "You take your tea and go, and behind you a boy stands very still in a kitchen with a bowl of cereal going soft, and is late." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take your tea."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_kitchen"
+time_progression_minutes = 15
+effects = [
+  { targetType = "npc", npcId = "npc_cal", trait = "lust", op = "add", value = 5 },
+  { targetType = "player", trait = "exposure", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 15, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -1, clamp = true },
+]
+
+
+# ── Marek, 16:00-17:30. Two adults, an empty house, and no history. ─────────
+[[canvases]]
+id          = "hub_marek_kitchen"
+name        = "Marek (before his shift)"
+description = "Lane-1 hub @the_kitchen, 16:00-17:30 daily — his second surface, and the only hour when the two of them are the only adults in the house. The transactional register in a domestic room. Gates on need."
+
+[canvases.trigger]
+location      = "the_kitchen"
+requires_npc  = "npc_marek"
+npc           = "npc_marek"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "first_night_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Before the shift"
+blocks = [
+  { type = "paragraph", content = "Half four and Marek is making the thing he makes before every shift — rice, a tin, whatever is in the fridge that is his. He cooks like a man who has cooked for one for a long time and stopped minding." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Eat with him."
+targetType = "node"
+nodeId     = "rung_marek_eat.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him for a sub till Monday."
+targetType = "node"
+nodeId     = "rung_marek_sub.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "need", operator = "gte", value = 25 },
+] }
+
+
+[[canvases]]
+id          = "rung_marek_eat"
+name        = "Eat with him"
+description = "Triggerless rung. No gate. The only meal anybody in this house eats sitting down with another person. +4 his relation, 45 min, +energy."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Rice"
+blocks = [
+  { type = "paragraph", content = "He puts a second plate out without asking, which is not a thing anybody in this family does, and you sit down in the chair that does not wobble because he has given it to you." },
+  { type = "paragraph", content = "You eat rice and a tin of something at a kitchen table at five o'clock with a man who is leaving in spring. He asks how the shop is. You tell him the truth about the shop, which you have not done with anyone else, because the truth is that it is fine and being fine is the worst part." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_marek" }, content = "You are not going to be here in a year." },
+  { type = "paragraph", content = "You ask how he knows. He says because nobody who is going to be somewhere in a year eats their tea at five with the lodger." },
+  { type = "paragraph", content = "Then he washes both plates, and puts his coat on, and goes to work." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Wash up."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_kitchen"
+time_progression_minutes = 45
+effects = [
+  { targetType = "npc", npcId = "npc_marek", trait = "relation", op = "add", value = 4 },
+  { targetType = "player", trait = "energy", op = "add", value = 15, clamp = true },
+]
+
+
+[[canvases]]
+id          = "rung_marek_sub"
+name        = "Ask him for a sub till Monday"
+description = "Triggerless rung, gate need>=25. The same ask she makes of Ray, made of a man who will name a price instead of an envelope. Explicit at the top band; the interiority is its own beat. +30 money, +4 need, -4 pride, +5 his lust, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "A sub"
+blocks = [
+  { type = "paragraph", content = "You ask him for thirty until Monday. He puts the spoon down and looks at you for slightly longer than the question needs." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_marek" }, content = "I can do thirty. You know I am not Ray. I will want it back, or I will want something." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Ask what something.", blocks = [
+        { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+          { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 45 },
+        ] } }, blocks = [
+          { type = "paragraph", content = "He tells you to sit on the chair that does not wobble and take the vest off, and nothing else, and he will look at you while he finishes his tea." },
+          { type = "paragraph", content = "So you sit at a kitchen table at five in the afternoon with your tits out and your hands in your lap while a man eats rice, and he looks at them the whole time — properly, both of them, the way you would look at something you were paying for — and does not touch you once and does not pretend it is anything but a transaction." },
+        ] },
+        { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+          { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 45 },
+        ] } }, blocks = [
+          { type = "video", props = { pool_dir = "sex/marek_kitchen_t5", pool = 4, description = "Explicit — a woman on her knees in a small kitchen in front of a seated man, late afternoon light.", search_queries = ["woman kneeling kitchen man seated blowjob amateur", "girl on knees small kitchen man chair"] } },
+          { type = "paragraph", content = "He does not make you ask twice and he does not dress it up. He pushes the chair back from the table and has his cock out before you are all the way down onto the lino, and you take it in your mouth in a kitchen that smells of rice with the back door glass right there." },
+          { type = "paragraph", content = "He holds the back of your head without pushing and lets you work, thick and warm on your tongue, one hand still round the mug. When you get your tits out of the vest and put them against his thigh he makes the first sound he has made and his cock jumps against the roof of your mouth, and he finishes down your throat with his fist closed in your hair." },
+        ] },
+      ] },
+    { advance_text = "Take the thirty.", blocks = [
+        { type = "paragraph", content = "He counts it out of the tin, and washes his mug, and puts his coat on." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marek" }, content = "Monday, or not. It is not a debt in this house, it is a debt with me. There is a difference and you know it." },
+        { type = "thought_bubble", content = "There is a difference. That is exactly why you asked him and not Ray." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let him go to work."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_kitchen"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "money", op = "add", value = 30, clamp = true },
+  { targetType = "player", trait = "need", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "exposure", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -4, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 20, clamp = true },
+  { targetType = "npc", npcId = "npc_marek", trait = "lust", op = "add", value = 5 },
+]
+
+
+# ── Dean, 08:00-09:00 — straight down from the bathroom ─────────────────────
+[[canvases]]
+id          = "rung_dean_after"
+name        = "Neither of you mentions it"
+description = "Triggerless rung off hub_dean_kitchen, gate exposure>=25. He comes down from the bathroom she was watching through the gap twenty minutes ago, and they have breakfast. The whole scene is the not-mentioning. +5 his lust, +3 nerve, 20 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "After"
+blocks = [
+  { type = "paragraph", content = "Eight o'clock. His hair is wet. Twenty minutes ago you had your eye to a gap in a door watching him finish with his fist round his cock and his eyes on yours, and now he is getting a bowl down and asking whether there is any of the good coffee left." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Say there isn't.", blocks = [
+        { type = "paragraph", content = "You say there is not. He says of course there is not. He gets the other coffee and stands at the counter with it, and the whole conversation is about coffee, and neither of you has looked directly at the other since he came in." },
+    ] },
+    { advance_text = "Look at him.", blocks = [
+        { type = "paragraph", content = "Then you do look, and he is already looking, and it lasts about three seconds — which in a kitchen at eight in the morning is a very long time." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dean" }, content = "Nine minutes, that. You'd think a man could get nine minutes." },
+        { type = "paragraph", content = "That is as close as either of you comes to saying it. He drinks his coffee. You eat your toast. Ray comes through for his keys and says morning to both of you and neither of you can look at him either." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Finish your toast."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_kitchen"
+time_progression_minutes = 20
+effects = [
+  { targetType = "npc", npcId = "npc_dean", trait = "lust", op = "add", value = 5 },
+  { targetType = "player", trait = "nerve", op = "add", value = 3, clamp = true },
+]
+
+
+# =============================================================================
+# THE GARAGE — Dean's weekend row had a schedule and NO CONTENT. The only row in
+# the game with nothing on it. Cold, strip-lit, oil and old carpet, and a radio
+# on a shelf playing to nobody.
+# =============================================================================
+
+[[canvases]]
+id          = "hub_dean_garage"
+name        = "Dean (the weights)"
+description = "Lane-1 hub @the_garage, 14:00-17:00 weekends — the scheduled row that had nothing on it. Three hours, nobody else in the house, and a man who has been lifting the same weights in his father's garage since he was seventeen. Gates on exposure."
+
+[canvases.trigger]
+location      = "the_garage"
+requires_npc  = "npc_dean"
+npc           = "npc_dean"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "arrival_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The weights"
+blocks = [
+  { type = "paragraph", content = "Saturday afternoon and the garage door is up a foot for the air. Dean is on the bench in a vest with the radio going, doing the thing he has done in this garage since he was seventeen, which is the same six exercises in the same order for three hours." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit on the freezer and watch."
+targetType = "node"
+nodeId     = "rung_dean_weights.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Spot him."
+targetType = "node"
+nodeId     = "rung_dean_spot.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 25 },
+] }
+
+
+[[canvases]]
+id          = "rung_dean_weights"
+name        = "Sit on the freezer and watch"
+description = "Triggerless rung off hub_dean_garage. No gate. The only version of Dean with no audience and no angle — he cannot do the funny voice while he is under a bar. +3 his relation, +2 his lust, 45 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The freezer"
+blocks = [
+  { type = "paragraph", content = "There is a chest freezer against the wall that has not worked since 2011 and everyone sits on it, and you sit on it with your heels against the door and watch your stepbrother lift things and put them down again." },
+  { type = "paragraph", content = "He cannot do the voice under a bar. That is the discovery of the afternoon — that the angle needs breath, and between the fourth and fifth rep of anything he has none, so what you get for three hours is a man being completely straightforward with you for the first time since you were both children." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_dean" }, content = "Dad used to come out here. Before. Just sat where you are." },
+  { type = "paragraph", content = "You ask before what. He says before, and racks the bar, and that is the end of the subject, and the radio does an advert for a carpet warehouse in a town neither of you has been to." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave him to it."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_garage"
+time_progression_minutes = 45
+effects = [
+  { targetType = "npc", npcId = "npc_dean", trait = "relation", op = "add", value = 3 },
+  { targetType = "npc", npcId = "npc_dean", trait = "lust", op = "add", value = 2 },
+]
+
+
+[[canvases]]
+id          = "rung_dean_spot"
+name        = "Spot him"
+description = "Triggerless rung, gate exposure>=25. Standing over the bench means standing over his face. Explicit beats stay on the body; interiority is its own beat after (references/register.md). +6 his lust, +4 exposure, +2 nerve, -2 pride, 45 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Spotting"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/dean_garage_spot_t4", pool = 4, description = "A woman standing over a man lying on a weight bench, leaning down, garage strip light.", search_queries = ["woman spotting man bench press garage close", "girl standing over man weight bench gym"] } },
+  { type = "paragraph", content = "He asks you to spot him because there is nobody else in the house, and spotting means standing at the head of the bench with your hands under the bar, which means standing directly over his face." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Stand over him.", blocks = [
+        { type = "paragraph", content = "You are in the vest and the shorts because it is Saturday. From flat on his back he is looking straight up into the loose front of it — at your tits hanging in there, both of them, the whole way down — and there is not one thing either of you can do about the geometry." },
+        { type = "paragraph", content = "He does eight reps. He does not look anywhere else for any of the eight, and his cock is obvious through the shorts by about the fourth, and your nipples have gone hard in a cold garage which is deniable and is not deniable." },
+    ] },
+    { advance_text = "Lean in on the last one.", blocks = [
+        { type = "paragraph", content = "On the last rep you lean right in to take the bar — properly in, so your tits are over his face and your hair is on his chest — and hold it there while he racks it, and he is breathing like a man who has done a great deal more than eight reps." },
+        { type = "paragraph", content = "His hand comes up and settles on the back of your thigh, high, at the hem, and stays there. Neither of you moves for a while. The radio does the weather." },
+    ] },
+    { advance_text = "Straighten up.", blocks = [
+        { type = "thought_bubble", content = "You could stay bent over him. That is what is actually on the table, in a garage, on a Saturday." },
+        { type = "paragraph", content = "You straighten up. He takes his hand back. He says cheers, and gets a drink of water, and does the next six sets without asking you to spot him again — and without asking you to leave, either, and you sit back on the freezer for all of it." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sit back down."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_garage"
+time_progression_minutes = 45
+effects = [
+  { targetType = "npc", npcId = "npc_dean", trait = "lust", op = "add", value = 6 },
+  { targetType = "player", trait = "exposure", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "nerve", op = "add", value = 2, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 20, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -2, clamp = true },
+]
+
+
+# =============================================================================
+# THE FRONT ROOM — the ANCHOR. It must hold >=25% of the finished total, which
+# means 9,000 words, which means it gets fed in every increment and not topped
+# up at the end. This is the first instalment.
+# =============================================================================
+
+[[canvases]]
+id          = "activity_frontroom_late"
+name        = "The room after they've all gone up"
+description = "Wren-solo @the_front_room, 00:30-03:00. The anchor's solo surface — no NPC needed, so it fills the anchor without competing with the three hubs. Banded on pride: what she does alone in the room the family sits in changes as the counterweight falls."
+
+[canvases.trigger]
+location      = "the_front_room"
+is_repeatable = true
+priority      = 2
+is_active     = true
+schedules     = [ { weekdays = [0, 1, 2, 3, 4, 5, 6], start_time = "00:30", end_time = "03:00" } ]
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "first_night_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "After they've gone up"
+blocks = [
+  { type = "paragraph", content = "Gone half twelve and the house has emptied upward. Ray went at eleven. Dean went at one or did not. The telly is still on because in this house the telly is always still on, and you are the only person downstairs in it." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "pride", operator = "gte", value = 75 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "You sit in the middle of the good sofa, which nobody was ever allowed on, and you have the whole of it and it is not much of a prize." },
+    { type = "paragraph", content = "You do the thing you have done every night since you got back: work out how many weeks of shop money it would take to get a deposit together, and reach the same number, and put the phone face-down. It is eleven weeks. It has been eleven weeks for a month." },
+    { type = "thought_bubble", content = "Eleven weeks is not the problem. The problem is that you have stopped counting down." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "pride", operator = "lt", value = 75 },
+    { type = "trait", subject = "player", trait_key = "pride", operator = "gte", value = 45 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "You take Ray's chair. Not the sofa — the chair, the one nobody sits in, which is still warm, and you sit in it with your feet up under you and let the telly happen." },
+    { type = "paragraph", content = "The room smells of him and of the house. Upstairs a floorboard goes on the landing and you know which one and therefore roughly who, and you sit very still until it stops, and you are disappointed when it stops, which is a new development." },
+    { type = "paragraph", content = "You have stopped doing the deposit arithmetic. You could not say which week that stopped." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "pride", operator = "lt", value = 45 },
+  ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/frontroom_late_alone_t5", pool = 4, description = "Explicit — a woman alone on a sofa at night lit by a television, one hand between her legs.", search_queries = ["woman alone sofa night tv light touching herself", "girl on couch dark room hand between legs"] } },
+    { type = "paragraph", content = "You lie along the good sofa in the vest and nothing else and put your hand between your legs in the middle of the front room, with the door to the hall standing open and the stairs eight feet away and every man in this house asleep at the top of them." },
+    { type = "paragraph", content = "You are wet before you have properly started. You work your clit with two fingers and your knees apart and your eyes on the ceiling, listening to the boards, and the whole point of doing it here instead of upstairs is that somebody could come down for a glass of water at any moment and you have decided that you would not stop." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go up eventually."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_front_room"
+time_progression_minutes = 60
+effects = [
+  { targetType = "player", trait = "arousal", op = "add", value = -20, clamp = true },
+  { targetType = "player", trait = "exposure", op = "add", value = 1, clamp = true },
+]
+
+
+# ── Ray's hub gains a post-arrangement band ─────────────────────────────────
+[[canvases]]
+id          = "rung_ray_after"
+name        = "Sit with him after"
+description = "Triggerless rung off hub_ray_frontroom, gate ray_arrangement. What the two of them are once the money has stopped being mentioned. The register drops back to quiet — his tier-3 crude is INSIDE the loop, not out here, per the Want. +3 his relation, 45 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "After"
+blocks = [
+  { type = "paragraph", content = "The envelope has stopped appearing on the arm of the sofa. Neither of you decided that; it just stopped, the way the Monday kitchen conversation stopped, and what is left is a man and his stepdaughter watching a programme about people buying a house in Spain at half ten on a Wednesday." },
+  { type = "paragraph", content = "You sit with your legs across his lap because that is where you sit now. He rests his hand on your shin. He does not do anything with it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "Your mother used to sit like that." },
+  { type = "paragraph", content = "It is the first time he has said her name in this room in two years, and he says it while his hand is on your leg, and you understand — completely, all at once, sitting on the good sofa — that these two facts have been the same fact for some time." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Don't move your legs.", blocks = [
+        { type = "paragraph", content = "You do not move your legs. You ask him whether that is a problem." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "No. No, it's not a problem." },
+        { type = "paragraph", content = "And that is the whole conversation, and the programme goes to an advert, and his thumb moves once on your shin and then stops moving." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stay till the end of it."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_front_room"
+time_progression_minutes = 45
+effects = [
+  { targetType = "npc", npcId = "npc_ray", trait = "relation", op = "add", value = 3 },
+  { targetType = "npc", npcId = "npc_ray", trait = "lust", op = "add", value = 2 },
+]
+
+
+# ── ANCHOR INSTALMENT — front-room rungs, deepening what is already here ─────
+
+[[canvases]]
+id          = "rung_cal_lap"
+name        = "Sit on him"
+description = "Triggerless rung off hub_cal_frontroom, gate nerve>=45 AND his lust>=20. Between the contact rung and the loop. Explicit; interiority gets its own beat after (register.md). +7 his lust, +3 nerve, +2 exposure, -2 pride, 45 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "On him"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/cal_frontroom_lap_t5", pool = 4, description = "Explicit — a woman straddling a young man on a sofa, television light, a small living room.", search_queries = ["woman straddling man sofa living room amateur", "girl on mans lap couch night"] } },
+  { type = "paragraph", content = "The house has gone up. You take the remote out of his hand, put it on the arm, and get across him with a knee either side of his hips before he has worked out what is happening." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Settle.", blocks = [
+        { type = "paragraph", content = "His cock comes up hard against you through two layers of nothing and you settle down onto it and stay there. His hands go to your waist and grip and do not move, because he does not know if he is allowed to move them, and you have not told him." },
+        { type = "paragraph", content = "You pull the vest off over your head. His hands come up off your waist to your tits without being asked — the first thing he has ever done to you without asking — and his palms are hot and he is shaking." },
+    ] },
+    { advance_text = "Move.", blocks = [
+        { type = "paragraph", content = "You work yourself against him slowly, still in your knickers, rubbing your cunt down the length of his cock through the fabric while he holds your tits and swears at your collarbone. He is wet through the front of his joggers inside a minute." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cal" }, content = "June — I'm going to — can I, is it—" },
+        { type = "paragraph", content = "You tell him yes. You do not stop moving. He comes in his joggers under you with your nipple in his mouth and both hands full of your arse, going rigid all the way through." },
+    ] },
+    { advance_text = "Get off him.", blocks = [
+        { type = "thought_bubble", content = "He is going to be nineteen for another four months and you are going to remember this when he is forty." },
+        { type = "paragraph", content = "You get up, find the vest, and put the remote back in his hand. He is still sitting exactly as you left him when you get to the door." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go up."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_front_room"
+time_progression_minutes = 45
+effects = [
+  { targetType = "npc", npcId = "npc_cal", trait = "lust", op = "add", value = 7 },
+  { targetType = "player", trait = "nerve", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "exposure", op = "add", value = 2, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 30, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -2, clamp = true },
+]
+
+
+[[canvases]]
+id          = "rung_dean_bargain"
+name        = "Make him say what it's worth"
+description = "Triggerless rung off hub_dean_late, gate need>=45 AND his lust>=30. Dean is the only one who will name a number to her face without an envelope or an angle. Where `need` and `exposure` meet. +6 his lust, +40 money, +4 need, -5 pride, 45 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "What it's worth"
+blocks = [
+  { type = "paragraph", content = "Half twelve and he is on the sofa in the dark and you stand in front of the telly so he has to look past you or at you." },
+  { type = "paragraph", content = "You tell him you are short again this week. He laughs, properly, once, because of all the men in this house he is the one who finds the whole arrangement funniest and least surprising." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Wait him out.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dean" }, content = "Dad does it in an envelope so he doesn't have to hear himself. I'm not doing that. Forty. Get your knickers off and come here." },
+        { type = "paragraph", content = "It is the first time anybody in this house has said the actual shape of it out loud, and hearing it hurts about a tenth as much as you expected and turns you on about ten times more, which you file away to be appalled at later." },
+    ] },
+    { advance_text = "Do it.", blocks = [
+        { type = "paragraph", content = "You take them off standing up in the middle of the front room and go and put yourself over his lap on your knees on the good sofa, and he gets two fingers in your cunt without any preamble at all and finds you soaking." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dean" }, content = "Look at the state of that. Forty quid and you're wetter than I am." },
+        { type = "paragraph", content = "He works you with his hand and his mouth at your ear narrating every bit of it — what your cunt is doing, what your tits look like from up there, how long he has been going to do this — and you come on his fingers with your face in the cushion of a sofa nobody was ever allowed on." },
+    ] },
+    { advance_text = "Take the forty.", blocks = [
+        { type = "paragraph", content = "He counts it out of his back pocket onto the arm, still sitting down, and puts the telly back up two bars." },
+        { type = "thought_bubble", content = "Ray's envelope is kinder and it is worse. That is the whole thing and you cannot unsee it now." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take it and go up."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_front_room"
+time_progression_minutes = 45
+effects = [
+  { targetType = "player", trait = "money", op = "add", value = 40, clamp = true },
+  { targetType = "player", trait = "need", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "nerve", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 35, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -5, clamp = true },
+  { targetType = "npc", npcId = "npc_dean", trait = "lust", op = "add", value = 6 },
+]

@@ -1,0 +1,1124 @@
+# =============================================================================
+# Back Home — 3_activities
+#
+# The daily loop, and the bathroom.
+#
+# WHY THE BATHROOM COMES FIRST. Gate 2 wants >=7.5% of beats carrying 3+ explicit
+# words, but nerve / exposure / need all start at 0 — a seduction ladder at tier 0
+# would be absurd. The reference game resolves this the same way: its early heat is
+# not chosen by the player at all. Her promiscuity sits at zero while the world
+# still acts on her. So the explicit floor at v0.1 is carried by TRIGGERED content
+# — things that happen to her — and the STANDING ladder stays cold until she has
+# climbed it.
+#
+# The bathroom is the machine: one bathroom, four adults, a door that does not sit
+# flush, and an extractor loud enough that she cannot hear the landing. All three
+# facts were planted on night one.
+# =============================================================================
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THE DAILY LOOP — the clicks that exist whether or not anything is happening
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id          = "activity_sleep"
+name        = "Sleep"
+description = "Wren-solo @her_room. The day-router: advances ~9h, restores energy, runs decay. Available 21:00-05:00 (wraps midnight in one row — the engine handles it)."
+
+[canvases.trigger]
+location      = "her_room"
+is_repeatable = true
+priority      = 2
+is_active     = true
+schedules     = [ { weekdays = [0, 1, 2, 3, 4, 5, 6], start_time = "20:00", end_time = "05:00" } ]
+
+[[canvases.nodes]]
+id   = "sleep"
+name = "Sleep"
+blocks = [
+  { type = "paragraph", content = "The bed is the same bed. It was too short for you at seventeen and it has not grown. You lie in the dark listening to the house do the things a house does at night — the boiler, the boards, someone on the landing who does not knock on anything." },
+  { type = "paragraph", content = "You sleep the way you have slept since you got back: hard for four hours, then thin." },
+]
+exit_block = { type = "location", text = "Morning.", config = { destinationType = "specific", locationId = "her_room", time_progression_minutes = 540, effects = [
+  { targetType = "player", trait = "energy", op = "add", value = 100, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "activity_wash"
+name        = "Wash"
+description = "Wren-solo @the_bathroom. Restores hygiene, 30 min. GATED is_absent (any NPC) — the room has to be free. Carries the walk-in substitution: this is the mandatory daily click the world ambushes."
+
+[canvases.trigger]
+location      = "the_bathroom"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "first_night_done", operator = "is_true" },
+  { type = "npc_at_location", location_id = "the_bathroom", operator = "is_absent" },
+] }
+substitutions = [
+  { target_canvas_id = "walkin_cal_wash", chance = 0.35, conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_done", operator = "is_true" },
+  ] } },
+  { target_canvas_id = "walkin_ray_wash", chance = 0.30, conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 35 },
+  ] } },
+  { target_canvas_id = "walkin_dean_wash", chance = 0.30, conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 45 },
+  ] } },
+  { target_canvas_id = "walkin_marek_wash", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 55 },
+  ] } },
+]
+
+[[canvases.nodes]]
+id   = "wash"
+name = "Wash"
+blocks = [
+  { type = "paragraph", content = "You get the door shut and the extractor comes on with the light, roaring, and for as long as the water runs you cannot hear a thing that happens on the other side of that door." },
+  { type = "paragraph", content = "You have started noticing that. You have started noticing it every time." },
+]
+exit_block = { type = "location", text = "Dry off.", config = { destinationType = "specific", locationId = "the_bathroom", time_progression_minutes = 30, effects = [
+  { targetType = "player", trait = "hygiene", op = "add", value = 45, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "activity_shift"
+name        = "Take a shift"
+description = "Wren-solo @the_shop. Six hours on the till. Costs 25 energy, pays 30 money, once per day, 09:00-18:00. The only money that is hers — and the reason `need` can stay low if she works for it."
+
+[canvases.trigger]
+location             = "the_shop"
+is_repeatable        = true
+priority             = 3
+is_active            = true
+max_triggers_per_day = 1
+costs                = [ { trait = "energy", value = 25 } ]
+schedules            = [ { weekdays = [0, 1, 2, 3, 4, 5, 6], start_time = "09:00", end_time = "18:00" } ]
+
+[[canvases.nodes]]
+id   = "shift"
+name = "The shift"
+blocks = [
+  { type = "paragraph", content = "Six hours on the till. A man buys rizla and asks if you're new and you say you're back, and he says back from where, and you say it doesn't matter, and he agrees with you." },
+  { type = "paragraph", content = "It is thirty pounds. In Bristol you spent thirty pounds on a round without thinking about it. Here it is a week of not asking Ray for anything, and that turns out to be worth considerably more than thirty pounds." },
+]
+exit_block = { type = "location", text = "Walk home.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 360, effects = [
+  { targetType = "player", trait = "money", op = "add", value = 30, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = 2, clamp = true },
+] } }
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THE BATHROOM — the triggered layer. This is where the heat lives at tier 0.
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id          = "bath_occupied"
+name        = "Someone's in there"
+description = "Auto-fire @the_bathroom when ANY npc is present (any-NPC form of npc_at_location — omit npc_id). Priority above activity_wash so the room reads occupied before it reads washable. Teaches contention: one bathroom, four adults."
+
+[canvases.trigger]
+location      = "the_bathroom"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_bathroom", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "occupied"
+name = "Occupied"
+blocks = [
+  { type = "paragraph", content = "The door is shut and the extractor is going and there is a bar of light under it. Someone got here first. In this house someone has always got here first, and there is one of these rooms, and four of you." },
+  { type = "paragraph", content = "You stand on the landing with your towel over your arm like a person queueing." },
+]
+exit_block = { type = "location", text = "Wait your turn.", config = { destinationType = "specific", locationId = "the_landing", time_progression_minutes = 10 } }
+
+
+# ── Peep: Ray, mornings ──────────────────────────────────────────────────────
+# Hosted at the LANDING — the vantage, not the room. The gap in the door was
+# planted on night one and it works in both directions.
+[[canvases]]
+id          = "peep_ray_bathroom"
+name        = "The gap in the door"
+description = "Repeatable @the_landing, once per day, gated npc_at_location(the_bathroom, npc_ray, is_present). Her side of the gap she found on night one. Explicit, repeatable, and available at nerve 0 — the world acts, she only looks. +4 exposure, +3 nerve, -3 pride."
+
+[canvases.trigger]
+location             = "the_landing"
+is_repeatable        = true
+priority             = 5
+is_active            = true
+max_triggers_per_day = 1
+conditions           = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "first_night_done", operator = "is_true" },
+  { type = "npc_at_location", location_id = "the_bathroom", npc_id = "npc_ray", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The gap"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/peep_ray_shower_t4", pool = 4, description = "POV through a narrow gap in a bathroom door at a man showering, steam, partial view.", search_queries = ["peeking through door gap man shower pov", "hidden view man in shower steam voyeur"] } },
+  { type = "paragraph", content = "Ray is in there. You know it is Ray because Ray is the only one who runs the water that hot, and the landing is warm with it, and the boards outside the door are damp." },
+  { type = "paragraph", content = "The gap is where you left it. A finger's width, hinge side, where the frame has dropped. You are standing on the landing of your father's house at twenty to seven in the morning and there is a decision in front of you that you have already made, because you are still standing here." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Look.", blocks = [
+        { type = "paragraph", content = "You lean in. The mirror is fogged in a band across the middle and clear at the bottom, and what it gives you is Ray from the hip down, side on, one hand flat on the tiles — wet, naked, and hard." },
+        { type = "paragraph", content = "His cock is up against his belly, thick and dark at the head, and he is not touching it. He is just standing under the water with his hand on the wall waiting for it to go down. You have seen this man in swimming trunks and hospital gowns and you are looking at his cock, and the arithmetic your body is doing about that is not the arithmetic you would have predicted." },
+    ] },
+    { advance_text = "Keep looking.", blocks = [
+        { type = "paragraph", content = "It does not go down. He gives up waiting and takes his cock in his fist, and the stroke is short and grim and entirely unromantic — a man dealing with a thing before work. His balls are tight up against him. His other hand stays flat on the tile like he needs it there." },
+        { type = "thought_bubble", content = "Move. There is no version of this where you get to keep standing here." },
+        { type = "paragraph", content = "You do not move. You stand on the landing and watch your stepfather fuck his own fist, and the extractor covers the sound of it, and covers the sound of you, and your thighs have gone tight in a way you are going to have to think about later." },
+    ] },
+    { advance_text = "Until he finishes.", blocks = [
+        { type = "paragraph", content = "It does not take long. He braces on the tiles, his shoulders go, and he spills over his own knuckles in three thick pulses that the water takes off him. Then he stands there with his head down and his cock still half-hard in his hand, like a man who has just lost an argument." },
+        { type = "paragraph", content = "You get off the landing before the water stops. Your face is hot and your hands are not steady and underneath all of it there is a small, appalling flicker of something that is nothing at all like shame." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Get out of the hall.", config = { destinationType = "specific", locationId = "the_landing", time_progression_minutes = 15, effects = [
+  { targetType = "player", trait = "exposure", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "nerve", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 20, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -3, clamp = true },
+] } }
+
+
+# ── Peep: Cal, mornings ──────────────────────────────────────────────────────
+[[canvases]]
+id          = "peep_cal_bathroom"
+name        = "Cal takes his time"
+description = "Repeatable @the_landing, once per day, gated npc_at_location(the_bathroom, npc_cal, is_present). The easy one — she is not even really hiding, and he is nineteen and takes forty minutes in there for a reason. +5 exposure, +2 nerve."
+
+[canvases.trigger]
+location             = "the_landing"
+is_repeatable        = true
+priority             = 5
+is_active            = true
+max_triggers_per_day = 1
+conditions           = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "first_night_done", operator = "is_true" },
+  { type = "npc_at_location", location_id = "the_bathroom", npc_id = "npc_cal", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Forty minutes"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/peep_cal_shower_t4", pool = 4, description = "Young man alone in a shower seen through a narrow gap, steam, partial view.", search_queries = ["young man shower alone voyeur pov gap", "peek through bathroom door young man showering"] } },
+  { type = "paragraph", content = "Cal has been in there thirty-five minutes and the whole house knows what a nineteen-year-old is doing in a bathroom for thirty-five minutes, and the whole house has agreed to keep not knowing it." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Look.", blocks = [
+        { type = "paragraph", content = "He is not even careful. He is sat on the edge of the bath with the shower running beside him and not on him, naked, phone propped against the taps, fist going on his cock with an urgency that has nothing patient in it at all." },
+        { type = "paragraph", content = "He is thinner than you remember and he has got a man's hands now and a man's cock, and both of those are strange things to be finding out through a gap in a door." },
+    ] },
+    { advance_text = "Listen.", blocks = [
+        { type = "paragraph", content = "And then you hear it, under the water, and it stops being funny." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cal" }, content = "…June — fuck — June —" },
+        { type = "paragraph", content = "He says your name twice more, and then he is coming — up his own stomach, chin down, biting the sound off into his wrist, trying to be quiet in a room where nobody could hear him anyway. He is still stroking his cock through the last of it when you make yourself step back." },
+        { type = "thought_bubble", content = "He is nineteen. He is your brother. He is nineteen." },
+        { type = "paragraph", content = "You go back to your room and sit on the bed with your hands flat on your knees for a while, and what you keep coming back to is not that he did it. It is that he said it out loud, in a house where nobody says anything out loud, and that you were on the other side of the door to hear it." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Back to your room.", config = { destinationType = "specific", locationId = "the_landing", time_progression_minutes = 15, effects = [
+  { targetType = "player", trait = "exposure", op = "add", value = 5, clamp = true },
+  { targetType = "player", trait = "nerve", op = "add", value = 2, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 25, clamp = true },
+], flagEffects = [
+  { targetType = "player", flag = "heard_cal_say_it", op = "set" },
+] } }
+
+
+# ── The walk-in — it happens TO her ──────────────────────────────────────────
+# substitution_only: reached ONLY as a substitution on activity_wash. This is the
+# mandatory daily click turned into an ambush, which is the pattern the reference
+# game's release commits use over and over ("when exposed", "at high stress").
+[[canvases]]
+id          = "walkin_cal_wash"
+name        = "The door that doesn't lock"
+description = "substitution_only, once per day, 35% on activity_wash. Cal comes in while she is washing — the extractor means she does not hear him. Not chosen by her: this is the world acting at tier 0. +6 exposure, -2 pride."
+
+[canvases.trigger]
+location             = "the_bathroom"
+substitution_only    = true
+is_repeatable        = true
+max_triggers_per_day = 1
+is_active            = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The door"
+blocks = [
+  { type = "paragraph", content = "You are under the water with your eyes shut and shampoo in your hair, and the extractor is roaring, and the first you know about it is the cold — the draught off the landing across your wet back as the door comes open." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Turn.", blocks = [
+        { type = "paragraph", content = "Cal, halfway through the door with his toothbrush in his hand, entirely frozen. The screen covers you from the hip down and nothing else, so what he is looking at is your tits, wet, with the water coming off them." },
+        { type = "paragraph", content = "There is a full second where neither of you moves. He is looking at your nipples with the specific helpless attention of somebody who has thought about this a great deal and is now being made to do it in real time, and his eyes go down once — all the way down, to where the screen stops being any use at all — before he gets them back up." },
+    ] },
+    { advance_text = "Say something.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cal" }, content = "Sorry — sorry, the — it doesn't lock, the—" },
+        { type = "paragraph", content = "It does lock. You did not lock it. You have not locked it since the second night, and you have not examined why, and you are not going to examine it standing here wet with your brother in the doorway." },
+        { type = "paragraph", content = "You do not cover up. You could — an arm across your tits, a turn, half a second — and instead you stand there wet and naked and let your stepbrother look at you, and it lasts about as long as it takes him to understand that you are letting him." },
+    ] },
+    { advance_text = "Let him go.", blocks = [
+        { type = "paragraph", content = "Then you say his name, once, mildly, the way you'd say it if he'd left the milk out, and he goes the colour of the tiles and gets out and pulls the door to behind him." },
+        { type = "paragraph", content = "The extractor roars on. You finish washing your hair. Your hands are shaking and you are smiling at the wall, and both of those facts are going to be with you all day." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Finish.", config = { destinationType = "specific", locationId = "the_bathroom", time_progression_minutes = 20, effects = [
+  { targetType = "player", trait = "hygiene", op = "add", value = 45, clamp = true },
+  { targetType = "player", trait = "exposure", op = "add", value = 6, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 15, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -2, clamp = true },
+], flagEffects = [
+  { targetType = "player", flag = "cal_saw_her", op = "set" },
+] } }
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PASS TIME — found by live play: without this the game SOFT-LOCKS.
+#
+# The opening lands at 17:18. Sleep is gated 21:00+, the shift needs the shop,
+# and navigation does NOT advance the clock — so there was no way to reach any
+# scheduled window. Every schedule in the game was unreachable.
+#
+# The fix belongs in the front room on purpose: it is the anchor, it needs the
+# most prose, and "the evening goes past" is exactly what this room is for.
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id          = "activity_evening"
+name        = "Sit with it"
+description = "Wren-solo @the_front_room. The pass-time action and the anchor's baseline content. +90 min, -5 energy. Repeatable, no window — this is the click that makes every other schedule reachable."
+
+[canvases.trigger]
+location      = "the_front_room"
+is_repeatable = true
+priority      = 2
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "arrival_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "sit"
+name = "Sit with it"
+blocks = [
+  { type = "paragraph", content = "You sit on the end of the good sofa with your feet up under you and let the telly happen at you. It is a programme about people buying a house in Spain. Nobody in this room has ever been to Spain." },
+  { type = "paragraph", content = "This is the thing nobody tells you about coming home: it is not dramatic. It is a Tuesday, and then another one. The days go past at the speed of a room with a telly in it, and you are twenty-four, and somewhere in Bristol there is a flat with your handwriting still on the boiler instructions." },
+  { type = "paragraph", content = "Whoever else is in the house drifts through. Somebody puts the kettle on. Somebody swears at the football. You learn the shape of the evening the way you learn a corridor in the dark — by the fourth night you know who is where without looking up." },
+]
+exit_block = { type = "location", text = "Let it get late.", config = { destinationType = "specific", locationId = "the_front_room", time_progression_minutes = 90, effects = [
+  { targetType = "player", trait = "energy", op = "add", value = -5, clamp = true },
+] } }
+
+
+# =============================================================================
+# HER ROOM — the emptiest location, and the one the wardrobe belongs in.
+#
+# The room privacy is supposed to happen in, and does not: half storage, her
+# father's weight bench where the desk was, four boxes of her mother's things,
+# and a door catch that broke years ago because until she came home nobody in
+# this house needed a door that shut.
+#
+# The boxes are the wardrobe's second half. Opening them is a milestone that
+# GRANTS two garments and opens the standing content gated on worn_corruption.
+# =============================================================================
+
+[[canvases]]
+id          = "canvas_the_boxes"
+name        = "Her mother's boxes"
+description = "Auto-fire @her_room, one-shot, gated exposure>=15. MILESTONE: grants mothers_sundress + mothers_slip and opens everything gated on worn_corruption. Two years unopened, in her room, her size."
+
+[canvases.trigger]
+location      = "her_room"
+is_repeatable = false
+priority      = 8
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "first_night_done", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 15 },
+  { type = "flag", subject = "player", flag_key = "boxes_opened", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The boxes"
+blocks = [
+  { type = "image", props = { file = "scenes/the_boxes.jpg", description = "Four taped cardboard boxes in the corner of a small bedroom, dusty, one open.", search_queries = ["cardboard storage boxes bedroom corner dusty", "taped boxes stacked small room"] } },
+  { type = "paragraph", content = "Four boxes, taped, in the corner where the desk used to be. Ray wrote MARGARET on the sides in marker two years ago and put them in the only room nobody was using, which at the time was yours." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Open one.", blocks = [
+        { type = "paragraph", content = "Clothes, mostly. A hairdryer. A tin of buttons. Half a life boxed by a man who did not know what else to do with it and then carried upstairs and never mentioned again." },
+        { type = "paragraph", content = "Nobody has asked you to sort them. Nobody has asked you anything since you got here, which you are starting to understand is not the same as nobody minding." },
+    ] },
+    { advance_text = "Keep going.", blocks = [
+        { type = "paragraph", content = "A green sundress near the top, folded the way she folded things. You hold it up against yourself before you have decided to, and it is your size, because of course it is your size — you were the same height at fifteen and she never got any taller." },
+        { type = "paragraph", content = "Under it, wrapped in tissue like it mattered, a slip. Oyster-coloured, cut on the bias, the kind of thing a woman buys for one specific evening. You have absolutely no doubt which evening, and you put it down and pick it up again." },
+    ] },
+    { advance_text = "Keep both.", blocks = [
+        { type = "thought_bubble", content = "She left. She is not coming back for a slip." },
+        { type = "paragraph", content = "You hang the two of them on the back of the door that does not shut, and put the lids back on the other three boxes, and sit on the bed for a while in a room that has your mother's clothes in it and your father's weight bench and one window." },
+        { type = "paragraph", content = "Downstairs the telly goes on. You can hear which chair it is from up here." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Put the lids back on the rest."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "her_room"
+time_progression_minutes = 45
+effects = [
+  { targetType = "player", trait = "exposure", op = "add", value = 3, clamp = true },
+]
+flagEffects = [
+  { targetType = "player", flag = "boxes_opened", op = "set" },
+]
+# ⚠️ The key is wardrobeEffects with action/item_id — `clothingEffects` with
+#    itemId/op is NOT a key the importer reads, and is silently ignored: the
+#    build goes green and the garments are never granted.
+wardrobeEffects = [
+  { action = "add", item_id = "mothers_sundress" },
+  { action = "add", item_id = "mothers_slip" },
+]
+
+
+# ── The standing surface the boxes open ──────────────────────────────────────
+[[canvases]]
+id          = "activity_get_dressed"
+name        = "Decide what you're going downstairs in"
+description = "Repeatable @her_room, gated boxes_opened. The exposure system as a standing choice: what she puts on is what the house gets. Banded on worn_corruption — the MAX aggregate, so one loaded garment sets the reading alone."
+
+[canvases.trigger]
+location      = "her_room"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "boxes_opened", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Getting dressed"
+blocks = [
+  { type = "paragraph", content = "The mirror is the inside of the wardrobe door and it does not fit all of you at once, so getting dressed in this room has always been done in sections." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "worn_corruption", operator = "lt", value = 2 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "Shirt, jeans, the flats. The uniform of a person who has somewhere to be, worn by a person who has the shop at two and nothing else this week." },
+    { type = "paragraph", content = "You do it up to the collar. There is nobody in this house you are dressing for, is the official position, and you hold that position all the way down the stairs." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "worn_corruption", operator = "gte", value = 2 },
+    { type = "worn_corruption", operator = "lt", value = 5 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "The vest, then. The vest and whatever else, and the decision took about as long as it takes to reach for something." },
+    { type = "paragraph", content = "You know what you look like in it. You worked that out in week two, in this mirror, in sections — the way it sits, what it does not cover, what happens when you reach up. You have not put a jumper on since, and every single person in this house has noticed, and not one of them has said a word." },
+    { type = "thought_bubble", content = "You are not doing anything. You are getting dressed in your own bedroom." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "worn_corruption", operator = "gte", value = 5 },
+  ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/her_room_dressing_t4", pool = 4, description = "A woman standing in front of a wardrobe mirror in a slip in a small cluttered bedroom.", search_queries = ["woman slip standing wardrobe mirror bedroom", "girl getting dressed silk slip small room"] } },
+    { type = "paragraph", content = "Your mother's slip. Oyster silk on the bias, cut for one specific evening, and you put it on in the same room your father keeps his weight bench and go down in it." },
+    { type = "paragraph", content = "It does nothing you could name. It covers everything. It also makes it perfectly obvious that there is nothing under it, and it moves when you move, and there is not a man in this house who is going to be able to look at you in this and think about the telly." },
+    { type = "paragraph", content = "You stand in front of the half-mirror and look at your tits under the silk in sections, and you are not dressing for nobody any more, and you have stopped bothering to say that you are." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go down."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "her_room"
+time_progression_minutes = 15
+
+
+# ── The door that does not shut ──────────────────────────────────────────────
+[[canvases]]
+id          = "activity_the_door"
+name        = "Do something about the door"
+description = "Repeatable @her_room. The broken catch, and the fact that she has stopped meaning to fix it. Banded on exposure — the same action reads as three different decisions as she climbs. Cheap, standing, and it is the room's whole thesis."
+
+[canvases.trigger]
+location      = "her_room"
+is_repeatable = true
+priority      = 2
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "first_night_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The door"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 15 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "The catch went years ago. The tongue does not reach the plate, so the door rests shut and swings if the back door goes or somebody comes heavy up the stairs." },
+    { type = "paragraph", content = "You wedge a paperback under it. It works. You will ask Ray about a new catch at the weekend, and you will mean it when you say it, and you will not do it." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 15 },
+    { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 45 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "The paperback is still on the shelf. You have not wedged it since the first week and you could not tell anybody when you stopped." },
+    { type = "paragraph", content = "You get changed with the door resting shut. It swings about four inches if somebody goes past heavy, and about once a week somebody goes past heavy, and you have started listening for the boards rather than for the door." },
+    { type = "thought_bubble", content = "Ask Ray for a catch. It is a two-pound part." },
+    { type = "paragraph", content = "You do not ask Ray for a catch." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 45 },
+  ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/her_room_door_t4", pool = 4, description = "A woman undressing in a bedroom with the door standing several inches open onto a lit landing.", search_queries = ["woman undressing bedroom door ajar landing light", "girl changing room door open hallway"] } },
+    { type = "paragraph", content = "You leave it. Not resting shut — actually open, four or five inches, onto a lit landing with three men's bedrooms off it, and then you get undressed in the middle of the room where the gap looks." },
+    { type = "paragraph", content = "It takes twice as long as it needs to. You are naked for most of it. Twice this week the boards have gone halfway along the landing and stopped, and stayed stopped, and then gone back — and you did not cover up either time, and both times you were still standing there a minute after they had gone." },
+    { type = "thought_bubble", content = "It is a two-pound part. You know exactly where the hardware shop is." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave it."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "her_room"
+time_progression_minutes = 15
+effects = [
+  { targetType = "player", trait = "exposure", op = "add", value = 1, clamp = true },
+]
+
+
+# ── Solo, gated on arousal — the house does this TO her all day ──────────────
+[[canvases]]
+id          = "activity_alone"
+name        = "See to it yourself"
+description = "Repeatable @her_room, gated arousal>=30. The house winds her up all day; this is the only place she can do anything about it. Banded on nerve so what she thinks about changes as she climbs. Explicit, repeatable, pooled — a standing surface carrying the crude register."
+
+[canvases.trigger]
+location      = "her_room"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 30 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Alone"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/her_room_alone_t5", pool = 6, description = "Explicit — a woman alone on a single bed in a small bedroom, hand between her legs, daylight.", search_queries = ["woman masturbating single bed small bedroom solo", "girl alone bed hand between legs bedroom amateur"] } },
+  { type = "paragraph", content = "Door resting shut. The house doing its noises. You get on the bed that was too short for you at seventeen and put your hand down the front of your knickers, because you have been wound up since about eleven this morning and there is nowhere in this house to put it." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Take your time.", blocks = [
+        { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+          { type = "trait", subject = "player", trait_key = "nerve", operator = "lt", value = 35 },
+        ] } }, blocks = [
+          { type = "paragraph", content = "You try to think about the man from Bristol and it does not work, and you try to think about nobody and that does not work either, and what you end up with is the sound of the extractor and a bar of light under a door." },
+          { type = "paragraph", content = "You do not let yourself finish the thought. You finish anyway, quietly, with your face turned into the pillow, and lie there afterwards deciding not to have noticed what did it." },
+        ] },
+        { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+          { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 35 },
+        ] } }, blocks = [
+          { type = "paragraph", content = "You do not bother with Bristol. You go straight to this house — the gap in the bathroom door, Cal saying your name into his own wrist, the weight of a hand on the back of your thigh in a front room at midnight — and you work your clit to all of it without one second of pretending otherwise." },
+          { type = "paragraph", content = "Two fingers in and your other hand over your own mouth, because the wall is eighteen inches thick and there is a man on the other side of it who works nights and does not sleep." },
+        ] },
+      ] },
+    { advance_text = "Finish.", blocks = [
+        { type = "paragraph", content = "You come with two fingers still in your cunt and your knees up and your heels dug into a mattress you have had since you were eleven, in your father's house, in the middle of a Tuesday afternoon, biting down on the noise out of habit that stopped being necessary weeks ago." },
+        { type = "paragraph", content = "After, the ceiling. The same water stain, the same shape it has been since you were fourteen, and you lie under it with your hand still where it is and think that a person could get used to this house." },
+        { type = "thought_bubble", content = "That is what is happening. You are getting used to it." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Lie there a while."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "her_room"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "arousal", op = "add", value = -30, clamp = true },
+  { targetType = "player", trait = "nerve", op = "add", value = 1, clamp = true },
+]
+
+
+# =============================================================================
+# THE MORNING QUEUE — the bathroom and the landing, paid off.
+#
+# Three facts were planted on night one and none of them had been paid:
+#   the gap down the hinge side of the bathroom door
+#   the extractor that makes her deaf to the landing
+#   the wall between her room and the box room, which is eighteen inches
+#
+# Weekday grid: Ray 06:30-07:00, Cal 07:00-07:40, Dean 07:40-08:00. Three men
+# through one bathroom in ninety minutes, and she needs it too.
+# =============================================================================
+
+# ── Peep: Dean. The one who talks, and knows the gap works both ways. ────────
+[[canvases]]
+id          = "peep_dean_bathroom"
+name        = "Dean knows about the gap"
+description = "Repeatable @the_landing, once per day, gated npc_at_location(the_bathroom, npc_dean, is_present) — his new 07:40-08:00 row. Unlike Ray and Cal he KNOWS, and that is the whole scene: she is not getting away with anything. +5 exposure, +4 nerve, -3 pride."
+
+[canvases.trigger]
+location             = "the_landing"
+is_repeatable        = true
+priority             = 5
+is_active            = true
+max_triggers_per_day = 1
+conditions           = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "first_night_done", operator = "is_true" },
+  { type = "npc_at_location", location_id = "the_bathroom", npc_id = "npc_dean", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The gap, both ways"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/peep_dean_shower_t4", pool = 4, description = "A man showering seen through a narrow gap in a bathroom door, steam, partial view.", search_queries = ["man shower seen through door gap steam", "peek bathroom door man washing voyeur"] } },
+  { type = "paragraph", content = "Twenty to eight and the water goes on. Dean is nine minutes in that bathroom, every weekday, and you have never once had to wait for him — which you have noticed, and which means you have been keeping track." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Look.", blocks = [
+        { type = "paragraph", content = "He is not doing anything you have not already seen your other stepbrother do. He is just faster about it and considerably less troubled — one hand braced, one hand on his cock, working it with the brisk impatience of a man who has to be on the estate for half eight." },
+        { type = "paragraph", content = "Nine minutes. You have understood what the nine minutes is for since about week three." },
+    ] },
+    { advance_text = "Keep looking.", blocks = [
+        { type = "paragraph", content = "Then he turns his head. Not sharply — he does not startle, he does not stop, his fist keeps going on his cock — he just turns and looks at the gap, straight down the line of it, straight at your eye, with the water coming off his chest and his balls tight and his hand not breaking rhythm once." },
+        { type = "thought_bubble", content = "He knows. He has known for a while. He has been leaving the light on." },
+        { type = "paragraph", content = "And he does not stop. He holds your eye through a finger's width of gap and keeps working his cock, slower now, deliberately slower, turning himself square to the door so you get all of it — cock, balls, the lot — and it is you who steps back, eventually, with your nipples up hard under the vest and your cunt aching, which he cannot possibly know and which you suspect he has guessed." },
+    ] },
+    { advance_text = "Stay.", blocks = [
+        { type = "paragraph", content = "Or you do not step back. You stay with your eye to the gap and one hand already inside your own knickers, and let him watch you watch, and he finishes like that — fist tight on his cock, spilling over his knuckles into the water, without a sound, without once letting you off. You are wet enough that walking away is going to be its own problem." },
+        { type = "paragraph", content = "At five past eight he comes down to the kitchen and says good morning like a man who has said good morning, and gets a bowl out, and asks if you slept alright." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get off the landing."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_landing"
+time_progression_minutes = 15
+effects = [
+  { targetType = "player", trait = "exposure", op = "add", value = 5, clamp = true },
+  { targetType = "player", trait = "nerve", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 25, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -3, clamp = true },
+  { targetType = "npc", npcId = "npc_dean", trait = "lust", op = "add", value = 4 },
+]
+
+
+# ── Peep: Marek. No bathroom row needed — his door is already half open. ─────
+[[canvases]]
+id          = "peep_marek_boxroom"
+name        = "The door that's always half open"
+description = "Repeatable @the_landing, once per day, gated npc_at_location(the_box_room, npc_marek, is_present) — his 09:00-16:00 window, when the house is empty. No new schedule row: his door being half open is already established. The transactional register even here — he does not perform and he does not hide. +4 exposure, +3 nerve."
+
+[canvases.trigger]
+location             = "the_landing"
+is_repeatable        = true
+priority             = 5
+is_active            = true
+max_triggers_per_day = 1
+conditions           = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "first_night_done", operator = "is_true" },
+  { type = "npc_at_location", location_id = "the_box_room", npc_id = "npc_marek", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Half open"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/peep_marek_boxroom_t4", pool = 4, description = "A man lying on a single bed in a small bare room seen through a partly open door, daylight.", search_queries = ["man on single bed small room door ajar daylight", "view through half open bedroom door man lying"] } },
+  { type = "paragraph", content = "Half eleven. Ray at work, Dean on the estate, Cal wherever nineteen goes on a Tuesday. The house is yours and Marek's and the boards on the landing give you away halfway along, which is why you stop halfway along." },
+  { type = "paragraph", content = "The box room door is half open. It is always half open. There is not enough room in there to shut it against anything." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Look in.", blocks = [
+        { type = "paragraph", content = "He is on top of the covers with his jeans open and his cock out — thick, uncut, dark against his belly — working it in a slow fist with the paperback face-down on his chest, and he is not being quiet about it, because there is nobody in this house to be quiet for. You can hear his breathing from the landing and you can see his balls and the flex of his thigh and the wet at the head of him." },
+        { type = "paragraph", content = "It is the least furtive thing you have seen in six weeks. Nobody in this family does anything without an angle on it, and there is a man eighteen inches from your bedroom wall wanking in the middle of a Tuesday with his door open because he has nothing whatsoever to hide." },
+    ] },
+    { advance_text = "Don't move.", blocks = [
+        { type = "paragraph", content = "The board under your left foot has gone already. He knows exactly where you are standing. He does not look over and he does not stop and he does not speed up — he just keeps that unhurried fist going on his cock while a woman he pays no rent to watches him from a hallway, and something about being ignored while you look at a man's cock turns out to be worse than being caught." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marek" }, content = "You can come in or you can go. Standing there is the only thing that is rude." },
+        { type = "paragraph", content = "You go. You get as far as your own door and stand behind it with your heart going, and through eighteen inches of wall you hear him finish, unhurried, and then hear the paperback come back up." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go to your room."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_landing"
+time_progression_minutes = 15
+effects = [
+  { targetType = "player", trait = "exposure", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "nerve", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 25, clamp = true },
+  { targetType = "npc", npcId = "npc_marek", trait = "lust", op = "add", value = 3 },
+]
+
+
+# ── Heard, not seen. The eighteen inches, finally paid. ──────────────────────
+[[canvases]]
+id          = "activity_the_wall"
+name        = "Listen through the wall"
+description = "Repeatable @her_room. The wall was planted on night one and never paid. Banded on nerve — at the bottom she is trying not to hear it; at the top she is timing herself to it. Standing, explicit at the top band, pooled."
+
+[canvases.trigger]
+location      = "her_room"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "first_night_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The wall"
+blocks = [
+  { type = "paragraph", content = "The wall between your room and the box room is a partition somebody put up in about 1974 to make two rooms out of one, and it is eighteen inches of plasterboard and air, and you can hear him turn a page through it." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "nerve", operator = "lt", value = 35 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He works nights and sleeps badly, so what you mostly hear is a man not sleeping — the bed, the page, the tap in the corner that he runs at four in the morning." },
+    { type = "paragraph", content = "Some nights it is not that. Some nights it is the bed going in a rhythm nothing else makes, and a man's breathing, and you know exactly what his hand is doing on his cock eighteen inches away — and you lie on your side facing the wall with a pillow half over your ear and your thighs pressed together, being a person who is asleep." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 35 },
+  ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/her_room_wall_t5", pool = 4, description = "Explicit — a woman lying on her side in bed in the dark, hand between her legs, facing a wall.", search_queries = ["woman in bed dark hand between legs side", "girl touching herself bed night bedroom solo"] } },
+    { type = "paragraph", content = "You have stopped putting the pillow over your ear. You lie facing the wall in the dark and listen to a man on the other side of it working his cock, eighteen inches away, and you put your own hand down." },
+    { type = "paragraph", content = "You match him. That is the part you would not be able to say out loud to anybody — that you have learned his rhythm through a partition wall and you go at his pace, and when his bed stops you stop, and you both lie there in the dark two feet apart with a piece of plasterboard between you." },
+    { type = "thought_bubble", content = "He knows. Of course he knows. It works both ways, it always worked both ways." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go to sleep."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "her_room"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "nerve", op = "add", value = 1, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 15, clamp = true },
+]
+
+
+# ── Walk-in: Ray. The expensive one. ────────────────────────────────────────
+[[canvases]]
+id          = "walkin_ray_wash"
+name        = "Ray, and the door she stopped locking"
+description = "substitution_only on activity_wash, once per day, gated exposure>=35. The costly walk-in: Cal's is an accident, this is not, and both of them know the lock works. His tier-2 register — flat, once, like an admission. +6 exposure, +4 nerve, -4 pride, +5 his lust."
+
+[canvases.trigger]
+location             = "the_bathroom"
+substitution_only    = true
+is_repeatable        = true
+max_triggers_per_day = 1
+is_active            = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Ray"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/walkin_ray_bathroom_t4", pool = 4, description = "An older man in a bathroom doorway with a woman at the sink, steam, both still.", search_queries = ["man in bathroom doorway woman at sink steam", "older man doorway bathroom woman towel"] } },
+  { type = "paragraph", content = "You are at the sink with the water going and the extractor roaring and your top off, and the door comes open behind you, and in the mirror is Ray." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Don't cover up.", blocks = [
+        { type = "paragraph", content = "He stops in the doorway. Six weeks ago he would have said sorry and pulled it to in half a second — you know that because six weeks ago he did, and neither of you mentioned it." },
+        { type = "paragraph", content = "He does not do that now. He stands in the doorway of his own bathroom and looks at your tits in the mirror — properly, both of them, wet, nipples up in the cold off the landing — and you watch him do it, and the extractor covers the fact that neither of you is saying anything and that he has not moved his eyes once." },
+    ] },
+    { advance_text = "Let him say it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "You've stopped locking it." },
+        { type = "paragraph", content = "It is not a question and it is not quite an accusation. It is a man saying a true thing out loud in a small room, having thought about whether to, and having decided." },
+        { type = "paragraph", content = "You say the lock sticks. He says the lock does not stick, he put it on himself in 2009, and there is about four seconds where the whole thing could go either way." },
+    ] },
+    { advance_text = "Hold his eye.", blocks = [
+        { type = "paragraph", content = "You do not turn round and you do not cover up. You put your hands back in the water and let your tits move with it, and hold his eye in the mirror until he is the one who looks away — and on the way down his eyes go over your arse and your thighs and the wet flat of your stomach, all of it, before he says he will use the downstairs one and pulls the door to. He is hard. You can see it in the mirror and he knows you can." },
+        { type = "paragraph", content = "It does not latch. It never latches. It rests shut about an inch off, and through the inch you can see him still standing on the landing, not moving, for a good deal longer than a man needs to stand on a landing." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Finish washing."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_bathroom"
+time_progression_minutes = 25
+effects = [
+  { targetType = "player", trait = "hygiene", op = "add", value = 45, clamp = true },
+  { targetType = "player", trait = "exposure", op = "add", value = 6, clamp = true },
+  { targetType = "player", trait = "nerve", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 20, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -4, clamp = true },
+  { targetType = "npc", npcId = "npc_ray", trait = "lust", op = "add", value = 5 },
+]
+
+
+# ── Walk-in: Dean. He does not pretend it was an accident. ──────────────────
+[[canvases]]
+id          = "walkin_dean_wash"
+name        = "Dean doesn't bother with sorry"
+description = "substitution_only on activity_wash, once per day, gated exposure>=45. Where Cal apologises and Ray deflects, Dean narrates. His tier-2/3 register. +6 exposure, +5 nerve, -3 pride, +6 his lust."
+
+[canvases.trigger]
+location             = "the_bathroom"
+substitution_only    = true
+is_repeatable        = true
+max_triggers_per_day = 1
+is_active            = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Dean"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/walkin_dean_bathroom_t4", pool = 4, description = "A man leaning in a bathroom doorway watching a woman at the shower, steam, unhurried.", search_queries = ["man leaning bathroom doorway watching woman shower", "guy in doorway steamy bathroom woman"] } },
+  { type = "paragraph", content = "The door goes and it is Dean, and he does not stop in the doorway and he does not say sorry. He comes in, gets his toothbrush off the shelf, and starts brushing his teeth with you naked in the shower four feet away — tits, arse, cunt, the whole of you behind a screen that stops at the hip and was never a screen." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Say something.", blocks = [
+        { type = "paragraph", content = "You ask him what he thinks he is doing. He points at the toothbrush with his free hand, mouth full of foam, entirely unbothered, and carries on." },
+        { type = "paragraph", content = "The screen covers you from the hip down. He is looking at the rest in the mirror while he brushes his teeth, unhurried, taking his time about the whole business in a way that makes it perfectly clear the teeth are not the point." },
+    ] },
+    { advance_text = "Get out and dry off.", blocks = [
+        { type = "paragraph", content = "So you get out. You get out and stand on the mat in front of your stepbrother and dry yourself with the towel, all of it, in no hurry at all, because the alternative is standing in a cooling shower waiting for him to leave and you are not doing that in your own house." },
+        { type = "paragraph", content = "He spits, rinses, and watches the entire time in a mirror you both know he can see you in — your tits while you do your arms, your cunt when you put your foot on the bath to dry your leg, and he does not look away for one second of it and neither do you." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dean" }, content = "You know there's a lock." },
+    ] },
+    { advance_text = "Tell him.", blocks = [
+        { type = "paragraph", content = "You tell him you know there is a lock." },
+        { type = "paragraph", content = "He puts the toothbrush back, and looks at you a moment longer than the sentence needs, and says right then, and goes, leaving the door open behind him onto the landing where anybody could be." },
+        { type = "paragraph", content = "You stand there wet with the towel in your hand and the door open, and count to about ten before you go and shut it, and you are not entirely sure why you counted." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Shut the door."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_bathroom"
+time_progression_minutes = 25
+effects = [
+  { targetType = "player", trait = "hygiene", op = "add", value = 45, clamp = true },
+  { targetType = "player", trait = "exposure", op = "add", value = 6, clamp = true },
+  { targetType = "player", trait = "nerve", op = "add", value = 5, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 20, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -3, clamp = true },
+  { targetType = "npc", npcId = "npc_dean", trait = "lust", op = "add", value = 6 },
+]
+
+
+# =============================================================================
+# THE BOX ROOM WHEN HE IS OUT — Marek works nights, so from 22:00 the room on the
+# other side of her wall is empty and unlocked and four objects deep.
+# =============================================================================
+
+[[canvases]]
+id          = "activity_his_room"
+name        = "Go in while he's at work"
+description = "Repeatable @the_box_room, gated npc_at_location(the_box_room, npc_marek, is_absent). His room while he is on the estate. Banded on need — at the bottom she is snooping, at the top she is leaving him something. Fills the box room without another rung on his ladder."
+
+[canvases.trigger]
+location      = "the_box_room"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "first_night_done", operator = "is_true" },
+  { type = "npc_at_location", location_id = "the_box_room", npc_id = "npc_marek", operator = "is_absent" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "His room"
+blocks = [
+  { type = "paragraph", content = "Gone eleven and he is on the estate until six. The door is half open because it is always half open, and the light off the landing gets about as far as the end of the bed." },
+  { type = "paragraph", content = "The whole room is four things. A bed. A chair with his work clothes over it. A paperback face-down on the windowsill next to a biscuit tin with money in it. And a bag, packed, in the corner — not being unpacked, not being used, just packed, since October." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "need", operator = "lt", value = 35 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "You do not open the tin. You want to know what is in it in the way you want to know most things about this man, which is a lot and without any right to." },
+    { type = "paragraph", content = "You read the back of the paperback instead. It is a thriller about a submarine. He is two hundred pages in and there is a bus ticket keeping his place, dated a week ago, from a town forty minutes away that he has never once mentioned going to." },
+    { type = "thought_bubble", content = "He has a whole life. Everybody in this house has one life and he has a whole one." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "need", operator = "gte", value = 35 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "You sit on his bed. It is made, tightly, the way people who have lived somewhere temporary for a long time make a bed, and it smells of him and of the estate." },
+    { type = "paragraph", content = "You count the tin. Four hundred and change, in a biscuit tin, on a windowsill, in a house where your stepfather does his accounting in envelopes and nobody says a number out loud. He has never once locked this door." },
+    { type = "paragraph", content = "You put it back exactly as it was, and then you take your knickers off and leave them on the pillow, because you are going to be asleep on the other side of that wall when he comes in at six and finds them." },
+    { type = "thought_bubble", content = "That is not a favour and it is not a joke. That is a price list." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get out before you hear the van."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_box_room"
+time_progression_minutes = 20
+effects = [
+  { targetType = "player", trait = "need", op = "add", value = 1, clamp = true },
+  { targetType = "player", trait = "exposure", op = "add", value = 1, clamp = true },
+]
+
+
+# =============================================================================
+# THE SHOP — the only room in the game where no man wants anything from her, and
+# the only place where the reversal is visible from OUTSIDE the house.
+# =============================================================================
+
+[[canvases]]
+id          = "activity_shop_regulars"
+name        = "The regulars"
+description = "Repeatable @the_shop, 09:00-18:00. Six hours of a town that does not know, which is what makes the shop the release valve. Banded on pride — the same job reads completely differently depending on how much of herself she is still defending."
+
+[canvases.trigger]
+location      = "the_shop"
+is_repeatable = true
+priority      = 3
+is_active     = true
+schedules     = [ { weekdays = [0, 1, 2, 3, 4, 5, 6], start_time = "09:00", end_time = "18:00" } ]
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "arrival_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Behind the till"
+blocks = [
+  { type = "paragraph", content = "The shop is one aisle of tins, one of crisps, a fridge that hums in E flat, and a till with a drawer that sticks. Between eleven and two you will see fourteen people and know eleven of them by what they buy." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "pride", operator = "gte", value = 70 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "The man with the rizla. The woman who counts coppers out of a purse and apologises the whole time. The lad who buys energy drinks at half nine in the morning and is never going anywhere." },
+    { type = "paragraph", content = "You are extremely good at this job, which is the humiliating part. Two years of a career and it turns out the transferable skill is being pleasant to strangers about crisps." },
+    { type = "thought_bubble", content = "This is temporary. Say it in your head at the till like everybody else in here does." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "pride", operator = "lt", value = 70 },
+    { type = "trait", subject = "player", trait_key = "pride", operator = "gte", value = 40 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "Six hours and nobody in here wants anything off you except a bag and the right change. It takes you until about week five to notice that this is the only place you go where that is true, and until about week six to notice that you have started finding it restful rather than insulting." },
+    { type = "paragraph", content = "You take an extra shift on the Thursday. You tell yourself it is the money." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "pride", operator = "lt", value = 40 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "You come in in the vest under the shop fleece because the fleece does up and nobody is checking, and you spend six hours reaching things down off shelves for men who say thanks love and go home to their wives, and not one of them knows a single thing about your Tuesdays." },
+    { type = "paragraph", content = "That is what the shop is for now. Not the thirty pounds. Six hours as somebody unremarkable, in a town where nobody has any idea what you let happen in a front room, and you come out of it lighter every time." },
+    { type = "thought_bubble", content = "You are not resting from the house. You are resting so you can go back to it." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Cash up."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_shop"
+time_progression_minutes = 120
+effects = [
+  { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true },
+  { targetType = "player", trait = "money", op = "add", value = 10, clamp = true },
+]
+
+
+[[canvases]]
+id          = "canvas_someone_who_knew"
+name        = "Somebody who knew her before"
+description = "Auto-fire @the_shop, one-shot, gated pride<60. MILESTONE — the reversal made visible from OUTSIDE the house, which is the only place it can be seen from. Opens the shop's standing content by proving the town is a mirror. SETS seen_from_outside."
+
+[canvases.trigger]
+location      = "the_shop"
+is_repeatable = false
+priority      = 8
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "pride", operator = "lt", value = 60 },
+  { type = "flag", subject = "player", flag_key = "seen_from_outside", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Half four on a Tuesday"
+blocks = [
+  { type = "image", props = { file = "scenes/shop_someone.jpg", description = "A woman behind a small convenience shop counter looking up as a customer comes in.", search_queries = ["woman behind convenience shop counter customer", "shop assistant till looking up small store"] } },
+  { type = "paragraph", content = "Half four on a Tuesday and the door goes and it is Hannah Beckett, who sat next to you for two years and who you last saw at a leaving do you were the reason for." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Serve her.", blocks = [
+        { type = "paragraph", content = "She does the face. Everybody does the face — the quarter-second where they arrange it before they say hiya — and Hannah does it badly because Hannah has never been able to do it at all." },
+        { type = "paragraph", content = "\"June! God,\" she says. \"I didn't know you were — are you back? Are you back back?\"" },
+        { type = "paragraph", content = "You say you are back. She says that is great, that is really great, and buys milk and a lottery ticket she does not want." },
+    ] },
+    { advance_text = "Let her go.", blocks = [
+        { type = "paragraph", content = "At the door she turns round and says it, because she cannot not: that she had heard, and that she is sorry, and that if you ever fancy a drink." },
+        { type = "paragraph", content = "You say that would be lovely. Neither of you will do anything about it." },
+    ] },
+    { advance_text = "Then stand there.", blocks = [
+        { type = "paragraph", content = "And when the door has shut you stand behind a till in a shop and understand something you have been managing not to understand for nine weeks — that from out here, from the town, from Hannah Beckett's side of the counter, the story is very short and completely finished. June went, June came back, June is at the shop." },
+        { type = "thought_bubble", content = "Nobody out here knows about the house. And the house is the only part that is still moving." },
+        { type = "paragraph", content = "You cash up at six and walk home the long way, and go in, and the telly is on, and Ray shifts the paper off the arm of the sofa without looking up." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Walk home the long way."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_shop"
+time_progression_minutes = 90
+effects = [
+  { targetType = "player", trait = "pride", op = "add", value = -5, clamp = true },
+  { targetType = "player", trait = "need", op = "add", value = 2, clamp = true },
+]
+flagEffects = [
+  { targetType = "player", flag = "seen_from_outside", op = "set" },
+]
+
+
+# ── The fourth walk-in: Marek. The only man in the house who would knock. ────
+[[canvases]]
+id          = "walkin_marek_wash"
+name        = "Marek knocks"
+description = "substitution_only on activity_wash, once per day, gated exposure>=55. The contrast that makes the other three legible: he is the only one who asks, and asking turns out to be worse. +5 exposure, +4 nerve, -3 pride, +6 his lust."
+
+[canvases.trigger]
+location             = "the_bathroom"
+substitution_only    = true
+is_repeatable        = true
+max_triggers_per_day = 1
+is_active            = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "A knock"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/walkin_marek_bathroom_t4", pool = 4, description = "A man standing in a bathroom doorway with a woman wet at the sink, both still, daylight.", search_queries = ["man standing bathroom doorway woman wet sink", "man doorway bathroom woman towel daylight"] } },
+  { type = "paragraph", content = "There is a knock. Nobody in this house knocks — not on the bathroom, not on your room, not since you got here — and it takes you a second to identify the sound at all." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Say come in.", blocks = [
+        { type = "paragraph", content = "You are naked at the sink with your hair wet and you say come in, and he does, and shuts it behind him." },
+        { type = "paragraph", content = "He looks at you the way he looked at you across the kitchen table — the whole of you, unhurried, tits and cunt and thighs, the way you would look at something you were considering — and then puts his shaving things on the shelf and starts filling the sink beside you." },
+    ] },
+    { advance_text = "Stay where you are.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_marek" }, content = "I am not going to ask you to move. You can stay or you can go. Both are fine." },
+        { type = "paragraph", content = "So you stay. You stand naked next to a man you pay nothing to and owe nothing to and dry your hair while he shaves, and his cock is hard in his jeans the entire time and he does not mention it and neither do you." },
+    ] },
+    { advance_text = "Then go.", blocks = [
+        { type = "thought_bubble", content = "The other three take it and pretend they did not. He asks, and gets it, and that is somehow the one that keeps you up." },
+        { type = "paragraph", content = "You go out past him with the towel over your arm rather than round you, and he says thanks, for the sink, and goes on shaving." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go and get dressed."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_bathroom"
+time_progression_minutes = 25
+effects = [
+  { targetType = "player", trait = "hygiene", op = "add", value = 45, clamp = true },
+  { targetType = "player", trait = "exposure", op = "add", value = 5, clamp = true },
+  { targetType = "player", trait = "nerve", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 20, clamp = true },
+  { targetType = "player", trait = "pride", op = "add", value = -3, clamp = true },
+  { targetType = "npc", npcId = "npc_marek", trait = "lust", op = "add", value = 6 },
+]
+
+
+# ── The wash, banded on what she is wearing when she goes in ────────────────
+[[canvases]]
+id          = "activity_wash_long"
+name        = "Take your time in there"
+description = "Repeatable @the_bathroom, gated is_absent + boxes_opened. The wash as a standing surface rather than a hygiene click. Banded on worn_corruption — the wardrobe drives it, so what she took in with her changes what the room is for."
+
+[canvases.trigger]
+location      = "the_bathroom"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "boxes_opened", operator = "is_true" },
+  { type = "npc_at_location", location_id = "the_bathroom", operator = "is_absent" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Time in there"
+blocks = [
+  { type = "paragraph", content = "The extractor comes on with the light and the room goes to that roar, and for as long as you are in here you cannot hear the landing, the stairs, the back door, or anybody at all." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "worn_corruption", operator = "lt", value = 4 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "You take the jeans and the shirt in with you and come out in them, which is what a person does. Fifteen minutes. The mirror clears in a band across the middle by the time you are dressed and you barely look at it." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "worn_corruption", operator = "gte", value = 4 },
+  ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/bathroom_long_t5", pool = 4, description = "Explicit — a woman alone in a shower, hand between her legs, steam and tiles.", search_queries = ["woman alone shower touching herself steam", "girl in shower hand between legs solo amateur"] } },
+    { type = "paragraph", content = "You take your mother's slip in with you and hang it on the back of the door, and then you take a great deal longer than fifteen minutes." },
+    { type = "paragraph", content = "The water is too hot and you stand under it and put your hand between your legs with your forehead on the tile, and work your clit slowly because there is no hurry and no one can hear a thing over the extractor. Your other hand is on your tit. You come standing up with the water on your back and your knees going, and have to put a hand flat on the wall." },
+    { type = "thought_bubble", content = "Four feet of landing away from every one of them. That is the reason it works in here and not in your room, and you know it." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Dry off."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_bathroom"
+time_progression_minutes = 45
+effects = [
+  { targetType = "player", trait = "hygiene", op = "add", value = 45, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = -20, clamp = true },
+]
