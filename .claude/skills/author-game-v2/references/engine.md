@@ -330,6 +330,20 @@ something. Both were fixed the same way: move the `flagEffects` up onto the loca
 Flags that nothing reads in a trigger *or* a choice are unaffected — a triggerless rung may set
 them freely.
 
+**⚠️ MOVE the setter. Do not duplicate it.** Adding the `flagEffects` to the located hub choice
+while *leaving* the copy on the triggerless rung fails exactly as if you had never moved it:
+
+```
+✗ cal_arrangement    Required by: Cal
+                     required by choice 'Let him stay down here with you.',
+                     set by 'Take him upstairs' but no location/schedule
+```
+
+`Take him upstairs` there is the *canvas name* of the triggerless loop, not the hub choice of
+the same wording — the validator resolved the flag to the setter without a location and refused
+the build, with the correct setter sitting right there on the hub. One setter, on the located
+canvas, is the only arrangement that passes.
+
 ---
 
 ## 17. The wardrobe — and the most dangerous failure class in this engine
@@ -378,16 +392,67 @@ with `equipped` / `unequipped` / `owned` / `not_owned`.
 ## 18. Build
 
 ```
-python scripts/merge_toml_phases.py games/<slug>
-python manage.py package_from_toml games/<slug>/toml_phases/7_final_game.toml \
-    --output-dir games/<slug>/output --gen-version v2 [--video-folder <dir>] [--debug]
+python3 scripts/merge_toml_phases.py games/<slug>
+python3 manage.py package_from_toml \
+    --file games/<slug>/toml_phases/7_final_game.toml \
+    --output games/<slug>/output --gen-version v2 [--video-folder <dir>] [--debug]
 ```
+
+⚠️ The flags are `--file` and `--output`, both **required and named**. This file previously
+documented a positional path plus `--output-dir`; that form exits 2 with
+`error: the following arguments are required: --file, --output` and builds nothing. `python`
+may not exist on the path either — use `python3`.
 
 `merge_toml_phases.py` concatenates a fixed set of phase files into `7_final_game.toml`.
 **Never hand-edit `7_final_game.toml`** — it is output.
 
 ⚠️ `--video-folder` gates external-asset copying. Omit it and the build is green while every
 portrait, location and scene image 404s in the browser.
+
+---
+
+## 19. ONE repeatable canvas per location + NPC + time window
+
+Two repeatable canvases that bind the same NPC at the same location with overlapping schedules
+are a build-time warning, and only one of them will ever render:
+
+```
+⚠️  Repeatable canvases 'hub_dean_late' and 'shift_change_frontroom' both trigger for NPC
+    'npc_dean' at location 'the_front_room' with overlapping schedules. Only one repeatable
+    canvas is allowed per location + NPC + time window. Put multiple interactions inside a
+    single canvas as choices instead.
+```
+
+It does not stop the build. A canvas silently shadowed this way looks perfectly correct in the
+TOML and is unreachable in play, so treat the warning as an error.
+
+**The fix is the engine's own advice, and it is also the better design:** make the second
+canvas a triggerless rung and hang it off the existing hub as a CHOICE. Conditions on a choice
+are evaluated live at render, so a rung can still be time-limited and state-limited without
+owning a schedule of its own — see §20 for the predicate that makes this worth doing.
+
+---
+
+## 20. `npc_at_location` — cross-room occupancy, and the any-NPC form
+
+```toml
+{ type = "npc_at_location", location_id = "the_front_room", npc_id = "npc_ray", operator = "is_present" }
+{ type = "npc_at_location", location_id = "the_front_room", operator = "is_present" }   # ← any NPC
+```
+
+`generators/v2.py:4131-4145` (the runtime branch) and `:7791` (the human-readable dispatcher).
+`operator` is `is_present` | `is_absent`; `location_id` accepts a slug or a UUID. **`npc_id` is
+optional — omit it and the test becomes "is this room occupied by anybody".** 38 uses in
+`games/vesper`.
+
+Verified live in a built game, not just read: a choice carrying
+`npc_at_location(the_front_room, npc_ray, is_present)` rendered at 23:10, when Ray's
+20:00–23:30 row and Dean's 23:00–01:30 row overlap, and was gone at 23:45 with the same state
+and the same player. This is the primitive that makes two-NPC scenes possible at all, since
+`requires_npc` binds exactly one.
+
+The any-NPC form has a second use: a scene about being *seen* without specifying who by. No NPC
+is bound, so nothing can be mis-attributed — there is no character in scope to attribute to.
 
 ---
 

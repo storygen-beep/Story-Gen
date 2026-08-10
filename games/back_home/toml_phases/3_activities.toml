@@ -24,7 +24,7 @@
 [[canvases]]
 id          = "activity_sleep"
 name        = "Sleep"
-description = "Wren-solo @her_room. The day-router: advances ~9h, restores energy, runs decay. Available 21:00-05:00 (wraps midnight in one row — the engine handles it)."
+description = "Player-solo @her_room. The day-router: advances ~9h, restores energy, runs decay. Available 21:00-05:00 (wraps midnight in one row — the engine handles it)."
 
 [canvases.trigger]
 location      = "her_room"
@@ -48,7 +48,7 @@ exit_block = { type = "location", text = "Morning.", config = { destinationType 
 [[canvases]]
 id          = "activity_wash"
 name        = "Wash"
-description = "Wren-solo @the_bathroom. Restores hygiene, 30 min. GATED is_absent (any NPC) — the room has to be free. Carries the walk-in substitution: this is the mandatory daily click the world ambushes."
+description = "Player-solo @the_bathroom. Restores hygiene, 30 min. GATED is_absent (any NPC) — the room has to be free. Carries the walk-in substitution: this is the mandatory daily click the world ambushes."
 
 [canvases.trigger]
 location      = "the_bathroom"
@@ -89,7 +89,7 @@ exit_block = { type = "location", text = "Dry off.", config = { destinationType 
 [[canvases]]
 id          = "activity_shift"
 name        = "Take a shift"
-description = "Wren-solo @the_shop. Six hours on the till. Costs 25 energy, pays 30 money, once per day, 09:00-18:00. The only money that is hers — and the reason `need` can stay low if she works for it."
+description = "Player-solo @the_shop. Six hours on the till. Costs 25 energy, pays 30 money, once per day, 09:00-18:00. The only money that is hers — and the reason `need` can stay low if she works for it."
 
 [canvases.trigger]
 location             = "the_shop"
@@ -298,7 +298,7 @@ exit_block = { type = "location", text = "Finish.", config = { destinationType =
 [[canvases]]
 id          = "activity_evening"
 name        = "Sit with it"
-description = "Wren-solo @the_front_room. The pass-time action and the anchor's baseline content. +90 min, -5 energy. Repeatable, no window — this is the click that makes every other schedule reachable."
+description = "Player-solo @the_front_room. The pass-time action and the anchor's baseline content. +90 min, -5 energy. Repeatable, no window — this is the click that makes every other schedule reachable, so it is also the single most-repeated screen in the game. Banded on pride in three adjacent groups (they merge into one if/elseif chain, which is the intent): the same ninety minutes reads as exile, then as routine, then as waiting to be walked in on."
 
 [canvases.trigger]
 location      = "the_front_room"
@@ -314,8 +314,28 @@ id   = "sit"
 name = "Sit with it"
 blocks = [
   { type = "paragraph", content = "You sit on the end of the good sofa with your feet up under you and let the telly happen at you. It is a programme about people buying a house in Spain. Nobody in this room has ever been to Spain." },
-  { type = "paragraph", content = "This is the thing nobody tells you about coming home: it is not dramatic. It is a Tuesday, and then another one. The days go past at the speed of a room with a telly in it, and you are twenty-four, and somewhere in Bristol there is a flat with your handwriting still on the boiler instructions." },
-  { type = "paragraph", content = "Whoever else is in the house drifts through. Somebody puts the kettle on. Somebody swears at the football. You learn the shape of the evening the way you learn a corridor in the dark — by the fourth night you know who is where without looking up." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "pride", operator = "gte", value = 75 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "This is the thing nobody tells you about coming home: it is not dramatic. It is a Tuesday, and then another one. The days go past at the speed of a room with a telly in it, and you are twenty-four, and somewhere in Bristol there is a flat with your handwriting still on the boiler instructions." },
+    { type = "paragraph", content = "Whoever else is in the house drifts through. Somebody puts the kettle on. Somebody swears at the football. You learn the shape of the evening the way you learn a corridor in the dark — by the fourth night you know who is where without looking up." },
+    { type = "paragraph", content = "You sit at the end of the sofa nearest the door, because the end nearest the door is the end a person sits on when they are not staying. You have been sitting on it for eleven weeks." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "pride", operator = "lt", value = 75 },
+    { type = "trait", subject = "player", trait_key = "pride", operator = "gte", value = 45 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "You have stopped hearing the telly. It is on, and you are looking at it, and if somebody asked you at the end of ninety minutes what had been on you could not tell them — but you could tell them that Ray came through at twenty past for the mug he left, and that Cal's music went off at half nine, and that Dean has not come down yet." },
+    { type = "paragraph", content = "That is what you do with the evenings now. You sit in the middle of the house and you track it. Everyone else in this family is somewhere doing something; you are the one who knows where everyone is." },
+    { type = "paragraph", content = "It is not a bad way to spend a night. That is the part you would have argued with, two months ago, and cannot be bothered to argue with now." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "pride", operator = "lt", value = 45 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "You sit in the middle of the sofa in what you sleep in, with the throw over your knees and not over anything else, and you do not put a jumper on when it gets cold. You have got a list now of who comes through this room and when, and you are in it, on purpose, dressed for it." },
+    { type = "paragraph", content = "Nothing has to happen. Most nights nothing does. Somebody comes in for the charger and stops for slightly longer than getting a charger takes, and goes out again, and the room goes back to being a room — and you sit there afterwards with your heart going like you have done something." },
+    { type = "thought_bubble", content = "Ninety minutes on a sofa in a vest, waiting. Call it what it is: this is the part of the day you look forward to." },
+  ] },
 ]
 exit_block = { type = "location", text = "Let it get late.", config = { destinationType = "specific", locationId = "the_front_room", time_progression_minutes = 90, effects = [
   { targetType = "player", trait = "energy", op = "add", value = -5, clamp = true },

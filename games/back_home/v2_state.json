@@ -4,37 +4,37 @@
   "narration_person": "second",
   "want": {
     "who_she_is": "June, 24. Left for a city job and a man, lost both, came back on a coach with two bags. Her room is half a storage room; the house has one bathroom; her bedroom door has no lock.",
-    "appetite": "To be wanted \u2014 not looked after, not tolerated, not managed \u2014 by the people who have only ever seen her as the kid. It cannot complete: each person can go further, each room can turn.",
-    "ascent": "Bottom: she knocks, waits for the bathroom, wears the robe over the towel, is careful in rooms that were never hers. Top: nobody knocks, the bathroom door stays open, the garage and the box room and her father's room are simply places she goes \u2014 and nobody in the house says the word for what has happened.",
+    "appetite": "To be wanted — not looked after, not tolerated, not managed — by the people who have only ever seen her as the kid. It cannot complete: each person can go further, each room can turn.",
+    "ascent": "Bottom: she knocks, waits for the bathroom, wears the robe over the towel, is careful in rooms that were never hers. Top: nobody knocks, the bathroom door stays open, the garage and the box room and her father's room are simply places she goes — and nobody in the house says the word for what has happened.",
     "charge": "reversal",
     "charge_note": "She was the one who got out. Now she is broke in her father's house and the men who were beneath her in that story have what she needs. The taboo is the second layer; the first is that they get to watch her come down.",
     "why_this_person": {
-      "npc_ray": "He was the proud one, and his approval is what she came back without. He is careful, so every inch is expensive and deniable \u2014 which makes an inch feel like a mile.",
+      "npc_ray": "He was the proud one, and his approval is what she came back without. He is careful, so every inch is expensive and deniable — which makes an inch feel like a mile.",
       "npc_dean": "He was the disappointment while she was the success. Now they are level and he is enjoying it out loud. Wanting him is wanting the person who is winning.",
-      "npc_cal": "Nineteen, obvious, transparently gone on her. The easy rung \u2014 she finds out what she is willing to do on someone who will never say no, which is its own kind of ugly.",
+      "npc_cal": "Nineteen, obvious, transparently gone on her. The easy rung — she finds out what she is willing to do on someone who will never say no, which is its own kind of ugly.",
       "npc_marek": "A stranger inside the house who owes her nothing and is owed nothing, and who leaves. The rotating slot."
     },
     "crude_ceiling": {
       "npc_ray": [
-        "tier1: nothing named \u2014 her chest, her legs, the shape of her",
-        "tier2: tits, arse, wet, hard, cock \u2014 flatly, once, like an admission",
-        "tier3: cunt, fuck her, come in her \u2014 quiet, never performed"
+        "tier1: nothing named — her chest, her legs, the shape of her",
+        "tier2: tits, arse, wet, hard, cock — flatly, once, like an admission",
+        "tier3: cunt, fuck her, come in her — quiet, never performed"
       ],
       "npc_dean": [
         "tier1: crude ABOUT her as jokes she is meant to hear",
-        "tier2: crude TO her \u2014 cunt, suck it, get on it",
+        "tier2: crude TO her — cunt, suck it, get on it",
         "tier3: anything, narrated while it happens"
       ],
       "npc_cal": [
         "tier1: can barely speak",
-        "tier2: borrowed words, badly \u2014 tits, fuck, please",
+        "tier2: borrowed words, badly — tits, fuck, please",
         "tier3: still asking permission mid-act, and it never stops"
       ],
       "npc_marek": [
-        "transactional and plain from the start \u2014 tits, arse, cunt, fuck. No build, no history."
+        "transactional and plain from the start — tits, arse, cunt, fuck. No build, no history."
       ]
     },
-    "register_rule": "The crude register lives on the STANDING surfaces \u2014 the bathroom, the kitchen at night, the front room after eleven, her own room with the door not shut. One-time scenes may be careful; the content she returns to fifty times is the crude content.",
+    "register_rule": "The crude register lives on the STANDING surfaces — the bathroom, the kitchen at night, the front room after eleven, her own room with the door not shut. One-time scenes may be careful; the content she returns to fifty times is the crude content.",
     "last_read_at_release": "0.1"
   },
   "board": {
@@ -53,14 +53,14 @@
     "locations": [
       {
         "id": "the_front_room",
-        "job": "The house collects here after dark \u2014 whoever is home ends up in it, and after eleven it is usually only one of them.",
+        "job": "The house collects here after dark — whoever is home ends up in it, and after eleven it is usually only one of them.",
         "anchor": true,
-        "fill": 4556,
+        "fill": 9607,
         "has_cycling_pool": true
       },
       {
         "id": "the_kitchen",
-        "job": "The crossing point. Everyone passes through, nobody stays \u2014 so it is where she is caught in passing.",
+        "job": "The crossing point. Everyone passes through, nobody stays — so it is where she is caught in passing.",
         "anchor": false,
         "fill": 1775,
         "has_cycling_pool": true
@@ -74,7 +74,7 @@
       },
       {
         "id": "the_landing",
-        "job": "The vantage. Boards give her away; from here she can hear the water and see the light under the bathroom door. Corridor \u2014 legitimately thin.",
+        "job": "The vantage. Boards give her away; from here she can hear the water and see the light under the bathroom door. Corridor — legitimately thin.",
         "anchor": false,
         "fill": 1367,
         "has_cycling_pool": true
@@ -88,9 +88,9 @@
       },
       {
         "id": "the_bathroom",
-        "job": "The occupancy engine. One bathroom, four adults \u2014 contention, waiting, walking in, being walked in on.",
+        "job": "The occupancy engine. One bathroom, four adults — contention, waiting, walking in, being walked in on.",
         "anchor": false,
-        "fill": 1517,
+        "fill": 1954,
         "has_cycling_pool": true
       },
       {
@@ -134,18 +134,18 @@
         "why_wanted": "owes nothing, is owed nothing, leaves"
       }
     ],
-    "need_engine": "[settings.rent] \u2014 120/week, due Monday, collector npc_ray, grace 1, eviction_mode='flag_set' -> keep_unpaid. Verified live: paying deducts 120, first miss consumes grace, second miss sets keep_unpaid AND THE GAME CONTINUES.",
-    "wardrobe": "9 [[clothing]] items across 3 sources (what she came back with / what she sleeps in / her mother's boxes). worn_corruption is a MAX aggregate \u2014 verified live 2->7 on equipping mothers_slip over sleep_vest. Granted by canvas_the_boxes via exit_block.config.wardrobeEffects."
+    "need_engine": "[settings.rent] — 120/week, due Monday, collector npc_ray, grace 1, eviction_mode='flag_set' -> keep_unpaid. Verified live: paying deducts 120, first miss consumes grace, second miss sets keep_unpaid AND THE GAME CONTINUES.",
+    "wardrobe": "9 [[clothing]] items across 3 sources (what she came back with / what she sleeps in / her mother's boxes). worn_corruption is a MAX aggregate — verified live 2->7 on equipping mothers_slip over sleep_vest. Granted by canvas_the_boxes via exit_block.config.wardrobeEffects."
   },
   "releases": [],
   "promises": [
     {
-      "text": "Marek leaves in spring \u2014 the box room must get a new lodger, not sit empty.",
+      "text": "Marek leaves in spring — the box room must get a new lodger, not sit empty.",
       "made_in": "0.1",
       "paid_in": null
     },
     {
-      "text": "keep_unpaid changes the terms with Ray \u2014 'we'll sort it another way' has to be paid off with actual content.",
+      "text": "keep_unpaid changes the terms with Ray — 'we'll sort it another way' has to be paid off with actual content.",
       "made_in": "0.1",
       "paid_in": null
     },
@@ -170,12 +170,27 @@
       "paid_in": null
     },
     {
-      "text": "Marek's packed bag in the corner of the box room, unopened since October \u2014 planted, unexplained, unpaid.",
+      "text": "Marek's packed bag in the corner of the box room, unopened since October — planted, unexplained, unpaid.",
       "made_in": "0.1",
       "paid_in": null
     },
     {
-      "text": "Hannah Beckett offered a drink. Neither of them will do anything about it \u2014 unless a release makes them.",
+      "text": "Hannah Beckett offered a drink. Neither of them will do anything about it — unless a release makes them.",
+      "made_in": "0.1",
+      "paid_in": null
+    },
+    {
+      "text": "Dean's price list names a version where he does not charge her at all — 'you're not ready to hear what that one costs'. Named, unpriced, unpaid.",
+      "made_in": "0.1",
+      "paid_in": null
+    },
+    {
+      "text": "Ray stopped in the doorway and said nothing. The scene states he has known for a fortnight; his knowing has to become content, not stay a stage direction.",
+      "made_in": "0.1",
+      "paid_in": null
+    },
+    {
+      "text": "Cal's savings account: eight hundred and forty pounds, quoted to the pound because he has checked it recently. Planted, unspent.",
       "made_in": "0.1",
       "paid_in": null
     }
@@ -183,7 +198,7 @@
   "decisions": [
     {
       "at": "board",
-      "note": "The house is ROOMS, not one location. Presence and occupancy are per-location in this engine, so room-level co-location \u2014 the whole engine of a household game \u2014 only works if rooms are locations. Cost: eight locations to fill instead of three."
+      "note": "The house is ROOMS, not one location. Presence and occupancy are per-location in this engine, so room-level co-location — the whole engine of a household game — only works if rooms are locations. Cost: eight locations to fill instead of three."
     },
     {
       "at": "board",
@@ -191,7 +206,7 @@
     },
     {
       "at": "board",
-      "note": "Anchor is the_front_room, not the_bathroom. The bathroom generates the most CHARGED beats but they are short; the front room hosts the evening routine with all three men rotating through it, so it carries the most standing prose. Gate 1 also requires the anchor be reachable and re-enterable \u2014 the measured failure case had a 29% anchor inside a sealed room."
+      "note": "Anchor is the_front_room, not the_bathroom. The bathroom generates the most CHARGED beats but they are short; the front room hosts the evening routine with all three men rotating through it, so it carries the most standing prose. Gate 1 also requires the anchor be reachable and re-enterable — the measured failure case had a 29% anchor inside a sealed room."
     },
     {
       "at": "board",
@@ -203,19 +218,19 @@
     },
     {
       "at": "v0.1 increment 1",
-      "note": "BUILD ORDER FLIPPED, and this should become doctrine. Gate 2 wants >=7.5% of beats explicit, but nerve/exposure/need all start at 0 \u2014 a seduction ladder at tier 0 is absurd. The reference game resolves it the same way: its early heat is not chosen by the player at all. So the explicit floor at v0.1 is carried by the TRIGGERED layer (things that happen TO her) and the STANDING ladder stays cold until she has climbed it. The bathroom was therefore built first, not third."
+      "note": "BUILD ORDER FLIPPED, and this should become doctrine. Gate 2 wants >=7.5% of beats explicit, but nerve/exposure/need all start at 0 — a seduction ladder at tier 0 is absurd. The reference game resolves it the same way: its early heat is not chosen by the player at all. So the explicit floor at v0.1 is carried by the TRIGGERED layer (things that happen TO her) and the STANDING ladder stays cold until she has climbed it. The bathroom was therefore built first, not third."
     },
     {
       "at": "v0.1 increment 1",
-      "note": "SOFT-LOCK found by live play, not by any gate. The opening lands at 17:18, sleep was gated 21:00+, the shift needs the shop, and navigation does NOT advance the clock \u2014 so no scheduled window in the game was reachable, ever. Fixed with activity_evening at the front room (+90 min), which also feeds the anchor's word count, plus widening sleep to 20:00. No static check would have caught this."
+      "note": "SOFT-LOCK found by live play, not by any gate. The opening lands at 17:18, sleep was gated 21:00+, the shift needs the shop, and navigation does NOT advance the clock — so no scheduled window in the game was reachable, ever. Fixed with activity_evening at the front room (+90 min), which also feeds the anchor's word count, plus widening sleep to 20:00. No static check would have caught this."
     },
     {
       "at": "v0.1 increment 1",
-      "note": "COLD START found by live play. Ray and Cal only used the bathroom on weekdays and the game started Friday evening, so the core mechanic was dead until Monday \u2014 three in-game days. That was mechanical scheduling rather than fiction: people wash at weekends. Added weekend bathroom rows (Ray 09:30-10:15, Cal 11:00-11:50) and moved the start to Sunday so Monday morning is day 2."
+      "note": "COLD START found by live play. Ray and Cal only used the bathroom on weekdays and the game started Friday evening, so the core mechanic was dead until Monday — three in-game days. That was mechanical scheduling rather than fiction: people wash at weekends. Added weekend bathroom rows (Ray 09:30-10:15, Cal 11:00-11:50) and moved the start to Sunday so Monday morning is day 2."
     },
     {
       "at": "v0.1 increment 1",
-      "note": "PROSE CAUGHT BY ITS OWN GATE. The first draft of the peep and walk-in scenes scored 0.0% on the explicit floor despite being explicit, because the prose named the act obliquely \u2014 'hard', 'comes', 'finishes' \u2014 instead of naming bodies. That is exactly the defect diagnosed in the previous game. Rewriting seven beats in a crude register took the floor 0.0% -> 12.0% and flipped three gates. The wordlist was NOT loosened: 'come' would match 'come downstairs' everywhere, so excluding it is correct and the prose was the thing at fault."
+      "note": "PROSE CAUGHT BY ITS OWN GATE. The first draft of the peep and walk-in scenes scored 0.0% on the explicit floor despite being explicit, because the prose named the act obliquely — 'hard', 'comes', 'finishes' — instead of naming bodies. That is exactly the defect diagnosed in the previous game. Rewriting seven beats in a crude register took the floor 0.0% -> 12.0% and flipped three gates. The wordlist was NOT loosened: 'come' would match 'come downstairs' everywhere, so excluding it is correct and the prose was the thing at fault."
     },
     {
       "at": "v0.1 increment 1",
@@ -223,15 +238,15 @@
     },
     {
       "at": "v0.1 increment 2a",
-      "note": "TOML SYNTAX: exit blocks must use SECTION syntax ([canvases.nodes.exit_block] + [[canvases.nodes.exit_block.choices]]), not nested inline tables. A multi-line inline table is a parse error, and a conditional choice list is unavoidably multi-line. The shipped game does this 199 times; I wrote it inline first and the merge failed. `conditions = { ... items = [ ... ] }` may span lines because newlines are legal inside the array \u2014 two levels of nesting is where it breaks."
+      "note": "TOML SYNTAX: exit blocks must use SECTION syntax ([canvases.nodes.exit_block] + [[canvases.nodes.exit_block.choices]]), not nested inline tables. A multi-line inline table is a parse error, and a conditional choice list is unavoidably multi-line. The shipped game does this 199 times; I wrote it inline first and the merge failed. `conditions = { ... items = [ ... ] }` may span lines because newlines are legal inside the array — two levels of nesting is where it breaks."
     },
     {
       "at": "v0.1 increment 2a",
-      "note": "METER CEILING caught a real lie. `nerve` displayed a 75-100 top band while the highest authored gate was 75, so the top 25 points bought nothing. Fixed by making the top band UNBOUNDED (min=75, no max) on all three tiers \u2014 which is honest (75 IS the top rung) and which the gate correctly skips as promising nothing."
+      "note": "METER CEILING caught a real lie. `nerve` displayed a 75-100 top band while the highest authored gate was 75, so the top 25 points bought nothing. Fixed by making the top band UNBOUNDED (min=75, no max) on all three tiers — which is honest (75 IS the top rung) and which the gate correctly skips as promising nothing."
     },
     {
       "at": "v0.1 increment 2a",
-      "note": "CAL'S LADDER VERIFIED LIVE. Hub appears at the_front_room only inside his 16:00-19:30 weekday rows (requires_npc). At nerve 60 / cal lust 35 all four rungs render and the fifth renders as SPAN.locked-choice. Clicking 'Sit closer' moved cal lust 35->41 and relation 0->2, player nerve 60->63, exposure 0->2, pride 100->98 \u2014 exactly the declared effects. Zero JS errors."
+      "note": "CAL'S LADDER VERIFIED LIVE. Hub appears at the_front_room only inside his 16:00-19:30 weekday rows (requires_npc). At nerve 60 / cal lust 35 all four rungs render and the fifth renders as SPAN.locked-choice. Clicking 'Sit closer' moved cal lust 35->41 and relation 0->2, player nerve 60->63, exposure 0->2, pride 100->98 — exactly the declared effects. Zero JS errors."
     },
     {
       "at": "v0.1 increment 2a",
@@ -239,27 +254,27 @@
     },
     {
       "at": "v0.1 increment 2b",
-      "note": "THE `need` TIER GOT ITS ENGINE. [settings.rent] (template_import.py:2564-2573) is a first-class rent system and it is exactly the mechanic the reference game's seed uses (Rent Intro / Rent Pay / Rent Refuse / Rent Fight passages in its loc-home). 120/week against a shop paying 30/shift is four shifts \u2014 most of her week, survivable, and one bad week forces the ask. Ray collects, which makes the demand a father invoicing his stepdaughter."
+      "note": "THE `need` TIER GOT ITS ENGINE. [settings.rent] (template_import.py:2564-2573) is a first-class rent system and it is exactly the mechanic the reference game's seed uses (Rent Intro / Rent Pay / Rent Refuse / Rent Fight passages in its loc-home). 120/week against a shop paying 30/shift is four shifts — most of her week, survivable, and one bad week forces the ask. Ray collects, which makes the demand a father invoicing his stepdaughter."
     },
     {
       "at": "v0.1 increment 2b",
-      "note": "eviction_mode = 'flag_set', NOT the default 'game_end'. A product that never ends must not ship a lose-state that stops play. VERIFIED LIVE: paying deducts 120 (200->80); the first miss takes warnings 0->1 and shows the warning prose; the second sets keep_unpaid, shows the soft-eviction prose, and the game CONTINUES \u2014 still playable, returned to Location_her_room. The engine's own fallback line for this mode is 'You're still here. But the terms have changed.'"
+      "note": "eviction_mode = 'flag_set', NOT the default 'game_end'. A product that never ends must not ship a lose-state that stops play. VERIFIED LIVE: paying deducts 120 (200->80); the first miss takes warnings 0->1 and shows the warning prose; the second sets keep_unpaid, shows the soft-eviction prose, and the game CONTINUES — still playable, returned to Location_her_room. The engine's own fallback line for this mode is 'You're still here. But the terms have changed.'"
     },
     {
       "at": "v0.1 increment 2b",
-      "note": "GATE CORRECTED: meter ceiling. With top bands correctly unbounded, the old check read the SECOND band's max as the ceiling and produced nonsense ('exposure shown up to 74'). The truer semantic is that EVERY BAND BOUNDARY IS A PROMISE \u2014 a meter showing 15/35/55/75 tells the player something is different at each. The gate now compares the highest authored gate against the TOP band's min and names the empty bands: 'exposure: bands promise something at 35/55/75, but the highest authored gate is 15'. Vesper unchanged at 1/10."
+      "note": "GATE CORRECTED: meter ceiling. With top bands correctly unbounded, the old check read the SECOND band's max as the ceiling and produced nonsense ('exposure shown up to 74'). The truer semantic is that EVERY BAND BOUNDARY IS A PROMISE — a meter showing 15/35/55/75 tells the player something is different at each. The gate now compares the highest authored gate against the TOP band's min and names the empty bands: 'exposure: bands promise something at 35/55/75, but the highest authored gate is 15'. Vesper unchanged at 1/10."
     },
     {
       "at": "v0.1 increment 2b",
-      "note": "Ray's top rung OMITS locked_text on purpose, so the greyed row shows the action ('Ask him for it in front of the others') \u2014 a want the player can name \u2014 rather than a reason they cannot act. Cal's still shows the reason; compare both before ship and pick one house style."
+      "note": "Ray's top rung OMITS locked_text on purpose, so the greyed row shows the action ('Ask him for it in front of the others') — a want the player can name — rather than a reason they cannot act. Cal's still shows the reason; compare both before ship and pick one house style."
     },
     {
       "at": "v0.1 increment 2c",
-      "note": "ENGINE RULE that HARD-FAILS the build: a flag read by a TRIGGER must be set from a canvas that HAS a location/schedule. `dean_open` was set in the exit of a triggerless rung and read by hub_dean_late's trigger; the flag-chain validator refused the build with 'MISSING HINT - set by ... but no location/schedule' \u2014 it cannot tell the player where to go to earn a flag set inside a link target. Fix: move the flagEffects onto the hub CHOICE that opens the rung. Same semantics, located canvas, chain resolves. Flags nothing reads in a trigger are unaffected."
+      "note": "ENGINE RULE that HARD-FAILS the build: a flag read by a TRIGGER must be set from a canvas that HAS a location/schedule. `dean_open` was set in the exit of a triggerless rung and read by hub_dean_late's trigger; the flag-chain validator refused the build with 'MISSING HINT - set by ... but no location/schedule' — it cannot tell the player where to go to earn a flag set inside a link target. Fix: move the flagEffects onto the hub CHOICE that opens the rung. Same semantics, located canvas, chain resolves. Flags nothing reads in a trigger are unaffected."
     },
     {
       "at": "v0.1 increment 2c",
-      "note": "DEAN VERIFIED LIVE on both surfaces. Kitchen hub appears at Monday 08:30 (his 08:00-09:00 row). Front-room hub appears at Monday 00:30 with getNpcsAtLocation('the_front_room') = ['npc_dean'] \u2014 the OVERNIGHT-WRAP row (23:00-01:30) holds in live presence, not just in a schedule dump, which is the first end-to-end proof of the midnight-wrap finding. The late loop applied dean lust 30->38, relation 0->3, player exposure 40->45, nerve 0->4, pride 100->96. Zero JS errors."
+      "note": "DEAN VERIFIED LIVE on both surfaces. Kitchen hub appears at Monday 08:30 (his 08:00-09:00 row). Front-room hub appears at Monday 00:30 with getNpcsAtLocation('the_front_room') = ['npc_dean'] — the OVERNIGHT-WRAP row (23:00-01:30) holds in live presence, not just in a schedule dump, which is the first end-to-end proof of the midnight-wrap finding. The late loop applied dean lust 30->38, relation 0->3, player exposure 40->45, nerve 0->4, pride 100->96. Zero JS errors."
     },
     {
       "at": "v0.1 increment 2c",
@@ -267,79 +282,91 @@
     },
     {
       "at": "v0.1 increment 2d",
-      "note": "MAREK BUILT \u2014 the rotating slot proven. Verified live: present in the box room at Tuesday 11:00 (his 09:00-16:00 empty-house window, the one no family member competes for), all three rungs render with the fourth locked, and the explicit rung applied money 0->50, need 40->45, exposure 60->64, pride 100->94, his lust 0->8, marek_arrangement set. Zero JS errors. Replacing him next release should touch only his [[npcs]] entry and his block in 5_scenes.toml \u2014 nothing about the world."
+      "note": "MAREK BUILT — the rotating slot proven. Verified live: present in the box room at Tuesday 11:00 (his 09:00-16:00 empty-house window, the one no family member competes for), all three rungs render with the fourth locked, and the explicit rung applied money 0->50, need 40->45, exposure 60->64, pride 100->94, his lust 0->8, marek_arrangement set. Zero JS errors. Replacing him next release should touch only his [[npcs]] entry and his block in 5_scenes.toml — nothing about the world."
     },
     {
       "at": "v0.1 increment 2d",
-      "note": "NINE OF TEN GATES PASS. standing surface 4/4, traversal heat 5/8 (62%, over the 60% floor), meter ceiling clear, ends on an opening at 4 locked rungs, ascent tiers all three gated (nerve 4+, exposure 6+, need 7+). The only remaining failure is location fill \u2014 7,605 words against a ~34,000 target, median 698 vs 3,000, mean 951 vs 4,500. That is not a design problem; it is the writing that a first release costs."
+      "note": "NINE OF TEN GATES PASS. standing surface 4/4, traversal heat 5/8 (62%, over the 60% floor), meter ceiling clear, ends on an opening at 4 locked rungs, ascent tiers all three gated (nerve 4+, exposure 6+, need 7+). The only remaining failure is location fill — 7,605 words against a ~34,000 target, median 698 vs 3,000, mean 951 vs 4,500. That is not a design problem; it is the writing that a first release costs."
     },
     {
       "at": "v0.1 increment 2d",
-      "note": "PROMISES LOGGED. Six named-but-unpaid threads recorded in `promises` \u2014 Marek leaving in spring (the slot must be refilled, not left empty), the keep_unpaid 'we'll sort it another way' line, and the four locked 75-rungs. Each must be paid or explicitly cut; the measured failure mode is a character dangled for years."
+      "note": "PROMISES LOGGED. Six named-but-unpaid threads recorded in `promises` — Marek leaving in spring (the slot must be refilled, not left empty), the keep_unpaid 'we'll sort it another way' line, and the four locked 75-rungs. Each must be paid or explicitly cut; the measured failure mode is a character dangled for years."
     },
     {
       "at": "v0.1 increment 2e",
-      "note": "THE MOST DANGEROUS FAILURE CLASS SO FAR: an unrecognised TOML key is SILENTLY IGNORED. I wrote `clothingEffects = [{itemId, op='grant'}]` to grant the two garments. The TOML parsed, the validator passed, the build went green \u2014 and nothing was ever granted, which would have left the top of the wardrobe permanently unreachable with no error anywhere. The real key is `wardrobeEffects = [{action='add', item_id='...'}]` on exit_block.config. Nothing in the pipeline catches an invented key; the only defence is to grep template_import.py for any key not personally seen in a shipped game."
+      "note": "THE MOST DANGEROUS FAILURE CLASS SO FAR: an unrecognised TOML key is SILENTLY IGNORED. I wrote `clothingEffects = [{itemId, op='grant'}]` to grant the two garments. The TOML parsed, the validator passed, the build went green — and nothing was ever granted, which would have left the top of the wardrobe permanently unreachable with no error anywhere. The real key is `wardrobeEffects = [{action='add', item_id='...'}]` on exit_block.config. Nothing in the pipeline catches an invented key; the only defence is to grep template_import.py for any key not personally seen in a shipped game."
     },
     {
       "at": "v0.1 increment 2e",
-      "note": "THE WARDROBE IS REAL, NOT DECORATIVE \u2014 which was the plan's decisive check. Verified live: 7 initial garments equip at start; canvas_the_boxes grants mothers_sundress + mothers_slip; equipping the slip moved worn_corruption 2->7 (MAX aggregate, not sum \u2014 one loaded garment sets the reading alone); and activity_get_dressed rendered its tier-3 band in response. Clothing is now a genuine gate source for the `exposure` tier rather than a UI ornament."
+      "note": "THE WARDROBE IS REAL, NOT DECORATIVE — which was the plan's decisive check. Verified live: 7 initial garments equip at start; canvas_the_boxes grants mothers_sundress + mothers_slip; equipping the slip moved worn_corruption 2->7 (MAX aggregate, not sum — one loaded garment sets the reading alone); and activity_get_dressed rendered its tier-3 band in response. Clothing is now a genuine gate source for the `exposure` tier rather than a UI ornament."
     },
     {
       "at": "v0.1 increment 2e",
-      "note": "HER ROOM built out from 68 words: the boxes (milestone -> grants the wardrobe's top tier), activity_get_dressed (banded on worn_corruption), activity_the_door (the broken catch, banded on exposure \u2014 the room's whole thesis: she has stopped meaning to fix it), and activity_alone (solo, gated arousal>=30, banded on nerve so what she thinks about changes as she climbs). All four are STANDING surfaces, which is where the crude register belongs."
+      "note": "HER ROOM built out from 68 words: the boxes (milestone -> grants the wardrobe's top tier), activity_get_dressed (banded on worn_corruption), activity_the_door (the broken catch, banded on exposure — the room's whole thesis: she has stopped meaning to fix it), and activity_alone (solo, gated arousal>=30, banded on nerve so what she thinks about changes as she climbs). All four are STANDING surfaces, which is where the crude register belongs."
     },
     {
       "at": "v0.1 increment 2e-2",
-      "note": "THE REGISTER DEFECT IS MINE AND IT RECURS. Third time. The new peeps and walk-ins added SIXTEEN beats and ZERO explicit ones \u2014 every new beat scored 0 or 1 against the 3-word floor, dropping the game to exactly 7.5%. The pattern is always the same: name a body part once, then pivot the next beat to psychology (he knows / her face burning / what it means). The heat sits in the situation and never in the words. This is Vesper's diagnosed defect reproduced by the same author who wrote the doctrine against it, twice after writing it. THE FIX IS NOT WORD-STUFFING: stay on the body THROUGH the beat instead of referencing it once and moving on. Eleven targeted rewrites took the floor 7.5% -> 9.4%, which is at the TOP of the reference game's measured 7.5-9.3% band. Conclusion for the skill: this is not a lapse, it is a default that reasserts itself the moment it is not being actively fought, and the gate is the only thing that catches it."
+      "note": "THE REGISTER DEFECT IS MINE AND IT RECURS. Third time. The new peeps and walk-ins added SIXTEEN beats and ZERO explicit ones — every new beat scored 0 or 1 against the 3-word floor, dropping the game to exactly 7.5%. The pattern is always the same: name a body part once, then pivot the next beat to psychology (he knows / her face burning / what it means). The heat sits in the situation and never in the words. This is Vesper's diagnosed defect reproduced by the same author who wrote the doctrine against it, twice after writing it. THE FIX IS NOT WORD-STUFFING: stay on the body THROUGH the beat instead of referencing it once and moving on. Eleven targeted rewrites took the floor 7.5% -> 9.4%, which is at the TOP of the reference game's measured 7.5-9.3% band. Conclusion for the skill: this is not a lapse, it is a default that reasserts itself the moment it is not being actively fought, and the gate is the only thing that catches it."
     },
     {
       "at": "v0.1 increment 2e-2",
-      "note": "THE MORNING QUEUE VERIFIED LIVE. Added Dean a bathroom row (07:40-08:00 weekdays), which he lacked entirely \u2014 he could neither be peeped nor walk in on anything. Grid now steps cleanly: 06:45 Ray, 07:20 Cal, 07:50 Dean, 08:30 empty, no overlaps. Each of the four peeps is offered only while its own man is in its own room, including Marek's box-room peep at Tuesday 11:00 which needed no new schedule row because his door was already established as half open."
+      "note": "THE MORNING QUEUE VERIFIED LIVE. Added Dean a bathroom row (07:40-08:00 weekdays), which he lacked entirely — he could neither be peeped nor walk in on anything. Grid now steps cleanly: 06:45 Ray, 07:20 Cal, 07:50 Dean, 08:30 empty, no overlaps. Each of the four peeps is offered only while its own man is in its own room, including Marek's box-room peep at Tuesday 11:00 which needed no new schedule row because his door was already established as half open."
     },
     {
       "at": "v0.1 increment 2e-2",
-      "note": "PLANTED FACTS PAID. All three night-one details now have content hanging off them: the gap down the hinge side (four peeps), the extractor that makes her deaf (three walk-ins hung off activity_wash's substitutions at rising exposure), and the eighteen-inch wall (activity_the_wall, banded on nerve \u2014 at the bottom she is trying not to hear it, at the top she is timing herself to it)."
+      "note": "PLANTED FACTS PAID. All three night-one details now have content hanging off them: the gap down the hinge side (four peeps), the extractor that makes her deaf (three walk-ins hung off activity_wash's substitutions at rising exposure), and the eighteen-inch wall (activity_the_wall, banded on nerve — at the bottom she is trying not to hear it, at the top she is timing herself to it)."
     },
     {
       "at": "v0.1 increment 2e-3a",
-      "note": "THE DOCTRINE WORKS, AND THIS WAS ITS TEST. references/register.md was written first, then the kitchen was authored against it. Result: beats 106 -> 120 (+14) and the explicit floor 9.4% -> 10.0% \u2014 the floor went UP. For four consecutive increments before this, new content dropped it and had to be rewritten after the gate caught it. The rule that did it: an explicit beat stays on the body for its whole length, and the interiority gets its OWN beat afterwards rather than being folded into the act. Splitting them costs nothing (cascade beats are free) and sacrifices none of the psychology."
+      "note": "THE DOCTRINE WORKS, AND THIS WAS ITS TEST. references/register.md was written first, then the kitchen was authored against it. Result: beats 106 -> 120 (+14) and the explicit floor 9.4% -> 10.0% — the floor went UP. For four consecutive increments before this, new content dropped it and had to be rewritten after the gate caught it. The rule that did it: an explicit beat stays on the body for its whole length, and the interiority gets its OWN beat afterwards rather than being folded into the act. Splitting them costs nothing (cascade beats are free) and sacrifices none of the psychology."
     },
     {
       "at": "v0.1 increment 2e-3a",
-      "note": "THE MISSING DOCTRINE FILE. The skill said WHERE the crude register lives and WHICH words were permitted, and nothing about HOW to write the beat \u2014 which is why the same author reproduced the defect three times after writing the doctrine against it. references/register.md now names the three pivot targets explicitly (he knows / she is ashamed / what this says about her) so they are catchable while writing, and states that the fix is duration on the body, NOT word-stuffing and NOT loosening the frozen wordlist."
+      "note": "THE MISSING DOCTRINE FILE. The skill said WHERE the crude register lives and WHICH words were permitted, and nothing about HOW to write the beat — which is why the same author reproduced the defect three times after writing the doctrine against it. references/register.md now names the three pivot targets explicitly (he knows / she is ashamed / what this says about her) so they are catchable while writing, and states that the fix is duration on the body, NOT word-stuffing and NOT loosening the frozen wordlist."
     },
     {
       "at": "v0.1 increment 2e-3a",
-      "note": "KITCHEN built out 698 -> 1,775. Four surfaces against the existing schedule: Cal 07:40-08:00 (twenty minutes, cannot look at her, and the cupboard is above his head), Dean 08:00-09:00 (down from the bathroom she watched him in \u2014 the whole scene is the not-mentioning), Marek 16:00-17:30 (the only hour the two of them are the only adults in the house, and the only meal anyone eats sitting down). Marek and Cal both now carry two surfaces."
+      "note": "KITCHEN built out 698 -> 1,775. Four surfaces against the existing schedule: Cal 07:40-08:00 (twenty minutes, cannot look at her, and the cupboard is above his head), Dean 08:00-09:00 (down from the bathroom she watched him in — the whole scene is the not-mentioning), Marek 16:00-17:30 (the only hour the two of them are the only adults in the house, and the only meal anyone eats sitting down). Marek and Cal both now carry two surfaces."
     },
     {
       "at": "v0.1 increment 2e-3b",
-      "note": "THE ANCHOR TRAP \u2014 a ratio gate tightens as you work elsewhere. Gate 1 wants the anchor at >=25% of ALL location prose, so the front room's share fell 53% -> 46% -> 40% -> 39% -> 35% while six other rooms were written and not one word was removed from it. Held at 4,020 it would have crossed below 25% within a single further increment, taking the game 9/10 -> 8/10 while getting objectively better. Budget the anchor against the FINISHED total: at 36,000 it owes 9,000. Recorded in references/the-board.md as 'fill the anchor IN STEP with the rest'."
+      "note": "THE ANCHOR TRAP — a ratio gate tightens as you work elsewhere. Gate 1 wants the anchor at >=25% of ALL location prose, so the front room's share fell 53% -> 46% -> 40% -> 39% -> 35% while six other rooms were written and not one word was removed from it. Held at 4,020 it would have crossed below 25% within a single further increment, taking the game 9/10 -> 8/10 while getting objectively better. Budget the anchor against the FINISHED total: at 36,000 it owes 9,000. Recorded in references/the-board.md as 'fill the anchor IN STEP with the rest'."
     },
     {
       "at": "v0.1 increment 2e-3b",
-      "note": "FLAG-CHAIN RULE IS BROADER THAN RECORDED. Hit it a second time with ray_arrangement: the validator refuses a flag set in a triggerless rung when it is read by a CHOICE condition, not only by a trigger. Same fix both times \u2014 move the flagEffects up onto the located hub choice that opens the rung. engine.md \u00a716 corrected to say 'a TRIGGER or a CHOICE'."
+      "note": "FLAG-CHAIN RULE IS BROADER THAN RECORDED. Hit it a second time with ray_arrangement: the validator refuses a flag set in a triggerless rung when it is read by a CHOICE condition, not only by a trigger. Same fix both times — move the flagEffects up onto the located hub choice that opens the rung. engine.md §16 corrected to say 'a TRIGGER or a CHOICE'."
     },
     {
       "at": "v0.1 increment 2e-3b",
-      "note": "THE LAST EMPTY SCHEDULE ROW IS FILLED. Dean was present in the garage 14:00-17:00 at weekends with zero content \u2014 the only scheduled row in the game with nothing on it. Verified live at Saturday 15:00: getNpcsAtLocation('the_garage') returns ['npc_dean'] and his hub renders. He now carries three surfaces (kitchen, front room late, garage)."
+      "note": "THE LAST EMPTY SCHEDULE ROW IS FILLED. Dean was present in the garage 14:00-17:00 at weekends with zero content — the only scheduled row in the game with nothing on it. Verified live at Saturday 15:00: getNpcsAtLocation('the_garage') returns ['npc_dean'] and his hub renders. He now carries three surfaces (kitchen, front room late, garage)."
     },
     {
       "at": "v0.1 increment 2e-3b",
-      "note": "SCOPE HONESTY: the plan named three targets and this increment hit two. Garage 309 -> ~1,600 and the front room 4,020 -> ~5,000 (the anchor instalment, verified live at Monday 01:00). THE BOX ROOM WAS NOT TOUCHED and remains at 908 \u2014 it carries into the next increment rather than being quietly dropped."
+      "note": "SCOPE HONESTY: the plan named three targets and this increment hit two. Garage 309 -> ~1,600 and the front room 4,020 -> ~5,000 (the anchor instalment, verified live at Monday 01:00). THE BOX ROOM WAS NOT TOUCHED and remains at 908 — it carries into the next increment rather than being quietly dropped."
     },
     {
       "at": "v0.1 increment 2e-4",
-      "note": "AUTHORING BUG CAUGHT IN MY OWN PROSE: Hannah Beckett's line in canvas_someone_who_knew was written as a `dialog` block attributed to npcId=npc_marek, because she is a walk-on with no NPC record. It would have rendered 'Marek:' over a woman's line in the built game. Fixed by making it quoted prose in a paragraph. THE STRUCTURAL REASON WALK-ONS MUST BE PROSE: adding Hannah as an [[npcs]] entry would immediately BREAK gate 6, which requires every declared character to have a standing surface and a schedule row. The gate is right \u2014 a character with a name and no way to find them is the defect it exists to catch \u2014 so one-scene characters are narrated, never declared."
+      "note": "AUTHORING BUG CAUGHT IN MY OWN PROSE: Hannah Beckett's line in canvas_someone_who_knew was written as a `dialog` block attributed to npcId=npc_marek, because she is a walk-on with no NPC record. It would have rendered 'Marek:' over a woman's line in the built game. Fixed by making it quoted prose in a paragraph. THE STRUCTURAL REASON WALK-ONS MUST BE PROSE: adding Hannah as an [[npcs]] entry would immediately BREAK gate 6, which requires every declared character to have a standing surface and a schedule row. The gate is right — a character with a name and no way to find them is the defect it exists to catch — so one-scene characters are narrated, never declared."
     },
     {
       "at": "v0.1 increment 2e-4",
-      "note": "A USEFUL LINT, worth adding to gates.py later: flag any `dialog` block whose npcId is a character the canvas neither BINDS (npc/requires_npc) nor NAMES in its id. Run over back_home it returns exactly 2 hits, both canvas_arrival (which legitimately has Ray and Dean speaking in the opening), and it WOULD have caught the Hannah bug. The naive version \u2014 flagging dialogue on any unbound canvas \u2014 returns 30 false positives, because every triggerless rung is unbound by design and correctly carries its own character's voice."
+      "note": "A USEFUL LINT, worth adding to gates.py later: flag any `dialog` block whose npcId is a character the canvas neither BINDS (npc/requires_npc) nor NAMES in its id. Run over back_home it returns exactly 2 hits, both canvas_arrival (which legitimately has Ray and Dean speaking in the opening), and it WOULD have caught the Hannah bug. The naive version — flagging dialogue on any unbound canvas — returns 30 false positives, because every triggerless rung is unbound by design and correctly carries its own character's voice."
     },
     {
       "at": "v0.1 increment 2e-4",
-      "note": "THE SHOP IS THE MIRROR. Built 76 -> ~1,000: the regulars banded on `pride` (the same six hours read as humiliation, then as rest, then as camouflage), and canvas_someone_who_knew \u2014 a woman she sat next to for two years, who does the face badly. The point of the shop is that it is the ONLY place the reversal is visible from outside the house, and from out there the story is short and finished: June went, June came back, June is at the shop. The house is the only part still moving."
+      "note": "THE SHOP IS THE MIRROR. Built 76 -> ~1,000: the regulars banded on `pride` (the same six hours read as humiliation, then as rest, then as camouflage), and canvas_someone_who_knew — a woman she sat next to for two years, who does the face badly. The point of the shop is that it is the ONLY place the reversal is visible from outside the house, and from out there the story is short and finished: June went, June came back, June is at the shop. The house is the only part still moving."
+    },
+    {
+      "at": "v0.1 anchor increment",
+      "note": "The half-hour-both-of-them-are-in-it scene is a triggerless RUNG off hub_dean_late, not a located canvas. It was written as a canvas first and the build refused it: only one repeatable canvas is allowed per location + NPC + time window, and hub_dean_late already owned npc_dean at the front room. Ray's presence is tested on the CHOICE with npc_at_location, which is evaluated live, so the row is up only during the 23:00-23:30 overlap of their two rows. Verified in the built game: present at 23:10, gone at 23:45."
+    },
+    {
+      "at": "v0.1 anchor increment",
+      "note": "triggered_crossing_the_room binds NO NPC on purpose. The any-NPC form of npc_at_location (npc_id omitted) tests that the room is occupied without saying by whom, which is the content — she crosses without looking — and it also makes dialogue mis-attribution structurally impossible, since no character is in scope."
+    },
+    {
+      "at": "v0.1 anchor increment",
+      "note": "The anchor was budgeted against the FINISHED 36,000-word total rather than the current one: 9,630 words is 51% today and lands near 27% when the seven satellites reach their targets. Filling it later would have meant filling it twice."
     }
   ]
 }

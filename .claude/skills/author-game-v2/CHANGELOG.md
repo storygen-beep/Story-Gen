@@ -5,6 +5,92 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-11 — v0.1 Phase 1: the anchor, 5,123 → 9,607, and three engine facts it cost
+
+**What.** The front room taken from 5,123 words to 9,607 in one pass — the anchor budgeted
+against the *finished* 36,000-word total (where it owes ~9,000) rather than the current one,
+because the ratio tightens every time any other room grows and topping it up later means
+writing it twice. Files touched: `games/back_home/toml_phases/5_scenes.toml` and
+`3_activities.toml`, plus `references/engine.md`, `SKILL.md` and the game's `v2_state.json`.
+
+Gate 1 still fails, as expected and as planned — mean 2,360 against 4,500, median 1,496 against
+3,000. It closes when the seven satellites are filled. What this bought is the right to fill
+them without the anchor sliding under 25% on the way.
+
+### The register rule was written from this game's own failures and never applied to it
+
+`references/register.md` quotes, as pivot target #3, the sentence *"…and the arithmetic does not
+come out the way it is supposed to."* That sentence was still sitting at the end of
+`loop_ray_arrangement`, and the beat carrying it scored **zero**. Measured per beat, all three
+repeatable sex loops failed the same way in the same place — their *tails*:
+
+| | beat 1 | beat 2 | beat 3 | beat 4 |
+|---|---|---|---|---|
+| `loop_ray_arrangement` | 4 | 1 | **0** | 0 |
+| `loop_dean_late` | 3 | 1 | **0** | **0** |
+| `loop_cal_sex` | 4 | 3 | **0** | 0 |
+
+Every loop opened explicit and then left the body exactly when the act got closest. The fix was
+the one the doctrine already prescribes — keep the camera on the body to the last sentence, and
+give the interiority its own beat *after* — and it moved the whole game **10.8% → 15.9%** of
+beats at 3+ explicit words, without one gratuitous noun.
+
+**Two words worth knowing are NOT on the frozen list:** `wet` and `come` (the latter excluded
+deliberately, since it matches "come downstairs"). Three finishing beats rewritten to be
+relentlessly physical still scored 2, because they leaned on both. The list is the instrument;
+write to the body and check the number.
+
+### Three engine facts, each caught by a build that refused to run
+
+1. **The documented build command was wrong** — in `SKILL.md` *and* `references/engine.md`.
+   `package_from_toml` takes named, required `--file` and `--output`; the positional-plus-
+   `--output-dir` form both files carried exits 2 and builds nothing. `python` may not be on the
+   path either. Both files corrected. A skill that cannot build the game it authored is a broken
+   skill, and this had been shipped since the first release.
+2. **Move a flag setter — never duplicate it.** `cal_arrangement` was set on the located hub
+   choice *and* left on the triggerless loop. The validator resolved it to the one without a
+   location and hard-failed with `MISSING HINT`, naming the loop's canvas name (`Take him
+   upstairs`), which reads exactly like the hub choice of the same wording. §16 sharpened.
+3. **One repeatable canvas per location + NPC + time window.** The two-men scene was written as
+   a located canvas and the build warned that `hub_dean_late` already owned `npc_dean` at the
+   front room. It is a *warning*, not an error — a canvas shadowed this way looks correct in
+   TOML and is unreachable in play. New §19; treat the warning as an error.
+
+### `npc_at_location` promoted from "known" to "verified live" (new §20)
+
+`generators/v2.py:4131-4145` and `:7791`. **`npc_id` is optional — omit it and the predicate
+tests whether the room is occupied by anybody.** Confirmed in the built game rather than read:
+the two-men choice rendered at 23:10, where Ray's 20:00–23:30 row overlaps Dean's 23:00–01:30,
+and was gone at 23:45 with identical player state.
+
+That single fact carried the increment's two new content kinds. Conditions on a *choice* are
+evaluated live at render, so the scene the engine refused as a canvas works better as a rung on
+the existing hub. And the any-NPC form let the TRIGGERED piece — she crosses the room in what
+she sleeps in and does not look to see which of them is in the chair — bind **no NPC at all**,
+which is both the content and a structural guarantee that no dialogue can be mis-attributed.
+
+### Live-testing this engine, for whoever writes the next harness
+
+Static parsing cannot see a passage that errors. Three things about the built game are not what
+a reasonable person would guess, and each cost a run:
+
+- `State` and `Engine` are **not** bare globals. Use `SugarCube.State`, `SugarCube.Engine`,
+  `SugarCube.setup`.
+- `$flags` is an **object** keyed by flag name, not an array. `.includes` throws.
+- Player traits live at `player.core_traits`, not `player.traits`.
+
+All fourteen new or rewritten passages then rendered clean: no JS errors, every cascade
+advancing, and no speaker outside the four declared characters.
+
+**9/10 holds.** Nothing else moved: explicit-in-repeatable 100%, standing surface 4/4,
+milestones 4/4, meter ceiling clean, four locked doors still shut. Three new promises logged
+(Dean's uncharged version, Ray's knowing, Cal's £840). The stray `Wren-solo` labels — Vesper's
+protagonist used as a pattern name in a game about June — are gone.
+
+**+17,100 remain**, all of it in the seven satellites.
+
+---
+
 ## 2026-08-10 — v0.1 increment 2e-4: the box room and the shop, and a bug in my own prose
 
 **What.** Box room 908 → 1,228, shop 76 → 654. Two new promises logged.
