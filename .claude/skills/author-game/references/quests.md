@@ -26,6 +26,7 @@ when the engine is regenerated, so if a line looks wrong, `grep -n` the named sy
 - §7 — The end-of-content card
 - §8 — The quests-vs-sidebar split
 - §9 — Designing the page (the Step-5 deliverable)
+- §10 — Sweep the whole table when the world moves (⚠️ the three triggers)
 
 ---
 
@@ -143,6 +144,16 @@ once corruption hits 50, R5's `→ 50` goal is met and the sidebar goes blank.
 "take him to bed" gated on `renner_fucked_once is_false`, the one numberless rung) or a **`ready_canvas`** (the 🔓
 Ready frame). Never leave a met-numeric card as the last thing an NPC's chain points at.
 
+**⚠️ And the third case, which is worse because nothing looks wrong: the section DISAPPEARS.** A blank row at
+least shows a heading. If the arc's last card retires with **nothing matching behind it**, `pickQuestsCard`
+returns `null`, `:: QuestsPage` skips the section entirely (`v2.py:15141`), and the NPC vanishes off the page —
+at the exact moment the arc ends and they become **permanent sandbox content the player can still go and use**.
+So: **every arc'd NPC needs one card that matches forever after the arc closes** — the warm-tap / end-of-content
+shape (§7). Audit it by walking each NPC's chain to its last rung and asking what matches *after* it.
+*(Measured: Vesper's Renner ladder gates all nine cards on `renner_drained is_false` or
+`renner_office_open is_false`; his heading disappeared on the drain while his office stayed open for the rest of
+the game. Calloway and Colm both had an end card and did not. Nobody noticed for eleven beats.)*
+
 ## §7 — The end-of-content card
 When an arc (or the whole build) runs out of content, show a **frontier-seed card**, not a dead number. A card
 that is **goal-less + `ready_text`-less + non-terminal** renders as **flavor `text` + `tip` only** (Frame 3 is
@@ -165,9 +176,73 @@ At blueprint (Step 5), lay out the **whole page** in the design book, before aut
    (one climbing trait). Write the rungs, each with its `when` band and its `goals[].label` **walkthrough line**
    (place + person + verb — §3); a meter-gated rung names its feeder (§3).
 3. **The end-of-content card** (§7) — where the current build stops.
-4. **Check it as a surface:** every NPC section is non-stale (§6 — no met-numeric dead end), every live label
-   passes the walkthrough standard (§3), parity-matched to its `npc_panel` next row (§4), and free of dev-speak.
-   Confirm at Step 6.
+4. **Check it as a surface:** every NPC section is non-stale (§6 — no met-numeric dead end, and nothing that
+   *disappears*), every live label passes the walkthrough standard (§3), parity-matched to its `npc_panel` next
+   row (§4), and free of dev-speak. Confirm at Step 6.
+5. **⚠️ No two CO-LIVE cards repeat a clause.** The Story-Goals card and every NPC card render on **one
+   screen**, so a phrase carried over from the spine prints twice in the same view. This is not a hypothetical
+   tidiness note: authoring an NPC tier *next to* the spine cards it belongs with produces the echo almost
+   every time — the sentence is right there and it is the best sentence you have. Vesper's `beat_0084` shipped
+   eight of them into one draft and had to rewrite every card to kill them. The rule that fixes it is the same
+   one that justifies the two tiers at all: **the NPC card says what the spine leaves out** — the man, the
+   count, the state of him — never the mission beat again in different words. Audit mechanically: for each
+   reachable state, take the live set and flag any **six-word run** shared by two of them.
+
+## §10 — Sweep the whole table when the world moves
+§9 lays the page out **once**. This section is the maintenance rule, and it is the one the page actually fails
+on: a card is written true, the world changes around it, and the card keeps saying the old thing. Nothing warns
+you — the build is green, the card renders, the sentence is grammatical. **Three triggers, each one a
+whole-table grep, never a read of the card in front of you.**
+
+**⚠️ The trap that makes all three hard: these defects cannot be checked LOCALLY.** Asking "is this card's
+sentence true from where this card stands?" answers *yes* for every one of them. That is the wrong question.
+
+### 1. The frontier moves → re-grep the boundary claim
+When the build ends somewhere, the frontier card says so ("that's where this build ends; X is the next
+release"). When the next chunk ships, that card **is still saying it** — and it is now describing this
+release's own contents as the next one.
+
+**Rule: exactly ONE card in the game may name the build boundary.** Moving the frontier is a **two-step**
+edit — *strip the old, add the new* — and the check is
+`grep -c 'build ends' <the tip assignments>` over the whole table, expecting **1**. Anchor the grep on the
+syntax that **declares** a tip (`^tip\s*=`), not on the bare string: the comment blocks quote the sentences you
+stripped, so a naive count matches its own history.
+The **Support-Us ask is a separate thing and rides EVERY rung** — a player who stops anywhere should see it.
+Only the *claim* walks. (Strip both at once and the live card loses the ask for the whole chunk.)
+
+*(Measured, Vesper 1b: the boundary walked forward five times and three cards were left holding it. The
+comments above two of them record the check being **run and passed** — against the card's own rung. The worst
+of the three named "cutting the leash, opening the file, and reading what you are" as the next release, in a
+build that shipped all three.)*
+
+### 2. The map seals or opens → re-grep every place-name
+**A `tip` is a direction, so it is coupled to reachability.** When a beat locks a region, greys out a travel
+choice, or moves a location's parent, every live card naming somewhere inside it becomes a false direction —
+and pointing a player at content they cannot reach is the purest form of the genre's dominant complaint (§3).
+Sweep by NPC **and** by place: for each live card, is the place still reachable *from where the player now
+is*, and is the person still there?
+
+Watch for the **half-stale** card, which is the easy one to miss: Vesper's Colm end card kept a back room that
+was still open and a "take it to Vane at Vance Securities" that pointed through a sealed floor.
+**The fix is usually ONE card, not N edits** — the NPC tier returns the single highest-priority match
+(`pickQuestsCard`, §1), so a new card at a priority **above the whole ladder**, gated on the sealing flag,
+covers every rung at once and cannot be defeated by where the player's arc stopped. That last part matters:
+the *unfinished* arc is the worse case, because its rungs are live instructions.
+
+### 3. A mechanic retires → sweep the cards with the canvases
+`lanes.md`'s terminal-flag sweep ("when a flag makes something permanently true, list what it makes
+permanently false") binds here too. If a beat retires an item, a switch, a meter, or a gate, then any card
+whose subject is *acquiring or smuggling that thing* is now an instruction about an object that no longer
+exists. Give it a post-retirement partner card gated on the terminal flag, exactly as you would re-partition a
+canvas's exits.
+
+### The audit, as three commands
+Run at Step 6, and again in the beat that moves any of the three:
+```
+grep -n '^tip'  <scenes>.toml | grep -c 'build ends'     # expect exactly 1
+grep -n '^tip'  <scenes>.toml | grep -i '<sealed place>' # expect 0 live cards
+```
+plus, for each arc'd NPC, walk the chain to its last rung and ask **what matches after it** (§6).
 
 ---
 

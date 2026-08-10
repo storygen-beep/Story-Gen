@@ -352,17 +352,93 @@ effects = [
   { targetType = "player", trait = "arousal_charge", op = "set", value = 3 },
 ]
 
-# ═══════════════════ 1b DEFERRED (rev 97) — activity_kess_cot (the Reach rest-bed) shelved ═════════════════
-# THE REACH REST-BED (beat_0069, rev 96): the cradle-substitute @kess_berth, gated reach_safehouse (set by the
-# shelved kess_1b_open). TWO tiers — "Crash rough" (FREE, +40 Charge, the soft-lock floor) + "A night on the feed
-# line" (RENT: 10 coin, +100 Charge, 540 min day-advance, drain reload). It FIXED the post-close stranded-battery
-# dead-end. REMOVED because 1b isn't releasing (the whole Kess safehouse arc is shelved, and reach_safehouse never
-# sets now). ⚠️ CONSEQUENCE: with this out, the post-close Reach sandbox has NO Charge restore again — the latent
-# pre-1b dead-end returns for a player who ignores the terminal frontier card (D) and keeps grinding. Acceptable for
-# a 1a-only test-portal release (this is the exact pre-rev-96 state), but it comes BACK the moment 1b ships this bed.
-# Full block preserved in commit 08ec2e1 (rev 96). RE-ENABLE: restore this canvas alongside kess_1b_open + the berth
-# reopen + dev_jump_1b_start + the E frontier card.
-# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════
+# ─── beat_0068 (RESTORED rev 113; built rev 96) — THE REACH REST-BED: the cradle-substitute ───────
+# Restored verbatim from 08ec2e1, reach_safehouse -> berth_home. THIS IS THE FIX FOR THE SHIPPED 0.1.7
+# DEAD-END. (beat_0069, rev 114: the work-stall did NOT become a second bill. The plan had a weekly
+# activity_pay_rent on top of this; the fiction had already said "per night" in Kess's own mouth, so the
+# PAID NIGHT BELOW *IS* THE UPKEEP — it sets feed_line_days = 3. activity_pay_rent was dropped.)
+# The post-1a-close problem: the cradle (the ONLY Charge restore + the ONLY bed) is Spire-side, and the close
+# seals the Spire. Dropped in the Reach with a live sandbox that costs Charge, the player had no way to refill it
+# -> a silent dead-end (Charge -> 0, everything greys, no death screen). This bed fixes it. Gated berth_home
+# (set by kess_1b_open, 5_scenes) so it only exists once Kess has taken her in. TWO tiers, deliberately:
+#   • "Crash rough" — FREE, always available, +40 Charge, 120 min, no day-advance. The survivability FLOOR: it kills
+#     the coin soft-lock (a coin-only bed would strand her — no Charge -> can't earn coin at the brothel/pit ->
+#     can't pay to sleep). 40 > the 15-Charge action floor, so she can always scrape back to functional.
+#   • "A night on the feed line" — the RENT: costs 10 coin, +100 Charge (full), 540 min day-advance, AND reloads the
+#     drain (Kess's feed line is the natural home for it; the cradle's weapon-reload is Spire-side + now sealed off).
+# Rougher than the cradle by design (LO's lean): comfort costs Reach coin every night; the free option is a genuinely
+# rough half-charge. Also gives the coin economy (brothel/pit earn) a real sink. Emitter reload left for a later 1b
+# beat. Choices carry costs+effects (market pattern, underworld_market_shop); the result nodes carry the time.
+[[canvases]]
+id          = "activity_kess_cot"
+name        = "The cot"
+description = "Wren-solo @kess_berth (rev 96). The Reach rest-bed — the cradle-substitute after the Spire seals. Gated berth_home is_true. TWO tiers: 'Crash rough' (FREE, +40 Charge, 120 min, no day-advance — the soft-lock floor) and 'A night on the feed line' (10 coin, +100 Charge, 540 min day-advance, reload the drain, AND feed_line_days -> 3). Repeatable, pri 3. Fixes the post-close dead-end (no Charge restore in the Reach); rougher than the cradle by design. rev 114 (beat_0069): the paid tier IS the upkeep — the same coin buys three days of Kess's time on the key, so crash-rough-forever means he never touches it. Coin gates PROGRESS, never action."
+[canvases.trigger]
+location      = "kess_berth"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "berth_home", operator = "is_true" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "The cot"
+blocks = [
+  { type = "paragraph", content = "The cot sits along the wall by Kess's feed line — a stripped bench with a pad on it and a tap off the same rig he uses to wake dead machines. Not the cradle. But it holds a charge, and down here that's the whole of what she needs a bed to do." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Crash rough — a couple hours, no coin. (Half a charge.)"
+targetType = "node"
+nodeId     = "activity_kess_cot.rough"
+effects    = [{ targetType = "player", trait = "energy", op = "add", value = 40, clamp = true }]
+[[canvases.nodes.exit_block.choices]]
+text       = "A night on the feed line. (10 coin — full charge, drain reloaded.)"
+targetType = "node"
+nodeId     = "activity_kess_cot.night"
+costs      = [{ trait = "coin", value = 10 }]
+effects    = [
+  { targetType = "player", trait = "energy",       op = "add", value = 100, clamp = true },
+  { targetType = "player", trait = "drain_charge",  op = "set", value = 1 },
+  # beat_0069 — THE PAID NIGHT IS THE UPKEEP. The same 10 coin that buys the bed buys THREE DAYS of Kess's
+  # time on the key (feed_line_days, decayed 1/day by [player.trait_decay]). There is no second bill: his
+  # terms in kess_1b_open are "you pay per night, in coin... coin dries up, so does the arrangement", and
+  # this is that sentence as a number. `set` not `add` — a night tops it back up to full, it doesn't stack.
+  { targetType = "player", trait = "feed_line_days", op = "set", value = 3, clamp = true },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it."
+targetType = "location"
+locationId = "kess_berth"
+
+[[canvases.nodes]]
+id   = "rough"
+name = "Crash rough"
+blocks = [
+  { type = "paragraph", content = "She doesn't pay for the line — just drops onto the pad and lets the cot's trickle-tap do what it can. A couple hours of half-sleep, one eye on the water, and her cells claw back partway. Not full. Enough to move. She's up before she's rested, the way the Reach teaches you to be." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Up."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "kess_berth"
+time_progression_minutes = 120
+[[canvases.nodes]]
+id   = "night"
+name = "A night on the feed line"
+blocks = [
+  { type = "paragraph", content = "She pays Kess his coin and hooks into the feed line proper. It's not the cradle's clean pull — it's a breaking-dock rig meant for hulls — but it takes her down the whole way and holds her there till morning. Charge full, the drain rebuilt its one shot off the same current, the night walked back into her. She unhooks into a new day." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Morning."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "kess_berth"
+time_progression_minutes = 540
 
 # The chip / memories view — seeded-empty, the greyed FRAGMENT 01 slot (the visible next
 # rung; fills at the_site, frontier). The unconscious self-labelling = the awakening seed.
@@ -1456,6 +1532,69 @@ blocks = [
 [canvases.nodes.exit_block]
 type = "location"
 text = "Don't look again."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_market"
+time_progression_minutes = 30
+
+# ── beat_0075 (rev 120) — THE PARTS STALL: the supply side of The Leash's loop ───────────────────
+# design_the_leash.md §8: the part burns on failure, so there are no free retries and she has to go
+# earn between attempts — which is what makes the House and the Pit spine instead of side-earning.
+# ITS OWN CARD, not a fourth choice on underworld_market_shop, and that is the whole point: the loop's
+# next step is a VISIBLE card that appears exactly when it is wanted and disappears the moment she is
+# carrying one. Buried in a menu it would be a thing the player has to remember; as a card it is a
+# thing the market tells her.
+# THE TWO `lt 1` CLAUSES ARE THE NO-STOCKPILING RULE. One part at a time, so the burn actually bites:
+# she cannot buy four on a good night and walk the loop without ever going back to work.
+# PRICE — 25 coin, against a 10-coin night on the feed line, a +20 pit win, a +10 brothel finisher and
+# +15 off Marsh. One cycle runs ~35 coin all in, four cycles ~140. Two or three earning actions a
+# cycle: enough that the coin economy is load-bearing, short of the grind the mopoga review found.
+# ⚠️ Coin NEVER blocks the mainline (design_book): the free crash-rough bed keeps her upright whatever
+# her purse says, and a short purse GREYS this choice rather than taking her negative — costs are
+# checked by checkCostsAffordable before they deduct.
+# Reuses locations/underworld_market.jpg — establishing shots are the one asset this game reuses.
+[[canvases]]
+id          = "activity_buy_part"
+name        = "The parts stall"
+description = "beat_0075 (rev 120). Wren-solo @underworld_market — the supply side of the parts loop. Repeatable, pri 3, gated parts_loop_open is_true + part_held lt 1 + part_installed lt 1, so it shows only when she has nothing seated and nothing in her pocket (no stockpiling; the burn has to bite). One buy: 25 coin -> part_held = 1, +30 min. The card vanishes the moment she is carrying one and comes back when the attempt burns it."
+[canvases.trigger]
+location      = "underworld_market"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "parts_loop_open", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "part_held",       operator = "lt", value = 1 },
+  { type = "trait", subject = "player", trait_key = "part_installed",  operator = "lt", value = 1 },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "The parts stall"
+blocks = [
+  { type = "image", props = { file = "locations/underworld_market.jpg", description = "Dim black-market stalls under a low ceiling, weapons and gear laid on cloth, cages further back.", search_queries = ["black market weapons stall dim", "underground arms bazaar cages back"] } },
+  { type = "paragraph", content = "Past the blades and the field-kit there are three tables nobody stops at, stacked with the insides of things: salvage boards, drawer after drawer of small dead components sorted by nothing. Kess said the small stalls. This is what he meant." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Buy a part. (25 coin.)"
+targetType = "node"
+nodeId     = "activity_buy_part.buy"
+costs      = [{ trait = "coin", value = 25 }]
+effects    = [{ targetType = "player", trait = "part_held", op = "set", value = 1, clamp = true }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave the tables."
+targetType = "location"
+locationId = "underworld_market"
+[[canvases.nodes]]
+id   = "buy"
+name = "A part"
+blocks = [
+  { type = "paragraph", content = "The man behind the drawers doesn't ask what it's for and doesn't look up while she pays, which is the only service on offer down here and the only one worth coin. It goes in her coat with the other thing she is not carrying openly." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take it to him."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "underworld_market"

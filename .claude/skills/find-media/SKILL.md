@@ -551,6 +551,22 @@ file with the same stem before writing, regardless of extension. Re-downloading 
 better source silently replaces the previous file — no orphan `_1` suffixes, no manual
 cleanup. That is what makes a refetch cheap.
 
+⚠️ **`grab` COMPRESSES animated clips on the way in, so the installed extension is `.mp4`
+no matter what the source served.** A `.gif`/`.webm`/`.mov`/`.mkv`/`.avi`/`.m4v` download is
+re-encoded to H.264 CRF 23 between the staging fetch and the install; `.mp4` sources and every
+still are passed through untouched. **Read the target path off the response's `file_path`, never
+off the url's extension** — `alley_bj_t5.webm` lands as `alley_bj_t5.mp4`, and any check you run
+against the name you *asked* for will hunt a file that does not exist.
+
+Why it exists: GIF has no interframe compression, so a harvested shelf inflates ~10× for
+nothing. Measured on vesper 2026-08-09 — 248 clips were **1546 MB as GIF, 160 MB as H.264**,
+with the pixel difference dominated by GIF dithering being smoothed away rather than by
+compression loss. Compressing at install is what stops the shelf re-inflating one pick at a
+time. The response reports `transcoded` (bool) and `transcode_skipped` (reason or null);
+**a skip is never an error** — a failed squeeze falls back to installing the original bytes,
+because losing a clip the human just chose is far worse than shipping a fat one. Needs `ffmpeg`
+on PATH; without it every install simply keeps its source format.
+
 Then, in order:
 1. **Fetch sanity** on the file the API actually wrote: anything under **1024 bytes**, or
    whose bytes are HTML, is an error page, not media. Check the bytes, never the url.

@@ -17,8 +17,8 @@ title       = "Vesper"
 description = "An owned half-human weapon who feels nothing but the sex she's used for. Inside Vance Dynamics she's the company's slave; outside, under a false face, she slips into powerful men's lives and drains them while they think they're using her — sent to hunt a rogue called Cain."
 quests_engine   = "v2"
 starting_canvas = "canvas_opening_office"   # the cold open (Beat 1 — the office)
-version         = "0.1.7"          # sidebar footer — bump in the same commit as the games-data.js portal entry
-release_date    = "2026-08-09"     # sidebar footer — date this build ships
+version         = "0.1.8"          # sidebar footer — bump in the same commit as the games-data.js portal entry
+release_date    = "2026-08-11"     # sidebar footer — date this build ships
 # The funding link baked into the build at THREE sites (sidebar button + both intro/age-gate links).
 # Same URL the engine falls back to when this is unset (v2.DEFAULT_SUPPORT_URL), so it is stated here
 # only to make the key visible and editable — the built output is byte-identical either way.
@@ -300,6 +300,45 @@ hidden = true
 # gate). TRAIT not flag = dodges the flag-chain validator (the fire gates are exit-block choice conditions).
 [[traits.labels]]
 key    = "emitter_broken"
+hidden = true
+# THE LEASH (beat_0075) — the parts loop. All three hidden from the <<playerTraits>> dump and none of them
+# draws a sidebar row: they are internal loop state, and the player reads the loop off Kess's mouth, the
+# market card's presence and the Story-Goal card, never off a number. Declared in 1_metadata's
+# [player.core_traits] (which is what puts them in the cross-release backfill); the header there carries the
+# full reasoning for trait-not-flag.
+[[traits.labels]]
+key    = "part_held"
+hidden = true
+[[traits.labels]]
+key    = "part_installed"
+hidden = true
+[[traits.labels]]
+key    = "mercer_attempts"
+hidden = true
+# THE LEASH (beat_0079) — the Mercer drain counter. Hidden; no sidebar row. Bumped by cap_first_fire (the first
+# fire) and by every loop_mercer_warm_tap repeat after it, so it selects nothing today but is the twin of
+# calloway_drains_done / colm_drains_done and is what the repeat is counted on.
+[[traits.labels]]
+key    = "mercer_drains_done"
+hidden = true
+# THE LEASH (beat_0081) — where the controller is carried: 0 = her coat, 1 = seated at the seam by Kess.
+# Hidden; no sidebar row. The player reads it off Kess's mouth and off what happens at Bastien's door, never
+# off a number. Not to be confused with §13's run-state (on/off + charge), which is beat_0082's.
+[[traits.labels]]
+key    = "controller_seated"
+hidden = true
+# THE LEASH (beat_0081) — what the door decided last time she stood at it. Hidden; no sidebar row. The player
+# reads it off the search itself and off hub_bastien's two bands, never off a number.
+[[traits.labels]]
+key    = "controller_through"
+hidden = true
+# THE LEASH (beat_0082) — §13's run-state (0 idle / 1 running) and the Bastien drain counter. Both hidden; no
+# sidebar rows. The player reads the switch off the anal pose's three bands and off what the finish gives her.
+[[traits.labels]]
+key    = "controller_state"
+hidden = true
+[[traits.labels]]
+key    = "bastien_drains_done"
 hidden = true
 
 # ══════════════════════════════════════════════════════════════════

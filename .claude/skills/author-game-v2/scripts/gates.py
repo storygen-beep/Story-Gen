@@ -264,6 +264,70 @@ def build(game):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Lints — reported, never scored
+# ─────────────────────────────────────────────────────────────────────────────
+def _dialog_blocks(blocks, out):
+    """Every dialog block reachable from a node, including inside cascades and groups."""
+    for b in blocks or []:
+        if not isinstance(b, dict):
+            continue
+        props = b.get("props") or {}
+        if b.get("type") == "dialog":
+            out.append(b)
+        for cb in (props.get("beats") or []):
+            _dialog_blocks(cb.get("blocks"), out)
+        if b.get("blocks"):
+            _dialog_blocks(b["blocks"], out)
+
+
+def lint_dialogue_attribution(model):
+    """Dialogue attributed to a character the canvas neither BINDS nor NAMES.
+
+    The bug this catches shipped once: a walk-on character with no NPC record was
+    written as a dialog block borrowing a declared NPC's id, which would have
+    rendered the wrong name over her line. Declaring her instead is not the fix —
+    that breaks the standing-surface gate, which wants every declared character
+    findable and scheduled. One-scene characters are narrated, never declared.
+
+    Deliberately narrow. The naive version of this check — flag dialogue on any
+    canvas without an `npc` binding — returns 30 hits on a game with 2 real ones,
+    because every triggerless rung is unbound by design and correctly carries its
+    own character's voice. Naming the character in the canvas id is what tells
+    them apart, and it is a convention the games already follow.
+    """
+    seen, hits = set(), []
+    for c in model:
+        bound = {c.get("npc"), c.get("requires_npc")} - {None}
+        for n in c.get("nodes") or []:
+            blocks = []
+            _dialog_blocks(n.get("blocks"), blocks)
+            for b in blocks:
+                npc_id = ((b.get("props") or {}).get("npcId") or "").strip()
+                if not npc_id or npc_id in bound:
+                    continue
+                # `npc_ray` is named by a canvas called `rung_ray_sit`.
+                short = re.sub(r"^npc[_-]", "", npc_id)
+                if short and short.lower() in c["id"].lower():
+                    continue
+                # ONE hit per canvas+speaker, not per line. A canvas where the
+                # wrong name renders gets it wrong on every line it says, so the
+                # per-line count measures how talkative the scene is, not how
+                # many defects there are.
+                key = (c["id"], npc_id)
+                if key in seen:
+                    continue
+                seen.add(key)
+                hits.append(dict(canvas=c["id"], node=n.get("id"), npc=npc_id,
+                                 lines=1, line=str(b.get("content") or "")[:60]))
+            for h in hits:
+                if h["canvas"] == c["id"]:
+                    h["lines"] = sum(
+                        1 for b in blocks
+                        if ((b.get("props") or {}).get("npcId") or "") == h["npc"])
+    return hits
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Gates
 # ─────────────────────────────────────────────────────────────────────────────
 def run_gates(model, game, state=None):
@@ -496,8 +560,12 @@ def main():
     state = json.load(open(state_path)) if os.path.exists(state_path) else None
     results = run_gates(model, game, state)
 
+    lints = lint_dialogue_attribution(model)
+
     if "--json" in sys.argv:
-        print(json.dumps([{k: v for k, v in r.items()} for r in results], indent=1, default=str))
+        print(json.dumps({"gates": [dict(r) for r in results],
+                          "lints": {"dialogue_attribution": lints}},
+                         indent=1, default=str))
         return
 
     name = (game.get("project") or {}).get("name") or os.path.basename(path)
@@ -516,7 +584,20 @@ def main():
             print(f"          · … and {len(r['detail'])-12} more")
     print(f"  {'─'*72}")
     na_note = f"  ({nna} n/a — nothing authored yet to judge)" if nna else ""
-    print(f"  {npass}/{judged} judged gates pass{na_note}\n")
+    print(f"  {npass}/{judged} judged gates pass{na_note}")
+
+    # Lints sit BELOW the tally and never touch it. A warning that can change a
+    # score is a gate, and a gate has to be re-derivable from a measurement.
+    if lints:
+        print(f"  {'─'*72}")
+        print(f"  lint · dialogue attribution — {len(lints)} to eyeball")
+        for h in lints[:12]:
+            print(f"          · {h['canvas']}#{h['node']} speaks as {h['npc']}: {h['line']}…")
+        if len(lints) > 12:
+            print(f"          · … and {len(lints)-12} more")
+        print("          (a canvas that neither binds nor names the speaker — check the"
+              " name that will render)")
+    print()
     sys.exit(0 if judged and npass == judged else 1)
 
 

@@ -390,6 +390,37 @@ Vesper shipped courtship offered to a man she already owned, and a hub for a man
   or they linger "present" in a place they've fled (dead presence the player can see but can't act on).
 - **The surrounding floor cluster** — the *other* NPCs' walk-ins/ambients that share the location.
 
+⚠️ **AND THE ONE THAT IS NOT A STALE-PROSE BUG — GATES THAT `F` MAKES PERMANENTLY FALSE.** Everything above
+sweeps for surfaces that become a **lie**. The other failure mode is surfaces that become **unreachable**, and
+it is worse, because nothing on screen looks wrong. If the terminal beat **removes the enabling state of a
+mechanic** — the key is cut out, the cover is burned, the weapon is spent, the ally is dead — then every gate
+that *requires* that state stops passing **forever**, and the content behind it is gone with no message. The
+engine will not tell you: when no choice passes it emits a `console.warn` and a bare Continue escape
+(`engine-reference.md` §3), which reads to a player as a scene that simply stopped having anything in it.
+
+**The audit is mechanical and takes one grep.** For the state `F` retires, list every gate that reads it, and
+for each one ask **"does this still have a true branch after `F`?"** Three legitimate answers, and picking one
+is the whole job:
+
+| | when | what it looks like |
+|---|---|---|
+| **re-partition** | the content should survive `F` | add a post-`F` branch, and add `F is_false` to every pre-`F` branch so they can't swallow it (adjacent `[group]`s merge into ONE if/elseif chain — **first match wins**) |
+| **retire** | the content is finished with | gate the whole surface on `F is_false` and let it close cleanly |
+| **repoint** | the mechanic had a fiction bigger than its state | keep the surface, drop the state clause, and let the prose say why it still happens |
+
+⚠️ **`logic = "OR"` will not save you here.** It exists, but it is **one logic per block with no nesting**, and
+a re-partitioned gate almost always needs an `AND` alongside — so the answer is **exclusive choices**, verbose
+and greppable, not a cleverer condition.
+
+**Verify from the failing side.** Assert that after `F`, the surface still reaches its payload and **never**
+reaches the branch that used to mean "you got it wrong" — that assertion is the whole point, and it is the one
+a memory-based check will not think to write.
+
+*(Vesper, `beat_0083`: the extraction cuts the controller out, so `controller_state` is 0 for the rest of the
+game. Five surfaces read it; the one that mattered was a finisher whose drain exits required the key — every
+future anal finish would have routed to the "nothing happens" branch forever, so the player would own the man
+and get nothing, with no way back. Caught only because the beat's plan listed the readers before writing.)*
+
 **Two mechanisms — pick by shape:**
 - **Per-canvas gate** — add `F` to each surface's `conditions` (close) or `[group]`-swap its body (change).
   Right when the surfaces are scattered or only *some* retire.

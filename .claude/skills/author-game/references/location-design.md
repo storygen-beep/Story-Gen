@@ -157,6 +157,37 @@ door lock, so it will list the NPC at a locked location. With the visible-but-bl
 tolerable, even flavorful — "the boss does the books in the office overnight." The engine has no
 discovery/absent lock, only this flag gate.)*
 
+### §4.2 The NAV-INVISIBLE INTERIOR — when a locked door is the wrong tool
+
+A locked location is **visible-but-blocked**: a greyed card sits on the parent's nav grid with its
+`blocked_message` showing. That is right when the lock *is* the story ("you haven't been invited yet").
+It is **wrong** in two situations, and both come up often enough to name the shape:
+
+- **The room must not be advertised before it exists in the fiction.** A greyed card announces a place —
+  and its NPC — to a player who has no idea it is there, including one replaying an earlier act.
+- **Getting in is a SCENE, and the scene must be unskippable.** If the door is a nav card, the moment the
+  flag flips the player walks straight in and the scene you built as the gate never plays.
+
+The shape for both: **a location with no `entry_from`, plus `auto_exit = false`.** Nothing links to it, so
+it has no card anywhere and no NPC badge can render for anyone scheduled there; the only way in is a
+canvas exit, and the only way out is a canvas exit you author.
+
+⚠️ **BOTH HALVES OR IT DUMPS THE WHOLE MAP.** Dropping `entry_from` alone is half a job. A location's nav
+grid is built from its **children** (locations whose `entry_from` points at it), so a childless, parentless
+location renders an empty grid *and* no auto "Leave" link — and an empty nav list trips the
+**list-every-location fallback**, which prints `All locations:` and the entire world. `auto_exit = false` is
+the flag that tells the engine the emptiness is intentional (`v2.py _generate_hierarchical_navigation`:
+`if not navigation_html and auto_exit`). See §5 of `engine-reference.md` for the field.
+
+**Two ways to satisfy the engine, and they are not interchangeable.** A sealed room can instead be kept
+quiet by giving it a **child** — a door location whose `entry_from` points back at it, locked on a flag
+nothing ever sets. Use that when the door itself is content the player should see and rattle. Use
+`auto_exit = false` when the player should not be shown a door at all.
+
+**Checklist before shipping one:** the entering canvas exists and is reachable · the leaving exit is
+authored (there is no safety net) · the built passage does **not** contain `All locations` · and, if an NPC
+is scheduled there, no badge for them appears on any nav grid in the game.
+
 ---
 
 ## §5 The nav-learnings — authoring tools the engine now gives you

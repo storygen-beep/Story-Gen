@@ -289,7 +289,7 @@ pornhub search for medias, doesnt bring pornhub medias, the tab that opens does 
 http://127.0.0.1:5500/story_gen_web_app/story_gen_django/find.html?id=vesper&file=sex%2Fma_renner_blowjob_t5.webm&slot_key=sex%2Fma_renner_blowjob_t5.webm
 
 
-[PROGRESS]Selected media related feature
+[DONE]Selected media related feature
 
 We have zero clips from RedGIFs. Zero, out of 26,528.
 
@@ -311,9 +311,24 @@ Why pornhub query search is fast and the related search is slowx
 [DONE]figure out a way to run it on phone without github pages, the root index.html
 tailscale
 
-Vesper Release 0.1.7 to patreon
+[DONE]Vesper Release 0.1.7 to patreon
 
-Linear Story Chapters to Game Experiment
 
-Vesper next chapter
+**9th Aug**
+
+
+[PROGRESS]Linear Story Chapters to Game Experiment
+New author game v2 skill
+One skill, multiple agents
+
+
+[PROGRESS]Vesper next chapter
+
+
+
+Next week also work on find media v3 to make it a lot faster again. The reason is the custom search is fast as hell, and when the agent runs on a slot it takes more then 7 mins to do it, all it needs to do is to use proper search query so now the question is are we doing a lot of things or how we can write these queries faster.
+on the new game we will build using the author game v2
+
+
+asdoklk
 

@@ -1,5 +1,22 @@
 # find-media-v3 — CHANGELOG
 
+## 2026-08-09 — the human's pick now installs as `.mp4`
+
+- **`SKILL.md` §"The deliverable contract" item 3** — noted that `grab` re-encodes any animated
+  clip to H.264 CRF 23 on install, so the human's pick lands as `.mp4` regardless of what the
+  source served. Cross-referenced find-media `SKILL.md` §6, which carries the full contract.
+
+- **Why it belongs in v3 at all, given v3 installs nothing:** that is exactly the reason. v3's
+  whole shape is "the human judges every candidate and **his pick is the install**", so the one
+  install in a v3 run is the one this engine change touches. An agent reading only this file
+  would otherwise report a `.webm` path for a file now on disk as `.mp4`.
+
+- **Nothing in v3's own behaviour changes.** Still no fetching, no ranking, no pruning, no
+  installs; the shelf still stores original source urls, so provenance and refetch are unaffected.
+
+- **Verified:** `tests/test_media_finder_transcode.py` (12 new tests) plus 241 existing tests
+  green. Doctrine unchanged — this is an engine note, not a rule.
+
 ## 2026-08-06 (run) — 49 slots harvested; the poison list roughly triples, and two structural gaps close
 
 An 88-slot approved-NSFW run on `vesper` (49 complete when the session limit stopped it,

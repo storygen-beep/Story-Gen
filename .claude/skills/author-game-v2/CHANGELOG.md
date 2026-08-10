@@ -5,6 +5,51 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-11 — `scripts/gates.py`: the dialogue-attribution lint, specced 2026-08-10, now real
+
+**What.** `lint_dialogue_attribution()` plus a `_dialog_blocks()` walker in
+`scripts/gates.py`, reported below the tally and **never scored**. A warning that can move a
+gate is a gate, and a gate has to be re-derivable from a measurement.
+
+Flags any `dialog` block whose `npcId` names a character the canvas neither **binds**
+(`npc` / `requires_npc`) nor **names in its id**. It walks into cascades and groups, so it sees
+the dialogue that only exists three levels down inside a `beats` array.
+
+**Results, measured:**
+
+| game | hits |
+|---|---|
+| `back_home` | **3** |
+| `vesper` | **28** |
+
+**The spec said 2, and 2 was right when it was written.** Of today's three: two are
+`canvas_arrival`, the known-good opening where Ray and Dean both speak — exactly the pair the
+original measurement found. The third is `shift_change_frontroom`, which **this project
+introduced yesterday** in the Phase-1 anchor increment. It renders correctly (verified live —
+only `Dean` appears), but it is a triggerless rung whose id does not name its speaker, so it is
+precisely the shape the lint exists to surface. The house convention would call it
+`rung_dean_shift_change`; that rename is the cheap fix and is left for the next pass rather than
+smuggled into a tooling commit.
+
+**One hit per canvas + speaker, not per line.** The first cut counted blocks and returned 7 on
+`back_home` and 200+ on `vesper` — unusable. A canvas that renders the wrong name renders it
+wrong on *every* line it speaks, so a per-line count measures how talkative a scene is rather
+than how many defects exist. The per-canvas count is the defect count; `lines` is carried in the
+JSON for anyone who wants the volume.
+
+**Vesper's 28 are not noise.** They cluster on `cell_*` canvases speaking as `npc_bastien` —
+the same character the standing-surface gate already fails it for: referenced everywhere,
+findable nowhere. Two independent checks landing on one character is the useful kind of
+agreement.
+
+`--json` output is now `{"gates": [...], "lints": {...}}` rather than a bare gate array.
+**Anything parsing the old top-level list needs updating.**
+
+**Verified.** `back_home` still reports 9/10 and `vesper` its existing score — the lint changed
+no gate, which is the property that matters most about it.
+
+---
+
 ## 2026-08-11 — v0.1 Phase 1: the anchor, 5,123 → 9,607, and three engine facts it cost
 
 **What.** The front room taken from 5,123 words to 9,607 in one pass — the anchor budgeted

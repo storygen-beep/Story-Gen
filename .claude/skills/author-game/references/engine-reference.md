@@ -109,13 +109,37 @@ placed at canvas level they are silently ignored (`references/toml-gotchas.md` "
 | `entry_only_from` | list | `[]` | Lane 2 anti-toggle: fire only if the previous location matched. `:1705-1709`. |
 | `substitutions` | list | `[]` | **Lane 3 dispatcher rules** — §2.4. `:1715-1735`. |
 | `substitution_only` | bool | `false` | Excluded from portrait/solo/auto-fire grids; reachable ONLY via a substitution rule. `:1736`. |
-| `requires_npc` | str? | — | **Presence gate only** (does NOT set `npcId`): ANDs `getNpcLocation(npc).location === location`. `:1740`. |
+| `requires_npc` | str? | — | **Presence gate only** (does NOT set `npcId`): ANDs `getNpcLocation(npc).location === location`. `:1740`. ⚠️ **Honoured on the random + portrait paths only — INERT on auto-fire.** See the note below. |
 | `pre_substitution_effects` | list | `[]` | Effects that run unconditionally before the substitution check (`{targetType, npcId?, trait, op, value, clamp?, cap?}`). `:1744-1748`. |
 
 > **`npc` ≠ `requires_npc` — separate fields; an NPC hub needs BOTH.** `npc` is the portrait (→`npcId`);
 > `requires_npc` is presence only. A repeatable hub with `requires_npc` but no `npc` has no `npcId` and
 > drops to the flat solo-activity bucket — no build error, only live-play shows it. Full trap (with the
 > Lane 2 `trigger_mode="random"`+`chance` twin): `references/toml-gotchas.md`.
+
+> ⚠️ **`requires_npc` DOES NOT GATE A LANE-4 AUTO-FIRE.** Verified 2026-08-10 (vesper beat_0074).
+> `selectAutoFireCanvasForLocation` (`v2.py:4447`) filters on `isRepeatable` / `triggerMode` /
+> `substitutionOnly` / `isCanvasValid` + priority and **never reads `requiresNpc`**; `isCanvasValid`
+> (`v2.py:4567`) checks schedules, conditions and repeatability only. The field is honoured on the **Lane-2/3
+> random** path (`v2.py:5247-5261`) and inside the **portrait renderer**, and nowhere else. So a capstone
+> written as *"auto-fires when he's in the room"* fires **whether or not he is there** — an empty-room scene,
+> green build, nobody notices until someone walks in at the wrong hour. Vesper shipped one for a whole beat.
+>
+> **The gate that bites on an auto-fire is a condition, not a field:**
+> ```toml
+> conditions = { version = "1.0", logic = "AND", items = [
+>   { type = "npc_at_location", location_id = "<loc>", npc_id = "<npc>", operator = "is_present" },
+> ] }
+> ```
+> `isCanvasValid` *does* evaluate `conditions`, so this one holds. Keep `requires_npc` alongside it — it costs
+> nothing, it states the intent, and the two agree if the canvas is ever made repeatable.
+>
+> **Second trap, same family: an auto-fire that exits into its own location will CHAIN.** If capstone A exits
+> to the room it fired in and capstone B is eligible there, B fires in the same breath — so B's opening ("she
+> comes through the door…") narrates an arrival that never happened. Separate them with real state: a trait
+> band, or a flag B's own predecessor hasn't set yet. **Prefer a trait band to `days_since_flag`** on anything
+> load-bearing: `days_since_flag` fails **CLOSED** when `flags_meta.set_day` is missing (`v2.py:3979`), so a
+> flag set by any path that doesn't write metadata locks that content forever.
 
 ### §2.3 — Lane fingerprints (which combination = which lane)
 
@@ -125,7 +149,7 @@ placed at canvas level they are silently ignored (`references/toml-gotchas.md` "
 | **2 — Location-entry random** | `trigger_mode="random"` + `chance` + `is_repeatable=true` (often `requires_npc`) | `references/lanes.md` |
 | **3 — Dispatcher (parent activity)** | `trigger_mode="manual"` + `is_repeatable=true` + `substitutions=[…]` (solo-clickable) | `references/lanes.md` |
 | **3 — Substitution target** | `substitution_only=true` + `requires_npc` + `is_repeatable=true` + `max_triggers_per_day=1` | `references/lanes.md` |
-| **4 — Capstone (auto-fire)** | `trigger_mode="manual"` + `priority ≥ 9` + `is_repeatable=false` + a flag-setter effect on exit | `references/beat-authoring.md` |
+| **4 — Capstone (auto-fire)** | `trigger_mode="manual"` + `priority ≥ 9` + `is_repeatable=false` + a flag-setter effect on exit. ⚠️ Needs someone in the room? Use an `npc_at_location … is_present` **condition** — `requires_npc` is inert here (note above) | `references/beat-authoring.md` |
 
 ### §2.4 — `[[canvases.trigger.substitutions]]` (Lane 3)
 
@@ -187,10 +211,33 @@ no-`advance_text` **terminal** beat (renders after the last click). Builds green
 `references/toml-gotchas.md`. (Live-caught in Vesper's blackmail + 1a-close capstones, rev 86.)
 
 `exit_block` (`TemplateExitBlock` at `:662`): `type` = `"location"` or `"choices"`.
-- `type="location"` → single return button; `config = {destinationType, locationId, time_progression_minutes}`.
+- `type="location"` → single return button;
+  `config = {destinationType, locationId, time_progression_minutes, effects, flagEffects}`.
   `destinationType` must be `"trigger"`, `"specific"`, or `"node"` (validated `:3900`; default `"trigger"`,
   `v2.py:12567`).
 - `type="choices"` → the menu (Lane 1 hub) — §3.
+
+> ⚠️ **A `type="location"` exit's effects fire on RENDER, not on the exit click.** Its
+> `time_progression_minutes`, `effects` and `flagEffects` are emitted as **passage-level `<<script>>` macros at
+> the bottom of the node's passage body** — `advanceTime(n)` (`v2.py:13376`) and
+> `setup.applyAndNotifyFlag(...)` — so they run when the canvas paints, before the player has clicked anything.
+> The engine says so itself at `v2.py:15400-15412`, explaining why canvas nodes are excluded from
+> `setup.isRerenderSafe`: *"their bodies carry render-time advanceTime() script macros and additive trait
+> effects… commit a post-render state on one and every reload re-applies them."*
+>
+> This is **not** the §3 table's per-choice behaviour: a **choice's** `costs` / `effects` / `flagEffects` are
+> emitted inside its `<<link>>` body and genuinely do fire on click. The two look identical in TOML and behave
+> differently, which is exactly why it bites.
+>
+> **Two things follow, and both are authoring rules.** (1) **Never write a canvas whose closing state depends
+> on the player reaching the last beat.** A player who opens a cascade, reads two beats and navigates away by
+> the sidebar has already banked the flag and the minutes. If a state change must be *earned* by finishing,
+> put it on a **choice** — the exit-block's location button is not a commit point. (2) When a canvas is the
+> one-shot that opens the next stage, that render-time set is usually what you want: the scene fired, the
+> player saw it, and leaving by another route must not un-see it. Write the gate around that, not against it.
+>
+> *(Verified in Vesper's built HTML at rev 120, on `kess_print_read` and `cap_owner_print`; a live test that
+> asserted the opposite was corrected against the artefact.)*
 
 **No real-time timer.** The engine advances time ONLY as click-driven minutes (`time_progression_minutes` /
 a `costs.time`) — there is **no wall-clock / countdown primitive.** Any "window of control / it lasts N minutes"
@@ -239,6 +286,37 @@ used to point here as "the full table"; this is it.)
 
 `costs` (resource gating) is the same `costs` semantic as the trigger (§2.2), at the choice level — for a
 per-choice differential (e.g. −15 vs −28 energy). Full model: `references/toml-gotchas.md` "Resource gating".
+
+> **A choice's effects fire on CLICK. An exit block's fire on RENDER.** The two shapes look identical in TOML
+> and they are not the same primitive. Choice-level `effects` / `flagEffects` / `costs` are emitted into the
+> click handler; an `exit_block.config`'s `effects`, `flagEffects` and `time_progression_minutes` are emitted
+> as passage-level `<<script>>` macros **at the bottom of the node's passage body** (§2), so they run the
+> moment the canvas paints. **Anything whose meaning is "she finished this scene" has to ride a choice** — put
+> it on the exit block and a player who reads two beats and leaves by the sidebar has already banked it.
+
+> **When NO choice passes its conditions, the engine does not dead-end** (`v2.py:12890-12946`). It emits a
+> `console.warn` naming the canvas and every choice, a `$flags.debug_mode`-gated diagnostic block that
+> re-evaluates each predicate individually and prints ✓/✗ per item, and a player-facing `[[Continue->…]]`
+> escape that **fires no effects**. Two consequences: a conditional-routing exit is safe to **author one
+> branch at a time** (the unauthored generations degrade to a free escape, not a lock), and you should **not**
+> add an unconditional fallback choice "just in case" — it would render alongside the real one whenever the
+> real one passes.
+
+> **Choosing between a `[group]` band and a routed NODE for a variant.** Both are shipped ways to make one
+> canvas render differently by state, and the deciding factor is **size**, not taste.
+> - **One or two lines** → an adjacent `[group]` chain in the node lead, bands mutually exclusive by
+>   construction (`gte` + `lt`), because adjacent groups merge into a single if/elseif chain and a
+>   non-exclusive band ships dead.
+> - **A whole multi-beat scene** → a **sibling node** per variant, reached from a `choices` exit whose choices
+>   carry the same mutually exclusive `conditions`. Each variant then gets its own exit, its own effects and
+>   its own beat count.
+>
+> The forcing constraint is the density audit (`rts-flat-prose.md` §7 check 2): a beat's measured unit is the
+> **sum** of every block inside it, and beat 0's unit swallows the **entire node lead** — so four multi-beat
+> bands parked there measure as one ~250-word beat even though exactly one ever renders. A one-line band
+> absorbs that; a scene cannot. Where you do keep bands, record the **max-not-sum** reading in the canvas
+> header and hold each band under the word budget that keeps `lead + longest band ≤ 50`. The same arithmetic
+> applies to `block_pool`, which is also summed and also renders exactly one child.
 
 ---
 

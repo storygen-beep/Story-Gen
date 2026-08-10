@@ -63,6 +63,7 @@ from django.views.decorators.http import require_GET
 
 from api.v1.dev import (
     download_direct,
+    find_ffmpeg,
     get_extension_from_content_type,
     get_extension_from_url,
     parse_scene_path,
@@ -222,6 +223,149 @@ def _install(tmp_path: Path, output_path: Path) -> str:
         return ""
     except OSError as exc:  # noqa: BLE001 - surfaced to the caller as-is
         return f"install failed: {exc}"
+
+
+# ── Auto-compress on install ─────────────────────────────────────────────────
+# A harvested clip arrives in whatever format the host served, which is usually GIF —
+# a 1987 format with no interframe compression, costing roughly ten times what H.264
+# does for the same ten seconds. Measured on vesper 2026-08-09: the 248-clip shelf was
+# 1546 MB as GIF and 160 MB as H.264 CRF 23, and the pixel difference was dominated by
+# GIF's 256-colour dithering being smoothed away rather than by compression loss
+# (0.0578 at CRF 18 vs 0.0622 at CRF 26 — near-flat, so the cheap setting costs almost
+# nothing). The 20 VP8 webms measured 41 dB PSNR at the same CRF: transparent.
+#
+# This belongs HERE, not in a periodic sweep, because a sweep only ever plays catch-up:
+# without it every future pick re-inflates the shelf and the whole conversion has to be
+# run again. The staged download is already isolated from the game (see _incoming_dir),
+# so the squeeze happens where no enumerator can advertise a half-written file, and the
+# reviewer judges the clip that will actually ship rather than a source he'll never see.
+_TRANSCODE_CRF = "23"
+# Deliberately NOT ".mp4": re-encoding H.264 to H.264 always loses a generation, and the
+# "only keep it if smaller" rule below would happily accept that loss on every refetch —
+# a slow quality drain with no byte win worth having. Stills are absent for the same
+# reason they are absent from the packager's video path: package_from_toml already
+# downscales and re-compresses them (game_service.py:829).
+_TRANSCODE_SOURCES = {"gif", "webm", "mov", "mkv", "avi", "m4v"}
+_TRANSCODE_TIMEOUT = 300
+
+
+def _probe_dimensions(binary: str, path: Path) -> tuple[int, int, int]:
+    """(width, height, frames) via ffprobe, or (0, 0, 0) if it cannot be read."""
+    probe = binary[:-6] + "ffprobe" if binary.endswith("ffmpeg") else "ffprobe"
+    try:
+        out = subprocess.run(
+            [
+                probe,
+                "-v",
+                "error",
+                "-select_streams",
+                "v:0",
+                "-count_frames",
+                "-show_entries",
+                "stream=width,height,nb_read_frames",
+                "-of",
+                "json",
+                str(path),
+            ],
+            capture_output=True,
+            text=True,
+            timeout=60,
+        )
+        if out.returncode != 0:
+            return (0, 0, 0)
+        s = json.loads(out.stdout)["streams"][0]
+        return (
+            int(s.get("width") or 0),
+            int(s.get("height") or 0),
+            int(s.get("nb_read_frames") or 0),
+        )
+    except (
+        subprocess.TimeoutExpired,
+        FileNotFoundError,
+        OSError,
+        json.JSONDecodeError,
+        KeyError,
+        IndexError,
+        ValueError,
+    ):
+        return (0, 0, 0)
+
+
+def _transcode_to_mp4(src: Path, dst: Path) -> str:
+    """Re-encode a staged download to H.264. Returns "" on success, else the reason.
+
+    EVERY failure path is non-fatal by design — the caller installs the original
+    bytes instead. Compression is an optimisation; losing a clip the human just chose
+    because ffmpeg is missing or a codec is exotic would be a far worse bug than
+    shipping one fat file.
+
+    The result is accepted only if it decodes, keeps its frames and dimensions, and is
+    actually smaller. The frame check is the load-bearing one: a truncated encode still
+    produces a *playable* file that simply stops early, which on a looping clip reads as
+    "this pool got shorter" rather than as an error, so nothing downstream would catch
+    it. (Measured: a concurrent-writer collision during the vesper conversion produced
+    exactly one such file out of 229, and only a frame-count check found it.)
+    """
+    binary = find_ffmpeg()
+    if not binary:
+        return "ffmpeg not found"
+
+    try:
+        result = subprocess.run(
+            [
+                binary,
+                "-y",
+                "-v",
+                "error",
+                "-i",
+                str(src),
+                # yuv420p demands even dimensions and harvested clips are not always even.
+                "-vf",
+                "scale=trunc(iw/2)*2:trunc(ih/2)*2",
+                "-c:v",
+                "libx264",
+                "-crf",
+                _TRANSCODE_CRF,
+                "-preset",
+                "medium",
+                "-pix_fmt",
+                "yuv420p",
+                "-movflags",
+                "+faststart",
+                "-an",
+                # -f is NOT optional: ffmpeg picks its container from the output extension
+                # and we write to a `.part` temp, so without it every encode dies on
+                # "Unable to choose an output format".
+                "-f",
+                "mp4",
+                str(dst),
+            ],
+            capture_output=True,
+            text=True,
+            timeout=_TRANSCODE_TIMEOUT,
+        )
+    except subprocess.TimeoutExpired:
+        return f"transcode exceeded {_TRANSCODE_TIMEOUT}s"
+    except (FileNotFoundError, OSError) as exc:
+        return f"transcode could not run: {exc}"
+
+    if result.returncode != 0:
+        return f"ffmpeg failed: {(result.stderr or '').strip()[:200]}"
+    if not dst.exists() or dst.stat().st_size == 0:
+        return "transcode produced nothing"
+
+    sw, sh, sf = _probe_dimensions(binary, src)
+    dw, dh, df = _probe_dimensions(binary, dst)
+    if not dw:
+        return "transcoded file does not decode"
+    if sf and df < sf * 0.98:
+        return f"frame loss {sf} -> {df}"
+    # the scale filter rounds down to even, so allow one pixel per axis
+    if sw and not (sw - 1 <= dw <= sw and sh - 1 <= dh <= sh):
+        return f"dimensions changed {sw}x{sh} -> {dw}x{dh}"
+    if dst.stat().st_size >= src.stat().st_size:
+        return "not smaller than the original"
+    return ""
 
 
 # Suffixes that need a <video> element in the picker; .gif previews as an <img>,
@@ -1638,6 +1782,29 @@ def grab(request):
         if not success:
             return JsonResponse({"success": False, "error": error}, status=400)
 
+        # ── compress before installing ──────────────────────────────────────
+        # Runs on the STAGED file, so a failure here costs nothing: the original
+        # download is still sitting in `tmp_path` and installs unchanged. The
+        # extension is re-derived rather than assumed, because `output_path` was
+        # computed from the source url's extension back at the top.
+        transcoded = False
+        transcode_note = ""
+        if ext.lower() in _TRANSCODE_SOURCES:
+            mp4_tmp = (
+                staging
+                / f"{filename_base}.{os.getpid()}.{threading.get_ident()}.mp4.part"
+            )
+            mp4_tmp.unlink(missing_ok=True)
+            transcode_note = _transcode_to_mp4(tmp_path, mp4_tmp)
+            if transcode_note:
+                mp4_tmp.unlink(missing_ok=True)  # keep the original bytes
+            else:
+                tmp_path.unlink(missing_ok=True)
+                tmp_path = mp4_tmp
+                ext = "mp4"
+                output_path = output_dir / f"{filename_base}.mp4"
+                transcoded = True
+
         preserved: list = []
         if pool_dir:
             # ⚠️ A pool install ADDS; it must never run the replace path below.
@@ -1712,6 +1879,11 @@ def grab(request):
                 "success": True,
                 "file_path": str(output_path.relative_to(GAMES_ROOT)),
                 "previous_kept_as_option": preserved,
+                # Reported rather than logged: a silent fallback to the fat original is
+                # exactly the failure that would go unnoticed for months, and the caller
+                # is the only party that knows which clip it just asked for.
+                "transcoded": transcoded,
+                "transcode_skipped": transcode_note or None,
             }
         )
     finally:

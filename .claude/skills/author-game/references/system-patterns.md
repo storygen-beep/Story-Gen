@@ -97,6 +97,38 @@ mid-game). This is the build recipe once you've named it, not a system to discov
   unclamped banded value that leaves its bands silently vanishes from the sidebar.
   → `references/trait-catalog.md` §4.
 
+## 9. Iterated prototype — *a fix that has to fail first*
+The shape for **"the thing that would free her doesn't work yet, and finding out why is the chapter."** A fixer
+builds successive prototypes; each one is bought, installed, tried **in the field against a target that is
+gated shut**, and burns out. Distinct from #2 (a skill that rises with practice) and #5 (a tool that merely runs
+dry): here **failure is the content**, and the *reason* each attempt fails is the reveal.
+- **When:** the player owns a locked thing (a key, a device, a piece of their own body) and a helper NPC has to
+  reverse-engineer it. Also: whenever you want a grind whose repetitions are *not* interchangeable.
+- **The shape:** three traits. `<thing>_gen` (0→N, which prototype is fitted — drives the install talk and the
+  finding text) · `<thing>_installed` (0/1, is one live right now) · `<attempt>_count` (0→N, the loop counter).
+  A **buy** action at a shop sinks money; an **install** action at the fixer's bench sets `_installed = 1`; the
+  **field attempt** is an ordinary rung on the target's hub that plays the failure, sets `_installed` back to 0
+  (the burn) and bumps both counters; a **finding** beat at the bench, banded on the counter, is where the
+  fixer says what he learned. Nth attempt succeeds and routes to the capstone.
+- **Why the burn matters:** it is the only pressure. Without it the player retries for free, the economy stops
+  mattering, and the loop is a click. With it, every attempt costs a trip to the income content.
+- **Shape the failures, don't count them.** Three failures then a win; give the set an emotional curve
+  (nothing → it hurts → it almost works) rather than a tally. **N identical null results is the "grind not
+  content" review arriving on schedule** — if you can't write three *different* failures, the loop should be
+  one scene.
+- **The traps:**
+  - **The part must be a TRAIT, never a clothing/inventory item.** `setup.backfillStateDefaults` carries new
+    flags and traits into existing saves but has **no wardrobe branch**, so an item added in a later release
+    than the beat that grants it never reaches a save that already passed that beat
+    (`references/save-safety.md` §5).
+  - **The attempts are ONE canvas with an exclusive banded `[group]` chain**, not one canvas per attempt —
+    adjacent `[group]` blocks merge into a single if/elseif chain, so bands must be mutually exclusive
+    (`gte` + `lt`) or every band after the first ships dead.
+  - **The target has to be reachable and repeatable.** A gated-shut target the player can only visit once
+    makes the loop unplayable; give it a hub and a schedule.
+  - **The counter is a trait, not a flag** — the attempt canvas is usually node-routed and triggerless, and a
+    flag `is_true` gate demands a located setter or the flag-chain validator hard-fails.
+
 ---
 
 **Deepening:** a recipe here is the starter shape. When a game leans hard on one, it earns its own fuller

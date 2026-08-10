@@ -13,6 +13,211 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-08-11
+- **`§9` gains a fifth check: no two CO-LIVE cards may repeat a clause (`references/quests.md`).** The
+  Story-Goals card and every NPC section render on one screen, so a phrase carried over from the spine prints
+  twice in the same view — and authoring an NPC tier *next to* the spine cards it belongs with produces that
+  echo almost every time, because the sentence is right there and it is the best one you have. Found by
+  measurement, not by reading: a six-word-run comparison over the live set at each reachable state caught
+  **eight** repeats in `vesper` `beat_0084`'s first draft of its nine new cards, including whole lifted
+  clauses ("he keeps a stall on the black market and a room behind it"). Every card was rewritten; the check
+  is now a permanent assertion in that game's live suite. The rule stated positively is the same one that
+  justifies two tiers at all: the NPC card says **what the spine leaves out** — the man, the count, the state
+  of him — never the mission beat again in different words.
+- **New `§10 — Sweep the whole table when the world moves` (`references/quests.md`), plus a third case added
+  to `§6`.** The file taught how to author a card and how to lay the page out once, and had no maintenance
+  rule at all — so every defect where the card stayed still and the world moved around it was invisible to it.
+  Found by reading `vesper`'s Quests page end to end at `beat_0084`, which turned up three independent
+  instances at once. **(1) The frontier moves.** Three Story-Goal cards still carried "that's where this build
+  ends … is the next release" after the frontier walked five rungs past them; the worst named cutting the
+  leash, opening the file and reading her own page as *the next release*, in the build that ships all three.
+  The interesting part is why it survived: the TOML comments record the check being **run and passed**, against
+  the card's own rung — and from that card's rung the sentence is true. A boundary claim is a statement about
+  the **whole build**, so it cannot be evaluated locally. New rule: exactly one card names it, moving it is a
+  two-step edit, the check is a whole-table grep anchored on `^tip\s*=` (a bare string grep matches the comment
+  blocks quoting what you stripped), and the **Support-Us ask never walks with it** — only the claim does.
+  **(2) The map seals or opens.** A tip is a *direction*, so it is coupled to reachability: Act 1a's close
+  hard-seals the Spire, and Calloway's whole four-rung ladder plus half of Colm's end card went on pointing at
+  it for the rest of the game. The unfinished arc is the worse case, because its rungs are live instructions —
+  and the fix is one card at a priority above the ladder, not N edits, because the NPC tier returns the single
+  highest-priority match. **(3) A mechanic retires** — `lanes.md`'s terminal-flag sweep binds to cards too.
+  §6 gains the case it was missing next to the Frame-3 blank: when an arc's last card retires with nothing
+  behind it, the section does not go stale, it **disappears** (`pickQuestsCard` returns null and `:: QuestsPage`
+  skips it), at the exact moment that NPC becomes permanent sandbox content — Vesper's Renner vanished off the
+  page on his own drain while his office stayed open for the rest of the game. Verified live: 85/85 on
+  `live_beat_0084.py`, which reads the real renderer at every state from the 1a close to `leash_cut`.
+- **Terminal-beat retirement had only half the failure mode: gates the flag makes permanently FALSE**
+  (`references/lanes.md`, extending *Retire the standing surface on the terminal flag*). The existing sweep is
+  thorough about surfaces that become a **lie** — courtship for a man she owns, a hub for a man who fled — and
+  it is entirely about **prose and presence**. It does not name the case where a terminal beat removes the
+  **enabling state of a mechanic**, which makes nothing stale: it makes every gate that requires that state
+  stop passing **forever**, and the content behind them unreachable with nothing on screen to show it. The
+  engine actively hides it — no passing choice emits a `console.warn` and a bare Continue escape, which reads
+  as a scene that simply stopped having anything in it. Found at `vesper` `beat_0083`: the extraction cuts the
+  controller out, so `controller_state` is 0 for the rest of the game, and the sex loop's drain exits required
+  it — every future anal finish would have routed to the "nothing happens" branch forever, so the player would
+  own the man and get nothing. Five surfaces read the retired state; only that one was fatal. The new section
+  gives the one-grep audit (list every reader of the retired state, and ask of each whether it still has a
+  **true branch** after the flag), the three legitimate answers (re-partition / retire / repoint), the warning
+  that `logic = "OR"` cannot express the re-partition because it is one logic per block with no nesting, and
+  the assertion shape that catches it — **verify from the failing side: after the flag the surface must still
+  reach its payload and must NEVER reach the wrong-answer branch.** Verified by building against it: 52/52
+  live assertions green including that failing-side pair, with the six-way exit partition asserted by
+  derivation rather than by count.
+- **The sex LOOP is where the dialogue ratio actually dies — measured, and added to Rule 4's worked example**
+  (`references/beat-authoring.md`, extending the extraction-beat blockquote). The `beat_0079` fold covered the
+  *payload* beat; applying it a second time at `vesper` `beat_0082` showed the payload is the smaller half of
+  the problem. Measured across that game's three shipped sex loops: the pose canvases and finishers run
+  **8.8 : 1**, **102 : 1** and **132 : 1**, and the finishers and drain payloads contain **zero** dialogue
+  blocks between them. The reflex — a man mid-act has nothing to say — is wrong twice: he is the most
+  talkative he will ever be, and what he says while using someone is the most characterising line he gets.
+  Authored fresh with his voice on, the same three-canvas chain measured **1.08 / 1.28 / 1.22**, and the fix
+  cost **eight lines**. The note also carries the procedural half that would have caught it earlier: run
+  `§7 check 3` on **each canvas of a chain separately**, because a chain average hides a 100 : 1 finisher
+  inside a healthy-looking whole. Verified by building against it — the new chain's three canvases each pass
+  check 3 independently, 57/57 live assertions green, and the whole-game ratio moved 2.60 → **2.55 : 1**.
+
+## 2026-08-10
+- **The nav-invisible interior named as a map SHAPE, where map shapes get chosen**
+  (`references/location-design.md` — new §4.2, under the locked-location unlock contract). ⚠️ **This is not a
+  case of the skill teaching something wrong** — `engine-reference.md` §5 already documents `auto_exit`
+  correctly, including the exact sentence *"Both halves are required: without the fallback half, the location
+  dumps the whole map."* The gap is where it lives: it is a **field row in a reference table**, and the
+  author who needs it is not looking up a field, they are choosing a **map shape** in `location-design.md`.
+  Found the hard way at `vesper` `beat_0081`: a room that must not be advertised and whose door is an
+  unskippable scene was built with no `entry_from` and *without* `auto_exit = false`, and the built passage
+  came out carrying `All locations:` and the entire world — from a locked back room the player could walk to
+  the Spire. Caught by the live suite before any content assertion ran. The new section names the two
+  situations that call for the shape (do not advertise the room; getting in is a scene), states that **both
+  halves are required** with the code path (`v2.py _generate_hierarchical_navigation`,
+  `if not navigation_html and auto_exit`), contrasts it with the other legitimate answer (give the room a
+  child — a door location — when the door *is* content), and ends with a four-item pre-ship checklist whose
+  sharpest item is greppable: **the built passage must not contain `All locations`**. Verified by building
+  against it — 67/67 live assertions green, including one that asserts the room is nav-less and one that
+  asserts no NPC badge for its occupant renders anywhere in the game.
+- **The extraction beat is a conversation — a worked example for Rule 4** (`references/beat-authoring.md` —
+  new blockquote under *dialogue carries character (Rule 4)*). The rule already said "play it, don't report
+  it" and named capstones and sex scenes as the place to push hardest, but it had no example and no named
+  case for the single highest-value instance: the beat where an NPC **gives something up** — a drain, an
+  interrogation, a confession. Measured at `vesper` `beat_0079`: that game's design book has carried a
+  *control-canvas carriage rule* ("played as a Q&A in HIS own dialog, not narrated summary") since its first
+  such scene, and **all three canvases written under it broke it** — `loop_renner_finisher.drain`,
+  `calloway_drain_canvas.d0`, `colm_drain_canvas.d0`, with **zero** player dialog blocks between them, every
+  one narrating the take. A prose rule in a per-game design book did not survive contact three times running,
+  so the fix goes in the skill as a wrong/right TOML pair plus the three rules that keep the pattern from
+  becoming an interview (her questions ≤ 4 words; the payload never also appears in narration; open is not
+  broken — he answers helpfully and is never made pathetic). Verified by building against it: the rewritten
+  canvas measured **0.93 : 1** by `§7 check 3`, the best in that game, and moved the whole-game ratio
+  2.80 → **2.72 : 1** in one beat; 68/68 live assertions green, including one that greps the paragraph blocks
+  to prove the payload is not reported twice.
+- **§7 check 2 never said how a "word" is counted** (`references/rts-flat-prose.md` — new blockquote under
+  *2 — Per-beat density*). Check 2 says "sum the words in each `beats[]` entry" and leaves the author counting
+  by eye, while check 3's script counts `str.split()` tokens — so the two checks silently use different
+  definitions, and a spaced em dash or ellipsis is a word to one and not to the other. Found while authoring
+  Vesper's `beat_0078`: a Kess line planned as "twenty words, one under the 21-word ceiling" measured **21**,
+  because its em dash is its own token. It passed, but the same off-by-one against a beat sitting at 50 is a
+  surprise FAIL — or worse, an author trims real prose to fix an arithmetic error that was never there. The
+  blockquote states the definition, gives the worked example, and says to count with the script whenever the
+  budget is exact. *(Deliberately NOT changed: `kink-ceilings.md` §4 already says "the ceiling is a CAP, not a
+  quota", which is exactly the reading `beat_0078` needed when a signed row worded around one scene had to
+  govern a quieter one. The doctrine was there and correct.)* Verified by re-running the beat's §7 audit and
+  re-reading §4.
+- **Three gaps in the `exit_block.choices` reference, all found by reading the generator while authoring
+  Vesper's `beat_0076`** (`references/engine-reference.md` §3 — three new blockquotes after the `costs`
+  paragraph). (1) **Choice effects fire on CLICK, exit-block effects fire on RENDER.** §2 gained the
+  render-time note yesterday but §3 never stated the contrast, so the two shapes read as interchangeable when
+  they are not — and the practical rule ("anything meaning *she finished this scene* has to ride a choice")
+  was nowhere. (2) **What happens when no choice passes.** The table documented every `TemplateChoice` key
+  and was silent on the zero-match case, so an author either assumes a dead end and avoids conditional
+  routing altogether, or defensively adds an unconditional fallback choice that then double-renders whenever
+  a real choice passes. The engine actually emits a `console.warn`, a `$flags.debug_mode` per-predicate ✓/✗
+  diagnostic, and an effect-free `[[Continue->…]]` escape (`v2.py:12890-12946`) — which also means a
+  conditional-routing exit is safe to author one branch at a time. (3) **When to use a `[group]` band and when
+  to use a routed sibling node.** The skill named the adjacent-`[group]` merge trap exactly once
+  (`system-patterns.md:125`) and never taught the positive alternative, so "one canvas, banded chain" reads as
+  the only shape for a state-varying canvas. The deciding factor is size, and the forcing constraint is §7
+  check 2: a beat's measured unit is the **sum** of its blocks and beat 0's unit swallows the whole node lead,
+  so four multi-beat bands measure as one ~250-word beat even though one renders. A one-line variant is a
+  band; a multi-beat variant is a node. Same arithmetic noted for `block_pool`. — verified by reading
+  `template_import.py:1955-1988` and `v2.py:12890-12946`, and by building the pattern live (Vesper
+  `loop_mercer_attempt`, 56/56 assertions including a direct click-vs-render test of the effect timing).
+- **A `type="location"` exit block's effects fire on RENDER, not on the exit click**
+  (`references/engine-reference.md` §2, the `exit_block` bullet — a new blockquote, plus `effects` and
+  `flagEffects` added to the `config = {…}` line, which had listed only `destinationType`, `locationId` and
+  `time_progression_minutes` despite every real canvas putting its state change there).
+  **Why:** the skill described the exit block's config keys and never said *when* they run, while §3's
+  per-choice table says `time_progression_minutes` "advances the clock on click" — so the obvious reading is
+  that a node's exit effects also wait for the click. They do not. They are emitted as passage-level
+  `<<script>>` at the bottom of the node body (`advanceTime(n)` at `v2.py:13376`,
+  `setup.applyAndNotifyFlag(...)`), and the engine documents this itself at `v2.py:15400-15412` as the reason
+  canvas nodes are excluded from `setup.isRerenderSafe`. The bug class it invites is an author writing a canvas
+  whose closing state is meant to be *earned* by finishing the scene: a player who reads two beats and leaves
+  by the sidebar has already banked the flag and the minutes. The note gives both authoring rules — put an
+  earned state change on a **choice**, and when the render-time set is the wanted behaviour (a one-shot that
+  opens the next stage), gate around it rather than against it. Per-choice effects genuinely do fire on click;
+  the two shapes look identical in TOML, which is why it bites.
+  **Verified:** read out of Vesper's built `index.html` for `kess_print_read` and `cap_owner_print` (identical
+  emission), cross-checked against the generator and against the engine's own `isRerenderSafe` comment. A live
+  test written at `beat_0075` asserted the opposite and was corrected against the artefact, not against memory.
+- **`requires_npc` is INERT on the Lane-4 auto-fire path** (`references/engine-reference.md` §2.2 field table,
+  a new note under the `npc` ≠ `requires_npc` block, and the Lane-4 row of the §2.3 fingerprint table).
+  **Why:** the skill taught `requires_npc` as an unqualified presence gate — *"ANDs
+  `getNpcLocation(npc).location === location`"* — with no hint that the AND only happens on two of the four
+  selection paths. `selectAutoFireCanvasForLocation` (`v2.py:4447`) filters on `isRepeatable` / `triggerMode` /
+  `substitutionOnly` / `isCanvasValid` + priority and never reads `requiresNpc`; `isCanvasValid`
+  (`v2.py:4567`) checks schedules, conditions and repeatability only. So a capstone authored as *"auto-fires
+  when he's in the room"* fires whether or not he is there, the build is green, and only a player entering at
+  the wrong hour finds out. This is a **bug class, not a one-off**: vesper's `rung_mercer_hands_on` shipped
+  with it for a whole beat and `cap_owner_print` reproduced it immediately, because the skill is what taught
+  both. The note gives the fix that actually holds — an `npc_at_location … is_present` predicate in
+  `conditions`, which `isCanvasValid` does evaluate — and says to keep `requires_npc` beside it as the
+  statement of intent.
+  - **Second trap folded into the same note: an auto-fire that exits into its own location will CHAIN.** If
+    capstone A exits to the room it fired in and capstone B is eligible there, B fires in the same breath and
+    B's opening narrates an arrival that never happened. Separate them with real state, and **prefer a trait
+    band to `days_since_flag`** on anything load-bearing: that predicate fails **closed** when
+    `flags_meta.set_day` is absent (`v2.py:3979`), so a flag set by any path that skips the metadata locks
+    the content forever.
+  - **Verified live, not from docs:** headless Playwright against a clean vesper build — at 12:00, with Mercer
+    scheduled at `penthouse` and `getNpcLocation` confirming he is **not** at `mercer_room`, both canvases
+    fired in the padlocked empty room; after adding the `npc_at_location` predicate both correctly declined,
+    and the daylight guard rendered instead. Chaining reproduced and fixed the same way (46/46 assertions).
+- **Documented `[player.trait_decay]` / `[npcs.trait_decay]`** (`references/trait-catalog.md` §1). **Why:** the
+  file asserted that the only way to get a daily passive was `[engine.daily_tick].traitEffects` — *"`advanceDay`
+  just iterates whatever you put in `[engine.daily_tick].traitEffects`"* — which is incomplete. A second route
+  exists, is applied unconditionally by the engine, floors at 0 for free, and is **shipped in
+  `games/late_shifts`**; it was invisible to the skill (`grep trait_decay .claude/skills/` returned nothing).
+  Found while authoring vesper's feed-line upkeep, where it is the right primitive precisely *because* it's an
+  unconditional countdown with a floor. Added the TOML shape, the parse/apply sites
+  (`template_import.py:1657-1666` → `v2.py:5532-5544`; the NPC variant's interacted-today skip at `:5516-5531`),
+  the choose-between rule vs `daily_tick.traitEffects` (conditional vs not), and two traps: only the calendar's
+  own spend belongs there, and the auto-emitted `trait_decay_warning` sidebar item.
+  - **Verified live, not from docs:** built vesper with `[player.trait_decay] feed_line_days = 1`, confirmed
+    `player_trait_decay = {"feed_line_days": 1.0}` in the emitted HTML, and drove a headless playthrough across
+    a real midnight crossing — 3 → 2, floored at 0, no sidebar row drawn.
+  - ⚠️ **Line numbers in this skill's references are drifting.** `trait-catalog.md` cited the `daily_tick` loop
+    at `v2.py:5255-5275`; it is now at `:5567-5588`. I cited only sites I read myself. A sweep of stale
+    `v2.py:` refs across the references is worth its own pass.
+
+## 2026-08-09
+- **Added recipe #9 — "Iterated prototype — *a fix that has to fail first*"** (`references/system-patterns.md`).
+  **Why:** designing Vesper's next chapter (`## The Leash`, book rev 112) needed a
+  buy-a-part → install-it-in-her-body → field-test-it → it-burns-out → iterate loop, and the menu had **no
+  matching recipe** — the closest entries were #5 (consumable/reload), #2 (capability track) and #6 (loadout),
+  none of which model a loop where **failure is the content**. `system-patterns.md:19-20` says to design a
+  missing system from first principles and add the recipe back, so this is that. The recipe carries four traps
+  learned from shipped code rather than invented: the part must be a **trait, not an inventory item** (the save
+  backfill has no wardrobe branch — the `cover_analyst` post-mortem in `save-safety.md` §5, which soft-locked
+  every 0.1.4→0.1.5 Vesper carry-over); the attempts must be **one canvas with an exclusive banded `[group]`
+  chain** (adjacent groups merge into a single if/elseif chain, so non-exclusive bands ship dead); the counter
+  must be a **trait not a flag** (a triggerless canvas has no located setter and the flag-chain validator hard-
+  fails); and **N identical failures is the "grind not content" review** — if you can't write three *different*
+  failures, the loop wants to be one scene.
+  - **Verified:** the four traps are each grounded in a shipped Vesper precedent or an engine fact already cited
+    elsewhere in the skill (`save-safety.md` §5; the merged-group behaviour; the `calloway_drains_done` /
+    `colm_drains_done` trait-counter pattern). No file outside `system-patterns.md` changed; no build run
+    (design-fold turn, no TOML).
+
 ## 2026-07-31 (later)
 - **Documented the optional media-block `id`** (`references/media.md` §1). **Why:** a slot's
   stocked options and its approve/disapprove verdict are both filed under a *string*, and by

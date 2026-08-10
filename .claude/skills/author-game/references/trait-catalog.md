@@ -33,6 +33,29 @@ consequences that the old corpus draft got wrong — the code is the source of t
   and applies it through the normal effect path (`v2.py:5255-5275`, `daily_tick.traitEffects` loop → `applyAndNotifyTrait`). *(Code-vs-lore note: older drafts
   claimed a "hardcoded daily climb" for family NPCs. The engine hardcodes nothing — if you want the
   climb, you author the tick. If you want a slow burn, you simply don't.)*
+- **⚠️ There is a SECOND daily-decay route this file used to omit: `[player.trait_decay]` and
+  `[npcs.trait_decay]`.** Both are real, shipped (`games/late_shifts`), and were undocumented here until
+  2026-08-10. Shape is a flat `{trait_key = amount}` table:
+  ```toml
+  [player.trait_decay]
+  feed_line_days = 1        # subtracted at every day rollover, floored at 0
+  ```
+  Parsed at `template_import.py:1657-1666` (a non-numeric value **raises at import**), emitted as
+  `setup.player_trait_decay`, applied inside `advanceDay` at `v2.py:5532-5544`:
+  `_pt[key] = Math.max(0, _pt[key] - decay)`. **It floors at 0 and has no skip logic** — it fires every day
+  regardless of what the player did. `[npcs.trait_decay]` is the same but **skipped for any NPC interacted
+  with that day** (`v2.py:5516-5531`, against `$npc_interacted_today`).
+  **When to reach for it over `[engine.daily_tick].traitEffects`:** `trait_decay` is a clean unconditional
+  countdown with a free floor — ideal for an **upkeep meter** (pay → set a literal N → it ticks down). Use
+  `daily_tick.traitEffects` instead when the tick needs to be **conditional**, since each entry there takes
+  its own `conditions` block (and note its clamp defaults to `false`).
+  **Two traps.** (1) Only put a trait here if the *calendar* should spend it — anything spent by ACTIONS
+  (energy, hygiene, a currency, weapon charges) must not decay, or an idle day silently taxes the player.
+  (2) If **any** decay is configured the engine may auto-append a `trait_decay_warning` sidebar item — it only
+  draws when a decayed trait lands within 2.0 of a threshold harvested from `[[engine.stage_helpers]]`, so a
+  trait with no stage helper never renders one. *(Verified live 2026-08-10 on vesper `feed_line_days`: emitted
+  as `player_trait_decay = {"feed_line_days": 1.0}`, ticked 3 → 2 across a real midnight crossing, floored at
+  0, and drew no sidebar row.)*
 - **No band names are hardcoded.** "Pure / Lewd / Slutty / Whore" is NOT in the engine. What the engine
   ships for corruption is (a) a raw 0–100 number and (b) a derived discrete **level 0–4** from tier
   thresholds `[0, 5, 15, 30, 45]` (`getCorruptionLevel`, `v2.py:5622-5628`; override via

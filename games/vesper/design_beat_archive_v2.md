@@ -220,6 +220,16 @@ first drain, so the full Calloway seduction is on the critical path.
 
 ## 12. Handoff to 1b
 
+> ⚠️ **SUPERSEDED 2026-08-09 (rev 112) — see `games/vesper/design_the_leash.md` (authoritative).** The sketch
+> below is the OLD 1b. Its **destinations survive** — the file read, the leash controller, Bastien, Vane fled,
+> the Chairman inbound to the arc beyond — but its **shape does not**: there is **no deal scene and no
+> controller trade**, because the trade already happened inside the 1a close (`cap_1a_close`, rev 96). 1b's
+> engine is a **repair grind on her own hardware**: she rents a bunk on Kess's feed line, he reads the file's
+> shape but not her sealed page, he needs the owner's hand print, and the print only buys him *a bit of an
+> idea* — so the chapter is buy-a-part → plant-it-in-her → try it on the one man she cannot touch → it burns →
+> repeat, three distinct failures then the win, and the win's payload is that the key only ever spoke for one
+> name. **Vane is NOT picked up this chunk** (reserved). Kept below for reference only.
+
 - **The Mercer fuse (as set earlier):** Calloway's report → the Chairman (Aldous Vance) → **Mercer blown / running.**
 - **The controller bridge:** *why* she helps Mercer run is that **he holds her leash controller.** Helping him =
   leverage to get it. (She still can't cut it — Failing core — but she takes hold of it.)

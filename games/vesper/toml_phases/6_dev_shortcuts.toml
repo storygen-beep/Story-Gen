@@ -270,10 +270,217 @@ wardrobeEffects = [
   { action = "equip", item_id = "cover_analyst" },
 ]
 
-# ═══════════════════ 1b DEFERRED (rev 97) — dev_jump_1b_start shelved for this release ═════════════════════
-# DEV JUMP (rev 96): seeded the full through-Archive + close state and dropped at underworld_strip, one step from
-# Kess's berth, to test the 1b handoff. REMOVED with the rest of 1b — there's no Kess scene to land on now, and its
-# promise ("step into the breaking-dock -> kess_1b_open fires") is no longer true. To test the 1a ending in this
-# release, use dev_jump_archive_start above and play through to cap_1a_close. Full block preserved in commit 08ec2e1
-# (rev 96); RE-ENABLE alongside kess_1b_open + activity_kess_cot + the berth reopen + the E frontier card.
-# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════
+# ─── DEV JUMP: 1b start — post-1a-close, dropped in the underworld (RESTORED rev 113; built rev 96) ─
+# Restored verbatim from 08ec2e1, reach_safehouse -> berth_home. NOTE: canvases gated dev_mode_enabled are
+# INVISIBLE to the flag-chain validator, the hint index and the setter index — this block is never checked
+# by the build, so its seed list is verified by hand + live-play only.
+# Seeds the full THROUGH-ARCHIVE state (the whole Calloway/case/Colm/Vane chain done) + the close outcome
+# (archive_1a_done, docs_retrieved, controller_held) and drops at underworld_strip — one step into the breaking-dock
+# fires kess_1b_open (the Kess handoff). NO cover equip (she's out of the Spire; the underworld reads her in grays).
+# Coin seeded so the tester can exercise the paid cot tier. Gated dev_mode_enabled; inert in shipped builds.
+[[canvases]]
+id          = "dev_jump_1b_start"
+name        = "▶ 1b: after the close (to Kess)"
+description = "DEV JUMP. Post-1a-close: seeds the full through-Archive state + the close outcome (archive_1a_done, docs_retrieved, controller_held) and drops at underworld_strip, one step from Kess's berth where kess_1b_open (the docs+controller handoff + rent) fires. Coin seeded for the paid cot. berth_home left unset so the Kess scene + the 'go to Kess' card show. Gated dev_mode_enabled; inert in shipped builds."
+
+[canvases.trigger]
+location      = "underworld_strip"
+is_repeatable = true
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "dev_mode_enabled", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "seed"
+name = "1b start (dev)"
+blocks = [
+  { type = "paragraph", content = "Dev jump: seeding the post-close state (file + controller in hand, both locked; Spire sealed) and dropping in the underworld. Step into the breaking-dock off the strip to reach Kess." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Into the Reach."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_strip"
+effects = [
+  { targetType = "player", trait = "equipped_weapon",  op = "set", value = 1 },
+  { targetType = "player", trait = "core_strain",      op = "set", value = 0 },
+  { targetType = "player", trait = "core_sealed",      op = "set", value = 1 },
+  { targetType = "player", trait = "repair_session",   op = "set", value = 12 },
+  { targetType = "player", trait = "colm_drains_done", op = "set", value = 1 },
+  { targetType = "player", trait = "case_progress",    op = "set", value = 6 },
+  { targetType = "player", trait = "coin",             op = "set", value = 50 },
+  { targetType = "player", trait = "energy",           op = "set", value = 100 },
+  { targetType = "player", trait = "names_known",      op = "set", value = 1 },
+]
+flagEffects = [
+  { targetType = "player", flag = "opening_done",       op = "set" },
+  { targetType = "player", flag = "renner_drained",     op = "set" },
+  { targetType = "player", flag = "hunt_lead",          op = "set" },
+  { targetType = "player", flag = "crew_known",         op = "set" },
+  { targetType = "player", flag = "bastien_found",      op = "set" },
+  { targetType = "player", flag = "bastien_revealed",   op = "set" },
+  { targetType = "player", flag = "captivity_entered",  op = "set" },
+  { targetType = "player", flag = "captivity_broken",   op = "set" },
+  { targetType = "player", flag = "captivity_done",     op = "set" },
+  { targetType = "player", flag = "salvage_entered",    op = "set" },
+  { targetType = "player", flag = "kess_met",           op = "set" },
+  { targetType = "player", flag = "salvage_done",       op = "set" },
+  { targetType = "player", flag = "mission_3_active",   op = "set" },
+  { targetType = "player", flag = "salvage_relaunched", op = "set" },
+  { targetType = "player", flag = "mercer_hub_open",    op = "set" },
+  # ── Archive 1a chain, all resolved (so the world + quests read coherent post-close) ──
+  { targetType = "player", flag = "calloway_met",         op = "set" },
+  { targetType = "player", flag = "calloway_believes",    op = "set" },
+  { targetType = "player", flag = "case_insider_seen",    op = "set" },
+  { targetType = "player", flag = "case_curated_seen",    op = "set" },
+  { targetType = "player", flag = "pipe_known",           op = "set" },
+  { targetType = "player", flag = "colm_found",           op = "set" },
+  { targetType = "player", flag = "access_problem_seen",  op = "set" },
+  { targetType = "player", flag = "docs_retrieved",       op = "set" },
+  # ── the close outcome: 1a done, key in her pocket (locked). berth_home EXPLICITLY UNSET so the jump always
+  #    lands PRE-Kess (the handoff + the 'go to Kess' card show) regardless of any prior session state. ──
+  { targetType = "player", flag = "archive_1a_done",      op = "set" },
+  { targetType = "player", flag = "controller_held",      op = "set" },
+  { targetType = "player", flag = "berth_home",      op = "unset" },
+]
+
+# ─── DEV JUMP: the parts loop — post-print, pre-read (beat_0075, rev 120) ────────────────────────
+# The 1b jump above lands PRE-Kess and stops there, so beats 0075-0079 (the whole parts economy and the
+# three failures) had no hand-testable entry point. This one seeds the chapter forward through the print
+# and stops one step short of kess_print_read, which is the loop's opening canvas: walk into the berth in
+# his yard hours and it fires.
+# Same caveat as the jump above: canvases gated dev_mode_enabled are INVISIBLE to the flag-chain validator,
+# the hint index and the setter index, so this seed list is verified by hand and by live play only.
+# ⚠️ NOTHING HERE SETS THE CLOCK — no effect type reaches time_state. Kess keeps 10:00-22:00 and Mercer
+#   keeps 23:00-08:00, so a tester who lands at the wrong hour gets berth_offhours or the padlock, exactly
+#   as a player would. Sleep on the cot to move the clock.
+# ⚠️ parts_loop_open is EXPLICITLY UNSET so the jump always lands pre-read regardless of prior session
+#   state, and part_held / part_installed / mercer_attempts are zeroed for the same reason.
+# npc_mercer relation is seeded to 15 — the anti-chain floor cap_owner_print needs (beat_0074) and the
+# level the loop runs at, so his hub reads its after-band and the room is the room she has been visiting.
+[[canvases]]
+id          = "dev_jump_parts_loop"
+name        = "▶ 1b: the parts loop (to Kess, print taken)"
+description = "DEV JUMP. Seeds The Leash forward through the print (berth_home, file_shape_known, print_needed, mercer_found, mercer_hospitality_open, owner_print_taken) and drops at kess_berth with parts_loop_open UNSET, so kess_print_read fires on entry during his 10:00-22:00 window. Coin + feed_line_days seeded so the buy and the install are both reachable; npc_mercer relation 15. Gated dev_mode_enabled; inert in shipped builds."
+
+[canvases.trigger]
+location      = "underworld_strip"
+is_repeatable = true
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "dev_mode_enabled", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "seed"
+name = "The parts loop (dev)"
+blocks = [
+  { type = "paragraph", content = "Dev jump: seeding The Leash through the print — the berth rented, the file read, Mercer found under his new name, the arrangement back on, and the print already off his hand. Dropping at the breaking-dock with the read still to come. Kess keeps 10:00-22:00; Mercer keeps 23:00-08:00." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Into the berth."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "kess_berth"
+effects = [
+  { targetType = "player", trait = "equipped_weapon",  op = "set", value = 1 },
+  { targetType = "player", trait = "core_strain",      op = "set", value = 0 },
+  { targetType = "player", trait = "core_sealed",      op = "set", value = 1 },
+  { targetType = "player", trait = "repair_session",   op = "set", value = 12 },
+  { targetType = "player", trait = "colm_drains_done", op = "set", value = 1 },
+  { targetType = "player", trait = "case_progress",    op = "set", value = 6 },
+  { targetType = "player", trait = "names_known",      op = "set", value = 1 },
+  { targetType = "player", trait = "coin",             op = "set", value = 120 },
+  { targetType = "player", trait = "energy",           op = "set", value = 100 },
+  { targetType = "player", trait = "feed_line_days",   op = "set", value = 3 },
+  { targetType = "player", trait = "part_held",        op = "set", value = 0 },
+  { targetType = "player", trait = "part_installed",   op = "set", value = 0 },
+  { targetType = "player", trait = "mercer_attempts",  op = "set", value = 0 },
+  { targetType = "npc", npcId = "npc_mercer", trait = "relation", op = "set", value = 15 },
+  { targetType = "npc", npcId = "npc_kess",   trait = "relation", op = "set", value = 10 },
+]
+flagEffects = [
+  { targetType = "player", flag = "opening_done",           op = "set" },
+  { targetType = "player", flag = "renner_drained",         op = "set" },
+  { targetType = "player", flag = "hunt_lead",              op = "set" },
+  { targetType = "player", flag = "crew_known",             op = "set" },
+  { targetType = "player", flag = "bastien_found",          op = "set" },
+  { targetType = "player", flag = "bastien_revealed",       op = "set" },
+  { targetType = "player", flag = "captivity_entered",      op = "set" },
+  { targetType = "player", flag = "captivity_broken",       op = "set" },
+  { targetType = "player", flag = "captivity_done",         op = "set" },
+  { targetType = "player", flag = "salvage_entered",        op = "set" },
+  { targetType = "player", flag = "kess_met",               op = "set" },
+  { targetType = "player", flag = "salvage_done",           op = "set" },
+  { targetType = "player", flag = "mission_3_active",       op = "set" },
+  { targetType = "player", flag = "salvage_relaunched",     op = "set" },
+  { targetType = "player", flag = "mercer_hub_open",        op = "set" },
+  { targetType = "player", flag = "calloway_met",           op = "set" },
+  { targetType = "player", flag = "calloway_believes",      op = "set" },
+  { targetType = "player", flag = "case_insider_seen",      op = "set" },
+  { targetType = "player", flag = "case_curated_seen",      op = "set" },
+  { targetType = "player", flag = "pipe_known",             op = "set" },
+  { targetType = "player", flag = "colm_found",             op = "set" },
+  { targetType = "player", flag = "access_problem_seen",    op = "set" },
+  { targetType = "player", flag = "docs_retrieved",         op = "set" },
+  { targetType = "player", flag = "archive_1a_done",        op = "set" },
+  { targetType = "player", flag = "controller_held",        op = "set" },
+  # ── The Leash, run forward to the print ──
+  { targetType = "player", flag = "berth_home",             op = "set" },
+  { targetType = "player", flag = "file_shape_known",       op = "set" },
+  { targetType = "player", flag = "print_needed",           op = "set" },
+  { targetType = "player", flag = "mercer_found",           op = "set" },
+  { targetType = "player", flag = "mercer_hospitality_open", op = "set" },
+  { targetType = "player", flag = "owner_print_taken",      op = "set" },
+  # ── and stopped one step short: the read is the thing under test ──
+  { targetType = "player", flag = "parts_loop_open",      op = "unset" },
+]
+
+# ═══ dev_jump_loop_armed — beat_0076 (rev 121): arm one cycle of the parts loop ════════════════════════════
+# COMPOSES with dev_jump_parts_loop above rather than duplicating its sixty lines of seed: take that jump
+# first (or play forward to it), then take this one at the market to skip the buy and the install and stand
+# one click away from the attempt. Repeatable, so a tester can re-arm after each failure without walking the
+# whole cycle again.
+# ⚠️ It lands back at underworld_market rather than at mercer_room on purpose: no effect can set the clock
+# (there is no clock-writing effect op, and no condition type reads the clock either), and Mercer is only in
+# his room 23:00-08:00, so dropping the tester at a locked door would be worse than dropping them a walk away
+# from an open one.
+# Gated dev_mode_enabled, inert in every shipped build.
+[[canvases]]
+id          = "dev_jump_loop_armed"
+name        = "▶ 1b: arm a parts-loop cycle (part seated)"
+description = "DEV JUMP. Opens the parts loop and seats a part (parts_loop_open, part_installed = 1, part_held = 0) without walking the buy and the install, and tops up coin and the feed line so the next cycle is affordable. Repeatable — re-arm after each failure. Lands back at underworld_market; the clock is not settable, so the walk to Mercer's 23:00-08:00 window is the tester's to make."
+
+[canvases.trigger]
+location      = "underworld_market"
+is_repeatable = true
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "dev_mode_enabled", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "seed"
+name = "Arm a cycle (dev)"
+blocks = [
+  { type = "paragraph", content = "Dev jump: the parts loop opened and a part seated at the seam, skipping the buy and the bench. Coin and the feed line topped up so the next cycle is affordable. Mercer keeps 23:00-08:00 — walk it." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Into the market."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_market"
+effects = [
+  { targetType = "player", trait = "part_held",      op = "set", value = 0 },
+  { targetType = "player", trait = "part_installed", op = "set", value = 1 },
+  { targetType = "player", trait = "coin",           op = "set", value = 120 },
+  { targetType = "player", trait = "energy",         op = "set", value = 100 },
+  { targetType = "player", trait = "feed_line_days", op = "set", value = 3 },
+]
+flagEffects = [
+  { targetType = "player", flag = "parts_loop_open", op = "set" },
+]

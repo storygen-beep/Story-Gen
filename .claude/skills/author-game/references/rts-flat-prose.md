@@ -534,6 +534,12 @@ Then for each cascade you just wrote, sum the words in **each `beats[]` entry** 
 + a `paragraph` — the **beat**, not the block, is the unit). **>50 words in one beat → split it into two
 beats.** Beat 0's budget includes the node's lead `blocks`.
 
+> **A "word" is a `str.split()` token** — the same definition check 3's script uses, so the two checks agree.
+> That means **a spaced em dash or ellipsis counts as a word**: `a set of names — I've been spoofing one` is
+> **nine** tokens, not eight. Harmless in the middle of a range, and not harmless when you are authoring to a
+> hard number (a band held to exactly 21, a beat sitting at 50). Count with the script, not by eye, whenever
+> the budget is exact.
+
 ### 3 — Narration : dialogue (Rule 4) — THE ONE THAT MATTERS
 ```bash
 python3 - <<'PY'

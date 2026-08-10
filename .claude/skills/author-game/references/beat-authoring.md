@@ -360,6 +360,51 @@ Run with the repo venv active, in order; emit a PASS/FAIL line for each:
      actually there to speak**: solo activities, voyeur/peek where you're unseen, and the interior-monologue
      stretches of a capstone. An NPC who's *present* is not exempt — give them at least a line (a mood
      glimpse can be one terse spoken beat).
+
+     > **THE EXTRACTION BEAT IS A CONVERSATION — the worked example, because "play it" was not enough.**
+     > The highest-value case of this rule is the beat where an NPC gives something up: a drain, an
+     > interrogation, a confession, a drunk talking. Vesper's design book has carried a *control-canvas
+     > carriage rule* since its first such scene — *played as a Q&A in HIS own dialog, not narrated summary* —
+     > and when it was measured at `beat_0079`, **all three canvases written under it had broken it**:
+     > `loop_renner_finisher.drain`, `calloway_drain_canvas.d0`, `colm_drain_canvas.d0`, with **zero** player
+     > dialog blocks between them. Every one narrated the take (*"She asks the only thing she came for… He
+     > tells her."*). A sentence in a design book did not survive contact three times running, so here is the
+     > shape instead:
+     >
+     > ```toml
+     > # WRONG — the narrated take. One paragraph, no voices, the payoff reported rather than played.
+     > { type = "paragraph", content = "She asks the only thing she came for: where the crew lived. He tells her." },
+     >
+     > # RIGHT — one beat per question, her line short, his line carrying the payload AND his character.
+     > { advance_text = "Ask him.", blocks = [
+     >     { type = "dialog", props = { speaker = "player" }, content = "Who signed for me." },
+     >     { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Halloran. Asset Services, fourth floor. Never met the man." },
+     >     { type = "paragraph", content = "His voice comes out even. He answers the way a man answers in his sleep." },
+     > ] },
+     > ```
+     >
+     > **Why it is worth the beats.** The payload has to be said anyway, so putting it in his mouth costs
+     > nothing and buys three things at once: the ratio (the rewritten canvas landed at **0.93 : 1**, the best
+     > in that game, and moved the whole-game figure 2.80 → **2.72 : 1** in a single beat), the character (how
+     > he answers is characterisation that narration throws away), and the pacing (one question per beat is
+     > free beat-count for a Tier-3 capstone that needs 10–20 of them).
+     >
+     > **Three rules that keep it from turning into an interview.** (1) **Her questions stay short** — four
+     > words or fewer, no preamble; she is not performing cleverness, and a long question is the author
+     > planning out loud. (2) **The payload never appears in narration** — grep the paragraph blocks for the
+     > name or fact he gives up; if it is there, it is being reported twice. (3) **He does not become
+     > pathetic.** Open is not broken: he answers helpfully, evenly, entirely himself, and the player does the
+     > gloating if anyone does.
+     >
+     > ⚠️ **AND IT IS NOT ONLY THE PAYLOAD BEAT — THE POSE LOOP THAT LEADS TO IT IS WORSE.** Measured across
+     > one game's three shipped sex loops, the pose canvases and finishers run **8.8 : 1**, **102 : 1** and
+     > **132 : 1** — the finishers and drain payloads contain *literally zero* dialogue blocks. The reflex is
+     > that a man mid-act has nothing to say, and it is wrong twice over: he is the most talkative he will
+     > ever be, and **what he says while he is using someone is the most characterising line he gets in the
+     > game.** Authored fresh with his voice on, the same three-canvas chain measured **1.08 / 1.28 / 1.22**,
+     > and the cost was **eight lines**. Budget one or two spoken lines per pose node and per finisher branch,
+     > and run `§7 check 3` on each canvas of the chain **separately** — a chain average hides a 100 : 1
+     > finisher inside a healthy-looking whole.
    - **per-beat density (Rule 2)** — each **beat** (not each block — a beat is often a `dialog` + a
      `paragraph`, and beat 0 includes the node's lead blocks) carries **~35–40 words**. **Over ~50 → SPLIT it
      into two beats, don't compress it.** The click is the fix. `references/rts-flat-prose.md` §7 check 2.

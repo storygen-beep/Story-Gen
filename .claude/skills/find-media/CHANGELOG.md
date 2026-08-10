@@ -1,6 +1,36 @@
 # find-media — CHANGELOG
 
-## 2026-08-09 (latest) — selecting a clip no longer erases where it came from
+## 2026-08-09 (latest) — `grab` now COMPRESSES on install, so the installed extension is `.mp4`
+
+- **`SKILL.md` §6 INSTALL** — documented the new auto-compress step in `grab`. An animated
+  download (`.gif/.webm/.mov/.mkv/.avi/.m4v`) is re-encoded to **H.264 CRF 23** between the
+  staging fetch and the atomic install; `.mp4` sources and every still pass through untouched.
+  **The operative warning: read the target path off the response's `file_path`, never off the
+  url's extension** — `alley_bj_t5.webm` now lands as `alley_bj_t5.mp4`, so a post-install check
+  built from the requested name hunts a file that does not exist. Also documented the new
+  response fields `transcoded` / `transcode_skipped`, and that **a skip is never an error**.
+
+- **Why (engine change, not doctrine).** LO's build had gone 359 MB → 1.7 GB. Diagnosed
+  read-only: nothing was wasted — 365 refs, 0 broken, pools 196/196 — the build was simply
+  **95.6% GIF**. `game_service.py:829-849` optimises stills (48 MB → 11 MB) and `shutil.copy2`s
+  everything else verbatim, so there was a still optimiser and no video optimiser. Measured on
+  vesper: 248 clips **1546 MB as GIF → 160 MB as H.264 CRF 23**, and the pixel difference is
+  near-flat across CRF 18→26 (0.0578 → 0.0622) because it is GIF's dithering being smoothed
+  away, not compression loss. The 20 VP8 webms measured **41 dB PSNR** at the same CRF —
+  transparent. Compressing in `grab` is what stops the shelf re-inflating one pick at a time.
+
+- **Verified:** new `tests/test_media_finder_transcode.py` (12 tests) covering the happy path,
+  five distinct failure modes all falling back to the original bytes, no staging leak on
+  fallback, `.mp4` and stills never re-encoded, and pool peers left intact. **241 existing tests
+  still pass.** Real end-to-end through the un-mocked encoder: 19.02 MB → 2.80 MB, 216 frames
+  preserved; junk input returns a reason instead of raising.
+
+- **The guard that earned its place:** the frame-count check. A truncated encode still produces
+  a *playable* file that stops early — on a looping clip that reads as "the pool got shorter",
+  not as an error. During the bulk conversion two concurrent writers sharing a temp name
+  produced exactly one corrupt file out of 229, and **only a frame count found it.**
+
+## 2026-08-09 — selecting a clip no longer erases where it came from
 
 LO asked why a selected clip loses its `⇢`. It is not a missing button: `grab` calls
 `_drop_option` (media_finder.py:1532) and the row it deletes held the ONLY copy of the clip's

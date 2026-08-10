@@ -80,7 +80,10 @@ Every worked slot ends with **both**:
    — the metadata-triple regex, part of the same extraction pass). That id is what makes the
    picker's ⇢ "fetch related" a one-navigation lookup; an option stocked without it needs a
    whole grid re-search later, which usually fails on aged shelves. Contract since 2026-08-05.
-3. **Nothing installed.** The slot stays empty and the review page shows
+3. **Nothing installed.** *(But when the human does pick, `grab` re-encodes any animated
+   clip to H.264 CRF 23 on the way in, so his install lands as `.mp4` whatever the source
+   served — see find-media SKILL.md §6. Nothing here changes: you still install nothing, and
+   the shelf still stores the original source urls.)* The slot stays empty and the review page shows
    `N options — pick` (the `ready_to_pick` state, `api/v1/media_review.py`).
 
 You may never: install a file, rank the shelf, score a candidate, fetch-and-judge candidates,
