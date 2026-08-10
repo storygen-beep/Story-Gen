@@ -1,0 +1,163 @@
+# =============================================================================
+# The Board — <game title>
+#
+# Copy into games/<slug>/toml_phases/ split across:
+#   0_systems_spec.toml            [project] [settings] [time] [[sidebar_items]]
+#   1_metadata_and_locations.toml  [player] + [player.core_traits]
+#                                  [[locations]] [[npcs]] [[npcs.schedules]]
+#
+# The split is not cosmetic: TOML scoping means [[npcs]], their schedules and the
+# player traits must share one file, or the nested tables re-parent themselves.
+#
+# Every key below occurs in a real shipped game — nothing here is invented.
+# Doctrine and the evidence behind each rule: references/the-board.md
+#
+# THE ONE RULE: fill is a DISTRIBUTION, not a per-room quota. One deep anchor,
+#               a decent median, and no declared room left empty.
+# =============================================================================
+
+
+# ── project ──────────────────────────────────────────────────────────────────
+[project]
+id             = "<slug>"
+title          = "<Title>"
+description     = "<one paragraph — the fantasy, not the plot>"
+starting_canvas = "<canvas_id>"
+quests_engine   = "v2"
+
+[settings]
+narration_person  = "second"      # IMMUTABLE once a release ships
+clothing_enabled  = true
+wardrobe_location = "<her_room>"
+
+[time]
+starting_hour = 8
+starting_day  = "Monday"
+starting_week = 1
+
+
+# ── meters: three layers ─────────────────────────────────────────────────────
+# Layer 1 RATCHETING TIERS  — 3-4, each a different kind of going-further.
+#                             Rungs at 15/35/55/75. These do the heavy gating.
+# Layer 2 VOLATILE STATE    — moves both ways, managed minute to minute.
+#                             NOT ascent. Never gate an arc on these.
+# Layer 3 PER-CHARACTER     — light; lives on each [[npcs]] block below.
+[player]
+id   = "player"
+name = "<Name>"
+
+# ⚠️ SECTION form, not an inline table. TOML inline tables cannot span lines, so
+#    `core_traits = { … }` across several lines is a parse error. Real games use this.
+[player.core_traits]
+# layer 1 — ratchets (the ascent tiers; these do the heavy gating)
+<tier_1> = 0
+<tier_2> = 0
+<tier_3> = 0
+purity   = 100      # optional counterweight
+# layer 2 — volatile (managed minute to minute; NEVER gate an arc on these)
+arousal  = 0
+energy   = 100
+hygiene  = 100
+money    = 20
+
+# One [[sidebar_items]] per tier you want visible.
+# ⚠️ The TOP BAND'S `max` IS A PROMISE: content must exist up to it, or gate 8 fails.
+#    Omit `max` on the top band only if the meter is genuinely unbounded.
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "<tier_1>"
+bands = [
+  { min = 0,  max = 14,  text = "<…>" },
+  { min = 15, max = 34,  text = "<…>" },
+  { min = 35, max = 54,  text = "<…>" },
+  { min = 55, max = 74,  text = "<…>" },
+  { min = 75, max = 100, text = "<…>" },
+]
+
+
+# ── locations: 6-8 at v0.1, budgeted as a SHAPE not a flat quota ─────────────
+#   one ANCHOR carrying >=25% of all location prose (the place the game is about)
+#   median location >=3,000 words · mean >=4,500 across the set
+#   satellites may be small — a 300-word corridor is not a defect
+# For each one, answer before writing it:
+#   · its dramatic job — why she goes there when nothing is happening
+#   · who is there, and when — no scheduled character means it is scenery
+#   · what she can do there REPEATEDLY — if nothing, it is not a location yet
+#   · budget vs current fill — the debt column in v2_state.json
+#
+# Cold rooms are allowed: the reference game had no sexual content in 8 of its
+# 25 locations. The floor is 60% of locations carrying heat, not 100%.
+
+[[locations]]
+id                   = "<location_id>"
+name                 = "<Name>"
+description          = "<what she sees; what it smells of; who is usually here>"
+image                = "locations/<location_id>.jpg"
+image_search_queries = ["<query>", "<query>"]     # find-media fills the file
+entry_from           = "<other_location_id>"
+navigation_order     = ["<neighbour_id>"]
+# Locked rooms only — and every locked room needs a beat that unlocks it:
+# entry_conditions   = { version = "1.0", items = [
+#   { type = "flag", subject = "player", flag_key = "<flag>", operator = "is_true" } ] }
+
+# BOARD NOTES (keep in v2_state.json, not in the TOML):
+#   job    = "<why she comes here with nothing happening>"
+#   anchor = false        # exactly one location sets this true
+#   fill   = 0            # recomputed by gates.py — do not hand-maintain
+
+
+# ── characters ───────────────────────────────────────────────────────────────
+# Every character needs AT LEAST ONE standing surface and AT LEAST ONE schedule
+# row, or gate 6 fails. Measured anti-pattern: a character referenced 88 times in
+# a game's source, reachable nowhere.
+
+[[npcs]]
+id          = "npc_<id>"
+name        = "<Name>"
+description = "<who they are — and why she wants them, or why being wanted by them lands>"
+portrait    = "<id>.jpg"
+core_traits = { relation = 0, lust = 0 }      # layer 3: light, per character
+flag_keys   = []
+arc_stages  = ["<Stranger>", "<…>"]
+
+# ⚠️ ORDERING: schedules bind to the [[npcs]] block ABOVE them. Inserting a new
+#    character between an existing one and its schedules silently re-parents them.
+# ✅ Overnight windows are fine — 22:00-04:00 is ONE row. setup.isCurrentTimeSlot
+#    handles the wrap (generators/v2.py, call sites :3448 :3465 :3612).
+[[npcs.schedules]]
+location   = "<location_id>"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "09:00"
+end_time   = "18:00"
+activity   = "<what they are doing — shown to the player>"
+
+
+# ── media declaration ────────────────────────────────────────────────────────
+# This skill DECLARES slots. `find-media` fills them. Three gated rules:
+#
+#  1. Repeatable explicit content declares pool_dir + pool, NEVER a single file.
+#     A beat replayed fifty times with one clip is dead on arrival; the reference
+#     game re-rolls pools of 26 and 56 items on every room render.   → gate 4
+#
+#  2. High-traffic locations carry a cycling pool. Movement between scenes is most
+#     of the play minutes; a non-erotic traversal layer wins by occupancy. → gate 5
+#
+#  3. Tier the filename. _t4 / _t5 is how downstream tooling knows the slot is
+#     explicit. An untagged explicit slot gets read as safe and mis-sourced.
+#
+# { type = "video", props = { pool_dir = "sex/<name>_t5", pool = 4,
+#                             description = "<what is on screen>",
+#                             search_queries = ["<query>", "<query>"] } }
+#
+# { type = "image", props = { file = "scenes/<name>.jpg",
+#                             description = "<…>", search_queries = ["<…>"] } }
+
+
+# =============================================================================
+# BEFORE LEAVING THE BOARD
+#
+#   python3 .claude/skills/author-game-v2/scripts/gates.py <slug>
+#
+# Gates 1, 4, 5, 6, 8 and 10 are decidable from the Board alone. Fix them here,
+# where it is cheap, rather than after content is hung on a broken frame.
+# =============================================================================
