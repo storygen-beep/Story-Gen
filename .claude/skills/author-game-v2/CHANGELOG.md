@@ -5,6 +5,575 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-11 — **v0.1 SHIPS: 10/10. The first green game this skill has ever produced.**
+
+```
+[PASS]  location fill        8 locations · 36,035 words · mean 4,504 · median 4,381 · anchor 27%
+[PASS]  explicit floor       27.8% of 270 beats carry 3+ explicit words (floor 7.5%)
+[PASS]  explicit in repeatable  100.0% of 75 explicit beats are re-enterable
+[PASS]  repeatable explicit media cycles  49 pooled, 0 fixed single-clip
+[PASS]  traversal heat       7/8 locations (88%) carry a cycling explicit pool
+[PASS]  standing surface     4/4 characters findable and scheduled
+[PASS]  milestones open something   4 of 4
+[PASS]  meter ceiling        0 visible meters rise past their content
+[PASS]  ends on an opening   8 choices render visible-but-locked
+[PASS]  ascent tiers expand the world   nerve · exposure · need, all upward
+────────────────────────────────────────────────────────────────
+10/10 judged gates pass          EXIT CODE 0
+```
+
+`games/back_home` — **36,035 words of location prose, 8 locations, 4 characters, 270 beats,
+75 explicit, 8 locked doors.** Nothing had ever passed all ten before; the promotion criteria in
+`STATUS.md` require exactly this.
+
+### The last room: the shop, and it stays cold
+
+`the_shop` 654 → **2,952**, and **every beat in it scores 0 on the explicit floor, on purpose.** The
+Want: *"the one room where no man wants anything from her, and that is its entire function."* It is
+the counterweight to five rooms of heat, and `register.md` is explicit that a game far above the
+floor is usually one that has stopped having non-sexual texture.
+
+Four surfaces:
+
+- **`activity_shift` 76 → 594.** The single most-repeated money click in the game was one paragraph.
+  Banded on `need`: thirty pounds as pocket money, then as the four-shifts-is-the-rent arithmetic she
+  cannot stop doing mid-transaction, then as *the only money in her life that arrives without a face
+  attached to it.*
+- **`activity_the_walk`.** Ten minutes each way is the only stretch of the day she is outside the
+  house **and** outside the shop — the one part of the map nobody in the game can see her in.
+- **`activity_stock_hour`.** The room's declared job is *money that is hers* and there was exactly
+  **one** way to earn in this game. A second lever on `need` that is not a man is what makes the
+  trades elsewhere a choice rather than the only road.
+- **`triggered_hannah_again`** — pays the logged promise. Three bands on `pride` that are three
+  different answers to the same question: the voice that means no, the drink that actually happens,
+  and the standing fortnightly lie to the one person who thinks she is basically all right.
+
+**No new location for the drink.** *A release adds events, not places* — it happens off-screen and
+arrives back at the counter. And Hannah stays **narrated, never declared**: an `[[npcs]]` entry would
+fail gate 6 on the spot, which is why she speaks in quoted prose rather than `dialog` blocks.
+
+### Verified live, end to end — not just the new surfaces
+
+- Age gate → opening chain plays with **no state forcing at all**; `arrival_done` set, player lands
+  at `her_room`.
+- The full schedule grid on a **weekday and a weekend**: Ray 06:30 bathroom → Dean 08:30 kitchen →
+  Marek 10:30–14:30 box room → Cal 16:30 front room + Marek 16:30 kitchen → Ray 18:30 garage → Ray
+  20:30 front room. Saturday differs correctly (Dean 14:30 garage, no Ray bathroom row).
+- **All eight locations render** with actions at a mid-game state: 5 · 3 · 3 · 5 · 7 · 2 · 6 actions.
+- **Zero JS errors** across the whole pass.
+
+### v0.1 closed out
+
+`phase` flipped **`board` → `release`** in `v2_state.json`, with a `releases[]` entry recording
+subject, what it added, what it opened and the gate scores. Per `the-release.md`: *never build a
+"chapter" again.*
+
+**13 promises stay open, and that is deliberate rather than accumulated.** Eight of them **are** the
+locked doors — that is what "every release ends on an opening" means, and closing them would be
+closing the product. The other five are plants with content owed: the lodger leaving in spring,
+`keep_unpaid` changing the terms with Ray, Dean's uncharged version, Cal's eight hundred and forty,
+and Ray finding out where the rent money came from. Nothing is cut; every one is a release subject.
+
+### What this run cost, and what it produced
+
+Six increments, **+17,153 words**, and every one of them turned up something the instrument could
+see and a reader could not:
+
+| # | room | the finding |
+|---|---|---|
+| 1 | bathroom | two harness facts that faked a broken game (the clock lives at `game_state.time_state`; blind cascade-advance double-applies effects) |
+| 2 | kitchen | **the `clamp` bug** — every money grant capped at 100 against a 120 rent, so the rent was unpayable. `engine.md` §21 |
+| 3 | her room | **a category name is not a sweep** — the register rule had been applied to "the sex loops" instead of to everything under the floor. `register.md` |
+| 4 | box room | **the rotating slot was never split by lifetime** — room-scoped content must name the occupant by role. `the-board.md` |
+| 5 | garage | the explicit-floor comparison **checked instead of acted on** — the reference denominator may not match ours, so the room was not diluted to chase a ratio |
+| 6 | shop | one-scene characters are narrated, never declared — gate 6 enforces it |
+
+Three of the six produced doctrine changes to the skill itself. The register defect appeared in
+**new prose in four consecutive increments**, written each time immediately after re-reading the
+rule against it — which is the strongest evidence yet for `register.md`'s own claim that it
+reasserts the moment it is not being actively fought, and for keeping the per-beat scorer in the
+loop rather than trusting a read-through.
+
+**Still open, and now the top of the list:** the explicit-floor denominator question (28% against a
+band that may not be comparable), media (47 declared `pool_dir` slots, zero files — deferred by LO
+until after he plays it), and **the agents**, which remain the skill's largest architectural gap.
+
+---
+
+## 2026-08-11 — v0.1 fill 5/6: the garage, and a deliberately cold surface
+
+**What.** `the_garage` 801 → **3,514 words** — the thinnest room in the game and the last big add.
+Files: `games/back_home/toml_phases/5_scenes.toml`, `3_activities.toml`, the game's `v2_state.json`.
+
+### The room was Ray's and had 309 words of him in it
+
+The Want gives Ray a specific mechanic: *"he is careful, so every inch is expensive and deniable —
+which makes an inch feel like a mile."* The front room is his **money** surface (rent, the ask, the
+arrangement); the garage is where the deniable register belongs, and his garage ladder **topped out
+at exposure 15** while his front-room ladder ran to need 75.
+
+Two rungs and a door, verified live:
+
+| rung | gate | the mechanic |
+|---|---|---|
+| `rung_ray_garage_hold` | nerve 35 | **deniability as an engine.** Out here contact has a *job* — holding the other end of a board — so it can happen and still be about the board. Bands on his lust: he stops saying sorry, then there stops being a job, and there is a fresh plank on the trestles every evening that nobody comments on |
+| `rung_ray_garage_bench` | exposure 55 + his lust 30 | explicit, and it happens in the one room with a door to the outside. Afterwards he says *"Right."* and holds the door and asks Dean whether the football is on |
+| *locked* "Ask him where the bench went." | nerve 75 | the room's door |
+
+```
+nerve10           tea · [LOCKED] where the bench went
+nerve40           + what you've got on · hold the other end · [LOCKED]
+nerve60 lust35    + stay out here after he's finished · [LOCKED]
+nerve80           the locked row goes live
+```
+
+Ray already owns a need-75 door in the front room; nerve 75 here is a different axis and a different
+want, so it is not the same promise twice. Dean's weekend ladder went 2 → 3 rungs
+(`rung_dean_garage_bar`, exposure 45 + his lust 25 — three hours, empty house, door up a foot).
+
+### The bench-shaped absence
+
+The room's defining detail is a **gap**: the weight bench in her bedroom came out of this garage, in
+the same fortnight the desk went to the tip. There is a rectangle of clean concrete on an otherwise
+filthy floor and nobody in the family has ever mentioned it. It is planted in three canvases now and
+the nerve-75 door is where it finally gets named — **logged as a promise, not paid**, because the
+answer is a scene and this increment did not write it.
+
+### A surface written cold on purpose
+
+`activity_the_garage` (512 words, room-scoped, names no NPC) has **zero explicit beats and that is
+the design**, not an oversight: a garage with nobody in it is not erotic, and `register.md` says a
+game far above the floor is usually one that has stopped having non-sexual texture. It carries the
+biro height-marks on the door frame that stop the year the mother left, and the two mugs Ray has
+been filling the kettle for without ever mentioning it.
+
+Also banded the two remaining flat presence-floor rungs, `rung_ray_tea` (147 → 500) and
+`rung_dean_weights` (148 → 327) — the same treatment the kitchen and box-room floors got.
+
+### The floor question, checked rather than assumed
+
+Last increment I called 26.3% "3× the reference band" and treated it as a looming problem. Before
+letting it drive design I tried to check the comparison, and **it cannot be checked from here**:
+
+- `gates.py` measures **location prose only** — that denominator correction was made to gate 1 on
+  2026-08-10, when the word count was found to include `base-combat` and `base-system`.
+- `EXPLICIT_BEAT_FLOOR`'s own header cites the reference at **1,772 → 15,629 units**, which look like
+  whole-source unit counts. If that denominator included combat, systems and UI passages and ours
+  does not, **the two percentages are not comparable at the top end.**
+- No reference snapshot is on disk. This stays a hypothesis.
+
+What survives either way: it is a **floor**, the game clears it, and the discrimination test holds
+(the measured-cold game scores 4.7% on this same instrument). So the garage was **not** diluted to
+chase a ratio — Ray's arc genuinely lives in that room — and the cold surface is cold for its own
+reasons. **Open question for after v0.1:** either re-derive the reference ratio on a location-only
+denominator, or say plainly in `gates.py` that the upper comparison is not meaningful.
+
+### Tally
+
+```
+[FAIL] location fill   8 locations · 33,728 words · mean 4,216 · median 4,381 · anchor 28%
+       · mean location 4,216 words (need 4,500)
+```
+
+Explicit floor **26.3% → 28.1%** of 267 beats; explicit beats 67 → **75**; doors 7 → **8**; every
+garage beat that was under the floor (`rung_dean_spot` 1, `rung_ray_garage_cold` 1) now clears, and
+so do the three that this increment's own new prose produced at 1–2. Zero JS errors.
+
+**One room left.** The shop 654 → **2,950** (+2,296) lands the total at **36,024**: mean 4,503,
+median 4,381, anchor 26.7%. That is gate 1 closed.
+
+---
+
+## 2026-08-11 — v0.1 fill 4/6: the box room and the landing, and the rotating slot was never split by lifetime
+
+**What.** `the_box_room` 1,228 → **4,381**, `the_landing` 1,367 → **1,963**. Files:
+`games/back_home/toml_phases/3_activities.toml`, `5_scenes.toml`, the game's `v2_state.json`, and
+`references/the-board.md` — the finding is about the rotating-slot pattern, not about this game.
+
+### The finding: the slot's economics were designed, its content was not filed to match
+
+The box room is the premise's answer to never-ending — *a new character at an existing location
+every few releases* — and the ledger records the intent that replacing the lodger **touches only his
+`[[npcs]]` entry and his block in `5_scenes.toml`.**
+
+That only holds if content is filed by **how long it lives**:
+
+| scope | covers | file | survives rotation |
+|---|---|---|---|
+| **tenant** | his ladder, his register, his props | `5_scenes.toml` | no — dies with him, deliberately |
+| **room** | the slot, the mattress, the wall, what the arrangement *is* | `3_activities.toml` | **yes** |
+
+`activity_his_room` was room-scoped **by file** and tenant-scoped **by content**: a specific
+submarine thriller, a bus ticket from a named town, a biscuit tin with a named amount in it. Every
+one of those is Marek. The first rotation would have cost a rewrite *in the file the plan says it
+will not open* — a cost that is free to avoid while writing and annoying afterwards.
+
+**The rule that fixes it: room-scoped content names the occupant by ROLE, never by name.** Now in
+`the-board.md` with the table above. The tenant-specific version of the bag moved to
+`rung_marek_bag`, where it is supposed to die.
+
+The room-scoped layer also turned out to be the more interesting half, because it is the only place
+the slot is legible **as a slot**: the same mattress through four tenants, marks on the wall at three
+different headboard heights, a name she has genuinely forgotten, and the fact that the terms get set
+in the first fortnight by whoever is standing on the landing when the new one arrives.
+
+### His ladder had a hole in the middle and nothing at the top
+
+It ran *stand in the doorway* (no gate) → *ask what he's paying Ray* (need 15) → **the explicit
+loop** (need 35 + exposure 55). Three rungs added, verified live at their gates:
+
+| rung | gate | what it is |
+|---|---|---|
+| `rung_marek_watch` | need 25 + exposure 35 | the missing middle — he prices *looking*, in the voice he priced the room in |
+| `rung_marek_bag` | his relation 45 | **pays the logged promise**: the packed bag, unopened since October. The only scene in his ladder with no transaction in it, which is why it costs him more than the loop does |
+| `rung_marek_after` | `marek_arrangement` | Cal and Ray both had a post-arrangement rung; he had none, and his is a 09:00–16:00 empty house with nothing to get back to |
+
+```
+cold                    doorway · [LOCKED] tell him what it costs now
+need30 exp40            + what he's paying Ray · what else he'd pay for
+need60 exp60 rel50      + the bag · the offer · stay after · [LOCKED]
+```
+
+Every effect matched its declaration (`rung_marek_watch`: money +20, need +3, exposure +3, pride −3,
+his lust +6). Zero JS errors.
+
+### The sweep, again — and it caught the new content too
+
+Seven beats across the two rooms scored 1 or 2 and were lifted: the Marek loop's actual sex beat
+(**1 → 6**) and its finish (**1 → 3**), and six landing peep beats. The landing now reads
+`3·3·3` / `3·4` / `3·7·4` / `4·4` where it read `3·3·1` / `3·2` / `1·7·1` / `2·2`.
+
+**And the content written this increment did it again** — `rung_marek_watch` came out at 2 on its
+middle beat and `triggered_lodger_home` at 2, both caught by the same per-beat pass. That is the
+fourth consecutive increment where the defect appeared in *new* prose written immediately after
+re-reading the rule. `register.md` is right that it reasserts itself the moment it is not being
+actively fought.
+
+### Tally
+
+```
+[FAIL] location fill   8 locations · 31,015 words · mean 3,877 · median 4,381 · anchor 31%
+       · mean location 3,877 words (need 4,500)
+```
+
+Explicit floor **22.4% → 26.3%** of 255 beats; explicit beats 53 → **67**; doors still 7; anchor 31%.
+
+⚠️ **Honest note on the floor.** 26.3% is roughly three times the reference game's measured 7.5–9.3%
+band. The floor is a floor and the game is not failing anything — but `register.md` warns that a game
+far above it is usually one that has stopped having non-sexual texture. The two rooms left are the
+two coldest in the game (the garage, and the shop which is cold by design), so the ratio should come
+down on its own. **If it does not, the next increment after v0.1 is texture, not heat.**
+
+**+4,985 remain** — the garage and the shop, and they are the whole of it.
+
+---
+
+## 2026-08-11 — v0.1 fill 3/6: her room, and the backward sweep that was only half done
+
+**What.** `her_room` 1,496 → **3,927 words**, and the median half of gate 1 now **passes**. Files:
+`games/back_home/toml_phases/3_activities.toml`, the game's `v2_state.json`, and — because the
+finding is about how the register rule gets applied, not about this game — `references/register.md`.
+
+### The measurement that set the increment
+
+The room where privacy structurally fails, containing the only surface in the game she initiates
+alone, had **eleven beats and not one of them cleared the 3-word floor**:
+
+| canvas | before | after |
+|---|---|---|
+| `activity_alone` — the solo sex surface | **1 · 1 · 0** | **7 · 3 · 0 · 0** |
+| `activity_the_wall` | **2** | **9** |
+| `activity_the_door` | **2** | **5** |
+| `activity_get_dressed` | **1** | **3** |
+
+Every one was the pivot: one body word, then off the body for the rest of the beat.
+
+### The doctrine finding — a category name is not a sweep
+
+Phase 1 applied this rule backwards and moved the game 10.8% → 15.9%. It did it to **"the three
+repeatable sex loops"** — a *category* — rather than to everything the instrument scored under the
+floor. These four canvases were written the day before the rule existed, were never in that
+category, and sat under 3 through two further increments **while the headline number rose**.
+
+> Score every beat, sort ascending, fix everything under 3. The instrument already prints per-beat
+> scores; there is no reason to select by intuition.
+
+Now in `register.md`, with the corollary that stops the over-correction: **a 0 next to a 4 is the
+rule working** — the interiority beat *after* an explicit one is supposed to score 0. What you hunt
+is the beat scoring **1 or 2**, which is a beat trying to be explicit and pivoting partway.
+
+The new content proved the point immediately: the three intrusions came out at **2 · 2 · 2 · 0** on
+their first pass and had to be lifted before they cleared — written by the same author, in the same
+turn, directly after diagnosing it.
+
+### The door had never once been come through
+
+The room's declared thesis is a catch that does not reach the plate — *"the room privacy is supposed
+to happen in, and does not"* — and six shipped canvases all had her alone in it with the door as
+scenery.
+
+No NPC is scheduled in `her_room`, so `npc_at_location` has nobody to find and `requires_npc` has
+nobody to hold. The only pattern that works without a schedule is the bathroom's:
+`substitution_only` canvases on the mandatory daily click.
+
+| intrusion | parent | gate | the character in one gesture |
+|---|---|---|---|
+| `intrusion_cal_room` | `activity_get_dressed` | exposure 25 | knocks on a door that has already swung |
+| `intrusion_dean_room` | `activity_get_dressed` | exposure 45 | does not knock, and pushes it to behind him |
+| `intrusion_ray_room` | `activity_alone` | exposure 60 | stops in the doorway and says one flat sentence |
+
+Ray's hangs on `activity_alone` **because of that parent's `arousal >= 30` gate** — he only ever
+arrives at the worst possible moment, which is the whole difference between him and the other two.
+It pays a logged promise outright: *"Ray stopped in the doorway and said nothing… his knowing has to
+become content, not stay a stage direction."* Marked `paid_in: 0.1`.
+
+### Two plants paid, one door added
+
+`activity_the_bench` pays the Want's own line — *"her father's weight bench is where the desk was"* —
+which had been scenery in six canvases. Three bands: an obstruction, then a thing she has started
+using, then the piece of furniture the room is arranged around. And `her_room` had **no locked
+rung at all**, so `activity_the_door` became a two-choice surface with *"Take the door off the
+hinges"* at nerve 75 — the end of the two-pound-part running line, which until now was a joke with
+nothing behind it.
+
+**Verified live:** six standing surfaces render in the room; the door's locked row resolves into a
+live choice at nerve 80 and is greyed at 40; every rung applied its declared effects exactly
+(Ray: exposure +5, nerve +4, pride −7, his lust +6, relation +3); zero JS errors.
+
+### Tally — gate 1 is down to one sub-check
+
+```
+[FAIL] location fill   8 locations · 27,266 words · mean 3,408 · median 3,927 · anchor 35%
+       · mean location 3,408 words (need 4,500)
+```
+
+**The median check passes for the first time** (3,927 against 3,000) — gate 1 went from three
+failing sub-checks to one. Explicit floor **18.1% → 22.4%** of 237 beats, explicit beats 40 → **53**,
+locked doors 6 → **7**, anchor 35% and still clear.
+
+⚠️ **Budget rebalance.** Three increments have each landed short of their row (754 + 64 + 573 =
+1,391), so the remaining four rooms at their planned targets reach only ~34,600 against the 36,000
+the mean needs. The box room goes to **4,700** and the garage to **3,900** to absorb it; that lands
+36,016 with the anchor at 26.7% and the median at 4,700. **+8,750 remain.**
+
+---
+
+## 2026-08-11 — v0.1 fill 2/6: the kitchen, and `clamp` had made the rent unpayable
+
+**What.** The kitchen 1,775 → **4,936 words**, and a shipped bug found by the effect diff rather
+than by reading anything. Files touched: `games/back_home/toml_phases/3_activities.toml`,
+`5_scenes.toml`, the game's `v2_state.json`, and — because the bug is an engine fact the skill never
+recorded — `references/engine.md` (new **§21**).
+
+### The bug: every money grant in the game was capped at 100, and the rent is 120
+
+`rung_marek_kitchen_price` declares `money +120`. The live diff said **0 → 100**.
+
+```
+v2.py:5753   if (clampFlag === undefined || clampFlag === null) { clampFlag = true; }
+v2.py:5754   if (clampFlag) { next = window._traitClamp(next, 0, 100); }
+```
+
+`clamp` is a hard **0–100 on every trait**, and it **defaults to true when the key is absent**. All
+**ten** money effects in this game carried `clamp = true`. The shop pays 30 a shift and the weekly
+rent is 120, so the player could work four shifts, hit the ceiling at 100, and **never once be able
+to pay the rent** — the eviction branch was the only reachable outcome of a system the ledger
+records as verified end to end.
+
+It is invisible to everything we own: the TOML is valid, the validator passes, the build is green,
+all ten gates score the same, and the sidebar shows a plausible number. **Only the live effect diff
+against the declared value shows it.** The earlier rent verification missed it because that run set
+`money = 200` directly in state and then tested the *deduction*.
+
+Fixed by `clamp = false` on all ten. Verified after rebuild:
+
+| | before | after |
+|---|---|---|
+| the rent scene, from 0 | 100 | **120** |
+| start 12 + four 30-shifts | 100 | **132** |
+
+The rent is payable by working for the first time since `[settings.rent]` shipped.
+
+**Doctrine, new §21:** a trait used as a **quantity** — money, counts — must carry `clamp = false`
+on every effect that writes it; meters (nerve, exposure, arousal, energy) want the clamp and keep
+it. Would a correct skill have prevented this? Yes — so it is in the engine card, not just the game.
+
+### The kitchen had no triggered layer, in the room named for one
+
+The room is declared *"the crossing point — everyone passes through, nobody stays, so it is where
+she is caught in passing"* and shipped three hubs and eight rungs, every one a menu she picks from.
+`the-release.md` calls TRIGGERED the main heat engine for a female protagonist, and the room named
+for it had none of it.
+
+`triggered_caught_in_passing` is that layer: gated on the **any-NPC** form of `npc_at_location` plus
+`worn_corruption >= 4`, so **the wardrobe is what makes it fire** — what she carried downstairs
+decides whether the room turns. It binds no NPC, which is both the content (she does not get to pick
+who comes through) and the structural guarantee that nothing in it can be mis-attributed.
+
+Verified live: with `sleep_vest` (corruption 2) the surface is absent; with `mothers_slip` (7) it
+appears, `getWornCorruption()` reading 7. Its menu steps exposure 10 → 40 → 80, and the locked door
+resolves into a live choice at 80 rather than merely un-greying.
+
+Distinct from `triggered_crossing_the_room` on purpose: that one is her crossing into a room one of
+them is sitting in; this is the opposite, and it is what *crossing point* means — she is already
+here, the kitchen has two doors, and the whole house comes through it one at a time.
+
+### One rung on each ladder, each written to that character's own ceiling
+
+Cal topped out at exposure 15, Dean at 35, Marek at need 25, while the meters band at 55 and 75.
+
+| rung | gate | verified |
+|---|---|---|
+| `rung_cal_kitchen_late` | nerve 45 + his lust 20 | appears at 45, absent at 20 |
+| `rung_dean_kitchen_counter` | exposure 55 + his lust 30 | appears at 55, absent at 40 — fills the band the meter-ceiling gate names |
+| `rung_marek_kitchen_price` | need 55 | appears at 55, absent at 30 |
+
+Every effect matched its declaration (Dean: exposure +6, nerve +3, pride −5, his lust +10,
+relation +3). Zero JS errors. Also banded the two thinnest rungs in the game —
+`rung_cal_breakfast` (120w) and `rung_marek_eat` (146w), each its ladder's always-available presence
+floor and each one flat paragraph — and gave the room a solo surface, `activity_kitchen_night`
+(23:00–03:00, banded on `need`, deliberately **not** explicit).
+
+**The door belongs to the room, not to a man.** Checking first changed the plan: Cal already owns
+nerve 75, Ray need 75, Dean exposure 75 and Marek need 75 elsewhere, so three of the four obvious
+choices would have been the same promise twice — and one of them was a ledger promise already made.
+*"Stop getting dressed to come down."* hangs on the NPC-less surface instead.
+
+### Two more harness facts
+
+There are **two** per-day ledgers, and clearing one is not enough:
+`game_state.trigger_history` keyed by canvas id (`v2.py:4187`) and
+`game_state.activity_trigger_history` keyed by canvas **name** (`v2.py:4223`, used when the canvas is
+offered as a location action). With only the first cleared, the second probe of a once-per-day
+surface reads exactly like a gate that does not work. Also: an NPC-bound hub renders under the
+**NPC's** name, not the canvas name — `hub_cal_kitchen` ("Cal (breakfast)") appears as *Cal*.
+
+### Tally
+
+**9/10 holds.** Fill 21,674 → **24,835**. Explicit floor **17.7% → 18.1%** of 221 beats — fourth
+increment running that raised it. Explicit beats 35 → 40. Locked doors 5 → 6. Anchor **44% → 39%**,
+still clear of 25% and still inside the 36,000–38,400 landing window.
+
+Kitchen came in **64 short** of its 5,000 row; with the bathroom's 754 that is 818 carried.
+**+11,172 words remain** across her room, the box room, the garage, the shop and the landing.
+
+---
+
+## 2026-08-11 — v0.1 fill 1/6: the bathroom gets the three quarters of its job it never shipped
+
+**What.** The bathroom 1,954 → **4,746 words** and the room's declared job finally built. Files
+touched: `games/back_home/toml_phases/3_activities.toml` (the contention hub plus six triggerless
+rungs), `5_scenes.toml` (one rename), and the game's `v2_state.json`. Nothing in the skill's doctrine
+changed — this is the first of six fill increments closing gate 1.
+
+### The room was declared for four things and shipped one
+
+`v2_state.json` describes `the_bathroom` as *"the occupancy engine — contention, waiting, walking
+in, being walked in on."* What existed was four walk-in substitutions — **being walked in on** — and
+a 57-word `bath_occupied` that said the room was busy and sent her back to the landing. Contention,
+waiting and walking in had no content at all. The room was named for a machine and shipped the one
+part where she does nothing.
+
+`bath_occupied` is now the contention hub: a nerve-banded opener (15/35/55) and a menu. Six rungs
+hang off it — wait, knock, walk in on Cal, on Dean, on Ray, and get in with him.
+
+### The hour picks the man; she only picks whether the door opens
+
+The three walk-in choices are gated on `npc_at_location(the_bathroom, npc_X, is_present)` and
+nothing else identifies them, so the ladder is the morning queue: Ray 06:30, Cal 07:00, Dean 07:40.
+Same click, three different men, three different registers off the Want's per-character ceiling —
+Cal borrowing words badly, Dean crude *to* her, Ray one flat sentence that costs more than anything
+Dean says all week.
+
+**Verified live, which is the only way this could be checked** — a choice condition is evaluated at
+render, so it cannot be read out of the TOML:
+
+| clock | occupant | menu |
+|---|---|---|
+| Mon 06:45 | `npc_ray` | wait · knock · **walk in on Ray** · locked door |
+| Mon 07:20 | `npc_cal` | wait · knock · **walk in on Cal** · locked door |
+| Mon 07:50 | `npc_dean` | wait · knock · **walk in on Dean** · **get in with him** · locked door |
+| Mon 08:30 | — | hub does not fire |
+
+At `nerve` 0 the menu is *wait* and the locked door only; Cal's rung appears at 25, Dean's at 35,
+Ray's at 40, and the shared shower at 55/55. Every rung applied its declared effects exactly
+(Cal: nerve +4, exposure +3, pride −3, arousal +25, his lust +8, relation +3). Zero JS errors.
+
+### Two harness facts, both of which faked a broken game
+
+1. **The clock is `game_state.time_state`** — `current_day` as a day *name*, plus `current_hour`
+   and `current_minute` (`v2.py:3272-3276`). Setting `game_state.day` / `.hour` writes a field
+   nothing reads: every schedule then evaluates as unoccupied and the whole game looks dead. The
+   first run of this increment's harness reported an empty presence grid at all five times.
+2. **Stop clicking when the passage leaves the canvas.** Advancing blindly to the end of a cascade
+   walks on through the exit into the location page and back into the hub, applying a second scene's
+   effects. That read as Cal's rung granting +8 nerve against a declared +4 — a doubling that looks
+   exactly like an engine bug and is the harness.
+
+Both are the same lesson the Player agent's spec already owed: this is the second increment running
+where the only defects found were in the test harness, not the game.
+
+### The lint's one actionable hit, paid
+
+`shift_change_frontroom` → **`rung_dean_shift_change`**, per house convention that a rung's id names
+its speaker. Two occurrences, both in `5_scenes.toml`; verified live that the renamed canvas is still
+reachable from `hub_dean_late` and still applies its effects. The dialogue-attribution lint drops
+**3 → 2**, and the two that remain are `canvas_arrival`, the known-good opening where Ray and Dean
+both speak.
+
+### Tally
+
+**9/10 holds.** Fill 18,882 → **21,674**. Explicit floor **15.9% → 17.7%** of 198 beats — the third
+consecutive increment where new explicit content *raised* the floor rather than diluting it, which
+is `register.md` continuing to hold. Explicit beats 28 → 35, all re-enterable. Locked doors 4 → 5.
+
+⚠️ **The anchor fell 51% → 44% without losing a word**, exactly as `the-board.md:59` says a ratio
+gate does. It has room — 25% of the 36,000-word target is 9,000 and it sits at 9,607 — but the
+budget only works if the finished total lands in **36,000–38,400**. Above that the front room needs
+another instalment.
+
+The room came in **754 short of its 5,500 budget row** and that debt carries rather than being
+quietly written off: **+14,333 words remain** across the kitchen, her room, the box room, the
+garage, the shop and the landing.
+
+---
+
+## 2026-08-11 — `STATUS.md`: the status doc moves into the skill, and was wrong in four places
+
+**What.** New file `STATUS.md`, moved from `~/.claude/plans/continue-nested-acorn.md` and refreshed
+against a live scoreboard run. The plan file is removed; this is now its only home. Nothing else in
+the skill changed.
+
+**Why move it.** Plan files live outside the repo and are not git-tracked, so the single most useful
+document in the project — the one that catches a reader up on why v2 exists, what the ten gates
+measure, and where the test game stands — had no history and could not travel with the skill. It now
+sits beside the `CHANGELOG.md` it summarises.
+
+**Why it needed refreshing.** Every number in it was written before Phase 1 and the lint landed. Four
+sections had drifted:
+
+| section | said | actually |
+|---|---|---|
+| Part 3 — file inventory | `gates.py` 524, `engine.md` 403, `CHANGELOG` 792, `SKILL.md` 107 | **605 / 468 / 923 / 111** |
+| Part 4 — engine facts | "Eighteen engine facts" | **twenty** (§19 canvas-shadowing, §20 `npc_at_location`) |
+| Part 5 — the game | 62 canvases, 14,398 words, 10.8% of 148 beats, mean 1,800 | **66 · 18,882 · 15.9% of 176 · mean 2,360** |
+| Part 6 — not done | the lint "worth adding" | **shipped** |
+
+**The one that mattered.** Part 5 said the anchor had fallen to **34%** and was the next thing to
+write. Phase 1 had already taken it to **51%**. A reader following that document would have written
+the one room that no longer needed it. The satellites are the work — seven of them, ~17,000 words,
+listed thinnest-first in the new Part 5.
+
+**Guard added.** The document now opens with a `Last verified` stamp and the two commands that
+regenerate its numbers, plus the rule that the scoreboard wins any disagreement. This file went stale
+inside a day; a status doc that cannot be checked against a command will do it again.
+
+**Verified.** Numbers taken from `python3 scripts/gates.py back_home` (9/10, location fill the only
+failure) and `… vesper` (1/10) run immediately before writing; counts from
+`grep -c '^\[\[canvases\]\]'` and `wc -l` on the live files.
+
+---
+
 ## 2026-08-11 — `scripts/gates.py`: the dialogue-attribution lint, specced 2026-08-10, now real
 
 **What.** `lint_dialogue_attribution()` plus a `_dialog_blocks()` walker in

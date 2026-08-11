@@ -78,6 +78,20 @@ window.GAMES = [
     summary: `Emma, a sheltered 23-year-old schoolteacher, moves to Millfield and awakens to power over four men through strategy and reputation.`,
   },
   {
+    // Added 2026-08-11. The author-game-v2 skill's first game, and the first thing this project has
+    // ever built that passes all ten gates (10/10, exit 0) — 36,035 words of location prose across
+    // 8 locations, 97 canvases, 4 characters, 8 visible locked doors.
+    // ⚠️ output/ is a --dev --debug build: dev stat controls in the sidebar, and 53 declared media
+    // slots (49 pool_dir + 4 fixed) with ZERO files on disk, so every image/video renders as a
+    // labelled placeholder. find-media has never run on it. Listed as dev until the media lands;
+    // add `version` and drop the dev flags when a production build ships.
+    slug: "back_home",
+    title: "Back Home",
+    badge: "v2",
+    dev: true,
+    summary: `June, 24, comes back on a coach with two bags after the job and the man both went — into her stepfather's house, where her room is half a storage room, the bathroom door does not lock, and her bedroom catch broke years ago because nobody ever needed it to. One bathroom and four adults; a lodger eighteen inches through the partition wall who is gone in the spring and replaced by somebody else. She was the one who got out. Now the men who were beneath her in that story have what she needs, and the house rearranges itself around what she wants without anybody ever saying the word for it. Built with author-game-v2: no ending, one house, and every release a rung on somebody already in it.`,
+  },
+  {
     slug: "the_long_summer_test",
     title: "The Long Summer — Test Slice",
     dev: true,

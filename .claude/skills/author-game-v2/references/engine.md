@@ -456,6 +456,39 @@ is bound, so nothing can be mis-attributed — there is no character in scope to
 
 ---
 
+## 21. `clamp` is 0–100, it defaults to TRUE, and it will silently cap a CURRENCY
+
+```js
+v2.py:5753   if (clampFlag === undefined || clampFlag === null) { clampFlag = true; }
+v2.py:5754   if (clampFlag) { next = window._traitClamp(next, 0, 100); }
+```
+
+Two facts, and the second one is the dangerous one:
+
+1. **Omitting `clamp` means `clamp = true`.** The default is not "leave it alone".
+2. **The clamp is a hard 0–100 on every trait, including one you are using as money.**
+
+Found in a shipped game, by a live effect diff: a scene declared `money +120` and the state went
+**0 → 100**. Every money grant in that game carried `clamp = true`, the weekly rent was **120**, and
+the shop paid 30 a shift — so the player could work four shifts, hit the ceiling at 100, and **never
+once be able to pay the rent.** The eviction branch was the only reachable outcome, and nothing
+anywhere reported it: the TOML is valid, the build is green, all ten gates pass, and the sidebar
+shows a plausible number.
+
+**Rule: any trait that is a QUANTITY rather than a 0–100 meter must carry `clamp = false` on every
+effect that writes it.** Money, counts, inventory-ish integers. Meters — nerve, exposure, corruption,
+arousal, energy — want the clamp and should keep it.
+
+⚠️ Note the asymmetry with a *deduction*: unclamped subtraction can go negative. The engine's own
+recurring-demand system (`[settings.rent]`) does its own affordability check, but an authored
+`op = "subtract"` on an unclamped trait does not — gate the choice on the trait instead.
+
+**How to catch it:** diff the state across the scene and compare against the declared value. A
+capped effect looks identical to a working one in the TOML, in the validator, in the build log and
+on the scoreboard. Only the live number shows it.
+
+---
+
 ## Unverified — do not cite until read
 
 Facts we believe but have not confirmed against source during this skill's construction.

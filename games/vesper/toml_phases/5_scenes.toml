@@ -4005,7 +4005,7 @@ locationId = "underworld_strip"
 [[canvases]]
 id          = "berth_offhours"
 name        = "The yard's shut"
-description = "Off-hours flavor at The Berth when Kess is away (22:00-10:00) — keeps the room from reading dead now that he's schedule-gated. Gated npc_kess is_absent + salvage_done is_false. Priority 1."
+description = "Off-hours flavor at The Berth when Kess is away (22:00-10:00) — keeps the room from reading dead now that he's schedule-gated. Gated npc_kess is_absent ALONE; the salvage_done is_false clause this line used to name was dropped at rev 113 (see the note above) and only the description stayed stale until rev 130. Priority 1. Names his hours in full as of rev 130 — this card fires exactly when the player has walked to the right place at the wrong time, which is the one moment the hours are worth anything."
 [canvases.trigger]
 location      = "kess_berth"
 is_repeatable = true
@@ -4021,7 +4021,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The yard's shut"
 blocks = [
-  { type = "paragraph", content = "The torch is cold on its hook and the cradle sits empty, the hull up on its blocks going nowhere. Kess keeps hours like any other working man. The black water under the walkway doesn't move. Come back when he's cutting." },
+  { type = "paragraph", content = "The torch is cold on its hook and the cradle sits empty, the hull up on its blocks going nowhere. Kess keeps hours like any other working man — ten in the morning to ten at night, and not a minute either side. The black water under the walkway doesn't move. Come back when he's cutting." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -5272,13 +5272,25 @@ flagEffects = [
 # NO SIDEBAR ROW, deliberately — LO's 2026-07-16 call retiring the "Leash: Uncut" line holds here too (the
 # state lives in the SCENE, in Kess's mouth, not as a standing sidebar line). It also sidesteps the banded-card
 # trap (a value outside every band renders nothing).
-# ⚠️ Adjacent [group] blocks MERGE into one if/elseif chain, so the two bands must be mutually exclusive —
-# gte 1 / lt 1 are, by construction. Register: Kess's shipped clinical/tradesman voice — he is not unkind when
-# she's behind, he is simply not a charity. Dialogue-carried (the ratio target is <= 1.5:1 with an NPC present).
+# ⚠️ Adjacent [group] blocks MERGE into one if/elseif chain, so every band must be mutually exclusive — the
+# four below are, by construction: feed_line_days gte/lt 1 crossed with part_held gte/lt 1. Register: Kess's
+# shipped clinical/tradesman voice — he is not unkind when she's behind, he is simply not a charity.
+# Dialogue-carried (the ratio target is <= 1.5:1 with an NPC present).
+#
+# rev 130 — THE PART-AWARE BANDS, and the reason this canvas was reopened. The read-out used to band on
+# feed_line_days alone, which left the one state that actually strands a player unspoken: carrying a bought
+# part with the line lapsed. The install rung is HIDDEN in that state (see the choice below), so the player
+# loses the button and is told nothing — LO hit exactly this in playtest and could not find the next click.
+# Band D is the missing connection between the part in her pocket and the bill she has not paid, and it names
+# the cot as the fix. Bands A and C are the shipped lines, unchanged.
+# ⚠️ NOT fixable with show_when_locked on the rung: that greys a choice whenever its WHOLE conditions block
+# fails (v2.py:12798), so it would advertise the loop from the moment this canvas exists — which is precisely
+# what the hide-don't-grey note on the rung refuses, and correctly. A gate this specific has to be spoken in
+# prose, not greyed in the menu.
 [[canvases]]
 id          = "hub_kess_berth"
 name        = "Kess"
-description = "beat_0069 (rev 114). The post-close Kess hub @kess_berth — his FIRST interactive surface after the salvage verdict retires salvage_repair_hub. Portrait card (requires_npc + npc = npc_kess, so it only renders inside his 10:00-22:00 window; berth_offhours covers the rest). Repeatable, pri 3, gated berth_home is_true. Carries the upkeep read-out as two exclusive [group] bands on feed_line_days (gte 1 = working, lt 1 = stalled) and one rung, 'Ask how the work's going'. Charges NOTHING — the cot's paid night is the only bill."
+description = "beat_0069 (rev 114), bands re-cut rev 130. The post-close Kess hub @kess_berth — his FIRST interactive surface after the salvage verdict retires salvage_repair_hub. Portrait card (requires_npc + npc = npc_kess, so it only renders inside his 10:00-22:00 window; berth_offhours covers the rest). Repeatable, pri 3, gated berth_home is_true. Carries the upkeep read-out as FOUR exclusive [group] bands crossing feed_line_days (gte 1 = working, lt 1 = stalled) with part_held (gte 1 = she is carrying one), plus the 'Ask how the work's going' rung. The part_held axis was added at rev 130: lapsed-and-carrying is the state that hides the install rung, and before this it was the only stall in the chapter with nothing on screen to explain it. Charges NOTHING — the cot's paid night is the only bill."
 [canvases.trigger]
 location      = "kess_berth"
 requires_npc  = "npc_kess"
@@ -5296,17 +5308,34 @@ name = "Kess"
 blocks = [
   { type = "image", props = { file = "locations/kess_berth.jpg", description = "A flooded ship-breaking dock lit by work-lamps, a stripped hull on blocks, a man at a work-cradle.", search_queries = ["flooded ship breaking dock work lamps night", "gutted hull workshop cutting torch dark"] } },
   { type = "paragraph", content = "Black water, the hull on its blocks, the smell of cut steel. Kess is at the bench with the cot behind him and her two locked things somewhere under the mess he calls an order." },
-  # BAND A — paid up. He's working it. gte 1 / lt 1 are exclusive; adjacent groups merge into one chain.
+  # BAND A — paid up, nothing in her pocket. He's working it. The shipped line.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "feed_line_days", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "part_held",      operator = "lt",  value = 1 },
     ] } }, blocks = [
       { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "You're paid up, so I'm on it. Don't hover." },
   ] },
-  # BAND B — lapsed. Not unkind. A tradesman with an unpaid bench.
+  # BAND B — paid up AND carrying. He clocks the part before she offers it, and says where it goes.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "feed_line_days", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "part_held",      operator = "gte", value = 1 },
+    ] } }, blocks = [
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "You've got something on you that came off a stall. Bring it here when you want it in — it's a bench job, not a doorway job, and you'll be face-down on the cradle for it." },
+  ] },
+  # BAND C — lapsed, nothing in her pocket. Not unkind. A tradesman with an unpaid bench. The shipped line.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "feed_line_days", operator = "lt", value = 1 },
+      { type = "trait", subject = "player", trait_key = "part_held",      operator = "lt", value = 1 },
     ] } }, blocks = [
       { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Your key's where you left it. So's my hand. You've been sleeping rough — that buys you a floor, not me." },
+  ] },
+  # BAND D — THE STALL. Lapsed AND carrying: the rung is hidden and this is the only thing on screen that
+  # explains why. It names the cot explicitly, because "a proper night on the line" IS activity_kess_cot.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "feed_line_days", operator = "lt",  value = 1 },
+      { type = "trait", subject = "player", trait_key = "part_held",      operator = "gte", value = 1 },
+    ] } }, blocks = [
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "You bought the part. Good. I still don't seat hardware on a bench that isn't paid — take a proper night on the line first, then bring it back and I'll have it in you inside the hour." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -5318,10 +5347,14 @@ nodeId     = "hub_kess_berth.work"
 # beat_0075 — THE INSTALL RUNG. Hidden (no show_when_locked) rather than greyed: before she is carrying a
 # part there is nothing to hand over, and a greyed row would advertise the loop a beat before Kess opens it.
 # The feed_line_days clause is not decoration — when she IS carrying a part but has lapsed, this rung
-# vanishes and the hub's SHIPPED stalled band above already says exactly why ("you've been sleeping rough —
-# that buys you a floor, not me"). Choice-level conditions are a shipped Vesper pattern (rung_renner_tease).
-# ⚠️ Deliberately NOT a third [group] band on this node: the two feed_line_days bands are adjacent and
-# adjacent groups merge into ONE if/elseif chain, so a third band would silently kill one of them.
+# vanishes. Choice-level conditions are a shipped Vesper pattern (rung_renner_tease).
+# ⚠️ rev 130 — THIS COMMENT USED TO CLAIM the stalled band above "already says exactly why". It did not. The
+# shipped band said only "you've been sleeping rough — that buys you a floor, not me", which is true in the
+# lapsed state whether or not she is carrying anything, and never once mentions the part. The check that
+# passed here was run against this rung alone; the claim it made was about the SCREEN. Band D above is the
+# actual answer, and it exists because LO lost the loop in playtest at this exact state.
+# ⚠️ Bands are exclusive by CONSTRUCTION, not by count — adjacent groups merge into ONE if/elseif chain, so
+# what matters is that no two can match at once. The four above cross two binary axes and cannot.
 [[canvases.nodes.exit_block.choices]]
 text       = "Give him the part."
 targetType = "node"
@@ -5334,10 +5367,13 @@ conditions = { version = "1.0", logic = "AND", items = [
 # makes the controller a smuggling problem, and before that this rung would be an answer to a question the
 # player has not been asked. controller_seated lt 1 retires it once it is in — Kess says on the way out that
 # it comes back out by him, not by her, so there is nothing to toggle. feed_line_days gte 1 for the same
-# reason the install rung carries it: he does not work a bench he is not paid for, and the hub's shipped
-# stalled band already says exactly that.
-# ⚠️ Deliberately NOT a third [group] band on this node — the two feed_line_days bands above are adjacent and
-# adjacent groups merge into ONE if/elseif chain, so a third would silently kill one of them.
+# reason the install rung carries it: he does not work a bench he is not paid for.
+# ⚠️ rev 130 — RESIDUAL, KNOWN AND LEFT. When this rung vanishes on a lapsed line she is carrying a
+# controller, not a part, so part_held is 0 and band C fires: "you've been sleeping rough — that buys you a
+# floor, not me." That names the payable fix, which is what the parts stall was missing, but it does not name
+# the KEY. Closing that properly means crossing a third axis into the band chain and the 2x2 stops being
+# exclusive by construction. Not done here because the measured stall was the parts loop; if the seat-key
+# step ever strands a playtester the fix is a fifth band, not a greyed rung (see the show_when_locked note).
 [[canvases.nodes.exit_block.choices]]
 text       = "Have him seat the key."
 targetType = "node"
@@ -5793,12 +5829,18 @@ flagEffects = [
 # requires_npc + npc, so it renders only inside his 23:00-08:00 window and mercer_room_offhours covers the
 # rest. Base prose bands on the FLAG, not the meter — §7 is explicit that the meter buys access, never
 # register, so the room's read changes when the arrangement resumes and not as relation ticks up.
-# The two [group] blocks are adjacent and mutually exclusive by construction (is_false / is_true), which is
-# the one shape that survives the merge-into-a-single-if/elseif-chain behaviour.
+# The [group] blocks are adjacent, so they merge into a single if/elseif chain and FIRST MATCH WINS. Band A
+# (is_false) leads; B1 carries the extra clauses that separate it; B2 is the deliberate catch-all on is_true
+# alone and must stay last. Ordering does the exclusion here, which is legal in an if/elseif chain — the
+# invariant to keep is that the catch-all is never moved above a narrower band.
+# rev 130 — B1 exists because "Give him the evening" is HIDDEN at part_installed 0, so a player standing in
+# the loop with an unseated part saw a normal hospitable room and no rung and no reason. Her thought_bubble
+# is that reason. Not fixable with show_when_locked: it greys on the whole conditions block (v2.py:12798),
+# so it would put the rung on screen from the moment the hub exists, before Kess has opened the loop at all.
 [[canvases]]
 id          = "hub_mercer_room"
 name        = "Mercer"
-description = "beat_0073 (rev 118). Mercer's portrait hub @mercer_room — his first standing surface since the penthouse. requires_npc + npc = npc_mercer (presence does the 23:00-08:00 clock), repeatable, pri 3, gated mercer_found is_true. Base bands on mercer_hospitality_open (host with a bottle / the arrangement back on). Two rungs: 'Let him talk' (+2 relation, 30m, block_pool of penthouse stories) and 'Pour for him' (+3 relation, 60m, banded on relation). She does not drink — beat_0072 established it in his own mouth — so the hospitality runs one way and she is the one pouring."
+description = "beat_0073 (rev 118), base bands re-cut rev 130. Mercer's portrait hub @mercer_room — his first standing surface since the penthouse. requires_npc + npc = npc_mercer (presence does the 23:00-08:00 clock), repeatable, pri 3, gated mercer_found is_true. Base bands on mercer_hospitality_open (host with a bottle / the arrangement back on), with the is_true branch split at rev 130 so a player inside the parts loop with nothing seated gets her own read on why tonight buys her nothing — the loop rung is hidden in that state and nothing else on screen explained it. Two rungs: 'Let him talk' (+2 relation, 30m, block_pool of penthouse stories) and 'Pour for him' (+3 relation, 60m, banded on relation). She does not drink — beat_0072 established it in his own mouth — so the hospitality runs one way and she is the one pouring."
 [canvases.trigger]
 location      = "mercer_room"
 requires_npc  = "npc_mercer"
@@ -5823,7 +5865,30 @@ blocks = [
     { type = "paragraph", content = "He is up off the bed before the door is shut, moving the crate a foot to the left as if that made it a table." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Sit. Sit down. It's not what you're used to — neither am I, come to that, and I'd rather you saw it than heard about it." },
   ] },
-  # BAND B — after. He stops getting up. The room has become the penthouse in his head.
+  # BAND B1 — after, INSIDE the loop, with nothing seated. rev 130: the same room, plus the physical fact
+  # that tonight cannot pay. The rung "Give him the evening" is hidden at part_installed 0 and this is the
+  # only thing on screen that says why.
+  # ⚠️ A PARAGRAPH, NOT A thought_bubble, AND NOT ONE OF HIS LINES. Two separate constraints meet here:
+  #   (1) Mercer must not know the part exists — in his mouth it hands him the plot.
+  #   (2) beat_0073 authored ALL of Mercer's surfaces with NO interiority ("the silence — no interior and no
+  #       commentary"), and live_beat_0073.py:236 asserts hub_mercer_room carries zero thought_bubbles.
+  # So the read-out is narration of her body, in the same third-person register as the base paragraphs
+  # above: it states where the part is and that it does not work from there. No interior, no commentary.
+  # A first draft of this band DID use a thought_bubble and tripped that suite — the suite was right.
+  # ⚠️ Ordered BEFORE B2, which is the deliberate catch-all. Adjacent groups merge into one if/elseif chain
+  # and first match wins, so B1's extra clauses do the separating; B2 needs no negation of them.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",  subject = "player", flag_key  = "mercer_hospitality_open", operator = "is_true" },
+      { type = "flag",  subject = "player", flag_key  = "parts_loop_open",         operator = "is_true" },
+      { type = "trait", subject = "player", trait_key = "part_installed",          operator = "lt", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He doesn't get up now. He nods at the crate and goes back to the bottle, and the room arranges itself around him." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "There she is. Shut the door behind you — it's a market out there and half of it listens for a living." },
+    { type = "paragraph", content = "Her seam is empty under the coat — the old dead socket, nothing seated in it. The part is still in her pocket, or still on Kess's bench, and it does not work from either." },
+  ] },
+  # BAND B2 — after, the CATCH-ALL. He stops getting up. The room has become the penthouse in his head.
+  # The two prose blocks are duplicated from B1 by design: they are the same room, and a cross-product on
+  # every axis would be four bands of near-identical text to save four lines.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "mercer_hospitality_open", operator = "is_true" },
     ] } }, blocks = [
@@ -5964,7 +6029,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "Padlocked"
 blocks = [
-  { type = "paragraph", content = "A padlock through a hasp, and the stall in front of it shuttered. The room is only his after the market goes dark. He keeps late hours now — everyone down here does, and he has started calling it a preference." },
+  { type = "paragraph", content = "A padlock through a hasp, and the stall in front of it shuttered. The room is only his after the market goes dark — eleven at night until eight, and he is somewhere else the rest of it. He keeps late hours now. Everyone down here does, and he has started calling it a preference." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -6046,7 +6111,7 @@ effects = [
 [[canvases]]
 id          = "rung_mercer_hands_on"
 name        = "The arrangement"
-description = "beat_0073 (rev 118). The nostalgia ladder's payoff rung @mercer_room. Auto-fire one-shot, pri 10, requires_npc, gated mercer_found is_true + mercer_hospitality_open is_false + npc_mercer.relation gte 12 (four to six visits at +2/+3, matching Colm's first unlock at 12). The story stops, his hand goes where it used to go, she doesn't move. Carries ASK #3 — the silence — with no interior and no commentary. 7 cascade beats. SETS mercer_hospitality_open, which gates cap_owner_print at beat_0074. Stops at the touch: nothing explicit, the Mercer ceiling stays unsigned."
+description = "beat_0073 (rev 118). The nostalgia ladder's payoff rung @mercer_room. Auto-fire one-shot, pri 10, requires_npc, gated mercer_found is_true + mercer_hospitality_open is_false + npc_mercer.relation gte 12 (four to six visits at +2/+3, matching Colm's first unlock at 12). The story stops, his hand goes where it used to go, she doesn't move. Carries ASK #3 — the silence — with no interior and no commentary. 7 cascade beats. SETS mercer_hospitality_open, which gates cap_owner_print at beat_0074. Stops at the touch: nothing explicit, the Mercer ceiling stays unsigned. rev 131: the hand image moved from the node top into the 'Watch his hand' beat — at the top it showed the payoff four clicks before the player earned it. This canvas now opens on prose, like loop_mercer_attempt at the same location."
 [canvases.trigger]
 location      = "mercer_room"
 requires_npc  = "npc_mercer"
@@ -6064,8 +6129,15 @@ conditions = { version = "1.0", logic = "AND", items = [
 [[canvases.nodes]]
 id   = "base"
 name = "The arrangement"
+# ⚠️ NO TOP IMAGE, rev 131. This canvas used to open on scenes/mercer_hands_on.jpg — a picture of his hand
+# already on her thigh — which is cascade beat 5, four clicks down. The image gave away the beat the whole
+# scene is built to arrive at. Moved into that beat, where every sibling canvas already keeps its escalating
+# media: cap_owner_print at beats 4 and 12, cap_first_penthouse_service at beat 1, the opening's punishment
+# node at beats 2 and 4. The rule those all follow: a TOP image establishes (the room, the setting), and
+# anything that shows what happens goes in the beat that makes it happen.
+# Opening on prose alone is the shipped shape at this location — loop_mercer_attempt has no top image either,
+# because hub_mercer_room already carries the room's art and the player has just come through it.
 blocks = [
-  { type = "image", props = { file = "scenes/mercer_hands_on.jpg", description = "A seated older man in a dim concrete room, one hand resting on the thigh of a woman sitting beside him.", search_queries = ["older man hand on womans thigh seated dim room", "man sitting close woman hand on leg noir interior"] } },
   { type = "paragraph", content = "He is most of the way through the one about the car and the driver when he stops." },
   { type = "cascade", props = { beats = [
     # beat 0 — no advance_text; merges into the lead.
@@ -6085,7 +6157,10 @@ blocks = [
     { advance_text = "Let him get to it.", blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "It was a good arrangement. Say what you like about the rest of that place — that part of it worked, and it worked for both of us, whatever anyone down here would tell you." },
     ] },
+    # THE BEAT THE IMAGE BELONGS TO (moved here rev 131 — it used to sit at the top of the node and spoil
+    # this click). Media first inside the beat, then the line, matching cap_owner_print's beats 4 and 12.
     { advance_text = "Watch his hand.", blocks = [
+        { type = "image", props = { file = "scenes/mercer_hands_on.jpg", description = "A seated older man in a dim concrete room, one hand resting on the thigh of a woman sitting beside him.", search_queries = ["older man hand on womans thigh seated dim room", "man sitting close woman hand on leg noir interior"] } },
         { type = "paragraph", content = "His hand comes over and settles on her thigh, above the knee, with the whole weight of it behind it. Not a grab. The way a man rests a hand on something of his." },
     ] },
     { advance_text = "Don't move.", blocks = [
@@ -6323,9 +6398,14 @@ blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "So what's it worth." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "A build. Something that says it live instead of playing it back — and it has to say it from where the question gets asked." },
     ] },
+    # ⚠️ rev 131 — WHERE THE THING GETS ITS NAME. Kess reasoned this part thoroughly from the beginning
+    # (live not playback, at the seam, one per go, the small stalls, he won't guess how many) but never once
+    # NAMED it, and neither did the stall or the quest tip — so the player buys "a part" four times without
+    # a word for what they are carrying. A talkback: his word, blunt and trade-shaped, and it says what the
+    # thing does. Used in exactly three places — here, activity_buy_part's prose, and quest card I's tip.
     { advance_text = "Ask where that is.", blocks = [
         { type = "paragraph", content = "She keeps her hands off the bench." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Inside you. Small enough to sit at the seam, listening for the challenge, answering in his voice while you stand there being you. That's the theory." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Inside you. Small enough to sit at the seam, listening for the challenge, answering in his voice while you stand there being you. A talkback. That's the theory." },
     ] },
     { advance_text = "Ask the price.", blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "A part a go, off the market — the small stalls, not the blades. And a bench, which is me, which you're already paying for." },
@@ -6347,7 +6427,7 @@ blocks = [
     ] },
     # Terminal beat — no advance_text; renders after the last click, above the exit.
     { blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Bring me a part. I'll put it in you. After that it's you and him and whatever's left of my guessing." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Bring me a talkback. I'll put it in you. After that it's you and him and whatever's left of my guessing." },
         { type = "paragraph", content = "He goes back under the lamp. That is the whole of the goodbye down here, and she has stopped minding it." },
     ] },
   ] } },
@@ -10721,10 +10801,15 @@ when = [
 # Quest `when` has no validation site, so the forward reference to owner_drained builds green and reads
 # is_false. No `goals` array — frontier shape. It does not name the part's generation or the attempt count:
 # the numbers are hidden traits and the card speaks in the fiction's terms.
+# ⚠️ rev 130 — THE CLOCK CLAUSE. The tip listed the three steps and the upkeep and never said WHEN, and Kess
+# (10:00-22:00) and Mercer's room (23:00-08:00) have ZERO overlapping hours — measured across all 24, not
+# inferred. So the loop cannot be run in one outing and the card was the only place that could say so. Hours
+# are given in the fiction's terms here and as digits on the two off-hours cards; both are needed, because a
+# player who never walks to the wrong door at the wrong time never sees those.
 [[quest_cards]]
 priority   = 10
 text       = "Kess got the key to answer and that turned out to be the easy half. He has the shape of what your owner's hand said, not the hand — so he's building something that can say it live, from inside you, at the seam Bastien's men opened. It's a guess, and a guess has to be tested on the one man the leash won't let you touch."
-tip        = "Buy a part at the black market — the small stalls, not the blades — then take it to Kess and let him seat it. Then go to Mercer, let the evening go where it goes, and reach for the take at the finish. It will fail before it holds, and every failure burns the part and teaches him one thing, so keep the cot paid and keep earning between goes. If you want the next chapter sooner, Support Us in the sidebar."
+tip        = "Buy a talkback at the black market — the small stalls, not the blades — then take it to Kess and let him seat it. Then go to Mercer, let the evening go where it goes, and reach for the take at the finish. Kess works days and Mercer's room is a night address, so one cycle is two trips and never one. It will fail before it holds, and every failure burns the part and teaches him one thing, so keep the cot paid and keep earning between goes. If you want the next chapter sooner, Support Us in the sidebar."
 when = [
   { flag = "parts_loop_open", op = "is_true"  },
   { flag = "owner_drained",   op = "is_false" },

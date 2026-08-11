@@ -112,6 +112,37 @@ opposite; the source says otherwise, so verify live before splitting a window.
 **Ordering trap:** `[[npcs.schedules]]` binds to the `[[npcs]]` block above it. Inserting a
 new character between an existing one and its schedules silently re-parents them.
 
+### The rotating slot, and the split that makes it actually cheap
+
+A **rotating slot** — one location whose occupant is replaced every few releases — is the
+cleanest way to build the measured release shape (*a new character at an existing place*) into
+the fiction rather than bolting it on. A lodger's room, a locker at a gym, a chair in a bar.
+
+It only pays off if content is filed by **how long it lives**, and this is the part that gets
+missed:
+
+| scope | what it covers | file | survives a rotation? |
+|---|---|---|---|
+| **TENANT** | his ladder, his register, his props, his one paid-off secret | `5_scenes.toml` | no — dies with him, deliberately |
+| **ROOM** | the slot itself, the furniture, the wall, what the arrangement IS | `3_activities.toml` | **yes** |
+
+**Room-scoped content names the occupant by ROLE, never by name.** *The lodger*, not *Marek*.
+That one rule is the difference between a rotation that costs one `[[npcs]]` block plus one
+scene file, and a rotation that quietly costs a rewrite of every solo surface in the room.
+
+⚠️ Caught in a real build: a game's box-room solo surface was room-scoped *by file* and
+tenant-scoped *by content* — a specific paperback, a specific bus ticket, a specific tin with a
+specific amount in it. Every one of those was the current tenant. The ledger's plan said a
+replacement would touch only his `[[npcs]]` entry and his scene block; in fact the first
+rotation would have cost a rewrite in a file the plan claimed it would not open. The fix is
+free if you do it while writing and annoying afterwards, so decide the scope of each surface
+*before* you write it.
+
+The room-scoped layer is also the more interesting half to write, because it is the only place
+the slot is legible **as a slot** — the same mattress, four tenants, marks on the wall at three
+different headboard heights, and the fact that the terms get set in the first fortnight by
+whoever is standing there when the new one arrives.
+
 ---
 
 ## 3. The meters — three layers, measured

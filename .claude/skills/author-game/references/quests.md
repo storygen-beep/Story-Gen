@@ -26,7 +26,7 @@ when the engine is regenerated, so if a line looks wrong, `grep -n` the named sy
 - §7 — The end-of-content card
 - §8 — The quests-vs-sidebar split
 - §9 — Designing the page (the Step-5 deliverable)
-- §10 — Sweep the whole table when the world moves (⚠️ the three triggers)
+- §10 — Sweep the whole table when the world moves (⚠️ the three triggers + every guidance surface, not just this page)
 
 ---
 
@@ -229,6 +229,29 @@ was still open and a "take it to Vane at Vance Securities" that pointed through 
 covers every rung at once and cannot be defeated by where the player's arc stopped. That last part matters:
 the *unfinished* arc is the worse case, because its rungs are live instructions.
 
+⚠️ **The Quests page is not the only guidance surface, and it is not the one that fails worst.** Sweeping
+the card table and stopping there is a half-sweep. Everything below reads the same world and points the
+player somewhere, so a seal invalidates all of them at once:
+
+| surface | what goes stale | why it's easy to miss |
+|---|---|---|
+| **quest cards** (`tip`) | a direction into a sealed region | the one people remember to check |
+| **the Schedules page** | an NPC's "NOW: <place>" and their rows | **schedule rows carry no conditions** — the resolver reads five keys and drops the rest, so a row cannot be gated and keeps resolving forever |
+| **off-hours / dead-room cards** | "come back when he's here" for a door that no longer opens | they only render when the player is already lost |
+| **hub and location prose** | any sentence naming a place as a next step | it reads as flavour, so nobody greps it |
+
+*Measured (vesper):* the Act-1a close sealed the Spire. `beat_0084` swept the card table and declared the
+page clean — and the **Schedules page went on advertising the owner as "NOW: Mercer's Penthouse" for fifteen
+hours of every twenty-four**, with his real address filed as the inactive row, plus two more NPCs standing in
+a sealed building. A page that names a locked door is **worse than a page that says nothing**, because the
+player walks there.
+
+**The Schedules-page fix is on the PAGE, never on the rows** (the rows are correct, and often cannot be
+dropped — an earlier act still needs them). The engine now checks `setup.navDestUnlocked(slug)` per row,
+mutes the unreachable ones with `navDestBlockedReason()`, and suppresses the NOW badge for a locked
+location. What you owe as an author is the **`blocked_message`**: a location with two gates in two acts has
+only one message, so write it to be true in both, or the muted row explains the wrong lock.
+
 ### 3. A mechanic retires → sweep the cards with the canvases
 `lanes.md`'s terminal-flag sweep ("when a flag makes something permanently true, list what it makes
 permanently false") binds here too. If a beat retires an item, a switch, a meter, or a gate, then any card
@@ -241,8 +264,14 @@ Run at Step 6, and again in the beat that moves any of the three:
 ```
 grep -n '^tip'  <scenes>.toml | grep -c 'build ends'     # expect exactly 1
 grep -n '^tip'  <scenes>.toml | grep -i '<sealed place>' # expect 0 live cards
+grep -n '^location' <metadata>.toml                      # every scheduled place, checked for reachability
 ```
 plus, for each arc'd NPC, walk the chain to its last rung and ask **what matches after it** (§6).
+
+**And read the Schedules page live, in a save past the seal.** No grep catches this one: the rows are
+authored correctly and the staleness is produced at render time by `getNpcLocation` resolving a row whose
+location has since locked. Open the page, and for every `NOW:` badge ask whether the player can actually
+walk in right now.
 
 ---
 

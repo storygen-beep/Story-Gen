@@ -18909,6 +18909,17 @@ if (clothingMsg) {
 """ + stats_page + wardrobe_page + clothing_block_page + travel_block_page + shop_page + rent_page + """
 
 :: SchedulePage
+<!-- LOCK-AWARENESS (2026-08-11). The Schedules page is a GUIDANCE surface: it is the only screen that
+     publishes NPC hours, so the player uses it to decide where to walk. Schedule rows carry no conditions
+     by design — the resolver reads exactly five keys and drops the rest — so a row keeps pointing at a
+     location long after the story seals it, and getNpcLocation happily resolves "NOW" to a building the
+     player can no longer enter. Measured on vesper: after the Act-1a close it advertised Mercer as NOW at
+     his penthouse for 15 hours of every 24, and Calloway and Vane at Vance Securities, all three sealed by
+     the same flag. That is worse than saying nothing, because the player walks there.
+     The fix is on the PAGE, never on the rows: navDestUnlocked() is a pure entry_conditions check on the
+     location (no current-location dependency, no side effects), so it answers "can she get in right now"
+     for any slug. Locked rows are muted and show navDestBlockedReason() instead of the activity, and the
+     NOW badge and its activity line are suppressed entirely rather than naming a door that will not open. -->
 <<nobr>>
 <<set _currentDay to $game_state.time_state.current_day>>
 <<set _todayIndex to ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].indexOf(_currentDay)>>
@@ -18926,12 +18937,14 @@ if (clothingMsg) {
 <div class="npc-section">
 <h3 class="npc-name">
 <<print _npcName>>
-<<if _currentLoc>>
+<<set _nowSlug to _currentLoc ? (setup._getLocUuidToSlug()[_currentLoc.location] || _currentLoc.location) : "">>
+<<set _nowOpen to _currentLoc ? setup.navDestUnlocked(_nowSlug) : false>>
+<<if _currentLoc and _nowOpen>>
 <<set _locName to (setup.locations[_currentLoc.location] && setup.locations[_currentLoc.location].name) || setup._locNameFromUuid(_currentLoc.location) || _currentLoc.location>>
 <span class="now-badge">NOW: <<print _locName>></span>
 <</if>>
 </h3>
-<<if _currentLoc && _currentLoc.activity>>
+<<if _currentLoc and _nowOpen and _currentLoc.activity>>
 <div class="current-activity">"<<print _currentLoc.activity>>"</div>
 <</if>>
 <<if _allSchedules.length === 0>>
@@ -18941,13 +18954,19 @@ if (clothingMsg) {
 <thead><tr><th>Time</th><th>Location</th><th>Activity</th><th>Days</th></tr></thead>
 <tbody>
 <<for _sch range _allSchedules>>
-<<set _isCurrent to setup.isCurrentTimeSlot(_sch.start_time, _sch.end_time) && setup._weekdayMatches(_sch.weekdays, _todayIndex)>>
-<<set _rowClass to _isCurrent ? "current-slot" : "">>
+<<set _schSlug to _sch.location_slug || _sch.location>>
+<<set _schOpen to setup.navDestUnlocked(_schSlug)>>
+<<set _isCurrent to _schOpen && setup.isCurrentTimeSlot(_sch.start_time, _sch.end_time) && setup._weekdayMatches(_sch.weekdays, _todayIndex)>>
+<<set _rowClass to _isCurrent ? "current-slot" : (_schOpen ? "" : "locked-slot")>>
 <<set _schLocName to (setup.locations[_sch.location] && setup.locations[_sch.location].name) || _sch.location>>
-<tr class="<<print _rowClass>>">
+<!-- @class, NOT class="<<print>>". SugarCube does not evaluate macros inside a raw HTML attribute — it
+     emits them verbatim, so the row shipped with the literal string as its class and `.current-slot`
+     never matched anything. Found 2026-08-11 while adding `.locked-slot`; the attribute directive is the
+     same one the choice renderer already uses for `unlocked-choice`. -->
+<tr @class="_rowClass">
 <td><<if _isCurrent>>▶ <</if>><<print _sch.start_time>>-<<print _sch.end_time || "?">></td>
 <td><<print _schLocName>></td>
-<td><<print _sch.activity>></td>
+<td><<if _schOpen>><<print _sch.activity>><<else>><span class="locked-slot-reason"><<print setup.navDestBlockedReason(_schSlug)>></span><</if>></td>
 <td><<print setup.renderWeekdayBadges(_sch.weekdays, _todayIndex)>></td>
 </tr>
 <</for>>
@@ -18966,7 +18985,8 @@ if (clothingMsg) {
 <tbody>
 <<for _act range _soloActivities>>
 <<set _rowClass to _act.isCurrent ? "current-slot" : "">>
-<tr class="<<print _rowClass>>">
+<!-- @class for the same reason as the NPC table above — the literal-attribute bug applied here too. -->
+<tr @class="_rowClass">
 <td><<if _act.isCurrent>>▶ <</if>><<print _act.startTime>>-<<print _act.endTime || "?">></td>
 <td><<print _act.locationName>></td>
 <td><<print _act.name>></td>
@@ -19035,6 +19055,18 @@ if (clothingMsg) {
 
 .schedule-table tr.current-slot td:first-child {
     color: var(--theme-warning-text);
+}
+
+/* A schedule row whose location the player cannot currently enter. Muted rather than hidden: a row that
+   vanishes reads as "he has no schedule there", where a muted one reads as "that door is shut for now",
+   which is the truth and is what a returning player needs. Never carries the ▶ current marker. */
+.schedule-table tr.locked-slot {
+    opacity: 0.55;
+}
+
+.schedule-table tr.locked-slot .locked-slot-reason {
+    font-style: italic;
+    opacity: 0.85;
 }
 
 .solo-activities-section {

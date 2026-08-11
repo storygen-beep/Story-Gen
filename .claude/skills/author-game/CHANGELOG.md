@@ -14,6 +14,43 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 -->
 
 ## 2026-08-11
+- **A hidden rung still owes the player a reason, and it is owed in PROSE (`references/lanes.md`, the
+  "Grey vs hide" bullet).** The rule taught hide-vs-grey as a property of the *rung type* (escalation rungs
+  grey, everything else hides). That is right when the precondition is a story the player has not reached and
+  a trap when it is an **upkeep or inventory step they can act on right now** — a lapsed rent, a decayed feed
+  line, a part bought but not installed. There the rung is real, earned, and vanishes silently, which reads as
+  a broken game. Added the second half of the rule plus the state-not-rung check ("enumerate the states where
+  the rung is hidden; for each, what on this screen tells them what to do?"), and the reason
+  `show_when_locked` cannot be the fix: it greys on the choice's **whole** conditions block (`v2.py:12798`),
+  so it is all-or-nothing and would advertise the content from the moment the canvas exists. Also recorded
+  that banding a base node on a **recoverable state** is not the banned "tiering the opener" — a read-out
+  tracks something the player can change this minute, not arc progress. **Root cause of `vesper`'s parts-loop
+  stall**, where LO lost his own loop in playtest: both gates were correct, both were commented as checked,
+  and no state on screen named the part in her pocket or the bill she had not paid. Verified live —
+  `repro_parts_stall.py`, 33/33, with the four Kess bands and the Mercer band asserted at every gate combination.
+- **`§10` now sweeps EVERY guidance surface, not just the card table (`references/quests.md`).** `beat_0084`
+  added "the map seals or opens" as a sweep trigger, swept the Quests page, and declared it clean — while the
+  **Schedules page** went on advertising `vesper`'s owner as "NOW: Mercer's Penthouse" for fifteen hours of
+  every twenty-four, his real address filed as the inactive row, plus two more NPCs standing in a building
+  sealed an act earlier. Added the surface table (quest cards / Schedules page / off-hours cards / hub prose)
+  with why each goes stale — schedule rows **cannot** be gated, the resolver reads five keys and drops the
+  rest — the note that a page naming a locked door is worse than one saying nothing, the `blocked_message`
+  obligation for a location with two gates in two acts, and a live-read step to the audit, since no grep
+  catches staleness produced at render time. Verified live: no `NOW:` badge on any locked location for
+  Mercer, Calloway or Vane in a 1b save, Kess's row unaffected.
+- **Both QA build flags poison absence-assertions in a live suite (`references/beat-authoring.md`, the
+  build-flags note).** Each injects text that is not the game, so a check reading a wide scope reads the
+  scaffolding and calls it content — and it is always the *absence* checks that die, since a presence check
+  simply finds what it wanted. `--debug` bakes the `MISSING` placeholder's **authoring metadata**
+  (`description`, `search_queries`) into the passage, so a vocabulary hold trips on the word inside an
+  `avoid: … <that act>` clause. `--dev` puts the **DEV JUMPS list in the sidebar**, and jump labels name NPCs
+  and chapters, so "this NPC must not appear here" fails on the label. Both found while re-running `vesper`'s
+  regression set against the rev-130 fix, and both were false alarms that cost a full diagnosis each:
+  measured on identical TOML, `live_beat_0074` fails under `--debug` and passes **46/46** without it, and
+  `live_beat_0081`'s six nav-badge checks fail under `--dev` and pass **68/68** clean. Recorded with both
+  fixes — run suites against a **clean** build, or scope absence checks to `#passage` rather than `body` —
+  and with the reason it matters: a suite that only runs on a QA build is one whose failures you learn to
+  ignore, which is worse than not having it.
 - **`§9` gains a fifth check: no two CO-LIVE cards may repeat a clause (`references/quests.md`).** The
   Story-Goals card and every NPC section render on one screen, so a phrase carried over from the spine prints
   twice in the same view — and authoring an NPC tier *next to* the spine cards it belongs with produces that

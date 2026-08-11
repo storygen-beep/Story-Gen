@@ -1,6 +1,6 @@
 {
   "slug": "back_home",
-  "phase": "board",
+  "phase": "release",
   "narration_person": "second",
   "want": {
     "who_she_is": "June, 24. Left for a city job and a man, lost both, came back on a coach with two bags. Her room is half a storage room; the house has one bathroom; her bedroom door has no lock.",
@@ -62,49 +62,49 @@
         "id": "the_kitchen",
         "job": "The crossing point. Everyone passes through, nobody stays — so it is where she is caught in passing.",
         "anchor": false,
-        "fill": 1775,
+        "fill": 4936,
         "has_cycling_pool": true
       },
       {
         "id": "the_garage",
         "job": "The private male space. Nothing in it is hers, and both of them know when she comes out.",
         "anchor": false,
-        "fill": 801,
+        "fill": 3514,
         "has_cycling_pool": true
       },
       {
         "id": "the_landing",
         "job": "The vantage. Boards give her away; from here she can hear the water and see the light under the bathroom door. Corridor — legitimately thin.",
         "anchor": false,
-        "fill": 1367,
+        "fill": 1963,
         "has_cycling_pool": true
       },
       {
         "id": "her_room",
         "job": "Her base, and half storage. The door catch is broken, so it is the room privacy is supposed to happen in and does not.",
         "anchor": false,
-        "fill": 1496,
+        "fill": 3927,
         "has_cycling_pool": true
       },
       {
         "id": "the_bathroom",
         "job": "The occupancy engine. One bathroom, four adults — contention, waiting, walking in, being walked in on.",
         "anchor": false,
-        "fill": 1954,
+        "fill": 4746,
         "has_cycling_pool": true
       },
       {
         "id": "the_box_room",
         "job": "The renewable slot. A stranger living on the other side of her wall, replaced every few releases.",
         "anchor": false,
-        "fill": 1228,
+        "fill": 4381,
         "has_cycling_pool": true
       },
       {
         "id": "the_shop",
         "job": "Money that is hers, and the world that does not know. The release valve.",
         "anchor": false,
-        "fill": 654,
+        "fill": 2961,
         "has_cycling_pool": false
       }
     ],
@@ -137,7 +137,20 @@
     "need_engine": "[settings.rent] — 120/week, due Monday, collector npc_ray, grace 1, eviction_mode='flag_set' -> keep_unpaid. Verified live: paying deducts 120, first miss consumes grace, second miss sets keep_unpaid AND THE GAME CONTINUES.",
     "wardrobe": "9 [[clothing]] items across 3 sources (what she came back with / what she sleeps in / her mother's boxes). worn_corruption is a MAX aggregate — verified live 2->7 on equipping mothers_slip over sleep_vest. Granted by canvas_the_boxes via exit_block.config.wardrobeEffects."
   },
-  "releases": [],
+  "releases": [
+    {
+      "version": "0.1",
+      "subject": "The Board, built: eight rooms filled, four characters laddered.",
+      "added": {
+        "units": 97,
+        "words": 36035,
+        "locations": 8,
+        "characters": 4
+      },
+      "opened": "Eight visible locked rungs — one per character plus three room-owned doors (the kitchen at exposure 75, her room at nerve 75, the garage at nerve 75).",
+      "gates": "10/10 · mean 4,504 · median 4,381 · anchor 27% · explicit floor 27.8% of 270 beats · explicit-in-repeatable 100% of 75 · traversal heat 7/8 · standing surface 4/4"
+    }
+  ],
   "promises": [
     {
       "text": "Marek leaves in spring — the box room must get a new lodger, not sit empty.",
@@ -172,12 +185,12 @@
     {
       "text": "Marek's packed bag in the corner of the box room, unopened since October — planted, unexplained, unpaid.",
       "made_in": "0.1",
-      "paid_in": null
+      "paid_in": "0.1"
     },
     {
       "text": "Hannah Beckett offered a drink. Neither of them will do anything about it — unless a release makes them.",
       "made_in": "0.1",
-      "paid_in": null
+      "paid_in": "0.1"
     },
     {
       "text": "Dean's price list names a version where he does not charge her at all — 'you're not ready to hear what that one costs'. Named, unpriced, unpaid.",
@@ -187,10 +200,35 @@
     {
       "text": "Ray stopped in the doorway and said nothing. The scene states he has known for a fortnight; his knowing has to become content, not stay a stage direction.",
       "made_in": "0.1",
-      "paid_in": null
+      "paid_in": "0.1"
     },
     {
       "text": "Cal's savings account: eight hundred and forty pounds, quoted to the pound because he has checked it recently. Planted, unspent.",
+      "made_in": "0.1",
+      "paid_in": null
+    },
+    {
+      "text": "The bathroom's nerve-75 door: 'Stop waiting for the room to be empty.' Shown as the action, not the reason.",
+      "made_in": "0.1",
+      "paid_in": null
+    },
+    {
+      "text": "The kitchen's exposure-75 door: 'Stop getting dressed to come down.' Hung on the room's own NPC-less surface, not on a man.",
+      "made_in": "0.1",
+      "paid_in": null
+    },
+    {
+      "text": "Marek's rent scene names a hundred and twenty a week from the lodger, and tells her not to let Ray find out where it came from. Ray finding out is unwritten.",
+      "made_in": "0.1",
+      "paid_in": null
+    },
+    {
+      "text": "Her room's nerve-75 door: 'Take the door off the hinges.' The two-pound part finally gets bought and then not fitted.",
+      "made_in": "0.1",
+      "paid_in": null
+    },
+    {
+      "text": "The garage's nerve-75 door: 'Ask him where the bench went.' The bench-shaped rectangle on the garage floor is planted in three canvases and the answer is not written.",
       "made_in": "0.1",
       "paid_in": null
     }

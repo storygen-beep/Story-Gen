@@ -132,6 +132,32 @@ IS the menu.
 - **Grey vs hide.** Only *escalation rungs* get `show_when_locked` (they telegraph the ladder).
   Daily-capped rungs, intra-loop beats, and conditional narrative branches **hide** (gated, no
   `show_when_locked`) — you don't telegraph "talk again tomorrow" or a pose inside the sex loop.
+- **A hidden rung still owes the player a reason — and it is owed in PROSE, not in the menu.**
+  Hiding is right when the precondition is a **story the player has not reached**: there is nothing to
+  explain, because the thing does not exist for them yet. Hiding is a **trap** when the precondition is
+  an **upkeep or an inventory step the player can act on right now** — a lapsed rent, a decayed feed
+  line, a part bought but not yet installed. There the rung is real, the player has earned it, and it
+  vanishes with no message. They read that as a broken game, and they are not wrong to.
+  **The rule: hide the rung, then make sure some band of the base prose speaks that exact state.**
+  - ⚠️ **`show_when_locked` cannot do this job.** It greys on the choice's **whole** conditions block
+    (`v2.py:12798`; the cascade-beat twin at `:13988`), so it is all-or-nothing — you cannot grey for
+    the recoverable half and hide for the story half. Turn it on and the rung is on screen from the
+    moment the canvas exists, advertising content the player cannot reach. This is why the answer is a
+    prose band.
+  - **Check it by state, not by rung.** The failure is invisible from the choice you are authoring:
+    every clause is individually correct. Enumerate the states in which the rung is hidden and ask of
+    each, *"if a player sat here, what on this screen tells them what to do?"* If the honest answer is
+    "nothing", that state needs a band.
+  - *Measured (vesper, The Leash):* the parts loop hid its install rung on a lapsed feed line and its
+    spend rung on an uninstalled part. Both gates were correct and both were commented as checked. The
+    author himself lost the loop in playtest and could not find the next click.
+- **Banding the base node on a RECOVERABLE STATE is not "tiering the opener."** The ban below is on
+  rewriting the opener *per stat band as the arc escalates*. A band that reports a **payable or
+  fixable condition** — paid up vs lapsed, carrying the part vs not — is a read-out, not a tier: it
+  does not track arc progress, it tracks something the player can change this minute, and it is the
+  standard place to put the reason a hidden rung is missing. Keep such bands **mutually exclusive**
+  (adjacent `[group]` blocks merge into ONE `if/elseif` chain, `v2.py:14162`), or ordered with the
+  catch-all last.
 - **Hub cap ~5–6 items.** More rungs → make them locked-visible stages, not parallel tasks.
 - **Exposure-tier ceiling:** the location's *privacy* caps which rungs may appear — Public
   (talk/look only) / Semi-private (tease/grope) / Private (full ladder). Relationship stats unlock

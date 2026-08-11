@@ -719,7 +719,7 @@ Vesper is **shipped** (v0.1.7 public, free + paid), so this chapter is **ADD-ONL
 | 3 | **Mercer resurfaces** | `beat_0072`–`0074` | His entrance, his room, the drink ladder, the print. |
 | 4 | **The loop** | `beat_0075`–`0079` | The heart. Systems beat first, then the three failures, then the fire. ✅ **CLOSED at rev 124.** The fire landed and took blueprint scene 16 (the warm tap) with it — that scene sat between this increment and the next and would otherwise never have got a turn. |
 | 5 | **Bastien** | `beat_0080`–`0082` | Needs the third failure's finding to have a reason to exist. **STARTED at rev 125** — scene 17 (the reveal) landed and required no ceiling signature; ⚠️ **`beat_0081` onward is BLOCKED until the Bastien row in §14 is signed.** |
-| 6 | **Extraction + ship** | `beat_0083`–`0086` | The chip out, the Quests page, media, clean build + deploy. **`beat_0083` CLOSED at rev 128** — scene 20 built, and with it the chapter's content. **`beat_0084` CLOSED at rev 129** — the Quests page, read end to end. Left: `beat_0085` (media, 22 slots) and `beat_0086` (clean ship). |
+| 6 | **Extraction + ship** | `beat_0083`–`0086` | The chip out, the Quests page, media, clean build + deploy. **`beat_0083` CLOSED at rev 128** — scene 20 built, and with it the chapter's content. **`beat_0084` CLOSED at rev 129** — the Quests page, read end to end. **rev 130 — the playtest fix**, out of sequence and correctly so: LO's own run stalled in the parts loop, which makes it a blocker for everything below it. Left: `beat_0085` (media, 22 slots) and `beat_0086` (clean ship). |
 
 **⚠️ What the Quests pass found (`beat_0084`, rev 129) — recorded here because two of the three are
 *chapter*-level facts, not card-level ones.**
@@ -742,6 +742,37 @@ Vesper is **shipped** (v0.1.7 public, free + paid), so this chapter is **ADD-ONL
 **Kess deliberately gets no section.** He is the bench, not an arc, and the only thing a Kess card could carry
 is the cot and the feed line — which is upkeep, and upkeep lives on the HUD (`quests.md` §8). The Story-Goal
 tips already say "keep the cot paid" at every rung that needs it.
+
+**⚠️ What LO's playtest found (rev 130) — the loop was correct and unreadable, and the rev-129 sweep was a
+half-sweep.** He bought the part, and the game stopped. Reproduced live: no logic bug, no soft-lock, every
+gate doing exactly what its TOML says. Three chapter-level facts, recorded here because none of them is
+visible from the canvas that carries them:
+
+4. **A hidden rung owes the player a reason whenever the gate is one they can PAY.** Hiding is right when
+   the precondition is a story they have not reached — there is nothing to explain. It is a trap when the
+   precondition is upkeep or an inventory step: the lapsed feed line hid the install rung, an unseated part
+   hid the spend rung, and in both states the player has the money and the means and is told nothing. The
+   answer is a prose band, not a greyed row — `show_when_locked` greys on a choice's *whole* conditions
+   block, so turning it on here would have advertised the loop before Kess opened it. The original
+   hide-don't-grey call was right; the missing half was the prose. Kess's hub now bands 2 → 4 (feed line ×
+   carrying), and Mercer's splits so "nothing seated" is stated in the room.
+5. **The loop cannot be run in one outing, and only the tip could say so.** Kess keeps 10:00–22:00 and
+   Mercer's Lockup is 23:00–08:00 — measured across all 24 hours, the overlap is **empty**. That is a fine
+   design (it paces the cycle and it is why the cot matters), but it was nowhere in the fiction. Now it is in
+   card I's tip and in both off-hours cards, as hours.
+6. **The Quests page is not the only guidance surface, and `beat_0084` swept only that one.** The
+   **Schedules page** kept resolving Mercer to the penthouse — sealed by this chapter's own opening flag —
+   for fifteen hours of every twenty-four, listing his real address as the inactive row, with Calloway and
+   Vane likewise parked in Vance Securities. Schedule rows carry no conditions and cannot, so the page was
+   fixed instead: unreachable rows are muted with their in-world reason and the NOW badge is suppressed for a
+   locked location. **This one is an engine change** and it applies to every game on this stack. Folded into
+   `quests.md` §10 as a surface table, and into `lanes.md` as the hide-vs-speak rule.
+
+⚠️ **Left open, surfaced not fixed:** `vance_securities` has two gates in two acts (`salvage_relaunched
+is_true` **and** `archive_1a_done is_false`) and only one `blocked_message`, written for the first. A 1b
+player now reads the muted row's reason as *"Mercer hasn't sent her up there yet"*, which is the wrong lock.
+Strictly better than the pre-rev-130 behaviour — the page no longer says *go here now* — but it wants either a
+message true in both phases or a per-clause reason, which is a design call and a separate beat.
 
 Total ≈ **30–36 canvases**. Against `lanes.md` budgets: Kess ~9 (Service 6–10) · Mercer ~12 (static owner
 6–12, **at the ceiling**, and only because the four attempts collapse into one banded canvas) · Bastien ~9

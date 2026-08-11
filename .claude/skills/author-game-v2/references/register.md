@@ -79,6 +79,28 @@ having any non-sexual texture, which is its own failure.
 
 ---
 
+## Sweeping backwards: drive it off the MEASUREMENT, never off a category
+
+The first backward application of this rule moved a game **10.8% → 15.9%** by rewriting "the three
+repeatable sex loops". That worked, and it left the job half done: four canvases in the
+protagonist's own bedroom — the solo surface, the wall, the door, the wardrobe — were written the
+day before the rule existed, were never in the named category, and sat under the floor through two
+further increments while the headline number went up.
+
+Measured a fortnight later, every beat in that room scored **0, 1 or 2**. The only sex surface in
+the game she initiates alone scored **1 · 1 · 0**.
+
+> **A category name is not a sweep. Score every beat, sort ascending, and fix everything under 3.**
+
+The instrument already prints per-beat scores; there is no reason to select by intuition.
+
+**One thing the per-beat numbers will show you that looks wrong and is not:** the interiority beat
+*after* an explicit one scores 0, correctly and by design. Do not "fix" it. What you are hunting is
+the beat that scores **1 or 2** — that is a beat trying to be explicit and pivoting off the body
+partway, which is exactly the defect. A 0 next to a 4 is the rule working.
+
+---
+
 ## The habit this is fighting
 
 The pivot is not carelessness. It is a *literary* instinct — the trained move of ending a

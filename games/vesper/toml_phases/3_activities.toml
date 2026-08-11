@@ -372,7 +372,7 @@ effects = [
 [[canvases]]
 id          = "activity_kess_cot"
 name        = "The cot"
-description = "Wren-solo @kess_berth (rev 96). The Reach rest-bed — the cradle-substitute after the Spire seals. Gated berth_home is_true. TWO tiers: 'Crash rough' (FREE, +40 Charge, 120 min, no day-advance — the soft-lock floor) and 'A night on the feed line' (10 coin, +100 Charge, 540 min day-advance, reload the drain, AND feed_line_days -> 3). Repeatable, pri 3. Fixes the post-close dead-end (no Charge restore in the Reach); rougher than the cradle by design. rev 114 (beat_0069): the paid tier IS the upkeep — the same coin buys three days of Kess's time on the key, so crash-rough-forever means he never touches it. Coin gates PROGRESS, never action."
+description = "Wren-solo @kess_berth (rev 96). The Reach rest-bed — the cradle-substitute after the Spire seals. Gated berth_home is_true. TWO tiers: 'Crash rough' (FREE, +40 Charge, 120 min, no day-advance — the soft-lock floor) and 'A night on the feed line' (10 coin, +100 Charge, 540 min day-advance, reload the drain AND the emitter, AND feed_line_days -> 3). rev 131 added arousal_charge -> 3 to the paid tier: the emitter's only reload was activity_recharge_emitter @cradle, which is route-cut at the 1a close, so the emitter had no reload at all for the whole of 1b. Kept on the PAID tier so the berth still has exactly one bill. Repeatable, pri 3. Fixes the post-close dead-end (no Charge restore in the Reach); rougher than the cradle by design. rev 114 (beat_0069): the paid tier IS the upkeep — the same coin buys three days of Kess's time on the key, so crash-rough-forever means he never touches it. Coin gates PROGRESS, never action."
 [canvases.trigger]
 location      = "kess_berth"
 is_repeatable = true
@@ -395,13 +395,21 @@ targetType = "node"
 nodeId     = "activity_kess_cot.rough"
 effects    = [{ targetType = "player", trait = "energy", op = "add", value = 40, clamp = true }]
 [[canvases.nodes.exit_block.choices]]
-text       = "A night on the feed line. (10 coin — full charge, drain reloaded.)"
+text       = "A night on the feed line. (10 coin — full charge, weapons reloaded.)"
 targetType = "node"
 nodeId     = "activity_kess_cot.night"
 costs      = [{ trait = "coin", value = 10 }]
 effects    = [
   { targetType = "player", trait = "energy",       op = "add", value = 100, clamp = true },
   { targetType = "player", trait = "drain_charge",  op = "set", value = 1 },
+  # ⚠️ rev 131 — THE EMITTER RELOADS HERE TOO. It reloaded ONLY at activity_recharge_emitter @cradle, which
+  # is Spire-side and route-cut the moment archive_1a_done fires, so from the 1a close onward the emitter had
+  # no reload anywhere in the game. The berth is the cradle-substitute (beat_0068) and this line completes
+  # that substitution — the drain was carried over at rev 114 and the emitter was simply missed.
+  # ON THE PAID TIER, NOT AS A SECOND BILL: the berth's rule is one bill and it is the bed (see below), so
+  # the emitter rides the night that is already bought rather than arriving as its own charge. `set` to 3
+  # matches the cradle's own reload exactly — a full cell is three, not a top-up.
+  { targetType = "player", trait = "arousal_charge", op = "set", value = 3 },
   # beat_0069 — THE PAID NIGHT IS THE UPKEEP. The same 10 coin that buys the bed buys THREE DAYS of Kess's
   # time on the key (feed_line_days, decayed 1/day by [player.trait_decay]). There is no second bill: his
   # terms in kess_1b_open are "you pay per night, in coin... coin dries up, so does the arrangement", and
@@ -430,7 +438,10 @@ time_progression_minutes = 120
 id   = "night"
 name = "A night on the feed line"
 blocks = [
-  { type = "paragraph", content = "She pays Kess his coin and hooks into the feed line proper. It's not the cradle's clean pull — it's a breaking-dock rig meant for hulls — but it takes her down the whole way and holds her there till morning. Charge full, the drain rebuilt its one shot off the same current, the night walked back into her. She unhooks into a new day." },
+  # rev 131 — the emitter is named here for the same reason it now reloads here: the cradle's reload is
+  # Spire-side and gone, and a charge that refills without the prose ever saying so is a system the player
+  # never learns they have. One clause, on the current that was already doing the work.
+  { type = "paragraph", content = "She pays Kess his coin and hooks into the feed line proper. It's not the cradle's clean pull — it's a breaking-dock rig meant for hulls — but it takes her down the whole way and holds her there till morning. Charge full, the drain rebuilt its one shot off the same current, and she bleeds the tail of it into the emitter's cell until that reads three. The night walked back into her. She unhooks into a new day." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -1071,6 +1082,66 @@ text       = "Leave it."
 targetType = "location"
 locationId = "wren_room"
 
+# ═══ Switch weapon, at the berth — rev 131. THE 1b HALF OF THE LOADOUT SWAP ══════════════════════
+# WHY THIS EXISTS: activity_swap_weapon above lives at wren_room, which is Spire-side. The 1a close cuts the
+# ride up (3_activities.toml:108/:184), so from that moment there is NO way to change weapons anywhere in
+# the game — and she comes out of the salvage with equipped_weapon = 1. All four emitter fire gates require
+# equipped_weapon eq 2, so the emitter was not merely unrechargeable in 1b, it was UNREACHABLE for the whole
+# chapter. Its one live use down here is underworld_gate_check's "Put the weapon on him.", which sits on the
+# route she walks every night — so the system went dark exactly where it should have come into its own.
+# ⚠️ NOT a soft-lock, which is why nothing caught it: the gate still takes coin or a fight, so play continues
+# and a whole weapon just quietly stops being an option.
+# SHAPE: a copy of the wren_room swap with the location and the return changed, deliberately — same two
+# exclusive equipped_weapon bands, same two routing choices, same free swap, so the player meets one
+# mechanic in two places rather than two mechanics. Gated berth_home (her bench is here now) instead of
+# opening_done; arousal_weapon_ready unchanged, so it cannot appear before she owns a second weapon.
+# ⚠️ Bands are mutually exclusive by construction (eq 1 / eq 2) — adjacent [group] blocks merge into ONE
+# if/elseif chain, so that is the shape that survives. Reuses locations/kess_berth.jpg: establishing shots
+# are the sanctioned exception to ONE ASSET / ONE BLOCK (5_scenes.toml:6343, six shipped uses of that file).
+[[canvases]]
+id          = "activity_swap_weapon_berth"
+name        = "Switch weapon"
+description = "rev 131. Wren-solo @kess_berth — the 1b twin of activity_swap_weapon, which is stranded at wren_room behind the Spire seal. Swap equipped_weapon (1 drain <-> 2 emitter), free, repeatable, pri 4. Gated berth_home is_true + arousal_weapon_ready is_true. Without this the emitter is unreachable for the whole of Act 1b, because she leaves the salvage on equipped_weapon = 1 and every emitter fire gate needs 2."
+[canvases.trigger]
+location      = "kess_berth"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "berth_home",           operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Switch weapon"
+blocks = [
+  { type = "image", props = { file = "locations/kess_berth.jpg", description = "A flooded ship-breaking dock lit by work-lamps, a stripped hull on blocks, a work-cradle and a bench of tools.", search_queries = ["flooded ship breaking dock work lamps night", "gutted hull workshop cutting torch dark"] } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 } ] } }, blocks = [
+    { type = "paragraph", content = "The emitter lies on Kess's bench between two things he is not working on. One core, one weapon — it feeds the drain inside her or the thing in her hand, never both at once. Right now it's the drain." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 } ] } }, blocks = [
+    { type = "paragraph", content = "The emitter's live in her coat, the drain inside her gone quiet behind it. One core, one weapon. Right now it's the emitter, and the gate is the only place down here that cares." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Run the emitter instead."
+targetType = "location"
+locationId = "kess_berth"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 } ] }
+effects    = [{ targetType = "player", trait = "equipped_weapon", op = "set", value = 2 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Go back to the drain."
+targetType = "location"
+locationId = "kess_berth"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 } ] }
+effects    = [{ targetType = "player", trait = "equipped_weapon", op = "set", value = 1 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it."
+targetType = "location"
+locationId = "kess_berth"
+
 # ═══ beat_0018 — THE UNDERWORLD: the dark city, a coin economy, her second life ═══════════════
 # Always available (gate gated opening_done). The guard is cleared EVERY visit (pay coin / fight / weapon
 # — NO stealth). The strip is reached ONLY via this gate canvas (underworld_strip is a root location, not
@@ -1572,7 +1643,10 @@ id   = "base"
 name = "The parts stall"
 blocks = [
   { type = "image", props = { file = "locations/underworld_market.jpg", description = "Dim black-market stalls under a low ceiling, weapons and gear laid on cloth, cages further back.", search_queries = ["black market weapons stall dim", "underground arms bazaar cages back"] } },
-  { type = "paragraph", content = "Past the blades and the field-kit there are three tables nobody stops at, stacked with the insides of things: salvage boards, drawer after drawer of small dead components sorted by nothing. Kess said the small stalls. This is what he meant." },
+  # rev 131 — the stall echoes Kess's word. He named it a talkback at kess_print_read; this is the only
+  # other place the player handles the thing, and buying an object the game has never named is how you get
+  # a player who has done four cycles and still could not say what they are carrying.
+  { type = "paragraph", content = "Past the blades and the field-kit there are three tables nobody stops at, stacked with the insides of things: salvage boards, drawer after drawer of small dead components sorted by nothing. Kess said the small stalls, and he said what to ask for. The man behind the tables doesn't blink at talkback — he just turns a drawer round and lets her pick." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"

@@ -330,5 +330,28 @@ Next week also work on find media v3 to make it a lot faster again. The reason i
 on the new game we will build using the author game v2
 
 
-asdoklk
 
+**Vesper**
+
+Drain recharge but what about weapon change and emitter charge too
+
+[DONE]mercer schedule still have penthouse, I think a new game gen engine logic, when things changes it needs to ignore mercer penthouse and why penthouse was 8 to 23 and lockup 23 to 8, was this a mistake??
+The hours are NOT a mistake. A schedule row carries no conditions — the engine reads five fields and drops the rest — and it walks the rows top-down taking the first match, so the penthouse row (written first) owns 08:00-23:00 and the Lockup gets the remainder. There is no way to write "only before he's blown", and the penthouse row can't be deleted because two Act-1 canvases need him standing there. So his data was right and the Schedules PAGE was wrong: it kept badging "NOW: Mercer's Penthouse" for 15 hours of every 24 after the Archive sealed that building, with his real address listed as the inactive row — and Calloway and Vane likewise parked in Vance Securities. Built the engine logic asked for here, in :: SchedulePage: every row is checked with navDestUnlocked(), unreachable rows are greyed and show their in-world reason instead of the activity, and the NOW badge is suppressed for a locked location. Generic — no game or NPC is named, so every game gets it. Bonus: in the window after he runs and before she finds him the page now shows nothing, where it used to give away where he was and spoil the search.
+Also found and fixed here: the page's row class was written as class="<<print _rowClass>>", which SugarCube emits verbatim inside a raw HTML attribute, so the "you are here now" highlight had been dead since it shipped. Both tables now use @class.
+
+The arrangement (rung_mercer_hands_on) | Node: The arrangement: The media is on top and the content part where he actually put his hands on her comes after the link click: Watch his hand
+
+The print (cap_owner_print) | Node: The print | it directly goes to fucking her, even in the one time, things intensifies slowly incremantally, not a next canvas direct to fucking
+
+mercer locked hub menu canvas: this one have only two choice sit with him and pour for him. I mean can it also have something like fuck him, tease him, kiss him. How should we decide that??
+
+Canvas: A start (kess_print_read) | Node: A start: Does it says that controller is listening to whatever wren hears and sees?? Also it says bring a part but does nt name and logically reason that part right??
+
+when wren gets mercer hands on the controller it unlocks, does wren drain mercer?? does she asks him what is the controller?? how many people are like her working in the company?? Who have access to the controller??
+
+
+After getting mercer hands, she also have to turn controller off, I would say not at that same canvas, like there is at the berth after she takes his hands, (so also drain will move from this canvas to another canvas after this, so now this first fuck doesnt drain instead she tries and confirm that she still cant drain him and then she takes his hands prints not before that). Kess turns the controller off and then she goes again, and drain him, it works, now she can aks him all questions. Moving on to, she goes back to kess with this new issue that this controller was only for mercer, now they make a plan to drain him with the controller on, and then the same things as we have currently. 
+
+
+[DONE]Something is messed up, like I have bought the part from blackmarket but now things are stuck, the mercer menu doesnt show the choice and the kess also does nothing.
+Not a bug — nothing was broken and no save was stuck. Three gates were hidden with nothing on screen to explain any of them: a lapsed feed line deletes Kess's "give him the part", a bought-but-unseated part deletes Mercer's "give him the evening", and Kess (10:00-22:00) and the Lockup (23:00-08:00) share NO hour of the day, so a cycle is always two trips. Fixed in prose, not menus: Kess's hub now bands on the feed line AND whether she's carrying a part (the lapsed-and-carrying band names the cot), Mercer's room states an unseated part, both off-hours cards give the hours, and card I's tip says it takes two trips. show_when_locked could not do this — it greys on a choice's whole conditions block, so it would have advertised the loop before Kess opened it.

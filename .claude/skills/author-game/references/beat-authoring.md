@@ -68,6 +68,20 @@ NPC arcs/hubs/ambients/capstones are beats. Only the skeleton + boot + sleep + s
    build time, so a debug build ships those placeholders even after the media is added; `--dev` leaks dev
    controls (`references/media.md` "QA vs publish build"). A build that actually goes to players runs
    `references/ship-gate.md` first — dropping the flags is one row of that checklist, not the whole of it.
+   ⚠️ **BOTH QA FLAGS POISON "IS THIS TEXT ABSENT?" ASSERTIONS IN A LIVE SUITE.** Each one injects text that
+   is not the game, so any check reading a wide scope reads your scaffolding and calls it content. Absence
+   checks are the casualties — a presence check just finds the string it wanted:
+   - **`--debug`** bakes the `MISSING` placeholder's **authoring metadata** — `description` and
+     `search_queries` — into the passage as visible text. A vocabulary hold trips on the word sitting inside
+     an `avoid: … <that act>` clause in a media description.
+   - **`--dev`** puts the **DEV JUMPS list in the sidebar**, and jump labels name NPCs, chapters and flags.
+     Any check reading `document.body.innerText` for "this NPC must not appear here" fails on the label alone.
+
+   *Measured on `vesper`, same TOML, three builds: `live_beat_0074`'s anal-hold check fails under `--debug`
+   and passes 46/46 without it; `live_beat_0081`'s six "no badge on this nav card" checks fail under `--dev`
+   and pass 68/68 clean.* **Run the suite against a CLEAN build** (the state you ship anyway), or scope every
+   absence check to `#passage` rather than `body`. A suite that only ever runs on a QA build is a suite whose
+   failures you learn to ignore, which is worse than not having it.
    **`--build free|paid`** selects the cheat-page variant and **defaults to `free`**, so an ordinary build
    is always the safe one. It only matters for a game that authors `[ui.cheat_page]`; a `free` build emits
    the rows as padlocked labels with **no working effects in the file**, a `paid` build emits live rows.
