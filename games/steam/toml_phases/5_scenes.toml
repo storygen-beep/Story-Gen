@@ -1,0 +1,2252 @@
+# =============================================================================
+# Steam — 5_scenes
+#
+# THE PEOPLE. One standing hub per character, each a repeatable NPC-bound canvas
+# whose menu is that person's ladder. `requires_npc` does the presence work, so
+# the hub inherits the character's own schedule rows and needs none of its own.
+#
+# Tenant-scoped by design: everything here dies with the person it is about. The
+# ROOM keeps its own content in 3_activities.toml and survives a rotation.
+#
+# ⚠️ KEY ASYMMETRY (engine.md §3, §14):
+#      CONDITION → trait_key, npc_id      EFFECT → trait, npcId
+#
+# CRUDE CEILINGS, declared in the Want and enforced here per person:
+#   June   — crude in SPEECH about anyone; her own acts cap at hands
+#   Warren — full crude behind a shut door, euphemism in daylight; the gap IS him
+#   Casper — full crude, taboo register, and he never once says the word cousin
+#   Nell   — full crude, playful, no ceiling below the top rung authored
+# =============================================================================
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# JUNE — Tuesdays, 10:00-13:00, the hot end. The town's permission in one body.
+# Her ladder is not seduction. It is SPONSORSHIP: what she says in this water on
+# a Tuesday is what Hollis Springs believes by Thursday, so every rung here buys
+# propriety back or spends it in public.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "hub_june_pool"
+name        = "June"
+description = "Lane-1 standing hub @the_pool, Tuesdays (her 10:00-13:00 row gates it via requires_npc). Repeatable. The ladder runs on her relation and pays out in PROPRIETY — she is the only character who can give it back."
+
+[canvases.trigger]
+location      = "the_pool"
+requires_npc  = "npc_june"
+npc           = "npc_june"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "doors_open", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "June"
+blocks = [
+  { type = "paragraph", content = "June has the corner of the hot end that everybody knows is June's. She is sixty-eight and has been getting into this water on a Tuesday since she was twenty-eight, and she watches you work with her arms along the tile like a woman marking an exam." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit with her."
+targetType = "node"
+nodeId     = "rung_june_sit.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask her about Perrine."
+targetType = "node"
+nodeId     = "rung_june_perrine.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_june", trait_key = "relation", operator = "gte", value = 12 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Do her back and shoulders in the water."
+targetType = "node"
+nodeId     = "rung_june_back.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "service", operator = "gte", value = 15 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask her to say something in the pool on Tuesday."
+targetType = "node"
+nodeId     = "rung_june_vouch.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_june", trait_key = "relation", operator = "gte", value = 30 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask how far the town will let you go."
+targetType = "node"
+nodeId     = "rung_june_the_town.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_june", trait_key = "relation", operator = "gte", value = 40 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask if she's ever missed a Tuesday."
+targetType = "node"
+nodeId     = "rung_june_winter.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_june", trait_key = "relation", operator = "gte", value = 25 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask her what actually went on here."
+targetType = "node"
+nodeId     = "rung_june_stories.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_june", trait_key = "relation", operator = "gte", value = 20 },
+] }
+
+
+[[canvases]]
+id          = "rung_june_sit"
+name        = "Sit with June"
+description = "Triggerless rung off hub_june_pool. Ungated presence floor. Banded on her relation so the same click reads differently as she decides about you. +3 her relation, +1 energy, 40 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Tuesday"
+blocks = [
+  { type = "paragraph", content = "You put the tray down and get in beside her, which is a thing the owner is allowed to do once a day if she does it in the right corner." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_june", trait_key = "relation", operator = "lt", value = 15 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "She asks what you did before. You tell her. She asks whether you are keeping the Tuesday hours and you say yes, and she nods once and goes back to looking at the skylight, and that is the interview." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "Your aunt let it go grey. Everything in here's grey. Water's still good." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_june", trait_key = "relation", operator = "gte", value = 15 },
+    { type = "trait", subject = "npc", npc_id = "npc_june", trait_key = "relation", operator = "lt",  value = 35 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "She talks the whole hour now. Who has sold up, who is drinking, whose husband is in the Baptist choir and whose husband is somewhere else on Thursdays. She is not gossiping. She is handing you the map." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "You want to know who pays on time in this town, you ask me. I've been naked in a room with all of them." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_june", trait_key = "relation", operator = "gte", value = 35 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "She has stopped explaining the town to you and started telling you about herself, which is a different and much rarer thing, and she does it in the flat voice of a woman who has decided you can take it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "I had a fella used to come Tuesdays and all. Forty years ago. My husband thought I was doing the flowers." },
+    { type = "paragraph", content = "She says it to the skylight and then looks at you sideways to see what your face is doing." },
+  ] },
+]
+exit_block = { type = "location", text = "Get out and get on.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 40, effects = [
+  { targetType = "npc", npcId = "npc_june", trait = "relation", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = 1, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_june_perrine"
+name        = "Ask June about Perrine"
+description = "Triggerless rung, her relation 12. The black line on the board explained by the only person still alive who was in the room. This is the game's own backstory delivered as SPEECH, not as narration. +4 her relation, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The black line"
+blocks = [
+  { type = "paragraph", content = "You ask her what the four scratched services were. She takes a long breath in through her nose and lets it out at the ceiling." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "Oil. Two-hand. The private hour. And one they never wrote down properly, which tells you what that was." },
+  { type = "paragraph", content = "She says it the way you would list four kinds of bread." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "Girls worked the floor in a wrap and the members' floor had a list. Everybody knew. Everybody's husband knew. Nobody said the word out loud in the street and the town ran perfectly well for sixty years." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Ask what changed.", blocks = [
+        { type = "paragraph", content = "Perrine, is what changed. She came back from her own bad marriage in eighty-nine, took the house off her mother, and put a line through half the board in one afternoon." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "She wanted it respectable. She got it respectable. Took her thirty years and it cost her the trade, and now you've got the note." },
+    ] },
+    { advance_text = "Ask if she minded.", blocks = [
+        { type = "paragraph", content = "June looks at you properly for the first time all morning." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "I'm sixty-eight, love. I don't mind anything. I liked it better when there was a bit of life in here, and I'd not be the only one." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Let it go for now.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 30, effects = [
+  { targetType = "npc", npcId = "npc_june", trait = "relation", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_june_back"
+name        = "Do June's back"
+description = "Triggerless rung, SERVICE 15. Hands on an old woman's body in public water — the ceiling for June is HANDS, declared in the Want, and this is it. Not explicit; it is competence, and competence is what buys her sponsorship. +4 her relation, +1 service, 40 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Her back"
+blocks = [
+  { type = "paragraph", content = "She turns round on the bench without being asked twice and puts her forearms on the tile. Her back is sixty-eight years old and forty of them were spent behind a sewing machine at the mill." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Start at the neck.", blocks = [
+        { type = "paragraph", content = "You work up from the shoulder blades with your thumbs either side of the spine and find the two knots at the base of her neck that have probably been there since the mill shut. She swears once, quietly, in a language she learned from her mother." },
+    ] },
+    { advance_text = "Work them out.", blocks = [
+        { type = "paragraph", content = "It takes ten minutes and both thumbs and the heat helps. Halfway through she stops talking, which from June is the loudest possible review." },
+    ] },
+    { advance_text = "Finish.", blocks = [
+        { type = "paragraph", content = "You finish across the tops of her shoulders and down the arms and she sits there with her eyes shut and her chin on her wrists." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "Your aunt couldn't do that. Your aunt had hands like a bird." },
+        { type = "paragraph", content = "It is the first compliment anybody in this building has paid you, and it is about your hands, and you take it." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Get back to the floor.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 40, effects = [
+  { targetType = "npc", npcId = "npc_june", trait = "relation", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "service", op = "add", value = 1, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_june_vouch"
+name        = "Ask June to vouch"
+description = "Triggerless rung, her relation 30. THE PROPRIETY VALVE: June is the only source of propriety back in the game, and it costs relation to draw on. +6 propriety, -2 her relation, 20 min. Deliberately a trade, not a gift."
+
+[[canvases.nodes]]
+id   = "base"
+name = "A word in the pool"
+blocks = [
+  { type = "paragraph", content = "You tell her what is being said — about the hours, about the linen, about what the Marlow is turning into — and you ask her, straight out, to say something about it on a Tuesday." },
+  { type = "paragraph", content = "She does not answer for a while. This is the first time you have asked her for anything and both of you know exactly what it is worth." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "I can do that. I'll say the water's the best it's been since the sixties and Perrine's girl works like her grandmother did." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Thank her.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "Don't thank me. I'm spending something. You'll know when it's gone." },
+        { type = "paragraph", content = "By Thursday two women who had stopped coming are back in the ten o'clock, and one of them brings her sister." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Back to work.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 20, effects = [
+  { targetType = "player", trait = "propriety", op = "add", value = 6, clamp = true },
+  { targetType = "npc", npcId = "npc_june", trait = "relation", op = "subtract", value = 2, clamp = true },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# NELL — 01:00-03:00, the pool, every night. The lodger.
+# TENANT-SCOPED: this whole section dies when the season ends and the slot
+# rotates. Nothing here may be referenced by the room's own content.
+# Full crude, playful. She is the one person in Hollis with no opinion about
+# who Iris is supposed to be, which is the entire reason she works.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "hub_nell_pool"
+name        = "Nell"
+description = "Lane-1 standing hub @the_pool, 01:00-03:00 (her row gates it via requires_npc). Repeatable, and it deliberately overlaps the after-close hub — the room's solo content and the lodger's content are both live at that hour, and which one the player picks is the choice. Ladder on her relation."
+
+[canvases.trigger]
+location      = "the_pool"
+requires_npc  = "npc_nell"
+npc           = "npc_nell"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "first_soak_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Nell"
+blocks = [
+  { type = "paragraph", content = "One in the morning and the lodger is doing lengths in the dark with the lights off, which she has done every night since she took the room and which you have said nothing about because she pays on the first without being asked." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say the date out loud."
+targetType = "node"
+nodeId     = "rung_nell_season.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_nell", trait_key = "relation", operator = "gte", value = 45 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get in with her."
+targetType = "node"
+nodeId     = "rung_nell_swim.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit on the edge and talk."
+targetType = "node"
+nodeId     = "rung_nell_talk.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_nell", trait_key = "relation", operator = "gte", value = 20 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit out the last of the night with her."
+targetType = "node"
+nodeId     = "rung_nell_dawn.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_nell", trait_key = "relation", operator = "gte", value = 20 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Race her."
+targetType = "node"
+nodeId     = "rung_nell_race.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_nell", trait_key = "relation", operator = "gte", value = 15 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit on the bench with her afterwards."
+targetType = "node"
+nodeId     = "rung_nell_bench.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_nell", trait_key = "relation", operator = "gte", value = 25 },
+  { type = "trait", subject = "player", trait_key = "steam", operator = "gte", value = 15 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take her to the hot end."
+targetType = "node"
+nodeId     = "loop_nell_hotend.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_nell", trait_key = "relation", operator = "gte", value = 35 },
+  { type = "trait", subject = "player", trait_key = "steam", operator = "gte", value = 35 },
+] }
+
+
+[[canvases]]
+id          = "rung_nell_swim"
+name        = "Swim with Nell"
+description = "Triggerless rung off hub_nell_pool. Ungated presence floor. Two women in a dark pool at one in the morning, and the whole point of the rung is that nothing is being negotiated. +3 her relation, +2 energy, 40 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Lengths"
+blocks = [
+  { type = "paragraph", content = "You drop the robe and get in at the shallow end and she does not stop swimming, just changes to a lane that runs alongside you and keeps going." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Swim.", blocks = [
+        { type = "paragraph", content = "You do twenty lengths side by side in the dark without a word. She swims like somebody who was coached at some point and stopped, and she breathes on the wrong side on purpose so she can see you." },
+    ] },
+    { advance_text = "Stop at the wall.", blocks = [
+        { type = "paragraph", content = "At the wall she hangs off the lip with her hair flat to her head and asks whether you ever sleep, and you say not really, and she says good, neither do I, and that is the arrangement made." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Get out.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 40, effects = [
+  { targetType = "npc", npcId = "npc_nell", trait = "relation", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = 2, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_nell_race"
+name        = "Race Nell"
+description = "Triggerless rung, her relation 15. Physical, competitive, and the first rung where either of them touches the other. +4 her relation, +3 arousal, -2 energy, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Four lengths"
+blocks = [
+  { type = "paragraph", content = "Four lengths, no start signal, she goes on the word go and you go half a second before it. She wins the first and calls you a cheat with her whole chest and the room throws it back off the tiles." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Again.", blocks = [
+        { type = "paragraph", content = "You win the second because she is laughing too hard to breathe on the third length, and she grabs your ankle at the wall to slow you and you kick free and she gets a handful of your thigh instead." },
+    ] },
+    { advance_text = "Call it.", blocks = [
+        { type = "paragraph", content = "You both hang off the lip at the deep end with your chests going. She is very close and neither of you moves back, and the water between you is doing nothing to disguise that you are both naked, which up to about four seconds ago had not been a fact either of you were noticing." },
+        { type = "thought_bubble", content = "She noticed first. She is enjoying that you noticed second." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Get out before you say something.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 30, effects = [
+  { targetType = "npc", npcId = "npc_nell", trait = "relation", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "energy", op = "subtract", value = 2, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_nell_bench"
+name        = "The bench with Nell"
+description = "Triggerless rung, her relation 25 + STEAM 15. Explicit. The underwater bench at one in the morning; hands, and nothing pretending to be an accident. Cycling pool, t5. +5 her relation, +8 arousal, +1 steam, 40 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The bench"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/nell_bench_t5", pool = 4, description = "Two women close together on the submerged bench of a dim indoor pool at night.", search_queries = ["two women nude hot pool night close", "women together bath house pool steam dark"] } },
+  { type = "paragraph", content = "You end up on the underwater bench at the hot end with your shoulders against the tile and her sitting sideways across the corner of it, one leg over yours, close enough that the water between you is not really between you." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Let it happen.", blocks = [
+        { type = "paragraph", content = "Her hand goes flat on your thigh under the water while she is still talking about the season ending. Then it slides up. Your cunt is open and slick before she gets near it, and your tits are up out of the water with the nipples hard where she can see them." },
+    ] },
+    { advance_text = "Don't move.", blocks = [
+        { type = "paragraph", content = "Two fingers into your cunt, slow, and she watches your face the whole time she is doing it. Her thumb finds your clit on the third pass and stays there. Her other hand comes up out of the water onto your tit and stays there too." },
+    ] },
+    { advance_text = "Reach for her.", blocks = [
+        { type = "paragraph", content = "You get your hand on her cunt and she is slick in a way the water cannot account for. She swears into your shoulder. You work her clit with two fingers while she is still fucking you with hers, and neither of you finds a rhythm and neither of you stops." },
+    ] },
+    { advance_text = "Together.", blocks = [
+        { type = "paragraph", content = "She comes first, on your fingers, biting down on the muscle at the top of your arm, and the moan goes round the tiled room twice. You come a minute later with her fingers still in your cunt and her mouth on your tit and her thumb on your clit." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "paragraph", content = "You both sit there in the corner of the bench in eight inches of steam with the water going flat around you." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_nell" }, content = "I've been swimming at one in the morning for six weeks. I'm not actually nocturnal." },
+        { type = "thought_bubble", content = "Six weeks. You had been congratulating yourself on not asking questions." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Send her to bed.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 40, effects = [
+  { targetType = "npc", npcId = "npc_nell", trait = "relation", op = "add", value = 5, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 8, clamp = true },
+  { targetType = "player", trait = "steam", op = "add", value = 1, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "loop_nell_hotend"
+name        = "The hot end"
+description = "Triggerless LOOP, her relation 35 + STEAM 35. The repeatable sex surface for the lodger — replayable every night she is in the water, which is every night. Explicit, cycling pool, t5. +2 her relation, +10 arousal, 45 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The hot end"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/nell_hotend_t5", pool = 6, description = "Two women having sex at the tiled edge of a steaming pool at night.", search_queries = ["two women sex pool edge night steam", "lesbian couple hot tub tiled pool dark"] } },
+  { type = "paragraph", content = "You take her wrist and walk backwards up the pool into the hot end where the water is deep enough to stand in and the steam sits on it thick enough to hide a room." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Against the wall.", blocks = [
+        { type = "paragraph", content = "You put her against the tile and get your mouth on her tits with the water at her ribs. You suck one nipple hard and she swears. Her other nipple is up between your fingers. She has both hands in your wet hair, already pushing your head down." },
+    ] },
+    { advance_text = "Down.", blocks = [
+        { type = "paragraph", content = "You lift her onto the lip so she is sitting out of the water with her cunt at your mouth and her heels on your shoulders. You lick her from the water up, once, slowly, standing chest-deep in your own pool with both hands under her ass." },
+    ] },
+    { advance_text = "Work her.", blocks = [
+        { type = "paragraph", content = "She tastes of the water and of herself. You suck her clit and get two fingers in her cunt and she goes flat on her back on the wet tile with her knees up around your ears, swearing at the skylight." },
+    ] },
+    { advance_text = "Let her finish.", blocks = [
+        { type = "paragraph", content = "She comes on your mouth with her thighs locked either side of your head, her cunt working against your tongue while you suck her clit, her hand holding you onto it. She does not let go for ten seconds after, which is the only greedy thing about her." },
+    ] },
+    { advance_text = "Then you.", blocks = [
+        { type = "paragraph", content = "Then she pulls you up onto the tile and fucks you with three fingers, kissing you, her thumb grinding your clit, kneeling in the puddle you are both making — until you come on her hand with your heels slipping on wet stone." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "paragraph", content = "You lie on the tiles at the hot end getting your breath with the steam going up past both of you into the black glass." },
+        { type = "thought_bubble", content = "She leaves at the end of the season. She has said so twice, both times in a voice that was checking." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Lock up properly this time.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 45, effects = [
+  { targetType = "npc", npcId = "npc_nell", trait = "relation", op = "add", value = 2, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 10, clamp = true },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# WARREN — Thursdays, 18:00-20:00, the far corner with his back to the door.
+# The clerk. His whole charge is the GAP: Miss Marlow in daylight, and whatever
+# he is behind a shut door. Every rung of his ladder trades on the occupancy
+# grade, which is the one piece of paper that decides how many bodies she is
+# legally allowed in the water.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "hub_warren_pool"
+name        = "Warren"
+description = "Lane-1 standing hub @the_pool, Thursday evenings (his 18:00-20:00 row gates it via requires_npc). Repeatable. Ladder runs on his lust and pays out in the occupancy grade — the paper that gates how many bathers the house may legally hold."
+
+[canvases.trigger]
+location      = "the_pool"
+requires_npc  = "npc_warren"
+npc           = "npc_warren"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "doors_open", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Warren"
+blocks = [
+  { type = "paragraph", content = "Thursday evening, and the town clerk is in the far corner of the hot end with his back to the door and his glasses folded on the tile beside him, which is where he has sat on a Thursday for eleven years without once coming on a Saturday." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him a towel and stay a minute."
+targetType = "node"
+nodeId     = "rung_warren_towel.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get in at his end."
+targetType = "node"
+nodeId     = "rung_warren_water.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "steam", operator = "gte", value = 15 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him what the grade would take."
+targetType = "node"
+nodeId     = "rung_warren_grade.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_warren", trait_key = "lust", operator = "gte", value = 18 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Have him sign the grade up to sixty."
+targetType = "node"
+nodeId     = "rung_warren_signed.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_warren", trait_key = "lust", operator = "gte", value = 35 },
+  { type = "trait", subject = "player", trait_key = "house", operator = "gte", value = 35 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Do him in the corner with the lights on."
+targetType = "node"
+nodeId     = "loop_warren_corner.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "service", operator = "gte", value = 35 },
+  { type = "trait", subject = "npc", npc_id = "npc_warren", trait_key = "lust", operator = "gte", value = 30 },
+] }
+
+
+[[canvases]]
+id          = "rung_warren_towel"
+name        = "Take Warren a towel"
+description = "Triggerless rung off hub_warren_pool. Ungated presence floor. Establishes the gap between the daylight voice and the pool voice, which is his whole architecture. +2 his lust, +2 his relation, 20 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Miss Marlow"
+blocks = [
+  { type = "paragraph", content = "You take a dry towel down to the corner and set it on the tile within his reach, which is a service, and then you do not immediately leave, which is not." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_warren" }, content = "Thank you, Miss Marlow." },
+  { type = "paragraph", content = "He is fifty-one, naked, chest-deep in your water, and he has just called you by the name he uses across a counter with a queue behind you." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_warren", trait_key = "lust", operator = "gte", value = 12 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He also does not stand up when you go, and he has stopped doing that recently, and neither of you has remarked on the fact that he now stays sitting down in the hot end until you have left the room." },
+  ] },
+]
+exit_block = { type = "location", text = "Get back to the floor.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 20, effects = [
+  { targetType = "npc", npcId = "npc_warren", trait = "lust", op = "add", value = 2, clamp = true },
+  { targetType = "npc", npcId = "npc_warren", trait = "relation", op = "add", value = 2, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_warren_water"
+name        = "Get in at his end"
+description = "Triggerless rung, STEAM 15. Explicit-adjacent and deliberately restrained — the register here is a man trying very hard to conduct himself correctly while entirely naked and eighteen inches away. +4 his lust, +4 arousal, 40 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "His end"
+blocks = [
+  { type = "paragraph", content = "You get in at the hot end, four feet along the bench from him, which is closer than a stranger and further than a friend, and he moves his glasses a precise two inches further from the edge." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Talk about the building.", blocks = [
+        { type = "paragraph", content = "He talks about the building because it is the only subject in which he is permitted to be interested in you. Damp course. The skylight. What the boiler is rated for. He knows the file better than you know the rooms." },
+    ] },
+    { advance_text = "Move down the bench.", blocks = [
+        { type = "paragraph", content = "You move along the bench to hear him better over the pump and now your shoulder is against his shoulder in thirty-nine degree water and he keeps talking about the damp course with his voice one full tone higher." },
+    ] },
+    { advance_text = "Let him see.", blocks = [
+        { type = "paragraph", content = "You stand up to get out and let the water come off you slowly — tits, nipples, belly, cunt — in front of a man who writes your occupancy grade in a ledger on Monday. He looks. He looks for a long time. Then he says something about the damp course." },
+        { type = "thought_bubble", content = "He is going to sit in this water for another twenty minutes now. He cannot possibly get out." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Leave him in it.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 40, effects = [
+  { targetType = "npc", npcId = "npc_warren", trait = "lust", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_warren_grade"
+name        = "The occupancy grade"
+description = "Triggerless rung, his lust 18. The trade named out loud, in the water, in the voice of a man doing paperwork. Sets nothing by itself — it prices the thing, and pricing it is the scene. +5 his lust, -2 propriety, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "What it would take"
+blocks = [
+  { type = "paragraph", content = "You ask him, in the water, what it would take to move the grade from twenty-eight bodies to sixty. He does not pretend not to understand the question, which is the first genuinely dangerous thing he has ever done." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_warren" }, content = "A second fire exit, a certificate on the boiler, and a member of the council who is prepared to be persuaded that it is safe." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Ask who that would be.", blocks = [
+        { type = "paragraph", content = "He looks at the far wall for a while." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_warren" }, content = "It would be me, Miss Marlow. It has been me since nineteen ninety-four." },
+    ] },
+    { advance_text = "Ask what persuades him.", blocks = [
+        { type = "paragraph", content = "And there it is, in the water, at ten past seven on a Thursday: the whole shape of it, said by a man with his glasses off." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_warren" }, content = "I've been coming here for eleven years and nobody has ever once asked me that. I'd like you to keep asking. I'd like it to take a while." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Leave it there for tonight.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 30, effects = [
+  { targetType = "npc", npcId = "npc_warren", trait = "lust", op = "add", value = 5, clamp = true },
+  { targetType = "player", trait = "propriety", op = "subtract", value = 2, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "loop_warren_corner"
+name        = "The corner"
+description = "Triggerless LOOP, SERVICE 35 + his lust 30. The repeatable sex surface for Warren, every Thursday for the rest of the game. Explicit, cycling pool, t5. The register is the GAP: he is crude in here and calls her Miss Marlow at the counter on Monday. +3 his lust, +12 arousal, -2 propriety, +1 service, 50 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Thursday, the far corner"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/warren_corner_t5", pool = 6, description = "A man and a woman having sex at the edge of a steaming indoor pool in dim light.", search_queries = ["couple sex indoor hot pool edge steam", "man woman hot tub sex tiled pool night"] } },
+  { type = "paragraph", content = "You put the lights up rather than down, because he flinched the first time you reached for the dimmer and you have not made that mistake since." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Get in front of him.", blocks = [
+        { type = "paragraph", content = "You stand between his knees on the bench with the water at your thighs and your tits at his face. His cock is hard against your leg and he says nothing about it. You put your hand round his cock and he stops breathing for about four seconds." },
+    ] },
+    { advance_text = "Work him.", blocks = [
+        { type = "paragraph", content = "You work his cock slowly under the water with your tits at his eye level and his glasses on the tile a foot away. He is thick and uncut and leaking already, and he holds the bench with both hands like a man on a small boat and moans through his nose." },
+    ] },
+    { advance_text = "Let him say it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_warren" }, content = "God — your cunt. Let me put my mouth on your cunt. Eleven years I've sat in this water with my cock in my hand thinking about it." },
+        { type = "paragraph", content = "The clerk. Out loud. In a public bath, with the lights up." },
+    ] },
+    { advance_text = "Sit on the lip.", blocks = [
+        { type = "paragraph", content = "You get up onto the tiled lip and open your legs and he comes off the bench onto his knees and puts his mouth on your cunt like a man who has rehearsed it. He licks badly and sucks your clit too hard and does not stop, and determined turns out to beat good." },
+    ] },
+    { advance_text = "Pull him up.", blocks = [
+        { type = "paragraph", content = "You pull him up by the shoulders and put his cock in your cunt at the edge of the pool, legs round his back, tile cold under your ass. He fucks you carefully, then not carefully, and the water goes over the lip in sheets and runs away down the channel." },
+    ] },
+    { advance_text = "Finish him.", blocks = [
+        { type = "paragraph", content = "He comes in your cunt with his forehead on your collarbone, saying your first name twice, which he has never once used in this building. Then you pull his cock out and put his fingers on your clit and hold them there until you come as well." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "paragraph", content = "He puts his glasses back on. That is always the moment it comes back — glasses on, and he is the clerk again, and he apologises for the water on the floor." },
+        { type = "thought_bubble", content = "On Monday there will be a queue behind you and he will call you Miss Marlow and mean both things at once." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Send him home to his Thursday.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 50, effects = [
+  { targetType = "npc", npcId = "npc_warren", trait = "lust", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 12, clamp = true },
+  { targetType = "player", trait = "service", op = "add", value = 1, clamp = true },
+  { targetType = "player", trait = "propriety", op = "subtract", value = 2, clamp = true },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# DEL — the slab, 11:00-15:00, every day of the week.
+# The standard. She is the only person qualified to say whether Iris is doing it
+# right, and she withholds it. Her crude ceiling: full, blunt, instructional —
+# she has had her hands on four thousand bodies and has no vocabulary problem.
+#
+# She is also a MONEY SINK with a face: thirty-one years on this floor and not
+# paid since March.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "hub_del_scrub"
+name        = "Del"
+description = "Lane-1 standing hub @the_scrub_room, 11:00-15:00 (her own row gates it via requires_npc). Repeatable. The service teacher, the standard, and the back pay. Ladder on her relation; the pay rung is the game's first money GATE and its second sink."
+
+[canvases.trigger]
+location      = "the_scrub_room"
+requires_npc  = "npc_del"
+npc           = "npc_del"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "doors_open", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Del"
+blocks = [
+  { type = "paragraph", content = "Del works the slab from eleven until three with her sleeves rolled to the shoulder and her hair up in the same clip she has used since the nineties. She does not talk while she works. She talks between." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Work beside her."
+targetType = "node"
+nodeId     = "rung_del_learn.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask her where the key to the stairs is."
+targetType = "node"
+nodeId     = "rung_del_the_key.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_del", trait_key = "relation", operator = "gte", value = 45 },
+  { type = "trait", subject = "player", trait_key = "house", operator = "gte", value = 35 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Pay her what she's owed."
+targetType = "node"
+nodeId     = "rung_del_pay.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 60 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let her see how you work now."
+targetType = "node"
+nodeId     = "rung_del_watch.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "service", operator = "gte", value = 35 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get on the slab yourself."
+targetType = "node"
+nodeId     = "rung_del_hands.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_del", trait_key = "relation", operator = "gte", value = 30 },
+] }
+
+
+[[canvases]]
+id          = "rung_del_learn"
+name        = "Work beside Del"
+description = "Triggerless rung off hub_del_scrub. Ungated presence floor and the main SERVICE feeder. Banded on her relation: correction, then instruction, then the two of them working a room together. +2 service, +3 her relation, -5 energy, 60 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The second pair of hands"
+blocks = [
+  { type = "paragraph", content = "Two on a slab is how the house used to run it. One at the shoulders, one at the legs, and whoever is on the slab gets done in half the time and pays the same." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_del", trait_key = "relation", operator = "lt", value = 15 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "She corrects you four times in the first ten minutes without once looking up. Wrist straight. Lean, do not push. Not the kidneys, ever. Grit goes on wet skin or it takes the skin with it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "You're doing it with your arms. You'll be finished by Thursday doing it with your arms." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_del", trait_key = "relation", operator = "gte", value = 15 },
+    { type = "trait", subject = "npc", npc_id = "npc_del", trait_key = "relation", operator = "lt",  value = 35 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "She has started explaining instead of correcting, which is a promotion. Where the knots sit on a man who drives all day. Why you always finish at the feet. What to do with somebody who cries on the slab, which happens about once a fortnight and is nobody's business afterwards." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "They come in for the water. They come back for the hands. Your aunt never understood that and it cost her the trade." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_del", trait_key = "relation", operator = "gte", value = 35 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "You work a room of six together now without discussing it. She takes the shoulders, you take the legs, the slab turns round every twenty minutes and neither of you has to say a word about who does what." },
+    { type = "paragraph", content = "Somewhere in the last month she stopped calling it your aunt's house." },
+  ] },
+]
+exit_block = { type = "location", text = "Rinse and turn the slab.", config = { destinationType = "specific", locationId = "the_scrub_room", time_progression_minutes = 60, effects = [
+  { targetType = "player", trait = "service", op = "add", value = 2, clamp = true },
+  { targetType = "npc", npcId = "npc_del", trait = "relation", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "energy", op = "subtract", value = 5, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_del_pay"
+name        = "Pay Del"
+description = "Triggerless rung, MONEY 60. The second sink and the game's first money GATE (the-economy.md R1/R2). Thirty-one years on this floor and nothing since March. -60 money (clamp FALSE), +10 her relation, +2 propriety, 15 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Since March"
+blocks = [
+  { type = "paragraph", content = "You count sixty out of the till in front of her, which is not what she is owed and both of you know it, and put it on the corner of the slab because handing it to her would make it a gift." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "That's not the March to June." },
+  { type = "paragraph", content = "You say you know. You say it is what there is this week, and there will be more the week after, and you would rather give her sixty now than a hundred and forty in a speech at Christmas." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Wait.", blocks = [
+        { type = "paragraph", content = "She looks at the money on the slab for a while. Then she picks it up, folds it, and puts it in the pocket of the apron she has been wearing unpaid since the funeral." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "Right. Well. That's the electric." },
+    ] },
+    { advance_text = "Say sorry.", blocks = [
+        { type = "paragraph", content = "You start to apologise for how long it took and she cuts you off with a hand, not unkindly, the way you would stop somebody explaining a thing you had already worked out." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "I stayed because I wanted to see what you'd do. That's all that was. Don't make a thing of it." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Back to the slab.", config = { destinationType = "specific", locationId = "the_scrub_room", time_progression_minutes = 15, effects = [
+  { targetType = "player", trait = "money", op = "subtract", value = 60, clamp = false },
+  { targetType = "npc", npcId = "npc_del", trait = "relation", op = "add", value = 10, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = 2, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_del_watch"
+name        = "Let Del see how you work"
+description = "Triggerless rung, SERVICE 35. The verdict scene: the woman who taught Perrine's board watches Iris work a man in a wet wrap and delivers thirty-one years of professional opinion in four sentences. +5 her relation, +1 service, 40 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The verdict"
+blocks = [
+  { type = "paragraph", content = "You take the next one on the slab with Del in the room, in the wrap, wet, and you do not adjust a single thing about how you have been working since she stopped watching." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Work him.", blocks = [
+        { type = "paragraph", content = "Long pulls from the base of the spine out over the hip. The wrap goes where the wrap goes. He is hard against the marble by the fourth pass, which is neither remarkable nor concealed, and you work straight through it." },
+    ] },
+    { advance_text = "Finish and turn to her.", blocks = [
+        { type = "paragraph", content = "You hose him down, hand him off, and turn round to find her leaning on the door frame with her arms folded." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "Your hands are right. Weight's right. You've stopped apologising, which is the bit that took me eleven years." },
+    ] },
+    { advance_text = "Wait for the rest.", blocks = [
+        { type = "paragraph", content = "There is always a rest, with Del." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "And the wrap's a choice, and it's yours to make, and I've made it myself in this room. Just don't let anybody tell you it's the same job. It isn't. It pays better and it costs more." },
+        { type = "thought_bubble", content = "*I've made it myself in this room.* She says it like the weather." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Get the next one in.", config = { destinationType = "specific", locationId = "the_scrub_room", time_progression_minutes = 40, effects = [
+  { targetType = "npc", npcId = "npc_del", trait = "relation", op = "add", value = 5, clamp = true },
+  { targetType = "player", trait = "service", op = "add", value = 1, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_del_hands"
+name        = "Get on the slab"
+description = "Triggerless rung, her relation 30. The owner on the slab and the attendant working her — thirty-one years of hands, and no ceremony about any of it. Explicit, cycling pool, t5, and deliberately NOT a seduction: Del's register is competence, which is exactly why it lands. +4 her relation, +10 arousal, +6 energy, 60 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Her hands"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/del_slab_hands_t5", pool = 4, description = "A woman lying naked on a wet marble slab being worked over by another woman's hands.", search_queries = ["woman massage marble slab hammam hands", "nude woman scrub table attendant working"] } },
+  { type = "paragraph", content = "You get up on the slab yourself for the first time since March, on your front, with your forehead on your folded arms, and Del rolls her sleeves up without a word about it." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Let her start.", blocks = [
+        { type = "paragraph", content = "Grit soap, hot water, and thirty-one years. She goes down your spine in long pulls with her whole weight behind it and you make a noise into your own arm that you have not made in front of anybody in two years." },
+    ] },
+    { advance_text = "Don't move.", blocks = [
+        { type = "paragraph", content = "She works your shoulders out, both arms, then down over your ass and the backs of your thighs — hard, thorough, entirely unbothered, the way she does it to everybody who pays two dollars." },
+    ] },
+    { advance_text = "Turn over.", blocks = [
+        { type = "paragraph", content = "You turn over when she taps your hip. Tits, belly, hips, and she works across all of it with the same steady weight and does not once alter her pace or pretend not to be touching you." },
+    ] },
+    { advance_text = "Let it happen.", blocks = [
+        { type = "paragraph", content = "By the time she is doing your hips you are wet and both of you know it, and she does not remark on it and she does not stop, and her thumb goes over your cunt on the third pass without any change in pressure at all." },
+    ] },
+    { advance_text = "Ask her.", blocks = [
+        { type = "paragraph", content = "You say her name. She says nothing, and puts two fingers in your cunt and her other palm flat on your belly to hold you on the slab, and works you like she works everything else in this room — patiently, correctly, and without hurrying." },
+    ] },
+    { advance_text = "Finish.", blocks = [
+        { type = "paragraph", content = "You come on her hand with your heels slipping on wet marble and your fist in your own hair, moaning at a tiled ceiling, in the middle of a working afternoon with the pool room going next door." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "paragraph", content = "She hoses the slab, dries her hands on the apron, and looks at the clock." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "Half two. There's four in the water and one waiting." },
+        { type = "thought_bubble", content = "Thirty-one years of this room. You are not the first owner she has had on that slab and she has not said so." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Get up and get on.", config = { destinationType = "specific", locationId = "the_scrub_room", time_progression_minutes = 60, effects = [
+  { targetType = "npc", npcId = "npc_del", trait = "relation", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 10, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = 6, clamp = true },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# IVO — the boiler, 20:00-02:00 and 05:00-08:00, every day.
+# The one man who can shut the building down, who has never once mentioned it.
+# Crude ceiling: cock, cunt, cum, fuck — and almost no words at all. His whole
+# register is that he does not narrate himself, so the prose does the body and
+# he does about six lines of dialogue in the entire ladder.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "hub_ivo_boiler"
+name        = "Ivo"
+description = "Lane-1 standing hub @the_boiler, nights and dawn (his own rows gate it via requires_npc). Repeatable. Ladder on his relation; the cot loop is reached from the room's dead-hours hub as well, which is deliberate — the room and the man are two ways into the same bed."
+
+[canvases.trigger]
+location      = "the_boiler"
+requires_npc  = "npc_ivo"
+npc           = "npc_ivo"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "doors_open", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Ivo"
+blocks = [
+  { type = "paragraph", content = "He is at the gauge board with a rag over his shoulder and the logbook open, and he has heard you come down eleven steps and has not turned round, because he knows the sound of everybody in this building on those steps." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit out the stoke with him."
+targetType = "node"
+nodeId     = "rung_ivo_stoke.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask about his room in town."
+targetType = "node"
+nodeId     = "rung_ivo_room_in_town.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_ivo", trait_key = "relation", operator = "gte", value = 30 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Come down for the dawn stoke."
+targetType = "node"
+nodeId     = "rung_ivo_dawn.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him to do your back."
+targetType = "node"
+nodeId     = "rung_ivo_back.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_ivo", trait_key = "relation", operator = "gte", value = 20 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Come down in the wrap and stay in it."
+targetType = "node"
+nodeId     = "rung_ivo_wrap.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "steam", operator = "gte", value = 35 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get under the blanket with him."
+targetType = "node"
+nodeId     = "loop_ivo_cot.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_ivo", trait_key = "relation", operator = "gte", value = 35 },
+  { type = "trait", subject = "player", trait_key = "steam", operator = "gte", value = 35 },
+] }
+
+
+[[canvases]]
+id          = "rung_ivo_stoke"
+name        = "Sit out the stoke"
+description = "Triggerless rung off hub_ivo_boiler. Ungated presence floor. Banded on his relation. Almost no dialogue by design — he is the one character who does not explain himself. +3 his relation, +2 energy, 45 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The stoke"
+blocks = [
+  { type = "paragraph", content = "You sit on the third step up with your back against the wall, which is the only place down here that is not either hot metal or wet stone, and he works." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_ivo", trait_key = "relation", operator = "lt", value = 15 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "Forty minutes and he says eleven words, four of which are the pressure reading. It is not unfriendly. He has worked alone in a loud room for sixteen years and conversation is simply not one of the things that happens here." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_ivo", trait_key = "relation", operator = "gte", value = 15 },
+    { type = "trait", subject = "npc", npc_id = "npc_ivo", trait_key = "relation", operator = "lt",  value = 35 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He has started handing you things without asking — the lamp, the rag, the end of a length of copper — which is his entire vocabulary for wanting somebody in the room." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_ivo" }, content = "Your aunt came down twice in fifteen years. Both times to tell me something." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_ivo", trait_key = "relation", operator = "gte", value = 35 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He works with you sitting there the way a man works with a radio on. At some point in the last month the third step became yours, and there is a folded towel on it now that you did not put there and neither of you has mentioned." },
+  ] },
+]
+exit_block = { type = "location", text = "Go up.", config = { destinationType = "specific", locationId = "the_boiler", time_progression_minutes = 45, effects = [
+  { targetType = "npc", npcId = "npc_ivo", trait = "relation", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = 2, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_ivo_back"
+name        = "Ask Ivo for your back"
+description = "Triggerless rung, his relation 20. She works on bodies all day and nobody works on hers. He has hands like a man who turns valves for a living. Explicit-adjacent, and the restraint is the point. +4 his relation, +6 arousal, +4 energy, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "His hands"
+blocks = [
+  { type = "paragraph", content = "You ask him, straight out, because your shoulders have been finished since Tuesday and there is nobody in this building whose job it is to do that for you." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Sit on the bench.", blocks = [
+        { type = "paragraph", content = "You sit backwards on the bench with the wrap down round your waist and your arms folded on the bench end. He wipes his hands twice on the rag before he touches you, which takes about four seconds and feels considerably longer." },
+    ] },
+    { advance_text = "Let him work.", blocks = [
+        { type = "paragraph", content = "His hands are enormous and hot and about as gentle as a press. He finds the knot under your left shoulder blade in eight seconds flat and holds his thumb on it until it lets go, and you swear into your own forearm." },
+    ] },
+    { advance_text = "Don't cover up.", blocks = [
+        { type = "paragraph", content = "He works down either side of your spine to the small of your back. Your tits are bare against the bench end and your nipples are hard on the cold wood, and he can see all of that from where he is standing and says absolutely nothing." },
+    ] },
+    { advance_text = "Stop him there.", blocks = [
+        { type = "paragraph", content = "You get up, pull the wrap back over yourself, and go up the eleven steps in your own building at half eleven at night with your face burning." },
+        { type = "thought_bubble", content = "He said nothing. He is going to say nothing about it tomorrow, too, and the day after that." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Go up.", config = { destinationType = "specific", locationId = "the_boiler", time_progression_minutes = 30, effects = [
+  { targetType = "npc", npcId = "npc_ivo", trait = "relation", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 6, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_ivo_wrap"
+name        = "Come down in the wrap"
+description = "Triggerless rung, STEAM 35. She stops changing before she goes down to the basement. Explicit, cycling pool, t5. +5 his relation, +7 arousal, +1 steam, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The eleven steps"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/ivo_boiler_wrap_t5", pool = 4, description = "A woman in a loose wet wrap standing in a dim industrial basement with a man at a workbench.", search_queries = ["woman towel wrap industrial basement man", "wet woman wrap boiler room dim light"] } },
+  { type = "paragraph", content = "You stop changing before you come down. Straight out of the pool room at eleven at night, wet, in the wrap, down eleven steps into a room at thirty degrees." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Stand where the light is.", blocks = [
+        { type = "paragraph", content = "You stand under the gauge bulb to read the log, which puts the light behind you through a soaked wrap, and you know exactly what that does because you have been on the other side of it in the pool room all week." },
+    ] },
+    { advance_text = "Let it fall open.", blocks = [
+        { type = "paragraph", content = "It comes open at the front when you reach up for the book. Your tits are out in a boiler room with a man four feet away, nipples hard in spite of the heat, and you do not tuck it back." },
+    ] },
+    { advance_text = "Look at him.", blocks = [
+        { type = "paragraph", content = "He has stopped working. He is not pretending he has not stopped working. His hands are on the bench and his cock is obvious through his trousers and he looks at your tits, then your cunt through the wet linen, then your face." },
+    ] },
+    { advance_text = "Leave it there.", blocks = [
+        { type = "paragraph", content = "You write the pressure in the book, close it, and go up the steps without covering up, and he does not say a word the whole time." },
+        { type = "thought_bubble", content = "Sixteen years he has done this room for a family that came down twice." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Up.", config = { destinationType = "specific", locationId = "the_boiler", time_progression_minutes = 30, effects = [
+  { targetType = "npc", npcId = "npc_ivo", trait = "relation", op = "add", value = 5, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 7, clamp = true },
+  { targetType = "player", trait = "steam", op = "add", value = 1, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "loop_ivo_cot"
+name        = "The cot"
+description = "Triggerless LOOP, his relation 35 + STEAM 35. Reached from BOTH his hub and the room's dead-hours hub. The repeatable sex surface in the basement, every night of the game. Explicit, cycling pool, t5. Full crude, almost no dialogue — his register is that he does not narrate. +2 his relation, +12 arousal, 60 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The cot"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/ivo_cot_t5", pool = 6, description = "A couple having sex on a narrow cot in a dim industrial basement.", search_queries = ["couple sex narrow bed industrial room dim", "man woman sex bunk basement dark"] } },
+  { type = "paragraph", content = "The cot is a folding frame with a mattress the width of a door and a blanket that smells of hot metal. It was never built for two people and neither of you has ever raised that." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Get in.", blocks = [
+        { type = "paragraph", content = "You drop the wrap on the bench and get under the blanket with him and he is awake, and he is hard against your hip before you have got your legs in, and his hand comes flat over your cunt and stays there while you get settled." },
+    ] },
+    { advance_text = "Let him.", blocks = [
+        { type = "paragraph", content = "Two fingers in you and his thumb on your clit, and his hands are so big that the whole of you fits under one of them. He works you slowly, on his side, with his mouth on the back of your neck, and does not say one word." },
+    ] },
+    { advance_text = "Turn over.", blocks = [
+        { type = "paragraph", content = "You turn and get his cock in your hand, thick and hot, and he makes the first sound he has made all night, which is not a word either. You suck him for a minute in the dark with the boiler going and his hand in your hair, not pulling." },
+    ] },
+    { advance_text = "On top of him.", blocks = [
+        { type = "paragraph", content = "The cot is too narrow for anything else, so you get up on top and put his cock in your cunt and take it sitting up with your palms on his chest. He fills you up to the point where you have to stop and breathe before you can move." },
+    ] },
+    { advance_text = "Ride him.", blocks = [
+        { type = "paragraph", content = "The frame complains under both of you. He gets his hands on your ass and works you down onto his cock in long slow pulls, and his thumb finds your clit again because he learned that on the second night and has done it every night since." },
+    ] },
+    { advance_text = "Finish.", blocks = [
+        { type = "paragraph", content = "You come on his cock with your fists in the blanket and your forehead on his collarbone, moaning into him, and he keeps going until you are through it and then comes in you with his whole body locked and still silent." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "paragraph", content = "You lie in a folding cot in a hot basement with your leg over a man who has said nothing for an hour and a quarter." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_ivo" }, content = "Pressure's dropping." },
+        { type = "paragraph", content = "He gets up naked, turns the wheel a quarter, watches the needle come back, and gets in again." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Sleep an hour, then open at eight.", config = { destinationType = "specific", locationId = "the_boiler", time_progression_minutes = 60, effects = [
+  { targetType = "npc", npcId = "npc_ivo", trait = "relation", op = "add", value = 2, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 12, clamp = true },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# CASPER — Fridays at the desk with his father's book, Saturdays in the water
+# like a man with a stake in it.
+#
+# He is the obligation with a face (the-economy.md R3) AND the reversal charge
+# in one body: he expected this building, got the paper on it instead, and every
+# week has to stand in a lobby that is not his and be handed money by the cousin
+# who got the bricks. Crude ceiling: full, and he never once says the word
+# cousin — everybody in Hollis Springs already knows, which is the point.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "hub_casper_desk"
+name        = "Casper"
+description = "Lane-1 standing hub @the_front_desk, Fridays 17:00-19:00 (his row gates it via requires_npc). Repeatable. The note, the book, and the leaning. [settings.rent] runs the actual collection; this is the surface around it."
+
+[canvases.trigger]
+location      = "the_front_desk"
+requires_npc  = "npc_casper"
+npc           = "npc_casper"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "doors_open", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Casper"
+blocks = [
+  { type = "paragraph", content = "Friday, six o'clock, and your cousin is at the desk with his coat on and his father's book under his arm, standing on the customer side of a counter in a building he grew up being told would be his." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Talk to him while he writes it up."
+targetType = "node"
+nodeId     = "rung_casper_book.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him what he actually wants."
+targetType = "node"
+nodeId     = "rung_casper_what_he_wants.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_casper", trait_key = "relation", operator = "gte", value = 40 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask what his father would have done."
+targetType = "node"
+nodeId     = "rung_casper_father.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_casper", trait_key = "relation", operator = "gte", value = 15 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him see the second column."
+targetType = "node"
+nodeId     = "rung_casper_ledger.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "service", operator = "gte", value = 35 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him through to the scrub room after close."
+targetType = "node"
+nodeId     = "loop_casper_slab.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "service", operator = "gte", value = 35 },
+  { type = "trait", subject = "npc", npc_id = "npc_casper", trait_key = "lust", operator = "gte", value = 25 },
+] }
+
+
+[[canvases]]
+id          = "rung_casper_book"
+name        = "Friday, the book"
+description = "Triggerless rung off hub_casper_desk. Ungated presence floor. Banded on his relation: the note collected by a man who cannot decide, week to week, whether he is family or a creditor. +3 his relation, +1 his lust, 20 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The counter"
+blocks = [
+  { type = "paragraph", content = "He writes the week into the book with the pen his father used, in handwriting that is trying to be his father's handwriting and is not." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_casper", trait_key = "relation", operator = "lt", value = 15 },
+  ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_casper" }, content = "You've not changed the prices. Two dollars. She had two dollars on that board when we were at school." },
+    { type = "paragraph", content = "You tell him you know. He says nothing else, and looks around the lobby the way a man looks at a car he did not buy." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_casper", trait_key = "relation", operator = "gte", value = 15 },
+    { type = "trait", subject = "npc", npc_id = "npc_casper", trait_key = "relation", operator = "lt",  value = 35 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He stays twenty minutes after the money is written up now, leaning on the counter, telling you what the man from the county said about the road and who has bought the hotel at the top of the street." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_casper" }, content = "You're doing better than she was. That's not me being nice, that's the book saying it." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_casper", trait_key = "relation", operator = "gte", value = 35 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He does not open the book until you have both been talking for half an hour, and last week he wrote the figure down without counting the money, which his father would have considered a serious professional failure." },
+    { type = "paragraph", content = "He is not looking at the building any more when he says goodnight. He is looking at you, and he has stopped bothering to stop." },
+  ] },
+]
+exit_block = { type = "location", text = "See him out.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 20, effects = [
+  { targetType = "npc", npcId = "npc_casper", trait = "relation", op = "add", value = 3, clamp = true },
+  { targetType = "npc", npcId = "npc_casper", trait = "lust", op = "add", value = 1, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_casper_father"
+name        = "What his father would have done"
+description = "Triggerless rung, his relation 15. The note's history, spoken: why a private family loan exists at all, and what it was really for. +4 his relation, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Nineteen eighty-nine"
+blocks = [
+  { type = "paragraph", content = "You ask him what his father lent it for. He takes long enough to answer that you know the answer is going to be worth having." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_casper" }, content = "To buy her mother out. She wanted the building clean and the trade shut and her mother wanted neither, so my dad found sixty-one thousand dollars and Perrine found a black paintbrush." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Ask whether he minded.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_casper" }, content = "He thought she'd pay it back in six years. She paid interest for thirty-one and never touched the principal, and he died holding paper on a building full of cold water." },
+    ] },
+    { advance_text = "Ask what he wants.", blocks = [
+        { type = "paragraph", content = "And here is where he could say the true thing, and does not, and both of you watch him not say it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_casper" }, content = "I want a Friday where I don't have to come in here and be the bank. That's all I want, Iris." },
+        { type = "thought_bubble", content = "He comes on Saturdays too. He has never once been asked to." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Let it go.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_casper", trait = "relation", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_casper_ledger"
+name        = "The second column"
+description = "Triggerless rung, SERVICE 35. She shows the man who holds the note what the house is actually earning it with. This is the whole reversal in one scene: the creditor finds out he is being paid out of the thing his father paid to shut down. +6 his lust, -2 propriety, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "What's paying him"
+blocks = [
+  { type = "paragraph", content = "You turn the ledger round on the counter and let him read it. Door takings on the left in the column his father's money was supposed to be repaid out of. The other column on the right, which is bigger." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Wait.", blocks = [
+        { type = "paragraph", content = "He reads it twice. Oil at four. The private hour at thirty. Eleven of those last month, written in pencil in your handwriting, next to the initials of men he has known his whole life." },
+    ] },
+    { advance_text = "Let him say it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_casper" }, content = "So my dad's hundred and thirty-five a week is coming out of— " },
+        { type = "paragraph", content = "He stops. He looks at the board behind you, at the pencil under the gold, and works out that it has been there for weeks and he has been standing in front of it every Friday." },
+    ] },
+    { advance_text = "Don't help him.", blocks = [
+        { type = "paragraph", content = "You do not help him with the sentence. You stand behind your own counter in a wet wrap with your arms folded and let him finish it himself, and he cannot, and what he does instead is look at you for about four seconds too long and then say he will see you Friday." },
+        { type = "thought_bubble", content = "He was not appalled. That is the thing you take upstairs with you." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Turn the book back round.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_casper", trait = "lust", op = "add", value = 6, clamp = true },
+  { targetType = "player", trait = "propriety", op = "subtract", value = 2, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "loop_casper_slab"
+name        = "After close, the scrub room"
+description = "Triggerless LOOP, SERVICE 35 + his lust 25. The repeatable taboo surface: the man who holds the note, on the slab, paying the same thirty dollars as anybody else — which is the entire reversal made mechanical. Explicit, cycling pool, t5. +3 his lust, +12 arousal, +30 money (clamp FALSE), -3 propriety, 75 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The same thirty dollars"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/casper_slab_t5", pool = 6, description = "A couple on a wet marble slab in a dim tiled room, steam heavy in the air.", search_queries = ["couple sex marble slab steam room dim", "man woman wet massage table hammam"] } },
+  { type = "paragraph", content = "You bolt the front door at six and take him through the changing room to the scrub room, and on the way you tell him the price, because the price is not a joke and he needs to have heard it." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Make him pay it.", blocks = [
+        { type = "paragraph", content = "He puts thirty dollars on the corner of the slab out of the same wallet the note goes into, and you leave it there where both of you can see it for the whole hour." },
+    ] },
+    { advance_text = "Undress him.", blocks = [
+        { type = "paragraph", content = "You get his shirt off him standing up and drop the wrap yourself, and then you are naked in front of the boy you learned to swim with, in the room where the four crossed-out lines used to happen, at ten past six on a Friday." },
+    ] },
+    { advance_text = "On the slab.", blocks = [
+        { type = "paragraph", content = "Oil, both hands, his back and his ass and his thighs, and then over. His cock is hard before you have turned him and you work it in an oiled fist while he stares at you like a man watching a building come down." },
+    ] },
+    { advance_text = "Your mouth.", blocks = [
+        { type = "paragraph", content = "You suck his cock on the slab with your tits against his hip and his hand flat on the back of your head, not pushing, and he says your name in a completely wrecked voice and you take him deeper for it." },
+    ] },
+    { advance_text = "Get on him.", blocks = [
+        { type = "paragraph", content = "Then you climb onto the slab and put his cock in your cunt and fuck him on wet marble in the middle of your own building, sliding down toward the drain with every stroke, both of you slipping and neither of you stopping." },
+    ] },
+    { advance_text = "Finish it.", blocks = [
+        { type = "paragraph", content = "You work your clit with two fingers and come on his cock with your other hand braced on his chest. He comes about a minute later, hard, saying nothing at all, with his fingers dug into your ass." },
+    ] },
+    { advance_text = "The money.", blocks = [
+        { type = "paragraph", content = "Afterwards you hose the slab down while he dresses, and the thirty dollars is still on the corner where he put it, and you pick it up in front of him and put it in the pocket of the wrap." },
+        { type = "thought_bubble", content = "A hundred and thirty-five a week, and thirty of it just went round in a circle." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Let him out the front.", config = { destinationType = "specific", locationId = "the_scrub_room", time_progression_minutes = 75, effects = [
+  { targetType = "npc", npcId = "npc_casper", trait = "lust", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 12, clamp = true },
+  { targetType = "player", trait = "money", op = "add", value = 30, clamp = false },
+  { targetType = "player", trait = "propriety", op = "subtract", value = 3, clamp = true },
+] } }
+
+
+# ── Casper's Saturday: the pool, using the place like it is half his ─────────
+[[canvases]]
+id          = "hub_casper_pool"
+name        = "Casper, Saturday"
+description = "Lane-1 standing hub @the_pool, Saturdays 11:00-13:00 (his second row gates it via requires_npc). A DIFFERENT window and a different room from his Friday hub, so engine.md §19 is satisfied. Repeatable."
+
+[canvases.trigger]
+location      = "the_pool"
+requires_npc  = "npc_casper"
+npc           = "npc_casper"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "doors_open", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Saturday"
+blocks = [
+  { type = "paragraph", content = "Saturday morning and he is in the shallow end with his arms along the tile, in the middle of the busiest two hours of the week, not paying and not being asked to." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Charge him."
+targetType = "node"
+nodeId     = "rung_casper_charge.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Give him the scrub he asked for."
+targetType = "node"
+nodeId     = "rung_casper_scrub.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "service", operator = "gte", value = 15 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Work the floor in front of him."
+targetType = "node"
+nodeId     = "rung_casper_watch.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "steam", operator = "gte", value = 35 },
+] }
+
+
+[[canvases]]
+id          = "rung_casper_charge"
+name        = "Charge Casper"
+description = "Triggerless rung off hub_casper_pool. Ungated. Two dollars, from the man who holds the note, in front of a full pool — the smallest possible act of ownership and the one that changes everything between them. +2 money (clamp FALSE), +4 his relation, +2 his lust, 15 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Two dollars"
+blocks = [
+  { type = "paragraph", content = "You go down the pool with the tray and stop at the shallow end and tell him it is two dollars, the same as everybody, and that he can settle it at the desk on his way out." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Hold it.", blocks = [
+        { type = "paragraph", content = "The whole hot end has gone quiet in the way a room goes quiet when it is pretending not to listen. June has her chin on her wrists and her eyebrows somewhere near her hairline." },
+    ] },
+    { advance_text = "Wait him out.", blocks = [
+        { type = "paragraph", content = "He looks at you for a long moment. Then he laughs once, gets out, walks dripping across the lobby and puts two dollars on the counter, and comes back in." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_casper" }, content = "Fine. Then I'm a customer, and the customer wants a scrub at half twelve." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Carry on down the pool.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 15, effects = [
+  { targetType = "player", trait = "money", op = "add", value = 2, clamp = false },
+  { targetType = "npc", npcId = "npc_casper", trait = "relation", op = "add", value = 4, clamp = true },
+  { targetType = "npc", npcId = "npc_casper", trait = "lust", op = "add", value = 2, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_casper_watch"
+name        = "Work the floor in front of him"
+description = "Triggerless rung, STEAM 35. She does her ordinary Saturday round, in the wrap, in front of the cousin who holds the note and a pool full of people who know them both. Explicit. +5 his lust, +6 arousal, +1 steam, 40 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The Saturday round"
+blocks = [
+  { type = "paragraph", content = "You do the round you do every day. The skimmer, the towels, the tray, the tiles. The only difference on a Saturday is who is in the water watching you do it." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Kneel at his end.", blocks = [
+        { type = "paragraph", content = "You kneel on the lip a yard from him to work the skimmer along the wall and the wrap comes open the way it always comes open, tits out over the water, cunt on wet tile, exactly as it happens forty times a day." },
+    ] },
+    { advance_text = "Don't hurry.", blocks = [
+        { type = "paragraph", content = "You do not hurry it up and you do not fix it. He looks at your tits from eighteen inches away with his own cousin's whole town in the pool behind him, and his ears go red, and he does not look away." },
+    ] },
+    { advance_text = "Move on.", blocks = [
+        { type = "paragraph", content = "Then you stand up, tuck it, and carry on down the wall, and he stays in that water a full forty minutes longer than he needs to." },
+        { type = "thought_bubble", content = "He will be back on Friday with the book. Both of those things are now true at the same time." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Finish the round.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 40, effects = [
+  { targetType = "npc", npcId = "npc_casper", trait = "lust", op = "add", value = 5, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 6, clamp = true },
+  { targetType = "player", trait = "steam", op = "add", value = 1, clamp = true },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE ANCHOR'S REMAINING DEPTH — more hours at the pool, on the people already
+# scheduled there. No new locations, no new characters: the measured release
+# shape, applied inside v0.1 (references/the-release.md).
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "rung_june_stories"
+name        = "June, on the old house"
+description = "Triggerless rung off hub_june_pool, her relation 20. Her ceiling is CRUDE IN SPEECH about anybody, hands on her own account — this is the speech half, and it is the game's history told by someone who was in the water for it. +4 her relation, 35 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "What went on"
+blocks = [
+  { type = "paragraph", content = "You ask her what actually went on. Not the board. The rooms." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "You want the truth or the version I tell at the chapel?" },
+  { type = "cascade", props = { beats = [
+    { advance_text = "The truth.", blocks = [
+        { type = "paragraph", content = "She settles back on the bench and puts her arms along the tile." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "Two girls on the floor in wraps. Oil on the board. And a list upstairs, and men on it, and every wife in this town knew whose husband was on that list." },
+    ] },
+    { advance_text = "Ask if anyone minded.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "Course they minded. They minded and they came anyway, because where else were they going to get their backs done." },
+        { type = "paragraph", content = "She says it flat. No scandal in it at all." },
+    ] },
+    { advance_text = "Ask about her.", blocks = [
+        { type = "paragraph", content = "She takes a while over this one." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "I had a girl do me in the private hour twice in nineteen seventy-eight. Best money I ever spent. My husband thought I was at the mill social." },
+        { type = "paragraph", content = "Then she looks at you sideways to see what your face is doing, which is what she always does after she has handed you something." },
+    ] },
+    { advance_text = "Don't flinch.", blocks = [
+        { type = "paragraph", content = "You do not flinch. You ask whether the girl was any good." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "She was twenty-two and she knew exactly what she was doing, which is more than I could say for my husband after nine years." },
+        { type = "paragraph", content = "She laughs at the skylight. It goes round the room off the tiles. Two women at the far end look over and smile at nothing in particular." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Get out and get on.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 35, effects = [
+  { targetType = "npc", npcId = "npc_june", trait = "relation", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_warren_signed"
+name        = "The grade, signed"
+description = "Triggerless rung off hub_warren_pool, his lust 35 + PROPRIETY paid. The trade completed: twenty-eight bodies to sixty, which is the legal ceiling on how many people can be in the building at once. Raises HOUSE and costs propriety — the counterweight doing its job. +12 house, -4 propriety, +2 his relation, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Sixty bodies"
+blocks = [
+  { type = "paragraph", content = "He brings the form to the pool. Not the office. The pool, on a Thursday, in a folder he keeps out of the water on the tile." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_warren" }, content = "Second exit is done. Boiler's certified. That leaves the councillor who has to be persuaded it's safe." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Ask him to sign it.", blocks = [
+        { type = "paragraph", content = "He signs it on the tiled edge with his glasses on and his other hand still in the water. Twenty-eight crossed out. Sixty written in." },
+    ] },
+    { advance_text = "Watch him do it.", blocks = [
+        { type = "paragraph", content = "It takes four seconds. Eleven years of Thursdays and a piece of paper that doubles what this building is allowed to be, and it takes four seconds." },
+    ] },
+    { advance_text = "Ask what it cost him.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_warren" }, content = "Nothing yet. It'll cost me in about eight weeks when somebody asks why the Marlow's grade went up the same year its reputation went down." },
+        { type = "paragraph", content = "He puts the folder under his arm and gets out, dripping, and stands there while he dries off." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_warren" }, content = "I've decided I don't mind. That's the part I'd like you to understand, Iris. I've thought about it and I don't mind." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Put it in the frame behind the desk.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 30, effects = [
+  { targetType = "player", trait = "house", op = "add", value = 12, clamp = true },
+  { targetType = "player", trait = "propriety", op = "subtract", value = 4, clamp = true },
+  { targetType = "npc", npcId = "npc_warren", trait = "relation", op = "add", value = 2, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_nell_dawn"
+name        = "Nell at dawn"
+description = "Triggerless rung off hub_nell_pool, her relation 20. The other end of the night: she is still in the water at five and the light comes through the skylight grey. Quiet, and the closest thing the lodger gets to a promise. +4 her relation, +2 energy, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Five in the morning"
+blocks = [
+  { type = "paragraph", content = "Some nights she is still in it at five. The skylight goes from black to grey between one length and the next." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Sit on the edge.", blocks = [
+        { type = "paragraph", content = "You sit on the lip with your feet in and watch her do lengths in the grey. She swims like she is working something off." },
+    ] },
+    { advance_text = "Ask her.", blocks = [
+        { type = "paragraph", content = "You ask what she is doing here. Not tonight. Here, in Hollis Springs, for a season, with no job." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_nell" }, content = "Left somewhere. Didn't want to go anywhere. This place has hot water at four in the morning." },
+    ] },
+    { advance_text = "Leave it there.", blocks = [
+        { type = "paragraph", content = "You do not push it. You have been here five months yourself and you know exactly what that answer is." },
+        { type = "paragraph", content = "She swims to the wall and hangs off the lip beside your feet, and the two of you watch the skylight get light enough to see the mineral stains on it." },
+        { type = "thought_bubble", content = "The card in the merchant's window says the let runs to the end of the season. You wrote that card." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Open at eight.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 30, effects = [
+  { targetType = "npc", npcId = "npc_nell", trait = "relation", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = 2, clamp = true },
+] } }
+
+
+# ── NELL, in the room she rents. Tenant-scoped: dies with her, by design. ────
+
+[[canvases]]
+id          = "hub_nell_room"
+name        = "Nell, in her room"
+description = "Lane-1 standing hub @the_lodgers_room, 11:00-17:00 (her sleeping row gates it via requires_npc). Repeatable. Everything here is tenant-scoped — the room's own content in 3_activities never names her."
+
+[canvases.trigger]
+location      = "the_lodgers_room"
+requires_npc  = "npc_nell"
+npc           = "npc_nell"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "doors_open", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Nell"
+blocks = [
+  { type = "paragraph", content = "The door is never quite shut because it does not fit its frame. The fan is going. She sleeps through the afternoon the way people do who are awake at four." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Wake her."
+targetType = "node"
+nodeId     = "rung_nell_wake.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit on the end of the bed."
+targetType = "node"
+nodeId     = "rung_nell_bed.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_nell", trait_key = "relation", operator = "gte", value = 15 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get in with her."
+targetType = "node"
+nodeId     = "loop_nell_room.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_nell", trait_key = "relation", operator = "gte", value = 30 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask her to stay past the season."
+targetType = "node"
+nodeId     = "rung_nell_stay.base"
+show_when_locked = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_nell", trait_key = "relation", operator = "gte", value = 60 },
+] }
+
+
+[[canvases]]
+id          = "rung_nell_wake"
+name        = "Wake her"
+description = "Triggerless rung off hub_nell_room. Ungated presence floor. +3 her relation, 15 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Half three"
+blocks = [
+  { type = "paragraph", content = "You knock on a door that is already open and she surfaces out of the sheet without opening her eyes." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nell" }, content = "What time is it." },
+  { type = "paragraph", content = "Half three. She says something into the mattress about the state of her life and puts an arm over her face." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Give her ten minutes.", blocks = [
+        { type = "paragraph", content = "She comes out ten minutes later in a towel, drinks a pint of water at the tap in the changing room, and goes and sits in the hot end for an hour with her eyes shut." },
+        { type = "paragraph", content = "That is her morning. It happens at four in the afternoon." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Leave her to it.", config = { destinationType = "specific", locationId = "the_lodgers_room", time_progression_minutes = 15, effects = [
+  { targetType = "npc", npcId = "npc_nell", trait = "relation", op = "add", value = 3, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_nell_bed"
+name        = "The end of the bed"
+description = "Triggerless rung, her relation 15. The room is hot, the fan is going, and neither of them is dressed for a conversation. +4 her relation, +4 arousal, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The fan"
+blocks = [
+  { type = "paragraph", content = "You sit on the end of the mattress. The room runs at thirty degrees off the pipe in the wall and the fan does almost nothing." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Talk.", blocks = [
+        { type = "paragraph", content = "She lies on her front with the sheet across the backs of her thighs and talks about nothing at all. The state of the road. Whether the merchant's coffee is a war crime." },
+    ] },
+    { advance_text = "Don't pretend.", blocks = [
+        { type = "paragraph", content = "She is naked under a sheet that covers about a third of her and neither of you is pretending otherwise. Her back is bare to the base of the spine. There is a swimmer's line across her shoulders that has nearly gone." },
+    ] },
+    { advance_text = "Stay a bit.", blocks = [
+        { type = "paragraph", content = "You stay twenty minutes. Somebody rings the bell in the lobby twice and you let them wait." },
+        { type = "thought_bubble", content = "You have a building to open at eight and a note due Friday, and you are sitting on a lodger's bed at four in the afternoon." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Get back to the desk.", config = { destinationType = "specific", locationId = "the_lodgers_room", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_nell", trait = "relation", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "loop_nell_room"
+name        = "Her room, the afternoon"
+description = "Triggerless LOOP, her relation 30. The second repeatable surface for the lodger and deliberately different from the pool one: no water, no dark, a hot bright room at four in the afternoon with the building open downstairs. Explicit, cycling pool, t5. +2 her relation, +11 arousal, 45 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Four in the afternoon"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/nell_room_afternoon_t5", pool = 6, description = "Two women in bed together in a hot bare room with a fan going and afternoon light.", search_queries = ["two women bed afternoon light bare room", "women together bed fan hot room daylight"] } },
+  { type = "paragraph", content = "You shut the door as far as it goes, which is not far, and get onto the mattress with her." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Get the sheet off.", blocks = [
+        { type = "paragraph", content = "The sheet goes on the floor. She is hot from sleeping and slow with it, and she gets your wrap off you in about four seconds, which she has had practice at." },
+    ] },
+    { advance_text = "Her mouth.", blocks = [
+        { type = "paragraph", content = "She kisses you and works down. Her mouth on your tits, teeth on the nipple, and her hand already between your legs and on your cunt before she has got below your ribs." },
+    ] },
+    { advance_text = "Let her.", blocks = [
+        { type = "paragraph", content = "Then her mouth on your cunt in the flat afternoon light with her hands under your ass, holding you up to it. She licks you slowly and does not hurry once, because there is a fan going and nowhere to be." },
+    ] },
+    { advance_text = "Come.", blocks = [
+        { type = "paragraph", content = "You come on her tongue with a fistful of the mattress and your heels dug in either side of her, and she keeps her mouth on your clit through the whole of it." },
+    ] },
+    { advance_text = "Turn her over.", blocks = [
+        { type = "paragraph", content = "Then you get her onto her back and do her properly, two fingers in her cunt and your mouth on her clit, until she comes with her thighs shaking and one hand flat on the wall." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "paragraph", content = "The fan turns. The room is thirty degrees and both of you are wrecked with it." },
+        { type = "paragraph", content = "Downstairs the bell goes in the lobby, twice, and then a third time, and then stops." },
+        { type = "thought_bubble", content = "That was two dollars. You have started letting the bell ring out about once a week." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Go down and open up again.", config = { destinationType = "specific", locationId = "the_lodgers_room", time_progression_minutes = 45, effects = [
+  { targetType = "npc", npcId = "npc_nell", trait = "relation", op = "add", value = 2, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 11, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_nell_stay"
+name        = "Ask her to stay"
+description = "Triggerless rung, her relation 60 — ABOVE the v0.1 ceiling on purpose. This is the release's second locked door: the lodger's season ends, and whether she can be asked to stay is the want the next release sells. Renders greyed with the action showing (the-voice.md R4)."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Past the season"
+blocks = [
+  { type = "paragraph", content = "The card in the merchant's window says the let runs to the end of the season. You wrote that card." },
+]
+exit_block = { type = "location", text = "Not yet.", config = { destinationType = "specific", locationId = "the_lodgers_room", time_progression_minutes = 5 } }
+
+
+# ── More of the cast, in the rooms their schedules already put them in. ─────
+
+[[canvases]]
+id          = "hub_del_changing"
+name        = "Del, the linen count"
+description = "Lane-1 standing hub @the_changing_room, 15:00-17:30 (her third row gates it via requires_npc). A different room and window from her scrub hub, so engine.md §19 is satisfied. Repeatable."
+
+[canvases.trigger]
+location      = "the_changing_room"
+requires_npc  = "npc_del"
+npc           = "npc_del"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "doors_open", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Del"
+blocks = [
+  { type = "paragraph", content = "Three o'clock and she is counting linen on the bench, which takes twenty minutes and which she makes last two and a half hours, because it is the only part of her day she is allowed to sit down for." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Count it with her."
+targetType = "node"
+nodeId     = "rung_del_linen.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask her about the thirty-one years."
+targetType = "node"
+nodeId     = "rung_del_years.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_del", trait_key = "relation", operator = "gte", value = 20 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask her what she'd do with the place."
+targetType = "node"
+nodeId     = "rung_del_plan.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_del", trait_key = "relation", operator = "gte", value = 35 },
+] }
+
+
+[[canvases]]
+id          = "rung_del_linen"
+name        = "Count the linen"
+description = "Triggerless rung off hub_del_changing. Ungated. Two women folding towels, which is where every real conversation in a working building happens. +2 her relation, +1 service, 35 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Forty in, forty out"
+blocks = [
+  { type = "paragraph", content = "Forty out in the morning, forty back in the basket, and about thirty-four of them accounted for by six o'clock." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Sit down and fold.", blocks = [
+        { type = "paragraph", content = "She folds one in four seconds. You are up to about seven. She has not commented on the gap since August, which is her way of saying it has closed enough." },
+    ] },
+    { advance_text = "Talk.", blocks = [
+        { type = "paragraph", content = "Who was in. Whose back is worse. Which of the Tuesday women has stopped coming and whether that is the hours or the hip." },
+    ] },
+    { advance_text = "Get to the end of the basket.", blocks = [
+        { type = "paragraph", content = "Six missing. Six is a good day. Perrine used to write the number in a book and Del stopped doing that in April without being told to." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Take the stack through.", config = { destinationType = "specific", locationId = "the_changing_room", time_progression_minutes = 35, effects = [
+  { targetType = "npc", npcId = "npc_del", trait = "relation", op = "add", value = 2, clamp = true },
+  { targetType = "player", trait = "service", op = "add", value = 1, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_del_years"
+name        = "Thirty-one years"
+description = "Triggerless rung, her relation 20. Why a woman stays in one building for thirty-one years, answered without a single sentimental word. +4 her relation, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Since eighty-nine"
+blocks = [
+  { type = "paragraph", content = "You ask how she ended up here. She folds three towels before she answers, which is her equivalent of clearing her throat." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "Mill shut in eighty-eight. Your grandmother had a card in the merchant's window in the January." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Ask about her grandmother.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "Hard woman. Fair, mind. She had that board full and she worked the floor herself till she was sixty-one." },
+        { type = "paragraph", content = "Full board. She says it without any weight on it at all, which is how you know she means all nine lines." },
+    ] },
+    { advance_text = "Ask why she stayed.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "Where was I going? And it's warm, and it's the same forty people, and once you're any good at this there's about four buildings in the country where it's worth anything." },
+    ] },
+    { advance_text = "Ask about her husband.", blocks = [
+        { type = "paragraph", content = "She looks at you for a second to see whether you are asking properly or being polite." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "Died two thousand and six. I did four days a week before that and six after, and your aunt never once asked me why." },
+        { type = "paragraph", content = "Then she picks the basket up and puts it on the bench between you, which ends it." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Carry on folding.", config = { destinationType = "specific", locationId = "the_changing_room", time_progression_minutes = 30, effects = [
+  { targetType = "npc", npcId = "npc_del", trait = "relation", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_del_plan"
+name        = "What she'd do with it"
+description = "Triggerless rung, her relation 35. The woman who has run this floor for thirty-one years, asked what she would do if it were hers. This is the game's own roadmap, spoken by the person best placed to write it. +5 her relation, +2 house, 35 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "If it were yours"
+blocks = [
+  { type = "paragraph", content = "You ask her what she would do with the place if it were hers. Nobody has asked her that in thirty-one years, and it takes her a moment to work out that you mean it." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Wait.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "Second slab. Two of us working, one room. That's forty dollars a day you're leaving on the floor." },
+    ] },
+    { advance_text = "And after that.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "Price it properly. Open the upstairs. Put the four lines back and charge what they're worth, not what they were worth when the mill was going." },
+    ] },
+    { advance_text = "Ask her about upstairs.", blocks = [
+        { type = "paragraph", content = "She stops folding." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "There's four rooms up there and a bath in each of them. Your grandmother's list was fourteen names long and every one of them paid a year in advance." },
+        { type = "paragraph", content = "The stairs go up from the lobby. The chain has been on the third step since nineteen eighty-nine, and Del has walked past it four thousand times." },
+        { type = "thought_bubble", content = "She has thought about this. She has thought about this for years and nobody ever asked her." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Finish the count.", config = { destinationType = "specific", locationId = "the_changing_room", time_progression_minutes = 35, effects = [
+  { targetType = "npc", npcId = "npc_del", trait = "relation", op = "add", value = 5, clamp = true },
+  { targetType = "player", trait = "house", op = "add", value = 2, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "hub_warren_desk"
+name        = "Warren, at the desk"
+description = "Lane-1 standing hub @the_front_desk, Thursdays 20:00-20:45 (his second row gates it via requires_npc). The other half of the man: he settles up at the counter, dressed, twenty minutes after whatever happened in the water. Repeatable."
+
+[canvases.trigger]
+location      = "the_front_desk"
+requires_npc  = "npc_warren"
+npc           = "npc_warren"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "doors_open", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Settling up"
+blocks = [
+  { type = "paragraph", content = "Twenty past eight and he is at the counter with his coat on and his hair wet, counting two dollars out of a leather purse, the way he has on a Thursday for eleven years." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take his two dollars."
+targetType = "node"
+nodeId     = "rung_warren_counter.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask about the committee."
+targetType = "node"
+nodeId     = "rung_warren_the_councillor.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_warren", trait_key = "relation", operator = "gte", value = 30 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep him talking about the file."
+targetType = "node"
+nodeId     = "rung_warren_file.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_warren", trait_key = "relation", operator = "gte", value = 15 },
+] }
+
+
+[[canvases]]
+id          = "rung_warren_counter"
+name        = "Two dollars"
+description = "Triggerless rung off hub_warren_desk. Ungated. The gap, in its purest form: whatever happened in the water, this is a man paying two dollars at a counter. Banded on his lust. +2 his relation, 10 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The counter"
+blocks = [
+  { type = "paragraph", content = "He puts two dollars on the counter, not in your hand, and takes the token off the hook and puts it in the bowl himself." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_warren", trait_key = "lust", operator = "lt", value = 25 },
+  ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_warren" }, content = "Thank you, Miss Marlow. Same time next week." },
+    { type = "paragraph", content = "And that is the whole of it, and he is out of the door and up the street, and the till has two dollars more in it." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_warren", trait_key = "lust", operator = "gte", value = 25 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He puts the two dollars down with his hair still wet and his collar dark at the back, forty minutes after having his mouth on you in the far corner of the hot end." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_warren" }, content = "Thank you, Miss Marlow." },
+    { type = "paragraph", content = "The same four words, in the same voice, with the same small nod. He has never once slipped. It is the most disciplined thing you have ever watched a person do." },
+    { type = "thought_bubble", content = "That is not shame. You worked that out in September. That is the whole thing working exactly as he wants it to." },
+  ] },
+]
+exit_block = { type = "location", text = "Put it in the till.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 10, effects = [
+  { targetType = "npc", npcId = "npc_warren", trait = "relation", op = "add", value = 2, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_warren_file"
+name        = "The Marlow's file"
+description = "Triggerless rung, his relation 15. He has held the building's paperwork since Perrine's day and knows things about it she never told anybody. +4 his relation, +2 house, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Since eighty-six"
+blocks = [
+  { type = "paragraph", content = "He has had the Marlow's file since nineteen eighty-six. Every grade, every complaint, every application, and one letter from the county in nineteen ninety-two that he mentions twice before you ask about it." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Ask about ninety-two.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_warren" }, content = "Somebody complained about what went on upstairs. Anonymously, which in a town this size means we all knew who." },
+    ] },
+    { advance_text = "Ask what happened.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_warren" }, content = "Nothing. It was three years after she'd already shut it. She wrote back saying so and my predecessor filed it and that was the end of it." },
+        { type = "paragraph", content = "He straightens the two dollars on the counter so the edges line up." },
+    ] },
+    { advance_text = "Ask what it would take now.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_warren" }, content = "A complaint in writing, from somebody prepared to put a name on it, about something specific. In eleven years I have had none of those about this building." },
+        { type = "paragraph", content = "Then he says goodnight, and the door does the thing it does, and you stand at the counter for a while with two dollars in your hand." },
+        { type = "thought_bubble", content = "*From somebody prepared to put a name on it.* He was answering the question you did not ask." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Lock up.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_warren", trait = "relation", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "house", op = "add", value = 2, clamp = true },
+] } }
+
+
+# ── Ivo at dawn, Casper's Saturday scrub, June in winter, Nell in the water. ─
+
+[[canvases]]
+id          = "rung_ivo_dawn"
+name        = "The dawn stoke"
+description = "Triggerless rung off hub_ivo_boiler, reached in his 05:00-08:00 window. Ungated. Two people awake in a building nobody else is in yet. +3 his relation, +2 energy, 40 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Five o'clock"
+blocks = [
+  { type = "paragraph", content = "He is up at five to bring the outlet back to temperature before the doors. It takes three hours and it has to be done by hand because the mixing valve is a hundred and thirty years old." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Come down with coffee.", blocks = [
+        { type = "paragraph", content = "You bring two cups down the eleven steps. He takes his without comment and puts it on the bench where it goes cold, every morning, without fail." },
+    ] },
+    { advance_text = "Watch the needle.", blocks = [
+        { type = "paragraph", content = "Thirty-nine at five. Forty-one by six. Forty-four at ten to eight, which is where it wants to be when the first of them gets in." },
+    ] },
+    { advance_text = "Sit on the third step.", blocks = [
+        { type = "paragraph", content = "You sit on the third step with the towel on it that you did not put there and watch a man bring a building up to temperature." },
+        { type = "paragraph", content = "Nobody upstairs has ever seen this happen. Perrine came down twice in fifteen years." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Go up and open.", config = { destinationType = "specific", locationId = "the_boiler", time_progression_minutes = 40, effects = [
+  { targetType = "npc", npcId = "npc_ivo", trait = "relation", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = 2, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_casper_scrub"
+name        = "The scrub he asked for"
+description = "Triggerless rung off hub_casper_pool, SERVICE 15. He said it in front of a full pool as a joke and neither of you treated it as one. Explicit-adjacent, and the last rung before his loop. +5 his lust, +4 money (clamp FALSE), 45 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Half twelve"
+blocks = [
+  { type = "paragraph", content = "He said half twelve in front of eleven people and you wrote it in the book, which made it a booking rather than a remark." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Put him on the slab.", blocks = [
+        { type = "paragraph", content = "Face down, forehead on his folded arms, on the same marble your grandmother worked. He has not been in this room since he was about nine." },
+    ] },
+    { advance_text = "Work him.", blocks = [
+        { type = "paragraph", content = "Grit soap and long pulls from the base of the spine out over the hip. He is a builder's shape and his back is a mess and he says so, into his arms, in a voice that is doing a lot of work." },
+    ] },
+    { advance_text = "Keep going.", blocks = [
+        { type = "paragraph", content = "You do the backs of his thighs. He is hard against the marble and both of you know it and neither of you mentions it, because that is what this room is and it is the first time he has understood that." },
+    ] },
+    { advance_text = "Hose him down.", blocks = [
+        { type = "paragraph", content = "He pays two dollars for the bath and two for the scrub at the desk, and puts a five in the bowl for the lockers, which is not a thing anybody does." },
+        { type = "thought_bubble", content = "Four dollars. Off a man who takes a hundred and thirty-five off you on Friday." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Turn the room round.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 45, effects = [
+  { targetType = "npc", npcId = "npc_casper", trait = "lust", op = "add", value = 5, clamp = true },
+  { targetType = "player", trait = "money", op = "add", value = 4, clamp = false },
+] } }
+
+
+[[canvases]]
+id          = "rung_june_winter"
+name        = "June, on the winter"
+description = "Triggerless rung off hub_june_pool, her relation 25. What the water is actually for, in a valley where the road shuts. +4 her relation, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Forty years of Tuesdays"
+blocks = [
+  { type = "paragraph", content = "You ask her whether she has ever missed one. She thinks about it properly, which takes a while, because forty years is two thousand Tuesdays." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "Four. Two when I had the girls. One when my mother went. And the February the road shut and I couldn't get down the hill." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Ask about the February.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "Nineteen eighty-four. Worst week this valley's had. Everything shut except this, and I was stuck at the top with two kids and no coal." },
+    ] },
+    { advance_text = "Ask what she did.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "Walked down on the Thursday. Two miles on the ice with the pair of them. Your grandmother had the door open and forty people in here and she never charged one of us that week." },
+    ] },
+    { advance_text = "Let that land.", blocks = [
+        { type = "paragraph", content = "She says it to the skylight, as always, and then does the sideways look." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "So when people in this town start telling me what the Marlow's turning into, I remind them whose door was open in eighty-four. Usually shuts them up." },
+        { type = "thought_bubble", content = "She has been fighting on your behalf in rooms you are not in. She has never once mentioned it." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Get her a towel.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 30, effects = [
+  { targetType = "npc", npcId = "npc_june", trait = "relation", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_nell_talk"
+name        = "In the water with Nell"
+description = "Triggerless rung off hub_nell_pool, her relation 20. Two people who both left somewhere, in a pool at two in the morning, not asking each other about it. +3 her relation, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Two in the morning"
+blocks = [
+  { type = "paragraph", content = "She hangs off the lip at the deep end and you sit on the edge with your feet in, which is the arrangement most nights when neither of you can be bothered to swim." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Ask about the swimming.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_nell" }, content = "County squad till I was seventeen. Six mornings a week from the age of nine. Then I stopped, on a Tuesday, and never got in a pool again till March." },
+    ] },
+    { advance_text = "Ask what happened on the Tuesday.", blocks = [
+        { type = "paragraph", content = "She goes under, comes up, wipes her face, and answers a completely different question about the merchant's coffee." },
+        { type = "paragraph", content = "You let her. You have your own version of that Tuesday and you would not answer it either." },
+    ] },
+    { advance_text = "Stay a while.", blocks = [
+        { type = "paragraph", content = "So you sit in the dark in a tiled room with a woman who will be gone by spring and talk about absolutely nothing for forty minutes." },
+        { type = "thought_bubble", content = "The card said end of the season. You have started thinking about the card." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Leave her to her lengths.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 30, effects = [
+  { targetType = "npc", npcId = "npc_nell", trait = "relation", op = "add", value = 3, clamp = true },
+] } }
+
+
+# ── One more long surface per character, in the room their schedule puts them. ─
+
+[[canvases]]
+id          = "rung_del_the_key"
+name        = "Ask Del where the key is"
+description = "Triggerless rung off hub_del_scrub, her relation 45 + HOUSE 35. The padlock on the third step has a key and one living person knows where it is. Pays out the release's main locked door as a WANT rather than opening it. +4 her relation, +3 house, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The third step"
+blocks = [
+  { type = "paragraph", content = "You ask her, straight out, in the scrub room, with the door open and the hose running." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Wait.", blocks = [
+        { type = "paragraph", content = "She turns the tap off. That is not a small thing — she has never once stopped working for a conversation in five months." },
+    ] },
+    { advance_text = "Let her answer.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "I know where it is. I've known since eighty-nine. She gave it me to hold the day she put the chain on, and I've not had it out of the tin since." },
+    ] },
+    { advance_text = "Ask why she kept it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "Because she asked me to, and because she never asked for it back, which is two different things and I've had thirty-one years to think about both of them." },
+    ] },
+    { advance_text = "Ask for it.", blocks = [
+        { type = "paragraph", content = "She looks at you for a long moment with her sleeves rolled to the shoulder and her hands wet." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "Not yet. When you know what you're opening it for, ask me again, and I'll go and get the tin." },
+    ] },
+    { advance_text = "Accept that.", blocks = [
+        { type = "paragraph", content = "It is not a refusal and both of you know it. It is a woman of fifty-six declining to hand a building's history to somebody who has not decided what she wants with it." },
+        { type = "thought_bubble", content = "*When you know what you're opening it for.* She has thought about this for thirty-one years and she has just made it your question." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Turn the tap back on.", config = { destinationType = "specific", locationId = "the_scrub_room", time_progression_minutes = 30, effects = [
+  { targetType = "npc", npcId = "npc_del", trait = "relation", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "house", op = "add", value = 3, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_ivo_room_in_town"
+name        = "The room in town"
+description = "Triggerless rung off hub_ivo_boiler, his relation 30. He has a room he pays for and has not slept in since two thousand and nine. +5 his relation, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Eleven dollars a month"
+blocks = [
+  { type = "paragraph", content = "There is a room above the garage that he pays eleven dollars a month for and that he has not slept in since two thousand and nine." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Ask why he keeps it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_ivo" }, content = "Address. You need one." },
+    ] },
+    { advance_text = "Ask about the valve.", blocks = [
+        { type = "paragraph", content = "You point out that the valve holds now and he could sleep eight hours in a bed in a room with a window." },
+        { type = "paragraph", content = "He turns the logbook round to face him and writes the pressure in it, which is what he does instead of answering." },
+    ] },
+    { advance_text = "Wait him out.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_ivo" }, content = "Sixteen years I've listened to this building at night. I'd not sleep in a quiet room." },
+    ] },
+    { advance_text = "Ask what he'd do with it.", blocks = [
+        { type = "paragraph", content = "You ask what he would do if the Marlow went. He does not answer that one at all, and the silence goes on long enough that you understand it was the wrong question and also that it was the right one." },
+        { type = "thought_bubble", content = "A cot, a boiler, and eleven dollars a month for an address. That is the whole of what this building pays a man who could shut it down." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Leave it.", config = { destinationType = "specific", locationId = "the_boiler", time_progression_minutes = 30, effects = [
+  { targetType = "npc", npcId = "npc_ivo", trait = "relation", op = "add", value = 5, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_june_the_town"
+name        = "June, on the town"
+description = "Triggerless rung off hub_june_pool, her relation 40. The clearest statement in the game of what Hollis Springs will and will not tolerate, from the only person entitled to make it. +3 her relation, +3 propriety, 35 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "What it'll stand"
+blocks = [
+  { type = "paragraph", content = "You ask her, in the hot end on a Tuesday, how far this town will actually let you go." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Let her think.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "Further than you'd credit, and not as far as you'll want." },
+    ] },
+    { advance_text = "Ask what the rule is.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "Nobody minds what happens in here. What they mind is being made to say they know. That's the whole rule and it's been the rule since before the war." },
+    ] },
+    { advance_text = "Ask about the chapel.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "Half the chapel's been in this water this month and four of them on that slab. They'll sing on Sunday and be back Tuesday and not one of them thinks they're a hypocrite, because they're not." },
+    ] },
+    { advance_text = "Ask what would break it.", blocks = [
+        { type = "paragraph", content = "She goes quiet, which she does not do." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_june" }, content = "Somebody's daughter. Somebody's husband where the wife has to hear it. Or you putting it on the board in gold where a stranger can read it off the wall." },
+        { type = "paragraph", content = "You have it on the board in pencil, under the gold, where you have to be standing at the desk to see it. She knows that. She was telling you that you got it right." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Get her a towel.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 35, effects = [
+  { targetType = "npc", npcId = "npc_june", trait = "relation", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = 3, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_warren_the_councillor"
+name        = "The councillor"
+description = "Triggerless rung off hub_warren_desk, his relation 30. The other half of his power: he sits on the committee that could shut the building, and he has been quietly managing it for eleven years. +4 his relation, +3 house, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Eleven years of managing it"
+blocks = [
+  { type = "paragraph", content = "It comes out at the counter on a Thursday, sideways, while he is counting two dollars out of a leather purse." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Let him get to it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_warren" }, content = "There's a committee. Licensing, public health, the road. It meets four times a year and I write the papers for it." },
+    ] },
+    { advance_text = "Ask what he writes.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_warren" }, content = "For eleven years I've written that the Marlow is compliant, well run and of significant local value. Which is true. It also happens to end the discussion before it starts." },
+    ] },
+    { advance_text = "Ask what would change it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_warren" }, content = "A named complaint. Or somebody on that committee deciding to be interested. There's one who would like to be, and he lives forty minutes away, and he has never once been in the building." },
+    ] },
+    { advance_text = "Ask why he's telling you.", blocks = [
+        { type = "paragraph", content = "He puts the purse away and squares the two dollars up on the counter with one finger." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_warren" }, content = "Because you should know what you're standing on, Miss Marlow. And because I would rather you heard it from me at a counter than in a letter." },
+        { type = "thought_bubble", content = "Eleven years of papers. He was protecting Perrine's building before he ever wanted anything in it." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Lock up behind him.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_warren", trait = "relation", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "house", op = "add", value = 3, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_casper_what_he_wants"
+name        = "What Casper actually wants"
+description = "Triggerless rung off hub_casper_desk, his relation 40. Five months of Fridays, said out loud in a lobby. The reversal, named. +5 his relation, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Friday, late"
+blocks = [
+  { type = "paragraph", content = "It is twenty to seven and he has not opened the book, and he has been standing at the counter for eleven minutes talking about the road." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Ask him.", blocks = [
+        { type = "paragraph", content = "So you ask what he actually wants, because it is a Friday in a lobby and there is nobody else in the building." },
+    ] },
+    { advance_text = "Let him try.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_casper" }, content = "I wanted the building. Everybody knows that. My dad told me it'd come to us since I was nine." },
+    ] },
+    { advance_text = "Wait.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_casper" }, content = "And then it didn't, and I've had five months of coming in here on a Friday to take money off you, and the thing nobody warned me about is that I look forward to it." },
+    ] },
+    { advance_text = "Don't help him.", blocks = [
+        { type = "paragraph", content = "You let that sit in the lobby for a second, under a board with seven lines crossed out and one line in pencil." },
+    ] },
+    { advance_text = "Let him finish.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_casper" }, content = "I don't want the building. I want to be in it. That's the whole of it and I've made a proper mess of saying it." },
+        { type = "thought_bubble", content = "He has come every Friday for five months. Two of those months, he had no legal need to come in person at all." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Tell him it's Friday.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 30, effects = [
+  { targetType = "npc", npcId = "npc_casper", trait = "relation", op = "add", value = 5, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_nell_season"
+name        = "The end of the season"
+description = "Triggerless rung off hub_nell_room, her relation 45. The rotating slot's whole point, said between two people who both know the date. Pays into the release's second locked door. +3 her relation, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The date on the card"
+blocks = [
+  { type = "paragraph", content = "The let runs to the end of the season, which is a date, and both of you know what it is, and neither of you has said it in this room." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Say the date.", blocks = [
+        { type = "paragraph", content = "So you say it. She is lying on her front with the sheet across the backs of her thighs and she does not move for a second." },
+    ] },
+    { advance_text = "Let her answer.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_nell" }, content = "I know when it is. I've known since I paid the first thirty-five." },
+    ] },
+    { advance_text = "Ask what she's doing after.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_nell" }, content = "Somewhere with a coast, probably. That was the plan in March and it's still technically the plan." },
+        { type = "paragraph", content = "Technically. She puts a lot of work into that word and then looks at you to see whether it landed." },
+    ] },
+    { advance_text = "Don't ask her to stay.", blocks = [
+        { type = "paragraph", content = "You do not ask her to stay. You are not sure whether that is restraint or cowardice and you have gone round it four times this week without getting an answer." },
+    ] },
+    { advance_text = "Leave it there.", blocks = [
+        { type = "paragraph", content = "She turns over and asks whether the water is up to temperature yet, which is her way of ending a conversation, and you tell her forty-four and dead steady." },
+        { type = "thought_bubble", content = "Everybody who takes that room has left somewhere. Nobody who takes it has ever stayed." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Go and open up.", config = { destinationType = "specific", locationId = "the_lodgers_room", time_progression_minutes = 30, effects = [
+  { targetType = "npc", npcId = "npc_nell", trait = "relation", op = "add", value = 3, clamp = true },
+] } }
