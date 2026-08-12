@@ -23,6 +23,11 @@ id             = "<slug>"
 title          = "<Title>"
 description     = "<one paragraph — the fantasy, not the plot>"
 starting_canvas = "<canvas_id>"
+
+# ⚠️ THIS SWITCHES THE GUIDANCE PAGE ON. It does not author it.
+# With no [[quest_cards]] the sidebar shows a "Quests" entry leading to a page
+# with a heading and nothing under it — which is exactly what shipped once.
+# One card per ascent-tier band and one per character: references/the-voice.md R2.
 quests_engine   = "v2"
 
 [settings]
@@ -87,6 +92,15 @@ bands = [
 #
 # Cold rooms are allowed: the reference game had no sexual content in 8 of its
 # 25 locations. The floor is 60% of locations carrying heat, not 100%.
+#
+# ⚠️ BUT ANSWER THIS FIRST, BEFORE ANY OF THE ABOVE — references/the-map.md:
+#   · Could a stranger DRAW this building from the graph? Room-by-room jobs all
+#     pass on a world with no outside and no beds. One shipped that way.
+#   · Where does every character SLEEP? Declare it in board.map.homes, or
+#     "offscreen" if they genuinely live elsewhere. It cannot be inferred.
+#   · If she travels anywhere, what does she cross? A domestic premise with no
+#     exterior can only recycle its own interior — and that exterior is the only
+#     renewable source of new characters it will ever have.
 
 [[locations]]
 id                   = "<location_id>"
@@ -96,6 +110,11 @@ image                = "locations/<location_id>.jpg"
 image_search_queries = ["<query>", "<query>"]     # find-media fills the file
 entry_from           = "<other_location_id>"
 navigation_order     = ["<neighbour_id>"]
+# Travel friction — put it on the BRIDGES between zones, never on every room.
+# This is what makes a schedule grid matter: with free instant travel, "who is
+# where at which hour" is a lookup table. `time` is minutes on the day clock;
+# any other key deducts that player trait. engine.md §22.
+# costs              = { time = 20, energy = 5 }
 # Locked rooms only — and every locked room needs a beat that unlocks it:
 # entry_conditions   = { version = "1.0", items = [
 #   { type = "flag", subject = "player", flag_key = "<flag>", operator = "is_true" } ] }

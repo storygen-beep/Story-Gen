@@ -1,6 +1,6 @@
 ---
 name: author-game-v2
-description: EXPLICIT-INVOKE ONLY — the experimental v2 of game authoring, run when the user asks for "/author-game-v2", "author-game v2", "v2 on <slug>", or "start a v2 game". Authors adult sandbox games as a never-ending release stream rather than as a story with chapters: one ascent meter that buys access, locations that must be filled before new ones open, explicit content living in the surfaces the player returns to, and every release ending on a visible locked door. Ships a runnable scoreboard (scripts/gates.py) whose ten thresholds each came from measuring a top game's own source. Do NOT use for a plain "start a new game" / "continue writing <game>" / "add an NPC or beat to games/<slug>" request; those belong to the incumbent author-game skill until the user promotes this one.
+description: EXPLICIT-INVOKE ONLY — the experimental v2 of game authoring, run when the user asks for "/author-game-v2", "author-game v2", "v2 on <slug>", or "start a v2 game". Authors adult sandbox games as a never-ending release stream rather than as a story with chapters: one ascent meter that buys access, locations that must be filled before new ones open, explicit content living in the surfaces the player returns to, and every release ending on a visible locked door. Ships a runnable scoreboard (scripts/gates.py) whose thresholds came from measuring a top game's own source and, for the world/guidance/economy/prose gates, a field of 18 shipped sandboxes. Do NOT use for a plain "start a new game" / "continue writing <game>" / "add an NPC or beat to games/<slug>" request; those belong to the incumbent author-game skill until the user promotes this one.
 ---
 
 # author-game v2 — the release stream
@@ -51,6 +51,13 @@ anything earlier:
 **Every milestone names the standing content it turns on.** A milestone that opens nothing
 is a dead end, and `gates.py` will say so.
 
+⚠️ **Those three answer WHEN content fires. They do not answer WHICH SCREEN IT LIVES ON, and that
+is a separate question with its own file — `references/the-surfaces.md`.** Ask *who is this aimed
+at*: a person → their hub · the room or herself → its own located canvas · her, done to her → a
+substitution. They never share an exit block, and a repeatable location screen caps at 8 choices.
+A game that obeyed every other rule here shipped 23 choices on one front desk and scored 18/18,
+because nothing said a location page had a shape.
+
 ## Dispatch
 
 Resolve the game slug from the request, then read `games/<slug>/v2_state.json`:
@@ -58,9 +65,14 @@ Resolve the game slug from the request, then read `games/<slug>/v2_state.json`:
 | `phase` | do this | reference |
 |---|---|---|
 | *(no state file)* | write the Want, create the state file | `references/the-want.md` |
-| `want` | lay down the world | `references/the-board.md` |
-| `board` | build v0.1 | `references/the-release.md` (§ first release) |
+| `want` | lay down the world | `references/the-board.md` + `the-map.md` + `the-economy.md` |
+| `board` | build v0.1 | `references/the-release.md` (§ first release) + `the-voice.md` |
 | `release` | run the loop — pitch, attack, write, gate, ship, log | `references/the-release.md` |
+
+**The world files, all read in the board phase:** `the-board.md` (fill, meters, cast) ·
+`the-map.md` (the world as a place someone could draw) · `the-surfaces.md` (which screen each
+piece of content lives on) · `the-economy.md` (what money is for) · `the-voice.md` (how the game
+talks to the player about itself) · `register.md` (how the prose reads once they click).
 
 The agent roster for each phase is in `references/agents.md`. The state schema is in
 `references/state.md`. Engine facts are in `references/engine.md` — and **only** there.
@@ -84,6 +96,19 @@ The agent roster for each phase is in `references/agents.md`. The state schema i
 - **The person is the product.** Across ~11,000 player comments, praise for the porn itself
   scored lowest of every theme; what players praise is content volume, who the performer is,
   and attachment to a character. Swapping a performer has killed games.
+- **Where a property cannot be inferred from the TOML, the BOARD DECLARES IT and the gate checks
+  the game against its own declaration.** This held in all four doctrine studies and is now the
+  standard shape — where each character sleeps, which tiers owe guidance cards, what the currency
+  is. Do not build a gate that guesses intent; build a field that states it. A gate with no
+  declaration to check against reports **n/a**, never a pass: an absence is not a pass.
+- **Two voices, and they are different jobs.** `references/register.md` governs what the player
+  reads **after** a click. `references/the-voice.md` governs everything else — room names, button
+  labels, guidance cards, the words under a meter. A label is UI and must say what clicking does;
+  the register lives in the paragraph the click produces. Writing both in the same voice is how a
+  game ends up with a most-clicked button nobody can parse.
+- **When a gate you just wrote fails a game, check the skill before blaming the game.** A gate
+  built for locked doors fired on seven of eight and every one was following `engine.md` §15
+  correctly. A check that fails a game for obeying the doctrine is a bug in the check.
 - **An explicit beat stays on the body for its whole length** — `references/register.md`. If the
   beat's last sentence is about what it *means* rather than what is *happening*, it has pivoted
   and will fail the floor. This defect recurred three times in three increments, authored each

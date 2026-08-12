@@ -5,6 +5,338 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-12 — **The missing axis: `the-surfaces.md`, and the sentence of mine that caused Steam**
+
+`games/steam` was authored in a clean session by a reader of this skill, with no context carried
+over — the honest validation `back_home` could never be. **It scored 18/18, and its front desk has
+23 choices on one screen.** Full findings: `games/steam/REVIEW.md`. This entry is the fix.
+
+### The cause was a sentence I wrote, with no scope on it
+
+`engine.md` §19's *rule* is narrow and correct: two repeatable canvases binding **the same NPC** at
+the same location with overlapping windows collide, and only one renders. Steam's `hub_front_desk`
+and `hub_spring_street` **bind no NPC at all**, so it never applied to them.
+
+But the paragraph attached to it read *"The fix is the engine's own advice, **and it is also the
+better design**: make the second canvas a triggerless rung and hang it off the existing hub as a
+CHOICE."* No scope, and it calls itself the better design. A careful author applies that everywhere
+— and did. §19 now scopes the advice explicitly and points at the new file.
+
+### What v2 was missing, stated properly
+
+`SKILL.md`'s three content kinds — STANDING / TRIGGERED / MILESTONE — all answer **when content
+fires**. **None answers which screen it lives on.** That axis simply did not exist in v2, so the
+author invented one and picked the shape the loose sentence pointed at.
+
+**New: `references/the-surfaces.md`.** The question is *who is this aimed at* — a person → their
+hub, one per schedule row · the room or herself → its own located canvas · her, done to her → a
+substitution. They never share an exit block. Carries the **object test** (is a person the object of
+the verb? then it is a hub rung; *"Count the till"* is not), **money is not a scene** (11 of Steam's
+23 desk choices are purchases sitting beside *"Look up at the board"*), ungated choices are the
+minority, and the opener moves.
+
+*(The incumbent skill solves this with a four-lane model and states the same separation at
+`lanes.md:96`, including a pronoun-in-the-verb test and the observation that "all Lane 1 =
+transactional menu game". v2's version is organised by **who the content is aimed at** rather than
+by who decides it fires, because that is the question an author can answer while writing, and
+because v1's lane budgets are keyed to arc shapes v2 does not have. Studied, not copied.)*
+
+### Gate 20 · a place is not a catalogue — **measured, not asserted**
+
+Re-pulled the 18-game corpus and counted player-facing links per non-system screen:
+
+```
+median screen ..................... 2 links
+median p90 ........................ 4 links
+screens offering more than 12 ..... ~2% (field median)
+```
+
+**Ceiling set at 8** — double the field's ninetieth percentile — for any repeatable,
+location-bound canvas. Triggerless rungs are exempt; they are link targets, not screens.
+
+The nuance that stopped this being a flat cap: **big screens do exist in good games.** The reference
+game runs 2.9% of its screens above 20 links — and they are *catalogues*: shops, wardrobes,
+character creation. A catalogue is legitimately long. **A place the player returns to daily is not
+a catalogue**, and Steam's error was merging one into the other.
+
+**Verified:** `steam` **18/19** — the gate names all nine offending screens (23, 19, 19, 18, 17, 16,
+14, 12, 12) · `back_home` **13/18**, passes at a max of 7 · `vesper` 5/17, no crash.
+
+### And the thing Steam proved about how doctrine has to be written
+
+Everything encoded as a **required field** came back correct and unprompted: `board.map` with 6/6
+real homes, `board.economy`, `board.guidance`, 24 quest cards, 6/6 ladders with end cards, all
+locations reachable. Everything encoded as **advice** was not: the heat guidance added that same
+morning (*"clear it, do not aim at it"*) produced a game sitting on the floor at 7.6%.
+
+**Second game running.** Declarations and gates hold; paragraphs do not. Every future doctrine
+change should ask which of the two it is before it is written.
+
+---
+
+## 2026-08-12 — **Tier 1 graduated: four studies become doctrine, and the scoreboard grows teeth**
+
+The four studies in `DOCTRINE_GAPS.md` are now reference files, and their checkable half is now in
+`gates.py`. **`back_home` scores 12/17, exit 1** — the ten original gates all still pass, and every
+new failure is a defect the game shipped with. That is the intended outcome: LO's call was one
+scoreboard, not a second unscored tier, because a check that cannot fail is exactly the failure v1
+documented against itself.
+
+**New reference files** — self-contained, no cross-reference to the incumbent skill, written in
+`want / board / release` vocabulary:
+
+- **`references/the-map.md`** — the map is a place, not a room list · residents have homes ·
+  if she travels there is something to travel through · the graph owes the prose · travel friction.
+- **`references/the-voice.md`** — the game's own voice, plain and never performing: labels answer
+  "what happens if I click", every ascent tier carries a visible ladder, name the feeder not the
+  number, nothing retires into silence.
+- **`references/the-economy.md`** — money must gate content · sinks outnumber sources · the
+  obligation is real and has a face · prices move with state · no free uncapped income.
+- **`references/register.md`** expanded — sentences run short, second person is the genre standard,
+  dialogue as a direction not a threshold.
+
+**`gates.py`: +7 gates, +1 lint, and a header that now names two measurement bases.**
+
+```
+11 world reachable          12 residents have homes      13 guidance exists
+15 no chain ends in silence 16 money gates something     17 sinks >= sources
+18 no free uncapped income  19 sentence length (ceiling 14)
+lint · the prose names places the map does not have
+```
+
+**The declare-then-check pattern is now an operating rule**, added to `SKILL.md`: where a property
+cannot be inferred from the TOML, the board declares it and the gate checks the game against its own
+declaration. `state.md` and `templates/board.toml` gain `board.map` (shape, dwelling, exterior,
+**homes**, bridges) and `board.economy` (currency, obligation, **sinks**). A gate with no declaration
+to check against reports **n/a**, never a pass.
+
+**`engine.md` §22–23** — twelve verified facts v2 never had. Locations can charge a per-entry
+`costs = { time, energy }` (`template_import.py:170`, `:1778`; `v2.py:4681`, `:15276`) — the
+mechanical answer to a premise that says *"ten minutes' walk away"* while arriving costs nothing —
+plus `entry_conditions`/`blocked_message`, `offscreen`, `is_container`. And the guidance table is
+`[[quest_cards]]` (`template_import.py:2456-2462`), gated on `quests_engine = "v2"`
+(`v2.py:14711`), whose **conditions use a separate evaluator with no fail-open** (`v2.py:14878`) so
+`version = "1.0"` must never be pasted onto a card.
+
+### ⚠️ One study output was WITHDRAWN on contact with the engine, and it is the most useful thing here
+
+Study 2's R4 proposed a gate requiring every locked door to carry `locked_text`. It was built. It
+fired on **7 of 8 doors in `back_home`** — and then `references/engine.md` **§15, which already
+existed**, turned out to rule the other way and rule deliberately:
+
+> omit `locked_text` and the greyed row shows the action ("Stop pretending it's a secret") — a *want*
+> the player can name, which is what sells the next release … **Prefer the want unless the gate is
+> genuinely obscure.**
+
+Every one of those seven doors was following the skill correctly. **A check that fails a game for
+obeying the doctrine is a bug in the check**, so no gate shipped; R4 was rewritten as *"the wall
+shows the want, the card shows the route"*, and `games/back_home/REVIEW.md` **G2 was withdrawn as
+not-a-defect**. Also added to `SKILL.md`'s operating rules, because the same trap will recur:
+**when a gate you just wrote fails a game, check the skill before blaming the game.**
+
+### Two other corrections the build forced
+
+- **`back_home` has twelve money sources, not three.** `REVIEW.md` E1 counted only the clean shop
+  income; the gate counted every canvas that grants money, including nine transactional rungs.
+  1 sink : 12 sources. The defect is worse than first recorded, and it was found by counting what
+  the game does rather than what the author remembered.
+- **The sentence-length figure is instrument-dependent and the constant now says so.** The field
+  medians come from parsing built HTML; the gate reads authored beat text from the TOML. The same
+  game measures 16 on the first and **13** on the second, so it passes the ceiling of 14. The
+  threshold spans a seam and is APPROXIMATE — it catches drift, it does not certify a match. Closing
+  that gap would need the field re-measured on TOML we do not have.
+
+**Verified:** `gates.py back_home` → 12/17 exit 1, every new FAIL cross-checked against a
+`REVIEW.md` finding · `gates.py vesper` → 5/18 exit 1, does not crash, `residents have homes`
+correctly **n/a** with no ledger present, and it independently caught **18 of vesper's 27 locations
+unreachable on foot** · `--json` parses with 17 gates and both lint keys.
+
+---
+
+## 2026-08-12 — **`DOCTRINE_GAPS.md` opened: what v2 never learned about building a good game here**
+
+New file, `DOCTRINE_GAPS.md`, next to `STATUS.md`. No reference file changed.
+
+**The trigger.** LO played `back_home` and asked why it has no quests. Traced it: `templates/board.toml:26`
+ships `quests_engine = "v2"`, which lights up a sidebar entry and a "What's Next" page, and across all
+1,367 lines of v2 doctrine there is **zero** quest instruction and **zero** quest check in `gates.py`.
+Verified: `setup.quests_cards = []` in the built game. A game built exactly to spec ships an empty
+guidance page.
+
+**The root cause, and it is bigger than quests.** v2's doctrine was derived solely by measuring one
+reference game's source. That game has no quest log. **A doctrine derived from measuring one game
+cannot contain anything that game lacks** — even when our engine ships the feature and the incumbent
+skill teaches it. Measured: the incumbent carries 38 reference files / 9,672 lines; v2 carries 7 /
+1,367, or **14%**. Nearly every finding in `games/back_home/REVIEW.md` maps to a file v2 does not have.
+
+**The decision (LO's, this session): v2 never links to or imports a v1 file.** Not tidiness — v1's
+references are welded to v1's pipeline (`step-5-blueprint.md` says "Step N" 24×, `step-3-casting.md`
+16×, `content-framework.md` 15×), so importing one imports v1's chapter shape into the skill whose
+thesis is that the shape was wrong. Same failure as the `prompts_v2` dependency. Each item is studied,
+not copied, and every study ends in a **check** rather than a paragraph — the case for which is made by
+v1 against itself at `location-design.md:257`, on a locked-flag bug that *"shipped twice: v1's Dining
+Room, then again in the rebuild written to prevent it."*
+
+**Contents:** a 12-item inventory over three tiers, save-safety parked as separate work (and argued to
+matter more for v2 than v1, since a never-ending product lands every release on live saves), the
+item-2/item-4 boundary settled (interface text is plain and functional; RTS-flat governs everything
+read *after* a click), and **study 1 — map & space** in the five-part format.
+
+**Study 1's substantive output:** four engine capabilities verified against source that `engine.md`
+does not carry and must — location travel-friction `costs = { time, energy }`
+(`template_import.py:170`, `:1778`; `v2.py:4681`, `:15276`), `entry_conditions` + `blocked_message`
+(`template_import.py:159-160`, `:1775-1776`; `v2.py:6590`), `offscreen` (`template_import.py:154`),
+and `is_container` + `default_entry` (`:153`, `:3968`). Travel friction is the mechanical answer to a
+premise that says *"ten minutes' walk away"* while arrival costs nothing.
+
+Also recorded: **`back_home`'s missing-bedrooms defect passes v1's entire 13-point location audit** —
+274 lines of map doctrine with no rule that a resident needs a room — so v1 is evidence about the
+problem, not the answer.
+
+### Study 2 — how the game talks to the player *(same day, format approved by LO after study 1)*
+
+Names the category no skill owns: **everything the player reads that is not the story** — room names,
+activity labels, the guidance page, meter band words, locked-door text. Four `REVIEW.md` findings
+(G1 G2 W5 W7) with one cause. v1 splits this across two files and two gaps: `quests.md` covers cards,
+`location-design.md §3` covers room names, and activity labels, `locked_text` and meter words are
+covered nowhere — which is how a game can hold a consistent naming style and still be unreadable.
+
+**Where v1 is wrong, beyond the split:** of `quests.md`'s 285 lines, the rule about how a label should
+*read* is one paragraph; the rest is engine mechanics. And its top tier is a **mission spine** — *"the
+Story-Goals column… the mission's current want"* (`:173`) — which a v2 game does not have. Copying it
+would smuggle a story shape into a release stream, so v2 needed its own answer: **the top of the
+guidance page is the ascent tiers themselves**, one card per band via v1's stepped trait-band shape.
+That falls out of v2's architecture instead of being borrowed.
+
+**Carried over from v1 because it is measured, not asserted:** the label is a walkthrough line —
+place + person + verb (`quests.md:81`); and **a meter-gated rung names its FEEDER, not its number**
+(`:91`) — *"the HUD already shows the number; the ROUTE to raising it is what the player can't see."*
+That is the single most load-bearing rule for v2, whose every gate is a meter.
+
+**One rule v2 owns harder than v1 did:** an arc whose last card retires with nothing behind it makes
+the character's whole section disappear. v1 found it (Renner's heading, unnoticed for eleven beats).
+In v2 it is worse by construction — a product that never ends turns every topped-out character into
+permanent sandbox content at the exact moment the chain goes silent.
+
+**Corrected while verifying:** the authored table is **`[[quest_cards]]`** (`template_import.py:2456-2462`,
+`class QuestsCard` `:997`), *not* `[[quests]]`. `games/back_home/REVIEW.md` G1 said the wrong table name
+and was fixed; the finding itself stands — zero `quest_cards` across all five phase files, and
+`setup.quests_cards = []` in the built HTML.
+
+**Eight more engine facts verified and flagged for `engine.md`**, including that **quest conditions use
+a separate evaluator with no fail-open** (`v2.py:14878`) — so the `version = "1.0"` key that canvas
+conditions require must *not* be pasted onto a quest card — and that the sidebar next row calls the
+identical renderer as the page (`v2.py:15454-15456`), so there is no such thing as a separate sidebar
+quest.
+
+**The pattern now holds twice.** Both studies' load-bearing gates work by having the board phase
+**declare** a property the TOML cannot express, then checking the built game against that declaration
+(study 1 Gate B: where each resident sleeps; study 2 Gates C/E: which tiers and characters owe cards).
+Proposed as the skill's standard gate shape rather than being rediscovered per study.
+
+**Also held twice:** each study refuses to gate the thing it cares most about — *"is the map a coherent
+place"*, *"does this label read well"* — because neither is mechanically decidable, and a check that
+measures a proxy is how `back_home` shipped 10/10 with no street.
+
+### Study 3 — money & pressure. **The first study measured on more than one game.**
+
+LO's instruction: verify against real games, and *"not just 3 or 4 — get at least 10."* Pulled **18
+shipped browser sandboxes, ~62,000 passages**, as complete single-file SugarCube source. URLs came from
+this project's own prior live-play sessions in `game_explorations/`; a `mopoga.com/<slug>` page carries
+the real file URL in `data-game-url`, and those `/embed/` URLs serve the full compiled game. Corpus,
+method and limits recorded in `DOCTRINE_GAPS.md` Appendix B.
+
+**Two extraction bugs found and fixed before any number was trusted**, both logged because the first
+pass produced a confident wrong table: (1) passage bodies are **HTML-escaped** in a compiled Twine file,
+so every `<<set>>` regex silently matched nothing — DoL read as *"0 spending"* against 372 gates, which
+is what exposed it; (2) money mostly moves through **per-game widgets**, not raw `<<set>>` — DoL uses
+`<<money -350000 "farmUpgrades">>`, `life_at_university` uses `<<addmoney>>`/`<<redmoney>>`. The final
+extractor discovers each game's money widgets from its own `<<widget>>` definitions. Currency selection
+was also changed to pick by **usage** rather than name frequency, after `road_to_success` resolved to the
+decoy `$game.randomMoney`.
+
+**The measured rules:** money gates content at a **median 67.3 conditions per 1,000 passages** (every
+sandbox in the set does; `back_home` is at **0**, independently confirmed from its TOML) · **sinks
+outnumber sources at a median 2.2:1** (DoL 1.76:1; `back_home` has three sources and one sink) ·
+**14 of 19 carry a real recurring obligation** (DoL says *rent* 130 times — the one thing `back_home`
+gets right) · a median **24% of money movements carry a computed rather than literal amount**. Plus one
+rule from the failure rather than the corpus: **no free uncapped income**, the single line that would
+have caught `E1`.
+
+**Where v1 is wrong here, and it is a precise defect:** `rent.md` §8's safety rule guards only the
+downside — *"rent that can't be paid isn't pressure, it's a scripted loss"* — with **no rule against
+trivially payable**, and no ratio to tune against. `back_home` obeyed v1 exactly and the pressure
+evaporated. v1 is also scoped to rent as a mechanism and develops no doctrine of sinks at all, which is
+why the game ships **zero items**.
+
+**And the finding that justifies the whole DOCTRINE_GAPS exercise:** DoL carries **738 money movements
+and 372 money gates**. v2 derived all ten of its thresholds from this game's source — words, locations,
+explicit ratios — and never once measured its economy.
+
+**Side result: `games/back_home/REVIEW.md` O1 is resolved, not by argument but by holding the file.**
+`gates.py:7` cites the reference as *"1.7k → 15.6k units"*; the pulled source contains **15,587
+`<tw-passagedata>` passages**. So a "unit" is a whole-source passage — combat, systems and UI included —
+while `gates.py` counts beats in **location prose only**. The two denominators were never the same, so
+back_home's 27.8% against a 7.5–9.3% band was never a valid comparison and **no dilution pass is owed**.
+`gates.py`'s header should say so, or this gets re-litigated a fourth time.
+
+**Verified:** all 18 files confirmed SugarCube with non-zero passage counts before parsing; every rule
+above recomputed after both extractor fixes; `back_home` run through the identical instrument, with its
+non-comparable flow counts excluded from the medians and marked as such.
+
+### Study 4 — how the prose is written. Same corpus, `gates.py`'s own explicit regex.
+
+`v1/rts-flat-prose.md` is 735 lines, the largest file in either corpus; `v2/register.md` is 111 and
+covers **one topic** — how to write an explicit beat. Sentence length, dialogue, how an ordinary
+non-sexual paragraph reads: undocumented in v2.
+
+**A third extraction trap, and it invalidated the entire first pass.** The longest "prose" passages in
+every game are **widget libraries and CSS** — `back_home`'s was the engine's own widget library, DoL's a
+combat widget, *Road to Success*'s a styled laptop UI. Fixed by dropping passages tagged
+`widget`/`script`/`stylesheet`/`init`/`header`/`footer`, bodies defining widgets, and — the load-bearing
+filter — **any passage whose stripped text is under 40% of its raw length.** Nothing in the study is
+quoted from the polluted pass.
+
+**R1 — the one length measure that transfers: `back_home`'s sentences are too long.** Median sentence:
+**field 10 words, DoL 9, `back_home` 16** — third-longest of eighteen, 60% above the field. First hard
+number confirming our prose is denser than the genre, which is what "RTS-flat" was always reaching for.
+Proposed as **Gate I, ceiling 14** — the first gate in this exercise that measures *writing* rather than
+structure.
+
+**R2 — second person is the genre standard, 13 of 17 games.** `back_home` at 94% *you/your* is the
+highest in the corpus. v2's `narration_person` default is **validated by the field** — the one piece of
+v2 prose doctrine the corpus confirms outright.
+
+**R3 — the reference game is the coldest game in its own genre.** Percentage of prose passages carrying
+3+ frozen-list words: field median **33.3%**, `back_home` 43.4%, **DoL 7.5% — last of eighteen.** Note
+`gates.py` sets `EXPLICIT_BEAT_FLOOR = 7.5`; this run reproduces that derivation independently on a
+different unit and shows the number is **a property of DoL, not of the genre.** Valid as a floor, badly
+miscalibrated as anything resembling a target. **This closes the `back_home` heat worry a second time,
+from a second direction** — O1 showed the denominator was wrong; the field now says 43.4% is mid-pack
+with five games above it.
+
+**Where v1 is wrong — and the one place it cannot be judged.** Its headline claim, *"RTS runs 0.73
+narration words : 1 dialogue word … every game this skill has shipped runs 5:1 to 19:1 the other way.
+This is the drift"* (`rts-flat-prose.md:12`), rests on **one game** — the same methodological error v2
+made with DoL. And it is **untestable from the compiled artifact**: *Road to Success* is built from
+HTML/CSS interior markup, so only **31 of its 373 passages** survive prose extraction. The study does not
+claim the number is wrong; it records that a rule calling everything else "drift" has never been checked.
+What the corpus does support is the direction — the two most prose-dense games in it are the two most
+dialogue-heavy (DoL 2.7:1, `course_of_temptation` 3.8:1) against a field median of 33:1.
+
+**Explicitly not transferable, recorded in Appendix C:** passage length (our engine emits a whole canvas
+as one passage — `back_home` 429w median vs field 175w measures architecture, so **the 35–40-words-per-beat
+rule is neither confirmed nor refuted here**) and v1's dialogue ratio, above.
+
+**Verified:** every figure recomputed after the tag/markup filter; `back_home` run through the identical
+script; per-game sample sizes reported so the small ones (`road_to_success` 31 passages, `back_home` 122)
+are visibly weaker than DoL's 10,215.
+
+**Verified:** every engine citation above read from source this turn; the v1/v2 line counts from `wc -l`;
+the quest counts from `grep` over the skill and from `setup.quests_cards` in the built HTML.
+
+---
+
 ## 2026-08-11 — **v0.1 SHIPS: 10/10. The first green game this skill has ever produced.**
 
 ```

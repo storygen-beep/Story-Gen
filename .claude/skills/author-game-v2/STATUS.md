@@ -321,22 +321,50 @@ Roughly **17,000 more words** closes gate 1 and makes this v2's first green game
 *(Shipped off this list: the dialogue-attribution lint — `gates.py:605`; the
 `shift_change_frontroom` rename; **and a green game.**)*
 
-## Promotion criteria — **MET, 2026-08-11**
+## Promotion criteria — **NO LONGER MET, and the criteria themselves were wrong**
 
-v2 replaces v1 when a game it built clears: location fill by the distribution rule, ≥7.5% of beats
-at 3+ explicit words, majority of explicit content repeatable, and a release that adds zero
-locations and still feels like a release.
+### What changed, 2026-08-12
+
+The criteria below were met on 2026-08-11 by `games/back_home` at 10/10. LO then played it, and a
+read-only audit found **21 defects** the scoreboard could not see: the corner shop was one step from
+the sofa, three of four men had no bedroom, the guidance page was empty behind a live sidebar entry,
+and money was unbounded against the one obligation in the game.
+
+Root cause: **v2's doctrine was derived by measuring one game, and a doctrine built that way cannot
+contain anything that game lacks.** Four studies (`DOCTRINE_GAPS.md`), two of them measured across a
+**field of 18 shipped sandboxes**, are now doctrine, and their checkable half is now in `gates.py`.
+
+**`back_home` scores 12/17, exit 1.** The ten original gates all still pass; every new failure is a
+defect it shipped with. Nothing about the game changed — only what we can see.
 
 | criterion | `back_home` v0.1 |
 |---|---|
 | location fill (distribution) | **mean 4,504 · median 4,381 · anchor 27%** ✅ |
-| ≥7.5% beats at 3+ explicit | **27.8% of 270** ✅ |
+| ≥7.5% beats at 3+ explicit | **27.8% of 270** ✅ *(and see below — the ceiling reading was wrong)* |
 | majority of explicit repeatable | **100% of 75** ✅ |
-| a release that adds zero locations | ⏳ **not yet demonstrated** — v0.1 *built* the Board; the
-first true release is the next increment, and it is the one criterion still outstanding |
+| world reachable · sentence length | ✅ |
+| **residents have homes** | ❌ `board.map` not declared |
+| **guidance exists** | ❌ 0 `[[quest_cards]]` for 3 tiers and 4 characters |
+| **money gates something** | ❌ 0 conditions read the currency |
+| **sinks ≥ sources** | ❌ 1 sink : 12 sources |
+| **no free uncapped income** | ❌ 1 standing surface prints money |
+| a release that adds zero locations | ⏳ still not demonstrated |
 
-**So: three of four, and the fourth is by definition unprovable until a release ships.** The
-description stays **EXPLICIT-INVOKE ONLY** until that release lands and still feels like one.
+### The criterion that was missing
+
+*"One game passes all the gates"* is insufficient on its own — it was satisfied by a game with 21
+defects, because a scoreboard agreeing with itself proves nothing. **Add: a human played it end to
+end and it held up.** That is now the binding one, and it has not happened yet.
+
+The description stays **EXPLICIT-INVOKE ONLY**.
+
+### One thing that got *better*, not worse
+
+The heat worry recorded here for weeks is dead. `EXPLICIT_BEAT_FLOOR = 7.5` was measured on
+whole-source passages (15,587 of them) while our gate counts location-prose beats — different
+denominators — **and** across 18 shipped games the reference is the **coldest in its own genre**
+(7.5% against a 33.3% field median). `back_home` at 27.8% was never too hot. No dilution pass is
+owed, and `register.md` and `gates.py` now both say so in place, so it does not get re-litigated.
 
 ---
 

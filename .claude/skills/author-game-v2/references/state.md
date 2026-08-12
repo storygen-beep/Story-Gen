@@ -40,7 +40,23 @@ belong here; only decisions, debts, and promises do.
     ],
     "characters": [
       { "id": "npc_…", "surfaces": 2, "schedule_rows": 3, "why_wanted": "…" }
-    ]
+    ],
+
+    // the map, as a place — declared BEFORE locations are written
+    "map": {
+      "shape":    "one dwelling + a street + one workplace",
+      "dwelling": "the_house",
+      "exterior": "the_street",
+      "homes":    { "npc_…": "location_id", "npc_…": "offscreen" },
+      "bridges":  [ { "from": "the_street", "to": "the_shop", "costs": { "time": 20 } } ]
+    },
+
+    // what money is FOR — the question asked while it is still cheap to answer
+    "economy": {
+      "currency":   "money",
+      "obligation": "rent",
+      "sinks":      ["rent", "the boiler", "the bus fare"]
+    }
   },
 
   "releases": [
@@ -87,6 +103,23 @@ and should not be mistaken for the spine.
 
 **`board.ceilings`** — each tier's top band. If the highest authored gate on a tier sits below
 its ceiling, the top of that bar buys nothing. Gate 8 fails and the player is being lied to.
+
+**`board.map.homes`** — where every declared character sleeps, or the literal `"offscreen"`.
+**This cannot be inferred and must not be guessed.** A lodger working nights legitimately has no
+night schedule row; a shopkeeper legitimately has no bed in the player's house. Only a declaration
+separates *lives elsewhere* from *was never given a room* — and the measured failure was a game
+whose landing description counted "four doors" while three of its four men slept nowhere at all.
+Gate 12.
+
+**`board.map.exterior`** — the location that is outside the dwelling. If any destination is away
+from home, this is what the player crosses to reach it, and it is where the ascent tiers get a
+consequence surface beyond the household. A domestic premise with no exterior can only recycle its
+own interior, so it is also the only renewable source of new characters. `the-map.md` R3.
+
+**`board.economy.currency`** — declaring it is strictly better than letting the gates infer one
+from `player.core_traits`; the headline says which was used, and inference picks wrong on a game
+with two currencies. **`board.economy.sinks`** is the useful half: listing what money is actually
+*for* is the question that, left unasked, produced a game with twelve ways to earn and one to spend.
 
 **`releases[].opened`** — never empty. A release that opened nothing had no reason to ship.
 

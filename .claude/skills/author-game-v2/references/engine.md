@@ -426,10 +426,22 @@ are a build-time warning, and only one of them will ever render:
 It does not stop the build. A canvas silently shadowed this way looks perfectly correct in the
 TOML and is unreachable in play, so treat the warning as an error.
 
-**The fix is the engine's own advice, and it is also the better design:** make the second
-canvas a triggerless rung and hang it off the existing hub as a CHOICE. Conditions on a choice
-are evaluated live at render, so a rung can still be time-limited and state-limited without
-owning a schedule of its own — see §20 for the predicate that makes this worth doing.
+**The fix for THIS collision** — two canvases fighting over the same NPC in the same window — is
+the engine's own advice: make the second canvas a triggerless rung and hang it off the existing
+hub as a CHOICE. Conditions on a choice are evaluated live at render, so a rung can still be
+time-limited and state-limited without owning a schedule of its own — see §20 for the predicate
+that makes this worth doing.
+
+⚠️ **THAT ADVICE IS SCOPED TO THIS COLLISION. IT IS NOT A GENERAL DESIGN PREFERENCE.** This
+paragraph previously read *"and it is also the better design"* with no scope on it, and a game was
+authored that took it as one: **23 choices on its front desk, 19 on its street**, one paragraph and
+a wall of buttons at every location. The hubs in question **bound no NPC at all**, so §19 never
+applied to them.
+
+The rule is: *same NPC, same location, overlapping windows.* Two repeatable canvases at one
+location that bind **different** NPCs, or **no** NPC, do not collide and **should be separate
+canvases** — that is the normal shape, not a workaround. What lives on which screen is
+`references/the-surfaces.md`, and a repeatable location-bound canvas caps at **8 choices** (gate 20).
 
 ---
 
@@ -486,6 +498,95 @@ recurring-demand system (`[settings.rent]`) does its own affordability check, bu
 **How to catch it:** diff the state across the scene and compare against the declared value. A
 capped effect looks identical to a working one in the TOML, in the validator, in the build log and
 on the scoreboard. Only the live number shows it.
+
+---
+
+## 22. Locations do more than `entry_from` — four fields nobody used
+
+All verified 2026-08-12. A game shipped without any of these because the skill never said they
+existed; the first is the mechanical answer to a premise that says *"ten minutes' walk away"*.
+
+**Travel friction — a per-entry cost on a location.**
+
+```toml
+[[locations]]
+id    = "the_shop"
+costs = { time = 20, energy = 5 }     # time is minutes on the day clock; any other key is a trait
+```
+
+```
+template_import.py:170    costs: Dict[str, int] = field(default_factory=dict)
+template_import.py:1778   costs=_require_dict(l, "costs"),
+v2.py:4681                // A location's per-entry cost lives in setup.locations[slug].entry_costs
+v2.py:15276               has_location_costs = any(...)   # the travel-cost block is only emitted
+                                                          # when some location declares costs
+```
+
+**This is what makes a schedule grid matter.** With free instant travel, "who is where at which
+hour" is a lookup table. Charge twenty minutes each way and the player cannot be everywhere, so
+presence becomes a constraint. Put the cost on **bridges between zones**, never on every room.
+
+**Locked location — visible but blocked, with in-world prose on the card.**
+
+```toml
+entry_conditions = { version = "1.0", logic = "AND", items = [ ... ] }
+blocked_message  = "The dining room's been dark since the staff went."
+```
+
+```
+template_import.py:159-160   entry_conditions / blocked_message
+template_import.py:1775-1776 parsed
+v2.py:6590                   loc.properties["entry_conditions"] = l.entry_conditions
+```
+
+⚠️ `entry_conditions` needs `version = "1.0"` like any condition block, or it **fails open** and the
+door silently unlocks (§4).
+
+**`offscreen = true`** — a non-navigable "away" label. No nav card, no hub, and it is exempt from the
+presence floor and reachability. Use it for a character who is genuinely elsewhere rather than
+inventing a room for them. `template_import.py:154`.
+
+**`is_container` + `default_entry`** — a pure navigation wrapper that holds no content.
+`template_import.py:153`, `:3968`. A container **swallows** any canvas attached to it; attach to a
+non-container hub instead.
+
+---
+
+## 23. The guidance page — `[[quest_cards]]`, and it is OFF by default in practice
+
+The table is **`quest_cards`**, flat and top-level — **not** `[[quests]]`, which is an unrelated
+table.
+
+```
+template_import.py:2456-2462   top-level key is `quest_cards` (flat, not nested under `quests`)
+template_import.py:997         class QuestsCard
+template_import.py:1068        parser for one [[quest_cards]] entry
+v2.py:14711                    the V2 QuestsPage overlay is emitted only when
+                               project.metadata["quests_engine"] == "v2"
+```
+
+⚠️ **The trap that shipped a game with an empty guidance page:** `quests_engine = "v2"` turns the
+sidebar entry and the page **on**. Authoring no cards leaves a nav link to a heading with nothing
+under it. Switching the engine on is not authoring guidance.
+
+**Rendering.** `renderQuestsGoalBlock` (`v2.py:14964`) renders **exactly one** frame per card, in
+order: ✓ terminal → 🔓 `ready_canvas` → 🎯 unmet goals. A card that matches none of the three returns
+empty and the row goes blank.
+
+**Selection.** `pickQuestsCards(scope)` (`v2.py:14837`) returns every matching top-tier card;
+`pickQuestsCard(slug)` (`v2.py:14065`) returns the **single highest-`priority`** match for a
+character — so a character's cards are a one-live-at-a-time chain.
+
+⚠️ **Quest conditions use a SEPARATE evaluator with NO fail-open** — `checkQuestsCondition`,
+`v2.py:14878`. **Never paste `version = "1.0"` onto a quest card.** That key is required on canvas
+conditions and is wrong here.
+
+⚠️ **The sidebar next-row calls the identical functions as the page** (`v2.py:15454-15456`). There is
+no separate "sidebar quest": edit a card and both surfaces move together, and a character with no
+card renders a blank next-row.
+
+**`locked_text_threshold`** (`v2.py:12786`) prints an explicit *"Requires …"* hint on a locked
+choice, distinct from `locked_text`, which replaces the label (§15).
 
 ---
 

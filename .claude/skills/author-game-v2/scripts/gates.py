@@ -2,11 +2,19 @@
 """
 gates.py — the author-game-v2 scoreboard.
 
-Measures a built game against the ten ship gates. Every threshold in here was
-derived from primary measurement of Degrees of Lewdity's own source across ten
-snapshots spanning 2018-11 to 2026-07 (25 -> 61 locations, 1.7k -> 15.6k units,
-254k -> 2.24M words). Nothing here is inherited opinion; see THRESHOLDS below for
-the evidence behind each number.
+Measures a built game against the ship gates. Nothing here is inherited opinion;
+see THRESHOLDS below for the evidence behind each number.
+
+Two measurement bases, and they are NOT interchangeable:
+
+  1. Gates 1-10 were derived from Degrees of Lewdity's own source across ten
+     snapshots, 2018-11 to 2026-07 (25 -> 61 locations, 1.7k -> 15.6k units,
+     254k -> 2.24M words).
+  2. Gates 11-19 (2026-08-12) were derived from a FIELD of 18 shipped browser
+     sandboxes, ~62,000 passages, because a doctrine measured from one game
+     cannot contain anything that game lacks. The game this skill built with
+     basis (1) shipped 10/10 with no street, no guidance page, and an economy
+     where money was unbounded — every one of those invisible to gates 1-10.
 
 Usage:
     python3 gates.py <game-slug>            # resolves games/<slug>/toml_phases/7_final_game.toml
@@ -54,6 +62,49 @@ EXPLICIT_BEAT_FLOOR = 7.5
 # systems and UI outgrew prose), this ratio is stable, so it is the usable floor.
 # It is also robust to word-list choice: two different lists both put DoL at
 # 8-10% and Vesper at ~2%.
+#
+# ⚠️ THIS IS A FLOOR. ITS UPPER COMPARISON IS MEANINGLESS. Do not read a game
+# scoring far above it as "too hot" — that reading has now been wrong twice, and
+# cost one game a dilution pass it never needed. Two independent reasons:
+#
+#   1. DIFFERENT DENOMINATORS. The 7.5-9.3% band is per DoL *unit* = a passage in
+#      the whole source, combat/systems/UI included: its file carries 15,587
+#      <tw-passagedata> entries, matching the "15.6k units" this header cites.
+#      THIS gate counts beats in LOCATION PROSE ONLY. Not the same scale.
+#   2. THE REFERENCE IS THE COLDEST GAME IN ITS OWN GENRE. Measured 2026-08-12
+#      across 18 shipped sandboxes on this exact regex: field median 33.3% of
+#      prose passages carry 3+, and DoL is LAST at 7.5%. The floor is a property
+#      of DoL, not of the genre.
+#
+# Valid as a floor and still discriminating (the measured-cold game scores 4.7%).
+# Invalid as anything resembling a target.
+
+MENU_CEILING = 8
+# Choices on a single repeatable, location-bound canvas. Measured 2026-08-12 across
+# 18 shipped sandboxes, counting player-facing links per non-system screen:
+#   median screen = 2 links · median p90 = 4 · ~2% of screens exceed 12
+# So 8 is already double the field's ninetieth percentile.
+#
+# Big screens DO exist in real games — the reference game runs 2.9% of its screens
+# above 20 links — but they are CATALOGUES: shops, wardrobes, character creation.
+# A place the player returns to daily is not a catalogue. The game that prompted
+# this put 23 choices on its front desk, 11 of them purchases, next to "Look up at
+# the board", and scored 18/18 while doing it. references/the-surfaces.md.
+
+SENTENCE_CEILING = 14
+# Median sentence length, in words, across all authored beats. The first threshold
+# here that measures WRITING rather than structure. Measured 2026-08-12 over 18
+# shipped sandboxes: field median 10 words, DoL 9, and the game that prompted this
+# ran 16 — third longest of the eighteen.
+#
+# ⚠️ TWO INSTRUMENTS, AND THE THRESHOLD SPANS THEM. The field figures come from
+# parsing BUILT HTML (the only form a shipped game is available in). This gate reads
+# AUTHORED BEAT TEXT from the TOML, which excludes the UI and system strings that
+# survive HTML extraction. The same game measures 16 on the first instrument and 13
+# on this one, so 14 is calibrated across a seam, not within one basis. It is
+# therefore APPROXIMATE — it will catch prose drifting denser, but do not read a
+# pass as "matches the field". Tightening it needs the field re-measured on TOML,
+# which is not obtainable: we do not have anyone else's source.
 
 EXPLICIT_IN_REPEATABLE = 50.0
 # Explicit prose must live where the player returns. Measured failure case:
@@ -93,6 +144,22 @@ EXPLICIT = re.compile(
 PROSE_BLOCKS = {"paragraph", "dialog", "thought_bubble", "quote", "note"}
 MEDIA_BLOCKS = {"image", "video"}
 EXPLICIT_MEDIA = re.compile(r"_t[45]\b|/sex/|^sex/", re.I)
+
+# Parts of a building the prose can name. If the writing treats one as a place and
+# the graph has no such location, either the location is missing or the sentence is
+# wrong — both cheap to fix on the day, expensive twenty thousand words later.
+# A LINT, never a gate: "he came through the hall" in a game that deliberately has
+# no hall location is a judgement call, and a check that fires on correct work gets
+# ignored. Measured trigger: one game referred to a hall six times, a front door
+# twice, and the street once, with none of them in the map.
+BUILDING_PARTS = ("hall", "hallway", "stairs", "staircase", "landing", "street",
+                  "front door", "back door", "garden", "yard", "attic", "cellar",
+                  "basement", "porch", "driveway", "corridor")
+
+# Currency naming, used when the ledger does not declare one. Inference is a
+# fallback so the economy gates still bite on a game authored before board.economy
+# existed; a declaration always wins and the headline says which was used.
+CURRENCY_HINT = re.compile(r"money|cash|funds?|wallet|credits?", re.I)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -162,6 +229,35 @@ def _conditions_of(obj):
         for it in conds.get("items") or []:
             if isinstance(it, dict):
                 yield it
+
+
+def _currency_ops(obj, cur, out):
+    """Collect every 'add'/'subtract' this structure performs on the currency trait.
+
+    Walks the whole nested shape rather than the known effect sites, because a
+    grant can hang off an exit_block config, a choice, or a cascade beat, and a
+    gate that only looks in one of those under-reports the economy.
+    NOTE the key asymmetry the rest of this file already documents: an EFFECT
+    names its trait `trait`, a CONDITION names it `trait_key`.
+    """
+    if isinstance(obj, dict):
+        if (obj.get("trait") or obj.get("trait_key")) == cur and obj.get("op") in ("add", "subtract"):
+            out.append(obj["op"])
+        # a `costs` entry is a spend even though it carries no op
+        for cost in (obj.get("costs") or []):
+            if isinstance(cost, dict) and cost.get("trait") == cur:
+                out.append("subtract")
+        for v in obj.values():
+            _currency_ops(v, cur, out)
+    elif isinstance(obj, list):
+        for v in obj:
+            _currency_ops(v, cur, out)
+
+
+def _median(xs):
+    """Same convention as gate 1 uses: the middle element of the sorted list."""
+    s = sorted(xs)
+    return s[len(s) // 2] if s else 0
 
 
 def build(game):
@@ -259,6 +355,13 @@ def build(game):
                           sets=sets, reads=reads, traits=traits,
                           random=trig.get("trigger_mode") == "random",
                           npc=trig.get("npc"), requires_npc=trig.get("requires_npc"),
+                          # The economy gates need to know whether a surface is
+                          # rate-limited. `costs` is a real gate (the engine blocks
+                          # on affordability); `effects` only deducts, so an income
+                          # surface with neither a per-day cap nor a cost is a money
+                          # printer and every other economy rule is void beside it.
+                          perday=trig.get("max_triggers_per_day"),
+                          costs=trig.get("costs") or [],
                           nodes=c.get("nodes") or []))
     return model, game
 
@@ -325,6 +428,29 @@ def lint_dialogue_attribution(model):
                         1 for b in blocks
                         if ((b.get("props") or {}).get("npcId") or "") == h["npc"])
     return hits
+
+
+def lint_world_prose(model, game):
+    """Parts of a building the writing treats as real, that the map does not have.
+
+    A LINT, not a gate. Crossing "the hall" in a game with no hall location may be
+    perfectly deliberate — but the measured case was a game whose prose named a hall
+    six times, a front door twice and the street once while its map had none of them,
+    and whose shop was consequently reachable in one step from the living room.
+    Either the location is missing or the sentence is wrong; both are cheap now.
+    """
+    locs = game.get("locations") or []
+    known = " ".join(str(l.get("id", "")) + " " + str(l.get("name", "")) for l in locs).lower()
+    prose = " ".join(t for c in model for b in c["beats"] for t in b.text).lower()
+    hits = []
+    for part in BUILDING_PARTS:
+        if part in known:
+            continue
+        n = len(re.findall(rf"\b{re.escape(part)}\b", prose))
+        if n >= 3:                      # once is a turn of phrase; three is a place
+            m = re.search(rf"[^.]*\b{re.escape(part)}\b[^.]*\.", prose)
+            hits.append(dict(part=part, count=n, line=(m.group(0).strip()[:70] if m else "")))
+    return sorted(hits, key=lambda h: -h["count"])
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -541,6 +667,247 @@ def run_gates(model, game, state=None):
           for k in bad] +
          [f"also ranked: {k} ({expand[k]}+/{contract[k]}-)" for k in ranked if k not in tiers])
 
+    # ─────────────────────────────────────────────────────────────────────────
+    # G11-G19 — added 2026-08-12, derived from a FIELD of 18 shipped sandboxes
+    # rather than from the single reference game. See the module docstring.
+    #
+    # Several of these judge the game against what the BOARD PHASE DECLARED,
+    # because the property cannot be inferred from the TOML. That pattern held in
+    # all four doctrine studies and is now the standard shape. Its n/a rule:
+    #   no v2_state.json at all -> n/a, nothing was ever declared to check against
+    #   ledger present, field missing -> FAIL, naming the missing key
+    # ─────────────────────────────────────────────────────────────────────────
+    board = ((state or {}).get("board") or {})
+    locs = game.get("locations") or []
+    loc_ids = {l["id"] for l in locs if l.get("id")}
+
+    # G11 — every location reachable on foot from the start.
+    # Movement is undirected: the engine generates the return link from entry_from,
+    # so an edge in either field connects both ways.
+    adj = collections.defaultdict(set)
+    for l in locs:
+        lid = l.get("id")
+        if not lid:
+            continue
+        if l.get("entry_from"):
+            adj[lid].add(l["entry_from"])
+            adj[l["entry_from"]].add(lid)
+        for child in (l.get("navigation_order") or []):
+            adj[lid].add(child)
+            adj[child].add(lid)
+    start_canvas = (game.get("project") or {}).get("starting_canvas")
+    start_loc = next((((c.get("trigger") or {}).get("location"))
+                      for c in (game.get("canvases") or []) if c.get("id") == start_canvas), None)
+    if not start_loc:
+        start_loc = next((l["id"] for l in locs if not l.get("entry_from")), None)
+    seen_locs, stack = set(), [start_loc] if start_loc else []
+    while stack:
+        cur_loc = stack.pop()
+        if cur_loc in seen_locs:
+            continue
+        seen_locs.add(cur_loc)
+        stack.extend(adj[cur_loc] - seen_locs)
+    # `offscreen` is a schedule label with no nav card; `auto_exit = false` is a
+    # deliberately sealed room entered only by a canvas exit. Neither is stranded.
+    exempt = {l["id"] for l in locs if l.get("offscreen") or l.get("auto_exit") is False}
+    stranded = sorted(loc_ids - seen_locs - exempt)
+    gate("world reachable", None if not loc_ids else not stranded,
+         f"{len(seen_locs & loc_ids)}/{len(loc_ids)} locations reachable on foot from "
+         f"{start_loc or '(no start)'}",
+         [f"{l} is not reachable and is not marked offscreen/sealed" for l in stranded])
+
+    # G12 — everyone who lives here has somewhere to sleep.
+    # Not inferable: a shopkeeper legitimately has no bed in the player's house and
+    # a lodger on nights legitimately has no night schedule row. Only a declaration
+    # separates "lives elsewhere" from "was never given a room".
+    chars = board.get("characters") or []
+    bmap = board.get("map") or {}
+    homes = bmap.get("homes") or {}
+    if state is None:
+        gate("residents have homes", None, "no v2_state.json — nothing declared to check against")
+    elif not bmap:
+        gate("residents have homes", False, "board.map not declared",
+             ["the board phase must record the map: shape, dwelling, exterior, homes",
+              "until it does, a cast with nowhere to sleep cannot be distinguished from one that lives out"])
+    else:
+        homeless = []
+        for ch in chars:
+            cid2 = ch.get("id")
+            where = homes.get(cid2)
+            if where is None:
+                homeless.append(f"{cid2}: no home declared in board.map.homes")
+            elif where not in loc_ids and where != "offscreen":
+                homeless.append(f"{cid2}: home '{where}' is not a declared location")
+        gate("residents have homes", None if not chars else not homeless,
+             f"{len(chars)-len(homeless)}/{len(chars)} characters have a home that exists", homeless)
+
+    # G13 — the guidance surface is authored, not just switched on.
+    # `quests_engine = "v2"` lights up a sidebar entry and a page; without cards it
+    # renders a heading and nothing. Measured genre failure: lostness is the dominant
+    # player complaint at a 4.7% median share of comments, against grind's 0.9%.
+    cards = game.get("quest_cards") or []
+    tiers_owed = board.get("ascent_tiers") or []
+    engine_on = ((game.get("project") or {}).get("quests_engine") == "v2"
+                 or (game.get("settings") or {}).get("quests_engine") == "v2")
+    def _card_mentions(card, key):
+        blob = json.dumps(card)
+        return f'"{key}"' in blob
+    if not engine_on and not cards:
+        gate("guidance exists", None, "quests engine not enabled — no guidance surface to author")
+    elif not tiers_owed and not chars:
+        # Cards exist but the ledger names no tiers and no characters, so there is
+        # nothing to check them against. An absence is not a pass.
+        gate("guidance exists", None,
+             f"{len(cards)} quest cards, but board.ascent_tiers/characters undeclared — nothing to judge coverage against")
+    else:
+        gaps = []
+        if not cards:
+            gaps.append("0 [[quest_cards]] authored — the guidance page renders empty")
+        else:
+            for t in tiers_owed:
+                if not any(_card_mentions(c, t) for c in cards if not c.get("npc_id")):
+                    gaps.append(f"ascent tier '{t}' has no story-tier card — nothing tells the player its next rung")
+            carded = {c.get("npc_id") for c in cards if c.get("npc_id")}
+            for ch in chars:
+                if ch.get("id") not in carded:
+                    gaps.append(f"{ch.get('id')} has no quest card — their sidebar next-row renders blank")
+        gate("guidance exists", not gaps,
+             f"{len(cards)} quest cards for {len(tiers_owed)} ascent tiers and {len(chars)} characters",
+             gaps)
+
+    # ⚠️ THERE IS NO "walls state their key" GATE, AND THE ABSENCE IS DELIBERATE.
+    # It was written, it fired on 7 of 8 doors in a real game, and it was WRONG:
+    # `references/engine.md` §15 already rules on this and rules the other way —
+    # omitting `locked_text` shows the greyed ACTION ("Ask him where the bench went"),
+    # which is a want the player can name and is what sells the next release; setting
+    # it replaces the want with a reason and is "weaker as a door". Preferring the want
+    # is the documented default, verified live.
+    # A locked choice showing its own action text is therefore NOT silent — it states
+    # the want. What it does not state is the ROUTE, and that is `the-voice.md` R3's
+    # job on the guidance card, already enforced by "guidance exists" below. A gate
+    # here would fail a game for obeying the skill, and would duplicate that one.
+
+    # G15 — no character's ladder ends in silence.
+    # pickQuestsCard returns the single highest-priority match; when an arc's last
+    # card retires with nothing behind it the whole section disappears from the page,
+    # at the exact moment that character becomes permanent sandbox content. This bites
+    # v2 harder than it bites a finite game, because a v2 product never ends.
+    by_npc = collections.defaultdict(list)
+    for c in cards:
+        if c.get("npc_id"):
+            by_npc[c["npc_id"]].append(c)
+    silent_chains = []
+    for npc_id, cs in sorted(by_npc.items()):
+        forever = any(c.get("terminal") or (not c.get("goals") and not c.get("ready_text")) for c in cs)
+        if not forever:
+            silent_chains.append(f"{npc_id}: {len(cs)} cards, none terminal or end-of-content — "
+                                 f"section vanishes when the arc closes")
+    gate("no chain ends in silence", None if not by_npc else not silent_chains,
+         f"{len(by_npc)-len(silent_chains)}/{len(by_npc)} character ladders keep a card after the last rung",
+         silent_chains)
+
+    # ── the economy gates ────────────────────────────────────────────────────
+    # Measured over 18 shipped sandboxes, 2026-08-12:
+    #   money gates content ....... median 67.3 conditions per 1,000 passages;
+    #                               every sandbox in the set does it
+    #   sinks outnumber sources ... median 2.2 : 1 (DoL 1.76 : 1)
+    #   recurring obligation ...... 14 of 19 games carry one (DoL says "rent" 130x)
+    econ = board.get("economy") or {}
+    currency = econ.get("currency")
+    cur_src = "declared"
+    if not currency:
+        for k in ((game.get("player") or {}).get("core_traits") or {}):
+            if CURRENCY_HINT.search(k):
+                currency = k
+                cur_src = "inferred — board.economy.currency not declared"
+                break
+
+    if not currency:
+        for nm in ("money gates something", "sinks >= sources", "no free uncapped income"):
+            gate(nm, None, "no currency found — game declares none and none inferable")
+    else:
+        reads_cur = sorted(c["id"] for c in model if currency in c["reads"])
+        gate("money gates something", bool(reads_cur),
+             f"[{cur_src}] {len(reads_cur)} canvases gate on `{currency}`",
+             [] if reads_cur else
+             [f"nothing in the game reads `{currency}` — every arc gated behind it is optional scenery",
+              "field median is 67.3 money conditions per 1,000 passages; every measured sandbox gates on money"])
+
+        sources, sinks = set(), set()
+        for c in (game.get("canvases") or []):
+            ops = []
+            _currency_ops(c, currency, ops)
+            if "add" in ops:
+                sources.add(c["id"])
+            if "subtract" in ops:
+                sinks.add(c["id"])
+        rent = (game.get("settings") or {}).get("rent") or {}
+        if rent.get("enabled"):
+            sinks.add("[settings.rent]")
+        gate("sinks >= sources", None if not (sources or sinks) else len(sinks) >= len(sources),
+             f"{len(sinks)} sinks : {len(sources)} sources (field median 2.2 : 1)",
+             [] if len(sinks) >= len(sources) else
+             [f"more ways to earn `{currency}` than to spend it — the meter it feeds never has to rise",
+              f"sources: {', '.join(sorted(sources)[:8])}"])
+
+        # A STANDING surface — one with its own trigger.location, that the player can
+        # simply click — granting currency with neither a per-day cap nor a costs block
+        # is a money printer, and every other economy rule is void beside it.
+        # A triggerless RUNG is held to a weaker standard on purpose: it is reached
+        # through a hub choice that carries the meter gate, so it is not free, only
+        # farmable. Those are reported, not failed — the sinks:sources gate above is
+        # what judges whether the game has too many ways to earn.
+        own_trigger = {c["id"] for c in (game.get("canvases") or [])
+                       if (c.get("trigger") or {}).get("location")}
+        printers, farmable = [], []
+        for c in model:
+            if not c["rep"] or c["perday"] or c["costs"]:
+                continue
+            ops = []
+            _currency_ops({"nodes": c["nodes"]}, currency, ops)
+            if "add" not in ops:
+                continue
+            (printers if c["id"] in own_trigger else farmable).append(
+                f"{c['id']} @{c['loc']}: grants `{currency}`, no per-day cap, no costs block")
+        gate("no free uncapped income", not printers,
+             f"{len(printers)} standing surfaces print money without limit"
+             + (f" · {len(farmable)} gated rungs are uncapped too" if farmable else ""),
+             printers + ([f"(gated, not failed) {x}" for x in farmable[:6]] if printers else []))
+
+    # G20 — a place is not a catalogue.
+    # The seam to split on is always available: one canvas per (who it is aimed at
+    # x when). A hub that has grown past this is doing several jobs at once — almost
+    # always a character hub with solo work dumped into it, or a shop merged into a
+    # room. references/the-surfaces.md.
+    fat = []
+    for c in model:
+        if not c["rep"]:
+            continue
+        if not (c["id"] in {x["id"] for x in (game.get("canvases") or [])
+                            if (x.get("trigger") or {}).get("location")}):
+            continue                                  # rungs are link targets, not screens
+        for n in c["nodes"]:
+            n_choices = len(((n.get("exit_block") or {}).get("choices") or []))
+            if n_choices > MENU_CEILING:
+                fat.append(f"{c['id']} @{c['loc']}: {n_choices} choices on one screen")
+    gate("a place is not a catalogue", not fat,
+         f"{len(fat)} location screens offer more than {MENU_CEILING} choices",
+         fat + (["field: median screen is 2 links, p90 is 4; big menus in real games are "
+                 "shops and wardrobes, not rooms"] if fat else []))
+
+    # G19 — sentence length. The first gate here that measures WRITING.
+    sent_words = [len(s.split())
+                  for c in model for b in c["beats"]
+                  for s in re.split(r"(?<=[.!?])\s+", " ".join(b.text))
+                  if 2 <= len(s.split()) <= 120]
+    med_sent = _median(sent_words)
+    gate("sentence length", None if not sent_words else med_sent <= SENTENCE_CEILING,
+         f"median sentence {med_sent} words across {len(sent_words):,} sentences "
+         f"(ceiling {SENTENCE_CEILING})",
+         [] if med_sent <= SENTENCE_CEILING else
+         ["field median is 10 words; the reference game is 9",
+          "escalate by adding beats, not by lengthening sentences"])
+
     return R
 
 
@@ -561,10 +928,12 @@ def main():
     results = run_gates(model, game, state)
 
     lints = lint_dialogue_attribution(model)
+    world_lints = lint_world_prose(model, game)
 
     if "--json" in sys.argv:
         print(json.dumps({"gates": [dict(r) for r in results],
-                          "lints": {"dialogue_attribution": lints}},
+                          "lints": {"dialogue_attribution": lints,
+                                    "world_prose": world_lints}},
                          indent=1, default=str))
         return
 
@@ -597,6 +966,13 @@ def main():
             print(f"          · … and {len(lints)-12} more")
         print("          (a canvas that neither binds nor names the speaker — check the"
               " name that will render)")
+
+    if world_lints:
+        print(f"  {'─'*72}")
+        print(f"  lint · the prose names places the map does not have — {len(world_lints)} to eyeball")
+        for h in world_lints[:10]:
+            print(f"          · \"{h['part']}\" ×{h['count']}: {h['line']}…")
+        print("          (either the location is missing, or the sentence is wrong)")
     print()
     sys.exit(0 if judged and npass == judged else 1)
 

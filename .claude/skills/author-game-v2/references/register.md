@@ -73,9 +73,20 @@ challenged twice and was right both times.
 | per explicit beat | **3+ words from the frozen list** |
 | across the whole game | **7.5–9.3% of beats carry 3+** |
 
-The band is the reference game's, held across eight years and twelve-fold growth. It is a floor
-to clear, not a ceiling to approach — but a game far above it is usually one that has stopped
-having any non-sexual texture, which is its own failure.
+The band is the reference game's, held across eight years and twelve-fold growth.
+
+> ⚠️ **It is a FLOOR. Its upper comparison is meaningless — do not read a game scoring far above it
+> as "too hot."** That reading has been wrong twice and cost one game a dilution pass it never
+> needed. Two independent reasons, both measured 2026-08-12:
+>
+> - **Different denominators.** The 7.5–9.3% band counts whole-source *passages* — combat, systems
+>   and UI included, 15,587 of them. `gates.py` counts beats in **location prose only**. Not the
+>   same scale, so the two numbers were never comparable.
+> - **The reference is the coldest game in its own genre.** Across 18 shipped sandboxes scored on
+>   this exact word list, the field median is **33.3%** of prose passages carrying 3+ — and the
+>   reference game is **last, at 7.5%**. The floor is a property of that one game, not of the genre.
+>
+> Clear it. Do not aim at it, and never dilute to approach it from above.
 
 ---
 
@@ -109,3 +120,55 @@ single most reliable way to produce a game that is explicit and cold at the same
 
 It reasserts itself the moment it is not being actively fought. Assume you are doing it, and
 check the gate.
+
+---
+---
+
+# The other ninety percent
+
+Everything above is about the explicit beat. Most of a game is not one. These rules cover the rest,
+and they are measured across 18 shipped sandboxes rather than asserted — corpus and limits in
+`DOCTRINE_GAPS.md` Appendix C.
+
+*(This file governs what the player reads **after** a click. The room names, button labels, guidance
+cards and locked-door text are a different job with a different rule — `references/the-voice.md`.)*
+
+## Sentences run short
+
+| | median sentence |
+|---|---|
+| field, 17 games | **10 words** |
+| the reference game | **9 words** |
+| a game of ours, measured | **16 words** — third longest of eighteen |
+
+**Escalate by adding beats, never by lengthening sentences.** This is the same rule as the
+beat-count one, one level down: a longer sentence buys density, and density is what rots on the
+third re-read of a surface the player returns to fifty times.
+
+Gate 19 puts the ceiling at 14 — deliberately generous, and calibrated across two extraction bases,
+so treat a pass as "not drifting" rather than as "matches the field." The constant in `gates.py`
+carries the full caveat.
+
+## Second person is the genre standard
+
+**13 of 17 games are second-person dominant.** Third person is a minority position held by three.
+Our own most-second-person game runs 94% *you / your*.
+
+`[settings] narration_person = "second"` is the default for a reason, and the field confirms it.
+It stays **immutable once a release ships** — a person swap invalidates every line already written.
+
+## Dialogue: a direction, not a threshold
+
+The field spread runs from 2.7:1 narration-to-dialogue to over 400:1, which is far too wide to
+threshold and is not gated. What the corpus does show: **the two most prose-dense games in it are
+the two most dialogue-heavy.** Writing that is spoken rather than narrated scales; writing that
+narrates at the reader does not.
+
+Prefer a line of speech to a sentence describing a line of speech. That is the direction, and there
+is deliberately no number attached to it.
+
+## What is not measured here
+
+Whether the writing is any good, and whether it arouses. Neither is countable, both are the job.
+`gates.py` measures shape. It cannot tell you the scene works.
+

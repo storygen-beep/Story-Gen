@@ -1,0 +1,910 @@
+# Doctrine gaps — what v2 never learned about building a good game in this engine
+
+v2 was derived one way: by measuring ten snapshots of one reference game's source. That method
+produced four commitments that are correct and that refuted the incumbent skill on **shape**. It
+also has a hard structural limit:
+
+> **A doctrine derived from measuring one game cannot contain anything that game lacks** — even
+> when our engine ships the feature, and even when our own previous skill taught it.
+
+Quests fell through that hole first. `templates/board.toml:26` ships `quests_engine = "v2"`, which
+lights up a sidebar entry and a "What's Next" page, and across all 1,367 lines of v2 doctrine there
+is **zero** instruction on authoring a quest and **zero** quest check in `gates.py`. A game built
+exactly to spec ships an empty guidance page. `games/back_home` did.
+
+This file closes the rest of the hole. It is the inventory of what v2 must teach, plus one study
+per item.
+
+---
+
+## The method — and the constraint that shapes it
+
+The incumbent `author-game` skill carries 38 reference files and 9,672 lines, most of it craft
+knowledge this engine paid for the hard way. v2 has 7 files and 1,367 lines — **14%**.
+
+**v2 does not link to, reference, or import any v1 file. It never will.** That is not tidiness,
+it is a structural requirement:
+
+- v1's references are welded to v1's pipeline. `step-5-blueprint.md` says "Step N" 24 times,
+  `step-3-casting.md` 16, `content-framework.md` 15. v1 is a chapter-shaped process — design the
+  story, then build it. v2 is `want` → `board` → `release`, a stream with no end. Importing a v1
+  file imports v1's shape into the one skill whose thesis is that the shape was wrong.
+- v1 is actively maintained and changing. A live dependency drifting under v2 is invisible to v2.
+- Precedent: v2 was already divorced from the `prompts_v2` corpus, which taught false engine facts.
+  Depending on a corpus you do not own reproduces that failure.
+
+So each item is **studied, not copied**. v1 is evidence about the problem, not the answer.
+
+**And v1 is not the good version.** Its craft files coexisted with a game scoring **1/10** on this
+skill's own instrument — 95% of its explicit prose sealed in a room with no exits, all nine of its
+repeatable sex loops scoring zero. The picture is exact complements:
+
+| | craft | shape |
+|---|---|---|
+| **v1** | strong | wrong |
+| **v2** | absent | measured, right |
+
+So "where v1 is wrong" is real work in every study, not a courtesy paragraph.
+
+### Every study ends in a check, not a paragraph
+
+This is what makes the output v2's doctrine rather than v1's advice reworded.
+
+Prose gets skipped. Measured, on this project: the register pivot defect was authored **three
+increments running, each time immediately after re-reading the rule against it.** The paragraph
+never once caught it. The per-beat scorer caught it every time.
+
+v1 knows this about itself and says so. `location-design.md:14` — *"The engine never checks any of
+this — a wrong, dead, or incoherent map builds GREEN."* And then, in its own audit list at `:257`,
+the confession that settles the argument:
+
+> Every locked location's unlock flag has a real setter … *(Shipped twice: v1's Dining Room, then
+> again in the rebuild written to prevent it.)*
+
+**A checklist written to prevent a bug, followed by the same bug.** That is the case for gates,
+made by the checklist.
+
+So every study's last section asks: *what can `gates.py` decide mechanically?* An honest "nothing,
+and here is why" is an acceptable answer. A vague one is not.
+
+---
+
+## The study format
+
+Five sections, identical every time:
+
+1. **What it is, and what breaks without it** — cited to a `games/back_home/REVIEW.md` finding
+2. **How v1 teaches it** — a real quote, not a summary
+3. **Where v1 is wrong** — dated, pipeline-bound, incomplete, or mistaken
+4. **What v2 says instead** — written in v2's phases, owing nothing to v1's structure
+5. **The check** — what `gates.py` can decide, or an honest nothing
+
+A finished study graduates into a real v2 reference file. Until then it lives here.
+
+---
+
+## The inventory
+
+### Tier 1 — proven broken in `back_home`, blocks building a new game
+
+| # | item | what it owns | evidence | status |
+|---|---|---|---|---|
+| **1** | **Map & space** | the graph, floors, exteriors, travel, what a room is for | `REVIEW.md` W1 W3 W4 W6 | ✅ **GRADUATED** → `references/the-map.md` |
+| **2** | **How the game talks to the player** | quests, guidance, labels, room names, locked-door text, meter band words | G1 ~~G2~~ W5 W7 | ✅ **GRADUATED** → `references/the-voice.md` |
+| **3** | **Money & pressure** | sources, sinks, what forces a choice | E1 | ✅ **GRADUATED** → `references/the-economy.md` |
+| **4** | **How the prose is written** | RTS-flat, dialogue, thought, the 90% of prose that is not an explicit beat | — | ✅ **GRADUATED** → `references/register.md` (expanded) |
+
+> **Tier 1 is closed.** The four studies below are the trail, not the doctrine — the doctrine now
+> lives in the reference files above and the checks live in `scripts/gates.py`. Read a study when you
+> want to know *why* a rule exists or what v1 got wrong; read the reference file to author.
+>
+> **One study output was withdrawn on contact with the engine.** Study 2's R4 proposed a gate
+> requiring every locked door to carry `locked_text`. Built, it fired on 7 of 8 doors in a real game
+> — and `references/engine.md` §15 already rules the other way, deliberately: omitting `locked_text`
+> shows the greyed *action*, a want the player can name, which is what sells the next release.
+> **A check that fails a game for obeying the doctrine is a bug in the check.** No gate shipped, the
+> rule was rewritten as "the wall shows the want, the card shows the route", and
+> `games/back_home/REVIEW.md` G2 was withdrawn as not-a-defect. Recorded because it is the clearest
+> case in this exercise of verifying before asserting, and it was caught only by building the thing.
+
+### Tier 2 — proven weak
+
+| **5** | **Meters & the HUD** | what is displayed vs what is actually read | E2 E3 E4 |
+| **6** | **Onboarding** | the first hour |
+| **7** | **The daily loop** | time costs, energy, what an ordinary day is |
+| **8** | **Ladder shape** | rung spacing, ceilings, when an arc is finished |
+
+### Tier 3 — untested here, v2 still has nothing
+
+| **9** | Clothing / wardrobe as a system |
+| **10** | Sex-loop shape |
+| **11** | Pre-ship checklist |
+| **12** | Optional systems — phone, customization |
+
+### Parked
+
+**Save safety.** Handled as its own piece of work, not as a study here. Noting why it matters more
+for v2 than it ever did for v1: v2's founding commitment is that **the product never ends**, so
+every release after the first lands on players holding live saves. v1 built games that finished and
+could afford to be casual about it. v2 cannot, and v2 is the version that has nothing — the topic
+appears exactly once, at `references/engine.md:501`, under the heading **"Unverified — do not cite
+until read"**. This has already cost us once: Vesper's 0.1.4 saves were stranded by a one-shot
+burn and needed an idempotent re-grant to heal.
+
+### Item 4's boundary, settled
+
+Items 2 and 4 divide all player-facing text between them, and the line is **what job the text is
+doing**, not where it sits:
+
+| category | job | rule | owner |
+|---|---|---|---|
+| **interface text** — room names, activity labels, quest cards, meter band words, locked-door text | tell the player what this is / what clicking does | plain, functional, unambiguous | **item 2** |
+| **scene prose** — paragraphs, dialogue, thought bubbles | still be good on the fiftieth read | RTS-flat | **item 4** |
+| **in-scene choice lines** — *Stop pretending it's a favour* | a choice inside a conversation, with the scene already on screen | voice; leave them alone | **item 4** |
+
+So naming is **not** an RTS-flat problem. Naming is a button. RTS-flat governs everything the
+player reads *after* clicking — and v2 currently has 111 lines on it against v1's 735, of which
+v2's cover exactly one topic: how to write an explicit beat, and one recurring defect in doing so.
+The other 90% of the prose in a game is undocumented.
+
+---
+---
+
+# Study 1 — Map & space
+
+## 1 · What it is, and what breaks without it
+
+The map is the set of places, how they connect, and what each is for. It is the only system in the
+game the player touches on **every single turn**, and the engine validates almost none of it.
+
+`back_home` shipped 10/10 on `gates.py` with a map that does not describe a building. Four findings,
+all from `games/back_home/REVIEW.md`:
+
+**W1 — there is no outside.** `the_shop` carries `entry_from = "the_front_room"` and sits in the
+front room's `navigation_order` between the kitchen and the landing. No street, no front door, no
+town. Walking to work is the same action as walking into the kitchen. The location's own description
+says *"ten minutes' walk away"*; the graph puts it one step from the sofa.
+
+**W3 — the fiction and the graph disagree.** `rung_ray_garage_bench` is written around the garage
+being *"the only room in the house with a door to the outside."* The garage's `navigation_order` is
+`[]` and its only exit is back to the kitchen.
+
+**W4 — three of four men have no bedroom.** Ray, Dean and Cal are scheduled only in the bathroom,
+front room, garage and kitchen. Two bedrooms exist in a house holding four adults, and the landing's
+own description counts *"Four doors"* — one of which opens on nothing. The Want compounds it:
+`the_want.md:41` sells **"her father's room"** as one of three rewards for topping out `nerve`. It
+was never built.
+
+**W6 — the prose built the world the graph didn't.** Counted across the authored phase files: *the
+hall* ×6, *front door* ×2, *the street* ×1, *outside the house* ×1. None are locations.
+
+**The consequences are not cosmetic.** `exposure` is the most gameable meter in the game and its
+entire consequence surface is four adults who already live with her. There is no source of new
+characters, because a world with no exterior can only recycle its interior — which is also why the
+box room is the only renewal mechanism the game has (`REVIEW.md` N3).
+
+## 2 · How v1 teaches it
+
+v1 owns this in two files: `references/location-design.md` (274 lines, the design vocabulary) and
+`references/step-2b-map-design.md` (76 lines, the generative step that runs it). Between them they
+carry the best map doctrine this project has produced.
+
+**On why the step exists** — `step-2b-map-design.md:9`, and it is a verbatim prediction of W1,
+written months before v2 committed it:
+
+> Without it, locations are a backdrop: enumerated as scenes demand them, then emitted at authoring
+> by **copying a reference game's shape**. A premise whose geography differs from that reference
+> ships incoherent and gets fixed by hand, pass after pass.
+
+**On defaulting to a house** — `location-design.md:45`:
+
+> The genre floor is a **multi-zone town** (zone → venue → room), NOT a single building… Choose the
+> shape from the premise; don't default to "a house."
+
+`back_home` is a house. v2 had no such rule, so nothing objected.
+
+**On exteriors** — `location-design.md:77`, which is precisely the missing street:
+
+> **Two roots, bridged by walk activities.** A home-exterior root and a town root are SEPARATE
+> top-level locations with no `entry_from`, connected by walk-activity canvases… Keep the private
+> unit, the shared building it sits in, and the town outside as distinct layers.
+
+**On sizing, and a failure mode we have already lived** — `location-design.md:65`:
+
+> Sizing is TWO axes: scale AND aliveness… the failure is **drifting** into a lifeless scene-holder
+> because no one asked "how alive?" (Vesper's first map shipped "utilitarian, not a living world"
+> exactly this way — the anti-sprawl rule followed off a cliff.)
+
+**On rooms earning their place** — `location-design.md:225`, the room-content floor:
+
+> every navigable location must host at least one canvas… A reachable, **empty-dead** room (no plot
+> AND no ambient — the player walks in and bounces off) is the failure.
+
+And it closes with a **13-item pre-ship audit** covering container traps, `navigation_order`
+reciprocity, the locked-location unlock contract, reachability, and naming consistency.
+
+## 3 · Where v1 is wrong
+
+Four things, and the first is the one that matters most.
+
+**a · It is a checklist, and checklists do not hold.** v1 states the problem itself at
+`location-design.md:14` — *"The engine never checks any of this — a wrong, dead, or incoherent map
+builds GREEN and only reveals itself in play."* Its answer is thirteen manual checkboxes. The
+evidence that this does not work is in the same file, at `:257`, describing the locked-flag-with-no-
+setter bug: **"Shipped twice: v1's Dining Room, then again in the rebuild written to prevent it."**
+v2 must not inherit the checkbox; it must inherit the finding and turn it into a gate.
+
+**b · Nobody has to sleep anywhere.** 274 lines about maps, and no rule that a character who lives
+in a dwelling needs a room in it. **`back_home`'s W4 passes v1's entire 13-point audit** — every
+location has a job, every schedule row is categorised, naming is consistent, and three adult men
+still have no bed. This is a real hole in v1, not just in v2.
+
+**c · The prose and the graph are never reconciled.** W6 — six references to a hall that does not
+exist — also passes v1's audit clean. v1 checks the graph against the *design*; it never checks the
+graph against the *written game*.
+
+**d · It mixes design doctrine with engine minutiae, which v2 structurally forbids.** `SKILL.md:66`
+is unambiguous: *"Engine facts are in `references/engine.md` — and **only** there."* v1's file
+interleaves `auto_exit = false`, container double-printing, `navDestBlockedReason`, and passage-entry
+guards with the design argument. Splitting the two is a requirement of v2's layout, not a preference.
+
+**e · The archetype claim carries no number.** *"The genre floor is a multi-zone town"* is asserted
+with example games and no measurement. It may well be true — a sandbox-nav survey behind it exists —
+but v2's standard is that a threshold arrives with the count that produced it. Either the number
+comes with the claim into v2, or the claim does not come.
+
+## 4 · What v2 says instead
+
+Map design belongs to the **`board` phase**, before any character is placed and before a word of
+prose is written. It produces a decision recorded in `v2_state.json`, and the gates check the built
+game against the game's own declaration.
+
+### The four rules
+
+**R1 · The map is a place, not a list of rooms.** Before locations are declared, name what kind of
+place it is and write the graph down as something a person could walk. The test is not "does every
+room have a job" — every room in `back_home` has a job. The test is: **could someone who has never
+seen the game draw this building from the graph?**
+
+**R2 · A dwelling houses its residents.** Every character the board declares as living in the
+world's primary dwelling gets a `home` location recorded in `v2_state.json`. If a character sleeps
+off-screen — a lodger on nights, a neighbour — that is declared too, explicitly, not by omission.
+A game where the cast has nowhere to sleep is a set, not a house.
+
+**R3 · If she travels, there is something to travel through.** Any destination the fiction places
+away from the dwelling requires a connecting exterior location. This is not decoration: it is where
+the ascent meters get a consequence surface outside the household, and it is the only renewable
+source of new characters a domestic premise has.
+
+**R4 · The graph owes the prose.** Nothing the writing treats as a place may be missing from the
+map. When a paragraph says *hall*, either the hall exists or the paragraph is wrong. Both are
+cheap fixes on the day and expensive twenty thousand words later.
+
+### The engine capabilities v2 did not know it had
+
+Verified against source during this study; all four are absent from `references/engine.md` and must
+be added there with these citations before any of this ships.
+
+| capability | field | citation |
+|---|---|---|
+| **travel friction** — a per-entry cost on a location, in time and any player trait | `costs = { time = 20, energy = 5 }` on `[[locations]]` | `template_import.py:170` (dataclass), `:1778` (parse); `v2.py:4681` (*"A location's per-entry cost lives in `setup.locations[slug].entry_costs`"*), `:15276` `has_location_costs` |
+| **locked location** — visible but blocked, with in-world prose on the greyed card | `entry_conditions` + `blocked_message` | `template_import.py:159-160`, `:1775-1776`; `v2.py:6590` |
+| **off-screen location** — a schedule label with no nav card | `offscreen = true` | `template_import.py:154` — *"Non-navigable 'away' location… no nav card, no hub, exempt from presence floor + reachability"* |
+| **pure-nav wrapper** | `is_container` + `default_entry` | `template_import.py:153`, `:3968` |
+
+`travel friction` is the direct mechanical answer to *"the shop is ten minutes' walk away."* Right
+now that sentence is decoration, because arriving costs nothing. A `costs = { time = 20 }` on the
+bridge is what makes a schedule bite — if crossing to work burns twenty minutes each way, then who
+is home at which hour becomes a real constraint rather than a lookup table.
+
+### What the board phase records
+
+Extends the existing `board` block in `v2_state.json`, which already holds `locations` with a `job`
+per entry:
+
+```
+board.map = {
+  "shape":      "one dwelling + a street + one workplace",
+  "exterior":   "the_street",
+  "dwelling":   "the_house",
+  "homes":      { "npc_ray": "rays_room", "npc_marek": "the_box_room", … },
+  "bridges":    [ { "from": "the_street", "to": "the_shop", "costs": { "time": 20 } } ]
+}
+```
+
+Declared once, in the board phase, before content. Then the gates check the game against it.
+
+## 5 · The check
+
+Four candidates. Two are hard gates; two are lints, and they are marked as lints because a check
+that fires on correct work is worse than no check.
+
+**Gate A · every location reachable from the start.** Walk `entry_from` / `navigation_order` from
+`project.starting_canvas`'s location. Any location not reached, and not marked `offscreen = true`
+or deliberately sealed (`auto_exit = false`), is a fail. Fully decidable from the merged TOML.
+
+**Gate B · every declared resident has a home that exists.** Read `board.map.homes` from
+`v2_state.json`; every value must be a real location id, and every character in `board.characters`
+must appear as a key or carry an explicit off-screen declaration. This is the check that catches
+W4, and it catches it **because the board had to state the answer first** — the gate compares the
+game to its own design rather than guessing intent.
+
+*This is the pattern worth generalising to later studies: where a property cannot be inferred from
+the TOML, have the board phase declare it and gate the game against the declaration.*
+
+**Lint C · building-part nouns with no location.** Scan authored prose for a small frozen list —
+`hall`, `stairs`, `landing`, `street`, `front door`, `back door`, `garden`, `yard`, `attic`,
+`cellar`, `porch`, `drive` — and report any that appear without a matching location. A lint, not a
+gate: *"he came through the hall"* in a game that deliberately has no hall location is a judgement
+call, not an error. It would have caught W6 on the first build.
+
+**Lint D · declared exits that do not exist.** Report a location whose description or prose asserts
+an exit (*"a door to the outside"*) that has no counterpart in the graph. Same frozen-phrase
+approach as C, same lint status, catches W3.
+
+**Deliberately not a gate: "is the map a coherent place."** It is the most important rule in this
+study and it is not mechanically decidable. R1 stays a design rule that a human signs off in the
+board phase. Pretending otherwise would produce a check that measures the wrong thing and lets the
+real failure through — which is exactly how `back_home` shipped 10/10.
+
+---
+---
+
+# Study 2 — How the game talks to the player
+
+## 1 · What it is, and what breaks without it
+
+Everything the player reads that **is not the story**: the room names on the nav, the labels on
+activity links, the guidance page, the words under a meter, the text on a door that will not open.
+It is the game speaking about itself, and it is a different job from prose — it has to be
+unambiguous on a first read, by someone who has never seen the game.
+
+No skill owns this category. Four findings, one cause.
+
+**G1 — the guidance page is empty, and the nav links to it.** `0_systems_spec.toml:19` declares
+`quests_engine = "v2"`, which emits the V2 QuestsPage (`v2.py:14711` dispatches on that key). The
+authored table is `[[quest_cards]]` (`template_import.py:2462`). `back_home` declares **zero** across
+all five phase files; the built game carries `setup.quests_cards = []`. So the sidebar shows
+**Quests 📋**, and behind it a page headed *"What's Next"* with nothing under it.
+
+**G2 — seven of eight locked doors say nothing.** Only `hub_cal_frontroom` carries `locked_text`.
+`v2.py:12747` falls back to the choice text (`locked_text or choice_text`), so the other seven render
+as a greyed copy of themselves. `locked_text_threshold` (`v2.py:12786`), which prints an explicit
+*"Requires …"*, is used **zero** times.
+
+**W5 — two of eight room names are unresolvable.** *The Landing* is British for an upstairs hallway
+and the game never says so; *The Box Room* is a small spare bedroom, here rented out.
+
+**W7 — activity labels are written as voice.** *Sit with it* is the most-clicked link in the game —
+the pass-time action, +90 minutes — and does not say what it does. *See to it yourself*, *The bench*,
+*The regulars*, *Someone's in there*. Found the correct way: LO read the menu and asked what one of
+them meant.
+
+**What this costs, concretely.** Three chains exist that a player has no way to discover:
+
+- `exposure ≥15` opens her mother's boxes, the only source of `worn_corruption ≥4`, the only key to
+  `triggered_caught_in_passing`
+- one specific kitchen choice at `exposure ≥35` sets `dean_open`, the sole unlock for Dean's entire
+  late-night hub
+- Ray is in the garage weekdays 18:00–20:00; Dean weekends 14:00–17:00
+
+Against the measured genre failure: across a top-30 sandbox study, **lostness is the dominant player
+complaint at a 4.7% median share of all comments, against grind's 0.9%.** Players quit lost, not
+bored. `back_home` is a pure specimen — 97 canvases, 8 locked doors, three interlocking meters, and
+no statement anywhere of what to do first.
+
+## 2 · How v1 teaches it
+
+v1's `references/quests.md` (285 lines) is the strongest single file in either corpus on this, and
+its central rule is the one v2 needs most.
+
+**On what a guidance line is for** — `quests.md:81`:
+
+> **The label is a walkthrough line — place + person + verb (+ window).** "Flash him at the depot"
+> passes; "Prove yourself to Renner" fails (no place, no clickable verb)… Atmosphere lives in the
+> card's `text`; the label is load-bearing navigation.
+
+**On what the player actually cannot see** — `:91`, and this is the rule that answers `back_home`
+directly:
+
+> **A meter-gated rung names its FEEDER, not just its number.** … not "she isn't ready" but "she
+> won't go further until the lessons do — bring her a new word (her room, evenings)". **The HUD
+> already shows the number; the ROUTE to raising it is what the player can't see.**
+
+**On the page as a designed thing** — `:3`: *"The Quests page is a designed surface, not a pile of
+per-beat cards."* Two tiers, free from the engine: a card with no `npc_id` goes to a top section, a
+card with one goes to that character's own section, one live at a time by `priority`.
+
+**On the ladder shape that fits a meter-driven game** — `:118`, the stepped trait-band ladder: one
+card per exclusive band, gated `gte X` + `lt Y`, so exactly one matches and the card swaps as the
+meter crosses. Proven live on Vesper's Renner across 28 checks.
+
+**On two traps that produce silence** — `:137` and `:147`. A card whose numeric goal is met, with no
+`ready_canvas` and not `terminal`, matches none of the three render frames and returns empty. Worse,
+if an arc's last card retires with nothing behind it, the character's whole section **disappears** at
+the exact moment they become permanent sandbox content. *(Measured: Renner's heading vanished and
+nobody noticed for eleven beats.)*
+
+## 3 · Where v1 is wrong
+
+**a · It is a mechanics file wearing a voice file's title.** Of 285 lines, the overwhelming majority
+are engine mechanics — render frames, picker symbols, condition evaluators, line numbers. The rule
+about how a label should *read* is **one paragraph**. For the thing LO actually asked for — *"same
+info, told better"* — v1 is thinnest exactly where we need it thickest.
+
+**b · It does not recognise the category.** `quests.md` covers quest cards. Room names live in a
+different file (`location-design.md §3`). Activity labels, `locked_text`, and the words under a meter
+are covered **nowhere**. Four surfaces doing one job, split across two files and two gaps, so nothing
+enforces a consistent voice across them. That is why `back_home` can have a careful naming style and
+still be unreadable — each surface was written to its own instinct.
+
+**c · Writing it down did not make it happen.** The file exists *because* Vesper reworked its quest
+page five times — and then, with the file in place, Renner's section still disappeared for eleven
+beats. Doctrine caught neither.
+
+**d · Its top tier assumes a game v2 does not build.** `quests.md:173` lays out the top section as
+*"the Story-Goals column — from the desire ladder: the mission's current want + next action, plus any
+mission investigation threads."* **A v2 game has no mission and no ending.** The per-character tier
+transfers cleanly; the mission spine does not, and copying it would smuggle a story shape into a
+release stream. v2 needs a different answer for the top of that page.
+
+**e · Pipeline-bound.** *"Read this at Step 5 … at Step 7 … at Step 6."*
+
+## 4 · What v2 says instead
+
+One category, one voice, five rules. This is the skill's **second voice** — `register.md` governs
+what the player reads *after* clicking; this governs everything else.
+
+> **The game's own voice is plain. It names a thing or an action and it never performs.**
+
+**R1 · A label answers "what happens if I click."** Room names and activity links are navigation.
+*Sleep*, *Wash*, *Take a shift*, *Listen through the wall* already work in this game; *Sit with it*
+does not. **The register lives in the paragraph the click produces, not in the button.** In-scene
+choice lines inside a hub are exempt and stay as voice — they arrive with the scene already on
+screen.
+
+**R2 · Every ascent tier carries a visible ladder.** v2 has no mission, so the top of the guidance
+page is not a story spine — it is **the tiers themselves**. One `[[quest_cards]]` card per band of
+each ascent meter, using the stepped trait-band shape, so the page always answers *what is the next
+rung and what raises it.* This is the v2-native replacement for v1's Story-Goals column, and it falls
+out of v2's own architecture rather than being borrowed.
+
+**R3 · Name the feeder, not the number.** The HUD already prints `exposure 22`. What the player
+cannot see is **which repeatable click moves it**, and in a game where every gate is a meter that is
+the whole of navigation. Every card names a place, a person where there is one, and a verb.
+
+**R4 · Every wall states its own key.** A choice rendered `show_when_locked` without `locked_text` is
+a defect, not a style choice. The skill's own release doctrine already says it —
+`the-release.md:93`: *"An honest wall is a promise; a silent one is a bug report."* Eight strings
+would have converted eight dead grey lines into eight advertisements for the next release.
+
+**R5 · Nothing retires into silence.** v1 found this trap; **v2 owns it far harder, because a v2
+product never ends.** Every character becomes permanent sandbox content the moment their ladder tops
+out, which is exactly when a badly-shaped chain makes them vanish from the page. Every arc needs one
+card that still matches after the last rung.
+
+### Engine facts to move into `engine.md`, with citations
+
+None of this is in v2's engine reference. Verified this turn.
+
+| fact | citation |
+|---|---|
+| the table is **`[[quest_cards]]`**, flat, not nested under `quests` | `template_import.py:2456-2462`; `class QuestsCard` `:997`, parser `:1068` |
+| requires `quests_engine = "v2"` in project metadata or the overlay is not emitted | `v2.py:14711` |
+| three render frames, exactly one per card: ✓ terminal / 🔓 `ready_canvas` / 🎯 unmet goals | `v2.py:14964` `renderQuestsGoalBlock` |
+| card selection: `pickQuestsCards(scope)` for the top tier, `pickQuestsCard(slug)` returns the single highest-`priority` match per character | `v2.py:14837`, `:14065` |
+| **quest conditions use a different evaluator and do NOT fail open** — never paste `version = "1.0"` onto a card | `v2.py:14878` `checkQuestsCondition` |
+| the sidebar next row calls the identical functions — there is no separate "sidebar quest" | `v2.py:15454-15456` |
+| a locked choice with no `locked_text` falls back to the choice text | `v2.py:12747` |
+| `locked_text_threshold` prints an explicit "Requires …" hint | `v2.py:12786` |
+
+## 5 · The check
+
+**Gate C · guidance exists.** At least one `[[quest_cards]]` card per ascent tier declared in
+`board.ascent_tiers`, and at least one per character in `board.characters`. Fully decidable from the
+merged TOML plus `v2_state.json`. Catches G1 on the first build — and note it would have fired on
+`back_home` at the moment the board phase ended, long before 36,000 words were written.
+
+**Gate D · every wall states its key.** Every choice with `show_when_locked = true` carries a
+non-empty `locked_text` or `locked_text_threshold`. Fully decidable. Catches G2. Eight failures today.
+
+**Gate E · no chain ends in silence.** For each `npc_id` appearing in `quest_cards`, at least one of
+its cards is `terminal = true`, or is goal-less and `ready_text`-less (the end-of-content shape).
+Decidable for the shape v1 documents; it does not prove every condition path, and the study says so
+rather than overclaiming.
+
+**Deliberately not a gate: whether a label reads well.** *The bench* is a plain noun and clear in
+context; *Sit with it* is a plain phrase and is not. No rule separates them mechanically. This stays
+a human sign-off in the board phase, alongside study 1's "is the map a coherent place."
+
+**The pattern holds.** Gates C and E read the board's declaration and check the game against it —
+the same move as study 1's Gate B. Where a property cannot be inferred from the TOML, the board
+phase declares it and the gate compares. That is now two studies out of two, and it should be
+written into the skill as the standard shape rather than rediscovered each time.
+
+---
+---
+
+# Study 3 — Money & pressure
+
+**This is the first study built on primary measurement of more than one game.** 18 shipped browser
+sandboxes were pulled and parsed — the corpus, the method and its limits are in Appendix B.
+
+## 1 · What it is, and what breaks without it
+
+Money is the only system in a sandbox that can make the player *choose*. Everything else expands;
+money is the one thing that says no. If it never says no, every arc gated behind it becomes optional
+scenery.
+
+`back_home`'s state, from the merged TOML:
+
+```
+conditions anywhere that read money ...... 0
+items declared ........................... 0
+sinks besides the engine's rent .......... 0
+canvases carrying a real `costs` block ... 2   (both at the shop)
+```
+
+Against £120/week rent, income is £42/day from two once-daily surfaces — plus
+`activity_shop_regulars` at £10 per 2 hours, **uncapped and free**. So money is not merely
+sufficient, it is **unbounded**.
+
+The design intent is stated at `0_systems_spec.toml:33`: *"120/week is four shifts — most of her
+week, survivable, and one bad week forces the ask."* **No week forces the ask.** Ray's entire
+front-room ladder is gated on `need` at 15/35/45/55/75, and nothing ever pushes the player toward
+any of it — while the Want's own check names Ray as the character a player would most miss.
+
+## 2 · How v1 teaches it
+
+v1's `references/rent.md` (278 lines) is a good file about **one mechanism**. It is verified against
+live code, it names the engine's key set exactly, and it gets three things right that v2 should keep:
+
+**Rent is a clock, not a tax** — `rent.md:5`:
+
+> Rent is the simplest mechanical engine for the "I Need Money" opener: it converts "you could work"
+> into **"Friday, $125, or else."**
+
+**Give the obligation a face** (§6, `collector_npc`) — a person collects, so the pressure is social
+as well as arithmetic. `back_home` does this correctly: Ray collects, in the kitchen, and hates it.
+
+**Arm it after income exists** (§7, `start_after_flag`) — pressure before the player has a way to earn
+is a scripted loss, not a choice.
+
+And its budget rule, §8:
+
+> **Rule: `amount` must be clearable by the first post-arm due date with margin** — tune it against the
+> income channels, not in a vacuum. Rent that can't be paid isn't pressure, it's a scripted loss.
+
+## 3 · Where v1 is wrong
+
+**a · It only guards the downside.** §8's entire safety rule is *don't make it unpayable.* There is
+**no corresponding rule against making it trivially payable**, and no measurement of what the ratio
+should be. `back_home` followed v1's rule exactly — rent is clearable with enormous margin — and the
+pressure evaporated. A rule with a floor and no ceiling produces exactly this failure, and the
+corpus below shows the missing half is measurable.
+
+**b · It is scoped to rent, and rent is one mechanism.** §1 waves at alternatives — *"a savings goal,
+a debt, or purchase-gated progression"* — and develops none of them. There is no general doctrine of
+**sinks**: what money should be for, how many ways to spend there should be, whether prices move.
+That is why `back_home` ships **zero items** and one sink.
+
+**c · Nothing connects money to the ascent tiers.** In a v2 game every meaningful gate is a meter,
+and money's job is to be the thing that makes a meter-raising choice cost something. v1 treats money
+as a survival subsystem sitting beside the arcs rather than as the pressure that drives them.
+
+**d · Pipeline-bound**, like the rest.
+
+## 4 · What v2 says instead — the measured rules
+
+Every number below is measured across 18 shipped games (Appendix B). Where the corpus is ambiguous,
+the study says so rather than inventing a threshold.
+
+### R1 · Money must gate content
+
+**Measured: median 67.3 conditions reading the currency per 1,000 passages.**
+
+| | gates/1k | | gates/1k |
+|---|---|---|---|
+| shady_deals | 605.6 | destroyer | 66.3 |
+| generic_porn_game | 327.2 | become_someone | 55.1 |
+| back_to_freedom | 262.0 | zaras_school_life | 44.4 |
+| life_at_university | 156.2 | road_to_success | 29.5 |
+| new_life_project | 95.1 | the_company | 26.0 |
+| galactic_outlaws | 91.4 | **degrees_of_lewdity** | **23.8** |
+| better_sit_home | 70.4 | course_of_temptation | 15.1 |
+| apocalyptic_world | 68.3 | gakko | 4.8 |
+| | | **back_home** | **0.0** |
+
+The only games at zero are `emilie` and `lustbound` — a scripted time-slot game and a small one.
+**Every sandbox in the set gates on money.** `back_home` sits with the two that are not sandboxes.
+
+### R2 · Sinks outnumber sources
+
+**Measured: median spend-site : earn-site ratio = 2.2 : 1**, across the 14 games with enough flow to
+measure. `the_company` 48:1 · `back_to_freedom` 4.8:1 · `destroyer` 3.4:1 · **`degrees_of_lewdity`
+1.76:1** · `become_someone` 1.3:1. Only three games invert it, and all three are the small ones.
+
+**The floor v2 adopts is 1:1** — generous against a 2.2 median, and it still catches `back_home`,
+which has three sources and one sink.
+
+### R3 · The obligation is near-universal, and it is not optional furniture
+
+**Measured: 14 of 19 games carry real recurring-obligation vocabulary** (rent / debt / loan / bill /
+tuition, ≥10 mentions). `back_to_freedom` says *debt* 142 times. **`degrees_of_lewdity` says *rent*
+130 times.** `road_to_success` 57.
+
+`back_home` has the obligation and gets this one right. It is the only part of its economy that works.
+
+### R4 · Prices should move with state
+
+**Measured: a median 24% of money movements carry a computed rather than a literal amount** — 86% in
+`life_at_university`, 57% in `shady_deals`, **21% in DoL**. Real games price things off the player's
+situation, not off a constant.
+
+`back_home`: every grant is a hardcoded literal. This is the softest of the four rules — the corpus
+range is wide — and v2 states it as guidance, not a gate.
+
+### R5 · No free, uncapped income
+
+Not from the corpus — from the failure. A repeatable surface with **no daily cap and no `costs`
+block** that grants currency makes every other rule void, because the player can print money. This is
+mechanically checkable and it is the single line that would have caught `back_home`'s `E1`.
+
+### And the finding that justifies the whole exercise
+
+**DoL carries 738 money movements, 372 money gates, and says *rent* 130 times.** v2 derived every one
+of its ten thresholds from this game's source — word counts, location counts, explicit-word ratios —
+and **never once measured its economy.** The blind spot is not theoretical.
+
+## 5 · The check
+
+**Gate F · money gates something.** At least one condition in the merged TOML reads the currency
+declared in `board.need_engine`. A floor, not a target — the corpus median is 67 per 1,000 passages
+and our games are far smaller, so a rate threshold would be noise. Catches `back_home` at 0.
+
+**Gate G · sinks ≥ sources.** Count distinct canvases granting the currency vs distinct canvases or
+conditions consuming it, engine rent included. Floor 1:1 against a measured median of 2.2:1.
+
+**Gate H · no free uncapped income.** Fail any repeatable canvas that grants the currency while
+carrying neither `max_triggers_per_day` nor a `costs` block. Fully decidable. One rule, and it is the
+one that broke this game.
+
+**Deliberately not a gate: whether the pressure is felt.** Whether £120 against a £42 day *squeezes*
+is a play question. The three gates above establish that a squeeze is possible; only a playthrough
+establishes that it happens. Third study running that refuses to gate the thing it cares most about,
+and the reason is unchanged — a proxy check is how `back_home` shipped 10/10.
+
+---
+
+## Appendix B · The economy corpus — method and limits
+
+**What was pulled.** 18 shipped browser sandboxes, ~62,000 passages, obtained 2026-08-12 as complete
+single-file SugarCube source. Game URLs came from this project's own prior live-play sessions in
+`game_explorations/`; `mopoga.com/<slug>` landing pages carry the real file URL in a
+`data-game-url` attribute, and those `/embed/` URLs serve the full compiled game with `tw-storydata`
+intact.
+
+The set: `degrees_of_lewdity` (15,626 psg) · `course_of_temptation` (5,294) · `destroyer` (5,236) ·
+`gakko_no_monogatari` (4,836) · `become_someone` (3,287) · `back_to_freedom` (2,252) ·
+`the_company` (2,075) · `new_life_project` (1,683) · `apocalyptic_world` (996) ·
+`life_at_university` (890) · `zaras_school_life` (788) · `shady_deals` (710) · `lustbound` (673) ·
+`emilie_finds_a_way` (619) · `galactic_outlaws` (525) · `road_to_success` (373) ·
+`generic_porn_game` (327) · `better_sit_home` (142).
+
+**Two extraction bugs found and fixed before any number here was trusted.** Recorded because the
+first pass produced a confident, wrong table:
+
+1. **Passage bodies are HTML-escaped in a compiled Twine file.** `<<set $money += 5>>` is stored as
+   `&lt;&lt;set …&gt;&gt;`, so every macro regex silently matched nothing. DoL initially read as
+   *"0 spending sites"* next to 372 gates — obviously impossible, which is what exposed it.
+2. **Money mostly moves through per-game widgets, not raw `<<set>>`.** DoL uses `<<money -350000
+   "farmUpgrades">>`; `life_at_university` uses `<<addmoney 10>>` / `<<redmoney $taxiprice>>`;
+   `shady_deals` uses `` <<money `$junk_price`>> ``. The final extractor discovers each game's money
+   widgets from its own `<<widget>>` definitions and counts call sites by argument sign.
+
+**Also corrected:** the currency variable is now chosen by **how it is used** (arithmetic + gate
+occurrences) rather than by name frequency, after `road_to_success` initially resolved to the decoy
+`$game.randomMoney` instead of `$player.money`.
+
+**Known limits, stated rather than hidden:**
+
+- **`back_home`'s earn/spend counts are not comparable** and are excluded from R2's median. Our engine
+  represents effects as JSON data, not as inline macros, so a macro-scanner cannot see them. Its
+  **gate count of 0 is comparable and is independently confirmed** from the TOML: zero conditions
+  anywhere read money.
+- `back_to_freedom` is not a standard Twine compile (no `tw-passagedata`); its passage count comes
+  from a `<div>` container and its per-1k figures are softer than the rest.
+- Obligation vocabulary is a keyword count. It shows an obligation is *present and load-bearing*, not
+  how hard it bites.
+- Everything here measures **structure, not feel.** No number in this study says whether a game's
+  economy is enjoyable — see the refusal in §5.
+
+**A second use for this corpus.** Those 62,000 passages are also the first real prose sample this
+project has held. **Study 4 (how the prose is written) should measure against it rather than assert**,
+which would make it the second study grounded in more than one game.
+
+---
+---
+
+# Study 4 — How the prose is written
+
+Measured on the same 18-game corpus as study 3, scored with **`gates.py`'s own frozen explicit
+regex** so the field and our game sit on one instrument. Limits in Appendix C — read them before
+quoting any number here, because two of the four measurements do **not** transfer to our engine.
+
+## 1 · What it is, and what breaks without it
+
+Everything the player reads after clicking: paragraphs, dialogue, thought. It is the bulk of the
+game and v2 barely mentions it.
+
+```
+v1  references/rts-flat-prose.md .... 735 lines — the largest file in either corpus
+v2  references/register.md .......... 111 lines
+```
+
+And v2's 111 cover **one topic**: how to write an explicit beat, and one recurring defect in doing
+so. Sentence length, dialogue, how an ordinary non-sexual paragraph should read, how thought is
+handled — none of it is written down anywhere in v2.
+
+## 2 · How v1 teaches it
+
+`rts-flat-prose.md:12` states the register as three things, and only the first is length:
+
+> 1. **Few words PER CLICK.** ~35–40 words per beat — **flat across every tier.** You escalate a
+>    scene by adding *beats*, not by fattening paragraphs.
+> 2. **SPOKEN, not narrated.** RTS runs **0.73 narration words : 1 dialogue word** — more dialogue
+>    than narration, including in its sex scenes. Every game this skill has shipped runs 5:1 to
+>    19:1 the other way. **This is the drift.**
+
+Plus Rule 6 (`:311`) — crude is the default at the sexual register, with a per-NPC ceiling — and
+Rule 9 (`:360`), added after the diagnosis that a game can satisfy every other rule and still read
+as *"a cold literary thriller that happens to contain sex."*
+
+## 3 · Where v1 is wrong — and the one place it cannot be judged
+
+**a · Its most load-bearing claim rests on one game — the same error v2 made.** The 0.73:1
+narration-to-dialogue ratio is measured from *Road to Success* alone and then used to declare every
+game this project ships "drifted." One game is a hypothesis, not a norm.
+
+**b · And I could not test it.** *Road to Success* is built almost entirely from HTML/CSS interior
+markup — its passages are laptop UIs and styled panels — so only **31 of its 373 passages** survive
+prose extraction. **v1's headline number is untestable from the compiled artifact**, and this study
+does not claim it is wrong. It claims it is unverified, which for a rule that calls everything else
+"drift" is its own problem.
+
+What the corpus *can* say: the field median is **33:1 narration:dialogue**, and the two most
+prose-dense games in it are the two most dialogue-heavy — **DoL at 2.7:1**, `course_of_temptation`
+at 3.8:1. So dialogue-forward writing at scale is real and the direction of v1's instinct survives;
+the specific number does not transfer.
+
+**c · The 35–40 words-per-beat figure cannot be checked from a compiled game either.** A Twine
+passage is not a beat, and our own engine emits a whole canvas as **one** passage — `back_home`'s
+median passage is 429 words against a field median of 175, which measures architecture, not
+register. Appendix C.
+
+## 4 · What v2 says instead — three measured, one inherited
+
+### R1 · Sentences run short. Ours do not.
+
+**The one length measure that transfers**, because a sentence is a sentence regardless of how
+passages are cut.
+
+| | median sentence |
+|---|---|
+| field median (17 games) | **10 words** |
+| degrees_of_lewdity | **9 words** |
+| course_of_temptation · destroyer | 10 · 9 |
+| **`back_home`** | **16 words** |
+
+`back_home` writes sentences **60% longer than the field and nearly double the reference game's**,
+and is third-longest of eighteen. This is the first hard, measured confirmation that our prose is
+denser than the genre — the thing "RTS-flat" was always reaching for, now with a number.
+
+### R2 · Second person is the genre standard
+
+**13 of 17 games are second-person dominant.** `back_home` is at 94% *you/your* — the highest in the
+corpus, alongside `shady_deals` and `course_of_temptation` at 90 and DoL at 84. Third person is a
+minority position held by three games.
+
+v2's `narration_person` setting and its second-person default are **validated by the field**. This
+is the one piece of v2 prose doctrine the corpus confirms outright.
+
+### R3 · The reference game is the coldest game in its own genre
+
+Scored on `gates.py`'s frozen regex, percentage of prose passages carrying 3+ explicit words:
+
+```
+zaras_school_life  72.2      destroyer          43.1      new_life_project  28.0
+become_someone     60.4      gakko              37.8      road_to_success   22.6
+emilie             56.0      apocalyptic_world  37.2      better_sit_home   18.4
+the_company        48.1      generic_porn_game  33.3      galactic_outlaws  17.9
+life_at_university 46.2      lustbound          31.7      shady_deals       14.8
+back_home          43.4                                   course_of_temptation 10.0
+                                                          degrees_of_lewdity    7.5
+                              FIELD MEDIAN 33.3%
+```
+
+**DoL is last. Every other game in the corpus is hotter, and the median is more than four times it.**
+
+Note what DoL's 7.5% is: `gates.py` sets `EXPLICIT_BEAT_FLOOR = 7.5`, derived from this game. This
+run reproduces that derivation independently on a different unit — and shows the number is **a
+property of DoL, not of the genre.**
+
+So v2 took its heat floor from the coldest game in the field and adopted it as the standard. As a
+*floor* it is still valid and still discriminating (the measured-cold game scores 4.7%). As anything
+resembling a target it is badly miscalibrated.
+
+**And this closes the `back_home` heat worry for the second time, from a second direction.**
+`REVIEW.md` O1 already showed the 27.8% was measured on a different denominator. Now the field
+comparison says the same thing outright: at **43.4%, `back_home` sits mid-pack with five games above
+it.** It is not too hot. It never was.
+
+### R4 · Crude at the sexual register, with a per-character ceiling — inherited, not re-measured
+
+v1's Rule 6 and Rule 9 stand. Nothing in this corpus contradicts them and this study did not attempt
+to measure "is it arousing," which is not a countable property. Carried into v2 on v1's evidence,
+flagged as inherited rather than measured.
+
+## 5 · The check
+
+**Gate I · median sentence length.** Computable directly from the merged TOML's prose blocks, no
+declaration needed. The field says 10 and the reference says 9; a **ceiling of 14** is generous
+against both and still fails `back_home` at 16. The first gate in this whole exercise that measures
+*writing* rather than structure.
+
+**Not a gate · explicit density.** `gates.py` already has one, and this study's finding is that its
+threshold is a **floor derived from an outlier** — the fix is to say so in the header, not to add a
+second check. Raising it toward the field median would be inventing a target the evidence does not
+support.
+
+**Not a gate · narration person.** Already an authored setting, already validated. Nothing to check.
+
+**Not a gate · dialogue ratio.** v1's number is untestable from a compiled game and the field spread
+runs 2.7:1 to 500:1 — far too wide to threshold. It belongs in doctrine as a direction, not a gate.
+
+**Deliberately not a gate: whether the writing is good.** Fourth study running.
+
+---
+
+## Appendix C · The prose corpus — method and the three traps
+
+Same 18 files as Appendix B, plus `back_home`'s built HTML through the identical script.
+
+**Prose passages are isolated** by dropping any passage tagged `widget` / `script` / `stylesheet` /
+`init` / `startup` / `header` / `footer`, any body containing a `<<widget>>` or `<<script>>`
+definition, anything under 20 words after stripping, and — the load-bearing filter — **anything whose
+stripped text is under 40% of its raw length**, which removes CSS-and-markup passages that survive
+tag-stripping as word-like fragments.
+
+**Three extraction traps, all found by a result being obviously wrong:**
+
+1. **HTML-escaped macro bodies** (study 3) — `<<set>>` never matched.
+2. **Money moves through per-game widgets** (study 3), not raw `<<set>>`.
+3. **The longest "prose" passages are widget libraries and CSS.** Before the tag filter, the longest
+   passage in `back_home` was the engine's widget library, in DoL a combat widget, in
+   *Road to Success* a styled laptop UI. This inflated every median and poisoned every denominator —
+   the first-pass table showed a field median of 138 words and DoL "8.0% hot" against a denominator
+   stuffed with combat text. **Nothing in this study is quoted from that pass.**
+
+**What does not transfer, stated plainly:**
+
+- **Passage length.** Our engine emits a whole canvas as one passage; a Twine game cuts a passage
+  per click. `back_home`'s 429-word median vs a 175-word field median measures architecture. The
+  35–40-words-per-beat rule is **neither confirmed nor refuted here.**
+- **v1's 0.73:1 dialogue ratio.** Untestable — only 31 of *Road to Success*'s 373 passages survive
+  extraction.
+- **`back_home`'s prose sample is small** — 122 passages against DoL's 10,215. Its sentence-length
+  and person figures are stable at that size; its hot% is noisier than the field's.
+- Everything here measures **shape, not quality.**
+
+---
+
+## Log
+
+| date | what |
+|---|---|
+| 2026-08-12 | Opened. Inventory of 12 items + parked save-safety. Study 1 (map & space) written. Four engine capabilities verified against source and flagged for `engine.md`. Nothing in the skill's reference files changed yet. |
+| 2026-08-12 | Study 2 (how the game talks to the player) written. Eight more engine facts verified and flagged for `engine.md`. Confirmed the authored table is `[[quest_cards]]`, not `[[quests]]` — `games/back_home/REVIEW.md` G1 corrected to match. The declare-then-check pattern now holds in both studies and is proposed as the skill's standard shape. |
+| 2026-08-12 | **Tier 1 graduated.** Studies 1–4 converted into `references/the-map.md`, `the-voice.md`, `the-economy.md` and an expanded `register.md`; 7 new gates + 1 new lint in `scripts/gates.py`; `engine.md` §22–23; `state.md` and `templates/board.toml` extended with `board.map` / `board.economy`. `back_home` now scores **12/17, exit 1** — the ten original gates still pass and every new failure is a defect it shipped with. One study output withdrawn (study 2 R4, the locked-door gate) after it contradicted `engine.md` §15. |
+| 2026-08-12 | Study 4 (how the prose is written) written on the same corpus, scored with `gates.py`'s own explicit regex. Three measured rules, one inherited, one gate. Headline: **DoL is the coldest game in its own genre** (7.5% vs a 33.3% field median), so v2's heat floor came from an outlier — which closes the `back_home` heat worry a second time, from a second direction. `back_home`'s sentences run **16 words against a field median of 10**. Second person confirmed as the genre standard, 13/17. A third extraction trap found and fixed: widget libraries and CSS were being counted as prose, poisoning the first pass entirely. |
+| 2026-08-12 | Study 3 (money & pressure) written — **the first study grounded in primary measurement of more than one game.** 18 shipped sandboxes pulled, ~62,000 passages, method and limits in Appendix B. Four measured rules + one from the failure; three gates proposed. Two extraction bugs found and fixed before trusting any number. Side result: DoL's real source settled `REVIEW.md` O1 — the reference "unit" is a whole-source passage (15,587 of them, matching `gates.py:7`'s "15.6k units"), so the explicit-floor band was never on the same scale as our location-prose measure. |
