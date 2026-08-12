@@ -21,6 +21,18 @@
 //                        NOT whatever is currently half-built in the working tree.
 window.GAMES = [
   {
+    // Listed 2026-08-12. First game authored end-to-end with the author-game-v2 skill:
+    // 36,019 words across 8 locations, 18/18 gates, and a headless play-test (games/steam/playtest.py)
+    // covering the money clamp, the schedule grid and the guidance ladders.
+    // Current output/ is a --dev --debug build — dev stat controls visible, media NOT yet harvested,
+    // so images and clips show debug placeholders. Add `version` + drop the dev flags on output/
+    // when the production build ships with art.
+    slug: "steam",
+    title: "Steam",
+    dev: true,
+    summary: `Your aunt left you the Marlow Baths and the note on it: sixty-one thousand dollars, eleven months, and a hundred and thirty-five a week collected in person every Friday by the cousin who expected to inherit the building. You have one attendant who has not been paid since March, a boiler man who sleeps beside the boiler, and a spring that has run hot out of the mountain since 1891. The town knew your aunt as respectable. Keep the doors open and find out what the house used to do — and what it will pay you to do it again.`,
+  },
+  {
     slug: "vesper",
     title: "Vesper",
     badge: "New",

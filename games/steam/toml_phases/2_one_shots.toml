@@ -1,0 +1,123 @@
+# =============================================================================
+# Steam — 2_one_shots
+# The opening chain. Linear on purpose: it teaches the building, the woman who
+# came with it, the board of things this house used to do, and the note.
+#
+# FIRST EXPLICIT BEAT ON NIGHT ONE (references/the-release.md § first release —
+# the strongest-retained game in the comparison set is explicit on night one,
+# two clicks from free roam). It is not a sex scene forced onto a woman who
+# buried her aunt in March. It is her, alone, in her own water, after close —
+# which is the actual contract this game is selling.
+#
+# ⚠️ engine.md §16 — `doors_open` is read by [settings.rent] and by the standing
+#    surfaces, so it is set from a LOCATED canvas exit. Both canvases here have
+#    a trigger location, so the chain resolves.
+# =============================================================================
+
+
+# ── Morning one ──────────────────────────────────────────────────────────────
+[[canvases]]
+id          = "canvas_opening"
+name        = "Steam"
+description = "Opening. Monday, 07:00, the attic flat. Establishes the inheritance, the note, Del, and the board of nine services with seven scratched out. Linear. SETS doors_open (which arms the Friday draw) and arrival_done."
+
+[canvases.trigger]
+location      = "the_attic_flat"
+is_repeatable = false
+priority      = 12
+is_active     = true
+
+[[canvases.nodes]]
+id   = "the_bed"
+name = "Perrine's bed"
+blocks = [
+  { type = "image", props = { file = "scenes/attic_morning.jpg", description = "A woman sitting on the edge of a bed in a small attic room in early morning light.", search_queries = ["woman sitting edge of bed attic room morning light", "small attic bedroom sloped ceiling morning window"] } },
+  { type = "paragraph", content = "You wake at seven in your aunt's bed, in your aunt's flat, over your aunt's changing room. The pipes run up the wall behind the headboard. They are warm. They have been warm every night since March, because Ivo is downstairs keeping them warm, and he has not been paid either." },
+  { type = "paragraph", content = "The note is on the nightstand where you left it. Sixty-one thousand dollars. Eleven months. A weekly draw of a hundred and thirty-five every Friday, in cash, at the desk." },
+  { type = "paragraph", content = "You have forty-five dollars and a building." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Go down.", targetType = "node", nodeId = "the_lobby" },
+] }
+
+[[canvases.nodes]]
+id   = "the_lobby"
+name = "The lobby"
+blocks = [
+  { type = "paragraph", content = "Del is already at the desk. She has swept the lobby, run the pool skimmer, checked the boiler gauge and put the float in the till, and she does not mention any of it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "We open at eight. We've opened at eight since nineteen eighty-nine." },
+  { type = "paragraph", content = "You say you know. She says nothing, which is her way of saying you did not know, and goes back to the linen count she finished twenty minutes ago." },
+  { type = "paragraph", content = "Behind her is Perrine's board. Nine services in gold paint. Bath. Steam. Scrub. Oil. Four more under a line of black, and the last one scratched down to the wood." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Ask about the board.", targetType = "node", nodeId = "the_board" },
+] }
+
+[[canvases.nodes]]
+id   = "the_board"
+name = "The board"
+blocks = [
+  { type = "paragraph", content = "You ask what the scratched ones were. Del looks at the board for a while, like she is deciding how much of an answer you have earned on day one." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "Things the house did. Before your aunt got respectable about it." },
+  { type = "paragraph", content = "The stairs go up from the end of the lobby to the members' floor, and there is a chain across the third step with a padlock on it that has been there since before you came home." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "And that's shut. She'd want it left shut." },
+  { type = "thought_bubble", content = "She said *she'd want*. Not *it stays*." },
+]
+exit_block = { type = "location", text = "Open the doors.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 60, flagEffects = [
+  { targetType = "player", flag = "doors_open", op = "set" },
+  { targetType = "player", flag = "arrival_done", op = "set" },
+] } }
+
+
+# ── Night one — the first explicit beat, and it is hers ──────────────────────
+[[canvases]]
+id          = "canvas_first_soak"
+name        = "After close"
+description = "Auto-fire at the_pool, gated doors_open, one-shot. Night one, after close, nobody in the building but Ivo two floors down. The first explicit beat of the game and it is solo: she gets into her own water for the first time since she inherited it. SETS first_soak_done, +6 steam, +15 arousal. Teaches the after-close hour, which is where the whole steam ladder ends up."
+
+[canvases.trigger]
+location      = "the_pool"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "doors_open", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "first_soak_done", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "the_water"
+name = "After close"
+blocks = [
+  { type = "image", props = { file = "sex/first_soak_t4.jpg", description = "A woman alone at night in a dim tiled indoor hot pool, water to her chest, steam on the surface.", search_queries = ["woman alone night indoor hot spring pool steam dim", "nude woman tiled bath house pool night lit from below"] } },
+  { type = "paragraph", content = "Half eleven. The doors are bolted, the till is counted, and the only other person in the building is two floors down with his hand on a valve. The skylight is black. The water is still going." },
+  { type = "paragraph", content = "You have not been in it yet. Eleven days in this building and you have not once got in your own pool." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Undress.", blocks = [
+        { type = "paragraph", content = "You leave the robe on the bench. Nobody is coming through that door. You go down the steps into the hot end and the water takes the day off you at your knees, your hips, your ribs." },
+    ] },
+    { advance_text = "Stand in it.", blocks = [
+        { type = "paragraph", content = "You stand naked in the middle of your own building at midnight. The water holds your tits up. The air above the surface is cold enough that your nipples ache, and everything under it is loose and open and weightless." },
+    ] },
+    { advance_text = "Nobody is coming.", blocks = [
+        { type = "paragraph", content = "You put your hand on your cunt. It is hot from the water and hotter under your fingers. Your clit is up already and your nipples are up, and you work yourself slowly, standing, one arm hooked over the tile lip." },
+    ] },
+    { advance_text = "Keep going.", blocks = [
+        { type = "paragraph", content = "Two fingers in and your cunt takes them easily, the water going in with them. Your thumb stays on your clit. You brace on the tile and fuck yourself standing up in four feet of water in the middle of the room." },
+    ] },
+    { advance_text = "Let it happen.", blocks = [
+        { type = "paragraph", content = "The orgasm goes up through your legs and your hips buck the water. You hear yourself moan off the tile and the room hands it back from every wall at once. You keep your fingers on your clit all the way through it." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "paragraph", content = "You stand there breathing with the water rocking against the sides. It takes a long time to go flat again in a room this size." },
+        { type = "thought_bubble", content = "Perrine ran this house thirty years and never did that in here." },
+        { type = "paragraph", content = "Then you think about it properly — the board with four services under a black line, the padlock on the third step — and you would not put money on it." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Go up.", config = { destinationType = "specific", locationId = "the_attic_flat", time_progression_minutes = 45, effects = [
+  { targetType = "player", trait = "steam", op = "add", value = 6, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 15, clamp = true },
+], flagEffects = [
+  { targetType = "player", flag = "first_soak_done", op = "set" },
+] } }

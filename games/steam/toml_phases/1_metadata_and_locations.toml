@@ -1,0 +1,404 @@
+# =============================================================================
+# Steam — 1_metadata_and_locations
+#
+# ⚠️ [player], [[locations]], [[npcs]] and [[npcs.schedules]] MUST share this one
+#    file. TOML scoping re-parents nested tables across a file boundary.
+#
+# THE MAP (references/the-map.md R1 — a place, not a list of rooms):
+#
+#   Spring Street  (exterior, costs 20 min)
+#   └── The Front Desk                    ← her post, the hub
+#       ├── The Changing Room → The Pool → The Scrub Room
+#       ├── The Boiler Room   (down)
+#       ├── The Lodger's Room (the rotating slot)
+#       └── The Attic Flat    (up — her room, the wardrobe)
+#
+# You undress before you get wet and get wet before you get scrubbed, so the
+# graph is walkable by someone who has never seen it. Signed off in the board
+# phase, in the ledger.
+#
+# ANCHOR = the_pool. It carries >=25% of location prose (gate 1) and it is
+# re-enterable at every hour of the day — the measured failure was an anchor
+# sealed in a room with no exits.
+#
+# Location NAMES are UI (references/the-voice.md R1): they say what is through
+# the door. "The Lodger's Room", not "The Back Room".
+# =============================================================================
+
+[player]
+id           = "player"
+name         = "Iris"
+description  = "Thirty-one, and the owner of a bathhouse she cannot afford, in a town that knew her aunt."
+customizable = false      # deferred: needs [[player.customization_fields]]; v0.1 ships fixed
+
+[player.core_traits]
+# layer 1 — ratcheting ascent tiers (rungs at 15/35/55)
+steam     = 0
+service   = 0
+house     = 0
+propriety = 70     # counterweight: what she spends to climb the other three
+# layer 2 — volatile state
+arousal   = 0
+energy    = 100
+money     = 45     # ⚠️ engine.md §21 — EVERY money effect carries clamp = false.
+                   #    Clamped, money caps at 100, the 135 draw is unpayable, and
+                   #    the build is green the whole way down.
+# internals
+takings_today = 0
+tenant_slot   = 1
+
+# Decay is a POSITIVE MAGNITUDE — the validator rejects negatives.
+[player.trait_decay]
+energy = 8
+
+
+# =============================================================================
+# LOCATIONS — 8. One anchor, six working rooms, one exterior.
+# =============================================================================
+
+# ── ANCHOR — where the town sits half-dressed and talks ──────────────────────
+[[locations]]
+id                   = "the_pool"
+name                 = "The Pool"
+description          = "Green tile, a skylight with forty years of mineral on it, and water hot enough that everybody in it goes quiet for the first minute. Two dozen bodies fit in here. Most days it is four. Who is in the water at which hour is the only calendar this town keeps."
+image                = "locations/the_pool.jpg"
+image_search_queries = ["old tiled indoor hot spring bath house pool steam", "vintage bathhouse pool skylight green tile"]
+entry_from           = "the_changing_room"
+navigation_order     = ["the_scrub_room"]
+
+# ── the crudest room in the game, and it is a WORKING room ───────────────────
+[[locations]]
+id                   = "the_scrub_room"
+name                 = "The Scrub Room"
+description          = "One marble slab, worn to a dish in the middle by a century of people lying on it. A hose, a bucket of grit soap, and a bench for the one who is waiting. The door does not lock and never has — Perrine took the lock off herself, and Del will tell you why if you ask her twice."
+image                = "locations/the_scrub_room.jpg"
+image_search_queries = ["hammam marble slab scrub room wet", "bath house massage slab tiled steam room"]
+entry_from           = "the_pool"
+navigation_order     = []
+
+# ── where the house decides what she is wearing today ────────────────────────
+[[locations]]
+id                   = "the_changing_room"
+name                 = "The Changing Room"
+description          = "Wooden lockers with brass numbers, a bench down the middle, and a mirror that has been fogged since March. Everyone in this building is undressed in this room at some point in the day, and so are you, and the door to the lobby does not sit flush in its frame."
+image                = "locations/the_changing_room.jpg"
+image_search_queries = ["old bathhouse changing room wooden lockers bench", "vintage locker room brass numbers steam"]
+entry_from           = "the_front_desk"
+navigation_order     = ["the_pool"]
+
+# ── the heat, and the man who is it ──────────────────────────────────────────
+[[locations]]
+id                   = "the_boiler"
+name                 = "The Boiler Room"
+description          = "Down eleven steps into the sound. The spring comes in at one end at forty-four degrees and goes out the other into the pool, and in between there is a boiler older than the town's tarmac and a cot with a blanket folded on it. Ivo keeps the heat by hand. If he stops, the Marlow is a building full of cold water."
+image                = "locations/the_boiler.jpg"
+image_search_queries = ["old basement boiler room pipes steam industrial", "furnace room dim pipes valves"]
+entry_from           = "the_front_desk"
+navigation_order     = []
+
+# ── the hub ──────────────────────────────────────────────────────────────────
+[[locations]]
+id                   = "the_front_desk"
+name                 = "The Front Desk"
+description          = "The lobby, the till, and Perrine's service board on the wall behind you — nine things this house used to do, painted on in gold, most of them scratched out. The stairs to the members' floor go up from here and they are chained at the third step."
+image                = "locations/the_front_desk.jpg"
+image_search_queries = ["old bath house lobby front desk tiled entrance", "vintage spa reception counter brass"]
+entry_from           = "spring_street"
+navigation_order     = ["the_changing_room", "the_boiler", "the_lodgers_room", "the_attic_flat"]
+
+# ── THE ROTATING SLOT ────────────────────────────────────────────────────────
+# The let room. Perrine took seasonal lodgers to cover the winter and so does
+# Iris. Content here is ROOM-SCOPED — the mattress, the fan, the arrangement —
+# and names the occupant by ROLE ("the lodger"), never by name, so a rotation
+# costs one [[npcs]] block and one scene file instead of a rewrite.
+[[locations]]
+id                   = "the_lodgers_room"
+name                 = "The Lodger's Room"
+description          = "A let room off the lobby with its own door to the street that has not opened in years. A mattress on a frame, a fan, a hook. Perrine took a lodger every winter to cover the quiet months, and whoever is in it now will be gone by the end of the season and someone else will be in it."
+image                = "locations/the_lodgers_room.jpg"
+image_search_queries = ["small bare rented room mattress fan", "sparse lodger bedroom single bed window"]
+entry_from           = "the_front_desk"
+navigation_order     = []
+
+# ── hers ─────────────────────────────────────────────────────────────────────
+[[locations]]
+id                   = "the_attic_flat"
+name                 = "The Attic Flat"
+description          = "Two rooms over the changing room, and the floor carries every sound from below it. Perrine's bed, Perrine's wardrobe, and Perrine's paperwork in four boxes you have not finished going through. The pipes run up the wall, so it is the warmest room in the building and it never quite dries out."
+image                = "locations/the_attic_flat.jpg"
+image_search_queries = ["small attic flat bedroom sloped ceiling old", "cramped apartment above shop bed window night"]
+entry_from           = "the_front_desk"
+navigation_order     = []
+
+# ── the exterior — the town's eyes, and the only renewable source of bodies ───
+# ⚠️ Travel friction (engine.md §22). Twenty minutes each way is what stops the
+#    schedule grid from being a free lookup table: she cannot be in the street
+#    and on the slab in the same hour.
+[[locations]]
+id                   = "spring_street"
+name                 = "Spring Street"
+description          = "Four hot-spring hotels, three of them shut, and a road that goes up to the wellhead and stops. The Marlow's frontage is the best on the street and the paint is coming off it in sheets. Everybody who walks past can read the opening hours, and everybody who walks past knows whose niece you are."
+image                = "locations/spring_street.jpg"
+image_search_queries = ["faded spa town main street old hotels", "quiet small town street peeling storefronts mountains"]
+navigation_order     = ["the_front_desk"]
+costs                = { time = 20, energy = 5 }
+
+
+# =============================================================================
+# CHARACTERS — 6. Each needs >=1 standing surface and >=1 schedule row (gate 6).
+#
+# ⚠️ SCHEDULES BIND TO THE [[npcs]] BLOCK ABOVE THEM. Never insert a new
+#    character between an existing one and its schedule rows.
+# ⚠️ Overnight windows are ONE row — setup.isCurrentTimeSlot handles the wrap
+#    (engine.md §6, call sites v2.py:3448/:3465/:3612).
+# =============================================================================
+
+# ── the standard she is measured against ─────────────────────────────────────
+[[npcs]]
+id          = "npc_del"
+name        = "Del"
+description = "Perrine's attendant, fifty-six, thirty-one years on this floor. She has not been paid since March and she has not missed a morning either. She knows every valve in the building and every regular's habits, and she has said four complete sentences to you since the funeral."
+portrait    = "del.jpg"
+core_traits = { relation = 0, lust = 0 }
+flag_keys   = []
+arc_stages  = ["Perrine's attendant", "Watching her", "Teaching her", "Yours"]
+
+[[npcs.schedules]]
+location   = "the_front_desk"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "11:00"
+activity   = "opening up, having already done everything you came down to do"
+
+[[npcs.schedules]]
+location   = "the_scrub_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "11:00"
+end_time   = "15:00"
+activity   = "working the slab"
+
+[[npcs.schedules]]
+location   = "the_changing_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "15:00"
+end_time   = "17:30"
+activity   = "counting linen and not hurrying about it"
+
+
+# ── the heat ─────────────────────────────────────────────────────────────────
+[[npcs]]
+id          = "npc_ivo"
+name        = "Ivo"
+description = "He runs the spring line and the boiler and he sleeps on the cot beside it, because the feed valve needs a hand on it every couple of hours through the night. Perrine paid him in a bed and a wage. He is the only person who can shut this building down, and it has never once occurred to him to say so."
+portrait    = "ivo.jpg"
+core_traits = { relation = 0, lust = 0 }
+flag_keys   = []
+arc_stages  = ["The boiler man", "Around", "Close", "Taking"]
+
+# ✅ Wraps midnight in ONE row.
+[[npcs.schedules]]
+location   = "the_boiler"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "20:00"
+end_time   = "02:00"
+activity   = "down with the boiler through the night"
+
+[[npcs.schedules]]
+location   = "the_boiler"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "05:00"
+end_time   = "08:00"
+activity   = "stoking for the morning"
+
+
+# ── the man whose job is respectability ──────────────────────────────────────
+[[npcs]]
+id          = "npc_warren"
+name        = "Warren"
+description = "Town clerk. He assesses the occupancy grade that decides how many bodies you are allowed in the water, and he has held the Marlow's file since Perrine's day. He comes on Thursday evenings when the pool is empty, and in daylight he calls you Miss Marlow."
+portrait    = "warren.jpg"
+core_traits = { relation = 0, lust = 0 }
+flag_keys   = []
+arc_stages  = ["The clerk", "A regular", "Asking", "Compromised"]
+
+[[npcs.schedules]]
+location   = "the_pool"
+weekdays   = [3]
+start_time = "18:00"
+end_time   = "20:00"
+activity   = "in the far corner of the pool with his back to the door"
+
+[[npcs.schedules]]
+location   = "the_front_desk"
+weekdays   = [3]
+start_time = "20:00"
+end_time   = "20:45"
+activity   = "settling up at the desk and taking his time over it"
+
+
+# ── the town's permission ────────────────────────────────────────────────────
+[[npcs]]
+id          = "npc_june"
+name        = "June"
+description = "Sixty-eight, and she has been in this water every Tuesday since she was twenty-eight. What June says in the pool on a Tuesday is what Hollis Springs believes by Thursday. She is entirely frank about bodies, hers included, and she has not decided about you yet."
+portrait    = "june.jpg"
+core_traits = { relation = 0, lust = 0 }
+flag_keys   = []
+arc_stages  = ["Tuesday regular", "Frank with her", "Sponsor", "Accomplice"]
+
+[[npcs.schedules]]
+location   = "the_pool"
+weekdays   = [1]
+start_time = "10:00"
+end_time   = "13:00"
+activity   = "in the hot end, where she has sat every Tuesday for forty years"
+
+[[npcs.schedules]]
+location   = "the_changing_room"
+weekdays   = [1]
+start_time = "13:00"
+end_time   = "13:45"
+activity   = "getting dressed slowly and talking the whole time"
+
+
+# ── the note, with a face ────────────────────────────────────────────────────
+[[npcs]]
+id          = "npc_casper"
+name        = "Casper"
+description = "Your cousin, thirty-eight, four streets over. His father lent Perrine the money and the paper came to him, so the building went to you and the note on it went to him. He watched you learn to swim in this pool. On Fridays he reads out what you owe."
+portrait    = "casper.jpg"
+core_traits = { relation = 0, lust = 0 }
+flag_keys   = []
+arc_stages  = ["The cousin", "Leaning", "Trading", "In"]
+
+[[npcs.schedules]]
+location   = "the_front_desk"
+weekdays   = [4]
+start_time = "17:00"
+end_time   = "19:00"
+activity   = "at the desk with his father's book, waiting for the week's take"
+
+[[npcs.schedules]]
+location   = "the_pool"
+weekdays   = [5]
+start_time = "11:00"
+end_time   = "13:00"
+activity   = "using the place on a Saturday like a man with a stake in it"
+
+
+# ── THE ROTATING SLOT'S CURRENT TENANT ───────────────────────────────────────
+# Tenant-scoped content dies with her, by design: her ladder, her register, her
+# props all live in 5_scenes.toml. The ROOM — the mattress, the fan, the terms —
+# is room-scoped in 3_activities.toml and survives the rotation.
+[[npcs]]
+id          = "npc_nell"
+name        = "Nell"
+description = "Twenty-three, took the let room for the season, pays on the first without being asked, and does not appear to have a job. She sleeps through the afternoon with the fan on and swims lengths at two in the morning. She never met Perrine, which makes her the only person in Hollis Springs with no opinion about who you are supposed to be."
+portrait    = "nell.jpg"
+core_traits = { relation = 0, lust = 0 }
+flag_keys   = []
+arc_stages  = ["The lodger", "Company", "Close", "Yours"]
+
+[[npcs.schedules]]
+location   = "the_lodgers_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "11:00"
+end_time   = "17:00"
+activity   = "asleep with the fan on and the door not quite shut"
+
+# ✅ Wraps midnight in ONE row. The after-close hours are hers.
+[[npcs.schedules]]
+location   = "the_pool"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "01:00"
+end_time   = "03:00"
+activity   = "swimming lengths in the dark with the lights off"
+
+
+# =============================================================================
+# THE WARDROBE — the `steam` tier made into something she WEARS
+#
+# `worn_corruption` is a MAX aggregate, not a sum (engine.md §17), so one
+# garment sets the reading on its own: the catalog needs one item per rung,
+# not a shop. The three house garments ARE the steam ladder.
+#
+# THREE SOURCES, and the source is the story:
+#   what she came with   — town clothes, for the street, increasingly a costume
+#   the staff robe       — what Perrine wore, belt done up, and what Del wears
+#   Perrine's locker     — the shift and the wrap the house used to work in
+# =============================================================================
+
+# ── the street ───────────────────────────────────────────────────────────────
+[[clothing]]
+id      = "plain_bra"
+name    = "Plain bra"
+slot    = "bra"
+image   = "clothing/plain_bra.jpg"
+initial = true
+beauty  = 1
+corruption = 0
+
+[[clothing]]
+id      = "plain_briefs"
+name    = "Plain briefs"
+slot    = "underwear"
+image   = "clothing/plain_briefs.jpg"
+initial = true
+beauty  = 1
+corruption = 0
+
+[[clothing]]
+id      = "town_blouse"
+name    = "Town blouse"
+slot    = "top"
+image   = "clothing/town_blouse.jpg"
+initial = true
+beauty  = 2
+corruption = 0
+
+[[clothing]]
+id      = "town_jeans"
+name    = "Jeans"
+slot    = "bottom"
+image   = "clothing/town_jeans.jpg"
+initial = true
+beauty  = 1
+corruption = 0
+
+[[clothing]]
+id      = "wooden_clogs"
+name    = "House clogs"
+slot    = "shoes"
+image   = "clothing/wooden_clogs.jpg"
+initial = true
+beauty  = 1
+corruption = 0
+
+# ── rung 0: what Perrine wore on the floor, and what Del still wears ─────────
+[[clothing]]
+id      = "staff_robe"
+name    = "The staff robe"
+slot    = "dress"
+image   = "clothing/staff_robe.jpg"
+initial = true
+beauty  = 2
+corruption = 0
+
+# ── Perrine's locker. Not initial: the house has to be opened first. ─────────
+[[clothing]]
+id      = "house_shift"
+name    = "The house shift"
+slot    = "dress"
+image   = "clothing/house_shift.jpg"
+initial = false
+beauty  = 4
+corruption = 3
+
+[[clothing]]
+id      = "linen_wrap"
+name    = "The linen wrap"
+slot    = "dress"
+image   = "clothing/linen_wrap.jpg"
+initial = false
+beauty  = 5
+corruption = 6
