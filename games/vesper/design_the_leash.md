@@ -768,6 +768,94 @@ visible from the canvas that carries them:
    locked location. **This one is an engine change** and it applies to every game on this stack. Folded into
    `quests.md` §10 as a surface table, and into `lanes.md` as the hide-vs-speak rule.
 
+**⚠️ rev 131 — three items off LO's 9 Aug list, and the third one was a whole weapon.** All chosen because
+they survive the Mercer/Kess resequencing still to come, which will rebuild `cap_owner_print`.
+
+7. **A payoff image was rendering four clicks before it was earned.** `rung_mercer_hands_on` opened on the
+   picture of his hand on her thigh — cascade beat 5. The house rule, measured across all 38 cascades and
+   followed by every sibling: **a top image establishes, and anything that shows what happens goes in the
+   beat that makes it happen.** Moved. The scene opens on prose, which `loop_mercer_attempt` already does at
+   the same location.
+8. **A REACHABLE GATE WITH AN UNREACHABLE SETTER — a new failure shape, and the quietest yet.** The
+   emitter's reload (`activity_recharge_emitter` @cradle) and the weapon swap (@`wren_room`) were both
+   Spire-side. The 1a close cut the ride up, and she leaves the salvage on `equipped_weapon = 1`, so all four
+   emitter fire gates went on evaluating correctly and forever falsely: the weapon was **unreachable for the
+   whole of Act 1b**, and its one remaining use is the underworld gate, i.e. the route she walks nightly.
+   The berth was built as the cradle-substitute and the drain was carried across at rev 114 — the emitter was
+   simply not thought of at the same time, which is the whole shape of the bug. **It never presented as a
+   soft-lock**, because the gate also takes coin or a fight, so play continued and one option stopped
+   existing. Fixed into the berth's economy rather than by cloning the cradle's: the reload rides the paid
+   night that is already the chapter's single bill, and the swap gets its own surface at Kess's bench. Folded
+   into `lanes.md` — *for every state a live gate READS, where is it SET, and is that place still reachable?*
+9. **The object she buys four times had no name.** Kess reasoned it thoroughly and never named it; nor did
+   the stall or the tip. It is a **talkback** now, in Kess's mouth, at the stall, and in card I. LO's other
+   half of that note — does the scene say the controller hears and sees what she does — is **deliberately
+   unanswered**: it is a lore decision about the chip, it belongs with the resequencing, and it is his call.
+
+**⚠️ rev 132 — the print scene rebuilt, and a chapter-level finding about the resequencing.**
+
+10. **Five of the seven steps in LO's resequencing already shipped.** The fuck that doesn't drain is
+    `try1/2/3`, three times. The drain that works, the seven-beat Q&A, and the reveal that the controller only
+    ever spoke for Mercer are all `cap_first_fire`. **The sixth cannot be built as sketched:** it needs Kess
+    able to switch the controller off, and `kess_print_read` has him say he cannot — *"A shape isn't a voice."*
+    That impossibility is the reason the talkback exists at all. Recorded here because it is a **chapter-level**
+    fact: any future request to reorder this chain has to start from it.
+11. **A drain can only be reached for at the man's finish** — every instance in the game does it that way
+    (the twelve salvage sessions, all three tries, `cap_first_fire`). That is a hard staging constraint, and
+    it is why the print scene's **finish moved in front of the theft** rather than the reach moving before it.
+    Worth carrying: a beat that shows a *mechanic* failing can only sit where the mechanic fires.
+12. **The hinge scene had almost no build-up, and the hub went cold in the window the player lives in.**
+    `cap_owner_print` is 18 beats / 16 clicks now, escalating properly; `hub_mercer_room` has a
+    non-escalating routine rung gated on the print (never on hospitality, which would pre-spend the capstone).
+    Found while measuring: the finish beat carried a clip and named nothing — coy, in shipped prose, now re-cut
+    inside the signed ceiling.
+
+**⚠️ rev 133 — THE RESTRUCTURE, and the chapter's spine changes. B1 of three is built.**
+
+LO's missing piece: **Kess can switch the controller off, but only with Mercer's handprint, and once.** She
+is not freed by it — only freed *of Mercer*, because his key speaks for him alone. The chapter's problem
+survives an early win, which is what makes the whole resequencing buildable.
+
+**The new chain**, for the record, since §6 step 6 and §8 both still describe the old one:
+
+1. Kess keeps the key on his bench, sends her to the market for a **bonded case**. *(built, rev 133–134)*
+2. She buys it — a courier box that logs the hand that opens it, because the log *is* the receipt. *(built)*
+3. She gives it to Mercer as a gift after the failed reach; he palms it open, keeps the bottle, and she
+   carries the empty box away with his hand in it. *(built)*
+4. Kess feeds the log to the lock and **the key opens** — a lock cannot tell a plate from a room. *(built, rev 135)*
+5. She goes back, reaches, **and it catches with nothing left to shut it**. Mercer's whole Q&A lives here
+   now, including *"mine only speaks for me… like there were others out there with one"*. *(built, rev 135)*
+6. The key was never the problem; the **chip** is. He asks for it back **on**, with her under it, and
+   **she says yes** — which is what opens the loop. *(built, rev 135)*
+7. The loop, reframed as a thing they chose. *(B3)*
+8. `cap_first_fire`'s **new payload**: the talkback beats a **live** controller, so she needs nobody's key. *(B3)*
+
+⚠️ **rev 135 also corrected the plan's own split.** Card I was gated on a flag that now fires *first*, so it
+would never have been live and card J would have doubled with it. The cards moved into B2, which let the
+reveal move too — **and that deleted the do-not-ship-between-beats hazard entirely.** The chapter is coherent
+as of rev 135; `cap_first_fire` is thin until B3, not broken.
+
+⚠️ **Two real bugs the suites caught, both mine, both invisible to a reader:** `cap_first_fire` still gated on
+`owner_drained is_false`, which the early drain makes **unsatisfiable** — the chapter's payoff could never
+have fired again. And the warm-tap rung gated the same way, so it would have opened alongside the loop and
+handed the player the post-payoff surface before the payoff. A third — a **blank Story-Goals window** between
+the drain and Kess's scene — was caught by the one-live walk. **Fourth time this chapter that moving a flag
+opened a hole one rung below it.**
+
+13. **It repairs a hole rather than making one.** `kess_needs_print`'s ask — *"that hand, warm, on this, with
+    me in the room"* — was never satisfied by the build. It is now, because the answer to "I cannot get him
+    here" is a device, not a contradiction the player is asked not to notice.
+14. **The extraction's justification now comes from inside the chapter.** `beat_0083` works *"because a live
+    key holds the governor quiet"* — so turning Mercer's controller back on for the experiments is also what
+    makes cutting the chip out survivable. The chapter reasons its way to its own ending.
+
+⚠️ **B2 and B3 are a pair. Between them Mercer's reveal exists in two places** — fine unbuilt, fatal if
+released. **Do not ship between them.**
+
+✅ **Save-safety, verified not assumed:** `releases/v0.1.7.html` contains **zero** occurrences of
+`cap_owner_print` or `parts_loop_open`. The Leash has never shipped, so nothing in this chain has a live save
+in it and the scene could be restructured freely. This will stop being true the moment 1b releases.
+
 ⚠️ **Left open, surfaced not fixed:** `vance_securities` has two gates in two acts (`salvage_relaunched
 is_true` **and** `archive_1a_done is_false`) and only one `blocked_message`, written for the first. A 1b
 player now reads the muted row's reason as *"Mercer hasn't sent her up there yet"*, which is the wrong lock.

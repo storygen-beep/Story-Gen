@@ -5569,7 +5569,7 @@ flagEffects = [
 [[canvases]]
 id          = "kess_needs_print"
 name        = "The other end"
-description = "beat_0071 (rev 116). The print dispatch @kess_berth. Auto-fire one-shot, pri 11, gated file_shape_known is_true + print_needed is_false + feed_line_days gte 1 + npc_kess is_present. Kess has taken the key as far as the receiver can take him and REVISES the price he quoted at beat_0068: he assumed the original keyholder was dead. He isn't. So Kess needs a living hand — that one, warm, on the key, with him in the room — and he will not ask whose it is. 6 cascade beats, ~264 words, dialogue-dominant. A HINGE, not a capstone: NOT Tier-3. SETS print_needed."
+description = "beat_0071 (rev 116), ask re-cut rev 133. The print dispatch @kess_berth. Auto-fire one-shot, pri 11, gated file_shape_known is_true + print_needed is_false + feed_line_days gte 1 + npc_kess is_present. Kess has taken the key as far as the receiver can take him and REVISES the price he quoted at beat_0068: he assumed the original keyholder was dead. He isn't. So he needs a living hand — pressed flat and whole, the kind a lock takes. rev 133: the key does NOT leave the bench and he does not ask her to bring the man here (the shipped line asked for the hand 'on this, with me in the room', which the build never satisfied — she carried the key to Mercer instead). He sends her to the market for a PALM-LOCK and tells her to bring him the lock. 8 cascade beats, dialogue-dominant. A HINGE, not a capstone: NOT Tier-3. SETS print_needed, which opens activity_buy_case."
 [canvases.trigger]
 location      = "kess_berth"
 requires_npc  = "npc_kess"
@@ -5610,9 +5610,33 @@ blocks = [
         { type = "paragraph", content = "He sets the key down and looks at her." },
     ] },
     # (3) THE ASK — reads as a SOLVE. The loop breaks it later, not here.
+    # ⚠️ rev 133 — THE ASK CHANGED, AND IT REPAIRS A HOLE. The shipped line asked for "that hand, warm, on
+    # this, WITH ME IN THE ROOM" — and the build never satisfied it: she carried the key to Mercer instead,
+    # and nothing bridged the contradiction. Kess cannot get a blown company man into his yard and would not
+    # let the key leave it, so what he actually needs is the hand brought to him ON SOMETHING ELSE. That is
+    # the dispatch now, and it is what sends her to the market for a palm-lock.
     { advance_text = "The ask.", blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "He isn't. So it's not a hand I need — it's that hand, warm, on this, with me in the room. Bring me that and I'm through it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "He isn't. So it's the hand I need — his, warm, pressed flat and whole. Not a smudge off a glass. The kind a lock takes and keeps." },
         { type = "paragraph", content = "The bench is cold under her palm again. She doesn't take it away this time." },
+    ] },
+    # ⚠️ rev 134 — TWO REASONS THE KEY STAYS, AND BOTH ARE BETTER THAN THE ONE THIS BEAT SHIPPED WITH.
+    #   (1) IT IS IN PIECES. Kess has had it open on the bench for a chunk of the chapter; that is what "I've
+    #       taken this as far as I can" MEANS. A dismantled thing cannot be carried anywhere, so the question
+    #       "why not just take it to him" stops being a question.
+    #   (2) MERCER WOULD KNOW IT ON SIGHT. He carried it in his coat for two years. The shipped staging put
+    #       his own controller on the crate beside him and covered it with "he never once looks down", which
+    #       is thin — a man recognises the thing he has been handed with a girl and told to keep.
+    { advance_text = "Reach for the key.", blocks = [
+        { type = "paragraph", content = "Her hand goes towards it and there is not much left to reach for. It is in four pieces on a cloth, with the lamp over the smallest one." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "It doesn't go anywhere. It hasn't been a whole thing since Tuesday, and the bit that matters is the bit I can't open." },
+    ] },
+    { advance_text = "Say the other reason.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "And he'd know it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "There you go. Whoever he is, he had it long enough to know it by the weight. Put that in front of him and you've told him everything about you in one go." },
+    ] },
+    { advance_text = "Then how.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Then how do I bring you a hand." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Bonded case. The market's full of them — courier boxes that only open to the buyer's hand and keep a record of it, because the record IS the receipt. Get him to open one. Bring me the case." },
     ] },
     # His fourth refusal — and the first one that costs her something.
     { advance_text = "Wait for the rest.", blocks = [
@@ -5937,13 +5961,41 @@ conditions = { version = "1.0", logic = "AND", items = [
 # ⚠️ THE BUMP RIDES THIS CHOICE, not the canvas exit — choice effects fire on CLICK and exit effects on
 # RENDER, and "she did this again" is a thing she does, not a room she arrives in. Same discipline as the
 # loop's burn, and the same shape colm_drains_done uses on loop_colm_finisher's ass-finish choice.
+# ═══ rev 132 — THE ROUTINE RUNG. Closes the hub's cold window. ══════════════════════════════════════════
+# LO: "this one has only two choice sit with him and pour for him — can it also have fuck him, tease him,
+# kiss him?" Answered with a rule rather than a wishlist. The hub is correctly cold BEFORE the arrangement
+# resumes and correctly carries the sex on the loop rung AFTER a part is seated. The gap is the window
+# BETWEEN: from the print onward the fiction says the old thing is back on, and every time an attempt burns
+# its part the loop rung vanishes again — so the state the player stands in most often is one where Mercer
+# has resumed using her and the room offers two ways to talk.
+# ⚠️ GATED ON owner_print_taken, NOT on mercer_hospitality_open. Hospitality opens at relation 12 and
+# cap_owner_print does not fire until 15, so gating on hospitality would put repeatable Mercer sex on screen
+# BEFORE the chapter's hinge capstone and spend it in advance. The print is the honest boundary.
+# ⚠️ NON-ESCALATING BY DESIGN — no drain, no counter, no flag, no ladder. It is the arrangement as routine,
+# which is the point: nothing she does here moves anything, and that is what the loop rung is for. Priced in
+# time only; the parts economy owns the coin.
+# EXCLUSIVE with both "Give him the evening" rungs by construction: this needs part_installed lt 1 (the loop
+# rung needs gte 1) and owner_drained is_false (the warm tap needs is_true).
+[[canvases.nodes.exit_block.choices]]
+text       = "Let it go where it goes."
+targetType = "node"
+nodeId     = "hub_mercer_room.routine"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "owner_print_taken", operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key  = "leash_answered",    operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "part_installed",    operator = "lt", value = 1 },
+] }
 [[canvases.nodes.exit_block.choices]]
 text       = "Give him the evening."
 targetType = "node"
 nodeId     = "loop_mercer_warm_tap.base"
 time_progression_minutes = 60
+# ⚠️ rev 135 — WAS owner_drained. That is true from the early drain onward, so the warm tap would have opened
+# alongside the loop rung and handed the player the post-payoff surface before the payoff. leash_answered is
+# what "she has beaten a live key" means, and it is what this rung was always really waiting for.
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "owner_drained", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "leash_answered", operator = "is_true" },
 ] }
 effects = [
   { targetType = "player", trait = "mercer_drains_done", op = "add", value = 1, clamp = true },
@@ -6006,6 +6058,47 @@ time_progression_minutes = 60
 effects = [
   { targetType = "npc", npcId = "npc_mercer", trait = "relation", op = "add", value = 3 },
 ]
+
+# ── routine — rev 132. The arrangement as routine, in the window where the hub was two talk options. ──
+# NO drain, NO counter, NO flag: nothing here moves anything, which is the whole content of the beat. She is
+# the one thing in his life that still runs the way it used to, and the price of that is that it runs.
+# ⚠️ VAGINAL ONLY. Anal is the loop's and the first fire's, and spending it on a repeatable routine rung
+# would flatten the one escalation the chapter has left (Mercer ceiling, signed rev 119 clauses ii + iii —
+# this stays inside what is already spent at cap_owner_print and asks for nothing new).
+# ⚠️ NEW MEDIA SLOT, and it is a POOL — an explicit rung on a repeatable surface is among the most-replayed
+# content in the game and a fixed clip goes dead by the third visit (`lanes.md`). Debt 22 -> 23; it is the
+# cheapest possible moment to add one, with the harvest not yet run.
+[[canvases.nodes]]
+id   = "routine"
+name = "The arrangement"
+blocks = [
+  { type = "paragraph", content = "He doesn't ask and she doesn't make him. The bottle goes down on the floor, the crate gets moved the same foot to the left it always gets moved, and he turns her round by the hip." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Same as ever. I like that there's a same-as-ever left." },
+    ] },
+    { advance_text = "Bend for him.", blocks = [
+        { type = "video", props = { pool_dir = "sex/mercer_lockup_routine_t5", pool = 4, description = "A heavy older man fucking a younger woman from behind, bent over the end of a low bed in a bare concrete room, unhurried and steady, one hand on her hip. Must show: her bent over face-down, him behind her, an unhurried steady pace. Avoid: anal, her on top or riding, face-to-face, a bright or luxurious room, a switch of act partway through.", search_queries = ["older man fucking girl bent over bed behind slow", "man hand on hip fucking woman from behind dim room"] } },
+        { type = "paragraph", content = "He gets his cock into her and settles into it, unhurried, one hand on her hip and the other still holding the glass. Her cunt takes him the way it has taken him for two years." },
+    ] },
+    { advance_text = "Let him talk through it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "There was a woman came Thursdays and did the plants. I've been trying a week to remember what she was called." },
+        { type = "paragraph", content = "He fucks her steady the whole way through it and never once loses the thread." },
+    ] },
+    # Terminal beat — no advance_text. Nothing has changed, and that is the beat.
+    { blocks = [
+        { type = "paragraph", content = "He finishes in her without hurrying that either, holds there a moment, and does up his belt one-handed. His cum runs on the inside of her thigh and she leaves it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Come Thursday. Or don't. You know where the door is." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get your coat."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "mercer_room"
+time_progression_minutes = 60
 
 # ═══ mercer_room_offhours — DEAD-ROOM GUARD for his daylight hours ═════════════════════════════════════════
 # Mercer's underworld row is 23:00-08:00, so outside it the room has no portrait and no hub (both are
@@ -6211,7 +6304,7 @@ flagEffects = [
 [[canvases]]
 id          = "cap_owner_print"
 name        = "The print"
-description = "beat_0074 (rev 119). THE CHAPTER'S HINGE @mercer_room. Auto-fire capstone, pri 10, one-shot, gated mercer_hospitality_open is_true + owner_print_taken is_false + npc_mercer.relation gte 15 (so it cannot chain straight off the rung, which opens at 12) + npc_at_location mercer_room is_present (requires_npc is INERT on the auto-fire path). He has her over the end of the bed and talks about the penthouse the whole way through; his free hand goes flat on the crate to lean on, next to her coat, and the controller comes out of the pocket and under his palm. He never looks down. 13 cascade beats. SETS owner_print_taken, which opens the market part-stall and the whole loop at beat_0075. First spend of the Mercer ceiling (signed rev 119, clause iii — warm and crude at once); anal held for the loop and the first fire."
+description = "beat_0074 (rev 119). THE CHAPTER'S HINGE @mercer_room. Auto-fire capstone, pri 10, one-shot, gated mercer_hospitality_open is_true + owner_print_taken is_false + npc_mercer.relation gte 15 (so it cannot chain straight off the rung, which opens at 12) + npc_at_location mercer_room is_present (requires_npc is INERT on the auto-fire path). He has her over the end of the bed and talks about the penthouse the whole way through; his free hand goes flat on the crate to lean on, next to her coat, and the controller comes out of the pocket and under his palm. He never looks down. 18 cascade beats / 16 clicks (was 14/13 — rev 132 added the build-up and the failed reach). rev 132: the scene ran coat-to-fucking in three clicks, so the front now escalates the way the register claims he does — he looks before he touches, undresses her a piece at a time, uses his hand on her first. AND THE FINISH MOVED IN FRONT OF THE THEFT: she reaches for the drain at his finish, gets nothing, and only then goes for his hand. Before this she ran the theft without ever confirming, on this man in this room, that the drain was dead — and the reach can only be staged at a finish, because that is where every drain in the game fires. SETS owner_print_taken, which opens the market part-stall and the whole loop at beat_0075. First spend of the Mercer ceiling (signed rev 119, clause iii — warm and crude at once); anal held for the loop and the first fire."
 [canvases.trigger]
 location      = "mercer_room"
 requires_npc  = "npc_mercer"
@@ -6221,6 +6314,10 @@ is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "mercer_hospitality_open", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "owner_print_taken",       operator = "is_false" },
+  # ⚠️ rev 133 — SHE HAS TO BE CARRYING THE FLASK. The capture is the point of the visit now, and a capstone
+  # that fired without it would play the gift beat with nothing in her coat. This is what makes the market
+  # trip mandatory rather than decorative, and it is why activity_buy_case opens on the same dispatch.
+  { type = "trait", subject = "player", trait_key = "case_held",            operator = "gte", value = 1 },
   # ⚠️ IT MUST NOT CHAIN STRAIGHT OFF THE RUNG. rung_mercer_hands_on exits to mercer_room with him still in
   # it, so on the bare flag this capstone fired in the same breath — and its lead ("He is pouring before the
   # door is properly shut") is a lie about an evening she never left. The meter is the separator: the rung
@@ -6250,10 +6347,24 @@ blocks = [
         { type = "paragraph", content = "She hangs it over the crate. The bottle goes down onto the floor to make room, and he watches her do it." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Nine years I had somebody take a coat off me at a door. Now I hang my own on a nail. You don't miss it until it's gone." },
     ] },
+    # rev 132 — THE BUILD-UP. This scene used to run coat -> hair -> over the bed -> his cock in her, three
+    # clicks from the door to fucking, in the chapter's hinge. The whole tension of the room is how UNHURRIED
+    # he is — a man with nowhere to be, taking his time with the one thing he still owns — and the pacing was
+    # contradicting the register. Added in front of and between the shipped beats, which keep their order.
+    { advance_text = "Wait for him to come over.", blocks = [
+        { type = "paragraph", content = "He doesn't come over. He pours the second one he has no intention of drinking and looks at her from the crate, taking his time, the way a man looks at something he already owns." },
+    ] },
     { advance_text = "Go to him.", blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Come here." },
         { type = "paragraph", content = "He gets a hand into her hair without hurry, the way a man takes hold of a thing he has owned a long time." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Two years and I never once had to raise my voice at you. People don't understand what that is worth." },
+    ] },
+    { advance_text = "Let him take his time.", blocks = [
+        { type = "paragraph", content = "He works her out of the rest of it one piece at a time, both hands, no impatience anywhere in him. He sets each thing on the crate instead of dropping it. Nobody has undressed her slowly in two years." },
+    ] },
+    { advance_text = "Stand still for it.", blocks = [
+        { type = "paragraph", content = "His hand goes flat on her stomach and down, and two fingers find her cunt already wet and work there unhurried, the heel of his palm hard against her." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "There. I remember that. That never was for show, whatever else was." },
     ] },
     { advance_text = "Let him.", blocks = [
         { type = "paragraph", content = "He turns her by the hip and puts her over the end of the bed one-handed, because the other one still has the glass in it." },
@@ -6281,26 +6392,71 @@ blocks = [
         { type = "thought_bubble", props = { speaker = "player" }, content = "His hand has been flat on that crate a while now. It's the stillest part of him." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Are you listening. You always did let a man get to the end of a thing." },
     ] },
-    { advance_text = "Reach.", blocks = [
-        { type = "paragraph", content = "Her coat is a hand's width from his palm. She gets two fingers into the pocket and slides the little metal thing out onto the wood." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "And the driver. Four years I had that man, and I never once asked him his name." },
-    ] },
-    { advance_text = "Under his hand.", blocks = [
-        { type = "paragraph", content = "She works it under the heel of his hand. It goes warm against him. He leans on it harder and keeps talking." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "It was never the money. I want to be clear about that. It was never once about the money." },
-    ] },
-    { advance_text = "Don't look at it.", blocks = [
-        { type = "paragraph", content = "He never once looks down at his own hand. He never has had to." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "You liked that floor. Say what you like about the rest of it — you liked that floor, and you are the only one left I can say that to." },
-    ] },
+    # ⚠️ rev 132 — THE FINISH MOVED IN FRONT OF THE THEFT, AND THE FAILED REACH GOES BETWEEN THEM.
+    # The order used to be: take the key, plant it, THEN he finishes. Which meant she ran an elaborate theft
+    # to solve a problem the scene never let her confirm she had — she never once reached for the drain on
+    # this man, in this room, before deciding his hand was the only way in. LO's note, and he was right.
+    # ⚠️ IT CAN ONLY BE STAGED HERE. The drain fires at the MAN'S FINISH — every instance in the game does it
+    # that way (the twelve salvage sessions, all three loop tries, cap_first_fire), so a reach at any other
+    # moment fails for the wrong reason and teaches the player nothing. The theft therefore has to move after
+    # the finish rather than the reach moving before it. His hand is still on the crate there: he holds, then
+    # leans, and does not take it off until the terminal beat to do up his belt. He is also at his least
+    # attentive in exactly that window, which is the version of this that should always have been written.
     { advance_text = "Let him finish.", blocks = [
         { type = "video", props = { pool_dir = "sex/mercer_lockup_finish_t5", pool = 4, description = "He finishes inside her without changing pace, holding himself there against her hips with his eyes shut, then straightens up. Must show: him coming inside her from behind, holding still at the end, her face-down. Avoid: pulling out to finish on her, facial or external cumshot, her looking back at him, anal.", search_queries = ["creampie from behind bent over bed older man", "man finishes inside girl holds still behind"] } },
-        { type = "paragraph", content = "He finishes inside her without changing pace, holds there while it goes through him, and lets a breath out like a man sitting down." },
+        # rev 132 — RE-CUT FOR REGISTER. The shipped line was "He finishes inside her without changing pace",
+        # which is the one beat in this scene carrying a sex clip and naming nothing: coy, and the failure
+        # state the register doctrine names. Inside the signed ceiling — the terminal beat two down already
+        # says his cum runs on her thigh, so nothing new is being spent, it is only being said.
+        { type = "paragraph", content = "His cock goes deep and stays there while he comes in her, and he lets a breath out like a man sitting down. His weight stays forward, on the hand on the crate." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Ah. That's better. That is the first quiet hour I have had in a month." },
+    ] },
+    # THE REACH THAT FAILS — narration, not interiority. The scene keeps exactly ONE thought_bubble (above),
+    # and the loop's try nodes carry this same failure as narration too, so the player recognises the motion
+    # when it repeats. Deliberately NOT the same sentence as try1: this is the original and that is the echo.
+    { advance_text = "Reach for it.", blocks = [
+        { type = "paragraph", content = "She reaches down inside for the old pull — the thing that used to open a man at the base of the spine. It closes on nothing. Not a flicker. Whatever he is now, she cannot get at it." },
+    ] },
+    # ⚠️ rev 133 — THE FLASK REPLACED THE KEY, AND THE THEFT MOVED TO THE DOOR. She used to carry the
+    # controller into this room in her coat and work it under his palm mid-fuck. She does not any more:
+    # kess_needs_print now keeps the key on the bench and sends her to buy a palm-lock instead, because a man
+    # who cannot get Mercer into his yard needs the hand brought to him ON something.
+    # WHY IT IS A GIFT, AND WHY IT IS ON THE WAY OUT: the failed reach above is what makes her do it, so it
+    # has to come after. And a bonded case is the one parcel this man will open himself — he signed for forty a
+    # week once and never opened one — so a flat palm press is simply how the thing works. She asks
+    # him for nothing and engineers no moment. He is pleased. That is the theft.
+    { advance_text = "Then give him the thing you brought.", blocks = [
+        { type = "paragraph", content = "She gets her coat off the crate and takes the case out of it — grey, courier-grade, a reader plate let into the lid — and puts it in his hands while he is still doing up his belt." },
+        { type = "dialog", props = { speaker = "player" }, content = "It's bonded. You have to open it yourself." },
+    ] },
+    { advance_text = "Let him have it.", blocks = [
+        { type = "paragraph", content = "He turns it over twice. Nobody has sent him anything since the floor went, and it takes him a moment to work out what is happening to him." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Bonded. God. I used to sign for forty of these a week and never once opened one myself." },
+    ] },
+    # rev 133 — "it was never the money" was collateral when the key staging came out; it lived in the beat
+    # that put the controller under his palm. Restored as its own beat, and it lands better here than it did
+    # mid-fuck: a man holding a present, saying his own eulogy to it.
+    { advance_text = "Let him talk himself down.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "It was never the money. I want to be clear about that. It was never once about the money." },
+        { type = "paragraph", content = "He says it to the box, not to her." },
+    ] },
+    { advance_text = "Watch him open it.", blocks = [
+        { type = "paragraph", content = "He spreads his palm flat on the plate, holds it there, and the reader goes warm and takes him. The lid gives. He lifts the bottle out and does not look at the box again." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "You liked that floor. You are the only one left I can say that to." },
+    ] },
+    # ⚠️ rev 134 — THE PRINT LEAVES WITH HER, AND THIS BEAT IS WHY THE DEVICE IS A CASE. At rev 133 it was a
+    # palm-lock flask, which he KEEPS — so the hand was recorded and then walked out of the room in his
+    # pocket, and Kess never got it. A bonded case splits the object in two: he keeps the bottle, and the
+    # empty is litter in a room with no bin. She clears it, and he thanks her for tidying up.
+    { advance_text = "Pick up the empty.", blocks = [
+        { type = "paragraph", content = "The case goes on the floor by his foot the way anything does once it's open. She folds it under her arm on her way past, tidying up after a man who has stopped tidying up after himself." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Leave it, leave it. God, you don't have to do that." },
     ] },
     # Terminal beat — no advance_text. The hand comes off the crate on its own, for a belt.
     { blocks = [
-        { type = "paragraph", content = "He takes his hand off the crate to do up his belt and pours another. His cum runs on the inside of her thigh and she leaves it." },
+        # rev 133 — the belt moved up into the gift beat, so this no longer does it twice. He ends the scene
+        # holding the thing that just took him, pleased with it.
+        { type = "paragraph", content = "His cum runs on the inside of her thigh and she leaves it. He sits back with the bottle in his fist, pleased with it, and doesn't put it down." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Thursday. It doesn't have to be Thursday. Come whenever — you know where the door is now." },
         { type = "dialog", props = { speaker = "player" }, content = "Thursday." },
     ] },
@@ -6315,6 +6471,11 @@ locationId               = "mercer_room"
 time_progression_minutes = 90
 flagEffects = [
   { targetType = "player", flag = "owner_print_taken", op = "set" },
+]
+# rev 133/134 — the case is SPENT here: she carries it out with his hand logged in it, and it is Kess's
+# Same burn shape as the parts loop uses on part_held, so the market's two objects behave alike.
+effects = [
+  { targetType = "player", trait = "case_held", op = "set", value = 0, clamp = true },
 ]
 
 # ═══ kess_print_read — beat_0075 (rev 120): THE PRINT IS A START, NOT A SOLVE ═══════════════════════════
@@ -6355,7 +6516,7 @@ flagEffects = [
 [[canvases]]
 id          = "kess_print_read"
 name        = "A start"
-description = "beat_0075 (rev 120). The print read @kess_berth. Auto-fire one-shot, pri 11, gated owner_print_taken is_true + parts_loop_open is_false + feed_line_days gte 1 + npc_kess is_present. The print MOVED the key and it still isn't a solve: Kess has the shape of what Mercer's hand said, not the hand. So he builds a part that sits at her seam and answers in that voice live — and the only bench that can test it is Mercer himself, mid-use. He prices it as a part and a bench and never asks what the room costs her. 10 beats / 9 clicks, dialogue-dominant. A hinge, NOT Tier-3. SETS parts_loop_open."
+description = "beat_0075 (rev 120), REWRITTEN rev 135 — it changed jobs. The switch-off @kess_berth. Auto-fire one-shot, pri 11, gated owner_print_taken is_true + controller_off is_false + feed_line_days gte 1 + npc_kess is_present. Kess feeds the bonded case's log to the key and the KEY OPENS — a lock cannot tell a hand off a courier plate from a hand in the room. He is careful that this opens the KEY and not her, refuses to promise the rest, and sends her to find out the only way anyone can: reach for it on the man it never let her touch. Range is a non-issue and the fiction already settled it — the key governed her across a city from a coat pocket, so off carries the same distance. 8 beats / 7 clicks, dialogue-dominant, ONE interior that observes. A hinge, NOT Tier-3. SETS controller_off. It NO LONGER sets parts_loop_open: the loop opens at kess_the_chip_not_the_key, after she has proved the key is dead and heard that Mercer's was only ever his."
 
 [canvases.trigger]
 location      = "kess_berth"
@@ -6365,7 +6526,8 @@ priority      = 11
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key  = "owner_print_taken", operator = "is_true"  },
-  { type = "flag",  subject = "player", flag_key  = "parts_loop_open",   operator = "is_false" },
+  # rev 135 — its own guard flag, not the loop's. This beat no longer opens the parts economy.
+  { type = "flag",  subject = "player", flag_key  = "controller_off",    operator = "is_false" },
   { type = "trait", subject = "player", trait_key = "feed_line_days",    operator = "gte", value = 1 },
   # THE GATE THAT ACTUALLY BITES — see the header. requires_npc above is inert on this path.
   { type = "npc_at_location", location_id = "kess_berth", npc_id = "npc_kess", operator = "is_present" },
@@ -6378,63 +6540,275 @@ blocks = [
   { type = "image", props = { file = "locations/kess_berth.jpg", description = "A flooded breaking-dock lit by work-lamps, a stripped hull up on blocks, a work-cradle rigged for something bigger than a person.", search_queries = ["flooded ship breaking dock underground night", "gutted hull workshop cutting torch dark"] } },
   { type = "paragraph", content = "He has not been to bed. She can tell by the bench, which has been tidied the way a man tidies when he is close to something." },
   { type = "cascade", props = { beats = [
+    # ⚠️ rev 135 — THIS BEAT CHANGED JOBS. It used to say the print MOVED the key without opening it ("A
+    # shape isn't a voice"), which existed for exactly one reason: to justify the talkback. The talkback is
+    # now justified later and better — by what Mercer says under the drain — so this beat gets to be the win
+    # it always looked like it should be. He feeds the case's log to the key and the key BELIEVES it.
+    # ⚠️ AND IT DOES NOT OPEN HER, IT OPENS THE KEY. Kess is careful about the difference and refuses to
+    # promise the rest, because the only way to know what a dead key does to a live leash is to go and reach
+    # for it on the one man it never let her touch. That refusal is what sends her back to the room.
+    # ⚠️ RANGE IS NOT A THING, and the fiction settled it before this beat: Mercer carried the key in a coat
+    # pocket for two years and it governed her across a city. So off is off with it sitting on Kess's bench —
+    # which is also what beat_0083 leans on when it says a live key holds the governor quiet during the cut.
     # beat 0 — no advance_text; merges into the node lead, so it carries two words and nothing more.
     { blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "It moved." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "It's open." },
     ] },
     { advance_text = "Wait for the rest.", blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Whatever you did up there, it took — first thing this has done on my bench that wasn't sitting there being metal." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Your box kept his hand the way it's built to. I fed that to the lock and the lock took it. It has no way of telling a hand off a courier plate from a hand in the room." },
     ] },
-    { advance_text = "Ask if it's open.", blocks = [
-        { type = "dialog", props = { speaker = "player" }, content = "Is it open." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "No. It answered. Those aren't the same thing, and the difference is the whole job." },
+    { advance_text = "Ask what that means.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "So it's off." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "This is off. That's all I'll say standing here. The key's stopped talking — what that does to the thing in you is a different sentence and I'm not saying it yet." },
     ] },
-    # THE REVISION — he priced it as a hand at beat_0071. A recording is not a hand.
-    { advance_text = "Let him explain it.", blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "It asked, his hand said the right thing back, and it went quiet. I've got the shape of what he said. I haven't got him." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "A shape isn't a voice. Play it back cold and it hears a recording, same as you would." },
+    { advance_text = "Make him say the rest.", blocks = [
+        { type = "paragraph", content = "He turns the key over once, the way he turns anything he has finished with, and sets it down on the cloth." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "It never had to be near you. Two years in a coat pocket and it worked on you across a city. Off carries the same distance." },
     ] },
-    { advance_text = "Ask what that leaves.", blocks = [
-        { type = "dialog", props = { speaker = "player" }, content = "So what's it worth." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "A build. Something that says it live instead of playing it back — and it has to say it from where the question gets asked." },
-    ] },
-    # ⚠️ rev 131 — WHERE THE THING GETS ITS NAME. Kess reasoned this part thoroughly from the beginning
-    # (live not playback, at the seam, one per go, the small stalls, he won't guess how many) but never once
-    # NAMED it, and neither did the stall or the quest tip — so the player buys "a part" four times without
-    # a word for what they are carrying. A talkback: his word, blunt and trade-shaped, and it says what the
-    # thing does. Used in exactly three places — here, activity_buy_part's prose, and quest card I's tip.
-    { advance_text = "Ask where that is.", blocks = [
-        { type = "paragraph", content = "She keeps her hands off the bench." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Inside you. Small enough to sit at the seam, listening for the challenge, answering in his voice while you stand there being you. A talkback. That's the theory." },
-    ] },
-    { advance_text = "Ask the price.", blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "A part a go, off the market — the small stalls, not the blades. And a bench, which is me, which you're already paying for." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "I'll seat it. I won't guess how many." },
-    ] },
-    # THE CATCH — the test bench is the man himself. This is what points her back up the ramp.
-    { advance_text = "Wait for the catch.", blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "And I can't test it down here. The block doesn't show up on a lamp, and it doesn't show up on me. It only shows up on him." },
-    ] },
-    { advance_text = "Let him say it.", blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "So you take it into a room with him and you reach for the take at the finish, same as you did on my cradle. If the leash has let go, it fires." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "If it hasn't, nothing happens, and I learn something off the nothing." },
+    { advance_text = "Ask how she'd know.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Then how do I know." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "You go and reach for it on the man it never let you touch. It catches or it doesn't. There's no reading I can take off this bench that beats that one." },
     ] },
     { advance_text = "Wait for him to ask.", blocks = [
-        { type = "paragraph", content = "He doesn't ask what that room is. He hasn't asked once, and she has stopped expecting him to start." },
+        { type = "paragraph", content = "He doesn't ask who the man is. He hasn't asked once, and she has stopped expecting him to start." },
     ] },
+    # The one interior, and it observes rather than plans — the shipped discipline for this canvas.
     { advance_text = "Let it go.", blocks = [
-        { type = "thought_bubble", props = { speaker = "player" }, content = "He has priced it the way he prices everything — a part, a bench, a number of goes. The one thing he hasn't priced is the room, and he never will, because he doesn't know she used to live in it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Two years of a thing in her that answered to a man who never once asked what it was for, and it came off a courier box and a hand he gave away for nothing." },
     ] },
     # Terminal beat — no advance_text; renders after the last click, above the exit.
     { blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Bring me a talkback. I'll put it in you. After that it's you and him and whatever's left of my guessing." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Go on, then. Come back and tell me which one of us was right." },
         { type = "paragraph", content = "He goes back under the lamp. That is the whole of the goodbye down here, and she has stopped minding it." },
     ] },
   ] } },
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Go and find a part."
+text = "Go and find out."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "kess_berth"
+time_progression_minutes = 45
+# ⚠️ rev 135 — SETS controller_off, NOT parts_loop_open. The loop is no longer opened here: it is opened at
+# kess_the_chip_not_the_key, AFTER she has gone and proved the key is dead and heard from Mercer that his
+# was only ever his. Opening it here would put her back on the parts economy before the chapter has given
+# her a reason to want one, which is the whole complaint this restructure answers.
+flagEffects = [
+  { targetType = "player", flag = "controller_off", op = "set" },
+]
+
+# ═══ cap_owner_confirmed — rev 135: THE DRAIN LANDS, AND SHE FINALLY GETS TO ASK ═══════════════════════
+# THE CHAPTER'S NEW HINGE @mercer_room. Auto-fire Tier-3 capstone, pri 10, one-shot, gated controller_off
+# is_true + owner_drained is_false + presence (requires_npc is INERT on the auto-fire path — the
+# npc_at_location item is the gate that bites; the beat_0074 finding).
+# WHY IT EXISTS: Kess switched Mercer's key off and refused to promise what that did to her, because the only
+# reading that counts is taken on the man the leash never let her touch. This is her taking it.
+# ⚠️ NOTHING CHALLENGES HER HERE, AND THAT IS THE DIFFERENCE FROM cap_first_fire. The key is dead, so no
+# list comes down and nothing arrives to shut it — the drain simply opens, and the quiet is the tell. At the
+# first fire the list DOES come down and the talkback answers it live. Two drains, two different reasons.
+# ⚠️ THE PAYLOAD IS MOVED, NOT COPIED. The seven-beat Q&A and her one interior used to sit at cap_first_fire.
+# The drain that FIRST lands is the one that gets to ask the questions, and the answer it comes back with —
+# "mine only speaks for me... like there were others out there with one" — is precisely what makes the parts
+# loop necessary. Under the old order the reveal arrived AFTER the loop it was supposed to motivate.
+# THE CONTROL CANVAS IS PLAYED AS Q&A IN HIS DIALOG — design_book's carriage rule, inherited with the beats.
+# MEDIA: sex/mercer_lockup_anal_drain_t5.webm travels with the payload. It depicts the first successful drain
+# and this is now that scene; cap_first_fire's replacement slot is a B3 cost. Debt stays 22.
+# CEILING: anal, already signed for Mercer at rev 119 (clauses ii + iii). Nothing new is asked for.
+[[canvases]]
+id          = "cap_owner_confirmed"
+name        = "What it cost him"
+description = "rev 135. THE CHAPTER'S HINGE @mercer_room — the drain that finally lands. Auto-fire Tier-3 capstone, pri 10, one-shot, gated controller_off is_true + owner_drained is_false + npc_at_location is_present. Kess killed the key off the bonded case's log and would not promise what that did to her; this is the reading, taken on the one man the leash never let her touch. It catches, and NOTHING comes to shut it — no list, no challenge, because the key is dead. Carries the seven-beat Q&A MOVED from cap_first_fire (Halloran and Asset Services; what each man was told; what the key was for; and the bad news, that it only ever spoke for HIM). 18 beats. SETS owner_drained, bumps mercer_drains_done. The reveal now arrives BEFORE the loop it motivates instead of after it."
+[canvases.trigger]
+location      = "mercer_room"
+requires_npc  = "npc_mercer"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "controller_off", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "owner_drained",  operator = "is_false" },
+  { type = "npc_at_location", location_id = "mercer_room", npc_id = "npc_mercer", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "What it cost him"
+blocks = [
+  { type = "paragraph", content = "He has the bottle out of the case already and a second glass on the crate that nobody is going to drink from." },
+  { type = "cascade", props = { beats = [
+    # beat 0 — no advance_text; merges into the lead.
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Thursday. Look at that. I said Thursday and here's Thursday." },
+    ] },
+    { advance_text = "Let him pour.", blocks = [
+        { type = "paragraph", content = "He pours hers anyway and sets it where she isn't sitting, which is a thing he has done for two years and has never once noticed doing." },
+    ] },
+    { advance_text = "Let the evening go where it goes.", blocks = [
+        { type = "paragraph", content = "It goes where it always goes. He has her over the end of the bed with one hand flat between her shoulders, unhurried, because he is never anything else now." },
+    ] },
+    { advance_text = "Let him take his time.", blocks = [
+        { type = "paragraph", content = "He works his cock into her ass slowly, the way he likes it, and she takes it the way she has taken it since the floor." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "That box. I've been thinking about that box all week. Nobody sends a man anything down here." },
+    ] },
+    # THE REACH. Same words the salvage sessions and the shipped loop use — the player has to recognise it.
+    { advance_text = "Reach for it at the finish.", blocks = [
+        { type = "paragraph", content = "He finishes in her ass, and she reaches down inside for the old pull, the thing that used to open a man at the base of the spine." },
+        { type = "paragraph", content = "It catches." },
+    ] },
+    # THE QUIET. The whole difference from cap_first_fire: nothing arrives, because nothing is left to
+    # arrive. She does not diagnose it — §14 — she just notices what does not happen.
+    { advance_text = "Wait for it to be shut.", blocks = [
+        { type = "paragraph", content = "She waits for the list. For the item, and the item, and the gap where she is that always closes. Nothing comes down. Nothing comes at all." },
+        { type = "paragraph", content = "The room stays exactly as quiet as a room." },
+    ] },
+    { advance_text = "Take it.", blocks = [
+        { type = "video", props = { file = "sex/mercer_lockup_anal_drain_t5.webm", description = "A heavy older man finishing in a woman's ass over the end of a bed in a bare concrete room and sinking forward onto her back, his whole weight going loose over her, both of them still afterwards.", search_queries = ["anal creampie man collapses forward onto her back gif", "older man anal finish slumps over her spent still"] } },
+        { type = "paragraph", content = "Then the whole of him comes loose — not a skim, the live current of him going soft and honest through her while he lies over her back and lets it happen." },
+    ] },
+    # ── THE Q&A, MOVED FROM cap_first_fire AT rev 135 AND RESTORED HERE AFTER a mis-scoped edit at rev 136
+    #    wrote cap_first_fire's payload into this canvas instead. His mouth, her command, no narrated summary.
+    { advance_text = "Ask him.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Who signed for me." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Halloran. Asset Services, fourth floor. Never met the man. A signature on a transfer and a number I never called." },
+        { type = "paragraph", content = "His voice comes out even. He answers the way a man answers in his sleep." },
+    ] },
+    { advance_text = "And what was he told.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "What was Halloran told I was." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Sensitive recovery. One of theirs, on loan, keep her off the manifests. That's the whole of it. Four lines and a signature." },
+    ] },
+    { advance_text = "And you.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "And what were you told." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Less. She's yours, she does what you say, don't break her, don't ask. I didn't ask. It never once occurred to me to ask." },
+        { type = "paragraph", content = "There is no shame in it. There is nothing in it at all." },
+    ] },
+    { advance_text = "The key.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "The key in your coat. What is it for." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Christ knows. They handed it over with you. Said if she stops working, this is who you call — so I took it for the off-switch." },
+    ] },
+    { advance_text = "Two years.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Two years in a coat pocket. I thought it was there so you couldn't turn on me. A perk, not a job. I never once asked what it did." },
+        { type = "paragraph", content = "He carried the thing that owns her as a courtesy, and never had the faintest idea what it was for." },
+    ] },
+    # THE BAD NEWS. He reports what he was told; he does not understand it. The narration draws the line.
+    { advance_text = "Then say the rest.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Then how does it know you." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "It doesn't know me. Mine only speaks for me — I remember, because it annoyed me. Mine. Like there were others out there with one." },
+    ] },
+    { advance_text = "Ask for the rest of them.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Who else." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "How would I know. I got a key and a girl and a floor to lose. I wasn't senior. I was the one who signed." },
+        { type = "paragraph", content = "Nothing in him goes any further. He is the bottom of it and he was never anything else." },
+    ] },
+    # The chapter's one interior beat, and it observes. She is not free; she is carrying a hall pass.
+    { advance_text = "Let go.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Two years owned by a man who was handed her with four lines and a signature. The leash is off for him and on for everyone else on that list, and she has no idea how long the list is." },
+    ] },
+    { advance_text = "Let him come back.", blocks = [
+        { type = "paragraph", content = "He surfaces ten minutes later on his own bed, blinking, the good mood of a man who has had a nice evening still on him." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Where'd you go. Sit down and have one. There's a whole bottle of it and it came in a box." },
+    ] },
+    # Terminal beat — no advance_text.
+    { blocks = [
+        { type = "paragraph", content = "She goes out past the shuttered stall and up into the market carrying, for the first time since the floor, something that is not on loan." },
+        { type = "paragraph", content = "Behind her he is pouring, and none the wiser, and pleased." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get your coat."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "mercer_room"
+time_progression_minutes = 90
+effects = [
+  { targetType = "player", trait = "mercer_drains_done", op = "add", value = 1, clamp = true },
+]
+flagEffects = [
+  { targetType = "player", flag = "owner_drained", op = "set" },
+]
+
+# ═══ kess_the_chip_not_the_key — rev 135: THE CONCLUSION, AND THE ASK SHE HAS TO SAY YES TO ════════════
+# @kess_berth. Auto-fire one-shot, pri 11, gated owner_drained is_true + parts_loop_open is_false +
+# feed_line_days gte 1 + npc_kess is_present. A HINGE, not a capstone — it is a conversation and a decision.
+# WHY IT EXISTS: without it the parts loop has no reason. Under the old chain Kess simply guessed at a build
+# and she went shopping; the player was carried through five canvases of failure on his hunch. Now she has
+# come back off a drain that WORKED and a sentence that spoils it — "mine only speaks for me, like there
+# were others out there with one" — and the conclusion is hers to take: one man is off her, and the thing in
+# her still answers to every other key on that list.
+# ⚠️ THIS IS WHERE SHE AGREES TO GO BACK UNDER IT, and the ask has to cost. They hold the only live key
+# either of them will ever get their hands on, and a dead key teaches Kess nothing. So it goes back ON, with
+# her inside it, because that is the only bench that exists for the thing she actually wants solved.
+# ⚠️ AND IT SETS UP THE EXTRACTION. beat_0083 cuts the chip out "because a live key holds the governor
+# quiet" — his own Salvage rule is that pulling it blind takes her with it. Turning Mercer's key back on is
+# therefore not only how he studies the chip, it is what makes cutting it out survivable at the end. The
+# chapter reasons its way to its own last scene instead of arriving there through Bastien's thread.
+# MEDIA: none. Reuses nothing and earns nothing — it is a bench conversation, and hub_kess_berth carries the
+# room's art. Debt unchanged.
+[[canvases]]
+id          = "kess_the_chip_not_the_key"
+name        = "The wrong lock"
+description = "rev 135. The conclusion @kess_berth. Auto-fire one-shot, pri 11, gated owner_drained is_true + parts_loop_open is_false + feed_line_days gte 1 + npc_kess is_present. She comes back off a drain that worked and a sentence that spoils it. Kess takes the conclusion: they killed a key, and the chip does not care — it will answer the next one, and neither of them knows how many there are. The only live key either will ever hold is the one on his bench, and a dead key teaches him nothing. So it goes back ON, with her inside it. SHE SAYS YES, and that is the beat. 9 beats / 8 clicks, dialogue-dominant. A hinge, NOT Tier-3. SETS parts_loop_open — the loop now opens because she chose it, not because Kess had a hunch. Also the setup for beat_0083: a live key is what lets him cut the chip out without it taking her with it."
+[canvases.trigger]
+location      = "kess_berth"
+requires_npc  = "npc_kess"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "owner_drained",   operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key  = "parts_loop_open", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "feed_line_days",  operator = "gte", value = 1 },
+  { type = "npc_at_location", location_id = "kess_berth", npc_id = "npc_kess", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The wrong lock"
+blocks = [
+  { type = "paragraph", content = "The key is where he left it, on the cloth, dead. He has not put it away. He has been waiting to find out whether it mattered." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Well?" },
+    ] },
+    { advance_text = "Tell him it worked.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "It caught. Nothing came to shut it." },
+        { type = "paragraph", content = "He sits back off the bench for the first time she has ever seen and lets out a breath through his nose." },
+    ] },
+    { advance_text = "Tell him the rest.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "He said his only ever spoke for him. Like there were others." },
+        { type = "paragraph", content = "The breath goes back in. He looks at the dead thing on the cloth for a while." },
+    ] },
+    { advance_text = "Let him get there.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Then I've killed a lock and you're still locked. That's not a small thing, but it's the wrong thing to have done well." },
+    ] },
+    { advance_text = "Make him say it plainly.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "It was never the key. It's what's IN you. That answers to anything with the right voice, and I've got no idea how many of those are walking round this city." },
+    ] },
+    # THE ASK. He does not soften it and he does not sell it — the shape of every price he has quoted her.
+    { advance_text = "Ask what he wants.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "So what do you want." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "I want it back on. A dead lock tells me nothing — I need it talking, with you underneath it, or I'm guessing at the thing in you for the rest of your life." },
+    ] },
+    { advance_text = "Let it sit.", blocks = [
+        { type = "paragraph", content = "He does not fill the gap. He has never once filled a gap for her, and she has come to read that as the closest he gets to respect." },
+    ] },
+    # SHE SAYS YES, and the cost is on the page rather than in her head — §12, and the register rule.
+    { advance_text = "Say yes.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Turn it on." },
+        { type = "paragraph", content = "He picks the key up and it wakes under his thumb, and the old weight comes back down over her the way a coat does, and she stands there and lets it." },
+    ] },
+    # Terminal beat — no advance_text. He is already pricing it, because that is what he is.
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Right. Then it's a part a go, off the small stalls, and a bench, which is me, and I won't guess how many. Bring me a talkback." },
+        { type = "paragraph", content = "He goes back under the lamp. She has bought herself a leash to stand in until he is done, and she chose it, which is new." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave him to it."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "kess_berth"
@@ -6492,7 +6866,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "mercer_attempts", operator = "lt", value = 1 },
     ] } }, blocks = [
-      { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "First one. My best read of what his hand said, cut down to sit where the drain sits." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "First one. Everything I could read off that lock while it was open, cut down to sit where the drain sits." },
   ] },
   # ── BAND 1 — beat_0076. Kess's finding from failure 1 (design_the_leash §9): it isn't a LOCK, it's
   # LISTENING, and he guessed the wrong channel. The finding rides this canvas rather than a bench beat of its
@@ -6530,7 +6904,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "mercer_attempts", operator = "gte", value = 3 },
     ] } }, blocks = [
-      { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Not a man — a set of names. I've been spoofing one. There's three more. Two I can't place. One's Bastien." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "He was right, and better than right. It's a set — three more besides his. Two I can't place. One's Bastien." },
   ] },
   { type = "cascade", props = { beats = [
     # beat 0 — no advance_text; merges into the node lead and whichever band is live.
@@ -7007,7 +7381,8 @@ time_progression_minutes = 30
 [[canvases]]
 id          = "cap_first_fire"
 name        = "The fourth one"
-description = "beat_0079 (rev 124). THE CHAPTER'S PAYOFF @mercer_room. Auto-fire Tier-3 capstone, pri 10, one-shot, gated mercer_attempts gte 3 + part_installed gte 1 (a FOURTH part is seated) + owner_drained is_false + npc_at_location mercer_room is_present (requires_npc is INERT on the auto-fire path). The part answers the challenge in his own voice, the door stays open, and the drain lands on her owner. THE CONTROL CANVAS IS PLAYED AS Q&A IN HIS DIALOG — the first canvas in the game to execute design_book's carriage rule, which all three shipped drain payloads narrate instead. Payload: Halloran signed for her and was told four lines; Mercer was told less; he never knew what the key was for and carried it two years as a perk; and the bad news, it only ever spoke for HIM. 17 beats. SETS owner_drained, bumps mercer_drains_done. The one explicit spend of the Mercer ceiling (signed rev 119, clauses ii + iii). The part is NOT burned — try 4 holds."
+description = "beat_0079 (rev 124), PAYLOAD REPLACED rev 136. THE CHAPTER'S PAYOFF @mercer_room. Auto-fire Tier-3 capstone, pri 10, one-shot, gated mercer_attempts gte 3 + part_installed gte 1 (a FOURTH part is seated) + leash_answered is_false + npc_at_location mercer_room is_present. ⚠️ ITS PAYLOAD CHANGED AT rev 136 AND IS BIGGER THAN THE ONE IT GAVE UP. The seven-beat Q&A moved to cap_owner_confirmed at rev 135, because the drain that FIRST lands is the one that gets to ask. What this canvas pays now is not information, it is a change of state in her: the key is LIVE — they turned it back on themselves — so the list comes down exactly as it always has, and the talkback answers it in his voice. She holds the take open against an awake key and nothing comes back for it. Then one question to Mercer that is not for information, and he has nothing left she needs and will never know it. THE ONE INTERIOR: every door that has opened in this chapter was somebody else's — Kess's bench, Mercer's hand, a key on a cloth — and this one was not handed over. 14 beats. SETS leash_answered (and re-sets owner_drained harmlessly), bumps mercer_drains_done. MEDIA: one new single-file slot, sex/mercer_lockup_anal_answered_t5.webm — the old drain clip travelled with the payload at rev 135. Debt 22 -> 23. Mercer ceiling, signed rev 119."
+
 [canvases.trigger]
 location      = "mercer_room"
 requires_npc  = "npc_mercer"
@@ -7020,7 +7395,10 @@ conditions = { version = "1.0", logic = "AND", items = [
   # gte 1 is the shape hub_mercer_room's loop rung and cap_bastien_walks_in's beat_0080 fix both use. The
   # clause means "she has been back to Kess since try 3" — which is where finding 3 gets spoken.
   { type = "trait", subject = "player", trait_key = "part_installed",  operator = "gte", value = 1 },
-  { type = "flag",  subject = "player", flag_key  = "owner_drained",   operator = "is_false" },
+  # ⚠️ rev 135 — WAS owner_drained is_false, WHICH BECAME UNSATISFIABLE. The early drain sets owner_drained
+  # two beats before the loop opens, so this capstone — the chapter's payoff — could never have fired
+  # again. Its guard is its own flag: leash_answered, which is what it sets.
+  { type = "flag",  subject = "player", flag_key  = "leash_answered",  operator = "is_false" },
   # ⚠️ THE PRESENCE GATE THAT ACTUALLY BITES — requires_npc above is inert here. Same fix cap_owner_print and
   # rung_mercer_hands_on both carry, and it was caught live at beat_0074.
   { type = "npc_at_location", location_id = "mercer_room", npc_id = "npc_mercer", operator = "is_present" },
@@ -7057,54 +7435,37 @@ blocks = [
     # THE REACH. Same words the loop used three times, on purpose — the player has to recognise the motion.
     { advance_text = "Reach for it at the finish.", blocks = [
         { type = "paragraph", content = "He finishes in her ass, and she reaches down inside for the old pull, the way she has three times now." },
-        { type = "paragraph", content = "It catches. And this time nothing comes to shut it." },
+        { type = "paragraph", content = "It catches. She holds still and waits to be shut." },
     ] },
-    # THE CHALLENGE, ANSWERED. She FEELS the list-check from try 3 and something inside her speaks for her.
-    # She never diagnoses it — §14. Kess has already told her at the bench what it is.
+    # ⚠️ rev 136 — THE LIST DOES COME DOWN, AND THAT IS THE POINT. At cap_owner_confirmed the key was dead
+    # and nothing arrived, and the silence was the tell. Here the key is LIVE — they turned it back on
+    # themselves — so the challenge runs exactly as it always has. The difference is what answers it.
+    { advance_text = "Wait for the list.", blocks = [
+        { type = "paragraph", content = "The list comes down the way it has always come down. An item. An item. And then the gap where she is, and the thing that lives in that gap turning over to look at her." },
+    ] },
     { advance_text = "Hold it.", blocks = [
-        { type = "paragraph", content = "The list comes down anyway. An item. An item. And at the gap where she is, something inside her answers in his voice." },
-        { type = "paragraph", content = "The door stays open. She has no idea what just spoke for her." },
+        { type = "paragraph", content = "Something at the base of her spine answers it in his voice. Two words, maybe three. She never hears them." },
+        { type = "paragraph", content = "The list moves on past her and the door stays open." },
     ] },
     { advance_text = "Take it.", blocks = [
-        { type = "video", props = { file = "sex/mercer_lockup_anal_drain_t5.webm", description = "A heavy older man finishing in a woman's ass over the end of a bed in a bare concrete room and sinking forward onto her back, his whole weight going loose over her, both of them still afterwards.", search_queries = ["anal creampie man collapses forward onto her back gif", "older man anal finish slumps over her spent still"] } },
+        { type = "video", props = { file = "sex/mercer_lockup_anal_answered_t5.webm", description = "A heavy older man collapsed forward over a younger woman's back on the end of a low bed after finishing in her ass, his whole weight gone loose on her, both of them still, her face turned away and her eyes open.", search_queries = ["man collapses onto her back after anal finish spent still", "older man slumped over girl bed after sex both still"] } },
         { type = "paragraph", content = "Then the whole of him comes loose — not a skim, the live current of him going soft and honest through her while he lies over her back and lets it happen." },
     ] },
-    # ── THE Q&A. His mouth, her command, no narrated summary. design_book's control-canvas carriage rule. ──
-    { advance_text = "Ask him.", blocks = [
-        { type = "dialog", props = { speaker = "player" }, content = "Who signed for me." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Halloran. Asset Services, fourth floor. Never met the man. A signature on a transfer and a number I never called." },
-        { type = "paragraph", content = "His voice comes out even. He answers the way a man answers in his sleep." },
+    # THE PROOF, and it is mechanical rather than announced: she holds the take open against a key that is
+    # awake, and nothing comes back for it. Kess turned it on himself before she walked out of the yard.
+    { advance_text = "Hold it open.", blocks = [
+        { type = "paragraph", content = "She holds it open longer than she needs to, the way you press a bruise to check. Nothing comes back for it. The key is awake on Kess's bench and it has nothing left to say about her." },
     ] },
-    { advance_text = "And what was he told.", blocks = [
-        { type = "dialog", props = { speaker = "player" }, content = "What was Halloran told I was." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Sensitive recovery. One of theirs, on loan, keep her off the manifests. That's the whole of it. Four lines and a signature." },
+    # He has nothing she needs any more. He is the last one in the room to find that out, and he never will.
+    { advance_text = "Ask him something.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Do you feel different." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Different. No. Should I? I feel like a man who's had a nice evening, which is more than I've had in a month." },
     ] },
-    { advance_text = "And you.", blocks = [
-        { type = "dialog", props = { speaker = "player" }, content = "And what were you told." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Less. She's yours, she does what you say, don't break her, don't ask. I didn't ask. It never once occurred to me to ask." },
-        { type = "paragraph", content = "There is no shame in it. There is nothing in it at all." },
-    ] },
-    { advance_text = "The key.", blocks = [
-        { type = "dialog", props = { speaker = "player" }, content = "The key in your coat. What is it for." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Christ knows. They handed it over with you. Said if she stops working, this is who you call — so I took it for the off-switch." },
-    ] },
-    { advance_text = "Two years.", blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Two years in a coat pocket. I thought it was there so you couldn't turn on me. A perk, not a job. I never once asked what it did." },
-        { type = "paragraph", content = "He carried the thing that owns her as a courtesy, and never had the faintest idea what it was for." },
-    ] },
-    # THE BAD NEWS. He reports what he was told; he does not understand it. The narration draws the line.
-    { advance_text = "Then say the rest.", blocks = [
-        { type = "dialog", props = { speaker = "player" }, content = "Then how does it know you." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "It doesn't know me. Mine only speaks for me — I remember, because it annoyed me. Mine. Like there were others out there with one." },
-    ] },
-    { advance_text = "Ask for the rest of them.", blocks = [
-        { type = "dialog", props = { speaker = "player" }, content = "Who else." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "How would I know. I got a key and a girl and a floor to lose. I wasn't senior. I was the one who signed." },
-        { type = "paragraph", content = "Nothing in him goes any further. He is the bottom of it and he was never anything else." },
-    ] },
-    # The chapter's one interior beat, and it observes. She is not free; she is carrying a hall pass.
+    # ⚠️ THE ONE INTERIOR, and it is what this capstone pays instead of the Q&A it gave up at rev 135. Not
+    # information — a change of state in her. Every door that has opened in this chapter was somebody else's:
+    # Kess's bench, Mercer's hand, a key on a cloth. This one was not handed over. It observes, never plans.
     { advance_text = "Let go.", blocks = [
-        { type = "thought_bubble", props = { speaker = "player" }, content = "Two years owned by a man who was handed her with four lines and a signature. The leash is off for him and on for everyone else on that list, and she has no idea how long the list is." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Every door that has opened for her down here was somebody else's — his bench, that hand, a key on a cloth. The thing that spoke for her just now is in her, and nobody gave it to her." },
     ] },
     { advance_text = "Let him come back.", blocks = [
         { type = "paragraph", content = "He surfaces ten minutes later on his own bed, blinking, the good mood of a man who has had a nice evening still on him." },
@@ -7112,7 +7473,7 @@ blocks = [
     ] },
     # Terminal beat — no advance_text.
     { blocks = [
-        { type = "paragraph", content = "She goes out past the shuttered stall and up into the market with one name off a list she did not know existed an hour ago." },
+        { type = "paragraph", content = "She goes out past the shuttered stall and up into the market carrying, for the first time since the floor, something that is not on loan." },
         { type = "paragraph", content = "Behind her he is pouring, and none the wiser, and pleased." },
     ] },
   ] } },
@@ -7127,8 +7488,13 @@ time_progression_minutes = 90
 effects = [
   { targetType = "player", trait = "mercer_drains_done", op = "add", value = 1, clamp = true },
 ]
+# ⚠️ rev 135 — owner_drained is set EARLIER now, at cap_owner_confirmed, so this canvas sets the flag that
+# actually means "the talkback beat a live controller": leash_answered. That is what the extraction reads,
+# and what quest card I closes on. owner_drained stays in the list only because re-setting a set flag is
+# harmless and a returning save mid-restructure should not be able to land between the two.
 flagEffects = [
-  { targetType = "player", flag = "owner_drained", op = "set" },
+  { targetType = "player", flag = "owner_drained",  op = "set" },
+  { targetType = "player", flag = "leash_answered", op = "set" },
 ]
 
 # ═══ loop_mercer_warm_tap — beat_0079, blueprint scene 16. The repeat: pure power, no new payload ══════
@@ -8250,7 +8616,10 @@ is_repeatable = false
 priority      = 10
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag",  subject = "player", flag_key  = "owner_drained",       operator = "is_true"  },
+  # ⚠️ rev 135 — READS leash_answered, NOT owner_drained. The early drain sets owner_drained long before the
+  # talkback exists, so this gate would now mean "she has drained him once" rather than "the leash has been
+  # answered". bastien_drains_done fences it either way, but a gate should say what it means.
+  { type = "flag",  subject = "player", flag_key  = "leash_answered",      operator = "is_true"  },
   { type = "trait", subject = "player", trait_key = "bastien_drains_done", operator = "gte", value = 1 },
   { type = "flag",  subject = "player", flag_key  = "leash_cut",           operator = "is_false" },
   # ⚠️ THE PRESENCE GATE THAT ACTUALLY BITES — requires_npc above is inert here (v2.py:4447). Kess keeps
@@ -10787,10 +11156,42 @@ when = [
 priority   = 10
 text       = "You have it. It came off his own hand while he was talking about a woman who used to do the plants on Thursdays, and he will never know he gave it. That's the handshake Kess said he couldn't be the other end of — and it went into your coat pocket in a concrete room behind a paper stall, with the man it belongs to pouring himself another one."
 tip        = "Take it back down to the breaking-dock and put it in front of Kess. He keeps yard hours, and he doesn't work a bench he isn't paid for — so keep the cot paid before you go looking for him. If you want the next chapter sooner, Support Us in the sidebar."
+# ⚠️ rev 135 — CLOSES ON controller_off, NOT parts_loop_open. Under the restructure the loop opens two beats
+# later (at kess_the_chip_not_the_key), so the old closer would have held this card live across the
+# switch-off AND the drain — three rungs of chapter under one card that describes only the first.
 when = [
   { flag = "owner_print_taken", op = "is_true"  },
-  { flag = "parts_loop_open",   op = "is_false" },
+  { flag = "controller_off",    op = "is_false" },
 ]
+
+# H2 — the CONFIRMATION card (rev 135). controller_off is_true + owner_drained is_false. A new rung, and a
+# mandatory one: the restructure inserts a whole state between "Kess has the print" and "the loop is open",
+# and without a card for it the Story-Goals spine goes blank across the chapter's biggest scene. This is the
+# same defect cards G, H, I and J each exist to prevent, one rung further down.
+[[quest_cards]]
+priority   = 10
+text       = "Kess fed the courier plate to the lock and the lock believed it. Your owner's key is dead on his bench — and he will not tell you what that does to the thing in you, because there is only one place that answer lives and it is not the Reach. It is the man the leash never let you touch."
+tip        = "Go back to Mercer's room after dark and take the evening the way you always have. Reach for the take at the finish, the same reach Kess had you make on the cradle. Either it catches or it doesn't, and either way you will know something you cannot know standing on a dock. If you want the next chapter sooner, Support Us in the sidebar."
+when = [
+  { flag = "controller_off", op = "is_true"  },
+  { flag = "owner_drained",  op = "is_false" },
+]
+
+# H3 — the CARRY-IT-BACK card (rev 135). owner_drained is_true + parts_loop_open is_false. The window between
+# the drain and Kess's conclusion, and the suite caught it BLANK on the first build: H2 closes the moment she
+# drains him and card I does not open until the loop does, so the Story-Goals spine went empty across the
+# walk home from the chapter's biggest scene. Exactly the defect G, H, H2, I and J each exist to prevent —
+# and it is the fourth time in this chapter that moving a flag has opened a hole one rung below it.
+[[quest_cards]]
+priority   = 10
+text       = "It caught. Nothing came down to shut it, and he came apart under your hands and answered everything you asked — who signed for you, what they were told, and what he thought the key in his coat was for. And then the part that spoils it: his only ever spoke for him, and he remembers being annoyed about it, because that means there are others."
+tip        = "Take it back down to the breaking-dock. Kess is waiting to hear whether he killed the right thing, and he keeps yard hours — ten in the morning to ten at night — so go while he's cutting, and keep the cot paid or he won't be. If you want the next chapter sooner, Support Us in the sidebar."
+when = [
+  { flag = "owner_drained",   op = "is_true"  },
+  { flag = "parts_loop_open", op = "is_false" },
+]
+
+
 
 # I — the LOOP card (rev 120, beat_0075): parts_loop_open is_true + owner_drained is_false. The new frontier,
 # carrying the build boundary and the Support-Us ask forward from H. Same D/E/F/G/H shape: prior-stage flag
@@ -10808,11 +11209,14 @@ when = [
 # player who never walks to the wrong door at the wrong time never sees those.
 [[quest_cards]]
 priority   = 10
-text       = "Kess got the key to answer and that turned out to be the easy half. He has the shape of what your owner's hand said, not the hand — so he's building something that can say it live, from inside you, at the seam Bastien's men opened. It's a guess, and a guess has to be tested on the one man the leash won't let you touch."
+text       = "Killing your owner's key got one man off you and left the rest of the list exactly where it was. So the key is back on, because you told Kess to put it back on, and the thing in you is talking to it again — and while it talks he can build something that answers it from inside you, at the seam Bastien's men opened. It is still a guess. It has to be tested on the one man you can walk in on."
 tip        = "Buy a talkback at the black market — the small stalls, not the blades — then take it to Kess and let him seat it. Then go to Mercer, let the evening go where it goes, and reach for the take at the finish. Kess works days and Mercer's room is a night address, so one cycle is two trips and never one. It will fail before it holds, and every failure burns the part and teaches him one thing, so keep the cot paid and keep earning between goes. If you want the next chapter sooner, Support Us in the sidebar."
+# ⚠️ rev 135 — CLOSES ON leash_answered. owner_drained now fires BEFORE this card opens, so the old closer
+# made card I permanently unreachable — the loop's Story-Goal would simply never have existed. leash_answered
+# is set at cap_first_fire and means what this card is actually waiting for: the talkback beat a LIVE key.
 when = [
-  { flag = "parts_loop_open", op = "is_true"  },
-  { flag = "owner_drained",   op = "is_false" },
+  { flag = "parts_loop_open", op = "is_true"   },
+  { flag = "leash_answered",  op = "is_false"  },
 ]
 
 # J — the BASTIEN card (rev 124, beat_0079): owner_drained is_true + bastien_hub_open is_false.
@@ -10839,10 +11243,13 @@ when = [
 # defect one rung down and it is worth fixing the next time H is open.)
 [[quest_cards]]
 priority   = 10
-text       = "It fired. He came apart under your hands and told you the truth in his sleep — he was handed you with four lines and a signature, he never knew what the key in his coat was for, and it only ever spoke for him. One name off a set. That isn't off the leash. That's a hall pass."
+text       = "It answered. The list came down the way it always comes down and something at the base of your spine spoke for you in his voice, and the door stayed open with a live key in the room. That is the part that matters: it was not his key that let you through this time. It was the thing Kess put in you, and it will do that to anyone's."
 tip        = "Kess read the rest off the key: three more names, two he can't place, and one of them is Bastien — the man who kept you in a room. He's down in the Undertow and he doesn't take much finding. Keep the cot paid; you'll want Kess's bench again before this is finished. If you want the next chapter sooner, Support Us in the sidebar."
+# ⚠️ rev 135 — OPENS ON leash_answered. owner_drained is true from the early drain onward, so the old opener
+# would have put this card live alongside card I for the whole loop — two live Story-Goals, breaking the
+# one-live invariant beat_0084 established and measured.
 when = [
-  { flag = "owner_drained",    op = "is_true"  },
+  { flag = "leash_answered",   op = "is_true"  },
   { flag = "bastien_hub_open", op = "is_false" },
 ]
 
@@ -11087,9 +11494,12 @@ priority   = 12
 npc_id     = "npc_mercer"
 text       = "He's the test bench. Everything Kess seats in you gets spent on him, and it fails, and it fails, and every failure hands the yard one fact it did not have before. Parts bought, parts burned, evenings gone. He thinks you keep coming back because you like the company."
 tip        = "One part, one evening, one try. Buy at the small stalls, have Kess seat it, spend the night on Mercer, take your shot when he finishes. The part burns whether it works or not, so budget for another. It misses three times before it holds."
+# ⚠️ rev 135 — CLOSES ON leash_answered. owner_drained now fires BEFORE this card opens, so the old closer
+# made card I permanently unreachable — the loop's Story-Goal would simply never have existed. leash_answered
+# is set at cap_first_fire and means what this card is actually waiting for: the talkback beat a LIVE key.
 when = [
-  { flag = "parts_loop_open", op = "is_true"  },
-  { flag = "owner_drained",   op = "is_false" },
+  { flag = "parts_loop_open", op = "is_true"   },
+  { flag = "leash_answered",  op = "is_false"  },
 ]
 goals = [
   { trait = "mercer_attempts", subject = "player", op = "gte", value = 3, label = "Spend evenings on him until the take holds (his room, nights)" },
@@ -11100,8 +11510,9 @@ priority   = 13
 npc_id     = "npc_mercer"
 text       = "By morning he had none of it back. He pours, he talks, he asks after nobody, and the man who signed for you does not know he was ever opened. He will go on not knowing for exactly as long as you let him, and that is the closest thing to a hold you have ever had on him."
 tip        = "Mercer's drained; there's nothing left in him to get. The room behind the stall is open every night anyway — pure power now. He's the one man down here who's glad to see you."
+# rev 135 — the warm tap belongs to the END of the loop, not to the early drain, so it reads leash_answered.
 when = [
-  { flag = "owner_drained", op = "is_true" },
+  { flag = "leash_answered", op = "is_true" },
 ]
 
 # ══════════════════════════════════════════════════════════════════════════════════════════════════════════

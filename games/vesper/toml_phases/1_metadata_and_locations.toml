@@ -155,6 +155,19 @@ feed_line_days    = 0
 part_held         = 0
 part_installed    = 0
 mercer_attempts   = 0
+# THE LEASH (rev 133, renamed rev 134) — the CAPTURE device: a bonded courier case. Same shape as part_held:
+# bought at the market (0 -> 1), spent when Mercer's palm opens it (1 -> 0). The key cannot go to him — it is
+# in pieces on Kess's bench, and he carried it two years and would know it by the weight — so the hand has to
+# be brought back on something else, and this is it.
+# ⚠️ WAS flask_held AT rev 133, AND THE RENAME IS A FIX, NOT COSMETICS. A flask is a thing he KEEPS, so the
+# print left the room in his pocket and never reached the bench — the device recorded the hand and then
+# walked off with the mark. A case is opened and DISCARDED: what he keeps (the bottle) and what she carries
+# away (the box, with his hand logged in it) are different objects, and that difference is the mechanism.
+# A TRAIT for the same reason part_held is — its setter rides a navigating choice, and the flag-chain
+# validator hard-fails a flag whose only setter is triggerless.
+# ⚠️ ONE-WAY. Unlike part_held there is no re-buy: activity_buy_case closes on owner_print_taken, so once the
+# print is taken the stall is gone for good. The print is not a consumable — Kess needs the hand ONCE.
+case_held         = 0
 # THE LEASH (beat_0079) — the Mercer drain counter, the twin of calloway_drains_done and colm_drains_done.
 # Bumped to 1 by cap_first_fire (the first fire, an auto-fire one-shot) and again by every loop_mercer_warm_tap
 # repeat after it. A TRAIT for the same reason as the three above: the warm tap's setter rides a triggerless

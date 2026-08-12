@@ -442,6 +442,39 @@ and greppable, not a cleverer condition.
 reaches the branch that used to mean "you got it wrong" — that assertion is the whole point, and it is the one
 a memory-based check will not think to write.
 
+### ⚠️ The third failure: a reachable gate with an UNREACHABLE SETTER
+
+The audit above asks, of every gate, *"does this still have a true branch after `F`?"* There is a failure it
+**passes clean**, and it is the quietest of the three.
+
+**A region sealing is not a terminal flag, and it retires nothing.** No state is removed, no NPC is retired,
+no gate stops being satisfiable. What dies is the *place* — and with it, every surface that happened to stand
+inside it. If a mechanic's only **maintenance** surface was in there — its reload, its swap, its repair, its
+resupply, its trainer — the mechanic still gates perfectly and simply can never be put back into a usable
+state again.
+
+So add one question to the audit, and ask it of **state**, not of gates:
+
+> **For every state a live gate READS, where is that state SET — and is that place still reachable?**
+
+*Measured (vesper, the Act-1a close):* the emitter's reload and the weapon swap both stood in the Spire. The
+close cut the ride up, and the player leaves the preceding chunk holding the *other* weapon — so all four
+emitter fire gates went on evaluating `equipped_weapon eq 2` correctly and forever falsely, and an entire
+weapon disappeared from a chapter whose main thoroughfare is the one place it was still used. **Nothing
+looked wrong.** The drain had been carried across to the new home base a chunk earlier; the emitter was
+simply not thought of at the same time, which is the whole shape of this bug — you port the system you are
+using and forget the one you are not.
+
+- **It will not present as a soft-lock**, which is why it survives playtesting. Every one of these is a
+  *choice among several*: the gate takes coin or a fight or the weapon. Play continues, and one option
+  silently stops existing.
+- **The fix goes where the new home base is**, in that region's economy rather than as a copy of the old
+  one's. *(Vesper put the reload on the paid night that was already the chapter's single bill, rather than
+  cloning the old free-at-the-cradle activity, and gave the swap its own surface at the new bench.)*
+- **Sweep at the seal, not at the symptom.** When a beat cuts a region, list every mechanic the player
+  still carries and name the surface each one is maintained at. The ones pointing inside the seal are the
+  work.
+
 *(Vesper, `beat_0083`: the extraction cuts the controller out, so `controller_state` is 0 for the rest of the
 game. Five surfaces read it; the one that mattered was a finisher whose drain exits required the key — every
 future anal finish would have routed to the "nothing happens" branch forever, so the player would own the man

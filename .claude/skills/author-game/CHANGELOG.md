@@ -14,6 +14,40 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 -->
 
 ## 2026-08-11
+- **Never assert a proxy — assert the claim the check's own label makes (`references/beat-authoring.md`,
+  new section before "Quest cards").** A game's regression suite is written against prose and structure that
+  are *supposed* to keep changing, so the failure mode is not that assertions break — it is that they break
+  **for no reason**, on a later beat that did nothing wrong, each costing a full diagnosis before turning
+  out to be noise. Every instance has one shape: the check asserts a **count, a literal string, or a
+  hard-coded list** as a stand-in for what it actually cares about. Five measured in a row across two
+  `vesper` beats, all false alarms — `len(groups) == 2` (broken by a correct third band), the literal
+  `"Buy a part at the black market"` (broken when the object got a name), a hard-coded list of twelve
+  `advance_text` labels (broken when the scene gained beats — **sixteen assertions failed at once from that
+  one list**), and `RAW.count('pool_dir = …') == 4` in two separate suites (broken by a legitimate new
+  pool). Recorded with the invariant form of each, three rules (derive from the source rather than restating
+  it; anchor on the syntax that DECLARES a thing, and `\b`-bound vocabulary regexes since a bare `"ass"`
+  matches *glass*; a total is never an invariant, because it encodes "nothing else may ever grow"), and the
+  tell: **if you can imagine a correct edit that fails the check, it is measuring the wrong thing** — and it
+  will be "fixed" by re-pinning it to whatever the code now says, which is how a suite ends up asserting the
+  bug. That last failure is not hypothetical: `live_beat_0075`'s lapsed-band check had been green for six
+  beats while the screen it guarded said nothing useful.
+- **A reachable gate with an unreachable SETTER — the third failure in the terminal-flag sweep
+  (`references/lanes.md`, new subsection under "Retire the standing surface on the terminal flag").** The
+  section's audit asks of every gate *"does this still have a true branch?"*, and there is a failure that
+  passes it clean. **A region sealing is not a terminal flag and retires nothing:** no state is removed, no
+  gate stops being satisfiable — the *place* dies, and with it every surface standing in it. When a
+  mechanic's only **maintenance** surface (reload, swap, repair, resupply, trainer) was inside, the mechanic
+  gates perfectly and can never be returned to a usable state. Added the one question that catches it —
+  *for every state a live gate READS, where is it SET, and is that place still reachable?* — asked of state
+  rather than of gates. **Third instance of one root** (rev 129 quest cards, rev 130 the Schedules page,
+  rev 131 this), and the first where the casualty is a mechanic rather than guidance. Measured on `vesper`:
+  the Act-1a close stranded the emitter's reload and the weapon swap in the Spire, and since the player
+  leaves the preceding chunk holding the *other* weapon, all four emitter fire gates went on evaluating
+  correctly and forever falsely — an entire weapon gone from the chapter whose main thoroughfare was its
+  last remaining use. Recorded with why it survives playtesting (it never presents as a soft-lock: the gate
+  also took coin or a fight, so play continues and one option quietly stops existing), and with the fix
+  shape (rebuild the surface into the NEW home base's economy — vesper put the reload on the paid night
+  that was already the chapter's single bill — rather than cloning the old region's version).
 - **A hidden rung still owes the player a reason, and it is owed in PROSE (`references/lanes.md`, the
   "Grey vs hide" bullet).** The rule taught hide-vs-grey as a property of the *rung type* (escalation rungs
   grey, everything else hides). That is right when the precondition is a story the player has not reached and

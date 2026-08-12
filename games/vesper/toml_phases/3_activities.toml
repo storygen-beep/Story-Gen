@@ -1623,6 +1623,73 @@ time_progression_minutes = 30
 # ⚠️ Coin NEVER blocks the mainline (design_book): the free crash-rough bed keeps her upright whatever
 # her purse says, and a short purse GREYS this choice rather than taking her negative — costs are
 # checked by checkCostsAffordable before they deduct.
+# ═══ activity_buy_case — rev 134. THE BONDED CASE: the capture device Kess sends her for ═══════════════
+# WHY IT EXISTS: kess_needs_print can't have Mercer in the yard, and the key can't go to him either — it is
+# in pieces on the bench, and Mercer carried it two years and would know it by the weight. So the hand has to
+# be brought to Kess ON something. This is that something, and it is the chapter's first player-PERFORMED
+# step: buy an object, carry it in, use it, bring it back. The print used to just happen inside the prose.
+# ⚠️ A CASE AND NOT A FLASK — rev 134, and the correction matters. A palm-locked flask is a thing he KEEPS,
+# so the print walked out of the room in Mercer's pocket and never reached the bench. A bonded courier case
+# is the opposite: he opens it, takes what is inside, and the empty box is rubbish. What he keeps and what
+# she carries away are DIFFERENT OBJECTS, which is the whole mechanism.
+# ⚠️ AND THE RECORDING IS NOT A HACK — it is the product's actual purpose. A bonded case logs the hand that
+# opened it because the log IS the proof of delivery. She is not smuggling a scanner into his room; she is
+# handing him a parcel that works exactly as advertised, in front of him, and the receipt is the theft.
+# THE BOTTLE INSIDE is the gift and is deliberate: he is a man defined by pouring, so a bonded bottle is
+# both the most natural present she could bring him and the one he will open on the spot.
+# GATES mirror activity_buy_part exactly (print_needed opens it, held/taken fence it), so the market teaches
+# one shopping pattern met twice. Same 25 coin, same +30 min.
+# Reuses locations/underworld_market.jpg — establishing shots are the one asset this game reuses.
+[[canvases]]
+id          = "activity_buy_case"
+name        = "The bonded stall"
+description = "rev 134 (was activity_buy_case at rev 133; a flask is KEPT, so the print never came home — a case is opened and discarded, which is the mechanism). Wren-solo @underworld_market. Repeatable, pri 3, gated print_needed is_true + case_held lt 1 + owner_print_taken is_false, so it shows from Kess's dispatch until the print is taken and never again. One buy: 25 coin -> case_held = 1, +30 min. Same shape and price as activity_buy_part, deliberately."
+[canvases.trigger]
+location      = "underworld_market"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "print_needed",      operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key  = "owner_print_taken", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "case_held",         operator = "lt", value = 1 },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "The bonded stall"
+blocks = [
+  { type = "image", props = { file = "locations/underworld_market.jpg", description = "Dim black-market stalls under a low ceiling, weapons and gear laid on cloth, cages further back.", search_queries = ["black market weapons stall dim", "underground arms bazaar cages back"] } },
+  { type = "paragraph", content = "Two tables past the blades a man does bonded freight — grey courier cases stacked to his shoulder, each with a reader plate let into the lid. Nothing down here moves without a hand on it at both ends." },
+  { type = "dialog", props = { speaker = "player" }, content = "It keeps the hand that opens it." },
+  { type = "paragraph", content = "That's the whole product, he says. Anyone can carry a box. The case is how you prove who took delivery, and it holds that a year." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Have him bond a bottle into one. (25 coin.)"
+targetType = "node"
+nodeId     = "activity_buy_case.buy"
+costs      = [{ trait = "coin", value = 25 }]
+effects    = [{ targetType = "player", trait = "case_held", op = "set", value = 1, clamp = true }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave the table."
+targetType = "location"
+locationId = "underworld_market"
+[[canvases.nodes]]
+id   = "buy"
+name = "The case"
+blocks = [
+  { type = "paragraph", content = "He seats a bottle in the foam, drops the lid, and the reader plate goes dull and waiting. It is a good bottle. It is a better box, and only one of the two is going back to the Reach with her." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He will open it in front of her. He will not be able to help it, and he will be pleased, and the empty will be sitting on the floor when she leaves." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Pocket it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_market"
+time_progression_minutes = 30
+
 # Reuses locations/underworld_market.jpg — establishing shots are the one asset this game reuses.
 [[canvases]]
 id          = "activity_buy_part"

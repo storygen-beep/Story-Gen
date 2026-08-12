@@ -488,6 +488,42 @@ plain **reload** — so after rebuilding `index.html`, a refresh resumes the OLD
 code (inconsistent gates). For a TRUE fresh test: in-game **Restart**, clear local/sessionStorage, or a
 private window (`--fresh`). After ANY gate/trait change, reset before judging.
 
+## ⚠️ Never assert a PROXY — assert the claim the check's own label makes
+
+A regression suite for a game is written against prose and structure that are *supposed* to keep changing.
+The failure mode is not that assertions break; it is that they break **for no reason**, on a later beat
+that did nothing wrong, and each one costs a full diagnosis before you find out it was noise. Every
+instance has the same shape: **the check asserts a count, a literal string, or a hard-coded list as a
+stand-in for the thing it actually cares about.**
+
+Measured across two beats on `vesper`, five in a row, every one a false alarm:
+
+| what it asserted | what it meant | what broke it |
+|---|---|---|
+| `len(groups) == 2` on a hub node | the `[group]` chain is still well-formed | a correct third band |
+| the literal `"Buy a part at the black market"` | the tip still gives all three steps | the object got a name |
+| a hard-coded list of 12 `advance_text` labels | the cascade walks to the end | the scene gained beats |
+| `RAW.count('pool_dir = "sex/x') == 4` (×2 suites) | ONE ASSET / ONE BLOCK; the failures carry no media | a legitimate new pool |
+
+**Write the invariant instead.** Not "there are two bands" but *the chain opens on the `is_false` band,
+ends on the bare catch-all, and every band between is strictly narrower.* Not "the tip says these words"
+but *the tip names the market, the seat step and the burn.* Not "twelve labels" but *read the labels out of
+the cascade.* Not "four pools" but *no `pool_dir` is declared twice.*
+
+Three rules that catch most of it:
+
+- **Derive from the source, don't restate it.** If the suite already parses the merged TOML, read the
+  labels/bands/pools out of it rather than copying them into the test.
+- **Anchor on the syntax that DECLARES a thing**, never a bare substring — `file = "x.jpg"`, not `x.jpg`,
+  because your own comments discuss the asset by name. (And `\b`-bound your vocabulary regexes: a plain
+  `"ass" in text` matches *glass*, which is a drink this game hands out constantly.)
+- **A total is never an invariant.** Counts are the most tempting proxy and the most brittle: they encode
+  "nothing else in the game may ever grow", which is false for every game still being authored.
+
+The tell that you have written a proxy: **you can imagine a correct edit that fails the check.** If so it
+is measuring the wrong thing, and it will be "fixed" by re-pinning it to whatever the code now says — which
+is how a suite ends up asserting the bug.
+
 ## Quest cards (`[[quest_cards]]` — the Quests page)
 Active only when `[project].quests_engine = "v2"`. Authoritative schema + condition shape:
 `references/engine-reference.md`. Design split: quests are narrative goals, the sidebar carries body-state
