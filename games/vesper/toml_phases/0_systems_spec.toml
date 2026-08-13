@@ -301,7 +301,7 @@ hidden = true
 [[traits.labels]]
 key    = "emitter_broken"
 hidden = true
-# THE LEASH (beat_0075) — the parts loop. All three hidden from the <<playerTraits>> dump and none of them
+# THE LEASH (beat_0075) — the parts loop. All four hidden from the <<playerTraits>> dump and none of them
 # draws a sidebar row: they are internal loop state, and the player reads the loop off Kess's mouth, the
 # market card's presence and the Story-Goal card, never off a number. Declared in 1_metadata's
 # [player.core_traits] (which is what puts them in the cross-release backfill); the header there carries the
@@ -314,6 +314,22 @@ key    = "part_installed"
 hidden = true
 [[traits.labels]]
 key    = "mercer_attempts"
+hidden = true
+# THE DEBRIEF (beat_0093, rev 143) — two traits, and they do different jobs.
+# part_spec 0-3 = WHICH part Kess has asked for. Selects the market stall's prose and nothing else.
+# spec_pending 0/1 = HAS SHE REPORTED the last failure. Set by each of the three try nodes, cleared by the
+#   debrief, and it is the actual gate: the market's buy choice needs it clear, so after a failure she cannot
+#   spend until she has stood in front of Kess and heard what went wrong. Before this the diagnosis arrived
+#   AFTER the purchase — she bought on a guess and was told the reason while the part was being seated.
+# ⚠️ WHY TWO AND NOT ONE COMPARISON. The natural gate is "part_spec is behind mercer_attempts", and a trait
+# condition CANNOT express it: the evaluator reads `var rightVal = it.value` (v2.py:3948), a literal, with no
+# trait-to-trait form. Unrolling that comparison costs three rungs at the bench and four more at the stall.
+# One derived bit collapses all of it to a single condition in both places.
+[[traits.labels]]
+key    = "part_spec"
+hidden = true
+[[traits.labels]]
+key    = "spec_pending"
 hidden = true
 # THE LEASH (beat_0079) — the Mercer drain counter. Hidden; no sidebar row. Bumped by cap_first_fire (the first
 # fire) and by every loop_mercer_warm_tap repeat after it, so it selects nothing today but is the twin of

@@ -1361,3 +1361,208 @@ for the first time in several revisions, and `0079` went 68/73 → **73/73**.
 Still red, and verified pre-existing on the same pre-change build: `live_beat_0069` (11/14), `0070` (19/20),
 `0071` (16/22) — `kess_needs_print` auto-fires at the berth and swallows their assertions — and
 `live_rev130_131` (33/34).
+
+---
+
+## rev 142 (beat_0092) — the Quests page learns to say "finished"
+
+LO played the build to its last beat, opened the Quests page and said it "looks sort of same." He was right,
+and the reason is a render rule that had never been written down anywhere.
+
+### What was wrong
+
+At the end state the page draws **five sections**: Story Goals, Renner, Calloway, Colm, Mercer. Four of those
+five are **finished arcs with nothing left to do**, and all four render *identically to a live objective* —
+same card, same italic flavour paragraph, same yellow 💡 tip box.
+
+`renderQuestsGoalBlock` (`v2.py:14964`) draws exactly one of three frames per card: ✓ terminal, 🔓 ready,
+🎯 unmet goals. A card that is **goal-less and non-terminal matches none of them**. That is not a blank *row* —
+the card still renders its `text` and `tip` — so the section reads as an open task, permanently. The only
+"this is over" signal anywhere in the game was one sentence buried mid-paragraph in card M's tip, competing
+with four other cards that said nothing at all.
+
+The skill caused it. `quests.md` §7 told authors what an end-of-content card should **say** and never told them
+to **mark** it, so the shape it prescribes is exactly the shape that draws no frame.
+
+### What the engine already had
+
+`terminal = true` fires a green ✓ frame. It has existed and been styled since PRD 48.
+
+```
+grep -c "^terminal\|^ready_canvas\|^ready_text" 5_scenes.toml   →   0
+```
+
+Zero cards in the game had ever set it. Both the ✓ frame and the 🔓 Ready frame were dead code as far as
+Vesper was concerned.
+
+### The five cards
+
+| card | gate | badge |
+|---|---|---|
+| Renner, p14 | `renner_drained is_true` | ✓ Arc complete |
+| Calloway, p12 | `archive_1a_done is_true` | ✓ Arc complete |
+| Colm, p12 | `archive_1a_done is_true` | ✓ Arc complete |
+| Mercer, p13 | `leash_answered is_true` | ✓ Arc complete |
+| Story-Goal **M**, p10 | `leash_cut is_true` | ✓ Chapter complete — the story continues in the next release |
+
+⚠️ **The badge marks the ARC complete, not the SURFACE closed.** Every one of them keeps its tip. Colm's back
+room and Renner's office stay open as repeatable content for the rest of the game and their tips still say so.
+Retiring the cards instead would make the sections disappear, which is the worse case `quests.md` §6 exists to
+prevent and which Renner's ladder had already committed once.
+
+⚠️ **Mercer's badge fires at `leash_answered`, before the build ends, and that is correct.** The NPC tier
+answers *"how far am I with him"* and his arc genuinely closes at the fire, while the Story-Goal card still
+says go to Kess. Two tiers, two questions. A player seeing ✓ on Mercer beside a live Story Goal is being told
+the truth about both.
+
+### The engine field this forced — `terminal_text`
+
+Frame 1's label was hardcoded to `Arc complete`, which cannot say *this release ends here*. A finished arc and
+a finished build are different endings. So the label is now overridable:
+
+```
+template_import.py    QuestsCard.terminal_text, the parser, the serializer
+v2.py:14968           var _tlabel = card.terminal_text || "Arc complete";
+```
+
+Plus a validator warning when `terminal_text` is set without `terminal` — the string would otherwise be
+silently dead, and it mirrors the existing `terminal + ready_canvas` warning one line above it.
+
+⚠️ **EXACTLY ONE CARD IN THE GAME MAY SET IT.** The label promises future content, and Renner's arc is
+finished forever — *"more in new releases"* on his card would be a false claim, the same defect class as the
+build-boundary sentence that shipped stale on three cards for eleven beats. This is the badge form of §10.1's
+rule that exactly one card names the future, and it is now the same rule stated twice.
+
+⚠️ **No apostrophe in the string, deliberately.** SugarCube's source-byte escaping renders `'` as `&amp;#x27;`
+in the built HTML — it displays correctly and then poisons every later grep of the file. The em dash is safe.
+
+### Doctrine
+
+Both skills took it in the same turn, because a fix that lands in one regresses in the other:
+`quests.md` §3 (the field) and a new §7 subsection (the rule, the arc-vs-surface split, the one-card cap) in
+`author-game`; `beat-authoring.md`'s field list and mode list; `engine.md` §23 in `author-game-v2`, where the
+frame order was documented correctly and the goal-less case was not.
+
+### Verification
+
+`live_rev142_terminal_cards` — **49/49**. ⚠️ The load-bearing half is the **negative**: a badge on a card the
+player still has work to do is this same defect inverted, so the suite asserts at three attempt counts that
+the loop cards never badge, that Mercer's 🎯 count still climbs 0/3 → 1/3 with three other arcs already
+finished beside it, and that the four NPC labels never contain the words "next release".
+
+`live_beat_0084` **82/82** and `live_rev141_bastien_cut` **73/73**, both unchanged — predicted before running
+them, since `0084`'s card extractor collects `.quests-goal li` and the terminal frame emits a header div with
+no `<li>` in it. Full suite set re-run: only the four documented pre-existing failures (`0069` 11/14, `0070`
+19/20, `0071` 16/22, `rev130_131` 33/34). Build green, 22 MISSING unchanged — this beat touches no media.
+
+---
+
+## rev 143 (beat_0093) — she tells Kess it failed, and the part is different every time
+
+LO found this by playing the loop: *"there is nothing that she tells kess like that part failed… I think
+currently its like wren doesnt tell kess directly goes on to buy the second part from out of the sudden."*
+
+He was right, and reading it showed the defect was worse than a missing beat.
+
+### The order was inverted
+
+| step | where | what was said |
+|---|---|---|
+| 1 | Mercer's room | the part burns (`part_installed = 0`), nothing is said |
+| 2 | Kess's berth | *"You're paid up, so I'm on it. Don't hover."* |
+| 3 | "Ask how the work's going" | *"I'm learning what it listens for."* |
+| 4 | black market | she buys another, **unprompted**, 25 coin |
+| 5 | on the bench | *"Nothing at all. That's the useful kind… I hit the wrong wire."* |
+
+**The diagnosis landed at step 5 and the purchase happened at step 4.** She paid for a guess and heard the
+reason afterwards, four cycles running.
+
+### And the hub was deaf
+
+`hub_kess_berth`'s bands were authored at **rev 114, nineteen beats before the parts loop existed**, and were
+never re-banded on `mercer_attempts`. Band A — `feed_line_days gte 1 + part_held lt 1` — is exactly the
+post-failure state, so after every burn Kess greeted her with *"don't hover"*, a line about him working the
+key on his own bench. Meanwhile his line in the `work` node one over promised:
+
+> *"You'll know when I've got something because I'll say so."*
+
+He never said so. The only way to hear a finding was to go and buy another part first.
+
+### What was built
+
+**The debrief.** A new `debrief` node on his hub behind a new rung, **"Tell him the part failed."** She reports
+the *sensation*; he does the working out — §14's split, unchanged, and the same one that governs `try3`. Then
+he names what to buy next. Three bands on `mercer_attempts`, exclusive by `gte`/`lt` pairs.
+
+**The findings moved off the bench.** All three — *it is listening, not locking* · *it bit you, that is a
+guard* · *it is a set of voices, not one man* — now precede the purchase instead of following it. The install
+bands keep their slots and carry **the part in his hands** instead, each inside the measured 21-word ceiling:
+
+| attempts | install band now |
+|---|---|
+| 0 | *"First one. Everything I could read off that lock…"* (unchanged — nothing preceded it) |
+| 1 | *"Sweep head. Wider than the last one — I'll have to take more of the seam."* |
+| 2 | *"Isolator. Heavy for its size, and it sits deeper. If it bites this time it bites this, not you."* |
+| 3 | *"Last one. Stacked — three seatings in one seam. After this you're free or I'm out of ideas."* |
+
+**The stall sells four different things.** `activity_buy_part` was one repeatable card with identical prose
+four times; it now carries four exclusive bands on `part_spec`, so the part is named and the man behind the
+tables reacts differently to each — he does not look up for the talkback, gives the sweep head a second look,
+undersells the isolator as dead stock, and goes into the back for the last one.
+
+### ⚠️ Bastien out of finding 3 — LO's call, and overdue
+
+Band 3 read *"It's a set — three more besides his. Two I can't place. **One's Bastien**."* Written when
+present-day Bastien was the next thing in the release; he went to the shelf at rev 141, so from that beat
+onward the line handed the player a lead this build cannot pay off — on the **last rung before the fire**,
+the worst place in the chapter to plant one.
+
+- **The SET stays.** Load-bearing on quest cards H3 (*"that means there are others"*) and I (*"left the rest of
+  the list exactly where it was"*), and the whole reason part four is a stacked talkback.
+- **The names go**, replaced by what LO asked for: *"if it takes, there's nothing left in you that answers to
+  anybody."* Forward-looking on purpose — band 3 is spoken while he is **seating** part four, so she is not
+  free yet and he cannot say she is.
+- **The captivity references are KEPT** — *"Bastien's men opened this seam"* is the comparison the install
+  scene is built on and has shipped since 0.1.7. Asserted as a negative in the suite so a later sweep cannot
+  take them by accident.
+
+### ⚠️ Two engine facts changed the design mid-build
+
+1. **A trait condition compares a trait to a LITERAL.** `var rightVal = it.value` (`v2.py:3948`) — there is no
+   trait-to-trait form, so the natural gate *"`part_spec` is behind `mercer_attempts`"* is inexpressible. It
+   would have unrolled into three rungs at the bench plus four more at the stall. A derived bit —
+   **`spec_pending`** 0/1, raised by each of the three try nodes, cleared by the debrief — collapses both
+   surfaces to a single clause and cannot drift out of step with the counters. ⚠️ `d1` (the fire) deliberately
+   does **not** set it: nothing failed there.
+2. **`[group]` blocks are display-only** — 80 in this game, not one carrying effects — so the re-spec had to
+   ride the node's `exit_block`. Better anyway: LO's ask was that she *tell* him, and a rung is an action.
+
+### ⚠️ The buy greys, it does not vanish
+
+The gate is on the **choice** (`show_when_locked` + a `locked_text` naming the missing step), never on the
+canvas trigger. A stall that silently disappears while the Story-Goal card still says *buy a part* is the
+lostness failure — the player would be standing in the market with nothing to click and no reason given.
+
+**Cost:** one extra leg per cycle, `berth → market → berth`. Both underworld locations, a few clicks apart.
+**Price held at 25 coin** — the ask was a richer part, not a tighter economy.
+
+### Verification
+
+`live_rev143_parts_debrief` — **75/75**, and the load-bearing half is the negative: **no dead end across ten
+reachable loop states**, the buy greys with a reason rather than vanishing, all four stall reads are distinct
+text, and the pre-loop *"don't hover"* line still fires where it is still true.
+
+Four loop suites were **retargeted rather than re-pinned**, each now asserting that the moved findings still
+exist at the surface that owns them — so a later beat cannot delete one and stay green. `0075` 68/68,
+`0076` 58/58, `0077` 44/44, `0078` **51/51** (gained an assertion). One assertion in the new suite was my own
+bad proxy: it counted part-name words and demanded exactly one, and band 2 failed it correctly, because it
+opens *"Sweep was right and it got caught listening"* before naming the isolator — a tradesman referring back
+to the part he just lost. The callback is the writing working; the check now anchors on her report line, the
+only string unique per band.
+
+Full set otherwise unchanged, with the four documented pre-existing failures (`0069` 11/14, `0070` 19/20,
+`0071` 16/22, `rev130_131` 33/34). Build green, 22 MISSING unchanged — this beat adds no media.
+
+Folded into the skill the same turn: `lanes.md`'s **fourth failure — a loop lands beside a deaf hub**, the
+companion to the terminal-flag sweep. That sweep keys on a flag making something *false*, and could never have
+caught this, because when a loop lands nothing becomes false — the hub just stops listening.

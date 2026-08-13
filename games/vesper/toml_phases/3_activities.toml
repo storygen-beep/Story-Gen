@@ -1694,7 +1694,7 @@ time_progression_minutes = 30
 [[canvases]]
 id          = "activity_buy_part"
 name        = "The parts stall"
-description = "beat_0075 (rev 120). Wren-solo @underworld_market — the supply side of the parts loop. Repeatable, pri 3, gated parts_loop_open is_true + part_held lt 1 + part_installed lt 1, so it shows only when she has nothing seated and nothing in her pocket (no stockpiling; the burn has to bite). One buy: 25 coin -> part_held = 1, +30 min. The card vanishes the moment she is carrying one and comes back when the attempt burns it."
+description = "beat_0075 (rev 120). Wren-solo @underworld_market — the supply side of the parts loop. Repeatable, pri 3, gated parts_loop_open is_true + part_held lt 1 + part_installed lt 1, so it shows only when she has nothing seated and nothing in her pocket (no stockpiling; the burn has to bite). One buy: 25 coin -> part_held = 1, +30 min. The card vanishes the moment she is carrying one and comes back when the attempt burns it. ⚠️ rev 143 (beat_0093) — FOUR exclusive [group] bands on part_spec, so the part is named and different every cycle (talkback / sweep head / isolator / stacked talkback); before this it was the same stall and the same prose four times, and nothing said why part two would beat part one. The buy CHOICE is gated spec_pending lt 1 with show_when_locked + locked_text, so after a failure it greys with a reason until she has debriefed Kess. The gate is deliberately on the choice and never on the trigger: a card that silently disappears while the Story-Goal still says buy a part is the lostness failure."
 [canvases.trigger]
 location      = "underworld_market"
 is_repeatable = true
@@ -1713,16 +1713,59 @@ blocks = [
   # rev 131 — the stall echoes Kess's word. He named it a talkback at kess_print_read; this is the only
   # other place the player handles the thing, and buying an object the game has never named is how you get
   # a player who has done four cycles and still could not say what they are carrying.
-  { type = "paragraph", content = "Past the blades and the field-kit there are three tables nobody stops at, stacked with the insides of things: salvage boards, drawer after drawer of small dead components sorted by nothing. Kess said the small stalls, and he said what to ask for. The man behind the tables doesn't blink at talkback — he just turns a drawer round and lets her pick." },
+  # ⚠️ rev 143 (beat_0093) — THE PART IS DIFFERENT EVERY CYCLE NOW, and it was not before: this card was one
+  # repeatable buy, same stall, same prose, same 25 coin, four times, so nothing on screen explained why the
+  # second part would do better than the first. Four exclusive bands on part_spec, each naming what Kess sent
+  # her for at hub_kess_berth.debrief. Adjacent [group] blocks merge into ONE if/elseif chain, so what matters
+  # is that no two can match — the gte/lt pairs below cannot.
+  { type = "paragraph", content = "Past the blades and the field-kit there are three tables nobody stops at, stacked with the insides of things: salvage boards, drawer after drawer of small dead components sorted by nothing. The man behind the tables doesn't look up until she says what she is after." },
+  # SPEC 0 — the first guess. Kess's own dispatch word, from kess_the_chip_not_the_key: "Bring me a talkback."
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "part_spec", operator = "lt", value = 1 },
+    ] } }, blocks = [
+      { type = "paragraph", content = "A talkback. He doesn't blink at the word — just turns a drawer round and lets her pick out of forty of them, none of which he can tell apart either." },
+  ] },
+  # SPEC 1 — the sweep head. Listens across instead of shouting on one channel.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "part_spec", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "part_spec", operator = "lt",  value = 2 },
+    ] } }, blocks = [
+      { type = "paragraph", content = "A sweep head. That gets a second look — sweeps come off signal boards, and nobody buys one to fix a signal board. He puts a flat grey wafer on the cloth and names a price without being asked." },
+  ] },
+  # SPEC 2 — the isolator. Takes the bite. Dead stock, which is why he undersells it.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "part_spec", operator = "gte", value = 2 },
+      { type = "trait", subject = "player", trait_key = "part_spec", operator = "lt",  value = 3 },
+    ] } }, blocks = [
+      { type = "paragraph", content = "An isolator. He tells her it's dead stock and nobody's asked for one in two years, which she already knew, because the man who sent her said the same sentence. It is heavier than it looks." },
+  ] },
+  # SPEC 3 — the stacked talkback. The last one, and the only cycle where the stall itself notices.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "part_spec", operator = "gte", value = 3 },
+    ] } }, blocks = [
+      { type = "paragraph", content = "A stacked talkback. He goes into the back for this one. When he comes out he sets it down and looks at her for the first time in four visits, and decides against asking." },
+  ] },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
+# ⚠️ rev 143 (beat_0093) — THE BUY IS GATED ON HAVING REPORTED THE FAILURE, and the gate is on the CHOICE,
+# never on the canvas trigger. Gating the trigger would make the stall vanish, and a card that disappears with
+# no explanation is the lostness failure the genre dies of (quests.md §3) — the player would be standing in the
+# market with the loop's own Story-Goal telling them to buy a part and nothing on screen to buy it from.
+# Greyed-with-a-reason is the shipped pattern here (3_activities.toml:32/105/181, 5_scenes.toml:434/449/…).
+# The locked_text is written FOR the locked state, so it is never stale — the toml-gotchas show_when_locked
+# trap is a consumed is_false clause advertising a PRE-state, and this is not one.
 [[canvases.nodes.exit_block.choices]]
-text       = "Buy a part. (25 coin.)"
-targetType = "node"
-nodeId     = "activity_buy_part.buy"
-costs      = [{ trait = "coin", value = 25 }]
-effects    = [{ targetType = "player", trait = "part_held", op = "set", value = 1, clamp = true }]
+text             = "Buy a part. (25 coin.)"
+targetType       = "node"
+nodeId           = "activity_buy_part.buy"
+costs            = [{ trait = "coin", value = 25 }]
+effects          = [{ targetType = "player", trait = "part_held", op = "set", value = 1, clamp = true }]
+show_when_locked = true
+locked_text      = "The last one burned out in her and she has not been back to the berth since. Buying another before Kess has said what went wrong is how the first twenty-five went — he asks what it did, and then he says what to get."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "spec_pending", operator = "lt", value = 1 },
+] }
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave the tables."
 targetType = "location"

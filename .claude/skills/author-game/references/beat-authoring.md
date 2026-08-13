@@ -530,11 +530,13 @@ Active only when `[project].quests_engine = "v2"`. Authoritative schema + condit
 status (the quests-vs-sidebar split); the card shape follows the capstone/mechanic/hybrid modes.
 - **Where they render:** no `npc_id` → top **"Story Goals"** (the spine); `npc_id` set → that NPC's section.
 - **Fields:** `text` · `ready_text` · `tip` · `npc_id` · `priority` · `when` (routing — ALL must be true) ·
-  `goals` (🎯 to-advance bullets) · `ready_canvas` (set → 🔓 Ready frame) · `terminal = true` (✓ complete).
+  `goals` (🎯 to-advance bullets) · `ready_canvas` (set → 🔓 Ready frame) · `terminal = true` (✓ complete) ·
+  `terminal_text` (overrides the ✓ label, default `Arc complete`; needs `terminal` or it is dead — validator warns).
 - **Condition shape is FLAT** (no `type` discriminator): flag gate `{ flag = "x", op = "is_true" }`; trait
   gate `{ trait = "relation", subject = "npc", npc_id = "npc_x", op = "gte", value = 10, label = "X trust" }`.
 - **Three modes:** *mechanic* (no `ready_canvas` — crossing a `goals` threshold IS the unlock); *capstone*
-  (`ready_canvas` → Ready frame launches the one-shot); *terminal* (`terminal = true`).
+  (`ready_canvas` → Ready frame launches the one-shot); *terminal* (`terminal = true`). ⚠️ Every arc's LAST
+  card is terminal — unbadged, it renders identically to a live objective. Owner: `references/quests.md` §7.
 - **Milestone chain:** one card per arc stage, each gated `when` the prior stage's flag is set and this
   stage's completion flag is not — so exactly one card shows per NPC at a time. The frontier card narrates
   the current peak honestly, never blank. *(One of two chain shapes — for an arc riding ONE climbing trait use a
