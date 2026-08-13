@@ -573,6 +573,18 @@ under it. Switching the engine on is not authoring guidance.
 order: ✓ terminal → 🔓 `ready_canvas` → 🎯 unmet goals. A card that matches none of the three returns
 empty and the row goes blank.
 
+⚠️ **`pickQuestsCards` takes EXACTLY ONE scope string, and anything else fails silently.**
+
+```
+v2.py:14837   setup.pickQuestsCards = function(scope) {
+v2.py:14838       if (scope !== "story_goals") return [];
+```
+
+A hard early return, no error, no warning. A typo in that string gives an **empty top section on the
+guidance page** and no clue why. *(This paragraph originally described the function without
+mentioning the guard — written from source, and it still missed the function's first line. Read the
+whole function, not the part that answers your question.)*
+
 **Selection.** `pickQuestsCards(scope)` (`v2.py:14837`) returns every matching top-tier card;
 `pickQuestsCard(slug)` (`v2.py:14065`) returns the **single highest-`priority`** match for a
 character — so a character's cards are a one-live-at-a-time chain.
@@ -587,6 +599,68 @@ card renders a blank next-row.
 
 **`locked_text_threshold`** (`v2.py:12786`) prints an explicit *"Requires …"* hint on a locked
 choice, distinct from `locked_text`, which replaces the label (§15).
+
+---
+
+## 24. Reading a built game from outside — four facts that each FAKE A BROKEN GAME
+
+Before a playtest pass can assert anything, it has to read the build correctly. Every fact here has
+been got wrong at least once in this project, and **each one produces a false alarm that looks
+exactly like a real defect** — which is worse than not knowing, because it sends a session hunting a
+bug that does not exist.
+
+Two of the four were already known here and were logged in a `CHANGELOG.md` instead of this file. A
+fresh session then lost time rediscovering both. **A changelog is a diary; nobody reads it before
+starting work. If a fact is needed to do the job, it belongs in a reference file.**
+
+### 24.1 `State`, `Engine` and `setup` hang off `window.SugarCube`
+
+They are not bare globals from a browser console or an automation driver. Use
+`SugarCube.State.variables`, `SugarCube.Engine.play(...)`, `SugarCube.setup`.
+
+**The false alarm:** bare `State` throws *"State is not defined"*, every probe fails at once, and the
+build reads as dead.
+
+*(SugarCube 2's own runtime, not ours — so it carries no `v2.py` line. Verify in any built
+`index.html`: search for `window.SugarCube=` and the `State:State`, `Engine:Engine` members inside
+it.)*
+
+### 24.2 `time_state.current_day` is a day NAME, not an index
+
+```
+v2.py:3273   const dayIndex = ["Monday","Tuesday",…].indexOf(timeState.current_day);
+             also :3444 :3588 :3643 :3706
+```
+
+Set it to `0` and `indexOf` returns `-1` at every call site.
+
+**The false alarm:** no schedule row matches, **every location reports nobody present**, and the
+game reads as having a broken presence system. It does not. The harness set a number where a string
+belongs.
+
+### 24.3 Ask the engine who is present — do not recompute it
+
+```
+v2.py:4773    setup.getNpcsPresentAtLocation = function(locationId)
+v2.py:19297   the engine's own nav badges call it
+v2.py:19321   and again for the portrait row
+```
+
+**The false alarm:** hand-rolling presence from `[[npcs.schedules]]` gets overnight windows wrong —
+a `22:00`–`04:00` row wraps midnight and a naive start ≤ now ≤ end comparison drops it — so a
+correctly-scheduled character reads as absent.
+
+### 24.4 The built page is ENTITY-ENCODED — macros are not stored literally
+
+Measured on a real build: **663 occurrences of `&lt;&lt;set` against 3 literal `<<set`**, and 462
+encoded `<<linkreplace>>`.
+
+**The false alarm:** grep the page for `<<set` and find nothing, and conclude the game has no state
+writes. This trap has now cost this project twice — once reading a built game, and once reading a
+corpus of 18 shipped games, where it produced a confident and completely wrong measurement table.
+
+**Always `html.unescape()` before matching macro syntax in built output.** Note this applies to the
+*page*; the authored TOML is not encoded.
 
 ---
 

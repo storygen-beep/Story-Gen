@@ -92,6 +92,21 @@ three games that were actually *played* produced every single heat finding in th
 the twenty-seven that were only parsed produced none. A green build has never once detected
 appeal.
 
+### How it must assert — non-negotiable
+
+**Assert on `SugarCube.State.variables`. Never on rendered page text.**
+
+Text assertions have a measured record here: **four false alarms and zero real findings.** The
+rendered label is not the string that was authored — icons, spacing, cost suffixes and state
+decoration are added at render — so a selector matching author-side text fails on a working build
+and the Player reports a defect that does not exist.
+
+The same applies to finding things to click: locate by passage and canvas id, not by visible label.
+
+**Before it can assert at all it needs `engine.md` §24** — four facts about reading a built game,
+each of which otherwise produces a false alarm indistinguishable from a real defect. Two of the four
+have already cost this project a session apiece.
+
 ---
 
 ## What is NOT an agent

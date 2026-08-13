@@ -5,6 +5,67 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-12 — **`engine.md` §24: the facts that fake a broken game — promoted only after verifying them**
+
+Steam's session could not find what it needed in `engine.md`, worked six things out by trial and
+error, and wrote `games/steam/ENGINE_NOTES.md`. **Two of the six this project had already paid for**
+— the day-name fact and the entity-encoding trap — both logged in *this changelog* rather than in a
+reference file, so a fresh session lost time rediscovering them.
+
+> **A changelog is a diary. Nobody reads it before starting work. If a fact is needed to do the job,
+> it belongs in a reference file.** That is the whole reason for this entry.
+
+### The verification came first, on LO's instruction, and it earned its keep
+
+LO's call before promoting anything: *"these were written by the same agent building the game, so
+they might be true or might be not."* Correct. Checked all six against source:
+
+| claim | verdict |
+|---|---|
+| `State`/`Engine` on `window.SugarCube` | ✅ true — `window.SugarCube=` with `State:State`, `Engine:Engine`, in the built file |
+| `current_day` is a day NAME | ✅ true — `v2.py:3273` `[…].indexOf(timeState.current_day)`, plus `:3444 :3588 :3643 :3706` |
+| `setup.getNpcsPresentAtLocation(slug)` | ✅ true — `v2.py:4773`; the engine's own nav badges call it at `:19297`, `:19321` |
+| `pickQuestsCards` takes one scope | ✅ true, and **understated** — `v2.py:14838` `if (scope !== "story_goals") return [];` |
+| Playwright text selectors break | ⚠️ true, but **tooling, not engine behaviour** |
+| page source is entity-encoded | ✅ true — **663** `&lt;&lt;set` against **3** literal in one build |
+
+**Five promoted, one rejected.** The Playwright note went to `references/agents.md` under The
+Player, not into `engine.md`: that file's value is that every line carries a source citation, and a
+tooling observation cannot. Putting it there is how the file stops being trustworthy.
+
+### And verifying exposed an error in §23, written the same morning
+
+`§23` described `pickQuestsCards` as *"returns every matching top-tier card"* and **never mentioned
+the scope guard** — which is the function's **first line**. Authored from source, and still missed
+it. Corrected in place with the guard quoted, and the correction says so rather than being tidied
+away: a wrong scope string produces an empty guidance section, silently.
+
+### What §24 is, and why it is framed the way it is
+
+**"Reading a built game from outside — four facts that each FAKE A BROKEN GAME."** Not a reference
+list. Every one produces a false alarm indistinguishable from a real defect: bare `State` reads as a
+dead build · a numeric `current_day` empties every room and reads as broken presence · hand-rolled
+presence drops overnight windows and reads as an absent character · grepping the page for literal
+`<<set` returns zero and reads as missing content. **The entity-encoding trap has now cost this
+project twice** — once on a built game, once on an 18-game corpus where it produced a confident and
+completely wrong measurement table.
+
+### New operating rule in `SKILL.md`
+
+**A note written by the agent that did the work is a CLAIM, not a fact.** Verify against source with
+a `file:line` before promoting. Six claims checked: five held, one was misfiled, and the check
+exposed a defect in a same-day reference section. Trusting the handback would have shipped both.
+
+`games/steam/ENGINE_NOTES.md` keeps its content and gains a header pointing at §24, so the
+game-local copy is not mistaken for the source of truth. Worth recording that the session had
+already labelled its own notes **"LIVE-VERIFIED, NOT SOURCE-CITED"** — an honest handback is what
+made the check cheap.
+
+**Verified:** every promoted citation re-grepped against `v2.py` immediately before writing; scores
+unmoved by a docs-only change — `steam` 18/19, `back_home` 13/18, `vesper` no crash.
+
+---
+
 ## 2026-08-12 — **The missing axis: `the-surfaces.md`, and the sentence of mine that caused Steam**
 
 `games/steam` was authored in a clean session by a reader of this skill, with no context carried

@@ -106,6 +106,12 @@ The agent roster for each phase is in `references/agents.md`. The state schema i
   labels, guidance cards, the words under a meter. A label is UI and must say what clicking does;
   the register lives in the paragraph the click produces. Writing both in the same voice is how a
   game ends up with a most-clicked button nobody can parse.
+- **A note written by the agent that did the work is a CLAIM, not a fact.** Session notes, handback
+  summaries, a game's own `ENGINE_NOTES.md` — verify each line against source with a `file:line`
+  before it is promoted into a reference file. Measured: six such claims were checked, **five held,
+  one was a tooling note misfiled as engine behaviour**, and the check also exposed an error in a
+  reference section written that same day from the same function. Trusting the handback would have
+  put both into doctrine.
 - **When a gate you just wrote fails a game, check the skill before blaming the game.** A gate
   built for locked doors fired on seven of eight and every one was following `engine.md` §15
   correctly. A check that fails a game for obeying the doctrine is a bug in the check.

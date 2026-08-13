@@ -1,5 +1,15 @@
 # Engine notes — found live while play-testing Steam v0.1
 
+> **PROMOTED 2026-08-12 — this file is a record, not the source of truth.**
+> All six notes were checked against engine source. **Five held.** Four are now
+> `.claude/skills/author-game-v2/references/engine.md` **§24** with `file:line` citations; the
+> `pickQuestsCards` note corrected an error in **§23**. The sixth (Playwright text selectors) is
+> real but is *tooling*, not engine behaviour, so it went to `references/agents.md` under The
+> Player instead of into the engine reference. **Cite `engine.md`, not this file.**
+>
+> The self-assessment below was accurate and is why the check was cheap — flagging your own notes
+> as un-cited is the right thing to do with a handback.
+
 **Status: LIVE-VERIFIED, NOT SOURCE-CITED.** Every fact below was observed in a headless
 Chromium session driving `games/steam/output/index.html` on 2026-08-12. None of them carry a
 `v2.py` line reference yet, so **they do not meet the bar for `references/engine.md`**, which
