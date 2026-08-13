@@ -5,6 +5,37 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-14 — **The field's most consistent shape was in a study file the authoring path never reads**
+
+`references/the-surfaces.md` gains **R2b · every choice hangs off a named object in the prose**, with
+a worked comparison at the top of the file, and `SKILL.md`'s surfaces callout now names it inline.
+
+**Why this was urgent.** Study 5 found this in three of five played games independently, and called
+it *"the single most consistent shape in the corpus"* — but it lived only in `DOCTRINE_GAPS.md`,
+which this skill's own inventory calls **"the trail, not the doctrine."** Nothing on the authoring
+path pointed at it. An author following the dispatch table would have produced correct *counts* with
+no anchoring: eight choices in a flat list rather than eight choices under four sentences. That is
+precisely the difference between the failure case's front desk and the reference game's bedroom, so
+the rule that best predicts whether a location reads as a room was unreachable from the phase that
+builds locations.
+
+Found while sanity-checking whether a **bare** prompt — `/author-game-v2 new game, female
+protagonist, give me a few ideas` — would be a fair test of the skill. It would not have been: the
+skill could not have taught the rule, and a loaded prompt would have tested the operator instead.
+
+**Also moved:** study 5's play-measured figure for how much a location offers — **median 3 things to
+do, max 6**, counting only decisions and excluding onward travel and standing affordances. It now
+sits beside the existing 18-sandbox parse figures with a note reconciling them, since the two count
+different things and disagree by a factor of three otherwise.
+
+R2b is **not gated and says so**, with the reason: a parser can see that a choice exists and that a
+paragraph exists, but not whether the paragraph names the thing the choice acts on. It is flagged in
+the file's checked-table as the highest-value ungated rule there.
+
+**No gate, no threshold, no code changed. Scores untouched:** steam 17/19, back_home 13/18.
+
+---
+
 ## 2026-08-14 — **Gate 21 graduates study 5's one gateable rule — and finds two economy gates reading the wrong channel**
 
 Study 5 named exactly one output as gateable: *a choice with a declared cost whose label omits it is

@@ -36,15 +36,72 @@ its object. Every one of them was a solo surface wearing a menu item's clothes.
 
 ---
 
+## Every choice hangs off a named object in the prose
+
+**This is the most consistent shape in the field, and it is the difference between a room and a
+menu.** Measured by playing five shipped games (`DOCTRINE_GAPS.md` study 5): three of them do this
+independently, and the two that read worst are the two that do not.
+
+A location's prose names a thing, and the choices that thing affords sit under it:
+
+```
+Your bed takes up most of the room.
+   Strip and get in bed
+   Wear pyjamas and climb in bed
+
+Your clothes are kept in the creaky wardrobe.
+   Wardrobe
+   Mirror
+
+The hallway outside connects to the rest of the orphanage.
+   Bathroom · Kitchen · Main hall · Leave
+```
+
+Against the same eight choices as a flat list:
+
+```
+   Strip and get in bed
+   Wear pyjamas and climb in bed
+   Wardrobe
+   Mirror
+   Bathroom · Kitchen · Main hall · Leave
+```
+
+Identical content, identical count. **The first reads as four sentences about a room. The second
+reads as a button list.** A third corpus game does it with the objects made explicit —
+*"Your dorm room cot is against one wall."* / sleep · *"Past the end of your bed is a small closet
+and shelf set."* / clothes.
+
+> **The wall of buttons is not caused by the count. It is caused by choices that float free of the
+> prose.** A screen that fails this cannot be fixed by deleting choices, and a screen that passes it
+> can carry more than you would guess.
+
+**How to author it:** write the room's paragraph first, naming the things in it. Then attach each
+choice to the thing that affords it. A choice with nothing to attach to is a sign the room's prose
+is missing an object — or that the choice belongs on another surface entirely (see the object test
+above).
+
+---
+
 ## A place is not a catalogue
 
-**Measured across 18 shipped sandboxes:**
+**Measured two ways. Playing five games (study 5), counting only the things you can actually DO at a
+place — excluding onward travel and standing affordances like *wait for a bus*:**
+
+```
+things to do at a location ..... median 3 · max 6
+```
+
+**And parsing 18 shipped sandboxes, counting every link on a screen:**
 
 ```
 median screen ......................... 2 links
 median p90 ............................ 4 links
 screens offering more than 12 ......... ~2% (median across the field)
 ```
+
+The two agree once you know what each is counting — a corpus street shows 12 links, of which 4 are
+exits to other streets, 4 are travel affordances repeated on every screen, and **3–4 are decisions.**
 
 The typical screen in a real game — the one the player is on most of the time — is **small**.
 
@@ -73,6 +130,12 @@ and does her own work is **at least two canvases**, plus a substitution if anyon
 her. Never put solo work in a character's hub.
 
 **R2 · Apply the object test to every choice** before it goes in a hub's exit block.
+
+**R2b · Every choice hangs off a named object in the prose.** Write the room's paragraph first,
+naming what is in it; then attach each choice to the thing that affords it. A choice with nothing to
+attach to means either the prose is missing an object or the choice belongs on a different surface.
+**This is the rule that decides whether a screen reads as a room or as a menu**, and no count fixes
+a screen that fails it. See the worked comparison at the top of this file.
 
 **R3 · A repeatable location-bound canvas caps at 8 choices.** Field median is 2 and p90 is 4, so 8
 is already double the ninetieth percentile. Above that, split by what the choices are aimed at —
@@ -151,8 +214,14 @@ doctrine. The menu shape set that ratio before a word was written.
 |---|---|
 | **Gate 20 · menu size** | no repeatable location-bound canvas offers more than 8 choices |
 
-**R1, R2 and R4 are deliberately not gated.** Whether *"Turn somebody away"* is aimed at a person
-or at the room is a judgement a parser cannot make, and a proxy check for it would pass exactly the
-game that failed. They are a board-phase and authoring-time discipline, and R3's cap is the
-measurable shadow they cast — a hub that violates R1 almost always violates R3 as well, which is
-how the failure case would have been caught on its first build.
+**R1, R2, R2b and R4 are deliberately not gated.** Whether *"Turn somebody away"* is aimed at a
+person or at the room is a judgement a parser cannot make, and a proxy check for it would pass
+exactly the game that failed. **R2b is the same:** a parser can see that a choice exists and that a
+paragraph exists; it cannot see whether the paragraph names the thing the choice acts on. They are a
+board-phase and authoring-time discipline, and R3's cap is the measurable shadow they cast — a hub
+that violates R1 almost always violates R3 as well, which is how the failure case would have been
+caught on its first build.
+
+> **R2b is the highest-value ungated rule in this file.** It is the one the field agrees on most
+> consistently and the one no check will ever catch for you. If you read nothing else here before
+> writing a location, read the worked comparison at the top.

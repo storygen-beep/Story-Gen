@@ -55,6 +55,10 @@ is a dead end, and `gates.py` will say so.
 is a separate question with its own file — `references/the-surfaces.md`.** Ask *who is this aimed
 at*: a person → their hub · the room or herself → its own located canvas · her, done to her → a
 substitution. They never share an exit block, and a repeatable location screen caps at 8 choices.
+**And every choice hangs off a named object in the prose** — write the room's paragraph first,
+naming what is in it, then attach each choice to the thing that affords it. That is what separates a
+room from a button list, it is the shape the field agrees on most consistently, and no gate can
+check it for you.
 A game that obeyed every other rule here shipped 23 choices on one front desk and scored 18/18,
 because nothing said a location page had a shape.
 
