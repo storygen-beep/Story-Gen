@@ -309,7 +309,7 @@ hidden = true
 [[traits.labels]]
 key    = "emitter_broken"
 hidden = true
-# THE LEASH (beat_0075) — the parts loop. All three hidden from the <<playerTraits>> dump and none of them
+# THE LEASH (beat_0075) — the parts loop. All four hidden from the <<playerTraits>> dump and none of them
 # draws a sidebar row: they are internal loop state, and the player reads the loop off Kess's mouth, the
 # market card's presence and the Story-Goal card, never off a number. Declared in 1_metadata's
 # [player.core_traits] (which is what puts them in the cross-release backfill); the header there carries the
@@ -322,6 +322,22 @@ key    = "part_installed"
 hidden = true
 [[traits.labels]]
 key    = "mercer_attempts"
+hidden = true
+# THE DEBRIEF (beat_0093, rev 143) — two traits, and they do different jobs.
+# part_spec 0-3 = WHICH part Kess has asked for. Selects the market stall's prose and nothing else.
+# spec_pending 0/1 = HAS SHE REPORTED the last failure. Set by each of the three try nodes, cleared by the
+#   debrief, and it is the actual gate: the market's buy choice needs it clear, so after a failure she cannot
+#   spend until she has stood in front of Kess and heard what went wrong. Before this the diagnosis arrived
+#   AFTER the purchase — she bought on a guess and was told the reason while the part was being seated.
+# ⚠️ WHY TWO AND NOT ONE COMPARISON. The natural gate is "part_spec is behind mercer_attempts", and a trait
+# condition CANNOT express it: the evaluator reads `var rightVal = it.value` (v2.py:3948), a literal, with no
+# trait-to-trait form. Unrolling that comparison costs three rungs at the bench and four more at the stall.
+# One derived bit collapses all of it to a single condition in both places.
+[[traits.labels]]
+key    = "part_spec"
+hidden = true
+[[traits.labels]]
+key    = "spec_pending"
 hidden = true
 # THE LEASH (beat_0079) — the Mercer drain counter. Hidden; no sidebar row. Bumped by cap_first_fire (the first
 # fire) and by every loop_mercer_warm_tap repeat after it, so it selects nothing today but is the twin of
@@ -614,6 +630,13 @@ feed_line_days    = 0
 part_held         = 0
 part_installed    = 0
 mercer_attempts   = 0
+# THE DEBRIEF (beat_0093) — part_spec 0-3 selects which part the market is selling; spec_pending 0/1 is the
+# gate, raised by every failed attempt and cleared when she reports it to Kess. Declared HERE and not only in
+# 0_systems_spec for the reason the header above gives: this block is what lands them in setup.stateDefaults,
+# and an absent trait reads undefined, which makes every lt/gte gate on it return false — spec_pending would
+# read "already reported" forever and the debrief rung would never appear at all.
+part_spec         = 0
+spec_pending      = 0
 # THE LEASH (rev 133, renamed rev 134) — the CAPTURE device: a bonded courier case. Same shape as part_held:
 # bought at the market (0 -> 1), spent when Mercer's palm opens it (1 -> 0). The key cannot go to him — it is
 # in pieces on Kess's bench, and he carried it two years and would know it by the weight — so the hand has to
@@ -3578,7 +3601,7 @@ time_progression_minutes = 30
 [[canvases]]
 id          = "activity_buy_part"
 name        = "The parts stall"
-description = "beat_0075 (rev 120). Wren-solo @underworld_market — the supply side of the parts loop. Repeatable, pri 3, gated parts_loop_open is_true + part_held lt 1 + part_installed lt 1, so it shows only when she has nothing seated and nothing in her pocket (no stockpiling; the burn has to bite). One buy: 25 coin -> part_held = 1, +30 min. The card vanishes the moment she is carrying one and comes back when the attempt burns it."
+description = "beat_0075 (rev 120). Wren-solo @underworld_market — the supply side of the parts loop. Repeatable, pri 3, gated parts_loop_open is_true + part_held lt 1 + part_installed lt 1, so it shows only when she has nothing seated and nothing in her pocket (no stockpiling; the burn has to bite). One buy: 25 coin -> part_held = 1, +30 min. The card vanishes the moment she is carrying one and comes back when the attempt burns it. ⚠️ rev 143 (beat_0093) — FOUR exclusive [group] bands on part_spec, so the part is named and different every cycle (talkback / sweep head / isolator / stacked talkback); before this it was the same stall and the same prose four times, and nothing said why part two would beat part one. The buy CHOICE is gated spec_pending lt 1 with show_when_locked + locked_text, so after a failure it greys with a reason until she has debriefed Kess. The gate is deliberately on the choice and never on the trigger: a card that silently disappears while the Story-Goal still says buy a part is the lostness failure."
 [canvases.trigger]
 location      = "underworld_market"
 is_repeatable = true
@@ -3597,16 +3620,59 @@ blocks = [
   # rev 131 — the stall echoes Kess's word. He named it a talkback at kess_print_read; this is the only
   # other place the player handles the thing, and buying an object the game has never named is how you get
   # a player who has done four cycles and still could not say what they are carrying.
-  { type = "paragraph", content = "Past the blades and the field-kit there are three tables nobody stops at, stacked with the insides of things: salvage boards, drawer after drawer of small dead components sorted by nothing. Kess said the small stalls, and he said what to ask for. The man behind the tables doesn't blink at talkback — he just turns a drawer round and lets her pick." },
+  # ⚠️ rev 143 (beat_0093) — THE PART IS DIFFERENT EVERY CYCLE NOW, and it was not before: this card was one
+  # repeatable buy, same stall, same prose, same 25 coin, four times, so nothing on screen explained why the
+  # second part would do better than the first. Four exclusive bands on part_spec, each naming what Kess sent
+  # her for at hub_kess_berth.debrief. Adjacent [group] blocks merge into ONE if/elseif chain, so what matters
+  # is that no two can match — the gte/lt pairs below cannot.
+  { type = "paragraph", content = "Past the blades and the field-kit there are three tables nobody stops at, stacked with the insides of things: salvage boards, drawer after drawer of small dead components sorted by nothing. The man behind the tables doesn't look up until she says what she is after." },
+  # SPEC 0 — the first guess. Kess's own dispatch word, from kess_the_chip_not_the_key: "Bring me a talkback."
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "part_spec", operator = "lt", value = 1 },
+    ] } }, blocks = [
+      { type = "paragraph", content = "A talkback. He doesn't blink at the word — just turns a drawer round and lets her pick out of forty of them, none of which he can tell apart either." },
+  ] },
+  # SPEC 1 — the sweep head. Listens across instead of shouting on one channel.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "part_spec", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "part_spec", operator = "lt",  value = 2 },
+    ] } }, blocks = [
+      { type = "paragraph", content = "A sweep head. That gets a second look — sweeps come off signal boards, and nobody buys one to fix a signal board. He puts a flat grey wafer on the cloth and names a price without being asked." },
+  ] },
+  # SPEC 2 — the isolator. Takes the bite. Dead stock, which is why he undersells it.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "part_spec", operator = "gte", value = 2 },
+      { type = "trait", subject = "player", trait_key = "part_spec", operator = "lt",  value = 3 },
+    ] } }, blocks = [
+      { type = "paragraph", content = "An isolator. He tells her it's dead stock and nobody's asked for one in two years, which she already knew, because the man who sent her said the same sentence. It is heavier than it looks." },
+  ] },
+  # SPEC 3 — the stacked talkback. The last one, and the only cycle where the stall itself notices.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "part_spec", operator = "gte", value = 3 },
+    ] } }, blocks = [
+      { type = "paragraph", content = "A stacked talkback. He goes into the back for this one. When he comes out he sets it down and looks at her for the first time in four visits, and decides against asking." },
+  ] },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
+# ⚠️ rev 143 (beat_0093) — THE BUY IS GATED ON HAVING REPORTED THE FAILURE, and the gate is on the CHOICE,
+# never on the canvas trigger. Gating the trigger would make the stall vanish, and a card that disappears with
+# no explanation is the lostness failure the genre dies of (quests.md §3) — the player would be standing in the
+# market with the loop's own Story-Goal telling them to buy a part and nothing on screen to buy it from.
+# Greyed-with-a-reason is the shipped pattern here (3_activities.toml:32/105/181, 5_scenes.toml:434/449/…).
+# The locked_text is written FOR the locked state, so it is never stale — the toml-gotchas show_when_locked
+# trap is a consumed is_false clause advertising a PRE-state, and this is not one.
 [[canvases.nodes.exit_block.choices]]
-text       = "Buy a part. (25 coin.)"
-targetType = "node"
-nodeId     = "activity_buy_part.buy"
-costs      = [{ trait = "coin", value = 25 }]
-effects    = [{ targetType = "player", trait = "part_held", op = "set", value = 1, clamp = true }]
+text             = "Buy a part. (25 coin.)"
+targetType       = "node"
+nodeId           = "activity_buy_part.buy"
+costs            = [{ trait = "coin", value = 25 }]
+effects          = [{ targetType = "player", trait = "part_held", op = "set", value = 1, clamp = true }]
+show_when_locked = true
+locked_text      = "The last one burned out in her and she has not been back to the berth since. Buying another before Kess has said what went wrong is how the first twenty-five went — he asks what it did, and then he says what to get."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "spec_pending", operator = "lt", value = 1 },
+] }
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave the tables."
 targetType = "location"
@@ -5573,6 +5639,12 @@ priority   = 14
 npc_id     = "npc_renner"
 text       = "The quartermaster gave up everything he had and went back to counting crates. The manifests still balance, the depot still runs, and he still expects you in coveralls — he has no idea anything came off him. The first man you ever broke, and the only one you didn't have to be told to."
 tip        = "Renner's finished as a lead; the office isn't. Cover on, the depot by day or the Anchor in the evening, and take him whenever you want — pure power now. The waterfront's still open to you even after the Spire shuts."
+# ⚠️ rev 142 (beat_0092) — the ✓ badge. This card is the end of Renner's arc and it rendered exactly like a
+# live objective: same box, same 💡 tip, no goal block at all (a goal-less non-terminal card hits none of the
+# three frames and draws nothing). `terminal = true` fires Frame 1 and the section finally reads as finished.
+# NO terminal_text: his arc is over for good and there is no more Renner coming, so the default "Arc complete"
+# is the only true label. Exactly one card in the game may promise the future, and that is card M.
+terminal   = true
 when = [
   { flag = "renner_drained", op = "is_true" },
 ]
@@ -9178,7 +9250,7 @@ flagEffects = [
 [[canvases]]
 id          = "hub_kess_berth"
 name        = "Kess"
-description = "beat_0069 (rev 114), bands re-cut rev 130. The post-close Kess hub @kess_berth — his FIRST interactive surface after the salvage verdict retires salvage_repair_hub. Portrait card (requires_npc + npc = npc_kess, so it only renders inside his 10:00-22:00 window; berth_offhours covers the rest). Repeatable, pri 3, gated berth_home is_true. Carries the upkeep read-out as FOUR exclusive [group] bands crossing feed_line_days (gte 1 = working, lt 1 = stalled) with part_held (gte 1 = she is carrying one), plus the 'Ask how the work's going' rung. The part_held axis was added at rev 130: lapsed-and-carrying is the state that hides the install rung, and before this it was the only stall in the chapter with nothing on screen to explain it. Charges NOTHING — the cot's paid night is the only bill."
+description = "beat_0069 (rev 114), bands re-cut rev 130. The post-close Kess hub @kess_berth — his FIRST interactive surface after the salvage verdict retires salvage_repair_hub. Portrait card (requires_npc + npc = npc_kess, so it only renders inside his 10:00-22:00 window; berth_offhours covers the rest). Repeatable, pri 3, gated berth_home is_true. Carries the upkeep read-out as exclusive [group] bands crossing feed_line_days (gte 1 = working, lt 1 = stalled) with part_held (gte 1 = she is carrying one), plus the 'Ask how the work's going' rung. ⚠️ rev 143 (beat_0093) — band A SPLIT on mercer_attempts and a debrief node added. Band A was written at rev 114, before the parts loop existed, and it was the line that fired in the post-failure state: after every burned part Kess greeted her with 'don't hover', while his own work-node line promised he would say when he had something. The 'Tell him the part failed' rung (gated spec_pending) is where she reports and he re-specs; its exit bumps part_spec and clears spec_pending, which re-opens the market. The part_held axis was added at rev 130: lapsed-and-carrying is the state that hides the install rung, and before this it was the only stall in the chapter with nothing on screen to explain it. Charges NOTHING — the cot's paid night is the only bill."
 [canvases.trigger]
 location      = "kess_berth"
 requires_npc  = "npc_kess"
@@ -9196,12 +9268,29 @@ name = "Kess"
 blocks = [
   { type = "image", props = { file = "locations/kess_berth.jpg", description = "A flooded ship-breaking dock lit by work-lamps, a stripped hull on blocks, a man at a work-cradle.", search_queries = ["flooded ship breaking dock work lamps night", "gutted hull workshop cutting torch dark"] } },
   { type = "paragraph", content = "Black water, the hull on its blocks, the smell of cut steel. Kess is at the bench with the cot behind him and her two locked things somewhere under the mess he calls an order." },
-  # BAND A — paid up, nothing in her pocket. He's working it. The shipped line.
+  # BAND A — paid up, nothing in her pocket, and the loop has not burned anything yet. The shipped line.
+  # ⚠️ rev 143 (beat_0093) — THIS BAND WAS SPLIT, and it was overdue. It was written at rev 114, before the
+  # parts loop existed, and it is the line that fires in the POST-FAILURE state (paid up, part burned, hands
+  # empty). So after every failure Kess greeted her with "don't hover" — a line about him working the key on
+  # his own bench — as if the last three days had not happened. His own line in the `work` node promises
+  # "you'll know when I've got something because I'll say so", and he never said so: the only way to hear a
+  # finding was to go and buy another part first. A1 keeps the shipped line for the pre-loop window; A2 below
+  # owns the failure states and points at the new rung.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "feed_line_days", operator = "gte", value = 1 },
-      { type = "trait", subject = "player", trait_key = "part_held",      operator = "lt",  value = 1 },
+      { type = "trait", subject = "player", trait_key = "feed_line_days",  operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "part_held",       operator = "lt",  value = 1 },
+      { type = "trait", subject = "player", trait_key = "mercer_attempts", operator = "lt",  value = 1 },
     ] } }, blocks = [
       { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "You're paid up, so I'm on it. Don't hover." },
+  ] },
+  # BAND A2 — paid up, hands empty, and at least one part has burned. He knows something went wrong the moment
+  # she walks in without it; what he does not have is what it DID, and that is what the rung buys him.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "feed_line_days",  operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "part_held",       operator = "lt",  value = 1 },
+      { type = "trait", subject = "player", trait_key = "mercer_attempts", operator = "gte", value = 1 },
+    ] } }, blocks = [
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "You've come back empty, so it went. Sit down and tell me what it did before you go spending on the next one." },
   ] },
   # BAND B — paid up AND carrying. He clocks the part before she offers it, and says where it goes.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
@@ -9232,6 +9321,23 @@ type = "choices"
 text       = "Ask how the work's going."
 targetType = "node"
 nodeId     = "hub_kess_berth.work"
+# ── THE DEBRIEF RUNG (beat_0093, rev 143). SHE TELLS HIM IT FAILED, and until this beat she never did:
+# she walked out of Mercer's room with a burned part and the next thing she did was buy another one off her
+# own bat, with Kess's finding arriving afterwards, while he was seating the part she had already paid for.
+# Cause landed after effect. This rung is where the report happens and where he re-specs the next part.
+# ⚠️ ONE CONDITION, AND IT IS A DERIVED BIT RATHER THAN A COMPARISON. What this rung wants to ask is "is
+# part_spec behind mercer_attempts" — and a trait condition CANNOT ask it: the evaluator reads
+# `var rightVal = it.value` (v2.py:3948), a literal, with no trait-to-trait form. Unrolling the comparison
+# costs three rungs here and four more at the market stall. So the failure raises spec_pending and the debrief
+# clears it, which collapses both surfaces to a single clause and cannot drift out of step with the counters.
+# The three try nodes in loop_mercer_finisher are the only setters; d1 (the fire) deliberately is not one.
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell him the part failed."
+targetType = "node"
+nodeId     = "hub_kess_berth.debrief"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "spec_pending", operator = "gte", value = 1 },
+] }
 # beat_0075 — THE INSTALL RUNG. Hidden (no show_when_locked) rather than greyed: before she is carrying a
 # part there is nothing to hand over, and a greyed row would advertise the loop a beat before Kess opens it.
 # The feed_line_days clause is not decoration — when she IS carrying a part but has lapsed, this rung
@@ -9291,6 +9397,73 @@ text = "Leave him to it."
 destinationType          = "specific"
 locationId               = "kess_berth"
 time_progression_minutes = 15
+
+# ── debrief — SHE REPORTS THE FAILURE (beat_0093, rev 143). ────────────────────────────────────────────────
+# The missing half of the parts loop. She used to walk out of Mercer's room with a burned part and go straight
+# to the stalls for another, unprompted, and Kess's finding arrived afterwards while he was seating the part
+# she had already paid for. Diagnosis after purchase. This node is where she hands him the failure and he
+# hands back a spec, so the money is spent on something he asked for.
+# ⚠️ WHAT SHE GIVES HIM IS SENSATION, NOT DIAGNOSIS — §14's split, the same one that governs try3 and band 3
+# of the install. She reports what it felt like; he does the working out. She never arrives at a conclusion.
+# ⚠️ THREE BANDS ON mercer_attempts, exclusive by gte/lt pairs. Adjacent [group] blocks merge into ONE
+# if/elseif chain, so exclusivity is what matters, not ordering.
+# ⚠️ THE EFFECT RIDES THE EXIT, NOT A BAND. [group] blocks are display-only — 80 of them in this game and not
+# one carries effects. Two effects: part_spec `add 1` (which part the stall now sells) and spec_pending back
+# to 0 (which re-opens the buy and retires the rung until the next burn). `add` rather than `set N` because
+# effects take a static value, and the rung's own spec_pending gate guarantees this lands once per failure.
+[[canvases.nodes]]
+id   = "debrief"
+name = "What it did"
+blocks = [
+  # BAND 1 — after failure 1. It did NOTHING, and that is the useful kind: a lock pushes back, so the thing
+  # is listening rather than locking, and he was shouting on the wrong channel. Spec: something that listens.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "mercer_attempts", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "mercer_attempts", operator = "lt",  value = 2 },
+    ] } }, blocks = [
+      { type = "dialog", props = { speaker = "player" }, content = "Nothing happened. He finished, I reached, and there was nothing there to push against." },
+      { type = "paragraph", content = "Kess stops what he is doing, which he has not done for anything she has said before, and looks at the bench rather than at her." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Nothing at all. That's the useful kind. A lock pushes back — yours didn't, so it isn't locking, it's listening. I shouted on the wrong wire." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Don't buy me another talkback. I want a sweep head — the flat ones off a salvage board, the kind that listens across instead of shouting the once. Ask him for a sweep." },
+  ] },
+  # BAND 2 — after failure 2. It BIT her, which is the finding: a safety fails open, a guard defends itself.
+  # Spec: something that takes the bite. Her report is the clamp, and she hid it from Mercer, which is hers.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "mercer_attempts", operator = "gte", value = 2 },
+      { type = "trait", subject = "player", trait_key = "mercer_attempts", operator = "lt",  value = 3 },
+    ] } }, blocks = [
+      { type = "dialog", props = { speaker = "player" }, content = "It found me. Something came down on it and shut it, hard, and I had to lie there with his weight on me and not make a sound." },
+      { type = "paragraph", content = "He turns her round by the shoulder, unhurried, and reads the seam at the base of her spine with two fingers before he answers." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "It bit you. That's not a safety — safeties fail open. That's a guard, and a guard means somebody's still using the thing." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Sweep was right and it got caught listening. So the next one takes the bite instead of you. An isolator, off the same tables. Small, heavy, and the man will tell you it's dead stock." },
+  ] },
+  # BAND 3 — after failure 3, and the hinge. It let go, then something ran a list, found her gap and shut the
+  # door on the way back. The finding: not one voice, a SET of them, so the part has to hold more than one.
+  # ⚠️ BASTIEN CAME OUT OF THIS BEAT AT rev 143, LO's call. Band 3 used to name him and two men Kess could not
+  # place, and it was written when present-day Bastien was the next thing in the release. He went to the shelf
+  # at rev 141, so the name pointed at nothing this build can pay off. WHAT STAYS is the set — that clause is
+  # load-bearing on quest cards H3 and I, and it is the whole reason part 4 is built the way it is. What
+  # replaces the names is what LO asked for: the part that ends it.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "mercer_attempts", operator = "gte", value = 3 },
+    ] } }, blocks = [
+      { type = "dialog", props = { speaker = "player" }, content = "It let go. Then something went down a list, found the hole where I am, and shut the door on its way back past me." },
+      { type = "paragraph", content = "That is the first thing she has told him that he writes down." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "A list. Then it was never keyed to a man at all — it's a set of voices, and his was one of them. That's why one answer was never going to be enough." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Last one, then. A stacked talkback — holds more than one voice at once. Bring me that and if it takes, there's nothing left in you that answers to anybody." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go and find it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "kess_berth"
+time_progression_minutes = 15
+effects = [
+  { targetType = "player", trait = "part_spec",    op = "add", value = 1, clamp = true },
+  { targetType = "player", trait = "spec_pending", op = "set", value = 0, clamp = true },
+]
 
 # ═══ cap_file_shape — beat_0070 (rev 115): Kess reads the SHAPE of the file ══════════════════════════════
 # Auto-fire capstone @kess_berth, pri 11, ONE-SHOT. The chapter's first Tier-3 spend, and the first cascade in
@@ -10599,7 +10772,7 @@ flagEffects = [
 [[canvases]]
 id          = "kess_install_part"
 name        = "He seats it"
-description = "beat_0075 (rev 120). The install @kess_berth. TRIGGERLESS — reached from hub_kess_berth's 'Give him the part' rung, gated part_held gte 1 + feed_line_days gte 1. He opens the seam at the base of her spine, the same one Bastien's men opened to disarm her, and seats the part where the drain sits. Explicit and NOT sexual: no arousal, no pain, no comfort — she is handled, and the horror is that it is routine. Banded on mercer_attempts for his build talk — all four bands authored as of rev 123 (band 0 at beat_0075, then findings 1/2/3 at beats 0076/0077/0078; band 3 is terminal, gte 3 with no upper bound). 9 beats / 8 clicks, 1.28:1 counting the interior. Tier-2. Sets part_held 0 + part_installed 1."
+description = "beat_0075 (rev 120). The install @kess_berth. TRIGGERLESS — reached from hub_kess_berth's 'Give him the part' rung, gated part_held gte 1 + feed_line_days gte 1. He opens the seam at the base of her spine, the same one Bastien's men opened to disarm her, and seats the part where the drain sits. Explicit and NOT sexual: no arousal, no pain, no comfort — she is handled, and the horror is that it is routine. Banded on mercer_attempts, gte/lt pairs, band 3 terminal (gte 3, no upper bound — nothing pushes the counter past 3). ⚠️ rev 143 (beat_0093) — the bands used to carry Kess's FINDINGS, and those moved to hub_kess_berth.debrief, where she reports the failure that produced them; delivered here they arrived after she had already bought the replacement. What the bands carry now is the part itself going in — talkback, sweep head, isolator, stacked talkback — because the berth is the diagnosis and the bench is the work. Each band is capped at 21 words (node lead 12 + beat 0's 17 + 21 = 50). 9 beats / 8 clicks, 1.28:1 counting the interior. Tier-2. Sets part_held 0 + part_installed 1."
 
 [[canvases.nodes]]
 id   = "base"
@@ -10613,43 +10786,51 @@ blocks = [
     ] } }, blocks = [
       { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "First one. Everything I could read off that lock while it was open, cut down to sit where the drain sits." },
   ] },
-  # ── BAND 1 — beat_0076. Kess's finding from failure 1 (design_the_leash §9): it isn't a LOCK, it's
-  # LISTENING, and he guessed the wrong channel. The finding rides this canvas rather than a bench beat of its
-  # own — §18's open item, closed at beat_0075. One short line, which is both the §7 check 2 constraint (beat
-  # 0's unit swallows the whole lead) and how a tradesman talks about his own work: he does not explain, he
-  # revises.
+  # ── BAND 1 — beat_0076, RE-CUT AT beat_0093 (rev 143). It used to carry the FINDING from failure 1 ("that
+  # thing's listening, and I hit the wrong wire"), and the finding has moved to hub_kess_berth.debrief, where
+  # she reports the failure and he re-specs the part. It had to move: delivered here it arrived AFTER she had
+  # already bought the replacement, so the reason came second and the money went on a guess.
+  # ⚠️ WHAT THIS BAND CARRIES NOW IS THE OBJECT IN HIS HANDS, not the theory — the part is a different shape
+  # and the seam has to open wider for it. That is the split: the berth is the diagnosis, the bench is the
+  # work. Saying the finding in both places would be the same sentence twice in one cycle.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "mercer_attempts", operator = "gte", value = 1 },
       { type = "trait", subject = "player", trait_key = "mercer_attempts", operator = "lt",  value = 2 },
     ] } }, blocks = [
-      { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Nothing at all. That's the useful kind. A lock pushes back — that thing's listening, and I hit the wrong wire." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Sweep head. Wider than the last one — I'll have to take more of the seam. Lie still and breathe." },
   ] },
-  # ── BAND 2 — beat_0077. Finding 2 (design_the_leash §9): it DEFENDS ITSELF — a guard, not a safety. Exactly
-  # 21 words, which is the measured ceiling rather than a preference: beat 0's max reading is lead 29 + the
-  # longest single band, and 21 puts it at exactly 50. The closing clause is also the hinge into beat_0078 —
-  # a guard that is still being USED implies somebody using it, which is what the set-of-names finding pays off.
+  # ── BAND 2 — beat_0077, RE-CUT AT beat_0093 (rev 143), same reason as band 1: finding 2 (it DEFENDS itself,
+  # a guard rather than a safety) now lands at the berth, and this band carries the isolator going in.
+  # ⚠️ THE 21-WORD CEILING IS MEASURED, NOT A PREFERENCE, and it still binds: beat 0's max reading is lead 29
+  # (node lead 12 + beat 0's paragraph 17) plus the longest single band, and 21 puts it at exactly 50. The
+  # audit counts on str.split(), so a spaced em dash is its own token — worth knowing before anyone "adds a
+  # word" to a band that looks like it has room.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "mercer_attempts", operator = "gte", value = 2 },
       { type = "trait", subject = "player", trait_key = "mercer_attempts", operator = "lt",  value = 3 },
     ] } }, blocks = [
-      { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "It bit you. That's not a safety. Safeties fail open. That's a guard, and a guard means somebody's still using it." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Isolator. Heavy for its size, and it sits deeper. If it bites this time it bites this, not you." },
   ] },
-  # ── BAND 3 — beat_0078. Finding 3 (design_the_leash §9), and the chapter's hinge: it was never keyed to a
-  # MAN, it is keyed to a SET OF NAMES, and Bastien is on it. gte 3 with NO upper bound — the terminal band,
-  # because nothing pushes mercer_attempts past 3. TWENTY-ONE WORDS, the measured ceiling exactly, same as
-  # bands 1 and 2. (The audit counts on str.split(), so the em dash is its own token — worth knowing before
-  # anyone "adds a word" to a band that looks like it has room.) Beat 0's max reading is 29 + 21 = 50.
-  # ⚠️ THE HINGE GETS TWO SURFACES AND NEITHER IS A NEW CANVAS. She gets the SENSATION in loop_mercer_attempt
-  # .try3 — the leash lets go, then something goes down a list, finds a gap and shuts the door on the way back,
-  # and she cannot tell what it counted. He gets the DIAGNOSIS here. That split is §14's rule: she never
-  # narrates a plan or a diagnosis, Kess does the diagnosing, one line, on the next bench.
-  # ⚠️ It also closes design_the_leash §18's last open item — how many names Kess reads off the set — at the
-  # recommended answer: two he cannot place plus Bastien. Enough to be a list, not enough to be a roster. He
-  # does not explain how he read them; a tradesman revises rather than explains, which bands 1 and 2 set.
+  # ── BAND 3 — beat_0078, RE-CUT TWICE. gte 3 with NO upper bound: the terminal band, because nothing pushes
+  # mercer_attempts past 3.
+  # ⚠️ BASTIEN CAME OUT AT rev 143 (beat_0093), LO's call, and it was the right one. This band used to read
+  # "It's a set — three more besides his. Two I can't place. One's Bastien." That was written when present-day
+  # Bastien was the next thing in the release; he went to the shelf at rev 141, so from that beat onward this
+  # line was handing the player a name the build cannot pay off — a hook into nothing, on the last rung before
+  # the fire, which is the worst place in the chapter to plant one.
+  # ⚠️ WHAT STAYS AND WHERE. The SET — "not one voice, a set of them" — is load-bearing on quest cards H3 and
+  # I and is the whole reason part 4 is a stacked talkback, so it survives; it now lives at the berth, in
+  # hub_kess_berth.debrief band 3, where the rest of the finding went. What replaces it here is what LO asked
+  # for: the part that ends it, and what happens if it takes. Forward-looking on purpose — this band is spoken
+  # while he is SEATING part four, so she is not free yet and he cannot say she is.
+  # ⚠️ THE SENSATION/DIAGNOSIS SPLIT IS UNCHANGED (§14). She gets the sensation in loop_mercer_attempt.try3 —
+  # the leash lets go, something runs a list, finds a gap and shuts the door on the way back — and she cannot
+  # tell what it counted. He does the working out, and as of rev 143 he does it at the bench she reports to,
+  # not the bench she is lying on.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "mercer_attempts", operator = "gte", value = 3 },
     ] } }, blocks = [
-      { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "He was right, and better than right. It's a set — three more besides his. Two I can't place. One's Bastien." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Last one. Stacked — three seatings in one seam. Hold still. After this you're free or I'm out of ideas." },
   ] },
   { type = "cascade", props = { beats = [
     # beat 0 — no advance_text; merges into the node lead and whichever band is live.
@@ -11222,6 +11403,9 @@ time_progression_minutes = 60
 effects = [
   { targetType = "player", trait = "part_installed",    op = "set", value = 0, clamp = true },
   { targetType = "player", trait = "mercer_attempts",   op = "add", value = 1, clamp = true },
+  # beat_0093 — the part burned and she has not told Kess yet. Raises the debrief rung at his bench and
+  # closes the market's buy until she has. d1 (the fire) does NOT set this: nothing failed there.
+  { targetType = "player", trait = "spec_pending",      op = "set", value = 1, clamp = true },
   { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
@@ -11247,6 +11431,9 @@ time_progression_minutes = 60
 effects = [
   { targetType = "player", trait = "part_installed",    op = "set", value = 0, clamp = true },
   { targetType = "player", trait = "mercer_attempts",   op = "add", value = 1, clamp = true },
+  # beat_0093 — the part burned and she has not told Kess yet. Raises the debrief rung at his bench and
+  # closes the market's buy until she has. d1 (the fire) does NOT set this: nothing failed there.
+  { targetType = "player", trait = "spec_pending",      op = "set", value = 1, clamp = true },
   { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
@@ -11272,6 +11459,9 @@ time_progression_minutes = 60
 effects = [
   { targetType = "player", trait = "part_installed",    op = "set", value = 0, clamp = true },
   { targetType = "player", trait = "mercer_attempts",   op = "add", value = 1, clamp = true },
+  # beat_0093 — the part burned and she has not told Kess yet. Raises the debrief rung at his bench and
+  # closes the market's buy until she has. d1 (the fire) does NOT set this: nothing failed there.
+  { targetType = "player", trait = "spec_pending",      op = "set", value = 1, clamp = true },
   { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
@@ -14376,7 +14566,7 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "Killing your owner's key got one man off you and left the rest of the list exactly where it was. So the key is back on, because you told Kess to put it back on, and the thing in you is talking to it again — and while it talks he can build something that answers it from inside you, at the seam Bastien's men opened. It is still a guess. It has to be tested on the one man you can walk in on."
-tip        = "Buy a talkback at the black market — the small stalls, not the blades — then take it to Kess and let him seat it. Then go to Mercer, let the evening go where it goes, take it in the ass and reach for the take when he finishes — that is the only finish the drain opens on, and it needs the drain carried and charged. Kess works days and Mercer's room is a night address, so one cycle is two trips and never one. It will fail before it holds, and every failure burns the part and teaches him one thing, so keep the cot paid and keep earning between goes. If you want the next chapter sooner, Support Us in the sidebar."
+tip        = "Ask Kess what he wants, buy that at the small stalls, and take it back for him to seat — after every failure the stall stays shut to you until you have told him what the last one did, because what it did is what decides the next part. Then go to Mercer, let the evening go where it goes, take it in the ass and reach for the take when he finishes — that is the only finish the drain opens on, and it needs the drain carried and charged. Kess works days and Mercer's room is a night address, so one cycle is never a single trip. It will fail before it holds, and every failure burns the part and teaches him one thing, so keep the cot paid and keep earning between goes. If you want the next chapter sooner, Support Us in the sidebar."
 # ⚠️ rev 135 — CLOSES ON leash_answered. owner_drained now fires BEFORE this card opens, so the old closer
 # made card I permanently unreachable — the loop's Story-Goal would simply never have existed. leash_answered
 # is set at cap_first_fire and means what this card is actually waiting for: the talkback beat a LIVE key.
@@ -14471,6 +14661,21 @@ tip        = "Nothing in you answers to anybody now — no leash, no key, no own
 # established in Act 1 captivity, shipped since 0.1.7. The hook never depended on present-day Bastien; only
 # the LINK between that man and the buyer did, and that link lived on card L and is shelved with it.
 # The boundary sentence is untouched: M is still the one card in the game that names it.
+#
+# ⚠️ rev 142 (beat_0092) — THE ONE CARD IN THE GAME THAT SETS terminal_text, and the reason the field exists.
+# LO played to the end, opened this page and could not tell the build was over. The audit found why: five
+# sections render at the end state and four of them are finished arcs, every one of them drawn in the exact
+# shape of a live objective. The only "this is over" signal in the whole game was the boundary sentence buried
+# mid-paragraph in the tip below — prose, in an italic block, competing with four other cards saying nothing.
+# The engine has had the fix built and styled since PRD 48 and no card in this game had ever set it.
+# WHY THIS ONE IS DIFFERENT FROM THE OTHER FOUR: they end an ARC; this ends a RELEASE. Frame 1's default label
+# is the hardcoded "Arc complete", which cannot say the second thing, so the label is overridden here and
+# nowhere else. It is the badge form of the §10.1 rule the other four obey by staying silent — exactly one
+# card in the game may name the future, and it is this one.
+# ⚠️ NO APOSTROPHE IN THE STRING, deliberately. SugarCube's source-byte escaping renders one as &amp;#x27; in
+# the built HTML — it displays correctly and then poisons every future grep of the file. The em dash is safe.
+terminal      = true
+terminal_text = "Chapter complete — the story continues in the next release"
 when = [
   { flag = "leash_cut", op = "is_true" },
 ]
@@ -14538,6 +14743,10 @@ priority   = 12
 npc_id     = "npc_calloway"
 text       = "The last true believer in a dying division, still at that desk, still chasing a leak that stopped bleeding the day you closed it. He never learned what the woman who took his hunt seriously was actually hunting, and now he never will."
 tip        = "Calloway's closed out. The Spire is sealed to you — sweeps on every floor, your face on every camera at the curb — so the file room and the man in it are both behind glass. What he gave you, you already have."
+# ⚠️ rev 142 (beat_0092) — the ✓ badge, same sweep as Renner, Colm and Mercer. This one earns it hardest: the
+# card already says in words that the man is behind glass, and it still rendered in the shape of a live
+# instruction. Default label, no terminal_text — his arc is finished and nothing about him is coming back.
+terminal   = true
 when = [
   { flag = "archive_1a_done", op = "is_true" },
 ]
@@ -14603,6 +14812,10 @@ priority   = 12
 npc_id     = "npc_colm"
 text       = "The careful courier still runs his carry and still doesn't know what he handed you. Whatever the company does about its leak now, it does without you — you're not in that building any more, and neither is anything you owe it."
 tip        = "Colm's business is finished; Colm isn't. He's in from seven at the Undertow and the back room's yours whenever you want it, pure power now, no lead waiting at the end of it."
+# ⚠️ rev 142 (beat_0092) — the ✓ badge. Note what it does NOT mean: the badge marks the ARC complete, not the
+# surface closed. Colm's back room stays open for the rest of the game and the tip says so. That split is the
+# whole point of pairing the badge with a frontier-seed tip (quests.md §7) instead of retiring the card.
+terminal   = true
 when = [
   { flag = "archive_1a_done", op = "is_true" },
 ]
@@ -14642,7 +14855,7 @@ when = [
 priority   = 12
 npc_id     = "npc_mercer"
 text       = "He's the test bench. Everything Kess seats in you gets spent on him, and it fails, and it fails, and every failure hands the yard one fact it did not have before. Parts bought, parts burned, evenings gone. He thinks you keep coming back because you like the company."
-tip        = "One part, one evening, one try. Buy at the small stalls, have Kess seat it, spend the night on Mercer, give him your ass and take your shot when he finishes — no other finish opens the drain, and it has to be the drain you are carrying, charged. The part burns whether it works or not, so budget for another. It misses three times before it holds."
+tip        = "One part, one evening, one try. Tell Kess what the last one did, buy what he asks for, have him seat it, then spend the night on Mercer — give him your ass and take your shot when he finishes, because no other finish opens the drain and it has to be the drain you are carrying, charged. The part burns whether it works or not, and it is a different part every time. It misses three times before it holds."
 # ⚠️ rev 135 — CLOSES ON leash_answered. owner_drained now fires BEFORE this card opens, so the old closer
 # made card I permanently unreachable — the loop's Story-Goal would simply never have existed. leash_answered
 # is set at cap_first_fire and means what this card is actually waiting for: the talkback beat a LIVE key.
@@ -14660,6 +14873,11 @@ npc_id     = "npc_mercer"
 text       = "By morning he had none of it back. He pours, he talks, he asks after nobody, and the man who signed for you does not know he was ever opened. He will go on not knowing for exactly as long as you let him, and that is the closest thing to a hold you have ever had on him."
 tip        = "Mercer's drained; there's nothing left in him to get. The room behind the stall is open every night anyway — pure power now. He's the one man down here who's glad to see you."
 # rev 135 — the warm tap belongs to the END of the loop, not to the early drain, so it reads leash_answered.
+# ⚠️ rev 142 (beat_0092) — the ✓ badge, and this is the one that fires BEFORE the build ends. That is correct,
+# not a bug: the NPC tier answers "how far am I with him" and his arc genuinely closes at the fire, while the
+# Story-Goal card still says go to Kess. Two tiers, two questions — the section header above states the rule.
+# A player seeing ✓ on Mercer and a live Story Goal is being told the truth about both.
+terminal   = true
 when = [
   { flag = "leash_answered", op = "is_true" },
 ]

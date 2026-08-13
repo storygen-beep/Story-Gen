@@ -9,9 +9,80 @@ how it was verified if relevant (grep / build / live-play).
 Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 
 <!-- entries recorded going forward; example shape:
+## 2026-08-12
+
+- **`references/lanes.md`** — added *"A repeatable sex surface is a MENU, not a scene"*. Written after
+  `vesper`'s Mercer accreted six sex canvases at one location across five beats with no choice of act,
+  while every other NPC in the game had the standard hub-rung → pose-menu → finisher → drain-canvas rig —
+  and while that same character had shipped the rig himself one act earlier. No step in the skill asked
+  "does this NPC already have a loop, and should this be a node inside it?", so the answer was never no.
+  The fold carries the rig, the three symptoms, and the five things the repair has to get right: the exits
+  must be a provable partition (with unreachable branches kept as named guards), resource burns move to the
+  correct exit and the one that must *not* burn is the most dangerous line in the change, the flag-chain
+  validator's demand for a located setter is answered with a **trait** counter for gates and flags for
+  cards, the ceiling must be re-checked because a menu makes every act available whenever it is open, and
+  quest tips describe doors that just moved. Verified by doing it: `vesper` rev 137, six canvases into
+  three, twelve provably-exclusive exits, 103/103 on a new live suite plus six earlier suites ported green.
+
 ## YYYY-MM-DD
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
+
+## 2026-08-13
+
+- **A loop lands beside a deaf hub (`references/lanes.md`, new subsection under the terminal-flag sweep).**
+  The existing sweep keys on a **terminal** flag — one-way, fires once, makes something false — and it cannot
+  catch this, because when a repeating loop lands **nothing becomes false**. The dispatching hub's greeting
+  stays grammatical, in character, arguably true; it is simply **deaf**, saying the same thing on cycle one,
+  two and three. Measured on `vesper`: the parts loop's hub was authored at rev 114, **nineteen beats before
+  the loop existed**, so Kess met her with *"you're paid up, so I'm on it — don't hover"* after every burned
+  part, while his own line in the next node promised *"you'll know when I've got something because I'll say
+  so."* Worse, the finding that justified buying a **different** part next was delivered while he seated the
+  replacement she had **already paid for** — cause after effect, four cycles running, and she never once told
+  him it failed. LO found it by playing it; no gate, guard or suite could have. The new rule makes the loop's
+  **counter** the audit key, adds the two smells (a promised reaction never delivered; payoff information on
+  the surface that *consumes* the resource rather than the one that *precedes* it), and adds the order check —
+  write the cycle as steps, place each surface against a step, read it as a sentence.
+- **Two engine facts folded in with it (same subsection).** (a) **Gate the CHOICE, never the trigger** when a
+  step must wait on an earlier one: a card whose trigger fails *vanishes*, and a vanished card beside a quest
+  tip still naming it is `quests.md` §3's lostness failure — `show_when_locked` plus a `locked_text` naming
+  the missing step turns a dead end into a direction. (b) **A trait condition compares a trait to a literal**
+  (`var rightVal = it.value`), so *"is counter A behind counter B"* is not expressible and unrolls into one
+  rung per value in every place that asks; carry a **derived bit** instead. Both were discovered building the
+  fix, and the second one silently changed the design mid-implementation.
+- **Verified:** green merge + package (`✓ All flag chains valid`, 22 MISSING unchanged); a new 75/75 live
+  suite whose load-bearing half is the negative — no dead end across ten reachable loop states, the buy greys
+  *with a reason* rather than vanishing, and the four stall reads are distinct; four loop suites retargeted
+  rather than re-pinned (`0075` 68/68, `0076` 58/58, `0077` 44/44, `0078` 50→**51**/51, gaining an assertion
+  that the moved findings still exist at the surface that now owns them); full set otherwise unchanged with
+  only the four known pre-existing failures.
+
+- **A finished quest card has to LOOK finished (`references/quests.md` §3 + §7,
+  `references/beat-authoring.md` "Quest cards").** §7 told authors what an end-of-content card should *say*
+  and never told them to *mark* it, so the card it describes — goal-less, non-terminal — matches none of the
+  three render frames and draws **no goal block at all**. That is not a blank row: the card still renders its
+  flavour and its 💡 tip, so a finished arc is drawn in the exact shape of a live objective. Measured on
+  `vesper` 0.1.8: five sections at the end state, **four of them closed arcs**, all four indistinguishable
+  from open ones, and the only "this is over" signal in the game was one sentence buried mid-paragraph in a
+  tip. LO played to the last beat, opened the page, and could not tell the build had ended. `terminal = true`
+  has existed and been styled since PRD 48 and **no card in the game had ever set it** — the skill never
+  asked. §7 now carries the badge rule, the arc-complete-is-not-surface-closed split (keep the tip; retiring
+  the card instead triggers §6's vanishing-section case), and which cards qualify.
+- **`terminal_text` — the engine field the fix needed (`references/quests.md` §3 + §7,
+  `references/beat-authoring.md`).** Frame 1's label was the hardcoded string `Arc complete`, which cannot
+  say *this release ends here*. Added an optional per-card override (`template_import.py` dataclass + parser
+  + serializer, `v2.py:14968` renderer, plus a validator warning when it is set without `terminal` — the
+  string would otherwise be silently dead). ⚠️ Documented with a hard cap: **exactly one card per game may
+  set it**, because it promises future content and a closed-forever arc must not. That is the badge form of
+  §10.1's existing one-card-names-the-boundary rule, and it is now stated as the same rule. Also carries the
+  no-apostrophe constraint — SugarCube source-byte escaping turns `'` into `&amp;#x27;` in the built HTML,
+  which renders fine and poisons every later grep.
+- **Verified:** green merge + package (`✓ All flag chains valid`, 22 MISSING unchanged, no new build
+  warnings); 5 `terminal` and 1 `terminal_text` present in the built HTML with the em dash intact; a new
+  49/49 live suite covering the badge, the override, the negative (loop cards must never badge, asserted at
+  three attempt counts) and tip retention; `live_beat_0084` 82/82 and `live_rev141_bastien_cut` 73/73 both
+  unchanged; full suite set re-run with only the four pre-existing failures (`0069` 11/14, `0070` 19/20,
+  `0071` 16/22, `rev130_131` 33/34).
 
 ## 2026-08-11
 - **Never assert a proxy — assert the claim the check's own label makes (`references/beat-authoring.md`,

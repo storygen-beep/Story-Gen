@@ -65,7 +65,9 @@ quest card. Operators: `gte / lte / gt / lt / eq` (`v2.py:14155-14159`) + flag `
 
 ## §3 — The three render frames (how a card shows)
 `renderQuestsGoalBlock` (`v2.py:14217`) renders **exactly one** frame per card, in priority order:
-1. **✓ Arc complete** — if `terminal = true` (`:14221`).
+1. **✓ Arc complete** — if `terminal = true` (`:14221`). The label is overridable with **`terminal_text`**, a
+   plain string on the card; absent, it reads `Arc complete`. Use the override only where "arc" is the wrong
+   noun — see §7, which is the one card per game that qualifies.
 2. **🔓 Ready** — else if `ready_canvas` is set (`:14229`): the capstone is launchable, with **📍 location**
    (`:14237`) + **🕒 window** (`:14238`) pulled from that canvas.
 3. **🎯 To advance** — else, and **only while a goal is UNMET** (`!allMet`, `:14244`): the goal bullets with live
@@ -162,6 +164,35 @@ skipped with no goals; nothing else matches). Rules:
   forever. Remove the goals array.
 - **Don't leak dev-speak** ("Bastien is Act-2 work") into a player tip. Keep the earned payoff, frame it forward:
   *"Renner's trail is logged. The hunt picks up from here in a future update."*
+
+### ⚠️ And BADGE it — a finished card that looks live is this section's real failure mode
+The frontier-seed shape above describes what the card *says*. It says nothing about what the card *looks like*,
+and left there the card renders **flavor + tip and no goal block at all** — visually identical to a live
+objective. Same box, same italic prose, same yellow 💡 tip. So set **`terminal = true`** on it and the green
+**✓** frame fires.
+
+*(Measured, Vesper 0.1.8: five sections rendered at the end state and **four were finished arcs**, every one of
+them drawn in the shape of a live task. The author walked the build to its last beat, opened the page and could
+not tell the game was over. The field had existed since PRD 48, was styled, and no card in the game had ever set
+it — because §7 told authors what to write and never told them to mark it.)*
+
+**The badge marks the ARC complete, not the SURFACE closed.** Keep the tip. A drained NPC usually stays
+available as repeatable content, and the ✓ plus a tip that says *"the back room's yours whenever you want it"*
+is the honest pair. Retiring the card instead makes the section vanish, which is §6's worse case.
+
+**Which cards get the badge:** the last card in each arc's chain — the one §6 makes you write anyway — plus the
+card that ends the build.
+
+**⚠️ `terminal_text` promises the future, so exactly ONE card in the game may set it.** A finished *arc* and a
+finished *build* are different endings and the default label can only say the first. The build-ending card
+overrides it (*"Chapter complete — the story continues in the next release"*); every closed arc keeps the plain
+`Arc complete`, **because promising more Renner when Renner is finished forever is a false claim** — the same
+defect class as the stale build-boundary sentence in §10.1, which is the rule this extends. One card names the
+future in its prose; the same one card names it on its badge.
+
+**⚠️ No apostrophes or quotes in `terminal_text`.** SugarCube's source-byte escaping renders `'` as
+`&amp;#x27;` in the built HTML. It displays correctly and then poisons every future grep of the file. Em dashes
+are safe.
 
 ## §8 — The quests-vs-sidebar split
 Quest cards carry **goals** (flags/traits toward content). **Body-need stats** (Charge / energy / hygiene) belong

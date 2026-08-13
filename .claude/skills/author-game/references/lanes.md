@@ -501,6 +501,54 @@ single-choice stale-copy hazard the `show_when_locked` trap names — same defec
 either *"still true in-fiction — keep"* or *"stale — gate on `F`."* The surface you didn't name is the one
 that ships the bug.
 
+### ⚠️ The fourth failure: a loop lands beside a DEAF hub
+
+Everything above keys on a **terminal** flag — one-way, fires once, makes something false. A **repeating
+loop** is the other shape, and the sweep above will not catch it, because after a loop lands **nothing has
+become false.** The hub's greeting is still grammatical, still in character, still arguably true. It is just
+**deaf**: it says the same thing on cycle one, cycle two and cycle three, as though the cycles were not
+happening.
+
+**When you build a loop, its dispatching hub is part of the loop.** The audit key is not a terminal flag —
+it is the loop's own **counter**, and the question is asked of every standing surface at the dispatcher's
+location:
+
+> **At each value of the counter, does this surface have something to say — and is what it says still the
+> right thing to say?**
+
+A hub authored *before* the loop cannot have an answer, because the counter did not exist when its lines were
+written. So the moment a loop lands, re-band the hub on the counter, or the very first cycle proves the hub
+is not listening.
+
+**Two smells that mean you have this bug:**
+- The hub promises a reaction it never delivers — *"you'll know when I've got something, because I'll say
+  so"* — and the only place the player can actually hear it is somewhere else in the cycle.
+- The loop's **payoff information** (what was learned, what changes next go) is delivered on the surface that
+  **consumes** the player's resource rather than the one that **precedes** it. That inverts cause and effect:
+  they pay first and find out why afterwards.
+
+**And check the ORDER, not just the presence.** A loop is a sequence, so the content has to sit where the
+sequence needs it. Write the cycle out as steps, put each authored surface against a step, and read it as a
+sentence. If the reason for step 2 arrives at step 4, the loop teaches nothing on the first pass and the
+player is buying on a guess.
+
+⚠️ **Gate the CHOICE, never the trigger,** when a step must be blocked until an earlier one is done. A card
+whose trigger fails simply vanishes, and a vanished card beside a quest tip still naming it is the genre's
+dominant complaint (`references/quests.md` §3). `show_when_locked` + a `locked_text` that names *the missing
+step* keeps it on screen and turns a dead end into a direction.
+
+⚠️ **A trait condition compares a trait to a LITERAL.** There is no trait-to-trait form — the evaluator reads
+`var rightVal = it.value` — so *"is counter A behind counter B"* is not expressible and unrolls into one
+rung per value, in every place that asks. Carry a **derived bit** instead (`spec_pending` 0/1, raised by the
+failure and cleared by the debrief): one clause everywhere, and it cannot drift out of step with the counters.
+
+*(Measured, vesper `beat_0093`: the parts loop's hub was authored at rev 114, nineteen beats before the loop
+existed. Kess greeted her with "you're paid up, so I'm on it — don't hover" after every burned part, and his
+finding — the reason to buy a **different** part next — was delivered while he seated the replacement she had
+already paid twenty-five coin for. Four cycles of a four-cycle loop, diagnosis after purchase, and the player
+never once told him it failed. LO found it by playing it; no gate, guard or suite could have, because nothing
+was false.)*
+
 ## Voice register
 
 > **This section is the lane → value LOOKUP.** The three register axes are **defined** in
@@ -574,3 +622,59 @@ The location screen renders four separate paths; a canvas only appears if it mat
 - `cross_npc` → an NPC as interruptor in another's **Lane 3** ending, or a shared scene.
 - `capstone` → a **Lane 4** one-shot gating a milestone.
 - `location_reveal` / `story_turn` → structure + the scenes the new place/turn needs (often a hub + ambients).
+
+## ⚠️ A repeatable sex surface is a MENU, not a scene — and check before you add a second one
+
+Written after `vesper` accreted **six sex canvases at one location with no choice of act** across five
+beats, each addition individually reasonable: a loop canvas, a "routine" hub rung, a repeat rung, and three
+one-shot capstones. Meanwhile every other NPC in that game had the standard rig, and the character in
+question had *shipped that rig himself one act earlier* — he is the only one who **lost** a menu going
+forward in the story. Nobody decided that. It accreted, because no step asked the question.
+
+**The rig, and it is the same for every NPC:**
+
+```
+hub rung  ──►  pose menu  ──►  finisher  ──►  drain / payload canvas
+(resets the      (oral /        (ONE node,      (one node per
+ loop traits)    vaginal /       forks on        outcome: first
+                 anal;           STATE and       time, repeat,
+                 self-loop       decides what    each failure,
+                 to build        the act         the cold nothing)
+                 pleasure)       RETURNS)
+```
+
+The finisher is the interesting part: **the same act, and the state decides what she gets.** Gear, charge,
+how far the arc has come — each combination routes to its own payload node. That is what makes a repeatable
+surface carry story instead of repeating one.
+
+**Before authoring any new repeatable sex surface, ask: does this NPC already have a loop, and should this
+be a NODE inside it rather than a canvas beside it?** Almost always yes. A new pose is a node. A new outcome
+is a node on the payload canvas plus one exit on the finisher. A whole new canvas is for a *different
+location or a different partner*, not for a different rung of the same arc.
+
+**Symptoms you already have this defect:**
+- Two or more rungs on one hub that are "exclusive by construction" and all mean *sleep with him*.
+- A one-shot capstone that stages a sex act the player did not elect — it plays *at* them.
+- Prose in a hub band whose whole job is to explain why a rung is currently hidden.
+
+**Fixing it is cheap and is not a rewrite.** Every payload moves verbatim into a node behind an elected
+choice; the exits carry the gates the canvases used to carry. What you must get right:
+
+- **Exits must be a provable partition.** Assert that exactly one renders in every reachable state, and that
+  none renders zero — a fork with a hole dead-ends the player at the most expensive moment in the scene.
+  Keep an unreachable branch as a **guard** rather than deleting it, and say in the comment that it is one.
+- **Watch what the old canvases' gates were load-bearing for.** A gate that consumed a resource on entry now
+  has to consume it on the right exit — and an exit that must *not* consume it (because a later scene reads
+  that resource) is the single most dangerous line in the change. It fails with a green build.
+- **⚠️ The flag-chain validator will stop you, and it is right.** A capstone that becomes a triggerless node
+  loses its located setter, and a triggerless setter gives the help page no "go here" hint. The shipped
+  answer is not to fight it: **a triggerless canvas sets TRAITS.** Put a small ordered counter on the fork
+  (`0 / 1 / 2` naming the arc's stages), have every **gate** read the counter, and leave the flags — still
+  set, on the same choices — for the **quest cards**, which are not validated.
+- **Re-check the ceiling.** A menu makes every act available in every state the menu is open. If an act was
+  being held back for a later beat, the pose that offers it needs the gate the old structure got for free
+  from *when the canvas fired*. Verify by reading the earlier canvases for that act — do not assume it was
+  already spent.
+- **Quest tips describe doors.** When the door moves, the tip is wrong. One of `vesper`'s had been telling
+  the player to take the evening and reach at the finish — an instruction she could not follow, because the
+  scene auto-fired. The restructure made the tip true.

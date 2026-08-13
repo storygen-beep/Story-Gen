@@ -14965,10 +14965,14 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
     if (!card) return "";
 
     // Frame 1: ✓ Arc complete (terminal overrides everything)
+    // terminal_text overrides the label. A finished NPC arc and a finished
+    // BUILD are different endings — the card that ends a release has to be
+    // able to say so, and "Arc complete" cannot.
     if (card.terminal === true) {
+        var _tlabel = card.terminal_text || "Arc complete";
         return '<div class="quests-goal">' +
                '<div class="quests-goal-header quests-terminal">' +
-               '<span class="quests-target">✓</span> Arc complete' +
+               '<span class="quests-target">✓</span> ' + _tlabel +
                '</div></div>';
     }
 

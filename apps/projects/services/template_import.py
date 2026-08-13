@@ -1030,6 +1030,13 @@ class QuestsCard:
     # regardless of goals/ready_canvas. Author opt-in for the final card in
     # an arc.
     terminal: bool = False
+    # Overrides the terminal frame's "Arc complete" label. Only renders when
+    # `terminal` is also true (the validator warns if it isn't). Exists because
+    # a finished NPC arc and a finished BUILD are different endings and the
+    # hardcoded label can only say the first: the card that ends a release has
+    # to be able to say so, e.g. "Chapter complete — the story continues in
+    # the next release".
+    terminal_text: Optional[str] = None
 
 
 def _parse_quests_condition(d: Dict[str, Any]) -> QuestsCondition:
@@ -1094,6 +1101,7 @@ def _parse_quests_card(d: Dict[str, Any]) -> QuestsCard:
         goals=goals_items,
         ready_canvas=_require_str(d, "ready_canvas", "") or None,
         terminal=terminal,
+        terminal_text=_require_str(d, "terminal_text", "") or None,
     )
 
 
@@ -5212,6 +5220,12 @@ def _validate_quests_cards(
                 f"the ✓ Arc complete frame will render, ready_canvas will be "
                 f"ignored. Drop one to silence."
             )
+        if card.terminal_text and not card.terminal:
+            _w.warn(
+                f"{ctx}: terminal_text is set but terminal is not — the label "
+                f"only renders inside the terminal frame, so this string is "
+                f"dead. Add `terminal = true` or drop terminal_text."
+            )
         if card.group and card.npc_id:
             _w.warn(
                 f"{ctx}: `group` is Story Goal only (cards without npc_id). "
@@ -5775,6 +5789,8 @@ def _serialize_quests_card(card: QuestsCard) -> Dict[str, Any]:
         out["ready_canvas"] = card.ready_canvas
     if card.terminal:
         out["terminal"] = True
+    if card.terminal_text:
+        out["terminal_text"] = card.terminal_text
     return out
 
 
