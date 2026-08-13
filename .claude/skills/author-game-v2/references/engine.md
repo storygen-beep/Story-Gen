@@ -573,6 +573,20 @@ under it. Switching the engine on is not authoring guidance.
 order: ✓ terminal → 🔓 `ready_canvas` → 🎯 unmet goals. A card that matches none of the three returns
 empty and the row goes blank.
 
+⚠️ **A goal-less non-terminal card draws NO frame, and that is how a finished arc ends up looking
+live.** It is not a blank *row* — the card still renders its `text` and `tip`, so it reads as an
+objective with nothing ticked. Set `terminal = true` on the last card of every arc. `terminal_text`
+overrides the ✓ label (default `Arc complete`) and exists because a finished arc and a finished
+BUILD are different endings; it needs `terminal` set or the string is dead, and the validator warns.
+
+```
+template_import.py:1032-1039   terminal + terminal_text on QuestsCard
+v2.py:14968-14976              Frame 1, terminal_text || "Arc complete"
+```
+
+⚠️ **Exactly ONE card per game may set `terminal_text`** — it is the badge form of the
+build-boundary rule. A closed arc that is closed forever must not promise more of itself.
+
 ⚠️ **`pickQuestsCards` takes EXACTLY ONE scope string, and anything else fails silently.**
 
 ```

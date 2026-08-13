@@ -88,6 +88,31 @@ least. The failure case ran 109 of 216 ungated.
 screen. Band it on whichever tier the location serves. Ten of the failure case's eighteen menus sat
 on a single static block.
 
+> ⚠️ **R5 and R6 are reported as LINTS, not gates, and the reason is worth keeping.** Both were
+> built as gates first. Neither threshold survived being checked:
+>
+> - **R5's ceiling had to be invented.** At 50% one game passes at exactly 50.0% while another
+>   fails at 52% — that is noise being scored, not a measurement.
+> - **R6 is not field-comparable at all.** In a compiled Twine file `<<if>>` covers engine plumbing
+>   — gated choices, media, presence — as well as authored banding, and the two cannot be
+>   separated in someone else's build. Measured that way our games score **84% and 89% against a
+>   field median of 86%**, which says precisely nothing about whether the *prose* moves.
+>
+> **Whether a room's narrative actually changes on re-entry is a question only playing answers.**
+> The numbers are printed every run; judge them. A threshold arrives when the play study does.
+
+---
+
+## Why two of these six have no gate, and that is the honest state
+
+Four of these rules are enforceable and one (R3) is measured against a field. Two are not, and were
+demoted after the thresholds were tested rather than before. That is the discipline working: **a
+gate whose number is invented fails correct work and gets ignored, which is worse than a lint that
+gets read.**
+
+It is also the third time in this skill's construction that a measurement turned out to be comparing
+two different denominators. Assume the seam is there until it is ruled out.
+
 ---
 
 ## What this costs, and why it is worth it

@@ -430,6 +430,59 @@ def lint_dialogue_attribution(model):
     return hits
 
 
+def lint_screen_shape(model, game):
+    """The two `the-surfaces.md` rules whose thresholds are not yet establishable.
+
+    R5 — ungated doors: how much of a location's menu is open on turn one.
+    R6 — frozen openers: a standing menu whose authored prose carries no conditional
+         block at all, so it reads identically on day 1 and day 40.
+
+    LINTS, deliberately. Both were built as gates first and neither threshold held up:
+    R5's ceiling had to be invented, and R6 is not field-comparable because a compiled
+    game's `<<if>>` covers engine plumbing as well as authored banding. Read the numbers,
+    judge them; do not let a build pass or fail on them until the play study lands.
+    """
+    located = {x["id"] for x in (game.get("canvases") or [])
+               if (x.get("trigger") or {}).get("location")}
+
+    def varies(blocks):
+        for b in blocks or []:
+            if not isinstance(b, dict):
+                continue
+            if ((b.get("props") or {}).get("conditions") or {}).get("items"):
+                return True
+            if (b.get("conditions") or {}).get("items"):
+                return True
+            inner = (b.get("blocks") or []) + [bb for cb in ((b.get("props") or {}).get("beats") or [])
+                                               for bb in (cb.get("blocks") or [])]
+            if inner and varies(inner):
+                return True
+        return False
+
+    out, tot, opened, menus, frozen = [], 0, 0, 0, 0
+    for c in model:
+        if not c["rep"] or c["id"] not in located:
+            continue
+        chs = [ch for n in c["nodes"] for ch in ((n.get("exit_block") or {}).get("choices") or [])]
+        if not chs:
+            continue
+        n_open = sum(1 for ch in chs if not ((ch.get("conditions") or {}).get("items")))
+        tot += len(chs)
+        opened += n_open
+        if len(chs) >= 2:
+            menus += 1
+            if c["beats"] and not any(varies(n.get("blocks")) for n in c["nodes"]):
+                frozen += 1
+                out.append(dict(kind="frozen", id=c["id"], loc=c["loc"],
+                                note=f"{len(chs)} choices, no conditional block — same prose every visit"))
+        if n_open >= 8:
+            out.append(dict(kind="open", id=c["id"], loc=c["loc"],
+                            note=f"{n_open} of {len(chs)} choices open with no condition"))
+    summary = (f"{opened}/{tot} location choices open on turn one · "
+               f"{frozen}/{menus} standing menus never change their prose")
+    return summary, out
+
+
 def lint_world_prose(model, game):
     """Parts of a building the writing treats as real, that the map does not have.
 
@@ -931,6 +984,20 @@ def run_gates(model, game, state=None):
          fat + (["field: median screen is 2 links, p90 is 4; big menus in real games are "
                  "shops and wardrobes, not rooms"] if fat else []))
 
+    # ⚠️ THE TWO SCREEN-SHAPE RULES ARE LINTS, NOT GATES — see lint_screen_shape().
+    # `the-surfaces.md` R5 (ungated doors) and R6 (frozen openers) are real rules that a
+    # real game ignored, and both were built here as gates before the thresholds were
+    # checked. Neither survived the check:
+    #   R5: the ceiling had to be invented — one game sits at exactly 50% and passes
+    #       while another fails at 52%, which is noise, not a measurement.
+    #   R6: not field-comparable AT ALL. In a compiled Twine file `<<if>>` covers engine
+    #       plumbing — gated choices, media, presence — not just authored prose banding,
+    #       and the two cannot be separated in someone else's build. Measured that way
+    #       our games score 84% and 89% against a field median of 86%, which says
+    #       nothing about whether the PROSE moves.
+    # Whether a room's narrative actually changes on re-entry is a question only PLAY
+    # answers. Reported as lints until the play study sets real numbers.
+
     # G19 — sentence length. The first gate here that measures WRITING.
     sent_words = [len(s.split())
                   for c in model for b in c["beats"]
@@ -965,11 +1032,14 @@ def main():
 
     lints = lint_dialogue_attribution(model)
     world_lints = lint_world_prose(model, game)
+    shape_summary, shape_lints = lint_screen_shape(model, game)
 
     if "--json" in sys.argv:
         print(json.dumps({"gates": [dict(r) for r in results],
                           "lints": {"dialogue_attribution": lints,
-                                    "world_prose": world_lints}},
+                                    "world_prose": world_lints,
+                                    "screen_shape": {"summary": shape_summary,
+                                                     "findings": shape_lints}}},
                          indent=1, default=str))
         return
 
@@ -1002,6 +1072,17 @@ def main():
             print(f"          · … and {len(lints)-12} more")
         print("          (a canvas that neither binds nor names the speaker — check the"
               " name that will render)")
+
+    if shape_lints or shape_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · screen shape — {shape_summary}")
+        for h in shape_lints[:10]:
+            tag = "frozen" if h["kind"] == "frozen" else "wide open"
+            print(f"          · [{tag}] {h['id']} @{h['loc']}: {h['note']}")
+        if len(shape_lints) > 10:
+            print(f"          · … and {len(shape_lints)-10} more")
+        print("          (the-surfaces.md R5/R6 — thresholds not yet establishable; judge these,"
+              " do not score them)")
 
     if world_lints:
         print(f"  {'─'*72}")

@@ -5,6 +5,68 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-13 — **A goal-less card draws no frame, and that is how a finished arc ends up looking live**
+
+`references/engine.md` §23 documented the three render frames in the right order and stopped there,
+which left the most consequential case unstated: a card with no `goals` and no `terminal` matches
+**none** of the three. That is not a blank row — the card still renders its `text` and its 💡 tip, so
+it reads as an objective with nothing ticked yet.
+
+Measured on `vesper` 0.1.8: at the end state the guidance page drew five sections, **four of them
+closed arcs**, every one of them shaped like live work. The author walked the build to its final beat,
+opened the page, and could not tell the game had ended.
+
+Section 23 now states the trap, the fix (`terminal = true` on the last card of every arc), and the new
+`terminal_text` override with its file:line pair — plus the cap that matters: **exactly one card per
+game may set `terminal_text`**, since it promises future content and a closed-forever arc must not.
+The full authoring rule, including the arc-complete-is-not-surface-closed split, lives in the
+`author-game` skill's `references/quests.md` §7, updated the same turn.
+
+Verified: green build, 5 `terminal` + 1 `terminal_text` in the built HTML, new 49/49 live suite, and
+the two suites that read the guidance page (`live_beat_0084` 82/82, `live_rev141_bastien_cut` 73/73)
+unchanged.
+
+## 2026-08-12 — **Two gates built, both demoted to lints, and the measurement is why**
+
+`the-surfaces.md` R5 (ungated doors) and R6 (frozen openers) are real rules that a real game
+ignored, and the plan was to make them gates — the whole lesson of this project being that
+paragraphs get skipped and only checks hold. **Both were built. Neither threshold survived the
+check.**
+
+**R5 — the ceiling had to be invented.** Set at 50%, Steam sits at exactly 50.0% and passes while
+vesper fails at 52%. That is noise being scored. There is no field number, because "does this link
+carry a condition" is not separable from engine plumbing in someone else's compiled game.
+
+**R6 — not field-comparable at all, and the check nearly shipped backwards.** Measured on our TOML
+(does the opener carry a conditional block?) our games look catastrophic: **steam 0/22 menus vary,
+back_home 2/12, vesper 11/29.** Measured on the field's only available instrument — `<<if>>` present
+in a built screen's text — the field median is **86%**, and re-measuring *our* built games the same
+way gives **back_home 84%, steam 89%**, i.e. at or above the field median.
+
+Both cannot be true. They are not measuring the same thing: in compiled output `<<if>>` wraps gated
+choices, media and presence checks as well as authored prose banding, and the two cannot be told
+apart in a game whose source we do not have. **A gate shipped on the first number would have failed
+every game this project has built, on evidence that does not support it.**
+
+> **Third time in this skill's construction that a measurement compared two different denominators**
+> — after the explicit floor (whole-source units vs location beats) and the sentence ceiling (built
+> HTML vs authored TOML). Assume the seam is there until it is ruled out.
+
+Both are now `lint_screen_shape()` — printed every run, never scored:
+
+```
+steam       107/214 choices open on turn one · 22/22 standing menus never change their prose
+back_home    12/57                           · 10/12
+vesper       65/124                          · 18/29
+```
+
+Those numbers are real and worth reading. What is missing is any basis for a pass/fail — and
+**whether a room's narrative actually changes on re-entry is a question only playing answers**,
+which is what the play study agreed this session exists to settle. Scores unmoved: steam 17/19,
+back_home 13/18, vesper 5/17.
+
+---
+
 ## 2026-08-12 — **Presence is not placement: the economy gate rebuilt, and the heat floor made to admit what it is**
 
 Two gates were giving false green on Steam. Both fixed; Steam drops **18/19 → 17/19**.
