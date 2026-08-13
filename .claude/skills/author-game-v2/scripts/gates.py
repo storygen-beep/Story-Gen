@@ -976,13 +976,25 @@ def run_gates(model, game, state=None):
                             if (x.get("trigger") or {}).get("location")}):
             continue                                  # rungs are link targets, not screens
         for n in c["nodes"]:
-            n_choices = len(((n.get("exit_block") or {}).get("choices") or []))
-            if n_choices > MENU_CEILING:
-                fat.append(f"{c['id']} @{c['loc']}: {n_choices} choices on one screen")
+            # Count DECISIONS, not navigation. A choice that leaves for another
+            # location is an exit; the field's big screens are mostly exits and
+            # standing travel affordances, and only 1-6 things to actually do.
+            # Today this excludes nothing — every choice we have ever authored is
+            # targetType "node" — but the engine does support location targets
+            # (v2.py:13252), so the count is made denominator-proof up front.
+            choices = (n.get("exit_block") or {}).get("choices") or []
+            decisions = [ch for ch in choices
+                         if (ch.get("targetType") or "node") != "location"]
+            if len(decisions) > MENU_CEILING:
+                exits = len(choices) - len(decisions)
+                fat.append(f"{c['id']} @{c['loc']}: {len(decisions)} decisions on one screen"
+                           + (f" (+{exits} exits, not counted)" if exits else ""))
     gate("a place is not a catalogue", not fat,
-         f"{len(fat)} location screens offer more than {MENU_CEILING} choices",
-         fat + (["field: median screen is 2 links, p90 is 4; big menus in real games are "
-                 "shops and wardrobes, not rooms"] if fat else []))
+         f"{len(fat)} location screens offer more than {MENU_CEILING} decisions",
+         fat + (["field, measured by PLAYING five games: a location screen carries 1-6 things to "
+                 "actually do (median 3). Big screens in real games are wardrobes, rosters and "
+                 "character builders — or they are mostly exits, which are not counted here"]
+                if fat else []))
 
     # ⚠️ THE TWO SCREEN-SHAPE RULES ARE LINTS, NOT GATES — see lint_screen_shape().
     # `the-surfaces.md` R5 (ungated doors) and R6 (frozen openers) are real rules that a

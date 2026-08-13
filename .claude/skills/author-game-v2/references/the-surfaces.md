@@ -84,22 +84,36 @@ the split is always available, because R1 already tells you the seam. Gate 20.
 ascent tiers are decoration and the wall of choices is at its worst on the day the player knows
 least. The failure case ran 109 of 216 ungated.
 
-**R6 · The opener moves.** A hub re-entered daily whose first paragraph never changes is a dead
-screen. Band it on whichever tier the location serves. Ten of the failure case's eighteen menus sat
-on a single static block.
+**R6 · The screen moves on re-entry — but the opener does not.** A location the player returns to
+daily has to render differently each time. **It does not do this by rewriting its first sentence.**
+
+Measured by playing the reference game and diffing repeat visits (43 turns, six visits to one cafe,
+`DOCTRINE_GAPS.md` study 5 R7): the identity sentence is **byte-identical every single time**. Six
+visits, six times *"You are in the Ocean Breeze Cafe."* Four other things carry the variation:
+
+| mechanism | what it looks like |
+|---|---|
+| **a condition clause on the identity sentence** | *"...No one is sitting outside due to the rain"* → *"The cafe is busy, and despite the strong winds..."*. Weather and crowd — **not** progression |
+| **one presence line per NPC actually there** | *"You see Sam attending to the customers."* only once you hold the job; *"Gwylan sits alone on the exterior balcony"* only when she is present |
+| **the choice list itself** | 5 → 9 → 8 across six visits, as the on-ramp is replaced by the job and NPCs arrive and leave |
+| **an event replacing the whole screen** | two consecutive street visits rendered a harassment scene *instead of* the location menu |
+
+And on a repeatable **action**, variation is a scenario draw: eight cafe shifts produced **five
+distinct scenarios**.
 
 > ⚠️ **R5 and R6 are reported as LINTS, not gates, and the reason is worth keeping.** Both were
 > built as gates first. Neither threshold survived being checked:
 >
 > - **R5's ceiling had to be invented.** At 50% one game passes at exactly 50.0% while another
 >   fails at 52% — that is noise being scored, not a measurement.
-> - **R6 is not field-comparable at all.** In a compiled Twine file `<<if>>` covers engine plumbing
->   — gated choices, media, presence — as well as authored banding, and the two cannot be
->   separated in someone else's build. Measured that way our games score **84% and 89% against a
->   field median of 86%**, which says precisely nothing about whether the *prose* moves.
+> - **R6 was measuring a practice nobody follows.** The original rule said *"band the opener on
+>   whichever tier the location serves"*, and our TOML test asked whether the opener carries a
+>   conditional block. Our games scored **0/22, 2/12, 11/29** — against a reference game whose
+>   openers are *never* conditional. The 86% field figure from built HTML was `<<if>>` counting
+>   engine plumbing, so neither number measured what the rule claimed.
 >
-> **Whether a room's narrative actually changes on re-entry is a question only playing answers.**
-> The numbers are printed every run; judge them. A threshold arrives when the play study does.
+> The four mechanisms above are what to look for instead. Still a lint, still no threshold —
+> what changed is that we now know **what** to count.
 
 ---
 
