@@ -499,10 +499,23 @@ def run_gates(model, game, state=None):
          f"anchor {anchor_id} {anchor_pct:.0f}%",
          fails)
 
-    # G2 — explicit floor
+    # G2 — explicit floor.
+    # ⚠️ A BARE PASS HERE MEANS ALMOST NOTHING, and the headline has to say so.
+    # This floor is derived from the reference game's own 7.5-9.3% band — and that
+    # game is the COLDEST of 18 shipped sandboxes measured on this same word list
+    # (field median 33.3%). A game landing on 7.6% is inside the reference's historical
+    # range and still four times colder than its genre. One did exactly that and the
+    # gate said PASS. Until a field-comparable threshold exists (see the constant),
+    # the honest thing is to print how marginal a marginal pass is.
     pct = 100 * len(expl) / max(len(all_beats), 1)
+    marginal = EXPLICIT_BEAT_FLOOR <= pct < 12.0
     gate("explicit floor", None if not all_beats else pct >= EXPLICIT_BEAT_FLOOR,
-         f"{pct:.1f}% of {len(all_beats):,} beats carry 3+ explicit words (floor {EXPLICIT_BEAT_FLOOR}%)")
+         f"{pct:.1f}% of {len(all_beats):,} beats carry 3+ explicit words "
+         f"(floor {EXPLICIT_BEAT_FLOOR}%)" + ("  ← BARE PASS" if marginal else ""),
+         [f"{len(expl)} explicit beats in the whole game — the floor is the reference game's own "
+          f"band, and that game is the coldest of 18 measured sandboxes",
+          "clearing this floor is not evidence of heat; it is evidence of not being empty"]
+         if marginal else [])
 
     # G3 — explicit content lives where the player returns
     rep_expl = sum(1 for c in model for b in c["beats"] if b.explicit >= 3 and c["rep"])
@@ -844,11 +857,34 @@ def run_gates(model, game, state=None):
         rent = (game.get("settings") or {}).get("rent") or {}
         if rent.get("enabled"):
             sinks.add("[settings.rent]")
-        gate("sinks >= sources", None if not (sources or sinks) else len(sinks) >= len(sources),
-             f"{len(sinks)} sinks : {len(sources)} sources (field median 2.2 : 1)",
-             [] if len(sinks) >= len(sources) else
-             [f"more ways to earn `{currency}` than to spend it — the meter it feeds never has to rise",
-              f"sources: {', '.join(sorted(sources)[:8])}"])
+
+        # ⚠️ COUNTING SINKS IS NOT ENOUGH — ASK WHERE THEY ARE.
+        # The first version of this gate counted 21 sinks against 20 sources and passed
+        # a game whose sinks were TWELVE PURCHASE BUTTONS ON ONE FRONT DESK. That is a
+        # shop counter, not an economy: money leaves the player in one place, by one
+        # gesture, and no other room is ever the reason she needs it.
+        # This is the same error the explicit-in-repeatable gate already avoids for
+        # heat — presence is not placement — and it was rebuilt here anyway.
+        loc_of = {c["id"]: c["loc"] for c in model}
+        sink_locs = collections.Counter(loc_of.get(s, "(engine)") for s in sinks
+                                        if s != "[settings.rent]")
+        top_loc, top_n = (sink_locs.most_common(1) or [("—", 0)])[0]
+        concentrated = len(sinks) >= 5 and top_n > len(sinks) / 2
+
+        fails = []
+        if len(sinks) < len(sources):
+            fails.append(f"more ways to earn `{currency}` than to spend it — "
+                         f"the meter it feeds never has to rise")
+            fails.append(f"sources: {', '.join(sorted(sources)[:8])}")
+        if concentrated:
+            fails.append(f"{top_n} of {len(sinks)} sinks are at ONE location ({top_loc}) — "
+                         f"that is a shop counter, not an economy")
+            fails.append("a sink belongs where the thing being bought lives, so the room it "
+                         "improves is the reason she needs the money — references/the-economy.md")
+        gate("sinks >= sources", None if not (sources or sinks) else not fails,
+             f"{len(sinks)} sinks : {len(sources)} sources (field median 2.2 : 1)"
+             + (f" · {top_n} at {top_loc}" if top_n else ""),
+             fails)
 
         # A STANDING surface — one with its own trigger.location, that the player can
         # simply click — granting currency with neither a per-day cap nor a costs block

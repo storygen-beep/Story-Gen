@@ -118,7 +118,11 @@ surfaces and landed **3.7× hotter** with the same author and the same doctrine.
 **The shape set the ratio before a word was written.**
 
 ### S5 · The economy is a shop counter
-**severity** MED · **layer** GAME + SKILL · **status** OPEN
+**severity** MED · **layer** GAME + SKILL · **status** **GATED 2026-08-12; game untouched**
+
+Gate 17 now measures **where** sinks are, not just how many: it fails when more than half resolve to
+one location. Steam fails it at **12 of 21 at `the_front_desk`**, and the game drops to 17/19.
+`the-economy.md` R2 gained the placement half — *a sink belongs where the thing being bought lives.*
 
 Gate 17 passes at 21 sinks : 20 sources — but **eleven of those sinks are purchase buttons in one
 menu at the front desk**: the water test, the paper advert, the electric, the frontage, Del's wage,

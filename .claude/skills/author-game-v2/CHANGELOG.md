@@ -5,6 +5,50 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-12 — **Presence is not placement: the economy gate rebuilt, and the heat floor made to admit what it is**
+
+Two gates were giving false green on Steam. Both fixed; Steam drops **18/19 → 17/19**.
+
+### Gate 17 — counting sinks was never the question
+
+It passed Steam at **21 sinks : 20 sources** while **twelve of those sinks sat on one front desk**:
+the water test, the advert, the electric, two wages, the frontage, the occupancy fee — in the same
+undifferentiated list as *"Look up at the board."* That is a shop counter, not an economy. Money
+leaves the player in one place, by one gesture, and no room in the world is ever the reason for it.
+
+Now resolves each sink to its location and fails when **more than half land on one** — applied only
+once a game has five or more sinks, below which concentration is meaningless. Steam fails at 12 of
+21; `back_home` is unaffected (one sink, under the threshold) and still fails on the 1:12 ratio.
+
+**The galling part:** this is the exact distinction the explicit-in-repeatable gate has made since
+day one — *where content sits, not how much of it there is* — and the economy gate was built a
+fortnight later without it. `the-economy.md` R2 now carries the placement half: **a sink belongs
+where the thing being bought lives**, so the room it improves is the reason she needs the money.
+
+### Gate 2 — a bare pass now says it is a bare pass
+
+Steam cleared the explicit floor by **0.1 points** (7.6% against 7.5%) and printed a clean PASS.
+That floor is the reference game's own 7.5–9.3% band — and that game is the **coldest of the 18
+sandboxes** measured on this same word list, against a field median of 33.3%. So a game can sit
+inside the reference's historical range, be four times colder than its genre, and read as green.
+
+The threshold is unchanged, because there is no honest field-comparable number yet: the field was
+measured on built HTML and this gate reads authored beats. What changed is that a pass between the
+floor and 12% now prints **`← BARE PASS`** with the reason — *clearing this floor is not evidence
+of heat; it is evidence of not being empty.*
+
+**A calibrated heat threshold remains open work**, and it needs our own built games measured on the
+field's instrument to exist at all. Recorded rather than guessed.
+
+### Gate 3 — checked, and it was fine
+
+Flagged in review as hiding volume behind a percentage. It was not: it already prints the absolute
+count (*"93.8% of 65 explicit beats"*). The number was visible and the reader — me — treated the
+percentage as the headline. **No change made.** Noted because a fix applied here would have been a
+fix to nothing, and the review claim was wrong.
+
+---
+
 ## 2026-08-12 — **`engine.md` §24: the facts that fake a broken game — promoted only after verifying them**
 
 Steam's session could not find what it needed in `engine.md`, worked six things out by trial and

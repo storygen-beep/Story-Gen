@@ -36,6 +36,24 @@ earn and one way to spend. Gate 17.
 Count both sides honestly: a rung that pays her for something is a **source**, not a scene. A game
 whose only sink is rent has one sink no matter how many ways it pays out.
 
+### …and they are SPREAD. Counting them is not enough.
+
+**A sink belongs where the thing being bought lives.** The boiler upgrade at the boiler. The paint at
+the frontage. The soap in the scrub room. Then the room *is* the reason she needs the money, and
+earning it is aimed at somewhere she goes.
+
+Pile them all at one counter and you have a **shop**, not an economy: money leaves the player in one
+place, by one gesture, and no room in the world is ever the reason for it.
+
+> Measured failure: a game passed this gate at **21 sinks : 20 sources** while **twelve of those
+> sinks sat on a single front desk** — the water test, the advert, the electric, two wages, the
+> frontage, the occupancy fee — in the same undifferentiated list as *"Look up at the board."*
+> The first version of this gate counted them and said PASS.
+
+Gate 17 now fails when **more than half the sinks resolve to one location** (applied once a game has
+five or more, below which concentration is meaningless). It is the same distinction the heat gates
+already make and this one was built without it: **presence is not placement.**
+
 ### R3 · The obligation is real, recurring, and has a face
 
 **Field: 14 of 19 games carry a recurring obligation** — rent, debt, a loan, bills, tuition. The
