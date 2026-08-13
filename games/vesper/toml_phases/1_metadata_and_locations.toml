@@ -168,15 +168,32 @@ mercer_attempts   = 0
 # ⚠️ ONE-WAY. Unlike part_held there is no re-buy: activity_buy_case closes on owner_print_taken, so once the
 # print is taken the stall is gone for good. The print is not a consumable — Kess needs the hand ONCE.
 case_held         = 0
-# THE LEASH (beat_0079) — the Mercer drain counter, the twin of calloway_drains_done and colm_drains_done.
-# Bumped to 1 by cap_first_fire (the first fire, an auto-fire one-shot) and again by every loop_mercer_warm_tap
-# repeat after it. A TRAIT for the same reason as the three above: the warm tap's setter rides a triggerless
-# choice, and the flag-chain validator hard-fails a flag whose only setter is triggerless.
+# THE LEASH (beat_0079, rewired beat_0087) — the Mercer drain counter, the twin of calloway_drains_done and
+# colm_drains_done. Bumped by every draining exit of loop_mercer_finisher: the first drain (the key dead), the
+# answered fire, and every warm-tap repeat after it. A TRAIT for the same reason as the three above: its
+# setters ride triggerless choices, and the flag-chain validator hard-fails a flag whose only setter is
+# triggerless.
 # ⚠️ NOTE THE ASYMMETRY WITH mercer_attempts: the fourth part is NOT burned. The build finally holds, so
 # part_installed stays at 1 from the first fire onward, which is what closes the parts economy (activity_buy_part
 # and the install rung both read part_installed lt 1 / part_held gte 1 and go dark) and what cap_bastien_walks_in
 # reads at beat_0080 to know she has been back to Kess since try 3.
 mercer_drains_done = 0
+# THE LEASH (beat_0087) — HOW FAR THE LEASH ITSELF HAS BEEN BEATEN. The fork axis of loop_mercer_finisher.
+#   0 = leashed. Her drain has never once caught on this man.
+#   1 = drained with the key DEAD. Kess killed Mercer's controller off the bonded case's log, the reach landed,
+#       and nothing came down to shut it. One man off her; the rest of the list exactly where it was.
+#   2 = ANSWERED against a LIVE key. The controller is running again — they turned it back on themselves so
+#       Kess could study it — the challenge came down as it always has, and the thing in her spoke for her.
+# ⚠️ WHY A TRAIT AND NOT THE TWO FLAGS. owner_drained and leash_answered still exist, are still set on the same
+# two choices, and still drive all eight Mercer quest cards and every prose band — but their ONLY setters are
+# now triggerless (loop_mercer_finisher), and the flag-chain validator hard-fails a flag REQUIRED BY A GATE
+# whose only setter is triggerless. It is right to: a triggerless setter gives the help page no "go here" hint.
+# So every GATE reads this counter and every CARD reads the flags. That is the shipped discipline, stated in
+# loop_colm_finisher's own header and the reason vane_confirmed was retired at rev 92.
+# ⚠️ THE ORDER IS STRUCTURALLY FORCED, so gte 1 / gte 2 can never be reached out of sequence: state 1 needs
+# controller_off (Kess, at his bench) and state 2 needs mercer_attempts 3 + a fourth part seated, which cannot
+# happen until parts_loop_open, which kess_the_chip_not_the_key does not set until state 1 has been reached.
+mercer_leash_state = 0
 # THE LEASH (beat_0081) — where the controller is carried. 0 = in her coat pocket, where it has been since the
 # 1a close; 1 = seated in the seam at the base of her spine, put there by Kess on his bench.
 # It exists because of ONE door: Bastien searches everyone who comes into his back room, and design_the_leash
@@ -346,22 +363,13 @@ core_traits = { relation = 0, corruption = 0, arousal = 0 }
 flag_keys   = []
 arc_stages  = ["Revealed"]
 
-# beat_0081 (The Leash) — HIS FIRST SCHEDULE ROW IN THE GAME. He has carried the largest prose block in the
-# corpus (the captivity chunk) with no hub, no schedule and no way to be met.
-# ⚠️ IT IS AT bastien_backroom AND IT COULD NOT BE ANYWHERE ELSE. A schedule row is unconditional and the
-# nav-card badge is not canvas-gated (getNpcsPresentAtLocation, v2.py:4773), so a row at underworld_bar —
-# unlocked and reachable since Act 1 — would park his face on the Undertow card in every save, including one
-# where he is still a saved reveal. bastien_backroom has NO nav card at all (no entry_from), so this row can
-# never surface anywhere. See that location's header.
-# ⚠️ ONE ROW, ENDING AT 23:59 — a single window cannot wrap the day boundary (that needs two entries), and
-# there is nothing here that needs the small hours. 20:00-23:59 also overlaps Kess's 10:00-22:00 by two
-# hours, so one night can hold a bench trip and a visit to the door.
-[[npcs.schedules]]
-location   = "bastien_backroom"
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "20:00"
-end_time   = "23:59"
-activity   = "keeping the back room"
+# ⚠️ NO SCHEDULE ROW — rev 141 (beat_0091). He had exactly one, added at beat_0081 and pointing at
+# bastien_backroom, and it went to games/vesper/shelf/bastien_present_day.toml with the room itself. A
+# schedule row naming a location that no longer exists is an unresolved locationId, so it could not have been
+# left behind even as a dead entry.
+# He is back to what he was through the whole of 0.1.7: the largest prose block in the corpus (the captivity
+# chunk) with no hub, no schedule and no way to be met in the present. Restore the row with the block at
+# 0.1.9; the shelf file carries it verbatim, including the reasoning for why it can only live in that room.
 
 # ── Rue — the madam who runs The House (brothel-work's face + the Marsh on-ramp) — rev 59 ──
 # Promoted from the anonymous "madam" already in the brothel-work prose (3_activities) to a real NPC.
@@ -972,40 +980,13 @@ entry_from  = "underworld_strip"
 # ── crew_den — the dead crew's rooms (Underworld Hunt, beat_0033). LOCKED-visible until she drains
 # the address out of Marsh (crew_known). version="1.0" or the lock fails open. Content floor = the
 # search + finding "Bastien" (beat_0033); the grab capstone (beat_0034) fires here on bastien_found.
-# ── bastien_backroom — beat_0081 (The Leash). The room behind the Undertow, and blueprint scene 18's home.
-# ⚠️ NO `entry_from`, DELIBERATELY — the captive_room shape. A location with no entry_from is on NO nav grid,
-# which is what this room needs for two separate reasons:
-#   (1) THE BADGE. npc_bastien gets his first schedule row in the game here, and a schedule row is
-#       unconditional. The in-room portrait card is canvas-gated (v2.py:4998-5008) but the NAV-CARD BADGE IS
-#       NOT (getNpcsPresentAtLocation, v2.py:4773), so a row at any location with a card would park his face
-#       on that card in every save — including an Act-1 save where he is still a saved reveal and is at that
-#       moment holding her in a cell. Scene 6c hit this with Mercer and answered it with a LOCKED card; no
-#       card at all is strictly better, because a locked card still advertises the room before she is invited.
-#   (2) THE SEARCH MUST BE UNSKIPPABLE. The only thing that ever puts her in here is bastien_door_search's
-#       exit. With a nav card — locked or not — she could walk in the moment the flag flips and never stand
-#       for the search, which is the one beat this room exists to make unavoidable (design_the_leash §11:
-#       "he strips her at the door… in front of his own bar, because he is establishing that he still may").
-# So: no entry_from, no entry_conditions, no blocked_message. There is no door to block because there is no
-# card. She leaves by hub_bastien's exit, back out to underworld_bar.
-[[locations]]
-id          = "bastien_backroom"
-name        = "The Back Room"
-description = "Behind the Undertow, past a door that has no handle on the bar side. Better furniture than the room deserves, a desk with nothing on it, and a chair set where a man can see both the door and whoever he has put in front of it. It smells of the bar and of nothing else."
-image       = "locations/bastien_backroom.jpg"
-image_search_queries = ["private back room behind bar desk armchair dim", "noir speakeasy office low light leather chair"]
-# ⚠️ auto_exit = false, AND IT IS LOAD-BEARING — caught live at beat_0081 before the first assertion about
-# the room even ran. Dropping entry_from is only half the job: _ordered_navigation builds a location's nav
-# grid from its CHILDREN (locations whose entry_from points at it), so this room has an empty grid AND no
-# auto "Leave" link — and an empty navigation_html trips the list-every-location FALLBACK
-# (v2.py:19386, `if not navigation_html and auto_exit`). The built passage came out carrying
-# "All locations:" and the entire world, so from Bastien's back room she could walk to the Spire.
-# auto_exit = false is the engine's own word for this shape — a TRANSIT STOP, arrived at and left by CANVAS
-# (in by bastien_door_search's exit, out by hub_bastien's "Back out to the bar"), whose empty nav list is
-# intentional rather than a stranding to be rescued. underworld_gate is the shipped precedent and its header
-# in this same file spells the whole trap out; captive_room dodges it a different way, by having captive_door
-# as a child. A nav-invisible interior needs BOTH halves: no entry_from, and auto_exit = false.
-auto_exit   = false
-
+# ── bastien_backroom — SHELVED at rev 141 (beat_0091). The room behind the Undertow went to
+# games/vesper/shelf/bastien_present_day.toml with the six canvases that were the only way in or out of it.
+# It had no nav card by design (no entry_from, auto_exit = false), so nothing in the world pointed at it
+# except bastien_door_search's exit and npc_bastien's schedule row, and both of those are shelved too — which
+# is why removing it leaves no unresolved locationId anywhere. The block is preserved verbatim on the shelf,
+# including the two-part reasoning for why it must stay off every nav grid and the auto_exit trap that was
+# caught live at beat_0081. Restore it with the thread at 0.1.9.
 [[locations]]
 id          = "crew_den"
 name        = "The Crew's Rooms"

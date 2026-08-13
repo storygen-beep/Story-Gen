@@ -942,3 +942,422 @@ sets nothing, so no "finding 3 heard" flag exists and none can be added there. *
   casting row always promised: capture-and-flip, and the flip is her walking back in on her own feet.
 
 Nothing in the shipped 0.1.7 build is renamed, re-gated shut, or removed.
+
+---
+
+## rev 137 — Beat C: Mercer gets a sex loop, and the drain becomes a switchboard
+
+**The defect was structural and it accreted.** Across five beats Mercer's room gained six sex canvases —
+`loop_mercer_attempt`, the routine rung, `loop_mercer_warm_tap`, `cap_owner_print`, `cap_owner_confirmed`,
+`cap_first_fire` — and not one of them let the player choose an act. Every other character in the game has
+the same three-piece rig: **hub rung → pose menu → finisher → drain canvas**, where the finisher forks on
+state and decides what the drain returns. Mercer shipped that rig himself in Act 1 (`mercer_penthouse_hub` →
+`mercer_serve`, knees / desk / glass). He is the only character who *lost* a menu going forward in the story,
+and the chapter's biggest scene — the first drain that lands — arrived as an auto-fire the player could not
+decline.
+
+**Six canvases became three.** `loop_mercer_lockup` (intro + oral / vaginal / anal), `loop_mercer_finisher`
+(one node, twelve exits), `mercer_drain_canvas` (`cold` / `try1` / `try2` / `try3` / `d0` / `d1` / `done`).
+Every payload moved verbatim behind an elected choice; nothing was rewritten and nothing was dropped.
+
+**The switchboard.** The anal finish forks twelve ways on gear, charge and the story chain — the full
+`loop_renner_finisher` shape rather than story state alone. Two gear refusals (`wrong gear`, and an empty
+drain that points at **the berth**, because the cradle is behind the Spire seal), then the chain: cold before
+the switch-off, `d0` when the key is dead, cold again while she owes Kess a visit, the three tries, `d1` when
+the fourth part is seated, and the warm tap after. All twelve are provably exclusive and a live suite proves
+exactly one renders in each of thirteen states.
+
+### Three things the build caught that the design did not
+
+1. **The flag-chain validator hard-failed, and it was right.** `owner_drained` and `leash_answered` lost
+   their located setters the moment their capstones became triggerless nodes, and a triggerless setter gives
+   the help page no "go here" hint. The shipped discipline — stated in `loop_colm_finisher`'s own header, and
+   the reason `vane_confirmed` was retired at rev 92 — is that a triggerless canvas sets **traits**. So
+   `mercer_leash_state` (0 leashed / 1 drained with the key dead / 2 answered against a live key) is the axis
+   every **gate** reads, and the two flags, still set on the same two choices, remain what the eight quest
+   cards read.
+2. **The ceiling nearly went early.** The first cut offered the anal pose from the print onward. But anal is
+   **not** spent at `cap_owner_print` or `rung_mercer_hands_on` — both are anal-free — and under the shipped
+   structure the first anal at the Lockup was the switch-off night. Both entry points into that pose now
+   carry `controller_off`, which reproduces the authored order exactly. Oral joined the Lockup and takes no
+   new signature: `mercer_serve.base_knees` spent it in Act 1.
+3. **One exit is now a guard, and it is kept deliberately.** With the anal pose gated, exit D (`.cold` while
+   the key is live) cannot fire in normal play. It stays so the fork can never render **zero** exits if a
+   later edit opens the pose earlier — the suite asserts both halves.
+
+### ⚠️ The highest-risk line
+
+The `.d1` exit **must not** zero `part_installed`. `cap_bastien_walks_in` gates on `part_installed gte 1` —
+the beat_0080 off-by-one fix, meaning "she has been back to Kess since try 3". Burning it at the fire kills
+the rest of the chapter with a green build and no error anywhere. Asserted structurally and live.
+
+### Surfaces
+
+Three quest tips were rewritten to name the act and the loadout. One of them had been telling the player to
+*"take the evening the way you always have. Reach for the take at the finish."* — which she could not do,
+because the scene fired at her. It is true now.
+
+**Media.** Three new pools (`mercer_lockup_oral_t5`, `_finish_facial_t5`, `_finish_inside_t5`); five existing
+Mercer assets moved, one block each. Debt 23 → 26. **The harvest has not run** — LO runs it himself.
+
+---
+
+## rev 138 (2026-08-12) — the heat pass, `beat_0088`
+
+**The observation, LO's.** `cap_owner_print` is the first time she fucks Mercer since the fall, and it runs
+hand → bent over → fucked. No tits, no mouth, no throat. Rev 132 had already put six beats in front of that
+scene, but every one of them is **tempo** — he watches her from the crate, he undresses her a piece at a time
+— and the ladder of **acts** never moved. He is a man written as unhurried, and the pacing fix was mistaken
+for an escalation fix.
+
+**What the measurement said.** Across the chapter's nine Mercer canvases: **110 prose units, exactly two**
+carrying three or more explicit words. The shipped sealed-cell canvases run 50–71% on the same instrument.
+The chapter's entire explicit mass fitted in about four paragraphs.
+
+**Why no signature was owed.** The Mercer ceiling was signed at rev 119, and clause (iii) is not a budget —
+it names a standing register: *"full anatomical words (cock, cunt, cum, ass) … that is the register for every
+Mercer use-scene in this chapter, the loop included."* These surfaces were written **under** their own
+ceiling. `rts-flat-prose.md` Rule 9 names this game's own `drain/plate/socket` lexicon as its anti-pattern by
+name — *"words spent on the device, not the fuck"* — which is precisely what `mercer_drain_canvas` was doing.
+
+### The three changes
+
+1. **`cap_owner_print` — three act rungs.** Tits, on her knees, the throat, inserted between the undress beat
+   and the fingers beat. That placement is not arbitrary: `live_rev132_beat_b` pins the order
+   *looks → undresses → fingers → bed*, and this slot is the only one that grows the build-up without
+   disturbing it. The six act beats that already existed each carried exactly one crude word and were re-cut
+   to three. The finish beat had **no word budget at all** — it already measured 49 of the canvas's 50-word
+   band — so its crude words were **swapped in**, not added.
+2. **The three pose nodes.** Their narration was about *the arrangement*, not about bodies:
+   *"she works him with her tongue and lets him keep the timing, because the timing was never hers"* is a
+   sentence about power in which nothing happens. Rewritten onto the act. **His dialogue is untouched** —
+   the penthouse talk over the top of the fuck is the whole joke of the register.
+3. **All seven `mercer_drain_canvas` leads.** Every one of the seven nodes is entered off the anal finish, and
+   every one opened straight onto the reach — a heavy man who has just come in her ass, lying on her back,
+   and the prose never mentions it again across twelve beats. One clause per lead, varied. ⚠️ **The Halloran
+   Q&A is untouched and must stay that way**: an interrogation is not a sex beat, and it is the one place in
+   the game where the control-canvas carriage rule is actually executed.
+
+### The three things worth remembering
+
+1. **The discovery line had to move, and the flag order is why.** The loop's oral node opened on *"That's a
+   new one. Two years and you never once"* — true only while the loop was the first oral at the Lockup. But
+   `cap_owner_print` **sets `owner_print_taken`**, which is the flag gating the loop's own entry rung, so the
+   print is *always* first. Adding oral to the print made that line a continuity error in the same stroke.
+   The discovery is spoken at the print now; the loop's line is the same man three weeks later.
+2. **The reserved anal held, and the guard was made unambiguous.** Anal is still unspent at the print. Beyond
+   the ceiling's own reservation, canon (`5_scenes.toml:283`) is that his ass finish passes her nothing — put
+   an anal finish at the print and the loop's three failed reaches stop reading as *this man is dead* and
+   start reading as *wrong hole*. The canvas now contains **no `ass` at all**, not even as a grope, so the
+   anal-free claim that the loop's `controller_off` gates rest on needs nobody's judgement to verify.
+3. **Change 4 was cut, and the reason is the interesting part.** The plan carried a fourth item: bring the
+   pose and finish choice labels to the crude ceiling (`rts-flat-prose.md` §4 — *`Suck his cock`, not
+   `Go down on him`*). Measured before touching it: `Get on your knees.` is shared by **seven** canvases and
+   `Let him finish in your mouth.` by **six**, across Renner, Colm, Calloway, Marsh, Bastien, `mercer_serve`
+   and Mercer. These labels are the game's **house menu vocabulary**, not one loop's wording. Changing them on
+   Mercer alone would make the Lockup the only loop with a different menu; changing them everywhere means
+   editing six shipped canvases. Both are wrong inside a Lockup-only, 0.1.8-only scope, so it was dropped.
+
+### Left open
+
+- **Mercer's pose nodes are ~3× the house size.** Measured across every sex loop: Colm 36/39/68,
+  Renner 34/37/43, Calloway 47/38/59, Bastien 53/67/193 — **Mercer 133/97/118**. They inherited whole
+  multi-beat paragraphs when `loop_mercer_attempt.base` was folded into pose nodes at rev 137, and a pose page
+  is re-entered dozens of times, which is exactly the surface Rule 2 exists to protect. The fix is to cut one
+  of the two nostalgia speeches per node — **that is his dialogue**, so it was not taken unasked.
+- **`mercer_drain_canvas.d1#b6` measures 52 words** against the 50-word band. The node's one interior beat,
+  arrived verbatim from `cap_first_fire`. Two over; recorded rather than silently trimmed.
+- **⚠️ `cap_owner_print`'s §7 check-3 ratio got worse, and this beat is why.** Measured against `HEAD`:
+
+  | | narration : dialogue | total prose |
+  |---|---|---|
+  | before `beat_0088` | **1.71 : 1** | 820 w |
+  | after | **1.87 : 1** | 986 w |
+  | §7 target | ≤ 1.50 : 1 | 400–800 w (Tier 3) |
+
+  Both were **already failing before the ladder** — this widened them. The three new rungs are narration-led
+  (a 32–36-word paragraph against a 10–21-word line of his), which is what moved the ratio. Two things worth
+  separating before anyone "fixes" it:
+  - **The word total is arithmetic, not fat.** The canvas is **23 beats**, its max beat is **50 w** and its
+    mean is **43 w** — both inside the band. A Tier-3 budget of 400–800 words at the doctrine's own
+    35–40 words per beat describes a **10–20 beat** scene; this one is longer than that on purpose. The
+    budget and the beat count are in tension here, and the beats are not the thing that is wrong.
+  - **The ratio is the real miss.** Getting 631 words of narration to 1.50:1 needs ~420 of dialogue against
+    the 338 it has — roughly **+82 words in his mouth**. Every beat is already at or near the 50-word cap, so
+    that means *new beats*, not longer ones. Out of scope for a heat pass; recorded for whoever takes it.
+
+**Result: 2/110 → 10/113 = 8.8%**, inside the measured 7.5–9.3% band. Media debt **26 → 29** —
+`sex/mercer_print_tits_t5`, `_knees_t5`, `_throat_t5`, all new folders (one asset, one block).
+
+---
+
+## rev 139 (2026-08-13) — the ass grope, and the pose pages, `beat_0089`
+
+Two follow-ups to the heat pass. One is a defect I introduced; one is a defect I found and left open.
+
+### 1 — A test's convenience had deleted one of LO's rungs
+
+His ladder for the print was *boobs → **ass** → blow him → throat*. `beat_0088` built every rung but that
+one, and not because anyone decided against it. The anal-free guard was written as *"this canvas contains no
+`\bass\b` at all"* — a **proxy** for the real claim — and satisfying that proxy required taking the grope out.
+
+**A grope is not the anal act.** The rung is back: he turns her round by the hip, both hands on her ass,
+weighing it the way he weighed her tits, still talking. New pool `sex/mercer_print_ass_t5`.
+
+⚠️ **Two guards were rewritten, and the second one is the important one.** `live_rev138_beat_0088` §3 was
+mine. But `live_beat_0074:148` — `not re.search(r"\b(anal|ass|arse)\b", low)` — is **where the shape came
+from**, written at beat_0074 to enforce the ceiling row's *"anal is reserved for the loop and the first
+fire."* `beat_0088` copied it. Both now match the **act**:
+
+```python
+ANAL_ACT = re.compile(r"\banal\b|\b(?:in|into|up) her ass\b|\bfucks? her ass\b"
+                      r"|\btakes? her ass\b|\bcock\b[^.]{0,40}\bass\b", re.I)
+```
+
+…and both additionally assert the grope is **present**, so the rung cannot be traded for a simpler regex a
+second time. ⚠️ `\bass\b` and never a substring: this scene hands him a **glass** in three separate beats.
+
+⚠️ One consequence in the prose: the grope must not be phrased *"takes her ass"*, because that phrasing means
+the anal act everywhere else in this game and the new guard matches on it. Hands, explicitly.
+
+### 2 — The pose pages were 3× the house size
+
+The pose node in every other loop in this game is **video + one ~36-word paragraph, and no dialogue at all**:
+
+| loop | oral | vaginal | anal |
+|---|---|---|---|
+| Colm | 36 | 39 | 68 *(34 act + 34 seat)* |
+| Renner | 34 | 37 | 43 |
+| Calloway | 47 | 38 | 59 |
+| **Mercer, before** | **133** | **97** | **118** |
+| **Mercer, after** | **55** | **54** | **85** |
+
+They got fat at rev 137, when `loop_mercer_attempt.base`'s multi-beat paragraphs were folded into pose nodes
+wholesale. A pose page is re-opened **4–6 times per visit** — the exact surface Rule 2 exists to protect.
+
+Each node now merges its two paragraphs into one and keeps **one** short line instead of two. Each still
+carries **3–4 explicit words** against Colm's 1–2, so they came down in size and stayed up in heat.
+
+⚠️ **Mercer does not go silent the way Colm does.** Clause (iii) is a man *"talking about the penthouse while
+he is inside her"* — the talk is the register, and the obscenity is that he is having a nice evening. So one
+line stays on every page, and the anal page keeps its seat paragraph on top of that (Colm's own shape). That
+is why Mercer lands at 55/54/85 rather than at 36/39/68, and it is a deviation on purpose.
+
+**What was cut:** *"Nine years I had a floor and a driver and a woman in on Thursdays for the plants, and I
+never got this. Down here I get this."* Pinned by no suite, and nothing unique dies with it —
+`cap_owner_print` already gives the plants woman her own beat. ⚠️ It could **not** be moved into the intro's
+`block_pool` (where his rotating talk lives) because its punchline only parses during the blowjob.
+
+**What had to survive verbatim**, and did: `"his cock into her cunt"` and `"I like that there's a
+same-as-ever left"` (`live_beat_0076`), `"always got round to it"` and `"That was always the one."`
+(`0076`/`0077`/`0078`). A new assertion caps each pose node's size so the 3× regression cannot return.
+
+### Numbers
+
+- Explicit share **8.8% → 9.6%** (was 1.8% before the heat pass)
+- `cap_owner_print`: 24 beats, max beat **50 w**, §7 ratio **1.87:1 → 1.88:1**, prose 986 → **1033 w**.
+  The ratio barely moved — the grope beat's line of dialogue roughly paid for its own narration — but it is
+  still short of the ≤1.50:1 target and the canvas is still over the 400–800 w Tier-3 band. **Unchanged
+  conclusion from rev 138:** closing it needs ~80 more words in his mouth as *new beats*, not longer ones.
+- Media debt **29 → 30** (`sex/mercer_print_ass_t5`).
+
+### Still open from LO's original list
+
+**kiss** and **anal + cum in her ass**. Both are design calls, not defects.
+
+---
+
+## rev 140 (2026-08-13) — the kiss and the anal finish, `beat_0090`
+
+This closes LO's original eight-rung list for `cap_owner_print`. The scene now runs, in his order:
+
+> **kiss → tits → ass → her mouth → her throat → he fucks her → anal → cum inside her ass**
+
+26 beats, max beat 50 w, asserted live.
+
+### ⚠️ This amends a signed clause
+
+The rev-119 Mercer ceiling reserved anal for the loop and the first fire, in these words: *"so the print scene
+is vaginal."* It is not any more. The clause is **struck rather than deleted** in `design_book.md` so the
+reasoning stays readable next to the amendment.
+
+The objection was put to LO twice before he took the call, and it is worth being precise about what it was
+and was not:
+
+- **It was about escalation.** With anal spent at the print, the chapter has no act left to climb to. That
+  cost is real and it is now paid.
+- **It was NOT about mechanism, and my earlier framing overstated that half.** I argued the loop's three
+  failed reaches would start reading as *wrong hole* rather than *this man is dead*. They don't:
+  `mercer_finisher` canonises that **every** finish of his passes her nothing — the immunity was never about
+  the act. The print's failed reach and the loop's failures all still say the same thing.
+
+**One finish, not two.** The vaginal beats keep their act and lose only their finish — he pulls out, he does
+not come. That is what makes it a ladder rather than two climaxes.
+
+### Two things moved with it, and the second is a small vindication
+
+**1. The loop's anal pose is ungated.** Both entry choices carried `controller_off is_true` for one purpose
+only: protecting the reserve. A gate that hides an act she has already performed is worse than no gate.
+
+**2. `loop_mercer_finisher`'s exit D just went live.** D (`controller_off is_false` → `.cold`) was kept at
+`beat_0087` as a **deliberately unreachable guard**, with its payload written at the time. Its note reads:
+
+> *"if a future edit opens the anal pose earlier, this catches it with the correct payload instead of
+> dead-ending the player at the finish."*
+
+That future edit arrived three beats later. No new work was needed — a player can now elect an anal finish
+with the key still live and gets the two-year nothing, correctly.
+
+### The kiss
+
+Refused at `beat_0088` on a register argument that leaned on a **false measurement**: I claimed the game
+contained no kisses at all. It contains `hub_colm_undertow.kiss` — a whole rung with two kiss paragraphs. The
+walker bug that produced the bad density numbers produced that claim too, and I re-measured the density after
+fixing it but never re-checked the kiss.
+
+What survives of the argument is the register point: a kiss is the one act that asks for something *from*
+her, and this man never asks. So it is written as one more thing he takes — unhurried, without asking, fist
+still closed in her hair, and he tells her about it afterwards rather than during.
+
+⚠️ **It is the one rung with no clip.** A clip there would either break §5's *"a beat carrying a sex clip
+carries crude vocabulary"* guard, or force a crude word into a beat where she is still dressed and nothing is
+out. Deliberate; `sex/mercer_print_kiss_t5` is available if LO wants it.
+
+### Media
+
+- **NEW** `sex/mercer_print_anal_t5` (the switch), `sex/mercer_print_anal_finish_t5` (the finish)
+- **RETIRED** `sex/mercer_lockup_finish_t5` — a vaginal creampie, and there is no longer a vaginal finish
+- Debt **30 → 31** — minus one retired, plus two new; the kiss takes no clip
+
+### Numbers
+
+- Explicit share **9.6% → 10.3%** (1.8% before the heat pass began)
+- §7 ratio **1.88:1 → 1.97:1**, prose 1033 → **1132 w**, against ≤1.50:1 and 400–800 w. Both moved the wrong
+  way again, and this beat is why: three of the four new beats are narration-led. **Unchanged conclusion** —
+  closing the ratio needs ~150 words in his mouth as *new beats*, since every beat is at the 50-word cap.
+  It is now the largest open quality item on this canvas.
+
+### Suites
+
+Four assertions were re-cut, each because the claim underneath it changed rather than because it broke:
+
+| suite | was | now |
+|---|---|---|
+| `live_beat_0074` | *"ANAL IS HELD BACK for the loop and the first fire"* | the amended ceiling is **delivered** — the act is on the page and it is the scene's finish |
+| `live_rev137_beat_c` | every route into the anal pose is **gated** on the switch-off | both routes are **ungated** — the act is spent at the print now |
+| `live_rev138_beat_0088` | cap_owner_print spends **no** anal act | grope and act are **separate rungs in order**; the finish is anal and no vaginal finish is left behind |
+| `live_rev132_beat_b` | `i_finish` found via `mercer_lockup_finish_t5` | same claim, new pool `mercer_print_anal_finish_t5` |
+
+Plus one harness fix, not a claim: `live_rev132_beat_b`'s live walk was bounded at 20 clicks and the scene has
+grown 18 → 24 → 26, so it ran out one click short of the theft beat and reported a false ordering failure.
+
+---
+
+## rev 141 (beat_0091) — present-day Bastien shelved out of 0.1.8
+
+LO's call, taken after a read-only walk of what the release actually contains. 0.1.8 was going to be the
+release that put Bastien on screen for the first time: in 0.1.7 he is 210 mentions and every one of them is
+past tense — the cell, the salvage sessions, a name on a ledger — with no room, no hub, no loop and no drain.
+His present-day surfaces were authored at rev 126–127 and never received the heat pass that revs 138–140 gave
+the Lockup, and shipping the next chapter's antagonist at a standard the rest of the release has left behind
+spends him for nothing. He comes back at 0.1.9, polished, as that release's spine.
+
+**This is a shelve, not a delete.** `scripts/merge_toml_phases.py:44` merges a hardcoded whitelist and skips
+anything absent from it (`:74-78`), so the block lives in `games/vesper/shelf/bastien_present_day.toml` —
+outside `toml_phases/` on purpose, where no glob or added phase number can reach it — and the restore is a
+paste plus three reversals, all written out in that file's own header.
+
+### What moved
+
+One contiguous block, `5_scenes.toml:7863–8879`, 1,017 lines, seven canvases:
+
+| canvas | what it was |
+|---|---|
+| `cap_bastien_walks_in` | he takes the next stool at the Undertow, 15 beats |
+| `bastien_door_search` | the search, unhurried and in public; the room's only entrance |
+| `hub_bastien` | his portrait hub, 20:00–23:59 |
+| `loop_bastien_backroom` | the sex loop, and the controller switch as a mid-act choice |
+| `loop_bastien_finisher` | the fork, including the `.dead` branch for a sleeping key |
+| `bastien_drain_canvas` | `d0` / `done` / `dead` — the buyer |
+| `kess_seat_controller` | ⚠️ **orphaned.** The switch existed only to beat his door search |
+
+Plus the `bastien_backroom` location and `npc_bastien`'s only schedule row, both from
+`1_metadata_and_locations.toml`. **`npc_bastien` himself stays** — 78 of his 131 dialog blocks are Act 1
+captivity, which is untouched and still ships.
+
+### The one thing that would have taken the ending with it
+
+`cap_extraction` — *"Her own page"*, blueprint scene 20, the chapter's capstone — was gated on
+`bastien_drains_done gte 1`. Cut Bastien naively and the chip never comes out, card M never fires, and the
+build has **no ending**.
+
+All eighteen of its beats were read before anything was touched: **zero Bastien references**, and the scene
+states its own enabler in Kess's mouth on the bench —
+
+> "Your build's been talking to it. While that thing's answering in his voice the guard's asleep, and a
+> sleeping guard I can cut around."
+
+That is the **fire**, not the Bastien drain. And the gate already carried `mercer_leash_state gte 2`, which is
+the fire in trait form (the flag/triggerless-setter problem was solved at rev 137). So the Bastien clause was
+**sequencing, not cause**, and deleting it cost the scene nothing and required no new writing. The chapter now
+reads *the print → the key dies → the Q&A → the loop → the fire → Kess cuts the chip out → her own page.*
+
+### What is actually lost
+
+**One reveal.** The buyer — no name, wanted *what was done to her* rather than what she can do, and is the same
+man who came through the far door of that cell and carried her out — lived only in `bastien_drain_canvas.d0`
+and quest card L.
+
+Card M's next-chapter hook **survives him**: that door is Act 1 captivity, shipped since 0.1.7, so the tip only
+had to stop calling it Bastien's. What goes to 0.1.9 is the *link* between that man and the buyer, which is a
+stronger place to make it than the last page of a release that then goes quiet.
+
+### The three accommodation edits
+
+Everything outside the block that pointed into it:
+
+1. **`hub_kess_berth.base`** — the `"Have him seat the key."` rung targeted `kess_seat_controller.base`. A
+   choice pointing at an absent node hard-fails the unresolved-exit build gate, so it could not be left gated
+   shut. Removed; preserved verbatim on the shelf.
+2. **`cap_extraction`'s trigger** — the `bastien_drains_done` clause, as above.
+3. **The Quests page** — cards K and L shelved, Bastien's three-card NPC section shelved, card J re-cut, card
+   M's tip trimmed by one sentence.
+
+**The ladder is now I → J → M.** Card J's *text* is untouched — *"It answered."* is true at the fire and says
+nothing about Bastien — and its tip is **card L's, verbatim**, because L's tip never mentioned him: it is the
+walk back to Kess and the reason he can cut now, which is exactly the instruction the last frontier has to
+carry. Its closer moves from `bastien_hub_open is_false` to `leash_cut is_false`. **M stays the one card in
+the game that names the build boundary**, so nothing moved onto J with the tip.
+
+### Kept on purpose
+
+`controller_seated`, `controller_through`, `controller_state` and `bastien_drains_done` are **left declared**
+in `0_systems_spec.toml` and `1_metadata_and_locations.toml`. All four are `hidden = true`, so an unused
+declaration renders nothing and costs nothing, and keeping them holds the restore to a paste.
+
+### Media
+
+**31 → 22 MISSING.** Nine slots went with the thread: seven sex pools, `locations/bastien_backroom.jpg` and
+`scenes/bastien_undertow.jpg`. None had been harvested. `videos/bastien.jpg` and the cell flashback clip are
+Act 1 assets and stay.
+
+### Suites — and four that were already red
+
+`live_beat_0080/0081/0082` **self-skip** while `cap_bastien_walks_in` is absent, and are kept rather than
+deleted: they are the regression net the restore needs, and they light up again on their own. `live_beat_0083`
+(§1, §4, §5a–c, §7), `live_beat_0084` (the spine ladder, §6, §9, §10), `live_beat_0079` (§6) and
+`live_rev137_beat_c` (§3) had their Bastien-dependent halves re-cut to **derive from what is in the build**, so
+the restore flips them back with no edit. New suite `live_rev141_bastien_cut`, 73 assertions.
+
+⚠️ **AND FOUR SUITES WERE ALREADY FAILING AT HEAD.** `live_beat_0076` (57/58), `0077` (43/44), `0078` (49/50)
+and five of `0079`'s assertions were red *before* this beat touched anything — found by rebuilding the
+pre-change TOML into a scratch output, serving it on a second port and running the suites against it, rather
+than by trusting the previous beat's report, which had called three of them green. The cause is one harness
+bug: a `--debug` build renders a media-finder widget in place of every MISSING clip, each widget contributes
+one anchor **per search query inside `#passage`**, and a fork helper that expects *"the finisher renders
+exactly one row"* was seeing three. `link_texts` now filters those rows in all four files. All four are green
+for the first time in several revisions, and `0079` went 68/73 → **73/73**.
+
+Still red, and verified pre-existing on the same pre-change build: `live_beat_0069` (11/14), `0070` (19/20),
+`0071` (16/22) — `kess_needs_print` auto-fires at the berth and swallows their assertions — and
+`live_rev130_131` (33/34).
