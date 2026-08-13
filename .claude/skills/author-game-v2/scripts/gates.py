@@ -159,7 +159,9 @@ BUILDING_PARTS = ("hall", "hallway", "stairs", "staircase", "landing", "street",
 # Currency naming, used when the ledger does not declare one. Inference is a
 # fallback so the economy gates still bite on a game authored before board.economy
 # existed; a declaration always wins and the headline says which was used.
-CURRENCY_HINT = re.compile(r"money|cash|funds?|wallet|credits?", re.I)
+CURRENCY_HINT = re.compile(r"money|cash|funds?|wallet|credits?|coins?|gold", re.I)
+# `coin` was missing until 2026-08-14, which made a whole currency invisible: vesper
+# spends `coin` 18 times and `money` once, and every economy gate was judging `money`.
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -882,19 +884,52 @@ def run_gates(model, game, state=None):
     currency = econ.get("currency")
     cur_src = "declared"
     if not currency:
-        for k in ((game.get("player") or {}).get("core_traits") or {}):
-            if CURRENCY_HINT.search(k):
-                currency = k
-                cur_src = "inferred — board.economy.currency not declared"
-                break
+        # Pick by USAGE, not by declaration order. A game can carry more than one
+        # real currency — vesper runs `money` (Credits, company-visible) alongside
+        # `coin` (hers, hidden) — and taking the first name match judged the wrong
+        # one. Same bug class already fixed once in the corpus extractor, where a
+        # decoy `randomMoney` beat the real currency on name alone.
+        cands = [k for k in ((game.get("player") or {}).get("core_traits") or {})
+                 if CURRENCY_HINT.search(k)]
+
+        def _usage(trait):
+            ops = []
+            for c in model:
+                _currency_ops(c, trait, ops)
+            return len(ops) + sum(1 for c in model if trait in c["reads"])
+
+        if cands:
+            ranked = sorted(cands, key=lambda t: (-_usage(t), cands.index(t)))
+            currency = ranked[0]
+            cur_src = "inferred — board.economy.currency not declared"
+            if len(ranked) > 1:
+                cur_src += (f"; chose `{currency}` ({_usage(currency)} uses) over "
+                            + ", ".join(f"`{t}` ({_usage(t)})" for t in ranked[1:3]))
 
     if not currency:
         for nm in ("money gates something", "sinks >= sources", "no free uncapped income"):
             gate(nm, None, "no currency found — game declares none and none inferable")
     else:
-        reads_cur = sorted(c["id"] for c in model if currency in c["reads"])
+        # A `costs` block IS a gate: the engine refuses the choice when the player
+        # cannot afford it (v2.py:12556). `reads` is built from conditions only
+        # (see _conditions_of above), so a game that prices its choices instead of
+        # condition-gating them read as "nothing gates on money" — vesper spends
+        # `coin` on seven choices and scored zero here.
+        def _prices_currency(c):
+            for n in c["nodes"]:
+                for ch in ((n.get("exit_block") or {}).get("choices") or []):
+                    cs = ch.get("costs") or []
+                    if isinstance(cs, dict):
+                        cs = [cs]
+                    if any(isinstance(x, dict) and x.get("trait") == currency for x in cs):
+                        return True
+            return False
+
+        reads_cur = sorted(c["id"] for c in model
+                           if currency in c["reads"] or _prices_currency(c))
         gate("money gates something", bool(reads_cur),
-             f"[{cur_src}] {len(reads_cur)} canvases gate on `{currency}`",
+             f"[{cur_src}] {len(reads_cur)} canvases gate on `{currency}` "
+             f"(conditions or an affordability cost)",
              [] if reads_cur else
              [f"nothing in the game reads `{currency}` — every arc gated behind it is optional scenery",
               "field median is 67.3 money conditions per 1,000 passages; every measured sandbox gates on money"])
@@ -962,6 +997,47 @@ def run_gates(model, game, state=None):
              f"{len(printers)} standing surfaces print money without limit"
              + (f" · {len(farmable)} gated rungs are uncapped too" if farmable else ""),
              printers + ([f"(gated, not failed) {x}" for x in farmable[:6]] if printers else []))
+
+        # G21 — a price the player cannot see cannot be planned against.
+        #
+        # Measured by PLAYING (DOCTRINE_GAPS study 5, R3): every field game that
+        # charges money names the amount on the label itself — "Buy coffee (0:02
+        # £2)", "Paper - 80$ for a piece". The player is budgeting against a stated
+        # obligation (DoL: "Bailey wants £100 on Sunday"), so a hidden price is a
+        # plan they cannot make.
+        #
+        # This is money ONLY, deliberately. The field is split on stamina-type
+        # costs — two corpus games label them, the reference game does not — and a
+        # second rule there would be an invented threshold, which is the failure
+        # that demoted the-surfaces R5 and R6. Non-currency costs are counted in
+        # the headline and never judged.
+        priced, silent, other_cost = 0, [], 0
+        for c in model:
+            for n in c["nodes"]:
+                for ch in ((n.get("exit_block") or {}).get("choices") or []):
+                    costs = ch.get("costs") or []
+                    if isinstance(costs, dict):
+                        costs = [costs]
+                    amt = next((x.get("value") for x in costs
+                                if isinstance(x, dict) and x.get("trait") == currency), None)
+                    if amt is None:
+                        other_cost += sum(1 for x in costs if isinstance(x, dict))
+                        continue
+                    priced += 1
+                    if str(amt) not in (ch.get("text") or ""):
+                        silent.append(f"{c['id']} @{c['loc']}: \"{(ch.get('text') or '')[:58]}\""
+                                      f" costs {amt} {currency}, label does not say so")
+        if priced:
+            gate("a price is on its label", not silent,
+                 f"{len(silent)} of {priced} choices spend `{currency}` without naming the amount"
+                 + (f" · {other_cost} non-currency costs not judged" if other_cost else ""),
+                 silent + (["field: every game in the play corpus that charges money puts the "
+                            "amount in the label — the player is budgeting against a deadline"]
+                           if silent else []))
+        else:
+            gate("a price is on its label", None,
+                 f"no choice spends `{currency}` — nothing to judge"
+                 + (f" ({other_cost} non-currency costs, not judged)" if other_cost else ""))
 
     # G20 — a place is not a catalogue.
     # The seam to split on is always available: one canvas per (who it is aimed at

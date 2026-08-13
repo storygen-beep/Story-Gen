@@ -5,6 +5,50 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-14 — **Gate 21 graduates study 5's one gateable rule — and finds two economy gates reading the wrong channel**
+
+Study 5 named exactly one output as gateable: *a choice with a declared cost whose label omits it is
+checkable against the TOML.* Graduating it turned up two pre-existing defects in the economy gates
+that had nothing to do with study 5, and both were silently wrong on a shipped game.
+
+**`scripts/gates.py` — gate 21, `a price is on its label`.** Every choice that spends the currency
+must name the amount in its text. Measured by playing: every corpus game that charges money puts the
+price on the button, and the player is budgeting against a stated deadline. **Money only** —
+stamina-type costs are counted in the headline and never judged, because two corpus games label them
+and the reference game does not, and a rule there would be an invented threshold, which is the
+failure that demoted R5/R6. Fires on vesper: **3 of 7 coin choices hide their price**, all three
+purchases (`Pay the toll.` at 5, `Buy a weapon` at 40, `Buy infiltration gear` at 30) while four
+others name it — the same game contradicting itself is the tell.
+
+**Bug 1 — a `costs` block is a gate, and gate 16 could not see it.** The engine refuses a choice the
+player cannot afford (`v2.py:12556`), but `reads` is built from *conditions* only (`gates.py:349`).
+A game that prices its choices rather than condition-gating them read as *"nothing in the game reads
+the currency"*. Vesper spends coin on seven choices and scored **zero**. Gate 16 now counts either
+channel and says which.
+
+**Bug 2 — the currency inference took the first name match, and vesper has two real currencies.**
+`money` is Credits, company-visible; `coin` is hers and hidden, *"the company can't see"*. `money`
+is used once, `coin` eighteen times — and the gates were judging `money`. Worse, `CURRENCY_HINT` had
+no entry for `coin` at all, so a currency by that name was invisible outright. **This is the same bug
+class already fixed once in the corpus extractor**, where a decoy `randomMoney` beat the real
+currency on name alone; the fix never came back to `gates.py`. Selection is now by usage, the hint
+list gained `coin|gold`, and gate 16 prints the chosen currency and its runners-up so a wrong guess
+is visible rather than silent. Declaring `board.economy.currency` skips the guess entirely.
+
+**Doctrine.** `references/the-voice.md` R1 gains the cost clause (with the shape worth stealing —
+DoL's *"Take them all out at once | Dance: Impossible"*, a label that states the check **and whether
+you currently pass it**, where failing still paid). `references/the-economy.md` gains gate 21 in its
+checked table plus a warning section on both bugs. `DOCTRINE_GAPS.md` study 5 R3 marked graduated —
+and corrected: it extends **item 2** (interface text), which was already closed on 8-12. The plan
+that commissioned the study called the label rule "Tier 1 item 4"; item 4 is scene prose.
+
+**Verified.** steam **17/19** and back_home **13/18**, both unchanged. Vesper **6/17 → 6/18** — the
+price gate now judges instead of reading n/a, and its economy gates moved from the wrong currency to
+the right one: `money gates something` FAIL→PASS on the costs fix, and the new gate fails on three
+real hidden prices.
+
+---
+
 ## 2026-08-13 — **Study 5: the field, played rather than parsed — and gate 20 counts the wrong thing**
 
 `DOCTRINE_GAPS.md` gains Study 5 and Appendix C. This is the first study in the skill grounded in
