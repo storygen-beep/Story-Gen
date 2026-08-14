@@ -21,6 +21,25 @@
 //                        NOT whatever is currently half-built in the working tree.
 window.GAMES = [
   {
+    // Listed 2026-08-14. Authored end-to-end with author-game-v2 and the first game in this
+    // repo to ship a PRODUCTION build on listing day: no --dev, no --debug, --build free, and
+    // the archive at games/forty_miles/releases/v0.1.html is byte-identical to output/.
+    // 37,450 words across 8 locations, 247 canvases, 20/20 gates, and an 11/11 headless
+    // play-test (games/forty_miles/playtest.py) covering the money clamp, nine NPC presence
+    // probes across the midnight and week boundaries, and the locked door staying locked.
+    // ⚠️ MEDIA HAS NEVER BEEN HARVESTED. 84 declared slots — 68 cycling pools (296 clips),
+    // 2 fixed files, 8 location plates, 6 portraits — with zero files on disk. Because this is
+    // a non-debug build there are no labelled placeholders: the art simply is not there and the
+    // page renders the prose with silent gaps. Run find-media, then rebuild output/ and
+    // re-archive in the same commit. Flip `dev: true` if it should sit in the dev section
+    // until then.
+    slug: "forty_miles",
+    title: "Forty Miles",
+    badge: "v2",
+    version: "0.1",
+    summary: `Robyn Sayer works ten at night to six in the morning at a truckstop on a trunk road with nothing open either way for forty miles. At ten the day manager hands over and she is the site — the only authority on it, holding the only key to the shower block. At six she hands it back and is the girl on nights who owes the owner six thousand pounds he has never once explained. Everything she climbs buys hours, not rank: how much of the site is hers after dark, how much of her the lit glass box shows a road she cannot see into, and what she will sell that was never on the shelves. Nine cabs in the park, one man in the tyre bay who has nothing over her, and a padlocked door behind the cold store that is not the company's lock.`,
+  },
+  {
     // Listed 2026-08-12. First game authored end-to-end with the author-game-v2 skill:
     // 36,019 words across 8 locations, 18/18 gates, and a headless play-test (games/steam/playtest.py)
     // covering the money clamp, the schedule grid and the guidance ladders.
