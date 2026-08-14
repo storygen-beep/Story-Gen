@@ -1,0 +1,196 @@
+# =============================================================================
+# Forty Miles — 2_one_shots
+# The opening chain. Linear on purpose, and it teaches exactly three things:
+# the handover, the hatch, and the eleven feet of corridor no camera covers.
+#
+# ⚠️ EVERY MILESTONE NAMES WHAT IT TURNS ON (gate 7). In order:
+#     first_shift_done  -> arms [settings.rent], opens every standing counter
+#                          surface in the_shop
+#     first_hatch_done  -> opens the forecourt night-hatch surfaces
+#     blind_spot_found  -> opens the stock-room corridor surfaces, which is
+#                          where the TRADE ladder tops out and where the
+#                          padlocked door's locked choice lives
+#
+# FIRST EXPLICIT BEAT ON NIGHT ONE (references/the-release.md § first release).
+# It is solo, and it is deliberately sited on the blind spot rather than
+# anywhere else: the opening funnel's job is to teach the surface the whole
+# trade ladder and the v0.1 locked door both hang off, so the game teaches it
+# with her body instead of with a tooltip.
+#
+# ⚠️ engine.md §16 — `first_shift_done` is read by [settings.rent] and by every
+#    standing surface, so it is set from a LOCATED canvas exit. All three
+#    canvases here carry a trigger location, so the chain resolves.
+# =============================================================================
+
+
+# ── Night one, 22:00 — the handover ──────────────────────────────────────────
+[[canvases]]
+id          = "canvas_opening"
+name        = "Forty Miles"
+description = "Opening. Monday 22:00, the shop. Establishes Bev, the three rules, the six thousand pounds, and the fact that from ten to six there is nobody else on this site. Linear. SETS first_shift_done (which arms the Friday settle-up) and arrival_done, opening the standing counter surfaces."
+
+[canvases.trigger]
+location      = "the_shop"
+is_repeatable = false
+priority      = 12
+is_active     = true
+
+[[canvases.nodes]]
+id   = "the_counter"
+name = "Quarter to ten"
+blocks = [
+  { type = "image", props = { file = "scenes/handover.jpg", description = "Two women behind the counter of a brightly lit petrol station shop at night, one in a coat.", search_queries = ["petrol station shop counter night two staff", "convenience store night shift counter bright interior"] } },
+  { type = "paragraph", content = "Bev has her coat on before you are through the door. She has had her coat on since half nine. The till drawer is open on the counter with the float counted into it and the roll torn off and folded, and she is holding it out to you like a receipt she wants signed for." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Two-twenty float. Hot counter's off, I've done it. Bins are done." },
+  { type = "paragraph", content = "Outside the glass the canopy is lit up white and there is nothing past it. Nine cabs in the park. The road does something every eleven minutes and then goes back to being black." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Take the float.", targetType = "node", nodeId = "the_keys" },
+] }
+
+[[canvases.nodes]]
+id   = "the_keys"
+name = "The keys"
+blocks = [
+  { type = "paragraph", content = "She puts the keys on the counter one at a time so you watch her do it. Shop. Stock room. Cold store. A brass one on a fob worn smooth." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Shower block. That one's yours all night. Nobody else on site has it." },
+  { type = "paragraph", content = "You ask who else is on site. She looks at you like the question is the answer." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Ossie's in the tyre bay if he's not out on a callout. That's it. That's everybody." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Ask about the rules.", targetType = "node", nodeId = "the_rules" },
+] }
+
+[[canvases.nodes]]
+id   = "the_rules"
+name = "Three rules"
+blocks = [
+  { type = "paragraph", content = "There are three and she says them in the order she has said them to four people before you." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Hatch comes down at midnight. Serve through the drawer after that. And you don't go out on the apron on your own." },
+  { type = "paragraph", content = "You point out that you are on your own. All night. That is the job." },
+  { type = "paragraph", content = "She picks her bag up off the chair and does not answer that, and at the door she stops with her hand on it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Gerry comes Friday at six. Have it counted before he pulls in. He doesn't like waiting in the car." },
+  { type = "thought_bubble", content = "Two hundred for him and forty-five for the van, out of a week that pays three-fifty. She knows the numbers. Everyone here knows the numbers." },
+  { type = "paragraph", content = "Then the door does its two-tone thing, and her car goes out under the canopy and left onto the road, and the shop is very quiet and very bright and it is twenty-two hundred hours on Monday." },
+]
+exit_block = { type = "location", text = "Start the shift.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 30, flagEffects = [
+  { targetType = "player", flag = "first_shift_done", op = "set" },
+  { targetType = "player", flag = "arrival_done", op = "set" },
+] } }
+
+
+# ── Night one, 03:00 — the hatch, and the first thing she is looked at through ─
+[[canvases]]
+id          = "canvas_first_hatch"
+name        = "Three in the morning"
+description = "Auto-fire at the_shop 02:00-04:00, gated first_shift_done, one-shot. The first driver she serves alone, through glass, in what she put on to be warm rather than to be seen in. Teaches the hatch and the SEEN tier. SETS first_hatch_done, opening the standing night-hatch surfaces on the forecourt. +4 seen, +3 money (tip, clamp = false)."
+
+[canvases.trigger]
+location      = "the_shop"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "first_shift_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "first_hatch_done", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "the_drawer"
+name = "The hatch"
+blocks = [
+  { type = "paragraph", content = "Three o'clock and the fleece is off because the heater over the door runs all night and there is nobody in here. You are in the vest you sleep in and a pair of leggings, sat on the stool behind the till with the radio down low." },
+  { type = "paragraph", content = "Then the forecourt bell goes, which means somebody is stood at the hatch, which means somebody walked across the apron and you did not see them do it." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Go to the glass.", blocks = [
+        { type = "paragraph", content = "He is fifty-odd, in a fleece of his own, holding a card up at the window. He wants twenty on pump four and something hot. Ordinary. The whole thing takes ninety seconds." },
+    ] },
+    { advance_text = "Serve him.", blocks = [
+        { type = "paragraph", content = "You do it through the drawer because the hatch is down. Push the drawer, take the card, push it back. He has to bend to the slot and when he bends he is looking through the glass at you, not at the drawer." },
+    ] },
+    { advance_text = "Understand the geometry.", blocks = [
+        { type = "paragraph", content = "The shop is lit like an operating theatre. Outside it is black. He can see everything in here and you can see a shape and a fleece, and you worked that out a fortnight ago and have thought about it every night since." },
+    ] },
+    { advance_text = "Let him look.", blocks = [
+        { type = "paragraph", content = "You do not fold your arms. You stand in a vest and let a man you cannot see take his time. Your nipples come up hard in the draught off the door and the vest does nothing. He is looking at your tits in your own reflection. It lands in your cunt, a clench low down, and you hold still and let him have the whole of it." },
+    ] },
+    { advance_text = "He goes.", blocks = [
+        { type = "paragraph", content = "He puts a two-pound coin in the drawer and pushes it back through, which is not a thing anyone does at a hatch, and walks off across the apron into the black without saying anything else." },
+    ] },
+  ] } },
+  { type = "thought_bubble", content = "Ninety seconds. Bev has done that ninety-second transaction eleven years and would not call it anything." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Put the coin in your pocket, not the till.", targetType = "node", nodeId = "the_coin", effects = [
+    { targetType = "player", trait = "seen", op = "add", value = 4, clamp = true },
+    { targetType = "player", trait = "money", op = "add", value = 3, clamp = false },
+    { targetType = "player", trait = "count", op = "subtract", value = 2, clamp = true },
+  ] },
+] }
+
+[[canvases.nodes]]
+id   = "the_coin"
+name = "The coin"
+blocks = [
+  { type = "paragraph", content = "It goes in the pocket of the leggings. Two pounds. The till roll will not know about it and neither will Friday, and it is the first thing that has happened on this site that is yours." },
+  { type = "paragraph", content = "You are also wound up in a way that has nothing to do with two pounds, and there are three hours of the shift left, and there is nobody within forty miles." },
+]
+exit_block = { type = "location", text = "Do the stock check early.", config = { destinationType = "specific", locationId = "the_stock_room", time_progression_minutes = 20, flagEffects = [
+  { targetType = "player", flag = "first_hatch_done", op = "set" },
+] } }
+
+
+# ── Night one, 03:30 — the first explicit beat, and it is hers ───────────────
+[[canvases]]
+id          = "canvas_blind_spot"
+name        = "Eleven feet"
+description = "Auto-fire at the_stock_room, gated first_hatch_done, one-shot. The corridor between the cold store and the back wall carries no camera, and she measures it. The first explicit beat of the game: solo, on the surface the whole TRADE ladder and the v0.1 locked door both hang off. SETS blind_spot_found, opening the standing stock-room surfaces. +6 trade, +18 arousal."
+
+[canvases.trigger]
+location      = "the_stock_room"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "first_hatch_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "blind_spot_found", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "the_corridor"
+name = "The blind spot"
+blocks = [
+  { type = "image", props = { file = "sex/blind_spot_t5.jpg", description = "A woman alone against a cold store door in a dim stock room at night, one hand down the front of her leggings.", search_queries = ["woman alone dim storeroom night leaning against door", "back room storage corridor dim figure standing"] } },
+  { type = "paragraph", content = "The recorder sits on a shelf by the door with its green light on, and there is a screen next to it that cycles the four cameras every eight seconds. Till. Door. Aisle two. Fuel court." },
+  { type = "paragraph", content = "You stand and watch it go round twice. There is no fifth picture." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Walk it out.", blocks = [
+        { type = "paragraph", content = "You pace the gap between the cold store and the back wall, heel to toe, counting. Eleven feet. Eleven feet of this building that nothing in it can see, and the padlocked door is at the end of it." },
+    ] },
+    { advance_text = "Stand in the middle of it.", blocks = [
+        { type = "paragraph", content = "You put your back against the cold store door. The metal is freezing through the vest. Overhead the strip light buzzes and forty miles in either direction there is not one person awake." },
+    ] },
+    { advance_text = "Nobody can see this.", blocks = [
+        { type = "paragraph", content = "Your hand goes down the front of the leggings. Your cunt is already wet from ninety seconds at a window, and your clit is up hard, and your other hand goes under the vest to your tits." },
+    ] },
+    { advance_text = "Keep going.", blocks = [
+        { type = "paragraph", content = "Two fingers in. Your cunt takes them without any work at all. Your thumb stays on your clit and you brace your shoulders on the cold store and fuck yourself standing up against it." },
+    ] },
+    { advance_text = "Faster.", blocks = [
+        { type = "paragraph", content = "You get the vest up over your tits and the cold comes onto your nipples. Your hips work against your own hand. Your cunt is wet enough now that your fingers make a sound in it over the freezer motor." },
+    ] },
+    { advance_text = "Let it happen.", blocks = [
+        { type = "paragraph", content = "The orgasm takes your legs and you moan out loud into an empty stock room, and your cunt clenches down hard on your fingers, and you keep them in there through all of it until it lets go." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "thought_bubble", content = "Eleven feet. She has measured it now and she is not going to be able to stop knowing the number." },
+        { type = "paragraph", content = "You straighten the vest, and you look down the corridor at the padlock on the far door, and you think about what the eleven feet is worth rather than what it is." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Back to the counter.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 25, effects = [
+  { targetType = "player", trait = "trade", op = "add", value = 6, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 18, clamp = true },
+], flagEffects = [
+  { targetType = "player", flag = "blind_spot_found", op = "set" },
+] } }

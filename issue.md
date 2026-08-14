@@ -367,9 +367,46 @@ STILL OPEN: does the controller hear and see what Wren does? Nothing in the game
 Not a bug — nothing was broken and no save was stuck. Three gates were hidden with nothing on screen to explain any of them: a lapsed feed line deletes Kess's "give him the part", a bought-but-unseated part deletes Mercer's "give him the evening", and Kess (10:00-22:00) and the Lockup (23:00-08:00) share NO hour of the day, so a cycle is always two trips. Fixed in prose, not menus: Kess's hub now bands on the feed line AND whether she's carrying a part (the lapsed-and-carrying band names the cot), Mercer's room states an unseated part, both off-hours cards give the hours, and card I's tip says it takes two trips. show_when_locked could not do this — it greys on a choice's whole conditions block, so it would have advertised the loop before Kess opened it.
 
 
+[PROGRESS][DONE]Canvas: The print (cap_owner_print) | Node: The print: It is the first time she is fucking mercer after the ranb off, right?? It is a linear that is not the problem but directly goes to bent over fuck, the intensity between them can rise incremantally, like they kiss, he grops her boobs, then ass, then ask you to blow him, then he deep throats you, then he fucks you, then anal and then cum inside anal.
+Other canvases linear ones that have sex are exactly same like "What it cost him" one
+
+[DONE]mercer fuck choice from hub menu should trigger sex loop menu, and have a drain function through it. If I am correct What it cost him drains him for the first time, that is a linear canvas, I think we wont need it and player should be using that fuck choice from the hub menu.
+
+
+[DONE]You have it. It came off his own hand while he was talking about a woman who used to do the plants on Thursdays, and he will never know he gave it. That's the handshake Kess said he couldn't be the other end of — and it went into your coat pocket in a concrete room behind a paper stall, with the man it belongs to pouring himself another one.
+Quests page shows thursday, actually what does it means explain in simple words?? 
+
+
+After the mercer drains the quest page shows:
+It caught. Nothing came down to shut it, and he came apart under your hands and answered everything you asked — who signed for you, what they were told, and what he thought the key in his coat was for. And then the part that spoils it: his only ever spoke for him, and he remembers being annoyed about it, because that means there are others.
+💡 Take it back down to the breaking-dock. Kess is waiting to hear whether he killed the right thing, and he keeps yard hours — ten in the morning to ten at night — so go while he's cutting, and keep the cot paid or he won't be. If you want the next chapter sooner, Support Us in the sidebar.
+But it doesnt trigger until cot is paid
+
+
+Canvas: Thursday (loop_mercer_attempt) | Node: Thursday :
+This is where the drain works on mercer with the controller on, right??
+What are the questions she asks him??
+This is also the end of the current build, is it?? if yes, what quests page shows??
+
+
+[DONE]What we added to on bastien in this release??
+cut off bastien
+
+
+Test Again
+
 Quest Page
 
 change cloths
+
+
+Vesper Finalize: her lease
+
+
+Should we add more things to this release like bastien and all, parallel to her lease?? or its been more then 12-13 days since we have released a public version, should we release it now??
+
+
+[DONE]For the buy the part and try we have missed an important detail here. So first time kess tells her to buy that part, then he installs that in her, she tries and fails. Then There is nothing that she tells kess like that part failed now he should want you to buy a new part this ones different and then same. I think currently its like wren doesnt tell kess directly goes on to buy the second part from out of the sudden.
 
 
 **Back Home**
@@ -386,3 +423,10 @@ What is landing, why shop is in the house??
 It doesnt have any quests.
 
 one real thing is, how v1 defines the medias, sometimes it is just impossible to find those medias.
+
+search query: never right old man or age or middle age or anything similar.
+
+
+
+
+index.html, one page reload the selected query goes away

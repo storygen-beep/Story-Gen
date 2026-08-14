@@ -898,6 +898,314 @@ tag-stripping as word-like fragments.
 - Everything here measures **shape, not quality.**
 
 ---
+---
+---
+
+# Study 5 — What the field actually does in play
+
+## 1 · What it is, and what breaks without it
+
+Every measurement in studies 1–4 was a **parse**. Link counts, word counts, sink counts, gate
+counts. Nobody had opened one of these games.
+
+This skill's own `references/agents.md` indicts that method: *"in a thirty-game study, the three
+games that were actually played produced every single heat finding in the corpus, and the
+twenty-seven that were only parsed produced none."*
+
+Three rules had already shipped into `gates.py` and the reference files as **inferences that had
+never been observed**: the 8-choice cap (gate 20), guidance-must-exist, and sinks-must-be-spread.
+This study played the field to see whether they survive contact.
+
+**Five games, 198 recorded turns**, driven through `.claude/skills/twine-game-explorer/scripts/live.js`.
+Every turn logged to `game_explorations/<slug>/study_turns.jsonl`: passage, visible choices, explicit
+hits scored with `gates.py`'s own frozen `EXPLICIT` regex, engine state snapshot, in-game clock.
+
+| game | turns | why this one |
+|---|---|---|
+| `degrees_of_lewdity` | 74 | the reference the whole skill derives from — measured ten ways, never played |
+| `course_of_temptation` | 61 | ships literal in-game hint cards. The guidance exemplar |
+| `generic_porn_game` | 29 | the parse's menu outlier — median 18 links/screen. The decisive test of the cap |
+| `shady_deals` | 17 | heaviest money-gating in the field (605 gates/1k) |
+| `destroyer` | 17 | ~151 one-line staged hints in NPC voice — guidance done a second way |
+
+## 2 · How v1 teaches it
+
+It does not. v1 has no play-derived doctrine at all; `lanes.md`, `rts-flat-prose.md` and the
+mechanism audits are all readings of source. This study has no v1 counterpart to quote — which is
+itself the point, and the reason the same blind spot reached v2 intact.
+
+## 3 · Where the parse is wrong
+
+**Three of the four headline parse figures did not survive being looked at.**
+
+**The GPG outlier does not exist.** The parse put GPG at a median of 18 links/screen with 55% of
+screens over 12 — the single strongest argument that our cap of 8 was too low. Live, its house hub
+is **five buttons**, its city map **ten**, its mall **eight**. The parse was counting `<img>` tags
+inside image-button hubs as links. GPG's real median is **4**.
+
+**"Screens over 8 are common" is an artifact of mixing screen kinds.** Across all five games, every
+screen above ~12 choices is a **builder, roster, wardrobe or tracker** — CoT's appearance builder
+(99), destroyer's quest tracker (151 portrait tiles, most locked), DoL's wardrobe (35), CoT's class
+picker (30). Separate those out and the play surfaces are:
+
+```
+game                play screens   median   max   over 8
+degrees_of_lewdity        35          5      12     11
+course_of_temptation      39          3      15      2
+generic_porn_game         11          4      10      1
+shady_deals               10          3      10      1
+destroyer                 16          1       6      0
+```
+
+**And the last denominator seam — the fourth in this project.** DoL is the only game with many play
+screens over 8, and all eleven are streets. Split one:
+
+```
+Cliff Street ......... 12 links
+  onward travel ...... 4   (glossed: "Barb Street (0:05) (Studio)")
+  travel affordances . 4   (bus, loiter, alleyways, manhole — identical on every street)
+  things to do here .. 4   (Watch pillory, Mayor's Office, Beach, Cafe)
+```
+
+Across all eight street screens sampled: **things-to-do-here has a median of 3 and a max of 4.**
+The rest is a navigation frame the player learns once and never reads again.
+
+> **The fourth denominator mismatch is in this comparison, not in the gate.** Ruled 2026-08-13 by
+> reading the code instead of reasoning from the play log: **259 of 259 choices in `steam` and
+> `back_home` carry `targetType = "node"`.** Our engine renders location-to-location navigation as
+> engine chrome, not as canvas choices, so gate 20 *already* counts only decisions local to the
+> place. A DoL street's 12 links are 4 exits + 4 travel affordances + 3–4 decisions; the same street
+> authored here would present 3–4 choices and eight pieces of chrome. The failure case's front desk
+> was 23 choices *of which 23 were decisions*, eleven of them purchases — correctly failed.
+>
+> So the mismatch was **our-authored-decisions vs DoL's-total-on-screen-links**, which is a fault in
+> the paragraph above, not in `gates.py`. **The ceiling of 8 stands.** Field local-decision counts
+> run 1–6 (max: the cafe, 6), so 8 keeps the same slack over the observed maximum that the original
+> derivation used. Dropping to 6 would invent precision five games on one route each cannot carry —
+> the exact failure that demoted R5 and R6.
+
+## 4 · What v2 says instead
+
+### The verdicts required by the plan — confirmed, refuted, or untested
+
+| shipped rule | verdict | evidence |
+|---|---|---|
+| **Gate 20 · 8-choice cap** | **upheld** (first read "refuted" — see §3) | 11 DoL play screens exceed it, but only as *total links*. Separating exits and travel affordances puts field screens at 1–6 *decisions*, and our engine never authors exits as choices — so the gate was already comparing like with like |
+| **Guidance must exist** | **confirmed, 4/4 games that have a hub** | four different mechanisms, all always-reachable — below |
+| **Sinks must be spread** | **not established by this study** | `shady_deals` was cut short at 17 turns before its sink map was walked. Its top-level objective *is* a cash threshold, which supports R1, not R2 |
+| **`the-surfaces.md` R5/R6 (lints)** | **still untested** | needs the free-play hour; DoL's bedroom does contract 10→6 on state, which is R6 evidence in the choice list rather than the prose |
+
+### R1 · A location screen is exits + affordances + **at most four things to do here**
+
+The count that matters is **decisions local to this place**. Field median 3, max 4, across five
+games. Onward travel and standing affordances are frame, not menu.
+
+### R2 · Every choice hangs off a named object in the prose
+
+Three games independently, and it is the single most consistent shape in the corpus. CoT's dorm:
+
+```
+Your dorm room cot is against one wall.
+🛏️[1] Sleep
+💦[2] Masturbate in bed   Disinhibition 1
+
+Past the end of your bed is a small closet and shelf set.
+👕[4] Clothes
+```
+
+DoL's bedroom and `shady_deals`' Downtown do the same. **The wall of buttons is not caused by the
+count — it is caused by choices that float free of the prose.** Eight anchored choices read as four
+sentences; eight unanchored ones read as a menu.
+
+### R3 · The label carries its own cost, gate and consequence
+
+Measured on every game that has costs. Not one made the player click to find out:
+
+```
+Buy coffee (0:02 £2)                  DoL — time and money
+Flirt | Promiscuity 1                 DoL — which meter it feeds, and the tier
+Long Sleep (10:00) Rest >>>>>         CoT — duration and magnitude
+Take a walk (-0.5 energy)             GPG
+Move to secluded area with him.[2]    shady_deals — plus an inline risk gloss
+  Very unlikely thats your life is in danger, he's just horny.
+```
+
+Measured label length across 1,009 rendered labels: **median 1–3 words, p90 1–7, max 12.** Our
+own games are not out of band here — this is the Tier 1 item 4 answer, and it is about *content*,
+not length.
+
+### R4 · The label keeps the want; the reason sits next to it
+
+Four games, four refusals, and **the reason is never on the label in place of the action**:
+
+```
+DoL     label on the street:  Strip club (0:01)              ← the plain want
+        behind the door:      The strip club is closed. A sign reads:
+                              "Opening hours: 18:00 - 06:00"
+                              The lock looks beyond your ability to pick.
+                              Skulduggery required: D
+CoT     label:                [1] Strip                       ← the plain want
+        body after clicking:  On second thought, you don't feel comfortable being
+                              that undressed here. (Need Exhibitionism 2)
+shady   label:                Check the local stroll.[7]      ← the plain want
+        adjacent prose:       It's under Street Gangs control.
+GPG     label:                Enter (CLOSED)                  ← want PLUS state suffix
+```
+
+> ⚠️ **Correction, ruled 2026-08-13.** This section first read *"a closed door states its own
+> requirement"* and concluded that `engine.md` §15 was *"contradicted by every game in the corpus
+> that has a gate."* **That was wrong, and it is worth keeping the reason visible.**
+>
+> §15 governs `locked_text`, which **replaces** the action label — set it and *"the player never
+> sees what the action was called."* Its ruling is *"prefer the want unless the gate is genuinely
+> obscure."* Every game above **keeps the want on the label** and puts the reason somewhere else:
+> adjacent prose, a state suffix, or the passage behind the door. **That confirms §15's preference;
+> it does not contradict it.** The comparison was between a label-replacement rule and evidence
+> about where reasons are *placed* — two different axes.
+>
+> **§15 stands unchanged, and the withdrawn locked-door gate stays withdrawn.** What the field adds
+> is a separate, additive rule §15 never spoke to: *the reason should be reachable adjacent to the
+> want* — before the click as prose or suffix, or immediately after it. Not gated: which of the
+> three placements is right is an authoring judgement.
+
+### R5 · Guidance is always-reachable, and it names a place and a verb
+
+Four mechanisms, all present, none requiring the player to have paid attention earlier:
+
+- **DoL** — a persistent sidebar line on *every* screen (*"You have school tomorrow"*), plus a
+  JOURNAL with a dated **Time-Sensitive** section: *"Bailey wants £100 on Sunday."*
+- **CoT** — categorized hint cards with In Progress / Completed states, each ending in a route:
+  *"Go to Summit Market (next to your residence hall) and apply for a job."*
+- **destroyer** — a per-NPC card, one line, in that character's voice: *"My bedroom. You need to
+  start pulling your weight around here."*
+- **shady_deals** — a numbered whiteboard where each goal carries its own route: *"Own a warehouse.
+  The warehouse district is located at the harbor."* Plus a diegetic NPC Q&A at chargen with a
+  literal *"What do you recommend me to do first?"*
+
+**All four name a place. Three name a verb. None is a bare percentage.** That confirms
+`the-voice.md` R4 as written and is the strongest single result in this study.
+
+### R6 · The world moves on its own — and this is where our games are thinnest
+
+M4, measured as engine-state movement per turn:
+
+```
+degrees_of_lewdity   93% of turns   median 16 variables moved   max 25
+destroyer           100%            median  2                   max  3
+generic_porn_game    68%            median  2                   max  6   (nav bookkeeping only)
+shady_deals          62%            median  2                   max 10
+course_of_temptation 60%            median  1                   max  7
+```
+
+The raw percentage is a poor discriminator — the **magnitude** is the signal. DoL moves an order of
+magnitude more state per turn than anything else in the corpus, and it is felt: in 74 turns it fired
+**four unrequested events** (an assault on leaving the orphanage at 07:02, a street-seduction prompt
+in transit, a friendly-stranger encounter on Loiter, and a soaking that forced an exposure chain
+through the orphanage).
+
+The contrast is the finding. **GPG: six consecutive identical loiters at the mall, zero state
+movement, zero events, byte-identical prose.**
+
+### M1 · Time to first heat
+
+| game | first screen at 3+ explicit words | reached by |
+|---|---|---|
+| `degrees_of_lewdity` | **turn 9 · 07:02, two in-game minutes** | walking out the front door |
+| `course_of_temptation` | turn 11 (backstory picker), turn 16 first playable | prologue |
+| `generic_porn_game` | **none in 29 turns / 4 in-game hours** | — |
+| `shady_deals` | none in 17 turns | — |
+| `destroyer` | none in 17 turns | — |
+
+DoL's first heat is **not sought — it is triggered**, and it is a *repeatable system* (combat), not a
+one-shot scene. That reframes the measure: the reference game's answer to "when does the player meet
+the content" is *before they have made a single meaningful choice, via a mechanic they will meet
+hundreds of times.*
+
+**No threshold is proposed from this.** Three of five games produced no heat at all in a first
+session, so a "turns to first heat" gate would fail most of the field. Tier 1 item 1 stays open, and
+this study says why: **the placement is the finding, not a number.**
+
+### R7 · Re-entry variation — the free hour's finding, and it corrects `the-surfaces.md` R6
+
+A second unstructured DoL session (43 turns, `game_explorations/dol_free/`) revisited the same
+surfaces repeatedly and diffed the rendered prose. This is the measurement the R6 lint was explicitly
+waiting on.
+
+```
+passage              visits   distinct bodies   distinct FIRST lines
+Ocean Breeze Work        8            5                  5
+Ocean Breeze             6            5                  2
+Barb Street              3            2                  1
+Domus Street             3            2                  1
+Orphanage                3            2                  1
+```
+
+**A DoL location's opening sentence is byte-identical on every visit.** Six visits to the cafe, six
+times *"You are in the Ocean Breeze Cafe."* The variation is real and it is dense — but it is not in
+the opener, and it is not banded on an ascent tier. Four separate mechanisms:
+
+1. **A condition clause appended to the identity sentence** — *"...No one is sitting outside due to
+   the rain"* becomes *"The cafe is busy, and despite the strong winds some people are sitting..."*.
+   Weather and crowd, not progression.
+2. **One presence line per NPC actually there** — *"You see Sam attending to the customers."* appears
+   only once you hold the job; *"Gwylan sits alone on the exterior balcony"* only when she is present,
+   and that is the visit where the choice count jumps 8 → 9.
+3. **The choice list itself moves** — 5 → 9 → 8 across six visits at one location, as the job
+   replaces the on-ramp and NPCs arrive and leave.
+4. **An event replaces the whole screen** — two consecutive Barb Street visits rendered a street
+   harassment scene *instead of* the location menu, then the third rendered the menu normally.
+
+And on the repeatable **action** rather than the room, variation is a scenario draw: eight cafe
+shifts produced **five distinct scenarios**, each with its own choices, one carrying a visible skill
+check — *"Take them all out at once | Dance: Impossible"*, which states not just the requirement but
+whether you currently pass it.
+
+> **`the-surfaces.md` R6 is wrong about the mechanism.** It says *"A hub re-entered daily whose first
+> paragraph never changes is a dead screen. Band it on whichever tier the location serves."* In the
+> reference game the first paragraph **never changes**, and it is the least dead game in the corpus.
+> This also explains the seam that forced R6 to become a lint: our TOML test asked whether the opener
+> carries a conditional block, which is a thing DoL does not do — so our games scored 0/22 against a
+> practice nobody follows.
+
+## 5 · The check
+
+| | |
+|---|---|
+| **Gate 20 · ceiling unchanged, denominator hardened** | 8 stands. One 2-line change made: choices with `targetType = "location"` are excluded from the count, so the gate measures decisions rather than navigation. A **no-op on every current game** (259/259 choices are `node` targets), taken so the gate cannot be tripped by a future game that authors exits as choices — `v2.py:13252` shows the engine supports them |
+| **R7 · re-entry variation** | R6's lint should count the four observed mechanisms — condition clause, presence lines, choice-list movement, event replacement — not conditional openers. `the-surfaces.md` R6 rewritten accordingly; still a lint, still no threshold |
+| **R2 · anchoring** | not gateable. Whether a choice hangs off a named object is a judgement a parser cannot make — same class as R1/R2 in `the-surfaces.md` |
+| **R3 · cost-in-label** | **✅ GRADUATED 2026-08-14 as gate 21** (`a price is on its label`), into `the-voice.md` R1 and `the-economy.md`. Money only — the field is split on stamina costs, so gating those would invent a threshold. Fires on vesper 3/7. **This extends item 2** (interface text), which was already graduated; it closes nothing, since Tier 1 closed on 8-12. The plan that commissioned this study called the label rule "Tier 1 item 4" — that was wrong, item 4 is scene prose |
+| **R4 · reason sits next to the want** | not gateable, and **`engine.md` §15 is untouched** — the study's first reading of it was wrong, corrected in §4 above |
+| **R5 · guidance** | already gated (study 2's output). **Confirmed, not changed** |
+| **R6 · world movement** | not gateable from source — it is a runtime property. Belongs with the R5/R6 lints |
+
+**Nothing in this study has been applied to `gates.py` or the reference files yet.** Two of its six
+outputs contradict shipped decisions (gate 20's denominator, `engine.md` §15), and this skill's own
+standing rule is that a contradiction between a study and a shipped rule is surfaced, not silently
+resolved.
+
+---
+
+## Appendix C · Play-study method and limits
+
+- **Instrument.** `live.js` per turn, plus a per-turn probe reading visible `a`/`button` elements
+  inside the passage container only. Sidebar chrome is excluded — it is identical on every screen,
+  so counting it would put the same floor under every game.
+- **Two instrument bugs were found and fixed mid-study, and both would have inverted a finding.**
+  (1) A text-only link count read GPG's image-button hubs as one-choice screens. (2) `live.js`'s own
+  `variables_diff` is rebaselined by the `eval` calls this study makes between turns, so it reported
+  **0/59 turns with state movement** for a game whose arousal meter was visibly climbing. M4 is
+  scored only over the 14 DoL turns after the fix, and in full for the other four games.
+- **Session lengths are uneven** — 74, 61, 29, 17, 17. The two 17-turn sessions are enough for
+  structure and guidance, **not** for M1 or for `shady_deals`' sink map. Marked untested above
+  rather than reported thin.
+- **Explicit scoring is per screen, not per beat.** It fires on config screens: DoL's body-settings
+  page hit on "nipple". Screen-level heat % here is **not** comparable to `gates.py`'s beat-level
+  floor — the same denominator caution as `REVIEW.md` O1.
+- **One player, one route, one session each.** These are existence proofs and shape measurements,
+  not coverage.
+
+---
 
 ## Log
 
@@ -907,4 +1215,5 @@ tag-stripping as word-like fragments.
 | 2026-08-12 | Study 2 (how the game talks to the player) written. Eight more engine facts verified and flagged for `engine.md`. Confirmed the authored table is `[[quest_cards]]`, not `[[quests]]` — `games/back_home/REVIEW.md` G1 corrected to match. The declare-then-check pattern now holds in both studies and is proposed as the skill's standard shape. |
 | 2026-08-12 | **Tier 1 graduated.** Studies 1–4 converted into `references/the-map.md`, `the-voice.md`, `the-economy.md` and an expanded `register.md`; 7 new gates + 1 new lint in `scripts/gates.py`; `engine.md` §22–23; `state.md` and `templates/board.toml` extended with `board.map` / `board.economy`. `back_home` now scores **12/17, exit 1** — the ten original gates still pass and every new failure is a defect it shipped with. One study output withdrawn (study 2 R4, the locked-door gate) after it contradicted `engine.md` §15. |
 | 2026-08-12 | Study 4 (how the prose is written) written on the same corpus, scored with `gates.py`'s own explicit regex. Three measured rules, one inherited, one gate. Headline: **DoL is the coldest game in its own genre** (7.5% vs a 33.3% field median), so v2's heat floor came from an outlier — which closes the `back_home` heat worry a second time, from a second direction. `back_home`'s sentences run **16 words against a field median of 10**. Second person confirmed as the genre standard, 13/17. A third extraction trap found and fixed: widget libraries and CSS were being counted as prose, poisoning the first pass entirely. |
+| 2026-08-13 | **Study 5 (what the field does in play) written — the first study in this skill grounded in playing rather than parsing.** Five games, 198 recorded turns through `twine-game-explorer`; logs in `game_explorations/study_*/study_turns.jsonl`. Headline: **the `generic_porn_game` menu outlier does not exist** (the parse counted `<img>` tags in image-button hubs; its real median is 4, not 18), and **gate 20 counts the wrong quantity** — a DoL street is 12 links of which 3–4 are decisions, the rest being onward-travel exits and a standing travel frame. Field median for *things-to-do-here* is **3, max 4**. Guidance-must-exist **confirmed 4/4**, four different mechanisms, all naming a place. `the-economy.md` R2 marked **not established** — `shady_deals` was cut short before its sinks were walked. M4 baseline established: **DoL 93% of turns, median 16 variables moved**, against a corpus median of 2. Two instrument bugs found and fixed mid-study, both of which would have inverted a finding. **Nothing applied to `gates.py` or the reference files** — two outputs contradict shipped decisions (gate 20's denominator, `engine.md` §15's locked-door ruling) and are surfaced for LO rather than resolved. |
 | 2026-08-12 | Study 3 (money & pressure) written — **the first study grounded in primary measurement of more than one game.** 18 shipped sandboxes pulled, ~62,000 passages, method and limits in Appendix B. Four measured rules + one from the failure; three gates proposed. Two extraction bugs found and fixed before trusting any number. Side result: DoL's real source settled `REVIEW.md` O1 — the reference "unit" is a whole-source passage (15,587 of them, matching `gates.py:7`'s "15.6k units"), so the explicit-floor band was never on the same scale as our location-prose measure. |

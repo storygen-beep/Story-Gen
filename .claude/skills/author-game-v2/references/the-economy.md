@@ -123,10 +123,30 @@ for in this game* asked at the point where it is still cheap to answer.
 
 | | |
 |---|---|
-| **Gate 16 · money gates something** | ≥1 condition reads the currency |
+| **Gate 16 · money gates something** | ≥1 condition reads the currency, **or** ≥1 choice prices itself in it |
 | **Gate 17 · sinks >= sources** | at least as many ways to spend as to earn |
 | **Gate 18 · no free uncapped income** | no standing surface grants currency without a cap or a cost |
+| **Gate 21 · a price is on its label** | every choice that spends currency names the amount in its text |
 
 **Whether the pressure is actually felt is deliberately not a gate.** Whether £120 against a £42 day
 *squeezes* is a play question. These three establish that a squeeze is possible; only a playthrough
 establishes that it happens.
+
+---
+
+## ⚠️ Two ways these gates read the wrong thing — both found 2026-08-14, both fixed
+
+**A `costs` block is a gate.** The engine refuses a choice the player cannot afford
+(`v2.py:12556`), but gate 16 was built from *conditions* only. A game that prices its choices
+instead of condition-gating them therefore read as **"nothing in the game reads the currency"** —
+which is how a game with seven priced choices scored zero. Gate 16 now counts either channel.
+
+**Declare your currency, or the inference will pick one.** With `board.economy.currency` unset the
+gates guess from trait names, and until 2026-08-14 they took the *first* name match. A game running
+**two real currencies** — one company-visible, one hidden and hers — had every economy gate judging
+the wrong one, the one used once instead of the one used eighteen times. The hint list also had no
+entry for `coin`, so a currency by that name was invisible outright.
+
+Selection is now by **usage**, and the chosen currency plus the runners-up are printed on gate 16's
+line so a wrong guess is visible rather than silent. **Declaring `board.economy.currency` skips all
+of this** — the declare-then-check pattern exists precisely because inference is a guess.

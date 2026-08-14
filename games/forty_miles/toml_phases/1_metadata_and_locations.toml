@@ -1,0 +1,350 @@
+# =============================================================================
+# Forty Miles — 1_metadata_and_locations
+#
+# ⚠️ [player], [[locations]], [[npcs]] and [[npcs.schedules]] MUST share this one
+#    file. TOML scoping re-parents nested tables across a file boundary.
+#
+# THE MAP (references/the-map.md R1 — a place, not a list of rooms):
+#
+#              the A-road
+#   ───────────────────────────────
+#        ┌─ THE FORECOURT ─┐            ← exterior, the hub, everything crosses it
+#        │   pumps, canopy  │
+#   THE SHOP ──────────────┤            ← ANCHOR
+#     └ THE STOCK ROOM     ├─ THE SHOWER BLOCK   (10 min across the apron)
+#                          ├─ THE LORRY PARK     (10 min)   └ BAY NINE (5 min)
+#                          └─ THE TYRE BAY       (10 min)   └ THE CARAVAN (5 min)
+#
+# A stranger could draw it: road, canopy, shop, apron, block, park, bay, van.
+# Signed off in the board phase, in the ledger.
+#
+# ANCHOR = the_shop. It carries >=25% of location prose (gate 1) and it is
+# re-enterable at every hour — the measured failure was an anchor sealed in a
+# room the player could not return to.
+#
+# ⚠️ TRAVEL COST SITS ON THE APRON CROSSINGS ONLY (engine.md §22), never on
+#    rooms inside the shop building. Ten minutes each way is the whole premise:
+#    she is the only person on site, so every minute in the block or the park is
+#    a minute the shop stands open and unwatched. That is what gives `count`
+#    its teeth.
+#
+# Location NAMES are UI (references/the-voice.md R1) — they say what is through
+# the door. "The Shower Block", not "The Block".
+# =============================================================================
+
+[player]
+id           = "player"
+name         = "Robyn"
+description  = "Twenty-six, on nights, cash in hand, no contract. Six thousand pounds down to a man who has never once said what the six thousand was for."
+customizable = false      # deferred: needs [[player.customization_fields]]; v0.1 ships fixed
+
+[player.core_traits]
+# layer 1 — ratcheting ascent tiers (rungs at 15/35/55)
+nights = 0
+seen   = 0
+trade  = 0
+count  = 100     # counterweight: Nunn's reconciliation. Only ever falls.
+# layer 2 — volatile state
+arousal = 0
+stress  = 0
+energy  = 100
+money   = 30     # ⚠️ engine.md §21 — EVERY money effect carries clamp = false.
+                 #    Clamped, money caps at 100, the 245 Friday draw is
+                 #    unpayable, and the build stays green the whole way down.
+# internals
+takings_tonight = 0
+bay_slot        = 1
+
+# Decay is a POSITIVE MAGNITUDE — the validator rejects negatives.
+[player.trait_decay]
+energy = 9
+
+
+# =============================================================================
+# LOCATIONS — 8. One anchor, six working places, one exterior.
+# =============================================================================
+
+# ── ANCHOR — the lit glass box, and every hour of her shift is spent in it ────
+[[locations]]
+id                   = "the_shop"
+name                 = "The Shop"
+description          = "Strip lights, four aisles, a hot counter that goes off at eleven, and a coffee machine that takes ninety seconds and sounds like a drill. Four tables in the window where the drivers sit. The glass runs the whole front, so from the road you are the only lit thing for forty miles, and from in here the road is black and you cannot see who is stood in it."
+image                = "locations/the_shop.jpg"
+image_search_queries = ["petrol station shop interior night strip lights aisles", "24 hour truck stop convenience store counter night"]
+entry_from           = "the_forecourt"
+navigation_order     = ["the_stock_room"]
+
+# ── behind the shop. Cages, the cold store, and the padlocked door ───────────
+[[locations]]
+id                   = "the_stock_room"
+name                 = "The Stock Room"
+description          = "Roll cages, a cold store with a door that does not sit right, and the CCTV recorder on a shelf with its little green light. The corridor between the cold store and the back wall is eleven feet long and there is no camera on any of it. At the end of it there is a door with a padlock that is not the company's padlock."
+image                = "locations/the_stock_room.jpg"
+image_search_queries = ["shop stock room roll cages cold store door", "back room storage shelves strip light dim"]
+entry_from           = "the_shop"
+navigation_order     = []
+
+# ── the crudest repeatable surface in the game, and she holds the key ────────
+[[locations]]
+id                   = "the_showers"
+name                 = "The Shower Block"
+description          = "A flat-roofed brick block across the apron with four cubicles, a bench, and a dryer that costs a pound. Cubicle three's lock has been broken since before she started and the sign about it fell off in February. The extractor runs all night whether anyone is in here or not, so from outside there is no way of telling."
+image                = "locations/the_showers.jpg"
+image_search_queries = ["truck stop driver shower block cubicles tiled", "public shower room bench tiles dim wet floor"]
+entry_from           = "the_forecourt"
+navigation_order     = []
+costs                = { time = 10, energy = 2 }
+
+# ── the renewable source of faces, and where SEEN gets its consequence ───────
+[[locations]]
+id                   = "the_lorry_park"
+name                 = "The Lorry Park"
+description          = "Room for thirty and most nights there are nine. Two sodium lamps cover the first four rows and past the last lamp there is nothing but sidelights and the shape of cabs. They talk to each other on channel nineteen down there. The gravel is loose, so nobody crosses this park quietly, including you."
+image                = "locations/the_lorry_park.jpg"
+image_search_queries = ["lorry park at night trucks parked sodium lights", "truck stop parking lot dark rows of cabs night"]
+entry_from           = "the_forecourt"
+navigation_order     = ["bay_9"]
+costs                = { time = 10, energy = 2 }
+
+# ── THE ROTATING SLOT ────────────────────────────────────────────────────────
+# One bay, one occupant, swapped every few releases. Content authored HERE and
+# in 3_activities.toml is ROOM-SCOPED and names the occupant by ROLE — "the
+# bay-nine driver" — never by name. TENANT-scoped content lives in
+# 5_scenes.toml and dies with him. That split is what makes a rotation cost one
+# [[npcs]] block and one scene file instead of a rewrite of this room.
+[[locations]]
+id                   = "bay_9"
+name                 = "Bay Nine"
+description          = "The last bay before the lamp gives out, which is why it is the one nobody books and the one the agency lads end up in. A cab with a curtain behind the seats, a bunk the width of a door, and a window you have to knock on twice because the first knock never gets heard over the night heater."
+image                = "locations/bay_9.jpg"
+image_search_queries = ["lorry cab sleeper bunk interior curtain", "truck sleeper cab bed night interior dim"]
+entry_from           = "the_lorry_park"
+navigation_order     = []
+costs                = { time = 5 }
+
+# ── the only other body on site between ten and six ──────────────────────────
+[[locations]]
+id                   = "the_tyre_bay"
+name                 = "The Tyre Bay"
+description          = "An open-fronted shed at the edge of the plot with a roller door he never brings all the way down. A compressor, a pit, a kettle, a calendar four years out of date, and a bunk in the back behind a sheet of ply, because the wage here does not cover a room anywhere it would be worth having one."
+image                = "locations/the_tyre_bay.jpg"
+image_search_queries = ["tyre fitting workshop garage bay night open shutter", "roadside truck tyre repair shed compressor dim"]
+entry_from           = "the_forecourt"
+navigation_order     = ["her_static"]
+costs                = { time = 10, energy = 2 }
+
+# ── hers, and Nunn's ─────────────────────────────────────────────────────────
+[[locations]]
+id                   = "her_static"
+name                 = "The Caravan"
+description          = "A static behind the tyre bay with a fan heater, a two-ring hob, and a bed at the end that gets the cold off the window. Everything she owns is in two bags under it. Nunn owns the van the same way he owns the shop, and forty-five pounds of every Friday is for standing it on his gravel."
+image                = "locations/her_static.jpg"
+image_search_queries = ["old static caravan interior bed night cramped", "small trailer home interior dim bed window"]
+entry_from           = "the_tyre_bay"
+navigation_order     = []
+costs                = { time = 5 }
+
+# ── the exterior — everything crosses it, and it is lit like a stage ─────────
+[[locations]]
+id                   = "the_forecourt"
+name                 = "The Forecourt"
+description          = "Six pumps under a canopy that throws more light than the whole rest of the county. A night hatch in the shop wall with a steel drawer, a mast with four cameras on it pointed at the pumps and nothing else, and beyond the canopy the road, which at this hour is a black line with something coming down it every eleven minutes."
+image                = "locations/the_forecourt.jpg"
+image_search_queries = ["petrol station forecourt at night canopy lights empty", "fuel pumps night bright canopy dark road"]
+navigation_order     = ["the_shop", "the_showers", "the_lorry_park", "the_tyre_bay"]
+
+
+# =============================================================================
+# CHARACTERS — 6. Each needs >=1 standing surface and >=1 schedule row (gate 6).
+#
+# ⚠️ SCHEDULES BIND TO THE [[npcs]] BLOCK ABOVE THEM. Never insert a new
+#    [[npcs]] between an existing character and its schedule rows — they get
+#    silently re-parented onto the new one.
+#
+# ⚠️ AN OVERNIGHT WINDOW ON SPECIFIC WEEKDAYS NEEDS TWO ROWS. Verified in
+#    source, and it contradicts a flat reading of the-board.md §2:
+#
+#      v2.py:3446   if (!setup._weekdayMatches(ds.weekdays, todayIndex)) continue;
+#      v2.py:3448   if (!setup.isCurrentTimeSlot(ds.start_time, ds.end_time)) continue;
+#
+#    `isCurrentTimeSlot` DOES handle the 22:00->06:00 wrap (v2.py:3784, the
+#    `endTotal < startTotal` branch). But `todayIndex` is TODAY, checked
+#    separately and first. So `weekdays = [1], 23:00-06:00` puts Hal in the park
+#    on Tuesday night and DELETES him at midnight, because Wednesday is not in
+#    his list. One row is correct only when weekdays covers all seven — which is
+#    exactly what the skill's example does, which is how the caveat stays hidden.
+#    Tam is every night, so he gets one row. Everyone day-specific gets two.
+# =============================================================================
+
+# ── the handover, and the only judgement she respects ────────────────────────
+[[npcs]]
+id          = "npc_bev"
+name        = "Bev"
+description = "Forty-four, day manager, eleven years on this site. She has handed this shop over to four people before Robyn and two of them lasted a fortnight. She tells you the rules on the first night. She does not tell you which of them she keeps."
+portrait    = "bev.jpg"
+core_traits = { relation = 0, lust = 0 }
+flag_keys   = []
+arc_stages  = ["Day manager", "Straight with you", "Levelling", "In it too"]
+
+[[npcs.schedules]]
+location   = "the_shop"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "21:45"
+end_time   = "22:15"
+activity   = "handing over, with her coat already on"
+
+[[npcs.schedules]]
+location   = "the_shop"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "06:00"
+end_time   = "14:00"
+activity   = "running the day shift"
+
+[[npcs.schedules]]
+location   = "the_shop"
+weekdays   = [4, 5]
+start_time = "14:00"
+end_time   = "21:45"
+activity   = "on a double, and not happy about it"
+
+
+# ── the face on the obligation ───────────────────────────────────────────────
+[[npcs]]
+id          = "npc_nunn"
+name        = "Gerry Nunn"
+description = "Owns the site, the caravan, and six thousand pounds of her. Fifties, unhurried, does the Friday collection from the car with the engine running. He has never once said what the money was for, and she has never once asked, and by now the not-asking is the arrangement."
+portrait    = "nunn.jpg"
+core_traits = { relation = 0, lust = 0 }
+flag_keys   = []
+arc_stages  = ["The owner", "The note", "Turning the engine off", "Not in money"]
+
+[[npcs.schedules]]
+location   = "the_forecourt"
+weekdays   = [4]
+start_time = "18:00"
+end_time   = "20:00"
+activity   = "parked under the canopy with the window down"
+
+# Deliberately inside her sleep. Catching him on a Tuesday costs her the day.
+[[npcs.schedules]]
+location   = "the_shop"
+weekdays   = [1]
+start_time = "10:00"
+end_time   = "12:00"
+activity   = "going through the till roll with Bev"
+
+
+# ── the one with nothing over her ────────────────────────────────────────────
+[[npcs]]
+id          = "npc_ossie"
+name        = "Ossie"
+description = "Runs the tyre bay and sleeps in the back of it on the same money she is on. Thirties, does the motorway callouts at two in the morning, and is the only man on this plot who has never needed anything from her. He looks away when she comes in, every time, and has not stopped doing it in a year."
+portrait    = "ossie.jpg"
+core_traits = { relation = 0, lust = 0 }
+flag_keys   = []
+arc_stages  = ["The fitter", "Neighbour", "Awake at the same hours", "Not looking away"]
+
+[[npcs.schedules]]
+location   = "the_tyre_bay"
+weekdays   = [0, 1, 2, 3, 4, 5]
+start_time = "08:00"
+end_time   = "18:00"
+activity   = "working the bay"
+
+# Weekend nights, split across the midnight boundary — see the header note.
+[[npcs.schedules]]
+location   = "the_tyre_bay"
+weekdays   = [4, 5]
+start_time = "22:00"
+end_time   = "23:59"
+activity   = "light on behind the ply, not asleep"
+
+[[npcs.schedules]]
+location   = "the_tyre_bay"
+weekdays   = [5, 6]
+start_time = "00:00"
+end_time   = "02:00"
+activity   = "light on behind the ply, not asleep"
+
+
+# ── Tuesdays, and he has never asked her for anything ────────────────────────
+[[npcs]]
+id          = "npc_hal"
+name        = "Hal"
+description = "Fridge trailer, bay four, Tuesdays. In at eleven, gone by six, buys a tea and a paper at one in the morning and says about nine words. Married, sixty, and in a year of Tuesdays he has not once asked her for anything at all, which she has started to find harder than being asked."
+portrait    = "hal.jpg"
+core_traits = { relation = 0, lust = 0 }
+flag_keys   = []
+arc_stages  = ["Tuesday", "The tea and the paper", "Half twelve instead of one", "Still not saying it"]
+
+[[npcs.schedules]]
+location   = "the_lorry_park"
+weekdays   = [1]
+start_time = "23:00"
+end_time   = "23:59"
+activity   = "backing onto bay four"
+
+[[npcs.schedules]]
+location   = "the_shop"
+weekdays   = [2]
+start_time = "00:45"
+end_time   = "01:30"
+activity   = "at the second table with a tea and the paper"
+
+[[npcs.schedules]]
+location   = "the_lorry_park"
+weekdays   = [2]
+start_time = "01:30"
+end_time   = "06:00"
+activity   = "curtained up in bay four"
+
+
+# ── the broadcast ────────────────────────────────────────────────────────────
+[[npcs]]
+id          = "npc_denny"
+name        = "Denny"
+description = "Tipper work, Thursdays and Sundays, and he knows every cab in this park by the sound of it before he sees it. Loud in a way that is doing a job. What Denny decides about her on a Thursday is on channel nineteen by Sunday and the length of this road by the week after."
+portrait    = "denny.jpg"
+core_traits = { relation = 0, lust = 0 }
+flag_keys   = []
+arc_stages  = ["The loud one", "Talking about you", "Talking to you", "Broadcasting"]
+
+[[npcs.schedules]]
+location   = "the_lorry_park"
+weekdays   = [3, 6]
+start_time = "22:00"
+end_time   = "23:59"
+activity   = "holding court between the cabs"
+
+[[npcs.schedules]]
+location   = "the_shop"
+weekdays   = [4, 0]
+start_time = "00:00"
+end_time   = "01:00"
+activity   = "at the counter, talking to the whole shop"
+
+[[npcs.schedules]]
+location   = "the_lorry_park"
+weekdays   = [4, 0]
+start_time = "01:00"
+end_time   = "02:00"
+activity   = "back at the cabs with an audience"
+
+
+# ── THE ROTATING TENANT. Everything specific to him is 5_scenes.toml ─────────
+[[npcs]]
+id          = "npc_tam"
+name        = "Tam"
+description = "Agency, first month, bay nine. Sleeping in the cab because the digs money has not come through and he would rather she did not work that out. Twenty-three, apologises before he has done anything, and is the only man on this site who has nothing at all to trade."
+portrait    = "tam.jpg"
+core_traits = { relation = 0, lust = 0 }
+flag_keys   = []
+arc_stages  = ["Bay nine", "The one who says sorry", "Waiting up", "Month's end"]
+
+# Every night, so the wrap is safe in ONE row — weekdays covers all seven.
+[[npcs.schedules]]
+location   = "bay_9"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "20:00"
+end_time   = "06:00"
+activity   = "in the cab with the curtain half across"

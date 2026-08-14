@@ -38,6 +38,26 @@ anyone. *The Box Room* becomes *The Lodger's Room* and says who and why in two w
 him wait*, *Come down in what you slept in*. These arrive with the scene already on screen, they are
 choices in a conversation, and evocative is correct there. Changing them is a regression.
 
+**And the label carries its own cost.** Measured by playing five shipped games — every one that
+charges the player states the charge on the button, before the click:
+
+```
+Buy coffee (0:02 £2)                  time AND money
+Flirt | Promiscuity 1                 which meter it feeds, and the tier
+Long Sleep (10:00) Rest >>>>>         duration and magnitude
+Take a walk (-0.5 energy)
+Take them all out at once | Dance: Impossible      ← the check, and whether you pass it
+```
+
+That last one is the shape worth stealing: the label names the skill check **and its current
+verdict**, so a player never spends a turn discovering they were never eligible. Failing it still
+paid £8.50 — the cost is information, not a wall.
+
+**Money is the one that is gated** (gate 21). A price the player cannot see is a plan they cannot
+make, and they are budgeting against a stated deadline. Stamina-type costs are *not* gated: two
+corpus games label them and the reference game does not, so a rule there would be invented rather
+than measured.
+
 ### R2 · Every ascent tier carries a visible ladder
 
 A v2 game has **no mission and no ending**, so the top of the guidance page is not a story spine —
@@ -106,6 +126,10 @@ Never dangle a live goal bullet that cannot flip in this build. That is a fake o
 - **The sidebar next-row and the guidance page call the identical renderer.** There is no separate
   "sidebar quest" — edit one card and both surfaces move together. A character with no card renders
   a blank next-row.
+
+**R1's cost clause is gated as gate 21** (`a price is on its label`) — a choice that spends the
+currency must name the amount. The rest of R1 is not gateable: whether *The bench* is resolvable is a
+judgement a parser cannot make.
 
 Field reference and citations: `references/engine.md`.
 

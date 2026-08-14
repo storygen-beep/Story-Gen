@@ -103,11 +103,28 @@ fails otherwise.
 > other except the lead — carrying zero bound canvases and zero schedule rows. Heavily
 > written, reachable nowhere.
 
-**Overnight windows are supported.** `setup.isCurrentTimeSlot` handles the wrap explicitly —
-`if (endTotal < startTotal) return currentTotal >= startTotal || currentTotal < endTotal;`
-(`generators/v2.py`, the `isCurrentTimeSlot` definition; call sites at `:3448`, `:3465`,
-`:3612`). So `22:00`–`04:00` is one row, not two. An older note in our own memory claimed the
-opposite; the source says otherwise, so verify live before splitting a window.
+**Overnight windows are supported — but ONLY on a row that covers every weekday.** The wrap and
+the weekday are two separate checks, and the weekday one runs first against **today**:
+
+```
+v2.py:3446   if (!setup._weekdayMatches(ds.weekdays, todayIndex)) continue;
+v2.py:3448   if (!setup.isCurrentTimeSlot(ds.start_time, ds.end_time)) continue;
+```
+
+`isCurrentTimeSlot` does handle the wrap (`if (endTotal < startTotal) return currentTotal >=
+startTotal || currentTotal < endTotal;`, the `isCurrentTimeSlot` definition at `v2.py:3784`). So
+`weekdays = [0,1,2,3,4,5,6]`, `22:00`–`04:00` is correctly **one** row.
+
+⚠️ **But `weekdays = [1]`, `23:00`–`06:00` puts the character on site on Tuesday night and DELETES
+them at midnight**, because `todayIndex` is now Wednesday and Wednesday is not in the list. A
+day-specific overnight window needs **two rows** — `[1] 23:00–23:59` and `[2] 00:00–06:00`.
+
+This section previously said "`22:00`–`04:00` is one row, not two" with no weekday qualifier, and
+its own example happens to use all seven days — which is exactly why the caveat stayed invisible.
+An older note in project memory claimed overnight windows always need two rows. **Both were half
+right**, and a game following either one blindly loses half its night cast or doubles rows it did
+not need to. Verified live in a built game: nine presence probes across the midnight and week
+boundaries, all correct only once the day-specific rows were split.
 
 **Ordering trap:** `[[npcs.schedules]]` binds to the `[[npcs]]` block above it. Inserting a
 new character between an existing one and its schedules silently re-parents them.

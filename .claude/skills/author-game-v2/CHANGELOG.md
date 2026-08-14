@@ -5,6 +5,220 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-14 — **The overnight-schedule rule was true only for the example it was written from**
+
+`references/the-board.md` §2 rewrites the overnight-window paragraph to name the weekday caveat, with
+the two source lines and the two-row fix.
+
+**What was wrong.** The section said *"`22:00`–`04:00` is one row, not two"* with no qualifier. That
+holds only when `weekdays` covers all seven days — which is exactly what the code sample directly
+above it does, so the exception was invisible to anyone reading the rule off the page. The engine
+checks the weekday and the time wrap **separately**, weekday first, against *today*:
+
+```
+v2.py:3446   if (!setup._weekdayMatches(ds.weekdays, todayIndex)) continue;
+v2.py:3448   if (!setup.isCurrentTimeSlot(ds.start_time, ds.end_time)) continue;
+```
+
+So `weekdays = [1], 23:00–06:00` places the character on Tuesday night and **deletes them at
+midnight**. A game with a Tuesday-night regular, a Thursday/Sunday regular and weekend-night rows —
+i.e. any game whose cast is not on site every single night — silently loses most of its night
+presence, with no build error and every gate green.
+
+**Why it matters beyond one game.** Presence failures are invisible to `gates.py`: gate 6 checks that
+a character *has* a schedule row, never that the row resolves at the hours the fiction claims. This
+was a rule that could not be caught downstream.
+
+**A note on the prior claim this paragraph rebutted.** An older project-memory note said overnight
+windows always need two rows, "because a single window can't wrap". That stated *reason* is
+contradicted by source — the `endTotal < startTotal` branch is present in **both** `v1.py:3145` and
+`v2.py:3784`, so the wrap itself works in either generator. Its *recipe* is nonetheless right
+whenever the row is day-specific, for the weekday reason above. The skill then over-corrected from
+"the recipe is unnecessary" to "one row, always", and neither account had separated the two cases.
+Net: **the wrap is not the variable; the weekday list is.**
+
+**How verified.** Read at source, then proved in a built game rather than on paper: nine presence
+probes driven through the engine's own `setup.getNpcLocation()` across the midnight and week
+boundaries (Tue 23:00 → Wed 01:00 → Wed 04:00; Thu 22:00 → Fri 00:00; Sun → Mon; plus an
+all-seven-days row left as one). All nine correct only after the day-specific rows were split;
+the all-seven-days row stays a single row and still resolves.
+
+---
+
+## 2026-08-14 — **The field's most consistent shape was in a study file the authoring path never reads**
+
+`references/the-surfaces.md` gains **R2b · every choice hangs off a named object in the prose**, with
+a worked comparison at the top of the file, and `SKILL.md`'s surfaces callout now names it inline.
+
+**Why this was urgent.** Study 5 found this in three of five played games independently, and called
+it *"the single most consistent shape in the corpus"* — but it lived only in `DOCTRINE_GAPS.md`,
+which this skill's own inventory calls **"the trail, not the doctrine."** Nothing on the authoring
+path pointed at it. An author following the dispatch table would have produced correct *counts* with
+no anchoring: eight choices in a flat list rather than eight choices under four sentences. That is
+precisely the difference between the failure case's front desk and the reference game's bedroom, so
+the rule that best predicts whether a location reads as a room was unreachable from the phase that
+builds locations.
+
+Found while sanity-checking whether a **bare** prompt — `/author-game-v2 new game, female
+protagonist, give me a few ideas` — would be a fair test of the skill. It would not have been: the
+skill could not have taught the rule, and a loaded prompt would have tested the operator instead.
+
+**Also moved:** study 5's play-measured figure for how much a location offers — **median 3 things to
+do, max 6**, counting only decisions and excluding onward travel and standing affordances. It now
+sits beside the existing 18-sandbox parse figures with a note reconciling them, since the two count
+different things and disagree by a factor of three otherwise.
+
+R2b is **not gated and says so**, with the reason: a parser can see that a choice exists and that a
+paragraph exists, but not whether the paragraph names the thing the choice acts on. It is flagged in
+the file's checked-table as the highest-value ungated rule there.
+
+**No gate, no threshold, no code changed. Scores untouched:** steam 17/19, back_home 13/18.
+
+---
+
+## 2026-08-14 — **Gate 21 graduates study 5's one gateable rule — and finds two economy gates reading the wrong channel**
+
+Study 5 named exactly one output as gateable: *a choice with a declared cost whose label omits it is
+checkable against the TOML.* Graduating it turned up two pre-existing defects in the economy gates
+that had nothing to do with study 5, and both were silently wrong on a shipped game.
+
+**`scripts/gates.py` — gate 21, `a price is on its label`.** Every choice that spends the currency
+must name the amount in its text. Measured by playing: every corpus game that charges money puts the
+price on the button, and the player is budgeting against a stated deadline. **Money only** —
+stamina-type costs are counted in the headline and never judged, because two corpus games label them
+and the reference game does not, and a rule there would be an invented threshold, which is the
+failure that demoted R5/R6. Fires on vesper: **3 of 7 coin choices hide their price**, all three
+purchases (`Pay the toll.` at 5, `Buy a weapon` at 40, `Buy infiltration gear` at 30) while four
+others name it — the same game contradicting itself is the tell.
+
+**Bug 1 — a `costs` block is a gate, and gate 16 could not see it.** The engine refuses a choice the
+player cannot afford (`v2.py:12556`), but `reads` is built from *conditions* only (`gates.py:349`).
+A game that prices its choices rather than condition-gating them read as *"nothing in the game reads
+the currency"*. Vesper spends coin on seven choices and scored **zero**. Gate 16 now counts either
+channel and says which.
+
+**Bug 2 — the currency inference took the first name match, and vesper has two real currencies.**
+`money` is Credits, company-visible; `coin` is hers and hidden, *"the company can't see"*. `money`
+is used once, `coin` eighteen times — and the gates were judging `money`. Worse, `CURRENCY_HINT` had
+no entry for `coin` at all, so a currency by that name was invisible outright. **This is the same bug
+class already fixed once in the corpus extractor**, where a decoy `randomMoney` beat the real
+currency on name alone; the fix never came back to `gates.py`. Selection is now by usage, the hint
+list gained `coin|gold`, and gate 16 prints the chosen currency and its runners-up so a wrong guess
+is visible rather than silent. Declaring `board.economy.currency` skips the guess entirely.
+
+**Doctrine.** `references/the-voice.md` R1 gains the cost clause (with the shape worth stealing —
+DoL's *"Take them all out at once | Dance: Impossible"*, a label that states the check **and whether
+you currently pass it**, where failing still paid). `references/the-economy.md` gains gate 21 in its
+checked table plus a warning section on both bugs. `DOCTRINE_GAPS.md` study 5 R3 marked graduated —
+and corrected: it extends **item 2** (interface text), which was already closed on 8-12. The plan
+that commissioned the study called the label rule "Tier 1 item 4"; item 4 is scene prose.
+
+**Verified.** steam **17/19** and back_home **13/18**, both unchanged. Vesper **6/17 → 6/18** — the
+price gate now judges instead of reading n/a, and its economy gates moved from the wrong currency to
+the right one: `money gates something` FAIL→PASS on the costs fix, and the new gate fails on three
+real hidden prices.
+
+---
+
+## 2026-08-13 — **Study 5: the field, played rather than parsed — and gate 20 counts the wrong thing**
+
+`DOCTRINE_GAPS.md` gains Study 5 and Appendix C. This is the first study in the skill grounded in
+playing games rather than reading their source, which the skill's own `references/agents.md` had
+already argued for: *"the three games that were actually played produced every single heat finding
+in the corpus, and the twenty-seven that were only parsed produced none."*
+
+**What changed.** `DOCTRINE_GAPS.md` only — Study 5, Appendix C, and a Log row. **No reference file
+and no gate was touched**, deliberately: two of the study's six outputs contradict decisions already
+shipped, and resolving those is LO's call, not a silent edit.
+
+**Why.** Three rules were live in `gates.py` and the reference files as inferences nobody had ever
+observed — gate 20's 8-choice cap, guidance-must-exist, and `the-economy.md` R2's spread requirement.
+
+**What it found.**
+
+- **The `generic_porn_game` menu outlier does not exist.** The corpus parse put it at a median of 18
+  links/screen, which was the single strongest argument that our cap was too low. It builds its hubs
+  out of image buttons, and the parse counted the `<img>` tags. Real median: **4**.
+- **Gate 20 counts the wrong quantity.** Every screen above ~12 choices in the corpus is a builder,
+  roster, wardrobe or tracker. Among play surfaces, only DoL's streets exceed 8 — and a 12-link DoL
+  street is 4 onward-travel exits + 4 standing travel affordances + **3–4 actual decisions**. Field
+  median for things-to-do-here is **3, max 4**. Fourth denominator mismatch in this skill's history.
+- **Guidance-must-exist confirmed 4/4**, by four different mechanisms, all always-reachable, all
+  naming a place.
+- **`the-economy.md` R2 marked *not established*** — the `shady_deals` session ended at 17 turns,
+  before its sinks were walked. Recorded as untested rather than reported thin.
+- **`engine.md` §15 is now contradicted by four games.** Every corpus door states its own
+  requirement, including the exact tier (*"Skulduggery required: D"*, *"(Need Exhibitionism 2)"*).
+  The locked-door gate was withdrawn on 8-12 *because* §15 ruled the other way; it is re-opened here
+  on evidence that did not exist then, and flagged for revision rather than re-added.
+- **M4 baseline**, which we had no number for at all: DoL moves state on **93% of turns, median 16
+  variables**, against a corpus median of 2. `generic_porn_game` ran six identical mall loiters with
+  zero state movement and byte-identical prose.
+
+**How verified.** 198 turns across five games through `.claude/skills/twine-game-explorer/scripts/live.js`,
+every turn logged to `game_explorations/study_*/study_turns.jsonl` with passage, visible choices,
+engine state snapshot and explicit hits scored by `gates.py`'s own frozen `EXPLICIT` regex. Two
+instrument bugs were caught and fixed mid-study, both of which would have inverted a finding — a
+text-only link count that read image-button hubs as one-choice screens, and `live.js`'s
+`variables_diff` being rebaselined by this study's own `eval` calls, which reported 0/59 turns of
+state movement for a game whose arousal meter was visibly climbing. Scores unchanged (nothing in
+`gates.py` was edited): **steam 17/19, back_home 13/18, vesper 6/17.** (Vesper read 5/17 on one
+mid-session run and 6/17 before and after — a concurrent session is editing that game. Neither
+number is attributable to anything here.)
+
+**Free-play follow-up, same day.** A second unstructured DoL session (43 turns,
+`game_explorations/dol_free/`) revisited surfaces repeatedly and diffed the rendered prose — the one
+measurement `the-surfaces.md` R6 said it was waiting for: *"A threshold arrives when the play study
+does."*
+
+**`references/the-surfaces.md` R6 rewritten.** It said *"A hub re-entered daily whose first paragraph
+never changes is a dead screen. Band it on whichever tier the location serves."* Measured: a DoL
+location's opening sentence is **byte-identical on every visit** — six visits to one cafe, six times
+the same first sentence — and it is the least dead game in the corpus. The variation is real and
+dense but lives in four other places: a condition clause appended to the identity sentence (weather
+and crowd, not progression), one presence line per NPC actually there, movement in the choice list
+itself (5 → 9 → 8 across six visits), and events that replace the whole screen. On a repeatable
+*action* rather than a room, variation is a scenario draw — eight cafe shifts produced five distinct
+scenarios.
+
+This also explains the seam that forced R6 to become a lint on 8-12: our TOML test asked whether the
+opener carries a conditional block, so our games scored **0/22, 2/12, 11/29** against a practice the
+reference game does not follow. R6 stays a lint with no threshold; what changed is that we now know
+what to count. `DOCTRINE_GAPS.md` study 5 gains section R7 with the visit-diff table.
+
+Also observed and worth keeping: DoL's labels state not just a requirement but whether you currently
+meet it — *"Take them all out at once | Dance: Impossible"* — and failing that check still pays
+(£8.50, minus respect). Free play surfaced it; a cost-in-label checklist would not have asked.
+
+**Ruling on the two flagged items, same day — and both inverted on reading the source.**
+
+**`engine.md` §15 stands unchanged. The study's claim that it was contradicted was wrong.** §15
+governs `locked_text`, which **replaces** the action label — *"the player never sees what the action
+was called"* — and prefers the want. Re-read against the four field doors: DoL's street label is
+`Strip club (0:01)` with the opening hours on the passage *behind* it; CoT's is `[1] Strip` with the
+Exhibitionism requirement in the body *after* clicking; shady's is `Check the local stroll.[7]` with
+the gate in *adjacent* prose; GPG's `Enter (CLOSED)` is want **plus** suffix. **All four keep the
+want on the label**, which is what §15 asks for. The study had compared a label-replacement rule
+against evidence about where reasons are *placed* — a different axis, and the same denominator error
+in new clothes. The withdrawn locked-door gate stays withdrawn. `DOCTRINE_GAPS.md` R4 rewritten with
+the correction kept visible rather than edited away.
+
+**Gate 20's ceiling of 8 stands; its denominator was never the problem.** The decisive fact came
+from the code, not the play log: **259 of 259 choices in `steam` and `back_home` carry
+`targetType = "node"`** — our engine renders location-to-location navigation as chrome, so gate 20
+already counted decisions rather than links. The "12 links vs 23 choices" mismatch was in the
+study's own comparison. `scripts/gates.py` G20 changed anyway, two lines: choices with
+`targetType = "location"` are excluded, and the gate now reports "decisions" rather than "choices".
+A **no-op today**, taken because the engine does support location targets (`v2.py:13252`). The
+ceiling was **not** lowered to the field maximum of 6 — five games on one route each cannot carry
+that precision, which is the failure that demoted R5 and R6.
+
+**Verified:** scores identical before and after the code change — **steam 17/19, back_home 13/18,
+vesper 6/17** — and G20 still fires on steam with its wording updated
+(`9 location screens offer more than 8 decisions · hub_scrub_room @the_scrub_room: 17 decisions`).
+
+---
+
 ## 2026-08-13 — **A goal-less card draws no frame, and that is how a finished arc ends up looking live**
 
 `references/engine.md` §23 documented the three render frames in the right order and stopped there,
