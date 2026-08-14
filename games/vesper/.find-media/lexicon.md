@@ -992,3 +992,228 @@ seeds touched. `aftermath` reads like a mood word but **measures like a tag word
    150-350 expectation at 305. The measurement now has two independent runs behind it.
 3. **A cum-aftermath shelf is gif-dominant even on the animated axis** — 305 options split
    270 gif / 35 true video (~11%). Set expectations accordingly.
+
+---
+
+## 2026-08-14 — the 23-slot Mercer/Kess v3 harvest (4,863 options, 100 chips, 0 installed)
+
+23 slots, one agent each, rolling cap 4. Every line below was measured on a live grid this day.
+Where a finding CORRECTS an older row in this file, it says so.
+
+### ⚠️ THE MALE-BODY AXIS — four tokens, only one works
+
+| token | what it actually buys | verdict |
+|---|---|---|
+| `heavyset` | **the WOMAN.** Reads as a BBW-aisle token (`bbwgirls.club` surfaces in the histogram); does NOT force a heavy male | **POISON for a male-build beat** |
+| `grandpa` | age WITHOUT the body — returns lean/thin old men, and adds a blowjob leak | **THIN** |
+| bare `old man` / `older man` | age, but on a NON-ORAL query it aisle-shifts to BLOWJOB — `blovjob.com` rose to TOP host on `anal from behind old man homemade gif`, plus a gay/sissy tail | **LEAKY — needs `fat`** |
+| **`fat old man`** | genuinely heavy AND older males. Killed the blowjob leak outright (blovjob 9→1) | **CONFIRMED 7x across 6 slots. The only reliable heavy-male token.** |
+
+⚠️ **`heavy` is absorbed by an adjacent verb.** `heavy older man drinking` parses as *heavy drinking* — it
+returned gaunt 80-somethings and swamped the grid with the alcoholism-awareness stock aisle. One-token swap
+to `fat` fixed both defects at once. **THE CLASS: an adjective that doubles as an intensity adverb gets eaten
+by the verb beside it.** `fat` cannot be absorbed that way.
+
+### ✅ `fat old man` + `prone bone` COMPOSE — and this breaks the crop-out
+
+The standing measurement is that this corpus crops the man out (27 of 28 clips torso-or-legs, one face).
+**That is a property of the AFTERMATH vocabulary, not of the corpus.** Measured on both drain slots:
+aftermath-vocabulary queries ran ~90% him-absent; `fat old man` + `prone bone` queries showed the man in
+**70–80% of tiles**, frequently full-length flat on top of a face-down woman — the beat's literal shape.
+**This is the most actionable string the run produced.** It partially refutes today's own earlier
+"heavy-male and anal trade off" note: the two tokens compose, at some cost to anal share.
+
+### Position and posture tokens
+
+- ✅ **`doggystyle` composes cleanly with a FINISH anchor and buys the POSITION.** It does NOT outrank the
+  finish term the way pace words do. Confirmed on 2 slots. The old rule (position names leave porn) is
+  correct only for a position name ALONE — it cannot CARRY a query, but it can STEER an anchored one.
+- ✅ **`bent over bed` SURVIVES.** Corrects the blanket "room/setting words drop silently" rule: `bed` here is
+  **ACT-FURNITURE, not setting** ("Bent Over Bed Porn GIFs", "BENT OVER ANAL" are live tag pages). Best
+  server of the over-an-edge posture; confirmed 3x. ⚠️ Its tail dilutes into CLOTHED-butt photo stills
+  (TikTok, Shutterstock, Men's Health) when the act anchor is weak.
+- ✅ **`prone bone` is the best-behaved anal token measured** — zero leak and, unusually, it does NOT degrade
+  in the deep tail ("Prone Bone Anal" is its own tag). It is face-down-FLAT, not bent-over-an-EDGE.
+- ⚠️ **`deep stroking` leaks to the HANDJOB aisle** — `stroking` is porn-native for stroking a cock, not
+  thrust pace. **`long stroke` is the clean form.** Pace remains legal MID-ACT, never on a finish beat.
+- ⚠️ `anal` still does not reliably select the act in from-behind framing — **5th and 6th confirmations.**
+  Shelves run 35–75% anal depending on chip. Do not burn rounds on it.
+
+### Finish-beat vocabulary
+
+- ⚠️ **`pumped full of cum` DRAGS ANAL** — it is a live idiom for the ass. On a VAGINAL finish slot it pulled
+  both the anal aisle and the solo pussy-pumping aisle. **`pumping cum inside her` is the vaginal-safe form**
+  and keeps the finish-moment yield. **Corrects the finish-MOMENT family as recorded.**
+- ⚠️ **`bred` drags a degraded tail** — past the More-results click: gay-breeding, trans, impregnation
+  captions, furry, and two health-explainer hosts. **The histogram stays ~100% porn** because caption hosts
+  serve few animated files. Pure histogram-blind failure; only the screenshot catches it.
+- ✅ `aftermath` reads like a mood word but **measures like a TAG word** — literal "Anal Aftermath" tag pages.
+  Reconfirmed. ⚠️ But aftermath vocabulary returns SOLO anatomical close-ups (drip, gape, nobody else in
+  frame) — it buys the register and loses the second body.
+- ⚠️ **`collapses on her back` pulls the EDITORIAL/PROSE aisle** (Slate, Medium, utopiastories) — same failure
+  class as the `wrecked`/`spent` poison set. **`lying on top of her` is the clean substitute**, same geometry.
+
+### The CMNF / clothed-male composition — the earlier warning was MIS-SCOPED
+
+- ✅ **`cmnf` HOLDS beside hands-on-torso verbs** (`groping`, `fondles`) — ~10 of 12 tiles clothed men with
+  nude women. Confirmed 3x.
+- ⚠️ **`cmnf` FAILS beside an oral or penetrative token** — such a token forces the man's cock into frame and
+  therefore forces him undressed. **That, not `cmnf` itself, is what failed on the earlier blowjob slot.**
+- ✅ **`fondle` is the best composition token found** ("Fondle Her Tits From Behind"). **The trade: `fondles`
+  wins on HIT RATE (33–34 urls, densely on-composition), `groping` wins on VOLUME (89 urls, target scattered
+  among crops and penetration).** Run both; open the `fondles` bucket first when picking.
+- ⚠️ **`clothed man` is a WEAK substitute for `cmnf`** — the only query of its slot to let Tenor into the top
+  5 and show Shutterstock. Reads as "sex with clothes on", keeping HER clothed too.
+- ⚠️ **`quickie clothes on` is weaker than its recorded reputation** — it delivers the clothed man but keeps
+  HER clothed (t-shirts, tanks) and crops to torso closeups; `quickie` also pulled solo self-touch and
+  girl-on-girl. **Downgrade the existing row.**
+- ⚠️ `hair grip` does NOT bind — returns relaxed couch blowjobs with few visible hair-fists. `hair pulling`
+  is the working form.
+
+### ⚠️⚠️ STILL / CLEAN-BAND SLOTS — a whole poison CLASS, newly identified
+
+**THE POISON CLASS ON A STILL SLOT IS *ANY PURCHASABLE NOUN*.** `bench`, `workbench`, `lamp`, `work lamp`,
+`tools`, `component`, `bed`, `mattress`, `crate`, `bottle`, `glass`, `whisky`, `table`, `chair`, `sofa`.
+Google reclassifies the query as SHOPPING — Amazon, Alibaba, imimg, made-in-china, eBay, VEVOR, Wayfair,
+Overstock — and the grid becomes product-on-white. One slot burned SIX queries proving it: it dropped `lamp`
+and kept `bench` and still landed on workbench-furniture vendors. Another lost ~40% of its grid to the single
+word `table`.
+
+**THE TWO ANTI-RETAIL LEVERS:**
+1. **A PERSON DOING AN ACTION** — catalogue photos have no people. `man working alone in dark garage workshop
+   at night` flipped a slot from 15 Amazon urls to 89/93 pure stock-photo crowd. **4 independent
+   confirmations.** Cheapest and strongest lever available.
+2. **A DERELICTION / REGISTER WORD**, and it is **LOAD-BEARING**: deleting `abandoned` while keeping
+   `mattress`+`bottle` flipped a query straight back to furniture retail. **The repair for a wrong REGISTER
+   is to swap the ROOM NOUN and KEEP the dereliction word — never the reverse.**
+
+**Newly measured still-slot traps:**
+- ⚠️ **`noir` IS A FURNITURE BRAND** (Noir Furniture; `noirfurniturela.com` landed live). It AMPLIFIES retail
+  whenever an object noun sits beside it. It is not a safe register word.
+- ⚠️ **`corner` STEALS THE ROOM** — `man sitting alone corner dim bar` returned a man crouched in the corner
+  of an empty room; only ~3 tiles were a bar.
+- ✅ **`basement` is a FREE anti-retail anchor** — nobody sells a basement — and unlike `abandoned` it carries
+  no ruin connotation. Cheapest route to bare concrete without ruin-porn.
+- ⚠️ **`bed` is a DECOR magnet as well as a retail one** — beside `basement` it pulled remodeling listicles
+  rather than product pages. `grimy squat` cleared both in one token.
+- ⚠️ **`abandoned` skews DERELICT** — peeling plaster, collapsed ceilings, rusted frames. Wrong for a
+  squalid-but-LIVED-IN room. `squalid`/`bedsit` do NOT substitute (they lose the anti-retail power).
+- ⚠️ **`machine shop` can resolve to "photocopier / copy shop"** (Alamy copy-shop hits).
+- ⚠️ **`face down` is absorbed by the DESK-SLUMP idiom**, and `workshop` also means a business SEMINAR:
+  `woman face down workshop` → "Woman Face Down On Desk", "Exhausted Business Woman".
+- ⚠️ **`mechanic` + `lying` COLLAPSES TWO FIGURES INTO ONE** — every result was a single mechanic on a creeper
+  under a vehicle. The actor noun owns that stock cluster and ignored "leaning over person".
+- ⚠️ **`thigh` + `older man` pulls the JOINT-PAIN / medical aisle** (Mayo, WebMD, AARP, Cleveland Clinic).
+
+**THE BUSINESS/LIFESTYLE-STOCK MAGNET IS TRIGGERED BY THE *ACTOR AND VERB*, NOT THE ROOM.** `two people
+talking over documents` went wall-to-wall suited boardroom, and swapping the room noun made it WORSE (twice
+over: `machine shop` became a copy shop AND the boardroom strengthened). **This is the one case where the
+"swap the room noun" repair is exactly wrong.** The equivalent trap on a seated-couple beat is the
+romantic-couple / dating / therapy aisle, and fixing the actor moved it sideways (`couple` → young-romantic,
+`old man and woman` → elderly-lifestyle, losing the age gap).
+
+✅ **SEARCH THE REAL-WORLD ANALOG, NOT THE FICTION.** A beat of "a woman prone on a bench while a man works at
+the base of her spine with a fine tool" is unretrievable as written — but **tattoo stock is framed as exactly
+that composition** (one person prone, a second leaning over working the body with a fine tool under a low
+articulated lamp). `tattoo artist working on back of woman lying down in dark studio` landed it. Cost: the
+room reads tattoo parlour, not industrial.
+
+✅ **`harassment` is the stock-caption phrase for a NON-CONSENSUAL hand-on-leg two-shot** — surfaced unprompted
+in a stocked result's own caption, and it carries both the age gap and the unwilling second figure that every
+seed vocabulary missed. ⚠️ UNTESTED. Two cautions: `sexual` is a banned token on a clean band (it would
+propose retagging the still to `_t5`), so use `harassment` alone; and the aisle is office-set.
+
+⚠️ **Still queries hit Google's "the rest of the results might not be what you're looking for" wall at ~95–100
+urls with NO "More results" button at all.** One page IS the whole shelf on a still slot. Confirmed across 4
+slots. Not a failure — do not chase it.
+
+### ⚠️ ENGINE / API facts measured this run (not query craft)
+
+- **`media_kind` MUST be derived PER URL, never per slot.** `.gif` → `media_kind:"img"`, `type:"image"`; only
+  `.webm`/`.mp4`/`.mov`/`.mkv` → `"video"`. Ground truth: `_VIDEO_SUFFIXES` (`api/v1/media_finder.py:373`)
+  excludes `.gif`, which sits in `_IMAGE_SUFFIXES`; the code comment states *"a .gif pool reports media_kind
+  'img'"*. **A `.gif` posted as `video` renders inside a `<video>` tag and shows NOTHING to the human.**
+  1,648 options were stocked wrong this run and had to be repaired. Since these shelves are overwhelmingly
+  gifs, this silently blanks most of a shelf.
+- **`queries/add` takes `query`, NOT `q`.** Posting `q` returns `{"error": "file and query are required"}`.
+  Chips READ BACK keyed `q`; they WRITE as `query`.
+- ⚠️ **`hosts` MUST be `[[host, count], ...]` PAIRS.** `_clean_hosts` (`api/v1/media_finder.py:857`) returns
+  `None` for `[{host, count}]` objects AND for `"host:count"` strings — the field is **SILENTLY DROPPED**,
+  response still `ok: true`. Two agents lost histograms by different routes. **Since the histogram is v3's
+  only quality gate, a silently empty one is a BLIND gate.** Always verify by re-reading the chip.
+- `queries/add` never echoes `hosts` back — a success reads `hostsStored: 0`. `"duplicate": true` is NORMAL:
+  `options/add_bulk` already created the chip from its own `query` field; the explicit POST merges the
+  histogram in (`rec.update(fields)`, `media_finder.py:1320`).
+- **The extracted url list truncates coming back through `javascript_tool` (~1000 chars, lossy mid-slice).**
+  POST `options/add_bulk` DIRECTLY FROM THE PAGE with `fetch(..., {mode:'no-cors'})` — the views are
+  `@csrf_exempt` and `_parse_body` is content-type agnostic (`media_finder.py:115-120`). Lossless and faster.
+  Verify writes from bash afterwards.
+- ⚠️ **`i.xgroovy.com` is DEAD** — connection failure on a direct fetch, while `blovjob.com` returns 200. It
+  was the TOP host at 19/58 on one probe query. Expect a real dead-link share on any shelf it appears in.
+- ⚠️ **THE ANIMATED REGEX HAS A BLIND SPOT:** `.gif|.mp4|.webm` cannot reach PornHub/xHamster **page
+  thumbnails**, which is where the heaviest older-male content sits. One query's grid was excellent while its
+  extracted urls were poor, purely for this reason. **Histogram and grid CAN disagree in this direction.**
+- Installed files are **renamed on install** (hashed, or to the slot name), so a candidate's source url is
+  destroyed and there is **no recoverable provenance** — `media_reviews.json` records only "replaced via
+  finder". A url-level collision check against installed media is therefore structurally impossible; compare
+  against the SIBLING SLOT'S SHELF instead, then md5 at install time.
+
+### 2026-08-14b — `mercer_hands_on` re-harvest after a human rejection (still → animated `_t4`)
+
+The human rejected the 103-option STILL shelf with the note *"Should be a gif."* The slot was re-declared
+`scenes/mercer_hands_on.jpg` → **`scenes/mercer_hands_on_t4.gif`** and re-run. **The retag, not the
+extension, is what fixed it** — a `.gif` at clean band still searches the SFW stock corpus. 201 stocked.
+
+**The clean-band failure it escaped** (recorded above under still-slot rules): the SFW corpus offers only a
+MACRO CROP ("hand on thigh": hand and leg fill the frame, no faces, no second figure) or a bright LIFESTYLE
+TWO-SHOT ("couple sitting": both figures visible but smiling, and both-young or both-old). No wide seated
+shot of an older man with a younger woman exists in it. **The porn/tease corpus at t4 has that frame** —
+`old man groping her clothed couch amateur gif` returned an older clothed man seated on a couch in a dim
+room, a woman seated beside him, both faces in frame.
+
+| finding | measurement |
+|---|---|
+| ⚠️ **THE MEDICAL TRAP IS BOUGHT BY `older man`, NOT BY `thigh`** — corrects the earlier joint attribution | one-token swap `older man`→`grandpa`, everything else held: British Heart Foundation and self.com dropped to ZERO, yield 30→51. **`older man` is SFW-REGISTER phrasing; the porn corpus says `old man` / `grandpa`.** |
+| ⚠️ **`thigh` is the MACRO-CROP puller** | same stem otherwise, `thigh`→`couch` took the wrong crowd to zero — no Tenor, no gifdb, no medical, no stock, **the only 100% porn-host histogram of the run** — and converted waist-crops into seated two-shots |
+| ⚠️ **`grandpa` buys AGE but swaps the ACT BAND to penetration** | every tile a genuine grey-haired man with a younger woman, but nearly all hardcore/nude — wrong for a t4 tease. **`old man` + `groping` + `couch` holds age AND the clothed band; `grandpa` + `fondles` does not.** Consistent with the earlier `grandpa` rows (buys age, loses the body, leaks act band). |
+| ✅ **`quickie clothes on` INVERTS by slot** | measured a DEFECT on the CMNF pools because it keeps HER clothed; on a both-clothed tease beat that is exactly right. **`cmnf` is wrong here — it would strip her.** Same measurement, opposite verdict: check whether the beat wants her nude before choosing between them. |
+
+**Gap:** the clothed-tease band and the older-male band are partly disjoint — the best-composition chips skew
+young, the age-correct chip is thinner on composition. Both are on the shelf as separate chips.
+
+### 2026-08-14c — `kess_install` re-harvest (still → **clean-band ANIMATED**, the first of its kind here)
+
+Human rejected the 70-option still shelf: *"should be gif."* Re-declared `scenes/kess_install.jpg` →
+**`scenes/kess_install.gif`, band UNCHANGED at clean.** Unlike `mercer_hands_on` (retagged `_t4`), this beat
+must NOT move into the porn corpus — the canvas says *"Explicit and NOT sexual: no arousal, no pain, no
+comfort — she is handled, and the horror is that it is routine."* 89 stocked, **zero erotic leakage across
+6 queries**. **THE LESSON: two identical rejection notes needed OPPOSITE treatment. Read the canvas before
+deciding whether "make it a gif" means retag or rename.**
+
+⚠️ **A CLEAN + ANIMATED slot INVERTS the Tenor rule.** `media.tenor.com` / `giphy` / `gifdb` / `i.pinimg`
+are the TARGET crowd for an SFW animated subject — the "Tenor = wrong crowd" measurement was taken on PORN
+beats, where Tenor means the query left porn entirely. Do not reject an SFW animated query for landing there.
+Its wrong crowd is instead e-commerce/product, stock agencies, and medical.
+
+| finding | measurement |
+|---|---|
+| ⚠️ **THE GRID GLANCE IS UNRELIABLE ON AN SFW ANIMATED SLOT** | on the best query the visible top rows were 7 iStock/Dreamstime/Unsplash STILLS while the extracted animated files were 22 Giphy + 7 Tenor. **Stock agencies buy the top rows; the gif corpus sits deeper.** The decisive gate was reading the TITLES on gif-host anchors — the query would have been wrongly REJECTED on the screenshot alone. |
+| ⚠️ **A natural-language SENTENCE + `gif` collapses into Tenor's REACTION-MEME tag pages** | `person lying face down getting a back tattoo gif` → 84 urls of "Lay Back GIFs", "Face Down GIFs" (a man face-planting on a rug), Tupac, "I'M FINE". Keep SFW animated queries SHORT and TECHNICAL. |
+| ⚠️ `tattoo machine` | the purchasable-noun trap plus the stock agencies — iStock/Getty/Shutterstock "Licensable" watermarks and a floating-machine render |
+| ⚠️ `lower back tattoo` (as a standalone noun phrase) | owned by the TRAMP-STAMP showcase idiom (Teen Vogue explainers, finished-tattoo photos). Survives when `tattoo artist tattooing` LEADS the query |
+| ⚠️ `timelapse` | **craters animated yield 59→18** — that footage lives on YouTube/TikTok, not gif hosts |
+| ✅ live gif-host tags for this beat | "Tattoo Session", "Up Close Tattoo Session", "Back Tattoo GIFs", "Girl Getting Tattooed GIFs", "Close Up Tattoo GIFs", "Studio Tattoo GIFs" |
+
+⚠️ **SKILL DEFECT — `ANIMATED_KEYWORDS` IS SEX-ONLY.** All 79 entries in `scene_semantics.py` are sex acts
+(`fuck`, `kiss`, `grope`, `nude`, `riding`…). There is NO way to express a non-sexual beat that moves, so
+**any SFW slot legitimately wanting motion classifies `static` and FAILS `check_format_alignment` on
+`.gif`/`.webm`** — and the only way to "pass" is to insert sexual vocabulary, which is the exact anti-pattern
+the t4 exemption exists to prevent. Compounding it, `working` sits in `ACTIVITY_STATIC_KEYWORDS`, so "a man
+working a tool over someone" reads as chores. **Honest workaround used here:** avoid `working`, which drops
+the family to `ambiguous` — and `ambiguous` always passes. `tattooing` is the measured-live synonym.
+**Real fix belongs in the skill: a non-sexual motion vocabulary in `ANIMATED_KEYWORDS`.**
+
+**Gap:** posture is unverifiable per-file — Tenor/Giphy filenames are opaque (`200w.gif`, `giphy.gif`), so
+face-down-vs-supine and back-vs-arm can only be judged by eye in the picker. Arm/sleeve work dominates the
+whole tattoo gif corpus. Query 1 also carries fandom contamination (Arcane, Call of Duty, Percy Jackson
+gifsets tagged "tattoo"), ~4 of 60 urls.

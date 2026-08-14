@@ -964,7 +964,7 @@ id          = "mercer_room"
 name        = "The Lockup"
 description = "A rented room behind the market stalls — concrete, one bulb, a bed that came with the rent and a door that bolts from the inside. The kind of address a man takes when he has money and no name to put on a lease. Whatever he sells out front, he sleeps back here."
 image       = "locations/mercer_room.jpg"
-image_search_queries = ["bare concrete back room single bulb mattress", "storage lockup room behind market stall dim"]
+image_search_queries = ["bare concrete room single bulb empty wide", "windowless rented room mattress bare bulb"]
 entry_from  = "underworld_market"
 entry_conditions = { version = "1.0", items = [
   { type = "flag", subject = "player", flag_key = "mercer_found", operator = "is_true" },

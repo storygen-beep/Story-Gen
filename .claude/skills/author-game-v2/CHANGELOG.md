@@ -5,6 +5,46 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-14 — **The overnight-schedule rule was true only for the example it was written from**
+
+`references/the-board.md` §2 rewrites the overnight-window paragraph to name the weekday caveat, with
+the two source lines and the two-row fix.
+
+**What was wrong.** The section said *"`22:00`–`04:00` is one row, not two"* with no qualifier. That
+holds only when `weekdays` covers all seven days — which is exactly what the code sample directly
+above it does, so the exception was invisible to anyone reading the rule off the page. The engine
+checks the weekday and the time wrap **separately**, weekday first, against *today*:
+
+```
+v2.py:3446   if (!setup._weekdayMatches(ds.weekdays, todayIndex)) continue;
+v2.py:3448   if (!setup.isCurrentTimeSlot(ds.start_time, ds.end_time)) continue;
+```
+
+So `weekdays = [1], 23:00–06:00` places the character on Tuesday night and **deletes them at
+midnight**. A game with a Tuesday-night regular, a Thursday/Sunday regular and weekend-night rows —
+i.e. any game whose cast is not on site every single night — silently loses most of its night
+presence, with no build error and every gate green.
+
+**Why it matters beyond one game.** Presence failures are invisible to `gates.py`: gate 6 checks that
+a character *has* a schedule row, never that the row resolves at the hours the fiction claims. This
+was a rule that could not be caught downstream.
+
+**A note on the prior claim this paragraph rebutted.** An older project-memory note said overnight
+windows always need two rows, "because a single window can't wrap". That stated *reason* is
+contradicted by source — the `endTotal < startTotal` branch is present in **both** `v1.py:3145` and
+`v2.py:3784`, so the wrap itself works in either generator. Its *recipe* is nonetheless right
+whenever the row is day-specific, for the weekday reason above. The skill then over-corrected from
+"the recipe is unnecessary" to "one row, always", and neither account had separated the two cases.
+Net: **the wrap is not the variable; the weekday list is.**
+
+**How verified.** Read at source, then proved in a built game rather than on paper: nine presence
+probes driven through the engine's own `setup.getNpcLocation()` across the midnight and week
+boundaries (Tue 23:00 → Wed 01:00 → Wed 04:00; Thu 22:00 → Fri 00:00; Sun → Mon; plus an
+all-seven-days row left as one). All nine correct only after the day-specific rows were split;
+the all-seven-days row stays a single row and still resolves.
+
+---
+
 ## 2026-08-14 — **The field's most consistent shape was in a study file the authoring path never reads**
 
 `references/the-surfaces.md` gains **R2b · every choice hangs off a named object in the prose**, with

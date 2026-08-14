@@ -1,0 +1,455 @@
+{
+  "slug": "forty_miles",
+  "title": "Forty Miles",
+  "phase": "release",
+  "narration_person": "second",
+  "want": {
+    "who_she_is": "Robyn Sayer, 26. Nights at the Kelbrook Services truckstop on the A-road — cash in hand, no contract, 22:00 to 06:00 alone on site. Gerry Nunn, who owns it, paid off something for her before she started and has never once mentioned it. She sleeps in a static caravan behind the tyre bay that belongs to him too. What she has to lose: the job, the caravan, and the answer to what that money bought — all three of which are one phone call from Nunn, and every person she goes further with is a person who can make that call.",
+    "appetite": "To be wanted by men who have nowhere else to be at 3am — and every one who starts planning his route around this stop pulls it a notch deeper in. It cannot complete: the road never stops supplying men, each regular can go further, and each hour of the site she takes is one she then has to hold. Release 41 adds a new name on the park's CB, a new night on the rota, a new hour that is hers.",
+    "ascent": "The reversal runs on a clock and the ascent is about widening it. At 22:00 Bev hands over and Robyn is the site — the only authority for forty miles in either direction. At 06:00 she hands it back and is the girl on nights who owes the owner money. Bottom: she works the counter, drops the hatch at midnight, locks the showers, and the rest of the site is somewhere she checks and leaves. Top: the showers, the park, the tyre bay, the back room and the cabs are all hers all night on her terms, drivers route to this stop because of her, and the handover at six stops being a handover. Three tiers plus a counterweight — NIGHTS (how much of the site is hers after dark), SEEN (a lit glass box on a black road, cameras inside and a park of men outside who talk on the radio), TRADE (what she will sell that is not on the shelves), and THE COUNT (Nunn's till reconciliation, which only ever falls).",
+    "charge": "reversal (primary) + transformation (secondary)",
+    "charge_note": "The reversal is on a clock, not on a ladder, and that is what makes it this game rather than another one. Same building, same people, and her position inverts twice a day: at night she is the only authority on site, at six she is the least powerful person on it. Every meter buys hours, not rank. The transformation rides underneath — the girl working off a debt becomes the fixture the road stops for, at a business that owns her rather than one she owns.",
+    "why_this_person": {
+      "npc_nunn": "He paid to make her problem go away and has never once brought it up, which means the price is still unfixed. Wanting him is the only way to find out what it is, and she would rather know than not.",
+      "npc_bev": "Days. Fifteen minutes of handover at 06:00 and she is the only other person alive who knows what this site actually is — and she has been running her own version of it on the day shift for years. Her approval is not moral, it is professional, and it is the only judgement Robyn respects.",
+      "npc_ossie": "Tyre bay, a caravan twenty feet from hers, the same wages. The only man on site with no leverage over her at all — which is why he is the one choice that costs nothing, and why she keeps not making it.",
+      "npc_hal": "Tuesdays, fridge trailer, married, barely speaks. Twenty quiet minutes at 01:00 every week for a year, and he has never asked her for anything. Being wanted by a man who will not say it is its own thing entirely.",
+      "npc_denny": "Thursdays and Sundays, tipper work, knows every cab in the park and talks to all of them. He decides what the lorry park thinks of her. Being wanted by Denny is being broadcast, which is the SEEN tier with a face on it.",
+      "npc_tam": "Bay 9, this month's. Agency driver, first month, sleeping in the cab because he cannot afford digs and will not say so. He is the one who has nothing to trade, in a game where everyone trades."
+    },
+    "crude_ceiling": {
+      "npc_nunn": [
+        "tier1: nothing named — the shape of her, what she is wearing, how long she has been on",
+        "tier2: tits, arse, cock — said flatly, like reading stock off a sheet",
+        "tier3: cunt, fuck, cum in her — never raised, never hurried"
+      ],
+      "npc_bev": [
+        "tier1: crude ABOUT the drivers, as trade talk across the handover",
+        "tier2: crude about Robyn to her face — tits, cunt, wet, on your knees",
+        "tier3: cunt, clit, fuck, suck, fingers in her — spoken and done, in the stock room, on the clock"
+      ],
+      "npc_ossie": [
+        "tier1: nothing — he looks away",
+        "tier2: cock, tits, fuck, hard",
+        "tier3: cunt, cum, fuck her — plain, no performance, he still will not look at her after"
+      ],
+      "npc_hal": [
+        "tier1: nothing at all",
+        "tier2: barely — cock, wet, once each",
+        "tier3: cunt, fuck, cum — and the words are hers, not his; he is near silent through the whole of it"
+      ],
+      "npc_denny": [
+        "tier1: crude, loud, public, about other women, where she can hear",
+        "tier2: cunt, tits, arse, suck it, get on it — to her, in front of others",
+        "tier3: anything, and he narrates it while it happens and repeats it in the park after"
+      ],
+      "npc_tam": [
+        "tier1: nothing — he apologises",
+        "tier2: cock, tits, fuck, please",
+        "tier3: cunt, cum, fuck me — begging register, declared per tenant and dies with him"
+      ],
+      "_notes": "Written as the actual permitted words per the-want.md section 6. A ceiling, never a floor: writing under it is a defect. The rotating bay-9 tenant redeclares his own ceiling each rotation."
+    },
+    "register_home": "The crude register lives on the surfaces she re-enters every single night: the shop counter after midnight, the shower-block corridor, the cab in bay 9, the stock room, the dark end of the lorry park. Nothing crude is held back for a one-time capstone — that inversion is the exact failure this system exists to correct.",
+    "deletion_test": "Cut Bev and nothing Robyn does at night gets measured by anyone who understands it. Nunn is leverage and the drivers are appetite; Bev is the only person whose read on the site is worth having, and the handover is the game's only mirror.",
+    "release_41_test": "A new regular on a new night, or an hour of the site she did not previously hold. Neither the road nor the rota can be exhausted.",
+    "crudest_repeatable_surface": "The shower-block corridor — tokens, cubicles, the drain, and the fact that she is the one who holds the key to it. Entered nightly from v0.1 onward.",
+    "last_read_at_release": "0.1"
+  },
+  "board": {
+    "ascent_tiers": [
+      "nights",
+      "seen",
+      "trade"
+    ],
+    "counterweight": "count",
+    "rungs": [
+      15,
+      35,
+      55
+    ],
+    "ceilings": {
+      "nights": null,
+      "seen": null,
+      "trade": null
+    },
+    "ceiling_note": "All three top bands are declared with a `min` and NO `max` — unbounded on purpose, so the top of the bar promises nothing the authored gates do not already reach. Gate 8 judges a bounded top band against the highest authored gate; an unbounded one makes no promise to break. `count` is the counterweight, starts at 100, only ever falls, and is deliberately NOT in ascent_tiers so gate 10 does not read its lt/lte gates as a contracting spine.",
+    "meters_note": "NIGHTS = how much of the site is hers between 22:00 and 06:00. SEEN = a lit glass box on a black road, cameras inside and a park of men outside on the CB. TRADE = what she will sell that is not on the shelves. COUNT = Nunn's till reconciliation.",
+    "locations": [
+      {
+        "id": "the_shop",
+        "job": "The anchor. Till, hot counter, coffee machine, the night hatch, four tables in the window. Where she spends most of eight hours and where everyone comes to her.",
+        "anchor": true,
+        "budget": 10000,
+        "fill": 10295,
+        "has_cycling_pool": true
+      },
+      {
+        "id": "the_lorry_park",
+        "job": "The apron. Rows of cabs, the lit end and the dark end past the last lamp. The renewable source of new faces and the SEEN tier's consequence surface.",
+        "anchor": false,
+        "budget": 5000,
+        "fill": 5086,
+        "has_cycling_pool": true
+      },
+      {
+        "id": "the_showers",
+        "job": "Driver shower block across the apron. Corridor, four cubicles, token machine, one dryer. She holds the key. The crudest repeatable surface in the game.",
+        "anchor": false,
+        "budget": 5000,
+        "fill": 4191,
+        "has_cycling_pool": true
+      },
+      {
+        "id": "the_forecourt",
+        "job": "Pumps under the canopy, the night hatch, the CCTV mast. The exterior and the traversal hub — everything crosses it. Where Nunn pulls up on a Friday.",
+        "anchor": false,
+        "budget": 4000,
+        "fill": 3902,
+        "has_cycling_pool": true
+      },
+      {
+        "id": "bay_9",
+        "job": "The rotating slot, as a room. One cab, one bunk, one curtain. ROOM-scoped content names the occupant by role only ('the bay-nine driver'); TENANT-scoped content dies with him.",
+        "anchor": false,
+        "budget": 3500,
+        "fill": 4081,
+        "has_cycling_pool": true
+      },
+      {
+        "id": "the_tyre_bay",
+        "job": "Ossie's open-fronted shed. Compressor, pit, kettle, a bunk in the back he sleeps in. The only other body on site at night.",
+        "anchor": false,
+        "budget": 3200,
+        "fill": 3540,
+        "has_cycling_pool": true
+      },
+      {
+        "id": "her_static",
+        "job": "Her caravan behind the bay. Nunn owns it. The dwelling, the wardrobe, and the solo surface — cold, damp, and the one place nobody can walk in.",
+        "anchor": false,
+        "budget": 3200,
+        "fill": 3395,
+        "has_cycling_pool": true
+      },
+      {
+        "id": "the_stock_room",
+        "job": "Behind the shop. Cages, the cold store, the CCTV recorder — and the padlocked door that is v0.1's locked door.",
+        "anchor": false,
+        "budget": 3000,
+        "fill": 2960,
+        "has_cycling_pool": true
+      }
+    ],
+    "fill_plan": "Budgets total 36,900 across 8 locations: mean 4,612 (floor 4,500), median 4,000 (floor 3,000), anchor the_shop 27.1% (floor 25%). Budgeted against the FINISHED v0.1 total, not topped up at the end — the anchor share is a ratio and tightens every time any other room grows.",
+    "no_cafe_decision": "Kelbrook has no cafe. It is a shop with a hot counter and four tables in the window, which is what most real truckstops of this size are. This removes a location the map would have had to carry and keeps the prose honest: the tables are an OBJECT inside the anchor's paragraph, not a room, so nothing in the writing names a place the graph does not have.",
+    "characters": [
+      {
+        "id": "npc_nunn",
+        "surfaces": 1,
+        "schedule_rows": 2,
+        "why_wanted": "He paid her debt and has never mentioned it, so the price is still unfixed. Wanting him is the only way to learn what it is."
+      },
+      {
+        "id": "npc_bev",
+        "surfaces": 1,
+        "schedule_rows": 3,
+        "why_wanted": "The only other person who knows what this site is, running her own version of it on days. The only judgement Robyn respects."
+      },
+      {
+        "id": "npc_ossie",
+        "surfaces": 1,
+        "schedule_rows": 3,
+        "why_wanted": "The only man on site with no leverage over her — the one choice that costs nothing, which is why she keeps not making it."
+      },
+      {
+        "id": "npc_hal",
+        "surfaces": 1,
+        "schedule_rows": 3,
+        "why_wanted": "Tuesdays, married, near-silent, has never asked her for anything in a year of 01:00s."
+      },
+      {
+        "id": "npc_denny",
+        "surfaces": 2,
+        "schedule_rows": 3,
+        "why_wanted": "He decides what the park thinks of her. Being wanted by Denny is being broadcast — the SEEN tier with a face."
+      },
+      {
+        "id": "npc_tam",
+        "surfaces": 1,
+        "schedule_rows": 1,
+        "why_wanted": "Bay 9, agency, first month, sleeping in the cab because he cannot afford digs. The one man with nothing to trade, in a game where everyone trades."
+      }
+    ],
+    "schedule_plan": {
+      "npc_bev": "Shop 06:00-14:00 Mon-Fri, plus the 21:45-22:15 handover Mon-Fri and two 14:00-22:00 evening shifts (Fri, Sat) that overlap the front of Robyn's night. The handover alone would be too thin a surface for the character the deletion test names as essential.",
+      "npc_nunn": "Forecourt/shop Fri 18:00-20:00 (the settle-up) and Tue 10:00-12:00 — deliberately inside Robyn's sleep, so catching him costs her the day.",
+      "npc_ossie": "Tyre bay 08:00-18:00 Mon-Sat; night row 22:00-02:00 Fri/Sat only. He lives in the back of the bay, so the isolation is real but not absolute.",
+      "npc_hal": "Lorry park 23:00-06:00 Tue; shop 01:00-01:30 Tue.",
+      "npc_denny": "Lorry park 22:00-02:00 Thu and Sun; shop and showers inside that window.",
+      "npc_tam": "Bay 9 every night, 20:00-06:00, for this rotation.",
+      "overnight_note": "Overnight windows are ONE row — setup.isCurrentTimeSlot handles the wrap explicitly. Verified in the-board.md section 2 against generators/v2.py; do not split 22:00-06:00 into two rows."
+    },
+    "map": {
+      "shape": "One truckstop plot off a trunk A-road, and nothing else for forty miles either way. A forecourt with pumps under a canopy; the shop building on one side of it with the stock room and cold store behind; the shower block across the apron; the lorry park behind that, with bay 9 at the dark end; the tyre bay at the edge of the plot; her caravan behind the tyre bay.",
+      "dwelling": "her_static",
+      "exterior": "the_forecourt",
+      "homes": {
+        "npc_nunn": "offscreen",
+        "npc_bev": "offscreen",
+        "npc_ossie": "the_tyre_bay",
+        "npc_hal": "the_lorry_park",
+        "npc_denny": "the_lorry_park",
+        "npc_tam": "bay_9"
+      },
+      "graph": {
+        "the_forecourt": {
+          "entry_from": null,
+          "navigation_order": [
+            "the_shop",
+            "the_showers",
+            "the_lorry_park",
+            "the_tyre_bay"
+          ]
+        },
+        "the_shop": {
+          "entry_from": "the_forecourt",
+          "navigation_order": [
+            "the_stock_room"
+          ]
+        },
+        "the_stock_room": {
+          "entry_from": "the_shop",
+          "navigation_order": []
+        },
+        "the_showers": {
+          "entry_from": "the_forecourt",
+          "navigation_order": []
+        },
+        "the_lorry_park": {
+          "entry_from": "the_forecourt",
+          "navigation_order": [
+            "bay_9"
+          ]
+        },
+        "bay_9": {
+          "entry_from": "the_lorry_park",
+          "navigation_order": []
+        },
+        "the_tyre_bay": {
+          "entry_from": "the_forecourt",
+          "navigation_order": [
+            "her_static"
+          ]
+        },
+        "her_static": {
+          "entry_from": "the_tyre_bay",
+          "navigation_order": []
+        }
+      },
+      "bridges": [
+        {
+          "from": "the_forecourt",
+          "to": "the_showers",
+          "costs": {
+            "time": 10
+          }
+        },
+        {
+          "from": "the_forecourt",
+          "to": "the_lorry_park",
+          "costs": {
+            "time": 10
+          }
+        },
+        {
+          "from": "the_forecourt",
+          "to": "the_tyre_bay",
+          "costs": {
+            "time": 10
+          }
+        },
+        {
+          "from": "the_lorry_park",
+          "to": "bay_9",
+          "costs": {
+            "time": 5
+          }
+        },
+        {
+          "from": "the_tyre_bay",
+          "to": "her_static",
+          "costs": {
+            "time": 5
+          }
+        }
+      ],
+      "bridge_note": "Cost sits on crossings of the open apron only, never on rooms inside the shop building (shop <-> stock room is free). Ten minutes each way is what makes the premise bite: she is the ONLY person on site, so every minute spent in the shower block or bay 9 is a minute the shop stands open and unattended. That is the free gift of the premise and it is what gives COUNT its teeth.",
+      "r1_signoff": "SIGNED OFF. Road, canopy, forecourt, shop with the stock room behind it, shower block across the apron, lorry park behind that with bay nine at the dark end, tyre bay at the edge, caravan behind the tyre bay. A stranger can draw it from the graph. It has an outside, every resident has somewhere to sleep, and the exterior is a real crossing with a ten-minute cost rather than a corridor of zero width. Confirmed against the built game: 8/8 locations reachable on foot from the_shop."
+    },
+    "economy": {
+      "currency": "money",
+      "obligation": "The Friday settle-up with Gerry Nunn on the forecourt. He paid GBP 6,000 to make her problem go away and takes GBP 200 a week back, plus GBP 45 for the caravan. She earns roughly GBP 350 a week in cash, which leaves about GBP 105 for everything else — and any till discrepancy comes off that. A date, a face, and a number that a single bad night halves.",
+      "obligation_pricing": "Priced in BOTH directions per the-economy.md R3: payable on a clean week (so it is not a scripted loss) and genuinely tight on a bad one (so it is not trivial). Recheck the arithmetic once the income rungs are authored and their real per-night yield is known.",
+      "sinks": [
+        {
+          "what": "the Friday settle-up — debt and caravan rent",
+          "at": "the_forecourt"
+        },
+        {
+          "what": "calor gas and the fan heater for the static",
+          "at": "her_static"
+        },
+        {
+          "what": "till discrepancies, paid out of her wages",
+          "at": "the_shop"
+        },
+        {
+          "what": "food off the hot counter she is not allowed to take free",
+          "at": "the_shop"
+        },
+        {
+          "what": "her own shower token and the dryer",
+          "at": "the_showers"
+        },
+        {
+          "what": "Ossie's labour on her car",
+          "at": "the_tyre_bay"
+        },
+        {
+          "what": "buying back a favour owed in the cab",
+          "at": "bay_9"
+        }
+      ],
+      "sources": [
+        {
+          "what": "night wages, weekly, automatic — not a click",
+          "at": "n/a",
+          "cap": "weekly"
+        },
+        {
+          "what": "counter tips",
+          "at": "the_shop",
+          "cap": "max_triggers_per_day = 1"
+        },
+        {
+          "what": "Ossie's cash jobs",
+          "at": "the_tyre_bay",
+          "cap": "max_triggers_per_day = 1 + energy costs"
+        },
+        {
+          "what": "TRADE rungs — off-book tokens, the microwave, a bay to sleep in",
+          "at": "various",
+          "cap": "gated on trade + per-day caps; price scales with seen/trade tier"
+        }
+      ],
+      "ratio_note": "7 sinks : 4 sources = 1.75:1, against the field median of 2.2:1 and the reference game's 1.76:1. Gate 17's floor is 1:1. Spread deliberately: no location holds more than 2 of the 7 sinks (the_shop), well under the half-of-all-sinks concentration that fails the gate — this is the exact defect the frozen `steam` record ships with, at 12 of 21 sinks on one front desk.",
+      "gate21_rule": "Every choice that spends money names the amount in its own label. Construction rule, not a later pass."
+    },
+    "surfaces_plan": {
+      "menu_cap": 8,
+      "anchor_split": "the_shop cannot be one canvas. It splits by WHO the content is aimed at and WHEN: shop_handover (21:45-22:15, Bev), shop_counter_early (22:00-00:00), shop_counter_dead (00:00-04:00), shop_counter_dawn (04:00-06:00), plus separate bound hubs for whoever is actually in it. Solo work never goes in a character's hub.",
+      "object_rule": "R2b, the highest-value ungated rule in the skill: write each room's paragraph first, naming what is in it, then hang every choice off the thing that affords it. The shop's objects: the hatch, the till, the coffee machine, the hot counter, the CCTV monitor, the window tables, the door. A choice with nothing to attach to means the prose is missing an object or the choice belongs elsewhere.",
+      "avoids": "The frozen `steam` record fails gate 20 with 9 screens over the cap — 23 choices on one front desk, 19 in one changing room. Designed out here at the board rather than split later."
+    },
+    "guidance": {
+      "quests_engine": "v2",
+      "owed_at_v01": "One stepped card per band of each of the three ascent tiers (4 bands x 3 tiers = 12), plus a ladder per character with a terminal card at the end of each so nothing retires into silence (gate 15). Every goal line names a place, a person where there is one, a verb, and the window if it is schedule-gated.",
+      "terminal_text_note": "Exactly ONE card in the whole game may set terminal_text — it is the build-boundary badge. Every other closed arc uses plain terminal = true.",
+      "trap": "Never paste version = \"1.0\" onto a quest card: quest conditions use a separate evaluator that does NOT fail open."
+    },
+    "locked_door_v01": {
+      "what": "The padlocked door behind the cold store. Nunn's. It is also why the CCTV has a blind spot on the stock-room corridor.",
+      "how": "A show_when_locked choice on the stock-room surface, NOT a declared location. Gate 1 fails any declared location with nothing placed in it (gates.py:550, empties count as 0), and gate 9 counts visible-but-locked CHOICES (gates.py:705). It becomes a real location in 0.2, filled on arrival.",
+      "opens_at": "nights >= 35 AND count below clean",
+      "locked_text": "left off by default so the row shows the action itself — a want the player can name is what sells the next release (the-voice.md R4)"
+    },
+    "rungs_note": "v0.1 ships THREE rungs. The Want named a four-rung 15/35/55/75 ladder after the reference game, but gate 8 judges the TOP BAND'S MIN (gates.py:692-695), so a 75 band obliges an authored gate at 75 in this build. Shipping bands at 15/35/55 with an unbounded top is the honest-wall shape the frozen `steam` record uses: each later release adds a band and the content behind it. The 75 rung is logged as a promise, not silently dropped."
+  },
+  "releases": [
+    {
+      "version": "0.1",
+      "subject": "Kelbrook Services, 22:00-06:00 — the whole board",
+      "want_line": "Serves every line. v0.1 is the one release that lays the world down rather than adding to it: the reversal on a clock (NIGHTS), the lit glass box (SEEN), the second economy (TRADE), and the Friday settle-up that gives the six thousand a face and a date.",
+      "added": {
+        "units": 247,
+        "words": 37450,
+        "locations": 8,
+        "characters": 6
+      },
+      "opened": [
+        "The padlocked room behind the cold store — visible on the stock-room screen from night one, gated on a key v0.1 never grants."
+      ],
+      "gates": {
+        "passed": 20,
+        "of": 20
+      },
+      "playtest": {
+        "passed": 11,
+        "of": 11,
+        "note": "Live in the built HTML, not grepped: opening funnel reaches free roam; money is UNCLAMPED so the 245 draw is payable (and clamp=true really would cap at 100); 9/9 NPC presence probes correct across the midnight and week boundaries; guidance cards render; back_room_key never set."
+      },
+      "shipped": "2026-08-14"
+    }
+  ],
+  "promises": [
+    {
+      "text": "The room behind the padlock becomes a real, filled [[locations]] entry. 0.2 flips canvas_back_room_key from is_active = false to true and writes what is actually in there.",
+      "made_in": "0.1",
+      "paid_in": null
+    },
+    {
+      "text": "The 75 rung on each of nights/seen/trade — a fourth band plus the content behind it. The band is deliberately absent rather than promised-and-empty.",
+      "made_in": "0.1",
+      "paid_in": null
+    },
+    {
+      "text": "Media. Every pool_dir and file in the game is DECLARED with search_queries and tier suffixes and nothing is fetched; the build warns on 6 uncopied external assets. find-media fills them.",
+      "made_in": "0.1",
+      "paid_in": null
+    },
+    {
+      "text": "Bay nine rotates. Tam's ladder in 5_scenes.toml plus his [[npcs]] block are the whole cost; everything room-scoped lives in 3_activities.toml and survives.",
+      "made_in": "0.1",
+      "paid_in": null
+    }
+  ],
+  "decisions": [
+    {
+      "at": "want",
+      "note": "Premise picked from a three-way pitch. Its named weakness was cast attachment — a truckstop's natural population passes through once and never returns, which fights the measured finding that the person is the product. Fixed at the foundation rather than patched later: the cast is site-resident (Nunn, Bev, Ossie) plus fixed-rota weekly regulars (Hal Tuesdays, Denny Thursdays/Sundays), and exactly ONE bay rotates (bay 9). Cost: the lorry park cannot be the renewable-stranger firehose the premise offers, and new faces arrive at the measured rate instead."
+    },
+    {
+      "at": "board",
+      "note": "The v0.1 locked door is a CHOICE, not a location. Checked rather than assumed: gate 1 builds its distribution from every declared location with empties counted as 0 and fails on any with nothing placed (gates.py:540, :550), while gate 9 counts choices carrying show_when_locked (gates.py:705). A sealed empty back room would therefore have failed the fill gate to satisfy the door gate. It becomes a real location in 0.2, filled on arrival — which is also the measured release shape."
+    },
+    {
+      "at": "board",
+      "note": "Two gates the frozen `steam` record fails were designed out at the board instead of being fixed later. (1) Gate 17: steam ships 21 sinks : 20 sources with 12 of those sinks on one front desk; forty_miles runs 7:4 with no location holding more than 2. (2) Gate 20: steam ships 9 screens over the 8-choice cap, including 23 on one desk; the_shop is split by aim and time window from the start. Cost: more canvases to author, and the anchor's word budget now has to land across four counter surfaces rather than one."
+    },
+    {
+      "at": "board",
+      "note": "No cafe. Kelbrook is a shop with a hot counter and four tables in the window. Cost: Bev loses a room of her own and works the shop; benefit: one fewer location to carry to the 3,000-word median, and the tables become an object in the anchor's prose rather than a place the graph owes."
+    },
+    {
+      "at": "want",
+      "note": "Slug is forty_miles, not night_shift — the repo already carries a v1 game called late_shifts and the two would be confused within months. Title Forty Miles also names the isolation, which is the premise."
+    },
+    {
+      "at": "0.1",
+      "note": "⚠️ ENGINE CONSTRAINT, hit at build time, not predicted. The flag-chain validator HARD-FAILS a build where a choice requires a flag no canvas sets: 'back_room_key — NEVER SET - required by choice Open the padlocked door.' So 'the key simply does not exist yet' is not a shape the engine will build. Fix: canvas_back_room_key ships with a real location and is_active = false, which satisfies the validator, never fires in play, and makes 0.2 a one-boolean change. Verified live: the flag is still false after a playthrough."
+    },
+    {
+      "at": "0.1",
+      "note": "⚠️ SCHEDULE DOCTRINE CORRECTED UPSTREAM. v2.py:3446-3448 checks the weekday against TODAY separately from, and before, the time wrap. A day-specific overnight row (weekdays = [1], 23:00-06:00) therefore deletes the character at midnight. Hal, Denny and Ossie each carry two rows because of it; Tam covers all seven days and correctly keeps one. Nothing in gates.py can see this — gate 6 checks a row EXISTS, never that it resolves at the claimed hours. Fixed in the skill (the-board.md §2) and in project memory, both of which had it half right in opposite directions."
+    },
+    {
+      "at": "0.1",
+      "note": "THE HEAT RATIO TIGHTENS AS THE WORLD FILLS, exactly like the anchor ratio, and it caught me. The explicit floor ran 18-23% through the first two thirds of the build, then fell to 7.3% — a bare pass — when ~600 beats of texture went in without one hot beat being removed. The fix was NOT to thin the texture: a systematic sweep scored every beat, found 75 scoring 1-2 inside 30 heat rungs (each one the documented pivot — naming a body part then leaving the body), and rewrote all 75 to stay on the body. 7.7% -> 14.8%. Budget heat against the FINISHED beat count, not the current one."
+    },
+    {
+      "at": "0.1",
+      "note": "Four rungs shipped as orphans mid-build — written but never referenced by any hub choice, so unreachable content that also silently failed to count toward location fill. Caught by a reachability sweep, not by any gate. Worth a standing check after every authoring batch: a triggerless rung with no referrer is dead."
+    }
+  ]
+}

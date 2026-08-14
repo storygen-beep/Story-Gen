@@ -1,0 +1,1914 @@
+# =============================================================================
+# Forty Miles — 5_scenes
+# The bound character hubs. Every one carries BOTH `requires_npc` (so it only
+# renders when the schedule actually puts them there) and `npc` (so it renders
+# in the portrait bucket rather than the solo bucket). Gate 6 counts the `npc`
+# binding; the schedule rows live in 1_metadata_and_locations.toml.
+#
+# ⚠️ R1 (the-surfaces.md) — SOLO WORK NEVER GOES IN A CHARACTER'S HUB. Every
+#    choice in this file has a PERSON as the object of its verb. Counting the
+#    till, mopping the block and working the cages are all in 3_activities.toml
+#    where they belong.
+#
+# ⚠️ THE TENANT SECTION AT THE BOTTOM DIES AT THE FIRST ROTATION. Everything
+#    above it is permanent cast. Nothing room-scoped may leak downward — the bay
+#    itself, the bunk, the curtain, the two-knock rule and the terms-setting are
+#    all in 3_activities.toml and survive every swap.
+# =============================================================================
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# BEV — the handover. The deletion test names her: cut Bev and nothing Robyn
+# does at night gets measured by anyone who understands it.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "hub_bev_handover"
+name        = "Bev"
+description = "Lane-1 standing hub @the_shop, gated by her own 21:45-22:15 row via requires_npc. Repeatable. Fifteen minutes a night with the only other person who knows what this site is. Ladder on her relation; the top rung is her admitting what the day shift actually is."
+
+[canvases.trigger]
+location      = "the_shop"
+requires_npc  = "npc_bev"
+npc           = "npc_bev"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Quarter to ten"
+blocks = [
+  { type = "paragraph", content = "She has her coat on. She has had her coat on since half nine and she will stand at the end of the counter with the till drawer open until you are behind it, and then she will go, and then it is yours." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the handover off her properly."
+targetType = "node"
+nodeId     = "rung_bev_handover.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask her what the last one was like."
+targetType = "node"
+nodeId     = "rung_bev_last_one.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask her about Gerry."
+targetType = "node"
+nodeId     = "rung_bev_gerry.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_bev", trait_key = "relation", operator = "gte", value = 20 },
+] }
+show_when_locked = true
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask which of the three rules she keeps."
+targetType = "node"
+nodeId     = "rung_bev_the_first_night.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask what the forty a week was for."
+targetType = "node"
+nodeId     = "rung_bev_the_forty_a_week.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_bev", trait_key = "relation", operator = "gte", value = 40 },
+] }
+show_when_locked = true
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get her to show you the wastage sheet."
+targetType = "node"
+nodeId     = "rung_bev_the_wastage_sheet.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_bev", trait_key = "relation", operator = "gte", value = 40 },
+] }
+show_when_locked = true
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask what sorted meant."
+targetType = "node"
+nodeId     = "rung_bev_the_other_woman.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_bev", trait_key = "relation", operator = "gte", value = 20 },
+] }
+show_when_locked = true
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask her what she does on days."
+targetType = "node"
+nodeId     = "rung_bev_days.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_bev", trait_key = "relation", operator = "gte", value = 40 },
+] }
+show_when_locked = true
+
+
+[[canvases]]
+id          = "rung_bev_handover"
+name        = "The handover"
+description = "Triggerless rung off Bev's hub. Ungated — the guidance card points here. Doing the fifteen minutes properly instead of nodding through it. +4 relation with npc_bev, 20 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Two-twenty float"
+blocks = [
+  { type = "paragraph", content = "The proper way is to count it in front of her rather than after she has gone. It takes four minutes and it is the difference between being handed a shop and being handed a set of keys." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Count it in front of her.", blocks = [
+        { type = "paragraph", content = "Twenties, tens, the pound bag, the fifty-pence tube. She watches you do it without saying anything and does not correct you when you get to the same number she got to." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Right." },
+    ] },
+    { advance_text = "Go through the day with her.", blocks = [
+        { type = "paragraph", content = "What went, what did not, who was in, what the pumps did. She gives it to you in about ninety seconds in an order that has clearly been the same order for eleven years." },
+    ] },
+    { advance_text = "Let her go.", blocks = [
+        { type = "paragraph", content = "She gets to the door and stops with her hand on it, the way she does, and then does not say whatever it was and goes out to the car instead." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Watch her pull out.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 20, effects = [
+  { targetType = "npc", npcId = "npc_bev", trait = "relation", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_bev_last_one"
+name        = "The last one"
+description = "Triggerless rung off Bev's hub. Ungated. Four people before Robyn and two lasted a fortnight — the rotating-slot logic applied to her own job, which is the quietest threat in the game. +3 relation with npc_bev, 20 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Four before you"
+blocks = [
+  { type = "paragraph", content = "You ask who was on nights before you. She does the thing where she puts her bag back down on the chair, which means the answer is longer than the question was." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Let her tell it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Four. Two of them a fortnight. One did eight months and one did nearly two years." },
+    ] },
+    { advance_text = "Ask what happened to the two-year one.", blocks = [
+        { type = "paragraph", content = "She says he went to a distribution centre in Warrington on nearly double, which is the answer, and then she does not pick her bag up, which is not." },
+    ] },
+    { advance_text = "Ask about the fortnight ones.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "One couldn't do the quiet. The other one got herself in a mess with the park and Gerry sorted it, and I'm not going into what sorted means." },
+    ] },
+    { advance_text = "Don't push it.", blocks = [
+        { type = "thought_bubble", content = "Herself. The other one was a her, and Bev said Gerry sorted it in exactly the voice she uses for the bins." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Let her get off.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 20, effects = [
+  { targetType = "npc", npcId = "npc_bev", trait = "relation", op = "add", value = 3, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_bev_gerry"
+name        = "Ask her about Gerry"
+description = "Triggerless rung off Bev's hub, gated relation >= 20. The obligation seen from the day shift. Bev knows about the six thousand and has never mentioned knowing. +4 relation with npc_bev, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Two hundred a week"
+blocks = [
+  { type = "paragraph", content = "You ask her, on a Thursday, whether Gerry does the Friday thing with everybody. She looks at you for a second longer than the question needs." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Wait her out.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "He does the van rent with whoever's in the van. The other thing he does with you." },
+    ] },
+    { advance_text = "Ask how she knows about the other thing.", blocks = [
+        { type = "paragraph", content = "She says the till roll and the wage envelope come out of the same safe and she has counted both of them twice a week for eleven years, and she can do arithmetic." },
+    ] },
+    { advance_text = "Ask what he gets out of it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Six grand at two hundred a week is thirty weeks. He's not short of six grand, love. He's short of somebody who can't leave for thirty weeks." },
+    ] },
+    { advance_text = "Sit with that.", blocks = [
+        { type = "thought_bubble", content = "Thirty weeks. Not one of the four before her lasted thirty weeks except the one who went to Warrington." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Let her go home.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_bev", trait = "relation", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_bev_days"
+name        = "What she does on days"
+description = "Triggerless rung off Bev's hub, gated relation >= 40. Her arc's top rung: the day shift has its own second economy and Robyn becomes the second person who knows. +5 relation with npc_bev, +3 trade, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The day shift"
+blocks = [
+  { type = "paragraph", content = "You tell her the roll has been coming up eight or nine light some nights. You say it flat, the way you would say the pumps needed doing. She does not react at all for about four seconds." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Let her decide.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Eight or nine. On a night." },
+    ] },
+    { advance_text = "Say yes.", blocks = [
+        { type = "paragraph", content = "She puts her bag on the chair and sits down on it, which she has never once done at quarter to ten, and tells you that the day shift does it on the wastage sheet instead, and has done since about two thousand and nine." },
+    ] },
+    { advance_text = "Ask how much.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Forty a week. Every week. Eleven years. Do that one in your head." },
+    ] },
+    { advance_text = "Do it in your head.", blocks = [
+        { type = "paragraph", content = "Twenty-three thousand pounds, give or take, out of a shop on a road, forty pounds at a time, by a woman who has never taken a sick day and drives a car that starts." },
+    ] },
+    { advance_text = "Ask why she is telling you.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Because you're doing it wrong. Eight or nine is a number somebody notices. Forty on a wastage sheet is a number that was always going to be there." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Take the lesson.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 30, effects = [
+  { targetType = "npc", npcId = "npc_bev", trait = "relation", op = "add", value = 5, clamp = true },
+  { targetType = "player", trait = "trade", op = "add", value = 3, clamp = true },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# NUNN — the face on the obligation. Fridays under the canopy, engine running.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "hub_nunn_forecourt"
+name        = "Gerry Nunn"
+description = "Lane-1 standing hub @the_forecourt, gated by his Friday 18:00-20:00 row via requires_npc. Repeatable weekly. The car, the window down, the notebook on the passenger seat. Ladder on his relation; the reversal is that the engine eventually goes off."
+
+[canvases.trigger]
+location      = "the_forecourt"
+requires_npc  = "npc_nunn"
+npc           = "npc_nunn"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Under the canopy"
+blocks = [
+  { type = "paragraph", content = "The car is in the same place it is in every Friday, nose out, under the second island, engine running and the window down four inches. He does not get out and he has never once come inside on a Friday." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go out to the car with the week."
+targetType = "node"
+nodeId     = "rung_nunn_settle.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him what the six thousand was for."
+targetType = "node"
+nodeId     = "rung_nunn_six_grand.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him about the padlock."
+targetType = "node"
+nodeId     = "rung_nunn_padlock.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_nunn", trait_key = "relation", operator = "gte", value = 20 },
+] }
+show_when_locked = true
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask about the eleventh name."
+targetType = "node"
+nodeId     = "rung_nunn_the_eleventh_name.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_nunn", trait_key = "relation", operator = "gte", value = 40 },
+] }
+show_when_locked = true
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask to see the notebook."
+targetType = "node"
+nodeId     = "rung_nunn_the_notebook.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_nunn", trait_key = "relation", operator = "gte", value = 20 },
+] }
+show_when_locked = true
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go out short."
+targetType = "node"
+nodeId     = "rung_nunn_short_week.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get in the car."
+targetType = "node"
+nodeId     = "rung_nunn_get_in.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_nunn", trait_key = "relation", operator = "gte", value = 40 },
+] }
+show_when_locked = true
+
+
+[[canvases]]
+id          = "rung_nunn_settle"
+name        = "The week"
+description = "Triggerless rung off Nunn's hub. Ungated — the guidance card points here. The transaction itself, which is also the whole relationship. +3 relation with npc_nunn, 20 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Two hundred and forty-five"
+blocks = [
+  { type = "paragraph", content = "You go out to the car with it counted. He does not count it again, which took you three weeks to understand: counting it would mean the number was the point." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Hand it through.", blocks = [
+        { type = "paragraph", content = "Through a four-inch gap into a hand with the engine still going. It gets folded once and goes into the inside pocket and a figure goes into the notebook on the passenger seat." },
+    ] },
+    { advance_text = "Watch him write.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_nunn" }, content = "Two hundred. Forty-five for the van. You're all right." },
+    ] },
+    { advance_text = "Stand there a second longer than you need to.", blocks = [
+        { type = "paragraph", content = "He puts the window up. He has never once said thanks and he has never once said anything unkind either, and you stand on the forecourt in the cold with the canopy buzzing and eight hours in front of you." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Go back in.", config = { destinationType = "specific", locationId = "the_forecourt", time_progression_minutes = 20, effects = [
+  { targetType = "npc", npcId = "npc_nunn", trait = "relation", op = "add", value = 3, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_nunn_six_grand"
+name        = "What it was for"
+description = "Triggerless rung off Nunn's hub. Ungated and deliberately repeatable: she can ask every Friday for the rest of the game and the answer does not arrive in v0.1. The Want's central unfixed price. +2 relation with npc_nunn, 15 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "He does not say"
+blocks = [
+  { type = "paragraph", content = "You ask him. You have asked him before, in different words, at different points in the week, and it has never gone anywhere and you keep doing it." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Ask it straight this time.", blocks = [
+        { type = "paragraph", content = "What was the six thousand for. Not who was it paid to, not what did it cover — what was it for, from where he was sitting, on the day he decided to pay it." },
+    ] },
+    { advance_text = "Let the silence run.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_nunn" }, content = "It was for the six thousand, love." },
+    ] },
+    { advance_text = "Try once more.", blocks = [
+        { type = "paragraph", content = "He looks out through the windscreen at the canopy lights for a while, and then he puts the car in gear without putting the window up, which is the closest he has come to answering." },
+    ] },
+    { advance_text = "Let him go.", blocks = [
+        { type = "thought_bubble", content = "Thirty weeks at two hundred. Bev did that arithmetic out loud and he has never done it out loud once." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Watch the car pull off.", config = { destinationType = "specific", locationId = "the_forecourt", time_progression_minutes = 15, effects = [
+  { targetType = "npc", npcId = "npc_nunn", trait = "relation", op = "add", value = 2, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_nunn_padlock"
+name        = "Ask about the padlock"
+description = "Triggerless rung off Nunn's hub, gated relation >= 20. She raises the door. He does not open it. Keeps the v0.1 locked door alive as a WANT with a face on it rather than a set-dressing detail. +3 relation with npc_nunn, 20 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Your lock, not theirs"
+blocks = [
+  { type = "paragraph", content = "You mention, on a Friday, that there is a door behind the cold store with a padlock on it that is not on the company contract. You say it like a maintenance query." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Watch what he does with his hands.", blocks = [
+        { type = "paragraph", content = "Nothing. He does nothing with his hands at all, which is itself a thing, because for eleven weeks he has folded notes and written in a book and put a window up while you were talking." },
+    ] },
+    { advance_text = "Wait.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_nunn" }, content = "That's mine. It's not stock and it's not shop. Leave it." },
+    ] },
+    { advance_text = "Ask whether it needs doing.", blocks = [
+        { type = "paragraph", content = "You say if there is anything in there that wants moving you can move it, since you are in the stock room six times a night anyway. He says no. He says it fast." },
+    ] },
+    { advance_text = "Drop it.", blocks = [
+        { type = "thought_bubble", content = "Eleven weeks of a man who has never once been in a hurry, and the word no arrived early." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Go back inside.", config = { destinationType = "specific", locationId = "the_forecourt", time_progression_minutes = 20, effects = [
+  { targetType = "npc", npcId = "npc_nunn", trait = "relation", op = "add", value = 3, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_nunn_get_in"
+name        = "Get in the car"
+description = "Triggerless rung off Nunn's hub, gated relation >= 40. His arc's top rung in v0.1: the engine goes off. EXPLICIT. +5 relation with npc_nunn, +12 arousal, -4 count, 40 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The engine goes off"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/nunn_car_t5", pool = 5, description = "A woman in the passenger seat of a car at night under bright forecourt lights.", search_queries = ["woman passenger seat car night bright lights outside", "couple in parked car night interior dim forecourt"] } },
+  { type = "paragraph", content = "You do not hand it through the window. You go round the front of the car in the headlights, open the passenger door, move the notebook onto the dash and sit down in it, and after a second he turns the engine off." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Put the money on the dash.", blocks = [
+        { type = "paragraph", content = "Two hundred and forty-five on the dashboard next to the notebook, in the light off the canopy, and neither of you looks at it again for the rest of it." },
+    ] },
+    { advance_text = "Let him take his time.", blocks = [
+        { type = "paragraph", content = "He puts a hand on your knee and works it up under the fleece onto your tits without hurrying, nipples hard under his palm, and his other hand goes down between your legs to your cunt before he has said one word." },
+    ] },
+    { advance_text = "Get his belt.", blocks = [
+        { type = "paragraph", content = "His cock is already hard when you get it out and you work it slowly with the canopy lights on both of you. His hand stays on your tits. Your cunt is wet against the seat and he lets his head go back." },
+    ] },
+    { advance_text = "Get over.", blocks = [
+        { type = "paragraph", content = "You get the leggings off one leg and climb across onto him and take his cock into your cunt with the wheel in your back, and your tits are at his face and his hands come up under the fleece to hold them." },
+    ] },
+    { advance_text = "Move on him.", blocks = [
+        { type = "paragraph", content = "The car goes on its springs on a lit forecourt. Your cunt is tight on his cock, his thumb finds your clit between you, your tits are at his mouth, and neither of you says a word about six thousand pounds." },
+    ] },
+    { advance_text = "Finish it.", blocks = [
+        { type = "paragraph", content = "You come with his cock in you and your forehead against the window pillar, and he goes right after with both hands on your arse holding you down on him, and you moan into the roof lining." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "paragraph", content = "You get off him and find the leggings and open the door, and the cold comes in. The money is still on the dash. He does not touch it and neither do you." },
+        { type = "thought_bubble", content = "It is still two hundred and forty-five and it is still Friday, and now she does not know what it is." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Get out.", config = { destinationType = "specific", locationId = "the_forecourt", time_progression_minutes = 40, effects = [
+  { targetType = "npc", npcId = "npc_nunn", trait = "relation", op = "add", value = 5, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 12, clamp = true },
+  { targetType = "player", trait = "count", op = "subtract", value = 4, clamp = true },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# OSSIE — the only man on site with no leverage over her.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "hub_ossie_bay"
+name        = "Ossie"
+description = "Lane-1 standing hub @the_tyre_bay, gated by his rows via requires_npc — days Mon-Sat, plus Friday and Saturday nights split across midnight into two rows. Repeatable. The neighbour. Ladder on his relation."
+
+[canvases.trigger]
+location      = "the_tyre_bay"
+requires_npc  = "npc_ossie"
+npc           = "npc_ossie"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Behind the ply"
+blocks = [
+  { type = "paragraph", content = "The light is on behind the sheet of ply at the back, which means he is in and not asleep. He does not look up when you come under the roller door. He has not looked up once in a year and he always knows it is you." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit out a callout with him."
+targetType = "node"
+nodeId     = "rung_ossie_callout.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him why he sleeps in the bay."
+targetType = "node"
+nodeId     = "rung_ossie_why_here.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him why he never looks at you."
+targetType = "node"
+nodeId     = "rung_ossie_looks.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_ossie", trait_key = "relation", operator = "gte", value = 20 },
+] }
+show_when_locked = true
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask about the two shirts."
+targetType = "node"
+nodeId     = "rung_ossie_the_two_shirts.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_ossie", trait_key = "relation", operator = "gte", value = 20 },
+] }
+show_when_locked = true
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask about the calendar."
+targetType = "node"
+nodeId     = "rung_ossie_the_calendar_answer.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_ossie", trait_key = "relation", operator = "gte", value = 40 },
+] }
+show_when_locked = true
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Find out what he is on."
+targetType = "node"
+nodeId     = "rung_ossie_the_wage.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay in the bay until it stops being a visit."
+targetType = "node"
+nodeId     = "rung_ossie_stay.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_ossie", trait_key = "relation", operator = "gte", value = 40 },
+] }
+show_when_locked = true
+
+
+[[canvases]]
+id          = "rung_ossie_callout"
+name        = "Sit out a callout"
+description = "Triggerless rung off Ossie's hub. Ungated — the guidance card points here. Two people awake at the same hours on the same money. +4 relation with npc_ossie, 45 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Waiting for the phone"
+blocks = [
+  { type = "paragraph", content = "Between about one and four he is waiting for a phone that might not go. He sits on an upturned crate with the kettle on and the roller door up a foot and the radio on the local station that plays nothing after midnight." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Sit on the bench.", blocks = [
+        { type = "paragraph", content = "The cleared patch at the end nearest the door. Neither of you has ever said anything about the cleared patch. He puts a mug down on the bench next to you without being asked and without a word." },
+    ] },
+    { advance_text = "Say nothing for a bit.", blocks = [
+        { type = "paragraph", content = "That is most of it. Twenty minutes of a compressor ticking as it cools and a radio and two people who have been awake since eight in the evening not talking to each other." },
+    ] },
+    { advance_text = "Let him talk when he does.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_ossie" }, content = "Fifty-eight quid a callout. Forty of that's the rubber. It's the middle of the night and the rain and the sixty-mile-an-hour, that's what the eighteen's for." },
+    ] },
+    { advance_text = "Stay until the phone goes or it doesn't.", blocks = [
+        { type = "paragraph", content = "It does not go. At twenty past four you take the mugs to the sink at the back and wash both of them, which you have started doing, and he has stopped saying you do not have to." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Get back to the shop.", config = { destinationType = "specific", locationId = "the_tyre_bay", time_progression_minutes = 45, effects = [
+  { targetType = "npc", npcId = "npc_ossie", trait = "relation", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_ossie_why_here"
+name        = "Why he sleeps in the bay"
+description = "Triggerless rung off Ossie's hub. Ungated. He is on the same wage in the same trap and has been for longer, which is the thing that makes him legible and the thing that makes him frightening. +3 relation with npc_ossie, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The bunk behind the ply"
+blocks = [
+  { type = "paragraph", content = "You ask him, eventually, why a man with a trade sleeps behind a sheet of ply in a shed. He does not take it as an insult, which you had been braced for." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Let him answer.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_ossie" }, content = "Nearest place you'd want to live is Kelbrook proper. That's nine miles and a car I'd have to keep on the road." },
+    ] },
+    { advance_text = "Do the sum with him.", blocks = [
+        { type = "paragraph", content = "Rent, a car, fuel, and a wage that is the same as yours. He worked it out four years ago and the answer was the bay, and the answer has been the bay ever since." },
+    ] },
+    { advance_text = "Ask if Gerry charges him.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_ossie" }, content = "No. Never has. I asked him to, first year, so it'd be a proper thing. He said no." },
+    ] },
+    { advance_text = "Understand what that means.", blocks = [
+        { type = "thought_bubble", content = "Forty-five a week for the van and nothing at all for the bay. Ossie asked to be charged and Gerry would not do it. Nothing on this site is priced by what it costs." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Leave it there.", config = { destinationType = "specific", locationId = "the_tyre_bay", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_ossie", trait = "relation", op = "add", value = 3, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_ossie_looks"
+name        = "Why he never looks"
+description = "Triggerless rung off Ossie's hub, gated relation >= 20. The thing neither of them has said in a year, said. +4 relation with npc_ossie, +4 arousal, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "A year of not looking"
+blocks = [
+  { type = "paragraph", content = "You tell him you have noticed he never looks at you. Not once, not in a year, not even when you are stood four feet away in a vest at three in the morning holding a mug he made you." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Make him answer it.", blocks = [
+        { type = "paragraph", content = "He puts the wrench down and wipes his hands on the cloth for longer than his hands need, and then he looks at you, properly, for the first time, and it takes about a second and a half and it is a lot." },
+    ] },
+    { advance_text = "Let him say it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_ossie" }, content = "There's four blokes on this site can make your life difficult and I'm the only one that can't. Seemed like the least I could do was not be another one looking." },
+    ] },
+    { advance_text = "Tell him that is not the same thing.", blocks = [
+        { type = "paragraph", content = "You say that not looking is not the same as not wanting, and that he has spent a year being careful at you, and that being the safe one is a decision he made without asking you about it." },
+    ] },
+    { advance_text = "Watch him take it.", blocks = [
+        { type = "paragraph", content = "He picks the wrench back up, which is what he does instead of talking, and he says nothing at all, and he does not go back to not looking." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Go back to the shop.", config = { destinationType = "specific", locationId = "the_tyre_bay", time_progression_minutes = 30, effects = [
+  { targetType = "npc", npcId = "npc_ossie", trait = "relation", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_ossie_stay"
+name        = "Stay in the bay"
+description = "Triggerless rung off Ossie's hub, gated relation >= 40. His arc's top rung: the one thing on this site that costs her nothing and is therefore the hardest to take. EXPLICIT. +5 relation with npc_ossie, +12 arousal, 60 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Behind the ply"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/ossie_bunk_t5", pool = 5, description = "A man and a woman on a low bunk in a dim workshop back room at night.", search_queries = ["couple on bunk dim workshop back room night", "man and woman on low bed garage back room dim"] } },
+  { type = "paragraph", content = "The bunk behind the ply is a scaffold board frame with a proper mattress on it and a lamp clipped to the upright. It is warmer back here than the caravan and quieter than the shop and it smells of rubber and diesel." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Don't go back at four.", blocks = [
+        { type = "paragraph", content = "You do not get up at four. That is the whole of the decision and both of you know it is being made, and he does not say anything, and he moves along the bunk about six inches." },
+    ] },
+    { advance_text = "Let him take his time.", blocks = [
+        { type = "paragraph", content = "He gets the fleece off you and then just looks, which is a year of not looking arriving all at once. Then his mouth is on your tits, your nipples go hard under his tongue, and his hand is at your cunt." },
+    ] },
+    { advance_text = "Get his hands where you want them.", blocks = [
+        { type = "paragraph", content = "His hands are enormous and careful and rough from the work. Two fingers into your cunt, thumb on your clit, his mouth back on your tits, and you are wet enough to make a noise you did not plan on." },
+    ] },
+    { advance_text = "Get him in.", blocks = [
+        { type = "paragraph", content = "You pull him over onto you and take his cock into your cunt with your heels behind him and your tits flat under his chest, and the scaffold frame does not move at all because he built it square." },
+    ] },
+    { advance_text = "Let it be slow.", blocks = [
+        { type = "paragraph", content = "It is slow the entire time, which nothing on this site has been. His cock is deep and steady in your cunt and one hand stays on your tits and he watches your face the whole way through." },
+    ] },
+    { advance_text = "Finish.", blocks = [
+        { type = "paragraph", content = "You get there first with his thumb on your clit and your cunt clenching on him, moaning into his shoulder, and he goes after you with his forehead down on the pillow beside your ear." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "paragraph", content = "You stay. That is the part that is new. It gets light at the bottom of the roller door and neither of you gets up, and at ten past six Bev's headlights come down the road and slow at the junction." },
+        { type = "thought_bubble", content = "Nothing was traded. That is the only time on this site that has happened and she does not have anywhere to put it." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Stay where you are.", config = { destinationType = "specific", locationId = "the_tyre_bay", time_progression_minutes = 60, effects = [
+  { targetType = "npc", npcId = "npc_ossie", trait = "relation", op = "add", value = 5, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 12, clamp = true },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# HAL — Tuesdays. Note the hub sits at the_shop on WEDNESDAY, because his
+# 01:00 is the far side of midnight and the engine checks the weekday against
+# TODAY (v2.py:3446). His park rows and his shop row are deliberately separate.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "hub_hal_shop"
+name        = "Hal"
+description = "Lane-1 standing hub @the_shop, gated by his 00:45-01:30 Wednesday row via requires_npc — the far side of Tuesday night. Repeatable weekly. A tea, a paper, the second table, and about nine words. Ladder on his relation; the whole arc is about a man who does not ask."
+
+[canvases.trigger]
+location      = "the_shop"
+requires_npc  = "npc_hal"
+npc           = "npc_hal"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The second table"
+blocks = [
+  { type = "paragraph", content = "He comes in at quarter to one, buys a tea and whatever paper is left, and sits at the second table from the door. It is not marked and nobody has ever said it is his and everybody leaves it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him his tea and don't fill the quiet."
+targetType = "node"
+nodeId     = "rung_hal_tea.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit down opposite him."
+targetType = "node"
+nodeId     = "rung_hal_sit.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him why he stops here."
+targetType = "node"
+nodeId     = "rung_hal_why.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_hal", trait_key = "relation", operator = "gte", value = 20 },
+] }
+show_when_locked = true
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get through a Tuesday he does not come."
+targetType = "node"
+nodeId     = "rung_hal_the_last_tuesday.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask why the second table."
+targetType = "node"
+nodeId     = "rung_hal_the_second_table.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_hal", trait_key = "relation", operator = "gte", value = 20 },
+] }
+show_when_locked = true
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him talk about home."
+targetType = "node"
+nodeId     = "rung_hal_the_dog.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Make him ask you for something."
+targetType = "node"
+nodeId     = "rung_hal_ask.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_hal", trait_key = "relation", operator = "gte", value = 40 },
+] }
+show_when_locked = true
+
+
+[[canvases]]
+id          = "rung_hal_tea"
+name        = "The tea and the paper"
+description = "Triggerless rung off Hal's hub. Ungated — the guidance card points here, and the card says not to fill the twenty minutes with talk. +4 relation with npc_hal, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Nine words"
+blocks = [
+  { type = "paragraph", content = "The tea is from the machine and it is not good and he has never once said so. He takes it with both hands round the cup, which is a cold-cab habit, and opens the paper at the back." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Take it over.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_hal" }, content = "Ta." },
+    ] },
+    { advance_text = "Don't say anything.", blocks = [
+        { type = "paragraph", content = "You go back behind the counter and do the things you would be doing anyway. He reads. The strip lights buzz. It is one in the morning on a Tuesday and there are two people in a building on a black road." },
+    ] },
+    { advance_text = "Let the twenty minutes run.", blocks = [
+        { type = "paragraph", content = "That is the whole of it. Twenty minutes, most of a paper, one refill he pays for. It is the quietest part of the week and you have started arranging your Tuesday round it." },
+    ] },
+    { advance_text = "Watch him go.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_hal" }, content = "Night, then." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Clear the cup.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_hal", trait = "relation", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_hal_sit"
+name        = "Sit down opposite him"
+description = "Triggerless rung off Hal's hub. Ungated. Crossing from behind the counter to the other side of a table, which in this shop is a considerable distance. +4 relation with npc_hal, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The other chair"
+blocks = [
+  { type = "paragraph", content = "There are two chairs at the second table and for a year you have brought the tea to one of them and gone back behind the counter. Tonight you pull the other one out and sit in it." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Sit.", blocks = [
+        { type = "paragraph", content = "He looks up over the paper and then folds it, which takes a while, and puts it on the table face down. He does not ask what you want. He has never asked you for anything." },
+    ] },
+    { advance_text = "Let him start it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_hal" }, content = "Quiet one." },
+    ] },
+    { advance_text = "Agree that it is a quiet one.", blocks = [
+        { type = "paragraph", content = "And that is the conversation, and it goes on for twenty-five minutes, and by the end of it you know he does Aberdeen and back and that his wife has a dog he does not like and that he will retire in four years." },
+    ] },
+    { advance_text = "Stay until he goes.", blocks = [
+        { type = "thought_bubble", content = "Twenty-five minutes and he asked her nothing about herself, and it did not once feel like not being asked." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Get back behind the counter.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 30, effects = [
+  { targetType = "npc", npcId = "npc_hal", trait = "relation", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_hal_why"
+name        = "Why he stops here"
+description = "Triggerless rung off Hal's hub, gated relation >= 20. There are two other stops on this road and he passes both of them. +3 relation with npc_hal, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Two other stops"
+blocks = [
+  { type = "paragraph", content = "There is a services eleven miles back with a proper cafe in it and another one twenty-two miles on with a Costa. He passes both of them every Tuesday to sit at a chipboard table with machine tea." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Point that out.", blocks = [
+        { type = "paragraph", content = "He does the thing with the paper again, the fold, the face down. Then he tells you that the one eleven miles back has fourteen cameras in the car park and a bloke on the door." },
+    ] },
+    { advance_text = "Ask what is wrong with that.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_hal" }, content = "Nothing's wrong with it. It's just somewhere you get processed. This is somewhere somebody knows how you have your tea." },
+    ] },
+    { advance_text = "Take that in.", blocks = [
+        { type = "paragraph", content = "It is the longest thing he has said in a year and he says it to the table rather than to you, and then he picks the paper back up, which is the end of it." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Leave him with it.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_hal", trait = "relation", op = "add", value = 3, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_hal_ask"
+name        = "Make him ask"
+description = "Triggerless rung off Hal's hub, gated relation >= 40. His arc's top rung: a man who has never asked for anything is made to. EXPLICIT, and deliberately near-silent — his ceiling says the words are hers, not his. +5 relation with npc_hal, +10 arousal, 40 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "He has never asked"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/hal_table_t5", pool = 4, description = "A man seated at a table in a lit night shop and a woman standing close beside him.", search_queries = ["man seated table night shop woman standing close", "woman standing over seated man dim cafe night"] } },
+  { type = "paragraph", content = "A year of Tuesdays and he has not asked you for one thing, and you have worked out that this is not restraint on his part. It is that he does not believe asking is a thing that is available to him." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Lock the door first.", blocks = [
+        { type = "paragraph", content = "You put the snib on and turn the sign, which takes four seconds and is the loudest thing that has ever happened at that table. He watches you do it and does not say a word." },
+    ] },
+    { advance_text = "Stand next to his chair.", blocks = [
+        { type = "paragraph", content = "You put his hand on your tits over the vest, because he will not do it himself, and hold it there until it stays. Your nipples come up under his palm, your cunt tightens, and he still does not say anything." },
+    ] },
+    { advance_text = "Make him say it.", blocks = [
+        { type = "paragraph", content = "You tell him to ask. He cannot get it out. You get the vest up over your tits, put your nipple in his mouth and his hand on your cunt, and tell him again, and it comes out muffled and it is one word." },
+    ] },
+    { advance_text = "Get down.", blocks = [
+        { type = "paragraph", content = "You get his belt open and his cock out and take it in your mouth under a chipboard table in a locked shop, one hand on your own cunt and your tits against his knee, and he makes a noise like something giving way." },
+    ] },
+    { advance_text = "Get up on the table.", blocks = [
+        { type = "paragraph", content = "Leggings off, up on the second table, and he gets his mouth on your cunt with both hands under your arse and his tongue on your clit, careful with it in exactly the way he is careful with everything." },
+    ] },
+    { advance_text = "Have him there.", blocks = [
+        { type = "paragraph", content = "You pull him up and take his cock into your cunt on the table with your heels on the chair arms, and your tits are in his face and he holds on to your hips like the table might go." },
+    ] },
+    { advance_text = "Finish.", blocks = [
+        { type = "paragraph", content = "He comes almost at once and apologises into your neck, and you keep him there and work your own clit against him until your cunt goes tight and you moan into the top of his head." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "paragraph", content = "He folds the paper and puts it in his coat, and at the door he stops and says night, then, exactly the way he says it every week." },
+        { type = "thought_bubble", content = "Four years to retirement and a dog he does not like. He will be here next Tuesday at quarter to one and neither of them will mention any of it." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Unlock the door.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 40, effects = [
+  { targetType = "npc", npcId = "npc_hal", trait = "relation", op = "add", value = 5, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 10, clamp = true },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# DENNY — the broadcast. Two hubs, two rooms, two windows (engine.md §19).
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "hub_denny_park"
+name        = "Denny, in the park"
+description = "Lane-1 standing hub @the_lorry_park, gated by his Thu/Sun 22:00-23:59 and Fri/Mon 01:00-02:00 rows via requires_npc. Repeatable. Holding court between the cabs. This is where the SEEN tier gets a voice."
+
+[canvases.trigger]
+location      = "the_lorry_park"
+requires_npc  = "npc_denny"
+npc           = "npc_denny"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Holding court"
+blocks = [
+  { type = "paragraph", content = "He parks in the second row where the lamp is best and he does not get in the cab until he has to. There are usually two or three of them stood round the front of it with the doors open and a radio going." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stand with them for a bit."
+targetType = "node"
+nodeId     = "rung_denny_stand.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him introduce you to the park."
+targetType = "node"
+nodeId     = "rung_denny_intro.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him why he polices the channel."
+targetType = "node"
+nodeId     = "rung_denny_the_rule.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_denny", trait_key = "relation", operator = "gte", value = 20 },
+] }
+show_when_locked = true
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go up in the cab with him after."
+targetType = "node"
+nodeId     = "rung_denny_the_cab_after.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 35 },
+] }
+show_when_locked = true
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him about his sister."
+targetType = "node"
+nodeId     = "rung_denny_the_sister.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_denny", trait_key = "relation", operator = "gte", value = 40 },
+] }
+show_when_locked = true
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Give him something to say on nineteen."
+targetType = "node"
+nodeId     = "rung_denny_broadcast.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 35 },
+] }
+show_when_locked = true
+
+
+[[canvases]]
+id          = "hub_denny_shop"
+name        = "Denny, at the counter"
+description = "Lane-1 standing hub @the_shop, gated by his Fri/Mon 00:00-01:00 row via requires_npc — the far side of Thursday and Sunday night. A different room and window from his park hub, so engine.md §19 is satisfied. Repeatable."
+
+[canvases.trigger]
+location      = "the_shop"
+requires_npc  = "npc_denny"
+npc           = "npc_denny"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Talking to the whole shop"
+blocks = [
+  { type = "paragraph", content = "He comes in at midnight and talks at a volume built for a lorry park to a shop with two people in it, and buys about eleven pounds of things he does not need, and stays forty minutes." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Serve him and let him talk."
+targetType = "node"
+nodeId     = "rung_denny_counter.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Watch him deal with a new firm."
+targetType = "node"
+nodeId     = "rung_denny_the_new_ones.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask about the fifth phone cable."
+targetType = "node"
+nodeId     = "rung_denny_the_eleven_pounds.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_denny", trait_key = "relation", operator = "gte", value = 20 },
+] }
+show_when_locked = true
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go and bang on his door."
+targetType = "node"
+nodeId     = "rung_denny_bang_on_my_door.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him what the park says about you."
+targetType = "node"
+nodeId     = "rung_denny_what_they_say.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_denny", trait_key = "relation", operator = "gte", value = 20 },
+] }
+show_when_locked = true
+
+
+[[canvases]]
+id          = "rung_denny_stand"
+name        = "Stand with them"
+description = "Triggerless rung off Denny's park hub. Ungated — the guidance card points here. Being in the group rather than serving it. +4 relation with npc_denny, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Three of them and you"
+blocks = [
+  { type = "paragraph", content = "There is a way of joining a group of men stood round the front of a cab at half ten that does not work, which is to arrive with a purpose. The way that works is to arrive with nothing and say nothing for two minutes." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Arrive with nothing.", blocks = [
+        { type = "paragraph", content = "You come over with no bin bag and no clipboard and stand at the edge of it, and Denny moves about eight inches to make the circle bigger, which is done without any comment at all." },
+    ] },
+    { advance_text = "Listen.", blocks = [
+        { type = "paragraph", content = "Roadworks. A weighbridge near Penrith. An agency that owes one of them four days. Somebody's back. It is exactly the conversation that happens in every workplace and you have not stood in one for two years." },
+    ] },
+    { advance_text = "Say one thing.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_denny" }, content = "She's on nights on her own, mate. She knows about the Penrith one, she's had four of you in this week moaning about it." },
+    ] },
+    { advance_text = "Stay for the rest of it.", blocks = [
+        { type = "thought_bubble", content = "He said she's on nights on her own like it was a qualification rather than a fact about a lone woman on a dark plot." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Head back over.", config = { destinationType = "specific", locationId = "the_lorry_park", time_progression_minutes = 30, effects = [
+  { targetType = "npc", npcId = "npc_denny", trait = "relation", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_denny_intro"
+name        = "Let him introduce you"
+description = "Triggerless rung off Denny's park hub. Ungated. He hands her the park, which is a gift and a transfer of ownership at the same time. +3 relation with npc_denny, +2 seen, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "This is the one"
+blocks = [
+  { type = "paragraph", content = "A new one pulls in on a Thursday and is stood by his cab working out where the block is, and Denny does the thing he does, which is to shout across forty feet of gravel." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Let him do it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_denny" }, content = "Oi. That's the one you want. Shop's open all night and she'll sort you out, showers and all." },
+    ] },
+    { advance_text = "Hear the sentence twice.", blocks = [
+        { type = "paragraph", content = "It is a completely ordinary sentence about a shop and a shower block and it is also not, and Denny knows both of those things and has said it anyway and is now grinning at the gravel." },
+    ] },
+    { advance_text = "Take it.", blocks = [
+        { type = "paragraph", content = "You could correct it. You have about two seconds to correct it in front of four men and one new one, and you let the two seconds go past." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Go and sort him out.", config = { destinationType = "specific", locationId = "the_lorry_park", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_denny", trait = "relation", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "seen", op = "add", value = 2, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_denny_counter"
+name        = "Let him talk"
+description = "Triggerless rung off Denny's shop hub. Ungated SOURCE — he genuinely buys eleven pounds of tat every visit, and it goes through the till, which is the joke. +4 relation with npc_denny, +3 money (clamp = false), 40 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Eleven pounds of things"
+blocks = [
+  { type = "paragraph", content = "Two energy drinks, a bag of Percy Pigs, a phone cable he already has three of, a magazine about tractors, and a pasty out of the machine. Eleven pounds forty, through the till, every single time." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Ring it through.", blocks = [
+        { type = "paragraph", content = "He talks the entire time and none of it needs answering, which is restful in a way you did not expect. He is the only customer who has ever asked how your week has been and then waited." },
+    ] },
+    { advance_text = "Notice what he does not do.", blocks = [
+        { type = "paragraph", content = "He does not lean on the counter. He does not come round the end of it. He stands where a customer stands and shouts from there, and he has never once been anywhere in this shop he was not supposed to be." },
+    ] },
+    { advance_text = "Let him get to it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_denny" }, content = "Right. Bay six. If anything kicks off out there tonight, you come and bang on my door and not anybody else's." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Bag it up.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 40, effects = [
+  { targetType = "npc", npcId = "npc_denny", trait = "relation", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_denny_what_they_say"
+name        = "What the park says"
+description = "Triggerless rung off Denny's shop hub, gated relation >= 20. The SEEN meter read back to her in somebody's actual voice, which is the only place in the game it becomes a fact rather than a number. +4 relation with npc_denny, +3 seen, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "On nineteen"
+blocks = [
+  { type = "paragraph", content = "You ask him straight out what gets said about you on the radio. He puts the tractor magazine down, which for Denny is the equivalent of somebody else sitting down." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Make him give you the real version.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_denny" }, content = "You want the real version or the one that won't put you off your tea?" },
+    ] },
+    { advance_text = "The real version.", blocks = [
+        { type = "paragraph", content = "That it is worth stopping at now. That the woman on nights is all right. That there is a shower block she keeps proper and a table you can sit at and she will not move you on at three." },
+    ] },
+    { advance_text = "And the other half.", blocks = [
+        { type = "paragraph", content = "And that two or three of them have said other things and been told to give over, and that the telling to give over was done by Denny, on nineteen, in front of everybody, more than once." },
+    ] },
+    { advance_text = "Ask why he does that.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_denny" }, content = "Because they'll say what I let them say. That's just how it works out there." },
+    ] },
+    { advance_text = "Sit with it.", blocks = [
+        { type = "thought_bubble", content = "They will say what he lets them say. Every good thing the park thinks about her is a thing he decided it would think." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Bag his stuff up.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 30, effects = [
+  { targetType = "npc", npcId = "npc_denny", trait = "relation", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "seen", op = "add", value = 3, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_denny_broadcast"
+name        = "Give him something to say"
+description = "Triggerless rung off Denny's park hub, gated seen >= 35. The SEEN tier's top standing beat: not being looked at, being reported. EXPLICIT. +5 seen, +4 relation with npc_denny, +11 arousal, 40 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "In front of the cab"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/denny_cab_front_t5", pool = 5, description = "A woman and a man against the front of a parked lorry at night under orange light.", search_queries = ["woman against front of lorry night orange light man", "couple against truck grille night parking lot"] } },
+  { type = "paragraph", content = "The others have gone in. It is half eleven on a Thursday and there is one cab with its doors still open and a radio going and a man stood in front of it who tells this park what to think." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Don't take him round the back.", blocks = [
+        { type = "paragraph", content = "Round the back of the cab is the dark. The front of it is under the lamp with nine windscreens pointed at it, and that is where you stop, and he works out what that means about a second later." },
+    ] },
+    { advance_text = "Let him get the fleece off.", blocks = [
+        { type = "paragraph", content = "It goes on the wing mirror. He gets his hands up under the vest and onto your tits in full orange light, your nipples come up hard in the cold, and his knee goes between your legs against your cunt." },
+    ] },
+    { advance_text = "Get his cock out where they can see.", blocks = [
+        { type = "paragraph", content = "You get his belt open against the grille and his cock out in your hand, working it slowly, stood side-on with your tits out and your nipples up so anybody looking gets the whole shape of it." },
+    ] },
+    { advance_text = "Turn round.", blocks = [
+        { type = "paragraph", content = "You put your hands on the grille and he pulls the leggings down and gets his cock into your cunt from behind, tits pressed to cold steel, face toward the row." },
+    ] },
+    { advance_text = "Let the park have it.", blocks = [
+        { type = "paragraph", content = "He fucks you against the front of his own cab under the best lamp in the park. Your cunt is tight on his cock and you do not keep the noise down, and a curtain moves two rows over and stays moved." },
+    ] },
+    { advance_text = "Finish out there.", blocks = [
+        { type = "paragraph", content = "You come with one hand on your own clit and your cunt clenching on him and your tits flat to the grille, moaning loud enough to carry, and he goes right after with his hands on your hips." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "paragraph", content = "You get the fleece off the wing mirror. He does his belt and does not say anything clever, which is the single most surprising thing he has ever done." },
+        { type = "thought_bubble", content = "By Sunday it will be on nineteen in his words, and his words are the only ones this road is going to get." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Walk back across.", config = { destinationType = "specific", locationId = "the_lorry_park", time_progression_minutes = 40, effects = [
+  { targetType = "player", trait = "seen", op = "add", value = 5, clamp = true },
+  { targetType = "npc", npcId = "npc_denny", trait = "relation", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 11, clamp = true },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# ⚠️ TENANT SCOPE — EVERYTHING BELOW THIS LINE DIES AT THE FIRST ROTATION.
+#
+# Tam is the current occupant of bay nine. His ladder, his register, his one
+# paid-off secret. When the agency moves him on, THIS SECTION and his [[npcs]]
+# block are what get deleted, and nothing else in the game changes.
+#
+# Nothing room-scoped may appear below: the bay, the bunk, the curtain, the
+# two-knock rule, the state of the footwell and the terms-setting are all in
+# 3_activities.toml and are written to survive him. The measured failure was a
+# surface that was room-scoped BY FILE and tenant-scoped BY CONTENT.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "hub_tam_bay"
+name        = "Tam"
+description = "TENANT-SCOPED. Lane-1 standing hub @bay_9, gated by his all-nights row via requires_npc. Repeatable. Agency, first month, sleeping in the cab because the digs money has not come. Dies at rotation."
+
+[canvases.trigger]
+location      = "bay_9"
+requires_npc  = "npc_tam"
+npc           = "npc_tam"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The one in bay nine"
+blocks = [
+  { type = "paragraph", content = "Twenty-three, and he apologises before he has done anything. He has been in bay nine for three weeks and he has told you twice that the digs money is coming through on Friday, and it has been two different Fridays." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him about the digs money."
+targetType = "node"
+nodeId     = "rung_tam_digs.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Feed him without making it a favour."
+targetType = "node"
+nodeId     = "rung_tam_feed.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell him to stop apologising."
+targetType = "node"
+nodeId     = "rung_tam_sorry.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "relation", operator = "gte", value = 20 },
+] }
+show_when_locked = true
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Be there on the last morning."
+targetType = "node"
+nodeId     = "rung_tam_what_he_leaves.base"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Talk about the end of the month."
+targetType = "node"
+nodeId     = "rung_tam_the_end_of_the_month.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "relation", operator = "gte", value = 40 },
+] }
+show_when_locked = true
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Be there on the twenty-eighth."
+targetType = "node"
+nodeId     = "rung_tam_the_twenty_eighth.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "relation", operator = "gte", value = 20 },
+] }
+show_when_locked = true
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take what he has got nothing to pay with."
+targetType = "node"
+nodeId     = "rung_tam_nothing_to_trade.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "relation", operator = "gte", value = 40 },
+] }
+show_when_locked = true
+
+
+[[canvases]]
+id          = "rung_tam_digs"
+name        = "The digs money"
+description = "TENANT-SCOPED. Triggerless rung off Tam's hub. Ungated — the guidance card points here. The lie he is maintaining and the fact that she has known since week one. +4 relation with npc_tam, 20 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Coming through Friday"
+blocks = [
+  { type = "paragraph", content = "You knock twice and the window comes down four inches and you ask, straight, whether the digs money came. He says it is coming through Friday, and it is Saturday." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Don't let him off it.", blocks = [
+        { type = "paragraph", content = "You say it is Saturday. He goes quiet and then says the agency pays four weeks in arrears and the four weeks is up on the twenty-eighth, which is a real fact he has been sitting on alone for three weeks." },
+    ] },
+    { advance_text = "Ask what he has been eating.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "There's a Tesco in Kelbrook does the yellow stickers at eight. It's fine. Honestly, it's fine." },
+    ] },
+    { advance_text = "Let it go for now.", blocks = [
+        { type = "thought_bubble", content = "Twenty-three, four hundred miles from wherever he is from, in a bay nobody books, doing sums about yellow stickers." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Get down.", config = { destinationType = "specific", locationId = "bay_9", time_progression_minutes = 20, effects = [
+  { targetType = "npc", npcId = "npc_tam", trait = "relation", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_tam_feed"
+name        = "Feed him"
+description = "TENANT-SCOPED. Triggerless rung off Tam's hub. Ungated. The wastage card, used the other way. +4 relation with npc_tam, +1 trade, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Wastage"
+blocks = [
+  { type = "paragraph", content = "There is a laminated card on the back of the door that says staff may not consume wastage and may purchase it at full retail. It says nothing at all about what happens to it between the lamp and the bin." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Take it out at eleven.", blocks = [
+        { type = "paragraph", content = "Two pasties and a bacon slice in a bag, walked out to bay nine at eleven o'clock, handed up through a four-inch gap with the line about how they only get binned anyway." },
+    ] },
+    { advance_text = "Make it not a favour.", blocks = [
+        { type = "paragraph", content = "You tell him you need the tray cleared before Bev comes on and he is doing you a turn, which is a lie constructed carefully enough that he can accept it, and he takes it." },
+    ] },
+    { advance_text = "Go before he says thanks.", blocks = [
+        { type = "paragraph", content = "He starts to and you are already off the step, because a thank-you would make it the thing you both just agreed it was not." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Walk back.", config = { destinationType = "specific", locationId = "bay_9", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_tam", trait = "relation", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "trade", op = "add", value = 1, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_tam_sorry"
+name        = "Stop apologising"
+description = "TENANT-SCOPED. Triggerless rung off Tam's hub, gated relation >= 20. The apologising is the arc. +4 relation with npc_tam, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Sorry"
+blocks = [
+  { type = "paragraph", content = "He says sorry when you knock. He says sorry when he takes the coffee. He said sorry when you told him the block was free, as though a shower being available were an imposition he had caused." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Count them out to him.", blocks = [
+        { type = "paragraph", content = "You tell him he has said it four times in eleven minutes and you have started counting. He says sorry. Then he hears it and puts his hand over his face." },
+    ] },
+    { advance_text = "Ask where it comes from.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Everyone I've worked for in two years has been about a minute off telling me to get out the cab. You get like it." },
+    ] },
+    { advance_text = "Tell him the rule.", blocks = [
+        { type = "paragraph", content = "You tell him that between ten at night and six in the morning this site is yours, not the company's and not the agency's, and that nobody in it is a minute off telling him anything." },
+    ] },
+    { advance_text = "Watch him try it.", blocks = [
+        { type = "paragraph", content = "He nods and does not say sorry, visibly, with effort, and then grins at having managed it, and it is the first time you have seen his face do that." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Leave him to sleep.", config = { destinationType = "specific", locationId = "bay_9", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_tam", trait = "relation", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_tam_nothing_to_trade"
+name        = "Nothing to pay with"
+description = "TENANT-SCOPED. Triggerless rung off Tam's hub, gated relation >= 40. His arc's top rung and the Want's line about him: the one man on this site with nothing to trade, in a game where everyone trades. EXPLICIT. +5 relation with npc_tam, +12 arousal, 45 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "He has got nothing"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/tam_bunk_t5", pool = 5, description = "A young man and a woman close together on a narrow bunk in a lorry cab at night.", search_queries = ["young man and woman narrow bunk truck cab night", "couple close together sleeper cab bed dim"] } },
+  { type = "paragraph", content = "Everything on this site has a price now and you set most of them. A seat, a socket, a shower, ninety seconds of microwave, eleven feet of corridor. He is the one person in it who has nothing at all to put on the table." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Get up in the cab anyway.", blocks = [
+        { type = "paragraph", content = "He starts to say he cannot pay for anything and you tell him you are not selling anything, and you can see him fail to make that fit anywhere, because on this site it does not fit anywhere." },
+    ] },
+    { advance_text = "Take the vest off yourself.", blocks = [
+        { type = "paragraph", content = "He does not move at all. You get it off and his eyes are on your tits and he still does not move, so you take his hands and put one on your tits and one at your cunt, and your nipples go hard under his palm." },
+    ] },
+    { advance_text = "Let him catch up.", blocks = [
+        { type = "paragraph", content = "Then he does catch up all at once. His mouth is on your tits, his hand is into your cunt, his thumb finds your clit by accident, and he is shaking and you are already wet for him." },
+    ] },
+    { advance_text = "Get his jeans off.", blocks = [
+        { type = "paragraph", content = "His cock is hard in your hand before you have got the jeans past his knees. You push him back onto the bunk and get over him with your tits at his face and your cunt over his cock." },
+    ] },
+    { advance_text = "Take him.", blocks = [
+        { type = "paragraph", content = "You sit down on his cock and take it all the way into your cunt in one and he makes a sound like he has been hit. Your tits are in his face and his hands do not know where to go." },
+    ] },
+    { advance_text = "Slow him down.", blocks = [
+        { type = "paragraph", content = "He is going to go almost immediately so you stop moving and hold him there, cunt tight on his cock, until his breathing comes down, and then you start again slower with his thumb on your clit." },
+    ] },
+    { advance_text = "Finish together, more or less.", blocks = [
+        { type = "paragraph", content = "You come first with your cunt clenching down hard on him and your forehead on the roof lining, moaning into it, and he goes about four seconds later with both hands finally on your arse." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "paragraph", content = "He says thank you. Not sorry. You tell him that is worse and he laughs, properly, in a cab in bay nine at half three in the morning." },
+        { type = "thought_bubble", content = "Nothing was priced. The agency pays him on the twenty-eighth and moves him on at the end of the month and neither of them has said that out loud." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Get down off the step.", config = { destinationType = "specific", locationId = "bay_9", time_progression_minutes = 45, effects = [
+  { targetType = "npc", npcId = "npc_tam", trait = "relation", op = "add", value = 5, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 12, clamp = true },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# SECOND-PASS RUNGS. Depth on the existing ladders rather than new characters —
+# the measured release shape is a new event with an existing person at an
+# existing place, and that applies inside v0.1 as much as after it.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "rung_bev_the_wastage_sheet"
+name        = "The wastage sheet"
+description = "Triggerless rung off Bev's hub, gated relation >= 40. The mechanism, taught. Forty a week for eleven years on a form nobody reads. +3 relation with npc_bev, +3 trade, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "A form nobody reads"
+blocks = [
+  { type = "paragraph", content = "She shows you on the clipboard by the hot counter. It is a grid: item, quantity, reason, initial." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Let her walk you through it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Wastage goes on here and the stock count reconciles against it. Nobody checks the sheet against the bin. Nobody has ever checked the sheet against the bin." },
+    ] },
+    { advance_text = "Ask why it works.", blocks = [
+        { type = "paragraph", content = "Because wastage is expected. A stop like this bins twenty to forty pounds a week of food and head office has a number for that and the number is a range." },
+    ] },
+    { advance_text = "Ask what the rule is.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Inside the range, every week, never the same figure twice. The day you take a number that stands out is the day somebody looks at eleven years of them." },
+    ] },
+    { advance_text = "Understand what she is doing.", blocks = [
+        { type = "paragraph", content = "She is not cutting you in. There is nothing to cut you into. She is telling you how to do the thing you were already doing so that it does not end with both of them looked at." },
+    ] },
+    { advance_text = "Say thank you.", blocks = [
+        { type = "thought_bubble", content = "Eleven years of a woman being careful, handed over at quarter to ten like a float and a set of keys." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Take the clipboard.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_bev", trait = "relation", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "trade", op = "add", value = 3, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_bev_the_other_woman"
+name        = "The one before"
+description = "Triggerless rung off Bev's hub, gated relation >= 20. The fortnight one who got herself in a mess with the park, and what sorted means. +3 relation with npc_bev, +2 stress, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "What sorted means"
+blocks = [
+  { type = "paragraph", content = "You go back to it, weeks later, at quarter to ten, in the middle of a handover. You ask what sorted meant." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Ask it properly.", blocks = [
+        { type = "paragraph", content = "She puts the bag down. She does not sit. She looks at the door for a second and then tells you, flatly, in about forty words." },
+    ] },
+    { advance_text = "Listen.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Two of them from the park got into the shop after she'd locked it. Gerry had them off the site by the Thursday and their firm knew by the Friday." },
+    ] },
+    { advance_text = "Ask what happened to her.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "She went. Nobody made her. He offered her days and she didn't want days, she wanted out, and he paid her a month she hadn't worked." },
+    ] },
+    { advance_text = "Sit with the last part.", blocks = [
+        { type = "paragraph", content = "He got them off the site in three days, told their employer, and paid a month to a woman who had quit. None of that is what you expected sorted to mean." },
+    ] },
+    { advance_text = "Ask the obvious question.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "No. He didn't put a camera on the apron after it either. I've asked him twice." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Let her get off.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_bev", trait = "relation", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "stress", op = "add", value = 2, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_nunn_the_notebook"
+name        = "The notebook"
+description = "Triggerless rung off Nunn's hub, gated relation >= 20. What is actually written in it, which is not what she assumed. +3 relation with npc_nunn, 20 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "On the passenger seat"
+blocks = [
+  { type = "paragraph", content = "It is an A5 hardback with a rubber band round it and it lives on the passenger seat. He writes in it every Friday and has never once opened it in front of you at any other time." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Ask to see it.", blocks = [
+        { type = "paragraph", content = "He hands it over through the window without any hesitation at all, which is not what you had planned for." },
+    ] },
+    { advance_text = "Open it.", blocks = [
+        { type = "paragraph", content = "Names down the left, weeks across the top, and figures in the boxes. Yours is four down. There are eleven names in it and six of them are crossed through." },
+    ] },
+    { advance_text = "Read the crossed-out ones.", blocks = [
+        { type = "paragraph", content = "Crossed through means finished. Six people who owed him money and do not any more, going back years, in a hardback notebook with a rubber band round it." },
+    ] },
+    { advance_text = "Give it back.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_nunn" }, content = "Six done, four going, one that never will. It's not a secret, love. It's a book." },
+    ] },
+    { advance_text = "Work out what you got wrong.", blocks = [
+        { type = "thought_bubble", content = "She had assumed it was a ledger about her. It is a ledger about eleven people, and four of them are still on it, and one of them is never getting off." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Step back from the car.", config = { destinationType = "specific", locationId = "the_forecourt", time_progression_minutes = 20, effects = [
+  { targetType = "npc", npcId = "npc_nunn", trait = "relation", op = "add", value = 3, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_nunn_short_week"
+name        = "A short week"
+description = "Triggerless rung off Nunn's hub. Ungated. The Friday she cannot make the number, handled at the window with the engine running. -3 relation with npc_nunn, +3 stress, 20 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Forty short"
+blocks = [
+  { type = "paragraph", content = "Two hundred and five in the coat and two hundred and forty-five owed. There is no version of the walk out to the car that fixes forty pounds." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Go out anyway.", blocks = [
+        { type = "paragraph", content = "The alternative is not going out, and the alternative to that is him getting out of the car, and nobody on this site has ever seen him get out of the car on a Friday." },
+    ] },
+    { advance_text = "Say the number.", blocks = [
+        { type = "paragraph", content = "You say two hundred and five and you say why, which is a bottle of gas and two tyres and a bad Tuesday on the roll. He listens to the whole thing." },
+    ] },
+    { advance_text = "Wait.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_nunn" }, content = "Give us the two hundred. Van rent can wait a week. Don't let it be two weeks." },
+    ] },
+    { advance_text = "Understand the shape of it.", blocks = [
+        { type = "paragraph", content = "He took the debt and deferred the rent. Not the other way round. The six thousand keeps moving and the thing that can wait is the thing that is his own gravel." },
+    ] },
+    { advance_text = "Walk back.", blocks = [
+        { type = "thought_bubble", content = "That was a kindness and it was also a man making sure the number that matters did not slip. Both, at once, through a four-inch gap." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Go back in.", config = { destinationType = "specific", locationId = "the_forecourt", time_progression_minutes = 20, effects = [
+  { targetType = "npc", npcId = "npc_nunn", trait = "relation", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "stress", op = "add", value = 3, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_ossie_the_wage"
+name        = "The same money"
+description = "Triggerless rung off Ossie's hub. Ungated. Two people on identical wages, on the same plot, and the different things they have done with four years and eleven weeks. +3 relation with npc_ossie, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Identical"
+blocks = [
+  { type = "paragraph", content = "It comes out sideways, over a kettle, on a Friday night. He is on what you are on. Not similar. The same figure." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Check you heard it.", blocks = [
+        { type = "paragraph", content = "You make him say it twice. A time-served fitter with his own bay and a callout book is on the same hourly rate as a woman eleven weeks into a night shift in a shop." },
+    ] },
+    { advance_text = "Ask if he has asked for more.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_ossie" }, content = "Twice. He didn't say no. He said what would you do with it, and I couldn't answer him, and that was the end of that." },
+    ] },
+    { advance_text = "Think about what he did with four years.", blocks = [
+        { type = "paragraph", content = "A scaffold-board bed built square, a rail of four ironed shirts, a rope across a pit, and a calendar four years dead kept on the right month." },
+    ] },
+    { advance_text = "Say something true.", blocks = [
+        { type = "paragraph", content = "You tell him that what would you do with it is not a question, it is a way of not answering, and that he let a man talk him out of a rise with a rhetorical question." },
+    ] },
+    { advance_text = "Watch him take it.", blocks = [
+        { type = "paragraph", content = "He does not argue. He looks at the kettle for a while and then says, quietly, that he had not thought of it that way, which is the most rattled you have ever seen him." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Wash the mugs.", config = { destinationType = "specific", locationId = "the_tyre_bay", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_ossie", trait = "relation", op = "add", value = 3, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_hal_the_dog"
+name        = "The dog he does not like"
+description = "Triggerless rung off Hal's hub. Ungated. Nine words a week for a year, and then about two hundred in one go. +4 relation with npc_hal, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Four years to go"
+blocks = [
+  { type = "paragraph", content = "It arrives without warning at ten past one on a Tuesday, off the back of nothing, in a shop with two people in it." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Let him start.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_hal" }, content = "She got a dog when our lad went. I'm away four nights. It's her dog, that, not ours." },
+    ] },
+    { advance_text = "Don't fill the gap.", blocks = [
+        { type = "paragraph", content = "There is a long one. You have learned not to put anything in it, which took about four months and is the single most useful thing you have learned in this job." },
+    ] },
+    { advance_text = "Let him get to it.", blocks = [
+        { type = "paragraph", content = "He says four years to retirement. He says it twice. Then he says that he does not know what he is going to do on a Tuesday night in four years, and folds the paper." },
+    ] },
+    { advance_text = "Say the only useful thing.", blocks = [
+        { type = "paragraph", content = "You tell him the shop is open on a Tuesday in four years and so are you, probably, and he laughs, once, which you have never heard." },
+    ] },
+    { advance_text = "Let him go at half one.", blocks = [
+        { type = "thought_bubble", content = "A year of nine words and then two hundred at ten past one, and next Tuesday it will be nine again, and that is completely fine." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Clear the cup.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_hal", trait = "relation", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_denny_the_rule"
+name        = "What he lets them say"
+description = "Triggerless rung off Denny's park hub, gated relation >= 20. He polices the channel, and she works out what that costs and who it is for. +4 relation with npc_denny, +2 seen, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "On nineteen"
+blocks = [
+  { type = "paragraph", content = "You have heard him do it twice now. Somebody says something about you on the radio and Denny comes back over the top of it and tells them to give over." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Ask him why he bothers.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_denny" }, content = "Because if it goes one way it's a laugh and if it goes the other way it's a woman on her own out here at three and nobody stopping." },
+    ] },
+    { advance_text = "Ask who taught him that.", blocks = [
+        { type = "paragraph", content = "He says his sister did nights in a hospital car park for six years, which he offers exactly once and never mentions again in any conversation you have with him." },
+    ] },
+    { advance_text = "Push on the other half.", blocks = [
+        { type = "paragraph", content = "You point out that it also means what the park thinks of you is whatever he decides it thinks, and that he has not offered to stop doing that." },
+    ] },
+    { advance_text = "Watch him take it seriously.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_denny" }, content = "Aye. That's true, that. I'd not thought of it as a thing I was doing to you." },
+    ] },
+    { advance_text = "Leave it there.", blocks = [
+        { type = "thought_bubble", content = "He is the reason nine men are polite to her and he is also the reason she cannot tell whether they would have been." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Head back across.", config = { destinationType = "specific", locationId = "the_lorry_park", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_denny", trait = "relation", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "seen", op = "add", value = 2, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_denny_bang_on_my_door"
+name        = "Bang on my door"
+description = "Triggerless rung off Denny's shop hub. Ungated. He says it every visit. One night she has to. +4 relation with npc_denny, -2 stress, 30 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Bay six"
+blocks = [
+  { type = "paragraph", content = "He says it on the way out every single time and you have said yeah, right, thanks every single time, and neither of you has ever meant it as a plan." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "The night it is not nothing.", blocks = [
+        { type = "paragraph", content = "Two of them, a car, half two, and one of them is round the end of the counter and is not moving when you ask him to and his mate has locked the door on the snib." },
+    ] },
+    { advance_text = "Get to the side door.", blocks = [
+        { type = "paragraph", content = "You go out the side and across the apron in a vest at half two in February and you are at bay six in about eleven seconds." },
+    ] },
+    { advance_text = "Bang on it.", blocks = [
+        { type = "paragraph", content = "It takes two goes. Then a light, and a curtain, and a man in a T-shirt getting down off a cab into wet gravel in bare feet without asking a single question." },
+    ] },
+    { advance_text = "Watch it end.", blocks = [
+        { type = "paragraph", content = "It ends without anybody touching anybody. Denny gets between them and the door and says four sentences and they go, and their plate is on the fuel camera anyway." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "paragraph", content = "He makes you a tea in your own shop with your own machine and does not ask if you are all right, which is the correct decision." },
+        { type = "thought_bubble", content = "He said it every week for eleven weeks so that it would already be true on the night it had to be." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Take the snib off.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 30, effects = [
+  { targetType = "npc", npcId = "npc_denny", trait = "relation", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "stress", op = "subtract", value = 2, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_tam_the_twenty_eighth"
+name        = "The twenty-eighth"
+description = "TENANT-SCOPED. Triggerless rung off Tam's hub, gated relation >= 20. The day the money lands, and what he does with it. +4 relation with npc_tam, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "It lands"
+blocks = [
+  { type = "paragraph", content = "Four weeks in arrears, up on the twenty-eighth, and on the twenty-eighth it actually lands, which by then neither of you was sure about." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Hear about it before he tells you.", blocks = [
+        { type = "paragraph", content = "He is in the shop at midnight buying an actual meal instead of the yellow-sticker stuff, and he is buying it with a card, and he is grinning at a pasty." },
+    ] },
+    { advance_text = "Ask what he is doing with it.", blocks = [
+        { type = "paragraph", content = "Digs in Kelbrook from the first, a proper bed, nine miles away. He has it all worked out and has clearly had it worked out for three weeks." },
+    ] },
+    { advance_text = "Ask about the bay.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "I'll still be parking here. It's the run. I'll just not be, you know. Living in it." },
+    ] },
+    { advance_text = "Say the right thing.", blocks = [
+        { type = "paragraph", content = "You tell him the twelve pounds a week stops on the first, then, and he says he will pay it anyway, and you tell him not to be daft, and he pays it anyway." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "thought_bubble", content = "The agency moves him on at the end of the month regardless. Neither of them has said that out loud and both of them have known it for a fortnight." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Ring the pasty through.", config = { destinationType = "specific", locationId = "bay_9", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_tam", trait = "relation", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_bev_the_first_night"
+name        = "What she did not say"
+description = "Triggerless rung off Bev's hub. Ungated. The three rules, revisited, and which of them Bev keeps. +3 relation with npc_bev, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Three rules"
+blocks = [
+  { type = "paragraph", content = "Hatch down at midnight. Serve through the drawer. Do not go out on the apron on your own. She said them in that order on the first night and has never repeated them." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Ask which ones she kept.", blocks = [
+        { type = "paragraph", content = "She does not pretend to misunderstand. She says she did days for nine years before nights ever came up and that she has done about eleven night shifts in her life." },
+    ] },
+    { advance_text = "Push on that.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "I've never worked a full night on this site on my own. Not once. I gave you three rules for a job I've not done." },
+    ] },
+    { advance_text = "Ask where they came from.", blocks = [
+        { type = "paragraph", content = "From the woman before the woman before you, who wrote them on the back of a delivery note in about twenty-fourteen, and Bev has been handing them over ever since." },
+    ] },
+    { advance_text = "Ask if they are any good.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "The hatch one's rubbish. The apron one isn't. I'd not have told you which if you'd asked me week one." },
+    ] },
+    { advance_text = "Understand the handover.", blocks = [
+        { type = "thought_bubble", content = "Eleven years of passing on somebody else's rules for a shift she has never worked, and being honest about it the day she was asked." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Take the keys.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_bev", trait = "relation", op = "add", value = 3, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_bev_the_forty_a_week"
+name        = "Twenty-three thousand"
+description = "Triggerless rung off Bev's hub, gated relation >= 40. What eleven years of forty pounds a week was actually for. +4 relation with npc_bev, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "What it was for"
+blocks = [
+  { type = "paragraph", content = "You do the arithmetic out loud one night. Forty a week, eleven years, twenty-three thousand pounds, give or take, out of a wastage sheet." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Ask what she did with it.", blocks = [
+        { type = "paragraph", content = "You are expecting a holiday, or a car, or nothing in particular. She tells you and it takes about nine words and it is none of those." },
+    ] },
+    { advance_text = "Hear it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Our lad's course. Three years of it and the digs in Leeds. He's a physio now." },
+    ] },
+    { advance_text = "Do the sum again.", blocks = [
+        { type = "paragraph", content = "Three years of a course and accommodation in Leeds is not far off twenty-three thousand pounds, and it did not come out of a wage that has never gone above what you are on." },
+    ] },
+    { advance_text = "Ask if she has stopped.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "He finished in twenty-two. No, I've not stopped. I've not worked out how to and I've not tried that hard." },
+    ] },
+    { advance_text = "Let it sit.", blocks = [
+        { type = "thought_bubble", content = "Eleven years, forty a week, inside a range head office already expected, so that a lad from a village with one shop could do three years in Leeds." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Let her go home.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_bev", trait = "relation", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_hal_the_last_tuesday"
+name        = "A Tuesday he does not come"
+description = "Triggerless rung off Hal's hub. Ungated. One week the fridge trailer is not on bay four, and there is no way to find out why. +2 stress, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Bay four is empty"
+blocks = [
+  { type = "paragraph", content = "Bay four is empty at eleven. It is empty at midnight. At quarter to one nobody comes in for a tea and a paper." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Wait anyway.", blocks = [
+        { type = "paragraph", content = "You put the paper on the second table at half twelve the way you have for months. It sits there. At two you put it back on the rack." },
+    ] },
+    { advance_text = "Work out what you know.", blocks = [
+        { type = "paragraph", content = "You do not know his surname. You do not know the firm. You know a bay number, a trailer type, a night, and that he has four years to retirement." },
+    ] },
+    { advance_text = "Work out what you can do.", blocks = [
+        { type = "paragraph", content = "Nothing. There is no way to check on a man you have spent a year with for twenty minutes a week. There is not one thing you could put into a phone." },
+    ] },
+    { advance_text = "Get through the shift.", blocks = [
+        { type = "paragraph", content = "The rest of the night is the same night it always is. The road does something every eleven minutes. The block gets run at three." },
+    ] },
+    { advance_text = "The week after.", blocks = [
+        { type = "paragraph", content = "He is on bay four at eleven the following Tuesday. Tyre blowout on the A1 and a night in a hotel in Wetherby, which he mentions in about six words." },
+        { type = "thought_bubble", content = "Six words, a week late, and she had spent seven days with no way on earth to ask." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Take him his tea.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 25, effects = [
+  { targetType = "player", trait = "stress", op = "add", value = 2, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_denny_the_new_ones"
+name        = "Vouching"
+description = "Triggerless rung off Denny's shop hub. Ungated. What he does when a new firm starts using the stop. +3 relation with npc_denny, +2 seen, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "A new firm"
+blocks = [
+  { type = "paragraph", content = "A haulier out of Warrington starts putting three a week through here in February. New plates, new faces, none of them on the channel." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Watch what he does.", blocks = [
+        { type = "paragraph", content = "He gets to them in the park before they get to the shop. Not a warning and not a welcome. Just a bloke stood by a cab telling somebody how the stop works." },
+    ] },
+    { advance_text = "Ask what he tells them.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_denny" }, content = "Shop's open all night, block's proper, she'll sort you out, and don't be a prick about it." },
+    ] },
+    { advance_text = "Notice the fourth clause.", blocks = [
+        { type = "paragraph", content = "The first three are information. The fourth one is the whole job and it is four words long and it is said by a man leaning on somebody else's wing mirror." },
+    ] },
+    { advance_text = "Ask if it works.", blocks = [
+        { type = "paragraph", content = "Eleven weeks and three a week out of Warrington and not one of them has been a problem, which is either the four words or luck, and there is no way to tell which." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "thought_bubble", content = "Everything good about this park might be him and might be the men in it, and she is never going to find out which, and that is its own kind of debt." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Bag his stuff up.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_denny", trait = "relation", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "seen", op = "add", value = 2, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_nunn_the_eleventh_name"
+name        = "The one that never will"
+description = "Triggerless rung off Nunn's hub, gated relation >= 40. Six crossed through, four going, and one that is never getting off the notebook. +4 relation with npc_nunn, 25 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Never"
+blocks = [
+  { type = "paragraph", content = "He said it through a window with the engine running. Six done, four going, one that never will. You go back to it a month later on a Friday." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Ask who it is.", blocks = [
+        { type = "paragraph", content = "He turns the engine off, which by now you know is the whole answer arriving before any of the words do." },
+    ] },
+    { advance_text = "Wait.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_nunn" }, content = "First name in it. Fella who had the tyre bay before Ossie. Nineteen ninety-eight." },
+    ] },
+    { advance_text = "Ask what happened.", blocks = [
+        { type = "paragraph", content = "He does not say. He says the man is dead and that the figure is still written in and that he has copied it forward into three notebooks since, in his own handwriting, at the top of the first page." },
+    ] },
+    { advance_text = "Ask why he keeps it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_nunn" }, content = "Because it's owed. Doesn't stop being owed because there's nobody to pay it." },
+    ] },
+    { advance_text = "Understand the book.", blocks = [
+        { type = "paragraph", content = "It is not a ledger of people who owe him. It is a ledger of what he is owed and what he owes, and the first line has been on the wrong side of it for twenty-eight years." },
+    ] },
+    { advance_text = "Step back from the car.", blocks = [
+        { type = "thought_bubble", content = "Six thousand pounds and a rubber band, and the first name in the book is somebody he has been carrying since before she was born." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Go back in.", config = { destinationType = "specific", locationId = "the_forecourt", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_nunn", trait = "relation", op = "add", value = 4, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_ossie_the_two_shirts"
+name        = "The two that never get worn"
+description = "Triggerless rung off Ossie's hub, gated relation >= 20. Four years of ironing two shirts for something that has not come up. +3 relation with npc_ossie, 20 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Plain blue and a check"
+blocks = [
+  { type = "paragraph", content = "You ask about the two on the rail with four inches of clear conduit either side of them. He does not deflect it, which by now is not surprising." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Let him answer.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_ossie" }, content = "You've got to have something that isn't work. Even if there's nowhere to wear it. Especially then." },
+    ] },
+    { advance_text = "Ask when they last went on.", blocks = [
+        { type = "paragraph", content = "A funeral in twenty-twenty-three and a hospital appointment before that. Two occasions in four years and he has ironed them roughly every fortnight for the whole period." },
+    ] },
+    { advance_text = "Ask why he irons them.", blocks = [
+        { type = "paragraph", content = "He says because otherwise in two years they would be a pair of creased shirts in a shed, and then there would be nothing on this plot that was not work." },
+    ] },
+    { advance_text = "Say the honest thing.", blocks = [
+        { type = "paragraph", content = "You tell him you have a shoebox and two bags and a mirror at the wrong height, and that you understand the shirts completely, and that it is the saddest thing you have heard all year." },
+    ] },
+    { advance_text = "Let him laugh.", blocks = [
+        { type = "paragraph", content = "He does. Then he says that the alternative is not having them, and that he has thought about that version of it, and that he prefers this one." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Finish the tea.", config = { destinationType = "specific", locationId = "the_tyre_bay", time_progression_minutes = 20, effects = [
+  { targetType = "npc", npcId = "npc_ossie", trait = "relation", op = "add", value = 3, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "rung_tam_what_he_leaves"
+name        = "What he leaves on the post"
+description = "TENANT-SCOPED. Triggerless rung off Tam's hub. Ungated. The last morning, and the one thing on the fence post anybody has ever come back for. +3 relation with npc_tam, 20 min."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The last morning"
+blocks = [
+  { type = "paragraph", content = "He goes on the thirty-first at about half five, which is the same as every other morning, because there is no ceremony available at half five." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Do the coffee run.", blocks = [
+        { type = "paragraph", content = "The chipped cup, four minutes across the gravel, handed up through a gap. He says the thing about not having any money on him and both of you let it go past." },
+    ] },
+    { advance_text = "Watch the walkround.", blocks = [
+        { type = "paragraph", content = "Eleven minutes. Not ninety seconds. Somewhere in a month he started doing the whole thing properly and neither of you has ever mentioned that either." },
+    ] },
+    { advance_text = "Watch him go.", blocks = [
+        { type = "paragraph", content = "Air up, lights, off the gravel in a long slow curve. The bay is a dry rectangle and an oil shadow and about forty cable ties' worth of nothing." },
+    ] },
+    { advance_text = "Check the post.", blocks = [
+        { type = "paragraph", content = "There is a work glove on it that was not there last night. One of a pair. Left hand. Nobody has ever taken anything off that post and nobody has ever left anything deliberately." },
+    ] },
+    { advance_text = "Leave it there.", blocks = [
+        { type = "thought_bubble", content = "Three gloves, a hi-vis, a hat, and now a left hand that was put there on purpose by somebody who knew she would be the one to find it." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Finish the sweep.", config = { destinationType = "specific", locationId = "bay_9", time_progression_minutes = 20, effects = [
+  { targetType = "npc", npcId = "npc_tam", trait = "relation", op = "add", value = 3, clamp = true },
+] } }
