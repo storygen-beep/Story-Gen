@@ -54,7 +54,7 @@
     "deletion_test": "Cut Bev and nothing Robyn does at night gets measured by anyone who understands it. Nunn is leverage and the drivers are appetite; Bev is the only person whose read on the site is worth having, and the handover is the game's only mirror.",
     "release_41_test": "A new regular on a new night, or an hour of the site she did not previously hold. Neither the road nor the rota can be exhausted.",
     "crudest_repeatable_surface": "The shower-block corridor — tokens, cubicles, the drain, and the fact that she is the one who holds the key to it. Entered nightly from v0.1 onward.",
-    "last_read_at_release": "0.1"
+    "last_read_at_release": "0.1.1"
   },
   "board": {
     "ascent_tiers": [
@@ -81,25 +81,25 @@
         "job": "The anchor. Till, hot counter, coffee machine, the night hatch, four tables in the window. Where she spends most of eight hours and where everyone comes to her.",
         "anchor": true,
         "budget": 10000,
-        "fill": 10295,
+        "fill": 10500,
         "has_cycling_pool": true,
         "objects": [
-          "the till and Bev's float",
+          "the till, its drawer and Bev's float",
           "the till roll",
-          "the drawer",
           "the hot counter",
           "the coffee machine",
           "the four tables in the window",
           "the glass front",
+          "the road past the glass",
           "the hatch",
           "the monitor",
           "the heater over the door",
           "the stool",
-          "the safe drawer and the wage envelope",
           "the bakery van crates",
           "the radio",
           "the door",
-          "the queue"
+          "the queue",
+          "the room in daylight"
         ]
       },
       {
@@ -107,7 +107,7 @@
         "job": "The apron. Rows of cabs, the lit end and the dark end past the last lamp. The renewable source of new faces and the SEEN tier's consequence surface.",
         "anchor": false,
         "budget": 5000,
-        "fill": 5086,
+        "fill": 5000,
         "has_cycling_pool": true,
         "objects": [
           "the two sodium lamps",
@@ -124,7 +124,7 @@
         "job": "Driver shower block across the apron. Corridor, four cubicles, token machine, one dryer. She holds the key. The crudest repeatable surface in the game.",
         "anchor": false,
         "budget": 5000,
-        "fill": 4191,
+        "fill": 4250,
         "has_cycling_pool": true,
         "objects": [
           "the four cubicles",
@@ -144,7 +144,7 @@
         "job": "Pumps under the canopy, the night hatch, the CCTV mast. The exterior and the traversal hub — everything crosses it. Where Nunn pulls up on a Friday.",
         "anchor": false,
         "budget": 4000,
-        "fill": 3902,
+        "fill": 4000,
         "has_cycling_pool": true,
         "objects": [
           "the six pumps in three islands",
@@ -160,13 +160,12 @@
         "job": "The rotating slot, as a room. One cab, one bunk, one curtain. ROOM-scoped content names the occupant by role only ('the bay-nine driver'); TENANT-scoped content dies with him.",
         "anchor": false,
         "budget": 3500,
-        "fill": 4081,
+        "fill": 4000,
         "has_cycling_pool": true,
         "objects": [
           "the cab",
-          "the bunk the width of a door",
+          "the bunk and the locker over it",
           "the curtain behind the seats",
-          "the kettle on the engine hump",
           "the window you knock on twice",
           "the night heater"
         ]
@@ -176,7 +175,7 @@
         "job": "Ossie's open-fronted shed. Compressor, pit, kettle, a bunk in the back he sleeps in. The only other body on site at night.",
         "anchor": false,
         "budget": 3200,
-        "fill": 3540,
+        "fill": 3500,
         "has_cycling_pool": true,
         "objects": [
           "the roller door and the gap of light",
@@ -193,16 +192,18 @@
         "job": "Her caravan behind the bay. Nunn owns it. The dwelling, the wardrobe, and the solo surface — cold, damp, and the one place nobody can walk in.",
         "anchor": false,
         "budget": 3200,
-        "fill": 3395,
+        "fill": 3500,
         "has_cycling_pool": true,
         "objects": [
-          "the fan heater",
-          "the two-ring hob",
-          "the table that folds",
           "the bed at the cold end",
           "the two bags under the bed",
           "the thin curtain",
-          "the mirror on the back of the door"
+          "the mirror on the back of the door",
+          "the window over the bed",
+          "the calor bottle",
+          "the cold tap over the sink",
+          "the gravel the van stands on",
+          "the tyre bay light"
         ]
       },
       {
@@ -210,7 +211,7 @@
         "job": "Behind the shop. Cages, the cold store, the CCTV recorder — and the padlocked door that is v0.1's locked door.",
         "anchor": false,
         "budget": 3000,
-        "fill": 2960,
+        "fill": 2750,
         "has_cycling_pool": true,
         "objects": [
           "the roll cages",
@@ -218,7 +219,9 @@
           "the CCTV recorder and its screen",
           "the eleven feet of corridor",
           "the padlocked door",
-          "the shelves"
+          "the shelves",
+          "the back door and its hasp",
+          "the wastage sheet"
         ]
       }
     ],
@@ -264,12 +267,12 @@
     ],
     "schedule_plan": {
       "npc_bev": "Shop 06:00-14:00 Mon-Fri, plus the 21:45-22:15 handover Mon-Fri and two 14:00-22:00 evening shifts (Fri, Sat) that overlap the front of Robyn's night. The handover alone would be too thin a surface for the character the deletion test names as essential.",
-      "npc_nunn": "Forecourt/shop Fri 18:00-20:00 (the settle-up) and Tue 10:00-12:00 — deliberately inside Robyn's sleep, so catching him costs her the day.",
-      "npc_ossie": "Tyre bay 08:00-18:00 Mon-Sat; night row 22:00-02:00 Fri/Sat only. He lives in the back of the bay, so the isolation is real but not absolute.",
-      "npc_hal": "Lorry park 23:00-06:00 Tue; shop 01:00-01:30 Tue.",
-      "npc_denny": "Lorry park 22:00-02:00 Thu and Sun; shop and showers inside that window.",
-      "npc_tam": "Bay 9 every night, 20:00-06:00, for this rotation.",
-      "overnight_note": "Overnight windows are ONE row — setup.isCurrentTimeSlot handles the wrap explicitly. Verified in the-board.md section 2 against generators/v2.py; do not split 22:00-06:00 into two rows."
+      "npc_nunn": "Forecourt Fri 18:00-20:00 and shop Tue 10:00-12:00 — both deliberately inside Robyn's sleep, so catching him costs her the day. NOTE the Friday row is NOT the settle-up: [settings.rent] takes the 245 at the Friday midnight rollover, wherever she is. The 18:00 row is the evening after, with nothing owed.",
+      "npc_ossie": "Tyre bay 08:00-18:00 Mon-Sat, as one all-days row. The Fri/Sat night window 22:00-02:00 is SPLIT into two rows — [4,5] 22:00-23:59 and [5,6] 00:00-02:00 — per overnight_note. He lives in the back of the bay, so the isolation is real but not absolute.",
+      "npc_hal": "Lorry park Tue 23:00-06:00, SPLIT as [1] 23:00-23:59 and [2] 01:30-06:00, with the shop 00:45-01:30 on [2] between them.",
+      "npc_denny": "Lorry park Thu and Sun 22:00-02:00, SPLIT as [3,6] 22:00-23:59 and [4,0] 01:00-02:00, with the shop 00:00-01:00 on [4,0] between them.",
+      "npc_tam": "Bay 9 every night, 20:00-06:00, for this rotation. ONE row, because it covers all seven weekdays — see overnight_note.",
+      "overnight_note": "⚠️ THIS NOTE USED TO SAY THE OPPOSITE AND THE GAME NEVER OBEYED IT. Corrected 2026-08-16 from the shipped rows and from decisions[] at 0.1. THE RULE: a DAY-SPECIFIC overnight window must be SPLIT into two rows with the day rolled forward — [1] 23:00-23:59 plus [2] 00:00-06:00 — because v2.py:3446-3448 tests the weekday against TODAY separately from, and before, the time wrap, so a single [1] 23:00-06:00 row deletes the character at midnight. An ALL-DAYS row stays SINGLE: every weekday is in the list, so the rolled-forward day is in it too. Hal, Denny and Ossie carry two rows for this reason; Tam covers all seven and correctly keeps one. Nothing in gates.py can see this — gate 6 checks that a row EXISTS, never that it resolves at the claimed hours, so the only proof is a live presence probe across the midnight boundary."
     },
     "map": {
       "shape": "One truckstop plot off a trunk A-road, and nothing else for forty miles either way. A forecourt with pumps under a canopy; the shop building on one side of it with the stock room and cold store behind; the shower block across the apron; the lorry park behind that, with bay 9 at the dark end; the tyre bay at the edge of the plot; her caravan behind the tyre bay.",
@@ -425,7 +428,8 @@
         }
       ],
       "ratio_note": "7 sinks : 4 sources = 1.75:1, against the field median of 2.2:1 and the reference game's 1.76:1. Gate 17's floor is 1:1. Spread deliberately: no location holds more than 2 of the 7 sinks (the_shop), well under the half-of-all-sinks concentration that fails the gate — this is the exact defect the frozen `steam` record ships with, at 12 of 21 sinks on one front desk.",
-      "gate21_rule": "Every choice that spends money names the amount in its own label. Construction rule, not a later pass."
+      "gate21_rule": "Every choice that spends money names the amount in its own label. Construction rule, not a later pass.",
+      "obligation_amount": 245
     },
     "surfaces_plan": {
       "menu_cap": 8,
@@ -472,6 +476,44 @@
         "note": "Live in the built HTML, not grepped: opening funnel reaches free roam; money is UNCLAMPED so the 245 draw is payable (and clamp=true really would cap at 100); 9/9 NPC presence probes correct across the midnight and week boundaries; guidance cards render; back_room_key never set."
       },
       "shipped": "2026-08-14"
+    },
+    {
+      "version": "0.1.1",
+      "subject": "Everything the review found, and four things it got wrong",
+      "want_line": "Serves the Want's own spine twice over. The obligation — 'takes GBP 200 a week back, plus GBP 45' — now has exactly ONE place it is paid instead of a real charge and a free duplicate. And the appetite line, 'every one who starts planning his route around this stop pulls it a notch deeper in', finally has a world that acts first: eight events that arrive without being clicked.",
+      "added": {
+        "units": 8,
+        "words": 1532,
+        "locations": 0,
+        "characters": 0
+      },
+      "opened": [
+        "Bev's ladder past the handover — tier 3 of her declared ceiling, in the stock room, at relation 40. The one character the Want names as the deletion test had no heat at all in 0.1.",
+        "The trade top band. 'Two economies out of one shop' had nothing gated at 55 once the ladder's circular guidance was straightened out; running the tokens entirely inside the block now buys it.",
+        "Eight locations that can each interrupt the player once a day, three of them behind the tier that earns them."
+      ],
+      "gates": {
+        "passed": 24,
+        "of": 24
+      },
+      "fixes": [
+        "BLOCKER — 147 thought bubbles rendered '💭 Npc is thinking:' on 58% of screens. All now carry props.speaker; 74 rewritten from third to second person. Three left in third person on purpose: two are about Bev and one is Denny quoted.",
+        "BLOCKER (new, the review missed it) — 35 effects used op = 'subtract', which the engine discards. `count` never moved off 100 for the whole of 0.1; 20 activities never charged energy; Nunn's short-week penalty never applied.",
+        "The settle-up duplicate. [settings.rent] was charging 245 correctly the whole time; rung_nunn_settle narrated the same handover for free and printed relation. Re-aimed to the evening after (rung_nunn_squared) and capped; rung_nunn_short_week re-aimed to the ask before.",
+        "The RentDay pages printed '$'. New [settings.rent] currency_symbol; the game sets '£'.",
+        "Room hubs went from 126 of 166 choices open on night one to 70 — median 3 open, matching the NPC hubs and the field. Nothing deleted: the ascent tiers now open the rooms the way they already opened the people.",
+        "The TRADE ladder's guidance was circular at all three rungs — each card named a choice gated at the value the card was trying to reach. nights and seen were correct; trade simply missed the shape.",
+        "Two location descriptions in the third person, on text the player re-reads every visit.",
+        "The board's room objects: 8 declared things nothing could act on, 16 real affordances undeclared.",
+        "The fill budgets were an exact post-hoc word count in all eight rooms — see decisions.",
+        "board.schedule_plan.overnight_note said the opposite of what shipped and would have made the next release un-split the rows."
+      ],
+      "playtest": {
+        "passed": 18,
+        "of": 18,
+        "note": "Live in the rebuilt HTML, not grepped: opening funnel end to end to free roam; '💭 You are thinking:' renders in second person; `count` falls 100 → 96 (it never moved once in 0.1); RentDay charges £245 and prints £ (300 → 55); hub_shop_counter_early is 4 open / 4 visibly locked at tier 0 and 8 open at tier 60; three objectives render in the sidebar with places, verbs and counters; all eight random encounters fire on location entry at 13–24%, and the three tier-gated ones are correctly silent at zero."
+      },
+      "shipped": "2026-08-16"
     }
   ],
   "promises": [
@@ -532,6 +574,22 @@
     {
       "at": "0.1",
       "note": "Four rungs shipped as orphans mid-build — written but never referenced by any hub choice, so unreachable content that also silently failed to count toward location fill. Caught by a reachability sweep, not by any gate. Worth a standing check after every authoring batch: a triggerless rung with no referrer is dead."
+    },
+    {
+      "at": "0.1.1",
+      "note": "⚠️ THE FILL BUDGETS WERE REGULARISED, NOT PLANNED, AND THAT IS A LIMIT ON WHAT GATE 1 MEANS HERE. All eight board.locations[].fill figures were an exact post-hoc word count (six matched delivery to the word), so gate 1 was comparing the game against a record of itself. They are now round numbers within tolerance of what is delivered — but a plan cannot be retro-fitted to prose that is already written, and rounding a record does not make it a budget. Gate 1 has no teeth on this release. FROM 0.2 THE BUDGET IS WRITTEN BEFORE THE PROSE, and a location that overruns it by more than 25% either gets edited or gets its budget deliberately revised in this ledger."
+    },
+    {
+      "at": "0.1.1",
+      "note": "The settle-up is the ENGINE's, and the authored scene beside it is about something else. [settings.rent] was already charging 245 on the Friday rollover and working; the authored rung was a second, free version of the same moment, and it was the one with the writing in it. Cost of the fix: the payment is no longer a scene the player chooses to play, and the hour it lands (00:xx Friday, mid-shift) is the engine's, not the fiction's — Bev's opening line and the rent scene text were rewritten to match the clock rather than the other way round. What replaces it: rung_nunn_squared, the Friday evening with nothing owed, capped at relation 24 so the ungated rungs carry her to his first gate and no further."
+    },
+    {
+      "at": "0.1.1",
+      "note": "The room hubs were gated on the ascent tiers rather than trimmed. 57 choices moved behind nights/seen/trade at the existing 15/35/55 bands, all with show_when_locked = true. NOTHING was deleted — the alternative was cutting about ninety choices and the rungs behind them, which is the best-written prose in the repo. Cost: a room now takes longer to open out, and a player who climbs only one tier will see two of the three ladders stay shut. That is the intended shape and it is what the NPC hubs were already doing correctly."
+    },
+    {
+      "at": "0.1.1",
+      "note": "Bev's arc was written up to her declared ceiling and it changes what she is. Tier 1 (crude about the drivers, as trade talk) sits on her three ungated rungs; tier 2 (crude about Robyn, to her face) on the two at relation 20; tier 3 is a new node on rung_bev_days at relation 40 — spoken and done, in the stock room, on the clock, exactly as the ceiling declares. It hangs off her top rung rather than a ninth hub choice because her hub is already at the gate-20 cap of eight. Cost, stated plainly: the professional, entirely non-sexual handover WAS the character, and this makes the top of her ladder something else. The Want's own line is why it was done anyway — she is the deletion test, and she was the only person on site with no heat."
     }
   ]
 }

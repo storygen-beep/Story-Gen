@@ -10,6 +10,15 @@ Answers what gates.py structurally cannot:
      character is the fix; this proves it in the built engine, not on paper.
   4. do the locked doors render as span.locked-choice
   5. does the guidance page have cards in it
+  6. DOES EVERY EFFECT USE AN OP THE RUNTIME RUNS (v2.py:5742-5751) — `subtract`
+     is not one, and 0.1 shipped 35 of them: the counterweight never moved once
+     in the whole game and twenty activities never charged the energy they said
+     they cost. Green TOML, green build, green gates, green play-test.
+  7. DOES THE OBLIGATION ACTUALLY MOVE MONEY — 0.1's play-test checked that the
+     245 draw WAS PAYABLE and never that it was TAKEN. That is a precondition,
+     not a transaction, and the difference is the whole mechanic.
+  8. does the sidebar carry a next STEP, not just a state band
+  9. can the world act first — do the random encounters resolve
 """
 import sys, json, pathlib
 from playwright.sync_api import sync_playwright
@@ -139,7 +148,7 @@ with sync_playwright() as p:
         ("npc_denny", "Monday",     1, "the_lorry_park", "AFTER midnight, week wrap"),
         ("npc_tam",   "Tuesday",    3, "bay_9",          "all-seven-days row, one row is correct"),
         ("npc_bev",   "Monday",    22, "the_shop",       "the handover"),
-        ("npc_nunn",  "Friday",    18, "the_forecourt",  "the settle-up"),
+        ("npc_nunn",  "Friday",    18, "the_forecourt",  "the evening AFTER the draw — the draw itself is [settings.rent] at the rollover"),
     ]
     bad = []
     for slug, day, hour, want, why in cases:
@@ -179,6 +188,101 @@ with sync_playwright() as p:
     }""")
     check("back_room_key is never set in v0.1", not door["keyHeld"],
           f"flag held = {door['keyHeld']}")
+
+    # ── 7. EVERY EFFECT OP IS ONE THE RUNTIME RUNS ─────────────────────────
+    # applyTraitEffect handles 'add' and 'set' and RETURNS on anything else. An
+    # op it does not know is not an error, a warning or a log line — the trait
+    # simply does not move, which is indistinguishable from a player who has not
+    # moved it. 0.1 shipped 35 of these and every check in this repo passed.
+    ops = page.evaluate("""() => {
+        const t = SugarCube.State.variables.player.core_traits;
+        const before = t.count;
+        t.count = 50;
+        SugarCube.setup.applyAndNotifyTrait('player', null, 'count', 'add', -4, true, null);
+        const afterAdd = t.count;
+        t.count = 50;
+        SugarCube.setup.applyAndNotifyTrait('player', null, 'count', 'subtract', 4, true, null);
+        const afterSub = t.count;
+        t.count = before;
+        return {afterAdd, afterSub};
+    }""")
+    check("a negative `add` really deducts", ops["afterAdd"] == 46,
+          f"50 + (-4) = {ops['afterAdd']}")
+    check("and `subtract` really is a silent no-op — the hazard is real",
+          ops["afterSub"] == 50, f"50 subtract 4 = {ops['afterSub']}")
+
+    # ── 8. THE OBLIGATION IS TAKEN, NOT MERELY PAYABLE ─────────────────────
+    # 0.1 verified money was unclamped and stopped there. Drive the engine's own
+    # rent system across the Friday rollover and read the balance afterwards.
+    rent = page.evaluate("""() => {
+        const SC = SugarCube, v = SC.State.variables;
+        if (!SC.setup.rent_enabled) return {enabled:false};
+        v.flags = v.flags || {};
+        if (SC.setup.rent_start_after_flag) v.flags[SC.setup.rent_start_after_flag] = true;
+        v.player.core_traits.money = 300;
+        const ts = v.game_state.time_state;
+        const days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+        const due = SC.setup.rent_due_day;
+        ts.current_day = days[(days.indexOf(due) + 6) % 7];
+        ts.current_hour = 23; ts.current_minute = 0;
+        window.advanceTime(90);
+        const armed = !!(v.game_state.rent_state && v.game_state.rent_state.is_due);
+        const before = v.player.core_traits.money;
+        SC.Engine.play('RentDay');
+        return {enabled:true, armed, before, amount:SC.setup.rent_amount,
+                symbol:SC.setup.rent_currency_symbol || '$'};
+    }""")
+    page.wait_for_timeout(250)
+    if rent.get("enabled"):
+        check("rent arms on the rollover into its due day", rent["armed"],
+              f"is_due after crossing midnight = {rent['armed']}")
+        paid = click_text(page, f"Pay {rent['symbol']}{rent['amount']}")
+        page.wait_for_timeout(250)
+        after = page.evaluate("() => SugarCube.State.variables.player.core_traits.money")
+        check("the obligation TAKES the money",
+              paid and after == rent["before"] - rent["amount"],
+              f"{rent['before']} -> {after} (amount {rent['amount']})")
+        check("and it is priced in the game's own currency symbol",
+              rent["symbol"] != "$" or "£" not in page.inner_text("#story"),
+              f"symbol = {rent['symbol']!r}")
+    else:
+        check("[settings.rent] enabled", False, "no recurring obligation in this build")
+
+    # ── 9. the sidebar carries a next STEP ─────────────────────────────────
+    nxt = page.eval_on_selector_all(
+        ".quest-next-item", "els => els.map(e => e.textContent.replace(/\\s+/g,' ').trim())")
+    check("the sidebar names a next step, not only a state", len(nxt) > 0,
+          f"{len(nxt)} objective(s): {nxt[0][:64] if nxt else '—'}")
+
+    # ── 10. THE WORLD ACTS FIRST ───────────────────────────────────────────
+    # Not "is a random canvas declared" — does the engine's own selector return
+    # one. 0.1 had zero canvases that could fire without being clicked.
+    # ⚠️ checkRandomEncounters returns null outright when previous() is an info
+    # page (v2.py:5185-5188), and RentDay is one — so the probe has to leave the
+    # rent flow first or it reads 0/8 on a game where every location works.
+    # TWO hops, not one: after a single hop previous() is still the rent page.
+    page.evaluate("() => SugarCube.Engine.play('Location_the_shop')")
+    page.wait_for_timeout(200)
+    page.evaluate("() => SugarCube.Engine.play('Location_the_forecourt')")
+    page.wait_for_timeout(200)
+    fired = page.evaluate("""() => {
+        const SC = SugarCube, v = SC.State.variables, t = v.player.core_traits;
+        t.nights = 60; t.seen = 60; t.trade = 60;
+        const locs = Object.keys(SC.setup.locations || {});
+        const hit = {};
+        for (const loc of locs) {
+            for (let i = 0; i < 60; i++) {
+                v.game_state.random_cooldowns = {};
+                v.game_state.trigger_history = {};
+                v.game_state.activity_trigger_history = {};
+                if (SC.setup.checkRandomEncounters(loc)) { hit[loc] = true; break; }
+            }
+        }
+        return {locations: locs.length, withEvent: Object.keys(hit).length};
+    }""")
+    check("every location can interrupt the player unprompted",
+          fired["withEvent"] == fired["locations"] and fired["locations"] > 0,
+          f"{fired['withEvent']}/{fired['locations']} locations resolved a random encounter")
 
     check("no uncaught page errors", not errors, "; ".join(errors[:2])[:160])
     browser.close()

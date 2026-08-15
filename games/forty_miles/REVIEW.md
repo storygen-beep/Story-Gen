@@ -4,10 +4,11 @@ Opened 2026-08-14, the day it was listed on the portal. Forty Miles is the **sec
 game** for `author-game-v2` — authored by a reader of the skill, after `the-surfaces.md` and R2b
 existed, which `steam` was built without.
 
-It scores **20/20, exit 0**, and it is the best-written game in this repo. It also ships **two
-blockers that no gate, no lint and its own 11/11 play-test all missed.** That combination is the
-finding, and it is the same shape as Steam's: **the scoreboard is green and the scoreboard is not
-the review.**
+It scored **20/20, exit 0** at 0.1, and it is the best-written game in this repo. It also shipped
+**three blockers that no gate, no lint and its own 11/11 play-test all missed** — two found by this
+review and one found only when the fix pass re-checked its own findings. That combination is the
+whole point, and it is the same shape as Steam's: **the scoreboard is green and the scoreboard is
+not the review.** §0a records where the review itself was wrong.
 
 **Same conventions as `games/steam/REVIEW.md` and `games/back_home/REVIEW.md`:** severity
 `BLOCKER`/`HIGH`/`MED`/`LOW` · layer `GAME` (this build) / `SKILL` (doctrine taught it wrong or not
@@ -20,10 +21,96 @@ hub at low and high ascent, a 20-point schedule probe across every midnight and 
 boundary tests at zero money and zero energy. Every structural claim below was checked in the built
 game, not inferred from source.
 
-Current count: **9 open**, 0 fixed in the game. **Two of the skill-layer causes were fixed on
-2026-08-15** — F3's ceiling-as-spec and F5's ungated R2b — via `DOCTRINE_GAPS.md` study 6, which this
-review produced. The game is unchanged and every number below still stands; re-scored against the new
-gates it reads **19/21**.
+Current count: **10 of 10 addressed in 0.1.1**, plus **four things this review got wrong or never
+looked for**, found by re-investigating before editing. Skill-layer causes for F3 and F5 shipped
+2026-08-15 via `DOCTRINE_GAPS.md` study 6; the game itself was repaired 2026-08-16 and now scores
+**24/24**.
+
+---
+
+# 0a · ⚠️ What this review got wrong
+
+Written after the repair pass. **Every finding below was re-checked against source and against a
+live build before anything was edited**, and four of them did not survive that check. Two of the
+four are worse than the things the review did find.
+
+### ⚠️ N1 · BLOCKER — 35 authored effects were silently discarded, and nothing in this review looked
+
+`op = "subtract"` **is not an engine operation.** `applyTraitEffect` runs `add` and `set` and falls
+through to `// Unknown op; do nothing` + `return` on anything else (`v2.py:5742-5751`). The string
+`subtract` appears nowhere in the generator or the importer, so the build emitted
+`applyAndNotifyTrait(..., "subtract", 4, ...)` verbatim into `output/index.html`, 35 times, and the
+runtime dropped every one. Proven live on the shipped 0.1:
+
+```
+count 100  →  applyAndNotifyTrait('player',null,'count','subtract',4,true,null)   →  count 100
+energy 100 →  applyAndNotifyTrait('player',null,'energy','subtract',12,true,null) →  energy 100
+stress 20  →  applyAndNotifyTrait('player',null,'stress','add',-5,false,null)     →  stress 15
+```
+
+| trait | live `add` | dead `subtract` | what 0.1 actually did |
+|---|---|---|---|
+| `count` | 2 (positive) | **12** | starts at 100, clamps at 100 — **the counterweight never moved once in the entire game.** Its sidebar band was permanently "Balances to the penny". |
+| `energy` | 8 | **20** | no activity ever cost energy. It left only via location `entry_costs` (2, on three locations) and `trait_decay = 9`/day. |
+| `stress` | 13 | 1 | one-way ratchet, no decay declared. |
+| `relation` | 52 | 1 | Nunn's short-week penalty never applied. |
+| `money` | 11 | 1 | the bay-9 coffee was free. |
+
+**Layer: SKILL + ENGINE.** `references/engine.md:497` discussed `op = "subtract"` as authored
+behaviour — the skill taught it. `template_import.py:3755` validates `op` for cheat-page grants and
+nothing validated it for effects. **`games/steam` has 70 of these**, which is what makes it a class
+rather than a slip. Why nothing caught it: valid TOML, green build, 20/20 gates, and an 11/11
+play-test, because **a number that never changes looks exactly like a number nobody has moved.**
+
+Fixed in 0.1.1: all 35 rewritten to `op = "add"` with negative values, `engine.md` §21b written,
+**gate 25** added (fails `steam` at 70, passes `back_home` at 0 — it discriminates), and
+`template_import.py` now hard-fails so no future build can emit one.
+
+### ⚠️ N2 · F2 is wrong on its central claim — the obligation WAS charged
+
+F2 says the settle-up *"does not exist in the build."* It does. `[settings.rent]` is enabled at
+`0_systems_spec.toml:61-69` with `amount = 245`, `due_day = "Friday"`, `collector_npc = "npc_nunn"`,
+`start_after_flag = "first_shift_done"` (set in `canvas_opening`). Verified live, end to end:
+
+```
+Thursday 23:00 → advanceTime(90) → Friday 00:30 → rent_state.is_due = true   (v2.py:5453-5464)
+Engine.play("Location_the_forecourt") → intercepted → RentDay                (v2.py:15247-15259)
+"Pay $245 rent" → money 300 → 55, is_due → false                             (v2.py:15925)
+```
+
+F2's search — *"any 200 / 245 / 45 anywhere .. NONE"* — walked the canvases and never looked at
+`[settings]`. **What is genuinely wrong is a duplicate, not an absence:** `rung_nunn_settle`
+narrated the same handover for free, granted `relation +3`, and was re-clickable, so the player met
+two settle-ups and the free one was the one with the writing in it. Three smaller things fell out:
+the RentDay pages hardcoded `$` in a game whose every other price is in pounds; the demand arms at
+the **midnight rollover**, not at the 18:00 Friday row Nunn's schedule and the prose both promised;
+and **gate 24 could not see any of it**, so it failed a game whose obligation was charged correctly.
+
+Fixed in 0.1.1: `rung_nunn_settle` → `rung_nunn_squared`, re-aimed to the Friday evening with
+nothing owed and capped at relation 24; `rung_nunn_short_week` re-aimed to the ask made before the
+draw; `[settings.rent] currency_symbol` added to the engine; the rent scene text and Bev's opening
+line rewritten to the hour the demand actually lands; gate 24 taught to read `[settings.rent]`;
+`engine.md` §26 written.
+
+### ⚠️ N3 · The TRADE ladder's guidance was circular at all three rungs
+
+Not in the review at all, and it made the game's third ascent tier effectively unclimbable by
+following its own instructions. Each `trade` quest card named a choice gated at the exact value the
+card was trying to reach — *"Sell a token off the book"* for `trade ≥ 15`, on a choice requiring
+`trade ≥ 15`. **`nights` and `seen` were both correct** (every card names a choice gated one tier
+*below* its goal), so the shape was known and one ladder simply missed it. Fixed, and the top band
+re-earned: moving *"Bring somebody back here"* down to `trade ≥ 35` emptied `trade ≥ 55`, which
+gate 8 caught immediately, so *"Hand a token over in here instead of at the till"* now buys it.
+
+### N4 · Two counts in this review are off
+
+- **F1's third-person count is 77, not 62** — and one more mixes both persons. 67 of the 147 are
+  person-neutral and needed attribution only. Three are correctly third-person and were left alone:
+  two are about Bev, one is Denny quoted.
+- **F9's diagnosis is wrong.** The four sidebar strings are not quest-card titles; a card has **no
+  title field** (`template_import.py:997-1039`). They are `[[sidebar_items]] type =
+  "trait_status_text"` bands doing exactly what `the-voice.md` R1 asks. The real gap was that the
+  engine had **no sidebar item type that renders a next step at all** — fixed by adding one.
 
 ---
 
@@ -96,7 +183,7 @@ link and two exits; the forecourt one canvas and four exits **with the cost on t
 
 # 1 · F1 · Every thought bubble is attributed to a character called "Npc" — and 62 of them are in the wrong person
 
-**severity** BLOCKER · **layer** SKILL + GAME · **status** OPEN
+**severity** BLOCKER · **layer** SKILL + GAME · **status** ✅ **FIXED 0.1.1** — all 147 blocks carry `props.speaker`; 74 rewritten to second person; 3 correctly left third-person (two about Bev, one Denny quoted). Verified live: `💭 You are thinking:`. Gate 23 reads 204/204.
 
 Measured in the shipped `releases/v0.1.html`:
 
@@ -182,7 +269,7 @@ breakages went unreported.
 
 # 2 · F2 · The Friday settle-up charges nothing, and repeats without limit
 
-**severity** BLOCKER · **layer** GAME + SKILL · **status** OPEN
+**severity** BLOCKER · **layer** GAME + SKILL · **status** ⚠️ **WRONG — see §0a N2**, then ✅ **FIXED 0.1.1**. The obligation *was* charged, by `[settings.rent]`, verified live at 300 → 55. The real defect was a free duplicate canvas beside it. Read §0a before this section.
 
 The obligation is the spine of the Want. `v2_state.json` declares it:
 
@@ -247,7 +334,7 @@ price and a cadence. Nothing checks it.
 
 # 3 · F3 · The location hubs never change; the NPC hubs do it right
 
-**severity** HIGH · **layer** SKILL + GAME · **status** OPEN — **doctrine fixed 2026-08-15, game
+**severity** HIGH · **layer** SKILL + GAME · **status** ✅ **FIXED** — doctrine 2026-08-15, game 0.1.1. Room hubs went 126/166 → 70/166 open on night one, median 3, matching the NPC hubs and the field. Nothing deleted; the tiers now open the rooms. Verified live: 4 open / 4 visibly locked at tier 0, 8 open at tier 60.
 untouched**
 
 > **The skill-side half shipped.** `the-surfaces.md` R3 no longer states a cap as the rule: the
@@ -340,7 +427,7 @@ reads differently from a game built to the field.
 
 # 4 · F4 · Nothing in the game ever happens unprompted
 
-**severity** HIGH · **layer** GAME · **status** OPEN
+**severity** HIGH · **layer** GAME · **status** ✅ **FIXED 0.1.1** — eight `trigger_mode = "random"` events, one per location, three behind the tier that earns them. Verified live: they fire on location entry at 13–24% and the gated three are silent at zero.
 
 ```
 canvases with trigger_mode = "random"  ......  0
@@ -371,7 +458,7 @@ belongs in the next release's Want.
 
 # 5 · F5 · A third of hub choices float free of the screen's prose (R2b)
 
-**severity** MED · **layer** GAME · **status** OPEN — **measured 2026-08-15, split 2026-08-16**
+**severity** MED · **layer** GAME · **status** ✅ **FIXED 0.1.1** — 8 unusable declared objects cut or made usable, 6 real affordances declared, three room openers gained the thing their choices act on. Gate 22 reads 0 / 0 / 0.
 
 > **R2b is no longer ungated.** `board.locations[].objects` was backfilled for this game — derived
 > by reading what each room's prose names, not from its choice lists. Two halves now watch it:
@@ -441,7 +528,7 @@ useless as one that passed everything.
 
 # 6 · F6 · No media, and two gates pass on media that does not exist
 
-**severity** MED · **layer** GAME (disclosed) + SKILL · **status** OPEN
+**severity** MED · **layer** GAME (disclosed) + SKILL · **status** OPEN — media is a logged promise, not a 0.1.1 fix. **The gate half is also still open**: no gate in `gates.py` touches the filesystem, so 68 declared pools with zero files still report 100%.
 
 ```
 declared  ....  68 video pool_dirs · 2 fixed files · 8 location plates · 6 portraits
@@ -476,7 +563,7 @@ build. No internal strings leak to a player.
 
 # 7 · F7 · Bev's entire arc is written under her declared ceiling
 
-**severity** MED · **layer** GAME · **status** OPEN
+**severity** MED · **layer** GAME · **status** ✅ **FIXED 0.1.1** — her three tiers are written. Tier 1 across the ungated rungs, tier 2 at relation 20, tier 3 as a new node on her top rung: the stock room, on the clock. She now carries cunt/clit/tits/wet/knees across 1,628 words. See `decisions` in the ledger for what it costs the character.
 
 Crude vocabulary actually used, per NPC arc (hub + every rung it owns):
 
@@ -516,7 +603,7 @@ of the deferred fourth rung, not a register failure.
 
 # 8 · F8 · Two of eight location descriptions are in the wrong person
 
-**severity** LOW · **layer** GAME · **status** OPEN
+**severity** LOW · **layer** GAME · **status** ✅ **FIXED 0.1.1** — both clauses moved to second person; all eight descriptions re-checked.
 
 `[settings] narration_person = "second"`, and six of eight location descriptions honour it. Two do
 not, and they are the two most personal rooms, on text the player re-reads every visit:
@@ -531,7 +618,7 @@ correct.)
 
 # 9 · F9 · The always-visible guidance carries state, not a next step
 
-**severity** LOW · **layer** GAME · **status** OPEN
+**severity** LOW · **layer** GAME · **status** ⚠️ **DIAGNOSIS WRONG — see §0a N4**, then ✅ **FIXED 0.1.1** by an engine addition: `[[sidebar_items]] type = "quest_next"`. Three objectives now render in the rail, each with a place, a verb and a counter.
 
 The Quests **page** is excellent (§0). The **sidebar** — what a player sees on every screen — shows
 only the card titles:
@@ -553,7 +640,7 @@ midnight — the shop — 0/15"* is already written and already correct.
 
 # 10 · F10 · The ledger records the opposite of what shipped
 
-**severity** LOW · **layer** GAME (ledger) · **status** OPEN
+**severity** LOW · **layer** GAME (ledger) · **status** ✅ **FIXED 0.1.1** — `overnight_note` rewritten to match the build, and the four `schedule_plan.npc_*` lines still written in the one-row idiom corrected with their actual split rows.
 
 `v2_state.json` → `board.schedule_plan.overnight_note`:
 
@@ -626,3 +713,30 @@ at all — speaker attribution and *charge the obligation you declared* — are 
 
 **The pattern is exact: what the skill wrote down and checked, held. What it wrote down and did not
 check, drifted. What it never wrote down, broke.**
+
+---
+
+# 13 · What the repair pass added to that pattern (2026-08-16)
+
+The sentence above needs a fourth clause, and it is the worst one.
+
+> **What the skill wrote down WRONG, shipped 105 times across two games — and looked completely
+> fine doing it.**
+
+`engine.md:497` discussed `op = "subtract"` as though the engine ran it. Both v2 games written
+against that file used it: 35 effects here, 70 in `steam`. Every one does nothing. The TOML is
+valid, the build is green, the gates are green, the play-test is green, and the symptom — a meter
+that never moves — is indistinguishable from a player who has not moved it. This is a strictly
+harder failure than the other three, because a missing rule leaves a gap somebody eventually
+notices and a **wrong** rule produces confident, consistent, dead output.
+
+Two other lessons, both cheap and both now doctrine:
+
+1. **A review is a claim, not a fact — including this one.** Re-checking the ten findings before
+   editing overturned F2's central claim, corrected F9's diagnosis, corrected F1's count, and found
+   two defects (N1, N3) nobody had gone looking for. The skill already says a handback note must be
+   verified before promotion; a *review* is the same kind of document and had never been held to it.
+2. **Gate 24 failed a game that was doing the right thing.** It walked canvases; the charge lived in
+   `[settings.rent]`. Second measured instance of a rule the skill already states — *a check that
+   fails a game for obeying the doctrine is a bug in the check* — which suggests the rule is worth
+   applying **before** a gate ships, not after it fires.

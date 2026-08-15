@@ -11,7 +11,8 @@
 #   1  RATCHETING TIERS  nights · seen · trade    — rungs at 15/35/55
 #   2  VOLATILE STATE    arousal · stress · energy · money
 #   3  PER-CHARACTER     relation · lust          — on each [[npcs]] block
-#   +  COUNTERWEIGHT     count — starts at 100, only ever falls
+#   +  COUNTERWEIGHT     count — starts at 100, falls when the book stops
+#                        balancing, and can be bought back out of her own money
 #
 # ⚠️ THE TOP BAND IS UNBOUNDED AT v0.1 (min = 55, no max). Gate 8 judges the top
 #    band's MIN (gates.py:692-695), so a band at 75 would oblige an authored gate
@@ -23,6 +24,14 @@
 #    only collects tops from those operators (gates.py:680), so a counterweight
 #    gated exclusively on lt/lte is skipped rather than made to buy its ceiling.
 #    It is the price she pays, not a currency — it owes no content.
+#
+# ⚠️ EVERY TRAIT EFFECT USES op = "add" (with a NEGATIVE value to take something
+#    away). `op = "subtract"` is NOT an engine operation — applyTraitEffect
+#    accepts "add" and "set" and silently returns on anything else
+#    (v2.py:5742-5751). v0.1 shipped 35 subtract effects and every one of them
+#    did nothing: `count` never moved off 100 for the whole game, no activity
+#    ever cost energy, and Nunn's short-week penalty never applied. Fixed in
+#    0.1.1; references/engine.md §21.
 # =============================================================================
 
 schema_version = "1.0"
@@ -33,7 +42,7 @@ title           = "Forty Miles"
 description     = "Kelbrook Services, ten at night to six in the morning, and nothing open either way for forty miles. She is the only person on site. The man who owns it paid off her debt and has never once mentioned it."
 starting_canvas = "canvas_opening"
 quests_engine   = "v2"
-version         = "0.1"
+version         = "0.1.1"
 
 [time]
 starting_hour = 22          # Bev has just gone. The first handover is the opening.
@@ -58,6 +67,16 @@ wardrobe_location = "her_static"  # everything she owns is in the caravan
 # ⚠️ eviction_mode = "flag_set", NOT the default "game_end". The product never
 #    ends. Missing the draw does not evict her; it sets `terms_changed`, and what
 #    he takes instead stops being money.
+#
+# ⚠️ THIS IS THE ONLY PLACE THE 245 MOVES, and it is the ENGINE that moves it.
+#    `advanceDay()` arms `rent_state.is_due` on the rollover into due_day
+#    (v2.py:5453-5464); the next `Location_*` entry is intercepted into RentDay
+#    (v2.py:15247-15259); paying runs `$player.core_traits.money -= _rent`
+#    (v2.py:15925). Verified live at 300 -> 55. So the draw lands in the small
+#    hours of Friday, mid-shift, NOT at 18:00 when Nunn's schedule row puts him on
+#    the forecourt — the scene text below is written for the hour it actually
+#    fires. And no authored canvas may narrate handing the money over: v0.1 shipped
+#    one that did, charging nothing and granting relation on every click.
 [settings.rent]
 enabled          = true
 amount           = 245
@@ -67,10 +86,11 @@ grace_periods    = 1
 start_after_flag = "first_shift_done"
 eviction_mode    = "flag_set"
 eviction_flag    = "terms_changed"
+currency_symbol  = "£"        # the pages hardcoded "$" before this key existed
 
 [settings.rent.text]
 title            = "Friday"
-scene            = "He comes at six and does not come inside. The car sits under the canopy with the engine running and the window down, and you go out to it, because that is how this has worked since the first week."
+scene            = "Friday starts at midnight and he does not wait for six. The car is on the forecourt with the engine running and the window down four inches, and you go out to it, because that is how this has worked since the first week."
 greeting         = "Friday, then."
 paid_scene       = "You count it into his hand through the window. He does not count it again. He folds it once, puts it in the inside pocket, and writes a figure in the notebook he keeps on the passenger seat, and you stand in the cold watching a man do sums about you."
 paid_response    = "Two hundred. Forty-five for the van. You're all right."
@@ -85,6 +105,17 @@ eviction_closing_soft  = "He does not say what the other way is. He buys a coffe
 
 [theme]
 mode = "dark"
+
+
+# ─── The next step, on every screen ──────────────────────────────────────────
+# The band strings below say where she IS. This says what to do about it — the
+# same 🎯/◯ goal block the Quests page renders, from the same cards, so the two
+# can never drift. v0.1 shipped with the bands and nothing else in the rail: four
+# descriptions of a state, no place, no verb, no person, and a player who never
+# opened the Quests page had no direction at all.
+[[sidebar_items]]
+type = "quest_next"
+max  = 3          # one live card per ascent tier
 
 
 # ─── The ascent tiers ────────────────────────────────────────────────────────
@@ -125,7 +156,10 @@ bands = [
   { min = 55, text = "Two economies out of one shop" },
 ]
 
-# The counterweight. Starts clean, only ever falls, buys nothing by design.
+# The counterweight. Starts clean and buys nothing by design. It falls whenever
+# the roll and the drawer stop saying the same thing, and the only way back up is
+# covering the shortfall out of her own money — two rungs do that, and they are
+# the only positive writes to it in the game.
 # Gated on lt/lte ONLY — see the header note on gate 8.
 [[sidebar_items]]
 type  = "trait_status_text"
@@ -299,10 +333,10 @@ when     = [ { trait = "relation", subject = "npc", npc_id = "npc_bev", op = "gt
 [[quest_cards]]
 priority = 20
 npc_id   = "npc_nunn"
-text     = "He paid six thousand pounds for a problem of yours and has never once said what the problem was worth to him. Every Friday at six he sits under the canopy with the engine running and you go out to the car."
-tip      = "Have the two hundred and forty-five. Find out what else is on the table."
+text     = "He paid six thousand pounds for a problem of yours and has never once said what the problem was worth to him. The two hundred and forty-five goes at the Friday rollover, whatever you are doing. Friday evening he is back under the canopy with the engine running, owed nothing, which is the only time he is just a man in a car."
+tip      = "Have the two hundred and forty-five before Friday. Then go out to him on the Friday evening, when nothing is owed, and find out what else is on the table."
 when     = [ { trait = "relation", subject = "npc", npc_id = "npc_nunn", op = "lt", value = 40 } ]
-goals    = [ { trait = "relation", subject = "npc", npc_id = "npc_nunn", op = "gte", value = 40, label = "Meet him with the week — the forecourt, Friday 18:00" } ]
+goals    = [ { trait = "relation", subject = "npc", npc_id = "npc_nunn", op = "gte", value = 40, label = "Go out to the car with nothing owed — the forecourt, Friday 18:00" } ]
 
 [[quest_cards]]
 priority = 19
