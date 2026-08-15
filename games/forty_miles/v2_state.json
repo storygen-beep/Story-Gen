@@ -82,7 +82,25 @@
         "anchor": true,
         "budget": 10000,
         "fill": 10295,
-        "has_cycling_pool": true
+        "has_cycling_pool": true,
+        "objects": [
+          "the till and Bev's float",
+          "the till roll",
+          "the drawer",
+          "the hot counter",
+          "the coffee machine",
+          "the four tables in the window",
+          "the glass front",
+          "the hatch",
+          "the monitor",
+          "the heater over the door",
+          "the stool",
+          "the safe drawer and the wage envelope",
+          "the bakery van crates",
+          "the radio",
+          "the door",
+          "the queue"
+        ]
       },
       {
         "id": "the_lorry_park",
@@ -90,7 +108,16 @@
         "anchor": false,
         "budget": 5000,
         "fill": 5086,
-        "has_cycling_pool": true
+        "has_cycling_pool": true,
+        "objects": [
+          "the two sodium lamps",
+          "the first four rows",
+          "the nine curtained cabs",
+          "the loose gravel",
+          "the CB aerials on channel nineteen",
+          "the last lamp and the dark past it",
+          "bay nine"
+        ]
       },
       {
         "id": "the_showers",
@@ -98,7 +125,19 @@
         "anchor": false,
         "budget": 5000,
         "fill": 4191,
-        "has_cycling_pool": true
+        "has_cycling_pool": true,
+        "objects": [
+          "the four cubicles",
+          "cubicle three's broken lock",
+          "the slatted bench",
+          "the drain",
+          "the extractor",
+          "the token machine",
+          "the dryer",
+          "the sign that came off in February",
+          "the towels",
+          "the mop"
+        ]
       },
       {
         "id": "the_forecourt",
@@ -106,7 +145,15 @@
         "anchor": false,
         "budget": 4000,
         "fill": 3902,
-        "has_cycling_pool": true
+        "has_cycling_pool": true,
+        "objects": [
+          "the six pumps in three islands",
+          "the canopy lights",
+          "the night hatch and its steel drawer",
+          "the camera mast with four heads",
+          "the road past the canopy",
+          "the bakery van crates"
+        ]
       },
       {
         "id": "bay_9",
@@ -114,7 +161,15 @@
         "anchor": false,
         "budget": 3500,
         "fill": 4081,
-        "has_cycling_pool": true
+        "has_cycling_pool": true,
+        "objects": [
+          "the cab",
+          "the bunk the width of a door",
+          "the curtain behind the seats",
+          "the kettle on the engine hump",
+          "the window you knock on twice",
+          "the night heater"
+        ]
       },
       {
         "id": "the_tyre_bay",
@@ -122,7 +177,16 @@
         "anchor": false,
         "budget": 3200,
         "fill": 3540,
-        "has_cycling_pool": true
+        "has_cycling_pool": true,
+        "objects": [
+          "the roller door and the gap of light",
+          "the compressor",
+          "the pit with a plank over it",
+          "the kettle and two mugs",
+          "the calendar four years out of date",
+          "the bunk behind the ply",
+          "the lorry with a wheel off"
+        ]
       },
       {
         "id": "her_static",
@@ -130,7 +194,16 @@
         "anchor": false,
         "budget": 3200,
         "fill": 3395,
-        "has_cycling_pool": true
+        "has_cycling_pool": true,
+        "objects": [
+          "the fan heater",
+          "the two-ring hob",
+          "the table that folds",
+          "the bed at the cold end",
+          "the two bags under the bed",
+          "the thin curtain",
+          "the mirror on the back of the door"
+        ]
       },
       {
         "id": "the_stock_room",
@@ -138,7 +211,15 @@
         "anchor": false,
         "budget": 3000,
         "fill": 2960,
-        "has_cycling_pool": true
+        "has_cycling_pool": true,
+        "objects": [
+          "the roll cages",
+          "the cold store",
+          "the CCTV recorder and its screen",
+          "the eleven feet of corridor",
+          "the padlocked door",
+          "the shelves"
+        ]
       }
     ],
     "fill_plan": "Budgets total 36,900 across 8 locations: mean 4,612 (floor 4,500), median 4,000 (floor 3,000), anchor the_shop 27.1% (floor 25%). Budgeted against the FINISHED v0.1 total, not topped up at the end — the anchor share is a ratio and tightens every time any other room grows.",
@@ -364,7 +445,8 @@
       "opens_at": "nights >= 35 AND count below clean",
       "locked_text": "left off by default so the row shows the action itself — a want the player can name is what sells the next release (the-voice.md R4)"
     },
-    "rungs_note": "v0.1 ships THREE rungs. The Want named a four-rung 15/35/55/75 ladder after the reference game, but gate 8 judges the TOP BAND'S MIN (gates.py:692-695), so a 75 band obliges an authored gate at 75 in this build. Shipping bands at 15/35/55 with an unbounded top is the honest-wall shape the frozen `steam` record uses: each later release adds a band and the content behind it. The 75 rung is logged as a promise, not silently dropped."
+    "rungs_note": "v0.1 ships THREE rungs. The Want named a four-rung 15/35/55/75 ladder after the reference game, but gate 8 judges the TOP BAND'S MIN (gates.py:692-695), so a 75 band obliges an authored gate at 75 in this build. Shipping bands at 15/35/55 with an unbounded top is the honest-wall shape the frozen `steam` record uses: each later release adds a band and the content behind it. The 75 rung is logged as a promise, not silently dropped.",
+    "objects_note": "board.locations[].objects = the things the room's prose names AND the player can act on. Atmosphere nouns belong in the prose, not here. Gate 22 checks three ways: every declared object is written, every declared object affords a choice, and no choice names something the screen's prose has not put in the room (the-surfaces.md R2b)."
   },
   "releases": [
     {

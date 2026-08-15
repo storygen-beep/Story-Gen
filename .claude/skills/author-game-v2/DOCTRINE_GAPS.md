@@ -1207,10 +1207,281 @@ resolved.
 
 ---
 
+---
+
+# Study 6 — The number becomes the spec
+
+## 1 · What it is, and what breaks without it
+
+Studies 1–5 produced numbers, and `gates.py` now checks nineteen of them. This study asks the
+question none of the previous five asked:
+
+> **When a rule states a reason in prose and a number in a check, which one does the author build to?**
+
+It matters because the skill almost always has both. `the-surfaces.md:23` states the causal rule for
+how many things a room offers — **"as many as the room has things to do"** — and then R3 states the
+number, *caps at 8*. Only the number is checked. The prompting question came from LO, on reading a
+game that passes gate 20 on every screen and still reads as a wall of menus: *"there should be a
+genuine reasoning on how it should be decided, not just numberify it."*
+
+The failure this exists to name: **a spec that can be satisfied by generating N of something is a
+quota, and an author under a green-board incentive will generate N of something.** The count stops
+being a consequence of the design and becomes an input to it.
+
+## 2 · Where the skill already has the reasoning
+
+This is not a case of missing doctrine. In every instance below the causal rule is written down,
+often in the same file, sometimes in the same sentence:
+
+| the number | the reason, already written |
+|---|---|
+| R3 · *caps at 8 choices* | `the-surfaces.md:23` — *"as many as the room has things to do"*; R2b — *"write the room's paragraph first, naming what is in it, then attach each choice to the thing that affords it"* |
+| *6–8 locations* | `the-release.md:128` — *"Treat the count as a judgement, the distribution as evidence"* |
+| *mean ≥4,500 · median ≥3,000* | `the-board.md:20` — *"Budget them as a shape, not a flat quota"* |
+| *3 ascent tiers* | `the-want.md:45` — *"several parallel ascents, so a player who doesn't want one can climb another"* |
+
+The reasoning is present, correct, and load-bearing. **It is also, in every case, the half that is
+not checked.**
+
+## 3 · The measurement — three games converged on the numbers, not on their worlds
+
+Three v2 games, authored in separate sessions, on different premises — a family home, a bathhouse,
+a truckstop:
+
+```
+                        back_home    steam    forty_miles     what the skill says
+locations                     8         8          8          "6-8" (explicitly a judgement)
+ascent tiers                  3         3          3          ASCENT_TIERS = 3
+NPCs                          4         6          6          —
+quest cards                   0        24         24          —
+total location words     36,035    36,019     37,450          example arithmetic: "a 36,000-word target"
+mean words per location   4,504     4,502      4,681          floor 4,500
+```
+
+**Two of the three landed within four words of the mean floor.** All three chose the top of the
+"6–8" range — the range the skill had already flagged, in prose, as not evidence-based. And the
+36,000-word total is not a spec anywhere: it appears once, at `the-board.md:79`, as illustrative
+arithmetic — *"At a 36,000-word target the anchor owes 9,000"*. Three games shipped to the example.
+
+### The asymmetry that explains it
+
+Scoring `forty_miles` against every threshold, split by direction:
+
+```
+                          direction   threshold   game      margin
+explicit beat %             floor          7.5    14.8      +97%
+explicit in repeatable %    floor           50    97.1      +94%
+locations with heat %       floor           60     100      +67%
+location median words       floor        3,000   4,081      +36%
+anchor share %              floor           25      28      +12%
+location mean words         floor        4,500   4,681       +4%
+sinks : sources             floor          1.0     1.0        0%
+─────────────────────────────────────────────────────────────────
+menu size                  CEILING           8       8        0%    (19 of 30 screens AT the cap)
+sentence median words      CEILING          14      14        0%
+```
+
+**Six of the seven floors are cleared with room. Both ceilings are hit exactly.**
+(The seventh, `sinks : sources`, lands on its floor at 1.0 — an integer ratio with little room to
+land anywhere else, but the sentence should not claim more than the table shows.)
+
+The mechanism is simple and worth stating in one line: **a ceiling makes "pass" and "maximise" point
+the same way.** A floor makes them point in opposite directions, so an author who wants a green
+board has to overshoot it and stop. An author facing a ceiling has to approach it and stop — and
+nothing tells them where to stop short of it, because the only feedback the check gives is a PASS
+that arrives at the boundary.
+
+### The consequence, measured
+
+`gate 20` was written to fix Steam's 23-choice front desk. Against the game it was written for:
+
+```
+                            steam        forty_miles
+repeatable located screens     22             29
+TOTAL choices on them         214            213      unchanged
+choices per screen      median  7      median  8      went UP
+                           max 23         max  8
+open on day one          107 (50%)      147 (69%)     got worse
+```
+
+**The same number of menu items, redistributed.** The cap removed the outliers and pulled the median
+up to itself. Meanwhile R2b — the causal half, unchecked — drifted to **41% of hub choices anchored
+to a named object.** The checked half was satisfied perfectly and the unchecked half decayed, in the
+same game, on the same screens.
+
+## 4 · What follows
+
+**R1 · A spec that can be satisfied by generating N things is a quota, and will be.** Before writing
+a number into a reference file, ask: *can an author satisfy this without consulting their own
+design?* If yes, the number is doing the deciding.
+
+**R2 · State the derivation, then the number as a consequence.** The shape that works is already in
+the skill — `the-surfaces.md:23` and R2b. A room's choice count is not chosen; it *falls out of*
+writing the room's paragraph and hanging every choice on something named in it. A sparse room ends up
+small and a rich one ends up larger, and neither number is a target. The number's only job is to
+catch the pathological case.
+
+> ⚠️ **Say it as many-to-one, and check that you did.** The first draft of this rule — and of three
+> reference files written from it — said *"one choice per thing that affords one"*, which is a quota
+> wearing a derivation's clothes: it pushes an author to invent an object to justify a choice, or to
+> cap a rich object at one. It also contradicted the worked example three lines above it in
+> `the-surfaces.md`, where a bed affords two choices and a wardrobe two more. **The only hard
+> direction is that no choice may hang on nothing.** Caught on re-reading, one day after shipping.
+
+**R3 · A prose caveat does not survive contact with a number.** `the-release.md:128` says in as many
+words that the location count is a judgement and not evidence. Three of three games took the top of
+the range anyway. If a number should not be built to, it cannot be stated as a bare range beside
+numbers that should.
+
+**R4 · Never put illustrative arithmetic in the same file as a threshold.** The 36,000 at
+`the-board.md:79` exists only to demonstrate that the anchor ratio must be budgeted forward. It was
+read as the size of a game.
+
+**R5 · Where a ceiling is unavoidable, the check must report the distribution, not the verdict.**
+"0 screens over 8" and "19 of 30 screens at exactly 8" are the same PASS and completely different
+games. The scoreboard currently cannot tell them apart — which is why `steam` at 18/18 and
+`forty_miles` at 20/20 both read as solved while sharing the defect.
+
+**R6 · Iterate the GAME and look the declaration up. Never iterate the declaration.**
+
+Measured across all 23 gates, and it partitions them cleanly:
+
+```
+walks the game, looks the declaration up   ->  the declaration can only make it STRICTER
+walks the declaration                      ->  declaring LESS shrinks the obligation
+```
+
+`residents have homes` walks the game's six NPCs: declare no homes at all and it fails 0/6.
+`guidance exists` walked `board.characters`: truncate the declared cast to one and it reported
+*"24 quest cards for 3 ascent tiers and 1 characters"* — and passed. `ascent tiers expand the world`
+was worse than gameable, it was **narrowed by declaring**: with nothing declared it guesses the
+top-gated traits, so naming only your healthy tiers hid a descent-shaped meter from the gate whose
+entire job is to catch one. `declared objects are real` had the same hole — one safe object per
+room, game byte-identical, scored 20/21 green.
+
+The tell is grammatical: `for x in declared` is the bug, `for x in game` is the fix. Where the
+declaration genuinely holds information the game cannot (a *price*, a *home*, a *budget*), walk the
+game's entities and demand the declaration cover each one.
+
+**R7 · A presence gate cannot see that the important one is missing.**
+
+Four gates ask *does at least one exist* — and **both blockers in the most-audited game in this
+repo hid in exactly that class**:
+
+- `money gates something` passed on nine *other* canvases while the declared £245 weekly obligation
+  charged nothing at all. The game's whole outflow was 11 optional purchases, largest £35.
+- `repeatable explicit media cycles` and `traversal heat` both report **100%** on 68 declared pools
+  with **zero files on disk**. No gate in the file touches the filesystem.
+
+A presence gate is fine for *"the guidance page is not empty."* It is worthless for anything the
+game is actually built on. When something matters, name it in the board and check **that** thing —
+which is what gate 24 now does for the obligation.
+
+## 5 · The check — SHIPPED 2026-08-15
+
+Reporting changes alone turned out not to be enough: the reason R2b drifted is that nothing checked
+it, and no amount of better *printing* fixes that. So this shipped as one new gate, one rewritten
+gate, and the reporting change:
+
+| | |
+|---|---|
+| **Gate 22 · declared objects are real** *(new)* | declare-then-check against `board.locations[].objects`: every declared object is written into the room's prose AND affords a choice; a room with screens must declare objects (or the denominator is author-controlled); a declared id must be a real location. Scoped to location-only hubs — on an NPC hub the anchor is the person. **This is the half of R2b a parser can judge.** |
+| **Lint · choices hang off the room** *(new)* | the share of room choices naming something their own screen's prose said. **Built as part of the gate and demoted within the week** — see below. |
+| **Gate 1 · location fill** *(rewritten)* | judges each location against its **own** declared `fill`; the global mean/median/anchor constants demote to a backstop used only when no ledger exists, and the headline says which ran. |
+| **Gate 20 · menu size** | prints `median · N of M screens at the cap`, and warns when the majority sit on it. A game at median 3 and a game at median 8 no longer print the same line. |
+| **Gate 19 · sentence length** | prints its margin and the field median. |
+| **Floor gates** | unchanged — they keep printing a verdict. The asymmetry in §3 is the whole reason the two are treated differently. |
+
+### Why the anchoring half is a LINT — the third rule in this file to be demoted
+
+It was shipped as part of the gate and taken back out two days later, on the same evidence that
+demoted R5 and R6. Run the strict word-match against **the worked example printed at the top of
+`the-surfaces.md`** — measured from a shipped game, and used to teach what *correct* looks like:
+
+```
+Your clothes are kept in the creaky wardrobe.
+   Wardrobe   -> matches
+   Mirror     -> FAILS. "mirror" is not in that paragraph.
+```
+
+The mirror belongs to the cluster the sentence sets up; a reader sees it, a matcher cannot. **One in
+four of the canonical example's real decisions fails.** On a real game the ceiling is ~74% even
+matching against the whole room's prose, against 55% for the strict per-screen rule.
+
+A gate demanding zero failures could therefore never be cleared — and this project has twice
+recorded what happens next: *"a gate whose number is invented fails correct work and gets ignored."*
+No number was invented here; a **zero** was, which is worse, because it looks rigorous. The
+percentage is genuinely useful and is now reported as one, with the worst screens ranked.
+
+**Generalises past this case:** *check the halves separately.* A rule usually has a part a parser can
+decide (did you write the thing you declared) and a part only a reader can (does this sentence make
+that choice feel like it belongs). Gating both together makes the gate unreachable; gating neither
+makes the rule rot. Split them.
+
+### What building it found — a budget that cannot be wrong is not a budget
+
+Gate 1's declared-vs-delivered check passed **8/8 on all three games immediately**, which was the
+tell. Every declared figure is an exact post-hoc word count:
+
+```
+back_home    9,607 · 4,936 · 3,514 · 1,963 · 3,927 · 4,746 · 4,381 · 2,961
+steam       10,413 · 4,345 · 3,565 · 4,167 · 4,614 · 2,649 · 3,316 · 2,950
+forty_miles 10,295 · 5,086 · 4,191 · 3,902 · 4,081 · 3,540 · 3,395 · 2,960
+
+round to the nearest 100:  0 of 24
+```
+
+Nobody plans a room at 9,607 words. `board.locations[].fill` was being written **from the delivered
+prose**, so the declaration recorded the outcome instead of constraining it — declare-then-check
+degenerating into check-nothing. **A declaration only works if it can be wrong.** Gate 1 now detects
+a mostly-non-round budget, refuses to credit it, and falls back to the backstop; the doctrine asks
+for round numbers written at board phase, before the prose.
+
+This is the same defect as the study's headline, one level up: the *form* of the good pattern was
+present and the *substance* was not, because nothing checked the difference.
+
+### Result
+
+```
+forty_miles   20/20  ->  19/21     (fill: post-hoc budget · gate 22: declaration incomplete)
+steam         17/19  ->  16/19     (fill)
+back_home     13/18  ->  12/18     (fill)
+```
+
+Gate 22 **discriminates rather than merely firing** — `hub_stock_room` flags 2 floating choices,
+`hub_stock_room_dawn` flags 5, matching the by-hand measurement in `games/forty_miles/REVIEW.md`,
+and every flagged line is a genuinely unanchored noun (*the hasp, the wastage sheet, the first
+Tuesday*). A check that fails everything would have been as useless as one that passes everything.
+
+**Deliberately not gated:** none of R1–R4 is mechanically decidable. Whether a choice count *fell
+out of* a room or was *filled to* a number is not visible in the TOML — the same eight choices are
+produced either way. This is the same honest state as R2b, and for the same reason: the check can
+see the artifact, never the process that made it.
+
+## Appendix D · Method and limits
+
+Thresholds enumerated from `scripts/gates.py:55-119`; measured values from `gates.py <slug>` on all
+three v2 games; menu shape parsed from each `7_final_game.toml` with a real TOML parser.
+
+**Two limits, both real:**
+
+1. **The three games share an author in the sense that matters.** Different sessions, but the same
+   model reading the same skill. This measures *how this skill is read*, which is the question — but
+   it is not evidence about authors in general.
+2. **Convergence is not proof of causation.** Eight locations and 36,000 words may be independently
+   reasonable for a v0.1. What moves it past coincidence is the *margin* pattern in §3: the same
+   games that clear floors by 12–97% sit on both ceilings at exactly 0%, and 19 of 30 screens land
+   on the cap rather than distributing around it.
+
 ## Log
 
 | date | what |
 |---|---|
+| 2026-08-16 | **Whole-skill audit — the declaration hole was a CLASS.** Reviewed all 23 gates, 11 reference files and 1,618 lines of `gates.py`. **R6 added:** a gate that walks the GAME and looks a declaration up cannot be weakened; a gate that walks the DECLARATION can. `guidance exists` owed one card when the declared cast was truncated to one; `ascent tiers expand the world` was *narrowed by declaring* — naming only healthy tiers hid a descent meter from the gate built to catch one. Both now walk the game. **R7 added:** all four PRESENCE gates are blind to the important instance missing — which is where BOTH of `forty_miles`' blockers hid. **Two new gates close them: 23 · speakers are named** (147/145/79 blocks missing `props.speaker` across the three v2 games — three for three, because the skill mentioned `thought_bubble` once and never showed its shape) and **24 · the obligation is charged** (a declared obligation must carry an `obligation_amount` and some choice must take it). `engine.md` §25 written and `speaker = "unknown"` promoted out of *Unverified* — it had been read during the review and left there. Also: the stale "recompute the fill" instruction had a second home in `state.md`; **nine gates were documented in zero reference files**, now indexed in `SKILL.md` (23/23 findable); and `the-surfaces.md` called gate 20 by a name the board never prints. Scores: forty_miles 19/23, steam 15/21, back_home 11/19. |
+| 2026-08-16 | **Third audit — gate 22 could be passed by declaring LESS.** Measured: one safe object per room, game byte-identical, **20/21 with the gate green**. The declaration checks verify the board is honest about what it declares and cannot see that it declared almost nothing — and the *lint* demoted the day before turned out to be the half that **cannot** be gamed, because it never consults the declaration. The cheatable half was the gate; the honest half was the lint. Fixed with **check 3: every thing the choices act on must be declared**, computed from the game (an anchored choice hooks onto a word its screen wrote; if no declared object covers it, an affordance is missing) — the same shrink now scores 59 undeclared against 16 for the honest declaration. Its first cut was half noise, which exposed a real bug: `_content_words` filtered stopwords on the RAW word before stemming, so every inflection walked through (`gets` survived while `get` was stopped); 30 findings became 16. **Three denominators were on one board** — gate 20 and the screen-shape lint over 213 choices (rooms AND character hubs), the anchoring lint over 166 (rooms only). Gate 20 now splits them, and it matters: **rooms are 18/22 at the cap (82%)** where the blended figure read 19/29 (66%) — the well-shaped hubs were diluting the number meant to expose the rooms. Anchoring restated as **55%** (rooms) and **51%** (like-for-like against the by-hand 41%). Scores unchanged. |
+| 2026-08-16 | **Study 6 audited twice; gate 22 split.** Second pass found the anchoring check **unreachable as a gate** — run against this file's own worked example it fails *"Mirror"* under a paragraph about a wardrobe, one in four of that example's real decisions, with a ~74% ceiling on a real game. Demoted to a lint, making it the third rule here taken back out after being built as a gate; the generalisation added is **check the halves separately** — the part a parser can decide, and the part only a reader can. Gate 22 keeps the declarable half (**every declared object is written AND affords a choice**), and gained three closures: a room with screens must declare objects (the denominator was author-controlled — declaring one room shrank the check from 166 choices to 84), phantom location ids are reported, and NPC hubs are excluded on `requires_npc` as well as `npc`. ⚠️ **Root cause of the fake budgets found, and it was ours:** `templates/board.toml` said `fill = 0 # recomputed by gates.py — do not hand-maintain` and `state.md` said anything recomputable does not belong in the ledger, so three authors back-filled it. Both corrected. Also: the post-hoc detector false-positived a legitimate 250-granularity plan (now `% 50`); `DECLARED_FILL_TOLERANCE` labelled as the one invented number and why it is defensible here but was not in R5/R6; and §3's *"every floor is cleared with room"* corrected to six of seven. Scores unchanged: forty_miles 19/21, steam 16/19, back_home 12/18. |
+| 2026-08-15 | **Study 6 APPLIED.** New **gate 22 · choices hang off the room** — declare-then-check against a new `board.locations[].objects`, three consistency tests and no threshold of its own, scoped to location-only hubs. **This finally gates `the-surfaces.md` R2b**, the rule that file called its highest-value ungated one, which had drifted to 55% in a 20/20 game. **Gate 1 rewritten** to judge each location against its OWN declared `fill`, with the three global constants demoted to a backstop. **Gate 20 and 19 now print the distribution and the margin** — `median 8 · 19/29 at the cap` reads differently from `median 5 · 0/12`, where before both printed the same PASS. Doctrine rewritten in `the-surfaces.md` (R3 derives from R2b; 8 named as a backstop), `the-board.md` (location count derived from the cast's rotas; the 36,000 example deleted), `the-release.md` ("6-8 locations" removed), `state.md` and `templates/board.toml`. ⚠️ **Building it found a second-order case of the same defect:** every game's declared `fill` was an exact post-hoc word count — 0 of 24 round to 100 — so the declared check passed 8/8 everywhere and proved nothing. *A budget that cannot be wrong is not a budget*; gate 1 now detects and refuses to credit it. Results, run not asserted: **forty_miles 20/20 → 19/21**, steam 17/19 → 16/19, back_home 13/18 → 12/18, and gate 22 discriminates (2 floating on the exemplary screen, 5 on the worst). `forty_miles`' board backfilled with `objects`; **no game content touched.** |
+| 2026-08-15 | **Study 6 (the number becomes the spec) written**, prompted by LO on reading `forty_miles`: *"there should be a genuine reasoning on how it should be decided, not just numberify it."* Headline: **three v2 games converged on the skill's numbers rather than on their own worlds** — all three ship exactly 8 locations (the top of a range `the-release.md:128` explicitly flags as a judgement, not evidence), all three ship 3 ascent tiers, and two land within **four words** of the 4,500 mean-location floor. Total prose came in at 36,035 / 36,019 / 37,450 against a **36,000 that is not a spec anywhere** — it is illustrative arithmetic at `the-board.md:79`. The mechanism is an asymmetry: `forty_miles` clears every FLOOR by 12-97% and sits on both CEILINGS at exactly 0% margin, with 19 of 30 screens at the gate-20 cap — because a ceiling makes *pass* and *maximise* point the same way. Consequence measured against the game gate 20 was written for: **steam 214 choices / 22 screens vs forty_miles 213 / 29** — the cap redistributed the menu and raised the median from 7 to 8, while R2b (the causal half, unchecked) drifted to 41% anchored. Five rules, **no new gates** — the fix is reporting `median · count-at-cap` on ceiling gates, because "0 over 8" and "19 at exactly 8" currently print the same PASS. Nothing applied to `gates.py` or the reference files yet. |
 | 2026-08-12 | Opened. Inventory of 12 items + parked save-safety. Study 1 (map & space) written. Four engine capabilities verified against source and flagged for `engine.md`. Nothing in the skill's reference files changed yet. |
 | 2026-08-12 | Study 2 (how the game talks to the player) written. Eight more engine facts verified and flagged for `engine.md`. Confirmed the authored table is `[[quest_cards]]`, not `[[quests]]` — `games/back_home/REVIEW.md` G1 corrected to match. The declare-then-check pattern now holds in both studies and is proposed as the skill's standard shape. |
 | 2026-08-12 | **Tier 1 graduated.** Studies 1–4 converted into `references/the-map.md`, `the-voice.md`, `the-economy.md` and an expanded `register.md`; 7 new gates + 1 new lint in `scripts/gates.py`; `engine.md` §22–23; `state.md` and `templates/board.toml` extended with `board.map` / `board.economy`. `back_home` now scores **12/17, exit 1** — the ten original gates still pass and every new failure is a defect it shipped with. One study output withdrawn (study 2 R4, the locked-door gate) after it contradicted `engine.md` §15. |

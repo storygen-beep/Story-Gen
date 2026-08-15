@@ -441,7 +441,8 @@ applied to them.
 The rule is: *same NPC, same location, overlapping windows.* Two repeatable canvases at one
 location that bind **different** NPCs, or **no** NPC, do not collide and **should be separate
 canvases** — that is the normal shape, not a workaround. What lives on which screen is
-`references/the-surfaces.md`, and a repeatable location-bound canvas caps at **8 choices** (gate 20).
+`references/the-surfaces.md`; a room's choice count derives from what its prose names (R2b, gate 22),
+and **8 is a backstop, not a size** (gate 20 — read R3 before treating it as a target).
 
 ---
 
@@ -685,6 +686,56 @@ Read and cite before using; delete from this list once promoted above.
 
 - Adjacent `[group]` blocks merging into a single if/elseif chain (so a second ladder on one
   node is dead).
-- `speaker = "unknown"` rendering a hardcoded label.
 - The exact cooldown count for random events.
 - Save-safety specifics: which identifiers orphan a live save when renamed.
+
+*(`speaker = "unknown"` was on this list. It has been read and promoted — see §25.)*
+
+---
+
+## 25. A speaking block with no `speaker` renders as a character called "Npc"
+
+**Verified, and it is the largest defect ever found in a v2 game.** `dialog` and `thought_bubble`
+both resolve their speaker the same way, and the field is **not optional**:
+
+```python
+speaker = props.get("speaker", "npc")        # v2.py:14631 — the default is a STRING, not a person
+```
+
+`"npc"` satisfies `speaker.startswith(("npc_", "npc"))`, so the unknown branch is skipped and the
+NPC branch runs with `npc_id = "npc"` (`v2.py:14651`). Nothing matches, so the fallback title-cases
+the id (`v2.py:14657`):
+
+```python
+npc_name = npc_id.replace("npc_", "").replace("_", " ").title() or "NPC"   # "npc".title() -> "Npc"
+```
+
+A portal-listed build rendered **`💭 Npc is thinking:` on 147 passages** — every thought bubble it
+had. Measured afterwards across all three v2 games: **147, 145 and 79** blocks with no speaker.
+Three for three, because this skill mentioned `thought_bubble` once and never showed its shape.
+
+### The three forms, all required to carry `props`
+
+```toml
+{ type = "dialog",         props = { speaker = "player" },                        content = "…" }
+{ type = "dialog",         props = { speaker = "npc", npcId = "npc_bev" },        content = "…" }
+{ type = "thought_bubble", props = { speaker = "player" },                        content = "…" }
+{ type = "thought_bubble", props = { speaker = "npc", npcId = "npc_bev" },        content = "…" }
+{ type = "dialog",         props = { speaker = "unknown" },                       content = "…" }
+```
+
+`speaker = "unknown"` is the deliberate pre-introduction form: it renders **"Someone is thinking:"**
+for a thought bubble (`v2.py:14647`) and the equivalent stranger label for dialogue. Use it while
+the player cannot yet know the name — never as a shrug.
+
+⚠️ **`dialog` is the correct type; `dialogue` is not.** The recognised list is `heading, paragraph,
+dialog, thought_bubble, image, video, cascade, group, block_pool, clip` (`v2.py:14673`). A mistyped
+type degrades to a bare `<p>` and silently drops the speaker.
+
+⚠️ **A player thought must be written in the game's `narration_person`.** Of the 147 broken bubbles,
+**62 referred to the protagonist as "she"** in a second-person game — so stamping
+`speaker = "player"` on them would render *"💭 You are thinking: She has measured it now…"*. The
+attribution and the prose have to agree.
+
+**Gate 23 · speakers are named** checks the field is present. Whether the *right* name renders is a
+different question and stays a lint (`lint_dialogue_attribution`).

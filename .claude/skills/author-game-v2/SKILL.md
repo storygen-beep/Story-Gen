@@ -54,13 +54,21 @@ is a dead end, and `gates.py` will say so.
 ⚠️ **Those three answer WHEN content fires. They do not answer WHICH SCREEN IT LIVES ON, and that
 is a separate question with its own file — `references/the-surfaces.md`.** Ask *who is this aimed
 at*: a person → their hub · the room or herself → its own located canvas · her, done to her → a
-substitution. They never share an exit block, and a repeatable location screen caps at 8 choices.
-**And every choice hangs off a named object in the prose** — write the room's paragraph first,
-naming what is in it, then attach each choice to the thing that affords it. That is what separates a
-room from a button list, it is the shape the field agrees on most consistently, and no gate can
-check it for you.
-A game that obeyed every other rule here shipped 23 choices on one front desk and scored 18/18,
-because nothing said a location page had a shape.
+substitution. They never share an exit block.
+
+**How many choices a room has is not a number you pick — it falls out of what the room contains.**
+Write the room's paragraph first, naming the things she can act on; declare those in
+`board.locations[].objects`; then hang every choice on one of them. One object may afford several
+choices; no choice may hang on nothing. That is what separates a room from a button list, it is the
+shape the field agrees on most consistently. **Gate 22 checks the half a parser can judge** — did
+you write the object, can she use it — against your own declaration; the half that needs a reader is
+reported as a percentage instead.
+
+⚠️ **There is also a cap of 8 (gate 20), and it is a backstop, not a size.** Two games prove why it
+must be read that way: one shipped 23 choices on a front desk and scored 18/18 because nothing said a
+location page had a shape — and the game built *after* the cap existed put 19 of its 30 screens at
+exactly 8, shipping the same 213 total choices as the first. A ceiling makes "pass" and "maximise"
+point the same way. The field median for things-to-do-at-a-place is **3**.
 
 ## Dispatch
 
@@ -80,6 +88,34 @@ talks to the player about itself) · `register.md` (how the prose reads once the
 
 The agent roster for each phase is in `references/agents.md`. The state schema is in
 `references/state.md`. Engine facts are in `references/engine.md` — and **only** there.
+
+## The scoreboard — what fails, and where to read about it
+
+`python3 scripts/gates.py <slug>`. **When a gate fails, look it up here.** Nine of these used to be
+documented nowhere but in the script's own comments, so an author who hit one had nothing to read.
+
+| gate | what it means | where it is argued |
+|---|---|---|
+| location fill | the world is a distribution — one anchor, budgeted rooms | `the-board.md` §1 |
+| explicit floor | enough beats carry real heat | `register.md` · `gates.py` THRESHOLDS |
+| explicit in repeatable | the heat is where the player returns, not sealed away | `gates.py` THRESHOLDS |
+| repeatable explicit media cycles | re-entered surfaces cycle their clips instead of repeating one | `gates.py` THRESHOLDS |
+| traversal heat | most locations carry something, not just the one hot room | `the-board.md` §1 |
+| standing surface | every character is findable and scheduled | `the-board.md` §2 |
+| milestones open something | a milestone that turns nothing on is a dead end | this file, "three kinds of content" |
+| meter ceiling | the top of a bar buys something | `the-board.md` §3 · `state.md` |
+| ends on an opening | the release closes on a visible locked door | `the-release.md` |
+| ascent tiers expand the world | your meters open content; **and no player meter quietly closes it** | `the-board.md` §3 |
+| world reachable · residents have homes | the map is a place someone could draw | `the-map.md` |
+| guidance exists · no chain ends in silence | the player is told where to go next | `the-voice.md` R2 |
+| money gates something · sinks >= sources · no free uncapped income · a price is on its label · **the obligation is charged** | the economy can say no | `the-economy.md` |
+| a place is not a catalogue | the backstop on room size — **not** the target | `the-surfaces.md` R3 |
+| declared objects are real | the board's room objects are written, usable, and complete | `the-surfaces.md` R2b |
+| **speakers are named** | every `dialog`/`thought_bubble` says whose it is | `engine.md` §25 |
+| sentence length | the prose has not drifted dense | `register.md` |
+
+Lints sit below the tally and never move it: dialogue attribution · choices hang off the room ·
+screen shape · the prose names places the map does not have.
 
 ## Operating rules
 

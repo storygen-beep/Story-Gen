@@ -11,6 +11,15 @@ is worse than none, because it is trusted.
 Keep it small. Anything that can be recomputed from the TOML by `scripts/gates.py` does not
 belong here; only decisions, debts, and promises do.
 
+> ⚠️ **"Recomputed" means *derived*, not *measured after the fact*. The difference is the whole
+> point of a declaration.** `fill` and `objects` look recomputable — you *can* count words and read
+> nouns out of a finished game — but writing them that way turns declare-then-check into
+> check-nothing. Measured: all three v2 games filled `board.locations[].fill` from the delivered
+> word count (9,607 · 4,936 · 10,295 — 0 of 24 round to the nearest hundred), so gate 1 compared
+> each game against a record of itself and passed 8/8 every time. **A declaration only works if it
+> can be wrong.** Write these before the prose; gate 1 now refuses to credit a budget that looks
+> back-filled.
+
 ---
 
 ## Schema
@@ -36,7 +45,16 @@ belong here; only decisions, debts, and promises do.
     "ascent_tiers": ["nerve", "exposure", "need"],
     "ceilings": { "nerve": 100, "exposure": 100, "need": 100 },
     "locations": [
-      { "id": "…", "job": "…", "anchor": false, "fill": 3200, "has_cycling_pool": false }
+      // `fill` — the word budget, in ROUND numbers, declared BEFORE the prose. Gate 1 checks
+      //   each location against its own figure; it refuses to credit a set that is mostly
+      //   non-round, because that is a post-hoc record and cannot fail. (`budget` is an
+      //   observed drift of the same key — accepted on read, but write `fill`.)
+      // `objects` — what the room's prose names AND she can act on, not every noun. This is
+      //   what decides the room's choice count — every choice belongs to one of these, though
+      //   one object may afford several. Many-to-one, never one-to-one. Gate 22 checks each
+      //   declared object is written AND usable; anchoring quality is a lint. the-surfaces.md R2b/R3.
+      { "id": "…", "job": "…", "anchor": false, "fill": 3200, "has_cycling_pool": false,
+        "objects": ["the roll cages", "the cold store", "the padlocked door"] }
     ],
     "characters": [
       { "id": "npc_…", "surfaces": 2, "schedule_rows": 3, "why_wanted": "…" }
@@ -54,7 +72,10 @@ belong here; only decisions, debts, and promises do.
     // what money is FOR — the question asked while it is still cheap to answer
     "economy": {
       "currency":   "money",
-      "obligation": "rent",
+      "obligation": "rent — Monday, from the landlord, in person",
+      // ⚠️ The PRICE, as a number. Prose alone cannot be checked, and a game shipped with its
+      //    central charge missing because only the prose existed. Gate 24.
+      "obligation_amount": 245,
       "sinks":      ["rent", "the boiler", "the bus fare"]
     }
   },
@@ -92,8 +113,11 @@ this shape. The documented failure was a fantasy spec written once and never ope
 this field is behind the current version, the Want has not been read this cycle and the
 release is not ready.
 
-**`board.locations[].fill`** — words currently placed there. Recompute from `scripts/gates.py`;
-hand-maintain only the *job* and the *anchor* flag. Exactly one location should carry
+**`board.locations[].fill`** — the word budget you are writing TO, in round numbers, set at board
+phase before the prose exists. ⚠️ This entry used to read *"words currently placed there, recompute
+from gates.py"*, and that instruction is why all three v2 games back-filled it from the delivered
+count and gate 1 passed 8/8 against a record of itself. Gate 1 now refuses to credit a budget that
+is mostly non-round. Hand-maintain the *job*, the *anchor* flag and the *objects* too. Exactly one location should carry
 `anchor: true`, and it must be one the player can reach and re-enter.
 
 **`board.ascent_tiers`** — names the three or four ratcheting tiers. Gate 10 reads this and

@@ -19,13 +19,22 @@ key, it does not belong on the board.
 
 ## 1. Locations — `[[locations]]`
 
-**v0.1 ships 6–8 locations.** Budget them as a *shape*, not a flat quota:
+**How many locations is not a number you pick. Derive it:** the places your declared cast's rotas
+actually visit, plus the places the daily loop requires — where she sleeps, where she earns, where
+she washes, where she crosses. Write that list and count it. That is the answer.
+
+> ⚠️ **There used to be a "6–8" here, with a note saying it was a judgement rather than evidence.
+> All three v2 games shipped exactly 8 anyway.** A prose caveat does not survive next to a number.
+> Derived instead, `forty_miles` comes to 8 on its own — so the count was right and only its
+> provenance was wrong, which is the whole problem: nobody had to think to arrive at it. Study 6.
+
+Budget the set as a *shape*, not a flat quota:
 
 - **one anchor** carrying **≥25%** of all your location prose — the place the game is actually
   about, where she spends her hours. At seed the reference game's anchor was the school, at
   35,218 words against a 116,540-word total.
-- **median location ≥3,000 words**, **mean ≥4,500** across the set.
-- satellites may be genuinely small. A 300-word bus station is not a defect; it is a corridor.
+- satellites may be genuinely small. A 300-word bus station is not a defect; it is a corridor —
+  **provided you declared it as one** (see `fill`, below).
 
 After that, widen at the measured
 early rate of roughly 6–8 per year, and **never faster than fill**.
@@ -42,15 +51,30 @@ navigation_order     = ["back_room"]
 # entry_conditions   = { version = "1.0", items = [...] }   # locked rooms only
 ```
 
-For each location, decide and record:
+For each location, decide and record in `v2_state.json` under `board.locations[]`:
 
-- **Its dramatic job.** Why she goes there when nothing is happening.
+- **Its dramatic job** (`job`). Why she goes there when nothing is happening.
 - **Who is there, and when.** At least one scheduled character, or it is scenery.
-- **What she can do there repeatedly.** If the answer is nothing, it is not a location yet.
-- **Anchor or satellite?** Exactly one location is the anchor. Say which, in `v2_state.json`.
+- **What is in it that she can act on** (`objects`) — the things the room's prose will name and
+  she can do something with. *"the roll cages", "the cold store", "the recorder", "the eleven feet
+  of corridor", "the padlocked door".* Not every noun: atmosphere goes in the prose, not this list.
+  **This is what decides how many choices the room has** — every choice belongs to one of these,
+  though a single object may afford several (a bed affords *get in* and *change first*). The
+  relation is many-to-one, never one-to-one: do not invent an object to justify a choice, and do not
+  cap an object at one choice. Gate 22 checks that each declared object is written and usable; how
+  well the choices hang off the prose is reported as a lint. See `the-surfaces.md` R2b and R3.
+- **Anchor or satellite?** (`anchor`) Exactly one location is the anchor.
+- **Its word budget** (`fill`) — **in round numbers, written now, before the prose.**
 
-**A declared location with nothing placed in it is debt, not a location.** Gate 1 reports the
-whole distribution — anchor share, median, mean, and every empty room.
+> ⚠️ **`fill` must be a plan, and gate 1 can tell when it is not.** Measured across all three v2
+> games: every declared figure was an exact post-hoc word count — 9,607 / 4,936 / 10,295, not one
+> of twenty-four round to the nearest hundred — so delivered-vs-declared matched 8/8 in all three
+> and proved nothing. **A budget that cannot be wrong is not a budget.** Gate 1 now refuses to
+> credit a declaration that is mostly non-round and falls back to the global backstop instead.
+
+**A declared location with nothing placed in it is debt, not a location.** Gate 1 checks each
+location against **its own declared `fill`**; the global mean/median floors are only a backstop for
+a game with no ledger.
 
 ⚠️ Measured failure worth naming: one of our games *does* have an anchor at 29% — and it is a
 sealed room with no exits that the player can never return to. An anchor the world cannot
@@ -66,9 +90,14 @@ and its share fell **53% → 46% → 40% → 39% → 35%** without a word being 
 would have crossed below 25% within a single further increment — the game going 9/10 → 8/10
 while getting objectively better.
 
-**Budget the anchor against the FINISHED total, not the current one.** At a 36,000-word target
-the anchor owes 9,000, so plan its share into every increment rather than topping it up at the
-end. A ratio gate cannot be satisfied by working elsewhere; the target moves with you.
+**Budget the anchor against the FINISHED total, not the current one** — work out its share of the
+total you are planning for and put that share into every increment, rather than topping it up at
+the end. A ratio gate cannot be satisfied by working elsewhere; the target moves with you.
+
+> ⚠️ **This paragraph used to carry a worked example with a number in it, and the number has been
+> removed because three games shipped to it.** back_home 36,035 · steam 36,019 · forty_miles
+> 37,450 — against a figure that appeared once, as arithmetic, and was a spec nowhere. Illustrative
+> numbers in a file that also contains thresholds get read as thresholds. Study 6.
 
 **Cold rooms are allowed.** Not every place is erotic — the reference game had no sexual
 content in 8 of its 25 locations (a police station, a museum). The floor is **60% of

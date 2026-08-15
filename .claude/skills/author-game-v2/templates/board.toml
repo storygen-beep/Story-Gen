@@ -80,15 +80,32 @@ bands = [
 ]
 
 
-# ── locations: 6-8 at v0.1, budgeted as a SHAPE not a flat quota ─────────────
+# ── locations: DERIVE the count, budget the set as a SHAPE ───────────────────
+#   How many? Not a number you pick. List the places your declared rotas visit
+#   plus what the daily loop needs (sleep, earn, wash, cross), and count that.
+#   ⚠️ This line used to read "6-8 at v0.1" WITH a caveat saying the count was a
+#      judgement, not evidence. All three v2 games shipped exactly 8 anyway — a
+#      prose caveat does not survive next to a number. Study 6.
 #   one ANCHOR carrying >=25% of all location prose (the place the game is about)
-#   median location >=3,000 words · mean >=4,500 across the set
-#   satellites may be small — a 300-word corridor is not a defect
-# For each one, answer before writing it:
+#   satellites may be small — a 300-word corridor is not a defect, IF you declared
+#   it as one. Global mean/median floors are only a backstop for a game with no
+#   v2_state.json; with a ledger, each location is judged against its own budget.
+# For each one, answer before writing it — recorded in board.locations[]:
 #   · its dramatic job — why she goes there when nothing is happening
 #   · who is there, and when — no scheduled character means it is scenery
 #   · what she can do there REPEATEDLY — if nothing, it is not a location yet
-#   · budget vs current fill — the debt column in v2_state.json
+#   · `objects` — what the prose will name AND she can act on. NOT every noun.
+#     This is what sets the room's choice count: every choice belongs to one of
+#     these, though one object may afford several (a bed affords "get in" and
+#     "change first"). Many-to-one, never one-to-one — do not invent an object
+#     to justify a choice. Gate 22 checks each declared object is written AND
+#     affords a choice; anchoring quality is a lint, not a bar to clear.
+#     references/the-surfaces.md R2b/R3.
+#   · `fill` — the word budget, in ROUND numbers, written NOW, before the prose.
+#     Gate 1 refuses to credit a budget that is mostly non-round: measured, all
+#     three v2 games declared exact post-hoc word counts (9,607 / 4,936 / 10,295)
+#     and so matched their own plan 8/8 while proving nothing. A budget that
+#     cannot be wrong is not a budget.
 #
 # Cold rooms are allowed: the reference game had no sexual content in 8 of its
 # 25 locations. The floor is 60% of locations carrying heat, not 100%.
@@ -120,9 +137,17 @@ navigation_order     = ["<neighbour_id>"]
 #   { type = "flag", subject = "player", flag_key = "<flag>", operator = "is_true" } ] }
 
 # BOARD NOTES (keep in v2_state.json, not in the TOML):
-#   job    = "<why she comes here with nothing happening>"
-#   anchor = false        # exactly one location sets this true
-#   fill   = 0            # recomputed by gates.py — do not hand-maintain
+#   job     = "<why she comes here with nothing happening>"
+#   anchor  = false       # exactly one location sets this true
+#   objects = ["<the thing>", "<the other thing>"]   # what she can act on here
+#   fill    = 4000        # ⚠️ YOUR BUDGET, in round numbers, written NOW — a PLAN.
+#
+# ⚠️ THIS LINE USED TO READ `fill = 0  # recomputed by gates.py — do not hand-maintain`,
+#    AND THAT IS WHY ALL THREE v2 GAMES SHIPPED A FAKE BUDGET. Told the field was
+#    computed, three authors filled it in afterwards from the delivered word count —
+#    9,607 / 4,936 / 10,295, not one of twenty-four round to the nearest hundred — so
+#    gate 1 compared each game to a record of itself and passed 8/8 every time.
+#    A budget that cannot be wrong is not a budget. Write it before the prose.
 
 
 # ── characters ───────────────────────────────────────────────────────────────

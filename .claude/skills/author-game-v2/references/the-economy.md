@@ -66,6 +66,28 @@ Three things make it work, and they are cheap:
 - **Armed after income exists.** Pressure before she has a way to earn is a scripted loss, not a
   choice.
 
+> ⚠️ **AND A PRICE THAT IS ACTUALLY TAKEN. Declare it as a number, not only as prose.**
+>
+> ```json
+> "economy": { "currency": "money",
+>              "obligation": "The Friday settle-up with Nunn on the forecourt…",
+>              "obligation_amount": 245 }
+> ```
+>
+> **Measured failure, and it is the worst kind — the mechanic the game is named after.** A shipped
+> game declared *"£200 a week back, plus £45 for the caravan"*, printed *"Have the two hundred and
+> forty-five"* on its quest card, and wrote the scene of handing money through a car window. The
+> settle-up canvas carried **no cost and no money effect.** Played live with £300: before £300,
+> after £300 — and repeatable without limit, in both directions, making it a free relation faucet.
+> The game's entire money outflow was 11 optional purchases totalling £90 against £70 a night of
+> income, so nothing in it ever squeezed.
+>
+> Gate 16 passed it, because nine *other* canvases gate on money. That is the presence-gate failure
+> mode: *"at least one exists"* cannot see that the important one does not. **Gate 24** closes it —
+> declare the obligation and its amount, and some choice must charge at least that much.
+> An obligation declared with no `obligation_amount` fails: a price nobody can check is how this
+> shipped.
+
 ⚠️ **And the half that gets forgotten.** An obligation that cannot be paid is a scripted loss — but
 an obligation that is *trivially* paid is not pressure either, and only the first failure is
 usually guarded against. **Price it against the income channels in both directions.** Count what a
@@ -104,7 +126,8 @@ whether the game simply has too many ways to earn.*
 "board": {
   "economy": {
     "currency":   "money",
-    "obligation": "rent",
+    "obligation": "rent — Monday, from the landlord, in person",
+    "obligation_amount": 120,
     "sinks":      ["rent", "the boiler", "the bus fare", "her phone"]
   }
 }
@@ -127,9 +150,10 @@ for in this game* asked at the point where it is still cheap to answer.
 | **Gate 17 · sinks >= sources** | at least as many ways to spend as to earn |
 | **Gate 18 · no free uncapped income** | no standing surface grants currency without a cap or a cost |
 | **Gate 21 · a price is on its label** | every choice that spends currency names the amount in its text |
+| **Gate 24 · the obligation is charged** | if `board.economy.obligation` is declared it must carry an `obligation_amount`, and some choice must charge at least that much |
 
 **Whether the pressure is actually felt is deliberately not a gate.** Whether £120 against a £42 day
-*squeezes* is a play question. These three establish that a squeeze is possible; only a playthrough
+*squeezes* is a play question. These five establish that a squeeze is possible; only a playthrough
 establishes that it happens.
 
 ---

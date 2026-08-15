@@ -122,12 +122,16 @@ Posting volume predicts revenue (ρ = +0.58). Release *speed* does not (ρ = −
 
 v0.1 builds the Board instead of adding to it.
 
-- **6–8 locations, shaped like the reference seed:** one anchor holding >=25% of the prose,
-  median location >=3,000 words, mean >=4,500. That lands near 30-45k words of prose for a
-  seven-location world. Satellites may be small; the anchor may not.
-  *(The fill shape is measured from the reference seed. The 6-8 LOCATION COUNT is not: that
-  build already had 25 locations, and the true v0.1 is unavailable — its repository begins
-  five months after launch. Treat the count as a judgement, the distribution as evidence.)*
+- **As many locations as your cast and your loop require, shaped like the reference seed.**
+  Derive the count — the places your declared rotas visit, plus what the daily loop needs (sleep,
+  earn, wash, cross) — then shape the set: one anchor holding **≥25%** of the prose, satellites
+  free to be small. Each location declares its own word budget, in round numbers, before the
+  prose; gate 1 checks the game against that rather than against a global figure. `the-board.md` §1.
+  *(The fill SHAPE is measured from the reference seed. A location COUNT is not measurable from it:
+  that build already had 25 locations and the true v0.1 is unavailable — its repository begins five
+  months after launch. This bullet used to carry "6–8" with exactly that caveat attached, and all
+  three v2 games shipped 8. A caveat in prose does not survive next to a number, so the number is
+  gone. Study 6.)*
 - **Every gate green on the day it ships.** v0.1 is not a slice with debt attached; the debt
   model starts *after* it.
 - **The explicit floor is met from minute one**, including the traversal layer.
