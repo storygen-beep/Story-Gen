@@ -492,13 +492,57 @@ shows a plausible number.
 effect that writes it.** Money, counts, inventory-ish integers. Meters — nerve, exposure, corruption,
 arousal, energy — want the clamp and should keep it.
 
-⚠️ Note the asymmetry with a *deduction*: unclamped subtraction can go negative. The engine's own
-recurring-demand system (`[settings.rent]`) does its own affordability check, but an authored
-`op = "subtract"` on an unclamped trait does not — gate the choice on the trait instead.
+⚠️ Note the asymmetry with a *deduction*: an unclamped one can go negative. The engine's own
+recurring-demand system (`[settings.rent]`) does its own affordability check; an authored deduction
+does not — gate the choice on the trait, or price it with `costs`, which the engine refuses when
+unaffordable (`v2.py:12556`).
 
 **How to catch it:** diff the state across the scene and compare against the declared value. A
 capped effect looks identical to a working one in the TOML, in the validator, in the build log and
 on the scoreboard. Only the live number shows it.
+
+### ⚠️ 21b. `op = "subtract"` IS NOT AN ENGINE OP. It does nothing at all.
+
+This section used to say *"an authored `op = "subtract"` on an unclamped trait"*, as though that
+were a thing the engine ran. It is not, and the sentence taught two games to write 105 effects that
+do nothing.
+
+```js
+// window.applyTraitEffect — v2.py:5742-5751
+if (op === 'add')      { next = current + value; }
+else if (op === 'set') { next = value; }
+else { /* Unknown op; do nothing */ return; }
+```
+
+Nothing normalises it: the string `subtract` appears **nowhere** in `generators/v2.py` or in
+`apps/projects/services/template_import.py`. The generator interpolates the op straight through
+(`v2.py:13469`), so the build emits `applyAndNotifyTrait(..., "subtract", 4, ...)` verbatim and the
+runtime drops it on the floor.
+
+**Every effect family, and the ops each actually runs:**
+
+| family | key that identifies it | ops the engine runs | source |
+|---|---|---|---|
+| trait | `trait` | `add` · `set` | `v2.py:5742-5751` |
+| flag | `flag` | `set` · `unset` · `toggle` | `v2.py:5888` |
+| quest | `quest_id` | `start` · `update` · `complete` · `cancel` | `v2.py:5914-5919` |
+| item | `action`, not `op` | `add` · `remove` | — |
+
+**To take something away, write `op = "add"` with a NEGATIVE value.** Proven live on a shipped
+build: `applyAndNotifyTrait('player',null,'count','subtract',4,true,null)` left `count` at 100;
+`applyAndNotifyTrait('player',null,'stress','add',-5,false,null)` moved stress 20 → 15.
+
+> **Measured cost. 35 dead effects in one v2 game, 70 in another, both authored from this file.**
+> In the first, the counterweight meter its own spec called *"only ever falls"* never moved off its
+> starting value for the entire game — twelve dead decrements against a clamp — twenty activities
+> never charged the energy they said they cost, and the one NPC penalty in the game never applied.
+> The TOML was valid, the build was green, all the ship gates passed, and a full live play-through
+> passed too: **a number that never changes looks exactly like a number the player has not moved
+> yet.** Two gates were reading it wrong as well — the sink/source counter classified by op NAME,
+> so rewriting a deduction correctly flipped the line from 11:11 to 10:12.
+>
+> Now checked twice: `gates.py` **gate 25** fails any game using a dead op, and
+> `template_import.py` refuses to build one.
 
 ---
 
@@ -611,6 +655,40 @@ conditions and is wrong here.
 ⚠️ **The sidebar next-row calls the identical functions as the page** (`v2.py:15454-15456`). There is
 no separate "sidebar quest": edit a card and both surfaces move together, and a character with no
 card renders a blank next-row.
+
+### The next STEP in the rail — `[[sidebar_items]] type = "quest_next"`
+
+**A quest card has no `title` field** (`template_import.py:997-1039`) — `text` is the narrative body,
+`tip` is the 💡 line, and the only short imperative string on a card is `goals[].label`. So there is
+nothing on a card that a sidebar could show as a headline, and until 2026-08-16 there was no sidebar
+item type for guidance at all: the only always-visible strings a game could put in the rail were
+`trait_status_text` bands, which name a **state**, not a step.
+
+> Measured: a game shipped with four band strings — *"Counter only, hatch down at midnight"*,
+> *"Fleece zipped, back to the window"* — and an excellent Quests page. A player who never opened
+> that page had **no place, no verb and no person** anywhere in the persistent chrome.
+
+```toml
+[[sidebar_items]]
+type   = "quest_next"
+max    = 3            # optional, default 3
+npc_id = "npc_bev"    # optional — omitted, it takes the live TIER cards in file order
+```
+
+It renders `renderQuestsGoalBlock` — the same `🎯 To advance: ◯ <label> — 6 / 15` block as the page
+and as `npc_panel`'s `next` row — so there is one implementation of what an objective looks like and
+the three surfaces cannot drift. Terminal cards are skipped (no goals to show). Requires
+`quests_engine = "v2"`, and the validator says so.
+
+**The label is the whole UI.** `goals[].label` is what appears in the rail on every screen, so it
+carries `the-voice.md` R3 in full: a place, a verb, and a window if the thing is schedule-gated.
+
+⚠️ **Check the label is not circular.** Measured on a shipped game: all three cards of one ascent
+tier named a choice gated at the exact value the card was trying to reach — *"Sell a token off the
+book"* for `trade ≥ 15`, where the choice itself required `trade ≥ 15`. The two tiers beside it were
+correct (each card named a choice gated **one tier below** its own goal), so the shape was known and
+one ladder simply missed it. Nothing in `gates.py` catches this; read each card against the gate on
+the choice it names.
 
 **`locked_text_threshold`** (`v2.py:12786`) prints an explicit *"Requires …"* hint on a locked
 choice, distinct from `locked_text`, which replaces the label (§15).
@@ -739,3 +817,55 @@ attribution and the prose have to agree.
 
 **Gate 23 · speakers are named** checks the field is present. Whether the *right* name renders is a
 different question and stays a lint (`lint_dialogue_attribution`).
+
+---
+
+## 26. `[settings.rent]` — the engine charges the money, so do not author a canvas that does
+
+The recurring-demand system is real, it is wired end to end, and it **takes the money**. Read this
+before writing a settle-up scene, because a game shipped one that narrated the handover and charged
+nothing while this system was quietly doing the actual work three passages away.
+
+```toml
+[settings.rent]
+enabled          = true
+amount           = 245
+due_day          = "Friday"          # weekday names only — VALID_DAYS, template_import.py:4786
+collector_npc    = "npc_nunn"        # must exist in [[npcs]]
+grace_periods    = 1
+start_after_flag = "first_shift_done"
+eviction_mode    = "flag_set"        # or "game_end" (the default, and a product that ends)
+eviction_flag    = "terms_changed"
+currency_symbol  = "£"               # added 2026-08-16; defaults to "$"
+
+[settings.rent.text]                  # every beat of all three pages is authored here
+title = "…" · scene = "…" · greeting = "…" · paid_scene = "…" · paid_response = "…"
+paid_closing = "…" · cant_pay = "…" · warning_scene = "…" · warning_response = "…"
+warning_closing = "…" · eviction_scene_soft = "…" · eviction_response_soft = "…"
+eviction_closing_soft = "…"
+```
+
+**How it fires — and the timing is the part authors get wrong.**
+
+1. `advanceDay()` sets `rent_state.is_due` when the day rolls over **to** `due_day` (`v2.py:5453-5464`).
+   Days roll at midnight (`v2.py:5405-5408`), so the demand arms at **00:00 on the due day**, not at
+   whatever hour the collector's schedule row says.
+2. The next time the player lands on a `Location_*` passage or `Navigation`, they are intercepted
+   into `RentDay` (`v2.py:15247-15259`). Never mid-canvas.
+3. Paying runs `$player.core_traits.money -= _rent` and clears `is_due` (`v2.py:15925`). Verified
+   live: 300 → 55 on a 245 demand.
+4. Short pays route to `RentDay_Short`, which spends a grace period, and after that to the eviction
+   branch — which under `eviction_mode = "flag_set"` sets a flag instead of ending the game.
+
+**`start_after_flag` is what stops it being a scripted loss.** Until that flag is set the demand
+never arms, so the flag belongs on the canvas that first gives her a way to earn.
+
+> ⚠️ **DO NOT ALSO WRITE THE PAYMENT AS A CANVAS.** Measured failure: a game declared the settle-up
+> as its central mechanic, ran `[settings.rent]` correctly, **and** authored a hub rung that
+> narrated counting the money through a car window — with no cost, no money effect, no day gate and
+> a relation grant, repeatable without limit. Played live it moved nothing and printed relation. The
+> player meets two settle-ups, one of which is free, and the free one is the one with the writing in
+> it. If the engine takes the money, the authored scene beside it must be about something else.
+
+**Money must be unclamped for this to work at all.** A 245 demand against `clamp = true` money
+(caps at 100) is unpayable and the only reachable outcome is eviction — see §21.

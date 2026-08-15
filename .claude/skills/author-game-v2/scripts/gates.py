@@ -259,18 +259,46 @@ def _conditions_of(obj):
                 yield it
 
 
+def _effect_value_sign(val):
+    """+1 / -1 / 0 for an effect `value`, which may be a number or a random range.
+
+    The engine accepts `{type = "random", min = N, max = M}` as a value (v2.py:13525),
+    so a sign test that only handles numbers silently reads every ranged grant as zero.
+    """
+    if isinstance(val, bool):
+        return 0
+    if isinstance(val, (int, float)):
+        return 1 if val > 0 else (-1 if val < 0 else 0)
+    if isinstance(val, dict) and val.get("type") == "random":
+        hi = val.get("max", val.get("min"))
+        if isinstance(hi, (int, float)):
+            return 1 if hi > 0 else (-1 if hi < 0 else 0)
+    return 0
+
+
 def _currency_ops(obj, cur, out):
-    """Collect every 'add'/'subtract' this structure performs on the currency trait.
+    """Collect every movement this structure performs on the currency trait, BY DIRECTION.
 
     Walks the whole nested shape rather than the known effect sites, because a
     grant can hang off an exit_block config, a choice, or a cascade beat, and a
     gate that only looks in one of those under-reports the economy.
     NOTE the key asymmetry the rest of this file already documents: an EFFECT
     names its trait `trait`, a CONDITION names it `trait_key`.
+
+    ⚠️ DIRECTION, NOT OP NAME — and `op = "subtract"` IS NOT AN ENGINE OP.
+    `applyTraitEffect` runs `add` and `set` and silently returns on anything else
+    (v2.py:5742-5751), so the only way to take currency away in an effect is
+    `op = "add"` with a NEGATIVE value. This function used to append the op string,
+    which meant a real deduction written the only way that works counted as INCOME —
+    measured on a game whose sink/source line flipped from 11:11 to 10:12 the moment
+    its dead `subtract` effects were rewritten correctly. A `subtract` effect is
+    counted as neither: it moves nothing, and gate 25 is what reports it.
     """
     if isinstance(obj, dict):
-        if (obj.get("trait") or obj.get("trait_key")) == cur and obj.get("op") in ("add", "subtract"):
-            out.append(obj["op"])
+        if (obj.get("trait") or obj.get("trait_key")) == cur and obj.get("op") == "add":
+            sign = _effect_value_sign(obj.get("value"))
+            if sign:
+                out.append("subtract" if sign < 0 else "add")
         # a `costs` entry is a spend even though it carries no op
         for cost in (obj.get("costs") or []):
             if isinstance(cost, dict) and cost.get("trait") == cur:
@@ -575,12 +603,35 @@ there here whole half first last next again through past before after until whil
 another other same both few many much less least enough almost quite rather even also else
 monday tuesday wednesday thursday friday saturday sunday weekend weekday morning evening night
 eleven twelve twenty thirty forty fifty hundred
+shift start minute hour day week month year time moment thing way point reason version sort kind
 """.split())
 # ⚠️ The second block was added after the under-declaration check reported choices "hanging off"
 # objects called *there*, *before*, *whole*, *forty* and *friday*. Adverbs, ordinals, weekday
 # names and bare numbers are never the thing a choice acts on, and they were drowning the real
 # findings. Words that ARE objects in some game (a "morning" shift is not an object; a location
 # genuinely named "The Weekend" would be) stay resolvable through the declared list itself.
+# The third block is time spans and abstractions — *the shift*, *the start of it*, *the whole
+# point*. They pass every lexical test for a noun and none of them is a thing in a room.
+
+
+# An object is a thing a room HAS, and in English that is written with a determiner in front of
+# it. This is the cheapest available noun test and it exists because the under-declaration check
+# was reporting `sleep` (from the choice "Sleep.") as an object the board had failed to declare.
+# Measured on a real game: without it, 16 findings of which 6 were verbs or bare abstractions;
+# with it, 7 findings and every one a genuine thing in the room.
+_NOUN_PHRASE = re.compile(
+    r"\b(?:the|a|an|his|her|its|their|your|our|this|that|these|those|one|two|three|four|five|"
+    r"six|seven|eight|nine|ten)\s+([a-z][a-z-]{2,})", re.I)
+
+
+def _phrase_nouns(text):
+    """Stemmed head-nouns that `text` names WITH a determiner, minus stopwords."""
+    out = set()
+    for w in _NOUN_PHRASE.findall(text or ""):
+        st = _stem(w.lower())
+        if st not in _OBJ_STOP and len(st) > 2:
+            out.add(st)
+    return out
 
 
 def _stem(w):
@@ -732,15 +783,22 @@ def _room_objects(model, game, state):
                 if _names_any(txt, screen_vocab):
                     n_anchored += 1
                     # ⚠️ UNDER-DECLARATION, computed from the GAME rather than the board, so
-                    # it cannot be answered by shrinking the board. This choice hangs off
-                    # something its screen really did name — so if no declared object covers
-                    # that word, the board left a real affordance out. Without this, gate 22
-                    # was passable by declaring one safe object per room and touching nothing
-                    # else: measured, that scored 20/21 with the game byte-identical.
-                    # Compare with the SAME fuzzy matcher the rest of the file uses. Exact
-                    # membership reported "padlock" as undeclared against a declared "the
+                    # it cannot be answered by shrinking the board. This choice acts on a thing
+                    # its own screen names as a thing — so if no declared object covers it, the
+                    # board left a real affordance out. Without this, gate 22 was passable by
+                    # declaring one safe object per room and touching nothing else: measured,
+                    # that scored 20/21 with the game byte-identical.
+                    #
+                    # BOTH SIDES MUST NAME IT AS A NOUN PHRASE. A bare content-word overlap
+                    # reported `sleep` (from the choice "Sleep.") and `start` (from "the start
+                    # of it") as objects the board had failed to declare, and a check that
+                    # demands nonsense in the ledger gets ignored. Requiring a determiner on
+                    # both sides took a real game from 16 findings, 6 of them junk, to 7 —
+                    # every one of them a thing genuinely in the room and genuinely undeclared.
+                    # Comparison uses the SAME fuzzy matcher as the rest of the file: exact
+                    # membership reported "padlock" undeclared against a declared "the
                     # padlocked door".
-                    hooks = [w for w in _content_words(txt) if w in screen_vocab]
+                    hooks = sorted(_phrase_nouns(txt) & _phrase_nouns(prose))
                     if hooks and not any(_names_any(w, obj_words) for w in hooks):
                         undeclared_hooks[c["loc"]][hooks[0]] += 1
                 else:
@@ -1566,14 +1624,30 @@ def run_gates(model, game, state=None):
     else:
         # `_currency_ops` collects operations, not amounts, and this gate needs the amount —
         # so it walks for values itself rather than widening a helper five other gates share.
+        #
+        # ⚠️ TWO CHANNELS, AND THE FIRST VERSION KNEW ONLY ONE.
+        # (1) An authored charge — a `costs` entry, or an effect written `op = "add"` with a
+        #     NEGATIVE value. NOT `op = "subtract"`: that is not an engine op and moves nothing
+        #     (v2.py:5742-5751), so counting it here would credit a charge that never happens —
+        #     which is the exact failure this gate exists to catch, rebuilt inside the gate.
+        # (2) `[settings.rent]` — the engine's own recurring-demand system. It arms on the day
+        #     rollover to `due_day`, intercepts the next `Location_*` entry, and really does
+        #     charge (`$player.core_traits.money -= _rent`, v2.py:15918-15928; verified live).
+        #     Measured: a game whose obligation IS charged, by that system, failed this gate
+        #     because the walk only looked at canvases. A check that fails a game for obeying
+        #     the doctrine is a bug in the check.
         outflows = []
+        rent_cfg = (game.get("settings") or {}).get("rent") or {}
+        rent_amt = rent_cfg.get("amount") if rent_cfg.get("enabled") else None
+        rent_charges = isinstance(rent_amt, (int, float)) and rent_amt > 0
 
         def _outflows(o):
             if isinstance(o, dict):
                 if ((o.get("trait") or o.get("trait_key")) == currency
-                        and o.get("op") == "subtract"
-                        and isinstance(o.get("value"), (int, float))):
-                    outflows.append(o["value"])
+                        and o.get("op") == "add"
+                        and isinstance(o.get("value"), (int, float))
+                        and o["value"] < 0):
+                    outflows.append(-o["value"])
                 for cost in (o.get("costs") or []):
                     if (isinstance(cost, dict) and cost.get("trait") == currency
                             and isinstance(cost.get("value"), (int, float))):
@@ -1586,19 +1660,92 @@ def run_gates(model, game, state=None):
 
         _outflows(game.get("canvases") or [])
         biggest = max(outflows) if outflows else 0
+        charged_by = None
+        if rent_charges and rent_amt >= (ob_amt if isinstance(ob_amt, (int, float)) else 0):
+            charged_by = f"[settings.rent] {rent_amt:g} every {rent_cfg.get('due_day', '?')}"
+        elif isinstance(ob_amt, (int, float)) and biggest >= ob_amt:
+            charged_by = f"an authored charge of {biggest:g}"
+
         gaps = []
         if not isinstance(ob_amt, (int, float)) or ob_amt <= 0:
             gaps.append("board.economy.obligation is declared but board.economy.obligation_amount "
                         "is not — an obligation with no price cannot be checked, and one that "
                         "cannot be checked is how a game shipped with its central charge missing")
-        elif biggest < ob_amt:
-            gaps.append(f"the largest single `{currency}` outflow in the game is {biggest:g}, "
-                        f"below the declared obligation of {ob_amt:g} — the price is written in "
-                        f"the ledger and the prose but never taken from the player")
+        elif not charged_by:
+            gaps.append(f"nothing takes {ob_amt:g} `{currency}` from the player: the largest "
+                        f"authored outflow is {biggest:g}"
+                        + (f" and [settings.rent] charges {rent_amt:g}" if rent_charges
+                           else " and [settings.rent] is not enabled")
+                        + " — the price is written in the ledger and the prose but never taken")
         gate("the obligation is charged", not gaps,
-             f"[declared] {ob_amt if isinstance(ob_amt, (int, float)) else '?'} "
-             f"{currency} · largest single outflow {biggest:g} across {len(outflows)} charges",
+             f"[declared] {ob_amt if isinstance(ob_amt, (int, float)) else '?'} {currency}"
+             + (f" · charged by {charged_by}" if charged_by else "")
+             + f" · largest authored outflow {biggest:g} across {len(outflows)} charges",
              gaps)
+
+    # G25 — every effect uses an op the engine actually runs.
+    #
+    # ⚠️ THE CHEAPEST GATE HERE, AND IT CATCHES THE MOST INVISIBLE CLASS OF BUG.
+    # `applyTraitEffect` runs `add` and `set`, and on anything else falls through to
+    # `// Unknown op; do nothing` and RETURNS (v2.py:5742-5751). Nothing normalises the
+    # value: `subtract` appears nowhere in the generator or the importer. The importer
+    # validates `op` for cheat-page grants (template_import.py:3755) and for nothing else,
+    # so a dead effect is valid TOML, builds green, and emits verbatim into the HTML.
+    #
+    # Measured, on two v2 games authored from the same skill: 35 dead effects in one and
+    # 70 in the other. In the first, a whole declared meter never moved for the entire game
+    # — the counterweight that "only ever falls" was frozen at its starting value across 12
+    # dead decrements — twenty activities never charged the energy they said they cost, and
+    # the one NPC penalty in the game never applied. Every gate here passed it, and a live
+    # play-through passed it too, because the number simply does not change and nothing says
+    # why. `references/engine.md` §21 had discussed `op = "subtract"` as though it worked.
+    #
+    # SCOPED TO CANVASES AND THE ENGINE BLOCK on purpose: quest-card `goals`/`when` entries
+    # legitimately carry `trait` + `op = "gte"|"lt"`, and they are comparisons, not effects.
+    # Anything carrying `subject` or `operator` is a condition and is skipped for the same
+    # reason.
+    LIVE_OPS = {
+        "trait": ({"add", "set"}, "v2.py:5742-5751"),
+        "flag": ({"set", "unset", "toggle"}, "v2.py:5888"),
+        "quest": ({"start", "update", "complete", "cancel"}, "v2.py:5914-5919"),
+    }
+    dead = collections.Counter()
+    dead_where = collections.defaultdict(set)
+
+    def _walk_ops(o, cid):
+        if isinstance(o, dict):
+            if "subject" not in o and "operator" not in o and isinstance(o.get("op"), str):
+                kind = ("flag" if o.get("flag") else
+                        "quest" if (o.get("quest_id") or o.get("questId") or o.get("quest")) else
+                        "trait" if o.get("trait") else None)
+                if kind and o["op"] not in LIVE_OPS[kind][0]:
+                    dead[(kind, o["op"])] += 1
+                    dead_where[(kind, o["op"])].add(cid)
+            for v in o.values():
+                _walk_ops(v, cid)
+        elif isinstance(o, list):
+            for v in o:
+                _walk_ops(v, cid)
+
+    for c in (game.get("canvases") or []):
+        _walk_ops(c, c.get("id", "?"))
+    _walk_ops(game.get("engine") or {}, "[engine]")
+
+    detail = []
+    for (kind, op), n in dead.most_common():
+        live = ", ".join(sorted(LIVE_OPS[kind][0]))
+        where = sorted(dead_where[(kind, op)])
+        detail.append(f"{n} {kind} effects use op = \"{op}\", which the engine discards — "
+                      f"the {kind} ops it runs are {live} ({LIVE_OPS[kind][1]})")
+        detail.append(f"    in: {', '.join(where[:6])}"
+                      + (f" … and {len(where) - 6} more canvases" if len(where) > 6 else ""))
+    if dead:
+        detail.append("to take something away, write op = \"add\" with a NEGATIVE value; "
+                      "a quantity like money must also carry clamp = false (engine.md §21)")
+    gate("effects use a live op", not dead,
+         f"{sum(dead.values())} effects use an op the engine does not run"
+         if dead else "every effect op is one the engine runs",
+         detail)
 
     # G19 — sentence length. The first gate here that measures WRITING.
     sent_words = [len(s.split())

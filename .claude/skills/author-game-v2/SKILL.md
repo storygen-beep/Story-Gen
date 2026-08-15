@@ -112,6 +112,7 @@ documented nowhere but in the script's own comments, so an author who hit one ha
 | a place is not a catalogue | the backstop on room size — **not** the target | `the-surfaces.md` R3 |
 | declared objects are real | the board's room objects are written, usable, and complete | `the-surfaces.md` R2b |
 | **speakers are named** | every `dialog`/`thought_bubble` says whose it is | `engine.md` §25 |
+| **effects use a live op** | no effect uses an `op` the engine silently discards | `engine.md` §21b |
 | sentence length | the prose has not drifted dense | `register.md` |
 
 Lints sit below the tally and never move it: dialogue attribution · choices hang off the room ·
@@ -154,7 +155,17 @@ screen shape · the prose names places the map does not have.
   put both into doctrine.
 - **When a gate you just wrote fails a game, check the skill before blaming the game.** A gate
   built for locked doors fired on seven of eight and every one was following `engine.md` §15
-  correctly. A check that fails a game for obeying the doctrine is a bug in the check.
+  correctly. A check that fails a game for obeying the doctrine is a bug in the check. Measured
+  again 2026-08-16: gate 24 failed a game whose obligation *was* charged, because the gate walked
+  canvases and the charge lived in `[settings.rent]`.
+- **A vocabulary the engine does not recognise fails SILENTLY, and nothing else in this system
+  does.** `op = "subtract"` is not an engine op — `applyTraitEffect` runs `add` and `set` and
+  returns on anything else (`v2.py:5742-5751`). Two v2 games shipped 105 effects that do nothing,
+  because this skill's own `engine.md` discussed the op as though it worked. Valid TOML, green
+  build, green gates, and a clean play-through, because **a number that never changes looks exactly
+  like a number the player has not moved yet.** When you write an unfamiliar key or value, find the
+  line that consumes it before you write a hundred of them. Gate 25 and the importer now both
+  refuse it; the next one of these has no gate yet.
 - **An explicit beat stays on the body for its whole length** — `references/register.md`. If the
   beat's last sentence is about what it *means* rather than what is *happening*, it has pivoted
   and will fail the floor. This defect recurred three times in three increments, authored each

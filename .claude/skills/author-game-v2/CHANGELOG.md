@@ -5,6 +5,75 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-16 (later — the Forty Miles repair pass)
+
+- **⚠️ `engine.md` §21 was teaching an op the engine does not run, and two games wrote 105 of
+  them.** `references/engine.md:497` discussed `op = "subtract"` as authored behaviour. It is not
+  one: `applyTraitEffect` runs `add` and `set` and falls through to *"Unknown op; do nothing"* +
+  `return` on anything else (`v2.py:5742-5751`), and the string `subtract` appears nowhere in the
+  generator or the importer. Proven live on a shipped build — `count` 100 stayed 100 through a
+  `subtract 4`; `add -5` moved stress 20 → 15.
+  - **Measured cost.** 35 dead effects in `forty_miles`, **70 in `steam`**. In the first, the
+    counterweight its own spec called *"only ever falls"* never moved for the entire game (12 dead
+    decrements), 20 activities never charged the energy they said they cost, and the only NPC
+    penalty in the game never applied. Valid TOML, green build, all gates green, and an 11/11
+    play-test — because a number that never changes looks exactly like a number nobody has moved.
+  - **New §21b** in `engine.md` with the full op table per effect family (trait `add|set`, flag
+    `set|unset|toggle`, quest `start|update|complete|cancel`), each cited.
+  - **New gate 25 · effects use a live op** in `gates.py`. Fails `steam` at 70, passes `forty_miles`
+    (repaired) and `back_home` (never had any) — it discriminates rather than just firing.
+  - **`template_import.py` now hard-fails** on a dead op (same shape as the cheat-page grant check at
+    `:3755`), so no future build can emit one. Verified: `games/steam` now exits 1 and produces
+    nothing until its 70 are rewritten. Deliberate and recorded — a frozen record that is not
+    rebuilt, and the failure is the point.
+  - **⚠️ Two gates were reading direction from the op NAME.** `_currency_ops` appended the op string,
+    so a deduction written the only way that works (`op = "add"`, negative value) counted as INCOME:
+    `forty_miles` flipped from 11:11 to 10:12 the moment its dead effects were repaired correctly.
+    Now classified by SIGN, with a `_effect_value_sign` helper that also handles the
+    `{type = "random", min, max}` value form. Gate 24's `_outflows` had the same bug.
+
+- **Gate 24 now reads `[settings.rent]`, and `engine.md` §26 documents that system for the first
+  time.** The gate walked canvases only, so it **failed a game whose obligation was charged** —
+  `[settings.rent]` was enabled at `amount = 245` and works end to end (verified live: 300 → 55 on
+  the Friday rollover; `v2.py:5453-5464` arms it, `:15247-15259` intercepts, `:15925` charges).
+  A check that fails a game for obeying the doctrine is a bug in the check.
+  - §26 carries the whole mechanism, the `start_after_flag` rule, and the new doctrine line:
+    **if the engine takes the money, do not also author a canvas that narrates the payment.** The
+    measured failure is a game with two settle-ups where the free one had all the writing in it.
+    `the-economy.md` R3 gains the same rule.
+  - **`currency_symbol` added to `[settings.rent]`** (importer + generator), default `"$"` so no
+    existing build moves. The three RentDay passages hardcoded `$` — one screen quoting dollars in a
+    game whose every other price is written in pounds.
+
+- **Gate 22's third check was reporting verbs as room objects.** *"choices hang off `sleep`"* (from
+  the choice `"Sleep."`) and *"`start`"* (from *"the start of it"*) are not things a board can
+  declare, and a check that demands nonsense in the ledger gets ignored. It now requires the hook to
+  be a **noun phrase on both sides** — a determiner in front of it in the choice text AND in the
+  screen's prose — plus a third `_OBJ_STOP` block for time spans and abstractions. Measured on
+  `forty_miles`: 16 findings of which 6 were junk → 7, every one a real thing in the room that the
+  board had genuinely left out.
+
+- **New sidebar item `type = "quest_next"`** (generator + importer + CSS). A quest card has no
+  `title` field, and there was no sidebar type for guidance at all — so a game could ship an
+  excellent Quests page and nothing in the persistent rail but `trait_status_text` bands, which name
+  a **state**, not a step. It renders `renderQuestsGoalBlock`, the same block as the page and as
+  `npc_panel`'s `next` row, so the three surfaces cannot drift. Documented in `engine.md` §23, along
+  with a **circular-label** warning: measured on a shipped game, all three cards of one ascent tier
+  named a choice gated at the exact value the card was trying to reach.
+
+- **`SKILL.md`** — gate 25 added to the scoreboard index; a new operating rule on silent-vocabulary
+  failure, and the "check the skill before blaming the game" rule gains its second measured instance.
+
+- **How verified.** `gates.py` on all three v2 games before and after; `package_from_toml` on
+  `forty_miles` (builds) and `steam` (now correctly refuses); and a live pass in
+  `twine-game-explorer` over the rebuilt game — the funnel end to end, `💭 You are thinking:`
+  rendering in second person, `count` falling for the first time, RentDay charging £245 and printing
+  £, a room hub at 4/8 open on night one and 8/8 at tier 55, three objectives in the sidebar, and
+  all eight new random encounters firing on location entry at 13–24% with the three tier-gated ones
+  correctly silent at zero.
+
+---
+
 ## 2026-08-16
 
 - **Whole-skill audit — the declaration hole was a CLASS, and both of the review's blockers are now
