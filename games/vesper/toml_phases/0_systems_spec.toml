@@ -133,18 +133,23 @@ when  = { worn_type = "cover" }
 image = "portraits/wren_cover_analyst.jpg"
 when  = { worn_type = "cover_analyst" }
 
-# ⚠️ beat_0094 (rev 145) — THE BOUGHT FACE, and it is a different KIND of cover from the two above.
-# The Act-1 covers are costumes: she is recognisably Wren in dock coveralls or an analyst's kit, and the
-# portrait swap is a change of dress and bearing. This one is an IDENTITY bought off a market whose own
-# description already sells "weapons, gear, and people". The rule is keyed the same way — on the dress
-# item's type — because that is the only axis the resolver has, so the garment carries the face. That is
-# a deliberate compression and it is stated here so nobody later reads the wardrobe row as "she changed
-# her clothes": in the fiction she bought a face and the kit that sells it, and taking the kit off puts
-# Wren back. It is also why the item is gated by ITEM ID everywhere downstream, never by type — the type
-# exists for this rule and nothing else (the cover_analyst precedent, 1_metadata).
+# ⚠️ beat_0116 (rev 167) — THE FACE IS NO LONGER A GARMENT, AND THE OLD NOTE HERE WAS WRONG ABOUT THE ENGINE.
+# It said: "the rule is keyed on the dress item's type BECAUSE THAT IS THE ONLY AXIS THE RESOLVER HAS, so the
+# garment carries the face. That is a deliberate compression." The resolver takes worn_type, corruption AND
+# `flag` in one `when` and checks them independently (v2.py:1664). The face never had to be clothing. I
+# collapsed two genuinely independent axes — WHO SHE LOOKS LIKE and WHAT SHE IS WEARING — on an assumption I
+# had not checked, and it cost two live defects: the bar dress could only exist in prose, because a real
+# garment would have taken the same `dress` slot as the face-carrying kit and silently deleted her job (six
+# gates read that item).
+# ⚠️ NOW: the face is the flag `face_worn`, put on and taken off at her own bunk (activity_the_face @the_cot),
+# and cover_stranger goes back to being what it physically always was — the plain second-hand kit she bought
+# with it. The rule below keys on the FLAG, so the face survives any change of clothes, which is the whole
+# point: she can be in the bar dress or in her own coat and still not be Wren.
+# ⚠️ THIS RULE SITS FIRST AND WINS. One portrait covers every outfit she can be seen in while disguised, so
+# there is no face-by-outfit matrix to harvest — and she can only wear the bar dress while wearing the face.
 [[player_portrait.outfits]]
 image = "portraits/wren_cover_stranger.jpg"
-when  = { worn_type = "cover_stranger" }
+when  = { flag = "face_worn" }
 
 # ─── Sidebar items — the live HUD (Charge ONLY) ───────────────────────────────
 # Credits is tracked internally (the depot economy uses `money`) but NOT surfaced in the

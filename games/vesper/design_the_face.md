@@ -706,3 +706,56 @@ unpredictability and one of the better lines in the chapter.
 `references/rts-flat-prose.md` **Rule 10 — never assert elapsed time the player's pace controls**, with the
 meter reasoning, the four exempt classes, a replacement table, and two sub-rules: keep precision where it is
 character, and the same check catches invented **economy** figures. Logged in the skill CHANGELOG.
+
+---
+
+## 23. THE FACE LEAVES THE CLOTHING SYSTEM (beat_0116, rev 167)
+
+LO, across three turns: *"the face cover becomes something else… like a link to wear the face or not in the
+cot. From the bar bathroom she can only change to dress or her prev dress no new"* — and: taking it off
+should be **a deliberate act with prose weight**.
+
+### The root error was an unchecked engine claim
+
+My own note at beat_0094 read: *"the portrait resolver has exactly one axis, the dominant dress item's type,
+so the garment has to carry the face. **That is a deliberate compression.**"*
+
+**It is not one axis.** The outfit loop takes `worn_type`, `corruption` **and `flag`** in a single `when`,
+each checked independently (`v2.py:1664`). The face never had to be clothing. Collapsing *who she looks
+like* into *what she is wearing* cost two live defects:
+
+- **The bar dress existed only in prose.** `rung_bar_promotion_3` narrated her changing in a cellar passage
+  that appeared in one sentence and nowhere else, with no `wardrobeEffects` anywhere.
+- **It could not be made real**, because a `dress`-slot garment would replace the face-carrying kit and
+  **silently delete her job** — six gates read that item.
+
+### The separation
+
+`face_worn` is a flag. `cover_stranger` goes back to being the plain kit she physically bought (its `type`
+dropped, so no orphan on either side of the portrait audit). `dress_undertow` is a new garment. The portrait
+rule re-keys onto the flag and sits first, so one portrait covers every outfit she can be seen in while
+disguised. Six trigger gates re-point from `clothing_item` to `flag`.
+
+### The two directions are deliberately asymmetric
+
+**Putting it on** is routine — the small competent act it has become. **Taking it off is the beat**: the one
+moment in the chapter where she chooses to be Wren again, at her own bunk because it is the only room where
+nobody is watching. The game **does not explain why she wanted to**, because she has no reason that would
+survive being said out loud — which is the chapter's argument in one line.
+
+⚠️ **And the off-band states the mechanical cost in her voice.** Sol does not know her, the floor is not her
+floor, the rota does not have her on it. Six surfaces vanish, and nothing else in the game would connect
+that for a player who takes it off and finds the Undertow empty.
+
+### The bathroom is not a second wardrobe
+
+`wardrobe_location` is a **scalar** — one full rack, and it stays at the cot where her own things are and
+where the undress portraits fire. `underworld_bar_bathroom` is two `equip` effects behind two choices;
+`equipItem` replaces whatever holds the slot, so each is a straight swap and no unequip is needed (the
+emitter supports only `add` and `equip`). The dress choice is gated on the face with a `locked_text` that
+gives the reason: Sol hired a stranger.
+
+### Recorded as decisions, not oversights
+
+**Bar work is not gated on the dress** — only the face gates work, and gating the costume would rebuild the
+exact "job silently vanishes" trap this removes. **No face-by-outfit portrait matrix.**

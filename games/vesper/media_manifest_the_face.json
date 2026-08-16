@@ -242,7 +242,7 @@
       "type": "image",
       "slot": "clothing/cover_stranger.jpg",
       "pool": false,
-      "description": "A plain second-hand dress and coat of the kind a woman working a Reach bar floor would own — cheap, unremarkable, chosen to be forgettable.",
+      "description": "Plain second-hand dress and coat of the kind a woman working a Reach bar floor would own — drab, cheap, chosen to be forgettable. NOT a face: the face is a flag now.",
       "search_queries": [
         "plain cheap womens dress coat second hand",
         "drab inexpensive work dress hanging"
@@ -270,6 +270,30 @@
       "search_queries": [
         "makeshift bunk in industrial workshop dim",
         "bench bed machine shop corner cables low light"
+      ]
+    },
+    {
+      "canvas": "1_metadata [[locations]]",
+      "node": "underworld_bar_bathroom",
+      "type": "image",
+      "slot": "locations/underworld_bar_bathroom.jpg",
+      "pool": false,
+      "description": "A small dingy staff toilet behind a bar — one cubicle, a cracked basin, a single bulb, a hook on the back of the door.",
+      "search_queries": [
+        "small dingy bar bathroom cubicle cracked basin",
+        "dim staff toilet tiled wall single bulb"
+      ]
+    },
+    {
+      "canvas": "1_metadata [[clothing]]",
+      "node": "dress_undertow",
+      "type": "image",
+      "slot": "clothing/dress_undertow.jpg",
+      "pool": false,
+      "description": "A short, thin, close-cut black cocktail dress on a hanger — cheap, cut for standing still rather than working.",
+      "search_queries": [
+        "short tight black cocktail dress hanger",
+        "thin clingy mini dress on hanger plain background"
       ]
     }
   ]

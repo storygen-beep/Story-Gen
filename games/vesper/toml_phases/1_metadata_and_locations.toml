@@ -701,25 +701,37 @@ image      = "clothing/cover_analyst.jpg"
 beauty     = 0
 corruption = 0
 
-# THE FACE (beat_0094, rev 145) — the bought identity. type = "cover_stranger" -> its own
-# [[player_portrait.outfits]] rule (portraits/wren_cover_stranger.jpg), distinct from both Act-1 covers.
-# ⚠️ THIS IS NOT A COSTUME, AND THE ENGINE CANNOT SAY SO. The two covers above are clothes: Wren in
-# coveralls, Wren in an analyst's kit. This one is an identity she buys off the black market — whose own
-# shipped description already sells "weapons, gear, and people, penned at the far end like the rest of the
-# stock" — and the FACE is the thing she is paying for. The portrait resolver has exactly one axis, the
-# dominant dress item's type, so the garment has to carry the face. Recorded here so a later reader does
-# not soften it back into a change of clothes.
-# ⚠️ GATED BY ITEM ID EVERYWHERE (`clothing_item cover_stranger equipped`), NEVER by type — the type
-# exists for the portrait rule and nothing else. Same discipline as cover_analyst.
-# ⚠️ NO `initial` — she does not own it. It is granted un-worn by activity_buy_face (3_activities) for
-# coin, and she equips it at the rack, which as of this beat is at kess_berth and not in the sealed Spire.
+# THE BOUGHT KIT (beat_0094, rev 145; RE-SCOPED at beat_0116, rev 167) — the plain second-hand clothes she
+# buys along with the face.
+# ⚠️ IT USED TO CARRY THE FACE AND IT NO LONGER DOES. The original note claimed the portrait resolver had
+# only one axis, so the garment had to be the identity. That was wrong — the resolver takes `flag` as well
+# (v2.py:1664) — and the compression cost two defects: the bar dress could only ever exist in prose, because
+# a real garment would occupy this same `dress` slot, and equipping it would have silently deleted her job
+# (six gates read this item). The face is now the flag `face_worn`, put on at her own bunk.
+# ⚠️ SO THIS IS CLOTHES AGAIN, and no `type` — the portrait keys on the flag, so a type here would be an
+# orphan the build warns about. It is the drab, forgettable kit a woman working a Reach floor would own, and
+# it is what she wears when she is not in the bar dress.
+# ⚠️ NO `initial` — she does not own it. Granted un-worn by activity_buy_face (3_activities) for coin.
 # beauty/corruption stay 0: this game does not use the worn_beauty/worn_corruption axes.
 [[clothing]]
 id         = "cover_stranger"
-name       = "A stranger's face"
+name       = "Second-hand kit"
 slot       = "dress"
-type       = "cover_stranger"               # portrait axis: the bought face (own outfit rule)
 image      = "clothing/cover_stranger.jpg"
+beauty     = 0
+corruption = 0
+
+# THE BAR DRESS (beat_0116, rev 167). Sent down from the back room in a bag with no note at
+# rung_bar_promotion_3, and changed into at the Undertow's bathroom — never at the rack, because it is
+# not hers and it does not leave the bar in her bag.
+# ⚠️ SAME `dress` SLOT AS THE KIT, WHICH IS NOW SAFE AND WAS NOT BEFORE. equipItem sets equipped[slot] and
+# replaces whatever was there, so changing into this takes the kit off and changing back puts it on — and
+# because the FACE is a flag now, neither swap touches who she looks like or whether she has a job.
+[[clothing]]
+id         = "dress_undertow"
+name       = "The dress he sent down"
+slot       = "dress"
+image      = "clothing/dress_undertow.jpg"
 beauty     = 0
 corruption = 0
 
@@ -1041,6 +1053,31 @@ entry_from  = "underworld_strip"
 # ── crew_den — the dead crew's rooms (Underworld Hunt, beat_0033). LOCKED-visible until she drains
 # the address out of Marsh (crew_known). version="1.0" or the lock fails open. Content floor = the
 # search + finding "Bastien" (beat_0033); the grab capstone (beat_0034) fires here on bastien_found.
+# ── underworld_bar_bathroom — beat_0116 (rev 167). Where the dress goes on, and only the dress. ──────
+# ⚠️ WHY IT EXISTS: until this beat the bar dress was PROSE ONLY. rung_bar_promotion_3 narrated her changing
+# "standing up in the cold" in a cellar passage that existed in one sentence and nowhere else, with no
+# wardrobeEffects anywhere — so the game said short thin dress while the wardrobe said second-hand kit.
+# ⚠️ AND IT IS NOT A SECOND RACK. wardrobe_location is a SCALAR (one full wardrobe page per game) and it stays
+# at the_cot, where her own things are and where the four equipped-based undress portraits fire. This room is
+# a TARGETED change surface built out of wardrobeEffects `equip` — two garments, no browsing, no new clothes.
+# That is also the fiction: it is a staff toilet at the back of a bar, not her wardrobe.
+# ⚠️ DELIBERATELY NOT NAV-INVISIBLE, unlike bastien_backroom and cain_lab: entry_from gives it a nav card and
+# the engine's own Leave link, so it can never become the dead end beat_0114 had to fix twice in one chapter.
+# ⚠️ raid_done is_false — three machines came through the wall and the Undertow does not open in the evenings
+# after that. She can still change at the cot, so nothing strands.
+[[locations]]
+id          = "underworld_bar_bathroom"
+name        = "The Bathroom"
+description = "One cubicle, one cracked basin and a bolt that turns. It smells of the bar and of the cheap pink soap somebody refills without being asked. There is a hook on the back of the door, which is the whole of what the Undertow provides its staff."
+image       = "locations/underworld_bar_bathroom.jpg"
+image_search_queries = ["small dingy bar bathroom cubicle cracked basin", "dim staff toilet tiled wall single bulb"]
+entry_from  = "underworld_bar"
+entry_conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "bar_rung",  operator = "gte", value = 3 },
+  { type = "flag",  subject = "player", flag_key  = "raid_done", operator = "is_false" },
+] }
+blocked_message = "The staff toilet at the back, and nothing in it she needs."
+
 # ── the_cot — beat_0115 (rev 166). THE FIRST ROOM IN THE GAME THAT IS HERS. ───────────────────────────
 # LO's call, and it repairs a framing mistake I made at beat_0094. The cot has been a solo-activity CARD on
 # the berth's page since rev 96, and when the wardrobe moved to the Reach I hung it off kess_berth — so

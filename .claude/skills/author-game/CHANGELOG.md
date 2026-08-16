@@ -10,6 +10,18 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 
 ## 2026-08-16
 
+- **Doctrine, from vesper 0.1.9: check the resolver before collapsing two axes into one.** The
+  player-portrait outfit resolver takes `worn_type`, `corruption` **and `flag`** in a single `when`, each
+  checked independently (`v2.py:1664`) — but the only axis in *use* was `worn_type`, so I assumed it was the
+  only one available and made a character's bought IDENTITY a `dress`-slot garment "because the engine forces
+  it". It did not. The compression then blocked a second garment from existing at all (same slot), and
+  equipping one would have **silently deleted six gated surfaces**, because those gates read
+  `clothing_item <id> equipped` as a proxy for "is she in disguise". The rule: when a design wants two
+  independent facts (who she looks like / what she is wearing) and the engine appears to offer one field for
+  both, **read the resolver before compressing** — and where the axes really are independent, a FLAG plus a
+  canvas is usually the right shape, because it also lets the act carry prose weight instead of becoming a
+  row on a wardrobe page between a bra and a pair of flats.
+
 - `references/rts-flat-prose.md` — **new Rule 10: never assert elapsed time the player's pace controls.**
   Motivated by a measured defect in vesper 0.1.9 (THE FACE): **25 sites across 13 canvases and 4 quest
   cards** claimed durations the engine never bound, and they contradicted each other — `rung_bar_promotion_4`

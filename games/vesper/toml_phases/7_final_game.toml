@@ -141,18 +141,23 @@ when  = { worn_type = "cover" }
 image = "portraits/wren_cover_analyst.jpg"
 when  = { worn_type = "cover_analyst" }
 
-# ⚠️ beat_0094 (rev 145) — THE BOUGHT FACE, and it is a different KIND of cover from the two above.
-# The Act-1 covers are costumes: she is recognisably Wren in dock coveralls or an analyst's kit, and the
-# portrait swap is a change of dress and bearing. This one is an IDENTITY bought off a market whose own
-# description already sells "weapons, gear, and people". The rule is keyed the same way — on the dress
-# item's type — because that is the only axis the resolver has, so the garment carries the face. That is
-# a deliberate compression and it is stated here so nobody later reads the wardrobe row as "she changed
-# her clothes": in the fiction she bought a face and the kit that sells it, and taking the kit off puts
-# Wren back. It is also why the item is gated by ITEM ID everywhere downstream, never by type — the type
-# exists for this rule and nothing else (the cover_analyst precedent, 1_metadata).
+# ⚠️ beat_0116 (rev 167) — THE FACE IS NO LONGER A GARMENT, AND THE OLD NOTE HERE WAS WRONG ABOUT THE ENGINE.
+# It said: "the rule is keyed on the dress item's type BECAUSE THAT IS THE ONLY AXIS THE RESOLVER HAS, so the
+# garment carries the face. That is a deliberate compression." The resolver takes worn_type, corruption AND
+# `flag` in one `when` and checks them independently (v2.py:1664). The face never had to be clothing. I
+# collapsed two genuinely independent axes — WHO SHE LOOKS LIKE and WHAT SHE IS WEARING — on an assumption I
+# had not checked, and it cost two live defects: the bar dress could only exist in prose, because a real
+# garment would have taken the same `dress` slot as the face-carrying kit and silently deleted her job (six
+# gates read that item).
+# ⚠️ NOW: the face is the flag `face_worn`, put on and taken off at her own bunk (activity_the_face @the_cot),
+# and cover_stranger goes back to being what it physically always was — the plain second-hand kit she bought
+# with it. The rule below keys on the FLAG, so the face survives any change of clothes, which is the whole
+# point: she can be in the bar dress or in her own coat and still not be Wren.
+# ⚠️ THIS RULE SITS FIRST AND WINS. One portrait covers every outfit she can be seen in while disguised, so
+# there is no face-by-outfit matrix to harvest — and she can only wear the bar dress while wearing the face.
 [[player_portrait.outfits]]
 image = "portraits/wren_cover_stranger.jpg"
-when  = { worn_type = "cover_stranger" }
+when  = { flag = "face_worn" }
 
 # ─── Sidebar items — the live HUD (Charge ONLY) ───────────────────────────────
 # Credits is tracked internally (the depot economy uses `money`) but NOT surfaced in the
@@ -1288,25 +1293,37 @@ image      = "clothing/cover_analyst.jpg"
 beauty     = 0
 corruption = 0
 
-# THE FACE (beat_0094, rev 145) — the bought identity. type = "cover_stranger" -> its own
-# [[player_portrait.outfits]] rule (portraits/wren_cover_stranger.jpg), distinct from both Act-1 covers.
-# ⚠️ THIS IS NOT A COSTUME, AND THE ENGINE CANNOT SAY SO. The two covers above are clothes: Wren in
-# coveralls, Wren in an analyst's kit. This one is an identity she buys off the black market — whose own
-# shipped description already sells "weapons, gear, and people, penned at the far end like the rest of the
-# stock" — and the FACE is the thing she is paying for. The portrait resolver has exactly one axis, the
-# dominant dress item's type, so the garment has to carry the face. Recorded here so a later reader does
-# not soften it back into a change of clothes.
-# ⚠️ GATED BY ITEM ID EVERYWHERE (`clothing_item cover_stranger equipped`), NEVER by type — the type
-# exists for the portrait rule and nothing else. Same discipline as cover_analyst.
-# ⚠️ NO `initial` — she does not own it. It is granted un-worn by activity_buy_face (3_activities) for
-# coin, and she equips it at the rack, which as of this beat is at kess_berth and not in the sealed Spire.
+# THE BOUGHT KIT (beat_0094, rev 145; RE-SCOPED at beat_0116, rev 167) — the plain second-hand clothes she
+# buys along with the face.
+# ⚠️ IT USED TO CARRY THE FACE AND IT NO LONGER DOES. The original note claimed the portrait resolver had
+# only one axis, so the garment had to be the identity. That was wrong — the resolver takes `flag` as well
+# (v2.py:1664) — and the compression cost two defects: the bar dress could only ever exist in prose, because
+# a real garment would occupy this same `dress` slot, and equipping it would have silently deleted her job
+# (six gates read this item). The face is now the flag `face_worn`, put on at her own bunk.
+# ⚠️ SO THIS IS CLOTHES AGAIN, and no `type` — the portrait keys on the flag, so a type here would be an
+# orphan the build warns about. It is the drab, forgettable kit a woman working a Reach floor would own, and
+# it is what she wears when she is not in the bar dress.
+# ⚠️ NO `initial` — she does not own it. Granted un-worn by activity_buy_face (3_activities) for coin.
 # beauty/corruption stay 0: this game does not use the worn_beauty/worn_corruption axes.
 [[clothing]]
 id         = "cover_stranger"
-name       = "A stranger's face"
+name       = "Second-hand kit"
 slot       = "dress"
-type       = "cover_stranger"               # portrait axis: the bought face (own outfit rule)
 image      = "clothing/cover_stranger.jpg"
+beauty     = 0
+corruption = 0
+
+# THE BAR DRESS (beat_0116, rev 167). Sent down from the back room in a bag with no note at
+# rung_bar_promotion_3, and changed into at the Undertow's bathroom — never at the rack, because it is
+# not hers and it does not leave the bar in her bag.
+# ⚠️ SAME `dress` SLOT AS THE KIT, WHICH IS NOW SAFE AND WAS NOT BEFORE. equipItem sets equipped[slot] and
+# replaces whatever was there, so changing into this takes the kit off and changing back puts it on — and
+# because the FACE is a flag now, neither swap touches who she looks like or whether she has a job.
+[[clothing]]
+id         = "dress_undertow"
+name       = "The dress he sent down"
+slot       = "dress"
+image      = "clothing/dress_undertow.jpg"
 beauty     = 0
 corruption = 0
 
@@ -1628,6 +1645,31 @@ entry_from  = "underworld_strip"
 # ── crew_den — the dead crew's rooms (Underworld Hunt, beat_0033). LOCKED-visible until she drains
 # the address out of Marsh (crew_known). version="1.0" or the lock fails open. Content floor = the
 # search + finding "Bastien" (beat_0033); the grab capstone (beat_0034) fires here on bastien_found.
+# ── underworld_bar_bathroom — beat_0116 (rev 167). Where the dress goes on, and only the dress. ──────
+# ⚠️ WHY IT EXISTS: until this beat the bar dress was PROSE ONLY. rung_bar_promotion_3 narrated her changing
+# "standing up in the cold" in a cellar passage that existed in one sentence and nowhere else, with no
+# wardrobeEffects anywhere — so the game said short thin dress while the wardrobe said second-hand kit.
+# ⚠️ AND IT IS NOT A SECOND RACK. wardrobe_location is a SCALAR (one full wardrobe page per game) and it stays
+# at the_cot, where her own things are and where the four equipped-based undress portraits fire. This room is
+# a TARGETED change surface built out of wardrobeEffects `equip` — two garments, no browsing, no new clothes.
+# That is also the fiction: it is a staff toilet at the back of a bar, not her wardrobe.
+# ⚠️ DELIBERATELY NOT NAV-INVISIBLE, unlike bastien_backroom and cain_lab: entry_from gives it a nav card and
+# the engine's own Leave link, so it can never become the dead end beat_0114 had to fix twice in one chapter.
+# ⚠️ raid_done is_false — three machines came through the wall and the Undertow does not open in the evenings
+# after that. She can still change at the cot, so nothing strands.
+[[locations]]
+id          = "underworld_bar_bathroom"
+name        = "The Bathroom"
+description = "One cubicle, one cracked basin and a bolt that turns. It smells of the bar and of the cheap pink soap somebody refills without being asked. There is a hook on the back of the door, which is the whole of what the Undertow provides its staff."
+image       = "locations/underworld_bar_bathroom.jpg"
+image_search_queries = ["small dingy bar bathroom cubicle cracked basin", "dim staff toilet tiled wall single bulb"]
+entry_from  = "underworld_bar"
+entry_conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "bar_rung",  operator = "gte", value = 3 },
+  { type = "flag",  subject = "player", flag_key  = "raid_done", operator = "is_false" },
+] }
+blocked_message = "The staff toilet at the back, and nothing in it she needs."
+
 # ── the_cot — beat_0115 (rev 166). THE FIRST ROOM IN THE GAME THAT IS HERS. ───────────────────────────
 # LO's call, and it repairs a framing mistake I made at beat_0094. The cot has been a solo-activity CARD on
 # the berth's page since rev 96, and when the wardrobe moved to the Reach I hung it off kess_berth — so
@@ -4348,7 +4390,10 @@ max_triggers_per_day = 2
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "bar_hired", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "raid_done", operator = "is_false" },
-  { type = "clothing_item", item_id = "cover_stranger", operator = "equipped" },
+  # ⚠️ beat_0116 (rev 167) — THE FACE IS A FLAG NOW, not a garment. This used to read
+  # `clothing_item cover_stranger equipped`, which conflated who she looks like with what she is wearing and
+  # made the bar dress unbuildable (same `dress` slot, so equipping it would have deleted her job).
+  { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
 ] }
 
 [[canvases.nodes]]
@@ -4663,6 +4708,206 @@ text = "Take what there is."
 destinationType          = "specific"
 locationId               = "underworld_bar"
 time_progression_minutes = 120
+
+# ═══ activity_the_face — beat_0116 (rev 167). The face goes on and comes off HERE, and nowhere else. ════
+# Wren-solo @the_cot. Repeatable, pri 4, gated face_bought is_true. Two exclusive bands on face_worn.
+#
+# ⚠️ WHY THIS IS A CANVAS AND NOT A WARDROBE ROW. Until this beat the face WAS a garment, and putting it on
+# was a line item on a clothes rack between a bra and a pair of flats. That was an engine-shaped decision I
+# made on a wrong assumption (that the portrait resolver only keys on worn_type — it takes `flag` too,
+# v2.py:1664), and it flattened the single most consequential act in the chapter into a costume change.
+# Six surfaces in this game exist only while she is wearing it. That is not clothing. That is who she is.
+#
+# ⚠️ THE TWO DIRECTIONS ARE NOT SYMMETRICAL AND MUST NOT BE WRITTEN AS IF THEY WERE.
+# PUTTING IT ON is routine after the first time — she has a job and a room to be in and this is the cost of
+# both, and the prose treats it as the small competent act it has become.
+# TAKING IT OFF IS THE BEAT. It is the one moment in the chapter where she chooses to be Wren again, and she
+# does it at her own bunk because that is the only room where nobody is watching. It costs her everything the
+# chapter has built, and she does it anyway, and the game does not tell her why she wanted to.
+#
+# ⚠️ AND IT STATES THE MECHANICAL COST IN HER OWN VOICE. Six surfaces vanish with the face — the shift card,
+# the two promotions, Bastien noticing her, the door, the room — and a player who takes it off and finds the
+# Undertow empty has no way at all to connect the two. So the take-it-off band says plainly what stops
+# existing, as a thing she knows rather than as a warning label.
+# ⚠️ NO TIME COST ON THE TOGGLE ITSELF. It is minutes at a mirror, and charging the clock for it would make
+# the honest act (taking it off, sitting with it, putting it back) more expensive than never taking it off.
+# MEDIA: none. It reuses the room she is standing in.
+[[canvases]]
+id          = "activity_the_face"
+name        = "The face"
+description = "beat_0116 (rev 167). Wren-solo @the_cot. Repeatable, pri 4, gated face_bought is_true. THE FACE IS NO LONGER A GARMENT — it is the flag face_worn, and this is the only surface that moves it. Two exclusive bands: off (put it on, routine) and on (take it off, the beat). Taking it off is deliberate and carries weight: it is the one moment in the chapter where she chooses to be Wren again, done at her own bunk because it is the only room where nobody is watching. The on-band states the mechanical cost in her own voice — six surfaces exist only while she wears it, and a player who takes it off and finds the bar empty could not otherwise connect the two. No time cost: charging the clock would make the honest act more expensive than never doing it."
+[canvases.trigger]
+location      = "the_cot"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "face_bought", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The face"
+blocks = [
+  # BAND A — it is in the bag. Routine, and the prose says so.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_false" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The bag is under the cot where it lives. Twenty minutes at the cracked glass over the basin and she is somebody else — she has the order of it now, and her hands do most of it without being asked." },
+  ] },
+  # BAND B — it is on. Standing in her own room as somebody else.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She is wearing it now, in her own room, with nobody to be it at. It comes off in about a minute and goes back on in twenty, which is the exchange rate on being nobody." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Put it on."
+targetType = "node"
+nodeId     = "activity_the_face.on"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_false" },
+] }
+flagEffects = [
+  { targetType = "player", flag = "face_worn", op = "set" },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Take it off."
+targetType = "node"
+nodeId     = "activity_the_face.off"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
+] }
+flagEffects = [
+  { targetType = "player", flag = "face_worn", op = "unset" },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it."
+targetType = "location"
+locationId = "the_cot"
+
+# ── on — routine. Competent, quick, and not a big deal any more. ────────────────────────────────
+[[canvases.nodes]]
+id   = "on"
+name = "Put it on"
+blocks = [
+  { type = "paragraph", content = "The order of it is fixed now: the hairline first, then the jaw, then the small dull work around the eyes that does more than any of the rest. She does not look at the whole of it until the end." },
+  { type = "paragraph", content = "The woman in the glass has a job at a bar off the strip, no history anybody has asked about, and nothing at all to do with a programme that closed eleven years ago." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go to work."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_cot"
+
+# ── off — THE BEAT. ⚠️ The one moment she chooses to be Wren, and the only place she can. ────────
+# ⚠️ IT NAMES WHAT IT COSTS, MECHANICALLY, IN HER VOICE. Six surfaces stop existing and nothing else in the
+# game would ever tell her. It is written as a thing she knows, not as a warning.
+# ⚠️ AND IT DOES NOT EXPLAIN WHY SHE WANTED TO. She has no reason that would survive being said out loud,
+# which is the point of the beat — the chapter's whole argument is that she is a person now, and a person
+# does not need a mission to want her own face back for an hour.
+[[canvases.nodes]]
+id   = "off"
+name = "Take it off"
+blocks = [
+  { type = "paragraph", content = "It comes off faster than it goes on. A minute at the basin, the water going grey, and the woman who has been carrying trays for a man who owned her stops existing over a cracked sink in a ship-breaker's yard." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Nothing out there is hers while this is off. Sol does not know her. The floor is not her floor and the rota does not have her on it, and the room behind the door is a room she has never been invited into. All of that belongs to a woman with no name who does not exist until she puts it back on." },
+  { type = "paragraph", content = "She does it anyway, most nights, for an hour, and could not give a reason that would survive being said out loud." },
+  { type = "paragraph", content = "The face in the glass is four years older than the paperwork says and has a designation on a page in a file under the cot, and it is the only thing in this city that nobody sold her." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sit with it a while."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_cot"
+
+# ═══ activity_bar_change — beat_0116 (rev 167). The bathroom. Two garments, no browsing. ═══════════════
+# Wren-solo @underworld_bar_bathroom. Repeatable, pri 3, gated bar_rung gte 3.
+# ⚠️ THIS IS NOT A SECOND WARDROBE. wardrobe_location is a scalar and stays at the_cot, where her own things
+# are and where the four equipped-based undress portraits fire. This is two `equip` effects behind two
+# choices — equipItem sets equipped[slot] and replaces whatever was there, so each choice is a straight swap
+# and no unequip action is needed (there isn't one). It is a staff toilet, not her wardrobe.
+# ⚠️ THE DRESS CHOICE IS GATED ON THE FACE, WITH show_when_locked AND A REASON. Out of the face she is Wren,
+# and Wren does not work here — Sol hired a stranger. Greyed with a locked_text that says so, never silently
+# absent, because a vanished choice in a room she walked to on purpose is the lostness failure.
+# MEDIA: reuses the bathroom's own location art.
+[[canvases]]
+id          = "activity_bar_change"
+name        = "Change"
+description = "beat_0116 (rev 167). Wren-solo @underworld_bar_bathroom. Repeatable, pri 3, gated bar_rung gte 3. Two choices, both wardrobeEffects `equip`: into the dress he sent down, or back into her own kit. NOT a second wardrobe — wardrobe_location is a scalar and stays at the_cot; this is a targeted change surface, which is also the fiction (a staff toilet). equipItem replaces whatever holds the slot, so each choice is a straight swap and no unequip is needed. The dress choice is gated face_worn is_true with show_when_locked + locked_text: out of the face she is Wren, and Sol hired a stranger."
+[canvases.trigger]
+location      = "underworld_bar_bathroom"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "bar_rung", operator = "gte", value = 3 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Change"
+blocks = [
+  { type = "paragraph", content = "The bolt turns. One cubicle, one cracked basin, a hook on the back of the door, and the bar coming through the wall at the volume it comes through everything down here." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text             = "Change into the dress."
+targetType       = "node"
+nodeId           = "activity_bar_change.into"
+show_when_locked = true
+locked_text      = "Out of the face she is Wren, and Wren does not work here — Sol hired a stranger, and the dress belongs to the stranger. Put it on at the cot first."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
+] }
+wardrobeEffects = [
+  { action = "equip", item_id = "dress_undertow" },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Back into your own things."
+targetType = "node"
+nodeId     = "activity_bar_change.out"
+wardrobeEffects = [
+  { action = "equip", item_id = "cover_stranger" },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it."
+targetType = "location"
+locationId = "underworld_bar_bathroom"
+
+[[canvases.nodes]]
+id   = "into"
+name = "Into the dress"
+blocks = [
+  { type = "paragraph", content = "It goes on over the head and is the right size, which she has stopped finding interesting and has not stopped noticing. Her own things fold small enough to sit on the hook under her coat." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out onto the floor."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar_bathroom"
+time_progression_minutes = 15
+
+[[canvases.nodes]]
+id   = "out"
+name = "Back into your own things"
+blocks = [
+  { type = "paragraph", content = "The dress goes on the hook where the bag was and stays in the building, because it is not hers and it has never once left with her. Her own kit smells of the strip and of the cot and of nothing anybody chose for her." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar_bathroom"
+time_progression_minutes = 15
 
 # ══════════════════════════════════════════════════════════════════
 # Phase: 5_scenes.toml
@@ -16322,7 +16567,10 @@ is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "face_bought",    operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "stranger_seen",  operator = "is_false" },
-  { type = "clothing_item", item_id = "cover_stranger", operator = "equipped" },
+  # ⚠️ beat_0116 (rev 167) — THE FACE IS A FLAG NOW, not a garment. This used to read
+  # `clothing_item cover_stranger equipped`, which conflated who she looks like with what she is wearing and
+  # made the bar dress unbuildable (same `dress` slot, so equipping it would have deleted her job).
+  { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
   { type = "npc_at_location", location_id = "underworld_bar", npc_id = "npc_sol", operator = "is_present" },
 ] }
 
@@ -16389,7 +16637,7 @@ priority   = 10
 text       = "A hundred and twenty coin at the curtained tables and an afternoon of sitting still, and what you walked out with is a woman who does not exist: a face, a history thin enough that nobody will check it, and the clothes that make both of them true. She asked you exactly one question — whether anyone had ever taken a print of you — and you lied to her before the face was even finished."
 # ⚠️ beat_0098 (rev 149) — P GIVES UP THE BOUNDARY to card Q, in the same edit that adds Q. Run in the
 # right order this time. P keeps its Support-Us ask (rev-113 rule).
-tip        = "It is in your bag, not on you. Get to the cot at the Berth and change — everything from here needs it worn, and out of it you are just Wren again in a district that has stopped talking to her. Then go and drink at the Undertow like somebody with nowhere else to be. If you want the next chapter sooner, Support Us in the sidebar."
+tip        = "It is in your bag, not on you. Get to the cot at the Berth and put it on — that is its own thing now, not a change of clothes, and it lives at your own bunk. Everything from here needs it worn: out of it you are just Wren again, in a district that has stopped talking to her, with no job and no reason to be in that bar. Then go and drink at the Undertow like somebody with nowhere else to be. If you want the next chapter sooner, Support Us in the sidebar."
 when = [
   { flag = "face_bought",   op = "is_true"  },
   { flag = "stranger_seen", op = "is_false" },
@@ -16435,7 +16683,7 @@ is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "stranger_seen", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "bar_hired",     operator = "is_false" },
-  { type = "clothing_item", item_id = "cover_stranger", operator = "equipped" },
+  { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
   { type = "npc_at_location", location_id = "underworld_bar", npc_id = "npc_sol", operator = "is_present" },
 ] }
 
@@ -16597,7 +16845,7 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "bar_rung",     operator = "lt", value = 2 },
   { type = "trait", subject = "npc", npc_id = "npc_bastien", trait_key = "relation", operator = "gte", value = 6 },
   { type = "flag", subject = "player", flag_key = "bastien_seen", operator = "is_false" },
-  { type = "clothing_item", item_id = "cover_stranger", operator = "equipped" },
+  { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
 ] }
 
 [[canvases.nodes]]
@@ -16699,7 +16947,7 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "bar_rung", operator = "gte", value = 2 },
   { type = "trait", subject = "player", trait_key = "bar_rung", operator = "lt",  value = 3 },
   { type = "trait", subject = "npc", npc_id = "npc_bastien", trait_key = "relation", operator = "gte", value = 12 },
-  { type = "clothing_item", item_id = "cover_stranger", operator = "equipped" },
+  { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
 ] }
 
 [[canvases.nodes]]
@@ -16726,8 +16974,10 @@ blocks = [
         { type = "paragraph", content = "The door out is eight feet behind her and nothing in this room is holding it shut. Nobody signed for her. Nobody has a key. She could put the bag down and be up the strip inside a minute and there would be no consequence at all except the one that matters." },
         { type = "thought_bubble", props = { speaker = "player" }, content = "And then she is a woman with a hundred and twenty coin of face and no way through that door." },
     ] },
-    { advance_text = "Go and change.", blocks = [
-        { type = "paragraph", content = "The cellar passage has a nail with three coats on it and that is the whole of the staff arrangements. She changes standing up in the cold with the bag at her feet." },
+    { advance_text = "Ask where.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Where am I meant to put this on." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Staff toilet at the back. Bolt turns. There's a hook on the door and I'd use it, because whatever you came in wearing isn't going on that floor." },
+        { type = "paragraph", content = "It is the most consideration the Undertow has ever shown her and it takes him four seconds." },
     ] },
     { advance_text = "Go back up.", blocks = [
         { type = "paragraph", content = "The room clocks it in about a second and a half. The talk drops, not much, the way it does when weather changes outside a window, and then it comes back up around her at a slightly different pitch and stays there." },
@@ -16747,6 +16997,15 @@ locationId               = "underworld_bar"
 time_progression_minutes = 60
 effects = [
   { targetType = "player", trait = "bar_rung", op = "set", value = 3, clamp = true },
+]
+# ⚠️ beat_0116 (rev 167) — THE BAG NOW GRANTS A REAL GARMENT. Until this beat the dress existed only in
+# prose: this canvas narrated her changing in a cellar passage that appeared in one sentence and nowhere
+# else, with no wardrobeEffects anywhere, so the game said short thin dress while the wardrobe said
+# second-hand kit. Granted UN-WORN (`add`, not `equip`) on purpose — she puts it on at the bathroom, which
+# is where Sol has just told her to, and which is the surface that makes the change an act she performs
+# rather than a sentence that happens to her.
+wardrobeEffects = [
+  { action = "add", item_id = "dress_undertow" },
 ]
 
 # ═══ rung_bar_promotion_4 — beat_0100 (rev 151). He sends for her. ══════════════════════════════════════
@@ -16773,7 +17032,7 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "bar_rung", operator = "gte", value = 3 },
   { type = "trait", subject = "player", trait_key = "bar_rung", operator = "lt",  value = 4 },
   { type = "trait", subject = "npc", npc_id = "npc_bastien", trait_key = "relation", operator = "gte", value = 18 },
-  { type = "clothing_item", item_id = "cover_stranger", operator = "equipped" },
+  { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
 ] }
 
 [[canvases.nodes]]
