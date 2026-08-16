@@ -1820,6 +1820,132 @@ effects = [
   { targetType = "player", trait = "hygiene", op = "add", value = 100, clamp = true },
 ]
 
+# ── Change — the ACT-1 change surface. THIS IS A BLOCKER FIX, not a convenience. ────────────────
+# ⚠️ THE BUG IT REPAIRS. wardrobe_location is a scalar (v2.py:9601, :9649 compare slugs with ==), so the
+# engine injects "[[Change Clothes->WardrobePage]]" into exactly ONE location. That location left wren_room
+# at rev 145 and is now the_cot, which is entry-gated berth_home. Every cover in this game is granted with
+# wardrobeEffects `add` and none carries `initial` — so between the opening and berth_home there was NO way
+# to equip anything at all. Renner's whole hub is gated `clothing_item cover_dockhand equipped` (5_scenes:347,
+# 534, 667, 809, 859, 976, 1307, 1361), which means MISSION 1 COULD NOT BE COMPLETED FROM A COLD START. It
+# stayed invisible because every dev jump equips a cover directly (6_dev_shortcuts:269) and nobody replays
+# Act 1. Found by the quests-page audit: card A's tip says "wear the dock-work coveralls from your room" and
+# the player had no way to do it.
+#
+# ⚠️ WHY NOT JUST MOVE THE RACK BACK. Because unequip exists ONLY on the WardrobePage (the
+# .wardrobe-unequip-btn handler), and the four equipped-based undress portraits fire off getUndressLevel().
+# The rack has to live where those portraits belong, and rev 166 put that in the one room that is hers. So the
+# rack stays at the_cot and Act 1 gets a TARGETED change surface instead — the activity_bar_change pattern
+# (rev 167), which is the shipped precedent for exactly this: equip-only, no browsing, no second wardrobe.
+#
+# ⚠️ CHOICES GATE ON `owned`, NOT ON A PROXY FLAG. clothing_item supports owned/not_owned as well as
+# equipped/unequipped (v2.py:4026), so each choice asks the real question — does she have this garment — and
+# never drifts out of sync with whichever canvas granted it. show_when_locked + locked_text on both covers:
+# a choice that silently vanishes from a room she walked to on purpose is the lostness failure.
+#
+# ⚠️ WINDOW. Gated opening_done, the same gate the room's other three cards use. wren_room has no
+# entry_conditions and is reachable until the Spire zone-seal at archive_1a_done — which is exactly the span
+# where cover_dockhand (Mission 1) and cover_analyst (The Archive) are both needed. After the seal the rack
+# at the_cot takes over; see cap_1a_close, which puts her back in grays on the way out.
+# MEDIA: reuses locations/wren_room.jpg. No new slot.
+[[canvases]]
+id          = "activity_wren_change"
+name        = "Change"
+description = "beat_0118 (rev 169). Wren-solo @wren_room. Repeatable, pri 3, gated opening_done is_true. THE ACT-1 CHANGE SURFACE — the fix for a cold-start blocker in which no cover could be equipped between the opening and berth_home, because wardrobe_location is a scalar and had moved to the_cot. Three choices, all wardrobeEffects `equip`, each gated `clothing_item <id> owned` with show_when_locked: the dock-work coveralls, the junior-analyst kit, her own company grays. NOT a second wardrobe — the rack stays at the_cot, because unequip and the undress portraits only exist there. equipItem replaces whatever holds the dress slot, so every choice is a straight swap and no unequip is needed; `unequipped` gates elsewhere read satisfied the moment a different garment holds the slot."
+[canvases.trigger]
+location      = "wren_room"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Change"
+blocks = [
+  { type = "paragraph", content = "The locker at the foot of the bed holds everything the company has ever issued her and two things it hasn't. She stands in front of it with the door open and picks what the day needs her to look like." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text             = "Into the dock-work coveralls."
+targetType       = "node"
+nodeId           = "activity_wren_change.dock"
+show_when_locked = true
+locked_text      = "She hasn't been issued anything to work a dock in. Whatever the job turns out to be, it comes with the clothes."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "clothing_item", item_id = "cover_dockhand", operator = "owned" },
+] }
+wardrobeEffects = [
+  { action = "equip", item_id = "cover_dockhand" },
+]
+[[canvases.nodes.exit_block.choices]]
+text             = "Into the junior-analyst kit."
+targetType       = "node"
+nodeId           = "activity_wren_change.analyst"
+show_when_locked = true
+locked_text      = "Nothing in the locker would get her past a desk on a Vance floor. That kit comes from Mercer, when Mercer wants her on one."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "clothing_item", item_id = "cover_analyst", operator = "owned" },
+] }
+wardrobeEffects = [
+  { action = "equip", item_id = "cover_analyst" },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Back into company grays."
+targetType = "node"
+nodeId     = "activity_wren_change.grays"
+wardrobeEffects = [
+  { action = "equip", item_id = "company_grays" },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it."
+targetType = "location"
+locationId = "wren_room"
+
+[[canvases.nodes]]
+id   = "dock"
+name = "Into the coveralls"
+blocks = [
+  { type = "paragraph", content = "Heavy canvas, worn at the knees by somebody else first, and it smells of a shed. In the mirror there is a woman who lifts things for a living and no reason at all to look at her twice, which is the entire point of it." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "wren_room"
+time_progression_minutes = 15
+
+[[canvases.nodes]]
+id   = "analyst"
+name = "Into the analyst kit"
+blocks = [
+  { type = "paragraph", content = "Grey, cut close, a size too junior to be worth resenting. It is the same trick as the coveralls run the other way — not a woman nobody looks at, a woman everybody has already decided they know." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "wren_room"
+time_progression_minutes = 15
+
+[[canvases.nodes]]
+id   = "grays"
+name = "Back into grays"
+blocks = [
+  { type = "paragraph", content = "The company line goes back on and sits the way it always sits, which is correctly. She has never once chosen these and has never once been out of them long enough to notice she wasn't." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "wren_room"
+time_progression_minutes = 15
+
 # ═══════════════════════════════════════════════════════════════════════════════
 # CAPTIVITY — the room's two verbs (beat_0038). There are only two, and that is the design.
 #

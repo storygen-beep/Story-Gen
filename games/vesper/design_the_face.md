@@ -810,3 +810,100 @@ than instructions. Card T went back to being a pointer.
 Across every combination of `bastien_drains_done` × `plan_made` × `taser_held`: **zero states** where the
 taser is buyable while `plan_made` is false, and the chain drain 1 → `cap_the_wait` → taser → drain 2 → raid
 is reachable at every step.
+
+---
+
+## 25. THE QUESTS-PAGE AUDIT (beats 0118–0119, revs 169–170)
+
+LO: *"analyze thoroughly, and check if we have updated the quests page properly"* — read-only first, then
+*"fix all of them properly."* The spine came back **clean**: a state simulation across all thirty-nine story
+states found exactly one Story card live in every one of the chapter's eleven, no blank, no double, the
+terminal badge on card U and nowhere else. Everything below is what the audit found *around* that.
+
+### 25.1 The blocker the page exposed — no wardrobe from the opening to `berth_home`
+
+Cards A and I tell the player to *"wear the dock-work coveralls from your room"* and *"wear the
+junior-analyst kit from your room."* **Neither was possible.**
+
+`wardrobe_location` is a scalar and the generator injects `[[Change Clothes->WardrobePage]]` into exactly the
+one location whose slug matches (`v2.py:9601`, `:9649`). The built HTML carried **one** such link, inside
+`Location_the_cot` — entry-gated `berth_home is_true`. Every cover is granted `wardrobeEffects add` and none
+carries `initial`. So between the opening and `berth_home` **nothing could be equipped at all**, and Renner's
+entire hub gates on `clothing_item cover_dockhand equipped`: **Mission 1 was uncompletable from a cold
+start.** Invisible in play because every dev jump equips a cover directly and nobody replays Act 1.
+
+Introduced at rev 145 when the rack left `wren_room`. **This chapter widened it**: rev 166 moved the rack
+`kess_berth` → `the_cot`, and `berth_home` is strictly later than `salvage_entered`, so The Archive's
+`cover_analyst` joined the list.
+
+**The rack does not move again.** Unequip exists only on the WardrobePage, and the four equipped-based
+undress portraits depend on it, so the rack has to live in the room those belong to. Act 1 gets a second,
+targeted surface instead — `activity_wren_change`, the `activity_bar_change` pattern from rev 167: equip
+only, no browsing, choices gated `clothing_item <id> owned` with `show_when_locked` so nothing silently
+vanishes. `cap_1a_close` re-equips `company_grays` on the way out of the sealing Spire, so she is not
+stranded in a Vance kit for the whole 1b handoff with the portrait resolver showing the analyst face.
+
+Proven live from the exact cold-start state, not from a green build: the card renders at `wren_room`,
+`dress` swaps `company_grays` ↔ `cover_dockhand` both ways, and both the `equipped` and `unequipped` gates
+flip correctly. Cards A and I are now literally true and needed no rewording.
+
+⚠️ **Two tips I had flagged were not stale after all.** *"your bench in your room"* and *"drill at your
+room"* point at `activity_swap_weapon` and `activity_train`, both still at `wren_room` and live through
+Act 1. Only the two *wearing* instructions were unfollowable.
+
+### 25.2 Card T was one card doing four states' work
+
+`bastien_drains_done gte 1` + `raid_done is_false` spanned drain 1 / plan made / taser bought / drain 2
+behind byte-identical text, and was wrong in three of them: it asserted *"you already worked out the rest of
+it lying on the cot"* from the instant the first drain landed — **before `cap_the_wait` can have fired** (the
+rev-162 elapsed-time defect in a new place); it went on saying *"go and buy the thing"* after she was
+carrying it; and it never mentioned that the raid needs a **second** drain.
+
+Split on `plan_made`. **T1** covers the un-thought state and its only goal is to send her home. **T2** puts
+the two tasks in live bullets — `bastien_drains_done gte 2` and `taser_held gte 1`, which are the two clauses
+of `cap_the_raid`'s own gate — so the page can no longer disagree with the engine, plus `ready_canvas` and a
+`ready_text` for when both land. The tip keeps only the evergreen half, because **there is no `ready_tip`**:
+one string serves the card's whole life, so an instruction to go shopping would have gone stale exactly the
+way the single-card version did.
+
+### 25.3 Progress goals — the chapter shipped with none
+
+Cards M–U carried no `goals` at all while `yard_depth` and `mercer_attempts` set the precedent, and the
+chapter has four countable ladders. The cheap engine fact that made this quick: **a card with no goals
+evaluates `allMet` vacuously true**, so `ready_canvas` alone renders the 🔓 frame with a 📍 pin.
+
+| card | added |
+|---|---|
+| M | `ready_canvas` → 📍 The Berth |
+| N | `wall_refusals gte 3` — four refusals across four presence windows, and three are needed |
+| O | `coin gte 120` (the face's own price) + 📍 The Black Market once she can afford it |
+| P | `face_worn` flag bullet + 📍 The Undertow — buying and *wearing* have been different acts since rev 167 |
+| R | `bar_rung gte 4` — the longest grind in the chapter |
+| S | `ready_canvas` → 📍 The Back Room (no goal: a `gte 1` bullet would close the card the moment it was met) |
+
+**Q stays goal-less on purpose.** Its only countable axis is `npc_bastien.relation`, and naming him on the
+page before `cap_bastien_notices` fires would spoil the hinge.
+
+⚠️ **📍 renders, 🕒 does not.** `_formatCanvasSchedule` reads the *canvas's own* `scheduleParams`;
+`hub_bastien` has none — its 20:00–23:59 window comes from `npc_bastien`'s schedule row through
+`requires_npc`. Verified live, after the comments had already claimed otherwise.
+
+### 25.4 Bastien had no section
+
+Cards per NPC at ship: Renner 10, Calloway 5, Colm 5, Mercer 3, **Bastien 0** — for the chapter's own
+conquest, who carries a four-rung ladder and the hottest repeatable loop in the game. The rev-141 shelving
+was right for 0.1.8 (its own rule was that his section starts when he becomes somebody she can act on) and
+stopped being right here. Four new cards, placed after Mercer's so the section renders last, which is
+chronologically correct — NPC sections come from the cards themselves, so that is the whole wiring.
+
+**B4 takes the plain ✓ badge.** Card U remains the one card in this game permitted to set `terminal_text`
+and to name the future. And B4 keeps the secret: it says they carried him out, never that he is dead and
+never that he can be found.
+
+### 25.5 Verified
+
+Live headless walk of all eleven chapter states plus the cold-start wardrobe flow: every card, counter and
+pin correct at the moment it renders, all five `ready_canvas` slugs resolving (an unresolved one blanks the
+block silently), Bastien's section appearing and retiring on cue, and **zero page errors**. Heat unmoved at
+`explicit floor` 6.3% / `explicit in repeatable` 34.0% — the deferred Colm/Renner/Calloway backlog, untouched
+by this pass.
