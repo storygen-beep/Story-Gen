@@ -2189,7 +2189,10 @@ max_triggers_per_day = 2
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "bar_hired", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "raid_done", operator = "is_false" },
-  { type = "clothing_item", item_id = "cover_stranger", operator = "equipped" },
+  # ⚠️ beat_0116 (rev 167) — THE FACE IS A FLAG NOW, not a garment. This used to read
+  # `clothing_item cover_stranger equipped`, which conflated who she looks like with what she is wearing and
+  # made the bar dress unbuildable (same `dress` slot, so equipping it would have deleted her job).
+  { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
 ] }
 
 [[canvases.nodes]]
@@ -2504,3 +2507,203 @@ text = "Take what there is."
 destinationType          = "specific"
 locationId               = "underworld_bar"
 time_progression_minutes = 120
+
+# ═══ activity_the_face — beat_0116 (rev 167). The face goes on and comes off HERE, and nowhere else. ════
+# Wren-solo @the_cot. Repeatable, pri 4, gated face_bought is_true. Two exclusive bands on face_worn.
+#
+# ⚠️ WHY THIS IS A CANVAS AND NOT A WARDROBE ROW. Until this beat the face WAS a garment, and putting it on
+# was a line item on a clothes rack between a bra and a pair of flats. That was an engine-shaped decision I
+# made on a wrong assumption (that the portrait resolver only keys on worn_type — it takes `flag` too,
+# v2.py:1664), and it flattened the single most consequential act in the chapter into a costume change.
+# Six surfaces in this game exist only while she is wearing it. That is not clothing. That is who she is.
+#
+# ⚠️ THE TWO DIRECTIONS ARE NOT SYMMETRICAL AND MUST NOT BE WRITTEN AS IF THEY WERE.
+# PUTTING IT ON is routine after the first time — she has a job and a room to be in and this is the cost of
+# both, and the prose treats it as the small competent act it has become.
+# TAKING IT OFF IS THE BEAT. It is the one moment in the chapter where she chooses to be Wren again, and she
+# does it at her own bunk because that is the only room where nobody is watching. It costs her everything the
+# chapter has built, and she does it anyway, and the game does not tell her why she wanted to.
+#
+# ⚠️ AND IT STATES THE MECHANICAL COST IN HER OWN VOICE. Six surfaces vanish with the face — the shift card,
+# the two promotions, Bastien noticing her, the door, the room — and a player who takes it off and finds the
+# Undertow empty has no way at all to connect the two. So the take-it-off band says plainly what stops
+# existing, as a thing she knows rather than as a warning label.
+# ⚠️ NO TIME COST ON THE TOGGLE ITSELF. It is minutes at a mirror, and charging the clock for it would make
+# the honest act (taking it off, sitting with it, putting it back) more expensive than never taking it off.
+# MEDIA: none. It reuses the room she is standing in.
+[[canvases]]
+id          = "activity_the_face"
+name        = "The face"
+description = "beat_0116 (rev 167). Wren-solo @the_cot. Repeatable, pri 4, gated face_bought is_true. THE FACE IS NO LONGER A GARMENT — it is the flag face_worn, and this is the only surface that moves it. Two exclusive bands: off (put it on, routine) and on (take it off, the beat). Taking it off is deliberate and carries weight: it is the one moment in the chapter where she chooses to be Wren again, done at her own bunk because it is the only room where nobody is watching. The on-band states the mechanical cost in her own voice — six surfaces exist only while she wears it, and a player who takes it off and finds the bar empty could not otherwise connect the two. No time cost: charging the clock would make the honest act more expensive than never doing it."
+[canvases.trigger]
+location      = "the_cot"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "face_bought", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The face"
+blocks = [
+  # BAND A — it is in the bag. Routine, and the prose says so.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_false" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The bag is under the cot where it lives. Twenty minutes at the cracked glass over the basin and she is somebody else — she has the order of it now, and her hands do most of it without being asked." },
+  ] },
+  # BAND B — it is on. Standing in her own room as somebody else.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She is wearing it now, in her own room, with nobody to be it at. It comes off in about a minute and goes back on in twenty, which is the exchange rate on being nobody." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Put it on."
+targetType = "node"
+nodeId     = "activity_the_face.on"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_false" },
+] }
+flagEffects = [
+  { targetType = "player", flag = "face_worn", op = "set" },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Take it off."
+targetType = "node"
+nodeId     = "activity_the_face.off"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
+] }
+flagEffects = [
+  { targetType = "player", flag = "face_worn", op = "unset" },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it."
+targetType = "location"
+locationId = "the_cot"
+
+# ── on — routine. Competent, quick, and not a big deal any more. ────────────────────────────────
+[[canvases.nodes]]
+id   = "on"
+name = "Put it on"
+blocks = [
+  { type = "paragraph", content = "The order of it is fixed now: the hairline first, then the jaw, then the small dull work around the eyes that does more than any of the rest. She does not look at the whole of it until the end." },
+  { type = "paragraph", content = "The woman in the glass has a job at a bar off the strip, no history anybody has asked about, and nothing at all to do with a programme that closed eleven years ago." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go to work."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_cot"
+
+# ── off — THE BEAT. ⚠️ The one moment she chooses to be Wren, and the only place she can. ────────
+# ⚠️ IT NAMES WHAT IT COSTS, MECHANICALLY, IN HER VOICE. Six surfaces stop existing and nothing else in the
+# game would ever tell her. It is written as a thing she knows, not as a warning.
+# ⚠️ AND IT DOES NOT EXPLAIN WHY SHE WANTED TO. She has no reason that would survive being said out loud,
+# which is the point of the beat — the chapter's whole argument is that she is a person now, and a person
+# does not need a mission to want her own face back for an hour.
+[[canvases.nodes]]
+id   = "off"
+name = "Take it off"
+blocks = [
+  { type = "paragraph", content = "It comes off faster than it goes on. A minute at the basin, the water going grey, and the woman who has been carrying trays for a man who owned her stops existing over a cracked sink in a ship-breaker's yard." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Nothing out there is hers while this is off. Sol does not know her. The floor is not her floor and the rota does not have her on it, and the room behind the door is a room she has never been invited into. All of that belongs to a woman with no name who does not exist until she puts it back on." },
+  { type = "paragraph", content = "She does it anyway, most nights, for an hour, and could not give a reason that would survive being said out loud." },
+  { type = "paragraph", content = "The face in the glass is four years older than the paperwork says and has a designation on a page in a file under the cot, and it is the only thing in this city that nobody sold her." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sit with it a while."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_cot"
+
+# ═══ activity_bar_change — beat_0116 (rev 167). The bathroom. Two garments, no browsing. ═══════════════
+# Wren-solo @underworld_bar_bathroom. Repeatable, pri 3, gated bar_rung gte 3.
+# ⚠️ THIS IS NOT A SECOND WARDROBE. wardrobe_location is a scalar and stays at the_cot, where her own things
+# are and where the four equipped-based undress portraits fire. This is two `equip` effects behind two
+# choices — equipItem sets equipped[slot] and replaces whatever was there, so each choice is a straight swap
+# and no unequip action is needed (there isn't one). It is a staff toilet, not her wardrobe.
+# ⚠️ THE DRESS CHOICE IS GATED ON THE FACE, WITH show_when_locked AND A REASON. Out of the face she is Wren,
+# and Wren does not work here — Sol hired a stranger. Greyed with a locked_text that says so, never silently
+# absent, because a vanished choice in a room she walked to on purpose is the lostness failure.
+# MEDIA: reuses the bathroom's own location art.
+[[canvases]]
+id          = "activity_bar_change"
+name        = "Change"
+description = "beat_0116 (rev 167). Wren-solo @underworld_bar_bathroom. Repeatable, pri 3, gated bar_rung gte 3. Two choices, both wardrobeEffects `equip`: into the dress he sent down, or back into her own kit. NOT a second wardrobe — wardrobe_location is a scalar and stays at the_cot; this is a targeted change surface, which is also the fiction (a staff toilet). equipItem replaces whatever holds the slot, so each choice is a straight swap and no unequip is needed. The dress choice is gated face_worn is_true with show_when_locked + locked_text: out of the face she is Wren, and Sol hired a stranger."
+[canvases.trigger]
+location      = "underworld_bar_bathroom"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "bar_rung", operator = "gte", value = 3 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Change"
+blocks = [
+  { type = "paragraph", content = "The bolt turns. One cubicle, one cracked basin, a hook on the back of the door, and the bar coming through the wall at the volume it comes through everything down here." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text             = "Change into the dress."
+targetType       = "node"
+nodeId           = "activity_bar_change.into"
+show_when_locked = true
+locked_text      = "Out of the face she is Wren, and Wren does not work here — Sol hired a stranger, and the dress belongs to the stranger. Put it on at the cot first."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
+] }
+wardrobeEffects = [
+  { action = "equip", item_id = "dress_undertow" },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Back into your own things."
+targetType = "node"
+nodeId     = "activity_bar_change.out"
+wardrobeEffects = [
+  { action = "equip", item_id = "cover_stranger" },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it."
+targetType = "location"
+locationId = "underworld_bar_bathroom"
+
+[[canvases.nodes]]
+id   = "into"
+name = "Into the dress"
+blocks = [
+  { type = "paragraph", content = "It goes on over the head and is the right size, which she has stopped finding interesting and has not stopped noticing. Her own things fold small enough to sit on the hook under her coat." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out onto the floor."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar_bathroom"
+time_progression_minutes = 15
+
+[[canvases.nodes]]
+id   = "out"
+name = "Back into your own things"
+blocks = [
+  { type = "paragraph", content = "The dress goes on the hook where the bag was and stays in the building, because it is not hers and it has never once left with her. Her own kit smells of the strip and of the cot and of nothing anybody chose for her." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar_bathroom"
+time_progression_minutes = 15

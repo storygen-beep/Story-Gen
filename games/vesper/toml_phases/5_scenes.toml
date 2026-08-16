@@ -11652,7 +11652,10 @@ is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "face_bought",    operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "stranger_seen",  operator = "is_false" },
-  { type = "clothing_item", item_id = "cover_stranger", operator = "equipped" },
+  # ⚠️ beat_0116 (rev 167) — THE FACE IS A FLAG NOW, not a garment. This used to read
+  # `clothing_item cover_stranger equipped`, which conflated who she looks like with what she is wearing and
+  # made the bar dress unbuildable (same `dress` slot, so equipping it would have deleted her job).
+  { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
   { type = "npc_at_location", location_id = "underworld_bar", npc_id = "npc_sol", operator = "is_present" },
 ] }
 
@@ -11719,7 +11722,7 @@ priority   = 10
 text       = "A hundred and twenty coin at the curtained tables and an afternoon of sitting still, and what you walked out with is a woman who does not exist: a face, a history thin enough that nobody will check it, and the clothes that make both of them true. She asked you exactly one question — whether anyone had ever taken a print of you — and you lied to her before the face was even finished."
 # ⚠️ beat_0098 (rev 149) — P GIVES UP THE BOUNDARY to card Q, in the same edit that adds Q. Run in the
 # right order this time. P keeps its Support-Us ask (rev-113 rule).
-tip        = "It is in your bag, not on you. Get to the cot at the Berth and change — everything from here needs it worn, and out of it you are just Wren again in a district that has stopped talking to her. Then go and drink at the Undertow like somebody with nowhere else to be. If you want the next chapter sooner, Support Us in the sidebar."
+tip        = "It is in your bag, not on you. Get to the cot at the Berth and put it on — that is its own thing now, not a change of clothes, and it lives at your own bunk. Everything from here needs it worn: out of it you are just Wren again, in a district that has stopped talking to her, with no job and no reason to be in that bar. Then go and drink at the Undertow like somebody with nowhere else to be. If you want the next chapter sooner, Support Us in the sidebar."
 when = [
   { flag = "face_bought",   op = "is_true"  },
   { flag = "stranger_seen", op = "is_false" },
@@ -11765,7 +11768,7 @@ is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "stranger_seen", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "bar_hired",     operator = "is_false" },
-  { type = "clothing_item", item_id = "cover_stranger", operator = "equipped" },
+  { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
   { type = "npc_at_location", location_id = "underworld_bar", npc_id = "npc_sol", operator = "is_present" },
 ] }
 
@@ -11927,7 +11930,7 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "bar_rung",     operator = "lt", value = 2 },
   { type = "trait", subject = "npc", npc_id = "npc_bastien", trait_key = "relation", operator = "gte", value = 6 },
   { type = "flag", subject = "player", flag_key = "bastien_seen", operator = "is_false" },
-  { type = "clothing_item", item_id = "cover_stranger", operator = "equipped" },
+  { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
 ] }
 
 [[canvases.nodes]]
@@ -12029,7 +12032,7 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "bar_rung", operator = "gte", value = 2 },
   { type = "trait", subject = "player", trait_key = "bar_rung", operator = "lt",  value = 3 },
   { type = "trait", subject = "npc", npc_id = "npc_bastien", trait_key = "relation", operator = "gte", value = 12 },
-  { type = "clothing_item", item_id = "cover_stranger", operator = "equipped" },
+  { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
 ] }
 
 [[canvases.nodes]]
@@ -12056,8 +12059,10 @@ blocks = [
         { type = "paragraph", content = "The door out is eight feet behind her and nothing in this room is holding it shut. Nobody signed for her. Nobody has a key. She could put the bag down and be up the strip inside a minute and there would be no consequence at all except the one that matters." },
         { type = "thought_bubble", props = { speaker = "player" }, content = "And then she is a woman with a hundred and twenty coin of face and no way through that door." },
     ] },
-    { advance_text = "Go and change.", blocks = [
-        { type = "paragraph", content = "The cellar passage has a nail with three coats on it and that is the whole of the staff arrangements. She changes standing up in the cold with the bag at her feet." },
+    { advance_text = "Ask where.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Where am I meant to put this on." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Staff toilet at the back. Bolt turns. There's a hook on the door and I'd use it, because whatever you came in wearing isn't going on that floor." },
+        { type = "paragraph", content = "It is the most consideration the Undertow has ever shown her and it takes him four seconds." },
     ] },
     { advance_text = "Go back up.", blocks = [
         { type = "paragraph", content = "The room clocks it in about a second and a half. The talk drops, not much, the way it does when weather changes outside a window, and then it comes back up around her at a slightly different pitch and stays there." },
@@ -12077,6 +12082,15 @@ locationId               = "underworld_bar"
 time_progression_minutes = 60
 effects = [
   { targetType = "player", trait = "bar_rung", op = "set", value = 3, clamp = true },
+]
+# ⚠️ beat_0116 (rev 167) — THE BAG NOW GRANTS A REAL GARMENT. Until this beat the dress existed only in
+# prose: this canvas narrated her changing in a cellar passage that appeared in one sentence and nowhere
+# else, with no wardrobeEffects anywhere, so the game said short thin dress while the wardrobe said
+# second-hand kit. Granted UN-WORN (`add`, not `equip`) on purpose — she puts it on at the bathroom, which
+# is where Sol has just told her to, and which is the surface that makes the change an act she performs
+# rather than a sentence that happens to her.
+wardrobeEffects = [
+  { action = "add", item_id = "dress_undertow" },
 ]
 
 # ═══ rung_bar_promotion_4 — beat_0100 (rev 151). He sends for her. ══════════════════════════════════════
@@ -12103,7 +12117,7 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "bar_rung", operator = "gte", value = 3 },
   { type = "trait", subject = "player", trait_key = "bar_rung", operator = "lt",  value = 4 },
   { type = "trait", subject = "npc", npc_id = "npc_bastien", trait_key = "relation", operator = "gte", value = 18 },
-  { type = "clothing_item", item_id = "cover_stranger", operator = "equipped" },
+  { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
 ] }
 
 [[canvases.nodes]]
