@@ -17789,6 +17789,102 @@ when = [
   { flag = "raid_done", op = "is_true" },
 ]
 
+# ═══ bastien_backroom_offhours — beat_0114 (rev 165). THE DEAD-ROOM GUARD. A SOFT-LOCK FIX. ═════════════
+# Repeatable, pri 1, @bastien_backroom, gated npc_at_location bastien_backroom/npc_bastien/is_absent.
+#
+# ⚠️ LO FOUND THIS BY PLAYING IT: "Canvas exit player to the backroom and there is no choice in the backroom.
+# No exit or nothing. Player is stuck in there." He is exactly right, and it is not an edge case.
+#
+# THE ROOM HAS ONE EXIT AND IT IS A PORTRAIT CARD. bastien_backroom is nav-invisible by design — no
+# entry_from, auto_exit = false — so the built passage carries an EMPTY <div class="location-navigation">.
+# The only way out is hub_bastien's "Back out to the bar", and hub_bastien is a PORTRAIT hub (npc +
+# requires_npc), so it renders only while Bastien is present. His single schedule row is 20:00-23:59.
+#
+# ⚠️ AND EVERY ACTION IN THAT ROOM SPENDS HIS WINDOW. It is 240 minutes wide, and:
+#     the door search -> +15 · "Let him talk" -> +30 · a facial or inside finish -> +60
+# So: enter 23:00 (+15 = 23:15), one loop, facial finish (+60) = 00:15 — HE IS GONE, the portrait does not
+# render, the nav div is empty, and the player is sealed in with no link on the page. Arriving at 23:50 seals
+# her at 00:05 before she has done anything at all. The ass finish escapes only by accident, because
+# bastien_drain_canvas exits to underworld_bar instead of back into the room.
+#
+# ⚠️ THE ROOT CAUSE IS A WRITTEN CLAIM I RESTORED WITHOUT RE-CHECKING. The shelved header said: "No off-hours
+# guard is needed here (unlike mercer_room_offhours) because the room has no nav card — the only way in is
+# bastien_door_search, and that card is itself presence-gated, so she can never arrive to an empty room in
+# the first place." That reasoning only considers ARRIVAL. It never considers that the clock advances while
+# she is INSIDE, and that one loop burns a quarter of his window. Same failure as the other audit defects:
+# trusting a note instead of verifying it.
+#
+# ⚠️ THE SHAPE IS NOT INVENTED — it is mercer_room_offhours and berth_offhours exactly: repeatable, priority
+# 1, gated on the NPC being ABSENT, exiting to the parent location. Bastien's was the only nav-invisible
+# interior in the game without one.
+# ⚠️ THE FINISHER'S EXIT IS DELIBERATELY LEFT ALONE. Returning to the room is the HOUSE PATTERN for every
+# loop in the game — Renner to renner_depot, Calloway to vance_securities, Mercer to penthouse. The
+# difference was never the exit; it was that all of those rooms have a nav grid and this one does not.
+# MEDIA: reuses locations/bastien_backroom.jpg — the room, which is what this beat is about.
+[[canvases]]
+id          = "bastien_backroom_offhours"
+name        = "The room after he has gone"
+description = "beat_0114 (rev 165). DEAD-ROOM GUARD @bastien_backroom, and a SOFT-LOCK FIX found by LO in play. Repeatable, pri 1, gated npc_at_location bastien_backroom/npc_bastien/is_absent. The room is nav-invisible (no entry_from, auto_exit false) so its built passage has an EMPTY navigation div, and its only exit is hub_bastien's rung — a PORTRAIT hub that renders only while he is present, 20:00-23:59. Every action inside spends that 240-minute window (door search +15, talk +30, facial/inside finish +60), so a player who finishes late is sealed in with no link on the page. Shape copied exactly from mercer_room_offhours / berth_offhours. Exits to underworld_bar."
+[canvases.trigger]
+location      = "bastien_backroom"
+is_repeatable = true
+priority      = 1
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  # ⚠️ version = "1.0" or the condition FAILS OPEN and this renders while he is standing in the room.
+  { type = "npc_at_location", location_id = "bastien_backroom", npc_id = "npc_bastien", operator = "is_absent" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The room after he has gone"
+blocks = [
+  { type = "image", props = { file = "locations/bastien_backroom.jpg", description = "A private back room behind a bar — a desk with nothing on it, a good chair set to see the door, better furniture than the room deserves.", search_queries = ["private back room behind bar desk armchair dim", "noir speakeasy office low light leather chair"] } },
+  { type = "paragraph", content = "The chair that sees the door is empty and the lamp over the desk is off. He goes when he goes and he does not say so, and nobody who works here has ever been told where." },
+  { type = "paragraph", content = "The door onto the bar is on the latch from this side, which is the only courtesy the room has ever shown her. She lets herself out through a room with the stools up on the tables." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let yourself out."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 15
+
+# ═══ cain_lab_offhours — beat_0114 (rev 165). The same guard, on the other nav-invisible room. ══════════
+# ⚠️ cain_lab IS SAFE TODAY BY LUCK, NOT BY DESIGN, and that is the whole reason this exists. It has the
+# identical shape to bastien_backroom — no entry_from, auto_exit = false, an empty navigation div — and its
+# only exit is cap_the_lab, which is a ONE-SHOT gated lab_seen is_false. The instant that flag is set the
+# room has no exit at all. It is unreachable afterwards, so nothing can strand a player today; but the NEXT
+# RELEASE opens on that scene and will almost certainly add a way back, and the trap would be waiting.
+# Six lines now against a soft-lock later. Gated lab_seen is_true so it never competes with the capstone.
+[[canvases]]
+id          = "cain_lab_offhours"
+name        = "The way out"
+description = "beat_0114 (rev 165). Latent-soft-lock guard @cain_lab. Repeatable, pri 1, gated lab_seen is_true. cain_lab has the same nav-invisible shape as bastien_backroom — no entry_from, auto_exit false, empty navigation div — and its only exit is cap_the_lab, a ONE-SHOT. Once lab_seen is set the room has no exit; it is unreachable today, but the next release opens on that scene and will likely add a way back. Gated on lab_seen so it never competes with the capstone. Exits to underworld_strip."
+[canvases.trigger]
+location      = "cain_lab"
+is_repeatable = true
+priority      = 1
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "lab_seen", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The way out"
+blocks = [
+  { type = "paragraph", content = "Long benches, work-lamps, the frame standing open at the far end. The door he did not lock is where it was." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out, and up."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_strip"
+time_progression_minutes = 30
+
 # ══════════════════════════════════════════════════════════════════
 # Phase: 6_dev_shortcuts.toml
 # ══════════════════════════════════════════════════════════════════
