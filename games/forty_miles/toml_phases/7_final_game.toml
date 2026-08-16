@@ -19,7 +19,8 @@
 #   1  RATCHETING TIERS  nights · seen · trade    — rungs at 15/35/55
 #   2  VOLATILE STATE    arousal · stress · energy · money
 #   3  PER-CHARACTER     relation · lust          — on each [[npcs]] block
-#   +  COUNTERWEIGHT     count — starts at 100, only ever falls
+#   +  COUNTERWEIGHT     count — starts at 100, falls when the book stops
+#                        balancing, and can be bought back out of her own money
 #
 # ⚠️ THE TOP BAND IS UNBOUNDED AT v0.1 (min = 55, no max). Gate 8 judges the top
 #    band's MIN (gates.py:692-695), so a band at 75 would oblige an authored gate
@@ -31,6 +32,14 @@
 #    only collects tops from those operators (gates.py:680), so a counterweight
 #    gated exclusively on lt/lte is skipped rather than made to buy its ceiling.
 #    It is the price she pays, not a currency — it owes no content.
+#
+# ⚠️ EVERY TRAIT EFFECT USES op = "add" (with a NEGATIVE value to take something
+#    away). `op = "subtract"` is NOT an engine operation — applyTraitEffect
+#    accepts "add" and "set" and silently returns on anything else
+#    (v2.py:5742-5751). v0.1 shipped 35 subtract effects and every one of them
+#    did nothing: `count` never moved off 100 for the whole game, no activity
+#    ever cost energy, and Nunn's short-week penalty never applied. Fixed in
+#    0.1.1; references/engine.md §21.
 # =============================================================================
 
 schema_version = "1.0"
@@ -41,7 +50,7 @@ title           = "Forty Miles"
 description     = "Kelbrook Services, ten at night to six in the morning, and nothing open either way for forty miles. She is the only person on site. The man who owns it paid off her debt and has never once mentioned it."
 starting_canvas = "canvas_opening"
 quests_engine   = "v2"
-version         = "0.1"
+version         = "0.1.1"
 
 [time]
 starting_hour = 22          # Bev has just gone. The first handover is the opening.
@@ -66,6 +75,16 @@ wardrobe_location = "her_static"  # everything she owns is in the caravan
 # ⚠️ eviction_mode = "flag_set", NOT the default "game_end". The product never
 #    ends. Missing the draw does not evict her; it sets `terms_changed`, and what
 #    he takes instead stops being money.
+#
+# ⚠️ THIS IS THE ONLY PLACE THE 245 MOVES, and it is the ENGINE that moves it.
+#    `advanceDay()` arms `rent_state.is_due` on the rollover into due_day
+#    (v2.py:5453-5464); the next `Location_*` entry is intercepted into RentDay
+#    (v2.py:15247-15259); paying runs `$player.core_traits.money -= _rent`
+#    (v2.py:15925). Verified live at 300 -> 55. So the draw lands in the small
+#    hours of Friday, mid-shift, NOT at 18:00 when Nunn's schedule row puts him on
+#    the forecourt — the scene text below is written for the hour it actually
+#    fires. And no authored canvas may narrate handing the money over: v0.1 shipped
+#    one that did, charging nothing and granting relation on every click.
 [settings.rent]
 enabled          = true
 amount           = 245
@@ -75,10 +94,11 @@ grace_periods    = 1
 start_after_flag = "first_shift_done"
 eviction_mode    = "flag_set"
 eviction_flag    = "terms_changed"
+currency_symbol  = "£"        # the pages hardcoded "$" before this key existed
 
 [settings.rent.text]
 title            = "Friday"
-scene            = "He comes at six and does not come inside. The car sits under the canopy with the engine running and the window down, and you go out to it, because that is how this has worked since the first week."
+scene            = "Friday starts at midnight and he does not wait for six. The car is on the forecourt with the engine running and the window down four inches, and you go out to it, because that is how this has worked since the first week."
 greeting         = "Friday, then."
 paid_scene       = "You count it into his hand through the window. He does not count it again. He folds it once, puts it in the inside pocket, and writes a figure in the notebook he keeps on the passenger seat, and you stand in the cold watching a man do sums about you."
 paid_response    = "Two hundred. Forty-five for the van. You're all right."
@@ -93,6 +113,17 @@ eviction_closing_soft  = "He does not say what the other way is. He buys a coffe
 
 [theme]
 mode = "dark"
+
+
+# ─── The next step, on every screen ──────────────────────────────────────────
+# The band strings below say where she IS. This says what to do about it — the
+# same 🎯/◯ goal block the Quests page renders, from the same cards, so the two
+# can never drift. v0.1 shipped with the bands and nothing else in the rail: four
+# descriptions of a state, no place, no verb, no person, and a player who never
+# opened the Quests page had no direction at all.
+[[sidebar_items]]
+type = "quest_next"
+max  = 3          # one live card per ascent tier
 
 
 # ─── The ascent tiers ────────────────────────────────────────────────────────
@@ -133,7 +164,10 @@ bands = [
   { min = 55, text = "Two economies out of one shop" },
 ]
 
-# The counterweight. Starts clean, only ever falls, buys nothing by design.
+# The counterweight. Starts clean and buys nothing by design. It falls whenever
+# the roll and the drawer stop saying the same thing, and the only way back up is
+# covering the shortfall out of her own money — two rungs do that, and they are
+# the only positive writes to it in the game.
 # Gated on lt/lte ONLY — see the header note on gate 8.
 [[sidebar_items]]
 type  = "trait_status_text"
@@ -307,10 +341,10 @@ when     = [ { trait = "relation", subject = "npc", npc_id = "npc_bev", op = "gt
 [[quest_cards]]
 priority = 20
 npc_id   = "npc_nunn"
-text     = "He paid six thousand pounds for a problem of yours and has never once said what the problem was worth to him. Every Friday at six he sits under the canopy with the engine running and you go out to the car."
-tip      = "Have the two hundred and forty-five. Find out what else is on the table."
+text     = "He paid six thousand pounds for a problem of yours and has never once said what the problem was worth to him. The two hundred and forty-five goes at the Friday rollover, whatever you are doing. Friday evening he is back under the canopy with the engine running, owed nothing, which is the only time he is just a man in a car."
+tip      = "Have the two hundred and forty-five before Friday. Then go out to him on the Friday evening, when nothing is owed, and find out what else is on the table."
 when     = [ { trait = "relation", subject = "npc", npc_id = "npc_nunn", op = "lt", value = 40 } ]
-goals    = [ { trait = "relation", subject = "npc", npc_id = "npc_nunn", op = "gte", value = 40, label = "Meet him with the week — the forecourt, Friday 18:00" } ]
+goals    = [ { trait = "relation", subject = "npc", npc_id = "npc_nunn", op = "gte", value = 40, label = "Go out to the car with nothing owed — the forecourt, Friday 18:00" } ]
 
 [[quest_cards]]
 priority = 19
@@ -473,7 +507,7 @@ navigation_order     = []
 [[locations]]
 id                   = "the_showers"
 name                 = "The Shower Block"
-description          = "A flat-roofed brick block across the apron with four cubicles, a bench, and a dryer that costs a pound. Cubicle three's lock has been broken since before she started and the sign about it fell off in February. The extractor runs all night whether anyone is in here or not, so from outside there is no way of telling."
+description          = "A flat-roofed brick block across the apron with four cubicles, a bench, and a dryer that costs a pound. Cubicle three's lock has been broken since before you started and the sign about it fell off in February. The extractor runs all night whether anyone is in here or not, so from outside there is no way of telling."
 image                = "locations/the_showers.jpg"
 image_search_queries = ["truck stop driver shower block cubicles tiled", "public shower room bench tiles dim wet floor"]
 entry_from           = "the_forecourt"
@@ -522,7 +556,7 @@ costs                = { time = 10, energy = 2 }
 [[locations]]
 id                   = "her_static"
 name                 = "The Caravan"
-description          = "A static behind the tyre bay with a fan heater, a two-ring hob, and a bed at the end that gets the cold off the window. Everything she owns is in two bags under it. Nunn owns the van the same way he owns the shop, and forty-five pounds of every Friday is for standing it on his gravel."
+description          = "A static behind the tyre bay with a fan heater, a two-ring hob, and a bed at the end that gets the cold off the window. Everything you own is in two bags under it. Nunn owns the van the same way he owns the shop, and forty-five pounds of every Friday is for standing it on his gravel."
 image                = "locations/her_static.jpg"
 image_search_queries = ["old static caravan interior bed night cramped", "small trailer home interior dim bed window"]
 entry_from           = "the_tyre_bay"
@@ -809,8 +843,8 @@ blocks = [
   { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Hatch comes down at midnight. Serve through the drawer after that. And you don't go out on the apron on your own." },
   { type = "paragraph", content = "You point out that you are on your own. All night. That is the job." },
   { type = "paragraph", content = "She picks her bag up off the chair and does not answer that, and at the door she stops with her hand on it." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Gerry comes Friday at six. Have it counted before he pulls in. He doesn't like waiting in the car." },
-  { type = "thought_bubble", content = "Two hundred for him and forty-five for the van, out of a week that pays three-fifty. She knows the numbers. Everyone here knows the numbers." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Gerry takes it the minute Friday starts. Have it counted before midnight Thursday. He doesn't like waiting in the car." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Two hundred for him and forty-five for the van, out of a week that pays three-fifty. You know the numbers. Everyone here knows the numbers." },
   { type = "paragraph", content = "Then the door does its two-tone thing, and her car goes out under the canopy and left onto the road, and the shop is very quiet and very bright and it is twenty-two hundred hours on Monday." },
 ]
 exit_block = { type = "location", text = "Start the shift.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 30, flagEffects = [
@@ -858,13 +892,13 @@ blocks = [
         { type = "paragraph", content = "He puts a two-pound coin in the drawer and pushes it back through, which is not a thing anyone does at a hatch, and walks off across the apron into the black without saying anything else." },
     ] },
   ] } },
-  { type = "thought_bubble", content = "Ninety seconds. Bev has done that ninety-second transaction eleven years and would not call it anything." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Ninety seconds. Bev has done that ninety-second transaction eleven years and would not call it anything." },
 ]
 exit_block = { type = "choices", choices = [
   { text = "Put the coin in your pocket, not the till.", targetType = "node", nodeId = "the_coin", effects = [
     { targetType = "player", trait = "seen", op = "add", value = 4, clamp = true },
     { targetType = "player", trait = "money", op = "add", value = 3, clamp = false },
-    { targetType = "player", trait = "count", op = "subtract", value = 2, clamp = true },
+    { targetType = "player", trait = "count", op = "add", value = -2, clamp = true },
   ] },
 ] }
 
@@ -923,7 +957,7 @@ blocks = [
         { type = "paragraph", content = "The orgasm takes your legs and you moan out loud into an empty stock room, and your cunt clenches down hard on your fingers, and you keep them in there through all of it until it lets go." },
     ] },
     { advance_text = "After.", blocks = [
-        { type = "thought_bubble", content = "Eleven feet. She has measured it now and she is not going to be able to stop knowing the number." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Eleven feet. You have measured it now and you are not going to stop knowing the number." },
         { type = "paragraph", content = "You straighten the vest, and you look down the corridor at the padlock on the far door, and you think about what the eleven feet is worth rather than what it is." },
     ] },
   ] } },
@@ -1018,11 +1052,19 @@ nodeId     = "rung_shop_coffee.base"
 text       = "Wipe down the window tables."
 targetType = "node"
 nodeId     = "rung_shop_tables.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Watch the monitor cycle."
 targetType = "node"
 nodeId     = "rung_shop_monitor.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Serve whoever comes through the door."
@@ -1043,6 +1085,10 @@ text       = "Buy something off the hot counter (£3)."
 targetType = "node"
 nodeId     = "rung_shop_eat.base"
 costs      = [ { trait = "money", value = 3 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 
 # ── 00:00-04:00 — the dead hours, and the crudest counter window ─────────────
@@ -1100,17 +1146,13 @@ show_when_locked = true
 text       = "Sell a shower token off the book."
 targetType = "node"
 nodeId     = "rung_shop_token_offbook.base"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "trade", operator = "gte", value = 15 },
-] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Put a price on the back table and the microwave."
 targetType = "node"
 nodeId     = "rung_shop_back_table.base"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "trade", operator = "gte", value = 35 },
+  { type = "trait", subject = "player", trait_key = "trade", operator = "gte", value = 15 },
 ] }
 show_when_locked = true
 
@@ -1197,16 +1239,28 @@ show_when_locked = true
 text       = "Watch the road for her headlights."
 targetType = "node"
 nodeId     = "rung_shop_headlights.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Count up the eleven weeks."
 targetType = "node"
 nodeId     = "rung_shop_eleven_weeks.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Stay for a coffee after the handover."
 targetType = "node"
 nodeId     = "rung_shop_first_hour.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 35 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Cover tonight's shortfall out of your own money (£8)."
@@ -1235,7 +1289,7 @@ blocks = [
     ] },
     { advance_text = "Put it back.", blocks = [
         { type = "paragraph", content = "A hundred and five pounds a week to live on, in a place where the only shop is the one you are stood behind and you get staff price on nothing." },
-        { type = "thought_bubble", content = "Bev does this drawer twice a day and has done for eleven years and drives a car that starts." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Bev does this drawer twice a day and has done for eleven years and drives a car that starts." },
     ] },
   ] } },
 ]
@@ -1399,7 +1453,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Done.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 20, effects = [
   { targetType = "player", trait = "money", op = "add", value = 70, clamp = false },
-  { targetType = "player", trait = "energy", op = "subtract", value = 12, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -12, clamp = true },
 ] } }
 
 
@@ -1450,12 +1504,12 @@ blocks = [
         { type = "paragraph", content = "Half two. You have read the back of the scratchcard dispenser. You know the ingredients of a Ginsters slice. You could do the fire-exit notice from memory, in order, including the bit about the assembly point." },
     ] },
     { advance_text = "Notice what you are doing.", blocks = [
-        { type = "thought_bubble", content = "Two hours, awake, in a lit box, being paid seventy pounds to be the thing that is open." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Two hours, awake, in a lit box, being paid seventy pounds to be the thing that is open." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Get up.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 90, effects = [
-  { targetType = "player", trait = "energy", op = "subtract", value = 4, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -4, clamp = true },
 ] } }
 
 
@@ -1481,7 +1535,7 @@ blocks = [
         { type = "paragraph", content = "It goes straight to your cunt. You press your thighs together behind the papers rack. Your clit is up against the seam of the leggings and your nipples are aching on the vest and you stay at the glass another full minute." },
     ] },
     { advance_text = "Go back.", blocks = [
-        { type = "thought_bubble", content = "You cannot see one face out there. That is not the part that is doing it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "You cannot see one face out there. That is not the part that is doing it." },
     ] },
   ] } },
 ]
@@ -1513,7 +1567,7 @@ blocks = [
         { type = "paragraph", content = "The door does its two-tone thing behind them. You are stood in a bright shop with your cunt wet and your nipples still up, and you put your hand flat over your own tits under the vest just to feel them." },
     ] },
     { advance_text = "After.", blocks = [
-        { type = "thought_bubble", content = "Bev has done this shift eleven years and wears the fleece. That is not an accident either." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Bev has done this shift eleven years and wears the fleece. That is not an accident either." },
     ] },
   ] } },
 ]
@@ -1549,14 +1603,14 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "You put the leggings back on before the next set of lights turns in." },
-        { type = "thought_bubble", content = "The roll will say forty of diesel and a Yorkie. Everything else that happened here is not a thing this building keeps." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The roll will say forty of diesel and a Yorkie. Everything else that happened here is not a thing this building keeps." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Back to the stool.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 45, effects = [
   { targetType = "player", trait = "seen", op = "add", value = 4, clamp = true },
   { targetType = "player", trait = "arousal", op = "add", value = 10, clamp = true },
-  { targetType = "player", trait = "count", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "count", op = "add", value = -3, clamp = true },
 ] } }
 
 
@@ -1589,7 +1643,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "You get up, wash your hands in the sink behind the hot counter, and put the kettle on for a coffee you already made at eleven." },
-        { type = "thought_bubble", content = "Four feet at the counter, eleven in the corridor. She has started keeping a map of this building that nobody else has." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Four feet at the counter, eleven in the corridor. You are keeping a map of this building that nobody else has." },
     ] },
   ] } },
 ]
@@ -1622,7 +1676,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Back to the counter.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 20, effects = [
   { targetType = "player", trait = "trade", op = "add", value = 3, clamp = true },
-  { targetType = "player", trait = "count", op = "subtract", value = 4, clamp = true },
+  { targetType = "player", trait = "count", op = "add", value = -4, clamp = true },
   { targetType = "player", trait = "money", op = "add", value = 4, clamp = false },
 ] } }
 
@@ -1648,13 +1702,13 @@ blocks = [
         { type = "paragraph", content = "By half three there are four of them in the window and the shop is warm and loud and smells like somebody's kitchen, and none of it is on the till, and all of it is why they will stop here again." },
     ] },
     { advance_text = "Count it.", blocks = [
-        { type = "thought_bubble", content = "Twelve pounds. Less than the diesel one of them just put through the pump. Worth more, because it is hers." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Twelve pounds. Less than the diesel one of them just put through the pump. Worth more, because it is yours." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Get back behind the counter.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 60, effects = [
   { targetType = "player", trait = "trade", op = "add", value = 4, clamp = true },
-  { targetType = "player", trait = "count", op = "subtract", value = 5, clamp = true },
+  { targetType = "player", trait = "count", op = "add", value = -5, clamp = true },
   { targetType = "player", trait = "money", op = "add", value = 12, clamp = false },
 ] } }
 
@@ -1679,7 +1733,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Break the crates down.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 25, effects = [
-  { targetType = "player", trait = "energy", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -3, clamp = true },
 ] } }
 
 
@@ -1750,13 +1804,13 @@ blocks = [
         { type = "paragraph", content = "Under the drawer, folded in four, the way she folds it. Bev will pick it up at ten past six with a coffee in her other hand and will not look at it until Friday." },
     ] },
     { advance_text = "Think about Friday.", blocks = [
-        { type = "thought_bubble", content = "He does not read the roll in the car. He reads it at some point, though, or the notebook would not balance, and it always balances." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He does not read the roll in the car. He reads it at some point, though, or the notebook would not balance, and it always balances." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Wash the cups.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 25, effects = [
   { targetType = "player", trait = "trade", op = "add", value = 3, clamp = true },
-  { targetType = "player", trait = "count", op = "subtract", value = 6, clamp = true },
+  { targetType = "player", trait = "count", op = "add", value = -6, clamp = true },
   { targetType = "player", trait = "money", op = "add", value = 8, clamp = false },
 ] } }
 
@@ -1779,7 +1833,7 @@ blocks = [
         { type = "paragraph", content = "The car comes under the canopy and stops in the second bay. The engine goes off. The interior light comes on and she sits in it for a second the way people do, and then she is a manager again and you are on nights." },
     ] },
     { advance_text = "Get the fleece back on.", blocks = [
-        { type = "thought_bubble", content = "Ten to six is the only part of this job that is genuinely hard, and it has nothing to do with any of the hours before it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Ten to six is the only part of this job that is genuinely hard, and it has nothing to do with any of the hours before it." },
     ] },
   ] } },
 ]
@@ -1832,6 +1886,10 @@ nodeId     = "rung_showers_run.base"
 text       = "Open the cylinder cupboard."
 targetType = "node"
 nodeId     = "rung_showers_the_hot_water.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Look at the key on your belt."
@@ -1843,6 +1901,10 @@ text       = "Mop out and re-bleach the block (£6)."
 targetType = "node"
 nodeId     = "rung_showers_drain.base"
 costs      = [ { trait = "money", value = 6 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Put a pound in the dryer (£1)."
@@ -1872,8 +1934,10 @@ show_when_locked = true
 text       = "Hand a token over in here instead of at the till."
 targetType = "node"
 nodeId     = "rung_showers_token_here.base"
+# The TRADE top band. Running the tokens entirely inside the block, off any till at
+# all, is "two economies out of one shop" — so it is the rung that buys the ceiling.
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "trade", operator = "gte", value = 35 },
+  { type = "trait", subject = "player", trait_key = "trade", operator = "gte", value = 55 },
 ] }
 show_when_locked = true
 
@@ -1898,7 +1962,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Back across.", config = { destinationType = "specific", locationId = "the_showers", time_progression_minutes = 20, effects = [
-  { targetType = "player", trait = "energy", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -1920,12 +1984,12 @@ blocks = [
         { type = "paragraph", content = "The floor slopes to the middle and always has an inch of standing water at the far end where it does not. You mop it toward the drain and it goes, and by tomorrow night it will be back." },
     ] },
     { advance_text = "Stand up.", blocks = [
-        { type = "thought_bubble", content = "Nobody has ever thanked anyone for this room. It gets used forty times a night by men who have driven six hundred miles." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Nobody has ever thanked anyone for this room. It gets used forty times a night by men who have driven six hundred miles." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Wash your hands.", config = { destinationType = "specific", locationId = "the_showers", time_progression_minutes = 35, effects = [
-  { targetType = "player", trait = "energy", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -3, clamp = true },
 ] } }
 
 
@@ -1980,7 +2044,7 @@ blocks = [
         { type = "paragraph", content = "You take your fingers off your clit and put them back twice. The third time you leave them, forehead on the tile, two fingers in your cunt and your clit under your thumb until your legs go." },
     ] },
     { advance_text = "After.", blocks = [
-        { type = "thought_bubble", content = "Fifty minutes. The shop has been open and unattended for fifty minutes and nothing happened, and that is now a thing she knows rather than a thing she risks." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Fifty minutes. The shop stood open and unattended for fifty minutes and nothing happened. That is a thing you know now, not a thing you risk." },
     ] },
   ] } },
 ]
@@ -2018,7 +2082,7 @@ blocks = [
         { type = "paragraph", content = "You come with your eyes open on the door. Your cunt grips your fingers, your clit is still going under your thumb, and you moan once into the water and the sound goes flat off the tiles." },
     ] },
     { advance_text = "After.", blocks = [
-        { type = "thought_bubble", content = "Nine cabs in the park and any one of them could have wanted a shower at ten to four." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Nine cabs in the park and any one of them could have wanted a shower at ten to four." },
     ] },
   ] } },
 ]
@@ -2058,7 +2122,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "He says sorry, love, and goes and gets his boots, and you go back to mopping a floor that is already done." },
-        { type = "thought_bubble", content = "He apologised. In her block, with her key in her pocket, he apologised." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He apologised. In your block, with your key in your pocket, he apologised." },
     ] },
   ] } },
 ]
@@ -2098,7 +2162,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "You turn the water off and the block is quiet and the outer door is exactly where you left it." },
-        { type = "thought_bubble", content = "Forty-five minutes with the door on the latch. Nobody came. She has decided not to think about whether that is the good outcome." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Forty-five minutes with the door on the latch. Nobody came. You have decided not to think about whether that is the good outcome." },
     ] },
   ] } },
 ]
@@ -2132,7 +2196,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Back across the apron.", config = { destinationType = "specific", locationId = "the_showers", time_progression_minutes = 30, effects = [
   { targetType = "player", trait = "trade", op = "add", value = 4, clamp = true },
-  { targetType = "player", trait = "count", op = "subtract", value = 5, clamp = true },
+  { targetType = "player", trait = "count", op = "add", value = -5, clamp = true },
   { targetType = "player", trait = "money", op = "add", value = 9, clamp = false },
 ] } }
 
@@ -2202,6 +2266,10 @@ show_when_locked = true
 text       = "Guess what is in there."
 targetType = "node"
 nodeId     = "rung_stock_what_is_in_there.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Stand in the eleven feet."
@@ -2216,7 +2284,7 @@ text       = "Bring somebody back here."
 targetType = "node"
 nodeId     = "rung_stock_bring_him.base"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "trade", operator = "gte", value = 55 },
+  { type = "trait", subject = "player", trait_key = "trade", operator = "gte", value = 35 },
 ] }
 show_when_locked = true
 
@@ -2253,7 +2321,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Push the empties out.", config = { destinationType = "specific", locationId = "the_stock_room", time_progression_minutes = 40, effects = [
-  { targetType = "player", trait = "energy", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -3, clamp = true },
 ] } }
 
 
@@ -2277,7 +2345,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Come out.", config = { destinationType = "specific", locationId = "the_stock_room", time_progression_minutes = 25, effects = [
-  { targetType = "player", trait = "energy", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -2302,7 +2370,7 @@ blocks = [
         { type = "paragraph", content = "The recorder is nine feet away pointed at nothing. Whoever fitted this hasp stood exactly where you are standing and worked out the same eleven feet you worked out on your second night." },
     ] },
     { advance_text = "Leave it.", blocks = [
-        { type = "thought_bubble", content = "He owns the shop, the van and the gravel, and there is one door on this site he felt the need to put his own lock on." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He owns the shop, the van and the gravel, and there is one door on this site he felt the need to put his own lock on." },
     ] },
   ] } },
 ]
@@ -2335,7 +2403,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "You pull the leggings up and face the cages up and go back out to a shop that has been open the whole time." },
-        { type = "thought_bubble", content = "Twice a night, most nights. It has stopped being a thing she discovered and started being part of the shift." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Twice a night, most nights. It has stopped being a thing you discovered and started being part of the shift." },
     ] },
   ] } },
 ]
@@ -2377,13 +2445,13 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "He goes back out through the shop and buys a coffee on the way past, which he pays for, which goes through the till." },
-        { type = "thought_bubble", content = "Twenty-five pounds. The coffee was two-forty and only the coffee will ever have existed." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Twenty-five pounds. The coffee was two-forty and only the coffee will ever have existed." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Face the cages up.", config = { destinationType = "specific", locationId = "the_stock_room", time_progression_minutes = 45, effects = [
   { targetType = "player", trait = "trade", op = "add", value = 4, clamp = true },
-  { targetType = "player", trait = "count", op = "subtract", value = 8, clamp = true },
+  { targetType = "player", trait = "count", op = "add", value = -8, clamp = true },
   { targetType = "player", trait = "money", op = "add", value = 25, clamp = false },
 ] } }
 
@@ -2401,7 +2469,7 @@ id   = "base"
 name = "Behind the padlock"
 blocks = [
   { type = "paragraph", content = "The hasp comes off the frame with the screws still in it. The door goes in about a foot and stops against something on the floor, and the light from the corridor gets in as far as a stack of boxes and the corner of a mattress." },
-  { type = "thought_bubble", content = "A mattress. In a room he put his own lock on, on a site with a caravan he rents to her for forty-five pounds a week." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "A mattress. In a room he put his own lock on, on a site with a caravan he rents you for forty-five pounds a week." },
 ]
 exit_block = { type = "location", text = "Shut it.", config = { destinationType = "specific", locationId = "the_stock_room", time_progression_minutes = 10 } }
 
@@ -2456,6 +2524,10 @@ nodeId     = "rung_forecourt_bins.base"
 text       = "Stand under the mast and work out what it sees."
 targetType = "node"
 nodeId     = "rung_forecourt_mast.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Answer the hatch in what you slept in."
@@ -2538,7 +2610,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Take the bags round the back.", config = { destinationType = "specific", locationId = "the_forecourt", time_progression_minutes = 30, effects = [
-  { targetType = "player", trait = "energy", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -3, clamp = true },
 ] } }
 
 
@@ -2560,7 +2632,7 @@ blocks = [
         { type = "paragraph", content = "Behind you is the apron, the shower block, the lorry park and the tyre bay. Forty feet of open ground you cross six times a night on your own. Not one head is pointed at any of it." },
     ] },
     { advance_text = "Do the arithmetic.", blocks = [
-        { type = "thought_bubble", content = "They insured the diesel. Nobody has ever been asked to insure the person who walks out to the block at three." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "They insured the diesel. Nobody has ever been asked to insure the person who walks out to the block at three." },
     ] },
   ] } },
 ]
@@ -2622,7 +2694,7 @@ blocks = [
         { type = "paragraph", content = "You stop under the second island and stand there, and pull the vest straight over your tits, and let whoever is awake in that park have as long as they want with your nipples through it." },
     ] },
     { advance_text = "Go on.", blocks = [
-        { type = "thought_bubble", content = "Bev walks the wall. Bev has walked the wall for eleven years and there is not a single thing wrong with the wall." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Bev walks the wall. Bev has walked the wall for eleven years and there is not a single thing wrong with the wall." },
     ] },
   ] } },
 ]
@@ -2661,7 +2733,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "You pull the coat round and go back in through the side door and put the kettle on." },
-        { type = "thought_bubble", content = "Not one of them will ever say anything. That is the arrangement out here and she has stopped needing it to be otherwise." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Not one of them will ever say anything. That is the arrangement out here and you have stopped needing it to be otherwise." },
     ] },
   ] } },
 ]
@@ -2716,6 +2788,10 @@ nodeId     = "rung_park_rows.base"
 text       = "Pick up what gets thrown out of the windows."
 targetType = "node"
 nodeId     = "rung_park_litter.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Listen to channel nineteen."
@@ -2784,7 +2860,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Head back.", config = { destinationType = "specific", locationId = "the_lorry_park", time_progression_minutes = 25, effects = [
-  { targetType = "player", trait = "energy", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -2808,7 +2884,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Bag it and go back.", config = { destinationType = "specific", locationId = "the_lorry_park", time_progression_minutes = 30, effects = [
-  { targetType = "player", trait = "energy", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -2830,7 +2906,7 @@ blocks = [
         { type = "paragraph", content = "And then the shop comes up. Not by name. Somebody asks if the one with the blue canopy is worth stopping at and somebody else says it is now, and neither of them says anything more specific than that." },
     ] },
     { advance_text = "Turn it off.", blocks = [
-        { type = "thought_bubble", content = "It is now. Two words on a radio she is not supposed to be listening to, and she will be thinking about them at four." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "It is now. Two words on a radio you are not supposed to be listening to, and you will be thinking about them at four." },
     ] },
   ] } },
 ]
@@ -2862,7 +2938,7 @@ blocks = [
         { type = "paragraph", content = "Nobody says anything. Nobody ever says anything. Your clit is aching against the seam and your cunt is soaked and eleven men are pretending to be asleep." },
     ] },
     { advance_text = "Walk on.", blocks = [
-        { type = "thought_bubble", content = "By Sunday one of them will have said something about this on nineteen, and she will be in the shop when they do." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "By Sunday one of them will have said something about this on nineteen, and you will be in the shop when they do." },
     ] },
   ] } },
 ]
@@ -2901,7 +2977,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "You put yourself back together and walk back up toward the lamp, and behind you a cab door does not open." },
-        { type = "thought_bubble", content = "The whole park is hers now, both ends of it, which is what the meter said it would mean and is not at all what she had pictured." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The whole park is yours now, both ends of it. That is what the meter said it would mean and not at all what you pictured." },
     ] },
   ] } },
 ]
@@ -2948,7 +3024,7 @@ id   = "base"
 name = "The last bay before the lamp gives out"
 blocks = [
   { type = "video", props = { pool_dir = "sex/bay9_cab_t5", pool = 5, description = "The sleeper bunk inside a lorry cab at night with a curtain half drawn.", search_queries = ["lorry sleeper cab bunk night curtain interior", "truck cab sleeper bed dim night interior"] } },
-  { type = "paragraph", content = "Nine is the last bay before the lamp gives out, which is why nobody books it and why the agency lads end up in it. The cab is somebody's whole flat: a bunk the width of a door, a curtain behind the seats, a kettle wedged on the engine hump." },
+  { type = "paragraph", content = "Nine is the last bay before the lamp gives out, which is why nobody books it and why the agency lads end up in it. The cab is somebody's whole flat: a bunk the width of a door, a curtain behind the seats, a kettle wedged on the engine hump. There is a locker over the bunk with a padlock nobody uses." },
   { type = "paragraph", content = "There is a window you have to knock on twice, because the first knock never gets heard over the night heater." },
 ]
 
@@ -2984,16 +3060,28 @@ show_when_locked = true
 text       = "Look at the mark on the glass."
 targetType = "node"
 nodeId     = "rung_bay9_window_line.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Listen to the night heater."
 targetType = "node"
 nodeId     = "rung_bay9_night_heater.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Look at the footwell."
 targetType = "node"
 nodeId     = "rung_bay9_footwell.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Set the terms for the rest of the month."
@@ -3048,7 +3136,7 @@ blocks = [
         { type = "paragraph", content = "The ones who are in bay nine are in bay nine because they cannot afford to be anywhere else, and it takes about a fortnight before they stop pretending otherwise to you specifically." },
     ] },
     { advance_text = "Think about the next one.", blocks = [
-        { type = "thought_bubble", content = "There will be a next one. The bay does not change. Only the height of the mark on the glass changes." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "There will be a next one. The bay does not change. Only the height of the mark on the glass changes." },
     ] },
   ] } },
 ]
@@ -3075,7 +3163,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Take the cup back.", config = { destinationType = "specific", locationId = "bay_9", time_progression_minutes = 20, effects = [
-  { targetType = "player", trait = "money", op = "subtract", value = 1, clamp = false },
+  { targetType = "player", trait = "money", op = "add", value = -1, clamp = false },
 ] } }
 
 
@@ -3111,7 +3199,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "You find the vest by feel. The window has gone opaque all the way round and outside it there is a lorry park and a lit shop with nobody in it." },
-        { type = "thought_bubble", content = "Every cab in this park rocks on its springs. Anybody awake in the four nearest bays knows precisely what bay nine has been doing." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Every cab in this park rocks on its springs. Anybody awake in the four nearest bays knows precisely what bay nine has been doing." },
     ] },
   ] } },
 ]
@@ -3142,7 +3230,7 @@ blocks = [
         { type = "paragraph", content = "He is on agency money and sleeping in a cab, and twelve pounds is most of a day's food, and it is also the difference between a fortnight of being a vehicle and a fortnight of being a person." },
     ] },
     { advance_text = "Shake on it.", blocks = [
-        { type = "thought_bubble", content = "The fourth time she has made this deal on this gravel. She got better at it every time and she is not sure that is a good sentence." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The fourth time you have made this deal on this gravel. You got better at it every time and you are not sure that is a good sentence." },
     ] },
   ] } },
 ]
@@ -3208,26 +3296,46 @@ costs      = [ { trait = "money", value = 35 } ]
 text       = "Look down the pit."
 targetType = "node"
 nodeId     = "rung_tyre_pit.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Look at the rope across the pit."
 targetType = "node"
 nodeId     = "rung_tyre_the_rope.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Listen to the compressor."
 targetType = "node"
 nodeId     = "rung_tyre_compressor.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Check the isolator."
 targetType = "node"
 nodeId     = "rung_tyre_the_isolator.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 35 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Take a cash job off him."
 targetType = "node"
 nodeId     = "rung_tyre_cash_job.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "trade", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 
 [[canvases]]
@@ -3272,7 +3380,7 @@ blocks = [
         { type = "paragraph", content = "The other answer is that from the caravan, and from the apron, and from the side door of the shop, a foot of light under a roller door tells you somebody else on this plot is awake." },
     ] },
     { advance_text = "Leave it.", blocks = [
-        { type = "thought_bubble", content = "Neither of them has ever mentioned the door. She checks for it six times a night and she knows exactly what she is checking for." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Neither of them has ever mentioned the door. You check for it six times a night and you know exactly what you are checking for." },
     ] },
   ] } },
 ]
@@ -3329,7 +3437,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Get back to the site.", config = { destinationType = "specific", locationId = "the_tyre_bay", time_progression_minutes = 90, effects = [
   { targetType = "player", trait = "money", op = "add", value = 15, clamp = false },
-  { targetType = "player", trait = "energy", op = "subtract", value = 14, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -14, clamp = true },
 ] } }
 
 
@@ -3366,7 +3474,7 @@ id   = "base"
 name = "Daylight, which is bedtime"
 blocks = [
   { type = "video", props = { pool_dir = "sex/static_bed_t5", pool = 4, description = "A woman lying on a bed in a small dim caravan with daylight behind a thin curtain.", search_queries = ["woman on bed small caravan daylight through curtain", "static caravan interior bed dim daylight window"] } },
-  { type = "paragraph", content = "Everything is eleven feet from everything else. A fan heater that smells like burning if anything is hung on it, a two-ring hob, a table that folds, and a bed at the end where the cold comes off the window." },
+  { type = "paragraph", content = "Everything is eleven feet from everything else. A fan heater that smells like burning if anything is hung on it, a two-ring hob, a table that folds, and a bed at the end where the cold comes off the window. The hob runs off a calor bottle in a cage outside. One cold tap, over a sink the size of a hand." },
   { type = "paragraph", content = "Two bags under the bed hold everything you own. The curtain is thin enough that going to sleep at seven in the morning is a decision rather than an event." },
 ]
 
@@ -3398,11 +3506,19 @@ nodeId     = "rung_static_solo.base"
 text       = "Wipe the window down."
 targetType = "node"
 nodeId     = "rung_static_cold.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Stand at the window for a signal."
 targetType = "node"
 nodeId     = "rung_static_phone.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Wash in the van."
@@ -3437,7 +3553,7 @@ blocks = [
         { type = "paragraph", content = "The compressor goes at half eight. A car door at nine. Someone doing a delivery at eleven with a tail lift that beeps forty times. You sleep through every bit of it after the first fortnight." },
     ] },
     { advance_text = "Wake up at four.", blocks = [
-        { type = "thought_bubble", content = "Awake at four in the afternoon in a caravan, six hours until the shift, and the whole world went and did a day without her again." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Awake at four in the afternoon in a caravan, six hours until the shift, and the whole world went and did a day without you again." },
     ] },
   ] } },
 ]
@@ -3524,7 +3640,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "You lie there in the cold with the daylight coming through the curtain and the compressor going again outside." },
-        { type = "thought_bubble", content = "The van moves on its blocks. Everything on this site is a thin box on somebody else's ground and every one of them broadcasts." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The van moves on its blocks. Everything on this site is a thin box on somebody else's ground and every one of them broadcasts." },
     ] },
   ] } },
 ]
@@ -3561,7 +3677,7 @@ blocks = [
         { type = "paragraph", content = "You come with your face turned to the window and your hand working your clit and your cunt tight on three fingers, and you moan out loud in a van with eleven-millimetre walls." },
     ] },
     { advance_text = "After.", blocks = [
-        { type = "thought_bubble", content = "He did not look up. Four hours from now she has to walk past that door to get to work." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He did not look up. Four hours from now you have to walk past that door to get to work." },
     ] },
   ] } },
 ]
@@ -3620,7 +3736,7 @@ blocks = [
         { type = "paragraph", content = "Now the roll and the drawer say the same thing and nothing will ever be asked. It cost you eight pounds of a hundred and five to make a question not exist." },
     ] },
     { advance_text = "Think about which way this runs.", blocks = [
-        { type = "thought_bubble", content = "The same drawer, the same roll, the same eight pounds. One direction is a woman covering a mistake and the other is the thing Bev has been doing since two thousand and nine." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The same drawer, the same roll, the same eight pounds. One direction is a woman covering a mistake and the other is the thing Bev has been doing since two thousand and nine." },
     ] },
   ] } },
 ]
@@ -3671,7 +3787,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Mop it.", config = { destinationType = "specific", locationId = "the_stock_room", time_progression_minutes = 20, effects = [
-  { targetType = "player", trait = "energy", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -3713,7 +3829,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "Ten to six. The fleece goes back on and the hot counter goes on at half five and the roll comes off the printer." },
-        { type = "thought_bubble", content = "Eight hours of a site that is hers, and then a pair of headlights slows at the junction and it stops being, and that is the part nothing on any meter measures." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Eight hours of a site that is yours. Then a pair of headlights slows at the junction and it stops being. Nothing on any meter measures that part." },
     ] },
   ] } },
 ]
@@ -3755,7 +3871,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "The vest goes back on at twenty past five for the crates and the hot counter. Nothing anywhere records one minute of it." },
-        { type = "thought_bubble", content = "Men book this stop now. Not the fuel and not the food — the stop, on the nights she is on, and the CB says so out loud." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Men book this stop now. Not the fuel and not the food — the stop, on the nights you are on, and the CB says so out loud." },
     ] },
   ] } },
 ]
@@ -3821,26 +3937,46 @@ nodeId     = "rung_day_daylight.base"
 text       = "Read the laminated card properly."
 targetType = "node"
 nodeId     = "rung_shop_the_laminated_card.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Go through the list of regulars."
 targetType = "node"
 nodeId     = "rung_shop_regulars_list.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Go through the lost property box."
 targetType = "node"
 nodeId     = "rung_shop_lost_property.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Look at the ice machine."
 targetType = "node"
 nodeId     = "rung_shop_ice_machine.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Go and stand in the stock room for a minute."
 targetType = "node"
 nodeId     = "rung_day_stock_room.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 35 },
+] }
+show_when_locked = true
 
 
 [[canvases]]
@@ -3864,7 +4000,7 @@ blocks = [
         { type = "paragraph", content = "One pound fifteen, out of a coat with four hundred pounds in the pocket. You have been counting other people's money into that drawer for eleven hours." },
     ] },
     { advance_text = "Go.", blocks = [
-        { type = "thought_bubble", content = "Twelve hours ago she owned this room. Now she is number five in a queue in it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Twelve hours ago you owned this room. Now you are number five in a queue in it." },
     ] },
   ] } },
 ]
@@ -3892,7 +4028,7 @@ blocks = [
         { type = "paragraph", content = "Till, queue, hot counter timer, the lad on the shop floor, and the delivery driver at the back door. Five things. She is not sweating." },
     ] },
     { advance_text = "Take the lesson.", blocks = [
-        { type = "thought_bubble", content = "Forty a week for eleven years out of a shop she runs better than anyone will ever notice." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Forty a week for eleven years out of a shop she runs better than anyone will ever notice." },
     ] },
   ] } },
 ]
@@ -3947,7 +4083,7 @@ blocks = [
         { type = "paragraph", content = "Still there. In daylight, with two people in the room, it is a black combination lock on a door. It does not look like anything at all." },
     ] },
     { advance_text = "Go.", blocks = [
-        { type = "thought_bubble", content = "Nothing back here is different. The only thing that was ever different was that at three in the morning she is the only one in it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Nothing back here is different. The only thing that was ever different is that at three in the morning you are the only one in it." },
     ] },
   ] } },
 ]
@@ -4012,11 +4148,19 @@ nodeId     = "rung_showers_towels.base"
 text       = "Put the sign back up, or don't."
 targetType = "node"
 nodeId     = "rung_showers_sign.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Stand under the extractor."
 targetType = "node"
 nodeId     = "rung_showers_extractor.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Wipe the bench down."
@@ -4027,6 +4171,10 @@ nodeId     = "rung_showers_bench.base"
 text       = "Wait out the last one."
 targetType = "node"
 nodeId     = "rung_dawn_last_one.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Take one of them into four."
@@ -4059,12 +4207,12 @@ blocks = [
         { type = "paragraph", content = "By twenty to six it is empty and steaming and the floor is under an inch of water at the far end. You mop it toward the middle." },
     ] },
     { advance_text = "Lock up.", blocks = [
-        { type = "thought_bubble", content = "Nine of them clean and on the road, out of one flat-roofed brick box, run by her." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Nine of them clean and on the road, out of one flat-roofed brick box, run by you." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Back for the handover.", config = { destinationType = "specific", locationId = "the_showers", time_progression_minutes = 60, effects = [
-  { targetType = "player", trait = "energy", op = "subtract", value = 5, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -5, clamp = true },
 ] } }
 
 
@@ -4093,7 +4241,7 @@ blocks = [
         { type = "paragraph", content = "Squeegee, towel, token, next. Nine men through in ninety minutes with your nipples through a wet vest the entire time and every single one of them says thanks." },
     ] },
     { advance_text = "After.", blocks = [
-        { type = "thought_bubble", content = "Not one of them touched her and not one of them looked away. That is a room she built out of a mop and a token tub." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Not one of them touched you and not one of them looked away. That is a room you built out of a mop and a token tub." },
     ] },
   ] } },
 ]
@@ -4135,7 +4283,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "He goes out first. You give it two minutes and come out with the mop." },
-        { type = "thought_bubble", content = "Nobody in that corridor said a word about it. Nobody in that corridor is going to." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Nobody in that corridor said a word about it. Nobody in that corridor is going to." },
     ] },
   ] } },
 ]
@@ -4200,16 +4348,28 @@ nodeId     = "rung_park_bay_one.base"
 text       = "Check the fence post."
 targetType = "node"
 nodeId     = "rung_park_fence_post.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Walk it in the frost."
 targetType = "node"
 nodeId     = "rung_park_frost.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Work out who is new."
 targetType = "node"
 nodeId     = "rung_park_who_is_new.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Go in between two cabs."
@@ -4251,7 +4411,7 @@ blocks = [
         { type = "paragraph", content = "By ten to five there are two. The gravel looks bigger. There is a rectangle of dry ground where each one was and the frost has not got to it yet." },
     ] },
     { advance_text = "Finish the coffee.", blocks = [
-        { type = "thought_bubble", content = "Every one of them is somewhere else by tonight. She will be stood exactly here." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Every one of them is somewhere else by tonight. You will be stood exactly here." },
     ] },
   ] } },
 ]
@@ -4281,7 +4441,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Take the bag round.", config = { destinationType = "specific", locationId = "the_lorry_park", time_progression_minutes = 30, effects = [
-  { targetType = "player", trait = "energy", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -3, clamp = true },
 ] } }
 
 
@@ -4314,7 +4474,7 @@ blocks = [
     ] },
     { advance_text = "Get down.", blocks = [
         { type = "paragraph", content = "He is off the gravel four minutes later. You are back behind the counter for the bakery van." },
-        { type = "thought_bubble", content = "Aberdeen tonight, Dover Thursday. He will think about this at about eleven o'clock somewhere near Scotch Corner." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Aberdeen tonight, Dover Thursday. He will think about this at about eleven o'clock somewhere near Scotch Corner." },
     ] },
   ] } },
 ]
@@ -4384,16 +4544,28 @@ nodeId     = "rung_static_the_forty_five.base"
 text       = "Time how long it would take to leave."
 targetType = "node"
 nodeId     = "rung_static_two_bags_again.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Listen to the gravel."
 targetType = "node"
 nodeId     = "rung_static_gravel_sound.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Watch the tyre bay light from the window."
 targetType = "node"
 nodeId     = "rung_evening_bay_light.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 
 [[canvases]]
@@ -4414,7 +4586,7 @@ blocks = [
         { type = "paragraph", content = "The white one is thinner. You know exactly how thin, because you have stood at the glass in it, and you know what the strip lights do to it." },
     ] },
     { advance_text = "Notice the decision.", blocks = [
-        { type = "thought_bubble", content = "Half eight in the evening in a cold caravan, picking a vest for a road that will not see her until three." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Half eight in the evening in a cold caravan, picking a vest for a road that will not see you until three." },
     ] },
   ] } },
 ]
@@ -4448,7 +4620,7 @@ blocks = [
         { type = "paragraph", content = "You work your clit until your legs go and you have to put a hand on the door, cunt clenching, tits in a foot of mirror, moaning at yourself in a cold van at nine at night." },
     ] },
     { advance_text = "After.", blocks = [
-        { type = "thought_bubble", content = "She has no idea what she looks like from the road. She has been performing it for a month at a mirror that will not show her." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "You have no idea what you look like from the road. You have been performing it for a month at a mirror that will not show you." },
     ] },
   ] } },
 ]
@@ -4478,7 +4650,7 @@ blocks = [
         { type = "paragraph", content = "Two hours. The heater ticks. Outside there is gravel and a road and eventually a shop that will be bright and warm and yours." },
     ] },
     { advance_text = "Wait for ten.", blocks = [
-        { type = "thought_bubble", content = "The best part of her day starts at twenty-two hundred hours and she has stopped pretending that is a normal sentence." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The best part of your day starts at twenty-two hundred hours and you have stopped pretending that is a normal sentence." },
     ] },
   ] } },
 ]
@@ -4559,21 +4731,37 @@ nodeId     = "rung_tyre_day_tea.base"
 text       = "Look at the bunk in daylight."
 targetType = "node"
 nodeId     = "rung_tyre_day_bunk.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Be there when the phone goes."
 targetType = "node"
 nodeId     = "rung_tyre_night_callout.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Look at the name on the grabber."
 targetType = "node"
 nodeId     = "rung_tyre_the_grabber.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Look at the four shirts."
 targetType = "node"
 nodeId     = "rung_tyre_the_four_shirts.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 35 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Look at the calendar."
@@ -4602,7 +4790,7 @@ blocks = [
         { type = "paragraph", content = "The gun goes on and then the bar comes out, and he does all ten by hand with a torque wrench, in a star, and checks two of them twice." },
     ] },
     { advance_text = "Understand the last bit.", blocks = [
-        { type = "thought_bubble", content = "Nine seconds off with a gun and four minutes back on by hand. Nobody watching would know which half was the job." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Nine seconds off with a gun and four minutes back on by hand. Nobody watching would know which half was the job." },
     ] },
   ] } },
 ]
@@ -4660,7 +4848,7 @@ blocks = [
         { type = "paragraph", content = "Nothing on it. Four years and there is nothing on the wall at all, and the calendar out front is four years old, which is either a joke or a date." },
     ] },
     { advance_text = "Come back out.", blocks = [
-        { type = "thought_bubble", content = "Her two bags take eleven minutes to pack. He has a rail and an iron and a bed he built square." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Your two bags take eleven minutes to pack. He has a rail and an iron and a bed he built square." },
     ] },
   ] } },
 ]
@@ -4746,7 +4934,7 @@ blocks = [
         { type = "paragraph", content = "So anything anybody wants to look at has to be asked for inside a fortnight. After that it is gone whether or not anybody meant it to be." },
     ] },
     { advance_text = "Leave it running.", blocks = [
-        { type = "thought_bubble", content = "Fourteen days and a clock two days out. That is the entire security of this building and she now knows it better than the man who owns it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Fourteen days and a clock two days out. That is the entire security of this building and you know it better than the man who owns it." },
     ] },
   ] } },
 ]
@@ -4807,7 +4995,7 @@ id   = "base"
 name = "Before she walks in"
 blocks = [
   { type = "video", props = { pool_dir = "sex/stock_dawn_t4", pool = 3, description = "A dim stock room in the early hours with roll cages part unloaded.", search_queries = ["stock room early morning cages part unloaded dim", "back room storage dawn shelves boxes"] } },
-  { type = "paragraph", content = "The shelves have to be right for six. That is the one thing on this shift that somebody will actually notice." },
+  { type = "paragraph", content = "The shelves have to be right for six. That is the one thing on this shift that somebody will actually notice. The back door has a hasp on it. A wastage sheet hangs on a clipboard beside it." },
   { type = "paragraph", content = "The cold store hums. The recorder sits on its shelf with the green light going. The eleven feet are the eleven feet." },
 ]
 
@@ -4815,7 +5003,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text       = "Do the restock."
+text       = "Get the shelves right for six."
 targetType = "node"
 nodeId     = "rung_stock_restock.base"
 
@@ -4828,11 +5016,19 @@ nodeId     = "rung_stock_recorder.base"
 text       = "Push the back door open."
 targetType = "node"
 nodeId     = "rung_stock_back_door.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Get up for the first Tuesday."
 targetType = "node"
 nodeId     = "rung_stock_the_first_tuesday.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 35 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Put it on the wastage sheet instead."
@@ -4847,6 +5043,10 @@ show_when_locked = true
 text       = "Look at the hasp."
 targetType = "node"
 nodeId     = "rung_stock_the_hasp.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Try the cold store door again."
@@ -4881,12 +5081,12 @@ blocks = [
         { type = "paragraph", content = "Flat, stacked, wheeled to the roller door for Tuesday. The floor comes back. The room looks like a room again." },
     ] },
     { advance_text = "Stand back and check it.", blocks = [
-        { type = "thought_bubble", content = "The only part of eight hours that leaves a mark anybody else will see, and it is a shelf of crisps facing the right way." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The only part of eight hours that leaves a mark anybody else will see, and it is a shelf of crisps facing the right way." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Out to the counter.", config = { destinationType = "specific", locationId = "the_stock_room", time_progression_minutes = 45, effects = [
-  { targetType = "player", trait = "energy", op = "subtract", value = 4, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -4, clamp = true },
 ] } }
 
 
@@ -4945,6 +5145,10 @@ nodeId     = "rung_weekend_drunks.base"
 text       = "Look at the snib."
 targetType = "node"
 nodeId     = "rung_shop_the_snib.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Get through a dead Saturday."
@@ -4955,6 +5159,10 @@ nodeId     = "rung_shop_quiet_saturday.base"
 text       = "Talk to the taxi drivers."
 targetType = "node"
 nodeId     = "rung_weekend_taxis.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Get through it with the fleece off."
@@ -5005,12 +5213,12 @@ blocks = [
         { type = "paragraph", content = "By one it is done. The bin by the door is full, there are two hundred quid more in the drawer than a Tuesday, and the shop looks like a shop that has been used." },
     ] },
     { advance_text = "Get your breath.", blocks = [
-        { type = "thought_bubble", content = "Ninety minutes of being a shop assistant. It is the only part of the week she does the job she was actually hired for." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Ninety minutes of being a shop assistant. The only part of the week you do the job you were actually hired for." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Wipe the counter down.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 60, effects = [
-  { targetType = "player", trait = "energy", op = "subtract", value = 5, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -5, clamp = true },
 ] } }
 
 
@@ -5038,7 +5246,7 @@ blocks = [
         { type = "paragraph", content = "You watch it off the forecourt and onto the road before you go back behind the counter and put your hands flat on it for a second." },
     ] },
     { advance_text = "After.", blocks = [
-        { type = "thought_bubble", content = "There is a camera on the till, one on the door and one on aisle two. Not one of them is pointed at the end of the counter where he came round." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "There is a camera on the till, one on the door and one on aisle two. Not one of them is pointed at the end of the counter where he came round." },
     ] },
   ] } },
 ]
@@ -5068,7 +5276,7 @@ blocks = [
         { type = "paragraph", content = "One of them says the worst part is not the drunks, it is that at five in the morning there is nobody to tell about any of it. The other one says nothing at all, for a while." },
     ] },
     { advance_text = "Watch them go.", blocks = [
-        { type = "thought_bubble", content = "Three night-workers agreeing about five in the morning, in a shop, at one, and then all three going back to it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Three night-workers agreeing about five in the morning, in a shop, at one, and then all three going back to it." },
     ] },
   ] } },
 ]
@@ -5100,7 +5308,7 @@ blocks = [
         { type = "paragraph", content = "One in the morning, empty shop, and you are stood behind the counter with your cunt wet and your nipples aching and two hundred quid more in the drawer." },
     ] },
     { advance_text = "After.", blocks = [
-        { type = "thought_bubble", content = "Not one of those forty will ever come back. That turns out to matter less than she expected it to." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Not one of those forty will ever come back. That turns out to matter less than you expected." },
     ] },
   ] } },
 ]
@@ -5145,14 +5353,14 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "The snib comes off. The sign goes round. He buys a coffee on the way out, which he pays for." },
-        { type = "thought_bubble", content = "Four minutes of a locked door on a Friday, and the roll will say one coffee at ten past two." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Four minutes of a locked door on a Friday, and the roll will say one coffee at ten past two." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Take the snib off.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 50, effects = [
   { targetType = "player", trait = "nights", op = "add", value = 3, clamp = true },
   { targetType = "player", trait = "arousal", op = "add", value = 12, clamp = true },
-  { targetType = "player", trait = "count", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "count", op = "add", value = -3, clamp = true },
 ] } }
 
 
@@ -5182,12 +5390,12 @@ blocks = [
         { type = "paragraph", content = "You wash the worst of the bin ones in the sink and put them through the dryer at a pound a go, out of your own coat, so that nine men have a towel at four in the morning." },
     ] },
     { advance_text = "Say nothing about it.", blocks = [
-        { type = "thought_bubble", content = "Two pounds a week out of a hundred and five, so that a laundry contract nobody reads keeps looking like it works." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Two pounds a week out of a hundred and five, so that a laundry contract nobody reads keeps looking like it works." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Stack the shelf.", config = { destinationType = "specific", locationId = "the_showers", time_progression_minutes = 30, effects = [
-  { targetType = "player", trait = "energy", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -3, clamp = true },
 ] } }
 
 
@@ -5209,7 +5417,7 @@ blocks = [
         { type = "paragraph", content = "The lock is broken, not the shower. The cubicle works perfectly. The sign is about a bolt, and the bolt is the only interesting thing in this building." },
     ] },
     { advance_text = "Put it back on the shelf.", blocks = [
-        { type = "thought_bubble", content = "Eleven weeks and forty seconds. Nobody has asked and she has an answer ready anyway, which tells her what she needs to know." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Eleven weeks and forty seconds. Nobody has asked and you have an answer ready anyway, which tells you what you need to know." },
     ] },
   ] } },
 ]
@@ -5267,7 +5475,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "You mop the length of it and lock the outer door and are behind the counter at four minutes to six." },
-        { type = "thought_bubble", content = "Ninety minutes of nine men and eleven minutes of nobody, and the eleven minutes is the part she runs the morning around." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Ninety minutes of nine men and eleven minutes of nobody. The eleven minutes is the part you run the morning around." },
     ] },
   ] } },
 ]
@@ -5329,7 +5537,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Inside.", config = { destinationType = "specific", locationId = "the_lorry_park", time_progression_minutes = 20, effects = [
-  { targetType = "player", trait = "energy", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -3, clamp = true },
 ] } }
 
 
@@ -5354,7 +5562,7 @@ blocks = [
         { type = "paragraph", content = "New ones come into the shop within twenty minutes to find out what there is. Regulars come in when they want something, which might be Thursday." },
     ] },
     { advance_text = "Decide what to do about it.", blocks = [
-        { type = "thought_bubble", content = "Three tells, all of them learned by standing in a lit box watching a dark park, and none of them anything she could put on a form." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Three tells, all of them learned by standing in a lit box watching a dark park, and none of them anything you could put on a form." },
     ] },
   ] } },
 ]
@@ -5391,7 +5599,7 @@ blocks = [
         { type = "paragraph", content = "You come with your teeth in your own sleeve, cunt gripping your fingers, clit raw under your thumb and your tits bare on the cold, four feet from a man asleep and four feet from another one." },
     ] },
     { advance_text = "After.", blocks = [
-        { type = "thought_bubble", content = "There is nowhere on this plot that is actually private. She has stopped looking for one and started picking which audience." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "There is nowhere on this plot that is actually private. You have stopped looking for one and started picking which audience." },
     ] },
   ] } },
 ]
@@ -5450,11 +5658,19 @@ nodeId     = "rung_forecourt_bakery.base"
 text       = "Look at the hatch from outside."
 targetType = "node"
 nodeId     = "rung_forecourt_night_hatch.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Check the side door behind you."
 targetType = "node"
 nodeId     = "rung_forecourt_side_door.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Do the last walk round the pumps."
@@ -5465,16 +5681,28 @@ nodeId     = "rung_forecourt_last_walk.base"
 text       = "Count what goes past."
 targetType = "node"
 nodeId     = "rung_forecourt_the_road.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Watch the junction for brake lights."
 targetType = "node"
 nodeId     = "rung_forecourt_the_junction.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 35 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Stand under it in the rain."
 targetType = "node"
 nodeId     = "rung_forecourt_rain.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 
 [[canvases]]
@@ -5498,7 +5726,7 @@ blocks = [
         { type = "paragraph", content = "The glass has stopped being a mirror on the outside. You can see straight through it now, into an empty lit room with a till in it." },
     ] },
     { advance_text = "Understand what just ended.", blocks = [
-        { type = "thought_bubble", content = "Eight hours of being the only lit thing on a black road, over, not at six but at twenty to five, quietly, by the sky." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Eight hours of being the only lit thing on a black road, over, not at six but at twenty to five, quietly, by the sky." },
     ] },
   ] } },
 ]
@@ -5529,7 +5757,7 @@ blocks = [
         { type = "paragraph", content = "He does eleven more stops before eight. He says the next one is a school. Then he gets in the van and is gone and the forecourt is empty again." },
     ] },
     { advance_text = "Take the crates in.", blocks = [
-        { type = "thought_bubble", content = "Six years of two people missing each other by four minutes, on the same forecourt, at the same time, every single weekday." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Six years of two people missing each other by four minutes, on the same forecourt, at the same time, every single weekday." },
     ] },
   ] } },
 ]
@@ -5557,12 +5785,12 @@ blocks = [
         { type = "paragraph", content = "From out here it is a lit box with a woman-shaped absence in it. The hot counter is on and the shelves are faced and the roll is folded under the drawer." },
     ] },
     { advance_text = "Go in.", blocks = [
-        { type = "thought_bubble", content = "Everything on this forecourt is exactly as she found it at ten. That is the entire measurable output of eight hours." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Everything on this forecourt is exactly as you found it at ten. That is the entire measurable output of eight hours." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Back behind the counter.", config = { destinationType = "specific", locationId = "the_forecourt", time_progression_minutes = 25, effects = [
-  { targetType = "player", trait = "energy", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -5616,12 +5844,12 @@ blocks = [
         { type = "paragraph", content = "So the fan heater is free and the cooking is not, which is why you are warm and eating pasta, and why you have never once used the oven." },
     ] },
     { advance_text = "Get in.", blocks = [
-        { type = "thought_bubble", content = "Forty-five a week for a box she cannot heat the way she would choose to, on gravel belonging to the man she owes six thousand pounds." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Forty-five a week for a box you cannot heat the way you would choose to, on gravel belonging to the man you owe six thousand pounds." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Under the blanket.", config = { destinationType = "specific", locationId = "her_static", time_progression_minutes = 25, effects = [
-  { targetType = "player", trait = "energy", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -5646,7 +5874,7 @@ blocks = [
         { type = "paragraph", content = "There is no answer that is nine words long. There is one that is about four hundred and it would have to start with where you are living." },
     ] },
     { advance_text = "Put the phone on the side.", blocks = [
-        { type = "thought_bubble", content = "Eleven weeks. At some point not answering stopped being a decision she was making and started being the situation." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Eleven weeks. At some point not answering stopped being a decision you were making and started being the situation." },
     ] },
   ] } },
 ]
@@ -5680,7 +5908,7 @@ blocks = [
         { type = "paragraph", content = "You work your clit fast in a phone box of a shower with the water going cold on your back, cunt tight on two fingers and your nipples hard enough to hurt, and it takes about ninety seconds." },
     ] },
     { advance_text = "After.", blocks = [
-        { type = "thought_bubble", content = "She could have crossed forty feet of gravel and had all the hot water on the site. She washed in the cold in her own van instead, and did not examine why." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "You could have crossed forty feet of gravel and had all the hot water on the site. You washed in the cold in your own van instead, and did not examine why." },
     ] },
   ] } },
 ]
@@ -5714,7 +5942,7 @@ blocks = [
         { type = "paragraph", content = "You have started leaving it on. Not for the content. For the fact that if it makes a noise there is somebody within a mile who is awake." },
     ] },
     { advance_text = "Notice the difference.", blocks = [
-        { type = "thought_bubble", content = "The London station is company. The handheld is a perimeter. She uses one of them and listens to the other." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The London station is company. The handheld is a perimeter. You use one of them and listen to the other." },
     ] },
   ] } },
 ]
@@ -5742,7 +5970,7 @@ blocks = [
         { type = "paragraph", content = "Because there is no procedure. There is a procedure for wastage and a procedure for cash but there is no procedure for a wedding ring in a crisp box." },
     ] },
     { advance_text = "Put the lid back on.", blocks = [
-        { type = "thought_bubble", content = "Everything anybody has ever lost at this stop, in one box, under a till, for eleven years." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Everything anybody has ever lost at this stop, in one box, under a till, for eleven years." },
     ] },
   ] } },
 ]
@@ -5799,7 +6027,7 @@ blocks = [
         { type = "paragraph", content = "Four of them. You work your clit on the lip through all four and your cunt is soaked by the last one and none of them looks below your shoulders once." },
     ] },
     { advance_text = "After.", blocks = [
-        { type = "thought_bubble", content = "Eleven inches of chipboard and a lip on it. Nothing in this building was designed for any of what she does with it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Eleven inches of chipboard and a lip on it. Nothing in this building was designed for any of what you do with it." },
     ] },
   ] } },
 ]
@@ -5859,7 +6087,7 @@ blocks = [
         { type = "paragraph", content = "When he goes out on a callout he kills it at the isolator. The first time you noticed the silence you were awake in about four seconds." },
     ] },
     { advance_text = "Understand what you have learned.", blocks = [
-        { type = "thought_bubble", content = "Eleven weeks and she can tell from a compressor whether she is the only person on this plot." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Eleven weeks and you can tell from a compressor whether you are the only person on this plot." },
     ] },
   ] } },
 ]
@@ -5884,7 +6112,7 @@ blocks = [
         { type = "paragraph", content = "There is nothing written in any of them. Not one. Four years of a calendar being kept accurate and never once being written on." },
     ] },
     { advance_text = "Don't ask about it.", blocks = [
-        { type = "thought_bubble", content = "She has decided not to ask, and she has decided that on purpose, and she could not fully say why." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "You have decided not to ask. You decided it on purpose, and you could not fully say why." },
     ] },
   ] } },
 ]
@@ -5995,7 +6223,7 @@ blocks = [
         { type = "paragraph", content = "For a fortnight you treated it as a chore. Somebody wants a shower, you go and unlock it, you come back. Four minutes, at a jog, twice a shift." },
     ] },
     { advance_text = "Think about now.", blocks = [
-        { type = "thought_bubble", content = "It is not a chore and it never was one. It is the only thing on this site that is hers to give, and it took her a fortnight to notice she was holding it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "It is not a chore and it never was one. It is the only thing on this site that is yours to give, and it took you a fortnight to notice you were holding it." },
     ] },
   ] } },
 ]
@@ -6033,7 +6261,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "It stops when one of them says he is turning in. The park goes quiet and you walk back across it with the radio still in your pocket." },
-        { type = "thought_bubble", content = "Being looked at is a thing that happens to her. Being talked about on a channel she is not supposed to have is a thing she went and got." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Being looked at is a thing that happens to you. Being talked about on a channel you are not supposed to have is a thing you went and got." },
     ] },
   ] } },
 ]
@@ -6089,7 +6317,7 @@ blocks = [
         { type = "paragraph", content = "The same somebody did not cost a camera on the apron, or a second person, or a lock on the side door that shuts by itself." },
     ] },
     { advance_text = "Push the drawer in and out.", blocks = [
-        { type = "thought_bubble", content = "A safety measure that stops at the wall of the shop, and eight hours of ground behind it that nobody costed at all." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "A safety measure that stops at the wall of the shop, and eight hours of ground behind it that nobody costed at all." },
     ] },
   ] } },
 ]
@@ -6203,11 +6431,19 @@ nodeId     = "rung_showers_the_far_end.base"
 text       = "Read the drain."
 targetType = "node"
 nodeId     = "rung_showers_the_drain_again.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Turn the lights off in it."
 targetType = "node"
 nodeId     = "rung_showers_the_quiet_hour.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Sit on the warm end of the bench."
@@ -6236,7 +6472,7 @@ blocks = [
         { type = "paragraph", content = "You cannot hear it from in here. That was true on the first night too, and on the first night it was the reason you never sat down." },
     ] },
     { advance_text = "Get up at ten to four.", blocks = [
-        { type = "thought_bubble", content = "Twenty minutes off a shift nobody is measuring, in a room she holds the key to, and it took eleven weeks to work out she was allowed." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Twenty minutes off a shift nobody is measuring, in a room you hold the key to, and it took eleven weeks to work out you were allowed." },
     ] },
   ] } },
 ]
@@ -6266,7 +6502,7 @@ blocks = [
         { type = "paragraph", content = "You have stayed for a coffee eleven mornings running. There is a bed four minutes away and you are sat in a plastic chair watching somebody else run a shop." },
     ] },
     { advance_text = "Go before it gets embarrassing.", blocks = [
-        { type = "thought_bubble", content = "It is not the shop. It is that at six in the morning the caravan is a cold box and this is a room with people in it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "It is not the shop. It is that at six in the morning the caravan is a cold box and this is a room with people in it." },
     ] },
   ] } },
 ]
@@ -6294,7 +6530,7 @@ blocks = [
         { type = "paragraph", content = "They are not spread across the week. They are stacked on the nights you are on, which you noticed a fortnight ago and have not written down anywhere." },
     ] },
     { advance_text = "Put the roll in your pocket.", blocks = [
-        { type = "thought_bubble", content = "Nineteen names on the back of a till roll. It is a customer book for a business that does not exist and she is the whole of it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Nineteen names on the back of a till roll. A customer book for a business that does not exist, and you are the whole of it." },
     ] },
   ] } },
 ]
@@ -6327,7 +6563,7 @@ blocks = [
         { type = "paragraph", content = "Six hours, four customers, and eleven pounds forty in the drawer. The busy nights are exhausting. The empty ones are the ones that get at you." },
     ] },
     { advance_text = "After.", blocks = [
-        { type = "thought_bubble", content = "She is paid seventy pounds either way. Only one of the two versions makes the seventy pounds feel like a wage." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "You are paid seventy pounds either way. Only one of the two versions makes the seventy pounds feel like a wage." },
     ] },
   ] } },
 ]
@@ -6357,7 +6593,7 @@ blocks = [
         { type = "paragraph", content = "Key, lights, and the extractor is already going because it never stops. He says cheers, love, and goes in, and you walk back on your own." },
     ] },
     { advance_text = "Think about the ninety seconds.", blocks = [
-        { type = "thought_bubble", content = "There is a version of that walk where she does not have the key, and in that version he stands at the shop door in the dark and she is behind glass." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "There is a version of that walk where you do not have the key. In that version he stands at the shop door in the dark and you are behind glass." },
     ] },
   ] } },
 ]
@@ -6387,13 +6623,13 @@ blocks = [
         { type = "paragraph", content = "One out of the tub for bay nine. One through the till at four fifty for the man who leaned on the counter and asked if you got lonely." },
     ] },
     { advance_text = "Put the tub back.", blocks = [
-        { type = "thought_bubble", content = "Four pounds fifty either way to the company. The difference is entirely hers and none of it is on any roll." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Four pounds fifty either way to the company. The difference is entirely yours and none of it is on any roll." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Back to the counter.", config = { destinationType = "specific", locationId = "the_showers", time_progression_minutes = 20, effects = [
   { targetType = "player", trait = "trade", op = "add", value = 2, clamp = true },
-  { targetType = "player", trait = "count", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "count", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -6445,7 +6681,7 @@ blocks = [
         { type = "paragraph", content = "The van goes out under the canopy and left onto the road, and the compressor goes off at the isolator, and the plot has one person on it again." },
     ] },
     { advance_text = "Notice the silence.", blocks = [
-        { type = "thought_bubble", content = "Ninety minutes of the compressor not running. That is the sound of being the only person for forty miles, and it took eleven weeks to learn to hear it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Ninety minutes of the compressor not running. That is the sound of being the only person for forty miles, and it took eleven weeks to learn to hear it." },
     ] },
   ] } },
 ]
@@ -6475,7 +6711,7 @@ blocks = [
         { type = "paragraph", content = "Eleven minutes to pack and thirty weeks to be able to. Those two numbers have not moved toward each other since the day she got here." },
     ] },
     { advance_text = "Put the bags back.", blocks = [
-        { type = "thought_bubble", content = "The packing is not a plan. It is a thing she does so that leaving stays a fact about the world rather than a thing she used to be able to do." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The packing is not a plan. It is a thing you do so that leaving stays a fact about the world rather than a thing you used to be able to do." },
     ] },
   ] } },
 ]
@@ -6532,7 +6768,7 @@ blocks = [
         { type = "paragraph", content = "No paint round it. No filler. No attempt to make it look like it came with the building. Whoever did it did not mind it being obvious, only that it was shut." },
     ] },
     { advance_text = "Leave it.", blocks = [
-        { type = "thought_bubble", content = "A careful man in a hurry, on his own, with a drill, in the one part of his own building nothing watches." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "A careful man in a hurry, on his own, with a drill, in the one part of his own building nothing watches." },
     ] },
   ] } },
 ]
@@ -6595,21 +6831,37 @@ nodeId     = "rung_bay9_left_behind.base"
 text       = "Look at the curtain."
 targetType = "node"
 nodeId     = "rung_bay9_the_curtain.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Look in the locker over the bed."
 targetType = "node"
 nodeId     = "rung_bay9_the_locker.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Stand at the wheel arch in the hour before."
 targetType = "node"
 nodeId     = "rung_bay9_the_hour_before.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Look at the empty bay."
 targetType = "node"
 nodeId     = "rung_bay9_the_next_one.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "trade", operator = "gte", value = 15 },
+] }
+show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Get up in it one more time before he goes."
@@ -6642,7 +6894,7 @@ blocks = [
         { type = "paragraph", content = "Everybody kicks them, which does nothing, and about half of them then actually look at the inner sidewalls with a torch, which does everything." },
     ] },
     { advance_text = "Notice what you know.", blocks = [
-        { type = "thought_bubble", content = "Eleven weeks ago she could not have told a coupling from a mudflap. She can now tell a tired man from a careless one at forty feet in the dark." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Eleven weeks ago you could not have told a coupling from a mudflap. You can now tell a tired man from a careless one at forty feet in the dark." },
     ] },
   ] } },
 ]
@@ -6728,7 +6980,7 @@ blocks = [
     ] },
     { advance_text = "Get down.", blocks = [
         { type = "paragraph", content = "He is off the gravel six minutes later. You are behind the counter for the bakery van." },
-        { type = "thought_bubble", content = "The bay will have somebody else in it inside a fortnight and the twenty minutes of card time will be worth exactly the same to him." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The bay will have somebody else in it inside a fortnight and the twenty minutes of card time will be worth exactly the same to him." },
     ] },
   ] } },
 ]
@@ -6759,7 +7011,7 @@ blocks = [
         { type = "paragraph", content = "Standing on a forecourt at half one in the morning counting cars. Nobody asked for the number. There is nowhere to put the number." },
     ] },
     { advance_text = "Go in.", blocks = [
-        { type = "thought_bubble", content = "Six an hour. Every one of them a person going somewhere, at speed, past a lit box with her in it, without slowing down." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Six an hour. Every one of them a person going somewhere, at speed, past a lit box with you in it, without slowing down." },
     ] },
   ] } },
 ]
@@ -6784,7 +7036,7 @@ blocks = [
         { type = "paragraph", content = "About one in nine. Everything else goes straight past. You have got very good at telling from the way the lights move whether it is going to be one." },
     ] },
     { advance_text = "Think about the eleven seconds.", blocks = [
-        { type = "thought_bubble", content = "Eleven seconds of warning, six times a night. That is the whole security system and she built it herself out of watching brake lights." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Eleven seconds of warning, six times a night. That is the whole security system and you built it yourself out of watching brake lights." },
     ] },
   ] } },
 ]
@@ -6812,7 +7064,7 @@ blocks = [
         { type = "paragraph", content = "You have been on this plot eleven weeks and you have never once seen either of them on him. Not once. They hang there and they get ironed." },
     ] },
     { advance_text = "Say nothing about it.", blocks = [
-        { type = "thought_bubble", content = "Two shirts kept ready, four years, in a shed, for something that has not come up." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Two shirts kept ready, four years, in a shed, for something that has not come up." },
     ] },
   ] } },
 ]
@@ -6842,13 +7094,13 @@ blocks = [
         { type = "paragraph", content = "The stock goes in the bag and the bag goes in the bin, because the one thing that would undo eleven years of this is a full bin that does not match a sheet." },
     ] },
     { advance_text = "Sign it.", blocks = [
-        { type = "thought_bubble", content = "Eight pounds off a till roll is a number somebody notices. Six pounds on a wastage sheet was always going to be there." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Eight pounds off a till roll is a number somebody notices. Six pounds on a wastage sheet was always going to be there." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Hang the clipboard up.", config = { destinationType = "specific", locationId = "the_stock_room", time_progression_minutes = 25, effects = [
   { targetType = "player", trait = "trade", op = "add", value = 3, clamp = true },
-  { targetType = "player", trait = "count", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "count", op = "add", value = -3, clamp = true },
   { targetType = "player", trait = "money", op = "add", value = 6, clamp = false },
 ] } }
 
@@ -6877,7 +7129,7 @@ blocks = [
         { type = "paragraph", content = "Denny's Thursdays went from four in the morning to half two in the same fortnight. The drain knew about the job change before he mentioned it." },
     ] },
     { advance_text = "Put the trap back.", blocks = [
-        { type = "thought_bubble", content = "Nobody has ever thanked anybody for this and it is the most detailed record anybody on this site keeps of anything." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Nobody has ever thanked anybody for this and it is the most detailed record anybody on this site keeps of anything." },
     ] },
   ] } },
 ]
@@ -6905,7 +7157,7 @@ blocks = [
         { type = "paragraph", content = "Warm, wet, loud with a fan, and completely black. It is the only place on this plot you cannot see the shop from, or the canopy, or the road." },
     ] },
     { advance_text = "Put the light back on.", blocks = [
-        { type = "thought_bubble", content = "Two and a half hours a night when the most contested building on this site is not wanted by anybody. It is the only thing on the plot that gets a rest." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Two and a half hours a night when the most contested building on this site is not wanted by anybody. It is the only thing on the plot that gets a rest." },
     ] },
   ] } },
 ]
@@ -6936,7 +7188,7 @@ blocks = [
         { type = "paragraph", content = "Eleven hundred pounds against six thousand paid out for one woman's problem and a month's wages to another one who had already quit." },
     ] },
     { advance_text = "Look at the dark end again.", blocks = [
-        { type = "thought_bubble", content = "The nine bays past the last lamp are not a design. They are eleven hundred pounds nobody spent, and everything that happens down there happens in the gap." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The nine bays past the last lamp are not a design. They are eleven hundred pounds nobody spent, and everything that happens down there happens in the gap." },
     ] },
   ] } },
 ]
@@ -6967,7 +7219,7 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_denny" }, content = "She's on days now. Has been since twenty-nineteen. I still get a ring on a Thursday about nowt." },
     ] },
     { advance_text = "Let it go.", blocks = [
-        { type = "thought_bubble", content = "That is where the radio comes from. Not chivalry and not ownership. Six years of a phone call about nothing, on a Thursday." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "That is where the radio comes from. Not chivalry and not ownership. Six years of a phone call about nothing, on a Thursday." },
     ] },
   ] } },
 ]
@@ -7000,7 +7252,7 @@ blocks = [
         { type = "paragraph", content = "You ring the fifth cable through. He puts it in the door pocket of the cab with the other four and says the same thing about bay six on his way out." },
     ] },
     { advance_text = "After.", blocks = [
-        { type = "thought_bubble", content = "Twelve hundred pounds a year of deliberate waste, so that a building stays open, so that there is somewhere to stop." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Twelve hundred pounds a year of deliberate waste, so that a building stays open, so that there is somewhere to stop." },
     ] },
   ] } },
 ]
@@ -7033,7 +7285,7 @@ blocks = [
         { type = "paragraph", content = "He says forty years of transport cafes and you sit where you can see the till, and that he has never thought about it as a decision, and then sits quietly with having just described one." },
     ] },
     { advance_text = "Leave him to the paper.", blocks = [
-        { type = "thought_bubble", content = "A year of the same chair, chosen for a reason he could not have told you until she asked, in a shop where she picked her own corner for reasons she could." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "A year of the same chair, chosen for a reason he could not have told you until she asked, in a shop where she picked her own corner for reasons she could." },
     ] },
   ] } },
 ]
@@ -7102,7 +7354,7 @@ blocks = [
         { type = "paragraph", content = "He says he knows. Then he says that he had worked out that it would be somebody else and had not worked out that it would be the same arrangement." },
     ] },
     { advance_text = "After.", blocks = [
-        { type = "thought_bubble", content = "Four occupants. The mattress, the mark on the glass at four heights, and the terms set in the first fortnight by whoever is standing on the gravel." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Four occupants. The mattress, the mark on the glass at four heights, and the terms set in the first fortnight by whoever is standing on the gravel." },
     ] },
   ] } },
 ]
@@ -7136,7 +7388,7 @@ blocks = [
         { type = "paragraph", content = "Nine cabs in this park and every one of them has one. It is what separates a man asleep from a car park, and it is a sheet on a wire, and everybody treats it as a wall." },
     ] },
     { advance_text = "Pull it across.", blocks = [
-        { type = "thought_bubble", content = "Everybody on this site agrees to treat a curtain as a wall. It is the only rule out here that has never once been tested." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Everybody on this site agrees to treat a curtain as a wall. It is the only rule out here that has never once been tested." },
     ] },
   ] } },
 ]
@@ -7164,7 +7416,7 @@ blocks = [
         { type = "paragraph", content = "Two bags under a bed, a shoebox, and a mirror screwed to a door at the wrong height by somebody who is not you." },
     ] },
     { advance_text = "Shut it.", blocks = [
-        { type = "thought_bubble", content = "Everybody on this plot lives out of the smallest container that will hold it, and every one of them would tell you it is temporary." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Everybody on this plot lives out of the smallest container that will hold it, and every one of them would tell you it is temporary." },
     ] },
   ] } },
 ]
@@ -7200,7 +7452,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "You do the rest of the sweep. At ten past four the sidelights come on and he starts the walkround." },
-        { type = "thought_bubble", content = "He will buy a coffee at half four and say the thing about not having any money on him." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He will buy a coffee at half four and say the thing about not having any money on him." },
     ] },
   ] } },
 ]
@@ -7234,7 +7486,7 @@ blocks = [
         { type = "paragraph", content = "The mattress. The mark on the glass, at a new height. The two-knock rule, which the heater enforces regardless of who is behind the curtain. Twelve pounds a week." },
     ] },
     { advance_text = "Go back in.", blocks = [
-        { type = "thought_bubble", content = "Four of them so far and she has been better at it every time, and she has stopped pretending that is only a good thing." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Four of them so far and you have been better at it every time, and you have stopped pretending that is only a good thing." },
     ] },
   ] } },
 ]
@@ -7267,13 +7519,13 @@ blocks = [
         { type = "paragraph", content = "Two days out. It has been two days out since before you started and every timestamp on that drive is wrong by the same amount and nobody has ever noticed." },
     ] },
     { advance_text = "Leave it running.", blocks = [
-        { type = "thought_bubble", content = "One grey box, one green light, and it is doing both of those jobs badly at the same time." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "One grey box, one green light, and it is doing both of those jobs badly at the same time." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Get on with the stock.", config = { destinationType = "specific", locationId = "the_stock_room", time_progression_minutes = 20, effects = [
   { targetType = "player", trait = "trade", op = "add", value = 2, clamp = true },
-  { targetType = "player", trait = "count", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "count", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -7301,7 +7553,7 @@ blocks = [
         { type = "paragraph", content = "There is a wear line on the concrete in front of it in a quarter circle, the shape a door makes over years of being opened. Somebody opens it. Not often, and not never." },
     ] },
     { advance_text = "Give up for tonight.", blocks = [
-        { type = "thought_bubble", content = "Whatever is behind it, he drove four screws in at eight degrees off square, on his own, in the one part of his own building nothing watches." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Whatever is behind it, he drove four screws in at eight degrees off square, on his own, in the one part of his own building nothing watches." },
     ] },
   ] } },
 ]
@@ -7329,7 +7581,7 @@ blocks = [
         { type = "paragraph", content = "Two or three callouts a week, ninety minutes each. Call it four hours where there is genuinely nobody on this plot but her, and the isolator is how she knows." },
     ] },
     { advance_text = "Leave it.", blocks = [
-        { type = "thought_bubble", content = "Eleven weeks ago the compressor was a noise. Now it is the only instrument on this site that tells her whether she is alone." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Eleven weeks ago the compressor was a noise. Now it is the only instrument on this site that tells you whether you are alone." },
     ] },
   ] } },
 ]
@@ -7359,7 +7611,7 @@ blocks = [
         { type = "paragraph", content = "Every night. Four minutes, on a floor that will be wrong again by six, in a building nobody inspects, for men who will never know it was done." },
     ] },
     { advance_text = "Stand the mop up.", blocks = [
-        { type = "thought_bubble", content = "There is a version of this job where she stops doing the far end. She has thought about it and she has not done it and she is not entirely sure why." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "There is a version of this job where you stop doing the far end. You have thought about it, you have not done it, and you are not entirely sure why." },
     ] },
   ] } },
 ]
@@ -7387,7 +7639,7 @@ blocks = [
         { type = "paragraph", content = "A three-hundred-litre immersion running permanently is real money on somebody's electric, and it is on Gerry's meter, and nobody has ever mentioned it." },
     ] },
     { advance_text = "Compare it to the caravan.", blocks = [
-        { type = "thought_bubble", content = "Unlimited hot water forty feet away on his meter, and a phone-box shower on her gas bottle, and she pays forty-five a week to stand the van on his gravel." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Unlimited hot water forty feet away on his meter, and a phone-box shower on your gas bottle, and you pay forty-five a week to stand the van on his gravel." },
     ] },
   ] } },
 ]
@@ -7418,7 +7670,7 @@ blocks = [
         { type = "paragraph", content = "In the event of fire, assemble at the far end of the lorry park. Past the last lamp. In the dark. That is the designated place of safety on this site." },
     ] },
     { advance_text = "Put it back on its hook.", blocks = [
-        { type = "thought_bubble", content = "The safest place on this plot according to head office is the exact patch of gravel that nothing on the site can see." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The safest place on this plot according to head office is the exact patch of gravel that nothing on the site can see." },
     ] },
   ] } },
 ]
@@ -7449,7 +7701,7 @@ blocks = [
         { type = "paragraph", content = "The second one. By a distance. Eleven weeks ago the whole of this was a job that came with a caravan and a debt she had not asked anybody to pay." },
     ] },
     { advance_text = "Get ready for the handover.", blocks = [
-        { type = "thought_bubble", content = "Nineteen weeks to go on a number that has not moved, and about four hours until it is somebody else's shop again." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Nineteen weeks to go on a number that has not moved, and about four hours until it is somebody else's shop again." },
     ] },
   ] } },
 ]
@@ -7479,7 +7731,7 @@ blocks = [
         { type = "paragraph", content = "It is on the door frame at hand height, on the inside, reachable by anybody stood at the door, which is every single person who comes into this shop." },
     ] },
     { advance_text = "Leave it off.", blocks = [
-        { type = "thought_bubble", content = "One catch, and which of the two things it is depends entirely on whose hand is nearest it, and hers is behind a counter eleven feet away." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "One catch, and which of the two things it is depends entirely on whose hand is nearest it, and yours is behind a counter eleven feet away." },
     ] },
   ] } },
 ]
@@ -7510,7 +7762,7 @@ blocks = [
         { type = "paragraph", content = "Ossie asked to be charged for the bay and was told no. She was charged forty-five from the first week without any conversation about it at all." },
     ] },
     { advance_text = "Put the pen down.", blocks = [
-        { type = "thought_bubble", content = "Forty-five a week is a fair price. It is also the thing that makes the six thousand impossible to walk away from, and both of those are true and only one of them is an accident." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Forty-five a week is a fair price. It is also the thing that makes the six thousand impossible to walk away from, and both of those are true and only one of them is an accident." },
     ] },
   ] } },
 ]
@@ -7540,7 +7792,7 @@ blocks = [
         { type = "paragraph", content = "He says he has thought about taking it off with thinners about once a year for four years and has never got round to it, which is exactly the answer you expected." },
     ] },
     { advance_text = "Take it out to the park.", blocks = [
-        { type = "thought_bubble", content = "A man who marked his tools against thieves who do not exist here, four years ago, and has left the evidence up ever since." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "A man who marked his tools against thieves who do not exist here, four years ago, and has left the evidence up ever since." },
     ] },
   ] } },
 ]
@@ -7573,7 +7825,7 @@ blocks = [
         { type = "paragraph", content = "You get up for the next one and stand at the end of aisle two with a coffee, off shift, in your own time, watching a man scan a gantry for forty minutes." },
     ] },
     { advance_text = "Watch him leave.", blocks = [
-        { type = "thought_bubble", content = "Forty minutes a month is the entire external check on this building, and she now knows exactly what it looks like, and she got up at eleven to find out." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Forty minutes a month is the entire external check on this building. You know exactly what it looks like now, and you got up at eleven to find out." },
     ] },
   ] } },
 ]
@@ -7707,7 +7959,7 @@ blocks = [
         { type = "paragraph", content = "You come with three fingers in your cunt and your clit raw under your thumb, moaning at a caravan ceiling with the whole van moving on its blocks." },
     ] },
     { advance_text = "After.", blocks = [
-        { type = "thought_bubble", content = "Eight hours of it and none of it touched her, and this is where all of it lands, every morning, four minutes' walk from where it happened." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Eight hours of it and none of it touched you, and this is where all of it lands, every morning, four minutes' walk from where it happened." },
     ] },
   ] } },
 ]
@@ -7783,7 +8035,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "The compressor cuts in again at about ten to seven and then it is quiet and then there is a kettle." },
-        { type = "thought_bubble", content = "Neither of them will mention it and both of them will make the tea at eight tonight exactly the same way." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Neither of them will mention it and both of them will make the tea at eight tonight exactly the same way." },
     ] },
   ] } },
 ]
@@ -7825,7 +8077,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "He does not say anything clever afterwards. He does not say anything at all for about a minute, which from Denny is an entire speech." },
-        { type = "thought_bubble", content = "By Sunday it will be on nineteen in his words. None of the words will be any of this." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "By Sunday it will be on nineteen in his words. None of the words will be any of this." },
     ] },
   ] } },
 ]
@@ -7943,7 +8195,7 @@ blocks = [
         { type = "paragraph", content = "By the end of the row your nipples ache and your clit is up and you have about eleven minutes before you have to be back at the counter." },
     ] },
     { advance_text = "After.", blocks = [
-        { type = "thought_bubble", content = "Not one of them moved. On a Friday with forty-five hours in front of them and nothing to lose, not one of them moved." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Not one of them moved. On a Friday with forty-five hours in front of them and nothing to lose, not one of them moved." },
     ] },
   ] } },
 ]
@@ -7984,7 +8236,7 @@ blocks = [
         { type = "paragraph", content = "You come stood up on the gravel with your tits out and your clit under your thumb, moaning out loud, and he watches all of it from the step and does not move." },
     ] },
     { advance_text = "After.", blocks = [
-        { type = "thought_bubble", content = "He could have come down. He did not. On this park that turns out to be the rule and she still does not know who wrote it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He could have come down. He did not. On this park that turns out to be the rule and you still do not know who wrote it." },
     ] },
   ] } },
 ]
@@ -8026,7 +8278,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "They both say sorry, which is not what you expected, and one of them offers you his jacket for the walk back." },
-        { type = "thought_bubble", content = "Neither of them will say a word about it on nineteen. Denny would take the channel off them and they know it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Neither of them will say a word about it on nineteen. Denny would take the channel off them and they know it." },
     ] },
   ] } },
 ]
@@ -8068,7 +8320,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "You get the block open at three and stand under it for twenty minutes and then do the counter until six." },
-        { type = "thought_bubble", content = "Nine cabs and one woman and eight hours, and at six Bev's headlights slow at the junction and it stops." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Nine cabs and one woman and eight hours, and at six Bev's headlights slow at the junction and it stops." },
     ] },
   ] } },
 ]
@@ -8117,6 +8369,334 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Try it.", config = { destinationType = "specific", locationId = "the_stock_room", time_progression_minutes = 10, flagEffects = [
   { targetType = "player", flag = "back_room_key", op = "set" },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE WORLD ACTS FIRST — trigger_mode = "random"
+#
+# v0.1 shipped with ZERO of these. After the opening funnel ended, around turn
+# eleven, every single thing that happened was something the player had clicked:
+# 213 triggerless rungs, 30 repeatable hubs, and four canvases that could fire on
+# their own, of which three were the funnel and one was a disabled stub. For a
+# game premised on forty miles of nothing and you the only person awake, nothing
+# ever arriving unbidden was a thematic loss as well as a mechanical one.
+#
+# HOW THE ENGINE RUNS THESE (generators/v2.py:5174-5297, verified):
+#   · rolled on LOCATION ENTRY, after auto-fire canvases are considered
+#   · a hit REPLACES the location page for that entry — an event instead of the menu
+#   · per-location cooldown of 3 further entries after any hit
+#   · `max_triggers_per_day` is enforced at the ACTIVITY level, shared by name
+#   · schedule, conditions and requires_npc all gate them the same as any canvas
+#   · they are excluded from every menu selector, so they never appear as a link
+#
+# One per location, so no room is the only one that never surprises her, and the
+# three that carry heat sit behind the tier that earns them — the world escalates
+# with her rather than opening at full volume on night one.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "event_forecourt_lights_off"
+name        = "Sat with the lights off"
+description = "Random encounter @the_forecourt. A car on the apron that did not come for fuel. No tier gate — this is the baseline fact of the place and it should be available from night one."
+
+[canvases.trigger]
+location      = "the_forecourt"
+trigger_mode  = "random"
+chance        = 0.18
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 4
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Not here for fuel"
+blocks = [
+  { type = "paragraph", content = "There is a car on the second island with its lights off and somebody in it. It did not come up the slip road while you were looking. It is not at a pump." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Watch it from behind the glass.", blocks = [
+        { type = "paragraph", content = "Four minutes. No door, no window, nobody gets out for a coffee. The canopy puts more light on that car than on anything else for forty miles and whoever is in it chose to sit under it." },
+    ] },
+    { advance_text = "Go out and do the pumps anyway.", blocks = [
+        { type = "paragraph", content = "You walk the islands with the clipboard the way you would at any other point in the night. The engine starts when you are two pumps away and it goes out the way it came in." },
+    ] },
+    { advance_text = "Log it.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Nobody is going to ask about that and there is nowhere to write it down. You will remember the shape of the car until about Tuesday." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Go back in.", config = { destinationType = "specific", locationId = "the_forecourt", time_progression_minutes = 10, effects = [
+  { targetType = "player", trait = "stress", op = "add", value = 2, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "event_park_nineteen"
+name        = "Your name on nineteen"
+description = "Random encounter @the_lorry_park, seen >= 15. The CB channel talking about her while she is stood in it. The SEEN tier arriving without being clicked."
+
+[canvases.trigger]
+location      = "the_lorry_park"
+trigger_mode  = "random"
+chance        = 0.20
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 4
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 15 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Channel nineteen"
+blocks = [
+  { type = "paragraph", content = "The handheld goes on your belt halfway down the second row. Not a call. Two of them talking to each other about the stop, and then about the girl on the stop." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Stand still and listen.", blocks = [
+        { type = "paragraph", content = "One of them says you work in a vest with nothing under it and the other one says he has seen it and would like a proper look. Neither of them knows the set is on your belt." },
+    ] },
+    { advance_text = "Work out which cabs they are in.", blocks = [
+        { type = "paragraph", content = "Row two and somewhere down the dark end. You could walk to either of them in ninety seconds and they would both go quiet and neither would ever mention it again." },
+    ] },
+    { advance_text = "Walk the rest of the row.", blocks = [
+        { type = "paragraph", content = "You do the sweep at the same pace you always do, past both of them, in the vest, with the radio still on. The channel does not say anything else for eleven minutes." },
+    ] },
+    { advance_text = "Get to the end of it.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "You could have turned the set off at any point in that. You did not, and you walked past both of them slower than you had to." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Finish the sweep.", config = { destinationType = "specific", locationId = "the_lorry_park", time_progression_minutes = 15, effects = [
+  { targetType = "player", trait = "seen", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 8, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "event_shop_three_oclock"
+name        = "The one who stays at the counter"
+description = "Random encounter @the_shop. A driver who buys one thing and then does not leave. No tier gate."
+
+[canvases.trigger]
+location      = "the_shop"
+trigger_mode  = "random"
+chance        = 0.15
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 4
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Ninety seconds becomes twenty minutes"
+blocks = [
+  { type = "paragraph", content = "He buys a coffee and a Twix and then he does not go. He stands the far side of the counter with the coffee going cold and talks about a weighbridge near Penrith." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Let him talk.", blocks = [
+        { type = "paragraph", content = "He is not chatting you up and he is not going to. He has been on his own in a cab since Sunday and you are the first person he has said a whole sentence to." },
+    ] },
+    { advance_text = "Do the job round him.", blocks = [
+        { type = "paragraph", content = "You wipe down, you do the coffee machine, you serve one other person, and he keeps talking through all of it and does not once ask you a question." },
+    ] },
+    { advance_text = "Let him get to the end.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Twenty minutes and you know his route, his firm and his knee. He does not know your name and he will be back on Thursday." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Watch him go.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 20, effects = [
+  { targetType = "player", trait = "seen", op = "add", value = 1, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "event_showers_already_running"
+name        = "Three is running"
+description = "Random encounter @the_showers, nights >= 15. She comes in for the run and the broken cubicle is going. Carries heat behind the tier that gives her the block."
+
+[canvases.trigger]
+location      = "the_showers"
+trigger_mode  = "random"
+chance        = 0.18
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 4
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The one with the broken lock"
+blocks = [
+  { type = "paragraph", content = "Three is running and the door is not shut, because it does not shut. Steam comes out of the gap at the top and there is a towel over the rail and a pair of boots outside it." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Do the run properly anyway.", blocks = [
+        { type = "paragraph", content = "You check one, two and four with a man four feet away behind a door that will not hold. He knows somebody is in the corridor. The water does not change." },
+    ] },
+    { advance_text = "Stand in the corridor a second longer.", blocks = [
+        { type = "paragraph", content = "The gap runs the whole height of the door. You can see a shoulder, a wet forearm, and one hand flat on the tile, and he is not moving like a man washing." },
+    ] },
+    { advance_text = "Watch him finish.", blocks = [
+        { type = "paragraph", content = "His fist is going on his cock in short strokes with his forehead on the tile, and your hand is inside the waistband of the leggings with two fingers on your clit before you have decided to do it. He comes against the wall." },
+    ] },
+    { advance_text = "Get out before the water stops.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He has no idea. That is the part you are going to keep, and it is the part that is going to be there at four in the morning." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Out into the corridor.", config = { destinationType = "specific", locationId = "the_showers", time_progression_minutes = 15, effects = [
+  { targetType = "player", trait = "arousal", op = "add", value = 12, clamp = true },
+  { targetType = "player", trait = "seen", op = "add", value = 2, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "event_bay9_curtain"
+name        = "The curtain, from outside"
+description = "Random encounter @bay_9, nights >= 15. The bay is not empty and is not asleep. Carries heat."
+
+[canvases.trigger]
+location      = "bay_9"
+trigger_mode  = "random"
+chance        = 0.20
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 4
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Half across"
+blocks = [
+  { type = "paragraph", content = "The curtain is half across and the cab light is on the dim setting, which is not how anybody sleeps. The window is down two inches for the heater. You are stood at the wheel arch." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Do not knock.", blocks = [
+        { type = "paragraph", content = "The gap in the curtain is about four inches and it is at the top, and the bunk is below it, so what you get is a shoulder and an arm and the sound." },
+    ] },
+    { advance_text = "Stay where you are.", blocks = [
+        { type = "paragraph", content = "The arm is going and the breathing is going with it and he says a name that is not yours. His hand comes up and wipes off on the sheet and the light goes out." },
+    ] },
+    { advance_text = "Walk on.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Not your name. You are stood on gravel at half two working out how you feel about a name, and the answer is not the one you expected." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Back onto the gravel.", config = { destinationType = "specific", locationId = "bay_9", time_progression_minutes = 10, effects = [
+  { targetType = "player", trait = "arousal", op = "add", value = 9, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "event_tyre_bay_dark"
+name        = "The gap with no light in it"
+description = "Random encounter @the_tyre_bay. The one instrument on the site that tells her whether she is alone, saying she is."
+
+[canvases.trigger]
+location      = "the_tyre_bay"
+trigger_mode  = "random"
+chance        = 0.16
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 4
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "No light under the door"
+blocks = [
+  { type = "paragraph", content = "The foot of gap along the bottom of the roller door is black. No compressor either. In eleven weeks that has happened twice and both times he was at his sister's." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Work out what it means.", blocks = [
+        { type = "paragraph", content = "It means there is nobody on this plot but you and nine men who are asleep or are not. It also means the van behind the bay has nothing between it and the gravel." },
+    ] },
+    { advance_text = "Check the door anyway.", blocks = [
+        { type = "paragraph", content = "The roller is down as far as it goes and the padlock is on it from the outside, which is the answer. He is not in there. He did not say he was going." },
+    ] },
+    { advance_text = "Go back to the shop.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Eleven weeks of a light you did not know you were using. It is off for one night and you have walked back a different way." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Walk back.", config = { destinationType = "specific", locationId = "the_tyre_bay", time_progression_minutes = 10, effects = [
+  { targetType = "player", trait = "stress", op = "add", value = 3, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "event_stock_room_recorder"
+name        = "The green light"
+description = "Random encounter @the_stock_room. The CCTV recorder, which she has an arrangement with, behaving differently."
+
+[canvases.trigger]
+location      = "the_stock_room"
+trigger_mode  = "random"
+chance        = 0.15
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 4
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Cycling four pictures"
+blocks = [
+  { type = "paragraph", content = "The screen beside the recorder is cycling three pictures instead of four. The fourth is black. It is the one on the shop floor and it has been the one on the shop floor for eleven weeks." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Wait for it to come round again.", blocks = [
+        { type = "paragraph", content = "Forecourt, corridor, stock room, black. Forecourt, corridor, stock room, black. The green record light is on the whole time, which is the part you do not like." },
+    ] },
+    { advance_text = "Work out who would know.", blocks = [
+        { type = "paragraph", content = "Bev does not touch it. Ossie has never been in this room. The engineer comes on a first Tuesday and it is not a first Tuesday, and Gerry has the other key." },
+    ] },
+    { advance_text = "Leave it.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "A camera you have spent eleven weeks staying out of, and the one that has gone dark is the one you were never hiding from." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Get on with the cages.", config = { destinationType = "specific", locationId = "the_stock_room", time_progression_minutes = 10, effects = [
+  { targetType = "player", trait = "stress", op = "add", value = 3, clamp = true },
+] } }
+
+
+[[canvases]]
+id          = "event_static_gravel"
+name        = "Somebody on the gravel"
+description = "Random encounter @her_static. The one place on site that is hers, and it has a thin door."
+
+[canvases.trigger]
+location      = "her_static"
+trigger_mode  = "random"
+chance        = 0.15
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 4
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Four feet from the bed"
+blocks = [
+  { type = "paragraph", content = "Gravel, twice, outside. The bed is at the end of the van and the end of the van is four feet from where whoever that is has just stopped walking." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Do not move.", blocks = [
+        { type = "paragraph", content = "Nothing for about forty seconds. Then gravel again, going away, at the pace of somebody who has come round the back of the bay to have a look and is now going." },
+    ] },
+    { advance_text = "Get up and check.", blocks = [
+        { type = "paragraph", content = "The curtain is thin enough to see a shape through and there is no shape. Nothing on the step. The tyre bay light is on and the roller is down and the whole plot is exactly as it was." },
+    ] },
+    { advance_text = "Get back in.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "It will have been a driver looking for the bay. You have decided that, and the deciding took about four seconds, and you are going to lie here for an hour." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Lie back down.", config = { destinationType = "specific", locationId = "her_static", time_progression_minutes = 20, effects = [
+  { targetType = "player", trait = "stress", op = "add", value = 4, clamp = true },
 ] } }
 
 # ══════════════════════════════════════════════════════════════════
@@ -8249,6 +8829,12 @@ blocks = [
     { advance_text = "Go through the day with her.", blocks = [
         { type = "paragraph", content = "What went, what did not, who was in, what the pumps did. She gives it to you in about ninety seconds in an order that has clearly been the same order for eleven years." },
     ] },
+    { advance_text = "Ask what she means by watch that one.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Blue Scania, bay six. Fine till he's had a drink. After that you'll hear what he did to some girl in Carlisle and how wet she was for it. Serve him and don't laugh." },
+    ] },
+    { advance_text = "Take the note.", blocks = [
+        { type = "paragraph", content = "She is not warning you off him. She is telling you which of the nine will say it out loud. Knowing that is stock control." },
+    ] },
     { advance_text = "Let her go.", blocks = [
         { type = "paragraph", content = "She gets to the door and stops with her hand on it, the way she does, and then does not say whatever it was and goes out to the car instead." },
     ] },
@@ -8279,8 +8865,11 @@ blocks = [
     { advance_text = "Ask about the fortnight ones.", blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "One couldn't do the quiet. The other one got herself in a mess with the park and Gerry sorted it, and I'm not going into what sorted means." },
     ] },
+    { advance_text = "Ask what mess.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Two of them had her in the stock room and half the park knew by Thursday. She'd done nothing wrong. It's just that once they've all pictured it, they don't stop." },
+    ] },
     { advance_text = "Don't push it.", blocks = [
-        { type = "thought_bubble", content = "Herself. The other one was a her, and Bev said Gerry sorted it in exactly the voice she uses for the bins." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Yourself. The other one was a her, and Bev said Gerry sorted it in exactly the voice she uses for the bins." },
     ] },
   ] } },
 ]
@@ -8309,8 +8898,11 @@ blocks = [
     { advance_text = "Ask what he gets out of it.", blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Six grand at two hundred a week is thirty weeks. He's not short of six grand, love. He's short of somebody who can't leave for thirty weeks." },
     ] },
+    { advance_text = "Ask if he wants anything else.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "He's not asked you for anything and he won't. That's the whole trick of him. He'd rather you got there on your own. On your knees on his forecourt, calling it your idea." },
+    ] },
     { advance_text = "Sit with that.", blocks = [
-        { type = "thought_bubble", content = "Thirty weeks. Not one of the four before her lasted thirty weeks except the one who went to Warrington." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Thirty weeks. Not one of the four before you lasted thirty weeks except the one who went to Warrington." },
     ] },
   ] } },
 ]
@@ -8347,9 +8939,58 @@ blocks = [
     ] },
   ] } },
 ]
-exit_block = { type = "location", text = "Take the lesson.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 30, effects = [
+# TIER 3 of her declared ceiling hangs off HERE rather than off a ninth hub choice —
+# the hub is already at eight and gate 20 is a hard cap. The branch inherits the
+# relation >= 40 gate from the hub choice that reaches this rung.
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the lesson."
+targetType = "location"
+locationId = "the_shop"
+time_progression_minutes = 30
+effects = [
   { targetType = "npc", npcId = "npc_bev", trait = "relation", op = "add", value = 5, clamp = true },
   { targetType = "player", trait = "trade", op = "add", value = 3, clamp = true },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "She has still not picked her bag up."
+targetType = "node"
+nodeId     = "rung_bev_days.stock_room"
+
+[[canvases.nodes]]
+id   = "stock_room"
+name = "Eleven feet"
+blocks = [
+  { type = "paragraph", content = "She does not pick her bag up. She walks to the stock-room door instead and holds it open. The shop is empty behind you both and it is four minutes past ten." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Follow her in.", blocks = [
+        { type = "paragraph", content = "The cold store hums. She puts her back to the roll cages, in the eleven feet where nothing in this building can see. She watches you come the last two steps." },
+    ] },
+    { advance_text = "Let her say it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Eleven years of this room on my own. Get your hand up my skirt and don't be careful about it." },
+    ] },
+    { advance_text = "Do it.", blocks = [
+        { type = "paragraph", content = "Tights down to her knees and two fingers in her cunt. Standing, her back against a cage that shifts every time she moves. She is wet before you are properly in. Her thumb finds your wrist and pushes it harder." },
+    ] },
+    { advance_text = "Keep going.", blocks = [
+        { type = "paragraph", content = "Your thumb on her clit. She puts her hand over yours to show you how. She does not close her eyes once. She holds the cage with one hand and your wrist with the other, and comes with her mouth shut." },
+    ] },
+    { advance_text = "Let her get her breath.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Right." },
+        { type = "paragraph", content = "She pulls the tights up, straightens the skirt, and puts the clipboard back on its hook on the way out. Four minutes past ten has become eleven minutes past." },
+    ] },
+    { advance_text = "Watch her go.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Eleven years of that room twice a day and she has never once been late out of it. Tonight she was seven minutes late." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Take the shop.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 15, effects = [
+  { targetType = "npc", npcId = "npc_bev", trait = "relation", op = "add", value = 5, clamp = true },
+  { targetType = "player", trait = "trade", op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = 12, clamp = true },
 ] } }
 
 
@@ -8381,9 +9022,9 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text       = "Go out to the car with the week."
+text       = "Go out to the car with nothing owed."
 targetType = "node"
-nodeId     = "rung_nunn_settle.base"
+nodeId     = "rung_nunn_squared.base"
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Ask him what the six thousand was for."
@@ -8418,7 +9059,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
-text       = "Go out short."
+text       = "Tell him Friday will be short."
 targetType = "node"
 nodeId     = "rung_nunn_short_week.base"
 
@@ -8432,30 +9073,36 @@ conditions = { version = "1.0", logic = "AND", items = [
 show_when_locked = true
 
 
+# ⚠️ NOT THE PAYMENT. `[settings.rent]` takes the 245 at the Friday rollover and this
+#    rung must never narrate handing money over — v0.1 shipped one that did, charging
+#    nothing, and it read as the settle-up while the real one happened elsewhere. This is
+#    the evening after: same car, same window, nothing owed. `cap = 24` so the ungated
+#    rungs carry her to his 20 gate and no further; the climb past it comes from the
+#    content behind that gate.
 [[canvases]]
-id          = "rung_nunn_settle"
-name        = "The week"
-description = "Triggerless rung off Nunn's hub. Ungated — the guidance card points here. The transaction itself, which is also the whole relationship. +3 relation with npc_nunn, 20 min."
+id          = "rung_nunn_squared"
+name        = "Squared"
+description = "Triggerless rung off Nunn's hub. Ungated. The Friday evening AFTER the engine has taken the 245 — the six days of owing nothing, which is the only time he is ever just a man in a car. +3 relation with npc_nunn capped at 24, 20 min."
 
 [[canvases.nodes]]
 id   = "base"
-name = "Two hundred and forty-five"
+name = "Six days"
 blocks = [
-  { type = "paragraph", content = "You go out to the car with it counted. He does not count it again, which took you three weeks to understand: counting it would mean the number was the point." },
+  { type = "paragraph", content = "The money went at midnight. This is the other half of Friday. Same car, same four inches of open window, and nothing owed for another six days." },
   { type = "cascade", props = { beats = [
-    { advance_text = "Hand it through.", blocks = [
-        { type = "paragraph", content = "Through a four-inch gap into a hand with the engine still going. It gets folded once and goes into the inside pocket and a figure goes into the notebook on the passenger seat." },
-    ] },
     { advance_text = "Watch him write.", blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_nunn" }, content = "Two hundred. Forty-five for the van. You're all right." },
+        { type = "paragraph", content = "He puts a figure in the notebook on the passenger seat. He does not show you the page. Eleven names on it, and yours is one line." },
+    ] },
+    { advance_text = "Let him say it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_nunn" }, content = "Six days you don't have to think about it. Then you do." },
     ] },
     { advance_text = "Stand there a second longer than you need to.", blocks = [
-        { type = "paragraph", content = "He puts the window up. He has never once said thanks and he has never once said anything unkind either, and you stand on the forecourt in the cold with the canopy buzzing and eight hours in front of you." },
+        { type = "paragraph", content = "He puts the window up. He has never once said thanks and he has never once said anything unkind either, and you stand on the forecourt in the cold with the canopy buzzing and the whole night still in front of you." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Go back in.", config = { destinationType = "specific", locationId = "the_forecourt", time_progression_minutes = 20, effects = [
-  { targetType = "npc", npcId = "npc_nunn", trait = "relation", op = "add", value = 3, clamp = true },
+  { targetType = "npc", npcId = "npc_nunn", trait = "relation", op = "add", value = 3, clamp = true, cap = 24 },
 ] } }
 
 
@@ -8480,12 +9127,12 @@ blocks = [
         { type = "paragraph", content = "He looks out through the windscreen at the canopy lights for a while, and then he puts the car in gear without putting the window up, which is the closest he has come to answering." },
     ] },
     { advance_text = "Let him go.", blocks = [
-        { type = "thought_bubble", content = "Thirty weeks at two hundred. Bev did that arithmetic out loud and he has never done it out loud once." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Thirty weeks at two hundred. Bev did that arithmetic out loud and he has never done it out loud once." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Watch the car pull off.", config = { destinationType = "specific", locationId = "the_forecourt", time_progression_minutes = 15, effects = [
-  { targetType = "npc", npcId = "npc_nunn", trait = "relation", op = "add", value = 2, clamp = true },
+  { targetType = "npc", npcId = "npc_nunn", trait = "relation", op = "add", value = 2, clamp = true, cap = 24 },
 ] } }
 
 
@@ -8510,12 +9157,12 @@ blocks = [
         { type = "paragraph", content = "You say if there is anything in there that wants moving you can move it, since you are in the stock room six times a night anyway. He says no. He says it fast." },
     ] },
     { advance_text = "Drop it.", blocks = [
-        { type = "thought_bubble", content = "Eleven weeks of a man who has never once been in a hurry, and the word no arrived early." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Eleven weeks of a man who has never once been in a hurry, and the word no arrived early." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Go back inside.", config = { destinationType = "specific", locationId = "the_forecourt", time_progression_minutes = 20, effects = [
-  { targetType = "npc", npcId = "npc_nunn", trait = "relation", op = "add", value = 3, clamp = true },
+  { targetType = "npc", npcId = "npc_nunn", trait = "relation", op = "add", value = 3, clamp = true, cap = 44 },
 ] } }
 
 
@@ -8551,14 +9198,14 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "You get off him and find the leggings and open the door, and the cold comes in. The money is still on the dash. He does not touch it and neither do you." },
-        { type = "thought_bubble", content = "It is still two hundred and forty-five and it is still Friday, and now she does not know what it is." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "It is still two hundred and forty-five and it is still Friday, and now you do not know what it is." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Get out.", config = { destinationType = "specific", locationId = "the_forecourt", time_progression_minutes = 40, effects = [
   { targetType = "npc", npcId = "npc_nunn", trait = "relation", op = "add", value = 5, clamp = true },
   { targetType = "player", trait = "arousal", op = "add", value = 12, clamp = true },
-  { targetType = "player", trait = "count", op = "subtract", value = 4, clamp = true },
+  { targetType = "player", trait = "count", op = "add", value = -4, clamp = true },
 ] } }
 
 
@@ -8692,7 +9339,7 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_ossie" }, content = "No. Never has. I asked him to, first year, so it'd be a proper thing. He said no." },
     ] },
     { advance_text = "Understand what that means.", blocks = [
-        { type = "thought_bubble", content = "Forty-five a week for the van and nothing at all for the bay. Ossie asked to be charged and Gerry would not do it. Nothing on this site is priced by what it costs." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Forty-five a week for the van and nothing at all for the bay. Ossie asked to be charged and Gerry would not do it. Nothing on this site is priced by what it costs." },
     ] },
   ] } },
 ]
@@ -8764,7 +9411,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "You stay. That is the part that is new. It gets light at the bottom of the roller door and neither of you gets up, and at ten past six Bev's headlights come down the road and slow at the junction." },
-        { type = "thought_bubble", content = "Nothing was traded. That is the only time on this site that has happened and she does not have anywhere to put it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Nothing was traded. That is the only time on this site that has happened and you do not have anywhere to put it." },
     ] },
   ] } },
 ]
@@ -8902,7 +9549,7 @@ blocks = [
         { type = "paragraph", content = "And that is the conversation, and it goes on for twenty-five minutes, and by the end of it you know he does Aberdeen and back and that his wife has a dog he does not like and that he will retire in four years." },
     ] },
     { advance_text = "Stay until he goes.", blocks = [
-        { type = "thought_bubble", content = "Twenty-five minutes and he asked her nothing about herself, and it did not once feel like not being asked." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Twenty-five minutes and he asked you nothing about yourself, and it did not once feel like not being asked." },
     ] },
   ] } },
 ]
@@ -8973,7 +9620,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "He folds the paper and puts it in his coat, and at the door he stops and says night, then, exactly the way he says it every week." },
-        { type = "thought_bubble", content = "Four years to retirement and a dog he does not like. He will be here next Tuesday at quarter to one and neither of them will mention any of it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Four years to retirement and a dog he does not like. He will be here next Tuesday at quarter to one and neither of them will mention any of it." },
     ] },
   ] } },
 ]
@@ -9135,7 +9782,7 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_denny" }, content = "She's on nights on her own, mate. She knows about the Penrith one, she's had four of you in this week moaning about it." },
     ] },
     { advance_text = "Stay for the rest of it.", blocks = [
-        { type = "thought_bubble", content = "He said she's on nights on her own like it was a qualification rather than a fact about a lone woman on a dark plot." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He said she's on nights on her own like it was a qualification rather than a fact about a lone woman on a dark plot." },
     ] },
   ] } },
 ]
@@ -9223,7 +9870,7 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_denny" }, content = "Because they'll say what I let them say. That's just how it works out there." },
     ] },
     { advance_text = "Sit with it.", blocks = [
-        { type = "thought_bubble", content = "They will say what he lets them say. Every good thing the park thinks about her is a thing he decided it would think." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "They will say what he lets them say. Every good thing the park thinks about you is a thing he decided it would think." },
     ] },
   ] } },
 ]
@@ -9265,7 +9912,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "You get the fleece off the wing mirror. He does his belt and does not say anything clever, which is the single most surprising thing he has ever done." },
-        { type = "thought_bubble", content = "By Sunday it will be on nineteen in his words, and his words are the only ones this road is going to get." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "By Sunday it will be on nineteen in his words, and his words are the only ones this road is going to get." },
     ] },
   ] } },
 ]
@@ -9382,7 +10029,7 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "There's a Tesco in Kelbrook does the yellow stickers at eight. It's fine. Honestly, it's fine." },
     ] },
     { advance_text = "Let it go for now.", blocks = [
-        { type = "thought_bubble", content = "Twenty-three, four hundred miles from wherever he is from, in a bay nobody books, doing sums about yellow stickers." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Twenty-three, four hundred miles from wherever he is from, in a bay nobody books, doing sums about yellow stickers." },
     ] },
   ] } },
 ]
@@ -9484,7 +10131,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "He says thank you. Not sorry. You tell him that is worse and he laughs, properly, in a cab in bay nine at half three in the morning." },
-        { type = "thought_bubble", content = "Nothing was priced. The agency pays him on the twenty-eighth and moves him on at the end of the month and neither of them has said that out loud." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Nothing was priced. The agency pays him on the twenty-eighth and moves him on at the end of the month and neither of them has said that out loud." },
     ] },
   ] } },
 ]
@@ -9524,7 +10171,7 @@ blocks = [
         { type = "paragraph", content = "She is not cutting you in. There is nothing to cut you into. She is telling you how to do the thing you were already doing so that it does not end with both of them looked at." },
     ] },
     { advance_text = "Say thank you.", blocks = [
-        { type = "thought_bubble", content = "Eleven years of a woman being careful, handed over at quarter to ten like a float and a set of keys." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Eleven years of a woman being careful, handed over at quarter to ten like a float and a set of keys." },
     ] },
   ] } },
 ]
@@ -9560,6 +10207,9 @@ blocks = [
     { advance_text = "Ask the obvious question.", blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "No. He didn't put a camera on the apron after it either. I've asked him twice." },
     ] },
+    { advance_text = "Ask if it will happen to you.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "You're harder than she was and you've got the key. Doesn't matter. Nine men and one lit box. Every one of them has had a think about your tits by now. That's the job, love." },
+    ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Let her get off.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 25, effects = [
@@ -9592,45 +10242,49 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_nunn" }, content = "Six done, four going, one that never will. It's not a secret, love. It's a book." },
     ] },
     { advance_text = "Work out what you got wrong.", blocks = [
-        { type = "thought_bubble", content = "She had assumed it was a ledger about her. It is a ledger about eleven people, and four of them are still on it, and one of them is never getting off." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "You had assumed it was a ledger about you. It is a ledger about eleven people, four of them still on it, and one of them is never getting off." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Step back from the car.", config = { destinationType = "specific", locationId = "the_forecourt", time_progression_minutes = 20, effects = [
-  { targetType = "npc", npcId = "npc_nunn", trait = "relation", op = "add", value = 3, clamp = true },
+  { targetType = "npc", npcId = "npc_nunn", trait = "relation", op = "add", value = 3, clamp = true, cap = 44 },
 ] } }
 
 
+# ⚠️ NOT THE SHORT PAYMENT EITHER. `RentDay_Short` is the engine's version, with the
+#    grace period and the `terms_changed` flag on it. This is the ASK, made before the
+#    draw: she tells him on the forecourt that Friday is going to be short. Different
+#    transaction, same conversation, and it is the only thing on his hub that costs her.
 [[canvases]]
 id          = "rung_nunn_short_week"
-name        = "A short week"
-description = "Triggerless rung off Nunn's hub. Ungated. The Friday she cannot make the number, handled at the window with the engine running. -3 relation with npc_nunn, +3 stress, 20 min."
+name        = "Telling him first"
+description = "Triggerless rung off Nunn's hub. Ungated. Going out to the car BEFORE the draw to say the week will not make the number — the engine handles what happens when it does not. -3 relation with npc_nunn, +3 stress, 20 min."
 
 [[canvases.nodes]]
 id   = "base"
 name = "Forty short"
 blocks = [
-  { type = "paragraph", content = "Two hundred and five in the coat and two hundred and forty-five owed. There is no version of the walk out to the car that fixes forty pounds." },
+  { type = "paragraph", content = "Two hundred and five in the coat and two hundred and forty-five due at midnight. There is no version of this week that finds another forty pounds by then." },
   { type = "cascade", props = { beats = [
-    { advance_text = "Go out anyway.", blocks = [
-        { type = "paragraph", content = "The alternative is not going out, and the alternative to that is him getting out of the car, and nobody on this site has ever seen him get out of the car on a Friday." },
+    { advance_text = "Go out and say it early.", blocks = [
+        { type = "paragraph", content = "The alternative is letting Friday arrive and saying it then, and the alternative to that is him getting out of the car, and nobody on this site has ever seen him get out of the car on a Friday." },
     ] },
     { advance_text = "Say the number.", blocks = [
         { type = "paragraph", content = "You say two hundred and five and you say why, which is a bottle of gas and two tyres and a bad Tuesday on the roll. He listens to the whole thing." },
     ] },
     { advance_text = "Wait.", blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_nunn" }, content = "Give us the two hundred. Van rent can wait a week. Don't let it be two weeks." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_nunn" }, content = "Bring the two hundred Friday. Van rent can wait a week. Don't let it be two weeks." },
     ] },
     { advance_text = "Understand the shape of it.", blocks = [
         { type = "paragraph", content = "He took the debt and deferred the rent. Not the other way round. The six thousand keeps moving and the thing that can wait is the thing that is his own gravel." },
     ] },
     { advance_text = "Walk back.", blocks = [
-        { type = "thought_bubble", content = "That was a kindness and it was also a man making sure the number that matters did not slip. Both, at once, through a four-inch gap." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "That was a kindness and it was also a man making sure the number that matters did not slip. Both, at once, through a four-inch gap." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Go back in.", config = { destinationType = "specific", locationId = "the_forecourt", time_progression_minutes = 20, effects = [
-  { targetType = "npc", npcId = "npc_nunn", trait = "relation", op = "subtract", value = 3, clamp = true },
+  { targetType = "npc", npcId = "npc_nunn", trait = "relation", op = "add", value = -3, clamp = true },
   { targetType = "player", trait = "stress", op = "add", value = 3, clamp = true },
 ] } }
 
@@ -9692,7 +10346,7 @@ blocks = [
         { type = "paragraph", content = "You tell him the shop is open on a Tuesday in four years and so are you, probably, and he laughs, once, which you have never heard." },
     ] },
     { advance_text = "Let him go at half one.", blocks = [
-        { type = "thought_bubble", content = "A year of nine words and then two hundred at ten past one, and next Tuesday it will be nine again, and that is completely fine." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "A year of nine words and then two hundred at ten past one, and next Tuesday it will be nine again, and that is completely fine." },
     ] },
   ] } },
 ]
@@ -9725,7 +10379,7 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_denny" }, content = "Aye. That's true, that. I'd not thought of it as a thing I was doing to you." },
     ] },
     { advance_text = "Leave it there.", blocks = [
-        { type = "thought_bubble", content = "He is the reason nine men are polite to her and he is also the reason she cannot tell whether they would have been." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He is the reason nine men are polite to you and he is also the reason you cannot tell whether they would have been." },
     ] },
   ] } },
 ]
@@ -9760,13 +10414,13 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "paragraph", content = "He makes you a tea in your own shop with your own machine and does not ask if you are all right, which is the correct decision." },
-        { type = "thought_bubble", content = "He said it every week for eleven weeks so that it would already be true on the night it had to be." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He said it every week for eleven weeks so that it would already be true on the night it had to be." },
     ] },
   ] } },
 ]
 exit_block = { type = "location", text = "Take the snib off.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 30, effects = [
   { targetType = "npc", npcId = "npc_denny", trait = "relation", op = "add", value = 4, clamp = true },
-  { targetType = "player", trait = "stress", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "stress", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -9794,7 +10448,7 @@ blocks = [
         { type = "paragraph", content = "You tell him the twelve pounds a week stops on the first, then, and he says he will pay it anyway, and you tell him not to be daft, and he pays it anyway." },
     ] },
     { advance_text = "After.", blocks = [
-        { type = "thought_bubble", content = "The agency moves him on at the end of the month regardless. Neither of them has said that out loud and both of them have known it for a fortnight." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The agency moves him on at the end of the month regardless. Neither of them has said that out loud and both of them have known it for a fortnight." },
     ] },
   ] } },
 ]
@@ -9826,8 +10480,11 @@ blocks = [
     { advance_text = "Ask if they are any good.", blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "The hatch one's rubbish. The apron one isn't. I'd not have told you which if you'd asked me week one." },
     ] },
+    { advance_text = "Ask what the apron rule is actually for.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Nine of them in a dark field and one of you. Half have already said out loud what they'd do to your cunt. Those aren't the ones. It's the quiet ones." },
+    ] },
     { advance_text = "Understand the handover.", blocks = [
-        { type = "thought_bubble", content = "Eleven years of passing on somebody else's rules for a shift she has never worked, and being honest about it the day she was asked." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Eleven years of passing on somebody else's rules for a shift she has never worked, and being honest about it the day she was asked." },
     ] },
   ] } },
 ]
@@ -9860,7 +10517,7 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "He finished in twenty-two. No, I've not stopped. I've not worked out how to and I've not tried that hard." },
     ] },
     { advance_text = "Let it sit.", blocks = [
-        { type = "thought_bubble", content = "Eleven years, forty a week, inside a range head office already expected, so that a lad from a village with one shop could do three years in Leeds." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Eleven years, forty a week, inside a range head office already expected, so that a lad from a village with one shop could do three years in Leeds." },
     ] },
   ] } },
 ]
@@ -9894,7 +10551,7 @@ blocks = [
     ] },
     { advance_text = "The week after.", blocks = [
         { type = "paragraph", content = "He is on bay four at eleven the following Tuesday. Tyre blowout on the A1 and a night in a hotel in Wetherby, which he mentions in about six words." },
-        { type = "thought_bubble", content = "Six words, a week late, and she had spent seven days with no way on earth to ask." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Six words, a week late, and you had spent seven days with no way on earth to ask." },
     ] },
   ] } },
 ]
@@ -9927,7 +10584,7 @@ blocks = [
         { type = "paragraph", content = "Eleven weeks and three a week out of Warrington and not one of them has been a problem, which is either the four words or luck, and there is no way to tell which." },
     ] },
     { advance_text = "After.", blocks = [
-        { type = "thought_bubble", content = "Everything good about this park might be him and might be the men in it, and she is never going to find out which, and that is its own kind of debt." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Everything good about this park might be him and might be the men in it, and you are never going to find out which, and that is its own kind of debt." },
     ] },
   ] } },
 ]
@@ -9964,7 +10621,7 @@ blocks = [
         { type = "paragraph", content = "It is not a ledger of people who owe him. It is a ledger of what he is owed and what he owes, and the first line has been on the wrong side of it for twenty-eight years." },
     ] },
     { advance_text = "Step back from the car.", blocks = [
-        { type = "thought_bubble", content = "Six thousand pounds and a rubber band, and the first name in the book is somebody he has been carrying since before she was born." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Six thousand pounds and a rubber band, and the first name in the book is somebody he has been carrying since before you were born." },
     ] },
   ] } },
 ]
@@ -10030,7 +10687,7 @@ blocks = [
         { type = "paragraph", content = "There is a work glove on it that was not there last night. One of a pair. Left hand. Nobody has ever taken anything off that post and nobody has ever left anything deliberately." },
     ] },
     { advance_text = "Leave it there.", blocks = [
-        { type = "thought_bubble", content = "Three gloves, a hi-vis, a hat, and now a left hand that was put there on purpose by somebody who knew she would be the one to find it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Three gloves, a hi-vis, a hat, and now a left hand that was put there on purpose by somebody who knew you would be the one to find it." },
     ] },
   ] } },
 ]

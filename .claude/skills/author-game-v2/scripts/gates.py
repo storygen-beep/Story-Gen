@@ -52,9 +52,35 @@ except ImportError:
 #   -> 24 of its 25 locations are UNDER 10,000. The exemplar failed its own gate.
 # The real shape is one or two deep ANCHORS plus many legitimately thin satellites:
 # `school` alone held 30.2% of all location prose at seed.
+#
+# ⚠️ THESE THREE ARE A BACKSTOP, NOT THE CHECK — corrected 2026-08-15, study 6.
+# When `v2_state.json` declares `board.locations[].fill`, gate 1 checks each location
+# against ITS OWN declared budget and these constants are not consulted. They run only
+# for a game with no ledger.
+#
+# Why: measured across all three v2 games, they were being treated as targets. Two of
+# the three landed within FOUR WORDS of MEAN_LOCATION_WORDS (4,504 / 4,502 / 4,681), and
+# all three shipped exactly 8 locations against a "6-8" range the doctrine had already
+# flagged, in prose, as a judgement rather than evidence. A global constant can be
+# satisfied by generating N things; a number checked against the author's own declaration
+# cannot, because moving it means changing the design. See SKILL.md:107.
 ANCHOR_SHARE_PCT      = 25.0    # DoL seed: school = 35,218 / 116,540 = 30.2%
 MEDIAN_LOCATION_WORDS = 3_000   # DoL seed median 3,154
 MEAN_LOCATION_WORDS   = 4_500   # DoL seed mean 4,661
+
+DECLARED_FILL_TOLERANCE = 0.25
+# ⚠️ THIS IS THE ONE INVENTED NUMBER IN THIS FILE. Say so plainly: it comes from no
+# measurement, because none exists — nobody publishes their word budgets.
+#
+# It is defensible here for a reason that did NOT hold for the two thresholds this project
+# had to demote (the-surfaces.md R5/R6): those had to discriminate BETWEEN GAMES, so an
+# invented value scored noise and failed correct work. This one compares a game against
+# ITSELF, so it only has to be loose enough not to police normal variance while still
+# catching a room declared at 4,000 and delivered at 400. Any value in 0.2-0.4 does that job
+# identically, which is the signature of a number that is not carrying the decision.
+#
+# If it ever starts failing games that look right, it is wrong and should be widened, not
+# defended.
 
 EXPLICIT_BEAT_FLOOR = 7.5
 # Share of beats carrying 3+ explicit words. DoL held 7.5%-9.3% across eight
@@ -233,18 +259,46 @@ def _conditions_of(obj):
                 yield it
 
 
+def _effect_value_sign(val):
+    """+1 / -1 / 0 for an effect `value`, which may be a number or a random range.
+
+    The engine accepts `{type = "random", min = N, max = M}` as a value (v2.py:13525),
+    so a sign test that only handles numbers silently reads every ranged grant as zero.
+    """
+    if isinstance(val, bool):
+        return 0
+    if isinstance(val, (int, float)):
+        return 1 if val > 0 else (-1 if val < 0 else 0)
+    if isinstance(val, dict) and val.get("type") == "random":
+        hi = val.get("max", val.get("min"))
+        if isinstance(hi, (int, float)):
+            return 1 if hi > 0 else (-1 if hi < 0 else 0)
+    return 0
+
+
 def _currency_ops(obj, cur, out):
-    """Collect every 'add'/'subtract' this structure performs on the currency trait.
+    """Collect every movement this structure performs on the currency trait, BY DIRECTION.
 
     Walks the whole nested shape rather than the known effect sites, because a
     grant can hang off an exit_block config, a choice, or a cascade beat, and a
     gate that only looks in one of those under-reports the economy.
     NOTE the key asymmetry the rest of this file already documents: an EFFECT
     names its trait `trait`, a CONDITION names it `trait_key`.
+
+    ⚠️ DIRECTION, NOT OP NAME — and `op = "subtract"` IS NOT AN ENGINE OP.
+    `applyTraitEffect` runs `add` and `set` and silently returns on anything else
+    (v2.py:5742-5751), so the only way to take currency away in an effect is
+    `op = "add"` with a NEGATIVE value. This function used to append the op string,
+    which meant a real deduction written the only way that works counted as INCOME —
+    measured on a game whose sink/source line flipped from 11:11 to 10:12 the moment
+    its dead `subtract` effects were rewritten correctly. A `subtract` effect is
+    counted as neither: it moves nothing, and gate 25 is what reports it.
     """
     if isinstance(obj, dict):
-        if (obj.get("trait") or obj.get("trait_key")) == cur and obj.get("op") in ("add", "subtract"):
-            out.append(obj["op"])
+        if (obj.get("trait") or obj.get("trait_key")) == cur and obj.get("op") == "add":
+            sign = _effect_value_sign(obj.get("value"))
+            if sign:
+                out.append("subtract" if sign < 0 else "add")
         # a `costs` entry is a spend even though it carries no op
         for cost in (obj.get("costs") or []):
             if isinstance(cost, dict) and cost.get("trait") == cur:
@@ -480,9 +534,35 @@ def lint_screen_shape(model, game):
         if n_open >= 8:
             out.append(dict(kind="open", id=c["id"], loc=c["loc"],
                             note=f"{n_open} of {len(chs)} choices open with no condition"))
+    # Population labelled on purpose: the anchoring lint counts ROOM screens only, this one
+    # counts every located repeatable screen. Two adjacent numbers over different populations
+    # is the denominator trap, and naming it is cheaper than reconciling it.
     summary = (f"{opened}/{tot} location choices open on turn one · "
-               f"{frozen}/{menus} standing menus never change their prose")
+               f"{frozen}/{menus} standing menus never change their prose "
+               f"(rooms AND character hubs)")
     return summary, out
+
+
+def lint_choice_anchoring(model, game, state=None):
+    """`the-surfaces.md` R2b, as a MEASURED PERCENTAGE rather than a verdict.
+
+    A LINT, and the third rule in this file to end up here after being built as a gate. The
+    reason is in `_room_objects`: a word-match is a proxy for a semantic rule, and run
+    against the skill's own worked example it fails "Mirror" under a paragraph about a
+    wardrobe. A check that fails correct work gets ignored — R5 and R6 taught that already.
+
+    What to do with the number: compare it, do not clear it. Measured on the game that
+    prompted this, 55% of room choices name something their own screen said, against a
+    ceiling of ~74% for the same game measured against the whole room's prose. A screen
+    contributing several floating choices is where to look — not the total.
+    """
+    decl = _room_objects(model, game, state)
+    if decl is None or not decl["choices"]:
+        return None, []
+    pct = 100 * decl["anchored"] / decl["choices"]
+    summary = (f"{decl['anchored']}/{decl['choices']} ({pct:.0f}%) of room choices name "
+               f"something their own screen's prose put in the room")
+    return summary, decl["floats"]
 
 
 def lint_world_prose(model, game):
@@ -511,6 +591,253 @@ def lint_world_prose(model, game):
 # ─────────────────────────────────────────────────────────────────────────────
 # Gates
 # ─────────────────────────────────────────────────────────────────────────────
+_OBJ_STOP = set("""
+a an the and or but of to in on at for with from into over under by it its this that those these
+you your yours she her hers he him his they them their is are was were be been being do does did
+if then than so as up down out off back again more most some any all one two three four five six
+seven eight nine ten what who whom which where when how why not no yes can will would could should
+may might must let get got go goes going come comes take takes put puts make makes see sees look
+looks keep keeps give gives run runs say says tell tells ask asks want wants need needs like just
+now still yet only ever never own properly instead something somebody anybody nothing everything
+there here whole half first last next again through past before after until while every each
+another other same both few many much less least enough almost quite rather even also else
+monday tuesday wednesday thursday friday saturday sunday weekend weekday morning evening night
+eleven twelve twenty thirty forty fifty hundred
+shift start minute hour day week month year time moment thing way point reason version sort kind
+""".split())
+# ⚠️ The second block was added after the under-declaration check reported choices "hanging off"
+# objects called *there*, *before*, *whole*, *forty* and *friday*. Adverbs, ordinals, weekday
+# names and bare numbers are never the thing a choice acts on, and they were drowning the real
+# findings. Words that ARE objects in some game (a "morning" shift is not an object; a location
+# genuinely named "The Weekend" would be) stay resolvable through the declared list itself.
+# The third block is time spans and abstractions — *the shift*, *the start of it*, *the whole
+# point*. They pass every lexical test for a noun and none of them is a thing in a room.
+
+
+# An object is a thing a room HAS, and in English that is written with a determiner in front of
+# it. This is the cheapest available noun test and it exists because the under-declaration check
+# was reporting `sleep` (from the choice "Sleep.") as an object the board had failed to declare.
+# Measured on a real game: without it, 16 findings of which 6 were verbs or bare abstractions;
+# with it, 7 findings and every one a genuine thing in the room.
+_NOUN_PHRASE = re.compile(
+    r"\b(?:the|a|an|his|her|its|their|your|our|this|that|these|those|one|two|three|four|five|"
+    r"six|seven|eight|nine|ten)\s+([a-z][a-z-]{2,})", re.I)
+
+
+def _phrase_nouns(text):
+    """Stemmed head-nouns that `text` names WITH a determiner, minus stopwords."""
+    out = set()
+    for w in _NOUN_PHRASE.findall(text or ""):
+        st = _stem(w.lower())
+        if st not in _OBJ_STOP and len(st) > 2:
+            out.add(st)
+    return out
+
+
+def _stem(w):
+    """Crude singular form. It only has to make the singular and the plural of the same word
+    land on the same string.
+
+    ⚠️ The first version stripped "es" from ANY word ending in it, so 'cages'->'cag' while
+    'cage'->'cage' — 5 of 16 common pairs failed to meet, including cubicle/cubicles and
+    table/tables, both of which occur in a real board declaration. English only adds "es"
+    after a sibilant; everything else is a plain "s" on a word that already ends in "e".
+    """
+    if len(w) >= 5 and w.endswith(("ses", "xes", "zes", "ches", "shes")):
+        return w[:-2]
+    if len(w) >= 4 and w.endswith("s") and not w.endswith("ss"):
+        return w[:-1]
+    return w
+    # Known and accepted: f->ves irregulars (shelf/shelves) still miss. Handling them costs
+    # more than it buys — 'curves'->'curf' would be a new wrong answer — and both sides of a
+    # real comparison are almost always the same number.
+
+
+def _content_words(s):
+    """Content words of a phrase — the vocabulary an object or a choice actually names.
+
+    ⚠️ Stops are checked on BOTH the raw word and its stem. Filtering the raw form only let
+    every inflection through — "gets" survived while "get" was stopped — which showed up as
+    choices apparently hanging off objects called "get" and "start".
+    """
+    out = []
+    for w in re.findall(r"[a-z]+", (s or "").lower()):
+        if len(w) <= 2 or w in _OBJ_STOP:
+            continue
+        st = _stem(w)
+        if st in _OBJ_STOP:
+            continue
+        out.append(st)
+    return out
+
+
+def _names_any(text, vocab):
+    """Does `text` name anything in `vocab`? Both sides are stemmed, then matched exactly,
+    with a SIX-character prefix fallback so 'curtain'/'curtained' and 'monitor'/'monitoring'
+    connect.
+
+    ⚠️ Six, not five. At five, 'count' matched 'counter' — so *"Count Bev's float"* was
+    credited to the shop counter, which is a different object. A false PASS is the dangerous
+    direction here: this gate exists to catch choices that name nothing, and one that
+    silently forgives them is worse than none. Six excludes every 5-letter word from the
+    fuzzy path, which costs a few true matches ('drain'/'drainage') and buys back precision.
+    """
+    for w in _content_words(text):
+        if w in vocab:
+            return w
+        if len(w) >= 6:
+            for v in vocab:
+                if len(v) >= 6 and (v.startswith(w[:6]) or w.startswith(v[:6])):
+                    return v
+    return None
+
+
+_ROOM_OBJECTS_CACHE = {}
+
+
+def _room_objects(model, game, state):
+    """Shared analysis behind gate 22 and the choice-anchoring lint.
+
+    Memoised on the identity of its inputs: the gate and the lint both need the full walk,
+    and computing it twice is not just wasted work — it is two places that could drift if
+    only one call site is ever edited.
+
+    Returns None when no `board.locations[].objects` are declared anywhere — an absence is
+    never a pass. Otherwise a dict carrying both the DECLARATION checks (which are gated,
+    because they are pure consistency and reachable) and the ANCHORING count (which is a
+    lint, because it is a lexical proxy for a semantic rule — see the note below).
+
+    ⚠️ WHY ANCHORING IS A LINT AND NOT A GATE. Run against this skill's own worked example
+    in `the-surfaces.md` — the one measured from a shipped game to show what CORRECT looks
+    like — a strict word-match fails "Mirror" under *"Your clothes are kept in the creaky
+    wardrobe."* The mirror belongs to the cluster that paragraph sets up; a human sees it and
+    a word-match cannot. One in four of that example's real decisions fails. On a real game
+    the ceiling is ~74% even matching against the whole room's prose. A gate demanding zero
+    failures could therefore never be passed, and this project has already learned twice what
+    happens to a check that fails correct work: it gets ignored. The percentage is genuinely
+    useful; the pass/fail line was not.
+    """
+    key = (id(model), id(game), id(state))
+    if key in _ROOM_OBJECTS_CACHE:
+        return _ROOM_OBJECTS_CACHE[key]
+
+    board_locs = ((state or {}).get("board") or {}).get("locations") or []
+    objs = {l.get("id"): (l.get("objects") or []) for l in board_locs if l.get("objects")}
+    if not objs:
+        _ROOM_OBJECTS_CACHE[key] = None
+        return None
+
+    real_locs = {l.get("id") for l in (game.get("locations") or [])}
+    loc_desc = {l.get("id"): (l.get("description") or "") for l in (game.get("locations") or [])}
+
+    # A canvas bound to a person is judged by the object test (R1/R2), not by room objects.
+    # BOTH keys matter: `requires_npc` and `npc` are separate fields and a hub may set only
+    # one — checking `npc` alone would judge a character's hub as if it were a room.
+    npc_hubs = {x["id"] for x in (game.get("canvases") or [])
+                if (x.get("trigger") or {}).get("npc")
+                or (x.get("trigger") or {}).get("requires_npc")}
+
+    named = collections.defaultdict(set)
+    afforded = collections.defaultdict(set)
+    floats, rooms_seen = [], set()
+    undeclared_hooks = collections.defaultdict(collections.Counter)
+    n_choices = n_anchored = 0
+
+    # The location's own description renders on the way in, so it is prose the room has said.
+    # Seeded OUTSIDE the canvas loop on purpose: a location whose only canvases bind an NPC
+    # would otherwise never have its description read, and every object there would be
+    # reported "never written".
+    for loc, os_ in objs.items():
+        for i, o in enumerate(os_):
+            if _names_any(loc_desc.get(loc, ""), set(_content_words(o))):
+                named[loc].add(i)
+
+    for c in model:
+        if not c["rep"] or c["id"] in npc_hubs or not c["loc"]:
+            continue
+        rooms_seen.add(c["loc"])
+        os_ = objs.get(c["loc"])
+        if not os_:
+            continue
+        obj_words = {w for o in os_ for w in _content_words(o)}
+        for n in c["nodes"]:
+            prose = " ".join([loc_desc.get(c["loc"], "")]
+                             + [b.get("content") or "" for b in (n.get("blocks") or [])
+                                if isinstance(b, dict)])
+            for i, o in enumerate(os_):
+                if _names_any(prose, set(_content_words(o))):
+                    named[c["loc"]].add(i)
+            # This screen's own prose — NOT the room's whole declared list, which would
+            # accept almost anything from a room declaring seventeen things.
+            screen_vocab = set(_content_words(prose))
+            for ch in ((n.get("exit_block") or {}).get("choices") or []):
+                if (ch.get("targetType") or "node") == "location":
+                    continue                                  # an exit is not a decision
+                n_choices += 1
+                txt = ch.get("text") or ""
+                # Separate question from anchoring — record unconditionally, or one defect
+                # gets reported twice (floating choice AND unusable object).
+                for i, o in enumerate(os_):
+                    if _names_any(txt, set(_content_words(o))):
+                        afforded[c["loc"]].add(i)
+                if _names_any(txt, screen_vocab):
+                    n_anchored += 1
+                    # ⚠️ UNDER-DECLARATION, computed from the GAME rather than the board, so
+                    # it cannot be answered by shrinking the board. This choice acts on a thing
+                    # its own screen names as a thing — so if no declared object covers it, the
+                    # board left a real affordance out. Without this, gate 22 was passable by
+                    # declaring one safe object per room and touching nothing else: measured,
+                    # that scored 20/21 with the game byte-identical.
+                    #
+                    # BOTH SIDES MUST NAME IT AS A NOUN PHRASE. A bare content-word overlap
+                    # reported `sleep` (from the choice "Sleep.") and `start` (from "the start
+                    # of it") as objects the board had failed to declare, and a check that
+                    # demands nonsense in the ledger gets ignored. Requiring a determiner on
+                    # both sides took a real game from 16 findings, 6 of them junk, to 7 —
+                    # every one of them a thing genuinely in the room and genuinely undeclared.
+                    # Comparison uses the SAME fuzzy matcher as the rest of the file: exact
+                    # membership reported "padlock" undeclared against a declared "the
+                    # padlocked door".
+                    hooks = sorted(_phrase_nouns(txt) & _phrase_nouns(prose))
+                    if hooks and not any(_names_any(w, obj_words) for w in hooks):
+                        undeclared_hooks[c["loc"]][hooks[0]] += 1
+                else:
+                    floats.append(f"{c['id']} @{c['loc']}: \"{txt[:52]}\" names nothing "
+                                  f"the room has")
+
+    unknown = [f"board declares objects for \"{loc}\", which is not a location in the game"
+               for loc in objs if loc not in real_locs]
+    # Closes the room-level hole: without this, declaring objects for one easy room and
+    # leaving the rest blank shrinks what the checks look at until they are trivial.
+    undeclared = [f"{loc} has room screens but declares no objects — nothing to check it against"
+                  for loc in sorted(rooms_seen - set(objs))]
+    # Closes the object-level hole — see the note at the call site above.
+    missing = [f"{loc}: choices hang off \"{w}\", which the board never declared "
+               f"({n} choice{'s' if n > 1 else ''})"
+               for loc, ws in sorted(undeclared_hooks.items())
+               for w, n in ws.most_common()]
+    unnamed, unused, roomless = [], [], []
+    for loc, os_ in objs.items():
+        if loc in real_locs and loc not in rooms_seen:
+            # No repeatable room screen at all. Reporting every object as "affords no choice"
+            # would be seven misleading lines for one fact — and the fact is the board's own:
+            # "what she can do there repeatedly — if nothing, it is not a location yet."
+            roomless.append(f"{loc}: declares {len(os_)} objects but has no repeatable room "
+                            f"screen — nothing there can afford anything")
+            continue
+        for i, o in enumerate(os_):
+            if i not in named.get(loc, set()):
+                unnamed.append(f"{loc}: declared \"{o}\" but no prose names it")
+            elif i not in afforded.get(loc, set()):
+                unused.append(f"{loc}: \"{o}\" is in the prose but affords no choice")
+
+    result = dict(objs=objs, unknown=unknown, undeclared=undeclared, roomless=roomless,
+                  missing=missing, unnamed=unnamed, unused=unused, floats=floats,
+                  anchored=n_anchored, choices=n_choices)
+    _ROOM_OBJECTS_CACHE[key] = result
+    return result
+
+
 def run_gates(model, game, state=None):
     R = []
 
@@ -539,20 +866,92 @@ def run_gates(model, game, state=None):
     anchor_id = max(declared, key=lambda l: wl.get(l, 0)) if declared else "—"
     empty = sorted(l for l in declared if not wl.get(l))
 
+    # DECLARE-THEN-CHECK (2026-08-15, study 6). If the ledger declares a per-location
+    # budget, each location is judged against ITS OWN number and the global constants are
+    # not consulted. `fill` is canonical; `budget` is accepted because one shipped game
+    # wrote that key. A 300-word corridor is not a defect if you declared a corridor —
+    # which is what the-board.md has always said in prose and could not enforce.
+    budgets = {}
+    for l in ((state or {}).get("board") or {}).get("locations") or []:
+        b = l.get("fill", l.get("budget"))
+        if isinstance(b, (int, float)) and b > 0:
+            budgets[l.get("id")] = float(b)
+
     fails = []
-    if anchor_pct < ANCHOR_SHARE_PCT:
-        fails.append(f"no anchor: deepest location {anchor_id} holds {anchor_pct:.1f}% "
-                     f"of location prose (need {ANCHOR_SHARE_PCT:.0f}%) — the world has no centre")
-    if median < MEDIAN_LOCATION_WORDS:
-        fails.append(f"median location {median:,} words (need {MEDIAN_LOCATION_WORDS:,})")
-    if mean < MEAN_LOCATION_WORDS:
-        fails.append(f"mean location {mean:,.0f} words (need {MEAN_LOCATION_WORDS:,})")
     if empty:
         fails.append(f"{len(empty)} declared locations with nothing placed: {', '.join(empty[:12])}")
-    gate("location fill", not fails,
-         f"{n} locations · {total:,} words · mean {mean:,.0f} · median {median:,} · "
-         f"anchor {anchor_id} {anchor_pct:.0f}%",
-         fails)
+
+    # ⚠️ A BUDGET THAT CANNOT BE WRONG IS NOT A BUDGET. Measured on all three v2 games:
+    # every declared figure was an exact post-hoc word count — 9,607 / 4,936 / 10,295, not
+    # one of twenty-four round to the nearest hundred — so delivered-vs-declared matched
+    # 8/8 in all three and proved nothing. A plan is written in round numbers before the
+    # prose; a record is written in arbitrary ones after it. If the declaration is a
+    # record, say so and judge on the backstop instead of crediting a tautology.
+    # ⚠️ 50, not 100. At 100 a legitimate 250-granularity plan (9,750 · 5,250 · 4,250 …) was
+    # flagged as post-hoc — a false positive on exactly the careful author this is meant to
+    # reward. 50 accepts every plan granularity anyone would actually use and still rejects
+    # the measured real case, which scores 0 of 8 either way.
+    planned = sum(1 for v in budgets.values() if v % 50 == 0)
+    post_hoc = bool(budgets) and planned * 2 < len(budgets)
+
+    if budgets and post_hoc:
+        drift = [f"{lid}: declared {budgets[lid]:,.0f}, delivered {wl.get(lid, 0):,}"
+                 for lid in sorted(budgets) if abs(wl.get(lid, 0) - budgets[lid]) > 1]
+        fails.append(f"board.locations[].fill is a RECORD, not a plan — only {planned} of "
+                     f"{len(budgets)} figures are round to 100, so the budget was written "
+                     f"from the delivered word count and cannot fail")
+        fails.append("declare the budget in round numbers at BOARD phase, before the prose; "
+                     "the-board.md §1 — budget against the FINISHED total, not the current one")
+        fails += drift[:4]
+        if anchor_pct < ANCHOR_SHARE_PCT:
+            fails.append(f"no anchor: {anchor_id} holds {anchor_pct:.1f}% of location prose "
+                         f"(need {ANCHOR_SHARE_PCT:.0f}%) — the world has no centre")
+        if median < MEDIAN_LOCATION_WORDS:
+            fails.append(f"median location {median:,} words (need {MEDIAN_LOCATION_WORDS:,})")
+        if mean < MEAN_LOCATION_WORDS:
+            fails.append(f"mean location {mean:,.0f} words (need {MEAN_LOCATION_WORDS:,})")
+        head = (f"{n} locations · {total:,} words · mean {mean:,.0f} · median {median:,} · "
+                f"anchor {anchor_id} {anchor_pct:.0f}% · [declared budget is post-hoc — "
+                f"judged on the backstop]")
+    elif budgets:
+        off = []
+        for lid in sorted(declared):
+            want_w = budgets.get(lid)
+            if not want_w:
+                off.append(f"{lid}: no fill declared in board.locations — nothing to check against")
+                continue
+            got = wl.get(lid, 0)
+            drift = (got - want_w) / want_w
+            if abs(drift) > DECLARED_FILL_TOLERANCE:
+                off.append(f"{lid}: declared {want_w:,.0f} words, delivered {got:,} "
+                           f"({drift:+.0%})")
+        fails += off
+        plan_total = sum(budgets.values())
+        plan_anchor = max(budgets.values()) if budgets else 0
+        plan_anchor_pct = 100 * plan_anchor / plan_total if plan_total else 0
+        if plan_anchor_pct < ANCHOR_SHARE_PCT:
+            fails.append(f"the PLAN has no centre: its deepest location is only "
+                         f"{plan_anchor_pct:.0f}% of the declared total "
+                         f"(need {ANCHOR_SHARE_PCT:.0f}%)")
+        elif anchor_pct < ANCHOR_SHARE_PCT:
+            fails.append(f"no anchor as built: {anchor_id} holds {anchor_pct:.1f}% of location "
+                         f"prose (plan said {plan_anchor_pct:.0f}%) — the world has no centre")
+        head = (f"{n} locations · {total:,} words vs {plan_total:,.0f} declared · "
+                f"{len(declared) - len(off)}/{n} on their own budget · "
+                f"anchor {anchor_id} {anchor_pct:.0f}%")
+    else:
+        # BACKSTOP ONLY — no ledger. See the constants block for why these are not the check.
+        if anchor_pct < ANCHOR_SHARE_PCT:
+            fails.append(f"no anchor: deepest location {anchor_id} holds {anchor_pct:.1f}% "
+                         f"of location prose (need {ANCHOR_SHARE_PCT:.0f}%) — no centre")
+        if median < MEDIAN_LOCATION_WORDS:
+            fails.append(f"median location {median:,} words (need {MEDIAN_LOCATION_WORDS:,})")
+        if mean < MEAN_LOCATION_WORDS:
+            fails.append(f"mean location {mean:,.0f} words (need {MEAN_LOCATION_WORDS:,})")
+        head = (f"{n} locations · {total:,} words · mean {mean:,.0f} · median {median:,} · "
+                f"anchor {anchor_id} {anchor_pct:.0f}% · [backstop — no declared budgets]")
+
+    gate("location fill", not fails, head, fails)
 
     # G2 — explicit floor.
     # ⚠️ A BARE PASS HERE MEANS ALMOST NOTHING, and the headline has to say so.
@@ -727,12 +1126,46 @@ def run_gates(model, game, state=None):
     tiers = list(declared) if declared else ranked[:ASCENT_TIERS]
     source = "declared" if declared else f"top-{ASCENT_TIERS} guess — no v2_state.json"
     bad = [k for k in tiers if expand[k] <= contract[k]]
+
+    # ⚠️ DECLARING MUST NOT NARROW THE CHECK. Judging only what the board names means a
+    # descent-shaped meter — the exact failure this gate exists to catch — disappears by not
+    # being volunteered. Measured across the whole gate set: every gate that ITERATES a
+    # declaration can be weakened by declaring less, and every gate that iterates the GAME and
+    # looks a declaration up cannot. So the direction test now runs over every PLAYER trait in
+    # the game, declared or not. It needs no threshold — "closes more than it opens" is a
+    # direction, not a magnitude — and NPC-subject traits are excluded because a per-character
+    # relation legitimately gates one way.
+    p_expand, p_contract = collections.Counter(), collections.Counter()
+
+    def _walk_player_traits(o):
+        if isinstance(o, dict):
+            if o.get("type") == "trait" and o.get("trait_key") and o.get("subject") == "player":
+                op = o.get("operator")
+                if op in ("gte", "gt"):
+                    p_expand[o["trait_key"]] += 1
+                elif op in ("lt", "lte"):
+                    p_contract[o["trait_key"]] += 1
+            for v in o.values():
+                _walk_player_traits(v)
+        elif isinstance(o, list):
+            for v in o:
+                _walk_player_traits(v)
+
+    _walk_player_traits(game)
+    descents = [k for k in sorted(set(p_expand) | set(p_contract))
+                if p_contract[k] >= p_expand[k] and (p_expand[k] + p_contract[k])
+                and k not in bad]
+
     gate("ascent tiers expand the world",
-         None if not (expand or contract) else (bool(tiers) and not bad),
+         None if not (expand or contract) else (bool(tiers) and not bad and not descents),
          f"[{source}] " + ", ".join(f"{k} ({expand[k]}+/{contract[k]}-)" for k in tiers)
          if tiers else "no gated meter found",
          [f"{k} closes more than it opens ({expand[k]} expanding / {contract[k]} contracting)"
           for k in bad] +
+         [f"{k} is a player meter that closes more than it opens "
+          f"({p_expand[k]}+/{p_contract[k]}-) and is NOT declared as an ascent tier — "
+          f"a descent wearing an ascent's clothes is invisible to the declaration"
+          for k in descents] +
          [f"also ranked: {k} ({expand[k]}+/{contract[k]}-)" for k in ranked if k not in tiers])
 
     # ─────────────────────────────────────────────────────────────────────────
@@ -828,6 +1261,15 @@ def run_gates(model, game, state=None):
         gate("guidance exists", None,
              f"{len(cards)} quest cards, but board.ascent_tiers/characters undeclared — nothing to judge coverage against")
     else:
+        # ⚠️ THE CAST COMES FROM THE GAME, NOT THE BOARD. Iterating board.characters let an
+        # author owe fewer cards by naming fewer people: truncating the declared cast to one
+        # reported "24 quest cards for 3 ascent tiers and 1 characters" and still passed. Every
+        # [[npcs]] entry is a character the player can find — gate 6 already requires each to be
+        # scheduled and reachable — so every one of them owes a card. The declaration may add
+        # to what is checked; it may never subtract.
+        game_npcs = [n for n in (game.get("npcs") or []) if n.get("id")]
+        cast = {n["id"] for n in game_npcs} | {c.get("id") for c in chars if c.get("id")}
+
         gaps = []
         if not cards:
             gaps.append("0 [[quest_cards]] authored — the guidance page renders empty")
@@ -836,11 +1278,12 @@ def run_gates(model, game, state=None):
                 if not any(_card_mentions(c, t) for c in cards if not c.get("npc_id")):
                     gaps.append(f"ascent tier '{t}' has no story-tier card — nothing tells the player its next rung")
             carded = {c.get("npc_id") for c in cards if c.get("npc_id")}
-            for ch in chars:
-                if ch.get("id") not in carded:
-                    gaps.append(f"{ch.get('id')} has no quest card — their sidebar next-row renders blank")
+            for cid in sorted(cast):
+                if cid not in carded:
+                    gaps.append(f"{cid} has no quest card — their sidebar next-row renders blank")
         gate("guidance exists", not gaps,
-             f"{len(cards)} quest cards for {len(tiers_owed)} ascent tiers and {len(chars)} characters",
+             f"{len(cards)} quest cards for {len(tiers_owed)} ascent tiers and "
+             f"{len(cast)} characters in the game",
              gaps)
 
     # ⚠️ THERE IS NO "walls state their key" GATE, AND THE ABSENCE IS DELIBERATE.
@@ -1044,7 +1487,26 @@ def run_gates(model, game, state=None):
     # x when). A hub that has grown past this is doing several jobs at once — almost
     # always a character hub with solo work dumped into it, or a shop merged into a
     # room. references/the-surfaces.md.
-    fat = []
+    #
+    # ⚠️ THE HEADLINE REPORTS THE DISTRIBUTION, NOT THE VERDICT — added 2026-08-15, study 6.
+    # "0 screens over 8" and "19 of 30 screens at exactly 8" are the same PASS and completely
+    # different games, and the scoreboard could not tell them apart: the game this cap was
+    # written to fail (23 on one desk, 214 choices over 22 screens) and the game that replaced
+    # it (max 8, 213 choices over 29 screens) both read as solved. A ceiling makes "pass" and
+    # "maximise" point the same way, so a ceiling gate that prints only a verdict teaches the
+    # cap as the spec. Same discipline as G2's marginal-pass headline.
+    #
+    # ⚠️ ROOMS AND CHARACTER HUBS ARE COUNTED SEPARATELY, and the reason is the denominator
+    # trap this project has now hit six times. R3 is about ROOMS. Character hubs are shaped by
+    # a different rule (R1/R2's object test) and measured well: on the game that prompted this
+    # they open a median of 3 choices, exactly the field figure. Averaging them together
+    # reported "19/29 screens at the cap" when the rooms alone were 18 of 22 — the good screens
+    # were diluting the bad ones in the number meant to expose them. The cap still applies to
+    # both; only the reporting is split.
+    npc_bound = {x["id"] for x in (game.get("canvases") or [])
+                 if (x.get("trigger") or {}).get("npc")
+                 or (x.get("trigger") or {}).get("requires_npc")}
+    fat, per_screen, per_hub = [], [], []
     for c in model:
         if not c["rep"]:
             continue
@@ -1061,16 +1523,66 @@ def run_gates(model, game, state=None):
             choices = (n.get("exit_block") or {}).get("choices") or []
             decisions = [ch for ch in choices
                          if (ch.get("targetType") or "node") != "location"]
+            if decisions:
+                (per_hub if c["id"] in npc_bound else per_screen).append(len(decisions))
             if len(decisions) > MENU_CEILING:
                 exits = len(choices) - len(decisions)
                 fat.append(f"{c['id']} @{c['loc']}: {len(decisions)} decisions on one screen"
                            + (f" (+{exits} exits, not counted)" if exits else ""))
+    at_cap = sum(1 for k in per_screen if k == MENU_CEILING)
+    shape = (f"rooms median {_median(per_screen)} · {at_cap}/{len(per_screen)} at the cap"
+             if per_screen else "no repeatable room screens")
+    if per_hub:
+        shape += (f" · character hubs median {_median(per_hub)} "
+                  f"({sum(1 for k in per_hub if k == MENU_CEILING)}/{len(per_hub)} at the cap)")
     gate("a place is not a catalogue", not fat,
-         f"{len(fat)} location screens offer more than {MENU_CEILING} decisions",
+         f"{len(fat)} screens over {MENU_CEILING} · {shape}",
          fat + (["field, measured by PLAYING five games: a location screen carries 1-6 things to "
                  "actually do (median 3). Big screens in real games are wardrobes, rosters and "
                  "character builders — or they are mostly exits, which are not counted here"]
-                if fat else []))
+                if fat else [])
+         + ([f"⚠️ {at_cap} of {len(per_screen)} screens sit ON the cap. {MENU_CEILING} is a "
+             f"backstop for the pathological case, NOT the size of a normal room — the field "
+             f"median is 3. A room's choice count should fall out of what its prose names "
+             f"(the-surfaces.md R2b, gate 22), not be filled up to this number."]
+            if per_screen and at_cap * 2 > len(per_screen) else []))
+
+    # G22 — choices hang off the room. `the-surfaces.md` R2b, made checkable.
+    #
+    # DECLARE-THEN-CHECK, per SKILL.md:107. `board.locations[].objects` is the author's
+    # own list of what each room's prose names; this compares the game against it and
+    # invents no number of its own.
+    #
+    # Why it exists (study 6): gate 20 caps a MAGNITUDE, and a game can satisfy a cap by
+    # generating choices up to it — measured, one did, at exactly 8 on 19 of 30 screens,
+    # with the same 213 total choices as the game the cap was written to fail. R2b is the
+    # causal half of the same rule and was the half nothing checked; it drifted to 41%.
+    #
+    # SCOPED TO LOCATION-ONLY HUBS. On an NPC-bound hub the anchor is the PERSON, not a
+    # room object — R1/R2's object test. Measured: the handover hub scores 0% here and is
+    # correct, because all eight of its choices take the character as the object of the
+    # verb. Including NPC hubs would fail exactly the screens that are right.
+    decl = _room_objects(model, game, state)
+    if decl is None:
+        gate("declared objects are real", None,
+             "no board.locations[].objects declared — nothing to check against",
+             ["declare what each room's prose names and she can act on, per location",
+              "references/the-surfaces.md R2b"])
+    else:
+        bad = (decl["unknown"] + decl["undeclared"] + decl["roomless"]
+               + decl["unnamed"] + decl["unused"] + decl["missing"])
+        n_obj = sum(len(v) for v in decl["objs"].values())
+        gate("declared objects are real", not bad,
+             f"{n_obj} declared objects across {len(decl['objs'])} rooms · "
+             f"{len(decl['unnamed'])} never written · {len(decl['unused'])} unusable · "
+             f"{len(decl['missing'])} affordances undeclared"
+             + (f" · {len(decl['undeclared'])} rooms undeclared" if decl["undeclared"] else ""),
+             bad + (["references/the-surfaces.md R2b — a declared object must appear in the "
+                     "room's prose AND afford at least one choice, and every thing the choices "
+                     "act on must be declared",
+                     "an object nobody can act on is texture: put it in the prose, not in "
+                     "board.locations[].objects"]
+                    if bad else []))
 
     # ⚠️ THE TWO SCREEN-SHAPE RULES ARE LINTS, NOT GATES — see lint_screen_shape().
     # `the-surfaces.md` R5 (ungated doors) and R6 (frozen openers) are real rules that a
@@ -1086,18 +1598,219 @@ def run_gates(model, game, state=None):
     # Whether a room's narrative actually changes on re-entry is a question only PLAY
     # answers. Reported as lints until the play study sets real numbers.
 
+    # G24 — the declared obligation is actually charged.
+    #
+    # ⚠️ MEASURED FAILURE. A game declared "GBP 200 a week back, plus GBP 45 for the caravan",
+    # printed "Have the two hundred and forty-five" on its quest card, and wrote the scene of
+    # handing the money through a car window — and the settle-up canvas carried NO cost and NO
+    # money effect. Played live with GBP 300: before 300, after 300, and repeatable without
+    # limit. The whole game's money outflow was 11 optional purchases totalling GBP 90 against
+    # GBP 70 a night of income.
+    #
+    # Gate 16 passed it, because nine OTHER canvases gate on money. That is the presence-gate
+    # failure mode: "at least one exists" cannot see that the important one does not. This is
+    # SKILL.md:107 applied to the field the economy is built on — the board declares a price,
+    # so the gate checks the price is taken.
+    ob = econ.get("obligation")
+    ob_amt = econ.get("obligation_amount")
+    has_ob = isinstance(ob, str) and ob.strip() and ob.strip().lower() not in ("none", "n/a")
+    if not currency:
+        gate("the obligation is charged", None, "no currency declared — nothing to price")
+    elif not has_ob:
+        gate("the obligation is charged", None,
+             "no board.economy.obligation declared — nothing to check against",
+             ["the-economy.md R3: a recurring obligation is near-universal in the field; "
+              "declaring none is a choice, not an omission"])
+    else:
+        # `_currency_ops` collects operations, not amounts, and this gate needs the amount —
+        # so it walks for values itself rather than widening a helper five other gates share.
+        #
+        # ⚠️ TWO CHANNELS, AND THE FIRST VERSION KNEW ONLY ONE.
+        # (1) An authored charge — a `costs` entry, or an effect written `op = "add"` with a
+        #     NEGATIVE value. NOT `op = "subtract"`: that is not an engine op and moves nothing
+        #     (v2.py:5742-5751), so counting it here would credit a charge that never happens —
+        #     which is the exact failure this gate exists to catch, rebuilt inside the gate.
+        # (2) `[settings.rent]` — the engine's own recurring-demand system. It arms on the day
+        #     rollover to `due_day`, intercepts the next `Location_*` entry, and really does
+        #     charge (`$player.core_traits.money -= _rent`, v2.py:15918-15928; verified live).
+        #     Measured: a game whose obligation IS charged, by that system, failed this gate
+        #     because the walk only looked at canvases. A check that fails a game for obeying
+        #     the doctrine is a bug in the check.
+        outflows = []
+        rent_cfg = (game.get("settings") or {}).get("rent") or {}
+        rent_amt = rent_cfg.get("amount") if rent_cfg.get("enabled") else None
+        rent_charges = isinstance(rent_amt, (int, float)) and rent_amt > 0
+
+        def _outflows(o):
+            if isinstance(o, dict):
+                if ((o.get("trait") or o.get("trait_key")) == currency
+                        and o.get("op") == "add"
+                        and isinstance(o.get("value"), (int, float))
+                        and o["value"] < 0):
+                    outflows.append(-o["value"])
+                for cost in (o.get("costs") or []):
+                    if (isinstance(cost, dict) and cost.get("trait") == currency
+                            and isinstance(cost.get("value"), (int, float))):
+                        outflows.append(cost["value"])
+                for v in o.values():
+                    _outflows(v)
+            elif isinstance(o, list):
+                for v in o:
+                    _outflows(v)
+
+        _outflows(game.get("canvases") or [])
+        biggest = max(outflows) if outflows else 0
+        charged_by = None
+        if rent_charges and rent_amt >= (ob_amt if isinstance(ob_amt, (int, float)) else 0):
+            charged_by = f"[settings.rent] {rent_amt:g} every {rent_cfg.get('due_day', '?')}"
+        elif isinstance(ob_amt, (int, float)) and biggest >= ob_amt:
+            charged_by = f"an authored charge of {biggest:g}"
+
+        gaps = []
+        if not isinstance(ob_amt, (int, float)) or ob_amt <= 0:
+            gaps.append("board.economy.obligation is declared but board.economy.obligation_amount "
+                        "is not — an obligation with no price cannot be checked, and one that "
+                        "cannot be checked is how a game shipped with its central charge missing")
+        elif not charged_by:
+            gaps.append(f"nothing takes {ob_amt:g} `{currency}` from the player: the largest "
+                        f"authored outflow is {biggest:g}"
+                        + (f" and [settings.rent] charges {rent_amt:g}" if rent_charges
+                           else " and [settings.rent] is not enabled")
+                        + " — the price is written in the ledger and the prose but never taken")
+        gate("the obligation is charged", not gaps,
+             f"[declared] {ob_amt if isinstance(ob_amt, (int, float)) else '?'} {currency}"
+             + (f" · charged by {charged_by}" if charged_by else "")
+             + f" · largest authored outflow {biggest:g} across {len(outflows)} charges",
+             gaps)
+
+    # G25 — every effect uses an op the engine actually runs.
+    #
+    # ⚠️ THE CHEAPEST GATE HERE, AND IT CATCHES THE MOST INVISIBLE CLASS OF BUG.
+    # `applyTraitEffect` runs `add` and `set`, and on anything else falls through to
+    # `// Unknown op; do nothing` and RETURNS (v2.py:5742-5751). Nothing normalises the
+    # value: `subtract` appears nowhere in the generator or the importer. The importer
+    # validates `op` for cheat-page grants (template_import.py:3755) and for nothing else,
+    # so a dead effect is valid TOML, builds green, and emits verbatim into the HTML.
+    #
+    # Measured, on two v2 games authored from the same skill: 35 dead effects in one and
+    # 70 in the other. In the first, a whole declared meter never moved for the entire game
+    # — the counterweight that "only ever falls" was frozen at its starting value across 12
+    # dead decrements — twenty activities never charged the energy they said they cost, and
+    # the one NPC penalty in the game never applied. Every gate here passed it, and a live
+    # play-through passed it too, because the number simply does not change and nothing says
+    # why. `references/engine.md` §21 had discussed `op = "subtract"` as though it worked.
+    #
+    # SCOPED TO CANVASES AND THE ENGINE BLOCK on purpose: quest-card `goals`/`when` entries
+    # legitimately carry `trait` + `op = "gte"|"lt"`, and they are comparisons, not effects.
+    # Anything carrying `subject` or `operator` is a condition and is skipped for the same
+    # reason.
+    LIVE_OPS = {
+        "trait": ({"add", "set"}, "v2.py:5742-5751"),
+        "flag": ({"set", "unset", "toggle"}, "v2.py:5888"),
+        "quest": ({"start", "update", "complete", "cancel"}, "v2.py:5914-5919"),
+    }
+    dead = collections.Counter()
+    dead_where = collections.defaultdict(set)
+
+    def _walk_ops(o, cid):
+        if isinstance(o, dict):
+            if "subject" not in o and "operator" not in o and isinstance(o.get("op"), str):
+                kind = ("flag" if o.get("flag") else
+                        "quest" if (o.get("quest_id") or o.get("questId") or o.get("quest")) else
+                        "trait" if o.get("trait") else None)
+                if kind and o["op"] not in LIVE_OPS[kind][0]:
+                    dead[(kind, o["op"])] += 1
+                    dead_where[(kind, o["op"])].add(cid)
+            for v in o.values():
+                _walk_ops(v, cid)
+        elif isinstance(o, list):
+            for v in o:
+                _walk_ops(v, cid)
+
+    for c in (game.get("canvases") or []):
+        _walk_ops(c, c.get("id", "?"))
+    _walk_ops(game.get("engine") or {}, "[engine]")
+
+    detail = []
+    for (kind, op), n in dead.most_common():
+        live = ", ".join(sorted(LIVE_OPS[kind][0]))
+        where = sorted(dead_where[(kind, op)])
+        detail.append(f"{n} {kind} effects use op = \"{op}\", which the engine discards — "
+                      f"the {kind} ops it runs are {live} ({LIVE_OPS[kind][1]})")
+        detail.append(f"    in: {', '.join(where[:6])}"
+                      + (f" … and {len(where) - 6} more canvases" if len(where) > 6 else ""))
+    if dead:
+        detail.append("to take something away, write op = \"add\" with a NEGATIVE value; "
+                      "a quantity like money must also carry clamp = false (engine.md §21)")
+    gate("effects use a live op", not dead,
+         f"{sum(dead.values())} effects use an op the engine does not run"
+         if dead else "every effect op is one the engine runs",
+         detail)
+
     # G19 — sentence length. The first gate here that measures WRITING.
     sent_words = [len(s.split())
                   for c in model for b in c["beats"]
                   for s in re.split(r"(?<=[.!?])\s+", " ".join(b.text))
                   if 2 <= len(s.split()) <= 120]
     med_sent = _median(sent_words)
+    # G23 — every speaking block names its speaker.
+    #
+    # ⚠️ THE LARGEST DEFECT EVER FOUND IN A v2 GAME, AND NOTHING WATCHED FOR IT. A shipped,
+    # portal-listed build rendered "💭 Npc is thinking:" on 147 passages — every thought bubble
+    # in the game — because `props.speaker` was omitted and the engine defaults the field to the
+    # literal string "npc" (v2.py:14631), which then title-cases to "Npc" (v2.py:14657).
+    # Measured afterwards across every v2 game: 147, 145 and 79 blocks missing it. Three for
+    # three, because the v2 skill mentions `thought_bubble` once and never shows its shape.
+    #
+    # A GATE, not a lint: unlike a dialog speaker's IDENTITY — which needs a reader — the
+    # PRESENCE of the field is pure consistency, always reachable, and there is no case where
+    # omitting it is correct. The existing dialogue-attribution lint is a different question
+    # (it asks whether the right name will render); this asks whether any name will.
+    def _speaking_blocks(blocks, out):
+        for b in blocks or []:
+            if not isinstance(b, dict):
+                continue
+            if b.get("type") in ("dialog", "thought_bubble"):
+                out.append(b)
+            props = b.get("props") or {}
+            for beat in (props.get("beats") or []):
+                _speaking_blocks(beat.get("blocks"), out)
+            _speaking_blocks(props.get("blocks") or b.get("blocks"), out)
+
+    voiceless = collections.Counter()
+    n_speaking = 0
+    for c in (game.get("canvases") or []):
+        for n in (c.get("nodes") or []):
+            found = []
+            _speaking_blocks(n.get("blocks"), found)
+            for b in found:
+                n_speaking += 1
+                if not (b.get("props") or {}).get("speaker"):
+                    voiceless[f"{c.get('id')}#{b.get('type')}"] += 1
+    n_bad = sum(voiceless.values())
+    gate("speakers are named", None if not n_speaking else not n_bad,
+         f"{n_speaking - n_bad}/{n_speaking} dialog and thought_bubble blocks name their speaker"
+         if n_speaking else "no dialog or thought_bubble blocks authored",
+         [f"{k}: {v} block{'s' if v > 1 else ''} with no props.speaker"
+          for k, v in voiceless.most_common(10)]
+         + ([f"a missing speaker renders as the literal '{'Npc'}' (v2.py:14631, :14657) — it is "
+             f"never a default, it is a bug",
+             "props = { speaker = \"player\" } · { speaker = \"npc\", npcId = \"npc_x\" } · "
+             "{ speaker = \"unknown\" } for a stranger (renders \"Someone\"), v2.py:14640"]
+            if n_bad else []))
+
+    # Ceiling gate — reports its MARGIN, for the reason in G20's header. A game sitting on
+    # the ceiling and a game well under it must not print the same line.
+    margin = SENTENCE_CEILING - med_sent
     gate("sentence length", None if not sent_words else med_sent <= SENTENCE_CEILING,
          f"median sentence {med_sent} words across {len(sent_words):,} sentences "
-         f"(ceiling {SENTENCE_CEILING})",
-         [] if med_sent <= SENTENCE_CEILING else
-         ["field median is 10 words; the reference game is 9",
-          "escalate by adding beats, not by lengthening sentences"])
+         f"(ceiling {SENTENCE_CEILING}, margin {margin:+d}) · field median 10",
+         ([] if med_sent <= SENTENCE_CEILING else
+          ["field median is 10 words; the reference game is 9",
+           "escalate by adding beats, not by lengthening sentences"])
+         + ([f"⚠️ sitting ON the ceiling. {SENTENCE_CEILING} is a backstop calibrated across "
+             f"two extraction bases, not a target — the field runs 10 and the reference game 9."]
+            if sent_words and margin <= 0 else []))
 
     return R
 
@@ -1121,13 +1834,16 @@ def main():
     lints = lint_dialogue_attribution(model)
     world_lints = lint_world_prose(model, game)
     shape_summary, shape_lints = lint_screen_shape(model, game)
+    anchor_summary, anchor_lints = lint_choice_anchoring(model, game, state)
 
     if "--json" in sys.argv:
         print(json.dumps({"gates": [dict(r) for r in results],
                           "lints": {"dialogue_attribution": lints,
                                     "world_prose": world_lints,
                                     "screen_shape": {"summary": shape_summary,
-                                                     "findings": shape_lints}}},
+                                                     "findings": shape_lints},
+                                    "choice_anchoring": {"summary": anchor_summary,
+                                                         "findings": anchor_lints}}},
                          indent=1, default=str))
         return
 
@@ -1160,6 +1876,19 @@ def main():
             print(f"          · … and {len(lints)-12} more")
         print("          (a canvas that neither binds nor names the speaker — check the"
               " name that will render)")
+
+    if anchor_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · choices hang off the room — {anchor_summary}")
+        by_screen = collections.Counter(h.split(" @")[0] for h in anchor_lints)
+        for sid, n in by_screen.most_common(8):
+            print(f"          · {sid}: {n} choice{'s' if n > 1 else ''} naming nothing the screen said")
+        if len(by_screen) > 8:
+            print(f"          · … and {len(by_screen)-8} more screens")
+        if anchor_lints:
+            print("          (the-surfaces.md R2b — a PERCENTAGE to compare, not a bar to clear:"
+                  " a word-match cannot see that a mirror belongs to a paragraph about a wardrobe."
+                  " ROOM screens only; character hubs are judged by the object test instead)")
 
     if shape_lints or shape_summary:
         print(f"  {'─'*72}")

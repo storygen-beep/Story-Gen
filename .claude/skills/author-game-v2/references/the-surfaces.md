@@ -137,9 +137,77 @@ attach to means either the prose is missing an object or the choice belongs on a
 **This is the rule that decides whether a screen reads as a room or as a menu**, and no count fixes
 a screen that fails it. See the worked comparison at the top of this file.
 
-**R3 · A repeatable location-bound canvas caps at 8 choices.** Field median is 2 and p90 is 4, so 8
-is already double the ninetieth percentile. Above that, split by what the choices are aimed at —
-the split is always available, because R1 already tells you the seam. Gate 20.
+**R2b is now MEASURED, and half of it is gated — which is the reason R3 could stop being a quota.**
+Declare each room's affordances on the board:
+
+```json
+"board": { "locations": [
+  { "id": "the_stock_room",
+    "objects": ["the roll cages", "the cold store", "the CCTV recorder and its screen",
+                "the eleven feet of corridor", "the padlocked door", "the shelves"] }
+] }
+```
+
+`objects` are **the things the room's prose names AND the player can act on** — not every noun.
+Atmosphere belongs in the prose, not in this list.
+
+**Gate 22 · declared objects are real** — a hard gate, because both halves are pure consistency
+against your own declaration and both are reachable:
+
+1. every declared object is actually written into the room's prose
+2. every declared object affords at least one choice — a named thing she cannot act on is texture,
+   so either give it an affordance or take it out of the list
+3. **every thing the choices actually act on is declared.** Computed from the GAME, not the board:
+   if a choice hooks onto a word its screen really did write, and no declared object covers that
+   word, the board left a real affordance out
+   *(plus: a room that has screens but declares no objects fails; a room that declares objects but
+   has no repeatable screen fails; and a declared id that is not a real location fails.)*
+
+> ⚠️ **Check 3 exists because without it the gate was passable by declaring LESS.** Measured: one
+> safe object per room, game byte-identical, scored **20/21 with gate 22 green**. The completeness
+> half has to be computed from what the choices do, or a declaration check just rewards a short
+> declaration. Same shrink now scores 59 undeclared affordances against 16 for the honest one.
+
+**Lint · choices hang off the room** — the third check, *no choice names something its own screen's
+prose has not put in the room*, is reported as a **percentage, not a verdict.**
+
+> ⚠️ **It was built as a gate and demoted the same week, and the reason is worth keeping.** Run
+> against the worked example at the top of this file — measured from a shipped game, printed here to
+> show what *correct* looks like — a word-match fails **"Mirror"** under *"Your clothes are kept in
+> the creaky wardrobe."* The mirror belongs to the cluster that sentence sets up; a human sees it and
+> a matcher cannot. One in four of that example's real decisions fails, and the ceiling on a real
+> game is ~74%, against 55% for the strict per-screen rule. **A gate demanding zero failures could
+> never be passed, and this file has already
+> demoted two rules for exactly that.** The number is worth reading; the pass/fail line was not.
+
+The per-screen scope is deliberate: matching a choice against the room's *whole* declared list would
+make the measure vacuous — a room declaring seventeen things would accept almost anything. R2b is
+about the paragraph *in front of the player* naming the thing the choice acts on. Read the lint by
+looking at **which screens contribute several floaters**, not at the total.
+
+**R3 · A room's choice count is not chosen. It falls out of R2b.**
+
+Write the room's paragraph, naming the things in it that she can act on. Hang every choice on one of
+them. **That is the count** — it was not decided in advance and it is not a target.
+
+**The relation is many-to-one, never one-to-one.** One object may afford several choices: the bed in
+the worked example at the top of this file affords *strip and get in* and *pyjamas and climb in*, and
+the wardrobe affords *wardrobe* and *mirror*. Read the other way round it becomes a quota again —
+inventing an object to justify a choice, or capping a rich object at one, are both the disease in a
+new coat. The only hard direction is that **no choice may hang on nothing.**
+
+> ⚠️ **Do not read the 8 below as the size of a room.** It is a backstop for the pathological case
+> and nothing else. Measured, study 6: a game built after this file existed put **19 of its 30
+> screens at exactly 8** and shipped the *same 213 choices* as the 23-choices-on-one-desk game the
+> cap was written to fail — the cap redistributed the menu instead of shrinking it, and pushed the
+> median *up* from 7 to 8. **A ceiling makes "pass" and "maximise" point the same way.** The field
+> median for things-to-do-at-a-place is **3**.
+
+**The backstop:** a repeatable location-bound canvas fails above **8** decisions (gate 20). Field
+median is 2 links and p90 is 4, so 8 is already double the ninetieth percentile — if you are near
+it, the screen is doing several jobs and R1 already tells you where the seam is. Gate 20 now prints
+`median · N of M screens at the cap`, so building to the number is visible on the scoreboard
+instead of reading as a clean pass.
 
 **R4 · Money is not a scene.** Purchases live with the thing bought, or on one ledger surface.
 
@@ -212,16 +280,23 @@ doctrine. The menu shape set that ratio before a word was written.
 
 | | |
 |---|---|
-| **Gate 20 · menu size** | no repeatable location-bound canvas offers more than 8 choices |
+| **Gate 20 · a place is not a catalogue** | the backstop: no repeatable location-bound canvas offers more than 8 decisions. Prints `median · N at the cap` — a game built to the number reads differently from one built to its rooms |
+| **Gate 22 · declared objects are real** | declare-then-check against `board.locations[].objects`: every declared object is written into the prose and affords a choice; every room with screens declares objects; no declared id is a phantom location |
+| **Lint · choices hang off the room** | the share of room choices naming something their own screen said. A percentage to compare, never a bar to clear — see R2b for why it is not a gate |
 
-**R1, R2, R2b and R4 are deliberately not gated.** Whether *"Turn somebody away"* is aimed at a
-person or at the room is a judgement a parser cannot make, and a proxy check for it would pass
-exactly the game that failed. **R2b is the same:** a parser can see that a choice exists and that a
-paragraph exists; it cannot see whether the paragraph names the thing the choice acts on. They are a
-board-phase and authoring-time discipline, and R3's cap is the measurable shadow they cast — a hub
-that violates R1 almost always violates R3 as well, which is how the failure case would have been
-caught on its first build.
+**R1, R2 and R4 are deliberately not gated.** Whether *"Turn somebody away"* is aimed at a person or
+at the room is a judgement a parser cannot make, and a proxy check for it would pass exactly the game
+that failed. They stay a board-phase and authoring-time discipline.
 
-> **R2b is the highest-value ungated rule in this file.** It is the one the field agrees on most
-> consistently and the one no check will ever catch for you. If you read nothing else here before
-> writing a location, read the worked comparison at the top.
+> **R2b used to be on that list, and moving it half-off is the point.** It was described here as
+> *"the highest-value ungated rule in this file… the one no check will ever catch for you"* — and it
+> then drifted to **55% of choices anchored** in a game that scored 20/20, while gate 20 (the checked
+> half of the same rule) was satisfied perfectly on 18 of its 22 rooms at exactly the cap. **What the skill
+> wrote down and checked, held; what it wrote down and did not check, rotted.**
+>
+> The half that a parser *can* judge — did you write the object, can she use it — is now gate 22,
+> because the board declares what the room has and the check compares the game against the author's
+> own statement. **The half that needs a reader stayed unjudged**, and became a percentage instead:
+> the original sentence was right about that part, and the first attempt to gate it failed the
+> worked example printed at the top of this very file. Two rules in this file were demoted for that
+> reason before; do not make it three.

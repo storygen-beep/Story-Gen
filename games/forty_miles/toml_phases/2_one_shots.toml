@@ -69,8 +69,8 @@ blocks = [
   { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Hatch comes down at midnight. Serve through the drawer after that. And you don't go out on the apron on your own." },
   { type = "paragraph", content = "You point out that you are on your own. All night. That is the job." },
   { type = "paragraph", content = "She picks her bag up off the chair and does not answer that, and at the door she stops with her hand on it." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Gerry comes Friday at six. Have it counted before he pulls in. He doesn't like waiting in the car." },
-  { type = "thought_bubble", content = "Two hundred for him and forty-five for the van, out of a week that pays three-fifty. She knows the numbers. Everyone here knows the numbers." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bev" }, content = "Gerry takes it the minute Friday starts. Have it counted before midnight Thursday. He doesn't like waiting in the car." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Two hundred for him and forty-five for the van, out of a week that pays three-fifty. You know the numbers. Everyone here knows the numbers." },
   { type = "paragraph", content = "Then the door does its two-tone thing, and her car goes out under the canopy and left onto the road, and the shop is very quiet and very bright and it is twenty-two hundred hours on Monday." },
 ]
 exit_block = { type = "location", text = "Start the shift.", config = { destinationType = "specific", locationId = "the_shop", time_progression_minutes = 30, flagEffects = [
@@ -118,13 +118,13 @@ blocks = [
         { type = "paragraph", content = "He puts a two-pound coin in the drawer and pushes it back through, which is not a thing anyone does at a hatch, and walks off across the apron into the black without saying anything else." },
     ] },
   ] } },
-  { type = "thought_bubble", content = "Ninety seconds. Bev has done that ninety-second transaction eleven years and would not call it anything." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Ninety seconds. Bev has done that ninety-second transaction eleven years and would not call it anything." },
 ]
 exit_block = { type = "choices", choices = [
   { text = "Put the coin in your pocket, not the till.", targetType = "node", nodeId = "the_coin", effects = [
     { targetType = "player", trait = "seen", op = "add", value = 4, clamp = true },
     { targetType = "player", trait = "money", op = "add", value = 3, clamp = false },
-    { targetType = "player", trait = "count", op = "subtract", value = 2, clamp = true },
+    { targetType = "player", trait = "count", op = "add", value = -2, clamp = true },
   ] },
 ] }
 
@@ -183,7 +183,7 @@ blocks = [
         { type = "paragraph", content = "The orgasm takes your legs and you moan out loud into an empty stock room, and your cunt clenches down hard on your fingers, and you keep them in there through all of it until it lets go." },
     ] },
     { advance_text = "After.", blocks = [
-        { type = "thought_bubble", content = "Eleven feet. She has measured it now and she is not going to be able to stop knowing the number." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Eleven feet. You have measured it now and you are not going to stop knowing the number." },
         { type = "paragraph", content = "You straighten the vest, and you look down the corridor at the padlock on the far door, and you think about what the eleven feet is worth rather than what it is." },
     ] },
   ] } },

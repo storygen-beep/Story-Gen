@@ -1183,6 +1183,11 @@ class TweeComprehensiveGeneratorV2:
         self.rent_text = rent_settings.get("text", {})
         self.rent_eviction_mode = rent_settings.get("eviction_mode", "game_end")
         self.rent_eviction_flag = rent_settings.get("eviction_flag", "rent_evicted")
+        # The RentDay pages used to hardcode "$". Every other price in a game comes from
+        # authored prose, so a game written in pounds had exactly one screen quoting
+        # dollars — and it was the screen the whole economy hangs off. Default stays "$"
+        # so no existing build moves.
+        self.rent_currency_symbol = rent_settings.get("currency_symbol", "$") or "$"
 
         # Passes (recurring time-limited purchases)
         self.passes = (self.project.metadata or {}).get("passes", [])
@@ -3115,6 +3120,7 @@ setup.rent_enabled = {"true" if self.rent_enabled else "false"};
 {f'setup.rent_text = {json.dumps(self.rent_text)};' if self.rent_enabled else ''}
 {f'setup.rent_eviction_mode = "{self.rent_eviction_mode}";' if self.rent_enabled else ''}
 {f'setup.rent_eviction_flag = "{self.rent_eviction_flag}";' if self.rent_enabled else ''}
+{f'setup.rent_currency_symbol = {json.dumps(self.rent_currency_symbol)};' if self.rent_enabled else ''}
 setup.sidebar_items = {sidebar_items_json};
 setup.player_portrait_enabled = {"true" if self.player_portrait_enabled else "false"};
 setup.player_portrait = {player_portrait_json};
@@ -15894,6 +15900,7 @@ if (clothingMsg) {
 <<nobr>>
 <<set _money to $player.core_traits.money || 0>>
 <<set _rent to setup.rent_amount>>
+<<set _cur to setup.rent_currency_symbol || "$">>
 <<set _rt to setup.rent_text || {}>>
 <<set _collectorName to "the landlord">>
 <<set _npcPortrait to "">>
@@ -15912,14 +15919,14 @@ if (clothingMsg) {
 
 <div class="dialog-block dialog-npc">
   <div class="dialog-content">
-    <strong><<print _collectorName>>:</strong> <<print _rt.greeting || "Rent. $" + _rent + ". You know how this works.">>
+    <strong><<print _collectorName>>:</strong> <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">>
   </div>
 </div>
 
-<p>You have $<<print _money>>. Rent is $<<print _rent>>.</p>
+<p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
 <div class="rent-choices">
   <<if _money gte _rent>>
-    <<set _payText to "Pay $" + _rent + " rent">>
+    <<set _payText to "Pay " + _cur + _rent + " rent">>
     <<link _payText>>
       <<set $player.core_traits.money -= _rent>>
       <<set $game_state.rent_state.last_paid_week to $game_state.time_state.current_week>>
@@ -15957,7 +15964,8 @@ if (clothingMsg) {
 
 <p><<print _rt.paid_closing || "Another week secured.">></p>
 
-<p class="rent-balance">Remaining money: <strong>$<<print $player.core_traits.money>></strong></p>
+<<set _cur to setup.rent_currency_symbol || "$">>
+<p class="rent-balance">Remaining money: <strong><<print _cur>><<print $player.core_traits.money>></strong></p>
 
 <<set _returnTo to (State.variables.last_game_passage || "Navigation")>>
 <<link "Continue your day" _returnTo>><</link>>
@@ -16159,6 +16167,39 @@ if (clothingMsg) {
       <div class="sidebar-item hint-item" id="sidebar-hint-<<print _si>>">
         <<print _hintText>>
       </div>
+    <</if>>
+  <<elseif _item.type is "quest_next">>
+    /* The next STEP, on every screen — as opposed to trait_status_text, which is the
+       next STATE. A game shipped with four band strings in the sidebar and no verb, no
+       place and no person anywhere in the always-visible chrome: a player who never
+       opened the Quests page had no direction at all. Renders the same goal block as
+       the Quests page and the npc_panel "next" row (setup.renderQuestsGoalBlock), so
+       there is one implementation of what an objective looks like, not three.
+       `npc_id` picks that character's live card; omitted, it takes the live tier cards
+       in file order. `max` caps how many render (default 3). Terminal cards are
+       skipped: they carry no goals and would render a bare completion badge forever. */
+    <<if setup.renderQuestsGoalBlock and setup.evaluateGoals>>
+      <<set _qnCards to []>>
+      <<if _item.npc_id>>
+        <<set _qnOne to setup.pickQuestsCard(_item.npc_id)>>
+        <<if _qnOne>><<run _qnCards.push(_qnOne)>><</if>>
+      <<else>>
+        <<set _qnCards to setup.pickQuestsCards("story_goals") || []>>
+      <</if>>
+      <<set _qnMax to _item.max || 3>>
+      <<set _qnShown to 0>>
+      <<for _qi to 0; _qi lt _qnCards.length; _qi++>>
+        <<set _qnCard to _qnCards[_qi]>>
+        <<if _qnShown lt _qnMax and _qnCard and _qnCard.goals and _qnCard.goals.length gt 0 and not _qnCard.terminal>>
+          <<set _qnBlock to setup.renderQuestsGoalBlock(_qnCard, setup.evaluateGoals(_qnCard))>>
+          <<if _qnBlock>>
+            <<set _qnShown to _qnShown + 1>>
+            <div class="sidebar-item quest-next-item" id="sidebar-questnext-<<print _si>>-<<print _qi>>">
+              <<print _qnBlock>>
+            </div>
+          <</if>>
+        <</if>>
+      <</for>>
     <</if>>
   <<elseif _item.type is "trait_bar">>
     <<set _tbOwner to _item.trait_owner || "player">>
@@ -16624,6 +16665,14 @@ if (clothingMsg) {
     border-radius: 4px;
     color: var(--theme-success);
     font-style: italic;
+}
+/* quest_next — the next STEP in the rail. Quieter than the hint card on purpose: it
+   is there on every screen, so it reads as chrome rather than as an alert. The inner
+   goal block reuses the Quests-page classes (.quests-goal / .quests-ready / .quests-where). */
+.quest-next-item {
+    padding: 4px 8px;
+    border-left: 2px solid var(--theme-border);
+    margin-bottom: 4px;
 }
 
 #traits-widget {

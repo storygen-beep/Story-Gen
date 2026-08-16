@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import json
 import logging
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field, is_dataclass
 import uuid
 from typing import Any, Dict, List, Optional, Set, Tuple
 
@@ -362,6 +362,10 @@ class GameTemplate:
     rent_text: Dict[str, str] = field(default_factory=dict)
     rent_eviction_mode: str = "game_end"  # "game_end" (legacy) | "flag_set" (fail-forward)
     rent_eviction_flag: str = "rent_evicted"
+    # Symbol the RentDay pages print in front of an amount. Defaults to "$" because
+    # that is what those pages hardcoded before this field existed — a game shipped
+    # with every price in the prose written "£3" and its rent page saying "$245".
+    rent_currency_symbol: str = "$"
     # Sidebar items (custom display elements)
     sidebar_items: List[Dict[str, Any]] = field(default_factory=list)
     # Phone system
@@ -2579,6 +2583,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     rent_text = rent_raw.get("text", {}) or {}
     rent_eviction_mode = _require_str(rent_raw, "eviction_mode", "game_end")
     rent_eviction_flag = _require_str(rent_raw, "eviction_flag", "rent_evicted")
+    rent_currency_symbol = _require_str(rent_raw, "currency_symbol", "$") or "$"
 
     # ── Phone system ──
     phone_raw = data.get("phone")
@@ -2927,6 +2932,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         rent_text=rent_text,
         rent_eviction_mode=rent_eviction_mode,
         rent_eviction_flag=rent_eviction_flag,
+        rent_currency_symbol=rent_currency_symbol,
         sidebar_items=sidebar_items,
         phone_enabled=phone_enabled,
         phone=phone_obj,
@@ -3679,6 +3685,28 @@ def validate(template: GameTemplate) -> List[str]:
                             f"{ctx}: row '{r}' but NPC '{np_npc_id}' has no '{r}' in core_traits "
                             f"(declare it before use)"
                         )
+
+        elif itype == "quest_next":
+            # The next STEP in the always-visible chrome, as opposed to
+            # trait_status_text, which is the next STATE. Renders the same goal block
+            # as the Quests page. `npc_id` picks that character's live card; omitted,
+            # it takes the live tier cards (those with no npc_id) in file order.
+            ctx = f"sidebar_items[{i}] (quest_next)"
+            if template.project.quests_engine != "v2":
+                errors.append(
+                    f"{ctx}: requires project.quests_engine = \"v2\" — the goal-block "
+                    f"renderer this reuses only exists on the v2 quests page"
+                )
+            if not (template.quests_cards or []):
+                errors.append(f"{ctx}: no [[quest_cards]] defined — nothing to show")
+            qn_npc = item.get("npc_id")
+            if qn_npc is not None and qn_npc not in _npc_ids_for_sidebar:
+                errors.append(f"{ctx}: npc_id '{qn_npc}' not found in NPC definitions")
+            qn_max = item.get("max")
+            if qn_max is not None and (
+                not isinstance(qn_max, int) or isinstance(qn_max, bool) or qn_max < 1
+            ):
+                errors.append(f"{ctx}: 'max' must be a positive integer when set")
 
     # ── Cheat page ([ui.cheat_page]) ───────────────────────────────────────────
     # Placed here so the sidebar-item scan above is still in scope: "is this trait
@@ -4786,6 +4814,72 @@ def validate(template: GameTemplate) -> List[str]:
         seen_item_ids.add(it.id)
         if it.max_stack <= 0:
             errors.append(f"items[{i}].max_stack must be positive")
+
+    # ===== Effect `op` must be an op the RUNTIME actually runs =====
+    #
+    # ⚠️ SILENT NO-OP, AND THE MOST EXPENSIVE KIND OF BUG THIS FILE CAN LET THROUGH.
+    # `window.applyTraitEffect` runs 'add' and 'set' and falls through to
+    # "// Unknown op; do nothing" + return on anything else
+    # (twee_comprehensive/generators/v2.py:5742-5751). Nothing normalises the value —
+    # the string "subtract" appears nowhere in this file or in the generator. So an
+    # effect written `op = "subtract"` parses, validates, builds, and emits verbatim
+    # into the HTML, where it does nothing at all.
+    #
+    # Measured on two shipped games authored from the same instructions: 35 dead
+    # effects in one and 70 in the other. In the first, a whole declared meter never
+    # moved for the entire game, twenty activities never charged the energy they said
+    # they cost, and the only NPC penalty in the game never applied. Every ship gate
+    # passed it and so did a live play-through, because a number that never changes
+    # looks exactly like a number the player has not moved yet.
+    #
+    # `op` is already validated this way for cheat-page grants further down; this is
+    # the same check applied to the effects that are actually the game.
+    _LIVE_OPS = {
+        "trait": {"add", "set"},
+        "flag": {"set", "unset", "toggle"},
+        "quest": {"start", "update", "complete", "cancel"},
+    }
+
+    def _check_ops(node: Any, ctx: str, out: List[str]) -> None:
+        if is_dataclass(node) and not isinstance(node, type):
+            node = asdict(node)
+        if isinstance(node, dict):
+            op = node.get("op")
+            if isinstance(op, str) and "subject" not in node and "operator" not in node:
+                kind = ("flag" if node.get("flag") else
+                        "quest" if (node.get("quest_id") or node.get("questId")
+                                    or node.get("quest")) else
+                        "trait" if node.get("trait") else None)
+                if kind and op not in _LIVE_OPS[kind]:
+                    out.append(
+                        f"{ctx}: {kind} effect uses op='{op}', which the engine discards "
+                        f"(applyTraitEffect runs only {sorted(_LIVE_OPS[kind])}, "
+                        f"generators/v2.py:5742-5751). To take something away write "
+                        f"op='add' with a NEGATIVE value; a quantity like money also "
+                        f"needs clamp=false."
+                    )
+            for v in node.values():
+                _check_ops(v, ctx, out)
+        elif isinstance(node, (list, tuple)):
+            for v in node:
+                _check_ops(v, ctx, out)
+
+    _op_errors: List[str] = []
+    for ci, c in enumerate(template.canvases):
+        _check_ops(c, f"canvases[{ci}] '{c.id}'", _op_errors)
+    # Collapse to one line per canvas: a game with 70 of these should not emit 70
+    # near-identical errors and bury everything else the validator found.
+    _seen_op_ctx: Set[str] = set()
+    for e in _op_errors:
+        key = e.split(":", 1)[0]
+        if key not in _seen_op_ctx:
+            _seen_op_ctx.add(key)
+            errors.append(e)
+    if len(_op_errors) > len(_seen_op_ctx):
+        errors.append(
+            f"({len(_op_errors)} dead-op effects across {len(_seen_op_ctx)} canvases "
+            f"in total)"
+        )
 
     # ===== Rent validation (optional) =====
     if template.rent_enabled:
@@ -6296,6 +6390,7 @@ def _assemble_project_metadata(project, template):
             "text": template.rent_text,
             "eviction_mode": template.rent_eviction_mode,
             "eviction_flag": template.rent_eviction_flag,
+            "currency_symbol": template.rent_currency_symbol,
         }
     # Store story_arc if defined (for narrative journal and help page)
     if template.story_arc:

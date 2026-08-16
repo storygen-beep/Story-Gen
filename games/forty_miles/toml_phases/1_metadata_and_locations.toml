@@ -88,7 +88,7 @@ navigation_order     = []
 [[locations]]
 id                   = "the_showers"
 name                 = "The Shower Block"
-description          = "A flat-roofed brick block across the apron with four cubicles, a bench, and a dryer that costs a pound. Cubicle three's lock has been broken since before she started and the sign about it fell off in February. The extractor runs all night whether anyone is in here or not, so from outside there is no way of telling."
+description          = "A flat-roofed brick block across the apron with four cubicles, a bench, and a dryer that costs a pound. Cubicle three's lock has been broken since before you started and the sign about it fell off in February. The extractor runs all night whether anyone is in here or not, so from outside there is no way of telling."
 image                = "locations/the_showers.jpg"
 image_search_queries = ["truck stop driver shower block cubicles tiled", "public shower room bench tiles dim wet floor"]
 entry_from           = "the_forecourt"
@@ -137,7 +137,7 @@ costs                = { time = 10, energy = 2 }
 [[locations]]
 id                   = "her_static"
 name                 = "The Caravan"
-description          = "A static behind the tyre bay with a fan heater, a two-ring hob, and a bed at the end that gets the cold off the window. Everything she owns is in two bags under it. Nunn owns the van the same way he owns the shop, and forty-five pounds of every Friday is for standing it on his gravel."
+description          = "A static behind the tyre bay with a fan heater, a two-ring hob, and a bed at the end that gets the cold off the window. Everything you own is in two bags under it. Nunn owns the van the same way he owns the shop, and forty-five pounds of every Friday is for standing it on his gravel."
 image                = "locations/her_static.jpg"
 image_search_queries = ["old static caravan interior bed night cramped", "small trailer home interior dim bed window"]
 entry_from           = "the_tyre_bay"

@@ -5,6 +5,317 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-16 (later — the Forty Miles repair pass)
+
+- **⚠️ `engine.md` §21 was teaching an op the engine does not run, and two games wrote 105 of
+  them.** `references/engine.md:497` discussed `op = "subtract"` as authored behaviour. It is not
+  one: `applyTraitEffect` runs `add` and `set` and falls through to *"Unknown op; do nothing"* +
+  `return` on anything else (`v2.py:5742-5751`), and the string `subtract` appears nowhere in the
+  generator or the importer. Proven live on a shipped build — `count` 100 stayed 100 through a
+  `subtract 4`; `add -5` moved stress 20 → 15.
+  - **Measured cost.** 35 dead effects in `forty_miles`, **70 in `steam`**. In the first, the
+    counterweight its own spec called *"only ever falls"* never moved for the entire game (12 dead
+    decrements), 20 activities never charged the energy they said they cost, and the only NPC
+    penalty in the game never applied. Valid TOML, green build, all gates green, and an 11/11
+    play-test — because a number that never changes looks exactly like a number nobody has moved.
+  - **New §21b** in `engine.md` with the full op table per effect family (trait `add|set`, flag
+    `set|unset|toggle`, quest `start|update|complete|cancel`), each cited.
+  - **New gate 25 · effects use a live op** in `gates.py`. Fails `steam` at 70, passes `forty_miles`
+    (repaired) and `back_home` (never had any) — it discriminates rather than just firing.
+  - **`template_import.py` now hard-fails** on a dead op (same shape as the cheat-page grant check at
+    `:3755`), so no future build can emit one. Verified: `games/steam` now exits 1 and produces
+    nothing until its 70 are rewritten. Deliberate and recorded — a frozen record that is not
+    rebuilt, and the failure is the point.
+  - **⚠️ Two gates were reading direction from the op NAME.** `_currency_ops` appended the op string,
+    so a deduction written the only way that works (`op = "add"`, negative value) counted as INCOME:
+    `forty_miles` flipped from 11:11 to 10:12 the moment its dead effects were repaired correctly.
+    Now classified by SIGN, with a `_effect_value_sign` helper that also handles the
+    `{type = "random", min, max}` value form. Gate 24's `_outflows` had the same bug.
+
+- **Gate 24 now reads `[settings.rent]`, and `engine.md` §26 documents that system for the first
+  time.** The gate walked canvases only, so it **failed a game whose obligation was charged** —
+  `[settings.rent]` was enabled at `amount = 245` and works end to end (verified live: 300 → 55 on
+  the Friday rollover; `v2.py:5453-5464` arms it, `:15247-15259` intercepts, `:15925` charges).
+  A check that fails a game for obeying the doctrine is a bug in the check.
+  - §26 carries the whole mechanism, the `start_after_flag` rule, and the new doctrine line:
+    **if the engine takes the money, do not also author a canvas that narrates the payment.** The
+    measured failure is a game with two settle-ups where the free one had all the writing in it.
+    `the-economy.md` R3 gains the same rule.
+  - **`currency_symbol` added to `[settings.rent]`** (importer + generator), default `"$"` so no
+    existing build moves. The three RentDay passages hardcoded `$` — one screen quoting dollars in a
+    game whose every other price is written in pounds.
+
+- **Gate 22's third check was reporting verbs as room objects.** *"choices hang off `sleep`"* (from
+  the choice `"Sleep."`) and *"`start`"* (from *"the start of it"*) are not things a board can
+  declare, and a check that demands nonsense in the ledger gets ignored. It now requires the hook to
+  be a **noun phrase on both sides** — a determiner in front of it in the choice text AND in the
+  screen's prose — plus a third `_OBJ_STOP` block for time spans and abstractions. Measured on
+  `forty_miles`: 16 findings of which 6 were junk → 7, every one a real thing in the room that the
+  board had genuinely left out.
+
+- **New sidebar item `type = "quest_next"`** (generator + importer + CSS). A quest card has no
+  `title` field, and there was no sidebar type for guidance at all — so a game could ship an
+  excellent Quests page and nothing in the persistent rail but `trait_status_text` bands, which name
+  a **state**, not a step. It renders `renderQuestsGoalBlock`, the same block as the page and as
+  `npc_panel`'s `next` row, so the three surfaces cannot drift. Documented in `engine.md` §23, along
+  with a **circular-label** warning: measured on a shipped game, all three cards of one ascent tier
+  named a choice gated at the exact value the card was trying to reach.
+
+- **`SKILL.md`** — gate 25 added to the scoreboard index; a new operating rule on silent-vocabulary
+  failure, and the "check the skill before blaming the game" rule gains its second measured instance.
+
+- **How verified.** `gates.py` on all three v2 games before and after; `package_from_toml` on
+  `forty_miles` (builds) and `steam` (now correctly refuses); and a live pass in
+  `twine-game-explorer` over the rebuilt game — the funnel end to end, `💭 You are thinking:`
+  rendering in second person, `count` falling for the first time, RentDay charging £245 and printing
+  £, a room hub at 4/8 open on night one and 8/8 at tier 55, three objectives in the sidebar, and
+  all eight new random encounters firing on location entry at 13–24% with the three tier-gated ones
+  correctly silent at zero.
+
+---
+
+## 2026-08-16
+
+- **Whole-skill audit — the declaration hole was a CLASS, and both of the review's blockers are now
+  gated.** Read-only pass over all 23 gates, 11 reference files and 1,618 lines of `gates.py`.
+
+  - **⚠️ R6 · "declare less to owe less" was one rule broken in three places, not one bug.** The
+    third audit fixed `objects` without noticing the shape generalised. Measured across every gate,
+    it partitions them exactly: **a gate that walks the GAME and looks the declaration up cannot be
+    weakened** (`residents have homes` — declare no homes, fail 0/6); **a gate that walks the
+    DECLARATION can** (`guidance exists` — truncate `board.characters` to one and it reported *"24
+    quest cards for 3 ascent tiers and 1 characters"*, and passed). `ascent tiers expand the world`
+    was worse than gameable, it was **narrowed by declaring**: with nothing declared it guesses the
+    top-gated traits, so naming only the healthy tiers hid a descent-shaped meter from the gate whose
+    entire job is to catch one. Both fixed — guidance now owes a card for every `[[npcs]]` entry the
+    game has, and the direction test now runs over **every player-subject trait in the game**,
+    declared or not (NPC-subject traits excluded, since a per-character relation legitimately gates
+    one way). Verified with a synthetic descent meter: `shame (0+/1-)` is now caught while undeclared.
+  - **⚠️ R7 · Both blockers the review found had hidden in the PRESENCE class.** Four gates ask *does
+    at least one exist*, and that question cannot see that the important one is missing.
+    `money gates something` passed on nine *other* canvases while the declared £245 obligation charged
+    nothing; the media gates report 100% on 68 declared pools with zero files (no gate in the file
+    touches the filesystem at all — still true, still open).
+  - **New gate 23 · speakers are named.** Every `dialog`/`thought_bubble` must carry `props.speaker`.
+    Consistency, no threshold, always reachable, and there is no case where omitting it is correct.
+    Measured across all three v2 games: **147, 145 and 79** blocks missing it — three for three,
+    because the skill mentioned `thought_bubble` once and never showed its shape.
+  - **New gate 24 · the obligation is charged.** `board.economy.obligation` must carry an
+    `obligation_amount`, and some choice must charge at least that much. Declaring an obligation with
+    no price now fails — *a price nobody can check is how a game shipped with its central mechanic
+    missing.* Verified both ways: fails as shipped, passes once the settle-up takes £245.
+  - **`engine.md` §25 written, and `speaker = "unknown"` promoted out of "Unverified — do not cite".**
+    It had been read during the review (`v2.py:14640-14647`, renders *"Someone is thinking:"*) and
+    left on the list — sitting directly beside the largest defect the review found. §25 now carries
+    the default's `file:line` chain, all five authoring forms, the `dialog` vs `dialogue` trap, and
+    the requirement that a player thought match the game's `narration_person` (62 of the 147 broken
+    bubbles called the protagonist "she" in a second-person game, so re-attribution alone would have
+    produced *"You are thinking: She has measured it now…"*).
+  - **⚠️ The stale `fill` instruction had a SECOND home.** `state.md`'s Field-rules section still read
+    *"words currently placed there — recompute from `scripts/gates.py`"*. Fixing `templates/board.toml`
+    yesterday only got one of the two places telling authors the budget is computed.
+  - **Nine of twenty-one gates were documented in zero reference files** — their evidence lived only
+    in `gates.py` comments, so an author hitting a FAIL on "traversal heat" had nothing to read.
+    `SKILL.md` gains a scoreboard index mapping every gate to the file that argues it; **23/23 gate
+    names now appear in the docs**. Also fixed a naming mismatch: `the-surfaces.md` called it
+    *"Gate 20 · menu size"* while the board prints *"a place is not a catalogue"*.
+  - **`DOCTRINE_GAPS.md` study 6 gains R6 and R7**, since both are rules rather than one-offs.
+
+  **Scores:** forty_miles **19/23**, steam **15/21**, back_home **11/19**. Every new failure is a real
+  defect the games shipped with, and the two new gates fail all three games on the speaker field.
+
+- **Third audit — the gate could be passed by declaring LESS, and three denominators were on one
+  scoreboard.** Read-only pass, then applied.
+
+  - **⚠️ Gate 22 was gameable, and the inversion is worth recording.** Measured: keep one safe object
+    per room, change nothing in the game — **20/21, gate green.** The declaration checks verify the
+    board is honest about what it declares and could not see that it declared almost nothing. Worse,
+    the *lint* I had demoted for being unreachable is the half that **cannot** be gamed, because it
+    never consults the declaration. So the cheatable half was the gate and the honest half was the
+    lint — the opposite of how I had described the split. Fixed with **check 3: every thing the
+    choices actually act on must be declared**, computed from the game rather than the board (an
+    anchored choice hooks onto a word its screen wrote; if no declared object covers that word, the
+    board left an affordance out). The same shrink now scores **59 undeclared affordances against 16**
+    for the honest declaration, so under-declaring is strictly worse. Reachable, because it only asks
+    the board to list what the game already acts on.
+  - **Check 3's first cut was 50% noise, and fixing it exposed a real bug in `_content_words`.**
+    It reported choices hanging off objects called *there*, *before*, *get* and *forty*. Two causes:
+    stopwords were filtered on the RAW word and only then stemmed, so every inflection walked
+    through (`gets` survived while `get` was stopped); and the list had no adverbs, ordinals,
+    weekday names or bare numbers. Both fixed — 30 findings became **16**, and they are now nouns a
+    reader would recognise (*the block*, *the window*, *the van*, *the road*). Also switched the
+    comparison to `_names_any`, which had been reporting `padlock` as undeclared against a declared
+    *"the padlocked door"*.
+  - **Three denominators were printed on one board** — the trap this project has now hit six times.
+    Gate 20 and the screen-shape lint counted 213 choices across rooms **and** character hubs; the
+    anchoring lint counted 166, rooms only. Gate 20 now reports them separately, and the split
+    matters: **rooms are 18 of 22 at the cap (82%)**, where the blended figure read 19 of 29 (66%) —
+    the well-shaped character hubs were diluting the number meant to expose the badly-shaped rooms.
+    The screen-shape lint now names its population inline.
+  - **A location declaring objects but owning no repeatable screen** reported seven misleading
+    "affords no choice" lines for one fact; it now reports that fact once, in the board's own terms.
+  - **`_room_objects` memoised** — the gate and the lint each triggered a full walk, which is not
+    just wasted work but two call sites that could drift.
+  - **Figures moved by the stopword fix and corrected everywhere:** anchoring is **55%** over room
+    screens (was reported 65%), and **51%** over the 213-choice population, which is the honest
+    like-for-like against the by-hand 41% in `games/forty_miles/REVIEW.md`. The review now states
+    both populations rather than reading as a before-and-after.
+
+  **Verified:** cheat re-tested (fails, 59 undeclared) · matcher unit tests re-run after the
+  stopword change (9/9 stem pairs, 6/6 match cases, and the doctrine's worked example still scores
+  3/4 with "Mirror" failing by design) · all three games and the no-ledger path re-run. Scores
+  unchanged: forty_miles 19/21, steam 16/19, back_home 12/18.
+
+- **Second audit — gate 22 was unreachable, and the root cause of the fake budgets was in our own
+  template.** Read-only pass at LO's request, after the first audit had already found six defects.
+
+  - **⚠️ Gate 22's anchoring check could never be passed, so it is now a LINT.** Run against the
+    worked example in `the-surfaces.md` — printed there, measured from a shipped game, to show what
+    *correct* looks like — a word-match fails **"Mirror"** under *"Your clothes are kept in the
+    creaky wardrobe."* One in four of that example's real decisions fails. On `forty_miles` the
+    ceiling is **74%** even matching against the whole room's prose, against the 55% the strict rule
+    scores. **A gate demanding zero failures fails correct work, which is exactly why R5 and R6 were
+    demoted** — I had reproduced the documented mistake with a zero instead of an invented number,
+    which is worse because it looks rigorous. Split: **gate 22 "declared objects are real"** keeps
+    the two halves a parser can actually judge (every declared object is written; every declared
+    object affords a choice), and **`lint_choice_anchoring`** reports the share as a percentage with
+    the worst screens ranked.
+  - **The gate's denominator was under the author's control.** A location declaring no `objects` was
+    silently skipped, so declaring one easy room shrank what was checked from 166 choices to 84.
+    Now a room that has screens and declares nothing is itself a failure.
+  - **`_room_objects` extracted** as the shared analysis behind the gate and the lint, fixing three
+    more latent bugs on the way: the location description is now read *outside* the canvas loop (a
+    room whose only canvases bind an NPC previously had every object reported "never written");
+    NPC hubs are excluded on `npc` **or** `requires_npc`, not `npc` alone (they are separate fields
+    and a hub may set only one); and a board declaring a location id the game does not have is now
+    reported instead of silently counted as unwritten.
+  - **The post-hoc budget detector false-positived a real plan.** At `% 100`, a legitimate
+    250-granularity plan (9,750 · 5,250 · 4,250 …) was flagged as back-filled — a false positive on
+    exactly the careful author it is meant to reward. Now `% 50`, which accepts every plausible plan
+    granularity and still scores the measured real case 0 of 8.
+  - **⚠️ ROOT CAUSE of the fake budgets found, and it was ours.** `templates/board.toml` said
+    `fill = 0  # recomputed by gates.py — do not hand-maintain`, and `state.md` opened with
+    *"anything that can be recomputed from the TOML does not belong here"*. **The skill told three
+    authors the field was computed, so all three filled it in afterwards.** Both corrected, with the
+    distinction stated: *recomputed* means derived, not measured after the fact, and a declaration
+    only works if it can be wrong.
+  - **`DECLARED_FILL_TOLERANCE` labelled as the one invented number in the file**, with why an
+    invented value is defensible here (it compares a game against itself, so it only has to be loose
+    enough not to police variance) and unacceptable in R5/R6 (which had to discriminate between
+    games). Any value in 0.2–0.4 behaves identically — the signature of a number not carrying the
+    decision.
+  - **`DOCTRINE_GAPS.md` overstatement corrected** — "every floor is cleared with room" was wrong;
+    `sinks : sources` sits exactly on its floor. Six of seven.
+  - Doctrine updated for the split: `SKILL.md`, `the-surfaces.md` (R2b, the checked table, the
+    not-gated note), `the-board.md`, `state.md`, `templates/board.toml`, `games/forty_miles/REVIEW.md`.
+
+  **Verified by construction, not inspection.** Each fix was exercised against a synthetic case:
+  a phantom location id is reported; declaring one room only now fails with the other seven named;
+  a 250-granularity plan passes; a `requires_npc`-only hub contributes 0 floats (correctly excluded);
+  and a location whose every canvas binds an NPC still resolves 5 of 6 objects from its description
+  alone. Scores unchanged — forty_miles 19/21, steam 16/19, back_home 12/18, no-ledger 18/18.
+
+- **Audit of yesterday's study-6 work — four defects in it, all fixed.** Found by unit-testing the
+  new helpers and re-reading the doctrine against itself, not by re-reading the diff.
+
+  - **`scripts/gates.py` `_stem` was wrong for consonant+"es".** It stripped "es" from any word
+    ending in it, so `cages`→`cag` while `cage`→`cage`. **5 of 16 common singular/plural pairs failed
+    to meet**, including cubicle/cubicles and table/tables, both of which occur in a real board
+    declaration. Now strips "es" only after a sibilant (`ses/xes/zes/ches/shes`) and "s" otherwise:
+    13/14 pairs meet. The `shelf`/`shelves` irregular still misses and is documented rather than
+    fixed — handling f→ves would make `curves`→`curf`, a new wrong answer.
+  - **`_names_any`'s prefix fallback produced FALSE PASSES.** At a 5-character prefix, `count`
+    matched `counter` — so *"Count Bev's float"* was credited to the shop counter, a different
+    object. Raised to six. A gate that silently forgives an unanchored choice is worse than no gate,
+    so the wrong-fail direction is the one to prefer here.
+  - **Gate 22 double-reported one defect as two.** `afforded` was only recorded for choices that had
+    already matched their screen's prose, so a choice naming an object the screen forgot to write was
+    flagged as floating *and* its object flagged as unusable. Now recorded independently: unusable
+    objects drop 11 → 8, and the 8 are real.
+  - **`SKILL.md:57` still taught the cap as the rule** — *"a repeatable location screen caps at 8
+    choices"* — in the file an author reads first, which would have undone the whole change. Rewritten
+    to lead with the derivation and name 8 as a backstop, citing both games as evidence. Same fix
+    applied to `engine.md:444`.
+  - **The many-to-one relation was written as one-to-one** in `the-surfaces.md` R3, `the-board.md`,
+    `state.md`, `templates/board.toml` and study 6's own R2 — *"one choice per thing that affords
+    one"*. That is a quota wearing a derivation's clothes, and it contradicted the worked example
+    three lines above it, where a bed affords two choices. All five corrected; study 6 R2 carries the
+    correction visibly.
+
+  **Also verified:** gate 1's round-number branch, which had never executed on any real game, was
+  exercised against a synthetic honest plan — it PASSes a roughly-right plan, FAILs named locations
+  that drift (`the_showers: declared 9,000, delivered 4,191 (-53%)`), and FAILs a flat plan with
+  *"the PLAN has no centre"*. `_median` returns an int on both odd and even inputs, so gate 19's
+  `:+d` margin format cannot crash. Stale figures from yesterday (64% → 65%, 11 → 8 unusable,
+  106/166 → 108/166) corrected in `CHANGELOG.md`, `DOCTRINE_GAPS.md` ×2, `the-surfaces.md` and
+  `games/forty_miles/REVIEW.md` ×3. Scores unchanged: forty_miles 19/21, steam 16/19,
+  back_home 12/18.
+
+## 2026-08-15
+
+- **`DOCTRINE_GAPS.md` — Study 6 added: "The number becomes the spec."** Written after a full review
+  of `games/forty_miles`, and prompted by LO's question on reading it: whether the skill states
+  *reasoning* for its specs or only *numbers*. Measured across all three v2 games. Three of three
+  ship exactly 8 locations and 3 ascent tiers; two land within four words of the 4,500 mean-location
+  floor; total prose came in at 36,035 / 36,019 / 37,450 against a 36,000 figure that is not a spec
+  anywhere — it is illustrative arithmetic at `the-board.md:79`. The mechanism is a floor/ceiling
+  asymmetry: `forty_miles` clears every floor by 12-97% and sits on both ceilings at exactly 0%
+  margin, with 19 of its 30 hub screens at the gate-20 cap. Verified by parsing each
+  `7_final_game.toml` and by re-running `gates.py` on all three games; the menu comparison
+  (steam 214 choices over 22 screens vs forty_miles 213 over 29) is the measured consequence.
+  Five rules proposed, **no new gates** — the fix is reporting `median · count-at-cap` on ceiling
+  gates, since "0 over 8" and "19 at exactly 8" currently print the same PASS. Nothing applied to
+  `gates.py` or the reference files; surfaced for LO's call.
+
+- **Study 6 applied — the numbers stop being the spec.** LO's call: hard gates immediately, and
+  backfill `forty_miles`' board declaration only (no game content touched anywhere).
+
+  - **`scripts/gates.py` — new gate 22, "choices hang off the room".** Declare-then-check per
+    `SKILL.md:107` against a new `board.locations[].objects`. Three consistency tests, no threshold
+    of its own: every declared object is written into some screen's prose, every declared object
+    affords a choice, and no choice names something its own screen's prose has not put in the room.
+    Scoped to **location-only** hubs — on an NPC hub the anchor is the person (R1/R2's object test),
+    and the handover hub measures 0% on object-matching while being correct. Matching is a stemmed
+    content-word overlap with a 5-char prefix fallback; `_stem`/`_content_words`/`_names_any` are
+    new module-level helpers. **This is what makes `the-surfaces.md` R2b checkable** — the rule the
+    file itself called "the highest-value ungated rule", which had drifted to 55% in a 20/20 game.
+  - **`scripts/gates.py` — gate 1 now checks the author's own budget.** Reads
+    `board.locations[].fill` (accepting `budget`, an observed key drift in `steam`) and judges each
+    location against its own declared figure at `DECLARED_FILL_TOLERANCE = 0.25`; the three global
+    constants are demoted to a backstop used only when no ledger exists, and the headline says which
+    ran. ⚠️ **Found while building it:** all three v2 games declared *exact post-hoc word counts*
+    (9,607 / 4,936 / 10,295 — 0 of 24 round to 100), so delivered-vs-declared matched 8/8 in all
+    three and proved nothing. A budget that cannot be wrong is not a budget, so the gate detects a
+    mostly-non-round declaration, refuses to credit it, and falls back to the backstop. All three
+    games now FAIL gate 1 for this, correctly.
+  - **`scripts/gates.py` — ceiling gates report the distribution, not the verdict.** Gate 20 prints
+    `median · N of M screens at the cap` and warns when the majority sit on it; gate 19 prints its
+    margin and the field median. Floor gates keep printing a verdict — the asymmetry is the finding.
+    Same discipline as G2's existing marginal-pass headline.
+  - **`references/the-surfaces.md`** — R3 rewritten so the derivation leads (the count falls out of
+    R2b; 8 is named as a backstop, not a size). R2b gains the `objects` declaration, the three
+    checks, and why check 3 is per-screen. R2b moved out of the not-gated list, with the reason it
+    was there kept visible. Gate 22 added to the checked table.
+  - **`references/the-board.md`** — §1 leads with deriving the location count from the cast's rotas
+    and the daily loop; the "6–8" removed. `objects` and round-number `fill` added to the per-location
+    record. The 36,000-word example deleted, with a note that three games shipped to it.
+  - **`references/the-release.md`** — §"The first release": "6–8 locations" and "30-45k words"
+    replaced by the derivation plus the shape.
+  - **`references/state.md`**, **`templates/board.toml`** — `objects` documented; `fill` recorded as
+    canonical and round-numbers-before-prose; `budget` noted as drift.
+  - **`games/forty_miles/v2_state.json`** — `board.locations[].objects` backfilled for all eight
+    locations, derived by reading what each room's prose actually names (not reverse-engineered from
+    the choice lists, which would make the gate vacuous). Plus an `objects_note`. **No game content
+    changed** — `toml_phases/`, `output/` and `releases/v0.1.html` untouched.
+
+  **Verified by running, not asserted.** `forty_miles` **20/20 → 19/21** (fails fill and gate 22);
+  `steam` 17/19 → 16/19; `back_home` 13/18 → 12/18 — every new failure is the post-hoc budget, which
+  is true of all three. Gate 22 **discriminates rather than just firing**: `hub_stock_room` flags 2
+  floating choices and `hub_stock_room_dawn` flags 5, matching the by-hand review measurement, and
+  every flagged line is a real unanchored noun (*the hasp, the wastage sheet, the first Tuesday*).
+  The no-ledger path was tested on a copy with no `v2_state.json`: gate 1 falls back and says so,
+  gate 22 reports n/a, nothing crashes.
+
 ## 2026-08-14 — **The overnight-schedule rule was true only for the example it was written from**
 
 `references/the-board.md` §2 rewrites the overnight-window paragraph to name the weekday caveat, with
