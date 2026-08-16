@@ -42,7 +42,7 @@ title           = "Forty Miles"
 description     = "Kelbrook Services, ten at night to six in the morning, and nothing open either way for forty miles. She is the only person on site. The man who owns it paid off her debt and has never once mentioned it."
 starting_canvas = "canvas_opening"
 quests_engine   = "v2"
-version         = "0.1.1"
+version         = "0.1.2"
 
 [time]
 starting_hour = 22          # Bev has just gone. The first handover is the opening.

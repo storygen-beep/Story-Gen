@@ -334,8 +334,7 @@ price and a cadence. Nothing checks it.
 
 # 3 · F3 · The location hubs never change; the NPC hubs do it right
 
-**severity** HIGH · **layer** SKILL + GAME · **status** ✅ **FIXED** — doctrine 2026-08-15, game 0.1.1. Room hubs went 126/166 → 70/166 open on night one, median 3, matching the NPC hubs and the field. Nothing deleted; the tiers now open the rooms. Verified live: 4 open / 4 visibly locked at tier 0, 8 open at tier 60.
-untouched**
+**severity** HIGH · **layer** SKILL + GAME · **status** ✅ **FIXED 0.1.2 — 0.1.1's attempt DID NOT WORK.** 0.1.1 gated 57 room choices and left `show_when_locked` on all of them, so 164 of 166 rows still rendered: the same wall, half of it grey. 0.1.2 hides 88 gated choices across rooms and character hubs, keeping one visible locked door per screen. Rows on screen went median 8 → 4 (max 8 → 6); verified live at 5 rows on tier 0 and 8 on tier 60. The lint now leads with rows rendered, because nothing measured that number and that is why 0.1.1 shipped believing it was fixed.
 
 > **The skill-side half shipped.** `the-surfaces.md` R3 no longer states a cap as the rule: the
 > count now derives from R2b (write the room, name what she can act on, one choice per thing), with
