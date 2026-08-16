@@ -241,6 +241,28 @@ controller_state = 0
 # Bumped on loop_bastien_finisher's d0 choice only. A TRAIT because that setter is triggerless.
 bastien_drains_done = 0
 
+# ─── THE FACE (beat_0094, rev 145) — the chapter's three internal traits ──────────────────────────
+# Labels + the full trait-not-flag reasoning live in 0_systems_spec.toml. Declared HERE because
+# [player.core_traits] is what puts a trait into the cross-release save backfill: a 0.1.8 save loaded
+# into 0.1.9 gets these initialised to 0, where a trait declared only in the labels block would be
+# undefined and every "gte" against it would read as a comparison on undefined.
+# wall_refusals 0-4 — doors that have shut on her as Wren; read once, by cap_the_wall's gte 3.
+# bar_rung 0-4 — 0 not hired / 1 floor / 2 counter / 3 the floor in less / 4 the back room.
+# taser_held 0/1 — carrying the market taser. NOT on the equipped_weapon axis, on purpose: that axis is
+#   one-core-one-weapon and the taser's whole job is to be the thing she can carry WITH the drain live.
+wall_refusals = 0
+bar_rung      = 0
+taser_held    = 0
+# taser_through 0/1 — set at the door search every visit. "She owns one" and "it is on her right now" are
+# different facts, because he searches her every time. Read by cap_the_raid as a BAND, never as a gate.
+taser_through = 0
+# ruin_depth 0-4 — beat_0110 (rev 160). The burned-back-room crawl's OWN odometer. It exists because the
+# first cut banded that crawl on yard_depth, which belongs to the Burned Yard and is already maxed by this
+# point in the game, so the ruin's first stage was dead and its first click jumped to the last stage.
+# Declared here and not only in the labels block, because core_traits is what puts a trait into the
+# cross-release backfill — a trait declared only in labels is undefined on a 0.1.8 save.
+ruin_depth    = 0
+
 # ─── Daily decay (engine-applied at every day rollover) ───────────────────────
 # advanceDay subtracts each value from its trait and floors at 0 (v2.py:5532-5544); parsed at
 # template_import.py:1657-1666. Unconditional — there is no skip logic, which is exactly what an upkeep wants.
@@ -370,13 +392,23 @@ core_traits = { relation = 0, corruption = 0, arousal = 0 }
 flag_keys   = []
 arc_stages  = ["Revealed"]
 
-# ⚠️ NO SCHEDULE ROW — rev 141 (beat_0091). He had exactly one, added at beat_0081 and pointing at
-# bastien_backroom, and it went to games/vesper/shelf/bastien_present_day.toml with the room itself. A
-# schedule row naming a location that no longer exists is an unresolved locationId, so it could not have been
-# left behind even as a dead entry.
-# He is back to what he was through the whole of 0.1.7: the largest prose block in the corpus (the captivity
-# chunk) with no hub, no schedule and no way to be met in the present. Restore the row with the block at
-# 0.1.9; the shelf file carries it verbatim, including the reasoning for why it can only live in that room.
+# ⚠️ SCHEDULE ROW RESTORED — beat_0101 (rev 152), THE FACE. It was removed at rev 141 when the back room went
+# to the shelf, because a row naming a location that no longer exists is an unresolved locationId. The room is
+# back, so the row is back, unchanged: bastien_backroom, all days, 20:00-23:59, "keeping the back room".
+# ⚠️ AND IT MUST NEVER POINT AT A PUBLIC LOCATION. The in-room portrait card is canvas-gated (v2.py:4998-5008)
+# but the nav-card badge is NOT (getNpcsPresentAtLocation, v2.py:4773), so a row at underworld_bar would park
+# his face on the Undertow nav card in EVERY save — including an Act-1 save where he is a saved reveal who is
+# at that moment holding her in a cell. bastien_backroom has no nav card at all (no entry_from, auto_exit
+# false), which is precisely why it is the only address he may have. His three present-day appearances at the
+# bar (cap_bastien_notices, both promotions) are all scheduleless speakers, the cap_mercer_resurfaces shape.
+# ⚠️ HIS HOURS ARE THE CHAPTER'S CLOCK. 20:00-23:59 against Kess's 10:00-22:00 splits the day cleanly: days
+# at the berth and the market, nights at the bar. That was already true in the build and nothing adds to it.
+[[npcs.schedules]]
+location   = "bastien_backroom"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "20:00"
+end_time   = "23:59"
+activity   = "keeping the back room"
 
 # ── Rue — the madam who runs The House (brothel-work's face + the Marsh on-ramp) — rev 59 ──
 # Promoted from the anonymous "madam" already in the brothel-work prose (3_activities) to a real NPC.
@@ -666,6 +698,28 @@ name       = "Junior-analyst kit"
 slot       = "dress"
 type       = "cover_analyst"                # portrait axis: the analyst face (own outfit rule)
 image      = "clothing/cover_analyst.jpg"
+beauty     = 0
+corruption = 0
+
+# THE FACE (beat_0094, rev 145) — the bought identity. type = "cover_stranger" -> its own
+# [[player_portrait.outfits]] rule (portraits/wren_cover_stranger.jpg), distinct from both Act-1 covers.
+# ⚠️ THIS IS NOT A COSTUME, AND THE ENGINE CANNOT SAY SO. The two covers above are clothes: Wren in
+# coveralls, Wren in an analyst's kit. This one is an identity she buys off the black market — whose own
+# shipped description already sells "weapons, gear, and people, penned at the far end like the rest of the
+# stock" — and the FACE is the thing she is paying for. The portrait resolver has exactly one axis, the
+# dominant dress item's type, so the garment has to carry the face. Recorded here so a later reader does
+# not soften it back into a change of clothes.
+# ⚠️ GATED BY ITEM ID EVERYWHERE (`clothing_item cover_stranger equipped`), NEVER by type — the type
+# exists for the portrait rule and nothing else. Same discipline as cover_analyst.
+# ⚠️ NO `initial` — she does not own it. It is granted un-worn by activity_buy_face (3_activities) for
+# coin, and she equips it at the rack, which as of this beat is at kess_berth and not in the sealed Spire.
+# beauty/corruption stay 0: this game does not use the worn_beauty/worn_corruption axes.
+[[clothing]]
+id         = "cover_stranger"
+name       = "A stranger's face"
+slot       = "dress"
+type       = "cover_stranger"               # portrait axis: the bought face (own outfit rule)
+image      = "clothing/cover_stranger.jpg"
 beauty     = 0
 corruption = 0
 
@@ -987,13 +1041,36 @@ entry_from  = "underworld_strip"
 # ── crew_den — the dead crew's rooms (Underworld Hunt, beat_0033). LOCKED-visible until she drains
 # the address out of Marsh (crew_known). version="1.0" or the lock fails open. Content floor = the
 # search + finding "Bastien" (beat_0033); the grab capstone (beat_0034) fires here on bastien_found.
-# ── bastien_backroom — SHELVED at rev 141 (beat_0091). The room behind the Undertow went to
-# games/vesper/shelf/bastien_present_day.toml with the six canvases that were the only way in or out of it.
-# It had no nav card by design (no entry_from, auto_exit = false), so nothing in the world pointed at it
-# except bastien_door_search's exit and npc_bastien's schedule row, and both of those are shelved too — which
-# is why removing it leaves no unresolved locationId anywhere. The block is preserved verbatim on the shelf,
-# including the two-part reasoning for why it must stay off every nav grid and the auto_exit trap that was
-# caught live at beat_0081. Restore it with the thread at 0.1.9.
+# ── bastien_backroom — RESTORED at beat_0101 (rev 152), THE FACE. Shelved at rev 141, back unchanged.
+# ⚠️ NO `entry_from`, DELIBERATELY — the captive_room shape. A location with no entry_from is on NO nav grid,
+# which this room needs for two separate reasons, both still true in 0.1.9:
+#   (1) THE BADGE. npc_bastien's only schedule row in the game points here, and a schedule row is
+#       unconditional. The in-room portrait card is canvas-gated (v2.py:4998-5008) but the NAV-CARD BADGE IS
+#       NOT (getNpcsPresentAtLocation, v2.py:4773), so a row at any location carrying a card would park his
+#       face on that card in every save — including an Act-1 save where he is a saved reveal at that moment
+#       holding her in a cell. A locked card is not good enough: it still advertises the room before she is
+#       invited.
+#   (2) THE SEARCH MUST BE UNSKIPPABLE. The only thing that ever puts her in here is bastien_door_search's
+#       exit. With a nav card — locked or not — she could walk in the moment bar_rung hits 4 and never stand
+#       for the search, which is the one beat this room exists to make unavoidable.
+# So: no entry_from, no entry_conditions, no blocked_message. There is no door to block because there is no
+# card. She leaves by hub_bastien's exit, back out to underworld_bar.
+# ⚠️ THIS BLOCK CHANGES AT beat_0107, when the raid burns the room and it gains a nav card for the first time.
+[[locations]]
+id          = "bastien_backroom"
+name        = "The Back Room"
+description = "Behind the Undertow, past a door that has no handle on the bar side. Better furniture than the room deserves, a desk with nothing on it, and a chair set where a man can see both the door and whoever he has put in front of it. It smells of the bar and of nothing else."
+image       = "locations/bastien_backroom.jpg"
+image_search_queries = ["private back room behind bar desk armchair dim", "noir speakeasy office low light leather chair"]
+# ⚠️ auto_exit = false, AND IT IS LOAD-BEARING — caught live at beat_0081 before the first assertion about
+# the room even ran. Dropping entry_from is only half the job: _ordered_navigation builds a location's nav
+# grid from its CHILDREN (locations whose entry_from points at it), so this room has an empty grid AND no
+# auto "Leave" link — and an empty navigation_html trips the list-every-location FALLBACK
+# (v2.py:19386, `if not navigation_html and auto_exit`). The built passage came out carrying
+# "All locations:" and the entire world, so from Bastien's back room she could walk to the Spire.
+# A nav-invisible interior needs BOTH halves: no entry_from, and auto_exit = false. cain_lab copies it.
+auto_exit   = false
+
 [[locations]]
 id          = "crew_den"
 name        = "The Crew's Rooms"
@@ -1064,3 +1141,31 @@ entry_conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "cell_door", operator = "gte", value = 1 },
 ] }
 blocked_message = "The door does not open for her."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# THE FACE (beat_0094, rev 145) — CAIN'S LAB. The chapter's last room, and the release's last passage.
+# ═══════════════════════════════════════════════════════════════════════════════
+# ⚠️ NAV-INVISIBLE, AND IT NEEDS BOTH HALVES — the bastien_backroom shape, copied deliberately rather
+# than re-derived. No `entry_from`, so it appears on no nav grid and nothing in the world points at it;
+# and `auto_exit = false`, because _ordered_navigation builds a location's grid from its CHILDREN and this
+# room has none, so an empty navigation_html would trip the list-every-location FALLBACK
+# (v2.py:19386, `if not navigation_html and auto_exit`) and emit "All locations:" plus the entire world —
+# which from here would let the player walk out of Cain's lab straight into the sealed Spire.
+# Arrived at by canvas (cap_the_lab, chained off cap_the_raid's exit) and left by canvas.
+#
+# ⚠️ SHE DOES NOT KNOW WHERE THIS IS, AND THE DESCRIPTION MUST NOT TELL HER. Bastien's drain establishes
+# that nobody knows where Cain lives, so the room cannot carry a district, a street, a view, or a
+# direction — she was moved here at speed, out of a burning building, and the prose has to be as blind as
+# she is. What it can say is what is IN it, and what is in it is the point: this is where the stolen Vance
+# paperwork has been going for years, and it is a workshop for rebuilding a body.
+#
+# ⚠️ NO SCHEDULE ROW FOR CAIN, EVER — the badge trap. getNpcsPresentAtLocation is not canvas-gated
+# (v2.py:4773), and Cain is the reserved reveal of the whole game. He is a scheduleless speaker inside
+# cap_the_lab, the cap_mercer_resurfaces precedent.
+[[locations]]
+id          = "cain_lab"
+name        = "The Lab"
+description = "Somewhere she was carried to with her head down. Long benches under work-lamps, a body-frame standing empty at the far end, and paper everywhere — filed, stacked, annotated, years of it, in a hand that presses hard. Nothing in the room was bought new. Everything in it has been taken from somewhere that could afford it."
+image       = "locations/cain_lab.jpg"
+image_search_queries = ["cluttered underground workshop long benches work lamps night", "improvised laboratory salvaged equipment dim industrial interior"]
+auto_exit   = false

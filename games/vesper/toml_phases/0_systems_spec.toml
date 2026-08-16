@@ -17,8 +17,8 @@ title       = "Vesper"
 description = "An owned half-human weapon who feels nothing but the sex she's used for. Inside Vance Dynamics she's the company's slave; outside, under a false face, she slips into powerful men's lives and drains them while they think they're using her — sent to hunt a rogue called Cain."
 quests_engine   = "v2"
 starting_canvas = "canvas_opening_office"   # the cold open (Beat 1 — the office)
-version         = "0.1.8"          # sidebar footer — bump in the same commit as the games-data.js portal entry
-release_date    = "2026-08-14"     # sidebar footer — date this build ships
+version         = "0.1.9"          # sidebar footer — bump in the same commit as the games-data.js portal entry
+release_date    = "2026-08-16"     # sidebar footer — date this build ships
 # The funding link baked into the build at THREE sites (sidebar button + both intro/age-gate links).
 # Same URL the engine falls back to when this is unset (v2.DEFAULT_SUPPORT_URL), so it is stated here
 # only to make the key visible and editable — the built output is byte-identical either way.
@@ -66,8 +66,22 @@ flagEffects = [
 # ─── Clothing / wardrobe — the worn-state COVER system (beat_0015) ─────────────
 # The disguise is a real garment now. The boss ISSUES the Mission-1 cover (granted un-worn at
 # the morning briefing — see 2_one_shots) and she equips it at the rack (the wardrobe page the
-# engine injects at wren_room). NO shop_location = no buying, no shop UI (the cover is provided;
-# the disguise shop is a frontier sink). Customization stays OFF (independent of clothing).
+# engine injects at the wardrobe_location). NO shop_location = no buying, no shop UI (the Act-1
+# covers are provided; The Face buys its own through a canvas, not the shop UI — see
+# activity_buy_face, 3_activities). Customization stays OFF (independent of clothing).
+#
+# ⚠️ beat_0094 (rev 145) — wardrobe_location MOVED wren_room -> kess_berth, and it was BROKEN, not
+# merely inconvenient. The rack is a single injected link: the generator emits
+# "[[Change Clothes->WardrobePage]]" into exactly the one location whose slug equals this key
+# (v2.py:9601 and :9649, the entry-conditioned and plain branches of the same emit). wren_room is
+# Spire-side and route-cut by the 1a close, so from the moment The Archive sealed that building the
+# player had NO wardrobe page at all — she could not equip a cover, could not unequip one, and the
+# four equipped-based undress portraits below were unreachable with her. It never looked broken
+# because Act 1b needed no costume change. The Face is built on buying a face and putting it on, so
+# this had to move; the berth is where she sleeps, keeps her locked things and pays her upkeep, and
+# it is the cradle-substitute for every other Spire-side utility already (activity_kess_cot took the
+# charge + both weapon reloads at revs 96/131). ONE location only — the key is a scalar and the
+# generator compares slugs with ==, so there is no two-rack form to reach for.
 [settings]
 # Vesper is narrated in THIRD person — Wren is watched, not inhabited (the still-point /
 # owned-weapon PC). Declared so the engine labels her own dialogue with her name instead of
@@ -75,7 +89,7 @@ flagEffects = [
 # Register doctrine: .claude/skills/author-game/references/rts-flat-prose.md Rule 1.
 narration_person  = "third"
 clothing_enabled  = true
-wardrobe_location = "wren_room"
+wardrobe_location = "kess_berth"
 
 # ─── Player portrait — the state-reactive sidebar face (opt-in engine feature) ─
 # Wren's face, in the sidebar just below the time display (above the Charge/Condition HUD) — the reactive
@@ -101,8 +115,9 @@ topless_image    = "portraits/wren_topless.jpg"
 bottomless_image = "portraits/wren_bottomless.jpg"
 underwear_image  = "portraits/wren_underwear.jpg"
 
-# THE THREE FACES — dock-work cover -> the dock face; analyst cover -> the analyst face; otherwise she
-# falls through to default_image (the company-grays asset-self face). Keyed on the dominant dress type.
+# THE FOUR FACES — dock-work cover -> the dock face; analyst cover -> the analyst face; the bought
+# Reach identity -> a face that is not hers at all; otherwise she falls through to default_image (the
+# company-grays asset-self face). Keyed on the dominant dress type.
 [[player_portrait.outfits]]
 image = "portraits/wren_cover.jpg"
 when  = { worn_type = "cover" }
@@ -110,6 +125,19 @@ when  = { worn_type = "cover" }
 [[player_portrait.outfits]]
 image = "portraits/wren_cover_analyst.jpg"
 when  = { worn_type = "cover_analyst" }
+
+# ⚠️ beat_0094 (rev 145) — THE BOUGHT FACE, and it is a different KIND of cover from the two above.
+# The Act-1 covers are costumes: she is recognisably Wren in dock coveralls or an analyst's kit, and the
+# portrait swap is a change of dress and bearing. This one is an IDENTITY bought off a market whose own
+# description already sells "weapons, gear, and people". The rule is keyed the same way — on the dress
+# item's type — because that is the only axis the resolver has, so the garment carries the face. That is
+# a deliberate compression and it is stated here so nobody later reads the wardrobe row as "she changed
+# her clothes": in the fiction she bought a face and the kit that sells it, and taking the kit off puts
+# Wren back. It is also why the item is gated by ITEM ID everywhere downstream, never by type — the type
+# exists for this rule and nothing else (the cover_analyst precedent, 1_metadata).
+[[player_portrait.outfits]]
+image = "portraits/wren_cover_stranger.jpg"
+when  = { worn_type = "cover_stranger" }
 
 # ─── Sidebar items — the live HUD (Charge ONLY) ───────────────────────────────
 # Credits is tracked internally (the depot economy uses `money`) but NOT surfaced in the
@@ -357,6 +385,60 @@ hidden = true
 key    = "bastien_drains_done"
 hidden = true
 
+# ─── THE FACE (beat_0094, rev 145) — three new internal traits, all hidden ─────────────────────────
+# None of them draws a sidebar row and none appears in the <<playerTraits>> dump. The player reads all
+# three off the fiction: the refusals off the doors that shut, the rung off what Sol has her doing, and
+# the taser off her own coat. Declared in 1_metadata's [player.core_traits], which is what puts them in
+# the cross-release save backfill — a trait that only exists here is undefined on an old save.
+#
+# wall_refusals 0-4 — how many doors have shut on her as Wren. A COUNTER and not four flags, because
+#   the only thing that reads it is cap_the_wall's "gte 3" gate, and four flags there would be four
+#   clauses that have to be kept in sync with four one-shots.
+#
+# bar_rung 0-4 — where Sol has her working: 0 not hired · 1 the floor · 2 the counter · 3 the floor in
+#   less · 4 the back room. ⚠️ THE LADDER IS A TRAIT AND NOT FOUR FLAGS FOR THE SAME REASON THE PARTS
+#   LOOP IS: activity_bar_work bands on it, four exclusive [group]s in one chain, and a chain wants one
+#   axis to compare. It is also what every downstream gate reads (the door search needs "gte 4"), so a
+#   promotion is one write in one place.
+#
+# taser_held 0/1 — she is carrying the thing she bought at the market. ⚠️ DELIBERATELY NOT A THIRD
+#   equipped_weapon VALUE. equipped_weapon is the one-core-one-weapon axis (1 = drain, 2 = emitter) and
+#   the whole design point of the taser is that it runs off NOTHING and therefore does not compete with
+#   the drain — she can carry it to Bastien's with the drain live, which is exactly the choice the raid
+#   scene turns on. Putting it on that axis would make it mutually exclusive with the drain and destroy
+#   the beat. Shape copied from part_held: a carried-object bit, read with "gte 1".
+[[traits.labels]]
+key    = "wall_refusals"
+hidden = true
+[[traits.labels]]
+key    = "bar_rung"
+hidden = true
+[[traits.labels]]
+key    = "taser_held"
+hidden = true
+# taser_through 0/1 — beat_0101 (rev 152). Did the taser get PAST THE DOOR SEARCH tonight, as opposed to
+# taser_held, which is only "she owns one". Bastien pats her down every single visit, so the two are
+# genuinely different facts and the raid reads the second one. ⚠️ IT IS NEVER A BLOCKER: a failed search puts
+# the taser on his desk and she gets it back on the way out, and cap_the_raid bands on this rather than
+# gating on it, so a player who cannot reach stealth 30 still finishes the release — they just get one extra
+# beat of her going for the desk first. A stealth roll that can strand a save is not a difficulty setting.
+[[traits.labels]]
+key    = "taser_through"
+hidden = true
+# ruin_depth 0-4 — beat_0110 (rev 160). How many times she has been through the burned back room.
+# ⚠️ THIS EXISTS BECAUSE THE FIRST CUT BORROWED yard_depth AND THAT WAS A REAL BUG, not a tidiness issue.
+# yard_depth is not a generic crawl counter: it is the BURNED YARD's own odometer (1_metadata, "how deep
+# she's pushed, odometer 0->3"), and it is already sitting at 3 by the time The Face starts, because that
+# crawl is mandatory Act-1 content — it produces crew_known, which gates the Underworld Hunt, which reaches
+# Marsh, the grab, captivity, the salvage, the Archive and the Leash. So the ruin's first band (lt 2) could
+# never render, and the very first sift took 3 -> 4 and landed on the TERMINAL band, handing over all nine
+# sheets in one click. The release's only post-credits content collapsed to a single screen.
+# The original header defended the reuse as "the same shape of thing". A counter is not a shape; it has a
+# live value, and this one was full.
+[[traits.labels]]
+key    = "ruin_depth"
+hidden = true
+
 # ══════════════════════════════════════════════════════════════════
 # THE LEDGER — the player cheat page ([ui.cheat_page])
 # ══════════════════════════════════════════════════════════════════
@@ -439,6 +521,29 @@ clamp       = true
 hint        = "opens the anal pose in the office loop — in cover, carrying the charged drain. The rungs still have to be run."
 button_text = "Renner +10"
 at_cap_text = "He is as far gone as the rungs will take him."
+
+# BASTIEN — THE FACE's one wall, added at beat_0109 (rev 159), same shape as the Renner row above.
+# The ladder gates sit at relation 6 / 12 / 18, earned at +2 a shift on the floor and +3 on the counter and
+# in the dress, so roughly seven shifts at 180 in-game minutes each — three or four evenings of clicking the
+# same card. That is the chapter's only real grind and it is exactly what this page exists for.
+# +6 lands ON each band rather than between them, so no rung is skipped and none is overshot into.
+# CAP 18, because 18 is the last thing relation buys: the door search and the room are gated on bar_rung,
+# which the promotion capstones set, and nothing in the game reads npc_bastien.relation above 18.
+# ⚠️ THE HINT SAYS WHAT IT ACTUALLY BUYS. Relation alone opens nothing — the three promotions are auto-fires
+# that still have to be met on the floor, in the bought face, and the hint says so rather than implying that
+# a full meter walks her through the door.
+[[ui.cheat_page.grants]]
+label       = "Bastien"
+targetType  = "npc"
+npcId       = "npc_bastien"
+trait       = "relation"
+op          = "add"
+value       = 6
+cap         = 18
+clamp       = true
+hint        = "moves him one promotion nearer — the counter, then the dress, then the back room. You still have to be on the floor in the bought face for each one to land."
+button_text = "Bastien +6"
+at_cap_text = "He has decided everything about you that he is going to decide from a chair."
 
 # CHARGE — a pool, so it is SET to full rather than incremented (the way the cradle
 # does it). Free in normal play; this row exists because after the Archive beat every

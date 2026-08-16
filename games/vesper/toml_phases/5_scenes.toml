@@ -5314,6 +5314,33 @@ name = "Kess"
 blocks = [
   { type = "image", props = { file = "locations/kess_berth.jpg", description = "A flooded ship-breaking dock lit by work-lamps, a stripped hull on blocks, a man at a work-cradle.", search_queries = ["flooded ship breaking dock work lamps night", "gutted hull workshop cutting torch dark"] } },
   { type = "paragraph", content = "Black water, the hull on its blocks, the smell of cut steel. Kess is at the bench with the cot behind him and her two locked things somewhere under the mess he calls an order." },
+  # ══ BANDS Z1 / Z2 — THE FACE (beat_0095, rev 146). THE POST-CHAPTER STATE, AND THEY GO FIRST. ══════════
+  # ⚠️ THIS IS A REPAIR, NOT AN ADDITION, and it is the same defect rev 143 fixed one beat earlier arriving
+  # from the other direction. Every band below was authored for the parts loop and crosses feed_line_days ×
+  # part_held × mercer_attempts. NONE of them reads leash_cut. So from the moment cap_extraction ends — the
+  # chapter's last content beat, after which the player is meant to keep playing — walking up to Kess got
+  # "you're paid up, so I'm on it, don't hover" about a key that is no longer in her and a job that finished
+  # three days ago. A1 in particular fires in exactly that state (paid, hands empty, and mercer_attempts is
+  # still 3, so A2 owns it — either way the line is about the loop).
+  # ⚠️ THEY MUST BE FIRST. Adjacent [group] blocks merge into ONE if/elseif chain and the first match wins,
+  # so a post-chapter band placed after A1 would never render. Placed here, they take every leash_cut state
+  # and the five parts bands below become correctly unreachable rather than wrong.
+  # ⚠️ TWO BANDS AND NOT ONE, because the feed line does not end with the chapter. The cot is still the bill,
+  # activity_kess_cot still reloads both weapons off it, and a lapsed line still means no bench — so the
+  # stalled read has to survive into The Face or the upkeep goes silent at the exact moment she starts
+  # needing coin for a face and a taser.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",  subject = "player", flag_key  = "leash_cut",      operator = "is_true" },
+      { type = "trait", subject = "player", trait_key = "feed_line_days", operator = "gte", value = 1 },
+    ] } }, blocks = [
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Bed's paid and the line's on. I've a hull to cut and you've nothing in you that needs me, which is the first time that's been true." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",  subject = "player", flag_key  = "leash_cut",      operator = "is_true" },
+      { type = "trait", subject = "player", trait_key = "feed_line_days", operator = "lt", value = 1 },
+    ] } }, blocks = [
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Line's off. You're nobody's asset now, which doesn't make the cot free — it makes it something you have to want." },
+  ] },
   # BAND A — paid up, nothing in her pocket, and the loop has not burned anything yet. The shipped line.
   # ⚠️ rev 143 (beat_0093) — THIS BAND WAS SPLIT, and it was overdue. It was written at rev 114, before the
   # parts loop existed, and it is the line that fires in the POST-FAILURE state (paid up, part burned, hands
@@ -5363,10 +5390,33 @@ blocks = [
 ]
 [canvases.nodes.exit_block]
 type = "choices"
+# ⚠️ beat_0095 (rev 146) — THIS RUNG GAINED A CONDITION AND IT IS THE OTHER HALF OF THE Z-BAND REPAIR.
+# "The work" is the key and the talkback: a job that ends at cap_extraction. The rung was ungated, so after
+# the chip came out the player could still ask how it was going and get a progress report on it. Hidden
+# rather than greyed — show_when_locked would advertise a finished job — and the chip rung below takes its
+# place in the same slot, so the hub never loses its conversational option.
 [[canvases.nodes.exit_block.choices]]
 text       = "Ask how the work's going."
 targetType = "node"
 nodeId     = "hub_kess_berth.work"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "leash_cut", operator = "is_false" },
+] }
+# ── THE CHIP RUNG (beat_0095, rev 146). The standing surface for the thing on his bench.
+# ⚠️ WHAT IT IS FOR: cap_chip_read spends the discovery once, and this is where it stays readable. A player
+# who takes the capstone, wanders off for six in-game days and comes back needs the chapter's question still
+# in someone's mouth — the mopoga finding is that LOSTNESS, not grind, is this genre's disease.
+# ⚠️ IT IS FLAT, ONE BAND, NO CONDITIONS, and that is deliberate rather than lazy. Kess's answer does not
+# change across the chapter: he cannot open it, and the road runs through paperwork he does not have. Banding
+# it on her progress would make him a progress read-out for an investigation he has told her he wants no part
+# of, which contradicts his own closing line at the extraction ("I'd rather not know").
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask about the chip."
+targetType = "node"
+nodeId     = "hub_kess_berth.chip"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chip_read", operator = "is_true" },
+] }
 # ── THE DEBRIEF RUNG (beat_0093, rev 143). SHE TELLS HIM IT FAILED, and until this beat she never did:
 # she walked out of Mercer's room with a burned part and the next thing she did was buy another one off her
 # own bat, with Kess's finding arriving afterwards, while he was seating the part she had already paid for.
@@ -5510,6 +5560,30 @@ effects = [
   { targetType = "player", trait = "part_spec",    op = "add", value = 1, clamp = true },
   { targetType = "player", trait = "spec_pending", op = "set", value = 0, clamp = true },
 ]
+
+# ── Node: chip — THE FACE (beat_0095, rev 146). The standing read on the thing on his bench. ──────────────
+# Reached from the "Ask about the chip" rung (gated chip_read). Repeatable and FLAT — one band, no
+# conditions. Kess's answer does not move across this chapter and it should not pretend to: he cannot open
+# it, and the road runs through paperwork he does not have and does not want. Banding it on her progress
+# would turn him into a read-out for an investigation he has said in his own mouth he wants no part of.
+# ⚠️ IT RESTATES NOTHING FROM THE CAPSTONE. cap_chip_read spends the age, the tooling and the shared hand.
+# What lives here is only the STANDING fact — it is not a thing you open, it is a thing paperwork opens —
+# because that sentence is the chapter's whole direction and it has to survive six idle days in someone's
+# mouth. Two blocks, and his refusal is a reason of trade, never sentiment (his shipped register).
+[[canvases.nodes]]
+id   = "chip"
+name = "The chip"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Still where you left it and still shut. I've had a light on it twice and I've learned the same nothing both times." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "It's not a thing you open. It's a thing somebody's paperwork opens — your page came up because the two were cut together, and I'd want the rest of that paper before I went at it with anything sharp." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave it with him."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "kess_berth"
+time_progression_minutes = 15
 
 # ═══ cap_file_shape — beat_0070 (rev 115): Kess reads the SHAPE of the file ══════════════════════════════
 # Auto-fire capstone @kess_berth, pri 11, ONE-SHOT. The chapter's first Tier-3 spend, and the first cascade in
@@ -10699,7 +10773,7 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "It's out. Kess cut the chip out on the bench you've been paying for since you got here, and your own page opened on the same lock — eleven years of somebody's programme, an index that doesn't start at one, and two date columns. The second one says when they stopped each of you. Yours is blank. Mercer spent two years sending you on errands and the last one was to go and fetch yourself, and he never once looked at what he was sending."
-tip        = "Nothing in you answers to anybody now — no leash, no key, no owner with a switch. Mercer still pours for you and still doesn't know. That's where this build ends. There's a man who came through the far door of that cell a year ago, in a hurry, and wouldn't say why he cared, and he doesn't have a name yet — he's the next chapter. If you want it sooner, Support Us in the sidebar."
+tip        = "Nothing in you answers to anybody now — no leash, no key, no owner with a switch. Mercer still pours for you and still doesn't know. The chip is on Kess's bench where you left it, and it is the only thing you have ever owned that somebody wrote down. Go and ask him what he got off it. If you want the next chapter sooner, Support Us in the sidebar."
 # ⚠️ rev 141 (beat_0091) — TWO WORDS OF THIS TIP MOVED AND THE REST DID NOT. "Bastien still keeps the back
 # room and still can't work out what you are" went out with the shelved thread: in this build there is no back
 # room to keep, so the sentence describes a surface the player has never seen. The HOOK STAYS and only changes
@@ -10720,10 +10794,80 @@ tip        = "Nothing in you answers to anybody now — no leash, no key, no own
 # card in the game may name the future, and it is this one.
 # ⚠️ NO APOSTROPHE IN THE STRING, deliberately. SugarCube's source-byte escaping renders one as &amp;#x27; in
 # the built HTML — it displays correctly and then poisons every future grep of the file. The em dash is safe.
-terminal      = true
-terminal_text = "Chapter complete — the story continues in the next release"
+#
+# ══ beat_0095 (rev 146) — M GIVES UP THE BOUNDARY, THE BADGE AND ITS OWN TERMINAL FRAME, ALL IN ONE EDIT. ══
+# The rev-129 rule this obeys: exactly one card in the game names the build boundary, moving it is a TWO-STEP
+# edit (strip the old, add the new), and the check is a grep of the whole table from both sides — never a
+# read of the card in front of you, because a boundary claim is a statement about the WHOLE BUILD and cannot
+# be evaluated from the rung that carries it. That is precisely how the same sentence survived five forward
+# walks on cards E, F and G. So: `terminal`, `terminal_text` and the boundary sentence all come off HERE, and
+# card N below gains the sentence in the same edit. Nothing else in M's text changes.
+# ⚠️ WHY THE BADGE GOES TOO. terminal = true draws the green ✓ "Chapter complete" frame, and the whole reason
+# rev 142 added terminal_text was that a finished ARC and a finished BUILD are different endings. This card is
+# the second kind, and in 0.1.9 the build does not end here — she has somewhere to go the moment she walks
+# back into the berth. Leaving the badge on would tell a player the release was over on its first screen.
+# ⚠️ AND IT GAINS A CLOSER. M's `when` was a single clause, because it was the last card in the game and had
+# nothing to hand off to. The ladder's rule is that each card's closer IS the next card's opener, so without
+# `chip_read is_false` both M and N would render together from the opening capstone onward.
+# The Support-Us ask STAYS on M — the rev-113 precedent set on card D is that a prior card keeps its copy of
+# the ask and only the boundary CLAIM can go false. The ask is true at every rung.
 when = [
-  { flag = "leash_cut", op = "is_true" },
+  { flag = "leash_cut", op = "is_true"  },
+  { flag = "chip_read", op = "is_false" },
+]
+
+# ══ CARD N — THE FACE's first Story-Goal, and the new holder of the build boundary (beat_0095, rev 146). ══
+# ⚠️ MANDATORY, AND THIS IS THE EIGHTH TIME IN THIS GAME. cap_chip_read's exit sets chip_read, which closes M
+# — and M was the last Story-Goal card in the build — so without N the Quests page goes blank on the
+# chapter's opening beat, which is the worst possible place for it after the ending it just followed.
+# ⚠️ IT NAMES A QUESTION, NOT A PERSON. The buyer has no name on this card and will not get one until she is
+# inside the bar. Bastien is 213 mentions of pure backstory in 0.1.8 with no present-day surface at all, and
+# the chapter earns the reveal that the man behind the Undertow's back door is the man who owned her.
+# Naming him in a tip would spend it for nothing.
+# ⚠️ THE TIP POINTS AT A PLACE AND AN ACT, WHICH IS THE ANTI-LOSTNESS RULE. The mopoga study found lostness,
+# not grind, is this genre's disease (0.9% vs 4.7% median), so every frontier tip says where to stand and
+# what to do there. Here: the Undertow, and ask about the courier's buyer. It does NOT say "buy a face" —
+# that is card O's job, after the doors have actually shut on her, because a tip that pre-empts the wall
+# would tell the player the refusals are scripted before she has met one.
+# No `goals` array — frontier shape, like J and M.
+[[quest_cards]]
+priority   = 10
+text       = "Kess had the chip under a lamp for four days and got one thing off it: it is about fifteen years old, cut a shade wide and dressed back by hand, which is what a room with a budget and no hurry does when it is making eleven of something. He cannot open it. Nobody in the Reach can. What opens it is more of the paper it was cut alongside — and you have met the road that paper travels. A careful courier in the corner of the Undertow, carrying copies out of Vance Securities and down the strip, to somebody who paid on time. You never found out who was buying."
+tip        = "Somebody down there has been collecting that company's paperwork for years, and if your page had a brother it is in his stack. Start at the Undertow and start asking — the courier drank there every night, the madam counts every head on the strip, and the paper stall sells anything. If you want the next chapter sooner, Support Us in the sidebar."
+# ⚠️ beat_0096 (rev 147) — N's CLOSER MOVED face_bought -> wall_understood, AND THE BOUNDARY LEFT WITH IT.
+# The tip tells the player to go and ask, which stops being true the moment three doors have shut on the
+# question — and under the old closer this card stayed live from the first refusal all the way to the market
+# purchase, instructing her to do the one thing the chapter has just established she cannot. That is the same
+# defect cards E, F and G carried for eleven beats: a card whose sentence is true where it stands and false
+# about the build. Card O below owns the post-wall state and takes the boundary claim in the same edit
+# (the rev-129 two-step). N keeps its Support-Us ask — a prior card always keeps the ask; only the boundary
+# CLAIM can go false (the rev-113 precedent on card D).
+when = [
+  { flag = "chip_read",       op = "is_true"  },
+  { flag = "wall_understood", op = "is_false" },
+]
+
+# ══ CARD O — the face (beat_0096, rev 147). Frontier, and the boundary moves here. ══════════════════════
+# ⚠️ MANDATORY: cap_the_wall's exit sets wall_understood, which closes N, and N is the only live Story-Goal
+# card in the build. Without O the page goes blank on the chapter's first turn.
+# ⚠️ IT CARRIES HER CONCLUSION AND NOT THE TRUTH. The card says the company closed the street, because that
+# is what she believes and the player is meant to believe it with her. It is wrong — it is Cain — and the
+# card must not hedge, because a tip that hedges tells the player there is a twist. The correction arrives
+# in Cain's own mouth in the last scene of the release.
+# ⚠️ THE TIP NAMES A PLACE, A PRICE-SHAPE AND AN ACT — the anti-lostness rule. Where the coin comes from is
+# named explicitly (The House, the pit) because the chapter's first real ask is that she earn a lump sum,
+# and a player who has been living on 10-coin nights needs telling that the two earners still work.
+[[quest_cards]]
+priority   = 10
+text       = "Three doors in a week, and not one of them said no. The courier who protects himself, the madam who deals straight with everybody, the barman who decided he liked you — and a paper stall that would sell you a person off the end of the row and would not take your money for a name. That is not four decisions. That is a word, and a word has your name in it. You cut a company's hardware out of your own spine eleven days ago and then walked around this district asking questions in your own face."
+# ⚠️ beat_0097 (rev 148) — O GIVES UP THE BOUNDARY CLAIM, and this edit is the other half of card P gaining
+# it. The two-step got run in the wrong order once already in this chapter and spine.py caught it at two
+# claims; that is what the checker is for. O KEEPS its Support-Us ask (the rev-113 rule: a prior card always
+# keeps the ask, only the boundary CLAIM can go false).
+tip        = "So stop wearing it. There is a row at the far end of the Black Market where the stock has faces, and what they sell there is the difference between a woman called Wren and a woman off a boat with nothing to trade but hours. It will cost more than you have — The House still pays thirty a head and the pit still pays out on a win. Then get to the cot and put it on. If you want the next chapter sooner, Support Us in the sidebar."
+when = [
+  { flag = "wall_understood", op = "is_true"  },
+  { flag = "face_bought",     op = "is_false" },
 ]
 
 # ── Quests page — Calloway's section (Tier 2, npc_id). Stepped, one card at a time (exclusive by flags); the
@@ -10945,3 +11089,2078 @@ when = [
 # chase, not how tired you are. The feed-line meter is already on the HUD and the Story-Goal tips already say
 # "keep the cot paid" at every rung that needs it. Asserted in the live suite so a later beat can't add one by
 # reflex.
+
+# ██████████████████████████████████████████████████████████████████████████████████████████████████████
+# THE FACE (Act 2 · 1c) — rev 145 onward. Design: games/vesper/design_the_face.md; blueprint: design_book.md.
+# The chapter picks up from cap_extraction, which set leash_cut + file_read and opened NO standing content.
+# ██████████████████████████████████████████████████████████████████████████████████████████████████████
+
+# ═══ cap_chip_read — beat_0095 (rev 146). THE CHAPTER OPENS, AND IT OPENS ON A QUESTION, NOT AN ORDER. ═══
+# Auto-fire capstone @kess_berth, pri 11, ONE-SHOT, gated leash_cut is_true + chip_read is_false + presence.
+#
+# ⚠️ WHY THE CHAPTER NEEDS THIS BEAT AT ALL. cap_extraction ends the last chapter with her un-leashed and
+# with nothing to do — it sets two flags and its chain reaches no standing content. For two acts her motive
+# was the company's; this is the first beat in the game where she wants something nobody assigned her.
+# The want has to be small, specific and hers, so it is the one question her own page raised and did not
+# answer: the programme CLOSED, and eight months later a hand on none of the sign-offs came back and sealed
+# one page. Hers.
+#
+# ⚠️ WHAT IS ALREADY SPENT AND MUST NOT BE RESTATED — three prior beats have been at this material:
+#   beat_0068 (the read-tease): her designation, "older than she is", the word BUILD, the keyed garble,
+#     and "cut to the same hand".
+#   cap_file_shape (beat_0070): it is a PROGRAMME, eleven years, an index that doesn't start at one, two
+#     date columns.
+#   cap_extraction (beat_0083): the chip is smaller than a coin, "eleven years of somebody's paperwork and
+#     that's the whole of what they put in you to make it stick", and the seal reading it — same hand.
+# What is UNCLAIMED and therefore what this beat delivers: (a) how OLD it is, with a number, extending
+# salvage_chip_snag's bare "Older, too"; (b) HOW HE KNOWS — manufacture, which is the one thing a
+# ship-breaker can genuinely read off a component; (c) that he CANNOT open it, which is a limit and not a
+# refusal; (d) the standing direction — it is not a thing you open, it is a thing paperwork opens; and
+# (e) HER thread, named in her own mouth.
+#
+# ⚠️ SHE NAMES THE LEAD, NOT KESS, and this is the beat's load-bearing structural choice. Kess pointing her
+# at Bastien would be an assignment, which is the exact thing this chapter exists to stop doing to her. What
+# he gives is a shape — more of that paperwork — and SHE is the one who knows where company paper goes,
+# because hub_colm_undertow already told her in play: "a courier who moves things between the worlds for a
+# buyer who pays on time. That's the thread." She never found out who was buying. Now she wants to.
+# ⚠️ AND THE BUYER IS NOT NAMED HERE OR ANYWHERE UNTIL SHE IS INSIDE THE BAR. Bastien is 213 mentions of
+# pure backstory in 0.1.8 — a voice in a cell — with no present-day surface of any kind. The chapter earns
+# the reveal that the man behind the Undertow's back door is the man who owned her; handing it over on the
+# first page would spend it for a gasp.
+#
+# ⚠️ SHE LEAVES THE CHIP ON THE BENCH, and it is a mechanical decision as much as a character one.
+# bastien_door_search pats her down at the door EVERY visit — lining, cuffs, the seam under the arm — and
+# company hardware found on a woman who has told him she is nobody ends the cover in one beat. The bench is
+# the only place in the Reach it is safe. It also keeps the chip unspent for the release after this one.
+#
+# ⚠️ KESS'S REGISTER, from his signed row: clinical and technical, hardware not woman, no ownership diction,
+# refusal is a bare verb plus a reason of TRADE and never sentiment. He never uses her name (zero instances
+# game-wide). "Huh." is his discovery opener and it has been spent exactly three times — the re-seated seam,
+# the shared lock, the differential — so it is NOT used a fourth time here; a fourth use makes it a verbal
+# tic instead of a tell. Her interior is rationed to ONE thought_bubble in fourteen beats.
+# MEDIA: one new slot, scenes/kess_chip_light.jpg — a different moment from scenes/kess_extraction.jpg (that
+# one is a body on a bench; this one is a component under a lamp with nobody on the steel). ONE ASSET, ONE
+# BLOCK forbids the reuse.
+[[canvases]]
+id          = "cap_chip_read"
+name        = "What he could get off it"
+description = "beat_0095 (rev 146). THE FACE's opening capstone @kess_berth. Auto-fire, pri 11, one-shot, gated leash_cut is_true + chip_read is_false + npc_at_location kess_berth/npc_kess/is_present (requires_npc is INERT on the auto-fire path, v2.py:4447). Kess has had the chip under a lamp since she left it and tells her what a ship-breaker can read off manufacture: it is roughly fifteen years old, older than her frame and older than her designation, and it was made in small numbers on tooling that has not existed for a decade. He cannot open it — a limit, not a refusal. What he gives is the DIRECTION: it is not a thing you open, it is a thing paperwork opens. SHE names the lead herself, off shipped Colm canon (a courier carrying company copies to a buyer who pays on time), because the chapter's whole point is that nobody assigns her this. The buyer is NOT named. She LEAVES the chip on the bench — the door search would find it. SETS chip_read. 14 beats / 13 clicks."
+[canvases.trigger]
+location      = "kess_berth"
+requires_npc  = "npc_kess"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "leash_cut", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "chip_read", operator = "is_false" },
+  # ⚠️ THE PRESENCE GATE THAT ACTUALLY BITES — requires_npc above is inert on the auto-fire path
+  # (v2.py:4447). Kess keeps 10:00-22:00; berth_offhours covers the rest. A pri-11 one-shot without this
+  # out-ranks the off-hours card and plays to an empty dock — the lesson beats 0068 and 0070 both carried.
+  { type = "npc_at_location", location_id = "kess_berth", npc_id = "npc_kess", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "What he could get off it"
+blocks = [
+  { type = "image", props = { file = "scenes/kess_chip_light.jpg", description = "A tiny grey component alone on a steel workbench under a low work-lamp, magnifier and fine tools beside it, nobody on the bench.", search_queries = ["tiny electronic component under magnifier workbench lamp", "microchip on steel bench close up work light"] } },
+  { type = "paragraph", content = "The lamp is down over the bench this time, tight on one small grey thing, and the tools beside it are the fine ones." },
+  { type = "cascade", props = { beats = [
+    # beat 0 — no advance_text; merges into the node lead.
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "You left it. I said I'd rather not know and I meant that too, and then it sat there four days looking at me." },
+    ] },
+    { advance_text = "Ask what he did.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "You've had it under a light." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "I've had it under two. Don't get excited — I can tell you how it was made and not one thing about what it did." },
+    ] },
+    # (a) THE AGE, with a number. Extends salvage_chip_snag's bare "Older, too" rather than repeating it.
+    { advance_text = "Take what there is.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "It's about fifteen years old. That's not a guess, that's the finish on it." },
+        { type = "paragraph", content = "Her frame is nine. The number on her line is thirteen. The thing that was holding her shut is older than both." },
+    ] },
+    # (b) HOW HE KNOWS — manufacture, the one thing a ship-breaker genuinely reads.
+    { advance_text = "Ask how he can tell.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "From the finish." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "From the tooling. Everything's cut a shade wide and then dressed back by hand, which is what you do when you're making eleven of a thing and not eleven thousand." },
+    ] },
+    { advance_text = "Let him finish.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "And nobody's dressed a part by hand in this city for ten years. Whoever made that had a room, a budget and no hurry." },
+    ] },
+    # (c) THE LIMIT. Not a refusal — he has already refused twice and this is a different word.
+    { advance_text = "Ask him to open it.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Can you get inside it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "No. Not won't — can't. I cut ships. What's in there wants a clean room and somebody who's seen one before, and there's neither of those within forty miles of this water." },
+    ] },
+    # (d) THE DIRECTION. The chapter's whole heading, in his mouth, and it is a shape and not a name.
+    { advance_text = "Ask what would.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Paper would." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Your page came open because the two were cut together. That's not a trick I did, that's the same office signing twice. Find me the rest of what that office wrote and I'll have something to work against." },
+    ] },
+    { advance_text = "Ask where that lives.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Where does an office's paper go." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Not my trade. But paper that's worth anything gets sold, and this city's got exactly one direction it gets sold in, and it isn't up." },
+    ] },
+    # (e) HER THREAD, IN HER OWN MOUTH. Built entirely on shipped Colm canon (hub_colm_undertow.meet_drink).
+    { advance_text = "Think.", blocks = [
+        { type = "paragraph", content = "She has met that direction. A careful man in a corner of the Undertow, drinking slow, carrying copies out of Vance Securities and down the strip to somebody who paid on time." },
+        { type = "dialog", props = { speaker = "player" }, content = "There was a courier. I never found out who was buying." },
+    ] },
+    { advance_text = "Say it out loud.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Then that's your end of it, and it's a better end than mine. A buyer keeps what he buys." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Somebody down there has been collecting that company's paper for years. If your page had a brother, it's in his stack." },
+    ] },
+    # HIS PRICE, AND HIS LINE. The extraction's closing terms, held to.
+    { advance_text = "Ask if he'll help.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "I'll build. That's the arrangement and I've not changed it. You bring me a thing that needs making and I'll price it, and I'll not ask what it's for." },
+    ] },
+    # THE ONE INTERIOR BEAT IN FOURTEEN. It is about the ORDER, not about her feelings.
+    { advance_text = "Nothing to say to that.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Two years of being told where to stand and by whom. Nobody has told her to do this. There is no order behind it, no dispatch, no man upstairs waiting on a result — only a shut page and a hand that closed it, and the fact that she wants to know." },
+    ] },
+    # SHE LEAVES IT. The door search is why, and the reason is stated in the fiction rather than in the gate.
+    { advance_text = "Reach for the chip.", blocks = [
+        { type = "paragraph", content = "Her hand goes to it and stops. Wherever this goes, it goes through people who put hands in her coat, and there is nothing on her worth less explaining than this." },
+        { type = "dialog", props = { speaker = "player" }, content = "Keep it on the bench." },
+    ] },
+    # Terminal beat — no advance_text.
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "It'll be under the jar. It's been under the jar four days and the jar's not moved." },
+        { type = "paragraph", content = "She goes up the strip with nothing in her pockets and one question in her, which is more than she has ever carried out of this dock." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go and find the buyer."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "kess_berth"
+time_progression_minutes = 60
+flagEffects = [
+  { targetType = "player", flag = "chip_read", op = "set" },
+]
+
+# ═══ THE WALL — beat_0096 (rev 147). Four refusals, and not one of them explains itself. ═════════════════
+# Four one-shot cards, one per person worth asking, each gated chip_read is_true + its own flag is_false,
+# each bumping wall_refusals on the way out. cap_the_wall below fires at gte 3, so ONE of the four can be
+# missed — deliberate, because a chapter gate that demands the player find all four of anything is the
+# lostness failure the mopoga study named (0.9% vs 4.7% median: lostness, not grind, is this genre's disease).
+#
+# ⚠️ THE ONE RULE THAT GOVERNS ALL FOUR: THE REASON MAY NOT LEAK. Cain put the word out to leave her alone
+# and she does not learn that this release — not here, not at cap_the_wall, not from Bastien's drain. What
+# the player sees is four people being kind to her in a way that is indistinguishable from rejection. So no
+# refusal may name a cause, hint at a third party, or apologise in a way that implies orders. Each one has to
+# read as that PERSON's own reason, and each one's own reason has to be plausible on its face.
+#
+# ⚠️ FOUR DIFFERENT TEXTURES, ON PURPOSE, or it is the same beat four times:
+#   Colm  — PROFESSIONAL. Least surprising and therefore first in the design order; his shipped line is
+#           "you never learn a name you don't need. I've forgotten more people than this bar's seen. On
+#           purpose." A man refusing exactly as he has always described himself. Nothing wrong here at all.
+#   Rue   — PRINCIPLED, and the first one that is genuinely odd. Her shipped brief is that she "deals straight
+#           with whoever deals straight back" and is "the one steady face down here". A straight dealer who
+#           will not deal is the first crack in the pattern.
+#   Sol   — PERSONAL, and the one that costs. His shipped narration says he has "decided he likes her.
+#           Mostly." He likes her and still will not, and he is bad at it, because he is not a man who lies.
+#   Market— COMMERCIAL. No NPC: a stallholder as a quoted voice in narration, never a named speaker — the
+#           shipped `crew` register (faceless but loud, hands and voices only). Coin does not move it, which
+#           in a place whose own description sells "weapons, gear, and people" is the loudest refusal of all.
+#
+# ⚠️ RENDER BUCKET — THEY ARE AUTO-FIRES, AND THE ORIGINAL NOTE HERE WAS WRONG ABOUT ITS OWN CODE.
+# It claimed these were "flat solo links (the bastien_door_search / mercer_end_table shape)". Both of those
+# precedents are `is_repeatable = true`, and the engine's selector is unambiguous:
+# selectAutoFireCanvasForLocation skips a canvas with `if (c.isRepeatable) continue;` — so a NON-repeatable
+# canvas with a location trigger fires ON ENTRY and redirects, whatever its npc fields say.
+# That is KEPT, because it is the better shape for this content: doors shutting on her should land unbidden,
+# not wait behind a card she elects to click. But it is written down correctly now, because a wrong note is
+# how the next author repeats the mistake.
+# ⚠️ AND IT IS WHY EACH ONE NEEDS wall_understood is_false. cap_the_wall fires at THREE of four, so a live
+# fourth refusal is the designed-for case — and without a closer it stays armed through the face, the bar,
+# the back room and the raid. The most likely path is the worst one: she takes the third refusal, crosses the
+# strip, cap_the_wall fires, and she walks straight into the market to buy the face with wall_market still
+# waiting. The scene would then have a man who knows her treating her as Wren, in the bought face, one beat
+# after the capstone that establishes nobody recognises her.
+# ⚠️ wall_understood RATHER THAN face_bought, because cap_the_wall ends on "So the question is dead… Dead is
+# her asking it". Asking stops being coherent at that beat, not at the purchase.
+# ⚠️ NO ORDERING RISK: all four locations are children of underworld_strip, and a third refusal always means
+# reaching a second location, so cap_the_wall always fires before a fourth could.
+# Presence is enforced where it matters by an npc_at_location clause, which is the predicate that bites.
+# MEDIA: none. Four short refusals do not earn four slots, and every one of these rooms already carries its
+# own establishing art on its location card.
+
+# ── (1) Colm. The professional refusal, and the one that is not strange at all. ──────────────────────────
+[[canvases]]
+id          = "wall_colm"
+name        = "Ask Colm who was buying"
+description = "beat_0096 (rev 147). Wall refusal 1 of 4 @underworld_bar. Flat solo link (neither npc nor requires_npc), one-shot, pri 4, gated chip_read is_true + wall_colm_asked is_false + npc_at_location underworld_bar/npc_colm/is_present (his row is 19:00-23:59). The courier she already worked will not name his buyer, and he refuses in the exact words his shipped hub gave him. SETS wall_colm_asked, bumps wall_refusals. 5 beats."
+[canvases.trigger]
+location      = "underworld_bar"
+is_repeatable = false
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chip_read",       operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "wall_understood", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "wall_colm_asked", operator = "is_false" },
+  { type = "npc_at_location", location_id = "underworld_bar", npc_id = "npc_colm", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Ask Colm who was buying"
+blocks = [
+  { type = "paragraph", content = "He is in the corner he is always in, back to the wall, drinking at the speed of a man who intends to still be upright at closing." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "The copies you carried out of Vance. Who was at the other end." },
+    ] },
+    { advance_text = "Wait.", blocks = [
+        { type = "paragraph", content = "He does not put the glass down, which is his tell, and she has seen it enough times now to read it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "You know what I'm going to say. You've heard me say it about other people and you liked me for it." },
+    ] },
+    { advance_text = "Ask anyway.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "I'm asking anyway." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "I don't learn a name I don't need. I've never needed that one. I put a package where I'm told and I go home, and that's thirty years of still being here." },
+    ] },
+    { advance_text = "Push.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "You know the room. You've stood outside it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "I've stood outside a lot of rooms. Ask me about the ones with nothing in them and I'll talk all night." },
+    ] },
+    { blocks = [
+        { type = "paragraph", content = "That is not a man hiding something. That is a man who arranged his whole life so there would be nothing to hide, and she cannot hold it against him." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let him drink."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "wall_colm_asked", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "wall_refusals", op = "add", value = 1, clamp = true },
+]
+
+# ── (2) Rue. The principled refusal, and the first one that is actually wrong. ───────────────────────────
+[[canvases]]
+id          = "wall_rue"
+name        = "Ask Rue who buys paper"
+description = "beat_0096 (rev 147). Wall refusal 2 of 4 @underworld_brothel. Flat solo link, one-shot, pri 4, gated chip_read is_true + wall_rue_asked is_false + npc_at_location underworld_brothel/npc_rue/is_present. Rue's shipped brief is that she deals straight with whoever deals straight back and is the one steady face down here — so a straight dealer who will not deal is the chapter's first real crack. She offers coin work instead, which is the tell: she is not shutting the door, she is standing in it. SETS wall_rue_asked, bumps wall_refusals. 5 beats."
+[canvases.trigger]
+location      = "underworld_brothel"
+is_repeatable = false
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chip_read",       operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "wall_understood", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "wall_rue_asked",  operator = "is_false" },
+  { type = "npc_at_location", location_id = "underworld_brothel", npc_id = "npc_rue", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Ask Rue who buys paper"
+blocks = [
+  { type = "paragraph", content = "Rue is doing the book, which she does in the open, because the whole of her authority down here is that her numbers are the same numbers whoever asks." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Who buys company paper on the strip. Not the fences. The one who keeps it." },
+    ] },
+    { advance_text = "Wait for it.", blocks = [
+        { type = "paragraph", content = "The pen stops. It is a short stop and it is the first time in four months that Rue has taken any time at all to answer her." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "That's not a thing I trade in." },
+    ] },
+    { advance_text = "Say the obvious.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "You trade in who's where and who pays. That's the same trade." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "It is. And I'm still not trading in it, and I'd rather you took that as an answer than as the start of something." },
+    ] },
+    { advance_text = "Ask what changed.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "You've never done that to me." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "No. And there's work upstairs at thirty a head if you want it, same as always, and I'll count it out honest, same as always." },
+    ] },
+    { blocks = [
+        { type = "paragraph", content = "The offer is real. Everything about it is exactly as straight as Rue has ever been with her, and it is being used to change the subject." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave her to the book."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_brothel"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "wall_rue_asked", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "wall_refusals", op = "add", value = 1, clamp = true },
+]
+
+# ── (3) Sol. The personal refusal, and the one that costs. ───────────────────────────────────────────────
+[[canvases]]
+id          = "wall_sol"
+name        = "Ask Sol"
+description = "beat_0096 (rev 147). Wall refusal 3 of 4 @underworld_bar. Flat solo link, one-shot, pri 4, gated chip_read is_true + wall_sol_asked is_false + npc_at_location underworld_bar/npc_sol/is_present (10:00-23:59). ⚠️ THE ONE THAT COSTS. Sol's shipped narration says he has decided he likes her, 'mostly', and his whole declared function is that he hears everything over his counter and repeats none of it UNLESS you are the kind he has decided he likes. She is that kind, and he still will not — and he is bad at it, because he is not a man who lies. He does not name a cause and he does not apologise; he changes what he is willing to be to her. SETS wall_sol_asked, bumps wall_refusals. 6 beats."
+[canvases.trigger]
+location      = "underworld_bar"
+is_repeatable = false
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chip_read",       operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "wall_understood", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "wall_sol_asked",  operator = "is_false" },
+  { type = "npc_at_location", location_id = "underworld_bar", npc_id = "npc_sol", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Ask Sol"
+blocks = [
+  { type = "paragraph", content = "Sol has the taps and the towel and the flat attention he gives everyone, and she has spent four months earning a version of it that is not flat." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Somebody down here collects Vance paper. Years of it. You'd know who." },
+    ] },
+    { advance_text = "Wait.", blocks = [
+        { type = "paragraph", content = "He wipes the same clean glass he was already wiping. He is a man who has told her true things about dead men and where their people ended up, unprompted, for free." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "I would." },
+    ] },
+    { advance_text = "Wait for the rest.", blocks = [
+        { type = "paragraph", content = "There is no rest. He sets the glass down and picks up another one that is also already clean." },
+    ] },
+    { advance_text = "Ask him straight.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "You've never made me ask twice." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "No." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "I'll pour for you all night and I'll not charge you for the last one. That's what I've got." },
+    ] },
+    { advance_text = "Push it.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Sol." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Don't. You'll only make me say something short and then we'll both have to live in this bar afterwards." },
+    ] },
+    { blocks = [
+        { type = "paragraph", content = "He is not frightened of her and he is not ashamed. He looks like a man keeping a promise he does not enjoy having made, and she has no idea who he made it to." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let it go."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "wall_sol_asked", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "wall_refusals", op = "add", value = 1, clamp = true },
+]
+
+# ── (4) The market. The commercial refusal — and coin is the thing that has never failed down here. ──────
+[[canvases]]
+id          = "wall_market"
+name        = "Buy the name"
+description = "beat_0096 (rev 147). Wall refusal 4 of 4 @underworld_market. Flat solo link, one-shot, pri 4, gated chip_read is_true + wall_market_asked is_false. NO NPC — the stallholder is a quoted voice in narration and never a named speaker, the shipped `crew` register (faceless but loud; hands and voices only). ⚠️ THE LOUDEST OF THE FOUR because it is the only one where she puts money on the counter. The market's own shipped description sells 'weapons, gear, and people, penned at the far end like the rest of the stock', so a stall that will not take coin for a name is a stall breaking its own only rule. Costs her NOTHING — the coin goes back; charging for a refusal would make the wall an economic wall instead of a social one. SETS wall_market_asked, bumps wall_refusals. 5 beats."
+[canvases.trigger]
+location      = "underworld_market"
+is_repeatable = false
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chip_read",         operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "wall_understood",   operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "wall_market_asked", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Buy the name"
+blocks = [
+  { type = "paragraph", content = "The paper stall is the old man with the new name, and the price of a thing here has never once depended on what the thing was." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "She puts coin on the counter before she asks, because that is the grammar down here and it has never failed." },
+        { type = "dialog", props = { speaker = "player" }, content = "Company paper. Somebody's been buying it for years. I want where it goes." },
+    ] },
+    { advance_text = "Wait.", blocks = [
+        { type = "paragraph", content = "He looks at the coin the way a man looks at weather. He does not touch it, and not touching it takes him some effort." },
+        { type = "paragraph", content = "\"Not that,\" he says. \"Anything else on this table and half of what's under it.\"" },
+    ] },
+    { advance_text = "Add to it.", blocks = [
+        { type = "paragraph", content = "She adds to it. It is more than the manifests behind him are worth and they both know it." },
+        { type = "paragraph", content = "\"Still not that.\"" },
+    ] },
+    { advance_text = "Ask why not.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "You sell people off the end of this row." },
+        { type = "paragraph", content = "\"I do. Take your money back, love — I'd rather you had it than left it here looking at me.\"" },
+    ] },
+    { blocks = [
+        { type = "paragraph", content = "She takes it back. Four people now, and every one of them has found a different way to be perfectly reasonable at her, and not one of them has said no." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Pocket it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_market"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "wall_market_asked", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "wall_refusals", op = "add", value = 1, clamp = true },
+]
+
+# ═══ cap_the_wall — beat_0096 (rev 147). She works it out, and she works it out WRONG. ═══════════════════
+# Auto-fire capstone @underworld_strip, pri 10, ONE-SHOT, gated wall_refusals gte 3 + wall_understood is_false.
+#
+# ⚠️ gte 3 OF 4, NOT ALL FOUR. One refusal can be missed. A chapter gate that requires the player to find
+# every instance of anything is the lostness failure — and three is already a pattern, which is all this beat
+# needs. The fourth, if she gets it, is confirmation she does not require.
+#
+# ⚠️ SHE NOTICES THE COORDINATION AND MISREADS ITS DIRECTION, AND THIS IS THE WHOLE BEAT.
+# Four people refusing the same question inside a week is not four private decisions and she is not stupid
+# enough to think it is. So she does the arithmetic and reaches the wrong answer: VANCE. She cut her leash
+# eleven days ago, and the fear sitting under everything since is that they noticed. A word from the company
+# would close a district exactly like this.
+# It is Cain, and she will not learn that this release. What the beat must NOT do is let her get close: no
+# third-party phrasing, no "somebody is protecting you", no character who nearly says it. The misreading has
+# to be sound enough that the player makes it with her.
+# ⚠️ AND IT EARNS ITS KEEP TWICE — this is the plant for the raid. When the three machines come through
+# Bastien's door at beat_0105, she has spent the whole chapter afraid the company found her, and the units
+# arriving reads as the fear confirmed. The truth arrives one beat later and takes the fear off her.
+#
+# ⚠️ THE PIVOT IS A THING SHE ALREADY KNOWS HOW TO DO. She has worn two covers — dock coveralls for Renner,
+# an analyst's kit for Calloway — and Mercer issued both. The new thought is not "wear a disguise". It is
+# that she has never once been somebody else for HERSELF, and that the company's word, whatever it says,
+# describes a woman named Wren.
+# ⚠️ HER INTERIOR IS RATIONED EVEN HERE. Two thought_bubbles in nine beats, and both are arithmetic rather
+# than feeling. What she does not do is grieve about Sol.
+# MEDIA: reuses locations/underworld_strip.jpg — a walking beat on a street the player has crossed a hundred
+# times does not earn a new slot, and establishing art is the one asset this game reuses on purpose.
+[[canvases]]
+id          = "cap_the_wall"
+name        = "A word from somewhere"
+description = "beat_0096 (rev 147). THE FACE's first turn @underworld_strip. Auto-fire capstone, pri 10, one-shot, gated wall_refusals gte 3 + wall_understood is_false. Three of four doors have shut on the same question in a week and she does the arithmetic: this is coordinated, and somebody said her name. She reaches VANCE — she cut her leash eleven days ago and the fear has been sitting there since. It is Cain, and she does not learn that this release; the beat is built so the player makes the same mistake she does. The pivot is not 'wear a disguise' (she has worn two, both issued by Mercer) but that she has never been somebody else for herself, and that whatever word is out describes a woman called Wren. SETS wall_understood. 9 beats / 8 clicks. Plants the fear the units confirm at beat_0105."
+[canvases.trigger]
+location      = "underworld_strip"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "wall_refusals",   operator = "gte", value = 3 },
+  { type = "flag",  subject = "player", flag_key  = "wall_understood", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "A word from somewhere"
+blocks = [
+  { type = "image", props = { file = "locations/underworld_strip.jpg", description = "A narrow underground street of lit doorways and low ceilings, figures moving between them.", search_queries = ["narrow underground street lit doorways night", "dim subterranean market alley low ceiling"] } },
+  { type = "paragraph", content = "The strip at the hour when it fills. She stands out of the traffic with her back to a wall and does the arithmetic properly instead of walking it off again." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Four people. One question. A courier who protects himself, a madam who deals straight, a barman who likes her, and a stall that would sell her a person. Four different answers and the same shape underneath all of them." },
+    ] },
+    { advance_text = "Count it again.", blocks = [
+        { type = "paragraph", content = "Any one of them alone is a man's own business. Rue on her own is a bad week. Sol on his own is a man with a headache." },
+        { type = "paragraph", content = "Three inside a week is not four private decisions. Somebody said something, and every one of them heard it before she asked." },
+    ] },
+    { advance_text = "Ask who.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Eleven days ago she took a thing out of her own spine that a company put there, and she has been walking around since like a woman who got away with it." },
+    ] },
+    { advance_text = "Follow it.", blocks = [
+        { type = "paragraph", content = "The Reach does not close for nothing. It closes for money it is frightened of losing, and there is exactly one outfit above this water with enough of that to buy a whole street's manners at once." },
+    ] },
+    { advance_text = "Test it.", blocks = [
+        { type = "paragraph", content = "She tests it against what she saw. Nobody was frightened of her. Nobody threatened her, took her coin, or asked her to leave. Rue offered her work at the same rate as always." },
+        { type = "paragraph", content = "That fits. A word does not have to say harm her. A word only has to say her name and not one thing more, and careful people fill in the rest themselves." },
+    ] },
+    { advance_text = "Take the consequence.", blocks = [
+        { type = "paragraph", content = "So the question is dead. Not the buyer — the buyer is still down here with a stack of paper and a habit of paying on time. Dead is her asking it." },
+    ] },
+    { advance_text = "Think about the covers.", blocks = [
+        { type = "paragraph", content = "She has done this before. Coveralls at a depot, an analyst's kit on a Vance floor, a walk and a voice and a name for each. She was good at it. It is the one thing they built her to be good at." },
+        { type = "paragraph", content = "Both times Mercer handed her the clothes and told her whose life to get inside." },
+    ] },
+    { advance_text = "Follow that.", blocks = [
+        { type = "paragraph", content = "Whatever word is out, it has a name in it, and the name is Wren. It does not describe a woman off a boat with no history and nothing to trade but hours." },
+    ] },
+    { blocks = [
+        { type = "paragraph", content = "There is a row at the far end of the market where the stock has faces. Whatever they sell down there to make a person stop being findable, she can afford it or she can earn it." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go and price it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_strip"
+time_progression_minutes = 45
+flagEffects = [
+  { targetType = "player", flag = "wall_understood", op = "set" },
+]
+
+# ═══ cap_stranger_at_the_bar — beat_0097 (rev 148). She puts it on, and it costs her Sol. ═══════════════
+# Auto-fire capstone @underworld_bar, pri 10, ONE-SHOT, gated face_bought is_true + cover_stranger EQUIPPED
+# + stranger_seen is_false + npc_at_location underworld_bar/npc_sol/is_present.
+#
+# ⚠️ THE EQUIPPED CLAUSE IS THE WHOLE GATE AND IT IS NOT DECORATION. Buying the face does not wear it: the
+# garment is granted UN-WORN (the cover_dockhand precedent) and she has to go to the rack at the berth and
+# put it on. So this scene cannot fire until the player has taken a deliberate action in a wardrobe UI, which
+# is exactly right — the chapter's turn is her CHOOSING to stop being Wren, and a cutscene that fires off a
+# purchase would take the choice off her. `clothing_item ... equipped` is the shipped predicate
+# (5_scenes.toml:347, :534, the Renner cover).
+# ⚠️ AND IT IS WHY beat_0094 HAD TO MOVE THE RACK FIRST. wardrobe_location pointed at wren_room, sealed since
+# the 1a close, so before that beat this gate would have been unsatisfiable for the whole release.
+#
+# ⚠️ WHAT THE SCENE IS FOR: the cost, not the disguise working. That it works is assumed — she is good at
+# this, it is the one thing they built her to be good at, and the game has shown her do it twice. What is
+# new is the bill. Sol's shipped narration says he has "decided he likes her. Mostly," and one beat ago he
+# refused her while plainly keeping a promise he did not enjoy having made. Now she walks back in and gets
+# the flat version of him that everyone else gets, and it is worse than the refusal was, because the refusal
+# at least happened to HER.
+# ⚠️ IT IS PLAYED ONCE AND NEVER MENTIONED AGAIN. No later canvas remarks on it, nothing tracks it, and she
+# does not think about it after this. A game that keeps returning to the sad thing turns a cost into a mood.
+# ⚠️ HE IS NOT SUSPICIOUS AND NOTHING NEARLY SLIPS. A near-miss here would make the face fragile and the
+# whole ladder tense in the wrong way; the tension in this chapter is what she has to DO in that bar, never
+# whether the paint holds. The one thing he clocks is a stranger looking at the back door, which is true of
+# every new face in that room and which he reads as ambition rather than as her.
+# MEDIA: one new slot, scenes/wren_stranger_bar.jpg — her at the bar in the bought kit, from behind or at an
+# angle that is not the portrait. Not a reuse of locations/underworld_bar.jpg: that is the room, this is her
+# in it wearing somebody else, and ONE ASSET ONE BLOCK forbids the double-spend.
+[[canvases]]
+id          = "cap_stranger_at_the_bar"
+name        = "Nobody"
+description = "beat_0097 (rev 148). Auto-fire capstone @underworld_bar, pri 10, one-shot, gated face_bought is_true + clothing_item cover_stranger equipped + stranger_seen is_false + npc_at_location underworld_bar/npc_sol/is_present. The face is granted un-worn, so this cannot fire until the player has gone to the rack at the berth and deliberately put it on — the chapter's turn is her CHOOSING to stop being Wren and a scene that fired off the purchase would take the choice off her. What the beat spends is the COST: Sol gives her the flat attention he gives everyone, which is worse than his refusal was, because the refusal at least happened to her. He is not suspicious, nothing nearly slips, and it is never mentioned again. SETS stranger_seen. 8 beats / 7 clicks."
+[canvases.trigger]
+location      = "underworld_bar"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "face_bought",    operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "stranger_seen",  operator = "is_false" },
+  { type = "clothing_item", item_id = "cover_stranger", operator = "equipped" },
+  { type = "npc_at_location", location_id = "underworld_bar", npc_id = "npc_sol", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Nobody"
+blocks = [
+  { type = "image", props = { file = "scenes/wren_stranger_bar.jpg", description = "A woman in plain second-hand clothes standing at the end of a dim underground bar, seen from behind, a barman working the taps beyond her.", search_queries = ["woman from behind at dim bar counter noir", "back view woman standing at underground bar low light"] } },
+  { type = "paragraph", content = "The Undertow at nine. Same door, same three steps down, same smell of wet coats and spilled beer over old smoke." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "The room does what the room does when anybody comes in: a half-second of attention, priced and dismissed. She has been getting a different half-second than that for four months and had not noticed until it stopped." },
+    ] },
+    { advance_text = "Go to the bar.", blocks = [
+        { type = "paragraph", content = "Sol comes down the counter with the towel over his shoulder and the flat, even, entirely pleasant face he keeps for people whose names he does not have yet." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "What'll it be." },
+    ] },
+    { advance_text = "Order something.", blocks = [
+        { type = "paragraph", content = "She orders the thing she always orders. He pours it, takes her coin, and rings it, and there is nothing at all in it." },
+    ] },
+    { advance_text = "Wait for it.", blocks = [
+        { type = "paragraph", content = "He does not lean. He does not do the thing where he finds a glass to wipe near her. He does not say the short flat sentence about somebody who died on the strip last week that he has been saying to her, unasked, since the second week." },
+    ] },
+    # The one interior beat, and it is about the mechanism rather than the feeling.
+    { advance_text = "Hold still.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "It works. That is the finding, and it is the finding she paid for. A man who decided he liked her four months ago has looked at her twice tonight and got nothing back either time." },
+    ] },
+    # He clocks ONE thing, and it is true of every new face in the room. No near-miss.
+    { advance_text = "Look at the back door.", blocks = [
+        { type = "paragraph", content = "There is a door at the back of the room with no handle on this side. She has walked past it a hundred times and never once wondered about it, which she now thinks is itself a strange thing to be true." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "That's not a door you look at, love. New ones always do, mind. It's how I know they're new." },
+    ] },
+    { advance_text = "Say nothing much.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Just came in out of the rain." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "It's not raining." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Doesn't matter to me. Everybody comes in out of something." },
+    ] },
+    # Terminal beat — no advance_text. She stays, which is the chapter starting.
+    { blocks = [
+        { type = "paragraph", content = "She takes the drink to the end of the bar and sits where she can see the door with no handle, and stays until closing, and nobody asks her anything at all." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stay till closing."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 120
+flagEffects = [
+  { targetType = "player", flag = "stranger_seen", op = "set" },
+]
+
+# ══ CARD P — the bought face is on (beat_0097, rev 148). Frontier; the boundary moves here from O. ══════
+# ⚠️ MANDATORY: activity_buy_face's buy choice sets face_bought, which closes O, and O is the only live
+# Story-Goal card in the build. Ninth time in this game.
+# ⚠️ ITS TIP CARRIES THE ONE RULE THE PLAYER CAN GET WRONG AND LOSE AN EVENING TO — the face is granted
+# un-worn and every surface from here to the end of the chapter gates on it being EQUIPPED. A player who
+# buys it and walks straight to the bar gets nothing and has no way to know why, because a canvas that does
+# not fire leaves no trace. So the tip names the rack, names the place the rack is, and says it plainly.
+[[quest_cards]]
+priority   = 10
+text       = "A hundred and twenty coin at the curtained tables and an afternoon of sitting still, and what you walked out with is a woman who does not exist: a face, a history thin enough that nobody will check it, and the clothes that make both of them true. She asked you exactly one question — whether anyone had ever taken a print of you — and you lied to her before the face was even finished."
+# ⚠️ beat_0098 (rev 149) — P GIVES UP THE BOUNDARY to card Q, in the same edit that adds Q. Run in the
+# right order this time. P keeps its Support-Us ask (rev-113 rule).
+tip        = "It is in your bag, not on you. Get to the cot at the Berth and change — everything from here needs it worn, and out of it you are just Wren again in a district that has stopped talking to her. Then go and drink at the Undertow like somebody with nowhere else to be. If you want the next chapter sooner, Support Us in the sidebar."
+when = [
+  { flag = "face_bought",   op = "is_true"  },
+  { flag = "stranger_seen", op = "is_false" },
+]
+
+# ═══ cap_sol_hires — beat_0098 (rev 149). Sol puts her on the floor. ════════════════════════════════════
+# Auto-fire capstone @underworld_bar, pri 10, ONE-SHOT, gated stranger_seen is_true + bar_hired is_false +
+# cover_stranger equipped + npc_at_location underworld_bar/npc_sol/is_present.
+#
+# ⚠️ SOL IS PROMOTED FROM SET-DRESSING, AND IT IS OVERDUE. npc_sol has shipped since the underworld opened
+# with a portrait, a daily 10:00-23:59 row, a 14-beat hub, an explicit declared function — "bring him a dead
+# man's name and he knows who ran it and where the survivor still turns up" — and a brief that says in as
+# many words "No arc, no conquest." He has never once been asked to do anything. This is the first thing the
+# game gives him, and it is not an arc: he hires, he trains, he keeps the floor. The brief holds.
+#
+# ⚠️ THE JOB PAYS WORSE THAN THE HOUSE AND SHE TAKES IT ANYWAY. Rue pays thirty a head; this is fifteen a
+# shift. The player is meant to notice, and she says why once, in her own voice, and never again: it puts her
+# ten feet from a door. That single line is where the player learns she has stopped chasing coin — which is
+# the whole difference between this chapter and every chapter before it, where the money was somebody's
+# errand budget.
+# ⚠️ AND SHE ASKS FOR THE JOB. It is not offered. Sol has just watched a woman with no name sit at the end of
+# his bar until closing; he hires her because she turned up twice and did not talk, which is the entire
+# hiring standard of a room like that.
+#
+# ⚠️ THE OWNER IS ESTABLISHED AND NOT NAMED, and this is the beat where the chapter's central irony is
+# loaded. npc_bastien's own shipped record already reads "The underworld's quiet owner — the bar and The
+# House both, worked through a web of connections, never in front", and Sol's two shipped lines say the same
+# from the floor: "he's outlasted every owner this place has had... the one it answers to now never shows his
+# face" and "an owner you never see is an owner who never asks questions you can't answer". So Sol tells her
+# there is an owner, tells her the owner is not a topic, and does not know the man in the back room IS him.
+# She has been paid by Bastien's money since the day she started taking shifts at The House, and neither of
+# them knows it.
+# MEDIA: reuses locations/underworld_bar.jpg. A hiring conversation over a counter does not earn a slot.
+[[canvases]]
+id          = "cap_sol_hires"
+name        = "Two nights running"
+description = "beat_0098 (rev 149). Auto-fire capstone @underworld_bar, pri 10, one-shot, gated stranger_seen is_true + bar_hired is_false + clothing_item cover_stranger equipped + npc_at_location underworld_bar/npc_sol/is_present. She asks Sol for work; he hires her because she turned up twice and did not talk. The job pays FIFTEEN a shift against Rue's thirty a head, and she takes it anyway — she says why once, in her own voice, and never again: it puts her ten feet from a door. Sol establishes that the bar has an owner, that the owner is not a topic, and does not know the man who keeps the back room IS him. SETS bar_hired + bar_rung = 1. 9 beats / 8 clicks."
+[canvases.trigger]
+location      = "underworld_bar"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "stranger_seen", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "bar_hired",     operator = "is_false" },
+  { type = "clothing_item", item_id = "cover_stranger", operator = "equipped" },
+  { type = "npc_at_location", location_id = "underworld_bar", npc_id = "npc_sol", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Two nights running"
+blocks = [
+  { type = "image", props = { file = "locations/underworld_bar.jpg", description = "A dim underground bar, low light, a door at the back with no handle on this side.", search_queries = ["dim underground speakeasy bar red light", "quiet noir back-alley bar low light"] } },
+  { type = "paragraph", content = "Second night at the same stool. He rings her drink without being asked this time, which down here is most of a conversation." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Are you hiring." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Always. It's that kind of room." },
+    ] },
+    { advance_text = "Wait for the terms.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Glasses, tables, and you carry a full tray down three steps without looking at your feet. Fifteen a shift and you keep whatever's left on the bar, which is nothing, because the men in here are careful with money." },
+    ] },
+    # SHE SAYS WHY, ONCE. This is the beat where the player learns she has stopped chasing coin.
+    { advance_text = "Do the arithmetic out loud.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "The House pays thirty a head." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "The House pays thirty a head. So go and work at The House." },
+    ] },
+    { advance_text = "Don't.", blocks = [
+        { type = "paragraph", content = "Thirty a head buys the cot and the line and a part, and she has spent four months doing exactly that arithmetic, and every answer it ever gave her belonged to somebody else's errand." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Fifteen a shift, six nights a week, standing in a room with a door in it. That is not what the money is for." },
+    ] },
+    { advance_text = "Take it.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Fifteen's fine." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Course it is. You've sat there two nights and not once tried to tell me anything about yourself, and that's the whole interview." },
+    ] },
+    # THE OWNER — established, not named. Both of Sol's shipped lines on the subject, kept true.
+    { advance_text = "Ask who you'd be working for.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Whose bar is it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Mine, six nights out of seven. Somebody's on the paper. He's never once come down to look at it and I've never once gone up to ask." },
+    ] },
+    { advance_text = "Push a little.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "You've never met him." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "I've outlasted four owners. You don't do that by learning which one you've got. An owner you never see is an owner who never asks you a question you can't answer." },
+    ] },
+    # THE DOOR. He gives her the rule and the rule is the ladder.
+    { advance_text = "Ask about the back.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "And that door's not yours. Men use that room. They come in the alley side and they go out the alley side and what they want from this bar comes to them, it doesn't get fetched." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "If you're ever in there it'll be because somebody sent for you, and I'd think hard about that night before you got to it." },
+    ] },
+    # Terminal beat — no advance_text.
+    { blocks = [
+        { type = "paragraph", content = "He puts a bar cloth on the counter in front of her, which is the whole of the paperwork, and goes back down the taps." },
+        { type = "paragraph", content = "She ties her hair back with somebody else's hands and starts on the glasses at the near end, where she can see the door." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Start on the glasses."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 60
+flagEffects = [
+  { targetType = "player", flag = "bar_hired", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "bar_rung", op = "set", value = 1, clamp = true },
+]
+
+# ══ CARD Q — the job (beat_0098, rev 149). Frontier, and the boundary lives here now. ══════════════
+# ⚠️ MANDATORY: cap_stranger_at_the_bar sets stranger_seen, which closes P, and P is the only live
+# Story-Goal card in the build. Tenth time in this game.
+# ⚠️ IT NAMES THE LADDER WITHOUT NAMING THE MAN. The player is told there is an owner, that the owner keeps
+# the back room, and that getting sent for is the only way in — all of which Sol says on screen. Bastien is
+# not named and will not be until she is standing in front of him. The card also does NOT say "seduce him":
+# she does not know there is anyone to seduce, and a tip that pre-empts her own discovery would hand the
+# player a plan she has not formed.
+# ⚠️ AND IT NAMES THE ONE RULE THAT COSTS AN EVENING IF MISSED — out of the face, the job is not there. The
+# work card gates on the garment being equipped, so a player who changes at the cot and forgets to change
+# back finds the shift has silently vanished. Sol hired a stranger; Wren does not work here.
+[[quest_cards]]
+priority   = 10
+text       = "Fifteen a shift, six nights, glasses and tables and three steps with a full tray. The House pays twice that and you took this instead, because The House is on the other side of the strip and this room has a door in it — a door with no handle on the bar side, that men go into with envelopes and come out of without them, that nobody who works here will look at twice. Sol says the bar has an owner who has never once come down to see it. Sol has outlasted four owners by never learning which one he has."
+# ⚠️ beat_0099 (rev 150) — Q'S CLOSER MOVED bar_rung lt 4 -> bastien_seen is_false, AND THE BOUNDARY LEFT.
+# Q's whole text is a player who does not know who the owner is. cap_bastien_notices answers that in its
+# first four seconds, so under the old closer this card would have gone on wondering aloud about a man she
+# had just recognised, for two more rungs. Same defect as cards E/F/G: true where it stands, false about the
+# build. Card R below owns everything after the recognition and takes the boundary in the same edit.
+tip        = "So work. Take shifts at the Undertow and keep taking them — the man who keeps that room sits four hours a night in a chair placed to see the floor, and there is nothing you can do to be noticed faster than being there. Wear the face every time: out of it the job does not exist, because Sol hired a stranger. If you want the next chapter sooner, Support Us in the sidebar."
+when = [
+  { flag = "stranger_seen", op = "is_true"  },
+  { flag = "bastien_seen",  op = "is_false" },
+]
+
+# ══ CARD R — she knows who he is (beat_0099, rev 150). Frontier; the boundary lives here. ═══════════════
+# ⚠️ MANDATORY: cap_bastien_notices sets bastien_seen, which closes Q. Eleventh time in this game.
+# ⚠️ IT NAMES HIM, BECAUSE SHE KNOWS. Every card before this refused the name; this one uses it in the first
+# sentence, because the scene the player just finished put it in her own mouth. A card that kept coy after
+# a recognition scene would be the quests page lying about what the player just read.
+# ⚠️ AND IT SAYS THE PART THAT MAKES THE DISGUISE HOLD, because it is the single most likely thing for a
+# player to disbelieve: he never looked at her face. That is not a convenience invented for this chapter —
+# it is stated flat, unprompted, in four separate shipped cell canvases, and the tip cites the reason in the
+# fiction's own terms (he was reading the light in her chest, and the light is out).
+# ⚠️ IT DOES NOT SAY "SEDUCE HIM". The tip says keep working and let him keep deciding, which is the truth of
+# the ladder: every rung is his call, and the only thing she controls is being there.
+[[quest_cards]]
+priority   = 10
+text       = "Bastien. Grey through the sides now, a good coat, a drink he does not touch, in a chair set at the angle a chair is set at when a man wants the door in front of him all evening. He owns the bar. He owns The House you have been earning at. He has been buying that company's paper for years and it goes into the room behind you, and you have been carrying trays around inside the answer for four nights. He looked straight at you and saw a girl with a tray."
+# ⚠️ beat_0104 (rev 154) — R GIVES UP THE BOUNDARY to card S. Two-step, right order.
+tip        = "He never once looked at your face. Three months in that cell and what he watched was the light under your sternum and what he wrote down was the number — and the light is out now, and the chip is on a bench four miles from here. So he will not know you. Keep working, and let him keep deciding: every step nearer that door has been his call so far and the only thing you control is being on the floor when he makes the next one. If you want the next chapter sooner, Support Us in the sidebar."
+when = [
+  { flag = "bastien_seen", op = "is_true" },
+  { trait = "bar_rung", subject = "player", op = "lt", value = 4 },
+]
+
+# ═══ cap_bastien_notices — beat_0099 (rev 150). SHE KNOWS HIM. HE DOES NOT KNOW HER. ════════════════════
+# Auto-fire capstone @underworld_bar, pri 11, ONE-SHOT, gated bar_rung lt 2 + npc_bastien.relation gte 6 +
+# cover_stranger equipped + bastien_seen is_false. SETS bastien_seen + bar_rung = 2.
+#
+# ⚠️ THE ASYMMETRY THIS SCENE ESTABLISHES IS THE CHAPTER, AND IT IS CANON RATHER THAN INVENTION.
+# She spent captivity looking straight at him: he sat in a chair in her cell with a notebook, crouched in
+# front of her, wiped cum off the plate under her sternum with his thumb to read the number clean. She would
+# know that man in any room on earth.
+# And he will not know her, because THE SHIPPED PROSE SAYS SO THREE SEPARATE TIMES, in three different
+# canvases, unprompted: "He watches the number, not her" (cell_use_inventory) · "He doesn't look at her face
+# once" (cell_use_turns) · "Not her face — her face has never been the thing" (cell_use_stutter) · and again
+# at cell_use_he_does_not_stop, "not at her face, at the read-out". He was never looking at a woman. He was
+# reading a gauge, and the gauge was the light in her chest.
+# That gauge is GONE. The chip is out, the core is sealed, the plate under her sternum is dark, and the seam
+# at the base of her spine is closed. What he remembers is a machine with a light in it. What is standing in
+# front of him is a woman carrying a tray. The bought face is the smallest part of why this works.
+# ⚠️ SO THE RECOGNITION RUNS ONE WAY AND THE PLAYER GETS IT IMMEDIATELY. This is not a mystery to solve —
+# the buyer question is ANSWERED here, in the first second, and what replaces it is much worse: she now
+# knows exactly whose paper stack she needs, and exactly what she is going to have to do to get near it.
+# Every rung after this one is her choosing it.
+#
+# ⚠️ NOTHING NEARLY SLIPS AND HE IS NOT SUSPICIOUS. He gives her the look a man gives a new girl on a floor
+# he owns — appraising, brief, entirely without heat — and goes back to his room. The tension in this
+# chapter is what she has to do, never whether the paint holds.
+# ⚠️ SHE DOES NOT DECIDE ANYTHING ON SCREEN. No plan, no resolve, no clenched jaw. She finishes the shift.
+# The deciding is the player clicking the next shift card, which is the only place a decision like this
+# can honestly live.
+#
+# ⚠️ SCHEDULELESS SPEAKER — no `npc`, no `requires_npc`, no npc_at_location clause. npc_bastien has had NO
+# schedule row since rev 141 and must not get one at a PUBLIC location: the in-room portrait card is
+# canvas-gated (v2.py:4998-5008) but the nav-card badge is NOT (getNpcsPresentAtLocation, v2.py:4773), so a
+# row here would park his face on the Undertow card in every save, including an Act-1 save where he is a
+# saved reveal currently holding her in a cell. Shipped precedent for this exact shape at this exact
+# location: cap_mercer_resurfaces. His room's row comes back at beat_0101, where the room has no nav card.
+# MEDIA: one new slot, scenes/bastien_back_door.jpg — a seated man glimpsed through a part-open door. Not a
+# reuse of scenes/bastien_undertow.jpg (shelved, and that is him at the bar in the open) or of
+# locations/underworld_bar.jpg. ONE ASSET, ONE BLOCK.
+[[canvases]]
+id          = "cap_bastien_notices"
+name        = "The door is open a few inches"
+description = "beat_0099 (rev 150). THE CHAPTER'S HINGE @underworld_bar. Auto-fire Tier-3 capstone, pri 11, one-shot, gated bar_rung lt 2 + npc_bastien relation gte 6 + clothing_item cover_stranger equipped + bastien_seen is_false. SHE RECOGNISES HIM AND HE DOES NOT RECOGNISE HER, and both halves are shipped canon: she was face to face with him for the whole captivity, and three separate cell canvases state unprompted that he never once looked at her face — he watched the read-out under her sternum and wrote the number down. That read-out is dark now and the chip is out, so what he remembers is a machine with a light in it and what is in front of him is a woman with a tray. The buyer question is ANSWERED here rather than teased, and what replaces it is worse. He gives her the look a man gives new staff and goes back to his room; nothing nearly slips. She decides nothing on screen. Scheduleless speaker (cap_mercer_resurfaces precedent) — he must NOT get a row at a public location. SETS bastien_seen + bar_rung = 2. 11 beats / 10 clicks."
+[canvases.trigger]
+location      = "underworld_bar"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "bar_rung",     operator = "lt", value = 2 },
+  { type = "trait", subject = "npc", npc_id = "npc_bastien", trait_key = "relation", operator = "gte", value = 6 },
+  { type = "flag", subject = "player", flag_key = "bastien_seen", operator = "is_false" },
+  { type = "clothing_item", item_id = "cover_stranger", operator = "equipped" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The door is open a few inches"
+blocks = [
+  { type = "image", props = { file = "scenes/bastien_back_door.jpg", description = "A door standing a few inches ajar at the back of a dim bar, warm light behind it, the shape of a seated man in a chair beyond.", search_queries = ["door ajar warm light back room seated man silhouette", "partly open door dim bar back room chair light"] } },
+  { type = "paragraph", content = "Fourth shift. Tray, three steps, the near tables. Halfway through the night the door at the back is open a few inches, which it has not been once since she started." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "She does not look at it, because that is the rule and because looking at it is what new ones do. She clears the near tables twice instead." },
+    ] },
+    { advance_text = "Look.", blocks = [
+        { type = "paragraph", content = "Then she looks." },
+        { type = "paragraph", content = "Warm light, a desk with nothing on it, and a chair set at the angle a chair is set at when a man wants the door in front of him all evening. There is somebody in it." },
+    ] },
+    # RECOGNITION. Her body first, and the vocabulary is the game's own drain/plate/core lexicon.
+    { advance_text = "Keep looking.", blocks = [
+        { type = "paragraph", content = "Her hands know before she does. The tray goes very slightly heavier and something under her sternum that has been quiet for eleven days does a thing that is not quite the old climb." },
+    ] },
+    { advance_text = "Name it.", blocks = [
+        { type = "paragraph", content = "Older than the voice through the wall. Grey through the sides now, a good coat over a chair back, a drink at his elbow that he is not drinking and, she would bet the whole hundred and twenty, has not touched all night." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Bastien." },
+    ] },
+    # WHAT SHE KNOWS. Three lines, all from shipped captivity content, none of it re-narrated at length.
+    { advance_text = "Don't drop the tray.", blocks = [
+        { type = "paragraph", content = "She does not drop the tray. That is the entire achievement of the next four seconds and she will think about it later with something close to pride." },
+        { type = "paragraph", content = "A chair pulled up to a mattress. A thumb wiping her chest clean to read what was underneath. A pen clicking, in a room with no clock in it." },
+    ] },
+    # THE ANSWER, ARRIVING EARLY AND ON PURPOSE.
+    { advance_text = "Do the arithmetic.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "A man who has been collecting a company's paper for years, in a room that takes envelopes in one direction only, behind a bar he owns and never visits. She has been carrying trays for four nights inside the answer." },
+    ] },
+    # AND THE REASON IT HOLDS. The chapter's whole permission, and it is canon, stated flat.
+    { advance_text = "Wait for him to see you.", blocks = [
+        { type = "paragraph", content = "He looks up. She stands in the middle of his floor holding four empty glasses and lets him." },
+        { type = "paragraph", content = "In three months in that cell he never once looked at her face. He looked at the light under her sternum, and he wrote what it said in a notebook, and the light is out now." },
+    ] },
+    { advance_text = "Let him look.", blocks = [
+        { type = "paragraph", content = "So what is standing in his bar is a woman with a tray and somebody else's face, and what he is remembering, if he is remembering anything at all, is a number in a column." },
+        { type = "paragraph", content = "He looks at her the way a man looks at a chair he is thinking of moving. Then he looks back down at the desk." },
+    ] },
+    { advance_text = "Finish the tables.", blocks = [
+        { type = "paragraph", content = "The door shuts a minute later, from the inside, without anybody crossing to it." },
+    ] },
+    # SOL RELAYS IT. The promotion is his decision, delivered by somebody who does not know it is his.
+    { advance_text = "Take the glasses back.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "You're on the taps from tomorrow." },
+        { type = "dialog", props = { speaker = "player" }, content = "Says who." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Says the rota. Don't make it a conversation — I've been doing this thirty years and the rota's never once been my idea." },
+    ] },
+    # Terminal beat — no advance_text. She decides NOTHING on screen. The deciding is the next shift card.
+    { blocks = [
+        { type = "paragraph", content = "She works the rest of the shift and her hands stay steady the whole way through it, which is a thing she notices and does not examine." },
+        { type = "paragraph", content = "At closing she walks up the strip in somebody else's coat, past the market, past the gate, down to a dock where a man is cutting a hull open under a lamp, and she does not tell him either." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go home and say nothing."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 180
+flagEffects = [
+  { targetType = "player", flag = "bastien_seen", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "bar_rung", op = "set", value = 2, clamp = true },
+]
+
+# ═══ rung_bar_promotion_3 — beat_0100 (rev 151). The bag comes down. ════════════════════════════════════
+# Auto-fire, @underworld_bar, pri 10, ONE-SHOT, gated bar_rung gte 2 + lt 3 + relation gte 12 + cover equipped.
+# ⚠️ THE SECOND SPEND OF CEILING ROW (b), and it is about being DRESSED rather than touched. The declared row
+# is exposure and handling, not sex; the handling lives on the repeatable shift card and this beat spends
+# only the exposure, once, at the moment it is imposed. Nothing in it is an act.
+# ⚠️ HE HAS STILL NOT SPOKEN TO HER, AND THAT IS THE POINT OF THE WHOLE RUNG. A man who owns the building
+# changes what a woman on his floor is wearing by sending a bag down with somebody else, and never once has
+# to be in the room. That is his shipped register — the ownership man, unhurried, establishing that he may —
+# operating at a distance on a woman he thinks he has never met.
+# ⚠️ SOL CARRIES THE COST AGAIN AND WILL NOT LOOK AT HER. He is not complicit and he is not protecting her;
+# he is a man who has outlasted four owners by handing things over without comment, and the scene lets that
+# be exactly as bleak as it is without a speech about it.
+# ⚠️ SHE CAN REFUSE AND DOES NOT, AND THE SCENE SAYS SO IN ONE LINE. If the game does not acknowledge that
+# the door is open behind her, the whole ladder reads as coercion and the chapter loses its spine — she is
+# not owned any more, and every rung she takes she takes.
+# MEDIA: none. The dress itself is on the shift card's rung-3 pool, which is where it is re-entered.
+[[canvases]]
+id          = "rung_bar_promotion_3"
+name        = "Somebody sent a bag down"
+description = "beat_0100 (rev 151). Promotion 2 of 3 @underworld_bar. Auto-fire, pri 10, one-shot, gated bar_rung gte 2 + bar_rung lt 3 + npc_bastien relation gte 12 + cover_stranger equipped. A bag comes down from the back room with no note and Sol hands it over without meeting her eye. SECOND SPEND OF CEILING ROW (b) — exposure only, imposed at a distance, nothing in it is an act. He has still never spoken to her, which is the whole point: he changes what a woman on his floor wears by sending somebody else, and never has to be in the room. She can refuse and does not, and the scene says so in one line, because without that the ladder reads as coercion and she is not owned any more. SETS bar_rung = 3. 7 beats / 6 clicks."
+[canvases.trigger]
+location      = "underworld_bar"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "bar_rung", operator = "gte", value = 2 },
+  { type = "trait", subject = "player", trait_key = "bar_rung", operator = "lt",  value = 3 },
+  { type = "trait", subject = "npc", npc_id = "npc_bastien", trait_key = "relation", operator = "gte", value = 12 },
+  { type = "clothing_item", item_id = "cover_stranger", operator = "equipped" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Somebody sent a bag down"
+blocks = [
+  { type = "paragraph", content = "It is on the counter when she comes in — a soft bag, folded shut, with nothing written on it and nobody standing near it." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "That's yours." },
+        { type = "dialog", props = { speaker = "player" }, content = "From." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "It was on the counter when I opened up." },
+    ] },
+    { advance_text = "Open it.", blocks = [
+        { type = "paragraph", content = "A dress. Short, thin, cut close, and the right size, which is the part that sits coldest — somebody has looked at her carefully enough to be right about it, from a chair, across a room, over four nights." },
+    ] },
+    { advance_text = "Look at Sol.", blocks = [
+        { type = "paragraph", content = "Sol is at the far taps doing something to a barrel that does not need doing. He has been at that barrel since she came through the door." },
+        { type = "dialog", props = { speaker = "player" }, content = "Sol." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "I've outlasted four owners by handing things over and not saying anything after. I'm not going to be good at this and I'd rather not try." },
+    ] },
+    # THE ONE LINE THAT KEEPS THE LADDER HERS. Without it the whole chapter reads as coercion.
+    { advance_text = "Think about the door.", blocks = [
+        { type = "paragraph", content = "The door out is eight feet behind her and nothing in this room is holding it shut. Nobody signed for her. Nobody has a key. She could put the bag down and be up the strip inside a minute and there would be no consequence at all except the one that matters." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "And then she is a woman with a hundred and twenty coin of face and no way through that door." },
+    ] },
+    { advance_text = "Go and change.", blocks = [
+        { type = "paragraph", content = "The cellar passage has a nail with three coats on it and that is the whole of the staff arrangements. She changes standing up in the cold with the bag at her feet." },
+    ] },
+    { advance_text = "Go back up.", blocks = [
+        { type = "paragraph", content = "The room clocks it in about a second and a half. The talk drops, not much, the way it does when weather changes outside a window, and then it comes back up around her at a slightly different pitch and stays there." },
+    ] },
+    # Terminal beat — no advance_text. He never appears. That is the rung.
+    { blocks = [
+        { type = "paragraph", content = "The back door does not open all night. She works the floor in it until closing, and the man who chose it does not come out once to see whether he was right about the size." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Work the floor."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 60
+effects = [
+  { targetType = "player", trait = "bar_rung", op = "set", value = 3, clamp = true },
+]
+
+# ═══ rung_bar_promotion_4 — beat_0100 (rev 151). He sends for her. ══════════════════════════════════════
+# Auto-fire, @underworld_bar, pri 10, ONE-SHOT, gated bar_rung gte 3 + lt 4 + relation gte 18 + cover equipped.
+# ⚠️ THIS IS THE CALLBACK cap_sol_hires PLANTED ON HER FIRST NIGHT, in Sol's own mouth: "If you're ever in
+# there it'll be because somebody sent for you, and I'd think hard about that night before you got to it."
+# That sentence was written to be cashed here and it is cashed almost verbatim, by the same man, who now has
+# to say the second half of it to somebody he has spent three weeks working beside.
+# ⚠️ IT ARMS THE DOOR SEARCH AND NOTHING ELSE. bar_rung = 4 is what bastien_door_search (restored at
+# beat_0101) gates on, so the search — and only the search — is the way in. No nav card, no shortcut.
+# ⚠️ HE STILL DOES NOT APPEAR. Three rungs, three of his decisions, and the man has not said one word to her.
+# The first thing he ever says to her is at the door, with his hands in her coat.
+# MEDIA: none.
+[[canvases]]
+id          = "rung_bar_promotion_4"
+name        = "Somebody sent for you"
+description = "beat_0100 (rev 151). Promotion 3 of 3 @underworld_bar. Auto-fire, pri 10, one-shot, gated bar_rung gte 3 + bar_rung lt 4 + npc_bastien relation gte 18 + cover_stranger equipped. Sol cashes the warning he gave her on her first night, almost verbatim, and hates it. ARMS THE DOOR SEARCH AND NOTHING ELSE — bar_rung = 4 is what bastien_door_search gates on, and the search is the only route into the back room, which has no nav card. He still has not spoken to her: three rungs, three of his decisions, and the first thing he ever says to her will be at the door with his hands in her coat. SETS bar_rung = 4. 7 beats / 6 clicks."
+[canvases.trigger]
+location      = "underworld_bar"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "bar_rung", operator = "gte", value = 3 },
+  { type = "trait", subject = "player", trait_key = "bar_rung", operator = "lt",  value = 4 },
+  { type = "trait", subject = "npc", npc_id = "npc_bastien", trait_key = "relation", operator = "gte", value = 18 },
+  { type = "clothing_item", item_id = "cover_stranger", operator = "equipped" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Somebody sent for you"
+blocks = [
+  { type = "paragraph", content = "Sol waits until the last of the near tables has gone up and the room is down to the men who will be here at closing. Then he comes along the counter and stands in front of her instead of beside her, which he has never done." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Tomorrow night you take the tray through the back." },
+    ] },
+    { advance_text = "Wait.", blocks = [
+        { type = "paragraph", content = "She has been waiting three weeks to hear a version of this sentence and it still lands somewhere under the ribs." },
+        { type = "dialog", props = { speaker = "player" }, content = "You said that room isn't mine." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "It isn't. That's why it's a sending-for and not a shift." },
+    ] },
+    # THE CALLBACK, cashed by the man who planted it.
+    { advance_text = "Make him say it.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "You told me to think hard about that night before I got to it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "I did. You've had three weeks and you've turned up every one of them, so I'll take it you thought." },
+    ] },
+    { advance_text = "Ask what it is.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "What happens in there." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Business, mostly. He's a businessman, mostly." },
+        { type = "paragraph", content = "It is the first time in three weeks she has heard Sol use a pronoun for the owner." },
+    ] },
+    { advance_text = "Ask about the door.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "You go in through the bar side. He'll do you at the door first — coat off, hands on, all of it, in front of the room. Everybody gets it. Don't take it personal and don't make a face about it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "The ones who make a face about it don't come back in." },
+    ] },
+    { advance_text = "Say yes.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "All right." },
+        { type = "paragraph", content = "Sol looks at her for a second longer than he has looked at her since the night she stopped being somebody he knew, and then he goes back down the counter and does not say anything else for the rest of the shift." },
+    ] },
+    # Terminal beat — no advance_text.
+    { blocks = [
+        { type = "paragraph", content = "She walks home up the strip working out what she will be carrying and where, and by the gate she has decided that the answer is nothing, and that she will be walking in with empty pockets and somebody else's face and nothing else at all." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go home. Tomorrow, then."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 90
+effects = [
+  { targetType = "player", trait = "bar_rung", op = "set", value = 4, clamp = true },
+]
+
+# ═══ bastien_door_search — RESTORED + RE-CUT, beat_0101 (rev 152). ══════════════════════════════════════
+# Flat solo link @underworld_bar (NEITHER npc nor requires_npc — the mercer_end_table shape), repeatable,
+# pri 3, gated bar_rung gte 4 + npc_at_location bastien_backroom/npc_bastien/is_present (his 20:00-23:59 row
+# is the clock, so the card is simply absent outside it and she can never arrive at a dead room).
+# ITS EXIT IS THE ONLY ROUTE INTO bastien_backroom, which has no nav card.
+#
+# ⚠️ RESTORED FROM THE SHELF, AND THE STRUCTURE IS UNTOUCHED — three exclusive outcome bands, the same
+# predicates repeated on three exclusive exit choices so the outcome rides the CLICK (choice effects fire on
+# click, exit-block effects on render). Two things changed and both were forced:
+#
+#   (1) THE AXIS. The shelved bands forked on controller_seated × stealth. The controller thread closed at
+#       leash_cut and kess_seat_controller is DELETED, so the fork is now taser_held × stealth. This is a
+#       straight improvement: the old band A was "it is inside the seam, he finds nothing", which meant the
+#       best outcome was the one where the search had nothing to do. Now the search always has something to
+#       look for, and stealth is what decides.
+#   (2) THE SEAM LINE HAD TO GO. He used to say "My men opened this once. I stood where you're standing and
+#       watched them do it." He cannot say that to a woman he has never met. But he still FINDS the seam,
+#       because it is at the base of her spine and he checks exactly there — and that is a gift rather than a
+#       problem. Off-books hardware work is the Reach's whole economy (it is Kess's trade), so a closed
+#       surgical seam on a barmaid reads as somebody with a history, which makes her MORE interesting to him
+#       and identifies her as nobody. It is also the first thing that snags his curiosity, which is the lever
+#       his signed row says he actually runs on.
+#
+# ⚠️ HE IS AT HIS CEILING FROM THE FIRST SCENE — the signed row, and clause (a) added at beat_0102's
+# signature governs it OUTSIDE the cell: full crude stands, but the degradation is PROPRIETARY rather than
+# jeering, because she is staff and he is establishing that staff is a category he owns. Nothing here is an
+# act; the row's charge is that it is unhurried, public, and she has to stand for it.
+# ⚠️ NO FAIL BRANCH. She always gets in — what varies is whether the taser got in with her. A search that
+# could refuse her would put a stealth roll between the player and the rest of the release.
+# MEDIA: reuses locations/underworld_bar.jpg. It happens at his bar's door.
+[[canvases]]
+id          = "bastien_door_search"
+name        = "The door"
+description = "beat_0081 (rev 126), RESTORED + RE-CUT at beat_0101 (rev 152). The gate @underworld_bar. Flat solo link (neither npc nor requires_npc), repeatable, pri 3, gated bar_rung gte 4 + npc_at_location bastien_backroom/npc_bastien/is_present. He searches her at the door, unhurried and in public, because he is establishing that he may. Its exit is the ONLY route into bastien_backroom, which has no nav card. NO FAIL BRANCH — she always gets in; what varies is whether the taser came with her, banded three ways on taser_held × stealth 30 and SET on the click as taser_through. The shelved controller_seated axis is gone with the controller thread; the shelved 'my men opened this once' line is gone because he has never met her, and what replaces it is better — he finds the closed seam at the base of her spine, reads it as off-books hardware work, and it snags the curiosity his signed row says he runs on. 8 beats / 7 clicks."
+[canvases.trigger]
+location      = "underworld_bar"
+is_repeatable = true
+priority      = 3
+is_active     = true
+# ⚠️ beat_0107 (rev 157) — raid_done is_false IS MANDATORY, NOT TIDINESS. A schedule row carries no
+# conditions (the resolver reads five keys and drops the rest), so npc_bastien goes on "being present" in
+# that room 20:00-23:59 every night for the rest of the game whether or not he is in the world. Without this
+# clause the door search keeps offering itself after the raid and delivers her to a burned room to be
+# searched by a man who is not there. The same clause is on hub_bastien for the same reason.
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "bar_rung",  operator = "gte", value = 4 },
+  { type = "flag",  subject = "player", flag_key  = "raid_done", operator = "is_false" },
+  { type = "npc_at_location", location_id = "bastien_backroom", npc_id = "npc_bastien", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The door"
+blocks = [
+  { type = "image", props = { file = "locations/underworld_bar.jpg", description = "A dim underground bar, low light, a door at the back with no handle on this side.", search_queries = ["dim underground speakeasy bar red light", "quiet noir back-alley bar low light"] } },
+  { type = "paragraph", content = "The back door has no handle on this side. He opens it himself and does not step out of the way." },
+  { type = "cascade", props = { beats = [
+    # beat 0 — no advance_text; merges into the node lead. THE FIRST WORDS HE HAS EVER SAID TO HER.
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Coat." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Nobody minds. They've all had it. It's the ones who mind that are carrying." },
+        { type = "paragraph", content = "Four weeks of him deciding things about her from a chair, and this is the first sentence he has ever aimed at her face." },
+    ] },
+    { advance_text = "Give him the coat.", blocks = [
+        { type = "paragraph", content = "He goes through it standing up, in the light, with the bar behind her doing what the bar does when he is in the room." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Lining, cuffs, the seam under the arm. That's where a clever one puts it, and you look clever." },
+    ] },
+    # The ceiling-touching half — the camera stays on what she holds still FOR, never on damage.
+    { advance_text = "Then the rest.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Turn round. Skirt up at the back. No, I don't need it off — I need to see the base of your spine." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "I'd do this to a man twice your size and he'd stand there and thank me for it." },
+        { type = "paragraph", content = "There is a bar behind her with forty people at it and half of them work the same floor she does. She turns round." },
+    ] },
+    # ⚠️ THE SEAM. He finds it, reads it as the Reach reads it, and it makes her interesting instead of known.
+    { advance_text = "Stand still.", blocks = [
+        { type = "paragraph", content = "His hand finds the ridge without hunting for it, which means he has done this to somebody with one before." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Well now. Somebody's had you open." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Closed neat, too. That's a shipwright's stitch — you've been down the breaking docks with the rest of the desperate, and you've been down there more than once." },
+    ] },
+    { advance_text = "Say nothing.", blocks = [
+        { type = "paragraph", content = "She lets him have it, because it is true, because it is the least dangerous true thing about her, and because a woman who has been under a ship-breaker's hands for money is the most ordinary person in this district." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "I like that. Everyone who comes through this door is a story somebody's tidied up. You've not bothered tidying." },
+    ] },
+    # ── THE THREE ROUTES. Exclusive by construction; adjacent groups merge into ONE if/elseif chain. ──
+    # ⚠️ MEASURED MAX, NOT SUM — words_by_type recurses every group, so an audit sums all three bands into one
+    # beat while a player only ever sees the longest. Author against the max.
+    { advance_text = "Wait for the verdict.", blocks = [
+      # A — carrying, and stealth carries it. Very nearly not.
+      { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+          { type = "trait", subject = "player", trait_key = "taser_held", operator = "gte", value = 1 },
+          { type = "trait", subject = "player", trait_key = "stealth",    operator = "gte", value = 30 },
+        ] } }, blocks = [
+        { type = "paragraph", content = "The coat comes back with the lining flat and the weight still in it, and his hand went over that seam twice." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Clean. You buy your gear off my stalls — everyone does. It's why I check twice and why it's usually worth it." },
+      ] },
+      # B — carrying, and he finds it. NOT a fail: she still goes in, and it waits on the desk.
+      { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+          { type = "trait", subject = "player", trait_key = "taser_held", operator = "gte", value = 1 },
+          { type = "trait", subject = "player", trait_key = "stealth",    operator = "lt",  value = 30 },
+        ] } }, blocks = [
+        { type = "paragraph", content = "It comes out of the coat on the second pass. He turns it over, finds the thumb-switch, and doesn't press it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "This stays on the desk. You'll have it back at the door and I'll not ask, because every woman working a floor down here carries one and the ones who don't are somebody's already." },
+      ] },
+      # C — nothing on her at all. The search still happens, because it was never about what she carries.
+      { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+          { type = "trait", subject = "player", trait_key = "taser_held", operator = "lt", value = 1 },
+        ] } }, blocks = [
+        { type = "paragraph", content = "He goes over the coat and the seam and finds what is there, which is nothing at all." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Nothing. Not a pin. That's either very careful or very stupid and I've not decided which yet." },
+      ] },
+    ] },
+    # Terminal beat — no advance_text.
+    { blocks = [
+        { type = "paragraph", content = "He holds the door with two fingers and waits for her to walk through it in front of him." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "After you. I like to watch a thing walk when it thinks it's got away with something." },
+    ] },
+  ] } },
+]
+# ⚠️ THREE EXCLUSIVE EXIT CHOICES ON THE SAME PREDICATES AS THE BANDS, identical text, so the outcome rides
+# the CLICK. "The taser got through the door" is a thing that happens when she walks through it. Identical
+# labels on one node are shipped practice — loop_mercer_attempt.base carries three that all read "Reach for it."
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Go through."
+targetType = "location"
+locationId = "bastien_backroom"
+time_progression_minutes = 15
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "taser_held", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "stealth",    operator = "gte", value = 30 },
+] }
+effects = [
+  { targetType = "player", trait = "taser_through", op = "set", value = 1, clamp = true },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Go through."
+targetType = "location"
+locationId = "bastien_backroom"
+time_progression_minutes = 15
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "taser_held", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "stealth",    operator = "lt",  value = 30 },
+] }
+effects = [
+  { targetType = "player", trait = "taser_through", op = "set", value = 0, clamp = true },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Go through."
+targetType = "location"
+locationId = "bastien_backroom"
+time_progression_minutes = 15
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "taser_held", operator = "lt", value = 1 },
+] }
+effects = [
+  { targetType = "player", trait = "taser_through", op = "set", value = 0, clamp = true },
+]
+
+# ═══ hub_bastien — RESTORED + RE-BANDED, beat_0101 (rev 152). ═══════════════════════════════════════════
+# L1 portrait hub @bastien_backroom. requires_npc + npc = npc_bastien, so presence does his 20:00-23:59 clock
+# for free. No off-hours guard is needed (unlike mercer_room_offhours) because the room has no nav card — the
+# only way in is bastien_door_search, which is itself presence-gated, so she can never arrive to an empty room.
+# ⚠️ BANDS RE-CUT. The shelved bands forked on controller_through × leash_cut is_false, both of which are dead.
+# The axis now is bastien_drains_done: before the drain the room is a thing she is working, after it a
+# thing she is waiting in — which is the chapter's actual shape, because Bastien's own drain tells her Cain
+# turns up here whenever he likes, and that is the only reason to keep coming back.
+# ⚠️ THE TALK POOL IS ENTIRELY REWRITTEN. Every shelved line referenced their history ("the notes we took off
+# you", "Mercer trained that", "the girl who walked out of that room"), and he has never met her. What
+# replaces it is his signed lever — CURIOSITY, NOT DESIRE — pointed at a barmaid who does not add up: she
+# does not drink, she does not ask him for anything, and she looked at his door exactly once and then never
+# again, which he finds far more interesting than looking.
+# ⚠️ CLAUSE (i) OF HIS ROW STILL GOVERNS: HE NEVER LEARNS WHAT SHE IS. He circles and does not land.
+# ⚠️ AND THE LOOP RUNG IS UNGATED BY RELATION, per the rev-127 correction: his lever is curiosity, a standard
+# seduction ladder bounces off him, and he already sent for her. THE DOOR WAS THE GATE.
+[[canvases]]
+id          = "hub_bastien"
+name        = "Bastien"
+description = "beat_0081 (rev 126), RESTORED + RE-BANDED at beat_0101 (rev 152). His portrait hub @bastien_backroom. requires_npc + npc so presence does the 20:00-23:59 clock; repeatable, pri 3, gated bar_rung gte 4. Reached ONLY through bastien_door_search, because the room has no nav card. Bands re-cut off the dead controller_through/leash_cut axis onto bastien_drains_done (a TRAIT, because the setter is triggerless): before, the room is a thing she is working; after, a thing she is waiting in. The talk pool is entirely rewritten — every shelved line referenced a history he does not have with this woman — and now runs his signed lever, curiosity rather than desire, on a barmaid who does not add up. Two rungs: 'Let him talk' and the loop. The loop rung is UNGATED by relation (rev-127 correction: the door was the gate). Ceiling clause (i) holds — he never learns what she is."
+[canvases.trigger]
+location      = "bastien_backroom"
+requires_npc  = "npc_bastien"
+npc           = "npc_bastien"
+is_repeatable = true
+priority      = 3
+is_active     = true
+# ⚠️ raid_done is_false — see bastien_door_search. His schedule row is unconditional and outlives him.
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "bar_rung",  operator = "gte", value = 4 },
+  { type = "flag",  subject = "player", flag_key  = "raid_done", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Bastien"
+blocks = [
+  { type = "image", props = { file = "locations/bastien_backroom.jpg", description = "A private back room behind a bar — a desk with nothing on it, a good chair set to see the door, better furniture than the room deserves.", search_queries = ["private back room behind bar desk armchair dim", "noir speakeasy office low light leather chair"] } },
+  { type = "paragraph", content = "The door shuts and the bar stops existing. He takes the chair that sees it and leaves her the room." },
+  # BAND A — before the drain. She is working, and the paper is stacked against the wall behind him.
+  # ⚠️ BANDS ON THE TRAIT, NOT A FLAG. bastien_drains_done is bumped on loop_bastien_finisher's ass choice,
+  # and that canvas is TRIGGERLESS — the flag-chain validator hard-fails a flag whose only setter has no
+  # location, because the help page has no "go here" hint to give. The shipped answer game-wide is that a
+  # triggerless setter writes a TRAIT (mercer_drains_done, colm_drains_done, calloway_drains_done all do
+  # exactly this), so there is no bastien_drained flag anywhere and every reader uses gte 1.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "bastien_drains_done", operator = "lt", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Along the whole of the far wall, floor to shoulder, box files. Dated spines, a hand that presses hard, and eleven years of somebody's company going quietly into a room behind a bar." },
+  ] },
+  # BAND B — after. Nothing left to learn off him; she is here because of what he told her.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "bastien_drains_done", operator = "gte", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She has had everything out of this man that he has, and she keeps coming back to sit in the one room in the city that the other one walks into whenever he feels like it." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him talk."
+targetType = "node"
+nodeId     = "hub_bastien.talk"
+# ⚠️ UNGATED BY RELATION, and that is the rev-127 ruling kept: his lever is CURIOSITY, NOT DESIRE, a standard
+# seduction ladder bounces off him, and he has already sent for her. The DOOR was the gate.
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him take you in the back."
+targetType = "node"
+nodeId     = "loop_bastien_backroom.intro"
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Back out to the bar."
+targetType = "location"
+locationId = "underworld_bar"
+
+# ── talk — the standing feel. A block_pool, the shipped hub_mercer_room.talk shape. ─────────────────────
+# ⚠️ REWRITTEN WHOLESALE at beat_0101. He has never met her, so nothing here can reference the cell.
+# ⚠️ CLAUSE (i): HE NEVER LEARNS WHAT SHE IS. Every line circles and none lands. The closest he gets is the
+# seam and the fact that she wants nothing — and the fourth line is the dangerous one, because the true
+# answer to it is standing in front of him.
+[[canvases.nodes]]
+id   = "talk"
+name = "Bastien"
+blocks = [
+  { type = "block_pool", props = { blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "You don't drink. Four weeks on my floor and not one glass, and you carry them all night. I've had two people in twenty years I could say that about and I owned them both." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Everyone who comes through that door wants something off me. You're the first in a long time who hasn't said what. I'll wait. I'm good at that and there's nothing else I want." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "You looked at this door once. Your fourth shift, with a tray in your hands. Never again after that — and everybody looks, love. It's the not-looking that's the work." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Somebody spent real money putting you back together and you're carrying trays for fifteen a night. I've been turning that over for a fortnight and I've got nowhere with it, which is why you're in here." },
+  ] } },
+  { type = "paragraph", content = "He talks the way a man talks who has already decided he will find out, and has no reason to hurry." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Say nothing worth having."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "bastien_backroom"
+time_progression_minutes = 30
+effects = [
+  { targetType = "npc", npcId = "npc_bastien", trait = "relation", op = "add", value = 2, clamp = true },
+]
+
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════
+# beat_0102 (rev 153) — THE BACK-ROOM LOOP. THE HEAT PASS, AND THE RELEASE'S LARGEST SINGLE BEAT.
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════════
+# The shelved three-canvas chain is restored in SHAPE and rewritten in PROSE: loop_bastien_backroom (poses,
+# pleasure climbs, climax-elect at >=50) -> loop_bastien_finisher ([group] by sex_finisher_type) ->
+# bastien_drain_canvas. Nothing structural is invented; loop_colm_backroom is the template it was built from.
+#
+# ⚠️ WHY THIS BEAT EXISTS AT ALL — THE MEASUREMENT, NOT AN OPINION. Across the shipped 0.1.8 build, EVERY
+# repeatable sex loop scores 0 or 1 beats carrying three or more explicit words: Colm's back room 0/10,
+# Renner's office 0/8, Calloway 0/8, mercer_serve 0/7, the brothel 1/7. The best in the game is
+# loop_mercer_lockup at 2/15, and that one RECEIVED the rev-138 pass. Against that, the one-shot cap_owner_print
+# scores 8/28 and mercer_drain_canvas scores 0 in 54 beats. Whole-game, `explicit in repeatable` reads 20.5%
+# against a 50% floor. The heat is in content the player sees once; the surfaces they re-enter are cold.
+# Bastien was SHELVED at rev 141 for exactly this, so this loop cannot ship below the floor.
+#
+# ⚠️ AND THE FIX IS NOT "MAKE THE POSE PAGE LONGER". rev 139 measured the shipped pose pages and CUT Mercer's
+# from 133/97/118 words to 55/54/85, because a pose node is re-opened four to six times per visit and length
+# there is the thing Rule 2 protects. So the target is: ONE screen per pose, house size, and every one of them
+# carrying three or more real words and staying on the body for its whole length. The escalation is the
+# LADDER and the extra anal node, never a fatter paragraph.
+#   Result: intro, oral, vaginal, anal, anal-harder, and three finisher bands = EIGHT re-enterable hot beats
+#   in one loop, where the entire shipped game currently has eight across all nine of its loops.
+#
+# ⚠️ CEILING CLAUSE (a), SIGNED BY INSTRUCTION 2026-08-16 — BASTIEN OUTSIDE THE CELL, ON A WOMAN HE DOES NOT
+# OWN. The rev-62/64 row was written for a captive: hot and degrading, full crude, ownership-as-curiosity
+# underneath. Outside the cell he does not know she is his old property, so the cataloguing subtext has
+# nothing to attach to. What is left is a man who owns the building and takes what walks into it, unhurried,
+# because nobody has ever told him no in his own bar. FULL CRUDE STANDS. The degradation turns PROPRIETARY
+# rather than jeering — she is staff, and he is establishing that staff is a category he owns.
+# ⚠️ CLAUSE (ii) HOLDS UNCHANGED: SHE IS NEVER SHOWN ENJOYING IT. The back room is WORK. The prose stays on
+# what he is doing and what she is waiting for, never on her body answering him. He says the quiet part
+# himself in the intro, which is what makes the whole loop readable under it.
+# ⚠️ EVERY LINE OF HIS THAT REFERENCED THEIR HISTORY IS GONE — "bought and paid for", "I've wondered about
+# that for a year", "you've done this in worse rooms than mine". He has never met her. What replaces them is
+# his signed lever, CURIOSITY, pointed at a barmaid who does not add up.
+# ⚠️ THE CONTROLLER BANDS ARE GONE ENTIRELY. leash_cut is permanently true from here on, so the four bands on
+# controller_through/controller_state were all dead prose in every reachable state. The anal finish IS the
+# drain, per the shipped contract the loop teaches by playing it, and there is no second condition any more.
+# MEDIA: seven pooled slots, the same seven the Colm loop carries. POOLS, not fixed clips — repeatable
+# explicit content that plays the same file every visit is its own defect (7 of those still ship).
+
+# ── (1) loop_bastien_backroom — the pose loop ──────────────────────────────────────────────────────────
+[[canvases]]
+id          = "loop_bastien_backroom"
+name        = "The back room"
+description = "beat_0082 (rev 127), RESTORED + PROSE REWRITTEN at beat_0102 (rev 153) — THE HEAT PASS. Triggerless, reached from hub_bastien's 'Let him take you in the back' rung, which resets the five loop traits. Poses oral(0)/vaginal(1)/anal(2) on sex_stage plus a second anal node, loop_npc_pleasure climbing, climax-elect at >=50 — the loop_colm_backroom shape. NO RELATION GATE (rev-127 ruling: the door was the gate). Every pose is ONE screen at house size carrying 3+ explicit words and staying on the body for its whole length — the rev-139 finding was that a pose page re-opened 4-6 times a visit must not grow, so the escalation is the ladder and the extra node, never a fatter paragraph. Eight re-enterable hot beats. Ceiling clause (a): full crude, degradation PROPRIETARY rather than jeering. Clause (ii): she is never shown enjoying it — the back room is work."
+
+[[canvases.nodes]]
+id   = "intro"
+name = "The back room"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bastien_backroom_t4", pool = 4, description = "A composed older man unhurriedly undressing a woman in a private room behind a bar, her back to a desk, both still mostly clothed.", search_queries = ["man slowly undressing woman office desk clothed gif", "clothed couple back room man opening her shirt dim gif"] } },
+  { type = "paragraph", content = "He puts down the drink he has not touched and strips the dress off her over her head. She stands naked on his floor while he looks her over — tits, hips, the closed seam — takes his time about it, and has his cock out before he has finished looking." },
+  # CLAUSE (ii) IN HIS OWN MOUTH, AT THE TOP, so the whole loop reads under it. Nobody here is enjoying this.
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "I don't do this because I want you. I do it because it's the only way anybody down here is ever honest with me, and I've four weeks of questions about you and no answers at all." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Take your time. The door's shut and there's nobody in this city who knocks on it." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Get on your knees."
+targetType = "node"
+nodeId     = "base_oral_bastien"
+
+# ── Pose: oral (sex_stage 0). One screen, house size, 3+ explicit words, on the body throughout. ────────
+[[canvases.nodes]]
+id   = "base_oral_bastien"
+name = "On your knees"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bastien_loop_oral_t5", pool = 4, description = "A woman kneeling on the floor of a private back room with a seated older man's cock in her mouth, his hand resting on her head, unhurried.", search_queries = ["kneeling blowjob seated man armchair dim room gif", "back room blowjob kneeling hand on head gif"] } },
+  { type = "paragraph", content = "On her knees on his floor, hands flat on her own thighs, sucking his cock at the pace he sets. He holds her head still and fucks her throat down to his balls, unhurried, and her jaw aches long before he is near done." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There. Look up at me while you do it — I am paying for the eyes as much as the mouth." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Slower. You work for me, and my staff do not rush." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep him in your mouth."
+targetType = "node"
+nodeId     = "base_oral_bastien"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Stand up and let him have you."
+targetType = "node"
+nodeId     = "base_vaginal_bastien"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish in your mouth."
+targetType = "node"
+nodeId     = "loop_bastien_finisher.climax"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false } ]
+
+# ── Pose: vaginal (sex_stage 1) ────────────────────────────────────────────────────────────────────────
+[[canvases.nodes]]
+id   = "base_vaginal_bastien"
+name = "Over the desk"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bastien_loop_vaginal_t5", pool = 4, description = "A woman bent face-down over a bare desk in a dim private room, an older man fucking her from behind, one hand flat on her back.", search_queries = ["bent over desk from behind office sex dim gif", "man fucking woman over desk hand on her back gif"] } },
+  { type = "paragraph", content = "Bent face-down over the bare desk, his cock in her cunt, one hand spread flat between her shoulder blades and the other on her hip. He fucks her slowly and the bar comes through the wall in pieces around it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Christ, you are wet for a woman who wants nothing. That is not a compliment — it is the first honest thing you have done in four weeks." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Stay down. My floor, my time, my desk — and you are the only one of the four that talks." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him have it."
+targetType = "node"
+nodeId     = "base_vaginal_bastien"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Back down on your knees."
+targetType = "node"
+nodeId     = "base_oral_bastien"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 0, clamp = false } ]
+# THE DRAIN POSE. Ungated — the door was the gate, not a meter. Sets anal_active, which the ass finish needs.
+[[canvases.nodes.exit_block.choices]]
+text       = "Turn over — give him your ass."
+targetType = "node"
+nodeId     = "base_anal_bastien"
+effects = [
+  { targetType = "player", trait = "sex_stage",   op = "set", value = 2, clamp = false },
+  { targetType = "player", trait = "anal_active", op = "set", value = 1, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish inside you."
+targetType = "node"
+nodeId     = "loop_bastien_finisher.climax"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 1, clamp = false } ]
+
+# ── Pose: anal (sex_stage 2) — THE DRAIN POSE. ─────────────────────────────────────────────────────────
+# ⚠️ THE SEAT GOES FIRST AND THE ACT CLOSES THE PAGE — CORRECTED AT beat_0110, AND THE FIRST CUT HAD IT
+# BACKWARDS. The rule is to read the beat's LAST sentence: if it is about what the moment MEANS rather than
+# what is HAPPENING, the beat has pivoted. This page used to end on "the drain sits in the contact and waits
+# for the shudder to open it", which is mechanism, and base_anal_hard ended on "the rest is the price of the
+# hand", which is meaning. Both are the failure CLAUDE.md names as the one that recurs, in content written
+# the same week the rule was quoted at the top of this chapter's design.
+# The seat still has to be communicated — the shipped Colm loop teaches it the same way — so it is not cut,
+# it is MOVED to the top of the page where it belongs, and the body line lands last.
+[[canvases.nodes]]
+id   = "base_anal_bastien"
+name = "Give him your ass"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bastien_loop_anal_t5", pool = 4, description = "A woman bent face-down over a desk taken in the ass from behind by an older man, his hand flat between her shoulder blades holding her down.", search_queries = ["anal from behind bent over desk hand on back gif", "rough anal bent over office desk held down gif"] } },
+  { type = "paragraph", content = "She gets a hand back around his wrist, skin on skin, and holds it there. That is the seat, and the drain sits in the contact and waits." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "This is the one they all say no to. You didn't even change your breathing." },
+  { type = "paragraph", content = "He pulls out of her cunt and puts his cock in her ass instead, one hand flat between her shoulder blades, holding her down on the desk while he works the whole length of himself into her a piece at a time." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Take it."
+targetType = "node"
+nodeId     = "base_anal_bastien"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+# THE SECOND ANAL NODE — the escalation that keeps the pose page short. Reached from here, self-loops.
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him get his hands in your hair."
+targetType = "node"
+nodeId     = "base_anal_hard_bastien"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 10, max = 16 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Back on him."
+targetType = "node"
+nodeId     = "base_vaginal_bastien"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish in your ass — and reach for it."
+targetType = "node"
+nodeId     = "loop_bastien_finisher.climax"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+  { type = "trait", subject = "player", trait_key = "anal_active",       operator = "gte", value = 1  },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 2, clamp = false } ]
+
+# ── Pose: anal, harder (still sex_stage 2). The escalation, on its own short page. ──────────────────────
+# ⚠️ THIS IS HOW THE LOOP ESCALATES WITHOUT BREAKING RULE 2. A second node instead of a longer first one:
+# same house size, one more re-enterable hot beat, and the grind reads as going somewhere. The
+# loop_mercer_attempt per-generation-node shape, applied to a pose rather than a try.
+[[canvases.nodes]]
+id   = "base_anal_hard_bastien"
+name = "Both hands"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bastien_loop_anal_hard_t5", pool = 4, description = "An older man fucking a woman's ass hard over a desk with a fist gathered in her hair, pulling her head back off the wood.", search_queries = ["rough anal hair pulling bent over desk gif", "anal from behind pulling her hair back hard gif"] } },
+  { type = "paragraph", content = "Her hand stays on his wrist through all of it, skin on skin — the hand is the job and the rest is the price of it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There she is. Four weeks of nothing on your face and I get this out of you by doing that." },
+  { type = "paragraph", content = "He gathers her hair in his fist and hauls her head up off the wood, and stops being unhurried about any of it — fucking her ass hard enough to walk the desk, his other hand clamped white on her hip, her tits dragging the bare boards." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Take it like that."
+targetType = "node"
+nodeId     = "base_anal_hard_bastien"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 10, max = 16 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Back down onto the desk."
+targetType = "node"
+nodeId     = "base_anal_bastien"
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish in your ass — and reach for it."
+targetType = "node"
+nodeId     = "loop_bastien_finisher.climax"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+  { type = "trait", subject = "player", trait_key = "anal_active",       operator = "gte", value = 1  },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 2, clamp = false } ]
+
+# ── (2) loop_bastien_finisher — facial/inside END; the ass finish IS the drain ──────────────────────────
+# ⚠️ THREE EXITS, NOT THE SHELF'S FOUR. The shelved version forked the ass finish on controller_state — key
+# running went to the payload, key idle went to .dead, the cold-socket nothing. That whole second condition
+# belonged to the leash, and the leash is cut: there is nothing to bring up and nothing to fail. So the ass
+# finish opens the drain unconditionally, which is the game's ORIGINAL shipped contract (Renner, Calloway,
+# Colm all work exactly this way) and which the facial and inside bands still teach by playing it.
+# ⚠️ bastien_drains_done IS BUMPED ON THE ASS CHOICES — a TRAIT and not a flag, because this canvas is
+# TRIGGERLESS and the flag-chain validator hard-fails a flag whose only setter has no location (a triggerless
+# setter gives the help page no "go here" hint). THERE IS NO bastien_drained FLAG ANYWHERE IN THE GAME: every
+# reader — hub_bastien's bands, cap_the_raid's gate, the quest ladder — uses bastien_drains_done gte 1. That
+# is the shipped answer for all three prior drains (mercer_drains_done, colm_drains_done, calloway_drains_done).
+[[canvases]]
+id          = "loop_bastien_finisher"
+name        = "He finishes"
+description = "beat_0082 (rev 127), RE-CUT at beat_0102 (rev 153). Triggerless finisher. [group] by sex_finisher_type: facial(0) and inside(1) reset and exit with NO drain — the shipped contract, taught by playing it; ass(2) goes to bastien_drain_canvas. THREE exits where the shelf had four: the fourth forked on controller_state, and that whole second condition belonged to a leash that is cut. Bumps bastien_drains_done on the ass choice (a TRAIT, because a triggerless canvas cannot set a located flag)."
+
+[[canvases.nodes]]
+id   = "climax"
+name = "He finishes"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
+    ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/bastien_finish_facial_t5", pool = 4, description = "An older man finishing on a kneeling woman's face in a dim private room, looking down at the result without expression.", search_queries = ["facial kneeling woman older man dim room gif", "cumshot on face kneeling back room gif"] } },
+    { type = "paragraph", content = "He pulls out of her mouth and finishes across her face, cum on her cheek and her lashes and running off her chin, and looks down at it the way a man looks at a result. Nothing comes loose but him. The drain stays shut — it only ever opens the one way." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There. There's a cloth on the desk and I'd rather you used that than your sleeve, because you're going back out on my floor after this." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
+    ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/bastien_finish_inside_t5", pool = 4, description = "An older man finishing inside a woman bent over a desk, holding her hips still, then straightening up unhurried.", search_queries = ["creampie bent over desk from behind gif", "finishing inside woman over desk holding hips gif"] } },
+    { type = "paragraph", content = "He finishes deep in her cunt with both hands locked on her hips, holds her there while it goes through him, and lets her up when he is ready and not before. She has taken nothing. Not this way." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Stay down a minute. You'll walk out of here with it in you and go and carry a tray, and that's the whole of what I wanted tonight." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
+    ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/bastien_finish_ass_t5", pool = 4, description = "An older man finishing deep in a woman's ass over a desk, holding still, her hand gripping his forearm.", search_queries = ["anal creampie bent over desk holding still gif", "finishing deep in her ass from behind gif"] } },
+    { type = "paragraph", content = "He drives all the way into her ass and stays there while he cums, dead still, breathing out through his teeth — and her hand is on his wrist, skin on skin, and this time the shudder goes through him and takes the door with it." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Get dressed."
+targetType = "location"
+locationId = "bastien_backroom"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "lt", value = 2 },
+] }
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+]
+# THE FIRST FIRE — the payload, once.
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him."
+targetType = "node"
+nodeId     = "bastien_drain_canvas.d0"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "sex_finisher_type",    operator = "eq",  value = 2 },
+  { type = "trait", subject = "player", trait_key = "bastien_drains_done",  operator = "lt",  value = 1 },
+] }
+effects = [
+  { targetType = "player", trait = "bastien_drains_done", op = "add", value = 1, clamp = true },
+]
+# THE REPEAT — pure power, no new payload.
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him."
+targetType = "node"
+nodeId     = "bastien_drain_canvas.done"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "sex_finisher_type",    operator = "eq",  value = 2 },
+  { type = "trait", subject = "player", trait_key = "bastien_drains_done",  operator = "gte", value = 1 },
+] }
+effects = [
+  { targetType = "player", trait = "bastien_drains_done", op = "add", value = 1, clamp = true },
+]
+
+# ── (3) bastien_drain_canvas — beat_0103 (rev 153). WHAT THE PAPER WAS FOR. ─────────────────────────────
+# Triggerless. Played as Q&A in HIS OWN DIALOG, not narrated — the control-canvas carriage rule, executed
+# properly for the first time at cap_first_fire (six of her questions against thirteen of his answers, and
+# the reason that canvas holds the best narration-to-dialogue ratio in the game).
+#
+# ⚠️ CAIN IS NAMED HERE, AND THIS AMENDS design_the_face.md §8, WHICH SAID HE WOULD NOT BE.
+# That clause was written before LO's canon change had been carried all the way through. The shelved version
+# could withhold the name honestly because the shelved Bastien genuinely did not have it — he was a
+# middleman paid through three hands who never saw the buyer's face. Under LO's canon Bastien is Cain's
+# SUPPLY LINE and has been for eleven years, so he knows the name the way a man knows his oldest customer.
+# A drained man cannot be evasive — that is the entire premise of the weapon — so withholding it here would
+# require him to dodge a direct question while chemically incapable of dodging anything, which breaks the
+# mechanism the game has spent three chapters establishing.
+# ⚠️ AND SPENDING IT HERE IS BETTER THAN HOLDING IT. She was BUILT and SENT to hunt Cain; the name lands on
+# the one person in the world it means most to. What it buys: the man who bought her paperwork, the man who
+# carried her out of that cell, and the target she was made for are one person — and then she has to go back
+# to work in his friend's bar and WAIT for him. The release's last line does not need the name to land,
+# because the shock in the lab is not who he is. It is that he knows HER.
+#
+# ⚠️ WHAT HE DOES NOT KNOW, AND CANNOT SAY: that the woman he is telling this to is the girl in the story.
+# He talks about her own kidnapping in the third person, to her face, and the scene never once winks at it.
+# ⚠️ HER ONE INTERIOR BEAT is the chapter's ration, and it is arithmetic rather than feeling.
+# MEDIA: none. The payload is a conversation — colm_drain_canvas and calloway_drain_canvas take none either.
+[[canvases]]
+id          = "bastien_drain_canvas"
+name        = "What the paper was for"
+description = "beat_0103 (rev 153). Triggerless Bastien drain payloads, reached from loop_bastien_finisher's ass-finish choices. d0 = THE drain, played as Q&A in his own dialog: the paper trade is a cover, he has supplied one man for eleven years, that man is CAIN, Cain is an early build who cannot go at Vance as he is and has been rebuilding himself out of what Bastien brings him, nobody knows where he lives — and HE COMES HERE WHENEVER HE LIKES, which is the line that keeps the chapter alive after the drain. He also gives up that he has known for a year who took a girl out of his cell, and that he still does not know why that one. ⚠️ CAIN IS NAMED, amending design_the_face.md §8: a drained man cannot be evasive, and under LO's canon Bastien has known him for eleven years. He does NOT know the woman he is telling is the girl in the story. done = the repeatable pure-power use."
+
+[[canvases.nodes]]
+id   = "d0"
+name = "What the paper was for"
+blocks = [
+  { type = "paragraph", content = "He comes apart under her hand and stays there. The careful weight of him comes loose down her arm — eleven years of holding one thing, going soft." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "The files against that wall. Who are they for." },
+    ] },
+    { advance_text = "Let him answer.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "One man. Same man for eleven years. Everything else I sell is so that nobody wonders why I buy." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "The bar's for the same reason. You can't run paper out of a room nobody's allowed to come to." },
+    ] },
+    # THE NAME. It lands on the one person in the world it means most to.
+    { advance_text = "Ask which man.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Name." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Cain." },
+        { type = "paragraph", content = "She has been carrying that name since a briefing room on the ninetieth floor. It has never once had a person on the end of it." },
+    ] },
+    { advance_text = "Ask what he wants with it.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "What does he do with company paper." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Rebuilds himself out of it. He's an early one — first or near it — and next to what they turn out now he's a hand-cut thing with a lot of miles on it." },
+    ] },
+    { advance_text = "Push.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "He can't walk at Vance the way he is. He's tried something like it twice and both times he came back needing work I couldn't get him. So he takes them apart on paper instead and puts the good bits in himself, a year at a time." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Eleven years of it. He is a great deal harder to kill than he was when I met him and he is still nowhere near enough." },
+    ] },
+    { advance_text = "Ask where he is.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Where does he live." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "No idea. Eleven years and I've never had an address off him and never asked for one. That's not trust, that's the arrangement working." },
+    ] },
+    # ⚠️ THE LINE THAT KEEPS THE CHAPTER ALIVE AFTER THE DRAIN. Without it there is no reason to come back.
+    { advance_text = "Ask how he finds him, then.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Then how do you hand anything over." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "I don't. He comes here. Whenever he likes, through the alley door, and sits in that chair you're not sitting in, and takes what's ready." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Could be a fortnight. Could be tonight. He's never once told me he was coming in eleven years." },
+    ] },
+    # ⚠️ HE TALKS ABOUT HER, TO HER, IN THE THIRD PERSON, AND THE SCENE NEVER WINKS AT IT.
+    { advance_text = "Ask if he's ever asked for anything else.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Has he ever wanted something that wasn't paper." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Once. Year ago. I had a girl in a room under here that I'd bought off a bad debt, and I was finding out what she was, and he came through that far door in a state I'd never seen on him and took her out." },
+    ] },
+    { advance_text = "Keep him talking.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Furious. In a hurry. Wouldn't say why he cared and wouldn't be argued with, and I let him, because I've made a lot of money out of not arguing with him." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "And I still don't know why that one. He's walked past worse in this bar. I've asked him twice and he's changed the subject twice, and he's never changed a subject on me about anything else." },
+    ] },
+    # HER ONE INTERIOR BEAT. Arithmetic, not feeling.
+    { advance_text = "Hold on to him.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The man who bought her paperwork. The man who came through that door for her. The man they built her to kill. Three files in Mercer's office and one person standing in all of them, and she has spent four weeks getting a job in his supplier's bar." },
+    ] },
+    { advance_text = "Let him surface.", blocks = [
+        { type = "paragraph", content = "He comes back propped against the desk with his shirt open, agreeable and empty and none the wiser." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "I've lost the thread. Where were we. Sit down — no, don't. You never do." },
+    ] },
+    # Terminal beat — no advance_text.
+    { blocks = [
+        { type = "paragraph", content = "She takes the dress off his desk and puts it back on, and goes out through the bar carrying eleven years of his and none of her own." },
+        { type = "paragraph", content = "Behind her the room is quiet, and the man in it is going to wake up pleased, and the chair by the wall is empty and will not always be." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out through the bar."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 60
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+]
+
+# done — the repeat. Pure power, no new payload, no media. The shipped `done`-node shape.
+[[canvases.nodes]]
+id   = "done"
+name = "The warm tap"
+blocks = [
+  { type = "paragraph", content = "His cock is deep in her ass and he cums holding her down on the desk, the way he does it now, and the drain opens off her hand on his wrist with no discovery left in it — just the careful weight of him coming loose and the hour going with it. He wakes agreeable and none the wiser and asks her to sit down, and she does not." },
+  { type = "paragraph", content = "She asks the only question worth asking twice, and gets the same answer twice: he comes when he comes, and he has never once said he was coming." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out through the bar."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 60
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+]
+
+# ══ CARD S — through the door (beat_0104, rev 154). ════════════════════════════════════════════════════
+# ⚠️ MANDATORY: rung_bar_promotion_4 sets bar_rung = 4, which closes R. Twelfth time in this game.
+# ⚠️ IT NAMES THE ACT PLAINLY, because the game does. The tip says what the drain needs and where it needs
+# it, in the same flat terms every prior drain card in this game has used — this is not a surface to be coy
+# about on a Quests page when the loop itself is at the crude floor.
+[[quest_cards]]
+priority   = 10
+text       = "You are through the door. He searches you at it every time — coat, lining, cuffs, and the seam at the base of your spine, in front of the whole bar, because he is establishing that he may. Then the door shuts and the bar stops existing, and along the far wall floor to shoulder are eleven years of somebody else\u0027s company in box files with dated spines."
+tip        = "You know how this works. The drain only ever opens one way and it needs your skin on his when it does, so it is the ass finish and your hand on his wrist, and nothing else in that room will do it. Get him there and take everything he has."
+when = [
+  { trait = "bar_rung", subject = "player", op = "gte", value = 4 },
+  { trait = "bastien_drains_done", subject = "player", op = "lt", value = 1 },
+]
+
+# ══ CARD T — the wait (beat_0104, rev 154). Frontier; the boundary lives here. ═════════════════════════
+# ⚠️ MANDATORY: the drain bumps bastien_drains_done, which closes S.
+# ⚠️ THIS IS THE CARD THAT HAS TO STOP THE PLAYER FEELING FINISHED. She has the answer, and the natural
+# read after a drain in this game is "that arc is done". It is not: the whole point of Bastien's payload is
+# that Cain comes to that room whenever he likes and has never once announced it. So the tip's job is to
+# say, in plain words, that the correct move is to KEEP DOING THE THING SHE HAS BEEN DOING — work the bar,
+# go through the door, wait — which is the least intuitive instruction the game has ever given.
+# ⚠️ AND IT NAMES THE TASER AND WHY THE EMITTER IS NOT AN OPTION, because a player looking at a loadout
+# screen will otherwise reasonably ask why she is buying junk when she owns a weapon.
+[[quest_cards]]
+priority   = 10
+text       = "Eleven years of it, and none of it for money. Bastien has been buying that company apart on paper and handing it to one man since before you existed — Cain, the name off a briefing room on the ninetieth floor, the thing you were built and pointed at. He is an early build with a lot of miles on him, taking Vance apart a year at a time and putting the good pieces in himself, and he is still nowhere near enough. Nobody knows where he lives. Not even the man who has supplied him for eleven years. But he comes to that room whenever he likes, through the alley door, and he has never once said he was coming."
+# ⚠️ beat_0107 (rev 157) — T GIVES UP THE BOUNDARY to card U, which is the LAST card of the release and the
+# only one permitted to set terminal_text. Two-step, right order, and verified by grepping the whole table.
+tip        = "So keep working. Take shifts, go through the door, let him have the evening — the only way you are in that room when Cain walks into it is by being in that room. And carry something: one core feeds one weapon, so the drain being live means the emitter is at home, and a Vance field unit would come out of your coat at the door anyway. Thirty coin at the cheap end of the market buys a hand-taser that runs off nothing. If you want the next chapter sooner, Support Us in the sidebar."
+when = [
+  { trait = "bastien_drains_done", subject = "player", op = "gte", value = 1 },
+  { flag = "raid_done", op = "is_false" },
+]
+
+# ═══ cap_the_raid — beat_0105 (rev 155). THE NIGHT. ═════════════════════════════════════════════════════
+# Auto-fire Tier-3 capstone @bastien_backroom, pri 12, ONE-SHOT, gated bastien_drains_done gte 2 +
+# taser_held gte 1 + raid_done is_false. SETS raid_done + cain_named.
+#
+# ⚠️ "A DAY AFTER THE DRAIN" IS EXPRESSED AS bastien_drains_done gte 2 AND NOT AS A DAY COUNTER. LO's ask was
+# that the raid not land on the same night as the first drain. A second drain cannot happen on the first
+# night — the loop resets on the hub rung, the door search is presence-gated to his 20:00-23:59 row, and one
+# evening is one visit — so "she has been back" is exactly "a later night", using state the game already
+# keeps. No new counter, no new decay row, and it cannot desync. It also guarantees the player has run the
+# heat-passed loop at least twice before the room burns, which is the thing beat_0102 exists for.
+#
+# ⚠️ IT FIRES IN THE BACK ROOM, NOT ON THE FLOOR. She is inside with the door shut when it starts, which is
+# the only staging where she cannot simply leave, where Cain's arrival is a door opening rather than a
+# rumour, and where the choice at the middle of the scene is physically possible.
+#
+# ⚠️ SHE HAS SPENT THE WHOLE CHAPTER AFRAID OF THE WRONG THING, AND THIS BEAT PAYS THAT OFF TWICE.
+# cap_the_wall had her conclude the company closed the district against her. So when three machines come
+# through the wall she reads it as the fear confirmed — and she is right about the machines and wrong about
+# the district, and both halves land in the same ninety seconds.
+#
+# ⚠️ THE UNITS. Vega, Lyra and Nova have been planted since the opening scene of the game and never used:
+# "Vega, Lyra, Nova run the hunt head-on. You're useless with a gun — but you're the one asset I have that a
+# man wants to keep close" (2_one_shots.toml:97). They are not a cast and get no character here — three
+# machines and one line. The line is a DESIGNATION, not a threat, and it is the number off her own page,
+# because the most frightening thing a machine can say to her is her own filing.
+#
+# ⚠️ WHAT SHE OVERHEARS IS NOT EXPOSITION — LO's steer, and it is right. "Cain, you're late" is the shape of
+# two men who have known each other eleven years, mid-crisis. She already has every fact from the drain; what
+# this gives her is the man attached to them.
+#
+# ⚠️ THE TASER IS THE HINGE AND HER REASON IS ONE SENTENCE. Cain is getting Bastien out. If Bastien goes,
+# Cain goes with him, and she loses the only lead she has ever had. She drops Bastien to keep Cain in the
+# room. She trades a man for an answer, knowingly, in about a second and a half.
+# ⚠️ AND IT IS WHY THEY GET HIM. He was on the floor and could not run. THE GAME NEVER SAYS HE IS DEAD —
+# she assumes, the fire does the rest, and exactly one quiet detail is left for the next release: no body.
+# Do not add a second. Do not let any later surface state it either way.
+#
+# ⚠️ CAIN FAILS AT EVERYTHING HE CAME FOR — Bastien, the room, the files. He gets one person out and it is the
+# one he was not there for. That is the version of this scene that does not cost her arc: she ends it armed,
+# standing, and asking, rather than carried.
+# ⚠️ HE DOES NOT SAY HER NAME HERE. He sees the mole, he stops for half a second, and he says nothing about
+# it. The name is the last line of the release and it belongs to the lab.
+# ⚠️ BANDS ON taser_through, NEVER GATES ON IT. If the search took it off her, she goes for the desk first
+# and the beat costs her three seconds and one extra click. A stealth roll must not be able to strand a save.
+# ⚠️ MEDIA, AND THE FIRST CUT GOT THIS WRONG. scenes/backroom_burning.jpg was the NODE LEAD, which put a
+# picture of the room already alight directly above the line "An evening like the other ones" — and the fire
+# is beat 15 of 18. That is the exact defect LO caught in the shipped build, and the rule it produced: a top
+# image ESTABLISHES (the room, the setting) and anything showing what HAPPENS goes in the beat that makes it
+# happen. The lead is now locations/bastien_backroom.jpg — the room as she has known it for six weeks, and a
+# sanctioned establishing-shot reuse — and the fire lands in the "Go." beat, where the prose names it.
+[[canvases]]
+id          = "cap_the_raid"
+name        = "Three of them"
+description = "beat_0105 (rev 155). THE FACE's Tier-3 climax @bastien_backroom. Auto-fire, pri 12, one-shot, gated bastien_drains_done gte 2 (which IS 'a later night' — one evening is one visit, so a second drain cannot be the first night, and it needs no day counter) + taser_held gte 1 + raid_done is_false. The attack lands with her inside and the door shut. Cain comes through the alley door for Bastien; she overhears enough to know him, tasers Bastien to keep him in the room, and Cain sees the mole on her neck and says nothing about it. The units say her designation, which is how she learns the company knows she is alive. Cain FAILS at everything he came for and gets out the one person he was not there for. BANDS on taser_through, never gates on it. ⚠️ BASTIEN IS TAKEN, NOT KILLED — the game never states he is dead, she assumes, and exactly one detail is left: no body. SETS raid_done + cain_named. 18 beats / 17 clicks."
+[canvases.trigger]
+location      = "bastien_backroom"
+is_repeatable = false
+priority      = 12
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "bastien_drains_done", operator = "gte", value = 2 },
+  { type = "trait", subject = "player", trait_key = "taser_held",          operator = "gte", value = 1 },
+  { type = "flag",  subject = "player", flag_key  = "raid_done",           operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Three of them"
+blocks = [
+  { type = "image", props = { file = "locations/bastien_backroom.jpg", description = "A private back room behind a bar — a desk with nothing on it, a good chair set to see the door, better furniture than the room deserves.", search_queries = ["private back room behind bar desk armchair dim", "noir speakeasy office low light leather chair"] } },
+  { type = "paragraph", content = "An evening like the other ones. He is in the chair with a drink he is not drinking, working round to the same question he has been working round to for six weeks." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "Then the bar goes quiet, and it is the wrong quiet. Not a fight going up — a room deciding all at once to be somewhere else." },
+        { type = "paragraph", content = "Bastien is out of the chair before she has finished hearing it, and he is fast for a man his age, and that tells her he has been waiting years for this exact noise." },
+    ] },
+    { advance_text = "Ask.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "What is it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Alley side. Now. Don't stop for your coat and don't go through the bar." },
+    ] },
+    { advance_text = "Don't move.", blocks = [
+        { type = "paragraph", content = "It is the first thing he has ever said to her that was for her benefit, and she does not take it, because the whole reason she is standing in this room is standing in this room." },
+    ] },
+    # CAIN ARRIVES — through the alley door, which is the door the drain named.
+    { advance_text = "The alley door.", blocks = [
+        { type = "paragraph", content = "The alley door opens without being knocked on. Whoever comes through it does not hurry either, and Bastien's whole shape changes." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "You're late." },
+    ] },
+    # THE OVERHEARD EXCHANGE. Not expository. The shape of eleven years, mid-crisis.
+    { advance_text = "Listen.", blocks = [
+        { type = "paragraph", content = "\"I know what I am.\" The voice is low and unhurried and there is old smoke under it, and she has heard it once, through a wall, on a floor, going through her wrong." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Three of them came down the strip. Not police. Not anybody's crew." },
+        { type = "paragraph", content = "\"I counted them from the water. Get your coat.\"" },
+    ] },
+    { advance_text = "Stand very still.", blocks = [
+        { type = "paragraph", content = "Big through the shoulders. Grey coat. He does not look at her once, because she is a barmaid in a room he needs Bastien out of, and there is nothing in the world less interesting than that." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Cain." },
+    ] },
+    { advance_text = "Watch them.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "The wall. Eleven years of the wall, and you want me to walk out and leave it." },
+        { type = "paragraph", content = "\"I want you alive and the wall is paper. Bastien. Now.\"" },
+        { type = "paragraph", content = "And Bastien picks up his coat, because he is going to go, and when he goes the other one goes with him." },
+    ] },
+    # ⚠️ THE HINGE. Her reason is one sentence, and she takes about a second and a half over it.
+    { advance_text = "Do the arithmetic.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Six weeks of trays. Four thousand coin of face and shifts and hands on her in front of forty people, for one room, on the chance of one night. And it is this one, and it is walking out of the door in front of her." },
+    ] },
+    # ⚠️ BANDED, NEVER GATED. If the search took it, she goes for the desk — three seconds and one more click.
+    { advance_text = "Reach for it.", blocks = [
+      { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+          { type = "trait", subject = "player", trait_key = "taser_through", operator = "gte", value = 1 },
+        ] } }, blocks = [
+        { type = "paragraph", content = "It is in the lining where it has been all night, because he went over that coat and did not find it." },
+      ] },
+      { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+          { type = "trait", subject = "player", trait_key = "taser_through", operator = "lt", value = 1 },
+        ] } }, blocks = [
+        { type = "paragraph", content = "It is on his desk where he put it at the door, two feet behind her, and she has it in her hand before either of them has finished turning round." },
+      ] },
+    ] },
+    { advance_text = "Put him down.", blocks = [
+        { type = "paragraph", content = "She puts it against the back of Bastien's neck and holds the switch until his legs go, and he drops into his own good chair and out of it onto the boards, and the coat goes with him." },
+    ] },
+    # CAIN TURNS ON HER — and sees it. He says NOTHING about it. The name belongs to the lab.
+    { advance_text = "Face him.", blocks = [
+        { type = "paragraph", content = "The grey coat comes round fast enough that she does not see it happen, and then there is a hand on her throat and her back against the file wall and a face eight inches from hers that is not angry the way she expected angry to look." },
+        { type = "dialog", props = { speaker = "player" }, content = "I have questions and we are not doing them here." },
+    ] },
+    { advance_text = "Wait.", blocks = [
+        { type = "paragraph", content = "He does not answer. His eyes go off her face, down and left, to the side of her neck under the jaw — to a small brown mark she has never once been asked about by anybody, in two years, in any room." },
+        { type = "paragraph", content = "The hand comes off her throat." },
+    ] },
+    { advance_text = "Say something.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Don't." },
+        { type = "paragraph", content = "\"I wasn't going to.\" A beat. \"Not here.\"" },
+    ] },
+    # THE UNITS. Three machines and one line, and the line is her own filing.
+    { advance_text = "Then the wall goes.", blocks = [
+        { type = "paragraph", content = "The wall between the room and the bar stops being a wall. Through it, unhurried, three of them — chrome-perfect, hands empty, nothing moving behind the eyes, walking into a burning room the way you walk into a kitchen." },
+        { type = "paragraph", content = "One of them looks at her for exactly as long as it takes and says, flatly, a designation. Four letters and eleven digits, and she has read them once, on her own page, on a bench at the breaking docks." },
+    ] },
+    { advance_text = "Understand it.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "They are not here for Bastien. They have never been here for Bastien." },
+    ] },
+    { advance_text = "Go.", blocks = [
+        { type = "image", props = { file = "scenes/backroom_burning.jpg", description = "A private back room behind a bar with box files spilled and burning along one wall, smoke against the ceiling, the door off its frame.", search_queries = ["office room fire burning paper files smoke", "ransacked room burning documents dim interior"] } },
+        { type = "paragraph", content = "Cain takes her off the wall by the arm and out through the alley door, and behind them the files go up along their whole length at once, which is not how paper burns unless somebody has been thorough about it." },
+        { type = "paragraph", content = "She looks back from the alley for exactly as long as she gets, and what is on the floor of that room is a chair, a coat, and nothing she can see." },
+    ] },
+    # Terminal beat — no advance_text. Cain fails at all of it, and she is walking, not carried.
+    { blocks = [
+        { type = "paragraph", content = "They come up the strip against the whole district going the other way. He does not have Bastien, he does not have the wall, and he has not once let go of her arm." },
+        { type = "paragraph", content = "\"There's a place,\" he says. \"You can ask me there, and I'll answer, and then you can decide what you want to do about it.\"" },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go with him."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "cain_lab"
+time_progression_minutes = 90
+flagEffects = [
+  { targetType = "player", flag = "raid_done",  op = "set" },
+  { targetType = "player", flag = "cain_named", op = "set" },
+]
+
+# ═══ cap_the_lab — beat_0106 (rev 156). THE LAST SCENE OF THE RELEASE. ══════════════════════════════════
+# Auto-fire Tier-3 capstone @cain_lab, pri 12, ONE-SHOT, gated raid_done is_true + lab_seen is_false.
+# Reached only by cap_the_raid's exit; cain_lab has no nav card and no entry_from.
+#
+# ⚠️ IT IS SHORT AND IT DOES NOT ANSWER ANYTHING, AND BOTH ARE THE POINT. He told her in the alley she could
+# ask and he would answer. Then the first thing he says in the room is not an answer, and the release stops
+# there. Every question she has stays whole for the chapter that opens on it.
+# ⚠️ WHAT THE ROOM SAYS INSTEAD. She cannot be told where she is — Bastien's drain established that nobody
+# has ever had an address off him in eleven years, so the prose has to be as blind as she is. What it can
+# show is the CONTENTS, and the contents are the whole of Bastien's payload made physical: eleven years of
+# Vance paper annotated in a hand that presses hard, and a body-frame standing empty, and the parts. She is
+# looking at where every file she has been carrying trays around actually went.
+# ⚠️ SHE KEEPS THE WEAPON UP THE ENTIRE SCENE. She is not rescued, she is not grateful, and she is not
+# sitting down. That is what makes the last line work at all: it is said to a woman pointing something at
+# him, by a man who does not react to that in the slightest.
+# ⚠️ HE DOES NOT TOUCH HER, DOES NOT EXPLAIN, AND DOES NOT USE WARMTH. The design book reserves warmth for
+# Cain and this is its first spend, so it is spent at exactly one word's worth: he uses her name, and the
+# name is the warmth. Nothing else in the scene is soft.
+# ⚠️ AND SHE WALKS OUT. LO's call, and it matters structurally: the next release resumes in this scene, so
+# she must not be held. The exit puts her on the strip and the lab becomes unreachable again — a door she
+# has been through once and cannot open.
+# ⚠️ NO APOSTROPHE IN THE FINAL LINE and none in card U's terminal_text: SugarCube's source-byte escaping
+# renders one as &amp;#x27; in the built HTML, which displays correctly and then poisons every future grep.
+# MEDIA: one new slot, scenes/cain_lab_bench.jpg.
+[[canvases]]
+id          = "cap_the_lab"
+name        = "Put it down"
+description = "beat_0106 (rev 156). THE FACE's final capstone @cain_lab. Auto-fire Tier-3, pri 12, one-shot, gated raid_done is_true + lab_seen is_false, reached only from cap_the_raid's exit. It is SHORT and answers NOTHING: he said in the alley she could ask and he would answer, and the first thing he says in the room is not an answer, and the release stops there. The room carries the information instead — eleven years of annotated Vance paper and a body-frame standing empty, which is where every file she has been carrying trays around actually went. She keeps the taser up the whole scene; she is not rescued and not grateful. The design book reserves warmth for Cain and this spends exactly one word of it: her name. She walks out freely and the lab becomes unreachable. SETS lab_seen. 11 beats / 10 clicks."
+[canvases.trigger]
+location      = "cain_lab"
+is_repeatable = false
+priority      = 12
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "raid_done", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "lab_seen",  operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Put it down"
+blocks = [
+  { type = "image", props = { file = "scenes/cain_lab_bench.jpg", description = "A long workbench under work-lamps in a cluttered underground workshop, salvaged components laid out in order, an empty upright body-frame at the far end.", search_queries = ["cluttered underground workshop bench components work lamp", "improvised laboratory salvaged parts dim industrial"] } },
+  { type = "paragraph", content = "She does not know where it is. Twenty minutes with her head down and two changes of direction, and then a door, and then this." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "Long benches under work-lamps. Everything on them laid out in order, and none of it bought new — every piece has been taken off something that could afford it." },
+    ] },
+    { advance_text = "Look at the walls.", blocks = [
+        { type = "paragraph", content = "And the paper. Floor to ceiling on two sides, filed and stacked and annotated in a hand that presses hard enough to emboss the sheet under it. Eleven years of a company being taken apart on a desk." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "This is where it went. All of it. Every envelope through that door, every box file against that wall, for eleven years — it came here and it got read." },
+    ] },
+    { advance_text = "Look at the far end.", blocks = [
+        { type = "paragraph", content = "At the far end of the room, upright and empty, a body-frame. Not a rack and not a jig. The shape of a person, standing open, with the cabling dressed back and labelled." },
+    ] },
+    { advance_text = "Understand what it is.", blocks = [
+        { type = "paragraph", content = "It is not for holding somebody down. It is for getting into. There is a mirror bolted where the head would be, angled so that whoever is standing in it can watch their own hands work." },
+    ] },
+    { advance_text = "Keep the weapon up.", blocks = [
+        { type = "paragraph", content = "She has not lowered the taser since the alley. Her arm has been up for twenty minutes and it is starting to shake and she does not lower it." },
+    ] },
+    { advance_text = "Watch him.", blocks = [
+        { type = "paragraph", content = "He shuts the door behind them and does not lock it. Takes the grey coat off. Puts it over the back of a chair, and stands at the bench with his back to her, and washes his hands." },
+    ] },
+    { advance_text = "Ask.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "You came through a door for me a year ago and you would not say why." },
+        { type = "paragraph", content = "He keeps washing his hands." },
+    ] },
+    { advance_text = "Ask properly.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "They built me to kill you. I have had your name in my file since before I could hold it." },
+        { type = "paragraph", content = "The water goes off." },
+    ] },
+    { advance_text = "Raise it.", blocks = [
+        { type = "paragraph", content = "She gets both hands on the thing and brings it up level, and it is a thirty-coin piece of grey plastic and they both know exactly what it is worth in this room." },
+    ] },
+    { advance_text = "Wait for him to turn round.", blocks = [
+        { type = "paragraph", content = "He dries his hands on a cloth, without hurrying, the way Kess dries his hands. Then he turns round and looks at her properly for the first time since the alley — at her face, which nobody has done in six weeks." },
+    ] },
+    # TERMINAL BEAT — no advance_text. THE LAST LINE OF THE RELEASE.
+    # ⚠️ The design book reserves warmth for Cain; this is its first spend and it is one word long. He does
+    # not explain, does not touch her, and does not react to the weapon. He uses her name, and that is the
+    # entire event. No apostrophe in the line.
+    { blocks = [
+        { type = "paragraph", content = "\"Now put down the weapon, Wren.\"" },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Nobody has said that name to her since the penthouse. Nobody down here has ever heard it. There is a hundred and twenty coin of somebody else on her face and he has looked at it once and gone straight through." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Don't."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_strip"
+time_progression_minutes = 60
+flagEffects = [
+  { targetType = "player", flag = "lab_seen", op = "set" },
+]
+
+# ══ CARD U — the last card of the release (beat_0107, rev 157). ════════════════════════════════════════
+# ⚠️ MANDATORY: cap_the_raid sets raid_done, which closes T. Thirteenth time in this game.
+# ⚠️ IT IS THE ONLY CARD IN THE GAME PERMITTED TO SET terminal_text, and it takes that from card M, which
+# gave it up at beat_0095. The rev-142 reasoning holds exactly: terminal = true draws the green check frame
+# whose default label is the hardcoded "Arc complete", and a finished ARC and a finished BUILD are different
+# endings. This card ends a build. Every other terminal card in the game stays silent and keeps the default.
+# ⚠️ NO APOSTROPHE IN terminal_text — SugarCube's source-byte escaping renders one as &amp;#x27; in the built
+# HTML, which displays correctly and then poisons every future grep of the file. The em dash is safe.
+# ⚠️ IT DOES NOT SAY BASTIEN IS DEAD. She assumes, the card reports what she saw, and the one detail left is
+# that nothing was on the floor. Do not let any future edit resolve this either way before the next release.
+# ⚠️ AND IT POINTS AT SOMETHING TO DO. That is the whole reason this card reads differently from card M:
+# M ended a build that opened nothing, and this one ends a build with a burned room still standing in it.
+[[quest_cards]]
+priority   = 10
+text       = "Three of them came through the wall and none of them were there for Bastien. You put him down yourself, with thirty coin of grey plastic against the back of his neck, because the man who came through the alley door for him was the only lead you have ever had and he was about to walk out with him. One of them said your designation out loud — four letters and eleven digits off your own page — so the company knows the difference between an asset that broke and an asset that is walking around. And Cain got exactly one thing out of that room, and it was not the wall, and it was not Bastien. It was you. In a lab you could not find again he looked at your face for the first time and used a name that nobody in the Reach has ever heard."
+tip        = "That is where this build ends. The Undertow does not open in the evenings now, but Sol is in there most days with a shovel and he will let you past — the good years came off that wall before the fire, and what is left on the floor is the junk Bastien sold for cash, with a few sheets in it that carry designations in your own format and dates in the second column. Go and get them. Whatever Cain was going to say next, you will hear it when this picks up. If you want that sooner, Support Us in the sidebar."
+terminal      = true
+terminal_text = "Chapter complete — the story continues in the next release"
+when = [
+  { flag = "raid_done", op = "is_true" },
+]

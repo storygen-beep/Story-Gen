@@ -1,0 +1,264 @@
+{
+  "game": "vesper",
+  "chapter": "THE FACE (Act 2 - 1c)",
+  "release": "0.1.9",
+  "note": "Slots added by beats 0094-0107. Every explicit slot is a POOL. Harvest with find-media v3.",
+  "slots": [
+    {
+      "canvas": "activity_bar_work",
+      "node": "base",
+      "type": "image",
+      "slot": "locations/underworld_bar.jpg",
+      "pool": false,
+      "description": "A dim underground bar, low light, a door at the back with no handle on this side.",
+      "search_queries": [
+        "dim underground speakeasy bar red light",
+        "quiet noir back-alley bar low light"
+      ]
+    },
+    {
+      "canvas": "activity_bar_work",
+      "node": "shift",
+      "type": "video",
+      "slot": [
+        "sex/bar_floor_handled_t4a.webm",
+        "sex/bar_floor_handled_t4b.webm",
+        "sex/bar_floor_handled_t4c.webm"
+      ],
+      "pool": true,
+      "description": "A waitress in a short tight dress leaning across a low bar table with a tray, a seated man's hand up the back of her thigh, the room carrying on around them.",
+      "search_queries": [
+        "waitress groped serving drinks bar clothed",
+        "short dress waitress hand under skirt bar table"
+      ]
+    },
+    {
+      "canvas": "activity_sift_the_ruin",
+      "node": "base",
+      "type": "image",
+      "slot": "scenes/backroom_ruin.jpg",
+      "pool": false,
+      "description": "A burned-out back room days after a fire, soaked ash and charred paper inches deep on the floor, an empty scorched wall where shelving stood, daylight through a broken door.",
+      "search_queries": [
+        "burned out room ash charred paper floor aftermath",
+        "fire damaged office soaked debris daylight through door"
+      ]
+    },
+    {
+      "canvas": "cap_chip_read",
+      "node": "base",
+      "type": "image",
+      "slot": "scenes/kess_chip_light.jpg",
+      "pool": false,
+      "description": "A tiny grey component alone on a steel workbench under a low work-lamp, magnifier and fine tools beside it, nobody on the bench.",
+      "search_queries": [
+        "tiny electronic component under magnifier workbench lamp",
+        "microchip on steel bench close up work light"
+      ]
+    },
+    {
+      "canvas": "cap_stranger_at_the_bar",
+      "node": "base",
+      "type": "image",
+      "slot": "scenes/wren_stranger_bar.jpg",
+      "pool": false,
+      "description": "A woman in plain second-hand clothes standing at the end of a dim underground bar, seen from behind, a barman working the taps beyond her.",
+      "search_queries": [
+        "woman from behind at dim bar counter noir",
+        "back view woman standing at underground bar low light"
+      ]
+    },
+    {
+      "canvas": "cap_sol_hires",
+      "node": "base",
+      "type": "image",
+      "slot": "locations/underworld_bar.jpg",
+      "pool": false,
+      "description": "A dim underground bar, low light, a door at the back with no handle on this side.",
+      "search_queries": [
+        "dim underground speakeasy bar red light",
+        "quiet noir back-alley bar low light"
+      ]
+    },
+    {
+      "canvas": "cap_bastien_notices",
+      "node": "base",
+      "type": "image",
+      "slot": "scenes/bastien_back_door.jpg",
+      "pool": false,
+      "description": "A door standing a few inches ajar at the back of a dim bar, warm light behind it, the shape of a seated man in a chair beyond.",
+      "search_queries": [
+        "door ajar warm light back room seated man silhouette",
+        "partly open door dim bar back room chair light"
+      ]
+    },
+    {
+      "canvas": "bastien_door_search",
+      "node": "base",
+      "type": "image",
+      "slot": "locations/underworld_bar.jpg",
+      "pool": false,
+      "description": "A dim underground bar, low light, a door at the back with no handle on this side.",
+      "search_queries": [
+        "dim underground speakeasy bar red light",
+        "quiet noir back-alley bar low light"
+      ]
+    },
+    {
+      "canvas": "hub_bastien",
+      "node": "base",
+      "type": "image",
+      "slot": "locations/bastien_backroom.jpg",
+      "pool": false,
+      "description": "A private back room behind a bar — a desk with nothing on it, a good chair set to see the door, better furniture than the room deserves.",
+      "search_queries": [
+        "private back room behind bar desk armchair dim",
+        "noir speakeasy office low light leather chair"
+      ]
+    },
+    {
+      "canvas": "loop_bastien_backroom",
+      "node": "intro",
+      "type": "video",
+      "slot": "sex/bastien_backroom_t4",
+      "pool": true,
+      "description": "A composed older man unhurriedly undressing a woman in a private room behind a bar, her back to a desk, both still mostly clothed.",
+      "search_queries": [
+        "man slowly undressing woman office desk clothed gif",
+        "clothed couple back room man opening her shirt dim gif"
+      ]
+    },
+    {
+      "canvas": "loop_bastien_backroom",
+      "node": "base_oral_bastien",
+      "type": "video",
+      "slot": "sex/bastien_loop_oral_t5",
+      "pool": true,
+      "description": "A woman kneeling on the floor of a private back room with a seated older man's cock in her mouth, his hand resting on her head, unhurried.",
+      "search_queries": [
+        "kneeling blowjob seated man armchair dim room gif",
+        "back room blowjob kneeling hand on head gif"
+      ]
+    },
+    {
+      "canvas": "loop_bastien_backroom",
+      "node": "base_vaginal_bastien",
+      "type": "video",
+      "slot": "sex/bastien_loop_vaginal_t5",
+      "pool": true,
+      "description": "A woman bent face-down over a bare desk in a dim private room, an older man fucking her from behind, one hand flat on her back.",
+      "search_queries": [
+        "bent over desk from behind office sex dim gif",
+        "man fucking woman over desk hand on her back gif"
+      ]
+    },
+    {
+      "canvas": "loop_bastien_backroom",
+      "node": "base_anal_bastien",
+      "type": "video",
+      "slot": "sex/bastien_loop_anal_t5",
+      "pool": true,
+      "description": "A woman bent face-down over a desk taken in the ass from behind by an older man, his hand flat between her shoulder blades holding her down.",
+      "search_queries": [
+        "anal from behind bent over desk hand on back gif",
+        "rough anal bent over office desk held down gif"
+      ]
+    },
+    {
+      "canvas": "loop_bastien_backroom",
+      "node": "base_anal_hard_bastien",
+      "type": "video",
+      "slot": "sex/bastien_loop_anal_hard_t5",
+      "pool": true,
+      "description": "An older man fucking a woman's ass hard over a desk with a fist gathered in her hair, pulling her head back off the wood.",
+      "search_queries": [
+        "rough anal hair pulling bent over desk gif",
+        "anal from behind pulling her hair back hard gif"
+      ]
+    },
+    {
+      "canvas": "loop_bastien_finisher",
+      "node": "climax",
+      "type": "video",
+      "slot": "sex/bastien_finish_facial_t5",
+      "pool": true,
+      "description": "An older man finishing on a kneeling woman's face in a dim private room, looking down at the result without expression.",
+      "search_queries": [
+        "facial kneeling woman older man dim room gif",
+        "cumshot on face kneeling back room gif"
+      ]
+    },
+    {
+      "canvas": "loop_bastien_finisher",
+      "node": "climax",
+      "type": "video",
+      "slot": "sex/bastien_finish_inside_t5",
+      "pool": true,
+      "description": "An older man finishing inside a woman bent over a desk, holding her hips still, then straightening up unhurried.",
+      "search_queries": [
+        "creampie bent over desk from behind gif",
+        "finishing inside woman over desk holding hips gif"
+      ]
+    },
+    {
+      "canvas": "loop_bastien_finisher",
+      "node": "climax",
+      "type": "video",
+      "slot": "sex/bastien_finish_ass_t5",
+      "pool": true,
+      "description": "An older man finishing deep in a woman's ass over a desk, holding still, her hand gripping his forearm.",
+      "search_queries": [
+        "anal creampie bent over desk holding still gif",
+        "finishing deep in her ass from behind gif"
+      ]
+    },
+    {
+      "canvas": "cap_the_raid",
+      "node": "base",
+      "type": "image",
+      "slot": "scenes/backroom_burning.jpg",
+      "pool": false,
+      "description": "A private back room behind a bar with box files spilled and burning along one wall, smoke against the ceiling, the door off its frame.",
+      "search_queries": [
+        "office room fire burning paper files smoke",
+        "ransacked room burning documents dim interior"
+      ]
+    },
+    {
+      "canvas": "cap_the_lab",
+      "node": "base",
+      "type": "image",
+      "slot": "scenes/cain_lab_bench.jpg",
+      "pool": false,
+      "description": "A long workbench under work-lamps in a cluttered underground workshop, salvaged components laid out in order, an empty upright body-frame at the far end.",
+      "search_queries": [
+        "cluttered underground workshop bench components work lamp",
+        "improvised laboratory salvaged parts dim industrial"
+      ]
+    },
+    {
+      "canvas": "1_metadata [[clothing]]",
+      "node": "cover_stranger",
+      "type": "image",
+      "slot": "clothing/cover_stranger.jpg",
+      "pool": false,
+      "description": "A plain second-hand dress and coat of the kind a woman working a Reach bar floor would own — cheap, unremarkable, chosen to be forgettable.",
+      "search_queries": [
+        "plain cheap womens dress coat second hand",
+        "drab inexpensive work dress hanging"
+      ]
+    },
+    {
+      "canvas": "0_systems [[player_portrait.outfits]]",
+      "node": "cover_stranger",
+      "type": "image",
+      "slot": "portraits/wren_cover_stranger.jpg",
+      "pool": false,
+      "description": "A womans face that is NOT Wrens — same build, different bones: a bought identity, plainer, older, unmemorable. SFW headshot for the sidebar portrait.",
+      "search_queries": [
+        "plain womens portrait headshot neutral expression",
+        "unremarkable female face portrait dim"
+      ]
+    }
+  ]
+}
