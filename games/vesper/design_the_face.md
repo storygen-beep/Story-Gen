@@ -907,3 +907,46 @@ pin correct at the moment it renders, all five `ready_canvas` slugs resolving (a
 block silently), Bastien's section appearing and retiring on cue, and **zero page errors**. Heat unmoved at
 `explicit floor` 6.3% / `explicit in repeatable` 34.0% — the deferred Colm/Renner/Calloway backlog, untouched
 by this pass.
+
+---
+
+## 26. THE LOCKED TOILET (beat_0120, rev 171)
+
+LO, playing: *"bar bathroom can remain unlocked right?? there is no reason for it to be locked??"*
+
+Half right, and the half he was right about had a better reason than the one he gave.
+
+### The lock was visible
+
+`underworld_bar_bathroom` carries `entry_from = "underworld_bar"`, and **a blocked location does not hide.**
+The generator emits a greyed `location-card-locked` with `blocked_message` as its subtitle. So from **Act
+1b** — the Sol/hunt leg, long before this chapter exists — the Undertow's nav grid carried a greyed *"The
+Bathroom — nothing in it she needs."* The game was explaining a toilet in order to keep her out of one.
+
+That is the shape this book already rejected one door further in: `activity_sift_the_ruin` was built as a
+**card rather than a location** specifically so a locked "The Back Room" would not sit on that grid from Act
+1 onward. The same argument applies here and had simply not been made.
+
+### And the clause was doing no work
+
+`activity_bar_change` is the room's **sole** occupant and carries `bar_rung gte 3` on its own trigger. An
+open door therefore reaches nothing early — she walks into an empty toilet, which is what a bar toilet is.
+What the open door buys back is the **NEW badge**: `locationHasNewCanvases` now lights the card at exactly
+the moment the change surface unlocks, which is a better pointer to the dress than a greyed card ever was.
+
+### The other clause stays, and this is the part worth recording
+
+`activity_bar_change` has **no `raid_done` clause of its own.** The room lock is the only thing keeping
+*"change into the dress he sent down"* out of a bar that burned with its owner dragged through the wall —
+the rev-157 defect (a standing surface that survives the fire and contradicts the ending), one door deeper.
+Dropping both clauses because one was pointless would have shipped it.
+
+`blocked_message` was rewritten to match: it now renders **only** post-raid, where *"nothing in it she
+needs"* is plainly wrong — the room did not stop being useful, the building burned. The new line is the
+tape and Sol's bucket, in the voice `activity_sift_the_ruin` and card U already established.
+
+### Verified live, all four states
+
+Open and empty in Act 1b (enterable, no change card, exit resolves) · open with both equip choices at rung 3,
+dress landing in the `dress` slot · shut again post-raid with the new message on the greyed card. Counts
+unchanged at 186 canvases / 30 locations. Zero page errors.

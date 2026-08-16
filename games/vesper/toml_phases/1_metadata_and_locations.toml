@@ -1069,6 +1069,20 @@ entry_from  = "underworld_strip"
 # the engine's own Leave link, so it can never become the dead end beat_0114 had to fix twice in one chapter.
 # ⚠️ raid_done is_false — three machines came through the wall and the Undertow does not open in the evenings
 # after that. She can still change at the cot, so nothing strands.
+# ⚠️ AND THAT IS NOW THE ONLY CLAUSE. beat_0120 (rev 171) — the `bar_rung gte 3` half came OFF, LO's call, and
+# the reason is stronger than "a bar toilet should be open": THE LOCK WAS VISIBLE. entry_from gives this room
+# a nav card, and a blocked location does not hide — the generator emits a greyed `location-card-locked` with
+# blocked_message as its subtitle. So from Act 1b onward (the Sol/hunt leg, long before this chapter) the
+# Undertow's grid carried a greyed "The Bathroom" reading "nothing in it she needs" — the game explaining a
+# toilet in order to keep her out of it. It is the shape already rejected for the back room: sift_the_ruin was
+# built as a CARD rather than a location precisely so a locked door would not sit on that grid.
+# ⚠️ AND THE CLAUSE WAS DOING NO WORK. activity_bar_change is this room's SOLE occupant and carries
+# `bar_rung gte 3` on its own trigger, so an open door reaches nothing early — she walks into an empty toilet.
+# What the open door buys is the NEW badge (locationHasNewCanvases), which now lights the card at exactly the
+# moment the change surface unlocks. That is a better pointer to the dress than the greyed card ever was.
+# ⚠️ DO NOT DROP raid_done TOO. activity_bar_change has NO raid_done clause of its own, so this lock is the
+# only thing keeping "change into the dress he sent down" out of a bar that burned with its owner dragged
+# through the wall — the rev-157 defect (a surface that survives the fire), one door further in.
 [[locations]]
 id          = "underworld_bar_bathroom"
 name        = "The Bathroom"
@@ -1077,10 +1091,12 @@ image       = "locations/underworld_bar_bathroom.jpg"
 image_search_queries = ["small dingy bar bathroom cubicle cracked basin", "dim staff toilet tiled wall single bulb"]
 entry_from  = "underworld_bar"
 entry_conditions = { version = "1.0", items = [
-  { type = "trait", subject = "player", trait_key = "bar_rung",  operator = "gte", value = 3 },
-  { type = "flag",  subject = "player", flag_key  = "raid_done", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "raid_done", operator = "is_false" },
 ] }
-blocked_message = "The staff toilet at the back, and nothing in it she needs."
+# Renders ONLY post-raid now, so it has to name the fire. The old line ("nothing in it she needs") was written
+# for a player who had not been hired yet and is simply wrong here — the room did not stop being useful, the
+# building burned. Voice matches the ending's own: Sol alive, on site, working back through it with a bucket.
+blocked_message = "Tape across the back passage, and the toilet is on the far side of it. Sol has not got that far with the bucket."
 
 # ── the_cot — beat_0115 (rev 166). THE FIRST ROOM IN THE GAME THAT IS HERS. ───────────────────────────
 # LO's call, and it repairs a framing mistake I made at beat_0094. The cot has been a solo-activity CARD on
