@@ -2,7 +2,7 @@
   "game": "vesper",
   "chapter": "THE FACE (Act 2 - 1c)",
   "release": "0.1.9",
-  "note": "Slots added by beats 0094-0107. Every explicit slot is a POOL. Harvest with find-media v3.",
+  "note": "Slots added by beats 0094-0107, plus Cain's portrait at beat_0121. Every explicit slot is a POOL. Harvest with find-media v3.",
   "slots": [
     {
       "canvas": "activity_bar_work",
@@ -295,6 +295,19 @@
         "short tight black cocktail dress hanger",
         "thin clingy mini dress on hanger plain background"
       ]
+    },
+    {
+      "canvas": "npc_cain (character portrait)",
+      "node": "-",
+      "type": "image",
+      "slot": "cain.jpg",
+      "pool": false,
+      "description": "A big-shouldered man in his forties in a plain grey coat, dark hair going grey, a still unhurried face with old damage in it, lit from one side in a dim workshop. Not handsome and not a thug — someone who repairs things.",
+      "search_queries": [
+        "portrait older man grey coat dim workshop side light serious",
+        "broad shouldered man forties dark hair still expression low light noir portrait"
+      ],
+      "note": "beat_0121 (rev 172). Cain becomes an NPC from this release, so his dialog blocks need a portrait. He is SCHEDULELESS with no hub, so this only ever renders where a dialog block draws it. Path is a BARE filename at the videos/ root, matching every other NPC portrait (bastien.jpg, kess.jpg) — the engine resolves npc `portrait` there, not under portraits/."
     }
   ]
 }

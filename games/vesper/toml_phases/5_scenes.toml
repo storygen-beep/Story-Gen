@@ -3752,6 +3752,10 @@ flagEffects = [
 # slow) but the core is already scarred — that's why the drain back does NOT lower core_strain.
 #
 # Cain is a SHAPE, never a speaker: NO npc_cain, no portrait, no dialog block. Tier-3, earned.
+# ⚠️ SCOPE NARROWED AT beat_0121 (rev 172) — this rule now governs THIS SCENE AND EVERYTHING BEFORE IT, and
+# nothing after. npc_cain exists from The Face onward (1_metadata) and his lines are labelled dialog blocks
+# from the moment Wren names him in the alley (cap_the_raid). Here she does not know who he is, so here he
+# stays a voice through a wall with no name on it — which is what the rule was always protecting.
 # ═══════════════════════════════════════════════════════════════════════════════
 
 [[canvases]]
@@ -11131,7 +11135,7 @@ when = [
 [[quest_cards]]
 priority   = 11
 npc_id     = "npc_bastien"
-text       = "The man who kept you three months sits four hours a night ten feet from where you carry trays, and looks straight through you. He is not a mark and there is nothing in him to seduce — what he has is a room, and the only way into it is to be somebody he decides about."
+text       = "The man who kept you in that cell sits four hours a night ten feet from where you carry trays, and looks straight through you. He is not a mark and there is nothing in him to seduce — what he has is a room, and the only way into it is to be somebody he decides about."
 tip        = "Take shifts and keep taking them. Every rung is his call, not yours, and the only thing you control is being on the floor when he makes the next one. Wear the face every time — out of it the job does not exist."
 # The relation counter is safe HERE and nowhere earlier: bastien_seen means she has recognised him, so naming
 # him on the page no longer spoils the hinge. 18 is rung_bar_promotion_4's own gate.
@@ -11476,7 +11480,7 @@ blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "Who buys company paper on the strip. Not the fences. The one who keeps it." },
     ] },
     { advance_text = "Wait for it.", blocks = [
-        { type = "paragraph", content = "The pen stops. It is a short stop and it is the first time in four months that Rue has taken any time at all to answer her." },
+        { type = "paragraph", content = "The pen stops. It is a short stop and it is the first time since the madam took her on that Rue has taken any time at all to answer her." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "That's not a thing I trade in." },
     ] },
     { advance_text = "Say the obvious.", blocks = [
@@ -11527,7 +11531,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "Ask Sol"
 blocks = [
-  { type = "paragraph", content = "Sol has the taps and the towel and the flat attention he gives everyone, and she has spent four months earning a version of it that is not flat." },
+  { type = "paragraph", content = "Sol has the taps and the towel and the flat attention he gives everyone, and she has spent every night since she came down the gate earning a version of it that is not flat." },
   { type = "cascade", props = { beats = [
     { blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "Somebody down here collects Vance paper. Years of it. You'd know who." },
@@ -11770,7 +11774,7 @@ blocks = [
   { type = "paragraph", content = "The Undertow at nine. Same door, same three steps down, same smell of wet coats and spilled beer over old smoke." },
   { type = "cascade", props = { beats = [
     { blocks = [
-        { type = "paragraph", content = "The room does what the room does when anybody comes in: a half-second of attention, priced and dismissed. She has been getting a different half-second than that for four months and had not noticed until it stopped." },
+        { type = "paragraph", content = "The room does what the room does when anybody comes in: a half-second of attention, priced and dismissed. She has been getting a different half-second than that since the first night she came down those steps, and had not noticed until it stopped." },
     ] },
     { advance_text = "Go to the bar.", blocks = [
         { type = "paragraph", content = "Sol comes down the counter with the towel over his shoulder and the flat, even, entirely pleasant face he keeps for people whose names he does not have yet." },
@@ -11784,11 +11788,11 @@ blocks = [
     ] },
     # The one interior beat, and it is about the mechanism rather than the feeling.
     { advance_text = "Hold still.", blocks = [
-        { type = "thought_bubble", props = { speaker = "player" }, content = "It works. That is the finding, and it is the finding she paid for. A man who decided he liked her four months ago has looked at her twice tonight and got nothing back either time." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "It works. That is the finding, and it is the finding she paid for. A man who decided a long time ago that he liked her has looked at her twice tonight and got nothing back either time." },
     ] },
     # He clocks ONE thing, and it is true of every new face in the room. No near-miss.
     { advance_text = "Look at the back door.", blocks = [
-        { type = "paragraph", content = "There is a door at the back of the room with no handle on this side. She has walked past it a hundred times and never once wondered about it, which she now thinks is itself a strange thing to be true." },
+        { type = "paragraph", content = "There is a door at the back of the room with no handle on this side. She has walked past it more times than she could count and never once wondered about it, which she now thinks is itself a strange thing to be true." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "That's not a door you look at, love. New ones always do, mind. It's how I know they're new." },
     ] },
     { advance_text = "Say nothing much.", blocks = [
@@ -11903,12 +11907,12 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "The House pays thirty a head. So go and work at The House." },
     ] },
     { advance_text = "Don't.", blocks = [
-        { type = "paragraph", content = "Thirty a head buys the cot and the line and a part, and she has spent four months doing exactly that arithmetic, and every answer it ever gave her belonged to somebody else's errand." },
+        { type = "paragraph", content = "Thirty a head buys the cot and the line and a part, and she has been doing exactly that arithmetic since the night Kess first put her on the feed line, and every answer it ever gave her belonged to somebody else's errand." },
         { type = "thought_bubble", props = { speaker = "player" }, content = "Fifteen a shift, six nights a week, standing in a room with a door in it. That is not what the money is for." },
     ] },
     { advance_text = "Take it.", blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "Fifteen's fine." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Course it is. You've sat there two nights and not once tried to tell me anything about yourself, and that's the whole interview." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Course it is. You've sat there and not once tried to tell me anything about yourself, and that's the whole interview." },
     ] },
     # THE OWNER — established, not named. Both of Sol's shipped lines on the subject, kept true.
     { advance_text = "Ask who you'd be working for.", blocks = [
@@ -11989,7 +11993,7 @@ text       = "Bastien. Grey through the sides now, a good coat, a drink he does 
 # at the same rung, and NOTHING on this page said so; the change is a targeted surface at a location she has
 # never had a reason to walk into, so a player who missed the line in the promotion scene had a garment in a
 # bag and no idea where it goes on. Named here because this is the card that is live across rungs 2 and 3.
-tip        = "He never once looked at your face. Three months in that cell and what he watched was the light under your sternum and what he wrote down was the number — and the light is out now, and the chip is on a bench four miles from here. So he will not know you. Keep working, and let him keep deciding: every step nearer that door has been his call so far and the only thing you control is being on the floor when he makes the next one. When something comes down from that room for you to wear, the staff toilet at the back is where it goes on. If you want the next chapter sooner, Support Us in the sidebar."
+tip        = "He never once looked at your face. The whole of that cell and what he watched was the light under your sternum and what he wrote down was the number — and the light is out now, and the chip is on a bench four miles from here. So he will not know you. Keep working, and let him keep deciding: every step nearer that door has been his call so far and the only thing you control is being on the floor when he makes the next one. When something comes down from that room for you to wear, the staff toilet at the back is where it goes on. If you want the next chapter sooner, Support Us in the sidebar."
 when = [
   { flag = "bastien_seen", op = "is_true" },
   { trait = "bar_rung", subject = "player", op = "lt", value = 4 },
@@ -12089,7 +12093,7 @@ blocks = [
     # AND THE REASON IT HOLDS. The chapter's whole permission, and it is canon, stated flat.
     { advance_text = "Wait for him to see you.", blocks = [
         { type = "paragraph", content = "He looks up. She stands in the middle of his floor holding four empty glasses and lets him." },
-        { type = "paragraph", content = "In three months in that cell he never once looked at her face. He looked at the light under her sternum, and he wrote what it said in a notebook, and the light is out now." },
+        { type = "paragraph", content = "In all that time in the cell he never once looked at her face. He looked at the light under her sternum, and he wrote what it said in a notebook, and the light is out now." },
     ] },
     { advance_text = "Let him look.", blocks = [
         { type = "paragraph", content = "So what is standing in his bar is a woman with a tray and somebody else's face, and what he is remembering, if he is remembering anything at all, is a number in a column." },
@@ -12259,7 +12263,7 @@ blocks = [
     # THE CALLBACK, cashed by the man who planted it.
     { advance_text = "Make him say it.", blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "You told me to think hard about that night before I got to it." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "I did. You've had every night since to think about it and you've turned up for every one, so I'll take it you thought." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "I did. You've had time to think about it and you've kept turning up, so I'll take it you thought." },
     ] },
     { advance_text = "Ask what it is.", blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "What happens in there." },
@@ -12923,7 +12927,7 @@ blocks = [
     # ⚠️ HE TALKS ABOUT HER, TO HER, IN THE THIRD PERSON, AND THE SCENE NEVER WINKS AT IT.
     { advance_text = "Ask if he's ever asked for anything else.", blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "Has he ever wanted something that wasn't paper." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Once. Year ago. I had a girl in a room under here that I'd bought off a bad debt, and I was finding out what she was, and he came through that far door in a state I'd never seen on him and took her out." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Once. I had a girl in a room under here that I'd bought off a bad debt, and I was finding out what she was, and he came through that far door in a state I'd never seen on him and took her out." },
     ] },
     { advance_text = "Keep him talking.", blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Furious. In a hurry. Wouldn't say why he cared and wouldn't be argued with, and I let him, because I've made a lot of money out of not arguing with him." },
@@ -13165,18 +13169,24 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "You're late." },
     ] },
     # THE OVERHEARD EXCHANGE. Not expository. The shape of eleven years, mid-crisis.
+    # ⚠️ THESE TWO LINES STAY UNATTRIBUTED PARAGRAPHS — beat_0121 (rev 172), and it is the point of the seam.
+    # npc_cain exists from this release, but he is not labelled until SHE names him, and here she has not:
+    # the line says so in its own words, "she has heard it once, through a wall." A name-tag on a voice she
+    # cannot place would answer the question the next beat is built to answer.
     { advance_text = "Listen.", blocks = [
         { type = "paragraph", content = "\"I know what I am.\" The voice is low and unhurried and there is old smoke under it, and she has heard it once, through a wall, on a floor, going through her wrong." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Three of them came down the strip. Not police. Not anybody's crew." },
         { type = "paragraph", content = "\"I counted them from the water. Get your coat.\"" },
     ] },
+    # ⚠️ THE SEAM. Everything after this thought-bubble is a labelled dialog block; everything before it is a
+    # paragraph. The doctrine at :3754 ends exactly where the fiction ends it.
     { advance_text = "Stand very still.", blocks = [
         { type = "paragraph", content = "Big through the shoulders. Grey coat. He does not look at her once, because she is a barmaid in a room he needs Bastien out of, and there is nothing in the world less interesting than that." },
         { type = "thought_bubble", props = { speaker = "player" }, content = "Cain." },
     ] },
     { advance_text = "Watch them.", blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "The wall. Eleven years of the wall, and you want me to walk out and leave it." },
-        { type = "paragraph", content = "\"I want you alive and the wall is paper. Bastien. Now.\"" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "I want you alive and the wall is paper. Bastien. Now." },
         { type = "paragraph", content = "And Bastien picks up his coat, because he is going to go, and when he goes the other one goes with him." },
     ] },
     # ⚠️ THE HINGE. Her reason is one sentence, and she takes about a second and a half over it.
@@ -13210,7 +13220,11 @@ blocks = [
     ] },
     { advance_text = "Say something.", blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "Don't." },
-        { type = "paragraph", content = "\"I wasn't going to.\" A beat. \"Not here.\"" },
+        # Split into two labelled lines around the beat — a dialog block carries one utterance, and the
+        # pause between these two is the whole content of the exchange.
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "I wasn't going to." },
+        { type = "paragraph", content = "A beat." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Not here." },
     ] },
     # THE UNITS. Three machines and one line, and the line is her own filing.
     { advance_text = "Then the wall goes.", blocks = [
@@ -13228,7 +13242,8 @@ blocks = [
     # Terminal beat — no advance_text. Cain fails at all of it, and she is walking, not carried.
     { blocks = [
         { type = "paragraph", content = "They come up the strip against the whole district going the other way. He does not have Bastien, he does not have the wall, and he has not once let go of her arm." },
-        { type = "paragraph", content = "\"There's a place,\" he says. \"You can ask me there, and I'll answer, and then you can decide what you want to do about it.\"" },
+        # The inline "he says" goes — the block's own label does that job now.
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "There's a place. You can ask me there, and I'll answer, and then you can decide what you want to do about it." },
     ] },
   ] } },
 ]
@@ -13303,21 +13318,30 @@ blocks = [
         { type = "paragraph", content = "It is not for holding somebody down. It is for getting into. There is a mirror bolted where the head would be, angled so that whoever is standing in it can watch their own hands work." },
     ] },
     { advance_text = "Keep the weapon up.", blocks = [
-        { type = "paragraph", content = "She has not lowered the taser since the alley. Her arm has been up for twenty minutes and it is starting to shake and she does not lower it." },
+        { type = "paragraph", content = "She has not lowered the taser since the alley. Her arm has been up the whole walk and it is starting to shake and she does not lower it." },
     ] },
+    # ⚠️ THREE CAIN LINES ADDED AT beat_0121 (rev 172), LO's ask, AND NOT ONE OF THEM ANSWERS ANYTHING. He had
+    # one line in this scene and it was the last line of the release, which left the man the whole chapter is
+    # about with no voice at the moment he finally has a face. What he gets is a voice and still no answers:
+    # the room, her arm, the weapon. He does not explain what he is, why he came through that cell door, or
+    # what the frame is for. The scene's design holds — his first words in the room are not an answer, and
+    # "Now put down the weapon, Wren" is still the only thing in it that lands.
     { advance_text = "Watch him.", blocks = [
         { type = "paragraph", content = "He shuts the door behind them and does not lock it. Takes the grey coat off. Puts it over the back of a chair, and stands at the bench with his back to her, and washes his hands." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Sit down or don't. The chair by the frame is the only one that holds weight." },
     ] },
     { advance_text = "Ask.", blocks = [
-        { type = "dialog", props = { speaker = "player" }, content = "You came through a door for me a year ago and you would not say why." },
+        { type = "dialog", props = { speaker = "player" }, content = "You came through the far door of that cell for me and you would not say why." },
         { type = "paragraph", content = "He keeps washing his hands." },
     ] },
     { advance_text = "Ask properly.", blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "They built me to kill you. I have had your name in my file since before I could hold it." },
         { type = "paragraph", content = "The water goes off." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "I know what they built you for. I have read the same page you have." },
     ] },
     { advance_text = "Raise it.", blocks = [
         { type = "paragraph", content = "She gets both hands on the thing and brings it up level, and it is a thirty-coin piece of grey plastic and they both know exactly what it is worth in this room." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Your arm is going. Both hands will not fix that and neither will the thing in them." },
     ] },
     { advance_text = "Wait for him to turn round.", blocks = [
         { type = "paragraph", content = "He dries his hands on a cloth, without hurrying, the way Kess dries his hands. Then he turns round and looks at her properly for the first time since the alley — at her face, which nobody has done since she bought a different one." },
@@ -13326,8 +13350,11 @@ blocks = [
     # ⚠️ The design book reserves warmth for Cain; this is its first spend and it is one word long. He does
     # not explain, does not touch her, and does not react to the weapon. He uses her name, and that is the
     # entire event. No apostrophe in the line.
+    # ⚠️ A LABELLED DIALOG BLOCK since beat_0121 (rev 172) — the name-tag reads "Cain" over the line where he
+    # says hers, which is the whole exchange in one screen. The escaped-quote paragraph form it used to carry
+    # is gone with the shape doctrine; note the apostrophe rule still applies to any line in this scene.
     { blocks = [
-        { type = "paragraph", content = "\"Now put down the weapon, Wren.\"" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Now put down the weapon, Wren." },
         { type = "thought_bubble", props = { speaker = "player" }, content = "Nobody has said that name to her since the penthouse. Nobody down here has ever heard it. There is a hundred and twenty coin of somebody else on her face and he has looked at it once and gone straight through." },
     ] },
   ] } },

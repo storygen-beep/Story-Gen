@@ -1258,6 +1258,19 @@ location      = "underworld_brothel"
 is_repeatable = true
 priority      = 3
 is_active     = true
+# ⚠️ max_triggers_per_day = 4 — beat_0121 (rev 172), and it ships WITH the payout correction below, because
+# one without the other is a defect either way. The finisher paid 10 while five separate places in the game
+# said "thirty a head"; correcting the code to 30 without a cap would have made this the worst money printer
+# in the game. THE CAP HAS TO BE ON THE TRIGGER: the model reads max_triggers_per_day and costs off the
+# trigger, and the engine enforces it at setup.canTriggerActivity keyed on the canvas NAME, reset on the
+# calendar-day rollover. A Charge cost is not a cap at all — activity_kess_cot refills the whole pool for 10
+# coin, so 15 Charge a client just means 6 clients per 10-coin night.
+# ⚠️ WHY FOUR. The arithmetic that made the number: a full Charge pool is ~6 clients (15 each), each 120 min,
+# so uncapped 30/head is +180 a night against a 10-coin refill and the 120-coin face falls inside one day —
+# which would delete the chapter's whole save-up beat. Four holds it at +120 a night: the face is still one
+# solid night's work, and the bar's 15-a-shift is still visibly the worse wage, which is the point of it.
+# The same reasoning as activity_bar_work's cap at rev 161; that card carries the canonical version.
+max_triggers_per_day = 4
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "brothel_hired", operator = "is_true" },
 ] }
@@ -1461,7 +1474,14 @@ destinationType          = "specific"
 locationId               = "underworld_brothel"
 time_progression_minutes = 120
 effects = [
-  { targetType = "player", trait = "coin",              op = "add", value = 10 },
+  # ⚠️ 10 -> 30 at beat_0121 (rev 172). THE PROSE WAS RIGHT AND THE CODE WAS WRONG, and this is the only
+  # payout in the whole brothel chain — nothing else in work/loop/finisher touches coin, so 10 was the
+  # entire take. Five separate player-facing places say thirty a head (Rue at the wall, Wren and Sol twice
+  # over in cap_sol_hires, the narration under it, and card O's tip), and activity_bar_work's own header
+  # states the intent outright: "FLAT at 15 coin every rung against Rue's 30 a head — the chapter's economic
+  # argument in one number." At 10 the bar paid MORE than The House, which inverted that argument and made
+  # Wren's "That is not what the money is for" a sacrifice she was not making. Capped on the trigger above.
+  { targetType = "player", trait = "coin",              op = "add", value = 30 },
   { targetType = "player", trait = "hygiene",           op = "add", value = -30, clamp = true },
   { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
@@ -2330,7 +2350,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "bar_rung", operator = "lt", value = 2 },
     ] } }, blocks = [
-      { type = "paragraph", content = "Glasses, tables, the three steps with a full tray. Nobody looks at her and nobody speaks to her except to want something, which after four months of being the most interesting thing in every room she is in is close to restful." },
+      { type = "paragraph", content = "Glasses, tables, the three steps with a full tray. Nobody looks at her and nobody speaks to her except to want something, which after a life of being the most interesting thing in every room she is in is close to restful." },
   ] },
   # RUNG 2 — the counter. Sol's own declared function, handed to her.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [

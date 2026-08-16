@@ -627,6 +627,35 @@ core_traits = { relation = 0 }
 flag_keys   = []
 arc_stages  = ["The burnout"]
 
+# ── npc_cain — beat_0121 (rev 172). THE SHAPE BECOMES A PERSON, and only from this release. ──────────────
+# ⚠️ THIS REVERSES A DELIBERATE DOCTRINE, not an oversight. 5_scenes:3754 has read "Cain is a SHAPE, never a
+# speaker: NO npc_cain, no portrait, no dialog block" since beat_0042, and it was still being obeyed — he
+# speaks five times in cap_the_raid and once in cap_the_lab, every line a bare paragraph with escaped quotes,
+# while Bastien standing beside him gets proper dialog blocks. The contrast WAS the device: the named man
+# gets a name-tag and the shape does not.
+# ⚠️ AND THE DOCTRINE'S OWN WORDING IS WHY IT ENDS HERE. "A shape" was true while he was a briefing-room name
+# and a voice through a wall. In this release he shuts a door, takes his coat off, washes his hands, looks at
+# her face and says her name. The shape resolved, and a device that outlives its reason stops reading as
+# mystery and starts reading as a formatting bug — which in a two-hander in a lit room is exactly how it
+# reads. LO's call: an NPC from this release on, paragraphs everywhere before it.
+# ⚠️ THE SEAM IS HER THOUGHT-BUBBLE "Cain." IN THE ALLEY, not the start of the scene. His first two lines
+# there stay unattributed paragraphs because she cannot place the voice yet (the line itself says so — "she
+# has heard it once, through a wall"). Everything from the naming onward is a dialog block. captivity_cain
+# stays paragraphs end to end; she does not know who he is in that room.
+# ⚠️ NO SCHEDULE ROW, AND THAT IS LOAD-BEARING. Same rule as Bastien above: a row would park him at a
+# location, give him a nav-card badge and put him on the Schedules page. He has no reachable location —
+# cain_lab is nav-invisible and sealed the moment lab_seen sets. He also has no quest cards, so he draws no
+# Quests section. He is a speaker and nothing else, which is the whole of what this release needs.
+# MEDIA: one new slot, portraits/cain.jpg — expect the MISSING count to rise by one until it is harvested.
+[[npcs]]
+id          = "npc_cain"
+name        = "Cain"
+description = "The rogue asset the company built her to kill — an early build with a lot of miles on him, taking Vance apart a year at a time on paper and putting the good pieces in himself. Bastien has supplied him for eleven years and has never had an address. Speaks little, explains nothing, and is the only person in the Reach who has ever looked at her face and used her name. NOT a conquest and NOT reachable: no schedule, no hub, no location that stays open."
+portrait    = "cain.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = ["The shape"]
+
 # ─── Clothing — the worn-state COVER catalog (beat_0015) ──────────────────────
 # Two "dress"-slot looks she swaps between at activity_wren_change, the Act-1 change surface in her room
 # (3_activities). ⚠️ NOT the rack — the rack is the engine-injected wardrobe page and it lives at
