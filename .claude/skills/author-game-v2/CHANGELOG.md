@@ -5,6 +5,31 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-16 (later still — the fix that measured itself wrong)
+
+- **⚠️ THE MENU FIX IN THE PASS BELOW DID NOT WORK, AND THE LEDGER SAID IT DID.** It gated 57
+  room choices, moved *"choices open on turn one"* from 126/166 to 70/166, reported that as the
+  fix, and left `show_when_locked = true` on every one of them. A locked choice with that flag
+  **still renders** — greyed, but a line on the list. Counted afterwards, on the built game:
+  **164 of 166 room rows still appeared on night one.** The player met the same wall with half
+  of it grey, which is worse than leaving it alone. Found by LO playing the shipped build.
+
+  This is the **denominator trap from study 6, committed by the author of study 6**, one day
+  later. The number that was easy to move got moved; the number the player sees was never
+  computed by anything in the file.
+
+  - **`lint_screen_shape` now LEADS with `median N ROWS render on a screen at turn one (max M)`**
+    and flags any screen rendering 8+. Rows = unlocked + `show_when_locked`. Every other figure
+    in that lint counts something the player cannot see; this one is the wall.
+  - Measured across the three games the moment it existed: forty_miles **median 8 → 4** after
+    the repair, steam median 3 (max 17), back_home median 2.
+  - **Doctrine, now explicit:** one visible locked door per screen, not five. Keep the
+    lowest-threshold gate visible — that is the next thing the player earns, and it is what
+    gate 9 counts — and hide the rest. Flag-gated choices stay hidden regardless: a discovery
+    must not advertise itself.
+
+---
+
 ## 2026-08-16 (later — the Forty Miles repair pass)
 
 - **⚠️ `engine.md` §21 was teaching an op the engine does not run, and two games wrote 105 of

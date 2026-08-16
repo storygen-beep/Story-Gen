@@ -76,7 +76,6 @@ nodeId     = "rung_bev_the_forty_a_week.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_bev", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Get her to show you the wastage sheet."
@@ -85,7 +84,6 @@ nodeId     = "rung_bev_the_wastage_sheet.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_bev", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Ask what sorted meant."
@@ -94,7 +92,6 @@ nodeId     = "rung_bev_the_other_woman.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_bev", trait_key = "relation", operator = "gte", value = 20 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Ask her what she does on days."
@@ -103,7 +100,6 @@ nodeId     = "rung_bev_days.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_bev", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -342,7 +338,6 @@ nodeId     = "rung_nunn_the_eleventh_name.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_nunn", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Ask to see the notebook."
@@ -351,7 +346,6 @@ nodeId     = "rung_nunn_the_notebook.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_nunn", trait_key = "relation", operator = "gte", value = 20 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Tell him Friday will be short."
@@ -365,7 +359,6 @@ nodeId     = "rung_nunn_get_in.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_nunn", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 
 # ⚠️ NOT THE PAYMENT. `[settings.rent]` takes the 245 at the Friday rollover and this
@@ -548,7 +541,6 @@ nodeId     = "rung_ossie_looks.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_ossie", trait_key = "relation", operator = "gte", value = 20 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Ask about the two shirts."
@@ -566,7 +558,6 @@ nodeId     = "rung_ossie_the_calendar_answer.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_ossie", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Find out what he is on."
@@ -580,7 +571,6 @@ nodeId     = "rung_ossie_stay.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_ossie", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -776,7 +766,6 @@ nodeId     = "rung_hal_the_second_table.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_hal", trait_key = "relation", operator = "gte", value = 20 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Let him talk about home."
@@ -790,7 +779,6 @@ nodeId     = "rung_hal_ask.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_hal", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -978,7 +966,6 @@ nodeId     = "rung_denny_the_cab_after.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Ask him about his sister."
@@ -987,7 +974,6 @@ nodeId     = "rung_denny_the_sister.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_denny", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Give him something to say on nineteen."
@@ -996,7 +982,6 @@ nodeId     = "rung_denny_broadcast.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -1053,7 +1038,6 @@ nodeId     = "rung_denny_what_they_say.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_denny", trait_key = "relation", operator = "gte", value = 20 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -1271,7 +1255,6 @@ nodeId     = "rung_tam_sorry.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "relation", operator = "gte", value = 20 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Be there on the last morning."
@@ -1285,7 +1268,6 @@ nodeId     = "rung_tam_the_end_of_the_month.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Be there on the twenty-eighth."
@@ -1303,7 +1285,6 @@ nodeId     = "rung_tam_nothing_to_trade.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]

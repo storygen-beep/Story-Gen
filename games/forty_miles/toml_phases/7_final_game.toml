@@ -50,7 +50,7 @@ title           = "Forty Miles"
 description     = "Kelbrook Services, ten at night to six in the morning, and nothing open either way for forty miles. She is the only person on site. The man who owns it paid off her debt and has never once mentioned it."
 starting_canvas = "canvas_opening"
 quests_engine   = "v2"
-version         = "0.1.1"
+version         = "0.1.2"
 
 [time]
 starting_hour = 22          # Bev has just gone. The first handover is the opening.
@@ -1055,7 +1055,6 @@ nodeId     = "rung_shop_tables.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Watch the monitor cycle."
@@ -1064,7 +1063,6 @@ nodeId     = "rung_shop_monitor.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Serve whoever comes through the door."
@@ -1078,7 +1076,6 @@ nodeId     = "rung_shop_glass.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Buy something off the hot counter (£3)."
@@ -1140,7 +1137,6 @@ nodeId     = "rung_shop_vest.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Sell a shower token off the book."
@@ -1163,7 +1159,6 @@ nodeId     = "rung_shop_bare.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Put the radio on."
@@ -1233,7 +1228,6 @@ nodeId     = "rung_shop_roll.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "trade", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Watch the road for her headlights."
@@ -1242,7 +1236,6 @@ nodeId     = "rung_shop_headlights.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Count up the eleven weeks."
@@ -1260,7 +1253,6 @@ nodeId     = "rung_shop_first_hour.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Cover tonight's shortfall out of your own money (£8)."
@@ -1889,7 +1881,6 @@ nodeId     = "rung_showers_the_hot_water.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Look at the key on your belt."
@@ -1904,7 +1895,6 @@ costs      = [ { trait = "money", value = 6 } ]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Put a pound in the dryer (£1)."
@@ -1919,7 +1909,6 @@ nodeId     = "rung_showers_occupied.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Decide who gets it free."
@@ -1939,7 +1928,6 @@ nodeId     = "rung_showers_token_here.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "trade", operator = "gte", value = 55 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -2260,7 +2248,6 @@ nodeId     = "rung_stock_the_fourteen_days.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "trade", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Guess what is in there."
@@ -2286,7 +2273,6 @@ nodeId     = "rung_stock_bring_him.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "trade", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 # ── THE DOOR. Gated on a key v0.1 never grants. This is the release's opening. ─
 [[canvases.nodes.exit_block.choices]]
@@ -2527,7 +2513,6 @@ nodeId     = "rung_forecourt_mast.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Answer the hatch in what you slept in."
@@ -2550,7 +2535,6 @@ nodeId     = "rung_forecourt_coat.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Put diesel in your own car (£20)."
@@ -2565,7 +2549,6 @@ nodeId     = "rung_forecourt_seen_top.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 55 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -2805,7 +2788,6 @@ nodeId     = "rung_park_slow_walk.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Look at the two empty lamp columns."
@@ -2819,7 +2801,6 @@ nodeId     = "rung_park_cb_about_her.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Go past the last lamp."
@@ -2828,7 +2809,6 @@ nodeId     = "rung_park_dark_end.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Hold the whole site until six."
@@ -2837,7 +2817,6 @@ nodeId     = "rung_park_site_hers.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 55 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -3054,7 +3033,6 @@ nodeId     = "rung_bay9_up_in_it.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Look at the mark on the glass."
@@ -3063,7 +3041,6 @@ nodeId     = "rung_bay9_window_line.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Listen to the night heater."
@@ -3081,7 +3058,6 @@ nodeId     = "rung_bay9_footwell.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Set the terms for the rest of the month."
@@ -3090,7 +3066,6 @@ nodeId     = "rung_bay9_terms.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "trade", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -3299,7 +3274,6 @@ nodeId     = "rung_tyre_pit.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Look at the rope across the pit."
@@ -3308,7 +3282,6 @@ nodeId     = "rung_tyre_the_rope.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Listen to the compressor."
@@ -3326,7 +3299,6 @@ nodeId     = "rung_tyre_the_isolator.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Take a cash job off him."
@@ -3335,7 +3307,6 @@ nodeId     = "rung_tyre_cash_job.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "trade", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -3509,7 +3480,6 @@ nodeId     = "rung_static_cold.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Stand at the window for a signal."
@@ -3518,7 +3488,6 @@ nodeId     = "rung_static_phone.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Wash in the van."
@@ -3940,7 +3909,6 @@ nodeId     = "rung_shop_the_laminated_card.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Go through the list of regulars."
@@ -3958,7 +3926,6 @@ nodeId     = "rung_shop_lost_property.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Look at the ice machine."
@@ -3967,7 +3934,6 @@ nodeId     = "rung_shop_ice_machine.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Go and stand in the stock room for a minute."
@@ -3976,7 +3942,6 @@ nodeId     = "rung_day_stock_room.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -4137,7 +4102,6 @@ nodeId     = "rung_dawn_work_full.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Sort the towel shelf out."
@@ -4160,7 +4124,6 @@ nodeId     = "rung_showers_extractor.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Wipe the bench down."
@@ -4174,7 +4137,6 @@ nodeId     = "rung_dawn_last_one.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Take one of them into four."
@@ -4183,7 +4145,6 @@ nodeId     = "rung_dawn_cubicle_four.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -4360,7 +4321,6 @@ nodeId     = "rung_park_frost.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Work out who is new."
@@ -4369,7 +4329,6 @@ nodeId     = "rung_park_who_is_new.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Go in between two cabs."
@@ -4378,7 +4337,6 @@ nodeId     = "rung_park_between_cabs.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "See one of them off properly."
@@ -4387,7 +4345,6 @@ nodeId     = "rung_dawn_see_off.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -4547,7 +4504,6 @@ nodeId     = "rung_static_two_bags_again.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Listen to the gravel."
@@ -4565,7 +4521,6 @@ nodeId     = "rung_evening_bay_light.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -4734,7 +4689,6 @@ nodeId     = "rung_tyre_day_bunk.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Be there when the phone goes."
@@ -4752,7 +4706,6 @@ nodeId     = "rung_tyre_the_grabber.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Look at the four shirts."
@@ -4761,7 +4714,6 @@ nodeId     = "rung_tyre_the_four_shirts.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Look at the calendar."
@@ -5019,7 +4971,6 @@ nodeId     = "rung_stock_back_door.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Get up for the first Tuesday."
@@ -5028,7 +4979,6 @@ nodeId     = "rung_stock_the_first_tuesday.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Put it on the wastage sheet instead."
@@ -5037,7 +4987,6 @@ nodeId     = "rung_stock_the_range.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "trade", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Look at the hasp."
@@ -5148,7 +5097,6 @@ nodeId     = "rung_shop_the_snib.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Get through a dead Saturday."
@@ -5162,7 +5110,6 @@ nodeId     = "rung_weekend_taxis.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Get through it with the fleece off."
@@ -5180,7 +5127,6 @@ nodeId     = "rung_shop_counter_edge.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Let one of them stay after you lock the door."
@@ -5189,7 +5135,6 @@ nodeId     = "rung_weekend_after_hours.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -5661,7 +5606,6 @@ nodeId     = "rung_forecourt_night_hatch.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Check the side door behind you."
@@ -5684,7 +5628,6 @@ nodeId     = "rung_forecourt_the_road.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Watch the junction for brake lights."
@@ -5693,7 +5636,6 @@ nodeId     = "rung_forecourt_the_junction.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Stand under it in the rain."
@@ -5702,7 +5644,6 @@ nodeId     = "rung_forecourt_rain.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -6397,7 +6338,6 @@ nodeId     = "rung_showers_three.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Use cubicle three yourself."
@@ -6406,7 +6346,6 @@ nodeId     = "rung_showers_cubicle_three.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave three unlocked and get in it."
@@ -6415,7 +6354,6 @@ nodeId     = "rung_showers_unlocked.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Let the first of the morning in."
@@ -6443,7 +6381,6 @@ nodeId     = "rung_showers_the_quiet_hour.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Sit on the warm end of the bench."
@@ -6843,7 +6780,6 @@ nodeId     = "rung_bay9_the_locker.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Stand at the wheel arch in the hour before."
@@ -6852,7 +6788,6 @@ nodeId     = "rung_bay9_the_hour_before.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Look at the empty bay."
@@ -6861,7 +6796,6 @@ nodeId     = "rung_bay9_the_next_one.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "trade", operator = "gte", value = 15 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Get up in it one more time before he goes."
@@ -6870,7 +6804,6 @@ nodeId     = "rung_bay9_before_he_rolls.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -8156,7 +8089,6 @@ nodeId     = "rung_weekend_park_two.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Work the whole row."
@@ -8165,7 +8097,6 @@ nodeId     = "rung_weekend_park_row.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nights", operator = "gte", value = 55 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -8781,7 +8712,6 @@ nodeId     = "rung_bev_the_forty_a_week.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_bev", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Get her to show you the wastage sheet."
@@ -8790,7 +8720,6 @@ nodeId     = "rung_bev_the_wastage_sheet.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_bev", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Ask what sorted meant."
@@ -8799,7 +8728,6 @@ nodeId     = "rung_bev_the_other_woman.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_bev", trait_key = "relation", operator = "gte", value = 20 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Ask her what she does on days."
@@ -8808,7 +8736,6 @@ nodeId     = "rung_bev_days.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_bev", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -9047,7 +8974,6 @@ nodeId     = "rung_nunn_the_eleventh_name.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_nunn", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Ask to see the notebook."
@@ -9056,7 +8982,6 @@ nodeId     = "rung_nunn_the_notebook.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_nunn", trait_key = "relation", operator = "gte", value = 20 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Tell him Friday will be short."
@@ -9070,7 +8995,6 @@ nodeId     = "rung_nunn_get_in.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_nunn", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 
 # ⚠️ NOT THE PAYMENT. `[settings.rent]` takes the 245 at the Friday rollover and this
@@ -9253,7 +9177,6 @@ nodeId     = "rung_ossie_looks.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_ossie", trait_key = "relation", operator = "gte", value = 20 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Ask about the two shirts."
@@ -9271,7 +9194,6 @@ nodeId     = "rung_ossie_the_calendar_answer.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_ossie", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Find out what he is on."
@@ -9285,7 +9207,6 @@ nodeId     = "rung_ossie_stay.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_ossie", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -9481,7 +9402,6 @@ nodeId     = "rung_hal_the_second_table.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_hal", trait_key = "relation", operator = "gte", value = 20 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Let him talk about home."
@@ -9495,7 +9415,6 @@ nodeId     = "rung_hal_ask.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_hal", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -9683,7 +9602,6 @@ nodeId     = "rung_denny_the_cab_after.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Ask him about his sister."
@@ -9692,7 +9610,6 @@ nodeId     = "rung_denny_the_sister.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_denny", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Give him something to say on nineteen."
@@ -9701,7 +9618,6 @@ nodeId     = "rung_denny_broadcast.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "seen", operator = "gte", value = 35 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -9758,7 +9674,6 @@ nodeId     = "rung_denny_what_they_say.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_denny", trait_key = "relation", operator = "gte", value = 20 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]
@@ -9976,7 +9891,6 @@ nodeId     = "rung_tam_sorry.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "relation", operator = "gte", value = 20 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Be there on the last morning."
@@ -9990,7 +9904,6 @@ nodeId     = "rung_tam_the_end_of_the_month.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Be there on the twenty-eighth."
@@ -10008,7 +9921,6 @@ nodeId     = "rung_tam_nothing_to_trade.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "relation", operator = "gte", value = 40 },
 ] }
-show_when_locked = true
 
 
 [[canvases]]

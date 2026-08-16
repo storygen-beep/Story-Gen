@@ -516,6 +516,7 @@ def lint_screen_shape(model, game):
         return False
 
     out, tot, opened, menus, frozen = [], 0, 0, 0, 0
+    rows = []
     for c in model:
         if not c["rep"] or c["id"] not in located:
             continue
@@ -523,6 +524,20 @@ def lint_screen_shape(model, game):
         if not chs:
             continue
         n_open = sum(1 for ch in chs if not ((ch.get("conditions") or {}).get("items")))
+        # ⚠️ ROWS ON SCREEN — the only number here the PLAYER can see, and the one that was
+        # missing. A locked choice with `show_when_locked` still renders: greyed, but a line
+        # on the list. Measured failure: a pass gated 57 room choices, moved "open on turn
+        # one" from 126/166 to 70/166, and left show_when_locked on all of them — so 164 of
+        # 166 rows still rendered and the game played exactly as wide as before. The author
+        # optimised the number that was reported and never looked at the wall.
+        n_rows = n_open + sum(1 for ch in chs
+                              if (ch.get("conditions") or {}).get("items")
+                              and ch.get("show_when_locked"))
+        rows.append(n_rows)
+        if n_rows >= 8:
+            out.append(dict(kind="rows", id=c["id"], loc=c["loc"],
+                            note=f"{n_rows} rows RENDER on turn one ({n_open} clickable, "
+                                 f"{n_rows - n_open} greyed) out of {len(chs)} authored"))
         tot += len(chs)
         opened += n_open
         if len(chs) >= 2:
@@ -537,7 +552,8 @@ def lint_screen_shape(model, game):
     # Population labelled on purpose: the anchoring lint counts ROOM screens only, this one
     # counts every located repeatable screen. Two adjacent numbers over different populations
     # is the denominator trap, and naming it is cheaper than reconciling it.
-    summary = (f"{opened}/{tot} location choices open on turn one · "
+    summary = (f"median {_median(rows)} ROWS render on a screen at turn one "
+               f"(max {max(rows) if rows else 0}) · {opened}/{tot} location choices open · "
                f"{frozen}/{menus} standing menus never change their prose "
                f"(rooms AND character hubs)")
     return summary, out

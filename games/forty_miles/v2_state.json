@@ -54,7 +54,7 @@
     "deletion_test": "Cut Bev and nothing Robyn does at night gets measured by anyone who understands it. Nunn is leverage and the drivers are appetite; Bev is the only person whose read on the site is worth having, and the handover is the game's only mirror.",
     "release_41_test": "A new regular on a new night, or an hour of the site she did not previously hold. Neither the road nor the rota can be exhausted.",
     "crudest_repeatable_surface": "The shower-block corridor — tokens, cubicles, the drain, and the fact that she is the one who holds the key to it. Entered nightly from v0.1 onward.",
-    "last_read_at_release": "0.1.1"
+    "last_read_at_release": "0.1.2"
   },
   "board": {
     "ascent_tiers": [
@@ -514,6 +514,33 @@
         "note": "Live in the rebuilt HTML, not grepped: opening funnel end to end to free roam; '💭 You are thinking:' renders in second person; `count` falls 100 → 96 (it never moved once in 0.1); RentDay charges £245 and prints £ (300 → 55); hub_shop_counter_early is 4 open / 4 visibly locked at tier 0 and 8 open at tier 60; three objectives render in the sidebar with places, verbs and counters; all eight random encounters fire on location entry at 13–24%, and the three tier-gated ones are correctly silent at zero."
       },
       "shipped": "2026-08-16"
+    },
+    {
+      "version": "0.1.2",
+      "subject": "The menus, actually",
+      "want_line": "No new content. 0.1.1 claimed to fix the wall of choices and did not, and a release that does not do what its own ledger says it did is the thing this file exists to stop.",
+      "added": {
+        "units": 0,
+        "words": 0,
+        "locations": 0,
+        "characters": 0
+      },
+      "opened": [
+        "Nothing new. This release CLOSES rows rather than opening content."
+      ],
+      "gates": {
+        "passed": 24,
+        "of": 24
+      },
+      "fixes": [
+        "⚠️ 0.1.1's menu fix did not work and the ledger said it did. 57 room choices were gated and every one kept show_when_locked = true, so they rendered greyed instead of not rendering. Measured after the fact: 164 of 166 room rows still appeared on night one. The player met the same wall with half of it grey, which is worse than before.",
+        "88 gated choices across rooms AND character hubs no longer render until earned. Each screen keeps exactly ONE visible locked door — the lowest-threshold gate on it, which is the next thing you will unlock — so gate 9 still has 30 to count.",
+        "Flag-gated choices untouched: a discovery must not advertise itself, and back_room_key stays the release's visible locked door."
+      ],
+      "playtest": {
+        "note": "Live, on the built HTML: hub_shop_counter_early renders 5 rows at tier 0 (4 clickable + 1 greyed) and 8 rows at tier 60 (all clickable). Before this release it rendered 8 rows at both."
+      },
+      "shipped": "2026-08-16"
     }
   ],
   "promises": [
@@ -590,6 +617,10 @@
     {
       "at": "0.1.1",
       "note": "Bev's arc was written up to her declared ceiling and it changes what she is. Tier 1 (crude about the drivers, as trade talk) sits on her three ungated rungs; tier 2 (crude about Robyn, to her face) on the two at relation 20; tier 3 is a new node on rung_bev_days at relation 40 — spoken and done, in the stock room, on the clock, exactly as the ceiling declares. It hangs off her top rung rather than a ninth hub choice because her hub is already at the gate-20 cap of eight. Cost, stated plainly: the professional, entirely non-sexual handover WAS the character, and this makes the top of her ladder something else. The Want's own line is why it was done anyway — she is the deletion test, and she was the only person on site with no heat."
+    },
+    {
+      "at": "0.1.2",
+      "note": "⚠️ THE MEASUREMENT WAS THE BUG. 0.1.1 moved 'choices open on turn one' from 126/166 to 70/166 and reported that as the menu fix. Nobody counted ROWS ON SCREEN, and that is the only number the player can see: a locked choice with show_when_locked still draws a line on the list. Rows went 164 -> 95 -> 88 across the two passes; the first pass moved them by TWO. gates.py's screen-shape lint now leads with 'median N ROWS render on a screen at turn one' so the next author cannot optimise the reported number while the wall stays up. Same denominator trap as study 6, committed by the person who wrote study 6."
     }
   ]
 }
