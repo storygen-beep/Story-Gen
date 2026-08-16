@@ -2040,3 +2040,463 @@ time_progression_minutes = 30
 flagEffects = [
   { targetType = "player", flag = "glitch_iii_seen", op = "set" },
 ]
+
+# ═══ activity_buy_face — beat_0097 (rev 148). THE FACE's one big purchase. ═══════════════════════════════
+# Wren-solo @underworld_market. Repeatable trigger (so the card survives an unaffordable visit), pri 3,
+# gated wall_understood is_true + face_bought is_false. The BUY is a choice at 120 coin.
+#
+# ⚠️ 120 COIN, AND THE NUMBER IS THE POINT. The chapter's economy before this is 10-coin nights and 25-coin
+# parts against 30-a-head at The House and a pit win; 120 is four heads or six wins, which is three or four
+# in-game days of deliberate earning. That is the largest single ask the game has ever made and it should be:
+# this is the beat where she stops living hand-to-mouth on someone else's errands and saves up for something
+# she chose. A cheap face would make the decision free, and a free decision is not a decision.
+# ⚠️ THE CARD IS GATED ON THE TRIGGER BY STATE, AND THE PRICE IS ON THE CHOICE. She can stand at the row
+# with 40 coin and read what it costs — the choice simply cannot be afforded, which is the engine's own
+# behaviour for a `costs` block (it gates AND deducts). No show_when_locked needed: an unaffordable choice
+# already renders with its price in the label, and gate 21's rule is that a price lives on its label.
+# ⚠️ WHAT SHE IS BUYING IS NOT CLOTHES. The row at the far end of this market is where the stock has faces —
+# the location's own shipped description says so — so the thing on sale here is an identity: a face, the
+# papers under it, and the kit that makes the story hold. The garment carries all of it because the portrait
+# resolver has exactly one axis (0_systems_spec's cover_stranger note spells the compression out).
+# ⚠️ NO NAME IS CHOSEN ON SCREEN and none is ever spoken by the game. She works under it for a whole chapter
+# and the player never learns what she calls herself, which is the correct amount of nothing: the release
+# ends on somebody using her REAL name, and every invented one before that would be a rehearsal for it.
+# MEDIA: reuses locations/underworld_market.jpg, as activity_buy_part and underworld_market_shop already do.
+[[canvases]]
+id          = "activity_buy_face"
+name        = "The far end of the row"
+description = "beat_0097 (rev 148). Wren-solo @underworld_market — the chapter's one big purchase. Repeatable trigger (so the card survives an unaffordable visit and never silently vanishes), pri 3, gated wall_understood is_true + face_bought is_false. Buy = 120 coin -> grants cover_stranger UN-WORN + SETS face_bought, +90 min. 120 is four heads at The House or six pit wins: the largest single ask in the game, and deliberately so, because this is the first thing she has ever saved up for on her own account. What is sold here is an identity and not an outfit — the market's own description sells people off this row. She is never named."
+[canvases.trigger]
+location      = "underworld_market"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "wall_understood", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "face_bought",     operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The far end of the row"
+blocks = [
+  { type = "image", props = { file = "locations/underworld_market.jpg", description = "Dim black-market stalls under a low ceiling, weapons and gear laid on cloth, cages further back.", search_queries = ["black market weapons stall dim", "underground arms bazaar cages back"] } },
+  { type = "paragraph", content = "Past the blades, past the drawers of dead components, past the pens. The last three tables are curtained on three sides and the woman behind them does not sell anything you can hold up to the light." },
+  { type = "paragraph", content = "She deals in the paperwork of being somebody — a face, a history thin enough not to check and thick enough not to ask about, and the clothes that make a stranger believe both without being told." },
+  { type = "paragraph", content = "The price is the price. She does not haggle and she does not explain what any of it costs her to arrange." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Buy the face. (120 coin.)"
+targetType = "node"
+nodeId     = "activity_buy_face.buy"
+costs      = [{ trait = "coin", value = 120 }]
+flagEffects = [
+  { targetType = "player", flag = "face_bought", op = "set" },
+]
+wardrobeEffects = [
+  { action = "add", item_id = "cover_stranger" },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Not yet."
+targetType = "location"
+locationId = "underworld_market"
+
+# ── Node: buy. ⚠️ THE WORK IS DONE ON HER, and the register is Kess's clinical row rather than anything
+# erotic — a woman with instruments changing what a face reports, described as procedure. It is the third
+# time in this game somebody has opened her up on a bench for money, and she notices that and does not
+# make a speech about it.
+[[canvases.nodes]]
+id   = "buy"
+name = "The face"
+blocks = [
+  { type = "paragraph", content = "It takes the afternoon and most of it is sitting still. The woman works close, without conversation, the way Kess works, and asks her exactly one question, which is whether anyone has ever taken a print of her." },
+  { type = "paragraph", content = "She says no. It is the first lie the face tells and it is told before the face exists." },
+  { type = "paragraph", content = "What comes out at the end is not a mask and does not feel like one. It is a set of small differences that add up to somebody else, and a bag of clothes that belong to the somebody else rather than to her." },
+  { type = "paragraph", content = "\"Don't wear it in front of anyone who knew the old one,\" the woman says, folding the bag shut. \"That's not me being careful. That's the whole of what you paid for.\"" },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take it back to the berth."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_market"
+time_progression_minutes = 90
+
+# ═══ activity_bar_work — beat_0098 (rev 149). The shift, and the ladder it climbs. ══════════════════════
+# Wren-solo @underworld_bar. Repeatable, pri 3, gated bar_hired is_true + cover_stranger EQUIPPED.
+#
+# ⚠️ THE COVER CLAUSE IS ON THE TRIGGER, NOT A CHOICE. Out of the bought face she is Wren, and Wren does not
+# have this job — Sol hired a stranger. So the whole card is absent when she is not wearing it, which is the
+# same shape the Renner depot used (5_scenes.toml:534, "no working the floor out of cover"). It is also a
+# quiet teaching surface: a player who takes the kit off and wonders where her job went learns the rule.
+#
+# ⚠️ THE PAY IS FLAT AND THE ATTENTION IS NOT. Fifteen a shift at every rung, forever, against Rue's thirty
+# a head. That is deliberate and it is the chapter's economic argument in one number: she is not here for
+# money, and a wage that climbed with the ladder would quietly turn the promotions into a payline and make
+# the last rung read as a raise. What climbs is npc_bastien.relation — 2 / 3 / 3 / 1 per shift — which is
+# the axis every promotion capstone reads.
+# ⚠️ RELATION ON A MAN SHE HAS NOT MET IS CORRECT HERE and is not a fudge. He is in a room with the door
+# open, in a chair placed to see the floor, four hours a night. Relation in this game has always meant "what
+# he thinks of her", and what he thinks of her is being formed across every one of these shifts without a
+# word passing between them. It is the first time the meter has ever run one-way.
+# ⚠️ FOUR BANDS, EXCLUSIVE BY CONSTRUCTION — adjacent [group]s merge into ONE if/elseif chain and the first
+# match wins, so the gte/lt pairs below cannot both match. Same discipline as activity_buy_part's part_spec.
+# ⚠️ THE SHIFT CHOICES CARRY THE EFFECTS, NOT THE EXIT. Choice effects fire on CLICK and exit effects fire on
+# RENDER, and per-rung pay/relation cannot live on a single shared exit at all — so each rung gets its own
+# gated choice, all four targeting the same `shift` node, whose bands render what the night was actually like.
+#
+# ⚠️ CEILING ROW (b) — THE BAR FLOOR — IS FIRST SPENT AT RUNG 3 AND ONLY THERE. Rungs 1 and 2 are un-crude:
+# work, noise, tired feet. Rung 3 is public, semi-sexual and repeatable, and the declared row is EXPOSURE AND
+# HANDLING, NOT SEX — she is looked at, and occasionally touched by men who have decided the room permits it,
+# and the prose is crude only at the point where a hand actually lands. No act, no finish, no drain: this is
+# a working floor and not a sex loop, and the sex in this chapter belongs to the back room.
+# MEDIA: reuses locations/underworld_bar.jpg on the base; the shift node's rung-3 band carries the one new
+# slot, sex/bar_floor_handled_t4 — a pool, because it is re-entered every shift for the rest of the chapter.
+[[canvases]]
+id          = "activity_bar_work"
+name        = "Take a shift at the Undertow"
+description = "beat_0098 (rev 149). Wren-solo @underworld_bar. Repeatable, pri 3, gated bar_hired is_true + clothing_item cover_stranger equipped (out of the face she is Wren, and Wren does not have this job — the shipped Renner-depot shape). FOUR exclusive [group] bands on bar_rung: 1 the floor / 2 the counter / 3 the floor in less / 4 the room is open to her. Pay is FLAT at 15 coin every rung against Rue's 30 a head — the chapter's economic argument in one number, and a wage that climbed would turn the promotions into a payline. What climbs is npc_bastien.relation (+2/+3/+3/+1), the axis every promotion capstone reads; relation on a man she has not met is correct, because he is in a chair placed to see the floor four hours a night and the meter has never run one-way before. Costs 15 Charge and 240 min (a whole evening), CAPPED at 2 shifts a day on the trigger — without the cap this was a money printer, since Charge refills for 10 coin and 15-coin shifts were unlimited. First spend of ceiling row (b) at rung 3: exposure and handling, not sex."
+[canvases.trigger]
+location      = "underworld_bar"
+is_repeatable = true
+priority      = 3
+is_active     = true
+# ⚠️ max_triggers_per_day = 2 — beat_0111 (rev 161), AND IT IS A REAL FIX, NOT DRESSING. Without it this card
+# was a money printer: 15 coin a shift, unlimited shifts, against a 10-coin cot night that restores the whole
+# Charge pool — roughly six shifts per night for a net +80 coin, repeatable forever. The audit gate names the
+# shape ("standing surfaces print money without limit") and vesper went from two of them to three when this
+# card shipped. The other two (the pit, the Sunday hunt) are pre-existing; this one was mine.
+# ⚠️ THE CAP HAS TO BE ON THE TRIGGER. A `costs` block on the CHOICE does not satisfy it and does not stop it:
+# the model reads max_triggers_per_day and costs off the TRIGGER (gates.py:419-420), and more to the point a
+# Charge cost is not a cap at all when Charge refills for 10 coin. Only a per-day limit bounds it.
+# ⚠️ TWO AND NOT ONE. Two evenings' work a night is the most the fiction supports, and it keeps the ladder at
+# roughly four in-game days (relation 6/12/18 at +2/+3/+3). One would double that for no gain.
+# The engine enforces it at setup.canTriggerActivity (v2.py:4495, :4526), keyed on the canvas NAME and reset
+# on the calendar-day rollover — so a name collision would share the limit. This name is unique.
+# ⚠️ IT CANNOT STALL HER. The 120-coin face is bought BEFORE the job exists, out of The House and the pit, and
+# the only thing bar money has to cover afterwards is the 30-coin taser. Capping at 30 a day blocks nothing.
+max_triggers_per_day = 2
+# ⚠️ beat_0107 (rev 157) — raid_done is_false. Three machines came through the wall between this room and
+# the bar and set eleven years of paper alight; the Undertow does not open the next evening, and a shift card
+# that survived the fire would be the surface contradicting the scene. Her income falls back to The House and
+# the pit, both of which still stand, and the ruin crawl takes over as the standing content at this location.
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "bar_hired", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "raid_done", operator = "is_false" },
+  { type = "clothing_item", item_id = "cover_stranger", operator = "equipped" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Take a shift at the Undertow"
+blocks = [
+  { type = "image", props = { file = "locations/underworld_bar.jpg", description = "A dim underground bar, low light, a door at the back with no handle on this side.", search_queries = ["dim underground speakeasy bar red light", "quiet noir back-alley bar low light"] } },
+  # RUNG 1 — the floor. Invisible, and that is the job.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "bar_rung", operator = "lt", value = 2 },
+    ] } }, blocks = [
+      { type = "paragraph", content = "Glasses, tables, the three steps with a full tray. Nobody looks at her and nobody speaks to her except to want something, which after four months of being the most interesting thing in every room she is in is close to restful." },
+  ] },
+  # RUNG 2 — the counter. Sol's own declared function, handed to her.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "bar_rung", operator = "gte", value = 2 },
+      { type = "trait", subject = "player", trait_key = "bar_rung", operator = "lt",  value = 3 },
+    ] } }, blocks = [
+      { type = "paragraph", content = "Behind the taps now, which is a different job entirely. Everything said in this room gets said at the counter eventually, and Sol has spent thirty years standing here hearing all of it and repeating none." },
+  ] },
+  # RUNG 3 — the floor, in less. HIS call, relayed. Ceiling row (b) — exposure and handling.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "bar_rung", operator = "gte", value = 3 },
+      { type = "trait", subject = "player", trait_key = "bar_rung", operator = "lt",  value = 4 },
+    ] } }, blocks = [
+      { type = "paragraph", content = "Back on the floor, in what came down from the back room in a bag with no note. Sol handed it over without a word and without meeting her eye, which told her whose bag it was more clearly than a note would have." },
+  ] },
+  # RUNG 4 — the room is open. The floor work continues, and that is the point: she is still staff.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "bar_rung", operator = "gte", value = 4 },
+    ] } }, blocks = [
+      { type = "paragraph", content = "The floor, the tray, the three steps, same as the first night. The only thing that has changed is that the door at the back opens for her now, and every man in this room who has noticed that has stopped looking at her twice." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+# ⚠️ FOUR GATED CHOICES, ONE PER RUNG, ALL TARGETING THE SAME NODE. Choice effects fire on click; a single
+# shared exit cannot band pay or relation, and four nodes would duplicate the same scene four times.
+[[canvases.nodes.exit_block.choices]]
+text       = "Work the floor. (15 coin.)"
+targetType = "node"
+nodeId     = "activity_bar_work.shift"
+costs      = [{ trait = "energy", value = 15 }]
+effects = [
+  { targetType = "player", trait = "coin", op = "add", value = 15, clamp = true },
+  { targetType = "npc", npcId = "npc_bastien", trait = "relation", op = "add", value = 2 },
+]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "bar_rung", operator = "lt", value = 2 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Work the counter. (15 coin.)"
+targetType = "node"
+nodeId     = "activity_bar_work.shift"
+costs      = [{ trait = "energy", value = 15 }]
+effects = [
+  { targetType = "player", trait = "coin", op = "add", value = 15, clamp = true },
+  { targetType = "npc", npcId = "npc_bastien", trait = "relation", op = "add", value = 3 },
+]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "bar_rung", operator = "gte", value = 2 },
+  { type = "trait", subject = "player", trait_key = "bar_rung", operator = "lt",  value = 3 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Work the floor in what he sent down. (15 coin.)"
+targetType = "node"
+nodeId     = "activity_bar_work.shift"
+costs      = [{ trait = "energy", value = 15 }]
+effects = [
+  { targetType = "player", trait = "coin", op = "add", value = 15, clamp = true },
+  { targetType = "npc", npcId = "npc_bastien", trait = "relation", op = "add", value = 3 },
+]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "bar_rung", operator = "gte", value = 3 },
+  { type = "trait", subject = "player", trait_key = "bar_rung", operator = "lt",  value = 4 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Work the floor. (15 coin.)"
+targetType = "node"
+nodeId     = "activity_bar_work.shift"
+costs      = [{ trait = "energy", value = 15 }]
+effects = [
+  { targetType = "player", trait = "coin", op = "add", value = 15, clamp = true },
+  { targetType = "npc", npcId = "npc_bastien", trait = "relation", op = "add", value = 1 },
+]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "bar_rung", operator = "gte", value = 4 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Not tonight."
+targetType = "location"
+locationId = "underworld_bar"
+
+# ── Node: shift — what the night was actually like. Four bands again, same axis, same exclusivity. ───────
+[[canvases.nodes]]
+id   = "shift"
+name = "The shift"
+blocks = [
+  # RUNG 1 — un-crude by the declared ceiling. Work, noise, tired feet, and the door.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "bar_rung", operator = "lt", value = 2 },
+    ] } }, blocks = [
+      { type = "paragraph", content = "Six hours of it. Her hands go raw in the water and her back finds the exact place three steps with a loaded tray puts the weight, and she learns the room the way you only learn a room by carrying things across it." },
+      { type = "paragraph", content = "Twice in the night the back door opens and closes and she does not turn round, because the girls who turn round are the ones Sol talks to afterwards." },
+  ] },
+  # RUNG 2 — the counter. She hears things, and the one she keeps is about the room and not about a man.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "bar_rung", operator = "gte", value = 2 },
+      { type = "trait", subject = "player", trait_key = "bar_rung", operator = "lt",  value = 3 },
+    ] } }, blocks = [
+      { type = "paragraph", content = "The taps, the till, and the whole room's talk arriving at her elbow in pieces. Most of it is nothing. She keeps the pieces that are about the back door and there are more of them than she expected." },
+      { type = "paragraph", content = "Men go in with envelopes and come out without them. Nobody carries anything out. Whatever that room is, it takes paper in one direction only, and it has been doing it for years." },
+  ] },
+  # RUNG 3 — CEILING ROW (b), FIRST SPEND. Exposure and handling, not sex. Crude only where a hand lands.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "bar_rung", operator = "gte", value = 3 },
+      { type = "trait", subject = "player", trait_key = "bar_rung", operator = "lt",  value = 4 },
+    ] } }, blocks = [
+      { type = "video", props = { files = ["sex/bar_floor_handled_t4a.webm", "sex/bar_floor_handled_t4b.webm", "sex/bar_floor_handled_t4c.webm"], description = "A waitress in a short tight dress leaning across a low bar table with a tray, a seated man's hand up the back of her thigh, the room carrying on around them.", search_queries = ["waitress groped serving drinks bar clothed", "short dress waitress hand under skirt bar table"] } },
+      { type = "paragraph", content = "The dress is short and the material is thin and it was cut for a woman standing still, which is not what the job is. Bending for the low tables is the whole of the arithmetic and everyone in the room has done it." },
+      { type = "paragraph", content = "Hands land. Not often and never hard — a palm flat on her ass while she reaches across, a hand up under the hem that finds her cunt through nothing at all and is gone before she straightens, knuckles dragging her tits through the thin material as she leans past. She sets the glasses down and moves on and it costs her nothing, and that is the part she notices." },
+      { type = "paragraph", content = "Nobody goes further than that. They look at the back door first, every one of them, and then they take their hand back." },
+  ] },
+  # RUNG 4 — the room is open. Flat, and the change is in how the room treats her.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "bar_rung", operator = "gte", value = 4 },
+    ] } }, blocks = [
+      { type = "paragraph", content = "Nobody's hand goes anywhere near her now. The dress is the same dress and the tables are the same height, and the whole room has quietly agreed she is not theirs to touch any more." },
+      { type = "paragraph", content = "It is not respect. It is the same instinct that makes them all check the back door first, arriving one step earlier." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Close out."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+# ⚠️ 240, RAISED FROM 180 at beat_0111. A shift is an EVENING, not three hours — Bastien keeps 20:00-23:59
+# and the room empties at closing, so the fiction was already a whole evening while the clock only charged
+# for part of one. With the 2/day cap that is 480 minutes of a 1,440-minute day against a 540-minute paid
+# night at the cot, leaving about seven hours for the berth, the market and the strip. Time is the second
+# half of the cap: the money limit stops the printer, the clock stops the day being free.
+time_progression_minutes = 240
+
+# ═══ activity_buy_taser — beat_0104 (rev 154). The cheapest thing on the table. ══════════════════════════
+# Wren-solo @underworld_market. Repeatable trigger, pri 3, gated bastien_drains_done gte 1 + taser_held lt 1.
+#
+# ⚠️ SHE ALREADY HAS A WEAPON AND CANNOT USE IT, AND THE CARD SAYS WHY IN THE FICTION RATHER THAN IN A GATE.
+# Two shipped facts do the work. (1) ONE CORE, ONE WEAPON — the game states it in its own prose at the
+# loadout bench: "it feeds the drain inside her or the thing in her hand, never both at once". She needs the
+# drain live for Bastien, so the emitter is switched off and at home every night she works. (2) The emitter
+# is company hardware and Bastien goes through her coat lining, cuffs and the seam under the arm EVERY visit
+# — a Vance field emitter found on a barmaid ends the cover in one beat. So the answer is a thing that runs
+# off nothing and looks like what every woman working a floor down here carries.
+# ⚠️ AND THE EMITTER WOULD NOT HELP ANYWAY. It is an AROUSAL FIELD, not a gun: "whoever's in reach goes
+# stupid with it inside a breath". It buys her a way past one man by fucking him. It does not put anybody on
+# the floor, which is the only thing she is going to need.
+# ⚠️ 30 COIN — cheap on purpose, against the 40-coin edged weapon on the same row and the 120 she paid for
+# the face. This is not an investment, it is a thing she picks up because it is there.
+# ⚠️ taser_held IS NOT ON THE equipped_weapon AXIS. That axis is the one-core-one-weapon loadout; the whole
+# design point is that this competes with nothing. See 0_systems_spec.
+# MEDIA: reuses locations/underworld_market.jpg.
+[[canvases]]
+id          = "activity_buy_taser"
+name        = "Something that runs off nothing"
+description = "beat_0104 (rev 154). Wren-solo @underworld_market. Repeatable trigger, pri 3, gated bastien_drains_done gte 1 + taser_held lt 1. Buy = 30 coin -> taser_held = 1, +30 min. She has a weapon and cannot use it: one core one weapon means the emitter is off whenever the drain is live, and a Vance field emitter would not survive a pat-down that goes through the lining, the cuffs and the seam under the arm. It would not help anyway — the emitter is an arousal field that buys her past one man by fucking him, and does not put anybody on the floor. 30 coin against the 40-coin edged weapon on the same row: not an investment, a thing she picks up because it is there."
+[canvases.trigger]
+location      = "underworld_market"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "bastien_drains_done", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "taser_held",          operator = "lt",  value = 1 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Something that runs off nothing"
+blocks = [
+  { type = "image", props = { file = "locations/underworld_market.jpg", description = "Dim black-market stalls under a low ceiling, weapons and gear laid on cloth, cages further back.", search_queries = ["black market weapons stall dim", "underground arms bazaar cages back"] } },
+  { type = "paragraph", content = "The blade tables want forty and she has stood at them twice and walked off twice, because a knife in that room is a thing she would have to be willing to use on a man she needs conscious." },
+  { type = "paragraph", content = "What she is actually short of is the emitter, and the emitter is not an option. One core feeds one weapon and the drain has to be the one that is live, every night she goes in — and a Vance field unit in her coat would come out of it at the door, in front of the room, in a man's hand." },
+  { type = "paragraph", content = "So: the box at the end of the row with the cheap gear in it, where a hand-taser is thirty coin and every woman working a floor down here has one." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Buy the taser. (30 coin.)"
+targetType = "node"
+nodeId     = "activity_buy_taser.buy"
+costs      = [{ trait = "coin", value = 30 }]
+effects = [
+  { targetType = "player", trait = "taser_held", op = "set", value = 1, clamp = true },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it."
+targetType = "location"
+locationId = "underworld_market"
+
+[[canvases.nodes]]
+id   = "buy"
+name = "The taser"
+blocks = [
+  { type = "paragraph", content = "It is a grey plastic thing the size of her palm with a thumb-switch and a charge light that does not work. The man selling it does not ask what it is for, because down here nobody has ever had to explain that one." },
+  { type = "paragraph", content = "It goes in the coat, in the lining, where he is going to look." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take it to work."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_market"
+time_progression_minutes = 30
+
+# ═══ activity_sift_the_ruin — beat_0107 (rev 157). The one thing left to do. ════════════════════════════
+# Wren-solo @underworld_bar. Repeatable, pri 3, gated raid_done is_true.
+#
+# ⚠️ THIS CANVAS EXISTS BECAUSE 0.1.8 ENDED AND OPENED NOTHING. cap_extraction set two flags and its chain
+# reached no standing content, so the player finished the story and had nothing to do — the v2 gate says it
+# in structural terms and it is the single defect this whole release was scoped against. The Face must not
+# repeat it, and this is the surface that stops it: after the last scene there is still a room to go back to.
+#
+# ⚠️ IT IS A CARD AT underworld_bar, NOT A NAV CARD ON THE ROOM, and that is deliberate. Giving
+# bastien_backroom an entry_from would put a card for it on the Undertow's nav grid from the START OF THE
+# GAME — locked, but visible — which leaks a saved reveal to an Act-1 player who is at that moment being
+# held in a cell by the man who keeps it. Reaching it by an explicit canvas is the same shape
+# bastien_door_search used, for the same reason, and it costs nothing.
+# ⚠️ THE GOOD PAPER IS GONE — LO's call. The units took what was worth taking, so what is left is the junk
+# Bastien sold for cash. That is why this is a crawl and not a library: she is going through a burned floor
+# looking for the few sheets that matter among thousands that do not.
+# ⚠️ AND WHAT SHE FINDS IS THE NEXT RELEASE, NOT THIS ONE. Names off her own index — the second date column,
+# the ones they stopped. No answers, no addresses, no Cain. Three exclusive bands on ruin_depth, the crawl's
+# OWN counter — see the node header for why borrowing yard_depth was a bug and not a shortcut.
+# ⚠️ SOL IS ALIVE AND THAT IS ALREADY IN THE RAID: the bar emptied before the units reached it — "a room
+# deciding all at once to be somewhere else" — so nobody who worked that floor was in it. He lets her back
+# in because she is the only one who came back at all.
+# MEDIA: reuses scenes/backroom_burning.jpg — the raid's own slot, the one asset this game reuses on purpose.
+[[canvases]]
+id          = "activity_sift_the_ruin"
+name        = "Go back through the door"
+description = "beat_0107 (rev 157). Wren-solo @underworld_bar. Repeatable, pri 3, gated raid_done is_true. THE ONE THING LEFT TO DO AFTER THE RELEASE ENDS, and the reason it exists is that 0.1.8's ending opened no standing content at all. A card at the bar rather than a nav card on the room, because an entry_from would show a locked 'The Back Room' on the Undertow grid from Act 1 onward and leak a saved reveal. The good paper is gone — the units took it — so this is a crawl through the junk Bastien sold for cash, and what turns up is names off her own index: the second date column, the ones they stopped. No answers, no addresses, no Cain. Bands on ruin_depth, the crawl's OWN counter — the first cut borrowed yard_depth, which is the Burned Yard's odometer and is already maxed by this chapter, so the first stage was dead and the first click jumped to the last. Sol is alive and lets her in, which the raid already established by emptying the bar before the units reached it."
+[canvases.trigger]
+location      = "underworld_bar"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "raid_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Go back through the door"
+blocks = [
+  { type = "image", props = { file = "scenes/backroom_ruin.jpg", description = "A burned-out back room days after a fire, soaked ash and charred paper inches deep on the floor, an empty scorched wall where shelving stood, daylight through a broken door.", search_queries = ["burned out room ash charred paper floor aftermath", "fire damaged office soaked debris daylight through door"] } },
+  { type = "paragraph", content = "The Undertow does not open in the evenings any more. Sol is in it most days with a shovel and a bucket and no particular plan, and he lets her past the tape because she is the only one of the staff who came back at all." },
+  { type = "paragraph", content = "The back door is off its frame. What is behind it is a burned floor two inches deep in other people's paperwork, and most of it is worth exactly what it looks like." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Sift it. (An hour on your knees.)"
+targetType = "node"
+nodeId     = "activity_sift_the_ruin.sift"
+costs      = [{ trait = "energy", value = 10 }]
+effects = [
+  { targetType = "player", trait = "ruin_depth", op = "add", value = 1, clamp = true },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it for today."
+targetType = "location"
+locationId = "underworld_bar"
+
+# ── Node: sift. Three exclusive bands on ruin_depth — what the floor gives up, in order. ────────────────
+# ⚠️ ruin_depth AND NOT yard_depth. The first cut used the Burned Yard's odometer on the reasoning that it
+# was "the same shape of thing" — but it is already at 3 when this chapter starts (that crawl is mandatory
+# Act-1 content), so band 1 was dead and the first sift jumped straight to the terminal band. From a fresh 0
+# the thresholds below give band 1 twice, band 2 twice, then the terminal band: a four-click crawl.
+[[canvases.nodes]]
+id   = "sift"
+name = "What the floor gives up"
+blocks = [
+  # BAND 1 — the shape of the loss. Mostly nothing, and one thing that is not nothing.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "ruin_depth", operator = "lt", value = 2 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "An hour on her knees in wet ash. Manifests, bills of lading, a decade of somebody moving cargo that was never cargo. All of it worthless and all of it his, and none of it what he was actually keeping." },
+    { type = "paragraph", content = "The spines with the dates on them are gone. Not burned — gone. Somebody lifted whole years off that wall before the fire and the fire was for the rest." },
+  ] },
+  # BAND 2 — the first name off her own index.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "ruin_depth", operator = "gte", value = 2 },
+      { type = "trait", subject = "player", trait_key = "ruin_depth", operator = "lt",  value = 4 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Under the desk, where the desk protected it, half a folder with the top third burned off. Vance paper. A transfer of custody, eleven years old, and a designation in the same format as her own." },
+    { type = "paragraph", content = "It is not hers. She checks it four times against a number she has read exactly once and will never need to read again. The second date column on that sheet is filled in." },
+  ] },
+  # BAND 3 — the terminal band. What she now has, and what it is not.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "ruin_depth", operator = "gte", value = 4 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She goes back through it in daylight, and then again, and what she has at the end of it is nine sheets that mean anything and a coat that smells of burned paper for a fortnight." },
+    { type = "paragraph", content = "Nine designations in her own format. Six of them have a date in the second column. Two do not. One of them is a line she has read before, on a bench, at a breaking dock, with a man standing over there pretending not to look." },
+    { type = "paragraph", content = "There is nothing in any of it about where a man might live, and nothing in any of it about who came back eight months after the programme closed and sealed one page. That is not in this room. That was never going to be in this room." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take what there is."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 120
