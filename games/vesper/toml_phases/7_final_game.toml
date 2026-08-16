@@ -90,6 +90,13 @@ flagEffects = [
 # it is the cradle-substitute for every other Spire-side utility already (activity_kess_cot took the
 # charge + both weapon reloads at revs 96/131). ONE location only — the key is a scalar and the
 # generator compares slugs with ==, so there is no two-rack form to reach for.
+#
+# ⚠️ beat_0115 (rev 166) — MOVED AGAIN, kess_berth -> the_cot, and this is a framing fix rather than a bug.
+# Pointed at the berth, "Change Clothes" rendered on a ship-breaker's dock floor two lines under Kess's
+# portrait, as though the rack were a facility of his yard. The cot is now a real location (1_metadata) and
+# it is the only space in the game that is hers, so the wardrobe, the four equipped-based undress portraits
+# and the feed line all sit in the room they actually belong to. It also makes card P's tip — "Get to the
+# cot at the Berth and change" — literally true, where before it was only nearly true.
 [settings]
 # Vesper is narrated in THIRD person — Wren is watched, not inhabited (the still-point /
 # owned-weapon PC). Declared so the engine labels her own dialogue with her name instead of
@@ -97,7 +104,7 @@ flagEffects = [
 # Register doctrine: .claude/skills/author-game/references/rts-flat-prose.md Rule 1.
 narration_person  = "third"
 clothing_enabled  = true
-wardrobe_location = "kess_berth"
+wardrobe_location = "the_cot"
 
 # ─── Player portrait — the state-reactive sidebar face (opt-in engine feature) ─
 # Wren's face, in the sidebar just below the time display (above the Charge/Condition HUD) — the reactive
@@ -1621,6 +1628,41 @@ entry_from  = "underworld_strip"
 # ── crew_den — the dead crew's rooms (Underworld Hunt, beat_0033). LOCKED-visible until she drains
 # the address out of Marsh (crew_known). version="1.0" or the lock fails open. Content floor = the
 # search + finding "Bastien" (beat_0033); the grab capstone (beat_0034) fires here on bastien_found.
+# ── the_cot — beat_0115 (rev 166). THE FIRST ROOM IN THE GAME THAT IS HERS. ───────────────────────────
+# LO's call, and it repairs a framing mistake I made at beat_0094. The cot has been a solo-activity CARD on
+# the berth's page since rev 96, and when the wardrobe moved to the Reach I hung it off kess_berth — so
+# "Change Clothes" rendered on a ship-breaker's dock floor, two lines under Kess's portrait, as if it were a
+# facility of his yard. It is not. It is her bunk.
+# ⚠️ AND CARD P ALREADY SAID SO. Its tip reads "Get to the cot at the Berth and change" — written when the
+# cot was assumed to be a place, then contradicted by the build. This makes the tip literally true rather
+# than nearly true, which is the difference between a player finding a link and hunting for one.
+# ⚠️ WHY A LOCATION AND NOT A BIGGER CARD. wren_room was the company's. The Spire is sealed. This is the only
+# space in the game that belongs to her, and a space that belongs to somebody needs a door, an image and a
+# description — the wardrobe, the four equipped-based undress portraits and the feed line all actually belong
+# to a room, and none of them belongs on a menu item.
+# ⚠️ IT ALSO SHEDS A CARD FROM THE BUSIEST SCREEN IN THE GAME. kess_berth carries 22 one-shot auto-fires and
+# (before this) 5 repeatable surfaces, with a standing validator warning about two of them colliding.
+# ⚠️ THE COST, RECORDED HONESTLY: +1 click on the most-repeated action in the game. She sleeps every in-game
+# night, and a location cannot carry choices directly while a repeatable surface cannot be an auto-fire, so
+# berth -> cot -> sleep is one step longer than berth -> cot-card -> sleep. Taken deliberately: the click is
+# cheap and a player home that is a menu item taxes every scene that ever wants to happen there.
+# ⚠️ entry_conditions ARE MANDATORY, not decoration. kess_berth opens at salvage_entered, which is a whole
+# chapter before she rents the cot at beat_0068 — without the gate this card would advertise a bed she has
+# not been offered, from the middle of the salvage. version = "1.0" or the condition FAILS OPEN.
+# ⚠️ NOT nav-invisible, deliberately, unlike bastien_backroom and cain_lab: entry_from gives it a nav card
+# and the engine's own "Leave" link, so it can never become the dead end beat_0114 had to fix twice.
+[[locations]]
+id          = "the_cot"
+name        = "The Cot"
+description = "A stripped bench along the wall past the hull, a pad on it, and a tap spliced off the same feed line Kess uses to wake dead machines. Her bag is under it and her coat is on a nail. It is not the cradle and it is not a room, and it is the first place in her life that nobody signed for."
+image       = "locations/the_cot.jpg"
+image_search_queries = ["industrial workshop corner bunk pad cables dim", "makeshift bed in a machine shop low light"]
+entry_from  = "kess_berth"
+entry_conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "berth_home", operator = "is_true" },
+] }
+blocked_message = "A bench along the wall with a pad on it, and no reason yet for it to be hers."
+
 # ── bastien_backroom — RESTORED at beat_0101 (rev 152), THE FACE. Shelved at rev 141, back unchanged.
 # ⚠️ NO `entry_from`, DELIBERATELY — the captive_room shape. A location with no entry_from is on NO nav grid,
 # which this room needs for two separate reasons, both still true in 0.1.9:
@@ -2489,9 +2531,13 @@ effects = [
 [[canvases]]
 id          = "activity_kess_cot"
 name        = "The cot"
-description = "Wren-solo @kess_berth (rev 96). The Reach rest-bed — the cradle-substitute after the Spire seals. Gated berth_home is_true. TWO tiers: 'Crash rough' (FREE, +40 Charge, 120 min, no day-advance — the soft-lock floor) and 'A night on the feed line' (10 coin, +100 Charge, 540 min day-advance, reload the drain AND the emitter, AND feed_line_days -> 3). rev 131 added arousal_charge -> 3 to the paid tier: the emitter's only reload was activity_recharge_emitter @cradle, which is route-cut at the 1a close, so the emitter had no reload at all for the whole of 1b. Kept on the PAID tier so the berth still has exactly one bill. Repeatable, pri 3. Fixes the post-close dead-end (no Charge restore in the Reach); rougher than the cradle by design. rev 114 (beat_0069): the paid tier IS the upkeep — the same coin buys three days of Kess's time on the key, so crash-rough-forever means he never touches it. Coin gates PROGRESS, never action."
+description = "Wren-solo @the_cot (rev 96; MOVED to its own location at beat_0115, rev 166 — it was a card on the berth page, and the room it describes is the only space in the game that is hers). The Reach rest-bed — the cradle-substitute after the Spire seals. Gated berth_home is_true. TWO tiers: 'Crash rough' (FREE, +40 Charge, 120 min, no day-advance — the soft-lock floor) and 'A night on the feed line' (10 coin, +100 Charge, 540 min day-advance, reload the drain AND the emitter, AND feed_line_days -> 3). rev 131 added arousal_charge -> 3 to the paid tier: the emitter's only reload was activity_recharge_emitter @cradle, which is route-cut at the 1a close, so the emitter had no reload at all for the whole of 1b. Kept on the PAID tier so the berth still has exactly one bill. Repeatable, pri 3. Fixes the post-close dead-end (no Charge restore in the Reach); rougher than the cradle by design. rev 114 (beat_0069): the paid tier IS the upkeep — the same coin buys three days of Kess's time on the key, so crash-rough-forever means he never touches it. Coin gates PROGRESS, never action."
+# ⚠️ beat_0115 (rev 166) — LOCATION MOVED kess_berth -> the_cot. The berth_home gate is KEPT even though
+# the_cot's own entry_conditions now carry it: the location gate stops her reaching the room, and this one
+# stops the surface existing, and a card whose room is unreachable is not the same as a card that is absent.
+# Belt and braces on the one surface the whole upkeep economy runs through.
 [canvases.trigger]
-location      = "kess_berth"
+location      = "the_cot"
 is_repeatable = true
 priority      = 3
 is_active     = true
@@ -2502,7 +2548,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The cot"
 blocks = [
-  { type = "paragraph", content = "The cot sits along the wall by Kess's feed line — a stripped bench with a pad on it and a tap off the same rig he uses to wake dead machines. Not the cradle. But it holds a charge, and down here that's the whole of what she needs a bed to do." },
+  { type = "paragraph", content = "The pad, the tap spliced off Kess's feed line, the bag underneath and the coat on the nail. Not the cradle. But it holds a charge, and down here that's the whole of what she needs a bed to do." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -2536,7 +2582,7 @@ effects    = [
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave it."
 targetType = "location"
-locationId = "kess_berth"
+locationId = "the_cot"
 
 [[canvases.nodes]]
 id   = "rough"
@@ -2549,7 +2595,7 @@ type = "location"
 text = "Up."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "kess_berth"
+locationId               = "the_cot"
 time_progression_minutes = 120
 [[canvases.nodes]]
 id   = "night"
@@ -2565,7 +2611,7 @@ type = "location"
 text = "Morning."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "kess_berth"
+locationId               = "the_cot"
 time_progression_minutes = 540
 
 # The chip / memories view — seeded-empty, the greyed FRAGMENT 01 slot (the visible next
@@ -3257,7 +3303,7 @@ effects    = [{ targetType = "player", trait = "equipped_weapon", op = "set", va
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave it."
 targetType = "location"
-locationId = "kess_berth"
+locationId = "the_cot"
 
 # ═══ beat_0018 — THE UNDERWORLD: the dark city, a coin economy, her second life ═══════════════
 # Always available (gate gated opening_done). The guard is cleared EVERY visit (pay coin / fight / weapon

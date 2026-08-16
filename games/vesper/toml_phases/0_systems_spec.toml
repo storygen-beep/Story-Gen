@@ -82,6 +82,13 @@ flagEffects = [
 # it is the cradle-substitute for every other Spire-side utility already (activity_kess_cot took the
 # charge + both weapon reloads at revs 96/131). ONE location only — the key is a scalar and the
 # generator compares slugs with ==, so there is no two-rack form to reach for.
+#
+# ⚠️ beat_0115 (rev 166) — MOVED AGAIN, kess_berth -> the_cot, and this is a framing fix rather than a bug.
+# Pointed at the berth, "Change Clothes" rendered on a ship-breaker's dock floor two lines under Kess's
+# portrait, as though the rack were a facility of his yard. The cot is now a real location (1_metadata) and
+# it is the only space in the game that is hers, so the wardrobe, the four equipped-based undress portraits
+# and the feed line all sit in the room they actually belong to. It also makes card P's tip — "Get to the
+# cot at the Berth and change" — literally true, where before it was only nearly true.
 [settings]
 # Vesper is narrated in THIRD person — Wren is watched, not inhabited (the still-point /
 # owned-weapon PC). Declared so the engine labels her own dialogue with her name instead of
@@ -89,7 +96,7 @@ flagEffects = [
 # Register doctrine: .claude/skills/author-game/references/rts-flat-prose.md Rule 1.
 narration_person  = "third"
 clothing_enabled  = true
-wardrobe_location = "kess_berth"
+wardrobe_location = "the_cot"
 
 # ─── Player portrait — the state-reactive sidebar face (opt-in engine feature) ─
 # Wren's face, in the sidebar just below the time display (above the Charge/Condition HUD) — the reactive

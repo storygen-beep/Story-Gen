@@ -372,9 +372,13 @@ effects = [
 [[canvases]]
 id          = "activity_kess_cot"
 name        = "The cot"
-description = "Wren-solo @kess_berth (rev 96). The Reach rest-bed — the cradle-substitute after the Spire seals. Gated berth_home is_true. TWO tiers: 'Crash rough' (FREE, +40 Charge, 120 min, no day-advance — the soft-lock floor) and 'A night on the feed line' (10 coin, +100 Charge, 540 min day-advance, reload the drain AND the emitter, AND feed_line_days -> 3). rev 131 added arousal_charge -> 3 to the paid tier: the emitter's only reload was activity_recharge_emitter @cradle, which is route-cut at the 1a close, so the emitter had no reload at all for the whole of 1b. Kept on the PAID tier so the berth still has exactly one bill. Repeatable, pri 3. Fixes the post-close dead-end (no Charge restore in the Reach); rougher than the cradle by design. rev 114 (beat_0069): the paid tier IS the upkeep — the same coin buys three days of Kess's time on the key, so crash-rough-forever means he never touches it. Coin gates PROGRESS, never action."
+description = "Wren-solo @the_cot (rev 96; MOVED to its own location at beat_0115, rev 166 — it was a card on the berth page, and the room it describes is the only space in the game that is hers). The Reach rest-bed — the cradle-substitute after the Spire seals. Gated berth_home is_true. TWO tiers: 'Crash rough' (FREE, +40 Charge, 120 min, no day-advance — the soft-lock floor) and 'A night on the feed line' (10 coin, +100 Charge, 540 min day-advance, reload the drain AND the emitter, AND feed_line_days -> 3). rev 131 added arousal_charge -> 3 to the paid tier: the emitter's only reload was activity_recharge_emitter @cradle, which is route-cut at the 1a close, so the emitter had no reload at all for the whole of 1b. Kept on the PAID tier so the berth still has exactly one bill. Repeatable, pri 3. Fixes the post-close dead-end (no Charge restore in the Reach); rougher than the cradle by design. rev 114 (beat_0069): the paid tier IS the upkeep — the same coin buys three days of Kess's time on the key, so crash-rough-forever means he never touches it. Coin gates PROGRESS, never action."
+# ⚠️ beat_0115 (rev 166) — LOCATION MOVED kess_berth -> the_cot. The berth_home gate is KEPT even though
+# the_cot's own entry_conditions now carry it: the location gate stops her reaching the room, and this one
+# stops the surface existing, and a card whose room is unreachable is not the same as a card that is absent.
+# Belt and braces on the one surface the whole upkeep economy runs through.
 [canvases.trigger]
-location      = "kess_berth"
+location      = "the_cot"
 is_repeatable = true
 priority      = 3
 is_active     = true
@@ -385,7 +389,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The cot"
 blocks = [
-  { type = "paragraph", content = "The cot sits along the wall by Kess's feed line — a stripped bench with a pad on it and a tap off the same rig he uses to wake dead machines. Not the cradle. But it holds a charge, and down here that's the whole of what she needs a bed to do." },
+  { type = "paragraph", content = "The pad, the tap spliced off Kess's feed line, the bag underneath and the coat on the nail. Not the cradle. But it holds a charge, and down here that's the whole of what she needs a bed to do." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -419,7 +423,7 @@ effects    = [
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave it."
 targetType = "location"
-locationId = "kess_berth"
+locationId = "the_cot"
 
 [[canvases.nodes]]
 id   = "rough"
@@ -432,7 +436,7 @@ type = "location"
 text = "Up."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "kess_berth"
+locationId               = "the_cot"
 time_progression_minutes = 120
 [[canvases.nodes]]
 id   = "night"
@@ -448,7 +452,7 @@ type = "location"
 text = "Morning."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "kess_berth"
+locationId               = "the_cot"
 time_progression_minutes = 540
 
 # The chip / memories view — seeded-empty, the greyed FRAGMENT 01 slot (the visible next
@@ -1140,7 +1144,7 @@ effects    = [{ targetType = "player", trait = "equipped_weapon", op = "set", va
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave it."
 targetType = "location"
-locationId = "kess_berth"
+locationId = "the_cot"
 
 # ═══ beat_0018 — THE UNDERWORLD: the dark city, a coin economy, her second life ═══════════════
 # Always available (gate gated opening_done). The guard is cleared EVERY visit (pay coin / fight / weapon

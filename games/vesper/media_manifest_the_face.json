@@ -259,6 +259,18 @@
         "plain womens portrait headshot neutral expression",
         "unremarkable female face portrait dim"
       ]
+    },
+    {
+      "canvas": "1_metadata [[locations]]",
+      "node": "the_cot",
+      "type": "image",
+      "slot": "locations/the_cot.jpg",
+      "pool": false,
+      "description": "A stripped bench along the wall of a flooded ship-breaking dock with a sleeping pad on it, a cable tap spliced in above, a bag underneath and a coat on a nail.",
+      "search_queries": [
+        "makeshift bunk in industrial workshop dim",
+        "bench bed machine shop corner cables low light"
+      ]
     }
   ]
 }
