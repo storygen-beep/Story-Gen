@@ -656,3 +656,53 @@ boundary claim, five terminal badges.
   stakes).
 - `activity_berth_wardrobe` is a phantom row in `design_book.md`'s blueprint table — correctly implemented as
   the one-key `wardrobe_location` change; the table was never updated.
+
+---
+
+## 22. THE ELAPSED-TIME SWEEP (beat_0113, rev 164)
+
+LO read one line — `rung_bar_promotion_4`'s *"You've had three weeks and you've turned up every one of
+them"* — and asked whether it meant she had worked there three weeks, because if so it does not reflect
+correct data. It did, and it was a **class, not a line: 26 sites across 13 canvases and 4 quest cards.**
+
+### Why it happened, structurally
+
+**A chapter gated on a METER has no floor and no ceiling in days.** The bar ladder gates on
+`npc_bastien.relation` 6/12/18 at +2/+3/+3 a shift, so:
+
+- floor ≈ **7 shifts ≈ 4 in-game days** under the 2/day cap
+- a paid **cheat-page grant** (+6 relation) collapses it to **zero shifts worked**
+- a slow player can take **months**
+
+"Three weeks" is wrong at the floor, wrong on the cheat path, and wrong in the tail. **There is no number
+that is right.** The claims also contradicted each other — `rung_bar_promotion_4` ("three weeks") fires
+*before* `bastien_door_search` ("four weeks"), and three canvases all said "four weeks" at points separated
+by multiple visits.
+
+### And the same beat carried an economy error
+
+`cap_the_raid`'s hinge thought — the beat the chapter turns on — read *"Four thousand coin of face and
+shifts."* **The face costs 120; a shift pays 15.** Written for rhythm, never checked against an economy
+built two beats earlier.
+
+### What replaced them
+
+Anchors to events the game guarantees: *"since she started"*, *"since Kess closed her up"*, *"every night
+since"*, *"all this time"*. Most read better — Bastien is not a man who counts aloud.
+
+Two worth recording: `hub_bastien`'s *"Your fourth shift"* became *"I know which night it was"* — **the
+precision is the character**, so the fix keeps the counting and drops the count. And *"the first time in
+three weeks"* became *"the first time she has **ever**"*, which is truer and stronger.
+
+### Kept, deliberately
+
+Backward-looking canon (eleven years, three months in that cell, a year ago at the far door, fifteen years,
+the thirty/twenty-year careers, four months in the Reach) · in-scene beats · rotas ("six nights a week") ·
+forward consequences · and Cain's *"Could be a fortnight. Could be tonight"*, a hypothetical about his
+unpredictability and one of the better lines in the chapter.
+
+### The bug class is killed in the skill
+
+`references/rts-flat-prose.md` **Rule 10 — never assert elapsed time the player's pace controls**, with the
+meter reasoning, the four exempt classes, a replacement table, and two sub-rules: keep precision where it is
+character, and the same check catches invented **economy** figures. Logged in the skill CHANGELOG.
