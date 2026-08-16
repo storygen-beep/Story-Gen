@@ -1041,6 +1041,41 @@ entry_from  = "underworld_strip"
 # ── crew_den — the dead crew's rooms (Underworld Hunt, beat_0033). LOCKED-visible until she drains
 # the address out of Marsh (crew_known). version="1.0" or the lock fails open. Content floor = the
 # search + finding "Bastien" (beat_0033); the grab capstone (beat_0034) fires here on bastien_found.
+# ── the_cot — beat_0115 (rev 166). THE FIRST ROOM IN THE GAME THAT IS HERS. ───────────────────────────
+# LO's call, and it repairs a framing mistake I made at beat_0094. The cot has been a solo-activity CARD on
+# the berth's page since rev 96, and when the wardrobe moved to the Reach I hung it off kess_berth — so
+# "Change Clothes" rendered on a ship-breaker's dock floor, two lines under Kess's portrait, as if it were a
+# facility of his yard. It is not. It is her bunk.
+# ⚠️ AND CARD P ALREADY SAID SO. Its tip reads "Get to the cot at the Berth and change" — written when the
+# cot was assumed to be a place, then contradicted by the build. This makes the tip literally true rather
+# than nearly true, which is the difference between a player finding a link and hunting for one.
+# ⚠️ WHY A LOCATION AND NOT A BIGGER CARD. wren_room was the company's. The Spire is sealed. This is the only
+# space in the game that belongs to her, and a space that belongs to somebody needs a door, an image and a
+# description — the wardrobe, the four equipped-based undress portraits and the feed line all actually belong
+# to a room, and none of them belongs on a menu item.
+# ⚠️ IT ALSO SHEDS A CARD FROM THE BUSIEST SCREEN IN THE GAME. kess_berth carries 22 one-shot auto-fires and
+# (before this) 5 repeatable surfaces, with a standing validator warning about two of them colliding.
+# ⚠️ THE COST, RECORDED HONESTLY: +1 click on the most-repeated action in the game. She sleeps every in-game
+# night, and a location cannot carry choices directly while a repeatable surface cannot be an auto-fire, so
+# berth -> cot -> sleep is one step longer than berth -> cot-card -> sleep. Taken deliberately: the click is
+# cheap and a player home that is a menu item taxes every scene that ever wants to happen there.
+# ⚠️ entry_conditions ARE MANDATORY, not decoration. kess_berth opens at salvage_entered, which is a whole
+# chapter before she rents the cot at beat_0068 — without the gate this card would advertise a bed she has
+# not been offered, from the middle of the salvage. version = "1.0" or the condition FAILS OPEN.
+# ⚠️ NOT nav-invisible, deliberately, unlike bastien_backroom and cain_lab: entry_from gives it a nav card
+# and the engine's own "Leave" link, so it can never become the dead end beat_0114 had to fix twice.
+[[locations]]
+id          = "the_cot"
+name        = "The Cot"
+description = "A stripped bench along the wall past the hull, a pad on it, and a tap spliced off the same feed line Kess uses to wake dead machines. Her bag is under it and her coat is on a nail. It is not the cradle and it is not a room, and it is the first place in her life that nobody signed for."
+image       = "locations/the_cot.jpg"
+image_search_queries = ["industrial workshop corner bunk pad cables dim", "makeshift bed in a machine shop low light"]
+entry_from  = "kess_berth"
+entry_conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "berth_home", operator = "is_true" },
+] }
+blocked_message = "A bench along the wall with a pad on it, and no reason yet for it to be hers."
+
 # ── bastien_backroom — RESTORED at beat_0101 (rev 152), THE FACE. Shelved at rev 141, back unchanged.
 # ⚠️ NO `entry_from`, DELIBERATELY — the captive_room shape. A location with no entry_from is on NO nav grid,
 # which this room needs for two separate reasons, both still true in 0.1.9:
