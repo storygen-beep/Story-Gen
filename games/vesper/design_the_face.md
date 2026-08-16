@@ -759,3 +759,54 @@ gives the reason: Sol hired a stranger.
 
 **Bar work is not gated on the dress** — only the face gates work, and gating the costume would rebuild the
 exact "job silently vanishes" trap this removes. **No face-by-outfit portrait matrix.**
+
+---
+
+## 24. THE BEAT SHE NEVER HAD (beat_0117, rev 168)
+
+LO asked whether anything tells her she needs a weapon. **Nothing in the fiction did** — the only prompt was
+one clause at the end of card T's tip.
+
+### It is the rev-143 defect again
+
+LO's report then: *"there is nothing that she tells kess like that part failed, she just goes on to buy the
+second part out of the sudden."* The diagnosis was that **the order was inverted** — purchase first,
+justification after, four cycles running.
+
+The taser was identical. Bastien's drain ends on *"Could be a fortnight. Could be tonight."* **She had no
+reaction to it at all**, and a market card then explained why the emitter was not an option — reasoning the
+player only read *after* going shopping.
+
+**And it was a stall, not only a craft problem.** `cap_the_raid` is hard-gated on `taser_held`, so a player
+who skimmed that clause would keep walking into the back room to find an ordinary evening, indefinitely,
+with nothing on screen connecting the two.
+
+### A problem, not a plan — a deliberate deviation from LO's phrasing
+
+He said *"when Cain comes in she will have to somehow get him."* What the beat gives her instead is a list of
+things she does not know: whether the drain opens on a thing built the way she is built (she has fired it at
+nine men and never once at something with a core in it), whether he fights, whether he would look at her
+once and walk back out — **and the one she stops on and does not pick back up, which is whether she wants to
+do anything to him at all.**
+
+She has never made a plan against a person in this game; she has been *pointed* at people, which is a
+different verb. The only thing she decides in advance is the part that does not need him in it.
+
+**And that is what makes the raid land.** She uses the taser on **Bastien**, on the spot. *"I cannot be
+empty-handed"* reads as improvising with the one thing she had; *"I'll get Cain"* would read as a plan going
+wrong.
+
+### Two calls worth keeping
+
+**Not gated on the face being off** — a safety call over a thematic one. She would take it off first, and the
+cot is now where that happens, but a player who never does would never see the beat, never get the taser and
+never reach the raid.
+
+**The one-core-one-weapon rule moved out of a quest tip and into her head**, where it is reasoning rather
+than instructions. Card T went back to being a pointer.
+
+### Verified by simulating the state space
+
+Across every combination of `bastien_drains_done` × `plan_made` × `taser_held`: **zero states** where the
+taser is buyable while `plan_made` is false, and the chain drain 1 → `cap_the_wait` → taser → drain 2 → raid
+is reachable at every step.

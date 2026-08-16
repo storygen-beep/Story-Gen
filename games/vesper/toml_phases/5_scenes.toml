@@ -12884,7 +12884,12 @@ priority   = 10
 text       = "Eleven years of it, and none of it for money. Bastien has been buying that company apart on paper and handing it to one man since before you existed — Cain, the name off a briefing room on the ninetieth floor, the thing you were built and pointed at. He is an early build with a lot of miles on him, taking Vance apart a year at a time and putting the good pieces in himself, and he is still nowhere near enough. Nobody knows where he lives. Not even the man who has supplied him for eleven years. But he comes to that room whenever he likes, through the alley door, and he has never once said he was coming."
 # ⚠️ beat_0107 (rev 157) — T GIVES UP THE BOUNDARY to card U, which is the LAST card of the release and the
 # only one permitted to set terminal_text. Two-step, right order, and verified by grepping the whole table.
-tip        = "So keep working. Take shifts, go through the door, let him have the evening — the only way you are in that room when Cain walks into it is by being in that room. And carry something: one core feeds one weapon, so the drain being live means the emitter is at home, and a Vance field unit would come out of your coat at the door anyway. Thirty coin at the cheap end of the market buys a hand-taser that runs off nothing. If you want the next chapter sooner, Support Us in the sidebar."
+# ⚠️ beat_0117 (rev 168) — THE RULEBOOK CAME OFF THIS TIP. It used to carry the whole one-core-one-weapon
+# argument in one clause, which was the ONLY thing in the game telling her she needed a weapon at all — and
+# cap_the_raid is hard-gated on taser_held, so a player who skimmed it stalled forever with nothing on screen
+# to explain why. That reasoning now lives in her head at cap_the_wait, where it is thinking rather than
+# instructions, and the tip goes back to being a pointer.
+tip        = "So keep working. Take shifts, go through the door, let him have the evening — the only way you are in that room when Cain walks into it is by being in that room. And you already worked out the rest of it lying on the cot: go and buy the thing you decided you were not going to be without. If you want the next chapter sooner, Support Us in the sidebar."
 when = [
   { trait = "bastien_drains_done", subject = "player", op = "gte", value = 1 },
   { flag = "raid_done", op = "is_false" },
@@ -13274,3 +13279,113 @@ text = "Out, and up."
 destinationType          = "specific"
 locationId               = "underworld_strip"
 time_progression_minutes = 30
+
+# ═══ cap_the_wait — beat_0117 (rev 168). SHE WORKS OUT SHE CANNOT BE EMPTY-HANDED. ══════════════════════
+# Auto-fire capstone @the_cot, pri 10, ONE-SHOT, gated bastien_drains_done gte 1 + plan_made is_false.
+# SETS plan_made, which is what re-opens activity_buy_taser.
+#
+# ⚠️ THIS EXISTS BECAUSE THE ORDER WAS INVERTED, AND IT IS THE rev-143 DEFECT IN THE SAME SHAPE.
+# LO's report at rev 143 was "there is nothing that she tells kess like that part failed, she just goes on to
+# buy the second part out of the sudden", and the diagnosis was that the purchase preceded its own
+# justification. The taser was identical: Bastien tells her Cain walks in unannounced — "Could be a
+# fortnight. Could be tonight" — and she had NO REACTION TO IT AT ALL, and then a card appeared at the market
+# explaining why she needed a weapon, reasoning the player only ever read AFTER going shopping. The only
+# prompt in the whole game was one clause at the end of card T's tip.
+# ⚠️ AND IT WAS A STALL RISK, NOT ONLY A CRAFT ONE. cap_the_raid is hard-gated on taser_held gte 1, so a
+# player who skimmed that tip kept walking into the back room to find an ordinary evening, forever, with
+# nothing on screen explaining why.
+#
+# ⚠️ IT IS A PROBLEM, NOT A PLAN — and this is a deliberate deviation from LO's phrasing, put to him and
+# taken. He said "when cain comes in she will have to somehow get him". She does not know what he is, whether
+# the drain even opens on something built the way she is (nothing in this game has ever tested that), whether
+# he would fight, or whether he would just leave. She has never once made a plan against a person; she has
+# been POINTED at people, which is a different verb, and her first independent act should not turn her into a
+# tactician. What she can decide in advance is the only thing she decides: not to be standing there empty.
+# ⚠️ AND IT IS WHAT MAKES THE RAID LAND. In cap_the_raid she uses the taser on BASTIEN, in about a second and
+# a half, for a reason she works out on the spot. A setup promising "I'll get Cain" makes that read as a plan
+# going wrong; a setup of "I cannot be empty-handed" makes it read as improvising with the one thing she had,
+# which is what the scene already is.
+#
+# ⚠️ STAGING — IT ANSWERS THE DRAIN'S OWN LAST LINE. bastien_drain_canvas.d0 ends on "the chair by the wall is
+# empty and will not always be", and she walks out through the bar carrying eleven years of his. This is that
+# sentence answered, at her own bunk, which is now the room where the face comes off and the thinking happens.
+# ⚠️ NOT GATED ON THE FACE BEING OFF, and that is a safety call over a thematic one. She would take it off
+# first — but a player who never does would never see this beat, never get the taser and never reach the
+# raid, so the prose stays face-agnostic and the gate stays on the drain.
+# ⚠️ IT MOVES THE ONE-CORE-ONE-WEAPON RULE OUT OF A QUEST TIP AND INTO HER HEAD, where it is reasoning rather
+# than a rulebook. Card T's tip is re-cut in the same beat to be a pointer again.
+# ⚠️ HER INTERIOR IS RATIONED EVEN HERE — the chapter's register rule. Three thought_bubbles in nine beats,
+# and every one of them is arithmetic rather than feeling.
+# MEDIA: none. It reuses the room she is standing in.
+[[canvases]]
+id          = "cap_the_wait"
+name        = "What she can decide in advance"
+description = "beat_0117 (rev 168). Auto-fire capstone @the_cot, pri 10, one-shot, gated bastien_drains_done gte 1 + plan_made is_false. SETS plan_made, which is what opens activity_buy_taser — so the reason now always precedes the purchase, which is the rev-143 fix applied before it became a defect. She has just had eleven years out of Bastien and walked home with it, and the one thing she cannot put down is that Cain arrives unannounced. It is a PROBLEM, NOT A PLAN (a deliberate deviation from LO's phrasing, put to him and taken): she does not know what he is, whether the drain opens on something built like her, whether he fights or just leaves. The only thing she decides in advance is not to be empty-handed — which is what makes the raid read as improvisation rather than a plan going wrong. Carries the one-core-one-weapon reasoning that used to live in a quest tip. NOT gated on the face being off: a player who never takes it off would otherwise never reach the raid. 9 beats / 8 clicks."
+[canvases.trigger]
+location      = "the_cot"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "bastien_drains_done", operator = "gte", value = 1 },
+  { type = "flag",  subject = "player", flag_key  = "plan_made",           operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "What she can decide in advance"
+blocks = [
+  { type = "paragraph", content = "She gets back to the berth somewhere in the small hours with eleven years of a man's business in her head and nowhere to put any of it." },
+  { type = "cascade", props = { beats = [
+    # 1 — the thing she cannot put down. His own words, quoted back.
+    { blocks = [
+        { type = "paragraph", content = "The pad, the tap, the hull creaking on its blocks outside. She lies down and does not sleep, and the sentence that keeps coming back is not the one about Cain being weak or the one about eleven years of paper." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Could be a fortnight. Could be tonight. He's never once told me he was coming." },
+    ] },
+    # 2 — the shape of it: not a hunt. A wait.
+    { advance_text = "Turn it over.", blocks = [
+        { type = "paragraph", content = "So it is not a question of finding him. Nobody finds him — that is the whole of what eleven years of arrangement bought Bastien, and Bastien is the closest thing he has to a friend." },
+        { type = "paragraph", content = "It is a question of being in that room. And she is in that room, four nights out of six, with a tray." },
+    ] },
+    { advance_text = "Follow it.", blocks = [
+        { type = "paragraph", content = "Which means the work is already done. She does not have to do anything clever. She has to keep turning up and let a door open behind her, and one of those nights the man she was built to kill will walk through it." },
+    ] },
+    # 3 — WHAT SHE DOES NOT KNOW. This is the beat that keeps it a problem instead of a plan.
+    { advance_text = "Then what.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Then what." },
+        { type = "paragraph", content = "She has no answer and she works at it for an hour and still has no answer, and what she gets instead is a list of things she does not know." },
+    ] },
+    { advance_text = "Count them.", blocks = [
+        { type = "paragraph", content = "Whether the drain even opens on a thing built the way she is built. She has fired it at nine men and not once at something with a core in it, and there is nobody to ask." },
+        { type = "paragraph", content = "Whether he fights. Whether he is fast. Whether he would look at her once and walk straight back out through the alley door and never come to that room again." },
+    ] },
+    { advance_text = "And the last one.", blocks = [
+        { type = "paragraph", content = "And whether she wants to do anything to him at all, which is the one she stops on, and does not pick back up." },
+    ] },
+    # 4 — THE ONE THING SHE CAN DECIDE. Modest, and that is the point.
+    { advance_text = "Take what there is.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "None of it can be worked out from a cot in the dark. All of it gets decided in about four seconds in a room she does not control. So decide the one part that does not need him in it." },
+        { type = "paragraph", content = "She is not going to be standing there with nothing in her hands." },
+    ] },
+    # 5 — WHY THE EMITTER IS OUT. The rule, in her head, as reasoning rather than a rulebook.
+    { advance_text = "Go through the loadout.", blocks = [
+        { type = "paragraph", content = "Not the emitter. One core feeds one weapon and the drain has to be the live one every night she goes through that door, because the drain is the entire reason she is allowed through it." },
+        { type = "paragraph", content = "And a Vance field unit in her coat lining comes out of it at the door, in a man's hand, in front of forty people who all work the same floor she does." },
+    ] },
+    # 6 — the answer, and its size. Terminal beat, no advance_text.
+    { blocks = [
+        { type = "paragraph", content = "So: something cheap. Something that runs off nothing and owes the company nothing, that a woman working a bar floor down here would have in her coat anyway, and that survives a pat-down because it is exactly as unremarkable as it looks." },
+        { type = "paragraph", content = "It is not a plan. She knows it is not a plan. It is the one piece of the night she can buy in advance, and she is going to go and buy it in the morning." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sleep on it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 60
+flagEffects = [
+  { targetType = "player", flag = "plan_made", op = "set" },
+]
