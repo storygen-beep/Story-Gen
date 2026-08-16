@@ -628,7 +628,10 @@ flag_keys   = []
 arc_stages  = ["The burnout"]
 
 # ─── Clothing — the worn-state COVER catalog (beat_0015) ──────────────────────
-# Two "dress"-slot looks she swaps between at the rack (wardrobe page @ wren_room):
+# Two "dress"-slot looks she swaps between at activity_wren_change, the Act-1 change surface in her room
+# (3_activities). ⚠️ NOT the rack — the rack is the engine-injected wardrobe page and it lives at
+# wardrobe_location, which is a scalar and has been the_cot since rev 166. Between the opening and berth_home
+# the rack is unreachable, which is why the change surface exists at all (beat_0118, rev 169):
 #   • her DEFAULT "asset self" (initial=true, equipped at start) = the out-of-cover state
 #     ("her own clothes" — what Renner squints at). The bra/briefs/flats just keep her from
 #     reading naked in the wardrobe UI; the dress slot is the one that matters.
@@ -690,8 +693,9 @@ corruption = 0
 # dock face). Both the type and its matching rule exist, so neither side of the player_portrait audit warns.
 # Gates key on item_id (`clothing_item cover_analyst equipped`), NOT type — adding the type is portrait-only.
 # Granted UN-worn (no initial): Mercer issues it at the salvage_relaunch dispatch (wardrobeEffects add,
-# 5_scenes); she equips it at the rack (wren_room) to become "the analyst." company_grays (her sharper
-# asset-self) is the OUT-OF-COVER tell.
+# 5_scenes); she equips it at activity_wren_change in her room (3_activities) to become "the analyst."
+# company_grays (her sharper asset-self) is the OUT-OF-COVER tell, and cap_1a_close puts her back into it on
+# the way out of the Spire, because wren_room seals behind her and the rack is shut until berth_home.
 [[clothing]]
 id         = "cover_analyst"
 name       = "Junior-analyst kit"

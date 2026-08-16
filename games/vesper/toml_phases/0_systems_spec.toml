@@ -89,6 +89,18 @@ flagEffects = [
 # it is the only space in the game that is hers, so the wardrobe, the four equipped-based undress portraits
 # and the feed line all sit in the room they actually belong to. It also makes card P's tip — "Get to the
 # cot at the Berth and change" — literally true, where before it was only nearly true.
+#
+# ⚠️ beat_0118 (rev 169) — THE MOVE LEFT ACT 1 WITH NO RACK AT ALL, and that was a cold-start blocker, not a
+# nicety. the_cot is entry-gated berth_home, which is late in Act 2; every cover is granted `add` and none is
+# `initial`; so from the opening to berth_home the player could equip NOTHING. Renner's whole hub gates on
+# `clothing_item cover_dockhand equipped`, so Mission 1 was uncompletable on a fresh save, and after rev 166
+# The Archive's cover_analyst joined it (berth_home is strictly later than salvage_entered, which is what
+# kess_berth had needed). Invisible in play because every dev jump equips a cover directly. Found by the
+# quests-page audit: card A tells the player to wear the coveralls "from your room" and there was no way to.
+# THE FIX IS NOT ANOTHER MOVE. The rack stays here, because unequip exists only on the WardrobePage and the
+# four undress portraits below depend on it. Act 1 gets activity_wren_change (3_activities) instead — the
+# activity_bar_change pattern, equip-only, gated `clothing_item ... owned` — and cap_1a_close re-equips
+# company_grays on the way out of the sealing Spire so she is not stranded in a Vance kit until berth_home.
 [settings]
 # Vesper is narrated in THIRD person — Wren is watched, not inhabited (the still-point /
 # owned-weapon PC). Declared so the engine labels her own dialogue with her name instead of

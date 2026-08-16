@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 168,
+  "book_revision": 170,
   "register": {
     "person": "third"
   },
@@ -2069,6 +2069,33 @@
         "activity_buy_taser re-gated bastien_drains_done -> plan_made, so the reason precedes the purchase",
         "card T loses the one-core-one-weapon rulebook clause"
       ]
+    },
+    {
+      "id": "beat_0118",
+      "status": "validated",
+      "target_phase": "0_systems + 1_metadata + 3_activities + 5_scenes",
+      "title": "Quests audit 1 — the Act-1 change surface (cold-start wardrobe blocker)",
+      "introduces": [
+        "activity_wren_change (canvas)"
+      ],
+      "canvases": [
+        "activity_wren_change @wren_room — three equip choices gated `clothing_item ... owned`, show_when_locked",
+        "cap_1a_close — wardrobeEffects equip company_grays on the way out of the sealing Spire"
+      ],
+      "notes": "wardrobe_location is a scalar and had been the_cot since rev 166 (entry-gated berth_home); every cover is granted `add` with no `initial`, so nothing could be equipped between the opening and berth_home and Mission 1 was uncompletable from a cold start. The rack stays at the_cot because unequip and the undress portraits only exist on the WardrobePage. Proven live: dress swaps both ways and both the equipped and unequipped gates flip."
+    },
+    {
+      "id": "beat_0119",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "Quests audit 2 — card T split, goals across the chapter, Bastien's section restored",
+      "introduces": [],
+      "canvases": [
+        "card T -> T1/T2 split on plan_made; T2 carries cap_the_raid's own two gate clauses as live bullets + ready_text",
+        "goals/ready_canvas on cards M, N, O, P, R, S (Q left goal-less: its only axis is npc_bastien.relation and naming him early spoils the hinge)",
+        "four npc_bastien cards after Mercer's; B4 terminal with the plain badge, keeping the taken-not-killed secret"
+      ],
+      "notes": "Spine was already clean (one Story card in all eleven states). T claimed she had thought a thought cap_the_wait had not yet given her — the rev-162 elapsed-time defect again — and went stale after the purchase. No ready_tip exists, so the tip keeps only the evergreen half. 200 renders live-checked across eleven states, zero page errors. Heat unmoved."
     }
   ],
   "structure_registry": {
@@ -2808,7 +2835,7 @@
     "PLAYER PORTRAIT reactive art (follow-on, NOT AI-gen): source 4 DOWNLOADED photos of the SAME woman as wren.jpg (naked/topless/bottomless/underwear), drop into videos/portraits/, uncomment the 4 image lines in the [player_portrait] block (0_systems_spec.toml), re-merge+rebuild. They resolve immediately + degrade via onerror. Optional two-faces later: add worn_type tags to company_grays/cover_dockhand + a distinct in-cover portrait.",
     "beat_0015 DONE + green + live-verified + WARDROBE ART sourced+live-verified (turn 38). Open: DEPLOY to the portal (storygen-beep/Story-Gen) when LO wants it live (still local). FUTURE Act work (the A.5->B frontier): Bastien/Calloway deep-design+build (covers granted + tagged by worn_type so wrong-cover-at-wrong-mark = wrong reaction), the_site/chip ending, the disguise SHOP + Pell upgrades (the credits sink)."
   ],
-  "_active_beat": "THE FACE (Act 2 · 1c) — beat_0117 BUILT + GREEN, rev 168. 185 canvases, 30 locations.\nSHIPPED: cap_the_wait @the_cot (9 beats, auto-fire after the first drain, SETS plan_made) ·\nactivity_buy_taser re-gated from bastien_drains_done onto plan_made · card T's rulebook clause removed.\n⚠️ THE ORDER WAS INVERTED — THE rev-143 DEFECT IN THE SAME SHAPE. Bastien said \"could be a fortnight, could\nbe tonight\" and she had NO REACTION AT ALL, then a market card appeared explaining why she needed a weapon,\nreasoning the player only read AFTER going shopping. The only prompt in the game was one clause at the end\nof a quest tip — and cap_the_raid is HARD-GATED on taser_held, so a skimming player stalled forever with\nnothing on screen to explain why the back room kept being an ordinary evening.\n⚠️ IT IS A PROBLEM, NOT A PLAN — a deliberate deviation from LO's phrasing, put to him and taken. She does not\nknow whether the drain opens on something built like her (never tested in this game), whether he fights, or\nwhether he would just leave; and the beat she stops on is whether she wants to do anything to him at all.\nShe has never made a plan against a person — she has been POINTED at people. The only thing she decides in\nadvance is not to be standing there empty.\n⚠️ AND THAT IS WHAT MAKES THE RAID LAND: she uses the taser on BASTIEN, on the spot, so \"I cannot be\nempty-handed\" reads as improvisation where \"I'll get Cain\" would read as a plan going wrong.\n⚠️ NOT GATED ON THE FACE BEING OFF — a safety call over a thematic one. A player who never takes it off would\notherwise never see the beat, never get the taser and never reach the raid.\n⚠️ THE ONE-CORE-ONE-WEAPON RULE MOVED OUT OF A QUEST TIP AND INTO HER HEAD, where it is reasoning.\n⚠️ VERIFIED BY SIMULATION: ZERO states exist where the taser is buyable while plan_made is false; the chain\ndrain 1 -> cap_the_wait -> taser -> drain 2 -> raid is reachable at every step; the capstone's exit resolves\nto Location_the_cot; 5/5 hot held; 34.0% held; spine one card in all eleven states, one boundary, five badges.\n⚠️ FOUND AND LEFT ALONE (pre-existing, not this chapter): older quest tips still say \"switch back to the drain\nweapon at your bench in your room\" — that bench moved to Kess's berth at rev 131 and wren_room is sealed.\n⚠️ STILL OPEN: media harvest (24 slots) · the 17-suite live run · Sol/Colm burned-bar bands · floor 6.3%.",
+  "_active_beat": "THE FACE (Act 2 · 1c) — beats_0118/0119 BUILT + GREEN, rev 170. 186 canvases, 30 locations.\nTHE QUESTS-PAGE AUDIT AND ITS FIXES (design_the_face.md §25).\nSHIPPED: activity_wren_change @wren_room — the Act-1 change surface, and it is a COLD-START BLOCKER FIX: wardrobe_location is a scalar, had been the_cot since rev 166 (entry-gated berth_home), and every cover is granted `add` with no `initial`, so NOTHING could be equipped between the opening and berth_home and Mission 1 was uncompletable on a fresh save (Renner's whole hub gates on cover_dockhand equipped). The rack does NOT move again — unequip and the four undress portraits exist only on the WardrobePage. cap_1a_close now re-equips company_grays on the way out of the sealing Spire ·\ncard T SPLIT on plan_made into T1/T2 — it had asserted she worked the plan out on the cot before cap_the_wait could fire (the rev-162 elapsed-time defect again) and went stale after the taser purchase; T2 carries cap_the_raid's own two gate clauses as live bullets plus ready_text, and the tip keeps only the evergreen half because there is NO ready_tip ·\ngoals/ready_canvas added to cards M/N/O/P/R/S (Q deliberately left goal-less — its only axis is npc_bastien.relation and naming him before cap_bastien_notices spoils the hinge) ·\nBastien's section RESTORED — four cards after Mercer's, B4 terminal on the plain badge, keeping the taken-not-killed secret.\nVERIFIED LIVE (headless): all eleven chapter states plus the cold-start wardrobe flow, every counter and pin correct, all five ready_canvas slugs resolving, zero page errors. 📍 renders but 🕒 does NOT — _formatCanvasSchedule reads the canvas's own scheduleParams and hub_bastien has none.\nSPINE UNCHANGED: exactly one Story card in all eleven states. Heat unmoved (explicit floor 6.3%, explicit in repeatable 34.0%).\nOPEN: media harvest (24 slots, media_manifest_the_face.json) · the Colm/Renner/Calloway heat backlog · the 17-suite live run (needs a media-complete build).",
   "decisions_log": [
     {
       "turn": 1,

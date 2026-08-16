@@ -10477,6 +10477,16 @@ flagEffects = [
   { targetType = "player", flag = "archive_1a_done", op = "set" },
   { targetType = "player", flag = "controller_held", op = "set" },
 ]
+# ⚠️ beat_0118 (rev 169) — PUT HER BACK IN GRAYS ON THE WAY OUT. This exit is the Spire seal: the zone-cut
+# fires here and wren_room (with activity_wren_change in it) is unreachable forever after, while the rack at
+# the_cot does not open until berth_home. Without this line a player who walked onto the Vance floor in the
+# analyst kit — which is the only way that scene runs — leaves the Spire wearing Vance company clothes and
+# cannot take them off for the whole 1b handoff, and the player-portrait resolver keys off worn_type, so the
+# sidebar would show the analyst face through the entire underworld. `equip` on the dress slot replaces
+# whatever is in it, so this is a straight swap and is idempotent on a re-entry that cannot happen anyway.
+wardrobeEffects = [
+  { action = "equip", item_id = "company_grays" },
+]
 
 # ── Quests page — Story-Goals spine (Tier 1, no npc_id). A = the retargeted Salvage card (above). B1/B2/C/D here.
 # Flag-milestone chain, one card live at a time (exclusive by flags). ──
@@ -10815,6 +10825,12 @@ when = [
   { flag = "leash_cut", op = "is_true"  },
   { flag = "chip_read", op = "is_false" },
 ]
+# ⚠️ beat_0119 (rev 170) — ready_canvas WITH NO GOALS, which is the cheapest correct shape on this page. A card
+# with an empty goals array evaluates allMet vacuously true (setup.evaluateGoals), so the 🔓 frame renders on
+# its own with 📍 the location (and 🕒 only where the target canvas carries scheduleParams of its OWN — none
+# of this chapter's targets do, so in practice it is the pin alone; verified live). There is nothing to count
+# here — one canvas, one click — and what the player actually needs is the name of the room it is in.
+ready_canvas = "cap_chip_read"
 
 # ══ CARD N — THE FACE's first Story-Goal, and the new holder of the build boundary (beat_0095, rev 146). ══
 # ⚠️ MANDATORY, AND THIS IS THE EIGHTH TIME IN THIS GAME. cap_chip_read's exit sets chip_read, which closes M
@@ -10846,6 +10862,14 @@ when = [
   { flag = "chip_read",       op = "is_true"  },
   { flag = "wall_understood", op = "is_false" },
 ]
+# ⚠️ beat_0119 (rev 170) — THE ONE PLACE ON THIS PAGE A COUNTER IS GENUINELY LOAD-BEARING. The four wall_*
+# refusals are scattered across four locations behind four different presence windows, and cap_the_wall needs
+# THREE of them; without a bullet the player has no way to know whether a refusal counted, or how many are
+# left, and "start asking" reads as an open-ended errand instead of a three-step one. No ready_canvas: the
+# third refusal fires cap_the_wall immediately, so the met state never reaches the page.
+goals = [
+  { trait = "wall_refusals", subject = "player", op = "gte", value = 3, label = "Ask around in your own face" },
+]
 
 # ══ CARD O — the face (beat_0096, rev 147). Frontier, and the boundary moves here. ══════════════════════
 # ⚠️ MANDATORY: cap_the_wall's exit sets wall_understood, which closes N, and N is the only live Story-Goal
@@ -10869,6 +10893,15 @@ when = [
   { flag = "wall_understood", op = "is_true"  },
   { flag = "face_bought",     op = "is_false" },
 ]
+# ⚠️ beat_0119 (rev 170) — a COIN bullet, because this is the only gate in the chapter that is purely a price.
+# The tip says "it will cost more than you have" and then names two income surfaces; the counter turns that
+# from a warning into a distance. 120 is activity_buy_face's own cost — if that number ever moves, this moves
+# with it. ready_canvas pins the stall once she can afford it, and the card stays live until she buys, so
+# unlike card S the 🔓 frame here is actually reachable.
+goals = [
+  { trait = "coin", subject = "player", op = "gte", value = 120, label = "Save up for the face" },
+]
+ready_canvas = "activity_buy_face"
 
 # ── Quests page — Calloway's section (Tier 2, npc_id). Stepped, one card at a time (exclusive by flags); the
 # goal LABEL carries the current lever (the sidebar 'next' row renders only the goal block). ──
@@ -11073,14 +11106,84 @@ when = [
 ]
 
 # ══════════════════════════════════════════════════════════════════════════════════════════════════════════
-# Quests page — BASTIEN's section is SHELVED (rev 141, beat_0091). All three cards went to
-# games/vesper/shelf/bastien_present_day.toml with the thread they describe, and they had to: every one of
-# them is an instruction about a door, a search and a switch that no longer exist in this build. A card whose
-# whole subject has been shelved is the same defect the third card was written to prevent one rung further
-# down — a live instruction about an object the player cannot reach.
-# ⚠️ HE KEEPS NO SECTION AT ALL IN 0.1.8, AND THAT IS CORRECT RATHER THAN A HOLE. The original header's own
-# rule was that his section starts when he becomes somebody she can act on (bastien_hub_open); in this build
-# he never does. Act 1 captivity gave him no card either, for the reason recorded on the shelf.
+# Quests page — BASTIEN's section, RESTORED at beat_0119 (rev 170). Shelved at rev 141 with the thread it
+# described; the rev-141 header's own rule was that his section starts when he becomes somebody she can act
+# on, and in 0.1.9 he finally does. What went to games/vesper/shelf/bastien_present_day.toml stays shelved —
+# those three cards were instructions about a door, a search and a switch that this build does not have. These
+# four are new and read the ladder this chapter actually shipped.
+#
+# ⚠️ THIS WAS A REAL HOLE, FOUND BY THE QUESTS-PAGE AUDIT. Cards per NPC at 0.1.9 ship: Renner 10, Calloway 5,
+# Colm 5, Mercer 3, Bastien ZERO — for the chapter's own conquest, who carries a four-rung ladder and the
+# hottest repeatable loop in the game. Every other arc NPC answers "how far am I with him" on this page and he
+# answered nothing.
+#
+# ⚠️ PLACED AFTER MERCER ON PURPOSE. NPC sections render in the file order of an NPC's FIRST card (QuestsPage
+# walks setup.quests_cards and pushes slugs in order), so this puts him last, which is chronologically right.
+# No other wiring is needed: the sections come from the cards, not from help_data, and npc_bastien carries no
+# hidden_from_ui.
+#
+# ⚠️ NO terminal_text ON B4, DELIBERATELY. Card U is the one card in this game permitted to name the future,
+# and the rule is recorded on it. B4 takes the plain ✓ "Arc complete" badge the other four NPC terminals take.
+# ⚠️ AND B4 KEEPS THE SECRET. He was carried out alive and that does not become clear until the next release,
+# so the card says what she saw — they took him — and never that he is dead or that he can be found.
+#
+# ── B1 — she knows who he is; he does not know her. Working toward his door. ──
+[[quest_cards]]
+priority   = 11
+npc_id     = "npc_bastien"
+text       = "The man who kept you three months sits four hours a night ten feet from where you carry trays, and looks straight through you. He is not a mark and there is nothing in him to seduce — what he has is a room, and the only way into it is to be somebody he decides about."
+tip        = "Take shifts and keep taking them. Every rung is his call, not yours, and the only thing you control is being on the floor when he makes the next one. Wear the face every time — out of it the job does not exist."
+# The relation counter is safe HERE and nowhere earlier: bastien_seen means she has recognised him, so naming
+# him on the page no longer spoils the hinge. 18 is rung_bar_promotion_4's own gate.
+goals = [
+  { trait = "relation", subject = "npc", npc_id = "npc_bastien", op = "gte", value = 18, label = "Be somebody he decides about" },
+]
+when = [
+  { flag = "bastien_seen", op = "is_true" },
+  { trait = "bar_rung", subject = "player", op = "lt", value = 4 },
+]
+
+# ── B2 — through the door, not yet drained. ──
+[[quest_cards]]
+priority   = 12
+npc_id     = "npc_bastien"
+text       = "He searches you at the door every night, in front of the whole bar, because he is establishing that he may. Then it shuts and he wants to talk — not about himself. He has a stack of questions about a barmaid who does not add up, and no answer to any of them."
+tip        = "The drain only opens one way and it needs your skin on his when it does. Get him there and take everything he has."
+# The counter and not the pin: the story card live at this same state already carries ready_canvas =
+# hub_bastien, and two sections printing the same 📍 is noise. This tier answers distance instead.
+goals = [
+  { trait = "bastien_drains_done", subject = "player", op = "gte", value = 1, label = "Take him to the drain" },
+]
+when = [
+  { trait = "bar_rung", subject = "player", op = "gte", value = 4 },
+  { trait = "bastien_drains_done", subject = "player", op = "lt", value = 1 },
+]
+
+# ── B3 — drained, and the room is a place she waits now. ──
+[[quest_cards]]
+priority   = 13
+npc_id     = "npc_bastien"
+text       = "You have had everything he knows and he has no idea it is gone. He still pours himself something he does not drink, still asks his questions, still cannot make the barmaid come out even. The room stopped being a thing you are working the night he emptied, and started being a thing you sit in."
+tip        = "His door is open whenever he is behind it. Take what you want in there — and be in it on the evening the alley door opens."
+# The pin, and here it earns its place: this is the standing surface for the rest of the release and the room
+# it names has no nav card. 📍 only — hub_bastien carries no scheduleParams of its own (the 20:00-23:59 window
+# is npc_bastien's schedule row, reached through requires_npc), so no 🕒 renders. Verified live.
+ready_canvas = "hub_bastien"
+when = [
+  { trait = "bastien_drains_done", subject = "player", op = "gte", value = 1 },
+  { flag = "raid_done", op = "is_false" },
+]
+
+# ── B4 — terminal. He is gone, and she does not know where. ──
+[[quest_cards]]
+priority   = 14
+npc_id     = "npc_bastien"
+text       = "You put him on the floor of his own back room with thirty coin of grey plastic against the back of his neck, and then three machines that were never there for him carried him out through the hole they came in by. No shot, no argument, no reason given. Eleven years of paper burning behind them and a chair by the wall that will not be filled again."
+tip        = "There is nothing left to work here. The Undertow does not open in the evenings now and what is in the back room is ash."
+terminal   = true
+when = [
+  { flag = "raid_done", op = "is_true" },
+]
 # ══════════════════════════════════════════════════════════════════════════════════════════════════════════
 
 # ⚠️ KESS GETS NO SECTION, DELIBERATELY (beat_0084). He is not an arc — no relation climb, no corruption, no
@@ -11727,6 +11830,14 @@ when = [
   { flag = "face_bought",   op = "is_true"  },
   { flag = "stranger_seen", op = "is_false" },
 ]
+# ⚠️ beat_0119 (rev 170) — THE TWO-STEP THIS CARD DESCRIBES IS THE ONE PLAYERS SPLIT: buying the face and
+# WEARING the face are different acts since rev 167, in different districts, and everything downstream gates on
+# face_worn rather than on face_bought. A flag bullet names the first step and ready_canvas pins the second, so
+# the card reads "put it on (cot)" and then flips to "🔓 📍 The Undertow" the moment she has.
+goals = [
+  { flag = "face_worn", op = "is_true", label = "Put the face on (your cot, at the Berth)" },
+]
+ready_canvas = "cap_stranger_at_the_bar"
 
 # ═══ cap_sol_hires — beat_0098 (rev 149). Sol puts her on the floor. ════════════════════════════════════
 # Auto-fire capstone @underworld_bar, pri 10, ONE-SHOT, gated stranger_seen is_true + bar_hired is_false +
@@ -11874,10 +11985,21 @@ when = [
 priority   = 10
 text       = "Bastien. Grey through the sides now, a good coat, a drink he does not touch, in a chair set at the angle a chair is set at when a man wants the door in front of him all evening. He owns the bar. He owns The House you have been earning at. He has been buying that company's paper for years and it goes into the room behind you, and you have been carrying trays around inside the answer since the night you started. He looked straight at you and saw a girl with a tray."
 # ⚠️ beat_0104 (rev 154) — R GIVES UP THE BOUNDARY to card S. Two-step, right order.
-tip        = "He never once looked at your face. Three months in that cell and what he watched was the light under your sternum and what he wrote down was the number — and the light is out now, and the chip is on a bench four miles from here. So he will not know you. Keep working, and let him keep deciding: every step nearer that door has been his call so far and the only thing you control is being on the floor when he makes the next one. If you want the next chapter sooner, Support Us in the sidebar."
+# ⚠️ beat_0119 (rev 170) — THE DRESS CLAUSE. rung_bar_promotion_3 grants dress_undertow and the bathroom opens
+# at the same rung, and NOTHING on this page said so; the change is a targeted surface at a location she has
+# never had a reason to walk into, so a player who missed the line in the promotion scene had a garment in a
+# bag and no idea where it goes on. Named here because this is the card that is live across rungs 2 and 3.
+tip        = "He never once looked at your face. Three months in that cell and what he watched was the light under your sternum and what he wrote down was the number — and the light is out now, and the chip is on a bench four miles from here. So he will not know you. Keep working, and let him keep deciding: every step nearer that door has been his call so far and the only thing you control is being on the floor when he makes the next one. When something comes down from that room for you to wear, the staff toilet at the back is where it goes on. If you want the next chapter sooner, Support Us in the sidebar."
 when = [
   { flag = "bastien_seen", op = "is_true" },
   { trait = "bar_rung", subject = "player", op = "lt", value = 4 },
+]
+# ⚠️ beat_0119 (rev 170) — the rung counter, and it is the longest grind in the chapter: three promotions off
+# npc_bastien.relation at +2/+3/+3 a shift, capped at two shifts a day. bar_rung rather than his relation on
+# purpose — the number the player can see should be the one the STORY turns on, and his meter belongs on his
+# own card, where naming him is already safe. No ready_canvas: rung 4 closes this card in the same tick.
+goals = [
+  { trait = "bar_rung", subject = "player", op = "gte", value = 4, label = "Work your way to the back room" },
 ]
 
 # ═══ cap_bastien_notices — beat_0099 (rev 150). SHE KNOWS HIM. HE DOES NOT KNOW HER. ════════════════════
@@ -12864,11 +12986,21 @@ effects = [
 [[quest_cards]]
 priority   = 10
 text       = "You are through the door. He searches you at it every time — coat, lining, cuffs, and the seam at the base of your spine, in front of the whole bar, because he is establishing that he may. Then the door shuts and the bar stops existing, and along the far wall floor to shoulder are eleven years of somebody else\u0027s company in box files with dated spines."
-tip        = "You know how this works. The drain only ever opens one way and it needs your skin on his when it does, so it is the ass finish and your hand on his wrist, and nothing else in that room will do it. Get him there and take everything he has."
+tip        = "You know how this works. The drain only ever opens one way and it needs your skin on his when it does, so it is the ass finish and your hand on his wrist, and nothing else in that room will do it. Get him there and take everything he has. If you want the next chapter sooner, Support Us in the sidebar."
 when = [
   { trait = "bar_rung", subject = "player", op = "gte", value = 4 },
   { trait = "bastien_drains_done", subject = "player", op = "lt", value = 1 },
 ]
+# ⚠️ beat_0119 (rev 170) — ready_canvas, AND DELIBERATELY NO GOAL. A card with no goals evaluates allMet
+# vacuously true (setup.evaluateGoals), so ready_canvas alone renders the 🔓 frame — which is the whole value
+# here, because the room has no nav card and the door search is the only way in, and that is the thing players
+# get wrong. A `bastien_drains_done gte 1` bullet would have been dead config: the moment it is met this card
+# is closed and card T has taken over, so the bullet could only ever read 0 / 1 and would suppress the 🔓
+# frame the whole time it was on screen.
+# ⚠️ 📍 ONLY, NO 🕒 — verified live, not assumed. _formatCanvasSchedule reads the CANVAS's own scheduleParams,
+# and hub_bastien has none: its 20:00-23:59 window comes from npc_bastien's schedule row via requires_npc, so
+# the clock line does not render. The room's hours stay the tip's job.
+ready_canvas = "hub_bastien"
 
 # ══ CARD T — the wait (beat_0104, rev 154). Frontier; the boundary lives here. ═════════════════════════
 # ⚠️ MANDATORY: the drain bumps bastien_drains_done, which closes S.
@@ -12879,6 +13011,22 @@ when = [
 # go through the door, wait — which is the least intuitive instruction the game has ever given.
 # ⚠️ AND IT NAMES THE TASER AND WHY THE EMITTER IS NOT AN OPTION, because a player looking at a loadout
 # screen will otherwise reasonably ask why she is buying junk when she owns a weapon.
+#
+# ⚠️ beat_0119 (rev 170) — T IS NOW TWO CARDS, SPLIT ON plan_made, and the split is a defect fix. As ONE card
+# it spanned four distinct states (drain 1 / plan made / taser bought / drain 2) behind byte-identical text,
+# and it was wrong in three of them:
+#   • PREMATURE — the tip asserted "you already worked out the rest of it lying on the cot" from the instant
+#     the first drain landed, which is BEFORE cap_the_wait can possibly have fired (that canvas needs her to
+#     walk to the_cot). It told the player about a thought the character had not had. Same defect class as the
+#     "three weeks" line LO caught at rev 162: the page claiming elapsed events the player's pace controls.
+#   • STALE — it went on saying "go and buy the thing" for the whole rest of the chapter, including after she
+#     was carrying it.
+#   • SILENT ON THE SECOND DRAIN — cap_the_raid needs bastien_drains_done gte 2 and nothing said so; "let him
+#     have the evening" reads as the sex loop, not as another drain.
+# T1 covers the un-thought state and its ONLY goal is to send her home. T2 covers the rest and replaces the
+# prose instructions with two live counters, which cannot go stale because they are read from state.
+#
+# ── CARD T1 — she has the answer and has not sat with it yet. ──
 [[quest_cards]]
 priority   = 10
 text       = "Eleven years of it, and none of it for money. Bastien has been buying that company apart on paper and handing it to one man since before you existed — Cain, the name off a briefing room on the ninetieth floor, the thing you were built and pointed at. He is an early build with a lot of miles on him, taking Vance apart a year at a time and putting the good pieces in himself, and he is still nowhere near enough. Nobody knows where he lives. Not even the man who has supplied him for eleven years. But he comes to that room whenever he likes, through the alley door, and he has never once said he was coming."
@@ -12889,11 +13037,44 @@ text       = "Eleven years of it, and none of it for money. Bastien has been buy
 # cap_the_raid is hard-gated on taser_held, so a player who skimmed it stalled forever with nothing on screen
 # to explain why. That reasoning now lives in her head at cap_the_wait, where it is thinking rather than
 # instructions, and the tip goes back to being a pointer.
-tip        = "So keep working. Take shifts, go through the door, let him have the evening — the only way you are in that room when Cain walks into it is by being in that room. And you already worked out the rest of it lying on the cot: go and buy the thing you decided you were not going to be without. If you want the next chapter sooner, Support Us in the sidebar."
+tip        = "So keep working. Take shifts, go through the door, let him have the evening — the only way you are in that room when Cain walks into it is by being in that room. But go home first and lie down with it. There is a part of this you have not thought all the way through, and the cot is where you do your thinking. If you want the next chapter sooner, Support Us in the sidebar."
 when = [
   { trait = "bastien_drains_done", subject = "player", op = "gte", value = 1 },
+  { flag = "plan_made", op = "is_false" },
   { flag = "raid_done", op = "is_false" },
 ]
+# A FLAG goal, so it renders as a bare ◯ bullet with no counter — which is right, because there is nothing to
+# count. It names the room, which is the only instruction that matters in this state.
+goals = [
+  { flag = "plan_made", op = "is_true", label = "Work out what you do when he walks in (your cot)" },
+]
+
+# ══ CARD T2 — she has decided, and now it is arithmetic (beat_0119, rev 170). ══════════════════════════
+# ⚠️ MANDATORY: cap_the_wait sets plan_made, which closes T1. Thirteenth time in this game.
+# ⚠️ THE TWO BULLETS ARE THE WHOLE POINT. They are the exact two clauses of cap_the_raid's own gate, so the
+# page can no longer disagree with the engine about what opens the night, and they name the Black Market
+# because a player who has never had a reason to walk that row does not know the taser is sold there.
+# ⚠️ ready_text FIRES WHEN BOTH LAND, and it has to, because the tip below is written for a woman still
+# shopping. The 🔓 frame pins the back room at the same moment.
+[[quest_cards]]
+priority   = 10
+text       = "You know what he is now, and it does not help. Cain comes to that room whenever he likes, through the alley door, and has never once said he was coming — so there is no finding him and no waiting somewhere better. There is only being in the room, on the evenings he might, with something in your hands. You settled that much on the cot. The rest of it you will find out standing up."
+ready_text = "Two drains and thirty coin of grey plastic in your coat pocket, and there is nothing left to arrange. He searches you at the door every night and has never once found it, because it is not a weapon to anybody who builds them. Now it is evenings, and the alley door, and whether this is the one."
+# ⚠️ THE TIP CARRIES ONLY THE EVERGREEN HALF, and that is deliberate. ready_text swaps the FLAVOR when both
+# goals land but there is no ready_tip — the tip is one string for the card's whole life. So the two tasks
+# live in the bullets, where state keeps them honest, and the tip says the one thing that is true in every
+# state of this card: keep working and be in the room. An instruction to go shopping would have gone stale
+# here exactly the way the old single-card version did, which is the defect this split exists to kill.
+tip        = "Keep working. Take shifts, go through the door, let him have the evening. The only way you are in that room when Cain walks into it is by being in that room, and there is no shortcut anybody can sell you. If you want the next chapter sooner, Support Us in the sidebar."
+when = [
+  { flag = "plan_made", op = "is_true" },
+  { flag = "raid_done", op = "is_false" },
+]
+goals = [
+  { trait = "bastien_drains_done", subject = "player", op = "gte", value = 2, label = "Get him to the drain again" },
+  { trait = "taser_held", subject = "player", op = "gte", value = 1, label = "Something in your hands (the Black Market)" },
+]
+ready_canvas = "cap_the_raid"
 
 # ═══ cap_the_raid — beat_0105 (rev 155). THE NIGHT. ═════════════════════════════════════════════════════
 # Auto-fire Tier-3 capstone @bastien_backroom, pri 12, ONE-SHOT, gated bastien_drains_done gte 2 +
