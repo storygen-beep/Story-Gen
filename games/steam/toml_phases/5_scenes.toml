@@ -223,7 +223,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Back to work.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 20, effects = [
   { targetType = "player", trait = "propriety", op = "add", value = 6, clamp = true },
-  { targetType = "npc", npcId = "npc_june", trait = "relation", op = "subtract", value = 2, clamp = true },
+  { targetType = "npc", npcId = "npc_june", trait = "relation", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -365,7 +365,7 @@ blocks = [
 exit_block = { type = "location", text = "Get out before you say something.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 30, effects = [
   { targetType = "npc", npcId = "npc_nell", trait = "relation", op = "add", value = 4, clamp = true },
   { targetType = "player", trait = "arousal", op = "add", value = 3, clamp = true },
-  { targetType = "player", trait = "energy", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -597,7 +597,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Leave it there for tonight.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 30, effects = [
   { targetType = "npc", npcId = "npc_warren", trait = "lust", op = "add", value = 5, clamp = true },
-  { targetType = "player", trait = "propriety", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -642,7 +642,7 @@ exit_block = { type = "location", text = "Send him home to his Thursday.", confi
   { targetType = "npc", npcId = "npc_warren", trait = "lust", op = "add", value = 3, clamp = true },
   { targetType = "player", trait = "arousal", op = "add", value = 12, clamp = true },
   { targetType = "player", trait = "service", op = "add", value = 1, clamp = true },
-  { targetType = "player", trait = "propriety", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -754,7 +754,7 @@ blocks = [
 exit_block = { type = "location", text = "Rinse and turn the slab.", config = { destinationType = "specific", locationId = "the_scrub_room", time_progression_minutes = 60, effects = [
   { targetType = "player", trait = "service", op = "add", value = 2, clamp = true },
   { targetType = "npc", npcId = "npc_del", trait = "relation", op = "add", value = 3, clamp = true },
-  { targetType = "player", trait = "energy", op = "subtract", value = 5, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -5, clamp = true },
 ] } }
 
 
@@ -782,7 +782,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Back to the slab.", config = { destinationType = "specific", locationId = "the_scrub_room", time_progression_minutes = 15, effects = [
-  { targetType = "player", trait = "money", op = "subtract", value = 60, clamp = false },
+  { targetType = "player", trait = "money", op = "add", value = -60, clamp = false },
   { targetType = "npc", npcId = "npc_del", trait = "relation", op = "add", value = 10, clamp = true },
   { targetType = "player", trait = "propriety", op = "add", value = 2, clamp = true },
 ] } }
@@ -1250,7 +1250,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Turn the book back round.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 25, effects = [
   { targetType = "npc", npcId = "npc_casper", trait = "lust", op = "add", value = 6, clamp = true },
-  { targetType = "player", trait = "propriety", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -1294,7 +1294,7 @@ exit_block = { type = "location", text = "Let him out the front.", config = { de
   { targetType = "npc", npcId = "npc_casper", trait = "lust", op = "add", value = 3, clamp = true },
   { targetType = "player", trait = "arousal", op = "add", value = 12, clamp = true },
   { targetType = "player", trait = "money", op = "add", value = 30, clamp = false },
-  { targetType = "player", trait = "propriety", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = -3, clamp = true },
 ] } }
 
 
@@ -1474,7 +1474,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Put it in the frame behind the desk.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 30, effects = [
   { targetType = "player", trait = "house", op = "add", value = 12, clamp = true },
-  { targetType = "player", trait = "propriety", op = "subtract", value = 4, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = -4, clamp = true },
   { targetType = "npc", npcId = "npc_warren", trait = "relation", op = "add", value = 2, clamp = true },
 ] } }
 

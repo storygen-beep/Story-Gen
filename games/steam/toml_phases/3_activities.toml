@@ -428,7 +428,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Finish the round.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 45, effects = [
   { targetType = "player", trait = "service", op = "add", value = 1, clamp = true },
-  { targetType = "player", trait = "energy", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -3, clamp = true },
 ] } }
 
 
@@ -489,7 +489,7 @@ blocks = [
 exit_block = { type = "location", text = "Back to the floor.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 45, effects = [
   { targetType = "player", trait = "steam", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "arousal", op = "add", value = 4, clamp = true },
-  { targetType = "player", trait = "propriety", op = "subtract", value = 1, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = -1, clamp = true },
 ] } }
 
 
@@ -552,7 +552,7 @@ blocks = [
 exit_block = { type = "location", text = "Back to the floor.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 45, effects = [
   { targetType = "player", trait = "steam", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "arousal", op = "add", value = 5, clamp = true },
-  { targetType = "player", trait = "propriety", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -586,7 +586,7 @@ blocks = [
 exit_block = { type = "location", text = "Back through.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 60, effects = [
   { targetType = "player", trait = "steam", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "arousal", op = "add", value = 6, clamp = true },
-  { targetType = "player", trait = "propriety", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = -3, clamp = true },
 ] } }
 
 
@@ -913,7 +913,7 @@ blocks = [
 exit_block = { type = "location", text = "Rinse the slab down.", config = { destinationType = "specific", locationId = "the_scrub_room", time_progression_minutes = 60, effects = [
   { targetType = "player", trait = "service", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "money", op = "add", value = 8, clamp = false },
-  { targetType = "player", trait = "energy", op = "subtract", value = 6, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -6, clamp = true },
 ] } }
 
 
@@ -948,7 +948,7 @@ exit_block = { type = "location", text = "Next.", config = { destinationType = "
   { targetType = "player", trait = "service", op = "add", value = 1, clamp = true },
   { targetType = "player", trait = "steam", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "money", op = "add", value = 6, clamp = false },
-  { targetType = "player", trait = "energy", op = "subtract", value = 6, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -6, clamp = true },
 ] } }
 
 
@@ -989,8 +989,8 @@ exit_block = { type = "location", text = "Wash your hands.", config = { destinat
   { targetType = "player", trait = "service", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "money", op = "add", value = 12, clamp = false },
   { targetType = "player", trait = "arousal", op = "add", value = 6, clamp = true },
-  { targetType = "player", trait = "energy", op = "subtract", value = 5, clamp = true },
-  { targetType = "player", trait = "propriety", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -5, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -1034,8 +1034,8 @@ exit_block = { type = "location", text = "Turn the room round.", config = { dest
   { targetType = "player", trait = "service", op = "add", value = 1, clamp = true },
   { targetType = "player", trait = "money", op = "add", value = 30, clamp = false },
   { targetType = "player", trait = "arousal", op = "add", value = 12, clamp = true },
-  { targetType = "player", trait = "energy", op = "subtract", value = 8, clamp = true },
-  { targetType = "player", trait = "propriety", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -8, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = -3, clamp = true },
 ] } }
 
 
@@ -1216,7 +1216,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Stack the rest.", config = { destinationType = "specific", locationId = "the_changing_room", time_progression_minutes = 40, effects = [
   { targetType = "player", trait = "service", op = "add", value = 1, clamp = true },
-  { targetType = "player", trait = "energy", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -3, clamp = true },
 ] } }
 
 
@@ -1247,7 +1247,7 @@ blocks = [
 exit_block = { type = "location", text = "Out to the floor.", config = { destinationType = "specific", locationId = "the_changing_room", time_progression_minutes = 20, effects = [
   { targetType = "player", trait = "steam", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "arousal", op = "add", value = 4, clamp = true },
-  { targetType = "player", trait = "propriety", op = "subtract", value = 1, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = -1, clamp = true },
 ] } }
 
 
@@ -1281,7 +1281,7 @@ blocks = [
 exit_block = { type = "location", text = "Take the wet ones through.", config = { destinationType = "specific", locationId = "the_changing_room", time_progression_minutes = 30, effects = [
   { targetType = "player", trait = "steam", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "arousal", op = "add", value = 7, clamp = true },
-  { targetType = "player", trait = "propriety", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -1471,7 +1471,7 @@ blocks = [
   ] },
 ]
 exit_block = { type = "location", text = "Log it and go up.", config = { destinationType = "specific", locationId = "the_boiler", time_progression_minutes = 20, effects = [
-  { targetType = "player", trait = "energy", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -1493,7 +1493,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Back up.", config = { destinationType = "specific", locationId = "the_boiler", time_progression_minutes = 20, effects = [
-  { targetType = "player", trait = "money", op = "subtract", value = 40, clamp = false },
+  { targetType = "player", trait = "money", op = "add", value = -40, clamp = false },
   { targetType = "player", trait = "house", op = "add", value = 2, clamp = true },
 ] } }
 
@@ -1522,7 +1522,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Go up and look at it.", config = { destinationType = "specific", locationId = "the_boiler", time_progression_minutes = 60, effects = [
-  { targetType = "player", trait = "money", op = "subtract", value = 120, clamp = false },
+  { targetType = "player", trait = "money", op = "add", value = -120, clamp = false },
   { targetType = "player", trait = "house", op = "add", value = 15, clamp = true },
 ] } }
 
@@ -1552,7 +1552,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Go up as it gets light.", config = { destinationType = "specific", locationId = "the_boiler", time_progression_minutes = 90, effects = [
-  { targetType = "player", trait = "money", op = "subtract", value = 200, clamp = false },
+  { targetType = "player", trait = "money", op = "add", value = -200, clamp = false },
   { targetType = "player", trait = "house", op = "add", value = 20, clamp = true },
   { targetType = "npc", npcId = "npc_ivo", trait = "relation", op = "add", value = 6, clamp = true },
 ] } }
@@ -1655,7 +1655,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Go up and open at eight.", config = { destinationType = "specific", locationId = "the_boiler", time_progression_minutes = 120, effects = [
   { targetType = "npc", npcId = "npc_ivo", trait = "relation", op = "add", value = 5, clamp = true },
-  { targetType = "player", trait = "energy", op = "subtract", value = 6, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -6, clamp = true },
 ] } }
 
 
@@ -1888,7 +1888,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Cash up.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 300, effects = [
   { targetType = "player", trait = "money", op = "add", value = 40, clamp = false },
-  { targetType = "player", trait = "energy", op = "subtract", value = 25, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -25, clamp = true },
 ] } }
 
 
@@ -1936,7 +1936,7 @@ blocks = [
   { type = "paragraph", content = "Perrine's order book has a standing line in it. You have not changed the quantities and you are beginning to think the quantities were set for a busier house than the one she died running." },
 ]
 exit_block = { type = "location", text = "Put it through.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 45, effects = [
-  { targetType = "player", trait = "money", op = "subtract", value = 25, clamp = false },
+  { targetType = "player", trait = "money", op = "add", value = -25, clamp = false },
   { targetType = "player", trait = "service", op = "add", value = 1, clamp = true },
 ] } }
 
@@ -1959,7 +1959,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Take the certificate back.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 60, effects = [
-  { targetType = "player", trait = "money", op = "subtract", value = 75, clamp = false },
+  { targetType = "player", trait = "money", op = "add", value = -75, clamp = false },
   { targetType = "player", trait = "propriety", op = "add", value = 3, clamp = true },
 ] } }
 
@@ -1989,7 +1989,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Get back to the floor.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 30, effects = [
   { targetType = "player", trait = "service", op = "add", value = 2, clamp = true },
-  { targetType = "player", trait = "propriety", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -2135,7 +2135,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Shut the door on it.", config = { destinationType = "specific", locationId = "the_lodgers_room", time_progression_minutes = 45, effects = [
   { targetType = "player", trait = "service", op = "add", value = 1, clamp = true },
-  { targetType = "player", trait = "energy", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -3, clamp = true },
 ] } }
 
 
@@ -2365,7 +2365,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Take the broom back in.", config = { destinationType = "specific", locationId = "spring_street", time_progression_minutes = 30, effects = [
   { targetType = "player", trait = "service", op = "add", value = 1, clamp = true },
-  { targetType = "player", trait = "energy", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -2450,7 +2450,7 @@ blocks = [
 exit_block = { type = "location", text = "Take the linen through.", config = { destinationType = "specific", locationId = "spring_street", time_progression_minutes = 15, effects = [
   { targetType = "player", trait = "steam", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "arousal", op = "add", value = 6, clamp = true },
-  { targetType = "player", trait = "propriety", op = "subtract", value = 4, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = -4, clamp = true },
 ] } }
 
 
@@ -2752,7 +2752,7 @@ blocks = [
 exit_block = { type = "location", text = "Cash up.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 120, effects = [
   { targetType = "player", trait = "service", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "money", op = "add", value = 12, clamp = false },
-  { targetType = "player", trait = "energy", op = "subtract", value = 8, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -8, clamp = true },
 ] } }
 
 
@@ -2796,7 +2796,7 @@ exit_block = { type = "location", text = "Bolt it again.", config = { destinatio
   { targetType = "player", trait = "steam", op = "add", value = 1, clamp = true },
   { targetType = "player", trait = "money", op = "add", value = 25, clamp = false },
   { targetType = "player", trait = "arousal", op = "add", value = 11, clamp = true },
-  { targetType = "player", trait = "propriety", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -2979,7 +2979,7 @@ exit_block = { type = "location", text = "Next one in.", config = { destinationT
   { targetType = "player", trait = "service", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "money", op = "add", value = 18, clamp = false },
   { targetType = "player", trait = "arousal", op = "add", value = 8, clamp = true },
-  { targetType = "player", trait = "propriety", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = -3, clamp = true },
 ] } }
 
 
@@ -3009,7 +3009,7 @@ blocks = [
 exit_block = { type = "location", text = "Rinse it down.", config = { destinationType = "specific", locationId = "the_scrub_room", time_progression_minutes = 45, effects = [
   { targetType = "player", trait = "service", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "money", op = "add", value = 6, clamp = false },
-  { targetType = "player", trait = "energy", op = "subtract", value = 4, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -4, clamp = true },
 ] } }
 
 
@@ -3035,7 +3035,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Keep the receipt.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 20, effects = [
-  { targetType = "player", trait = "money", op = "subtract", value = 90, clamp = false },
+  { targetType = "player", trait = "money", op = "add", value = -90, clamp = false },
 ] } }
 
 
@@ -3063,7 +3063,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Put the ladder back.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 300, effects = [
-  { targetType = "player", trait = "money", op = "subtract", value = 150, clamp = false },
+  { targetType = "player", trait = "money", op = "add", value = -150, clamp = false },
   { targetType = "player", trait = "propriety", op = "add", value = 8, clamp = true },
 ] } }
 
@@ -3088,7 +3088,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Sort her out at six.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 30, effects = [
-  { targetType = "player", trait = "money", op = "subtract", value = 50, clamp = false },
+  { targetType = "player", trait = "money", op = "add", value = -50, clamp = false },
   { targetType = "player", trait = "energy", op = "add", value = 20, clamp = true },
 ] } }
 
@@ -3118,7 +3118,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Open at eight.", config = { destinationType = "specific", locationId = "the_boiler", time_progression_minutes = 240, effects = [
-  { targetType = "player", trait = "money", op = "subtract", value = 250, clamp = false },
+  { targetType = "player", trait = "money", op = "add", value = -250, clamp = false },
   { targetType = "player", trait = "house", op = "add", value = 12, clamp = true },
 ] } }
 
@@ -3147,7 +3147,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Get the first one on it.", config = { destinationType = "specific", locationId = "the_scrub_room", time_progression_minutes = 180, effects = [
-  { targetType = "player", trait = "money", op = "subtract", value = 180, clamp = false },
+  { targetType = "player", trait = "money", op = "add", value = -180, clamp = false },
   { targetType = "player", trait = "house", op = "add", value = 8, clamp = true },
   { targetType = "player", trait = "service", op = "add", value = 2, clamp = true },
 ] } }
@@ -3457,7 +3457,7 @@ exit_block = { type = "location", text = "Get the towels through.", config = { d
   { targetType = "player", trait = "steam", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "arousal", op = "add", value = 8, clamp = true },
   { targetType = "player", trait = "money", op = "add", value = 8, clamp = false },
-  { targetType = "player", trait = "propriety", op = "subtract", value = 1, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = -1, clamp = true },
 ] } }
 
 
@@ -3562,7 +3562,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Put the last load on.", config = { destinationType = "specific", locationId = "the_changing_room", time_progression_minutes = 40, effects = [
   { targetType = "player", trait = "service", op = "add", value = 1, clamp = true },
-  { targetType = "player", trait = "energy", op = "subtract", value = 4, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -4, clamp = true },
 ] } }
 
 
@@ -3714,7 +3714,7 @@ blocks = [
 exit_block = { type = "location", text = "Take the sign in.", config = { destinationType = "specific", locationId = "spring_street", time_progression_minutes = 20, effects = [
   { targetType = "player", trait = "steam", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "arousal", op = "add", value = 8, clamp = true },
-  { targetType = "player", trait = "propriety", op = "subtract", value = 5, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = -5, clamp = true },
 ] } }
 
 
@@ -3746,7 +3746,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Get the bus back.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 240, effects = [
-  { targetType = "player", trait = "money", op = "subtract", value = 120, clamp = false },
+  { targetType = "player", trait = "money", op = "add", value = -120, clamp = false },
   { targetType = "player", trait = "house", op = "add", value = 2, clamp = true },
 ] } }
 
@@ -3773,7 +3773,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Go back up.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 20, effects = [
-  { targetType = "player", trait = "money", op = "subtract", value = 100, clamp = false },
+  { targetType = "player", trait = "money", op = "add", value = -100, clamp = false },
   { targetType = "npc", npcId = "npc_ivo", trait = "relation", op = "add", value = 8, clamp = true },
 ] } }
 
@@ -3873,7 +3873,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Sleep.", config = { destinationType = "specific", locationId = "the_attic_flat", time_progression_minutes = 25, effects = [
   { targetType = "player", trait = "arousal", op = "add", value = 6, clamp = true },
-  { targetType = "player", trait = "energy", op = "subtract", value = 1, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -1, clamp = true },
 ] } }
 
 
@@ -3981,7 +3981,7 @@ blocks = [
 exit_block = { type = "location", text = "Go and get in the water.", config = { destinationType = "specific", locationId = "the_boiler", time_progression_minutes = 40, effects = [
   { targetType = "player", trait = "steam", op = "add", value = 1, clamp = true },
   { targetType = "player", trait = "arousal", op = "add", value = 4, clamp = true },
-  { targetType = "player", trait = "energy", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -3, clamp = true },
 ] } }
 
 
@@ -4016,7 +4016,7 @@ blocks = [
 exit_block = { type = "location", text = "Rinse the slab.", config = { destinationType = "specific", locationId = "the_scrub_room", time_progression_minutes = 50, effects = [
   { targetType = "player", trait = "service", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "money", op = "add", value = 10, clamp = false },
-  { targetType = "player", trait = "energy", op = "subtract", value = 5, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -5, clamp = true },
 ] } }
 
 
@@ -4078,7 +4078,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Put the brush away.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 45, effects = [
   { targetType = "player", trait = "house", op = "add", value = 2, clamp = true },
-  { targetType = "player", trait = "propriety", op = "subtract", value = 1, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = -1, clamp = true },
 ] } }
 
 
@@ -4156,7 +4156,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Pin it up.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 120, effects = [
-  { targetType = "player", trait = "money", op = "subtract", value = 85, clamp = false },
+  { targetType = "player", trait = "money", op = "add", value = -85, clamp = false },
   { targetType = "player", trait = "propriety", op = "add", value = 2, clamp = true },
 ] } }
 
@@ -4184,7 +4184,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Sweep the sawdust out.", config = { destinationType = "specific", locationId = "the_changing_room", time_progression_minutes = 180, effects = [
-  { targetType = "player", trait = "money", op = "subtract", value = 140, clamp = false },
+  { targetType = "player", trait = "money", op = "add", value = -140, clamp = false },
   { targetType = "player", trait = "house", op = "add", value = 6, clamp = true },
 ] } }
 
@@ -4211,7 +4211,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Post the copy.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 60, effects = [
-  { targetType = "player", trait = "money", op = "subtract", value = 60, clamp = false },
+  { targetType = "player", trait = "money", op = "add", value = -60, clamp = false },
 ] } }
 
 
@@ -4268,7 +4268,7 @@ blocks = [
 exit_block = { type = "location", text = "Finish the round.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 40, effects = [
   { targetType = "player", trait = "service", op = "add", value = 2, clamp = true },
   { targetType = "npc", npcId = "npc_del", trait = "relation", op = "add", value = 2, clamp = true },
-  { targetType = "player", trait = "energy", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -3, clamp = true },
 ] } }
 
 
@@ -4473,7 +4473,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Turn the light off.", config = { destinationType = "specific", locationId = "the_scrub_room", time_progression_minutes = 30, effects = [
   { targetType = "player", trait = "service", op = "add", value = 1, clamp = true },
-  { targetType = "player", trait = "energy", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -3, clamp = true },
 ] } }
 
 
@@ -4563,7 +4563,7 @@ blocks = [
 exit_block = { type = "location", text = "Get the next stack.", config = { destinationType = "specific", locationId = "the_changing_room", time_progression_minutes = 45, effects = [
   { targetType = "player", trait = "steam", op = "add", value = 1, clamp = true },
   { targetType = "player", trait = "arousal", op = "add", value = 5, clamp = true },
-  { targetType = "player", trait = "energy", op = "subtract", value = 4, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -4, clamp = true },
 ] } }
 
 
@@ -4992,7 +4992,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Go and count the till.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 25, effects = [
   { targetType = "player", trait = "service", op = "add", value = 1, clamp = true },
-  { targetType = "player", trait = "energy", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -5039,7 +5039,7 @@ blocks = [
 exit_block = { type = "location", text = "Cash up and get in the water.", config = { destinationType = "specific", locationId = "the_pool", time_progression_minutes = 600, effects = [
   { targetType = "player", trait = "service", op = "add", value = 3, clamp = true },
   { targetType = "player", trait = "money", op = "add", value = 25, clamp = false },
-  { targetType = "player", trait = "energy", op = "subtract", value = 20, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -20, clamp = true },
 ] } }
 
 
@@ -5233,7 +5233,7 @@ blocks = [
 exit_block = { type = "location", text = "Hose it down.", config = { destinationType = "specific", locationId = "the_scrub_room", time_progression_minutes = 300, effects = [
   { targetType = "player", trait = "service", op = "add", value = 3, clamp = true },
   { targetType = "player", trait = "money", op = "add", value = 22, clamp = false },
-  { targetType = "player", trait = "energy", op = "subtract", value = 14, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -14, clamp = true },
 ] } }
 
 
@@ -5274,7 +5274,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Put the last load on.", config = { destinationType = "specific", locationId = "the_changing_room", time_progression_minutes = 240, effects = [
   { targetType = "player", trait = "service", op = "add", value = 2, clamp = true },
-  { targetType = "player", trait = "energy", op = "subtract", value = 6, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -6, clamp = true },
 ] } }
 
 
@@ -5404,7 +5404,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Go up and open.", config = { destinationType = "specific", locationId = "the_boiler", time_progression_minutes = 300, effects = [
-  { targetType = "player", trait = "money", op = "subtract", value = 320, clamp = false },
+  { targetType = "player", trait = "money", op = "add", value = -320, clamp = false },
   { targetType = "player", trait = "house", op = "add", value = 10, clamp = true },
 ] } }
 
@@ -5437,7 +5437,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "See him out.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 20, effects = [
-  { targetType = "player", trait = "money", op = "subtract", value = 200, clamp = false },
+  { targetType = "player", trait = "money", op = "add", value = -200, clamp = false },
   { targetType = "npc", npcId = "npc_casper", trait = "relation", op = "add", value = 4, clamp = true },
 ] } }
 
@@ -5921,7 +5921,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Call the next one through.", config = { destinationType = "specific", locationId = "the_scrub_room", time_progression_minutes = 25, effects = [
   { targetType = "player", trait = "service", op = "add", value = 1, clamp = true },
-  { targetType = "player", trait = "energy", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -5953,7 +5953,7 @@ blocks = [
 ]
 exit_block = { type = "location", text = "Get the mop.", config = { destinationType = "specific", locationId = "the_changing_room", time_progression_minutes = 40, effects = [
   { targetType = "player", trait = "propriety", op = "add", value = 2, clamp = true },
-  { targetType = "player", trait = "energy", op = "subtract", value = 3, clamp = true },
+  { targetType = "player", trait = "energy", op = "add", value = -3, clamp = true },
 ] } }
 
 
@@ -6084,7 +6084,7 @@ exit_block = { type = "location", text = "Get the wrap.", config = { destination
   { targetType = "player", trait = "steam", op = "add", value = 1, clamp = true },
   { targetType = "player", trait = "arousal", op = "add", value = 9, clamp = true },
   { targetType = "player", trait = "money", op = "add", value = 14, clamp = false },
-  { targetType = "player", trait = "propriety", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "propriety", op = "add", value = -2, clamp = true },
 ] } }
 
 
@@ -6264,7 +6264,7 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Rule the line off.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 25, effects = [
-  { targetType = "player", trait = "money", op = "subtract", value = 240, clamp = false },
+  { targetType = "player", trait = "money", op = "add", value = -240, clamp = false },
   { targetType = "npc", npcId = "npc_del", trait = "relation", op = "add", value = 8, clamp = true },
   { targetType = "player", trait = "propriety", op = "add", value = 2, clamp = true },
 ] } }
@@ -6295,9 +6295,9 @@ blocks = [
   ] } },
 ]
 exit_block = { type = "location", text = "Hang the spare on the hook.", config = { destinationType = "specific", locationId = "the_front_desk", time_progression_minutes = 180, effects = [
-  { targetType = "player", trait = "money", op = "subtract", value = 80, clamp = false },
+  { targetType = "player", trait = "money", op = "add", value = -80, clamp = false },
   { targetType = "player", trait = "house", op = "add", value = 3, clamp = true },
-  { targetType = "player", trait = "arousal", op = "subtract", value = 2, clamp = true },
+  { targetType = "player", trait = "arousal", op = "add", value = -2, clamp = true },
 ] } }
 
 
