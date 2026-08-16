@@ -8,6 +8,23 @@ how it was verified if relevant (grep / build / live-play).
 
 Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 
+## 2026-08-16
+
+- `references/rts-flat-prose.md` — **new Rule 10: never assert elapsed time the player's pace controls.**
+  Motivated by a measured defect in vesper 0.1.9 (THE FACE): **25 sites across 13 canvases and 4 quest
+  cards** claimed durations the engine never bound, and they contradicted each other — `rung_bar_promotion_4`
+  said "three weeks" and fires *before* `bastien_door_search`'s "four weeks", while three separate canvases
+  all said "four weeks" at points separated by multiple visits. Root cause is structural rather than
+  careless: **a chapter gated on a METER has no floor and no ceiling in days.** That ladder gates on
+  `relation` 6/12/18 at +2/+3/+3 a shift, so the floor is ~7 shifts (~4 in-game days), a paid cheat-page
+  grant collapses it to zero shifts, and a slow player can take months — there is no number that is right.
+  The rule names the exempt classes (backward-looking canon, in-scene, rotas, forward consequences), gives a
+  replacement table, and carries two sub-rules: **keep the precision where it is the character** (a man who
+  counted stays frightening via "I know which night it was", with no number), and **the same check catches
+  invented ECONOMY figures** — the same beat also read "four thousand coin of face and shifts" in a chapter
+  where the face costs 120 and a shift pays 15. Verified by re-sweeping the whole chapter to zero on every
+  banned figure, with every survivor classified as canon, in-scene, rota or forward consequence.
+
 <!-- entries recorded going forward; example shape:
 ## 2026-08-12
 

@@ -15456,7 +15456,7 @@ when = [
 # No `goals` array — frontier shape, like J and M.
 [[quest_cards]]
 priority   = 10
-text       = "Kess had the chip under a lamp for four days and got one thing off it: it is about fifteen years old, cut a shade wide and dressed back by hand, which is what a room with a budget and no hurry does when it is making eleven of something. He cannot open it. Nobody in the Reach can. What opens it is more of the paper it was cut alongside — and you have met the road that paper travels. A careful courier in the corner of the Undertow, carrying copies out of Vance Securities and down the strip, to somebody who paid on time. You never found out who was buying."
+text       = "Kess kept the chip under a lamp and got one thing off it: it is about fifteen years old, cut a shade wide and dressed back by hand, which is what a room with a budget and no hurry does when it is making eleven of something. He cannot open it. Nobody in the Reach can. What opens it is more of the paper it was cut alongside — and you have met the road that paper travels. A careful courier in the corner of the Undertow, carrying copies out of Vance Securities and down the strip, to somebody who paid on time. You never found out who was buying."
 tip        = "Somebody down there has been collecting that company's paperwork for years, and if your page had a brother it is in his stack. Start at the Undertow and start asking — the courier drank there every night, the madam counts every head on the strip, and the paper stall sells anything. If you want the next chapter sooner, Support Us in the sidebar."
 # ⚠️ beat_0096 (rev 147) — N's CLOSER MOVED face_bought -> wall_understood, AND THE BOUNDARY LEFT WITH IT.
 # The tip tells the player to go and ask, which stops being true the moment three doors have shut on the
@@ -15483,7 +15483,7 @@ when = [
 # and a player who has been living on 10-coin nights needs telling that the two earners still work.
 [[quest_cards]]
 priority   = 10
-text       = "Three doors in a week, and not one of them said no. The courier who protects himself, the madam who deals straight with everybody, the barman who decided he liked you — and a paper stall that would sell you a person off the end of the row and would not take your money for a name. That is not four decisions. That is a word, and a word has your name in it. You cut a company's hardware out of your own spine eleven days ago and then walked around this district asking questions in your own face."
+text       = "Three doors, one after another, and not one of them said no. The courier who protects himself, the madam who deals straight with everybody, the barman who decided he liked you — and a paper stall that would sell you a person off the end of the row and would not take your money for a name. That is not four decisions. That is a word, and a word has your name in it. You cut a company's hardware out of your own spine and then walked around this district asking questions in your own face."
 # ⚠️ beat_0097 (rev 148) — O GIVES UP THE BOUNDARY CLAIM, and this edit is the other half of card P gaining
 # it. The two-step got run in the wrong order once already in this chapter and spine.py caught it at two
 # claims; that is what the checker is for. O KEEPS its Support-Us ask (the rev-113 rule: a prior card always
@@ -15793,7 +15793,7 @@ blocks = [
   { type = "cascade", props = { beats = [
     # beat 0 — no advance_text; merges into the node lead.
     { blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "You left it. I said I'd rather not know and I meant that too, and then it sat there four days looking at me." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "You left it. I said I'd rather not know and I meant that too, and then it sat there looking at me." },
     ] },
     { advance_text = "Ask what he did.", blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "You've had it under a light." },
@@ -15850,7 +15850,7 @@ blocks = [
     ] },
     # Terminal beat — no advance_text.
     { blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "It'll be under the jar. It's been under the jar four days and the jar's not moved." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "It'll be under the jar. It's been under the jar since you left it and the jar's not moved." },
         { type = "paragraph", content = "She goes up the strip with nothing in her pockets and one question in her, which is more than she has ever carried out of this dock." },
     ] },
   ] } },
@@ -16198,10 +16198,10 @@ blocks = [
     ] },
     { advance_text = "Count it again.", blocks = [
         { type = "paragraph", content = "Any one of them alone is a man's own business. Rue on her own is a bad week. Sol on his own is a man with a headache." },
-        { type = "paragraph", content = "Three inside a week is not four private decisions. Somebody said something, and every one of them heard it before she asked." },
+        { type = "paragraph", content = "Three of them, one after another, is not three private decisions. Somebody said something, and every one of them heard it before she asked." },
     ] },
     { advance_text = "Ask who.", blocks = [
-        { type = "thought_bubble", props = { speaker = "player" }, content = "Eleven days ago she took a thing out of her own spine that a company put there, and she has been walking around since like a woman who got away with it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "She took a thing out of her own spine that a company put there, and she has been walking around ever since like a woman who got away with it." },
     ] },
     { advance_text = "Follow it.", blocks = [
         { type = "paragraph", content = "The Reach does not close for nothing. It closes for money it is frightened of losing, and there is exactly one outfit above this water with enough of that to buy a whole street's manners at once." },
@@ -16493,7 +16493,7 @@ when = [
 # the ladder: every rung is his call, and the only thing she controls is being there.
 [[quest_cards]]
 priority   = 10
-text       = "Bastien. Grey through the sides now, a good coat, a drink he does not touch, in a chair set at the angle a chair is set at when a man wants the door in front of him all evening. He owns the bar. He owns The House you have been earning at. He has been buying that company's paper for years and it goes into the room behind you, and you have been carrying trays around inside the answer for four nights. He looked straight at you and saw a girl with a tray."
+text       = "Bastien. Grey through the sides now, a good coat, a drink he does not touch, in a chair set at the angle a chair is set at when a man wants the door in front of him all evening. He owns the bar. He owns The House you have been earning at. He has been buying that company's paper for years and it goes into the room behind you, and you have been carrying trays around inside the answer since the night you started. He looked straight at you and saw a girl with a tray."
 # ⚠️ beat_0104 (rev 154) — R GIVES UP THE BOUNDARY to card S. Two-step, right order.
 tip        = "He never once looked at your face. Three months in that cell and what he watched was the light under your sternum and what he wrote down was the number — and the light is out now, and the chip is on a bench four miles from here. So he will not know you. Keep working, and let him keep deciding: every step nearer that door has been his call so far and the only thing you control is being on the floor when he makes the next one. If you want the next chapter sooner, Support Us in the sidebar."
 when = [
@@ -16559,7 +16559,7 @@ id   = "base"
 name = "The door is open a few inches"
 blocks = [
   { type = "image", props = { file = "scenes/bastien_back_door.jpg", description = "A door standing a few inches ajar at the back of a dim bar, warm light behind it, the shape of a seated man in a chair beyond.", search_queries = ["door ajar warm light back room seated man silhouette", "partly open door dim bar back room chair light"] } },
-  { type = "paragraph", content = "Fourth shift. Tray, three steps, the near tables. Halfway through the night the door at the back is open a few inches, which it has not been once since she started." },
+  { type = "paragraph", content = "Another shift. Tray, three steps, the near tables. Halfway through the night the door at the back is open a few inches, which it has not been once since she started." },
   { type = "cascade", props = { beats = [
     { blocks = [
         { type = "paragraph", content = "She does not look at it, because that is the rule and because looking at it is what new ones do. She clears the near tables twice instead." },
@@ -16570,7 +16570,7 @@ blocks = [
     ] },
     # RECOGNITION. Her body first, and the vocabulary is the game's own drain/plate/core lexicon.
     { advance_text = "Keep looking.", blocks = [
-        { type = "paragraph", content = "Her hands know before she does. The tray goes very slightly heavier and something under her sternum that has been quiet for eleven days does a thing that is not quite the old climb." },
+        { type = "paragraph", content = "Her hands know before she does. The tray goes very slightly heavier and something under her sternum that has been quiet since Kess closed her up does a thing that is not quite the old climb." },
     ] },
     { advance_text = "Name it.", blocks = [
         { type = "paragraph", content = "Older than the voice through the wall. Grey through the sides now, a good coat over a chair back, a drink at his elbow that he is not drinking and, she would bet the whole hundred and twenty, has not touched all night." },
@@ -16583,7 +16583,7 @@ blocks = [
     ] },
     # THE ANSWER, ARRIVING EARLY AND ON PURPOSE.
     { advance_text = "Do the arithmetic.", blocks = [
-        { type = "thought_bubble", props = { speaker = "player" }, content = "A man who has been collecting a company's paper for years, in a room that takes envelopes in one direction only, behind a bar he owns and never visits. She has been carrying trays for four nights inside the answer." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "A man who has been collecting a company's paper for years, in a room that takes envelopes in one direction only, behind a bar he owns and never visits. She has been carrying trays inside the answer since the night she started." },
     ] },
     # AND THE REASON IT HOLDS. The chapter's whole permission, and it is canon, stated flat.
     { advance_text = "Wait for him to see you.", blocks = [
@@ -16668,7 +16668,7 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "It was on the counter when I opened up." },
     ] },
     { advance_text = "Open it.", blocks = [
-        { type = "paragraph", content = "A dress. Short, thin, cut close, and the right size, which is the part that sits coldest — somebody has looked at her carefully enough to be right about it, from a chair, across a room, over four nights." },
+        { type = "paragraph", content = "A dress. Short, thin, cut close, and the right size, which is the part that sits coldest — somebody has looked at her carefully enough to be right about it, from a chair, across a room, over every shift she has worked." },
     ] },
     { advance_text = "Look at Sol.", blocks = [
         { type = "paragraph", content = "Sol is at the far taps doing something to a barrel that does not need doing. He has been at that barrel since she came through the door." },
@@ -16740,19 +16740,19 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Tomorrow night you take the tray through the back." },
     ] },
     { advance_text = "Wait.", blocks = [
-        { type = "paragraph", content = "She has been waiting three weeks to hear a version of this sentence and it still lands somewhere under the ribs." },
+        { type = "paragraph", content = "She has been working toward a version of this sentence since the night Sol put a bar cloth on the counter, and it still lands somewhere under the ribs." },
         { type = "dialog", props = { speaker = "player" }, content = "You said that room isn't mine." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "It isn't. That's why it's a sending-for and not a shift." },
     ] },
     # THE CALLBACK, cashed by the man who planted it.
     { advance_text = "Make him say it.", blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "You told me to think hard about that night before I got to it." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "I did. You've had three weeks and you've turned up every one of them, so I'll take it you thought." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "I did. You've had every night since to think about it and you've turned up for every one, so I'll take it you thought." },
     ] },
     { advance_text = "Ask what it is.", blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "What happens in there." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Business, mostly. He's a businessman, mostly." },
-        { type = "paragraph", content = "It is the first time in three weeks she has heard Sol use a pronoun for the owner." },
+        { type = "paragraph", content = "It is the first time she has ever heard Sol use a pronoun for the owner." },
     ] },
     { advance_text = "Ask about the door.", blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "You go in through the bar side. He'll do you at the door first — coat off, hands on, all of it, in front of the room. Everybody gets it. Don't take it personal and don't make a face about it." },
@@ -16840,7 +16840,7 @@ blocks = [
     { blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Coat." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Nobody minds. They've all had it. It's the ones who mind that are carrying." },
-        { type = "paragraph", content = "Four weeks of him deciding things about her from a chair, and this is the first sentence he has ever aimed at her face." },
+        { type = "paragraph", content = "All those nights of him deciding things about her from a chair, and this is the first sentence he has ever aimed at her face." },
     ] },
     { advance_text = "Give him the coat.", blocks = [
         { type = "paragraph", content = "He goes through it standing up, in the light, with the bar behind her doing what the bar does when he is in the room." },
@@ -17029,10 +17029,10 @@ id   = "talk"
 name = "Bastien"
 blocks = [
   { type = "block_pool", props = { blocks = [
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "You don't drink. Four weeks on my floor and not one glass, and you carry them all night. I've had two people in twenty years I could say that about and I owned them both." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "You don't drink. All this time on my floor and not one glass, and you carry them all night. I've had two people in twenty years I could say that about and I owned them both." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Everyone who comes through that door wants something off me. You're the first in a long time who hasn't said what. I'll wait. I'm good at that and there's nothing else I want." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "You looked at this door once. Your fourth shift, with a tray in your hands. Never again after that — and everybody looks, love. It's the not-looking that's the work." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Somebody spent real money putting you back together and you're carrying trays for fifteen a night. I've been turning that over for a fortnight and I've got nowhere with it, which is why you're in here." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "You looked at this door exactly once, and I know which night it was. Never again after that — and everybody looks, love. It's the not-looking that's the work." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Somebody spent real money putting you back together and you're carrying trays for fifteen a night. I've been turning that over since the night you walked in and I've got nowhere with it, which is why you're in here." },
   ] } },
   { type = "paragraph", content = "He talks the way a man talks who has already decided he will find out, and has no reason to hurry." },
 ]
@@ -17101,7 +17101,7 @@ blocks = [
   { type = "video", props = { pool_dir = "sex/bastien_backroom_t4", pool = 4, description = "A composed older man unhurriedly undressing a woman in a private room behind a bar, her back to a desk, both still mostly clothed.", search_queries = ["man slowly undressing woman office desk clothed gif", "clothed couple back room man opening her shirt dim gif"] } },
   { type = "paragraph", content = "He puts down the drink he has not touched and strips the dress off her over her head. She stands naked on his floor while he looks her over — tits, hips, the closed seam — takes his time about it, and has his cock out before he has finished looking." },
   # CLAUSE (ii) IN HIS OWN MOUTH, AT THE TOP, so the whole loop reads under it. Nobody here is enjoying this.
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "I don't do this because I want you. I do it because it's the only way anybody down here is ever honest with me, and I've four weeks of questions about you and no answers at all." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "I don't do this because I want you. I do it because it's the only way anybody down here is ever honest with me, and I've a stack of questions about you and no answers at all." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Take your time. The door's shut and there's nobody in this city who knocks on it." },
 ]
 [canvases.nodes.exit_block]
@@ -17149,7 +17149,7 @@ name = "Over the desk"
 blocks = [
   { type = "video", props = { pool_dir = "sex/bastien_loop_vaginal_t5", pool = 4, description = "A woman bent face-down over a bare desk in a dim private room, an older man fucking her from behind, one hand flat on her back.", search_queries = ["bent over desk from behind office sex dim gif", "man fucking woman over desk hand on her back gif"] } },
   { type = "paragraph", content = "Bent face-down over the bare desk, his cock in her cunt, one hand spread flat between her shoulder blades and the other on her hip. He fucks her slowly and the bar comes through the wall in pieces around it." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Christ, you are wet for a woman who wants nothing. That is not a compliment — it is the first honest thing you have done in four weeks." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Christ, you are wet for a woman who wants nothing. That is not a compliment — it is the first honest thing you have done since you walked into my bar." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Stay down. My floor, my time, my desk — and you are the only one of the four that talks." },
 ]
 [canvases.nodes.exit_block]
@@ -17238,7 +17238,7 @@ name = "Both hands"
 blocks = [
   { type = "video", props = { pool_dir = "sex/bastien_loop_anal_hard_t5", pool = 4, description = "An older man fucking a woman's ass hard over a desk with a fist gathered in her hair, pulling her head back off the wood.", search_queries = ["rough anal hair pulling bent over desk gif", "anal from behind pulling her hair back hard gif"] } },
   { type = "paragraph", content = "Her hand stays on his wrist through all of it, skin on skin — the hand is the job and the rest is the price of it." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There she is. Four weeks of nothing on your face and I get this out of you by doing that." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There she is. All that time with nothing on your face, and I get this out of you by doing that." },
   { type = "paragraph", content = "He gathers her hair in his fist and hauls her head up off the wood, and stops being unhurried about any of it — fucking her ass hard enough to walk the desk, his other hand clamped white on her hip, her tits dragging the bare boards." },
 ]
 [canvases.nodes.exit_block]
@@ -17419,7 +17419,7 @@ blocks = [
     ] },
     # HER ONE INTERIOR BEAT. Arithmetic, not feeling.
     { advance_text = "Hold on to him.", blocks = [
-        { type = "thought_bubble", props = { speaker = "player" }, content = "The man who bought her paperwork. The man who came through that door for her. The man they built her to kill. Three files in Mercer's office and one person standing in all of them, and she has spent four weeks getting a job in his supplier's bar." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The man who bought her paperwork. The man who came through that door for her. The man they built her to kill. Three files in Mercer's office and one person standing in all of them, and she took a job carrying trays in his supplier's bar to get this far." },
     ] },
     { advance_text = "Let him surface.", blocks = [
         { type = "paragraph", content = "He comes back propped against the desk with his shirt open, agreeable and empty and none the wiser." },
@@ -17570,7 +17570,7 @@ id   = "base"
 name = "Three of them"
 blocks = [
   { type = "image", props = { file = "locations/bastien_backroom.jpg", description = "A private back room behind a bar — a desk with nothing on it, a good chair set to see the door, better furniture than the room deserves.", search_queries = ["private back room behind bar desk armchair dim", "noir speakeasy office low light leather chair"] } },
-  { type = "paragraph", content = "An evening like the other ones. He is in the chair with a drink he is not drinking, working round to the same question he has been working round to for six weeks." },
+  { type = "paragraph", content = "An evening like the other ones. He is in the chair with a drink he is not drinking, working round to the same question he has been working round to since she first stood in this room." },
   { type = "cascade", props = { beats = [
     { blocks = [
         { type = "paragraph", content = "Then the bar goes quiet, and it is the wrong quiet. Not a fight going up — a room deciding all at once to be somewhere else." },
@@ -17605,7 +17605,7 @@ blocks = [
     ] },
     # ⚠️ THE HINGE. Her reason is one sentence, and she takes about a second and a half over it.
     { advance_text = "Do the arithmetic.", blocks = [
-        { type = "thought_bubble", props = { speaker = "player" }, content = "Six weeks of trays. Four thousand coin of face and shifts and hands on her in front of forty people, for one room, on the chance of one night. And it is this one, and it is walking out of the door in front of her." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "All of it for this. The face, the shifts, the hands on her in front of forty people — one room, on the chance of one night. And it is this one, and it is walking out of the door in front of her." },
     ] },
     # ⚠️ BANDED, NEVER GATED. If the search took it, she goes for the desk — three seconds and one more click.
     { advance_text = "Reach for it.", blocks = [
@@ -17744,7 +17744,7 @@ blocks = [
         { type = "paragraph", content = "She gets both hands on the thing and brings it up level, and it is a thirty-coin piece of grey plastic and they both know exactly what it is worth in this room." },
     ] },
     { advance_text = "Wait for him to turn round.", blocks = [
-        { type = "paragraph", content = "He dries his hands on a cloth, without hurrying, the way Kess dries his hands. Then he turns round and looks at her properly for the first time since the alley — at her face, which nobody has done in six weeks." },
+        { type = "paragraph", content = "He dries his hands on a cloth, without hurrying, the way Kess dries his hands. Then he turns round and looks at her properly for the first time since the alley — at her face, which nobody has done since she bought a different one." },
     ] },
     # TERMINAL BEAT — no advance_text. THE LAST LINE OF THE RELEASE.
     # ⚠️ The design book reserves warmth for Cain; this is its first spend and it is one word long. He does

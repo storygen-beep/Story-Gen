@@ -357,6 +357,50 @@ The `[image: …]` above is **shorthand for this rule only** — the engine has 
 TOML media block (`{ type = "image", props = { file, description, search_queries } }`) with its
 `search_queries` acquisition layer per `references/media.md`.
 
+### Rule 10 — Never assert elapsed time the player's pace controls
+
+**Read every duration in a beat and ask: can the player make this false?** If the answer is yes, it is a
+defect — not a stylistic preference. Replace the number with an anchor to an event the game guarantees.
+
+Measured on vesper 0.1.9 (THE FACE): **25 sites across 13 canvases and 4 quest cards** claimed elapsed time
+the engine never bound. They contradicted each other — one canvas said "three weeks" and *fired before*
+another saying "four weeks" — and one of them also carried a coin figure thirty times the real price.
+
+**Why a sandbox makes this worse than it looks.** A chapter gated on a **meter** has no floor and no ceiling
+in days:
+
+- vesper's bar ladder gates on `relation` 6/12/18 at +2/+3/+3 a shift → floor ≈ 7 shifts ≈ **4 in-game days**
+- a paid **cheat-page grant** (+6 relation) collapses it to **zero shifts**
+- a slow player can take **months**
+
+So "you've had three weeks" is wrong at the floor, wrong at the cheat path, and wrong in the tail. There is
+no number that is right.
+
+**Exempt — these are safe and should stay:**
+- **Backward-looking canon** fixed by prior chapters: "eleven years of paperwork", "three months in that
+  cell", "a year ago at the far door", "thirty years behind that bar". The player cannot move them.
+- **In-scene**: "a minute later", "half a second", "all night", "tomorrow night".
+- **Rotas and schedules**: "six nights a week", "four hours a night" — job descriptions, not elapsed play.
+- **Forward consequences**: "his coat will smell of it for a fortnight."
+
+**The replacement is usually the better line, not a compromise.** Anchor to what happened:
+
+| ❌ asserts what the engine cannot keep | ✅ true at any pace |
+|---|---|
+| "Four weeks on my floor and not one glass" | "All this time on my floor and not one glass" |
+| "You've had three weeks and you've turned up every one" | "You've had every night since, and you've turned up for every one" |
+| "quiet for eleven days" | "quiet since Kess closed her up" |
+| "the first time in three weeks she has heard it" | "the first time she has **ever** heard it" |
+| "Fourth shift." | "Another shift." |
+
+⚠️ **Where the precision is the CHARACTER, keep the precision and drop the number.** A man who counts is
+frightening because he counted — so *"You looked at this door exactly once, and I know which night it was"*
+keeps everything *"Your fourth shift"* was doing, and claims nothing the engine has to honour.
+
+⚠️ **The same check catches invented ECONOMY figures.** vesper's raid thought said "four thousand coin of
+face and shifts" in a chapter where the face costs 120 and a shift pays 15. Any number in prose that names a
+game quantity — coin, days, counts — is a claim about state, and gets verified against the state.
+
 ### Rule 9 — Write to AROUSE. The player is the erotic subject; the sex is the subject of the scene.
 
 Rules 1–8 make prose *clean, spoken, specific.* None makes it **hot** — a game can pass all eight and read as
