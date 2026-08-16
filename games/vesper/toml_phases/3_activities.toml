@@ -2364,9 +2364,16 @@ location      = "underworld_market"
 is_repeatable = true
 priority      = 3
 is_active     = true
+# ⚠️ beat_0117 (rev 168) — GATED ON plan_made, NOT ON THE DRAIN, AND THAT IS THE WHOLE POINT.
+# It used to open on bastien_drains_done gte 1, which meant the card could be found and paid for before
+# anything in the game had made her want it — the player read the reasoning in this canvas's own prose AFTER
+# already walking to the market. That is exactly the rev-143 defect ("she just goes on to buy the second part
+# out of the sudden"), where diagnosis landed after purchase for four cycles running. cap_the_wait @the_cot
+# is where she works out she cannot be empty-handed, and it sets plan_made; the reason now always precedes
+# the purchase, and this card cannot exist before the decision that motivates it.
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "bastien_drains_done", operator = "gte", value = 1 },
-  { type = "trait", subject = "player", trait_key = "taser_held",          operator = "lt",  value = 1 },
+  { type = "flag",  subject = "player", flag_key  = "plan_made",  operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "taser_held", operator = "lt", value = 1 },
 ] }
 
 [[canvases.nodes]]
