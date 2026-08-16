@@ -2457,7 +2457,15 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "bar_rung", operator = "gte", value = 3 },
       { type = "trait", subject = "player", trait_key = "bar_rung", operator = "lt",  value = 4 },
     ] } }, blocks = [
-      { type = "video", props = { files = ["sex/bar_floor_handled_t4a.webm", "sex/bar_floor_handled_t4b.webm", "sex/bar_floor_handled_t4c.webm"], description = "A waitress in a short tight dress leaning across a low bar table with a tray, a seated man's hand up the back of her thigh, the room carrying on around them.", search_queries = ["waitress groped serving drinks bar clothed", "short dress waitress hand under skirt bar table"] } },
+      # POOL (rev 171) — converted from the legacy `files = [...]` shape on 2026-08-17. The comment
+      # at the head of this canvas always called this a POOL, but it shipped as three hardcoded
+      # filenames, which is the older form of the same feature (v2.py:11877-11882 — both land in
+      # `_render_media_pool`, and `pool_dir` is the preferred one because the count is not
+      # hardcoded). The cost was real: find-media keys a shelf on the slot name, so three names
+      # meant three separate slots, only the first ever got searched, and the other two could not
+      # be filled from its shelf because `grab` derives the filename from the key. As a folder it
+      # is one shelf and one row, and the pool is curated by adding or removing clips.
+      { type = "video", props = { pool_dir = "sex/bar_floor_handled_t4", pool = 3, description = "A waitress in a short tight dress leaning across a low bar table with a tray, a seated man's hand up the back of her thigh, the room carrying on around them.", search_queries = ["waitress groped serving drinks bar clothed", "short dress waitress hand under skirt bar table"] } },
       { type = "paragraph", content = "The dress is short and the material is thin and it was cut for a woman standing still, which is not what the job is. Bending for the low tables is the whole of the arithmetic and everyone in the room has done it." },
       { type = "paragraph", content = "Hands land. Not often and never hard — a palm flat on her ass while she reaches across, a hand up under the hem that finds her cunt through nothing at all and is gone before she straightens, knuckles dragging her tits through the thin material as she leans past. She sets the glasses down and moves on and it costs her nothing, and that is the part she notices." },
       { type = "paragraph", content = "Nobody goes further than that. They look at the back door first, every one of them, and then they take their hand back." },
