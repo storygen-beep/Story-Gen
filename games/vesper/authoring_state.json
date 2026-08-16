@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 171,
+  "book_revision": 172,
   "register": {
     "person": "third"
   },
@@ -2107,6 +2107,23 @@
         "underworld_bar_bathroom entry_conditions: bar_rung clause removed, raid_done kept; blocked_message rewritten for the post-raid state"
       ],
       "notes": "LO's call. The lock was VISIBLE — entry_from gives the room a nav card and a blocked location renders as a greyed card with blocked_message as its subtitle, so from Act 1b the Undertow's grid read 'The Bathroom — nothing in it she needs'. Same shape sift_the_ruin was made a card to avoid. The clause also did no work: activity_bar_change is the room's sole occupant and gates itself on bar_rung gte 3. raid_done STAYS — activity_bar_change has no raid_done clause, so the room lock is the only thing keeping the dress surface out of the burned bar (the rev-157 defect one door in). Verified live in all four states."
+    },
+    {
+      "id": "beat_0121",
+      "status": "validated",
+      "target_phase": "1_metadata + 3_activities + 5_scenes + media_manifest",
+      "title": "The hard-data sweep — six false-fact fixes — and Cain becomes an NPC",
+      "introduces": [
+        "npc_cain (NPC, scheduleless)"
+      ],
+      "canvases": [
+        "underworld_brothel_finisher payout 10 -> 30 + max_triggers_per_day = 4 on underworld_brothel_work's trigger",
+        "six 'four months' sites re-anchored to events (one was inside repeatable activity_bar_work)",
+        "'a year ago' x2 (cap_the_lab + bastien_drain_canvas) and 'three months in that cell' x3 de-dated",
+        "three player-behaviour assertions rewritten (Sol x2, the bar-door narration)",
+        "Cain's 6 lines: 2 stay paragraphs pre-naming, 4 become npc_cain dialog; 3 answer-nothing lines added in cap_the_lab"
+      ],
+      "notes": "LO caught one line ('a year ago'); the audit found six issues of one family — prose asserting hard facts the save can disprove. The worst was the brothel paying 10 while five places said thirty a head, which inverted the chapter's economic argument (bar 15 vs House 10 meant the bar paid MORE). Code was the outlier, so code moved, capped at 4/day or 30/head would have been the game's worst printer. Rule 10 existed and stopped none of it: the owed fix is a gates.py lint (duration phrases + price-vs-effect), NOT landed because LO is editing that file. Cain's seam is her thought-bubble 'Cain.' in the alley; verified live on both sides."
     }
   ],
   "structure_registry": {
@@ -2846,7 +2863,7 @@
     "PLAYER PORTRAIT reactive art (follow-on, NOT AI-gen): source 4 DOWNLOADED photos of the SAME woman as wren.jpg (naked/topless/bottomless/underwear), drop into videos/portraits/, uncomment the 4 image lines in the [player_portrait] block (0_systems_spec.toml), re-merge+rebuild. They resolve immediately + degrade via onerror. Optional two-faces later: add worn_type tags to company_grays/cover_dockhand + a distinct in-cover portrait.",
     "beat_0015 DONE + green + live-verified + WARDROBE ART sourced+live-verified (turn 38). Open: DEPLOY to the portal (storygen-beep/Story-Gen) when LO wants it live (still local). FUTURE Act work (the A.5->B frontier): Bastien/Calloway deep-design+build (covers granted + tagged by worn_type so wrong-cover-at-wrong-mark = wrong reaction), the_site/chip ending, the disguise SHOP + Pell upgrades (the credits sink)."
   ],
-  "_active_beat": "THE FACE (Act 2 · 1c) — beats_0118/0119/0120 BUILT + GREEN, rev 171. 186 canvases, 30 locations.\nTHE QUESTS-PAGE AUDIT AND ITS FIXES (design_the_face.md §25).\nSHIPPED: activity_wren_change @wren_room — the Act-1 change surface, and it is a COLD-START BLOCKER FIX: wardrobe_location is a scalar, had been the_cot since rev 166 (entry-gated berth_home), and every cover is granted `add` with no `initial`, so NOTHING could be equipped between the opening and berth_home and Mission 1 was uncompletable on a fresh save (Renner's whole hub gates on cover_dockhand equipped). The rack does NOT move again — unequip and the four undress portraits exist only on the WardrobePage. cap_1a_close now re-equips company_grays on the way out of the sealing Spire ·\ncard T SPLIT on plan_made into T1/T2 — it had asserted she worked the plan out on the cot before cap_the_wait could fire (the rev-162 elapsed-time defect again) and went stale after the taser purchase; T2 carries cap_the_raid's own two gate clauses as live bullets plus ready_text, and the tip keeps only the evergreen half because there is NO ready_tip ·\ngoals/ready_canvas added to cards M/N/O/P/R/S (Q deliberately left goal-less — its only axis is npc_bastien.relation and naming him before cap_bastien_notices spoils the hinge) ·\nBastien's section RESTORED — four cards after Mercer's, B4 terminal on the plain badge, keeping the taken-not-killed secret.\nVERIFIED LIVE (headless): all eleven chapter states plus the cold-start wardrobe flow, every counter and pin correct, all five ready_canvas slugs resolving, zero page errors. 📍 renders but 🕒 does NOT — _formatCanvasSchedule reads the canvas's own scheduleParams and hub_bastien has none.\nSPINE UNCHANGED: exactly one Story card in all eleven states. Heat unmoved (explicit floor 6.3%, explicit in repeatable 34.0%).\nbeat_0120 (LO's call): underworld_bar_bathroom UNLOCKED — the bar_rung clause came off because the lock was VISIBLE (entry_from renders a greyed card with blocked_message as its subtitle, so the Undertow's grid read 'The Bathroom — nothing in it she needs' from Act 1b), and it did no work anyway since activity_bar_change gates itself. raid_done STAYS: that activity has no raid_done clause of its own, so the room lock is the only thing keeping the dress surface out of the burned bar. blocked_message rewritten for the post-raid state it now exclusively renders in. Verified live in all four states (§26).\nOPEN: media harvest (24 slots, media_manifest_the_face.json) · the Colm/Renner/Calloway heat backlog · the 17-suite live run (needs a media-complete build).",
+  "_active_beat": "THE FACE (Act 2 · 1c) — beat_0121 BUILT + GREEN, rev 172. 186 canvases, 30 locations, 15 NPCs.\nTHE HARD-DATA SWEEP (design_the_face.md §27). LO caught one line; six issues of the same family were live.\n⚠️ WORST: underworld_brothel_finisher paid 10 coin while FIVE player-facing places said 'thirty a head', and activity_bar_work's header names 15-vs-30 as the chapter's economic argument. At 10 the bar paid MORE, so Wren's 'That is not what the money is for' was a sacrifice she was not making. Code moved 10 -> 30, WITH max_triggers_per_day = 4 on the trigger — uncapped 30 is +180/night against a 10-coin Charge refill and the 120-coin face falls inside one day.\nAlso fixed: 'four months' x6 (one inside repeatable activity_bar_work, so it re-fired every shift; the sidebar shows a live Day N counter) · 'a year ago' x2, same fact in two mouths · 'three months in that cell' x3 (really ~8 nights) · three assertions about what the player did.\n⚠️ CAIN IS AN NPC FROM THIS RELEASE (LO's ruling). npc_cain, SCHEDULELESS (a row would give him presence and a Schedules entry). Seam = her thought-bubble 'Cain.' in the alley: 2 lines before it stay unattributed paragraphs, everything after renders 'Cain: ...'. captivity_cain unchanged; the :3754 doctrine rescoped, not deleted. Three answer-nothing lines added in cap_the_lab.\n⚠️ THE REAL FINDING: Rule 10 existed and stopped none of it. Owed = a gates.py lint (duration phrases + price-vs-effect cross-check). NOT landed — LO is editing gates.py.\nOPEN: media harvest (25 slots now — cain.jpg added) · the Colm/Renner/Calloway heat backlog · the 17-suite live run.",
   "decisions_log": [
     {
       "turn": 1,

@@ -950,3 +950,105 @@ tape and Sol's bucket, in the voice `activity_sift_the_ruin` and card U already 
 Open and empty in Act 1b (enterable, no change card, exit resolves) · open with both equip choices at rung 3,
 dress landing in the `dress` slot · shut again post-raid with the new message on the greyed card. Counts
 unchanged at 186 canvases / 30 locations. Zero page errors.
+
+---
+
+## 27. THE HARD-DATA SWEEP, AND CAIN BECOMES A PERSON (beat_0121, rev 172)
+
+LO caught one line — *"You came through a door for me **a year ago**"* — and asked for a thorough look for
+more of the same. There was more of the same. **Six issues in one family**, and the one he caught was not
+the worst.
+
+The family: **prose stating hard facts — how long, how many, how much — that the player's own save can
+disprove.** Rule 10 already forbids it, written at beat_0113 after the "three weeks" defect, and it was
+violated eight-plus times anyway. **The doctrine existed; the enforcement did not.** That is the real
+finding and §27.7 is what to do about it.
+
+### 27.1 ⚠️ "The House pays thirty a head" — the code paid 10
+
+The worst of them, because a player can check it in one click and because it inverted the chapter's own
+argument. `underworld_brothel_finisher`'s exit is the entire brothel payout — nothing in work/loop/finisher
+else touches coin — and it read **10**, while **five** player-facing places said thirty: Rue at the wall,
+Wren and Sol trading it twice in `cap_sol_hires`, the narration under them, and card O's tip.
+
+And `activity_bar_work`'s own header states the intent: *"Pay is FLAT at 15 coin every rung against Rue's
+30 a head — the chapter's economic argument in one number."* At 15 against 10 **the bar paid more**, so
+Wren's *"That is not what the money is for"* described a sacrifice she was not making.
+
+**The code was the outlier, so the code moved: 10 → 30.** And it ships with
+`max_triggers_per_day = 4` on the trigger, because 30 uncapped would have been the worst money printer in
+the game — the cot refills the whole Charge pool for 10 coin, a client costs 15 Charge, so a full pool is
+~6 clients: +180 a night, and the 120-coin face falls inside a single day. Four holds it at +120: the face
+is still one solid night's work and the bar is still visibly the worse wage. Same reasoning and same
+placement as `activity_bar_work`'s cap at rev 161 — **on the trigger**, because that is where the model
+reads it and because a Charge cost is no cap when Charge is purchasable.
+
+### 27.2 "four months" — asserted six times
+
+Five in `5_scenes` and one inside **`activity_bar_work`, a repeatable card, so it re-fired every shift.**
+The sidebar carries a live **`Day N`** readout: a player at Day 31 read "four months" with the
+contradiction on the same screen.
+
+**The replacement rule, applied at every site: name the event, not the interval** — "since the madam took
+her on", "since she came down the gate", "since the first night she came down those steps", "since the
+night Kess first put her on the feed line". The correct form was already in the closing scene three lines
+below the bad one: *"Nobody has said that name to her **since the penthouse**."*
+
+### 27.3 "a year ago" — two mouths, one fact
+
+LO's line, and its twin in Bastien's mouth during the drain (*"Once. **Year ago.** I had a girl in a room
+under here…"*). Fixing only the first would have left the game still dating it. Wren's now names the door;
+Bastien's drops the interval and loses nothing.
+
+### 27.4 "three months in that cell"
+
+Three sites, **all inside this release**, so it closed cleanly with no older content to sweep.
+`cell_sleep` adds +12 core_strain against a break at 96 — **eight nights minimum**, not three months.
+Replaced with the experience rather than the span.
+
+### 27.5 Claims about what the player did
+
+Sol asserting she *"turned up for every one"* and *"sat there two nights"*, and the narration's *"walked
+past it a hundred times."* All three now describe without counting; the last became her fallibility
+("more times than she could count"), which is a character claim rather than a save-checkable one.
+
+### 27.6 Cain becomes an NPC — from this release only
+
+LO's ruling. `5_scenes:3754` has read *"Cain is a SHAPE, never a speaker: NO npc_cain, no portrait, no
+dialog block"* since beat_0042, and it was still being obeyed: five bare-paragraph lines in `cap_the_raid`
+and one in `cap_the_lab`, while Bastien beside him got proper dialog blocks.
+
+That doctrine was right while he was a briefing-room name and a voice through a wall. In this release he
+shuts a door, takes his coat off, washes his hands and says her name — the shape resolved, and a device
+that outlives its reason reads as a formatting bug rather than as mystery.
+
+**The seam is her thought-bubble "Cain." in the alley, not the top of the scene.** His first two lines
+stay unattributed paragraphs — the text itself says she cannot place the voice, *"she has heard it once,
+through a wall"* — and everything from the naming onward is a labelled block. Verified live: the first two
+render as paragraphs, the last four of the raid and all four of the lab render as **"Cain: …"**.
+`captivity_cain` stays paragraphs end to end and the rule at `:3754` was rescoped rather than deleted.
+
+`npc_cain` is **scheduleless** — a row would give him presence, a nav badge and a Schedules entry, and he
+has no location that stays open. No quest cards, so no Quests section. He is a speaker and nothing else.
+
+**Three lines added in the lab**, LO's ask, and **not one answers anything**: the room, her shaking arm,
+what thirty coin of plastic is worth. He had a single line there and it was the release's last line, which
+left the man the whole chapter is about voiceless at the moment he finally has a face.
+*"Now put down the weapon, Wren"* is still the only thing in the scene that lands.
+
+### 27.7 What actually needs to change next
+
+Rule 10 was on the books and did not stop any of this. **The durable fix is a lint, not more doctrine**: a
+`gates.py` check that flags duration phrases and bare quantities in player-facing prose, plus a
+price-versus-effect cross-check — the exact check that would have caught §27.1 the day it shipped. Written
+by hand for this pass (all five quoted prices now verified against their effect values) and **not** landed
+in `gates.py`, which LO is editing. Owed.
+
+### 27.8 Verified
+
+Build green — **NPCs 14 → 15**, canvases and locations unchanged at 186 / 30. Zero survivors on a re-run
+of the sweep across the release range *including* `3_activities`, which the first pass missed and which is
+where the repeatable-card instance lived. All five quoted prices match their effect values. The cap refuses
+a fifth client. Cain's seam renders correctly on both sides. Story spine still exactly one card in every
+state. Zero page errors. One new media slot (`cain.jpg`, a bare filename at the videos root like every
+other portrait) — build errors go 3 → 4 until it is harvested.
