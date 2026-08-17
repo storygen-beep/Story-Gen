@@ -21,6 +21,34 @@
 //                        NOT whatever is currently half-built in the working tree.
 window.GAMES = [
   {
+    // Listed 2026-08-17. Authored end-to-end with author-game-v2. 25,817 words across 14
+    // locations, 149 canvases, 25/26 gates.
+    //
+    // The first game in this repo to ship all THREE content kinds the skill names: 25 standing
+    // hubs, 14 TRIGGERED random events, and 7 milestones. That matters because its own v0.1 had
+    // zero triggered content — every earlier game in this list has the same hole, and
+    // the-release.md calls that layer the main heat engine for a female protagonist. Verified
+    // live across 28 in-game days: events fire, replace the location page, and respect the
+    // engine's 3-entry cooldown.
+    //
+    // The one red gate is `the climb is paid for`, and it is a CHECK bug, not a game defect —
+    // gates.py counts the one-shot opening funnel as farmable 14 times. Satisfying it would mean
+    // charging the player energy to read the intro. Written up as finding #5 in
+    // games/seventh_day/ENGINE_NOTES.md, which carries six findings in total (two engine, four
+    // skill), all unapplied and awaiting a call.
+    //
+    // ⚠️ MEDIA HAS NEVER BEEN HARVESTED. 52 cycling pools (246 clips), 8 fixed files, 14 location
+    // plates and 6 portraits, with zero files on disk. Current output/ is a --dev --debug build,
+    // so the art shows labelled debug placeholders rather than silent gaps, and the dev stat
+    // controls are visible. Run find-media, then rebuild output/ without --dev --debug, add
+    // `version`, archive to games/seventh_day/releases/, and drop `dev: true` in the same commit.
+    slug: "seventh_day",
+    title: "The Seventh Day",
+    badge: "v2",
+    dev: true,
+    summary: `Fourteen people live on sixty acres at the end of a mile of gravel, under seven rules your father wrote out by hand and framed at the turn of the stair. Thea is the third daughter: no room of her own, no money that was ever hers, and a rota in her mother's handwriting that decides where her body is every hour of the week. The fourth rule specifies a garment. The sixth says no door is shut on two. The seventh says nothing is yours, and on the seventh day a tin comes round the bench to prove it. Everything she climbs is measured in reach, not rank — what she is allowed to be seen in, who she can be alone with and for how long, and which doors open for her without anybody being asked. Her brother walks the property every night at ten to make sure none of this happens.`,
+  },
+  {
     // Listed 2026-08-14. Authored end-to-end with author-game-v2 and the first game in this
     // repo to ship a PRODUCTION build on listing day: no --dev, no --debug, --build free, and
     // the archive at games/forty_miles/releases/v0.1.html is byte-identical to output/.

@@ -1,0 +1,499 @@
+# =============================================================================
+# The Seventh Day — 0_systems_spec
+# Built with author-game-v2. Want + board: games/seventh_day/v2_state.json
+#
+# METERS, THREE LAYERS (references/the-board.md §3):
+#   1  RATCHETING TIERS  cover · alone · standing   — rungs at 15/35/55
+#   2  VOLATILE STATE    arousal · stress · energy · money
+#   3  PER-CHARACTER     relation · lust            — on each [[npcs]] block
+#   +  COUNTERWEIGHT     grace — starts at 70, and is TWO-ENDED
+#
+# ⚠️ GRACE IS NOT A LOCKOUT. High grace opens the unwatched surfaces (sent out
+#    alone, handed the keys, believed when she lies). Low grace opens the
+#    supervised ones (correction, the wash house, being walked by Ezra). Both
+#    ends buy content — the-board.md §3 and gate 10. A purity counterweight is
+#    the usual place a "rising must expand" defect enters a game; this one is
+#    built so neither direction closes a door without opening another.
+#
+# ⚠️ THE TOP BAND IS UNBOUNDED AT v0.1 (min = 55, no max). Gate 8 judges the top
+#    band's MIN, so v0.1 owes an authored gate at 55 on each of the three tiers
+#    and promises nothing above it. The 75 rung named in the board's first draft
+#    is DEFERRED for exactly this reason — a min = 75 top band would owe three
+#    more ladders of content on the day it ships. Logged in the ledger.
+# =============================================================================
+
+schema_version = "1.0"
+
+[project]
+id              = "seventh_day"
+title           = "The Seventh Day"
+description     = "Fourteen people, sixty acres, and a list of rules on the hall wall that gets read out at breakfast. You are the third daughter. You have never had a room, never held money that was yours, and never been alone with any of them."
+starting_canvas = "canvas_opening"
+quests_engine   = "v2"
+version         = "0.1"
+
+[time]
+starting_hour = 5          # the wash-house rota starts before light
+starting_day  = "Monday"   # six days before the first reading
+starting_week = 1
+
+[settings]
+narration_person  = "second"          # IMMUTABLE once v0.1 ships
+clothing_enabled  = true
+wardrobe_location = "the_girls_room"  # the shared press, which is not hers either
+
+# ─── The tithe — the ENGINE under everything ─────────────────────────────────
+# She owns nothing, so the obligation IS the taboo: holding money of her own is
+# already a broken rule, and keeping any of it means lying at the reading, which
+# costs grace. Money and grace are one loop, not two systems (the-economy.md R3).
+#
+# ⚠️ engine.md §26 — THE ENGINE TAKES THE MONEY. There is no authored canvas in
+#    this game that narrates handing the tin over. A shipped game wrote one, and
+#    its written settle-up charged nothing while [settings.rent] charged
+#    correctly three passages away — so the player met two collections, and the
+#    free one was the one with the writing in it. The prayer-room scenes here sit
+#    BESIDE the charge: the ask before it, the aftermath after it.
+#
+# ⚠️ `due_day` takes weekday NAMES only (template_import.py:4786). The seventh
+#    day of a week that starts Monday is Sunday.
+#
+# ⚠️ start_after_flag — the demand does not arm until she has held a coin. An
+#    obligation armed before she can earn is a scripted loss, not a choice.
+#
+# ⚠️ eviction_mode = "flag_set", NOT the default "game_end". The product never
+#    ends. Failing the reading sets `under_correction`, which is the low end of
+#    the counterweight — it opens the supervised content instead of stopping the
+#    game.
+[settings.rent]
+enabled          = true
+amount           = 20
+due_day          = "Sunday"
+collector_npc    = "npc_amos"
+grace_periods    = 1
+start_after_flag = "first_coin"
+eviction_mode    = "flag_set"
+eviction_flag    = "under_correction"
+currency_symbol  = "£"
+
+[settings.rent.text]
+title            = "The Reading"
+scene            = "He reads the seventh rule last, the way he always does, and then he does not close the book. He puts it face down on the stand and picks the tin up off the shelf behind him, and the room goes quiet in the particular way it goes quiet once a week. He starts at the far end of the bench. By the time the tin reaches you everybody who has already put something in is looking at their hands."
+greeting         = "Nothing is yours in this house. That is the whole of it."
+paid_scene       = "You put it in. It goes on top of what the others put in and it makes the same sound theirs made, and he does not look down at the tin and he does not look up at you either. He moves on to Job."
+paid_response    = "Good girl."
+paid_closing     = "The tin goes back on the shelf behind the reading stand where everyone can see it and nobody can reach it. He picks the book up again and finds his place, and the seventh day carries on the way it does."
+cant_pay         = "You haven't got it."
+warning_scene    = "The tin stops in front of you. You say there was nothing this week. He holds it there a moment longer than he needs to — long enough for Ruth to look up from the end of the bench — and then he sets it down on the arm of the stand and leaves it there for the rest of the reading, open, at your eye level."
+warning_response = "Then we will say it was a thin week. Once."
+warning_closing  = "Afterwards he does not mention it. Ruth does not mention it either, which is worse, and Ezra walks past the girls' room twice that night instead of once."
+eviction_scene_soft    = "The second seventh day he does not bring the tin to you at all. He carries it down the bench, past your knees, and hands it to Job as though you were not sitting there, and then he goes back to the stand and turns a page and reads the seventh rule again from the beginning, slowly, to the room."
+eviction_response_soft = "The rule is for the ones who are still inside it."
+eviction_closing_soft  = "Nobody says the word. But the rota goes up on Monday with your name against the wash house every day of the week, and Ezra's name against yours, and neither of those things has ever been an accident in this house."
+
+[theme]
+mode = "dark"
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE ASCENT TIERS
+#
+# Three kinds of going-further, so a player who does not want one can still climb
+# another. Rungs at 15/35/55, the ladder measured off the reference game.
+#
+# Band text is UI VOICE (references/the-voice.md R1): it names a state plainly and
+# never performs. The register lives in the paragraph after the click, never in
+# the rail.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "cover"
+bands = [
+  { min = 0,  max = 14, text = "Long dress, hair pinned" },
+  { min = 15, max = 34, text = "Apron off, sleeves up" },
+  { min = 35, max = 54, text = "Down to the shift" },
+  { min = 55, text = "Nothing under it" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "alone"
+bands = [
+  { min = 0,  max = 14, text = "Never alone with a man" },
+  { min = 15, max = 34, text = "Alone, where it can be seen" },
+  { min = 35, max = 54, text = "Behind a shut door" },
+  { min = 55, text = "Out at night with them" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "standing"
+bands = [
+  { min = 0,  max = 14, text = "Third daughter" },
+  { min = 15, max = 34, text = "Keeper of the kitchen" },
+  { min = 35, max = 54, text = "Keeper of the keys" },
+  { min = 55, text = "The market run is yours" },
+]
+
+# The counterweight. TWO-ENDED — read the header at the top of this file. It has
+# gates in both directions on purpose, and it is declared as the counterweight in
+# v2_state.json so gate 10 judges the three tiers above and not this one.
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "grace"
+bands = [
+  { min = 0,  max = 24, text = "Under correction" },
+  { min = 25, max = 49, text = "Watched" },
+  { min = 50, max = 74, text = "Trusted with the day" },
+  { min = 75, max = 100, text = "Above suspicion" },
+]
+
+# ─── The next step in the rail (engine.md §23) ───────────────────────────────
+# The band strings above name a STATE. This names a STEP. A player who never
+# opens the guidance page otherwise has no place, no verb and no person anywhere
+# in the persistent chrome.
+[[sidebar_items]]
+type = "quest_next"
+max  = 3
+
+
+# ─── Day-rollover hook ───────────────────────────────────────────────────────
+# The day-caps. the-economy.md R5 and the climb gate both refuse a rung that can
+# be clicked without limit: being behind a tier gate is not a cap, because the
+# tier is bought once and the rung repeats forever. Each capped rung sets its
+# flag on the HUB CHOICE (engine.md §16 — a flag read by a choice must be set
+# from a LOCATED canvas, and a triggerless rung has no location), and this hook
+# clears them all at the day rollover.
+[engine.daily_tick]
+flagEffects = [
+  { targetType = "player", flag = "market_run_today",    op = "unset" },
+  { targetType = "player", flag = "ate_apart_today",     op = "unset" },
+  { targetType = "player", flag = "asked_rota_today",    op = "unset" },
+  { targetType = "player", flag = "crossed_shift_today", op = "unset" },
+]
+
+# ─── Trait labels ────────────────────────────────────────────────────────────
+# ⚠️ THE FOUR TIERS ARE DECLARED HIDDEN. A trait banded with trait_status_text
+#    that is not hidden renders BOTH the band word and the raw number — the
+#    sidebar says "Down to the shift" and "cover 38" one under the other. Gate 27
+#    / engine.md §30. The band is the UI; the number is bookkeeping.
+[[traits.labels]]
+key    = "cover"
+hidden = true
+
+[[traits.labels]]
+key    = "alone"
+hidden = true
+
+[[traits.labels]]
+key    = "standing"
+hidden = true
+
+[[traits.labels]]
+key    = "grace"
+hidden = true
+
+[[traits.labels]]
+key   = "energy"
+label = "Rested"
+
+[[traits.labels]]
+key   = "money"
+label = "Kept back"
+
+[[traits.labels]]
+key   = "stress"
+label = "Nerves"
+
+# Internals — never surfaced to the player.
+[[traits.labels]]
+key    = "arousal"
+hidden = true
+
+[[traits.labels]]
+key    = "eggs_today"
+hidden = true
+
+[[traits.labels]]
+key    = "mending_today"
+hidden = true
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# GUIDANCE — [[quest_cards]] (engine.md §23; the-voice.md R2/R3/R5)
+#
+# ⚠️ NO `version = "1.0"` ON A QUEST CARD. Quest conditions use a separate
+#    evaluator with no fail-open (checkQuestsCondition, v2.py:14878).
+#
+# Tier cards carry no npc_id. A v2 game has no mission, so the top of the page IS
+# the three ladders. Stepped bands, gte + lt, exactly one live at a time.
+#
+# Every goal label names a PLACE and a VERB, and a WINDOW where the step is
+# schedule-gated (R3). The number is already in the sidebar; what the player
+# cannot see is which click moves it.
+#
+# ⚠️ Each card names a click gated ONE TIER BELOW its own goal, never at the value
+#    the card is trying to reach. A shipped game made all three cards of one
+#    ladder circular that way and nothing in gates.py catches it.
+#
+# The >=55 card on each tier is the HONEST WALL: no goal bullet, reads forward.
+# Every character ladder ends on `terminal = true` or the whole character vanishes
+# from the page at the moment they become permanent sandbox content (R5).
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ── COVER ────────────────────────────────────────────────────────────────────
+[[quest_cards]]
+priority = 10
+text     = "The rule is on the wall in the hall and it is the fourth one down: the daughters of this house go covered. Long dress, sleeves to the wrist, hair up before you come down."
+tip      = "The wash house is the one place the rules require you undressed. Work the rota there and stop hurrying."
+when     = [ { trait = "cover", subject = "player", op = "lt", value = 15 } ]
+goals    = [ { trait = "cover", subject = "player", op = "gte", value = 15, label = "Take the wash-house rota and don't rush it — the wash house, mornings" } ]
+
+[[quest_cards]]
+priority = 10
+text     = "Apron off, sleeves pushed up past the elbow, and the top button undone in the heat of the kitchen — none of it against the letter of anything, and all of it noticed."
+tip      = "The copper runs hot and the wash house door does not hold. Wash there in the afternoon, when the yard is working."
+when     = [ { trait = "cover", subject = "player", op = "gte", value = 15 },
+             { trait = "cover", subject = "player", op = "lt",  value = 35 } ]
+goals    = [ { trait = "cover", subject = "player", op = "gte", value = 35, label = "Wash with the door unlatched — the wash house, afternoons" } ]
+
+[[quest_cards]]
+priority = 10
+text     = "Down to the shift, which is what the rule actually permits when you read it properly, and which was never written by anyone who had seen linen wet."
+tip      = "Cross the yard in it instead of changing first. Ezra walks the property from ten."
+when     = [ { trait = "cover", subject = "player", op = "gte", value = 35 },
+             { trait = "cover", subject = "player", op = "lt",  value = 55 } ]
+goals    = [ { trait = "cover", subject = "player", op = "gte", value = 55, label = "Cross the yard in the shift after dark — the yard, nights" } ]
+
+[[quest_cards]]
+priority = 10
+text     = "You go about this house in a shift with nothing under it and nobody has read the fourth rule out at breakfast in three weeks. What is further than this is the market run, and that is Warrick's to give."
+when     = [ { trait = "cover", subject = "player", op = "gte", value = 55 } ]
+
+# ── ALONE ────────────────────────────────────────────────────────────────────
+[[quest_cards]]
+priority = 11
+text     = "The sixth rule: no daughter of this house is alone with a man who is not her husband, and no door in this house is shut on two people."
+tip      = "The rows are work, and work is not being alone. Take the far end where the hedge is, with whoever is on the rota."
+when     = [ { trait = "alone", subject = "player", op = "lt", value = 15 } ]
+goals    = [ { trait = "alone", subject = "player", op = "gte", value = 15, label = "Work the top end of the rows with one of them — the vegetable rows, afternoons" } ]
+
+[[quest_cards]]
+priority = 11
+text     = "Alone with one of them, in the open, where anybody crossing the yard could count you — which is the letter of the rule kept and the whole of it broken."
+tip      = "Warrick works the barn all day and the barn is not the yard. Take him something and stay."
+when     = [ { trait = "alone", subject = "player", op = "gte", value = 15 },
+             { trait = "alone", subject = "player", op = "lt",  value = 35 } ]
+goals    = [ { trait = "alone", subject = "player", op = "gte", value = 35, label = "Stay in the barn with Warrick after the work is done — the barn, days" } ]
+
+[[quest_cards]]
+priority = 11
+text     = "Behind a shut door, which is the rule broken in the only way the rule actually meant."
+tip      = "Ezra sleeps up the ladder and nobody goes up it by accident. Go up it on purpose."
+when     = [ { trait = "alone", subject = "player", op = "gte", value = 35 },
+             { trait = "alone", subject = "player", op = "lt",  value = 55 } ]
+goals    = [ { trait = "alone", subject = "player", op = "gte", value = 55, label = "Go up the ladder to Ezra after lights — the barn loft, nights" } ]
+
+[[quest_cards]]
+priority = 11
+text     = "You are out at night with them and the hall knows it. The one door on this property that has a bolt on the inside is your parents', and it is bolted from the inside."
+when     = [ { trait = "alone", subject = "player", op = "gte", value = 55 } ]
+
+# ── STANDING ─────────────────────────────────────────────────────────────────
+[[quest_cards]]
+priority = 12
+text     = "Third daughter. You are on the rota, you are not on the board that makes it, and every coin that passes through your hands is counted into a tin on Sunday."
+tip      = "Ruth writes the rota at the long table before six. Be down before she is and have the range lit."
+when     = [ { trait = "standing", subject = "player", op = "lt", value = 15 } ]
+goals    = [ { trait = "standing", subject = "player", op = "gte", value = 15, label = "Get the range lit before Ruth comes down — the long kitchen, before six" } ]
+
+[[quest_cards]]
+priority = 12
+text     = "Keeper of the kitchen: you set the table, you serve the head of it, and the rota has started asking you who can be spared instead of telling you."
+tip      = "The pantry key hangs on a hook in Warrick's room. There is a ledger under it that does not add up."
+when     = [ { trait = "standing", subject = "player", op = "gte", value = 15 },
+             { trait = "standing", subject = "player", op = "lt",  value = 35 } ]
+goals    = [ { trait = "standing", subject = "player", op = "gte", value = 35, label = "Take the pantry ledger off the hook and read it — Warrick's room, evenings" } ]
+
+[[quest_cards]]
+priority = 12
+text     = "Keeper of the keys. The pantry is yours, the ledger is yours, and what goes into the tin on Sunday is a number you now write down before he counts it."
+tip      = "The truck leaves the yard for Cowan on market day and Warrick has driven it alone for nine years."
+when     = [ { trait = "standing", subject = "player", op = "gte", value = 35 },
+             { trait = "standing", subject = "player", op = "lt",  value = 55 } ]
+goals    = [ { trait = "standing", subject = "player", op = "gte", value = 55, label = "Ride the truck to Cowan with Warrick — the yard, market day" } ]
+
+[[quest_cards]]
+priority = 12
+text     = "The market run is yours and the gate opens for you without anybody being asked. What is past the gate is a road, and the road is a future update."
+when     = [ { trait = "standing", subject = "player", op = "gte", value = 55 } ]
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# CHARACTER LADDERS
+#
+# `npc_id` on a card routes it into that character's section
+# (template_import.py:1004-1006), and pickQuestsCard returns the SINGLE
+# highest-priority match — so a character's cards are a one-live-at-a-time chain.
+#
+# ⚠️ EVERY LADDER ENDS ON `terminal = true`. Without it the character's whole
+#    section disappears from the page at the exact moment their arc closes and
+#    they become permanent sandbox content the player can still go and use (R5).
+#    A goal-less non-terminal card draws no frame at all and reads as an
+#    objective with nothing ticked (engine.md §23).
+#
+# ⚠️ EXACTLY ONE CARD IN THIS GAME SETS `terminal_text` — it is the badge form of
+#    the build-boundary rule, and it is on Ezra, because he is the character the
+#    Want's deletion test names.
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ── EZRA — the one whose job is to stop her ──────────────────────────────────
+[[quest_cards]]
+priority = 20
+npc_id   = "npc_ezra"
+text     = "Your brother walks the property from ten at night until he is satisfied, and he has never once said what he is looking for. He checks the wash house latch. He checks it whether or not anybody is in there."
+tip      = "Be in there when he checks it. He will not knock, because knocking would mean admitting he expected somebody."
+when     = [ { trait = "relation", subject = "npc", npc_id = "npc_ezra", op = "lt", value = 20 } ]
+goals    = [ { trait = "relation", subject = "npc", npc_id = "npc_ezra", op = "gte", value = 20, label = "Be in the wash house when he checks the latch — the wash house, after ten" } ]
+
+[[quest_cards]]
+priority = 20
+npc_id   = "npc_ezra"
+text     = "He caught you and he did not report it, and that is a thing he now has to carry every time he passes you the bread. He walks past the girls' room twice a night instead of once."
+tip      = "The ladder to the loft is the only door in this house nobody goes through by accident. Go up it."
+when     = [ { trait = "relation", subject = "npc", npc_id = "npc_ezra", op = "gte", value = 20 },
+             { trait = "relation", subject = "npc", npc_id = "npc_ezra", op = "lt",  value = 45 } ]
+goals    = [ { trait = "relation", subject = "npc", npc_id = "npc_ezra", op = "gte", value = 45, label = "Go up the ladder to him after lights — the barn loft, nights" } ]
+
+[[quest_cards]]
+priority = 20
+npc_id        = "npc_ezra"
+terminal      = true
+terminal_text = "As far as he goes in this build — the walk continues in the next release"
+text          = "He still walks the property every night at ten. What he is checking for now is whether you are already up there, and both of you have stopped pretending otherwise."
+when          = [ { trait = "relation", subject = "npc", npc_id = "npc_ezra", op = "gte", value = 45 } ]
+
+# ── AMOS — every rule is in his voice ────────────────────────────────────────
+[[quest_cards]]
+priority = 21
+npc_id   = "npc_amos"
+text     = "Your father reads the rules out at breakfast and again at the reading, and in between he does not speak much. He is at the head of the long table for every meal of your life."
+tip      = "He notices who lights the range. Be down before Ruth and be the one who hands him his cup."
+when     = [ { trait = "relation", subject = "npc", npc_id = "npc_amos", op = "lt", value = 20 } ]
+goals    = [ { trait = "relation", subject = "npc", npc_id = "npc_amos", op = "gte", value = 20, label = "Hand him his cup before anyone is down — the long kitchen, before six" } ]
+
+[[quest_cards]]
+priority = 21
+npc_id   = "npc_amos"
+text     = "He has started reading the fourth rule looking at the book instead of at the room, which is new, and which everybody at that table has noticed except possibly him."
+tip      = "The prayer room is empty after the reading and he stays in it. Go back in."
+when     = [ { trait = "relation", subject = "npc", npc_id = "npc_amos", op = "gte", value = 20 },
+             { trait = "relation", subject = "npc", npc_id = "npc_amos", op = "lt",  value = 45 } ]
+goals    = [ { trait = "relation", subject = "npc", npc_id = "npc_amos", op = "gte", value = 45, label = "Go back into the prayer room after the reading — the prayer room, evenings" } ]
+
+[[quest_cards]]
+priority = 21
+npc_id   = "npc_amos"
+terminal = true
+text     = "He reads the rules out the same way he always has, in the same voice, to the same fourteen people. Nothing about the reading has changed and everything else has."
+when     = [ { trait = "relation", subject = "npc", npc_id = "npc_amos", op = "gte", value = 45 } ]
+
+# ── WARRICK — the only one who leaves ────────────────────────────────────────
+[[quest_cards]]
+priority = 22
+npc_id   = "npc_warrick"
+text     = "Your uncle runs the barn and drives the truck, and he is the only person on this property who has seen a town in the last month. He talks to you like you are in the world instead of on it."
+tip      = "He works the barn all day. Take him something out and then do not go straight back."
+when     = [ { trait = "relation", subject = "npc", npc_id = "npc_warrick", op = "lt", value = 20 } ]
+goals    = [ { trait = "relation", subject = "npc", npc_id = "npc_warrick", op = "gte", value = 20, label = "Take his dinner out and stay in the barn — the barn, days" } ]
+
+[[quest_cards]]
+priority = 22
+npc_id   = "npc_warrick"
+text     = "He keeps the pantry key on a hook in his room and a ledger under it, and he has started leaving the door open when he knows you are in the kitchen."
+tip     = "His room is behind the kitchen. Go in when the house is at the reading."
+when     = [ { trait = "relation", subject = "npc", npc_id = "npc_warrick", op = "gte", value = 20 },
+             { trait = "relation", subject = "npc", npc_id = "npc_warrick", op = "lt",  value = 45 } ]
+goals    = [ { trait = "relation", subject = "npc", npc_id = "npc_warrick", op = "gte", value = 45, label = "Go into his room while the house is at the reading — Warrick's room, evenings" } ]
+
+[[quest_cards]]
+priority = 22
+npc_id   = "npc_warrick"
+terminal = true
+text     = "The truck goes to Cowan on market day with two people in it now, and Amos has not asked about it once, which tells you what Warrick told him."
+when     = [ { trait = "relation", subject = "npc", npc_id = "npc_warrick", op = "gte", value = 45 } ]
+
+# ── SILAS — married in, still outside ────────────────────────────────────────
+[[quest_cards]]
+priority = 23
+npc_id   = "npc_silas"
+text     = "Your sister's husband came from another household two years ago and has been on trial ever since. Everyone in this house watches him for signs. You are the one who does not."
+tip      = "He works the rows every afternoon and nobody talks to him out there. Take the next row over."
+when     = [ { trait = "relation", subject = "npc", npc_id = "npc_silas", op = "lt", value = 20 } ]
+goals    = [ { trait = "relation", subject = "npc", npc_id = "npc_silas", op = "gte", value = 20, label = "Work the row next to his and talk to him — the vegetable rows, afternoons" } ]
+
+[[quest_cards]]
+priority = 23
+npc_id   = "npc_silas"
+text     = "He has started coming up the rows to where you are working instead of waiting for you to come down them, which anybody standing in the yard could see and nobody has said."
+tip      = "The caravan is across the yard and Miriam is in the kitchen until eight. Go over."
+when     = [ { trait = "relation", subject = "npc", npc_id = "npc_silas", op = "gte", value = 20 },
+             { trait = "relation", subject = "npc", npc_id = "npc_silas", op = "lt",  value = 45 } ]
+goals    = [ { trait = "relation", subject = "npc", npc_id = "npc_silas", op = "gte", value = 45, label = "Go to the caravan while Miriam is in the kitchen — the caravan, evenings" } ]
+
+[[quest_cards]]
+priority = 23
+npc_id   = "npc_silas"
+terminal = true
+text     = "He is still on trial with everybody in this house except you, and he has worked out that the two facts are the same fact."
+when     = [ { trait = "relation", subject = "npc", npc_id = "npc_silas", op = "gte", value = 45 } ]
+
+# ── RUTH — she knows first, and says nothing ─────────────────────────────────
+[[quest_cards]]
+priority = 24
+npc_id   = "npc_ruth"
+text     = "Your mother writes the rota at the long table before six every Monday and nobody has ever asked her to explain a line of it. She is the only person in this house who knows where everyone will be all week."
+tip      = "Be down before her with the range lit and she will start talking while she writes."
+when     = [ { trait = "relation", subject = "npc", npc_id = "npc_ruth", op = "lt", value = 20 } ]
+goals    = [ { trait = "relation", subject = "npc", npc_id = "npc_ruth", op = "gte", value = 20, label = "Be at the table when she writes the rota — the long kitchen, Monday before six" } ]
+
+[[quest_cards]]
+priority = 24
+npc_id   = "npc_ruth"
+text     = "The rota has started putting you where you asked to be without your having asked. She has not mentioned it. She has not mentioned anything."
+tip      = "She takes the wash house last on the rota, when the copper is nearly cold. Be in there."
+when     = [ { trait = "relation", subject = "npc", npc_id = "npc_ruth", op = "gte", value = 20 },
+             { trait = "relation", subject = "npc", npc_id = "npc_ruth", op = "lt",  value = 45 } ]
+goals    = [ { trait = "relation", subject = "npc", npc_id = "npc_ruth", op = "gte", value = 45, label = "Be in the wash house when she takes her turn — the wash house, late" } ]
+
+[[quest_cards]]
+priority = 24
+npc_id   = "npc_ruth"
+terminal = true
+text     = "She knows. She has known longer than anyone and she writes the rota every Monday, and what she does with that is the thing this house is actually built on."
+when     = [ { trait = "relation", subject = "npc", npc_id = "npc_ruth", op = "gte", value = 45 } ]
+
+# ── JOB — the one where she moves first ──────────────────────────────────────
+[[quest_cards]]
+priority = 25
+npc_id   = "npc_job"
+text     = "Your younger brother is eighteen and has worked out how to be in the yard whenever you cross it. He has not worked out that you can tell."
+tip      = "Let him carry something for you and do not thank him for it."
+when     = [ { trait = "relation", subject = "npc", npc_id = "npc_job", op = "lt", value = 20 } ]
+goals    = [ { trait = "relation", subject = "npc", npc_id = "npc_job", op = "gte", value = 20, label = "Let him carry the water in for you — the yard, mornings" } ]
+
+[[quest_cards]]
+priority = 25
+npc_id   = "npc_job"
+text     = "He looks at you now instead of near you, and he has stopped being able to hide it, and you have stopped helping him hide it."
+tip      = "The boys' room door has no catch on it. Go in when the others are at the rows."
+when     = [ { trait = "relation", subject = "npc", npc_id = "npc_job", op = "gte", value = 20 },
+             { trait = "relation", subject = "npc", npc_id = "npc_job", op = "lt",  value = 45 } ]
+goals    = [ { trait = "relation", subject = "npc", npc_id = "npc_job", op = "gte", value = 45, label = "Go into the boys' room while the rest are at the rows — the boys' room, afternoons" } ]
+
+[[quest_cards]]
+priority = 25
+npc_id   = "npc_job"
+terminal = true
+text     = "He is the one you started, and he knows he is the one you started, and he would do anything you asked in this house including the things you have not asked yet."
+when     = [ { trait = "relation", subject = "npc", npc_id = "npc_job", op = "gte", value = 45 } ]
