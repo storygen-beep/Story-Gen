@@ -1,0 +1,161 @@
+# =============================================================================
+# The Allowance — 2_one_shots
+# The opening chain. Linear on purpose: it teaches the table, the arithmetic and
+# the five people at it, then lets go.
+#
+# ⚠️ EVERY MILESTONE HERE NAMES THE STANDING CONTENT IT TURNS ON (gate 7):
+#     first_envelope   -> the ask, the Saturday shift, and every standing surface
+#     first_night_done -> the bathroom layer, the landing, and her own room
+#
+# FIRST CHARGED BEAT ON NIGHT ONE, two clicks from free roam. It is not a sex
+# scene with a family member on day one — it is the bolt that does not catch, and
+# then her, alone, on the bed she has had since she was eleven.
+# =============================================================================
+
+
+# ── Sunday, six o'clock ──────────────────────────────────────────────────────
+[[canvases]]
+id          = "canvas_sunday"
+name        = "The Allowance"
+description = "Opening. Sunday 18:00, the kitchen. Establishes the table as a pricing mechanism, the £50 board against a £36 shift, and all four of the household. Linear. SETS first_envelope, which arms [settings.rent] and opens every standing surface in the game."
+
+[canvases.trigger]
+location      = "the_kitchen"
+is_repeatable = false
+priority      = 12
+is_active     = true
+
+[[canvases.nodes]]
+id   = "the_table"
+name = "The table"
+blocks = [
+  { type = "image", props = { file = "scenes/sunday_table.jpg", description = "A small worn kitchen table under a bare bulb with an envelope and a biro on it.", search_queries = ["small kitchen table envelope money evening", "worn family kitchen table biro paperwork"] } },
+  { type = "paragraph", content = "Six o'clock on a Sunday and the envelope is already on the table. He gets it out before anyone sits down. It is the same envelope it has been since March, soft at the corners now, with a column of numbers going down the back of it in biro." },
+  { type = "paragraph", content = "He tests the biro on the corner. It does not work. It has not worked for three weeks and he is surprised every time." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_martin" }, content = "Right. Board." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Sit down.", targetType = "node", nodeId = "the_room" },
+] }
+
+[[canvases.nodes]]
+id   = "the_room"
+name = "Who's in it"
+blocks = [
+  { type = "paragraph", content = "Your mother is stood by the door in her coat because the bus goes at twenty past. She does nights. She has done nights for six years and she will be asleep by eight in the morning." },
+  { type = "paragraph", content = "Joss is eating standing up at the counter, which he does so he can leave. He is on the depot at ten. Your uncle Gareth is at the table, in the way, with a paper he is not reading." },
+  { type = "paragraph", content = "Five adults in a house with one bathroom, and all five of them are in this room for the next ten minutes because that is what Sunday is." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_gareth" }, content = "I've got mine. It's — hang on. It's upstairs." },
+  { type = "paragraph", content = "Nobody says anything. Gareth goes up for it. He will be four minutes." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Wait your turn.", targetType = "node", nodeId = "the_sum" },
+] }
+
+[[canvases.nodes]]
+id   = "the_sum"
+name = "The sum"
+blocks = [
+  { type = "paragraph", content = "Fifty pounds a week, off everyone in the house, because everyone contributes. He says it the same way every Sunday. He is not wrong and he has never once been unfair about it." },
+  { type = "paragraph", content = "The shop pays thirty-six for a Saturday. That is the whole of your income. Fifty and thirty-six are the two numbers in your life and the gap between them is fourteen." },
+  { type = "paragraph", content = "You were supposed to be gone in September. The money was not there. Nobody in this room has mentioned September since about February." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Fourteen. Every week. Forever, at this rate." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Put your thirty-six down.", targetType = "node", nodeId = "the_ask" },
+] }
+
+[[canvases.nodes]]
+id   = "the_ask"
+name = "The ask"
+blocks = [
+  { type = "paragraph", content = "He counts it. Then he counts it again in front of you, and writes thirty-six under last week's number, and draws a small line under it, because it is short and the line is what short looks like." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_martin" }, content = "Fourteen. Right. What do you need this week?" },
+  { type = "paragraph", content = "This is the part. You have to say it out loud, itemised, in a kitchen with four other people in it. Bus fare. Tights, because the last pair went. Your phone, which is eight pounds and is the one he always asks about." },
+  { type = "paragraph", content = "He asks about the phone. Kindly. He asks who you are ringing that costs eight pounds, and he is genuinely curious, and Joss looks up from his plate for the first time." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Answer him.", targetType = "node", nodeId = "the_ledger" },
+] }
+
+[[canvases.nodes]]
+id   = "the_ledger"
+name = "The ledger"
+blocks = [
+  { type = "paragraph", content = "He gives you twenty. He writes twenty on the envelope, on the other side, in a second column, and puts the tin back on top of the fridge, and the lid goes on." },
+  { type = "paragraph", content = "Everybody at this table hears the lid go on. It is the loudest thing that happens on a Sunday." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_joss" }, content = "Twenty. God. She's doing well this week." },
+  { type = "paragraph", content = "Your mother tells him to leave it and goes for her bus. Your father is already looking at the football. Gareth comes back down with his fifty, four minutes late, and hands it over apologising." },
+  { type = "paragraph", content = "That is the number on you. Twenty pounds, decided out loud, in front of your family, and written down in biro in your father's handwriting." },
+]
+exit_block = { type = "location", text = "Go up.", config = { destinationType = "specific", locationId = "the_landing", flagEffects = [
+  { targetType = "player", flag = "first_envelope", op = "set" },
+] } }
+
+
+# ── Night one — the bolt, and then her ───────────────────────────────────────
+[[canvases]]
+id          = "canvas_first_night"
+name        = "The first night"
+description = "Auto-fire at the_bathroom, gated first_envelope. Night one, two clicks from free roam. Teaches the bathroom's one fact — the door has dropped and the bolt sits against the frame rather than in it — and then goes explicit, alone, in her own room. SETS first_night_done, which opens the bathroom layer, the landing and her room. +6 seen, +4 appetite."
+
+[canvases.trigger]
+location      = "the_bathroom"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "first_envelope",   operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "first_night_done", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "the_bolt"
+name = "The bolt"
+blocks = [
+  { type = "image", props = { file = "scenes/first_night_bolt.jpg", description = "A small dated bathroom door seen from inside with an old sliding bolt at eye height.", search_queries = ["old bathroom door bolt latch interior", "worn bathroom door lock small british house"] } },
+  { type = "paragraph", content = "Half eleven. The house has gone down to the fridge and the boiler. You get the bolt across and it goes across easily, which is the thing you have never once thought about." },
+  { type = "paragraph", content = "The door has dropped. It sits against the frame rather than in it, so the bolt is across an inch of air. You have known that since you were about fourteen and it has never meant anything before tonight." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Try it.", blocks = [
+        { type = "paragraph", content = "You put a hand on the handle from the inside and pull. The door opens against the bolt. Not far — an inch, maybe two — and then it stops, and it would keep stopping, and anybody outside would only have to lean." },
+    ] },
+    { advance_text = "Get in the bath.", blocks = [
+        { type = "paragraph", content = "You get in anyway. The water runs too hot and then cold and you stand under it doing the sum again, fourteen a week, and the sum is not the thing you are actually thinking about." },
+        { type = "paragraph", content = "You are thinking about the inch." },
+    ] },
+  ] } },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Cross the landing.", targetType = "node", nodeId = "her_bed" },
+] }
+
+[[canvases.nodes]]
+id   = "her_bed"
+name = "Her room"
+blocks = [
+  { type = "paragraph", content = "Eleven feet of carpet, the board outside the bathroom, and Joss's door shut with the light off because he left for the depot at ten. Your door catch does not hold unless you lift the handle. You do not lift the handle." },
+  { type = "video", props = { pool_dir = "sex/first_night_bed_t5", pool = 4, description = "Explicit — a young woman alone on a single bed in a small dark bedroom, hand between her legs.", search_queries = ["woman alone single bed bedroom touching herself dark", "girl in bed at night hand between legs solo amateur"] } },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Get in.", blocks = [
+        { type = "paragraph", content = "You get in wet, in nothing, and the towel goes on the floor. Your hand is between your legs before you have decided anything, two fingers flat, already slick from the bath and then not from the bath." },
+        { type = "paragraph", content = "You work your clit in small tight circles the way you have since you were fifteen in this exact bed. Your other hand goes up under your own tit and squeezes, hard, thumb dragging the nipple until it hurts." },
+        { type = "paragraph", content = "Your hips lift off the mattress. You push two fingers into your cunt and they go in easily and you make a noise into the pillow that is louder than you meant." },
+    ] },
+    { advance_text = "Don't stop.", blocks = [
+        { type = "paragraph", content = "The bed frame taps the wall. You keep going. Your fingers are soaked to the knuckle and you fuck yourself on them properly, heel of your hand grinding down on your clit every stroke, thighs shaking open." },
+        { type = "paragraph", content = "You come with your face in the pillow and your back off the bed, cunt clamping down on your own fingers, and you keep them in there through all of it until it stops." },
+    ] },
+    { advance_text = "Afterwards.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The inch. That is what did it. Not a person. An inch of air." },
+        { type = "paragraph", content = "You lie there and let that sit, and it does not go away, and you decide not to do anything about deciding it." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Go to sleep.", config = { destinationType = "specific", locationId = "her_room", effects = [
+  { targetType = "player", trait = "seen",     op = "add", value = 6, clamp = true },
+  { targetType = "player", trait = "appetite", op = "add", value = 4, clamp = true },
+  { targetType = "player", trait = "hygiene",  op = "add", value = 40, clamp = true },
+], flagEffects = [
+  { targetType = "player", flag = "first_night_done", op = "set" },
+] } }

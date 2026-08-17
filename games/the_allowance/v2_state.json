@@ -1,0 +1,436 @@
+{
+  "slug": "the_allowance",
+  "title": "The Allowance",
+  "phase": "release",
+  "narration_person": "second",
+  "want": {
+    "who_she_is": "Nell Vasey, 19. She was supposed to leave in September; the money wasn't there, so she didn't, and the gap year is quietly becoming her life. She has never lived anywhere else \u2014 her room is the room she was eight in. One bathroom, five adults. Her father takes board off everyone in the house, \u00a350 a week, Sunday night, cash, at the kitchen table, because everyone contributes. Her Saturday shift on the parade pays \u00a336. The gap is covered by an allowance she has to ask for out loud, itemised, in front of whoever is in the kitchen. What she has to lose is nothing dramatic, and that is the point: the only number anyone has ever put on Nell Vasey is the one on the back of her father's envelope, and everyone in the house has seen it.",
+    "appetite": "To be wanted by the people who set her price \u2014 and to keep the number moving. It cannot complete: no figure settles it, and the moment one is agreed she wants the next one set by someone else. Release 41 adds a new relative in the box room, a new thing in the house that turns out to have a price, or another rung on someone already at that table.",
+    "ascent": "Bottom: she asks, itemises, waits for the bathroom, and knocks on every door in the house including her own, because the catch is loud and her mother sleeps in the afternoons. Top: she names the number and the table pays it \u2014 the Sunday envelope runs the other way, no room needs an invitation, no door is waited outside, nothing she wants has to be justified. Four ratcheting tiers plus a counterweight: NERVE (how far she'll go with blood), SEEN (how much she lets herself be looked at in a house with no locks), PRICE (what she'll take money for and how openly), APPETITE (what she wants for its own sake \u2014 and at its ceiling the game stops offering and starts firing), against STANDING (what the house thinks she is, spent by every ask, buys nothing).",
+    "charge": "reversal (primary) + taboo (secondary)",
+    "charge_note": "Blood the whole way \u2014 father, brother, uncle, mother. No step, no patch, no asterisk. The reversal is mechanical and it is why this is a game rather than a scene: the kitchen table is a pricing mechanism that exists to decide what Nell is owed and what Nell owes, once a week, in public, in front of her family. The ascent is her learning to move other things across that same table until the direction of the money reverses.",
+    "appetite_is_not_arousal": "APPETITE is a ratchet \u2014 the standing baseline of what she needs before anything happens that day. Arousal is volatile layer-2 weather and must never be conflated with it.",
+    "why_this_person": {
+      "npc_martin": "Her father, 52. The ledger. Not cruel and never has been \u2014 procedural, which is worse: every fifteen pounds gets a follow-up question, asked kindly, in front of everyone. He decides what she is worth, weekly, in cash. To be wanted by the auditor is to break the audit.",
+      "npc_joss": "Her brother, 22. Nights at the depot, sleeps days, never left either. Room opposite hers; their windows share the flat roof over the kitchen. He noticed first and he is the only person in the house who will say a price out loud. Not harmless, not nervous \u2014 practical. The fastest rung, and the one who could end her at any moment by saying it at dinner.",
+      "npc_denise": "Her mother, 49. Nights at the care home, home at half six, asleep by eight. In the house for the whole game and the only person who could stop it. For seventy-four rungs she is the risk surface \u2014 the reason doors get closed and the reason they get left open. At seventy-five she is the rung.",
+      "npc_gareth": "Her uncle, 45 \u2014 Martin's younger brother, in the box room since the divorce, putting a bit toward things. The second man with an opinion on her allowance and no standing to have one. Also the first occupant of a slot that never empties.",
+      "npc_col": "41, runs the shop on the parade where she does Saturdays. The only money that is not the allowance and the only man who is not family. He is what an honest price looks like, which is what makes the household's prices legible as what they are."
+    },
+    "rotating_slot": {
+      "location": "the_box_room",
+      "role_noun": "whoever's in the box room",
+      "rule": "The Vaseys take in whichever relative is between things \u2014 Gareth now, a cousin next, an aunt after. The renewable character slot, renewable IN BLOOD, so the taboo does not reset when the occupant does. Room-scoped content (the room, the shared wall, the arrangement) lives in 3_activities.toml and names the occupant by ROLE only; tenant-scoped content (his ladder, his register, his props, his one secret) lives in 5_scenes.toml and dies with him."
+    },
+    "crude_ceiling": {
+      "npc_martin": [
+        "t1 (<35): nothing named \u2014 the shape of her, her legs, how she's grown",
+        "t2 (35-74): tits, arse, wet, hard, cock \u2014 flat, once, the way he reads out a figure",
+        "t3 (75+): cunt, fuck her, come in her \u2014 stated, never performed"
+      ],
+      "npc_joss": [
+        "t1: already crude about her where she can hear \u2014 tits, arse, fucking",
+        "t2: crude to her, and priced \u2014 cunt, suck it, that's what it's worth",
+        "t3: anything; he narrates it and keeps a running total"
+      ],
+      "npc_gareth": [
+        "t1: apologetic and specific at once \u2014 you shouldn't let me see that",
+        "t2: tits, cunt, fuck \u2014 borrowed, ugly, grateful",
+        "t3: everything, and he thanks her, which is the worst of it"
+      ],
+      "npc_denise": [
+        "t1: nothing. She is a risk, not a register.",
+        "t2: nothing. Still a risk.",
+        "t3: full crude, all at once, no build \u2014 a cliff, not a ladder"
+      ],
+      "box_room_role": [
+        "transactional from the start \u2014 tits, arse, cunt, fuck \u2014 no history to build on"
+      ],
+      "npc_col": [
+        "ordinary, adult, never taboo \u2014 tits, fuck, come here \u2014 the flat register the house does not have"
+      ]
+    },
+    "register_home": "The crude register lives on the STANDING surfaces: the bathroom, the landing between two doors, the kitchen after Denise leaves for nights, the flat roof outside two windows, her own room in the afternoon with her mother asleep down the hall. Once-only beats may be careful; the surfaces she returns to fifty times carry the crudest writing in the game.",
+    "last_read_at_release": "0.1"
+  },
+  "board": {
+    "ascent_tiers": [
+      "nerve",
+      "seen",
+      "price",
+      "appetite"
+    ],
+    "ceilings": {
+      "nerve": 100,
+      "seen": 100,
+      "price": 100,
+      "appetite": 100
+    },
+    "rungs": [
+      15,
+      35,
+      55,
+      75
+    ],
+    "ceiling_promises": {
+      "nerve": "Denise \u2014 her mother. The witness becomes the last rung. Owed location: the_back_bedroom.",
+      "seen": "the house has no private rooms left, and the parade is not private either",
+      "price": "the Sunday envelope reverses \u2014 she sets the board AND the allowance",
+      "appetite": "she stops being asked; standing surfaces fire on entry"
+    },
+    "counterweight": {
+      "id": "standing",
+      "start": 100,
+      "note": "What the house thinks Nell Vasey is. Spent by every ask, every itemised line, every thing taken. Buys nothing \u2014 it is what she pays with. NOT an ascent tier; excluded from board.ascent_tiers so gate 10 does not judge it as one."
+    },
+    "throttle_plan": {
+      "doctrine": "the-meters.md M1-M5. Every rung that grants an ascent tier carries TWO brakes.",
+      "brake_a": "`costs` on the hub choice \u2014 energy 8-15. Engine-enforced: an unaffordable choice is not offered (engine.md \u00a727).",
+      "brake_b": "a `<rung>_today` FLAG set on the rung's exit and gated `is_false` on the hub choice, cleared in [engine.daily_tick]. A flag, never a counter trait \u2014 a player-subject trait read only by `lt` reads to gate 10 as a descent (the-meters.md M5).",
+      "brake_c": "presence. Every family rung needs its person on site, and each is on site 2-4 hours a day.",
+      "spacing": "+2 to +4 per rung against thresholds at 15/35/55/75",
+      "target_rate": "fastest route to a top band 8-11 in-game days (M2 target: 7-10)",
+      "cap_note": "M6 \u2014 `cap` never goes on an ascent tier. Restores only (energy on sleep, hygiene on a wash)."
+    },
+    "sidebar_plan": {
+      "nerve|seen|price|appetite": "trait_words + bands, and hidden = true in [[traits.labels]] (the-meters.md M7, gate 27)",
+      "standing": "trait_words + bands, hidden = true",
+      "arousal": "trait_bar + bands + hide_value = true",
+      "energy": "trait_status_text + bands, hidden = true",
+      "money": "trait_bar, hide_value = false, NO bands \u2014 a countable resource is never banded",
+      "top_band_rule": "leave the top band's max off, or cap the terminal add \u2014 a value outside every band renders nothing at all (engine.md \u00a730)"
+    },
+    "locations": [
+      {
+        "id": "the_kitchen",
+        "anchor": true,
+        "fill": 3200,
+        "fill_target_mature": 11000,
+        "has_cycling_pool": true,
+        "job": "The table, and therefore the game. Board is paid here, the allowance is asked for here, out loud and itemised, and everyone in the house crosses it. Kitchen-diner through the back \u2014 this terrace has no separate lounge, which is why the room the house lives in is the room that prices things.",
+        "objects": [
+          "the table",
+          "the back of the envelope",
+          "the back step",
+          "the kettle",
+          "the airer",
+          "his chair"
+        ]
+      },
+      {
+        "id": "the_bathroom",
+        "anchor": false,
+        "fill": 1400,
+        "fill_target_mature": 4500,
+        "has_cycling_pool": true,
+        "job": "The occupancy engine. One bathroom, five adults, and a bolt that turns without catching. Contention, waiting, and being walked in on are all the same mechanic here.",
+        "objects": [
+          "the bolt",
+          "the bath",
+          "the mirror over the sink",
+          "the laundry basket",
+          "the immersion switch"
+        ]
+      },
+      {
+        "id": "her_room",
+        "anchor": false,
+        "fill": 1300,
+        "fill_target_mature": 4000,
+        "has_cycling_pool": true,
+        "job": "Her base, and the room she was eight in. The afternoon room \u2014 mother asleep down the hall, Joss awake across the landing.",
+        "objects": [
+          "the bed",
+          "the sash window",
+          "the wardrobe",
+          "her phone",
+          "the door catch"
+        ]
+      },
+      {
+        "id": "the_box_room",
+        "anchor": false,
+        "fill": 1200,
+        "fill_target_mature": 4000,
+        "has_cycling_pool": true,
+        "job": "The renewable slot, and it renews in blood \u2014 whichever relative is between things. Shares a wall with her room. ROOM-SCOPED content names the occupant by role only.",
+        "objects": [
+          "the single bed",
+          "the shared wall",
+          "his things on the sill",
+          "the door that catches on the carpet"
+        ]
+      },
+      {
+        "id": "joss_room",
+        "anchor": false,
+        "fill": 1400,
+        "fill_target_mature": 3500,
+        "has_cycling_pool": true,
+        "job": "Opposite hers across the landing. His window and hers both give onto the flat roof over the kitchen, which is the only part of this house that is neither inside nor out.",
+        "objects": [
+          "his bed",
+          "the window onto the flat roof",
+          "his work bag",
+          "the ashtray on the sill"
+        ]
+      },
+      {
+        "id": "the_landing",
+        "anchor": false,
+        "fill": 800,
+        "fill_target_mature": 2500,
+        "has_cycling_pool": true,
+        "job": "The vantage and the tell. Four doors, and a board near the bathroom that gives away anyone crossing at night.",
+        "objects": [
+          "the loose board",
+          "the airing cupboard",
+          "the four doors",
+          "the bannister"
+        ]
+      },
+      {
+        "id": "the_parade",
+        "anchor": false,
+        "fill": 700,
+        "fill_target_mature": 2000,
+        "has_cycling_pool": false,
+        "job": "The exterior. Where SEEN gets a consequence outside the household, and the only renewable source of people this premise has.",
+        "objects": [
+          "the bus stop",
+          "the bench",
+          "the shop front",
+          "the alley behind the parade"
+        ]
+      },
+      {
+        "id": "the_shop",
+        "anchor": false,
+        "fill": 700,
+        "fill_target_mature": 2000,
+        "has_cycling_pool": false,
+        "job": "Col's. The Saturday shift, and the only money in the game that is not the allowance \u2014 which is what makes the household's prices legible as prices.",
+        "objects": [
+          "the counter",
+          "the stockroom",
+          "the till",
+          "the shutter"
+        ]
+      },
+      {
+        "id": "the_back_bedroom",
+        "anchor": false,
+        "fill": 300,
+        "fill_target_mature": 2500,
+        "has_cycling_pool": false,
+        "locked_in_v0_1": true,
+        "job": "Her parents' room. LOCKED at v0.1 with entry_conditions + blocked_message \u2014 it is the visible shut door the first release ends on, and the location the Want owes at nerve 75 (the-map.md R2).",
+        "objects": [
+          "the bed",
+          "her mother's side",
+          "the drawer in his bedside"
+        ]
+      }
+    ],
+    "characters": [
+      {
+        "id": "npc_martin",
+        "surfaces": 2,
+        "schedule_rows": 3,
+        "why_wanted": "The ledger. Procedural, never cruel, and he is the man who decides weekly in cash what she is worth. To be wanted by the auditor is to break the audit."
+      },
+      {
+        "id": "npc_joss",
+        "surfaces": 2,
+        "schedule_rows": 3,
+        "why_wanted": "Noticed first, says the price out loud, and could end her at any dinner. The fastest rung and the most dangerous one."
+      },
+      {
+        "id": "npc_denise",
+        "surfaces": 2,
+        "schedule_rows": 4,
+        "why_wanted": "The only person who could stop it, present the whole game. Risk surface for seventy-four rungs, then the rung."
+      },
+      {
+        "id": "npc_gareth",
+        "surfaces": 2,
+        "schedule_rows": 2,
+        "why_wanted": "An opinion on her allowance and no standing to have one. Always there, grateful, and ugly about it."
+      },
+      {
+        "id": "npc_col",
+        "surfaces": 1,
+        "schedule_rows": 1,
+        "why_wanted": "The honest price. Not family, never taboo \u2014 he is the control group that makes the house readable."
+      }
+    ],
+    "schedule_grid": {
+      "note": "Three windows, three different men, one witness. Every window is defined by who is ASLEEP or OUT, not by who is present.",
+      "npc_denise": "21:30-06:30 care home (offscreen) \u00b7 06:30-08:00 the_kitchen \u00b7 08:00-15:00 ASLEEP the_back_bedroom \u00b7 15:00-21:00 the_kitchen",
+      "npc_joss": "22:00-06:00 depot (offscreen) \u00b7 07:00-14:00 ASLEEP joss_room \u00b7 14:00-22:00 joss_room / the_kitchen",
+      "npc_martin": "07:00-17:00 out (offscreen) \u00b7 17:00-23:00 the_kitchen \u00b7 23:00-07:00 the_back_bedroom",
+      "npc_gareth": "10:00-13:00 out (offscreen) \u00b7 13:00-23:00 the_box_room / the_kitchen \u00b7 23:00-10:00 the_box_room",
+      "npc_col": "08:00-18:00 the_shop \u00b7 otherwise offscreen",
+      "windows": {
+        "afternoon": "14:00-17:00 \u2014 Denise asleep, Martin out, Joss awake across the landing. The nerve window.",
+        "evening": "17:00-21:00 \u2014 the full table. Gareth and his opinion. The price window, because it happens in front of people.",
+        "late": "21:30-23:00 \u2014 Denise gone to nights, Joss gone to the depot, Martin in the kitchen. The one hour she is alone with the ledger."
+      }
+    },
+    "map": {
+      "shape": "one terraced dwelling over two floors + a parade of shops one bus stop away",
+      "dwelling": "the_kitchen",
+      "exterior": "the_parade",
+      "homes": {
+        "npc_martin": "the_back_bedroom",
+        "npc_denise": "the_back_bedroom",
+        "npc_joss": "joss_room",
+        "npc_gareth": "the_box_room",
+        "npc_col": "offscreen"
+      },
+      "graph": "the_kitchen <-> the_landing (stairs) \u00b7 the_landing <-> her_room | joss_room | the_box_room | the_bathroom | the_back_bedroom(locked) \u00b7 the_kitchen <-> the_parade (bridge) \u00b7 the_parade <-> the_shop \u00b7 her_room <-> joss_room via the flat roof (an OBJECT on both, not a location)",
+      "bridges": [
+        {
+          "from": "the_kitchen",
+          "to": "the_parade",
+          "costs": {
+            "time": 25
+          },
+          "note": "walk. The \u00a32 bus is the same bridge at time 8 \u2014 a sink that buys minutes, which is the only thing the schedule grid makes scarce."
+        },
+        {
+          "from": "the_parade",
+          "to": "the_shop",
+          "costs": {
+            "time": 2
+          }
+        }
+      ],
+      "r1_signoff": "Signed off in the board phase: two-up-two-down terrace, kitchen-diner at the back with the step out to the yard, stairs from the kitchen to a landing with four doors and the bathroom, flat roof over the kitchen reachable from the two back windows. One bus stop to the parade. A stranger could draw it."
+    },
+    "economy": {
+      "currency": "money",
+      "obligation": "board \u2014 \u00a350, Sunday night, cash, at the kitchen table, to her father",
+      "obligation_amount": 50,
+      "charge_channel": "[settings.rent] \u2014 due_day Sunday, amount 50. Per the-economy.md R3, the engine does the charging and NO canvas narrates the payment; the authored scenes sit beside it (the ask before, the table after).",
+      "counter_source": "Saturday shift at Col's, \u00a336, day-gated to Saturday. Structurally short of board by \u00a314 a week \u2014 the allowance is the only thing that closes the gap, so to pay her father she has to ask her father.",
+      "sources": [
+        "the Saturday shift at the_shop",
+        "the allowance ask at the_kitchen (costs standing, Sunday only)",
+        "priced acts under the `price` tier (each day-flagged)"
+      ],
+      "sinks": [
+        "board (\u00a350/wk \u2014 [settings.rent])",
+        "the bus fare to the parade (\u00a32 \u2014 the bridge)",
+        "her phone top-up (\u00a310 \u2014 her_room)",
+        "the immersion heater (\u00a35 \u2014 the_bathroom)",
+        "a lock for her door (\u00a318 \u2014 the_landing; buying privacy back is the anti-ascent purchase)",
+        "the parade (\u00a312 \u2014 tights, and the thing she keeps looking at)",
+        "Joss's price for keeping his mouth shut (variable \u2014 joss_room)"
+      ],
+      "spread_note": "the-economy.md R2 \u2014 seven sinks across five locations plus the engine, so no more than half resolve to one place."
+    }
+  },
+  "releases": [
+    {
+      "version": "0.1",
+      "subject": "The board \u2014 the house, the table, and the five people at it",
+      "want_line": "Sections 1 and 6: the household as a pricing mechanism, and the crude register placed on the STANDING surfaces rather than the one-time scenes.",
+      "added": {
+        "units": 63,
+        "words": 11100,
+        "locations": 9,
+        "characters": 5
+      },
+      "opened": [
+        "the_back_bedroom \u2014 visible from the landing, locked at nerve 75, with an in-world blocked_message",
+        "Denise as the ceiling of `nerve` \u2014 present and awake for the whole climb, stated as a wall on her terminal card",
+        "`price` 75 \u2014 the Sunday envelope reversing, rendered show_when_locked from turn one",
+        "the box room's next relative"
+      ],
+      "gates": {
+        "passed": 26,
+        "of": 26
+      },
+      "shipped": "2026-08-18"
+    }
+  ],
+  "promises": [
+    {
+      "text": "Denise is the ceiling of `nerve` \u2014 written as a present, awake, nearly-noticing witness for the whole climb, and she must eventually be the rung, not a tease",
+      "made_in": "want",
+      "paid_in": null
+    },
+    {
+      "text": "the Sunday envelope reverses at `price` 75 \u2014 she sets both numbers",
+      "made_in": "want",
+      "paid_in": null
+    },
+    {
+      "text": "`appetite` 75 fires standing surfaces on entry instead of offering them",
+      "made_in": "want",
+      "paid_in": null
+    },
+    {
+      "text": "the box room takes a new relative every few releases",
+      "made_in": "want",
+      "paid_in": null
+    },
+    {
+      "text": "the_back_bedroom is locked at v0.1 and is owed as real content \u2014 the-map.md R2, a room the Want promises must exist",
+      "made_in": "board",
+      "paid_in": null
+    },
+    {
+      "text": "78% of choices open on turn one (lint, not a gate). The room screens are texture and legitimately open, but this is the number seventh_day failed on \u2014 watch it in play, and gate the texture behind arrival if it reads as a wall.",
+      "made_in": "0.1",
+      "paid_in": null
+    }
+  ],
+  "decisions": [
+    {
+      "at": "want",
+      "note": "Premise chosen from a study of the four female-protagonist games in the mopoga top-30 (Zara's School Life, New Life Project, Family Ties, Cupid's Way) plus DoL. Two findings drove it: (1) every incest game in the top-30 is male-POV \u2014 the daughter/sister POV exists only as a subsystem under someone else's goal, which is the open lane; (2) all four fem-protag entries run ONE global corruption master-gate and all four generate stat-wall/cheat revolt, while the only fem-capable entry running split ratcheting tiers (DoL) has 6 grind complaints in 1,267. So: Zara's validated shape \u2014 'as her corruption rises the gameplay expands' \u2014 on DoL's four-tier structure."
+    },
+    {
+      "at": "want",
+      "note": "`appetite` as a forcing tier is lifted from Cupid's Way's `$bbc_addict >= 5`, which FORCES content rather than offering it. It is the one female-protagonist mechanic nobody else in the studied set ships, and it makes the top of an ascent feel like a loss of choice rather than a bigger menu."
+    },
+    {
+      "at": "want",
+      "note": "Deliberately differentiated from `back_home`, the other domestic v2 game. Held on purpose: blood family not step; she NEVER left rather than returned; the mother is present, awake and is the ceiling rather than absent; the anchor is a table that prices things rather than a room the house collects in; money is the master verb (charged board + itemised allowance in one closed loop) rather than a side system; the renewable box-room slot is a relative rather than a lodger; tiers are nerve/seen/price/appetite rather than nerve/exposure/need."
+    },
+    {
+      "at": "board",
+      "note": "Nine locations, derived rather than picked: seven rooms the cast's rotas actually visit plus the exterior the map owes (the-map.md R3) plus the one workplace that is the non-household income. the_back_bedroom ships LOCKED \u2014 it is simultaneously the release-closing door (gate 9) and the room the Want owes at nerve 75 (the-map.md R2), so declaring it now costs 300 words and prevents the measured failure where a promised room was never built."
+    },
+    {
+      "at": "board",
+      "note": "The kitchen is the anchor at 30% of plan because this terrace has no separate lounge \u2014 a design choice, not an accident. The room the house lives in and the room that prices things are the same room, which is the entire premise expressed as a floor plan."
+    },
+    {
+      "at": "board",
+      "note": "Brakes designed BEFORE the prose, per the-meters.md M1-M5 \u2014 the measured failure was a game with three correctly-gated tiers, zero brakes, and every tier topped out inside two in-game days. Every rung carries `costs` energy AND a `_today` flag cleared in [engine.daily_tick], and a flag rather than a counter trait specifically so gate 10 does not read the brake as a descent."
+    },
+    {
+      "at": "board",
+      "note": "Board is charged by [settings.rent], not by an authored canvas. This is the direct lesson of the measured forty_miles defect where the game's title mechanic was narrated in prose and never took a penny; per the-economy.md R3 the authored scenes sit beside the charge, never on it."
+    },
+    {
+      "at": "0.1",
+      "note": "joss_room re-planned 1,100 -> 1,400 words. NOT a back-fill: gate 22 requires every declared object to be written AND to afford a choice, and `his bed` had neither, so the room owed a real standing surface that the board's first count did not know about. Logged rather than silently widened, because a budget that moves without a reason is the post-hoc record the-board.md refuses to credit."
+    },
+    {
+      "at": "0.1",
+      "note": "Gate 22 changed the shape of every room. The first pass wrote each location's affordances as separate activity canvases whose exits were type=\"location\", so no room had a CHOICE hanging off a declared object and 35 of 39 objects were texture. Fixed by giving each location a room screen: the paragraph names the things, every choice hangs off one of them, and the count falls out of the objects (6 in the kitchen, 3 in the back bedroom). the-surfaces.md R2b."
+    },
+    {
+      "at": "0.1",
+      "note": "Gate 18 resolves brakes PER ROUTE INTO A CANVAS, so a money grant on a node inside a room screen reads as free income \u2014 the route in is the location menu, which costs nothing. The price-75 reversal was therefore split into its own triggerless rung (rung_kitchen_reversal) with the brake on the referring choice. Node-level grants inside a multi-node screen are invisible to the economy gates."
+    },
+    {
+      "at": "0.1",
+      "note": "Every thought_bubble shipped without props.speaker in the first pass \u2014 22 of them. A missing speaker renders as the literal 'Npc' (v2.py:14631); it is never a default. Fixed game-wide."
+    }
+  ]
+}

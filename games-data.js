@@ -21,6 +21,35 @@
 //                        NOT whatever is currently half-built in the working tree.
 window.GAMES = [
   {
+    // Listed 2026-08-18. Authored end-to-end with author-game-v2, and the first game in this
+    // repo to clear the scoreboard outright: 26/26 gates, 11,100 words across 9 locations,
+    // 63 canvases, 5 characters, 29 guidance cards. Headless play-through is clean — no JS
+    // errors, the opening funnel lands on the landing, and the seen-75 crossing renders greyed
+    // from turn one.
+    //
+    // Premise came out of a measurement, not a mood. Of the mopoga top-30, exactly four run a
+    // female protagonist, and every incest game in that thirty is male-POV — the daughter's side
+    // exists only as a subsystem under somebody else's goal. All four fem-protag entries also run
+    // ONE global corruption gate and all four generate stat-wall and cheat-code revolt, while the
+    // only fem-capable entry running split ratcheting tiers has 6 grind complaints in 1,267. So:
+    // that validated shape on four tiers, with the taboo as the spine rather than a side door.
+    //
+    // ⚠️ MEDIA HAS NEVER BEEN HARVESTED. 21 cycling pools plus the fixed slots, 9 location plates
+    // and 5 portraits, with zero files on disk. Current output/ is a --dev --debug build, so the
+    // art shows labelled debug placeholders rather than silent gaps and the dev stat controls are
+    // visible. Run find-media, then rebuild output/ without --dev --debug, add `version`, archive
+    // to games/the_allowance/releases/, and drop `dev: true` in the same commit.
+    //
+    // One open lint, logged in v2_state.json: 78% of choices open on turn one. The room-screen
+    // texture legitimately opens on day one, but that is the number seventh_day failed on — judge
+    // it in play before treating it as fine.
+    slug: "the_allowance",
+    title: "The Allowance",
+    badge: "v2",
+    dev: true,
+    summary: `Nell Vasey was supposed to leave in September and the money was not there, so she is nineteen and still in the room she was eight in. Her father takes fifty a week in board off everyone in the house, counted at the kitchen table on a Sunday night and written down the back of an envelope in biro. Her Saturday job pays thirty-six. The gap is covered by an allowance she has to ask for out loud, itemised, in front of her mother and her brother and her uncle — so to pay her father she has to ask her father. One bathroom for five adults and a bolt that goes across an inch of air. A brother on nights whose window shares a flat roof with hers. An uncle in the box room that this family fills with whichever relative is between things. And a mother who works nights, sleeps eight until three with the door shut, and has now asked twice whether everything is alright in this house. Everything Nell climbs is a different way out from under one sum, and at the top of the last one the envelope runs the other way.`,
+  },
+  {
     // Listed 2026-08-17. Authored end-to-end with author-game-v2. 25,817 words across 14
     // locations, 149 canvases, 25/26 gates.
     //
