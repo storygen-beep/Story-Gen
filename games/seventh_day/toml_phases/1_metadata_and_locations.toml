@@ -1,0 +1,638 @@
+# =============================================================================
+# The Seventh Day — 1_metadata_and_locations
+#
+# ⚠️ [player], [[locations]], [[npcs]] and [[npcs.schedules]] MUST share this one
+#    file. TOML scoping re-parents nested tables across a file boundary, and
+#    inserting an [[npcs]] block between an existing NPC and its schedules
+#    silently re-attaches them to the wrong character.
+#
+# THE MAP (references/the-map.md R1 — a place, not a list of rooms):
+#
+#   THE YARD  (exterior, the root — the pump, the gate, the boots)
+#   ├── THE LONG KITCHEN                       ← ANCHOR
+#   │   ├── THE HALL AND LANDING
+#   │   │   ├── THE GIRLS' ROOM                ← she sleeps here. The wardrobe.
+#   │   │   ├── THE BOYS' ROOM
+#   │   │   └── YOUR PARENTS' ROOM             ← locked. Top of ALONE.
+#   │   ├── THE PRAYER ROOM
+#   │   └── WARRICK'S ROOM                     (the pantry through the arch)
+#   ├── THE BARN  (10 min)
+#   │   └── THE BARN LOFT                      ← Ezra sleeps up the ladder
+#   ├── THE WASH HOUSE  (5 min)                ← the crudest room in the game
+#   ├── THE CARAVAN  (5 min)                   ← THE ROTATING SLOT
+#   ├── THE VEGETABLE ROWS  (15 min)
+#   └── COWAN MARKET  (90 min, gated)
+#
+# You cross the yard to get anywhere that is not the house, and the house is one
+# staircase with every bedroom off it. Signed off by LO in the board phase.
+#
+# ANCHOR = the_long_kitchen. Fourteen people pass through it every hour of the
+# day, it is re-enterable at every one of them, and it carries 13,000 of the
+# planned 47,000 words = 27.7% (gate 1). The measured failure was an anchor
+# sealed in a room with no exits.
+#
+# Location NAMES are UI (references/the-voice.md R1): they say what is through
+# the door. "Your Parents' Room", not "The Front Room".
+# =============================================================================
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE PLAYER
+# ═════════════════════════════════════════════════════════════════════════════
+
+[player]
+id           = "player"
+name         = "Thea"
+description  = "Twenty-one. Third daughter of the House. You have never had a room, never held money that was yours, and never been alone with a man who was not your father."
+customizable = true
+portrait     = "players/thea_plain.jpg"
+
+[[player.customization_fields]]
+id      = "name"
+type    = "text"
+label   = "Your name"
+default = "Thea"
+
+[[player.customization_fields]]
+id      = "build"
+type    = "select"
+label   = "Your build"
+default = "slight"
+options = ["slight", "average", "full", "strong"]
+
+[[player.customization_fields]]
+id            = "look"
+type          = "image_select"
+label         = "Your look"
+default       = "plain"
+sets_portrait = true
+options = [
+  { id = "plain",  image = "players/thea_plain.jpg",  label = "Plain, the way the house prefers" },
+  { id = "pretty", image = "players/thea_pretty.jpg", label = "Pretty, and it has been mentioned" },
+  { id = "dark",   image = "players/thea_dark.jpg",   label = "Dark, like your mother" },
+]
+
+[player.core_traits]
+# layer 1 — ratcheting ascent tiers (rungs at 15/35/55)
+cover    = 0
+alone    = 0
+standing = 0
+# the counterweight — TWO-ENDED. Starts high; both directions buy content.
+grace    = 70
+# layer 2 — volatile state
+arousal  = 0
+stress   = 10
+energy   = 100
+# ⚠️ engine.md §21 — EVERY money effect in this game carries clamp = false.
+#    Clamped, money caps at 100. She starts at zero because she owns nothing,
+#    which is the premise, and the tithe does not arm until `first_coin`.
+money    = 0
+# internals — capped daily earners, never surfaced (labels are hidden in phase 0)
+eggs_today    = 0
+mending_today = 0
+# ⚠️ ARC STAGES. Each NPC declares four arc_stages, and a stage lives on the
+#    PLAYER namespace as `<slug>_stage` (template_import.py:1366-1373) — slug is
+#    the npc id without the `npc_` prefix. v0.1 declared 24 arc stages and NONE of
+#    these traits, so all six characters sat on stage 0 for the whole game: a dead
+#    declaration of exactly the kind that makes a number look unmoved rather than
+#    unmovable. Advanced by the milestones in 4_story_arc.toml with op = "set".
+amos_stage    = 0
+ruth_stage    = 0
+ezra_stage    = 0
+warrick_stage = 0
+silas_stage   = 0
+job_stage     = 0
+
+# Decay is a POSITIVE MAGNITUDE — the validator rejects a negative (engine.md §11).
+[player.trait_decay]
+energy = 10
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# CLOTHING
+#
+# The fourth rule specifies the garment, so COVER is not an abstraction here —
+# it is a worn item the house can read off you across a yard.
+#
+# ⚠️ `worn_corruption` is a MAX aggregate, not a sum (engine.md §17). One loaded
+#    garment sets the number on its own, so the catalogue needs one item per
+#    band and not a wardrobe.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[clothing]]
+id         = "long_dress"
+name       = "The long dress"
+slot       = "dress"
+image      = "clothing/long_dress.jpg"
+initial    = true
+beauty     = 2
+corruption = 0
+
+[[clothing]]
+id         = "work_dress"
+name       = "The work dress"
+slot       = "dress"
+image      = "clothing/work_dress.jpg"
+initial    = true
+beauty     = 3
+corruption = 2
+
+[[clothing]]
+id         = "the_shift"
+name       = "The shift"
+slot       = "dress"
+image      = "clothing/the_shift.jpg"
+beauty     = 4
+corruption = 6
+
+[[clothing]]
+id         = "thin_shift"
+name       = "The shift gone thin"
+slot       = "dress"
+image      = "clothing/thin_shift.jpg"
+beauty     = 5
+corruption = 9
+
+[[clothing]]
+id         = "market_dress"
+name       = "The Cowan dress"
+slot       = "dress"
+image      = "clothing/market_dress.jpg"
+beauty     = 6
+corruption = 4
+
+[[clothing]]
+id         = "plain_underwear"
+name       = "Plain underthings"
+slot       = "underwear"
+image      = "clothing/plain_underwear.jpg"
+initial    = true
+beauty     = 1
+corruption = 0
+
+[[clothing]]
+id         = "stockings"
+name       = "Stockings"
+slot       = "legwear"
+image      = "clothing/stockings.jpg"
+beauty     = 3
+corruption = 1
+
+[[clothing]]
+id         = "boots"
+name       = "Yard boots"
+slot       = "shoes"
+image      = "clothing/boots.jpg"
+initial    = true
+beauty     = 1
+corruption = 0
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# LOCATIONS — 14. One anchor, one exterior root, two declared corridors.
+#
+# ⚠️ `navigation_order` lists CHILDREN ONLY (engine.md §10). The return link is
+#    generated from `entry_from` and renders as "Leave <Location Name>", so a
+#    location with navigation_order = [] is a leaf, not a dead end.
+#
+# ⚠️ Travel cost sits on BRIDGES BETWEEN ZONES, never on every room. Inside the
+#    house — kitchen, hall, the four bedrooms, the prayer room, Warrick's room —
+#    movement is free. Crossing the yard costs, and the road to Cowan costs 90
+#    minutes, which is what makes the market run a privilege instead of a button.
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ── THE EXTERIOR, and the root of the graph ──────────────────────────────────
+[[locations]]
+id                   = "the_yard"
+name                 = "The Yard"
+description          = "Packed dirt between the house and everything else, with the pump at the middle of it and the track running down to the gate a mile off. Every crossing you make is visible from the kitchen window, the barn door and the top of the rows at once. There is no route between any two parts of this property that does not come through here."
+image                = "locations/the_yard.jpg"
+image_search_queries = ["old farmyard packed dirt hand pump outbuildings dusk", "farm yard gravel track gate woodpile evening"]
+navigation_order     = ["the_long_kitchen", "the_barn", "the_wash_house", "the_caravan", "the_rows", "cowan_market"]
+
+# ── THE ANCHOR ───────────────────────────────────────────────────────────────
+[[locations]]
+id                   = "the_long_kitchen"
+name                 = "The Long Kitchen"
+description          = "One table, sixteen feet of it, and a range that goes out if nobody is watching it. The rota board hangs by the pantry door with the week written on it in your mother's hand. Fourteen people eat in this room three times a day and one of them is at the head of it and the rest are in the order they have always been in."
+image                = "locations/the_long_kitchen.jpg"
+image_search_queries = ["long farmhouse kitchen table wood range old", "rustic communal kitchen long table iron range"]
+entry_from           = "the_yard"
+navigation_order     = ["the_hall_and_stairs", "the_prayer_room", "warricks_room"]
+
+# ── the house, upstairs ──────────────────────────────────────────────────────
+[[locations]]
+id                   = "the_hall_and_stairs"
+name                 = "The Hall and Landing"
+description          = "The rules are framed on the wall at the turn of the stair where you cannot get past them. Seven of them, in the same hand as the rota. Every bedroom door in this house opens onto this landing, and after lights it is the only way any two people in the House get to each other."
+image                = "locations/the_hall_and_stairs.jpg"
+image_search_queries = ["dark farmhouse hallway staircase landing night", "old house stairs landing bedroom doors dim"]
+entry_from           = "the_long_kitchen"
+navigation_order     = ["the_girls_room", "the_boys_room", "your_parents_room"]
+
+[[locations]]
+id                   = "the_girls_room"
+name                 = "The Girls' Room"
+description          = "Four cots and a curtain that runs on a wire down the middle of the room, which is what this house means by a door. The press at the end holds everything the four of you own. The window has not shut properly since before you were born, and in January that matters and in July it does not."
+image                = "locations/the_girls_room.jpg"
+image_search_queries = ["attic dormitory row of iron cots curtain", "shared bedroom simple beds farmhouse window"]
+entry_from           = "the_hall_and_stairs"
+navigation_order     = []
+
+[[locations]]
+id                   = "the_boys_room"
+name                 = "The Boys' Room"
+description          = "The mirror of yours across the landing, three beds instead of four, and a door with no catch on it — which is the whole of the sixth rule made unnecessary, because a door that will not stay shut cannot be shut on anybody."
+image                = "locations/the_boys_room.jpg"
+image_search_queries = ["boys shared bedroom simple beds farmhouse", "spare room three iron beds old house"]
+entry_from           = "the_hall_and_stairs"
+navigation_order     = []
+
+# ⚠️ LOCKED — and the Want sells access to it as the top of ALONE, so the-map.md
+#    R2 says it is owed as a real place rather than a line of prose. It renders
+#    on the landing with `blocked_message` on the card: a door that is visibly
+#    shut, which is what "every release ends on an opening" means.
+#    entry_conditions carries version = "1.0" or it FAILS OPEN (engine.md §22).
+[[locations]]
+id                   = "your_parents_room"
+name                 = "Your Parents' Room"
+description          = "The only door in this house with a bolt on it, and the bolt is on the inside. A bed, his chair by the window where he reads before the reading, and a box under the bed that Ruth has never once mentioned in twenty-one years."
+image                = "locations/your_parents_room.jpg"
+image_search_queries = ["old farmhouse master bedroom iron bed chair window", "dim bedroom wooden chair bed box under"]
+entry_from           = "the_hall_and_stairs"
+navigation_order     = []
+entry_conditions     = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "alone", operator = "gte", value = 55 },
+] }
+blocked_message      = "The bolt is across. It is across every night of your life and you have never once heard it go over."
+
+# ── the house, ground floor ──────────────────────────────────────────────────
+[[locations]]
+id                   = "the_prayer_room"
+name                 = "The Prayer Room"
+description          = "A bench, a stand with the book open on it, and a shelf behind the stand with the tin on it where everyone can see the tin and nobody can reach it. There is a switch hanging on a nail by the door that nobody has needed in four years and nobody has taken down either."
+image                = "locations/the_prayer_room.jpg"
+image_search_queries = ["plain meeting room bench lectern bare walls", "sparse chapel room wooden bench reading stand"]
+entry_from           = "the_long_kitchen"
+navigation_order     = []
+
+[[locations]]
+id                   = "warricks_room"
+name                 = "Warrick's Room"
+description          = "The room behind the kitchen nobody wanted, because the pantry shelves come through the arch and there is no wall between his bed and the flour. The pantry key hangs on a hook by the arch. Under the hook there is a ledger, and the ledger does not add up, and it has not added up for some years."
+image                = "locations/warricks_room.jpg"
+image_search_queries = ["small back room bed pantry shelves arch", "larder store room shelves narrow bed dim"]
+entry_from           = "the_long_kitchen"
+navigation_order     = []
+
+# ── across the yard — THE CRUDEST ROOM IN THE GAME ───────────────────────────
+[[locations]]
+id                   = "the_wash_house"
+name                 = "The Wash House"
+description          = "Brick, one window high up, and the copper in the corner that takes an hour to come up and stays hot until midnight. The rota slate is screwed to the outside of the door. The latch is a wooden bar that drops into a slot and the slot has worn wide, so the bar sits in it and does not hold, and everyone in this house knows that and nobody has fixed it."
+image                = "locations/the_wash_house.jpg"
+image_search_queries = ["old brick wash house copper tub steam interior", "outbuilding laundry room tin bath copper boiler"]
+entry_from           = "the_yard"
+navigation_order     = []
+costs                = { time = 5 }
+
+# ── across the yard — the barn ───────────────────────────────────────────────
+[[locations]]
+id                   = "the_barn"
+name                 = "The Barn"
+description          = "The only building on this property with an engine in it. Tack down one wall, feed bins down the other, the truck nose-in at the end with its bonnet up more weeks than not, and a ladder at the back going up into the dark where somebody sleeps."
+image                = "locations/the_barn.jpg"
+image_search_queries = ["old timber barn interior tack wall feed bins truck", "farm barn interior ladder loft dim light"]
+entry_from           = "the_yard"
+navigation_order     = ["the_barn_loft"]
+costs                = { time = 10 }
+
+[[locations]]
+id                   = "the_barn_loft"
+name                 = "The Barn Loft"
+description          = "Up the ladder, through a hatch, into a space with a mattress on the boards and a coat on a nail and nothing else in it at all. You can see down into the stalls through the gaps between the boards, which means anybody in the stalls can see up."
+image                = "locations/the_barn_loft.jpg"
+image_search_queries = ["hay loft mattress bare boards lantern", "barn loft dim wooden floor blanket"]
+entry_from           = "the_barn"
+navigation_order     = []
+
+# ── across the yard — THE ROTATING SLOT ──────────────────────────────────────
+# Married-in couples live in it until a room frees up, so the occupant changes
+# across releases. Everything authored here is ROOM-scoped and names its occupant
+# by ROLE, never by name (the-board.md §2) — a rotation must cost one [[npcs]]
+# block and one scene file, not a rewrite of every surface in the room.
+[[locations]]
+id                   = "the_caravan"
+name                 = "The Caravan"
+description          = "Up on blocks against the wall, and it has been up on blocks longer than anyone still here can date. Whoever marries into this House lives in it. Everybody says the same thing about that — it is until a room frees up — and nobody says which room, or when, or what would have to happen first."
+image                = "locations/the_caravan.jpg"
+image_search_queries = ["old caravan on blocks farm yard weeds", "static caravan derelict field evening"]
+entry_from           = "the_yard"
+navigation_order     = []
+costs                = { time = 5 }
+
+# ── up the slope ─────────────────────────────────────────────────────────────
+[[locations]]
+id                   = "the_rows"
+name                 = "The Vegetable Rows"
+description          = "Eleven rows running up the slope to the hedge at the top, which is the only place on sixty acres you cannot be seen from the yard. The rota puts two people on the rows most afternoons and never says which two ends they start from."
+image                = "locations/the_rows.jpg"
+image_search_queries = ["vegetable garden rows crops slope hedge", "farm allotment rows summer afternoon"]
+entry_from           = "the_yard"
+navigation_order     = []
+costs                = { time = 15 }
+
+# ── the outside world ────────────────────────────────────────────────────────
+# Ninety minutes each way, which is what makes it a privilege instead of a menu
+# item, and gated on STANDING because being sent is the whole point of the tier.
+[[locations]]
+id                   = "cowan_market"
+name                 = "Cowan Market"
+description          = "A square, a run of stalls on Saturday, an ironmonger, and a telephone box outside the post office that takes coins you do not have. Everybody here is a person who does not know the seven rules, and there are more of them in this one square than you have met in your life."
+image                = "locations/cowan_market.jpg"
+image_search_queries = ["small english market town square stalls saturday", "rural market square stalls ironmonger old"]
+entry_from           = "the_yard"
+navigation_order     = []
+costs                = { time = 90, energy = 5 }
+entry_conditions     = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 35 },
+] }
+blocked_message      = "The truck goes on Saturday with Warrick in it and nobody else. You have never been asked and you have never asked."
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE CAST — six, all housed, all scheduled.
+#
+# ⚠️ [[npcs.schedules]] binds to the [[npcs]] block ABOVE it. Do not insert a new
+#    character between an existing one and its schedule rows.
+#
+# ⚠️ OVERNIGHT WINDOWS: the wrap is handled (v2.py:3784) but the WEEKDAY check
+#    runs first, against today (v2.py:3446). Every overnight row in this file
+#    covers all seven days, so each is correctly ONE row. A DAY-SPECIFIC
+#    overnight window would need two, and there are none in this file.
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ── AMOS — the father. Every rule is in his voice. ───────────────────────────
+[[npcs]]
+id          = "npc_amos"
+name        = "Amos"
+description = "Fifty-two, and the head of the House in the sense that he wrote the list on the hall wall in his own hand. He reads three of the seven out at breakfast and all seven at the reading. Between those he walks the property and looks at what has been done, and he does not say much, and the not saying much is the loudest thing in the room."
+portrait    = "amos.jpg"
+core_traits = { relation = 0, lust = 0 }
+flag_keys   = []
+arc_stages  = ["The head of the House", "Reading it at the book", "Staying behind", "Yours"]
+
+[[npcs.schedules]]
+location   = "the_long_kitchen"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "06:00"
+end_time   = "07:30"
+activity   = "at the head of the table, reading three of the seven out"
+
+[[npcs.schedules]]
+location   = "the_yard"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "07:30"
+end_time   = "17:30"
+activity   = "walking the place, looking at what has been done"
+
+[[npcs.schedules]]
+location   = "the_prayer_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:30"
+end_time   = "20:30"
+activity   = "at the stand with the book open, before anyone comes in"
+
+[[npcs.schedules]]
+location   = "your_parents_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "21:30"
+end_time   = "05:30"
+activity   = "behind the only bolt in the house"
+
+# ── RUTH — the mother. She knows first and says nothing. ─────────────────────
+[[npcs]]
+id          = "npc_ruth"
+name        = "Ruth"
+description = "Forty-eight, and she writes the rota. Nobody has ever asked her to explain a line of it, which means she is the only person on this property who knows where all fourteen of you will be all week. She is at the long table more hours of the day than the table is empty."
+portrait    = "ruth.jpg"
+core_traits = { relation = 0, lust = 0 }
+flag_keys   = []
+arc_stages  = ["Keeper of the rota", "Talking while she writes", "Not mentioning it", "Complicit"]
+
+[[npcs.schedules]]
+location   = "the_long_kitchen"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "05:00"
+end_time   = "09:00"
+activity   = "the range, and the rota if it is Monday"
+
+[[npcs.schedules]]
+location   = "the_wash_house"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "09:00"
+end_time   = "11:00"
+activity   = "her turn on the slate, and she takes it while the copper is hottest"
+
+[[npcs.schedules]]
+location   = "the_long_kitchen"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "11:00"
+end_time   = "18:30"
+activity   = "the long table, all day, the way she has for twenty-six years"
+
+[[npcs.schedules]]
+location   = "the_prayer_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:30"
+end_time   = "20:30"
+activity   = "at the end of the bench, where she can see the whole room"
+
+[[npcs.schedules]]
+location   = "your_parents_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "21:00"
+end_time   = "05:00"
+activity   = "asleep, or lying there with the bolt across"
+
+# ── EZRA — the one whose job is to stop her. Sleeps outside the house. ───────
+[[npcs]]
+id          = "npc_ezra"
+name        = "Ezra"
+description = "Twenty-six, your brother, and the one who walks the property from ten at night until he is satisfied. Nobody gave him the job. He sleeps up the ladder over the stalls instead of in the house, which he has never explained, and which means the enforcer of this household lives outside it."
+portrait    = "ezra.jpg"
+core_traits = { relation = 0, lust = 0 }
+flag_keys   = []
+arc_stages  = ["Walking the property", "Not reporting it", "Expecting you", "Waiting up"]
+
+[[npcs.schedules]]
+location   = "the_rows"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "07:00"
+end_time   = "12:00"
+activity   = "the top end, working fast so nobody can say he did not"
+
+[[npcs.schedules]]
+location   = "the_barn"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "13:00"
+end_time   = "18:00"
+activity   = "with Warrick, and saying less than Warrick does"
+
+[[npcs.schedules]]
+location   = "the_long_kitchen"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time   = "18:30"
+activity   = "eating standing up at the end of the table"
+
+[[npcs.schedules]]
+location   = "the_wash_house"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "23:00"
+activity   = "checking a latch that does not need checking"
+
+[[npcs.schedules]]
+location   = "the_yard"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "23:00"
+end_time   = "01:00"
+activity   = "walking the property, the long way round"
+
+[[npcs.schedules]]
+location   = "the_barn_loft"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "01:00"
+end_time   = "06:30"
+activity   = "up the ladder, with the hatch open"
+
+# ── WARRICK — the only one who leaves. ───────────────────────────────────────
+[[npcs]]
+id          = "npc_warrick"
+name        = "Warrick"
+description = "Forty-one, your father's younger brother, and the one who drives the truck to Cowan on a Saturday and comes back with the shopping and a look on him. He runs the barn. He is the only person on this property who talks to you as though you were in the world rather than on it."
+portrait    = "warrick.jpg"
+core_traits = { relation = 0, lust = 0 }
+flag_keys   = []
+arc_stages  = ["Your uncle", "Leaving the door open", "Two in the truck", "Yours"]
+
+[[npcs.schedules]]
+location   = "the_barn"
+weekdays   = [0, 1, 2, 3, 4, 6]
+start_time = "06:30"
+end_time   = "12:30"
+activity   = "the tack wall, the bins, and whatever is off the truck this week"
+
+[[npcs.schedules]]
+location   = "the_long_kitchen"
+weekdays   = [0, 1, 2, 3, 4, 6]
+start_time = "12:30"
+end_time   = "13:30"
+activity   = "eating fast at the wrong end of the table"
+
+[[npcs.schedules]]
+location   = "the_barn"
+weekdays   = [0, 1, 2, 3, 4, 6]
+start_time = "13:30"
+end_time   = "19:30"
+activity   = "under the bonnet, and it is not always broken"
+
+# Market day. Saturday is weekday index 5 — the engine indexes from Monday
+# (v2.py:3273, ["Monday",…].indexOf). No midnight wrap, so one row is correct.
+[[npcs.schedules]]
+location   = "cowan_market"
+weekdays   = [5]
+start_time = "08:00"
+end_time   = "14:00"
+activity   = "the stalls, the ironmonger, and an hour nobody can account for"
+
+[[npcs.schedules]]
+location   = "warricks_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "20:00"
+end_time   = "06:00"
+activity   = "in the room behind the kitchen with the door not quite shut"
+
+# ── SILAS — married in, still outside. ───────────────────────────────────────
+[[npcs]]
+id          = "npc_silas"
+name        = "Silas"
+description = "Twenty-eight, brought in from another household two years ago to marry your sister Miriam, and on trial with everyone here ever since. They watch him for signs. He works the rows all day and nobody goes up them to talk to him, and he has noticed which one of you is the exception."
+portrait    = "silas.jpg"
+core_traits = { relation = 0, lust = 0 }
+flag_keys   = []
+arc_stages  = ["Married in", "Coming up the rows", "Waiting for the kitchen to empty", "Past caring"]
+
+[[npcs.schedules]]
+location   = "the_rows"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "07:00"
+end_time   = "12:00"
+activity   = "the bottom end, working alone because nobody comes down it"
+
+[[npcs.schedules]]
+location   = "the_long_kitchen"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "12:00"
+end_time   = "13:00"
+activity   = "at the far end, being polite at people who are assessing him"
+
+[[npcs.schedules]]
+location   = "the_rows"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "13:00"
+end_time   = "18:00"
+activity   = "working up towards the hedge as the afternoon goes"
+
+[[npcs.schedules]]
+location   = "the_caravan"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "20:00"
+end_time   = "06:30"
+activity   = "up on the blocks by the wall, with one window lit"
+
+# ── JOB — the one where she moves first. ─────────────────────────────────────
+[[npcs]]
+id          = "npc_job"
+name        = "Job"
+description = "Eighteen, your younger brother, and he has worked out how to be crossing the yard whenever you are crossing the yard. He carries things for you that do not need carrying. He has not worked out that you can tell, and he has certainly not worked out that you have stopped helping him hide it."
+portrait    = "job.jpg"
+core_traits = { relation = 0, lust = 0 }
+flag_keys   = []
+arc_stages  = ["Your kid brother", "Carrying things", "Not hiding it", "Anything you asked"]
+
+[[npcs.schedules]]
+location   = "the_yard"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "06:00"
+end_time   = "08:00"
+activity   = "the pump and the water, and finding reasons to still be at it"
+
+[[npcs.schedules]]
+location   = "the_rows"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "12:30"
+activity   = "wherever on the rows he was put"
+
+[[npcs.schedules]]
+location   = "the_yard"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "13:30"
+end_time   = "17:30"
+activity   = "the woodpile, the pump, whatever keeps him where you are"
+
+[[npcs.schedules]]
+location   = "the_long_kitchen"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time   = "19:00"
+activity   = "at the table, opposite you, for an hour every night of his life"
+
+[[npcs.schedules]]
+location   = "the_boys_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "21:00"
+end_time   = "06:00"
+activity   = "behind a door with no catch on it"

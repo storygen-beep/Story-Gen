@@ -1,0 +1,116 @@
+# =============================================================================
+# The Seventh Day — 6_dev_shortcuts
+#
+# Dev-only. Bumps the three tiers, both ends of the counterweight, and the
+# milestone flags, so the late game can be tested without playing to it.
+#
+# HOW THE ENGINE TREATS THESE (generators/v2.py:8428-8452, read not assumed):
+#   · a canvas is a DEV SHORTCUT iff its trigger conditions contain
+#     `dev_mode_enabled is_true`. That condition is a MARKER, not a gate.
+#   · `dev_mode_enabled` is set at StoryInit ONLY in `--dev` builds
+#     (v2.py:1080) — no canvas sets it, and none should. It never fires in a
+#     shipped build.
+#   · the flag-chain validator and the quest-hint index both SKIP dev canvases,
+#     so this file cannot pollute guidance or trip the located-setter check.
+#   · the sidebar `<<devJumps>>` widget reaches them by direct Engine.play.
+#
+# ⚠️ Kept to SEVEN choices deliberately. Gate 20 counts decisions on any
+#    repeatable location-bound canvas and its backstop is 8, so an eight-choice
+#    dev screen would sit exactly at the cap and read as a smell on the
+#    scoreboard for a screen no player will ever see.
+#
+# ⚠️ EVERY CHOICE CARRIES A 1-ENERGY `costs` AND THE TRIGGER A max_triggers_per_day.
+#    Neither is design — gates.py has NO dev-canvas handling (verified: the string
+#    `dev_mode_enabled` does not appear in it), so it scores a dev tool as
+#    player-facing content and reported this screen as free uncapped income and as
+#    a free route up three tiers. Braking it is harmless because nothing here is
+#    player-facing. Logged as ENGINE_NOTES finding #6, same class as #5.
+#
+# ⚠️ Safe to put at a location that already has hubs: the repeatable-uniqueness
+#    check only considers canvases that BIND AN NPC — "solo activities are
+#    exempt" (template_import.py:4526).
+# =============================================================================
+
+[[canvases]]
+id          = "dev_shortcuts"
+name        = "[DEV] Shortcuts"
+description = "Dev-only. The yard. Bumps tiers, grace, money and the milestone flags for testing the late game."
+
+[canvases.trigger]
+location      = "the_yard"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 1
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "dev_mode_enabled", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "[DEV] Shortcuts"
+blocks = [
+  { type = "paragraph", content = "[DEV] Test shortcuts. Tiers rung at 15 / 35 / 55; grace bands at 25 / 50 / 75. Milestones auto-fire on entering their location once the tier is met." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "[DEV] +20 COVER"
+targetType = "location"
+locationId = "the_yard"
+costs      = [ { trait = "energy", value = 1 } ]
+effects = [ { targetType = "player", trait = "cover", op = "add", value = 20, clamp = true } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "[DEV] +20 ALONE"
+targetType = "location"
+locationId = "the_yard"
+costs      = [ { trait = "energy", value = 1 } ]
+effects = [ { targetType = "player", trait = "alone", op = "add", value = 20, clamp = true } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "[DEV] +20 STANDING"
+targetType = "location"
+locationId = "the_yard"
+costs      = [ { trait = "energy", value = 1 } ]
+effects = [ { targetType = "player", trait = "standing", op = "add", value = 20, clamp = true } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "[DEV] GRACE down to 30 (opens the supervised surfaces)"
+targetType = "location"
+locationId = "the_yard"
+costs      = [ { trait = "energy", value = 1 } ]
+effects = [ { targetType = "player", trait = "grace", op = "set", value = 30, clamp = true } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "[DEV] GRACE up to 80 (opens the trusted surfaces)"
+targetType = "location"
+locationId = "the_yard"
+costs      = [ { trait = "energy", value = 1 } ]
+effects = [ { targetType = "player", trait = "grace", op = "set", value = 80, clamp = true } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "[DEV] +50 money, refill energy"
+targetType = "location"
+locationId = "the_yard"
+costs      = [ { trait = "energy", value = 1 } ]
+effects = [
+  { targetType = "player", trait = "money",  op = "add", value = 50, clamp = false },
+  { targetType = "player", trait = "energy", op = "set", value = 100, clamp = true },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "[DEV] Set every milestone flag"
+targetType = "location"
+locationId = "the_yard"
+costs      = [ { trait = "energy", value = 1 } ]
+flagEffects = [
+  { targetType = "player", flag = "wears_the_shift",    op = "set" },
+  { targetType = "player", flag = "keeper_of_keys",     op = "set" },
+  { targetType = "player", flag = "slept_out",          op = "set" },
+  { targetType = "player", flag = "household_watching", op = "set" },
+  { targetType = "player", flag = "runs_the_market",    op = "set" },
+  { targetType = "player", flag = "rule_unread",        op = "set" },
+]
