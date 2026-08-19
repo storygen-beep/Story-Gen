@@ -1,0 +1,332 @@
+# =============================================================================
+# Off Season — 2_one_shots
+#
+# The opening funnel plus the five milestones. A MILESTONE FIRES ONCE AND THEN
+# OPENS STANDING CONTENT (gate 7): every one below sets a flag that a standing
+# surface in 3_activities or 5_scenes reads. A milestone whose only flag is its
+# own once-guard is not a milestone and owes nothing.
+#
+# ⚠️ engine.md §16 — a flag read by a trigger or a choice must be SET FROM A
+#    LOCATED CANVAS or the build hard-fails. Every canvas here declares a
+#    trigger.location, so the whole chain resolves.
+#
+# FIRST EXPLICIT BEAT EARLY, and it is hers. the-release.md § first release:
+# the strongest-retained game in the comparison set is explicit on night one,
+# two clicks from free roam. Here the first explicit surface is the same scene
+# that teaches `warmth` — she puts three pounds in the meter, gets warm for the
+# first time in a fortnight, and takes her clothes off in her own flat because
+# for once she can. The need and the heat are the same mechanic.
+# =============================================================================
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE OPENING — linear, three nodes. Teaches: the building, the ninety, who
+# holds it, and the four of them inside four hundred yards.
+# SETS season_shut (which arms [settings.rent]) and arrival_done.
+# ═════════════════════════════════════════════════════════════════════════════
+[[canvases]]
+id          = "canvas_opening"
+name        = "Off Season"
+description = "Opening. Monday 07:00, the flat. Establishes Marnie, the arcade, the GBP 90 pitch rent, Ewan holding the lease, and the four of them within four hundred yards. Linear, three nodes. SETS season_shut (arms the Monday draw) + arrival_done."
+
+[canvases.trigger]
+location      = "the_flat"
+is_repeatable = false
+priority      = 12
+is_active     = true
+
+[[canvases.nodes]]
+id   = "the_window"
+name = "Monday, seven"
+blocks = [
+  { type = "image", props = { file = "scenes/flat_morning.jpg", description = "A woman in her late thirties sitting on the edge of a bed in a small cold flat, grey sea light at the window.", search_queries = ["woman sitting edge of bed small flat cold morning window", "middle aged woman bedsit window grey winter light"] } },
+  { type = "paragraph", content = "You wake at seven with your breath going up in front of you. The window has run all night and the sill is wet. Out past it the sea is the same colour as the sky and nothing is moving on the front." },
+  { type = "paragraph", content = "The meter on the wall by the immersion says nothing, because there is nothing in it. There has been nothing in it since Thursday." },
+  { type = "paragraph", content = "Under the window, eight foot of it across the front of your own building: KESH AMUSEMENTS. Your name since you were seventeen. Your eldest since you were fifteen." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Get up.", targetType = "node", nodeId = "the_change_bag" },
+] }
+
+[[canvases.nodes]]
+id   = "the_change_bag"
+name = "The change bag"
+blocks = [
+  { type = "paragraph", content = "Twenty-two pounds in the change bag, most of it in tens and twenties. The pitch on this building is ninety a week and it comes out tonight, because it is Monday, because it is always Monday." },
+  { type = "paragraph", content = "It does not go to a landlord. It goes to Ewan. He took the folder off you the month after his father went inside, and he was right to, and you have not signed anything about your own building since." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He was nine when I started letting him count the till. That is the whole of it, really." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Go down.", targetType = "node", nodeId = "four_hundred_yards" },
+] }
+
+[[canvases.nodes]]
+id   = "four_hundred_yards"
+name = "Four hundred yards"
+blocks = [
+  { type = "paragraph", content = "Down the inside stair the arcade is black and the machines are off at the wall. Behind the PRIVATE door your sister's girl is asleep on a mattress and owes you forty." },
+  { type = "paragraph", content = "Harbour End: Ewan, under a hull, from eight. Terrace Row: Tam over the fryers, sleeping off nights. Eleven doors along, your mother's house, and your brother in it with a holdall and no story about Bristol." },
+  { type = "paragraph", content = "Everyone you are related to is inside four hundred yards of this counter. The season does not start again until April." },
+]
+exit_block = { type = "location", text = "Get the shutter up.", config = { destinationType = "specific", locationId = "the_arcade", time_progression_minutes = 30, flagEffects = [
+  { targetType = "player", flag = "season_shut", op = "set" },
+  { targetType = "player", flag = "arrival_done", op = "set" },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# MILESTONE 1 — the first warm night. THE FIRST EXPLICIT BEAT OF THE GAME.
+# Fires once the meter has been fed. OPENS: solo_flat_warm, the standing solo
+# surface in the flat, which is gated on `first_warm_done` + warmth >= 30.
+#
+# ⚠️ Every beat below stays ON THE BODY for its whole length. The interiority
+#    gets its OWN beat, last, and it correctly scores 0 (register.md).
+# ═════════════════════════════════════════════════════════════════════════════
+[[canvases]]
+id          = "canvas_first_warm"
+name        = "Three pounds"
+description = "Auto-fire @the_flat, one-shot, gated meter_fed_once. The first explicit beat in the game and it is solo. She has heat in the flat for the first time in a fortnight and takes her clothes off in it. SETS first_warm_done -> opens solo_flat_warm. +20 arousal."
+
+[canvases.trigger]
+location      = "the_flat"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "meter_fed_once",  operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "first_warm_done", operator = "is_false" },
+]}
+
+[[canvases.nodes]]
+id   = "the_heat"
+name = "Three pounds"
+blocks = [
+  { type = "image", props = { file = "sex/first_warm_t4.jpg", description = "A woman alone undressing on a bed in a small dim flat at night, one lamp on.", search_queries = ["woman undressing alone small bedroom night lamp", "woman lying on bed dim bedsit night bare"] } },
+  { type = "paragraph", content = "Three pounds of fifties into the meter and the immersion starts up behind the wall like something waking. By nine the whole flat is above freezing for the first time since a week last Thursday." },
+  { type = "paragraph", content = "You have been sleeping in a jumper, a cardigan and your coat. You have been washing in four inches of water and getting dressed under the covers." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Take it all off.", blocks = [
+        { type = "video", props = { pool_dir = "sex/first_warm_strip_t4", pool = 4, description = "A woman pulling a jumper off over her head, sitting on a bed in a dim room.", search_queries = ["woman pulling jumper off over head bedroom", "woman undressing sitting on bed dim room slow"] } },
+        { type = "paragraph", content = "Cardigan, jumper, the vest under it. You get naked on top of the covers and your nipples go hard anyway, out of fourteen years of habit, in a room that is finally warm enough that they do not have to." },
+    ] },
+    { advance_text = "Lie back.", blocks = [
+        { type = "paragraph", content = "You lie back and let your knees fall open and your cunt is already wet before you have touched it. Your hand goes flat down your belly, over the hair, and two fingers part you and settle on your clit." },
+    ] },
+    { advance_text = "Don't stop.", blocks = [
+        { type = "video", props = { pool_dir = "sex/first_warm_touch_t5", pool = 4, description = "A woman on her back on a bed with a hand between her legs, dim lamp light.", search_queries = ["woman on back bed hand between legs dim", "woman masturbating on bed lamp light close"] } },
+        { type = "paragraph", content = "Two fingers working your clit side to side, the way that takes longest. Your other hand takes a tit and squeezes until the nipple aches, and your cunt clenches on nothing every time you press down." },
+    ] },
+    { advance_text = "Inside.", blocks = [
+        { type = "paragraph", content = "You push two fingers into your cunt and they go in easy. You fuck yourself with them, heel of your hand grinding your clit, hips coming up off the covers to meet it." },
+    ] },
+    { advance_text = "Let it go.", blocks = [
+        { type = "video", props = { pool_dir = "sex/first_warm_finish_t5", pool = 4, description = "A woman arching on a bed, one hand between her legs, coming.", search_queries = ["woman arching bed orgasm hand between legs", "woman climaxing alone bed dim room"] } },
+        { type = "paragraph", content = "It goes through you in one long pull and your thighs clamp on your own wrist. Your cunt grips your fingers in waves and you keep working your clit through every one of them, wet to the knuckle." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Fourteen days. That is how long it has been too cold in my own house to take my clothes off." },
+        { type = "paragraph", content = "The immersion clicks off at half nine. You get under the covers before the room turns, and you are asleep before you have finished doing the arithmetic on Monday." },
+    ] },
+  ] } },
+]
+exit_block = { type = "choices", config = { time_progression_minutes = 45, effects = [
+  { targetType = "player", trait = "arousal", op = "add", value = 20 },
+], flagEffects = [
+  { targetType = "player", flag = "first_warm_done", op = "set" },
+] }, choices = [
+  { text = "Sleep.", targetType = "location", locationId = "the_flat" },
+] }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# MILESTONE 2 — Ewan. The first borrow. OPENS: every rung above hold 18 on his
+# ladder, all of which read `borrowed_from_ewan`. This is the leverage arc's
+# ignition — after this the money and the meter move together.
+# ═════════════════════════════════════════════════════════════════════════════
+[[canvases]]
+id          = "canvas_first_borrow"
+name        = "The second drawer"
+description = "One-shot @the_boat_yard, gated hold >= 18. She asks her son for money for the first time. SETS borrowed_from_ewan -> opens rung_ewan_terms and every hub choice above hold 18 in 5_scenes. +6 hold."
+
+[canvases.trigger]
+location      = "the_boat_yard"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_ewan", trait_key = "hold", operator = "gte", value = 18 },
+  { type = "flag", subject = "player", flag_key = "borrowed_from_ewan", operator = "is_false" },
+]}
+
+[[canvases.nodes]]
+id   = "the_drawer"
+name = "The second drawer"
+blocks = [
+  { type = "image", props = { file = "scenes/yard_caravan_office.jpg", description = "The inside of a caravan used as a workshop office, papers and a desk, winter light.", search_queries = ["caravan site office desk papers cluttered", "boat yard workshop office interior winter"] } },
+  { type = "paragraph", content = "The caravan smells of two-stroke and the stove. He is at the desk with the folder shut in front of him and he already knows, because you came down at four in the afternoon and you never come down at four." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "How much." },
+  { type = "paragraph", content = "You say the number. He does not write it down. He opens the second drawer, counts it out onto the desk in twenties, and turns it round so it faces you." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "That's the electric and the mech. Not the meter upstairs. You want the meter, you ask me for the meter." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He has itemised my flat. He did that in his head, standing there, in about four seconds." },
+  { type = "paragraph", content = "You take it. He watches you put it in your coat and does not say anything else, and the not-saying is the part you take home with you." },
+]
+exit_block = { type = "location", text = "Go back up the front.", config = { destinationType = "specific", locationId = "harbour_end", time_progression_minutes = 40, effects = [
+  { targetType = "npc", npcId = "npc_ewan", trait = "hold", op = "add", value = 6 },
+  { targetType = "player", trait = "money", op = "add", value = 40, clamp = false },
+], flagEffects = [
+  { targetType = "player", flag = "borrowed_from_ewan", op = "set" },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# MILESTONE 3 — Tam. OPENS: the whole `want` ladder. Until this fires his hub
+# offers `ease` rungs only; every `want` rung in 5_scenes reads `tam_saw_you`.
+# ═════════════════════════════════════════════════════════════════════════════
+[[canvases]]
+id          = "canvas_tam_saw_you"
+name        = "The extractor"
+description = "One-shot @the_chip_shop_flat, gated ease >= 20. The morning it stops being a mother in a son's flat. SETS tam_saw_you -> opens every `want` rung on his ladder in 5_scenes. +8 want, +15 arousal."
+
+[canvases.trigger]
+location      = "the_chip_shop_flat"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "ease", operator = "gte", value = 20 },
+  { type = "flag", subject = "player", flag_key = "tam_saw_you", operator = "is_false" },
+]}
+
+[[canvases.nodes]]
+id   = "the_heat_through_the_wall"
+name = "The extractor"
+blocks = [
+  { type = "image", props = { file = "scenes/tam_flat_morning.jpg", description = "A small warm flat in daylight, unmade bed against a wall, curtains half drawn.", search_queries = ["small messy flat unmade bed daylight curtains", "cramped bedsit bed against wall morning"] } },
+  { type = "paragraph", content = "Half nine and the flat is at twenty-four degrees because the fryers have been on since seven. He is on top of the covers in shorts with one arm over his eyes and the extractor going through the wall." },
+  { type = "paragraph", content = "You have taken your coat off. Then the cardigan. You are sitting on the end of his bed in a vest with the sleeves pushed up, and you have been there forty minutes." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "He moves his arm.", blocks = [
+        { type = "paragraph", content = "He takes his arm off his eyes and looks at you, and then does not look away, and then very deliberately looks at your chest and back up, and lets you see him do it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "You're stopping, then." },
+    ] },
+    { advance_text = "Don't cover up.", blocks = [
+        { type = "video", props = { pool_dir = "sex/tam_first_look_t4", pool = 4, description = "A woman sitting on the end of a bed in a thin vest, a man watching from the pillow.", search_queries = ["woman sitting end of bed vest man watching", "woman in tank top bedroom man on bed daylight"] } },
+        { type = "paragraph", content = "Your arms want to fold and you do not let them. The vest is thin enough that he can see your nipples through it, and they are hard, and they have been hard since you took the cardigan off." },
+    ] },
+    { advance_text = "Look at him back.", blocks = [
+        { type = "paragraph", content = "So you look. His cock is hard and the shorts are not hiding one inch of the shape of it, and he does not move his hand to cover it, and he does not take his eyes off your tits while you look." },
+    ] },
+    { advance_text = "Nobody says anything.", blocks = [
+        { type = "paragraph", content = "The extractor keeps going. He puts his hand flat on your back where you are sitting, low, above your waistband, and leaves it there. You do not move away from it." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Nothing happened. I can walk down those stairs and say nothing happened, and it would be true, and I am not going to." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Go down the outside stair.", config = { destinationType = "specific", locationId = "terrace_row", time_progression_minutes = 50, effects = [
+  { targetType = "npc", npcId = "npc_tam", trait = "want", op = "add", value = 8 },
+  { targetType = "player", trait = "arousal", op = "add", value = 15 },
+], flagEffects = [
+  { targetType = "player", flag = "tam_saw_you", op = "set" },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# MILESTONE 4 — Roan. OPENS: the back door. Every rung above bond 25 on his
+# ladder reads `roan_back_door`, and so does the late window on his hub.
+# ═════════════════════════════════════════════════════════════════════════════
+[[canvases]]
+id          = "canvas_roan_back_door"
+name        = "The back door"
+description = "One-shot @the_terrace_house, gated bond >= 25. The night neither of them goes home. SETS roan_back_door -> opens rung_roan_stay and the late band on his hub in 5_scenes. +7 bond."
+
+[canvases.trigger]
+location      = "the_terrace_house"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_roan", trait_key = "bond", operator = "gte", value = 25 },
+  { type = "flag", subject = "player", flag_key = "roan_back_door", operator = "is_false" },
+]}
+
+[[canvases.nodes]]
+id   = "the_mark_on_the_frame"
+name = "The back door"
+blocks = [
+  { type = "image", props = { file = "scenes/terrace_front_room.jpg", description = "A dated front room at night, one lamp, television on with the sound off.", search_queries = ["dated living room night lamp television on mute", "1990s front room evening lamp carpet"] } },
+  { type = "paragraph", content = "Half eleven and the telly has been on mute for two hours. Your mother's chair is still in the corner and neither of you sits in it. He has poured a third one without asking whether you were staying." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "You were seventeen in that doorway. Standing right there, telling her. I was in the hall." },
+  { type = "paragraph", content = "You had forgotten he was in the hall. Twenty-four years and every single person in this town has an opinion about that fortnight, and he is the only one who was actually in the building." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "They all decided who you were in about a fortnight. You know that, don't you. It wasn't you. It was them, and it took a fortnight." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Don't answer that.", blocks = [
+        { type = "paragraph", content = "You do not answer it. You put your glass down and you do not go and get your coat, which is on the hook by the front door, which is four feet away, and both of you can see it." },
+    ] },
+    { advance_text = "Stay where you are.", blocks = [
+        { type = "paragraph", content = "He gets up to lock the front and then does not. He stands in the doorway to the hall with his hand on the frame, on the mark where somebody once measured the pair of you, and looks at you sitting in his mother's front room." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "Back door's open. It's going to stay open." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He is telling me the door is open. He is not asking me anything. That is a different thing entirely and he knows it." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Walk back along the row.", config = { destinationType = "specific", locationId = "terrace_row", time_progression_minutes = 60, effects = [
+  { targetType = "npc", npcId = "npc_roan", trait = "bond", op = "add", value = 7 },
+], flagEffects = [
+  { targetType = "player", flag = "roan_back_door", op = "set" },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# MILESTONE 5 — Nessa. THE STAGED UNLOCK. Her `want` meter does not move at all
+# before this: every rung that raises it in 5_scenes reads `nessa_saw_her`, and
+# so does her hub's want band. This is what makes her pair a different SHAPE
+# from Tam's rather than a second copy of it (the-meters.md W6).
+# ═════════════════════════════════════════════════════════════════════════════
+[[canvases]]
+id          = "canvas_nessa_saw_her"
+name        = "The curtain"
+description = "One-shot @the_back_room, gated trust >= 20. She is caught looking and neither of them pretends otherwise. SETS nessa_saw_her -> unlocks the entire `want` meter on Nessa, which is dead before this. +6 want, +12 arousal."
+
+[canvases.trigger]
+location      = "the_back_room"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_nessa", trait_key = "trust", operator = "gte", value = 20 },
+  { type = "flag", subject = "player", flag_key = "nessa_saw_her", operator = "is_false" },
+]}
+
+[[canvases.nodes]]
+id   = "half_back"
+name = "The curtain"
+blocks = [
+  { type = "paragraph", content = "You come through with the tea and the curtain is half back and she is changing, and she does not stop, and she does not pull it across either. She goes on getting the shirt over her head like you are furniture." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Don't leave.", blocks = [
+        { type = "video", props = { pool_dir = "sex/nessa_curtain_t4", pool = 4, description = "A young woman changing her top in a small bare room, seen from a doorway.", search_queries = ["young woman changing top small bare room doorway", "woman pulling shirt over head bedsit seen from door"] } },
+        { type = "paragraph", content = "You should put the tea down and go. You put the tea down. Her back is to you and then it is not, and her tits are bare and her nipples are up hard in the cold of the room, and you look at them." },
+    ] },
+    { advance_text = "She looks up.", blocks = [
+        { type = "paragraph", content = "She catches it. She has caught it before, twice, and let it go both times. This time she stops with the clean shirt in her hands and stands there and lets you keep looking." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "You can, you know. I'm not going to say anything about it." },
+    ] },
+    { advance_text = "Say nothing.", blocks = [
+        { type = "paragraph", content = "So you do. Small, high, the nipples still hard, a mark on one hip from the mattress frame and the hair between her legs dark against the white of her. She lets you look at all of it." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "She is my sister's girl and she is twenty-one and she has just given me permission. Nobody has given me permission for anything in a long time." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Go back through to the counter.", config = { destinationType = "specific", locationId = "the_arcade", time_progression_minutes = 25, effects = [
+  { targetType = "npc", npcId = "npc_nessa", trait = "want", op = "add", value = 6 },
+  { targetType = "player", trait = "arousal", op = "add", value = 12 },
+], flagEffects = [
+  { targetType = "player", flag = "nessa_saw_her", op = "set" },
+  { targetType = "player", flag = "nessa_curtain_open", op = "set" },
+] } }

@@ -1,0 +1,1456 @@
+# =============================================================================
+# Off Season — 3_activities
+#
+# ROOM-SCOPED STANDING SURFACES. Everything in this file belongs to the ROOM and
+# survives a cast rotation: the meter, the counter, the turnaround, the pan on
+# the hob, the mattress in the let. Content that belongs to a PERSON lives in
+# 5_scenes.toml and dies with them. That split is what makes the rotating slot
+# cost one [[npcs]] block instead of a rewrite (the-board.md §2) — so nothing in
+# here ever says "Nessa". The room says "the lodger".
+#
+# ⚠️ A ROOM'S LIST IS NEEDS + WORK + PEOPLE, AND NOTHING ELSE (the-surfaces.md
+#    R2). Not objects. The previous rule declared the things in the room and
+#    hung a choice off each one, and it shipped a kitchen with a six-choice
+#    browse screen on top of four activities covering the same things. A body
+#    needs about five things; a room contains fifty nouns. The airer and the
+#    burn on the table belong INSIDE a beat, read in context, not scanned in a
+#    menu. Field median for things-to-do-at-a-place: 3.
+#
+# ⚠️ engine.md §19 — one repeatable canvas per location + NPC + time window. The
+#    three counter bands at the arcade are all UNBOUND, so their windows must
+#    not overlap: 08:00-13:00 / 13:00-19:00 / 21:00-01:00.
+#
+# ⚠️ THE CRUDE REGISTER LIVES HERE, not in the one-shots — these are the
+#    surfaces the player re-enters fifty times. An explicit beat stays on the
+#    body for its whole length; the interiority gets its OWN beat afterwards.
+#
+# ⚠️ ONE ASSET, ONE BLOCK — no pool_dir is reused across two media blocks.
+#
+# ⚠️ EVERY `money` EFFECT CARRIES clamp = false (engine.md §21). Clamped, money
+#    caps at 100 and the GBP 90 Monday draw becomes unpayable, and every gate
+#    stays green the whole way down.
+# =============================================================================
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# YOUR FLAT — the body. Sleep, the meter, and the only door she can shut.
+# NEEDS SERVED: energy, warmth.
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ── NEED: energy ─────────────────────────────────────────────────────────────
+[[canvases]]
+id          = "act_flat_sleep"
+name        = "Sleep"
+description = "NEED (energy) @the_flat, repeatable, evenings and nights. Restores energy, capped at 100. Cold sleep and warm sleep are two [group] bands on warmth — a read-out of a RECOVERABLE state, which is the one banding the opener is allowed (lanes.md:154-160), not an arc tier."
+
+[canvases.trigger]
+location             = "the_flat"
+is_repeatable        = true
+max_triggers_per_day = 1
+priority             = 3
+is_active            = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "slept_today", operator = "is_false" },
+]}
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "21:00"
+end_time   = "06:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Sleep"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "warmth", operator = "gte", value = 30 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The immersion has been on and the room is holding it. You get in in a vest and the sheets are not cold at the foot, and you are asleep inside ten minutes." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "warmth", operator = "lt", value = 30 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Nothing in the meter. You go to bed in a jumper and your socks and the coat over the top of the eiderdown, and you lie there a long time listening to the sea before it takes." },
+  ] },
+]
+exit_block = { type = "location", text = "Sleep until morning.", config = { destinationType = "specific", locationId = "the_flat", time_progression_minutes = 540, effects = [
+  { targetType = "player", trait = "energy", op = "add", value = 85, cap = 100 },
+], flagEffects = [
+  { targetType = "player", flag = "slept_today", op = "set" },
+] } }
+
+# ── NEED: warmth. A SINK, and the money-buys-heat chain in one click. ────────
+[[canvases]]
+id          = "act_flat_meter"
+name        = "Feed the meter (GBP 3)"
+description = "NEED (warmth) @the_flat, repeatable, all hours. GBP 3 -> +45 warmth capped at 100. Priced with `costs` so the engine refuses it when she cannot afford it (engine.md §27) — which makes it a real sink AND a real gate. SETS meter_fed_once, which is what canvas_first_warm reads."
+
+[canvases.trigger]
+location      = "the_flat"
+is_repeatable = true
+priority      = 4
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Feed the meter"
+blocks = [
+  { type = "paragraph", content = "Six fifties out of the change bag into the slot on the wall, and the immersion starts up behind the plaster. Three pounds gets you about a day and a half of being able to take your coat off indoors." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text  = "Put three pounds in (GBP 3, 5 min)."
+targetType = "node"
+nodeId = "rung_flat_meter.base"
+costs = [ { trait = "money", value = 3 } ]
+flagEffects = [
+  { targetType = "player", flag = "meter_fed_once", op = "set" },
+]
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE SOLO SURFACE — a NODE-ROUTED LOOP, not a cascade (the-surfaces.md R3b).
+#
+# A repeatable explicit surface is a loop: the passage SWAPS, so the clip
+# changes with the act. A cascade appends, so the clip pins at beat 0 and by
+# the time the player reaches the act they are reading it under a picture of
+# the setup. This is the single-act shape — one act node, a self-loop, a gated
+# finish — which is the cheapest loop that is still a loop.
+#
+# ⚠️ Loop state is HIDDEN NUMERIC TRAITS, never flags: a flag set inside a
+#    triggerless canvas has no located setter and hard-fails the build (§16).
+# ⚠️ RESET ON ENTRY AND ON EXIT. Forget either and the next run starts mid-climb.
+# ⚠️ GATED ON `warmth gte 30`, written in the POSITIVE form. `warmth lt 30` on a
+#    hidden rung would read to gate 10 as a meter that closes more than it opens
+#    (gates.py:1990). This is the door the warmth need shuts.
+#
+# WALK-IN: she is alone here and Tam is scheduled in this flat on Wednesday and
+# Saturday evenings. That pairing is a JOIN of the board, not a judgement, and
+# gate 30 computes it.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "solo_flat_warm"
+name        = "Take everything off"
+description = "STANDING solo surface @the_flat. Node-routed single-act loop: base -> act (self-loop raising arousal) -> finish (gated arousal >= 65) -> reset. Gated first_warm_done + warmth >= 30 — this is the door the warmth need shuts. Carries the flat's explicit pool. Walk-in router: Tam, Wed/Sat evenings."
+
+[canvases.trigger]
+location      = "the_flat"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "first_warm_done", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "warmth", operator = "gte", value = 30 },
+]}
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_flat_stairs"
+chance           = 0.30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "ease", operator = "lt", value = 20 },
+] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_flat_stairs"
+chance           = 0.55
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "ease", operator = "gte", value = 20 },
+  { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "want", operator = "lt",  value = 22 },
+] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_flat_stairs"
+chance           = 0.80
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "want", operator = "gte", value = 22 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The room is warm"
+blocks = [
+  { type = "paragraph", content = "The meter is running and the room is above freezing. The shutter is down, the machines are off at the wall, and there is nobody in this building but you." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take everything off."
+targetType = "node"
+nodeId     = "loop_flat_solo.entry"
+costs      = [ { trait = "energy", value = 5 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it tonight."
+targetType = "location"
+locationId = "the_flat"
+
+
+# ── WALK-IN PAYOFF: the flat. substitution_only, and it DECLARES A LOCATION. ──
+# ⚠️ getCanvasById builds its lookup only from help_data.locationCanvases, which
+#    is populated only for canvases carrying trigger.location (v2.py:3177-3191).
+#    Point a substitution at a triggerless rung and it SILENTLY never fires.
+# Three [group] bands on the same meter the odds ride. Thin on purpose: vesper's
+# is 2.3 KB and DoL's are 458-473 bytes. A tier band is one or two paragraphs
+# plus a pool, not a scene.
+[[canvases]]
+id          = "walkin_flat_stairs"
+name        = "Someone on the stairs"
+description = "Substitution-only walk-in @the_flat (target of solo_flat_warm's three rising bands). Tam comes up the inside stair on a Wednesday or a Saturday. Escalates by npc_tam.ease/want: goes back down < 20 / stands there 20-22 / does not pretend >= 22."
+
+[canvases.trigger]
+location             = "the_flat"
+requires_npc         = "npc_tam"
+substitution_only    = true
+max_triggers_per_day = 1
+is_repeatable        = true
+is_active            = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Someone on the stairs"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "ease", operator = "lt", value = 20 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The inside stair goes twice, the way it does, and you have the vest back over your head before the second one. He calls up from four steps down and does not come any further." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Only me. I'll come back up." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "ease", operator = "gte", value = 20 },
+      { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "want", operator = "lt",  value = 22 },
+    ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/flat_walkin_stood_t4", pool = 4, description = "A woman pulling a sheet across herself on a bed, a young man standing in a doorway.", search_queries = ["woman covering herself bed man in doorway", "man standing in bedroom doorway woman on bed dim"] } },
+    { type = "paragraph", content = "He is at the top of the stair before you have got anything over you. You pull the eiderdown to your waist and your tits are still bare, nipples up, your other hand still between your legs under the covers." },
+    { type = "dialog", props = { speaker = "player" }, content = "You could have shouted up." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "I'm not going anywhere. You don't have to do that." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "want", operator = "gte", value = 22 },
+    ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/flat_walkin_watched_t5", pool = 4, description = "A naked woman on a bed with a young man sitting on the edge of it watching her.", search_queries = ["naked woman on bed man sitting edge watching", "woman lying bare bed man beside her low light"] } },
+    { type = "paragraph", content = "He comes up, sees exactly what you are doing, and sits on the end of the bed to watch. You do not take your hand off your cunt. You keep working your clit with your tits bare and your knees open in front of him." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Don't stop on my account." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "He has stopped apologising for coming up the stairs. That happened at some point and neither of us said anything." },
+  ] },
+]
+exit_block = { type = "location", text = "Later.", config = { destinationType = "specific", locationId = "the_flat", time_progression_minutes = 20, effects = [
+  { targetType = "npc", npcId = "npc_tam", trait = "ease", op = "add", value = 2, cap = 100 },
+] } }
+
+
+# ── the flat, random event (R6 mechanism 4 — the one games drop) ─────────────
+# Floor: EVERY location carries at least one trigger_mode = "random" event.
+# Measured: 0 · 0 · 0 · 8 · 14 across five v2 games. Engine-cooled per location
+# so it cannot spam (engine.md §7).
+[[canvases]]
+id          = "amb_flat_window"
+name        = "The window's gone again"
+description = "Random ambient @the_flat. Three [group] bands on warmth — a read-out of a recoverable state, not an arc tier. Pure texture, sets nothing."
+
+[canvases.trigger]
+location      = "the_flat"
+trigger_mode  = "random"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The window's gone again"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "warmth", operator = "lt", value = 30 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The window has run overnight and there is a quarter inch of water standing on the sill and going into the plaster under it. You do it with a tea towel. You have done it every morning since November." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "warmth", operator = "gte", value = 30 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The window is clear for once and you can see the whole front from the bed. Two people on the whole half mile, both of them walking dogs, both of them going the other way." },
+  ] },
+]
+exit_block = { type = "location", text = "Get on.", config = { destinationType = "specific", locationId = "the_flat", time_progression_minutes = 10 } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE ARCADE — THE ANCHOR. 9,000 of 33,300 declared words = 27% (floor 25%).
+#
+# WORK is one job with three HOUR BANDS, not three jobs. Only one is ever live,
+# so the room's list stays needs + work + people — three or four entries — and
+# the depth goes into the rungs behind it rather than across the menu. This is
+# how a place gets deep without becoming a catalogue (the-surfaces.md R2).
+#
+# ⚠️ engine.md §19 — all three are UNBOUND (no npc), so the windows must not
+#    overlap: 08:00-13:00 · 13:00-19:00 · 21:00-01:00.
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ── WORK, band 1: mornings. The empty half of the season. ───────────────────
+[[canvases]]
+id          = "work_arcade_morning"
+name        = "Open up and work the counter"
+description = "WORK @the_arcade, 08:00-13:00, repeatable. The morning band: shutter, floats, the machines that are still on at the wall. Braked with a counter_done_today flag cleared in [engine.daily_tick] and priced at 150 minutes against a five-hour window, so it is roughly two takes a day, not a printer."
+
+[canvases.trigger]
+location      = "the_arcade"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "season_shut", operator = "is_true" },
+]}
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "13:00"
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_arcade_counter"
+chance           = 0.25
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "season_shut", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The morning"
+blocks = [
+  { type = "image", props = { file = "locations/arcade_morning.jpg", description = "The inside of an empty amusement arcade in daylight, most machines dark.", search_queries = ["empty amusement arcade daylight machines off", "seaside arcade interior deserted morning"] } },
+  { type = "paragraph", content = "Shutter up at eight and the light comes in about four feet and stops. Sixteen machines on at the wall out of forty. The rest you turned off in October and have not turned back on." },
+  { type = "paragraph", content = "Nobody comes in before eleven in February. Some days nobody comes in at all." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Work the counter till one (2h 30m)."
+targetType = "node"
+nodeId     = "rung_arcade_take_am.base"
+costs      = [ { trait = "energy", value = 8 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "counter_done_today", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Do the float and the change bags (40m)."
+targetType = "node"
+nodeId     = "float"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Buy a coin mech off the chandlery (GBP 25)."
+targetType = "node"
+nodeId     = "mech"
+costs      = [ { trait = "money", value = 25 } ]
+
+[[canvases.nodes]]
+id   = "float"
+name = "The float"
+blocks = [
+  { type = "paragraph", content = "Bag the fifties, bag the twenties, count the pound coins into fifties, and top up the change machine so it does not eat somebody's note and lose you a customer you were never going to get." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Twenty-six years I have been doing this with my hands and thinking about something else." },
+]
+exit_block = { type = "location", text = "Done.", config = { destinationType = "specific", locationId = "the_arcade", time_progression_minutes = 40, effects = [
+  { targetType = "player", trait = "energy", op = "add", value = -4 },
+] } }
+
+[[canvases.nodes]]
+id   = "mech"
+name = "A new coin mech"
+blocks = [
+  { type = "paragraph", content = "Twenty-five off the chandlery for a reconditioned mech, and the machine at the end that has been eating pounds since August takes one and gives a game back, first time." },
+  { type = "paragraph", content = "It is the only thing in this building that got better this week." },
+]
+exit_block = { type = "location", text = "Put it in.", config = { destinationType = "specific", locationId = "the_arcade", time_progression_minutes = 45, effects = [
+  { targetType = "player", trait = "energy", op = "add", value = -5 },
+] } }
+
+
+# ── WORK, band 2: afternoons. ───────────────────────────────────────────────
+[[canvases]]
+id          = "work_arcade_afternoon"
+name        = "Work the counter"
+description = "WORK @the_arcade, 13:00-19:00, repeatable. The afternoon band. Same day-cap flag as the morning band, so the two share ONE take per day between them rather than stacking — the brake is the flag, not the window."
+
+[canvases.trigger]
+location      = "the_arcade"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "season_shut", operator = "is_true" },
+]}
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "13:00"
+end_time   = "19:00"
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_arcade_counter"
+chance           = 0.35
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "season_shut", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The afternoon"
+blocks = [
+  { type = "paragraph", content = "The light goes off the front at about half three and after that the arcade is the brightest thing on the seafront, which is why the kids come in, and why the ones with nowhere to be come in after them." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Work the counter till seven (3h)."
+targetType = "node"
+nodeId     = "rung_arcade_take_pm.base"
+costs      = [ { trait = "energy", value = 10 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "counter_done_today", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit in the booth and watch the front (45m)."
+targetType = "node"
+nodeId     = "booth"
+
+[[canvases.nodes]]
+id   = "booth"
+name = "The booth"
+blocks = [
+  { type = "paragraph", content = "The change booth has a hatch you have to stoop to and a stool that has been the wrong height since 1994. From it you can see the whole front, both ways, and nobody can see you." },
+  { type = "paragraph", content = "Your brother goes past at about ten past. He does not look up. He walks the length of it every morning and half the afternoons, out and back, because there is nothing else to do with a day." },
+]
+exit_block = { type = "location", text = "Get off the stool.", config = { destinationType = "specific", locationId = "the_arcade", time_progression_minutes = 45 } }
+
+
+# ── WORK, band 3: after close. The arcade's hot hour. ───────────────────────
+[[canvases]]
+id          = "work_arcade_after_close"
+name        = "Cash up after close"
+description = "WORK @the_arcade, 21:00-01:00, repeatable. The after-close band, which is where the whole building changes character: shutter down, machines off, nobody on the front. This is the arcade's explicit surface and it carries its cycling pool (gate 5 traversal heat)."
+
+[canvases.trigger]
+location      = "the_arcade"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "season_shut", operator = "is_true" },
+]}
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "21:00"
+end_time   = "01:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "After close"
+blocks = [
+  { type = "image", props = { file = "locations/arcade_after_close.jpg", description = "A dark amusement arcade after closing, one light on over a counter.", search_queries = ["dark amusement arcade closed one light on", "empty arcade night machines off dim"] } },
+  { type = "paragraph", content = "Shutter down at nine and the machines go off one bank at a time, and the building goes from a noise to a hum to nothing. One strip light over the counter. Forty dark cabinets and you." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Count the night's take (1h)."
+targetType = "node"
+nodeId     = "count"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Walk the floor with the lights off."
+targetType = "node"
+nodeId     = "floor"
+
+[[canvases.nodes]]
+id   = "count"
+name = "The take"
+blocks = [
+  { type = "paragraph", content = "Coins into the bags, bags into the safe under the counter, and the figure written in the book that Ewan checks on a Monday whether he says he is checking it or not." },
+  { type = "paragraph", content = "Forty-one pounds sixty. The pitch is ninety. It is Thursday." },
+]
+exit_block = { type = "location", text = "Shut the book.", config = { destinationType = "specific", locationId = "the_arcade", time_progression_minutes = 60, effects = [
+  { targetType = "player", trait = "energy", op = "add", value = -6 },
+] } }
+
+[[canvases.nodes]]
+id   = "floor"
+name = "The floor, dark"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/arcade_after_close_t4", pool = 5, description = "A woman alone in a dark empty amusement arcade at night, lit by one machine.", search_queries = ["woman alone dark arcade night machine light", "woman standing empty arcade night dim glow"] } },
+  { type = "paragraph", content = "You walk it with everything off. Bare arms, no coat, because the machines have been on all day and the building holds it after close better than the flat upstairs ever has." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Nobody can see in.", blocks = [
+        { type = "paragraph", content = "The shutter goes to the floor. Nobody on the front can see one inch of the inside of this building, and there is nobody on the front, and it is quarter past eleven." },
+    ] },
+    { advance_text = "Take the cardigan off.", blocks = [
+        { type = "video", props = { pool_dir = "sex/arcade_floor_bare_t5", pool = 4, description = "A woman half undressed standing among dark arcade machines at night.", search_queries = ["woman undressed dark arcade machines night", "half naked woman standing empty arcade neon dim"] } },
+        { type = "paragraph", content = "Cardigan on the pusher, vest after it, bra after that. You stand in the middle of your own arcade naked to the waist with your tits out and your nipples going hard in the draught off the shutter." },
+    ] },
+    { advance_text = "Sit on the pusher.", blocks = [
+        { type = "paragraph", content = "You get up on the flat of the coin pusher with your knickers down at one ankle, the glass cold under your arse, and work your clit in slow circles until your cunt is wet enough to hear." },
+    ] },
+    { advance_text = "Don't stop.", blocks = [
+        { type = "paragraph", content = "Two fingers into your cunt and your heels hooked on the edge of the glass. You fuck yourself on them slowly, thumb flat on your clit, tits shaking every time your hips come up to meet your hand." },
+    ] },
+    { advance_text = "Come.", blocks = [
+        { type = "video", props = { pool_dir = "sex/arcade_floor_finish_t5", pool = 4, description = "A woman coming, sitting back on a machine in a dark arcade.", search_queries = ["woman orgasm sitting back on machine dark room", "woman climaxing leaning back dim arcade"] } },
+        { type = "paragraph", content = "You come with your hand clamped over your own mouth and your cunt pulsing round the fingers of the other one, arse skidding on the wet glass, both tits jumping with every pull of it." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "KESH AMUSEMENTS. Eight foot of it over the door, and this is the only hour of the week any of it is mine." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Go up.", config = { destinationType = "specific", locationId = "the_arcade", time_progression_minutes = 45, effects = [
+  { targetType = "player", trait = "arousal", op = "set", value = 0 },
+  { targetType = "player", trait = "energy",  op = "add", value = -5 },
+] } }
+
+
+# ── WALK-IN PAYOFF: the arcade. Three bands, and they ride the CHANGE the two
+#    people scheduled here are going through — Nessa on the booth at weekends,
+#    Ewan on a Monday evening with the folder.
+[[canvases]]
+id          = "walkin_arcade_counter"
+name        = "The door goes"
+description = "Substitution-only walk-in @the_arcade (target of both counter bands). Escalates by npc_nessa.trust: the lodger stays out of it < 20 / comes and sits on the counter 20-40 / stops pretending she is waiting for something >= 40. ROOM-SCOPED: names the occupant by ROLE, never by name, so it survives the rotation."
+
+[canvases.trigger]
+location             = "the_arcade"
+substitution_only    = true
+max_triggers_per_day = 1
+is_repeatable        = true
+is_active            = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The door goes"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_nessa", trait_key = "trust", operator = "lt", value = 20 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The PRIVATE door goes and the lodger comes through in a coat with her hood up, straight down the length of the floor and out onto the front without a word. Back in forty minutes with a carrier bag." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_nessa", trait_key = "trust", operator = "gte", value = 20 },
+      { type = "trait", subject = "npc", npc_id = "npc_nessa", trait_key = "trust", operator = "lt",  value = 40 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She comes through and gets up on the counter instead of going out — sits on the glass with her heels knocking the front of it, in a T-shirt, in February, because the machines keep this room at twenty degrees." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "There's nobody coming in. There's nobody out there at all. Look." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_nessa", trait_key = "trust", operator = "gte", value = 40 },
+    ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/arcade_counter_lodger_t4", pool = 4, description = "A young woman sitting on a shop counter with an older woman standing close in front of her.", search_queries = ["young woman sitting on counter older woman close", "two women close together shop counter dim interior"] } },
+    { type = "paragraph", content = "She sits on the counter with her knees apart and you end up standing between them with her thighs against your hips, nipples up through the T-shirt in a room she keeps telling you is too warm." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "She does that on purpose. She has done it on purpose since the second week and she wants me to know she is doing it on purpose." },
+  ] },
+]
+exit_block = { type = "location", text = "Get on with the till.", config = { destinationType = "specific", locationId = "the_arcade", time_progression_minutes = 20, effects = [
+  { targetType = "npc", npcId = "npc_nessa", trait = "trust", op = "add", value = 2, cap = 100 },
+] } }
+
+
+# ── the arcade, random events ───────────────────────────────────────────────
+[[canvases]]
+id          = "amb_arcade_damp"
+name        = "The damp above the door"
+description = "Random ambient @the_arcade. The building itself, tiered by how much money is in hand — a read-out of a recoverable state. Pure texture."
+
+[canvases.trigger]
+location      = "the_arcade"
+trigger_mode  = "random"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The damp above the door"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 90 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The stain over the door has come out another two inches since Christmas and the paper has started coming off the wall under it in a strip. Two hundred to have it looked at. You have not got ninety." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 90 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "You stand under the stain with the ninety in your coat pocket and work out that you could have it looked at, or you could pay the pitch, and that you cannot do both, and that this is the whole of your life now." },
+  ] },
+]
+exit_block = { type = "location", text = "Leave it.", config = { destinationType = "specific", locationId = "the_arcade", time_progression_minutes = 10 } }
+
+[[canvases]]
+id          = "amb_arcade_denny"
+name        = "Somebody asks after him"
+description = "Random ambient @the_arcade. A stranger asks about her husband. Two [group] bands on whether the lease has been called. Pure texture."
+
+[canvases.trigger]
+location      = "the_arcade"
+trigger_mode  = "random"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Somebody asks after him"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "lease_called", operator = "is_false" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "A man in for change stops with his hand on the hatch and asks, in the way they all ask, whether Denny is out yet. Four years and they still do it about once a fortnight." },
+    { type = "dialog", props = { speaker = "player" }, content = "Not yet." },
+    { type = "paragraph", content = "That is all you give any of them and it is more than they are owed." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "lease_called", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He asks whether Denny is out yet, and then, before you have answered, whether it is true the lad has the place off you now. The front knows. The front always knows about nine days before you would like it to." },
+  ] },
+]
+exit_block = { type = "location", text = "Give him his change.", config = { destinationType = "specific", locationId = "the_arcade", time_progression_minutes = 10 } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE HOLIDAY LETS — WORK 2, and the richest TRIGGERED ground in the game:
+# alone, on a key, in a room that is not hers, on a schedule other people know.
+#
+# The need gate here is written POSITIVELY — `hunger gte 25` on the rung that IS
+# offered, never `hunger lt 25` on a rung that is hidden (gates.py:1990).
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "work_lets_turnaround"
+name        = "Take a turnaround"
+description = "WORK @the_lets, repeatable, 09:00-17:00. Priced at 20 energy + 150 minutes and day-capped with turnaround_done_today, so it is one a day, not a printer (the-economy.md R5: a gate in FRONT of a printer only delays the printer). Gated hunger >= 25 — this is the door the hunger need shuts. Walk-in router: whoever the agency has sent."
+
+[canvases.trigger]
+location      = "the_lets"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "season_shut", operator = "is_true" },
+]}
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "09:00"
+end_time   = "17:00"
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_lets_number_four"
+chance           = 0.45
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_lets", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The agency's list"
+blocks = [
+  { type = "image", props = { file = "locations/lets_stripped.jpg", description = "An empty holiday flat with a stripped bed and bare mattress, winter light through net curtains.", search_queries = ["empty holiday flat stripped bed bare mattress", "vacant seaside apartment net curtains winter light"] } },
+  { type = "paragraph", content = "Six flats, one key on a fob with a wooden tag, and a list stuck to the fridge in number one with your name at the top of it. Strip, run the taps, hoover, out." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Marnie, love — leave four till Wednesday, they're shifting the mattress." },
+  { type = "paragraph", content = "Nobody has slept in any of them since September. The beds still smell of whoever did." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Do a turnaround (2h 30m)."
+targetType = "node"
+nodeId     = "rung_lets_turnaround.base"
+costs      = [ { trait = "energy", value = 20 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "turnaround_done_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "hunger", operator = "gte", value = 25 },
+  { type = "trait", subject = "player", trait_key = "energy", operator = "gte", value = 20 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Buy the agency's cleaning stock (GBP 8)."
+targetType = "node"
+nodeId     = "stock"
+costs      = [ { trait = "money", value = 8 } ]
+
+[[canvases.nodes]]
+id   = "stock"
+name = "The stock"
+blocks = [
+  { type = "paragraph", content = "Eight pounds of bin bags, bleach and the blue roll the agency is supposed to provide and has not provided since the office in town shut and it all went to a number in Leeds." },
+]
+exit_block = { type = "location", text = "Put it under the sink.", config = { destinationType = "specific", locationId = "the_lets", time_progression_minutes = 30 } }
+
+
+# ── WALK-IN PAYOFF: number four. Any NPC form — the agency sends whoever it
+#    sends, so the bands ride the ROOM's situation and `npc_at_location` with no
+#    npc_id, which is the primitive for being seen without specifying by whom.
+[[canvases]]
+id          = "walkin_lets_number_four"
+name        = "The door of number four"
+description = "Substitution-only walk-in @the_lets (target of work_lets_turnaround). Uses the any-NPC form of npc_at_location, so it fires for Tam on his bin mornings or Roan on his van afternoon without binding either. Three bands on how far the season has gone with whoever it is."
+
+[canvases.trigger]
+location             = "the_lets"
+substitution_only    = true
+max_triggers_per_day = 1
+is_repeatable        = true
+is_active            = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The door of number four"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "npc_at_location", location_id = "the_lets", npc_id = "npc_tam", operator = "is_present" },
+    ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/lets_walkin_tam_t4", pool = 4, description = "A woman bending over a bare mattress stripping a bed, a young man in the doorway behind her.", search_queries = ["woman stripping bed bare mattress bending over", "man watching from doorway woman making bed"] } },
+    { type = "paragraph", content = "You are bent over the far side of the mattress with your arms full of sheets when the door goes. It is him with the bins, and he stops, and your skirt has ridden up over your arse and you do not pull it down." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Agency said four. I did four first." },
+    { type = "paragraph", content = "You know exactly what he can see from there. You take longer over the corner than the corner needs." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "npc_at_location", location_id = "the_lets", npc_id = "npc_roan", operator = "is_present" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Your brother backs the van up to the door of four and takes the mattress out on his own rather than ask you to take an end, and then stands in the empty room with you for longer than either of you needs to." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "Nobody's been in this flat since August. Nobody's coming till April. Do you ever think about that?" },
+  ] },
+]
+exit_block = { type = "location", text = "Finish the room.", config = { destinationType = "specific", locationId = "the_lets", time_progression_minutes = 25 } }
+
+[[canvases]]
+id          = "amb_lets_drawer"
+name        = "What is in the drawers"
+description = "Random ambient @the_lets. Other people's rooms. Two bands, on whether the season has started turning her. Pure texture."
+
+[canvases.trigger]
+location      = "the_lets"
+trigger_mode  = "random"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "What is in the drawers"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "first_warm_done", operator = "is_false" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "A hairgrip, two euros, and a paperback with the spine broken at page ninety. You put them in the drawer of the bedside table with everything else that has been left behind since Easter and shut it." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "first_warm_done", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "A bikini top behind the radiator in number two, dried stiff, from a woman who was here in August and is not coming back. You hold it for a bit longer than you mean to before it goes in the bag." },
+  ] },
+]
+exit_block = { type = "location", text = "Get on with it.", config = { destinationType = "specific", locationId = "the_lets", time_progression_minutes = 10 } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# TAM'S FLAT — NEED: hunger. And the only warm room in Ellinbay.
+#
+# The eat surface is SOLO (he is asleep), and he is scheduled here 08:00-15:00,
+# so the room qualifies for a walk-in and the walk-in is HIM WAKING UP. That
+# pairing was already true in the board; gate 30 computed it.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "act_chip_eat"
+name        = "Eat what is in the pan (GBP 4)"
+description = "NEED (hunger) @the_chip_shop_flat, repeatable. GBP 4 down through the hatch for what is in the pan -> +50 hunger. Priced with `costs`, which makes it a sink AND a gate. Walk-in router: he wakes up."
+
+[canvases.trigger]
+location      = "the_chip_shop_flat"
+is_repeatable = true
+priority      = 4
+is_active     = true
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_chip_wakes"
+chance           = 0.40
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_chip_shop_flat", npc_id = "npc_tam", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The pan on the hob"
+blocks = [
+  { type = "paragraph", content = "There is always something in the pan because he makes it at four in the morning coming off the fryers and never finishes it. Four pounds down through the hatch to Lee downstairs squares it, and you eat standing up at the window." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text  = "Eat, and square it downstairs (GBP 4, 25 min)."
+targetType = "node"
+nodeId = "rung_chip_eat.base"
+costs = [ { trait = "money", value = 4 } ]
+
+[[canvases]]
+id          = "walkin_chip_wakes"
+name        = "He wakes up"
+description = "Substitution-only walk-in @the_chip_shop_flat (target of act_chip_eat). Three bands on npc_tam.ease/want: turns over < 20 / talks to her from the pillow 20-22 / does not bother pretending he was asleep >= 22."
+
+[canvases.trigger]
+location             = "the_chip_shop_flat"
+requires_npc         = "npc_tam"
+substitution_only    = true
+max_triggers_per_day = 1
+is_repeatable        = true
+is_active            = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "He wakes up"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "ease", operator = "lt", value = 20 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He turns over at the noise of the pan and gets an eye open and works out it is you and shuts it again. Nineteen years old and still does that." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Leave us some." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "ease", operator = "gte", value = 20 },
+      { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "want", operator = "lt",  value = 22 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He is awake before you have the gas on and he does not get up, he just lies there on top of the covers in the heat and talks to you from the pillow while you eat standing at the window." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "You could sit down, you know. It's your building I'm paying rent on, near enough." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "want", operator = "gte", value = 22 },
+    ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/chip_flat_wakes_t4", pool = 4, description = "A young man lying awake on top of the covers in a hot flat watching a woman across the room.", search_queries = ["young man lying on bed watching woman across room", "man awake on bed daylight small flat watching"] } },
+    { type = "paragraph", content = "He was not asleep and does not pretend he was. He is on top of the covers with his cock hard against the front of his shorts, and he watches you eat standing up and does not cover it or turn over." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "We have both stopped doing the thing where one of us looks away first. I could not tell you which week that stopped." },
+  ] },
+]
+exit_block = { type = "location", text = "Finish it standing up.", config = { destinationType = "specific", locationId = "the_chip_shop_flat", time_progression_minutes = 20, effects = [
+  { targetType = "npc", npcId = "npc_tam", trait = "ease", op = "add", value = 2, cap = 100 },
+] } }
+
+[[canvases]]
+id          = "amb_chip_extractor"
+name        = "The extractor"
+description = "Random ambient @the_chip_shop_flat. The heat of the room, which is the whole reason she keeps coming up here. Two bands. Pure texture."
+
+[canvases.trigger]
+location      = "the_chip_shop_flat"
+trigger_mode  = "random"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The extractor"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "warmth", operator = "lt", value = 30 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "You get to the top of the outside stair and the heat comes at you through the door before you have opened it. You have your coat off before you are in the room. Nothing in your own flat has done that since October." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "warmth", operator = "gte", value = 30 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Twenty-four degrees and the extractor going through the wall like something breathing. He has the window open two inches in February and it makes no difference at all." },
+  ] },
+]
+exit_block = { type = "location", text = "Sit down.", config = { destinationType = "specific", locationId = "the_chip_shop_flat", time_progression_minutes = 10 } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE THREE STREETS — deliberately COLD, and deliberately RANDOM-ONLY.
+#
+# Cold: the reference game had no sexual content in 8 of its 25 locations. The
+# floor is 60% of locations carrying heat, not 100%, and seven of ten here do.
+#
+# Random-only, and this is a MECHANICAL consequence worth writing down: gate 30
+# qualifies a room when it has a repeatable, location-bound, non-random, non-NPC
+# canvas AND a scheduled body. Every location in this game has a scheduled body.
+# So putting a solo activity on a street would owe that street a walk-in — and
+# a walk-in on a promenade is a worse scene than the four the board already
+# earned. `trigger_mode = "random"` is excluded from that join (gates.py
+# _walkin_join), so a street full of events owes nothing and still moves.
+#
+# This is R6 mechanism 4 — an event that replaces the whole screen. Measured
+# across five v2 games: 0 · 0 · 0 · 8 · 14 random canvases. It is the cheapest
+# of the four mechanisms to author and the one everybody drops.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "amb_front_wind"
+name        = "The length of it"
+description = "Random ambient @the_front. The exterior as the consequence surface: who is out, who sees her, what the town is doing while it waits for April. Three bands on the week's money. Pure texture."
+
+[canvases.trigger]
+location      = "the_front"
+trigger_mode  = "random"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The length of it"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 90 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "You have the ninety in your coat and the front looks different with it in there, which is a stupid thing to be true and is true anyway. Same shut shops. Same windmill on its side." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 40 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The wind comes straight up off the water with nothing between here and Denmark to slow it and it gets in at your collar every time. You walk it the way everyone here walks it, at an angle, with one hand at your throat." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 40 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Half a mile of shut. The rock shop, the two cafes, the crazy golf with the windmill lying on its side in the middle of the fourth. Your building and the chip shop are the only lit windows between the harbour and the caravan park." },
+  ] },
+]
+exit_block = { type = "location", text = "Keep walking.", config = { destinationType = "specific", locationId = "the_front", time_progression_minutes = 10 } }
+
+[[canvases]]
+id          = "amb_front_seen"
+name        = "Somebody clocks you"
+description = "Random ambient @the_front. Being SEEN, on the ground, outside the household — the exterior's other job. Two bands on how far the season has gone. Pure texture."
+
+[canvases.trigger]
+location      = "the_front"
+trigger_mode  = "random"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Somebody clocks you"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "tam_saw_you", operator = "is_false" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "A woman you were at school with, going the other way with a dog, and the whole exchange takes four seconds and both of you have done it a thousand times." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "All right, Marnie. Cold enough for you." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "tam_saw_you", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Same woman, same dog, same four seconds, and you get all the way past her before you understand that you have spent the whole of it wondering what your face was doing." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "Nobody can see anything. There is nothing to see. I have been telling myself that on this exact stretch of pavement for about a fortnight." },
+  ] },
+]
+exit_block = { type = "location", text = "Get on.", config = { destinationType = "specific", locationId = "the_front", time_progression_minutes = 10 } }
+
+[[canvases]]
+id          = "amb_front_season"
+name        = "April"
+description = "Random ambient @the_front. The clock the whole premise runs on — the season is what ends this, and it does not end for months. Two bands. Pure texture."
+
+[canvases.trigger]
+location      = "the_front"
+trigger_mode  = "random"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "April"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "lease_called", operator = "is_false" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Somebody has been round painting the railings by the bandstand, which is a council job that happens in February so it is dry by Easter. It is the only work anyone does on this front until the town comes back." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "lease_called", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The railings are painted and the bunting is in a crate behind the bandstand waiting for the last week of March, and you stand and look at it and think about who will be holding the lease on your building by then." },
+  ] },
+]
+exit_block = { type = "location", text = "Go on.", config = { destinationType = "specific", locationId = "the_front", time_progression_minutes = 10 } }
+
+
+[[canvases]]
+id          = "amb_harbour_slip"
+name        = "Down the slip"
+description = "Random ambient @harbour_end. The one working end of the town, and her eldest in the middle of it. Two bands on npc_ewan.hold. Pure texture."
+
+[canvases.trigger]
+location      = "harbour_end"
+trigger_mode  = "random"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Down the slip"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_ewan", trait_key = "hold", operator = "lt", value = 18 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Two boats in the water out of eleven, and the rest up on trailers with the shrink-wrap going green. Diesel and rope and cold. Somebody is running an angle grinder somewhere behind the sheds." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_ewan", trait_key = "hold", operator = "gte", value = 18 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Two men outside the chandlery stop talking about a foot and a half earlier than they would have, and one of them says your son's name in the sentence before they do it, and then they both say good morning." },
+  ] },
+]
+exit_block = { type = "location", text = "Go down to the yard.", config = { destinationType = "specific", locationId = "harbour_end", time_progression_minutes = 10 } }
+
+[[canvases]]
+id          = "amb_harbour_weather"
+name        = "It comes in sideways"
+description = "Random ambient @harbour_end. Weather and crowd — R6 mechanism 1, a condition clause on the identity sentence rather than progression. Pure texture."
+
+[canvases.trigger]
+location      = "harbour_end"
+trigger_mode  = "random"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "It comes in sideways"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "warmth", operator = "gte", value = 30 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The rain comes in off the water sideways for about ninety seconds and then stops, the way it does here, and everything is running and the concrete goes black and then grey again." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "warmth", operator = "lt", value = 30 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "It comes in sideways and gets down your collar and you stand in it, because getting home does not solve it, because there is nothing in the meter, because the flat is four degrees warmer than this and that is all." },
+  ] },
+]
+exit_block = { type = "location", text = "Get out of it.", config = { destinationType = "specific", locationId = "harbour_end", time_progression_minutes = 10 } }
+
+
+[[canvases]]
+id          = "amb_terrace_curtains"
+name        = "Eleven doors"
+description = "Random ambient @terrace_row. The street that knows her, which is what she has to lose. Two bands on npc_roan.bond. Pure texture."
+
+[canvases.trigger]
+location      = "terrace_row"
+trigger_mode  = "random"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Eleven doors"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_roan", trait_key = "bond", operator = "lt", value = 25 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Out of the wind for the first time all morning. Lights on behind the curtains at half three because the terrace never gets any sun in winter. Eleven doors between the chip shop and your mother's, and you know what every one of them is called." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_roan", trait_key = "bond", operator = "gte", value = 25 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "You have started counting the doors on the way down and working out which of them can see your mother's back gate from an upstairs window. Four of them. You did not use to know that." },
+  ] },
+]
+exit_block = { type = "location", text = "Carry on down.", config = { destinationType = "specific", locationId = "terrace_row", time_progression_minutes = 10 } }
+
+[[canvases]]
+id          = "amb_terrace_nights"
+name        = "Coming off nights"
+description = "Random ambient @terrace_row. The row at the hour the town changes hands. Two bands on npc_tam.ease. Pure texture."
+
+[canvases.trigger]
+location      = "terrace_row"
+trigger_mode  = "random"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Coming off nights"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "ease", operator = "lt", value = 20 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Seven in the morning and the fryers have been off an hour and the whole row still smells of it. Somebody's alarm going off behind a window and nobody getting up to it." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "ease", operator = "gte", value = 20 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He comes down the outside stair with his hood up and his hands in his sleeves and sees you at the bottom of the row, and stops, and waits there for you to walk the length of it to him rather than coming to meet you." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "He has started waiting. He never used to wait. He used to run at me the whole way up this street." },
+  ] },
+]
+exit_block = { type = "location", text = "Walk up to him.", config = { destinationType = "specific", locationId = "terrace_row", time_progression_minutes = 10 } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE THREE REMAINING ROOMS — their room-scoped ambients. The people who live
+# in them are in 5_scenes; this is the furniture, and it survives them.
+#
+# ⚠️ THE LODGER'S ROOM NAMES NOBODY. The mattress, the rail, the curtain and the
+#    marks on the wall are the SLOT, not the tenant. That is the one rule that
+#    makes a rotation cost an [[npcs]] block instead of a rewrite, and it was
+#    broken in a real build by a room-scoped file full of tenant-specific props
+#    (the-board.md §2).
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "amb_yard_stove"
+name        = "The drum stove"
+description = "Random ambient @the_boat_yard. The yard itself — the stove, the caravan, the second drawer. Two bands on npc_ewan.hold. Pure texture."
+
+[canvases.trigger]
+location      = "the_boat_yard"
+trigger_mode  = "random"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The drum stove"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_ewan", trait_key = "hold", operator = "lt", value = 18 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Half an oil drum with a flue through the roof sheet, going since seven, and it is the warmest place in Ellinbay that is not directly above a fryer. Four hulls up on stands and a radio nobody is listening to." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_ewan", trait_key = "hold", operator = "gte", value = 18 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He has put a second chair by the stove. It was not there in January. Nobody has said anything about the second chair and you sit in it now when you come down, which is most days." },
+  ] },
+]
+exit_block = { type = "location", text = "Warm your hands.", config = { destinationType = "specific", locationId = "the_boat_yard", time_progression_minutes = 10 } }
+
+[[canvases]]
+id          = "amb_terrace_house_barometer"
+name        = "The barometer says CHANGE"
+description = "Random ambient @the_terrace_house. Her mother's house, unaltered. Two bands on npc_roan.bond. Pure texture."
+
+[canvases.trigger]
+location      = "the_terrace_house"
+trigger_mode  = "random"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The barometer says CHANGE"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_roan", trait_key = "bond", operator = "lt", value = 25 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He has changed nothing. Same carpet, same three-bar fire, same barometer in the hall that has said CHANGE since 1998 because the needle came off the pin and nobody ever fixed it." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_roan", trait_key = "bond", operator = "gte", value = 25 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "There is a mark on the frame at the bottom of the stairs where somebody once did the pair of you in pencil. Yours is higher, because you were four years older and it was 1996, and he has never painted over it either." },
+  ] },
+]
+exit_block = { type = "location", text = "Go through.", config = { destinationType = "specific", locationId = "the_terrace_house", time_progression_minutes = 10 } }
+
+[[canvases]]
+id          = "amb_back_room_marks"
+name        = "Marks on the wall"
+description = "Random ambient @the_back_room. THE SLOT, not the tenant: the mattress, the rail, the curtain, and the headboard marks at four different heights. ROOM-SCOPED — names nobody, so it survives every rotation."
+
+[canvases.trigger]
+location      = "the_back_room"
+trigger_mode  = "random"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Marks on the wall"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "nessa_saw_her", operator = "is_false" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "There are four marks on the wall behind the mattress at four different heights, from four people who each put a headboard where they wanted it. Forty a week, cash, since the year the crazy golf shut." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "nessa_saw_her", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Four marks on the wall and the newest one is higher than the rest, because the frame got turned round in November. The curtain has not been pulled across in about a fortnight. You have stopped mentioning the curtain." },
+  ] },
+]
+exit_block = { type = "location", text = "Go back through.", config = { destinationType = "specific", locationId = "the_back_room", time_progression_minutes = 10 } }
+
+
+[[canvases]]
+id          = "rung_arcade_take_am"
+name        = "The take"
+description = "Triggerless rung off work_arcade_morning. THE money grant lives here, not on the located hub, because a brake on a node link inside a room-reachable canvas brakes nothing (gate 18)."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The take"
+blocks = [
+  { type = "paragraph", content = "Two lads off the bus from the college, an hour on the driving cabinet, four quid between them. A woman in for change for the machine outside and gone again. The dog man, who comes in to be out of the wind and puts a pound in the crane out of guilt." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Still open, then." },
+  { type = "paragraph", content = "You say you are. He says nobody is. He is not being unkind; he is right, and the two of you look out at the front together for a bit and then he goes." },
+]
+exit_block = { type = "location", text = "Cash it up.", config = { destinationType = "specific", locationId = "the_arcade", time_progression_minutes = 150, effects = [
+  { targetType = "player", trait = "money",         op = "add", value = 21, clamp = false },
+  { targetType = "player", trait = "energy",        op = "add", value = -8 },
+], flagEffects = [
+  { targetType = "player", flag = "counter_done_today", op = "set" },
+] } }
+
+
+[[canvases]]
+id          = "rung_arcade_take_pm"
+name        = "The take"
+description = "Triggerless rung off work_arcade_afternoon. Same restructure as the morning take."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The afternoon take"
+blocks = [
+  { type = "paragraph", content = "Better. School lets out at half three and you get an hour of it, six or seven of them on the coin pushers, and one who plays the same driving cabinet every day." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Is the two-pence one fixed yet?" },
+  { type = "dialog", props = { speaker = "player" }, content = "Thursday. He says Thursday." },
+  { type = "paragraph", content = "Then it goes dark outside and they all go home for their tea and it is you and the machines again until seven." },
+]
+exit_block = { type = "location", text = "Cash up.", config = { destinationType = "specific", locationId = "the_arcade", time_progression_minutes = 180, effects = [
+  { targetType = "player", trait = "money",         op = "add", value = 29, clamp = false },
+  { targetType = "player", trait = "energy",        op = "add", value = -10 },
+], flagEffects = [
+  { targetType = "player", flag = "counter_done_today", op = "set" },
+] } }
+
+
+[[canvases]]
+id          = "rung_lets_turnaround"
+name        = "The take"
+description = "Triggerless rung off work_lets_turnaround. The 20-energy price and the day-cap now sit on the only route in."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The turnaround"
+blocks = [
+  { type = "paragraph", content = "Beds stripped, traps run so they do not dry out and stink the place up by Easter, and the hoover round a carpet nobody has walked on in five months. Two hours thirty and you are paid for two." },
+  { type = "paragraph", content = "There is somebody's suntan lotion still in the bathroom cabinet in number four. There has been since August. You leave it where it is every single time." },
+]
+exit_block = { type = "location", text = "Lock up and put the key back.", config = { destinationType = "specific", locationId = "the_lets", time_progression_minutes = 150, effects = [
+  { targetType = "player", trait = "money",  op = "add", value = 34, clamp = false },
+  { targetType = "player", trait = "hunger", op = "add", value = -12 },
+], flagEffects = [
+  { targetType = "player", flag = "turnaround_done_today", op = "set" },
+] } }
+
+
+[[canvases]]
+id          = "rung_flat_meter"
+name        = "Three pounds in the slot"
+description = "Triggerless rung off act_flat_meter. The warmth grant and meter_fed_once live HERE, not on the located canvas, because gate 26 resolves brakes on the route IN and a room-reachable canvas has no brake on that route. Same restructure the two work surfaces needed."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Three pounds in the slot"
+blocks = [
+  { type = "paragraph", content = "Six fifties into the slot and the immersion starts up behind the plaster. By the time you have washed up the room is warm enough to be in without a coat, which lasts about a day and a half." },
+]
+exit_block = { type = "location", text = "Leave it running.", config = { destinationType = "specific", locationId = "the_flat", time_progression_minutes = 5, effects = [
+  { targetType = "player", trait = "warmth", op = "add", value = 45, cap = 100 },
+] } }
+
+
+# ── THE SOLO LOOP, lifted out of the located canvas ──────────────────────────
+# Triggerless on purpose. gate 26 resolves a brake on the route INTO a canvas, and a
+# located, repeatable, room-reachable canvas has no brake on that route — so a price on
+# a self-loop inside it prices nothing. Tam's loop was already this shape, which is why
+# his meters were never flagged and this one's were.
+[[canvases]]
+id          = "loop_flat_solo"
+name        = "Take everything off"
+description = "Node-routed single-act loop off solo_flat_warm, priced at 5 energy on the only route in. entry -> act <-> act_deep -> finish (gated arousal >= 65) -> reset. Resets arousal and loop_stage on entry and on both exits."
+
+[[canvases.nodes]]
+id   = "entry"
+name = "Take everything off"
+blocks = [
+  { type = "paragraph", content = "Cardigan, jumper, vest, the lot, onto the chair. The lamp on and the big light off and the shutter down two floors under you." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get a hand on yourself."
+targetType = "node"
+nodeId     = "act"
+effects = [
+  { targetType = "player", trait = "arousal",    op = "set", value = 0 },
+  { targetType = "player", trait = "loop_stage", op = "set", value = 1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get under the covers instead."
+targetType = "location"
+locationId = "the_flat"
+
+# ACT NODE — its own pool. The self-loop is what climbs the throttle.
+[[canvases.nodes]]
+id   = "act"
+name = "On top of the covers"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/flat_solo_t5", pool = 6, description = "A woman naked on her back on a bed in a small dim room, one hand between her legs.", search_queries = ["woman alone naked bed hand between legs dim room", "woman touching herself on bed lamp light bedsit"] } },
+  { type = "paragraph", content = "Naked on top of the covers with the lamp on. Two fingers working your clit in slow circles, your other hand squeezing a tit, thumb over the nipple until it hurts and then over it again." },
+  { type = "paragraph", content = "Your cunt is wet enough that your fingers keep sliding off. You push two of them in to the knuckle to get them slick, hold there a second while it grips, and bring them back up to your clit." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep going."
+targetType = "node"
+nodeId     = "act"
+costs      = [ { trait = "energy", value = 3 } ]
+time_progression_minutes = 10
+effects = [
+  { targetType = "player", trait = "arousal", op = "add", value = 12, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Fuck yourself properly."
+targetType = "node"
+nodeId     = "act_deep"
+costs      = [ { trait = "energy", value = 3 } ]
+time_progression_minutes = 10
+effects = [
+  { targetType = "player", trait = "arousal",    op = "add", value = 14, cap = 100 },
+  { targetType = "player", trait = "loop_stage", op = "set", value = 2 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stop."
+targetType = "node"
+nodeId     = "reset"
+
+# SECOND ACT NODE — a different pool, because the passage swap is what refreshes
+# the picture. This is the whole reason a repeatable surface is node-routed.
+[[canvases.nodes]]
+id   = "act_deep"
+name = "Both hands"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/flat_solo_deep_t5", pool = 6, description = "A woman on a bed fingering herself with her knees up, close, dim light.", search_queries = ["woman fingering herself knees up bed close dim", "woman masturbating fingers inside bed low light"] } },
+  { type = "paragraph", content = "Three fingers in your cunt and the heel of your hand grinding your clit at the same time. Your hips come up off the bed to meet them and your tits go with it and you are moaning at the ceiling." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep fucking yourself."
+targetType = "node"
+nodeId     = "act_deep"
+costs      = [ { trait = "energy", value = 3 } ]
+time_progression_minutes = 10
+effects = [
+  { targetType = "player", trait = "arousal", op = "add", value = 13, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Back to your clit."
+targetType = "node"
+nodeId     = "act"
+time_progression_minutes = 5
+effects = [
+  { targetType = "player", trait = "loop_stage", op = "set", value = 1 },
+]
+
+# FINISH — gated on the throttle. This is the ONLY thing arousal gates, which is
+# what W2 says a throttle is for. Five previous v2 games raised it 232 times and
+# read it four.
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Come."
+targetType = "node"
+nodeId     = "finish"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 65 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stop."
+targetType = "node"
+nodeId     = "reset"
+
+# FINISHER — its own pool, then the interiority as its OWN beat, which correctly
+# scores 0 on the explicit instrument and is the rule working (register.md).
+[[canvases.nodes]]
+id   = "finish"
+name = "Come"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/flat_solo_finish_t5", pool = 4, description = "A woman arching on a bed alone, coming, hand between her legs.", search_queries = ["woman arching bed alone orgasm", "woman climaxing alone bedroom hand between legs"] } },
+  { type = "paragraph", content = "It takes you with your fingers still in and your thighs clamp on your own hand. Your cunt pulses round your knuckles in long hard pulls, nipples aching, and you fuck yourself through every one of them." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Three pounds. That is what it costs to be a person in my own house for an evening." },
+]
+exit_block = { type = "location", text = "Get under the covers.", config = { destinationType = "specific", locationId = "the_flat", time_progression_minutes = 15, effects = [
+  { targetType = "player", trait = "arousal",    op = "set", value = 0 },
+  { targetType = "player", trait = "loop_stage", op = "set", value = 0 },
+] } }
+
+# RESET — the other exit. Both exits wipe the loop or the next run starts mid-climb.
+[[canvases.nodes]]
+id   = "reset"
+name = "Leave it"
+blocks = [
+  { type = "paragraph", content = "You stop, and lie there with your hand flat on your own belly, and the wanting sits there unfinished and does not go anywhere." },
+]
+exit_block = { type = "location", text = "Get dressed.", config = { destinationType = "specific", locationId = "the_flat", time_progression_minutes = 10, effects = [
+  { targetType = "player", trait = "arousal",    op = "set", value = 0 },
+  { targetType = "player", trait = "loop_stage", op = "set", value = 0 },
+] } }
+
+
+[[canvases]]
+id          = "rung_chip_eat"
+name        = "What is in the pan"
+description = "Triggerless rung off act_chip_eat. The hunger and warmth grants live here so the GBP 4 on the route in is the brake gate 26 reads."
+
+[[canvases.nodes]]
+id   = "base"
+name = "What is in the pan"
+blocks = [
+  { type = "paragraph", content = "Whatever he made at four in the morning, warmed through on the one ring that works, eaten standing up at the window with the front going dark outside." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "There's more in the fridge. Lee gives us what doesn't go out." },
+]
+exit_block = { type = "location", text = "Square it downstairs.", config = { destinationType = "specific", locationId = "the_chip_shop_flat", time_progression_minutes = 25, effects = [
+  { targetType = "player", trait = "hunger", op = "add", value = 50, cap = 100 },
+  { targetType = "player", trait = "warmth", op = "add", value = 10, cap = 100 },
+] } }

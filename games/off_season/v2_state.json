@@ -1,0 +1,415 @@
+{
+  "slug": "off_season",
+  "phase": "release",
+  "narration_person": "second",
+  "want": {
+    "who_she_is": "Marnie Kesh, 39. Her name is on the front of the arcade on the Ellinbay seafront in eight-foot letters, and has been since she married into it at seventeen; she had Ewan at fifteen, before the name. Her husband Denny has been inside four years for what he did in the arcade's back room with the arcade's money. She lives in the flat over it. What she has to lose is the version of her the town agreed on years ago -- the one who held it together, who is coping, who is fine -- and every hour spent being wanted instead of relied on spends some of it.",
+    "appetite": "To be wanted -- not needed, not thanked, not worried about -- by the people she raised or reared. It cannot complete: the direction is what matters. At the start she goes to them; every rung is one of them coming to her instead, and each can come one notch further in. Release 41 adds a door on the front, a relative back for the winter because the season went badly somewhere else, or another hour of the day that belongs to her.",
+    "ascent": "BOTTOM: she goes to them. Flask to the yard because Ewan will not stop for lunch; up the stairs over the chip shop and knock and wait; coat on in her own flat because the meter costs three pounds. Everything she does here she does on her way somewhere else. TOP: they come to her. The arcade after close is where they end up and the flat above it is where they stay; she does not knock at the terrace house and Roan does not lock the back door; the meter runs; whatever she is doing when they arrive is what they walk into. The ascent is PER-PERSON, not global -- a declared fork per the-meters.md W1, because this game declares who_climbs = 'cast'. There is no corruption bar. The four ladders are the four people, each a different kind of going further: Ewan `hold` (how much of her he is allowed to decide -- priced, never courted), Tam `ease` + `want` (how long he can be in a room with her without a reason), Roan `bond` (how much of who she was before is allowed back), Nessa `trust` then `want` (how much of the flat above the arcade is hers to walk into).",
+    "charge": "taboo + reversal",
+    "why_this_person": {
+      "npc_ewan": "She had him at fifteen and they raised each other. He took the books off her the month after Denny went in, and he was right to, and she has not been allowed a decision about her own building since. Being wanted by him means being UN-managed, which is the one thing she cannot ask for.",
+      "npc_tam": "The one who never left and never grew out of her. Comes up the stairs for nothing, sits where he always sat, eats what is in the pan. The only person in Ellinbay who treats her as company rather than as a situation. He does not know that is what he is doing and she has started to.",
+      "npc_roan": "Her brother, five years behind her, back in their mother's terrace after whatever it was in Bristol collapsed. He was twelve when she got pregnant and watched the town decide who she was in about a fortnight. He is the only witness. Being wanted by him is being told the verdict was wrong.",
+      "npc_nessa": "Her sister's girl, came for a summer job and did not go back. Sleeps in the arcade's back room, pays forty a week. Marnie was exactly her age with two kids, and Nessa is what she would have been. She cannot stop watching her, and Nessa has noticed."
+    },
+    "crude_ceiling": {
+      "npc_tam": [
+        "0.1: cock, cunt, tits, wet, hard, suck, fuck",
+        "later: cum, come in/on, arse"
+      ],
+      "npc_ewan": [
+        "0.1: cock, tits, hard, fuck, hold still",
+        "later: cunt, cum, arse, choke"
+      ],
+      "npc_roan": [
+        "0.1: cock, tits, cunt, wet, fuck, want",
+        "later: cum, come inside"
+      ],
+      "npc_nessa": [
+        "0.1: cunt, tits, wet, tongue, lick, fingers, come",
+        "later: fuck, hold her down"
+      ]
+    },
+    "crude_register_lives_in": "The act loops on the four hubs, and above all Tam's pose ladder in the flat over the chip shop -- the surface a player will re-enter more than any other. NOT in the milestones and NOT in the one-shots.",
+    "last_read_at_release": "0.1-wip"
+  },
+  "releases": [],
+  "promises": [
+    {
+      "text": "Tam: 'Stay the night' / 'Get on top of him' — shown locked at want >= 65 inside the act menu",
+      "made_in": "0.1",
+      "paid_in": null
+    },
+    {
+      "text": "Ewan: the loft over the boat yard, named on his terminal guidance card",
+      "made_in": "0.1",
+      "paid_in": null
+    },
+    {
+      "text": "Nessa: she comes up to the flat instead of being fetched — named on her terminal card",
+      "made_in": "0.1",
+      "paid_in": null
+    },
+    {
+      "text": "Roan: 'he has stopped locking the back door and you have stopped knocking'",
+      "made_in": "0.1",
+      "paid_in": null
+    },
+    {
+      "text": "Dov / the pier and the rotating slot's second tenant — deferred to 0.2",
+      "made_in": "0.1",
+      "paid_in": null
+    }
+  ],
+  "decisions": [
+    {
+      "at": "want",
+      "note": "Premise chosen to break a copied skeleton, not for novelty. Three of five existing v2 games (back_home, the_allowance, seventh_day) are the same shape: young woman at the bottom of a household, world = interior, family men above her. the-map.md R0 names this in its own text -- 'the only two whose map starts indoors are those two' -- and SKILL.md's operating rule says an example is copied harder than a rule is read. Off Season inverts all three declared axes at once: she is the ELDER (mother/sister/aunt), map.archetype = street_mesh with the exterior as root, who_climbs = 'cast'. Cost: a roster game is more expensive to author than a ladder game (four ladders instead of one)."
+    },
+    {
+      "at": "want",
+      "note": "Cast fixed by LO: 3 male blood + 1 female blood -- Ewan 24 (son), Tam 19 (son), Roan 36 (brother), Nessa 21 (niece). All four blood; one f/f arc. Nessa is tenant #1 of the arcade back room, which is the ROTATING SLOT, so the rotation mechanism is proven from release 1. An outsider (Dov, the pier) was the runner-up and is deferred to 0.2 as the proof that the exterior is a renewable cast source."
+    },
+    {
+      "at": "want",
+      "note": "Income fixed by LO: the arcade PLUS winter turnarounds on the empty holiday lets. Two work surfaces and two sink locations, which the-economy.md R2 requires (a game passed the sinks gate at 21:20 while twelve of its sinks sat on one front desk). The lets also put her alone in other people's rooms on a schedule, which is the ground the TRIGGERED layer and the walk-in join are built from."
+    },
+    {
+      "at": "board",
+      "note": "who_climbs = 'cast' with ascent_tiers = [] -- NO player ascent bar at all. the-meters.md W1: the field splits 8 roster / 9 ladder with nothing between 15% and 65%, family games sit on the roster side, and 14 of 25 shipped sandboxes have no player ascent tier. state.md says an empty list is a legitimate declaration for a cast game. Consequence: _school_split (gates.py:1225) counts the player side as ONLY what board.ascent_tiers names, so with [] the cast side should read ~100% and gate 34 passes. Cost: four ladders to author instead of one, and gate 10 falls back to a top-3 heuristic headline -- to be checked at the board gate run before any prose exists."
+    },
+    {
+      "at": "board",
+      "note": "Per-character meters live on the NPC as [[npcs]] core_traits, read as subject = 'npc' + npc_id + trait_key. NOT as player traits named tam_want. _school_split counts only subject = 'npc' predicates on the cast side, so the prefixed-player-trait form would score 0% cast and fail gate 34 -- the exact gate this game's differentiator rests on."
+    },
+    {
+      "at": "board",
+      "note": "FOUR DISTINCT METER SHAPES across the cast, on purpose. the-meters.md W6: all five previous v2 games shipped one shape (relation + lust on everybody) and the_allowance gave two of five characters a full pair with zero gate sites. Here: Ewan = one meter + money + a flag (leverage), Tam = two (slow burn, the spine), Roan = one with many rungs (peer/courtship), Nessa = two but STAGED, the second dead until a milestone. Reserving the rich pair for Tam and Nessa follows W6's 'do not gold-plate every character'."
+    },
+    {
+      "at": "board",
+      "note": "NO counterweight meter. the-meters.md W5: one field game in 25 has one that gates anything, and four of our five shipped one that gates almost nothing (count 0 reads, standing 2, grace 5, propriety 25 reads that are all prose bands). Declining rather than taking one because the template offered one."
+    },
+    {
+      "at": "board",
+      "note": "MAP CORRECTION made during authoring, against the plan's own diagram. The plan drew the three streets cross-linking (the_front - harbour_end - terrace_row - back to the_front). engine.md 10: navigation_order may list CHILDREN ONLY and the validator hard-fails a sibling link ('includes X which is not a destination'). So harbour_end and terrace_row both hang off the_front and you cross the Front to get between them -- which is what a seafront town actually is, and it makes the exterior more load-bearing rather than less. The graph is a tree rooted on the exterior; the_front carries no entry_from, which is what gate 28 checks."
+    },
+    {
+      "at": "board",
+      "note": "Every need condition is written in the POSITIVE form -- `warmth gte 30` on the rung that IS offered, never `warmth lt 30` on a rung that is hidden. gates.py:1990: gate 10's direction test walks EVERY player trait, declared or not, and fails any whose lt/lte gates outnumber its gte/gt as 'a descent wearing an ascent's clothes'. Hidden loop traits are exempt only when hidden = true in [[traits.labels]]."
+    },
+    {
+      "at": "board",
+      "note": "Traversal heat is a build requirement, not a nice-to-have: gate 5 needs 60% of DECLARED locations to carry a REPEATABLE canvas with an explicit cycling pool (pool_dir matching _t4|_t5|/sex/). Seven of ten are budgeted hot -- the four hubs, the arcade, the flat and the lets -- which is 70%. The three streets are deliberately cold; the reference game had no sexual content in 8 of its 25 locations."
+    },
+    {
+      "at": "0.1",
+      "note": "SILENT DEFECT, caught by the BUILD and by no gate: I wrote choice-level effects as `[canvases.nodes.exit_block.choices.config]`. On a CHOICE the keys sit DIRECTLY on the choice — v1.py:1731 reads `choice.flagEffects` and :10445 validates that same path; `config` is the node-level shape for a `type = \"location\"` exit_block only. 24 blocks were affected, so the warmth grant, the hunger grant and every loop-state reset in the game were valid TOML, parsed clean, and did nothing. Same family as engine.md §21b: a number that never changes looks exactly like a number the player has not moved yet. Fixed by flattening all 24; verified in the BUILT html (entity-encoded, per §24.4 — grepping the raw form finds nothing and that is not a bug signal)."
+    },
+    {
+      "at": "0.1",
+      "note": "Gate 26 taught the same lesson four times and it is worth stating once: A BRAKE IS RESOLVED ON THE ROUTE INTO A CANVAS. A located, repeatable, room-reachable canvas has no brake on that route, so `costs` on a choice INSIDE it prices nothing. Four surfaces had to be restructured into triggerless rungs behind a priced choice — both arcade takes, the lets turnaround, the meter, the eat, and the solo loop. Tam's loop was already that shape, which is exactly why his meters were never flagged and the others' were."
+    },
+    {
+      "at": "0.1",
+      "note": "AND THE COUNTERPART, which pulls the other way: engine.md §16 requires a flag read by a trigger to be SET FROM A LOCATED CANVAS. Moving the meter's grant to a triggerless rung took `meter_fed_once` with it and hard-failed the build. The two requirements are not the same requirement and must be split: the FLAG stays on the located canvas, the GRANT moves behind the price."
+    },
+    {
+      "at": "0.1",
+      "note": "THREE METERS STARTED ABOVE THEIR OWN GATE — warmth 40 vs a gate at 30, energy 100 vs 20, hunger 60 vs 25 — so every door those needs were supposed to shut was open from turn one at zero clicks (gate 26). Fixed by starting her below each: warmth 18, energy 16, hunger 20. It is better fiction as well: the first Monday is now a real choice between the counter and a turnaround, and the first three pounds in the meter is the thing that opens the flat."
+    },
+    {
+      "at": "0.1",
+      "note": "THE EXPLICIT SWEEP, driven off the per-beat measurement rather than off a category name. The floor scored 2.6% against 7.5% with 3 of 115 beats at 3+ frozen-list words. Sorting every beat ascending showed the real shape: the beats were landing at 1 and 2, which register.md names as the signature of a beat TRYING to be explicit and pivoting off the body partway. 36 beats rewritten to keep the camera on the body through the last sentence — no gratuitous nouns added, exactly as the doctrine predicts. Result 2.6% -> 14.8%, 3 beats -> 17."
+    },
+    {
+      "at": "0.1",
+      "note": "DIALOGUE: 13:1 narration against a 5:1 ceiling and a field median of 2.93:1. Fixed with the content kind the field leans on and four of five v2 games shipped zero of — the talk screen. The four one-node talk canvases became 3-4 node conversations and 20 dialogue lines went in where a person was already standing. Solo surfaces keep their silence (register.md S3's exemption is real and narrow). 13:1 -> 5.1:1."
+    },
+    {
+      "at": "0.1",
+      "note": "OPEN AND UNRESOLVED — LOCATION FILL. Declared 33,300 words across 10 locations in the board phase, before the prose, in round numbers. Delivered 7,963 (24%). Every other gate is green (31/32) and the game builds and runs. The budget was a real plan and it was really wrong, in the direction of over-declaring: 33,300 describes a much larger release than a v0.1. This is LO's call and it is deliberately NOT being resolved by editing the number down, because a budget quietly revised to match the delivered count is the exact back-fill defect state.md was written to stop."
+    }
+  ],
+  "board": {
+    "who_climbs": "cast",
+    "ascent_tiers": [],
+    "ceilings": {},
+    "map": {
+      "archetype": "street_mesh",
+      "shape": "Ellinbay seafront in February. THE FRONT is the ground and the root -- the promenade everything opens onto. Three ways off it: the arcade (with the back room behind and her flat above), the holiday lets, and two streets, HARBOUR END (the working end, the boat yard) and TERRACE ROW (the residential street, the chip shop flat and their mother's terrace house). You cross the Front to get between the two streets, which is what a seafront town actually is.",
+      "home_base": "the_flat",
+      "exterior": "the_front",
+      "homes": {
+        "npc_ewan": "the_boat_yard",
+        "npc_tam": "the_chip_shop_flat",
+        "npc_roan": "the_terrace_house",
+        "npc_nessa": "the_back_room"
+      },
+      "bridges": [
+        {
+          "from": "the_front",
+          "to": "harbour_end",
+          "costs": {
+            "time": 15
+          }
+        },
+        {
+          "from": "the_front",
+          "to": "terrace_row",
+          "costs": {
+            "time": 15
+          }
+        },
+        {
+          "from": "the_front",
+          "to": "the_lets",
+          "costs": {
+            "time": 10
+          }
+        },
+        {
+          "from": "the_front",
+          "to": "the_arcade",
+          "costs": {}
+        }
+      ],
+      "r1_signoff": "OWED -- unsigned. LO to walk the graph and sign with a date before 0.1 ships. the-map.md: an author signing off their own map is not a sign-off, and that is exactly what the 26/26 house-shaped game recorded."
+    },
+    "locations": [
+      {
+        "id": "the_arcade",
+        "anchor": true,
+        "fill": 9000,
+        "has_cycling_pool": true,
+        "job": "Her ground and the only place in Ellinbay with her name on it. She comes here because it is where she is when nothing is happening -- the change bag, the machines that eat pound coins, the counter you can see the whole front from.",
+        "serves": {
+          "needs": [],
+          "work": [
+            "the counter"
+          ],
+          "people": [
+            "npc_nessa",
+            "npc_ewan"
+          ]
+        }
+      },
+      {
+        "id": "the_flat",
+        "anchor": false,
+        "fill": 4000,
+        "has_cycling_pool": true,
+        "job": "Home base. Two rings, an immersion, a meter that wants three pounds, and a window over a sea nobody comes to see. Where she sleeps, warms up, and is alone.",
+        "serves": {
+          "needs": [
+            "energy",
+            "warmth"
+          ],
+          "work": [],
+          "people": [
+            "npc_tam"
+          ]
+        }
+      },
+      {
+        "id": "the_back_room",
+        "anchor": false,
+        "fill": 3000,
+        "has_cycling_pool": true,
+        "job": "THE ROTATING SLOT. Behind the arcade, where Denny did what he did. Forty a week, a mattress, a curtain instead of a door. Nessa's now.",
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_nessa"
+          ]
+        }
+      },
+      {
+        "id": "the_boat_yard",
+        "anchor": false,
+        "fill": 4000,
+        "has_cycling_pool": true,
+        "job": "Ewan's, and where the lease and the arcade's books live in a drawer he keeps shut. She comes here to ask, which is the whole problem.",
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_ewan"
+          ]
+        }
+      },
+      {
+        "id": "the_chip_shop_flat",
+        "anchor": false,
+        "fill": 4000,
+        "has_cycling_pool": true,
+        "job": "Tam's -- up the outside stair over the fryers, hot in a town where nothing else is. The spine of 0.1. Also the only hot food on the front in February.",
+        "serves": {
+          "needs": [
+            "hunger"
+          ],
+          "work": [],
+          "people": [
+            "npc_tam"
+          ]
+        }
+      },
+      {
+        "id": "the_terrace_house",
+        "anchor": false,
+        "fill": 3500,
+        "has_cycling_pool": true,
+        "job": "Their mother's old place, Roan's now. The one room in Ellinbay that remembers her as somebody's daughter instead of somebody's mother.",
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_roan"
+          ]
+        }
+      },
+      {
+        "id": "the_lets",
+        "anchor": false,
+        "fill": 3500,
+        "has_cycling_pool": true,
+        "job": "Six holiday flats above the front, empty from October. She does the winter turnarounds on a key -- alone, in a room that is not hers, on a schedule other people know.",
+        "serves": {
+          "needs": [],
+          "work": [
+            "the turnaround"
+          ],
+          "people": [
+            "npc_tam",
+            "npc_roan"
+          ]
+        }
+      },
+      {
+        "id": "the_front",
+        "anchor": false,
+        "fill": 900,
+        "has_cycling_pool": false,
+        "job": "The promenade, and the ground the whole town sits on. Everything opens onto it and you cross it to get anywhere. Shuttered, wind off the water, one bin lorry.",
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_roan"
+          ]
+        }
+      },
+      {
+        "id": "harbour_end",
+        "anchor": false,
+        "fill": 700,
+        "has_cycling_pool": false,
+        "job": "The working end of the front -- trailers, a slip, diesel. The one part of Ellinbay that still has a reason to be open in February.",
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_ewan"
+          ]
+        }
+      },
+      {
+        "id": "terrace_row",
+        "anchor": false,
+        "fill": 700,
+        "has_cycling_pool": false,
+        "job": "The street behind the front where the people who live here actually live. Chip shop at one end, their mother's house at the other.",
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_tam"
+          ]
+        }
+      }
+    ],
+    "needs": [
+      {
+        "key": "energy",
+        "falls": "8 a day",
+        "fills": "the_flat - Sleep - overnight",
+        "costs": "nothing",
+        "shuts": "every work rung and every ladder rung is priced in it, so the engine stops offering them (engine.md 27). Under about 20 there is no turnaround and no rung left in the day."
+      },
+      {
+        "key": "warmth",
+        "falls": "12 a day",
+        "fills": "the_flat - Feed the meter - 5 min",
+        "costs": "GBP 3",
+        "shuts": "at warmth >= 30 the solo surface and every at-home scene in the flat are offered; below it she keeps her coat on and they are gone. Money buys heat and heat buys skin."
+      },
+      {
+        "key": "hunger",
+        "falls": "10 a day",
+        "fills": "the_chip_shop_flat - Eat what is in the pan - 20 min",
+        "costs": "GBP 4",
+        "shuts": "at hunger >= 25 the turnaround at the lets is offered; below it she cannot work a shift on nothing. And eating puts her in Tam's building at Tam's hours."
+      }
+    ],
+    "characters": [
+      {
+        "id": "npc_ewan",
+        "surfaces": 2,
+        "schedule_rows": 3,
+        "why_wanted": "She had him at fifteen and they raised each other. He took the books off her the month after Denny went in and she has not had a decision about her own building since. Being wanted by him means being UN-managed.",
+        "meters": {
+          "hold": "leverage -- how much of her he is allowed to decide. His rungs gate on `hold` x money x the `borrowed_from_ewan` flag. NO willingness meter: this arc is priced, never courted (the-meters.md W6, leverage row)."
+        }
+      },
+      {
+        "id": "npc_tam",
+        "surfaces": 3,
+        "schedule_rows": 4,
+        "why_wanted": "The one who never left and never grew out of her. Comes up the stairs for nothing and sits where he always sat. The only person here who treats her as company rather than as a situation.",
+        "meters": {
+          "ease": "access -- how long he can be in a room with her without a reason",
+          "want": "willingness odometer, warmed by the `arousal` throttle. The two-meter model, spent on the arc that carries the game (W6)."
+        }
+      },
+      {
+        "id": "npc_roan",
+        "surfaces": 2,
+        "schedule_rows": 3,
+        "why_wanted": "Her brother, five years behind. He was twelve when she got pregnant and watched the town decide who she was in a fortnight. The only witness. Being wanted by him is being told the verdict was wrong.",
+        "meters": {
+          "bond": "peer -- many small milestones, densest at the bottom. Courtship IS the climb, so there is one meter and a lot of rungs on it (W6, peer row)."
+        }
+      },
+      {
+        "id": "npc_nessa",
+        "surfaces": 2,
+        "schedule_rows": 3,
+        "why_wanted": "Her sister's girl, came for a summer job and stayed. Marnie was exactly her age with two kids. Nessa is what she would have been, and Nessa has noticed her watching.",
+        "meters": {
+          "trust": "service/tenancy -- gates alone until the milestone fires",
+          "want": "DOES NOT MOVE AT ALL until the `nessa_saw_her` milestone unlocks it. Staged, so this pair is not the same shape as Tam's (W6)."
+        }
+      }
+    ],
+    "economy": {
+      "currency": "money",
+      "obligation": "The pitch rent on the arcade -- GBP 90 a week, Monday, and EWAN collects it. He holds the lease. The reversal IS the economy: the money leaves her every Monday and goes to her son.",
+      "obligation_amount": 90,
+      "charged_by": "[settings.rent] amount = 90, due_day = Monday. NO authored payment canvas -- engine.md 26 / the-economy.md R3: a shipped game wrote the hand-over scene beside a working [settings.rent] and created a free repeatable relation faucet. The authored content is the EVENING BEFORE and the ASK, never the transaction.",
+      "sources": [
+        "the_arcade - work the counter (costs time 120 + counter_done_today flag)",
+        "the_lets - take a turnaround (costs energy 20, hunger >= 25, + turnaround_done_today flag)"
+      ],
+      "sinks": [
+        "the pitch rent (GBP 90/wk, [settings.rent])",
+        "the electric meter - the_flat - GBP 3",
+        "chips out of the pan - the_chip_shop_flat - GBP 4",
+        "a coin mech for the machine that keeps jamming - the_arcade - GBP 25",
+        "diesel for the van - harbour_end - GBP 12",
+        "cleaning stock for the turnarounds - the_lets - GBP 8"
+      ]
+    }
+  }
+}

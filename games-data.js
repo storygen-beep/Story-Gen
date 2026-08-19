@@ -21,6 +21,42 @@
 //                        NOT whatever is currently half-built in the working tree.
 window.GAMES = [
   {
+    // Listed 2026-08-19. Authored end-to-end with author-game-v2. 7,963 words across 10
+    // locations, 58 canvases, 4 characters, 14 guidance cards, 31/32 gates.
+    //
+    // Built to break a skeleton, not for novelty. Three of the five earlier v2 games
+    // (back_home, the_allowance, seventh_day) are the SAME shape — a young woman at the bottom
+    // of a household, world = interior, family men above her — and the-map.md R0 says so in its
+    // own text. This inverts all three axes the skill demands be declared and all five left on
+    // default: she is the ELDER (mother/sister/aunt), the map is `street_mesh` with the exterior
+    // as the root, and `who_climbs = "cast"` measures at 100% of the climb on the cast against a
+    // previous 19-29% — a band no shipped game in the 25-game corpus occupies. Four characters,
+    // FOUR DISTINCT meter shapes, where all five earlier games shipped one.
+    //
+    // Also the first here to ship the two things v2 has never shipped: a node-routed act menu
+    // (Tam's pose ladder, with the locked door inside it) and the talk screen at 4 conversations
+    // deep. Explicit floor 14.8% against a 7.5% floor, reached by rewriting 36 beats that were
+    // scoring 1-2 — register.md's pivot signature — with no gratuitous nouns added.
+    //
+    // ⚠️ ONE RED GATE, and it is a real debt, not a check bug: `location fill`. The board declared
+    // 33,300 words before the prose, in round numbers, and 7,963 shipped — 24%. The budget was a
+    // real plan and it was wrong in the over-declaring direction. It has deliberately NOT been
+    // edited down to match, because a budget quietly revised to the delivered count is the
+    // back-fill defect state.md exists to stop. Open call in games/off_season/v2_state.json:
+    // write the remaining ~25,400 words, or re-budget deliberately and log the amendment.
+    //
+    // ⚠️ MEDIA HAS NEVER BEEN HARVESTED. 32 cycling pools (151 clips) plus 12 fixed slots, 10
+    // location plates and 4 portraits, zero files on disk. Current output/ is a --dev --debug
+    // build, so the art shows labelled debug placeholders rather than silent gaps and the dev
+    // stat controls are visible. Run find-media, then rebuild output/ without --dev --debug, add
+    // `version`, archive to games/off_season/releases/, and drop `dev: true` in the same commit.
+    slug: "off_season",
+    title: "Off Season",
+    badge: "v2",
+    dev: true,
+    summary: `Marnie Kesh has her own name in eight-foot letters over the front of a seaside arcade that nobody walks past between October and April. Her husband has been inside four years for what he did in its back room with its money. She lives in the flat above it, feeds three pounds at a time into a coin meter to make the place warm enough to take her coat off in, and every Monday ninety pounds of pitch rent leaves her hand — into her eldest son's, because he holds the lease and took the books off her the month his father went away. Her two sons, her younger brother and her sister's girl all live inside four hundred yards of that counter, and none of them under her roof. She raised or reared every one of them and there is nothing left in this town that needs her to. Everything she climbs is somebody coming to her instead of her going to them, and it climbs on four separate ladders, because in this one the cast is what changes and not her.`,
+  },
+  {
     // Listed 2026-08-18. Authored end-to-end with author-game-v2, and the first game in this
     // repo to clear the scoreboard outright: 26/26 gates, 11,100 words across 9 locations,
     // 63 canvases, 5 characters, 29 guidance cards. Headless play-through is clean — no JS

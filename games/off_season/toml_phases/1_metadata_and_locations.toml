@@ -1,0 +1,380 @@
+# =============================================================================
+# Off Season — 1_metadata_and_locations
+#
+# ⚠️ [player], [[locations]], [[npcs]] and [[npcs.schedules]] MUST share this one
+#    file. TOML scoping re-parents nested tables across a file boundary, and
+#    [[npcs.schedules]] binds to the [[npcs]] block ABOVE it — inserting a
+#    character between an existing one and its schedules silently re-parents.
+#
+# THE MAP — archetype `street_mesh` (the-map.md R0, board.map.archetype).
+# The exterior is the GROUND, and it is a ROOT: `the_front` carries no
+# entry_from. Gate 28 reads that field and fails a leaf — the measured failure
+# was a game whose "outside" hung off the kitchen.
+#
+#   THE FRONT   (root · the promenade · everything opens onto it)
+#   ├── The Arcade            ANCHOR
+#   │   ├── The Lodger's Room     (the rotating slot, behind)
+#   │   └── Your Flat             (above — sleep, warmth, the wardrobe)
+#   ├── The Holiday Lets      (+10 min)
+#   ├── Harbour End           (+15 min)
+#   │   └── The Boat Yard
+#   └── Terrace Row           (+15 min)
+#       ├── Tam's Flat
+#       └── Your Mother's House
+#
+# ⚠️ THE TWO STREETS DO NOT LINK TO EACH OTHER, and that is an engine
+#    constraint, not a design choice: `navigation_order` may list CHILDREN ONLY
+#    and the validator hard-fails a sibling link (engine.md §10). So you cross
+#    the Front to get between Harbour End and Terrace Row — which is what a
+#    seafront town actually is, and it puts more weight on the exterior, not
+#    less. Travel friction sits on the BRIDGES off the Front, never on every
+#    room: with free instant travel a schedule grid is just a lookup table.
+#
+# ANCHOR = the_arcade, budgeted at 9,000 of 33,300 = 27% (floor 25%, gate 1).
+# It is re-enterable at every hour — the measured failure was an anchor at 29%
+# sealed in a room with no exits.
+#
+# Location NAMES are UI (the-voice.md R1): they say what is through the door.
+# "The Lodger's Room", not "The Back Room" — and it never names the tenant,
+# because that room rotates.
+# =============================================================================
+
+[player]
+id           = "player"
+name         = "Marnie"
+description  = "Thirty-nine. Her name is on the front of the arcade because she married into it at seventeen, and she had the eldest one at fifteen, and this town has never once let her forget which order those happened in."
+customizable = false
+
+[player.core_traits]
+# NO ASCENT TIER. who_climbs = "cast" — the four ladders live on the [[npcs]]
+# blocks below. the-meters.md W1; board.ascent_tiers = [].
+
+# the throttle — gates the FINISH link on the act loops and nothing else (W2)
+arousal   = 0
+
+# the body — three needs, three different doors (M8-M10)
+# ⚠️ 16, not 100. A meter whose STARTING value already clears its own gate is free in
+#    zero clicks (gate 26) — the same defect warmth had at 40 against a gate of 30.
+#    She opens the game on a Sunday night's bad sleep in a freezing flat, so the first
+#    Monday is a real choice between the counter and a turnaround.
+energy    = 16
+warmth    = 18     # February. She starts BELOW her own 30 gate, so the flat
+                   # is shut until she pays the meter. Gate 26: starting above your
+                   # own threshold makes the climb free in zero clicks.
+hunger    = 20     # BELOW her own 25 gate, same reason as energy and warmth
+
+# ⚠️ money is a QUANTITY, not a 0-100 meter. EVERY effect that writes it must
+#    carry `clamp = false` (engine.md §21). Clamped, it caps at 100, the GBP 90
+#    Monday draw becomes unpayable within two weeks of takings, and the build is
+#    green the whole way down: a capped effect looks identical to a working one
+#    in the TOML, the validator, the build log and the scoreboard.
+money     = 22
+
+# internals — hidden in [[traits.labels]], see 0_systems_spec
+# ⚠️ `takings_today` and `tenant_slot` were declared here and CUT after gate 33: one
+#    was raised twice and read by nothing, the other was never touched at all. A
+#    number the player watches move that gates nothing is not a meter (W3).
+loop_stage    = 0
+
+# ⚠️ Decay is a POSITIVE MAGNITUDE — the validator rejects a negative.
+[player.trait_decay]
+energy = 8
+warmth = 12
+hunger = 10
+
+
+# =============================================================================
+# LOCATIONS — 10, derived from needs + work + people inside the chosen shape,
+# not picked. Budgets are declared in v2_state.json board.locations[].fill, in
+# round numbers, BEFORE the prose: gate 1 refuses to credit a budget that is
+# mostly non-round, because all three earlier v2 games filled that field in
+# afterwards from the delivered word count and matched their own plan 8/8 while
+# proving nothing.
+# =============================================================================
+
+# ── THE GROUND. Root: no entry_from. ─────────────────────────────────────────
+[[locations]]
+id                   = "the_front"
+name                 = "The Front"
+description          = "Half a mile of promenade with the sea on one side and the shut side of the season on the other. Boarded windows, a bin lorry that comes Tuesdays, and the wind coming straight up off the water with nothing between here and Denmark to slow it. Everything in Ellinbay opens onto this, and you cross it to get anywhere."
+image                = "locations/the_front.jpg"
+image_search_queries = ["english seaside promenade winter grey empty shuttered", "off season seafront boarded arcade rain"]
+navigation_order     = ["the_arcade", "the_lets", "harbour_end", "terrace_row"]
+
+# ── ANCHOR. Her ground, her name, her hours. ─────────────────────────────────
+[[locations]]
+id                   = "the_arcade"
+name                 = "The Arcade"
+description          = "KESH AMUSEMENTS in eight-foot letters over the door, and under them forty machines, half of them off at the wall to save the electric. Carpet the colour of a bruise, a change booth with a hatch you have to stoop to, and the damp coming through above the door where it has come through for four winters. From the counter you can see the whole length of the front."
+image                = "locations/the_arcade.jpg"
+image_search_queries = ["old seaside amusement arcade interior slot machines dim", "penny arcade british pier interior night carpet"]
+entry_from           = "the_front"
+navigation_order     = ["the_back_room", "the_flat"]
+
+# ── THE ROTATING SLOT. Room-scoped content ONLY; names the occupant by ROLE. ─
+# the-board.md §2: TENANT content dies with the tenant and lives in 5_scenes;
+# ROOM content is the slot itself and lives in 3_activities. The room's own
+# prose never says "Nessa" — a rotation then costs one [[npcs]] block and one
+# scene block instead of a rewrite of every surface in here.
+[[locations]]
+id                   = "the_back_room"
+name                 = "The Lodger's Room"
+description          = "Behind the arcade, through the door marked PRIVATE. A mattress on a frame, a rail with four hangers, a curtain hung across the doorway because the door came off its hinges before you were married. This is the room your husband did what he did in, and it is the room you let out for forty a week now, and both of those are true at once."
+image                = "locations/the_back_room.jpg"
+image_search_queries = ["bare back room mattress curtain doorway single bulb", "storeroom converted bedsit rail hangers dim"]
+entry_from           = "the_arcade"
+navigation_order     = []
+
+# ── HOME BASE. Sleep, warmth, the wardrobe, and the only door she can shut. ──
+[[locations]]
+id                   = "the_flat"
+name                 = "Your Flat"
+description          = "Up the inside stair from the arcade floor. Two rings, a kettle, an immersion with a coin meter screwed to the wall beside it, and a window over a sea that nobody comes to look at until April. It is yours in the sense that nobody else sleeps here. It is not yours in any of the other senses."
+image                = "locations/the_flat.jpg"
+image_search_queries = ["small cold flat above shop kitchen window sea", "bedsit two ring hob kettle worn interior night"]
+entry_from           = "the_arcade"
+navigation_order     = []
+
+# ── WORK 2. Alone, on a key, in a room that is not hers, on a schedule. ──────
+[[locations]]
+id                   = "the_lets"
+name                 = "The Holiday Lets"
+description          = "Six flats over the shut shops at the Terrace end, let by the week from Easter and empty the rest of the year. You do the winter turnarounds on the agency's key — strip the beds, run the taps so the traps don't dry, hoover a carpet nobody has walked on since September. Other people's rooms, other people's things in the drawers, and the agency's list on the fridge with your name at the top of it."
+image                = "locations/the_lets.jpg"
+image_search_queries = ["empty holiday flat stripped bed cleaning winter", "vacant seaside apartment bare mattress hoover"]
+entry_from           = "the_front"
+navigation_order     = []
+costs                = { time = 10 }
+
+# ── The working end of the front. ────────────────────────────────────────────
+[[locations]]
+id                   = "harbour_end"
+name                 = "Harbour End"
+description          = "Where the promenade gives up and turns into concrete, trailers and a slip going down into brown water. Diesel, rope, a chandlery that opens when it feels like it. The one part of Ellinbay with a reason to be awake in February, which is why your eldest ended up down here and not in the arcade."
+image                = "locations/harbour_end.jpg"
+image_search_queries = ["small harbour slipway boat trailers winter grey", "fishing harbour concrete slip diesel drums"]
+entry_from           = "the_front"
+navigation_order     = ["the_boat_yard"]
+costs                = { time = 15 }
+
+# ── Ewan's, and where the lease lives. ───────────────────────────────────────
+[[locations]]
+id                   = "the_boat_yard"
+name                 = "The Boat Yard"
+description          = "Four hulls up on stands under a roof with three sheets missing, a compressor, and a stove made out of half an oil drum that he keeps going all day. The office is a caravan with the wheels off. The arcade's folder lives in the second drawer of a desk in there, and so does the lease, and so does everything anybody knows about what your family actually owns."
+image                = "locations/the_boat_yard.jpg"
+image_search_queries = ["boat yard workshop hulls on stands winter", "marine repair shed interior tools oil drum stove"]
+entry_from           = "harbour_end"
+navigation_order     = []
+
+# ── The street where people actually live. ───────────────────────────────────
+[[locations]]
+id                   = "terrace_row"
+name                 = "Terrace Row"
+description          = "One street back from the front, out of the wind, and the only road in Ellinbay with lights on behind the curtains in February. Chip shop at the seaward end with a flat over it. Your mother's house at the other, eleven doors down, and the eleven doors between them all know exactly who you are."
+image                = "locations/terrace_row.jpg"
+image_search_queries = ["english seaside terraced street night wet road", "narrow terrace houses back street lamplight winter"]
+entry_from           = "the_front"
+navigation_order     = ["the_chip_shop_flat", "the_terrace_house"]
+costs                = { time = 15 }
+
+# ── Tam's. The spine of 0.1, and the only hot food on the front. ─────────────
+[[locations]]
+id                   = "the_chip_shop_flat"
+name                 = "Tam's Flat"
+description          = "Up the outside stair at the side of the chip shop, and the whole flat sits on top of the fryers, so it is the only warm room in Ellinbay between October and April and it smells permanently of beef dripping. One bed against the wall that backs onto the extractor, a chair, a pan on the hob with whatever he made at four in the morning still in it."
+image                = "locations/the_chip_shop_flat.jpg"
+image_search_queries = ["small flat above chip shop messy bed daylight", "cramped bedsit unmade bed radiator curtains drawn day"]
+entry_from           = "terrace_row"
+navigation_order     = []
+
+# ── Roan's now. The one room that remembers her as a daughter. ───────────────
+[[locations]]
+id                   = "the_terrace_house"
+name                 = "Your Mother's House"
+description          = "Eleven doors down, and Roan has changed nothing — the same front room, the same carpet, the barometer in the hall that has said CHANGE since 1998. He sleeps in the back bedroom, not hers. You grew up in this house and there is a mark on the door frame at the bottom of the stairs where somebody once measured you both."
+image                = "locations/the_terrace_house.jpg"
+image_search_queries = ["dated english terraced house front room 1990s carpet", "old fashioned living room net curtains lamp evening"]
+entry_from           = "terrace_row"
+navigation_order     = []
+
+
+# =============================================================================
+# CHARACTERS — four, all blood, FOUR DISTINCT METER SHAPES.
+#
+# the-meters.md W6: all five earlier v2 games shipped ONE meter shape across
+# the whole cast (`relation = 0, lust = 0` on everybody), and the_allowance
+# gave two of five characters a full pair with ZERO gate sites on either. The
+# meter is picked from what the relationship IS:
+#
+#   Ewan   leverage / transactional  ->  `hold` ONLY. His rungs gate on hold x
+#                                        money x the `borrowed_from_ewan` flag.
+#                                        No willingness meter: priced, never courted.
+#   Tam    slow burn / escalation    ->  `ease` (access) + `want` (willingness,
+#                                        warmed by the arousal throttle). The
+#                                        rich pair, spent on the arc that
+#                                        carries the game.
+#   Roan   peer                      ->  `bond` ONLY, with many small rungs.
+#                                        Courtship IS the climb.
+#   Nessa  lodger -> escalation      ->  `trust` + `want`, but STAGED: `want`
+#                                        does not move at all until the
+#                                        milestone fires, so this pair is not
+#                                        the same shape as Tam's.
+#
+# ⚠️ These are NPC-subject meters, read as
+#      { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "want" }
+#    NOT player traits named `tam_want`. _school_split (gates.py:1225) counts
+#    only `subject = "npc"` predicates on the cast side, so the prefixed-player
+#    form would score 0% cast and fail gate 34 — the gate this whole game's
+#    declaration rests on.
+#
+# ⚠️ RUNGS OPEN AT 4-5, NOT 15. All 16 declared tiers across five v2 games put
+#    their lowest rung at exactly 15; the field runs 8-17 rungs with the lowest
+#    at ~5, densest at the bottom (W4).
+# =============================================================================
+
+# ── EWAN — the reversal, and the man who collects the rent ───────────────────
+[[npcs]]
+id          = "npc_ewan"
+name        = "Ewan"
+description = "Twenty-four, and you were fifteen when you had him, so the pair of you came up together more than one of you raised the other. He took the arcade's books off you the month after his father went in because somebody had to and nobody else offered. He holds the lease. He is at the yard from eight, he does not stop for lunch, and he has never once raised his voice at you, which is worse."
+portrait    = "ewan.jpg"
+core_traits = { hold = 0 }
+flag_keys   = ["borrowed_from_ewan"]
+arc_stages  = ["Your eldest", "The one holding it", "Setting the terms", "Deciding"]
+
+[[npcs.schedules]]
+location   = "harbour_end"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "07:00"
+end_time   = "08:00"
+activity   = "backing a trailer down the slip in the dark"
+
+[[npcs.schedules]]
+location   = "the_boat_yard"
+weekdays   = [0, 1, 2, 3, 4, 5]
+start_time = "08:00"
+end_time   = "18:00"
+activity   = "under a hull with the radio going and the drum stove lit"
+
+# Monday evening at your counter with the folder. The rent itself is charged by
+# [settings.rent] — this row is so he is FINDABLE that night, not so a canvas
+# can narrate the payment. the-economy.md R3.
+[[npcs.schedules]]
+location   = "the_arcade"
+weekdays   = [0]
+start_time = "19:00"
+end_time   = "20:30"
+activity   = "doing the folder on your counter with his coat still on"
+
+
+# ── TAM — the spine ──────────────────────────────────────────────────────────
+[[npcs]]
+id          = "npc_tam"
+name        = "Tam"
+description = "Nineteen, on the fryers five nights a week, and the only person in this town who comes up your stairs when nothing is wrong. He never left and he never grew out of you. He sits where he has always sat, eats what is in the pan, and has no idea that being the one who turns up for nothing is what he is to you now."
+portrait    = "tam.jpg"
+core_traits = { ease = 0, want = 0 }
+flag_keys   = ["tam_saw_you", "tam_stayed"]
+arc_stages  = ["Your youngest", "Around", "Not leaving", "Waiting for you"]
+
+# Asleep, or getting there, with the fryers going underneath. This is his hub
+# window and the one the whole ladder is built in.
+[[npcs.schedules]]
+location   = "the_chip_shop_flat"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "15:00"
+activity   = "half asleep on top of the covers with the extractor going through the wall"
+
+[[npcs.schedules]]
+location   = "terrace_row"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "07:00"
+end_time   = "08:00"
+activity   = "coming off nights with his hood up and his hands in his sleeves"
+
+# Tuesday and Friday mornings at the lets — this is half the walk-in join there.
+[[npcs.schedules]]
+location   = "the_lets"
+weekdays   = [1, 4]
+start_time = "09:00"
+end_time   = "11:00"
+activity   = "dragging the bins round for the agency because they pay cash"
+
+# Wednesday and Saturday evenings, up your stairs for no reason at all — the
+# other half of the walk-in join in your own flat.
+[[npcs.schedules]]
+location   = "the_flat"
+weekdays   = [2, 5]
+start_time = "18:00"
+end_time   = "20:00"
+activity   = "in your chair with his boots off, for no reason he could give you"
+
+
+# ── ROAN — the witness ───────────────────────────────────────────────────────
+[[npcs]]
+id          = "npc_roan"
+name        = "Roan"
+description = "Your brother, five years behind you, back in your mother's house with a holdall and no explanation about Bristol. He was twelve when you got pregnant and he watched the whole street decide who you were in about a fortnight, and he is the only person still alive who was in the room for any of it. He talks to you like the girl. Nobody else has in twenty-four years."
+portrait    = "roan.jpg"
+core_traits = { bond = 0 }
+flag_keys   = ["roan_back_door"]
+arc_stages  = ["Your brother", "Round most nights", "Not going home", "The back door"]
+
+[[npcs.schedules]]
+location   = "the_terrace_house"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "23:00"
+activity   = "in your mother's front room with the telly on mute"
+
+[[npcs.schedules]]
+location   = "the_front"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "09:00"
+end_time   = "11:00"
+activity   = "walking the length of it because there is nothing else to do with a morning"
+
+# Wednesday afternoons in the van — the other half of the walk-in join at the lets.
+[[npcs.schedules]]
+location   = "the_lets"
+weekdays   = [2]
+start_time = "13:00"
+end_time   = "16:00"
+activity   = "shifting mattresses out of number four for the agency"
+
+
+# ── NESSA — the rotating slot's first tenant ─────────────────────────────────
+[[npcs]]
+id          = "npc_nessa"
+name        = "Nessa"
+description = "Your sister's girl, twenty-one, came down for a summer job on the front and did not go back. Forty a week for the room behind the arcade and a curtain instead of a door. You were exactly her age with two of them already, and she is the version where none of that happened, and she has worked out that you cannot stop looking at her."
+portrait    = "nessa.jpg"
+core_traits = { trust = 0, want = 0 }
+flag_keys   = ["nessa_saw_her", "nessa_curtain_open"]
+arc_stages  = ["The lodger", "Letting you in", "Leaving it open", "Coming upstairs"]
+
+# ✅ Wraps midnight in ONE row, because the row covers all seven weekdays. A
+#    DAY-SPECIFIC overnight window needs TWO rows: the weekday check runs first
+#    against TODAY (v2.py:3453) and deletes the character at midnight.
+[[npcs.schedules]]
+location   = "the_back_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "08:00"
+activity   = "asleep behind the curtain with the arcade humming through the wall"
+
+[[npcs.schedules]]
+location   = "the_back_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "12:00"
+end_time   = "15:00"
+activity   = "sat on the mattress on her phone with the curtain half back"
+
+[[npcs.schedules]]
+location   = "the_arcade"
+weekdays   = [5, 6]
+start_time = "12:00"
+end_time   = "17:00"
+activity   = "on the change booth, not looking at the front"
