@@ -1,0 +1,345 @@
+# =============================================================================
+# Off Season — 0_systems_spec
+# Built with author-game-v2. Want + board: games/off_season/v2_state.json
+#
+# WHO CLIMBS: "cast".  the-meters.md W1.
+#   The field splits 8 roster / 9 ladder with NOTHING between 15% and 65%, and
+#   all five previous v2 games landed at 19-29% because nobody asked. This game
+#   asks and answers: there is NO player ascent bar. `board.ascent_tiers = []`.
+#   The four ladders are the four people, and they live on the [[npcs]] blocks
+#   as `subject = "npc"` meters — which is what gates.py:1225 counts.
+#
+# METERS
+#   ASCENT      none on the player. Per-character: ewan.hold · tam.ease+want
+#               · roan.bond · nessa.trust+want — FOUR DISTINCT SHAPES (W6).
+#   THROTTLE    arousal — gates the FINISH link on the act loops and nothing
+#               else, resets to 0 at climax (W2). Five previous games raised it
+#               232 times and read it 4.
+#   NEEDS       energy · warmth · hunger — each shuts a DIFFERENT door (M8-M10).
+#   CURRENCY    money.
+#   NO COUNTERWEIGHT. One field game in 25 has one that gates anything; four of
+#   our five shipped a dead one (W5). Declined on purpose.
+#
+# ⚠️ RUNG SPACING DOES NOT START AT 15. All 16 declared tiers across the five
+#    previous v2 games put their lowest rung at exactly 15 — fifteen clicks in
+#    which nothing the player does changes anything — against a field running
+#    8-17 rungs with the lowest at ~5 (W4). Every ladder here opens at 4 or 5
+#    and is densest at the bottom.
+# =============================================================================
+
+schema_version = "1.0"
+
+[project]
+id              = "off_season"
+title           = "Off Season"
+description     = "Her name is on the front of the arcade in eight-foot letters and the town is shut until April. Her two sons, her brother and her sister's girl all live inside four hundred yards, and every one of them owes her."
+starting_canvas = "canvas_opening"
+quests_engine   = "v2"
+version         = "0.1"
+
+[time]
+starting_hour = 7
+starting_day  = "Monday"
+starting_week = 1
+
+[settings]
+narration_person  = "second"
+clothing_enabled  = true
+wardrobe_location = "the_flat"
+
+[theme]
+mode = "dark"
+
+
+# ─── The pitch rent — the ENGINE under everything ────────────────────────────
+# GBP 90 a week, Monday, and her SON collects it. Ewan holds the lease. The
+# reversal is not a scene, it is the economy: the money leaves her every Monday
+# and goes to the boy she had at fifteen.
+#
+# ⚠️ THE ENGINE CHARGES THIS. Do NOT author a canvas that narrates the payment.
+#    engine.md §26 / the-economy.md R3 — a shipped game wrote the hand-over
+#    scene beside a working [settings.rent] and the authored canvas carried no
+#    cost and no money effect, which made it a free, repeatable, unlimited
+#    relation faucet in both directions. The authored content is the EVENING
+#    BEFORE and the ASK. Never the transaction.
+#
+# ⚠️ WEEKLY ONLY. due_day validates against weekday names; there is no monthly
+#    period in the engine.
+#
+# eviction_mode = "flag_set", NOT the default "game_end": the product never
+# ends. Missing it sets `lease_called` and Ewan stops collecting and starts
+# deciding.
+[settings.rent]
+enabled          = true
+amount           = 90
+due_day          = "Monday"
+collector_npc    = "npc_ewan"
+grace_periods    = 1
+start_after_flag = "season_shut"
+eviction_mode    = "flag_set"
+eviction_flag    = "lease_called"
+
+[settings.rent.text]
+title            = "Monday"
+scene            = "He comes up the front at half seven with the folder under his arm and lets himself in, because the shutter key is his as well. He puts the folder on the counter and turns it round to face you, which is a thing he learned off somebody and not off you."
+greeting         = "Right. Ninety."
+paid_scene       = "You count it out of the change bag in coins and fives, because that is what an arcade pays in, and he stacks it into columns on the glass while you watch and writes the figure in the folder in his father's handwriting."
+paid_response    = "That's the week. I'll do the mech Thursday."
+paid_closing     = "He takes the folder back under his arm and pulls the shutter down two feet behind him on the way out, the way Denny used to, without noticing he has done it."
+cant_pay         = "You haven't got the ninety."
+warning_scene    = "You tell him it is short. He does not raise his voice — he never has. He closes the folder and looks round the arcade instead, at the carpet and the change machine and the damp above the door, pricing all of it the way a man prices a thing he already owns."
+warning_response = "One week, Mum. I'm not the landlord. I'm just the one holding it."
+warning_closing  = "He leaves the folder open on the counter facing you when he goes, so you can read what the pitch has cost every week since his father went in."
+eviction_scene_soft    = "The second Monday he does not open the folder at all. He takes his coat off, which he has not done in this building in four years, and hangs it on the hook behind the counter where your husband's used to go, and sits down on your stool."
+eviction_response_soft = "We're past the ninety. Let's talk about what you're actually doing with this place."
+eviction_closing_soft  = "He stays until you turn the machines off, and on the way out he tells you which one he would rip out first."
+
+
+# =============================================================================
+# SIDEBAR — the needs, the throttle, and the money.
+#
+# ⚠️ EVERY BANDED KEY IS `hidden = true` IN [[traits.labels]] BELOW. The sidebar
+#    prints a trait twice — once from the auto Traits dump, once from whatever
+#    [[sidebar_items]] you wrote — and the two do not know about each other
+#    (engine.md §30). Gate 27 fails a banded item whose key is not hidden.
+#
+# ⚠️ NO `max` ON A TOP BAND: a banded value landing outside every band renders
+#    NOTHING, which reads as a missing HUD element rather than a wrong number.
+# =============================================================================
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "warmth"
+bands = [
+  { min = 0,  max = 29, text = "Coat on indoors" },
+  { min = 30, text = "Took the coat off" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "hunger"
+bands = [
+  { min = 0,  max = 24, text = "Running on tea" },
+  { min = 25, text = "Had something" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "energy"
+bands = [
+  { min = 0,  max = 19, text = "Done in" },
+  { min = 20, text = "Standing up" },
+]
+
+# The throttle. Banded and value-hidden per the-meters.md M7 (transient mood):
+# the player sees the band, never the volatile figure.
+[[sidebar_items]]
+type       = "trait_bar"
+trait      = "arousal"
+hide_value = true
+bands = [
+  { min = 0,  max = 29, text = "—" },
+  { min = 30, max = 64, text = "Aware of it" },
+  { min = 65, max = 100, text = "Not going to be able to leave it" },
+]
+
+# Countable resource: the exact figure, NO bands. You do not band a thing the
+# player is counting against a Monday deadline (M7).
+[[sidebar_items]]
+type       = "trait_bar"
+trait      = "money"
+hide_value = false
+
+
+# ─── Trait labels ────────────────────────────────────────────────────────────
+[[traits.labels]]
+key   = "money"
+label = "Change bag"
+
+# Banded above -> hidden here, or they print twice (engine.md §30, gate 27).
+[[traits.labels]]
+key    = "warmth"
+hidden = true
+
+[[traits.labels]]
+key    = "hunger"
+hidden = true
+
+[[traits.labels]]
+key    = "energy"
+hidden = true
+
+[[traits.labels]]
+key    = "arousal"
+hidden = true
+
+# Loop state. Hidden numeric traits, never flags — a flag set inside a
+# triggerless canvas has no located setter and HARD-FAILS the build
+# (engine.md §16). the-surfaces.md R3b.
+[[traits.labels]]
+key    = "loop_stage"
+hidden = true
+
+
+
+# =============================================================================
+# DAY ROLLOVER — [engine.daily_tick] (engine.md §28)
+#
+# ⚠️ THE ONLY CLEAN WAY TO DAY-CAP A TRIGGERLESS RUNG, and nearly every rung in
+#    a v2 game is triggerless. `max_triggers_per_day` is read off the TRIGGER
+#    (v2.py:11017), so a hub choice has none. the-meters.md M5.
+#
+# ⚠️ USE A FLAG, NOT A COUNTER TRAIT. A hidden counter read with `lt` puts a
+#    player trait in the game whose only conditions close content, which reads
+#    to gate 10 as a descent wearing an ascent's clothes. Flags are not meters.
+#
+# A game with no [engine] section has no rollover hook at all, so any _today
+# state survives midnight unless the player happens to sleep.
+# =============================================================================
+[engine.daily_tick]
+flagEffects = [
+  { targetType = "player", flag = "counter_done_today",    op = "unset" },
+  { targetType = "player", flag = "turnaround_done_today", op = "unset" },
+  { targetType = "player", flag = "ewan_rung_today",       op = "unset" },
+  { targetType = "player", flag = "tam_rung_today",        op = "unset" },
+  { targetType = "player", flag = "roan_rung_today",       op = "unset" },
+  { targetType = "player", flag = "nessa_rung_today",      op = "unset" },
+  { targetType = "player", flag = "ewan_talk_today",       op = "unset" },
+  { targetType = "player", flag = "tam_talk_today",        op = "unset" },
+  { targetType = "player", flag = "roan_talk_today",       op = "unset" },
+  { targetType = "player", flag = "nessa_talk_today",      op = "unset" },
+  { targetType = "player", flag = "slept_today",           op = "unset" },
+]
+
+
+# =============================================================================
+# GUIDANCE — [[quest_cards]] (engine.md §23; the-voice.md R2/R3/R5)
+#
+# ⚠️ NO `version = "1.0"` ON A QUEST CARD. Quest conditions use a separate
+#    evaluator with no fail-open.
+#
+# This game declares NO ascent tiers, so there are no tier cards — the whole
+# page is the four people, which is what a roster game's guidance page IS.
+#
+# Every goal label names a PLACE, a PERSON and a VERB, with the window when the
+# rung is schedule-gated (R3). "Prove yourself to Ewan" fails: no place, no
+# clickable action.
+#
+# Every ladder keeps a card that STILL MATCHES after its last authored rung
+# (R5, gate 15) — otherwise the character vanishes from the page and the
+# sidebar next-row at the exact moment they become permanent sandbox content.
+# =============================================================================
+
+# ── TAM — the spine. ease (access) then want (willingness). ──────────────────
+[[quest_cards]]
+priority = 30
+npc_id   = "npc_tam"
+text     = "He comes up the stairs for nothing and sits where he has always sat, and you have started making him a reason to stay. Nineteen, on nights, and the only person in Ellinbay who turns up when nothing is wrong."
+tip      = "He is in the flat over the chip shop from eight in the morning, sleeping off the shift. Take the stairs up and stay past the tea."
+when     = [ { trait = "ease", subject = "npc", npc_id = "npc_tam", op = "lt", value = 20 } ]
+goals    = [ { trait = "ease", subject = "npc", npc_id = "npc_tam", op = "gte", value = 20, label = "Stay past the tea — his flat, mornings" } ]
+
+[[quest_cards]]
+priority = 30
+npc_id   = "npc_tam"
+text     = "He does not put a shirt on for you any more and neither of you has mentioned it. The room is hot because the fryers are underneath it, which is the excuse you have both agreed to use."
+tip      = "Stop finding a reason to be there. Go up with nothing to bring him."
+when     = [ { trait = "ease", subject = "npc", npc_id = "npc_tam", op = "gte", value = 20 },
+             { trait = "want", subject = "npc", npc_id = "npc_tam", op = "lt",  value = 22 } ]
+goals    = [ { trait = "want", subject = "npc", npc_id = "npc_tam", op = "gte", value = 22, label = "Go up with nothing to bring him — his flat, mornings" } ]
+
+[[quest_cards]]
+priority = 30
+npc_id   = "npc_tam"
+text     = "He has stopped waiting for you to leave. Whatever it is has a shape now, and the shape is his bed at nine in the morning with the fryers going underneath."
+tip      = "Take it further in his flat, mornings — and don't be the one who stops."
+when     = [ { trait = "want", subject = "npc", npc_id = "npc_tam", op = "gte", value = 22 },
+             { trait = "want", subject = "npc", npc_id = "npc_tam", op = "lt",  value = 50 } ]
+goals    = [ { trait = "want", subject = "npc", npc_id = "npc_tam", op = "gte", value = 50, label = "Don't be the one who stops — his flat, mornings" } ]
+
+[[quest_cards]]
+priority = 29
+npc_id   = "npc_tam"
+text     = "He wants you to stay the night and has not worked out how to ask for it, and you have not worked out what you would say. That is where this build stops with him; it picks up in a future update."
+when     = [ { trait = "want", subject = "npc", npc_id = "npc_tam", op = "gte", value = 50 } ]
+
+# ── EWAN — leverage. One meter, priced in money and a debt flag. ─────────────
+[[quest_cards]]
+priority = 31
+npc_id   = "npc_ewan"
+text     = "He took the books off you the month after his father went in and he was right to, and you have not had a decision about your own building since. He is twenty-four. You were fifteen."
+tip      = "He is at the boat yard all day. Go down and ask him for something instead of waiting for Monday."
+when     = [ { trait = "hold", subject = "npc", npc_id = "npc_ewan", op = "lt", value = 18 } ]
+goals    = [ { trait = "hold", subject = "npc", npc_id = "npc_ewan", op = "gte", value = 18, label = "Ask him for something — the boat yard, daytime" } ]
+
+[[quest_cards]]
+priority = 31
+npc_id   = "npc_ewan"
+text     = "You have borrowed off him twice now and he has started saying what the money is for before you do. Every pound of it moves a decision from your side of the counter to his."
+tip      = "Borrow again at the boat yard and let him set the terms out loud."
+when     = [ { trait = "hold", subject = "npc", npc_id = "npc_ewan", op = "gte", value = 18 },
+             { trait = "hold", subject = "npc", npc_id = "npc_ewan", op = "lt",  value = 40 } ]
+goals    = [ { trait = "hold", subject = "npc", npc_id = "npc_ewan", op = "gte", value = 40, label = "Let him set the terms — the boat yard, daytime" } ]
+
+[[quest_cards]]
+priority = 30
+npc_id   = "npc_ewan"
+text     = "He decides what the arcade does now, and lately what you do in it, and the only thing left to hand him is the flat above. There is a loft over the yard he has not offered you and has not stopped mentioning. That is a future update."
+when     = [ { trait = "hold", subject = "npc", npc_id = "npc_ewan", op = "gte", value = 40 } ]
+
+# ── ROAN — peer. One meter, many small rungs; courtship IS the climb. ────────
+[[quest_cards]]
+priority = 32
+npc_id   = "npc_roan"
+text     = "Your brother is back in your mother's house with nothing, five years behind you, and he is the only person alive who remembers the fortnight the town spent deciding who you were."
+tip      = "He is at the terrace house evenings. Go round the back the way you used to."
+when     = [ { trait = "bond", subject = "npc", npc_id = "npc_roan", op = "lt", value = 12 } ]
+goals    = [ { trait = "bond", subject = "npc", npc_id = "npc_roan", op = "gte", value = 12, label = "Go round the back — the terrace house, evenings" } ]
+
+[[quest_cards]]
+priority = 32
+npc_id   = "npc_roan"
+text     = "He talks to you like the girl and not the mother, which nobody has done in twenty-four years, and you have started going round on nights you have no reason to."
+tip      = "Stay later than the drink at the terrace house, evenings."
+when     = [ { trait = "bond", subject = "npc", npc_id = "npc_roan", op = "gte", value = 12 },
+             { trait = "bond", subject = "npc", npc_id = "npc_roan", op = "lt",  value = 25 } ]
+goals    = [ { trait = "bond", subject = "npc", npc_id = "npc_roan", op = "gte", value = 25, label = "Stay later than the drink — the terrace house, evenings" } ]
+
+[[quest_cards]]
+priority = 32
+npc_id   = "npc_roan"
+text     = "Neither of you goes home at the point where you used to, and the back door has stopped being locked. Your mother's front room, and the pair of you in it, and nobody in Ellinbay any the wiser."
+tip      = "Don't go home — the terrace house, evenings."
+when     = [ { trait = "bond", subject = "npc", npc_id = "npc_roan", op = "gte", value = 25 },
+             { trait = "bond", subject = "npc", npc_id = "npc_roan", op = "lt",  value = 42 } ]
+goals    = [ { trait = "bond", subject = "npc", npc_id = "npc_roan", op = "gte", value = 42, label = "Don't go home — the terrace house, evenings" } ]
+
+[[quest_cards]]
+priority = 31
+npc_id   = "npc_roan"
+text     = "He has stopped locking the back door and you have stopped knocking. What that turns into is a future update."
+when     = [ { trait = "bond", subject = "npc", npc_id = "npc_roan", op = "gte", value = 42 } ]
+
+# ── NESSA — staged. trust gates alone until the milestone opens `want`. ──────
+[[quest_cards]]
+priority = 33
+npc_id   = "npc_nessa"
+text     = "Your sister's girl, twenty-one, forty a week for the back room and a curtain instead of a door. You were exactly her age with two of them, and you cannot stop watching her, and she has noticed."
+tip      = "She is in the back room most of the day. Take her tea in and stay in there."
+when     = [ { trait = "trust", subject = "npc", npc_id = "npc_nessa", op = "lt", value = 20 } ]
+goals    = [ { trait = "trust", subject = "npc", npc_id = "npc_nessa", op = "gte", value = 20, label = "Take her tea in and stay — the back room, daytime" } ]
+
+[[quest_cards]]
+priority = 33
+npc_id   = "npc_nessa"
+text     = "She leaves the curtain open now when she changes, and she waits to see what you do about it, and so far what you do about it is not leave."
+tip      = "Don't leave — the back room, daytime."
+when     = [ { trait = "trust", subject = "npc", npc_id = "npc_nessa", op = "gte", value = 20 },
+             { trait = "want",  subject = "npc", npc_id = "npc_nessa", op = "lt",  value = 18 } ]
+goals    = [ { trait = "want", subject = "npc", npc_id = "npc_nessa", op = "gte", value = 18, label = "Don't leave — the back room, daytime" } ]
+
+[[quest_cards]]
+priority = 32
+npc_id   = "npc_nessa"
+text     = "She comes up to the flat now instead of waiting to be fetched, which is the whole direction of this thing in one sentence. Where it goes is a future update."
+when     = [ { trait = "want", subject = "npc", npc_id = "npc_nessa", op = "gte", value = 18 } ]

@@ -1,0 +1,1064 @@
+# =============================================================================
+# Off Season — 5_scenes
+#
+# TENANT-SCOPED. Four ladders, four people, FOUR DIFFERENT METER SHAPES. This is
+# the file that dies with a character; the room they stand in is in 3_activities
+# and survives them.
+#
+# ⚠️ RUNG CANVASES ARE TRIGGERLESS and reached by node link from a hub
+#    (`nodeId = "<canvas>.<node>"`). A triggerless link-target inherits its
+#    location and repeatability from whatever links to it, so its prose still
+#    counts to the room. Two NPC-bound canvases at the same location in the same
+#    window would collide (engine.md §19) — this is how you get depth without
+#    the collision, and without widening the room's list.
+#
+# ⚠️ EVERY RUNG IS BRAKED, and with TWO levers, not one (the-meters.md M4):
+#    a `costs` entry the engine enforces by refusing the choice, AND a
+#    `<npc>_rung_today` flag cleared in [engine.daily_tick]. Measured failure:
+#    a game shipped three correctly-gated tiers with no brake on any of them and
+#    moved a meter 4 -> 16 in twelve clicks of one free choice, topping out all
+#    three tiers inside two in-game days, and scored 22/24.
+#
+# ⚠️ NOT `max_triggers_per_day` — that is read off the TRIGGER (v2.py:11017) and
+#    a triggerless rung has none. It does nothing here. M5.
+#
+# ⚠️ THE HUB OPENER IS ONE CONSTANT PARAGRAPH. Do not tier it into bands per
+#    meter — an arc whose base node rewrites itself per stat band reads as N
+#    different scenes instead of one escalating hub. What moves on re-entry is
+#    the CHOICE LIST and the presence line, not the identity sentence.
+# =============================================================================
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# TAM — THE SPINE. `ease` (access) -> `want` (willingness), warmed by arousal.
+# The rich two-meter model, spent on the one arc that carries the game.
+#
+# His surface is the game's most re-entered, so it is where the crudest writing
+# lives (the-want.md §6). The measured failure inverted exactly this: 95% of one
+# game's explicit prose sealed in a room with no exits, and all nine of its
+# repeatable loops scoring zero.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "hub_tam_flat"
+name        = "Tam"
+description = "Standing hub @the_chip_shop_flat, 08:00-15:00, gated by his schedule row via requires_npc. Repeatable. The ease rungs are always open; the want rungs need tam_saw_you; the act loop needs want >= 22; and the locked door sits inside the act menu at want >= 65."
+
+[canvases.trigger]
+location      = "the_chip_shop_flat"
+requires_npc  = "npc_tam"
+npc           = "npc_tam"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Tam"
+blocks = [
+  { type = "image", props = { file = "portraits/tam.jpg", description = "A nineteen year old man lying on top of the covers in a hot small flat in daylight.", search_queries = ["young man lying on bed shirtless daylight small room", "teenager on bed small flat window light"] } },
+  { type = "paragraph", content = "He is on top of the covers with the extractor going through the wall. Nights finish at six, he is in bed by seven, and he does not properly sleep until about noon." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "You can come in, you know. You do this thing where you stand on the top step." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay past the tea."
+targetType = "node"
+nodeId     = "rung_tam_tea.base"
+costs      = [ { trait = "energy", value = 6 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tam_rung_today", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him about his dad."
+targetType = "node"
+nodeId     = "talk_tam_dad.base"
+costs      = [ { trait = "energy", value = 3 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tam_talk_today", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Come up with nothing to bring him."
+targetType = "node"
+nodeId     = "rung_tam_nothing.base"
+costs      = [ { trait = "energy", value = 8 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "tam_saw_you",     operator = "is_true" },
+  { type = "flag",  subject = "player", flag_key = "tam_rung_today",  operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "ease", operator = "gte", value = 20 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get in with him."
+targetType = "node"
+nodeId     = "loop_tam_bed.entry"
+costs      = [ { trait = "energy", value = 5 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "want", operator = "gte", value = 22 },
+] }
+
+
+# ── rung: ease. The access meter, and the cheapest thing on his ladder. ──────
+[[canvases]]
+id          = "rung_tam_tea"
+name        = "Stay past the tea"
+description = "Triggerless rung off hub_tam_flat. +4 ease, capped, day-capped by tam_rung_today, priced at 6 energy and 60 minutes against a seven-hour window. The access rung: it buys nothing but time in the room, which is the whole of what `ease` measures."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Past the tea"
+blocks = [
+  { type = "paragraph", content = "You make two teas in the two mugs he owns and you do not leave when yours is finished. He does not ask why. He shifts his legs up the bed to make room on the end of it, which is an answer." },
+  { type = "dialog", props = { speaker = "player" }, content = "You want me to go?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "When have I ever wanted you to go." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Lee wants me on six nights. I said I'd think about it. I'm not going to do six." },
+  { type = "paragraph", content = "You say he should take the money. He says he knows. Neither of you moves for another forty minutes and the extractor goes the whole time." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Nobody else in this town wants anything off me except a decision or a fiver." },
+]
+exit_block = { type = "location", text = "Go down the outside stair.", config = { destinationType = "specific", locationId = "the_chip_shop_flat", time_progression_minutes = 60, effects = [
+  { targetType = "npc", npcId = "npc_tam", trait = "ease", op = "add", value = 4, cap = 100 },
+], flagEffects = [
+  { targetType = "player", flag = "tam_rung_today", op = "set" },
+] } }
+
+
+# ── TALK SCREEN. 55 words, two-thirds spoken, one way out.
+# The genre's second largest content kind — 15,774 of 54,630 field screens, 29%
+# of everything shipped — and FOUR of the five previous v2 games shipped ZERO.
+# It is the cheapest content there is and it is where a character becomes
+# somebody the player is attached to, which outscored the porn itself across
+# ~11,000 player comments.
+[[canvases]]
+id          = "talk_tam_dad"
+name        = "About his dad"
+description = "TALK SCREEN off hub_tam_flat. Mostly spoken, one way out, +2 ease. No gate, no media hunt, no state beyond the meter — the cheap content kind v2 has never shipped."
+
+[[canvases.nodes]]
+id   = "base"
+name = "About his dad"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Do you go up. To see him." },
+  { type = "dialog", props = { speaker = "player" }, content = "I went twice the first year." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Ewan goes every month. He doesn't tell you because he thinks you'd take it as a side being picked." },
+  { type = "dialog", props = { speaker = "player" }, content = "I would." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Aye. That's what I said." },
+  { type = "paragraph", content = "He turns over so he is facing the wall, which is what he does when he has said the whole of a thing." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Ask him what he'd do.", targetType = "node", nodeId = "two" },
+] }
+
+[[canvases.nodes]]
+id   = "two"
+name = "What he'd do"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "If it was you. Would you go up and see him." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "No." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "He had four years of me being twelve and he spent them in the back room with a laptop. I'm not owed anything and I'm not owing anything either." },
+  { type = "dialog", props = { speaker = "player" }, content = "That's a hard way to put it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "You asked. You always want the soft version off me and I've never had one." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Ask what he thinks happens in April.", targetType = "node", nodeId = "three" },
+] }
+
+[[canvases.nodes]]
+id   = "three"
+name = "April"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "What do you think happens when the season starts." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "You'll be behind that counter fourteen hours a day and I'll be on the fryers and we won't see each other till October." },
+  { type = "paragraph", content = "He says it flat, at the ceiling, like a timetable he has already read." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "So I'm not in a rush for April. That's all I'm saying about April." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He has worked out how long this has got. He has worked it out and he did the arithmetic before I did." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Ask what he tells people.", targetType = "node", nodeId = "four" },
+] }
+
+[[canvases.nodes]]
+id   = "four"
+name = "What he tells people"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "What do you say to Lee. When he asks where you've been." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "I say I was at me mam's." },
+  { type = "dialog", props = { speaker = "player" }, content = "And he doesn't think anything of it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Why would he. It's true, isn't it. That's the good bit. Every word of it's true." },
+  { type = "dialog", props = { speaker = "player" }, content = "Don't say it like that." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Like what? I said I was at me mam's. You're the one hearing something in it." },
+  { type = "dialog", props = { speaker = "player" }, content = "Tam." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "I know. Sorry. I've been awake since four." },
+]
+exit_block = { type = "location", text = "Let him sleep.", config = { destinationType = "specific", locationId = "the_chip_shop_flat", time_progression_minutes = 20, effects = [
+  { targetType = "npc", npcId = "npc_tam", trait = "ease", op = "add", value = 2, cap = 100 },
+] } }
+
+
+# ── rung: want. Gated on the milestone, so the willingness meter cannot move
+#    before the scene that earns it (canvas_tam_saw_you).
+[[canvases]]
+id          = "rung_tam_nothing"
+name        = "Nothing to bring him"
+description = "Triggerless rung off hub_tam_flat. +5 want, day-capped, priced at 8 energy and 75 minutes. Gated tam_saw_you + ease >= 20. Explicit, and it stays on the body: the interiority is its own beat afterwards."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Nothing to bring him"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/tam_nothing_t4", pool = 5, description = "A woman sitting close to a young man on a bed in a hot small flat, daylight.", search_queries = ["woman sitting close to man on bed small room daylight", "woman and man on bed talking close warm room"] } },
+  { type = "paragraph", content = "No pan, no tea, no reason. You come up the outside stair with your hands in your pockets and he watches you climb the last four." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Nothing in your hands." },
+  { type = "dialog", props = { speaker = "player" }, content = "No." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Right." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Sit where you sit.", blocks = [
+        { type = "paragraph", content = "You sit on the bed instead of the chair. Coat off, cardigan off, because it is twenty-four degrees in here and it is not, and both of you know it is not." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "You never bring anything now." },
+    ] },
+    { advance_text = "Let him do it.", blocks = [
+        { type = "video", props = { pool_dir = "sex/tam_hand_under_t5", pool = 5, description = "A man's hand under a woman's top on a bed, close, daylight.", search_queries = ["mans hand under womans top on bed close", "hand up shirt on bed daylight intimate close"] } },
+        { type = "paragraph", content = "His hand goes up under the vest and takes a tit whole, and his thumb finds the nipple and works it until it is hard enough to hurt, and your cunt clenches on nothing underneath your skirt." },
+    ] },
+    { advance_text = "Don't stop him.", blocks = [
+        { type = "paragraph", content = "He gets the vest up over both of them and looks, and then his mouth is on one and he sucks the nipple hard enough that you swear at the ceiling, and his hand takes the other tit and squeezes." },
+    ] },
+    { advance_text = "Get a hand on him.", blocks = [
+        { type = "video", props = { pool_dir = "sex/tam_hand_on_him_t5", pool = 5, description = "A woman's hand inside a man's shorts on a bed, close.", search_queries = ["womans hand inside mans shorts bed close", "handjob under covers close daylight bedroom"] } },
+        { type = "paragraph", content = "You get your hand down the front of his shorts and his cock is hard and hot and already slick at the end. You work him slowly, thumb through the wet of it, while he sucks your other nipple." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "I carried him down that outside stair in a car seat. I am not going to be able to un-know that and I have stopped trying." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Go down before Lee opens up.", config = { destinationType = "specific", locationId = "the_chip_shop_flat", time_progression_minutes = 75, effects = [
+  { targetType = "npc", npcId = "npc_tam", trait = "want",    op = "add", value = 5, cap = 100 },
+  { targetType = "player", trait = "arousal", op = "add", value = 18, cap = 100 },
+], flagEffects = [
+  { targetType = "player", flag = "tam_rung_today", op = "set" },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE POSE LADDER — a NODE-ROUTED LOOP (the-surfaces.md R3b).
+#
+# Three act nodes with switch links BOTH ways, one pool each, a self-loop on
+# each that climbs the throttle, and a finish gated on it. The passage SWAPS, so
+# the picture changes with the act — which is the entire reason a repeatable
+# explicit surface is not a cascade. The player drives the escalation; the
+# switch links ARE the ladder.
+#
+# ⚠️ THE LOCKED DOOR IS IN HERE, not on a corridor. `show_when_locked = true` on
+#    the third act, greyed, at want >= 65, seen from inside his bed. A greyed
+#    row states the WANT and the want is what sells the next release; the
+#    guidance card states the ROUTE. R4 pairs them.
+#
+# ⚠️ Loop state resets on EVERY exit — the finish, the stop, and the entry.
+# ═════════════════════════════════════════════════════════════════════════════
+[[canvases]]
+id          = "loop_tam_bed"
+name        = "Get in with him"
+description = "Node-routed pose ladder off hub_tam_flat, gated want >= 22. entry -> hands <-> mouth <-> [LOCKED: fuck] -> finish (gated arousal >= 60). Each act node has its own pool. Resets arousal and loop_stage on entry and on both exits. Carries the day-cap so the whole loop is one run a day."
+
+[[canvases.nodes]]
+id   = "entry"
+name = "Get in with him"
+blocks = [
+  { type = "paragraph", content = "You get in. Not on the covers — in, with him, in a bed that is too warm before you are in it, at half nine in the morning with a chip shop working underneath." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Shut the door properly. Lee comes up for the bin bags." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get a hand on his cock."
+targetType = "node"
+nodeId     = "hands"
+effects = [
+  { targetType = "player", trait = "arousal",    op = "set", value = 0 },
+  { targetType = "player", trait = "loop_stage", op = "set", value = 1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Not today."
+targetType = "location"
+locationId = "the_chip_shop_flat"
+
+[[canvases.nodes]]
+id   = "hands"
+name = "Hands"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/tam_loop_hands_t5", pool = 6, description = "A woman's hand working a man's cock under a sheet, close, daylight.", search_queries = ["handjob close under sheet daylight bed", "womans hand stroking cock bed close"] } },
+  { type = "paragraph", content = "His cock is out and your hand is round it and he has both hands in your hair. You work him slow with a twist at the top and he goes wet in your fist and his hips start going with your fingers." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep going."
+targetType = "node"
+nodeId     = "hands"
+costs      = [ { trait = "energy", value = 3 } ]
+time_progression_minutes = 10
+effects = [ { targetType = "player", trait = "arousal", op = "add", value = 12, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him in your mouth."
+targetType = "node"
+nodeId     = "mouth"
+costs      = [ { trait = "energy", value = 3 } ]
+time_progression_minutes = 10
+effects = [
+  { targetType = "player", trait = "arousal",    op = "add", value = 14, cap = 100 },
+  { targetType = "player", trait = "loop_stage", op = "set", value = 2 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text             = "Get on top of him."
+targetType       = "node"
+nodeId           = "hands"
+show_when_locked = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "want", operator = "gte", value = 65 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stop."
+targetType = "node"
+nodeId     = "loop_reset"
+
+[[canvases.nodes]]
+id   = "mouth"
+name = "Your mouth"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/tam_loop_mouth_t5", pool = 6, description = "A woman going down on a man on a bed in a small bright room.", search_queries = ["woman going down on man bed daylight", "blowjob on bed small room daylight close"] } },
+  { type = "paragraph", content = "You go down and take his cock in your mouth and he swears once at the ceiling. You suck him with your hand working the base of it, tits pressed on his thigh, and his fist shuts in the sheet." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep him in your mouth."
+targetType = "node"
+nodeId     = "mouth"
+costs      = [ { trait = "energy", value = 3 } ]
+time_progression_minutes = 10
+effects = [ { targetType = "player", trait = "arousal", op = "add", value = 13, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Back to your hand."
+targetType = "node"
+nodeId     = "hands"
+time_progression_minutes = 5
+effects = [ { targetType = "player", trait = "loop_stage", op = "set", value = 1 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish."
+targetType = "node"
+nodeId     = "finish"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 60 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text             = "Sit on his cock."
+targetType       = "node"
+nodeId           = "mouth"
+show_when_locked = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "want", operator = "gte", value = 65 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stop."
+targetType = "node"
+nodeId     = "loop_reset"
+
+# FINISHER — [group] bands per finish type, elected by loop_stage, then every
+# loop trait is wiped. No engine macro resets a throttle; it is author-emitted.
+[[canvases.nodes]]
+id   = "finish"
+name = "Let him finish"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "loop_stage", operator = "gte", value = 2 },
+    ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/tam_finish_mouth_t5", pool = 5, description = "A man coming while a woman has him in her mouth, close, daylight bedroom.", search_queries = ["man coming in womans mouth close daylight", "cum in mouth close bedroom pov"] } },
+    { type = "paragraph", content = "He goes rigid under your hands and you keep sucking and he comes in your mouth, hot, three pulls of it, and you swallow and keep your lips round his cock until he is finished and soft." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "loop_stage", operator = "lt", value = 2 },
+    ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/tam_finish_hand_t5", pool = 5, description = "A man coming over a woman's hand on a bed, close, daylight.", search_queries = ["man coming over womans hand bed close", "handjob finish close daylight sheets"] } },
+    { type = "paragraph", content = "He grabs your wrist and comes over your fist and his own stomach in three, thick, and you keep working his cock through all of it until he takes hold of your arm to make you stop." },
+  ] },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He will be asleep in four minutes. He has been able to do that since he was a baby and it has never once stopped being the thing about him." },
+]
+exit_block = { type = "location", text = "Go down before Lee opens up.", config = { destinationType = "specific", locationId = "the_chip_shop_flat", time_progression_minutes = 40, effects = [
+  { targetType = "npc", npcId = "npc_tam", trait = "want",    op = "add", value = 6, cap = 100 },
+  { targetType = "player", trait = "arousal",    op = "set", value = 0 },
+  { targetType = "player", trait = "loop_stage", op = "set", value = 0 },
+  { targetType = "player", trait = "energy",     op = "add", value = -10 },
+], flagEffects = [
+  { targetType = "player", flag = "tam_rung_today", op = "set" },
+  { targetType = "player", flag = "tam_stayed",     op = "set" },
+] } }
+
+[[canvases.nodes]]
+id   = "loop_reset"
+name = "Stop"
+blocks = [
+  { type = "paragraph", content = "You take your hand off him and get out of the bed and stand there doing your cardigan up, and he lies where he is and watches you do it and says nothing at all." },
+]
+exit_block = { type = "location", text = "Down the stair.", config = { destinationType = "specific", locationId = "the_chip_shop_flat", time_progression_minutes = 15, effects = [
+  { targetType = "player", trait = "arousal",    op = "set", value = 0 },
+  { targetType = "player", trait = "loop_stage", op = "set", value = 0 },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# EWAN — LEVERAGE. `hold` ONLY, and his rungs gate on hold x MONEY x a debt
+# flag. the-meters.md W6, leverage row: "money or debt — not affection." He has
+# no willingness meter because this arc is not a courtship and giving him one
+# would make him a fourth copy of the same shape.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "hub_ewan_yard"
+name        = "Ewan"
+description = "Standing hub @the_boat_yard, gated by his 08:00-18:00 Mon-Sat row via requires_npc. Repeatable. His ladder is priced: the terms rung needs borrowed_from_ewan, and the last one needs hold >= 40. Every rung is day-capped by ewan_rung_today."
+
+[canvases.trigger]
+location      = "the_boat_yard"
+requires_npc  = "npc_ewan"
+npc           = "npc_ewan"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Ewan"
+blocks = [
+  { type = "image", props = { file = "portraits/ewan.jpg", description = "A man in his mid twenties in overalls in a boat workshop, wiping his hands.", search_queries = ["young man overalls boat workshop wiping hands", "man mid twenties workshop winter coveralls portrait"] } },
+  { type = "paragraph", content = "He is under the second hull with the light on a lead. He knows it is you from the way the door goes and he does not come out for a minute, and then he does, and wipes his hands on the front of himself." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "It's not Monday. What's gone wrong?" },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him for something."
+targetType = "node"
+nodeId     = "rung_ewan_ask.base"
+costs      = [ { trait = "energy", value = 5 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "ewan_rung_today", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask to see the folder."
+targetType = "node"
+nodeId     = "talk_ewan_folder.base"
+costs      = [ { trait = "energy", value = 3 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "ewan_talk_today", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him set the terms."
+targetType = "node"
+nodeId     = "rung_ewan_terms.base"
+costs      = [ { trait = "energy", value = 8 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "borrowed_from_ewan", operator = "is_true" },
+  { type = "flag",  subject = "player", flag_key = "ewan_rung_today",    operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_ewan", trait_key = "hold", operator = "gte", value = 18 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay in the caravan after he shuts the yard."
+targetType = "node"
+nodeId     = "rung_ewan_caravan.base"
+costs      = [ { trait = "energy", value = 10 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "ewan_rung_today", operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_ewan", trait_key = "hold", operator = "gte", value = 40 },
+] }
+
+[[canvases]]
+id          = "rung_ewan_ask"
+name        = "Ask him for something"
+description = "Triggerless rung off hub_ewan_yard. +4 hold, day-capped, 5 energy, 45 min. The whole leverage arc in miniature: every pound moves a decision from her side of the counter to his."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Ask him for something"
+blocks = [
+  { type = "paragraph", content = "You ask for the electric. He does not ask what happened to the take; he already knows what the take was, because you write it in the book and he reads the book." },
+  { type = "dialog", props = { speaker = "player" }, content = "It's only till the weekend." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "It's not, though. It hasn't been only till the weekend since November." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Right. I'll do it direct. Don't put it through the arcade account, it makes the year end a mess." },
+  { type = "paragraph", content = "So now the electric on your own building goes out of his account and not yours, and it took him about nine seconds to arrange, and he was being kind." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Every single one of these has been him being kind. That is what makes it impossible to say anything about." },
+]
+exit_block = { type = "location", text = "Go back up the slip.", config = { destinationType = "specific", locationId = "the_boat_yard", time_progression_minutes = 45, effects = [
+  { targetType = "npc", npcId = "npc_ewan", trait = "hold", op = "add", value = 4, cap = 100 },
+], flagEffects = [
+  { targetType = "player", flag = "ewan_rung_today", op = "set" },
+] } }
+
+[[canvases]]
+id          = "talk_ewan_folder"
+name        = "The folder"
+description = "TALK SCREEN off hub_ewan_yard. Mostly spoken, one way out, +2 hold. The arithmetic of the building, out loud, between the two of them."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The folder"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "Can I see it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "You can see it any time. It's your building." },
+  { type = "paragraph", content = "He says that without a flicker, and opens the second drawer, and neither of you mentions that he keeps it in a drawer in a caravan a mile from the building it is about." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Pitch, electric, the mech, the insurance. That's the four. The insurance is the one that'll do us in April." },
+  { type = "dialog", props = { speaker = "player" }, content = "How much in April." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "More than the summer makes. I'm working on it. Don't." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Ask him why he took the books.", targetType = "node", nodeId = "two" },
+] }
+
+[[canvases.nodes]]
+id   = "two"
+name = "Why he took them"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "Why did you take them off me. Really." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Because you paid the pitch twice in March and missed it in April, and you didn't notice either." },
+  { type = "dialog", props = { speaker = "player" }, content = "I was going up to see your father every fortnight in March." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "I know. That's why I didn't say anything about it at the time. I just took them." },
+  { type = "paragraph", content = "He wipes the same clean spot on his hands twice, which is the only thing about him that ever gives anything away." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Ask him when he gives them back.", targetType = "node", nodeId = "three" },
+] }
+
+[[canvases.nodes]]
+id   = "three"
+name = "When he gives them back"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "When do I get them back." },
+  { type = "paragraph", content = "It is the first time either of you has said it out loud in four years and the yard picks that second to go quiet, the way yards do." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "When it's making money." },
+  { type = "dialog", props = { speaker = "player" }, content = "It's never going to make money." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Aye." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He did not enjoy saying that. He also did not take it back, and he had a whole minute in which he could have." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Ask what he wants out of it.", targetType = "node", nodeId = "four" },
+] }
+
+[[canvases.nodes]]
+id   = "four"
+name = "What he wants out of it"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "What do you actually want out of that building, Ewan." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Nothing. It's a shed full of machines on a dead front." },
+  { type = "dialog", props = { speaker = "player" }, content = "Then why have you got the lease." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Because if I hadn't taken it the council would have, and then you'd have nowhere to live." },
+  { type = "paragraph", content = "He says that the way he says everything, like it is a fact about a boat, and then goes back to wiping his hands." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "I don't want the arcade. Don't ask me what I do want, because I'm under a hull till six." },
+]
+exit_block = { type = "location", text = "Let him get back under the hull.", config = { destinationType = "specific", locationId = "the_boat_yard", time_progression_minutes = 20, effects = [
+  { targetType = "npc", npcId = "npc_ewan", trait = "hold", op = "add", value = 2, cap = 100 },
+] } }
+
+[[canvases]]
+id          = "rung_ewan_terms"
+name        = "Let him set the terms"
+description = "Triggerless rung off hub_ewan_yard, gated borrowed_from_ewan + hold >= 18. AN INCOME SOURCE: +35 money, clamp = false. Braked by ewan_rung_today AND 8 energy AND 60 minutes, because a gate in FRONT of a printer only delays the printer (the-economy.md R5, struck exemption)."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Let him set the terms"
+blocks = [
+  { type = "paragraph", content = "Thirty-five out of the second drawer and he counts it into your hand rather than onto the desk, which is new, and holds the last note a half second longer than he needs to." },
+  { type = "dialog", props = { speaker = "player" }, content = "You don't have to count it out like that." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "I do, actually. If I stop counting it we both start pretending it isn't happening." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "That's the meter and something over. And you shut at nine now, not ten. Nobody's coming in after nine in February and you're paying to light an empty room." },
+  { type = "paragraph", content = "You say all right. He waits, because he expected an argument and did not get one, and the not-arguing lands between you like a thing that has been agreed." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Say if that's not all right." },
+  { type = "dialog", props = { speaker = "player" }, content = "It's all right." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He asked. He does always ask. And I have not once said no, and he has started to hear the shape of that." },
+]
+exit_block = { type = "location", text = "Put it in your coat.", config = { destinationType = "specific", locationId = "the_boat_yard", time_progression_minutes = 60, effects = [
+  { targetType = "npc", npcId = "npc_ewan", trait = "hold",  op = "add", value = 6, cap = 100 },
+  { targetType = "player", trait = "money",  op = "add", value = 35, clamp = false },
+  { targetType = "player", trait = "warmth", op = "add", value = 6, cap = 100 },
+], flagEffects = [
+  { targetType = "player", flag = "ewan_rung_today", op = "set" },
+] } }
+
+[[canvases]]
+id          = "rung_ewan_caravan"
+name        = "After he shuts the yard"
+description = "Triggerless rung off hub_ewan_yard, gated hold >= 40. Explicit, and it carries the boat yard's cycling pool (gate 5 traversal heat). +7 hold, day-capped, 10 energy, 90 min. Ceiling per the Want: cock, tits, hard, fuck, hold still."
+
+[[canvases.nodes]]
+id   = "base"
+name = "After he shuts the yard"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/yard_caravan_t4", pool = 5, description = "A woman and a man close together in a cramped caravan office lit by one lamp.", search_queries = ["man and woman close cramped caravan interior lamp", "couple in small site office dim lamp night"] } },
+  { type = "paragraph", content = "Six o'clock and the yard lights go off one bank at a time and it is the caravan, the stove, and the two of you, and the drawer with the folder in it a foot from your hip." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "You don't have to go straight back. There's nobody waiting on you." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Don't get up.", blocks = [
+        { type = "paragraph", content = "You do not get up when he gets up. He stands over the chair for a second working out whether that means what he thinks it means, and then puts a hand flat on the back of your neck." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Hold still." },
+    ] },
+    { advance_text = "Let him.", blocks = [
+        { type = "video", props = { pool_dir = "sex/yard_caravan_open_t5", pool = 5, description = "A woman's coat and top opened by a man in a dim cramped interior.", search_queries = ["man opening womans coat dim interior close", "hands undoing shirt close dim room"] } },
+        { type = "paragraph", content = "He gets your coat open and the jumper up and both hands on your tits in the same order he does everything, no hurry, thumbs going over the nipples until they are hard and then staying there." },
+    ] },
+    { advance_text = "Say nothing.", blocks = [
+        { type = "paragraph", content = "You get a hand into the front of his overalls and his cock is hard and thick and he does not react except to breathe out once, hand still on the back of your neck, thumb still on your nipple." },
+    ] },
+    { advance_text = "Do what he says.", blocks = [
+        { type = "video", props = { pool_dir = "sex/yard_caravan_hand_t5", pool = 5, description = "A woman's hand working a man off in a dim cramped interior, close.", search_queries = ["handjob close dim cramped interior", "womans hand on cock close low light"] } },
+        { type = "paragraph", content = "He tells you how, quietly, twice, and you work his cock how he says it. Slower. Harder at the top. He comes over your knuckles and the front of the desk and does not make a sound doing it." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "paragraph", content = "He gets a rag off the hook and does the desk first and your hand second. Then he shuts the second drawer, which was never open, and holds the caravan door for you." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He did the desk first. I have been thinking about that all the way up the slip and I am going to be thinking about it on Monday." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Walk back along the front.", config = { destinationType = "specific", locationId = "the_boat_yard", time_progression_minutes = 90, effects = [
+  { targetType = "npc", npcId = "npc_ewan", trait = "hold",   op = "add", value = 7, cap = 100 },
+  { targetType = "player", trait = "arousal", op = "set", value = 0 },
+], flagEffects = [
+  { targetType = "player", flag = "ewan_rung_today", op = "set" },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# ROAN — PEER. `bond` ONLY, and MANY SMALL RUNGS, densest at the bottom, lowest
+# at 4. the-meters.md W6, peer row: courtship IS the climb. W4: the field runs
+# 8-17 rungs starting at ~5, and all sixteen tiers across five v2 games started
+# at exactly 15.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "hub_roan_house"
+name        = "Roan"
+description = "Standing hub @the_terrace_house, gated by his 17:00-23:00 row via requires_npc. Repeatable. Small rungs at 4/12/25/42 — a peer ladder is climbed in a lot of short steps, not four long ones."
+
+[canvases.trigger]
+location      = "the_terrace_house"
+requires_npc  = "npc_roan"
+npc           = "npc_roan"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Roan"
+blocks = [
+  { type = "image", props = { file = "portraits/roan.jpg", description = "A man in his mid thirties sitting in a dated front room in lamplight.", search_queries = ["man mid thirties sitting front room lamp evening", "man in armchair dated living room night portrait"] } },
+  { type = "paragraph", content = "He is in the chair that is not your mother's with the telly on mute and the three-bar fire on one bar. He has a drink poured before you have your coat off." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "There you go. I'd got it out before I heard the gate, so don't read anything into it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Have one with him."
+targetType = "node"
+nodeId     = "rung_roan_drink.base"
+costs      = [ { trait = "energy", value = 4 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "roan_rung_today", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him what he remembers."
+targetType = "node"
+nodeId     = "talk_roan_fortnight.base"
+costs      = [ { trait = "energy", value = 3 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "roan_talk_today", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay later than the drink."
+targetType = "node"
+nodeId     = "rung_roan_later.base"
+costs      = [ { trait = "energy", value = 7 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "roan_rung_today", operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_roan", trait_key = "bond", operator = "gte", value = 12 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Don't go home."
+targetType = "node"
+nodeId     = "rung_roan_stay.base"
+costs      = [ { trait = "energy", value = 10 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "roan_back_door",  operator = "is_true" },
+  { type = "flag",  subject = "player", flag_key = "roan_rung_today", operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_roan", trait_key = "bond", operator = "gte", value = 25 },
+] }
+
+[[canvases]]
+id          = "rung_roan_drink"
+name        = "Have one with him"
+description = "Triggerless rung off hub_roan_house. +3 bond, day-capped, 4 energy, 50 min. The bottom rung, and it is cheap on purpose: a peer ladder that opens at 15 is fifteen clicks of nothing."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Have one with him"
+blocks = [
+  { type = "paragraph", content = "He pours yours the way your father poured them, too much and then a splash of something to make it look deliberate, and hands it over without looking away from the muted snooker." },
+  { type = "dialog", props = { speaker = "player" }, content = "That's Dad's measure, that." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "It's the only one I know. You get what you're given in this house." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "Sit down. You do this thing where you stand up in a house you grew up in." },
+  { type = "paragraph", content = "You sit down. The fire goes on one bar because he will not put the second on until eight, which is also a thing your mother did, and neither of you mentions it." },
+]
+exit_block = { type = "location", text = "Go back along the row.", config = { destinationType = "specific", locationId = "the_terrace_house", time_progression_minutes = 50, effects = [
+  { targetType = "npc", npcId = "npc_roan", trait = "bond", op = "add", value = 3, cap = 100 },
+  { targetType = "player", trait = "warmth", op = "add", value = 12, cap = 100 },
+], flagEffects = [
+  { targetType = "player", flag = "roan_rung_today", op = "set" },
+] } }
+
+[[canvases]]
+id          = "talk_roan_fortnight"
+name        = "What he remembers"
+description = "TALK SCREEN off hub_roan_house. Mostly spoken, one way out, +2 bond. The witness, which is the entire reason this character exists."
+
+[[canvases.nodes]]
+id   = "base"
+name = "What he remembers"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "What do you actually remember about it. That year." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "Mam crying in the kitchen with the radio on so nobody'd hear her." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "And you going out the front door every morning like nothing was happening. Fifteen. Coat done up. Chin out." },
+  { type = "dialog", props = { speaker = "player" }, content = "I was terrified." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "I know. I was twelve and I could tell, and not one of that lot out there could." },
+  { type = "paragraph", content = "The snooker goes to an advert and neither of you says anything for a while, and it is not an awkward while." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Ask him about Bristol.", targetType = "node", nodeId = "two" },
+] }
+
+[[canvases.nodes]]
+id   = "two"
+name = "Bristol"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "You've still not told me what happened in Bristol." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "Nothing happened. That's the whole of it. Eleven years and nothing happened, and then I was forty in a flat I couldn't afford." },
+  { type = "dialog", props = { speaker = "player" }, content = "You're thirty-six." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "I'm thirty-six and I felt forty. You'd have to have been there." },
+  { type = "paragraph", content = "He tops his own glass up and not yours, which means he has decided he is talking now and would rather you did not stop him." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Ask why he came back here of all places.", targetType = "node", nodeId = "three" },
+] }
+
+[[canvases.nodes]]
+id   = "three"
+name = "Why here"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "You could have gone anywhere. Why here." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "Because the house was sat empty and you were four hundred yards away." },
+  { type = "paragraph", content = "He says it into the glass rather than at you, and then he does look up, and does not look away again." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "That's not a thing I'd have said sober in November. It's February now." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Four hundred yards. He has measured it as well. He has been measuring it since November." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Ask if the street talks about you.", targetType = "node", nodeId = "four" },
+] }
+
+[[canvases.nodes]]
+id   = "four"
+name = "What the street says"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "Do they still talk. Out there. About me." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "Course they do. It's February." },
+  { type = "dialog", props = { speaker = "player" }, content = "About what, though." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "Denny. The arcade. Whether the lad's got it off you yet. Same three things since Christmas." },
+  { type = "dialog", props = { speaker = "player" }, content = "And me being round here every night." },
+  { type = "paragraph", content = "He looks at the muted snooker for a while before he answers that one, which is an answer on its own." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "Not yet. Four of them can see the back gate, mind. I'd go out the front if I were you." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "Or don't. I'm not telling you what to do. I've never once told you what to do." },
+]
+exit_block = { type = "location", text = "Finish your drink.", config = { destinationType = "specific", locationId = "the_terrace_house", time_progression_minutes = 20, effects = [
+  { targetType = "npc", npcId = "npc_roan", trait = "bond", op = "add", value = 2, cap = 100 },
+] } }
+
+[[canvases]]
+id          = "rung_roan_later"
+name        = "Stay later than the drink"
+description = "Triggerless rung off hub_roan_house, gated bond >= 12. +4 bond, day-capped, 7 energy, 70 min. Mid-rung: the hour where it stops being a visit."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Stay later than the drink"
+blocks = [
+  { type = "paragraph", content = "Half ten and your glass has been empty twenty minutes and he has not offered another one, because offering another one would be asking you to stay, and he has worked out that you will stay anyway." },
+  { type = "dialog", props = { speaker = "player" }, content = "You're not topping me up." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "No. Because then you'd have a reason to still be sat there, and I'd rather you hadn't." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "You've not looked at the clock once." },
+  { type = "paragraph", content = "He has moved from the chair to the end of the settee at some point and you did not see him do it. His arm is along the back of it. Your shoulder is about four inches from his hand." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Four inches. I know it is four inches, which means I have measured it, which means we are past something." },
+]
+exit_block = { type = "location", text = "Go, eventually.", config = { destinationType = "specific", locationId = "the_terrace_house", time_progression_minutes = 70, effects = [
+  { targetType = "npc", npcId = "npc_roan", trait = "bond", op = "add", value = 4, cap = 100 },
+  { targetType = "player", trait = "arousal", op = "add", value = 10, cap = 100 },
+], flagEffects = [
+  { targetType = "player", flag = "roan_rung_today", op = "set" },
+] } }
+
+[[canvases]]
+id          = "rung_roan_stay"
+name        = "Don't go home"
+description = "Triggerless rung off hub_roan_house, gated roan_back_door + bond >= 25. Explicit, and it carries the terrace house's cycling pool (gate 5). +6 bond, day-capped, 10 energy, 100 min. Ceiling per the Want: cock, tits, cunt, wet, fuck, want."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Don't go home"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/terrace_settee_t4", pool = 5, description = "A man and a woman close together on a settee in a dated front room at night.", search_queries = ["man and woman close on sofa night lamp living room", "couple on settee dim front room evening"] } },
+  { type = "paragraph", content = "Twenty past midnight and the fire is on both bars and neither of you has said the word coat. He locks the front and comes back through and does not sit in the chair." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "Say now if you're going." },
+  { type = "dialog", props = { speaker = "player" }, content = "I'm not going." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Let him.", blocks = [
+        { type = "paragraph", content = "He kisses you in your mother's front room with the snooker still going on mute, and it is not a mistake and neither of you does the thing where you pretend it might have been." },
+    ] },
+    { advance_text = "Get the jumper off.", blocks = [
+        { type = "video", props = { pool_dir = "sex/terrace_undress_t5", pool = 5, description = "A woman pulling a jumper off, a man's hands at her waist, dim front room.", search_queries = ["woman pulling jumper off man hands at waist dim", "couple undressing living room lamp light"] } },
+        { type = "paragraph", content = "Jumper over your head and the bra after it, and his hands come straight up and take your tits, and his mouth goes to one nipple and stays there until you have both hands in the back of his hair." },
+    ] },
+    { advance_text = "Let him get your tights down.", blocks = [
+        { type = "paragraph", content = "Tights and knickers down to your knees and his hand between your legs, and your cunt is so wet that two fingers go straight in, and his thumb finds your clit on the way and stays on it." },
+    ] },
+    { advance_text = "Say it.", blocks = [
+        { type = "video", props = { pool_dir = "sex/terrace_fingers_t5", pool = 5, description = "A man's hand between a woman's legs on a settee, close, lamplight.", search_queries = ["hand between womans legs sofa close lamplight", "fingering close on couch dim room"] } },
+        { type = "paragraph", content = "You tell him not to stop and he does not. Two fingers fucking your cunt and the flat of his thumb grinding your clit and your nipple in his mouth, and you come on his hand with your heels on the carpet." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The mark on the door frame is eight feet away in the dark. Nineteen ninety-six, both of us, in pencil." },
+        { type = "paragraph", content = "He does not ask you to stay the night and you do not go for a long time, and when you do he stands in the back doorway and watches you the whole length of the yard." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Go out the back way.", config = { destinationType = "specific", locationId = "the_terrace_house", time_progression_minutes = 100, effects = [
+  { targetType = "npc", npcId = "npc_roan", trait = "bond", op = "add", value = 6, cap = 100 },
+  { targetType = "player", trait = "arousal", op = "set", value = 0 },
+], flagEffects = [
+  { targetType = "player", flag = "roan_rung_today", op = "set" },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# NESSA — STAGED. `trust` gates alone; `want` is DEAD until canvas_nessa_saw_her
+# fires. That is what makes this pair a different SHAPE from Tam's rather than a
+# second copy of it (the-meters.md W6).
+#
+# ⚠️ SHE is tenant-scoped and lives here. THE ROOM she is in is room-scoped and
+#    lives in 3_activities, where it names nobody. When she rotates out, this
+#    block and her [[npcs]] entry go and the room stays.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "hub_nessa_back_room"
+name        = "Nessa"
+description = "Standing hub @the_back_room, gated by her rows via requires_npc. Repeatable. trust rungs at 5/20; the want rung is gated on nessa_saw_her AND trust >= 20, so the second meter cannot move before the milestone that opens it."
+
+[canvases.trigger]
+location      = "the_back_room"
+requires_npc  = "npc_nessa"
+npc           = "npc_nessa"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Nessa"
+blocks = [
+  { type = "image", props = { file = "portraits/nessa.jpg", description = "A woman of twenty-one sitting on a mattress in a bare back room, on her phone.", search_queries = ["young woman sitting on mattress bare room phone", "twenty something woman bedsit mattress dim room"] } },
+  { type = "paragraph", content = "She is on the mattress with her back against the wall and her phone up, and the arcade hums through the plaster behind her head all day and all night." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "I've got the forty. It's in my jacket. I'm not getting up for it though." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take her a tea and stay."
+targetType = "node"
+nodeId     = "rung_nessa_tea.base"
+costs      = [ { trait = "energy", value = 4 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nessa_rung_today", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask why she stayed on."
+targetType = "node"
+nodeId     = "talk_nessa_summer.base"
+costs      = [ { trait = "energy", value = 3 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nessa_talk_today", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Don't leave when she changes."
+targetType = "node"
+nodeId     = "rung_nessa_curtain.base"
+costs      = [ { trait = "energy", value = 8 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "nessa_saw_her",     operator = "is_true" },
+  { type = "flag",  subject = "player", flag_key = "nessa_rung_today",  operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_nessa", trait_key = "trust", operator = "gte", value = 20 },
+] }
+
+[[canvases]]
+id          = "rung_nessa_tea"
+name        = "Take her a tea and stay"
+description = "Triggerless rung off hub_nessa_back_room. +4 trust, day-capped, 4 energy, 40 min. Lowest rung at 5, densest at the bottom (W4)."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Take her a tea and stay"
+blocks = [
+  { type = "paragraph", content = "Two teas through the PRIVATE door and you end up sat on the end of the mattress because there is nowhere else in the room to sit, which is a thing she has never once offered to solve." },
+  { type = "dialog", props = { speaker = "player" }, content = "You could have the chair out the office." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "Then you'd sit on the chair. So, no." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "You can put the light on, you know. I'm not doing anything." },
+  { type = "paragraph", content = "You leave it off. The light from the arcade comes under the door in a strip across the floor and neither of you moves for twenty minutes." },
+]
+exit_block = { type = "location", text = "Take the mugs back through.", config = { destinationType = "specific", locationId = "the_back_room", time_progression_minutes = 40, effects = [
+  { targetType = "npc", npcId = "npc_nessa", trait = "trust", op = "add", value = 4, cap = 100 },
+], flagEffects = [
+  { targetType = "player", flag = "nessa_rung_today", op = "set" },
+] } }
+
+[[canvases]]
+id          = "talk_nessa_summer"
+name        = "Why she stayed on"
+description = "TALK SCREEN off hub_nessa_back_room. Mostly spoken, one way out, +2 trust. The mirror: Marnie at twenty-one had two of them."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Why she stayed on"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "Why didn't you go back, after the summer." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "Back to what." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "Mam's got the new one's kids in my room. There isn't a room. There's a settee and a rota." },
+  { type = "dialog", props = { speaker = "player" }, content = "You're twenty-one." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "So were you. And you had two of them and a mortgage and this town. So." },
+  { type = "paragraph", content = "She says it without any edge at all, which is worse, and goes back to her phone." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Ask what she does all day.", targetType = "node", nodeId = "two" },
+] }
+
+[[canvases.nodes]]
+id   = "two"
+name = "All day"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "What do you actually do all day, back here." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "Phone. Sleep. Listen to the machines. There's one out there that does a little tune every forty minutes even when nobody's on it." },
+  { type = "dialog", props = { speaker = "player" }, content = "The crane. It's been doing that since 2011." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "I know what time it is by it now. That's what I do all day." },
+  { type = "paragraph", content = "She says it without self-pity, which is the thing about her that you have never once been able to get round." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Ask if she's going back in the summer.", targetType = "node", nodeId = "three" },
+] }
+
+[[canvases.nodes]]
+id   = "three"
+name = "In the summer"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "When the season starts. Are you going back to your mam's." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "Do you want me to?" },
+  { type = "paragraph", content = "She puts the phone face down on the mattress, which she has not done once in four months, and waits for the answer with her whole attention on you." },
+  { type = "dialog", props = { speaker = "player" }, content = "No." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "Right. Then I'm not." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "That was the shortest conversation I have had in four years and I have agreed to something in it." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Ask if she tells her mam anything.", targetType = "node", nodeId = "four" },
+] }
+
+[[canvases.nodes]]
+id   = "four"
+name = "What she tells her mam"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "Do you ring her? Judith." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "Sundays. Ten minutes." },
+  { type = "dialog", props = { speaker = "player" }, content = "And what do you tell her about being here." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "That Auntie Marnie's sorted me a room and I'm fine." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "She says you were always the one who'd take somebody in. She says it like it's a fault." },
+  { type = "dialog", props = { speaker = "player" }, content = "She would." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "I don't tell her anything else. In case you were about to ask me that next." },
+]
+exit_block = { type = "location", text = "Take the mugs back through.", config = { destinationType = "specific", locationId = "the_back_room", time_progression_minutes = 20, effects = [
+  { targetType = "npc", npcId = "npc_nessa", trait = "trust", op = "add", value = 2, cap = 100 },
+] } }
+
+[[canvases]]
+id          = "rung_nessa_curtain"
+name        = "Don't leave when she changes"
+description = "Triggerless rung off hub_nessa_back_room, gated nessa_saw_her + trust >= 20. Explicit, and it carries the lodger's room cycling pool (gate 5). +5 want, day-capped, 8 energy, 60 min. Ceiling per the Want: cunt, tits, wet, tongue, lick, fingers, come."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Don't leave when she changes"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/back_room_curtain_t5", pool = 5, description = "Two women close together on a mattress in a bare dim room.", search_queries = ["two women close together on mattress dim room", "women intimate bare room low light mattress"] } },
+  { type = "paragraph", content = "The curtain has not been pulled across in a fortnight and neither of you has mentioned that either. She gets the shirt off with you sitting three feet away and does not turn her back." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "You always go quiet at this bit." },
+  { type = "dialog", props = { speaker = "player" }, content = "I know." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Stay where you are.", blocks = [
+        { type = "paragraph", content = "She comes and kneels up on the mattress in front of you in nothing but her knickers, close enough that you can feel the heat off her, and waits for you to be the one who moves." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "You always stop here. Don't stop here." },
+    ] },
+    { advance_text = "Put your hands on her.", blocks = [
+        { type = "video", props = { pool_dir = "sex/back_room_hands_t5", pool = 5, description = "A woman's hands on another woman's breasts, close, dim room.", search_queries = ["womans hands on womans breasts close dim", "two women touching close low light bedroom"] } },
+        { type = "paragraph", content = "You take her tits in both hands and she makes a noise like she has been holding it since November. Small and high and going warm under your palms, nipples hard, and she pushes them into your hands." },
+    ] },
+    { advance_text = "Get her knickers off.", blocks = [
+        { type = "paragraph", content = "She lifts for you and they come off and she puts your hand on her cunt herself. She is soaking. Two fingers slide into her and your thumb finds her clit and she says your name once and stops." },
+    ] },
+    { advance_text = "Use your mouth.", blocks = [
+        { type = "video", props = { pool_dir = "sex/back_room_mouth_t5", pool = 5, description = "A woman going down on another woman on a mattress in a dim room.", search_queries = ["woman going down on woman mattress dim room", "oral between two women low light close"] } },
+        { type = "paragraph", content = "You get down between her legs and lick her cunt slowly, flat tongue, then just the clit, and she gets both hands in your hair and does not let you back up until she has come on your mouth." },
+    ] },
+    { advance_text = "After.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Judith's girl. I held her at the christening in a car park in Leeds in the rain, and here we are on a mattress behind my husband's arcade." },
+    ] },
+  ] } },
+]
+exit_block = { type = "location", text = "Go back through to the counter.", config = { destinationType = "specific", locationId = "the_back_room", time_progression_minutes = 60, effects = [
+  { targetType = "npc", npcId = "npc_nessa", trait = "want", op = "add", value = 5, cap = 100 },
+  { targetType = "player", trait = "arousal", op = "set", value = 0 },
+], flagEffects = [
+  { targetType = "player", flag = "nessa_rung_today", op = "set" },
+] } }
