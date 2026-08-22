@@ -4,6 +4,17 @@ v2 was derived one way: by measuring ten snapshots of one reference game's sourc
 produced four commitments that are correct and that refuted the incumbent skill on **shape**. It
 also has a hard structural limit:
 
+> ⚠️ **SUPERSEDED IN PART, 2026-08-18.** Study 5's *"every choice hangs off a named object in the
+> prose"* — the finding that became `the-surfaces.md` R2b and gate 22 — **was read backwards.** The
+> worked example it rests on (DoL's bedroom) is not choices hanging off objects; its standing links
+> are `Strip and get in bed` (the sleep machine), `Masturbate in bed` (the solo feeder), `Wardrobe`
+> (the clothing system), `Mirror` (the body system). **Each "object" is the door to a system that
+> spans the whole game.** Measured afterwards across 25 shipped sandboxes: `sleep` 773 uses in 19
+> games, `eat` 430 in 17, `wash` 224 in 16 — while *"look around / examine"* appears 232 times and
+> is one-off quest objects everywhere, never a per-room browse menu. Gate 22 and its lint are
+> deleted; the rule is now **needs + work + people** (`the-surfaces.md` R2). The R2/R2b sections
+> below are kept as the record of what was believed and why.
+
 > **A doctrine derived from measuring one game cannot contain anything that game lacks** — even
 > when our engine ships the feature, and even when our own previous skill taught it.
 
@@ -109,10 +120,36 @@ A finished study graduates into a real v2 reference file. Until then it lives he
 
 ### Tier 2 — proven weak
 
-| **5** | **Meters & the HUD** | what is displayed vs what is actually read | E2 E3 E4 |
-| **6** | **Onboarding** | the first hour |
-| **7** | **The daily loop** | time costs, energy, what an ordinary day is |
-| **8** | **Ladder shape** | rung spacing, ceilings, when an arc is finished |
+| **5** | **Meters & the HUD** | what is displayed vs what is actually read | E2 E3 E4 | ✅ **ADDRESSED 2026-08-19** → `the-meters.md` W1–W6, gates 33/34 |
+| **6** | **Onboarding** | the first hour | `off_season/REVIEW_1.md` O1–O4 N1–N2 | ✅ **ADDRESSED 2026-08-22** → `the-first-hour.md` F1–F9, gates `the opening opens a door` · `every hub is met first` · `the anchor introduces itself`, lint `named before met` |
+| **7** | **The daily loop** | time costs, energy, what an ordinary day is | `off_season/REVIEW_1.md` T1–T3 | ✅ **TIME HALF ADDRESSED 2026-08-22** → `the-clock.md` C1–C6, gate `the label keeps its time`, lints `the clock in the prose` · `the time cost is not on the button`. Energy and "what an ordinary day is" remain in `the-meters.md` M8–M10 + gate 29 |
+| **8** | **Ladder shape** | rung spacing, ceilings, when an arc is finished | | ✅ **ADDRESSED 2026-08-19** → `the-meters.md` W4 + the meter-ladder lint |
+
+> ### ⛔ SUPERSEDED 2026-08-19 — "three layers, three or four ratcheting tiers" was n = 1
+>
+> `the-board.md` §3 and `STATUS.md` derived v2's meter architecture from **one game's seed source**
+> and presented it as the shape. Measured across the same 25-game corpus the prose study used
+> (SugarCube passage source, clamp guards excluded — Appendix C trap 5), counting player-owned
+> ascent meters with ≥4 real content gates:
+>
+> ```
+> 0 meters   14 games        1 meter   7 games        2 meters   2 games
+> 8 meters   family-ties     9 meters  degrees-of-lewdity          median 0
+> ```
+>
+> **Fourteen of 25 shipped sandboxes have no player ascent tier at all**, and only two carry three
+> or more — one of which is the reference game itself. The largest unclassified meter in each of the
+> 14 zeroes was hand-checked: resources, story counters, levels. No hidden tiers.
+>
+> Where the field's gating actually lives is **per character** — 285 per-character meters against
+> 101 player-owned ones — and it **splits into two schools with nothing between 15% and 65%**:
+> 8 roster games at 65%+, 9 ladder games at 13% or less. All five v2 games sit at 19–29%, inside a
+> band no shipped game occupies, because v2 dropped v1's "Who climbs?" question
+> (`author-game/references/content-framework.md`) and one template answered it five times.
+>
+> **Not deleted:** three-or-four tiers remains a correct answer for a `who_climbs = "player"` game,
+> and the reference game's own figures stand. What is retired is treating it as the default.
+> Superseding doctrine: `references/the-meters.md` W1. Checks: gates 33 and 34.
 
 ### Tier 3 — untested here, v2 still has nothing
 
@@ -120,6 +157,7 @@ A finished study graduates into a real v2 reference file. Until then it lives he
 | **10** | Sex-loop shape |
 | **11** | Pre-ship checklist |
 | **12** | Optional systems — phone, customization |
+| **13** | **Prose that copies a field** — a price, a window, a room name written into a beat is a duplicate of the TOML with no link back, and it goes stale the day the field moves. v1 carried a whole file on this (`author-game/references/prose-truth.md`, 121 lines); a grep of the v2 skill for `prose is a copy \| re-price \| stale prose` returns **nothing**. Found 2026-08-22 while closing the currency item, which is the first measured instance of it. |
 
 ### Parked
 
@@ -772,10 +810,54 @@ prose extraction. **v1's headline number is untestable from the compiled artifac
 does not claim it is wrong. It claims it is unverified, which for a rule that calls everything else
 "drift" is its own problem.
 
-What the corpus *can* say: the field median is **33:1 narration:dialogue**, and the two most
+~~What the corpus *can* say: the field median is **33:1 narration:dialogue**, and the two most
 prose-dense games in it are the two most dialogue-heavy — **DoL at 2.7:1**, `course_of_temptation`
 at 3.8:1. So dialogue-forward writing at scale is real and the direction of v1's instinct survives;
-the specific number does not transfer.
+the specific number does not transfer.~~
+
+> ### ⛔ SUPERSEDED 2026-08-18 — the 33:1 was the instrument, not the field
+>
+> Struck rather than deleted, because the trail is the point: this paragraph is why
+> `register.md` demoted v1's dialogue rule to *"a direction, not a threshold"*, and the demotion
+> stood for six days.
+>
+> **The measurement counted text inside `"quote marks"`. 20 of the 25 games in the corpus do not
+> use them.** They render speech as a UI component — `<<speech>>`, `<<say>>`,
+> `<<nm "Karlee" "…">>`, `<<chat portrait "…">>`, `<div class="npctextbox">`, or one container
+> macro per character (`<<Mc>>`, `<<AmyBd>>`). A quote-counter sees none of that and reports the
+> game as pure narration.
+>
+> Re-measured 2026-08-18 on the same corpus, one rendered path per passage, with each game's own
+> speech convention read out of its source first:
+>
+> ```
+> game                 quotes only    + its own speech UI
+> corpo-life               584.9:1               0.30:1
+> sluttown-usa             762.0:1               0.63:1
+> become-taxi-driver       142.1:1               0.72:1
+> family-business            >999:1               1.15:1
+> destroyer                 71.7:1               1.44:1
+> apocalyptic-world        120.6:1               1.83:1
+> the-company              290.1:1               2.69:1
+> degrees-of-lewdity         3.6:1               3.62:1   <- unchanged
+> course-of-temptation       4.6:1               4.57:1   <- unchanged
+> patriarch                  2.9:1               2.93:1   <- unchanged
+> MEDIAN                    65.3:1               2.93:1
+> games at <=2:1                  0             10 of 25
+> ```
+>
+> The three that do not move are the three that punctuate speech with quote marks — **DoL and
+> course_of_temptation among them.** This study did not find the two most dialogue-heavy games in
+> the corpus; it found the two whose dialogue its instrument could see. The most dialogue-dominant
+> game in the set, `corpo-life` at 0.30:1, was read as 585:1 narration.
+>
+> **The corrected finding: field median 2.93:1, ten of twenty-five games at or under 2:1.** v1's
+> Rule 4 was right in direction and too extreme in number — its 0.73:1 came from one game. The rule
+> is restored as **gate 32 · somebody speaks**, ceiling 5:1, with the derivation in the
+> `NARRATION_DIALOGUE_CEILING` constant. `references/register.md` S3.
+>
+> Item 4's other three findings (sentence length, second person, the reference game is the coldest)
+> re-measure unchanged and stand.
 
 **c · The 35–40 words-per-beat figure cannot be checked from a compiled game either.** A Twine
 passage is not a beat, and our own engine emits a whole canvas as **one** passage — `back_home`'s
@@ -866,7 +948,7 @@ runs 2.7:1 to 500:1 — far too wide to threshold. It belongs in doctrine as a d
 
 ---
 
-## Appendix C · The prose corpus — method and the three traps
+## Appendix C · The prose corpus — method and the six traps
 
 Same 18 files as Appendix B, plus `back_home`'s built HTML through the identical script.
 
@@ -876,11 +958,27 @@ definition, anything under 20 words after stripping, and — the load-bearing fi
 stripped text is under 40% of its raw length**, which removes CSS-and-markup passages that survive
 tag-stripping as word-like fragments.
 
-**Three extraction traps, all found by a result being obviously wrong:**
+**Six extraction traps, all found by a result being obviously wrong:**
 
 1. **HTML-escaped macro bodies** (study 3) — `<<set>>` never matched.
 2. **Money moves through per-game widgets** (study 3), not raw `<<set>>`.
-3. **The longest "prose" passages are widget libraries and CSS.** Before the tag filter, the longest
+3. **Speech is a UI COMPONENT, not punctuation** (added 2026-08-18 — the trap that superseded this
+   study's dialogue finding). 20 of 25 games render dialogue through `<<speech>>`, `<<say>>`,
+   `<<nm "Name" "…">>`, `<<chat portrait "…">>`, a `class="npctextbox"` div, or one container macro
+   per character. **Read each game's own convention out of its source before counting anything as
+   narration.** The quote-only instrument reported `corpo-life` — 70% spoken — as 585:1 narration.
+4. **Static source counts branches the player never sees** (added 2026-08-18). `destroyer:ginablow`
+   is eight `<<if>>` branches printing the same four words over a different image. **Collapse
+   if/elseif/else chains to one branch before measuring length**; doing so moves the corpus median
+   from 115 words to 88 and brings DoL's median from 82 to 54, in line with its known figure.
+5. **A clamp guard is not a gate** (added 2026-08-19, meter study). `<<if $lust lt 0>>` followed by
+   `<<set $lust to 0>>` is the author bounding a variable, not gating content — and `corpo-life`
+   carries **2,889** of them on one variable. Counting them reported that meter at 3,235 gates when
+   the real figure is **346**, and would have made a 0–100 arousal bar look like the most gated thing
+   in the corpus by an order of magnitude. **Count only comparisons against a threshold strictly
+   inside the meter's own range.** Same family as trap 3: the instrument did not report a smaller
+   number, it reported the wrong one.
+6. **The longest "prose" passages are widget libraries and CSS.** Before the tag filter, the longest
    passage in `back_home` was the engine's widget library, in DoL a combat widget, in
    *Road to Success* a styled laptop UI. This inflated every median and poisoned every denominator —
    the first-pass table showed a field median of 138 words and DoL "8.0% hot" against a denominator
@@ -892,7 +990,8 @@ tag-stripping as word-like fragments.
   per click. `back_home`'s 429-word median vs a 175-word field median measures architecture. The
   35–40-words-per-beat rule is **neither confirmed nor refuted here.**
 - **v1's 0.73:1 dialogue ratio.** Untestable — only 31 of *Road to Success*'s 373 passages survive
-  extraction.
+  extraction. *(But the field figure it was compared against was wrong; see the superseded block in
+  item 4 §3b. Corrected field median 2.93:1.)*
 - **`back_home`'s prose sample is small** — 122 passages against DoL's 10,215. Its sentence-length
   and person figures are stable at that size; its hot% is noisier than the field's.
 - Everything here measures **shape, not quality.**
@@ -1385,8 +1484,8 @@ gate, and the reporting change:
 
 | | |
 |---|---|
-| **Gate 22 · declared objects are real** *(new)* | declare-then-check against `board.locations[].objects`: every declared object is written into the room's prose AND affords a choice; a room with screens must declare objects (or the denominator is author-controlled); a declared id must be a real location. Scoped to location-only hubs — on an NPC hub the anchor is the person. **This is the half of R2b a parser can judge.** |
-| **Lint · choices hang off the room** *(new)* | the share of room choices naming something their own screen's prose said. **Built as part of the gate and demoted within the week** — see below. |
+| **Gate 22 · declared objects are real** ⚠️ **DELETED 2026-08-18 — see the note at the head of this file** | declare-then-check against `board.locations[].objects`: every declared object is written into the room's prose AND affords a choice; a room with screens must declare objects (or the denominator is author-controlled); a declared id must be a real location. Scoped to location-only hubs — on an NPC hub the anchor is the person. **This is the half of R2b a parser can judge.** |
+| **Lint · choices hang off the room** ⚠️ **DELETED 2026-08-18 with gate 22** | the share of room choices naming something their own screen's prose said. **Built as part of the gate and demoted within the week** — see below. |
 | **Gate 1 · location fill** *(rewritten)* | judges each location against its **own** declared `fill`; the global mean/median/anchor constants demote to a backstop used only when no ledger exists, and the headline says which ran. |
 | **Gate 20 · menu size** | prints `median · N of M screens at the cap`, and warns when the majority sit on it. A game at median 3 and a game at median 8 no longer print the same line. |
 | **Gate 19 · sentence length** | prints its margin and the field median. |

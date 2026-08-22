@@ -1,0 +1,249 @@
+# =============================================================================
+# The First Hour — <game title>
+#
+# Copy into games/<slug>/toml_phases/2_one_shots.toml.
+# Doctrine and the evidence behind every rule: references/the-first-hour.md
+#
+# THE ONE RULE: the game does not use a name until it has earned it.
+#               People, places, things.
+#
+# ⚠️ THIS FILE IS A MENU. Section A offers TWO opening shapes and you DELETE ONE.
+#    Keeping both, or blending them, is the measured defect (F1) — a cold open
+#    carrying a staged open's cast, which is where every v2 game landed.
+#
+# ⚠️ EVERY WORD IN A TEMPLATE IS BEING TAUGHT. Nothing below is real prose; all
+#    of it is <placeholder>. The last time this skill shipped a filled-in example
+#    five games copied its dialect. references/register.md, "The words the player
+#    has to already own".
+# =============================================================================
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# A · THE OPENING — pick ONE of A1 / A2, delete the other
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   A1  COLD OPEN    60-300 words · names NOBODY · the cast arrives via section B
+#                    10 of 20 field openings do this. corpo-life 64 w, DoL 193.
+#
+#   A2  STAGED OPEN  700+ words · one person at a time, on screen and SPEAKING
+#                    ~229 words per named character. patriarch 2,619 w.
+#
+#   There is no third option. The middle — a short opening carrying a long
+#   opening's cast — is what this file exists to stop.
+
+
+# ── A1 · COLD OPEN ───────────────────────────────────────────────────────────
+# The boot. It names the situation and the pressure. It names NO ONE.
+[[canvases]]
+id   = "canvas_opening"
+name = "<Opening>"
+description = "<Boot. Where she is, what is squeezing her, what she has to do today. NO NAMES. Sets opening_done.>"
+
+[canvases.trigger]
+location      = "<start_location>"
+is_repeatable = false
+priority      = 12
+is_active     = true
+
+[[canvases.nodes]]
+id   = "<first_node>"
+name = "<Screen title>"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "<Who she is and where. One or two sentences.>"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "<The pressure. What is owed, to whom, by when — no character names.>"
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "<Named next action — a verb, not a mood. the-voice.md R1.>"
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "<landing_location>"
+# ⚠️ F3 — THE HANDOVER TIME IS COMPUTED, NOT FELT.
+#    starting_hour + 3 min per undeclared node exit + this number = the clock the
+#    player lands on. Check that something at <landing_location> is OPEN at that
+#    minute. A `trigger_mode = "random"` ambient does not count; neither does a
+#    `substitution_only` walk-in. A game shipped landing at 07:36 in a room whose
+#    only content opened at 08:00.
+time_progression_minutes = 30
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "opening_done"
+op         = "set"
+
+
+# ── A2 · STAGED OPEN ─────────────────────────────────────────────────────────
+# Delete A1 if you use this. Same boot canvas, but the chain continues and each
+# character ENTERS: described, named after their role, and SPEAKING. F6 + F7.
+#
+# [[canvases.nodes]]
+# id   = "<second_node>"
+# name = "<Screen title>"
+#
+# [[canvases.nodes.blocks]]
+# type    = "paragraph"
+# content = "<Their entrance. Give the ROLE first — 'your closest friend', 'one of your father's girls'. The name comes after it, in the same sentence.>"
+#
+# [[canvases.nodes.blocks]]
+# type  = "dialog"
+# content = "<Their first line states what they WANT. Not a greeting, not a bio.>"
+# [canvases.nodes.blocks.props]
+# speaker = "npc"
+# npcId   = "<npc_id>"
+#
+# ⚠️ Where the player cannot yet know the name, use speaker = "unknown" and the
+#    engine prints "Stranger:" (v2.py:14600-14606).
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# B · THE MEETING — one per character, and the hub sits behind it
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   F5. A repeatable `npc =` hub with no gate IS the introduction, and that is
+#   the forbidden shape. All six v2 games shipped it for their whole cast.
+#
+#   Field size: median 101 words, 66% under 150, 64% with somebody speaking.
+#   Ours, already correct: the_inheritance/canvas_meet_audrey — 125 w, 4 dialog.
+
+[[canvases]]
+id   = "<canvas_meet_npcid>"
+name = "<Meeting NAME — must differ from the hub's name>"
+description = "<First contact. Why here, why now. Sets <npc>_met.>"
+
+[canvases.trigger]
+location      = "<where they actually are>"
+requires_npc  = "<npc_id>"
+is_repeatable = false
+priority      = 10
+is_active     = true
+
+# ⚠️ F5 — `requires_npc` DOES NOT GATE AUTO-FIRE. Verified:
+#    getStoryCanvasRedirect (v2.py:4921) -> selectAutoFireCanvasForLocation
+#    (v2.py:4453) -> isCanvasValid (v2.py:4573), which reads schedules,
+#    conditions and repeatability and NEVER reads requiresNpc. The field is only
+#    consumed at v2.py:5259 (random encounters) and v2.py:5332 (substitutions).
+#    Keep it — it is free and it documents intent — but the SCHEDULE below is
+#    what actually stops this firing in an empty room.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "<matches this character's own schedule row>"
+end_time   = "<matches this character's own schedule row>"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+# ⚠️ A conditions block without version = "1.0" FAILS OPEN — the engine returns
+#    true and the meeting cold-spawns at game start (v2.py:3534).
+[[canvases.trigger.conditions.items]]
+type      = "flag"
+subject   = "player"
+flag_key  = "opening_done"
+operator  = "is_true"
+[[canvases.trigger.conditions.items]]
+type      = "flag"
+subject   = "player"
+flag_key  = "<npc>_met"
+operator  = "is_false"
+
+[[canvases.nodes]]
+id   = "<meet_node>"
+name = "<Screen title>"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "<The pretext — why this meeting happens here, now. Then the ROLE, then the name, then one line of character read.>"
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+content = "<Their first line. It states a want or a role. A person, not a meter waiting to be raised.>"
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "<npc_id>"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "<Named next action.>"
+targetType = "location"
+locationId = "<where they are>"
+[[canvases.nodes.exit_block.choices.flagEffects]]
+targetType = "player"
+flag       = "<npc>_met"
+op         = "set"
+
+# ── the hub — separate canvas, gated on the flag above ───────────────────────
+#
+# ⚠️ F8 — ONE FLAG PER CHARACTER. A single `doors_open` / `arrival_done` that
+#    opens four people's hubs is the cold-spawn hub wearing a coat, and three v2
+#    games shipped exactly that. One flag may open the same character's talk hub
+#    AND their sex hub; it may never open a second character's door.
+#
+# [[canvases]]
+# id   = "<hub_npcid_place>"
+# name = "<A DIFFERENT name from the meeting canvas>"
+#
+# [canvases.trigger]
+# location      = "<where they are>"
+# requires_npc  = "<npc_id>"
+# npc           = "<npc_id>"          # this is what renders the portrait
+# is_repeatable = true
+# priority      = 6
+# is_active     = true
+#
+# [canvases.trigger.conditions]
+# version = "1.0"
+# logic   = "AND"
+# [[canvases.trigger.conditions.items]]
+# type     = "flag"
+# subject  = "player"
+# flag_key = "<npc>_met"
+# operator = "is_true"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# C · THE FIRST VISIT — the anchor introduces itself
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   F9. Same rule as a person: the first time the player walks in, the game says
+#   what kind of place this is and what happens here. After that it is just the
+#   name. A non-repeatable canvas bound to the location auto-fires once
+#   (v2.py:4453) — no new primitive needed.
+#
+#   ⚠️ THE ANCHOR IS THE ONE THAT MATTERS. A game declared its anchor at 27% of
+#      the whole word budget, gave first-visit canvases to five OTHER rooms, and
+#      never once said what kind of place the anchor was. The first thing the
+#      human reader asked was what it is.
+
+[[canvases]]
+id   = "<canvas_first_visit_anchor>"
+name = "<First time in NAME>"
+description = "<Says what this place IS and what happens here. Fires once.>"
+
+[canvases.trigger]
+location      = "<anchor_location>"
+is_repeatable = false
+priority      = 11
+is_active     = true
+
+[[canvases.nodes]]
+id   = "<first_visit_node>"
+name = "<Screen title>"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "<What kind of place this is, in the plainest words available — the type of business, what people do here, where the money comes from. Then the detail.>"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "<Named next action.>"
+targetType = "location"
+locationId = "<anchor_location>"

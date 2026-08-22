@@ -56,13 +56,18 @@ is a separate question with its own file — `references/the-surfaces.md`.** Ask
 at*: a person → their hub · the room or herself → its own located canvas · her, done to her → a
 substitution. They never share an exit block.
 
-**How many choices a room has is not a number you pick — it falls out of what the room contains.**
-Write the room's paragraph first, naming the things she can act on; declare those in
-`board.locations[].objects`; then hang every choice on one of them. One object may afford several
-choices; no choice may hang on nothing. That is what separates a room from a button list, it is the
-shape the field agrees on most consistently. **Gate 22 checks the half a parser can judge** — did
-you write the object, can she use it — against your own declaration; the half that needs a reader is
-reported as a percentage instead.
+**How many choices a room has is not a number you pick — it falls out of what the room serves.**
+A room's list is **needs + work + people**, and nothing else (`the-surfaces.md` R2). A body needs
+about five things and a room contains fifty nouns, so the count falls out of a set that cannot grow.
+That is what separates a room from a button list.
+
+⚠️ **This used to say "declare the objects in the room and hang every choice on one" and it was
+wrong** — deleted 2026-08-18 along with gate 22. See the operating rule about tired authors below.
+
+**A canvas advances in one of two ways, and the content kind picks which** (`the-surfaces.md` R3b):
+a **cascade** appends below what is on screen, so it suits a one-time scene whose text should build;
+**node routing** swaps the passage, so it suits a repeatable act surface where the picture has to
+change with the act.
 
 ⚠️ **There is also a cap of 8 (gate 20), and it is a backstop, not a size.** Two games prove why it
 must be read that way: one shipped 23 choices on a front desk and scored 18/18 because nothing said a
@@ -77,14 +82,28 @@ Resolve the game slug from the request, then read `games/<slug>/v2_state.json`:
 | `phase` | do this | reference |
 |---|---|---|
 | *(no state file)* | write the Want, create the state file | `references/the-want.md` |
-| `want` | lay down the world | `references/the-board.md` + `the-map.md` + `the-economy.md` |
+| `want` | lay down the world | `references/the-board.md` + `the-map.md` + `the-economy.md` + `the-meters.md` |
 | `board` | build v0.1 | `references/the-release.md` (§ first release) + `the-voice.md` |
 | `release` | run the loop — pitch, attack, write, gate, ship, log | `references/the-release.md` |
 
 **The world files, all read in the board phase:** `the-board.md` (fill, meters, cast) ·
 `the-map.md` (the world as a place someone could draw) · `the-surfaces.md` (which screen each
-piece of content lives on) · `the-economy.md` (what money is for) · `the-voice.md` (how the game
-talks to the player about itself) · `register.md` (how the prose reads once they click).
+piece of content lives on) · `the-economy.md` (what money is for) · **`the-meters.md` (WHICH meters
+exist and who owns them, what the climb costs, and how the player reads it off the sidebar)** ·
+`the-voice.md` (how the game talks to the player about itself) · `register.md` (how the prose reads
+once they click) · **`the-first-hour.md` (the opening, the first meeting with each character, and
+the first visit to each place)** · **`the-clock.md` (the time the game promises and the time the
+engine keeps)**.
+
+**Read `the-first-hour.md` before you author a single canvas.** It is the only one of these that
+governs content the player meets in a fixed order, and it is the one v2 shipped without: all six v2
+games put their entire cast in a room with no introduction, against four v1 games that did not.
+`templates/first-hour.toml` carries the shapes — and it is a **menu**, so delete the opening you
+are not using.
+
+**The first question of the board phase is `the-meters.md` W1 — does the PLAYER climb or does the
+CAST?** The field splits 8 roster / 9 ladder with nothing between them, and all five v2 games landed
+in the empty middle because nobody asked. Declare `board.who_climbs` before naming a meter.
 
 The agent roster for each phase is in `references/agents.md`. The state schema is in
 `references/state.md`. Engine facts are in `references/engine.md` — and **only** there.
@@ -107,16 +126,43 @@ documented nowhere but in the script's own comments, so an author who hit one ha
 | ends on an opening | the release closes on a visible locked door | `the-release.md` |
 | ascent tiers expand the world | your meters open content; **and no player meter quietly closes it** | `the-board.md` §3 |
 | world reachable · residents have homes | the map is a place someone could draw | `the-map.md` |
+| **the map is a place** | a shape was CHOSEN, and the exterior is the ground rather than a room off the kitchen | `the-map.md` R0 · R3 |
 | guidance exists · no chain ends in silence | the player is told where to go next | `the-voice.md` R2 |
 | money gates something · sinks >= sources · no free uncapped income · a price is on its label · **the obligation is charged** | the economy can say no | `the-economy.md` |
-| a place is not a catalogue | the backstop on room size — **not** the target | `the-surfaces.md` R3 |
-| declared objects are real | the board's room objects are written, usable, and complete | `the-surfaces.md` R2b |
+| a place is not a catalogue | the backstop on room size — **not** the target | `the-surfaces.md` R2 |
+| **a need shuts a door** | every declared need is read by a condition — a restore that gates nothing is a chore | `the-meters.md` M8–M10 |
+| **the walk-in floor** | a room where she works alone with someone scheduled carries a walk-in | `the-surfaces.md` R3 |
+| **an explicit beat carries a clip** | the picture is on the beat the player is reading, not on the one above it | `register.md` S1 · `engine.md` §8 |
+| **somebody speaks** | the game is not all narration — field median 2.93:1 | `register.md` S3 |
 | **speakers are named** | every `dialog`/`thought_bubble` says whose it is | `engine.md` §25 |
 | **effects use a live op** | no effect uses an `op` the engine silently discards | `engine.md` §21b |
+| **the climb is paid for** | every meter a gate reads has a brake on the rungs that raise it | `the-meters.md` M1–M5 |
+| **a day-cap closes** | every flag read `is_false` and cleared in `[engine.daily_tick]` is SET somewhere — a cap with two of its three parts validates and throttles nothing | `the-meters.md` M5 · `engine.md` §28.2 |
+| **a meter is read** | every number the game raises is read by a condition, a cost or a quest goal — a raise with no reader is decoration | `the-meters.md` W3 |
+| **the climb is where you said it is** | the game gates where `board.who_climbs` says it does | `the-meters.md` W1 · `state.md` |
+| **a banded meter is not also a number** | a banded sidebar stat is `hidden` in `[[traits.labels]]` | `the-meters.md` M7 · `engine.md` §30 |
+| **the opening opens a door** | the funnel's last click lands on a clock time when something at that location is actually open | `the-first-hour.md` F3 |
+| **every hub is met first** | no character's portrait is live before a meeting has fired, and one flag never opens the whole cast | `the-first-hour.md` F5 · F8 |
+| **the anchor introduces itself** | the room the ledger budgeted largest says what kind of place it is, once, on the first visit | `the-first-hour.md` F9 |
+| **the label keeps its time** | no button promises a clock time the engine cannot reach, and a stated duration is the real spend | `the-clock.md` C3 · C4 |
+| **the price is in one currency** | every notation on a button, plus the engine's own `currency_symbol`, resolves to ONE currency | `the-economy.md` R7 · `engine.md` §33 |
 | sentence length | the prose has not drifted dense | `register.md` |
 
-Lints sit below the tally and never move it: dialogue attribution · choices hang off the room ·
-screen shape · the prose names places the map does not have.
+Lints sit below the tally and never move it: dialogue attribution · room-list labels ·
+the browse share · screen shape · the prose names places the map does not have · **the ladder**
+(where a scene starts and stops on it) · **talk screens** · **the act menu** · **the meter ladder**
+(rungs per tier, and where the lowest one sits) · **the cast's meters** · **the counterweight** ·
+**the words the player has to already own** (every word in the player's face that fewer than four
+of the 25 field games use — a list to read, never a score) · **dispatch depth** (how many different
+things one activity can turn into, and how often the activity itself still renders) ·
+**the act nodes** (body words on the thinnest band each act and finish node can render) ·
+**named before met** (every character
+named before the game has introduced them, and every room that never says what it is) ·
+**the clock in the prose** (every hour a beat names, with the window it has to survive) ·
+**the time cost is not on the button** (every click that moves the clock an hour or more in
+silence) · **the currency in the prose** (every line that names a currency other than the game's
+own, and whether the rent pages agree with it) · **the price is spelled out** (the form of every
+priced label against the field's 94% symbol).
 
 ## Operating rules
 
@@ -128,6 +174,57 @@ screen shape · the prose names places the map does not have.
   citation. Never assert engine behaviour from memory.
 - **Gates before ship.** `python3 scripts/gates.py <slug>` must be green. A gate that fails
   is either a real defect or a wrong threshold — fix one or the other, never skip.
+- **An example outranks every rule beside it, so it goes in LAST — after it is validated, or not
+  at all.** A rule is read; an example is copied. `the-map.md` shipped a worked example on day one
+  that was the first game's own map — its character ids, its box room — with its two known bugs
+  patched out and its skeleton intact. Three games inherited that skeleton, and the second
+  house-shaped world scored **26/26** before anyone noticed. Where a shape has to be taught, teach a
+  **menu the author must choose from**, never one picture they can copy. If a validated example is
+  ever promoted, it is **one per option or none** — a single good example reproduces the failure
+  with a nicer floor plan. *(Every other reference file carrying a worked example has the same
+  exposure; that audit is open.)*
+- **The examples are also the REGISTER, not just the shape.** Same rule, third instance, and the
+  one nobody saw coming: no line in this skill ever said "write British", but its worked examples
+  used `airer` ×9, `lodger` ×8, `immersion` ×3 and shipped `costs = "£5 for the immersion"` in
+  `templates/board.toml`. Five games came out written in a dialect the genre does not use — the
+  field runs locale-locked nouns at **0.8 per 10,000 words**, our v2 games at **9.4–95.6**, and the
+  v1 games, whose skill happened not to carry those examples, sit at the field's rate. **Every word
+  in an example is being taught too.** `references/register.md`, "The words the player has to
+  already own".
+- **A shape that ships in `templates/` is copied harder than one that ships in `references/`.** A
+  reference file is read; a template is *filled in*, so whatever is already sitting in the slot is
+  the answer unless the author actively fights it. `the-board.md` said *"their rungs sit at
+  15/35/55/75 — copy that shape"* and `templates/board.toml` carried the matching band table:
+  **all 16 declared tiers across five games put their lowest rung at exactly 15**, against a field
+  that runs 8–17 rungs starting at ~5. The same file's volatile block said *"NEVER gate an arc on
+  these"* and omitted what a throttle IS for, and five games shipped **232 arousal raises against 4
+  reads**. This is the "an example outranks every rule" rule one level worse: in a template, even a
+  *placeholder list* is an example. Ship a menu the author must cut down, never a set they can keep.
+- **Ask what a tired author would build to satisfy a check, and make sure that is the thing you
+  want.** A check does not measure quality; it **manufactures** whatever it can see. `objects` /
+  gate 22 was green on all five games while forcing nine duplicate room screens into existence,
+  because it computed affordances from `exit_block.choices` and could not see a canvas at all — so
+  an entire canvas about the airer counted as zero, and the only way to pass was a second screen
+  re-listing what was already there. That is worse than no check, because it ships green. It was
+  deleted 2026-08-18 and replaced by `the-surfaces.md` R2: a room's list is **needs + work +
+  people**, a CLOSED set that sizes itself, instead of objects, an OPEN one that never can.
+- **An instrument that cannot see a thing reports its ABSENCE, not its rarity.** Before a
+  measurement is allowed to retire a rule, ask what the measurement is blind to. v1's dialogue rule
+  was dropped because a field study counted speech by looking for `"quote marks"` and found a
+  median of 33:1 — but 20 of 25 games render speech as a UI component (`<<speech>>`, `<<nm>>`, a
+  chat bubble, one macro per character), so the instrument read the most spoken game in the corpus
+  as **585:1 narration**. Re-measured with each game's own convention: median **2.93:1**, ten games
+  under 2:1. The two games the study named as the dialogue-heavy outliers were simply the two whose
+  dialogue it could see. Same failure family as gate 22 above, one level up: there, a check could
+  not see a canvas; here, a study could not see a sentence.
+- **A check that measures EXISTENCE has not measured anything.** Every defect found on
+  2026-08-16 had passed a gate that asked whether a thing was present, when the question was
+  *how much of it there was* or *what it cost*. `ends on an opening` was `locked > 0` and passed a
+  game running 78% of its choices open on turn one. `ascent tiers expand the world` tests
+  direction only, so a tier gating 4 choices scores like a tier gating 40. The media gates report
+  100% coverage against pools with zero files behind them. **Every check either carries a
+  denominator or prints its magnitude beside the verdict** — and where a threshold cannot be
+  honestly set, print the number and demote it to a lint rather than inventing one.
 - **The Want is an input, not an artifact.** Re-read it every release. A release that cannot
   name which line of the Want it serves does not ship. The failure this prevents is a spec
   written once at the start and never consulted again.
