@@ -154,15 +154,25 @@ class Command(BaseCommand):
             ),
         )
         parser.add_argument(
-            "--build",
+            "--codes",
             type=str,
-            choices=["free", "paid"],
-            default="free",
+            default=None,
             help=(
-                "Cheat-page build variant. 'free' (the default) emits the cheat page's rows "
-                "as padlocked labels with NO working effects in the file; 'paid' emits live "
-                "rows. Omitting this flag always produces the safe free build. Games without "
-                "a [ui.cheat_page] are unaffected either way."
+                "Path to the game's cheat-codes file (TOML: a [codes] table of "
+                "row_id = \"WORD\", plus a version that must match [project] version). "
+                "Required whenever the game authors a [ui.cheat_page]. The file is "
+                "untracked on purpose — codes reach players through the paid guide, and "
+                "this repo is public. Only hashes are baked into the build."
+            ),
+        )
+        parser.add_argument(
+            "--no-codes",
+            action="store_true",
+            help=(
+                "Build a game that has a [ui.cheat_page] without any working codes. The "
+                "page still renders its box and its join line; nothing can be unlocked. "
+                "Explicit because the silent version of this is a build that looks fine "
+                "and quietly sells a box no code opens."
             ),
         )
 
@@ -186,7 +196,8 @@ class Command(BaseCommand):
         dry_run = options["dry_run"]
         dev_mode = options["dev"]
         generate_chart = options.get("chart", False)
-        build_variant = options.get("build", "free") or "free"
+        codes_path = options.get("codes")
+        no_codes = options.get("no_codes", False)
         # No-DB (in-memory graph) is the DEFAULT; --use-db opts into the legacy
         # database build path (which requires an owner and persists rows).
         no_db = not options.get("use_db", False)
@@ -226,29 +237,13 @@ class Command(BaseCommand):
         # Phase 1: Validate owner (DB path only — no owner needed for the no-DB default)
         owner = None if no_db else self._get_owner(owner_id)
 
-        # Phase 1.9: Build-variant guard. Deliberately BEFORE the dry-run exit, so
-        # `--dry-run --build paid` still reports the mistake (and so it is testable
-        # without running a full package).
-        #
-        # A paid build carries live cheat grants. games/<slug>/output/ is git-tracked
-        # and the repo is public, so writing a paid build there publishes the grants
-        # and undoes the whole free/paid split. One wrong --output is all it takes.
-        if build_variant == "paid":
-            self.stdout.write(
-                self.style.WARNING(
-                    "🔓 PAID build — live cheat grants WILL be present in the output file. "
-                    "Do not commit or publish this artifact."
-                )
-            )
-            if Path(output_dir).name == "output":
-                raise CommandError(
-                    "--build paid must not write into a directory named 'output' — that path is "
-                    "git-tracked and public, which would publish the cheat grants. Use a "
-                    "gitignored sibling such as games/<slug>/output-paid/ instead."
-                )
-
         # Phase 2: Load and validate TOML
         template = self._load_toml(file_path)
+
+        # Phase 2.5: Cheat codes. AFTER the template load (we need to know whether the
+        # game even has a cheat page) but BEFORE the dry-run exit, so a missing or
+        # mismatched codes file is reported without running a full package.
+        cheat_codes = self._resolve_cheat_codes(template, codes_path, no_codes)
 
         # Phase 3: Optional dry-run exit
         if dry_run:
@@ -287,7 +282,7 @@ class Command(BaseCommand):
                 prune_orphans=not options["no_prune"],
                 game_folder=game_folder_name,  # Pass resolved game folder name for approvals
                 graph=graph,
-                build_variant=build_variant,
+                cheat_codes=cheat_codes,
             )
         except Exception as e:
             # Keep project for debugging on packaging failure (DB path only —
@@ -321,6 +316,119 @@ class Command(BaseCommand):
             raise CommandError(f"Owner with ID {owner_id} not found")
         except ValueError:
             raise CommandError(f"Invalid UUID format: {owner_id}")
+
+    def _resolve_cheat_codes(self, template, codes_path, no_codes: bool) -> dict:
+        """Read the untracked cheat-codes file into {row id: plaintext code}.
+
+        The codes are not a property of the game's TOML. That file is committed to a
+        public repo, so a code written there is a published code. They live in their
+        own untracked file, and exactly two things read it: this packager (which bakes
+        only hashes) and `build_guide` (which prints the words into the paid PDF). One
+        source means the guide can never print a code the build will not accept.
+
+        A game with a cheat page and no codes file is a build error rather than a
+        warning: the failure it prevents — shipping a release whose box opens nothing,
+        to people who paid for codes — is silent, and would be discovered by a customer.
+        """
+        from pathlib import Path
+
+        import tomli
+
+        has_page = getattr(template, "cheat_page", None) is not None
+        if not has_page:
+            if codes_path:
+                self.stdout.write(
+                    self.style.WARNING(
+                        "   ⚠️  --codes given but this game has no [ui.cheat_page]; ignoring."
+                    )
+                )
+            return {}
+
+        if no_codes:
+            self.stdout.write(
+                self.style.WARNING(
+                    "   🔒 --no-codes: the cheat page will render its box and join line, "
+                    "but no code will open anything."
+                )
+            )
+            return {}
+
+        if not codes_path:
+            raise CommandError(
+                "This game authors a [ui.cheat_page] but no --codes file was given. "
+                "Pass the game's untracked codes file (games/<slug>/guide/codes.toml), "
+                "or pass --no-codes to build a page nothing can unlock."
+            )
+
+        path = Path(codes_path)
+        if not path.exists():
+            raise CommandError(f"Cheat codes file not found: {path}")
+
+        try:
+            with open(path, "rb") as fh:
+                data = tomli.load(fh)
+        except Exception as e:
+            raise CommandError(f"Failed to parse cheat codes file {path}: {e}")
+
+        codes_raw = data.get("codes")
+        if not isinstance(codes_raw, dict) or not codes_raw:
+            raise CommandError(
+                f"{path}: expected a non-empty [codes] table of row_id = \"WORD\"."
+            )
+
+        # The codes file names the release it was written for. Without this check a
+        # stale file silently produces a build whose codes do not match the guide that
+        # ships beside it — the exact failure the version-scoped hash exists to avoid.
+        declared = str(data.get("version", "") or "").strip()
+        build_version = str(
+            getattr(getattr(template, "project", None), "version", "") or ""
+        ).strip()
+        if declared and build_version and declared != build_version:
+            raise CommandError(
+                f"{path}: codes are for v{declared} but this build is v{build_version}. "
+                f"Codes are scoped to a release — update the codes file and regenerate "
+                f"the guide, or build the matching version."
+            )
+
+        authored_ids = [g.id for g in (template.cheat_page.grants or [])]
+        codes = {}
+        for row_id, word in codes_raw.items():
+            if row_id not in authored_ids:
+                raise CommandError(
+                    f"{path}: [codes] declares '{row_id}', which is not a "
+                    f"[[ui.cheat_page.grants]] id. Known ids: {', '.join(authored_ids)}"
+                )
+            if not isinstance(word, str) or len(word.strip()) < 3:
+                raise CommandError(
+                    f"{path}: code for '{row_id}' must be a string of at least 3 "
+                    f"characters (shorter codes collide with ordinary prose and defeat "
+                    f"the plaintext-leak check)."
+                )
+            codes[row_id] = word
+
+        # Two codes that normalise to the same string would make one row unreachable.
+        from apps.game_generation.twee_comprehensive.generators.v2 import (
+            TweeComprehensiveGeneratorV2,
+        )
+        seen = {}
+        for row_id, word in codes.items():
+            norm = TweeComprehensiveGeneratorV2.normalize_cheat_code(word)
+            if norm in seen:
+                raise CommandError(
+                    f"{path}: '{row_id}' and '{seen[norm]}' have the same code once "
+                    f"spaces and case are ignored. Give each row its own word."
+                )
+            seen[norm] = row_id
+
+        missing = [i for i in authored_ids if i not in codes]
+        if missing:
+            raise CommandError(
+                f"{path}: no code for row(s) {', '.join(missing)}. Every authored row "
+                f"needs one, or the guide will document a row players cannot open."
+            )
+
+        self.stdout.write(f"   🔑 Cheat codes: {len(codes)} row(s) from {path.name}")
+        return codes
 
     def _load_toml(self, file_path: str) -> dict:
         """Load and validate TOML file."""
@@ -463,7 +571,7 @@ class Command(BaseCommand):
         prune_orphans: bool = True,
         game_folder: str = None,
         graph=None,
-        build_variant: str = "free",
+        cheat_codes: dict = None,
     ) -> dict:
         """Package game using GameService."""
         self.stdout.write("")
@@ -489,10 +597,11 @@ class Command(BaseCommand):
             options["dev_mode"] = True
         if game_folder:
             options["game_folder"] = game_folder
-        # Always passed, not conditionally: the generator's own default is "free", and
-        # sending the value every time means the emitted variant is never ambiguous.
-        # Harmless for games with no cheat page — nothing reads it.
-        options["build"] = build_variant
+        # Only sent when there is something to send. The generator's own default is an
+        # empty dict, so a game with no cheat page — or a deliberate --no-codes build —
+        # is unaffected either way.
+        if cheat_codes:
+            options["cheat_codes"] = cheat_codes
 
         service = GameService()
         return service.package_game(

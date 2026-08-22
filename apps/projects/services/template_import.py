@@ -405,14 +405,10 @@ class GameTemplate:
     # = page + sidebar button not emitted; runtime-conditional.
     tips_page: Optional["TemplateTipsPage"] = None
     # Player cheat page — authored under [ui.cheat_page]. None = page + sidebar
-    # button not emitted. Which VARIANT ships is a build-time choice
-    # (`package_from_toml --build free|paid`), never a TOML value: two builds come
-    # from one commit, so a committed selector is necessarily false for one of them.
+    # button not emitted. One build ships everywhere: every row is emitted live but
+    # wrapped in a check on its own unlock flag, which the player sets by entering
+    # that row's code. The codes are never in this file (see parse_template).
     cheat_page: Optional["TemplateCheatPage"] = None
-    # Build labels for the sidebar footer badge, authored under [builds.free] /
-    # [builds.paid]. None = no badge, which keeps every pre-existing game's output
-    # byte-identical (the reproducibility property test_nodb_equivalence guards).
-    build_labels: Optional["TemplateBuildLabels"] = None
     # Doc 69 Item 3 — parse-time errors collected during normalize() for the
     # field-name mismatch validator. validate() prepends these to its own
     # error list. Populated only by normalize(); never mutated downstream.
@@ -470,9 +466,11 @@ class TemplateCheatGrant:
     (targetType/npcId/trait/op/value/clamp/cap) so a raw row dict can be fed to
     the existing effect validators for free.
 
-    `label` is the ONLY string that reaches a free build — `hint`, `button_text`
-    and `at_cap_text` are paid-only, so a free player learns no threshold, place
-    or route from the page.
+    NOTHING here reaches a player who has not entered this row's code. The whole
+    row — label, hint, button text — is emitted inside a check on the row's unlock
+    flag, so a locked row renders no bytes at all. That is why `id` is required and
+    explicit rather than derived from `label`: the id is the flag key and the key
+    into the codes file, and renaming a label must not orphan a player's unlock.
 
     `clamp` defaults True here (unlike the choice path, which passes an explicit
     False when omitted) because this page emits its own calls and a banded meter
@@ -480,6 +478,7 @@ class TemplateCheatGrant:
     `clamp = false`, or the engine's hardcoded 0-100 clamp silently caps a wallet
     at 100.
     """
+    id: str
     label: str
     trait: str
     value: float
@@ -488,9 +487,9 @@ class TemplateCheatGrant:
     op: str = "add"
     cap: Optional[float] = None
     clamp: bool = True
-    hint: str = ""            # paid only
-    button_text: str = ""     # paid only; default composed from label + op + value
-    at_cap_text: str = ""     # paid only
+    hint: str = ""
+    button_text: str = ""     # default composed from label + op + value
+    at_cap_text: str = ""
 
 
 @dataclass
@@ -500,23 +499,19 @@ class TemplateCheatPage:
     Unlike TemplateTipsPage this is NOT dropped when empty — an authored-but-empty
     block is a validate() error. The tips_page silent drop is the documented cause
     of a game shipping with its 💡 button permanently absent.
+
+    One build ships everywhere. A player who has entered no code sees the title, the
+    intro, the join block and an empty code box — no row names, no numbers, no hints.
+    `join_note` and `join_url` are that page's only advertising, so they are required
+    (the url falls back to [project] support_url).
     """
     title: str = "Cheats"
-    intro: str = ""           # ships in BOTH builds
+    intro: str = ""
     button_label: str = ""    # defaults to title
     button_icon: str = ""
-    locked_note: str = ""     # FREE build only
+    join_note: str = ""       # the one line telling a free player what the box is for
+    join_url: str = ""        # defaults to [project] support_url at emission
     grants: List["TemplateCheatGrant"] = field(default_factory=list)
-
-
-@dataclass
-class TemplateBuildLabels:
-    """Per-variant labels for the sidebar footer badge ([builds.free] / [builds.paid]).
-
-    Text only. Which variant is active is a CLI argument — nothing here selects it.
-    """
-    free: str = "Free Build"
-    paid: str = "Paid Build"
 
 
 @dataclass
@@ -2805,15 +2800,26 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         if cp_raw is not None:
             if not isinstance(cp_raw, dict):
                 raise TypeError(f"[ui.cheat_page] must be a table, got {type(cp_raw).__name__}")
-            # Reject a TOML-side variant selector. The active variant is a build
-            # argument; a value committed here can only ever describe one of the
-            # two builds, and a forgotten `true` publishes the paid file.
-            for _bad_key in ("enabled", "paid", "free", "grants_enabled", "cheat_grants"):
+            # Reject a TOML-side unlock selector. Which rows are live is decided at
+            # RUNTIME by the code the player typed; a value committed here would open
+            # every row for everyone, in a file that ships publicly.
+            for _bad_key in (
+                "enabled", "paid", "free", "grants_enabled", "cheat_grants", "unlocked",
+            ):
                 if _bad_key in cp_raw:
                     _parse_errors.append(
-                        f"[ui.cheat_page] must not declare '{_bad_key}' — the build variant is "
-                        f"chosen at build time with `manage.py package_from_toml --build free|paid` "
-                        f"(default: free). Remove it."
+                        f"[ui.cheat_page] must not declare '{_bad_key}' — rows unlock at runtime "
+                        f"when the player enters that row's code. Remove it."
+                    )
+            # The codes themselves are NEVER authored here. This file is git-tracked
+            # and the repo is public; committing a code publishes it. Codes live in an
+            # untracked per-game codes file read by `package_from_toml --codes`.
+            for _bad_key in ("code", "codes", "code_words", "password"):
+                if _bad_key in cp_raw:
+                    _parse_errors.append(
+                        f"[ui.cheat_page] must not declare '{_bad_key}' — this file is committed "
+                        f"to a public repo. Put codes in the game's untracked codes file and pass "
+                        f"it with `package_from_toml --codes <path>`."
                     )
             grants: List[TemplateCheatGrant] = []
             for gi, g_raw in enumerate(cp_raw.get("grants", []) or []):
@@ -2821,9 +2827,16 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     raise TypeError(
                         f"ui.cheat_page.grants[{gi}] must be a table, got {type(g_raw).__name__}"
                     )
+                for _bad_key in ("code", "password"):
+                    if _bad_key in g_raw:
+                        _parse_errors.append(
+                            f"ui.cheat_page.grants[{gi}] must not declare '{_bad_key}' — codes live "
+                            f"in the untracked codes file, keyed by this row's `id`."
+                        )
                 _cap = g_raw.get("cap")
                 grants.append(
                     TemplateCheatGrant(
+                        id=_require_str(g_raw, "id", ""),
                         label=_require_str(g_raw, "label", ""),
                         trait=_require_str(g_raw, "trait", ""),
                         value=g_raw.get("value"),
@@ -2844,30 +2857,21 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 intro=_require_str(cp_raw, "intro", ""),
                 button_label=_require_str(cp_raw, "button_label", ""),
                 button_icon=_require_str(cp_raw, "button_icon", ""),
-                locked_note=_require_str(cp_raw, "locked_note", ""),
+                join_note=_require_str(cp_raw, "join_note", ""),
+                join_url=_require_str(cp_raw, "join_url", ""),
                 grants=grants,
             )
 
-    # Build labels for the sidebar footer badge — [builds.free] / [builds.paid].
-    # Text only. Nothing here selects the active variant.
-    build_labels_obj: Optional[TemplateBuildLabels] = None
-    builds_raw = data.get("builds")
-    if builds_raw is not None:
-        if not isinstance(builds_raw, dict):
-            raise TypeError(f"[builds] must be a table, got {type(builds_raw).__name__}")
-        for _bad_key in ("variant", "active", "selected", "default", "build"):
-            if _bad_key in builds_raw:
-                _parse_errors.append(
-                    f"[builds] must not declare which variant is active ('{_bad_key}') — that is "
-                    f"the `--build free|paid` CLI argument, not a TOML value."
-                )
-        _free_raw = builds_raw.get("free") or {}
-        _paid_raw = builds_raw.get("paid") or {}
-        if not isinstance(_free_raw, dict) or not isinstance(_paid_raw, dict):
-            raise TypeError("[builds.free] and [builds.paid] must be tables")
-        build_labels_obj = TemplateBuildLabels(
-            free=_require_str(_free_raw, "label", "Free Build") or "Free Build",
-            paid=_require_str(_paid_raw, "label", "Paid Build") or "Paid Build",
+    # [builds] is retired. One build ships everywhere now — which cheat rows are live
+    # is a runtime property of the code the player entered, not a property of the file.
+    # A leftover block is a parse error rather than a silent no-op, so a game carrying
+    # the old labels tells its author instead of quietly losing its footer badge.
+    if data.get("builds") is not None:
+        _parse_errors.append(
+            "[builds] is no longer supported — the free/paid build split was removed. "
+            "One build ships everywhere and cheat rows unlock at runtime by code. "
+            "Delete the [builds] block; the sidebar footer keeps [project] version "
+            "and release_date."
         )
 
     # Pattern 2: label registries — top-level [[traits.labels]] / [[flags.labels]]
@@ -2950,10 +2954,9 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         trait_labels=trait_labels,
         flag_labels=flag_labels,
         tips_page=tips_page_obj,
-        # These two kwargs are the silent-no-op step: parse the block, forget the
-        # kwarg, and the feature vanishes with no error anywhere. Covered by a test.
+        # This kwarg is the silent-no-op step: parse the block, forget the kwarg,
+        # and the feature vanishes with no error anywhere. Covered by a test.
         cheat_page=cheat_page_obj,
-        build_labels=build_labels_obj,
         # Doc 69 Item 3 — parse-time field-name mismatch errors collected
         # by the effect-context validators at the 5 effect parse sites.
         _parse_errors=_parse_errors,
@@ -3745,12 +3748,24 @@ def validate(template: GameTemplate) -> List[str]:
                 "[ui.cheat_page] is authored but declares no [[ui.cheat_page.grants]] rows — "
                 "the page would render a title and nothing else (add rows or remove the block)"
             )
-        if not template.build_labels:
+        # The join block is this page's only advertising. Without it a player who has
+        # no code sees a bare box and cannot tell what it is for or where to get one —
+        # the commonest complaint in the 26 shipped cheat surfaces that were studied.
+        if not cp.join_note:
             errors.append(
-                "[ui.cheat_page] is authored but [builds.free].label / [builds.paid].label are "
-                "missing — every build must be identifiable in the sidebar footer (declare both; "
-                "`--build free|paid` picks which one ships)"
+                "[ui.cheat_page] is authored but 'join_note' is missing — a player without a "
+                "code sees only an empty box, so the page must say in one line what the box is "
+                "for (the url comes from 'join_url', or falls back to [project] support_url)"
             )
+        if not cp.join_url and not template.project.support_url:
+            errors.append(
+                "[ui.cheat_page] is authored but neither 'join_url' nor [project] support_url is "
+                "set — the join line would have nowhere to point"
+            )
+        # Same rule as project.support_url (see the scheme check above): this lands in
+        # an href in a published file, so a scheme-less value becomes a relative link.
+        if cp.join_url and not cp.join_url.startswith(("http://", "https://")):
+            errors.append("[ui.cheat_page] join_url must start with http:// or https://")
         # The sidebar, setup.infoPages and setup.commitMoment are all emitted inside
         # the time-system section, which the generator only appends when time is
         # enabled. Without it the button has nowhere to live and a grant could not
@@ -3763,15 +3778,38 @@ def validate(template: GameTemplate) -> List[str]:
             )
 
         _seen_rows: Dict[tuple, int] = {}
+        _seen_ids: Dict[str, int] = {}
         _raw_rows = template._cheat_raw_rows or []
         for i, g in enumerate(cp.grants):
             ctx = f"ui.cheat_page.grants[{i}]"
             raw = _raw_rows[i] if i < len(_raw_rows) else {}
 
+            # `id` is load-bearing in two places that outlive this build: it is the
+            # unlock flag stored in the player's save, and it is the key the codes file
+            # is matched on. Restricting it to [a-z0-9_] keeps it safe as both a flag
+            # name and a TOML bare key.
+            if not g.id:
+                errors.append(
+                    f"{ctx}: 'id' is required — it is the unlock flag saved in the player's "
+                    f"save file and the key this row's code is looked up by"
+                )
+            elif not set(g.id) <= set("abcdefghijklmnopqrstuvwxyz0123456789_"):
+                errors.append(
+                    f"{ctx}: 'id' must be lowercase letters, digits and underscores only, "
+                    f"got '{g.id}' (it becomes a flag name and a TOML key)"
+                )
+            elif g.id in _seen_ids:
+                errors.append(
+                    f"{ctx}: duplicate id '{g.id}' "
+                    f"(already used at ui.cheat_page.grants[{_seen_ids[g.id]}]) — one code per "
+                    f"row, so ids must be unique"
+                )
+            else:
+                _seen_ids[g.id] = i
+
             if not g.label:
                 errors.append(
-                    f"{ctx}: 'label' is required (non-empty string) — it is the ONLY row text "
-                    f"the free build emits"
+                    f"{ctx}: 'label' is required (non-empty string) — it is the row's button text"
                 )
             if not g.trait:
                 errors.append(f"{ctx}: 'trait' is required (string)")
@@ -6322,8 +6360,12 @@ def _assemble_project_metadata(project, template):
             "content": template.tips_page.content,
         }
     # Player cheat page. The FULL row data goes here — hints, values, caps and all.
-    # Metadata never reaches the output file; the free/paid split happens at
-    # emission, so this dict is safe to carry everything the paid build needs.
+    # Metadata never reaches the output file as a config object; each row is baked
+    # into passage markup inside a check on its own unlock flag.
+    #
+    # The CODES are deliberately absent. They are not a property of the TOML (which
+    # is committed to a public repo) — they arrive at package time from an untracked
+    # codes file and are injected into this dict by the packager as hashes only.
     if template.cheat_page:
         cp = template.cheat_page
         project.metadata["cheat_page"] = {
@@ -6331,9 +6373,11 @@ def _assemble_project_metadata(project, template):
             "intro": cp.intro,
             "button_label": cp.button_label,
             "button_icon": cp.button_icon,
-            "locked_note": cp.locked_note,
+            "join_note": cp.join_note,
+            "join_url": cp.join_url,
             "grants": [
                 {
+                    "id": g.id,
                     "label": g.label,
                     "trait": g.trait,
                     "value": g.value,
@@ -6348,13 +6392,6 @@ def _assemble_project_metadata(project, template):
                 }
                 for g in cp.grants
             ],
-        }
-    # Build labels for the sidebar footer badge. Absent = no badge, which keeps
-    # every game that predates this feature byte-identical.
-    if template.build_labels:
-        project.metadata["build_labels"] = {
-            "free": template.build_labels.free,
-            "paid": template.build_labels.paid,
         }
     # Store theme if defined
     if template.theme:

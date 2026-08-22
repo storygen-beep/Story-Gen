@@ -54,17 +54,6 @@ class Command(BaseCommand):
             action="store_true",
             help="Enable dev mode with stat adjustment controls in sidebar",
         )
-        parser.add_argument(
-            "--build",
-            type=str,
-            choices=["free", "paid"],
-            default="free",
-            help=(
-                "Cheat-page build variant (parity with package_from_toml). 'free' (default) "
-                "emits padlocked labels with no working effects; 'paid' emits live rows."
-            ),
-        )
-
     def handle(self, *args, **options):
         project_id = options["project_id"]
         output_dir = options["output"]
@@ -73,7 +62,6 @@ class Command(BaseCommand):
         force_copy = options["force_copy"]
         verify_checksums = options["verify_checksums"]
         dev_mode = options["dev"]
-        build_variant = options.get("build", "free") or "free"
 
         # Load project
         try:
@@ -86,6 +74,17 @@ class Command(BaseCommand):
         self.stdout.write(f"   Output: {output_dir}")
         if dev_mode:
             self.stdout.write(self.style.WARNING("   Dev Mode: ENABLED (stat adjustment controls)"))
+        # Cheat codes are read from a game's untracked codes file, which this DB path
+        # has no way to locate (it starts from a project row, not a TOML). Say so
+        # rather than shipping a box that silently opens nothing.
+        if (project.metadata or {}).get("cheat_page"):
+            self.stdout.write(
+                self.style.WARNING(
+                    "   ⚠️  This project has a cheat page, but the DB path cannot load a "
+                    "codes file — the page will render with no working codes. Use "
+                    "`package_from_toml --codes <file>` for a release build."
+                )
+            )
 
         # Generate package
         service = GameService()
@@ -97,9 +96,7 @@ class Command(BaseCommand):
                 version=version,
                 force_copy=force_copy,
                 verify_checksums=verify_checksums,
-                options=(
-                    {"build": build_variant, **({"dev_mode": True} if dev_mode else {})}
-                ),
+                options=({"dev_mode": True} if dev_mode else {}),
             )
         except Exception as e:
             raise CommandError(f"Packaging failed: {e}")

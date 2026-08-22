@@ -5758,7 +5758,71 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
     return "";
 };
 
-})();</script><tw-passagedata pid="1" name="Story" tags="meta" position="100,100" size="100,100">{
+})();
+/* twine-user-script #4: "CheatCodes" */
+setup.cheatCodes = {"2292eb1b": "bastien", "3c3d608c": "renner", "5a710a13": "coin", "85282e1c": "charge", "b5600bf6": "stealth", "e82f17c8": "fighting"};
+setup.cheatStoreKey = "cheat_unlocks_v0.1.9";
+setup.cheatVersion = "0.1.9";
+
+setup.cheatHash = function (payload) {
+  var h = 2166136261;
+  var s = unescape(encodeURIComponent(String(payload)));
+  for (var i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 16777619) >>> 0;
+  }
+  return ('0000000' + h.toString(16)).slice(-8);
+};
+
+// Whitespace-stripped and upper-cased, matching normalize_cheat_code().
+setup.cheatNormalize = function (raw) {
+  return String(raw == null ? '' : raw).replace(/\s+/g, '').toUpperCase();
+};
+
+// localStorage is a MIRROR, never the source of truth. The unlock lives in
+// $flags like every other flag, so it rides in the save and survives export.
+// The mirror only spares a returning player from retyping on a new game, and
+// a browser that refuses storage (we run inside a cross-origin iframe on the
+// portals) must degrade to that, not throw.
+setup.cheatRemember = function (id) {
+  try {
+    var seen = recall(setup.cheatStoreKey, []);
+    if (!Array.isArray(seen)) seen = [];
+    if (seen.indexOf(id) === -1) seen.push(id);
+    memorize(setup.cheatStoreKey, seen);
+  } catch (e) { /* storage blocked — unlock still lives in the save */ }
+};
+
+setup.cheatRestore = function () {
+  var seen;
+  try { seen = recall(setup.cheatStoreKey, []); } catch (e) { return; }
+  if (!Array.isArray(seen) || !seen.length) return;
+  var sv = State.variables;
+  sv.flags = sv.flags || {};
+  for (var i = 0; i < seen.length; i++) {
+    var key = 'cheat_' + seen[i];
+    if (!sv.flags[key]) sv.flags[key] = true;
+  }
+};
+
+// Returns the unlocked row id, or null. The caller navigates on a hit so the
+// new row renders; a miss is reported in place, without spending a moment.
+setup.cheatTry = function (raw) {
+  var code = setup.cheatNormalize(raw);
+  if (!code) return null;
+  var ids = Object.keys(setup.cheatCodes);
+  for (var i = 0; i < ids.length; i++) {
+    var id = setup.cheatCodes[ids[i]];
+    if (setup.cheatHash(setup.cheatVersion + '|' + id + '|' + code) === ids[i]) {
+      setup.pendingEffects = [];
+      setup.applyAndNotifyFlag('player', null, 'cheat_' + id, 'set');
+      setup.showEffectNotification();
+      setup.cheatRemember(id);
+      return id;
+    }
+  }
+  return null;
+};</script><tw-passagedata pid="1" name="Story" tags="meta" position="100,100" size="100,100">{
     &quot;name&quot;: &quot;Vesper&quot;,
     &quot;ifid&quot;: &quot;7032a282-b49c-5de1-9ef0-8553b88d1f63&quot;,
     &quot;format&quot;: &quot;SugarCube&quot;,
@@ -6331,7 +6395,7 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 
 
 &lt;&lt;widget &quot;versionFooter&quot;&gt;&gt;
-&lt;div class=&quot;sidebar-version&quot;&gt;v0.1.9 · 2026-08-17 · &lt;span class=&quot;build-badge&quot;&gt;Free Build&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;sidebar-version&quot;&gt;v0.1.9 · 2026-08-17&lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="StoryCaption" tags="" position="600,100" size="100,100">&lt;&lt;missingMediaButton&gt;&gt;
 &lt;&lt;timeDisplay&gt;&gt;
 &lt;&lt;playerPortrait&gt;&gt;
@@ -6585,14 +6649,6 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
     border-bottom: 1px solid var(--theme-border, #2a2a2a);
 }
 .cheat-row:last-of-type { border-bottom: none; }
-.cheat-row.is-locked {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    opacity: 0.55;
-}
-.cheat-label { font-weight: 600; }
-.cheat-lock { font-size: 12px; }
 .cheat-hint, .cheat-at-cap {
     margin-top: 2px;
     color: var(--theme-text-muted, #8a8a8a);
@@ -6602,15 +6658,42 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
     font-weight: 600;
     opacity: 0.5;
 }
-.cheat-locked-note {
-    margin-top: 12px;
-    padding-top: 10px;
-    border-top: 1px solid var(--theme-border, #2a2a2a);
+/* Code entry. The box is the whole surface for a player with no code, so it is
+   sized to be obviously the thing to use rather than tucked in a corner. */
+.cheat-entry {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+.cheat-entry input[type=&quot;text&quot;] {
+    flex: 1 1 160px;
+    min-width: 0;
+    padding: 6px 8px;
+    border: 1px solid var(--theme-border, #3a3a3a);
+    border-radius: 4px;
+    background: var(--theme-surface-alt, #1a1a1a);
+    color: var(--theme-text, #e8e8e8);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+#cheat-reply { flex: 1 1 100%; }
+.cheat-reply-bad {
+    color: var(--theme-danger, #d06a6a);
+    font-size: 12px;
+}
+/* The join line is this page&#39;s only advertising: for a player with no code it is the
+   sole thing on the page that tells them what the box is for. */
+.cheat-join {
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--theme-border, #2a2a2a);
     color: var(--theme-text-muted, #8a8a8a);
     font-size: 12px;
 }
-/* Build badge — names which file the player is holding (free vs supporter build).
-   Rides inside .sidebar-version and is reused on the cheat page&#39;s heading. */
+/* Version chip — the release a player matches against their guide, since codes are
+   scoped per release. Rides inside .sidebar-version and the cheat page&#39;s heading. */
 .build-badge {
     display: inline-block;
     padding: 0 5px;
@@ -14247,16 +14330,59 @@ try {
   &lt;&lt;if passage() isnot &quot;CheatPage&quot;&gt;&gt;&lt;&lt;link &quot;Cheat&quot; &quot;CheatPage&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;else&gt;&gt;&lt;span class=&quot;nav-row&quot;&gt;Cheat&lt;/span&gt;&lt;&lt;/if&gt;&gt;&lt;span class=&quot;nav-i&quot;&gt;🔓&lt;/span&gt;
 &lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="408" name="CheatPage" tags="" position="975,5100" size="100,100">&lt;&lt;nobr&gt;&gt;
-&lt;h2&gt;The Ledger &lt;span class=&quot;build-badge&quot;&gt;Free Build&lt;/span&gt;&lt;/h2&gt;
+&lt;&lt;run setup.cheatRestore()&gt;&gt;
+&lt;h2&gt;The Ledger &lt;span class=&quot;build-badge&quot;&gt;v0.1.9&lt;/span&gt;&lt;/h2&gt;
 &lt;div class=&quot;npc-section&quot;&gt;
 &lt;div class=&quot;cheat-intro&quot;&gt;She keeps her own numbers.&lt;/div&gt;
-  &lt;div class=&quot;cheat-row is-locked&quot;&gt;&lt;span class=&quot;cheat-label&quot;&gt;Coin&lt;/span&gt;&lt;span class=&quot;cheat-lock&quot;&gt;🔒&lt;/span&gt;&lt;/div&gt;
-  &lt;div class=&quot;cheat-row is-locked&quot;&gt;&lt;span class=&quot;cheat-label&quot;&gt;Fighting&lt;/span&gt;&lt;span class=&quot;cheat-lock&quot;&gt;🔒&lt;/span&gt;&lt;/div&gt;
-  &lt;div class=&quot;cheat-row is-locked&quot;&gt;&lt;span class=&quot;cheat-label&quot;&gt;Stealth&lt;/span&gt;&lt;span class=&quot;cheat-lock&quot;&gt;🔒&lt;/span&gt;&lt;/div&gt;
-  &lt;div class=&quot;cheat-row is-locked&quot;&gt;&lt;span class=&quot;cheat-label&quot;&gt;Renner&lt;/span&gt;&lt;span class=&quot;cheat-lock&quot;&gt;🔒&lt;/span&gt;&lt;/div&gt;
-  &lt;div class=&quot;cheat-row is-locked&quot;&gt;&lt;span class=&quot;cheat-label&quot;&gt;Bastien&lt;/span&gt;&lt;span class=&quot;cheat-lock&quot;&gt;🔒&lt;/span&gt;&lt;/div&gt;
-  &lt;div class=&quot;cheat-row is-locked&quot;&gt;&lt;span class=&quot;cheat-label&quot;&gt;Charge&lt;/span&gt;&lt;span class=&quot;cheat-lock&quot;&gt;🔒&lt;/span&gt;&lt;/div&gt;
-&lt;div class=&quot;cheat-locked-note&quot;&gt;Supporters unlock these.&lt;/div&gt;
+&lt;div class=&quot;cheat-entry&quot;&gt;
+&lt;&lt;textbox &quot;_cheatcode&quot; &quot;&quot;&gt;&gt;
+&lt;&lt;link &quot;Unlock&quot;&gt;&gt;
+  &lt;&lt;set _hit to setup.cheatTry(_cheatcode)&gt;&gt;
+  &lt;&lt;if _hit&gt;&gt;&lt;&lt;goto &quot;CheatPage&quot;&gt;&gt;
+  &lt;&lt;else&gt;&gt;&lt;&lt;replace &quot;#cheat-reply&quot;&gt;&gt;&lt;span class=&quot;cheat-reply-bad&quot;&gt;No match. This build is v0.1.9 — check you are using the v0.1.9 guide.&lt;/span&gt;&lt;&lt;/replace&gt;&gt;
+  &lt;&lt;/if&gt;&gt;
+&lt;&lt;/link&gt;&gt;
+&lt;span id=&quot;cheat-reply&quot;&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class=&quot;cheat-join&quot;&gt;Cheat codes come with the game guide, in the Beta Nut tier. &lt;a href=&quot;https://www.patreon.com/cw/nutgames844/membership&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Open the membership page&lt;/a&gt;&lt;/div&gt;
+  &lt;&lt;if $flags[&quot;cheat_coin&quot;]&gt;&gt;
+  &lt;div class=&quot;cheat-row&quot;&gt;&lt;&lt;link &quot;Coin +25&quot; &quot;CheatPage&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];setup.applyAndNotifyTrait(&quot;player&quot;, null, &quot;coin&quot;, &quot;add&quot;, 25, false, null);setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;div class=&quot;cheat-hint&quot;&gt;five trips through the gate, or two salvage sessions&lt;/div&gt;&lt;/div&gt;
+  &lt;&lt;/if&gt;&gt;
+  &lt;&lt;if $flags[&quot;cheat_fighting&quot;]&gt;&gt;
+  &lt;div class=&quot;cheat-row&quot;&gt;
+    &lt;&lt;if setup.getTraitValue(&quot;player&quot;, null, &quot;fighting&quot;) lt 40&gt;&gt;&lt;&lt;link &quot;Fighting +5&quot; &quot;CheatPage&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];setup.applyAndNotifyTrait(&quot;player&quot;, null, &quot;fighting&quot;, &quot;add&quot;, 5, true, 40);setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;div class=&quot;cheat-hint&quot;&gt;the door at 15 · hard bouts at 30 · the yard at 40&lt;/div&gt;
+    &lt;&lt;else&gt;&gt;&lt;span class=&quot;cheat-row-maxed&quot;&gt;Fighting +5&lt;/span&gt;&lt;div class=&quot;cheat-at-cap&quot;&gt;As sharp as this will make her.&lt;/div&gt;
+    &lt;&lt;/if&gt;&gt;
+  &lt;/div&gt;
+  &lt;&lt;/if&gt;&gt;
+  &lt;&lt;if $flags[&quot;cheat_stealth&quot;]&gt;&gt;
+  &lt;div class=&quot;cheat-row&quot;&gt;
+    &lt;&lt;if setup.getTraitValue(&quot;player&quot;, null, &quot;stealth&quot;) lt 9&gt;&gt;&lt;&lt;link &quot;Stealth +5&quot; &quot;CheatPage&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];setup.applyAndNotifyTrait(&quot;player&quot;, null, &quot;stealth&quot;, &quot;add&quot;, 5, true, 9);setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;div class=&quot;cheat-hint&quot;&gt;enough to start the yard — the yard itself teaches the rest&lt;/div&gt;
+    &lt;&lt;else&gt;&gt;&lt;span class=&quot;cheat-row-maxed&quot;&gt;Stealth +5&lt;/span&gt;&lt;div class=&quot;cheat-at-cap&quot;&gt;Any sharper and she stops needing the quiet routes.&lt;/div&gt;
+    &lt;&lt;/if&gt;&gt;
+  &lt;/div&gt;
+  &lt;&lt;/if&gt;&gt;
+  &lt;&lt;if $flags[&quot;cheat_renner&quot;]&gt;&gt;
+  &lt;div class=&quot;cheat-row&quot;&gt;
+    &lt;&lt;if setup.getTraitValue(&quot;npc&quot;, &quot;npc_renner&quot;, &quot;corruption&quot;) lt 50&gt;&gt;&lt;&lt;link &quot;Renner +10&quot; &quot;CheatPage&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];setup.applyAndNotifyTrait(&quot;npc&quot;, &quot;npc_renner&quot;, &quot;corruption&quot;, &quot;add&quot;, 10, true, 50);setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;div class=&quot;cheat-hint&quot;&gt;opens the anal pose in the office loop — in cover, carrying the charged drain. The rungs still have to be run.&lt;/div&gt;
+    &lt;&lt;else&gt;&gt;&lt;span class=&quot;cheat-row-maxed&quot;&gt;Renner +10&lt;/span&gt;&lt;div class=&quot;cheat-at-cap&quot;&gt;He is as far gone as the rungs will take him.&lt;/div&gt;
+    &lt;&lt;/if&gt;&gt;
+  &lt;/div&gt;
+  &lt;&lt;/if&gt;&gt;
+  &lt;&lt;if $flags[&quot;cheat_bastien&quot;]&gt;&gt;
+  &lt;div class=&quot;cheat-row&quot;&gt;
+    &lt;&lt;if setup.getTraitValue(&quot;npc&quot;, &quot;npc_bastien&quot;, &quot;relation&quot;) lt 18&gt;&gt;&lt;&lt;link &quot;Bastien +6&quot; &quot;CheatPage&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];setup.applyAndNotifyTrait(&quot;npc&quot;, &quot;npc_bastien&quot;, &quot;relation&quot;, &quot;add&quot;, 6, true, 18);setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;div class=&quot;cheat-hint&quot;&gt;moves him one promotion nearer — the counter, then the dress, then the back room. You still have to be on the floor in the bought face for each one to land.&lt;/div&gt;
+    &lt;&lt;else&gt;&gt;&lt;span class=&quot;cheat-row-maxed&quot;&gt;Bastien +6&lt;/span&gt;&lt;div class=&quot;cheat-at-cap&quot;&gt;He has decided everything about you that he is going to decide from a chair.&lt;/div&gt;
+    &lt;&lt;/if&gt;&gt;
+  &lt;/div&gt;
+  &lt;&lt;/if&gt;&gt;
+  &lt;&lt;if $flags[&quot;cheat_charge&quot;]&gt;&gt;
+  &lt;div class=&quot;cheat-row&quot;&gt;
+    &lt;&lt;if setup.getTraitValue(&quot;player&quot;, null, &quot;energy&quot;) isnot 100&gt;&gt;&lt;&lt;link &quot;Charge → full&quot; &quot;CheatPage&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];setup.applyAndNotifyTrait(&quot;player&quot;, null, &quot;energy&quot;, &quot;set&quot;, 100, true, 100);setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;div class=&quot;cheat-hint&quot;&gt;back to full — the cradle does this for free while the Spire is still open&lt;/div&gt;
+    &lt;&lt;else&gt;&gt;&lt;span class=&quot;cheat-row-maxed&quot;&gt;Charge → full&lt;/span&gt;&lt;div class=&quot;cheat-at-cap&quot;&gt;Already full.&lt;/div&gt;
+    &lt;&lt;/if&gt;&gt;
+  &lt;/div&gt;
+  &lt;&lt;/if&gt;&gt;
 &lt;/div&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;link &quot;← Back&quot;&gt;&gt;&lt;&lt;run setup.smartBack()&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata></tw-storydata>
