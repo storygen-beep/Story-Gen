@@ -122,6 +122,16 @@ flagEffects = [
   { targetType = "player", flag = "meter_fed_once", op = "set" },
 ]
 
+[[canvases.nodes.exit_block.choices]]
+# ⚠️ THE ALWAYS-LIVE EXIT. This screen's only affordance costs money, and the engine
+#    counts a cost-bearing choice as conditional (v2.py:12827-12836), so a player who
+#    walks in broke gets the prose and no way out but a bare `Continue` that fires no
+#    effects. A door is a choice free of BOTH `conditions` and `costs`.
+#    the-surfaces.md R7.
+text       = "Leave it cold."
+targetType = "location"
+locationId = "the_flat"
+
 
 # ═════════════════════════════════════════════════════════════════════════════
 # THE SOLO SURFACE — a NODE-ROUTED LOOP, not a cascade (the-surfaces.md R3b).
@@ -1490,6 +1500,12 @@ targetType = "node"
 nodeId     = "stock"
 costs      = [ { trait = "money", value = 8 } ]
 
+[[canvases.nodes.exit_block.choices]]
+# The always-live exit -- see the note on act_flat_meter. the-surfaces.md R7.
+text       = "Leave it for tomorrow."
+targetType = "location"
+locationId = "the_lets"
+
 [[canvases.nodes]]
 id   = "stock"
 name = "The stock"
@@ -1695,6 +1711,12 @@ text  = "Eat, and square it downstairs ($4, 25m)."
 targetType = "node"
 nodeId = "rung_chip_eat.base"
 costs = [ { trait = "money", value = 4 } ]
+
+[[canvases.nodes.exit_block.choices]]
+# The always-live exit -- see the note on act_flat_meter. the-surfaces.md R7.
+text       = "Go without."
+targetType = "location"
+locationId = "the_chip_shop_flat"
 
 [[canvases]]
 id          = "walkin_chip_wakes"

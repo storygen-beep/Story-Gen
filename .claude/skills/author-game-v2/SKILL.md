@@ -138,6 +138,7 @@ documented nowhere but in the script's own comments, so an author who hit one ha
 | **effects use a live op** | no effect uses an `op` the engine silently discards | `engine.md` §21b |
 | **the climb is paid for** | every meter a gate reads has a brake on the rungs that raise it | `the-meters.md` M1–M5 |
 | **a day-cap closes** | every flag read `is_false` and cleared in `[engine.daily_tick]` is SET somewhere — a cap with two of its three parts validates and throttles nothing | `the-meters.md` M5 · `engine.md` §28.2 |
+| **a spent day still has a door** | no screen whose every choice is day-capped or priced lacks one choice free of **both** `conditions` and `costs` — a spent cap renders nothing at all, not a greyed line | `the-surfaces.md` R7 · `engine.md` §28.3 |
 | **a meter is read** | every number the game raises is read by a condition, a cost or a quest goal — a raise with no reader is decoration | `the-meters.md` W3 |
 | **the climb is where you said it is** | the game gates where `board.who_climbs` says it does | `the-meters.md` W1 · `state.md` |
 | **a banded meter is not also a number** | a banded sidebar stat is `hidden` in `[[traits.labels]]` | `the-meters.md` M7 · `engine.md` §30 |

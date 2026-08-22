@@ -49,6 +49,21 @@
         "clock_in_prose": "9.5 per 10k, 9x the field median. Untouched here; it is the clock batch.",
         "currency_in_prose": "3 references in `pound` against a declared \"$\". A regression from batch 8, and it belongs to the fill batch with the anchor at 24.9%."
       }
+    },
+    {
+      "version": "0.1",
+      "date": "2026-08-23",
+      "subject": "The empty screen — every hub kept a door for the day its caps are spent.",
+      "added": "No new content. One always-live exit on each of 13 screens: all ten NPC hubs, plus act_flat_meter, act_chip_eat and work_lets_turnaround, whose only affordances cost money. Each is a choice free of BOTH `conditions` and `costs`, targetType = \"location\" pointed at the node's own location, written to close the beat rather than bail out of it.",
+      "opened": "Nothing. This is a defect fix.",
+      "why": "LO opened hub_ewan_yard in the built game on a day he had already spent Ewan's one rung and one talk, and got a portrait, a paragraph, a line of dialogue and nothing to click. Every exit on the hub was gated and a failed condition renders NOTHING, not a greyed line (v2.py:12806). The day caps are per PERSON and Ewan stands in three rooms, so spending his rung at the yard emptied harbour_end and the arcade counter for the rest of the day too. The built HTML carried 13 copies of the engine's dead-end banner; it now carries 0.",
+      "gates": "38/39 · the only FAIL is `location fill` (14,689 of 33,300 declared), unchanged by this pass and owned by the fill batch. The denominator moved because this pass also added the gate that catches the defect — `a spent day still has a door` (the-surfaces.md R7). Every other gate was diffed before and after: one line moved, `ends on an opening` from 52/142 to 52/155 choices, which is the 13 new doors and nothing else.",
+      "lints_shipped_with": {
+        "own_words": "55 words / 121 uses, unchanged. The 13 new labels introduced no flagged word — checked after writing them, not before, because batches 6 and 7 both had to fix words written during the batch.",
+        "clock_in_prose": "9.5 per 10k, 9x the field median. Untouched here; it is the clock batch.",
+        "currency_in_prose": "3 references in `pound` against a declared \"$\". Still open, still the fill batch's."
+      },
+      "left_open_on_purpose": "The spent-state paragraph. A hub could say something DIFFERENT once the player has had their go — a [group] band on the day flag, ten small repeatable beats — and `location fill` is the one failing gate, so words there would count double. It is a content pass, not a defect fix, and folding it in here would have made the before/after gate diff unreadable. `show_when_locked` on the hub choices was considered and rejected: greying all five spent lines on every visit is clutter, and no game in this repo does it."
     }
   ],
   "promises": [
