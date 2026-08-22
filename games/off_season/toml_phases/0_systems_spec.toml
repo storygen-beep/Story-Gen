@@ -60,7 +60,7 @@ clothing_enabled  = false
 mode = "dark"
 
 
-# ─── The pitch rent — the ENGINE under everything ────────────────────────────
+# ─── The rent — the ENGINE under everything ────────────────────────────
 # $90 a week, Monday, and her SON collects it. Ewan holds the lease. The
 # reversal is not a scene, it is the economy: the money leaves her every Monday
 # and goes to the boy she had at fifteen.
@@ -109,7 +109,7 @@ paid_closing     = "He takes the folder back under his arm and pulls the shutter
 cant_pay         = "You haven't got the ninety."
 warning_scene    = "You tell him it is short. He does not raise his voice — he never has. He closes the folder and looks round the arcade instead, at the carpet and the change machine and the damp above the door, pricing all of it the way a man prices a thing he already owns."
 warning_response = "One week, Mum. I'm not the landlord. I'm just the one holding it."
-warning_closing  = "He leaves the folder open on the counter facing you when he goes, so you can read what the pitch has cost every week since his father went in."
+warning_closing  = "He leaves the folder open on the counter facing you when he goes, so you can read what the rent has cost every week since his father went in."
 eviction_scene_soft    = "The second Monday he does not open the folder at all. He takes his coat off, which he has not done in this building in four years, and hangs it on the hook behind the counter where your husband's used to go, and sits down on your stool."
 eviction_response_soft = "We're past the ninety. Let's talk about what you're actually doing with this place."
 eviction_closing_soft  = "He stays until you turn the machines off, and on the way out he tells you which one he would rip out first."

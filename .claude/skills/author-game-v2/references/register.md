@@ -408,6 +408,17 @@ inside → went to prison.* Either the sentence carries the meaning or the word 
 place. This costs nothing: the specificity that matters is what the thing is DOING, not which
 regional name it has.
 
+> ⚠️ **On a LABEL the "or" collapses — plain word, no exception.** A button cannot carry its own
+> gloss. There is no sentence on it to put one in, and the player reads it *before* the prose that
+> would have explained it. So a canvas `name`, a location `name` and a choice's `text` on a
+> room list get the plain word every time, however well the paragraph behind them glosses it.
+>
+> **This seam is how the defect shipped.** Off Season's meter is glossed properly — *"the slot is
+> at shoulder height beside the water heater… a card taped under it saying what three buys"* — and
+> the player reaches that sentence only by clicking **`Feed the meter ($3)`**, the words they could
+> not read. The gloss was downstream of the button the whole time. `the-voice.md` R1 owns label
+> shape; this rule owns the word in it, and neither file said so until 2026-08-23.
+
 **Name a place for what it is, the first time you name it.** Off Season's anchor is an amusement
 arcade. Across the whole game the prose says *"forty machines"* and never once says *slot
 machines*, so the building the plan gave **27% of the game's words** to is an unglossed noun.
@@ -417,14 +428,24 @@ machines*, so the building the plan gave **27% of the game's words** to is an un
 kind belongs in the first sentence that names it, not in its metadata. (The map is
 `the-map.md`'s; what the prose calls it is this file's.)
 
-**Three ways a word fails, and the second and third are worse than the first.** The rule was
-written for the first one and the measurements found all three:
+**Four ways a word fails, and only the first one is about dialect.** The rule was written for the
+first one; the measurements found the other three:
 
 | | what the reader gets | measured in our games |
 |---|---|---|
 | **unknown** — *airer, chandlery, forecourt* | a blank. They stall, or skim past it. | the class the skill's own examples taught — see below |
 | **ambiguous** — *half seven* | **a confident wrong answer.** It is 7:30 in Britain and 6:30 across much of Europe, and American English does not use the construction at all. | **157 uses across six games**, against **4** uses of the unambiguous *half past* |
-| **false friend** — *vest, tea, bonnet, jumper* | **a confident wrong picture**, with nothing to signal it. | `forty_miles`: *"You get the vest up over your tits"* — an undershirt here, a waistcoat to most readers, **inside an explicit beat**. `back_home`: *"He is going to be different at tea"* — the evening meal. `off_season`: *"Stay past the tea"* — and that one is a **quest card**, so it is UI. `seventh_day`: *"under the bonnet"* — a car hood, not a hat. |
+| **false friend** — *vest, tea, bonnet, jumper* | **a confident wrong picture**, with nothing to signal it. | `forty_miles`: *"You get the vest up over your tits"* — an undershirt here, a waistcoat to most readers, **inside an explicit beat**. `back_home`: *"He is going to be different at tea"* — the evening meal. `seventh_day`: *"under the bonnet"* — a car hood, not a hat. |
+| **collides with our own UI** — *meter* | a wrong picture again, but the competing meaning is **ours**, so no dialect check can ever find it. | `off_season` renders **four meters in its sidebar** — arousal, warmth, energy, money — and puts `Feed the meter ($3)` on a room button, where it reads as *top up a stat bar*. Same exposure, unmeasured: **board, card, flag, state, tier, rung.** |
+
+> ⚠️ **One of these examples was wrong, and it was ours.** This row cited `off_season`'s *"Stay
+> past the tea"* as the meal sense on a quest card. It is not: the scene it labels is *"You make
+> two teas in the two mugs he owns and you do not leave when yours is finished"* — **the drink**,
+> and correct in every English there is. All nine `tea` uses in that game are the drink, including
+> the hunger band *"Running on tea."* The word was read off the lint's output and never checked
+> against the line it came from, which is the exact failure this whole section exists to name.
+> **A false friend is a judgement about a sentence, never about a word.** The row stays and the
+> game keeps its nine — the same call `torch` gets in vesper.
 
 An unknown word costs the reader a beat. **An ambiguous or false-friend word costs them the scene,
 and they never find out they lost it** — which is why *half past seven*, *undershirt* and *dinner*
@@ -468,6 +489,33 @@ the cleanest game. **What separates them is what the words ARE, and no count can
 measurement that discriminates cannot be shipped — it is a hand-built list — and the measurement
 that can be shipped does not discriminate. That is exactly the condition under which a check must
 be a list and not a threshold. The lint hands over the words; you make the call.
+
+### The false-friend half is hand-built, and this file is where it goes stale
+
+`gates.py`'s `_FALSE_FRIENDS` is the authority — the corpus **structurally cannot** supply this
+half, because a false friend is by definition a word four or more field games use. Which means the
+only way an entry gets there is that somebody put it there, and the only way one goes missing is
+that somebody wrote it here and stopped.
+
+> ⚠️ **That is exactly what happened, and it is why LO hit the same wall twice.** This section
+> opened on *"**meter** (a coin-fed prepayment meter), **jumper**, **eiderdown**"* and listed
+> *pitch → rent* and *float → the till money* among its required swaps. `jumper` went into the
+> checker on 2026-08-22. **`meter`, `pitch` and `float` did not** — so the word this whole section
+> leads with was invisible to every instrument in the skill for a day, and reached a player on a
+> button. **A word named here as a defect belongs in that dict in the same edit.**
+
+Added 2026-08-23 after reading every hit in all 20 built games — `meter` (32 uses; the defect in
+off_season, the_allowance and forty_miles, metaphor in vesper), `float` (24; the till sense in six
+games), `pitch` (10; off_season's rent), `chemist` (3; all real).
+
+**Measured and rejected, so the work is not redone:** `front` ×334 and `inside` ×213 are noise
+(*"the front door"*, *"inside the room"*); `tip` ×44 carries only back_home's three real uses — a
+7% signal rate would train the reader to skim the section; `boot` ×8 is footwear every single time,
+with not one car boot in the repo; `bill` ×7 and `purse` ×10 give a slightly wrong picture that
+does not cost the line. **The bar is not "could be misread." It is "misreads badly enough to lose
+the reader the line, often enough to be worth its false positives."** `torch` is the reference
+point: six of its eight hits are vesper's *cutting* torch, and it stays, because the two it catches
+are worth reading past six that announce themselves.
 
 ## The examples are the register
 

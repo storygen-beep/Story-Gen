@@ -79,12 +79,12 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "warmth", operator = "gte", value = 30 },
     ] } }, blocks = [
-    { type = "paragraph", content = "The immersion has been on and the room is holding it. You get in in a T-shirt and the sheets are not cold at the foot, and you are asleep inside ten minutes." },
+    { type = "paragraph", content = "The heater has been on and the room is holding it. You get in in a T-shirt and the sheets are not cold at the foot, and you are asleep inside ten minutes." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "warmth", operator = "lt", value = 30 },
     ] } }, blocks = [
-    { type = "paragraph", content = "Nothing in the meter. You go to bed in a sweater and your socks and the coat over the top of the quilt, and you lie there a long time listening to the sea before it takes." },
+    { type = "paragraph", content = "Nothing in the coin box. You go to bed in a sweater and your socks and the coat over the top of the quilt, and you lie there a long time listening to the sea before it takes." },
   ] },
 ]
 exit_block = { type = "location", text = "Sleep until morning.", config = { destinationType = "specific", locationId = "the_flat", time_progression_minutes = 540, effects = [
@@ -94,7 +94,7 @@ exit_block = { type = "location", text = "Sleep until morning.", config = { dest
 # ── NEED: warmth. A SINK, and the money-buys-heat chain in one click. ────────
 [[canvases]]
 id          = "act_flat_meter"
-name        = "Feed the meter ($3)"
+name        = "Put $3 in the heater"
 description = "NEED (warmth) @the_flat, repeatable, all hours. $3 -> +45 warmth capped at 100. Priced with `costs` so the engine refuses it when she cannot afford it (engine.md §27) — which makes it a real sink AND a real gate. SETS meter_fed_once, which is what canvas_first_warm reads."
 
 [canvases.trigger]
@@ -105,7 +105,7 @@ is_active     = true
 
 [[canvases.nodes]]
 id   = "base"
-name = "Feed the meter"
+name = "The coin box"
 blocks = [
   { type = "paragraph", content = "The slot is at shoulder height beside the water heater and it takes coins only, and there is a card taped under it in your husband's handwriting saying what three buys." },
 ]
@@ -196,7 +196,7 @@ chance           = 0.10
 id   = "base"
 name = "The room is warm"
 blocks = [
-  { type = "paragraph", content = "The meter is running and the room is above freezing. The shutter is down, the machines are off at the wall, and there is nobody in this building but you." },
+  { type = "paragraph", content = "The heater is running and the room is above freezing. The shutter is down, the machines are off at the wall, and there is nobody in this building but you." },
 ]
 
 [canvases.nodes.exit_block]
@@ -269,7 +269,7 @@ exit_block = { type = "location", text = "Later.", config = { destinationType = 
 
 [[canvases]]
 id          = "walkin_flat_meter"
-name        = "The meter goes"
+name        = "The heater goes"
 description = "Substitution-only walk-in @the_flat. The declared warmth sink arriving on its own schedule instead of hers. No person, no meter grant — it takes warmth and gives her a reason to go back down for change."
 
 [canvases.trigger]
@@ -281,11 +281,11 @@ is_active            = true
 
 [[canvases.nodes]]
 id   = "base"
-name = "The meter goes"
+name = "The heater goes"
 blocks = [
-  { type = "paragraph", content = "The immersion cuts out first, then the lamp, and you are lying there in the dark over a shut arcade with the sea going on outside and no light in the whole building above the counter." },
+  { type = "paragraph", content = "The heater cuts out first, then the lamp, and you are lying there in the dark over a shut arcade with the sea going on outside and no light in the whole building above the counter." },
   { type = "paragraph", content = "You know exactly where the emergency is. You have known where the emergency is since the first week, and it is still not the same thing as having the coins for it." },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "I own the building the meter is in. I have said that to myself in the dark more than once and it has never once made the room warmer." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "I own the building the heater is in. I have said that to myself in the dark more than once and it has never once made the room warmer." },
 ]
 exit_block = { type = "location", text = "Find your coat.", config = { destinationType = "specific", locationId = "the_flat", time_progression_minutes = 10, effects = [
   { targetType = "player", trait = "warmth", op = "add", value = -12 },
@@ -476,19 +476,19 @@ conditions = { version = "1.0", logic = "AND", items = [
 ] }
 
 [[canvases.nodes.exit_block.choices]]
-text       = "Do the float and the change bags (40m)."
+text       = "Count the till and the change bags (40m)."
 targetType = "node"
 nodeId     = "float"
 
 [[canvases.nodes.exit_block.choices]]
-text       = "Buy a coin mechanism off the chandlery ($25)."
+text       = "Buy a coin mechanism off the boat shop ($25)."
 targetType = "node"
 nodeId     = "mech"
 costs      = [ { trait = "money", value = 25 } ]
 
 [[canvases.nodes]]
 id   = "float"
-name = "The float"
+name = "The till"
 blocks = [
   { type = "paragraph", content = "Bag the coins, bag the notes, count the coins into rolls, and top up the change machine so it does not eat somebody's note and lose you a customer you were never going to get." },
   { type = "thought_bubble", props = { speaker = "player" }, content = "Twenty-six years I have been doing this with my hands and thinking about something else." },
@@ -501,7 +501,7 @@ exit_block = { type = "location", text = "Done.", config = { destinationType = "
 id   = "mech"
 name = "A new coin mech"
 blocks = [
-  { type = "paragraph", content = "Twenty-five off the chandlery for a reconditioned coin mechanism, and the machine at the end that has been eating coins since August takes one and gives a game back, first time." },
+  { type = "paragraph", content = "Twenty-five off the boat shop for a rebuilt coin mechanism, and the machine at the end that has been eating coins since August takes one and gives a game back, first time." },
   { type = "paragraph", content = "It is the only thing in this building that got better this week." },
 ]
 exit_block = { type = "location", text = "Put it in.", config = { destinationType = "specific", locationId = "the_arcade", time_progression_minutes = 45, effects = [
@@ -873,8 +873,8 @@ id   = "bare"
 name = "Naked to the waist in your own arcade"
 blocks = [
   { type = "video", props = { pool_dir = "sex/arcade_floor_bare_t5", pool = 4, description = "A woman half undressed standing among dark arcade machines at night.", search_queries = ["woman undressed dark arcade machines night", "half naked woman standing empty arcade neon dim"] } },
-  { type = "paragraph", content = "Cardigan on the pusher, T-shirt after it, bra after that. You stand in the middle of your own arcade naked to the waist with your tits out and your nipples going hard in the draught off the shutter." },
-  { type = "paragraph", content = "One hand flat on your own tit and the other down the front of your knickers, working your clit slowly, stood up, in the middle of the floor with forty dark cabinets round you." },
+  { type = "paragraph", content = "Cardigan on the pusher, T-shirt after it, bra after that. You stand in the middle of your own arcade naked to the waist with your tits out and your nipples going hard in the draft off the shutter." },
+  { type = "paragraph", content = "One hand flat on your own tit and the other down the front of your panties, working your clit slowly, stood up, in the middle of the floor with forty dark cabinets round you." },
 ]
 
 [canvases.nodes.exit_block]
@@ -891,7 +891,7 @@ effects = [
 ]
 
 [[canvases.nodes.exit_block.choices]]
-text       = "Get up on the pusher."
+text       = "Get up on the coin pusher."
 targetType = "node"
 nodeId     = "glass"
 costs      = [ { trait = "energy", value = 3 } ]
@@ -911,7 +911,7 @@ id   = "glass"
 name = "On the glass"
 blocks = [
   { type = "video", props = { pool_dir = "sex/arcade_floor_glass_t5", pool = 5, description = "A woman sitting back on a machine in a dark arcade with her legs open, touching herself.", search_queries = ["woman sitting on machine legs open dark arcade", "woman masturbating sat back on table dim neon"] } },
-  { type = "paragraph", content = "You get up on the flat of the coin pusher with your knickers down at one ankle, the glass cold under your arse, and work your clit in slow circles until your cunt is wet enough to hear." },
+  { type = "paragraph", content = "You get up on the flat of the coin pusher with your panties down at one ankle, the glass cold under your arse, and work your clit in slow circles until your cunt is wet enough to hear." },
   { type = "paragraph", content = "Two fingers into your cunt and your heels hooked on the edge of the glass. You fuck yourself on them slowly, thumb flat on your clit, tits shaking every time your hips come up to meet your hand." },
 ]
 
@@ -1360,7 +1360,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 90 },
     ] } }, blocks = [
-    { type = "paragraph", content = "You stand under the stain with the ninety in your coat pocket and work out that you could have it looked at, or you could pay the pitch, and that you cannot do both, and that this is the whole of your life now." },
+    { type = "paragraph", content = "You stand under the stain with the ninety in your coat pocket and work out that you could have it looked at, or you could pay the rent, and that you cannot do both, and that this is the whole of your life now." },
   ] },
 ]
 exit_block = { type = "location", text = "Leave it.", config = { destinationType = "specific", locationId = "the_arcade", time_progression_minutes = 10 } }
@@ -1407,7 +1407,7 @@ exit_block = { type = "location", text = "Give him his change.", config = { dest
 
 [[canvases]]
 id          = "work_lets_turnaround"
-name        = "Take a turnaround"
+name        = "Clean a flat for the agency"
 description = "WORK @the_lets, repeatable, 09:00-17:00. Priced at 20 energy + 150 minutes and day-capped with turnaround_done_today, so it is one a day, not a printer (the-economy.md R5: a gate in FRONT of a printer only delays the printer). Gated hunger >= 25 — this is the door the hunger need shuts. Walk-in router: whoever the agency has sent."
 
 # ⚠️ show_when_blocked: a windowed activity that simply VANISHES from the room's
@@ -1473,7 +1473,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text        = "Do a turnaround (2h 30m)."
+text        = "Clean the flat (2h 30m)."
 targetType  = "node"
 nodeId      = "rung_lets_turnaround.base"
 costs       = [ { trait = "energy", value = 20 } ]
@@ -1630,7 +1630,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "first_warm_done", operator = "is_false" },
     ] } }, blocks = [
-    { type = "paragraph", content = "A hairgrip, two coins from somewhere else, and a paperback with the spine broken at page ninety. You put them in the drawer of the bedside table with everything else that has been left behind since Easter and shut it." },
+    { type = "paragraph", content = "A hair clip, two coins from somewhere else, and a paperback with the spine broken at page ninety. You put them in the drawer of the bedside table with everything else that has been left behind since Easter and shut it." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "first_warm_done", operator = "is_true" },
@@ -1788,7 +1788,7 @@ is_active            = true
 id   = "base"
 name = "The fryers go on"
 blocks = [
-  { type = "paragraph", content = "The extractor changes note under the floor, which means the fryers are up to heat, which means it is four hours until he has to be down there and he has not slept properly yet." },
+  { type = "paragraph", content = "The fan changes note under the floor, which means the fryers are up to heat, which means it is four hours until he has to be down there and he has not slept properly yet." },
   { type = "paragraph", content = "The whole flat warms about two degrees over the next half hour, for nothing, off somebody else's oil. It is the only free heat either of you gets all winter." },
   { type = "thought_bubble", props = { speaker = "player" }, content = "He pays rent on a flat that is warm because of the job that is killing him. I have never once said that out loud in this room." },
 ]
@@ -1799,7 +1799,7 @@ exit_block = { type = "location", text = "Open the window an inch.", config = { 
 
 [[canvases]]
 id          = "amb_chip_extractor"
-name        = "The extractor"
+name        = "The fan"
 description = "Random ambient @the_chip_shop_flat. The heat of the room, which is the whole reason she keeps coming up here. Two bands. Pure texture."
 
 [canvases.trigger]
@@ -1811,7 +1811,7 @@ is_active     = true
 
 [[canvases.nodes]]
 id   = "base"
-name = "The extractor"
+name = "The fan"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "warmth", operator = "lt", value = 30 },
@@ -1821,7 +1821,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "warmth", operator = "gte", value = 30 },
     ] } }, blocks = [
-    { type = "paragraph", content = "Twenty-four degrees and the extractor going through the wall like something breathing. He has the window open two inches in February and it makes no difference at all." },
+    { type = "paragraph", content = "Twenty-four degrees and the fan going through the wall like something breathing. He has the window open two inches in February and it makes no difference at all." },
   ] },
 ]
 exit_block = { type = "location", text = "Sit down.", config = { destinationType = "specific", locationId = "the_chip_shop_flat", time_progression_minutes = 10 } }
@@ -1965,7 +1965,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "npc", npc_id = "npc_ewan", trait_key = "hold", operator = "gte", value = 18 },
     ] } }, blocks = [
-    { type = "paragraph", content = "Two men outside the chandlery stop talking about a foot and a half earlier than they would have, and one of them says your son's name in the sentence before they do it, and then they both say good morning." },
+    { type = "paragraph", content = "Two men outside the boat shop stop talking about a foot and a half earlier than they would have, and one of them says your son's name in the sentence before they do it, and then they both say good morning." },
   ] },
 ]
 exit_block = { type = "location", text = "Go down to the yard.", config = { destinationType = "specific", locationId = "harbour_end", time_progression_minutes = 10 } }
@@ -1994,7 +1994,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "warmth", operator = "lt", value = 30 },
     ] } }, blocks = [
-    { type = "paragraph", content = "It comes in sideways and gets down your collar and you stand in it, because getting home does not solve it, because there is nothing in the meter, because the flat is four degrees warmer than this and that is all." },
+    { type = "paragraph", content = "It comes in sideways and gets down your collar and you stand in it, because getting home does not solve it, because there is nothing in the coin box, because the flat is four degrees warmer than this and that is all." },
   ] },
 ]
 exit_block = { type = "location", text = "Get out of it.", config = { destinationType = "specific", locationId = "harbour_end", time_progression_minutes = 10 } }
@@ -2205,7 +2205,7 @@ description = "Triggerless rung off work_lets_turnaround. The 20-energy price an
 
 [[canvases.nodes]]
 id   = "base"
-name = "The turnaround"
+name = "Cleaning the flat"
 blocks = [
   { type = "paragraph", content = "Beds stripped, traps run so they do not dry out and stink the place up by Easter, and the vacuum round a carpet nobody has walked on in five months. Two hours thirty and you are paid for two." },
   { type = "paragraph", content = "There is somebody's suntan lotion still in the bathroom cabinet in number four. There has been since August. You leave it where it is every single time." },

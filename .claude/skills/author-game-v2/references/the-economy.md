@@ -70,9 +70,15 @@ Three things make it work, and they are cheap:
 >
 > ```json
 > "economy": { "currency": "money",
->              "obligation": "The Friday settle-up with Nunn on the forecourt…",
+>              "obligation": "The Friday settle-up with Nunn out by the pumps…",
 >              "obligation_amount": 245 }
 > ```
+>
+> *(That example said **forecourt** until 2026-08-23 — one of the eleven words used by zero of the
+> 25 field games, sitting in a JSON snippet, which is the highest-copy form this skill has. Found
+> by the verification step of the pass that added `meter`, `float`, `pitch` and `chemist` to the
+> false-friend list: after editing the skill, re-sweep the skill. `register.md`, "The examples are
+> the register".)*
 >
 > **Measured failure, and it is the worst kind — the mechanic the game is named after.** A shipped
 > game declared *"£200 a week back, plus £45 for the caravan"*, printed *"Have the two hundred and

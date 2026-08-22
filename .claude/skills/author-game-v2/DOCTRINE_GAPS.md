@@ -155,7 +155,7 @@ A finished study graduates into a real v2 reference file. Until then it lives he
 
 | **9** | Clothing / wardrobe as a system |
 | **10** | Sex-loop shape |
-| **11** | Pre-ship checklist |
+| **11** | Pre-ship discipline — **still open, and it must NOT be built as a checklist.** §3a of this file already rules on that: *"checklists do not hold… v2 must not inherit the checkbox"*, with v1's 13-point audit followed by the very bug it was written to prevent. **Half of it closed 2026-08-23**: `the-release.md` loop step 5 now says the nineteen lints get read as well as the gates passing, and step 6 records the figures shipped with in `v2_state.json` — a tracked number rather than a box. Cause: Off Season shipped **37/38 with 67 flagged words**, two of which reached LO on a button. What remains open is everything the lints do not cover, and it arrives as instruments or not at all. |
 | **12** | Optional systems — phone, customization |
 | **13** | **Prose that copies a field** — a price, a window, a room name written into a beat is a duplicate of the TOML with no link back, and it goes stale the day the field moves. v1 carried a whole file on this (`author-game/references/prose-truth.md`, 121 lines); a grep of the v2 skill for `prose is a copy \| re-price \| stale prose` returns **nothing**. Found 2026-08-22 while closing the currency item, which is the first measured instance of it. |
 

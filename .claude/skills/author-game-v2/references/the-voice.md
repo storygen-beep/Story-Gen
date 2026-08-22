@@ -32,18 +32,34 @@ Same game, same author. The left column loses nothing.
 
 **Location names are UI too.** A name a player cannot resolve is a navigation bug wearing register's
 clothes. Keep the setting's voice in every paragraph; make the words on the nav buttons parseable by
-anyone. *The Box Room* becomes *The Tenant's Room* and says who and why in two words.
+anyone. *The Box Room* becomes *The Back Room* and says where it is in two words anybody owns.
+
+> ⚠️ **This example has now been wrong twice, in opposite directions, and both are worth keeping.**
+> It read *The Lodger's Room* until 2026-08-22 — `lodger` is used by **zero** of the 25 field
+> games, and `steam` and `off_season` both shipped a location copied from this line. The cure
+> written that day was *The Tenant's Room*, and **`tenant` is under the corpus bar too.**
+>
+> It is not a second `lodger` — the plural `tenants` **is** in-corpus, so `tenant` is standard
+> English that happens to fall under a frequency threshold, and it stays everywhere this skill
+> uses it to describe a *role* to an author (`the-board.md`, `the-map.md`, `state.md`). But a room
+> name is a **button**, and on a button the in-corpus word wins outright. Off Season had already
+> got there on its own: it shipped **The Back Room**, and `back` and `room` are both in-corpus.
+>
+> The lesson is not about these two words. **When you write a cure, run it through the same
+> instrument that caught the disease** — `scripts/genre_words.txt`, one grep. Neither replacement
+> here was ever checked, and the file taught a defect it had just finished diagnosing.
+
+**The word on a label is `register.md`'s, and it has no gloss.** A button cannot explain itself:
+there is no sentence on it to carry one, and the player reads it *before* the prose behind it. So
+a room name, a canvas `name` and a room-list choice take the **plain word**, however well the
+paragraph downstream glosses it. `references/register.md`, "The words the player has to already
+own" — the label sub-rule.
 
 **A character's name is navigation too, and it is not a label until the player owns it.** Before a
 character has been met, name them by their **role** and where they are — *"your closest friend,
 Felix Morin"*, *"a student at your school"*, *"can be found at the docks at night"*. After, the name
 alone is enough. `references/the-first-hour.md` F7 owns this and the `named before met` lint lists
 the misses.
-
-> ⚠️ This example read *The Lodger's Room* until 2026-08-22, and **`lodger` is used by zero of the
-> 25 field games.** The rule was right and its cure was written in the same dialect the rule exists
-> to catch — and `steam` and `off_season` both shipped a location named *The Lodger's Room*,
-> copied from this line. See `register.md`, "The words the player has to already own".
 
 **Exempt, and deliberately so: a choice's `text` INSIDE a scene** — *Don't answer him*, *Let it
 go quiet*, *Say the number first*. These arrive with the scene already on screen, they are choices in
@@ -124,7 +140,17 @@ amount on the button has to be written in the game's one currency, the same one
 A shipped game put `Feed the meter (GBP 3)` on a button, *"Three pounds"* in the paragraph behind
 it and `$90` on the rent card, because nothing had been declared. `references/the-economy.md` R7
 owns this; `engine.md` §33 lists every place the engine prints money and the four the setting
-reaches. Stamina-type costs are *not* gated: two
+reaches.
+
+> ⚠️ **That button carried TWO defects and this line only ever saw one.** `meter` is a false
+> friend — a coin-fed prepayment box here, a stat bar to most players, and the game renders four
+> stat bars in its own sidebar. The currency pass quoted the button *in order to fix it*, fixed the
+> notation, and left the unreadable word sitting in the quote, where it stayed until LO clicked it
+> in the built game and asked what it meant.
+>
+> `SKILL.md`'s **"an example outranks every rule beside it"**, in its sharpest form yet: not an
+> example that taught a defect by accident, but one held up *as* a defect, with a second defect
+> inside it that survived the edit. **When you quote a broken line, read the whole line.** Stamina-type costs are *not* gated: two
 corpus games label them and the reference game does not, so a rule there would be invented rather
 than measured.
 

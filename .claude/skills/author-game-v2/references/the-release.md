@@ -47,10 +47,26 @@ different timing, an order of magnitude in value.
 **4. Write.** Events on existing surfaces. Default to **zero new locations** — if this release
 opens one, it arrives filled, not as a promise.
 
-**5. Gate.** `python3 scripts/gates.py <slug>` green, or fix it.
+**5. Gate — and read the lists.** `python3 scripts/gates.py <slug>` green, or fix it. That same
+command prints **nineteen lints below the tally**, and they are the half of the instrument that
+judges nothing: a game can be green on every gate with the lints full. Off Season shipped **37/38
+with 67 flagged words in the player's face**, and the two the author never looked at reached LO on
+a button.
+
+> ⚠️ **This is a step in the loop, not a checklist, and the difference is deliberate.**
+> `DOCTRINE_GAPS.md` §3a: *"It is a checklist, and checklists do not hold… v2 must not inherit the
+> checkbox."* v1's thirteen-point pre-ship audit was followed by the exact bug it was written to
+> prevent. So there is no box to tick here. There is one command you already run, output you are
+> already looking at, and a rule about what leaving it means: **anything left in a list is left on
+> purpose, named in the ledger, with the reason.** A lint you cannot explain leaving is a lint you
+> have not read.
 
 **6. Ship, and log.** Record in `v2_state.json`: the subject, what it added, **what it
-opened**, and the gate scores.
+opened**, the gate scores, and **the lint figures you are shipping with** — at minimum the
+own-words count and anything you consciously left. A number in the ledger is one that has to come
+down next time; a number only in a terminal is one nobody is holding. This is the same mechanism
+the anchor share already runs on, and the reason the anchor gets budgeted and the word list does
+not is only that one of them was written down.
 
 ---
 

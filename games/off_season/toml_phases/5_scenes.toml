@@ -65,7 +65,7 @@ id   = "base"
 name = "Tam"
 blocks = [
   { type = "image", props = { file = "portraits/tam.jpg", description = "A nineteen year old man lying on top of the covers in a hot small flat in daylight.", search_queries = ["young man lying on bed shirtless daylight small room", "teenager on bed small flat window light"] } },
-  { type = "paragraph", content = "He is on top of the covers with the extractor going through the wall. Nights finish at six, he is in bed by seven, and he does not properly sleep until about noon." },
+  { type = "paragraph", content = "He is on top of the covers with the fan going through the wall. Nights finish at six, he is in bed by seven, and he does not properly sleep until about noon." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "You can come in, you know. You do this thing where you stand on the top step." },
 ]
 
@@ -149,7 +149,7 @@ blocks = [
   { type = "dialog", props = { speaker = "player" }, content = "You want me to go?" },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "When have I ever wanted you to go." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Lee wants me on six nights. I said I'd think about it. I'm not going to do six." },
-  { type = "paragraph", content = "You say he should take the money. He says he knows. Neither of you moves for another forty minutes and the extractor goes the whole time." },
+  { type = "paragraph", content = "You say he should take the money. He says he knows. Neither of you moves for another forty minutes and the fan goes the whole time." },
   { type = "thought_bubble", props = { speaker = "player" }, content = "Nobody else in this town wants anything off me except a decision or a loan." },
 ]
 exit_block = { type = "location", text = "Go down the outside stair.", config = { destinationType = "specific", locationId = "the_chip_shop_flat", time_progression_minutes = 60, effects = [
@@ -247,7 +247,7 @@ blocks = [
     ] } }, blocks = [
     { type = "dialog", props = { speaker = "player" }, content = "What do you do when you can't get off to sleep?" },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Nothing." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Lie there. Listen to the extractor. It's not a problem, it's just how it is." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Lie there. Listen to the fan. It's not a problem, it's just how it is." },
     { type = "paragraph", content = "He says it the way he says everything he has decided not to want help with." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
@@ -265,7 +265,7 @@ blocks = [
     ] } }, blocks = [
     { type = "dialog", props = { speaker = "player" }, content = "What do you do when you can't get off to sleep?" },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "I come down and sit on your step for a bit." },
-    { type = "paragraph", content = "He says it at the ceiling, in the same voice he used for the extractor." },
+    { type = "paragraph", content = "He says it at the ceiling, in the same voice he used for the fan." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Not to knock. Just till it gets light. Then I go back up." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
@@ -529,7 +529,7 @@ name = "On top of him"
 blocks = [
   { type = "video", props = { pool_dir = "sex/tam_loop_astride_t5", pool = 6, description = "A woman riding a man on a bed in a small bright room, seen from below.", search_queries = ["woman riding man on bed daylight from below", "cowgirl bedroom daylight small room close"] } },
   { type = "paragraph", content = "You get a knee over him and put his cock in yourself, and your cunt is wet enough that he goes all the way in with one push and you both stop dead for a second at that." },
-  { type = "paragraph", content = "Then you ride him with your hands flat on his chest and your tits going with it, nipples up, and he holds your hips and lets you do the work, and the bed knocks the wall the extractor is behind." },
+  { type = "paragraph", content = "Then you ride him with your hands flat on his chest and your tits going with it, nipples up, and he holds your hips and lets you do the work, and the bed knocks the wall the fan is behind." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Slow down. I'm not — slow down a minute." },
   { type = "dialog", props = { speaker = "player" }, content = "No." },
 ]
@@ -754,7 +754,7 @@ blocks = [
   { type = "dialog", props = { speaker = "player" }, content = "Can I see it." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "You can see it any time. It's your building." },
   { type = "paragraph", content = "He says that without a flicker, and opens the second drawer, and neither of you mentions that he keeps it in a drawer in a caravan a mile from the building it is about." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Pitch, electric, the coin mechanism, the insurance. That's the four. The insurance is the one that'll do us in April." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Rent, electric, the coin mechanism, the insurance. That's the four. The insurance is the one that'll do us in April." },
   { type = "dialog", props = { speaker = "player" }, content = "How much in April." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "More than the summer makes. I'm working on it. Don't." },
 ]
@@ -767,7 +767,7 @@ id   = "two"
 name = "Why he took them"
 blocks = [
   { type = "dialog", props = { speaker = "player" }, content = "Why did you take them off me. Really." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Because you paid the pitch twice in March and missed it in April, and you didn't notice either." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Because you paid the rent twice in March and missed it in April, and you didn't notice either." },
   { type = "dialog", props = { speaker = "player" }, content = "I was going up to see your father every two weeks in March." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "I know. That's why I didn't say anything about it at the time. I just took them." },
   { type = "paragraph", content = "He wipes the same clean spot on his hands twice, which is the only thing about him that ever gives anything away." },
@@ -891,7 +891,7 @@ blocks = [
   { type = "paragraph", content = "Thirty-five out of the second drawer and he counts it into your hand rather than onto the desk, which is new, and holds the last note a half second longer than he needs to." },
   { type = "dialog", props = { speaker = "player" }, content = "You don't have to count it out like that." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "I do, actually. If I stop counting it we both start pretending it isn't happening." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "That's the meter and something over. And you shut at nine now, not ten. Nobody's coming in after nine in February and you're paying to light an empty room." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "That's the heater and something over. And you shut at nine now, not ten. Nobody's coming in after nine in February and you're paying to light an empty room." },
   { type = "paragraph", content = "You say all right. He waits, because he expected an argument and did not get one, and the not-arguing lands between you like a thing that has been agreed." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Say if that's not all right." },
   { type = "dialog", props = { speaker = "player" }, content = "It's all right." },
@@ -1188,7 +1188,7 @@ blocks = [
   { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "And you going out the front door every morning like nothing was happening. Fifteen. Coat done up. Chin out." },
   { type = "dialog", props = { speaker = "player" }, content = "I was terrified." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "I know. I was twelve and I could tell, and not one of that lot out there could." },
-  { type = "paragraph", content = "The racing goes to an advert and neither of you says anything for a while, and it is not an awkward while." },
+  { type = "paragraph", content = "The racing goes to a commercial and neither of you says anything for a while, and it is not an awkward while." },
 ]
 exit_block = { type = "choices", choices = [
   { text = "Ask him about Bristol.", targetType = "node", nodeId = "two" },
@@ -1405,7 +1405,7 @@ id   = "fingers"
 name = "His hand"
 blocks = [
   { type = "video", props = { pool_dir = "sex/terrace_fingers_t5", pool = 6, description = "A man's hand between a woman's legs on a settee, close, lamplight.", search_queries = ["hand between womans legs sofa close lamplight", "fingering close on couch dim room"] } },
-  { type = "paragraph", content = "Tights and knickers down to your knees and his hand between your legs, and your cunt is so wet that two fingers go straight in. His thumb finds your clit and stays on it, and he fucks them into your cunt slowly while you hold on to his wrist." },
+  { type = "paragraph", content = "Tights and panties down to your knees and his hand between your legs, and your cunt is so wet that two fingers go straight in. His thumb finds your clit and stays on it, and he fucks them into your cunt slowly while you hold on to his wrist." },
   { type = "dialog", props = { speaker = "player" }, content = "Don't stop." },
 ]
 
@@ -1830,7 +1830,7 @@ blocks = [
   { type = "paragraph", content = "The curtain has not been pulled across in weeks and neither of you has mentioned that either. She gets the shirt off with you sitting three feet away and does not turn her back." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "You always go quiet at this bit." },
   { type = "dialog", props = { speaker = "player" }, content = "I know." },
-  { type = "paragraph", content = "She comes and kneels up on the mattress in front of you in nothing but her knickers, close enough that you can feel the heat off her, and waits for you to be the one who moves." },
+  { type = "paragraph", content = "She comes and kneels up on the mattress in front of you in nothing but her panties, close enough that you can feel the heat off her, and waits for you to be the one who moves." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "You always stop here. Don't stop here." },
 ]
 
@@ -1872,7 +1872,7 @@ time_progression_minutes = 10
 effects = [ { targetType = "player", trait = "arousal", op = "add", value = 11, cap = 100 } ]
 
 [[canvases.nodes.exit_block.choices]]
-text       = "Get her knickers off."
+text       = "Get her panties off."
 targetType = "node"
 nodeId     = "fingers"
 costs      = [ { trait = "energy", value = 3 } ]
@@ -2007,7 +2007,7 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "loop_stage", operator = "gte", value = 3 },
     ] } }, blocks = [
     { type = "video", props = { pool_dir = "sex/back_room_finish_mouth_t5", pool = 5, description = "A woman coming with another woman's mouth on her, dim room, close.", search_queries = ["woman coming oral close dim room", "female orgasm oral low light close"] } },
-    { type = "paragraph", content = "She comes on your mouth with both hands shut in your hair and her heels on your back. You keep licking her cunt through every pull of it with your tongue flat on her clit, and she does not let you up until she is finished, and the plasterboard takes the noise she does not make." },
+    { type = "paragraph", content = "She comes on your mouth with both hands shut in your hair and her heels on your back. You keep licking her cunt through every pull of it with your tongue flat on her clit, and she does not let you up until she is finished, and the thin wall takes the noise she does not make." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "loop_stage", operator = "eq", value = 2 },
@@ -2284,7 +2284,7 @@ description = "Triggerless rung off hub_ewan_slip. THE DECLARED DIESEL SINK, bui
 id   = "base"
 name = "Twelve in the tank"
 blocks = [
-  { type = "paragraph", content = "The pump at the chandlery takes cash and gives no receipt. You put twelve in his tank while he is down at the water end with the winch, and you say nothing about it." },
+  { type = "paragraph", content = "The pump at the boat shop takes cash and gives no receipt. You put twelve in his tank while he is down at the water end with the winch, and you say nothing about it." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "The needle's moved." },
   { type = "dialog", props = { speaker = "player" }, content = "Has it." },
   { type = "paragraph", content = "He looks at the pump, and at you, and does the arithmetic without writing it down, which is the thing he does that his father never could. He does not say thank you and he does not say don't." },
@@ -2382,7 +2382,7 @@ description = "Triggerless rung off hub_tam_row. +3 ease, capped, day-capped, 3 
 id   = "base"
 name = "Up the row"
 blocks = [
-  { type = "paragraph", content = "Eleven doors, and he does the whole of it a half step behind you the way he did when he was seven and would not be walked in front of. The row smells of last night through the extractor grille." },
+  { type = "paragraph", content = "Eleven doors, and he does the whole of it a half step behind you the way he did when he was seven and would not be walked in front of. The row smells of last night through the fan grille." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Lee wants me on six nights." },
   { type = "dialog", props = { speaker = "player" }, content = "You said." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "I know I said. I'm saying it again because you didn't tell me not to." },
@@ -2447,7 +2447,7 @@ id   = "base"
 name = "Nessa"
 blocks = [
   { type = "image", props = { file = "portraits/nessa.jpg", description = "A young woman sitting in a glass change booth in an amusement arcade, looking away from the front.", search_queries = ["young woman in arcade change booth glass", "girl sitting in ticket booth arcade bored"] } },
-  { type = "paragraph", content = "She is in the booth with her heels up on the shelf and her back to the window, which means she is watching the length of the floor instead of the front. The float bag is untouched." },
+  { type = "paragraph", content = "She is in the booth with her heels up on the shelf and her back to the window, which means she is watching the length of the floor instead of the front. The change bag is untouched." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "Four people since twelve. One of them was the dog man and he didn't have a dog." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "npc", npc_id = "npc_nessa", trait_key = "want", operator = "lt", value = 5 },
@@ -2483,7 +2483,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 ] }
 
 [[canvases.nodes.exit_block.choices]]
-text        = "Let her do the float."
+text        = "Let her count the till."
 targetType  = "node"
 nodeId      = "rung_nessa_float.base"
 costs       = [ { trait = "energy", value = 5 } ]
@@ -2516,12 +2516,12 @@ exit_block = { type = "location", text = "Get out before the hatch sticks.", con
 
 [[canvases]]
 id          = "rung_nessa_float"
-name        = "The float"
+name        = "The till"
 description = "Triggerless rung off hub_nessa_booth, gated trust >= 20. +5 trust, day-capped, 5 energy and 55 minutes. Handing a lodger the money bag is what trust IS -- no metaphor required."
 
 [[canvases.nodes]]
 id   = "base"
-name = "The float"
+name = "The till"
 blocks = [
   { type = "paragraph", content = "You show her the bags once and then let her do it: coins, notes, count them in, and the figure written in the book in her handwriting instead of yours for the first time in four years." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "What if I'm out." },
@@ -2586,7 +2586,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "npc", npc_id = "npc_ewan", trait_key = "hold", operator = "gte", value = 32 },
     ] } }, blocks = [
-    { type = "paragraph", content = "He does not get off the stool. He slides the float tin along the shelf to make room for your hip and carries on watching the floor." },
+    { type = "paragraph", content = "He does not get off the stool. He slides the change tin along the shelf to make room for your hip and carries on watching the floor." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Sit down. You've been on your feet since the shutter went up." },
   ] },
 ]
@@ -2770,7 +2770,7 @@ blocks = [
   { type = "paragraph", content = "You do not go and you do not pull the curtain. She rolls onto her back with the sheet down at her waist and puts one arm behind her head and lets you look at her tits in the light off the machines." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "Go on then." },
   { type = "paragraph", content = "Her other hand goes under the sheet and you watch it move, slow, and her knees fall open under the cotton, and she does not shut her eyes once the whole time she is doing it." },
-  { type = "paragraph", content = "She comes with her heel dragging up the mattress and her mouth open and no sound at all, because the wall is plasterboard and there is a whole town on the other side of it." },
+  { type = "paragraph", content = "She comes with her heel dragging up the mattress and her mouth open and no sound at all, because the wall is thin and there is a whole town on the other side of it." },
   { type = "thought_bubble", props = { speaker = "player" }, content = "Judith's girl. Forty a week and a curtain, and I stood in that doorway with my hand flat on the frame and did not go up." },
 ]
 exit_block = { type = "location", text = "Go up the stair.", config = { destinationType = "specific", locationId = "the_back_room", time_progression_minutes = 35, effects = [

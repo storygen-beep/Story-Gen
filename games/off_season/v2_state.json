@@ -34,7 +34,23 @@
     "crude_register_lives_in": "The act loops on the four hubs, and above all Tam's pose ladder in the flat over the chip shop -- the surface a player will re-enter more than any other. NOT in the milestones and NOT in the one-shots.",
     "last_read_at_release": "0.1-wip"
   },
-  "releases": [],
+  "releases": [
+    {
+      "version": "0.1",
+      "date": "2026-08-23",
+      "subject": "The word pass — every word in the player's face that the field does not use.",
+      "added": "No new content. 40 substitutions across the five phase files, plus two room-list buttons and nine choice labels relabelled.",
+      "opened": "Nothing. This is a maintenance release.",
+      "gates": "37/38 · the only FAIL is `location fill` (14,689 of 33,300 declared), unchanged by this pass and owned by the fill batch.",
+      "lints_shipped_with": {
+        "own_words": "55 words / 121 uses, down from 67 / 148.",
+        "own_words_left_on_purpose": "Three kinds, none of them defects. (1) Proper nouns the lint's filter missed — `kesh`, `judith`. (2) Inflections of in-corpus words, which the lint cannot lemmatise — `hulls`, `pushers`, `fryer`, `teas`, `flats`, `winters`, `clocks`, `turnarounds`, `eldest`, `shortest`, `twos`. (3) Ordinary English the 25-game corpus happens to lack — `arithmetic`, `christening`, `mortgage`, `paperback`, `radiator`, `subtitles`, `barometer`, `diesel`, `kettle`, `heater`, `stoop`, `tenant`, and `seafront`, which is the word `register.md` itself prescribes. `cardigan`, `hull`, `pusher` and `fryers` are kept deliberately: each is glossed by the sentence around it, and `pusher` is named in full — \"Four coin pushers in the middle\" — in the arcade's own first visit.",
+        "false_friends": "`tea` x9, kept. Every use is the DRINK — \"You make two teas in the two mugs he owns\", the hunger band \"Running on tea\" — and correct in any English. `register.md` cited this game's \"Stay past the tea\" as the meal sense; the citation was wrong and was corrected on 2026-08-23. Same call as vesper's `torch`.",
+        "clock_in_prose": "9.5 per 10k, 9x the field median. Untouched here; it is the clock batch.",
+        "currency_in_prose": "3 references in `pound` against a declared \"$\". A regression from batch 8, and it belongs to the fill batch with the anchor at 24.9%."
+      }
+    }
+  ],
   "promises": [
     {
       "text": "Tam: 'Stay the night' / 'Get on top of him' -- shown locked at want >= 65 inside the act menu. PAID in 0.1-fix5: both doors are real routes into loop_tam_bed's `astride` act node, the want cap moved 60 -> 85 in the same change exactly as this promise required, and a stage-3 finish band came with it. Tam's new 0.2 door is `arse` at want >= 90, unreachable against a cap of 85.",
