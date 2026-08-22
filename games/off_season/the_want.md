@@ -113,10 +113,18 @@ one of them stopping paying it back and starting to collect instead.**
 
   | person | permitted at 0.1 | opens later |
   |---|---|---|
-  | **Tam** | cock, cunt, tits, wet, hard, suck, fuck | cum, come in / on, arse |
-  | **Ewan** | cock, tits, hard, fuck, hold still | cunt, cum, arse, choke |
-  | **Roan** | cock, tits, cunt, wet, fuck, want | cum, come inside |
+  | **Tam** | cock, cunt, tits, wet, hard, suck, fuck, cum, come in / on | arse |
+  | **Ewan** | cock, tits, hard, fuck, hold still, cum, come over | cunt, arse, choke |
+  | **Roan** | cock, tits, cunt, wet, fuck, want, come | cum, come inside |
   | **Nessa** | cunt, tits, wet, tongue, lick, fingers, come | fuck, hold her down |
+
+  > ⚠️ **Corrected 2026-08-22, and the correction went the way you would not expect.** Tam's and
+  > Ewan's finishes ship *"he comes in your mouth"* (`loop_tam_bed.finish`) and *"He comes over your
+  > knuckles"* (`rung_ewan_caravan`) — both were sitting in the **opens later** column while the
+  > prose was already there. The prose is right: it is under no other ceiling, it is the crudest
+  > writing in the game, and this table is the spec each release is checked against. **The table was
+  > stale, so the table moved.** A ceiling is never a floor, and one that lags what shipped is worse
+  > than no table, because the next release reads it and writes under it.
 
   **Crude is the default at the sexual register, not a mode.** No euphemism, no "between her
   legs", no fade. The ceiling is a ceiling and never a floor — writing under it is the defect.

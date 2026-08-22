@@ -30,6 +30,14 @@ starting_canvas = "<canvas_id>"
 # One card per ascent-tier band and one per character: references/the-voice.md R2.
 quests_engine   = "v2"
 
+# ⚠️ THE CURRENCY IS ONE NOTATION, AND IT IS DECLARED. Write it into the ledger
+# as board.economy.symbol, and set [settings.rent] currency_symbol (in
+# 0_systems_spec.toml) to the same string. Left undeclared the rent pages print
+# "$" (v2.py:1190) while every button prints whatever it was typed with — one
+# shipped game wrote a single click's price six ways. references/the-economy.md R7.
+# House default "$": it is the only symbol the engine renders consistently, and
+# name no real-world currency in the prose.
+
 [settings]
 narration_person  = "second"      # IMMUTABLE once a release ships
 clothing_enabled  = true
@@ -41,12 +49,25 @@ starting_day  = "Monday"
 starting_week = 1
 
 
-# ── meters: three layers ─────────────────────────────────────────────────────
-# Layer 1 RATCHETING TIERS  — 3-4, each a different kind of going-further.
-#                             Rungs at 15/35/55/75. These do the heavy gating.
-# Layer 2 VOLATILE STATE    — moves both ways, managed minute to minute.
-#                             NOT ascent. Never gate an arc on these.
-# Layer 3 PER-CHARACTER     — light; lives on each [[npcs]] block below.
+# ── meters ───────────────────────────────────────────────────────────────────
+#   ⚠️ ANSWER W1 BEFORE YOU NAME A SINGLE METER: does the PLAYER climb, or does
+#      the CAST? references/the-meters.md W1. Declare it as `who_climbs` in
+#      v2_state.json; gate 34 checks the built game against your answer.
+#
+#      The field SPLITS and does not converge — 8 roster games put 65%+ of their
+#      character-gating on per-character meters, 9 ladder games put 13% or less,
+#      and NOTHING sits between. All five v2 games landed at 19-29%, in the gap,
+#      because the question was never asked and this file answered it for them.
+#
+#      who_climbs = "player"  →  1-2 deep player tiers · the cast runs light
+#      who_climbs = "cast"    →  little/no player tier · TWO meters per character
+#      who_climbs = "both"    →  a player tier as the FLOOR, per-character as the spine
+#
+#   ⚠️ THE LIST BELOW IS A MENU, NOT A SET. Same rule `needs` already carries on
+#      this page: per game, never a fixed list. Delete every line whose job you
+#      cannot name. A trait that is raised and never read fails gate 33 — measured,
+#      five games shipped 232 arousal raises against 4 reads because this file
+#      handed the key over and said only what NOT to do with it.
 [player]
 id   = "player"
 name = "<Name>"
@@ -54,35 +75,92 @@ name = "<Name>"
 # ⚠️ SECTION form, not an inline table. TOML inline tables cannot span lines, so
 #    `core_traits = { … }` across several lines is a parse error. Real games use this.
 [player.core_traits]
-# layer 1 — ratchets (the ascent tiers; these do the heavy gating)
+
+# ── ascent tiers — ONLY if who_climbs is "player" or "both" ───────────────────
+#    Each names a DIFFERENT kind of going-further. 14 of 25 field games have none
+#    at all; three-or-four is one game's shape, not the genre's (the-meters.md W1).
 <tier_1> = 0
 <tier_2> = 0
-<tier_3> = 0
-purity   = 100      # optional counterweight
-# layer 2 — volatile (managed minute to minute; NEVER gate an arc on these)
-arousal  = 0
-energy   = 100
-hygiene  = 100
-money    = 20
+
+# ── a counterweight — RARE, and it must shut doors ────────────────────────────
+#    1 field game in 25 ships one that gates anything. FOUR of our five shipped
+#    one and three gate almost nothing (`count` 0 reads · `standing` 2 · `grace` 5).
+#    Uncomment only if you can name the door it closes. the-meters.md W5.
+# purity = 100
+
+# ── volatile state — a THROTTLE, and a throttle still has a job ───────────────
+#    ⚠️ This used to read "NEVER gate an arc on these" and nothing else. That is
+#       the ODOMETER half and it is right; the missing half is what a throttle IS
+#       for. A throttle gates the REPEATABLE ACT SURFACE — the node-routed loop in
+#       the-surfaces.md R3b — and resets to 0 at climax (author-emitted; no engine
+#       macro does it). It must never gate a one-shot capstone.
+#    ⚠️ If this game has no repeatable act surface, arousal has no job. Build the
+#       loop or do not declare the meter. the-meters.md W2.
+arousal = 0
+
+# ── the body — declare one line per DECLARED NEED, and nothing else ───────────
+#    Every key here must appear in board.needs[] with a `shuts` (gate 29) AND be
+#    read by some condition (gate 33). the_allowance shipped hygiene with a daily
+#    decay, four ways to wash, and zero conditions reading it.
+energy = 100
+money  = 20
 
 # One [[sidebar_items]] per tier you want visible.
 # ⚠️ The TOP BAND'S `max` IS A PROMISE: content must exist up to it, or gate 8 fails.
 #    Omit `max` on the top band only if the meter is genuinely unbounded.
+# ⚠️ BANDS ARE THE SIDEBAR'S BUSINESS — how the player READS the meter. They are NOT
+#    the rung ladder and you do not derive one from the other. The gates go where the
+#    content goes: the field's live meters carry 8-17 rungs with the LOWEST AT ~5,
+#    and every tier of every v2 game so far starts at 15, which is fifteen clicks of
+#    nothing at the opening of the game. the-meters.md W4.
 [[sidebar_items]]
 type  = "trait_status_text"
 trait = "<tier_1>"
 bands = [
-  { min = 0,  max = 14,  text = "<…>" },
-  { min = 15, max = 34,  text = "<…>" },
-  { min = 35, max = 54,  text = "<…>" },
-  { min = 55, max = 74,  text = "<…>" },
-  { min = 75, max = 100, text = "<…>" },
+  { min = 0,             max = <band_1_top>, text = "<…>" },
+  { min = <band_2_floor>, max = <band_2_top>, text = "<…>" },
+  { min = <band_3_floor>,                     text = "<…>" },   # open top
 ]
 
 
+# ── needs: the body's clock ──────────────────────────────────────────────────
+#   The OTHER kind of meter. An ascent tier climbs and buys access; a need FALLS
+#   on its own, she refills it, and while it is empty something is SHUT.
+#   references/the-meters.md M8-M10.
+#
+#   Per game, NEVER a fixed list — vesper's body is "Power down"/"Charge up", a
+#   truck stop's is not a household's. What is fixed is the FORM: five fields.
+#
+#   ⚠️ `shuts` IS THE POINT. Gate 29 fails any need whose key no condition
+#      anywhere in the game reads. Measured failure: the_allowance declares
+#      [player.trait_decay] hygiene = 10, ships FOUR ways to wash, and has ZERO
+#      conditions reading hygiene — a fully wired loop that means nothing.
+#      Working example, vesper: 11 things drop hygiene by 30, one restores it,
+#      and hygiene >= 40 gates "Take the car". Filthy means she cannot leave.
+#
+#   ⚠️ Every need must be fillable somewhere on a room's `serves.needs`. A need
+#      with nowhere to fill it is a countdown to a wall.
+
+[[needs]]
+key   = "<trait>"
+falls = "<how fast per day — mirror it into [player.trait_decay]>"
+fills = "<location> · <the activity> · <minutes>"
+costs = "<money in the game's ONE notation / an item / nothing>"
+shuts = "<what she CANNOT do while this is empty>"
+
+# [[needs]]
+# key   = "hygiene"
+# falls = "10 a day"
+# fills = "the_bathroom · Wash · 30 min"
+# costs = "$5 for the water heater"
+# shuts = "under 40 she will not go out in public"
+
 # ── locations: DERIVE the count, budget the set as a SHAPE ───────────────────
-#   How many? Not a number you pick. List the places your declared rotas visit
-#   plus what the daily loop needs (sleep, earn, wash, cross), and count that.
+#   How many? Not a number you pick. Derive it from what a place is FOR:
+#        needs served here + work done here + people scheduled here
+#   List the places that answer at least one of those, and count that. A room
+#   that answers NONE of the three is not a location yet — vesper shipped 12 of
+#   30 thin or dead, six completely empty.
 #   ⚠️ This line used to read "6-8 at v0.1" WITH a caveat saying the count was a
 #      judgement, not evidence. All three v2 games shipped exactly 8 anyway — a
 #      prose caveat does not survive next to a number. Study 6.
@@ -94,13 +172,22 @@ bands = [
 #   · its dramatic job — why she goes there when nothing is happening
 #   · who is there, and when — no scheduled character means it is scenery
 #   · what she can do there REPEATEDLY — if nothing, it is not a location yet
-#   · `objects` — what the prose will name AND she can act on. NOT every noun.
-#     This is what sets the room's choice count: every choice belongs to one of
-#     these, though one object may afford several (a bed affords "get in" and
-#     "change first"). Many-to-one, never one-to-one — do not invent an object
-#     to justify a choice. Gate 22 checks each declared object is written AND
-#     affords a choice; anchoring quality is a lint, not a bar to clear.
-#     references/the-surfaces.md R2b/R3.
+#   · `serves` — the THREE kinds this room's list may hold, and nothing else:
+#       needs  = which declared board.needs[] she can fill here
+#       work   = what earns money here
+#       people = who is scheduled here (one hub per schedule row)
+#     THAT IS THE MENU, and its length. Anything that is none of the three is a
+#     BEAT INSIDE one of them, not a button. references/the-surfaces.md R2.
+#     ⚠️ This replaced `objects` on 2026-08-18. The old rule declared the things
+#     in the room and derived the choice count from them — and shipped a kitchen
+#     with a six-choice browse screen ON TOP OF four activities covering the same
+#     things, because gate 22 computed affordances from exit_block.choices and
+#     could not see a canvas at all. A body needs ~5 things; a room contains 50
+#     nouns. Needs are a CLOSED list; objects are an OPEN one.
+#   · does it carry a WALK-IN? If she works alone here and anyone is scheduled
+#     here, someone can interrupt her. That pairing is a JOIN of your own board,
+#     not a judgement — gate 30 computes it. One per qualifying room, never one
+#     per pair. references/the-surfaces.md R3.
 #   · `fill` — the word budget, in ROUND numbers, written NOW, before the prose.
 #     Gate 1 refuses to credit a budget that is mostly non-round: measured, all
 #     three v2 games declared exact post-hoc word counts (9,607 / 4,936 / 10,295)
@@ -110,14 +197,39 @@ bands = [
 # Cold rooms are allowed: the reference game had no sexual content in 8 of its
 # 25 locations. The floor is 60% of locations carrying heat, not 100%.
 #
-# ⚠️ BUT ANSWER THIS FIRST, BEFORE ANY OF THE ABOVE — references/the-map.md:
-#   · Could a stranger DRAW this building from the graph? Room-by-room jobs all
-#     pass on a world with no outside and no beds. One shipped that way.
-#   · Where does every character SLEEP? Declare it in board.map.homes, or
-#     "offscreen" if they genuinely live elsewhere. It cannot be inferred.
-#   · If she travels anywhere, what does she cross? A domestic premise with no
-#     exterior can only recycle its own interior — and that exterior is the only
-#     renewable source of new characters it will ever have.
+# ⚠️ BUT ANSWER THESE FIRST, BEFORE ANY OF THE ABOVE — references/the-map.md:
+#
+#   0. WHICH SHAPE IS THIS? Pick one and record it in board.map.archetype:
+#        nested_zones | two_hub | map_hotspots | street_mesh | time_slot
+#      The genre floor is a multi-zone world, NOT a single building. Do not
+#      default to a house. Gate 28 fails a board that has not chosen.
+#      ⚠️ The count below is derived from where the cast goes — which is CIRCULAR
+#      on its own: the premise fixes the cast, the cast fixes the map, and a
+#      household returns a house every time. Pick the shape first (in the Want,
+#      before the cast exists) and derive the count INSIDE it. Two of five v2
+#      games shipped a house because nobody was ever asked to choose.
+#
+#   1. Could a stranger DRAW this PLACE from the graph? Room-by-room jobs all
+#      pass on a world with no outside and no beds. One shipped that way.
+#
+#   2. Where does every character SLEEP? Declare it in board.map.homes, or
+#      "offscreen" if they genuinely live elsewhere. It cannot be inferred.
+#
+#   3. If she travels anywhere, what does she cross? A premise with no exterior
+#      can only recycle its own interior — and that exterior is the only
+#      renewable source of new characters it will ever have.
+#      ⚠️ AND THE EXTERIOR MUST BE A ROOT. A game declared one, priced it at 25
+#      minutes, passed every gate — and it hung off the kitchen, so "outside"
+#      meant stepping from one interior into a row of shops. Gate 28 reads
+#      entry_from and fails a leaf.
+#
+#   4. Does every NAME say what is through the door? A room name is a button read
+#      on every turn. Two shipped that a player cannot resolve, one of which was
+#      the naming rule's own example of a bad name.
+#
+#   5. WHO signs the map off, and WHEN? Put both in board.map.r1_signoff. The
+#      author signing off their own map is not a sign-off — and that is exactly
+#      what the 26/26 house-shaped game recorded.
 
 [[locations]]
 id                   = "<location_id>"
@@ -139,7 +251,10 @@ navigation_order     = ["<neighbour_id>"]
 # BOARD NOTES (keep in v2_state.json, not in the TOML):
 #   job     = "<why she comes here with nothing happening>"
 #   anchor  = false       # exactly one location sets this true
-#   objects = ["<the thing>", "<the other thing>"]   # what she can act on here
+#   [locations.serves]
+#   needs  = ["<a key from [[needs]] below>"]
+#   work   = ["<what earns money here>"]
+#   people = ["npc_<id>"]                           # one hub per schedule row
 #   fill    = 4000        # ⚠️ YOUR BUDGET, in round numbers, written NOW — a PLAN.
 #
 # ⚠️ THIS LINE USED TO READ `fill = 0  # recomputed by gates.py — do not hand-maintain`,
@@ -160,7 +275,15 @@ id          = "npc_<id>"
 name        = "<Name>"
 description = "<who they are — and why she wants them, or why being wanted by them lands>"
 portrait    = "<id>.jpg"
-core_traits = { relation = 0, lust = 0 }      # layer 3: light, per character
+# ⚠️ THE PAIR BELOW IS THE LADDER SCHOOL'S ANSWER — correct when who_climbs is
+#    "player" (the tiers gate, the bond colours). For who_climbs = "cast" it is
+#    the engine missing: pick THIS character's gating meter from what the
+#    relationship IS — bond for a peer, their own willingness for a slow burn,
+#    money for leverage, trust for service, and NO climbing meter at all for
+#    someone she already belongs to. the-meters.md W6.
+#    Measured: all five v2 games shipped ONE meter shape across the whole cast,
+#    and the_allowance gave two of five characters a full pair and zero gates.
+core_traits = { relation = 0, lust = 0 }
 flag_keys   = []
 arc_stages  = ["<Stranger>", "<…>"]
 

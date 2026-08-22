@@ -13,7 +13,7 @@
 #
 #   THE FRONT   (root · the promenade · everything opens onto it)
 #   ├── The Arcade            ANCHOR
-#   │   ├── The Lodger's Room     (the rotating slot, behind)
+#   │   ├── The Back Room          (the rotating slot, behind)
 #   │   └── Your Flat             (above — sleep, warmth, the wardrobe)
 #   ├── The Holiday Lets      (+10 min)
 #   ├── Harbour End           (+15 min)
@@ -35,8 +35,12 @@
 # sealed in a room with no exits.
 #
 # Location NAMES are UI (the-voice.md R1): they say what is through the door.
-# "The Lodger's Room", not "The Back Room" — and it never names the tenant,
-# because that room rotates.
+# ⚠️ "The Back Room", NOT "The Lodger's Room". This comment taught the opposite
+#    until 2026-08-22, copied from a the-voice.md example that was itself
+#    corrected: `lodger` is used by ZERO of the 25 field games, so the cure was
+#    written in the same dialect the rule exists to catch. A name says what is
+#    through the door in words anyone owns, and never names the tenant, because
+#    that room rotates.
 # =============================================================================
 
 [player]
@@ -64,7 +68,7 @@ warmth    = 18     # February. She starts BELOW her own 30 gate, so the flat
 hunger    = 20     # BELOW her own 25 gate, same reason as energy and warmth
 
 # ⚠️ money is a QUANTITY, not a 0-100 meter. EVERY effect that writes it must
-#    carry `clamp = false` (engine.md §21). Clamped, it caps at 100, the GBP 90
+#    carry `clamp = false` (engine.md §21). Clamped, it caps at 100, the $90
 #    Monday draw becomes unpayable within two weeks of takings, and the build is
 #    green the whole way down: a capped effect looks identical to a working one
 #    in the TOML, the validator, the build log and the scoreboard.
@@ -118,7 +122,7 @@ navigation_order     = ["the_back_room", "the_flat"]
 # scene block instead of a rewrite of every surface in here.
 [[locations]]
 id                   = "the_back_room"
-name                 = "The Lodger's Room"
+name                 = "The Back Room"
 description          = "Behind the arcade, through the door marked PRIVATE. A mattress on a frame, a rail with four hangers, a curtain hung across the doorway because the door came off its hinges before you were married. This is the room your husband did what he did in, and it is the room you let out for forty a week now, and both of those are true at once."
 image                = "locations/the_back_room.jpg"
 image_search_queries = ["bare back room mattress curtain doorway single bulb", "storeroom converted bedsit rail hangers dim"]
@@ -129,7 +133,7 @@ navigation_order     = []
 [[locations]]
 id                   = "the_flat"
 name                 = "Your Flat"
-description          = "Up the inside stair from the arcade floor. Two rings, a kettle, an immersion with a coin meter screwed to the wall beside it, and a window over a sea that nobody comes to look at until April. It is yours in the sense that nobody else sleeps here. It is not yours in any of the other senses."
+description          = "Up the inside stair from the arcade floor. Two rings, a kettle, and an immersion heater for the hot water with a coin meter screwed to the wall beside it, which is how you pay for heat in a building like this: and a window over a sea that nobody comes to look at until April. It is yours in the sense that nobody else sleeps here. It is not yours in any of the other senses."
 image                = "locations/the_flat.jpg"
 image_search_queries = ["small cold flat above shop kitchen window sea", "bedsit two ring hob kettle worn interior night"]
 entry_from           = "the_arcade"
@@ -139,7 +143,7 @@ navigation_order     = []
 [[locations]]
 id                   = "the_lets"
 name                 = "The Holiday Lets"
-description          = "Six flats over the shut shops at the Terrace end, let by the week from Easter and empty the rest of the year. You do the winter turnarounds on the agency's key — strip the beds, run the taps so the traps don't dry, hoover a carpet nobody has walked on since September. Other people's rooms, other people's things in the drawers, and the agency's list on the fridge with your name at the top of it."
+description          = "Six flats over the shut shops at the Terrace end, let by the week from Easter and empty the rest of the year. You do the winter turnarounds on the agency's key — strip the beds, run the taps so the traps don't dry, vacuum a carpet nobody has walked on since September. Other people's rooms, other people's things in the drawers, and the agency's list on the fridge with your name at the top of it."
 image                = "locations/the_lets.jpg"
 image_search_queries = ["empty holiday flat stripped bed cleaning winter", "vacant seaside apartment bare mattress hoover"]
 entry_from           = "the_front"
@@ -150,7 +154,7 @@ costs                = { time = 10 }
 [[locations]]
 id                   = "harbour_end"
 name                 = "Harbour End"
-description          = "Where the promenade gives up and turns into concrete, trailers and a slip going down into brown water. Diesel, rope, a chandlery that opens when it feels like it. The one part of Ellinbay with a reason to be awake in February, which is why your eldest ended up down here and not in the arcade."
+description          = "Where the promenade gives up and turns into concrete, trailers and a slip going down into brown water. Diesel, rope, and a chandlery -- the shop that sells boat parts -- which opens when it feels like it. The one part of Ellinbay with a reason to be awake in February, which is why your eldest ended up down here and not in the arcade."
 image                = "locations/harbour_end.jpg"
 image_search_queries = ["small harbour slipway boat trailers winter grey", "fishing harbour concrete slip diesel drums"]
 entry_from           = "the_front"
@@ -182,7 +186,7 @@ costs                = { time = 15 }
 [[locations]]
 id                   = "the_chip_shop_flat"
 name                 = "Tam's Flat"
-description          = "Up the outside stair at the side of the chip shop, and the whole flat sits on top of the fryers, so it is the only warm room in Ellinbay between October and April and it smells permanently of beef dripping. One bed against the wall that backs onto the extractor, a chair, a pan on the hob with whatever he made at four in the morning still in it."
+description          = "Up the outside stair at the side of the chip shop, and the whole flat sits on top of the fryers, so it is the only warm room in Ellinbay between October and April and it smells permanently of beef dripping. One bed against the wall that backs onto the chip shop's extractor fan, a chair, a pan on the hotplate with whatever he made at four in the morning still in it."
 image                = "locations/the_chip_shop_flat.jpg"
 image_search_queries = ["small flat above chip shop messy bed daylight", "cramped bedsit unmade bed radiator curtains drawn day"]
 entry_from           = "terrace_row"
@@ -192,7 +196,7 @@ navigation_order     = []
 [[locations]]
 id                   = "the_terrace_house"
 name                 = "Your Mother's House"
-description          = "Eleven doors down, and Roan has changed nothing — the same front room, the same carpet, the barometer in the hall that has said CHANGE since 1998. He sleeps in the back bedroom, not hers. You grew up in this house and there is a mark on the door frame at the bottom of the stairs where somebody once measured you both."
+description          = "Eleven doors down, and your brother has changed nothing — the same front room, the same carpet, the barometer in the hall that has said CHANGE since 1998. He sleeps in the back bedroom, not hers. You grew up in this house and there is a mark on the door frame at the bottom of the stairs where somebody once measured you both."
 image                = "locations/the_terrace_house.jpg"
 image_search_queries = ["dated english terraced house front room 1990s carpet", "old fashioned living room net curtains lamp evening"]
 entry_from           = "terrace_row"
@@ -257,15 +261,26 @@ start_time = "08:00"
 end_time   = "18:00"
 activity   = "under a hull with the radio going and the drum stove lit"
 
-# Monday evening at your counter with the folder. The rent itself is charged by
-# [settings.rent] — this row is so he is FINDABLE that night, not so a canvas
-# can narrate the payment. the-economy.md R3.
+# Monday EVENING at your counter. The rent itself is charged by [settings.rent],
+# and it fires in the MORNING: is_due is set at midnight (v2.py:5464) and the
+# RentDay page intercepts on the next Location_ passage (v2.py:15258). So the
+# money has already changed hands by the time this row puts him here.
+#
+# ⚠️ The activity string used to say "doing the folder on your counter", which is
+#    what [settings.rent.text] scene ALREADY has him doing at half seven -- the
+#    folder was in two places on the same day, and both render (this one on the
+#    Schedule page). The evening is its own thing now: he stays.
+#
+# ⚠️ hub_ewan_counter is built on this row and narrates NO payment. the-economy.md
+#    R3: if [settings.rent] is doing the charging, write the scene BESIDE it --
+#    the evening after, the ask before. A shipped game wrote the hand-over next to
+#    a working [settings.rent] and created a free repeatable relation faucet.
 [[npcs.schedules]]
 location   = "the_arcade"
 weekdays   = [0]
 start_time = "19:00"
 end_time   = "20:30"
-activity   = "doing the folder on your counter with his coat still on"
+activity   = "on your stool with his coat still on, not saying why he is stopping"
 
 
 # ── TAM — the spine ──────────────────────────────────────────────────────────
@@ -316,7 +331,7 @@ activity   = "in your chair with his boots off, for no reason he could give you"
 [[npcs]]
 id          = "npc_roan"
 name        = "Roan"
-description = "Your brother, five years behind you, back in your mother's house with a holdall and no explanation about Bristol. He was twelve when you got pregnant and he watched the whole street decide who you were in about a fortnight, and he is the only person still alive who was in the room for any of it. He talks to you like the girl. Nobody else has in twenty-four years."
+description = "Your brother, five years behind you, back in your mother's house with a holdall and no explanation about Bristol. He was twelve when you got pregnant and he watched the whole street decide who you were in about a two weeks, and he is the only person still alive who was in the room for any of it. He talks to you like the girl. Nobody else has in twenty-four years."
 portrait    = "roan.jpg"
 core_traits = { bond = 0 }
 flag_keys   = ["roan_back_door"]
@@ -327,7 +342,7 @@ location   = "the_terrace_house"
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "17:00"
 end_time   = "23:00"
-activity   = "in your mother's front room with the telly on mute"
+activity   = "in your mother's front room with the TV on mute"
 
 [[npcs.schedules]]
 location   = "the_front"
@@ -353,7 +368,7 @@ description = "Your sister's girl, twenty-one, came down for a summer job on the
 portrait    = "nessa.jpg"
 core_traits = { trust = 0, want = 0 }
 flag_keys   = ["nessa_saw_her", "nessa_curtain_open"]
-arc_stages  = ["The lodger", "Letting you in", "Leaving it open", "Coming upstairs"]
+arc_stages  = ["Your tenant", "Letting you in", "Leaving it open", "Coming upstairs"]
 
 # ✅ Wraps midnight in ONE row, because the row covers all seven weekdays. A
 #    DAY-SPECIFIC overnight window needs TWO rows: the weekday check runs first

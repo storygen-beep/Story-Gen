@@ -13,21 +13,54 @@
 # FIRST EXPLICIT BEAT EARLY, and it is hers. the-release.md § first release:
 # the strongest-retained game in the comparison set is explicit on night one,
 # two clicks from free roam. Here the first explicit surface is the same scene
-# that teaches `warmth` — she puts three pounds in the meter, gets warm for the
+# that teaches `warmth` — she puts three in the meter, gets warm for the
 # first time in a fortnight, and takes her clothes off in her own flat because
 # for once she can. The need and the heat are the same mechanic.
 # =============================================================================
 
 
 # ═════════════════════════════════════════════════════════════════════════════
-# THE OPENING — linear, three nodes. Teaches: the building, the ninety, who
-# holds it, and the four of them inside four hundred yards.
-# SETS season_shut (which arms [settings.rent]) and arrival_done.
+# THE OPENING — a COLD OPEN, and the shape is a declared choice.
+#
+# the-first-hour.md F1: the field runs TWO opening shapes and nothing between
+# them. A cold open names NOBODY at ~150 words and the cast arrives later as
+# content (corpo-life 64, degrees-of-lewdity 193, the-company 126). A staged
+# open spends 700-2,600 putting people on screen one at a time, each described
+# and SPEAKING. The defect is the middle.
+#
+# ⚠️ THIS CANVAS WAS THE MIDDLE. It ran 277 words and named SIX people -- Ewan,
+#    Tam, "your sister's girl", "your brother", "your mother", "his father" --
+#    with none of them on screen, none speaking, and TWO of the six not in the
+#    game at all. 46 words per named character against the field's ~229.
+#
+#    The cast did not get cut; it got MOVED to where a person can be met:
+#      the building and the pitch  -> canvas_first_arcade, the anchor's first visit
+#      the four of them            -> canvas_meet_* , one each, on screen, speaking
+#    What stays here is her situation and the pressure, which is all a cold
+#    open carries.
+#
+# ⚠️ NO CAPSTONE CANVAS (F2). The boot/capstone split exists for an opening that
+#    has to carry more than a boot can. canvas_first_arcade IS the capstone and
+#    it sits at the NEXT location, which is better: it introduces the room the
+#    player is standing in rather than one they have left.
+#
+# ⚠️ THE HANDOVER IS ARITHMETIC, NOT VIBE (F3). 07:00 + 3 (node->node default,
+#    v2.py:13200) + 30 (this exit) = 07:33 at the arcade, where the first-visit
+#    canvas auto-fires and spends 30 more -> 08:03, inside work_arcade_morning's
+#    08:00-13:00 window. The old funnel landed at 07:36 in a room that opened at
+#    08:00 and the player's first free act was pressing a wait button.
+#
+# ⚠️ Ewan is not named here and the rent does not need him to be: advanceDay()
+#    arms the demand when the day rolls TO due_day (engine.md 26) and the game
+#    starts ON Monday, so the first charge is a week out. There is a full week
+#    to meet him at the yard before he appears at the counter.
+#
+# SETS season_shut, which arms [settings.rent].
 # ═════════════════════════════════════════════════════════════════════════════
 [[canvases]]
 id          = "canvas_opening"
 name        = "Off Season"
-description = "Opening. Monday 07:00, the flat. Establishes Marnie, the arcade, the GBP 90 pitch rent, Ewan holding the lease, and the four of them within four hundred yards. Linear, three nodes. SETS season_shut (arms the Monday draw) + arrival_done."
+description = "Opening. Monday 07:00, the flat. A COLD OPEN (the-first-hour.md F1): ~150 words, NO character named, no cast load. Establishes her, the building with her name on it, the ninety a week due tonight, and the fact that everyone she is related to is inside four hundred yards. Two nodes. SETS season_shut, which arms the Monday draw."
 
 [canvases.trigger]
 location      = "the_flat"
@@ -41,8 +74,7 @@ name = "Monday, seven"
 blocks = [
   { type = "image", props = { file = "scenes/flat_morning.jpg", description = "A woman in her late thirties sitting on the edge of a bed in a small cold flat, grey sea light at the window.", search_queries = ["woman sitting edge of bed small flat cold morning window", "middle aged woman bedsit window grey winter light"] } },
   { type = "paragraph", content = "You wake at seven with your breath going up in front of you. The window has run all night and the sill is wet. Out past it the sea is the same colour as the sky and nothing is moving on the front." },
-  { type = "paragraph", content = "The meter on the wall by the immersion says nothing, because there is nothing in it. There has been nothing in it since Thursday." },
-  { type = "paragraph", content = "Under the window, eight foot of it across the front of your own building: KESH AMUSEMENTS. Your name since you were seventeen. Your eldest since you were fifteen." },
+  { type = "paragraph", content = "The meter on the wall says nothing, because there is nothing in it. There has been nothing in it since Thursday, and you have kept your coat on indoors for four days rather than spend the three." },
 ]
 exit_block = { type = "choices", choices = [
   { text = "Get up.", targetType = "node", nodeId = "the_change_bag" },
@@ -52,26 +84,274 @@ exit_block = { type = "choices", choices = [
 id   = "the_change_bag"
 name = "The change bag"
 blocks = [
-  { type = "paragraph", content = "Twenty-two pounds in the change bag, most of it in tens and twenties. The pitch on this building is ninety a week and it comes out tonight, because it is Monday, because it is always Monday." },
-  { type = "paragraph", content = "It does not go to a landlord. It goes to Ewan. He took the folder off you the month after his father went inside, and he was right to, and you have not signed anything about your own building since." },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "He was nine when I started letting him count the till. That is the whole of it, really." },
-]
-exit_block = { type = "choices", choices = [
-  { text = "Go down.", targetType = "node", nodeId = "four_hundred_yards" },
-] }
-
-[[canvases.nodes]]
-id   = "four_hundred_yards"
-name = "Four hundred yards"
-blocks = [
-  { type = "paragraph", content = "Down the inside stair the arcade is black and the machines are off at the wall. Behind the PRIVATE door your sister's girl is asleep on a mattress and owes you forty." },
-  { type = "paragraph", content = "Harbour End: Ewan, under a hull, from eight. Terrace Row: Tam over the fryers, sleeping off nights. Eleven doors along, your mother's house, and your brother in it with a holdall and no story about Bristol." },
-  { type = "paragraph", content = "Everyone you are related to is inside four hundred yards of this counter. The season does not start again until April." },
+  { type = "paragraph", content = "Twenty-two in the change bag, most of it in tens and twenties. Ninety comes out of it tonight, because it is Monday, because it is always Monday." },
+  { type = "paragraph", content = "Under the window, eight foot of it across the front of your own building: KESH AMUSEMENTS. Your name since you were seventeen, and everyone you are related to lives inside four hundred yards of it." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Nothing opens again until April. Ten weeks of this, and then a season, and then this again." },
 ]
 exit_block = { type = "location", text = "Get the shutter up.", config = { destinationType = "specific", locationId = "the_arcade", time_progression_minutes = 30, flagEffects = [
   { targetType = "player", flag = "season_shut", op = "set" },
-  { targetType = "player", flag = "arrival_done", op = "set" },
 ] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE ANCHOR'S FIRST VISIT — the-first-hour.md F9, and it does three jobs.
+#
+# 1. IT SAYS WHAT THE PLACE IS. `amusement arcade`, `slot machine`, `coin
+#    pusher`, `change booth` appeared NOWHERE in player-visible prose before
+#    this canvas -- only in image_search_queries and in image `description`,
+#    which renders as the alt attribute (v2.py:13750) and, with no media on
+#    disk, not at all. A human read the built game and asked "what is arcade??"
+#    and the game had no answer anywhere in it. The field names the kind of
+#    thing in the plainest word it has, immediately: "a suburban town called
+#    Onegaron", "Chase-Bank, one of the most prestigious banks in New York
+#    city".
+#
+# 2. IT CATCHES WHAT THE OPENING PUT DOWN. The building and the ninety came out
+#    of canvas_opening when that became a cold open; they land here, in the room
+#    they are about, and the person who collects is named by ROLE (F7) because
+#    the player has not met him yet.
+#
+# 3. IT CLOSES THE DEAD HALF-HOUR (F3). The funnel lands at 07:33 and
+#    work_arcade_morning does not open until 08:00. This canvas is what is live
+#    in between -- a non-repeatable, unscheduled, non-random canvas auto-fires
+#    on entry (selectAutoFireCanvasForLocation, v2.py:4453) -- and its exit
+#    spends 30 minutes, so the player comes out of it at 08:03 with the counter
+#    open. The introduction does the waiting.
+#
+# ⚠️ IT SETS `shutter_up`, AND THE COUNTER READS IT. The three arcade work bands
+#    used to gate on `season_shut` -- a flag set UPSTAIRS IN HER FLAT -- so the
+#    counter was workable in a building whose shutter was still down. Threading
+#    it through here makes the funnel a real chain (flat -> arcade -> the counter
+#    opens) and it is the truer rule besides: you cannot work a counter in a
+#    shuttered arcade. `work_lets_turnaround` keeps `season_shut`, because the
+#    holiday lets are not behind this shutter -- the SEASON being shut is what
+#    makes turnarounds her winter work.
+#
+#    Found by gate 7 (`milestones open something`), which failed this canvas the
+#    moment it was written: a one-shot that sets no flag opens nothing and owes
+#    an explanation. The gate was right. Widening it to excuse "first visits"
+#    was measured first and REJECTED -- a blanket "sets nothing" exemption would
+#    have excused 10 canvases across four games, including six mid-arc capstones
+#    in the_inheritance and three in vesper that it is correctly catching.
+#
+# ⚠️ NO SCHEDULE, deliberately. It has to be live at whatever minute the funnel
+#    hands over, and it is about the room rather than about a person, so there
+#    is no presence to match. The four canvas_meet_* below are the opposite case
+#    and every one of them carries a window.
+# ═════════════════════════════════════════════════════════════════════════════
+[[canvases]]
+id          = "canvas_first_arcade"
+name        = "Under the letters"
+description = "FIRST VISIT @the_arcade, the declared anchor. One-shot, no schedule, priority 11 so it beats anything else valid on entry. Says what an amusement arcade IS in plain words, carries the ninety and the folder across from the cold open, and spends 30 minutes so the funnel's 07:33 handover comes out at 08:03 inside the morning window."
+
+[canvases.trigger]
+location      = "the_arcade"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "season_shut", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Under the letters"
+blocks = [
+  { type = "image", props = { file = "scenes/arcade_shutter_up.jpg", description = "The inside of a small seaside amusement arcade in the morning with the shutter half up and most machines dark.", search_queries = ["amusement arcade interior shutter up morning empty", "seaside penny arcade slot machines dim daylight"] } },
+  { type = "paragraph", content = "The shutter goes up and the smell comes out before the light goes in. Carpet, warm dust, and the inside of forty machines that have been off since October." },
+  { type = "paragraph", content = "This is an amusement arcade. Slot machines down both walls. Four coin pushers in the middle, glass wiped every morning whether anybody has touched them or not. Two driving cabinets. A crane with nothing in it worth the money." },
+  { type = "paragraph", content = "Half of it is off at the wall to save the electric. The carpet is the colour of a bruise and a man who is not here chose it. The change booth has a hatch you have to stoop to, and from behind it you can see the whole length of the front." },
+  { type = "paragraph", content = "The pitch on this building is ninety a week, and it does not go to a landlord. It goes to the one who took the folder off you the month your husband went inside. He was right to take it. You have not signed anything about your own building since." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Forty machines with my name over them, and I do not get to say which ones are on." },
+]
+exit_block = { type = "location", text = "Open up.", config = { destinationType = "specific", locationId = "the_arcade", time_progression_minutes = 30, flagEffects = [
+  { targetType = "player", flag = "shutter_up", op = "set" },
+] } }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE FOUR MEETINGS — the-first-hour.md F5-F8. NEW 2026-08-22.
+#
+# ⚠️ THE FORBIDDEN SHAPE THIS REPLACES: a repeatable `npc =` hub whose base node
+#    IS the introduction. All four hubs here carried NO CONDITION AT ALL, so
+#    every portrait was live on turn one and the game had no meeting state.
+#    16 of 25 field games carry per-character meeting state; degrees-of-lewdity
+#    keeps a first-time flag on 24 of its 27 registered NPCs.
+#
+# The shape, from the worked example the_inheritance/canvas_meet_audrey (128
+# words, one node, four dialog blocks):
+#
+#   the meeting   is_repeatable = false · high priority · location-bound
+#                 · a SCHEDULE matching where the character actually is
+#                 · sets ONE flag on its exit choice
+#   the hub       is_repeatable = true · npc = set · gated on that flag
+#                 · a DIFFERENT name
+#
+# ⚠️ THE SCHEDULE IS NOT DECORATION. `requires_npc` does NOT gate the auto-fire
+#    path: getStoryCanvasRedirect -> selectAutoFireCanvasForLocation ->
+#    isCanvasValid (v2.py:4573) checks schedules, conditions and repeatability
+#    and never reads requiresNpc. Without a window, canvas_meet_ewan introduces
+#    him in an empty boat yard at ten at night -- which is exactly what
+#    vesper/cap_renner_hired does. Keep requires_npc as well: it is free and it
+#    is correct on the two paths that DO read it (v2.py:5259, :5332).
+#
+# ⚠️ FOUR FLAGS, NOT ONE (F8). seventh_day gated two hubs on `rota_running`,
+#    steam two on `doors_open`, back_home four on `arrival_done` -- one flag
+#    opening a whole cast is the cold-spawn hub with a coat on, and gate 34's
+#    flag_owners half fails it.
+#
+# ⚠️ NO WAVES, and that is a call rather than an oversight. F8 prefers staggered
+#    entrances. This game's premise is that all four live inside four hundred
+#    yards and she is related to every one of them; gating them by day would be
+#    an invented lock on the one thing the world is about.
+#
+# ⚠️ THE NODE NAME IS THE ROLE, and the hub's is the name (F7). Relationship
+#    label first -- it is what the player can hold; the name is what they will
+#    need later.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "canvas_meet_ewan"
+name        = "Your eldest"
+description = "MEETING @the_boat_yard, windowed to his 08:00-18:00 Mon-Sat row. One-shot, priority 11 so it beats canvas_first_borrow on entry. SETS met_ewan, which is the only thing that opens hub_ewan_yard. Carries the reversal the cold open put down: the pitch does not go to a landlord, and he says so himself."
+
+[canvases.trigger]
+location      = "the_boat_yard"
+requires_npc  = "npc_ewan"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_ewan", operator = "is_false" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5]
+start_time = "08:00"
+end_time   = "18:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Your eldest"
+blocks = [
+  { type = "paragraph", content = "Your eldest is under the second hull with a light on a lead. You had him at fifteen and the pair of you came up together after that, more than one of you raised the other. He wipes his hands on the front of himself before he looks at you." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "You want something." },
+  { type = "dialog", props = { speaker = "player" }, content = "I want to know what the pitch is this week." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Ninety. It's ninety every week. It was ninety when Dad was doing it and I haven't touched it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "I'm not the landlord, Mum. I'm just the one holding it." },
+  { type = "paragraph", content = "He says it the way you would say the weather. He took the folder off you the month his father went inside, because somebody had to and nobody else offered, and he has never once raised his voice at you, which is worse." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Let him get back under it.", targetType = "location", locationId = "the_boat_yard", time_progression_minutes = 15, flagEffects = [ { targetType = "player", flag = "met_ewan", op = "set" } ] },
+] }
+
+
+[[canvases]]
+id          = "canvas_meet_tam"
+name        = "Your youngest"
+description = "MEETING @the_chip_shop_flat, windowed to his 08:00-15:00 row. One-shot, priority 11 so it beats canvas_tam_saw_you. SETS met_tam, the only thing that opens hub_tam_flat."
+
+[canvases.trigger]
+location      = "the_chip_shop_flat"
+requires_npc  = "npc_tam"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_tam", operator = "is_false" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "15:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Your youngest"
+blocks = [
+  { type = "paragraph", content = "Your youngest is on top of the covers in a room that sits on top of the chip shop's fryers, which is why it is the only warm room in this town between October and April. He gets an eye open, works out it is you, and does not get up." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "You never knock at our Ewan's." },
+  { type = "dialog", props = { speaker = "player" }, content = "Ewan's got a door." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "I've got a door." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Sit down. You do this thing where you stand on the top step." },
+  { type = "paragraph", content = "He is nineteen, he has never left, and he has never grown out of you. He is also the only person in this town who comes up your stairs when nothing is wrong, and you have started noticing that, which is new." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Let him sleep it off.", targetType = "location", locationId = "the_chip_shop_flat", time_progression_minutes = 15, flagEffects = [ { targetType = "player", flag = "met_tam", op = "set" } ] },
+] }
+
+
+[[canvases]]
+id          = "canvas_meet_roan"
+name        = "Your brother"
+description = "MEETING @the_terrace_house, windowed to his 17:00-23:00 row. One-shot, priority 11 so it beats canvas_roan_back_door. SETS met_roan, the only thing that opens hub_roan_house."
+
+[canvases.trigger]
+location      = "the_terrace_house"
+requires_npc  = "npc_roan"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_roan", operator = "is_false" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "23:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Your brother"
+blocks = [
+  { type = "paragraph", content = "Your brother is in the chair that is not your mother's, with the TV on mute and one bar of the fire going. There is a bag in the hall that has been there three weeks and neither of you has asked about it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "Back door was open." },
+  { type = "dialog", props = { speaker = "player" }, content = "I came round the front like a visitor." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "Don't do that." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "You were in and out of this house for twenty years without knocking. Whatever Bristol was, it has got nothing to do with you." },
+  { type = "paragraph", content = "He is five years behind you and he was twelve when the whole street spent two weeks deciding who you were. He is the only person still alive who was in the building for any of it." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Leave him to the TV.", targetType = "location", locationId = "the_terrace_house", time_progression_minutes = 15, flagEffects = [ { targetType = "player", flag = "met_roan", op = "set" } ] },
+] }
+
+
+[[canvases]]
+id          = "canvas_meet_nessa"
+name        = "Your sister's girl"
+description = "MEETING @the_back_room, windowed to her 12:00-15:00 waking row -- the same window hub_nessa_back_room carries. One-shot, priority 11 so it beats canvas_nessa_saw_her. SETS met_nessa, the only thing that opens the hub."
+
+[canvases.trigger]
+location      = "the_back_room"
+requires_npc  = "npc_nessa"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_nessa", operator = "is_false" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "12:00"
+end_time   = "15:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Your sister's girl"
+blocks = [
+  { type = "paragraph", content = "Your sister's girl is sat on the mattress with her back to the wall and her phone up. She came down for a summer job on the front and did not go back, and she pays you forty a week for a room with a curtain where a door should be." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "You knocked on a curtain." },
+  { type = "dialog", props = { speaker = "player" }, content = "I knocked on the frame." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "There's no frame either." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "You can just come in. It's your building. I keep telling you and you keep doing the knock." },
+  { type = "paragraph", content = "You were exactly her age with two of them already. She is the version where none of that happened, she has worked out that you cannot stop looking at her, and she has not said so." },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Pull the curtain back over.", targetType = "location", locationId = "the_back_room", time_progression_minutes = 15, flagEffects = [ { targetType = "player", flag = "met_nessa", op = "set" } ] },
+] }
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -84,8 +364,8 @@ exit_block = { type = "location", text = "Get the shutter up.", config = { desti
 # ═════════════════════════════════════════════════════════════════════════════
 [[canvases]]
 id          = "canvas_first_warm"
-name        = "Three pounds"
-description = "Auto-fire @the_flat, one-shot, gated meter_fed_once. The first explicit beat in the game and it is solo. She has heat in the flat for the first time in a fortnight and takes her clothes off in it. SETS first_warm_done -> opens solo_flat_warm. +20 arousal."
+name        = "Three in the meter"
+description = "Auto-fire @the_flat, one-shot, gated meter_fed_once. The first explicit beat in the game and it is solo. She has heat in the flat for the first time in a two weeks and takes her clothes off in it. SETS first_warm_done -> opens solo_flat_warm. +20 arousal."
 
 [canvases.trigger]
 location      = "the_flat"
@@ -99,15 +379,15 @@ conditions    = { version = "1.0", logic = "AND", items = [
 
 [[canvases.nodes]]
 id   = "the_heat"
-name = "Three pounds"
+name = "Three in the meter"
 blocks = [
   { type = "image", props = { file = "sex/first_warm_t4.jpg", description = "A woman alone undressing on a bed in a small dim flat at night, one lamp on.", search_queries = ["woman undressing alone small bedroom night lamp", "woman lying on bed dim bedsit night bare"] } },
-  { type = "paragraph", content = "Three pounds of fifties into the meter and the immersion starts up behind the wall like something waking. By nine the whole flat is above freezing for the first time since a week last Thursday." },
-  { type = "paragraph", content = "You have been sleeping in a jumper, a cardigan and your coat. You have been washing in four inches of water and getting dressed under the covers." },
+  { type = "paragraph", content = "Three in coins into the slot and the immersion heater starts up behind the wall like something waking. An hour in, the whole flat is above freezing for the first time since a week last Thursday." },
+  { type = "paragraph", content = "You have been sleeping in a sweater, a cardigan and your coat. You have been washing in four inches of water and getting dressed under the covers." },
   { type = "cascade", props = { beats = [
     { advance_text = "Take it all off.", blocks = [
         { type = "video", props = { pool_dir = "sex/first_warm_strip_t4", pool = 4, description = "A woman pulling a jumper off over her head, sitting on a bed in a dim room.", search_queries = ["woman pulling jumper off over head bedroom", "woman undressing sitting on bed dim room slow"] } },
-        { type = "paragraph", content = "Cardigan, jumper, the vest under it. You get naked on top of the covers and your nipples go hard anyway, out of fourteen years of habit, in a room that is finally warm enough that they do not have to." },
+        { type = "paragraph", content = "Cardigan, sweater, the T-shirt under it. You get naked on top of the covers and your nipples go hard anyway, out of fourteen years of habit, in a room that is finally warm enough that they do not have to." },
     ] },
     { advance_text = "Lie back.", blocks = [
         { type = "paragraph", content = "You lie back and let your knees fall open and your cunt is already wet before you have touched it. Your hand goes flat down your belly, over the hair, and two fingers part you and settle on your clit." },
@@ -125,7 +405,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "thought_bubble", props = { speaker = "player" }, content = "Fourteen days. That is how long it has been too cold in my own house to take my clothes off." },
-        { type = "paragraph", content = "The immersion clicks off at half nine. You get under the covers before the room turns, and you are asleep before you have finished doing the arithmetic on Monday." },
+        { type = "paragraph", content = "The immersion clicks off when the three runs out. You get under the covers before the room turns, and you are asleep before you have finished doing the arithmetic on Monday." },
     ] },
   ] } },
 ]
@@ -148,8 +428,16 @@ id          = "canvas_first_borrow"
 name        = "The second drawer"
 description = "One-shot @the_boat_yard, gated hold >= 18. She asks her son for money for the first time. SETS borrowed_from_ewan -> opens rung_ewan_terms and every hub choice above hold 18 in 5_scenes. +6 hold."
 
+# ⚠️ WINDOWED AND BOUND 2026-08-22. It had no schedule and no requires_npc, so it
+#    could auto-fire with its character absent and narrate them into an empty
+#    room. `requires_npc` alone would not have saved it either -- isCanvasValid
+#    (v2.py:4573) never reads that field on the auto-fire path, which is exactly
+#    how vesper/cap_renner_hired introduces Renner in an empty bar at ten in the
+#    morning. The SCHEDULE is the gate; requires_npc documents the intent and is
+#    correct on the paths that do read it. the-first-hour.md F5.
 [canvases.trigger]
 location      = "the_boat_yard"
+requires_npc  = "npc_ewan"
 is_repeatable = false
 priority      = 10
 is_active     = true
@@ -158,15 +446,21 @@ conditions    = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "borrowed_from_ewan", operator = "is_false" },
 ]}
 
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5]
+start_time = "08:00"
+end_time   = "18:00"
+
+
 [[canvases.nodes]]
 id   = "the_drawer"
 name = "The second drawer"
 blocks = [
   { type = "image", props = { file = "scenes/yard_caravan_office.jpg", description = "The inside of a caravan used as a workshop office, papers and a desk, winter light.", search_queries = ["caravan site office desk papers cluttered", "boat yard workshop office interior winter"] } },
-  { type = "paragraph", content = "The caravan smells of two-stroke and the stove. He is at the desk with the folder shut in front of him and he already knows, because you came down at four in the afternoon and you never come down at four." },
+  { type = "paragraph", content = "The caravan smells of two-stroke and the stove. He is at the desk with the folder shut in front of him and he already knows, because you came down here in the middle of his day and you never come down here." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "How much." },
   { type = "paragraph", content = "You say the number. He does not write it down. He opens the second drawer, counts it out onto the desk in twenties, and turns it round so it faces you." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "That's the electric and the mech. Not the meter upstairs. You want the meter, you ask me for the meter." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "That's the electric and the coin mechanism. Not the meter upstairs. You want the meter, you ask me for the meter." },
   { type = "thought_bubble", props = { speaker = "player" }, content = "He has itemised my flat. He did that in his head, standing there, in about four seconds." },
   { type = "paragraph", content = "You take it. He watches you put it in your coat and does not say anything else, and the not-saying is the part you take home with you." },
 ]
@@ -187,8 +481,16 @@ id          = "canvas_tam_saw_you"
 name        = "The extractor"
 description = "One-shot @the_chip_shop_flat, gated ease >= 20. The morning it stops being a mother in a son's flat. SETS tam_saw_you -> opens every `want` rung on his ladder in 5_scenes. +8 want, +15 arousal."
 
+# ⚠️ WINDOWED AND BOUND 2026-08-22. It had no schedule and no requires_npc, so it
+#    could auto-fire with its character absent and narrate them into an empty
+#    room. `requires_npc` alone would not have saved it either -- isCanvasValid
+#    (v2.py:4573) never reads that field on the auto-fire path, which is exactly
+#    how vesper/cap_renner_hired introduces Renner in an empty bar at ten in the
+#    morning. The SCHEDULE is the gate; requires_npc documents the intent and is
+#    correct on the paths that do read it. the-first-hour.md F5.
 [canvases.trigger]
 location      = "the_chip_shop_flat"
+requires_npc  = "npc_tam"
 is_repeatable = false
 priority      = 10
 is_active     = true
@@ -197,13 +499,19 @@ conditions    = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "tam_saw_you", operator = "is_false" },
 ]}
 
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "15:00"
+
+
 [[canvases.nodes]]
 id   = "the_heat_through_the_wall"
 name = "The extractor"
 blocks = [
   { type = "image", props = { file = "scenes/tam_flat_morning.jpg", description = "A small warm flat in daylight, unmade bed against a wall, curtains half drawn.", search_queries = ["small messy flat unmade bed daylight curtains", "cramped bedsit bed against wall morning"] } },
-  { type = "paragraph", content = "Half nine and the flat is at twenty-four degrees because the fryers have been on since seven. He is on top of the covers in shorts with one arm over his eyes and the extractor going through the wall." },
-  { type = "paragraph", content = "You have taken your coat off. Then the cardigan. You are sitting on the end of his bed in a vest with the sleeves pushed up, and you have been there forty minutes." },
+  { type = "paragraph", content = "The flat is at twenty-four degrees because the fryers have been on since six. He is on top of the covers in shorts with one arm over his eyes and the extractor going through the wall." },
+  { type = "paragraph", content = "You have taken your coat off. Then the cardigan. You are sitting on the end of his bed in a T-shirt with the sleeves pushed up, and you have been there forty minutes." },
   { type = "cascade", props = { beats = [
     { advance_text = "He moves his arm.", blocks = [
         { type = "paragraph", content = "He takes his arm off his eyes and looks at you, and then does not look away, and then very deliberately looks at your chest and back up, and lets you see him do it." },
@@ -211,7 +519,7 @@ blocks = [
     ] },
     { advance_text = "Don't cover up.", blocks = [
         { type = "video", props = { pool_dir = "sex/tam_first_look_t4", pool = 4, description = "A woman sitting on the end of a bed in a thin vest, a man watching from the pillow.", search_queries = ["woman sitting end of bed vest man watching", "woman in tank top bedroom man on bed daylight"] } },
-        { type = "paragraph", content = "Your arms want to fold and you do not let them. The vest is thin enough that he can see your nipples through it, and they are hard, and they have been hard since you took the cardigan off." },
+        { type = "paragraph", content = "Your arms want to fold and you do not let them. The T-shirt is thin enough that he can see your nipples through it, and they are hard, and they have been hard since you took the cardigan off." },
     ] },
     { advance_text = "Look at him back.", blocks = [
         { type = "paragraph", content = "So you look. His cock is hard and the shorts are not hiding one inch of the shape of it, and he does not move his hand to cover it, and he does not take his eyes off your tits while you look." },
@@ -241,8 +549,16 @@ id          = "canvas_roan_back_door"
 name        = "The back door"
 description = "One-shot @the_terrace_house, gated bond >= 25. The night neither of them goes home. SETS roan_back_door -> opens rung_roan_stay and the late band on his hub in 5_scenes. +7 bond."
 
+# ⚠️ WINDOWED AND BOUND 2026-08-22. It had no schedule and no requires_npc, so it
+#    could auto-fire with its character absent and narrate them into an empty
+#    room. `requires_npc` alone would not have saved it either -- isCanvasValid
+#    (v2.py:4573) never reads that field on the auto-fire path, which is exactly
+#    how vesper/cap_renner_hired introduces Renner in an empty bar at ten in the
+#    morning. The SCHEDULE is the gate; requires_npc documents the intent and is
+#    correct on the paths that do read it. the-first-hour.md F5.
 [canvases.trigger]
 location      = "the_terrace_house"
+requires_npc  = "npc_roan"
 is_repeatable = false
 priority      = 10
 is_active     = true
@@ -251,15 +567,21 @@ conditions    = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "roan_back_door", operator = "is_false" },
 ]}
 
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "23:00"
+
+
 [[canvases.nodes]]
 id   = "the_mark_on_the_frame"
 name = "The back door"
 blocks = [
   { type = "image", props = { file = "scenes/terrace_front_room.jpg", description = "A dated front room at night, one lamp, television on with the sound off.", search_queries = ["dated living room night lamp television on mute", "1990s front room evening lamp carpet"] } },
-  { type = "paragraph", content = "Half eleven and the telly has been on mute for two hours. Your mother's chair is still in the corner and neither of you sits in it. He has poured a third one without asking whether you were staying." },
+  { type = "paragraph", content = "The TV has been on mute for two hours. Your mother's chair is still in the corner and neither of you sits in it. He has poured a third one without asking whether you were staying." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "You were seventeen in that doorway. Standing right there, telling her. I was in the hall." },
-  { type = "paragraph", content = "You had forgotten he was in the hall. Twenty-four years and every single person in this town has an opinion about that fortnight, and he is the only one who was actually in the building." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "They all decided who you were in about a fortnight. You know that, don't you. It wasn't you. It was them, and it took a fortnight." },
+  { type = "paragraph", content = "You had forgotten he was in the hall. Twenty-four years and every single person in this town has an opinion about that two weeks, and he is the only one who was actually in the building." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "They all decided who you were in about a two weeks. You know that, don't you. It wasn't you. It was them, and it took a two weeks." },
   { type = "cascade", props = { beats = [
     { advance_text = "Don't answer that.", blocks = [
         { type = "paragraph", content = "You do not answer it. You put your glass down and you do not go and get your coat, which is on the hook by the front door, which is four feet away, and both of you can see it." },
@@ -291,8 +613,16 @@ id          = "canvas_nessa_saw_her"
 name        = "The curtain"
 description = "One-shot @the_back_room, gated trust >= 20. She is caught looking and neither of them pretends otherwise. SETS nessa_saw_her -> unlocks the entire `want` meter on Nessa, which is dead before this. +6 want, +12 arousal."
 
+# ⚠️ WINDOWED AND BOUND 2026-08-22. It had no schedule and no requires_npc, so it
+#    could auto-fire with its character absent and narrate them into an empty
+#    room. `requires_npc` alone would not have saved it either -- isCanvasValid
+#    (v2.py:4573) never reads that field on the auto-fire path, which is exactly
+#    how vesper/cap_renner_hired introduces Renner in an empty bar at ten in the
+#    morning. The SCHEDULE is the gate; requires_npc documents the intent and is
+#    correct on the paths that do read it. the-first-hour.md F5.
 [canvases.trigger]
 location      = "the_back_room"
+requires_npc  = "npc_nessa"
 is_repeatable = false
 priority      = 10
 is_active     = true
@@ -300,6 +630,12 @@ conditions    = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_nessa", trait_key = "trust", operator = "gte", value = 20 },
   { type = "flag", subject = "player", flag_key = "nessa_saw_her", operator = "is_false" },
 ]}
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "12:00"
+end_time   = "15:00"
+
 
 [[canvases.nodes]]
 id   = "half_back"

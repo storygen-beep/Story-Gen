@@ -5,6 +5,1886 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-23 — SKILL.md's lint index had gone stale
+
+**What changed.** `SKILL.md`'s "Lints sit below the tally" list now names **dispatch depth** and
+**the act nodes**, the two lints added on 2026-08-23.
+
+**Why.** That paragraph is the only place the skill enumerates what the scoreboard prints. Two
+lints shipped in `gates.py` without being added to it, so an author reading the skill would not
+know they exist and would not know to read their rows. A check nobody is told about is a check
+nobody acts on.
+
+**How verified.** Read back against `gates.py`'s print block — every lint the script emits now
+appears in the list, and every name in the list is emitted by the script.
+
+---
+
+## 2026-08-23 — a game-wide heat share cannot see the act the player is on
+
+**What changed.** `scripts/gates.py` gains `lint_act_nodes` (with `_act_nodes`, `_node_has_prose`
+and `_band_texts`), `_collect` learns the second group shape, and `references/register.md` gains the
+act-node rule under "The measured targets".
+
+**Why.** `explicit floor` is a percentage of all beats in the game, and a game can clear it while
+every act node is warm. That is not hypothetical — it is the measured failure this whole doctrine
+was written after: 95% of one game's crude prose sealed in a room with no exits, and all nine of its
+repeatable loops scoring zero. A share cannot see that; it averages it away.
+
+Measured on the game authored under the corrected skill, which was reading a comfortable pass:
+
+```
+loop_arcade_floor   bare=5 glass=7 finish=4      <- the two SOLO loops
+loop_flat_solo      act=6  act_deep=4 finish=3
+loop_tam_bed        hands=1 mouth=3 astride=2 finish=3
+loop_ewan_caravan   hands=4 mouth=1 finish=0     <- three paragraphs of a man coming,
+loop_roan_stay      hands=2 fingers=2 fuck=1 finish=5    not one body word in them
+loop_nessa_curtain  hands=2 fingers=2 mouth=3 finish=1
+```
+
+**10 of 21 act and finish beats under 3** — and the cold ones are the four CHARACTER loops, which is
+where that game's own `the_want.md` says the crudest writing in it lives. The solo loops, written by
+the same hand, are twice as crude as the ones with a person in them.
+
+⚠️ **Count the band, not the node — found by playing it, not by reading it.** The first version of
+the lint read `Beat.explicit`, which folds a node's `[group]` bands together on purpose. The live
+probe then found nine finisher BANDS under 3 on nodes the lint had just passed: one finisher scored
+6 folded and put two body words on screen whichever band fired. `_band_texts` now reports the
+thinnest band a node can render, and the lint prints `finish=6(band 2)` when those differ.
+
+⚠️ **And it exposed a blind spot in the MODEL, not just the lint.** `_collect` read a group's
+children only at the block's own `blocks` key. The importer accepts them there **or** inside
+`props.blocks` and normalises to the latter (`template_import.py:6062-6086`); the generator then
+renders `props.blocks` (`v2.py:13770`). Four games write the second shape, and **158 groups of
+prose were invisible to every beat-based gate in this file** — not counted as words, explicit beats,
+dialogue or sentences, while rendering perfectly well in the built game:
+
+```
+the_long_summer_test   4,979 -> 9,429 words   (its anchor location changes, and 2 gates flip)
+late_shifts            5,095 -> 6,017
+last_call              4,478 -> 5,017
+the_inheritance       12,975 -> 13,045
+```
+
+That is a correction, not a regression: those four games were being measured against half their
+prose. `off_season`, `back_home`, `steam`, `the_allowance` and `vesper` write the first shape and
+their output is byte-identical.
+
+**How verified.** Red first: the lint printed the table above before a word was rewritten, and it
+discriminates — `vesper` reads median 1 with 17 of 25 act beats under 3, which is the same game the
+2026-08-10 measurement caught. Then all twenty games run under `PYTHONHASHSEED=0`; the only movement
+anywhere is the four games the `_collect` fix stopped under-reading. The game that exposed it now
+reads **0 of 21 under 3 on the thinnest band each node renders**, verified live on the built page
+with the choice labels stripped out — the `opens later` vocabulary is also the text of the 0.2
+doors, and a locked door is a signpost, not content (`the-voice.md` R4).
+
+---
+
+## 2026-08-23 — the walk-in gate counted branches; the rule is about how many
+
+**What changed.** `scripts/gates.py` gains `lint_dispatch_depth` (plus `_rule_bounds`,
+`_rules_contradict`, `_dispatch_worst_case`), and `references/the-surfaces.md` R3 gains the depth
+rule and the Pattern A / Pattern B engine table.
+
+**Why.** `the walk-in floor` is an existence gate — `subs[loc] > 0` — and says so in its own comment.
+R3's content is the branching (*"the richness is combinatorial, not authored"*, DoL's `Bath` = one
+activity, twelve outcomes), and nothing had ever printed how deep a dispatch goes. Measured across
+the repo:
+
+```
+game                  hosts  rules  distinct outcomes per host   max
+back_home                 3      7  [4, 2, 1]                      4
+vesper                    5     10  [1, 1, 1, 1, 4]                4
+last_call / the_allowance 1      3  [3]                            3
+late_shifts               9      9  [1 x9]                         1
+the_long_summer_test      7      7  [1 x7]                         1
+off_season                5      7  [1 x5]                         1
+```
+
+Three of seven games could not produce a second outcome from any activity. Fourth instance of the
+same shape as the clock lint, the currency lint and the ladder lint: **the doctrine was right and the
+check covered part of it.**
+
+**The lint prints the host's own survival odds**, because the mechanism is invisible in the TOML.
+Rules without `exclusive_group` each roll their own dice (`v2.py:5382-5391`) and compound; rules
+sharing one share a single roll split into buckets (`v2.py:5361-5379`). Five branches at 0.12 leave
+the activity on screen 53% one way and 40% the other, and an author reading only the TOML cannot see
+which they wrote. It found `back_home`'s `activity_wash` renders itself **24%** of the time.
+
+⚠️ **Two corrections made before it shipped, both to stop it printing a wrong number.**
+1. It first multiplied every rule's chance. `back_home` stacks four `exposure >= 35/45/55` rules that
+   are all true at the top of its game, so multiplying is right there — but `off_season` bands one
+   walk-in `lt 20` / `gte 20 and lt 22` / `gte 22`, where exactly one can pass, and multiplying those
+   reported 6% for a canvas that renders 70% of the time. Same TOML shape, two mechanisms, so
+   `_rules_contradict` finds the impossible pairs first.
+2. It then picked the **largest** co-satisfiable set, which made the answer depend on declaration
+   order — two size-three sets left the host 55% and 16% of the time. It now picks the set that
+   squeezes the host hardest. A number that moves when an author reorders their TOML is not a
+   measurement.
+
+**How verified.** Red first on all seven dispatching games, printing the table above before anything
+was authored; then all twenty games run under `PYTHONHASHSEED=0` with **no gate moving anywhere** —
+it is a lint. The fix in the game that exposed it took off_season to `[3,5,5,4,3,4,3]`, the deepest
+dispatch in the repo, and the lint immediately found a latent defect in that game's own pre-existing
+bands (see `games/off_season/REVIEW_1.md` §12). Verified live against the engine: 400 dispatcher
+calls per host, every bucket reachable, the observed rate tracking `Σ p` and not `1 − ∏(1 − p)`, and
+the fall-through handing a shut bucket's share back to the host rather than to the next bucket.
+
+---
+
+## 2026-08-23 — the ladder lint measured one side of a fork the doctrine declares
+
+**What changed.** `scripts/gates.py`: `lint_meter_ladder` now chooses which meters to measure off
+`board.who_climbs`, via a new `_cast_meter_rungs`. Ladder games (`ascent_tiers` non-empty) print
+`N declared tiers` exactly as before; a roster game prints `N cast meters`, read off every
+`subject = "npc"` trait predicate. `the-meters.md` **W1** makes *who climbs* a declared fork, and
+the instrument only implemented the ladder side:
+
+```
+back_home / forty_miles / seventh_day / steam / the_allowance   3-4 tiers measured
+off_season   (who_climbs = "cast", ascent_tiers = [])           SILENT — nothing measured
+```
+
+**Why it mattered.** The one roster game in the repo ran **six meters at 1–3 rungs each with every
+lowest rung at 12–22**, against W4's field of 8–17 rungs and a lowest rung at a median of 5. With
+grants of 2–7 that is four to eight interactions with a person before anything about them changes —
+W4's own failure sentence, and the lint that exists to say so was the one lint that said nothing.
+
+**Third instance of the same shape.** The clock lint had four blind spots (2026-08-22), the
+currency lint had no sub-units (2026-08-22), and this one had half a fork. In all three the
+doctrine was right and the check covered part of it, so the game passed while breaking the rule.
+
+**A second bug, found by running it red.** Three of off_season's meters reported a rung at **110** —
+`the-release.md` G9 doors, declared unreachable against grants capped at 100. A gate above the
+meter's ceiling is a locked door, not a step anything climbs to, and counting it credits a game with
+a rung it can never reach. `METER_MAX = 100` now drops those on **both** sides of the fork, and
+`FIELD_METER_RUNGS` (which the old body computed and never used) is wired into the summary string
+instead of the 8 being hardcoded beside it.
+
+**How verified.** Red first, before a single rung was authored: the extended lint printed all six
+off_season ladders as they stood. Then all twelve games run old-vs-new under `PYTHONHASHSEED=0`
+(three games carry pre-existing tie-break noise that has nothing to do with this change) —
+**off_season the only diff, and no gate moved anywhere.** The fix in the game that exposed it:
+18 new rungs, every meter bottoming at 4–5, `somebody speaks` improving 4.8:1 → 3.9:1, and 105 new
+live checks green (`games/off_season/REVIEW_1.md` §11).
+
+---
+
+## 2026-08-22 — the currency lint could not see a sub-unit, and a real regression sat behind that
+
+**What changed.** `scripts/gates.py` `_CUR_UNIT` knew `pound`, `dollar`, `euro` and `yen` and **no
+sub-units**, so `pence`, `penny` and `cent` passed straight through `_cur_units`. A game that had
+declared a neutral `$` and then written *"she is out by sixty pence"* read as
+**"no beat names a currency"** — a false green.
+
+Added `pence` / `penny` / `pennies` → pound, `cent` / `cents` → dollar, `centime(s)` → euro,
+`sen` → yen, with a **`per cent` guard** in `_cur_units`.
+
+⚠️ **The guard was measured, not guessed.** Without it, `steam`'s *"the soap alone is up forty per
+cent"* and *"the trade is down forty per cent"* both false-positive as money. Checked directly:
+
+```
+"the trade is down forty per cent"          -> []                              guarded
+"She is out by sixty pence"                 -> [('pound','pence','word')]      caught
+```
+
+**What it was hiding.** `off_season` declared `$` in repair batch 2 and then reintroduced British
+coin units in batches 4 and 5 — `fifties` ×6, *"sixty pence"*, *"the two-pence one"*, *"to the
+penny"* — three of them in canvases written **during the repair itself**, matching the surrounding
+British texture instead of the declared rule. Six fifties for a $3 charge is arithmetic nonsense,
+and nothing in the toolchain said so for two batches.
+
+Run red before green: with the fix the lint immediately printed both ⚠ mismatch lines
+(*"the prose runs on `pound` and [settings.rent] currency_symbol is `$`"*), and went clean once the
+words were gone.
+
+**Repo-wide effect, checked before shipping:** it newly and correctly flags `forty_miles`
+(*"the fifty-pence tube"* ×3). **No gate moved on any of the twelve games** — this is a lint.
+
+⚠️ **Known limit, left alone:** `_CUR_WORD` requires whitespace between the number and the unit, so
+a hyphenated *"fifty-pence tube"* is caught by the unit word but a bare *"50p"* is not. Pre-existing,
+and widening the pattern is a bigger change than this defect justifies.
+
+**Files:** `scripts/gates.py` (`_CUR_UNIT`, `_CUR_PERCENT`, `_cur_units`).
+
+**Verified.** `games/off_season/REVIEW_1.md` batch-6 Log carries the game side; the game's currency
+lint now reads "no beat names a currency" and means it.
+
+---
+
+## 2026-08-22 — the clock lint had three blind spots, and they hid our defects and not the field's
+
+**What changed.** `scripts/gates.py` `_clk_refs` — the instrument behind `lint · the clock in the
+prose` — could not see three shapes, and all three are ones our authors reach for:
+
+```
+"By nine the whole flat…"      "the" sat in _CLK_BAD_NEXT, to catch "at one point"
+"at half nine"                 "half" was not in the hour vocabulary
+"Seven in the morning and…"    no preposition, so the rule never fired
+```
+
+Four fixes, plus a counting bug: `half [past] <hour>` added to the vocabulary **and** as a
+standalone pattern; a part-of-day pattern (`<hour> in the morning|afternoon|evening`, `at night`);
+`quarter past|to <hour>`; `"the"` moved from the stoplist to the allow-list; and matches now
+**deduped by span**, because several patterns legitimately hit the same phrase and counting *"at
+half nine in the morning"* twice inflated the rate.
+
+**Measured on the corpus before any of it was written** (25 games, 11.0M words):
+
+```
+                        FIELD median   FIELD p75      off_season   steam   forty_miles
+shipped instrument           1.0           2.1           20.1       29.2      22.6
+corrected instrument         1.1           2.1           26.4       36.6      34.4
+```
+
+**The field moves by one reference in one game — a true positive (*"gathered at half past six for
+drinks"*). Ours moves by a quarter to a half.** The constructions the regex could not see are
+British-inflected narrative idiom our games use and the corpus does not, so the blind spots were
+hiding our own defects almost exclusively. `FIELD_MEDIAN` / `FIELD_P75` updated 1.0/2.0 → 1.1/2.1
+and `references/the-clock.md`'s published table re-measured with it.
+
+⚠️ **Rejected, with the number that killed it:** dropping the `_CLK_OK_NEXT` allow-list entirely is
+the tidier rule and inflates the **field** to median 1.2 / p75 2.6 — noise being scored. The
+allow-list stays. The instrument deliberately under-counts rather than over-counts, which is the
+safe direction for a list nobody scores.
+
+**It immediately earned it.** Run against `off_season` the corrected lint found **four readings no
+earlier pass had listed**, two of them the opening line of a milestone one-shot:
+*"Half nine and the flat is at twenty-four degrees"* · *"Half eleven and the telly has been on mute
+for two hours"* · *"Half ten and your glass has been empty twenty minutes"* · *"Seven in the morning
+and the fryers have been off an hour"*.
+
+**`references/the-clock.md` C2 also gained the half it never had.** C2 was written about the
+**hour**. The same reading-versus-rule test runs on two more axes it did not name, and both shipped
+in `off_season`:
+
+- **the day of the week** — *"It is Thursday."* in an all-days canvas; *"It's not Monday. What's
+  gone wrong?"* as the first line of a hub whose character works Mondays;
+- **a figure the state already holds** — *"Forty-one pounds sixty"* asserted in prose while the
+  sidebar prints the real balance.
+
+Stated generally: **a beat may not state anything the engine is already tracking.** The section says
+plainly that the lint sees neither axis and a human has to.
+
+**Files:** `scripts/gates.py` (`_clk_refs`, the new patterns, span dedupe, re-measured constants) ·
+`references/the-clock.md` (C2's new subsection, field table re-measured).
+
+**Verified.** Field re-measured with the *shipped* function, not a copy: median 1.1 / p75 2.1. No
+gate moved on any of the twelve games; only the lint's printed numbers rise.
+`games/off_season/REVIEW_1.md` §8 (T1–T7) carries the game side, which went 32/38 → **34/38**.
+
+---
+
+## 2026-08-22 — the day cap: three parts, on the choice, and one of them was optional in the example
+
+**What changed.** `references/the-meters.md` M5 and `references/engine.md` §28 both taught the
+day-cap flag on the **rung's exit**. That is the wrong half of an asymmetry in the generator, and it
+is where a live, silent defect in `off_season` came from. Both are rewritten; one new gate ships
+with them.
+
+**The engine fact, read rather than assumed.** A choice and a node exit emit their effects in
+opposite orders:
+
+```
+choice     flagEffects -> costs -> … -> advanceTime      v2.py:12648-12733
+node exit  advanceTime -> traitEffects -> flagEffects    v2.py:13085-13088 · :13049-13050
+```
+
+`advanceTime` rolls the day inside itself (`v2.py:5411-5414`) and `advanceDay` is where
+`[engine.daily_tick]` clears every `_today` flag (`v2.py:5552`). So an **exit**-set cap on a rung
+that crosses midnight is written on the far side of the clear, and the new day starts already
+capped.
+
+**`engine.md:989` said the opposite** — it warned the cap gets *cleared* and the rung becomes
+re-clickable, which the emit order makes impossible. Replaced by §28.1 with the table and the
+citations, plus §28.2 on the two-of-three failure below.
+
+**Measured in the game the example authored.** `off_season/act_flat_sleep` ran 21:00–06:00 and set
+`slept_today` on its exit, so from night two onward Sleep was never offered before midnight again —
+the player was pushed into a permanent post-midnight bedtime. Four more rungs sat in the same trap
+on late hub windows (`rung_roan_stay`, `rung_roan_later`, `rung_nessa_tea`, `rung_nessa_curtain`).
+
+**And the placement is not a taste call — the repo had already voted:**
+
+```
+day-cap flag set on a CHOICE   78    last_call 11 · late_shifts 15 · the_inheritance 15
+                                     mothers_place 9 · seventh_day 4 · vesper 1 · TLS 23
+day-cap flag set on an EXIT    40    off_season 15 · the_allowance 20 · late_shifts 1 · TLS 4
+```
+
+Choice-set is the dominant practice and every v1 game uses it. **The two games holding 35 of the 40
+exit-set caps are `off_season` and `the_allowance` — the two written under this example.** Third
+recurrence of `SKILL.md`'s "an example outranks every rule beside it", after `15/35/55/75` and the
+volatile list.
+
+**New gate · `a day-cap closes`** (`scripts/gates.py`, judged set 37 → 38). Every flag read with
+`is_false` in any condition **and** unset in `[engine.daily_tick]` must have at least one
+`op = "set"` site. A cap with two of its three parts validates and throttles nothing, and nothing
+else in the toolchain can see it: the generator's flag-chain validator reports a never-set flag only
+when a condition requires it `is_true` (`v2.py:11659`), so an `is_false` read on a never-set flag
+fails open, silently.
+
+Fully mechanical — no threshold, no field measurement, nothing to judge. Predicted with a standalone
+script before the gate was written, and the shipped gate reproduced it exactly:
+
+```
+off_season       FAIL   4 flags — ewan/nessa/roan/tam_talk_today
+last_call · late_shifts · mothers_place · seventh_day · the_allowance ·
+the_inheritance · vesper · the_long_summer_test          PASS
+back_home · forty_miles · steam                          n/a (no [engine.daily_tick])
+```
+
+In `off_season` those four caps meant the talk screens were re-clickable every twenty minutes at
++2 on a cast meter for 3 energy — equal per energy and 50% faster per minute than the day-capped
+rung they were designed to sit below.
+
+**One more fact recorded while verifying:** a **located** canvas needs no flag at all.
+`max_triggers_per_day` is read off the trigger (`v2.py:11017`) and `markCanvasTriggered` stamps its
+day key **before** `advanceTime` (`v2.py:4290`), so it is immune to the whole problem. The flag
+pattern is for triggerless rungs only. Both files now say so.
+
+**Files:** `references/the-meters.md` (M5 rewritten, worked example moved onto the choice) ·
+`references/engine.md` (§28 rewritten, §28.1 and §28.2 added) · `scripts/gates.py` (one gate) ·
+`SKILL.md` (scoreboard row).
+
+**Verified.** Gate red before the game was touched (`off_season` 31/37 → 31/38), green after
+(32/38), no other gate moved. Fifteen live checks in a headless build, including sleeping on two
+consecutive evenings and clicking a talk screen twice in one day. `games/off_season/REVIEW_1.md`
+§6 (D1–D4) carries the game side.
+
+---
+
+## 2026-08-22 — the currency: one notation, declared, and the engine set to it
+
+**Cause: the same session, the same review, item 5.**
+
+> *"What does Feed the Meter (GBP 3) means??"*
+
+`games/off_season/REVIEW_1.md` §5, items M1–M3.
+
+### What the research found
+
+**The defect is three times the size the review recorded.** M2 reports three notations in one game.
+Counting what the *engine* writes as well as what the author typed, **one click carries six**
+(`games/off_season/toml_phases/3_activities.toml:83-108`):
+
+```
+room-list button   Feed the meter (GBP 3)                  author
+the choice         Put three pounds in (GBP 3, 5 min).     author
+the paragraph      Six fifties … Three pounds gets you …   author
+when she is short  Requires 3 Money (you have 1)           engine  v2.py:4680
+the sidebar        money: 12 / 100                         engine  v2.py:16215 · :16241
+rent day           $90                                     engine  v2.py:1190
+```
+
+**v1 was stronger here, in two files, and v2 kept only one of them.**
+`author-game/references/rent.md` (278 lines) taught the money *system* — §8's budget arithmetic, one
+wallet, income as a corruption ladder — and v2 carried that forward as `the-economy.md` R1–R6.
+`author-game/references/prose-truth.md` (121 lines) taught that **a price written into prose is a
+copy of a TOML field with no link back**, and **v2 has no counterpart at all**: a grep of the whole
+v2 skill for `prose is a copy | re-price | stale prose | prose-truth` returns nothing. Recorded as
+`DOCTRINE_GAPS.md` Tier 3 row 13; the currency is its first measured instance, not the whole of it.
+
+Note that v1 got the fiction half *right* and said so: `prose-truth.md` §2 approves spelling a price
+out in a character's mouth (*"`125` never appears as a digit in that prose — it's spelled out, in
+voice, as it should be"*). The field agrees. So R7 bans the spelled-out price on a **button**, which
+is interface, and leaves it alone in speech.
+
+**The field — 25 shipped sandboxes, 11.0M words of passage prose.** The mechanism first, because it
+explains every number that follows: **the field uses one printer.**
+
+```
+degrees-of-lewdity   money held in PENNIES; <<printmoney>> -> formatMoney()
+corpo-life           formatUSD($money) — one Intl.NumberFormat call
+the-hellfire-club    <<printmoney>> — guineas / shillings / pence, divisors 252 and 12
+new-life-project     StoryCaption prints  £$money
+```
+
+Three unrelated economies, one architecture: the symbol is applied at a single site, so it cannot
+drift. Measured consequences:
+
+```
+                                            FIELD          OURS
+one notation, share of money references       92% median     82% median   (field min 56%)
+priced link labels using a SYMBOL             94.0%          off_season 0%
+       …spelling the unit out                  5.2%
+       …using a currency CODE                  0.8%
+a money WORD carrying an exact amount          20%           51%
+symbol, of 16 games with a real economy       $ 10 · £ 2 · CODE 1 · invented unit 3
+persistent balance in a UI passage            12 of 16
+```
+
+⚠️ **A claim in `REVIEW_1.md` Appendix A.5 is wrong and is corrected here.** It records *"FIELD
+currency CODES (GBP/USD/EUR) on labels or in prose: 0"*. **`corpo-life` uses `USD` 109 times**,
+including on a link label — `Buy a set of Bespoke suite (USD 15,000)` — and uses it *consistently*
+(94% of its money references). The correction improves the rule rather than weakening it: the
+requirement is **one** notation, not a particular one, which is also why a gate on the *form* would
+be wrong (see below).
+
+**The engine — read, not assumed.** `[settings.rent] currency_symbol` (`v2.py:1190`) is the nearest
+thing we have to a printer, and of the **sixteen sites** where the generator prints a money figure
+it reaches **four** — all on the rent-day screen. Nine hardcode `$`; three print no notation at all.
+Full census: `references/engine.md` §33. Three findings inside it that nothing in the skill recorded:
+
+1. **`RentDay_Short` hardcodes `$` and does not even set `_cur`** (`v2.py:16000`). It is the branch
+   taken when the player cannot pay. `games/forty_miles` declares `currency_symbol = "£"` with the
+   author's own comment *"the pages hardcoded `$` before this key existed"* — and its released build
+   still ships `You have: <strong>$<<print $player.core_traits.money>></strong>`. The key did not
+   finish the job, and the author believed it had.
+2. **The sidebar ignores `[[traits.labels]]`.** `trait_bar` reads `_item.label || trait_key`
+   (`v2.py:16215`); `setup.trait_labels` is consumed only by `_labelForTrait` (`v2.py:6781`), which
+   formats *condition* text. `label = "Change bag"` does not rename the readout. And `_traitMax`
+   defaults to 100, so an uncapped currency renders as **`money: 12 / 100`** over a 12% fill bar.
+3. **A choice's price is rendered only when the player cannot afford it** (`v2.py:12597` vs
+   `:12747` + `:4680`) — the same asymmetry §32.2 records for time. So the visible price is authored
+   prose in every normal case, which is why hand-typed notations are the norm rather than the slip.
+
+`[[traits.labels]] unit` is imported (`template_import.py:2885`, stored `:6310`) and read by no
+generator — a dead key, recorded so nobody reaches for it as a pluralisation lever.
+
+### What changed
+
+| file | change |
+|---|---|
+| `references/the-economy.md` | **new R7 · One currency, declared once, and the engine set to it** — under a new section heading, since R5/R6 are billed as "two rules from failure". The four parts, the house default and its two measured reasons, the prefix-only engine limit, the ledger-drift warning, and why one check is a gate and two are lints. Ledger example gains `"symbol": "$"`. Checks table gains the gate and both lints. |
+| `references/engine.md` | **new §33** — the sixteen print sites in a table, the prefix limit (§33.2), the sidebar's `label`/`max` behaviour (§33.3), the affordable-vs-blocked asymmetry (§33.4), the dead `unit` key (§33.5). `:891` and `:931` examples moved off `£`. |
+| `scripts/gates.py` | **gate `the price is in one currency`** (35 judged → 36) + **lints `currency_in_prose` and `price_spelled_out`** (15 → 17). Helpers `_CUR_UNIT` / `_cur_units` / `_cur_labels` / `_cur_setup` / `_cur_extra` / `_cur_exact_share`. |
+| `SKILL.md` | scoreboard row; both lints added to the index. |
+| `references/state.md` | ledger gains `board.economy.symbol`, with the key's meaning in the field notes. |
+| `references/the-voice.md` | R1's cost paragraph gains the notation half beside the price half. |
+| `templates/board.toml` | a currency-declaration warning above `[settings]`; the `[[needs]] costs` placeholder now says "in the game's ONE notation". |
+| `DOCTRINE_GAPS.md` | Tier 3 row 13 — prose that copies a field, the missing v1 counterpart. |
+| `games/off_season/REVIEW_1.md` | Log entry, and the Appendix A.5 correction above. |
+
+**The `£` sweep.** 21 pound signs sat in live skill files, the same "an example outranks the rule
+beside it" mechanism item 1 fixed for dialect (and one of them was in `the-clock.md`, shipped by me
+last pass). The rule applied: **a quote of measured reality stays verbatim** — DoL's real cost tag
+`(£12 1:00)`, a real game's declared `£200 a week`, the played-game label `Buy coffee (0:02 £2)` —
+and an **invented teaching example moves to `$`**. Four qualified: `engine.md:891`, `engine.md:931`,
+`the-economy.md` R3's *"Monday, £120, or else"* and its *"£120 against a £42 day"*.
+
+### Why one gate and two lints
+
+**Gated, because it is string work:** does the game use more than one *currency*? A symbol and its
+own word are the same unit — `$` and *dollars* differ in form, not in currency, and the field ships
+both in one game — so the check maps them together and fails only on two units. The engine's own
+`currency_symbol` and the ledger's `symbol` are channels like any other.
+
+**Not gated, because a rate gate would fail correct work:** `zaras-school-life` writes every price
+in words across 905k words and never varies; `apocalyptic-world` prices in caps; `vesper` prices ten
+labels `10 coin` and never varies. `SKILL.md` — *a check that fails a game for obeying the doctrine
+is a bug in the check*.
+
+### Two false positives found by running it before believing it
+
+- **`+50 money` is not a price.** The first build added the currency *trait name* to the unit
+  vocabulary, so `seventh_day`'s `[DEV] +50 money, refill energy` read as a second currency and
+  failed the game. Generic money nouns (`money`, `cash`, `funds`, `wallet`, `balance`) are now
+  excluded, and `_cur_labels` skips dev shortcuts via the existing `_is_dev` marker.
+- **The lints and the gate disagreed on `vesper`.** The lints inferred the currency by first name
+  match and got `money`; the gate used gate 16's usage ranking and got `coin`. The lints now use the
+  same usage ranking — the exact bug `the-economy.md` already records for gate 16, rebuilt inside a
+  new check.
+
+### Verified
+
+Ten games, before and after. Every denominator moves by exactly one and **no existing gate changed**:
+
+```
+                 base      new    the price is in one currency
+off_season      31/36 →  31/37   FAIL  `pound` x9 (6 of them GBP) vs the engine's `$`
+the_allowance   28/35 →  28/36   FAIL  `pound` x7 on buttons vs the engine's `$`
+seventh_day     26/35 →  27/36   PASS
+forty_miles     24/35 →  25/36   PASS
+steam           17/34 →  18/35   PASS
+back_home       14/32 →  15/33   PASS  no button states a price — the lint carries it
+vesper           9/28 →  10/29   PASS  `coin` x10, consistent
+last_call       13/26 →  14/27   PASS
+late_shifts     10/27 →  11/28   PASS
+the_inheritance 13/25 →  14/26   PASS
+```
+
+A standalone predictor written before the gate called all ten correctly on labels; it also predicted
+`back_home` would fail, on prose. It does not, and that is deliberate — **the gate does not read
+prose**, because a beat that mentions a foreign price is legitimate and a parser cannot tell it from
+a defect. The prose lint carries it instead, naming the contradiction directly:
+*"the prose runs on `pound` and `[settings.rent] currency_symbol` is `$`"*.
+
+The prose lint also found something no one was looking for: `off_season`'s `amb_lets_drawer` reads
+*"A hairgrip, two euros, and a paperback"* — a **third** real-world currency in the same game.
+
+### Still open
+
+- **Ten hardcoded `$` in `v2.py`.** A generator change, out of scope for this stream, and the reason
+  the doctrine recommends `$` rather than merely requiring consistency. `engine.md` §33.1 carries
+  the list so the decision is costed whenever it is taken.
+- **Off Season is unchanged.** Doctrine first, the game as its proof — the agreed order.
+
+---
+
+## 2026-08-22 — the clock: the time the game promises and the time the engine keeps
+
+**Cause: the same session, the same review, item 4.**
+
+> *"Work the counter till one (2h 30m). One is 1 pm or am whatever it is, but we dont mention work
+> till one or time, there is something wrong going on. Its content also have shutter up at eight
+> and more, WTF is this?? Time is dynamic it is a sandbox game."*
+
+`games/off_season/REVIEW_1.md` §4, items T1–T3. Closes the time half of `DOCTRINE_GAPS.md` Tier 2
+row 7 ("The daily loop — time costs, energy, what an ordinary day is"), which was marked *partly*.
+
+### What the research found
+
+**v1 carried half of this and v2 dropped even that.**
+`author-game/references/rts-flat-prose.md:360` is **Rule 10 — "Never assert elapsed time the
+player's pace controls"**, with an exemption list, a replacement table and the note that where
+precision *is* the character you keep the precision and drop the number. v2's `register.md` shipped
+without it: a grep of every v2 reference for `clock|o'clock|name a time|absolute time|time of day`
+returns only engine mechanics. And Rule 10 only ever governed **days and weeks** — it never mentions
+the clock, which is the half that broke.
+
+**The field — 25 shipped sandboxes, 11.0M words.** One instrument on both sides. The first draft of
+that instrument was ~90% idiom ("at one point" ×312, "one by one", "after ten minutes") and was
+rebuilt with a stoplist before any number below was trusted.
+
+```
+clock references per 10,000 words       FIELD median 1.0   ·   20 of 25 games at or under 2.0
+
+last_call        v1    0.0        back_home       v2   13.5
+vesper           v1    2.2        seventh_day     v2   17.5
+the_inheritance  v1    5.8        off_season      v2   21.3
+late_shifts      v1   13.7        forty_miles     v2   22.3
+                                  the_allowance   v2   23.4
+                                  steam           v2   31.1
+```
+
+**Two explanations were tested and both failed — recorded so they are not tried again.**
+
+1. *"The field keeps hours out of prose because its clocks are coarse."* Classifying every field
+   game by what its state actually mutates: minute-clock median **2.4** per 10k, hour **4.9**, slot
+   **1.1**, none **1.4**. Every bucket sits between 1 and 5, and `degrees-of-lewdity` tracks minutes
+   across 2.1M words at **0.4**. Resolution does not predict it — so the doctrine explicitly does
+   **not** propose coarsening the clock.
+2. *"The field puts hours in timetables; we put them in beats."* A sentence-level
+   instruction-versus-narration split came back **33.0% field / 33.5% ours**. No separation. The
+   difference is volume, not placement, and only the volume claim shipped.
+
+**Buttons.** Of **92,226 link labels** across the 25 games, **two** name a clock time and both are
+explicit waits (*"Wait until 21:00"*); **zero** promise an hour as the outcome of an action. Even
+`lust-for-life`, which ships an absolute-time primitive (`$time.setTime(23, 55)`) and calls it 270
+times, labels those buttons *"Back home"* / *"Leave"* / *"Go to the SPA"*. Ours: **13 clock-time
+labels across four v2 games**, **zero across all four v1 games**.
+
+**Duration tags are one game's convention, not a field norm** — 4,219 of the corpus's 4,260 are
+`degrees-of-lewdity`'s, and of the five field games with a minute-resolution clock only that one
+does it. That is why C4 shipped as a lint.
+
+### The engine, read rather than assumed
+
+- **No absolute-time advance exists.**
+  `grep -E 'target_hour|advance_to|until_time|time_target' v2.py` → **0 hits**;
+  `advanceTime(minutes)` (`v2.py:5400`) is the whole API. (`setTime` matches eight times and every
+  one is `setTimeout`.) There is no `@time` token either — `_resolve_at_references` (`v2.py:14027`)
+  resolves `@player` and `@<npc>` only.
+- **Travel time is auto-tagged; activity time is not.** `getLocationCostTag` (`v2.py:4724`) renders
+  `20m` on a nav card; a choice's `time_progression_minutes` emits a bare `advanceTime()`
+  (`v2.py:12733`) with nothing on the label. A door announces twenty minutes and a 150-minute shift
+  announces nothing.
+- **`show_when_blocked` + `cooldown_message` exist and no game uses them.** Read at
+  `v2.py:11055-11059`, rendered at `v2.py:5140-5145` when `isCanvasValid` fails — and it fails on a
+  **schedule miss** first (`v2.py:4573-4580`). Usage across all ten games: **0**.
+- **Windows are far too wide to pin an hour.** Median schedule-window width per game runs
+  **149–540 minutes**; exactly **5 canvases in the entire repo** have a window of 60 minutes or
+  less. No beat shipped here can honestly state the current hour.
+
+### What changed
+
+- **NEW `references/the-clock.md`** — C1 the engine pins one moment · C2 a beat may not say what
+  time it is, turn the reading into a rule · C3 a label may not promise a clock time · C4 a label
+  that spends the clock says how much · C5 if a thing has hours, publish them · C6 v1's Rule 10
+  restored. The worked pair is Off Season's own canvas, which carries both halves on one screen:
+  *"Shutter up at eight"* (true for 1 minute of 300) beside *"Nobody comes in before eleven in
+  February"* (true always).
+- **`scripts/gates.py`** — judged set **35 → 36**, lints **13 → 15**.
+  - gate **`the label keeps its time`** — no choice label names a clock time, and a stated duration
+    equals the minutes the click actually spends. The duration walk follows choice → target node →
+    that node's exit, because Off Season states the tag where the player decides and charges it
+    where they leave; reading only the choice would have scored all eight of its honest tags as
+    unverifiable.
+  - lint **`the clock in the prose`** — every hour a beat names, with the window it has to survive,
+    sorted widest-window-first (a canvas with no schedule is treated as the full 1440, which is what
+    "fires at any hour" means).
+  - lint **`the time cost is not on the button`** — every click that moves the clock 60 minutes or
+    more in silence.
+- **`SKILL.md`** — world-file list, one scoreboard row, two entries in the lint index.
+- **`references/register.md`** — the "what is not measured here" note now hands time to
+  `the-clock.md`, and records that this is where v1's Rule 10 went.
+- **`references/the-voice.md`** — R1's cost paragraph gains the time half of its own sentence; the
+  money half was already gated, the time half never was.
+- **`references/the-surfaces.md`** — R2's room-list rules gain the out-of-hours line (C5).
+- **`references/engine.md`** — new **§32**, three subsections: no absolute advance and the 3-minute
+  default; the travel-versus-activity tag asymmetry; `show_when_blocked`.
+- **`DOCTRINE_GAPS.md`** — row 7 status, scoped to the time half.
+
+### Why C2 and C4 are lints and not gates
+
+A shift-driven world names hours as **rules**, and correctly: `seventh_day`'s `rung_kitchen_rota`
+and `steam`'s shift board are good work a rate gate would fail. That is this skill's own *"a check
+that fails a game for obeying the doctrine is a bug in the check"* — the trap that killed the
+proposed `locked_text` gate. And gating duration tags would be the invented threshold `gates.py`
+already refuses for stamina-type costs (G21's comment). Both print and neither moves the tally.
+
+### How it was verified
+
+The gate table was produced by a standalone script **before** the gate was written; the shipped gate
+reproduces it exactly.
+
+```
+                base      new     Δpass   the label keeps its time
+off_season      31/35 →  31/36      0     FAIL   2 clock labels · 8 durations all correct
+the_allowance   27/34 →  28/35     +1     PASS
+seventh_day     26/34 →  26/35      0     FAIL   2
+forty_miles     24/34 →  24/35      0     FAIL   1
+steam           17/33 →  17/34      0     FAIL   8
+back_home       13/31 →  14/32     +1     PASS
+vesper           8/27 →   9/28     +1     PASS
+last_call       12/25 →  13/26     +1     PASS
+late_shifts      9/26 →  10/27     +1     PASS
+the_inheritance 12/24 →  13/25     +1     PASS
+```
+
+Every denominator moved by exactly one and no existing gate changed on any game. `--json` carries
+36 distinct gates and 15 lints, lints outside the tally. Off Season's clock lint prints
+`work_arcade_morning`'s rule and its reading side by side on the same 300-minute window and convicts
+neither — which is the behaviour the lint exists to have.
+
+### Still open
+
+- **Off Season is not fixed.** Doctrine first, the game as its proof, per LO's standing order.
+- **`advanceTime` has no absolute form.** A `time_target` / `advance_to` primitive would make
+  *"work till one"* honest and let a work rung close its own window exactly. Surfaced for LO's call,
+  not acted on — engine work is out of scope for this stream.
+- **`show_when_blocked` has zero shipped instances.** Its first real use will be Off Season's
+  repair; until then C5 is a verified capability, not established practice, and says so.
+
+---
+
+## 2026-08-22 — the first hour: the opening, the meetings, and the first visit
+
+**Cause: the same session, the same review, items 2 and 3.**
+
+> *"No NPC introductions… In the start canvas, should it be like this… are we trying to ramp
+> things up too fast… I think we still havent learnt how the game should be started."*
+
+`games/off_season/REVIEW_1.md` splits these into §2 (O1–O4) and §3 (N1–N2). The field research
+says they are **one mechanism**, so they were done as one pass — LO approved that, 2026-08-22.
+This closes `DOCTRINE_GAPS.md` Tier 2 row 6, the last row in that table with an empty status.
+
+### What the research found
+
+**v1 had it and v2 dropped it, and the loss is mechanical.** `author-game/references/onboarding.md`
+(269 lines) and `npc-intro.md` (146 lines) have no v2 counterpart. Counting non-repeatable canvases
+that fire at a character's location — v1's first-contact shape:
+
+```
+v1  the_inheritance 24 · vesper 13 · late_shifts 7 · last_call 0
+v2  off_season 0 · the_allowance 0 · seventh_day 0 · forty_miles 0 · steam 0 · back_home 0
+```
+
+v2's `starting_canvas` runs a median of **402 words** against v1's **184**, because it has to do
+all the introducing itself.
+
+**The field, 25 mopoga games.** An introduction is small and somebody talks — 696 passages named
+intro/meet across 18 games run **median 101 words, quartiles 57/101/194, 64% with spoken
+dialogue**; narrowed to *meet* only (158) it is median 166 and 55% spoken. the-company's whole
+first meeting with the player's employer is 80 words. Our own `the_inheritance/canvas_meet_audrey`
+is 125 words and 4 `dialog` blocks — already the right shape.
+
+**Openings are bimodal.** 10 of 20 name nobody (corpo-life 64 w, DoL 193); the rest spend
+700–2,600 at ~229 words per named character. Off Season spends **46** and puts none on screen.
+
+**The mechanism is one flag family covering three kinds of thing.** degrees-of-lewdity carries a
+first-time flag on 24 of its 27 registered NPCs and uses it to change how the game *refers* to
+things — `<<if $wren_intro is undefined>>a <gender> named Wren. <He> can be found at Remy's estate
+in the moor<<else>>Wren<</if>>` — and the same family covers places (`$forest_shop_intro`) and
+knowledge (become-someone's `$has.auntaddress`). 16 of 25 games carry per-character meeting state,
+re-derived independently this pass and matching REVIEW_1's Appendix A.3.
+
+**The finding that landed hardest.** Off Season has a first-visit canvas at 5 of its 10 locations
+and **the anchor is not one of them** — the room its ledger declared at 9,000 words, 27% of the
+game, whose description says *"forty machines"* and never says of what.
+
+### ⚠️ An engine fact that corrects v1, verified before it was written down
+
+`npc-intro.md` §1.3 says to set `requires_npc` so a meeting *"fires where the NPC is."* On the
+auto-fire path that is **false**:
+
+```
+getStoryCanvasRedirect v2.py:4921 -> selectAutoFireCanvasForLocation v2.py:4453
+  -> isCanvasValid v2.py:4573   (schedules · conditions · repeatability — requiresNpc is not read)
+```
+
+`requiresNpc` is emitted at `v2.py:11104` and consumed only at `v2.py:5259` (random encounters) and
+`v2.py:5332` (substitutions). So `vesper/cap_renner_hired` at `the_anchor` fires whenever the
+player walks in, though Renner drinks there 19:00–23:00. **A straight port of v1 would have shipped
+that bug.** Recorded as `references/engine.md` §31; the doctrine tells authors to gate the meeting
+on a `schedules` row or a flag instead. **The engine itself was not changed** — a one-line fix to
+`isCanvasValid` would tighten every existing `requires_npc` one-shot including vesper's, which is
+out of scope; surfaced for LO rather than acted on.
+
+### What changed
+
+- **`references/the-first-hour.md` — NEW, 430 lines.** F1 pick one opening shape · F2 boot and
+  capstone are two canvases · F3 hand over into an open door · F4 every live system gets one beat ·
+  F5 every hub sits behind a meeting · F6 a meeting is small and somebody speaks · F7 role before
+  name · F8 one flag per character · F9 the anchor introduces itself. The rule underneath all nine:
+  **the game does not use a name until it has earned it.**
+- **`templates/first-hour.toml` — NEW.** Both opening shapes side by side with an instruction to
+  delete one, plus the meeting and first-visit skeletons. A **menu**, per `SKILL.md`'s own rule
+  that a template is filled in rather than read; every string is a `<placeholder>` and the file was
+  checked against the `own_words` lint before it shipped.
+- **`scripts/gates.py`** — three gates and one lint. 32 → **35 judged gates**, 12 → **13 lints**.
+  Helpers `_fh_handovers` (a branching walk of the funnel's clock), `_fh_live_at`,
+  `_fh_meeting_setters`, `_fh_cast_met`, `_fh_declared_anchor`, `_fh_first_visits`.
+- **`SKILL.md`** — the three gates in the scoreboard table, the lint in the index, and
+  `the-first-hour.md` added to the board-phase world-file list with "read it before you author a
+  single canvas."
+- **`references/the-release.md`** — a § first-release bullet.
+- **`references/the-map.md`** R4 — a button cannot carry the explanation; where the name will not
+  tell a stranger what the place is for, the place needs a first visit.
+- **`references/the-voice.md`** R1 — a character's name is navigation too: role before name.
+- **`references/engine.md`** §31 — the `requires_npc` finding above.
+- **`DOCTRINE_GAPS.md`** — Tier 2 row 6 filled.
+
+### The checks
+
+| gate | what it asks |
+|---|---|
+| **the opening opens a door** | walk `starting_canvas` from `[time] starting_hour`, adding 3 min per undeclared exit (`v2.py:13200`); is anything at the landing location open at that minute? `n/a` when the chain cannot be walked |
+| **every hub is met first** | per character: one hub gated on a flag a non-repeatable canvas naming them sets, no hub left with zero conditions, no flag opening a second character's door |
+| **the anchor introduces itself** | the anchor declared in `v2_state.json` `board.locations[].fill` has a non-repeatable canvas bound to it; `n/a` with no ledger |
+| lint · **named before met** | characters named in the opening / a quest card / a room description with no meeting, and rooms carrying prose with no first visit |
+
+### ⚠️ The meeting gate was wrong on its first run, and the correction is the point
+
+The first implementation demanded that **every** hub of a character carry the meeting flag. It read
+`the_inheritance` as 3/5 — failing `aud_sexloop` (gated on `audrey_stage gte 3`) and `last_call`'s
+`canvas_marcus_arrangement` (gated on `marcus_drinks_done`). Both are **later rungs**, gated on
+something downstream of the meeting, and both are correct work. That is `SKILL.md`'s *"a check that
+fails a game for obeying the doctrine is a bug in the check"*, sixth measured instance, caught by
+running the gate before writing it up. The shipped rule asks for the meeting on **one** hub and
+bans the **cold spawn** — a hub with no conditions at all — on every hub.
+
+### Verified
+
+- `templates/first-hour.toml` parses under `tomllib` — 3 canvases, triggers intact.
+- `gates.py` parses; run against all ten games.
+- **Every numerator moved only where predicted**, from a standalone predictor written before any
+  gate existed:
+
+```
+                base     new     Δpass   the three new gates
+off_season      31/32 → 31/35     +0     FAIL · 0/4 FAIL · FAIL
+the_allowance   26/31 → 27/34     +1     PASS · 1/5 FAIL · FAIL
+seventh_day     24/31 → 26/34     +2     PASS · 0/6 FAIL · PASS
+forty_miles     22/31 → 24/34     +2     PASS · 0/6 FAIL · PASS
+steam           15/30 → 17/33     +2     PASS · 1/6 FAIL · PASS
+back_home       12/28 → 13/31     +1     PASS · 0/4 FAIL · FAIL
+vesper           8/26 →  8/27     +0     n/a  · 6/9 FAIL · n/a
+last_call       10/23 → 12/25     +2     PASS · 4/4 PASS · n/a
+late_shifts      8/24 →  9/26     +1     PASS · 0/5 FAIL · n/a
+the_inheritance 11/22 → 12/24     +1     PASS · 4/5 FAIL · n/a
+```
+
+  No existing gate changed on any game. `--json` carries 35 distinct gates and 13 lints.
+- **One v1 game passes the meeting gate at 100% and a second misses by one hub**, so the bar is one
+  shipped work has cleared rather than an invented number.
+- Two lint bugs found by reading its output and fixed: an NPC named *The Collector* was searched as
+  `The` and matched every sentence in `last_call` (titles and articles are now skipped), and rooms
+  with zero prose were reported as lacking an introduction when the real defect is that they are
+  empty and gate `location fill` already says so.
+- **No game file was touched.** Off Season is repaired next, as the proof.
+
+### Still open
+
+- **The anchor gate is an existence check**, which `SKILL.md` warns is the weakest kind. Defensible
+  only because the real question here genuinely is existence; the per-location coverage prints in
+  the detail lines so it does not quietly become a box to tick. Noted in the code, not hidden.
+- **The engine gap is unfixed** (see above) — LO's call.
+- **Off Season is not fixed** by this pass. Doctrine first, game as proof.
+
+---
+
+## 2026-08-22 — the words the player has to already own, and the examples that taught the dialect
+
+**Cause: LO played the built Off Season and could not read it.**
+
+> *"the language being used here is tough to get. what is arcade?? … why couldnt we use simpler
+> language, are we try to ramp things up too fast"*
+
+The game scores **31 of 32** on `gates.py`. The full review, with all field measurements, is
+`games/off_season/REVIEW_1.md` (15 items). This entry covers item 1 of that review only; the
+opening, the NPC introductions, the clock and the currency are separate passes to come.
+
+### What the research found
+
+**Our prose is EASIER than the field's, and that is why no instrument caught it.** Flesch Reading
+Ease on real sentences (5–60 words, not majority-capitalised, so menus are excluded from both
+sides): field median **78.0 / grade 5.5**; off_season **86.8 / grade 5.0 — easier than 24 of the
+25 field games**. Gate 19 `sentence length` passes at median 10 words against a ceiling of 14.
+Difficulty here is **referential**, not syntactic, and nothing in the skill measured reference.
+
+**The real axis — locale-locked common nouns per 10,000 words:**
+
+```
+FIELD (25 games)   0.8   ·   v1 games 1.3–7.3   ·   v2 games 9.4–95.6   ·   off_season 95.6
+```
+
+Eleven terms our games use appear in **zero of 25 games across 10.6M words**: `airer, anorak,
+bedsit, biro, chandlery, chippy, forecourt, fryers, holdall, lodger, wellies`. The field uses rare
+words freely — `orphanage`, `slaver`, `mage`, `shillings` — but those are **invented or generic and
+the fiction defines them on contact**. A real regional object cannot be defined that way: it lands
+with the reader or it does not, and the prose gets no signal either way.
+
+**Corpus:** `~/Documents/Mopoga_Twine_Sandbox_Research_20260724/gamehtml/` — 28 files, 25 parsing as
+Twine stories, 10.6M words of passage prose after macro/markup stripping. Same corpus as the
+2026-08-18 meters study, so figures are comparable across passes.
+
+### ⚠️ A measurement in the first draft was wrong by 14× and is kept on the record
+
+The first count reported **`rota` ×44** in the skill. It was a **substring** grep: *p·rota·gonist*,
+*rota·ting* and *rota·tion* all contain `rota`. Recounted with word boundaries, and excluding the
+history files (`CHANGELOG.md`, `STATUS.md`, `DOCTRINE_GAPS.md`), the live skill carried **27
+locale-locked terms across 11 files** — `airer` ×9, `lodger` ×8, `immersion` ×3, `rota`/`rotas` ×3,
+`fortnight` ×2, `forecourt` ×1. The defect is real and a quarter the claimed size, and `rota` was
+never the main offender. **A measurement that inflates a defect fourteen-fold is the same class of
+error as one that hides it.** LO had already approved a `rota` → `roster` rename on the wrong
+figure; the rename was still correct, just three edits rather than forty-four.
+
+### Root cause: `SKILL.md` already had the rule, applied only to shapes
+
+No line in this skill has ever said "write British." Its **examples** said it —
+`templates/board.toml:147` shipped `costs = "£5 for the immersion"`, a foreign currency symbol and
+a locale-locked noun in six words, in the file authors copy hardest.
+
+`SKILL.md` already carried *"an example outranks every rule beside it"*, written after
+`the-map.md`'s worked map skeleton reached three games and `15/35/55/75` reached all sixteen
+declared tiers. **It had only ever been applied to shapes — a floor plan, a set of thresholds.
+Nobody applied it to words.** Third instance of a known mechanism.
+
+### Changes
+
+- **`references/register.md` +77 lines** — new section **"The words the player has to already
+  own"**, inserted after *"Sentences run short"*. Four rules: gloss it in the sentence that first
+  uses it or use the plain word · name a place for what it is the first time you name it (the
+  measured trigger: off_season never once writes *slot machine*, and `amusement arcade` existed
+  only in `image_search_queries` and in image `description`, which renders as `alt`,
+  `v2.py:13750`) · invented words are safe and real regional ones are the trap · and an explicit
+  ⚠️ that **this is not an instruction to write generic** — *specificity the reader cannot decode is
+  not specificity.* Second new section **"The examples are the register"**, carrying the correction
+  above. Unnumbered `##` headings, matching the file's convention in that region: **nothing was
+  renumbered and every `S1`–`S4` reference stays valid.**
+- **`SKILL.md`** — the new lint registered in the lint index; the existing *"an example outranks
+  every rule"* operating rule extended with the vocabulary instance.
+- **De-dialected, prescriptive text only** — `templates/board.toml:147`, `state.md:68` and
+  `the-board.md:327` (`"£5 for the immersion"` → `"$5 for the water heater"`, both halves, since
+  LO has already settled the currency on a neutral `$`); `lodger` → `tenant` ×6 across `state.md`,
+  `the-map.md` ×2, `the-board.md` ×2, `gates.py`; `rota`/`rotas` → `roster`/`rosters` ×3 across
+  `the-board.md`, `the-map.md`, `the-release.md`; `fortnight` → `two weeks` ×2.
+- **Deliberately NOT rewritten — quotations of real games are evidence.** `the-surfaces.md`'s five
+  `airer` lines, `SKILL.md:174`, `the-voice.md:92` and `gates.py:841` all quote `the_allowance`'s
+  real canvas *"Get the washing in off the airer"* (`the_allowance/7_final_game.toml:1163`).
+  `the-economy.md:73` quotes `forty_miles`' declared obligation (`forty_miles/v2_state.json:376`).
+  `gates.py:252`'s `knickers` is inside the frozen explicit lexicon — it exists to *detect* the
+  word. Rewriting any of these would falsify the record, the same principle that kept
+  `CHANGELOG.md` / `STATUS.md` / `DOCTRINE_GAPS.md` intact through the meters pass. Instead
+  `the-surfaces.md` now **glosses `airer` once at first use** — the skill obeying its own new rule.
+- **`scripts/genre_words.txt` — NEW, 18,043 words, 145KB.** Every lowercase word used by four or
+  more of the 25 field games. Data, not taste: the lint needs no hand-maintained word list.
+- **`scripts/gates.py` — one new lint, `lint · the words the player has to already own`.** Prints
+  every word in the player's face that fewer than four field games use, ranked by use count.
+  Scope is canvas prose **plus choice labels plus location text** — the measured trigger was
+  *"Buy a coin mech off the chandlery"*, where both hard words are on a button. Filters are all
+  deterministic: possessives, hyphenated number-words, calendar names, and **proper nouns**, the
+  last detected as a token capitalised in >60% of its non-sentence-initial uses, plus every name
+  the game declares in `[[npcs]]` and `[[locations]]`. Lint count **11 → 12**.
+
+### Why it is a LINT and not a gate
+
+The rate does not discriminate. With names, months and number-words filtered out: off_season 254
+per 10k, forty_miles 245, steam 219, **vesper 190 — and vesper reads fine**, the_inheritance 169,
+back_home 131. What separates them is what the words *are*, which is a judgement. **A word list
+dressed as a threshold is `DOCTRINE_GAPS.md` Appendix C trap 5**, and this pass did not repeat it.
+The check hands over the list; the author makes the call.
+
+### Verified
+
+- **All ten games re-scored, identical to the baseline captured before any edit** — `off_season
+  31/32 · the_allowance 26/31 · seventh_day 24/31 · forty_miles 22/31 · steam 15/30 · back_home
+  12/28 · vesper 8/26 · last_call 10/23 · late_shifts 8/24 · the_inheritance 11/22`. This pass adds
+  no gate, so any movement would have meant a broken edit.
+- `--json` intact: **32 gates, 12 lints**, `own_words` present, lints outside the tally.
+- `templates/board.toml` parses, before and after, with each placeholder filled uniquely in key
+  position and numerically in value position. *(Two earlier "parse failures" were bugs in the fill
+  harness — collapsing `<tier_1>`/`<tier_2>` to one key, and leaving a bare identifier as a value.
+  The template was never broken.)*
+- Lint output read by eye on all ten. off_season returns `cardigan ×8 · fortnight ×8 ·
+  immersion ×7 · extractor ×6 · fryers ×6 · jumper ×6 · fifties ×5 · chandlery ×4 · mech ×4`;
+  vesper returns `sternum ×35 · emitter ×23 · readout ×15 · coveralls ×7`. **Both lists are
+  correct, and only one of them is a defect** — which is the argument for a list over a score,
+  visible in the output itself.
+- One bug found and fixed by reading that output: `rstrip("'s")` strips *any* trailing `s`, so the
+  first run reported `goe ×27`, `thi ×27`, `mattre ×12`. Replaced with a literal possessive strip.
+
+### Known and accepted
+
+- **The lint blocks nothing.** Correct for a judgement axis, and it also means a hurried author
+  sails past it. The rule in `register.md` is the instrument; the lint only makes the words visible.
+- **145KB of data in a skill folder** — the largest non-prose artefact this skill carries. Bought
+  deliberately: it removes opinion from the check.
+- **`forecourt` survives once** in `the-economy.md:73`, inside a quoted obligation. Left, per the
+  evidence rule above.
+- **No game file was touched.** Off Season is repaired in a later pass, as the proof — three
+  doctrine passes now carry *"nothing here is proven by a built game"* and that is the one open
+  caveat this work does not yet close.
+
+---
+
+### Audit pass, same day — what the first implementation got wrong, and two classes it missed
+
+LO asked whether the same language problem sits elsewhere in the skill and whether the fix was
+actually implemented properly. Both halves found real things.
+
+**Four inaccuracies in the section as first written, all corrected:**
+
+- *"Four of those words"* in the worked quote — there are **three** (`meter`, `jumper`,
+  `eiderdown`). Now named individually rather than counted.
+- The `0.8 vs 9.4–95.6` table was presented as **"Measured"** with no note that its instrument is a
+  **curated list of ~40 regional terms**. It is a judgement and now says so, one line above the
+  table.
+- *"the building the player spends 27% of the game in"* — 27% was the **declared budget**. As built
+  the arcade holds **13%**, and `the_chip_shop_flat` is the de-facto anchor at 18.6%. Corrected,
+  with the built figure beside it.
+- The section quoted **190 / 254 per 10k** from a scratch script, not from the shipped lint.
+  The lint's own numbers across the ten games are **91–205**, v1 and v2 fully interleaved, with the
+  lowest (`seventh_day` 91) and the highest (`off_season` 205) both v2 games. That is a *stronger*
+  argument for a list over a score than the one first written, and it replaced it.
+
+**One prescriptive example missed by the first sweep, found by searching case-insensitively:**
+`the-voice.md:35` taught *"The Box Room becomes **The Lodger's Room** and says who and why in two
+words"* — and `lodger` is used by **zero of the 25 field games**. `the-map.md:152-158` had already
+caught that `The Box Room` was unreadable and **kept the locale-locked cure without noticing**.
+**`steam` and `off_season` both ship a location literally named "The Lodger's Room."** Now *The
+Tenant's Room*, in both files, each carrying a note about what it used to say.
+
+**Two whole classes the original rule never covered, and they are worse than the one it did.**
+A word can fail three ways, and the rule was written for the mildest:
+
+| | the reader gets | measured |
+|---|---|---|
+| **unknown** (`airer`, `chandlery`) | a blank | the class the skill's examples taught |
+| **ambiguous** (`half seven`) | **a confident wrong answer** — 7:30 here, 6:30 across much of Europe, not used at all in American English | **157 uses across six games** vs **4** of `half past` |
+| **false friend** (`vest`, `tea`, `bonnet`) | **a confident wrong picture** | `forty_miles` *"You get the vest up over your tits"* — an undershirt here, a waistcoat to most readers, **inside an explicit beat**; `off_season` *"Stay past the tea"* — **on a quest card**; `seventh_day` *"under the bonnet"* |
+
+**The skill is clean of both** — `vest`, `tea`, `bonnet`, `half seven` return zero hits across every
+reference file and template. These came from the authors, not from the examples, which is a
+distinction worth keeping: **not every language defect in a game traces back to the skill.** The
+rule now covers all three classes anyway, because the rule is what has to stop it next time.
+
+**The lint gained a second half, and it had to be curated.** A false friend is *by definition* a
+common word — `vest`, `tea`, `bonnet` and `boot` are all in `genre_words.txt`, so the data-driven
+half is **structurally blind** to exactly the worst class. The new half is a short hand-verified
+list plus one regex for `half <hour>`, labelled `[ambiguous]` / `[false friend]` in the output and
+flagged as curated in the footer. It discriminates where the data-driven half does not: **`vesper`
+reports 0 ambiguous** and reads fine; `forty_miles` reports 43 and `vest` ×73.
+
+**Explicitly out of scope, and said so in the rule: spelling.** *Colour*, *grey*, *realise*,
+*behaviour* cost a reader nothing and were **not** swept — the skill and its games keep them. Only
+`tyre`/`tire` and `kerb`/`curb` are named, because those change the word rather than its dress.
+Sweeping spelling would be the "write generic" overreach the section's own ⚠️ warns against.
+
+**Re-verified after the audit:** all ten scores still identical to the pre-edit baseline · 32 gates
+· 12 lints · `templates/board.toml` still parses · `false friend` false-positive risk stated in the
+footer, with `vesper`'s `torch` (a *cutting* torch, correct everywhere) named as the worked example
+of one.
+
+---
+
+## 2026-08-19 — meters by OWNER: who climbs, what a throttle is for, and no number that nothing reads
+
+**Cause: LO asked whether `the_allowance`'s four meters are how the top games are built.**
+
+> *"Allowance defines nerve, seen, price, appetite — is this how mopoga top games are designed?? Also
+> see how v1 does it?? … then share your honest thoughts on how our v2 should do it."*
+
+They are not a design. They are a **template fill**. `templates/board.toml` handed the author three
+blank `<tier_N>` slots, `purity = 100 # optional counterweight`, a fixed volatile list
+(`arousal/energy/hygiene/money`), and `the-board.md` §3 instructed: *"their rungs sit at 15/35/55/75…
+**copy that shape.**"* All five v2 games copied it, rungs included:
+
+```
+                 tier meters   lowest rung   NPC share of meter-gating
+the_allowance    4 + standing       15                 20%
+seventh_day      3 + grace          15                 22%
+forty_miles      3 + count          15                 20%
+steam            3 + propriety      15                 29%
+back_home        3 + pride          15                 29%
+```
+
+**Root cause:** this skill documented **what a climb costs** (`the-meters.md` M1–M7) and **what a
+need shuts** (M8–M10) and never documented **which meters should exist or who owns them.** The
+decision that comes before both was missing, so a template made it five times.
+
+### The corpus, and the correction that had to come first
+
+25 mopoga sandboxes, SugarCube passage source,
+`~/Documents/Mopoga_Twine_Sandbox_Research_20260724/gamehtml/` — the same corpus as the register
+pass. Variables extracted per game: writes (`<<set>>` / `<<run>>`, including `+=`, `++` and
+self-referencing `to $x + n`), reads (`<<if>>` / `<<elseif>>`), property-level (`$player.corruption`,
+not `$player`), plus per-game sidebar passages.
+
+> ⚠️ **A CLAMP GUARD IS NOT A GATE.** `<<if $lust lt 0>>` followed by `<<set $lust to 0>>` is the
+> author bounding a variable. `corpo-life` carries **2,889** of them on one variable, and the first
+> pass reported that meter at **3,235 gates** when the real figure is **346**. Every figure below
+> counts only comparisons against a threshold strictly inside the meter's own range. Recorded in
+> `DOCTRINE_GAPS.md` Appendix C as trap 5 — same family as the quote-only dialogue count that
+> wrongly retired v1's Rule 4: **an instrument that cannot tell a guard from a gate does not report a
+> smaller number, it reports the wrong one.**
+
+**Player-owned ascent meters with ≥4 real content gates:**
+
+```
+0 meters   14 games   adam-and-gaia · become-taxi-driver · course-of-temptation · destroyer ·
+                      growup · inseminator · love-and-vice · lust-for-life · new-life-project ·
+                      new-lust · realm-of-corruption · sluttown-usa · wasteland-lewdness ·
+                      zaras-school-life
+1 meter     7 games   amore · apocalyptic-world · become-someone · corpo-life · family-business ·
+                      patriarch · the-hellfire-club
+2 meters    2 games   friends-of-mine · the-company
+8 meters    family-ties          9 meters   degrees-of-lewdity          MEDIAN 0
+```
+
+The largest unclassified meter in each of the 14 zeroes was hand-checked — resources (`Wood`,
+`gunpowder`, `groceries`), story counters (`indiastory`, `officestory`), levels. No hidden tiers.
+
+**`the_allowance`'s shape is matched by 2 of 25 games, and one of them is DoL — the game v2's
+three-layer model was derived from.** We generalised from n = 1 and built five games on it.
+
+**Where the field's gating lives: on the CAST, and the distribution is BIMODAL.** 285 per-character
+meters against 101 player-owned ones (2.8 : 1). Share of character-meter gating carried by
+per-character meters:
+
+```
+ROSTER  zaras 100% · adam-and-gaia 100% · taxi 91% · become-someone 84% · hellfire 80% ·
+        patriarch 79% · love-and-vice 73% · family-business 65%                        (8)
+────────────────────────────────────────────────────────────────────────────────────────
+LADDER  new-lust 15% · friends-of-mine 13% · corpo-life 12% · destroyer 12% · DoL 10% ·
+        wasteland 5% · family-ties 0% · the-company 0% · sluttown-usa 0%               (9)
+```
+
+**Nothing between 15% and 65%.** Ours: 20 · 22 · 19 · 29 · 29 — all five inside a band no shipped
+game occupies, because the question was never asked. v1 asks it
+(`author-game/references/content-framework.md`, *"Who climbs?"*); v2 dropped it.
+
+**Rung structure of the field's live ascent meters** (content gates only):
+
+```
+family-ties  you.corr      978 gates  17 rungs   5,10,15,20,25,30,33,35,40,45,50,60…
+friends      feminine      443 gates   8 rungs   5,10,15,25,30,40,50,75
+corpo-life   lust          346 gates  11 rungs   10,21,24,31,41,50,61,70,80,90,99
+become-som.  mc.dom         96 gates   9 rungs   5,7,10,15,20,25,30,50,75
+the-company  player.horny   24 gates  11 rungs   2,20,30,40,49,50,60,70,80,90,99
+DoL          exhibitionism  21 gates  11 rungs   15,19,25,35,40,50,55,60,75,80,95
+```
+
+**8–17 rungs, lowest at a median of 5.** Ours: 3–4 rungs, and **all 16 declared tiers across five
+games put their lowest rung at exactly 15** — fifteen free clicks before anything changes, against
+M1's own measured finding that 12 clicks moved `cover` 4→16.
+
+**The sexual-state meter is a real gate in 12 of 25 games**, and where it exists it is the #1 or #2
+most-gated thing in the game (`corpo-life` lust, DoL arousal, `family-ties` you.arousal,
+`friends-of-mine` excitement). Ours, grepped:
+
+```
+                arousal raises   arousal reads
+the_allowance         25              0
+seventh_day           53              0
+forty_miles           52              0
+steam                 55              2
+back_home             47              2
+                     232              4
+```
+
+**The cause is one line of this skill's own template.** `templates/board.toml` labelled the volatile
+layer *"NEVER gate an arc on these"* — right about the ODOMETER, silent about what a THROTTLE is for
+— and five authors read it as "never gate on it at all". Structurally it is the same defect the
+register pass fixed: a throttle gates a repeatable act surface, v2 taught no such surface until
+2026-08-18, so arousal had no job.
+
+**Counterweights:** 1 field game in 25 ships one that gates (DoL `purity`, 84 sites). Ours: 4 of 5,
+and three gate almost nothing — `count` 0 reads, `standing` 2, `grace` 5; `propriety` reads 25 times
+and every one is a `[group]` prose band, which colours a paragraph and opens no door.
+
+**What survived the corpus unchanged:** the three-layer frame itself, the HUD count (field median
+4–5 meters shown against 20–260 gated; ours 4–7), and all of M1–M10.
+
+### What v1 has that v2 never carried
+
+`author-game/references/trait-design.md` (237 lines) + `trait-catalog.md` (248): spine-by-arc-shape
+(including **no climbing meter at all** for someone she already belongs to), **odometer vs
+throttle**, the **dead meter** as a named anti-pattern, reserve-the-rich-model-for-1–2-arcs, and
+"Who climbs?" in `content-framework.md`. v1's own games measure roster-shaped: `vesper` has **zero**
+player ascent gates and runs on per-NPC `corruption` (33 gates, 8 rungs) + `relation` (24).
+
+### LO's decisions
+
+- **2 hard gates + 3 lints** — hard-gate only what is deterministic or checkable against the
+  author's own declaration; print the rest as numbers.
+- **`who_climbs` is a DECLARATION checked against the game**, never a threshold invented across a
+  bimodal population.
+- **No game is touched.** Doctrine, template and `gates.py` only.
+
+### What changed
+
+**`references/the-meters.md`** (+248 lines, 277 → 521). New leading part, **"Which meters exist, and
+who owns them"**, placed before M1 and numbered W1–W6 so every existing M-reference stays valid:
+
+- **W1 · Who climbs** — the fork, the two schools with their populations, the table of what each
+  answer looks like on a board, and the instruction to declare it.
+- **W2 · A throttle's job, stated positively** — odometer vs throttle, what each may and may not
+  gate, the 232 : 4 measurement, and the template line that caused it.
+- **W3 · A number nothing reads is not a meter** — with the per-game dead lists.
+- **W4 · The ladder** — 8+ rungs, lowest around 5, dense at the bottom; retires 15/35/55/75 and
+  names where it came from.
+- **W5 · A counterweight is rare, and it shuts doors.**
+- **W6 · The cast's meters** — light or load-bearing, W1 decides which; v1's arc-shape table adapted,
+  including the no-meter row.
+
+**`references/the-board.md`** §3 rewritten (74 → 100 lines) — the teaching moved to `the-meters.md`;
+§3a declares `who_climbs`; **"copy that shape" deleted**; the DoL tier table kept as evidence with
+its provenance stated (2018 seed twee source, which is why it does not match a passage-level read of
+the 2026 build); a note that band boundaries are the sidebar's business and are not the rung ladder.
+
+**`templates/board.toml`** — the file that actually caused this. `15/35/55/75` gone from the band
+block (bands are now `<band_N_top>` placeholders in the file's existing bare-token style, so there
+are no numbers to copy); the fixed volatile list replaced by a **menu with a delete-what-you-cannot-
+name instruction**, matching the treatment `needs` already had on the same page; the "NEVER gate an
+arc" comment rewritten to carry both halves; `purity` commented out with the 1-of-25 figure; a
+`who_climbs` header block; and the NPC `{ relation = 0, lust = 0 }` pair labelled as the ladder
+school's answer with the roster school's shape beside it.
+
+**`references/state.md`** — `board.who_climbs` and `board.characters[].meters` added to the schema
+with field notes; the `ascent_tiers` note now says an empty list is legitimate.
+
+**`scripts/gates.py`** — 2 gates + 3 lints. **30 → 32 gates, 8 → 11 lints.**
+
+New helpers: `_walk_paths` · `_traits_read_anywhere` (three readers: conditions, `costs`, quest
+`when`/`goals`) · `_player_trait_raises` (attributes each raise to its canvas) ·
+`_engine_read_stage_traits` · `_school_split` · `_meter_rungs`. `_traits_read_by_conditions` is left
+untouched so G29's verdict does not shift under it.
+
+**G33 · a meter is read.** Deterministic. `costs` counts as a read — the engine filters an
+unaffordable choice rather than letting it fail (`engine.md` §27), and calling that dead would fail a
+game for using the engine's own resource gate. **`<npc>_stage` is exempt** when the prefix names a
+declared character, because `applyAndNotifyTrait` is its reader (`v2.py:5549-5554`) — written in
+advance rather than after a bug report, per SKILL.md's "check the skill before blaming the game".
+`sex_stage` is **not** exempt; no character is called `sex`.
+
+**G34 · the climb is where you said it is.** Declare-then-check against `board.who_climbs`; the
+player side is whatever `board.ascent_tiers` names, so no keyword classifier decides what counts as
+a meter. Quest-card reads excluded on both sides — a guidance card describes progress, it does not
+gate access.
+
+### Predictions, computed before the code was written — all reproduced exactly
+
+```
+                 G33 a meter is read                                    G34
+the_allowance    7/9    dead: arousal · hygiene                  FAIL   n/a
+seventh_day      14/16  dead: arousal · stress   (6 _stage exempt) FAIL  n/a
+forty_miles      4/8    dead: arousal · count · energy · stress  FAIL   n/a
+steam            6/7    dead: energy                             FAIL   n/a
+back_home        6/8    dead: hygiene · money                    FAIL   n/a
+vesper (v1)      36/41  dead: sex_stage · sex_entry_origin · +3   FAIL   n/a
+last_call (v1)   10/15  dead: sex_stage · sex_reactions · +3      FAIL   n/a
+late_shifts (v1) 3/7    dead: arousal · energy · hygiene · money  FAIL   n/a
+the_inheritance  10/10                                           PASS   n/a
+```
+
+One game passes, and it is a v1 game — the gate discriminates rather than condemning everything. The
+carve-out was verified both ways: `seventh_day`'s six `*_stage` keys are exempt, `vesper`'s
+`sex_stage` (81 raises across 26 canvases, 0 reads) is not.
+
+G34 reports **n/a nine times** — no game declares `who_climbs`. That is correct (`SKILL.md`: an
+absence is not a pass) and it means **the gate fires on nothing until the next game is authored.**
+Recorded plainly rather than counted as a green.
+
+Two findings the failure lines surfaced that nobody was looking for:
+
+- **`vesper` declares player `corruption` and never touches it** — all 8 raises and all 33 gates are
+  `subject = "npc"`. Verified by direct parse.
+- **`the_allowance` gives two of its five characters a full meter pair and zero gate sites**
+  (`npc_denise`, `npc_col`).
+
+### Lints, first run
+
+**the meter ladder** — `the_allowance` 4 tiers, median 4 rungs, lowest 15 · `forty_miles` 3/3/15 ·
+`seventh_day` 3/3/15 · `steam` median 4, lowest 15 · `back_home` median **9** rungs, lowest 15.
+
+**the cast's meters** — every v2 game: **1 distinct meter shape across the entire cast.**
+`the_allowance` 5 characters / 13 gate sites / 2 gate nothing · `seventh_day` 6 characters / 8 gate
+sites total · `back_home` 4 characters / 50.
+
+**the counterweight** — `count` 0 reads · `standing` 2 · `grace` 5 · `propriety` 25 · `pride` 17.
+Heuristic (a player trait starting at 50+ whose effects mostly fall, declared needs and
+`trait_decay` keys excluded), which is why it is a lint and not a gate.
+
+### Scores
+
+```
+                before      after
+back_home       12/27   →   12/28
+steam           15/29   →   15/30
+forty_miles     22/30   →   22/31
+seventh_day     24/30   →   24/31
+the_allowance   26/30   →   26/31
+vesper           8/25   →    8/26
+last_call       10/22   →   10/23
+late_shifts      8/23   →    8/24
+the_inheritance 10/21   →   11/22      ← the only game to GAIN one
+```
+
+### Also corrected, because they contradicted the new doctrine
+
+- **`SKILL.md`** — the two gates and three lints registered; the board-phase dispatch now opens with
+  W1; and a new operating rule earned by this pass: **a shape that ships in `templates/` is copied
+  harder than one that ships in `references/`.** A reference file is read; a template is *filled in*,
+  so whatever sits in the slot is the answer unless the author fights it. This is the
+  "an example outranks every rule" rule one level worse — in a template, even a placeholder list is
+  an example.
+- **`DOCTRINE_GAPS.md`** — Tier 2 items 5 and 8 marked addressed; a **⛔ SUPERSEDED** block on the
+  three-layer model recording that it was n = 1, kept rather than deleted because the trail is the
+  point; Appendix C's traps 5 → 6 with the clamp guard.
+- **`STATUS.md`** — carried the same three-layer table including the 15/35/55/75 rungs. Rungs
+  removed from the row, correction block added. Left contradicting, it would have re-taught the
+  thing this pass deleted.
+- **`scripts/gates.py`** `ASCENT_TIERS` constant — annotated as an n = 1 fallback for guessing when
+  `board.ascent_tiers` is absent, not a target.
+
+### Honest credit, and it cuts against the summary
+
+**`back_home` has the best meters we have built** — 8, 9 and 10 rungs on its three tiers, dense at
+the bottom, and its per-character `lust` read 36 times. That is the closest thing we have to the
+field shape, and it is a game previously written off as a failed test. The doctrine says so rather
+than treating all five v2 games as equally wrong.
+
+### Known and accepted
+
+- **`the_allowance`'s `hygiene` is now counted twice** — by G29 (a declared need nothing reads) and
+  by G33 (a raised meter nothing reads). Both are true and they ask different questions; it is one
+  defect appearing on two lines, not two defects.
+- **G33 can be satisfied cheaply and wrongly.** One throwaway `arousal >= 1` per dead meter and it
+  goes green — the deleted gate 22's failure mode in a new coat. The check can only ask whether a
+  reader exists; W2 is what says the reader has to be the act menu, and the meter-ladder lint prints
+  the rung count beside it so a one-rung fig leaf shows.
+- **The 60% / 25% cut points in G34 are judgement**, sitting inside a measured empty band. First
+  thing to revisit if they fire on a game that reads well.
+- **The counterweight lint is a heuristic**, because nothing in the TOML declares "counterweight".
+- **Nothing in this pass is proven by a built game.** Third pass running with that caveat. The first
+  game authored on these rules is the real test.
+
+### Verified
+
+`python3 scripts/gates.py <slug>` on all nine games — 32 gates, 11 lints, exit 1 throughout (gates
+failed, not an error). `--json` emits all 11 lints. `templates/board.toml` still parses as TOML once
+its placeholders are filled. Grep sweep: `15/35/55/75`, `copy that shape` and `NEVER gate an arc`
+survive only inside the correction blocks that quote them. `git status` shows only
+`.claude/skills/author-game-v2/`, plus the pre-existing `issue.md` and `games/vesper/.find-media/*`
+this session did not create.
+
+---
+
+## 2026-08-18 (2) — register is SIX SCREEN KINDS: the clip rides the beat, the loop is a machine, people talk
+
+**Cause: LO played `vesper` and named three things, all three real.**
+
+1. *"a canvas that says blowjob shows its media on top and its content on the bottom… the third link
+   is suck him, at that time it doesn't show that media, which it has already shown on top."*
+2. *"For dialog, we have dialog blocks in each canvas/beats that can be used."*
+3. *"there is a way repeated content is written and a way linear content is written even for sexual
+   content… in a linear canvas one-time one, it doesn't set things up, instead it directly takes
+   player to fuck/penetrate."*
+
+Then: *"learn more from the top games, and not just see what was wrong on v1."*
+
+**Root cause, one thing:** this skill wrote rules about "prose" in general when the property that
+actually varies is **which kind of screen you are on**. `register.md` was 174 lines covering four
+topics against v1's 779. The missing material was never judged and rejected — one rule was deleted on
+a broken measurement (below) and the rest was simply never written.
+
+### The corpus, and the two corrections that had to come first
+
+25 mopoga sandboxes, **58,163 passages**, `~/Documents/Mopoga_Twine_Sandbox_Research_20260724/gamehtml/`.
+
+- **Count one rendered path, not every branch.** `destroyer:ginablow` is eight `<<if>>` branches
+  printing the same four words over a different image. Collapsing chains moves the corpus median
+  from 115 words to **88**, and DoL from 82 to **54** — in line with its known figure.
+- **Speech is a UI component, not punctuation.** 20 of 25 games render dialogue through `<<speech>>`,
+  `<<say>>`, `<<nm "Karlee" "…">>`, `<<chat portrait "…">>`, `<div class="npctextbox">`, or one
+  container macro per character (`<<Mc>>`, `<<AmyBd>>`). Each game's convention was read out of its
+  own source before anything was counted.
+
+**The six kinds** (n = 54,630 screens with content, one path each):
+
+```
+kind of screen             n      words   spoken   picture   clips   exits
+room / hub             1,226         30       0%      41%       0       5
+one-liner / stat tick  7,278         14       4%      21%       0       1
+talk screen           15,774         55      65%      64%       1       1
+ordinary scene        21,465         71      14%      36%       0       1
+sex — act menu           164        107       8%      91%       1       5
+sex — few exits        1,068        305      18%      86%       2       3
+sex — one way on       7,161        228      28%      92%       3       1
+a REVEAL BEAT          3,005         37        —      58%       1       —
+```
+
+### C1 · The clip does not ride the beat — and it is an engine fact
+
+A cascade renders as nested `<<linkreplace>>` (`v2.py:13952`, `body_html` emitted inside the
+linkreplace body): every beat **appends** and nothing is removed, so the node-lead clip illustrates
+beat 0 and nothing after it. Node routing is the opposite — resolved at BUILD time
+(`v2.py:13258`) into a real passage, so the screen **swaps**.
+
+```
+a click that reveals more content — does it bring its own clip?
+FIELD   3,005 reveal beats, 58% (apocalyptic-world 64 · become-taxi-driver 71 · destroyer 79)
+OURS    vesper 16/389 = 4% · back_home 0/169 · steam 0/623 · forty_miles 0/938
+        · seventh_day 0/516 · the_allowance 0/39
+```
+
+Media in our games sits on **nodes** (20–54%) and never on beats, while v2 games moved nearly all
+content into beats — `forty_miles` ships 938 beats against 259 nodes. Field density inside explicit
+content: **one clip every 58 prose words** (IQR 25–104, n = 25,502 gaps); ours, one every 178–435.
+
+### C2 · v1's dialogue rule was deleted by a broken instrument
+
+`DOCTRINE_GAPS.md` Study 4 counted speech by looking for `"quote marks"`, reported a field median of
+**33:1** and a spread *"far too wide to threshold"*, and `register.md` dropped v1's Rule 4 on that
+basis. Re-measured on the same corpus with each game's own convention:
+
+```
+game                 quotes only    + its own speech UI
+corpo-life               584.9:1               0.30:1
+sluttown-usa             762.0:1               0.63:1
+family-business            >999:1               1.15:1
+destroyer                 71.7:1               1.44:1
+the-company              290.1:1               2.69:1
+degrees-of-lewdity         3.6:1               3.62:1   <- unchanged
+course-of-temptation       4.6:1               4.57:1   <- unchanged
+patriarch                  2.9:1               2.93:1   <- unchanged
+MEDIAN                    65.3:1               2.93:1
+games at <=2:1                  0             10 of 25
+```
+
+The three that do not move are the three that punctuate speech with quote marks — and DoL and
+`course_of_temptation`, the two the study named as the dialogue-heavy outliers, are two of them. The
+study found the two whose dialogue its instrument could see. The "over 400:1" that killed the rule is
+`corpo-life`, which is **70% spoken**.
+
+### C3 · The ladder, wrong in both directions
+
+Field screens open on a rung evenly (touch 13 · strip 15 · hands 11 · oral 14 · vaginal 28 · anal 5
+· finish 13) because a field screen is ONE rung and the ladder is chained across 3–4 of them. Ours,
+measured by `gates.py`'s own ladder lint:
+
+```
+vesper       77% of explicit canvases OPEN at vaginal-or-above, 0% stop below oral
+forty_miles   5% open at vaginal-or-above, 69% never reach oral
+```
+
+Vesper is the whole ladder with no stairs to it; forty_miles is all stairs and no ceiling. *Not* a
+general rushing problem: our run-up is longer than the field's (59–207 words before the first
+explicit word against 30) and 0% of our canvases open explicit against the field's 22–28%.
+
+### C4 · The mechanism for repeatable acts exists, is engine-native, and no v2 game uses it
+
+v1's sex-loop is the field's `ginablow` shape as a state machine — act node per rung with its own
+pool, self-loop raising a hidden meter, switch links, a meter-gated finish, a `[group]` finisher, and
+a reset at both ends. `vesper:loop_bastien_backroom` ships it. Verified engine support:
+build-time node resolution (`v2.py:13258`), a dedicated HUD index for triggerless sub-menus
+(`setup.sub_menu_parents`, `v2.py:3159`), and the flag-in-triggerless hard-fail that forces trait
+state (`engine.md` §16).
+
+```
+self-loop choices:  vesper 22 · every other game 0
+loop state traits:  vesper, last_call, the_long_summer only
+```
+
+v2 games use half of it — steam 203 triggerless canvases, forty_miles 214 cross-canvas node routes —
+but every one is a rung: route in, play a cascade, leave.
+
+### What changed
+
+- **`references/register.md`** (174 → 362 lines). Kept the explicit-beat pivot rule, sentence length
+  and second person unchanged. Replaced "the other ninety percent" with the six-kind table as the
+  file's spine, and four rules under it: **S1** the clip rides the beat · **S2** one canvas is one
+  rung · **S3** somebody speaks (carrying the two-instrument table so the artifact cannot be
+  re-derived) · **S4** the talk screen is a content kind.
+- **`references/the-surfaces.md`** — new **R3b · Two machines**: cascade appends and suits a one-time
+  scene, node routing swaps and suits a repeatable act surface. The loop taught as six parts plus a
+  **menu of three shapes** (single-act · pose ladder · paged service) — no copyable TOML, per
+  `SKILL.md`'s teach-a-menu rule and LO's explicit choice this session.
+- **`references/engine.md`** §8 — *"A node link SWAPS the screen. A cascade beat APPENDS to it"*,
+  with both citations, the `sub_menu_parents` index, and the distinction that a triggerless canvas is
+  a **safe node-link target and an unsafe substitution target**. §5 gained the corollary that a clip
+  inside a beat renders at that beat.
+- **`references/the-voice.md`** R1 — act-menu labels name the act and are crude at the ceiling
+  (*Keep blowing · Pound her ass · Cum*), explicitly distinct from a plain room-list button.
+- **`scripts/gates.py`** — two gates and three lints; `EXPLICIT_BEAT_MEDIA_FLOOR = 50.0` and
+  `NARRATION_DIALOGUE_CEILING = 5.0`, each carrying its full derivation. Gate count 28 → 30, lints
+  5 → 8.
+- **`DOCTRINE_GAPS.md`** — Study 4 §3b struck through with a superseded block rather than deleted;
+  Appendix C gained the two new extraction traps.
+- **`SKILL.md`** — the leftover objects/gate-22 paragraph at `:59-64` deleted (it contradicted
+  `:146-152` of the same file, which said both were removed); the two gates and three lints
+  registered; new operating rule: **an instrument that cannot see a thing reports its absence, not
+  its rarity.**
+
+### The new checks, and every game measured against them first
+
+```
+                    an explicit beat carries a clip        somebody speaks
+back_home            10/75   13%   FAIL                    24.1:1  FAIL
+steam                 1/65    2%   FAIL                    18.7:1  FAIL
+forty_miles           1/170   1%   FAIL                    31.1:1  FAIL
+seventh_day           0/118   0%   FAIL                    62.0:1  FAIL
+the_allowance        10/12   83%   PASS                    50.4:1  FAIL
+vesper (v1)          43/47   91%   PASS                     2.8:1  PASS
+last_call (v1)          n/a                                  6.6:1  FAIL
+late_shifts (v1)      0/1     0%   FAIL                    15.3:1  FAIL
+the_inheritance (v1)    n/a                                  1.5:1  PASS
+```
+
+Both gates were computed against all nine games **before** either was written, and both reproduced
+their predictions exactly. The clip gate discriminates the way it should: it passes the two games
+whose explicit content sits on nodes and fails the four that moved it into media-less cascades.
+
+Lints, first run: talk screens — vesper 26% (field 29%), steam 5%, forty_miles 1%, back_home /
+seventh_day / the_allowance **0%**. Act menu — vesper 8 loops against 8 one-shot cascades; every v2
+game **0 loops** against 11–47 one-shot cascades.
+
+### Scores
+
+```
+                before      after
+back_home       12/25   →   12/27
+steam           15/27   →   15/29
+forty_miles     22/28   →   22/30
+seventh_day     24/28   →   24/30
+the_allowance   25/28   →   26/30
+```
+
+`the_allowance` gains a pass because its explicit beats already carry their clips. The other four
+lose ground on both new lines, which is the point.
+
+### Decisions and open items
+
+- **LO chose two gates plus three lints**, not five gates: gate only what the corpus settles
+  decisively, print the rest. And **the loop is taught as a menu of shapes, not a copyable skeleton.**
+- **No game was touched.** vesper stays as authored; the other four stay as specimens.
+- **The 5:1 ceiling is the one judgement call here.** The measured facts are a median of 2.93 and ten
+  of twenty-five under 2:1; 5:1 is how much slack to allow. First thing to revisit if it ever fires
+  on a game that reads well.
+- **The clip gate can be satisfied cheaply and wrongly** — stapling one pool onto every beat passes
+  it. That is the gate-22 failure mode in a new coat. The mitigation is in the rule, not the check:
+  the clip must be the clip for *that* rung, and the ladder lint prints beside it.
+- **Nothing here is proven by a built game.** Third pass running with that caveat, and it has been
+  the honest one each time.
+
+---
+
+## 2026-08-18 — rooms serve NEEDS, activities carry WALK-INS, buttons carry VERBS
+
+**Cause: LO opened `games/the_allowance` in the kitchen and read five buttons.**
+
+```
+Look round the kitchen · Sit out on the back step · Come down in what you slept in
+Get the washing in off the airer · Ask for more than you need
+```
+
+*"All are a complete mess… what can be done in the kitchen, person can eat, cook, eat with the other
+people… check the fridge for what is in stock."* And then the diagnosis: *"objects in a room, and
+then things can be done in that room, will always end up with a mess like this, which means
+nothing."*
+
+He was right on every count, and it is measured rather than argued.
+
+### The corpus this pass is measured against
+
+Full HTML of 25 top-30 mopoga sandboxes, on disk at
+`~/Documents/Mopoga_Twine_Sandbox_Research_20260724/gamehtml/`. Every link label extracted —
+**64,594 of them**:
+
+```
+sleep / go to bed .... 773 uses, 19/25 games      wash / shower ....... 224, 16/25
+work / shift / earn .. 564, 18/25                 exercise ............ 122, 16/25
+get dressed .......... 487, 14/25                 dishes / laundry ..... 51, 11/25
+eat / breakfast ...... 430, 17/25                 fridge / stock ....... 44, 13/25
+                                                  cook ................. 27,  8/25
+"look around" ........ 232, 14/25  ← and sampled, these are one-off quest objects
+                                     ("examine the cash register" x16), never a room menu
+```
+
+Four kitchens read in full: **Apocalyptic World** (`Eat` needs food + 30 min, `Approach <her>`,
+`Talk with Blair`, `Back`), **Become Someone** (breakfast / dinner / dishes, once each per day, in
+windows, plus a portrait row), **Corpo Life** (one `if/elseif` on partner x time, two links a
+branch), **Degrees of Lewdity** (farm kitchen = **341 bytes**: a stock line, `<<kitchenDisplay>>`,
+`Leave`). **Not one browses an object.**
+
+### Five causes, all verified
+
+1. **The skill's worked example was read backwards.** `the-surfaces.md` printed DoL's bedroom as
+   *"what correct looks like"* and read it as *choices hang off objects*. The real passage's standing
+   links are `Strip and get in bed` (the **sleep machine** — how the day advances), `Masturbate in
+   bed` (the solo feeder), `Wardrobe` (the clothing system), `Sex toys`, `Mirror` (the body system).
+   **The bed is the door to the machine that runs the game.** We copied the sentence and dropped
+   what was behind it.
+2. **Gate 22 could not see a canvas, so it manufactured a duplicate menu.** `_room_objects`
+   computed affordances from `exit_block.choices` and never read a canvas name. The four kitchen
+   activities exit via `type = "location"` and carry no choices, so *"Get the washing in off the
+   airer"* — an entire canvas about the airer — counted as **zero**. Proved by probe: strip the nine
+   `room_*` screens from a scratch copy of the_allowance and the gate reports **34 of 39 declared
+   objects unusable**, naming *"the airer"* and *"the back step"*. The only way to pass was a second
+   screen re-listing what already existed; the author wrote that reasoning into
+   `3_activities.toml:1280-1294` themselves. Result: **nine near-verbatim duplicate pairs across
+   five rooms** — *"Two concrete steps down to a yard with a wheelie bin and a rotary line nobody
+   uses"* / *"Two concrete steps to a yard with a bin and a rotary line nobody uses"*, one free and
+   one charged.
+3. **The needs layer was never built.** `the-board.md` §4 was five lines of prose — no field, no
+   gate, no checklist — against `objects`, which had a declared field, a hard gate and a lint.
+   Authors build toward what is measured. Consequence: `the_allowance` has **zero** eat / cook /
+   meal / breakfast / dinner / food / fridge / sleep canvases in a game whose anchor room is a
+   kitchen, and declares `[player.trait_decay] hygiene = 10` with four ways to wash and **zero
+   conditions anywhere reading hygiene**. Contrast `games/vesper` (v1): 11 things drop hygiene by
+   30, one restores it, `hygiene >= 40` gates *"Take the car"* — filthy means she cannot leave.
+4. **The walk-in — the field's largest bucket — is absent.** DoL's `Bath` is one activity with
+   twelve outcome passages dispatched on (who is here x dice x your own stats), and the branches are
+   cheap: `Bath Molestation` is **458 bytes with zero prose**, six config lines handing off to
+   `<<actionsman>>`, the shared engine **1,742 other passages also call**. `Bath Robin Tease` is
+   **473 bytes, three sentences**. Our engine already ships the mechanism and Vesper already uses it
+   correctly (`Work the floor` @ renner_depot: 10% / 35% / 70% on Renner's corruption, into one
+   2.3 KB target with three bands on the same trait). **Across all five v2 games: 10 substitution
+   rules in 791 canvases**, and four mentions of the word in the whole doctrine, with no rules.
+5. **Labels drifted, through a leaked exemption.** Field: **median 3 words, 10% at 6+**. Ours:
+   `late_shifts` 3w/7% · `the_inheritance` 3w/10% · `vesper` 4w/17% · `last_call` 4w/15% ·
+   `back_home` 4.5w/35% · `the_allowance` 5w/36% · `steam` 5w/47% · `forty_miles` 6w/50% ·
+   `seventh_day` **6w/57%**. `the-voice.md` R1 already stated the correct rule; its **exemption**
+   named three examples as exempt scene-choices, and all three exist in `back_home` as canvas names
+   too — `5_scenes.toml:983` is a choice `text` (exempt, correct), `:1093` is a canvas `name` (a
+   room-list button, never exempt). The exemption was written off the wrong specimen and the pattern
+   was copied into `the_allowance` as the top-level button LO read.
+
+### Why not simply revert to v1
+
+`games/vesper` is v1's own output. It proves v1's **unit** is right — every room a verb (`Drill ·
+Fix the emitter · Switch weapon · Wash up · Change`), zero browse screens in 186 canvases — and that
+v1 could **prove nothing**: 12 of its 30 locations are thin or dead, six completely empty, and its
+own `Wash up` and `Power down` are bare restores with no branch and no walk-in, which is the exact
+*"dead-bath gap"* v1 names and forbids in `content-framework.md:113`. v1 is 10,095 lines of
+unenforced library; v2 is 3,450 with a working scoreboard. **v2's machine, v1's unit, and the one
+structural idea from the field neither had.**
+
+### Step 0 — the blocking verification, run first
+
+`setup.getCanvasById` (`v2.py:3177-3191`) builds its lookup **only** from
+`help_data.locationCanvases`, populated only for canvases carrying `trigger.location`
+(`v2.py:10986-11138`). v2's rungs are triggerless by design, so pointing a walk-in at one would
+**silently never fire**. Built a throwaway `games/_probe_walkin` and ran it live under Playwright:
+
+```
+TEST 1 · substitution_only hides the target from the room list ....... PASS
+TEST 2 · it fires as a substitution target ........................... PASS  -> Canvas_rung_shared_Node_base
+TEST 3 · a hub choice reaches the same canvas ........................ PASS  -> Canvas_rung_shared_Node_base
+JS errors ............................................................ none
+```
+
+**The shared payoff is viable**, and the required shape is `location` **+** `substitution_only =
+true` on the target. Probe deleted after the run.
+
+### What changed
+
+- **`references/the-surfaces.md`** — rewritten. Deleted the object test as the placement rule,
+  *"every choice hangs off a named object"*, R2b and its gate-22 block, and R3's
+  derivation-from-objects. **New R2: a room's list is needs + work + people, and nothing else.**
+  **New R3: the walk-in** — router (`trigger.substitutions`) / branch (one canvas,
+  `substitution_only = true`, `[group]` bands on the axis the odds ride) / payoff (routes into the
+  rung that already exists), with the Step 0 engine trap stated in the open, the join that produces
+  the worklist, the per-room floor, and the thin-branch size with its measured comparison. Carries
+  the corpus evidence and the corrected reading of the DoL bedroom. R1/R4/R5/R6 kept. The object
+  test is retained but **scoped to hub choices only**. Sizing is now structural — *needs are a
+  closed list, objects are an open one* — with both prior cap attempts and why each failed.
+- **`references/the-meters.md`** — new section **M8–M10, the body's meters**. M8: a need declares
+  what falls, where it fills, what it costs, and **what it shuts**. M9: a need that shuts nothing is
+  a chore (gate 29). M10: `[player.trait_decay]` is the clock, and decay-vs-spent is a deliberate
+  fork. Needs are per game, never a fixed list.
+- **`references/the-voice.md`** — R1's exemption **rescoped to a choice's `text`, explicitly not a
+  canvas `name`**, with the `back_home:983` / `:1093` pair printed as the leak. Three examples
+  replaced with strings verified (grep, 0 hits) never to appear as a canvas name. Field figures and
+  the full drift table added. Two lints registered.
+- **`references/the-board.md`** — §1's location count now derives from *needs served + work done +
+  people scheduled* rather than the rota alone, with vesper's 12-of-30 dead rooms as the warning.
+  §4 is now `board.needs[]` as a real declaration.
+- **`references/state.md`** — `board.needs[]` schema, `board.locations[].serves` replacing
+  `objects`. The `objects` key stays readable in the five shipped ledgers and **nothing reads it**,
+  the same treatment `dwelling` got in the map pass.
+- **`references/engine.md`** — §22's cross-reference no longer cites R2b/gate 22.
+- **`templates/board.toml`** — a `[[needs]]` block with the five fields and a worked-through
+  comment; the location block asks `serves` and the walk-in question.
+- **`templates/want.md`** — §5 gains *what does her body need here, and what stops when it goes
+  unmet*.
+- **`scripts/gates.py`** — **removed** gate 22, `_room_objects` and `lint_choice_anchoring`.
+  **Added** gate 29 `a need shuts a door` and gate 30 `the walk-in floor`,
+  plus lints `room-list labels` (noun-only share + length vs the field) and `the browse share`.
+  Gate 20's help text no longer points at the deleted rule. The model record now carries `raw` so
+  the checks can see `name`, `substitutions` and `substitution_only`.
+- **`SKILL.md`** — scoreboard index updated; new operating rule: **ask what a tired author would
+  build to satisfy a check, and make sure that is the thing you want** — a check manufactures
+  whatever it can see.
+- **`DOCTRINE_GAPS.md`** — study 5's object finding marked superseded at the head of the file, with
+  the corrected reading; the gate-22 and anchoring-lint rows marked deleted. The sections stay as
+  the record of what was believed and why.
+
+### Verified
+
+Both new gates were validated against all nine games **before** being written, and reproduce those
+numbers exactly:
+
+```
+                    walk-in floor          needs
+back_home           1/5   rooms covered    no board.needs[]
+steam               0/6                    no board.needs[]
+forty_miles         0/5                    no board.needs[]
+seventh_day         0/12                   no board.needs[]
+the_allowance       1/6                    no board.needs[]
+```
+
+The need-reader was checked directly against the merged TOML of four games: `hygiene` is read by a
+condition in **vesper** and in **none** of the_allowance, back_home or seventh_day.
+
+**Scores move, and the totals are not comparable across this pass** — gate 22 was a *passing* gate
+on all five games, so removing it costs a pass while the two new gates add two possible fails:
+
+```
+                before        after
+back_home       12/23         12/25
+steam           15/25         15/27
+forty_miles     23/27         22/28
+seventh_day     25/27         24/28
+the_allowance   26/27         25/28
+```
+
+**No game was touched.** LO's decision: doctrine only, `the_allowance` stays the specimen exactly as
+`seventh_day` did.
+
+### Open
+
+- **Nothing here is proven by a built game.** The first game authored on these rules is the real
+  test, and the honest expectation is that it finds holes — that is how this pass and the map pass
+  both began.
+- The audit of every *other* reference file carrying a worked example is still open; this pass
+  closed the one in `the-surfaces.md` by deleting the reading, not the example.
+
+---
+
+## 2026-08-18 — the map: the borrowed example deleted, the shape made a choice
+
+**Cause: `games/the_allowance`, which shipped at 26/26 gates with a world that is seven rooms of one
+house plus a row of shops.** LO read the location list — nothing else — and said *"I think we have
+done the same mistake we have done in back home."* He was right, and it is measurable: **of the five
+v2 games, the only two whose map starts indoors are back_home and the_allowance.** The other three
+root the world outdoors and read as places.
+
+**And the cause was this skill.** Four of them, all verified:
+
+1. **`the-map.md`'s only worked example WAS back_home's map.** `npc_ray`, `npc_marek`,
+   `the_box_room` — that game's own character ids and its own room, checked against
+   `games/back_home/toml_phases/7_final_game.toml`. back_home never declared a `board.map` at all,
+   so the example was a reconstruction of *what it should have written*: two bugs patched out (no
+   street, no beds), **skeleton kept**. A second copy sat in `state.md`. The Allowance's declared
+   shape — *"one terraced dwelling over two floors + a parade of shops one bus stop away"* — is the
+   template with the nouns swapped.
+2. **The vocabulary presumed a house before any decision was made.** R1 asked whether a stranger
+   could draw this *building*; the required field was `dwelling`. Already wrong for a truck stop and
+   a bathhouse.
+3. **The location-count rule is circular.** `the-board.md` §1: *"do not pick, derive it from where
+   the cast goes."* Premise → cast → map; a family of five who live in one house returns a house
+   every time. And `templates/want.md`, the first document written for any game, asked **nothing
+   about the world at all**.
+4. **The one rule that would have caught it is not a gate, and it signed itself off.** seventh_day:
+   *"SIGNED OFF by LO in chat, board phase, 2026-08-16."* the_allowance: *"Signed off in the board
+   phase."* No name, no date. The map signed off its own map.
+
+**LO's decisions:** delete the example rather than replace it — one validated example recreates the
+same failure with a nicer floor plan. Teach v1's naming contract **for new games, grandfathering the
+five shipped ones**. Make the shape a **declared field with a gate behind it**, not more prose.
+
+- **`references/the-map.md` — rewritten.**
+  - The worked example is **gone**, replaced by a fields-only schema whose placeholders cannot be
+    mistaken for a world, plus a note saying why there will not be another one.
+  - **New R0 · Pick the SHAPE before you count anything** — five archetypes adapted from
+    `author-game/references/location-design.md` §2, where they were measured against five named
+    shipped games. Its headline, which v2 never carried: *"the genre floor is a multi-zone world,
+    NOT a single building — do not default to a house."* Plus v1's two sizing axes (scale and
+    aliveness, a budget fork not a quality dial). Carries its own n=1 warning: five is what was
+    measured, not what exists; add a sixth **with evidence** rather than forcing a fit.
+  - **R3 rewritten — the exterior is the GROUND, not a room off the kitchen.** With the ascii of
+    both shapes and the measured failure. This is the rule the_allowance breaks.
+  - **New R4 · names are navigation** — v1's contract (public = bare noun, private = possessive,
+    hierarchy rides the page not the label), **explicitly grandfathering the five shipped games**,
+    plus the readability test that actually failed: `The Parade` (unresolvable) and `The Box Room` —
+    which is `the-voice.md` R1's *own worked example of a bad name*.
+  - `dwelling` → `home_base`; *building* → *place*; `r1_signoff` must record **who** and **when**.
+- **`references/state.md`** — same example removed, `archetype` / `home_base` / `r1_signoff`
+  documented, `exterior` prose de-housed with the root requirement.
+- **`templates/board.toml`** — the map block now asks the shape FIRST, and names the circularity it
+  breaks. **`templates/want.md`** — new **§5 The world**, placed before the cast section because the
+  cast is derived from the world and not the reverse.
+- **`scripts/gates.py` — new gate 28, "the map is a place."** Two tests, because a declaration alone
+  is satisfied by typing a word: (1) `board.map.archetype` is one of the five; (2) **the declared
+  exterior is a root, not a leaf off an interior location** — mechanical, off `entry_from`, and
+  unfalsifiable in the ledger. Also: the gate-12 help string still named the retired `dwelling` key.
+- **`SKILL.md`** — gate 28 indexed, and the operating rule this whole pass is about:
+  **an example outranks every rule beside it, so it goes in last — after it is validated, or not at
+  all.** A rule is read; an example is copied. If one is ever promoted: **one per option or none.**
+
+**Verified.** Gate 28 run on all five games. Its mechanical half, isolated:
+
+```
+back_home      FAIL — no board.map
+the_allowance  FAIL — leaf off the_kitchen
+steam          pass — exterior is the ground
+forty_miles    pass — exterior is the ground
+seventh_day    pass — exterior is the ground
+```
+
+It fails exactly the two games LO named by eye and passes the three that read as places, with no
+invented threshold. The Allowance's failure text names both locations: *"the exterior 'the_parade'
+HANGS OFF 'the_kitchen' (The Kitchen) — it is a leaf, not the ground."*
+
+⚠️ **All five games now fail gate 28 on the declaration half**, because none of them has an
+`archetype` field. Expected, same shape as the 2026-08-17 pass, and the denominators move: totals
+are now out of 27. Nothing was patched — `the_allowance` ships house-shaped with a red gate, as
+`seventh_day` shipped as the specimen for the last pass.
+
+⚠️ **Open, and it is bigger than the map: every other reference file carrying a worked example has
+the same exposure.** That audit is not in this pass.
+
+## 2026-08-17 — the price of the climb, and four rules carried over from v1
+
+**Cause: `games/seventh_day`, authored 2026-08-16 and reviewed the same day.** It scored
+**22/24** with the best prose in the repo and a correctly-shaped explicit ladder — every
+penetrative scene behind a gate, tier-0 content solo. Five things were wrong with it and **none
+was the author disobeying this skill.** Each was a place the skill said nothing, or said
+something that granted an exemption. LO's call: **fix the skill only.** `seventh_day` is
+untouched and is now the regression specimen.
+
+The measurement that started it, live in the built game under headless Chromium:
+
+```
+12 clicks of one choice — "Read the fourth rule again."
+cover 4 → 16 · energy 100 → 100 · money 2 → 2 · Monday 05:57 → 08:33
+```
+
+`+1 cover · 10 min · no cost · no cap · no daily limit · repeatable forever.`
+
+- **⚠️ THE SKILL HAD NO DOCUMENT ABOUT METERS AT ALL.** Eleven reference files, none about
+  traits, pacing or throttles; the word `cap` appeared in zero of them. The incumbent
+  `author-game` skill has solved this for years — `trait-design.md` "The throttle menu",
+  `rts-design-philosophy.md` P8, `trait-catalog.md` §4–§5 — and v2, built self-contained,
+  never carried any of it over.
+
+  **New `references/the-meters.md`**, adapted into v2's vocabulary rather than copied: M1 a
+  meter that gates content must cost something to raise · M2 progress accrues over in-game
+  **days** · M3 the four-lever throttle menu and why none works alone · M4 the recipe (spacing
+  + at least one hard throttle + the rung pays visibly) · M5 **how to throttle a TRIGGERLESS
+  rung**, which is what nearly every v2 rung is · M6 `cap` is a value ceiling, not a rate limit
+  · M7 the sidebar doubling trap. Carries the measured field table for all five games.
+
+- **⚠️ `the-economy.md` R5 CARRIED AN EXEMPTION THAT SWALLOWED THE ARCHITECTURE.** It read: *"a
+  triggerless rung reached through a gated hub choice is held to a weaker standard — it is not
+  free, only farmable."* **Every rung in a v2 game is a triggerless rung behind a hub choice.**
+  Struck. Measured instance: a rung paying £2 per 25 min, uncapped, behind `standing >= 35`,
+  against a £20 weekly obligation — gate 18 printed `4 gated rungs are uncapped too` and passed,
+  exactly as instructed. R5 rewritten with the tools that actually work on a triggerless rung
+  (`costs`, or a `_today` flag cleared in `[engine.daily_tick]`); **new R6** states that the same
+  test applies to any trait a condition reads, not only to currency.
+
+- **⚠️ `the-surfaces.md` R6's LINT COUNTED THE PRACTICE R6 REJECTS.** It reported *"N/N standing
+  menus never change their prose"* — a conditional-**opener** count — while R6's own text says
+  the reference game's identity sentence is byte-identical on all six visits, and
+  `author-game/lanes.md:167` calls tiering an opener *"a known failure."* Its worst-ever score,
+  `24/24 frozen`, was reported against openers that were **correct**. R6 now names its four
+  mechanisms as a per-location checklist, records the field figures for mechanism 4
+  (vesper 14 random events, forty_miles 8, the other three **0**), sets the floor *every location
+  carries at least one*, and folds in v1's permitted exception — banding a base node on a
+  **recoverable** state is a read-out, not a tier.
+
+- **`scripts/gates.py` — two new gates, two rewrites, one blind spot closed.** New shared
+  helpers `_routes` / `_is_free` / `_free_climb` resolve brakes **per route into a canvas**,
+  which is where the brake actually lives in this architecture.
+  - **New gate 26 · "the climb is paid for."** Walks every trait any condition reads — player
+    traits *and* per-NPC relation, so it cannot be narrowed by declaring less — and simulates the
+    cheapest **free** climb to the highest gate, from the declared starting value, one click at a
+    time. Reports clicks and in-game minutes whether it passes or fails, because a `costs` of 1
+    energy on a 10-minute rung satisfies any boolean version of this check and changes nothing.
+    On `seventh_day`: `cover 0 → gate at 55, entirely for FREE — 45 clicks, 9h10m`.
+  - **New gate 27 · "a banded meter is not also a number."** Deterministic, no invented
+    threshold. Fails **4/4** on `seventh_day` *and* **4/4** on `forty_miles`, which had shipped
+    the same defect through a full review nobody caught.
+  - **Gate 18 rewritten.** It read `trigger.costs`, which is always empty for a triggerless rung,
+    so every priced rung in every game read as unpriced — then it excused those rungs on the
+    struck footnote. Two bugs pointing the same way. Now fails any uncapped income rung, gated or
+    not: forty_miles 8, steam 20, back_home 10, seventh_day 2.
+  - **Gate 9 given a denominator.** `locked > 0` stays the verdict — inventing a ratio ceiling is
+    what demoted the-surfaces R5 — but the headline now prints gated-vs-total, which is how a game
+    running 78% open on turn one used to pass this silently.
+  - **Gate 10's hidden-trait blind spot closed**, as `games/seventh_day/ENGINE_NOTES.md` §3
+    diagnosed correctly. Traits marked `hidden = true` are excluded from the descent test: hiding
+    a trait also removes it from the sidebar, so it is not a meter the player can be lied to by.
+    This keeps the anti-narrowing property — the exclusion is a declaration about *rendering*,
+    not about which traits get judged.
+
+- **`engine.md` — four new sections and ten corrected citations.** §27 `costs` on a choice
+  (engine-enforced affordability, and the 0–100 hard clamp on the deduction the author cannot
+  turn off) · §28 `[engine.daily_tick]` and why it is the only clean day-cap for a triggerless
+  rung · §29 `cap` as a value ceiling, read out of `v2.py:5763-5769` — `Math.max(current, capNum)`
+  means it never pulls a value down · §30 the banded-item / auto-dump collision and the vanishing
+  card. **And fourteen `v2.py:NNNN` citations were drifted and are now fixed** (§7, §21, §21b ×4, §22, §23 ×2, §26 ×2)
+  — the failure `ENGINE_NOTES.md` §4 measured at two of two; it was worse than that.
+
+- **`SKILL.md`** — `the-meters.md` registered in the dispatch table and the world-files list;
+  gates 26 and 27 added to the scoreboard index; new operating rule: **a check that measures
+  EXISTENCE has not measured anything.**
+
+**Verified:** `gates.py` run on all four v2 games. Every new failure was traced back to the TOML
+by hand before being accepted — `forty_miles`' four unhidden banded meters and eight free income
+rungs were confirmed in its source, not inferred. Route classification asserted against all 17
+correctly-braked rungs across two games: **zero misclassified as free.** Gate 26's arithmetic
+hand-checked against the live probe (cover +1/click, `relation` 20 in 5 clicks of `rung_job_know`).
+Every `v2.py` line cited in this pass was opened and read.
+
+**Scores after:** seventh_day 22/26 · forty_miles 23/26 · steam 15/24 · back_home 12/22.
+
+⚠️ **Left open, deliberately:** the media gates still report 100% coverage for a game with 42
+declared pools and **zero files on disk**. Same denominator disease, last open R7 item from
+study 6, and a separate pass with filesystem work in it. Not fixed here; noted so it is not
+mistaken for fixed.
+
+⚠️ **A number LO reads changed meaning.** `lint · screen shape` no longer prints
+*"N/N standing menus never change their prose."* It prints *"N/M locations render identically on
+every visit"* and *"N/M carry a random event"* instead. Different population, different question.
+
+---
+
 ## 2026-08-16 (later still — the fix that measured itself wrong)
 
 - **⚠️ THE MENU FIX IN THE PASS BELOW DID NOT WORK, AND THE LEDGER SAID IT DID.** It gated 57

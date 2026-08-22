@@ -7,29 +7,86 @@ validates almost none of it.
 > Measured failure this exists to prevent: a game shipped with every gate green and a world where
 > the corner shop was one step from the sofa, three of its four men had no bedroom, and the prose
 > named a hall six times that the map did not contain. Every location in it individually had a
-> stated job, a scheduled body, and something repeatable to do. **The set still wasn't a building.**
+> stated job, a scheduled body, and something repeatable to do. **The set still wasn't a place.**
+
+> ⚠️ **AND THEN IT HAPPENED AGAIN, BECAUSE OF THIS FILE.** Two games later a second world shipped
+> at **26/26 gates** that was seven rooms of one house plus a row of shops — and it was recognised
+> from the location list alone, by eye, as *"the same mistake we made in back home."* It was. Of the
+> five v2 games, **the only two whose map starts indoors are those two.** The three that read as
+> places all root the world outdoors.
+>
+> The cause was on this page. The one worked example this file used to carry was **the first
+> game's own map** — its character ids, its box room — reconstructed with its two known bugs
+> patched out and its **skeleton left intact**. Every map since inherited that skeleton.
+> **An example outranks every rule beside it: a rule is read, an example is copied.** So this file
+> now teaches a *menu* you must choose from and carries no picture you can copy. See
+> `SKILL.md`, operating rules.
 
 ---
 
-## The four rules
+## R0 · Pick the SHAPE before you count anything
+
+**The genre floor is a multi-zone world — zone → venue → room — not a single building.** Choose the
+shape from the premise. **Do not default to a house.**
+
+That sentence is carried over from `author-game/references/location-design.md` §2, where it was
+measured against five named shipped games. v2 was built without it and produced two house-shaped
+worlds in five attempts.
+
+| `archetype` | the shape | fits |
+|---|---|---|
+| **`nested_zones`** *(the default to beat)* | district → venue → interior room; each hub lists its children | most life-sims: a town or campus **plus** a home |
+| **`two_hub`** | two strong hubs — home and work — fanning to rooms, joined by a commute | a premise anchored to two places |
+| **`map_hotspots`** | a drawn map with clickable districts and fast-travel | a large, replay-heavy world, 10+ zones |
+| **`street_mesh`** | named streets, each listing its neighbours and its venues | a city that should feel real without a drawn map |
+| **`time_slot`** *(the anti-map)* | no geography at all — a fixed Morning → Work → Evening chain | heavily scripted content where a map is friction |
+
+**Record the pick in `board.map.archetype`. Gate 28 fails a board that has not chosen.**
+
+> ⚠️ **This list is five entries long because five is what was measured, not because five is what
+> exists.** If the premise genuinely fits none of them, add a sixth **with its evidence** — a named
+> game that runs it. Forcing a premise into the nearest of five is the same mistake as copying one
+> example, only slower.
+
+**Then size it on two axes, and they are independent:**
+
+- **Scale** — how many zones. Match it to the cast; a small cast does not need a city.
+- **Aliveness** — how lived-in. A *tight slice* holds only what the content needs; a *living world*
+  carries ambient traffic, routines and events the player did not trigger. This is a
+  **content-budget fork, not a quality dial** — every ambient zone is content you have to fund.
+  A tight slice is legitimate **when chosen out loud**. The failure is drifting into one because
+  nobody asked. For a sandbox, lean toward alive: **a small dense world beats a wide thin one.**
+
+⚠️ **The count is derived, but only INSIDE the shape you chose.** `the-board.md` §1 says to derive
+the location count from where your cast's rosters go. That is right, and on its own it is circular:
+the premise fixes the cast, the cast fixes the map, and a family of five who live in one house
+returns a house every time. **The shape is the input that breaks the circle**, so it is picked
+first — before the cast exists, in the Want.
+
+---
+
+## The rules
 
 ### R1 · A map is a place, not a list of rooms
 
 The test is not *"does every room have a job"* — a room-by-room checklist passes a world with no
 outside and no beds. The test is:
 
-> **Could someone who has never seen the game draw this building from the graph?**
+> **Could someone who has never seen the game draw this place from the graph?**
 
 Write the graph down in the board phase as something a person could walk, and check it against that
 question before declaring a single location.
 
+⚠️ **Answer R0 first.** Before this question can mean anything you have to have chosen a *shape*.
+R1 asks whether the world you picked hangs together. It cannot tell you that you never picked one.
+
 ### R2 · If someone lives there, they have a room
 
 Every character the board declares gets a **`home`** recorded in `v2_state.json`. If a character
-sleeps off-screen — a neighbour, a lodger on nights who is simply gone — that is declared too,
+sleeps off-screen — a neighbour, a tenant on nights who is simply gone — that is declared too,
 explicitly, as `"offscreen"`.
 
-This cannot be inferred and must not be guessed. A lodger working nights legitimately has no night
+This cannot be inferred and must not be guessed. A tenant working nights legitimately has no night
 schedule row; a shopkeeper legitimately has no bed in the player's house. Only a declaration
 separates *lives elsewhere* from *was never given a room*. Gate 12.
 
@@ -38,18 +95,80 @@ topping out a tier — *her father's room*, *the office*, *upstairs* — that lo
 else in the scoreboard can see this: the meter-ceiling gate checks that authored **gates** reach a
 meter's top band, never that the Want's **prose promises** were built.
 
-### R3 · If she travels, there is something to travel through
+### R3 · The exterior is the GROUND, not a room off the kitchen
 
-Any destination the fiction places away from the dwelling requires a connecting **exterior**
+Any destination the fiction places away from her home base requires a connecting **exterior**
 location. This is not decoration:
 
 - it is where the ascent meters get a consequence surface **outside** the household, and
 - it is the only renewable source of new characters a domestic premise has. A world with no
   exterior can only ever recycle its interior.
 
-Declare the exterior in `board.map.exterior` and the routes across it in `board.map.bridges`.
+**And it is not enough for the exterior to exist. It has to be the thing everything else sits on.**
 
-### R4 · The graph owes the prose
+```
+✅  the yard  ──┬── the house ── the rooms          the world contains the home
+                ├── the barn
+                └── the market
+
+❌  the kitchen ─┬── the rooms                       the home contains a bit of world
+                 └── the shops
+```
+
+The measured failure: a game declared an exterior, put a 25-minute travel cost on it, passed every
+gate — and its exterior was **a leaf hanging off the kitchen**. You stepped out of a kitchen straight
+into a row of shops. No front door, no street, no ground. The world did not contain the house; the
+house contained a scrap of world, and it read as a floor plan for exactly that reason.
+
+So: **the declared `exterior` must be a root** — no `entry_from` — with the home base among the
+things that hang off it. Where the fiction wants two separate grounds (a home and a town that are
+genuinely apart), make them **two roots joined by a travel canvas**, not one nested inside the other.
+
+**Gate 28 checks this mechanically**, off `entry_from`. It is the half of R1 a parser can actually
+see. Declare the exterior in `board.map.exterior` and the routes across it in `board.map.bridges`.
+
+### R4 · Names are navigation, and a name is not house style's business
+
+A location name is a **button**. `the-voice.md` R1 owns the principle — *a name a player cannot
+resolve is a navigation bug wearing register's clothes* — and this is where it bites hardest,
+because a room name is read on every single turn.
+
+**The contract, carried from `author-game/references/location-design.md` §3, measured across the
+field's strongest games:**
+
+| kind | form | example |
+|---|---|---|
+| public venue | **bare plain noun**, no article | `Market` · `Gym` · `Bar` · `Police Station` |
+| private / owned interior | **possessive** | `Your Room` · `Joss's Room` · `Your Parents' Room` |
+| hierarchy | rides the **page you are on**, never the label | `Bar`, not `Hotel — Bar` |
+| flavour and branding | lives in the **description**, never the button | label `The Bar`; the prose calls it the Underworld Lounge |
+
+**Consistency beats flattening.** An articled house style is a legitimate register, not a bug — the
+only real defect is being inconsistent, some children prefixed and some bare.
+
+> **The five games shipped before 2026-08-18 are grandfathered.** back_home, steam, forty_miles,
+> seventh_day and the_allowance all run the articled style throughout and it is applied evenly. Do
+> not rename them. This contract governs games authored from here.
+
+⚠️ **But the readability test is not grandfathered, and it is the one that failed.** Two names
+shipped that a player cannot resolve: **`The Parade`** — British, dated, and read by most people as
+a procession rather than a row of shops — and **`The Box Room`**, which is
+`the-voice.md` R1's own worked example of a bad name, *"The Box Room becomes The Tenant's Room and
+says who and why in two words."* The game used the rule's own counter-example as a location name.
+*(That example said **Lodger's** until 2026-08-22 — a word no field game uses, so the prescribed
+cure carried the same defect as the disease. Two games copied it.)*
+Say it out loud to someone who has not played: if they cannot tell you what is through the door,
+it is a bad button no matter whose house style it matches.
+
+**And a button cannot carry the explanation.** Where the name alone will not tell a stranger what
+the place is FOR, the place needs a **first visit** — one non-repeatable canvas that says what kind
+of place this is, once, the first time she walks in. `references/the-first-hour.md` F9 owns that
+rule and the gate that checks it. Measured failure: a game declared its anchor at 27% of the whole
+word budget, gave first-visit canvases to five other rooms, and never once said what kind of
+business the anchor was. Its description opened *"…and under them forty machines"* — forty machines
+of what — and the first thing the human reader asked was what the place is.
+
+### R5 · The graph owes the prose
 
 Nothing the writing treats as a place may be missing from the map. When a paragraph says *hall*,
 either the hall exists or the paragraph is wrong. Both are cheap on the day and expensive twenty
@@ -78,20 +197,38 @@ a schedule grid at all. Put the cost on **bridges between zones**, never on ever
 
 ## What the board phase records
 
+**The fields, and deliberately no world.**
+
 ```jsonc
 "board": {
   "map": {
-    "shape":    "one dwelling + a street + one workplace",
-    "dwelling": "the_house",
-    "exterior": "the_street",
-    "homes":    { "npc_ray": "rays_room", "npc_marek": "the_box_room", "npc_hannah": "offscreen" },
-    "bridges":  [ { "from": "the_street", "to": "the_shop", "costs": { "time": 20 } } ]
+    "archetype":  "<nested_zones | two_hub | map_hotspots | street_mesh | time_slot>",
+    "shape":      "<one sentence a stranger could draw from>",
+    "home_base":  "<location_id — where she sleeps>",
+    "exterior":   "<location_id — the ground everything else sits on. MUST be a root.>",
+    "homes":      { "<npc_id>": "<location_id | offscreen>" },
+    "bridges":    [ { "from": "<location_id>", "to": "<location_id>", "costs": { "time": 0 } } ],
+    "r1_signoff": "<WHO signed it and WHEN, then what they saw. 'the author' is not a name.>"
   }
 }
 ```
 
+> ⚠️ **There is no example world here and there will not be one.** This block used to carry a filled-in
+> map, and that map was the first game's own — its `npc_` ids, its box room — with its two known bugs
+> patched out. Three games copied its shape. **An example outranks every rule beside it**, so the
+> shape is taught as R0's menu, which you must choose from, and the schema is shown as fields, which
+> you cannot copy a world out of.
+>
+> If a validated map is ever promoted to an example here, it is **one per archetype or none** — a
+> single good example recreates the same failure with a nicer floor plan.
+
 Declared once, before content. The gates then check the built game against **its own declaration**
 rather than against a guess.
+
+**`home_base` was called `dwelling` until 2026-08-18.** The word presumed a house before any
+decision had been made, and it was already wrong for two shipped games — a truck stop and a
+bathhouse. The five existing ledgers still carry the old key; nothing reads it (`gates.py` reads
+only `board.map.homes`), so they are stale, not broken.
 
 ---
 
@@ -101,8 +238,23 @@ rather than against a guess.
 |---|---|
 | **Gate 11 · world reachable** | every location reachable on foot from the start, unless `offscreen` or deliberately sealed |
 | **Gate 12 · residents have homes** | every declared character has a `home` that is a real location |
-| **Lint · the prose names places the map does not have** | building-part nouns used three or more times with no matching location |
+| **Gate 28 · the map is a place** | `board.map.archetype` is one of R0's five, **and** the declared `exterior` is a root rather than a leaf off an interior room (R3) |
+| **Lint · the prose names places the map does not have** | place nouns used three or more times with no matching location |
 
-**R1 is deliberately not a gate.** Whether a map reads as a coherent place is not mechanically
-decidable, and a check that measures a proxy for it is exactly how a world with no street scored
-full marks. It stays a human sign-off in the board phase. Sign it off out loud, in the ledger.
+**R1 as a whole is still not a gate.** Whether a world *reads* as a coherent place is not
+mechanically decidable, and a check that measures a proxy for it is exactly how a world with no
+street scored full marks.
+
+**What changed on 2026-08-18 is that two pieces of it turned out to be decidable after all**, and
+gate 28 takes both: *did you choose a shape* (a declaration), and *is the outside actually the
+outside* (`entry_from`, which no ledger can talk its way out of). What is left for the human is the
+part that genuinely needs eyes.
+
+> ⚠️ **And the human sign-off failed the first time it mattered.** One game's ledger reads
+> *"SIGNED OFF by LO in chat, board phase, 2026-08-16"* — a person, a place, a date. The next reads
+> *"Signed off in the board phase."* No name. No date. **The map signed off its own map**, and that
+> is the game that shipped seven rooms of a house at 26/26.
+>
+> So `r1_signoff` records **who** and **when**. A sign-off by the author of the thing being signed
+> off is not a sign-off, and a gate cannot tell the difference — which is exactly why it is written
+> down here instead.

@@ -61,7 +61,7 @@ reference game says *rent* 130 times.
 
 Three things make it work, and they are cheap:
 
-- **A date.** It converts *"you could work"* into *"Monday, £120, or else."*
+- **A date.** It converts *"you could work"* into *"Monday, $120, or else."*
 - **A face.** Someone collects. The pressure becomes social as well as arithmetic.
 - **Armed after income exists.** Pressure before she has a way to earn is a scripted loss, not a
   choice.
@@ -121,20 +121,166 @@ every price is a hardcoded constant has an economy that cannot respond to anythi
 
 ---
 
-## And one rule from failure, not from the field
+## And two rules from failure, not from the field
 
-### R5 · No free, uncapped income
+### R5 · No free, uncapped income — and "behind a gate" is not a cap
 
-A **standing** surface — one the player can simply click — that grants currency with neither a
-per-day cap nor a `costs` block is a money printer, and **every other rule here is void beside it**.
-One such loop makes rent irrelevant, which makes the trade tier irrelevant, which makes the arc
-gated behind it unreachable by design.
+A surface the player can simply click that grants currency with neither a per-day cap nor a `costs`
+block is a money printer, and **every other rule here is void beside it**. One such loop makes rent
+irrelevant, which makes the trade tier irrelevant, which makes the arc gated behind it unreachable
+by design.
 
-Give an income surface a `max_triggers_per_day`, a real `costs` block, or both.
+> ⚠️ **This rule used to carry an exemption and the exemption swallowed the whole architecture.**
+> It read: *"a triggerless rung reached through a gated hub choice is held to a weaker standard — it
+> is not free, only farmable."* **Every rung in a v2 game is a triggerless rung behind a hub
+> choice.** Measured: a game shipped a rung paying £2 per 25 minutes, uncapped and repeatable,
+> behind `standing >= 35` — against a £20 weekly obligation. Gate 18 saw it, printed
+> `4 gated rungs are uncapped too`, and passed, exactly as instructed. Once the tier landed the
+> economy was off. **A gate in front of a printer delays the printer.** Struck 2026-08-16; gate 18
+> now fails on any uncapped income rung, gated or not.
 
-*A triggerless rung reached through a gated hub choice is held to a weaker standard — it is not
-free, only farmable. Gate 18 reports those and fails only the standing ones; R2 is what judges
-whether the game simply has too many ways to earn.*
+**The tools, and which ones actually work here.** `max_triggers_per_day` is read off the *trigger*
+(`engine.md` §27–§28) — a triggerless rung has none, so on the rung this architecture is built from
+it does nothing. What works:
+
+| tool | applies to |
+|---|---|
+| `costs` on the hub choice | any rung. Engine-enforced — an unaffordable choice is not offered (`engine.md` §27) |
+| a `_today` flag cleared in `[engine.daily_tick]` | any rung (`engine.md` §28) — use a **flag**, not a counter trait |
+| `max_triggers_per_day` | only a canvas that has a `[canvases.trigger]` block |
+
+The full menu, and why one brake alone is brittle, is `references/the-meters.md` M3–M5.
+
+### R6 · The same test applies to any trait a condition reads
+
+This file protects the currency. In most v2 games **the currency is not what buys the content** —
+the ascent tiers are, and per-NPC relation is. A game can obey every rule above and still hand its
+entire ladder away, because nothing here ever priced a meter.
+
+An income loop and an ascent rung are the same defect wearing different clothes: *a repeatable
+surface that grants a number some gate reads, with no brake on how often it can be clicked.*
+
+Judged by **gate 26** and owned by `references/the-meters.md` M1. It is named here so that a reader
+who arrives at R5 by way of a money bug does not leave thinking money was the whole question.
+
+---
+
+## And one rule about what the player reads
+
+### R7 · One currency, declared once, and the engine set to it
+
+> **Measured failure, and it is not a typo.** A shipped game wrote the price of a single click
+> **six different ways**, and half of them the author never typed
+> (`games/off_season/toml_phases/3_activities.toml:83-108`):
+>
+> ```
+> room-list button   Feed the meter (GBP 3)                       author
+> the choice         Put three pounds in (GBP 3, 5 min).          author
+> the paragraph      Six fifties … Three pounds gets you …        author
+> when she is short  Requires 3 Money (you have 1)                engine  v2.py:4680
+> the sidebar        money: 12 / 100                              engine  v2.py:16215 · :16241
+> rent day           $90                                          engine  v2.py:1190
+> ```
+>
+> The author had declared `[[traits.labels]] key = "money", label = "Change bag"` and expected the
+> sidebar to use it. It does not: `trait_bar` reads `_item.label || trait_key` and never consults
+> the trait labels at all (`engine.md` §33.3).
+
+**The field's mechanism is one printer.** Measured across the 25-game corpus, the games with a real
+economy do not type a symbol next to a number. They store one integer and render it in one place:
+
+```
+degrees-of-lewdity   money held in PENNIES; <<printmoney>> -> formatMoney()
+corpo-life           formatUSD($money) — one Intl.NumberFormat call
+the-hellfire-club    <<printmoney>> — guineas / shillings / pence, divisors 252 and 12
+new-life-project     StoryCaption prints  £$money
+```
+
+Three unrelated economies, one architecture. The symbol is applied at a single site, so it cannot
+drift. That is why the field's consistency is high and ours is not:
+
+```
+                                        FIELD            OURS
+one notation, share of money refs        92% median       82% median   (field min 56%)
+priced link labels using the SYMBOL      94.0%            see below
+       …using a spelled-out unit          5.2%
+       …using a currency CODE             0.8%   (5 labels, all corpo-life)
+a money WORD carrying an EXACT amount     20%             51%
+```
+
+**We have no printer**, so every price is retyped by hand and the engine adds notations of its own.
+`[settings.rent] currency_symbol` is the closest thing to one, and of the sixteen sites where the
+generator prints a money figure it governs **four — all on the rent-day screen**. Nine hardcode `$`
+and three print no notation at all (`engine.md` §33 carries the full census). A shipped game proves it: `forty_miles` declares
+`currency_symbol = "£"` with the author's own comment *"the pages hardcoded `$` before this key
+existed"* — and its released build still ships
+`You have: <strong>$<<print $player.core_traits.money>></strong>` on `RentDay_Short`
+(`v2.py:16000`), the screen the player sees **when she cannot pay**.
+
+#### The rule, in four parts
+
+**1 · Declare it.** `board.economy.symbol` in the ledger, beside the currency trait. This works
+whether or not rent is enabled, and it is the same declare-then-check pattern this file already
+uses for `board.economy.currency` — the gates infer when nothing is declared, and an inference is a
+guess.
+
+**2 · Set the engine to it.** If `[settings.rent]` is on, `currency_symbol` must equal the declared
+symbol. Left out, it defaults to `"$"` (`v2.py:1190`) and the rent card contradicts every button in
+the game. Eight of our ten built games enable rent; two declare a symbol.
+
+**3 · A price on a button is a figure in that notation.**
+
+```
+✅  Feed the meter ($3).            ✅  Buy it (£25).            ✅  Add 1000 caps
+❌  Feed the meter (GBP 3).         ❌  Put three pounds in (GBP 3, 5 min).
+```
+
+Gate 21 already forces the *amount* onto the label. This adds only that the *notation* beside it be
+the game's one notation.
+
+**4 · Spelling it out belongs in a mouth, not on a button.** *"Three hundred, Friday, and don't make
+me ask"* is right and the field agrees — 80% of its money words carry no exact figure at all. What
+is wrong is spelling a price on a **button**, because a button is interface and interface has to
+match what the engine prints two screens later. v1 found this exact trap and scoped it to one line:
+`author-game/references/prose-truth.md` §2 — *"an authored override is a literal string"* — a game
+that sets `amount = 125` and writes *"Hundred and twenty-five"* is correct today and contradicts its
+own UI the day it re-prices. **The same debt is carried by every hand-typed price in the game, not
+just the rent greeting.**
+
+#### The house default is `$`, and this file calls it *the currency*
+
+Not taste. Two measurements:
+
+- **`$` is the only symbol the engine renders consistently.** Nine of its money print sites
+  hardcode it (`engine.md` §33.1). Declare anything else and the shop, the bank, the job board and the
+  rent-short screen still say `$`.
+- **The field agrees anyway** — of 16 corpus games with a real economy, 10 use `$`, 2 `£`, 1 a
+  currency code, 3 an invented unit.
+
+Name no real-world currency in the prose. A game set in a specific place still has a landlord, a
+price and a wage; it does not need the word *pounds* to have them.
+
+> ⚠️ **The symbol is a PREFIX, and the engine has no suffix form.** All four rent prints concatenate
+> symbol-then-number (`"Pay " + _cur + _rent`, `v2.py:15929`). An invented unit that reads as a
+> suffix — `10 coin`, `1000 caps` — is legitimate and the field ships it, but it cannot go through
+> `currency_symbol`. **If rent is enabled, the notation has to be a prefix.**
+
+> ⚠️ **The ledger is player-invisible and it drifts anyway.** `off_season`'s `board.economy` records
+> `GBP 90`, `GBP 3`, `GBP 25`; `forty_miles`' records `GBP 200` while its settings declare `£`. A
+> design record that disagrees with the game is how a re-price goes wrong later. Write the declared
+> symbol there too.
+
+#### Why one is a gate and two are lints
+
+**Gated:** *does the game use more than one currency?* Collect every notation on a canvas name, a
+choice text and the engine's own symbol; map a symbol to its unit (`$`≡dollars, `£`≡pounds) so a
+game is not failed for using both forms of one currency; fail on two units. Pure string work, no
+judgement.
+
+**Not gated:** *is a price spelled out rather than figured?* `zaras-school-life` writes every price
+in words across 905k words and is perfectly consistent; `apocalyptic-world` ships `Add 1000 caps`;
+`vesper` prices ten labels `10 coin` and never varies. A rate gate would fail all three for obeying
+the rule. Both rate checks print and never move the tally.
 
 ---
 
@@ -144,6 +290,7 @@ whether the game simply has too many ways to earn.*
 "board": {
   "economy": {
     "currency":   "money",
+    "symbol":     "$",
     "obligation": "rent — Monday, from the landlord, in person",
     "obligation_amount": 120,
     "sinks":      ["rent", "the boiler", "the bus fare", "her phone"]
@@ -151,7 +298,8 @@ whether the game simply has too many ways to earn.*
 }
 ```
 
-Declaring the currency is strictly better than letting the gates infer it from
+`symbol` is the notation every button, every paragraph and `[settings.rent] currency_symbol` must
+agree with (R7). Declaring the currency is strictly better than letting the gates infer it from
 `player.core_traits` — the headline says which was used, and an inferred currency on a game with two
 of them will pick the wrong one.
 
@@ -166,12 +314,16 @@ for in this game* asked at the point where it is still cheap to answer.
 |---|---|
 | **Gate 16 · money gates something** | ≥1 condition reads the currency, **or** ≥1 choice prices itself in it |
 | **Gate 17 · sinks >= sources** | at least as many ways to spend as to earn |
-| **Gate 18 · no free uncapped income** | no standing surface grants currency without a cap or a cost |
+| **Gate 18 · no free uncapped income** | **no** surface grants currency without a cap or a cost — gated rungs included (R5, reworded 2026-08-16) |
 | **Gate 21 · a price is on its label** | every choice that spends currency names the amount in its text |
 | **Gate 24 · the obligation is charged** | if `board.economy.obligation` is declared it must carry an `obligation_amount`, and something must charge at least that much — either an authored charge (a `costs` entry, or `op = "add"` with a negative value) or `[settings.rent]` |
 | **Gate 25 · effects use a live op** | no effect uses an `op` the engine discards — the economy's deductions in particular |
+| **Gate 26 · the climb is paid for** | R6 — every trait a condition reads has a brake on the rungs that raise it (`the-meters.md` M1) |
+| **Gate · the price is in one currency** | R7 — every notation on a button, plus the engine's own `currency_symbol`, resolves to ONE currency. A symbol and its spelled-out unit count as the same one |
+| **Lint · the currency in the prose** | the game's dominant-notation share against the field's 92% median, and its exact-amount-in-words rate against the field's 20% |
+| **Lint · the price is spelled out** | the form of every priced label — symbol / word / code — against the field's 94 / 5 / 1 |
 
-**Whether the pressure is actually felt is deliberately not a gate.** Whether £120 against a £42 day
+**Whether the pressure is actually felt is deliberately not a gate.** Whether $120 against a $42 day
 *squeezes* is a play question. These five establish that a squeeze is possible; only a playthrough
 establishes that it happens.
 
@@ -180,7 +332,8 @@ establishes that it happens.
 ## ⚠️ Two ways these gates read the wrong thing — both found 2026-08-14, both fixed
 
 **A `costs` block is a gate.** The engine refuses a choice the player cannot afford
-(`v2.py:12556`), but gate 16 was built from *conditions* only. A game that prices its choices
+(`v2.py:4496` filters it out, `:4625` is the check — `engine.md` §27), but gate 16 was built from
+*conditions* only. A game that prices its choices
 instead of condition-gating them therefore read as **"nothing in the game reads the currency"** —
 which is how a game with seven priced choices scored zero. Gate 16 now counts either channel.
 

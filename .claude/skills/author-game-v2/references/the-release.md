@@ -123,7 +123,7 @@ Posting volume predicts revenue (ρ = +0.58). Release *speed* does not (ρ = −
 v0.1 builds the Board instead of adding to it.
 
 - **As many locations as your cast and your loop require, shaped like the reference seed.**
-  Derive the count — the places your declared rotas visit, plus what the daily loop needs (sleep,
+  Derive the count — the places your declared rosters visit, plus what the daily loop needs (sleep,
   earn, wash, cross) — then shape the set: one anchor holding **≥25%** of the prose, satellites
   free to be small. Each location declares its own word budget, in round numbers, before the
   prose; gate 1 checks the game against that rather than against a global figure. `the-board.md` §1.
@@ -137,6 +137,11 @@ v0.1 builds the Board instead of adding to it.
 - **The explicit floor is met from minute one**, including the traversal layer.
 - **First explicit beat early.** The strongest-retained game in the comparison set is explicit
   on night one, two clicks from free roam.
+- **The first hour is authored, not assumed** — `references/the-first-hour.md`. One opening shape,
+  not both; the funnel hands over into something that is open at the minute it lands; every
+  character is met before their portrait goes live; the anchor says what kind of place it is the
+  first time she walks in. This is the half v2 shipped without, and it cost the first v2 game a
+  human read end to end its whole first ten minutes.
 - **It ends on a door**, like every release after it.
 
 Then set `phase = "release"` in `v2_state.json` and never build a "chapter" again.

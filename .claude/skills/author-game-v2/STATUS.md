@@ -96,18 +96,26 @@ Named from what DoL's release commits actually do:
   female protagonist this is the main heat engine at low tiers.
 - **MILESTONE** — fires once, then opens standing content. Every one names what it turns on.
 
-## The meters — three layers, measured
+## The meters — three layers, and WHO OWNS THEM
 
 Corrected mid-build when DoL's source refuted our first draft. It does **not** run one axis:
 
 | layer | evidence |
 |---|---|
-| **ratcheting tiers** (3–4) | promiscuity 22 raises / 1 lower, 206 gate sites · deviancy 20/0 · exhibitionism 12/1 · rungs at **15/35/55/75** |
+| **ratcheting tiers** (3–4) | promiscuity 22 raises / 1 lower, 206 gate sites · deviancy 20/0 · exhibitionism 12/1 |
 | **volatile state** | arousal — 277 sets, moves both ways constantly |
-| **per-character** | love + lust + disposition, light |
+| **per-character** | love + lust + disposition |
 
 Several tiers rather than one, because each names a *different* kind of going-further, so a
 player who does not want one can climb another.
+
+> ⚠️ **Corrected again 2026-08-19, and this row is n = 1.** Across 25 shipped sandboxes, **14 have
+> no player ascent tier at all** and the field's gating lives on the CAST (285 per-character meters
+> to 101 player-owned), splitting into two schools with nothing between them. Three-or-four tiers is
+> right for a `who_climbs = "player"` game and is not the default. The **15/35/55/75** rung spacing
+> that used to sit in this table was deleted from it: it is one game's seed spacing, and it reached
+> the lowest rung of **all 16 declared tiers across five v2 games**. Live doctrine:
+> `references/the-meters.md` W1–W6. Checks: gates 33 · 34.
 
 ---
 

@@ -101,6 +101,10 @@ list because the count comes from disk.
 Media blocks also appear nested — under group blocks (`blocks[].blocks[].props`) and inside
 cascade beats (`blocks[].props.beats[].blocks[].props`). Any tool walking media must recurse.
 
+**A clip inside a cascade beat renders at that beat** (`v2.py:13952`) — nesting it there is not
+merely allowed, it is the shape `register.md` S1 requires, because a cascade appends and the node
+lead's clip stops being the current one after beat 0. See §8.
+
 ---
 
 ## 6. Schedules, and overnight windows
@@ -136,7 +140,7 @@ v2.py:5190   var cooldowns = sv.game_state.random_cooldowns = sv.game_state.rand
 Cooldown is engine-managed per location — do not author your own. Random canvases are
 selected by `triggerMode === "random"`.
 
-`max_triggers_per_day` is read per trigger (`v2.py:11011`).
+`max_triggers_per_day` is read per trigger (`v2.py:11017`).
 
 ---
 
@@ -153,6 +157,50 @@ inherits its context from whatever links into it. Substitutions use
 
 `show_when_locked = true` on a choice renders it greyed and visible instead of hidden. This is
 the mechanism behind "every release ends on a visible locked door."
+
+### A node link SWAPS the screen. A cascade beat APPENDS to it.
+
+The single most load-bearing fact about how content is composed, and neither half was written
+down anywhere before 2026-08-18.
+
+```python
+v2.py:13258   target_passage = self.passage_name_map.get(str(node_id))   # BUILD-time resolution
+v2.py:13952   body_html = self._convert_blocks_to_game_html(beat_blocks) # INSIDE <<linkreplace>>
+```
+
+- **`targetType = "node"` is resolved when the game is built**, into a static link to
+  `Canvas_<uuid>_Node_<slug>`. Clicking it loads a new passage: the screen is **replaced**, and
+  whatever media the new node carries renders fresh.
+- **A cascade beat is a nested `<<linkreplace>>`.** Clicking it reveals the beat's blocks
+  **below** what is already on screen. Nothing is removed — including the clip that rendered
+  before it. A media block placed at the node lead therefore illustrates **beat 0 only**.
+
+Two consequences worth carrying:
+
+1. **Media placement is a composition decision, not decoration.** A repeatable act surface built
+   as one cascade shows the player the same picture for the whole scene. Built as node routing,
+   each act is its own screen with its own pool. `references/register.md` S1 ·
+   `references/the-surfaces.md` R3b.
+2. **A triggerless canvas is a SAFE node-link target, and an UNSAFE substitution target.** Build-
+   time resolution needs no runtime lookup, so node routing into a canvas with no `trigger` works
+   — it is how every sub-menu and every sex loop in this codebase is reached. A *substitution*
+   target is different: `setup.getCanvasById` indexes only `help_data.locationCanvases`
+   (`v2.py:3177`), which is populated only for canvases carrying `trigger.location`, so a
+   triggerless substitution target silently never fires. **Same word "triggerless", opposite
+   answer — do not carry one rule onto the other.**
+
+The generator keeps an index specifically for this pattern:
+
+```python
+v2.py:3159   setup.sub_menu_parents   # child_canvas_id -> parent_menu_canvas_id, for triggerless
+                                      # sub-menu canvases reached via cross-canvas targetType="node"
+```
+
+so the HUD can still render place and time from the parent hub even though the sub-menu canvas is
+not in `locationCanvases` itself.
+
+⚠️ **State inside a triggerless canvas must be TRAITS, not flags** — see §16. A flag whose only
+setter is a canvas with no location has no located hint and the build hard-fails.
 
 ---
 
@@ -180,12 +228,16 @@ The return link is **generated automatically** from `entry_from` and renders as
 
 ```toml
 [[locations]]
-id = "the_landing"; entry_from = "the_front_room"
-navigation_order = ["her_room", "the_bathroom", "the_box_room"]   # children
+id = "<hub_id>"; entry_from = "<parent_id>"
+navigation_order = ["<child_a>", "<child_b>", "<child_c>"]   # children ONLY
 
 [[locations]]
-id = "her_room";  entry_from = "the_landing";  navigation_order = []   # leaf, still exitable
+id = "<child_a>";  entry_from = "<hub_id>";  navigation_order = []   # leaf, still exitable
 ```
+
+*(Placeholders on purpose. This snippet used to show a landing with three bedrooms off it — the
+first game's own upstairs — which teaches a floor plan while claiming to teach a field. `SKILL.md`:
+an example outranks every rule beside it.)*
 
 Confirmed live: from `her_room` the only story links are `Change Clothes` and
 `Leave Her Room`.
@@ -441,8 +493,8 @@ applied to them.
 The rule is: *same NPC, same location, overlapping windows.* Two repeatable canvases at one
 location that bind **different** NPCs, or **no** NPC, do not collide and **should be separate
 canvases** — that is the normal shape, not a workaround. What lives on which screen is
-`references/the-surfaces.md`; a room's choice count derives from what its prose names (R2b, gate 22),
-and **8 is a backstop, not a size** (gate 20 — read R3 before treating it as a target).
+`references/the-surfaces.md`; a room's list is **needs + work + people** and its length falls out of
+that closed set (R2), and **8 is a backstop, not a size** (gate 20 — never treat it as a target).
 
 ---
 
@@ -472,8 +524,8 @@ is bound, so nothing can be mis-attributed — there is no character in scope to
 ## 21. `clamp` is 0–100, it defaults to TRUE, and it will silently cap a CURRENCY
 
 ```js
-v2.py:5753   if (clampFlag === undefined || clampFlag === null) { clampFlag = true; }
-v2.py:5754   if (clampFlag) { next = window._traitClamp(next, 0, 100); }
+v2.py:5759   if (clampFlag === undefined || clampFlag === null) { clampFlag = true; }
+v2.py:5760   if (clampFlag) { next = window._traitClamp(next, 0, 100); }   // :5761
 ```
 
 Two facts, and the second one is the dangerous one:
@@ -495,7 +547,7 @@ arousal, energy — want the clamp and should keep it.
 ⚠️ Note the asymmetry with a *deduction*: an unclamped one can go negative. The engine's own
 recurring-demand system (`[settings.rent]`) does its own affordability check; an authored deduction
 does not — gate the choice on the trait, or price it with `costs`, which the engine refuses when
-unaffordable (`v2.py:12556`).
+unaffordable (`v2.py:4496` filters it out, `:4625` is the check — §27).
 
 **How to catch it:** diff the state across the scene and compare against the declared value. A
 capped effect looks identical to a working one in the TOML, in the validator, in the build log and
@@ -508,7 +560,7 @@ were a thing the engine ran. It is not, and the sentence taught two games to wri
 do nothing.
 
 ```js
-// window.applyTraitEffect — v2.py:5742-5751
+// window.applyTraitEffect — v2.py:5749-5756
 if (op === 'add')      { next = current + value; }
 else if (op === 'set') { next = value; }
 else { /* Unknown op; do nothing */ return; }
@@ -516,16 +568,16 @@ else { /* Unknown op; do nothing */ return; }
 
 Nothing normalises it: the string `subtract` appears **nowhere** in `generators/v2.py` or in
 `apps/projects/services/template_import.py`. The generator interpolates the op straight through
-(`v2.py:13469`), so the build emits `applyAndNotifyTrait(..., "subtract", 4, ...)` verbatim and the
+(`v2.py:13475`), so the build emits `applyAndNotifyTrait(..., "subtract", 4, ...)` verbatim and the
 runtime drops it on the floor.
 
 **Every effect family, and the ops each actually runs:**
 
 | family | key that identifies it | ops the engine runs | source |
 |---|---|---|---|
-| trait | `trait` | `add` · `set` | `v2.py:5742-5751` |
-| flag | `flag` | `set` · `unset` · `toggle` | `v2.py:5888` |
-| quest | `quest_id` | `start` · `update` · `complete` · `cancel` | `v2.py:5914-5919` |
+| trait | `trait` | `add` · `set` | `v2.py:5749-5756` |
+| flag | `flag` | `set` · `unset` · `toggle` | `v2.py:5810-5825` |
+| quest | `quest_id` | `start` · `update` · `complete` · `cancel` | `v2.py:5922-5925` |
 | item | `action`, not `op` | `add` · `remove` | — |
 
 **To take something away, write `op = "add"` with a NEGATIVE value.** Proven live on a shipped
@@ -562,7 +614,7 @@ costs = { time = 20, energy = 5 }     # time is minutes on the day clock; any ot
 ```
 template_import.py:170    costs: Dict[str, int] = field(default_factory=dict)
 template_import.py:1778   costs=_require_dict(l, "costs"),
-v2.py:4681                // A location's per-entry cost lives in setup.locations[slug].entry_costs
+v2.py:4687                // A location's per-entry cost lives in setup.locations[slug].entry_costs
 v2.py:15276               has_location_costs = any(...)   # the travel-cost block is only emitted
                                                           # when some location declares costs
 ```
@@ -614,7 +666,7 @@ v2.py:14711                    the V2 QuestsPage overlay is emitted only when
 sidebar entry and the page **on**. Authoring no cards leaves a nav link to a heading with nothing
 under it. Switching the engine on is not authoring guidance.
 
-**Rendering.** `renderQuestsGoalBlock` (`v2.py:14964`) renders **exactly one** frame per card, in
+**Rendering.** `renderQuestsGoalBlock` (`v2.py:14970`) renders **exactly one** frame per card, in
 order: ✓ terminal → 🔓 `ready_canvas` → 🎯 unmet goals. A card that matches none of the three returns
 empty and the row goes blank.
 
@@ -636,7 +688,7 @@ build-boundary rule. A closed arc that is closed forever must not promise more o
 
 ```
 v2.py:14837   setup.pickQuestsCards = function(scope) {
-v2.py:14838       if (scope !== "story_goals") return [];
+v2.py:14844       if (scope !== "story_goals") return [];
 ```
 
 A hard early return, no error, no warning. A typo in that string gives an **empty top section on the
@@ -836,7 +888,9 @@ grace_periods    = 1
 start_after_flag = "first_shift_done"
 eviction_mode    = "flag_set"        # or "game_end" (the default, and a product that ends)
 eviction_flag    = "terms_changed"
-currency_symbol  = "£"               # added 2026-08-16; defaults to "$"
+currency_symbol  = "$"               # added 2026-08-16; defaults to "$". It covers the
+                                     # RENT PAGES ONLY — ten other money prints are
+                                     # hardcoded "$" regardless. §33.
 
 [settings.rent.text]                  # every beat of all three pages is authored here
 title = "…" · scene = "…" · greeting = "…" · paid_scene = "…" · paid_response = "…"
@@ -851,8 +905,8 @@ eviction_closing_soft = "…"
    Days roll at midnight (`v2.py:5405-5408`), so the demand arms at **00:00 on the due day**, not at
    whatever hour the collector's schedule row says.
 2. The next time the player lands on a `Location_*` passage or `Navigation`, they are intercepted
-   into `RentDay` (`v2.py:15247-15259`). Never mid-canvas.
-3. Paying runs `$player.core_traits.money -= _rent` and clears `is_due` (`v2.py:15925`). Verified
+   into `RentDay` (`v2.py:15253-15262`). Never mid-canvas.
+3. Paying runs `$player.core_traits.money -= _rent` and clears `is_due` (`v2.py:15931`). Verified
    live: 300 → 55 on a 245 demand.
 4. Short pays route to `RentDay_Short`, which spends a grace period, and after that to the eviction
    branch — which under `eviction_mode = "flag_set"` sets a flag instead of ending the game.
@@ -869,3 +923,371 @@ never arms, so the flag belongs on the canvas that first gives her a way to earn
 
 **Money must be unclamped for this to work at all.** A 245 demand against `clamp = true` money
 (caps at 100) is unpayable and the only reachable outcome is eviction — see §21.
+
+---
+
+## 27. `costs` on a choice — the only price the engine enforces by itself
+
+```toml
+[[canvases.nodes.exit_block.choices]]
+text  = "Buy soap and a candle. ($1)"
+costs = [ { trait = "money", value = 1 } ]
+```
+
+Two things happen, and the second is why this is the strongest throttle available to a triggerless
+rung:
+
+1. **The engine refuses the choice when the player cannot afford it.** Every choice-collection path
+   filters on `setup.checkCostsAffordable(c.costs)` (`v2.py:4496`, `:4527`, `:4975`; the function
+   itself at `v2.py:4625`). An unaffordable rung does not render as a broken click — it is not
+   offered.
+2. **The deduction is applied by `setup.deductCostArray`, not by your effects list**
+   (`v2.py:4655-4661`). A `costs` entry is parsed as `{trait, value}` only
+   (`template_import.py:2133-2136`).
+
+⚠️ **A `costs` deduction is HARD-CLAMPED to 0–100 and you cannot turn it off.**
+`deductCostArray` passes `clampFlag = true` positionally into `applyAndNotifyTrait`, and there is no
+`clamp` field on a `costs` entry to override it. Verified live: at `money = 150`, a 4-charge leaves
+**100**, losing 46. Below 100 it is correct. This bites any game following §21's rule that money
+grants carry `clamp = false` — the moment the balance exceeds 100, the next priced purchase
+truncates it. `[settings.rent]` is unaffected; it subtracts directly (§26).
+
+`costs` is the field to reach for when a repeatable rung needs a brake the player can *feel*. What
+it is **not** is a way to model a trait requirement — a `costs` entry always spends. To require a
+trait without spending it, use `conditions`.
+
+---
+
+## 28. `[engine.daily_tick]` — the day-rollover hook, and the only clean way to day-cap a triggerless rung
+
+```toml
+[engine.daily_tick]
+flagEffects = [
+  { targetType = "player", flag = "eggs_sold_today", op = "unset" },
+]
+traitEffects = [
+  { targetType = "player", trait = "arousal", op = "add", value = 1, clamp = true },
+]
+```
+
+Parsed at `template_import.py:2714-2769` (`TemplateDailyTick`), and both effect lists run when the
+day rolls. `flagEffects` with `op = "unset"` is the mechanism behind every `_today` flag.
+
+**Why it matters more than it looks.** `max_triggers_per_day` is read **off the trigger**
+(`v2.py:11017`, `getattr(trigger, 'max_triggers_per_day', None)`). A triggerless rung — a canvas
+reached by a hub choice, which is what most rungs in this architecture are — has no trigger, so it
+cannot carry one. The pair that *does* work on a triggerless rung is:
+
+- set a `_today` flag in the **hub choice's** `flagEffects`,
+- gate that same choice on the flag being `is_false`,
+- clear the flag here.
+
+⚠️ **Do not use a hidden counter TRAIT for this.** It works, but it puts a player-subject trait into
+the game whose only conditions are `lt` — which reads to `gates.py` gate 10 as a meter that closes
+more than it opens. Use a flag; flags are not meters.
+
+### 28.1 The flag goes on the CHOICE, because a choice and an exit run in opposite orders
+
+```
+choice     flagEffects -> costs -> modifiers -> … -> advanceTime   v2.py:12648-12733
+node exit  advanceTime -> traitEffects -> flagEffects              v2.py:13085-13088 · :13049-13050
+```
+
+`advanceTime` rolls the day inside itself — `while (current_hour >= 24) { … advanceDay(); }`
+(`v2.py:5411-5414`) — and `advanceDay` is where this hook clears the flags (`v2.py:5552`).
+
+So on a rung whose `time_progression_minutes` crosses midnight:
+
+| where the flag is set | what happens |
+|---|---|
+| **the choice** | set on the old day, then cleared by the tick → the new day is open. **Correct.** |
+| **the rung's exit** | tick clears first, flag is written second → **the new day starts already capped.** |
+
+> ⚠️ **This paragraph said the opposite until 2026-08-22.** It warned that a midnight-crossing rung
+> gets its cap *cleared* and becomes re-clickable. The emit order makes that impossible, and the
+> real failure is the reverse: the rung is **locked out of the following day**, silently. Measured
+> in `off_season`, whose sleep rung ran 21:00→06:00 and set `slept_today` on the exit — after night
+> one, Sleep was never offered before midnight again. The build, the flag-chain validator and the
+> scoreboard were all green throughout.
+
+⚠️ **A LOCATED canvas does not need the flag at all.** `max_triggers_per_day` is read off the
+trigger (`v2.py:11017`) and `markCanvasTriggered` stamps its day key **before** `advanceTime` runs
+(`v2.py:4290`), so it has none of this problem. The flag pattern exists for *triggerless* rungs.
+
+### 28.2 Two of the three parts validates and does nothing
+
+A flag read as `is_false` and cleared here, with **no canvas setting it**, is a cap that never
+closes. Nothing in the toolchain objects: the generator's flag-chain validator only reports a
+never-set flag when a condition requires it `is_true` (`v2.py:11659`) — deliberately, since an
+`is_false` read is a re-entry guard rather than a prerequisite — so the gate simply fails open.
+
+Measured: `off_season` shipped four `*_talk_today` caps with the read and the clear and no set, and
+its four talk screens were re-clickable every twenty minutes, out-earning the day-capped rungs they
+sat below. `scripts/gates.py` gate **`a day-cap closes`** exists for exactly this.
+
+---
+
+## 29. `cap` on an effect — a VALUE ceiling, not a rate limit
+
+```js
+// v2.py:5763-5769, inside applyAndNotifyTrait, AFTER the clamp
+if (cap !== undefined && cap !== null) {
+  var capNum = Number(cap);
+  if (!isNaN(capNum)) {
+    if (next > capNum) next = Math.max(current, capNum);
+  }
+}
+```
+
+`cap` is the **7th positional argument** to
+`setup.applyAndNotifyTrait(targetType, npcId, trait, op, val, clampFlag, cap)` (`v2.py:5858`).
+Authored as a sibling of `op`/`value` on any effect and passed straight through
+(`v2.py:13464`, `:13472`, `:9813`):
+
+```toml
+effects = [ { targetType = "player", trait = "energy", op = "add", value = 40, cap = 100 } ]
+```
+
+Read the `Math.max(current, capNum)` carefully: **a cap never pulls a value down.** If the trait is
+already above the cap it is left alone; the cap only refuses to *raise* it past the ceiling. So:
+
+| use | correct? |
+|---|---|
+| bounding a **restore** — a sleep rung that adds energy, a wash that adds hygiene | ✅ this is what it is for |
+| bounding a repeatable **relation** or reputation grant so one rung cannot max a character | ✅ |
+| bounding an **ascent tier** | ❌ the tier must be able to reach its top band; a cap there deletes content |
+| **throttling how fast** anything rises | ❌ it does not touch the rate. See `the-meters.md` |
+
+`cap` and `clamp` are independent and both apply — clamp first, then cap.
+
+---
+
+## 30. A banded sidebar item and the auto Traits dump both render — unless you hide the key
+
+The sidebar prints **two** things about a trait, from two different places:
+
+1. **The auto Traits dump** — every declared `core_trait`, as a bare number.
+2. **Whatever `[[sidebar_items]]` you authored** — `trait_status_text` (`v2.py:16251`),
+   `trait_words` (`v2.py:16314`), `trait_bar`.
+
+They do not know about each other. Band a trait without suppressing its number and the player reads
+*"Nothing under it"* and `cover 55` stacked on top of each other.
+
+**The suppression is `[[traits.labels]] hidden = true`.** The generator collects those keys
+(`v2.py:1220-1226`), emits them as `setup.hiddenTraits` (`v2.py:3156`), and the dump skips them
+(`v2.py:15557`, `:15604`).
+
+```toml
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "cover"
+bands = [ { min = 0, max = 14, text = "Long dress, hair pinned" }, { min = 15, text = "Apron off" } ]
+
+[[traits.labels]]
+key    = "cover"          # ← REQUIRED, or the number prints underneath the words
+hidden = true
+```
+
+⚠️ **A trait absent from `[[traits.labels]]` entirely is NOT hidden** — it still appears in the
+dump. Measured: a shipped game banded all four of its meters in `[[sidebar_items]]`, declared none
+of them in `[[traits.labels]]`, and printed every one twice.
+
+⚠️ **The other half: a banded value that lands outside every band renders NOTHING** — the whole card
+disappears, which reads as a missing HUD element rather than a wrong number, so a quick playtest
+sails past it. `trait_status_text` treats an omitted `min`/`max` as open-ended (`v2.py:16266`,
+defaults ∓1e9); `trait_words` needs a **closed** `[min, max]` to match (`v2.py:16335-16336`). Leave
+the top band's `max` off, or `cap` the terminal add (§29).
+
+---
+
+## 31. `requires_npc` does NOT gate an auto-firing canvas
+
+**The field is real and it works — on two paths out of three.** A canvas that AUTO-FIRES on
+entry never consults it, so a one-shot written as "fires where the character is" fires whether
+they are there or not.
+
+```
+setup.getStoryCanvasRedirect            v2.py:4921   ← entry-time auto-fire
+  -> setup.selectAutoFireCanvasForLocation   v2.py:4453
+       filters: isRepeatable · triggerMode=="random" · substitutionOnly · isCanvasValid · priority
+  -> setup.isCanvasValid                     v2.py:4573
+       checks: hasSchedules/scheduleParams · conditions · canTriggerCanvas
+       requiresNpc is NOT among them.
+```
+
+`requiresNpc` is emitted into `help_data.locationCanvases` at `v2.py:11104` and consumed in
+exactly two places:
+
+```
+v2.py:5253-5268   the RANDOM-ENCOUNTER selector — "Phase A (2026-05-14) — NPC presence gate.
+                  Canvases without requiresNpc are unaffected."   ← works as documented
+v2.py:5332-5335   substitution rules — same check on the substitution TARGET
+```
+
+Neither is the auto-fire path. **Consequence in a shipped game:** `vesper/cap_renner_hired` is
+bound to `the_anchor` with `requires_npc = "npc_renner"`, and Renner's schedule puts him there
+19:00–23:00. With `opening_done`, `renner_hired is_false` and the cover equipped, the canvas
+auto-fires the moment the player walks in — so a scene that introduces him can play in an empty
+bar at ten in the morning.
+
+**What to do instead:** put a `[[canvases.trigger.schedules]]` row on the meeting that matches the
+character's own schedule row, or gate it on a flag the player can only hold by having been where
+they are. Keep `requires_npc` as well — it is free, correct on the paths that read it, and it
+documents intent — but it is not the thing stopping the canvas.
+
+Portrait rendering is the mirror image and behaves as documented: `selectNpcPortraitCanvasesForLocation`
+skips every non-repeatable canvas outright (`v2.py:4482-4487`, `if (!c.isRepeatable) continue`), so a
+first-contact one-shot can never leak onto a location screen as a face.
+
+`references/the-first-hour.md` F5.
+
+---
+
+## 32. The clock advances by MINUTES only — and the label tag is asymmetric
+
+Three facts about time, and each one has been assumed the other way at least once.
+
+### 32.1 There is no absolute-time advance
+
+```
+grep -E 'target_hour|advance_to|until_time|time_target' v2.py     0 hits
+```
+
+*(`setTime` matches in this file, but all eight hits are `setTimeout` — a DOM timer for a
+notification fade or a deferred `Engine.play`, not a clock setter. Grep for the word, not the
+prefix.)*
+
+`window.advanceTime(minutes)` (`v2.py:5400`) adds minutes to `time_state.current_minute`, rolls the
+hour past 60 and the day past 24, expires temporary modifiers, and repaints the sidebar. That is the
+whole time API. **Nothing in this engine can send the clock to a named hour**, so a label or a beat
+promising one ("work till one", "back by six") is a promise the engine cannot keep.
+
+`window.waitTime(minutes)` (`v2.py:5442`) is the sidebar wait buttons' entry point — the same
+advance, plus `setup.commitMoment()`, because a wait navigates nowhere and would otherwise live only
+in the active moment.
+
+An exit that declares no `time_progression_minutes` still costs **3 minutes**
+(`v2.py:13200`, `config.get('default_time_progression', 3)`; the exception fallback at `:13388` emits
+the same `advanceTime(3)`). A four-node opening has therefore drifted 9 minutes before the first real
+choice.
+
+There is no `@time` token either — `_resolve_at_references` (`v2.py:14027`) resolves `@player` and
+`@<npc>` and returns everything else untouched. The clock can be *shown* (`<<timeDisplay>>` at the
+top of `StoryCaption`, `v2.py:15663`/`:15679`, rendering `<<timeFormatted>>` at `v2.py:16043`) but it
+cannot be *printed into prose* by any authored token.
+
+### 32.2 Travel time is tagged on the card; activity time is tagged nowhere
+
+| what | tagged? | where |
+|---|---|---|
+| `[[locations.costs]] time` | **yes, automatically** — renders `20m` on the nav card | `getLocationCostTag` `v2.py:4724`, used at `:19353` / `:19370` |
+| a choice's `time_progression_minutes` | **no** — emits a bare `<<script>>advanceTime(150);<</script>>` at the bottom of the passage body | `v2.py:12733` |
+| a trait `costs` entry | yes, when unaffordable | `getCostBlockedMessage` `v2.py:4670` |
+
+So a door announces its twenty minutes and a two-and-a-half-hour shift announces nothing. If the
+duration is to appear, the author puts it in the label. `references/the-clock.md` C4.
+
+### 32.3 `show_when_blocked` — the only out-of-hours surface, and nothing uses it
+
+A solo activity whose schedule window has closed is dropped from the location list entirely, unless
+the author opts in:
+
+```toml
+[canvases.trigger.metadata]
+show_when_blocked = true
+cooldown_message  = "Counter work — mornings, eight till one."
+```
+
+Read at `v2.py:11055-11059`, emitted as `showWhenBlocked` / `cooldownMessage` (`v2.py:11100-11101`).
+`renderSoloActivities` checks `isCanvasValid` (`v2.py:5091`) — which returns false on a **schedule
+miss** before anything else (`v2.py:4573-4580`) — and, when the flag is set, pushes the canvas onto
+`soloCooldownBlocked` instead of dropping it, rendering a dimmed non-clickable line carrying the
+message (`v2.py:5140-5145`). The same path also catches `max_triggers_per_day` exhaustion
+(`v2.py:5098-5102`).
+
+⚠️ **Zero of the ten games in this repo set it.** Windowed work simply vanishes, and the player has
+no surface that says when to come back. The `SchedulePage` (`v2.py:18964`) publishes hours for
+**people** — every declared `[[npcs.schedules]]` row as a Time / Location / Activity / Days table —
+and there is no equivalent for places or activities. `references/the-clock.md` C5.
+
+---
+
+## 33. Money on the screen — where the engine prints it, and in what notation
+
+The generator prints a money figure at **sixteen sites**. `[settings.rent] currency_symbol`
+governs **four**. Nine hardcode `$`; three print no notation at all. This is why a game that never
+declares a symbol still ends up with more than one, and why declaring a symbol other than `$` does
+not give you one either.
+
+### 33.1 The census
+
+| notation | where | `v2.py` |
+|---|---|---|
+| **honours `currency_symbol`** | `RentDay` — the collector's default greeting | `:15922` |
+| | `RentDay` — *"You have X. Rent is Y."* (2 prints) | `:15926` |
+| | `RentDay` — the `Pay $N rent` button | `:15929` |
+| | `RentDay_Paid` — remaining money | `:15968` |
+| **hardcodes `"$"`** | `RentDay_Short` — *"You have: … You need: …"* (2 prints) | `:16000` |
+| | the clothing shop — balance | `:2018` |
+| | the clothing shop — item prices (3 prints) | `:2075` `:2078` `:2081` |
+| | the phone job board — a job's income | `:2926` |
+| | the phone bank — balance, and cash | `:2960` `:2961` |
+| | the bank-interest notification | `:5618` |
+| **no notation at all** | an unaffordable choice — *"Requires 3 Money (you have 1)"* | `:4680` |
+| | a location's nav cost tag — *"30m · 3 Money"* | `:4731` |
+| | the sidebar `trait_bar` — *"money: 12 / 100"* | `:16241` |
+
+`self.rent_currency_symbol = rent_settings.get("currency_symbol", "$") or "$"` — `v2.py:1190`.
+Emitted to the runtime only when rent is enabled (`v2.py:3123`), so a game without
+`[settings.rent]` has no symbol setting at all.
+
+⚠️ **`RentDay_Short` is the one every rent game reaches.** It is the branch taken when the player
+cannot pay — the screen where the number matters most — and it does not even set `_cur`.
+`games/forty_miles` declares `currency_symbol = "£"`, and its released build ships
+`You have: <strong>$<<print $player.core_traits.money>></strong>`. The author's own comment on that
+line reads *"the pages hardcoded `$` before this key existed"*; the key did not finish the job.
+
+### 33.2 The symbol is a prefix
+
+Every honouring site concatenates symbol-then-number — `"Pay " + _cur + _rent + " rent"`
+(`v2.py:15929`), `<<print _cur>><<print _money>>` (`v2.py:15926`). There is no suffix form and no
+format string. An invented unit that reads after the number (`10 coin`, `1000 caps`) cannot be
+expressed through `currency_symbol`.
+
+### 33.3 The sidebar ignores `[[traits.labels]]`
+
+```
+<<set _traitLabel to _item.label || _tbKey>>     v2.py:16215
+<<print _traitLabel>>: <<print Math.floor(_traitVal)>> / <<print _traitMax>>   v2.py:16241
+```
+
+A `trait_bar` takes its label from **the sidebar item's own `label` key**, falling back to the raw
+trait key. `setup.trait_labels` is read only by `_labelForTrait` (`v2.py:6781`), which formats
+*condition* text — hint lines and blocked-choice reasons. So
+`[[traits.labels]] key = "money", label = "Change bag"` does **not** rename the sidebar readout.
+
+And `_traitMax` defaults to 100 (`v2.py:16214`), so an uncapped counter renders as a fraction of a
+maximum it does not have: a money trait with no `max` prints **`money: 12 / 100`** over a 12% fill
+bar. Set `label`, and set `max` to something the currency will not exceed, or use
+`trait_status_text`.
+
+### 33.4 A choice's price is never rendered when the player can afford it
+
+An affordable choice renders its authored label and nothing else (`v2.py:12597` only wraps it in an
+`<<if>>`). The engine speaks a price **only on the failure path** — `getCostBlockedMessage`
+(`v2.py:4680`) emitted into `<span class="locked-choice">` at `v2.py:12747`:
+
+```
+affordable      Feed the meter ($3)                        exactly what the author typed
+unaffordable    Feed the meter ($3) (Requires 3 Money (you have 1))
+```
+
+This is the same asymmetry as §32.2 for time: the engine tags the cost it stops you paying and
+stays silent about the one it takes. So the visible price is authored prose in every normal case —
+gate 21 exists because of this, and `the-economy.md` R7 governs its notation.
+
+### 33.5 `[[traits.labels]] unit` is dead
+
+The importer reads it (`template_import.py:2885`) and stores it in project metadata (`:6310`). No
+generator reads it back — a grep of `v2.py` for `unit` returns nothing. It is not a lever for
+pluralising a currency.

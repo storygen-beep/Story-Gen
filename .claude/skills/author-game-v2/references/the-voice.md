@@ -32,11 +32,75 @@ Same game, same author. The left column loses nothing.
 
 **Location names are UI too.** A name a player cannot resolve is a navigation bug wearing register's
 clothes. Keep the setting's voice in every paragraph; make the words on the nav buttons parseable by
-anyone. *The Box Room* becomes *The Lodger's Room* and says who and why in two words.
+anyone. *The Box Room* becomes *The Tenant's Room* and says who and why in two words.
 
-**Exempt, and deliberately so: choice lines inside a scene.** *Stop pretending it's a favour*, *Make
-him wait*, *Come down in what you slept in*. These arrive with the scene already on screen, they are
-choices in a conversation, and evocative is correct there. Changing them is a regression.
+**A character's name is navigation too, and it is not a label until the player owns it.** Before a
+character has been met, name them by their **role** and where they are — *"your closest friend,
+Felix Morin"*, *"a student at your school"*, *"can be found at the docks at night"*. After, the name
+alone is enough. `references/the-first-hour.md` F7 owns this and the `named before met` lint lists
+the misses.
+
+> ⚠️ This example read *The Lodger's Room* until 2026-08-22, and **`lodger` is used by zero of the
+> 25 field games.** The rule was right and its cure was written in the same dialect the rule exists
+> to catch — and `steam` and `off_season` both shipped a location named *The Lodger's Room*,
+> copied from this line. See `register.md`, "The words the player has to already own".
+
+**Exempt, and deliberately so: a choice's `text` INSIDE a scene** — *Don't answer him*, *Let it
+go quiet*, *Say the number first*. These arrive with the scene already on screen, they are choices in
+a conversation, and evocative is correct there. Changing them is a regression.
+
+> ⚠️ **The exemption is scoped to a choice's `text`. It has never covered a canvas `name`.** A canvas
+> `name` is what renders in the room's activity list — it is a *button on a menu*, judged by the
+> table above, not by this paragraph.
+>
+> **This distinction leaked, and it is why LO found the defect.** The three examples printed here
+> until 2026-08-18 were *Stop pretending it's a favour*, *Make him wait* and *Come down in what you
+> slept in* — and **every one of them exists in `back_home` twice**:
+>
+> ```
+> back_home/5_scenes.toml:983    text = "Come down in what you slept in."   ← a choice. exempt. correct.
+> back_home/5_scenes.toml:1093   name = "Come down in what you slept in"    ← a CANVAS NAME = a button
+> ```
+>
+> The exemption was written off the choice and read off the button, and the pattern was copied into
+> `the_allowance` as a top-level room-list entry. An example outranks the rule beside it
+> (`SKILL.md`), so the three above were replaced with strings that can only ever be choices.
+
+**Inside a loop, the label NAMES THE ACT.** The act-menu exits are not navigation and not
+atmosphere — they are the ladder, and they are the only thing on the screen that tells the player
+what the next click does to her. The field ships them bare and crude at the character's ceiling:
+
+```
+destroyer   Keep blowing · Pound her ass · Pound her pussy · Cum · Go back
+vesper      Keep him in your mouth · Turn over — give him your ass · Let him finish inside you
+corpo-life  Kiss Her · Handjob · Cum in mouth · Fuck Her
+```
+
+A loop whose exits say *Continue* or *Go on* has thrown away the only readable thing about it. This
+does not soften the room-list rule above — a room button stays plain; an act button is inside a
+scene the player already chose to be in. `the-surfaces.md` R3b.
+
+**Measured against the field.** 64,594 action link labels across 25 shipped sandboxes
+(`~/Documents/Mopoga_Twine_Sandbox_Research_20260724/gamehtml/`):
+
+```
+FIELD           median 3 words          10% are 6 words or longer
+```
+
+Ours, and the drift tracks build date:
+
+```
+late_shifts   v1   3w /  7%        back_home      v2   4.5w / 35%
+the_inherit.  v1   3w / 10%        the_allowance  v2   5w   / 36%
+last_call     v1   4w / 15%        steam          v2   5w   / 47%
+vesper        v1   4w / 17%        forty_miles    v2   6w   / 50%
+                                   seventh_day    v2   6w   / 57%
+```
+
+**Long labels are mostly a symptom, not the disease.** Our own need-shaped canvases are already short
+in the same files — `Wash up` · `Power down` · `Charge up` · `Drill` · `Change` · `Wash`. A need
+names itself in one or two words; a described fiddle with a noun needs seven (*"Get the washing in
+off the airer"*). Fix the room's list per `the-surfaces.md` R2 and most of this corrects itself.
 
 **And the label carries its own cost.** Measured by playing five shipped games — every one that
 charges the player states the charge on the button, before the click:
@@ -54,9 +118,22 @@ verdict**, so a player never spends a turn discovering they were never eligible.
 paid £8.50 — the cost is information, not a wall.
 
 **Money is the one that is gated** (gate 21). A price the player cannot see is a plan they cannot
-make, and they are budgeting against a stated deadline. Stamina-type costs are *not* gated: two
+make, and they are budgeting against a stated deadline. **And the notation is gated too** — the
+amount on the button has to be written in the game's one currency, the same one
+`[settings.rent] currency_symbol` prints on the rent card (gate `the price is in one currency`).
+A shipped game put `Feed the meter (GBP 3)` on a button, *"Three pounds"* in the paragraph behind
+it and `$90` on the rent card, because nothing had been declared. `references/the-economy.md` R7
+owns this; `engine.md` §33 lists every place the engine prints money and the four the setting
+reaches. Stamina-type costs are *not* gated: two
 corpus games label them and the reference game does not, so a rule there would be invented rather
 than measured.
+
+**Time is the other half of that sentence, and it has its own file.** A label may never promise a
+*clock time* — the engine has no absolute-time advance at all, so `Work the counter till one
+(2h 30m).` is a promise it cannot keep (gate `the label keeps its time`). A label that spends the
+clock should state the *duration*, in one form held across the game, and that duration has to be
+the real spend. `references/the-clock.md` C3 and C4 own both, and C4 carries the reason the
+duration half is a lint rather than a gate.
 
 ### R2 · Every ascent tier carries a visible ladder
 
@@ -141,9 +218,22 @@ Field reference and citations: `references/engine.md`.
 |---|---|
 | **Gate 13 · guidance exists** | ≥1 card per declared ascent tier and per declared character |
 | **Gate 15 · no chain ends in silence** | every character ladder keeps a card that matches after its last rung |
+| **Lint · noun-only buttons** | the share of room-list labels opening on a determiner and naming no verb |
+| **Lint · label length** | median words per label and the share at 6+, with the field's 3 / 10% printed alongside |
 
 **R4 has no gate on purpose** — see the warning under it.
 
-**R1 is deliberately not a gate.** *The bench* is a plain noun and clear in context; *Sit with it* is
-a plain phrase and is not. No rule separates them mechanically. It stays a human sign-off — read the
-location page as a stranger would, before shipping.
+**R1 is deliberately not a gate, and the numbers say why.** *The bench* is a plain noun and clear in
+context; *Sit with it* is a plain phrase and is not. No rule separates them mechanically. Measured,
+the noun-only share of room-list buttons is:
+
+```
+last_call 0%  ·  late_shifts 0%  ·  the_allowance 0%
+vesper 24%  ·  back_home 32%  ·  the_inheritance 38%
+seventh_day 84%  ·  forty_miles 87%  ·  steam 92%
+```
+
+**Three shipped games sit at 0%, so the target is reachable** — but any threshold in the gap between
+38% and 84% would be invented, and this skill has demoted two rules for exactly that. The lint prints
+the percentage and names the offending labels. Read it; it stays a human sign-off — read the location
+page as a stranger would, before shipping.
