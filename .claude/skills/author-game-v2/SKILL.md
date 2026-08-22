@@ -153,7 +153,8 @@ the browse share · screen shape · the prose names places the map does not have
 (where a scene starts and stops on it) · **talk screens** · **the act menu** · **the meter ladder**
 (rungs per tier, and where the lowest one sits) · **the cast's meters** · **the counterweight** ·
 **the words the player has to already own** (every word in the player's face that fewer than four
-of the 25 field games use — a list to read, never a score) · **dispatch depth** (how many different
+of the 25 field games use — **prose, choice labels AND location names**, because a word the player
+cannot decode is undecodable on a button too; a list to read, never a score) · **dispatch depth** (how many different
 things one activity can turn into, and how often the activity itself still renders) ·
 **the act nodes** (body words on the thinnest band each act and finish node can render) ·
 **named before met** (every character

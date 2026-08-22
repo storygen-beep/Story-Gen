@@ -15,7 +15,7 @@
 #   ├── The Arcade            ANCHOR
 #   │   ├── The Back Room          (the rotating slot, behind)
 #   │   └── Your Flat             (above — sleep, warmth, the wardrobe)
-#   ├── The Holiday Lets      (+10 min)
+#   ├── The Holiday Flats     (+10 min)
 #   ├── Harbour End           (+15 min)
 #   │   └── The Boat Yard
 #   └── Terrace Row           (+15 min)
@@ -100,7 +100,7 @@ hunger = 10
 [[locations]]
 id                   = "the_front"
 name                 = "The Front"
-description          = "Half a mile of promenade with the sea on one side and the shut side of the season on the other. Boarded windows, a bin lorry that comes Tuesdays, and the wind coming straight up off the water with nothing between here and Denmark to slow it. Everything in Ellinbay opens onto this, and you cross it to get anywhere."
+description          = "Half a mile of promenade with the sea on one side and the shut side of the season on the other. Boarded windows, a garbage truck that comes Tuesdays, and the wind coming straight up off the water with nothing between here and Denmark to slow it. Everything in Ellinbay opens onto this, and you cross it to get anywhere."
 image                = "locations/the_front.jpg"
 image_search_queries = ["english seaside promenade winter grey empty shuttered", "off season seafront boarded arcade rain"]
 navigation_order     = ["the_arcade", "the_lets", "harbour_end", "terrace_row"]
@@ -133,7 +133,7 @@ navigation_order     = []
 [[locations]]
 id                   = "the_flat"
 name                 = "Your Flat"
-description          = "Up the inside stair from the arcade floor. Two rings, a kettle, and an immersion heater for the hot water with a coin meter screwed to the wall beside it, which is how you pay for heat in a building like this: and a window over a sea that nobody comes to look at until April. It is yours in the sense that nobody else sleeps here. It is not yours in any of the other senses."
+description          = "Up the inside stair from the arcade floor. Two rings, a kettle, and a water heater with a coin box screwed to the wall beside it, which is how you pay for heat in a building like this: and a window over a sea that nobody comes to look at until April. It is yours in the sense that nobody else sleeps here. It is not yours in any of the other senses."
 image                = "locations/the_flat.jpg"
 image_search_queries = ["small cold flat above shop kitchen window sea", "bedsit two ring hob kettle worn interior night"]
 entry_from           = "the_arcade"
@@ -142,8 +142,8 @@ navigation_order     = []
 # ── WORK 2. Alone, on a key, in a room that is not hers, on a schedule. ──────
 [[locations]]
 id                   = "the_lets"
-name                 = "The Holiday Lets"
-description          = "Six flats over the shut shops at the Terrace end, let by the week from Easter and empty the rest of the year. You do the winter turnarounds on the agency's key — strip the beds, run the taps so the traps don't dry, vacuum a carpet nobody has walked on since September. Other people's rooms, other people's things in the drawers, and the agency's list on the fridge with your name at the top of it."
+name                 = "The Holiday Flats"
+description          = "Six flats over the shut shops at the Terrace end, let by the week from Easter and empty the rest of the year. You clean them through the winter on the agency's key — strip the beds, run the taps so the traps don't dry, vacuum a carpet nobody has walked on since September. Other people's rooms, other people's things in the drawers, and the agency's list on the fridge with your name at the top of it."
 image                = "locations/the_lets.jpg"
 image_search_queries = ["empty holiday flat stripped bed cleaning winter", "vacant seaside apartment bare mattress hoover"]
 entry_from           = "the_front"
@@ -154,7 +154,7 @@ costs                = { time = 10 }
 [[locations]]
 id                   = "harbour_end"
 name                 = "Harbour End"
-description          = "Where the promenade gives up and turns into concrete, trailers and a slip going down into brown water. Diesel, rope, and a chandlery -- the shop that sells boat parts -- which opens when it feels like it. The one part of Ellinbay with a reason to be awake in February, which is why your eldest ended up down here and not in the arcade."
+description          = "Where the promenade gives up and turns into concrete, trailers and a slip going down into brown water. Diesel, rope, and a boat shop that opens when it feels like it. The one part of Ellinbay with a reason to be awake in February, which is why your eldest ended up down here and not in the arcade."
 image                = "locations/harbour_end.jpg"
 image_search_queries = ["small harbour slipway boat trailers winter grey", "fishing harbour concrete slip diesel drums"]
 entry_from           = "the_front"
@@ -300,7 +300,7 @@ location   = "the_chip_shop_flat"
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "08:00"
 end_time   = "15:00"
-activity   = "half asleep on top of the covers with the extractor going through the wall"
+activity   = "half asleep on top of the covers with the fan going through the wall"
 
 [[npcs.schedules]]
 location   = "terrace_row"

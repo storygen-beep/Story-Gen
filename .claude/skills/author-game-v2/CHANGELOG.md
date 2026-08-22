@@ -5,6 +5,199 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-23 — Off Season's word pass, and a false example this file was citing
+
+**The game half of the pass above.** The instrument could see these words as of this morning;
+nothing had fixed them. `games/off_season` now reads **55 flagged words / 121 uses**, down from
+**67 / 148**, and **37/38 still passes with no gate moved on any of the 20 games.**
+
+### The count was never the target, and proving that was most of the work
+
+`register.md` says *"read the list, do not read the number"*, and this is what that looks like in
+practice. Checked against `scripts/genre_words.txt`: `kettle`, `flats`, `winters`, `clocks` and
+**`seafront`** are all "absent from the field" — and `seafront` is the word this skill explicitly
+prescribes (*"the front → the seafront"*). Roughly two-thirds of the 67 were frequency artifacts:
+proper nouns the filter missed, inflections the lint cannot lemmatise, and ordinary English 25 porn
+sandboxes happen not to use. **Every one got a decision; about a third got an edit**, and the
+reasons for the rest are now in `games/off_season/v2_state.json` rather than in someone's head.
+
+### Where the word sits is what it costs
+
+Measured before touching anything: the game has **9 room-list buttons in total**, and **2** carried
+a flagged word. Canvas names on walk-ins and one-shots were checked against the built
+`output/index.html` and **do not reach a player** — they appear only in JSON metadata, a
+`dev-canvas-info` block and a review block. That scoped the label work to 2 buttons and 9 clickable
+choice labels instead of the ~30 the lint implies.
+
+```
+"Feed the meter ($3)"   ->  "Put $3 in the heater"      <- the one LO clicked
+"Take a turnaround"     ->  "Clean a flat for the agency"
+```
+
+Also killed at the source: **`Buy a coin mechanism off the chandlery ($25)`** — the line
+`gates.py:1775` names as the measured trigger for the entire rule, still sitting in the game that
+produced it.
+
+### What changed in the game
+
+`meter → the heater` / `the coin box` · `chandlery → the boat shop` · `float → the till` /
+`the change bag` · `pitch → rent` (the game's central obligation, written in a word for a market
+stall) · `extractor → the fan`, with the full name kept once at first contact · `immersion → water
+heater` · `knickers → panties` (the `vest` precedent — a false-friend garment inside an explicit
+beat; explicit-floor neutral, both are in the regex at `gates.py:252`) · `plasterboard → thin` ·
+`hairgrip → hair clip` · `bin lorry → garbage truck` · `advert → commercial` · `draught → draft` ·
+**`The Holiday Lets → The Holiday Flats`**, a nav button on every screen that the lint
+**structurally cannot see**, because `_player_visible_text` folds every location name into its
+proper-noun filter.
+
+**Kept, and the reason matters more than the list.** `pusher` stays because the arcade's own first
+visit already says *"Four coin pushers in the middle"* — the gloss rule working exactly as written.
+`hull`, `fryers`, `cardigan` stay for the same reason: the sentence around each one carries it.
+
+### ⚠️ This file was citing a false example, and it was about our own game
+
+The false-friend row cited `off_season`'s *"Stay past the tea"* as the evening meal, on a quest
+card, as UI. **It is not.** The scene it labels reads *"You make two teas in the two mugs he owns
+and you do not leave when yours is finished."* It is the **drink**, and so are all nine uses in the
+game, including the hunger band *"Running on tea."*
+
+The word was read off the lint's output and never checked against the line it came from — the exact
+failure the section exists to name, committed inside the section itself. **A false friend is a
+judgement about a sentence, never about a word.** Citation removed, the correction kept on the
+record beside it, and the game keeps its nine.
+
+### How verified
+
+- **No gate moved on any of the 20 games**; off_season holds **37/38**. All five exposed gates
+  checked by name, not by total: `location fill` 14,681 → 14,689 words (the only FAIL, untouched),
+  `somebody speaks` 4.3:1 against a 5:1 ceiling, `sentence length` median 10 against 14,
+  `explicit floor` 15.3%, `a price is on its label` 0 misses.
+- **The pass introduced zero new flagged words.** Diffed the rare-word set before and after — the
+  55 remaining are a strict subset of the original 67. Batches 6 and 7 both had to fix words
+  written *during* the batch; this one was checked after editing rather than before.
+- **Read the buttons in the built HTML**, not the TOML: `Put $3 in the heater` and `Clean a flat
+  for the agency` render; `Feed the meter`, `Take a turnaround`, `Holiday Lets`, `chandlery`,
+  `immersion`, `knickers`, `plasterboard`, `hairgrip`, `bin lorry` return zero hits.
+- **`games/off_season/v2_state.json` gained its first `releases` entry**, with the gate score and
+  the lint figures shipped with — the first use of the release-loop amendment made this morning.
+
+**Still open on this game, and named rather than quietly carried:** the anchor at 24.9%, the
+`pound ×3` currency regression from batch 8, and the clock at 9× the field median. All three belong
+to the fill batch, not to a word pass.
+
+---
+
+## 2026-08-23 — the words the doctrine named and the checker could not see
+
+**Cause: LO opened the built Off Season, hit `Feed the meter ($3)`, and could not read it.**
+
+> *"in her bedroom it says: Feed the meter — is she turning on her heater?? or wtf is this about??"*
+
+It is a coin-fed prepayment meter for the flat's water heater. The word is accurate, the object is
+real, and the reader has to arrive already owning it. **This was the second time** — the same
+complaint on 2026-08-22 produced this section of `register.md`, the `own_words` lint, and the
+cleanup of the skill's own examples. All three landed, and he hit the wall anyway, because three
+separate things were still wrong.
+
+### 1 · The checker was missing the words this file leads with
+
+`gates.py`'s `_FALSE_FRIENDS` held nine terms. `register.md`'s section opens on *"**meter** (a
+coin-fed prepayment meter), **jumper**, **eiderdown**"* and lists *pitch → rent* and *float → the
+till money* among its required swaps. **`jumper` went into the dict on 2026-08-22. `meter`,
+`pitch` and `float` did not.** A false friend is by definition a word four or more field games use,
+so `genre_words.txt` is structurally blind to it: if the hand-built dict does not carry a word,
+nothing in the instrument does. The word this section leads with was invisible to the whole skill,
+and it reached a player on a button.
+
+**Added**, after reading every hit in all 20 built games (269,421 player-visible words):
+`meter` ×32 · `float` ×24 · `pitch` ×10 · `chemist` ×3.
+
+**Measured and rejected, recorded in the code so it is not redone:** `front` ×334 and `inside`
+×213 are noise; `tip` ×44 carries three real uses, a 7% signal rate that would train the reader to
+skim; `boot` ×8 is footwear every time, not one car boot in the repo; `bill` ×7 and `purse` ×10
+give a slightly wrong picture that does not cost the line. The bar is not *could be misread* — it
+is *misreads badly enough to lose the line, often enough to be worth its false positives*.
+
+### 2 · The rule fell through the seam between two files
+
+`register.md` said *"gloss it in the sentence that first uses it, **or** use the plain word."*
+**A button has no sentence.** The player reads a label *before* the prose that would explain it, so
+on a label the choice collapses to one branch. `register.md` owns words, `the-voice.md` owns
+labels, and neither said so.
+
+Off Season's meter is glossed well — *"the slot is at shoulder height beside the water heater… a
+card taped under it saying what three buys"* — and the only route to that sentence is clicking the
+words the player could not read. **The gloss was downstream of the button the whole time.**
+
+### 3 · Nothing in the release loop made anyone read the list
+
+`the-release.md` step 5 said *"gates.py green, or fix it"* and said nothing about the nineteen
+lints the same command prints. Off Season shipped **37/38 with 67 flagged words** and a scoreboard
+that reads *excellent*.
+
+⚠️ **Deliberately not a checklist.** `DOCTRINE_GAPS.md` §3a already ruled on this — *"checklists do
+not hold… v2 must not inherit the checkbox"*, with v1's 13-point audit followed by the exact bug it
+was written to prevent. So step 5 gained a rule about output already on screen (anything left in a
+list is left on purpose, named with its reason), and step 6 records the lint figures in
+`v2_state.json`, where a number has to come down — the mechanism the anchor share already runs on.
+
+### What changed
+
+- **`scripts/gates.py`** — four entries in `_FALSE_FRIENDS`, with the six rejects and their counts
+  in the comment above it; **plural matching** in the lookup (`uses` is a bag of singular tokens,
+  so `vests` ×2, `torches` ×2 and `biscuits` ×1 were invisible); and the **silent truncation**
+  named — `ranked[:20]` printed 20 rows under a summary saying 67, swallowing 47.
+- **`references/register.md`** — the label sub-rule; a **fourth** failure mode, *collides with our
+  own UI* (a meter is a stat bar in this genre and off_season renders four in its sidebar — the
+  clash is with our vocabulary, not a dialect; same exposure on `board`, `card`, `flag`, `state`,
+  `tier`, `rung`); and a passage naming `_FALSE_FRIENDS` as the authority this file keeps in sync.
+- **`references/the-voice.md`** — R1's example fixed and its history kept: it taught *The Lodger's
+  Room* until 2026-08-22 and *The Tenant's Room* after, and **`tenant` is under the corpus bar
+  too**. Not a second `lodger` — the plural `tenants` is in-corpus, so it is standard English under
+  a frequency threshold and it stays wherever the skill describes a *role* to an author — but a
+  room name is a button, and Off Season had already shipped **The Back Room**. Also annotated the
+  `Feed the meter (GBP 3)` worked example at `:124`: it carried **two** defects and the currency
+  pass that quoted it fixed one.
+- **`references/the-release.md`** — loop steps 5 and 6, above.
+- **`references/the-economy.md`** — `forecourt` out of the `"obligation"` JSON snippet, replaced
+  with *out by the pumps*. **Found by this pass's own verification step**, not by design: one of
+  the eleven zero-of-25 words, sitting in the highest-copy form the skill has.
+- **`SKILL.md`** — the lint index now says the own-words lint reads choice labels and location
+  names, not only prose. That is what `_player_visible_text` does and it is the seam that failed.
+- **`DOCTRINE_GAPS.md`** — item 11 restated: half closed by the loop amendment, the rest open and
+  barred from arriving as a checklist.
+
+### How verified
+
+- **No gate moved on any of the 20 built games.** Tallies diffed before and after with
+  `PYTHONHASHSEED=0` (three games carry pre-existing tie-break noise): `off_season 37/38`,
+  `the_allowance 29/37`, `seventh_day 28/37`, `forty_miles 25/36`, `steam 18/35`, `back_home
+  15/33`, `vesper 11/30`, and the thirteen others unchanged. This was lint-only work and the diff
+  is empty.
+- **The new entries fire exactly where measured.** off_season `meter ×10 · pitch ×5 · float ×4`;
+  the_allowance `meter ×3 · chemist ×3`; forty_miles `float ×7 · meter ×5 · pitch ×3`; back_home
+  `float ×1`; steam `float ×10 · meter ×2`; vesper `meter ×11 · pitch ×2` — both vesper rows are
+  expected false positives (a meter-reader's blank, a whine climbing pitch) and read as obviously
+  so, which is the `torch` precedent.
+- **Plurals now counted:** forty_miles `vest` 73→75 and `torch` 2→3, vesper `torch` 6→7, back_home
+  `biscuit` 2→3.
+- **Truncation announced:** off_season prints 20 rows and then *"and 47 more word(s), 56 use(s),
+  not printed"*.
+- **Re-swept the skill's own files** for ~50 locale-locked terms. `templates/` is clean — no
+  locale-locked term in any file authors fill in. Every remaining hit in `register.md`,
+  `the-surfaces.md`, `the-voice.md`, `SKILL.md` and `gates.py` is the doctrine naming a word in
+  order to ban it. The three words this pass introduced — `prepayment`, `buoyant`, `chemist` —
+  appear only in glosses and doctrine, never in a worked example.
+- **The four new glosses read against the nine existing ones** and were rewritten once: the first
+  draft of `meter` named another game inside a per-game finding and `float` carried corpus
+  statistics. Both now match the house shape — *"X here, Y to most readers."*
+
+**Not done here, on purpose.** Off Season's own 67 words — including `tea`, `immersion`,
+`chandlery` and the `Feed the meter` button itself — are a game-side pass. The skill now catches
+them; nothing has yet fixed them.
+
+---
+
 ## 2026-08-23 — SKILL.md's lint index had gone stale
 
 **What changed.** `SKILL.md`'s "Lints sit below the tally" list now names **dispatch depth** and

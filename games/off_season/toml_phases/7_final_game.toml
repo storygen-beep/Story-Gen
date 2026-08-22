@@ -68,7 +68,7 @@ clothing_enabled  = false
 mode = "dark"
 
 
-# ─── The pitch rent — the ENGINE under everything ────────────────────────────
+# ─── The rent — the ENGINE under everything ────────────────────────────
 # $90 a week, Monday, and her SON collects it. Ewan holds the lease. The
 # reversal is not a scene, it is the economy: the money leaves her every Monday
 # and goes to the boy she had at fifteen.
@@ -117,7 +117,7 @@ paid_closing     = "He takes the folder back under his arm and pulls the shutter
 cant_pay         = "You haven't got the ninety."
 warning_scene    = "You tell him it is short. He does not raise his voice — he never has. He closes the folder and looks round the arcade instead, at the carpet and the change machine and the damp above the door, pricing all of it the way a man prices a thing he already owns."
 warning_response = "One week, Mum. I'm not the landlord. I'm just the one holding it."
-warning_closing  = "He leaves the folder open on the counter facing you when he goes, so you can read what the pitch has cost every week since his father went in."
+warning_closing  = "He leaves the folder open on the counter facing you when he goes, so you can read what the rent has cost every week since his father went in."
 eviction_scene_soft    = "The second Monday he does not open the folder at all. He takes his coat off, which he has not done in this building in four years, and hangs it on the hook behind the counter where your husband's used to go, and sits down on your stool."
 eviction_response_soft = "We're past the ninety. Let's talk about what you're actually doing with this place."
 eviction_closing_soft  = "He stays until you turn the machines off, and on the way out he tells you which one he would rip out first."
@@ -421,7 +421,7 @@ when     = [ { trait = "want", subject = "npc", npc_id = "npc_nessa", op = "gte"
 #   ├── The Arcade            ANCHOR
 #   │   ├── The Back Room          (the rotating slot, behind)
 #   │   └── Your Flat             (above — sleep, warmth, the wardrobe)
-#   ├── The Holiday Lets      (+10 min)
+#   ├── The Holiday Flats     (+10 min)
 #   ├── Harbour End           (+15 min)
 #   │   └── The Boat Yard
 #   └── Terrace Row           (+15 min)
@@ -506,7 +506,7 @@ hunger = 10
 [[locations]]
 id                   = "the_front"
 name                 = "The Front"
-description          = "Half a mile of promenade with the sea on one side and the shut side of the season on the other. Boarded windows, a bin lorry that comes Tuesdays, and the wind coming straight up off the water with nothing between here and Denmark to slow it. Everything in Ellinbay opens onto this, and you cross it to get anywhere."
+description          = "Half a mile of promenade with the sea on one side and the shut side of the season on the other. Boarded windows, a garbage truck that comes Tuesdays, and the wind coming straight up off the water with nothing between here and Denmark to slow it. Everything in Ellinbay opens onto this, and you cross it to get anywhere."
 image                = "locations/the_front.jpg"
 image_search_queries = ["english seaside promenade winter grey empty shuttered", "off season seafront boarded arcade rain"]
 navigation_order     = ["the_arcade", "the_lets", "harbour_end", "terrace_row"]
@@ -539,7 +539,7 @@ navigation_order     = []
 [[locations]]
 id                   = "the_flat"
 name                 = "Your Flat"
-description          = "Up the inside stair from the arcade floor. Two rings, a kettle, and an immersion heater for the hot water with a coin meter screwed to the wall beside it, which is how you pay for heat in a building like this: and a window over a sea that nobody comes to look at until April. It is yours in the sense that nobody else sleeps here. It is not yours in any of the other senses."
+description          = "Up the inside stair from the arcade floor. Two rings, a kettle, and a water heater with a coin box screwed to the wall beside it, which is how you pay for heat in a building like this: and a window over a sea that nobody comes to look at until April. It is yours in the sense that nobody else sleeps here. It is not yours in any of the other senses."
 image                = "locations/the_flat.jpg"
 image_search_queries = ["small cold flat above shop kitchen window sea", "bedsit two ring hob kettle worn interior night"]
 entry_from           = "the_arcade"
@@ -548,8 +548,8 @@ navigation_order     = []
 # ── WORK 2. Alone, on a key, in a room that is not hers, on a schedule. ──────
 [[locations]]
 id                   = "the_lets"
-name                 = "The Holiday Lets"
-description          = "Six flats over the shut shops at the Terrace end, let by the week from Easter and empty the rest of the year. You do the winter turnarounds on the agency's key — strip the beds, run the taps so the traps don't dry, vacuum a carpet nobody has walked on since September. Other people's rooms, other people's things in the drawers, and the agency's list on the fridge with your name at the top of it."
+name                 = "The Holiday Flats"
+description          = "Six flats over the shut shops at the Terrace end, let by the week from Easter and empty the rest of the year. You clean them through the winter on the agency's key — strip the beds, run the taps so the traps don't dry, vacuum a carpet nobody has walked on since September. Other people's rooms, other people's things in the drawers, and the agency's list on the fridge with your name at the top of it."
 image                = "locations/the_lets.jpg"
 image_search_queries = ["empty holiday flat stripped bed cleaning winter", "vacant seaside apartment bare mattress hoover"]
 entry_from           = "the_front"
@@ -560,7 +560,7 @@ costs                = { time = 10 }
 [[locations]]
 id                   = "harbour_end"
 name                 = "Harbour End"
-description          = "Where the promenade gives up and turns into concrete, trailers and a slip going down into brown water. Diesel, rope, and a chandlery -- the shop that sells boat parts -- which opens when it feels like it. The one part of Ellinbay with a reason to be awake in February, which is why your eldest ended up down here and not in the arcade."
+description          = "Where the promenade gives up and turns into concrete, trailers and a slip going down into brown water. Diesel, rope, and a boat shop that opens when it feels like it. The one part of Ellinbay with a reason to be awake in February, which is why your eldest ended up down here and not in the arcade."
 image                = "locations/harbour_end.jpg"
 image_search_queries = ["small harbour slipway boat trailers winter grey", "fishing harbour concrete slip diesel drums"]
 entry_from           = "the_front"
@@ -706,7 +706,7 @@ location   = "the_chip_shop_flat"
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "08:00"
 end_time   = "15:00"
-activity   = "half asleep on top of the covers with the extractor going through the wall"
+activity   = "half asleep on top of the covers with the fan going through the wall"
 
 [[npcs.schedules]]
 location   = "terrace_row"
@@ -840,7 +840,7 @@ activity   = "on the change booth, not looking at the front"
 #    game at all. 46 words per named character against the field's ~229.
 #
 #    The cast did not get cut; it got MOVED to where a person can be met:
-#      the building and the pitch  -> canvas_first_arcade, the anchor's first visit
+#      the building and the rent   -> canvas_first_arcade, the anchor's first visit
 #      the four of them            -> canvas_meet_* , one each, on screen, speaking
 #    What stays here is her situation and the pressure, which is all a cold
 #    open carries.
@@ -880,7 +880,7 @@ name = "Monday, seven"
 blocks = [
   { type = "image", props = { file = "scenes/flat_morning.jpg", description = "A woman in her late thirties sitting on the edge of a bed in a small cold flat, grey sea light at the window.", search_queries = ["woman sitting edge of bed small flat cold morning window", "middle aged woman bedsit window grey winter light"] } },
   { type = "paragraph", content = "You wake at seven with your breath going up in front of you. The window has run all night and the sill is wet. Out past it the sea is the same colour as the sky and nothing is moving on the front." },
-  { type = "paragraph", content = "The meter on the wall says nothing, because there is nothing in it. There has been nothing in it since Thursday, and you have kept your coat on indoors for four days rather than spend the three." },
+  { type = "paragraph", content = "The coin box on the wall says nothing, because there is nothing in it. There has been nothing in it since Thursday, and you have kept your coat on indoors for four days rather than spend the three." },
 ]
 exit_block = { type = "choices", choices = [
   { text = "Get up.", targetType = "node", nodeId = "the_change_bag" },
@@ -967,7 +967,7 @@ blocks = [
   { type = "paragraph", content = "The shutter goes up and the smell comes out before the light goes in. Carpet, warm dust, and the inside of forty machines that have been off since October." },
   { type = "paragraph", content = "This is an amusement arcade. Slot machines down both walls. Four coin pushers in the middle, glass wiped every morning whether anybody has touched them or not. Two driving cabinets. A crane with nothing in it worth the money." },
   { type = "paragraph", content = "Half of it is off at the wall to save the electric. The carpet is the colour of a bruise and a man who is not here chose it. The change booth has a hatch you have to stoop to, and from behind it you can see the whole length of the front." },
-  { type = "paragraph", content = "The pitch on this building is ninety a week, and it does not go to a landlord. It goes to the one who took the folder off you the month your husband went inside. He was right to take it. You have not signed anything about your own building since." },
+  { type = "paragraph", content = "The rent on this building is ninety a week, and it does not go to a landlord. It goes to the one who took the folder off you the month your husband went inside. He was right to take it. You have not signed anything about your own building since." },
   { type = "thought_bubble", props = { speaker = "player" }, content = "Forty machines with my name over them, and I do not get to say which ones are on." },
 ]
 exit_block = { type = "location", text = "Open up.", config = { destinationType = "specific", locationId = "the_arcade", time_progression_minutes = 30, flagEffects = [
@@ -1019,7 +1019,7 @@ exit_block = { type = "location", text = "Open up.", config = { destinationType 
 [[canvases]]
 id          = "canvas_meet_ewan"
 name        = "Your eldest"
-description = "MEETING @the_boat_yard, windowed to his 08:00-18:00 Mon-Sat row. One-shot, priority 11 so it beats canvas_first_borrow on entry. SETS met_ewan, which is the only thing that opens hub_ewan_yard. Carries the reversal the cold open put down: the pitch does not go to a landlord, and he says so himself."
+description = "MEETING @the_boat_yard, windowed to his 08:00-18:00 Mon-Sat row. One-shot, priority 11 so it beats canvas_first_borrow on entry. SETS met_ewan, which is the only thing that opens hub_ewan_yard. Carries the reversal the cold open put down: the rent does not go to a landlord, and he says so himself."
 
 [canvases.trigger]
 location      = "the_boat_yard"
@@ -1042,7 +1042,7 @@ name = "Your eldest"
 blocks = [
   { type = "paragraph", content = "Your eldest is under the second hull with a light on a lead. You had him at fifteen and the pair of you came up together after that, more than one of you raised the other. He wipes his hands on the front of himself before he looks at you." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "You want something." },
-  { type = "dialog", props = { speaker = "player" }, content = "I want to know what the pitch is this week." },
+  { type = "dialog", props = { speaker = "player" }, content = "I want to know what the rent is this week." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Ninety. It's ninety every week. It was ninety when Dad was doing it and I haven't touched it." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "I'm not the landlord, Mum. I'm just the one holding it." },
   { type = "paragraph", content = "He says it the way you would say the weather. He took the folder off you the month his father went inside, because somebody had to and nobody else offered, and he has never once raised his voice at you, which is worse." },
@@ -1170,7 +1170,7 @@ exit_block = { type = "choices", choices = [
 # ═════════════════════════════════════════════════════════════════════════════
 [[canvases]]
 id          = "canvas_first_warm"
-name        = "Three in the meter"
+name        = "Three in the slot"
 description = "Auto-fire @the_flat, one-shot, gated meter_fed_once. The first explicit beat in the game and it is solo. She has heat in the flat for the first time in a two weeks and takes her clothes off in it. SETS first_warm_done -> opens solo_flat_warm. +20 arousal."
 
 [canvases.trigger]
@@ -1185,10 +1185,10 @@ conditions    = { version = "1.0", logic = "AND", items = [
 
 [[canvases.nodes]]
 id   = "the_heat"
-name = "Three in the meter"
+name = "Three in the slot"
 blocks = [
   { type = "image", props = { file = "sex/first_warm_t4.jpg", description = "A woman alone undressing on a bed in a small dim flat at night, one lamp on.", search_queries = ["woman undressing alone small bedroom night lamp", "woman lying on bed dim bedsit night bare"] } },
-  { type = "paragraph", content = "Three in coins into the slot and the immersion heater starts up behind the wall like something waking. An hour in, the whole flat is above freezing for the first time since a week last Thursday." },
+  { type = "paragraph", content = "Three in coins into the slot and the water heater starts up behind the wall like something waking. An hour in, the whole flat is above freezing for the first time since a week last Thursday." },
   { type = "paragraph", content = "You have been sleeping in a sweater, a cardigan and your coat. You have been washing in four inches of water and getting dressed under the covers." },
   { type = "cascade", props = { beats = [
     { advance_text = "Take it all off.", blocks = [
@@ -1211,7 +1211,7 @@ blocks = [
     ] },
     { advance_text = "After.", blocks = [
         { type = "thought_bubble", props = { speaker = "player" }, content = "Fourteen days. That is how long it has been too cold in my own house to take my clothes off." },
-        { type = "paragraph", content = "The immersion clicks off when the three runs out. You get under the covers before the room turns, and you are asleep before you have finished doing the arithmetic on Monday." },
+        { type = "paragraph", content = "The heater clicks off when the three runs out. You get under the covers before the room turns, and you are asleep before you have finished doing the arithmetic on Monday." },
     ] },
   ] } },
 ]
@@ -1266,7 +1266,7 @@ blocks = [
   { type = "paragraph", content = "The caravan smells of two-stroke and the stove. He is at the desk with the folder shut in front of him and he already knows, because you came down here in the middle of his day and you never come down here." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "How much." },
   { type = "paragraph", content = "You say the number. He does not write it down. He opens the second drawer, counts it out onto the desk in twenties, and turns it round so it faces you." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "That's the electric and the coin mechanism. Not the meter upstairs. You want the meter, you ask me for the meter." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "That's the electric and the coin mechanism. Not the heater upstairs. You want the heater, you ask me for the heater." },
   { type = "thought_bubble", props = { speaker = "player" }, content = "He has itemised my flat. He did that in his head, standing there, in about four seconds." },
   { type = "paragraph", content = "You take it. He watches you put it in your coat and does not say anything else, and the not-saying is the part you take home with you." },
 ]
@@ -1284,7 +1284,7 @@ exit_block = { type = "location", text = "Go back up the front.", config = { des
 # ═════════════════════════════════════════════════════════════════════════════
 [[canvases]]
 id          = "canvas_tam_saw_you"
-name        = "The extractor"
+name        = "The fan"
 description = "One-shot @the_chip_shop_flat, gated ease >= 20. The morning it stops being a mother in a son's flat. SETS tam_saw_you -> opens every `want` rung on his ladder in 5_scenes. +8 want, +15 arousal."
 
 # ⚠️ WINDOWED AND BOUND 2026-08-22. It had no schedule and no requires_npc, so it
@@ -1313,10 +1313,10 @@ end_time   = "15:00"
 
 [[canvases.nodes]]
 id   = "the_heat_through_the_wall"
-name = "The extractor"
+name = "The fan"
 blocks = [
   { type = "image", props = { file = "scenes/tam_flat_morning.jpg", description = "A small warm flat in daylight, unmade bed against a wall, curtains half drawn.", search_queries = ["small messy flat unmade bed daylight curtains", "cramped bedsit bed against wall morning"] } },
-  { type = "paragraph", content = "The flat is at twenty-four degrees because the fryers have been on since six. He is on top of the covers in shorts with one arm over his eyes and the extractor going through the wall." },
+  { type = "paragraph", content = "The flat is at twenty-four degrees because the fryers have been on since six. He is on top of the covers in shorts with one arm over his eyes and the fan going through the wall." },
   { type = "paragraph", content = "You have taken your coat off. Then the cardigan. You are sitting on the end of his bed in a T-shirt with the sleeves pushed up, and you have been there forty minutes." },
   { type = "cascade", props = { beats = [
     { advance_text = "He moves his arm.", blocks = [
@@ -1331,7 +1331,7 @@ blocks = [
         { type = "paragraph", content = "So you look. His cock is hard and the shorts are not hiding one inch of the shape of it, and he does not move his hand to cover it, and he does not take his eyes off your tits while you look." },
     ] },
     { advance_text = "Nobody says anything.", blocks = [
-        { type = "paragraph", content = "The extractor keeps going. He puts his hand flat on your back where you are sitting, low, above your waistband, and leaves it there. You do not move away from it." },
+        { type = "paragraph", content = "The fan keeps going. He puts his hand flat on your back where you are sitting, low, above your waistband, and leaves it there. You do not move away from it." },
     ] },
     { advance_text = "After.", blocks = [
         { type = "thought_bubble", props = { speaker = "player" }, content = "Nothing happened. I can walk down those stairs and say nothing happened, and it would be true, and I am not going to." },
@@ -1558,12 +1558,12 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "warmth", operator = "gte", value = 30 },
     ] } }, blocks = [
-    { type = "paragraph", content = "The immersion has been on and the room is holding it. You get in in a T-shirt and the sheets are not cold at the foot, and you are asleep inside ten minutes." },
+    { type = "paragraph", content = "The heater has been on and the room is holding it. You get in in a T-shirt and the sheets are not cold at the foot, and you are asleep inside ten minutes." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "warmth", operator = "lt", value = 30 },
     ] } }, blocks = [
-    { type = "paragraph", content = "Nothing in the meter. You go to bed in a sweater and your socks and the coat over the top of the quilt, and you lie there a long time listening to the sea before it takes." },
+    { type = "paragraph", content = "Nothing in the coin box. You go to bed in a sweater and your socks and the coat over the top of the quilt, and you lie there a long time listening to the sea before it takes." },
   ] },
 ]
 exit_block = { type = "location", text = "Sleep until morning.", config = { destinationType = "specific", locationId = "the_flat", time_progression_minutes = 540, effects = [
@@ -1573,7 +1573,7 @@ exit_block = { type = "location", text = "Sleep until morning.", config = { dest
 # ── NEED: warmth. A SINK, and the money-buys-heat chain in one click. ────────
 [[canvases]]
 id          = "act_flat_meter"
-name        = "Feed the meter ($3)"
+name        = "Put $3 in the heater"
 description = "NEED (warmth) @the_flat, repeatable, all hours. $3 -> +45 warmth capped at 100. Priced with `costs` so the engine refuses it when she cannot afford it (engine.md §27) — which makes it a real sink AND a real gate. SETS meter_fed_once, which is what canvas_first_warm reads."
 
 [canvases.trigger]
@@ -1584,7 +1584,7 @@ is_active     = true
 
 [[canvases.nodes]]
 id   = "base"
-name = "Feed the meter"
+name = "The coin box"
 blocks = [
   { type = "paragraph", content = "The slot is at shoulder height beside the water heater and it takes coins only, and there is a card taped under it in your husband's handwriting saying what three buys." },
 ]
@@ -1675,7 +1675,7 @@ chance           = 0.10
 id   = "base"
 name = "The room is warm"
 blocks = [
-  { type = "paragraph", content = "The meter is running and the room is above freezing. The shutter is down, the machines are off at the wall, and there is nobody in this building but you." },
+  { type = "paragraph", content = "The heater is running and the room is above freezing. The shutter is down, the machines are off at the wall, and there is nobody in this building but you." },
 ]
 
 [canvases.nodes.exit_block]
@@ -1748,7 +1748,7 @@ exit_block = { type = "location", text = "Later.", config = { destinationType = 
 
 [[canvases]]
 id          = "walkin_flat_meter"
-name        = "The meter goes"
+name        = "The heater goes"
 description = "Substitution-only walk-in @the_flat. The declared warmth sink arriving on its own schedule instead of hers. No person, no meter grant — it takes warmth and gives her a reason to go back down for change."
 
 [canvases.trigger]
@@ -1760,11 +1760,11 @@ is_active            = true
 
 [[canvases.nodes]]
 id   = "base"
-name = "The meter goes"
+name = "The heater goes"
 blocks = [
-  { type = "paragraph", content = "The immersion cuts out first, then the lamp, and you are lying there in the dark over a shut arcade with the sea going on outside and no light in the whole building above the counter." },
+  { type = "paragraph", content = "The heater cuts out first, then the lamp, and you are lying there in the dark over a shut arcade with the sea going on outside and no light in the whole building above the counter." },
   { type = "paragraph", content = "You know exactly where the emergency is. You have known where the emergency is since the first week, and it is still not the same thing as having the coins for it." },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "I own the building the meter is in. I have said that to myself in the dark more than once and it has never once made the room warmer." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "I own the building the heater is in. I have said that to myself in the dark more than once and it has never once made the room warmer." },
 ]
 exit_block = { type = "location", text = "Find your coat.", config = { destinationType = "specific", locationId = "the_flat", time_progression_minutes = 10, effects = [
   { targetType = "player", trait = "warmth", op = "add", value = -12 },
@@ -1955,19 +1955,19 @@ conditions = { version = "1.0", logic = "AND", items = [
 ] }
 
 [[canvases.nodes.exit_block.choices]]
-text       = "Do the float and the change bags (40m)."
+text       = "Count the till and the change bags (40m)."
 targetType = "node"
 nodeId     = "float"
 
 [[canvases.nodes.exit_block.choices]]
-text       = "Buy a coin mechanism off the chandlery ($25)."
+text       = "Buy a coin mechanism off the boat shop ($25)."
 targetType = "node"
 nodeId     = "mech"
 costs      = [ { trait = "money", value = 25 } ]
 
 [[canvases.nodes]]
 id   = "float"
-name = "The float"
+name = "The till"
 blocks = [
   { type = "paragraph", content = "Bag the coins, bag the notes, count the coins into rolls, and top up the change machine so it does not eat somebody's note and lose you a customer you were never going to get." },
   { type = "thought_bubble", props = { speaker = "player" }, content = "Twenty-six years I have been doing this with my hands and thinking about something else." },
@@ -1980,7 +1980,7 @@ exit_block = { type = "location", text = "Done.", config = { destinationType = "
 id   = "mech"
 name = "A new coin mech"
 blocks = [
-  { type = "paragraph", content = "Twenty-five off the chandlery for a reconditioned coin mechanism, and the machine at the end that has been eating coins since August takes one and gives a game back, first time." },
+  { type = "paragraph", content = "Twenty-five off the boat shop for a rebuilt coin mechanism, and the machine at the end that has been eating coins since August takes one and gives a game back, first time." },
   { type = "paragraph", content = "It is the only thing in this building that got better this week." },
 ]
 exit_block = { type = "location", text = "Put it in.", config = { destinationType = "specific", locationId = "the_arcade", time_progression_minutes = 45, effects = [
@@ -2352,8 +2352,8 @@ id   = "bare"
 name = "Naked to the waist in your own arcade"
 blocks = [
   { type = "video", props = { pool_dir = "sex/arcade_floor_bare_t5", pool = 4, description = "A woman half undressed standing among dark arcade machines at night.", search_queries = ["woman undressed dark arcade machines night", "half naked woman standing empty arcade neon dim"] } },
-  { type = "paragraph", content = "Cardigan on the pusher, T-shirt after it, bra after that. You stand in the middle of your own arcade naked to the waist with your tits out and your nipples going hard in the draught off the shutter." },
-  { type = "paragraph", content = "One hand flat on your own tit and the other down the front of your knickers, working your clit slowly, stood up, in the middle of the floor with forty dark cabinets round you." },
+  { type = "paragraph", content = "Cardigan on the pusher, T-shirt after it, bra after that. You stand in the middle of your own arcade naked to the waist with your tits out and your nipples going hard in the draft off the shutter." },
+  { type = "paragraph", content = "One hand flat on your own tit and the other down the front of your panties, working your clit slowly, stood up, in the middle of the floor with forty dark cabinets round you." },
 ]
 
 [canvases.nodes.exit_block]
@@ -2370,7 +2370,7 @@ effects = [
 ]
 
 [[canvases.nodes.exit_block.choices]]
-text       = "Get up on the pusher."
+text       = "Get up on the coin pusher."
 targetType = "node"
 nodeId     = "glass"
 costs      = [ { trait = "energy", value = 3 } ]
@@ -2390,7 +2390,7 @@ id   = "glass"
 name = "On the glass"
 blocks = [
   { type = "video", props = { pool_dir = "sex/arcade_floor_glass_t5", pool = 5, description = "A woman sitting back on a machine in a dark arcade with her legs open, touching herself.", search_queries = ["woman sitting on machine legs open dark arcade", "woman masturbating sat back on table dim neon"] } },
-  { type = "paragraph", content = "You get up on the flat of the coin pusher with your knickers down at one ankle, the glass cold under your arse, and work your clit in slow circles until your cunt is wet enough to hear." },
+  { type = "paragraph", content = "You get up on the flat of the coin pusher with your panties down at one ankle, the glass cold under your arse, and work your clit in slow circles until your cunt is wet enough to hear." },
   { type = "paragraph", content = "Two fingers into your cunt and your heels hooked on the edge of the glass. You fuck yourself on them slowly, thumb flat on your clit, tits shaking every time your hips come up to meet your hand." },
 ]
 
@@ -2839,7 +2839,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 90 },
     ] } }, blocks = [
-    { type = "paragraph", content = "You stand under the stain with the ninety in your coat pocket and work out that you could have it looked at, or you could pay the pitch, and that you cannot do both, and that this is the whole of your life now." },
+    { type = "paragraph", content = "You stand under the stain with the ninety in your coat pocket and work out that you could have it looked at, or you could pay the rent, and that you cannot do both, and that this is the whole of your life now." },
   ] },
 ]
 exit_block = { type = "location", text = "Leave it.", config = { destinationType = "specific", locationId = "the_arcade", time_progression_minutes = 10 } }
@@ -2886,7 +2886,7 @@ exit_block = { type = "location", text = "Give him his change.", config = { dest
 
 [[canvases]]
 id          = "work_lets_turnaround"
-name        = "Take a turnaround"
+name        = "Clean a flat for the agency"
 description = "WORK @the_lets, repeatable, 09:00-17:00. Priced at 20 energy + 150 minutes and day-capped with turnaround_done_today, so it is one a day, not a printer (the-economy.md R5: a gate in FRONT of a printer only delays the printer). Gated hunger >= 25 — this is the door the hunger need shuts. Walk-in router: whoever the agency has sent."
 
 # ⚠️ show_when_blocked: a windowed activity that simply VANISHES from the room's
@@ -2952,7 +2952,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text        = "Do a turnaround (2h 30m)."
+text        = "Clean the flat (2h 30m)."
 targetType  = "node"
 nodeId      = "rung_lets_turnaround.base"
 costs       = [ { trait = "energy", value = 20 } ]
@@ -3109,7 +3109,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "first_warm_done", operator = "is_false" },
     ] } }, blocks = [
-    { type = "paragraph", content = "A hairgrip, two coins from somewhere else, and a paperback with the spine broken at page ninety. You put them in the drawer of the bedside table with everything else that has been left behind since Easter and shut it." },
+    { type = "paragraph", content = "A hair clip, two coins from somewhere else, and a paperback with the spine broken at page ninety. You put them in the drawer of the bedside table with everything else that has been left behind since Easter and shut it." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "first_warm_done", operator = "is_true" },
@@ -3267,7 +3267,7 @@ is_active            = true
 id   = "base"
 name = "The fryers go on"
 blocks = [
-  { type = "paragraph", content = "The extractor changes note under the floor, which means the fryers are up to heat, which means it is four hours until he has to be down there and he has not slept properly yet." },
+  { type = "paragraph", content = "The fan changes note under the floor, which means the fryers are up to heat, which means it is four hours until he has to be down there and he has not slept properly yet." },
   { type = "paragraph", content = "The whole flat warms about two degrees over the next half hour, for nothing, off somebody else's oil. It is the only free heat either of you gets all winter." },
   { type = "thought_bubble", props = { speaker = "player" }, content = "He pays rent on a flat that is warm because of the job that is killing him. I have never once said that out loud in this room." },
 ]
@@ -3278,7 +3278,7 @@ exit_block = { type = "location", text = "Open the window an inch.", config = { 
 
 [[canvases]]
 id          = "amb_chip_extractor"
-name        = "The extractor"
+name        = "The fan"
 description = "Random ambient @the_chip_shop_flat. The heat of the room, which is the whole reason she keeps coming up here. Two bands. Pure texture."
 
 [canvases.trigger]
@@ -3290,7 +3290,7 @@ is_active     = true
 
 [[canvases.nodes]]
 id   = "base"
-name = "The extractor"
+name = "The fan"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "warmth", operator = "lt", value = 30 },
@@ -3300,7 +3300,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "warmth", operator = "gte", value = 30 },
     ] } }, blocks = [
-    { type = "paragraph", content = "Twenty-four degrees and the extractor going through the wall like something breathing. He has the window open two inches in February and it makes no difference at all." },
+    { type = "paragraph", content = "Twenty-four degrees and the fan going through the wall like something breathing. He has the window open two inches in February and it makes no difference at all." },
   ] },
 ]
 exit_block = { type = "location", text = "Sit down.", config = { destinationType = "specific", locationId = "the_chip_shop_flat", time_progression_minutes = 10 } }
@@ -3444,7 +3444,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "npc", npc_id = "npc_ewan", trait_key = "hold", operator = "gte", value = 18 },
     ] } }, blocks = [
-    { type = "paragraph", content = "Two men outside the chandlery stop talking about a foot and a half earlier than they would have, and one of them says your son's name in the sentence before they do it, and then they both say good morning." },
+    { type = "paragraph", content = "Two men outside the boat shop stop talking about a foot and a half earlier than they would have, and one of them says your son's name in the sentence before they do it, and then they both say good morning." },
   ] },
 ]
 exit_block = { type = "location", text = "Go down to the yard.", config = { destinationType = "specific", locationId = "harbour_end", time_progression_minutes = 10 } }
@@ -3473,7 +3473,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "warmth", operator = "lt", value = 30 },
     ] } }, blocks = [
-    { type = "paragraph", content = "It comes in sideways and gets down your collar and you stand in it, because getting home does not solve it, because there is nothing in the meter, because the flat is four degrees warmer than this and that is all." },
+    { type = "paragraph", content = "It comes in sideways and gets down your collar and you stand in it, because getting home does not solve it, because there is nothing in the coin box, because the flat is four degrees warmer than this and that is all." },
   ] },
 ]
 exit_block = { type = "location", text = "Get out of it.", config = { destinationType = "specific", locationId = "harbour_end", time_progression_minutes = 10 } }
@@ -3684,7 +3684,7 @@ description = "Triggerless rung off work_lets_turnaround. The 20-energy price an
 
 [[canvases.nodes]]
 id   = "base"
-name = "The turnaround"
+name = "Cleaning the flat"
 blocks = [
   { type = "paragraph", content = "Beds stripped, traps run so they do not dry out and stink the place up by Easter, and the vacuum round a carpet nobody has walked on in five months. Two hours thirty and you are paid for two." },
   { type = "paragraph", content = "There is somebody's suntan lotion still in the bathroom cabinet in number four. There has been since August. You leave it where it is every single time." },
@@ -3949,7 +3949,7 @@ id   = "base"
 name = "Tam"
 blocks = [
   { type = "image", props = { file = "portraits/tam.jpg", description = "A nineteen year old man lying on top of the covers in a hot small flat in daylight.", search_queries = ["young man lying on bed shirtless daylight small room", "teenager on bed small flat window light"] } },
-  { type = "paragraph", content = "He is on top of the covers with the extractor going through the wall. Nights finish at six, he is in bed by seven, and he does not properly sleep until about noon." },
+  { type = "paragraph", content = "He is on top of the covers with the fan going through the wall. Nights finish at six, he is in bed by seven, and he does not properly sleep until about noon." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "You can come in, you know. You do this thing where you stand on the top step." },
 ]
 
@@ -4033,7 +4033,7 @@ blocks = [
   { type = "dialog", props = { speaker = "player" }, content = "You want me to go?" },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "When have I ever wanted you to go." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Lee wants me on six nights. I said I'd think about it. I'm not going to do six." },
-  { type = "paragraph", content = "You say he should take the money. He says he knows. Neither of you moves for another forty minutes and the extractor goes the whole time." },
+  { type = "paragraph", content = "You say he should take the money. He says he knows. Neither of you moves for another forty minutes and the fan goes the whole time." },
   { type = "thought_bubble", props = { speaker = "player" }, content = "Nobody else in this town wants anything off me except a decision or a loan." },
 ]
 exit_block = { type = "location", text = "Go down the outside stair.", config = { destinationType = "specific", locationId = "the_chip_shop_flat", time_progression_minutes = 60, effects = [
@@ -4131,7 +4131,7 @@ blocks = [
     ] } }, blocks = [
     { type = "dialog", props = { speaker = "player" }, content = "What do you do when you can't get off to sleep?" },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Nothing." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Lie there. Listen to the extractor. It's not a problem, it's just how it is." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Lie there. Listen to the fan. It's not a problem, it's just how it is." },
     { type = "paragraph", content = "He says it the way he says everything he has decided not to want help with." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
@@ -4149,7 +4149,7 @@ blocks = [
     ] } }, blocks = [
     { type = "dialog", props = { speaker = "player" }, content = "What do you do when you can't get off to sleep?" },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "I come down and sit on your step for a bit." },
-    { type = "paragraph", content = "He says it at the ceiling, in the same voice he used for the extractor." },
+    { type = "paragraph", content = "He says it at the ceiling, in the same voice he used for the fan." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Not to knock. Just till it gets light. Then I go back up." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
@@ -4413,7 +4413,7 @@ name = "On top of him"
 blocks = [
   { type = "video", props = { pool_dir = "sex/tam_loop_astride_t5", pool = 6, description = "A woman riding a man on a bed in a small bright room, seen from below.", search_queries = ["woman riding man on bed daylight from below", "cowgirl bedroom daylight small room close"] } },
   { type = "paragraph", content = "You get a knee over him and put his cock in yourself, and your cunt is wet enough that he goes all the way in with one push and you both stop dead for a second at that." },
-  { type = "paragraph", content = "Then you ride him with your hands flat on his chest and your tits going with it, nipples up, and he holds your hips and lets you do the work, and the bed knocks the wall the extractor is behind." },
+  { type = "paragraph", content = "Then you ride him with your hands flat on his chest and your tits going with it, nipples up, and he holds your hips and lets you do the work, and the bed knocks the wall the fan is behind." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Slow down. I'm not — slow down a minute." },
   { type = "dialog", props = { speaker = "player" }, content = "No." },
 ]
@@ -4638,7 +4638,7 @@ blocks = [
   { type = "dialog", props = { speaker = "player" }, content = "Can I see it." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "You can see it any time. It's your building." },
   { type = "paragraph", content = "He says that without a flicker, and opens the second drawer, and neither of you mentions that he keeps it in a drawer in a caravan a mile from the building it is about." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Pitch, electric, the coin mechanism, the insurance. That's the four. The insurance is the one that'll do us in April." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Rent, electric, the coin mechanism, the insurance. That's the four. The insurance is the one that'll do us in April." },
   { type = "dialog", props = { speaker = "player" }, content = "How much in April." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "More than the summer makes. I'm working on it. Don't." },
 ]
@@ -4651,7 +4651,7 @@ id   = "two"
 name = "Why he took them"
 blocks = [
   { type = "dialog", props = { speaker = "player" }, content = "Why did you take them off me. Really." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Because you paid the pitch twice in March and missed it in April, and you didn't notice either." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Because you paid the rent twice in March and missed it in April, and you didn't notice either." },
   { type = "dialog", props = { speaker = "player" }, content = "I was going up to see your father every two weeks in March." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "I know. That's why I didn't say anything about it at the time. I just took them." },
   { type = "paragraph", content = "He wipes the same clean spot on his hands twice, which is the only thing about him that ever gives anything away." },
@@ -4775,7 +4775,7 @@ blocks = [
   { type = "paragraph", content = "Thirty-five out of the second drawer and he counts it into your hand rather than onto the desk, which is new, and holds the last note a half second longer than he needs to." },
   { type = "dialog", props = { speaker = "player" }, content = "You don't have to count it out like that." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "I do, actually. If I stop counting it we both start pretending it isn't happening." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "That's the meter and something over. And you shut at nine now, not ten. Nobody's coming in after nine in February and you're paying to light an empty room." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "That's the heater and something over. And you shut at nine now, not ten. Nobody's coming in after nine in February and you're paying to light an empty room." },
   { type = "paragraph", content = "You say all right. He waits, because he expected an argument and did not get one, and the not-arguing lands between you like a thing that has been agreed." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Say if that's not all right." },
   { type = "dialog", props = { speaker = "player" }, content = "It's all right." },
@@ -5072,7 +5072,7 @@ blocks = [
   { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "And you going out the front door every morning like nothing was happening. Fifteen. Coat done up. Chin out." },
   { type = "dialog", props = { speaker = "player" }, content = "I was terrified." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_roan" }, content = "I know. I was twelve and I could tell, and not one of that lot out there could." },
-  { type = "paragraph", content = "The racing goes to an advert and neither of you says anything for a while, and it is not an awkward while." },
+  { type = "paragraph", content = "The racing goes to a commercial and neither of you says anything for a while, and it is not an awkward while." },
 ]
 exit_block = { type = "choices", choices = [
   { text = "Ask him about Bristol.", targetType = "node", nodeId = "two" },
@@ -5289,7 +5289,7 @@ id   = "fingers"
 name = "His hand"
 blocks = [
   { type = "video", props = { pool_dir = "sex/terrace_fingers_t5", pool = 6, description = "A man's hand between a woman's legs on a settee, close, lamplight.", search_queries = ["hand between womans legs sofa close lamplight", "fingering close on couch dim room"] } },
-  { type = "paragraph", content = "Tights and knickers down to your knees and his hand between your legs, and your cunt is so wet that two fingers go straight in. His thumb finds your clit and stays on it, and he fucks them into your cunt slowly while you hold on to his wrist." },
+  { type = "paragraph", content = "Tights and panties down to your knees and his hand between your legs, and your cunt is so wet that two fingers go straight in. His thumb finds your clit and stays on it, and he fucks them into your cunt slowly while you hold on to his wrist." },
   { type = "dialog", props = { speaker = "player" }, content = "Don't stop." },
 ]
 
@@ -5714,7 +5714,7 @@ blocks = [
   { type = "paragraph", content = "The curtain has not been pulled across in weeks and neither of you has mentioned that either. She gets the shirt off with you sitting three feet away and does not turn her back." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "You always go quiet at this bit." },
   { type = "dialog", props = { speaker = "player" }, content = "I know." },
-  { type = "paragraph", content = "She comes and kneels up on the mattress in front of you in nothing but her knickers, close enough that you can feel the heat off her, and waits for you to be the one who moves." },
+  { type = "paragraph", content = "She comes and kneels up on the mattress in front of you in nothing but her panties, close enough that you can feel the heat off her, and waits for you to be the one who moves." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "You always stop here. Don't stop here." },
 ]
 
@@ -5756,7 +5756,7 @@ time_progression_minutes = 10
 effects = [ { targetType = "player", trait = "arousal", op = "add", value = 11, cap = 100 } ]
 
 [[canvases.nodes.exit_block.choices]]
-text       = "Get her knickers off."
+text       = "Get her panties off."
 targetType = "node"
 nodeId     = "fingers"
 costs      = [ { trait = "energy", value = 3 } ]
@@ -5891,7 +5891,7 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "loop_stage", operator = "gte", value = 3 },
     ] } }, blocks = [
     { type = "video", props = { pool_dir = "sex/back_room_finish_mouth_t5", pool = 5, description = "A woman coming with another woman's mouth on her, dim room, close.", search_queries = ["woman coming oral close dim room", "female orgasm oral low light close"] } },
-    { type = "paragraph", content = "She comes on your mouth with both hands shut in your hair and her heels on your back. You keep licking her cunt through every pull of it with your tongue flat on her clit, and she does not let you up until she is finished, and the plasterboard takes the noise she does not make." },
+    { type = "paragraph", content = "She comes on your mouth with both hands shut in your hair and her heels on your back. You keep licking her cunt through every pull of it with your tongue flat on her clit, and she does not let you up until she is finished, and the thin wall takes the noise she does not make." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "loop_stage", operator = "eq", value = 2 },
@@ -6168,7 +6168,7 @@ description = "Triggerless rung off hub_ewan_slip. THE DECLARED DIESEL SINK, bui
 id   = "base"
 name = "Twelve in the tank"
 blocks = [
-  { type = "paragraph", content = "The pump at the chandlery takes cash and gives no receipt. You put twelve in his tank while he is down at the water end with the winch, and you say nothing about it." },
+  { type = "paragraph", content = "The pump at the boat shop takes cash and gives no receipt. You put twelve in his tank while he is down at the water end with the winch, and you say nothing about it." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "The needle's moved." },
   { type = "dialog", props = { speaker = "player" }, content = "Has it." },
   { type = "paragraph", content = "He looks at the pump, and at you, and does the arithmetic without writing it down, which is the thing he does that his father never could. He does not say thank you and he does not say don't." },
@@ -6266,7 +6266,7 @@ description = "Triggerless rung off hub_tam_row. +3 ease, capped, day-capped, 3 
 id   = "base"
 name = "Up the row"
 blocks = [
-  { type = "paragraph", content = "Eleven doors, and he does the whole of it a half step behind you the way he did when he was seven and would not be walked in front of. The row smells of last night through the extractor grille." },
+  { type = "paragraph", content = "Eleven doors, and he does the whole of it a half step behind you the way he did when he was seven and would not be walked in front of. The row smells of last night through the fan grille." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "Lee wants me on six nights." },
   { type = "dialog", props = { speaker = "player" }, content = "You said." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_tam" }, content = "I know I said. I'm saying it again because you didn't tell me not to." },
@@ -6331,7 +6331,7 @@ id   = "base"
 name = "Nessa"
 blocks = [
   { type = "image", props = { file = "portraits/nessa.jpg", description = "A young woman sitting in a glass change booth in an amusement arcade, looking away from the front.", search_queries = ["young woman in arcade change booth glass", "girl sitting in ticket booth arcade bored"] } },
-  { type = "paragraph", content = "She is in the booth with her heels up on the shelf and her back to the window, which means she is watching the length of the floor instead of the front. The float bag is untouched." },
+  { type = "paragraph", content = "She is in the booth with her heels up on the shelf and her back to the window, which means she is watching the length of the floor instead of the front. The change bag is untouched." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "Four people since twelve. One of them was the dog man and he didn't have a dog." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "npc", npc_id = "npc_nessa", trait_key = "want", operator = "lt", value = 5 },
@@ -6367,7 +6367,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 ] }
 
 [[canvases.nodes.exit_block.choices]]
-text        = "Let her do the float."
+text        = "Let her count the till."
 targetType  = "node"
 nodeId      = "rung_nessa_float.base"
 costs       = [ { trait = "energy", value = 5 } ]
@@ -6400,12 +6400,12 @@ exit_block = { type = "location", text = "Get out before the hatch sticks.", con
 
 [[canvases]]
 id          = "rung_nessa_float"
-name        = "The float"
+name        = "The till"
 description = "Triggerless rung off hub_nessa_booth, gated trust >= 20. +5 trust, day-capped, 5 energy and 55 minutes. Handing a lodger the money bag is what trust IS -- no metaphor required."
 
 [[canvases.nodes]]
 id   = "base"
-name = "The float"
+name = "The till"
 blocks = [
   { type = "paragraph", content = "You show her the bags once and then let her do it: coins, notes, count them in, and the figure written in the book in her handwriting instead of yours for the first time in four years." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "What if I'm out." },
@@ -6470,7 +6470,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "npc", npc_id = "npc_ewan", trait_key = "hold", operator = "gte", value = 32 },
     ] } }, blocks = [
-    { type = "paragraph", content = "He does not get off the stool. He slides the float tin along the shelf to make room for your hip and carries on watching the floor." },
+    { type = "paragraph", content = "He does not get off the stool. He slides the change tin along the shelf to make room for your hip and carries on watching the floor." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_ewan" }, content = "Sit down. You've been on your feet since the shutter went up." },
   ] },
 ]
@@ -6654,7 +6654,7 @@ blocks = [
   { type = "paragraph", content = "You do not go and you do not pull the curtain. She rolls onto her back with the sheet down at her waist and puts one arm behind her head and lets you look at her tits in the light off the machines." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_nessa" }, content = "Go on then." },
   { type = "paragraph", content = "Her other hand goes under the sheet and you watch it move, slow, and her knees fall open under the cotton, and she does not shut her eyes once the whole time she is doing it." },
-  { type = "paragraph", content = "She comes with her heel dragging up the mattress and her mouth open and no sound at all, because the wall is plasterboard and there is a whole town on the other side of it." },
+  { type = "paragraph", content = "She comes with her heel dragging up the mattress and her mouth open and no sound at all, because the wall is thin and there is a whole town on the other side of it." },
   { type = "thought_bubble", props = { speaker = "player" }, content = "Judith's girl. Forty a week and a curtain, and I stood in that doorway with my hand flat on the frame and did not go up." },
 ]
 exit_block = { type = "location", text = "Go up the stair.", config = { destinationType = "specific", locationId = "the_back_room", time_progression_minutes = 35, effects = [

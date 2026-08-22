@@ -1736,6 +1736,25 @@ _WORD_TOKEN = re.compile(r"[A-Za-z][A-Za-z'\-]*")
 # blind to them. This is the half of the check that no corpus can supply, kept short on
 # purpose: a lint that cries wolf gets ignored (see `_OBJ_STOP` above, same lesson).
 # Only entries verified by reading real lines in our own games are listed.
+#
+# ⚠️ A WORD `register.md` NAMES AS A DEFECT BELONGS IN HERE. The four additions dated
+#    2026-08-23 were all sitting in that file already and in none of this dict:
+#    `meter` is the FIRST example in the section ("The words the player has to already
+#    own"), and `pitch` and `float` are both in its required-swap list. A false friend is
+#    by definition a common word, so `genre_words.txt` can never surface one — if this
+#    dict does not carry it, nothing in the instrument does. Reconcile the two on every
+#    edit to either.
+#
+# ⚠️ MEASURED AND REJECTED — do not re-propose without new evidence. Counts are uses in
+#    player-visible text across the 20 built games (269,421 words), read line by line:
+#      front  ×334  "the front door", "in front of" — noise
+#      inside ×213  "inside the room" — noise
+#      tip     ×44  only back_home's 3 ("the desk went to the tip") are the dump sense
+#      boot     ×8  every use is footwear; not one car boot in the repo
+#      bill     ×7  invoice and banknote are both common; no defect present
+#      purse   ×10  a wrong picture, but it does not cost the scene; 5 of 10 correct
+#    The bar is not "could be misread" — it is "misreads badly enough to cost the
+#    reader the line, often enough to be worth the false positives."
 _FALSE_FRIENDS = {
     "vest":    "an undershirt here, a waistcoat to most readers",
     "tea":     "the evening meal here, a hot drink to most readers",
@@ -1746,6 +1765,15 @@ _FALSE_FRIENDS = {
     "biscuit": "a cookie here, a soft savoury roll to most readers",
     "dummy":   "a pacifier here, a mannequin to most readers",
     "fringe":  "a haircut here, an edge to most readers",
+    # Added 2026-08-23. `meter` is the one that reached a player: LO hit the button
+    # `Feed the meter ($3)` in the built off_season and could not read it — and it is
+    # the first entry here whose clash is with OUR OWN UI rather than with a dialect.
+    # In this genre a meter is a stat bar, and that game renders four in its sidebar.
+    # Same exposure, unmeasured so far: board, card, flag, state, tier, rung.
+    "meter":   "a coin-fed prepayment box here, a stat bar to most players",
+    "float":   "the till's starting cash here, something buoyant to most readers",
+    "pitch":   "the rent on a trading spot here, a sound or a throw to most readers",
+    "chemist": "a pharmacy here, a scientist to most readers",
 }
 # `half seven` is 7:30 in Britain, 6:30 across much of Europe, and not a construction
 # American English uses at all. Measured: 157 uses across six of our games against 4
@@ -1845,7 +1873,15 @@ def lint_own_words(model, game):
         return (f"0 of {total:,} words sit outside the field's shared vocabulary", [])
 
     ranked = sorted(rare.items(), key=lambda kv: (-kv[1], kv[0]))
-    findings = [f"{w} ×{n}" for w, n in ranked[:20]]
+    SHOWN = 20
+    findings = [f"{w} ×{n}" for w, n in ranked[:SHOWN]]
+    # A list that hides two thirds of itself is not a list. off_season printed 20 rows
+    # under a summary that said 67, and the 47 it swallowed included words already in
+    # the player's face.
+    if len(ranked) > SHOWN:
+        rest = sum(n for _w, n in ranked[SHOWN:])
+        findings.append(f"… and {len(ranked) - SHOWN} more word(s), {rest} use(s), not "
+                        f"printed — re-run with --json for the full list")
 
     # The second half: words the corpus cannot flag because they are perfectly common.
     amb = len(_HALF_HOUR.findall(text))
@@ -1853,7 +1889,12 @@ def lint_own_words(model, game):
         findings.append(f"[ambiguous] `half <hour>` ×{amb} — 7:30 here, 6:30 across much of "
                         f"Europe, and not used at all in American English. `half past` is the "
                         f"version that survives")
-    ff = [(w, uses[w]) for w in _FALSE_FRIENDS if uses.get(w)]
+    # ⚠️ COUNT THE PLURAL TOO. `uses` is a bag of singular tokens, so the first version
+    # of this read `vest` and never `vests` — and forty_miles carries both. Missed
+    # `vests` ×2, `torches` ×2 and `biscuits` ×1 across the repo before this was added.
+    def _ff_uses(w):
+        return uses.get(w, 0) + uses.get(w + "s", 0) + uses.get(w + "es", 0)
+    ff = [(w, _ff_uses(w)) for w in _FALSE_FRIENDS if _ff_uses(w)]
     for w, n in sorted(ff, key=lambda kv: -kv[1]):
         findings.append(f"[false friend] {w} ×{n} — {_FALSE_FRIENDS[w]}")
 
