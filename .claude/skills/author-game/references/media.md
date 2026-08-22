@@ -186,45 +186,19 @@ and `search_queries` so the missing-media page is a usable list, and check cover
   `[IMAGE MISSING]`/`[VIDEO MISSING]` text into the file; `--dev` leaks dev controls. Minimal publish build:
   `python manage.py package_from_toml --file <toml> --output <dir> --video-folder <media-dir>` (no `--owner-id`
   — the no-DB build is the default).
-- **`--build free|paid`** — cheat-page variant, **default `free`**, so a publish build is the safe one unless
-  you say otherwise. Only affects games that author `[ui.cheat_page]`. A **paid** build carries live cheat
-  grants and goes to `games/<slug>/output-paid/` (the command refuses to write a paid build into any directory
-  named `output`, so it can never overwrite the free public build). Two builds come from ONE merged TOML —
-  never edit the source between them.
-  **Ship the paid build SELF-CONTAINED — same structure as the free build:** its own `output-paid/videos/`,
-  built with the PLAIN command (`--video-folder <media-dir>`, and **NOT** `--video-path`), so the folder stands
-  alone when archived/distributed. **Media is gitignored by default, so you MUST whitelist the paid build's
-  media in `.gitignore` or every clip 404s on Pages** — fine from `file://`, broken live. Mirror the free
-  build's two lines:
-  ```
-  !games/<slug>/output-paid/videos/
-  !games/<slug>/output-paid/videos/**
-  ```
-  Commit BOTH builds' HTML **and** media in the same commit so they never drift, and clear `ship-gate.md` §4's
-  deploy check (referenced media must be git-**tracked**, not just on disk). *(⚠️ `--video-path <dir>` is a
-  niche weight-saver — it points the paid HTML at ANOTHER build's media with **no copy**, e.g.
-  `--video-path ../output/videos` to borrow the free build's tracked assets and avoid a second copy near the
-  1 GB Pages cap. It yields a **non-standalone** folder, so **don't use it for a normal paid ship** — it exists
-  only for the weight-constrained case.)*
-
----
-
-## 4. Writing `search_queries` — the craft
-
-`search_queries` are **search-engine queries for an adult-content site**, not scene descriptions. The
-`description` field carries the narrative; the queries carry **platform-searchable vocabulary only.** The
-find-media skill runs them to fetch the asset, so vague or literary queries return nothing usable. The engine
-just stores the array verbatim (it never validates it), so this is pure craft — and it's the half Vesper, Last
-Call, and Late Shifts all skipped.
-
-> **⚠️ Corrected 2026-07-27 after a measured A/B.** The old rules here were tuned for searching PornHub's
-> own index directly, and they were taught as if they were universal search law. They are not. find-media now
-> searches **Google Images**, which behaves almost oppositely: it handles long natural-language queries fine,
-> but it re-classifies a query as mainstream the moment you put *story* words in it. The old "3-5 words,
-> setting first" law is retired. What follows is what actually measured better.
-
-**The rules:**
-
+- **`--codes <path>`** — the cheat-code file, **required** for any game that authors `[ui.cheat_page]`.
+  There is **ONE build** now: the same file ships to the portals, to itch and to a supporter, and which
+  cheat rows are live is decided at RUNTIME by the codes the player entered. `--build free|paid`, the
+  `[builds]` block and `games/<slug>/output-paid/` were removed on 2026-08-23 — a leftover `[builds]` block
+  is a hard validate() error, so a game carrying the old shape tells you instead of silently losing a badge.
+  Codes live in **`games/<slug>/guide/codes.toml`**, untracked because `games/*/guide/` is gitignored and
+  this repo is public. Only salted hashes reach the build. The same file feeds `manage.py build_guide`, so
+  the guide can never document a code the build will not accept. `--no-codes` builds the page with nothing
+  that opens it; omitting both is a build error.
+  **Why this shape:** the retired model shipped the cheats in a separate downloadable build, which a phone
+  cannot practically open — a paying supporter playing on mopoga or gamcore had no route to what they bought.
+  8 of the 26 top mopoga games carry a live code box inside the free web build; only 3 ship a separate paid
+  file. See `.claude/skills/author-game/CHANGELOG.md` (2026-08-23) for the measurement.
 - **Two queries per block: a primary + one fallback.** Length is not the constraint — *content* is. A
   descriptive query is fine; a story-flavoured one is not.
 - **Lead with the ACT and the POSITION, and say who does what to whom.** That is what the searcher must match

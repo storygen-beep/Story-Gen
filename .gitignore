@@ -100,19 +100,20 @@ the-persistent-husband_720m.mp4
 *.flv
 *.wmv
 
-# Rendered player guides. This repo is PUBLIC and serves the GitHub Pages
-# portal, so a committed guide PDF is a free download and the Patreon gate
-# stops meaning anything. Commit games/<slug>/guide/guide.md, upload the PDF.
+# Player guides. The GUIDE IS THE PAID PRODUCT now — it carries the cheat codes and
+# the walkthrough, and it is the whole of what a Beta Nut member buys. This repo is
+# PUBLIC and serves the GitHub Pages portal, so nothing under games/<slug>/guide/ may
+# be committed: not the PDF, not the markdown it is rendered from, and above all not
+# codes.toml. The renderer (apps/.../build_guide.py) and its print CSS
+# (scripts/guide_styles/) stay in git; only the content leaves.
+#
+# ⚠️ games/vesper/guide/guide.md was committed before this rule (it was a layout
+# sample) and is still in public history. Treat that draft as burned — this rule stops
+# FUTURE guide content leaking, it cannot retract what already shipped.
+#
+# The guide has no version history while it lives here. Back it up off this repo.
+games/*/guide/
 *.pdf
-games/*/guide/*.html
-
-# NOTE on paid ("supporter") builds — games/<slug>/output-paid/ is deliberately NOT
-# ignored (LO's call, 2026-07-26): the local portal opens it, and the build is worth
-# versioning and diffing alongside the free one. Be clear-eyed about what that means —
-# this repo is PUBLIC and serves Pages, so a committed paid build is publicly playable.
-# Patreon is the DISTRIBUTION channel for it, not an access gate. Media is still
-# ignored by extension, same as the free build. Build with:
-#   manage.py package_from_toml ... --build paid --output games/<slug>/output-paid
 
 # images
 *.jpg
@@ -219,9 +220,6 @@ game_explorations/*/.live/
 # ============================================================
 !games/vesper/output/videos/
 !games/vesper/output/videos/**
-# Paid build ships as a self-contained folder (own ./videos), same structure as the free build.
-!games/vesper/output-paid/videos/
-!games/vesper/output-paid/videos/**
 !games/the_inheritance/output/videos/
 !games/the_inheritance/output/videos/**
 

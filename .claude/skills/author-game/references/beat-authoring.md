@@ -82,18 +82,21 @@ NPC arcs/hubs/ambients/capstones are beats. Only the skeleton + boot + sleep + s
    and pass 68/68 clean.* **Run the suite against a CLEAN build** (the state you ship anyway), or scope every
    absence check to `#passage` rather than `body`. A suite that only ever runs on a QA build is a suite whose
    failures you learn to ignore, which is worse than not having it.
-   **`--build free|paid`** selects the cheat-page variant and **defaults to `free`**, so an ordinary build
-   is always the safe one. It only matters for a game that authors `[ui.cheat_page]`; a `free` build emits
-   the rows as padlocked labels with **no working effects in the file**, a `paid` build emits live rows.
-   The paid artifact goes to `games/<slug>/output-paid/` — the command refuses to write a paid build into any
-   directory named `output` (so it can't overwrite the free public build). Ship it **self-contained, same
-   structure as the free build** (its own `output-paid/videos/`, the plain command below — **not**
-   `--video-path`); **whitelist its media in `.gitignore` (`!games/<slug>/output-paid/videos/` + `/**`) or it
-   404s live**, and commit both builds' HTML + media together. `media.md` §3 owns the full model;
-   `ship-gate.md` §4 has the git-tracked deploy check that catches a missing whitelist:
+   **`--codes <path>`** is required for any game that authors `[ui.cheat_page]`. There is **one build**
+   now — the same file ships to the portals, to itch and to a supporter — and which cheat rows are live is
+   a RUNTIME property of the codes the player has entered, not a property of the file. `--build free|paid`,
+   `[builds]` and `games/<slug>/output-paid/` were removed on 2026-08-23; a leftover `[builds]` block is a
+   hard validate() error.
+   The codes live in **`games/<slug>/guide/codes.toml`**, which is untracked (`games/*/guide/` is gitignored)
+   because this repo is public and a committed code is a published code. Only salted hashes reach the build,
+   and `_assert_no_plaintext_codes()` fails the build if a code word appears anywhere in the output — the
+   likeliest way to leak one is pasting it into a row's `hint`. Pass `--no-codes` to build the page with
+   nothing that opens it; omitting both is a build error, because a release whose box opens nothing is a
+   failure a paying customer discovers for you.
    ```bash
    python manage.py package_from_toml --file games/<slug>/toml_phases/7_final_game.toml \
-     --build paid --output games/<slug>/output-paid --video-folder games/<slug>/videos
+     --output games/<slug>/output --video-folder games/<slug>/videos \
+     --codes games/<slug>/guide/codes.toml
    ```
 
 **Which phase file a beat's content goes in** (set `target_phase`; when unsure, check where

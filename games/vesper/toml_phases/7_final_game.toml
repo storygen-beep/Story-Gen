@@ -474,12 +474,17 @@ hidden = true
 # ══════════════════════════════════════════════════════════════════
 # THE LEDGER — the player cheat page ([ui.cheat_page])
 # ══════════════════════════════════════════════════════════════════
-# Sidebar page, free and never gated by a code. Which VARIANT ships is a BUILD
-# argument, never a value in here — two builds come from this one commit:
-#   free:  package_from_toml … --output games/vesper/output            (the default)
-#   paid:  package_from_toml … --build paid --output games/vesper/output-paid
-# The free build emits these rows as padlocked LABELS with no working effects and
-# no hint text in the file; the paid build emits live rows with the hints.
+# Sidebar page. ONE build ships everywhere — to the portals, to itch, to a supporter.
+# Each row is emitted live but wrapped in a check on its own unlock flag, so a player
+# who has entered no code sees the box and the join line and NOTHING else: no row
+# names, no numbers, no padlocks to count.
+#
+# The CODES are not in this file and must never be. This repo is public, so a code
+# written here is a published code. They live in games/vesper/guide/codes.toml, which
+# is untracked, and reach the build through:
+#   package_from_toml … --codes games/vesper/guide/codes.toml
+# Only salted hashes are baked into the output. The same file feeds `build_guide`, so
+# the guide can never print a code the build will not accept.
 #
 # Register: flat and mechanical. The container carries the fiction ("The Ledger" —
 # numbers she keeps for herself); the rows stay legible, because this page is read
@@ -492,7 +497,11 @@ title        = "The Ledger"
 intro        = "She keeps her own numbers."
 button_label = "Cheat"
 button_icon  = "🔓"
-locked_note  = "Supporters unlock these."
+# The join block is the page's only advertising — for a player with no code it is the
+# only thing that says what the box is for. Names the tier, because the codes ship with
+# the guide on that tier and nowhere else.
+join_note    = "Cheat codes come with the game guide, in the Beta Nut tier."
+join_url     = "https://www.patreon.com/cw/nutgames844/membership"
 
 # COIN — the only near-essential row. Starts at 0, the underworld toll is 5 and is
 # charged on EVERY entry, and all three coin faucets (brothel, pit, Marsh) sit behind
@@ -500,6 +509,7 @@ locked_note  = "Supporters unlock these."
 # so there are no bands to break; clamp = false because a wallet is unbounded (the
 # engine's 0-100 clamp would silently cap it at 100).
 [[ui.cheat_page.grants]]
+id          = "coin"
 label       = "Coin"
 trait       = "coin"
 op          = "add"
@@ -512,6 +522,7 @@ button_text = "Coin +25"
 # opens the hard pit bouts (+20 coin instead of +8), 40 clears yard guard 3. Step 5 =
 # the smallest gap between its gates, so it can never jump one. Cap 40 = the last gate.
 [[ui.cheat_page.grants]]
+id          = "fighting"
 label       = "Fighting"
 trait       = "fighting"
 op          = "add"
@@ -527,6 +538,7 @@ at_cap_text = "As sharp as this will make her."
 # encounters exist per save, so a stealth-40 player could never see the emitter scene.
 # The yard teaches the rest; this row only opens the door to it.
 [[ui.cheat_page.grants]]
+id          = "stealth"
 label       = "Stealth"
 trait       = "stealth"
 op          = "add"
@@ -542,6 +554,7 @@ at_cap_text = "Any sharper and she stops needing the quiet routes."
 # 40/50, evenly spaced, so +10 lands exactly on each band and skips nothing.
 # The hint says what 50 ACTUALLY buys — corruption alone opens nothing.
 [[ui.cheat_page.grants]]
+id          = "renner"
 label       = "Renner"
 targetType  = "npc"
 npcId       = "npc_renner"
@@ -565,6 +578,7 @@ at_cap_text = "He is as far gone as the rungs will take him."
 # that still have to be met on the floor, in the bought face, and the hint says so rather than implying that
 # a full meter walks her through the door.
 [[ui.cheat_page.grants]]
+id          = "bastien"
 label       = "Bastien"
 targetType  = "npc"
 npcId       = "npc_bastien"
@@ -581,6 +595,7 @@ at_cap_text = "He has decided everything about you that he is going to decide fr
 # does it). Free in normal play; this row exists because after the Archive beat every
 # charge point seals, which is the one place the game can strand a player.
 [[ui.cheat_page.grants]]
+id          = "charge"
 label       = "Charge"
 trait       = "energy"
 op          = "set"
@@ -590,13 +605,6 @@ clamp       = true
 hint        = "back to full — the cradle does this for free while the Spire is still open"
 button_text = "Charge → full"
 at_cap_text = "Already full."
-
-# Build labels for the sidebar footer badge. TEXT ONLY — nothing here selects which
-# build is active; that is `--build free|paid`.
-[builds.free]
-label = "Free Build"
-[builds.paid]
-label = "🎯 Beta Nut Build"
 
 # ══════════════════════════════════════════════════════════════════
 # Phase: 1_metadata_and_locations.toml

@@ -81,13 +81,12 @@ class TweeComprehensiveGeneratorV2:
     Completely isolated from other generation systems.
     """
 
-    # Build variant for the cheat page — "free" (padlocked labels, no effects in the
-    # output) or "paid" (live rows). Class-level so the throwaway instances that only
-    # call validate_flag_chains(), which never set options, can still read it.
-    # Default-free is enforced HERE as well as in argparse: several callers reach
-    # generate() without passing a build, and none of them should be able to produce
-    # a paid file by accident.
-    build_variant = "free"
+    # {row id: plaintext cheat code}, injected by the packager from a game's untracked
+    # codes file. Class-level and empty by default so the throwaway instances that only
+    # call validate_flag_chains() — which never set options — can still read it, and so
+    # a caller that never heard of codes produces a page whose box opens nothing rather
+    # than a crash.
+    cheat_codes: dict = {}
 
     def __init__(self):
         self.project = None
@@ -151,9 +150,12 @@ class TweeComprehensiveGeneratorV2:
         self.video_path = self.options.get("video_path")  # Direct path mode
         self.debug = self.options.get("debug", False)
         self.dev_mode = self.options.get("dev_mode", False)
-        # Only the exact string "paid" opts in. Anything else — missing, None, a typo
-        # that slipped past argparse, a caller that never heard of this flag — is free.
-        self.build_variant = "paid" if self.options.get("build") == "paid" else "free"
+        # Cheat codes, if the packager was given a codes file. Anything that is not a
+        # dict of strings is treated as no codes at all rather than half-trusted.
+        _codes = self.options.get("cheat_codes")
+        self.cheat_codes = {
+            str(k): str(v) for k, v in _codes.items()
+        } if isinstance(_codes, dict) else {}
         if self.video_folder:
             self._load_media_files()
 
@@ -240,63 +242,42 @@ class TweeComprehensiveGeneratorV2:
         # the underlying JS functions are dead code — purge them.
         output = self._strip_sidebar_mechanism_if_v2(output)
 
-        # Last gate before the file leaves the generator: prove the emitted cheat page
-        # matches the variant we were asked to build. Raises rather than returning a
-        # quietly-wrong file.
-        self._assert_build_variant_integrity(output)
+        # Last gate before the file leaves the generator: prove no plaintext cheat code
+        # reached the output. Raises rather than returning a quietly-wrong file.
+        self._assert_no_plaintext_codes(output)
 
         return output
 
-    def _assert_build_variant_integrity(self, output: str) -> None:
-        """Fail the build if the cheat page doesn't match self.build_variant.
+    def _assert_no_plaintext_codes(self, output: str) -> None:
+        """Fail the build if a cheat code reached the output in plaintext.
 
         Why an assertion and not a regex strip: a strip that under-matches ships a
         leaked file that still looks green. An assertion cannot fail quietly — and the
-        thing being protected (a free build containing working cheat grants, in a
-        PUBLIC repo) is not something to discover after publishing.
+        thing being protected (a code that is supposed to arrive with a paid guide, in
+        a file published to every portal) is not something to discover afterwards.
 
-        Cheap belt-and-braces over `_generate_cheat_page`, which already emits the
-        right thing. This catches a future edit that breaks it.
+        Cheap belt-and-braces over `_generate_cheat_code_script`, which only ever emits
+        hashes. This catches a future edit that breaks it — for instance an author
+        putting the code in a row's `hint`, which would be an easy mistake to make and
+        an expensive one to notice.
+
+        The comparison is case-insensitive and whitespace-stripped on the OUTPUT side
+        too, because a code that survives normalisation is still a working code.
         """
-        if not self.cheat_page:
+        if not self.cheat_page or not self.cheat_codes:
             return
 
-        grants = self.cheat_page.get("grants") or []
-        # Scope to the CheatPage passage. Splitting on the passage delimiter keeps a
-        # canvas's legitimate applyAndNotifyTrait calls out of the comparison.
-        section = ""
-        for chunk in output.split("\n:: "):
-            if chunk.startswith("CheatPage\n") or chunk == "CheatPage":
-                section = chunk
-                break
-
-        if self.build_variant == "paid":
-            found = section.count("setup.applyAndNotifyTrait(")
-            if found != len(grants):
+        haystack = self.normalize_cheat_code(output)
+        for grant_id, code in self.cheat_codes.items():
+            needle = self.normalize_cheat_code(code)
+            # A one- or two-character "code" would collide with ordinary prose and make
+            # this check useless noise; validate() already rejects those upstream.
+            if len(needle) >= 3 and needle in haystack:
                 raise RuntimeError(
-                    f"cheat page integrity: paid build emitted {found} grant call(s) for "
-                    f"{len(grants)} authored row(s). A paid build with dead rows must not ship."
+                    f"cheat page integrity: the plaintext code for row '{grant_id}' appears "
+                    f"in the output. Codes must reach players through the guide, never "
+                    f"through the published file — check the row's hint, label and intro."
                 )
-            return
-
-        # FREE build — nothing executable, and no paid-only copy anywhere in the file.
-        for token in ("setup.applyAndNotifyTrait", "<<script>>", "advanceTime", "cheat-hint"):
-            if token in section:
-                raise RuntimeError(
-                    f"cheat page integrity: FREE build contains '{token}' in the CheatPage "
-                    f"passage. The free build must carry padlocked labels only — no working "
-                    f"effects can be present in a file that ships publicly."
-                )
-        # The paid-only strings are unique authored copy; if any reached the output, the
-        # free/paid split has leaked somewhere other than the page body.
-        for i, g in enumerate(grants):
-            for field in ("hint", "button_text", "at_cap_text"):
-                text = (g.get(field) or "").strip()
-                if text and text in output:
-                    raise RuntimeError(
-                        f"cheat page integrity: FREE build leaked paid-only copy — "
-                        f"grants[{i}].{field} appears in the output."
-                    )
 
     def _strip_sidebar_mechanism_if_v2(self, output: str) -> str:
         """PRD 48 — Remove sidebar hint JS functions and widget branch
@@ -1253,12 +1234,9 @@ class TweeComprehensiveGeneratorV2:
         # button not emitted. Authored under [ui.tips_page] in TOML.
         self.tips_page = (self.project.metadata or {}).get("tips_page", {}) or {}
         # Player cheat page — empty dict = page + sidebar button not emitted.
-        # Authored under [ui.cheat_page]. WHICH VARIANT ships is self.build_variant,
-        # a build-time argument, never a value in here.
+        # Authored under [ui.cheat_page]. One build ships everywhere; which rows are
+        # live is decided at runtime by the codes the player has entered.
         self.cheat_page = (self.project.metadata or {}).get("cheat_page", {}) or {}
-        # Sidebar footer build badge, from [builds.free] / [builds.paid]. Empty =
-        # no badge at all, which keeps pre-existing games' output byte-identical.
-        self.build_labels = (self.project.metadata or {}).get("build_labels", {}) or {}
         # Theme (visual customization)
         raw_theme = (self.project.metadata or {}).get("theme", {})
         self.theme = self._resolve_theme(raw_theme)
@@ -9716,26 +9694,110 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 
         return content
 
+    def _cheat_page_css(self) -> str:
+        """Cheat-page styling, emitted ONLY for games that author a cheat page.
+
+        Gated on the same principle the retired build badge used: a game that does not
+        author this feature should not carry it. Until now these rules shipped in every
+        game's stylesheet whether or not it had a cheat page — a pre-existing leak this
+        change closes rather than widens.
+
+        The leading newline lives HERE, and the seam is spliced onto the closing brace
+        of the previous rule, so the emitted stylesheet is unchanged for a game with a
+        cheat page and simply has no gap for a game without one.
+        """
+        if not self.cheat_page:
+            return ""
+        return """
+/* Cheat page rows. Flat and mechanical by design — this page is read as a list of
+   levers, not as prose, so the fiction lives on the container and the rows stay legible. */
+.cheat-intro {
+    margin-bottom: 12px;
+    color: var(--theme-text-muted, #8a8a8a);
+    font-size: 13px;
+}
+.cheat-row {
+    padding: 7px 0;
+    border-bottom: 1px solid var(--theme-border, #2a2a2a);
+}
+.cheat-row:last-of-type { border-bottom: none; }
+.cheat-hint, .cheat-at-cap {
+    margin-top: 2px;
+    color: var(--theme-text-muted, #8a8a8a);
+    font-size: 12px;
+}
+.cheat-row-maxed {
+    font-weight: 600;
+    opacity: 0.5;
+}
+/* Code entry. The box is the whole surface for a player with no code, so it is
+   sized to be obviously the thing to use rather than tucked in a corner. */
+.cheat-entry {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+.cheat-entry input[type="text"] {
+    flex: 1 1 160px;
+    min-width: 0;
+    padding: 6px 8px;
+    border: 1px solid var(--theme-border, #3a3a3a);
+    border-radius: 4px;
+    background: var(--theme-surface-alt, #1a1a1a);
+    color: var(--theme-text, #e8e8e8);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+#cheat-reply { flex: 1 1 100%; }
+.cheat-reply-bad {
+    color: var(--theme-danger, #d06a6a);
+    font-size: 12px;
+}
+/* The join line is this page's only advertising: for a player with no code it is the
+   sole thing on the page that tells them what the box is for. */
+.cheat-join {
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--theme-border, #2a2a2a);
+    color: var(--theme-text-muted, #8a8a8a);
+    font-size: 12px;
+}
+/* Version chip — the release a player matches against their guide, since codes are
+   scoped per release. Rides inside .sidebar-version and the cheat page's heading. */
+.build-badge {
+    display: inline-block;
+    padding: 0 5px;
+    border: 1px solid var(--theme-border, #3a3a3a);
+    border-radius: 3px;
+    font-size: 10px;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    color: var(--theme-text-muted, #8a8a8a);
+}"""
+
     def _generate_cheat_page(self) -> str:
-        """Emit the player cheat page + its sidebar button widget.
+        """Emit the player cheat page, its code-entry script, and its sidebar button.
 
-        Two variants, chosen by self.build_variant (a BUILD argument, never a TOML
-        value — two builds come from one commit):
+        ONE build ships everywhere — to the portals, to itch, to a supporter. Which
+        rows are live is a RUNTIME property of the codes the player has entered, not
+        a property of the file. That is what the studied field does: 8 of the 26 top
+        mopoga games carry a live supporter-code box inside the free web build, and
+        only 3 ship a separate paid file (which a phone cannot practically open).
 
-          free — each row is a label and a padlock. No macros, no effects, and no
-                 runtime config object. The row's `hint` never reaches the file, so a
-                 free player learns no threshold, place or route from the page.
-          paid — each row is a link that writes its trait, with the hint text and an
-                 at-cap guard.
+        A player who has entered nothing sees the title, the intro, an empty box and
+        the join line. Each row is emitted inside a check on its own unlock flag, so
+        a locked row renders NO bytes — no label, no padlock, no hint. Reading the
+        page teaches a free player nothing about what exists or what it costs.
 
         The `cheatButton` widget is ALWAYS defined (empty when there is no cheat page),
         because StoryCaption calls it unconditionally and SugarCube throws on an
         undefined widget.
 
-        NOTE the deliberate absence of a `setup.cheat_page = {...}` ship line. Mirroring
-        the tips_page pattern here would put every trait, value, cap and hint string
-        into the FREE file — the house pattern is exactly the wrong thing to copy. All
-        text is baked into the passage markup instead.
+        NOTE the deliberate absence of a `setup.cheat_page = {...}` ship line. The only
+        runtime object is `setup.cheatCodes`, which maps hash -> row id and carries no
+        trait, value, cap or hint. Everything else is baked into passage markup.
         """
         cp = self.cheat_page or {}
         # Widget first — defined in both cases so StoryCaption never calls a ghost.
@@ -9745,10 +9807,10 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         title = html.escape(cp.get("title") or "Cheats")
         btn_label = html.escape(cp.get("button_label") or cp.get("title") or "Cheats")
         btn_icon = html.escape(cp.get("button_icon") or "")
-        intro = cp.get("intro") or ""            # ships in BOTH variants
-        locked_note = cp.get("locked_note") or ""  # free only
+        intro = cp.get("intro") or ""
+        join_note = cp.get("join_note") or ""
+        join_url = cp.get("join_url") or self._resolve_support_url()
         grants = cp.get("grants") or []
-        is_paid = self.build_variant == "paid"
 
         icon_span = f'<span class="nav-i">{btn_icon}</span>' if btn_icon else ""
         widget = (
@@ -9761,48 +9823,204 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
             '<</widget>>\n'
         )
 
-        # The badge tells a supporter which file they are holding — the commonest
-        # complaint in the studied games was people unable to tell.
-        badge_label = ""
-        if self.build_labels:
-            badge_label = (
-                self.build_labels.get("paid") or "Paid Build" if is_paid
-                else self.build_labels.get("free") or "Free Build"
-            )
-        badge = f' <span class="build-badge">{html.escape(badge_label)}</span>' if badge_label else ""
+        # The version chip. Codes are scoped to a release, so the number a player has
+        # to match against their guide belongs on this page and not only in the
+        # sidebar footer. Reuses the existing .build-badge rule.
+        version = str((self.project.metadata or {}).get("version", "") or "").strip()
+        badge = (
+            f' <span class="build-badge">v{html.escape(version)}</span>' if version else ""
+        )
 
-        rows = [self._cheat_row_markup(g, is_paid) for g in grants]
+        rows = [self._cheat_row_markup(g) for g in grants]
+
+        # Failure copy names the build. We cannot tell a wrong code from a right code
+        # for another release (the hash is salted with the version, so both simply
+        # miss) — and we do not need to. Naming the version answers both cases, and
+        # "your code is for a different release" is the likeliest one.
+        miss_msg = (
+            f"No match. This build is v{html.escape(version)} — check you are using the "
+            f"v{html.escape(version)} guide."
+            if version else "No match. Check the code against your guide."
+        )
+
+        entry = [
+            '<div class="cheat-entry">',
+            '<<textbox "_cheatcode" "">>',
+            '<<link "Unlock">>',
+            '  <<set _hit to setup.cheatTry(_cheatcode)>>',
+            '  <<if _hit>><<goto "CheatPage">>',
+            f'  <<else>><<replace "#cheat-reply">>'
+            f'<span class="cheat-reply-bad">{miss_msg}</span><</replace>>',
+            '  <</if>>',
+            '<</link>>',
+            '<span id="cheat-reply"></span>',
+            '</div>',
+        ]
+
+        join_block = ""
+        if join_note:
+            join_block = (
+                f'<div class="cheat-join">{html.escape(join_note)} '
+                f'<a href="{html.escape(join_url)}" target="_blank" rel="noopener">'
+                f'Open the membership page</a></div>'
+            )
 
         body = [
             ":: CheatPage",
             "<<nobr>>",
+            # Re-apply anything this browser has already unlocked for this build.
+            # Idempotent, and the only reason a new game does not need re-typing.
+            "<<run setup.cheatRestore()>>",
             f"<h2>{title}{badge}</h2>",
             '<div class="npc-section">',
         ]
         if intro:
             body.append(f'<div class="cheat-intro">{html.escape(intro)}</div>')
+        body.extend(entry)
+        if join_block:
+            body.append(join_block)
         body.extend(rows)
-        if not is_paid and locked_note:
-            body.append(f'<div class="cheat-locked-note">{html.escape(locked_note)}</div>')
         body.append("</div>")
         body.append("<</nobr>>")
-        # The back link is the ONLY macro on a free page.
         body.append('<<link "← Back">><<run setup.smartBack()>><</link>>')
 
-        return widget + "\n" + "\n".join(body) + "\n"
+        return widget + "\n" + self._generate_cheat_code_script() + "\n" + "\n".join(body) + "\n"
 
-    def _cheat_row_markup(self, g: dict, is_paid: bool) -> str:
-        """One cheat row. Free = a padlocked label; paid = a live self-navigating link."""
-        label = html.escape(str(g.get("label") or ""))
-        if not is_paid:
-            # Label + padlock. Nothing executable, and no hint text — a free player
-            # learns no threshold, place or route from this page.
-            return (
-                f'  <div class="cheat-row is-locked">'
-                f'<span class="cheat-label">{label}</span>'
-                f'<span class="cheat-lock">🔒</span></div>'
-            )
+    # FNV-1a 32-bit. Chosen because it is four lines in both Python and JavaScript and
+    # needs no library on either side; `crypto.subtle` is async and would turn every
+    # code check into a promise inside a SugarCube macro for no gain.
+    #
+    # This is obfuscation, not security, and that is the right ceiling: of the 26 top
+    # mopoga games examined, ZERO validate server-side (inseminator looks like it does
+    # — its `fetch(` count is 0; it is client-side salted SHA-256). The code ships in a
+    # public HTML file for everyone in this genre. What keeps the product alive is
+    # rotating the codes each release, not the strength of the check.
+    CHEAT_HASH_OFFSET = 2166136261
+    CHEAT_HASH_PRIME = 16777619
 
+    @staticmethod
+    def normalize_cheat_code(raw: str) -> str:
+        """Fold away every difference a phone keyboard can introduce.
+
+        ALL whitespace is stripped, not just the ends: a code read off a PDF gets
+        retyped with stray spaces, and autocapitalisation makes case meaningless.
+        The JS side does the same thing, so the two agree byte for byte.
+        """
+        return "".join(str(raw or "").split()).upper()
+
+    @classmethod
+    def cheat_code_hash(cls, version: str, grant_id: str, code: str) -> str:
+        """Hash one code for one row of one release.
+
+        Salted with BOTH the version and the row id, which buys two properties for
+        free: a code cannot be used on a row it was not issued for, and last release's
+        codes cannot open this release's rows.
+        """
+        payload = f"{version}|{grant_id}|{cls.normalize_cheat_code(code)}"
+        h = cls.CHEAT_HASH_OFFSET
+        for byte in payload.encode("utf-8"):
+            h ^= byte
+            h = (h * cls.CHEAT_HASH_PRIME) & 0xFFFFFFFF
+        return format(h, "08x")
+
+    def _generate_cheat_code_script(self) -> str:
+        """The code-entry runtime: hash, lookup table, unlock, and restore.
+
+        `setup.cheatCodes` carries hash -> row id and nothing else. The row ids are
+        already visible in the page's own flag checks, so this object leaks nothing
+        the markup does not, and it replaces what would otherwise be a hand-built
+        if/elseif chain one entry long per row.
+        """
+        cp = self.cheat_page or {}
+        version = str((self.project.metadata or {}).get("version", "") or "").strip()
+        # {row id: plaintext code} injected by the packager from the untracked codes
+        # file. Absent (an explicit --no-codes build) means the box accepts nothing,
+        # which is a valid state: the page still advertises, no row can be opened.
+        codes = self.cheat_codes or {}
+        table = {
+            self.cheat_code_hash(version, g.get("id"), codes[g.get("id")]): g.get("id")
+            for g in (cp.get("grants") or [])
+            if g.get("id") in codes
+        }
+        # Keyed by version so a release rotation retires the stored unlocks with the
+        # codes themselves — no invalidation step to remember, and a player on an old
+        # portal build keeps working with the guide that shipped beside it.
+        store_key = f"cheat_unlocks_v{version or '0'}"
+
+        return (
+            ":: CheatCodes [script]\n"
+            "setup.cheatCodes = " + json.dumps(table, sort_keys=True) + ";\n"
+            "setup.cheatStoreKey = " + json.dumps(store_key) + ";\n"
+            "setup.cheatVersion = " + json.dumps(version) + ";\n"
+            "\n"
+            "setup.cheatHash = function (payload) {\n"
+            "  var h = " + str(self.CHEAT_HASH_OFFSET) + ";\n"
+            "  var s = unescape(encodeURIComponent(String(payload)));\n"
+            "  for (var i = 0; i < s.length; i++) {\n"
+            "    h ^= s.charCodeAt(i);\n"
+            "    h = Math.imul(h, " + str(self.CHEAT_HASH_PRIME) + ") >>> 0;\n"
+            "  }\n"
+            "  return ('0000000' + h.toString(16)).slice(-8);\n"
+            "};\n"
+            "\n"
+            "// Whitespace-stripped and upper-cased, matching normalize_cheat_code().\n"
+            "setup.cheatNormalize = function (raw) {\n"
+            "  return String(raw == null ? '' : raw).replace(/\\s+/g, '').toUpperCase();\n"
+            "};\n"
+            "\n"
+            "// localStorage is a MIRROR, never the source of truth. The unlock lives in\n"
+            "// $flags like every other flag, so it rides in the save and survives export.\n"
+            "// The mirror only spares a returning player from retyping on a new game, and\n"
+            "// a browser that refuses storage (we run inside a cross-origin iframe on the\n"
+            "// portals) must degrade to that, not throw.\n"
+            "setup.cheatRemember = function (id) {\n"
+            "  try {\n"
+            "    var seen = recall(setup.cheatStoreKey, []);\n"
+            "    if (!Array.isArray(seen)) seen = [];\n"
+            "    if (seen.indexOf(id) === -1) seen.push(id);\n"
+            "    memorize(setup.cheatStoreKey, seen);\n"
+            "  } catch (e) { /* storage blocked — unlock still lives in the save */ }\n"
+            "};\n"
+            "\n"
+            "setup.cheatRestore = function () {\n"
+            "  var seen;\n"
+            "  try { seen = recall(setup.cheatStoreKey, []); } catch (e) { return; }\n"
+            "  if (!Array.isArray(seen) || !seen.length) return;\n"
+            "  var sv = State.variables;\n"
+            "  sv.flags = sv.flags || {};\n"
+            "  for (var i = 0; i < seen.length; i++) {\n"
+            "    var key = 'cheat_' + seen[i];\n"
+            "    if (!sv.flags[key]) sv.flags[key] = true;\n"
+            "  }\n"
+            "};\n"
+            "\n"
+            "// Returns the unlocked row id, or null. The caller navigates on a hit so the\n"
+            "// new row renders; a miss is reported in place, without spending a moment.\n"
+            "setup.cheatTry = function (raw) {\n"
+            "  var code = setup.cheatNormalize(raw);\n"
+            "  if (!code) return null;\n"
+            "  var ids = Object.keys(setup.cheatCodes);\n"
+            "  for (var i = 0; i < ids.length; i++) {\n"
+            "    var id = setup.cheatCodes[ids[i]];\n"
+            "    if (setup.cheatHash(setup.cheatVersion + '|' + id + '|' + code) === ids[i]) {\n"
+            "      setup.pendingEffects = [];\n"
+            "      setup.applyAndNotifyFlag('player', null, 'cheat_' + id, 'set');\n"
+            "      setup.showEffectNotification();\n"
+            "      setup.cheatRemember(id);\n"
+            "      return id;\n"
+            "    }\n"
+            "  }\n"
+            "  return null;\n"
+            "};\n"
+        )
+
+    def _cheat_row_markup(self, g: dict) -> str:
+        """One cheat row: a live self-navigating link behind its own unlock flag.
+
+        The unlock check wraps the WHOLE row, label included, so a row the player has
+        no code for emits nothing at all. A padlocked placeholder would tell a free
+        player exactly what is on sale and how many there are; nothing is the point.
+        """
         target = "npc" if g.get("targetType") == "npc" else "player"
         npc_js = f'"{g.get("npcId")}"' if target == "npc" else "null"
         trait = g.get("trait")
@@ -9843,15 +10061,19 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         at_cap = html.escape(str(g.get("at_cap_text") or "Already at the ceiling."))
 
         if not guard:
-            return f'  <div class="cheat-row">{grant}{hint_div}</div>'
-        return (
-            f'  <div class="cheat-row">\n'
-            f'    <<if {guard}>>{grant}{hint_div}\n'
-            f'    <<else>><span class="cheat-row-maxed">{btn}</span>'
-            f'<div class="cheat-at-cap">{at_cap}</div>\n'
-            f'    <</if>>\n'
-            f'  </div>'
-        )
+            row = f'  <div class="cheat-row">{grant}{hint_div}</div>'
+        else:
+            row = (
+                f'  <div class="cheat-row">\n'
+                f'    <<if {guard}>>{grant}{hint_div}\n'
+                f'    <<else>><span class="cheat-row-maxed">{btn}</span>'
+                f'<div class="cheat-at-cap">{at_cap}</div>\n'
+                f'    <</if>>\n'
+                f'  </div>'
+            )
+
+        unlock = f'$flags["cheat_{g.get("id")}"]'
+        return f'  <<if {unlock}>>\n{row}\n  <</if>>'
 
     @staticmethod
     def _fmt_num(n) -> str:
@@ -15630,26 +15852,10 @@ $(document).on(':passagestart', function(ev) {
         _rel = html.escape((self.project.metadata or {}).get("release_date", "") or "")
         _footer_parts = ([f"v{_ver}"] if _ver else []) + ([_rel] if _rel else [])
         _footer_text = " · ".join(_footer_parts)
-        # Build badge — which file the player is holding.
-        #
-        # Emitted ONLY when [builds] is authored, for BOTH variants. That looks like it
-        # risks an unlabelled paid file, but it can't: validate() requires [builds]
-        # whenever [ui.cheat_page] is authored, so every build that has cheats to
-        # protect is labelled. Gating both variants the same way buys the property that
-        # actually matters — a game without this feature produces byte-identical output
-        # no matter what --build says, so the 14 existing games cannot be disturbed.
-        _badge_label = ""
-        if self.build_labels:
-            _badge_label = (
-                self.build_labels.get("paid") or "Paid Build"
-                if self.build_variant == "paid"
-                else self.build_labels.get("free") or "Free Build"
-            )
-        _badge = (
-            f'<span class="build-badge">{html.escape(_badge_label)}</span>'
-            if _badge_label else ""
-        )
-        _footer_inner = " · ".join(x for x in [_footer_text, _badge] if x)
+        # No build badge any more: there is one build. What a player needs to identify
+        # is the RELEASE (it is what their guide's codes are scoped to), and the version
+        # string already does that here and in the cheat page's own heading.
+        _footer_inner = _footer_text
         version_footer_widget = (
             f'\n<<widget "versionFooter">>\n<div class="sidebar-version">{_footer_inner}</div>\n<</widget>>\n'
             if _footer_inner else '\n<<widget "versionFooter">><</widget>>\n'
@@ -16826,55 +17032,7 @@ if (clothingMsg) {
     font-size: 11px;
     color: var(--theme-text-muted, #8a8a8a);
     text-align: center;
-}
-/* Cheat page rows. Flat and mechanical by design — this page is read as a list of
-   levers, not as prose, so the fiction lives on the container and the rows stay legible. */
-.cheat-intro {
-    margin-bottom: 12px;
-    color: var(--theme-text-muted, #8a8a8a);
-    font-size: 13px;
-}
-.cheat-row {
-    padding: 7px 0;
-    border-bottom: 1px solid var(--theme-border, #2a2a2a);
-}
-.cheat-row:last-of-type { border-bottom: none; }
-.cheat-row.is-locked {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    opacity: 0.55;
-}
-.cheat-label { font-weight: 600; }
-.cheat-lock { font-size: 12px; }
-.cheat-hint, .cheat-at-cap {
-    margin-top: 2px;
-    color: var(--theme-text-muted, #8a8a8a);
-    font-size: 12px;
-}
-.cheat-row-maxed {
-    font-weight: 600;
-    opacity: 0.5;
-}
-.cheat-locked-note {
-    margin-top: 12px;
-    padding-top: 10px;
-    border-top: 1px solid var(--theme-border, #2a2a2a);
-    color: var(--theme-text-muted, #8a8a8a);
-    font-size: 12px;
-}
-/* Build badge — names which file the player is holding (free vs supporter build).
-   Rides inside .sidebar-version and is reused on the cheat page's heading. */
-.build-badge {
-    display: inline-block;
-    padding: 0 5px;
-    border: 1px solid var(--theme-border, #3a3a3a);
-    border-radius: 3px;
-    font-size: 10px;
-    letter-spacing: 0.02em;
-    white-space: nowrap;
-    color: var(--theme-text-muted, #8a8a8a);
-}
+}""" + self._cheat_page_css() + """
 
 /* Reduce gap between StoryCaption and Save/Restart menu */
 #story-caption {

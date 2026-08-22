@@ -167,6 +167,123 @@ class Command(BaseCommand):
 
     # -- rendering --------------------------------------------------------
 
+    CODES_MARKER = '{{codes}}'
+
+    def _substitute_codes(self, source, guide_path, version):
+        """Replace the {{codes}} marker with a table built from the game's codes file.
+
+        Generated, never hand-typed. The packager bakes hashes of the same file into
+        the build, so a guide that documents a code the build will not accept cannot
+        happen — which is the one failure a paying reader would discover for us.
+
+        The row labels and hints come from the game's own cheat-page TOML, so the
+        chapter says what each code actually buys without a second copy of that text
+        drifting out of date.
+        """
+        if self.CODES_MARKER not in source:
+            self.stdout.write(self.style.WARNING(
+                f'  note    no {self.CODES_MARKER} marker in {guide_path.name}; the guide '
+                f'will carry no cheat codes'
+            ))
+            return source
+
+        codes_path = guide_path.parent / 'codes.toml'
+        if not codes_path.exists():
+            raise CommandError(
+                f'{guide_path.name} asks for {self.CODES_MARKER} but there is no '
+                f'{codes_path}. That file is untracked on purpose — it holds the codes, '
+                f'and this repo is public.'
+            )
+
+        with open(codes_path, 'rb') as fh:
+            data = tomllib.load(fh)
+        codes = data.get('codes') or {}
+        declared = str(data.get('version', '') or '').strip()
+        if not codes:
+            raise CommandError(f'{codes_path}: [codes] is empty.')
+        if version and declared and declared != version:
+            raise CommandError(
+                f'{codes_path}: codes are for v{declared} but the game is v{version}. '
+                f'Codes are scoped to a release — a guide stamped with one version and '
+                f'codes from another is the exact thing this check exists to stop.'
+            )
+
+        rows = self._cheat_rows(guide_path)
+        lines = [
+            '| Cheat | Code | What it opens |',
+            '|---|---|---|',
+        ]
+        # Authored order, not the codes file's — the guide should read in the order the
+        # page presents, and a dict literal's order is an accident of editing.
+        for row_id, label, hint in rows:
+            if row_id not in codes:
+                continue
+            lines.append(f'| {label} | `{codes[row_id]}` | {hint or "—"} |')
+        for row_id, word in codes.items():
+            if row_id not in {r[0] for r in rows}:
+                lines.append(f'| {row_id} | `{word}` | — |')
+
+        table = '\n'.join(lines)
+        return source.replace(self.CODES_MARKER, table)
+
+    ROSTER_MARKER = '{{roster}}'
+    WEEKDAY_NAMES = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+
+    def _substitute_roster(self, source, guide_path):
+        """Replace {{roster}} with a who/where/when table from the game's schedules.
+
+        Generated for the same reason the codes are: a reader sent to the wrong place
+        at the wrong hour concludes the game is broken, and schedules move between
+        releases more often than almost anything else in a build.
+        """
+        if self.ROSTER_MARKER not in source:
+            return source
+
+        data = self._merged_toml(guide_path)
+        if data is None:
+            raise CommandError(
+                f'{guide_path.name} asks for {self.ROSTER_MARKER} but the merged TOML '
+                f'was not found next door in toml_phases/.'
+            )
+
+        names = {loc['id']: loc.get('name', loc['id'])
+                 for loc in data.get('locations') or [] if 'id' in loc}
+        lines = ['| Who | Where | When | Doing what |', '|---|---|---|---|']
+        for npc in data.get('npcs') or []:
+            for i, sched in enumerate(npc.get('schedules') or []):
+                weekdays = sched.get('weekdays') or []
+                when = ('Every day' if len(weekdays) == 7 or not weekdays
+                        else ', '.join(self.WEEKDAY_NAMES[d] for d in weekdays
+                                       if 0 <= d < 7))
+                lines.append(
+                    # The name is printed once per person; the extra rows hang under it,
+                    # so a person with three shifts reads as one entry, not three people.
+                    f'| {"**" + npc.get("name", "") + "**" if i == 0 else ""} '
+                    f'| {names.get(sched.get("location"), sched.get("location", "?"))} '
+                    f'| {when}, {sched.get("start_time")}–{sched.get("end_time")} '
+                    f'| {sched.get("activity", "—")} |'
+                )
+        return source.replace(self.ROSTER_MARKER, '\n'.join(lines))
+
+    def _merged_toml(self, guide_path):
+        path = guide_path.parent.parent / 'toml_phases' / '7_final_game.toml'
+        if not path.exists():
+            return None
+        with open(path, 'rb') as fh:
+            return tomllib.load(fh)
+
+    def _cheat_rows(self, guide_path):
+        """(id, label, hint) per authored cheat row, in the order the page shows them."""
+        data = self._merged_toml(guide_path)
+        if data is None:
+            return []
+        page = (data.get('ui') or {}).get('cheat_page') or {}
+        rows = []
+        for g in page.get('grants') or []:
+            label = g.get('button_text') or g.get('label') or g.get('id')
+            rows.append((g.get('id'), label, g.get('hint')))
+        return rows
+
     def _render_html(self, guide_path, style_dir, version, release):
         try:
             import markdown
@@ -176,8 +293,17 @@ class Command(BaseCommand):
                 '  uv pip install --python venv/bin/python markdown'
             ) from exc
 
+        source = guide_path.read_text(encoding='utf-8')
+        # Two tables are GENERATED; every other word in the guide is hand-written.
+        # These two are the ones a reader would be actively misled by if they went
+        # stale -- a code that does not work, and a person who is not where the book
+        # says. Substituted into the MARKDOWN, before conversion, so the chapters get
+        # real headings and land in the table of contents like any other.
+        source = self._substitute_codes(source, guide_path, version)
+        source = self._substitute_roster(source, guide_path)
+
         md = markdown.Markdown(extensions=MD_EXTENSIONS, output_format='html5')
-        body = md.convert(guide_path.read_text(encoding='utf-8'))
+        body = md.convert(source)
         meta = md.Meta
 
         # The TOC extension wraps its list in a div; the template places the

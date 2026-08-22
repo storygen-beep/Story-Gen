@@ -8,6 +8,83 @@ how it was verified if relevant (grep / build / live-play).
 
 Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 
+## 2026-08-23 (second pass — the paid guide)
+
+- **NEW `references/player-guide.md` (264 lines) — the skill had no guide doctrine at all.** The paid PDF
+  is now the product (the free/paid build split was removed earlier today), and nothing in the skill taught
+  how to make one. Covers: what a guide must carry to be worth money (the whole route at once · the traps ·
+  every threshold for one person in one place · the codes — a guide missing all four is a reprint of the
+  in-game Quests page and readers say so); the `build_guide` pipeline and its two substituted markers; the
+  untracked `codes.toml` and per-release rotation; the eight-chapter skeleton with **codes FIRST** (a
+  deliberate break from genre convention — four official walkthrough PDFs all bury cheats at the back, but
+  the code chapter is what the reader opened the file for); the routes chapter as **spine-in-acts with each
+  ladder written where the spine reaches it**; and §7, the verification gate.
+- **NEW `scripts/check_guide_numbers.py` — a runnable release gate, not a checklist line.** Harvests every
+  `trait/operator/value` condition in the merged TOML (257 on Vesper 0.1.9) and asserts every threshold the
+  guide claims is a real gate. **Why a script:** the guide is untracked and the compiler never sees it, so
+  a wrong number passes every existing check and is discovered by a paying customer following the book into
+  a gate that does not open. Verified by sabotage — changing one real threshold from 21 to 22 is caught
+  with the file and line. It is range-aware (`0-100` in a meters table is a description, not a claim) and
+  cheat-cap-aware (a cap deliberately sits one below the first `lt` window, so it is not a gate); both were
+  added after the first run produced four false positives, because a checker that cries wolf gets ignored.
+- **`ship-gate.md` §6 — the guide ships WITH the build.** New codes and a new PDF per release, because the
+  hash is salted with `[project] version` and a supporter holding a stale guide reads *"No match"* and
+  concludes the codes are broken. Five numbered steps ending in the number gate, plus a hard line that
+  nothing under `games/<slug>/guide/` is ever committed (public repo: a committed code is a published code
+  and a committed guide is a free one).
+- **`run-mode.md` — two durable process rules** promoted into the anti-hallucination contract: *a number
+  that reaches a PLAYER is verified against the build, not recalled*, and *when an engine feature lands,
+  fix the doctrine that teaches its predecessor in the same turn*. The second is this session's own lesson,
+  written down where the next author will hit it rather than left in a changelog nobody reads mid-task.
+- **`dev-console-jump.md`** — the bare-globals rule extended to headless tests: Playwright's
+  `page.evaluate("setup.…")` throws `ReferenceError` because the story JS runs in SugarCube's closure, not
+  on `window`. Hit live today; the file already said it for the browser console, not for `evaluate`.
+- **`SKILL.md`** — `player-guide.md` indexed in the reference list.
+- **Lesson worth more than the edits: guidance authored for one surface does not transfer to another
+  unread.** Vesper's 61 quest cards already ARE its walkthrough — the rungs, the order and every number —
+  so writing the guide was mostly reformatting. But two classes of fact are invisible in them, and both
+  are the ones that strand a player: **parallel threads** (a card describes its own thread and cannot say
+  that Act 1's yard runs alongside Renner) and **traps buried mid-tip in a subordinate clause** (*"keep the
+  cot paid or he won't be"*). In play those look exactly like bugs. Both are now required promotions into
+  the guide's own chapter 7.
+
+## 2026-08-23
+
+- **The free/paid build split is REMOVED. Cheat rows now unlock at runtime by code, and the codes ship in
+  the paid guide PDF.** `references/ship-gate.md` §3 rewritten; `references/beat-authoring.md` (build
+  command) and `references/media.md` (`--build` bullet) rewritten; `ship-gate.md` §4's deploy check
+  retargeted from `output-paid/` to `output/`.
+  **Why:** a Patreon exit survey said *"I thought cheats would be available for website version I can't use
+  it on my [phone]"*. Measured on disk before changing anything: the paid build was a **2,630-byte** delta
+  (`games/vesper/releases/v0.1.8.html` vs `v0.1.8-paid.html` — same 357 passages, only `CheatPage` and
+  `TimeWidgets` differ) delivered as a **242 MB** zip, and the free build's cheat page said *"Supporters
+  unlock these."* next to six padlocks with **no code box and no Patreon link on that page**. It advertised
+  a lock and shipped no key. Re-measured the 26 built mopoga games in
+  `~/Documents/Mopoga_Twine_Sandbox_Research_20260724/gamehtml/`: **8 carry a live supporter-code box inside
+  the free web build** (apocalyptic-world, become-someone, growup, destroyer, amore, realm-of-corruption,
+  inseminator, the-hellfire-club); only 3 use build segregation. We had picked the minority model.
+- **§3's own claims corrected against the 2026-07-26 mechanism study**, which had never been folded back in:
+  "the #1 game ships a free default-on menu" (→ free door, paid room; 0 of 12 ship a fully-free menu),
+  "selling codes converts friction into resentment" (→ unsupported; a mechanism corpus has no sentiment),
+  "re-skin it diegetically" (→ skin the container, never the rows), and "no game in this repo ships a cheat
+  page yet" (→ false since 2026-07-26). Added the two traps that cost a rev-1 rewrite: **an `lt`-only gate is
+  a WINDOW** (Vesper's Stealth row caps at 9 because 13 `lt` gates sit above it, against 7 `gte`), and
+  **step in band-sized increments** because a meter SET to max skips every band-entry canvas.
+- **Doctrine, and the reason the rewrite was needed at all: a shipped engine change did not reach the skill.**
+  `[ui.cheat_page]` shipped 2026-07-26 and §3 still taught the pre-feature shape (copy
+  `6_dev_shortcuts.toml`, re-skin the rows) five weeks later, while the study that refuted four of its eight
+  claims sat unread in a memory file. The build would have been authored wrong by anyone following it. When
+  an engine feature lands, the doctrine that teaches its *predecessor* is now false — update it in the same
+  turn, or the next game inherits the old shape.
+- **Verified:** 43/43 in `apps/game_generation/tests/test_cheat_page.py` (rewritten), 232 passed in
+  `apps/game_generation/tests/`, and the 4 `apps/projects/tests.py` failures confirmed PRE-EXISTING by
+  re-running them in a clean `git worktree` at HEAD. Vesper rebuilt; **22/22 headless Playwright checks** on
+  the real build — locked rows emit nothing, a wrong code names the build version, ` dead fall ` unlocks
+  exactly one row, the grant moves the trait, the unlock survives save/reload AND a new game, and the at-cap
+  guard still greys a maxed row. Grepped the built HTML for all six code words: **0 hits**. Python and
+  JavaScript FNV-1a implementations cross-checked with `node` — identical hashes, and the built lookup table
+  matches both.
+
 ## 2026-08-16
 
 - **Doctrine, from vesper 0.1.9: check the resolver before collapsing two axes into one.** The

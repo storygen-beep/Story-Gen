@@ -59,6 +59,11 @@ var State = SC.State, Engine = SC.Engine, setup = SC.setup;
 
 (If a future build exposes bare globals, `SC` still works — prefer it.)
 
+**Same rule inside a headless test.** Playwright's `page.evaluate("setup.getTraitValue(...)")`
+throws `ReferenceError: setup is not defined` — the story JS runs in SugarCube's own closure,
+not on `window`. Use `SugarCube.setup.…` / `SugarCube.State.…` / `SugarCube.Engine.…` in every
+evaluated string. (Hit live, 2026-08-23, testing Vesper's cheat box.)
+
 ---
 
 ## State read/write paths (code-verified against the generated `output/index.html`)

@@ -218,6 +218,12 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
   dangling-promise sweep, the player-facing **cheat page** (+ the `dev_mode_enabled` dev-shortcut contrast),
   the publish-flag gate (`--debug` bakes MISSING placeholders into the file), and the whole-game re-run of
   the scanners. Read at every milestone build that goes to players.
+- `references/player-guide.md` — **the paid PDF**: what a supporter actually buys, and the seam between it
+  and the in-game cheat box. The `build_guide` pipeline, the untracked `codes.toml` and the per-release
+  rotation, the eight-chapter skeleton (codes FIRST, on purpose), what is generated versus written and why
+  exactly those two blocks, and **the verification gate** — `scripts/check_guide_numbers.py`, which blocks a
+  release when a threshold in the guide is not a real gate in the build. Read before a game gets a paid tier
+  and at every release after.
 - `references/save-safety.md` — what you may NOT change once a game has shipped (immutable slugs / ids, live
   flag & trait keys, stat scales & tier thresholds, the game title) so an update doesn't orphan players'
   saves. Build-breakers fail loudly; these pass the build and only break a *returning player's* save. **Read

@@ -152,6 +152,16 @@ id/flag/trait key, rescale a stat, or change the title (`references/save-safety.
 - **Every increment BUILDS GREEN** before the next (Step 7). A red build is a stop, not a footnote.
 - **Assumptions are STATED** ("I'm assuming X — stop me if wrong"), never buried.
 - **A change of plan is surfaced**, not silently absorbed.
+- **A number that reaches a PLAYER is verified against the build, not recalled.** Thresholds in a
+  quest tip, a `blocked_message` or the paid guide are claims about gates, and a wrong one is
+  indistinguishable from a broken game to the person reading it. `scripts/check_guide_numbers.py`
+  makes this a gate for the guide; everywhere else it is a grep of the merged TOML.
+- **When an engine feature lands, fix the doctrine that teaches its PREDECESSOR in the same turn.**
+  `[ui.cheat_page]` shipped 2026-07-26 and `ship-gate.md` §3 was still teaching the pre-feature
+  shape (copy `6_dev_shortcuts.toml`, re-skin the rows) five weeks later, alongside four claims a
+  study had already refuted. Nobody was lying; the update just never happened, and any game
+  authored off that section in between would have been built wrong. Stale doctrine reads exactly
+  like current doctrine — there is no signal in the file to warn the next reader.
 
 ## Anti-patterns (the process failures this bans)
 - **The one-shot dump** — generating the whole game (or a whole phase) in a single pass. *(The LC/LS origin sin.)*
