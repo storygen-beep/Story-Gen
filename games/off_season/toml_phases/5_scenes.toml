@@ -134,6 +134,19 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "want", operator = "gte", value = 22 },
 ] }
 
+[[canvases.nodes.exit_block.choices]]
+# ⚠️ THE ALWAYS-LIVE EXIT, and it is not decoration. Every other affordance on this
+#    screen is gated, and the day caps are per PERSON, not per hub -- spend Tam's rung
+#    anywhere and every room he stands in loses its whole list at once. With no choice
+#    free of BOTH `conditions` and `costs` the engine reads the node as having no door
+#    (v2.py:12827-12836), hides every locked line rather than greying it (v2.py:12806),
+#    and falls back to a bare `Continue` that fires no effects. A player walked into
+#    exactly that on 2026-08-23. the-surfaces.md R7.
+text                     = "Leave him to it."
+targetType               = "location"
+locationId               = "the_chip_shop_flat"
+time_progression_minutes = 5
+
 
 # ── rung: ease. The access meter, and the cheapest thing on his ladder. ──────
 [[canvases]]
@@ -722,6 +735,13 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_ewan", trait_key = "hold", operator = "gte", value = 40 },
 ] }
 
+[[canvases.nodes.exit_block.choices]]
+# The always-live exit -- see the note on hub_tam_flat. the-surfaces.md R7.
+text                     = "Say it can wait, and go."
+targetType               = "location"
+locationId               = "the_boat_yard"
+time_progression_minutes = 5
+
 [[canvases]]
 id          = "rung_ewan_ask"
 name        = "Ask him for something"
@@ -1153,6 +1173,13 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "roan_rung_today", operator = "is_false" },
   { type = "trait", subject = "npc", npc_id = "npc_roan", trait_key = "bond", operator = "gte", value = 25 },
 ] }
+
+[[canvases.nodes.exit_block.choices]]
+# The always-live exit -- see the note on hub_tam_flat. the-surfaces.md R7.
+text                     = "Let him finish the drink on his own."
+targetType               = "location"
+locationId               = "the_terrace_house"
+time_progression_minutes = 5
 
 [[canvases]]
 id          = "rung_roan_drink"
@@ -1664,6 +1691,13 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_nessa", trait_key = "trust", operator = "gte", value = 20 },
 ] }
 
+[[canvases.nodes.exit_block.choices]]
+# The always-live exit -- see the note on hub_tam_flat. the-surfaces.md R7.
+text                     = "Let her get on."
+targetType               = "location"
+locationId               = "the_back_room"
+time_progression_minutes = 5
+
 [[canvases]]
 id          = "rung_nessa_tea"
 name        = "Take her a tea and stay"
@@ -2144,6 +2178,13 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_roan", trait_key = "bond", operator = "gte", value = 12 },
 ] }
 
+[[canvases.nodes.exit_block.choices]]
+# The always-live exit -- see the note on hub_tam_flat. the-surfaces.md R7.
+text                     = "Walk on without him."
+targetType               = "location"
+locationId               = "the_front"
+time_progression_minutes = 5
+
 
 [[canvases]]
 id          = "rung_roan_walk"
@@ -2252,6 +2293,13 @@ flagEffects = [ { targetType = "player", flag = "ewan_rung_today", op = "set" } 
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "ewan_rung_today", operator = "is_false" },
 ] }
+
+[[canvases.nodes.exit_block.choices]]
+# The always-live exit -- see the note on hub_tam_flat. the-surfaces.md R7.
+text                     = "Leave him to the boat."
+targetType               = "location"
+locationId               = "harbour_end"
+time_progression_minutes = 5
 
 
 [[canvases]]
@@ -2371,6 +2419,13 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "tam_rung_today", operator = "is_false" },
   { type = "trait", subject = "npc", npc_id = "npc_tam", trait_key = "ease", operator = "gte", value = 20 },
 ] }
+
+[[canvases.nodes.exit_block.choices]]
+# The always-live exit -- see the note on hub_tam_flat. the-surfaces.md R7.
+text                     = "Let him walk up on his own."
+targetType               = "location"
+locationId               = "terrace_row"
+time_progression_minutes = 5
 
 
 [[canvases]]
@@ -2492,6 +2547,13 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "nessa_rung_today", operator = "is_false" },
   { type = "trait", subject = "npc", npc_id = "npc_nessa", trait_key = "trust", operator = "gte", value = 20 },
 ] }
+
+[[canvases.nodes.exit_block.choices]]
+# The always-live exit -- see the note on hub_tam_flat. the-surfaces.md R7.
+text                     = "Leave her to the booth."
+targetType               = "location"
+locationId               = "the_arcade"
+time_progression_minutes = 5
 
 
 [[canvases]]
@@ -2615,6 +2677,13 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_ewan", trait_key = "hold", operator = "gte", value = 25 },
 ] }
 
+[[canvases.nodes.exit_block.choices]]
+# The always-live exit -- see the note on hub_tam_flat. the-surfaces.md R7.
+text                     = "Let him lock up."
+targetType               = "location"
+locationId               = "the_arcade"
+time_progression_minutes = 5
+
 
 [[canvases]]
 id          = "rung_ewan_stays"
@@ -2735,6 +2804,13 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "nessa_rung_today", operator = "is_false" },
   { type = "trait", subject = "npc", npc_id = "npc_nessa", trait_key = "want", operator = "gte", value = 18 },
 ] }
+
+[[canvases.nodes.exit_block.choices]]
+# The always-live exit -- see the note on hub_tam_flat. the-surfaces.md R7.
+text                     = "Leave her asleep."
+targetType               = "location"
+locationId               = "the_back_room"
+time_progression_minutes = 5
 
 
 [[canvases]]

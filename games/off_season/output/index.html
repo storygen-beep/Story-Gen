@@ -9220,44 +9220,7 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;span class=&quot;locked-choice&quot; title=&quot;Stay in the doorway.&quot;&gt;Stay in the doorway. (&lt;&lt;= setup.getCostBlockedMessage([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 6}])&gt;&gt;)&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;if not ((setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;nessa_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 2}])) or (setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;nessa_saw_her&quot;, &quot;operator&quot;: &quot;is_true&quot;}, {&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;nessa_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_nessa&quot;, &quot;trait_key&quot;: &quot;want&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 18}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 6}])))&gt;&gt;
-&lt;&lt;script&gt;&gt;
-try {
-  window._engineNoExitsDiag_hub_nessa_asleep = [{&quot;text&quot;: &quot;Pull the curtain across for her.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;nessa_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}}, {&quot;text&quot;: &quot;Stay in the doorway.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;nessa_saw_her&quot;, &quot;operator&quot;: &quot;is_true&quot;}, {&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;nessa_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_nessa&quot;, &quot;trait_key&quot;: &quot;want&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 18}]}}];
-  if (typeof console !== &#39;undefined&#39; &amp;&amp; console.warn) {
-    console.warn(&#39;[engine] no exit choices satisfied&#39;, {
-      canvas: &quot;hub_nessa_asleep&quot;,
-      choices: window._engineNoExitsDiag_hub_nessa_asleep,
-      flags: State.variables.flags,
-      player_traits: (State.variables.player || {}).core_traits
-    });
-  }
-} catch(e) {}
-&lt;&lt;/script&gt;&gt;
-&lt;&lt;if $flags.debug_mode&gt;&gt;
-&lt;&lt;set _diagChoices to window._engineNoExitsDiag_hub_nessa_asleep&gt;&gt;
-&lt;div class=&quot;engine-diag-no-exits&quot;&gt;
-&lt;div class=&quot;engine-diag-header&quot;&gt;⚠️ DEV: No exit choices satisfied — canvas hub_nessa_asleep&lt;/div&gt;
-&lt;div class=&quot;engine-diag-hint&quot;&gt;All exits are conditional and none of their gates currently evaluate true. Player will use the Continue link below to escape, but the visit fires no effects. Likely authoring gap — add a fallback choice or broaden a condition.&lt;/div&gt;
-&lt;&lt;for _i to 0; _i lt _diagChoices.length; _i++&gt;&gt;
-&lt;&lt;set _ch to _diagChoices[_i]&gt;&gt;
-&lt;div class=&quot;engine-diag-choice&quot;&gt;
-&lt;div class=&quot;engine-diag-choice-text&quot;&gt;Choice: &quot;&lt;&lt;print _ch.text&gt;&gt;&quot;&lt;/div&gt;
-&lt;div class=&quot;engine-diag-choice-logic&quot;&gt;Combined as: &lt;&lt;print _ch.conditions.logic&gt;&gt;&lt;/div&gt;
-&lt;ul class=&quot;engine-diag-items&quot;&gt;
-&lt;&lt;for _j to 0; _j lt _ch.conditions.items.length; _j++&gt;&gt;
-&lt;&lt;set _it to _ch.conditions.items[_j]&gt;&gt;
-&lt;&lt;set _single to {version: &quot;1.0&quot;, logic: &quot;AND&quot;, items: [_it]}&gt;&gt;
-&lt;&lt;set _ok to setup.triggerConditionsSatisfied(_single)&gt;&gt;
-&lt;li class=&quot;&lt;&lt;print _ok ? &#39;engine-diag-pass&#39; : &#39;engine-diag-fail&#39;&gt;&gt;&quot;&gt;&lt;&lt;if _ok&gt;&gt;✓&lt;&lt;else&gt;&gt;✗&lt;&lt;/if&gt;&gt; &lt;&lt;print JSON.stringify(_it)&gt;&gt;&lt;/li&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/div&gt;
-&lt;&lt;/if&gt;&gt;
-[[Continue-&gt;Location_the_back_room]]
-&lt;&lt;/if&gt;&gt;
+&lt;&lt;link &quot;Leave her asleep.&quot; &quot;Location_the_back_room&quot;&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(5);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="Canvas_rung_ewan_late_Node_base" tags="" position="475,475" size="100,100">&lt;div class=&quot;dev-canvas-info&quot;&gt;&lt;strong&gt;Canvas:&lt;/strong&gt; Past nine &lt;span style=&quot;opacity:0.7;&quot;&gt;(rung_ewan_late)&lt;/span&gt; | &lt;strong&gt;Node:&lt;/strong&gt; Past nine&lt;/div&gt;
 &lt;p&gt;Nine goes past and you do not go to the wall, because he has not stood up. The front is black and the machines are the only light in four hundred yards and he is sat in the middle of it with his coat off now.&lt;/p&gt;&lt;div class=&quot;dialog-block dialog-player&quot;&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;You:&lt;/strong&gt; I shut at nine.&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;dialog-block dialog-npc&quot;&gt;&lt;div class=&quot;portrait&quot;&gt;&lt;img src=&quot;ewan.jpg&quot; alt=&quot;Ewan&quot; onerror=&quot;this.style.display=&#39;none&#39;;this.parentElement.innerHTML=&#39;&amp;lt;svg viewBox=&amp;quot;0 0 100 100&amp;quot; xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;&amp;gt;&amp;lt;circle cx=&amp;quot;50&amp;quot; cy=&amp;quot;35&amp;quot; r=&amp;quot;20&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;ellipse cx=&amp;quot;50&amp;quot; cy=&amp;quot;85&amp;quot; rx=&amp;quot;35&amp;quot; ry=&amp;quot;25&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;/svg&amp;gt;&#39;;&quot; /&gt;&lt;/div&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;Ewan:&lt;/strong&gt; You shut when the last one leaves. That&#39;s what shutting is.&lt;/div&gt;&lt;/div&gt;&lt;p&gt;You stand behind the counter in your own building at twenty to eleven waiting for your son to decide the night is over, and you know exactly what that is, and you do it anyway.&lt;/p&gt;&lt;div class=&quot;thought-bubble thought-bubble-player&quot;&gt;&lt;div class=&quot;thought-bubble-content&quot;&gt;&lt;em&gt;💭 You are thinking:&lt;/em&gt; He has the lease, the books, and now the hours. There is the flat and there is me and that is the whole list of what is left.&lt;/div&gt;&lt;/div&gt;
 
@@ -9311,44 +9274,7 @@ try {
 &lt;span class=&quot;locked-choice&quot; title=&quot;Don&#39;t turn the machines off.&quot;&gt;Don&#39;t turn the machines off. (&lt;&lt;= setup.getCostBlockedMessage([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 8}])&gt;&gt;)&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;if not ((setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;ewan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 5}])) or (setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;ewan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_ewan&quot;, &quot;trait_key&quot;: &quot;hold&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 25}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 8}])))&gt;&gt;
-&lt;&lt;script&gt;&gt;
-try {
-  window._engineNoExitsDiag_hub_ewan_counter = [{&quot;text&quot;: &quot;Let him stay.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;ewan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}}, {&quot;text&quot;: &quot;Don&#39;t turn the machines off.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;ewan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_ewan&quot;, &quot;trait_key&quot;: &quot;hold&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 25}]}}];
-  if (typeof console !== &#39;undefined&#39; &amp;&amp; console.warn) {
-    console.warn(&#39;[engine] no exit choices satisfied&#39;, {
-      canvas: &quot;hub_ewan_counter&quot;,
-      choices: window._engineNoExitsDiag_hub_ewan_counter,
-      flags: State.variables.flags,
-      player_traits: (State.variables.player || {}).core_traits
-    });
-  }
-} catch(e) {}
-&lt;&lt;/script&gt;&gt;
-&lt;&lt;if $flags.debug_mode&gt;&gt;
-&lt;&lt;set _diagChoices to window._engineNoExitsDiag_hub_ewan_counter&gt;&gt;
-&lt;div class=&quot;engine-diag-no-exits&quot;&gt;
-&lt;div class=&quot;engine-diag-header&quot;&gt;⚠️ DEV: No exit choices satisfied — canvas hub_ewan_counter&lt;/div&gt;
-&lt;div class=&quot;engine-diag-hint&quot;&gt;All exits are conditional and none of their gates currently evaluate true. Player will use the Continue link below to escape, but the visit fires no effects. Likely authoring gap — add a fallback choice or broaden a condition.&lt;/div&gt;
-&lt;&lt;for _i to 0; _i lt _diagChoices.length; _i++&gt;&gt;
-&lt;&lt;set _ch to _diagChoices[_i]&gt;&gt;
-&lt;div class=&quot;engine-diag-choice&quot;&gt;
-&lt;div class=&quot;engine-diag-choice-text&quot;&gt;Choice: &quot;&lt;&lt;print _ch.text&gt;&gt;&quot;&lt;/div&gt;
-&lt;div class=&quot;engine-diag-choice-logic&quot;&gt;Combined as: &lt;&lt;print _ch.conditions.logic&gt;&gt;&lt;/div&gt;
-&lt;ul class=&quot;engine-diag-items&quot;&gt;
-&lt;&lt;for _j to 0; _j lt _ch.conditions.items.length; _j++&gt;&gt;
-&lt;&lt;set _it to _ch.conditions.items[_j]&gt;&gt;
-&lt;&lt;set _single to {version: &quot;1.0&quot;, logic: &quot;AND&quot;, items: [_it]}&gt;&gt;
-&lt;&lt;set _ok to setup.triggerConditionsSatisfied(_single)&gt;&gt;
-&lt;li class=&quot;&lt;&lt;print _ok ? &#39;engine-diag-pass&#39; : &#39;engine-diag-fail&#39;&gt;&gt;&quot;&gt;&lt;&lt;if _ok&gt;&gt;✓&lt;&lt;else&gt;&gt;✗&lt;&lt;/if&gt;&gt; &lt;&lt;print JSON.stringify(_it)&gt;&gt;&lt;/li&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/div&gt;
-&lt;&lt;/if&gt;&gt;
-[[Continue-&gt;Location_the_arcade]]
-&lt;&lt;/if&gt;&gt;
+&lt;&lt;link &quot;Let him lock up.&quot; &quot;Location_the_arcade&quot;&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(5);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="Canvas_rung_nessa_float_Node_base" tags="" position="850,475" size="100,100">&lt;div class=&quot;dev-canvas-info&quot;&gt;&lt;strong&gt;Canvas:&lt;/strong&gt; The till &lt;span style=&quot;opacity:0.7;&quot;&gt;(rung_nessa_float)&lt;/span&gt; | &lt;strong&gt;Node:&lt;/strong&gt; The till&lt;/div&gt;
 &lt;p&gt;You show her the bags once and then let her do it: coins, notes, count them in, and the figure written in the book in her handwriting instead of yours for the first time in four years.&lt;/p&gt;&lt;div class=&quot;dialog-block dialog-npc&quot;&gt;&lt;div class=&quot;portrait&quot;&gt;&lt;img src=&quot;nessa.jpg&quot; alt=&quot;Nessa&quot; onerror=&quot;this.style.display=&#39;none&#39;;this.parentElement.innerHTML=&#39;&amp;lt;svg viewBox=&amp;quot;0 0 100 100&amp;quot; xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;&amp;gt;&amp;lt;circle cx=&amp;quot;50&amp;quot; cy=&amp;quot;35&amp;quot; r=&amp;quot;20&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;ellipse cx=&amp;quot;50&amp;quot; cy=&amp;quot;85&amp;quot; rx=&amp;quot;35&amp;quot; ry=&amp;quot;25&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;/svg&amp;gt;&#39;;&quot; /&gt;&lt;/div&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;Nessa:&lt;/strong&gt; What if I&#39;m out.&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;dialog-block dialog-player&quot;&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;You:&lt;/strong&gt; Then you&#39;re out and we do it again tomorrow.&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;dialog-block dialog-npc&quot;&gt;&lt;div class=&quot;portrait&quot;&gt;&lt;img src=&quot;nessa.jpg&quot; alt=&quot;Nessa&quot; onerror=&quot;this.style.display=&#39;none&#39;;this.parentElement.innerHTML=&#39;&amp;lt;svg viewBox=&amp;quot;0 0 100 100&amp;quot; xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;&amp;gt;&amp;lt;circle cx=&amp;quot;50&amp;quot; cy=&amp;quot;35&amp;quot; r=&amp;quot;20&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;ellipse cx=&amp;quot;50&amp;quot; cy=&amp;quot;85&amp;quot; rx=&amp;quot;35&amp;quot; ry=&amp;quot;25&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;/svg&amp;gt;&#39;;&quot; /&gt;&lt;/div&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;Nessa:&lt;/strong&gt; Denny wouldn&#39;t have let me near this.&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;dialog-block dialog-player&quot;&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;You:&lt;/strong&gt; No.&lt;/div&gt;&lt;/div&gt;&lt;p&gt;She is out by sixty and she finds it herself, and she is more pleased about finding it than she would have been about being right, and you watch her be pleased about it.&lt;/p&gt;
 
@@ -9404,44 +9330,7 @@ try {
 &lt;span class=&quot;locked-choice&quot; title=&quot;Let her count the till.&quot;&gt;Let her count the till. (&lt;&lt;= setup.getCostBlockedMessage([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 5}])&gt;&gt;)&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;if not ((setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;nessa_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 3}])) or (setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;nessa_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_nessa&quot;, &quot;trait_key&quot;: &quot;trust&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 20}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 5}])))&gt;&gt;
-&lt;&lt;script&gt;&gt;
-try {
-  window._engineNoExitsDiag_hub_nessa_booth = [{&quot;text&quot;: &quot;Get in the booth with her.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;nessa_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}}, {&quot;text&quot;: &quot;Let her count the till.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;nessa_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_nessa&quot;, &quot;trait_key&quot;: &quot;trust&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 20}]}}];
-  if (typeof console !== &#39;undefined&#39; &amp;&amp; console.warn) {
-    console.warn(&#39;[engine] no exit choices satisfied&#39;, {
-      canvas: &quot;hub_nessa_booth&quot;,
-      choices: window._engineNoExitsDiag_hub_nessa_booth,
-      flags: State.variables.flags,
-      player_traits: (State.variables.player || {}).core_traits
-    });
-  }
-} catch(e) {}
-&lt;&lt;/script&gt;&gt;
-&lt;&lt;if $flags.debug_mode&gt;&gt;
-&lt;&lt;set _diagChoices to window._engineNoExitsDiag_hub_nessa_booth&gt;&gt;
-&lt;div class=&quot;engine-diag-no-exits&quot;&gt;
-&lt;div class=&quot;engine-diag-header&quot;&gt;⚠️ DEV: No exit choices satisfied — canvas hub_nessa_booth&lt;/div&gt;
-&lt;div class=&quot;engine-diag-hint&quot;&gt;All exits are conditional and none of their gates currently evaluate true. Player will use the Continue link below to escape, but the visit fires no effects. Likely authoring gap — add a fallback choice or broaden a condition.&lt;/div&gt;
-&lt;&lt;for _i to 0; _i lt _diagChoices.length; _i++&gt;&gt;
-&lt;&lt;set _ch to _diagChoices[_i]&gt;&gt;
-&lt;div class=&quot;engine-diag-choice&quot;&gt;
-&lt;div class=&quot;engine-diag-choice-text&quot;&gt;Choice: &quot;&lt;&lt;print _ch.text&gt;&gt;&quot;&lt;/div&gt;
-&lt;div class=&quot;engine-diag-choice-logic&quot;&gt;Combined as: &lt;&lt;print _ch.conditions.logic&gt;&gt;&lt;/div&gt;
-&lt;ul class=&quot;engine-diag-items&quot;&gt;
-&lt;&lt;for _j to 0; _j lt _ch.conditions.items.length; _j++&gt;&gt;
-&lt;&lt;set _it to _ch.conditions.items[_j]&gt;&gt;
-&lt;&lt;set _single to {version: &quot;1.0&quot;, logic: &quot;AND&quot;, items: [_it]}&gt;&gt;
-&lt;&lt;set _ok to setup.triggerConditionsSatisfied(_single)&gt;&gt;
-&lt;li class=&quot;&lt;&lt;print _ok ? &#39;engine-diag-pass&#39; : &#39;engine-diag-fail&#39;&gt;&gt;&quot;&gt;&lt;&lt;if _ok&gt;&gt;✓&lt;&lt;else&gt;&gt;✗&lt;&lt;/if&gt;&gt; &lt;&lt;print JSON.stringify(_it)&gt;&gt;&lt;/li&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/div&gt;
-&lt;&lt;/if&gt;&gt;
-[[Continue-&gt;Location_the_arcade]]
-&lt;&lt;/if&gt;&gt;
+&lt;&lt;link &quot;Leave her to the booth.&quot; &quot;Location_the_arcade&quot;&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(5);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="Canvas_rung_tam_row_wait_Node_base" tags="" position="1225,475" size="100,100">&lt;div class=&quot;dev-canvas-info&quot;&gt;&lt;strong&gt;Canvas:&lt;/strong&gt; Make him come to you &lt;span style=&quot;opacity:0.7;&quot;&gt;(rung_tam_row_wait)&lt;/span&gt; | &lt;strong&gt;Node:&lt;/strong&gt; Make him come to you&lt;/div&gt;
 &lt;p&gt;You stay at the bottom of the row with your hands in your coat and you do not start walking. He stands at the top of the stair for a good while working out whether you have seen him.&lt;/p&gt;&lt;p&gt;Then he comes down the whole eleven doors, hood down by the fourth one, and gets to you slightly out of breath and does not say anything about having done it.&lt;/p&gt;&lt;div class=&quot;dialog-block dialog-npc&quot;&gt;&lt;div class=&quot;portrait&quot;&gt;&lt;img src=&quot;tam.jpg&quot; alt=&quot;Tam&quot; onerror=&quot;this.style.display=&#39;none&#39;;this.parentElement.innerHTML=&#39;&amp;lt;svg viewBox=&amp;quot;0 0 100 100&amp;quot; xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;&amp;gt;&amp;lt;circle cx=&amp;quot;50&amp;quot; cy=&amp;quot;35&amp;quot; r=&amp;quot;20&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;ellipse cx=&amp;quot;50&amp;quot; cy=&amp;quot;85&amp;quot; rx=&amp;quot;35&amp;quot; ry=&amp;quot;25&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;/svg&amp;gt;&#39;;&quot; /&gt;&lt;/div&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;Tam:&lt;/strong&gt; You didn&#39;t move.&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;dialog-block dialog-player&quot;&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;You:&lt;/strong&gt; No.&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;dialog-block dialog-npc&quot;&gt;&lt;div class=&quot;portrait&quot;&gt;&lt;img src=&quot;tam.jpg&quot; alt=&quot;Tam&quot; onerror=&quot;this.style.display=&#39;none&#39;;this.parentElement.innerHTML=&#39;&amp;lt;svg viewBox=&amp;quot;0 0 100 100&amp;quot; xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;&amp;gt;&amp;lt;circle cx=&amp;quot;50&amp;quot; cy=&amp;quot;35&amp;quot; r=&amp;quot;20&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;ellipse cx=&amp;quot;50&amp;quot; cy=&amp;quot;85&amp;quot; rx=&amp;quot;35&amp;quot; ry=&amp;quot;25&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;/svg&amp;gt;&#39;;&quot; /&gt;&lt;/div&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;Tam:&lt;/strong&gt; Right.&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;thought-bubble thought-bubble-player&quot;&gt;&lt;div class=&quot;thought-bubble-content&quot;&gt;&lt;em&gt;💭 You are thinking:&lt;/em&gt; Nineteen years of me walking to him. Eleven doors the other way and my chest has gone tight standing still in the cold.&lt;/div&gt;&lt;/div&gt;
 
@@ -9497,44 +9386,7 @@ try {
 &lt;span class=&quot;locked-choice&quot; title=&quot;Wait at the bottom and make him come to you.&quot;&gt;Wait at the bottom and make him come to you. (&lt;&lt;= setup.getCostBlockedMessage([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 5}])&gt;&gt;)&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;if not ((setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;tam_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 3}])) or (setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;tam_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_tam&quot;, &quot;trait_key&quot;: &quot;ease&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 20}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 5}])))&gt;&gt;
-&lt;&lt;script&gt;&gt;
-try {
-  window._engineNoExitsDiag_hub_tam_row = [{&quot;text&quot;: &quot;Walk him up the row.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;tam_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}}, {&quot;text&quot;: &quot;Wait at the bottom and make him come to you.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;tam_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_tam&quot;, &quot;trait_key&quot;: &quot;ease&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 20}]}}];
-  if (typeof console !== &#39;undefined&#39; &amp;&amp; console.warn) {
-    console.warn(&#39;[engine] no exit choices satisfied&#39;, {
-      canvas: &quot;hub_tam_row&quot;,
-      choices: window._engineNoExitsDiag_hub_tam_row,
-      flags: State.variables.flags,
-      player_traits: (State.variables.player || {}).core_traits
-    });
-  }
-} catch(e) {}
-&lt;&lt;/script&gt;&gt;
-&lt;&lt;if $flags.debug_mode&gt;&gt;
-&lt;&lt;set _diagChoices to window._engineNoExitsDiag_hub_tam_row&gt;&gt;
-&lt;div class=&quot;engine-diag-no-exits&quot;&gt;
-&lt;div class=&quot;engine-diag-header&quot;&gt;⚠️ DEV: No exit choices satisfied — canvas hub_tam_row&lt;/div&gt;
-&lt;div class=&quot;engine-diag-hint&quot;&gt;All exits are conditional and none of their gates currently evaluate true. Player will use the Continue link below to escape, but the visit fires no effects. Likely authoring gap — add a fallback choice or broaden a condition.&lt;/div&gt;
-&lt;&lt;for _i to 0; _i lt _diagChoices.length; _i++&gt;&gt;
-&lt;&lt;set _ch to _diagChoices[_i]&gt;&gt;
-&lt;div class=&quot;engine-diag-choice&quot;&gt;
-&lt;div class=&quot;engine-diag-choice-text&quot;&gt;Choice: &quot;&lt;&lt;print _ch.text&gt;&gt;&quot;&lt;/div&gt;
-&lt;div class=&quot;engine-diag-choice-logic&quot;&gt;Combined as: &lt;&lt;print _ch.conditions.logic&gt;&gt;&lt;/div&gt;
-&lt;ul class=&quot;engine-diag-items&quot;&gt;
-&lt;&lt;for _j to 0; _j lt _ch.conditions.items.length; _j++&gt;&gt;
-&lt;&lt;set _it to _ch.conditions.items[_j]&gt;&gt;
-&lt;&lt;set _single to {version: &quot;1.0&quot;, logic: &quot;AND&quot;, items: [_it]}&gt;&gt;
-&lt;&lt;set _ok to setup.triggerConditionsSatisfied(_single)&gt;&gt;
-&lt;li class=&quot;&lt;&lt;print _ok ? &#39;engine-diag-pass&#39; : &#39;engine-diag-fail&#39;&gt;&gt;&quot;&gt;&lt;&lt;if _ok&gt;&gt;✓&lt;&lt;else&gt;&gt;✗&lt;&lt;/if&gt;&gt; &lt;&lt;print JSON.stringify(_it)&gt;&gt;&lt;/li&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/div&gt;
-&lt;&lt;/if&gt;&gt;
-[[Continue-&gt;Location_terrace_row]]
-&lt;&lt;/if&gt;&gt;
+&lt;&lt;link &quot;Let him walk up on his own.&quot; &quot;Location_terrace_row&quot;&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(5);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="Canvas_rung_ewan_diesel_Node_base" tags="" position="350,600" size="100,100">&lt;div class=&quot;dev-canvas-info&quot;&gt;&lt;strong&gt;Canvas:&lt;/strong&gt; Twelve in the tank &lt;span style=&quot;opacity:0.7;&quot;&gt;(rung_ewan_diesel)&lt;/span&gt; | &lt;strong&gt;Node:&lt;/strong&gt; Twelve in the tank&lt;/div&gt;
 &lt;p&gt;The pump at the boat shop takes cash and gives no receipt. You put twelve in his tank while he is down at the water end with the winch, and you say nothing about it.&lt;/p&gt;&lt;div class=&quot;dialog-block dialog-npc&quot;&gt;&lt;div class=&quot;portrait&quot;&gt;&lt;img src=&quot;ewan.jpg&quot; alt=&quot;Ewan&quot; onerror=&quot;this.style.display=&#39;none&#39;;this.parentElement.innerHTML=&#39;&amp;lt;svg viewBox=&amp;quot;0 0 100 100&amp;quot; xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;&amp;gt;&amp;lt;circle cx=&amp;quot;50&amp;quot; cy=&amp;quot;35&amp;quot; r=&amp;quot;20&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;ellipse cx=&amp;quot;50&amp;quot; cy=&amp;quot;85&amp;quot; rx=&amp;quot;35&amp;quot; ry=&amp;quot;25&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;/svg&amp;gt;&#39;;&quot; /&gt;&lt;/div&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;Ewan:&lt;/strong&gt; The needle&#39;s moved.&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;dialog-block dialog-player&quot;&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;You:&lt;/strong&gt; Has it.&lt;/div&gt;&lt;/div&gt;&lt;p&gt;He looks at the pump, and at you, and does the arithmetic without writing it down, which is the thing he does that his father never could. He does not say thank you and he does not say don&#39;t.&lt;/p&gt;&lt;div class=&quot;thought-bubble thought-bubble-player&quot;&gt;&lt;div class=&quot;thought-bubble-content&quot;&gt;&lt;em&gt;💭 You are thinking:&lt;/em&gt; Twelve. And he will know to the last coin what it was, and it will be in the folder by Monday under something else.&lt;/div&gt;&lt;/div&gt;
 
@@ -9584,44 +9436,7 @@ try {
 &lt;span class=&quot;locked-choice&quot; title=&quot;Put diesel in the van for him ($12).&quot;&gt;Put diesel in the van for him ($12). (&lt;&lt;= setup.getCostBlockedMessage([{&quot;trait&quot;: &quot;money&quot;, &quot;value&quot;: 12}])&gt;&gt;)&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;if not ((setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;ewan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 4}])) or (setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;ewan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;money&quot;, &quot;value&quot;: 12}])))&gt;&gt;
-&lt;&lt;script&gt;&gt;
-try {
-  window._engineNoExitsDiag_hub_ewan_slip = [{&quot;text&quot;: &quot;Take him the flask.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;ewan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}}, {&quot;text&quot;: &quot;Put diesel in the van for him ($12).&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;ewan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}}];
-  if (typeof console !== &#39;undefined&#39; &amp;&amp; console.warn) {
-    console.warn(&#39;[engine] no exit choices satisfied&#39;, {
-      canvas: &quot;hub_ewan_slip&quot;,
-      choices: window._engineNoExitsDiag_hub_ewan_slip,
-      flags: State.variables.flags,
-      player_traits: (State.variables.player || {}).core_traits
-    });
-  }
-} catch(e) {}
-&lt;&lt;/script&gt;&gt;
-&lt;&lt;if $flags.debug_mode&gt;&gt;
-&lt;&lt;set _diagChoices to window._engineNoExitsDiag_hub_ewan_slip&gt;&gt;
-&lt;div class=&quot;engine-diag-no-exits&quot;&gt;
-&lt;div class=&quot;engine-diag-header&quot;&gt;⚠️ DEV: No exit choices satisfied — canvas hub_ewan_slip&lt;/div&gt;
-&lt;div class=&quot;engine-diag-hint&quot;&gt;All exits are conditional and none of their gates currently evaluate true. Player will use the Continue link below to escape, but the visit fires no effects. Likely authoring gap — add a fallback choice or broaden a condition.&lt;/div&gt;
-&lt;&lt;for _i to 0; _i lt _diagChoices.length; _i++&gt;&gt;
-&lt;&lt;set _ch to _diagChoices[_i]&gt;&gt;
-&lt;div class=&quot;engine-diag-choice&quot;&gt;
-&lt;div class=&quot;engine-diag-choice-text&quot;&gt;Choice: &quot;&lt;&lt;print _ch.text&gt;&gt;&quot;&lt;/div&gt;
-&lt;div class=&quot;engine-diag-choice-logic&quot;&gt;Combined as: &lt;&lt;print _ch.conditions.logic&gt;&gt;&lt;/div&gt;
-&lt;ul class=&quot;engine-diag-items&quot;&gt;
-&lt;&lt;for _j to 0; _j lt _ch.conditions.items.length; _j++&gt;&gt;
-&lt;&lt;set _it to _ch.conditions.items[_j]&gt;&gt;
-&lt;&lt;set _single to {version: &quot;1.0&quot;, logic: &quot;AND&quot;, items: [_it]}&gt;&gt;
-&lt;&lt;set _ok to setup.triggerConditionsSatisfied(_single)&gt;&gt;
-&lt;li class=&quot;&lt;&lt;print _ok ? &#39;engine-diag-pass&#39; : &#39;engine-diag-fail&#39;&gt;&gt;&quot;&gt;&lt;&lt;if _ok&gt;&gt;✓&lt;&lt;else&gt;&gt;✗&lt;&lt;/if&gt;&gt; &lt;&lt;print JSON.stringify(_it)&gt;&gt;&lt;/li&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/div&gt;
-&lt;&lt;/if&gt;&gt;
-[[Continue-&gt;Location_harbour_end]]
-&lt;&lt;/if&gt;&gt;
+&lt;&lt;link &quot;Leave him to the boat.&quot; &quot;Location_harbour_end&quot;&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(5);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="Canvas_rung_roan_seen_Node_base" tags="" position="725,600" size="100,100">&lt;div class=&quot;dev-canvas-info&quot;&gt;&lt;strong&gt;Canvas:&lt;/strong&gt; Where the row can see &lt;span style=&quot;opacity:0.7;&quot;&gt;(rung_roan_seen)&lt;/span&gt; | &lt;strong&gt;Node:&lt;/strong&gt; Where the row can see&lt;/div&gt;
 &lt;p&gt;The shelter halfway along has a bench in it out of the wind and a view of Terrace Row&#39;s back windows. You sit in it with him and do not sit at the far end.&lt;/p&gt;&lt;div class=&quot;dialog-block dialog-player&quot;&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;You:&lt;/strong&gt; Somebody will say something.&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;dialog-block dialog-npc&quot;&gt;&lt;div class=&quot;portrait&quot;&gt;&lt;img src=&quot;roan.jpg&quot; alt=&quot;Roan&quot; onerror=&quot;this.style.display=&#39;none&#39;;this.parentElement.innerHTML=&#39;&amp;lt;svg viewBox=&amp;quot;0 0 100 100&amp;quot; xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;&amp;gt;&amp;lt;circle cx=&amp;quot;50&amp;quot; cy=&amp;quot;35&amp;quot; r=&amp;quot;20&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;ellipse cx=&amp;quot;50&amp;quot; cy=&amp;quot;85&amp;quot; rx=&amp;quot;35&amp;quot; ry=&amp;quot;25&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;/svg&amp;gt;&#39;;&quot; /&gt;&lt;/div&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;Roan:&lt;/strong&gt; They said everything they had about you in nineteen ninety-six. There&#39;s nothing left in the tin.&lt;/div&gt;&lt;/div&gt;&lt;p&gt;He puts his arm along the back of the bench behind you, not on you, and leaves it there for the rest of it. A woman you were at school with goes past with a dog and looks twice.&lt;/p&gt;&lt;div class=&quot;thought-bubble thought-bubble-player&quot;&gt;&lt;div class=&quot;thought-bubble-content&quot;&gt;&lt;em&gt;💭 You are thinking:&lt;/em&gt; He did not move his arm when she looked. That is the whole thing about him and I could not explain it to anybody.&lt;/div&gt;&lt;/div&gt;
 
@@ -9677,44 +9492,7 @@ try {
 &lt;span class=&quot;locked-choice&quot; title=&quot;Sit on the front with him where the row can see.&quot;&gt;Sit on the front with him where the row can see. (&lt;&lt;= setup.getCostBlockedMessage([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 6}])&gt;&gt;)&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;if not ((setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;roan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 4}])) or (setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;roan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_roan&quot;, &quot;trait_key&quot;: &quot;bond&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 12}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 6}])))&gt;&gt;
-&lt;&lt;script&gt;&gt;
-try {
-  window._engineNoExitsDiag_hub_roan_front = [{&quot;text&quot;: &quot;Walk it with him.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;roan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}}, {&quot;text&quot;: &quot;Sit on the front with him where the row can see.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;roan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_roan&quot;, &quot;trait_key&quot;: &quot;bond&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 12}]}}];
-  if (typeof console !== &#39;undefined&#39; &amp;&amp; console.warn) {
-    console.warn(&#39;[engine] no exit choices satisfied&#39;, {
-      canvas: &quot;hub_roan_front&quot;,
-      choices: window._engineNoExitsDiag_hub_roan_front,
-      flags: State.variables.flags,
-      player_traits: (State.variables.player || {}).core_traits
-    });
-  }
-} catch(e) {}
-&lt;&lt;/script&gt;&gt;
-&lt;&lt;if $flags.debug_mode&gt;&gt;
-&lt;&lt;set _diagChoices to window._engineNoExitsDiag_hub_roan_front&gt;&gt;
-&lt;div class=&quot;engine-diag-no-exits&quot;&gt;
-&lt;div class=&quot;engine-diag-header&quot;&gt;⚠️ DEV: No exit choices satisfied — canvas hub_roan_front&lt;/div&gt;
-&lt;div class=&quot;engine-diag-hint&quot;&gt;All exits are conditional and none of their gates currently evaluate true. Player will use the Continue link below to escape, but the visit fires no effects. Likely authoring gap — add a fallback choice or broaden a condition.&lt;/div&gt;
-&lt;&lt;for _i to 0; _i lt _diagChoices.length; _i++&gt;&gt;
-&lt;&lt;set _ch to _diagChoices[_i]&gt;&gt;
-&lt;div class=&quot;engine-diag-choice&quot;&gt;
-&lt;div class=&quot;engine-diag-choice-text&quot;&gt;Choice: &quot;&lt;&lt;print _ch.text&gt;&gt;&quot;&lt;/div&gt;
-&lt;div class=&quot;engine-diag-choice-logic&quot;&gt;Combined as: &lt;&lt;print _ch.conditions.logic&gt;&gt;&lt;/div&gt;
-&lt;ul class=&quot;engine-diag-items&quot;&gt;
-&lt;&lt;for _j to 0; _j lt _ch.conditions.items.length; _j++&gt;&gt;
-&lt;&lt;set _it to _ch.conditions.items[_j]&gt;&gt;
-&lt;&lt;set _single to {version: &quot;1.0&quot;, logic: &quot;AND&quot;, items: [_it]}&gt;&gt;
-&lt;&lt;set _ok to setup.triggerConditionsSatisfied(_single)&gt;&gt;
-&lt;li class=&quot;&lt;&lt;print _ok ? &#39;engine-diag-pass&#39; : &#39;engine-diag-fail&#39;&gt;&gt;&quot;&gt;&lt;&lt;if _ok&gt;&gt;✓&lt;&lt;else&gt;&gt;✗&lt;&lt;/if&gt;&gt; &lt;&lt;print JSON.stringify(_it)&gt;&gt;&lt;/li&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/div&gt;
-&lt;&lt;/if&gt;&gt;
-[[Continue-&gt;Location_the_front]]
-&lt;&lt;/if&gt;&gt;
+&lt;&lt;link &quot;Walk on without him.&quot; &quot;Location_the_front&quot;&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(5);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="Canvas_loop_nessa_curtain_Node_entry" tags="" position="1100,600" size="100,100">&lt;div class=&quot;dev-canvas-info&quot;&gt;&lt;strong&gt;Canvas:&lt;/strong&gt; Don&#39;t leave when she changes &lt;span style=&quot;opacity:0.7;&quot;&gt;(loop_nessa_curtain)&lt;/span&gt; | &lt;strong&gt;Node:&lt;/strong&gt; Don&#39;t leave when she changes&lt;/div&gt;
 &lt;div style=&quot;border:2px dashed #666;padding:20px;margin:10px 0;border-radius:8px;background:#f5f5f5;&quot;&gt;&lt;p style=&quot;margin:0;font-weight:bold;color:#333;&quot;&gt;[VIDEO POOL MISSING] sex/back_room_curtain_t5/ (0 of 5)&lt;/p&gt;&lt;p style=&quot;margin:5px 0 0;color:#666;font-style:italic;&quot;&gt;Two women close together on a mattress in a bare dim room.&lt;/p&gt;&lt;div style=&quot;margin-top:10px;&quot;&gt;&lt;a href=&quot;https://www.google.com/search?q=two+women+close+together+on+mattress+dim+room&amp;amp;_tmc_game=output&amp;amp;_tmc_scene=sex%2Fback_room_curtain_t5%2F+%280+of+5%29&quot; target=&quot;_blank&quot; style=&quot;display:inline-block;margin:4px 8px 4px 0;padding:6px 12px;background:#3b82f6;color:white;text-decoration:none;border-radius:4px;font-size:13px;&quot;&gt;🔍 two women close together on mattress dim room&lt;/a&gt;&lt;a href=&quot;https://www.google.com/search?q=women+intimate+bare+room+low+light+mattress&amp;amp;_tmc_game=output&amp;amp;_tmc_scene=sex%2Fback_room_curtain_t5%2F+%280+of+5%29&quot; target=&quot;_blank&quot; style=&quot;display:inline-block;margin:4px 8px 4px 0;padding:6px 12px;background:#3b82f6;color:white;text-decoration:none;border-radius:4px;font-size:13px;&quot;&gt;🔍 women intimate bare room low light mattress&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;The curtain has not been pulled across in weeks and neither of you has mentioned that either. She gets the shirt off with you sitting three feet away and does not turn her back.&lt;/p&gt;&lt;div class=&quot;dialog-block dialog-npc&quot;&gt;&lt;div class=&quot;portrait&quot;&gt;&lt;img src=&quot;nessa.jpg&quot; alt=&quot;Nessa&quot; onerror=&quot;this.style.display=&#39;none&#39;;this.parentElement.innerHTML=&#39;&amp;lt;svg viewBox=&amp;quot;0 0 100 100&amp;quot; xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;&amp;gt;&amp;lt;circle cx=&amp;quot;50&amp;quot; cy=&amp;quot;35&amp;quot; r=&amp;quot;20&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;ellipse cx=&amp;quot;50&amp;quot; cy=&amp;quot;85&amp;quot; rx=&amp;quot;35&amp;quot; ry=&amp;quot;25&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;/svg&amp;gt;&#39;;&quot; /&gt;&lt;/div&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;Nessa:&lt;/strong&gt; You always go quiet at this bit.&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;dialog-block dialog-player&quot;&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;You:&lt;/strong&gt; I know.&lt;/div&gt;&lt;/div&gt;&lt;p&gt;She comes and kneels up on the mattress in front of you in nothing but her panties, close enough that you can feel the heat off her, and waits for you to be the one who moves.&lt;/p&gt;&lt;div class=&quot;dialog-block dialog-npc&quot;&gt;&lt;div class=&quot;portrait&quot;&gt;&lt;img src=&quot;nessa.jpg&quot; alt=&quot;Nessa&quot; onerror=&quot;this.style.display=&#39;none&#39;;this.parentElement.innerHTML=&#39;&amp;lt;svg viewBox=&amp;quot;0 0 100 100&amp;quot; xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;&amp;gt;&amp;lt;circle cx=&amp;quot;50&amp;quot; cy=&amp;quot;35&amp;quot; r=&amp;quot;20&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;ellipse cx=&amp;quot;50&amp;quot; cy=&amp;quot;85&amp;quot; rx=&amp;quot;35&amp;quot; ry=&amp;quot;25&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;/svg&amp;gt;&#39;;&quot; /&gt;&lt;/div&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;Nessa:&lt;/strong&gt; You always stop here. Don&#39;t stop here.&lt;/div&gt;&lt;/div&gt;
 
@@ -9957,44 +9735,7 @@ try {
 &lt;span class=&quot;locked-choice&quot; title=&quot;Don&#39;t leave when she changes.&quot;&gt;Don&#39;t leave when she changes. (&lt;&lt;= setup.getCostBlockedMessage([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 8}])&gt;&gt;)&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;if not ((setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;nessa_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 4}])) or (setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;nessa_talk_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 3}])) or (setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;nessa_talk_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 3}])) or (setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;nessa_saw_her&quot;, &quot;operator&quot;: &quot;is_true&quot;}, {&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;nessa_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_nessa&quot;, &quot;trait_key&quot;: &quot;trust&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 20}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 8}])))&gt;&gt;
-&lt;&lt;script&gt;&gt;
-try {
-  window._engineNoExitsDiag_hub_nessa_back_room = [{&quot;text&quot;: &quot;Take her a tea and stay.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;nessa_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}}, {&quot;text&quot;: &quot;Ask why she stayed on.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;nessa_talk_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}}, {&quot;text&quot;: &quot;Ask her what she does all day in here.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;nessa_talk_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}}, {&quot;text&quot;: &quot;Don&#39;t leave when she changes.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;nessa_saw_her&quot;, &quot;operator&quot;: &quot;is_true&quot;}, {&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;nessa_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_nessa&quot;, &quot;trait_key&quot;: &quot;trust&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 20}]}}];
-  if (typeof console !== &#39;undefined&#39; &amp;&amp; console.warn) {
-    console.warn(&#39;[engine] no exit choices satisfied&#39;, {
-      canvas: &quot;hub_nessa_back_room&quot;,
-      choices: window._engineNoExitsDiag_hub_nessa_back_room,
-      flags: State.variables.flags,
-      player_traits: (State.variables.player || {}).core_traits
-    });
-  }
-} catch(e) {}
-&lt;&lt;/script&gt;&gt;
-&lt;&lt;if $flags.debug_mode&gt;&gt;
-&lt;&lt;set _diagChoices to window._engineNoExitsDiag_hub_nessa_back_room&gt;&gt;
-&lt;div class=&quot;engine-diag-no-exits&quot;&gt;
-&lt;div class=&quot;engine-diag-header&quot;&gt;⚠️ DEV: No exit choices satisfied — canvas hub_nessa_back_room&lt;/div&gt;
-&lt;div class=&quot;engine-diag-hint&quot;&gt;All exits are conditional and none of their gates currently evaluate true. Player will use the Continue link below to escape, but the visit fires no effects. Likely authoring gap — add a fallback choice or broaden a condition.&lt;/div&gt;
-&lt;&lt;for _i to 0; _i lt _diagChoices.length; _i++&gt;&gt;
-&lt;&lt;set _ch to _diagChoices[_i]&gt;&gt;
-&lt;div class=&quot;engine-diag-choice&quot;&gt;
-&lt;div class=&quot;engine-diag-choice-text&quot;&gt;Choice: &quot;&lt;&lt;print _ch.text&gt;&gt;&quot;&lt;/div&gt;
-&lt;div class=&quot;engine-diag-choice-logic&quot;&gt;Combined as: &lt;&lt;print _ch.conditions.logic&gt;&gt;&lt;/div&gt;
-&lt;ul class=&quot;engine-diag-items&quot;&gt;
-&lt;&lt;for _j to 0; _j lt _ch.conditions.items.length; _j++&gt;&gt;
-&lt;&lt;set _it to _ch.conditions.items[_j]&gt;&gt;
-&lt;&lt;set _single to {version: &quot;1.0&quot;, logic: &quot;AND&quot;, items: [_it]}&gt;&gt;
-&lt;&lt;set _ok to setup.triggerConditionsSatisfied(_single)&gt;&gt;
-&lt;li class=&quot;&lt;&lt;print _ok ? &#39;engine-diag-pass&#39; : &#39;engine-diag-fail&#39;&gt;&gt;&quot;&gt;&lt;&lt;if _ok&gt;&gt;✓&lt;&lt;else&gt;&gt;✗&lt;&lt;/if&gt;&gt; &lt;&lt;print JSON.stringify(_it)&gt;&gt;&lt;/li&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/div&gt;
-&lt;&lt;/if&gt;&gt;
-[[Continue-&gt;Location_the_back_room]]
-&lt;&lt;/if&gt;&gt;
+&lt;&lt;link &quot;Let her get on.&quot; &quot;Location_the_back_room&quot;&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(5);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="Canvas_loop_roan_stay_Node_entry" tags="" position="350,850" size="100,100">&lt;div class=&quot;dev-canvas-info&quot;&gt;&lt;strong&gt;Canvas:&lt;/strong&gt; Don&#39;t go home &lt;span style=&quot;opacity:0.7;&quot;&gt;(loop_roan_stay)&lt;/span&gt; | &lt;strong&gt;Node:&lt;/strong&gt; Don&#39;t go home&lt;/div&gt;
 &lt;div style=&quot;border:2px dashed #666;padding:20px;margin:10px 0;border-radius:8px;background:#f5f5f5;&quot;&gt;&lt;p style=&quot;margin:0;font-weight:bold;color:#333;&quot;&gt;[VIDEO POOL MISSING] sex/terrace_settee_t4/ (0 of 5)&lt;/p&gt;&lt;p style=&quot;margin:5px 0 0;color:#666;font-style:italic;&quot;&gt;A man and a woman close together on a settee in a dated front room at night.&lt;/p&gt;&lt;div style=&quot;margin-top:10px;&quot;&gt;&lt;a href=&quot;https://www.google.com/search?q=man+and+woman+close+on+sofa+night+lamp+living+room&amp;amp;_tmc_game=output&amp;amp;_tmc_scene=sex%2Fterrace_settee_t4%2F+%280+of+5%29&quot; target=&quot;_blank&quot; style=&quot;display:inline-block;margin:4px 8px 4px 0;padding:6px 12px;background:#3b82f6;color:white;text-decoration:none;border-radius:4px;font-size:13px;&quot;&gt;🔍 man and woman close on sofa night lamp living room&lt;/a&gt;&lt;a href=&quot;https://www.google.com/search?q=couple+on+settee+dim+front+room+evening&amp;amp;_tmc_game=output&amp;amp;_tmc_scene=sex%2Fterrace_settee_t4%2F+%280+of+5%29&quot; target=&quot;_blank&quot; style=&quot;display:inline-block;margin:4px 8px 4px 0;padding:6px 12px;background:#3b82f6;color:white;text-decoration:none;border-radius:4px;font-size:13px;&quot;&gt;🔍 couple on settee dim front room evening&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;The fire is on both bars and neither of you has said the word coat. He locks the front and comes back through and does not sit in the chair.&lt;/p&gt;&lt;div class=&quot;dialog-block dialog-npc&quot;&gt;&lt;div class=&quot;portrait&quot;&gt;&lt;img src=&quot;roan.jpg&quot; alt=&quot;Roan&quot; onerror=&quot;this.style.display=&#39;none&#39;;this.parentElement.innerHTML=&#39;&amp;lt;svg viewBox=&amp;quot;0 0 100 100&amp;quot; xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;&amp;gt;&amp;lt;circle cx=&amp;quot;50&amp;quot; cy=&amp;quot;35&amp;quot; r=&amp;quot;20&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;ellipse cx=&amp;quot;50&amp;quot; cy=&amp;quot;85&amp;quot; rx=&amp;quot;35&amp;quot; ry=&amp;quot;25&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;/svg&amp;gt;&#39;;&quot; /&gt;&lt;/div&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;Roan:&lt;/strong&gt; Say now if you&#39;re going.&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;dialog-block dialog-player&quot;&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;You:&lt;/strong&gt; I&#39;m not going.&lt;/div&gt;&lt;/div&gt;&lt;p&gt;He kisses you in your mother&#39;s front room with the racing still going on mute, and it is not a mistake and neither of you does the thing where you pretend it might have been.&lt;/p&gt;
 
@@ -10253,44 +9994,7 @@ try {
 &lt;span class=&quot;locked-choice&quot; title=&quot;Don&#39;t go home.&quot;&gt;Don&#39;t go home. (&lt;&lt;= setup.getCostBlockedMessage([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 10}])&gt;&gt;)&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;if not ((setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;roan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 4}])) or (setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;roan_talk_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 3}])) or (setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;roan_talk_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 3}])) or (setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;roan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_roan&quot;, &quot;trait_key&quot;: &quot;bond&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 12}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 7}])) or (setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;roan_back_door&quot;, &quot;operator&quot;: &quot;is_true&quot;}, {&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;roan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_roan&quot;, &quot;trait_key&quot;: &quot;bond&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 25}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 10}])))&gt;&gt;
-&lt;&lt;script&gt;&gt;
-try {
-  window._engineNoExitsDiag_hub_roan_house = [{&quot;text&quot;: &quot;Have one with him.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;roan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}}, {&quot;text&quot;: &quot;Ask him what he remembers.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;roan_talk_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}}, {&quot;text&quot;: &quot;Ask him about Bristol.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;roan_talk_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}}, {&quot;text&quot;: &quot;Stay later than the drink.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;roan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_roan&quot;, &quot;trait_key&quot;: &quot;bond&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 12}]}}, {&quot;text&quot;: &quot;Don&#39;t go home.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;roan_back_door&quot;, &quot;operator&quot;: &quot;is_true&quot;}, {&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;roan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_roan&quot;, &quot;trait_key&quot;: &quot;bond&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 25}]}}];
-  if (typeof console !== &#39;undefined&#39; &amp;&amp; console.warn) {
-    console.warn(&#39;[engine] no exit choices satisfied&#39;, {
-      canvas: &quot;hub_roan_house&quot;,
-      choices: window._engineNoExitsDiag_hub_roan_house,
-      flags: State.variables.flags,
-      player_traits: (State.variables.player || {}).core_traits
-    });
-  }
-} catch(e) {}
-&lt;&lt;/script&gt;&gt;
-&lt;&lt;if $flags.debug_mode&gt;&gt;
-&lt;&lt;set _diagChoices to window._engineNoExitsDiag_hub_roan_house&gt;&gt;
-&lt;div class=&quot;engine-diag-no-exits&quot;&gt;
-&lt;div class=&quot;engine-diag-header&quot;&gt;⚠️ DEV: No exit choices satisfied — canvas hub_roan_house&lt;/div&gt;
-&lt;div class=&quot;engine-diag-hint&quot;&gt;All exits are conditional and none of their gates currently evaluate true. Player will use the Continue link below to escape, but the visit fires no effects. Likely authoring gap — add a fallback choice or broaden a condition.&lt;/div&gt;
-&lt;&lt;for _i to 0; _i lt _diagChoices.length; _i++&gt;&gt;
-&lt;&lt;set _ch to _diagChoices[_i]&gt;&gt;
-&lt;div class=&quot;engine-diag-choice&quot;&gt;
-&lt;div class=&quot;engine-diag-choice-text&quot;&gt;Choice: &quot;&lt;&lt;print _ch.text&gt;&gt;&quot;&lt;/div&gt;
-&lt;div class=&quot;engine-diag-choice-logic&quot;&gt;Combined as: &lt;&lt;print _ch.conditions.logic&gt;&gt;&lt;/div&gt;
-&lt;ul class=&quot;engine-diag-items&quot;&gt;
-&lt;&lt;for _j to 0; _j lt _ch.conditions.items.length; _j++&gt;&gt;
-&lt;&lt;set _it to _ch.conditions.items[_j]&gt;&gt;
-&lt;&lt;set _single to {version: &quot;1.0&quot;, logic: &quot;AND&quot;, items: [_it]}&gt;&gt;
-&lt;&lt;set _ok to setup.triggerConditionsSatisfied(_single)&gt;&gt;
-&lt;li class=&quot;&lt;&lt;print _ok ? &#39;engine-diag-pass&#39; : &#39;engine-diag-fail&#39;&gt;&gt;&quot;&gt;&lt;&lt;if _ok&gt;&gt;✓&lt;&lt;else&gt;&gt;✗&lt;&lt;/if&gt;&gt; &lt;&lt;print JSON.stringify(_it)&gt;&gt;&lt;/li&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/div&gt;
-&lt;&lt;/if&gt;&gt;
-[[Continue-&gt;Location_the_terrace_house]]
-&lt;&lt;/if&gt;&gt;
+&lt;&lt;link &quot;Let him finish the drink on his own.&quot; &quot;Location_the_terrace_house&quot;&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(5);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="78" name="Canvas_loop_ewan_caravan_Node_entry" tags="" position="975,975" size="100,100">&lt;div class=&quot;dev-canvas-info&quot;&gt;&lt;strong&gt;Canvas:&lt;/strong&gt; After he shuts the yard &lt;span style=&quot;opacity:0.7;&quot;&gt;(loop_ewan_caravan)&lt;/span&gt; | &lt;strong&gt;Node:&lt;/strong&gt; After he shuts the yard&lt;/div&gt;
 &lt;div style=&quot;border:2px dashed #666;padding:20px;margin:10px 0;border-radius:8px;background:#f5f5f5;&quot;&gt;&lt;p style=&quot;margin:0;font-weight:bold;color:#333;&quot;&gt;[VIDEO POOL MISSING] sex/yard_caravan_t4/ (0 of 5)&lt;/p&gt;&lt;p style=&quot;margin:5px 0 0;color:#666;font-style:italic;&quot;&gt;A woman and a man close together in a cramped caravan office lit by one lamp.&lt;/p&gt;&lt;div style=&quot;margin-top:10px;&quot;&gt;&lt;a href=&quot;https://www.google.com/search?q=man+and+woman+close+cramped+caravan+interior+lamp&amp;amp;_tmc_game=output&amp;amp;_tmc_scene=sex%2Fyard_caravan_t4%2F+%280+of+5%29&quot; target=&quot;_blank&quot; style=&quot;display:inline-block;margin:4px 8px 4px 0;padding:6px 12px;background:#3b82f6;color:white;text-decoration:none;border-radius:4px;font-size:13px;&quot;&gt;🔍 man and woman close cramped caravan interior lamp&lt;/a&gt;&lt;a href=&quot;https://www.google.com/search?q=couple+in+small+site+office+dim+lamp+night&amp;amp;_tmc_game=output&amp;amp;_tmc_scene=sex%2Fyard_caravan_t4%2F+%280+of+5%29&quot; target=&quot;_blank&quot; style=&quot;display:inline-block;margin:4px 8px 4px 0;padding:6px 12px;background:#3b82f6;color:white;text-decoration:none;border-radius:4px;font-size:13px;&quot;&gt;🔍 couple in small site office dim lamp night&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;He shuts the yard down one bank of lights at a time, and then it is the caravan, the stove, and the two of you, and the drawer with the folder in it a foot from your hip.&lt;/p&gt;&lt;div class=&quot;dialog-block dialog-npc&quot;&gt;&lt;div class=&quot;portrait&quot;&gt;&lt;img src=&quot;ewan.jpg&quot; alt=&quot;Ewan&quot; onerror=&quot;this.style.display=&#39;none&#39;;this.parentElement.innerHTML=&#39;&amp;lt;svg viewBox=&amp;quot;0 0 100 100&amp;quot; xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;&amp;gt;&amp;lt;circle cx=&amp;quot;50&amp;quot; cy=&amp;quot;35&amp;quot; r=&amp;quot;20&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;ellipse cx=&amp;quot;50&amp;quot; cy=&amp;quot;85&amp;quot; rx=&amp;quot;35&amp;quot; ry=&amp;quot;25&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;/svg&amp;gt;&#39;;&quot; /&gt;&lt;/div&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;Ewan:&lt;/strong&gt; You don&#39;t have to go straight back. There&#39;s nobody waiting on you.&lt;/div&gt;&lt;/div&gt;&lt;p&gt;You do not get up when he gets up. He stands over the chair for a second working out whether that means what he thinks it means, and then puts a hand flat on the back of your neck.&lt;/p&gt;&lt;div class=&quot;dialog-block dialog-npc&quot;&gt;&lt;div class=&quot;portrait&quot;&gt;&lt;img src=&quot;ewan.jpg&quot; alt=&quot;Ewan&quot; onerror=&quot;this.style.display=&#39;none&#39;;this.parentElement.innerHTML=&#39;&amp;lt;svg viewBox=&amp;quot;0 0 100 100&amp;quot; xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;&amp;gt;&amp;lt;circle cx=&amp;quot;50&amp;quot; cy=&amp;quot;35&amp;quot; r=&amp;quot;20&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;ellipse cx=&amp;quot;50&amp;quot; cy=&amp;quot;85&amp;quot; rx=&amp;quot;35&amp;quot; ry=&amp;quot;25&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;/svg&amp;gt;&#39;;&quot; /&gt;&lt;/div&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;Ewan:&lt;/strong&gt; Hold still.&lt;/div&gt;&lt;/div&gt;
 
@@ -10518,44 +10222,7 @@ try {
 &lt;span class=&quot;locked-choice&quot; title=&quot;Stay in the caravan after he shuts the yard.&quot;&gt;Stay in the caravan after he shuts the yard. (&lt;&lt;= setup.getCostBlockedMessage([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 10}])&gt;&gt;)&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;if not ((setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;ewan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 5}])) or (setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;ewan_talk_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 3}])) or (setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;ewan_talk_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 3}])) or (setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;borrowed_from_ewan&quot;, &quot;operator&quot;: &quot;is_true&quot;}, {&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;ewan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_ewan&quot;, &quot;trait_key&quot;: &quot;hold&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 18}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 8}])) or (setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;ewan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_ewan&quot;, &quot;trait_key&quot;: &quot;hold&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 40}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 10}])))&gt;&gt;
-&lt;&lt;script&gt;&gt;
-try {
-  window._engineNoExitsDiag_hub_ewan_yard = [{&quot;text&quot;: &quot;Ask him for something.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;ewan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}}, {&quot;text&quot;: &quot;Ask to see the folder.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;ewan_talk_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}}, {&quot;text&quot;: &quot;Ask him when he last had a day off.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;ewan_talk_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}}, {&quot;text&quot;: &quot;Let him set the terms.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;borrowed_from_ewan&quot;, &quot;operator&quot;: &quot;is_true&quot;}, {&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;ewan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_ewan&quot;, &quot;trait_key&quot;: &quot;hold&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 18}]}}, {&quot;text&quot;: &quot;Stay in the caravan after he shuts the yard.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;ewan_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_ewan&quot;, &quot;trait_key&quot;: &quot;hold&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 40}]}}];
-  if (typeof console !== &#39;undefined&#39; &amp;&amp; console.warn) {
-    console.warn(&#39;[engine] no exit choices satisfied&#39;, {
-      canvas: &quot;hub_ewan_yard&quot;,
-      choices: window._engineNoExitsDiag_hub_ewan_yard,
-      flags: State.variables.flags,
-      player_traits: (State.variables.player || {}).core_traits
-    });
-  }
-} catch(e) {}
-&lt;&lt;/script&gt;&gt;
-&lt;&lt;if $flags.debug_mode&gt;&gt;
-&lt;&lt;set _diagChoices to window._engineNoExitsDiag_hub_ewan_yard&gt;&gt;
-&lt;div class=&quot;engine-diag-no-exits&quot;&gt;
-&lt;div class=&quot;engine-diag-header&quot;&gt;⚠️ DEV: No exit choices satisfied — canvas hub_ewan_yard&lt;/div&gt;
-&lt;div class=&quot;engine-diag-hint&quot;&gt;All exits are conditional and none of their gates currently evaluate true. Player will use the Continue link below to escape, but the visit fires no effects. Likely authoring gap — add a fallback choice or broaden a condition.&lt;/div&gt;
-&lt;&lt;for _i to 0; _i lt _diagChoices.length; _i++&gt;&gt;
-&lt;&lt;set _ch to _diagChoices[_i]&gt;&gt;
-&lt;div class=&quot;engine-diag-choice&quot;&gt;
-&lt;div class=&quot;engine-diag-choice-text&quot;&gt;Choice: &quot;&lt;&lt;print _ch.text&gt;&gt;&quot;&lt;/div&gt;
-&lt;div class=&quot;engine-diag-choice-logic&quot;&gt;Combined as: &lt;&lt;print _ch.conditions.logic&gt;&gt;&lt;/div&gt;
-&lt;ul class=&quot;engine-diag-items&quot;&gt;
-&lt;&lt;for _j to 0; _j lt _ch.conditions.items.length; _j++&gt;&gt;
-&lt;&lt;set _it to _ch.conditions.items[_j]&gt;&gt;
-&lt;&lt;set _single to {version: &quot;1.0&quot;, logic: &quot;AND&quot;, items: [_it]}&gt;&gt;
-&lt;&lt;set _ok to setup.triggerConditionsSatisfied(_single)&gt;&gt;
-&lt;li class=&quot;&lt;&lt;print _ok ? &#39;engine-diag-pass&#39; : &#39;engine-diag-fail&#39;&gt;&gt;&quot;&gt;&lt;&lt;if _ok&gt;&gt;✓&lt;&lt;else&gt;&gt;✗&lt;&lt;/if&gt;&gt; &lt;&lt;print JSON.stringify(_it)&gt;&gt;&lt;/li&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/div&gt;
-&lt;&lt;/if&gt;&gt;
-[[Continue-&gt;Location_the_boat_yard]]
-&lt;&lt;/if&gt;&gt;
+&lt;&lt;link &quot;Say it can wait, and go.&quot; &quot;Location_the_boat_yard&quot;&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(5);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="92" name="Canvas_loop_tam_bed_Node_entry" tags="" position="225,1225" size="100,100">&lt;div class=&quot;dev-canvas-info&quot;&gt;&lt;strong&gt;Canvas:&lt;/strong&gt; Get in with him &lt;span style=&quot;opacity:0.7;&quot;&gt;(loop_tam_bed)&lt;/span&gt; | &lt;strong&gt;Node:&lt;/strong&gt; Get in with him&lt;/div&gt;
 &lt;p&gt;You get in. Not on the covers — in, with him, in a bed that is too warm before you are in it, with a chip shop working underneath.&lt;/p&gt;&lt;div class=&quot;dialog-block dialog-npc&quot;&gt;&lt;div class=&quot;portrait&quot;&gt;&lt;img src=&quot;tam.jpg&quot; alt=&quot;Tam&quot; onerror=&quot;this.style.display=&#39;none&#39;;this.parentElement.innerHTML=&#39;&amp;lt;svg viewBox=&amp;quot;0 0 100 100&amp;quot; xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;&amp;gt;&amp;lt;circle cx=&amp;quot;50&amp;quot; cy=&amp;quot;35&amp;quot; r=&amp;quot;20&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;ellipse cx=&amp;quot;50&amp;quot; cy=&amp;quot;85&amp;quot; rx=&amp;quot;35&amp;quot; ry=&amp;quot;25&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;/svg&amp;gt;&#39;;&quot; /&gt;&lt;/div&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;Tam:&lt;/strong&gt; Shut the door properly. Lee comes up for the bin bags.&lt;/div&gt;&lt;/div&gt;
 
@@ -10825,44 +10492,7 @@ try {
 &lt;span class=&quot;locked-choice&quot; title=&quot;Get in with him.&quot;&gt;Get in with him. (&lt;&lt;= setup.getCostBlockedMessage([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 5}])&gt;&gt;)&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;if not ((setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;tam_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 6}])) or (setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;tam_talk_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 3}])) or (setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;tam_talk_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 3}])) or (setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;tam_saw_you&quot;, &quot;operator&quot;: &quot;is_true&quot;}, {&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;tam_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_tam&quot;, &quot;trait_key&quot;: &quot;ease&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 20}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 8}])) or (setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;tam_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_tam&quot;, &quot;trait_key&quot;: &quot;want&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 22}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 5}])))&gt;&gt;
-&lt;&lt;script&gt;&gt;
-try {
-  window._engineNoExitsDiag_hub_tam_flat = [{&quot;text&quot;: &quot;Stay past the tea.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;tam_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}}, {&quot;text&quot;: &quot;Ask him about his dad.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;tam_talk_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}}, {&quot;text&quot;: &quot;Ask him what he does when he can&#39;t sleep.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;tam_talk_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}]}}, {&quot;text&quot;: &quot;Come up with nothing to bring him.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;tam_saw_you&quot;, &quot;operator&quot;: &quot;is_true&quot;}, {&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;tam_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_tam&quot;, &quot;trait_key&quot;: &quot;ease&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 20}]}}, {&quot;text&quot;: &quot;Get in with him.&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;tam_rung_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;npc&quot;, &quot;npc_id&quot;: &quot;npc_tam&quot;, &quot;trait_key&quot;: &quot;want&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 22}]}}];
-  if (typeof console !== &#39;undefined&#39; &amp;&amp; console.warn) {
-    console.warn(&#39;[engine] no exit choices satisfied&#39;, {
-      canvas: &quot;hub_tam_flat&quot;,
-      choices: window._engineNoExitsDiag_hub_tam_flat,
-      flags: State.variables.flags,
-      player_traits: (State.variables.player || {}).core_traits
-    });
-  }
-} catch(e) {}
-&lt;&lt;/script&gt;&gt;
-&lt;&lt;if $flags.debug_mode&gt;&gt;
-&lt;&lt;set _diagChoices to window._engineNoExitsDiag_hub_tam_flat&gt;&gt;
-&lt;div class=&quot;engine-diag-no-exits&quot;&gt;
-&lt;div class=&quot;engine-diag-header&quot;&gt;⚠️ DEV: No exit choices satisfied — canvas hub_tam_flat&lt;/div&gt;
-&lt;div class=&quot;engine-diag-hint&quot;&gt;All exits are conditional and none of their gates currently evaluate true. Player will use the Continue link below to escape, but the visit fires no effects. Likely authoring gap — add a fallback choice or broaden a condition.&lt;/div&gt;
-&lt;&lt;for _i to 0; _i lt _diagChoices.length; _i++&gt;&gt;
-&lt;&lt;set _ch to _diagChoices[_i]&gt;&gt;
-&lt;div class=&quot;engine-diag-choice&quot;&gt;
-&lt;div class=&quot;engine-diag-choice-text&quot;&gt;Choice: &quot;&lt;&lt;print _ch.text&gt;&gt;&quot;&lt;/div&gt;
-&lt;div class=&quot;engine-diag-choice-logic&quot;&gt;Combined as: &lt;&lt;print _ch.conditions.logic&gt;&gt;&lt;/div&gt;
-&lt;ul class=&quot;engine-diag-items&quot;&gt;
-&lt;&lt;for _j to 0; _j lt _ch.conditions.items.length; _j++&gt;&gt;
-&lt;&lt;set _it to _ch.conditions.items[_j]&gt;&gt;
-&lt;&lt;set _single to {version: &quot;1.0&quot;, logic: &quot;AND&quot;, items: [_it]}&gt;&gt;
-&lt;&lt;set _ok to setup.triggerConditionsSatisfied(_single)&gt;&gt;
-&lt;li class=&quot;&lt;&lt;print _ok ? &#39;engine-diag-pass&#39; : &#39;engine-diag-fail&#39;&gt;&gt;&quot;&gt;&lt;&lt;if _ok&gt;&gt;✓&lt;&lt;else&gt;&gt;✗&lt;&lt;/if&gt;&gt; &lt;&lt;print JSON.stringify(_it)&gt;&gt;&lt;/li&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/div&gt;
-&lt;&lt;/if&gt;&gt;
-[[Continue-&gt;Location_the_chip_shop_flat]]
-&lt;&lt;/if&gt;&gt;
+&lt;&lt;link &quot;Leave him to it.&quot; &quot;Location_the_chip_shop_flat&quot;&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(5);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="107" name="Canvas_rung_chip_eat_Node_base" tags="" position="850,1350" size="100,100">&lt;div class=&quot;dev-canvas-info&quot;&gt;&lt;strong&gt;Canvas:&lt;/strong&gt; What is in the pan &lt;span style=&quot;opacity:0.7;&quot;&gt;(rung_chip_eat)&lt;/span&gt; | &lt;strong&gt;Node:&lt;/strong&gt; What is in the pan&lt;/div&gt;
 &lt;p&gt;Whatever he made at four in the morning, warmed through on the one ring that works, eaten standing up at the window with the front going dark outside.&lt;/p&gt;&lt;div class=&quot;dialog-block dialog-npc&quot;&gt;&lt;div class=&quot;portrait&quot;&gt;&lt;img src=&quot;tam.jpg&quot; alt=&quot;Tam&quot; onerror=&quot;this.style.display=&#39;none&#39;;this.parentElement.innerHTML=&#39;&amp;lt;svg viewBox=&amp;quot;0 0 100 100&amp;quot; xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;&amp;gt;&amp;lt;circle cx=&amp;quot;50&amp;quot; cy=&amp;quot;35&amp;quot; r=&amp;quot;20&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;ellipse cx=&amp;quot;50&amp;quot; cy=&amp;quot;85&amp;quot; rx=&amp;quot;35&amp;quot; ry=&amp;quot;25&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;/svg&amp;gt;&#39;;&quot; /&gt;&lt;/div&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;Tam:&lt;/strong&gt; There&#39;s more in the fridge. Lee gives us what doesn&#39;t go out.&lt;/div&gt;&lt;/div&gt;
 
@@ -11213,44 +10843,7 @@ try {
 &lt;&lt;else&gt;&gt;
 &lt;span class=&quot;locked-choice&quot; title=&quot;Eat, and square it downstairs ($4, 25m).&quot;&gt;Eat, and square it downstairs ($4, 25m). (&lt;&lt;= setup.getCostBlockedMessage([{&quot;trait&quot;: &quot;money&quot;, &quot;value&quot;: 4}])&gt;&gt;)&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;if not ((setup.checkCostsAffordable([{&quot;trait&quot;: &quot;money&quot;, &quot;value&quot;: 4}])))&gt;&gt;
-&lt;&lt;script&gt;&gt;
-try {
-  window._engineNoExitsDiag_act_chip_eat = [];
-  if (typeof console !== &#39;undefined&#39; &amp;&amp; console.warn) {
-    console.warn(&#39;[engine] no exit choices satisfied&#39;, {
-      canvas: &quot;act_chip_eat&quot;,
-      choices: window._engineNoExitsDiag_act_chip_eat,
-      flags: State.variables.flags,
-      player_traits: (State.variables.player || {}).core_traits
-    });
-  }
-} catch(e) {}
-&lt;&lt;/script&gt;&gt;
-&lt;&lt;if $flags.debug_mode&gt;&gt;
-&lt;&lt;set _diagChoices to window._engineNoExitsDiag_act_chip_eat&gt;&gt;
-&lt;div class=&quot;engine-diag-no-exits&quot;&gt;
-&lt;div class=&quot;engine-diag-header&quot;&gt;⚠️ DEV: No exit choices satisfied — canvas act_chip_eat&lt;/div&gt;
-&lt;div class=&quot;engine-diag-hint&quot;&gt;All exits are conditional and none of their gates currently evaluate true. Player will use the Continue link below to escape, but the visit fires no effects. Likely authoring gap — add a fallback choice or broaden a condition.&lt;/div&gt;
-&lt;&lt;for _i to 0; _i lt _diagChoices.length; _i++&gt;&gt;
-&lt;&lt;set _ch to _diagChoices[_i]&gt;&gt;
-&lt;div class=&quot;engine-diag-choice&quot;&gt;
-&lt;div class=&quot;engine-diag-choice-text&quot;&gt;Choice: &quot;&lt;&lt;print _ch.text&gt;&gt;&quot;&lt;/div&gt;
-&lt;div class=&quot;engine-diag-choice-logic&quot;&gt;Combined as: &lt;&lt;print _ch.conditions.logic&gt;&gt;&lt;/div&gt;
-&lt;ul class=&quot;engine-diag-items&quot;&gt;
-&lt;&lt;for _j to 0; _j lt _ch.conditions.items.length; _j++&gt;&gt;
-&lt;&lt;set _it to _ch.conditions.items[_j]&gt;&gt;
-&lt;&lt;set _single to {version: &quot;1.0&quot;, logic: &quot;AND&quot;, items: [_it]}&gt;&gt;
-&lt;&lt;set _ok to setup.triggerConditionsSatisfied(_single)&gt;&gt;
-&lt;li class=&quot;&lt;&lt;print _ok ? &#39;engine-diag-pass&#39; : &#39;engine-diag-fail&#39;&gt;&gt;&quot;&gt;&lt;&lt;if _ok&gt;&gt;✓&lt;&lt;else&gt;&gt;✗&lt;&lt;/if&gt;&gt; &lt;&lt;print JSON.stringify(_it)&gt;&gt;&lt;/li&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/div&gt;
-&lt;&lt;/if&gt;&gt;
-[[Continue-&gt;Location_the_chip_shop_flat]]
-&lt;&lt;/if&gt;&gt;
+&lt;&lt;link &quot;Go without.&quot; &quot;Location_the_chip_shop_flat&quot;&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(3);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="132" name="Canvas_amb_lets_drawer_Node_base" tags="" position="225,1725" size="100,100">&lt;div class=&quot;dev-canvas-info&quot;&gt;&lt;strong&gt;Canvas:&lt;/strong&gt; What is in the drawers &lt;span style=&quot;opacity:0.7;&quot;&gt;(amb_lets_drawer)&lt;/span&gt; | &lt;strong&gt;Node:&lt;/strong&gt; What is in the drawers&lt;/div&gt;
 &lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;first_warm_done&quot;, &quot;operator&quot;: &quot;is_false&quot;}]})&gt;&gt;
 &lt;p&gt;A hair clip, two coins from somewhere else, and a paperback with the spine broken at page ninety. You put them in the drawer of the bedside table with everything else that has been left behind since Easter and shut it.&lt;/p&gt;
@@ -11338,44 +10931,7 @@ try {
 &lt;&lt;else&gt;&gt;
 &lt;span class=&quot;locked-choice&quot; title=&quot;Buy the agency&#39;s cleaning stock ($8).&quot;&gt;Buy the agency&#39;s cleaning stock ($8). (&lt;&lt;= setup.getCostBlockedMessage([{&quot;trait&quot;: &quot;money&quot;, &quot;value&quot;: 8}])&gt;&gt;)&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;if not ((setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;turnaround_done_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;hunger&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 25}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;energy&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 20}]}) and setup.checkCostsAffordable([{&quot;trait&quot;: &quot;energy&quot;, &quot;value&quot;: 20}])) or (setup.checkCostsAffordable([{&quot;trait&quot;: &quot;money&quot;, &quot;value&quot;: 8}])))&gt;&gt;
-&lt;&lt;script&gt;&gt;
-try {
-  window._engineNoExitsDiag_work_lets_turnaround = [{&quot;text&quot;: &quot;Clean the flat (2h 30m).&quot;, &quot;conditions&quot;: {&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;turnaround_done_today&quot;, &quot;operator&quot;: &quot;is_false&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;hunger&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 25}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;energy&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 20}]}}];
-  if (typeof console !== &#39;undefined&#39; &amp;&amp; console.warn) {
-    console.warn(&#39;[engine] no exit choices satisfied&#39;, {
-      canvas: &quot;work_lets_turnaround&quot;,
-      choices: window._engineNoExitsDiag_work_lets_turnaround,
-      flags: State.variables.flags,
-      player_traits: (State.variables.player || {}).core_traits
-    });
-  }
-} catch(e) {}
-&lt;&lt;/script&gt;&gt;
-&lt;&lt;if $flags.debug_mode&gt;&gt;
-&lt;&lt;set _diagChoices to window._engineNoExitsDiag_work_lets_turnaround&gt;&gt;
-&lt;div class=&quot;engine-diag-no-exits&quot;&gt;
-&lt;div class=&quot;engine-diag-header&quot;&gt;⚠️ DEV: No exit choices satisfied — canvas work_lets_turnaround&lt;/div&gt;
-&lt;div class=&quot;engine-diag-hint&quot;&gt;All exits are conditional and none of their gates currently evaluate true. Player will use the Continue link below to escape, but the visit fires no effects. Likely authoring gap — add a fallback choice or broaden a condition.&lt;/div&gt;
-&lt;&lt;for _i to 0; _i lt _diagChoices.length; _i++&gt;&gt;
-&lt;&lt;set _ch to _diagChoices[_i]&gt;&gt;
-&lt;div class=&quot;engine-diag-choice&quot;&gt;
-&lt;div class=&quot;engine-diag-choice-text&quot;&gt;Choice: &quot;&lt;&lt;print _ch.text&gt;&gt;&quot;&lt;/div&gt;
-&lt;div class=&quot;engine-diag-choice-logic&quot;&gt;Combined as: &lt;&lt;print _ch.conditions.logic&gt;&gt;&lt;/div&gt;
-&lt;ul class=&quot;engine-diag-items&quot;&gt;
-&lt;&lt;for _j to 0; _j lt _ch.conditions.items.length; _j++&gt;&gt;
-&lt;&lt;set _it to _ch.conditions.items[_j]&gt;&gt;
-&lt;&lt;set _single to {version: &quot;1.0&quot;, logic: &quot;AND&quot;, items: [_it]}&gt;&gt;
-&lt;&lt;set _ok to setup.triggerConditionsSatisfied(_single)&gt;&gt;
-&lt;li class=&quot;&lt;&lt;print _ok ? &#39;engine-diag-pass&#39; : &#39;engine-diag-fail&#39;&gt;&gt;&quot;&gt;&lt;&lt;if _ok&gt;&gt;✓&lt;&lt;else&gt;&gt;✗&lt;&lt;/if&gt;&gt; &lt;&lt;print JSON.stringify(_it)&gt;&gt;&lt;/li&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/div&gt;
-&lt;&lt;/if&gt;&gt;
-[[Continue-&gt;Location_the_lets]]
-&lt;&lt;/if&gt;&gt;
+&lt;&lt;link &quot;Leave it for tomorrow.&quot; &quot;Location_the_lets&quot;&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(3);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="138" name="Canvas_work_lets_turnaround_Node_stock" tags="" position="975,1725" size="100,100">&lt;div class=&quot;dev-canvas-info&quot;&gt;&lt;strong&gt;Canvas:&lt;/strong&gt; Clean a flat for the agency &lt;span style=&quot;opacity:0.7;&quot;&gt;(work_lets_turnaround)&lt;/span&gt; | &lt;strong&gt;Node:&lt;/strong&gt; The stock&lt;/div&gt;
 &lt;p&gt;Eight in bin bags, bleach and the blue roll the agency is supposed to provide and has not provided since the office in town shut and it all went to a number in Leeds.&lt;/p&gt;
 
@@ -11848,44 +11404,7 @@ try {
 &lt;&lt;else&gt;&gt;
 &lt;span class=&quot;locked-choice&quot; title=&quot;Put it in the slot ($3, 5m).&quot;&gt;Put it in the slot ($3, 5m). (&lt;&lt;= setup.getCostBlockedMessage([{&quot;trait&quot;: &quot;money&quot;, &quot;value&quot;: 3}])&gt;&gt;)&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;if not ((setup.checkCostsAffordable([{&quot;trait&quot;: &quot;money&quot;, &quot;value&quot;: 3}])))&gt;&gt;
-&lt;&lt;script&gt;&gt;
-try {
-  window._engineNoExitsDiag_act_flat_meter = [];
-  if (typeof console !== &#39;undefined&#39; &amp;&amp; console.warn) {
-    console.warn(&#39;[engine] no exit choices satisfied&#39;, {
-      canvas: &quot;act_flat_meter&quot;,
-      choices: window._engineNoExitsDiag_act_flat_meter,
-      flags: State.variables.flags,
-      player_traits: (State.variables.player || {}).core_traits
-    });
-  }
-} catch(e) {}
-&lt;&lt;/script&gt;&gt;
-&lt;&lt;if $flags.debug_mode&gt;&gt;
-&lt;&lt;set _diagChoices to window._engineNoExitsDiag_act_flat_meter&gt;&gt;
-&lt;div class=&quot;engine-diag-no-exits&quot;&gt;
-&lt;div class=&quot;engine-diag-header&quot;&gt;⚠️ DEV: No exit choices satisfied — canvas act_flat_meter&lt;/div&gt;
-&lt;div class=&quot;engine-diag-hint&quot;&gt;All exits are conditional and none of their gates currently evaluate true. Player will use the Continue link below to escape, but the visit fires no effects. Likely authoring gap — add a fallback choice or broaden a condition.&lt;/div&gt;
-&lt;&lt;for _i to 0; _i lt _diagChoices.length; _i++&gt;&gt;
-&lt;&lt;set _ch to _diagChoices[_i]&gt;&gt;
-&lt;div class=&quot;engine-diag-choice&quot;&gt;
-&lt;div class=&quot;engine-diag-choice-text&quot;&gt;Choice: &quot;&lt;&lt;print _ch.text&gt;&gt;&quot;&lt;/div&gt;
-&lt;div class=&quot;engine-diag-choice-logic&quot;&gt;Combined as: &lt;&lt;print _ch.conditions.logic&gt;&gt;&lt;/div&gt;
-&lt;ul class=&quot;engine-diag-items&quot;&gt;
-&lt;&lt;for _j to 0; _j lt _ch.conditions.items.length; _j++&gt;&gt;
-&lt;&lt;set _it to _ch.conditions.items[_j]&gt;&gt;
-&lt;&lt;set _single to {version: &quot;1.0&quot;, logic: &quot;AND&quot;, items: [_it]}&gt;&gt;
-&lt;&lt;set _ok to setup.triggerConditionsSatisfied(_single)&gt;&gt;
-&lt;li class=&quot;&lt;&lt;print _ok ? &#39;engine-diag-pass&#39; : &#39;engine-diag-fail&#39;&gt;&gt;&quot;&gt;&lt;&lt;if _ok&gt;&gt;✓&lt;&lt;else&gt;&gt;✗&lt;&lt;/if&gt;&gt; &lt;&lt;print JSON.stringify(_it)&gt;&gt;&lt;/li&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;/div&gt;
-&lt;&lt;/if&gt;&gt;
-[[Continue-&gt;Location_the_flat]]
-&lt;&lt;/if&gt;&gt;
+&lt;&lt;link &quot;Leave it cold.&quot; &quot;Location_the_flat&quot;&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(3);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="172" name="Canvas_act_flat_sleep_Node_base" tags="" position="225,2225" size="100,100">&lt;div class=&quot;dev-canvas-info&quot;&gt;&lt;strong&gt;Canvas:&lt;/strong&gt; Sleep &lt;span style=&quot;opacity:0.7;&quot;&gt;(act_flat_sleep)&lt;/span&gt; | &lt;strong&gt;Node:&lt;/strong&gt; Sleep&lt;/div&gt;
 &lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;warmth&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 30}]})&gt;&gt;
 &lt;p&gt;The heater has been on and the room is holding it. You get in in a T-shirt and the sheets are not cold at the foot, and you are asleep inside ten minutes.&lt;/p&gt;
@@ -13547,7 +13066,7 @@ try {
 &lt;div class=&quot;review-block review-block-dialog&quot;&gt;&lt;blockquote&gt;&lt;strong&gt;npc:&lt;/strong&gt; I know you&amp;#x27;re stood there. You do it every night.&lt;/blockquote&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block block-other&quot;&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block block-other&quot;&gt;&lt;/div&gt;
-&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Pull the curtain across for her.&lt;/li&gt;&lt;li&gt;Stay in the doorway.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Pull the curtain across for her.&lt;/li&gt;&lt;li&gt;Stay in the doorway.&lt;/li&gt;&lt;li&gt;Leave her asleep.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;review-back-btn&quot;&gt;
@@ -13598,7 +13117,7 @@ try {
 &lt;div class=&quot;review-block review-block-dialog&quot;&gt;&lt;blockquote&gt;&lt;strong&gt;npc:&lt;/strong&gt; The end pusher&amp;#x27;s still jamming. I heard it from the door.&lt;/blockquote&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block block-other&quot;&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block block-other&quot;&gt;&lt;/div&gt;
-&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Let him stay.&lt;/li&gt;&lt;li&gt;Don&amp;#x27;t turn the machines off.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Let him stay.&lt;/li&gt;&lt;li&gt;Don&amp;#x27;t turn the machines off.&lt;/li&gt;&lt;li&gt;Let him lock up.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;review-back-btn&quot;&gt;
@@ -13651,7 +13170,7 @@ try {
 &lt;div class=&quot;review-block block-other&quot;&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block block-other&quot;&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block block-other&quot;&gt;&lt;/div&gt;
-&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Get in the booth with her.&lt;/li&gt;&lt;li&gt;Let her count the till.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Get in the booth with her.&lt;/li&gt;&lt;li&gt;Let her count the till.&lt;/li&gt;&lt;li&gt;Leave her to the booth.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;review-back-btn&quot;&gt;
@@ -13704,7 +13223,7 @@ try {
 &lt;div class=&quot;review-block block-other&quot;&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block block-other&quot;&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block block-other&quot;&gt;&lt;/div&gt;
-&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Walk him up the row.&lt;/li&gt;&lt;li&gt;Wait at the bottom and make him come to you.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Walk him up the row.&lt;/li&gt;&lt;li&gt;Wait at the bottom and make him come to you.&lt;/li&gt;&lt;li&gt;Let him walk up on his own.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;review-back-btn&quot;&gt;
@@ -13753,7 +13272,7 @@ try {
 &lt;div class=&quot;review-block review-block-image&quot;&gt;&lt;img src=&quot;./media/portraits/ewan.jpg&quot; style=&quot;max-width:100%;max-height:70vh;object-fit:contain;height:auto;border-radius:8px;&quot; /&gt;&lt;p class=&quot;media-caption&quot;&gt;&lt;em&gt;A young man in overalls backing a boat trailer down a concrete slipway before dawn.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block review-block-paragraph&quot;&gt;&lt;p&gt;He has the van half on the slip with the door open and one arm over the seat, reversing on the wing mirror in the dark. The water is the colour of the road.&lt;/p&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block review-block-dialog&quot;&gt;&lt;blockquote&gt;&lt;strong&gt;npc:&lt;/strong&gt; You&amp;#x27;re up.&lt;/blockquote&gt;&lt;/div&gt;
-&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Take him the flask.&lt;/li&gt;&lt;li&gt;Put diesel in the van for him ($12).&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Take him the flask.&lt;/li&gt;&lt;li&gt;Put diesel in the van for him ($12).&lt;/li&gt;&lt;li&gt;Leave him to the boat.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;review-back-btn&quot;&gt;
@@ -13805,7 +13324,7 @@ try {
 &lt;div class=&quot;review-block block-other&quot;&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block block-other&quot;&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block block-other&quot;&gt;&lt;/div&gt;
-&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Walk it with him.&lt;/li&gt;&lt;li&gt;Sit on the front with him where the row can see.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Walk it with him.&lt;/li&gt;&lt;li&gt;Sit on the front with him where the row can see.&lt;/li&gt;&lt;li&gt;Walk on without him.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;review-back-btn&quot;&gt;
@@ -13961,7 +13480,7 @@ try {
 &lt;div class=&quot;review-block review-block-dialog&quot;&gt;&lt;blockquote&gt;&lt;strong&gt;npc:&lt;/strong&gt; I&amp;#x27;ve got the forty. It&amp;#x27;s in my jacket. I&amp;#x27;m not getting up for it though.&lt;/blockquote&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block block-other&quot;&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block block-other&quot;&gt;&lt;/div&gt;
-&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Take her a tea and stay.&lt;/li&gt;&lt;li&gt;Ask why she stayed on.&lt;/li&gt;&lt;li&gt;Ask her what she does all day in here.&lt;/li&gt;&lt;li&gt;Don&amp;#x27;t leave when she changes.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Take her a tea and stay.&lt;/li&gt;&lt;li&gt;Ask why she stayed on.&lt;/li&gt;&lt;li&gt;Ask her what she does all day in here.&lt;/li&gt;&lt;li&gt;Don&amp;#x27;t leave when she changes.&lt;/li&gt;&lt;li&gt;Let her get on.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;review-back-btn&quot;&gt;
@@ -14135,7 +13654,7 @@ try {
 &lt;div class=&quot;review-block review-block-image&quot;&gt;&lt;img src=&quot;./media/portraits/roan.jpg&quot; style=&quot;max-width:100%;max-height:70vh;object-fit:contain;height:auto;border-radius:8px;&quot; /&gt;&lt;p class=&quot;media-caption&quot;&gt;&lt;em&gt;A man in his mid thirties sitting in a dated front room in lamplight.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block review-block-paragraph&quot;&gt;&lt;p&gt;He is in the chair that is not your mother&amp;#x27;s with the TV on mute and the three-bar fire on one bar. He has a drink poured before you have your coat off.&lt;/p&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block review-block-dialog&quot;&gt;&lt;blockquote&gt;&lt;strong&gt;npc:&lt;/strong&gt; There you go. I&amp;#x27;d got it out before I heard the gate, so don&amp;#x27;t read anything into it.&lt;/blockquote&gt;&lt;/div&gt;
-&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Have one with him.&lt;/li&gt;&lt;li&gt;Ask him what he remembers.&lt;/li&gt;&lt;li&gt;Ask him about Bristol.&lt;/li&gt;&lt;li&gt;Stay later than the drink.&lt;/li&gt;&lt;li&gt;Don&amp;#x27;t go home.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Have one with him.&lt;/li&gt;&lt;li&gt;Ask him what he remembers.&lt;/li&gt;&lt;li&gt;Ask him about Bristol.&lt;/li&gt;&lt;li&gt;Stay later than the drink.&lt;/li&gt;&lt;li&gt;Don&amp;#x27;t go home.&lt;/li&gt;&lt;li&gt;Let him finish the drink on his own.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;review-back-btn&quot;&gt;
@@ -14302,7 +13821,7 @@ try {
 &lt;div class=&quot;review-block review-block-image&quot;&gt;&lt;img src=&quot;./media/portraits/ewan.jpg&quot; style=&quot;max-width:100%;max-height:70vh;object-fit:contain;height:auto;border-radius:8px;&quot; /&gt;&lt;p class=&quot;media-caption&quot;&gt;&lt;em&gt;A man in his mid twenties in overalls in a boat workshop, wiping his hands.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block review-block-paragraph&quot;&gt;&lt;p&gt;He is under the second hull with the light on a lead. He knows it is you from the way the door goes and he does not come out for a minute, and then he does, and wipes his hands on the front of himself.&lt;/p&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block review-block-dialog&quot;&gt;&lt;blockquote&gt;&lt;strong&gt;npc:&lt;/strong&gt; You don&amp;#x27;t come down here. What&amp;#x27;s gone wrong?&lt;/blockquote&gt;&lt;/div&gt;
-&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Ask him for something.&lt;/li&gt;&lt;li&gt;Ask to see the folder.&lt;/li&gt;&lt;li&gt;Ask him when he last had a day off.&lt;/li&gt;&lt;li&gt;Let him set the terms.&lt;/li&gt;&lt;li&gt;Stay in the caravan after he shuts the yard.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Ask him for something.&lt;/li&gt;&lt;li&gt;Ask to see the folder.&lt;/li&gt;&lt;li&gt;Ask him when he last had a day off.&lt;/li&gt;&lt;li&gt;Let him set the terms.&lt;/li&gt;&lt;li&gt;Stay in the caravan after he shuts the yard.&lt;/li&gt;&lt;li&gt;Say it can wait, and go.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;review-back-btn&quot;&gt;
@@ -14475,7 +13994,7 @@ try {
 &lt;div class=&quot;review-block review-block-image&quot;&gt;&lt;img src=&quot;./media/portraits/tam.jpg&quot; style=&quot;max-width:100%;max-height:70vh;object-fit:contain;height:auto;border-radius:8px;&quot; /&gt;&lt;p class=&quot;media-caption&quot;&gt;&lt;em&gt;A nineteen year old man lying on top of the covers in a hot small flat in daylight.&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block review-block-paragraph&quot;&gt;&lt;p&gt;He is on top of the covers with the fan going through the wall. Nights finish at six, he is in bed by seven, and he does not properly sleep until about noon.&lt;/p&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block review-block-dialog&quot;&gt;&lt;blockquote&gt;&lt;strong&gt;npc:&lt;/strong&gt; You can come in, you know. You do this thing where you stand on the top step.&lt;/blockquote&gt;&lt;/div&gt;
-&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Stay past the tea.&lt;/li&gt;&lt;li&gt;Ask him about his dad.&lt;/li&gt;&lt;li&gt;Ask him what he does when he can&amp;#x27;t sleep.&lt;/li&gt;&lt;li&gt;Come up with nothing to bring him.&lt;/li&gt;&lt;li&gt;Get in with him.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Stay past the tea.&lt;/li&gt;&lt;li&gt;Ask him about his dad.&lt;/li&gt;&lt;li&gt;Ask him what he does when he can&amp;#x27;t sleep.&lt;/li&gt;&lt;li&gt;Come up with nothing to bring him.&lt;/li&gt;&lt;li&gt;Get in with him.&lt;/li&gt;&lt;li&gt;Leave him to it.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;review-back-btn&quot;&gt;
@@ -14797,7 +14316,7 @@ try {
 &lt;div class=&quot;review-node&quot;&gt;
 &lt;h4&gt;NODE: The pan on the hob&lt;/h4&gt;
 &lt;div class=&quot;review-block review-block-paragraph&quot;&gt;&lt;p&gt;There is always something in the pan and there is always four to put through the hatch to Lee for it, and neither of you has ever called that an arrangement out loud.&lt;/p&gt;&lt;/div&gt;
-&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Eat, and square it downstairs ($4, 25m).&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Eat, and square it downstairs ($4, 25m).&lt;/li&gt;&lt;li&gt;Go without.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;review-back-btn&quot;&gt;
@@ -14888,7 +14407,7 @@ try {
 &lt;div class=&quot;review-block review-block-paragraph&quot;&gt;&lt;p&gt;Six flats, one key on a fob with a wooden tag, and a list stuck to the fridge in number one with your name at the top of it. Strip, run the taps, vacuum, out.&lt;/p&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block review-block-dialog&quot;&gt;&lt;blockquote&gt;&lt;strong&gt;unknown:&lt;/strong&gt; Marnie, love — leave four till Wednesday, they&amp;#x27;re shifting the mattress.&lt;/blockquote&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block review-block-paragraph&quot;&gt;&lt;p&gt;Nobody has slept in any of them since September. The beds still smell of whoever did.&lt;/p&gt;&lt;/div&gt;
-&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Clean the flat (2h 30m).&lt;/li&gt;&lt;li&gt;Buy the agency&amp;#x27;s cleaning stock ($8).&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Clean the flat (2h 30m).&lt;/li&gt;&lt;li&gt;Buy the agency&amp;#x27;s cleaning stock ($8).&lt;/li&gt;&lt;li&gt;Leave it for tomorrow.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&quot;review-node&quot;&gt;
 &lt;h4&gt;NODE: The stock&lt;/h4&gt;
@@ -15315,7 +14834,7 @@ try {
 &lt;div class=&quot;review-node&quot;&gt;
 &lt;h4&gt;NODE: The coin box&lt;/h4&gt;
 &lt;div class=&quot;review-block review-block-paragraph&quot;&gt;&lt;p&gt;The slot is at shoulder height beside the water heater and it takes coins only, and there is a card taped under it in your husband&amp;#x27;s handwriting saying what three buys.&lt;/p&gt;&lt;/div&gt;
-&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Put it in the slot ($3, 5m).&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+&lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Put it in the slot ($3, 5m).&lt;/li&gt;&lt;li&gt;Leave it cold.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;review-back-btn&quot;&gt;

@@ -4100,6 +4100,94 @@ def run_gates(model, game, state=None):
          detail)
 
     # ─────────────────────────────────────────────────────────────────────────
+    # G37 — A SPENT DAY STILL HAS A DOOR.  the-surfaces.md R6 · the-meters.md M5.
+    #
+    # The other half of the gate above. `a day-cap closes` asks whether the cap has a
+    # SETTER. This one asks what the screen looks like once the cap is SPENT — and a
+    # day cap is spent every single day, by design, so this is not an edge state.
+    #
+    # Measured failure, 2026-08-23: the author of a shipped game walked into his own
+    # NPC's hub, on a day he had already used that character's one rung and one talk,
+    # and got a portrait, a paragraph, a line of dialogue and nothing to click. All TEN
+    # hubs in that game did it, and three activity screens did the money-shaped version
+    # of it. He could not tell whether the game was broken.
+    #
+    # ⚠️ THE CAP IS PER PERSON AND THE HUBS ARE PER ROOM. That game gave one character
+    # three hubs — a yard, a harbour, an arcade counter — all reading one shared
+    # `*_rung_today`. Spending it at the yard at 09:00 emptied the other two for the
+    # rest of the day, and their whole list was that one flag.
+    #
+    # ⚠️ MIRROR THE ENGINE, DO NOT RE-INVENT IT. A choice is a DOOR only when it carries
+    # neither `conditions` nor `costs` — that is precisely `has_unconditional_choice`
+    # (v2.py:12827-12836), where a cost-bearing choice is registered as conditional
+    # alongside a gated one. Get that wrong and the gate disagrees with the runtime.
+    #
+    # Two ways a choice is SHUT in a state the player reaches by ordinary play:
+    #   · its AND-conditions read a day-cap flag `is_false` — spent, until tomorrow;
+    #   · it spends `money` — and a player at $0 cannot earn any from inside the screen.
+    # A node with no door, all of whose choices are shut, is a guaranteed dead screen.
+    #
+    # ⚠️ NOT EVERY ALL-CONDITIONAL NODE IS A DEAD END, and this gate must not say so.
+    # Conditional ROUTING — `stealth gte 10` / `lt 10 + fighting` / `lt 10` catch-all —
+    # is exhaustive by construction and cannot all-fail. Scoping to day caps and money
+    # is what keeps it sound: measured across the ten built games, it finds 13 of 13 in
+    # the game that shipped the defect and ZERO in the other nine, which between them
+    # carry 29 all-conditional routing nodes.
+    #
+    # The fix is one choice, and every other game in the repo already ships it:
+    # `{ text = "Leave him to it.", targetType = "location", locationId = <the hub's
+    # own location> }` — no conditions, no costs, last in the list.
+    # ─────────────────────────────────────────────────────────────────────────
+    def _door(ch):
+        """The engine's own test: free of BOTH gates (v2.py:12827-12836)."""
+        return not ch.get("conditions") and not ch.get("costs")
+
+    def _spent(ch):
+        """Shut until tomorrow: reads a day-cap flag is_false."""
+        cond = ch.get("conditions") or {}
+        if str(cond.get("logic") or "AND").upper() != "AND":
+            return False
+        return any(it.get("type") == "flag" and it.get("operator") == "is_false"
+                   and str(it.get("flag_key")) in tick_cleared
+                   for it in (cond.get("items") or []))
+
+    def _priced(ch):
+        """Shut while broke, and no money is earnable from inside the screen."""
+        return any(str(cst.get("trait")) == "money" for cst in (ch.get("costs") or []))
+
+    shut_nodes = []
+    for c in (game.get("canvases") or []):
+        if _is_dev(c):
+            continue
+        for n in (c.get("nodes") or []):
+            chs = (n.get("exit_block") or {}).get("choices") or []
+            if not chs or any(_door(ch) for ch in chs):
+                continue
+            if not all(_spent(ch) or _priced(ch) for ch in chs):
+                continue
+            n_spent = sum(1 for ch in chs if _spent(ch))
+            n_priced = len(chs) - n_spent
+            why = ("all day-capped" if not n_priced else
+                   "all priced" if not n_spent else
+                   f"{n_spent} day-capped, {n_priced} priced")
+            shut_nodes.append(f"{c.get('id')}.{n.get('id')} — {len(chs)} choice(s), "
+                              f"{why}, none free of both conditions and costs")
+    door_det = list(shut_nodes[:20])
+    if shut_nodes:
+        if len(shut_nodes) > 20:
+            door_det.append(f"… and {len(shut_nodes) - 20} more")
+        door_det.append('add one choice with neither `conditions` nor `costs`: '
+                        '{ text = "Leave him to it.", targetType = "location", '
+                        'locationId = <the node\'s own location> }')
+    gate("a spent day still has a door",
+         None if not tick_cleared else not shut_nodes,
+         (f"{len(shut_nodes)} screen(s) empty once the day is spent"
+          if shut_nodes else
+          "every screen keeps one choice free of both conditions and costs")
+         if tick_cleared else "no [engine.daily_tick] flag clears — no day cap to check",
+         door_det)
+
+    # ─────────────────────────────────────────────────────────────────────────
     # G26 — THE CLIMB IS PAID FOR.  the-meters.md M1.
     #
     # Every gate before this one asks whether a thing EXISTS. This one asks what it

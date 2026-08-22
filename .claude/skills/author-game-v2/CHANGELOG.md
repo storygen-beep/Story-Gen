@@ -5,6 +5,80 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-23 — the empty screen: a hub with nothing on it, and the gate that now says so
+
+**LO walked into Ewan's yard in his own built game and got a portrait, a paragraph, a line of
+dialogue and nothing to click.** He could not tell whether the game was broken. It was not: he had
+spent that character's one rung and one talk for the day, every exit on the hub was gated, and a
+choice whose conditions fail renders **nothing** — not a greyed line (`v2.py:12806`). The engine
+printed its own diagnostic and offered a bare `Continue`. That code is identical in `v1.py:11590`,
+so this was never a v2 generator regression.
+
+### What was actually wrong, measured across all ten built games
+
+Parsed every `7_final_game.toml`. `off_season` had **10 choice-nodes with no unconditional exit**;
+every other game had **0**. Vesper's 11 all-conditional nodes are a different shape — conditional
+routing, exhaustive by construction (`stealth gte 10` / `lt 10 + fighting` / `lt 10` catch-all) —
+and cannot all-fail. Off Season's are independent daily budgets that deplete together, so all-false
+is the guaranteed end of every day, not an edge case.
+
+**The cap is per PERSON; the hubs are per ROOM.** Ewan had three hubs — yard, harbour, arcade
+counter — all reading one `ewan_rung_today`. Spending it at the yard emptied the other two for the
+rest of the day, and their entire list was that one flag. The built HTML carried **13** copies of
+the engine's dead-end banner: those 10 hubs plus 3 screens whose only affordance costs money, which
+are equally empty to a player at $0 because the engine counts a cost-bearing choice as conditional
+(`v2.py:12827-12836`).
+
+### Why every other game got this right without being told
+
+**The leave-link was never a written rule anywhere.** `last_call` and `mothers_place` carry eleven
+day-capped hubs and eleven leave-links (*"Leave him to it ↩️"*, *"Leave her alone."*); `seventh_day`
+and `the_allowance` do the same. The only paragraph in either skill on the subject is
+`author-game/references/engine-reference.md:297`, and it says you should **not** add an
+unconditional fallback — correct for routers, wrong for day caps. **v2 carried nothing at all**: its
+`engine.md` documented `exit_block` syntax and never mentioned the no-exits case, the `Continue`
+fallback, or needing an always-live exit. The leave-link was a habit in the v1 corpus, and v2
+inherited rules, not habits.
+
+`a day-cap closes` was itself written from this game's own measured failure and checks only that a
+cap has a **setter**. It never asked what the surface looks like once the cap is **spent** — which
+is every day, by design. Half the problem gated; the other half invisible.
+
+### Changed
+
+- **`scripts/gates.py`** — new gate **`a spent day still has a door`** (G37), placed beside
+  `a day-cap closes`, which is its other half. Fully mechanical, no threshold: a choice is a *door*
+  only when it carries neither `conditions` nor `costs` — **mirroring the engine's own
+  `has_unconditional_choice` (`v2.py:12827-12836`) rather than re-inventing it**, so the gate and
+  the runtime cannot disagree. A choice is *shut* when its AND-conditions read a
+  `[engine.daily_tick]`-cleared flag `is_false`, or when it spends `money`. Fail a node with no door
+  all of whose choices are shut; `n/a` when the game declares no daily tick.
+- **`references/the-surfaces.md`** — **R7 · Every screen keeps one door**, with the per-person /
+  per-room mechanism, the TOML shape, and an explicit scoping note that the incumbent skill's
+  "don't add a fallback" advice is about exhaustive **routers** and does not reach a day cap. Plus a
+  row in *What is checked*.
+- **`references/engine.md` §28.3** — the engine facts v2 never carried: a failed condition renders
+  nothing unless `show_when_locked`; a cost counts as a condition; the three things the engine does
+  when nothing passes; and that a leave-link pointed at the node's own location does **not** re-fire
+  the hub, because a canvas with `npcId` renders as a clickable portrait (`v2.py:4919`), not an
+  auto-fire.
+- **`SKILL.md`** — the gate indexed beside `a day-cap closes`.
+
+### Verified
+
+- The new gate **fails with 13 findings** against the pre-fix TOML and **passes** after — and the
+  detail lines name each screen and classify it *all day-capped* / *all priced* / mixed.
+- **Zero false positives.** Run across all ten built games: 6 PASS, 3 n/a (no daily tick), **0
+  FAIL** — including vesper's 11 routing nodes and `seventh_day`'s 18 cost-gated ones, which the
+  scoping deliberately spares.
+- `off_season` fixed in the same turn (one always-live exit per screen, 13 of them) and rebuilt:
+  the built `index.html` went from **13** dead-end banners to **0**.
+- Every existing gate diffed before and after on `off_season`: **one line moved**, and it is the
+  expected arithmetic — `ends on an opening` from `52/142` to `52/155` choices as the 13 doors were
+  added. Score **37/38 → 38/39**, `location fill` still the sole failure.
+
+---
+
 ## 2026-08-23 — Off Season's word pass, and a false example this file was citing
 
 **The game half of the pass above.** The instrument could see these words as of this morning;

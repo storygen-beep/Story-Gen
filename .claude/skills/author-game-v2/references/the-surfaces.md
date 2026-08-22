@@ -449,6 +449,45 @@ location so it cannot spam (`references/engine.md` §7).
 > The four mechanisms above are what to look for instead. Still a lint, still no threshold —
 > what changed is that we now know **what** to count.
 
+**R7 · Every screen keeps one door. A day cap is spent every day — that is the point of it.**
+
+R5 says most doors are gated. This is the floor under it: **one** choice on every screen carries
+neither `conditions` nor `costs`, so the screen still works on the day everything else is shut.
+
+Not a defensive habit — a consequence of how the engine renders. A choice whose conditions fail is
+wrapped in `<<if setup.triggerConditionsSatisfied(…)>>` (`v2.py:12806`) and renders **nothing**: no
+greyed line, no reason, no hours. And a **cost-bearing** choice counts as conditional too
+(`v2.py:12827-12836`), so a screen whose only affordance costs $3 is equally empty to a player at
+$0. When nothing is left the engine emits a bare `[[Continue->…]]` that fires no effects, and the
+player cannot tell a spent day from a broken build.
+
+> ⚠️ **THE CAP IS PER PERSON. THE HUBS ARE PER ROOM.** This is what makes it certain rather than
+> unlucky. `off_season` gave Ewan three hubs — the yard, the harbour, the arcade counter — all
+> reading one shared `ewan_rung_today`. Spending it at the yard at 09:00 emptied the other two for
+> the rest of the day, and their entire list was that one flag. Ten of its ten hubs did this, and
+> its author walked into one and could not tell whether his own game was broken (2026-08-23).
+
+The fix is one line, and every other game in this repo already ships it — eleven day-capped hubs
+across `last_call` and `mothers_place`, eleven leave-links:
+
+```toml
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave him to it."
+targetType               = "location"
+locationId               = "the_chip_shop_flat"   # the node's own location
+time_progression_minutes = 5
+```
+
+Write it to **close the beat**, not to bail out of it: the NPC has just spoken, so *"Say it can wait,
+and go."* answers him and *"Leave"* does not.
+
+> ⚠️ **NOT every all-conditional screen is a dead end**, and `author-game/references/engine-reference.md:297`
+> is right that you should not add a fallback "just in case" — it would double-render. That advice is
+> scoped to conditional **routing**, where the branches are exhaustive by construction
+> (`stealth gte 10` / `lt 10 + fighting` / `lt 10` catch-all) and one always passes. Vesper ships 11
+> such nodes and needs no door in any of them. The rule here is for **independent budgets that
+> deplete together**, which is what a day cap and a price both are.
+
 ---
 
 ## What this costs, and why it is worth it
@@ -478,6 +517,7 @@ shuts a door — *filthy means she cannot take the car* — turns a chore into a
 | **Gate 20 · a place is not a catalogue** | the backstop against the pathological case: no repeatable location-bound canvas offers more than 8 decisions. **No longer the sizing rule** — R2's closed list is |
 | **Gate 29 · a need shuts a door** | every entry in `board.needs[]` is read by at least one condition somewhere in the game. `the-meters.md` M9 |
 | **Gate 30 · the walk-in floor** | a location with at least one repeatable solo activity **and** at least one NPC schedule row carries at least one `substitutions` rule. R3 |
+| **Gate 37 · a spent day still has a door** | no screen whose every choice is day-capped or priced lacks one choice free of **both** `conditions` and `costs`. Mirrors the engine's own `has_unconditional_choice`, so the gate and the runtime cannot disagree. R7 |
 | **Lint · noun-only buttons** | the share of room-list labels that open on a determiner and name no verb. A number, not a bar — `the-voice.md` R1 |
 | **Lint · the browse share** | the share of repeatable room canvases whose entire click changes nothing but the clock |
 | **Lint · the act menu** | repeatable explicit surfaces split into node-routed loops and one-shot cascades. A count, never a target — R3b |

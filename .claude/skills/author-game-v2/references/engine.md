@@ -1025,6 +1025,47 @@ Measured: `off_season` shipped four `*_talk_today` caps with the read and the cl
 its four talk screens were re-clickable every twenty minutes, out-earning the day-capped rungs they
 sat below. `scripts/gates.py` gate **`a day-cap closes`** exists for exactly this.
 
+### 28.3 What the screen looks like once the cap IS spent
+
+§28.2 asks whether the cap closes. This asks what the player sees the moment it has, which is every
+day, by design.
+
+**A choice whose conditions fail renders NOTHING.** It is wrapped in
+`<<if setup.triggerConditionsSatisfied(…)>>` (`v2.py:12806`) — no greyed line, no reason, no hours,
+unless the choice opts in with `show_when_locked` (`v2.py:13016`). Absent that, a spent rung leaves
+no trace on the screen it used to be on.
+
+**A cost-bearing choice counts as conditional too.** The engine's own test for whether a node has a
+usable exit is `has_unconditional_choice`, and a choice registers as unconditional only when it
+carries **neither** `conditions` **nor** `costs` (`v2.py:12827-12836`). So a screen whose one
+affordance is *"Put it in the slot ($3, 5m)."* is exactly as empty to a player at $0 as a spent hub
+is to a player who has had their go.
+
+**When nothing passes, the engine does three things** (`v2.py:13113-13175`):
+
+| | |
+|---|---|
+| `console.warn` | always, in every build — canvas slug, every choice's conditions, and a live state snapshot |
+| a diagnostic banner | `$flags.debug_mode` only. Re-evaluates each predicate and prints ✓/✗ per item |
+| `[[Continue->…]]` | player-facing escape to the trigger location (`_get_return_location`, `v2.py:12545`). **Fires no effects** |
+
+That Continue link is a safety net, not an exit. The visit banks nothing, the label is the engine's
+word rather than the author's, and the player cannot distinguish a spent day from a broken build.
+**Author the door instead** — `the-surfaces.md` R7, gated by `a spent day still has a door`.
+
+⚠️ **The incumbent skill's advice on this is scoped, and the scope matters.**
+`author-game/references/engine-reference.md:297` says you should *not* add an unconditional fallback
+"just in case", because it double-renders whenever a real choice passes. **True for conditional
+ROUTING** — mutually exclusive branches with a catch-all, where exactly one always passes, and the
+unauthored generations degrade to a free escape rather than a lock. **False for a day-capped or
+priced screen**, where the gates are independent budgets that deplete together and all-false is the
+guaranteed end of every day. Read that paragraph as being about routers.
+
+⚠️ **Returning to the location does not re-fire the hub.** A repeatable canvas carrying `npcId`
+renders as a clickable portrait on the location screen (`renderNpcPortraits`, `v2.py:4919`), not as
+an auto-fire, so a leave-link pointed at the node's own location lands the player back in the room
+with the portrait still on it. No loop.
+
 ---
 
 ## 29. `cap` on an effect — a VALUE ceiling, not a rate limit
