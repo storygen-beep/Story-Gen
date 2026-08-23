@@ -684,6 +684,20 @@ v2.py:14968-14976              Frame 1, terminal_text || "Arc complete"
 ⚠️ **Exactly ONE card per game may set `terminal_text`** — it is the badge form of the
 build-boundary rule. A closed arc that is closed forever must not promise more of itself.
 
+⚠️ **`terminal` IS NOT COMPUTED FROM PROGRESS, AND A CHARACTER WHOSE ONLY CARD CARRIES IT READS AS
+FINISHED FROM VALUE ZERO.** Frame 1 fires on `card.terminal === true` alone, ahead of every other
+frame (`v2.py:15199`) — nothing checks that anything was achieved. So a single card gated
+`{ trait = "owed", op = "lt", value = 40 }` and marked terminal matches at `owed = 0` and prints
+**✓ Arc complete on turn one**, before the player has met the character.
+
+`the_season` shipped exactly this for two of its five: Boyd and Emmett each had one terminal card
+on a `lt` band, while Wade, Prine and Rae had proper two-card ladders and were correct. The rule
+above — *set `terminal` on the last card of every arc* — is right, and it is not sufficient:
+
+**`terminal` belongs on a card the player has to CLIMB TO.** An arc needs at least two cards: an
+open lower band, and a terminal upper one gated `gte` at a threshold real content sits on. One card
+marked terminal is not a ladder with a top; it is a badge with no ladder.
+
 ⚠️ **`pickQuestsCards` takes EXACTLY ONE scope string, and anything else fails silently.**
 
 ```
@@ -742,8 +756,10 @@ correct (each card named a choice gated **one tier below** its own goal), so the
 one ladder simply missed it. Nothing in `gates.py` catches this; read each card against the gate on
 the choice it names.
 
-**`locked_text_threshold`** (`v2.py:12786`) prints an explicit *"Requires …"* hint on a locked
-choice, distinct from `locked_text`, which replaces the label (§15).
+**`locked_text_threshold`** (`v2.py:13185-13186`) prints an explicit *"Requires …"* hint on a
+locked choice, distinct from `locked_text`, which replaces the label (§15). ⚠️ This citation read
+`v2.py:12786` until 2026-08-24 and was **stale** — corrected when §36 was written and every cited
+line re-read.
 
 ---
 
@@ -814,12 +830,15 @@ corpus of 18 shipped games, where it produced a confident and completely wrong m
 Facts we believe but have not confirmed against source during this skill's construction.
 Read and cite before using; delete from this list once promoted above.
 
-- Adjacent `[group]` blocks merging into a single if/elseif chain (so a second ladder on one
-  node is dead).
 - The exact cooldown count for random events.
 - Save-safety specifics: which identifiers orphan a live save when renamed.
 
 *(`speaker = "unknown"` was on this list. It has been read and promoted — see §25.)*
+
+*(Adjacent `[group]` blocks merging into a single if/elseif chain was on this list, while
+`the-surfaces.md` R6 stated it as fact — the skill contradicted itself. **Read and promoted
+2026-08-23:** `_render_group_chain` collects consecutive `group` blocks into one variant chain at
+`v2.py:14561-14568`, so a second ladder on the same node IS dead and first match wins.)*
 
 ---
 
@@ -829,7 +848,7 @@ Read and cite before using; delete from this list once promoted above.
 both resolve their speaker the same way, and the field is **not optional**:
 
 ```python
-speaker = props.get("speaker", "npc")        # v2.py:14631 — the default is a STRING, not a person
+speaker = props.get("speaker", "npc")        # v2.py:15003 — the default is a STRING, not a person
 ```
 
 `"npc"` satisfies `speaker.startswith(("npc_", "npc"))`, so the unknown branch is skipped and the
@@ -1180,6 +1199,23 @@ Portrait rendering is the mirror image and behaves as documented: `selectNpcPort
 skips every non-repeatable canvas outright (`v2.py:4482-4487`, `if (!c.isRepeatable) continue`), so a
 first-contact one-shot can never leak onto a location screen as a face.
 
+### 31.1 The two functions, by name — and the comment that says otherwise
+
+The two consumers are `setup.checkRandomEncounters` and `setup.checkAndSubstituteCanvas`. Naming
+them matters, because they are exactly the three trigger shapes a check must exclude:
+`trigger_mode = "random"`, `substitution_only = true`, and `is_repeatable = true`. Everything else
+that names a character is on the auto-fire path and is not gated by this field at all.
+
+⚠️ **`template_import.py` said the opposite, and that is what actually caused the failure.** The
+comment on `TemplateTrigger.requires_npc` described it as something that *"lets authors drop
+per-canvas location+time gates in favor of consulting the NPC's single source of truth"* — an
+unscoped claim, true only for the two functions above. `the_season` was authored twelve hours after
+`the-first-hour.md` F5 and its worked template landed, with the correct rule available, and shipped
+five meetings with no window; its introductions played to empty rooms, one of them at 06:10 on a
+Saturday saying *"it's Monday"*. **Doctrine loses to the schema comment, because the schema is what
+is open while you type.** Corrected 2026-08-23, and gated as `a meeting fires where they are`
+(G38) so the next one is caught by the build rather than by a player.
+
 `references/the-first-hour.md` F5.
 
 ---
@@ -1227,6 +1263,13 @@ cannot be *printed into prose* by any authored token.
 
 So a door announces its twenty minutes and a two-and-a-half-hour shift announces nothing. If the
 duration is to appear, the author puts it in the label. `references/the-clock.md` C4.
+
+The field puts it there as a matter of course. Course of Temptation's most-returned-to screen
+prints the cost on every single option — `<<dtime 15>>` beside the shower, `<<dtime 10>>` beside
+grooming — alongside the need effect (`<<dalterneed Hygiene 1000>>`), so nothing about the clock is
+a surprise (`~/Documents/Female_PC_Craft_Study_20260823/findings_C_loop.md`). No rule change here:
+C4 already owns this as a lint, and the corpus evidence behind it is thin — 4,219 of the corpus's
+4,260 duration tags belong to one game.
 
 ### 32.3 `show_when_blocked` — the only out-of-hours surface, and nothing uses it
 
@@ -1314,9 +1357,9 @@ bar. Set `label`, and set `max` to something the currency will not exceed, or us
 
 ### 33.4 A choice's price is never rendered when the player can afford it
 
-An affordable choice renders its authored label and nothing else (`v2.py:12597` only wraps it in an
-`<<if>>`). The engine speaks a price **only on the failure path** — `getCostBlockedMessage`
-(`v2.py:4680`) emitted into `<span class="locked-choice">` at `v2.py:12747`:
+An affordable choice renders its authored label and nothing else. The engine speaks a price **only
+on the failure path** — `getCostBlockedMessage` (`v2.py:4656`) emitted into
+`<span class="locked-choice">` at `v2.py:13140`:
 
 ```
 affordable      Feed the meter ($3)                        exactly what the author typed
@@ -1332,3 +1375,385 @@ gate 21 exists because of this, and `the-economy.md` R7 governs its notation.
 The importer reads it (`template_import.py:2885`) and stores it in project metadata (`:6310`). No
 generator reads it back — a grep of `v2.py` for `unit` returns nothing. It is not a lever for
 pluralising a currency.
+
+---
+
+## 34. `[ui.cast_page]` — the who-is-who page, and it authors nothing
+
+The player's place to look somebody up. Measured across the 25-game mopoga field: **17 of 25**
+shipped sandboxes carry a page like this and **7 of the 8** parsed top-ten do — the lone exception,
+degrees-of-lewdity, carries the same load inside its prose by swapping description for name on the
+meeting flag in 64 places. **None of the 25 uses a narrator to tell the player who somebody is.**
+
+```toml
+[ui.cast_page]
+title        = "The Crew"
+button_label = "The Crew"     # defaults to title
+button_icon  = "👥"
+intro        = "Nine of you on this contract. Four of them are blood."
+```
+
+**Presence of the block is the entire opt-in.** There is no content field, because every line on a
+card already exists elsewhere in the game and is read at runtime:
+
+| line | source |
+|---|---|
+| name | `$npcs[uuid].name` |
+| who they are to her | `$npcs[uuid].relationship` — the **existing** `[[npcs]] relationship` field |
+| what they are about | `setup.npc_tags[slug]` — the `[[npcs]] tags` field, below |
+| 📍 where, this minute | `setup.getNpcLocation` + `setup._locNameFromUuid` |
+| the next step | that character's own quest card — `renderQuestsGoalBlock` + its `tip` |
+
+```
+template_import.py   TemplateCastPage, [ui.cast_page] parse, metadata write
+game_graph.py        the NO-DB path's ai_behavior_config write  <- the default build
+v2.py                _generate_cast_page  ::CastPage + ::CastWidgets
+```
+
+⚠️ **`relationship` is the ONLY NPC string that survives to runtime.** `description` is
+`entry.pop("description", None)`'d before `$npcs` ships (`v2.py:1031`) — deliberately, because
+`$npcs` is snapshotted into every history moment. A 50-word bio in `[[npcs]] description` is an
+author note the player will never see. Write the player-facing line in `relationship`; one sentence
+is what the field ships (patriarch gives six people 814 characters between them).
+
+⚠️ **WHO IS LISTED IS THE QUEST CARDS' DECISION.** A character appears exactly when
+`setup.pickQuestsCard(slug)` returns a card — the same call and the same gate `QuestsPage` makes.
+Put the meeting flag on their cards (`the-first-hour.md` F8) and both surfaces reveal them in the
+same instant; there is no second gate to keep in sync. The cost, stated plainly: **a character with
+no quest card can never appear here.** The `guidance exists` gate already requires every `[[npcs]]`
+entry to carry one, so this cannot happen in a game that passes its own scoreboard.
+
+⚠️ **An off-schedule character is not a bug.** `getNpcLocation` returns null outside every declared
+window and the card says so in a dimmed line. At 05:15 on a farm whose crew starts at 06:00, four
+of five rows read *"Not about right now"* — correct, and the reason the away state gets its own
+muted style instead of an empty gap.
+
+The `castButton` widget is emitted **even when the block is absent** (as an empty widget), because
+`StoryCaption` calls it unconditionally and SugarCube throws on an undefined widget — the same rule
+`[ui.cheat_page]` records. And the button is wired into **both** `StoryCaption` branches: miss the
+non-dev one and the page ships dev-only, which no gate would catch.
+
+### `[[npcs]] tags` — the four-word line under the name
+
+Shipped 2026-08-24 from Section G. Optional, capped at **four** (`NPC_TAGS_MAX`), and inert in every
+game that does not use it.
+
+```toml
+[[npcs]]
+id           = "npc_boyd"
+name         = "Boyd"
+relationship = "Your father, 47. His name is the one on the contract."
+tags         = ["The book", "The scale", "Saturday", "Black coffee"]
+```
+
+```
+[face]  Boyd
+        Your father, 47. His name is the one on the contract.
+        The book · The scale · Saturday · Black coffee
+        📍 The packing shed
+        💡 …
+```
+
+**Why four, and which four.** The field's best cast page is `friends-of-mine`'s **Characterpedia**:
+fifteen people, each with a portrait, a counter (*"Had sex N times"*), a 27–83-word biography, and
+**exactly four interests** — all fifteen, no exceptions.
+
+```
+Chloe     Manipulation | Attention | Writing | Oriental Food
+Winter    Watching People | Domination | Money | Expensive food
+Sofia     Working | Silence | Reptiles | Rough Sex
+MrsMorin  Secrets | Manipulation | Relaxing | Spanish Food
+```
+
+The four slots are consistent: **how they operate · what they want · an aesthetic · something they
+consume.** Thirteen of the fifteen end on a food or a drink, and **that trivial fourth slot is the
+point** — it is what stops the entry reading as a stat block. Course of Temptation has the same
+instinct in its 66-tag personality vocabulary, which ships *Vegan*, *Pescetarian*, *Stoner* and
+*Retail Therapy* alongside the kinks.
+
+*"Manipulation | Attention"* tells you Chloe is dangerous in two words, and her 39-word biography
+never says so.
+
+⚠️ **A cap that bites is the rule.** A fifth entry is rejected at import, not truncated. Four words
+are a character sketch; six are a stat block, which is the thing the fourth slot exists to prevent.
+
+⚠️ **`tags` does NOT ride `$npcs`.** It ships as a slug-keyed registry, `setup.npc_tags`, exactly
+like `setup.npc_arc_stages` — because `$npcs` is snapshotted into **every history moment**, which is
+the same reason `description` is popped at `v2.py:1031`. Do not "simplify" it onto `$npcs`.
+
+⚠️ **`ai_behavior_config` IS WRITTEN IN TWO PLACES AND THE DEFAULT BUILD USES THE SECOND.**
+`template_import.create_project_from_template` is the `--use-db` path; `game_graph.build_game_graph`
+is the one a plain `package_from_toml` takes. **A per-NPC field added only to the first reaches the
+database and never reaches a packaged game** — and the symptom is a silently empty registry with no
+error at import, at build, or at runtime. This cost a debugging cycle on the day `tags` shipped;
+`tests/test_npc_tags_field.py` now locks the no-DB path specifically.
+
+**Not a substitute for design.** The tag line is a four-word compression of a corner of the world
+the character already owns (`the-surfaces.md` R8). It cannot give one to a character who has none.
+
+### One thing the field does on every line that we do not: colour
+
+Recorded 2026-08-24 as a **known difference. Nothing is built for it.**
+
+In seven of twenty-five field games the single most-used macro in the entire game is a
+speaker-attribution component — `become-taxi-driver`'s `<<chat>>` **59,751** times,
+`sluttown-usa`'s `<<nm>>` **37,379**, `destroyer`'s `<<speech>>` **30,640**, `lust-for-life`'s
+`<<dg>>` **26,122**, `the-company`'s `<<nm>>` **19,379**. Each renders three things: a **face**, the
+**name**, and a **colour unique to that person**.
+
+- `sluttown-usa` — a 107-branch `if` chain, one CSS box class and one face file per speaker
+  (`.karleeBox`, `.indiaBox`), and the face swaps on story state (`<<if $indiaToStarr is 1>>`).
+- `become-taxi-driver` — three colour slots per person (border, background, name plate) plus a
+  `$themes` toggle so the player can turn parts of it off.
+- `lust-for-life` — `dialogColor` is a first-class field on the character object, beside `fontColor`
+  and three separate name forms.
+
+**We already ship two of the three.** `v2.py:15035` puts the portrait on every NPC dialogue block
+and the name above it — 54 of `the_season`'s 59 rendered blocks carry both. What we do not ship is
+the third: the renderer emits one `dialog-npc` class for the whole cast (`v2.py:15042`).
+
+**Do not build this on the strength of the count alone.** It is recorded so the next person does not
+rediscover it as a gap; build it when a game asks for it.
+
+---
+
+## 35. `block_pool` — the variant pool, and the field's main mechanism for a re-read surface
+
+**The engine has had this since v2 shipped. No v2 game has ever used it.**
+
+```python
+v2.py:14572   if block_type == "block_pool":
+v2.py:14574       pool_blocks = (block.get("props") or {}).get("blocks", [])
+v2.py:14580       parts = [f'<<set _bp to random(0, {max_idx})>>']
+v2.py:14581-14588 # if / elseif / else chain over the variants
+```
+
+**It picks a different one of N blocks on every render.** Not once per game, not once per day —
+every time the passage draws. Re-enter the surface and the sentence is different.
+
+| fact | source |
+|---|---|
+| children live at **`props.blocks`** | `v2.py:14574` |
+| a **one-item** pool renders directly, no `random()` | `v2.py:14576-14578` |
+| variants may be **any block type** — the pool nests `_convert_blocks_to_game_html` | `v2.py:14578`, `:14587` |
+
+```toml
+{ type = "block_pool", props = { blocks = [
+    { type = "text", content = "…first variant…" },
+    { type = "text", content = "…second variant…" },
+    { type = "text", content = "…third variant…" },
+] } }
+```
+
+### Why this section exists
+
+Three of the four top female-PC games in the corpus build **every repeatable sexual surface** this
+way, and none of them writes such a scene as a paragraph
+(`~/Documents/Female_PC_Craft_Study_20260823/findings_D_writing.md`):
+
+| game | its mechanism | scale |
+|---|---|---|
+| Course of Temptation (rank 5) | `<<switch setup.rir(0, 3)>>` | 164 named acts × 3 phrasings, one passage of 194,874 chars |
+| Family Ties (rank 24) | `either("…", "…", …)` | 12 poses × ~10 narration lines + ~10 of his dialogue |
+| Degrees of Lewdity (rank 7) | a **deterministic** grid on two meters — see `register.md` | 99 `actions*` widgets |
+
+### ⚠️ We did not fail to discover this. We KNEW IT AND LOST IT.
+
+Counted across every `toml_phases/*.toml` in this repo:
+
+```
+the_long_summer   (v1)   46
+under_one_roof    (v1)   14
+vesper            (v1)    6
+EVERY v2 GAME             0
+```
+
+v1's corpus carried a whole numbered rule for it — `prompts/game_design_rules.md:1330`,
+**Rule 17: Block Pools for Repeatable Activities** — and it named the failure precisely:
+
+> "This prevents the **'same text every morning' problem** that makes daily activities feel dead.
+> […] The group block system handles phase changes (post-first-kiss vs default), but **WITHIN each
+> phase, the text is frozen.** Block pools add variety within phases."
+
+That last sentence is the same distinction the 2026-08-23 field study arrived at independently, and
+it is now R6's mechanism 4 vs mechanism 5 in `the-surfaces.md`.
+
+**How it was lost:** v2's skill was deliberately divorced from `prompts_v2/` because that corpus
+taught false engine facts. In cutting away the false ones, this true one went with them — and the
+v2 skill mentioned `block_pool` exactly once, inside a list of valid block types, for its whole
+life. **The lesson is about the divorce, not about the primitive:** a wholesale cut loses the good
+with the bad, and nothing checked what was in the discarded half.
+
+⚠️ One local exception is on record and should not be mistaken for a ban:
+`games/the_long_summer_test/toml_phases/3_activities.toml:7-9` says *"block_pool prose rotation is
+in the schema but forbidden by the doctrine; doctrine wins for slice authoring."* That was a
+**test-slice** decision — the same repo's full game uses it 46 times.
+
+### Two authoring constraints, from v1's schema doc
+
+`prompts/toml_generation_prompt_v4.txt:1044-1053`:
+
+- **All child blocks must be the same type** (paragraph, dialog, or group). Use a `group` inside the
+  pool for multi-block variants.
+- **"`block_pool` CANNOT be nested inside another `block_pool`."**
+
+⚠️ The nesting constraint is **stated by v1's schema doc and NOT verified against `v2.py`** — treat
+it as unverified and do not cite it as an engine fact. The plausible mechanism is that both pools
+emit the same `_bp` temp variable (`v2.py:14580`), but whether SugarCube's already-matched
+`if/elseif` chain actually breaks on the collision was not tested. **Do not nest until someone
+tests it.**
+
+### ⚠️ The gates fold every variant into one beat, and that is CORRECT
+
+`scripts/gates.py:338-349` collects a pool's children into the **same** `Beat` object, so ten
+30-word variants count as one 300-word beat. That looks wrong and is not. `Beat`'s own docstring
+(`gates.py:298-306`) gives the reason: a Twine passage carries all its `<<if>>` branches inline, so
+folding keeps our numbers comparable to the baseline the thresholds came from.
+
+Measured 2026-08-23 across ten Degrees of Lewdity location passages, to check rather than assume:
+
+```
+ten named location passages: 9,886 words · unconditional 234 · IN A BRANCH 9,652  (98%)
+```
+
+⚠️ **Read that as ten passages, not as the whole game.** It is a spot check of
+`Hallways`, `Farm Work`, `Forest`, `Orphanage`, `Domus Street`, `Bedroom`, `Beach`, `Park`,
+`Museum` and `Temple` — not a per-location total of the kind `location fill` computes. It is
+lopsided enough (234 words out of 9,886) to settle the question it was asked, and it is **not** a
+figure to quote as "DoL is 98% conditional".
+
+The `location fill` threshold was derived from that same source (116,540 words across 25
+locations — `CHANGELOG.md:4835`), so counting our variants the same way **is** the apples-to-apples
+comparison. Changing it would break the only baseline the gate has.
+
+Where the folding does distort, it distorts **conservatively**: ten explicit variants fold to *one*
+explicit beat, which makes `explicit floor` harder to reach, never easier.
+
+⚠️ **Do not "reconcile" this with `register.md`'s 25-game table**, which counts *one rendered path,
+not every branch*. That is a different instrument for a different question — per-screen word counts,
+where a passage printing the same four words over eight images must count as four words. Both are
+right for what they measure.
+
+### ⚠️ Randomise the WORDS. Never randomise the CONTENT.
+
+A pool varies how a beat is phrased. It must never decide **whether the player can reach
+something**. The distinction is not ours — it is what the field's players draw themselves. Course of
+Temptation's players resent the dice (*"the rng aspects of this game should be seriously toned
+down"*, 11 likes) while nobody anywhere complains about varied phrasing; the complaint that keeps
+recurring is the opposite one, *"same gifs every time you do same things every single time"*
+(`zaras-school-life`, its top-liked criticism). Measured 2026-08-23 across 3,479 comments —
+`~/Documents/Female_PC_Craft_Study_20260823/findings_J_players.md` §7.
+
+A `block_pool` whose branches carry different `flagEffects`, different `traitEffects`, or different
+exits is a dice roll on content wearing a pool's clothes. Vary the sentence; leave the consequence
+alone.
+
+### Where the rule lives
+
+`the-surfaces.md` R6 mechanism 5 (a screen moves on re-entry) · `register.md` (how to write the
+variants).
+
+---
+
+## 36. The rejection branch — a locked choice that is still clickable
+
+A choice whose `conditions` fail has **two** shapes, and the second one is the engine's answer to
+*"what happens when she tries anyway."*
+
+| mode | set | renders as | on click |
+|---|---|---|---|
+| **A — the wall** | `show_when_locked = true` | greyed out, label = `locked_text` or the choice text (`v2.py:13146`) | nothing, or a threshold toast if `locked_text_threshold` is set (`v2.py:13185-13186`, §23) |
+| **B — the rejection** | `rejection_node` | **a live link**, label = `locked_text` or the choice text | goes to that node and applies `rejection_effects` |
+
+The generator names Mode B itself — `# Mode B: Clickable rejection — redirects to rejection node`
+(`v2.py:13148`). The node id is resolved against `passage_name_map` at `v2.py:13668-13673`, which
+logs a warning rather than failing the build if the target does not exist, so **a typo here is
+silent in the game and visible only in the build log.** Effects are emitted at `v2.py:13152-13165`
+through the same `setup.pendingEffects` path a normal choice uses.
+
+Both fields live on `TemplateChoice` (`apps/projects/services/template_import.py:811-812`, in the
+class at `:792`), beside
+`conditions`, `show_when_locked`, `locked_text` and `locked_text_threshold`.
+
+### The census — this is a recovery, not a discovery
+
+Counted across every `toml_phases/*.toml` in the repo, 2026-08-24:
+
+```
+show_when_locked        176 uses · 12 games      the wall is well used
+locked_text_threshold    21 uses ·  1 game       late_shifts only (v1-era)
+rejection_node            0 uses ·  0 games      ← and undocumented until now
+rejection_effects         0 uses ·  0 games
+```
+
+`locked_text_threshold` was already documented (§23). **`rejection_node` was not documented
+anywhere in this skill**, which is the same shape as `block_pool` (§35): a working primitive that
+nothing taught, so nothing used.
+
+### What it is for — the field's refusal
+
+Course of Temptation resolves a refusal instead of granting it. `EventWalkPassHF`: an NPC gropes
+her in the street, and *"Refuse to respond"* routes two ways —
+
+```
+<<set _diff to $pc.resist_arousal_difficulty($eventnpc)>>
+<<link "Refuse to respond">>
+    <<if $pc.skillcheck("Willpower", _diff)>>  <<go EventWalkPassHFResist>>
+    <<else>>                                   <<go EventWalkPassHFResistFail>>
+<</link>> <<skillcheck Willpower _diff>>
+```
+
+- **succeeds** — `Composure +25`, and his `control` over her **−25**: *"It's good to know he can't
+  get to you quite so easily."* (354 chars)
+- **fails** — `Arousal +100`, `Humiliation +50`, his `lust +25`, his `control` **+25**:
+  *"So easy."* (629 chars)
+
+Not one event: **464 `skillcheck` branch calls** across the game, **41** passages named `*Resist*`.
+Degrees of Lewdity carries the same principle across **360** struggle/resist/escape passages.
+Measured 2026-08-23 — `findings_H_known.md` and `findings_J_players.md` §4.
+
+### ⚠️ Ours is deterministic, and theirs is a roll
+
+**This engine has no per-choice random outcome.** `conditions` has no `random` type — the
+*"flag/trait/random"* list at `template_import.py:3143` is a docstring, not a feature — and the only
+randomness available is `trigger_mode = "random"` (whether a canvas fires at all) and `block_pool`
+(which words render). A choice goes where its conditions send it.
+
+That difference is smaller than it looks, because the field **publishes the odds before the click**:
+`<<skillcheck>>` renders a word next to the label — `certain · trivial · easy · moderate ·
+demanding · hard · very hard · nearly impossible` (`skillcheck_descriptor`), used **314** times.
+A dice roll the player can see and accept is not the RNG their comments resent (§35).
+
+> A published *threshold* keeps the same promise a published *probability* does: **the player knows
+> what they are risking before they click.** Use `locked_text_threshold` to say the bar out loud.
+> Do not simulate a roll.
+
+### The authoring shape
+
+```toml
+[[canvases.nodes.choices]]
+text                  = "Tell him no"
+conditions            = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 40 },
+] }
+show_when_locked      = true
+locked_text           = "Tell him no"          # same words — she still tries
+locked_text_threshold = "She would need to be steadier than this — 40 nerve."
+rejection_node        = "node_told_him_no_failed"
+rejection_effects     = [ { targetType = "player", trait = "known", op = "add", value = 4 } ]
+```
+
+Four rules the field follows, all of them cheap:
+
+1. **Both branches are written, and both are paid** — in opposite directions on **one** meter, so
+   the attempt is a real wager rather than a coin with one face.
+2. **Who is pushing sets the bar.** CoT reads the difficulty off the NPC
+   (`resist_arousal_difficulty($eventnpc)`); ours does it with a per-NPC trait condition (§8,
+   `subject = "npc"`), so the same refusal is easy against one character and hard against another.
+3. **Keep the branches short.** 354 and 629 characters in the field. A refusal that costs a whole
+   scene to write is one you will only build once.
+4. **Never fail silently.** If she can try and lose, the bar is stated before the click.
+
+### Where the rule lives
+
+`the-surfaces.md` R5b (the decline branch is written at full length and pays).

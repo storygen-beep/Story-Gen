@@ -1,6 +1,6 @@
 {
   "slug": "the_season",
-  "phase": "board",
+  "phase": "release",
   "narration_person": "second",
   "protagonist": "Cass Renfro",
   "want": {
@@ -348,7 +348,48 @@
       "spread_note": "5 sinks across 5 locations, 3 sources. No location holds more than one sink — gate 17 fails when more than half resolve to one place, and a measured game passed 21:20 with twelve of its sinks on a single front desk."
     }
   },
-  "releases": [],
+  "releases": [
+    {
+      "version": "0.1",
+      "subject": "The ramp — guidance that fills in as you meet people, and a page to look them up on.",
+      "why": "LO played the first testable build and could not tell who anyone was. The Quests page introduced all five characters on click one -- names, rooms, hours -- before a single meeting fired, and Boyd and Emmett both read '✓ Arc complete' on turn one. Measured against the 25-game mopoga field: 17/25 ship a cast page, 17/25 ship a hints page, 7 of the 8 parsed top-ten have a cast page, and 0 of 25 use a narrator to explain who somebody is. This game had neither surface.",
+      "changed": [
+        "Every cast quest card carries its character's meeting flag in `when`. QuestsPage renders no section when pickQuestsCard returns null (v2.py:15371, :15050), so the roster fills in as the player meets people. No engine change for this part.",
+        "Boyd and Emmett each got a real two-card ladder, matching Wade/Prine/Rae. Their single terminal card on a `lt` band was printing '✓ Arc complete' at meter zero -- `terminal` is not computed from progress (v2.py:15199). Lower bands close at owed 25 and seen 20, the thresholds their own content already reads.",
+        "`relationship` written for all five NPCs -- an existing [[npcs]] field this game left empty. It is the ONLY NPC string that survives to runtime; `description` is popped before $npcs ships (v2.py:1027), so the five 50-word bios were author notes the player never saw.",
+        "ENGINE: [ui.cast_page] shipped. Authors no content -- name, relationship, live location and next step are all read at runtime. Who is listed is the quest cards' decision, so one flag reveals the guidance page and the cast page together and they cannot disagree."
+      ],
+      "gates": "38/39 — unchanged. One gate line moved: `guidance exists` 13 → 15 cards, still PASS. `location fill` (4,411 of 15,500 declared) remains the only FAIL.",
+      "verified": "Read live in the built HTML, both builds. Turn one: Story Goals plus Rae only, zero 'Arc complete', The Crew page shows Rae with her line and 📍 The Yard. After meet_wade: both pages gain Wade and nobody else. All five met: five cards, right lines, live locations. Ladder: no ✓ at 0, exactly two ✓ at owed 30 / seen 25. Rebuilt WITHOUT --dev --debug and confirmed the button and page still render. No console errors.",
+      "left_open_on_purpose": [
+        "The Tips page. [ui.tips_page] already exists in the engine and this game authors nothing, so the 💡 button never renders. Nothing to build -- only words to write. LO deferred it.",
+        "Time windows on the five meet_* canvases (0/5 carry one; off_season is 8/8, last_call 11/11). requires_npc does NOT gate the auto-fire path, so a meeting fires in an empty room at the wrong hour -- seen live twice.",
+        "Emmett's own meeting prose still never calls him her brother. The `relationship` line is a different surface and does not fix the scene.",
+        "The player-facing StatsPage has the same spoiler the Quests page had: it lists every NPC by name and raw meter (owed, ease, want, seen) from turn one (v2.py:16004).",
+        "The five bugs from the 0.1 review: dead walkin_loft_prine (substitution_only with no host), the cooler opening onto an empty room, Boyd and Emmett having no camp surface, into_the_advance set and never read, and the truck cab the Want promises never built."
+      ]
+    },
+    {
+      "version": "0.1",
+      "subject": "The introductions play where the person actually is, and Emmett gets called her brother.",
+      "why": "All five meet_* canvases carried no time window, so each auto-fired the moment the player walked in whether the character was there or not. Seen live twice: meet_prine at the camp at 06:10 Saturday with Prine out in the rows, and meet_boyd on day 6 saying 'it's Monday'. Separately meet_emmett opened on a bare name and no line in it ever said he was her brother.",
+      "cause": "NOT the author. The engine is correct (isCanvasValid, v2.py:4559, never reads requiresNpc; the field is consumed only in checkRandomEncounters v2.py:5245 and checkAndSubstituteCanvas v2.py:5318). The doctrine was correct AND present -- the-first-hour.md F5 and templates/first-hour.toml both created 2026-08-23 01:29:49, twelve hours before this game's TOML was written at 13:19:12. The cause is template_import.py's own comment on requires_npc, which said it 'lets authors drop per-canvas location+time gates' with no scope on the claim -- true for those two functions, false for every meeting canvas. The schema file and the skill said opposite things and the schema is what is open while you write TOML. And nothing checked it.",
+      "changed": [
+        "Five [[canvases.trigger.schedules]] windows, each matching EVERY row that character already has at that location -- a narrower slice would make the meeting unreachable for a player who first walks in after lunch. Prine's 19:30-00:30 stays ONE row: the wrap works (v2.py:3290), the weekday list is the trap, and an all-days row is immune.",
+        "meet_emmett now opens 'Your brother is on the belt' -- role before name, F7.",
+        "ENGINE: template_import.py's requires_npc comment scoped to the two functions that read it, with the failure recorded in place. Comment-only; off_season rebuilt and diffed with zero new output.",
+        "SKILL: new gate `a meeting fires where they are` (G38). 69 canvases in scope repo-wide and ZERO carry a window that misses their character's hours, so it never nags a game that did the work."
+      ],
+      "gates": "38/39 → 39/40. The new gate passes. `location fill` moves 4,411 → 4,412 words — Emmett's sentence gaining one word — and remains the only FAIL. Nothing else moves, including `the opening opens a door`.",
+      "verified": "Read live in the built HTML. Camp at 06:15: meet_prine does NOT fire. Camp at 20:25: it does. Shed before noon: meet_boyd does NOT fire. 12:30: it does. All five meetings still reachable in one ordinary day — 05:15 Rae, 07:40 Wade, 07:55 Emmett, 13:05 Boyd, 21:15 Prine. No console errors.",
+      "left_open_on_purpose": [
+        "No role-before-name check. A kinship-word detector was written and measured across every game: it fires falsely on 10 of last_call's meetings (that cast is not family), 18 of the_inheritance's and 3 of off_season's mid-arc canvases. A check that cannot be made clean is worse than none; F7 now says out loud that nothing enforces it at the meeting.",
+        "The gate's findings in other games are NOT fixed: the_inheritance 24, vesper 13, late_shifts 1. All true, all v1 games, and vesper is off limits.",
+        "Item 1 (the Tips page) and item 5 (forcing a first click on the cast page).",
+        "The five bugs from the 0.1 review, unchanged: dead walkin_loft_prine, the empty cooler, Boyd and Emmett with no camp surface, unread into_the_advance, the missing truck cab."
+      ]
+    }
+  ],
   "promises": [],
   "decisions": [
     {
@@ -430,6 +471,10 @@
     {
       "at": "0.1",
       "note": "STATUS AT HANDBACK: 38/39 gates. The one red is `location fill` -- 4,411 words against the 15,500 declared. The 15,500 was my own pre-writing estimate and it was ~3.5x optimistic. At 102 words per canvas the game is DENSER than the DoL seed (~68 words/unit); what it is short of is SURFACE COUNT -- 43 canvases across 8 locations, against the seed's 68 units per location. 0.1 needs more surfaces, not fatter ones. NOT re-declared downward: back-filling the budget from the delivered count is the exact cheat gate 1 exists to catch."
+    },
+    {
+      "at": "0.1",
+      "note": "THE CAST PAGE REVEALS ON THE QUEST CARDS, NOT ON A FIELD OF ITS OWN. The alternative was a new `reveal_flag` on [[npcs]] -- explicit, and two gates per character to keep in sync. Reusing pickQuestsCard means the meeting flag opens both surfaces in the same instant and they cannot drift. The cost is real and was taken knowingly: a character with no quest card can never appear on the cast page. The `guidance exists` gate already requires every [[npcs]] entry to carry one, so it cannot happen in a game that passes its own scoreboard."
     }
   ]
 }

@@ -221,6 +221,10 @@ class TweeComprehensiveGeneratorV2:
         # deliberately not inside _generate_time_system() — that section is only
         # appended when [time] enabled, and the widget must be defined unconditionally
         # (SugarCube throws on an undefined widget call from StoryCaption).
+        # Cast page + its sidebar button widget. Same reason as the cheat page for
+        # living in its own section: the widget must be defined unconditionally.
+        twee_sections.append(self._generate_cast_page())
+
         twee_sections.append(self._generate_cheat_page())
 
         # Add canvas review pages (only in dev mode)
@@ -858,6 +862,10 @@ class TweeComprehensiveGeneratorV2:
         # for NPCs without arc_stages — runtime checks length to know whether
         # to engage stage-related code paths.
         npc_arc_stages_map = {}
+        # G: slug → [tag phrases] for the cast card's tag line. A SEPARATE registry
+        # rather than a field on $npcs, deliberately: $npcs is snapshotted into every
+        # history moment, which is the same reason `description` is popped below.
+        npc_tags_map = {}
         # Phase A (2026-05-14): slug-keyed NPC schedule registry. Engine
         # consults this first in setup.getNpcLocation(); falls back to
         # canvas-derived presence when an NPC has no declared schedule.
@@ -924,6 +932,10 @@ class TweeComprehensiveGeneratorV2:
                 arc_stages_for_npc = ai_config.get("arc_stages") or []
                 if arc_stages_for_npc and slug:
                     npc_arc_stages_map[slug] = list(arc_stages_for_npc)
+                # G: per-NPC cast-card tag line, slug-keyed. Same shape as above.
+                tags_for_npc = ai_config.get("tags") or []
+                if tags_for_npc and slug:
+                    npc_tags_map[slug] = list(tags_for_npc)
                 # Phase A (2026-05-14): per-NPC schedule registry, slug-keyed.
                 # Consumed by setup.getNpcLocation() at runtime. Schedules with no
                 # entries leave the NPC un-keyed → getNpcLocation falls back to
@@ -971,6 +983,7 @@ class TweeComprehensiveGeneratorV2:
             npc_slug_map = {}
             hidden_npcs_map = {}
             npc_arc_stages_map = {}
+            npc_tags_map = {}
             npc_schedules_map = {}
 
         # Store as instance variables for use in _convert_blocks_to_game_html
@@ -980,6 +993,9 @@ class TweeComprehensiveGeneratorV2:
         # no NPC has stage chains — runtime checks Object.keys(...).length > 0
         # before engaging stalled-detection / stage-gate / stage_label paths.
         self.npc_arc_stages_map = npc_arc_stages_map
+        # G: slug-keyed cast-card tag registry. Empty when no NPC declares `tags`
+        # — the cast card checks length before rendering the line.
+        self.npc_tags_map = npc_tags_map
         # Phase A (2026-05-14): slug-keyed schedule registry. Empty when no
         # NPC has declared schedules — engine.getNpcLocation falls back to
         # canvas-derived presence for those NPCs.
@@ -1233,6 +1249,10 @@ class TweeComprehensiveGeneratorV2:
         # Tips page — game-level mechanics surface. Empty dict = page + sidebar
         # button not emitted. Authored under [ui.tips_page] in TOML.
         self.tips_page = (self.project.metadata or {}).get("tips_page", {}) or {}
+        # Cast page — the who-is-who surface. Empty dict = page + sidebar button
+        # not emitted. Authored under [ui.cast_page]. Carries chrome only: the
+        # roster is built at runtime from $npcs and setup.quests_cards.
+        self.cast_page = (self.project.metadata or {}).get("cast_page", {}) or {}
         # Player cheat page — empty dict = page + sidebar button not emitted.
         # Authored under [ui.cheat_page]. One build ships everywhere; which rows are
         # live is decided at runtime by the codes the player has entered.
@@ -3174,6 +3194,9 @@ setup.tips_page = {json.dumps(self.tips_page or {})};
 // Empty object = no NPC has a stage chain (existing TOMLs unaffected).
 // Trait name convention: <slug>_stage in $player.core_traits (integer 0..N).
 setup.npc_arc_stages = {json.dumps(self.npc_arc_stages_map)};
+// G: per-NPC cast-card tag line, slug-keyed. Empty object = no NPC declares
+// `tags` and the cast card renders no tag row (existing TOMLs unaffected).
+setup.npc_tags = {json.dumps(self.npc_tags_map)};
 setup.phone_enabled = {"true" if self.phone_enabled else "false"};
 setup.phone_purchase_flag = {json.dumps(self.phone_purchase_flag)};
 setup.phone_data = {phone_data_json};
@@ -9694,6 +9717,55 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 
         return content
 
+    def _cast_page_css(self) -> str:
+        """Cast-page styling, emitted ONLY for games that author a cast page.
+
+        Deliberately small: the card body reuses `.stats-card-with-portrait` /
+        `.stats-portrait` / `.stats-info` / `.stats-name` from the Stats page and
+        `.quests-goal` / `.quests-tip` from the Quests page, so a cast card reads
+        as the same object the player already knows from two other screens. Only
+        the two lines that exist nowhere else get rules of their own.
+        """
+        if not self.cast_page:
+            return ""
+        return """
+/* Cast page. Who these people are to her, where they are, what moves them. */
+.cast-intro {
+    margin-bottom: 12px;
+    color: var(--theme-text-muted, #8a8a8a);
+    font-size: 13px;
+}
+.cast-card .cast-relationship {
+    color: var(--theme-text, #c8c8c8);
+    font-size: 13px;
+    line-height: 1.45;
+    margin: 2px 0 6px;
+}
+/* G: the tag line. Reads quieter than `relationship` and at the same weight as
+   the location row — it is a label, not a sentence, and it must not compete with
+   the one sentence above it. */
+.cast-card .cast-tags {
+    color: var(--theme-text-muted, #8a8a8a);
+    font-size: 12px;
+    margin: 0 0 6px;
+}
+.cast-card .cast-where {
+    color: var(--theme-text-muted, #8a8a8a);
+    font-size: 12px;
+    margin: 0 0 6px;
+}
+/* Off-schedule reads quieter than on — the page should not look broken when
+   somebody is simply not around at this hour. */
+.cast-card .cast-where.cast-away {
+    opacity: 0.6;
+    font-style: italic;
+}
+.cast-card .quests-goal,
+.cast-card .quests-tip {
+    margin-top: 6px;
+}
+"""
+
     def _cheat_page_css(self) -> str:
         """Cheat-page styling, emitted ONLY for games that author a cheat page.
 
@@ -9776,6 +9848,130 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
     white-space: nowrap;
     color: var(--theme-text-muted, #8a8a8a);
 }"""
+
+    def _generate_cast_page(self) -> str:
+        """Emit the cast page, plus its sidebar button widget.
+
+        THE WHO-IS-WHO SURFACE. Measured across the 25-game mopoga corpus
+        (2026-08-23): 17 of 25 shipped sandboxes carry a page like this, and 7 of
+        the 8 parsed top-ten do — the lone exception, degrees-of-lewdity, carries
+        the same load inside its prose instead by swapping description for name on
+        the meeting flag in 64 places. NONE of the 25 uses a third-person narrator
+        to tell the player who somebody is. A page is the field's answer.
+
+        NOTHING HERE IS AUTHORED. Every line on a card already exists in the game:
+
+          name             $npcs[uuid].name
+          who they are     $npcs[uuid].relationship   ([[npcs]] relationship)
+          where, right now setup.getNpcLocation + setup._locNameFromUuid
+          what to do next  the character's own quest card — tip + goal block,
+                           via setup.pickQuestsCard / renderQuestsGoalBlock
+
+        WHO IS LISTED IS THE QUEST CARDS' DECISION. A character appears exactly
+        when pickQuestsCard returns a card for them, which is the same call and the
+        same gate QuestsPage makes. Put the meeting flag on a character's cards and
+        both surfaces reveal them together; they cannot fall out of step, and there
+        is no second gate to keep in sync. The cost of that choice is real and
+        worth stating: a character with no quest card can never appear here. The
+        `guidance exists` gate already requires every [[npcs]] entry to carry one,
+        so this cannot happen in a game that passes its own scoreboard.
+
+        Roster ORDER mirrors QuestsPage (walk setup.quests_cards, dedupe by npc_id,
+        keep file order) so the two pages read in the same sequence.
+
+        The `castButton` widget is ALWAYS defined, empty when there is no cast
+        page, because StoryCaption calls it unconditionally and SugarCube throws on
+        an undefined widget — the same rule the cheat page records below.
+        """
+        cp = self.cast_page or {}
+        if not cp:
+            return ':: CastWidgets [widget nobr]\n<<widget "castButton">><</widget>>\n'
+
+        title = html.escape(cp.get("title") or "The Cast")
+        btn_label = html.escape(cp.get("button_label") or cp.get("title") or "The Cast")
+        btn_icon = html.escape(cp.get("button_icon") or "")
+        intro = cp.get("intro") or ""
+
+        icon_span = f'<span class="nav-i">{btn_icon}</span>' if btn_icon else ""
+        widget = (
+            ':: CastWidgets [widget nobr]\n'
+            '<<widget "castButton">>\n'
+            '<div id="cast-btn-widget">\n'
+            f'  <<if passage() isnot "CastPage">><<link "{btn_label}" "CastPage">><</link>>'
+            f'<<else>><span class="nav-row">{btn_label}</span><</if>>{icon_span}\n'
+            '</div>\n'
+            '<</widget>>\n'
+        )
+
+        video_path = getattr(self, 'video_path', '') or './media'
+        placeholder_svg = self._get_placeholder_svg()
+        escaped_svg = html.escape(placeholder_svg).replace("'", "\\'")
+
+        intro_line = f'<div class="cast-intro">{html.escape(intro)}</div>\n' if intro else ""
+
+        page = f""":: CastPage
+<<nobr>>
+<h2>{title}</h2>
+{intro_line}
+/* Roster + reveal, both from the quest cards. See _generate_cast_page's docstring. */
+<<set _allCards to setup.quests_cards || []>>
+<<set _hidden to setup.hiddenNpcs || {{}}>>
+<<set _slugMap to setup.npc_slug_map || {{}}>>
+<<set _slugs to []>>
+<<for _c range _allCards>>
+  <<if _c && _c.npc_id && _slugs.indexOf(_c.npc_id) === -1>>
+    /* hiddenNpcs is UUID-keyed; check both forms so hidden_from_ui holds in
+       either build mode, exactly as QuestsPage does. */
+    <<if !_hidden[_c.npc_id] && !_hidden[_slugMap[_c.npc_id]]>>
+      <<run _slugs.push(_c.npc_id)>>
+    <</if>>
+  <</if>>
+<</for>>
+
+<<set _shown to 0>>
+<<for _slug range _slugs>>
+  <<set _card to setup.pickQuestsCard(_slug)>>
+  <<if _card>>
+    <<set _nid to _slugMap[_slug] || _slug>>
+    <<set _npc to State.variables.npcs ? (State.variables.npcs[_nid] || State.variables.npcs[_slug]) : null>>
+    <<if _npc>>
+      <<set _shown to _shown + 1>>
+      <<set _loc to setup.getNpcLocation(_slug)>>
+      <<set _locName to _loc ? (setup._locNameFromUuid(_loc.location) || "") : "">>
+      <<set _goalBlock to setup.renderQuestsGoalBlock(_card, setup.evaluateGoals(_card))>>
+      <div class="stats-card stats-card-with-portrait cast-card">
+        <div class="stats-portrait">
+          <<if _npc.portrait>>
+            <img @src="'{video_path}/' + _npc.portrait" @alt="_npc.name" onerror="this.style.display='none';this.parentElement.innerHTML='{escaped_svg}';">
+          <<else>>
+            {placeholder_svg}
+          <</if>>
+        </div>
+        <div class="stats-info">
+          <div class="stats-name"><<print _npc.name>></div>
+          <<if _npc.relationship>><div class="cast-relationship"><<print _npc.relationship>></div><</if>>
+          <<set _tags to setup.npc_tags[_slug]>>
+          <<if _tags && _tags.length>><div class="cast-tags"><<print _tags.join(" &middot; ")>></div><</if>>
+          <<if _locName>>
+            <div class="cast-where">📍 <<print _locName>></div>
+          <<else>>
+            <div class="cast-where cast-away">📍 Not about right now</div>
+          <</if>>
+          <<if _goalBlock>><<print _goalBlock>><</if>>
+          <<if _card.tip>><div class="quests-tip">💡 <<print _card.tip>></div><</if>>
+        </div>
+      </div>
+    <</if>>
+  <</if>>
+<</for>>
+
+<<if _shown === 0>>
+  <div class="no-quests">You have not met anybody yet.</div>
+<</if>>
+<</nobr>>
+<<link "← Back">><<run setup.smartBack()>><</link>>
+"""
+        return widget + "\n" + page
 
     def _generate_cheat_page(self) -> str:
         """Emit the player cheat page, its code-entry script, and its sidebar button.
@@ -15544,6 +15740,8 @@ window.devGoBack = function() {
         # The cheat page MUST be registered: setup.commitMoment refuses to publish a
         # moment on any passage isRerenderSafe() rejects, so without this every grant
         # is lost on save/refresh. Membership also keeps Back from landing on it.
+        if self.cast_page:
+            info_pages_list += ', "CastPage"'
         if self.cheat_page:
             info_pages_list += ', "CheatPage"'
         info_pages_list += ']'
@@ -15870,6 +16068,7 @@ $(document).on(':passagestart', function(ev) {
 {portrait_line}<<sidebarItems>>{phone_btn_line}
 <<activeModifiers>>
 <<journalButton>>
+<<castButton>>
 <<tipsButton>>
 <<cheatButton>>
 <<statsButton>>
@@ -15886,6 +16085,7 @@ $(document).on(':passagestart', function(ev) {
 {portrait_line}<<sidebarItems>>{phone_btn_line}
 <<activeModifiers>>
 <<journalButton>>
+<<castButton>>
 <<tipsButton>>
 <<cheatButton>>
 <<statsButton>>
@@ -16960,6 +17160,7 @@ if (clothingMsg) {
 #quests-btn-widget,
 #journal-btn-widget,
 #tips-btn-widget,
+#cast-btn-widget,
 #cheat-btn-widget,
 #stats-btn-widget,
 #schedule-btn-widget,
@@ -16972,8 +17173,8 @@ if (clothingMsg) {
 }
 /* the clickable fill: <a> in nav state, .nav-row span on the current page */
 #phone-sidebar-btn a,
-#quests-btn-widget a, #journal-btn-widget a, #tips-btn-widget a, #cheat-btn-widget a, #stats-btn-widget a, #schedule-btn-widget a, #flags-btn-widget a,
-#quests-btn-widget .nav-row, #journal-btn-widget .nav-row, #tips-btn-widget .nav-row, #cheat-btn-widget .nav-row, #stats-btn-widget .nav-row, #schedule-btn-widget .nav-row, #flags-btn-widget .nav-row {
+#quests-btn-widget a, #journal-btn-widget a, #tips-btn-widget a, #cast-btn-widget a, #cheat-btn-widget a, #stats-btn-widget a, #schedule-btn-widget a, #flags-btn-widget a,
+#quests-btn-widget .nav-row, #journal-btn-widget .nav-row, #tips-btn-widget .nav-row, #cast-btn-widget .nav-row, #cheat-btn-widget .nav-row, #stats-btn-widget .nav-row, #schedule-btn-widget .nav-row, #flags-btn-widget .nav-row {
     display: block;
     width: 100%;
     box-sizing: border-box;
@@ -16984,7 +17185,7 @@ if (clothingMsg) {
     font-weight: 600;
 }
 #phone-sidebar-btn a:hover,
-#quests-btn-widget a:hover, #journal-btn-widget a:hover, #tips-btn-widget a:hover, #cheat-btn-widget a:hover, #stats-btn-widget a:hover, #schedule-btn-widget a:hover, #flags-btn-widget a:hover {
+#quests-btn-widget a:hover, #journal-btn-widget a:hover, #tips-btn-widget a:hover, #cast-btn-widget a:hover, #cheat-btn-widget a:hover, #stats-btn-widget a:hover, #schedule-btn-widget a:hover, #flags-btn-widget a:hover {
     color: var(--theme-accent);
     text-decoration: none;
 }
@@ -17032,7 +17233,7 @@ if (clothingMsg) {
     font-size: 11px;
     color: var(--theme-text-muted, #8a8a8a);
     text-align: center;
-}""" + self._cheat_page_css() + """
+}""" + self._cast_page_css() + self._cheat_page_css() + """
 
 /* Reduce gap between StoryCaption and Save/Restart menu */
 #story-caption {

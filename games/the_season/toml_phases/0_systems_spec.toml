@@ -236,6 +236,25 @@ flagEffects = [
 ]
 
 
+# ─── THE CREW — [ui.cast_page] ───────────────────────────────────────────────
+# The who-is-who page. Nothing about the cast is authored here: each card is
+# built at runtime from the character's `relationship` line, where the schedule
+# puts them at this minute, and their own quest card's next step.
+#
+# ⚠️ WHO APPEARS IS DECIDED BY THE QUEST CARDS BELOW, not by this block. A
+#    character is listed exactly when pickQuestsCard returns a card for them, so
+#    the meeting flag on their cards opens this page and the guidance page in the
+#    same instant and the two can never disagree.
+#
+# Measured: 17 of the 25-game mopoga field ship a page like this, and 7 of the 8
+# parsed top-ten do. None of the 25 uses a narrator to explain who people are.
+[ui.cast_page]
+title        = "The Crew"
+button_label = "The Crew"
+button_icon  = "👥"
+intro        = "Nine of you on this contract. Four of them are blood."
+
+
 # ─── GUIDANCE — [[quest_cards]] ──────────────────────────────────────────────
 # ⚠️ quests_engine = "v2" turns the sidebar entry and the page ON. Authoring no
 #    cards leaves a nav link to a heading with nothing under it — which is
@@ -290,19 +309,46 @@ when     = [ { trait = "known", subject = "player", op = "gte", value = 24 } ]
 terminal = true
 
 # ── the cast ─────────────────────────────────────────────────────────────────
+# ⚠️ EVERY CAST CARD CARRIES ITS CHARACTER'S MEETING FLAG. Without it the guidance
+#    page introduces the whole crew on click one — five names, their rooms and
+#    their hours — before the player has met anybody, and every meeting scene is
+#    spoiled by the page that is supposed to help. QuestsPage wraps each section
+#    in `<<if _card>>` (v2.py:15371) and pickQuestsCard returns null when no
+#    `when` matches (v2.py:15050), so an unmet character renders no heading at
+#    all. The same gate feeds the cast page, which lists a character exactly when
+#    pickQuestsCard hands back a card — one flag, two surfaces, they cannot
+#    disagree. the-first-hour.md F8.
+#
+# ⚠️ A `when` ITEM SETS EITHER `flag` OR `trait`, NEVER BOTH — the importer rejects
+#    an item carrying both (template_import.py:5285). The meeting flag is its own
+#    item beside the trait band.
+#
+# ⚠️ FLAG NAMES ARE NOT VALIDATED. Nothing checks that `met_wade` exists; a typo
+#    hides that character's guidance forever and no build error says so. These
+#    five were read off the meet_* canvases' own flagEffects.
+#
+# ⚠️ `terminal = true` IS NOT COMPUTED FROM PROGRESS. renderQuestsGoalBlock prints
+#    "✓ Arc complete" whenever the winning card carries it, ahead of every other
+#    frame (v2.py:15199). A character whose ONLY card is terminal on a `lt` band
+#    therefore reads as finished at value zero — which is what Boyd and Emmett
+#    shipped with. Every ladder here is two cards: an open lower band, and a
+#    terminal upper one that has to be climbed to.
+
 [[quest_cards]]
 priority = 70
 npc_id   = "npc_wade"
 text     = "Your brother has been saying it about you to the crew since you were nineteen, where you could hear, and nobody has ever told him to stop. He has started not saying it in front of them."
 tip      = "Work the same block as him in the rows. He is on the step of the second van from seven at night — the curtain in the trailer does not close."
-when     = [ { trait = "want", subject = "npc", npc_id = "npc_wade", op = "lt", value = 40 } ]
+when     = [ { flag = "met_wade", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_wade", op = "lt", value = 40 } ]
 
 [[quest_cards]]
 priority = 69
 npc_id   = "npc_wade"
 text     = "Four feet of plywood and neither of you pretends about it any more."
 tip      = "He is at the second van after the crew turns in."
-when     = [ { trait = "want", subject = "npc", npc_id = "npc_wade", op = "gte", value = 40 } ]
+when     = [ { flag = "met_wade", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_wade", op = "gte", value = 40 } ]
 terminal = true
 
 [[quest_cards]]
@@ -310,43 +356,69 @@ priority = 68
 npc_id   = "npc_prine"
 text     = "Your uncle takes no days off and asks whether you have had water, and you keep going up the loft ladder at one o'clock as if that were about the crates."
 tip      = "Stack with him in the barn loft between one and two. He is outside the third van from half past seven at night."
-when     = [ { trait = "want", subject = "npc", npc_id = "npc_prine", op = "lt", value = 40 } ]
+when     = [ { flag = "met_prine", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_prine", op = "lt", value = 40 } ]
 
 [[quest_cards]]
 priority = 67
 npc_id   = "npc_prine"
 text     = "There is no hurry in it and there never has been, and that is the thing about him you cannot put down."
 tip      = "The loft, between one and two, while the rest of the crew is out of the sun."
-when     = [ { trait = "want", subject = "npc", npc_id = "npc_prine", op = "gte", value = 40 } ]
+when     = [ { flag = "met_prine", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_prine", op = "gte", value = 40 } ]
 terminal = true
 
+# Boyd's ladder. The lower band closes at owed 25 because that is where the shed
+# walk-in opens (walkin_shed_boyd, owed gte 25) — the rung the upper card is about.
 [[quest_cards]]
 priority = 66
 npc_id   = "npc_boyd"
 text     = "Every dollar you have earned went through your father's hand before it reached yours, and now the book has more in your column than your bins do."
 tip      = "He is at the scale in the packing shed from noon. Ask him for an advance against next week — it comes off the Saturday settle."
-when     = [ { trait = "owed", subject = "npc", npc_id = "npc_boyd", op = "lt", value = 40 } ]
-terminal = true
+when     = [ { flag = "met_boyd", subject = "player", op = "is_true" },
+             { trait = "owed", subject = "npc", npc_id = "npc_boyd", op = "lt", value = 25 } ]
 
 [[quest_cards]]
 priority = 65
+npc_id   = "npc_boyd"
+text     = "You are into him now, and he has stopped pretending the book is only a book. He has not said what the arrangement is and he is not going to be the one who says it."
+tip      = "The scale, after noon. He does the book alone once the crew has gone back out."
+when     = [ { flag = "met_boyd", subject = "player", op = "is_true" },
+             { trait = "owed", subject = "npc", npc_id = "npc_boyd", op = "gte", value = 25 } ]
+terminal = true
+
+# Emmett's ladder. The lower band closes at seen 20 — the band his own hub swaps
+# on (hub_emmett_shed), where he starts stopping the belt when she comes in.
+[[quest_cards]]
+priority = 64
 npc_id   = "npc_emmett"
 text     = "He stopped talking to you in March and will not say why. He works the belt with his face to the door, which means he sees everyone who comes in and everyone who does not."
 tip      = "Work the belt beside him in the packing shed. He is at the second van at night and he does not talk there either."
-when     = [ { trait = "seen", subject = "npc", npc_id = "npc_emmett", op = "lt", value = 40 } ]
-terminal = true
-
-[[quest_cards]]
-priority = 64
-npc_id   = "npc_rae"
-text     = "Twenty crews out that window. She names what the men are doing before you have words for it and she does not soften any of it."
-tip      = "The canteen window on the yard — first light, and again when the crew comes off the rows."
-when     = [ { flag = "rae_straight_with_you", subject = "player", op = "is_false" } ]
+when     = [ { flag = "met_emmett", subject = "player", op = "is_true" },
+             { trait = "seen", subject = "npc", npc_id = "npc_emmett", op = "lt", value = 20 } ]
 
 [[quest_cards]]
 priority = 63
+npc_id   = "npc_emmett"
+text     = "He stops the belt when you come in now. He has not told anybody, and he wants you to know that not telling is a thing he is choosing."
+tip      = "The belt in the packing shed — from six, and again from half past one."
+when     = [ { flag = "met_emmett", subject = "player", op = "is_true" },
+             { trait = "seen", subject = "npc", npc_id = "npc_emmett", op = "gte", value = 20 } ]
+terminal = true
+
+[[quest_cards]]
+priority = 62
+npc_id   = "npc_rae"
+text     = "Twenty crews out that window. She names what the men are doing before you have words for it and she does not soften any of it."
+tip      = "The canteen window on the yard — first light, and again when the crew comes off the rows."
+when     = [ { flag = "met_rae", subject = "player", op = "is_true" },
+             { flag = "rae_straight_with_you", subject = "player", op = "is_false" } ]
+
+[[quest_cards]]
+priority = 61
 npc_id   = "npc_rae"
 text     = "She gives you the whole opinion now instead of a third of it, and she does not lower her voice for any of it."
 tip      = "The window on the yard. She is the only read on this worth having."
-when     = [ { flag = "rae_straight_with_you", subject = "player", op = "is_true" } ]
+when     = [ { flag = "met_rae", subject = "player", op = "is_true" },
+             { flag = "rae_straight_with_you", subject = "player", op = "is_true" } ]
 terminal = true

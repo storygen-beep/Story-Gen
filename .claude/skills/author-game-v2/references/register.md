@@ -3,7 +3,10 @@
 Two halves, and they are read at different moments.
 
 **Part one — the explicit beat.** How to write the thing the game is for, and the one defect that
-recurred three increments running. Read it when you are writing heat.
+recurred three increments running. Read it when you are writing heat. It also carries the two rules
+that came out of reading four top female-PC games in source (2026-08-23): **the reason axis** — the
+same act reached two ways is written two ways — and **the two-halves sentence**, which is how a
+repeatable act surface survives its fiftieth visit.
 
 **Part two — the other ninety percent** (from "which is not one register, it is six"). A table of
 the six kinds of screen and the four rules that hang off it: where the clip goes, how far one canvas
@@ -152,6 +155,94 @@ single most reliable way to produce a game that is explicit and cold at the same
 
 It reasserts itself the moment it is not being actively fought. Assume you are doing it, and
 check the gate.
+
+**Tested against the field 2026-08-23 and CONFIRMED, not loosened.** Zara's School Life folds heavy
+interiority straight into its acts — and it never leaves the body: *"Her mind was a dark, focused
+hum of power and arousal. The feel of his hard cock in her hand, the slick pre-cum on her thumb…
+She wasn't just getting wet; her pussy was clenching with need, dripping for him."* That is not a
+pivot by this rule's own definition, which is about what the sentence is *describing*, not whether
+a thought is present. **The rule survived. Nothing about it changes.**
+
+---
+
+## The reason axis — the same act, reached two ways, written two ways
+
+> **When one act can be arrived at by two different routes, the two routes write two different
+> openings — and the difference is WHY she is doing it, not how hot it is.**
+
+Not a tier. Not a heat band. **Volition.** She chose this, or her body walked her into it.
+
+Course of Temptation's most-returned-to screen (`ShowerStall`) offers masturbation behind two
+different gates, and each writes its own intro text:
+
+*Reached by the skill — she decided:*
+> "You want to make yourself cum, and while the co-ed showers aren't exactly truly private, this
+> stall closed off by a curtain is as close as you get to uninterrupted alone time in the residence
+> hall. You start the water and duck under it, **ignoring how precarious your privacy is** as you
+> begin running your hands over your body."
+
+*Reached by arousal — her body decided:*
+> "Even though it's definitely not exactly private here — just a couple curtains separating you from
+> everybody else — **you're desperate for relief** and actual alone time is basically impossible to
+> find in the residence hall. You start the water and duck under it, **taking a breath** as you
+> immediately begin running your hands over your body."
+
+Same room, same act, same fifteen minutes. One is a decision; the other is a need. Neither is
+hotter than the other.
+
+Zara's School Life does it *inside* one act, with two interiority paragraphs for the same hand under
+the same table:
+
+> *owning it* — "Her mind was a dark, focused hum of power and arousal… to prove **she owned this
+> moment** and his pleasure."
+> *owned by it* — "The reality of what she was doing was almost too much to process. **Her own body
+> responded traitorously**… shocking, thrilling, and **deeply wrong**."
+
+**Two different women doing the same thing.**
+
+⚠️ **This is not R6's banned move.** `the-surfaces.md` R6 forbids rewriting a **hub's** first
+sentence per stat band, and it is right — an arc whose base node rewrites itself per tier reads as N
+different scenes rather than one escalating hub. This varies the **act's** intro by which route
+opened it. The hub opener stays constant, exactly as Course of Temptation's does.
+
+**How to build it.** The choice that routes into the act sets a flag or trait; the act's opening
+beat is a `group` chain reading it. Adjacent `group` blocks merge into one if/elseif chain and first
+match wins (`engine.md` §35, `v2.py:14561-14568`), so the branches must be mutually exclusive.
+
+---
+
+## The two-halves sentence — one sentence, two people's meters
+
+The most reusable sentence-level pattern in the field study, and it is **not random**.
+
+Degrees of Lewdity's `actionsothermouthpenisthrust` (`Widgets Actions Text`, 1,777 chars) is a
+**3×3 grid**. His arousal writes the first clause; hers writes the second:
+
+```
+HIS arousal — the first clause          HER arousal — the second
+  high  "ruthlessly fucked"               high  "Driven by instinct, you push back as you approach your peak."
+  mid   "hungrily enveloped"              mid   "You push back against the movements."
+  low   "rhythmically engulfed and…"      low   "You push back, trying to reduce your discomfort."
+```
+
+> *"Your cock is ruthlessly fucked by their mouth. Driven by instinct, you push back as you approach
+> your peak."*
+> *"Your cock is rhythmically engulfed and regurgitated by their mouth. You push back, trying to
+> reduce your discomfort."*
+
+**Nine outcomes from six written clauses**, and nothing is left to chance — read it twice at the
+same arousal and it is the same sentence; read it as the meters move and it changes under you.
+
+This is what a repeatable act surface should be built from. It is cheaper than nine scenes and it
+never says the same thing twice in a row, because **the two halves move independently**.
+
+Build it as nested `group` chains — one on his meter, one on hers — with mutually exclusive bands.
+
+**Its sibling is the random pool.** Where the two halves are *deterministic* variety driven by
+state, `block_pool` is *undirected* variety driven by a die (`engine.md` §35). Course of Temptation
+and Family Ties use the die; DoL uses the state. Use the die when nothing in the fiction should
+decide, and the state when something should. Our v2 games use **neither** — every repeatable act
+surface in this repo says the same words on visit one and visit fifty.
 
 ---
 ---
@@ -333,6 +424,73 @@ above 18 of the 25, so it is slack rather than an invented line.
 **The exemption is real and narrow: nobody is there to speak.** A solo surface, an unseen peek, the
 interior stretch of a capstone. A *present* character is never exempt, and "she is alone" stops
 being true the moment the walk-in fires.
+
+### Write the lines by PERSONALITY, not by person
+
+The field's answer to "how do I get speech into a scene that six different people can walk into"
+is not six sets of lines. Course of Temptation's `dirtytalkcuminside` picks by that NPC's
+**inclinations**, crossed with what they want:
+
+| | wants it | does not |
+|---|---|---|
+| **shy** | *"Please... cum inside me..."* | *She opens her mouth as if to say something, then closes it again.* |
+| **crude** | *"Fill me up with your fucking cum."* | *"Not fucking inside."* |
+| **crude + dominant** | — | *"Don't cum inside me or I'll rip your balls off."* |
+| **neutral** | *"Cum in my pussy!"* | *"Pull out, please."* |
+
+Thirteen such widgets exist in that game — `dirtytalkidea`, `dirtytalktits`, `dirtytalkgonnacum`,
+`dirtytalkcumfacial`, `spitorswallow` and more. **Speech inside a generated scene is its own
+subsystem**, and it is authored once for the whole cast.
+
+Two things to carry out of that table:
+
+- **The best line in the set has no words in it** — *"She opens her mouth as if to say something,
+  then closes it again."* A non-verbal beat is a legitimate answer to S3, and it came out of a
+  lookup table rather than a moment of inspiration.
+- **The axis is what KIND of person they are, not which person.** Write the shy line and the crude
+  line once and assign them by an NPC trait. Ours would be a `group` chain on that trait, or a
+  `block_pool` inside each branch (`engine.md` §35).
+
+This scales the way our cast does: five characters × one shy/crude split costs two lines, not ten.
+(`~/Documents/Female_PC_Craft_Study_20260823/findings_D_writing.md`)
+
+### One term of address per person, and nobody else uses it
+
+Added 2026-08-24 from Section G. **This is the exception to the paragraph above, and the boundary
+has to be held or the two rules read as contradictions:**
+
+> The shy line and the crude line are written once and assigned **by trait** — that is what makes a
+> generated scene affordable. **The name he calls her is not.** It is his, it is fixed, and no other
+> character in the game uses it.
+
+Measured across every captured line in two field games:
+
+| game | person | lines | their term | rate |
+|---|---|---|---|---|
+| `sluttown-usa` | India | 2,809 | **"pet"** ×262 | 9% |
+| `sluttown-usa` | Alex | 633 | **"sir"** ×47 | 7% |
+| `sluttown-usa` | AJ | 714 | **"daddy"** ×34 | 5% |
+| `destroyer` | Stepsister | 449 | **"bro"** ×58 | 13% |
+| `destroyer` | Granny | 413 | **"darling"** ×37, "dear" ×23, "sweetheart" ×15 | 18% |
+| `destroyer` | Aunt | 516 | **"baby"** ×32, "sweetie" ×11 | 8% |
+
+**Roughly every sixth to twentieth line**, and the terms do not overlap anywhere in either cast.
+It is the cheapest device in the whole study: one word, no system, no engine support, and it works
+on the first line the player ever reads from that person.
+
+`destroyer`'s Granny is the one character differentiated by **register** rather than by the term
+alone — beside "darling" and "dear", her distinctive vocabulary is *"perhaps"*, *"suppose"*,
+*"quite"*. An author writing an older woman's speech on purpose. That is the upper end of this rule,
+not its floor.
+
+**Ours:** `the_season` ships 56 NPC lines and **only Rae ever addresses Cass at all** — *"girl"*
+twice, *"Renfro"* once. Boyd, Wade, Prine and Emmett never call her anything. Her father, in nine
+lines, never once says his daughter's name.
+
+> ⚠️ **Do not over-read the measurement that found this.** The same instrument surfaces
+> per-character moan spellings — Stepmom "ahhh/gulp", Stepsister "mhnmhnm/fuuck", Cousin
+> "aaah/woof" — which are almost certainly accidents of typing rather than craft. **The address
+> term is the reliable half; the noises are not a rule.**
 
 ---
 

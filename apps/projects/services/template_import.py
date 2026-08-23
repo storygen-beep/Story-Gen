@@ -141,6 +141,12 @@ class TemplateNPC:
     #   - E10 hint stage_gate validation (stage_npc must reference one of these)
     #   - E11 stage_label sidebar widget (renders arc_stages[current_stage])
     arc_stages: List[str] = field(default_factory=list)
+    # G · the cast card's tag line. Up to NPC_TAGS_MAX short phrases naming what
+    # this person is about — how they operate, what they want, an aesthetic, and
+    # something mundane they consume. Rendered on the cast page under
+    # `relationship`. Ships to runtime via the slug-keyed `setup.npc_tags`
+    # registry, NOT via $npcs — see v2.py's npc_tags_map for why.
+    tags: List[str] = field(default_factory=list)
 
 
 @dataclass
@@ -179,6 +185,14 @@ class TemplateLocation:
 # stamped "You:" onto every player line — which reads as a contradiction in a game
 # narrated in third ("she") or first ("I").
 VALID_NARRATION_PERSONS = {"second", "first", "third"}
+
+# Ceiling on `[[npcs]] tags` — the cast card's tag line. Four, because the field is
+# unanimous at four: friends-of-mine's Characterpedia gives all fifteen of its
+# characters exactly four ("Manipulation | Attention | Writing | Oriental Food"),
+# and the shape is consistent — how they operate, what they want, an aesthetic, and
+# something mundane they consume. A fifth entry turns the line into a stat block,
+# which is the thing the trivial fourth slot exists to prevent.
+NPC_TAGS_MAX = 4
 
 # -------- Clothing System Data Shapes --------
 
@@ -404,6 +418,10 @@ class GameTemplate:
     # affects diner tips, etc.). Authored under [ui.tips_page] in TOML. None
     # = page + sidebar button not emitted; runtime-conditional.
     tips_page: Optional["TemplateTipsPage"] = None
+    # Cast page — the who-is-who surface. Authored under [ui.cast_page]. None =
+    # page + sidebar button not emitted. Carries no authored content: the roster
+    # is derived from [[npcs]] and the quest cards at runtime.
+    cast_page: Optional["TemplateCastPage"] = None
     # Player cheat page — authored under [ui.cheat_page]. None = page + sidebar
     # button not emitted. One build ships everywhere: every row is emitted live but
     # wrapped in a check on its own unlock flag, which the player sets by entering
@@ -456,6 +474,29 @@ class TemplateTipsPage:
     """
     title: str = "Tips"
     content: str = ""
+
+
+@dataclass
+class TemplateCastPage:
+    """The [ui.cast_page] surface: a sidebar button plus a standalone passage
+    listing the people the player has met — who they are to her, where they are
+    right now, and what advances them.
+
+    NO CONTENT IS AUTHORED HERE. The page draws entirely from data the game
+    already carries: `relationship` off [[npcs]], live presence off
+    setup.getNpcLocation, and the next-step block off the character's own quest
+    card. Presence of the block IS the opt-in; the fields below are chrome.
+
+    WHO APPEARS is the quest cards' decision, not this block's. A character is
+    listed exactly when setup.pickQuestsCard returns a card for them, so the
+    meeting flag on their cards gates the guidance page and this page together
+    and the two cannot fall out of step. Measured field practice: 17 of 25
+    shipped sandboxes carry a page like this, and 7 of the 8 parsed top-ten do.
+    """
+    title: str = "The Cast"
+    intro: str = ""
+    button_label: str = ""    # defaults to title
+    button_icon: str = ""
 
 
 @dataclass
@@ -596,12 +637,29 @@ class TemplateTrigger:
     # renderSoloActivities + selectAutoFireCanvasForLocation (PRD 25 §5.5).
     # Reachable ONLY as the target of another canvas's substitution rule.
     substitution_only: bool = False
-    # Lane 2/3 NPC-presence gate (Phase A, 2026-05-14). When set, the engine
-    # ANDs this with all existing gates: the canvas only fires if the named
-    # NPC is currently co-located with the player per their declared
-    # [[npcs.schedules]]. Lets authors drop per-canvas location+time gates in
-    # favor of consulting the NPC's single source of truth. Back-compat:
-    # canvases that still carry `trigger.schedules` keep working (AND-gate).
+    # Lane 2/3 NPC-presence gate (Phase A, 2026-05-14). The named NPC must be
+    # co-located with the player per their declared [[npcs.schedules]].
+    #
+    # ⚠️ THIS GATES TWO PATHS AND ONLY TWO. `requiresNpc` is read in exactly
+    #    setup.checkRandomEncounters (v2.py:5245) — Lane 2 random ambients,
+    #    trigger_mode = "random" — and setup.checkAndSubstituteCanvas
+    #    (v2.py:5318) — Lane 3 substitution targets, substitution_only = true.
+    #    On EVERY other path it does nothing at all. An auto-firing canvas is
+    #    selected by selectAutoFireCanvasForLocation -> isCanvasValid
+    #    (v2.py:4559), which reads schedules, conditions and repeatability and
+    #    never looks at this field; isCanvasValidForSelection (v2.py:4584) is
+    #    the same. So on a one-shot meeting canvas, `trigger.schedules` is what
+    #    stops it firing in an empty room, and this field is documentation.
+    #
+    #    An earlier version of this comment said requires_npc "lets authors drop
+    #    per-canvas location+time gates", with no scope on the claim. A game was
+    #    then authored with five meeting canvases and no windows, and its
+    #    introductions played to rooms the characters were not in — one of them
+    #    at 06:10 on a Saturday, saying "it's Monday". The skill said the right
+    #    thing the whole time (the-first-hour.md F5); this file did not, and this
+    #    file is what an author reads while writing TOML.
+    #
+    # Back-compat: canvases carrying both keep working — the two AND together.
     requires_npc: Optional[str] = None
     # Doc 69 Item 2 (2026-05-27) — Pattern C `pre_substitution_effects`.
     # Effects that run UNCONDITIONALLY at canvas entry, BEFORE the Lane 3
@@ -1736,6 +1794,31 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 )
             arc_stages.append(stage)
 
+        # G · Parse tags: short phrases for the cast card's tag line.
+        # Empty/missing = no tag line (default; existing TOMLs unaffected).
+        tags_raw = n.get("tags") or []
+        if not isinstance(tags_raw, list):
+            raise TypeError(
+                f"npcs[{ni}].tags must be a list, got {type(tags_raw).__name__}"
+            )
+        if len(tags_raw) > NPC_TAGS_MAX:
+            raise ValueError(
+                f"npcs[{ni}].tags has {len(tags_raw)} entries, max {NPC_TAGS_MAX}. "
+                f"The field ships exactly four (friends-of-mine gives all 15 of its "
+                f"characters four: how they operate, what they want, an aesthetic, "
+                f"and something they consume). More than that reads as a stat block."
+            )
+        npc_tags: List[str] = []
+        for ti, tag in enumerate(tags_raw):
+            if not isinstance(tag, str):
+                raise TypeError(
+                    f"npcs[{ni}].tags[{ti}] must be a string, "
+                    f"got {type(tag).__name__}: {tag!r}"
+                )
+            if not tag.strip():
+                raise ValueError(f"npcs[{ni}].tags[{ti}] is empty")
+            npc_tags.append(tag.strip())
+
         npcs.append(
             TemplateNPC(
                 id=_require_str(n, "id"),
@@ -1751,6 +1834,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 trait_decay=trait_decay,
                 hidden_from_ui=bool(n.get("hidden_from_ui", False)),
                 arc_stages=arc_stages,
+                tags=npc_tags,
             )
         )
 
@@ -2789,6 +2873,28 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     content=tp_content,
                 )
 
+    # Cast page (the who-is-who surface). Authored under [ui.cast_page].
+    # PRESENCE of the block is the whole opt-in — unlike tips_page there is no
+    # content field to be empty, because the roster comes from [[npcs]] and the
+    # quest cards. A non-table here is a hard error rather than a silent drop,
+    # for the reason recorded on TemplateCheatPage: a silently-dropped UI block
+    # is invisible until somebody notices the button never appeared.
+    cast_page_obj: Optional[TemplateCastPage] = None
+    if isinstance(ui_raw, dict):
+        castp_raw = ui_raw.get("cast_page")
+        if castp_raw is not None:
+            if not isinstance(castp_raw, dict):
+                raise TypeError(
+                    f"[ui.cast_page] must be a table, got {type(castp_raw).__name__}"
+                )
+            castp_title = _require_str(castp_raw, "title", "The Cast") or "The Cast"
+            cast_page_obj = TemplateCastPage(
+                title=castp_title,
+                intro=_require_str(castp_raw, "intro", ""),
+                button_label=_require_str(castp_raw, "button_label", "") or castp_title,
+                button_icon=_require_str(castp_raw, "button_icon", ""),
+            )
+
     # Player cheat page. Authored under [ui.cheat_page] + [[ui.cheat_page.grants]].
     # NOTE the deliberate divergence from tips_page above: an authored-but-empty
     # block is NOT silently dropped here. It is constructed and left for validate()
@@ -2954,6 +3060,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         trait_labels=trait_labels,
         flag_labels=flag_labels,
         tips_page=tips_page_obj,
+        cast_page=cast_page_obj,
         # This kwarg is the silent-no-op step: parse the block, forget the kwarg,
         # and the feature vanishes with no error anywhere. Covered by a test.
         cheat_page=cheat_page_obj,
@@ -6359,6 +6466,15 @@ def _assemble_project_metadata(project, template):
             "title": template.tips_page.title,
             "content": template.tips_page.content,
         }
+    # Cast page. Chrome only — the roster itself is built at runtime from $npcs
+    # and setup.quests_cards, so nothing about the cast is copied here.
+    if template.cast_page:
+        project.metadata["cast_page"] = {
+            "title": template.cast_page.title,
+            "intro": template.cast_page.intro,
+            "button_label": template.cast_page.button_label,
+            "button_icon": template.cast_page.button_icon,
+        }
     # Player cheat page. The FULL row data goes here — hints, values, caps and all.
     # Metadata never reaches the output file as a config object; each row is baked
     # into passage markup inside a check on its own unlock flag.
@@ -6715,6 +6831,9 @@ def create_project_from_template(
         # E9/E10/E11: per-NPC arc_stages list (display names per stage value).
         if n.arc_stages:
             npc.ai_behavior_config["arc_stages"] = n.arc_stages
+        # G: per-NPC cast-card tag line.
+        if n.tags:
+            npc.ai_behavior_config["tags"] = n.tags
         npc.save()
         npc_ids.append(str(npc.id))
 

@@ -1,17 +1,18 @@
 # author-game-v2 — the complete picture, and where we stand
 
 *Status document. Originally written 2026-08-11 as a plan file; moved into the skill and
-refreshed against a live run the same day.*
+refreshed against a live run the same day. **Rewritten 2026-08-23** — the previous version
+described a world of ten gates and one test game, and had gone materially wrong.*
 
 > **Every number below was verified by running the scoreboard, not from memory.** When this
 > document and the scoreboard disagree, the scoreboard is right. Re-verify with:
 >
 > ```bash
-> python3 .claude/skills/author-game-v2/scripts/gates.py back_home
-> python3 .claude/skills/author-game-v2/scripts/gates.py vesper
+> PYTHONHASHSEED=0 python3 .claude/skills/author-game-v2/scripts/gates.py the_season
+> PYTHONHASHSEED=0 python3 .claude/skills/author-game-v2/scripts/gates.py vesper
 > ```
 >
-> **Last verified: 2026-08-11.**
+> **Last verified: 2026-08-23** — all 27 game directories re-scored in one pass.
 
 ---
 
@@ -19,299 +20,240 @@ refreshed against a live run the same day.*
 
 ## The problem
 
-We had a working authoring skill (`author-game`) built from thorough research into top-ranked
-adult sandbox games. It produced games that were structurally correct and did not land. Two
-specific complaints drove this work:
+v1 authored games as stories with chapters. The genre does not work that way: a sandbox is a
+**never-ending release stream**, and everything follows from that — one ascent meter that buys
+access, locations filled before new ones open, explicit content living in the surfaces the player
+returns to, and every release ending on a visible locked door.
 
-1. **It pitches games with endings**, while top games never end and are continuously updated.
-2. **Vesper reads as dark noir rather than an adult game**, despite explicit content.
+## The commitment that has held
 
-## What the research found
-
-A clean-sheet study (13 agents, forbidden from reading the old skill) plus first-hand
-measurement of Degrees of Lewdity's source produced four findings that overturned prior belief.
-
-**"Start narrow" is wrong.** DoL's earliest retrievable build already had **25 locations** — the
-same width as Vesper's 26. It started wide. What differed was fill.
-
-**Density falls as a game matures; the beat ratio does not.** DoL's sex-word share dropped
-3.00% → 1.16% over eight years as systems and UI outgrew prose. But the share of scene units
-carrying 3+ explicit words held at **7.5–9.3%** across eight years and twelve-fold growth. That
-stability makes it the only usable heat measure.
-
-**Vesper's defect was located precisely.** Sexual prose exists in **17 of 25** DoL locations
-versus **1 of 21** Vesper locations — and that one is a sealed cell with no exits. **18 of
-Vesper's 19 explicitly-worded prose blocks sit in a room the player can never re-enter**, while
-all nine of its repeatable sex loops score zero. The premise was never the problem; the crude
-register was quarantined in one-time content.
-
-**A release is not a chapter.** One measured six-week DoL cycle: **+196 units, +24,388 words,
-zero new locations**, and every one of its ten content commits was an event at an existing place
-with an existing character. 55.6% of its commits were fixes.
-
-## The commitments that follow
-
-1. **The product never ends.** Endings *inside* the game are normal (DoL ships seven terminal
-   fail-states); the game itself does not close. Subscription revenue is an integral over months.
-2. **Fill before you widen** — as a *distribution*: one anchor holding ≥25%, median ≥3,000,
-   mean ≥4,500.
-3. **Heat lives where the player returns.** The explicit floor, and the majority of it in
-   re-enterable content.
-4. **A release adds events, not places.**
+**Nothing in this skill is taste.** Every threshold traces to a measurement, and the measurement is
+inline in the script beside the number. When a threshold could not be defended it was demoted to a
+lint or deleted — that has now happened five times, and each demotion is recorded where the rule
+used to be.
 
 ---
 
-# PART 2 — THE ARCHITECTURE
+# PART 2 — WHAT IS BUILT
 
-## One skill, many agents
-
-Settled after examining fifteen prior agent runs in Vesper's ledger. **Every one was read-only**
-— audit, verify, diagnose — and they repeatedly caught real defects. The single time authoring
-was fanned out, that build was deleted: it had the doctrine and still went naive.
-
-> **Agents look. The owner decides.**
-
-Two rules govern the seam:
-
-- **Split by what must be REMEMBERED, not by what must be DONE.** If a task's complete input fits
-  on one page → agent. If not → the owner keeps it.
-- **Skills are memory. Agents are attention.** One doctrine library, many attention units.
-
-## The pipeline
-
-| phase | what happens |
-|---|---|
-| `want` | one page: who she is, the appetite that never fills, the ascent as *access*, the charge, why each person is wanted, the register |
-| `board` | the world — locations with fill budgets, characters with surfaces and schedules, three ratcheting tiers |
-| `first_release` | v0.1 builds the board; every gate green on the day it ships |
-| `release` | forever: pick subject → pitch → attack → write → gate → ship → log |
-
-## Three kinds of content
-
-Named from what DoL's release commits actually do:
-
-- **STANDING** — she can go there and act, repeatedly. Carries the explicit floor and the crude
-  register.
-- **TRIGGERED** — fires when her state matches (*"when exposed"*, *"at high stress"*). For a
-  female protagonist this is the main heat engine at low tiers.
-- **MILESTONE** — fires once, then opens standing content. Every one names what it turns on.
-
-## The meters — three layers, and WHO OWNS THEM
-
-Corrected mid-build when DoL's source refuted our first draft. It does **not** run one axis:
-
-| layer | evidence |
-|---|---|
-| **ratcheting tiers** (3–4) | promiscuity 22 raises / 1 lower, 206 gate sites · deviancy 20/0 · exhibitionism 12/1 |
-| **volatile state** | arousal — 277 sets, moves both ways constantly |
-| **per-character** | love + lust + disposition |
-
-Several tiers rather than one, because each names a *different* kind of going-further, so a
-player who does not want one can climb another.
-
-> ⚠️ **Corrected again 2026-08-19, and this row is n = 1.** Across 25 shipped sandboxes, **14 have
-> no player ascent tier at all** and the field's gating lives on the CAST (285 per-character meters
-> to 101 player-owned), splitting into two schools with nothing between them. Three-or-four tiers is
-> right for a `who_climbs = "player"` game and is not the default. The **15/35/55/75** rung spacing
-> that used to sit in this table was deleted from it: it is one game's seed spacing, and it reached
-> the lowest rung of **all 16 declared tiers across five v2 games**. Live doctrine:
-> `references/the-meters.md` W1–W6. Checks: gates 33 · 34.
-
----
-
-# PART 3 — WHAT IS BUILT
+⚠️ **No line counts in this table, deliberately.** They were quoted here until 2026-08-24 and went
+stale three separate times in a single day — including once inside the same session that wrote them,
+because two changelog entries were added after the number. A count of a file this skill edits every
+session is wrong by the end of that session. Run `wc -l` if you need one.
 
 ```
 .claude/skills/author-game-v2/
-  SKILL.md                    111   entry point, EXPLICIT-INVOKE ONLY
-  scripts/gates.py            605   the scoreboard — 10 gates + 1 non-scoring lint
-  references/engine.md        501   21 verified engine facts, each with file:line
-  references/the-board.md     285   the world, its fill rules, and the rotating slot
-  references/the-release.md   138   the unit of work
-  references/state.md         116   v2_state.json schema
-  references/agents.md        114   the roster (described, NOT built)
-  references/register.md      111   how to write an explicit beat, and how to sweep
-  references/the-want.md      102   the spec re-read every release
-  templates/board.toml        163   fillable, parses
-  templates/want.md            90   fillable
-  CHANGELOG.md              1,492   the full trail
-  STATUS.md                     —   this file
+  SKILL.md                             entry point, EXPLICIT-INVOKE ONLY
+  scripts/gates.py                     the scoreboard — 40 gates + 17 lints
+  scripts/genre_words.txt              the field's own vocabulary, for the word lint
+  references/engine.md                 36 verified engine facts, each with file:line
+  references/register.md               how the prose reads once they click
+  references/the-surfaces.md           which screen each piece of content lives on
+  references/the-meters.md             which meters exist and who owns them
+  references/the-first-hour.md         the opening, first meetings, first visits
+  references/the-board.md              the world, its fill rules, the rotating slot
+  references/the-clock.md              the time promised vs the time the engine keeps
+  references/the-economy.md            what money is for
+  references/the-voice.md              how the game talks about itself
+  references/the-map.md                the world as a place someone could draw
+  references/state.md                  v2_state.json schema
+  references/the-release.md            the unit of work
+  references/agents.md                 the roster (described, NOT built)
+  references/the-want.md               the spec re-read every release
+  templates/board.toml                 fillable, parses
+  templates/first-hour.toml       249   the opening shapes — a MENU, delete what you don't use
+  templates/want.md               133   fillable
+  DOCTRINE_GAPS.md             1,589   the studies, with their instruments and their errors
+  CHANGELOG.md                     —   the full trail — every edit, dated, with how it was verified
+                                       (no line count: it grows every turn, and quoting one guarantees
+                                        this inventory is wrong by the end of the same session)
+  STATUS.md                       —    this file
 ```
 
-## The ten gates
+## The scoreboard — 40 gates, 17 lints
 
-Every threshold traces to a measurement, inline in the script.
+**A gate scores. A lint prints a list and refuses to score.** The split is the discipline: if a
+threshold cannot be defended against a measurement, it does not get to fail a game.
 
-| gate | threshold | source |
-|---|---|---|
-| location fill | anchor ≥25%, median ≥3,000, mean ≥4,500 | DoL seed: 30.2% / 3,154 / 4,661 |
-| explicit floor | ≥7.5% of beats carry 3+ explicit words | DoL held 7.5–9.3% over 8 years |
-| explicit in repeatable | >50% | Vesper's failure: 95% sealed away |
-| repeatable explicit media | pools, never single files | DoL re-rolls 26- and 56-item pools |
-| traversal heat | ≥60% of locations carry a cycling pool | DoL seed: 17 of 25 (68%) |
-| standing surface | every character findable and scheduled | Vesper: `npc_bastien`, 88 refs, nowhere |
-| milestones open something | transitive, random ambients excluded | — |
-| meter ceiling | every band boundary must buy content | — |
-| ends on an opening | ≥1 `show_when_locked` | wants sell updates, questions don't |
-| ascent tiers expand | declared tiers must gate upward | Vesper's meter contracted the world |
+`n/a` is **not** a pass — a gate with nothing to judge is excluded from the tally, because an
+absence flattering an empty game is how v1's numbers lied.
 
-Three gates were **corrected during the build** when they proved wrong against their own
-evidence — the location floor (DoL failed it 24/25), the meter ceiling (twice), and vacuous
-passes on empty games. A gate that cannot be re-derived from the measurements does not belong.
+Five thresholds have been demoted or deleted for failing their own evidence:
 
-**Plus one lint, deliberately non-scoring.** Dialogue attributed to a character the canvas
-neither binds nor names in its id. It returns **3 on `back_home`** (two are the known-good
-opening; one is `shift_change_frontroom`, which renders correctly but is misnamed by house
-convention) and **28 on `vesper`**, clustered on the same `npc_bastien` the standing-surface
-gate already fails it for. A warning that can move a gate is a gate, so it never scores.
-
----
-
-# PART 4 — WHAT USING IT PROVED
-
-## The pipeline runs end to end
-
-Want → Board → TOML → merge → validate → package → **a playable HTML game**, driven headlessly
-through the age gate, an opening chain, schedule-gated hubs and applied trait effects.
-
-## Twenty engine facts, six of which break builds silently
-
-The most valuable single artefact. Highlights:
-
-- **An invented TOML key is silently ignored.** `clothingEffects` parsed, validated, built green
-  and granted nothing. The real key is `wardrobeEffects`. Nothing in the pipeline catches this —
-  the only defence is grepping the importer.
-- **`is_repeatable` defaults to TRUE** when absent (`v2.py:10937`, `:11010`).
-- **Three key asymmetries:** conditions say `trait_key`/`npc_id`, effects say `trait`/`npcId`.
-- **A flag read by a trigger *or a choice* must be set from a LOCATED canvas**, or the build
-  hard-fails. Hit twice — and the fix is to **move** the setter, never to duplicate it.
-- **Exit blocks need section syntax**; multi-line inline tables are a parse error.
-- **`worn_corruption` is a MAX aggregate, not a sum** — one loaded garment sets the tier.
-- **One repeatable canvas per location + NPC + time window** (§19). A second one is a *warning*,
-  not an error: it looks correct in TOML and is unreachable in play. Treat the warning as an error.
-- **`npc_at_location` takes an optional `npc_id`** (§20) — omit it and the predicate tests whether
-  the room is occupied by anybody. Verified live, not read.
-
-## A doctrine file that measurably changed authoring
-
-Four times, new explicit content scored near-zero and had to be rewritten after the gate caught
-it. Investigating why revealed the skill said *where* the crude register lives and *which words*
-were allowed — and **nothing about how to write the beat**.
-
-`references/register.md` states the rule and the diagnostic:
-
-> An explicit beat stays on the body for its whole length. If its last sentence is about what the
-> moment *means* rather than what is *happening*, it has pivoted and will fail.
-
-**Every increment written against it raised the floor rather than diluting it** — 9.4% → 10.0%
-→ 10.1% → 10.8%, then **15.9%** when the rule was finally applied *backwards* to the three
-repeatable sex loops that had shipped before it existed. All three opened explicit and scored
-zero on their tails; the fix added no gratuitous nouns, it just kept the camera on the body to
-the last sentence. First evidence in this project that a written rule changes output.
-
-**Two words that are NOT on the frozen list:** `wet`, and `come` — the latter excluded on purpose
-because it matches "come downstairs". Beats that lean on both can read filthy and still score 2.
-
-## Bugs only live play could find
-
-- A **soft-lock**: the opening landed at 17:18, sleep was gated 21:00+, and navigation does not
-  advance the clock — every scheduled window in the game was unreachable, forever.
-- A **cold start**: two characters used the bathroom on weekdays only while the game began on a
-  Friday, leaving the core mechanic dead for three in-game days.
-- A **mis-attributed dialogue** block that would have rendered the wrong character's name.
-- **The documented build command was wrong** in two files and had shipped that way since the
-  first release. A skill that cannot build the game it authored is a broken skill.
-
-For whoever writes the next harness: `State`/`Engine` are not bare globals (use
-`SugarCube.State`, `SugarCube.Engine`, `SugarCube.setup`); `$flags` is an **object**, not an
-array; player traits live at `player.core_traits`.
-
-## And a property of ratio gates
-
-The anchor requirement **tightens as you work elsewhere**. Held at a fixed size while six other
-rooms were written, the anchor's share fell **53% → 34%** without a word being removed. Phase 1
-then took the front room 5,123 → 9,607 words, budgeting it against the *finished* 36,000-word
-total rather than the current one — and the share went to **51%**, with room to survive the
-remaining fill. Budget the anchor against the finished total, or you write it twice.
-
----
-
-# PART 5 — WHERE THE TEST GAME STANDS
-
-> **2026-08-11 — `back_home` v0.1 is GREEN. 10 of 10 gates, exit code 0.** The section below this
-> banner is the record of how it got there and is left standing; the numbers in it are superseded by
-> the table immediately following.
-
-`games/back_home` — **97 canvases, 8 locations, 4 characters, 36,035 words** of location prose,
-12,515 lines of TOML. `phase` is now **`release`**.
-
-| gate | |
+| what | why it fell |
 |---|---|
-| location fill | **PASS** mean 4,504 · median 4,381 · anchor `the_front_room` 27% |
-| explicit floor | **PASS** 27.8% of 270 beats |
-| explicit in repeatable | **PASS** 100% of 75 |
-| repeatable explicit media | **PASS** 49 pooled, 0 fixed |
-| traversal heat | **PASS** 7/8 (88%) — `the_shop` cold by design |
-| standing surface | **PASS** 4/4 |
-| milestones open something | **PASS** 4/4 |
-| meter ceiling | **PASS** |
-| ends on an opening | **PASS** 8 locked rungs |
-| ascent tiers expand | **PASS** all three |
-
-Vesper, the control, still scores **1/10** on the same instrument.
-
-**Six fill increments, +17,153 words, and three of them changed the skill rather than the game:**
-the `clamp` bug that made the rent unpayable (`engine.md` §21), *a category name is not a sweep*
-(`register.md`), and *the rotating slot must be split by content lifetime* (`the-board.md`).
-
-**Still open:** the explicit-floor denominator question (28% against a band whose denominator may
-not match ours), media (47 declared `pool_dir` slots, zero files), and the agents.
+| location floor (≥10,000 words/room) | the reference game failed it **24 times out of 25** |
+| meter ceiling | wrong twice |
+| R5 (ungated-choice ceiling) | at 50% one game passes at 50.0% and another fails at 52% — noise being scored |
+| R6 (opener variation) | measured a practice nobody follows; the reference game's openers are *never* conditional |
+| the v1 dialogue rule | killed by a **broken instrument** — a quote-counter that could not see `<<say>>`. Re-measured properly, restored |
 
 ---
 
-## The historical record — how it looked mid-run
+# PART 3 — HOW WE MOVED
 
-`games/back_home` — 66 canvases, 8 locations, 4 characters, 14 schedule rows, 9 wardrobe items,
-**18,882 words** of location prose, 8,207 lines of TOML across the phase files.
+The arc matters more than any single number, because it repeats.
 
-**9 of 10 gates pass.**
+### 1 · Derived from ONE game → 10 gates
 
-| | |
-|---|---|
-| explicit floor | **PASS** 15.9% of 176 beats |
-| explicit in repeatable | **PASS** 100% of 28 |
-| repeatable explicit media | **PASS** 28 pooled, 0 fixed |
-| traversal heat | **PASS** 7/8 (88%) — `the_shop` is the cold one, by design |
-| standing surface | **PASS** 4/4 |
-| milestones open something | **PASS** 4/4 |
-| meter ceiling | **PASS** |
-| ends on an opening | **PASS** 4 locked rungs |
-| ascent tiers expand | **PASS** all three gated |
-| **location fill** | **FAIL** — mean 2,360 (need 4,500), median 1,496 (need 3,000) |
+v2's doctrine came from measuring the seed source of Degrees of Lewdity. `games/back_home` was
+built against it and scored **10/10**.
 
-Vesper, as the control, scores **1/10** on the same instrument: 27 locations, 42,684 words, mean
-1,581, median 674, anchor 26%, explicit floor 4.7% of 578 beats, and only 14.8% of its explicit
-beats re-enterable.
+### 2 · LO played it → 21 defects the scoreboard could not see
 
-**Status: in progress.** The one failing gate is location fill, and it is a fill problem rather
-than a design problem. No location needs inventing and no character needs adding — the eight
-rooms and four characters that exist need more written inside them.
+The corner shop was one step from the sofa. Three of four men had no bedroom. The guidance page was
+empty behind a live sidebar entry. Money was unbounded against the one obligation in the game.
 
-**The anchor is no longer the constraint.** `the_front_room` sits at **51%** after Phase 1, well
-clear of the 25% floor and budgeted to survive the rest of the fill. The work is now the seven
-satellites, thinnest first:
+> **Root cause: a doctrine derived by measuring one game cannot contain anything that game lacks.**
 
-| location | words | job |
+### 3 · Widened to a field of 18 shipped sandboxes
+
+Four studies in `DOCTRINE_GAPS.md`. The checkable half became gates. 10 → 17.
+
+### 4 · Widened again to 25 mopoga sandboxes
+
+58,163 passages. Produced register.md's six screen kinds, the media floors, the narration:dialogue
+ratio, and the sentence ceiling. Two instrument corrections had to be made first, and **both are
+recorded, because they are why earlier studies of the same corpus got it wrong**.
+
+### 5 · `the_season` built with all of it → 39/40
+
+The most-instrumented game we have ever authored.
+
+### 6 · LO played it → *"I don't know who is who"*
+
+**The same failure as step 2, one level up.** Nothing on a 40-gate scoreboard asked whether a new
+player knows who these people are. What followed came from him playing, not from a number:
+
+- a **cast page** — shipped as an engine feature, revealed by the same quest-card gate as the
+  guidance page, so there is no second gate to keep in sync
+- **quest cards gated on having met the person** — no more spoilers on turn one
+- the fake *"✓ Arc complete"* killed — it was `terminal` alone, never computed from progress
+- **five introductions that fired in empty rooms.** Root cause was not the author: the TOML schema
+  comment told authors to delete the schedule, and the skill's own doctrine said the opposite. The
+  schema wins, because the schema is what is open while you type. Now gate G38.
+
+### 7 · LO asked how we measure a *good* game
+
+The honest answer: **we do not.** We measure "broken in a way we have seen before." Forty gates
+catch old mistakes and have never once found a new one.
+
+### 8 · Stopped counting. Started READING.
+
+Four top female-PC games read **in source** — Course of Temptation (mopoga rank 5), Degrees of
+Lewdity (7), Zara's School Life (22), Family Ties (24).
+`~/Documents/Female_PC_Craft_Study_20260823/`
+
+**The shape of the whole arc:** the evidence base keeps widening (1 game → 18 → 25) *and* the
+reading keeps deepening (counted → read). **Neither has ever replaced LO playing it.** Assume it
+never will.
+
+---
+
+# PART 4 — THE GAMES
+
+Re-scored 2026-08-23, one pass over every game directory.
+
+| game | score | note |
 |---|---|---|
-| `the_shop` | 654 | money that is hers, and the world that does not know |
-| `the_garage` | 801 | the private male space |
-| `the_box_room` | 1,228 | the renewable slot — a stranger the other side of her wall |
-| `the_landing` | 1,367 | the vantage; a corridor, legitimately thin |
-| `her_room` | 1,496 | her base, half storage, the door catch broken |
-| `the_kitchen` | 1,775 | the crossing point |
-| `the_bathroom` | 1,954 | the occupancy engine — one bathroom, four adults |
+| **the_season** | **39/40** | newest, v2, 0.1 shipped. Only red: `location fill` — 4,412 words against 15,500 declared |
+| **off_season** | **39/40** | v2 |
+| the_allowance | 30/38 | |
+| seventh_day | 29/38 | |
+| forty_miles | 25/36 | |
+| steam | 18/35 | |
+| last_call | 17/30 | v1 |
+| the_inheritance | 16/29 | v1 |
+| the_long_summer_test | 16/32 | |
+| back_home | 15/33 | the original 10/10 game |
+| late_shifts | 13/31 | v1 |
+| **vesper** | **12/32** | v1, **shipped and released**. LO's standing rule: *never* updated here |
 
-Roughly **17,000 more words** closes gate 1 and makes this v2's first green game.
+Seven games carry a `v2_state.json` ledger: `back_home · forty_miles · off_season · seventh_day ·
+steam · the_allowance · the_season`.
+
+⚠️ **A high score is not a good game, and the two 39/40s prove it.** `the_season` scored 39/40 while
+a new player could not tell who anyone was.
+
+---
+
+# PART 5 — WHAT THE FIELD STUDY FOUND (2026-08-23)
+
+Full findings: `~/Documents/Female_PC_Craft_Study_20260823/`
+— `findings_A_want.md` · `findings_C_loop.md` · `findings_D_writing.md` ·
+`gender_verdicts.md` · `per_game/course-of-temptation.md` · `proposal_for_skill.md`
+
+## Step 0 — the corpus is not what we assumed
+
+**There are only three clean female-PC games in the mopoga top 30**, plus one
+selectable-with-female-default. **The genre's top ranks are mostly male-PC games in which women are
+the content.** Any plan that says "study the top 30 female-protagonist games" is planning against a
+set that does not exist.
+
+## The finding that landed
+
+**Three of the four build every repeatable sexual surface out of a pool of one-sentence variants,
+and none of them writes such a scene as a paragraph.**
+
+| game | mechanism | scale |
+|---|---|---|
+| Course of Temptation | `<<switch setup.rir(0, 3)>>` | 164 named acts × 3 phrasings, one passage of 194,874 chars |
+| Family Ties | `either("…", "…", …)` | 12 poses × ~10 lines, plus ~10 of his dialogue |
+| Degrees of Lewdity | a **deterministic** grid on two meters | 99 `actions*` widgets |
+
+**Our engine has had the same primitive since v2 shipped** — `block_pool` (`v2.py:14572`) — and
+the audit found something worse than "we never knew": **the_long_summer 46 · under_one_roof 14 ·
+vesper 6 · every v2 game 0.** v1's corpus carried **Rule 17** for it and named the failure exactly
+(*"the same text every morning problem"*). v2's skill mentioned it once, in a list of block types,
+for its whole life — it was lost when the skill was divorced from a corpus that taught false engine
+facts, and nothing checked what was in the discarded half.
+
+> Their act prose is **thinner** than ours and they rank higher. Their variety is structural; ours
+> is manual. Structure survives the fiftieth visit; effort cannot afford to.
+
+## What shipped into the skill
+
+| change | file |
+|---|---|
+| **§35 `block_pool`** — the variant pool, fully cited | `engine.md` |
+| **The reason axis** — *the same act, reached two ways, is written two ways, and the difference is WHY she is doing it, not how hot it is* | `register.md` |
+| **The two-halves sentence** — his meter writes the first clause, hers the second; nine outcomes from six clauses | `register.md` |
+| **Lines by personality, not by person** | `register.md` S3 |
+| **R6 mechanism 5** — variant pools, the mechanism the field leans on hardest | `the-surfaces.md` |
+| **R5b** — the decline branch is written at full length and paid | `the-surfaces.md` |
+| **W5b** — the audience meter: it rises, and it refuses at 2% of 644 field read sites | `the-meters.md` |
+| **R5b.2** — a refusal that can never fail is a menu item | `the-surfaces.md` |
+| **R6 mechanism 6** — reputation as a casting filter: who is standing there | `the-surfaces.md` |
+| **§36 `rejection_node`** — the locked choice that stays clickable, used by 0 games | `engine.md` |
+| a self-contradiction removed (adjacent-`[group]` merging was "unverified" in one file and fact in another) | `engine.md` |
+| **R8** — a person owns a corner of the world, **and the schedule has to agree** | `the-surfaces.md` |
+| **S3 · one term of address per person** — the stated exception to "lines by personality, not by person" | `register.md` |
+| **W6 · the meter is a trade, not a bonus** — plus the W5 / W5b / W6 cross-pointer | `the-meters.md` |
+| **§34 `[[npcs]] tags`** — the four-word cast-card line. **The one ENGINE change**: new field, capped at 4, shipped via `setup.npc_tags` | `engine.md` + `template_import.py` + `game_graph.py` + `v2.py` |
+| **§34 · the colour we do not ship** — recorded as a known difference, deliberately unbuilt | `engine.md` |
+| **H and G converge** — differentiation is many small swaps (139 / 84 / **114** chars), not few large branches | `SKILL.md` |
+| **A per-NPC field has TWO write sites** — `game_graph.py` is the one the default build takes | `SKILL.md` + `engine.md` §34 |
+| three stale citations corrected — `v2.py:14631`→`:15003`, `engine.md` §29→§34, `v2.py:1027`→`:1031` | `engine.md`, `the-first-hour.md` |
+
+**No gate was added. `gates.py` was not touched.**
+
+⚠️ **The verification count is 21, not 27 or 28.** Both earlier numbers were wrong and the error is
+the same each time: `games/` holds **28** directories with a `toml_phases/`, but only **21** carry a
+merged `7_final_game.toml`, and `gates.py` needs that file. The other seven (`jacks_world`,
+`media_testbed`, `new_in_town`, `test_customize`, `the_long_summer`, `two_weeks`,
+`under_one_roof`) have never been merged. **Count the merged file, not the directory.**
+
+## What the study REFUSED to add
+
+- **No rule about opening length.** The range is 109,714 characters (rank 5) to one paragraph of
+  safety instructions (rank 7). **Two of the top seven at opposite extremes.** Any rule would be invented.
+- **The pivot rule was tested and CONFIRMED, not loosened.** Zara's School Life folds heavy
+  interiority into its acts and never leaves the body. Not a pivot by the rule's own definition.
+- **A proposed instrument fix was tested and DROPPED.** The proposal said `gates.py` over-counts
+  pooled variants. Measured across ten DoL location passages: **9,652 of 9,886 words (98%) of its
+  location prose sits inside a conditional branch** (a ten-passage spot check, not a whole-game
+  figure) — so folding *is* the apples-to-apples comparison against the baseline that set the
+  threshold. Recorded in `engine.md` §35 so it is not re-proposed.
 
 ---
 
@@ -319,85 +261,70 @@ Roughly **17,000 more words** closes gate 1 and makes this v2's first green game
 
 | | |
 |---|---|
-| **The agents** | Pitchers, attack panel, prose maker, player — all still prose in `agents.md`. No prompts, no schemas, no call sites. `scripts/` contains only `gates.py`. **Now the biggest hole by a distance.** |
+| **The agents** | Pitchers, attack panel, prose maker, player — all still prose in `agents.md`. No prompts, no schemas, no call sites. `scripts/` contains `gates.py` and a word list. **Still the biggest architectural hole.** |
 | **Evals** | None. "v2 beats v1" cannot be scored. |
 | **A cold reader** | Only one person has ever run the skill. |
-| **Media** | 47 declared `pool_dir` slots on `back_home`, **zero files on disk.** Gate 4 judges declarations, so the game is green without them; it is not *playable-shippable* until they are stocked. Deferred by LO until after he plays it. |
-| **The floor's upper comparison** | The game reads 28% against a reference band of 7.5–9.3%. `gates.py` measures **location prose only**; the reference figure cites whole-source unit counts. If those denominators differ, the two are not comparable at the top end — and no snapshot is on disk to check. Either re-derive it location-only or say plainly in `gates.py` that the floor is a floor. |
-| **Four engine facts** | Still on the do-not-cite list in `engine.md`. |
+| **`the_season`'s fill** | 4,412 words against 15,500 declared. Its one red gate, and the real problem with the game. |
+| **`the_season`'s `known`** | Rises and repaints a quest card. **7 read sites in 111 passages**; zero in the locations, zero in the one-shots, and a median branch of 570 chars against the field's 84–139. Measured in `findings_H_known.md` §6. |
+| **`block_pool` in practice** | Now documented in four places and used by **zero** v2 games. Doctrine without a worked example is a suggestion. |
+| **Three engine facts** | Still on the do-not-cite list in `engine.md`. |
+| **Eight study sections** | See PART 7. |
 
-*(Shipped off this list: the dialogue-attribution lint — `gates.py:605`; the
-`shift_change_frontroom` rename; **and a green game.**)*
-
-## Promotion criteria — **NO LONGER MET, and the criteria themselves were wrong**
-
-### What changed, 2026-08-12
-
-The criteria below were met on 2026-08-11 by `games/back_home` at 10/10. LO then played it, and a
-read-only audit found **21 defects** the scoreboard could not see: the corner shop was one step from
-the sofa, three of four men had no bedroom, the guidance page was empty behind a live sidebar entry,
-and money was unbounded against the one obligation in the game.
-
-Root cause: **v2's doctrine was derived by measuring one game, and a doctrine built that way cannot
-contain anything that game lacks.** Four studies (`DOCTRINE_GAPS.md`), two of them measured across a
-**field of 18 shipped sandboxes**, are now doctrine, and their checkable half is now in `gates.py`.
-
-**`back_home` scores 12/17, exit 1.** The ten original gates all still pass; every new failure is a
-defect it shipped with. Nothing about the game changed — only what we can see.
-
-| criterion | `back_home` v0.1 |
-|---|---|
-| location fill (distribution) | **mean 4,504 · median 4,381 · anchor 27%** ✅ |
-| ≥7.5% beats at 3+ explicit | **27.8% of 270** ✅ *(and see below — the ceiling reading was wrong)* |
-| majority of explicit repeatable | **100% of 75** ✅ |
-| world reachable · sentence length | ✅ |
-| **residents have homes** | ❌ `board.map` not declared |
-| **guidance exists** | ❌ 0 `[[quest_cards]]` for 3 tiers and 4 characters |
-| **money gates something** | ❌ 0 conditions read the currency |
-| **sinks ≥ sources** | ❌ 1 sink : 12 sources |
-| **no free uncapped income** | ❌ 1 standing surface prints money |
-| a release that adds zero locations | ⏳ still not demonstrated |
-
-### The criterion that was missing
-
-*"One game passes all the gates"* is insufficient on its own — it was satisfied by a game with 21
-defects, because a scoreboard agreeing with itself proves nothing. **Add: a human played it end to
-end and it held up.** That is now the binding one, and it has not happened yet.
+## Promotion criteria — still NOT met
 
 The description stays **EXPLICIT-INVOKE ONLY**.
 
-### One thing that got *better*, not worse
+The original criterion — *"one game passes all the gates"* — was satisfied by a game with 21
+defects, and then again by `the_season` at 39/40 that a player could not navigate socially.
 
-The heat worry recorded here for weeks is dead. `EXPLICIT_BEAT_FLOOR = 7.5` was measured on
-whole-source passages (15,587 of them) while our gate counts location-prose beats — different
-denominators — **and** across 18 shipped games the reference is the **coldest in its own genre**
-(7.5% against a 33.3% field median). `back_home` at 27.8% was never too hot. No dilution pass is
-owed, and `register.md` and `gates.py` now both say so in place, so it does not get re-litigated.
+> **The binding criterion is now: a human played it end to end and it held up.** It has not
+> happened yet.
 
 ---
 
 # PART 7 — WHAT IS NEXT
 
-v0.1 is green and `phase` is `release`. The paths have changed shape:
+## A · The eight open study sections
 
-**A. LO plays it.** His call and the gate before everything else. Nothing in `gates.py` measures
-whether the thing is any good to play, and one person clicking through it for an hour will find
-more than the scoreboard can.
+Eleven were scoped; LO picked three. **A (the want), C (the loop) and D (the writing) are done.**
 
-**B. Build the agents.** Now unambiguously the largest architectural gap. Pitchers first — three
-independent takes with no shared context, which is the capability v1 most visibly lacks. Note for
-the Player agent's spec, learned expensively across six increments: **forbid page-text assertions
-outright**, bake in that the clock is `game_state.time_state`, that a repeatable canvas renders as
-a clickable action rather than an auto-fire, and that there are *two* per-day ledgers.
+| | section | state |
+|---|---|---|
+| **B** | the first fifteen minutes | **partly** — A ate most of it. Missing: what day one *refuses* to let her do, and how it says no |
+| **E** | how she gets from no to yes | **partly** — D found the refusal costs and Zara's consent fork. Missing: the systematic view |
+| **F** | going further | **partly** — C found the two shapes (menu grows vs. event escalates internally). Missing: rungs and spacing |
+| **G** | the people | **DONE 2026-08-24** — `findings_G_people.md`. The field's answer is a UI component fired tens of thousands of times (a speaker macro is the **#1 macro in the whole game** in 7 of 25 — face + name + colour on every line), a label that encodes the relation (Stepmom · Aunt · Granny · Dr. Angela), **one term of address per person** (5–18% of their lines, never shared), and **a corner of the world each person owns**. `the_season` writes the voices well and then schedules **all four men into the camp every night** |
+| **H** | does the world know? | **DONE 2026-08-23** — `findings_H_known.md`. Reputation refuses almost nothing (14 of 644 field read sites, 2%); it is read constantly and swaps ~25-word lines. `the_season`'s `known` has **7 read sites in 111 passages** |
+| **I** | the body as a machine | **untouched** — clothes, arousal, hygiene, pregnancy: which are systems and which are decoration |
+| **J** | what players say | **DONE 2026-08-23** — `findings_J_players.md`. ⚠️ This row previously read *"untouched"* and **that was wrong**: the 2026-07-24 mopoga study already read 22,622 comments across 31 games and published F1–F10 from them. J was narrowed to testing *this week's* doctrine against 3,479 comments on the four study games |
+| **K** | the mirror | **untouched, and must be last** — it is the synthesis, not a section |
 
-**C. Ship release 0.2 — zero new locations.** The fourth promotion criterion, and the one thing
-v0.1 by its nature could not demonstrate. There are five unpaid content plants in the ledger and
-eight locked doors, so the backlog exists; per the operating rules, do **not** rank it by what is
-cheap to build.
+**Four are done: A, C, D, H, J and G.** The J-then-H recommendation that used to sit here is
+deleted — it was written before either ran, both are finished, and the order ended up reversed
+because checking the data first showed J was largely a re-run.
 
-**D. Run the corrected gates against Vesper.** It shipped, it scores 1/10, and the scoreboard has
-never been used to plan repairs on it.
+**G ran next because LO had already found its defect by playing** — *"I don't know who is who"* is
+the section's question in a player's words, and it was the only complaint about `the_season` that
+came from a human rather than a gate.
 
-**Recommendation: A, then B, then C.** The playthrough is cheap and changes what B and C should
-contain; the agents are the capability everything after this depends on; 0.2 is what actually
-closes promotion.
+**Left: B, E and F (each partly answered by A/C/D), I (untouched), and K (the synthesis, last).**
+**I** is the one genuinely untouched system question — clothes, arousal, hygiene, pregnancy, and
+which of them are systems rather than decoration.
+
+## B · The other work, unchanged in priority
+
+1. **`the_season`'s fill.** Its one red gate. 4,412 of 15,500 words.
+2. **Build the agents.** Still the largest architectural gap. Pitchers first — three independent
+   takes with no shared context, the capability v1 most visibly lacks. For the Player agent's spec,
+   learned expensively: **forbid page-text assertions outright**, bake in that the clock is
+   `game_state.time_state`, that a repeatable canvas renders as a clickable action rather than an
+   auto-fire, and that there are *two* per-day ledgers.
+3. **A release that adds zero locations.** Never demonstrated, and it is what the release model
+   claims to be for.
+4. **A worked `block_pool`.** The doctrine is written; nothing has been authored against it.
+
+## The operating rule that outranks all of the above
+
+**LO plays it.** Every real advance in this skill's history came from him clicking through a game
+for an hour, not from the scoreboard. Twice now the scoreboard has been green while the game was
+not good. Plan for a third.

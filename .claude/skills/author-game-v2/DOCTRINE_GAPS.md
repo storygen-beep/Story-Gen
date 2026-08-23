@@ -406,8 +406,8 @@ all five phase files; the built game carries `setup.quests_cards = []`. So the s
 **Quests 📋**, and behind it a page headed *"What's Next"* with nothing under it.
 
 **G2 — seven of eight locked doors say nothing.** Only `hub_cal_frontroom` carries `locked_text`.
-`v2.py:12747` falls back to the choice text (`locked_text or choice_text`), so the other seven render
-as a greyed copy of themselves. `locked_text_threshold` (`v2.py:12786`), which prints an explicit
+`v2.py:13146` falls back to the choice text (`locked_text or choice_text`), so the other seven render
+as a greyed copy of themselves. `locked_text_threshold` (`v2.py:13185-13186`), which prints an explicit
 *"Requires …"*, is used **zero** times.
 
 **W5 — two of eight room names are unresolvable.** *The Landing* is British for an upstairs hallway
@@ -533,8 +533,8 @@ None of this is in v2's engine reference. Verified this turn.
 | card selection: `pickQuestsCards(scope)` for the top tier, `pickQuestsCard(slug)` returns the single highest-`priority` match per character | `v2.py:14837`, `:14065` |
 | **quest conditions use a different evaluator and do NOT fail open** — never paste `version = "1.0"` onto a card | `v2.py:14878` `checkQuestsCondition` |
 | the sidebar next row calls the identical functions — there is no separate "sidebar quest" | `v2.py:15454-15456` |
-| a locked choice with no `locked_text` falls back to the choice text | `v2.py:12747` |
-| `locked_text_threshold` prints an explicit "Requires …" hint | `v2.py:12786` |
+| a locked choice with no `locked_text` falls back to the choice text | `v2.py:13146` |
+| `locked_text_threshold` prints an explicit "Requires …" hint | `v2.py:13185-13186` |
 
 ## 5 · The check
 

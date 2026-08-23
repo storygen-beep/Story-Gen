@@ -8,7 +8,9 @@ is about *what* the meter unlocks. This one is about the meters themselves.
 **W1–W6 — which meters exist and who owns them.** The decision that comes before every other one on
 this page: does the PLAYER climb or does the CAST, what a throttle is actually for, how deep a
 ladder goes, and whether a number anything reads. Missing entirely until 2026-08-19, which is why
-five games shipped the same meters without anyone choosing them.
+five games shipped the same meters without anyone choosing them. **W5b** (2026-08-24) covers the
+one meter that breaks W5's rules on purpose — a *"who knows about her"* meter, which rises and
+almost never refuses.
 
 **M1–M7 — the ascent, and what it costs to raise.** Missing until 2026-08-16, and the difference
 between an ascent and a button.
@@ -245,12 +247,118 @@ colours a paragraph and opens no door.
 Do not take one because the template offered one. If you take one, it shuts a door — the same test
 `needs` gets at M9, for the same reason.
 
+⚠️ **This rule is about a meter that runs DOWN and closes things off.** A *"who knows about her"*
+meter that rises is a different animal and fails this test on purpose — in the field it refuses the
+player at 2% of its read sites. See **W5b**, and do not apply the shuts-a-door test to it.
+
 **Lint · the counterweight.** Heuristic, which is why it is a lint: a player trait starting at 50+
 whose effects mostly fall, declared needs excluded. It prints how many times the thing is read.
 
 ---
 
+## W5b · The audience meter — it rises, and it almost never refuses
+
+W5 is about a meter that runs **down** and shuts doors. A *"who knows about her"* meter runs the
+other way, and measuring the field on 2026-08-23 showed it obeys none of W5's rules. It got its own
+entry because `the_season` shipped one, asserted its own doctrine at
+`0_systems_spec.toml:100` — *"known RISES AND WIDENS ... content, not punishment"* — and had no rule
+to check it against.
+
+### It is optional. Take it only if being found out is the fantasy
+
+`family-ties` is rank 24, 204 passages, heavy sexual content, **267 distinct variables** and not one
+of them tracks reputation. Its fantasy is the act; it spends its variables on the act (28 sex
+positions). **There is no obligation to have this meter**, and a game that would rather spend the
+same effort elsewhere is following the field, not defying it.
+
+### If you take one, its job is that people already know — not that a door is closed
+
+Every `<<if>>` in three field games whose condition names a reputation variable, classified by what
+its branch actually contains (`findings_H_known.md` §1):
+
+```
+644 read sites          opens a link  17%     colours prose  81%     REFUSES  2%   (14 sites)
+```
+
+Fourteen. **A reputation meter is not a lock.** What it buys is a stranger who already knows:
+
+```
+$fame.prostitution gte 400   ->  "Hope you don't mind that I'm not paying for it."
+$fame.rape gte 400           ->  "You like it rough, right? That's what I've heard."
+$fame.exhibitionism gte 500  ->  "I think the town's pervs have missed you."
+$fame.scrap gte 400          ->  "Very scary. But there's scarier behind us."
+```
+
+⚠️ **W5's test does not apply here.** W5 says a counterweight earns its place by shutting a door —
+*"if nothing shuts when it is low, you have charged them for nothing."* That is correct for a
+falling counterweight and wrong for this. **W5 owns the meter that closes; W5b owns the meter that
+talks.** If you find yourself gating content behind a rising audience meter, you have built W5's
+thing and should read W5's test instead.
+
+### Its reads are one-line swaps, and that is why there are hundreds of them
+
+```
+degrees-of-lewdity   610 read sites   median branch  139 chars   (~25 words)
+zaras-school-life     23 read sites   median branch   84 chars
+the_season             7 read sites   median branch  570 chars
+```
+
+**The branch size is the cause and the count is the symptom.** `the_season` treats a `known` check
+as a reason to write an alternate *block*, so it can only afford seven — none of them in a location,
+none in a one-shot. The field treats it as a reason to swap one line of dialogue, so it can afford
+six hundred.
+
+A player states the failure from the other side, about a game whose corruption meter moved in
+silence (`findings_J_players.md` §6):
+
+> *"add some sort of questline, or **even just a few lines of dialogue**, for the family members when
+> you reach certain corruption thresholds. Right now it just feels like **a switch was just turned on
+> somewhere** and suddenly everyone's okay with it."*
+
+> **A meter that rises without anyone in the world saying so reads as a switch being flipped.**
+
+### Split it — one global number is the degenerate case
+
+Degrees of Lewdity splits on two axes at once:
+
+```
+WHAT she is known for   $fame.<kind>, 14 kinds — model · exhibitionism · sex · scrap · prostitution
+                        bestiality · social · rape · pimp · business · pregnancy · good · impreg · dance
+WHERE it is known       $pubfame (the town) · $schoolrep (the school)
+```
+
+At minimum split by *what*. Better, and closer to the strongest architecture in the field, split by
+*who*: Course of Temptation holds reputation **per person** (`pinfo.rumors[type]`), so one character
+knowing is not the room knowing. Expressible here with per-NPC traits and flags (`engine.md` §8).
+
+**Two mechanisms worth stealing if you split by person:**
+
+- **Opposites cancel before they accumulate.** CoT pairs `promiscuity ↔ reservedness` and
+  `kindness ↔ meanness`; raising one *drains* the other first. She cannot be known as modest and
+  known as easy at once — a new reputation eats the old one.
+- **Intimacy buys silence.** `juiciest_rumor` returns nothing for anyone in a friendship or romantic
+  relationship. Who *won't* talk is as designed as who will.
+
+### Positive bands are not decoration
+
+`.good` and `.social` are tracked in the same structure as the lewd kinds and do real work: being
+known as decent is what lets someone find her passed out in the cold and help
+(`Widgets Temperature Passout`). `.scrap` — known as someone who fights — re-colours a threat scene.
+**A reputation system that only counts what she is ashamed of is half a system.**
+
+### Not a gate
+
+Three games is not a field. There is no threshold here and `gates.py` is unchanged.
+(`~/Documents/Female_PC_Craft_Study_20260823/findings_H_known.md`)
+
+---
+
 ## W6 · The cast's meters — light or load-bearing, and W1 decides which
+
+> **Which of the three this is.** W5 is the **counterweight** — one falling number that shuts doors.
+> W5b is the **audience meter** — it rises, it is read constantly, and it almost never refuses.
+> **W6 is the cast's own gating meters**, one set per character, and it is the only one of the three
+> that is per-person. A rule from any of the three does not transfer to the other two.
 
 The default the template shipped is `core_traits = { relation = 0, lust = 0 }` on every character.
 Measured, all five v2 games: **one distinct meter shape across the whole cast, every time.**
@@ -278,6 +386,51 @@ Two more rules that survive from v1 and are worth restating:
   every character dilutes the core and triples the authoring.
 - **A character who gates nothing is not in the game yet.** `the_allowance` ships two of five
   characters with a full meter pair and **zero** gate sites on either.
+
+### The meter is a trade, not a bonus
+
+Added 2026-08-24 from Section G. Above, W6 says an identical meter pair across the cast is *the
+engine missing*. This is the half that was missing from W6 itself: **picking a different meter is
+not enough if every meter only ever opens things.**
+
+`inseminator` ships its own design spec as a player-facing help page. Six relationship traits, each
+a one-line character summary plus three to five numeric modifiers — and **five of the six make one
+route cheaper and another route more expensive**:
+
+| trait | who she is | what it buys | what it costs |
+|---|---|---|---|
+| **Romantic** | "Believes in true love" | +10% girlfriend, roses +4 affinity | **−15% polyamory** |
+| **Clingy** | "Needs constant attention" | +20% girlfriend, +2/mo if dated | **−30% polyamory, −3/mo if ignored** |
+| **Independent** | "Values her freedom" | +20% polyamory | **−10% girlfriend, −15% estate, decay doubled** |
+| **Jealous** | "Possessive and suspicious" | +5/mo if dated | **+20% jealousy event, +10% breakup** |
+| **Precious** | "Innocent and harder to seduce" | +20 Matron | **−5/−10/−15% flirt/kiss/sex** |
+| Loyal | "Devoted and faithful" | never breaks up | — |
+
+> **A meter that only opens things is a stat wearing a personality's name.**
+
+Two mechanics from the same page worth having:
+
+- **A trait can be spent.** `Precious` carries a loss condition — *"Lost when: Affinity drops below
+  20 OR has 3+ children."* The personality is consumed by the thing it was gating.
+- **A trait can be inherited** — each carries a 30–60% chance of passing to children. Not something
+  we need, but it is the proof the author treated these as properties of a *person*, not of a slot.
+
+And the cheapest illustration in the corpus, from `degrees-of-lewdity`'s creature generation — the
+same tag moves a number **and** writes a line:
+
+```
+<<if traits.includes("territorial")>>
+    <<set healthmax += 125>> <<set skills.security += 100>>
+    ...
+    "This is my territory. You'll pay for this trespass."
+```
+
+**A tag that only moves the stat is invisible. A tag that only writes the line is decoration.**
+
+**Ours:** `the_season` fails both halves. Wade and Prine run the **identical** pair —
+`{ ease = 0, want = 0 }` on each — so two of the four men are mechanically the same person. Boyd
+runs `{ owed = 0 }`, Emmett `{ seen = 0 }`, and Rae runs nothing at all. None of the four is a
+trade; every one of them only rises and only opens.
 
 **Lint · the cast's meters.** Per character: which meters they own and how many gate sites each
 carries, plus how many distinct shapes exist across the cast.
