@@ -120,6 +120,24 @@ conditions    = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "met_rae", operator = "is_false" },
 ] }
 
+# ⚠️ THE WINDOW IS WHAT STOPS THIS FIRING IN AN EMPTY ROOM — not `requires_npc`.
+#    selectAutoFireCanvasForLocation -> isCanvasValid (v2.py:4559) reads schedules,
+#    conditions and repeatability and NEVER reads requiresNpc; the field is consumed
+#    in exactly two functions, checkRandomEncounters (v2.py:5245) and
+#    checkAndSubstituteCanvas (v2.py:5318), and neither is this path. Shipped without
+#    one: this fired at the camp at 06:10 on a Saturday with Prine out in the rows.
+#    Keep requires_npc anyway — it is free and it documents intent. the-first-hour.md F5.
+# Rae's two yard rows. The first covers the 05:05 handover out of the opening.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "05:00"
+end_time   = "08:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time   = "20:00"
+
 [[canvases.nodes]]
 id   = "coffee"
 name = "Coffee"
@@ -162,6 +180,17 @@ conditions    = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "met_wade", operator = "is_false" },
 ] }
 
+# Wade's two row blocks — before the bell and after it.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "06:00"
+end_time   = "12:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "13:30"
+end_time   = "18:30"
+
 [[canvases.nodes]]
 id   = "ladder"
 name = "The ladder"
@@ -190,6 +219,12 @@ flagEffects = [
 
 # ── Meeting · Emmett ─────────────────────────────────────────────────────────
 [[canvases]]
+# ⚠️ ROLE BEFORE NAME. This canvas opened on "Emmett is on the belt" — a bare
+#    name, and no line anywhere in it said he was her brother, so the one
+#    character in the cast who is hardest to read arrived unlabelled. Wade,
+#    Boyd and Prine all open on the role. the-first-hour.md F7 — and note that
+#    NOTHING checks this: the `named before met` lint skips any character who
+#    has a meeting and never reads the meeting's own text.
 id          = "meet_emmett"
 name        = "Emmett at the belt"
 description = "F5/F6. The shed. He stopped talking to her in March and will not say why. He works the belt facing the door, which is why he sees everything. SETS met_emmett."
@@ -205,11 +240,22 @@ conditions    = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "shed_seen", operator = "is_true" },
 ] }
 
+# Emmett's two shed blocks. He is off the belt 12:00-13:30 and so is this.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "06:00"
+end_time   = "12:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "13:30"
+end_time   = "19:00"
+
 [[canvases.nodes]]
 id   = "the_sort"
 name = "The sort"
 blocks = [
-  { type = "paragraph", content = "Emmett is on the belt with his back to the wall and his face to the door. It is where he has put himself every day since March. Twenty years old and he has stopped growing into anything." },
+  { type = "paragraph", content = "Your brother is on the belt with his back to the wall and his face to the door. It is where Emmett has put himself every day since March. Twenty years old and he has stopped growing into anything." },
   { type = "dialog", props = { speaker = "player" }, content = "Emmett." },
   { type = "paragraph", content = "He nods at the belt, not at you, and keeps his hands moving." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_emmett" }, content = "You're on the rows or you're on the belt. Not both." },
@@ -250,6 +296,12 @@ conditions    = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "met_boyd", operator = "is_false" },
   { type = "flag", subject = "player", flag_key = "met_emmett", operator = "is_true" },
 ] }
+
+# Boyd is at the scale from noon; the rows are his morning.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "12:00"
+end_time   = "20:00"
 
 [[canvases.nodes]]
 id   = "the_scale"
@@ -295,6 +347,14 @@ conditions    = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "met_prine", operator = "is_false" },
   { type = "flag", subject = "player", flag_key = "first_week_started", operator = "is_true" },
 ] }
+
+# ⚠️ ONE ROW, and it crosses midnight. isScheduleActive handles the wrap
+#    (v2.py:3290); the known trap is the WEEKDAY list, not the wrap, and an
+#    all-days row is immune to it. Splitting this into two rows is the bug.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:30"
+end_time   = "00:30"
 
 [[canvases.nodes]]
 id   = "the_chair"

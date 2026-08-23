@@ -244,6 +244,25 @@ flagEffects = [
 ]
 
 
+# ─── THE CREW — [ui.cast_page] ───────────────────────────────────────────────
+# The who-is-who page. Nothing about the cast is authored here: each card is
+# built at runtime from the character's `relationship` line, where the schedule
+# puts them at this minute, and their own quest card's next step.
+#
+# ⚠️ WHO APPEARS IS DECIDED BY THE QUEST CARDS BELOW, not by this block. A
+#    character is listed exactly when pickQuestsCard returns a card for them, so
+#    the meeting flag on their cards opens this page and the guidance page in the
+#    same instant and the two can never disagree.
+#
+# Measured: 17 of the 25-game mopoga field ship a page like this, and 7 of the 8
+# parsed top-ten do. None of the 25 uses a narrator to explain who people are.
+[ui.cast_page]
+title        = "The Crew"
+button_label = "The Crew"
+button_icon  = "👥"
+intro        = "Nine of you on this contract. Four of them are blood."
+
+
 # ─── GUIDANCE — [[quest_cards]] ──────────────────────────────────────────────
 # ⚠️ quests_engine = "v2" turns the sidebar entry and the page ON. Authoring no
 #    cards leaves a nav link to a heading with nothing under it — which is
@@ -298,19 +317,46 @@ when     = [ { trait = "known", subject = "player", op = "gte", value = 24 } ]
 terminal = true
 
 # ── the cast ─────────────────────────────────────────────────────────────────
+# ⚠️ EVERY CAST CARD CARRIES ITS CHARACTER'S MEETING FLAG. Without it the guidance
+#    page introduces the whole crew on click one — five names, their rooms and
+#    their hours — before the player has met anybody, and every meeting scene is
+#    spoiled by the page that is supposed to help. QuestsPage wraps each section
+#    in `<<if _card>>` (v2.py:15371) and pickQuestsCard returns null when no
+#    `when` matches (v2.py:15050), so an unmet character renders no heading at
+#    all. The same gate feeds the cast page, which lists a character exactly when
+#    pickQuestsCard hands back a card — one flag, two surfaces, they cannot
+#    disagree. the-first-hour.md F8.
+#
+# ⚠️ A `when` ITEM SETS EITHER `flag` OR `trait`, NEVER BOTH — the importer rejects
+#    an item carrying both (template_import.py:5285). The meeting flag is its own
+#    item beside the trait band.
+#
+# ⚠️ FLAG NAMES ARE NOT VALIDATED. Nothing checks that `met_wade` exists; a typo
+#    hides that character's guidance forever and no build error says so. These
+#    five were read off the meet_* canvases' own flagEffects.
+#
+# ⚠️ `terminal = true` IS NOT COMPUTED FROM PROGRESS. renderQuestsGoalBlock prints
+#    "✓ Arc complete" whenever the winning card carries it, ahead of every other
+#    frame (v2.py:15199). A character whose ONLY card is terminal on a `lt` band
+#    therefore reads as finished at value zero — which is what Boyd and Emmett
+#    shipped with. Every ladder here is two cards: an open lower band, and a
+#    terminal upper one that has to be climbed to.
+
 [[quest_cards]]
 priority = 70
 npc_id   = "npc_wade"
 text     = "Your brother has been saying it about you to the crew since you were nineteen, where you could hear, and nobody has ever told him to stop. He has started not saying it in front of them."
 tip      = "Work the same block as him in the rows. He is on the step of the second van from seven at night — the curtain in the trailer does not close."
-when     = [ { trait = "want", subject = "npc", npc_id = "npc_wade", op = "lt", value = 40 } ]
+when     = [ { flag = "met_wade", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_wade", op = "lt", value = 40 } ]
 
 [[quest_cards]]
 priority = 69
 npc_id   = "npc_wade"
 text     = "Four feet of plywood and neither of you pretends about it any more."
 tip      = "He is at the second van after the crew turns in."
-when     = [ { trait = "want", subject = "npc", npc_id = "npc_wade", op = "gte", value = 40 } ]
+when     = [ { flag = "met_wade", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_wade", op = "gte", value = 40 } ]
 terminal = true
 
 [[quest_cards]]
@@ -318,45 +364,71 @@ priority = 68
 npc_id   = "npc_prine"
 text     = "Your uncle takes no days off and asks whether you have had water, and you keep going up the loft ladder at one o'clock as if that were about the crates."
 tip      = "Stack with him in the barn loft between one and two. He is outside the third van from half past seven at night."
-when     = [ { trait = "want", subject = "npc", npc_id = "npc_prine", op = "lt", value = 40 } ]
+when     = [ { flag = "met_prine", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_prine", op = "lt", value = 40 } ]
 
 [[quest_cards]]
 priority = 67
 npc_id   = "npc_prine"
 text     = "There is no hurry in it and there never has been, and that is the thing about him you cannot put down."
 tip      = "The loft, between one and two, while the rest of the crew is out of the sun."
-when     = [ { trait = "want", subject = "npc", npc_id = "npc_prine", op = "gte", value = 40 } ]
+when     = [ { flag = "met_prine", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_prine", op = "gte", value = 40 } ]
 terminal = true
 
+# Boyd's ladder. The lower band closes at owed 25 because that is where the shed
+# walk-in opens (walkin_shed_boyd, owed gte 25) — the rung the upper card is about.
 [[quest_cards]]
 priority = 66
 npc_id   = "npc_boyd"
 text     = "Every dollar you have earned went through your father's hand before it reached yours, and now the book has more in your column than your bins do."
 tip      = "He is at the scale in the packing shed from noon. Ask him for an advance against next week — it comes off the Saturday settle."
-when     = [ { trait = "owed", subject = "npc", npc_id = "npc_boyd", op = "lt", value = 40 } ]
-terminal = true
+when     = [ { flag = "met_boyd", subject = "player", op = "is_true" },
+             { trait = "owed", subject = "npc", npc_id = "npc_boyd", op = "lt", value = 25 } ]
 
 [[quest_cards]]
 priority = 65
+npc_id   = "npc_boyd"
+text     = "You are into him now, and he has stopped pretending the book is only a book. He has not said what the arrangement is and he is not going to be the one who says it."
+tip      = "The scale, after noon. He does the book alone once the crew has gone back out."
+when     = [ { flag = "met_boyd", subject = "player", op = "is_true" },
+             { trait = "owed", subject = "npc", npc_id = "npc_boyd", op = "gte", value = 25 } ]
+terminal = true
+
+# Emmett's ladder. The lower band closes at seen 20 — the band his own hub swaps
+# on (hub_emmett_shed), where he starts stopping the belt when she comes in.
+[[quest_cards]]
+priority = 64
 npc_id   = "npc_emmett"
 text     = "He stopped talking to you in March and will not say why. He works the belt with his face to the door, which means he sees everyone who comes in and everyone who does not."
 tip      = "Work the belt beside him in the packing shed. He is at the second van at night and he does not talk there either."
-when     = [ { trait = "seen", subject = "npc", npc_id = "npc_emmett", op = "lt", value = 40 } ]
-terminal = true
-
-[[quest_cards]]
-priority = 64
-npc_id   = "npc_rae"
-text     = "Twenty crews out that window. She names what the men are doing before you have words for it and she does not soften any of it."
-tip      = "The canteen window on the yard — first light, and again when the crew comes off the rows."
-when     = [ { flag = "rae_straight_with_you", subject = "player", op = "is_false" } ]
+when     = [ { flag = "met_emmett", subject = "player", op = "is_true" },
+             { trait = "seen", subject = "npc", npc_id = "npc_emmett", op = "lt", value = 20 } ]
 
 [[quest_cards]]
 priority = 63
+npc_id   = "npc_emmett"
+text     = "He stops the belt when you come in now. He has not told anybody, and he wants you to know that not telling is a thing he is choosing."
+tip      = "The belt in the packing shed — from six, and again from half past one."
+when     = [ { flag = "met_emmett", subject = "player", op = "is_true" },
+             { trait = "seen", subject = "npc", npc_id = "npc_emmett", op = "gte", value = 20 } ]
+terminal = true
+
+[[quest_cards]]
+priority = 62
+npc_id   = "npc_rae"
+text     = "Twenty crews out that window. She names what the men are doing before you have words for it and she does not soften any of it."
+tip      = "The canteen window on the yard — first light, and again when the crew comes off the rows."
+when     = [ { flag = "met_rae", subject = "player", op = "is_true" },
+             { flag = "rae_straight_with_you", subject = "player", op = "is_false" } ]
+
+[[quest_cards]]
+priority = 61
 npc_id   = "npc_rae"
 text     = "She gives you the whole opinion now instead of a third of it, and she does not lower her voice for any of it."
 tip      = "The window on the yard. She is the only read on this worth having."
-when     = [ { flag = "rae_straight_with_you", subject = "player", op = "is_true" } ]
+when     = [ { flag = "met_rae", subject = "player", op = "is_true" },
+             { flag = "rae_straight_with_you", subject = "player", op = "is_true" } ]
 terminal = true
 
 # ══════════════════════════════════════════════════════════════════
@@ -407,17 +479,17 @@ name = "Cass"
 #    TOML parse error.
 [player.core_traits]
 # The player floor. Rungs at 4/8/12/18/25/33/42/55/70/85 and 5/10/16/24/34/46/62/80.
-nerve   = 0
-known   = 0
+nerve            = 0
+known            = 0
 # The throttle — act menu only, on Wade's and Prine's node-routed loops.
-arousal = 0
+arousal          = 0
 # The body.
-energy  = 100
-hygiene = 100
-thirst  = 100
+energy           = 100
+hygiene          = 100
+thirst           = 100
 # She has never held her own money. This is not flavour: it is the reason the
 # first Saturday lands.
-money   = 0
+money            = 0
 # Loop state (hidden). Numeric, never flags — a triggerless canvas has no located
 # setter for a flag and the build hard-fails.
 wade_loop_stage  = 0
@@ -545,13 +617,14 @@ costs                = { time = 40 }
 
 # ─── Boyd — LEVERAGE. Money and the book, not affection. ─────────────────────
 [[npcs]]
-id          = "npc_boyd"
-name        = "Boyd"
-description = "Her father, 47. His name is on the contract, so every dollar she has ever earned went through his hand before it reached hers. He runs the scale, the book and the Saturday settle. Being wanted by the man who holds the book is the only way the book stops being the whole of what is between them."
-portrait    = "boyd.jpg"
-core_traits = { owed = 0 }
-flag_keys   = ["met_boyd", "into_the_advance"]
-arc_stages  = ["Her father", "Owed", "Leaning on it", "Collecting"]
+id           = "npc_boyd"
+name         = "Boyd"
+relationship = "Your father, 47. His name is the one on the contract."
+description  = "Her father, 47. His name is on the contract, so every dollar she has ever earned went through his hand before it reached hers. He runs the scale, the book and the Saturday settle. Being wanted by the man who holds the book is the only way the book stops being the whole of what is between them."
+portrait     = "boyd.jpg"
+core_traits  = { owed = 0 }
+flag_keys    = ["met_boyd", "into_the_advance"]
+arc_stages   = ["Her father", "Owed", "Leaning on it", "Collecting"]
 
 [[npcs.schedules]]
 location   = "the_rows"
@@ -576,13 +649,14 @@ activity   = "outside the first van"
 
 # ─── Wade — SLOW BURN. Willingness, warmed by the throttle. Rich arc #1. ─────
 [[npcs]]
-id          = "npc_wade"
-name        = "Wade"
-description = "Her brother, 26. The loud one. He has been crude about her to the crew, where she can hear, since she was nineteen, and nobody has ever told him to stop. He is already saying it; the climb is him saying it to her."
-portrait    = "wade.jpg"
-core_traits = { ease = 0, want = 0 }
-flag_keys   = ["met_wade"]
-arc_stages  = ["Her brother", "Saying it to her", "Finding the far end", "Waiting for her"]
+id           = "npc_wade"
+name         = "Wade"
+relationship = "Your brother, 26. The loud one."
+description  = "Her brother, 26. The loud one. He has been crude about her to the crew, where she can hear, since she was nineteen, and nobody has ever told him to stop. He is already saying it; the climb is him saying it to her."
+portrait     = "wade.jpg"
+core_traits  = { ease = 0, want = 0 }
+flag_keys    = ["met_wade"]
+arc_stages   = ["Her brother", "Saying it to her", "Finding the far end", "Waiting for her"]
 
 [[npcs.schedules]]
 location   = "the_rows"
@@ -607,13 +681,14 @@ activity   = "at the second van with the radio on"
 
 # ─── Prine — SLOW BURN. Willingness. Rich arc #2. ────────────────────────────
 [[npcs]]
-id          = "npc_prine"
-name        = "Prine"
-description = "Her uncle, 48. Boyd's brother. Third van, sleeps alone, has not taken a day off in nine weeks. Patient in a way that reads as safe right up until it doesn't, and she is the one who keeps mistaking one for the other."
-portrait    = "prine.jpg"
-core_traits = { ease = 0, want = 0 }
-flag_keys   = ["met_prine"]
-arc_stages  = ["Her uncle", "Taking his time", "Not asking", "All season"]
+id           = "npc_prine"
+name         = "Prine"
+relationship = "Your uncle, 48. Boyd's brother, third van, sleeps alone."
+description  = "Her uncle, 48. Boyd's brother. Third van, sleeps alone, has not taken a day off in nine weeks. Patient in a way that reads as safe right up until it doesn't, and she is the one who keeps mistaking one for the other."
+portrait     = "prine.jpg"
+core_traits  = { ease = 0, want = 0 }
+flag_keys    = ["met_prine"]
+arc_stages   = ["Her uncle", "Taking his time", "Not asking", "All season"]
 
 [[npcs.schedules]]
 location   = "the_rows"
@@ -646,13 +721,14 @@ activity   = "outside the third van, not going in"
 
 # ─── Emmett — ANTAGONIST / WITNESS. A hidden accumulator, never surfaced. ────
 [[npcs]]
-id          = "npc_emmett"
-name        = "Emmett"
-description = "Her brother, 20. They were close, and then in March he stopped talking to her and will not say why. He works the shed instead of the rows, which means he is at the scale when everyone comes in, which means he sees things. Being wanted by him means finding out what he already knows."
-portrait    = "emmett.jpg"
-core_traits = { seen = 0 }
-flag_keys   = ["met_emmett"]
-arc_stages  = ["Not talking", "Watching the door", "Knows", "Says it"]
+id           = "npc_emmett"
+name         = "Emmett"
+relationship = "Your brother, 20. He stopped talking to you in March."
+description  = "Her brother, 20. They were close, and then in March he stopped talking to her and will not say why. He works the shed instead of the rows, which means he is at the scale when everyone comes in, which means he sees things. Being wanted by him means finding out what he already knows."
+portrait     = "emmett.jpg"
+core_traits  = { seen = 0 }
+flag_keys    = ["met_emmett"]
+arc_stages   = ["Not talking", "Watching the door", "Knows", "Says it"]
 
 [[npcs.schedules]]
 location   = "the_packing_shed"
@@ -679,13 +755,14 @@ activity   = "at the second van, not talking"
 # ⚠️ She is the deletion test. Cut her and nothing Cass does is measured by anyone
 #    who has seen twenty crews. She is not a conquest and does not get a bar.
 [[npcs]]
-id          = "npc_rae"
-name        = "Rae"
-description = "Runs the canteen window and the scale, 50s, drives in from town. Twenty crews. She names what the men are doing before Cass has words for it and she does not soften any of it. Cass wants to be told she is handling it, by the only person on this farm qualified to say so."
-portrait    = "rae.jpg"
-core_traits = { }
-flag_keys   = ["met_rae", "rae_straight_with_you"]
-arc_stages  = ["The window", "Straight with you"]
+id           = "npc_rae"
+name         = "Rae"
+relationship = "Runs the canteen window and the scale. Twenty crews."
+description  = "Runs the canteen window and the scale, 50s, drives in from town. Twenty crews. She names what the men are doing before Cass has words for it and she does not soften any of it. Cass wants to be told she is handling it, by the only person on this farm qualified to say so."
+portrait     = "rae.jpg"
+core_traits  = { }
+flag_keys    = ["met_rae", "rae_straight_with_you"]
+arc_stages   = ["The window", "Straight with you"]
 
 [[npcs.schedules]]
 location   = "the_yard"
@@ -834,6 +911,24 @@ conditions    = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "met_rae", operator = "is_false" },
 ] }
 
+# ⚠️ THE WINDOW IS WHAT STOPS THIS FIRING IN AN EMPTY ROOM — not `requires_npc`.
+#    selectAutoFireCanvasForLocation -> isCanvasValid (v2.py:4559) reads schedules,
+#    conditions and repeatability and NEVER reads requiresNpc; the field is consumed
+#    in exactly two functions, checkRandomEncounters (v2.py:5245) and
+#    checkAndSubstituteCanvas (v2.py:5318), and neither is this path. Shipped without
+#    one: this fired at the camp at 06:10 on a Saturday with Prine out in the rows.
+#    Keep requires_npc anyway — it is free and it documents intent. the-first-hour.md F5.
+# Rae's two yard rows. The first covers the 05:05 handover out of the opening.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "05:00"
+end_time   = "08:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time   = "20:00"
+
 [[canvases.nodes]]
 id   = "coffee"
 name = "Coffee"
@@ -876,6 +971,17 @@ conditions    = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "met_wade", operator = "is_false" },
 ] }
 
+# Wade's two row blocks — before the bell and after it.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "06:00"
+end_time   = "12:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "13:30"
+end_time   = "18:30"
+
 [[canvases.nodes]]
 id   = "ladder"
 name = "The ladder"
@@ -904,6 +1010,12 @@ flagEffects = [
 
 # ── Meeting · Emmett ─────────────────────────────────────────────────────────
 [[canvases]]
+# ⚠️ ROLE BEFORE NAME. This canvas opened on "Emmett is on the belt" — a bare
+#    name, and no line anywhere in it said he was her brother, so the one
+#    character in the cast who is hardest to read arrived unlabelled. Wade,
+#    Boyd and Prine all open on the role. the-first-hour.md F7 — and note that
+#    NOTHING checks this: the `named before met` lint skips any character who
+#    has a meeting and never reads the meeting's own text.
 id          = "meet_emmett"
 name        = "Emmett at the belt"
 description = "F5/F6. The shed. He stopped talking to her in March and will not say why. He works the belt facing the door, which is why he sees everything. SETS met_emmett."
@@ -919,11 +1031,22 @@ conditions    = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "shed_seen", operator = "is_true" },
 ] }
 
+# Emmett's two shed blocks. He is off the belt 12:00-13:30 and so is this.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "06:00"
+end_time   = "12:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "13:30"
+end_time   = "19:00"
+
 [[canvases.nodes]]
 id   = "the_sort"
 name = "The sort"
 blocks = [
-  { type = "paragraph", content = "Emmett is on the belt with his back to the wall and his face to the door. It is where he has put himself every day since March. Twenty years old and he has stopped growing into anything." },
+  { type = "paragraph", content = "Your brother is on the belt with his back to the wall and his face to the door. It is where Emmett has put himself every day since March. Twenty years old and he has stopped growing into anything." },
   { type = "dialog", props = { speaker = "player" }, content = "Emmett." },
   { type = "paragraph", content = "He nods at the belt, not at you, and keeps his hands moving." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_emmett" }, content = "You're on the rows or you're on the belt. Not both." },
@@ -964,6 +1087,12 @@ conditions    = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "met_boyd", operator = "is_false" },
   { type = "flag", subject = "player", flag_key = "met_emmett", operator = "is_true" },
 ] }
+
+# Boyd is at the scale from noon; the rows are his morning.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "12:00"
+end_time   = "20:00"
 
 [[canvases.nodes]]
 id   = "the_scale"
@@ -1009,6 +1138,14 @@ conditions    = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "met_prine", operator = "is_false" },
   { type = "flag", subject = "player", flag_key = "first_week_started", operator = "is_true" },
 ] }
+
+# ⚠️ ONE ROW, and it crosses midnight. isScheduleActive handles the wrap
+#    (v2.py:3290); the known trap is the WEEKDAY list, not the wrap, and an
+#    all-days row is immune to it. Splitting this into two rows is the bug.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:30"
+end_time   = "00:30"
 
 [[canvases.nodes]]
 id   = "the_chair"

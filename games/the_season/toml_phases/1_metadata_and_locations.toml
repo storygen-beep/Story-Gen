@@ -42,17 +42,17 @@ name = "Cass"
 #    TOML parse error.
 [player.core_traits]
 # The player floor. Rungs at 4/8/12/18/25/33/42/55/70/85 and 5/10/16/24/34/46/62/80.
-nerve   = 0
-known   = 0
+nerve            = 0
+known            = 0
 # The throttle — act menu only, on Wade's and Prine's node-routed loops.
-arousal = 0
+arousal          = 0
 # The body.
-energy  = 100
-hygiene = 100
-thirst  = 100
+energy           = 100
+hygiene          = 100
+thirst           = 100
 # She has never held her own money. This is not flavour: it is the reason the
 # first Saturday lands.
-money   = 0
+money            = 0
 # Loop state (hidden). Numeric, never flags — a triggerless canvas has no located
 # setter for a flag and the build hard-fails.
 wade_loop_stage  = 0
@@ -180,13 +180,14 @@ costs                = { time = 40 }
 
 # ─── Boyd — LEVERAGE. Money and the book, not affection. ─────────────────────
 [[npcs]]
-id          = "npc_boyd"
-name        = "Boyd"
-description = "Her father, 47. His name is on the contract, so every dollar she has ever earned went through his hand before it reached hers. He runs the scale, the book and the Saturday settle. Being wanted by the man who holds the book is the only way the book stops being the whole of what is between them."
-portrait    = "boyd.jpg"
-core_traits = { owed = 0 }
-flag_keys   = ["met_boyd", "into_the_advance"]
-arc_stages  = ["Her father", "Owed", "Leaning on it", "Collecting"]
+id           = "npc_boyd"
+name         = "Boyd"
+relationship = "Your father, 47. His name is the one on the contract."
+description  = "Her father, 47. His name is on the contract, so every dollar she has ever earned went through his hand before it reached hers. He runs the scale, the book and the Saturday settle. Being wanted by the man who holds the book is the only way the book stops being the whole of what is between them."
+portrait     = "boyd.jpg"
+core_traits  = { owed = 0 }
+flag_keys    = ["met_boyd", "into_the_advance"]
+arc_stages   = ["Her father", "Owed", "Leaning on it", "Collecting"]
 
 [[npcs.schedules]]
 location   = "the_rows"
@@ -211,13 +212,14 @@ activity   = "outside the first van"
 
 # ─── Wade — SLOW BURN. Willingness, warmed by the throttle. Rich arc #1. ─────
 [[npcs]]
-id          = "npc_wade"
-name        = "Wade"
-description = "Her brother, 26. The loud one. He has been crude about her to the crew, where she can hear, since she was nineteen, and nobody has ever told him to stop. He is already saying it; the climb is him saying it to her."
-portrait    = "wade.jpg"
-core_traits = { ease = 0, want = 0 }
-flag_keys   = ["met_wade"]
-arc_stages  = ["Her brother", "Saying it to her", "Finding the far end", "Waiting for her"]
+id           = "npc_wade"
+name         = "Wade"
+relationship = "Your brother, 26. The loud one."
+description  = "Her brother, 26. The loud one. He has been crude about her to the crew, where she can hear, since she was nineteen, and nobody has ever told him to stop. He is already saying it; the climb is him saying it to her."
+portrait     = "wade.jpg"
+core_traits  = { ease = 0, want = 0 }
+flag_keys    = ["met_wade"]
+arc_stages   = ["Her brother", "Saying it to her", "Finding the far end", "Waiting for her"]
 
 [[npcs.schedules]]
 location   = "the_rows"
@@ -242,13 +244,14 @@ activity   = "at the second van with the radio on"
 
 # ─── Prine — SLOW BURN. Willingness. Rich arc #2. ────────────────────────────
 [[npcs]]
-id          = "npc_prine"
-name        = "Prine"
-description = "Her uncle, 48. Boyd's brother. Third van, sleeps alone, has not taken a day off in nine weeks. Patient in a way that reads as safe right up until it doesn't, and she is the one who keeps mistaking one for the other."
-portrait    = "prine.jpg"
-core_traits = { ease = 0, want = 0 }
-flag_keys   = ["met_prine"]
-arc_stages  = ["Her uncle", "Taking his time", "Not asking", "All season"]
+id           = "npc_prine"
+name         = "Prine"
+relationship = "Your uncle, 48. Boyd's brother, third van, sleeps alone."
+description  = "Her uncle, 48. Boyd's brother. Third van, sleeps alone, has not taken a day off in nine weeks. Patient in a way that reads as safe right up until it doesn't, and she is the one who keeps mistaking one for the other."
+portrait     = "prine.jpg"
+core_traits  = { ease = 0, want = 0 }
+flag_keys    = ["met_prine"]
+arc_stages   = ["Her uncle", "Taking his time", "Not asking", "All season"]
 
 [[npcs.schedules]]
 location   = "the_rows"
@@ -281,13 +284,14 @@ activity   = "outside the third van, not going in"
 
 # ─── Emmett — ANTAGONIST / WITNESS. A hidden accumulator, never surfaced. ────
 [[npcs]]
-id          = "npc_emmett"
-name        = "Emmett"
-description = "Her brother, 20. They were close, and then in March he stopped talking to her and will not say why. He works the shed instead of the rows, which means he is at the scale when everyone comes in, which means he sees things. Being wanted by him means finding out what he already knows."
-portrait    = "emmett.jpg"
-core_traits = { seen = 0 }
-flag_keys   = ["met_emmett"]
-arc_stages  = ["Not talking", "Watching the door", "Knows", "Says it"]
+id           = "npc_emmett"
+name         = "Emmett"
+relationship = "Your brother, 20. He stopped talking to you in March."
+description  = "Her brother, 20. They were close, and then in March he stopped talking to her and will not say why. He works the shed instead of the rows, which means he is at the scale when everyone comes in, which means he sees things. Being wanted by him means finding out what he already knows."
+portrait     = "emmett.jpg"
+core_traits  = { seen = 0 }
+flag_keys    = ["met_emmett"]
+arc_stages   = ["Not talking", "Watching the door", "Knows", "Says it"]
 
 [[npcs.schedules]]
 location   = "the_packing_shed"
@@ -314,13 +318,14 @@ activity   = "at the second van, not talking"
 # ⚠️ She is the deletion test. Cut her and nothing Cass does is measured by anyone
 #    who has seen twenty crews. She is not a conquest and does not get a bar.
 [[npcs]]
-id          = "npc_rae"
-name        = "Rae"
-description = "Runs the canteen window and the scale, 50s, drives in from town. Twenty crews. She names what the men are doing before Cass has words for it and she does not soften any of it. Cass wants to be told she is handling it, by the only person on this farm qualified to say so."
-portrait    = "rae.jpg"
-core_traits = { }
-flag_keys   = ["met_rae", "rae_straight_with_you"]
-arc_stages  = ["The window", "Straight with you"]
+id           = "npc_rae"
+name         = "Rae"
+relationship = "Runs the canteen window and the scale. Twenty crews."
+description  = "Runs the canteen window and the scale, 50s, drives in from town. Twenty crews. She names what the men are doing before Cass has words for it and she does not soften any of it. Cass wants to be told she is handling it, by the only person on this farm qualified to say so."
+portrait     = "rae.jpg"
+core_traits  = { }
+flag_keys    = ["met_rae", "rae_straight_with_you"]
+arc_stages   = ["The window", "Straight with you"]
 
 [[npcs.schedules]]
 location   = "the_yard"
