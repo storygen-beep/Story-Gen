@@ -5,6 +5,680 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-24 — Section G lands: the cast, and the first engine field this skill has ever added
+
+**What.** `references/the-surfaces.md` (new **R8**, plus its entry and its reason in the
+deliberately-not-gated list), `references/register.md` (**S3** gains the term-of-address rule),
+`references/the-meters.md` (**W6** gains the trade rule and a W5 / W5b / W6 cross-pointer),
+`references/engine.md` (**§34** gains the `tags` field and a recorded colour difference; three stale
+citations fixed), `SKILL.md` (two lessons and a findability pointer), `STATUS.md`,
+`references/the-first-hour.md` (one citation).
+
+**And, for the first time in this skill's history, an engine change:**
+`apps/projects/services/template_import.py`, `apps/projects/services/game_graph.py`,
+`apps/game_generation/twee_comprehensive/generators/v2.py`, plus a new
+`tests/test_npc_tags_field.py`.
+
+**`scripts/gates.py` untouched. No new gate, no new lint, no threshold. No game file written** —
+not `the_season`, and not `vesper` per the standing rule.
+
+**Why now.** LO played `the_season` and reported one defect: *"I don't know who is who."* That is
+Section G's question in a player's words, and it was the only complaint about the game that came
+from a human rather than from the scoreboard. Nothing in the 40 gates measures it — all six
+cast-adjacent gates (*somebody speaks*, *speakers are named*, *residents have homes*, *a meeting
+fires where they are*, *every hub is met first*, *the anchor introduces itself*) are presence and
+plumbing checks.
+
+**Scope note.** G was **not** gated on the female-PC screening that shaped A/C/D/H/J. Those sections
+are about *her*; G is about *the cast*, and a male-PC game with eight women in it is evidence about
+cast craft in exactly the same way. All 25 readable corpus games were used.
+
+### A proposal was made and WITHDRAWN. Recording it so it is not made again.
+
+A 41st gate — *"a declared portrait must resolve to a file"* — was proposed on the strength of a
+real finding: `games/the_season/` contains **zero image files**, so all 59 of its portrait `<img>`
+tags fire `onerror` and render **one silhouette SVG, 59 times** (verified: `onerror fallbacks: 59,
+distinct: 1`). Five men, one grey blob.
+
+**LO refused it, correctly, on the grounds that it already exists.** Verified rather than assumed:
+`api/v1/game_review.py:588` enumerates NPC portraits, `:590-604` enumerates the player portrait
+including outfit and undress states, and `_extract_missing_media` splits them found/missing. And
+`package_from_toml` itself prints the warning at build time — *"5 external media file(s) referenced
+but NOT copied … Sidebar portraits / NPC / location images will be BROKEN in this build."*
+
+**So `the_season` has an unrun tool, not a doctrine hole.** It has no `.find-media/`, no
+`media_review.json` and no media pass in its history. The lesson generalises: **before proposing a
+gate, check whether another surface already reports the thing.** A scoreboard is not the only place
+a defect can be caught, and this skill's instinct is to reach for it first.
+
+### The engine change — `[[npcs]] tags`
+
+The field's best cast page is `friends-of-mine`'s Characterpedia: fifteen people, each with a
+portrait, a counter, a 27–83-word bio, and **exactly four interests** — all fifteen, no exceptions,
+in a consistent shape (how they operate · what they want · an aesthetic · something they consume),
+with thirteen of fifteen ending on a food. That trivial fourth slot is what stops the entry reading
+as a stat block. `TemplateNPC` had no field for it.
+
+LO was given the fork — ride in `relationship` (doc-only) versus a new field (engine change) — and
+chose the field. `relationship` was the wrong home on inspection: for a `customizable` NPC it must
+match an entry in `relationship_options` (`template_import.py:4029`), so tags there would break the
+player's relationship picker the moment anyone used it.
+
+Shipped: `NPC_TAGS_MAX = 4`, a hard reject rather than a truncation, and delivery through a
+**slug-keyed `setup.npc_tags` registry** copied from `setup.npc_arc_stages` — **not** through
+`$npcs`, because `$npcs` is snapshotted into every history moment, which is the same reason
+`description` is popped at `v2.py:1031`.
+
+> ⚠️ **THE BUG THIS TASK ACTUALLY HIT, AND THE REASON IT IS IN `SKILL.md`.** `ai_behavior_config` is
+> written in **two** places. `template_import.create_project_from_template` is the `--use-db` path;
+> `apps/projects/services/game_graph.py` is the one a plain `package_from_toml` takes. The field was
+> added to the first only, and the result was `setup.npc_tags = {}` in a build whose TOML plainly
+> declared four tags — **no error at import, none at build, none at runtime.** It looked exactly
+> like a game that had not authored the field. `tests/test_npc_tags_field.py` now locks the no-DB
+> path specifically, with the failure message naming the cause.
+
+### How it was verified
+
+1. **`gates.py` output byte-identical across all games**, before and after. ⚠️ A **non-zero exit
+   from `gates.py` means a red gate, not a crashed script** — the outputs are compared, never the
+   exit codes.
+2. **The engine change is inert when unused.** `the_season` rebuilt before and after and diffed:
+   **13 lines, all three of them mine** — `setup.npc_tags = {};` with its two comment lines, the
+   `.cast-card .cast-tags` CSS rule, and the two `<<if>>`-guarded render lines. Nothing else moved.
+3. **The round-trip works when used.** A copy of `the_season`'s TOML with four tags on Boyd builds
+   to `setup.npc_tags = {"npc_boyd": ["The book", "The scale", "Saturday", "Black coffee"]}`.
+4. **The cap bites.** Five tags is refused at import: *"npcs[0].tags has 5 entries, max 4."*
+5. **11 new tests pass** (`tests/test_npc_tags_field.py`).
+6. **Every engine line re-read at write time**, and every citation in the new §34 text re-pinned
+   *after* the v2.py edits shifted the file — the speaker default moved 14978→**15003**, the
+   portrait render 15010→**15035**, the `dialog-npc` class 15017→**15042**.
+
+### Instrument failures found in this section
+
+Recorded because two of them would have shipped as doctrine, and one wasted a verification cycle.
+
+- **`git stash` on a file that already had uncommitted changes reverts those too.** The first
+  before/after build comparison stashed the two engine files to get a baseline — but both were
+  *already* modified by earlier uncommitted work, so the "before" build was **HEAD**, not
+  before-my-edit. The diff showed `CastPage` appearing out of nowhere and looked alarming. The
+  correct baseline was built by programmatically reversing exactly the nine strings inserted.
+- **A dialogue-share measurement returned 128%.** `tw.prose()` strips `<<...>>` macros wholesale, so
+  the speech text was deleted from the denominator while being counted in the numerator. **Only an
+  impossible number caught it**; a plausible-but-wrong 45% would have shipped. Corrected figures
+  (13.8%–56.2%, five games) agree with the far better-provenanced `NARRATION_DIALOGUE_CEILING`
+  already in `gates.py`, and **that constant remains the citable one.**
+- **Degrees of Lewdity's 14 "traits" are BEAST traits.** A census returned `territorial`,
+  `brooding`, `sociable`, `relaxed`, `cowardly`, `clever`, `clumsy` — a fine human-temperament
+  vocabulary, and not one: they are set by `<<generate_beast_traits>>` in `Widgets Beast Generation`
+  and gate fox and wolf encounters. Caught only by printing the surrounding source instead of
+  trusting the count, which is the same discipline that caught `$sexPose` in Section H.
+- **"the_season renders no portraits on dialogue" was wrong.** A grep for
+  `dialog-block dialog-npc"><img` returned 0 of 59; the portrait `<div>` is on the *following* line.
+  Re-matched across the newline: **54 of 59 do carry a portrait.** Nearly shipped as a headline
+  defect.
+- **`census.tsv` in the corpus is not a passage count.** It reports `degrees-of-lewdity` at 636
+  passages and `the-company` at 40; parsed properly they are **15,626** and **2,078**. Do not cite
+  it.
+
+### The verification count was wrong twice, and is 21
+
+`games/` holds **28** directories with a `toml_phases/`, but only **21** carry a merged
+`7_final_game.toml`, which is the file `gates.py` needs. The seven that have never been merged are
+`jacks_world`, `media_testbed`, `new_in_town`, `test_customize`, `the_long_summer`, `two_weeks` and
+`under_one_roof`. Earlier entries said 27, then 28; both counted directories. **Count the merged
+file.** `STATUS.md` now carries the correction where the claim is made.
+
+### What was refused
+
+- **No gate for R8.** `degrees-of-lewdity` is rank 7 with 15,626 passages, and its NPC record reads
+  `penis` **2,198** times against `name_known` **27** — `lefthand`, `righthand`, `stance`,
+  `distance` are a limb-by-limb struggle machine. Its people are bodies in a physical simulation,
+  and that is a second working answer to the same problem. A gate mandating that characters be
+  differentiated *as people* would fail the seventh-ranked game in the corpus.
+- **No lint for the schedule half of R8**, even though it is trivially checkable — declined as scope
+  creep, and recorded in `the-surfaces.md` so the choice stays visible rather than looking like an
+  oversight.
+- **The per-character dialogue colour is not built.** Seven of 25 field games make a speaker macro
+  the single most-used macro in the whole game, each rendering face + name + colour; we ship the
+  first two (`v2.py:15035`) and one shared class for the third (`v2.py:15042`). Recorded in §34 as a
+  known difference so it is not rediscovered as a gap, and left unbuilt until a game asks.
+- **The full `engine.md` citation audit.** Three citations were fixed because this task read the
+  code around them. The other 114 remain unaudited and the task stays open — half an audit reported
+  as a whole one is worse than none.
+
+**Findings:** `~/Documents/Female_PC_Craft_Study_20260823/findings_G_people.md`.
+
+---
+
+## 2026-08-24 — the H and J doctrine lands: the audience meter, and a refusal that can fail
+
+**What.** `references/the-meters.md` (new **W5b**, plus a pointer from W5 and a header line),
+`references/the-surfaces.md` (new **R5b.2**, **R6 mechanism 6**, and player evidence added to R6
+mechanism 5), `references/engine.md` (new **§36**, plus an authoring note on §35), `SKILL.md` (one
+lesson). Doctrine only — **`scripts/gates.py` untouched, no new gate, no threshold**, and no game
+file written.
+
+**Why now.** Sections H and J (2026-08-23) each ended with a proposal rather than an edit. LO
+approved four of the five and, on the fifth — the refusal rule — said *"do what top games do, if top
+games do it, then lets do it too."*
+
+**That fifth instruction was conditional, so it was measured before being written.** The field does
+do it: Course of Temptation carries **464** `$pc.skillcheck()` branch calls and **41** `*Resist*`
+passages, including an explicitly named `EventWalkPassHFResistFail`; Degrees of Lewdity carries
+**360** struggle/resist/escape passages. The canonical shape routes *"Refuse to respond"* off a
+Willpower check whose difficulty is read from the NPC doing it, and **both branches are written and
+paid in opposite directions on one meter** — success `Composure +25` / his `control −25`
+(*"It's good to know he can't get to you quite so easily"*), failure `Arousal +100`,
+`Humiliation +50`, his `control +25` (*"So easy"*). Branches of 354 and 629 characters.
+
+**The mechanism was already in the engine, untaught.** `TemplateChoice.rejection_node` /
+`rejection_effects` (`template_import.py:792-830`) render a locked choice as a **live link** that
+routes to its own failure node — the generator's own comment is *"Mode B: Clickable rejection"*
+(`v2.py:13147`), resolution at `v2.py:13668-13673`, effects at `v2.py:13152-13165`. Census re-run at
+write time: **`rejection_node` 0 uses in 0 games, and 0 mentions anywhere in this skill.**
+
+⚠️ **Two claims in the approved plan were wrong and are corrected here.** The plan said these
+fields had "0 mentions" in the skill — `locked_text_threshold` was in fact already documented at
+`engine.md:759` and in `DOCTRINE_GAPS.md`; only `rejection_node` was undocumented. And the plan
+implied the locked-choice pattern was unused: `show_when_locked` is used **176 times across 12
+games**. Both were caught by re-running the census before writing, which is why verification step 3
+exists.
+
+**The honest difference, stated in §36 rather than smuggled.** CoT rolls dice; this engine has **no
+per-choice random outcome** — `conditions` has no `random` type (the "flag/trait/random" list at
+`template_import.py:3143` is a docstring, not a feature). Ours is deterministic. That is defensible
+because the field publishes its odds anyway — `skillcheck_descriptor` prints
+*certain/trivial/easy/moderate/demanding/hard/very hard/nearly impossible* next to **314** choice
+labels — so a published threshold keeps the same promise as a published probability. §36 says to
+state the bar with `locked_text_threshold` and never to simulate a roll.
+
+**W5b — the audience meter.** W5 covers a meter that falls and shuts doors and explicitly fails to
+cover one that rises. Field: **644 read sites, 2% refuse the player anything** (14 sites), 81%
+colour prose, median branch 139 chars in DoL and 84 in Zara against `the_season`'s 570. W5b records
+that it is **optional** (`family-ties`, rank 24, 267 variables, no reputation system at all), that
+its content is a stranger already knowing, that branch size is the cause and read count the
+symptom, that it should be split by *what* and ideally by *who*, and that positive kinds
+(`$fame.good`/`.social`/`.scrap`) do real work. W5 now carries a pointer saying which rule owns
+which case, so the two cannot be read as contradicting.
+
+**R5b.2 and R6 mechanism 6.** R5b gains the half the field has and we do not — a refusal that can
+never fail is a menu item, a scene with no refusal is why players quit — with both player quotes.
+R6 gains a sixth mechanism in kind: reputation as a **casting filter**, changing who is standing
+there rather than what is offered (`juiciest_rumor` inside CoT's person-selection predicate).
+
+**R6 mechanism 5 gains its player evidence**, including Zara's developer answering the complaint in
+public — *"trying to give every single scene a different text"* — and the distinction that keeps the
+rule from being misread: **repeating the loop is the genre, repeating the words is the defect.**
+§35 gains the matching authoring line: **randomise the words, never the content.**
+
+**`STATUS.md`** gains the four new rules in its built-inventory table, and its per-file **line
+counts were removed entirely** — they had gone stale three times in one day, the same bug already
+fixed for `CHANGELOG.md` on 2026-08-23. A count of a file edited every session is wrong by the end
+of that session.
+
+**`SKILL.md`** records the pattern rather than the feature, because this is now the second
+occurrence: `block_pool` and `rejection_node` were both built, both unused, both undocumented, and
+both announced by a rule that said *"our games do the opposite"* while offering no mechanism.
+
+**Verified.** `gates.py` run across all **28** games carrying `toml_phases/` before and after —
+**byte-identical**, as it must be for a doc-only change (⚠️ compare output, never exit codes: a
+non-zero exit means a red gate, not a crashed script). Census re-run at write time. W5/W5b checked
+for contradiction.
+
+**Every cited line was re-read against `v2.py` rather than trusted, and four of the first five were
+wrong** — including two this skill had been carrying for some time:
+
+```
+rejection_node / rejection_effects   template_import.py:811-812   (cited the class range :792-830)
+"Mode B: Clickable rejection"        v2.py:13148                  (cited 13147)
+locked_text fallback                 v2.py:13146                  (cited 12747 — STALE IN SKILL)
+locked_text_threshold                v2.py:13185-13186            (cited 12786 — STALE IN SKILL)
+rejection_effects emit               v2.py:13152-13165            ✓
+rejection_node resolution            v2.py:13668-13673            ✓
+```
+
+`engine.md:759` and `DOCTRINE_GAPS.md` both carried `:12747`/`:12786`; both corrected. §33.4 was
+found stale in the same pass — it cited `v2.py:12597` and `:4680`, **both of which are now blank
+lines** — and now cites `getCostBlockedMessage` at `v2.py:4656` and the locked-choice span at
+`:13140`.
+
+⚠️ **Systemic, and NOT fixed here.** `engine.md` carries **117** distinct `v2.py:NNNN` citations and
+**7 of them point at a blank line** (3448 · 3820 · 4496 · 5140 · 14065 · 14970 · 19297). Blank-line
+detection only catches the obvious ones; a citation that drifted onto a different non-blank line is
+invisible to it. `v2.py` moves and nothing re-checks the references against it. **A citation audit
+of `engine.md` is worth its own task** — recorded here rather than half-done inside this one.
+
+## 2026-08-23 — field study sections H and J: reputation refuses almost nothing, and J was not untouched
+
+**What.** `STATUS.md` PART 6 and PART 7 corrected. Two new study files outside the skill:
+`~/Documents/Female_PC_Craft_Study_20260823/findings_H_known.md` and `findings_J_players.md`, plus
+`probe_macros.py`. **No doctrine written yet** — both findings files end with a proposal for LO's
+call, per the propose-before-writing rule. `scripts/gates.py` untouched; no new gate.
+
+**Why H was run first, against the standing recommendation.** `STATUS.md` recommended J then H.
+Checking the data before starting reversed it: H had far more field evidence than assumed, and J
+was largely a re-run (below).
+
+**Finding — reputation almost never shuts a door.** Across 644 measurable read sites in three field
+games, **14 refuse the player anything (2%)**. The rest overwhelmingly swap a short line of
+dialogue — median branch 139 chars in `degrees-of-lewdity`, 84 in `zaras-school-life`. The skill's
+only rule touching this, `the-meters.md` W5, is about a counterweight that **shuts doors**; it does
+not cover a rising audience meter, so `the_season` asserted its own doctrine
+(`0_systems_spec.toml:100`) unaided. That gap is now measured, not guessed.
+
+**Finding — `the_season`'s `known` is thin.** Same instrument over the built game: **7 read sites in
+111 passages**, zero in the locations, zero in the one-shots, median branch **570 chars** against
+the field's 84–139. Big branches are why there are only seven. Recorded in `STATUS.md` PART 6 beside
+the fill problem.
+
+**Finding — Course of Temptation does not use a meter at all.** Reputation is *derived from memory*
+— the code comment on `alter_rumor_strength` reads *"things that create memories (sex, flashing)
+build reputation with no need to call this"*. Rumors are per-person, typed, carry a sentence and a
+strength (25 of them), spread between NPCs at ×10, and are suppressed by friendship. It also casts
+scenes: `juiciest_rumor` sits inside the person-selection predicate.
+
+**Engine check, because H's best idea needed one.** Per-NPC conditions are supported for **both**
+traits (`engine.md:320`) and flags (`v2.py:3877`, `subject === 'npc'`), and are used by 19 shipped
+games — `the_season` itself has 33. **The engine is not the gap; no game has used the primitive for
+reputation.** Checked before proposing, so the proposal is not built on an assumption.
+
+**Correction — J's row in `STATUS.md` was wrong.** It read *"untouched — and the data is already on
+disk."* The 2026-07-24 mopoga study had already read **22,622 comments across 31 games** and
+published F1–F10 from them; `digest_comments.py` had been run; the cheat-page engine feature came
+out of F8. J was renarrowed to the only question July could not answer — whether players' words
+support the doctrine written this week — over 3,479 comments on the four study games.
+
+**J's verdicts.** Variant pools **confirmed** (a player names the defect, and Zara's developer
+replies in-thread that he is fixing exactly it); S3 lines-by-personality **confirmed** (a 26-like
+feature request restating the rule); R5b **confirmed and extended** (players also mourn a *removed*
+failure case — a refusal that can never fail is a menu item); the reason axis **unsupported and
+unrefuted** — recorded as a miss so silence is not later mistaken for confirmation. The pivot rule
+gets no evidence either way.
+
+**Convergence worth keeping.** J's most-liked content theme in Course of Temptation is the world
+failing to react to state (32+22+9+7+5 likes), and a Zara player asks for *"even just a few lines of
+dialogue ... right now it feels like a switch was just turned on somewhere."* That is H's finding
+arriving from the player side, and it did not come from H.
+
+**Three instrument failures, all caught and recorded** in `findings_H_known.md` §0 — a regex whose
+`[^>]*` could not match a condition containing `>` (reported a false `set=0 read=0` for two games
+that use `<<if>>` thousands of times); `$sexPose` in `family-ties` being a sex *position*, not "sex
+expose", which withdrew 405 read sites from the evidence; and a window-based branch classifier whose
+opens/colours split swung 11%→47% with the window, replaced by a balanced span scan. The stable
+`blocks` figure is what the headline rests on.
+
+**Verified.** `gates.py` re-run across **all 28 games** carrying `toml_phases/` — every one produces
+its scoreboard. ⚠️ Two corrections to how this is checked: the count is **28, not the 27 quoted in
+earlier entries** (`ls games` = 29, of which `quests_v2_smoke` has no `toml_phases/`), and **a
+non-zero exit from `gates.py` means a RED GATE, not a crashed script** — a first pass here read the
+exit code and reported all 28 as failures, which was the check being wrong, not the run.
+
+The real claim is narrower and was verified by mtime: **this turn modified only `STATUS.md`
+(20:42) and this changelog (20:43)**. `scripts/gates.py` is untouched since 15:43 and no game file
+or engine file was written at all, so no scoreboard could have moved.
+
+## 2026-08-23 — audit of the same day's work: three real defects, and block_pool turns out to be knowledge we LOST
+
+**What.** Corrections to `references/engine.md` §35, `references/the-surfaces.md` R6,
+`SKILL.md` and `STATUS.md`, after LO asked for a thorough check of what had just been implemented.
+Everything else in the day's work stood up.
+
+**Defect 1 — the census was wrong, and the truth is worse.** §35 shipped saying *"vesper (v1) 6 ·
+every v2 game 0"* and *"the v1 game found it; this skill never wrote it down."* Re-counted across
+every `toml_phases/*.toml`: **the_long_summer 46 · under_one_roof 14 · vesper 6 · every v2 game 0.**
+
+More importantly, v1's corpus carried a **numbered rule** for it — `prompts/game_design_rules.md:1330`,
+*Rule 17: Block Pools for Repeatable Activities* — which named the failure exactly: *"the 'same text
+every morning' problem"*, and *"the group block system handles phase changes, but WITHIN each phase
+the text is frozen."* That is the same mechanism-4-vs-5 distinction the field study arrived at
+independently on 2026-08-23.
+
+**So this was not a discovery. It was a recovery.** The knowledge was lost when the v2 skill was
+divorced from `prompts_v2/` for teaching false engine facts: the wholesale cut took a true fact with
+the false ones, and nothing checked the discarded half. §35 now records the loss and its cause,
+because the lesson is about the divorce, not the primitive.
+
+**A near-miss worth recording.** The audit first surfaced
+`games/the_long_summer_test/toml_phases/3_activities.toml:7-9` — *"block_pool prose rotation is in
+the schema but forbidden by the doctrine"* — which read as a standing prohibition against everything
+shipped that morning. It is a **test-slice** decision; the same repo's full game uses the pattern 46
+times. Recorded in §35 so the next reader does not re-flinch at it.
+
+**Defect 2 — two authoring constraints were undocumented.** From
+`prompts/toml_generation_prompt_v4.txt:1044-1053`: all child blocks must be the same type, and
+`block_pool` cannot nest inside another `block_pool`. The nesting constraint is now written down
+**as unverified**, explicitly not as an engine fact — the plausible mechanism is that both pools
+emit the same `_bp` temp (`v2.py:14580`), but whether SugarCube's already-matched `if/elseif` chain
+actually breaks was **not tested**, and asserting it would have been the exact failure this skill
+exists to prevent.
+
+**Defect 3 — a measurement was over-generalised.** §35 said *"98% of DoL's location prose sits
+inside a conditional branch."* It was a **ten-passage spot check**, not a per-location total of the
+kind `location fill` computes. Rescoped in `engine.md` and `STATUS.md`, with the ten passages named
+and an explicit warning not to quote the figure as a whole-game property. The conclusion it supports
+— that folding pooled variants is the correct comparison — is unaffected: 234 words out of 9,886 is
+lopsided enough to settle that question.
+
+**Also.** `STATUS.md`'s file inventory had already drifted three lines from the same day's later
+edits and was refreshed — the precise failure mode that made the previous STATUS.md wrong.
+
+**What the audit CONFIRMED, so it is not re-checked.**
+- 139 distinct `file:line` citations across the new material — **0 point past end-of-file.**
+- All four block_pool passages (`SKILL.md`, `STATUS.md`, `engine.md`, `the-surfaces.md`) now carry
+  the identical census.
+- `STATUS.md`'s numeric claims re-derived: **35** numbered engine sections, **40** distinct gate
+  names, **17** lints.
+- The earlier shipped work is intact: five `meet_*` canvases still carry their windows (2/2/2/1/1
+  rows, Prine's midnight-crossing row unsplit), `CastPage` is present in the built game **and** in
+  its rendered `info_pages_list`, and G38 passes 5/5 on `the_season`.
+- Every markdown code fence in the skill balances.
+- `gates.py` output byte-identical across all 27 games, checked again after the corrections.
+
+⚠️ **Two probes cried wolf during this audit and both were the instrument, not the work** — a
+`grep` for unpadded `id = "meet_prine"` against TOML that pads the key, and a `grep` for
+`info_pages_list` against a build that only contains the rendered array. Both were re-run correctly
+before anything was concluded. Same class as the earlier `cd`-drift false alarm: **check the probe
+before believing the alarm.**
+
+---
+
+## 2026-08-23 — STATUS.md rewritten; it described ten gates and we have forty
+
+**What.** `STATUS.md`, full rewrite. Previous version preserved at
+`scratchpad/STATUS.md.pre-2026-08-23` for the session; the CHANGELOG remains the durable trail.
+
+**Why.** LO asked for a comprehensive document covering what is implemented, how the work has
+moved, and how it proceeds. That document already existed and had gone materially wrong — dated
+*"Last verified: 2026-08-11"*, headed *"The ten gates"*, with `back_home` as the live test game and
+`vesper` described as *"1/10"*. Writing a fourth overlapping document beside `SKILL.md`,
+`DOCTRINE_GAPS.md` and this file would have made the drift worse, so the existing one was brought
+current instead.
+
+**What it now carries.** The 40-gate / 17-lint split and why `n/a` is not a pass · the five
+thresholds demoted or deleted for failing their own evidence · a current file inventory · every
+game re-scored in one pass · the eight open study sections with their real state · the promotion
+criteria, still unmet.
+
+**The part worth keeping.** PART 3 records the arc rather than a snapshot, because it repeats:
+doctrine from ONE game → `back_home` 10/10 → LO played it → **21 defects the scoreboard could not
+see** → widened to 18 games → widened to 25 → `the_season` **39/40** → LO played it → *"I don't
+know who is who"*. The same failure, one level up, against four times the instrumentation. The
+evidence base keeps widening and the reading keeps deepening, and **neither has ever replaced LO
+playing it.**
+
+**Verified.** Every figure re-derived this turn, not carried over: file line counts by `wc -l`; 40
+distinct gate names and 17 lints parsed out of `gates.py`; all 27 game directories re-scored in one
+pass; seven `v2_state.json` ledgers enumerated from disk.
+
+---
+
+## 2026-08-23 — the engine already had the field's main mechanism, and this skill had never named it
+
+**What.** `references/engine.md` (new §35, the Unverified list, §32.2), `references/the-surfaces.md`
+(R6 mechanism 5, new R5b), `references/register.md` (two new part-one rules, S3 subsection, header),
+`SKILL.md` (one warning under the cascade/node-routing rule). **`scripts/gates.py` was NOT touched
+— no new gate, no new threshold.**
+
+**Why.** LO's question — *"how do we measure good games?"* — landed on the honest answer that the
+scoreboard measures plumbing, not writing: The Season scores 39/40 and his first reaction to playing
+it was *"I don't know who is who."* So four top female-PC games were read **in source**, not counted:
+Course of Temptation (mopoga rank 5), Degrees of Lewdity (7), Zara's School Life (22), Family Ties
+(24). Study at `~/Documents/Female_PC_Craft_Study_20260823/`.
+
+Step 0 of that study is itself worth recording: **there are only three clean female-PC games in the
+mopoga top 30**, plus one selectable-with-female-default. The genre's top ranks are mostly male-PC
+games in which women are the content.
+
+**The finding.** Three of the four build **every** repeatable sexual surface out of a pool of
+one-sentence variants, and none of them writes such a scene as a paragraph — Course of Temptation
+`<<switch setup.rir(0, 3)>>` over 164 named acts, Family Ties `either(...)` over 12 poses, DoL a
+deterministic grid on two arousal meters. Our engine has had the same primitive since v2 shipped:
+`block_pool` (`v2.py:14572-14591`) emits `<<set _bp to random(0, N)>>` and an if/elseif chain.
+Counted in each game's built TOML: **vesper (v1) 6 · every v2 game 0.** The whole skill mentioned it
+**once**, inside a list of valid block types. vesper's own ledger already described the pattern in
+the author's words — *"block_pool of penthouse stories"* (`5_scenes.toml:6036`).
+
+**What was proposed, tested, and DROPPED.** The proposal opened with a P0: fix `gates.py` first,
+because folding a pool's variants into one beat would over-count words. **That was wrong.** `Beat`'s
+docstring (`gates.py:298-306`) already gives the reason variants fold, and the claim was checked
+rather than assumed — measured across ten DoL location passages, **9,652 of 9,886 words (98%) of its
+location prose sits inside a conditional branch**. ⚠️ *Corrected the same day — see the audit entry
+above: that is a ten-passage spot check, not a whole-game figure, and must not be quoted as one.
+The conclusion it supports is unaffected.* The `location fill` threshold was derived from
+that same source (116,540 words / 25 locations, this file 2026-08-10), so folding **is** the
+apples-to-apples comparison; changing it would break the only baseline the gate has. Where folding
+distorts it distorts conservatively — ten explicit variants fold to *one* explicit beat, making
+`explicit floor` harder to reach, never easier. §35 records this so the next reader does not
+re-propose it. It also records why this does **not** contradict `register.md`'s 25-game table
+(*"count one rendered path, not every branch"*): different instrument, different question.
+
+**The two new writing rules.**
+
+- **The reason axis** — *the same act, reached two ways, is written two ways, and the difference is
+  WHY she is doing it, not how hot it is.* Course of Temptation's `ShowerStall` gates masturbation
+  behind a skill **and** behind arousal, and writes a different intro for each: *"ignoring how
+  precarious your privacy is"* against *"you're desperate for relief"*. Zara's School Life does it
+  inside one act with two interiority paragraphs — *"she owned this moment"* against *"her own body
+  responded traitorously"*. Grepped `references/` for *reason*, *same act*, *volition*, *chose*,
+  *driven* first: **no rule of this shape existed.** The file states explicitly that this is not
+  R6's banned move — R6 forbids tiering a **hub's** opener and is right; this varies the **act's**
+  intro by the route that opened it.
+- **The two-halves sentence** — DoL's `actionsothermouthpenisthrust` is a 3×3 grid with nothing
+  random in it: his arousal writes the first clause, hers writes the second. **Nine outcomes from
+  six written clauses.** Buildable today with stacked `group` bands.
+
+**Also.** S3 gains *write the lines by personality, not by person* (Course of Temptation's thirteen
+`dirtytalk*` widgets pick by `shy`/`crude`/`dominant` crossed with what the NPC wants). R5b records
+that all four games write the decline branch at full length and pay it — Zara's is a full paragraph
+granting `+60 Energy`; Course of Temptation charges `friendship -50 -60` for pushing and being
+refused. R5b is listed with R1/R2/R4 as **deliberately not gated**: four games is an observation,
+not a field.
+
+**A self-contradiction is gone.** `engine.md`'s Unverified list still carried *"adjacent `[group]`
+blocks merging into a single if/elseif chain"* while `the-surfaces.md` R6 stated it as fact. Read
+and promoted: `_render_group_chain` collects consecutive `group` blocks at `v2.py:14561-14568`.
+
+**What was deliberately NOT changed.**
+- **No rule about opening length.** The corpus range is 109,714 characters (Course of Temptation,
+  rank 5) down to one paragraph of safety instructions (DoL, rank 7). Two of the top seven at
+  opposite extremes; any rule here would be invented.
+- **The pivot rule was tested and CONFIRMED.** Zara folds heavy interiority into its acts and never
+  leaves the body — *"her pussy was clenching with need, dripping for him"* — which is not a pivot
+  by the rule's own definition. `register.md` now records that it survived, and nothing about it
+  moved.
+- **No game files.** Not The Season; **not vesper**, which was read for evidence only.
+
+**Verified.**
+1. `gates.py` re-run across **all 27 games** in `games/`, before and after: **every output
+   byte-identical.** (First run reported movement everywhere — that was a shell `cd` leaving a
+   doubled relative path so the "after" runs could not find `gates.py`, not a real change. Re-run
+   from the repo root with an absolute path: clean.)
+2. Every line cited in §35 re-read after writing: `v2.py:14572-14591`, `v2.py:14561-14568`,
+   `gates.py:298-306`, `gates.py:338-349`.
+3. The `block_pool` claim checked against a **real build, not a synthetic one** —
+   `games/vesper/output/index.html` contains **6** `_bp to random` emissions.
+4. Grepped that no file still lists adjacent-group-merging as unverified.
+
+---
+
+## 2026-08-23 — the introductions played to empty rooms, and the cause was a comment in the schema
+
+**`the_season`'s five meeting canvases carried no time window**, so each one auto-fired the moment
+the player walked into the room whether the character was standing in it or not. Seen live, twice:
+`meet_prine` fired at the camp at **06:10 on a Saturday** with Prine out in the rows, and
+`meet_boyd` fired **on day 6** in the shed with his line reading *"That's low for you and it's
+Monday."* Separately, `meet_emmett` opened on a bare name — *"Emmett is on the belt…"* — and no
+line in that canvas ever said he was her brother.
+
+### The cause, and it was not the author
+
+Checked engine → doctrine → one-off, in that order.
+
+- **The engine is correct.** `isCanvasValid` (`v2.py:4559-4574`) reads schedules, conditions and
+  repeatability and never reads `requiresNpc`. Repo-wide the field is consumed in exactly two
+  functions: `setup.checkRandomEncounters` (`v2.py:5245`) and `setup.checkAndSubstituteCanvas`
+  (`v2.py:5318`). Neither is the auto-fire path.
+- **The doctrine is correct, and it was already there.** `references/the-first-hour.md` F5 carries
+  the traced warning and `templates/first-hour.toml:126-136` ships the schedule block with the note
+  *"the SCHEDULE below is what actually stops this firing in an empty room."* Both files were
+  **created** in `e0783a1` at **2026-08-23 01:29:49**. `the_season`'s TOML was written at
+  **13:19:12** — twelve hours later, with both open.
+- **The cause is `apps/projects/services/template_import.py`.** Its comment on
+  `TemplateTrigger.requires_npc` said the field *"lets authors drop per-canvas location+time gates
+  in favor of consulting the NPC's single source of truth."* Unscoped, and false for every meeting
+  canvas. **The schema file and this skill said opposite things, and the schema is what is open
+  while you write TOML.**
+- **And nothing checked it.** `every hub is met first` tests flags and hub gating only.
+
+### Changed — `scripts/gates.py`
+
+**New gate `a meeting fires where they are` (G38)**, beside `every hub is met first`, which is its
+other half: G34 asks whether a character is introduced before their hub opens, G38 asks whether that
+introduction can only play in a room they are standing in.
+
+- **In scope:** not `is_repeatable`, not `substitution_only`, not `trigger_mode = "random"`, and
+  declares `requires_npc`. Those three exclusions are precisely the shapes that *do* read
+  `requiresNpc`, so the gate never convicts a canvas the field actually protects.
+- **Fails** a canvas with no `trigger.schedules` whose NPC declares `[[npcs.schedules]]` rows at
+  that same location — a window was authorable and was not authored. Detail lines print the hours
+  that were available to copy.
+- **Skips** a canvas whose NPC has no rows there. Nothing to match; a different, weaker finding.
+- Measured across every game the day it was written — 69 canvases in scope and **zero carry a
+  window that misses their character's own hours**, so it never nags a game that did the work:
+  `last_call` 11/11, `off_season` 8/8, `the_long_summer_test` 1/1 clean; `the_season` 0/5,
+  `the_inheritance` 0/24, `vesper` 0/13, `late_shifts` 6/7.
+
+### Changed — `references/the-first-hour.md`
+
+- **F5** gains the measurement, the gate's name, and the finding above: the rule was correct and
+  present and a game shipped 0/5 anyway, because a second document said the opposite.
+- **F7 gains the honest admission that nothing enforces it at the meeting.** The `named before met`
+  lint skips any character who *has* a meeting and never reads the meeting's own text, so a bare
+  name in a first paragraph passes every check in this skill. **A check was tried and rejected**,
+  recorded so it is not re-attempted blind: a kinship-word detector fires falsely on ten of
+  `last_call`'s meetings (its cast is not family), eighteen of `the_inheritance`'s and three of
+  `off_season`'s mid-arc canvases. The instruction is to read the five first lines yourself.
+
+### Changed — `references/engine.md`
+
+**§31.1** names the two consuming functions, states the three trigger shapes a check must exclude,
+and records the contradicting schema comment so the next reader who finds one finds the other.
+
+### Changed — `SKILL.md`
+
+One gate-index row.
+
+### Engine (outside this skill, logged here because §31.1 documents it)
+
+`template_import.py`'s `requires_npc` comment rewritten: the claim scoped to the two functions that
+read it, what actually does the work on every other path stated plainly, and the failure recorded
+in place. **Comment-only** — `off_season` rebuilt and diffed against its committed build with zero
+new differences.
+
+### Verified
+
+- **`the_season` gate diff:** the new gate appears and passes; `location fill` moves 4,411 → 4,412
+  words, which is Emmett's sentence gaining one word. Nothing else moves — including
+  `the opening opens a door`, whose 05:05 handover the `meet_rae` window had to keep open.
+  **38/39 → 39/40.**
+- **Every other game re-scored.** PASS and +1/+1 on `last_call`, `off_season`,
+  `the_long_summer_test`; the gate fails on `late_shifts`, `the_inheritance` and `vesper` (true
+  findings, not fixed — two are v1 games); **n/a with no change at all** on `back_home`,
+  `forty_miles`, `mothers_place`, `seventh_day`, `steam`, `the_allowance`.
+- **The bug itself, read live in the built HTML.** The camp at 06:15 → `meet_prine` does **not**
+  fire; the camp at 20:25 → it does. The shed before noon → `meet_boyd` does **not** fire; 12:30 →
+  it does. `meet_emmett` renders *"Your brother is on the belt…"*.
+- **The chain still closes:** all five meetings reached in one ordinary day —
+  05:15 Rae · 07:40 Wade · 07:55 Emmett · 13:05 Boyd · 21:15 Prine. No console errors.
+
+---
+
+## 2026-08-23 — the guidance page introduced the whole cast on click one, and there was no page to look anybody up on
+
+**LO played the first testable build of `games/the_season` and could not tell who anyone was.** The
+gates were at 38/39. Every hub was correctly gated behind a meeting. And the Quests page still
+listed all five characters — names, the room each stands in, the hour they are there — on the
+player's first click, before a single meeting had fired. Two of them, Boyd and Emmett, additionally
+read **"✓ Arc complete"** on turn one.
+
+Measured against the field rather than against our own doctrine
+(`~/Documents/Mopoga_Twine_Sandbox_Research_20260724/gamehtml/`, all 25 parsed):
+
+```
+cast page (Characters / Notes / Journal / Dramatis Personae)   17 / 25
+hints or guide page                                            17 / 25
+of the 8 parsed top-ten, ones with a cast page                  7 / 8
+games using a narrator to explain who somebody is               0 / 25
+```
+
+The one top-ten exception is degrees-of-lewdity, which carries the load in the prose instead —
+description swapped for name on the meeting flag, 64 places. `the_season` did neither.
+
+### The three defects, placed
+
+- **Doctrine.** F5–F8 gate the *canvases* and say nothing about the *guidance surface*. A game can
+  obey every rule in `the-first-hour.md` and still name its whole cast on the guidance page.
+- **Doctrine.** `engine.md` §23 said *"set `terminal = true` on the last card of every arc"* — true,
+  and not sufficient. It never said `terminal` is **not computed from progress**, so a character
+  with a single terminal card on a `lt` band prints ✓ at value zero.
+- **Engine.** There was nowhere to look a character up. `[ui.tips_page]` and `[ui.cheat_page]`
+  existed; no cast page did.
+
+### Changed — `references/the-first-hour.md`
+
+- **New subsection under F8, "The same flag belongs on that character's quest cards."** The meeting
+  flag goes in every one of that character's `[[quest_cards]] when`, as its own item beside the
+  trait band. `QuestsPage` wraps each section in `<<if _card>>` (`v2.py:15371`) and `pickQuestsCard`
+  returns null on no match (`v2.py:15050`), so the roster fills in as the player meets people with
+  no engine change. Carries the three traps: an item sets `flag` **or** `trait` and never both
+  (`template_import.py:5285`); the flag goes on *every* card in the ladder, not just the first; and
+  **flag names are validated against nothing**, so a typo hides a character forever in silence.
+- Story-goal cards (no `npc_id`) are explicitly excluded — gating those renders "No active quests."
+- **Added to the scoreboard table:** nothing checks the guidance surface. `named before met` reads
+  prose canvases only and does not look at `[[quest_cards]]`. Said out loud rather than left to be
+  inferred from a gate list that looks complete.
+
+### Changed — `references/engine.md`
+
+- **§23** — the correction above: Frame 1 fires on `card.terminal === true` alone (`v2.py:15199`),
+  nothing checks achievement. `terminal` belongs on a card the player has to **climb to**; an arc
+  needs an open lower band and a terminal upper one.
+- **New §34, `[ui.cast_page]`.** The block authors no content — name, `relationship`, live location
+  and next step are all read at runtime. Records that **`relationship` is the only NPC string that
+  survives to runtime**: `description` is popped before `$npcs` ships (`v2.py:1027`) because `$npcs`
+  is snapshotted into every history moment, so a bio written there is an author note the player
+  never sees. Records that who is listed is the quest cards' decision, and states the cost of that
+  coupling plainly.
+
+### Engine (outside this skill, logged here because §34 documents it)
+
+`[ui.cast_page]` shipped: `TemplateCastPage` + parse + metadata write in
+`apps/projects/services/template_import.py`; `_generate_cast_page` + `_cast_page_css` +
+`<<castButton>>` in **both** `StoryCaption` branches + the `infoPages` allowlist in
+`apps/game_generation/twee_comprehensive/generators/v2.py`.
+
+### Verified
+
+- **Every gate diffed before and after.** One line moved, and it is the two new cards:
+  `guidance exists  13 → 15 quest cards`, still PASS. Score unchanged at **38/39**, `location fill`
+  still the only red.
+- **Read live, not inferred** (headless Playwright, the built HTML). Turn one: Story Goals plus Rae
+  only — she is the one the opening meets — **zero "Arc complete"**, and The Crew page shows Rae
+  with her relationship line and 📍 The Yard. After meeting Wade: both pages gain Wade and nobody
+  else. All five met: five cards, right relationship lines, live locations, right tips.
+- **Ladder**: at `owed`/`seen` 0 no ✓ anywhere; pushed to 30/25 the second cards take over and ✓
+  appears exactly twice.
+- **Rebuilt WITHOUT `--dev --debug`** and confirmed the button and page still render. A page wired
+  into only the dev `StoryCaption` branch ships dev-only and no gate catches it.
+- No console errors, no `pageerror`, in either build.
+
+### Not done
+
+No new gate. The card-gating rule needs a second game before a threshold is honest — a gate written
+from one game is how `location fill` got a budget 3.5× its delivery.
+
+---
+
 ## 2026-08-23 — the brake detector could not see a day cap, and said so out loud
 
 **Two gates were reporting rungs as free that the engine will not serve twice in a day** — and

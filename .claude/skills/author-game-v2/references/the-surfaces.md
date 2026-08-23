@@ -392,6 +392,65 @@ board."*
 ascent tiers are decoration and the wall of choices is at its worst on the day the player knows
 least. The failure case ran 109 of 216 ungated.
 
+**R5b · The choice to decline is written at full length, and it pays.** Not a gate — four games is
+not a field — but it is unanimous across the four, and our games do the opposite: a refusal that
+exists at all is usually a bare link back to the menu.
+
+Zara's School Life writes a family dinner the player re-enters (`meal event1`, 78,621 chars) with
+six corruption rungs inside it. The branch where she declines is a full paragraph and **grants
+`+60 Energy`**:
+
+> "Zara gave a small, almost imperceptible shake of her head, as if to physically dislodge the
+> intrusive fantasy. She took a slow, deliberate sip of water… The dangerous thoughts were sealed
+> behind a mental door, leaving only the taste of food and the sound of ordinary laughter around
+> the table. **For now, the fantasy remained just that.**"
+
+Course of Temptation charges in the other direction. Walking into an occupied shower uninvited and
+being refused costs `friendship -50 -60` and `Arousal -100`, and the scene has to be walked out of:
+
+> "'What the hell are you doing in here?! Get out!' […] It seems prudent to beat a hasty retreat.
+> 'Um, sorry!' you say, backing out into the dressing area. You hastily put your clothes back on and
+> duck out of the stall. **That certainly backfired.**"
+
+**Read together: saying no is content, and pushing and being refused is content.** A "no" that
+returns the player to an unchanged menu is a door that was never really open.
+(`~/Documents/Female_PC_Craft_Study_20260823/findings_D_writing.md`)
+
+**R5b.2 · A refusal that can never fail is a menu item.** Added 2026-08-24 after the field was
+re-read on exactly this question. R5b above says the decline branch is written and paid; the field
+carries a half we do not have at all.
+
+Course of Temptation does not *grant* a refusal, it **resolves** one. *"Refuse to respond"* to a
+groping in the street routes two ways off a Willpower check whose difficulty is read from the NPC
+doing it (`EventWalkPassHF`) — and both branches are written, both are paid, and they move **one
+meter in opposite directions**:
+
+> **succeeds** — `Composure +25`, his `control` over her **−25**: *"It's good to know he can't get
+> to you quite so easily."*
+> **fails** — `Arousal +100`, `Humiliation +50`, his `control` **+25**: *"So easy."*
+
+Not a special case: **464** skillcheck branch calls and **41** `*Resist*` passages in that game,
+**360** struggle/resist/escape passages in Degrees of Lewdity.
+
+Both ends of the range are defects, and players name both:
+
+- **No refusal at all** is why they leave — *"I lost interest in playing it after only 2 hours
+  because at almost every step there is a man who wants to use my body, and all I can do is try to
+  hit him or cover my holes and hope"* (`degrees-of-lewdity`, 5 likes).
+- **A refusal that always works** is why they get bored — three separate comments mourn a *removed*
+  failure case: *"did they remove npc's not listening when you resist? ... i really enjoyed that"*
+  (8 likes), *"they'd usually ignore your resistance, but now they just relent"* (6 likes).
+
+⚠️ **This is not a licence to hide a dice roll.** The same players resent RNG (*"the rng aspects of
+this game should be seriously toned down"*), and the field's answer is that the odds are **printed
+next to the choice before it is clicked** — 314 rendered `skillcheck` labels. Our engine has no
+per-choice roll anyway: the mechanism is `rejection_node`, a locked choice that stays clickable and
+routes to its own failure node with its own price (`engine.md` §36, and it is used by **zero**
+games today). **State the bar with `locked_text_threshold`; never fail silently.**
+
+Still **not a gate** — three games is not a field, the same bar that stopped a gate last cycle.
+(`~/Documents/Female_PC_Craft_Study_20260823/findings_J_players.md` §4)
+
 **R6 · The screen moves on re-entry — but the opener does not.** A location the player returns to
 daily has to render differently each time. **It does not do this by rewriting its first sentence.**
 
@@ -409,6 +468,56 @@ visits, six times *"You are in the Ocean Breeze Cafe."* Four other things carry 
 And on a repeatable **action**, variation is a scenario draw: eight cafe shifts produced **five
 distinct scenarios**. R3's walk-in is mechanism 4 aimed at an activity instead of a room.
 
+**Mechanism 5 — a pool of variants inside the beat — was missing from this list until 2026-08-23,
+and it is the one the field leans on hardest.** `block_pool` picks a different one of N blocks on
+every render (`engine.md` §35). Three of the four top female-PC games build **every** repeatable
+sexual surface this way and none of them writes such a scene as a paragraph:
+
+| game | its mechanism | scale |
+|---|---|---|
+| Course of Temptation (rank 5) | `<<switch setup.rir(0, 3)>>` | 164 named acts × 3 phrasings |
+| Family Ties (rank 24) | `either("…", "…", …)` | 12 poses × ~10 lines, plus ~10 of his dialogue |
+
+Counted across every `toml_phases/*.toml` here: **the_long_summer 46 · under_one_roof 14 ·
+vesper 6 · every v2 game 0.** The primitive shipped with the engine, v1's corpus carried a numbered
+rule for it that named this exact failure — *"the same text every morning problem"* — and v2 lost it
+(`engine.md` §35).
+
+The difference between mechanisms 4 and 5 is worth keeping straight. **A random event replaces the
+screen; a variant pool changes a sentence inside it.** The first is how a room stops being the same
+room; the second is how a scene survives its tenth read. A surface the player enters fifty times
+needs the second, and no amount of the first substitutes for it.
+
+**Confirmed from the player side 2026-08-24, and this one is unusually direct.** The complaint is
+the top-liked criticism of `zaras-school-life`:
+
+> *"The biggest problem with this game its so boring doing the same thing every day too much loop no
+> nothing new — **same gifs every time you do same things every single time**"* (13 likes)
+
+and it is named precisely in two other games — *"the game is pointless if you just use the **same
+scenes for every character**"* (`family-ties`, 6 likes), *"a school day can be 50 inputs with **~48
+of those being repeat dialogue**"* (`degrees-of-lewdity`, 6 likes).
+
+**Zara's developer answers it in the thread**, which is as close to a controlled result as this
+study gets. A player asks for *"originally written encounters instead of ones based on a format with
+names changed"*; the reply:
+
+> *"whenever you see 'improvement' in the changelog, assume i have done what you suggested above,
+> **trying to give every single scene a different text**."*
+
+⚠️ **The distinction that keeps this rule from being misread: repeating the LOOP is the genre,
+repeating the WORDS is the defect.** Players defend the structure in the same breath as they attack
+the text — *"this game is meant to be repetitive ... made to be played over and over again"*
+(7 likes), *"Doesn't feel too repetitive, I'm actually **invested in the storylines**"* (5 likes).
+Mechanism 5 varies the sentence inside a stable loop. It is not a licence to churn the routine, and
+it never randomises what the player can reach (`engine.md` §35).
+
+Measured across 3,479 comments on the four study games —
+`~/Documents/Female_PC_Craft_Study_20260823/findings_J_players.md` §2.
+
+⚠️ Still a **lint-side observation, not a threshold** — see the box below for why both of R6's gate
+attempts failed. Four games is not a field.
+
 **Read those four as a per-location checklist.** The finding shape is *"this location carries none
 of the four"* — **not** *"this location's opener is constant."* A constant opener is correct; it is
 what the reference game does on every visit. The incumbent skill says the same thing in stronger
@@ -416,6 +525,18 @@ words — `author-game/references/lanes.md:167`: *"The hub opener is ONE constan
 tier the base node into T0/T1/T2 `[group]` blocks… Tiering the opener is a known failure"* — an arc
 whose base node rewrites itself per stat band reads as N different scenes instead of one escalating
 hub.
+
+**Mechanism 6 — who is standing there.** Added 2026-08-24. The five above change what the screen
+*says* or *offers*. Course of Temptation has one that changes **who the player finds**: whether an
+NPC has something on her is a term inside the person-selection predicate —
+`(!rumor || setup.people.juiciest_rumor(person))` — so a reputation decides which characters turn up
+in a scene rather than which options appear in it.
+
+That is worth naming separately because it costs no new prose at all. The same hub, the same list,
+a different person leaning on the doorframe, and one of them knows. Ours can express it with a
+per-NPC condition (`engine.md` §8, `subject = "npc"`) — every game in this repo already uses per-NPC
+conditions, and none uses one this way.
+(`~/Documents/Female_PC_Craft_Study_20260823/findings_H_known.md` §3)
 
 **The one permitted exception, and it is narrow** (`lanes.md:154-160`): banding a base node on a
 **recoverable state** — paid up vs lapsed, carrying the part vs not, the copper lit vs cold — is a
@@ -488,6 +609,59 @@ and go."* answers him and *"Leave"* does not.
 > such nodes and needs no door in any of them. The rule here is for **independent budgets that
 > deplete together**, which is what a day cap and a price both are.
 
+**R8 · A person owns a corner of the world — and the schedule has to agree.** Added 2026-08-24 from
+Section G, after `the_season` shipped and the one defect a player reported was *"I don't know who is
+who."*
+
+Twenty-five field games were read in source to find what actually separates one character from
+another. A log-odds pass over each speaker's dialogue answers it, and the answer is **not diction**:
+
+| `destroyer` — the words that are theirs and nobody else's | |
+|---|---|
+| **Dr. Angela** | donate · patient · donor · treatments · sample · semen · recovery |
+| **Dean Mea** | vote · levy · detention · discipline · students · punishment · class |
+| **Stepmom** | ranch · house · dinner · hire |
+| **Aunt** | thousand · investment · shopping |
+
+`sluttown-usa` splits the same way, and it splits **twice** — each person has their own subject
+*and their own supporting cast*: Romi has Ell, Gigi and Elliot and talks about fashion, the store,
+jeans and stock; Leah has Eve, Nina and Joss and talks about classes, the pole, dancing and the
+club; AJ has Brad and talks about the professor, tutoring and the test.
+
+**A character is not a temperament with a name on it. He is a different part of the world, and he
+talks about the part he is in.** A trait system cannot buy this; only the design can.
+
+> ### ⚠️ The prose half is the easy half. The schedule is where it gets taken back.
+>
+> `the_season` **passes** the writing test. Every man genuinely owns a subject — Boyd speaks in
+> numbers (*"Forty-one."* · *"The number is not an opinion."* · *"I have weighed eleven years of
+> it."*), Prine in water and distance (*"You had water today? Not coffee. Water."* · *"Nobody comes
+> down this far."*), Emmett in binary rules (*"You're on the rows or you're on the belt. Not
+> both."*), Wade to an audience (*"Watch the top of the tree, boys."*).
+>
+> And its sixteen schedule rows collapse the whole cast into two places:
+>
+> ```
+> the_camp   19:00–00:30   Wade, Prine, Emmett, Boyd    <- all four men, every night
+> the_rows   05:30–12:00   Prine, Boyd, Wade            <- three of four, every morning
+> ```
+>
+> **He is never the only man in the room, so he never gets to be a particular man.** Only Emmett
+> (the shed) and Rae (the yard, the window) have somewhere that is theirs.
+
+So the rule has two halves and **both are required**:
+
+1. **His own subject and his own people** — a domain he talks about that nobody else talks about,
+   and at least one named person offscreen who belongs to him and not to the crew.
+2. **A place and an hour where he is the only one there.** Check it the way the defect was found —
+   bucket every `[[npcs.schedules]]` row by `(location, start_time, end_time)` and read the rows
+   with more than one name in them.
+
+**Where the tag line fits.** `[ui.cast_page]`'s `tags` field (`engine.md` §34) is the four-word
+compression of half of this — *"Manipulation | Attention | Writing | Oriental Food"* tells you what
+Chloe is about before you have met her. It is a **summary of a corner she already owns**, not a
+substitute for owning one. Four words on a card cannot rescue a man who has no domain.
+
 ---
 
 ## What this costs, and why it is worth it
@@ -522,9 +696,20 @@ shuts a door — *filthy means she cannot take the car* — turns a chore into a
 | **Lint · the browse share** | the share of repeatable room canvases whose entire click changes nothing but the clock |
 | **Lint · the act menu** | repeatable explicit surfaces split into node-routed loops and one-shot cascades. A count, never a target — R3b |
 
-**R1, R2's judgement half, and R4 are deliberately not gated.** Whether *"Turn somebody away"* is
+**R1, R2's judgement half, R4, R5b and R8 are deliberately not gated.** Whether *"Turn somebody away"* is
 aimed at a person or at the room is a judgement a parser cannot make, and a proxy check for it would
-pass exactly the game that failed. They stay a board-phase and authoring-time discipline.
+pass exactly the game that failed. They stay a board-phase and authoring-time discipline. R5b joins
+them for a different reason: it rests on four games read in source, which is an observation, not a
+field.
+
+**R8 joins them for a third reason, and it is the strongest of the three: the field disagrees with
+itself.** `degrees-of-lewdity` is rank 7 with 15,626 passages, and its NPC record reads `penis`
+2,198 times against `name_known` **27** — `lefthand`, `righthand`, `stance` and `distance` are a
+limb-by-limb struggle machine. Its people are not characters at all; they are bodies in a physical
+simulation, and that is a second working answer to the same problem. A gate mandating that
+characters be differentiated *as people* would fail the seventh-ranked game in the corpus. **The
+schedule-collision half of R8 is trivially checkable and a lint for it was considered and
+declined** — half a rule enforced is worse than a whole rule taught.
 
 > ⚠️ **What a checked-and-wrong rule costs, kept as the standing warning.** `objects` / gate 22 was
 > the previous occupant of this section and it was **green on all five games** while forcing nine

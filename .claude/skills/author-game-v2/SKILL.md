@@ -61,6 +61,13 @@ A room's list is **needs + work + people**, and nothing else (`the-surfaces.md` 
 about five things and a room contains fifty nouns, so the count falls out of a set that cannot grow.
 That is what separates a room from a button list.
 
+⚠️ **And "people" is not one bucket — each of them has to own a different part of the world.**
+A character is separated from the others by the **subject he talks about and the people who are
+his** (Dr. Angela has the clinic; Dean Mea has the school; Romi has the shop and Ell and Gigi), and
+by **a place and an hour where he is the only one there**. Write five good voices and then schedule
+all five into the same room every evening and the player still cannot tell them apart — which is
+exactly what `the_season` did (`the-surfaces.md` R8, `register.md` S3, `the-meters.md` W6).
+
 ⚠️ **This used to say "declare the objects in the room and hang every choice on one" and it was
 wrong** — deleted 2026-08-18 along with gate 22. See the operating rule about tired authors below.
 
@@ -68,6 +75,17 @@ wrong** — deleted 2026-08-18 along with gate 22. See the operating rule about 
 a **cascade** appends below what is on screen, so it suits a one-time scene whose text should build;
 **node routing** swaps the passage, so it suits a repeatable act surface where the picture has to
 change with the act.
+
+⚠️ **A surface the player re-enters needs its text to VARY, and no v2 game has ever made it.**
+Counted across every `toml_phases/*.toml` here: `block_pool` — which picks a different one of N
+blocks on every render — runs **46 times in the_long_summer, 14 in under_one_roof, 6 in vesper, and
+0 times in every v2 game.** v1 had a numbered rule for it; v2 lost it in the divorce from the old
+corpus (`engine.md` §35). Three of the four top
+female-PC games in the corpus build every repeatable sexual surface out of such pools, and none of
+them writes one as a paragraph. Two ways to do it, and they are siblings: **`block_pool` for
+undirected variety** (a die), **stacked `group` bands for directed variety** (state) — DoL writes
+one sentence whose first clause is his arousal and whose second is hers. `engine.md` §35 ·
+`the-surfaces.md` R6 mechanism 5 · `register.md` "the two-halves sentence".
 
 ⚠️ **There is also a cap of 8 (gate 20), and it is a backstop, not a size.** Two games prove why it
 must be read that way: one shipped 23 choices on a front desk and scored 18/18 because nothing said a
@@ -144,6 +162,7 @@ documented nowhere but in the script's own comments, so an author who hit one ha
 | **a banded meter is not also a number** | a banded sidebar stat is `hidden` in `[[traits.labels]]` | `the-meters.md` M7 · `engine.md` §30 |
 | **the opening opens a door** | the funnel's last click lands on a clock time when something at that location is actually open | `the-first-hour.md` F3 |
 | **every hub is met first** | no character's portrait is live before a meeting has fired, and one flag never opens the whole cast | `the-first-hour.md` F5 · F8 |
+| **a meeting fires where they are** | a one-shot naming a character carries a `trigger.schedules` window matching that character's own hours — `requires_npc` does not gate the auto-fire path, so without one the introduction plays to an empty room | `the-first-hour.md` F5 · `engine.md` §31 |
 | **the anchor introduces itself** | the room the ledger budgeted largest says what kind of place it is, once, on the first visit | `the-first-hour.md` F9 |
 | **the label keeps its time** | no button promises a clock time the engine cannot reach, and a stated duration is the real spend | `the-clock.md` C3 · C4 |
 | **the price is in one currency** | every notation on a button, plus the engine's own `currency_symbol`, resolves to ONE currency | `the-economy.md` R7 · `engine.md` §33 |
@@ -265,6 +284,26 @@ priced label against the field's 94% symbol).
   like a number the player has not moved yet.** When you write an unfamiliar key or value, find the
   line that consumes it before you write a hundred of them. Gate 25 and the importer now both
   refuse it; the next one of these has no gate yet.
+- **Twice now, the missing feature was already built.** `block_pool` (§35) and `rejection_node`
+  (§36) are both fully wired in the engine, both solve a defect this skill kept finding in its own
+  games, and both were used by **zero** v2 games because nothing here wrote them down. The tell is
+  identical each time: a rule that says *"our games do the opposite"* and offers no mechanism.
+  **When you catch yourself about to say the engine cannot do something, grep
+  `template_import.py`'s dataclasses first** — the field's mechanism is often already sitting there
+  unused.
+- **Differentiation is many small swaps, not a few large branches.** Two sections measured this
+  independently and landed in the same place. Section H: reputation is read in one-line swaps,
+  median **139** characters (degrees-of-lewdity) and **84** (zaras-school-life). Section G:
+  personality is read the same way — **896** `if` branches gated on an inclination in
+  course-of-temptation, median **114** characters, deciles 30/37/50/72/**114**/153/204/284/448.
+  Roughly twenty words. One sentence, swapped. **When a system feels like it needs a big branch per
+  state, the field's answer is almost always a small branch per site instead** — and ours default to
+  the opposite: `the_season`'s seven `known` read sites have a median of 570 characters.
+- **A per-NPC field has TWO write sites and the default build uses the second.**
+  `template_import.create_project_from_template` is the `--use-db` path; `game_graph.build_game_graph`
+  is the one a plain `package_from_toml` takes. Add a field to only the first and it reaches the
+  database and never reaches a game, silently, with no error at import, build or runtime
+  (`engine.md` §34).
 - **An explicit beat stays on the body for its whole length** — `references/register.md`. If the
   beat's last sentence is about what it *means* rather than what is *happening*, it has pivoted
   and will fail the floor. This defect recurred three times in three increments, authored each

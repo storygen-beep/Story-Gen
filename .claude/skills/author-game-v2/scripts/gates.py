@@ -4840,6 +4840,70 @@ def run_gates(model, game, state=None):
              f"{len(met)}/{len(cast)} characters are introduced before their hub opens",
              det)
 
+    # G38 — a meeting fires where they are (the-first-hour.md F5).
+    # The other half of G34. G34 asks whether a character is INTRODUCED before their
+    # hub opens; this asks whether that introduction can only play in a room the
+    # character is standing in.
+    #
+    # ⚠️ `requires_npc` DOES NOT DO THIS, and believing it does is the whole defect.
+    #    Traced: selectAutoFireCanvasForLocation -> isCanvasValid (v2.py:4559) reads
+    #    schedules, conditions and repeatability and NEVER reads requiresNpc.
+    #    Repo-wide the field is consumed in exactly two functions —
+    #    checkRandomEncounters (v2.py:5245, trigger_mode="random") and
+    #    checkAndSubstituteCanvas (v2.py:5318, substitution_only) — which is why
+    #    those two shapes are excluded below rather than judged.
+    #
+    # The failure this was written from: a game shipped five meetings with no window
+    # and its introductions played to empty rooms — one at 06:10 on a Saturday with
+    # the character out working, its prose saying "it's Monday". The skill had taught
+    # the rule and shipped a worked template twelve hours before that game was
+    # written; what it did not have was a check, and template_import.py's own comment
+    # on the field said the opposite (corrected in the same change as this gate).
+    #
+    # SCOPED SO IT ONLY CONVICTS WHERE A WINDOW WAS AUTHORABLE. A canvas whose NPC
+    # declares no rows at that location has nothing to copy, and saying so would be a
+    # different, weaker finding wearing this one's clothes.
+    #
+    # Measured across every game in the repo the day it was written — 69 canvases in
+    # scope, and ZERO carry a window that misses their character's own hours, so this
+    # never nags a game that did the work:
+    #   last_call 11/11 clean · off_season 8/8 · the_long_summer_test 1/1
+    #   the_season 0/5 · the_inheritance 0/24 · vesper 0/13 · late_shifts 6/7
+    npc_rows = collections.defaultdict(list)
+    for _n in (game.get("npcs") or []):
+        for _r in (_n.get("schedules") or []):
+            _loc = _r.get("location") or _r.get("location_id")
+            if _loc:
+                npc_rows[(_n.get("id"), _loc)].append(_r)
+
+    windowless, in_scope = [], 0
+    for c in (game.get("canvases") or []):
+        t = c.get("trigger") or {}
+        # the three shapes that DO gate on requiresNpc, and a repeatable hub, which
+        # is G34's business and not this gate's
+        if t.get("is_repeatable") or t.get("substitution_only"):
+            continue
+        if t.get("trigger_mode") == "random" or _is_dev(c):
+            continue
+        who = t.get("requires_npc")
+        if not who:
+            continue
+        in_scope += 1
+        if t.get("schedules"):
+            continue
+        theirs = npc_rows.get((who, t.get("location")))
+        if not theirs:
+            continue          # nothing to copy — not this gate's finding
+        hours = " · ".join(f"{r.get('start_time')}-{r.get('end_time')}" for r in theirs[:3])
+        windowless.append(f"{c.get('id')} @{t.get('location')}: no trigger.schedules, but "
+                          f"{who} is only there {hours} — `requires_npc` alone does not "
+                          f"gate this path (v2.py:4559)")
+    gate("a meeting fires where they are",
+         None if not in_scope else not windowless,
+         f"{in_scope - len(windowless)}/{in_scope} one-shot canvases naming a character "
+         f"can only fire in that character's own hours",
+         windowless)
+
     # G35 — the anchor introduces itself (the-first-hour.md F9)
     # ⚠️ AN EXISTENCE CHECK, which SKILL.md warns is the weakest kind — it asks whether a
     # thing is there, not how much of it or what it cost. It is defensible here only

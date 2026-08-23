@@ -243,6 +243,24 @@ screen as a face, and the hub cannot appear before the meeting has fired.
 > flag the player can only hold by having been there.** Keep `requires_npc` as well — it is free,
 > it is correct on the paths that read it, and it documents intent — but never rely on it alone.
 
+> **Gated as `a meeting fires where they are` (G38).** Measured across every game in the repo,
+> 2026-08-23 — 69 canvases in scope, and **zero carry a window that misses their character's own
+> hours**, so the check never nags a game that did the work:
+>
+> ```
+> last_call 11/11 clean · off_season 8/8 · the_long_summer_test 1/1
+> the_season 0/5      · the_inheritance 0/24 · vesper 0/13 · late_shifts 6/7
+> ```
+>
+> ⚠️ **The rule above was correct and present, and a game still shipped 0/5 — because a second
+> document said the opposite.** `template_import.py`, the file an author reads to learn the TOML
+> schema, described `requires_npc` as something that *"lets authors drop per-canvas location+time
+> gates"*, with no scope on the claim. True for the two Lane 2/3 functions; false for every meeting
+> canvas. `the_season` was written twelve hours after this reference and its template landed, with
+> both open, and its five introductions played to empty rooms. **When doctrine and the schema
+> disagree, the schema wins, because the schema is what is open while you type.** The comment is
+> corrected; the gate is why it cannot come back.
+
 ---
 
 ## F6 · A meeting is small, and somebody speaks
@@ -311,6 +329,22 @@ course-of-temptation 9, amore 2). It is the strongest game's mechanism, not a fi
 it is a **tool to reach for**, not a bar the gates hold you to. The **flag** is the norm; the swap
 is what a good author does with it.
 
+⚠️ **NOTHING ENFORCES THIS AT THE MEETING ITSELF, which is the one place it matters most.** The
+`named before met` lint asks only whether a character's name appears in the opening, a quest card
+or a room description *before* they have a meeting — and it skips anyone who has one outright
+(`gates.py`, `if n["id"] in has_meeting: continue`). It never reads the meeting's own text. So a
+meeting that opens on a bare name passes every check in this skill.
+
+`the_season/meet_emmett` opened *"Emmett is on the belt…"* and no line in that canvas ever said he
+was her brother — the one character in that cast who is hardest to read, arriving unlabelled, while
+Wade, Boyd and Prine all opened on the role.
+
+**And a check for it was tried and rejected**, which is worth recording so it is not re-attempted
+blind: a kinship-word detector run over every game fires on ten of `last_call`'s meetings (its cast
+is not family, so the word was never going to be there), eighteen of `the_inheritance`'s, and three
+of `off_season`'s that are mid-arc canvases rather than introductions. Most of its hits are wrong.
+**Read the first line of every meeting yourself.** It is five lines of reading per game.
+
 ---
 
 ## F8 · One flag per character
@@ -334,6 +368,46 @@ is the cold-spawn hub with a coat on.
 arrival is a punctuation mark. For a character who arrives mid-game, **withhold their schedule until
 the meeting fires** — `getNpcsWithSchedules` (`v2.py:3537`) surfaces every declared NPC on the
 Schedule page from day one regardless of any gate, so a schedule given early spoils the entrance.
+
+### The same flag belongs on that character's quest cards
+
+F5 through F8 gate the **canvases**. They say nothing about the **guidance surface**, and that gap
+shipped: `the_season` gated every hub correctly and its Quests page still introduced all five
+people on click one — names, the room each stands in, and the hour they are there — before the
+player had met anybody. Every meeting in the game was spoiled by the page that exists to help.
+
+**A character's `[[quest_cards]]` carry that character's meeting flag in `when`.**
+
+```toml
+when = [ { flag = "met_wade", subject = "player", op = "is_true" },
+         { trait = "want", subject = "npc", npc_id = "npc_wade", op = "lt", value = 40 } ]
+```
+
+The engine already does the rest. `QuestsPage` wraps each character's section in `<<if _card>>`
+(`v2.py:15371`) and `setup.pickQuestsCard` returns `null` when no card's `when` matches
+(`v2.py:15050`), so an unmet character renders **no heading and no section** — the roster fills in
+as the player meets people, which is what the field ships (the-company's cast table is
+`<<if $player.met[_char.id]>>` per row).
+
+Three things to get right:
+
+- **A `when` item sets `flag` *or* `trait`, never both** — the importer rejects an item carrying
+  both (`template_import.py:5285`). The meeting flag is its own item beside the trait band.
+- **Put it on *every* card in that character's ladder**, not just the first. A gap means the
+  character reappears at the band whose card you missed.
+- **Flag names are not validated against anything.** Nothing checks that `met_wade` exists; a typo
+  hides that character's guidance forever and no build error says so. Read the name off the
+  meeting canvas's own `flagEffects`, not off memory.
+
+⚠️ **This flag is load-bearing twice.** The cast page (`[ui.cast_page]`, `engine.md` §34) lists a
+character exactly when `pickQuestsCard` returns a card for them, so one flag reveals both surfaces
+and they cannot fall out of step. The cost is worth stating plainly: **a character with no quest
+card can never appear on the cast page.** `guidance exists` already requires every `[[npcs]]` entry
+to carry one, so this cannot happen in a game that passes its own scoreboard.
+
+**Story-goal cards — the ones with no `npc_id` — are never gated this way.** They are the
+always-live "Story Goals" section, and a guidance page whose every card is gated renders
+"No active quests." on turn one.
 
 ---
 
@@ -383,6 +457,11 @@ Three gates and one lint. `python3 scripts/gates.py <slug>`.
 | gate · **every hub is met first** | F5 + F8. Per character: **one** hub gated on a flag a non-repeatable canvas naming them sets, **no** hub left with zero conditions, and no such flag opening a second character's door. |
 | gate · **the anchor introduces itself** | F9. The anchor declared in `v2_state.json` `board.locations[].fill` has a non-repeatable canvas bound to it. **n/a** with no ledger. |
 | lint · **named before met** | F7. Lists every character named in prose the player can reach before that character's meeting can fire. A list to read, never a score. |
+
+⚠️ **Nothing checks the guidance surface.** The `named before met` lint reads *prose canvases* and
+does not look at `[[quest_cards]]`, so a game can pass every gate above with its Quests page still
+naming the whole cast on turn one — which is exactly what `the_season` did. Read the page yourself
+at turn one. A gate here needs a second game before its shape is honest.
 
 Where each stood when the checks landed, 2026-08-22 — read off the shipped gates, not a
 prediction:
