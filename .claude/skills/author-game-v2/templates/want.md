@@ -116,6 +116,17 @@ A character with no line here has no reason to exist: cut them, or write it.
 4. **Which repeatable surface carries the crudest writing in the game?** (§7 — and if the
    answer is a one-time scene, the game is already cold)
 
+5. **Run the vocabulary check and read what it prints.** Not a judgement call, and not optional:
+
+   ```
+   python3 scripts/gates.py --words games/<slug>/WANT.md
+   ```
+
+   A list, never a score. This page is where the game's nouns get chosen — its rooms, its work,
+   its objects, its meters — so it is the cheapest place to catch a word the player does not
+   already own. Catching one after the prose exists means renaming things.
+   `references/the-want.md`, "The test before you leave this file".
+
 ---
 
 **Then:** create `games/<slug>/v2_state.json` with `phase = "want"` per `references/state.md`,

@@ -96,6 +96,25 @@ Answer these four out loud. If any answer is soft, the Want is not done.
 4. Which repeatable surface carries the crudest writing in the game? *(the register, in the
    right place)*
 
+Then run the fifth, which is not a judgement call:
+
+```
+python3 scripts/gates.py --words games/<slug>/WANT.md
+```
+
+**Read the list. It is a list and never a score** — a word on it is not automatically wrong, and
+the question is only whether a player arrives already holding it.
+
+**Why here and not at the end.** The same check runs against a built game, and that is one phase
+too late: by then every noun is set into a room name, a button label and the prose behind it, and
+changing one means renaming things. **The Want is where a game's nouns get chosen** — its rooms,
+its work, its objects and its meters all come out of this page. Measured: a Want written by an
+author who had committed, one message earlier, to avoiding exactly this class of word still
+shipped two of them, and only a hand-rolled check caught it.
+
+Run it again on the board's location names before leaving that phase too. A word the player
+cannot decode is undecodable on a button.
+
 ## Then
 
 Create `games/<slug>/v2_state.json` with `phase = "want"` and the Want recorded, per

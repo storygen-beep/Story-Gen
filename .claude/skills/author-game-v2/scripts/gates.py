@@ -20,6 +20,9 @@ Usage:
     python3 gates.py <game-slug>            # resolves games/<slug>/toml_phases/7_final_game.toml
     python3 gates.py <path/to/game.toml>
     python3 gates.py <slug> --json          # machine-readable
+    python3 gates.py --words <path>         # the vocabulary lint on ANY text file,
+                                            #   for the WANT and BOARD phases, before
+                                            #   a game exists to measure
 
 Why a real TOML parser and not grep: an earlier grep-based pass on this same file
 silently missed 24 `is_repeatable` lines (whitespace-aligned and unspaced variants)
@@ -1781,6 +1784,38 @@ _FALSE_FRIENDS = {
 _HALF_HOUR = re.compile(
     r"\bhalf\s+(?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)\b", re.I)
 
+# This skill's OWN vocabulary, dropped only by `--words` (never by the game lint).
+#
+# A design document is not player-visible text: a Want legitimately says "tier" and
+# "ratcheting" forty times, and a report where 41 of 46 rows are this skill talking to
+# itself is a report the author skims. The count is always printed beside the summary,
+# so the suppression is visible rather than silent.
+#
+# ⚠️ EVERY ENTRY HERE IS A WORD THE CHECK CAN NO LONGER SEE, so the bias is toward
+# KEEPING words visible. This lint is a list a human reads: a false positive costs one
+# skimmed row, a false negative costs a shipped word. Only unambiguous authoring jargon
+# goes in.
+#
+# ⚠️ CONSIDERED AND REJECTED — each could name a real thing in a porn sandbox, which is
+# the whole test:
+#     odometer   a truck has one            slug       an animal
+#     lint       comes out of a dryer       dispatcher a real job
+#     rungs      a ladder has them          scoreboard a real object
+#     downstream / fandom — not this skill's vocabulary in the first place
+#
+# Terms already in `genre_words.txt` (ascent, cascade, hub, meter, rung, surface,
+# throttle, tier, canvas, gate, instrument, sandbox, repeatable) are omitted: they can
+# never reach the list anyway, so naming them here would be decoration.
+#
+# `meter` is here for the FALSE-FRIEND half only. In game prose it is a real false
+# friend — a coin-fed prepayment box to some readers, a stat bar to others — but in a
+# design document it means the stat bar on purpose, so warning about it is the check
+# arguing with the vocabulary it is written in.
+_SKILL_META = frozenset("""
+authoring canvases capstone corpus doctrine gating linted meter milestone milestones
+ratcheting sandboxes schema taxonomy tiers toml verifier walkin
+""".split())
+
 def _genre_words():
     """The field's shared vocabulary. Empty set if the table is missing — the lint
     then reports nothing rather than reporting everything."""
@@ -1815,8 +1850,8 @@ def _player_visible_text(model, game):
     return "\n".join(parts)
 
 
-def lint_own_words(model, game):
-    """Words in the player's face that the genre does not use — a LIST, not a score.
+def own_words_report(text, declared_names=(), suppress=frozenset(), shown=20):
+    """Words in a body of text that the genre does not use — a LIST, not a score.
 
     Off Season scores 86.8 Flesch, easier than 24 of the 25 field games, and LO
     could not read it. Sentence length and syllable count both pass a game whose
@@ -1830,11 +1865,26 @@ def lint_own_words(model, game):
     because a real object either lands with the reader or it does not. That is a
     judgement, so the check hands over the words and the author makes it.
     `references/register.md`, "The words the player has to already own".
+
+    ⚠️ This takes TEXT, not a parsed game, so the same instrument can run in the
+    WANT phase — before a location has been named or a button written. It used to
+    be reachable only from a built game, which is one phase too late: by then the
+    vocabulary is already set into room names and labels and fixing it means
+    renaming things. `the_season`'s Want shipped `rota` and `ledger` past a author
+    who had committed, one message earlier, to avoiding exactly that class.
+
+    `declared_names` — names the fiction teaches (a game's cast and places), which
+    are never words the player had to arrive holding.
+    `suppress` — terms to drop from the list. Used ONLY by `--words` for this
+    skill's own vocabulary, which a design document legitimately contains; the
+    count is always printed so nothing is hidden silently.
+    `shown` — how many rows to print, or None for all. A whole game needs the cap;
+    a one-page design document does not, and the cap hid the exact word this mode
+    was built to catch — `rota` ×1 sorted into the tail behind twenty commoner ones.
     """
     genre = _genre_words()
     if not genre:
         return "", []
-    text = _player_visible_text(model, game)
 
     # A proper noun is capitalised where a sentence does not force it. This finds the
     # game's own cast and places with no hand-maintained list, which is the point:
@@ -1858,22 +1908,26 @@ def lint_own_words(model, game):
                 if w[0].isupper():
                     cap[lw] += 1
     proper = {w for w in mid if mid[w] >= 2 and cap[w] / mid[w] > 0.6}
-    # Plus everything the game DECLARES a name for. A cast member mentioned twice,
-    # both times at the head of a sentence, is invisible to the capitalisation test.
-    for decl in list(game.get("npcs") or []) + list(game.get("locations") or []):
-        for field in ("name", "id"):
-            for w in _WORD_TOKEN.findall(str(decl.get(field) or "").replace("_", " ")):
-                proper.add(w.lower())
+    # Plus every name the caller DECLARES. A cast member mentioned twice, both times
+    # at the head of a sentence, is invisible to the capitalisation test.
+    for name in declared_names:
+        for w in _WORD_TOKEN.findall(str(name or "").replace("_", " ")):
+            proper.add(w.lower())
 
     rare = {w: n for w, n in uses.items()
             if w not in genre and w not in proper and w not in _CALENDAR
             and not _NUM_WORD.match(w) and "-" not in w}
+    # Counted BEFORE the drop, so the report can say how much it is not showing.
+    muted = sorted(w for w in rare if w in suppress)
+    for w in muted:
+        del rare[w]
     total = sum(uses.values()) or 1
     if not rare:
-        return (f"0 of {total:,} words sit outside the field's shared vocabulary", [])
+        return (f"0 of {total:,} words sit outside the field's shared vocabulary"
+                + (f" · {len(muted)} meta term(s) suppressed" if muted else ""), [])
 
     ranked = sorted(rare.items(), key=lambda kv: (-kv[1], kv[0]))
-    SHOWN = 20
+    SHOWN = len(ranked) if shown is None else shown
     findings = [f"{w} ×{n}" for w, n in ranked[:SHOWN]]
     # A list that hides two thirds of itself is not a list. off_season printed 20 rows
     # under a summary that said 67, and the 47 it swallowed included words already in
@@ -1894,15 +1948,28 @@ def lint_own_words(model, game):
     # `vests` ×2, `torches` ×2 and `biscuits` ×1 across the repo before this was added.
     def _ff_uses(w):
         return uses.get(w, 0) + uses.get(w + "s", 0) + uses.get(w + "es", 0)
-    ff = [(w, _ff_uses(w)) for w in _FALSE_FRIENDS if _ff_uses(w)]
+    ff = [(w, _ff_uses(w)) for w in _FALSE_FRIENDS if _ff_uses(w) and w not in suppress]
     for w, n in sorted(ff, key=lambda kv: -kv[1]):
         findings.append(f"[false friend] {w} ×{n} — {_FALSE_FRIENDS[w]}")
 
     summary = (f"{len(ranked)} word(s) the 25-game field does not use, "
                f"{sum(rare.values())} use(s) across {total:,} words"
                + (f" · plus {amb} ambiguous and {len(ff)} false-friend term(s)" if (amb or ff) else "")
+               + (f" · {len(muted)} meta term(s) suppressed" if muted else "")
                + " · read the list, do not read the number")
     return summary, findings
+
+
+def lint_own_words(model, game):
+    """`own_words_report` over everything the player actually reads in a built game.
+
+    The names the fiction teaches come from the game's own declarations, so no
+    hand-maintained cast list is needed.
+    """
+    names = [decl.get(field)
+             for decl in list(game.get("npcs") or []) + list(game.get("locations") or [])
+             for field in ("name", "id")]
+    return own_words_report(_player_visible_text(model, game), names)
 
 def _walkin_join(model, game):
     """The activity x schedule JOIN. `the-surfaces.md` R3.
@@ -1946,14 +2013,59 @@ def _exit_holders(canvas_nodes):
     return out
 
 
-def _grants(canvas_nodes):
+def _tick_cleared(game):
+    """Flags `[engine.daily_tick]` unsets on the day roll — the third part of a day cap."""
+    out = set()
+    for fe in (((game.get("engine") or {}).get("daily_tick") or {}).get("flagEffects") or []):
+        if fe.get("op") in ("unset", "clear") and fe.get("flag"):
+            out.add(fe["flag"])
+    return out
+
+
+def _holder_day_capped(holder, cleared):
+    """Is this ONE choice self-capped to once a day?
+
+    The three-part cap, all of it on the same choice: its `conditions` read a flag
+    `is_false`, its own `flagEffects` set that flag, and `[engine.daily_tick]` clears it.
+    Clicking it once shuts it until the day rolls.
+
+    ⚠️ WHY THIS EXISTS. `_routes` already knows this pattern, but only for a choice that
+    routes into ANOTHER CANVAS — it keys on `nodeId`. A walk-in's own exit choice targets
+    a LOCATION, so it produces no route at all, `_is_free` fell through to the trigger,
+    and the climb gate reported rungs as farmable that the engine will not serve twice in
+    a day. Measured on `the_season`: `walkin_showers_wade` is guarded by
+    `wade_rung_today is_false` and sets it, and the gate said "9 clicks, no cap."
+
+    That is the family `_farmable`'s docstring above already documents twice, and
+    `SKILL.md`'s rule — *a check that fails a game for obeying the doctrine is a bug in
+    the check.* Both gates' own remediation text tells the author to do exactly this:
+    "day-cap the rung with a flag cleared in [engine.daily_tick]."
+    """
+    if not cleared:
+        return False
+    sets = {fe.get("flag") for fe in (holder.get("flagEffects") or [])
+            if fe.get("op") == "set" and fe.get("flag")}
+    if not sets:
+        return False
+    for it in _conditions_of(holder):
+        fk = it.get("flag_key")
+        if fk and fk in sets and fk in cleared and it.get("operator") in ("is_false", "is_not_true"):
+            return True
+    return False
+
+
+def _grants(canvas_nodes, cleared=frozenset()):
     """(subject, npcId, trait) -> total POSITIVE add on this canvas's exits, plus its time cost.
 
     Only `add` with a positive value counts as a grant. `set` is not a climb, and a
     negative add is a charge. Mirrors the engine's live-op list (engine.md §21b).
+
+    A choice that day-caps ITSELF grants nothing farmable — see `_holder_day_capped`.
     """
     got, minutes = collections.Counter(), 0
     for h in _exit_holders(canvas_nodes):
+        if _holder_day_capped(h, cleared):
+            continue
         t = h.get("time_progression_minutes")
         if isinstance(t, (int, float)):
             minutes = max(minutes, int(t))
@@ -2055,7 +2167,12 @@ def _routes(model, game):
                 if isinstance(costs, dict):
                     costs = [costs]
                 perday = bool((by_id[tgt].get("trigger") or {}).get("max_triggers_per_day"))
-                selflimit = False
+                # The choice may day-cap ITSELF — guard on a flag it sets, cleared on the
+                # tick. That is the shape §16 forces on a triggerless rung: the rung has
+                # no location, so the flag CANNOT live on its exit and has to sit on the
+                # hub choice instead. Without this the engine's own required pattern
+                # reads as an unbraked route into every act loop in the repo.
+                selflimit = _holder_day_capped(ch, _tick_cleared(game))
                 for it in _conditions_of(ch):
                     fk, tk, op = it.get("flag_key"), it.get("trait_key"), it.get("operator")
                     if fk and fk in sets_flag.get(tgt, ()) and op in ("is_false", "is_not_true"):
@@ -2091,6 +2208,12 @@ def _free_climb(top, grants, start=0.0):
         click count can be higher than reported — never lower.
       * decay and clamping are ignored. Both make the real climb longer.
     """
+    # A meter that already satisfies the gate at game start was never climbed, so it
+    # cannot have been climbed for free. Without this, `energy` starting at 100 against
+    # a gate at 25 reported "entirely for FREE — 0 clicks, 0m of game time" — which
+    # describes no climb at all. Zero clicks is not farming; it is a starting value.
+    if float(start) >= top:
+        return None
     v, clicks, mins, used = float(start), 0, 0.0, collections.Counter()
     while v < top and clicks < 5000:
         avail = [g for g in grants if g[3] <= v]
@@ -2110,9 +2233,23 @@ def _is_free(cid, routes, game):
     Min over routes, never max: one unbraked door makes the whole rung farmable, no
     matter how well priced the other doors are.
     """
-    trig = next((c.get("trigger") for c in (game.get("canvases") or []) if c.get("id") == cid), None) or {}
+    canvas = next((c for c in (game.get("canvases") or []) if c.get("id") == cid), None) or {}
+    trig = canvas.get("trigger") or {}
     if trig.get("max_triggers_per_day") or trig.get("costs"):
         return False
+    # The same three-part day cap, SPLIT: the guard on the trigger, the setter on a
+    # choice inside. The canvas stops rendering the moment the flag is set, so it is
+    # capped just as hard as if both halves sat on one choice — and this is the more
+    # common shape, because a whole activity is usually what a day cap is for.
+    cleared = _tick_cleared(game)
+    if cleared:
+        sets = {fe.get("flag") for h in _exit_holders(canvas.get("nodes"))
+                for fe in (h.get("flagEffects") or [])
+                if fe.get("op") == "set" and fe.get("flag")}
+        for it in _conditions_of(trig):
+            fk = it.get("flag_key")
+            if fk and fk in sets and fk in cleared and it.get("operator") in ("is_false", "is_not_true"):
+                return False
     rs = routes.get(cid)
     if not rs:                      # auto-firing / unreferenced: its own trigger is the only brake
         return not (trig.get("max_triggers_per_day") or trig.get("costs"))
@@ -3684,8 +3821,10 @@ def run_gates(model, game, state=None):
             _currency_ops({"nodes": c["nodes"]}, currency, ops)
             if "add" not in ops:
                 continue
-            _g, mins = _grants(c["nodes"])
+            _g, mins = _grants(c["nodes"], _tick_cleared(game))
             amt = sum(v for (subj, _n, t), v in _g.items() if subj == "player" and t == currency)
+            if amt <= 0:
+                continue          # every grant on it is day-capped — not a faucet
             printers.append(
                 f"{c['id']} @{c['loc']}: grants +{amt:g} `{currency}` every {mins or 0} min "
                 f"with no cost, no cap and no daily limit")
@@ -4221,7 +4360,7 @@ def run_gates(model, game, state=None):
     for c in (game.get("canvases") or []):
         if not _farmable(c):
             continue                                  # one-shots and dev shortcuts are not a grind
-        got, minutes = _grants(c.get("nodes"))
+        got, minutes = _grants(c.get("nodes"), _tick_cleared(game))
         rs = routes.get(c["id"]) or []
         free_rs = [r for r in rs if not r["braked"]]
         free = _is_free(c["id"], routes, game)
@@ -4789,10 +4928,95 @@ def run_gates(model, game, state=None):
     return R
 
 
+def _words_declared_names(path):
+    """The names the fiction teaches, read off `v2_state.json` beside the file.
+
+    Without this the cast tops its own report: a Want naming six people put five of
+    them in the first six rows and pushed the one real finding off the printed tail.
+    The ledger already declares them, so nothing here is guessed — same declare-then-
+    check shape the gates use everywhere else.
+
+    Returns `(names, ledger_path_or_None)`.
+    """
+    d = os.path.dirname(os.path.abspath(path))
+    for _ in range(3):                       # the file may sit in games/<slug>/ or below
+        cand = os.path.join(d, "v2_state.json")
+        if os.path.exists(cand):
+            break
+        parent = os.path.dirname(d)
+        if parent == d:
+            return [], None
+        d = parent
+    else:
+        return [], None
+
+    try:
+        with open(cand) as fh:
+            state = json.load(fh)
+    except (OSError, ValueError):
+        return [], None
+
+    names, board = [], state.get("board") or {}
+    # The protagonist. She is not in board.characters[] — she is the player — so
+    # without this her own name tops her own report on every single run.
+    names += [state.get("protagonist"), board.get("protagonist")]
+    names += list((state.get("want") or {}).get("why_this_person") or {})
+    names += list((state.get("want") or {}).get("crude_ceiling") or {})
+    for key in ("characters", "locations"):
+        for entry in board.get(key) or []:
+            if isinstance(entry, dict):
+                names += [entry.get("id"), entry.get("name")]
+    names += list((board.get("map") or {}).get("homes") or {})
+    # `npc_boyd` -> the tokeniser sees `npc` and `boyd`; both are then names the
+    # fiction teaches, which is correct — neither is a word the player arrived with.
+    return [n for n in names if n], cand
+
+
+def words_mode(path):
+    """The vocabulary lint on a plain text file — the WANT and BOARD phases.
+
+    The game-phase lint runs on a BUILT game, which is one phase too late: by then
+    every noun is already set into a room name, a button label and the prose behind
+    it, and changing one means renaming things. This runs on the document where the
+    nouns are being CHOSEN.
+
+    Always exits 0. `references/register.md` is explicit that this is a list and never
+    a score, so it must not be able to fail a build or block a phase.
+    """
+    try:
+        with open(path) as fh:
+            text = fh.read()
+    except OSError as exc:
+        print(f"cannot read {path}: {exc}")
+        return 2
+
+    names, ledger = _words_declared_names(path)
+    summary, findings = own_words_report(text, names, suppress=_SKILL_META, shown=None)
+    print(f"the words the player has to already own — {path}")
+    if ledger:
+        print(f"  names the fiction teaches, from {ledger}: {len(names)} declared")
+    else:
+        print("  no v2_state.json alongside — the cast's own names will appear in the "
+              "list below (they are not defects)")
+    print(f"  {summary}" if summary else
+          "  genre_words.txt is missing — nothing measured (an absence is not a pass)")
+    for f in findings:
+        print(f"    · {f}")
+    if findings:
+        print("\n  Read the list, not the number. A word here is not automatically wrong —")
+        print("  the question is whether a player arrives already holding it.")
+    return 0
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
         sys.exit(2)
+    if sys.argv[1] == "--words":
+        if len(sys.argv) < 3:
+            print("usage: python3 gates.py --words <path/to/file>")
+            sys.exit(2)
+        sys.exit(words_mode(sys.argv[2]))
     arg = sys.argv[1]
     path = arg if arg.endswith(".toml") else f"games/{arg}/toml_phases/7_final_game.toml"
     if not os.path.exists(path):

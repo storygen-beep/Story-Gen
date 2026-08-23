@@ -5,6 +5,164 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-23 — the brake detector could not see a day cap, and said so out loud
+
+**Two gates were reporting rungs as free that the engine will not serve twice in a day** — and
+the mechanism they could not see is the one their own remediation text tells the author to use:
+*"day-cap the rung with a flag cleared in `[engine.daily_tick]`."*
+
+Found authoring `games/the_season` v0.1. `walkin_showers_wade` is guarded by
+`wade_rung_today is_false`, sets that flag, and `[engine.daily_tick]` clears it. The player cannot
+click it twice in a day. `the climb is paid for` said **"9 clicks, no cap."**
+
+`_routes` already knew this pattern — but only for a choice routing into ANOTHER CANVAS, because it
+keys on `nodeId`. A walk-in's own exit choice targets a **location**, so it produced no route at
+all, `_is_free` fell through to the trigger, and every choice-level cap in the repo was invisible.
+
+This is the family `_farmable`'s own docstring already documents twice, and it names the rule:
+`SKILL.md`, *a check that fails a game for obeying the doctrine is a bug in the check.* Its two
+earlier instances each produced "a real defect introduced purely to please a check" — a `costs`
+block on a game's intro, and a 1-energy charge on every dev choice. The fix is in the check.
+
+### What changed — `scripts/gates.py`
+
+- **`_tick_cleared(game)`** — the flags `[engine.daily_tick]` unsets. The third part of a cap.
+- **`_holder_day_capped(holder, cleared)`** — the three-part cap on ONE choice: its `conditions`
+  read a flag `is_false`, its own `flagEffects` set it, and the tick clears it.
+- **`_grants()` skips a day-capped holder.** A rung that shuts after one click grants nothing
+  farmable.
+- **`_is_free()` also recognises the SPLIT cap** — guard on the trigger, setter on a choice inside.
+  The canvas stops rendering the moment the flag is set, and this is the *more* common shape,
+  because a day cap usually covers a whole activity.
+- **`no free uncapped income` skips a surface whose money grant nets to zero.** With every grant on
+  it capped, the gate was still listing it at "+0" — a faucet with no water in it.
+- **`_free_climb` returns None when `start >= top`.** A meter that already satisfies its gate at
+  game start was never climbed. `vesper`'s `hygiene 100 → gate at 40` was being reported as
+  *"entirely for FREE — 0 clicks, 0m of game time"*, which describes no climb at all. Zero clicks
+  is a starting value, not farming. Same denominator error the gate's own comment says it exists to
+  avoid.
+
+### How it was verified
+
+All **20 built games**, `--json`, `PYTHONHASHSEED=0`, pre-edit vs post-edit.
+
+> ⚠️ **A zero-diff bar would have been the WRONG bar here**, unlike the `--words` refactor above. A
+> correct fix to a check that was making false claims *must* move the games those claims were about.
+> The bar is instead: **no game flips pass-state, and every dropped row is verifiably false.**
+
+**Six games changed. Pass-state flips: ZERO.** Every change removes a row; none grants a pass.
+Three spot-checked against their own source:
+
+```
+last_call        canvas_rosa_hub "Sit and listen" — +4 relation, sets talked_to_rosa_today,
+                 guarded on it is_false, cleared in daily_tick.   Gate said "9 clicks, no cap."
+the_inheritance  p_floor_private — trigger guards private_done_today is_false, three choices set
+                 it, tick clears it.   Gate said "+5300 money every 180 min, no daily limit."
+vesper           hygiene starts at 100 against a gate at 40.   Gate said "free in 0 clicks."
+```
+
+`the_season` moved 29/37 → 31/37, both gates green for the right reason.
+
+---
+
+## 2026-08-23 — the vocabulary check, one phase earlier
+
+**The lint that catches a word the player cannot decode only ran against a BUILT GAME**, which is
+one phase too late. By the time a game exists, every noun is already set into a room name, a
+button label and the prose behind it, and changing one means renaming things.
+
+Caught on `games/the_season`, authoring its Want. The author had, one message earlier, written out
+the whole `airer`/`lodger`/`immersion` finding and committed to writing the game in neutral
+vocabulary — and then put **`rota`** into the Want's own charge section, plus **`ledger`** as the
+name of a mechanic. Both were found only because the check was hand-rolled against
+`scripts/genre_words.txt` at the end of the phase. Nothing in the skill asked for that.
+
+Applying the skill's own test — *would a correct author-game-v2 have prevented this?* — yes, and
+the fix is in the skill.
+
+### What changed
+
+**`scripts/gates.py`**
+- **`lint_own_words(model, game)` split into `own_words_report(text, declared_names, suppress,
+  shown)` plus a two-line wrapper.** The hard part — sentence-aware proper-noun detection, literal
+  possessives, `_CALENDAR`/`_NUM_WORD` filtering, false friends, the `half <hour>` check — is
+  unchanged and is now reachable **without a parsed game**.
+- **New CLI mode `python3 gates.py --words <path>`** — the same instrument on any text file, for
+  the WANT and BOARD phases. Always exits 0; `register.md` is explicit that this is a list and
+  never a score, so it must not be able to block a phase.
+- **`_SKILL_META`** — this skill's own vocabulary, suppressed **only** in `--words`, because a
+  design document legitimately says `tiers` and `ratcheting` and a report where 41 of 46 rows are
+  the skill talking to itself is a report the author skims. The count is always printed.
+  Deliberately small: `odometer`, `lint`, `rungs`, `slug`, `dispatcher` and `scoreboard` were
+  **considered and rejected** — each can name a real thing in a porn sandbox, and for a
+  list-only lint a false negative (a shipped word) costs more than a false positive (a skimmed
+  row). Terms already in `genre_words.txt` are omitted as no-ops.
+- **`shown` is now a parameter** (default 20, unchanged for games; `None` in `--words`). The cap
+  was sized for a whole game and it **hid the exact word this mode was built to catch** — `rota`
+  ×1 sorted into the unprinted tail behind twenty commoner ones. First run of the new mode
+  reproduced the original defect, which is the correct thing for a check to do to its author.
+- **`--words` reads the cast off `v2_state.json` beside the file** (`_words_declared_names`).
+  Without it the cast topped its own report: five of the first six rows were the game's own
+  people. Declare-then-check, same shape as everywhere else — nothing is guessed.
+- **False friends are filtered by `suppress` too**, and `meter` is in `_SKILL_META` for that half
+  only. In game prose it is a genuine false friend; in a design document it means the stat bar on
+  purpose, so the warning was the check arguing with the vocabulary it is written in.
+
+**`references/the-want.md`** — a fifth item under *"The test before you leave this file"*: the
+command, why it belongs at the Want rather than at the end, and an instruction to re-run it on the
+board's location names. **No example words**, per `SKILL.md`'s operating rule — a rule is read and
+an example is copied, which is how `airer` and `£5 for the immersion` spread in the first place.
+
+**`templates/want.md`** — the same check as item 5 in the checks block, where an author filling
+the template actually hits it. A template is filled in; a reference is read.
+
+### How it was verified
+
+- **The refactor moves nothing.** All **20 built games** in the repo, `--json`, pre-edit file
+  (`git show :`) vs post-edit, `PYTHONHASHSEED=0`: **0 diffs**.
+- ⚠️ **The first comparison reported 5 regressions and every one was false.** Gate 10's
+  *"also ranked"* list is built from a set, so its order varies between processes: the **same
+  code, run twice, does not match itself**. Fixed the instrument (`PYTHONHASHSEED=0`) rather than
+  the code. Worth carrying — a baseline diff on this script is meaningless without a pinned hash
+  seed, and the next person to refactor here will hit it.
+- **The new mode reproduces the defect that prompted it.** Against a pre-fix copy of
+  `games/the_season/WANT.md` it prints `ledger ×4` and `rota ×1`; against the corrected file,
+  neither.
+
+### Two follow-ups, found by running it for real on the board phase
+
+- **`--words` did not know the protagonist's name**, so `cass` topped her own report on every
+  run — she is the player and is therefore not in `board.characters[]`. Added an optional
+  top-level **`protagonist`** to `v2_state.json`, read by `_words_declared_names`, and documented
+  in `references/state.md`. Same declare-then-check shape as everything else: nothing is guessed.
+- **It caught a real one on the first board.** `games/the_season` shipped *"a hose bib on the
+  outside wall"* — `bib` is precisely the `airer`/`immersion` class, a short common-looking word
+  naming an object the reader must already own. Also `blacktop`. Both fixed before a line of
+  prose existed, which is the entire point of moving the check earlier. What survived the pass
+  and was kept on judgement: `tailgate ×5` (decodable in context), `peaches`/`crews` (plurals of
+  in-corpus words).
+
+### ⚠️ Open, NOT fixed here — the scoreboard hands out vacuous passes on an empty board
+
+Running `gates.py` at board phase for the first time (a game with 9 locations, 6 characters and
+**0 canvases**) returns **PASS** on checks that have nothing to measure — and one of them prints a
+claim that is false:
+
+```
+[PASS]  a day-cap closes     7 day-cap flag(s) cleared in [engine.daily_tick], all of them set somewhere
+```
+
+Each of those seven flags occurs **exactly once** in the built TOML — the clear. Nothing sets
+them and nothing reads them. `sinks >= sources` likewise passes at **1 : 0**, and
+`a place is not a catalogue` and `a spent day still has a door` both pass across **zero screens**.
+
+This is `SKILL.md`'s own rule turned on the instrument: *a check that measures EXISTENCE has not
+measured anything*, and *an absence is not a pass* — these should report **n/a**, as the content
+gates correctly already do. Left open deliberately rather than folded into this edit: it is a
+separate change to a separate set of gates, and it is LO's call whether to spend it now.
+
+---
+
 ## 2026-08-23 — the empty screen: a hub with nothing on it, and the gate that now says so
 
 **LO walked into Ewan's yard in his own built game and got a portrait, a paragraph, a line of
