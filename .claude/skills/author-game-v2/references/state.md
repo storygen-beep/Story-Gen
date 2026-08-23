@@ -29,6 +29,10 @@ belong here; only decisions, debts, and promises do.
   "slug": "…",
   "phase": "want" | "board" | "release",   // the dispatcher reads THIS
   "narration_person": "second",             // immutable once a release has shipped
+  "protagonist": "…",                       // her name. Read by `gates.py --words` as a
+                                            //   name the fiction teaches — she is not in
+                                            //   board.characters[], so without this her
+                                            //   own name tops her own vocabulary report.
 
   "want": {
     "who_she_is":      "…",

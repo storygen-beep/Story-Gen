@@ -15,6 +15,51 @@
 //                        NOT whatever is currently half-built in the working tree.
 window.GAMES = [
   {
+    // Listed 2026-08-23. Authored end-to-end with author-game-v2. 4,411 words across 8
+    // locations, 35 canvases, 5 characters, 13 guidance cards, 38/39 gates.
+    //
+    // Built against the shape the previous five kept returning to. FOUR of the six earlier v2
+    // games are a female protagonist and incest inside ONE BUILDING with vertical authority
+    // (back_home, the_allowance, off_season, seventh_day), which is the failure the-map.md R0
+    // names in its own text. This one roots the map OUTDOORS on a packing yard — the world
+    // contains the camp rather than the other way round — and puts the whole cast on a migrant
+    // picking crew, so the taboo is proximity rather than a household. `who_climbs = "both"`,
+    // declared: 57% of the climb sits on the cast, and five characters carry FOUR distinct meter
+    // shapes where all five earlier games shipped one.
+    //
+    // First game here to clear `every hub is met first` — all six earlier v2 games ship the
+    // forbidden cold-spawn hub, where a repeatable canvas with npc= IS the introduction. Also
+    // the first with rungs at the FIELD's spacing (lowest at 4 and 5) rather than the DoL seed's
+    // 15, which every one of the sixteen tiers across five games had copied.
+    //
+    // Headless play-through is clean: zero JS errors across the opening, the yard, the hubs and
+    // both act loops; the day-cap fires and R7's free door keeps the spent screen alive.
+    //
+    // ⚠️ ONE RED GATE, and it is a real debt: `location fill`. 4,411 words against a 15,500-word
+    // budget declared before the prose — 28%. The estimate was mine and it was ~3.5x optimistic.
+    // At 102 words/canvas the writing is DENSER than the DoL seed (~68/unit); what the world is
+    // short of is SURFACE COUNT — 35 canvases across 8 locations against the seed's ~68 units per
+    // location. Deliberately NOT edited down to match, because a budget quietly revised to the
+    // delivered count is the back-fill defect state.md exists to stop. Same posture as off_season.
+    //
+    // ⚠️ Also open: the anchor AS BUILT is the_camp (25%), not the declared the_packing_shed —
+    // content gravitated to Wade's loop while the shed's own arc (Boyd's) is deferred to 0.2.
+    // Resolve by filling the shed, not by moving the label. And npc_halbrook + the_porch were
+    // cut to 0.2 as a whole unit before the writing, logged in WANT.md's amendments.
+    //
+    // ⚠️ MEDIA HAS NEVER BEEN HARVESTED. 27 declared slots — cycling pools on 6 of 8 locations
+    // plus the fixed plates and portraits — with zero files on disk. Current output/ is a
+    // --dev --debug build, so the art shows labelled debug placeholders rather than silent gaps
+    // and the dev stat controls are visible. Run find-media, then rebuild output/ without
+    // --dev --debug, add `version`, archive to games/the_season/releases/, and drop `dev: true`
+    // in the same commit.
+    slug: "the_season",
+    title: "The Season",
+    badge: "v2",
+    dev: true,
+    summary: `Cass Renfro has picked six seasons and has never once held her own money. The crew is her father, her two brothers, her uncle and four men who are not family, and they follow the fruit — nine weeks at this farm, then the next one, living out of two vans and a camp trailer parked on the packing yard. Everyone is paid by the bin and every bin goes through the man whose name is on the contract, which has never been hers. She gets the back bunk because she is the only woman on the crew and because her father says she does. There is no door on this property that locks except the cooler, the shower gate starts at her knees and stops at her collarbone, and the wall between her bunk and her brothers is one sheet of plywood. Nothing here is private and nobody is further away than the yard, which is the whole problem and the entire appeal.`,
+  },
+  {
     // Listed 2026-08-19. Authored end-to-end with author-game-v2. 7,963 words across 10
     // locations, 58 canvases, 4 characters, 14 guidance cards, 31/32 gates.
     //

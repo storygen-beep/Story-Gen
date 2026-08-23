@@ -1,0 +1,435 @@
+{
+  "slug": "the_season",
+  "phase": "board",
+  "narration_person": "second",
+  "protagonist": "Cass Renfro",
+  "want": {
+    "who_she_is": "Cass Renfro, 23. The crew is her father Boyd, her brothers Wade (26) and Emmett (20), her uncle Prine (48), and four men who are not family. They follow the picking -- nine weeks at the Halbrook place, then the next one. They live in two vans and a camp trailer parked on the packing yard. Paid by the bin, and the whole crew's take goes through Boyd because his name is on the contract. Six seasons picked and she has never held her own money. What she has to lose: the back bunk in the trailer. She is the only woman on the crew and that arrangement exists because her father says it does. No car, no money, nine miles of dirt road to the highway.",
+    "appetite": "To be wanted by men she shares a wall with, in a place with nowhere at all to do it. It cannot finish: every notch further is also a notch more visible, the crew is never further away than the yard, and the season ends and starts again somewhere else with two of the same faces and two new ones. There is no state of affairs that settles it -- only how far in she is when the trucks load out.",
+    "ascent": "BOTTOM: she works the rows, sleeps in the back bunk with her brothers through the wall, washes at the camp showers with a towel and somebody standing at the gate. There is not one place on this property she can be alone with anyone for two minutes, and everything she does she does on her way to somewhere she is expected. TOP: she has the cooler key and the shed after the scale is shut, the truck cab, and the loft over the barn. The cooler is the only lock on this farm and she holds the key. She decides who is in the trailer at night, and the crew works around where she is.",
+    "charge": "taboo (primary) + transformation (secondary)",
+    "charge_note": "Proximity IS the transgression. Not a locked room and a secret -- two vans, a trailer, a wall she can hear through, and a crew twenty feet away. The thing that makes it transgressive is the thing that makes it nearly impossible, and they are the same wall. Reversal is deliberately NOT claimed: Boyd's hold on the money is real and does not flip, it gets USED, which belongs to his book.",
+    "why_this_person": {
+      "npc_boyd": "Her father, 47. His name is on the contract, so every dollar she has earned passed through his hand before it reached hers. Being wanted by the man who holds the book is the only way the book stops being the whole of what is between them.",
+      "npc_wade": "Her brother, 26. The loud one. He has been crude about her to the crew, where she can hear, since she was nineteen, and has never once been told to stop. He is already saying it; the climb is him saying it TO her.",
+      "npc_emmett": "Her brother, 20. They were close and then in March he stopped talking to her and will not say why. He is the one who sees things. Being wanted by him means finding out what he already knows.",
+      "npc_prine": "Her uncle, 48. Boyd's brother, third van, sleeps alone, takes no days off in nine weeks. Patient in a way that reads as safe right up until it doesn't, and she is the one who keeps mistaking one for the other.",
+      "npc_rae": "Runs the canteen and the scale, 50s. Twenty crews. She names what the men are doing before Cass has words for it and does not soften any of it. Cass wants to be told she is handling it, by the only person qualified to say so."
+    },
+    "crude_ceiling": {
+      "npc_boyd": [
+        "t1: nothing named -- the shape of her, how she has filled out, what she wears to work in",
+        "t2: tits, ass, wet, hard, cock -- flat, once, the way he reads a weight off the scale",
+        "t3: cunt, fuck her, come in her -- stated, never performed"
+      ],
+      "npc_wade": [
+        "t1: already crude ABOUT her, to the crew, where she can hear -- tits, ass",
+        "t2: crude TO her -- cock, wet, hard, suck, fuck",
+        "t3: cunt, cum, choke, hold still, come on your tits"
+      ],
+      "npc_emmett": [
+        "t1: nothing. He looks, and then he stops looking",
+        "t2: hard, cock, tits -- said badly, and he takes none of it back",
+        "t3: cunt, fuck, cum, please"
+      ],
+      "npc_prine": [
+        "t1: nothing named -- how long she has been on, whether she has had water",
+        "t2: cock, tits, wet, hard -- unhurried, like he has all season",
+        "t3: cunt, ass, fuck, cum in her -- still unhurried, which is the worst of it"
+      ],
+      "npc_rae": [
+        "all tiers: crude about the CREW, as trade talk, never about herself -- cock, tits, fuck, cunt. Her ceiling is language, not access"
+      ]
+    },
+    "register_home": "The crude register lives on five re-enterable surfaces, all on the standing map from 0.1: the showers, the packing shed after the scale is shut, the truck cab, the far end of the rows, and the trailer bunk at night. Nothing crude is held back for a one-time capstone.",
+    "crudest_repeatable_surface": "The showers -- communal, no lock, a gate instead of a door, entered daily from 0.1 onward.",
+    "deletion_test": "Cut Rae and nothing Cass does is measured by anyone who has seen twenty crews. Boyd is leverage and the brothers are appetite; Rae is the only read on this worth having, and the canteen is the game's only mirror.",
+    "release_41_test": "A new man on the crew, a new building on the property, or an hour of the day she stops working. The crew turns over between seasons -- two faces change and the blood does not -- so the cast is renewable without the taboo resetting.",
+    "last_read_at_release": null,
+    "amendments": [
+      "0.1 — npc_halbrook and the_porch DEFERRED to 0.2. LO's call: cut a whole unit, never thin everything. Halbrook was the only cast member with no ladder at 0.1 already (trust-only, met then locked), so the deferral costs the least real content; deferring the_store instead would have taken out the economy's main sink and the only renewable source of new faces.",
+      "0.1 — the ascent's 'the one door on this property that locks' now names THE COOLER, not the porch. the-map.md R2: a room the Want promises must exist. This also settles a contradiction the board shipped with — intro_packing_shed calls the cooler 'the only lock on this farm' while the_porch said its own door locked."
+    ]
+  },
+  "board": {
+    "who_climbs": "both",
+    "who_climbs_note": "Player tiers are the FLOOR on the most explicit content; the per-character meters are the SPINE of each arc. Six distinct cast meter shapes, picked from the-meters.md W6 -- leverage (boyd), willingness (wade, prine), hidden accumulator (emmett), trust only (halbrook), none (rae). Gate 34 checks >=25% of meter-gating on each side.",
+    "ascent_tiers": [
+      "nerve",
+      "known"
+    ],
+    "ceilings": {
+      "nerve": 100,
+      "known": 100
+    },
+    "tier_rungs": {
+      "nerve": [
+        4,
+        8,
+        12,
+        18,
+        25,
+        33,
+        42,
+        55,
+        70,
+        85
+      ],
+      "known": [
+        5,
+        10,
+        16,
+        24,
+        34,
+        46,
+        62,
+        80
+      ]
+    },
+    "tier_notes": {
+      "nerve": "the floor on WHERE -- what she will do in a place with that much cover, with that many people that close",
+      "known": "the floor on WHO KNOWS -- whether it stays between two people or the crew starts acting on it. Rises AND widens; the crew acting on what it knows is content, not punishment",
+      "counterweight": "NONE, deliberately. One game in 25 has one that gates anything, and four of our five shipped one that gates almost nothing.",
+      "throttle": "arousal -- declared WITH the first node-routed act loop and never before it. Its only job is gating the act menu on that loop."
+    },
+    "locations": [
+      {
+        "id": "the_packing_shed",
+        "job": "the scale, the sorting, and the hours after the belt stops",
+        "anchor": true,
+        "fill": 4200,
+        "has_cycling_pool": true,
+        "serves": {
+          "needs": [],
+          "work": [
+            "sorting",
+            "extra hours at the scale"
+          ],
+          "people": [
+            "npc_boyd",
+            "npc_emmett",
+            "npc_rae"
+          ]
+        }
+      },
+      {
+        "id": "the_camp",
+        "job": "where she sleeps, forty feet from everyone who is not asleep",
+        "anchor": false,
+        "fill": 2500,
+        "has_cycling_pool": true,
+        "serves": {
+          "needs": [
+            "energy"
+          ],
+          "work": [],
+          "people": [
+            "npc_boyd",
+            "npc_wade",
+            "npc_prine",
+            "npc_emmett"
+          ]
+        }
+      },
+      {
+        "id": "the_yard",
+        "job": "the ground everything crosses, and Rae's window on it",
+        "anchor": false,
+        "fill": 1900,
+        "has_cycling_pool": true,
+        "serves": {
+          "needs": [
+            "thirst",
+            "energy"
+          ],
+          "work": [
+            "loading out"
+          ],
+          "people": [
+            "npc_rae"
+          ]
+        }
+      },
+      {
+        "id": "the_rows",
+        "job": "the work and the money, and a far end nobody can see",
+        "anchor": false,
+        "fill": 2300,
+        "has_cycling_pool": true,
+        "serves": {
+          "needs": [
+            "thirst"
+          ],
+          "work": [
+            "picking, by the bin"
+          ],
+          "people": [
+            "npc_boyd",
+            "npc_wade",
+            "npc_prine"
+          ]
+        }
+      },
+      {
+        "id": "the_showers",
+        "job": "the only way to get clean, with a gate instead of a door",
+        "anchor": false,
+        "fill": 2100,
+        "has_cycling_pool": true,
+        "serves": {
+          "needs": [
+            "hygiene"
+          ],
+          "work": [],
+          "people": []
+        }
+      },
+      {
+        "id": "the_barn_loft",
+        "job": "crates out of the sun — inside, with a reason to be there",
+        "anchor": false,
+        "fill": 1100,
+        "has_cycling_pool": true,
+        "serves": {
+          "needs": [],
+          "work": [
+            "stacking crates"
+          ],
+          "people": [
+            "npc_prine"
+          ]
+        }
+      },
+      {
+        "id": "the_store",
+        "job": "nine miles out: where money goes, and where new faces come from",
+        "anchor": false,
+        "fill": 1000,
+        "has_cycling_pool": false,
+        "serves": {
+          "needs": [],
+          "work": [
+            "the store run for others"
+          ],
+          "people": []
+        }
+      },
+      {
+        "id": "the_cooler",
+        "job": "LOCKED at 0.1 — the visible door the release ends on",
+        "anchor": false,
+        "fill": 400,
+        "has_cycling_pool": false,
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        }
+      }
+    ],
+    "needs": [
+      {
+        "key": "energy",
+        "falls": "15 a day, plus every bin picked",
+        "fills": "the_camp · Sleep · to morning; the_yard · eat at Rae's window · 20 min",
+        "costs": "$4 at the window",
+        "shuts": "below 25 she cannot take a row or get up the ladder"
+      },
+      {
+        "key": "hygiene",
+        "falls": "20 a day, faster in the rows",
+        "fills": "the_showers · Wash · 20 min",
+        "costs": "$2 for hot water, or cold and free",
+        "shuts": "below 35 Rae turns her out of the window and two men will not be near her"
+      },
+      {
+        "key": "thirst",
+        "falls": "on the ROW WORK, not the calendar — 15 an hour picked",
+        "fills": "the_yard · the water · 5 min; the_store · cold water",
+        "costs": "nothing at the yard, $3 at the store",
+        "shuts": "below 20 the row choices are gone; she has to come down"
+      }
+    ],
+    "characters": [
+      {
+        "id": "npc_boyd",
+        "surfaces": 2,
+        "schedule_rows": 3,
+        "why_wanted": "He holds the book, and being wanted by the man who holds it is the only way it stops being the whole of what is between them.",
+        "meters": {
+          "owed": "leverage — what she owes against bins not yet picked. Money and the book, never affection"
+        }
+      },
+      {
+        "id": "npc_wade",
+        "surfaces": 2,
+        "schedule_rows": 3,
+        "why_wanted": "He is already crude about her to the crew where she can hear. The climb is him saying it to her.",
+        "meters": {
+          "ease": "access — how alone he will let it get",
+          "want": "willingness — how far he goes. Warmed by the arousal throttle"
+        }
+      },
+      {
+        "id": "npc_prine",
+        "surfaces": 2,
+        "schedule_rows": 4,
+        "why_wanted": "Patient in a way that reads as safe right up until it doesn't, and she keeps mistaking one for the other.",
+        "meters": {
+          "ease": "access — how alone he will let it get",
+          "want": "willingness — unhurried the whole way up"
+        }
+      },
+      {
+        "id": "npc_emmett",
+        "surfaces": 1,
+        "schedule_rows": 3,
+        "why_wanted": "He stopped talking to her in March and will not say why. He works the shed, so he is at the door when everyone comes in.",
+        "meters": {
+          "seen": "a hidden accumulator of what he has watched. Never surfaced — that is the shape of him"
+        }
+      },
+      {
+        "id": "npc_rae",
+        "surfaces": 2,
+        "schedule_rows": 3,
+        "why_wanted": "Twenty crews. She names what the men are doing before Cass has words for it. The deletion test: cut her and nothing Cass does is measured by anyone qualified to measure it.",
+        "meters": {}
+      }
+    ],
+    "map": {
+      "archetype": "nested_zones",
+      "shape": "A peach farm nine miles off the highway. The packing yard is the middle of everything: the camp and its two vans and a trailer on one side, the shed and the cooler on the other, the rows running uphill behind, the barn at the far end, and one dirt road out to the store.",
+      "home_base": "the_camp",
+      "exterior": "the_yard",
+      "homes": {
+        "npc_boyd": "the_camp",
+        "npc_wade": "the_camp",
+        "npc_emmett": "the_camp",
+        "npc_prine": "the_camp",
+        "npc_rae": "offscreen"
+      },
+      "bridges": [
+        {
+          "from": "the_yard",
+          "to": "the_rows",
+          "costs": {
+            "time": 15
+          }
+        },
+        {
+          "from": "the_yard",
+          "to": "the_store",
+          "costs": {
+            "time": 40
+          }
+        }
+      ],
+      "r1_signoff": "NOT SIGNED OFF. Drawn by the author at board phase 2026-08-23; the author signing off their own map is not a sign-off, and the 26/26 house-shaped game recorded exactly that. Owed: LO reads the shape sentence above and says whether he can draw it."
+    },
+    "economy": {
+      "currency": "money",
+      "symbol": "$",
+      "obligation": "the Saturday settle — Boyd takes the camp charge ($30) back off her take, in cash, in front of the crew. [settings.rent], due_day Saturday, collector npc_boyd, eviction_mode flag_set",
+      "obligation_amount": 30,
+      "weekly_take": "$25-45 a week",
+      "sinks": [
+        "the_store: boots, phone cards, cold water",
+        "the_yard: meals at Rae's window",
+        "the_showers: hot water",
+        "the_store run: gas for the truck",
+        "the advance: markup on borrowing against bins not yet picked"
+      ],
+      "sources": [
+        "the_rows: picking, by the bin",
+        "the_packing_shed: extra hours at the scale",
+        "the_store: the run for others"
+      ],
+      "spread_note": "5 sinks across 5 locations, 3 sources. No location holds more than one sink — gate 17 fails when more than half resolve to one place, and a measured game passed 21:20 with twelve of its sinks on a single front desk."
+    }
+  },
+  "releases": [],
+  "promises": [],
+  "decisions": [
+    {
+      "at": "want",
+      "note": "who_climbs = 'both'. Pitched as 'player' (ladder); corrected after reading the-meters.md W1/W6 -- this cast has six genuinely different relationships and all five earlier v2 games shipped ONE meter shape across the whole cast. Costs more to author; LO approved."
+    },
+    {
+      "at": "want",
+      "note": "Rungs deliberately NOT 15/35/55/75. Field runs 8-17 rungs with the lowest at a median of 5; all 16 tiers across our five games put the lowest at exactly 15 (the-meters.md W4), so the first fifteen clicks of a v2 game change nothing."
+    },
+    {
+      "at": "want",
+      "note": "Obligation is the Saturday settle PLUS the advance. The settle is the recurring public charge the economy needs (the-economy.md R3); the advance -- borrowing against bins not yet picked, at a markup, from whoever has cash -- is the per-person leverage, and it is what makes the debt-holder variable so the money feeds the roster. Adjacency to the_allowance's Sunday envelope was raised with LO and accepted."
+    },
+    {
+      "at": "want",
+      "note": "Vocabulary is neutral, not British. Every world noun checked against scripts/genre_words.txt (words used by >=4 of the 25 field games). bunkhouse, orchard, picker, foreman, vineyard, grower, migrant are out of corpus and are NOT used. Currency symbol is $."
+    },
+    {
+      "at": "want",
+      "note": "Shape chosen BEFORE the cast (the-map.md R0): nested_zones rooted OUTDOORS on the packing yard. Four of six existing v2 games are female-protagonist incest in one building with vertical authority; this one is deliberately different in shape, not in kink."
+    },
+    {
+      "at": "board",
+      "note": "The Saturday settle is wired to [settings.rent], and the engine was READ before it was wired rather than assumed. advanceDay sets rent_state.is_due on the due weekday (v2.py:5442-5446); the next Location_* or Navigation passage force-routes to RentDay (v2.py:15480-15485). It is an INTERRUPT SCENE with a named collector, not a room she visits -- exactly right for a father who finds her wherever she is. eviction_mode='flag_set' (v2.py:16211) so coming up short sets `into_the_advance` and play continues; the default 'game_end' would put a lose-state in a product that never ends."
+    },
+    {
+      "at": "board",
+      "note": "FIVE meter shapes across six people, not six. Wade and Prine deliberately SHARE the rich ease+want pair because they are the two arcs that carry 0.1 (the-meters.md W6: reserve the two-meter model for one or two). Earlier phrasing said six; corrected here rather than left overstated."
+    },
+    {
+      "at": "board",
+      "note": "NPC trait keys are UNPREFIXED (owed, ease, want, seen, trust). The engine namespaces them by npc_id in conditions -- { subject='npc', npc_id='npc_wade', trait_key='want' } -- as off_season does. A first draft used prefixed keys (wade_lust) and that was wrong."
+    },
+    {
+      "at": "board",
+      "note": "clothing_enabled = false at 0.1. The premise has a real clothing axis (work clothes, heat, what she wears where) but it is a whole system and the plan did not fund it. Deferred, not forgotten -- and NOT declared in the Want as a promise, so nothing is owed."
+    },
+    {
+      "at": "board",
+      "note": "DELIBERATE DEVIATION from the-first-hour.md F8's 'withhold their schedule until the meeting fires'. All five family schedules ship live from day one. Cass has known these people her whole life and they are on the same forty-foot yard; hiding them from the Schedule page would be a lie the map contradicts. The MEETING is the first time alone with each THIS SEASON, and the hub gate is still one flag per character (met_boyd .. met_rae), never one flag for the cast."
+    },
+    {
+      "at": "board",
+      "note": "thirst has NO entry in [player.trait_decay] on purpose. It falls on the ROW WORK, as a cost, not on the calendar -- which is what makes it the premise's own need instead of a third copy of hygiene."
+    },
+    {
+      "at": "0.1",
+      "note": "THE WHOLE ECONOMY WAS RESCALED TO LIVE UNDER 100. A `costs` deduction is hard-clamped 0-100 and there is no way to turn it off (engine.md §27, v2.py:4655-4661): at money=150 a $4 charge leaves 100 and silently eats 46. Rather than dodge it with clamp=false on grants, every balance in the game now stays under 100 -- rows pay $4/$6, shed $5, store fee $4, settle $30. Removes the bug class instead of routing around it. The Want's '$90-140 against $60' is superseded; ratio preserved."
+    },
+    {
+      "at": "0.1",
+      "note": "`costs` is an ARRAY of {trait, value} (engine.md §27), not an inline table. The first draft wrote `costs = { money = 4 }` -- valid TOML, parsed, and did NOTHING, because template_import reads a costs entry as {trait,value} only. Same silent-vocabulary class as `op = subtract`. Caught by the money gate reading 0 canvases gating on money."
+    },
+    {
+      "at": "0.1",
+      "note": "FILL REDECLARED BEFORE THE PROSE: 8 locations, 15,500 words, anchor the_packing_shed 4,200 = 27%. Mean 1,938 against the DoL seed's 4,661 — leaner, but the SHAPE holds: one anchor over 25%, a long tail, satellites small because they were declared small. Written into the ledger NOW; gate 1 refuses a budget that looks back-filled, and all three earlier v2 games passed 8/8 against a record of themselves by filling this field from the delivered count."
+    },
+    {
+      "at": "0.1",
+      "note": "A PORTRAIT HUB NEEDS BOTH `npc` AND `requires_npc`. `npc` is what puts the canvas in the portrait render bucket; `requires_npc` only gates presence. The first seven hubs carried requires_npc alone, so none of them was a portrait hub at all and 'every hub is met first' reported n/a because it could not find one. Now 5/5 -- the gate all six earlier v2 games fail."
+    },
+    {
+      "at": "0.1",
+      "note": "known's top sidebar band (80) was TRIMMED to 46, not gated. The top band's max is a promise (gate 8) and 0.1 does not deliver 80, so the honest fix is to stop promising it rather than bolt a gate onto content that is not there. The band returns in 0.2 with the rungs that earn it."
+    },
+    {
+      "at": "0.1",
+      "note": "Sentence length ran 16 against a ceiling of 14 (field median 10) -- 58 sentences over 25 words. Split at their natural break across 43 content blocks and read back; now 14. The register runs to compound sentences and it needs watching every pass, not once."
+    },
+    {
+      "at": "0.1",
+      "note": "THE VOCABULARY LINT CAUGHT ME A SECOND TIME on the same class it was built for: `ply` x5, the trade shortening of plywood, which American English does not use -- exactly `airer`. Also `ledger` back in one beat, `half seven` (6:30 to much of Europe, unused in American English), and `biscuit` (a cookie here, a savoury roll to most readers). All four fixed. Assume it is happening; run the check."
+    },
+    {
+      "at": "0.1",
+      "note": "THE ANCHOR AS BUILT IS the_camp (25%), NOT the declared the_packing_shed. Content gravitated to the camp because Wade's loop, the bunk and two walk-ins are all there, while the shed's own arc -- Boyd's -- is deferred to 0.2 by design. Gate 1 picks the anchor by DELIVERED words, so the ledger and the game disagree. Resolve in 0.2 by filling the shed, not by re-declaring the anchor."
+    },
+    {
+      "at": "0.1",
+      "note": "STATUS AT HANDBACK: 38/39 gates. The one red is `location fill` -- 4,411 words against the 15,500 declared. The 15,500 was my own pre-writing estimate and it was ~3.5x optimistic. At 102 words per canvas the game is DENSER than the DoL seed (~68 words/unit); what it is short of is SURFACE COUNT -- 43 canvases across 8 locations, against the seed's 68 units per location. 0.1 needs more surfaces, not fatter ones. NOT re-declared downward: back-filling the budget from the delivered count is the exact cheat gate 1 exists to catch."
+    }
+  ]
+}
