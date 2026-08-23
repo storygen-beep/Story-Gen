@@ -167,6 +167,12 @@ def build_game_graph(
             npc.ai_behavior_config["trait_decay"] = n.trait_decay
         if n.arc_stages:
             npc.ai_behavior_config["arc_stages"] = n.arc_stages
+        # G: per-NPC cast-card tag line. Mirrors the same write in
+        # template_import.create_project_from_template — this is the no-DB path
+        # and the default build takes it, so a field added there and NOT here
+        # reaches the database and never reaches a packaged game.
+        if n.tags:
+            npc.ai_behavior_config["tags"] = n.tags
         graph.npcs.append(npc)
         npc_ids.append(str(npc.id))
 
