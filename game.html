@@ -70,18 +70,6 @@
       actions.className = "actions";
       actions.append(play, review);
 
-      // Supporter build — the second artifact from the SAME merged TOML, built with
-      // `--build paid`, where the cheat page's rows are live instead of padlocked.
-      // Opt-in per game via `paidBuild: true` in games-data.js, because most games
-      // have no cheat page and therefore no second build to open.
-      if (game.paidBuild) {
-        var paid = document.createElement("a");
-        paid.className = "play-btn secondary";
-        paid.href = "games/" + game.slug + "/output-paid/index.html";
-        paid.textContent = game.paidLabel || "🎯 Beta Nut Build";
-        actions.append(paid);
-      }
-
       var detail = document.createElement("div");
       detail.className = "detail";
       detail.append(h1, summary, actions);
