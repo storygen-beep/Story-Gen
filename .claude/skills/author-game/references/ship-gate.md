@@ -109,6 +109,25 @@ into the paid guide). One source, so the guide cannot document a code the build 
 `_assert_no_plaintext_codes()` fails the build if a code word appears anywhere in the output — the likeliest
 leak is pasting one into a row's `hint`.
 
+**Pre-screen the words before you build.** That check normalises the *whole output* the same way it
+normalises a code — whitespace stripped, upper-cased — so it is not only hints that collide: **any two-word
+phrase anywhere in the prose becomes a candidate.** Vesper 0.2.0 picked `GREYCOAT` for the man in the grey
+coat and `COLDSTART` for the charge row, and the build rejected both, because the scenes describing them say
+"grey coat" and "cold start". Screen the candidate list first — it is one command and it beats a failed
+package:
+
+```bash
+venv/bin/python - <<'EOF'
+import pathlib
+hay = "".join(pathlib.Path('games/<slug>/toml_phases/7_final_game.toml').read_text().split()).upper()
+for w in ['WORDONE', 'WORDTWO']:          # the candidate words
+    print(('LEAK ' if w in hay else 'clean'), w)
+EOF
+```
+
+Words drawn from the game's own imagery are the ones most likely to fail, which is the trap: they are also
+the ones most tempting to pick.
+
 **Codes are scoped to a release.** The hash is salted with `[project] version` and the row id, so last
 release's codes stop working by construction and a code cannot open a row it was not issued for. Rotate
 per release: new words, new PDF. Do **not** invent a separate rotation mechanism — Apocalyptic World's
@@ -242,7 +261,13 @@ game**, not just the beat you last touched.
       you bump it. A supporter holding a stale guide reads *"No match. This build is vX.Y.Z"* and concludes
       the codes are broken.
       1. Rotate the words in `games/<slug>/guide/codes.toml` and bump its `version` to match.
-      2. Rebuild with `--codes games/<slug>/guide/codes.toml` (the build **fails** without it, by design).
+         Pre-screen them against the merged TOML first (see the plaintext-leak note above).
+      2. Re-merge for release with `scripts/merge_toml_phases.py games/<slug> --no-dev`, which drops
+         `6_dev_shortcuts.toml`. Dev canvases never *fire* in a non-`--dev` build — their trigger wants a flag
+         only `--dev` sets — but they are still emitted as passages and their **labels ride in the shipped
+         metadata blob**. Vesper 0.2.0 shipped a build with no dev mode at all that still carried the string
+         `"0.1.9: the 0.1.8 end-state"` off a jump label. Omitting `--dev` is not the same as excluding them.
+      3. Rebuild with `--codes games/<slug>/guide/codes.toml` (the build **fails** without it, by design).
       3. `python manage.py build_guide --game <slug> --html /tmp/guide.html`
       4. **Run the number gate — it blocks the release:**
          ```bash

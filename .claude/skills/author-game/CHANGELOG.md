@@ -8,6 +8,18 @@ how it was verified if relevant (grep / build / live-play).
 
 Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 
+## 2026-08-23
+- `references/ship-gate.md` — added a **pre-screen** step to the cheat-codes section and folded a `--no-dev`
+  release merge into the rotation checklist. Both came out of cutting Vesper 0.2.0. (1) The plaintext-leak
+  assert normalises the whole output the way it normalises a code, so whitespace vanishes and *any* two-word
+  phrase in the prose is a collision candidate — `GREYCOAT` and `COLDSTART` were both rejected because scenes
+  say "grey coat" and "cold start". The old text only warned about `hint` fields, which is the least likely
+  source. Added the one-liner that screens a candidate list against the merged TOML before building.
+  (2) Omitting `--dev` does not remove the dev canvases: they still emit as passages and their labels ride in
+  the metadata blob — the 0.2.0 build, with no dev mode, still carried `"0.1.9: the 0.1.8 end-state"`. The
+  checklist now says to re-merge with `--no-dev` — verified: `dev_jump` count in the built HTML went 47 → 0,
+  and the canvas count 186 → 177
+
 ## 2026-08-23 (second pass — the paid guide)
 
 - **NEW `references/player-guide.md` (264 lines) — the skill had no guide doctrine at all.** The paid PDF

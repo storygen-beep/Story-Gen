@@ -2383,7 +2383,7 @@ targetType = "node"
 nodeId     = "activity_bar_work.shift"
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
-  { targetType = "player", trait = "coin", op = "add", value = 15, clamp = true },
+  { targetType = "player", trait = "coin", op = "add", value = 15, clamp = false },  # rev 172: coin is the unbounded wallet — clamp=true was capping bar pay at 100 (ship-gate.md:125)
   { targetType = "npc", npcId = "npc_bastien", trait = "relation", op = "add", value = 2 },
 ]
 conditions = { version = "1.0", logic = "AND", items = [
@@ -2395,7 +2395,7 @@ targetType = "node"
 nodeId     = "activity_bar_work.shift"
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
-  { targetType = "player", trait = "coin", op = "add", value = 15, clamp = true },
+  { targetType = "player", trait = "coin", op = "add", value = 15, clamp = false },  # rev 172: coin is the unbounded wallet — clamp=true was capping bar pay at 100 (ship-gate.md:125)
   { targetType = "npc", npcId = "npc_bastien", trait = "relation", op = "add", value = 3 },
 ]
 conditions = { version = "1.0", logic = "AND", items = [
@@ -2408,7 +2408,7 @@ targetType = "node"
 nodeId     = "activity_bar_work.shift"
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
-  { targetType = "player", trait = "coin", op = "add", value = 15, clamp = true },
+  { targetType = "player", trait = "coin", op = "add", value = 15, clamp = false },  # rev 172: coin is the unbounded wallet — clamp=true was capping bar pay at 100 (ship-gate.md:125)
   { targetType = "npc", npcId = "npc_bastien", trait = "relation", op = "add", value = 3 },
 ]
 conditions = { version = "1.0", logic = "AND", items = [
@@ -2421,7 +2421,7 @@ targetType = "node"
 nodeId     = "activity_bar_work.shift"
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
-  { targetType = "player", trait = "coin", op = "add", value = 15, clamp = true },
+  { targetType = "player", trait = "coin", op = "add", value = 15, clamp = false },  # rev 172: coin is the unbounded wallet — clamp=true was capping bar pay at 100 (ship-gate.md:125)
   { targetType = "npc", npcId = "npc_bastien", trait = "relation", op = "add", value = 1 },
 ]
 conditions = { version = "1.0", logic = "AND", items = [

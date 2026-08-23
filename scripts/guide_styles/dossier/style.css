@@ -449,7 +449,12 @@ h1.fm-title::before {
 }
 
 .toc ul ul { margin: 1.4mm 0 0 0; }
-.toc ul ul > li { counter-increment: tsub; }
+/* `ul ul` is a DESCENDANT selector, so it also matched the h3 list nested one level
+   deeper: every h3 bumped the same `tsub` counter, and the contents ended up numbering
+   Act 2 "6.4" while the page it pointed at printed "6.2". The body numbers h2 and
+   nothing else (`main h3` has no ::before), so both levels are scoped with `>` now and
+   h3 rows carry a blank prefix box instead of a number — same shape, no number, aligned. */
+.toc > ul > li > ul > li { counter-increment: tsub; }
 .toc ul ul > li > a {
   display: block;
   font-size: 9.4pt;
@@ -457,7 +462,7 @@ h1.fm-title::before {
   color: #35342F;
   hyphens: none;
 }
-.toc ul ul > li > a::before {
+.toc > ul > li > ul > li > a::before {
   content: counter(tsec) "." counter(tsub);
   display: inline-block;
   width: 40mm;
@@ -466,6 +471,19 @@ h1.fm-title::before {
   font: 400 7.6pt/1.62 Menlo, "PT Mono", "Courier New", monospace;
   letter-spacing: 0.04em;
   color: #8A857A;
+}
+
+/* h3 entries: unnumbered, to match the body, but keeping the 40mm prefix box so the
+   titles stay on the same left edge as their numbered siblings. */
+.toc > ul > li > ul > li > ul > li > a::before {
+  content: "";
+  display: inline-block;
+  width: 40mm;
+  padding-right: 8mm;
+}
+.toc > ul > li > ul > li > ul > li > a {
+  color: #55524B;
+  font-size: 9pt;
 }
 
 /* dot leaders + real page numbers */
