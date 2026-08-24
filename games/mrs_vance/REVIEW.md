@@ -9,7 +9,8 @@ pivot rule end to end. Neither of those is in the tally. Neither is what follows
 
 **The scoreboard is green and the scoreboard is not the review.** Same finding as `steam` and
 `forty_miles` before it: the instrument is 42 checks wide and the game is wider. Six items below
-are invisible to all 42, one of them a blocker that a player meets on the first screen.
+are invisible to all 42 — and all 42 read the source only. Not one of them opens the built game
+(`grep -cE 'output/|index\.html' gates.py` → **0**), which is its own item now: B2.
 
 **Same conventions as `games/steam/REVIEW.md`, `games/forty_miles/REVIEW.md` and
 `games/off_season/REVIEW_1.md`:**
@@ -37,22 +38,26 @@ was found by **LO playing the built game** — a different instrument that finds
 defect, and the two are not merged so it stays visible which found what. Same split
 `off_season/REVIEW_1.md` records in its own header.
 
-**Current count: 20 open** — 1 blocker, 6 high, 6 med, 6 low, 1 open question. Three of the
-twenty are decisions for LO rather than defect calls: E1 (the obligation's size), D1 (how much
-locked content should explain itself) and G1 (whether the Want file's one shape is the genre). Plus
-**six places
-this review was itself wrong**, found by re-checking before writing, recorded first in §0a. Nothing
-is fixed yet; this pass records, it does not repair. `v2_state.json` and the skill are deliberately
-untouched — the SKILL-layer items (C2, Q1, W1, G1, half of D1) are recorded for LO to schedule.
+**Current count: 20 open, 1 fixed** — 0 blockers, 5 high, 7 med, 7 low, 1 open question, and **P1
+FIXED**. Three of the twenty-one are decisions for LO rather than defect calls: E1 (the obligation's
+size), D1 (how much locked content should explain itself) and G1 (whether the Want file's one shape
+is the genre). Plus **eight places
+this review was itself wrong**, recorded first in §0a — six caught before writing, and two (N7, N8)
+caught only after they had shipped in this file, one of them as its single blocker.
+`v2_state.json` is deliberately untouched; the remaining SKILL-layer items (C2, Q1, W1, G1, half of
+D1) are recorded for LO to schedule.
 
 ---
 
 # §0a · ⚠️ What this review got wrong
 
 `forty_miles/REVIEW.md:31` puts its own corrections ahead of its defect list, because a review that
-hides its misses is worth less than one that does not. Four claims made during this review were
-narrowed or overturned by checking them. **All four were caught before anything was written down**,
-which is the only reason they are corrections and not defects in this file.
+hides its misses is worth less than one that does not. Seven claims made during this review were
+narrowed or overturned by checking them. **Six were caught before anything was written down**, which
+is the only reason they are corrections and not defects in this file. **N7 and N8 were not** — both
+shipped in this file and were overturned afterwards, N7 by LO the day after and N8 by the work of
+actually repairing the item it belonged to. They are the two most instructive entries in the section
+for exactly that reason.
 
 ### ⚠️ N1 · The clock-gate hole is one missing preposition, not "it cannot read spelled-out numbers"
 
@@ -128,54 +133,180 @@ Walk-ins, hubs and meetings are genuinely presence-gated. The defect is only in 
 declare nothing at all (§12 P1). Recorded because "the generator reads a key the author does not
 write" is a plausible and wrong conclusion that a grep alone supports.
 
+### ⚠️ N7 · "The `--dev` build is a blocker a player meets on the first screen" is false — and this one shipped
+
+**The only correction in this section that was not caught before writing.** It went into the file as
+§1, as the review's single `BLOCKER`, and LO overturned it the next day: *"it being in dev mode is
+the blocker for release, media missing is the blocker for release, not for testing."*
+
+He is right, and the repo is further along than his framing. The portal **already** separates the two
+and this game is already on the correct side of the line:
+
+- `games-data.js:10` — `dev (optional) — true → renders in the "Dev / test builds" section, "Open" affordance`.
+- `mrs_vance` carries `dev: true` and **no `version` field**, so it renders in the dev grid, not the
+  main one, and nothing is published.
+- `games-data.js:44-49`, the comment on this game's own entry, already states the situation and the
+  exit from it: *"Current output/ is a `--dev --debug` build, **so the art shows labelled debug
+  placeholders rather than silent gaps.** Run find-media, rebuild output/ WITHOUT `--dev --debug`,
+  add `version`, archive to `games/mrs_vance/releases/`, and drop `dev: true` in the same commit."*
+
+So the dev build is not a slip. For a game whose media has never been harvested it is the **better**
+artefact: `--debug` (`package_from_toml.py:104`, *"Show placeholder blocks for missing videos with
+filename and description"*) is what turns 34 silent holes into 34 labelled ones. The fix §1
+originally prescribed — rebuild clean, today — would have destroyed authoring information and
+published nothing.
+
+**What survives is the opposite item.** The rule *blocks release, does not block testing* is correct
+and **nothing enforces it**: no gate reads the artefact, and `the-release.md` never mentions the act
+of publishing a build. That is B2, and it is the finding this correction produced.
+
+**The lesson, and it is the general one.** Every other correction here came from re-checking a claim
+about the code. This one came from a claim about **intent** — what a file is *for* — and no amount of
+measuring the file would have caught it. The measurement in §1 was right in every digit. Severity is
+not a property of an artefact; it is a property of an artefact **and the phase it is in**, and the
+review knew the first and assumed the second.
+
+### ⚠️ N8 · P1's own census was wrong in four numbers and three verdicts
+
+**The second correction that shipped in this file.** It was found by repairing P1 — reading all 36
+ambients end to end instead of matching character names in prose, which is what the first pass did.
+
+| §12 P1 as written | measured |
+|---|---|
+| "21 random ambients" | **36**. 21 is the subset in which a cast member *speaks* — the right number under the wrong label |
+| "roughly thirteen" need gating | **16** gated, **1** left open as a writing call |
+| "Eight of the twenty-one are NOT defects", table listing 6 | **3** genuinely leave-alone, plus **1 already gated** |
+| "No gate reads `requires_npc` at all" | `gates.py` reads it **12 times**; G38 (`:5109-5172`) is built entirely on it |
+| the fix is `requires_npc` | it binds **exactly one** NPC and has no absence form. Two canvases needed `npc_at_location` (`engine.md:561`, §20) |
+
+**Three of that table's six rows were wrong the same way**: the prose narrates *one* character's
+absence while a *second* is silently assumed present. `amb_office_phone` — Dorn is on the telephone,
+but **Cade comes through the hatch** and takes the receiver. `amb_kitchen_five_adults` — Sherrod's
+arrival is narrated, but **Booth is already at the table** and speaks. `amb_bunk_two_of_them` — the
+*player* is on the stairs, which is what the first pass read; **Isaac and Tobin are both in the
+room**.
+
+**Why the instrument failed.** The first census matched character names in narration. Half these
+scenes never name the man — `amb_office_close` says only *"He says it like he is agreeing to
+something"* — and the actual signal was structural all along: a `dialog` block carries
+`props.npcId`, so *who speaks* is a fact in the data and not a reading of the prose. The corrected
+census counts those, and it is what the new lint counts too.
+
+**The general shape.** A prose-matching heuristic used where a structural one was available, and it
+was wrong in both directions at once — it missed scenes that place a man without naming him, and it
+convicted scenes that name a man who is deliberately elsewhere. §11's *"parsed with a real TOML
+parser, never grep"* was the right rule and this pass broke it one level down.
+
 ---
 
-# §1 · The build that shipped is the developer build
+# §1 · The dev build is right for this phase, and the release boundary is unguarded
 
-### B1 · The committed, portal-served HTML is a `--dev` artefact
-**severity** BLOCKER · **layer** GAME · **status** OPEN
+### B1 · The committed HTML is a `--dev --debug` artefact — correct for now, blocks release
+**severity** LOW — *downgraded from BLOCKER, see §0a N7* · **layer** GAME · **status** OPEN, at release only
 
-`games/mrs_vance/output/index.html` is git-tracked and was built with `--dev`. That flag is opt-in
-(`apps/game_generation/management/commands/package_from_toml.py:136`, *"Enable dev mode with stat
-adjustment controls in sidebar"*), so this was a build-command slip, not an engine default.
+Every measurement below held on re-check (2026-08-25). Only the severity and the prescription were
+wrong.
 
-Rebuilt the same TOML without the flag, into scratch:
+`games/mrs_vance/output/index.html` is git-tracked and was built with two opt-in flags, which are
+separate and do separate things:
+
+| flag | `package_from_toml.py` | what it puts in the build |
+|---|---|---|
+| `--debug` | `:104` *"Show placeholder blocks for missing videos with filename and description"* | the 34 labelled media markers |
+| `--dev` | `:136` *"Enable dev mode with stat adjustment controls in sidebar"* | the banner, the jump panels, the meter adjusters |
+
+Committed file against a clean rebuild into scratch:
 
 ```
                                     committed        clean rebuild
-dev-mode markers                          8                    0
-[IMAGE MISSING] / [VIDEO POOL MISSING]   34                    0
+"DEV MODE"                                2                    0
+[IMAGE MISSING]                           2                    0
+[VIDEO POOL MISSING]                     32                    0
 bytes                             1,833,785            1,538,629
 ```
 
-What a player gets, observed live on the committed file:
+What is in it: a red **`[DEV MODE]`** banner at the top of the sidebar; **`⏩ DEV JUMPS`**,
+**`📋 Review Canvases`** and **`⚠️ Missing Media`** panels; **`+/-` adjusters on every meter** —
+`money`, plus `want`/`trust` for all six characters, which makes the entire ascent clickable; and on
+the second screen of the opening, inside the prose, `[IMAGE MISSING] scenes/dorn_leaving_t1.jpg`
+with its author-facing description and both raw search queries as clickable links.
 
-- A red **`[DEV MODE]`** banner at the top of the sidebar.
-- **`⏩ DEV JUMPS`**, **`📋 Review Canvases`**, **`⚠️ Missing Media`** panels.
-- **`+/-` adjusters on every meter** — `money`, and `want`/`trust` for all six characters. The
-  entire ascent, which is the game, is bypassable with a click.
-- On the **second screen of the opening**, inside the prose:
-  `[IMAGE MISSING] scenes/dorn_leaving_t1.jpg`, its author-facing description, and both raw search
-  queries rendered as clickable links —
-  `🔍 older trucker man dressed leaving bedroom doorway morning`.
-
-Per `games_tracked_media_ignored.md`, game source and the built HTML are tracked and the GitHub
-Pages portal serves them, so this is the file a player opens.
-
-**Why no check caught it.** Every gate reads `7_final_game.toml`. Not one of the 42 looks at the
-built artefact, and the build itself succeeds — a dev build is a legitimate build, just not a
-shipping one.
+**Why this is not a defect today.** Every one of those is an authoring instrument, and the game is in
+authoring. `mrs_vance` carries `dev: true` and no `version` in `games-data.js`, so the portal files it
+under **Dev / test builds** and nothing is published. The `--debug` markers are the *point*: media has
+never been harvested for this game, so the choice is 34 labelled holes or 34 silent ones. Rebuilding
+clean today would delete the labels and publish nothing. Full reasoning and quotes in §0a N7.
 
 ### Fix
 
-```bash
-python3 manage.py package_from_toml \
-    --file games/mrs_vance/toml_phases/7_final_game.toml \
-    --output games/mrs_vance/output --gen-version v2
+Nothing now. **At release**, the procedure already exists — written on this game's own portal entry
+at `games-data.js:44-49`, and it is four steps in one commit:
+
+1. Run find-media and harvest the 29 cycling pools, the fixed plates and the portraits.
+2. Rebuild `output/` with **neither** flag:
+   ```bash
+   python3 manage.py package_from_toml \
+       --file games/mrs_vance/toml_phases/7_final_game.toml \
+       --output games/mrs_vance/output --gen-version v2
+   ```
+   Verified in scratch already: the clean build boots with zero page errors, zero console errors, and
+   no missing-media markers anywhere.
+3. Archive that exact build to `games/mrs_vance/releases/v<version>.html` and add `version` to the
+   portal entry.
+4. Drop `dev: true`, in the **same** commit — that is the line that moves the game into the main grid.
+
+### B2 · Nothing enforces the release boundary — it lives in one hand-written comment per game
+**severity** MED · **layer** SKILL + TOOLING · **status** OPEN
+
+B1 is only safe because someone remembers. The rule LO states — *dev mode and missing media block
+**release**, not testing* — is right, and there is no instrument anywhere in the repo that holds it.
+
+```
+gates.py lines reading output/ or index.html                              0
+  (it knows dev_mode_enabled only as a TOML marker, gates.py:2193-2199)
+the-release.md hits for --dev / dev mode / debug / placeholder /
+  missing media / release checklist / "before you ship"                   0
+  (8 headings, all about what a release ADDS as content)
 ```
 
-No `--dev`. Verified in scratch already: the clean build boots with zero page errors, zero console
-errors, and no missing-media markers anywhere.
+So the entire release procedure for this game exists as a **comment on a JavaScript object literal**
+(`games-data.js:44-49`) that no tool reads and nothing checks. And not only for this game: **nine of
+the twenty-eight portal entries restate the same procedure by hand**, in at least three different
+phrasings — *"drop `dev: true`"* on five of them, *"drop the dev flags"* on `steam`, *"Flip
+`dev: true` if it should sit in the dev section until then"* on `forty_miles`. Nine hand-copies in
+three wordings is the signature of doctrine living in the wrong file.
+
+The drift it allows is already visible. `forty_miles` carries **`version: "0.1"` and `dev: true` at
+the same time**, and the schema declares no relationship between the fields — `version` is defined
+as *"the PUBLISHED release currently live at `games/<slug>/output/`"* while `dev: true` files the
+game under builds that are not published. Both are defensible readings of that entry. Nothing can
+adjudicate, because nothing was ever told which combination is legal.
+
+That comment is genuinely good, and that is the problem: it is doctrine that was discovered once,
+written in the one file where it could not be enforced, and never lifted into the skill. The header
+of `games-data.js` (`:11-15`) even carries the sharpest sentence anyone has written about this —
+`version` *"must track what actually shipped — NOT whatever is currently half-built in the working
+tree"* — which is a release-gate specification in a data file's comment block.
+
+**Why no check caught it.** The whole 42-check instrument is aimed at `7_final_game.toml`. That is
+the right target for authoring and it is structurally incapable of seeing a build. A release is the
+one moment when the artefact, not the source, is the thing being judged, and that moment has no
+instrument at all.
+
+#### Fix
+
+Two pieces, and the first is small.
+
+**A release section in `the-release.md`.** The file is named for this and does not cover it. What
+separates a test build from a published one, as one list: media harvested, built without `--dev` and
+without `--debug`, archived to `releases/v<version>.html`, `version` set, `dev: true` dropped, and
+`v2_state.json` promises reconciled. Lift it from `games-data.js:44-49` rather than inventing it —
+the procedure is already correct, it is only in the wrong place.
+
+**A `--release` mode on `gates.py`** that reads the built artefact and hard-fails on any of: a
+`DEV MODE` marker, an `[IMAGE MISSING]` or `[VIDEO POOL MISSING]` marker, `dev: true` still set on
+the portal entry, or a missing/stale `version`. It stays **off** for every ordinary run, so nothing
+about authoring changes — which is precisely LO's rule expressed as code instead of as memory.
 
 ---
 
@@ -713,10 +844,21 @@ stands.
 
 ### Walk-ins, hubs and meetings ARE presence-gated
 
-25 canvases declare `requires_npc` — **6 one-shot meetings, 8 walk-ins, 11 hubs** — and all 25 reach
-the built HTML as non-null `requiresNpc`. The runtime enforces it at `v2.py:5264`:
-`getNpcLocation(slug).location === locationId` or the canvas is skipped. Do not re-investigate this
-half; the presence defect is confined to the 21 random ambients (§12 P1).
+25 canvases declare `requires_npc` — **6 one-shots, 8 `substitution_only` walk-ins, 11 portrait
+hubs** — and all 25 reach the built HTML as non-null `requiresNpc`.
+
+**⚠️ But `requires_npc` is not what holds 17 of them up, and this matters if anyone ever tidies the
+file.** The field is consumed in exactly two runtime functions — `checkRandomEncounters`
+(`v2.py:5245`) and `checkAndSubstituteCanvas` (`v2.py:5318`). The 6 one-shots and 11 hubs go through
+`selectAutoFireCanvasForLocation` → `isCanvasValid` (`v2.py:4559`), which reads schedules, conditions
+and repeatability and **never reads `requiresNpc`** (`gates.py:5114-5121` carries the trace).
+
+They are correct anyway, and by the better mechanism: **all 17 carry both `trigger.schedules` and
+`trigger.conditions`**, and each schedule mirrors that character's own rows — `hub_cade_office` is
+06:30–09:00 and 18:00–20:30 Mon–Fri, which is exactly Cade's two office rows. The `requires_npc` on
+them is belt-and-braces. **Do not delete those schedules on the theory that `requires_npc` covers
+it.** The 8 walk-ins are `substitution_only`, which *is* one of the two consuming paths, so there the
+field is load-bearing.
 
 ### The map data is complete, and `world reachable 14/14` is honest
 
@@ -724,12 +866,21 @@ Adjacency is `navigation_order`, not `connections` (§0a N5). All 14 locations d
 graph is a connected two-level tree, and the engine supplies the return edge. A script that looks
 for `connections` or `exits` will find nothing and be wrong.
 
+### The portal already separates dev builds from releases, and this game is filed correctly
+
+`games-data.js` has a `dev` field (`:10`) that renders a game under **Dev / test builds** with an
+"Open" affordance instead of the main grid's "View", and a `version` field (`:11`) that names the
+published build. `mrs_vance` has `dev: true` and no `version`: nothing about it is published. Do not
+re-derive this — it is what makes B1 a release item rather than a blocker (§0a N7). What is *missing*
+is enforcement, not the concept (B2).
+
 ---
 
 # §10 · What this says about the skill
 
-The `CLAUDE.md` test is *"would a correct author-game skill have prevented this?"* Two of the six
-items answer yes.
+The `CLAUDE.md` test is *"would a correct author-game skill have prevented this?"* **Seven of the
+twenty-one answer yes** — P1, C2, Q1, W1, G1 and B2 outright, D1 in part. **One of the seven is
+fixed** (P1); the rest are recorded for LO to schedule.
 
 ### C2 · yes — and the fix is one token
 
@@ -773,12 +924,43 @@ here are good work. Neither doctrine says anything about the other 27 sites, so 
 guidance applied the door rule to cooldowns and to mid-scene arousal gates. The rule needs a scope,
 not a reversal.
 
+### P1 · yes — and the fix is shipped
+
+The narrowest instrument hole in the file, and the one that had the most already written about it.
+`gates.py:5114-5121` states outright that `requires_npc` is consumed on exactly two paths, and G38
+then judges the third. Nothing looked at the path that reads the field.
+
+`lint_ambient_presence` now does (`gates.py`, next to `lint_dialogue_attribution`). On this game it
+would have reported **20/21** before the repair and reports **4/21** after. It is the fourth
+instrument hole of this shape recorded here — `_band_texts` knowing `group` and not `block_pool`,
+`genre_words.txt` blind to false friends, `_clk_refs` missing a preposition, and now G38 aimed at the
+wrong runtime path. **In all four the doctrine was right and the check was narrower than the
+doctrine**, which is worth naming as a pattern rather than fixing four times.
+
+One thing the lint says about the corpus rather than this game: `mrs_vance` is the **only** v2 game
+with a speaking character in a random ambient. The other seven ship 46 random canvases between them
+and **not one** has a voice in it. Their ambients are weather; this game's are people. That is a real
+difference in what the game is, it is the reason this defect could only appear here, and it is worth
+knowing before the next game decides which kind of ambient to write.
+
+### B2 · yes — and it is the one the skill is named for
+
+`the-release.md` is the file called *The Release* and it describes a release as a **unit of authored
+content** — what a release adds, how the loop runs, what cadence to hold. It says nothing about the
+**act of publishing a build**, which is the other half of the same word. So the procedure had to be
+invented somewhere, and it was: nine times, by hand, in a data file's comments (B2).
+
+This is a different shape from the other four. C2 and Q1 are a correct doctrine with a narrow
+instrument. This is a **doctrine-shaped hole** — no one taught it wrong, no one taught it at all, and
+the authors kept solving it locally and correctly without anywhere to put the answer. Those are the
+ones that stay invisible longest, because every individual game looks fine.
+
 ### The rest are GAME-layer
 
-B1 is a build command. R1 had the doctrine — `engine.md` §35 is three pages long and names the
+B1 is a build command, and per §0a N7 the right one for this phase. R1 had the doctrine — `engine.md` §35 is three pages long and names the
 field games — and the author read it and pooled 35 canvases; the loops were a judgement, not an
 ignorance. S1/S2 and L1–L3 are ledger discipline the skill already teaches in `the-release.md`. E1
-is a design question. P1 is an authoring omission against a primitive the skill documents. M1/M2 sit
+is a design question. M1/M2 sit
 between: `the-first-hour.md` F7/F9 teach the first visit and the lint prints the list, so the
 doctrine is there and was not followed — but nothing in the skill teaches showing the player the
 *shape* of a map. **The skill taught most of these right.**
@@ -792,6 +974,9 @@ Recorded so the file is reproducible rather than believed.
 **Source.**
 - `scripts/merge_toml_phases.py games/mrs_vance` re-run and the result diffed against the committed
   `7_final_game.toml` — byte-identical, so the build and the source agree.
+- ⚠️ **One census in this file was built on prose-matching and was wrong in both directions** — see
+  §0a N8. Character names in narration are not who is *present*; a `dialog` block's `props.npcId`
+  is. Where a fact about a canvas exists structurally, read the structure.
 - `7_final_game.toml` parsed with `tomli`, never grep. The canvas graph walked for reachability,
   broken targets, dead nodes, NPC references and condition versions. Flags and traits counted by a
   generic recursive walk with a path, after a first pass using assumed key names produced a
@@ -832,21 +1017,32 @@ the skill that has nothing to do with this game. The investigation also produced
 
 ---
 
-### P1 · The 21 random ambients have no presence gate, so a character can be on screen while the game says he is elsewhere
-**severity** HIGH · **layer** GAME · **status** OPEN
+### P1 · Fifteen random ambients put a speaking character in a room the panel says he is not in
+**severity** HIGH · **layer** GAME + SKILL · **status** **FIXED** — 16 gated, proved live, 1 open writing call
 
 > LO: *"in the navigation panel where I see npc present or not, it doesn't shows up and it
 > automatically fires up."*
 
-Two kinds of canvas fire without the player choosing them, and only one kind is guarded:
+**⚠️ This item's own census was wrong in four numbers and three verdicts.** It was rebuilt by reading
+all 36 ambients rather than matching names in prose; §0a N8 records what moved and why. The
+corrected figures are below and the ones in the first draft should not be quoted.
+
+#### What is actually there
 
 ```
- 6 one-shot meetings  +  8 walk-ins  +  11 hubs   = 25 declare requires_npc   -> gated
-21 random ambients                                       declare nothing      -> requiresNpc: null
+91 canvases
+ ├─ 36  random ambients        trigger_mode = "random"
+ │       ├─ 21  a cast member SPEAKS in it   <- the population that can lie about presence
+ │       └─ 15  unpeopled texture            <- nothing to misplace
+ ├─ 25  declare requires_npc   6 one-shots · 8 substitution_only walk-ins · 11 portrait hubs
+ └─ 30  other
 ```
 
-Not one of the 21 carries its own `schedules` either, so nothing bounds them in time. The runtime is
-explicit about what that means (`v2.py:5260`):
+Of the 21 that put a man on screen, **one** was gated — `amb_kitchen_friday`, and it was gated
+correctly, with the primitive the other twenty needed. The remaining twenty carried no
+`requires_npc`, no `conditions` and no `schedules` of their own.
+
+The runtime is explicit (`v2.py:5260`):
 
 ```javascript
 if (!canvNpc.requiresNpc) {
@@ -855,45 +1051,161 @@ if (!canvNpc.requiresNpc) {
 }
 ```
 
-So `amb_office_close` — Cade bringing the roller door down — sits in the eligible pool at 02:00,
-when `setup.getNpcLocation('npc_cade')` returns `None`; that null was read live. `amb_bunk_radio`
-puts Isaac in the bunk room at 10:00 while his schedule has him at the shop. The three
-`sherrods_room` ambients are eligible at noon against a 23:30–06:00 schedule. Meanwhile the
-navigation panel builds its presence indicator from `npcId` and the schedule, so it correctly shows
-the character as absent — which is the mismatch LO saw.
+So `amb_office_close` — Cade bringing the roller door down at six — sat in the eligible pool at
+02:00, when `setup.getNpcLocation('npc_cade')` returns `null`. `amb_bunk_radio` put Isaac on his bed
+at 10:00 against an 08:00–11:00 shop-floor row. The three `sherrods_room` ambients were eligible at
+noon against a 23:30–06:00 row. The navigation panel reads presence from the same schedules and was
+right every time — which is the mismatch LO saw, and why it matters more than one wrong scene: a
+panel that is wrong once stops being read, and the panel is how a sandbox is navigated.
 
-**⚠️ The limit of the evidence.** This is established from the runtime source, the `requiresNpc`
-values in the built HTML, and the TOML — **not** from catching one in the act. Ambient chances run
-0.26–0.35 and the walker completed only eight clean trips before the harness lost the thread. The
-mechanism is certain; a captured instance is not in hand.
+#### `requires_npc` was the wrong tool for two of them
 
-**⚠️ Eight of the twenty-one are NOT defects, and a sweep would break them.** The author wrote the
-absence into the prose:
+`requires_npc` binds **exactly one** NPC and has no absence form (`engine.md:561-580`, §20, verified
+live in a built game). Two canvases need more than that, and `amb_kitchen_friday` already showed how:
 
-| canvas | why it is correct |
+```toml
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_kitchen", npc_id = "npc_dorn", operator = "is_present" },
+] }
+```
+
+#### The fix, as applied
+
+**15 canvases gained one line of `requires_npc`**, each on the character who has to be in the room,
+and each with a window in that character's own schedule so nothing is gated into never firing:
+
+| canvas | location | gate | the NPC's own rows there |
+|---|---|---|---|
+| `amb_booth_room_talk` · `amb_booths_door` | `booths_room` | `npc_booth` | 22:00–01:30 daily |
+| `amb_sherrod_history` · `amb_sherrod_owed` · `amb_sherrod_stairs` | `sherrods_room` | `npc_sherrod` | 23:30–06:00 daily |
+| `amb_bunk_radio` · `amb_bunk_stairs` · `amb_bunk_two_of_them` | `the_bunk_room` | `npc_isaac` | 21:00–01:00 daily |
+| `amb_row_late` | `the_back_row` | `npc_tobin` | 22:00–00:30 daily |
+| `amb_shop_hatch` | `the_shop_floor` | `npc_tobin` | 08:00–17:00 Mon–Fri |
+| `amb_shop_morning_talk` | `the_shop_floor` | `npc_cade` | 09:00–17:30 Mon–Fri |
+| `amb_office_close` | `the_office` | `npc_cade` | 18:00–20:30 Mon–Fri — the hour its prose names |
+| `amb_kitchen_five_adults` | `the_kitchen` | `npc_booth` | 16:00–19:00 Mon–Fri |
+| `amb_bay_after` | `the_wash_bay` | `npc_isaac` | 11:00–14:00 Mon–Fri |
+| `amb_yard_wash_car` | `the_yard` | `npc_booth` | 13:00–17:00 Sat–Sun — *"That's Saturday here"* |
+
+**Gate on the one who has to be there, not everyone named.** Tobin speaks in both bunk-room scenes
+and **has no bunk-room row at all**, so gating on him would have killed both. In `amb_yard_wash_car`
+his yard row is Saturday 09:00–12:00 against Booth's 13:00–17:00 — they never overlap. Isaac and
+Booth are the residents; they are the gate. Tobin standing there is a writing question, not a
+mechanical one.
+
+**`amb_office_phone` gained the two-item condition**, because it is the case that proves the
+primitive:
+
+```toml
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_shop_floor", npc_id = "npc_cade", operator = "is_present" },
+  { type = "npc_at_location", location_id = "the_office",     npc_id = "npc_dorn", operator = "is_absent"  },
+] }
+```
+
+Dorn has to be **away** — he is calling from a lay-by — and Cade has to be **in a different room**
+from the canvas, because the scene says *"He's in bay two"* before he comes through the hatch. One
+NPC by absence and one by a foreign location: `requires_npc` can express neither.
+
+#### Three left alone, and the reason is in the prose
+
+| canvas | why it is already correct |
 |---|---|
-| `amb_office_phone` | Dorn is on the telephone — *"It is your husband, from a lay-by somewhere"* |
-| `amb_bathroom_landing` | *"Two of them are on the landing"* — outside the door, not in the room |
-| `amb_bathroom_water` | Booth *"says it through the door on his way past"* |
-| `amb_bunk_two_of_them` | *"You are on the stairs. The stairs are outside the room."* |
-| `amb_kitchen_five_adults` | narrates the arrival — *"Sherrod comes down off his stairs and in through the back door"* |
-| `amb_kitchen_friday` | narrates the arrival — *"Cade comes up for ten minutes on a Friday"* |
+| `amb_bathroom_water` | Booth *"says it through the door on his way past and does not stop walking"* |
+| `amb_bathroom_landing` | *"Two of them are on the landing"* — the scene **is** being overheard through a gap the bolt will not close |
+| `amb_office_wrecker` | the small hours, and *"He is dressed. He has come from somewhere that is not a bed"* — the off-schedule arrival is the whole scene |
 
-The prose is doing the work the trigger is not. That is good writing, not an accident, and it is why
-the fix is per-canvas.
+The live check below catches `amb_office_wrecker` firing 70 times at 02:00 with Cade nowhere on the
+property, which is exactly what it is written to do.
 
-**Why no check caught it.** No gate reads `requires_npc` at all. `a meeting fires where they are`
-checks the six one-shots, which are the canvases that already declare it.
+#### One left open — a writing call, not a gate
 
-#### Fix
+**`amb_kitchen_house`.** Booth is in the kitchen at night — *"you come down for water in what you
+sleep in"* — but his kitchen row is 16:00–19:00 on weekdays and his night row is his own room.
+Gating him would move the scene to teatime and contradict its own first sentence. Three honest
+answers: leave it, narrate his arrival the way `amb_kitchen_five_adults` narrates Sherrod's, or give
+Booth a short late row in the kitchen. Not decided here because all three touch authored prose or
+the world model, and neither is what this pass was for.
 
-`requires_npc` on the ambients that put a character *inside* the room — roughly thirteen of the
-twenty-one. Leave the eight above alone. Where a character legitimately appears outside his hours,
-the alternative is a `schedules` row on the ambient rather than a presence gate.
+#### Proved live, which the first draft could not do
 
-Worth pairing with a skill fix: a lint that lists every canvas which names a speaker and declares
-neither `requires_npc` nor a schedule. `amb_kitchen_friday` would be on it for a second reason — it
-says *"on a Friday"* and nothing restricts the day, so it can fire on a Saturday.
+The first draft recorded *"the mechanism is certain; a captured instance is not in hand"*, because
+ambient chances run 0.26–0.35 and a walker rarely catches one. Driving
+`setup.checkRandomEncounters()` directly, 400 times per hour, settles it in both directions:
+
+```
+the_bunk_room, Monday 10:00   isaac -> the_shop_floor
+    amb_bunk_radio 0 · amb_bunk_stairs 0 · amb_bunk_two_of_them 0
+    amb_bunk_partition 122          <- the ungated control, same 400 rolls
+the_bunk_room, Monday 22:00   isaac -> the_bunk_room
+    radio 68 · stairs 78 · two_of_them 85 · partition 84
+
+the_office, Monday 02:00      cade -> null
+    amb_office_close 0              <- gated out
+    amb_office_wrecker 70           <- deliberately ungated, and correct
+the_office, Monday 19:00      cade -> the_office
+    amb_office_close 69 · amb_office_phone 0    <- cade is in the office, not bay two
+the_office, Monday 10:00      cade -> the_shop_floor
+    amb_office_phone 95             <- both condition items true
+```
+
+Zero page errors, zero console errors, 10/10 checks. **The harness is committed** —
+`games/mrs_vance/playtest_presence.py`, the same shape as `games/forty_miles/playtest.py`, so the
+claim is re-runnable rather than believed. It takes a build path because `output/` is still the
+pre-P1 artefact and stays that way until release (§1 B1).
+
+`amb_bunk_partition` is the control that makes the first block mean something: nobody speaks in it,
+so it is ungated by design, and it firing 122 times at the same hour the gated three fire zero is
+what shows the gate did the silencing and not some unrelated filter.
+
+#### Why no check caught it — and this is the skill half
+
+The first draft said *"No gate reads `requires_npc` at all."* **That is false and is corrected in
+§0a N8.** `gates.py` reads the field 12 times and G38 *"a meeting fires where they are"* is built
+entirely on it.
+
+The real miss is narrower and worse. `gates.py:5114-5121` already carries the trace:
+
+> `requires_npc` **DOES NOT DO THIS** … `isCanvasValid` (`v2.py:4559`) reads schedules, conditions
+> and repeatability and **NEVER reads requiresNpc**. Repo-wide the field is consumed in exactly two
+> functions — `checkRandomEncounters` (`v2.py:5245`, `trigger_mode="random"`) and
+> `checkAndSubstituteCanvas` (`v2.py:5318`, `substitution_only`).
+
+G38 then skips both of those and judges the auto-fire path — the one that does not read the field.
+**The single path that consumes `requires_npc` had no check on it.** The doctrine was right and the
+instrument was pointed at the wrong path, which is the failure shape `SKILL.md` names.
+
+#### The skill fix, shipped in the same commit
+
+`lint_ambient_presence` in `gates.py`, next to `lint_dialogue_attribution` which it extends: every
+`trigger_mode = "random"` canvas with a `dialog` block carrying an `npcId` and none of
+`requires_npc`, an `npc_at_location` condition, or its own `trigger.schedules`.
+
+It splits the finding into the two different jobs, which is the point — `gate it on <name>` when the
+speaker has rows at that location, `or narrate the arrival — no row here to gate on` when he does
+not, because there a gate would strand the canvas forever.
+
+```
+mrs_vance BEFORE   20/21 ambients where somebody speaks carry no presence gate
+mrs_vance AFTER     4/21   — bathroom_water · bathroom_landing (or narrate)
+                             kitchen_house · office_wrecker    (gate it)
+```
+
+A LIST and never a gate: an ambient may legitimately place someone off-schedule, and only the author
+can tell that from the defect. Both verdicts are exercised in that four-row output.
+
+**It is ahead of the corpus, not a no-op.** Across every v2 game, `mrs_vance` is the **only** one with
+a speaking character in a random ambient — 46 random canvases in the other seven games, **zero** with
+a speaker. It reports nothing on them because there is nothing there, and it bites the moment a
+second game puts its cast inside its texture. `41/41 judged gates pass` before and after; the lint
+touches no tally.
+
+#### One thing this did not fix, recorded
+
+`amb_kitchen_friday` says *"on a Friday"* and its Dorn condition admits Friday **and** Saturday, since
+Dorn's kitchen row is 19:00–22:00 on both. A one-day slippage, far smaller than the first draft
+implied. `amb_yard_wash_car` had the same shape — *"That's Saturday here"* — and the Booth gate
+closed it, because his only yard row is Sat–Sun.
 
 ---
 
@@ -1170,13 +1482,40 @@ All five `show_when_locked` with a written reason. `loop_solo` is ungated.
 
 ### A.7 · The presence gate
 
+⚠️ **Re-measured 2026-08-25 while repairing P1; the first version of this table was wrong.** See
+§0a N8. The signal is a `dialog` block's `props.npcId`, not a character name in the narration.
+
 ```
-declare requires_npc  ->  25 canvases   6 one-shot meetings · 8 walk-ins · 11 hubs
-                          all 25 reach the built HTML as a non-null "requiresNpc"
-declare nothing       ->  21 random ambients that put a speaking character on screen
-                          0 of the 21 carry their own `schedules`
-                          0 of the 21 carry an npc_at_location condition
-runtime               ->  v2.py:5260  no requiresNpc = always allowed
+91 canvases
+ ├─ 36 random ambients   trigger_mode = "random"
+ │      ├─ 21  a cast member SPEAKS in it        <- can lie about presence
+ │      └─ 15  unpeopled texture
+ ├─ 25 declare requires_npc   6 one-shots · 8 substitution_only walk-ins · 11 portrait hubs
+ │      all 25 reach the built HTML as a non-null "requiresNpc"
+ └─ 30 other
+
+the 21 that put somebody on screen        BEFORE      AFTER
+  requires_npc                                 0         15
+  npc_at_location condition                    1          2
+  own trigger.schedules                        0          0
+  ---------------------------------------------------------
+  no presence gate of any kind                20          4
+                                                          ├─ 2 "or narrate" — no row at that location
+                                                          └─ 2 "gate it"    — 1 open writing call,
+                                                                              1 deliberate (the 02:00 arrival)
+
+which runtime path reads requires_npc
+  checkRandomEncounters      v2.py:5245  trigger_mode = "random"        YES
+  checkAndSubstituteCanvas   v2.py:5318  substitution_only              YES
+  isCanvasValid              v2.py:4559  one-shots and hubs             NO   <- schedules hold those up
+  the gate itself            v2.py:5260  no requiresNpc = always allowed
+
+live, 400 forced rolls per hour (chance is 0.26-0.35, so a walker will not catch these)
+  the_bunk_room  Mon 10:00  isaac -> the_shop_floor   radio 0 · stairs 0 · two_of_them 0 · partition 122
+  the_bunk_room  Mon 22:00  isaac -> the_bunk_room    radio 68 · stairs 78 · two_of_them 85 · partition 84
+  the_office     Mon 02:00  cade  -> null             office_close 0 · office_wrecker 70
+  the_office     Mon 10:00  cade  -> the_shop_floor   office_phone 95
+  the_office     Mon 19:00  cade  -> the_office       office_close 69 · office_phone 0
 ```
 
 ### A.8 · The map, as declared by `navigation_order`
@@ -1241,3 +1580,38 @@ re-investigated. Count 13 → 19. Still nothing repaired.
 **2026-08-25 — L4 added.** Reconciling §4's pool count against the shipping commit before committing
 this file showed the commit's "46 pools" matches neither the grep (41) nor the parse (39), and its
 "46 in the_long_summer" is 49. Filed with L1–L3 as the same defect class. Count 19 → 20.
+
+**2026-08-25 — P1 FIXED, and its own census corrected.** The first repair in this file. Repairing it
+meant reading all 36 ambients instead of matching names in prose, and that overturned four of P1's
+numbers and three of its verdicts — recorded as **N8**, the second correction to ship in this file
+before being caught. Corrected shape: 36 random ambients, **21** with a speaking cast member, of
+which **one** (`amb_kitchen_friday`) was already gated and twenty were not.
+
+**Applied.** `requires_npc` on 15, each on the character who has to be in the room and each with a
+window in that character's own schedule; a two-item `npc_at_location` condition on
+`amb_office_phone`, which needs one NPC by absence and one in a *different* room and so cannot use
+`requires_npc` at all. Three left alone because the prose already says the man is not in the room.
+One, `amb_kitchen_house`, left open as a writing call rather than decided unilaterally.
+
+**Proved live**, closing the gap the first draft admitted to (*"a captured instance is not in
+hand"*): driving `setup.checkRandomEncounters()` 400 times per hour in headless Chromium, the three
+gated bunk-room ambients return **0** at Monday 10:00 while the ungated control returns 122, and all
+four return at 22:00. `amb_office_phone` fires at 10:00 and not at 19:00. 10/10 checks, zero page
+errors.
+
+**Skill fix shipped in the same commit** — `lint_ambient_presence` in `gates.py`, the check for the
+one runtime path that consumes `requires_npc` and had nothing aimed at it. 20/21 before, 4/21 after.
+`41/41 judged gates pass` throughout; the lint touches no tally. Count 21 open → 20 open, 1 fixed.
+
+**2026-08-25 — B1 downgraded, B2 opened.** LO overturned this file's only blocker: *"it being in dev
+mode is the blocker for release, media missing is the blocker for release, not for testing."* Checked
+and he is right — `games-data.js` already carries a `dev` field that files the game under **Dev / test
+builds**, `mrs_vance` has it set with no `version`, and the entry's own comment says the `--debug`
+placeholders are deliberate while media is unharvested. §1 rewritten: B1 `BLOCKER` → `LOW`, status
+`OPEN at release only`, and its Fix replaced with the four-step release procedure instead of a rebuild
+that would have destroyed authoring information. The correction is recorded as **N7** — the only entry
+in §0a that was written down before it was caught, and the only one that came from a wrong reading of
+*intent* rather than of code. The surviving half became **B2**: no gate reads the built artefact
+(`grep -cE 'output/|index\.html' gates.py` → 0) and `the-release.md` never mentions publishing one, so
+nine portal entries restate the procedure by hand in three phrasings. §9 gained the matching cleared
+row and §10 a B2 subsection. Count 20 → 21; blockers 1 → 0.

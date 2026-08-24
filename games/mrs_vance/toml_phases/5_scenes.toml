@@ -1565,6 +1565,7 @@ name = "The light at the top"
 [canvases.trigger]
 location      = "sherrods_room"
 priority      = 3
+requires_npc  = "npc_sherrod"
 is_repeatable = true
 trigger_mode  = "random"
 max_triggers_per_day = 1
@@ -1770,6 +1771,7 @@ name = "Both of them up there"
 [canvases.trigger]
 location      = "the_bunk_room"
 priority      = 3
+requires_npc  = "npc_isaac"
 is_repeatable = true
 trigger_mode  = "random"
 max_triggers_per_day = 1
@@ -1815,6 +1817,7 @@ name = "The shop first thing"
 [canvases.trigger]
 location      = "the_shop_floor"
 priority      = 3
+requires_npc  = "npc_cade"
 is_repeatable = true
 trigger_mode  = "random"
 max_triggers_per_day = 1
@@ -1988,6 +1991,7 @@ name = "Through his door"
 [canvases.trigger]
 location      = "booths_room"
 priority      = 3
+requires_npc  = "npc_booth"
 is_repeatable = true
 trigger_mode  = "random"
 max_triggers_per_day = 1
@@ -2030,6 +2034,7 @@ name = "What he knows"
 [canvases.trigger]
 location      = "sherrods_room"
 priority      = 3
+requires_npc  = "npc_sherrod"
 is_repeatable = true
 trigger_mode  = "random"
 max_triggers_per_day = 1
@@ -2295,6 +2300,10 @@ time_progression_minutes = 10
 id   = "amb_office_phone"
 name = "The phone at half four"
 
+# Dorn is on the telephone from a lay-by, so he must NOT be here; Cade is fetched
+# from bay two at the end of the scene, so he must be on the shop floor. Two NPCs
+# and one of them by absence — `requires_npc` binds exactly one and has no absence
+# form, so this is the npc_at_location case (engine.md:561, §20).
 [canvases.trigger]
 location             = "the_office"
 priority             = 3
@@ -2302,6 +2311,10 @@ is_repeatable        = true
 trigger_mode         = "random"
 max_triggers_per_day = 1
 chance               = 0.28
+conditions           = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_shop_floor", npc_id = "npc_cade", operator = "is_present" },
+  { type = "npc_at_location", location_id = "the_office",     npc_id = "npc_dorn", operator = "is_absent"  },
+] }
 
 [[canvases.nodes]]
 id = "base"
@@ -2341,6 +2354,7 @@ name = "Locking up"
 [canvases.trigger]
 location             = "the_office"
 priority             = 3
+requires_npc  = "npc_cade"
 is_repeatable        = true
 trigger_mode         = "random"
 max_triggers_per_day = 1
@@ -2387,6 +2401,7 @@ name = "Through the hatch"
 [canvases.trigger]
 location             = "the_shop_floor"
 priority             = 3
+requires_npc  = "npc_tobin"
 is_repeatable        = true
 trigger_mode         = "random"
 max_triggers_per_day = 1
@@ -2430,6 +2445,7 @@ name = "The stairs are outside"
 [canvases.trigger]
 location             = "the_bunk_room"
 priority             = 3
+requires_npc  = "npc_isaac"
 is_repeatable        = true
 trigger_mode         = "random"
 max_triggers_per_day = 1
@@ -2473,6 +2489,7 @@ name = "Saturday in the yard"
 [canvases.trigger]
 location             = "the_yard"
 priority             = 3
+requires_npc  = "npc_booth"
 is_repeatable        = true
 trigger_mode         = "random"
 max_triggers_per_day = 1
@@ -2634,6 +2651,7 @@ name = "Five adults, one pot"
 [canvases.trigger]
 location             = "the_kitchen"
 priority             = 3
+requires_npc  = "npc_booth"
 is_repeatable        = true
 trigger_mode         = "random"
 max_triggers_per_day = 1
@@ -2677,6 +2695,7 @@ name = "The bay after"
 [canvases.trigger]
 location             = "the_wash_bay"
 priority             = 3
+requires_npc  = "npc_isaac"
 is_repeatable        = true
 trigger_mode         = "random"
 max_triggers_per_day = 1
@@ -2718,6 +2737,7 @@ name = "The far end of the row"
 [canvases.trigger]
 location             = "the_back_row"
 priority             = 3
+requires_npc  = "npc_tobin"
 is_repeatable        = true
 trigger_mode         = "random"
 max_triggers_per_day = 1
@@ -2761,6 +2781,7 @@ name = "The latch again"
 [canvases.trigger]
 location             = "booths_room"
 priority             = 3
+requires_npc  = "npc_booth"
 is_repeatable        = true
 trigger_mode         = "random"
 max_triggers_per_day = 1
@@ -2802,6 +2823,7 @@ name = "Everybody is owed something"
 [canvases.trigger]
 location             = "sherrods_room"
 priority             = 3
+requires_npc  = "npc_sherrod"
 is_repeatable        = true
 trigger_mode         = "random"
 max_triggers_per_day = 1
@@ -2902,6 +2924,7 @@ name = "The radio through the floor"
 [canvases.trigger]
 location             = "the_bunk_room"
 priority             = 3
+requires_npc  = "npc_isaac"
 is_repeatable        = true
 trigger_mode         = "random"
 max_triggers_per_day = 1
