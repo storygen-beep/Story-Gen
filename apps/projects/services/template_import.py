@@ -5411,6 +5411,13 @@ def _validate_quests_cards(
                 errors.append(
                     f"{ctx}: trait condition subject='npc' requires npc_id"
                 )
+            # ⚠️ NO `ne` HERE, AND THAT IS DELIBERATE (2026-08-24). This is the
+            # QUEST-CARD validator, and quest cards are evaluated by a third
+            # evaluator — setup.checkQuestsCondition — whose switch has no `ne`
+            # case and falls through to `return false`. Widening this whitelist
+            # without adding that case would let an author write a condition
+            # that is silently always false. Canvas/node/choice conditions are a
+            # different path entirely; see engine.md §37.
             if item.op not in ("gte", "lte", "gt", "lt", "eq"):
                 errors.append(
                     f"{ctx}: trait condition op must be gte/lte/gt/lt/eq, "

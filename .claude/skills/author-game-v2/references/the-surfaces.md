@@ -621,28 +621,60 @@ because every game invents its own names and a domain lexicon leaves half of the
 / 13 / 8 / 2 (`findings_K_mirror.md` §1). Two populations, two questions, five days apart, one
 distribution. **The flag chain and the meter are both load-bearing, together.**
 
-**What this asks of an author.** An arc that runs in steps should be gated on **which step it is on**,
-not on a pile of switches that each remember one thing. The field's equality is a **stage counter** —
-one variable that counts — and it is 24.8% of all its conditions, present in **26 of 26 games**. Ours
-is 0.7%, in 6 of 21, and the six sites are `npc_jake_stage`, `loop_stage`, `wade_loop_stage` and
-their kin: **the field's own pattern, used once each.**
+**What this asks of an author.** An arc that runs in steps should be gated on **which step it is
+on**, not on a pile of switches that each remember one thing. The field's equality is mostly a
+**stage counter** — one variable that counts — and it is 24.8% of all its conditions, present in
+**26 of 26 games**.
+
+> ### ⚠️ This paragraph said "ours is 0.7%, used once each" until 2026-08-24. That was measured by the wrong thing.
+>
+> 0.7% counts **`eq` operator occurrences**, which is what the shape census above measures and is
+> the right unit for it. It is the wrong unit for *"do we build stage counters"*, and read as that
+> it says we barely do — which is false.
+>
+> Measured by **behaviour** instead — a trait `set` to two or more distinct integers, whatever it is
+> called and whatever operator reads it:
+>
+> ```
+> 7 of 21 scorable games carry at least one
+> how those counters are READ  (n = 416)   gte 48%   eq 32%   lt 20%
+> ```
+>
+> **Where we build a counter, we read it much closer to the field's way than the census suggests.**
+> The corpus-wide 4.5% equality figure is not walked back — it stands, and it is dominated by meter
+> thresholds, which is a real difference. But the gap is narrower and more specific than the census
+> alone implies: **it is not that we read counters wrong, it is that we build few of them.**
+
+**The worked example already exists.** `the_season`'s `wade_loop_stage` and `prine_loop_stage` are
+set to `0 / 1 / 2 / 3` and read three ways — `gte 3`, `eq 2`, `lt 2` — as the exclusive three-band
+chain that decides which ending a loop renders. That is the field's shape, built correctly, in a v2
+game. Copy it.
 
 The cost of the flag pile is not that it breaks. Adjacent `[group]` blocks merge into one
 `if/elseif` chain (`engine.md` §35), so exclusivity is enforced by the render. The cost is that
 **the arc is not a thing you can read** — there is no single value to print on a card, hand to a
 quest goal, or gate a later scene on. The set of flags is the only place its shape is written down.
 
-⚠️ **Our v1 games do this the field's way and our v2 games do not** — `vesper` 10% equality,
+⚠️ **Our v1 games lean on the counter harder than our v2 games do** — `vesper` 10% equality,
 `the_long_summer_test` 11%, `last_call` 7%, against `back_home` 0%, `off_season` 1%, `the_season` 2%.
-The TLS notes carry the rule in one line: *"sex-loop = numeric-enum state NOT flags."* **Second
-doctrine lost in the v1 to v2 divorce, and lost the same way `block_pool` was.**
+The TLS notes carry the rule in one line: *"sex-loop = numeric-enum state NOT flags."* Read with the
+behavioural figures above, the honest version is that **the pattern survived the v1 → v2 divorce in
+weakened form** — present in `off_season` and `the_season`, absent from the other five v2 games —
+rather than being lost outright the way `block_pool` was.
+
+⚠️ **And a counter nobody reads is worse than no counter.** Nine behavioural counters across four
+games are written and never read by any condition. Most are legitimate — a `<npc>_stage` key whose
+prefix names a declared character is read by the engine's own stage-label system, and gate 33 carves
+those out on purpose (`v2.py:5549-5554`). The rest are not: **`sex_stage` is set and never read in
+three separate games**, and gate 33 already fails all three for it.
 
 ⚠️ **Not a gate, and not a quota.** No threshold here is defensible — a game can be built entirely on
 thresholds and be correct. See "What is checked".
 
-⚠️ **`ne` is unreachable.** The negated form — *"she is NOT at stage 3"* — is used by the field
-(`$robinromance isnot 1`) and our importer rejects it, although the runtime implements it. `engine.md`
-§37.
+⚠️ **The negated form is legal on a canvas gate** — `operator = "ne"`, *"she is NOT at stage 3"*,
+the shape the field writes as `$robinromance isnot 1`. It reads correctly in every evaluator as of
+2026-08-24; before that it was true on the canvas and silently false in every hint that touched it.
+**It is still rejected on a `[[quest_cards]]` condition, deliberately.** `engine.md` §37.
 
 **R6 · The screen moves on re-entry — but the opener does not.** A location the player returns to
 daily has to render differently each time. **It does not do this by rewriting its first sentence.**

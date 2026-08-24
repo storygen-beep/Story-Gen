@@ -5,6 +5,148 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-24 — `ne` reaches two of three evaluators, a lint learns the second container type, and two of section K's own claims are corrected
+
+**Why.** Section K closed the field study and left two pieces of doctrine with nothing built against
+them: `engine.md` §37 (`ne`, the negated form of the field's commonest gate shape) and `block_pool`
+(the variant pool, documented in four places and used by zero v2 games). LO picked both. Researching
+them corrected **three** things committed earlier the same day.
+
+### 1 · `ne` — and §37 was wrong the day it shipped
+
+§37 said the fix was *"three whitelist entries and no runtime work"* and named
+`template_import.py:5414` as the line blocking `ne` on a canvas condition. **Both halves were
+wrong**, and the truth is the section's real content:
+
+| evaluator | backs | `ne` |
+|---|---|---|
+| `compare()` — `v2.py:3848`, reached at `:3956` | canvas / node / choice | already, since v2 shipped |
+| `setup.checkSingleCondition` — `v2.py:7513` | hints, quest-goal bullets, `_findFlagSetterCanvas` | **added** |
+| `setup.checkQuestsCondition` | `[[quest_cards]]` `when` / `goals` | **no, deliberately** |
+
+**Canvas condition operators are not validated by the importer at all.** An unknown operator imports
+clean, reaches the runtime JSON, and fails *closed* with no build error. So `ne` was always writable
+on a canvas gate. What was broken is that the **same condition item** read through
+`checkSingleCondition` fell through to `return false` — true on the canvas, false in every hint that
+touched it. One line.
+
+The second half was worse than cosmetic: the requirement-label formatter (`v2.py:7743`) mapped an
+unknown operator to `"≥"`, so a `ne` gate rendered as *"Elena Affection ≥ 50"* — the game stating the
+opposite of its own rule. Now `"≠"`.
+
+⚠️ **A wrong edit was made and reverted, and the revert is the finding.** `template_import.py:5414`
+was widened to accept `ne` before `setup.checkQuestsCondition` had been read. That evaluator's
+`switch` has no `ne` case and falls through to `return false`, so the change would have let an author
+write a quest-card condition that is **silently always false** — the same class as a `conditions`
+block missing `version = "1.0"`. Reverted; the site now carries a comment saying why it stays closed
+and what widening it correctly would require. Hint `trait_checks` (`:5227`), quest `stage_op`
+(`:5154`) and the heuristic threshold reader (`:5782`) are untouched for the same reason, each named
+in §37.
+
+⚠️ **v1 rollback caveat.** `generators/v1.py` is frozen and carries its own `compare()` with `ne` but
+not this `checkSingleCondition` fix, so a game using `ne` and rebuilt with `--gen-version v1` will
+diverge — canvas gate holds, hints do not. Recorded, not patched.
+
+**Tests.** `apps/projects/tests.py` gains `TraitConditionNeSchemaTests` and
+`TraitConditionNeIntegrationTests` in the file's existing convention. The integration half asserts on
+**both** evaluators, because their disagreement is the regression that matters; the schema half
+asserts that a quest card still rejects `ne`, so the deliberate asymmetry cannot be "fixed" by
+widening a whitelist alone. Seven tests, all passing.
+
+⚠️ The first fixture used `targetType = "trigger"` with no resolving `trigger.location`, which fails
+a different rule and **masked the operator error the fixture existed to test**. A test that fails for
+the wrong reason is worse than no test.
+
+### 2 · `gates.py` — a lint that knew one container type and met another
+
+`_band_texts` special-cased `type == "group"` to emit one string per exclusive band, and a
+`block_pool`'s variants fell through to the always-renders text and got concatenated. `lint · the act
+nodes` takes a **minimum** over that list to report the thinnest thing a node can show, so a
+three-variant pool would have reported the **sum** of all three — three one-word variants scoring as
+a three-word band, in the flattering direction.
+
+This is the same failure the file already warns about at the top of `_collect`, where 158 groups
+across four games were invisible to every beat-based gate for exactly this reason. Rewritten so both
+containers are **axes**: adjacent `[group]` blocks are one axis (they merge into one `if/elseif`
+chain, `engine.md` §35), each pool is its own, and the renderable set is their cross product, capped
+at 64 combinations.
+
+⚠️ **The beat collector still folds every variant together and that is correct** — `engine.md` §35
+argues why: it is the apples-to-apples comparison against the DoL baseline that set the threshold.
+
+**Fixed before the first pool shipped**, so it changes nothing today. Verified two ways: output
+byte-identical across all 21 scorable games (which is the proof `group` behaviour survived the
+rewrite), and a direct check of `_band_texts` on four shapes — a pool, a two-group chain, a node
+carrying both, and a plain node.
+
+### 3 · R5d — measured by the wrong thing
+
+R5d said our stage-counter use is *"0.7%, in 6 of 21 … the field's own pattern, used once each."*
+That counts **`eq` operator occurrences**, which is the right unit for the shape census it sits in
+and the wrong unit for *"do we build stage counters"* — read as the latter it says we barely do,
+which is false.
+
+Measured by **behaviour** — a trait `set` to two or more distinct integers, whatever it is called and
+whatever operator reads it:
+
+```
+7 of 21 scorable games carry at least one
+how those counters are READ  (n = 416)   gte 48%   eq 32%   lt 20%
+```
+
+The corpus-wide **4.5% equality figure stands and is not walked back** — it is dominated by meter
+thresholds, which is a real difference from the field. But the gap is narrower and more specific:
+**we do not read counters wrong, we build few of them.** `the_season`'s `wade_loop_stage` and
+`prine_loop_stage` are set `0/1/2/3` and read `gte 3` / `eq 2` / `lt 2` as an exclusive three-band
+chain — the field's shape, already built, in a v2 game. R5d now points at it.
+
+The *"second doctrine lost in the v1 → v2 divorce"* line is softened to **survived in weakened
+form** — present in two v2 games, absent from five — because that is what the numbers support and
+`block_pool` at a true zero is the thing the stronger phrasing belongs to.
+
+Added: **a counter nobody reads is worse than no counter.** Nine behavioural counters across four
+games are written and never read by a condition. Most are legitimate — gate 33 carves out
+`<npc>_stage` keys the engine reads itself (`v2.py:5549-5554`) — but `sex_stage` is set and never
+read in three separate games, and **gate 33 already fails all three for it.** No gate hole; a
+suspicion checked and found wrong, which is the fourth time this study.
+
+### 4 · `engine.md` §35 — four authoring facts it never carried
+
+Verified in `template_import.py:6210-6237`: children may sit at the block's own **`blocks`** key or
+at **`props.blocks`** (§35 showed only the `props` form, which is the minority shape in our own
+games); **a `block_pool` inside a `block_pool` is silently dropped** (`:6230`) where a `group` inside
+a `group` is preserved (`:6218-6222`); mixed child types only **warn** (`:6235`); depth is capped at
+**4** (`:6143`).
+
+⚠️ **Six of the seven file:line citations first written into §35 were wrong.** They were taken from a
+grep run **before** this session's own seven-line comment was added to `template_import.py`, which
+shifted everything below it. Caught by re-reading every cited line instead of trusting the grep.
+Yesterday's rule was *when a number moves, grep the number, not the file*; the addition is that **a
+file:line taken before your own edit is stale by construction** — and §35 is a document whose entire
+value is that its citations resolve.
+
+### What is NOT in this entry
+
+- **No worked `block_pool` in any game.** It was scoped for `the_season`'s two act loops and not
+  written: those loops are the player character with her brother and her uncle, and that is content
+  this author will not write. The mechanism therefore still has **zero** worked examples, and
+  `STATUS.md` PART 6 keeps the row. The standing alternative, unbuilt and awaiting LO: the six
+  repeatable non-family surfaces — `work_rows_picking`, `work_shed_hours`, `work_store_run`,
+  `sleep_camp`, `wash_showers`, `eat_window` — 438 words the player re-reads daily, which is the
+  case v1's Rule 17 named the feature for.
+- **No gate, no lint, no threshold.** Distinct-gate union stays at **42**.
+- **`generators/v1.py`** — frozen, untouched.
+- **`issue.md` and `games/vesper/.find-media/*`** — a concurrent session's, never staged.
+
+**Verified.** Baseline over all 21 scorable games captured before any edit and re-run after:
+**byte-identical**, 328 PASS / 223 FAIL / 337 n/a, distinct-gate union 42. `pytest
+apps/projects/tests.py` — 382 passed, 4 failed, and **all four fail at clean HEAD too**, confirmed in
+a throwaway `git worktree` at `169685e`; they are pre-existing and were not touched.
+`_band_texts` unit-checked on four shapes. Every file:line added to §35 and §37 re-read against the
+current file after all edits were in.
+
+---
+
 ## 2026-08-24 — Section K, the mirror: the field's most common gate is our rarest, and five numbers in this skill were arguing with themselves
 
 **Why.** Ten study sections measured the field and asked what the skill teaches. **None of them

@@ -1318,36 +1318,77 @@ def _node_has_prose(node):
     return bool(found)
 
 
+def _expand_axes(fixed, axes, cap=64):
+    """Every string this node can render: `fixed` plus one alternative per axis.
+
+    An axis is a set of mutually exclusive alternatives — a `[group]` if/elseif
+    chain, or a `block_pool`'s variants. A node can carry several, and what the
+    player sees is one from each, so the renderable set is their cross product.
+    Truncated at `cap` combinations: the callers take a MINIMUM over this list and
+    a lint that walks 3^12 strings to find it is not worth the wall-clock.
+    """
+    out = [fixed]
+    for axis in axes:
+        if not axis:
+            continue
+        out = [f"{alt} {base}".strip() for base in out for alt in axis][:cap]
+    return [x for x in out if x]
+
+
 def _band_texts(node):
     """One string per VARIANT this node can render, not per authored block.
 
-    A `Beat` folds a node's [group] bands together, on purpose — a Twine passage
-    carries all its `<<if>>` branches inline and the DoL baseline was counted that
-    way. But a PLAYER sees exactly one band plus whatever sits outside the chain, and
-    a finisher scoring six across three bands can put two body words on the screen.
-    Measured live: every act node passed while nine finisher bands did not.
-    """
-    fixed, bands = [], []
+    A `Beat` folds a node's variants together, on purpose — a Twine passage carries
+    all its `<<if>>` branches inline and the DoL baseline was counted that way. But a
+    PLAYER sees exactly one, and a finisher scoring six across three bands can put two
+    body words on the screen. Measured live: every act node passed while nine finisher
+    bands did not.
 
-    def walk(blocks, sink):
+    ⚠️ `block_pool` IS AN AXIS AND WAS NOT READ AS ONE UNTIL 2026-08-24. Only `group`
+    was special-cased; a pool's variants fell through to the always-renders text and
+    got concatenated, so a three-variant pool reported the SUM of all three as the
+    thinnest thing the node can show. Nothing had used `block_pool` yet, so nothing had
+    been wrong yet — this landed with the first one (`the_season`'s act nodes). It is
+    the same failure the beat collector already carries a warning about at the top of
+    this file, where 158 groups across four games were invisible for the same reason:
+    a walker that knows one container type and meets another.
+
+    Adjacent `[group]` blocks merge into ONE if/elseif chain (`engine.md` §35), so all
+    the groups at one level are a single axis. Pools are independent of each other and
+    of the chain, so each is its own.
+    """
+    def walk(blocks):
+        """-> (always-renders text, [axis, …]); an axis is a list of alternatives."""
+        fixed, group_bands, axes = [], [], []
         for b in blocks or []:
             if not isinstance(b, dict):
                 continue
             props = b.get("props") or {}
             inner = b.get("blocks") or props.get("blocks")
-            if b.get("type") == "group" and inner:
-                acc = []
-                walk(inner, acc)
-                bands.append(" ".join(acc))
+            btype = b.get("type")
+            if btype == "group" and inner:
+                gf, gaxes = walk(inner)
+                group_bands.extend(_expand_axes(gf, gaxes))
+                continue
+            if btype == "block_pool" and inner:
+                variants = []
+                for v in inner:
+                    vf, vaxes = walk([v])
+                    variants.extend(_expand_axes(vf, vaxes))
+                if variants:
+                    axes.append(variants)
                 continue
             if inner:
-                walk(inner, sink)
-            if b.get("content") and b.get("type") not in MEDIA_BLOCKS:
-                sink.append(str(b["content"]))
+                sf, saxes = walk(inner)
+                if sf:
+                    fixed.append(sf)
+                axes.extend(saxes)
+            if b.get("content") and btype not in MEDIA_BLOCKS:
+                fixed.append(str(b["content"]))
+        return " ".join(p for p in fixed if p), ([group_bands] if group_bands else []) + axes
 
-    walk(node.get("blocks"), fixed)
-    base = " ".join(fixed)
-    return [f"{band} {base}".strip() for band in bands] if bands else ([base] if base else [])
+    base, axes = walk(node.get("blocks"))
+    return _expand_axes(base, axes)
 
 
 def lint_act_nodes(model, game):

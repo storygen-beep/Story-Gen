@@ -1657,12 +1657,36 @@ every time the passage draws. Re-enter the surface and the sentence is different
 | variants may be **any block type** — the pool nests `_convert_blocks_to_game_html` | `v2.py:14578`, `:14587` |
 
 ```toml
-{ type = "block_pool", props = { blocks = [
-    { type = "text", content = "…first variant…" },
-    { type = "text", content = "…second variant…" },
-    { type = "text", content = "…third variant…" },
-] } }
+# BOTH SHAPES PARSE. This is the one every group in our games already uses —
+# children at the block's own `blocks` key — so it is the one to copy.
+{ type = "block_pool", blocks = [
+    { type = "paragraph", content = "…first variant…" },
+    { type = "paragraph", content = "…second variant…" },
+    { type = "paragraph", content = "…third variant…" },
+] }
+
+# Identical after import. The generator reads props.blocks either way.
+{ type = "block_pool", props = { blocks = [ … ] } }
 ```
+
+### The four authoring facts, verified in the importer
+
+`template_import.py:6210-6237` normalises both container types side by side, so the rules are the
+same ones `group` follows — with one exception that is not.
+
+| | |
+|---|---|
+| children may sit at **`blocks`** OR **`props.blocks`** | `:6225` — `b.get("blocks") or props.get("blocks")`, the same both-shapes read `group` gets at `:6214`. This section showed only the `props` form until 2026-08-24, which is the minority shape in our own games |
+| **a `block_pool` directly inside a `block_pool` is silently dropped** | `:6230` — `inner_safe = [ib for ib in inner_safe if ib.get("type") != "block_pool"]`. A random pick of a random pick is ambiguous and the restriction is deliberate. **Unlike `group`, which MAY nest in `group`** (`:6218-6222`, the same-type-skip rule was removed 2026-05-17) |
+| **mixed child types only WARN** | `:6235` — `logger.warning("block_pool has mixed types …")`. It builds. Same-type children are the intent, and the warning is in the build log, not the game |
+| nesting depth is capped at **4** | `:6143` — a `group` wrapping a pool wrapping a group is depth 3, so 4 is a ceiling rather than a limit you will meet |
+
+⚠️ **A pool is an exclusive axis and the scoreboard now reads it as one.** `gates.py`'s
+`_band_texts` knew `group` and not `block_pool` until 2026-08-24, so a three-variant pool had its
+variants concatenated and reported as text that always renders — `lint · the act nodes` would have
+called three one-word variants a three-word band. Fixed before the first pool shipped. The **beat**
+collector still folds every variant together on purpose, and that is correct: see the folding
+argument below.
 
 ### Why this section exists
 
@@ -1896,51 +1920,68 @@ Four rules the field follows, all of them cheap:
 
 ---
 
-## 37. `ne` runs in the engine and the importer will not let you write it
+## 37. THREE condition evaluators, and they do not agree by default
 
-Added 2026-08-24 from section K. **This is a gap, not a primitive** — it is here so nobody
-re-discovers it, and so the one-line fix is on record.
+Added 2026-08-24 from section K. **Rewritten the same day, because the first version of this
+section was wrong** — it said the fix was *"three whitelist entries and no runtime work"*, and it
+named `template_import.py:5414` as the thing blocking `ne` on a canvas condition. That line is the
+**quest-card** validator. The real architecture is below, and it is the load-bearing fact:
 
-The field's most common way to gate anything is an **equality** — *"are you at exactly this step"* —
-at 53% of all its conditions (`the-surfaces.md` R5d). Its negated form is ordinary in the corpus:
+| evaluator | backs | `ne` |
+|---|---|---|
+| `compare()` — `v2.py:3848` | canvas / node / choice `conditions`, reached at `v2.py:3956` | **yes**, since v2 shipped |
+| `setup.checkSingleCondition` — `v2.py:7490`, trait branch `:7513` | hints, quest-card *goal* bullets, `_findFlagSetterCanvas`, ten-plus call sites | **yes, since 2026-08-24** |
+| `setup.checkQuestsCondition` | `[[quest_cards]]` `when` and `goals` | **no, deliberately** |
 
+**Anything added to one has to be checked against the other two.** That is the rule this section
+exists for; `ne` is just the case that exposed it.
+
+### What was actually broken, and what was not
+
+**A canvas condition's operator is not validated by the importer at all.** An unknown operator
+imports clean, reaches the runtime JSON, and fails **closed** in `compare()` with no build error and
+no warning. So `ne` was always writable on a canvas gate and always worked there.
+
+What did not work: the **same condition item** read through `setup.checkSingleCondition`, whose trait
+branch ran `gte / gt / lte / lt / eq` and then `return false`. A `ne` gate was therefore true on the
+canvas and false in every hint and flag-setter lookup that touched it. One line, now fixed.
+
+The second half was cosmetic and worse than it sounds. The requirement-label formatter
+(`v2.py:7743`) mapped an unknown operator to `"≥"`, so a `ne` gate rendered as *"Elena Affection ≥
+50"* — the game stating the opposite of its own rule. Now `"≠"`.
+
+```toml
+# Legal today. "She is not at stage 3" — the negated form of the field's
+# commonest gate shape (the-surfaces.md R5d).
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "wade_loop_stage", operator = "ne", value = 3 },
+] }
 ```
-<<if $robinromance isnot 1>>        degrees-of-lewdity
-<<if $thomas != 0>>                 friends-of-mine
-```
 
-**Our runtime implements it.** Trait conditions are evaluated by `compare()`:
+### ⚠️ Quest cards reject `ne` on purpose — do not "fix" the whitelist
 
-| | |
-|---|---|
-| `v2.py:3956` | a `type = "trait"` item calls `compare(top, leftVal, rightVal)` |
-| `v2.py:3848` | `compare()` — `if (op === 'ne') return left !== right;` |
-| `v2.py:1916` | the locked-reason path evaluates `ne` as well |
-| `v2.py:1926` | and already renders it — `phrase = label + ' not ' + want` |
+`[[quest_cards]]` conditions **are** whitelisted (`template_import.py:5414`, `gte/lte/gt/lt/eq`) and
+their evaluator, `setup.checkQuestsCondition`, has no `ne` case — its `switch` falls through to
+`return false`. Widening that whitelist without adding the case would let an author write a card
+condition that is **silently always false**, which is the failure this engine has had before with
+`conditions` lacking `version = "1.0"`.
 
-**And the importer rejects it before it ever gets there:**
+Widening it correctly means the whitelist **and** the evaluator, in the same change. The comment at
+`template_import.py:5414` says so at the site.
 
-| | |
-|---|---|
-| `template_import.py:5414` | `if item.op not in ("gte", "lte", "gt", "lt", "eq"): errors.append(...)` |
-| `template_import.py:5227` | a second whitelist, `{"eq", "gte", "lte", "gt", "lt", "is_true", "is_false"}` |
-| `template_import.py:5969` | `op_map` translates `>= <= > < == =` and has no `!=` |
+Also unchanged, and for the same reason — each is its own path:
 
-So `operator = "ne"` is a **build error**, and there is no way to write *"she is NOT at stage 3"*
-except by inverting the surrounding structure — a second `[group]` branch, or an `is_false` flag
-mirroring the state you already have in a trait.
+- `template_import.py:5227` — hint `trait_checks`.
+- `template_import.py:5154` / `:5177` — quest `stage_op`, `{eq, gte, lte}`.
+- `template_import.py:5782` — a **heuristic** threshold reader, not a validator. `ne` is not a
+  threshold and does not belong there.
 
-⚠️ **Do not author `ne` today.** It fails the build. This section exists to record that the fix is
-three whitelist entries and no runtime work, not to license the field.
+### ⚠️ The v1 rollback path
 
-⚠️ **The flag side does not need `ne` — but it has the same mismatch in miniature.** `type = "flag"`
-negates with `is_false`, so nothing is missing there. But the runtime accepts a **third** flag
-operator the importer also refuses: `exists` (`v2.py:1937`, `fsat = hasOwnProperty(flags, fkey)`)
-against `template_import.py:5399`, which allows only `is_true` / `is_false`. Note the difference
-between them — `is_false` is TRUE for a flag that was never set (`v2.py:1936`,
-`v === false || v === undefined`), so *"never set"* and *"set and then cleared"* are the same test
-today. **The gap that matters for an arc is the numeric one**, which is exactly where a stage counter
-lives.
+`generators/v1.py` is frozen and carries its own `compare()` with `ne`, but not this fix to
+`checkSingleCondition`. **A game that uses `ne` and is rebuilt with `--gen-version v1` for safe-mode
+rollback will diverge** — the canvas gate holds, the hints do not. v1 is not patched; per `CLAUDE.md`
+it is rollback-only and slated for deletion.
 
 ### Where the rule lives
 
