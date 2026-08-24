@@ -1,0 +1,1035 @@
+# =============================================================================
+# Mrs. Vance — 4_story_arc  ·  TALK SCREENS AND THE ACT LOOPS
+#
+# ── THE TALK SCREENS ────────────────────────────────────────────────────────
+# S4. 15,774 of the field's 54,630 screens are these: 55 words, two-thirds
+# spoken, one picture, one way out. Nearly a third of everything the genre
+# ships, and the cheapest content there is — no media hunt, no ladder, no state.
+# vesper runs 26% and every v2 game runs 0-5%. What it is FOR is the person, not
+# the plot, and attachment to a character outscored praise for the porn itself
+# across ~11,000 player comments.
+# ⚠️ They grant NO meter. A free repeatable that raises `want` is an uncapped
+#    faucet on the thing every gate in the game reads (gate 26, the-economy R6).
+#    The ladder rungs are priced and day-capped; the talk is free and is content.
+# ⚠️ ONE TERM OF ADDRESS PER PERSON: Cade "Mrs. Vance" · Sherrod "girl" ·
+#    Tobin "Rilla" · Booth the title until he cracks · Isaac nothing at all.
+#    Measured at roughly every sixth to twentieth line in two field games, with
+#    no overlap anywhere in either cast. Cheapest device in the whole study.
+#
+# ── THE ACT LOOPS ───────────────────────────────────────────────────────────
+# R3b. A REPEATABLE EXPLICIT SURFACE IS A NODE-ROUTED LOOP. A one-time scene is
+# a cascade. The difference is not style: a cascade APPENDS, so the clip at the
+# node lead is the clip for beat 0 and by the beat that is the act the player is
+# reading the payoff under a picture of the setup. Node routing SWAPS the
+# passage, so every act is its own screen with its own pool.
+#
+# Six parts, all present in every loop below:
+#   ENTRY      on the hub, gated, and it resets every loop trait on the way in
+#   ACT NODE   per rung, its own media pool
+#   SELF-LOOP  stay on this act, raise the hidden meter
+#   SWITCH     change act, set loop_act, BOTH directions
+#   FINISH     gated on arousal, elects which finish, routes to the finisher
+#   FINISHER   [group] bands per finish, then resets every loop trait
+#
+# ⚠️ RESET ON ENTRY AND ON EXIT. Forget either and the next run starts mid-climb.
+# ⚠️ LOOP STATE IS HIDDEN NUMERIC TRAITS, NEVER FLAGS. A flag set inside a
+#    triggerless canvas has no located setter and HARD-FAILS the build (§16).
+# ⚠️ AN ACT MENU IS TWO OPTIONS WIDE. Measured across 2,292 act menus in
+#    nineteen shipped sandboxes: median 2, p75 3, and a SPAN of 1 — the options
+#    sit one step apart, `touch` beside `oral`, never `talk` beside `sex`. And
+#    the SINGLE-ACT LOOP is the shape the field mostly ships: of 61 arc hubs, 47
+#    run one to four intensities and only 14 run five or more. Cade gets the
+#    pose ladder because he carries the game; the other four are single-act.
+# ⚠️ THE LABEL NAMES THE ACT. A loop whose exits say "Continue" has thrown away
+#    the only readable thing about it. The field ships them bare and crude at
+#    the character's ceiling.
+# ⚠️ EVERY ACT NODE CARRIES 3+ WORDS FROM THE FROZEN LIST, and the game-wide
+#    percentage cannot see the screen the player is on: 10 of one game's 21 act
+#    and finish beats were under 3 while the whole-game floor read a comfortable
+#    pass, and one finisher scored ZERO on 127 words — three paragraphs of a man
+#    coming, not one of which named a body part.
+# ⚠️ AN EXPLICIT BEAT STAYS ON THE BODY FOR ITS WHOLE LENGTH. Read the last
+#    sentence: if it is about what the moment MEANS rather than what is
+#    HAPPENING, the beat has pivoted and it scores 0-1. Interiority gets its own
+#    beat, AFTER. This defect shipped three increments running, authored each
+#    time by someone who had just written the rule against it.
+# ⚠️ S1 · THE CLIP RIDES THE BEAT. Every act node has its own pool.
+# =============================================================================
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# TALK
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id   = "talk_cade"
+name = "Cade, talking"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "He was on his own eleven years. Then he wasn't. That's the whole of what I know about it, Mrs. Vance, and I'd stop there if I were you." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "I don't care what you are to him. I care that the drawer is right on Friday. Those are two separate things and I'd like them kept that way." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "You want to know what a job is worth, look at what the man will wait for. Everything else on that sheet is decoration." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "No, I didn't object. Objecting to my father is a thing you do once, and you want to be sure it's worth the once." },
+  ] },
+  { type = "paragraph", content = "He says it all in the same voice he uses for a delivery time, and then goes back down the column, and the conversation is over because he has decided it is." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let him have the last word."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_office"
+time_progression_minutes = 5
+
+
+[[canvases]]
+id   = "talk_booth"
+name = "Booth, talking"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "Rennick says there's work at the crossing. He says a lot of things. — Sorry, Mrs. Vance, you didn't ask about Rennick." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "Nobody's said I can't work in the shop. Nobody's said I can either. That's kind of how it goes here, if you haven't noticed yet." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "I put the water on. It's an hour, so. If you were going to. That's all." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "You're not what I thought you'd be. I don't mean that bad. I mean I'd made up a whole — no. Forget it." },
+  ] },
+  { type = "paragraph", content = "He goes red from the collar up while he is still talking and keeps going anyway, which is the bravest thing anybody in this house does all week." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let him off the hook."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_kitchen"
+time_progression_minutes = 5
+
+
+[[canvases]]
+id   = "talk_isaac"
+name = "Isaac, not talking"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "Hub seal. Not the bearing." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "Rain by four." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "He was all right. Before. That's all I'd say." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "You don't have to talk in here. Nobody does." },
+  ] },
+  { type = "paragraph", content = "Then nothing, for long enough that a normal person would fill it, and he does not fill it, and he does not look away either." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let the quiet run."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_wash_bay"
+time_progression_minutes = 5
+
+
+[[canvases]]
+id   = "talk_sherrod"
+name = "Sherrod, talking"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "This was two bays and a tow truck when I came. Everything in here older than fifteen years, I can tell you where it came from and what we didn't pay for it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "The first one, she did the book as well. Sat in that chair. He's not a man who has many ideas, girl, he just has the one twice." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "Nine months back he asked me what I thought. I told him what I thought. I've not been asked since and I've not offered." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "Everybody on this yard is owed something by somebody. It's the only thing holds it together. You'll work out where you sit in that." },
+  ] },
+  { type = "paragraph", content = "He does not move the lamp back. He tells you the whole thing looking at you rather than at the drawer he has open, and he is in no hurry to stop." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Say goodnight."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_office"
+time_progression_minutes = 5
+
+
+[[canvases]]
+id   = "talk_tobin"
+name = "Tobin, talking"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Mom asked after you. I said you were fine. Rilla, I've said you were fine four times now and she's stopped believing the way I say it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "They call you Mrs. Vance in the shop and then they look at me to see if I'm going to. I'm not going to." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "It's not the work. I'll do the work. It's that they all know something about this that I don't and none of them will say it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "You got me this. I know what that cost you. I've never once said thanks for it because I can't work out what thanks would sound like." },
+  ] },
+  { type = "paragraph", content = "Out here there is nobody to say it in front of, so he says it flat and full volume, and the hedge takes it." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let it sit."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_back_row"
+time_progression_minutes = 5
+
+
+[[canvases]]
+id   = "talk_dorn"
+name = "Dorn, talking"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_dorn" }, content = "Three years, and then it's half yours. That's not a leash. That's a man who's been married before." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_dorn" }, content = "Cade runs it because Cade can run it. You keep the book because I want the book kept by somebody who isn't him. Work the rest out yourself." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_dorn" }, content = "I'm four nights out. It was five before. It'll be four for a while yet." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_dorn" }, content = "You've not asked me for anything in eleven weeks. I've noticed. I've not decided what it means." },
+  ] },
+  { type = "paragraph", content = "He says it to the table rather than to you, and then he goes up, and he is asleep by ten." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sit on in the kitchen."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_kitchen"
+time_progression_minutes = 5
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE ACT LOOPS.  Triggerless — node routing resolves to a real passage at BUILD
+# time (v2.py:13258), so a triggerless canvas is a SAFE node-link target. That is
+# the opposite of a SUBSTITUTION target, which must declare a location or it
+# silently never fires. Same word, two mechanisms, do not carry one rule onto the
+# other.
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ── CADE.  The pose ladder — he carries the game, so he gets the minority
+#    shape: three act nodes with switch links both ways. Ceiling: full, and he
+#    says all of it out loud.
+[[canvases]]
+id   = "loop_cade"
+name = "The office with the door locked"
+
+[[canvases.nodes]]
+id = "entry"
+name = "Entry"
+blocks = [
+  { type = "paragraph", content = "He puts the bar across the office door himself, and then the blind down over the wired glass, and he does both without hurrying and without looking at you while he does them." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Right. Come here, Mrs. Vance." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get his cock out and take it in your hand."
+targetType = "node"
+nodeId     = "loop_cade.act_hand"
+effects = [
+  { targetType = "player", trait = "loop_stage", op = "set", value = 0 },
+  { targetType = "player", trait = "loop_act",   op = "set", value = 1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go down on your knees in front of the chair."
+targetType = "node"
+nodeId     = "loop_cade.act_mouth"
+effects = [
+  { targetType = "player", trait = "loop_stage", op = "set", value = 0 },
+  { targetType = "player", trait = "loop_act",   op = "set", value = 2 },
+]
+
+
+[[canvases.nodes]]
+id = "act_hand"
+name = "Your hand"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/cade_hand_t5", pool = 4, description = "A woman working a man's cock with her hand at a desk.", search_queries = ["handjob desk office pov", "woman stroking cock hand close"] } },
+  { type = "paragraph", content = "You get his belt open standing over him and pull his cock out and it is already hard against your palm. You work him slow with your fist closed under the head, and his hips come up off the chair to meet it." },
+  { type = "paragraph", content = "He puts his hand up under your shirt and takes a whole tit in it, thumb dragging over the nipple. Your cunt clenches every time he does it. His cock is leaking across your knuckles." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Slower. You're not doing the books now." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep working his cock."
+targetType = "node"
+nodeId     = "loop_cade.act_hand"
+time_progression_minutes = 10
+costs = [ { trait = "energy", value = 3 } ]
+effects = [
+  { targetType = "player", trait = "loop_stage", op = "add", value = 1 },
+  { targetType = "player", trait = "arousal",    op = "add", value = 14, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get down and put it in your mouth."
+targetType = "node"
+nodeId     = "loop_cade.act_mouth"
+time_progression_minutes = 5
+costs = [ { trait = "energy", value = 3 } ]
+effects = [
+  { targetType = "player", trait = "loop_act", op = "set", value = 2 },
+  { targetType = "player", trait = "arousal",  op = "add", value = 8, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get up on the desk and let him fuck you."
+targetType = "node"
+nodeId     = "loop_cade.act_desk"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_stage", operator = "gte", value = 2 },
+] }
+show_when_locked = true
+locked_text      = "Get up on the desk — not from a standing start, not with him like this."
+effects = [
+  { targetType = "player", trait = "loop_act", op = "set", value = 3 },
+  { targetType = "player", trait = "arousal",  op = "add", value = 10, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him cum over your hand."
+targetType = "node"
+nodeId     = "loop_cade.finish"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 60 },
+] }
+show_when_locked = true
+locked_text      = "Let him cum — he is nowhere near it yet."
+effects = [ { targetType = "player", trait = "loop_act", op = "set", value = 1 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Do his belt back up."
+targetType = "location"
+locationId = "the_office"
+time_progression_minutes = 5
+
+
+[[canvases.nodes]]
+id = "act_mouth"
+name = "Your mouth"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/cade_mouth_t5", pool = 4, description = "A woman on her knees sucking a man's cock beside an office chair.", search_queries = ["blowjob on knees office chair", "woman sucking cock kneeling close"] } },
+  { type = "paragraph", content = "You take his cock in your mouth and go down it until it is against the back of your throat, and he lets you set it for about four strokes before his hand goes into your hair and he stops letting you." },
+  { type = "paragraph", content = "He fucks up into your mouth in short shoves and you suck him through every one, spit running off your chin onto your own tits. Your cunt is soaking and you have not been touched once." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "There. That's it. All the way down, Mrs. Vance." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep him in your mouth."
+targetType = "node"
+nodeId     = "loop_cade.act_mouth"
+time_progression_minutes = 10
+costs = [ { trait = "energy", value = 3 } ]
+effects = [
+  { targetType = "player", trait = "loop_stage", op = "add", value = 1 },
+  { targetType = "player", trait = "arousal",    op = "add", value = 16, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Come up and use your hand instead."
+targetType = "node"
+nodeId     = "loop_cade.act_hand"
+time_progression_minutes = 5
+costs = [ { trait = "energy", value = 3 } ]
+effects = [
+  { targetType = "player", trait = "loop_act", op = "set", value = 1 },
+  { targetType = "player", trait = "arousal",  op = "add", value = 6, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get up on the desk and let him fuck you."
+targetType = "node"
+nodeId     = "loop_cade.act_desk"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_stage", operator = "gte", value = 2 },
+] }
+show_when_locked = true
+locked_text      = "Get up on the desk — he has not got to the point of moving you yet."
+effects = [
+  { targetType = "player", trait = "loop_act", op = "set", value = 3 },
+  { targetType = "player", trait = "arousal",  op = "add", value = 10, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish in your mouth."
+targetType = "node"
+nodeId     = "loop_cade.finish"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 60 },
+] }
+show_when_locked = true
+locked_text      = "Let him finish — not yet, he is still going slow enough to talk."
+effects = [ { targetType = "player", trait = "loop_act", op = "set", value = 2 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get up off the floor."
+targetType = "location"
+locationId = "the_office"
+time_progression_minutes = 5
+
+
+[[canvases.nodes]]
+id = "act_desk"
+name = "The desk"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/cade_desk_t5", pool = 4, description = "A woman bent over an office desk being fucked from behind.", search_queries = ["bent over desk fucked from behind office", "woman bent over table sex behind"] } },
+  { type = "paragraph", content = "He clears the spike off the desk with his forearm and puts you face down on the book, and gets your jeans down past your ass in one pull. Then he pushes his cock into your cunt in one long shove and holds it there." },
+  { type = "paragraph", content = "He fucks you against the edge of the desk with a hand flat between your shoulder blades, and every thrust drives your tits across your own handwriting. You are clenching around him and you cannot stop doing it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Two sixty. That's what's in the book. Say it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take it and say the number."
+targetType = "node"
+nodeId     = "loop_cade.act_desk"
+time_progression_minutes = 10
+costs = [ { trait = "energy", value = 3 } ]
+effects = [
+  { targetType = "player", trait = "loop_stage", op = "add", value = 1 },
+  { targetType = "player", trait = "arousal",    op = "add", value = 18, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get down and put it back in your mouth."
+targetType = "node"
+nodeId     = "loop_cade.act_mouth"
+time_progression_minutes = 5
+costs = [ { trait = "energy", value = 3 } ]
+effects = [
+  { targetType = "player", trait = "loop_act", op = "set", value = 2 },
+  { targetType = "player", trait = "arousal",  op = "add", value = 6, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him cum inside you."
+targetType = "node"
+nodeId     = "loop_cade.finish"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 65 },
+] }
+show_when_locked = true
+locked_text      = "Let him cum inside you — he is still counting, and he has not lost it yet."
+effects = [ { targetType = "player", trait = "loop_act", op = "set", value = 3 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Push back off the desk."
+targetType = "location"
+locationId = "the_office"
+time_progression_minutes = 5
+
+
+# THE FINISHER. [group] bands elect on loop_act, and they are MUTUALLY
+# EXCLUSIVE by `eq`: adjacent group blocks merge into ONE if/elseif chain
+# (v2.py:14561-14568) and first match wins, so a second live rule is a dead
+# branch. `eq` is the field's commonest gate shape at 53% against our 4.5%.
+# ⚠️ The lint reports the THINNEST BAND a node can render, because the player
+#    sees exactly one. Every band below carries 3+ on its own.
+[[canvases.nodes]]
+id = "finish"
+name = "Finish"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/cade_finish_t5", pool = 4, description = "A man finishing.", search_queries = ["cumshot close finish", "man cumming pov close"] } },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "loop_act", operator = "eq", value = 1 } ] }, blocks = [ { type = "paragraph", content = "His cock goes rigid in your fist and he cums up over your knuckles and your wrist in three long pulls, and you keep stroking him through all of it until he catches your hand and stops you." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "loop_act", operator = "eq", value = 2 } ] }, blocks = [ { type = "paragraph", content = "He holds your head down and cums in your mouth, and you take it and swallow with his cock still on your tongue, and he does not let go of your hair until he is finished." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "loop_act", operator = "eq", value = 3 } ] }, blocks = [ { type = "paragraph", content = "He drives all the way in and cums in your cunt with his hand still flat on your back, and you feel every pulse of it, and he stays inside you until he has gone soft." } ] },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "The book is under you and it is your handwriting, and that is the part you will think about at four in the morning." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get your jeans."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_office"
+time_progression_minutes = 20
+costs = [ { trait = "energy", value = 3 } ]
+effects = [
+  { targetType = "player", trait = "arousal",    op = "set", value = 0 },
+  { targetType = "player", trait = "loop_stage", op = "set", value = 0 },
+  { targetType = "player", trait = "loop_act",   op = "set", value = 0 },
+  { targetType = "npc", npcId = "npc_cade", trait = "want", op = "add", value = 4, cap = 100 },
+  { targetType = "player", trait = "clean", op = "add", value = -25 },
+]
+
+
+# ── ISAAC.  Single-act loop — the field's majority shape. He does not talk.
+[[canvases]]
+id   = "loop_isaac"
+name = "The corner of the bay"
+
+[[canvases.nodes]]
+id = "entry"
+name = "Entry"
+blocks = [
+  { type = "paragraph", content = "He walks you backwards until the wet concrete of the corner is against your shoulder blades and puts the hose down still running, so the bay is loud, so nothing has to be said in it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him get your jeans open."
+targetType = "node"
+nodeId     = "loop_isaac.act"
+effects = [
+  { targetType = "player", trait = "loop_stage", op = "set", value = 0 },
+  { targetType = "player", trait = "loop_act",   op = "set", value = 1 },
+]
+
+[[canvases.nodes]]
+id = "act"
+name = "The act"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/isaac_bay_t5", pool = 4, description = "A soaked woman fucked against a wall in a wash bay.", search_queries = ["wet woman fucked against wall standing", "soaked clothes sex against wall"] } },
+  { type = "paragraph", content = "He gets your soaked jeans down to your thighs and his fingers straight into your cunt, two of them, and you are already wet enough that they go in to the knuckle first go. Your head goes back against the concrete." },
+  { type = "paragraph", content = "Then his cock instead, pushed up into you with your back on the wall and one of your legs hooked over his arm, and he fucks you in silence with the hose still running across the floor at both your feet." },
+  { type = "paragraph", content = "He has your shirt shoved up over your tits and he watches them move the whole time. He does not once look at your face." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "Don't stop." },
+  { type = "paragraph", content = "Two words. It is the most he has said to you in eleven weeks and he says it with his cock all the way up inside you." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take it against the wall."
+targetType = "node"
+nodeId     = "loop_isaac.act"
+time_progression_minutes = 10
+costs = [ { trait = "energy", value = 3 } ]
+effects = [
+  { targetType = "player", trait = "loop_stage", op = "add", value = 1 },
+  { targetType = "player", trait = "arousal",    op = "add", value = 17, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Make him look at you while he does it."
+targetType = "node"
+nodeId     = "loop_isaac.act"
+time_progression_minutes = 10
+costs = [ { trait = "energy", value = 3 } ]
+effects = [
+  { targetType = "player", trait = "loop_stage", op = "add", value = 1 },
+  { targetType = "player", trait = "arousal",    op = "add", value = 12, cap = 100 },
+  { targetType = "npc", npcId = "npc_isaac", trait = "want", op = "add", value = 2, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him cum in you."
+targetType = "node"
+nodeId     = "loop_isaac.finish"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 60 },
+] }
+show_when_locked = true
+locked_text      = "Let him cum — not yet, he has barely started."
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get your jeans up."
+targetType = "location"
+locationId = "the_wash_bay"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id = "finish"
+name = "Finish"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/isaac_finish_t5", pool = 3, description = "A man finishing inside.", search_queries = ["creampie close finish", "man cumming inside pov"] } },
+  { type = "paragraph", content = "He shoves all the way up into you and holds it there. His cock jerks inside your cunt and he cums without making one sound, forehead down hard against your collarbone. You feel every pulse of it go into you. His hand is still clamped over one of your tits and it stays there while his whole body locks up." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Forty words in eleven weeks, and none of them just now either." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Put your shirt down."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_wash_bay"
+time_progression_minutes = 20
+costs = [ { trait = "energy", value = 3 } ]
+effects = [
+  { targetType = "player", trait = "arousal",    op = "set", value = 0 },
+  { targetType = "player", trait = "loop_stage", op = "set", value = 0 },
+  { targetType = "player", trait = "loop_act",   op = "set", value = 0 },
+  { targetType = "npc", npcId = "npc_isaac", trait = "want", op = "add", value = 4, cap = 100 },
+  { targetType = "player", trait = "clean", op = "add", value = -30 },
+]
+
+
+# ── SHERROD.  Single-act. He opens crude and he says it in front of anybody.
+[[canvases]]
+id   = "loop_sherrod"
+name = "What he is owed"
+
+[[canvases.nodes]]
+id = "entry"
+name = "Entry"
+blocks = [
+  { type = "paragraph", content = "He does not get out of the chair. He turns it a quarter toward you and puts one boot up on the drawer he keeps locked, and tells you what he thinks he is owed in the same voice he reads a job sheet in." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "Nine months I've said nothing, girl. Get it out and I'll not say anything after, either." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get his cock out."
+targetType = "node"
+nodeId     = "loop_sherrod.act"
+effects = [
+  { targetType = "player", trait = "loop_stage", op = "set", value = 0 },
+  { targetType = "player", trait = "loop_act",   op = "set", value = 1 },
+]
+
+[[canvases.nodes]]
+id = "act"
+name = "The act"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/sherrod_office_t5", pool = 4, description = "A woman kneeling to suck an older man in a chair.", search_queries = ["woman kneeling blowjob older man chair", "office chair blowjob pov older"] } },
+  { type = "paragraph", content = "You get his belt open and his cock out of it and it is thick and already hard and he does not help you with any of it. You take it in your mouth off your knees on the office floor." },
+  { type = "paragraph", content = "He talks while you suck him — about the yard, about his brother, about what a thing is worth — and every time you go all the way down on his cock he stops mid-sentence and then carries on from where he was." },
+  { type = "paragraph", content = "He gets a hand into the front of your shirt and pulls it open to get at your tits, and works one nipple between two fingers, hard enough that your cunt tightens on it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep sucking him through the sentence."
+targetType = "node"
+nodeId     = "loop_sherrod.act"
+time_progression_minutes = 10
+costs = [ { trait = "energy", value = 3 } ]
+effects = [
+  { targetType = "player", trait = "loop_stage", op = "add", value = 1 },
+  { targetType = "player", trait = "arousal",    op = "add", value = 15, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get up and ride him in the chair."
+targetType = "node"
+nodeId     = "loop_sherrod.act"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_stage", operator = "gte", value = 2 },
+] }
+show_when_locked = true
+locked_text      = "Get up and ride him — he has not finished the sentence and he will not be interrupted."
+effects = [
+  { targetType = "player", trait = "loop_stage", op = "add", value = 1 },
+  { targetType = "player", trait = "loop_act",   op = "set", value = 2 },
+  { targetType = "player", trait = "arousal",    op = "add", value = 18, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him cum in your mouth."
+targetType = "node"
+nodeId     = "loop_sherrod.finish"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 60 },
+] }
+show_when_locked = true
+locked_text      = "Let him cum — he is nowhere near done talking."
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit back on your heels."
+targetType = "location"
+locationId = "the_office"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id = "finish"
+name = "Finish"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/sherrod_finish_t5", pool = 3, description = "A man finishing in a woman's mouth.", search_queries = ["cum in mouth close swallow", "cumshot mouth pov close"] } },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "loop_act", operator = "eq", value = 1 } ] }, blocks = [ { type = "paragraph", content = "He puts a hand on the back of your neck and cums in your mouth without breaking off what he is saying, and you swallow it with his cock still against your tongue and his sentence still running." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "loop_act", operator = "eq", value = 2 } ] }, blocks = [ { type = "paragraph", content = "You take his cock all the way down sitting on him and he cums in your cunt with both hands on your ass, holding you down on it, and he keeps you there until the chair stops moving." } ] },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He said he would not mention it after. He will keep that, and it will cost you more than mentioning it would have." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Do your shirt up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_office"
+time_progression_minutes = 20
+costs = [ { trait = "energy", value = 3 } ]
+effects = [
+  { targetType = "player", trait = "arousal",    op = "set", value = 0 },
+  { targetType = "player", trait = "loop_stage", op = "set", value = 0 },
+  { targetType = "player", trait = "loop_act",   op = "set", value = 0 },
+  { targetType = "npc", npcId = "npc_sherrod", trait = "want", op = "add", value = 4, cap = 100 },
+  { targetType = "player", trait = "clean", op = "add", value = -20 },
+]
+
+
+# ── BOOTH.  Single-act, and he is still calling her Mrs. Vance while he does it.
+[[canvases]]
+id   = "loop_booth"
+name = "His door shut"
+
+[[canvases.nodes]]
+id = "entry"
+name = "Entry"
+blocks = [
+  { type = "paragraph", content = "You push his door to behind you and the latch goes and the room is very warm because the water heater is on the other side of that wall, and he sits up on the bed and does not know what to do with his hands." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "Mrs. Vance — " },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get on the bed and get his hand on your tits."
+targetType = "node"
+nodeId     = "loop_booth.act"
+effects = [
+  { targetType = "player", trait = "loop_stage", op = "set", value = 0 },
+  { targetType = "player", trait = "loop_act",   op = "set", value = 1 },
+]
+
+[[canvases.nodes]]
+id = "act"
+name = "The act"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/booth_room_t5", pool = 4, description = "A woman riding a younger man on a bed in a small warm room.", search_queries = ["woman riding man bed pov small room", "cowgirl bedroom young man close"] } },
+  { type = "paragraph", content = "You put his hand flat on your tit and hold it there until he stops trying to take it back, and then get his shorts down and his cock out, and he is so hard it is standing up against his stomach." },
+  { type = "paragraph", content = "You sit down onto it and take him in one go and he makes a sound like he has been hit. You ride him slow with both hands on his chest, and your cunt is clenching on him every time you come down." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "Mrs. Vance — Mrs. — I can't, if you keep — " },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ride him and keep him under you."
+targetType = "node"
+nodeId     = "loop_booth.act"
+time_progression_minutes = 10
+costs = [ { trait = "energy", value = 3 } ]
+effects = [
+  { targetType = "player", trait = "loop_stage", op = "add", value = 1 },
+  { targetType = "player", trait = "arousal",    op = "add", value = 16, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Make him say your name with your cunt on his cock."
+targetType = "node"
+nodeId     = "loop_booth.act"
+time_progression_minutes = 10
+costs = [ { trait = "energy", value = 3 } ]
+effects = [
+  { targetType = "player", trait = "loop_stage", op = "add", value = 1 },
+  { targetType = "player", trait = "arousal",    op = "add", value = 12, cap = 100 },
+  { targetType = "npc", npcId = "npc_booth", trait = "want", op = "add", value = 3, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him cum inside you."
+targetType = "node"
+nodeId     = "loop_booth.finish"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 60 },
+] }
+show_when_locked = true
+locked_text      = "Let him cum — he is holding on and he is going to keep holding on."
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get off him."
+targetType = "location"
+locationId = "booths_room"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id = "finish"
+name = "Finish"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/booth_finish_t5", pool = 3, description = "A young man finishing under a woman.", search_queries = ["cumming inside cowgirl close", "creampie pov close finish"] } },
+  { type = "paragraph", content = "He grabs your hips and cums in your cunt with his whole body off the bed. His cock is still jerking inside you when he says the title out loud, twice, and does not hear himself say it either time. You stay down on him and take all of it. Your tits are in his face and both his hands are locked on your ass." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He is the only one in this house who ever meant it. That is finished now, and you are the one who finished it." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the latch off on the way out."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "booths_room"
+time_progression_minutes = 20
+costs = [ { trait = "energy", value = 3 } ]
+effects = [
+  { targetType = "player", trait = "arousal",    op = "set", value = 0 },
+  { targetType = "player", trait = "loop_stage", op = "set", value = 0 },
+  { targetType = "player", trait = "loop_act",   op = "set", value = 0 },
+  { targetType = "npc", npcId = "npc_booth", trait = "want", op = "add", value = 4, cap = 100 },
+  { targetType = "player", trait = "clean", op = "add", value = -20 },
+]
+
+
+# ── TOBIN.  Single-act, in a cab in the back row. Blood, and he uses her name.
+[[canvases]]
+id   = "loop_tobin"
+name = "The fourth one along"
+
+[[canvases.nodes]]
+id = "entry"
+name = "Entry"
+blocks = [
+  { type = "paragraph", content = "He finishes the sentence at the fourth truck along, the empty one, and then opens the passenger door of it and stands there holding it and waits to see what you do about having heard it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Rilla. Get in." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get in and go through to the bed."
+targetType = "node"
+nodeId     = "loop_tobin.act"
+effects = [
+  { targetType = "player", trait = "loop_stage", op = "set", value = 0 },
+  { targetType = "player", trait = "loop_act",   op = "set", value = 1 },
+]
+
+[[canvases.nodes]]
+id = "act"
+name = "The act"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/tobin_cab_t5", pool = 4, description = "Sex on the bunk behind the seats of a truck cab at night.", search_queries = ["truck sleeper cab sex bunk night", "sex in truck cab bed dark"] } },
+  { type = "paragraph", content = "There is a bed behind the seats and no room to stand up in it. You go through on your hands and knees with him behind you, and he has your jeans off before you are all the way in." },
+  { type = "paragraph", content = "He pushes his cock into your cunt from behind with the curtain still open and one hand spread on your ass, and he fucks you slowly because the cab moves, and every stroke he says your name." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Rilla. Rilla. Look at me." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take it on your hands and knees."
+targetType = "node"
+nodeId     = "loop_tobin.act"
+time_progression_minutes = 10
+costs = [ { trait = "energy", value = 3 } ]
+effects = [
+  { targetType = "player", trait = "loop_stage", op = "add", value = 1 },
+  { targetType = "player", trait = "arousal",    op = "add", value = 16, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Turn over and let him see your face."
+targetType = "node"
+nodeId     = "loop_tobin.act"
+time_progression_minutes = 10
+costs = [ { trait = "energy", value = 3 } ]
+effects = [
+  { targetType = "player", trait = "loop_stage", op = "add", value = 1 },
+  { targetType = "player", trait = "arousal",    op = "add", value = 14, cap = 100 },
+  { targetType = "npc", npcId = "npc_tobin", trait = "want", op = "add", value = 3, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him cum in you."
+targetType = "node"
+nodeId     = "loop_tobin.finish"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 60 },
+] }
+show_when_locked = true
+locked_text      = "Let him cum — he has waited eight weeks and he is not rushing it now."
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get your jeans and go back down the row."
+targetType = "location"
+locationId = "the_back_row"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id = "finish"
+name = "Finish"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/tobin_finish_t5", pool = 3, description = "Finishing inside on a truck bunk.", search_queries = ["creampie finish close pov", "cumming inside close"] } },
+  { type = "paragraph", content = "He gets both arms right round you and cums in your cunt with his mouth against the back of your neck. He says your name into it, twice. His cock stays in you afterwards, going soft, and he keeps one hand full of your tit and does not let go of you for a long time after he has stopped." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Every other man on this property has a title for you. He has never once needed one." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Climb back down out of the cab."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_back_row"
+time_progression_minutes = 25
+costs = [ { trait = "energy", value = 3 } ]
+effects = [
+  { targetType = "player", trait = "arousal",    op = "set", value = 0 },
+  { targetType = "player", trait = "loop_stage", op = "set", value = 0 },
+  { targetType = "player", trait = "loop_act",   op = "set", value = 0 },
+  { targetType = "npc", npcId = "npc_tobin", trait = "want", op = "add", value = 4, cap = 100 },
+  { targetType = "player", trait = "clean", op = "add", value = -25 },
+]
+
+
+# ── SOLO.  The surface she initiates alone.
+#    ⚠️ register.md's backward sweep: a game moved 10.8% -> 15.9% by rewriting
+#    "the three repeatable sex loops" and left four canvases in the
+#    protagonist's own bedroom under the floor for two increments, because they
+#    were never in the named category. The only sex surface in that game she
+#    initiated alone scored 1 · 1 · 0. Score every beat, sort ascending.
+[[canvases]]
+id   = "loop_solo"
+name = "Touch yourself"
+
+[canvases.trigger]
+location             = "your_room"
+priority             = 5
+is_repeatable        = true
+max_triggers_per_day = 1
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "21:30"
+end_time   = "02:00"
+
+[canvases.trigger.metadata]
+show_when_blocked = true
+cooldown_message  = "Not with him in the house."
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "Monday to Thursday the other side of the bed is flat and the yard is dark except for the bunk-room window over the shop, which is on, and which stays on most of the night." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get your hand between your legs."
+targetType = "node"
+nodeId     = "loop_solo.act"
+effects = [
+  { targetType = "player", trait = "loop_stage", op = "set", value = 0 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Pull the curtain and go to sleep."
+targetType = "location"
+locationId = "your_room"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id = "act"
+name = "The act"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/solo_window_t4", pool = 4, description = "A woman touching herself in bed by a window at night.", search_queries = ["woman masturbating bed night window", "solo female fingers bed dark"] } },
+  { type = "paragraph", content = "You get your hand down inside your underwear and your fingers are wet the second they get there. Two of them into your cunt and the heel of your hand grinding down on your clit, knees up under the sheet." },
+  { type = "paragraph", content = "Your other hand goes up under your shirt and takes hold of a tit, thumb over the nipple, and you work yourself with the bunk-room light on the ceiling and the wet sound of your own fingers loud in the room." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep going with your fingers in you."
+targetType = "node"
+nodeId     = "loop_solo.act"
+time_progression_minutes = 10
+costs = [ { trait = "energy", value = 3 } ]
+effects = [
+  { targetType = "player", trait = "loop_stage", op = "add", value = 1 },
+  { targetType = "player", trait = "arousal",    op = "add", value = 18, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Make yourself cum."
+targetType = "node"
+nodeId     = "loop_solo.finish"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 55 },
+] }
+show_when_locked = true
+locked_text      = "Not there yet."
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take your hand out."
+targetType = "location"
+locationId = "your_room"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id = "finish"
+name = "Finish"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/solo_finish_t4", pool = 3, description = "A woman coming, alone.", search_queries = ["female orgasm close solo bed", "woman climax alone bed"] } },
+  { type = "paragraph", content = "You come with three fingers in your cunt and your other hand clamped over your own mouth. Your hips come up off the mattress. You keep working your clit right through the orgasm until your thighs stop shaking, and then lie still with your shirt up over your tits and your fingers still inside yourself." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "The light over the shop is still on. It is on every night, and you have started checking." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Turn over."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "your_room"
+time_progression_minutes = 15
+costs = [ { trait = "energy", value = 3 } ]
+effects = [
+  { targetType = "player", trait = "arousal",    op = "set", value = 0 },
+  { targetType = "player", trait = "loop_stage", op = "set", value = 0 },
+  { targetType = "player", trait = "energy",     op = "add", value = -4 },
+]

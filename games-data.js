@@ -15,6 +15,52 @@
 //                        NOT whatever is currently half-built in the working tree.
 window.GAMES = [
   {
+    // Listed 2026-08-25. Authored end-to-end with author-game-v2. 10,297 words across 14
+    // locations, 91 canvases, 6 characters, 14 guidance cards, 41/41 gates — the first game
+    // here to take the whole scoreboard.
+    //
+    // Built to miss the shape the earlier seven kept landing on. FIVE of the seven v2 games are
+    // a female protagonist and incest in a household she was already inside — daughter returns
+    // (back_home), daughter never left (the_allowance), mother and son (off_season), cult
+    // household (seventh_day), picking crew (the_season). This one marries her IN: eleven weeks
+    // a Vance, a prenup that gives her nothing for three years, and a husband who hauls four
+    // nights out of seven. The title is real and everything under it belongs to his sons. Nobody
+    // in the repo has been an in-law before.
+    //
+    // `who_climbs = "cast"`, declared before a meter was named: 100% of the climb sits on the
+    // cast. ONE willingness word (`want`) on all six at the same scale, per W6 as rewritten
+    // 2026-08-24 — nine of thirteen field games do exactly that, and off_season's four
+    // vocabularies for four people were the old reading. The rich second meter (`trust`) is on
+    // Cade and Booth only, the two arcs that carry the game.
+    //
+    // Firsts for this repo: `block_pool` used in a v2 game at all (46 pools — every v2 game
+    // before this shipped ZERO against the_long_summer's 46); every act surface built as a
+    // node-routed loop rather than a one-shot cascade; a second `[[npcs.schedules]]` row split
+    // out of every day-specific overnight window, live-probed at Saturday 01:00.
+    //
+    // Headless play-through is clean. Zero JS errors across the opening, all 14 locations, the
+    // eleven hubs and all six act loops. The funnel hands over at Monday 07:05 into an office
+    // with Cade standing in it, and the presence grid was probed at eight points across the week.
+    //
+    // ⚠️ MEDIA HAS NEVER BEEN HARVESTED. 29 cycling pools plus the fixed plates and portraits,
+    // zero files on disk. Current output/ is a --dev --debug build, so the art shows labelled
+    // debug placeholders rather than silent gaps. Run find-media, rebuild output/ WITHOUT
+    // --dev --debug, add `version`, archive to games/mrs_vance/releases/, and drop `dev: true`
+    // in the same commit.
+    //
+    // ⚠️ Open debts, all logged in v2_state.json promises: Dorn carries `want` and gates NOTHING
+    // (he is the week's clock, not a ladder, and that is deliberate for 0.1); nine locations have
+    // no first-visit canvas, though the anchor does; three dispatch hosts produce ONE outcome
+    // each; and the world ships 10,297 words against a 16,000-word finished plan kept per
+    // location as `fill_finished` — every release until that closes adds words to existing rooms
+    // rather than rooms.
+    slug: "mrs_vance",
+    title: "Mrs. Vance",
+    badge: "v2",
+    dev: true,
+    summary: `Rilla Vance is twenty-seven and eleven weeks married to the man who owns Vance Diesel — four bays and a wrecker on a county road, with the house out back on the same gravel. She signed a paper before the wedding that says nothing here is hers for three years: no car in her name, not on the account, an envelope on the kitchen counter once a week. What he did give her is the book. She writes down every number the yard makes and cannot spend one of them, and every Friday his eldest son counts the cash drawer against her handwriting. Dorn hauls four nights out of seven. So the man whose authority she is borrowing is gone most of the week, and the four men the paper says she is over are all still here — the one who runs the yard and is two years older than his stepmother, the one who watches and never speaks, the nineteen-year-old who says the title like he means it, and the brother-in-law over the office who knew about the wedding before she did. Her own brother works the parts wall, because she got him the job.`,
+  },
+  {
     // Listed 2026-08-23. Authored end-to-end with author-game-v2. 4,411 words across 8
     // locations, 35 canvases, 5 characters, 13 guidance cards, 38/39 gates.
     //

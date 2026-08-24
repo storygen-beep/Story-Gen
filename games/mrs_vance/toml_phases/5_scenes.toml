@@ -1,0 +1,2942 @@
+# =============================================================================
+# Mrs. Vance — 5_scenes  ·  HUBS · TALK · WALK-INS · THE TRAVERSAL LAYER
+#
+# R1 · ONE CANVAS PER (WHO IT IS AIMED AT x WHEN). Work never goes inside a
+#      character's hub. The 23-choice failure had a hub binding NO NPC at all and
+#      not one of its choices had a person as the object of the verb.
+# S4 · THE TALK SCREEN IS A CONTENT KIND, NOT A GARNISH — 15,774 of the field's
+#      54,630 screens, 29%. Ours: vesper 26%, and every v2 game at 0-5%. It is
+#      the cheapest content there is and it is where a character becomes someone
+#      the player is attached to, which outscored praise for the porn itself
+#      across ~11,000 comments.
+# S3 · SOMEBODY SPEAKS. Field median 2.93:1 narration to dialogue; every v2 game
+#      sits beyond the worst dialogue-bearing game in the corpus, and
+#      the_allowance ships 216 spoken words in the whole game.
+#      ⚠️ ONE TERM OF ADDRESS PER PERSON and nobody else uses it. Cade says
+#      "Mrs. Vance", Booth says "Mrs. V" once he cracks, Sherrod says "girl",
+#      Isaac says nothing at all, Tobin says "Rilla". the_season shipped 56 NPC
+#      lines and only one character ever addressed the protagonist.
+# R6 · THE SCREEN MOVES ON RE-ENTRY — BUT THE OPENER DOES NOT. Six visits to the
+#      reference game's cafe render a byte-identical identity sentence. The
+#      variation is `block_pool` inside the beat (mechanism 5), a presence line
+#      per NPC, the choice list itself, and a random event replacing the screen.
+#      Tiering a hub opener per stat band is a known failure — it reads as N
+#      different scenes instead of one escalating hub.
+# =============================================================================
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE WALK-IN TARGETS
+#
+# ⚠️ EVERY ONE DECLARES A `location`. setup.getCanvasById builds its lookup ONLY
+#    from help_data.locationCanvases (v2.py:3177-3191), populated only for
+#    canvases carrying trigger.location. A triggerless substitution target
+#    SILENTLY NEVER FIRES — no error, no red build.
+# ⚠️ `substitution_only = true` keeps them OUT of the room's list (v2.py:4523).
+# ⚠️ THE BRANCH IS THIN. Vesper's is 2.3 KB; DoL's are 458-473 bytes. The target
+#    is a tier band of one or two paragraphs plus a media pool — the same 35-40
+#    words per beat as everything else, not a scene. Writing a full encounter
+#    every time is how this rule dies.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id       = "walkin_bay_isaac"
+name     = "He is still in the bay"
+
+[canvases.trigger]
+priority      = 40
+location          = "the_wash_bay"
+substitution_only = true
+is_repeatable     = true
+requires_npc      = "npc_isaac"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bay_watched_t4", pool = 4, description = "A woman soaked through in a wet shirt, aware she is being watched.", search_queries = ["wet shirt see through woman soaked", "woman wet clothes clinging watched"] } },
+  { type = "paragraph", content = "He does not go. He winds the hose back onto the reel one turn at a time, taking about four times as long as it takes, and the whole while your shirt is going transparent across your tits and neither of you is mentioning it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "Drain's slow." },
+  { type = "paragraph", content = "You look down. Your nipples are up hard against the wet cotton and there is no version of standing here that hides it. When you look back up he has stopped pretending the reel is the reason he is still in the bay." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stand up straight and let him have it."
+targetType               = "location"
+locationId               = "the_wash_bay"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "isaac_rung_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "isaac_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_isaac", trait = "want", op = "add", value = 4, cap = 100 },
+  { targetType = "player", trait = "arousal", op = "add", value = 12, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Get out of the bay."
+targetType               = "location"
+locationId               = "the_shop_floor"
+time_progression_minutes = 5
+
+
+[[canvases]]
+id       = "walkin_bay_isaac_close"
+name     = "He comes down the bay"
+
+[canvases.trigger]
+priority      = 40
+location          = "the_wash_bay"
+substitution_only = true
+is_repeatable     = true
+requires_npc      = "npc_isaac"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bay_close_t5", pool = 4, description = "A man crowding a soaked woman against the wall of a wash bay.", search_queries = ["wet woman pinned against wall man", "soaked shirt woman man close pressed"] } },
+  { type = "paragraph", content = "He crosses the bay with the hose still in his hand and puts his other palm flat on the wall beside your head, and the water off the trailer is coming down on both of you. He takes hold of your shirt at the hem and peels it up off your tits in one wet handful." },
+  { type = "paragraph", content = "His thumb goes across your nipple and stays there, dragging, and your cunt clenches on nothing at all. He gets his knee between your legs and you are already grinding down on his thigh through your wet jeans before you decide to." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "Drain's slow." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Ride his thigh until you have to stop."
+targetType               = "location"
+locationId               = "the_wash_bay"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "isaac_rung_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "isaac_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_isaac", trait = "want", op = "add", value = 5, cap = 100 },
+  { targetType = "player", trait = "arousal", op = "add", value = 22, cap = 100 },
+  { targetType = "player", trait = "clean", op = "add", value = -20 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Get out from under his arm."
+targetType               = "location"
+locationId               = "the_shop_floor"
+time_progression_minutes = 5
+
+
+[[canvases]]
+id       = "walkin_bay_seen"
+name     = "The window onto the shop"
+
+[canvases.trigger]
+priority      = 40
+location          = "the_wash_bay"
+substitution_only = true
+is_repeatable     = true
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "There is a window from this bay through onto the shop floor, wired glass, chest height. Somebody is standing at it with a cup in his hand and he has been there long enough that the cup is not the reason." },
+  { type = "paragraph", content = "You cannot tell which one it is through the glass, and that is worse than knowing, because it means it could be any of them and tomorrow one of them will know something you do not know he knows." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Turn so he gets the front of you."
+targetType               = "location"
+locationId               = "the_wash_bay"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "seen_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "seen_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "arousal",  op = "add", value = 10, cap = 100 },
+  { targetType = "player", trait = "standing", op = "add", value = 2, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Finish with your back to the glass."
+targetType               = "location"
+locationId               = "the_wash_bay"
+time_progression_minutes = 10
+
+
+[[canvases]]
+id       = "walkin_office_driver"
+name     = "The one who wants a man"
+
+[canvases.trigger]
+priority      = 40
+location          = "the_office"
+substitution_only = true
+is_repeatable     = true
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "He comes in off a load with a fault he cannot describe and a schedule he can, leans both forearms on the counter, and asks you to get somebody who knows. He is not being unpleasant about it. That is the part that gets you." },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "unknown" }, content = "Is there a fella about, love?" },
+    { type = "dialog", props = { speaker = "unknown" }, content = "No offence — I'll wait for one of the lads." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "You want to get whoever does the diagnostics." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Book it in yourself and let him watch you do it."
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 15
+effects = [
+  { targetType = "player", trait = "standing", op = "add", value = 5, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Knock on the hatch and get one of them."
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 10
+
+
+[[canvases]]
+id       = "walkin_office_cade"
+name     = "He comes through the hatch"
+
+[canvases.trigger]
+priority      = 40
+location          = "the_office"
+substitution_only = true
+is_repeatable     = true
+requires_npc      = "npc_cade"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "He comes through from the shop wiping his hands and stops behind the chair instead of going round it, and reads the column over the top of your head with one hand on the chair back." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "That eight's a three." },
+  { type = "paragraph", content = "He reaches past your shoulder to put his finger on it and his forearm comes down across the back of the chair and stays there while you fix it, close enough that you can smell the orange soap." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Fix it slowly."
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 15
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "cade_rung_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "cade_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_cade", trait = "trust", op = "add", value = 3, cap = 100 },
+  { targetType = "npc", npcId = "npc_cade", trait = "want", op = "add", value = 2, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Fix it and hand him the sheet."
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 10
+
+
+[[canvases]]
+id       = "walkin_shop_tobin"
+name     = "Your brother in a shop full of them"
+
+[canvases.trigger]
+priority      = 40
+location          = "the_shop_floor"
+substitution_only = true
+is_repeatable     = true
+requires_npc      = "npc_tobin"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "He catches you between the bays with the key in your hand and stands closer than a man in a workshop stands to his employer's wife, because he has never once thought of you as that." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Rilla. They've got you doing runs now as well?" },
+  { type = "paragraph", content = "He says your name at working volume and two of them look over, and he knows they looked, and he does not lower it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Let him say it in front of them."
+targetType               = "location"
+locationId               = "the_shop_floor"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tobin_rung_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "tobin_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_tobin", trait = "want", op = "add", value = 4, cap = 100 },
+  { targetType = "player", trait = "standing", op = "add", value = -3 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Tell him not in the shop."
+targetType               = "location"
+locationId               = "the_shop_floor"
+time_progression_minutes = 10
+effects = [
+  { targetType = "player", trait = "standing", op = "add", value = 4, cap = 100 },
+]
+
+
+[[canvases]]
+id       = "walkin_shop_watched"
+name     = "Four men and one gate"
+
+[canvases.trigger]
+priority      = 40
+location          = "the_shop_floor"
+substitution_only = true
+is_repeatable     = true
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "The parts wall is behind the bays, so getting to it means going the length of the shop past whoever is working, and the compressor is loud enough that nobody has to pretend to be talking." },
+  { type = "paragraph", content = "You do it at the same speed you would do it if there were nobody in here. That takes about eleven seconds and it is the longest recurring eleven seconds of your day." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Walk it at your own speed."
+targetType               = "location"
+locationId               = "the_shop_floor"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "seen_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "seen_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "arousal", op = "add", value = 6, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go round the back of the bays."
+targetType               = "location"
+locationId               = "the_shop_floor"
+time_progression_minutes = 10
+
+
+[[canvases]]
+id       = "walkin_row_tobin"
+name     = "He is doing the row too"
+
+[canvases.trigger]
+priority      = 40
+location          = "the_back_row"
+substitution_only = true
+is_repeatable     = true
+requires_npc      = "npc_tobin"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "He is three trucks down with the clipboard and he waits for you rather than working toward you, which means he has been out here doing nothing for a while." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "You know he's not back till Friday, right." },
+  { type = "paragraph", content = "It is not a question and he does not put a question in his voice. The hedge takes the road noise and out here there is nobody within two hundred feet of the pair of you." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Ask him what he means by that."
+targetType               = "location"
+locationId               = "the_back_row"
+time_progression_minutes = 15
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tobin_rung_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "tobin_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_tobin", trait = "want", op = "add", value = 5, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Take the other end of the row."
+targetType               = "location"
+locationId               = "the_back_row"
+time_progression_minutes = 10
+
+
+[[canvases]]
+id       = "walkin_row_cab"
+name     = "Somebody is awake in one"
+
+[canvases.trigger]
+priority      = 40
+location          = "the_back_row"
+substitution_only = true
+is_repeatable     = true
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "video", props = { pool_dir = "amb/cab_curtain_t2", pool = 3, description = "A gap in a truck sleeper curtain at night with a light behind it.", search_queries = ["truck sleeper cab curtain night interior light", "semi truck cab curtain gap night"] } },
+  { type = "paragraph", content = "The fourth one has the curtain across two-thirds and a phone light behind it, and when you come level the light goes off. Not moves. Goes off." },
+  { type = "paragraph", content = "He waits for you to be past before he puts it back on. You are ten feet from a stranger in a bed, in the dark, on your husband's property, doing a job." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stand at the door of it a second longer than the job needs."
+targetType               = "location"
+locationId               = "the_back_row"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "seen_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "seen_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "arousal", op = "add", value = 9, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Log it and move down the row."
+targetType               = "location"
+locationId               = "the_back_row"
+time_progression_minutes = 10
+
+
+[[canvases]]
+id       = "walkin_kitchen_booth"
+name     = "He is at the table again"
+
+[canvases.trigger]
+priority      = 40
+location          = "the_kitchen"
+substitution_only = true
+is_repeatable     = true
+requires_npc      = "npc_booth"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "He is where he always is and he has been there since four, and when you come in he does the thing with the chair — half up, then sitting back down when he works out that standing was the wrong call." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "There's hot water, if you — I put it on. About an hour ago." },
+  { type = "paragraph", content = "He put the water heater on an hour ago for a bath he is not going to have." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Tell him you know he put it on for you."
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "booth_rung_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "booth_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_booth", trait = "trust", op = "add", value = 4, cap = 100 },
+  { targetType = "npc", npcId = "npc_booth", trait = "want", op = "add", value = 3, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Say thanks and go up."
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 5
+
+
+[[canvases]]
+id       = "walkin_room_dorn"
+name     = "He is home and not asleep"
+
+[canvases.trigger]
+priority      = 40
+location          = "your_room"
+substitution_only = true
+is_repeatable     = true
+requires_npc      = "npc_dorn"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "He is on his back with the light off and he has not been asleep at any point since he got in, and he does not say anything when you come up, which is his way of saying he knows what time it is." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_dorn" }, content = "Book all right?" },
+  { type = "paragraph", content = "In eleven weeks that is the closest he has come to asking you what you did today." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Tell him the book is fine."
+targetType               = "location"
+locationId               = "your_room"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "dorn_rung_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "dorn_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_dorn", trait = "want", op = "add", value = 3, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Get in without answering."
+targetType               = "location"
+locationId               = "your_room"
+time_progression_minutes = 10
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE HUBS — one per (person x place). EVERY ONE SITS BEHIND A MEETING.
+#
+# ⚠️ THE FORBIDDEN SHAPE is a repeatable canvas with `npc =` set whose base node
+#    IS the introduction. All six v2 games shipped it for their entire cast.
+#    A hub with NO conditions at all puts that character's portrait on a location
+#    screen from turn one however well the FIRST hub is gated.
+# ⚠️ ONE FLAG PER CHARACTER (F8). `arrival_done` opening four hubs is the
+#    cold-spawn hub in a coat, and three of six v2 games shipped exactly that.
+#    A later hub gated on something DOWNSTREAM of the meeting is correct work.
+# ⚠️ THE OPENER IS CONSTANT. Variation is `block_pool` inside the beat, and the
+#    choice list. Tiering a hub opener per stat band reads as N different scenes
+#    rather than one escalating hub.
+# ⚠️ THE OBJECT TEST — a hub choice has a PERSON as the object of the verb.
+#    "Count the till" is work and work is its own surface at that location.
+# ⚠️ THE CAP IS PER PERSON AND THE HUBS ARE PER ROOM. `cade_rung_today` is shared
+#    across all of Cade's hubs on purpose — spending it in the office empties the
+#    bar for the night. Every one of those screens therefore keeps a choice free
+#    of BOTH conditions and costs (R7, gate 37), or a spent day renders nothing
+#    at all and the player cannot tell it from a broken build.
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ── CADE · the office. The spine, and the release's locked door. ────────────
+[[canvases]]
+id   = "hub_cade_office"
+name = "Cade"
+
+[canvases.trigger]
+location      = "the_office"
+priority      = 6
+requires_npc  = "npc_cade"
+npc           = "npc_cade"
+is_repeatable = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_cade", operator = "is_true" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "06:30"
+end_time   = "09:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "18:00"
+end_time   = "20:30"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "He works at the desk, not the counter, and he does not move out of the chair for anybody including you." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The spike is half down and there is a mug on the corner of the book with a ring under it he has not noticed and will not apologise for." },
+    { type = "paragraph", content = "He has the phone against his shoulder saying nothing at all to somebody's dispatcher, which is a thing he does instead of arguing." },
+    { type = "paragraph", content = "He has taken his jacket off and hung it on the back of the chair, which is as close as this man comes to being off duty." },
+    { type = "paragraph", content = "He is going down a column with the end of a pen, not touching the page, and he gets to the bottom of it before he looks up." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Book's on the desk where you left it, Mrs. Vance. It's not going to do itself." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him something you already know the answer to."
+targetType = "node"
+nodeId     = "talk_cade.base"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Do the book at his elbow instead of the counter. (45m)"
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 45
+costs                    = [ { trait = "energy", value = 6 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "cade_rung_today", operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_cade", trait_key = "trust", operator = "lt", value = 26 },
+] }
+flagEffects = [ { targetType = "player", flag = "cade_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_cade", trait = "trust", op = "add", value = 5, cap = 100 },
+  { targetType = "npc", npcId = "npc_cade", trait = "want",  op = "add", value = 2, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stay while he shuts the roller door. (1h)"
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 60
+costs                    = [ { trait = "energy", value = 8 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "cade_rung_today", operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_cade", trait_key = "trust", operator = "gte", value = 26 },
+  { type = "trait", subject = "player", trait_key = "energy", operator = "gte", value = 20 },
+] }
+flagEffects = [ { targetType = "player", flag = "cade_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_cade", trait = "want", op = "add", value = 6, cap = 100 },
+  { targetType = "player", trait = "arousal", op = "add", value = 10, cap = 100 },
+]
+
+# ── THE DOOR THIS RELEASE ENDS ON (gate 9, gate 42) ──────────────────────────
+# Not a cliffhanger. A WANT: a question can be answered by reading a thread, a
+# want can only be satisfied by playing. It is attached to the person the player
+# already cares most about, it is visible, and it says why it is shut — 144 of
+# our 176 shown-locked choices across every game are the MUTE shape the field
+# ships at 2.26% and almost entirely as pagination chrome (§15, R5c).
+[[canvases.nodes.exit_block.choices]]
+text             = "Lock the office from the inside."
+targetType       = "node"
+nodeId           = "loop_cade.entry"
+time_progression_minutes = 5
+costs            = [ { trait = "energy", value = 10 } ]
+flagEffects      = [ { targetType = "player", flag = "cade_rung_today", op = "set" } ]
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_cade", trait_key = "want", operator = "gte", value = 42 },
+] }
+show_when_locked      = true
+locked_text           = "Lock the office from the inside — he has not decided yet whether the marriage counts."
+locked_text_threshold = "He would have to want it more than he wants the yard quiet. Forty-two."
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave him to the column."
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 5
+
+
+# ── CADE · the bar. A second hub, gated DOWNSTREAM of the meeting. ──────────
+[[canvases]]
+id   = "hub_cade_bar"
+name = "Cade, off the property"
+
+[canvases.trigger]
+location      = "the_bar"
+priority      = 6
+requires_npc  = "npc_cade"
+npc           = "npc_cade"
+is_repeatable = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "met_cade", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_cade", trait_key = "trust", operator = "gte", value = 6 },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [4, 5]
+start_time = "21:00"
+end_time   = "23:59"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "He sits at the end where the bar turns, so he can see the door without facing it, and he is not drinking much and never has been." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "In here nobody calls you anything. He notices that before you do, and you can tell he has noticed by which way he turns the stool." },
+    { type = "paragraph", content = "There are two men from the yard at the other end and he has put himself between them and you without either of you agreeing to it." },
+    { type = "paragraph", content = "He has the truck keys on the bar in front of him, which means he is driving, which means he is not staying, which he has not said." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Long way to come for a drink. Sit down or don't." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him what he said at the wedding."
+targetType = "node"
+nodeId     = "talk_cade.base"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Take the stool next to his. (1h)"
+targetType               = "location"
+locationId               = "the_bar"
+time_progression_minutes = 60
+costs                    = [ { trait = "energy", value = 6 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "cade_rung_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "cade_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_cade", trait = "want", op = "add", value = 5, cap = 100 },
+  { targetType = "player", trait = "standing", op = "add", value = -2 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Drink it where you are standing."
+targetType               = "location"
+locationId               = "the_bar"
+time_progression_minutes = 20
+
+
+# ── BOOTH · the kitchen. ────────────────────────────────────────────────────
+[[canvases]]
+id   = "hub_booth_kitchen"
+name = "Booth"
+
+[canvases.trigger]
+location      = "the_kitchen"
+priority      = 6
+requires_npc  = "npc_booth"
+npc           = "npc_booth"
+is_repeatable = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_booth", operator = "is_true" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "16:00"
+end_time   = "19:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "He is at the table with his phone face down, which he only does when there is somebody in the room he would rather look at." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He has the water heater on again and has not said so, and the bottle outside is going down faster than the month it is supposed to last." },
+    { type = "paragraph", content = "He is wearing a shirt he has ironed, in a kitchen, on a weekday, for nobody who is coming." },
+    { type = "paragraph", content = "He starts a sentence about a job in Kerr Crossing and stops it halfway when he works out that it makes him sound nineteen." },
+    { type = "paragraph", content = "He has moved down a chair from where he was sitting last week. Not toward you. Just to the one where he can see the door you come in by." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "There's coffee. It's been on since two. Sorry — Mrs. Vance." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him what he actually wants to do."
+targetType = "node"
+nodeId     = "talk_booth.base"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Sit down opposite him and let it get long. (45m)"
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 45
+costs                    = [ { trait = "energy", value = 5 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "booth_rung_today", operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_booth", trait_key = "trust", operator = "lt", value = 30 },
+] }
+flagEffects = [ { targetType = "player", flag = "booth_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_booth", trait = "trust", op = "add", value = 6, cap = 100 },
+  { targetType = "npc", npcId = "npc_booth", trait = "want",  op = "add", value = 3, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Make him say your name and not correct it. (30m)"
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 30
+costs                    = [ { trait = "energy", value = 5 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "booth_rung_today", operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_booth", trait_key = "trust", operator = "gte", value = 30 },
+] }
+flagEffects = [ { targetType = "player", flag = "booth_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_booth", trait = "want", op = "add", value = 7, cap = 100 },
+  { targetType = "player", trait = "arousal", op = "add", value = 8, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Put the kettle on and say nothing."
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 10
+
+
+# ── BOOTH · his room. Downstream of the meeting. ────────────────────────────
+[[canvases]]
+id   = "hub_booth_room"
+name = "Booth, with his door open"
+
+[canvases.trigger]
+location      = "booths_room"
+priority      = 6
+requires_npc  = "npc_booth"
+npc           = "npc_booth"
+is_repeatable = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "met_booth", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_booth", trait_key = "trust", operator = "gte", value = 5 },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "01:30"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "The door is on the latch, not shut, and it has been on the latch every night this week. The television is on with the sound almost down." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The room is warm because the water heater backs onto this wall, so he sleeps on top of the covers and does not always hear the door." },
+    { type = "paragraph", content = "He sits up fast when you knock and then makes himself slow down halfway through doing it, which is worse than either." },
+    { type = "paragraph", content = "He has the sound down far enough that he would hear anybody on the landing, which means he is listening for somebody on the landing." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "You can come in. I mean — the door's open, so." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him why the door is on the latch."
+targetType = "node"
+nodeId     = "talk_booth.base"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Knock about something that could have waited. (40m)"
+targetType               = "location"
+locationId               = "booths_room"
+time_progression_minutes = 40
+costs                    = [ { trait = "energy", value = 6 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "booth_rung_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "booth_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_booth", trait = "want", op = "add", value = 6, cap = 100 },
+  { targetType = "player", trait = "arousal", op = "add", value = 12, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text             = "Shut his door behind you."
+targetType       = "node"
+nodeId           = "loop_booth.entry"
+time_progression_minutes = 5
+costs            = [ { trait = "energy", value = 10 } ]
+flagEffects      = [ { targetType = "player", flag = "booth_rung_today", op = "set" } ]
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_booth", trait_key = "want", operator = "gte", value = 50 },
+] }
+show_when_locked      = true
+locked_text           = "Shut his door behind you — he is still calling you Mrs. Vance and he still means it."
+locked_text_threshold = "He would have to want it past the title. Fifty."
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Say goodnight from the landing."
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 5
+
+
+# ── ISAAC · the bay. ───────────────────────────────────────────────────────
+[[canvases]]
+id   = "hub_isaac_bay"
+name = "Isaac"
+
+[canvases.trigger]
+location      = "the_wash_bay"
+priority      = 6
+requires_npc  = "npc_isaac"
+npc           = "npc_isaac"
+is_repeatable = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_isaac", operator = "is_true" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "11:00"
+end_time   = "14:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "He works the bay on his own every midday and he has never once asked for help with it, which is not the same as not wanting company." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He is soaked on one side from the shoulder down and he does not change out of it, all afternoon, every day, and nobody has ever mentioned that either." },
+    { type = "paragraph", content = "The radio is on the shelf above the drain playing to a concrete room, and he turns it down when you come in rather than off." },
+    { type = "paragraph", content = "He has the hose trigger locked open and pointed at the floor while he is not using it, so the bay is loud, so nothing has to be said." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "Mind the drain." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get four words out of him."
+targetType = "node"
+nodeId     = "talk_isaac.base"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Take the other end of the hose off him. (1h)"
+targetType               = "location"
+locationId               = "the_wash_bay"
+time_progression_minutes = 60
+costs                    = [ { trait = "energy", value = 8 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "isaac_rung_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "isaac_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_isaac", trait = "want", op = "add", value = 6, cap = 100 },
+  { targetType = "player", trait = "clean", op = "add", value = -15 },
+  { targetType = "player", trait = "arousal", op = "add", value = 8, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text             = "Let him back you into the corner of the bay."
+targetType       = "node"
+nodeId           = "loop_isaac.entry"
+time_progression_minutes = 5
+costs            = [ { trait = "energy", value = 10 } ]
+flagEffects      = [ { targetType = "player", flag = "isaac_rung_today", op = "set" } ]
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_isaac", trait_key = "want", operator = "gte", value = 38 },
+] }
+show_when_locked      = true
+locked_text           = "Let him back you into the corner — he still stops looking when you look up."
+locked_text_threshold = "He would have to stop pretending the reel is the reason. Thirty-eight."
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave him the bay."
+targetType               = "location"
+locationId               = "the_shop_floor"
+time_progression_minutes = 5
+
+
+# ── ISAAC · the bunk room. Downstream. ─────────────────────────────────────
+[[canvases]]
+id   = "hub_isaac_bunk"
+name = "Isaac, upstairs"
+
+[canvases.trigger]
+location      = "the_bunk_room"
+priority      = 6
+requires_npc  = "npc_isaac"
+npc           = "npc_isaac"
+is_repeatable = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "met_isaac", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_isaac", trait_key = "want", operator = "gte", value = 6 },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "21:00"
+end_time   = "01:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "Two beds and a plywood partition that stops a foot short of the ceiling, so there is no such thing as a private conversation in this room and everybody in it knows that." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He is on his bed with the radio on and the door open, which is what he does instead of asking whether anybody is coming up." },
+    { type = "paragraph", content = "The window looks straight down onto the yard. From up here you can see the kitchen light and your own bedroom window and the gate." },
+    { type = "paragraph", content = "The compressor cuts in under the floor and the whole room takes it, and he waits for it to stop before he says anything, every time." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "Other bed's free." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit on the other bed and wait him out."
+targetType = "node"
+nodeId     = "talk_isaac.base"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stay past the point where he expects you to go. (1h)"
+targetType               = "location"
+locationId               = "the_bunk_room"
+time_progression_minutes = 60
+costs                    = [ { trait = "energy", value = 7 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "isaac_rung_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "isaac_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_isaac", trait = "want", op = "add", value = 7, cap = 100 },
+  { targetType = "player", trait = "arousal", op = "add", value = 12, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go back down the stairs."
+targetType               = "location"
+locationId               = "the_shop_floor"
+time_progression_minutes = 5
+
+
+# ── SHERROD · the office at night. He opens crude. ─────────────────────────
+[[canvases]]
+id   = "hub_sherrod_office"
+name = "Sherrod"
+
+[canvases.trigger]
+location      = "the_office"
+priority      = 6
+requires_npc  = "npc_sherrod"
+npc           = "npc_sherrod"
+is_repeatable = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_sherrod", operator = "is_true" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "20:30"
+end_time   = "23:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "He sits in the office after the shop is shut with the strip light off, and he is not waiting for anything, and he is in no hurry at all about not waiting." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The desk lamp is pointed at the chair rather than the desk, and it was not like that when you locked up at six." },
+    { type = "paragraph", content = "He has the third drawer of the filing cabinet open, the locked one, and he does not shut it when you come in." },
+    { type = "paragraph", content = "He knew this yard before there was a yard. Everything in this room that is older than fifteen years, he can tell you where it came from." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "You're up late, girl. So am I. Neither of us is going to remark on it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get him talking about the family."
+targetType = "node"
+nodeId     = "talk_sherrod.base"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stand in the lamp and let him look. (45m)"
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 45
+costs                    = [ { trait = "energy", value = 5 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "sherrod_rung_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "sherrod_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_sherrod", trait = "want", op = "add", value = 6, cap = 100 },
+  { targetType = "player", trait = "arousal", op = "add", value = 9, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text             = "Ask him what he thinks he is owed."
+targetType       = "node"
+nodeId           = "loop_sherrod.entry"
+time_progression_minutes = 5
+costs            = [ { trait = "energy", value = 10 } ]
+flagEffects      = [ { targetType = "player", flag = "sherrod_rung_today", op = "set" } ]
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_sherrod", trait_key = "want", operator = "gte", value = 34 },
+] }
+show_when_locked      = true
+locked_text           = "Ask him what he is owed — he has not said it out loud yet, and he will not be asked."
+locked_text_threshold = "He says it when he is ready and not before. Thirty-four."
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Turn the strip light on and lock up."
+targetType               = "location"
+locationId               = "the_yard"
+time_progression_minutes = 10
+
+
+# ── TOBIN · the back row. Blood, and the shortest ladder. ──────────────────
+[[canvases]]
+id   = "hub_tobin_row"
+name = "Tobin"
+
+[canvases.trigger]
+location      = "the_back_row"
+priority      = 6
+requires_npc  = "npc_tobin"
+npc           = "npc_tobin"
+is_repeatable = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_tobin", operator = "is_true" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "00:30"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "He does the row every night on his own and it takes twenty minutes and he stretches it to an hour, and both of you know why, and neither of you has said it." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He has the clipboard under his arm and nothing written on it. He has been out here since ten." },
+    { type = "paragraph", content = "He talks about home. Your mother, the house, what the road is like now, and he is the only person on this property who knows any of it." },
+    { type = "paragraph", content = "He calls you Rilla out here without checking first, because out here there is nobody to check for." },
+    { type = "paragraph", content = "He is sending money somewhere and will not say where, and it is the one thing about him you have not been able to get." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Rilla. Take the other side and we'll be done twice as slow." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him about home."
+targetType = "node"
+nodeId     = "talk_tobin.base"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Walk the whole row with him. (1h)"
+targetType               = "location"
+locationId               = "the_back_row"
+time_progression_minutes = 60
+costs                    = [ { trait = "energy", value = 6 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tobin_rung_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "tobin_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_tobin", trait = "want", op = "add", value = 7, cap = 100 },
+  { targetType = "player", trait = "arousal", op = "add", value = 7, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text             = "Let him finish the sentence."
+targetType       = "node"
+nodeId           = "loop_tobin.entry"
+time_progression_minutes = 5
+costs            = [ { trait = "energy", value = 10 } ]
+flagEffects      = [ { targetType = "player", flag = "tobin_rung_today", op = "set" } ]
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_tobin", trait_key = "want", operator = "gte", value = 70 },
+] }
+show_when_locked      = true
+locked_text           = "Let him finish it — he starts it about twice a week and stops himself every time."
+locked_text_threshold = "He has to get all the way to the end of it on his own. Seventy."
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Say goodnight at the top of the row."
+targetType               = "location"
+locationId               = "the_yard"
+time_progression_minutes = 10
+
+
+# ── TOBIN · the shop floor. Downstream. ────────────────────────────────────
+[[canvases]]
+id   = "hub_tobin_shop"
+name = "Tobin, in front of them"
+
+[canvases.trigger]
+location      = "the_shop_floor"
+priority      = 6
+requires_npc  = "npc_tobin"
+npc           = "npc_tobin"
+is_repeatable = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "met_tobin", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_tobin", trait_key = "want", operator = "gte", value = 5 },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "08:00"
+end_time   = "17:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "He is the youngest thing in this shop and everybody tells him how, and he takes it, and then he says your name at working volume where they can all hear it." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "Cade sends him for things that are on the wall behind him. He goes every time and he has stopped saying anything about it." },
+    { type = "paragraph", content = "He has got a burn up the inside of one forearm off a manifold and he has not told anybody, and he will not." },
+    { type = "paragraph", content = "He watches which one of them you talk to, and for how long, and he is not subtle about doing it." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Rilla. They've had me on the wall all morning." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him whether they are giving him a hard time."
+targetType = "node"
+nodeId     = "talk_tobin.base"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stand and talk to him where the shop can see. (30m)"
+targetType               = "location"
+locationId               = "the_shop_floor"
+time_progression_minutes = 30
+costs                    = [ { trait = "energy", value = 4 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tobin_rung_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "tobin_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_tobin", trait = "want", op = "add", value = 5, cap = 100 },
+  { targetType = "player", trait = "standing", op = "add", value = -2 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Let him get on with it."
+targetType               = "location"
+locationId               = "the_shop_floor"
+time_progression_minutes = 5
+
+
+# ── SHERROD · his room. Downstream. ────────────────────────────────────────
+[[canvases]]
+id   = "hub_sherrod_room"
+name = "Sherrod, up the stairs"
+
+[canvases.trigger]
+location      = "sherrods_room"
+priority      = 6
+requires_npc  = "npc_sherrod"
+npc           = "npc_sherrod"
+is_repeatable = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "met_sherrod", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_sherrod", trait_key = "want", operator = "gte", value = 5 },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "23:30"
+end_time   = "06:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "One room and a sink at the top of the outside stairs, and the light is on, and it is on most of the night whether he is doing anything or not." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He does not ask what you are doing at the top of his stairs at midnight. He has never once asked you what you are doing anywhere." },
+    { type = "paragraph", content = "There is nothing in this room that says a man expects to leave it, and he has been in it since before the first wife died." },
+    { type = "paragraph", content = "From his window you can see the whole yard, the gate, the house, and which windows in it are lit. He has been watching that view for nineteen years." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "Door's not locked. It's not been locked in nineteen years." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him about the first wife."
+targetType = "node"
+nodeId     = "talk_sherrod.base"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Come the whole way in. (45m)"
+targetType               = "location"
+locationId               = "sherrods_room"
+time_progression_minutes = 45
+costs                    = [ { trait = "energy", value = 6 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "sherrod_rung_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "sherrod_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_sherrod", trait = "want", op = "add", value = 8, cap = 100 },
+  { targetType = "player", trait = "arousal", op = "add", value = 14, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go back down."
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 5
+
+
+# ── DORN · the kitchen, weekend evenings. The clock, not a ladder. ─────────
+[[canvases]]
+id   = "hub_dorn_kitchen"
+name = "Dorn"
+
+[canvases.trigger]
+location      = "the_kitchen"
+priority      = 6
+requires_npc  = "npc_dorn"
+npc           = "npc_dorn"
+is_repeatable = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [4, 5]
+start_time = "19:00"
+end_time   = "22:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "He is home and the whole house is quieter for it. Booth eats in his room on the nights his father is back and nobody has ever told him to." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He asks about the book and not about you, and he asks it the way he would ask a driver about a load." },
+    { type = "paragraph", content = "He has been awake since two in the morning somewhere near the state line and he will be asleep by ten and gone again Monday." },
+    { type = "paragraph", content = "Cade comes in for ten minutes and the two of them talk about the yard in front of you as though the book were not in your handwriting." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_dorn" }, content = "Sit down. You've been on your feet since six, I saw the light." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him what the three years actually mean."
+targetType = "node"
+nodeId     = "talk_dorn.base"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Sit with him until he goes up. (1h)"
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 60
+costs                    = [ { trait = "energy", value = 5 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "dorn_rung_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "dorn_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_dorn", trait = "want", op = "add", value = 5, cap = 100 },
+  { targetType = "player", trait = "standing", op = "add", value = 3, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave the two of them to the yard."
+targetType               = "location"
+locationId               = "the_yard"
+time_progression_minutes = 10
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE TRAVERSAL LAYER — R6 mechanism 4, the one games actually drop.
+#
+# `trigger_mode = "random"` is the only one of the four mechanisms that can
+# replace the WHOLE SCREEN, it is the cheapest to author, and the engine cools
+# it per location so it cannot spam (v2.py:5190). Measured: vesper (v1) ships 14
+# and back_home, steam and seventh_day ship ZERO between them.
+#
+# And this is the traversal heat layer. Movement between scenes is most of the
+# play minutes, so a non-erotic traversal layer wins by sheer occupancy — it is
+# the clearest single cause of a game reading cold. Floor is 60% of locations,
+# not 100%: eight of the reference game's 25 locations carry no sexual content
+# at all and a police station SHOULD be cold.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id   = "amb_yard_crossing"
+name = "Crossing the yard"
+
+[canvases.trigger]
+location      = "the_yard"
+priority      = 3
+is_repeatable = true
+trigger_mode  = "random"
+max_triggers_per_day = 1
+chance        = 0.30
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/yard_watched_t4", pool = 4, description = "A woman crossing an open yard aware of men watching from a workshop.", search_queries = ["woman walking past men working watched", "woman crossing yard men looking"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The roller door is up. That means the whole shop can see the whole yard. You cross it anyway, at your own speed, and four heads come up off four jobs." },
+    { type = "paragraph", content = "It is eighty feet from the back step to the office and there is no way to do it that is not being looked at. You have stopped hurrying. Hurrying was worse." },
+    { type = "paragraph", content = "Somebody wolf-whistles from inside a bay and somebody else tells him to shut up, quickly, and neither of them knows you heard which was which." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Keep going."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_yard"
+time_progression_minutes = 5
+
+
+[[canvases]]
+id   = "amb_shop_length"
+name = "The length of the shop"
+
+[canvases.trigger]
+location      = "the_shop_floor"
+priority      = 3
+is_repeatable = true
+trigger_mode  = "random"
+max_triggers_per_day = 1
+chance        = 0.30
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/shop_watched_t4", pool = 4, description = "A woman walking through a workshop past working men.", search_queries = ["woman walking through garage men working", "woman in workshop men watching her"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "Two of them are under the same truck. One of them stops talking. The other one carries on for a second and then works out why." },
+    { type = "paragraph", content = "The compressor is loud. It is loud enough that nobody has to pretend to be saying something. They just look, and go back to it, and that is the whole exchange." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Morning, Mrs. Vance." },
+    { type = "paragraph", content = "Somebody says it from inside a bay where you cannot see him. Then somebody else says it, further down, and it goes along the shop like a bell." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get to the parts wall."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_shop_floor"
+time_progression_minutes = 5
+
+
+[[canvases]]
+id   = "amb_kitchen_house"
+name = "The house at night"
+
+[canvases.trigger]
+location      = "the_kitchen"
+priority      = 3
+is_repeatable = true
+trigger_mode  = "random"
+max_triggers_per_day = 1
+chance        = 0.28
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/kitchen_late_t4", pool = 3, description = "A woman in a kitchen late at night in what she sleeps in.", search_queries = ["woman kitchen night nightwear late", "woman in shirt kitchen dark late"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You come down for water in what you sleep in. There is a light on. There is always a light on." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "Sorry. Sorry, I'll — I didn't know you were up." },
+    { type = "paragraph", content = "He goes out the other door with his eyes down and gets it wrong on the way, catching a chair with his hip. You hear him stop on the stairs." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The water heater ticks as it cools. Somebody has been in and used it and not said." },
+    { type = "paragraph", content = "There is one mug on the drainer, upside down, still warm. Whoever it was went up when they heard the landing." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the water up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_kitchen"
+time_progression_minutes = 10
+
+
+[[canvases]]
+id   = "amb_bunk_partition"
+name = "Through the partition"
+
+[canvases.trigger]
+location      = "the_bunk_room"
+priority      = 3
+is_repeatable = true
+trigger_mode  = "random"
+max_triggers_per_day = 1
+chance        = 0.30
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bunk_partition_t4", pool = 3, description = "A man alone on a bunk in a bare room, a partition wall.", search_queries = ["man on bed bare room dim alone", "bunk room dark man lying bed"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The partition stops a foot short of the ceiling. Sound goes over the top of it. Everybody up here has agreed not to know that." },
+    { type = "paragraph", content = "The radio is on the other side and it is not loud enough. Under it there is a bed moving, slowly, and a man breathing through his teeth." },
+    { type = "paragraph", content = "You stand still. He does not know you came up. He gets faster and then he stops, and after that there is nothing at all for about a minute." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go back down."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_shop_floor"
+time_progression_minutes = 10
+
+
+[[canvases]]
+id   = "amb_bathroom_bolt"
+name = "The bolt"
+
+[canvases.trigger]
+location      = "the_bathroom"
+priority      = 3
+is_repeatable = true
+trigger_mode  = "random"
+max_triggers_per_day = 1
+chance        = 0.28
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bathroom_door_t4", pool = 3, description = "A bathroom door standing an inch open with a woman inside.", search_queries = ["bathroom door ajar woman inside steam", "woman undressing bathroom door open"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The bolt is proud of the keeper. It has been for years. It holds the door against a draught and against nothing else." },
+    { type = "paragraph", content = "Somebody comes up the landing and stops. Then the floor goes again, going away. He did not knock. He also did not try the handle." },
+    { type = "paragraph", content = "You are naked with one foot on the side of the tub and the door is not shut, and you finish what you were doing before you go and push it to." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Push it to."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_bathroom"
+time_progression_minutes = 5
+
+
+[[canvases]]
+id   = "amb_sherrod_stairs"
+name = "The light at the top"
+
+[canvases.trigger]
+location      = "sherrods_room"
+priority      = 3
+is_repeatable = true
+trigger_mode  = "random"
+max_triggers_per_day = 1
+chance        = 0.30
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/stairs_window_t4", pool = 3, description = "A lit window over a workshop seen from a dark yard.", search_queries = ["lit window above garage night", "man at window watching yard night"] } },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "You'd be the fourth person up these stairs in nineteen years, girl. I can name the other three." },
+    { type = "paragraph", content = "He says it without getting up and without turning the lamp down, and then he waits, and he is comfortable waiting." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "From his window you can see your own bedroom light. He can see when it goes on and when it goes off." },
+    { type = "paragraph", content = "He has a chair by the window and it faces the window, not the room, and the seat of it is worn through on one side." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go back down the stairs."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_office"
+time_progression_minutes = 5
+
+
+[[canvases]]
+id   = "amb_bar_regulars"
+name = "The end of the bar"
+
+[canvases.trigger]
+location      = "the_bar"
+priority      = 3
+is_repeatable = true
+trigger_mode  = "random"
+max_triggers_per_day = 1
+chance        = 0.30
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bar_stool_t4", pool = 3, description = "A woman alone at a bar with men further down it.", search_queries = ["woman alone at bar men watching", "woman on bar stool dim bar"] } },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "unknown" }, content = "You're Dorn's, aren't you. Thought so." },
+    { type = "paragraph", content = "He says it like a fact he has been checking against you all evening and has now confirmed. Then he goes back down the bar and tells the other one." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "In here nobody has to call you anything. That is the whole reason for the twenty minutes, and you have never said so out loud." },
+    { type = "paragraph", content = "Two men from the yard at the far end. They have seen you. Neither of them is coming down, and neither of them is leaving." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Finish it."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_bar"
+time_progression_minutes = 20
+
+
+[[canvases]]
+id   = "amb_crossing_canopy"
+name = "Under the canopy"
+
+[canvases.trigger]
+location      = "kerr_crossing"
+priority      = 3
+is_repeatable = true
+trigger_mode  = "random"
+max_triggers_per_day = 1
+chance        = 0.30
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/canopy_night_t4", pool = 3, description = "A woman at a lit gas station canopy at night with a truck behind her.", search_queries = ["woman at gas station night canopy lit", "woman pumping gas night truck"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The canopy light is the brightest thing for eight miles, so standing under it is like standing on a stage in a dark field." },
+    { type = "paragraph", content = "A rig comes through the crossroads and slows for the light and does not need to, and you are the only thing under the canopy." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "You want a hand with that, love?" },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Say you have got it."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "kerr_crossing"
+time_progression_minutes = 10
+
+
+[[canvases]]
+id   = "amb_bank_account"
+name = "The account you are not on"
+
+[canvases.trigger]
+location      = "the_bank"
+priority      = 3
+is_repeatable = true
+trigger_mode  = "random"
+max_triggers_per_day = 1
+chance        = 0.40
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bank_counter_t4", pool = 3, description = "A woman at a small bank counter being told no.", search_queries = ["woman at bank counter teller", "woman bank branch counter small town"] } },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "unknown" }, content = "It's a Vance account, love, it's just not your Vance account. I can't show you a balance you're not a signatory on." },
+    { type = "paragraph", content = "Dee has known this account since before there was a second Mrs. Vance on the paperwork. There is not one now either. That is the point of the sentence." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You could bring in the book. The book is not the account. You have worked that out three times now, standing here." },
+    { type = "paragraph", content = "There are two chairs against the wall and you have sat in one of them for forty minutes to be told a thing you already knew." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Say thanks anyway."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_bank"
+time_progression_minutes = 20
+
+
+[[canvases]]
+id   = "walkin_bar_cade"
+name = "He is already at the end of it"
+
+[canvases.trigger]
+priority          = 40
+location          = "the_bar"
+substitution_only = true
+is_repeatable     = true
+requires_npc      = "npc_cade"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "He is on the corner stool when you come in and he has seen you in the mirror before you are through the door. He does not wave. He moves the coat off the stool beside him." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Twenty minutes for a drink you could have had in the kitchen." },
+  { type = "paragraph", content = "Then he looks at you for a second longer than that sentence needed, and turns back to the bar, and leaves the stool where it is." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Take the stool."
+targetType               = "location"
+locationId               = "the_bar"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "cade_rung_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "cade_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_cade", trait = "want", op = "add", value = 4, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Sit at the other end."
+targetType               = "location"
+locationId               = "the_bar"
+time_progression_minutes = 20
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE ROOM EVENTS — mechanism 4 again, and this time carrying the speech.
+#
+# S3 · Field median is 2.93 : 1 narration to dialogue and TEN of 27 games sit at
+#      or under 2 : 1. Every v2 game sits beyond the worst dialogue-bearing game
+#      in the corpus; the_allowance ships 216 spoken words in its entire run and
+#      seventh_day 410. The instrument that retired v1's dialogue rule counted
+#      speech by looking for quote marks and read the most spoken game in the
+#      corpus as 585 : 1 narration — 20 of 27 games render speech as a UI
+#      component. We have had the `dialog` block the whole time.
+#
+# These are `trigger_mode = "random"`, NOT room-list entries: a room's list is
+# needs + work + people and nothing else (R2), and a scene is none of the three.
+# It fires instead of the room, which is the only one of R6's five mechanisms
+# that can replace the whole screen.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id   = "amb_bunk_two_of_them"
+name = "Both of them up there"
+
+[canvases.trigger]
+location      = "the_bunk_room"
+priority      = 3
+is_repeatable = true
+trigger_mode  = "random"
+max_triggers_per_day = 1
+chance        = 0.35
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "They are both up. The partition means it is one conversation whether they meant it to be or not." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "She's not what they said, though. Is she." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "Who's they." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Everybody. The whole yard. Before she got here." },
+  { type = "paragraph", content = "Isaac does not answer that. He does not answer most things." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "You've not said one word about it. Eight weeks." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "No." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Right." },
+  { type = "paragraph", content = "You are on the stairs. The stairs are outside the room. Neither of them knows how long you have been on them." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Your brother is defending you to a man who has not attacked you." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go in and let them work out what you heard."
+targetType               = "location"
+locationId               = "the_bunk_room"
+time_progression_minutes = 15
+effects = [ { targetType = "player", trait = "standing", op = "add", value = 2, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go back down."
+targetType               = "location"
+locationId               = "the_shop_floor"
+time_progression_minutes = 5
+
+
+[[canvases]]
+id   = "amb_shop_morning_talk"
+name = "The shop first thing"
+
+[canvases.trigger]
+location      = "the_shop_floor"
+priority      = 3
+is_repeatable = true
+trigger_mode  = "random"
+max_triggers_per_day = 1
+chance        = 0.30
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "Everybody has a sheet and nobody has a bay yet. Cade hands them out standing up, first thing, before anyone has taken a coat off." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Two's the reefer. Three's the wrecker when it comes back. Four, nobody, keep it clear." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "What about the tank job?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Not till the part's here." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Who's fetching it?" },
+  { type = "paragraph", content = "Cade does not look up from the sheets. He says it to the room." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Mrs. Vance is." },
+  { type = "paragraph", content = "That is the first time he has given you a job in front of them. Two of them turn round. Your brother does not." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Take the sheet off him in front of them."
+targetType               = "location"
+locationId               = "the_shop_floor"
+time_progression_minutes = 15
+effects = [ { targetType = "player", trait = "standing", op = "add", value = 4, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Wait until they have gone to their bays."
+targetType               = "location"
+locationId               = "the_shop_floor"
+time_progression_minutes = 15
+
+
+[[canvases]]
+id   = "amb_kitchen_friday"
+name = "Friday, with him back"
+
+[canvases.trigger]
+location      = "the_kitchen"
+priority      = 4
+is_repeatable = true
+trigger_mode  = "random"
+max_triggers_per_day = 1
+chance        = 0.40
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_kitchen", npc_id = "npc_dorn", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "Cade comes up for ten minutes on a Friday and stands rather than sits. Booth has taken his plate upstairs. Nobody asked him to." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Week's straight. Drawer balanced Friday." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_dorn" }, content = "Good." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "The book's neat. Neater than it was." },
+  { type = "paragraph", content = "Your husband looks at the ceiling for a second, working out whether that was a compliment and who it was aimed at." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_dorn" }, content = "That's what it's for." },
+  { type = "paragraph", content = "They talk about the yard for nine more minutes. You are sitting at the table. Neither of them says your name once." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "The book is in your handwriting. They are discussing it like weather." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Say the figure out loud before Cade does."
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 20
+effects = [ { targetType = "player", trait = "standing", op = "add", value = 5, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Let them finish."
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 20
+
+
+[[canvases]]
+id   = "amb_office_drivers"
+name = "Three of them at once"
+
+[canvases.trigger]
+location      = "the_office"
+priority      = 3
+is_repeatable = true
+trigger_mode  = "random"
+max_triggers_per_day = 1
+chance        = 0.30
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "Three come in together off the same convoy and all three start talking at the counter." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Air leak. Front axle. It's been going a week." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "He's booked. I'm not booked. I've got a slot at four." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Is there a fella, love? Only I've got a slot at four." },
+  { type = "paragraph", content = "You put your hand flat on the spike. All three of them stop." },
+  { type = "dialog", props = { speaker = "player" }, content = "One at a time. Name and plate. You first." },
+  { type = "paragraph", content = "It works. It works every time, and it costs you something every time it does." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Book all three and hand the sheets through."
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 25
+effects = [ { targetType = "player", trait = "standing", op = "add", value = 4, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Knock on the hatch."
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 15
+
+
+[[canvases]]
+id   = "amb_bathroom_landing"
+name = "Voices on the landing"
+
+[canvases.trigger]
+location      = "the_bathroom"
+priority      = 3
+is_repeatable = true
+trigger_mode  = "random"
+max_triggers_per_day = 1
+chance        = 0.30
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "The door is an inch open because the bolt does not hold it. Two of them are on the landing." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "She's in there." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "I can see the light." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "So don't." },
+  { type = "paragraph", content = "There is a pause on the landing that goes on too long to be nothing." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Don't what, Booth." },
+  { type = "paragraph", content = "Booth does not answer. One set of feet goes down. The other stays where it is for a count of four." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Open the door and see which one stayed."
+targetType               = "location"
+locationId               = "the_bathroom"
+time_progression_minutes = 10
+effects = [ { targetType = "player", trait = "arousal", op = "add", value = 8, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Wait until the landing is empty."
+targetType               = "location"
+locationId               = "the_bathroom"
+time_progression_minutes = 15
+
+
+[[canvases]]
+id   = "amb_booth_room_talk"
+name = "Through his door"
+
+[canvases.trigger]
+location      = "booths_room"
+priority      = 3
+is_repeatable = true
+trigger_mode  = "random"
+max_triggers_per_day = 1
+chance        = 0.32
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "He is on the phone to Rennick with the sound down and he does not hear the landing." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "No. No, she's not like that." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "Because I live here and you don't." },
+  { type = "paragraph", content = "A long gap. Rennick is saying something and it is going on." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "Say it again and I'll come down there." },
+  { type = "paragraph", content = "He hangs up. Then he sits on the edge of the bed with the phone in both hands and does not put the sound back up." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Nineteen, and he has just threatened his only friend over a woman who is married to his father." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Knock and tell him you heard."
+targetType               = "location"
+locationId               = "booths_room"
+time_progression_minutes = 15
+effects = [ { targetType = "npc", npcId = "npc_booth", trait = "trust", op = "add", value = 3, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go past his door."
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 5
+
+
+[[canvases]]
+id   = "amb_sherrod_history"
+name = "What he knows"
+
+[canvases.trigger]
+location      = "sherrods_room"
+priority      = 3
+is_repeatable = true
+trigger_mode  = "random"
+max_triggers_per_day = 1
+chance        = 0.35
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "He does not get up. He has the lamp on and the window behind him and the whole yard behind that." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "Sit down, girl. You're stood in my light." },
+  { type = "paragraph", content = "There is one chair and it faces the window. You sit in it. He can see the side of your face and you can see the yard." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "The first one sat there too. Different chair. Same window." },
+  { type = "dialog", props = { speaker = "player" }, content = "What was she like." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "Tired. He works a person the way he works a truck. Not cruel about it. Just till it stops." },
+  { type = "paragraph", content = "He lets that sit for a while. Down in the yard the pole light goes off on its timer." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "I told him don't. Nine months back. He did anyway, and here you are, and I've not said it since." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Ask him why he told your husband not to."
+targetType               = "location"
+locationId               = "sherrods_room"
+time_progression_minutes = 20
+effects = [ { targetType = "npc", npcId = "npc_sherrod", trait = "want", op = "add", value = 3, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Get out of his light."
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 10
+
+
+[[canvases]]
+id   = "amb_yard_gate"
+name = "Somebody at the gate"
+
+[canvases.trigger]
+location      = "the_yard"
+priority      = 3
+is_repeatable = true
+trigger_mode  = "random"
+max_triggers_per_day = 1
+chance        = 0.28
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "A rig comes in off the road too fast and stops with the air brakes going. The window comes down." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "You open?" },
+  { type = "dialog", props = { speaker = "player" }, content = "Till six." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "You the office?" },
+  { type = "paragraph", content = "It is a fair question. You are standing in a yard in a coat that is not yours holding a ledger." },
+  { type = "dialog", props = { speaker = "player" }, content = "I'm the office." },
+  { type = "paragraph", content = "He looks at you for a second and then swings it round toward bay two, which is the answer." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Walk him in yourself."
+targetType               = "location"
+locationId               = "the_yard"
+time_progression_minutes = 15
+effects = [ { targetType = "player", trait = "standing", op = "add", value = 4, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Point him at the office and carry on."
+targetType               = "location"
+locationId               = "the_yard"
+time_progression_minutes = 5
+
+
+[[canvases]]
+id   = "amb_bank_dee"
+name = "Dee, being kind about it"
+
+[canvases.trigger]
+location      = "the_bank"
+priority      = 4
+is_repeatable = true
+trigger_mode  = "random"
+max_triggers_per_day = 1
+chance        = 0.45
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "dialog", props = { speaker = "unknown" }, content = "You'll be Dorn's, then." },
+  { type = "paragraph", content = "Dee has been on that counter twenty years. She says it kindly. That is the part that lands." },
+  { type = "dialog", props = { speaker = "player" }, content = "I keep the books for the yard." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "That's lovely. And you're not on the account." },
+  { type = "dialog", props = { speaker = "player" }, content = "No." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "No. Well. Three years goes quicker than you'd think, love." },
+  { type = "paragraph", content = "She knows about the paper. Everybody at this crossroads knows about the paper." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Ask her who told her about the three years."
+targetType               = "location"
+locationId               = "the_bank"
+time_progression_minutes = 20
+effects = [ { targetType = "player", trait = "standing", op = "add", value = -3 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Say three years goes quick and leave."
+targetType               = "location"
+locationId               = "the_bank"
+time_progression_minutes = 10
+
+
+[[canvases]]
+id   = "amb_crossing_pumps"
+name = "At the pumps"
+
+[canvases.trigger]
+location      = "kerr_crossing"
+priority      = 3
+is_repeatable = true
+trigger_mode  = "random"
+max_triggers_per_day = 1
+chance        = 0.30
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "The shop truck has Vance Diesel down both doors in a foot of vinyl. It is not a thing you can park anonymously." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "That Dorn's truck?" },
+  { type = "dialog", props = { speaker = "player" }, content = "It's the shop's." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "So you're at the yard." },
+  { type = "dialog", props = { speaker = "player" }, content = "I'm at the yard." },
+  { type = "paragraph", content = "He decides not to ask the next one. You can see him decide it. He nods at the pump instead and goes in to pay." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Twenty minutes down the road and it is still eighteen inches of vinyl telling everybody first." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stand under the canopy till he has gone."
+targetType               = "location"
+locationId               = "kerr_crossing"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Get back in and drive."
+targetType               = "location"
+locationId               = "kerr_crossing"
+time_progression_minutes = 10
+
+
+[[canvases]]
+id   = "amb_bar_yard_drinks"
+name = "The yard, drinking"
+
+[canvases.trigger]
+location      = "the_bar"
+priority      = 3
+is_repeatable = true
+trigger_mode  = "random"
+max_triggers_per_day = 1
+chance        = 0.32
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "Two of them from the shop at the far end and one of them has had four." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Come down here, Mrs. Vance. We don't bite." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Leave it." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "I'm being nice." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "You're being loud. She's the boss's wife." },
+  { type = "paragraph", content = "The first one laughs at that and does not stop for a while, and the second one does not join in." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "She's the boss's wife. Right." },
+  { type = "paragraph", content = "Nobody says anything after that. They drink up quicker than they were going to." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go down the bar to them."
+targetType               = "location"
+locationId               = "the_bar"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "standing", op = "add", value = -4 },
+  { targetType = "player", trait = "arousal",  op = "add", value = 6, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stay where you are and let them leave."
+targetType               = "location"
+locationId               = "the_bar"
+time_progression_minutes = 20
+effects = [ { targetType = "player", trait = "standing", op = "add", value = 3, cap = 100 } ]
+
+
+[[canvases]]
+id   = "amb_row_driver"
+name = "One of them is out of his cab"
+
+[canvases.trigger]
+location      = "the_back_row"
+priority      = 3
+is_repeatable = true
+trigger_mode  = "random"
+max_triggers_per_day = 1
+chance        = 0.28
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "One of them is stood at the front of his truck in the dark having a cigarette he is not supposed to have here." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Evening." },
+  { type = "dialog", props = { speaker = "player" }, content = "You're not meant to smoke in the row." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "No." },
+  { type = "paragraph", content = "He does not put it out. He looks at the clipboard and then at what you are wearing and then back at the clipboard." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "They send you round on your own at this time?" },
+  { type = "dialog", props = { speaker = "player" }, content = "Nobody sends me." },
+  { type = "paragraph", content = "He thinks about that. Then he puts it out on his own boot and climbs back up without saying goodnight." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Write his plate down while he watches."
+targetType               = "location"
+locationId               = "the_back_row"
+time_progression_minutes = 15
+effects = [ { targetType = "player", trait = "standing", op = "add", value = 3, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Carry on down the row."
+targetType               = "location"
+locationId               = "the_back_row"
+time_progression_minutes = 10
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE SECOND PASS — dispatch depth, and the rooms that were still thin.
+#
+# `lint · dispatch depth` measures how many different things one activity can
+# turn into: three to five outcomes per host is the shape, ONE is a coin flip.
+# Measured across this repo, every host in three of seven dispatching games
+# could produce exactly one outcome, so the roll only ever decided whether the
+# branch or the room rendered.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id   = "amb_office_phone"
+name = "The phone at half four"
+
+[canvases.trigger]
+location             = "the_office"
+priority             = 3
+is_repeatable        = true
+trigger_mode         = "random"
+max_triggers_per_day = 1
+chance               = 0.28
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "It is your husband, from a lay-by somewhere, and he has four minutes." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_dorn" }, content = "Book straight?" },
+  { type = "dialog", props = { speaker = "player" }, content = "Book's straight." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_dorn" }, content = "Cade about?" },
+  { type = "dialog", props = { speaker = "player" }, content = "He's in bay two." },
+  { type = "paragraph", content = "There is a silence with a road in it. He is not going to ask you anything else and you are not going to offer." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_dorn" }, content = "Put him on, then." },
+  { type = "paragraph", content = "You knock on the hatch with the receiver in your hand. Cade comes through wiping his hands and takes it off you without looking at you." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Four minutes of road noise, and he used three of them getting to the person he actually rang." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stand there while Cade takes it."
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go back to the column."
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 10
+
+
+[[canvases]]
+id   = "amb_office_close"
+name = "Locking up"
+
+[canvases.trigger]
+location             = "the_office"
+priority             = 3
+is_repeatable        = true
+trigger_mode         = "random"
+max_triggers_per_day = 1
+chance               = 0.26
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/office_close_t4", pool = 3, description = "A woman alone in a dim workshop office after hours.", search_queries = ["woman alone office desk night dim", "woman at desk after hours low light"] } },
+  { type = "paragraph", content = "The roller door comes down at six, in three goes, and the shop noise stops in stages with it." },
+  { type = "paragraph", content = "The counter light goes off. The desk lamp does not. That is how this room is at night and nobody ever decided it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Leave the spike. I'll do it." },
+  { type = "dialog", props = { speaker = "player" }, content = "It's my column." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "It is." },
+  { type = "paragraph", content = "He says it like he is agreeing to something rather than conceding it, and then he leans on the filing cabinet and waits for you to finish." },
+  { type = "paragraph", content = "It takes eleven minutes. He waits all eleven and does not pick anything up while he does." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Take the whole eleven minutes."
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 20
+effects = [
+  { targetType = "npc", npcId = "npc_cade", trait = "trust", op = "add", value = 2, cap = 100 },
+  { targetType = "player", trait = "arousal", op = "add", value = 6, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Shut the book and give him the spike."
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 10
+
+
+[[canvases]]
+id   = "amb_shop_hatch"
+name = "Through the hatch"
+
+[canvases.trigger]
+location             = "the_shop_floor"
+priority             = 3
+is_repeatable        = true
+trigger_mode         = "random"
+max_triggers_per_day = 1
+chance               = 0.28
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/hatch_glass_t4", pool = 3, description = "A woman seen through wired workshop glass from the shop side.", search_queries = ["woman seen through wired glass window workshop", "figure through dirty glass window shop"] } },
+  { type = "paragraph", content = "The wired glass between the office and the shop is chest height and nobody has cleaned it since the spring." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "She's been at that book two hours." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "So?" },
+  { type = "dialog", props = { speaker = "unknown" }, content = "So nothing. Just saying." },
+  { type = "paragraph", content = "They are not being unpleasant. That is the whole trouble with it. They are talking about the office the way they talk about the weather." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Say it where she can hear you, then." },
+  { type = "paragraph", content = "Nobody says anything after that. Your brother goes back to the parts wall with his ears red." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Come through the hatch while they are still standing there."
+targetType               = "location"
+locationId               = "the_shop_floor"
+time_progression_minutes = 15
+effects = [ { targetType = "player", trait = "standing", op = "add", value = 3, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stay on your side of the glass."
+targetType               = "location"
+locationId               = "the_shop_floor"
+time_progression_minutes = 10
+
+
+[[canvases]]
+id   = "amb_bunk_stairs"
+name = "The stairs are outside"
+
+[canvases.trigger]
+location             = "the_bunk_room"
+priority             = 3
+is_repeatable        = true
+trigger_mode         = "random"
+max_triggers_per_day = 1
+chance               = 0.30
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bunk_window_t4", pool = 3, description = "A lit window over a workshop with a figure at it, seen from the yard.", search_queries = ["lit window above workshop figure night", "man at window looking down yard night"] } },
+  { type = "paragraph", content = "The stairs up to the bunk room are on the outside of the shop, so everybody in the yard can count who goes up them." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Sherrod watches the stairs. From his window. He does it every night." },
+  { type = "dialog", props = { speaker = "player" }, content = "How do you know." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Because I watch the stairs." },
+  { type = "paragraph", content = "Isaac is on the other bed and has not moved and has not stopped listening either." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "Everybody watches the stairs." },
+  { type = "paragraph", content = "That is the longest sentence he has produced in front of you and he says it to the ceiling." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stay up here anyway."
+targetType               = "location"
+locationId               = "the_bunk_room"
+time_progression_minutes = 20
+effects = [ { targetType = "player", trait = "arousal", op = "add", value = 5, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Take the stairs back down."
+targetType               = "location"
+locationId               = "the_shop_floor"
+time_progression_minutes = 5
+
+
+[[canvases]]
+id   = "amb_yard_wash_car"
+name = "Saturday in the yard"
+
+[canvases.trigger]
+location             = "the_yard"
+priority             = 3
+is_repeatable        = true
+trigger_mode         = "random"
+max_triggers_per_day = 1
+chance               = 0.30
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "Nothing is open and nobody is working and there are still four men on this property." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "Are you doing anything?" },
+  { type = "dialog", props = { speaker = "player" }, content = "No." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "No. Nobody is. That's Saturday here." },
+  { type = "paragraph", content = "He is sat on the step in the sun with nowhere to be. He was there when you came out and he will be there when it goes dark." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "Dad'll be back Friday. Then it goes quiet again for two days and then he's off. That's the year." },
+  { type = "paragraph", content = "Across the gravel your brother is washing his own car with a bucket, slowly, for the second time this week." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Sit on the step with him."
+targetType               = "location"
+locationId               = "the_yard"
+time_progression_minutes = 30
+effects = [ { targetType = "npc", npcId = "npc_booth", trait = "trust", op = "add", value = 2, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go over to the car."
+targetType               = "location"
+locationId               = "the_yard"
+time_progression_minutes = 20
+
+
+[[canvases]]
+id   = "amb_bathroom_water"
+name = "Twenty minutes of hot"
+
+[canvases.trigger]
+location             = "the_bathroom"
+priority             = 3
+is_repeatable        = true
+trigger_mode         = "random"
+max_triggers_per_day = 1
+chance               = 0.28
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "The water heater does twenty minutes and then it does not, and five adults share it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "I put it on at four. It'll be ready." },
+  { type = "paragraph", content = "He says it through the door on his way past and does not stop walking, which is how he says everything that matters to him." },
+  { type = "paragraph", content = "He has done it four days running. Nobody has asked him to and he has not once been in the bath himself." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Nineteen years old and he has worked out the only thing in this house he is allowed to give you." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Use the whole twenty minutes."
+targetType               = "location"
+locationId               = "the_bathroom"
+time_progression_minutes = 25
+effects = [ { targetType = "player", trait = "clean", op = "add", value = 20, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave half of it for whoever is next."
+targetType               = "location"
+locationId               = "the_bathroom"
+time_progression_minutes = 15
+
+
+[[canvases]]
+id   = "amb_crossing_alone"
+name = "Twenty minutes of nobody"
+
+[canvases.trigger]
+location             = "kerr_crossing"
+priority             = 3
+is_repeatable        = true
+trigger_mode         = "random"
+max_triggers_per_day = 1
+chance               = 0.30
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "The drive back is nine miles of nothing with the vinyl on the doors telling everybody who you are before you have said it." },
+  { type = "paragraph", content = "You stop at the crossroads with the engine running and the amber going and nobody behind you." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "You could go the other way. There is nothing in this truck that is yours and nothing at the other end of that road either." },
+  { type = "paragraph", content = "The light goes amber, amber, amber. You sit through eleven of them and then turn left, which is the way back." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Sit through a few more."
+targetType               = "location"
+locationId               = "kerr_crossing"
+time_progression_minutes = 20
+effects = [ { targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Turn left."
+targetType               = "location"
+locationId               = "kerr_crossing"
+time_progression_minutes = 5
+
+
+[[canvases]]
+id   = "amb_bank_paper"
+name = "What the paper says"
+
+[canvases.trigger]
+location             = "the_bank"
+priority             = 3
+is_repeatable        = true
+trigger_mode         = "random"
+max_triggers_per_day = 1
+chance               = 0.35
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "You brought the copy in once. Folded, in your coat, for eight days before you did it." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "I can't advise you on it, love. I can tell you what it isn't." },
+  { type = "dialog", props = { speaker = "player" }, content = "Go on." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "It isn't a bad one. Three years and then you're on everything. I've seen worse in this branch and I've seen them off men who called it love." },
+  { type = "paragraph", content = "Dee puts it back across the counter and squares the fold with two fingers before she lets go of it." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "It's just that three years is a long time to be somebody's wife and nobody's signatory." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Ask what she has seen worse of."
+targetType               = "location"
+locationId               = "the_bank"
+time_progression_minutes = 20
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Put it back in your coat."
+targetType               = "location"
+locationId               = "the_bank"
+time_progression_minutes = 10
+
+
+[[canvases]]
+id   = "amb_kitchen_five_adults"
+name = "Five adults, one pot"
+
+[canvases.trigger]
+location             = "the_kitchen"
+priority             = 3
+is_repeatable        = true
+trigger_mode         = "random"
+max_triggers_per_day = 1
+chance               = 0.26
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "Sherrod comes down off his stairs and in through the back door without knocking, because he has done it for nineteen years." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "Any in that pot, girl?" },
+  { type = "dialog", props = { speaker = "player" }, content = "There's some." },
+  { type = "paragraph", content = "He takes the mug that used to be somebody else's. Booth watches him do it from the table and says nothing." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "You want to put that heater on earlier. Twenty minutes is what it says, it's more like forty in the cold." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "I do put it on earlier." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "Do you now." },
+  { type = "paragraph", content = "He looks at Booth for a good deal longer than that needed and then takes his mug back out to the yard." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Tell Booth to sit down."
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 15
+effects = [ { targetType = "npc", npcId = "npc_booth", trait = "trust", op = "add", value = 2, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Wash the mug out."
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 10
+
+
+[[canvases]]
+id   = "amb_bay_after"
+name = "The bay after"
+
+[canvases.trigger]
+location             = "the_wash_bay"
+priority             = 3
+is_repeatable        = true
+trigger_mode         = "random"
+max_triggers_per_day = 1
+chance               = 0.26
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bay_after_t4", pool = 3, description = "A soaked woman standing in an empty concrete wash bay.", search_queries = ["wet clothes woman standing concrete wet floor", "soaked woman industrial bay water"] } },
+  { type = "paragraph", content = "The drain takes about four minutes to clear and there is nowhere in this bay to stand that is not in the water." },
+  { type = "paragraph", content = "Your shirt is stuck to you from the collarbone down and there is nothing to change into and eighty feet of yard between here and the house." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "There's a coat on the door." },
+  { type = "paragraph", content = "There is a coat on the door. There has been a coat on that door for eleven weeks and he has never mentioned it before." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Take the coat."
+targetType               = "location"
+locationId               = "the_wash_bay"
+time_progression_minutes = 10
+effects = [ { targetType = "npc", npcId = "npc_isaac", trait = "want", op = "add", value = 2, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Cross the yard as you are."
+targetType               = "location"
+locationId               = "the_yard"
+time_progression_minutes = 10
+effects = [ { targetType = "player", trait = "arousal", op = "add", value = 7, cap = 100 } ]
+
+
+[[canvases]]
+id   = "amb_row_late"
+name = "The far end of the row"
+
+[canvases.trigger]
+location             = "the_back_row"
+priority             = 3
+is_repeatable        = true
+trigger_mode         = "random"
+max_triggers_per_day = 1
+chance               = 0.26
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "Past the sixth space the gravel stops and there is a hedge and then the road, and no light at all." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "You don't have to come out here, you know. It's my job." },
+  { type = "dialog", props = { speaker = "player" }, content = "I know." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Right." },
+  { type = "paragraph", content = "He walks the last two spaces without the clipboard and without checking anything, and neither of you says so." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Mom thinks you're happy. I've let her think it." },
+  { type = "dialog", props = { speaker = "player" }, content = "Keep letting her." },
+  { type = "paragraph", content = "A fridge unit cycles on somewhere behind you and runs for a minute and stops again, and after that there is nothing at all out here." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stand at the hedge with him a while."
+targetType               = "location"
+locationId               = "the_back_row"
+time_progression_minutes = 20
+effects = [ { targetType = "npc", npcId = "npc_tobin", trait = "want", op = "add", value = 2, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Start back up the row."
+targetType               = "location"
+locationId               = "the_back_row"
+time_progression_minutes = 10
+
+
+[[canvases]]
+id   = "amb_booths_door"
+name = "The latch again"
+
+[canvases.trigger]
+location             = "booths_room"
+priority             = 3
+is_repeatable        = true
+trigger_mode         = "random"
+max_triggers_per_day = 1
+chance               = 0.26
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "The door is on the latch and the television is down to almost nothing, which is not how a person watches television." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "I'm not watching it." },
+  { type = "dialog", props = { speaker = "player" }, content = "I can see that." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "I leave it on so it's not quiet. That's all it is." },
+  { type = "paragraph", content = "The room is warm off the water heater and smells of the same orange soap the whole property smells of." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "You can leave it open. When you go. If you want." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave it on the latch."
+targetType               = "location"
+locationId               = "booths_room"
+time_progression_minutes = 15
+effects = [ { targetType = "npc", npcId = "npc_booth", trait = "want", op = "add", value = 2, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Pull it shut behind you."
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 5
+
+
+[[canvases]]
+id   = "amb_sherrod_owed"
+name = "Everybody is owed something"
+
+[canvases.trigger]
+location             = "sherrods_room"
+priority             = 3
+is_repeatable        = true
+trigger_mode         = "random"
+max_triggers_per_day = 1
+chance               = 0.28
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "Cade's owed the yard. He'll get it and he knows he'll get it, so he's patient." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "Isaac's owed nothing and doesn't want anything, which makes him the only free man on this property." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "Booth's owed a start. Nobody's giving him one." },
+  { type = "dialog", props = { speaker = "player" }, content = "And you." },
+  { type = "paragraph", content = "He turns the lamp down a quarter, which he has not done before, and the yard through the window gets brighter for it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "Nineteen years and a room over an office, girl. You work it out." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Ask him what he would take instead."
+targetType               = "location"
+locationId               = "sherrods_room"
+time_progression_minutes = 20
+effects = [ { targetType = "npc", npcId = "npc_sherrod", trait = "want", op = "add", value = 2, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave it where he put it."
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 10
+
+
+# The anchor gets budgeted against the FINISHED total, not the current one — a
+# ratio gate cannot be satisfied by working elsewhere, and the measured case
+# watched a front room fall 53% -> 35% without one word being removed from it.
+[[canvases]]
+id   = "amb_office_wrecker"
+name = "The wrecker goes out"
+
+[canvases.trigger]
+location             = "the_office"
+priority             = 3
+is_repeatable        = true
+trigger_mode         = "random"
+max_triggers_per_day = 1
+chance               = 0.26
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "The phone goes in the small hours, and it goes in the office, which means it goes through the wall into your room." },
+  { type = "paragraph", content = "You are down the stairs and across the yard in a coat and boots before you have decided to be. The office is cold and the desk lamp is the only thing on." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Vance Diesel?" },
+  { type = "dialog", props = { speaker = "player" }, content = "Go on." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "There's a rig off the road at the Kerr junction. Rear axle's in the ditch. He's out of hours and he's on the phone crying." },
+  { type = "paragraph", content = "You write the plate down, and the junction, and the time, and you are still writing when the door goes behind you." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Who is it." },
+  { type = "paragraph", content = "He is dressed. He has come from somewhere that is not a bed and he does not say where and you do not ask." },
+  { type = "dialog", props = { speaker = "player" }, content = "Kerr junction. Rear axle. He's out of hours." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Plate?" },
+  { type = "paragraph", content = "You turn the book round so it faces him, the way he turns it round to face you on a Friday. He reads it upside down anyway and goes for the wrecker keys." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Log it as a callout. Two hours minimum, whatever it takes." },
+  { type = "dialog", props = { speaker = "player" }, content = "I know what a callout is." },
+  { type = "paragraph", content = "He stops in the doorway with the keys in his hand. It is the first thing you have said to him that he has had to stand still for." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "You do." },
+  { type = "paragraph", content = "The wrecker starts outside and the whole office goes yellow and then dark again as it swings out through the gate. You are on your own in it at twenty past two with the book open." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Nobody rang Dorn. It is his yard and his phone and his name on the door, and the call came in and neither of you thought about it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Wait up for the wrecker to come back. (2h)"
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 120
+costs                    = [ { trait = "energy", value = 12 } ]
+effects = [
+  { targetType = "npc", npcId = "npc_cade", trait = "trust", op = "add", value = 5, cap = 100 },
+  { targetType = "player", trait = "standing", op = "add", value = 4, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go back to bed."
+targetType               = "location"
+locationId               = "your_room"
+time_progression_minutes = 15
+
+
+[[canvases]]
+id   = "amb_bunk_radio"
+name = "The radio through the floor"
+
+[canvases.trigger]
+location             = "the_bunk_room"
+priority             = 3
+is_repeatable        = true
+trigger_mode         = "random"
+max_triggers_per_day = 1
+chance               = 0.26
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "The radio has been on in this room since before you were a Vance and nobody knows what station it is." },
+  { type = "dialog", props = { speaker = "player" }, content = "Does that ever go off?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "No." },
+  { type = "paragraph", content = "He is on his bed with one arm behind his head and he has not looked over since you came up the stairs." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "It was on when I moved in." },
+  { type = "dialog", props = { speaker = "player" }, content = "That was six years ago." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "Yeah." },
+  { type = "paragraph", content = "The compressor cuts in under the floorboards and the whole room takes it. He waits for it to stop before he says the next thing, the way he always does." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "You can turn it off if you want." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Turn it off and see what he does."
+targetType               = "location"
+locationId               = "the_bunk_room"
+time_progression_minutes = 20
+effects = [
+  { targetType = "npc", npcId = "npc_isaac", trait = "want", op = "add", value = 3, cap = 100 },
+  { targetType = "player", trait = "arousal", op = "add", value = 6, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave it on."
+targetType               = "location"
+locationId               = "the_bunk_room"
+time_progression_minutes = 15
