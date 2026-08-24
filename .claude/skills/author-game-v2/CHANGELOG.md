@@ -5,6 +5,166 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-24 — Section B lands: day one refuses nothing, and this skill taught the one shape the field never ships
+
+Section B asked what day one refuses to let her do, and how it says no. Evidence in
+`~/Documents/Female_PC_Craft_Study_20260823/findings_B_refusal.md`, with two new instruments,
+`probe_gates.py` and `probe_open.py`.
+
+### The method had to be rebuilt, because a refusal is not a phrase
+
+The first pass swept passage prose for refusal words and matched **6,392 times in college-daze
+alone**. Sampling killed it: `you need` is overwhelmingly dialogue (*"you need to be more responsible
+and professional"*), and `refuse` is as often a changelog line or an NPC refusing a third party.
+Same class of error as `$groom` in the-hellfire-club turning out to be a bridegroom.
+
+**A refusal is a POSITION** — the branch of a conditional where the action would have been. Every
+number below comes from finding that position and reading what is in it.
+
+### The headline, and the fourth arrival of the same law
+
+Across 26 shipped sandboxes, **27,505 conditionals wrap an action**:
+
+```
+swap        9,776  35%   every branch acts — a variant selector, nothing refused
+silent     11,627  42%   a branch offers nothing and says nothing
+spoken      4,540  16%   a branch offers nothing and says <=25 words in its place
+alternate   1,562   5%   >25 words — different content, not a no
+```
+
+**Only 23% refuse anything.** Of the 16,167 that do, **71% render nothing at all** (per-game median
+79%, range 22–100%); the 28% that speak run a **median 9 words** and **60% name a handle** — a price
+37%, *already done* 18%, a time 5%, a place **2%**. Price is the field's answer; the refusal is not
+where these games do their wayfinding.
+
+That is H (reputation gates 2%), I (the body gates a median 10%) and G (differentiation is many small
+swaps) reached a fourth time, and the first time from the **choice** side rather than the meter side.
+`SKILL.md`'s convergence bullet updated from "a third time" to "a fourth time" with the 35/23 split.
+
+**Day one refuses nothing.** Twelve of fourteen identifiable openings carry zero spoken refusals,
+Course of Temptation's 78-passage, 8,057-word prologue among them (seven conditionals, no refusal).
+The two exceptions are tags covering a tutorial and a settings screen. The opening hands over a bill;
+it does not lock a door.
+
+### ⚠️ The real finding is that this skill caused the defect it was about to gate
+
+`engine.md` §15 read, until today:
+
+> *"omit `locked_text` and the greyed row shows the action […] a want the player can name, which is
+> what sells the next release […] **Prefer the want unless the gate is genuinely obscure.**"*
+
+Our games obeyed it: **13 of 176 shown-locked choices across every merged game carry a reason — 7%.**
+The field's answer is that a refusal is **either invisible (71%) or it speaks (28%)**, and a visible
+**mute** label is **2.26%** of 4,513 spoken refusals — nearly all of it settings and pagination chrome
+(`OptionsWidget` toggles, `Widgets Outfits` "Previous"/"Next"). §15 recommended the one shape the
+field does not ship.
+
+It also put this file in **direct conflict with `the-surfaces.md` R5b.2** — *"State the bar with
+`locked_text_threshold`; never fail silently"* — written the same day. LO's call was to **reverse
+§15**, not qualify it. The old advice is kept visible as superseded with the measurement beside it,
+because it shipped with a live verification behind it and deleting it would hide why every game
+scores the way it does. The two files now agree.
+
+### What changed
+
+- **`references/engine.md` §15 — reversed.** `locked_text` is the default; the bare label is a rare,
+  argued exception. Keeps the verified render fact and adds what actually happens without it:
+  `escaped_locked = (locked_text or choice_text)` (`v2.py:13171`), with the same string repeated into
+  the `title` tooltip (`:13219-13220`), so the tooltip adds nothing.
+- **`references/engine.md` §27 — scoped, not corrected.** Its claim that an unaffordable rung *"is
+  not offered"* is true of the canvas pickers (`v2.py:4496`, `:4527`, `:4975`) but **not** of
+  exit-block choices, which open `<<if setup.checkCostsAffordable(...)>>` (`v2.py:13014-13015`) and
+  write an `<<else>>` that keeps the row greyed with the requirement appended by the engine
+  (`v2.py:13159-13166`). **A priced choice explains itself with no authoring at all**; a condition
+  does not. That asymmetry is the section's engine finding and had no home.
+- **`references/engine.md` §36 — four stale citations fixed**, all of them wrong on the day §36 was
+  written: `13146`→`13171` (label fallback), `13148`→`13173` (the Mode B comment, entered from
+  `13172`), `13185-13186`→`13210-13217` (the threshold button), `template_import.py:811-812`→`:825-826`
+  (class at `:806`, read at `:2204`). Also recorded that `rejection_node` **is** build-validated —
+  `template_import.py:4616-4624` raises on a node outside its own canvas — which is stronger than
+  §36's fail-open warning implied.
+- **`references/the-first-hour.md` — new F4b, "The opening refuses nothing."** Beside F4 because it
+  is the constraint F4 implies and never states: teach the system, do not gate on it yet. Carries the
+  12-of-14 table with both exceptions named.
+- **`references/the-surfaces.md` — new R5c, "A locked door says why,"** placed after R5b.2, which
+  reached for `locked_text_threshold` and stopped one step short of saying what the row should look
+  like. Carries the measured shape (stands where the action stood · ~9 words · names a handle ·
+  marked as the game's own voice) and patriarch's `schoolgirls` roster verbatim, which does all four
+  at once on a **cast page**. **R5 gained a qualifier** in the same pass: a condition on a choice is
+  usually a variant, not a lock, and R5 is not a licence to gate.
+- **`scripts/gates.py` — new gate 42, "a locked door says why."** Registry **41 → 42**.
+
+### The gate
+
+Categorical, not a ratio, and the measurement is why: the field's mute share is ~2% and it is UI
+chrome, so there is no threshold to invent. `n/a` when a game authors no `show_when_locked` choices.
+Accepts three reasons — `locked_text`, `locked_text_threshold` (the label becomes a `<<button>>`
+firing `setup.queueGatedNotification(...)`, `v2.py:13210-13217`, so the reason is one click away) or
+`rejection_node`. **A choice gated only by `costs` is never counted against a game**, because the
+engine writes that message itself.
+
+Verified against every game with a merged final, baseline diffed:
+
+```
+12 FAIL   forty_miles 30->0 · the_inheritance 27->0 · seventh_day 25->0
+          the_long_summer_test 24->0 · vesper 13->9 · back_home 8->1
+          the_allowance 8->0 · last_call 7->1 · steam 5->0 · off_season 4->0
+          mothers_place 3->0 · the_season 1->0
+ 1 PASS   late_shifts 21->21   (all of it locked_text_threshold, v1-era)
+ 8 n/a    no show_when_locked choices authored
+```
+
+**No existing gate's verdict moved** — every remaining diff line is the tally denominator, plus
+`late_shifts`'s numerator for its pass. `the_season` and `off_season` go 39/40 → 39/41.
+
+Two predictions in the findings file were wrong and are left visible there with a correction block:
+**`vesper` does not pass** (best in the repo at 9 of 13, still four mute rows, scored red and not
+touched per the standing rule), and the floor was **not** argued from the 60% handle rate — that is
+the share of *spoken* refusals naming a handle and says nothing about how often a refusal should
+speak. The n/a count is **8, not the 13** a TOML scan implies, because `gates.py` reads only
+`7_final_game.toml` and five games still carry a `6_final_game.toml` it never opens.
+
+**B-5 was withdrawn.** It proposed recording that `rejection_node` is unused; `engine.md` §36 —
+written earlier the same day — already censuses it at zero and names it as a primitive nothing
+taught. Same call as I-2 folding into W3 last section. The findings file's `rejection_passage` was
+also corrected throughout: that is the **generator's internal variable**, and the field an author
+writes is `rejection_node`.
+
+### Three doctrine claims were false and are corrected
+
+`engine.md` §32.3, `the-clock.md` C5 and `the-surfaces.md` R2 all stated that **no game in this repo
+has ever used `show_when_blocked`**. `off_season` uses it **six times**, with the hours written out
+in its own words — *"mornings, eight till one"*, *"after nine at night"*, *"the last two hours,
+before the shutter"*. Found by the cross-reference grep this section runs to check no two files claim
+the same rule, verified with `tomllib`, and fixed in all four places. Not a stale line number — a
+claim about the repo that had gone false and would have taught the next author wrong.
+
+### The instrument was fixed twice more, underneath earlier sections
+
+Both live in `~/Documents/Female_PC_Craft_Study_20260823/tw.py`, which is outside the repo and not
+under git, so this is the only record:
+
+1. **Store-area escapes were never decoded.** Twine 1 writes a newline as the two characters `\n`, a
+   tab as `\t` and a backslash as `\s`. 9,221 `college-daze` passages carried **0 newlines and
+   5,620 literal `\n` tokens**; every word count on that game and `free-cities` was inflated by the
+   escape tokens, and any `[^\n]`-bounded regex ran the length of the passage. Decode order matters —
+   `\s` last, or the backslash it produces is re-read. **Section I ran before this fix.**
+2. **`tw.links()` dropped every setter link.** `\[\[([^\]]+)\]\]` cannot cross the `]` inside
+   `[[Get out of bed|Room][$minute += 1]]`, so the link did not match at all and its target was lost;
+   raw `<a data-passage="…">` navigation was invisible too. **This is what the in-degree hub ranking
+   and `the-first-hour.md` F1's opening-funnel walk were built on.** Fixed with a balanced scan plus
+   a `data-passage` pass.
+
+`STATUS.md` records both under the deferred end-of-study recheck, which they widen.
+
+### Also in `STATUS.md`
+
+B row → DONE with the headline; `41 gates` → `42 gates` at both sites; "Seven are done" → "Eight are
+done: A, B, C, D, G, H, I and J"; remaining sections are now **E, F and K (the synthesis, last)**.
+`17 lints` left alone — this section did not measure it.
+
+---
+
 ## 2026-08-24 — Section I lands: the body, and the field's answer is mostly "don't build it"
 
 Section I asked which of clothes, arousal, hygiene and pregnancy are systems and which are

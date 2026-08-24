@@ -191,7 +191,7 @@ inside one of them, or it belongs on a different surface entirely.
   simply disappears from the list — no greyed line, no reason, no hours — which reads as a broken
   game rather than a timetable. `show_when_blocked = true` plus a `cooldown_message` keeps the entry
   as a dimmed line carrying the author's own words (`v2.py:11055`, rendered at `v2.py:5143`).
-  **No game in this repo has ever used it.** `references/the-clock.md` C5 owns the rule; this is the
+  **One game uses it** — `off_season`, six times. Every other game drops the entry silently. `references/the-clock.md` C5 owns the rule; this is the
   surface it lands on.
 
 **R3 · The walk-in — one activity deepens, the room does not widen.**
@@ -392,6 +392,13 @@ board."*
 ascent tiers are decoration and the wall of choices is at its worst on the day the player knows
 least. The failure case ran 109 of 216 ungated.
 
+⚠️ **A condition on a choice is usually a VARIANT, not a lock, and R5 is not a licence to gate.**
+Of 27,505 conditionals wrapped around an action in 26 shipped sandboxes, **35% are variant selectors
+where every branch offers something** and only **23% refuse anything at all** (`findings_B_refusal.md`
+§1). Read together with R5: put a condition on the choice, then let it *change* the choice far more
+often than it removes one. This is the same law H measured on reputation (2% of reads refuse) and I
+measured on the body (median 10%).
+
 **R5b · The choice to decline is written at full length, and it pays.** Not a gate — four games is
 not a field — but it is unanimous across the four, and our games do the opposite: a refusal that
 exists at all is usually a bare link back to the menu.
@@ -450,6 +457,51 @@ games today). **State the bar with `locked_text_threshold`; never fail silently.
 
 Still **not a gate** — three games is not a field, the same bar that stopped a gate last cycle.
 (`~/Documents/Female_PC_Craft_Study_20260823/findings_J_players.md` §4)
+
+**R5c · A locked door says why.** Added 2026-08-24. R5b.2 above reaches for
+`locked_text_threshold` and `rejection_node` and stops one step short of saying what the row itself
+should look like. This is that step, and it is the only rule in this file with a gate behind it that
+**fails twelve of our fourteen games**.
+
+The field's refusal has exactly two shapes and we ship a third that it does not
+(`findings_B_refusal.md` §2–§4). Of 16,167 refusing conditionals:
+
+- **71% render nothing.** The option is not there. This is the default, and it is legitimate — the
+  corpus's deepest games are among its quietest.
+- **28% speak**, in a **median of nine words**, and **60% of those name a handle** — a price (37%),
+  *already done* (18%), a time (5%), a place (2%). Price is the field's answer; wayfinding is not.
+- **2.26% show a dead label with nothing beside it**, and nearly all of that is settings and
+  pagination chrome — `OptionsWidget` toggle states, `Widgets Outfits` "Previous"/"Next" greyed at
+  the ends. **That third shape is the one our engine renders by default** (`engine.md` §15), and
+  **144 of our 176 shown-locked choices are it.**
+
+**The shape, measured:** a refusal stands **where the action stood**, runs about **nine words**,
+**names a handle**, and is **marked as the game's own voice**. Typography is a binary house
+decision — patriarch italicises 86% of its refusals, zaras-school-life colours 89%,
+the-hellfire-club marks none of its 631. Nobody marks a third of them.
+
+patriarch's `schoolgirls` roster does all four at once, and it is a **cast page** — the surface F9
+and `engine.md` §34 give us:
+
+```
+<<if $lolasecret is true>>//(You should find Lola at her house!)//<<else>>[[Lola]]<</if>>
+<<if $briready is true>>//(You should find Bri at her house!)//<<else>>[[Bri]]<</if>>
+<<if $sukilike gt 399>>[[Suki|Suki service]]<<elseif $sukilike gt 29>>//(You should find Suki at her house!)//<<else>>[[Suki]]<</if>>
+```
+
+The refusal occupies the row the link would have used, so the roster never reflows and the eye
+learns one shape. It says where to go instead. It is parenthesised italics — the game talking about
+itself rather than narrating. And Suki's row shows the ladder: under 30 an ordinary link, from 30 a
+direction, at 400 a *different* link. Three states, one row, no dead end at any of them.
+
+**Ours:** `locked_text` (the reason), `locked_text_threshold` (the bar, delivered on click —
+`engine.md` §23), or `rejection_node` (a live link to a real failure node — §36, still used by zero
+games). A choice gated only by `costs` needs none of them: the engine appends the requirement itself
+(`engine.md` §27). Gate: **"a locked door says why"**.
+
+⚠️ **This is the choice case only.** R2's last bullet owns the canvas-and-schedule case
+(`show_when_blocked` + `cooldown_message`), and `the-clock.md` C5 owns the rule behind it. Same
+instinct, different surface — do not author one where the other belongs.
 
 **R6 · The screen moves on re-entry — but the opener does not.** A location the player returns to
 daily has to render differently each time. **It does not do this by rewriting its first sentence.**
@@ -692,9 +744,17 @@ shuts a door — *filthy means she cannot take the car* — turns a chore into a
 | **Gate 29 · a need shuts a door** | every entry in `board.needs[]` is read by at least one condition somewhere in the game. `the-meters.md` M9 |
 | **Gate 30 · the walk-in floor** | a location with at least one repeatable solo activity **and** at least one NPC schedule row carries at least one `substitutions` rule. R3 |
 | **Gate 37 · a spent day still has a door** | no screen whose every choice is day-capped or priced lacks one choice free of **both** `conditions` and `costs`. Mirrors the engine's own `has_unconditional_choice`, so the gate and the runtime cannot disagree. R7 |
+| **Gate 42 · a locked door says why** | every choice with `show_when_locked = true` carries a `locked_text`, a `locked_text_threshold` or a `rejection_node`. A choice gated only by `costs` is exempt — the engine writes that message itself (`engine.md` §27). R5c |
 | **Lint · noun-only buttons** | the share of room-list labels that open on a determiner and name no verb. A number, not a bar — `the-voice.md` R1 |
 | **Lint · the browse share** | the share of repeatable room canvases whose entire click changes nothing but the clock |
 | **Lint · the act menu** | repeatable explicit surfaces split into node-routed loops and one-shot cascades. A count, never a target — R3b |
+
+**What a tired author writes to satisfy gate 42, checked before it landed.** The answer is
+`locked_text = "Not yet"` — a bare negative with no handle. That is a real shape in the field:
+13% of its spoken refusals are exactly that, and it is still strictly better than the mute label,
+which is 2.26% and almost entirely UI chrome. **The fig leaf here produces something the field
+actually ships**, which is why this rule got a gate and R5b did not. What the gate cannot judge is
+whether the nine words are any good; R5c above is the part that has to be taught.
 
 **R1, R2's judgement half, R4, R5b and R8 are deliberately not gated.** Whether *"Turn somebody away"* is
 aimed at a person or at the room is a judgement a parser cannot make, and a proxy check for it would

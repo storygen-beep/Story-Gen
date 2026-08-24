@@ -269,7 +269,9 @@ An activity whose window has closed **vanishes**. No greyed line, no reason, no 
 who worked the counter yesterday morning arrives at two in the afternoon and the button is simply
 gone — which reads as a broken game, not a schedule.
 
-The engine has the surface for this and **no game in this repo has ever used it**:
+The engine has the surface for this and **exactly one game uses it** — `off_season`, six times,
+with the hours written out (*"mornings, eight till one"*, *"the last two hours, before the
+shutter"*). Every other game drops the entry silently:
 
 ```toml
 [canvases.trigger]

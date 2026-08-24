@@ -30,6 +30,7 @@ Engine claims here carry a `file:line` into
 2. F2 · Boot and capstone are two canvases
 3. F3 · The opening hands over into an open door
 4. F4 · Every live system gets one beat
+4b. F4b · The opening refuses nothing
 5. F5 · Every character's hub sits behind a meeting
 6. F6 · A meeting is small, and somebody speaks
 7. F7 · Role before name
@@ -176,6 +177,45 @@ ceiling **is** the "there is a climb ahead" read, on frame one, with no teach sc
 ⚠️ **The rent clock is armed, not fired.** Use `[settings.rent] start_after_flag` pointed at a flag
 the opening raises, so the first session is pressure-free — no charge lands before the player has
 been told the rules.
+
+---
+
+## F4b · The opening refuses nothing
+
+F4 says teach every live system. This is the half F4 implies and never states: **teach it, and do
+not gate on it yet.** The first hour states the price. It does not enforce one.
+
+Measured across the fourteen games in the mopoga top thirty that carry an identifiable opening —
+their own `intro` / `prologue` / `chargen` tags where they have them, anchored passage names
+otherwise (`findings_B_refusal.md` §5):
+
+| | openings | spoken refusals in them |
+|---|---|---|
+| course-of-temptation, degrees-of-lewdity, become-someone, destroyer, apocalyptic-world, become-taxi-driver, inseminator, the-hellfire-club, patriarch, college-daze, zaras-school-life, wasteland-lewdness | **12** | **0** |
+| new-life-project | 1 | 6 — its `intro` tag covers the tutorial |
+| free-cities | 1 | 9 — its `intro` tag covers the settings screens |
+
+**Twelve of fourteen openings refuse nothing out loud**, and the two exceptions are both tags
+covering something other than a prologue. The largest true opening in the corpus — Course of
+Temptation's 78-passage, 8,057-word prologue — contains **seven conditionals and not one refusal**.
+Walking outward from each game's `startnode`, the first spoken refusal appears at link-depth 3 to 6
+where it is reachable at all. The funnel is unconditional; refusals begin where it ends.
+
+**What the opening does instead is hand over a bill.** Course of Temptation's mother attaches
+$100/week in a conversation at the family dinner table, and degrees-of-lewdity's entire opening is a
+rules briefing that locks nothing:
+
+> "If you want to avoid trouble, keep your allure low by dressing modestly and sticking to safe,
+> well-lit areas. Nights are particularly dangerous." — `Start2`
+
+Section A found the same thing from the other side and it is stated there once: *state the pressure
+in the first minutes, as a scene, not as a rule.* This rule is the constraint that follows —
+**a locked door in the first hour is a door the player never learned they wanted.**
+
+What this does **not** say: that the opening should be short, or that nothing in it may be
+conditional. F1's two shapes still stand, and a conditional that picks which version of a beat to
+show is not a refusal — see `the-surfaces.md` R5c, where 35% of the field's action-conditionals turn
+out to be variant selectors.
 
 ---
 
