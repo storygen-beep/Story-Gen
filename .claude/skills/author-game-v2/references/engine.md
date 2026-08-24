@@ -741,8 +741,31 @@ template_import.py:1032-1039   terminal + terminal_text on QuestsCard
 v2.py:14968-14976              Frame 1, terminal_text || "Arc complete"
 ```
 
-⚠️ **Exactly ONE card per game may set `terminal_text`** — it is the badge form of the
-build-boundary rule. A closed arc that is closed forever must not promise more of itself.
+⚠️ **The one-`terminal_text`-per-game cap is scoped to a game whose arcs are CLOSED.** It was
+written from `vesper` 0.1.8, a finished build where four arcs genuinely had ended and the default
+`"Arc complete"` was **true** of them; there, one card marking the build boundary is right and six
+would be noise.
+
+**It is the wrong rule for a v0.1, and following it there produces the worse outcome.** In a first
+release nothing is closed — every track stops at a build boundary — so the cap forces every arc but
+one into `"Arc complete"`, **a stronger and falser claim than the string it was rationing**.
+`the-release.md:107-110` already rules the other way for that case:
+
+> state the current ceiling honestly. The reference game prints a plain marker at the top of **each
+> track** so the player knows where the wall is. […] An honest wall is a promise; a silent one is a
+> bug report.
+
+**Each track.** So: `"Arc complete"` belongs to an arc that has genuinely **ended**. An arc that
+stops because the build stops carries its own marker, and the same plain string on every such track
+is what "a plain marker at the top of each track" means. Cap the *claim*, not the field.
+
+⚠️ **`ready_canvas` MUST name a canvas that HAS A LOCATION, or Frame 2 renders NOTHING.**
+`lookupCanvasBySlug` (`v2.py:15371`) walks `help_data.locationCanvases`, keyed by location UUID, so a
+**triggerless** canvas — the usual shape for a sex loop or any sub-menu reached by a choice — is not
+in that index at all. It returns `null`, Frame 2 does `if (!found) return ""`, and the card falls
+through to **no frame**: text and 💡 tip with nothing ticked, the exact failure the warning above
+this one describes. Point `ready_canvas` at the **hub** the loop hangs off — it carries the location
+and the schedule, which is what the 📍 and 🕒 lines are read from.
 
 ⚠️ **`terminal` IS NOT COMPUTED FROM PROGRESS, AND A CHARACTER WHOSE ONLY CARD CARRIES IT READS AS
 FINISHED FROM VALUE ZERO.** Frame 1 fires on `card.terminal === true` alone, ahead of every other
@@ -757,6 +780,48 @@ above — *set `terminal` on the last card of every arc* — is right, and it is
 **`terminal` belongs on a card the player has to CLIMB TO.** An arc needs at least two cards: an
 open lower band, and a terminal upper one gated `gte` at a threshold real content sits on. One card
 marked terminal is not a ladder with a top; it is a badge with no ladder.
+
+⚠️ **AND A METER IS THE WRONG THING TO GATE IT ON AT ALL.** The rule above says climb to a
+threshold; it never says *climb to what*, and five v2 games answered it the same wrong way — they put
+the badge on the threshold that **opens** the content instead of one above it, so the ✓ arrives on the
+click that unlocks the scene. Measured across the repo the day this was written:
+
+```
+mrs_vance     5 of 6 characters - 2 landing ON the door, 3 landing BEFORE it
+                                  (one 40 points early; two on a DIFFERENT meter
+                                  from the one the door reads, so the tick at want 0)
+forty_miles   6 of 6 - every badge at exactly the door value
+seventh_day   1 badge on the door + 5 goals 25 points past anything the game reads
+the_season    4 of 5
+vesper        0 of 5   <- the v1 game this section was written from is clean
+```
+
+**The fix is not a bigger number — it is a different kind of gate.** Put the ✓ on a **flag the content
+sets on its way out**, so it means *you have played this* rather than *you have ground past it*. The
+v1 hint system had exactly that pairing (`arc_closure_flag` pre + `arc_complete` post,
+`template_import.py:1017-1023`) and the v2 card schema dropped it without replacing it:
+
+```toml
+# climb  - the goal frame, with live progress
+when = [ { trait = "want", subject = "npc", npc_id = "npc_x", op = "lt", value = 42 } ]
+goals = [ { trait = "want", subject = "npc", npc_id = "npc_x", op = "gte", value = 42, label = "..." } ]
+
+# ready  - the Ready frame. NO goals: an empty goals list is allMet vacuously true
+when = [ { trait = "want", subject = "npc", npc_id = "npc_x", op = "gte", value = 42 },
+         { flag = "x_loop_played", subject = "player", op = "is_false" } ]
+ready_canvas = "hub_x"            # the HUB, never the triggerless loop - see above
+
+# done   - the tick, and it means it
+when = [ { flag = "x_loop_played", subject = "player", op = "is_true" } ]
+terminal = true
+```
+
+⚠️ **A goal threshold no condition anywhere reads is a number the player climbs to for nothing.**
+Same measurement: `mrs_vance` shipped three (`isaac.want 66`, `sherrod.want 62`, `tobin.want 30`) and
+`seventh_day` five. They stay invisible while the terminal frame outranks the bullets, and the moment
+the badge is fixed they become live instructions to grind for nothing — so fix the numbers in the
+same pass, never one without the other. `scripts/gates.py`'s **`lint · the badge arrives before the
+content`** reports both.
 
 ⚠️ **`pickQuestsCards` takes EXACTLY ONE scope string, and anything else fails silently.**
 

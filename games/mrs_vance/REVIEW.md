@@ -38,12 +38,12 @@ was found by **LO playing the built game** — a different instrument that finds
 defect, and the two are not merged so it stays visible which found what. Same split
 `off_season/REVIEW_1.md` records in its own header.
 
-**Current count: 20 open, 1 fixed** — 0 blockers, 5 high, 7 med, 7 low, 1 open question, and **P1
-FIXED**. Three of the twenty-one are decisions for LO rather than defect calls: E1 (the obligation's
-size), D1 (how much locked content should explain itself) and G1 (whether the Want file's one shape
-is the genre). Plus **eight places
-this review was itself wrong**, recorded first in §0a — six caught before writing, and two (N7, N8)
-caught only after they had shipped in this file, one of them as its single blocker.
+**Current count: 18 open, 3 fixed** — 0 blockers, 4 high, 7 med, 6 low, 1 open question, and **P1,
+Q1 and Q2 FIXED**. Three of the twenty-one are decisions for LO rather than defect calls: E1 (the
+obligation's size), D1 (how much locked content should explain itself) and G1 (whether the Want
+file's one shape is the genre). Plus **nine places
+this review was itself wrong**, recorded first in §0a — six caught before writing, and three (N7,
+N8, N9) caught only after they had shipped in this file, one of them as its single blocker.
 `v2_state.json` is deliberately untouched; the remaining SKILL-layer items (C2, Q1, W1, G1, half of
 D1) are recorded for LO to schedule.
 
@@ -54,10 +54,11 @@ D1) are recorded for LO to schedule.
 `forty_miles/REVIEW.md:31` puts its own corrections ahead of its defect list, because a review that
 hides its misses is worth less than one that does not. Seven claims made during this review were
 narrowed or overturned by checking them. **Six were caught before anything was written down**, which
-is the only reason they are corrections and not defects in this file. **N7 and N8 were not** — both
-shipped in this file and were overturned afterwards, N7 by LO the day after and N8 by the work of
-actually repairing the item it belonged to. They are the two most instructive entries in the section
-for exactly that reason.
+is the only reason they are corrections and not defects in this file. **N7, N8 and N9 were not** —
+all three shipped in this file and were overturned afterwards: N7 by LO the day after, N8 and N9 by
+the work of actually repairing the items they belonged to. They are the three most instructive
+entries in the section for exactly that reason, and the pattern in the last two is the same —
+**a defect's diagnosis does not survive contact with its repair.**
 
 ### ⚠️ N1 · The clock-gate hole is one missing preposition, not "it cannot read spelled-out numbers"
 
@@ -196,6 +197,33 @@ census counts those, and it is what the new lint counts too.
 was wrong in both directions at once — it missed scenes that place a man without naming him, and it
 convicted scenes that name a man who is deliberately elsewhere. §11's *"parsed with a real TOML
 parser, never grep"* was the right rule and this pass broke it one level down.
+
+### ⚠️ N9 · Q1's "gated at the SAME value as the content" is wrong on three of five
+
+**The third correction to ship in this file**, found the same way as N8 — by repairing the item.
+
+Q1 as written: *"the card the player climbs to is gated at the **same** value as the content, so the
+✓ lands on the same click as the unlock."* True for Isaac and Sherrod. For the other three the badge
+fires **before the door opens at all**:
+
+```
+tobin    terminal at want gte 30, door at want gte 70      40 points early
+cade     terminal at trust gte 26, door at want gte 42     a DIFFERENT meter
+booth    terminal at trust gte 30, door at want gte 50     a DIFFERENT meter
+```
+
+Cade's and Booth's badges are gated on `trust` while their doors read `want` — two meters that move
+on different surfaces — so the ✓ could arrive at `want 0`. "Same click" understated it.
+
+**Why the first pass missed it.** It read the quest cards and stopped. The door values live on the
+**hub choices**, not on the cards, and the two were never put side by side — A.6 had the door values
+written down in the same file the whole time. **Comparing two tables the review already contained
+would have caught this**, which is a cheaper instrument than anything used to find it.
+
+Q1's fix note also said *"raise each terminal card's `when` above its loop gate"*. That would have
+exposed three goal thresholds nothing in the game reads (`isaac.want 66`, `sherrod.want 62`,
+`tobin.want 30`) as live instructions to grind for nothing. The right fix was to stop gating the
+badge on a meter at all.
 
 ---
 
@@ -363,61 +391,132 @@ the other prepositions got.
 
 ---
 
-# §3 · Five arcs announce themselves finished at the moment they open
+# §3 · The badge arrived before the content, on five of six
 
-### Q1 · The terminal card flips to ✓ when the door unlocks, not when the content is played
-**severity** HIGH · **layer** GAME + SKILL · **status** OPEN
+### Q1 · The ✓ was gated on a meter, and on three characters it landed before the door opened
+**severity** HIGH · **layer** GAME + SKILL · **status** **FIXED** — six ladders rebuilt, proved live
 
-Live quest page, every meter set to exactly the value that opens its loop:
+**⚠️ This item's own diagnosis was wrong on three of the five.** §0a **N9** records it. The corrected
+picture is below; the first draft's *"gated at the same value as the content"* should not be quoted.
+
+Every character's second card was `terminal = true`, and Frame 1 fires on `card.terminal === true`
+**alone** (`v2.py:15404`), ahead of the ready and goal frames, with nothing checking achievement.
+Against the value that actually opens each loop (A.6):
+
+| character | the badge fired at | the door | what the player saw |
+|---|---|---|---|
+| `npc_isaac` | `want gte 38` | `want gte 38` | ✓ on the same click as the unlock |
+| `npc_sherrod` | `want gte 34` | `want gte 34` | ✓ on the same click as the unlock |
+| `npc_tobin` | `want gte 30` | `want gte 70` | **✓ forty points of climbing early** |
+| `npc_cade` | **`trust gte 26`** | `want gte 42` | a **different meter** — ✓ possible at `want 0` |
+| `npc_booth` | **`trust gte 30`** | `want gte 50` | same |
+
+So it was not one defect but two: a badge landing *on* the door, and a badge landing *before* it on a
+meter the door does not read.
+
+**Three goals were numbers nothing in the game reads.** Every `gte` threshold any canvas condition
+uses, per character trait, against what the cards asked for:
 
 ```
-Cade      ✓ As far as this build goes
-Booth     ✓ Arc complete
-Isaac     ✓ Arc complete
-Sherrod   ✓ Arc complete
-Tobin     ✓ Arc complete
+booth.trust  5, 30    booth.want  50        cade.trust  6, 26    cade.want  42
+isaac.want   6, 38    sherrod.want 5, 34    tobin.want  5, 70
+
+asked for and never read:   isaac.want 66 · sherrod.want 62 · tobin.want 30
 ```
 
-Each character's second card is `terminal = true` with a `when` equal to the loop's own gate —
-`npc_isaac.want gte 38` is both what opens `loop_isaac` and what matches Isaac's terminal card. And
-frame 1 fires on `card.terminal === true` **alone** (`v2.py:15199`); nothing checks that anything
-was achieved. `engine.md:747` already carries this warning in the abstract:
+They were invisible only because the terminal frame outranked the bullets. **Removing `terminal`
+without touching them would have made the game worse** — the ✓ replaced by a live instruction to
+climb 28 points for nothing. That is the trap in this repair and the reason the fix was not "raise
+the threshold".
 
-> ⚠️ **`terminal` IS NOT COMPUTED FROM PROGRESS, AND A CHARACTER WHOSE ONLY CARD CARRIES IT READS
-> AS FINISHED FROM VALUE ZERO.**
+**And the game never used Frame 2 at all.** `🔓 Ready` + `📍 <location>` + `🕒 <schedule>` needs a
+`ready_canvas`, and the key appeared **zero** times. The guidance page had two states, *climbing* and
+*done*, and never *the door is open, here is where and when* — which is half of what LO could not
+work out about the world (§12 M1/M2).
 
-This game does not commit the failure that warning names — every arc here has a proper two-card
-ladder and a terminal the player climbs to, which is exactly what `engine.md:757` asks for. It
-commits the adjacent one: the card the player climbs to is gated at the **same** value as the
-content, so the ✓ lands on the same click as the unlock. You grind Isaac to 38, the corner of the
-bay opens, and the game tells you his story is over before you have played it.
+### Q2 · Dorn's card drew no frame at all, then a badge on an empty arc
+**severity** LOW · **layer** GAME · **status** **FIXED**
 
-**The skill half.** `engine.md:744`:
-
-> ⚠️ **Exactly ONE card per game may set `terminal_text`** — it is the badge form of the
-> build-boundary rule. A closed arc that is closed forever must not promise more of itself.
-
-The game obeyed it exactly: one card, Cade's, reading *"As far as this build goes"*. The
-consequence is that the other five fall through to the engine default `"Arc complete"`
-(`v2.py:14968-14976`) — a **stronger and falser** claim than the build-boundary string it was
-rationed to protect. Following the rule produced the worse outcome, which is what makes this a
-doctrine item and not an author slip.
-
-### Q2 · Dorn's terminal card is a badge on an arc with no content
-**severity** LOW · **layer** GAME · **status** OPEN
-
-`npc_dorn`'s terminal card carries **no goals and no `terminal_text`**, and matches at
-`want gte 55`. Per N3 that is reachable at +5 on the nights he is home — three to four weeks — at
-which point it prints `✓ Arc complete` for a character with one hub canvas, one walk-in, and no
-ladder. `v2_state.json` already promises *"Dorn's own ladder… Pay it or cut it"*, so the arc is
-knowingly unbuilt; the card is what makes the emptiness visible in the wrong words.
+His first card was `when want lt 55` with goal `want gte 12`. Between 12 and 54 every goal was met,
+there was no `ready_canvas`, and Frame 3 requires `!allMet` — so it returned `""`. The card rendered
+its text and 💡 tip **with nothing ticked**, which is precisely the trap `engine.md` §23 was written
+about. At 55 it flipped to `✓ Arc complete` for a character with one hub, one walk-in and no ladder.
 
 ### Fix
 
-Raise each terminal card's `when` above its loop gate so the ✓ arrives after the content rather
-than with it — Isaac's card at `want gte 38` becomes the *ready* state, and terminal moves up. Then
-take the one-`terminal_text` question to the skill: the rule is right about badges and silent about
-what the other five cards say instead, and both halves belong in the same paragraph.
+**The badge is no longer gated on a meter.** It is gated on a flag the loop sets on its way out, so
+it means *you have played this* rather than *you have ground past it*. Three states per character:
+
+| card | `when` | `goals` | `ready_canvas` | frame |
+|---|---|---|---|---|
+| climb | `<meter> lt DOOR` | the door, with its label | — | 🎯 live progress |
+| ready | `<meter> gte DOOR` + `<x>_loop_played` `is_false` | *(none)* | `hub_<x>` | 🔓 Ready 📍 🕒 |
+| done | `<x>_loop_played` `is_true` | *(none)* | — | ✓ + `terminal_text` |
+
+Card *ready* carries no goals on purpose: *"When `goals` is empty, the card has no climbing phase
+(`goalState.allMet` is vacuously true)"* (`template_import.py:1078`), so Frame 2 fires the moment the
+card matches. 14 cards became 21.
+
+⚠️ **`ready_canvas` points at the HUB, never at the loop, and this is a trap not an aesthetic.**
+`lookupCanvasBySlug` (`v2.py:15371`) walks `help_data.locationCanvases`, keyed by location UUID. The
+loops are triggerless, so they are **not in that index** — verified in the built HTML:
+`hub_cade_office` is present with `hasSchedules: true`, `loop_cade` is absent. `ready_canvas =
+"loop_cade"` returns `null`, Frame 2 does `if (!found) return ""`, and the card would have rendered
+**no frame at all**.
+
+**Five flags**, one `flagEffects` entry on each loop's `finish` exit
+(`4_story_arc.toml`, the idiom from `2_one_shots.toml:274`). Bailing out of a loop mid-scene
+deliberately does **not** tick the badge — the `act` node's exit to the room stays open and sets
+nothing, which is the correct reading of "played it".
+
+**The three phantom thresholds are cut.** Tobin's fake mid-rung at 30 collapses into his real single
+rung, 5 → 70; Isaac's 66 and Sherrod's 62 are gone.
+
+**Dorn** keeps two cards — `want lt 12` climbing, then terminal at 12 with the honest marker. The 55
+is gone, and with it the window that drew no frame.
+
+**All six now carry `terminal_text`**, which `engine.md:744` forbade. See §10 — the cap is correct
+for a finished game and wrong for a v0.1, and `the-release.md:109` already asks for *"a plain marker
+at the top of each track"*.
+
+### Proved live
+
+`games/mrs_vance/playtest_quests.py` — 23/23, zero page errors. It drives `pickQuestsCard` →
+`renderQuestsGoalBlock`, the same two functions the page and the sidebar both call
+(`v2.py:15454-15456`, *"there is no separate sidebar quest"*), so a pass covers both surfaces.
+
+```
+per character, three states
+  below the door        🎯 To advance: … — 34 / 42          ✓ absent
+  at the door, unplayed 🔓 Ready · 📍 Office · 🕒 …          ✓ absent
+  played                ✓ As far as this build goes         "Arc complete" absent
+
+then all five loops played through to their finish node
+  cade · booth · isaac · sherrod · tobin      <x>_loop_played  False -> True
+```
+
+The Ready assertion checks for the **📍**, not merely a non-empty string — a `ready_canvas` that
+fails to resolve returns `""`, and non-emptiness would not have caught it.
+
+### Why no check caught it
+
+Nothing measured **what the badge was climbing to**. `gates.py`'s G15 *"no chain ends in silence"*
+(`:3877`) asks only that each character keeps a terminal card, which this game always did.
+
+**`lint_badge_before_content`** now measures it, and the corpus result is the finding:
+
+```
+mrs_vance     8 findings before this repair, 0 after
+forty_miles   6 of 6 - every badge at exactly the door value
+seventh_day   1 badge on the door + 5 goals 25 points past anything the game reads
+the_season    4 of 5
+the_allowance 3 of 5
+vesper        0 of 5   <- the v1 game engine.md §23 was written from is clean
+```
+
+**Four other v2 games ship the same defect and the game the doctrine came from does not.** That is
+what makes this SKILL-layer rather than an author slip, and it is why the fix went into `engine.md`
+in the same commit.
 
 ---
 
@@ -866,6 +965,15 @@ Adjacency is `navigation_order`, not `connections` (§0a N5). All 14 locations d
 graph is a connected two-level tree, and the engine supplies the return edge. A script that looks
 for `connections` or `exits` will find nothing and be wrong.
 
+### `ready_canvas` must name a canvas with a LOCATION, or Frame 2 renders nothing
+
+`lookupCanvasBySlug` (`v2.py:15371`) walks `help_data.locationCanvases`, which is keyed by location
+UUID, so a **triggerless** canvas is not in that index at all. Verified against the built HTML:
+`hub_cade_office` is present with `hasSchedules: true`; `loop_cade` is absent. A card pointing
+`ready_canvas` at a loop gets `null` back, Frame 2 does `if (!found) return ""`, and the card renders
+**no frame** — text and 💡 tip with nothing ticked. All five in this game point at the hub, which is
+also where the loop's door actually is. Do not "simplify" them to the loop slug.
+
 ### The portal already separates dev builds from releases, and this game is filed correctly
 
 `games-data.js` has a `dev` field (`:10`) that renders a game under **Dev / test builds** with an
@@ -894,14 +1002,35 @@ Pattern worth naming: this is the third instrument hole of the same shape record
 false friends, and now `_clk_refs` missing a preposition. In every case the doctrine was right and
 the check was narrower than the doctrine.
 
-### Q1 · yes — and the fix is a paragraph, not a line
+### Q1 · yes — and the fix is shipped, in `engine.md` and in four other games' future
 
-`engine.md:744`'s one-`terminal_text` rule is correct about badges. It is silent about what the
-other cards then say, and the engine default they fall to — `"Arc complete"` — is a **stronger**
-claim than the build-boundary string the rule is rationing. A game that obeys the rule exactly ends
-up telling the player five arcs are finished. The rule and its consequence have to be stated
-together, and `engine.md:757`'s *"terminal belongs on a card the player has to CLIMB TO"* needs one
-more clause: **and gated above the content, not level with it.**
+§23 warned that `terminal` is not computed from progress and gave the rule that follows — *terminal
+belongs on a card the player has to CLIMB TO*. It never said **climb to what**, and every v2 game
+answered the same wrong way. Measured across the repo:
+
+```
+mrs_vance     5 of 6 - two ON the door, three BEFORE it
+forty_miles   6 of 6 - every badge at exactly the door value
+seventh_day   1 badge on the door + 5 goals past anything the game reads
+the_season    4 of 5
+the_allowance 3 of 5
+vesper        0 of 5   <- the v1 game §23 was WRITTEN FROM
+```
+
+**Four v2 games and not the one the section came from.** The doctrine did not fail; the sentence that
+would have prevented this was never written. §23 now carries it — a meter is the wrong thing to gate
+a badge on, put the ✓ on a flag the content sets on its way out — plus the goal-nobody-reads warning
+and the `ready_canvas` trap. `lint_badge_before_content` reports all three.
+
+**And the one-`terminal_text` cap was right for a different game.** `CHANGELOG.md` 2026-08-13 records
+it coming from `vesper` 0.1.8, a **finished** build where four arcs genuinely had ended and
+*"Arc complete"* was true of them. In a v0.1 nothing is closed, so the cap forced five tracks into a
+**stronger and falser** claim than the string it was rationing — and `the-release.md:109` already
+asked for *"a plain marker at the top of each track"*. The cap is now on the **claim**, not the field.
+
+This is the second time in this file a rule turned out to be correct but scoped to the wrong phase —
+B1/N7 was the first. Worth naming: **a rule measured on a finished game is not automatically a rule
+about a first release.**
 
 ### W1 · yes — and this is the second game to draw the same sentence from LO
 
@@ -1468,7 +1597,7 @@ npc_tobin     690 690 690 690 690 330 150      zero days: none
 npc_dorn      435   -   -   - 269 599 419      zero days: Tue, Wed, Thu  (by design)
 ```
 
-### A.6 · The five doors
+### A.6 · The five doors, and where the badge used to sit
 
 ```
 hub_cade_office     -> loop_cade      npc_cade.want gte 42
@@ -1479,6 +1608,28 @@ hub_tobin_row       -> loop_tobin     npc_tobin.want gte 70
 ```
 
 All five `show_when_locked` with a written reason. `loop_solo` is ungated.
+
+⚠️ **Put beside the quest cards, this table is Q1.** The whole defect was visible from two tables
+this file already contained, and nobody put them side by side (§0a N9):
+
+```
+character   the door          the badge fired at      after the repair
+cade        want   gte 42     trust gte 26  (!)       flag cade_loop_played
+booth       want   gte 50     trust gte 30  (!)       flag booth_loop_played
+isaac       want   gte 38     want  gte 38            flag isaac_loop_played
+sherrod     want   gte 34     want  gte 34            flag sherrod_loop_played
+tobin       want   gte 70     want  gte 30  (!!)      flag tobin_loop_played
+dorn        (no door)         want  gte 55            want gte 12, the wall stated
+```
+
+Every `gte` threshold any canvas condition reads, which is what "content" means here:
+
+```
+booth.trust  5, 30     booth.want   50        cade.trust  6, 26     cade.want  42
+isaac.want   6, 38     sherrod.want 5, 34     tobin.want  5, 70     dorn        none
+
+asked for by a card and read by nothing:  isaac.want 66 · sherrod.want 62 · tobin.want 30
+```
 
 ### A.7 · The presence gate
 
@@ -1580,6 +1731,36 @@ re-investigated. Count 13 → 19. Still nothing repaired.
 **2026-08-25 — L4 added.** Reconciling §4's pool count against the shipping commit before committing
 this file showed the commit's "46 pools" matches neither the grep (41) nor the parse (39), and its
 "46 in the_long_summer" is 49. Filed with L1–L3 as the same defect class. Count 19 → 20.
+
+**2026-08-25 — Q1 and Q2 FIXED, and Q1's own diagnosis corrected.** The badge is no longer gated on
+a meter. Repairing it overturned Q1's *"gated at the same value as the content"* — true for Isaac and
+Sherrod, but Tobin's ✓ arrived 40 points early and Cade's and Booth's were gated on a **different
+meter** from the one their door reads, so the tick could land at `want 0`. Recorded as **N9**, found
+by putting the cards next to A.6's door values — two tables this file already contained.
+
+It also turned up **three goal thresholds no condition in the game reads** (`isaac.want 66`,
+`sherrod.want 62`, `tobin.want 30`), invisible only because the terminal frame outranked the bullets.
+Q1's original fix note — *raise each terminal card's `when`* — would have turned all three into live
+instructions to grind for nothing.
+
+**Applied.** Six ladders rebuilt to three states, 14 cards → 21: climb (🎯 with live progress), ready
+(🔓 + 📍 + 🕒 off the **hub**, never the triggerless loop), done (✓ on a `<x>_loop_played` flag five
+`flagEffects` entries now set on each loop's `finish` exit). The three phantom thresholds are cut.
+Dorn keeps two cards and loses the 55 that left him rendering no frame at all between 12 and 54.
+All six carry the same plain wall marker.
+
+**Proved live**, `games/mrs_vance/playtest_quests.py`, 23/23, zero page errors: three frames per
+character in the right order, the Ready frame asserted on its **📍** rather than on non-emptiness
+(a `ready_canvas` that fails to resolve returns `""`), and all five loops played through to their
+finish node with each flag going `False -> True`.
+
+**Skill fix in the same commit.** `engine.md` §23 gains the sentence that would have prevented it —
+*a meter is the wrong thing to gate a badge on* — plus the goal-nobody-reads warning and the
+`ready_canvas`/`locationCanvases` trap, and the one-`terminal_text` cap is rescoped to a finished
+game. `lint_badge_before_content` reports all three: **8 findings on this game before, 0 after**, and
+across the corpus `forty_miles` 6/6, `seventh_day` 6, `the_season` 4/5, `the_allowance` 3/5 — and
+**`vesper` 0/5**, the v1 game the section was written from. `41/41 judged gates pass` throughout.
+Count 20 open → 18.
 
 **2026-08-25 — P1 FIXED, and its own census corrected.** The first repair in this file. Repairing it
 meant reading all 36 ambients instead of matching names in prose, and that overturned four of P1's

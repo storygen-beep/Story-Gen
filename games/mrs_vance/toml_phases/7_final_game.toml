@@ -323,11 +323,29 @@ intro        = "Four of them are his. One of them is yours."
 #    missed — and the_season gated every hub correctly and still introduced all
 #    five people on the Quests page on click one.
 # ⚠️ A `when` item sets `flag` OR `trait`, never both (template_import.py:5285).
-# ⚠️ `terminal` is not computed from progress. A character whose ONLY card is
-#    terminal prints "✓ Arc complete" on turn one. Every ladder here is two
-#    cards: an open lower band, and a terminal upper one gated `gte` at a
-#    threshold real content sits on.
-# ⚠️ Exactly ONE card in the game sets `terminal_text`.
+# ⚠️ `terminal` is not computed from progress, AND A METER IS THE WRONG THING TO
+#    GATE IT ON. v0.1 shipped every ladder as two cards with the terminal one
+#    gated `gte` on a meter, and the badge landed AT the door on two characters
+#    and BEFORE it on three — Tobin's ✓ arrived 40 points of climbing early, and
+#    Cade's and Booth's were gated on a different meter from the one the door
+#    reads. Every ladder here is now THREE states and the last one is a FLAG the
+#    loop sets on its way out:
+#       climb  -> `<meter> lt DOOR`, goals the door           -> 🎯 progress
+#       ready  -> `<meter> gte DOOR` + `<x>_loop_played` is_false,
+#                 NO goals, `ready_canvas` on the HUB          -> 🔓 Ready 📍 🕒
+#       done   -> `<x>_loop_played` is_true, terminal          -> ✓
+# ⚠️ `ready_canvas` MUST name a canvas that HAS A LOCATION. lookupCanvasBySlug
+#    (v2.py:15371) walks help_data.locationCanvases, keyed by location UUID, so
+#    a triggerless canvas is not in it — `ready_canvas = "loop_cade"` resolves to
+#    null and Frame 2 returns "", rendering NOTHING. Point it at the hub.
+# ⚠️ A goal threshold no canvas condition anywhere reads is a number the player
+#    climbs to for nothing. v0.1 shipped three (isaac 66, sherrod 62, tobin 30);
+#    they were invisible only because the terminal frame outranked the bullets.
+# ⚠️ terminal_text: engine.md caps it at ONE CARD PER GAME, and that cap is
+#    scoped to an arc that is genuinely CLOSED, where the default "Arc complete"
+#    is true. NOTHING here is closed — every track stops at a build boundary — so
+#    every track carries the same plain marker, which is what the-release.md:109
+#    asks for ("a plain marker at the top of EACH track").
 #
 # This game declares NO ascent tiers, so there are no tier cards. The page is
 # the six people plus the story goals, which is what a roster game's guidance
@@ -353,7 +371,7 @@ tip      = "Nothing much happens while he is here. Everything happens while he i
 when     = [ { flag = "opening_started", subject = "player", op = "is_true" } ]
 goals    = [ { trait = "standing", subject = "player", op = "gte", value = 15, label = "Get them saying your name instead of asking for a man — the office counter" } ]
 
-# ── CADE — the spine. trust (access) then want (willingness). ────────────────
+# ── CADE — the spine. trust (access), then want (willingness), then played. ──
 [[quest_cards]]
 priority = 30
 npc_id   = "npc_cade"
@@ -369,12 +387,31 @@ npc_id   = "npc_cade"
 text     = "He has stopped counting the drawer in front of you and started counting it beside you. What he has not done is say one word about the arrangement, and the not saying is the loudest thing in the room."
 tip      = "Stay in the office after he shuts the roller door. He does not ask you to and he does not tell you to go."
 when     = [ { flag = "met_cade", subject = "player", op = "is_true" },
-             { trait = "trust", subject = "npc", npc_id = "npc_cade", op = "gte", value = 26 } ]
-terminal = true
-terminal_text = "As far as this build goes"
+             { trait = "trust", subject = "npc", npc_id = "npc_cade", op = "gte", value = 26 },
+             { trait = "want", subject = "npc", npc_id = "npc_cade", op = "lt", value = 42 } ]
 goals    = [ { trait = "want", subject = "npc", npc_id = "npc_cade", op = "gte", value = 42, label = "Stay after the roller door goes down — the office, after six" } ]
 
-# ── BOOTH — the taboo. trust (what he lets her see) then want. ───────────────
+[[quest_cards]]
+priority = 32
+npc_id   = "npc_cade"
+text     = "He does not send you home when the door goes down any more. He counts, and he waits for you to finish your column, and the waiting has stopped being about the book."
+tip      = "Stay in the office after six and take the whole eleven minutes."
+when     = [ { flag = "met_cade", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_cade", op = "gte", value = 42 },
+             { flag = "cade_loop_played", subject = "player", op = "is_false" } ]
+ready_canvas = "hub_cade_office"
+
+[[quest_cards]]
+priority = 33
+npc_id   = "npc_cade"
+text     = "It is a standing arrangement now and neither of you has named it. He counts up on his own most nights and does not mind which nights you are there for."
+tip      = "The office after six, as often as you want it."
+when     = [ { flag = "met_cade", subject = "player", op = "is_true" },
+             { flag = "cade_loop_played", subject = "player", op = "is_true" } ]
+terminal = true
+terminal_text = "As far as this build goes"
+
+# ── BOOTH — the taboo. trust (what he lets her see), then want, then played. ─
 [[quest_cards]]
 priority = 30
 npc_id   = "npc_booth"
@@ -390,11 +427,31 @@ npc_id   = "npc_booth"
 text     = "He has started using your name and correcting himself back to the title, every time, out loud. He is doing it on purpose now and neither of you has said so."
 tip      = "His door is on the latch after ten. Knock on it about something that could have waited."
 when     = [ { flag = "met_booth", subject = "player", op = "is_true" },
-             { trait = "trust", subject = "npc", npc_id = "npc_booth", op = "gte", value = 30 } ]
-terminal = true
+             { trait = "trust", subject = "npc", npc_id = "npc_booth", op = "gte", value = 30 },
+             { trait = "want", subject = "npc", npc_id = "npc_booth", op = "lt", value = 50 } ]
 goals    = [ { trait = "want", subject = "npc", npc_id = "npc_booth", op = "gte", value = 50, label = "Knock on his door about nothing — his room, after ten" } ]
 
-# ── ISAAC — the watcher. one meter. ─────────────────────────────────────────
+[[quest_cards]]
+priority = 32
+npc_id   = "npc_booth"
+text     = "He leaves the door on the latch and he leaves the television down, and he has stopped saying sorry when you come in. He is still calling you Mrs. Vance and he is still doing it on purpose."
+tip      = "Knock after ten. He will not ask you to stay and he will not ask you to go."
+when     = [ { flag = "met_booth", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_booth", op = "gte", value = 50 },
+             { flag = "booth_loop_played", subject = "player", op = "is_false" } ]
+ready_canvas = "hub_booth_room"
+
+[[quest_cards]]
+priority = 33
+npc_id   = "npc_booth"
+text     = "The latch stays off now. He has not once used your name where anyone else could hear it, and he has not once used the title when nobody can."
+tip      = "His room, after ten, whenever you want it."
+when     = [ { flag = "met_booth", subject = "player", op = "is_true" },
+             { flag = "booth_loop_played", subject = "player", op = "is_true" } ]
+terminal = true
+terminal_text = "As far as this build goes"
+
+# ── ISAAC — the watcher. one meter, then played. ────────────────────────────
 [[quest_cards]]
 priority = 30
 npc_id   = "npc_isaac"
@@ -408,11 +465,21 @@ goals    = [ { trait = "want", subject = "npc", npc_id = "npc_isaac", op = "gte"
 priority = 31
 npc_id   = "npc_isaac"
 text     = "He has stopped pretending he was looking at something else. He still does not say anything, and the silence has changed sides — it is not his shyness any more, it is a thing he is doing to you."
-tip      = "The bunk room is over the shop and the stairs are outside. He is up there from nine."
+tip      = "The bay is his all midday and there is nothing in it to stand behind."
 when     = [ { flag = "met_isaac", subject = "player", op = "is_true" },
-             { trait = "want", subject = "npc", npc_id = "npc_isaac", op = "gte", value = 38 } ]
+             { trait = "want", subject = "npc", npc_id = "npc_isaac", op = "gte", value = 38 },
+             { flag = "isaac_loop_played", subject = "player", op = "is_false" } ]
+ready_canvas = "hub_isaac_bay"
+
+[[quest_cards]]
+priority = 32
+npc_id   = "npc_isaac"
+text     = "He works the bay the same way he always did and he does not wind the hose back until you have gone. Whatever was being decided between you got decided, and he still has not said forty words."
+tip      = "The bay, midday, as often as you want it."
+when     = [ { flag = "met_isaac", subject = "player", op = "is_true" },
+             { flag = "isaac_loop_played", subject = "player", op = "is_true" } ]
 terminal = true
-goals    = [ { trait = "want", subject = "npc", npc_id = "npc_isaac", op = "gte", value = 66, label = "Go up the outside stairs — the bunk room, after nine" } ]
+terminal_text = "As far as this build goes"
 
 # ── SHERROD — the debt. one meter, and it opens crude. ──────────────────────
 [[quest_cards]]
@@ -428,11 +495,21 @@ goals    = [ { trait = "want", subject = "npc", npc_id = "npc_sherrod", op = "gt
 priority = 31
 npc_id   = "npc_sherrod"
 text     = "He has started saying it. Not asking — saying, in the flat voice he uses for a job sheet, and then waiting to see whether you are going to make him say it twice."
-tip      = "His room is at the top of the outside stairs over the office."
+tip      = "He is in the chair by the filing cabinet after the shop shuts, and he is not going anywhere."
 when     = [ { flag = "met_sherrod", subject = "player", op = "is_true" },
-             { trait = "want", subject = "npc", npc_id = "npc_sherrod", op = "gte", value = 34 } ]
+             { trait = "want", subject = "npc", npc_id = "npc_sherrod", op = "gte", value = 34 },
+             { flag = "sherrod_loop_played", subject = "player", op = "is_false" } ]
+ready_canvas = "hub_sherrod_office"
+
+[[quest_cards]]
+priority = 32
+npc_id   = "npc_sherrod"
+text     = "He collects, and he has stopped being careful about when. He says it the same flat way in front of whoever is at the counter, and nineteen years of not saying it is over."
+tip      = "The office, evenings, whenever he decides."
+when     = [ { flag = "met_sherrod", subject = "player", op = "is_true" },
+             { flag = "sherrod_loop_played", subject = "player", op = "is_true" } ]
 terminal = true
-goals    = [ { trait = "want", subject = "npc", npc_id = "npc_sherrod", op = "gte", value = 62, label = "Go up the outside stairs over the office — evenings" } ]
+terminal_text = "As far as this build goes"
 
 # ── TOBIN — blood, and the shortest ladder. ─────────────────────────────────
 [[quest_cards]]
@@ -441,8 +518,8 @@ npc_id   = "npc_tobin"
 text     = "Your brother. You got him the job and he took it, and he is the only person on this property who knew you before there was a title to say. He has not called you Mrs. Vance once."
 tip      = "He walks the back row last thing at night, on his own, checking the parked trucks."
 when     = [ { flag = "met_tobin", subject = "player", op = "is_true" },
-             { trait = "want", subject = "npc", npc_id = "npc_tobin", op = "lt", value = 30 } ]
-goals    = [ { trait = "want", subject = "npc", npc_id = "npc_tobin", op = "gte", value = 30, label = "Walk the back row with him — last thing at night" } ]
+             { trait = "want", subject = "npc", npc_id = "npc_tobin", op = "lt", value = 70 } ]
+goals    = [ { trait = "want", subject = "npc", npc_id = "npc_tobin", op = "gte", value = 70, label = "Walk the back row with him — last thing at night" } ]
 
 [[quest_cards]]
 priority = 31
@@ -450,28 +527,39 @@ npc_id   = "npc_tobin"
 text     = "He has started saying out loud what everybody else here is careful not to, and he is saying it to you when there is nobody in the row but the two of you."
 tip      = "The back row, after eleven. Let him finish the sentence."
 when     = [ { flag = "met_tobin", subject = "player", op = "is_true" },
-             { trait = "want", subject = "npc", npc_id = "npc_tobin", op = "gte", value = 30 } ]
-terminal = true
-goals    = [ { trait = "want", subject = "npc", npc_id = "npc_tobin", op = "gte", value = 70, label = "Let him finish it — the back row, after eleven" } ]
+             { trait = "want", subject = "npc", npc_id = "npc_tobin", op = "gte", value = 70 },
+             { flag = "tobin_loop_played", subject = "player", op = "is_false" } ]
+ready_canvas = "hub_tobin_row"
 
-# ── DORN — the clock. A two-card ladder that is mostly a promise. ───────────
+[[quest_cards]]
+priority = 32
+npc_id   = "npc_tobin"
+text     = "He still walks it on his own and he still does not need you out there. He is the only one on this property who uses your name while he does it, and he was always going to be."
+tip      = "The back row, after eleven, as often as you want it."
+when     = [ { flag = "met_tobin", subject = "player", op = "is_true" },
+             { flag = "tobin_loop_played", subject = "player", op = "is_true" } ]
+terminal = true
+terminal_text = "As far as this build goes"
+
+# ── DORN — the clock. Knowingly unbuilt; the wall is stated, not hidden. ────
 [[quest_cards]]
 priority = 30
 npc_id   = "npc_dorn"
 text     = "Fifty-four, and your husband. Three nights his truck is in the lot and four nights it is not, and there is nothing else in the week that decides anything."
 tip      = "He is in the kitchen Friday and Saturday nights and in your room after. Ask him what the paper actually says."
 when     = [ { flag = "opening_done", subject = "player", op = "is_true" },
-             { trait = "want", subject = "npc", npc_id = "npc_dorn", op = "lt", value = 55 } ]
+             { trait = "want", subject = "npc", npc_id = "npc_dorn", op = "lt", value = 12 } ]
 goals    = [ { trait = "want", subject = "npc", npc_id = "npc_dorn", op = "gte", value = 12, label = "Ask him what the three years actually mean — the kitchen, weekend nights" } ]
 
 [[quest_cards]]
 priority = 31
 npc_id   = "npc_dorn"
 text     = "He is on the road Monday to Thursday and he has never once asked what happens here while he is gone. Whether that is trust or arithmetic is the thing this game has not answered yet."
-tip      = "Nothing further in this build."
+tip      = "He is the week's shape, not a ladder. Nothing further in this build."
 when     = [ { flag = "opening_done", subject = "player", op = "is_true" },
-             { trait = "want", subject = "npc", npc_id = "npc_dorn", op = "gte", value = 55 } ]
+             { trait = "want", subject = "npc", npc_id = "npc_dorn", op = "gte", value = 12 } ]
 terminal = true
+terminal_text = "As far as this build goes"
 
 # ══════════════════════════════════════════════════════════════════
 # Phase: 1_metadata_and_locations.toml
@@ -2675,6 +2763,10 @@ effects = [
   { targetType = "npc", npcId = "npc_cade", trait = "want", op = "add", value = 4, cap = 100 },
   { targetType = "player", trait = "clean", op = "add", value = -25 },
 ]
+# The badge on this character's last quest card is gated on THIS flag, not on a
+# meter — "terminal" is not computed from progress (engine.md §23), so the ✓ has
+# to come from having PLAYED the loop.
+flagEffects = [ { targetType = "player", flag = "cade_loop_played", op = "set" } ]
 
 
 # ── ISAAC.  Single-act loop — the field's majority shape. He does not talk.
@@ -2781,6 +2873,10 @@ effects = [
   { targetType = "npc", npcId = "npc_isaac", trait = "want", op = "add", value = 4, cap = 100 },
   { targetType = "player", trait = "clean", op = "add", value = -30 },
 ]
+# The badge on this character's last quest card is gated on THIS flag, not on a
+# meter — "terminal" is not computed from progress (engine.md §23), so the ✓ has
+# to come from having PLAYED the loop.
+flagEffects = [ { targetType = "player", flag = "isaac_loop_played", op = "set" } ]
 
 
 # ── SHERROD.  Single-act. He opens crude and he says it in front of anybody.
@@ -2891,6 +2987,10 @@ effects = [
   { targetType = "npc", npcId = "npc_sherrod", trait = "want", op = "add", value = 4, cap = 100 },
   { targetType = "player", trait = "clean", op = "add", value = -20 },
 ]
+# The badge on this character's last quest card is gated on THIS flag, not on a
+# meter — "terminal" is not computed from progress (engine.md §23), so the ✓ has
+# to come from having PLAYED the loop.
+flagEffects = [ { targetType = "player", flag = "sherrod_loop_played", op = "set" } ]
 
 
 # ── BOOTH.  Single-act, and he is still calling her Mrs. Vance while he does it.
@@ -2996,6 +3096,10 @@ effects = [
   { targetType = "npc", npcId = "npc_booth", trait = "want", op = "add", value = 4, cap = 100 },
   { targetType = "player", trait = "clean", op = "add", value = -20 },
 ]
+# The badge on this character's last quest card is gated on THIS flag, not on a
+# meter — "terminal" is not computed from progress (engine.md §23), so the ✓ has
+# to come from having PLAYED the loop.
+flagEffects = [ { targetType = "player", flag = "booth_loop_played", op = "set" } ]
 
 
 # ── TOBIN.  Single-act, in a cab in the back row. Blood, and he uses her name.
@@ -3101,6 +3205,10 @@ effects = [
   { targetType = "npc", npcId = "npc_tobin", trait = "want", op = "add", value = 4, cap = 100 },
   { targetType = "player", trait = "clean", op = "add", value = -25 },
 ]
+# The badge on this character's last quest card is gated on THIS flag, not on a
+# meter — "terminal" is not computed from progress (engine.md §23), so the ✓ has
+# to come from having PLAYED the loop.
+flagEffects = [ { targetType = "player", flag = "tobin_loop_played", op = "set" } ]
 
 
 # ── SOLO.  The surface she initiates alone.
