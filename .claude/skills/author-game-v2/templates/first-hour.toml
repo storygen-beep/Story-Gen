@@ -22,11 +22,16 @@
 # A · THE OPENING — pick ONE of A1 / A2, delete the other
 # ─────────────────────────────────────────────────────────────────────────────
 #
-#   A1  COLD OPEN    60-300 words · names NOBODY · the cast arrives via section B
-#                    10 of 20 field openings do this. corpo-life 64 w, DoL 193.
+#   A1  COLD OPEN    names NOBODY · her situation and the pressure · the cast
+#                    arrives via section B.   corpo-life · the-company · DoL
 #
-#   A2  STAGED OPEN  700+ words · one person at a time, on screen and SPEAKING
-#                    ~229 words per named character. patriarch 2,619 w.
+#   A2  STAGED OPEN  one person at a time, on screen and SPEAKING, each stating
+#                    what they want.   friends-of-mine · patriarch · destroyer
+#
+#   The two shapes are separated by WHO IS NAMED, not by length. This block
+#   carried word counts (60-300 / 700+) until 2026-08-24; they came from a walk
+#   that could not read setter links or <a data-passage> anchors, and no rebuilt
+#   walker reproduces them. See the-first-hour.md F1.
 #
 #   There is no third option. The middle — a short opening carrying a long
 #   opening's cast — is what this file exists to stop.

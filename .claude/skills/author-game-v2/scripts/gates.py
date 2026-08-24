@@ -1773,8 +1773,10 @@ def lint_counterweight(game, state):
 #
 # ⚠️ IT WAS 18,043 WORDS FROM 25 GAMES UNTIL 2026-08-24. `college-daze` and
 # `free-cities` parsed to zero, so a quarter of the corpus by volume was reported as
-# vocabulary the genre does not use. Rebuilding on 27 added 1,976 words and dropped
-# none — the file is a UNION with the old list, never a replacement.
+# vocabulary the genre does not use. Rebuilding on 27 added 2,512 words — 18,043 to
+# 20,555, of which 1,976 came from those two games — and dropped none: the file is a
+# UNION with the old list, never a replacement. (This read "added 1,976" until
+# 2026-08-24, which was the sub-figure, not the delta. Count the file.)
 GENRE_WORDS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                 "genre_words.txt")
 _GENRE_WORDS_CACHE = None
@@ -1912,7 +1914,7 @@ def _player_visible_text(model, game):
 def own_words_report(text, declared_names=(), suppress=frozenset(), shown=20):
     """Words in a body of text that the genre does not use — a LIST, not a score.
 
-    Off Season scores 86.8 Flesch, easier than 24 of the 25 field games, and LO
+    Off Season scores 86.8 Flesch, easier than 26 of the 27 field games, and LO
     could not read it. Sentence length and syllable count both pass a game whose
     difficulty is REFERENTIAL: `immersion`, `airer`, `chandlery`, `forecourt` are
     short, common-looking words naming objects the reader must already own.
@@ -5175,10 +5177,17 @@ def run_gates(model, game, state=None):
     #      that node's exit, because the tag sits where the player decides and the charge
     #      sits where they leave.
     #
-    # Field basis: of 92,226 link labels across 25 shipped sandboxes, TWO name a clock
-    # time and both are explicit waits ("Wait until 21:00") — zero promise an hour as the
-    # outcome of an action. Even lust-for-life, which HAS an absolute-time primitive and
-    # calls it 270 times, labels those buttons "Back home" / "Leave" / "Go to the SPA".
+    # Field basis: of 84,009 action link labels across the 27 parseable sandboxes, 24 name
+    # a clock time and NONE of them is a repeatable action — 6 explicit waits or alarms
+    # ("Wait until 21:00"), 7 stated windows, 6 chapter markers in one linear game, 5
+    # narration fragments used as a label. Even lust-for-life, which HAS an absolute-time
+    # primitive and calls it 270 times, labels those buttons "Back home" / "Leave" /
+    # "Go to the SPA".
+    # ⚠️ THIS READ "2 in 92,226 across 25 sandboxes" UNTIL 2026-08-24. The 2026-08-24
+    # recheck re-measured it into `the-clock.md` C2 and did not update this comment, so
+    # the skill carried two numbers for one measurement for a day. Section K found it.
+    # The load-bearing zero — no label promises a clock time as the OUTCOME of a
+    # repeatable action — survived the re-measurement unchanged. `the-clock.md:403`.
     # All four v1 games here already pass, so this is a bar shipped work has cleared.
     _idx = _clk_node_index(game)
     lab_n, clk_bad, dur_n, dur_bad = 0, [], 0, []

@@ -46,7 +46,7 @@ session is wrong by the end of that session. Run `wc -l` if you need one.
   SKILL.md                             entry point, EXPLICIT-INVOKE ONLY
   scripts/gates.py                     the scoreboard — 42 gates + 17 lints
   scripts/genre_words.txt              the field's own vocabulary, for the word lint
-  references/engine.md                 36 verified engine facts, each with file:line
+  references/engine.md                 37 verified engine facts, each with file:line
   references/register.md               how the prose reads once they click
   references/the-surfaces.md           which screen each piece of content lives on
   references/the-meters.md             which meters exist and who owns them
@@ -60,7 +60,11 @@ session is wrong by the end of that session. Run `wc -l` if you need one.
   references/the-release.md            the unit of work
   references/agents.md                 the roster (described, NOT built)
   references/the-want.md               the spec re-read every release
-  templates/board.toml                 fillable, parses
+  templates/board.toml                 fillable. ⚠️ does NOT parse as-is — `<tier_1> = 0` is a
+                                       placeholder, not TOML. This line read "parses" until
+                                       2026-08-24; it was never true. Same for first-hour.toml's
+                                       `<…>` fields, which happen to sit in string values and so
+                                       do parse.
   templates/first-hour.toml       249   the opening shapes — a MENU, delete what you don't use
   templates/want.md               133   fillable
   DOCTRINE_GAPS.md             1,589   the studies, with their instruments and their errors
@@ -268,6 +272,8 @@ merged `7_final_game.toml`, and `gates.py` needs that file. The other seven (`ja
 | **`the_season`'s `known`** | Rises and repaints a quest card. **7 read sites in 111 passages**; zero in the locations, zero in the one-shots, and a median branch of 570 chars against the field's 84–139. Measured in `findings_H_known.md` §6. |
 | **`block_pool` in practice** | Now documented in four places and used by **zero** v2 games. Doctrine without a worked example is a suggestion. |
 | **Three engine facts** | Still on the do-not-cite list in `engine.md`. |
+| **`ne` in the importer** | `engine.md` §37. The runtime evaluates *"not equal"* (`v2.py:3848`, reached at `:3956`) and already renders it (`:1926`); the importer rejects it at `template_import.py:5414`, with a second whitelist at `:5227`. **Three whitelist entries, no runtime work** — and it is the negated form of the field's commonest gate. Not applied: an engine change is LO's call. |
+| **The study's instruments** | Four of them published numbers and were then discarded — F1's opening walker, F's act-gate driver, and three of the recheck's rebuilds. Two of those numbers are now permanently unrecoverable. `probe_K.py` is on disk with a `main`; the earlier ones are not, and nothing enforces that they should be. |
 | **Eight study sections** | See PART 7. |
 
 ## Promotion criteria — still NOT met
@@ -297,10 +303,10 @@ Eleven were scoped; LO picked three. **A (the want), C (the loop) and D (the wri
 | **H** | does the world know? | **DONE 2026-08-23** — `findings_H_known.md`. Reputation refuses almost nothing (14 of 644 field read sites, 2%); it is read constantly and swaps ~25-word lines. `the_season`'s `known` has **7 read sites in 111 passages** |
 | **I** | the body as a machine | **DONE 2026-08-24** — `findings_I_body.md`. The strongest evidence is negative: `degrees-of-lewdity` **built hygiene and switched it off** — 1,273 writes, one read site, a seven-band widget nothing calls, and `<<set $hygieneenabled to 0>> /* unused */` in its own initialiser. Corpus-wide the body gates a median **10%** of its reads (H's reputation: 2%), and a system either stays small and gates or grows large and colours. Ours: **102 garments across 10 games, 47 reads**, and four wardrobes read zero times |
 | **J** | what players say | **DONE 2026-08-23** — `findings_J_players.md`. ⚠️ This row previously read *"untouched"* and **that was wrong**: the 2026-07-24 mopoga study already read 22,622 comments across 31 games and published F1–F10 from them. J was narrowed to testing *this week's* doctrine against 3,479 comments on the four study games |
-| **K** | the mirror | **untouched, and now the only one left** — it is the synthesis, not a section. **The deferred headline recheck landed 2026-08-24** and is no longer a blocker (`findings_RECHECK.md`). Two inputs remain: **the 48% of act-gate conditions section F could not name** — each game's invented vocabulary, and classifying it by *shape* rather than domain, the move section B used to take its own residue from 71% to 0.4%, would probably name most of it — and **`the-first-hour.md` F1's unverified 300-to-700-word gap**, which the recheck opened and could not close because F1's walker is not on disk |
+| **K** | the mirror | **DONE 2026-08-24** — `findings_K_mirror.md`. The synthesis, and the first section to point the study's own instrument at **us**. Every condition in the 26-game field against every condition in our 21 scorable games, one classifier, one denominator: the field gates on **equality 53% / threshold 31% / boolean 9%**, we gate on **threshold 56% / boolean 37% / equality 4.5%**. **The field's most common way to gate anything is our rarest.** Its equality is a **stage counter** — one variable that counts — at 24.8% of all its conditions in **26 of 26 games**; ours is 0.7% in 6 of 21. ⚠️ And our **v1** games do it the field's way (`vesper` 10%, `the_long_summer_test` 11%) while our **v2** games do not (0–2%) — **the second doctrine lost in the v1 → v2 divorce, lost exactly the way `block_pool` was.** Shipped as `the-surfaces.md` R5d, `SKILL.md`'s fifth commitment, `engine.md` §37. **No gate, no lint** |
 
-**Ten are done: A, B, C, D, E, F, G, H, I and J.** (This line read *"Four are done"* over a list of six
-until 2026-08-24.) The J-then-H recommendation that used to sit here is deleted — it was written
+**All eleven are done: A, B, C, D, E, F, G, H, I, J and K.** (This line read *"Four are done"* over a
+list of six until 2026-08-24, and *"Ten are done"* until K landed the same day.) The J-then-H recommendation that used to sit here is deleted — it was written
 before either ran, both are finished, and the order ended up reversed because checking the data
 first showed J was largely a re-run.
 
@@ -308,8 +314,15 @@ first showed J was largely a re-run.
 the section's question in a player's words, and it was the only complaint about `the_season` that
 came from a human rather than a gate.
 
-**Left: K alone — the synthesis, and it must be last.** Every section that feeds it is now done,
-**and the deferred recheck has landed** (2026-08-24).
+**Nothing is left. The study is closed.** K landed 2026-08-24 on top of the recheck, and both of the
+inputs its row used to name are answered: section F's unnamed 48% collapsed to a **0.4% residue** once
+classified by shape, and `the-first-hour.md` F1's 300-to-700-word band was **deleted** rather than
+re-derived, because three rebuilt walkers disagree with the published table and with each other.
+
+⚠️ **What the study did NOT produce, and it is the question that started it.** PART 3 step 7 asked how
+we measure a *good* game. Eleven sections later the answer is still **we do not** — every one of them
+measured what the field *does*, and the two things that ever moved this skill's quality both came from
+LO playing a game. K adds a frame, not a score.
 
 ### ✅ The recheck is done — `findings_RECHECK.md`
 
@@ -340,7 +353,7 @@ because the passage leaves through `<a data-passage>`. It is an eleven-passage, 
 open, and it has been moved. **Eight of twenty-five opening walks move once the extractor can see
 setter links and raw anchors.** So the two named shapes are sound but **the 300-to-700-word gap
 between them is unverified**, and it is not silently repaired because F1's own walker is not on
-disk. K should treat the gap as an open question, not a measurement.
+disk. **K closed this by deleting the band** — see the K block below.
 
 ⚠️ **Sections B, E, F and I needed no recheck** — they ran after the fixes, and their own text proves
 it (W6 already names `college-daze` and `free-cities`; F4b already counts fourteen openings including
@@ -359,6 +372,37 @@ gate constant; each is a prose figure whose instrument was not recoverable in th
 - `the-surfaces.md`'s room-verb table itself — the shipped keyword lists are not recorded, so it
   could not be reproduced. Re-run with equivalent lists, **every category's game count rises on 27
   and the ordering is unchanged**, so the table's conclusion holds even though its cells are stale.
+- **added by K 2026-08-24** — `the-meters.md` W5's counterweight census (*"one game in 25"*), and its
+  copy in `templates/board.toml:88`. Never on the recheck's list, and stale on both sides equally, so
+  it is a residue rather than a contradiction.
+- **added by K 2026-08-24** — the `gates.py` comments that carry the same 25-game bases as the two
+  reference lines above: `:2702` and `:2707` (the clock instrument, with `the-clock.md:142`) and
+  `:3100` and `:3157` (the currency census, with `the-economy.md:195`). **List the twin, always.**
+  Three of K's four contradictions exist because a number was updated on one side only.
+
+### ✅ K closed the recheck's open item, and found five numbers arguing with themselves
+
+Every number the recheck moved was swept for a second copy that did not move with it. **Five sites
+were carrying a superseded figure while its twin carried the new one:**
+
+| the stale copy | the live one |
+|---|---|
+| `gates.py:1917` *"easier than 24 of the 25 field games"* | `register.md:544` *"easier than 26 of the 27"* |
+| `gates.py:5180` *"2 in 92,226 across 25 sandboxes"* | `the-clock.md:403` *"24 in 84,009"* — which names the old figure explicitly |
+| `templates/board.toml:80` *"14 of 25 field games have none"* | `the-board.md:243` *"15 have no player ascent tier"* of 27 |
+| `SKILL.md:215` *"fewer than four of the 25 field games"* | `gates.py:1769` and `genre_words.txt`, both rebuilt on 27 |
+| `genre_words.txt:11`, `gates.py:1776`, `register.md:640` — *"rebuilding on 27 ADDED 1,976 words"* | the file's own line count: 18,043 → 20,555 is **+2,512**. 1,976 is the sub-figure from the two newly-readable games, quoted as the total |
+
+All five are fixed and each records what it used to say. **`templates/` was never swept at all by the
+recheck**, which is how the third one survived; it is swept now. The fifth is arithmetic — it was
+checkable against the file the whole time, and nobody counted the file.
+
+**The rule this adds, and it is cheap: when a number moves, grep the number, not the file.** Three of
+the five exist because one side of a pair was edited and the other was not.
+
+⚠️ **And the inventory in PART 2 was wrong about `templates/board.toml`.** It said *"fillable,
+parses"*. It does not parse and never did — `<tier_1> = 0` is a placeholder, not TOML — and the claim
+predates the recheck entirely. Corrected above.
 
 ## B · The other work, unchanged in priority
 

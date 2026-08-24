@@ -36,6 +36,45 @@ Every one is a measured number, not an opinion. The evidence lives inline in
    +24,388 words, **zero** new locations, and all ten of its content commits were events at
    an existing place with an existing character. 55.6% of its commits were fixes.
 
+## The fifth commitment — the machinery colours far more than it locks
+
+Added 2026-08-24, and it is the one thing eleven field-study sections agree on without any of
+them saying it. Each measured a different subsystem and each came back with the same answer:
+
+```
+reputation refuses                 2%  of 644 read sites                  the-meters.md W5b
+the body refuses          median  10%  of its reads                       the-meters.md W7
+her willingness gates              6%  of act links                       the-meters.md W6
+act links with no gate at all     47%  of 7,598                           the-surfaces.md R3b
+refusals that render nothing      71%  of 16,167                          the-surfaces.md R5c
+conditionals around an action     35%  select a variant · 23% refuse      the-surfaces.md R5
+```
+
+**A meter's main job in this genre is to select text, not to bar a door.** Reputation does not stop
+her walking into the bar — it changes what the barman says. The body does not lock the room — it
+changes the sentence. The lock is the exception, and it is the *cheap* half: it costs one condition
+and buys one refusal, where the same meter read as a colour buys a different line on every visit
+forever.
+
+⚠️ **Ours have been built the other way round, and it is measurable.** Every condition in our
+21 scorable games, against every condition in the 26-game field, on one instrument
+(`findings_K_mirror.md` §2):
+
+| | field | ours |
+|---|---|---|
+| **equality** — which step are you on | **53%** | **4.5%** |
+| **threshold** — is your number big enough | 31% | **56%** |
+| boolean — is this switch on | 9% | **37%** |
+
+Threshold and boolean are both locks. Two things already known separately fall straight out of it:
+**gate 42 exists** because our locked doors are mute, and **`block_pool` — the primitive for writing
+many versions of one line — is documented in four places and used by zero v2 games.**
+
+**What to do with it.** Before adding a condition, ask which of the two it is. If the answer is
+*"it stops her"*, ask what the other branch says, because the field would usually have written one
+(`the-surfaces.md` R5 and R5d, `the-meters.md` W5b). **This is a frame, not a quota** — no section
+measured a defensible ratio and nothing here is gated.
+
 ## The three kinds of content
 
 Named from what those release commits actually do, so the vocabulary owes nothing to
@@ -173,7 +212,7 @@ the browse share · screen shape · the prose names places the map does not have
 (where a scene starts and stops on it) · **talk screens** · **the act menu** · **the meter ladder**
 (rungs per tier, and where the lowest one sits) · **the cast's meters** · **the counterweight** ·
 **the words the player has to already own** (every word in the player's face that fewer than four
-of the 25 field games use — **prose, choice labels AND location names**, because a word the player
+of the 27 field games use — **prose, choice labels AND location names**, because a word the player
 cannot decode is undecodable on a button too; a list to read, never a score) · **dispatch depth** (how many different
 things one activity can turn into, and how often the activity itself still renders) ·
 **the act nodes** (body words on the thinnest band each act and finish node can render) ·
