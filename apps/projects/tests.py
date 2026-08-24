@@ -6778,3 +6778,166 @@ class TraitStatusTextRenderTemplateTests(SimpleTestCase):
             self.assertIn(".trait-status-text-item", src)
             # Distinct visual from .trait-decay-warning-item — cool blue tint.
             self.assertIn("rgba(99, 179, 237", src)
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  2026-08-24 — `ne` on a trait condition
+#
+#  "Not equal" is the negated form of an equality against a stage counter —
+#  "she is NOT at stage 3" — which is the single most common gate shape in the
+#  field (.claude/skills/author-game-v2/references/the-surfaces.md R5d).
+#
+#  ⚠️ THERE ARE THREE CONDITION EVALUATORS IN THIS ENGINE AND THEY DO NOT AGREE
+#  BY DEFAULT. Anything added to one has to be checked against the other two:
+#
+#    compare()                     v2.py:3848   canvas / node / choice
+#    setup.checkSingleCondition    v2.py:7513   hints, _findFlagSetterCanvas
+#    setup.checkQuestsCondition                 [[quest_cards]] when / goals
+#
+#  Canvas condition operators are NOT validated by the importer at all — an
+#  unknown one imports clean and fails closed at runtime with no build error —
+#  so `ne` was always writable on a canvas and worked through compare(). What
+#  did NOT work was the same item read through checkSingleCondition, which fell
+#  through to `return false`. That is the fix under test here.
+#
+#  Quest cards are the opposite: their operator IS whitelisted, and their
+#  evaluator has no `ne` case, so `ne` stays rejected there ON PURPOSE. The
+#  last test locks that asymmetry in place so nobody "fixes" it by widening the
+#  whitelist alone.
+# ═══════════════════════════════════════════════════════════════════════════
+
+
+def _toml_with_trait_condition(operator, trait_key="awareness", value=2):
+    """Minimal TOML: one location, one canvas, one node, one gated choice.
+
+    The canvas carries a `trigger.location` and the choice returns through it —
+    a bare targetType='trigger' with no resolving location fails validation on a
+    different rule and would mask the operator error this fixture exists to test.
+    """
+    d = _base_toml()
+    d["project"]["starting_canvas"] = "test_canvas"
+    d["locations"] = [
+        {"id": "loc_test", "name": "Test Location", "description": "test"}
+    ]
+    d["canvases"] = [
+        {
+            "id": "test_canvas",
+            "name": "Test Canvas",
+            "description": "x",
+            "trigger": {
+                "location": "loc_test",
+                "is_repeatable": True,
+                "priority": 5,
+                "is_active": True,
+            },
+            "nodes": [
+                {
+                    "id": "n1",
+                    "name": "Node 1",
+                    "blocks": [{"type": "paragraph", "content": "x"}],
+                    "exit_block": {
+                        "type": "choices",
+                        "choices": [
+                            {
+                                "text": "Continue",
+                                "targetType": "location",
+                                "locationId": "loc_test",
+                                "conditions": {
+                                    "version": "1.0",
+                                    "logic": "AND",
+                                    "items": [
+                                        {
+                                            "type": "trait",
+                                            "subject": "player",
+                                            "trait_key": trait_key,
+                                            "operator": operator,
+                                            "value": value,
+                                        }
+                                    ],
+                                },
+                            }
+                        ],
+                    },
+                }
+            ],
+        }
+    ]
+    return d
+
+
+class TraitConditionNeSchemaTests(SimpleTestCase):
+    def test_ne_on_a_canvas_condition_validates_clean(self):
+        template = normalize(_toml_with_trait_condition("ne"))
+        self.assertEqual(validate(template), [])
+
+    def test_every_numeric_operator_validates(self):
+        for op in ("gte", "lte", "gt", "lt", "eq", "ne"):
+            with self.subTest(operator=op):
+                template = normalize(_toml_with_trait_condition(op))
+                self.assertEqual(validate(template), [], f"{op} should validate")
+
+    def test_canvas_condition_operators_are_not_whitelisted_at_all(self):
+        # Documents the real behaviour rather than asserting a rule that does
+        # not exist: a canvas condition carries any operator string through
+        # import, and an unknown one fails CLOSED at runtime with no build
+        # error. If a whitelist is ever added here, this test is the place the
+        # decision gets recorded.
+        template = normalize(_toml_with_trait_condition("nope"))
+        self.assertEqual(validate(template), [])
+
+    def test_quest_card_still_rejects_ne(self):
+        # DELIBERATE ASYMMETRY. setup.checkQuestsCondition has no `ne` case and
+        # falls through to `return false`, so allowing it here would ship a
+        # condition that is silently always false.
+        data = _minimal_v2_toml()
+        data["quest_cards"] = [{
+            "text": "Looking at him.",
+            "when": [{"trait": "corruption", "subject": "player",
+                      "op": "ne", "value": 3, "label": "Maya corruption"}],
+        }]
+        template = normalize(data)
+        errors = validate(template)
+        self.assertTrue(
+            any("gte/lte/gt/lt/eq" in e and "ne" in e for e in errors),
+            f"Quest card should reject op='ne', got: {errors}",
+        )
+
+
+class TraitConditionNeIntegrationTests(TestCase):
+    """TOML → DB → v2 generator → Twee, for `ne` and for BOTH evaluators."""
+
+    @classmethod
+    def setUpTestData(cls):
+        User = get_user_model()
+        cls.user = User.objects.create_user(
+            email="trait-ne-test@example.com", password="testpass123"
+        )
+
+    def _build(self, operator):
+        template = normalize(_toml_with_trait_condition(operator))
+        self.assertEqual(validate(template), [])
+        result = create_project_from_template(template, str(self.user.id))
+        project = Project.objects.get(id=result["project_id"])
+        from apps.game_generation.twee_comprehensive.generators.v2 import (
+            TweeComprehensiveGeneratorV2,
+        )
+
+        return TweeComprehensiveGeneratorV2().generate(project)
+
+    def test_ne_survives_into_the_runtime_json(self):
+        twee = self._build("ne")
+        self.assertIn('"operator": "ne"', twee)
+        self.assertIn('"trait_key": "awareness"', twee)
+
+    def test_both_evaluators_handle_ne(self):
+        twee = self._build("ne")
+        # compare() — the canvas/node/choice path.
+        self.assertIn("if (op === 'ne') return left !== right;", twee)
+        # checkSingleCondition — hints, quest cards, _findFlagSetterCanvas.
+        self.assertIn("if (op === 'ne') return leftVal !== rightVal;", twee)
+
+    def test_requirement_label_renders_a_not_equal_sign(self):
+        # An unknown operator used to fall back to "≥", so a `ne` gate told the
+        # player the opposite of the truth.
+        twee = self._build("ne")
+        self.assertIn('item.operator === "ne" ? "≠"', twee)

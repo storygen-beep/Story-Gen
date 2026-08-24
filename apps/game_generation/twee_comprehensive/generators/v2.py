@@ -7515,6 +7515,13 @@ setup.checkSingleCondition = function(item) {{
         if (op === 'lte') return Number(leftVal) <= Number(rightVal);
         if (op === 'lt') return Number(leftVal) < Number(rightVal);
         if (op === 'eq') return leftVal === rightVal;
+        // `ne` added 2026-08-24. THIS IS THE SECOND EVALUATOR. compare() at the top
+        // of this file has handled `ne` since v2 shipped, and the canvas/node/choice
+        // path goes through that one -- but hints, quest cards and
+        // _findFlagSetterCanvas all read the SAME condition item through here, and
+        // without this line the identical item evaluated true on a canvas and false
+        // in a quest card. Any operator added to compare() has to be added here too.
+        if (op === 'ne') return leftVal !== rightVal;
         return false;
     }}
 
@@ -7744,7 +7751,8 @@ setup.formatCanvasConditions = function(conditions) {{
                      item.operator === "gt" ? ">" :
                      item.operator === "lte" ? "≤" :
                      item.operator === "lt" ? "<" :
-                     item.operator === "eq" ? "=" : "≥";
+                     item.operator === "eq" ? "=" :
+                     item.operator === "ne" ? "≠" : "≥";
 
             // Look up NPC display name via slug map, fall back to raw ID
             var displayNpc = "Your";
