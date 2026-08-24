@@ -637,7 +637,7 @@ borrowed one cannot.**
 word in the player's face that fewer than four of the 27 field games use, ranked by how often you
 used it, measured against `scripts/genre_words.txt` — 20,555 words of the field's own vocabulary,
 data rather than taste. (18,043 on 25 games until the 2026-08-24 recheck; rebuilding on 27 added
-1,976 words the genre uses that the list was reporting as words it does not.) **It is deliberately not a gate**, and the reason is worth stating because
+2,512 words, 1,976 of them from the two games that had been parsing to zero.) **It is deliberately not a gate**, and the reason is worth stating because
 it looks like a contradiction.
 
 The curated list at the top of this section separates our games from the field cleanly — 0.8

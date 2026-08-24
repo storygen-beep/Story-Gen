@@ -5,6 +5,164 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-24 — Section K, the mirror: the field's most common gate is our rarest, and five numbers in this skill were arguing with themselves
+
+**Why.** Ten study sections measured the field and asked what the skill teaches. **None of them
+measured us on the same instrument** — each says so in its own closing list; section F's is typical:
+*"Nothing measured about our own games."* K is the last section and it is the synthesis, so it has
+the one job the others could not do: run one instrument over both sides with one denominator, and
+then say what eleven sections add up to. Evidence:
+`~/Documents/Female_PC_Craft_Study_20260823/findings_K_mirror.md`, instrument `probe_K.py` in the
+same directory. **`probe_K.py` has a `main` with five sub-commands and every number below comes out
+of one of them** — deliberately, because K's own process finding is that four instruments in this
+study published numbers and were then thrown away.
+
+**Method — reproduce before re-measuring, again.** Section F's act-gate census is K1's input and
+**F's driver is not on disk** (`probe_arc.py` is a library; its caller was inline). Rebuilt, it
+lands **2,306 act menus against F's published 2,292** (0.6%), median width **2** and median span
+**1** exactly, and the maximum **not at all** (84 against 54). So K1's shape shares ship as a new
+census and never as a correction to F's table. ⚠️ The dedupe convention turned out to be load-bearing
+and F never recorded it: counting every label occurrence gives 2,516 menus and a maximum of 372.
+
+### What was measured
+
+**K1 · Section F's 48% residue, closed.** F classified act-gate conditions by *domain* — what the
+variable is about — and left **48%** unnamed, because every game invents its own names. Classified
+by **shape** instead, which is the move section B used, across **3,346 act-gating conditions in 24
+games**: equality 48% · threshold 38% · function 13% · boolean 8% · random 2%, **residue 0.4%**.
+
+The finding is the agreement with B. Measured over 16,167 *refusing* chains the split was 45 / 40 /
+17 / 7 / 1; over 3,346 *escalation* gates it is 48 / 38 / 13 / 8 / 2. **Two populations, two
+questions, five days apart, one distribution.** The flag-chain model and the meter model are both
+load-bearing, together, at both doors.
+
+**K2 · The mirror.** Every condition in the 26-game field (155,765) against every condition in our
+21 scorable games (3,028), one classifier, one denominator:
+
+| shape | field | ours |
+|---|---|---|
+| **equality** — which step are you on | **52.9%** | **4.5%** |
+| **threshold** — is your number big enough | 30.7% | **56.1%** |
+| function | 12.5% | 2.3% |
+| **boolean** — is this switch on | 8.9% | **37.1%** |
+| random | 4.1% | 0% |
+
+**The field's most common way to gate anything is our rarest.** Its equality is mostly a **stage
+counter** — one variable that counts — at **24.8% of all its conditions, in 26 of 26 games**. Ours
+is **0.7%, in 6 of 21**, and those sites are `npc_jake_stage`, `loop_stage`, `wade_loop_stage` and
+their kin: the field's own pattern, used once each.
+
+⚠️ **The `random` row is an encoding difference and is labelled as one.** The field rolls dice
+inside a condition; our engine rolls them in `trigger_mode`, a canvas `chance`, and `block_pool`.
+Reading our 0% as a finding would be reading the schema.
+
+⚠️ **Our v1 games do this the field's way and our v2 games do not** — `vesper` 10% equality,
+`the_long_summer_test` 11%, `last_call` 7%, against `back_home` 0%, `off_season` 1%, `the_season`
+2%. The TLS notes carry the rule in a line: *"sex-loop = numeric-enum state NOT flags."* **Second
+doctrine lost in the v1 → v2 divorce, and lost exactly the way `block_pool` was** — v1's corpus
+taught it, the corpus was discarded for teaching false engine facts, and nothing audited the half
+that was true.
+
+**K3 · `ne` runs in the engine and the importer will not let you write it.** The negated form of the
+field's commonest gate is ordinary in the corpus (`$robinromance isnot 1`). Our runtime implements
+it — `compare()` at `v2.py:3848`, reached by trait conditions at `v2.py:3956`, and already rendered
+at `v2.py:1926` as *"label not N"*. The importer rejects it at `template_import.py:5414`, with a
+second whitelist at `:5227` and an `op_map` at `:5969` that has no `!=`. **Three whitelist entries
+and no runtime work.** Not applied — an engine change is LO's call, not a study section's.
+
+**K3b · `the-first-hour.md` F1's opening band, deleted rather than re-derived.** The recheck opened
+it; K could not close it. Three rebuilt walkers — stop-at-first-branch, greedy first link, and
+breadth-first to depth three — each land on two or three of F1's six published openings and miss the
+rest by four to seven times (`corpo-life` published 64, walkers return 26 / 1,586 / 3,026), **and
+they disagree with each other.** The original walker is not on disk. So the word ranges are gone,
+along with the two other figures from the same walk — *"ten of twenty openings name nobody"* and
+*"~229 words per named character"*, the cast figure going because `destroyer` alone moves from
+naming nobody to naming four. **The rule loses nothing**: it was always a consistency rule between
+cast load and word budget, and the axis separating the two shapes is the cast, which a reader can
+check by opening the first passage.
+
+### What changed on disk
+
+| file | change |
+|---|---|
+| `references/the-surfaces.md` | **R5d · a gate asks one of two questions** — new rule, K1's shape table, the stage-counter finding, the v1/v2 split, and the cost of the flag pile (the arc is not a value you can print). Plus a paragraph in "What is checked" saying why it is not gated |
+| `SKILL.md` | **the fifth commitment — the machinery colours far more than it locks** — the synthesis, with the six field numbers behind it and K2's table |
+| `references/engine.md` | **§37 · `ne`** — the runtime/importer mismatch, cited both ways, on the do-not-author list until the importer changes. Notes the same mismatch in miniature on flags (`exists`) |
+| `references/the-first-hour.md` | F1 rewritten — table loses its `words` column, gains a block recording what was deleted and why, three-walker evidence inline. Cheat sheet line updated |
+| `templates/first-hour.toml` | the A1/A2 menu loses `60-300` / `700+` and says the shapes are separated by who is named |
+| `scripts/gates.py` · `scripts/genre_words.txt` · `references/register.md` · `templates/board.toml` | the five contradictions below |
+| `STATUS.md` | K row → DONE; *"Ten are done"* → all eleven; the study declared closed; the recheck's residue list extended with the `gates.py` twins K found; a new block recording the four contradictions; PART 2's `board.toml` line corrected |
+
+### ⚠️ Five numbers in this skill were arguing with themselves, and three were mine
+
+Every figure the recheck moved was swept for a second copy that did not move with it.
+
+| the stale copy | the live one |
+|---|---|
+| `gates.py:1917` *"easier than 24 of the 25 field games"* | `register.md:544` *"easier than 26 of the 27"* |
+| `gates.py:5180` *"2 in 92,226 across 25 sandboxes"* | `the-clock.md:403` *"24 in 84,009"* — which names the old figure explicitly |
+| `templates/board.toml:80` *"14 of 25 field games have none"* | `the-board.md:243` *"15 have no player ascent tier"* of 27 |
+| `SKILL.md:215` *"fewer than four of the 25 field games"* | `gates.py:1769` and `genre_words.txt`, both rebuilt on 27 |
+| `genre_words.txt:11`, `gates.py:1776`, `register.md:640` — *"rebuilding on 27 ADDED 1,976 words"* | the file's own line count: 18,043 → 20,555 is **+2,512**. 1,976 is the sub-figure from the two newly-readable games, quoted as the total |
+
+The first three were introduced by the recheck the previous day: it updated the reference file and
+missed the comment sitting beside the same number. **`templates/` was never swept by the recheck at
+all**, which is how the third survived. The fifth is arithmetic and was checkable against the file
+the whole time.
+
+⚠️ **And PART 2's inventory claimed `templates/board.toml` "parses". It does not, and never did** —
+`<tier_1> = 0` is a placeholder, not TOML, and it fails at HEAD too. That claim predates the recheck.
+
+**The rule this adds, and it is cheap: when a number moves, grep the number, not the file.** Three of
+the five exist because one side of a pair was edited.
+
+### What K deliberately did NOT ship
+
+- **No gate and no lint.** A colour-versus-lock lint was scoped, pitched, and cut on evidence: B's
+  35% is measured over *conditionals wrapped around an action*, a strict subset, and our block-level
+  prose conditions are not wrapped around actions at all. Building a comparator across two different
+  populations would mean choosing the definition after seeing which way it points — the exact fault
+  section F caught in itself (`findings_F_further.md` §0.5). **The distinct-gate union stays at 42.**
+- **No engine change.** §37 is documented, not applied.
+- **No claim that a stage counter is better than a flag pile.** It is what the field does; R5d names
+  the one concrete cost of our version and stops there.
+- **No claim that we gate too much.** No section measured a defensible ceiling and K adds none.
+- **Nothing in `games/`.** `issue.md` and `games/vesper/.find-media/*` belong to a concurrent
+  session and were not staged.
+
+### The synthesis, which is what K was for
+
+None of the eleven sections said this and all of them measured it:
+
+```
+reputation refuses                 2%  of 644 read sites                  H
+the body refuses          median  10%  of its reads                       I
+her willingness gates              6%  of act links                       F
+act links with no gate at all     47%  of 7,598                           F
+refusals that render nothing      71%  of 16,167                          B
+conditionals around an action     35%  select a variant · 23% refuse      B
+```
+
+**The field's systems colour far more than they lock.** Reputation does not stop her entering the
+bar; it changes what the barman says. Ours are the inverse — 56% threshold, 37% boolean, both
+locks — and two things already known separately fall straight out of it: **gate 42 exists** because
+our locked doors are mute, and **`block_pool` is documented in four places and used by zero v2
+games**, because our doctrine has been building access control rather than variation.
+
+⚠️ **What eleven sections did not produce.** PART 3 step 7 asked how we measure a *good* game. The
+answer is still **we do not.** Every section measured what the field *does*; the two things that
+ever moved this skill's quality both came from LO playing a game for an hour. K adds a frame, not a
+score.
+
+**Verified.** Fresh baseline over all 21 scorable games captured before any edit, re-run after:
+**byte-identical**, 328 PASS / 223 FAIL / 337 n/a, and the distinct-gate union confirmed at **42**.
+K touches only comments in `gates.py`, so any diff at all would have been a defect. `probe_K.py`
+re-run end to end: 2,306 menus · 3,346 act gates · 155,765 field conditions · 3,028 of ours ·
+the three-walker table. `templates/first-hour.toml` still parses; `templates/board.toml` still does
+not, as it never did.
+
+---
+
 ## 2026-08-24 — The end-of-study recheck: one constant moves, one shipped figure was never reproducible, and F1's opening table stood on truncated walks
 
 **Why.** Every field number in this skill was measured on **25** of the mopoga corpus's 28 files.

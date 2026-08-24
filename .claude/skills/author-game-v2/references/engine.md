@@ -1893,3 +1893,55 @@ Four rules the field follows, all of them cheap:
 ### Where the rule lives
 
 `the-surfaces.md` R5b (the decline branch is written at full length and pays).
+
+---
+
+## 37. `ne` runs in the engine and the importer will not let you write it
+
+Added 2026-08-24 from section K. **This is a gap, not a primitive** — it is here so nobody
+re-discovers it, and so the one-line fix is on record.
+
+The field's most common way to gate anything is an **equality** — *"are you at exactly this step"* —
+at 53% of all its conditions (`the-surfaces.md` R5d). Its negated form is ordinary in the corpus:
+
+```
+<<if $robinromance isnot 1>>        degrees-of-lewdity
+<<if $thomas != 0>>                 friends-of-mine
+```
+
+**Our runtime implements it.** Trait conditions are evaluated by `compare()`:
+
+| | |
+|---|---|
+| `v2.py:3956` | a `type = "trait"` item calls `compare(top, leftVal, rightVal)` |
+| `v2.py:3848` | `compare()` — `if (op === 'ne') return left !== right;` |
+| `v2.py:1916` | the locked-reason path evaluates `ne` as well |
+| `v2.py:1926` | and already renders it — `phrase = label + ' not ' + want` |
+
+**And the importer rejects it before it ever gets there:**
+
+| | |
+|---|---|
+| `template_import.py:5414` | `if item.op not in ("gte", "lte", "gt", "lt", "eq"): errors.append(...)` |
+| `template_import.py:5227` | a second whitelist, `{"eq", "gte", "lte", "gt", "lt", "is_true", "is_false"}` |
+| `template_import.py:5969` | `op_map` translates `>= <= > < == =` and has no `!=` |
+
+So `operator = "ne"` is a **build error**, and there is no way to write *"she is NOT at stage 3"*
+except by inverting the surrounding structure — a second `[group]` branch, or an `is_false` flag
+mirroring the state you already have in a trait.
+
+⚠️ **Do not author `ne` today.** It fails the build. This section exists to record that the fix is
+three whitelist entries and no runtime work, not to license the field.
+
+⚠️ **The flag side does not need `ne` — but it has the same mismatch in miniature.** `type = "flag"`
+negates with `is_false`, so nothing is missing there. But the runtime accepts a **third** flag
+operator the importer also refuses: `exists` (`v2.py:1937`, `fsat = hasOwnProperty(flags, fkey)`)
+against `template_import.py:5399`, which allows only `is_true` / `is_false`. Note the difference
+between them — `is_false` is TRUE for a flag that was never set (`v2.py:1936`,
+`v === false || v === undefined`), so *"never set"* and *"set and then cleared"* are the same test
+today. **The gap that matters for an arc is the numeric one**, which is exactly where a stage counter
+lives.
+
+### Where the rule lives
+
+`the-surfaces.md` R5d (a gate asks one of two questions).

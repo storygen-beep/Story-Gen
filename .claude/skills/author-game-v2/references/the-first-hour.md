@@ -43,27 +43,24 @@ Engine claims here carry a `file:line` into
 
 ## F1 · The opening picks one shape and commits
 
-The field runs **two** opening shapes and nothing in between. Measured across 25 shipped sandboxes
-(`~/Documents/Mopoga_Twine_Sandbox_Research_20260724/gamehtml/`), walking each game from its
-`startnode` down the navigation spine:
+The field runs **two** opening shapes, and they are separated by **who is named**, not by how long
+they run.
 
-| shape | words | cast | examples |
-|---|---|---|---|
-| **cold open** | 60–300 | **nobody** | corpo-life 64 · the-company 126 · degrees-of-lewdity 193 |
-| **staged open** | 700–2,600 | one at a time, each on screen and speaking | friends-of-mine 1,377 · new-life-project 1,558 · patriarch 2,619 · **destroyer ~3,300** |
+| shape | cast | examples |
+|---|---|---|
+| **cold open** | **nobody** — her situation and the pressure, and no people at all | corpo-life · the-company · degrees-of-lewdity |
+| **staged open** | one person at a time, each on screen and **speaking** | friends-of-mine · new-life-project · patriarch · destroyer |
 
-> ### ⚠️ The walk this table stands on could not see two navigation forms
+> ### ⚠️ This table published word counts until 2026-08-24. Section K deleted them.
 >
-> **`destroyer` was listed here as a 285-word cold open until 2026-08-24. It is not one.** Those
-> 285 words are its legal disclaimer — *"I am not the owner of any of the media or pictures used in
-> this game…"* — and the walk stopped there because that passage leaves through
-> `<a data-passage="intro1">`, which the extractor did not read. Walked properly it runs **eleven
-> passages and roughly 3,300 words** and names the **father**, the **grandfather** (who speaks, at
-> length), the **stepmother** and the school bullies. By this table's own definition that is a
-> staged open.
+> It read *"cold open 60–300 words · staged open 700–2,600"*, with the empty band between them
+> offered as a finding, and it carried two more figures from the same source — *"ten of twenty
+> openings name nobody"* and *"~229 words per named character."* **None of them is re-derivable, and
+> now none of them ever will be.**
 >
-> The same extractor also dropped setter links `[[label|Target][$x += 1]]`. Comparing the two
-> across all 25 games, **eight openings move and seventeen do not**:
+> What happened, in order. The 2026-08-24 recheck found that the extractor behind the original walk
+> could not see setter links `[[label|Target][$x += 1]]` or raw `<a data-passage>` anchors, so
+> **eight of the twenty-five opening walks move** once it can:
 >
 > ```
 > growup                26w  ->  8,132w        realm-of-corruption    7w -> 2,099w
@@ -72,24 +69,34 @@ The field runs **two** opening shapes and nothing in between. Measured across 25
 > inseminator          305w  ->    582w        zaras-school-life   1,173w -> 1,482w
 > ```
 >
-> **So the two named shapes are sound and the EMPTY BAND BETWEEN THEM IS NOT YET RE-VERIFIED.**
-> The 300-to-700 gap may be real or may be an artifact of walks that stopped early. Re-measuring it
-> needs this section's own walker, which is not on disk — the numbers above come from a plain
-> greedy first-link walk, which returns 531 words for `destroyer` where this table published 285,
-> so it is evidence of *movement* and not a replacement measurement.
+> `destroyer` was listed here as a **285-word cold open**. Those 285 words are its legal
+> disclaimer — *"I am not the owner of any of the media or pictures used in this game…"* — and the
+> walk stopped there because that passage leaves through `<a data-passage="intro1">`. Walked
+> properly it is **eleven passages and roughly 3,300 words**, naming the father, the grandfather
+> (who speaks, at length), the stepmother and the school bullies. A staged open by this table's own
+> definition — and it moves the *cast* count as well as the *word* count, which is why the cast
+> figure goes with them.
 >
-> **What the rule below asks of an author does not depend on the gap.** Pick a shape and make the
-> cast load and the word budget agree; that is a consistency rule, and the two shapes it names are
-> both real. `findings_RECHECK.md` §7.
-
-**Ten of twenty openings name nobody at all.** When a field opening does name people, it spends
-**~229 words per named character** (values 132, 174, 217, 229, 1055, 1558, 1633).
-
-⚠️ **Both figures rest on the same walk as the table above, so both carry its caveat.** `destroyer`
-alone moves from the names-nobody column to naming four, and seven other walks moved. The rate per
-named character is the more robust of the two — it is a ratio of two quantities that grow together
-— but neither has been re-derived. The rule they support is a consistency rule and does not turn on
-the exact count.
+> Section K then tried to rebuild the walk three ways — stop at the first branch, greedy first link,
+> and breadth-first to depth three — against the six openings this table used to name:
+>
+> ```
+> game                        published  branch-stop   greedy    bfs-3
+> corpo-life                         64           26     1586     9992
+> the-company                       126          145     1056      985
+> degrees-of-lewdity                193          197      197      197
+> friends-of-mine                  1377          351     6677     2649
+> new-life-project                 1558          202     2763     1551
+> patriarch                        2619         2720     4409      704
+> ```
+>
+> **Each lands on two or three of the six and misses the rest by four to seven times, and they do
+> not agree with each other either.** The original walker is not on disk. A number no instrument can
+> reproduce is not a measurement, and this skill has demoted five thresholds for less.
+>
+> **The rule loses nothing, because it never rested on the numbers.** It is a *consistency* rule —
+> the cast load and the word budget have to agree — and the axis that separates the two shapes is
+> the cast, which is checkable by opening the first passage and reading it. `findings_K_mirror.md` §4.
 
 corpo-life's whole cold open, in full — who, job, place, why poor, what is at stake, zero characters:
 
@@ -99,18 +106,20 @@ corpo-life's whole cold open, in full — who, job, place, why poor, what is at 
 > jungle."*
 
 **The defect is the middle.** A cold open carrying a staged open's payload names people the player
-cannot picture, at a density the prose cannot support. The measured case ran **46 words per named
-character** — a fifth of the field's rate — and put none of them on screen.
+cannot picture, at a density the prose cannot support. Our own measured failure named **six people,
+two of whom are not in the game at all**, and put none of them on screen — that count comes from
+reading our own TOML, not from the field walk, and it stands.
 
 **Pick one:**
 - **Cold open** — name the player's situation and the pressure. Name **nobody**. The cast arrives
-  later as content, each through F5's meeting. ~150 words.
+  later as content, each through F5's meeting. Around 150 words is a sensible target; it is an
+  authoring figure, not a field measurement.
 - **Staged open** — spend the words. One person enters at a time, is described, **speaks**, and
-  states what they want. 700+ words, and F6's craft bar applies to each entrance.
+  states what they want. F6's craft bar applies to each entrance.
 
-⚠️ **This is not a word-count rule.** It is a *consistency* rule: the cast load and the word budget
-have to agree. A 200-word opening that names four people fails it; a 200-word opening that names
-none passes.
+⚠️ **This is not a word-count rule, and after 2026-08-24 it does not carry a word count at all.** It
+is a *consistency* rule: the cast load and the word budget have to agree. A 200-word opening that
+names four people fails it; a 200-word opening that names none passes.
 
 ⚠️ **Named in passing is not met.** An offstage boss, a dead parent, a landlord who never appears —
 these are world-building and they cost the reader a name to hold. Two of the six people named in
@@ -575,8 +584,9 @@ the bar is one shipped work has cleared rather than an invented number. The six 
 ## Cheat sheet
 
 - **The game does not use a name until it has earned it.** People, places, things.
-- **Pick one opening shape** — cold open names nobody, staged open spends 700+ and puts them on
-  screen. The middle is the defect.
+- **Pick one opening shape** — cold open names nobody; staged open puts each person on screen and
+  lets them speak. The middle is the defect. (The word ranges this line used to carry were deleted
+  2026-08-24 — F1.)
 - **Boot and capstone are two canvases.** The boot starts the chain; the capstone spends the prose.
 - **Hand over into an open door.** A random ambient is not a door. A `substitution_only` walk-in is
   not a door.

@@ -77,8 +77,10 @@ name = "<Name>"
 [player.core_traits]
 
 # ── ascent tiers — ONLY if who_climbs is "player" or "both" ───────────────────
-#    Each names a DIFFERENT kind of going-further. 14 of 25 field games have none
+#    Each names a DIFFERENT kind of going-further. 15 of 27 field games have none
 #    at all; three-or-four is one game's shape, not the genre's (the-meters.md W1).
+#    (Read "14 of 25" until 2026-08-24 — the recheck moved the-board.md and missed
+#    this copy of the same number. Section K.)
 <tier_1> = 0
 <tier_2> = 0
 

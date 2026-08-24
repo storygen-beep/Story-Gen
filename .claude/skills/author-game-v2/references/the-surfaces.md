@@ -600,6 +600,50 @@ games). A choice gated only by `costs` needs none of them: the engine appends th
 (`show_when_blocked` + `cooldown_message`), and `the-clock.md` C5 owns the rule behind it. Same
 instinct, different surface — do not author one where the other belongs.
 
+**R5d · A gate asks one of two questions, and the field asks both in equal measure.** Added
+2026-08-24 from section K. R5 says how *often* to gate; R5c says what a refusal *looks* like. This
+is the third axis: what the condition actually tests.
+
+Every condition in the field, classified by **shape** rather than by what the variable is about —
+because every game invents its own names and a domain lexicon leaves half of them unnamed
+(`findings_K_mirror.md` §1):
+
+| shape | reads as | the field |
+|---|---|---|
+| **equality** | are you at this exact step — `$scene is 2` | **53%** |
+| **threshold** | is your number big enough — `$lust gte 40` | **31%** |
+| function | a helper decides — `visited(...)` | 13% |
+| boolean | a bare flag — `!$greekroomunlocked` | 9% |
+| random | a roll | 4% |
+
+**It is the same split at both doors.** Measured over 16,167 *refusing* chains it is 45 / 40 / 17 / 7
+/ 1 (`findings_B_refusal.md` §3); measured over 3,346 conditions gating an *escalation* it is 48 / 38
+/ 13 / 8 / 2 (`findings_K_mirror.md` §1). Two populations, two questions, five days apart, one
+distribution. **The flag chain and the meter are both load-bearing, together.**
+
+**What this asks of an author.** An arc that runs in steps should be gated on **which step it is on**,
+not on a pile of switches that each remember one thing. The field's equality is a **stage counter** —
+one variable that counts — and it is 24.8% of all its conditions, present in **26 of 26 games**. Ours
+is 0.7%, in 6 of 21, and the six sites are `npc_jake_stage`, `loop_stage`, `wade_loop_stage` and
+their kin: **the field's own pattern, used once each.**
+
+The cost of the flag pile is not that it breaks. Adjacent `[group]` blocks merge into one
+`if/elseif` chain (`engine.md` §35), so exclusivity is enforced by the render. The cost is that
+**the arc is not a thing you can read** — there is no single value to print on a card, hand to a
+quest goal, or gate a later scene on. The set of flags is the only place its shape is written down.
+
+⚠️ **Our v1 games do this the field's way and our v2 games do not** — `vesper` 10% equality,
+`the_long_summer_test` 11%, `last_call` 7%, against `back_home` 0%, `off_season` 1%, `the_season` 2%.
+The TLS notes carry the rule in one line: *"sex-loop = numeric-enum state NOT flags."* **Second
+doctrine lost in the v1 to v2 divorce, and lost the same way `block_pool` was.**
+
+⚠️ **Not a gate, and not a quota.** No threshold here is defensible — a game can be built entirely on
+thresholds and be correct. See "What is checked".
+
+⚠️ **`ne` is unreachable.** The negated form — *"she is NOT at stage 3"* — is used by the field
+(`$robinromance isnot 1`) and our importer rejects it, although the runtime implements it. `engine.md`
+§37.
+
 **R6 · The screen moves on re-entry — but the opener does not.** A location the player returns to
 daily has to render differently each time. **It does not do this by rewriting its first sentence.**
 
@@ -856,6 +900,12 @@ whether the nine words are any good; R5c above is the part that has to be taught
 **R3b's measured numbers join the not-gated list, and the reason is in the spread.** Act-menu width
 runs from 2 to 54 and hub depth splits 47/14 across the field; both are design choices with working
 games on either side. Section F recorded them and proposed no check.
+
+**R5d joins the not-gated list too, and for the cleanest reason of the set: there is nothing to
+fail.** A game built entirely on thresholds is not broken — `steam` is 90% threshold and its problems
+lie elsewhere. The field's 53/31 split is a description of how the genre encodes state, not a target
+share, and the moment it became a percentage to hit it would be an invented threshold. Section K
+measured it and proposed no check.
 
 **R1, R2's judgement half, R4, R5b and R8 are deliberately not gated.** Whether *"Turn somebody away"* is
 aimed at a person or at the room is a judgement a parser cannot make, and a proxy check for it would

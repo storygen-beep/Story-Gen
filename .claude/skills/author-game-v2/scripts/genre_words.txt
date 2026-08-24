@@ -8,7 +8,11 @@
 # ⚠️ IT WAS 25 GAMES UNTIL 2026-08-24. `college-daze` and `free-cities` ship the Twine 1
 # <div id="store-area"> container and parsed to ZERO passages, so 3.5M words of the
 # field — a quarter of the corpus by volume — were reported as words the genre does not
-# use. Rebuilding on 27 ADDED 1,976 words. It is a UNION with the 25-game list, never a
+# use. Rebuilding on 27 ADDED 2,512 words — 18,043 to 20,555 — of which 1,976 are
+# vocabulary the two newly-readable games contributed and the rest came off the
+# re-tokenised corpus. (This line said "ADDED 1,976" until 2026-08-24, quoting the
+# sub-figure as the total; the file's own line count settles it.) It is a UNION with
+# the 25-game list, never a
 # replacement: no word has ever been removed from this file, so a word that stops
 # qualifying under a slightly different tokeniser is still here.
 #
