@@ -1,0 +1,1243 @@
+# Mrs. Vance — review ledger
+
+Opened 2026-08-25, the day after v0.1 shipped (`a77058d`). Mrs. Vance is the **first game authored
+under the complete `author-game-v2` doctrine** — after all eleven sections of the field study
+closed — and the **first v2 game to take every gate**: `41/41 judged, 1 n/a`.
+
+It is also the first v2 game to ship `block_pool`, and the first whose explicit prose clears the
+pivot rule end to end. Neither of those is in the tally. Neither is what follows.
+
+**The scoreboard is green and the scoreboard is not the review.** Same finding as `steam` and
+`forty_miles` before it: the instrument is 42 checks wide and the game is wider. Six items below
+are invisible to all 42, one of them a blocker that a player meets on the first screen.
+
+**Same conventions as `games/steam/REVIEW.md`, `games/forty_miles/REVIEW.md` and
+`games/off_season/REVIEW_1.md`:**
+
+| field | values |
+|---|---|
+| **severity** | `BLOCKER` · `HIGH` · `MED` · `LOW` · `OPEN` (an unresolved question for LO, not a defect call) |
+| **layer** | `GAME` (this build) · `SKILL` (doctrine taught it wrong or never taught it) · `ENGINE` (the substrate) |
+| **evidence** | a `file:line`, a measurement, or a live observation. Anything without one is marked *opinion* |
+| **status** | `OPEN` · `FIXED (<rev>)` · `WONTFIX (<reason>)` |
+
+Per `CLAUDE.md`: fix the skill too wherever a correct skill would have prevented the item, or it
+ships again next game. Two of the six qualify — §10.
+
+**Method.** `7_final_game.toml` parsed with a real TOML parser, never grep. The canvas graph walked
+for reachability, broken targets and dead nodes. `scripts/gates.py` captured before and after and
+diffed. A clean non-`--dev` build made to scratch for comparison. Then the built game **live-played
+in headless Chromium**: through the age gate and the whole opening funnel, plus targeted
+`Engine.play` probes with `setup.commitMoment()` for the finish bands, the pool cycling, the money
+clamp, the sleep landing and the quest page. Every structural claim was checked in the built game,
+not inferred from source. §11 has the full list.
+
+**Two instruments, kept apart.** `§1`–`§10` were found by **reading and probing** the game. `§12`
+was found by **LO playing the built game** — a different instrument that finds a different class of
+defect, and the two are not merged so it stays visible which found what. Same split
+`off_season/REVIEW_1.md` records in its own header.
+
+**Current count: 20 open** — 1 blocker, 6 high, 6 med, 6 low, 1 open question. Three of the
+twenty are decisions for LO rather than defect calls: E1 (the obligation's size), D1 (how much
+locked content should explain itself) and G1 (whether the Want file's one shape is the genre). Plus
+**six places
+this review was itself wrong**, found by re-checking before writing, recorded first in §0a. Nothing
+is fixed yet; this pass records, it does not repair. `v2_state.json` and the skill are deliberately
+untouched — the SKILL-layer items (C2, Q1, W1, G1, half of D1) are recorded for LO to schedule.
+
+---
+
+# §0a · ⚠️ What this review got wrong
+
+`forty_miles/REVIEW.md:31` puts its own corrections ahead of its defect list, because a review that
+hides its misses is worth less than one that does not. Four claims made during this review were
+narrowed or overturned by checking them. **All four were caught before anything was written down**,
+which is the only reason they are corrections and not defects in this file.
+
+### ⚠️ N1 · The clock-gate hole is one missing preposition, not "it cannot read spelled-out numbers"
+
+First stated as: *the gate looks for digits, so "six" walked past it.* **False.** `_CLK_WORDNUM`
+(`gates.py:2718`) contains `one|two|…|twelve`, and the gate reads spelled-out hours perfectly well.
+
+The real hole is one word. `_CLK_PREP` (`gates.py:2727-2730`) fires on
+`at|till|until|by|before|after|past|from|gone` followed by an hour. **`to` is not in that list.**
+Run against the instrument itself:
+
+```
+"Sleep. (till six)"   ->  ['till six)']      CAUGHT
+"Sleep. (until six)"  ->  ['until six)']     CAUGHT
+"Sleep. (to six)"     ->  []                 not caught
+"Sleep. (to 6)"       ->  []                 not caught
+```
+
+`till six` would have failed the build. `to six` shipped. This matters for the fix: it is a
+one-token addition to an alternation, not a redesign of the extractor.
+
+### ⚠️ N2 · "The player grinds Isaac to 66 and finds nothing" is false
+
+First stated as: *Isaac's terminal quest card sets a goal of `want 66`, nothing exists at 66, so
+the player grinds toward a destination that is not there.* The premise is right and the conclusion
+is wrong, because **the player never sees that goal.**
+
+`renderQuestsGoalBlock` (`v2.py:14970`) renders **exactly one** frame per card, in the order
+`✓ terminal → 🔓 ready_canvas → 🎯 unmet goals`. `terminal` wins. Verified on the live quest page:
+with Isaac at `want 38` the card prints `✓ Arc complete` and the 66 is never drawn.
+
+Checking it turned up a worse defect in the same place, which is §3. The lesson is the ordinary
+one: a claim about what a player sees has to be checked against what renders, not against the TOML.
+
+### ⚠️ N3 · Dorn's meter climbs 5 a day, not 8
+
+First stated as *8/day across two raise sites*. Both sites — `walkin_room_dorn` (+3) and
+`hub_dorn_kitchen` (+5) — gate on **the same day-cap flag**, `dorn_rung_today`, and both set it. So
+it is one or the other, never both, and the ceiling is **+5 on a day he is home**. He is home three
+nights of seven, so `want 55` is roughly three to four weeks of play, not one.
+
+### ⚠️ N4 · `loop_act` is guarded, and the trap is narrower than first described
+
+First stated as *a shared global with no guard*. It is shared — one player trait across all six
+loops — but it is guarded twice. Every one of the five NPC loops **sets it at entry** before any
+band can be read, and five of six also **reset it to 0** on the `finish` exit-block config
+(`Get your jeans.`, `Do your shirt up.`, and so on). The residual is real but small, and is filed
+at its true size in §8.
+
+The next two came out of investigating LO's play-report (§12) and are recorded here for the same
+reason: both are conclusions someone would otherwise reach again from scratch.
+
+### ⚠️ N5 · "No location declares a single connection" is false — the key is `navigation_order`
+
+First stated, while investigating LO's *"couldn't understand the world"*, as: *every location has
+`connections: []`, so there is no adjacency data anywhere.* **The script grepped the wrong key.**
+Adjacency is declared as **`navigation_order`**, every location has one, and together they form a
+complete two-level tree under `the_yard` (§12 M2). The engine appends the way back itself —
+`[[Leave <name>->...]]` at `v2.py:19807` — which is why the authored graph looks one-way and the
+game plays fine.
+
+**The map data is correct and the gate `world reachable 14/14` is honest.** M1 and M2 are about what
+the player is *shown*, not about what is declared.
+
+### ⚠️ N6 · "`requires_npc` is read from `trigger.metadata`, so the presence gate is dead" is false
+
+First stated, on reading `v2.py:11508` — `requires_npc = trigger.metadata.get("requires_npc")` —
+against a game that declares the key at `trigger.requires_npc` with `metadata` empty: *the presence
+gate is off game-wide.* **The importer moves it.** `template_import.py:6990` writes
+`"requires_npc": c.trigger.requires_npc or None` into that metadata dict, and the built HTML carries
+**25 non-null `requiresNpc` values** — exactly the 25 canvases that declare it.
+
+Walk-ins, hubs and meetings are genuinely presence-gated. The defect is only in the ambients, which
+declare nothing at all (§12 P1). Recorded because "the generator reads a key the author does not
+write" is a plausible and wrong conclusion that a grep alone supports.
+
+---
+
+# §1 · The build that shipped is the developer build
+
+### B1 · The committed, portal-served HTML is a `--dev` artefact
+**severity** BLOCKER · **layer** GAME · **status** OPEN
+
+`games/mrs_vance/output/index.html` is git-tracked and was built with `--dev`. That flag is opt-in
+(`apps/game_generation/management/commands/package_from_toml.py:136`, *"Enable dev mode with stat
+adjustment controls in sidebar"*), so this was a build-command slip, not an engine default.
+
+Rebuilt the same TOML without the flag, into scratch:
+
+```
+                                    committed        clean rebuild
+dev-mode markers                          8                    0
+[IMAGE MISSING] / [VIDEO POOL MISSING]   34                    0
+bytes                             1,833,785            1,538,629
+```
+
+What a player gets, observed live on the committed file:
+
+- A red **`[DEV MODE]`** banner at the top of the sidebar.
+- **`⏩ DEV JUMPS`**, **`📋 Review Canvases`**, **`⚠️ Missing Media`** panels.
+- **`+/-` adjusters on every meter** — `money`, and `want`/`trust` for all six characters. The
+  entire ascent, which is the game, is bypassable with a click.
+- On the **second screen of the opening**, inside the prose:
+  `[IMAGE MISSING] scenes/dorn_leaving_t1.jpg`, its author-facing description, and both raw search
+  queries rendered as clickable links —
+  `🔍 older trucker man dressed leaving bedroom doorway morning`.
+
+Per `games_tracked_media_ignored.md`, game source and the built HTML are tracked and the GitHub
+Pages portal serves them, so this is the file a player opens.
+
+**Why no check caught it.** Every gate reads `7_final_game.toml`. Not one of the 42 looks at the
+built artefact, and the build itself succeeds — a dev build is a legitimate build, just not a
+shipping one.
+
+### Fix
+
+```bash
+python3 manage.py package_from_toml \
+    --file games/mrs_vance/toml_phases/7_final_game.toml \
+    --output games/mrs_vance/output --gen-version v2
+```
+
+No `--dev`. Verified in scratch already: the clean build boots with zero page errors, zero console
+errors, and no missing-media markers anywhere.
+
+---
+
+# §2 · A button promises an hour the engine cannot reach
+
+### C1 · `act_sleep` says "(to six)" and lands anywhere from 05:00 to 11:45
+**severity** HIGH · **layer** GAME · **status** OPEN
+
+`act_sleep`'s exit block carries `text = "Sleep. (to six)"` and
+`time_progression_minutes = 480` — a flat eight hours. The canvas window is 21:00–04:00, seven
+hours wide. Live, driving the clock and clicking the button:
+
+```
+sleep at 21:00 Monday    ->  wakes 05:00 Tuesday
+sleep at 22:00 Tuesday   ->  wakes 06:00 Wednesday      <- the only correct case
+sleep at 23:30 Wednesday ->  wakes 07:30 Thursday
+sleep at 01:00 Thursday  ->  wakes 09:00 Thursday
+sleep at 03:45 Thursday  ->  wakes 11:45 Thursday
+```
+
+The label is true for **one entry minute of a 420-minute window**.
+
+It is not only cosmetic. `work_counter` runs 07:00–13:00 and takes six hours. Sleep at 01:00 and
+two of those hours are gone before the player is awake; sleep at 03:45 and the counter — the
+largest income surface in the game at +74 — cannot be started at all.
+
+This is precisely what `the-clock.md` C3 (`:192`) forbids: *"A label is a promise about what the
+click does. The engine cannot deliver a clock time (C1), so a label naming one is a promise it
+cannot keep."* Against a field re-measurement of **84,009 action labels across all 27 parseable
+sandboxes**, of which 24 name an absolute clock time and **not one** promises a clock time as the
+outcome of a repeatable action.
+
+### C2 · The gate that enforces C3 has a one-word hole
+**severity** MED · **layer** SKILL · **status** OPEN
+
+Gate G36, *the label keeps its time* (`gates.py:5209`), exists, is correct in intent, and reported
+`0 label(s) name a clock time` on this game. The cause is N1: `to` is absent from `_CLK_PREP`'s
+preposition alternation (`gates.py:2727-2730`).
+
+Four v1 games and two v2 games already pass this gate, so the bar is one shipped work has cleared —
+which makes the miss a hole rather than a threshold problem.
+
+### Fix
+
+**Game.** Turn the reading into a rule, the grammatical turn C2 of the same doctrine already
+prescribes: `Sleep the night.` The clock stays engine business. If the hour genuinely has to be
+named, C3 says that is a window problem — narrow `act_sleep`'s schedule until the claim is true —
+and that there is no third option.
+
+**Skill.** Add `to` to `_CLK_PREP`, re-run the census across the 22 scorable games, and record what
+moves. Expect false positives on `to` where it is not temporal (`to the yard`); the existing
+`_CLK_OK_NEXT` / `_CLK_BAD_NEXT` machinery is what handles that and will need the same treatment
+the other prepositions got.
+
+---
+
+# §3 · Five arcs announce themselves finished at the moment they open
+
+### Q1 · The terminal card flips to ✓ when the door unlocks, not when the content is played
+**severity** HIGH · **layer** GAME + SKILL · **status** OPEN
+
+Live quest page, every meter set to exactly the value that opens its loop:
+
+```
+Cade      ✓ As far as this build goes
+Booth     ✓ Arc complete
+Isaac     ✓ Arc complete
+Sherrod   ✓ Arc complete
+Tobin     ✓ Arc complete
+```
+
+Each character's second card is `terminal = true` with a `when` equal to the loop's own gate —
+`npc_isaac.want gte 38` is both what opens `loop_isaac` and what matches Isaac's terminal card. And
+frame 1 fires on `card.terminal === true` **alone** (`v2.py:15199`); nothing checks that anything
+was achieved. `engine.md:747` already carries this warning in the abstract:
+
+> ⚠️ **`terminal` IS NOT COMPUTED FROM PROGRESS, AND A CHARACTER WHOSE ONLY CARD CARRIES IT READS
+> AS FINISHED FROM VALUE ZERO.**
+
+This game does not commit the failure that warning names — every arc here has a proper two-card
+ladder and a terminal the player climbs to, which is exactly what `engine.md:757` asks for. It
+commits the adjacent one: the card the player climbs to is gated at the **same** value as the
+content, so the ✓ lands on the same click as the unlock. You grind Isaac to 38, the corner of the
+bay opens, and the game tells you his story is over before you have played it.
+
+**The skill half.** `engine.md:744`:
+
+> ⚠️ **Exactly ONE card per game may set `terminal_text`** — it is the badge form of the
+> build-boundary rule. A closed arc that is closed forever must not promise more of itself.
+
+The game obeyed it exactly: one card, Cade's, reading *"As far as this build goes"*. The
+consequence is that the other five fall through to the engine default `"Arc complete"`
+(`v2.py:14968-14976`) — a **stronger and falser** claim than the build-boundary string it was
+rationed to protect. Following the rule produced the worse outcome, which is what makes this a
+doctrine item and not an author slip.
+
+### Q2 · Dorn's terminal card is a badge on an arc with no content
+**severity** LOW · **layer** GAME · **status** OPEN
+
+`npc_dorn`'s terminal card carries **no goals and no `terminal_text`**, and matches at
+`want gte 55`. Per N3 that is reachable at +5 on the nights he is home — three to four weeks — at
+which point it prints `✓ Arc complete` for a character with one hub canvas, one walk-in, and no
+ladder. `v2_state.json` already promises *"Dorn's own ladder… Pay it or cut it"*, so the arc is
+knowingly unbuilt; the card is what makes the emptiness visible in the wrong words.
+
+### Fix
+
+Raise each terminal card's `when` above its loop gate so the ✓ arrives after the content rather
+than with it — Isaac's card at `want gte 38` becomes the *ready* state, and terminal moves up. Then
+take the one-`terminal_text` question to the skill: the rule is right about badges and silent about
+what the other five cards say instead, and both halves belong in the same paragraph.
+
+---
+
+# §4 · The six repeatable sex loops are frozen
+
+### R1 · 39 variant pools in the game, zero in the loops
+**severity** HIGH · **layer** GAME · **status** OPEN
+
+First, the thing that is going right, because it is the reason this item is sharp rather than
+routine. **Mrs. Vance is the first v2 game to ship `block_pool`.** Census across all 22 scorable
+games:
+
+```
+mrs_vance      39
+vesper (v1)     6
+every other      0
+```
+
+39 blocks across 35 canvases, with 2–4 variants each (21 pools of 3, 11 of 4, 7 of 2), no nesting,
+no single-variant pools, and **verified cycling live** — six renders of `hub_cade_office` produced
+three distinct middle paragraphs.
+
+**Two different things share the word "pool" and only one of them is missing.**
+
+| | what it is | in this game |
+|---|---|---|
+| `block_pool` | a **prose** pool — the engine picks one of N text blocks on every render (`v2.py:14572`) | 39, none in a loop |
+| `pool_dir` + `pool` | a **media** pool — a folder of clips, one per visit | 34, correctly declared on every explicit surface |
+
+So the sex scenes do vary their video. What repeats verbatim is the writing.
+
+**Not one prose pool is in a loop.** Of the **20** nodes across `loop_cade`, `loop_isaac`,
+`loop_booth`, `loop_sherrod`, `loop_tobin` and `loop_solo`:
+
+```
+loop_cade      entry  act_hand  act_mouth  act_desk  finish(3 group bands)
+loop_sherrod   entry  act                            finish(2 group bands)
+loop_isaac     entry  act                            finish
+loop_booth     entry  act                            finish
+loop_tobin     entry  act                            finish
+loop_solo      base   act                            finish
+```
+
+**18 of 20 carry no variation mechanism at all.** Only Cade's and Sherrod's `finish` nodes vary,
+and they vary on `loop_act` — which act the player chose — not on re-entry. Isaac's 136-word act
+node, Booth's 96, Tobin's 82 and the solo scene's 81 render identical prose on visit 1 and visit
+50.
+
+These are the surfaces the game's own design document commits to. `WANT.md` §7:
+
+> **Where the crude register lives:** the Office after close, the Wash Bay, the Bunk Room, the Back
+> Row, the Shop Floor. Every one of them is a surface she re-enters. **Not one of them is a
+> one-time scene.**
+
+They are re-enterable. Their prose is not re-readable, and it is where a returning player spends
+most of their clicks.
+
+**The field.** `engine.md` §35: **three of the top four female-PC games in the corpus build every
+repeatable sexual surface this way, and none of them writes such a scene as a flat paragraph.**
+
+| game | mopoga rank | mechanism | scale |
+|---|---|---|---|
+| Course of Temptation | 5 | `<<switch setup.rir(0, 3)>>` | 164 named acts × 3 phrasings |
+| Degrees of Lewdity | 7 | deterministic grid on two meters | 99 `actions*` widgets |
+| Family Ties | 24 | `either("…", "…", …)` | 12 poses × ~10 narration + ~10 dialogue |
+
+And v1 carried a numbered rule for it — Rule 17, *Block Pools for Repeatable Activities* — naming
+the failure exactly: *"the **same text every morning** problem… the group block system handles
+phase changes, but **WITHIN each phase, the text is frozen.**"*
+
+**Why no check caught it.** `lint · the act nodes` measures the *heat* of the thinnest band a node
+renders and reported this game correctly: median 4 explicit words, 12 of 14 beats explicit. A frozen
+beat and a varied beat score identically. Nothing in the 42 counts how many different things a
+surface can say.
+
+### Fix
+
+Three-variant `block_pool`s on each act and finish paragraph, at the register the rest of the game
+already holds — RTS-flat, 35–40 words, on the body for the beat's whole length. Roughly 18 nodes.
+The two `[group]` finishers keep their bands and gain pools inside them; `engine.md` §35 confirms a
+pool nests inside a group (depth cap 4) though **not** inside another pool.
+
+One authoring note from §35 worth carrying into the work: children may sit at the block's own
+`blocks` key **or** at `props.blocks`, and this game already uses the top-level form throughout, so
+copy what is here rather than the `props` form the doctrine used to show.
+
+---
+
+# §5 · The colour meter is read in one room
+
+### S1 · `standing` moves 25 times and is read 4 times, all in the same canvas
+**severity** MED · **layer** GAME · **status** OPEN
+
+```
+standing   raised at 25 sites
+           read at  4 sites  — all four inside work_counter
+```
+
+The four reads are a correctly-bounded three-band ladder on `work_counter.nodes[0].blocks[6..8]`
+(`gte 40` / `gte 15 AND lt 40` / `lt 15`), and it works: probed live at standing 5 and 25 the
+counter narrates two different rooms. That part is good work.
+
+Everywhere else, the meter is inert. `the_bank`: zero reads. `the_bar`: zero reads. `WANT.md` §3
+declares:
+
+> **Counterweight:** `standing` — how much of the Vance name is actually hers… **It is read
+> constantly and refuses almost nothing** — the bank clerk's tone, whether a driver at the counter
+> talks to her or asks for a man, what the bar already knows.
+
+Three examples are named. **One is built.** The other two are locations that exist, with canvases
+in them, that do not look at the meter.
+
+`board.colour_meter` reinforces it: *"Read constantly to swap ONE line."* Against the field figure
+quoted in the same note — reputation read at 644 sites across the corpus — four is not a colour
+meter yet, it is a meter with one customer.
+
+**Why no check caught it.** Gate *a meter is read* asks whether a raised meter is read by any
+condition, cost or quest goal. It is: `7/7`. Nothing asks how often, and nothing compares the
+reads against what the game said it would do with them.
+
+### S2 · The gap is legitimate to defer and is not written down
+**severity** MED · **layer** GAME · **status** OPEN
+
+Building thin and thickening is the method, and adding reads to rooms that already exist is
+literally what `v2_state.json`'s own fill promise describes — *"every release until it closes adds
+words to existing rooms, not rooms."* So S1 is not a defect of ambition.
+
+It is a defect of record. `promises[]` holds six entries and this is not one of them.
+`the-release.md:107,110`:
+
+> Log every promise in the state file, and pay or cut it. […] **An honest wall is a promise; a
+> silent one is a bug report.**
+
+The same applies to a fourth thing not in `promises[]` — see L3.
+
+### Fix
+
+Two or three `standing` band reads in `the_bank` and `the_bar`, on the lines the Want already
+specifies (the clerk's tone; what the bar already knows), and a promise entry naming the rest.
+
+---
+
+# §6 · The obligation has no teeth
+
+### E1 · The week's income is roughly four times the week's demand
+**severity** OPEN — a design question for LO, not a defect call · **layer** GAME · **status** OPEN
+
+```
+income surfaces (each day-capped by a *_done_today flag cleared in [engine.daily_tick])
+   work_counter    +74   the_office        07:00-13:00  Mon-Fri   6h   18 energy
+   work_trailer    +62   the_wash_bay      11:00-14:00  Mon-Fri   3h   24 energy
+   work_parts_run  +34   the_shop_floor    08:00-17:00  Mon-Fri   2h   12 energy
+   work_books      +22   the_office        untimed               2h   10 energy
+   work_walkround  +16   the_back_row      22:00-00:30  daily     1h    8 energy
+                  ----                                                 --
+                  +208 / day                                           72 energy
+obligation        260 / week, Friday, [settings.rent], grace 1
+```
+
+The counter alone across four weekdays is 296. Energy is the real brake and it is tuned well —
+sleep restores +70 against a 22/day decay and a 72-energy full day, so a complete day is right at
+the edge — but it brakes *how much* she earns, not *whether* she clears 260.
+
+That matters because of what failure is wired to. `eviction_mode = "flag_set"` sets `cade_covered`,
+and the economy note calls it the mechanised centre of the whole premise:
+
+> *"The reversal, mechanised: she holds the drawer and is not on the account… Money failure feeds
+> the cast meters instead of ending the game."*
+
+As built, that branch is reachable only by deliberately not working. The most interesting outcome
+in the economy is the one the economy makes hardest to reach.
+
+Recorded as an **open question** rather than a defect because the numbers may be exactly what LO
+wants for a first release — a player who cannot pay rent in week one abandons the game, and every
+gate here passes. The question is whether 260 should rise, the sources fall, or the drawer count
+gain a demand the player cannot see coming.
+
+---
+
+# §7 · The ledger records four things that are not true
+
+Three are in `games/mrs_vance/v2_state.json` and one is in the shipping commit. They are low
+severity and high consequence: the ledger is the to-do list the next release reads, and the commit
+message is what anyone reads first.
+
+### L1 · "Six external files referenced and not copied" — it is 22, plus 34 directories
+**severity** LOW · **layer** GAME · **status** OPEN
+
+
+`releases[0].promises` says *"Six external files referenced and not copied."* The real inventory,
+walked over every file-shaped string in the TOML:
+
+```
+locations[].image     14   MISSING
+npcs[].portrait        6   MISSING
+blocks[].props.file    2   MISSING            <- scenes/dorn_leaving_t1.jpg, scenes/first_office_t1.jpg
+                      --
+                      22   fixed references, 0 on disk
+pool_dir              34   distinct directories, 0 on disk
+```
+
+The **6** is the packager's own warning — *"6 external media file(s) referenced but NOT copied"* —
+which counts NPC portraits only. The ledger copied the number without checking what it counted, so
+the 14 location images and 2 scene images are invisible to the promise that is supposed to track
+them.
+
+### L2 · "npc_dorn gates nothing — deliberate" — he gates two quest cards
+**severity** LOW · **layer** GAME · **status** OPEN
+
+
+`lints_shipped_with.cast_meters` says *"npc_dorn gates nothing — deliberate. He is the clock, not a
+ladder."* The design intent is right and the statement is not: `npc_dorn.want` is read by two quest
+cards, at `gte 12` and `gte 55`. It gates no *canvas*, which is what the lint measured and what the
+note meant. Worth stating precisely, because Q2 lives in the gap.
+
+### L3 · Four ladders are declared to a top the build does not reach, and no promise says so
+**severity** LOW · **layer** GAME · **status** OPEN
+
+
+`board.cast_meters.rungs` declares the full ladder; the build gates far below it:
+
+```                declared top   highest gate built
+npc_cade                    82                   42
+npc_booth                   74                   50
+npc_isaac                   66                   38
+npc_sherrod                 62                   34
+npc_tobin                   70                   70   <- built to its top
+```
+
+Deferring the upper half is correct for a v0.1 release stream. But `promises[]` has six entries and
+none of them is *"the top half of four ladders"*, so the same silent-wall problem as S2 applies —
+and here it is compounded, because Isaac's and Sherrod's terminal quest cards carry goals at 66 and
+62, values nothing in the build sits on.
+
+### Fix
+
+Three edits to `v2_state.json` and two new `promises[]` entries. Not done in this pass — see §12.
+
+### L4 · The shipping commit counts 46 `block_pool`s; there are 39
+
+**severity** LOW · **layer** GAME · **status** OPEN
+
+`a77058d`, under *"Firsts for this repo"*, says:
+
+> *"`block_pool` in a v2 game at all — 46 pools, against zero in every v2 game before this and 46 in
+> the_long_summer"*
+
+Both numbers are wrong, and the claim they support is right.
+
+```
+type = "block_pool" in 7_final_game.toml          39     <- the real count
+raw `grep -c block_pool` on the same file          41     <- 39 + two mentions inside comments
+raw `grep -c block_pool` on the_long_summer        49     <- not 46
+```
+
+The parsed count is the one this review uses everywhere (§4, A.2). 46 matches nothing measurable —
+neither the grep nor the parse, in either game. The **first** claim stands unharmed: 39 is still more
+pools than every other v2 game combined, and every other v2 game is still zero.
+
+This is L1's failure repeated in a different document — a number written from an impression rather
+than from a command, in the one artefact that gets read before the code. Recorded because the commit
+cannot be rewritten and the correction has to live somewhere.
+
+#### Fix
+
+Nothing to edit; history stands. The counts here are the correction of record.
+
+---
+
+# §8 · Latent, not live
+
+### T1 · `loop_act` is one shared trait across six loops, and `loop_solo` never writes it
+**severity** LOW · **layer** GAME · **status** OPEN
+
+`player.loop_act` is a single trait carrying "which act is happening" for every loop in the game.
+`loop_cade` writes 1/2/3, `loop_sherrod` 1/2, `loop_isaac`, `loop_booth` and `loop_tobin` write 1.
+Two `finish` nodes read it as exclusive bands.
+
+Per N4 this is **guarded and correct today**: every NPC loop sets it at entry before any band can be
+read, and five of six reset it to 0 on the `finish` exit. Probed live through
+`loop_sherrod entry → act → finish` from a cold start, the right band rendered.
+
+The residual is `loop_solo`, which sets `loop_stage` and never touches `loop_act`. It is safe only
+because its `finish` has no bands. Add one — and adding variation to the loops is exactly what §4
+asks for — and it will read whatever the last NPC loop left in the variable.
+
+### Fix
+
+Either set `loop_act` at `loop_solo.base` the way the other five do, or split the trait per loop.
+The first is one line and matches the existing pattern.
+
+---
+
+# §9 · Checked and cleared — do not re-investigate
+
+The most valuable section in a file like this. Each row was suspected, checked, and found correct;
+each carries the evidence so nobody spends the hours again.
+
+### The `engine.md` 27 clamp truncation does not bite
+
+`v2_state.json` carries a live worry: *"a `costs` deduction is hard-clamped and truncates a balance
+above 100 — keep priced rungs cheap and the balance low, or she loses money on a purchase."* That
+mitigation is impossible to honour here, because clearing a 260 obligation *requires* a balance
+above 100. So it was tested rather than assumed. Live, on the clean build:
+
+```
+buy_propane ($26)     money  50 -> 24     99 -> 73     120 -> 94     300 -> 274
+buy_gas     ($20)     money  60 -> 40                              300 -> 280
+work_counter (+74)    money  95 -> 169
+```
+
+No truncation at any balance, and income past 100 is fine. **The worry should be closed, not
+carried.**
+
+### `drawer_key` is not a dead write
+
+A flag audit flags it: set once in `open_dorn_leaves`, read by zero conditions. It is read by
+`[settings.rent] start_after_flag = "drawer_key"` — the rent engine, which no condition walk sees.
+Confirmed in the built HTML. Any future flag audit will re-flag it; this note is why it should not
+be deleted.
+
+### The past-midnight schedules are correct
+
+The trap in `schedule_past_midnight_two_entries` is that a day-specific overnight row needs **two**
+rows while an all-days row needs **one**. This game gets both right:
+
+```
+npc_dorn    day-specific   [4,5,6] 22:30-23:59  +  [5,6,0] 00:00-05:30      TWO rows  ✓
+npc_isaac   all days       [0..6] 21:00-01:00                                ONE row  ✓
+npc_booth   all days       [0..6] 22:00-01:30                                ONE row  ✓
+npc_sherrod all days       [0..6] 23:30-06:00                                ONE row  ✓
+npc_tobin   all days       [0..6] 22:00-00:30                                ONE row  ✓
+```
+
+Every character has non-zero presence on every weekday except Dorn, who is absent Tue/Wed/Thu by
+design — *"three nights his truck is in the lot and four nights it is not."* `v2_state.json` records
+a live probe of the split; it holds.
+
+### The three adjacent `[group]` bands in `loop_cade.finish` are correct
+
+`adjacent_groups_merge_one_chain` warns that adjacent `[group]` blocks merge into one if/elseif
+chain, so a second ladder placed next to a first is dead. Here the three adjacent groups are one
+ladder — `loop_act eq 1` / `eq 2` / `eq 3`, mutually exclusive — and an if/elseif chain is exactly
+the right compilation. Probed live at each value: all three bands render their own paragraph. Not
+the trap.
+
+### Missing media degrades gracefully in a clean build
+
+Zero of 22 fixed references and zero of 34 pool directories are on disk, and it costs the player
+nothing on a non-`--dev` build: no broken `<img>`, no console errors, no page errors. The media
+block simply does not render. (The committed build is a different story — B1.)
+
+### The pivot rule is clean, end to end
+
+`CLAUDE.md` names this as the defect that shipped three increments running: *"read the beat's last
+sentence; if it is about what the moment MEANS rather than what is HAPPENING, the beat has
+pivoted."* Every explicit paragraph across all six loops was read for it. **Zero pivots.** Two are
+worth naming as correct handling rather than luck:
+
+- **Booth's finish** pivots mid-paragraph to meaning — *"when he says the title out loud, twice, and
+  does not hear himself say it either time"* — and returns to the body to close: *"Your tits are in
+  his face and both his hands are locked on your ass."*
+- **Isaac's act** carries a meaning beat, *"Two words. It is the most he has said to you in eleven
+  weeks"* — as **its own beat, after** the act beats, which is exactly what the doctrine licenses,
+  and it still ends on the body.
+
+Beat lengths in act nodes run 25–46 words against a 35–40 target. Finish paragraphs run 55–65 —
+long, and defensible as terminal beats.
+
+### The structure is clean
+
+```
+0  broken choice targets            0  canvases unreachable (no trigger, no inbound link)
+0  nodes with no inbound link       0  references to a non-existent NPC
+0  trigger locations that do not exist
+0  conditions missing version="1.0"  (the conditions_version_failopen trap)
+0  flags read but never set          0  traits read but never raised
+13 day-cap flags, all set somewhere, all cleared in [engine.daily_tick]
+```
+
+### The crude ceilings — three exact, two open
+
+`WANT.md` §7 declares a per-character vocabulary ceiling. Three are executed precisely:
+
+- **Booth** — declared *"none — he cannot make himself say any of it"* and *"still calling her Mrs.
+  Vance while he does."* Shipped: `"Mrs. Vance —"`, `"Mrs. Vance — Mrs. — I can't, if you keep —"`,
+  and the finish narrating *"he says the title out loud, twice, and does not hear himself say it
+  either time."*
+- **Isaac** — *"mostly in narration — he still barely talks."* Shipped: a two-word line, and the
+  narration that makes it the point: *"Two words. It is the most he has said to you in eleven
+  weeks."*
+- **Tobin** — *"full — and he is the only one using her name."* Shipped: `"Rilla. Get in."`,
+  `"Rilla. Rilla. Look at me."`, and *"every stroke he says your name."*
+
+**Cade and Sherrod are the open question.** Both ceilings are about crude *speech* — Cade's tier 3
+is *"full — cum, and he says all of it out loud"*, Sherrod's tier 1 opens at *"cunt, tits — he
+opens here, he never pretended"*. Neither carries a single crude word in any dialog line. Their
+narration is fully crude; only their mouths are not.
+
+Recorded as **open** rather than as a defect because both loops sit mid-ladder — `loop_cade` opens
+at `want 42` of a declared 82, `loop_sherrod` at 34 of 62 — so tier 3 may be deliberately
+unreleased. It needs LO's call, and it is the one place `CLAUDE.md`'s *"writing under the ceiling is
+a defect"* may or may not apply.
+
+### 22 shown-locked choices, but 5 doors
+
+Gate *ends on an opening* reports `22 choices render visible-but-locked`, all 22 with a stated
+reason, and the locked text is good work throughout. The 22 are three different things:
+
+```
+ 6  day-caps and needs      "The book is straight for today."  "Get clean first."
+11  within-loop ladder      "Let him cum — he is nowhere near it yet."
+ 5  the release's doors     the five loop entries, at want 42 / 50 / 38 / 34 / 70
+```
+
+`v2_state.json` says five and is right. Recorded so the gate's 22 is not read as 22 doors.
+
+### ONE ASSET, ONE BLOCK is honoured
+
+No `pool_dir` and no `file` is reused across two blocks — the rule from `one_asset_one_block_rule`,
+which exists because media review dedupes by file and would return one verdict for two beats. Every
+one of the 34 pools also carries `search_queries`, so the game is ready for find-media as it
+stands.
+
+### Walk-ins, hubs and meetings ARE presence-gated
+
+25 canvases declare `requires_npc` — **6 one-shot meetings, 8 walk-ins, 11 hubs** — and all 25 reach
+the built HTML as non-null `requiresNpc`. The runtime enforces it at `v2.py:5264`:
+`getNpcLocation(slug).location === locationId` or the canvas is skipped. Do not re-investigate this
+half; the presence defect is confined to the 21 random ambients (§12 P1).
+
+### The map data is complete, and `world reachable 14/14` is honest
+
+Adjacency is `navigation_order`, not `connections` (§0a N5). All 14 locations declare theirs, the
+graph is a connected two-level tree, and the engine supplies the return edge. A script that looks
+for `connections` or `exits` will find nothing and be wrong.
+
+---
+
+# §10 · What this says about the skill
+
+The `CLAUDE.md` test is *"would a correct author-game skill have prevented this?"* Two of the six
+items answer yes.
+
+### C2 · yes — and the fix is one token
+
+`the-clock.md` C3 is correct, well-evidenced, and gated. The gate has a hole the size of the word
+`to`. Nothing about the doctrine needs rethinking; the instrument needs one alternation extended
+and a re-census. **This is the cheapest skill fix in the file and it ships again next game if it is
+not made.**
+
+Pattern worth naming: this is the third instrument hole of the same shape recorded in this skill —
+`_band_texts` knowing `group` and not `block_pool`, `genre_words.txt` being structurally blind to
+false friends, and now `_clk_refs` missing a preposition. In every case the doctrine was right and
+the check was narrower than the doctrine.
+
+### Q1 · yes — and the fix is a paragraph, not a line
+
+`engine.md:744`'s one-`terminal_text` rule is correct about badges. It is silent about what the
+other cards then say, and the engine default they fall to — `"Arc complete"` — is a **stronger**
+claim than the build-boundary string the rule is rationing. A game that obeys the rule exactly ends
+up telling the player five arcs are finished. The rule and its consequence have to be stated
+together, and `engine.md:757`'s *"terminal belongs on a card the player has to CLIMB TO"* needs one
+more clause: **and gated above the content, not level with it.**
+
+### W1 · yes — and this is the second game to draw the same sentence from LO
+
+`the_season` was reported with *"I don't know who is who"*, and Mrs. Vance was reported with *"for
+many npcs, it still sounds unclear like who is who."* Two games, two casts, the same complaint. The
+skill has a 7-step npc-intro and nothing at all about **keeping** a name attached to a person once
+the introduction is over — no rule that prose re-anchors a relationship, no check that counts
+whether it does. 31 kin words in 10,298 is what "no rule" looks like.
+
+### G1 · yes — and it is the largest of the five
+
+`the-want.md` has no step comparing a new premise against the games already in the repo, and its §2
+mandates a single shape. Seven of eight shipped appetites open with the same four words. This one is
+not a Mrs. Vance defect at all; it decides what the *next* game can be.
+
+### D1 · partly — right about doors, over-applied everywhere else
+
+Gate 42 and `the-release.md:110` are correct that a locked door must say why, and the five real doors
+here are good work. Neither doctrine says anything about the other 27 sites, so an author with no
+guidance applied the door rule to cooldowns and to mid-scene arousal gates. The rule needs a scope,
+not a reversal.
+
+### The rest are GAME-layer
+
+B1 is a build command. R1 had the doctrine — `engine.md` §35 is three pages long and names the
+field games — and the author read it and pooled 35 canvases; the loops were a judgement, not an
+ignorance. S1/S2 and L1–L3 are ledger discipline the skill already teaches in `the-release.md`. E1
+is a design question. P1 is an authoring omission against a primitive the skill documents. M1/M2 sit
+between: `the-first-hour.md` F7/F9 teach the first visit and the lint prints the list, so the
+doctrine is there and was not followed — but nothing in the skill teaches showing the player the
+*shape* of a map. **The skill taught most of these right.**
+
+---
+
+# §11 · Method
+
+Recorded so the file is reproducible rather than believed.
+
+**Source.**
+- `scripts/merge_toml_phases.py games/mrs_vance` re-run and the result diffed against the committed
+  `7_final_game.toml` — byte-identical, so the build and the source agree.
+- `7_final_game.toml` parsed with `tomli`, never grep. The canvas graph walked for reachability,
+  broken targets, dead nodes, NPC references and condition versions. Flags and traits counted by a
+  generic recursive walk with a path, after a first pass using assumed key names produced a
+  false "21 flags read but never set" — `flagEffects` is a separate key from `effects`.
+- `PYTHONHASHSEED=0 python3 .claude/skills/author-game-v2/scripts/gates.py mrs_vance` captured
+  before and after the review and diffed: identical, so nothing here moved what it measures.
+
+**Build.**
+- A clean `package_from_toml … --gen-version v2` to scratch, with no `--dev`, for the B1 comparison.
+
+**Live.** Headless Chromium against both builds:
+- The age gate and the whole opening funnel, click by click: `open_boot` → `open_dorn_leaves`
+  (three nodes) → `first_office` → `meet_cade` → the Office location screen → `hub_cade_office`.
+- `block_pool` cycling: six renders of `hub_cade_office`, three distinct variants.
+- The finish bands: `loop_cade.finish` at `loop_act` 0/1/2/3, and `loop_sherrod` walked
+  entry → act → finish from a cold start.
+- The money clamp: four balances through `buy_propane`, two through `buy_gas`, one income click.
+- The sleep landing: five start times through `act_sleep`, reading `game_state.time_state` before
+  and after.
+- The quest page at all-meters-zero and at every-door-open.
+- `standing` bands in `work_counter` at 5 / 25 / 60.
+
+**⚠️ One probe trap, paid for here so it is not paid for again.** Player traits live at
+`State.variables.player.core_traits.*`. Writing to `State.variables.player.*` silently creates a
+stray key, the condition reads the real one, and **the screen renders as though the band were
+broken.** The first pass at the finish bands produced a convincing false defect this way — "no
+explicit paragraph renders at any `loop_act` value" — that survived until the variable tree was
+dumped. SugarCube globals are also not on `window` directly in a page-eval context; reach them
+through `window.SugarCube.{State,Engine,setup}`.
+
+---
+
+# §12 · Found by LO playing the build
+
+Opened 2026-08-25, from LO's play-report on the shipped v0.1. Five reports, investigated the same
+day. Three are defects, one is a doctrine question the skill and LO disagree on, and one is a gap in
+the skill that has nothing to do with this game. The investigation also produced §0a's N5 and N6.
+
+---
+
+### P1 · The 21 random ambients have no presence gate, so a character can be on screen while the game says he is elsewhere
+**severity** HIGH · **layer** GAME · **status** OPEN
+
+> LO: *"in the navigation panel where I see npc present or not, it doesn't shows up and it
+> automatically fires up."*
+
+Two kinds of canvas fire without the player choosing them, and only one kind is guarded:
+
+```
+ 6 one-shot meetings  +  8 walk-ins  +  11 hubs   = 25 declare requires_npc   -> gated
+21 random ambients                                       declare nothing      -> requiresNpc: null
+```
+
+Not one of the 21 carries its own `schedules` either, so nothing bounds them in time. The runtime is
+explicit about what that means (`v2.py:5260`):
+
+```javascript
+if (!canvNpc.requiresNpc) {
+    afterNpcGate.push(canvNpc);   // no gate = always allowed
+    continue;
+}
+```
+
+So `amb_office_close` — Cade bringing the roller door down — sits in the eligible pool at 02:00,
+when `setup.getNpcLocation('npc_cade')` returns `None`; that null was read live. `amb_bunk_radio`
+puts Isaac in the bunk room at 10:00 while his schedule has him at the shop. The three
+`sherrods_room` ambients are eligible at noon against a 23:30–06:00 schedule. Meanwhile the
+navigation panel builds its presence indicator from `npcId` and the schedule, so it correctly shows
+the character as absent — which is the mismatch LO saw.
+
+**⚠️ The limit of the evidence.** This is established from the runtime source, the `requiresNpc`
+values in the built HTML, and the TOML — **not** from catching one in the act. Ambient chances run
+0.26–0.35 and the walker completed only eight clean trips before the harness lost the thread. The
+mechanism is certain; a captured instance is not in hand.
+
+**⚠️ Eight of the twenty-one are NOT defects, and a sweep would break them.** The author wrote the
+absence into the prose:
+
+| canvas | why it is correct |
+|---|---|
+| `amb_office_phone` | Dorn is on the telephone — *"It is your husband, from a lay-by somewhere"* |
+| `amb_bathroom_landing` | *"Two of them are on the landing"* — outside the door, not in the room |
+| `amb_bathroom_water` | Booth *"says it through the door on his way past"* |
+| `amb_bunk_two_of_them` | *"You are on the stairs. The stairs are outside the room."* |
+| `amb_kitchen_five_adults` | narrates the arrival — *"Sherrod comes down off his stairs and in through the back door"* |
+| `amb_kitchen_friday` | narrates the arrival — *"Cade comes up for ten minutes on a Friday"* |
+
+The prose is doing the work the trigger is not. That is good writing, not an accident, and it is why
+the fix is per-canvas.
+
+**Why no check caught it.** No gate reads `requires_npc` at all. `a meeting fires where they are`
+checks the six one-shots, which are the canvases that already declare it.
+
+#### Fix
+
+`requires_npc` on the ambients that put a character *inside* the room — roughly thirteen of the
+twenty-one. Leave the eight above alone. Where a character legitimately appears outside his hours,
+the alternative is a `schedules` row on the ambient rather than a presence gate.
+
+Worth pairing with a skill fix: a lint that lists every canvas which names a speaker and declares
+neither `requires_npc` nor a schedule. `amb_kitchen_friday` would be on it for a second reason — it
+says *"on a Friday"* and nothing restricts the day, so it can fire on a Saturday.
+
+---
+
+### D1 · The "why it is locked" text runs to 32 sites across three systems
+**severity** MED · **layer** GAME + SKILL — a question for LO, not a defect call · **status** OPEN
+
+> LO: *"I didn't liked showing the why text for locked choices."*
+
+```
+10  show_when_blocked + cooldown_message    greyed on the ROOM screen, re-read every day
+11  show_when_locked, inside the sex loops   "Let him cum — he is nowhere near it yet."
+ 6  show_when_locked, day-caps and needs     "The book is straight for today."
+ 5  show_when_locked, the loop entries       the release's five actual doors
+```
+
+**The five doors should keep their reason.** `SKILL.md:70` says gate 42 exists *"because our locked
+doors are mute"*, and `the-release.md:110` is *"An honest wall is a promise; a silent one is a bug
+report."* Strip those and the player climbs a meter with nothing telling them what it buys.
+
+**The other 27 are the noise, and the 11 inside the loops are the worst of them.** A locked choice
+mid-scene — *"Let him cum — he is nowhere near it yet"* — is the machinery explaining its own
+arousal threshold at the one moment the fiction should be the only thing on the screen. The 10
+room-screen cooldowns are re-read daily and say nothing a greyed-out item would not.
+
+Recorded as a question rather than a defect because it is a scope decision on a rule that is right
+where it was aimed. The skill never gave the door rule a boundary, so it got applied to everything
+that can be locked.
+
+#### Fix
+
+Split it: keep `locked_text` on the five loop entries, drop `show_when_locked` from the 11 in-loop
+ladder gates, and drop `show_when_blocked` from the 10 cooldowns. Then give the doctrine the missing
+scope sentence — a *door* says why, a *cooldown* does not.
+
+---
+
+### M1 · Thirteen of fourteen locations never say what kind of place they are
+**severity** HIGH · **layer** GAME · **status** OPEN
+
+> LO: *"couldnt understand the world, the map, locations."*
+
+The gate reports `5/14 locations carry one` and passes. Split by what the covering canvas actually
+does:
+
+```
+the_office       first_office                  <- the ONLY canvas that describes a PLACE
+the_office       meet_cade, meet_sherrod          a person, who happens to stand there
+the_shop_floor   meet_tobin                       "
+the_wash_bay     meet_isaac                       "
+the_kitchen      meet_booth                       "
+your_room        open_dorn_leaves                 "
+9 locations      nothing at all
+```
+
+So the honest number is **one**. Four of the five "covered" locations are covered by a character
+introduction that happens to be sited there; walk into the wash bay before meeting Isaac and nothing
+has ever told you it is a place where trailers get hosed out.
+
+**`the_yard` is among the nine with nothing** — the exterior, the root of the map, and the screen
+the player crosses more than any other. Its `description` is good and carries the entire geography:
+
+> *"Gravel from the back step of the house to the roller door of the shop, wide enough to turn a rig
+> on… The county road goes past the gate and everything on this property opens onto this."*
+
+A description renders under the room title on every visit. It is wallpaper, not an arrival, and
+`the-first-hour.md` F7/F9 is about the moment of arriving.
+
+#### Fix
+
+First visits for the nine, starting with `the_yard`, `the_bunk_room` and `the_back_row` — the three
+carrying the most prose with no introduction. `v2_state.json` already promises this; it is unpaid.
+
+---
+
+### M2 · The map is a two-level tree and the player is never shown its shape
+**severity** MED · **layer** GAME + SKILL · **status** OPEN
+
+What is declared, via `navigation_order` (§0a N5):
+
+```
+the_yard ─┬─ the_office ─── sherrods_room
+          ├─ the_shop_floor ─┬─ the_bunk_room
+          │                  └─ the_wash_bay
+          ├─ the_kitchen ─┬─ your_room
+          │               ├─ the_bathroom
+          │               └─ booths_room
+          ├─ the_back_row
+          └─ kerr_crossing ─┬─ the_bank
+                            └─ the_bar
+```
+
+Correct `nested_zones`, and mechanically sound — the engine adds the `Leave <name>` edge back up, so
+every room is reachable and the gate's `14/14` is true.
+
+What the player sees is a flat list of bare nouns. From the Yard: `Office · Shop Floor · Kitchen ·
+Back Row · Kerr Crossing`. No grouping into house / shop / outside / town. **Six locations never
+appear on any list the player is looking at**, because they are one level further down. Getting from
+`your_room` to `the_wash_bay` is four moves through two parents and nothing anywhere says so.
+
+`board.map.shape` already contains the sentence that would fix it — *"a diesel repair yard on a
+county road: gravel between a house and a four-bay shop, a row of overnight trucks at the far end,
+and a crossroads twenty minutes down the road"* — and it exists only in the ledger, where no player
+will ever read it.
+
+**Skill layer:** `the-map.md` specifies archetypes and the graph. Nothing in it asks how the player
+learns the shape, so a correct `nested_zones` map can ship completely illegible.
+
+#### Fix
+
+Group the travel list by zone, or put the shape into the yard's first visit (M1) so the player is
+told once that the house, the shop and the back row all hang off this gravel.
+
+---
+
+### W1 · Six men, and the prose says who they are 31 times in 10,298 words
+**severity** HIGH · **layer** GAME + SKILL · **status** OPEN
+
+> LO: *"For many npcs, it still sounds unclear like who is who."*
+
+Every kin word in the game's canvas prose:
+
+```
+husband 8 · brother 8 · wife 6 · father 4 · son 2 · youngest 2 · eldest 1     = 31
+```
+
+The `npcs[].relationship` strings are excellent and land it in six words — *"Your husband's eldest,
+29"*, *"Your husband's middle son, 24"*, *"Your husband's brother, 51"*. **They live on the cast
+page.** In the prose the player reads, the six are Cade, Booth, Isaac, Sherrod, Tobin and Dorn: six
+men, five surname-shaped first names, no ages, no nicknames, four of them Vances and two of those
+interchangeable on the page (Isaac 24 and Cade 29 are both grown sons who work the yard).
+
+The game owns the perfect device and does not spend it. **They call her Mrs. Vance; she calls them
+nothing.** The title is the premise, it is asymmetric, and *"your husband's eldest"* is three words
+that could ride in every Cade ambient without costing the register anything.
+
+**Skill layer, and the load-bearing half:** `the_season` drew the same sentence from LO — *"I don't
+know who is who."* Second game, same failure, so it is the instruction set and not the author. The
+skill teaches a 7-step npc-intro and says nothing about **keeping** a name attached after the
+introduction, and no gate or lint counts whether prose re-anchors a relationship.
+
+#### Fix
+
+A kin-anchor in the recurring surfaces, not the one-shots: each character's hub and ambients carry
+their relation once. Then a lint that reports kin-words per character per 10k words, so the next game
+cannot ship at 31.
+
+---
+
+### G1 · Eight games, one Want shape — and nothing checks a new premise against the repo
+**severity** MED · **layer** SKILL · **status** OPEN
+
+> LO: *"when it suggests some ideas, it goes and check the existing v2 games and made sure that new
+> game doesnt matches the current ones."*
+
+**No such step exists.** `the-want.md` has six sections and a closing test, and none asks whether the
+repo already contains this game. The only differentiation language anywhere in the skill is about
+meters *within* a game (`the-want.md:48`, `the-board.md:250`).
+
+Mrs. Vance is **not** a repeat. Its appetite — *to be wanted by men who have to call her by a title
+she did not earn* — is genuinely its own. The pattern is one level up:
+
+```
+back_home      24   "To be wanted — not looked after, not tolerated, not managed..."
+forty_miles    26   "To be wanted by men who have nowhere else to be at 3am"
+off_season     39   "To be wanted -- not needed, not thanked, not worried about..."
+seventh_day    21   "To be wanted by the men whose entire authority over her is telling her no"
+the_allowance  19   "To be wanted by the people who set her price"
+the_season     23   "To be wanted by men she shares a wall with"
+mrs_vance      27   "To be wanted by men who have to call her by a title she did not earn"
+steam          31   "To be necessary to people at the moment they have nothing on"
+```
+
+**Seven of eight open with the same four words.** All eight are a woman aged 19–39 held in place by
+money she cannot reach. Three of eight are a rural compound where she is the young woman among men.
+
+The fictions differentiate; the shape does not — because `the-want.md` §2 mandates it. The section is
+titled *"the appetite that never fills."* So the check LO describes would not have caught anything
+about this game's premise. It would have caught this, which is larger and decides what the next game
+can be.
+
+#### Fix
+
+Two separate things, and only the first is small: a step in `the-want.md` that reads the other games'
+`v2_state.json` want blocks before a premise is proposed; and a decision about whether §2's shape is
+the genre or merely the first shape measured. That second one is not a fix, it is a study.
+
+---
+
+---
+
+# Appendix A · The measurements
+
+Everything quoted above, in one place.
+
+### A.1 · The scoreboard
+
+```
+41/41 judged gates pass · 1 n/a (no [[clothing]] catalog declared)
+location fill      14 locations · 10,298 words vs 11,400 declared · 14/14 on budget · anchor 27%
+explicit floor     14.0% of 107 beats carry 3+ explicit words (floor 7.5%)
+explicit repeat    100.0% of 15 explicit beats are re-enterable (floor 50%)
+narration:dialogue 4.9:1 — 1,760 spoken of 10,298 (ceiling 5:1) · field median 2.93:1
+sentence length    median 9 words across 796 sentences (ceiling 14) · field median 10
+speakers named     212/212 dialog and thought_bubble blocks
+traversal heat     14/14 locations carry a cycling explicit pool
+```
+
+### A.2 · The prose pools
+
+```
+39 block_pool blocks across 35 canvases
+   variants:   21 pools of 3   ·   11 of 4   ·   7 of 2
+   children:   32 paragraph    ·   13 dialog   (6 pools mix the two — importer WARNs, builds)
+   nesting:    0 pools inside pools           depth cap is 4 (template_import.py:6143)
+   in loops:   0 of 20 loop nodes
+
+cross-game census, 22 scorable games:   mrs_vance 39 · vesper 6 (v1) · all others 0
+```
+
+### A.3 · The economy
+
+```
+sources (+/day, all day-capped)   counter 74 · trailer 62 · parts 34 · books 22 · walkround 16
+                                  = 208/day, 72 energy
+sinks                             propane 26 · gas 20 · drink 16 · parts 14 · wash-bay supplies 2
+obligation                        260/week, Friday, grace 1, eviction_mode = flag_set -> cade_covered
+starting money                    18
+energy                            start 55 · decay 22/day · sleep +70 (cap 100)
+clean                             start 30 · decay 18/day · house wash +55 free · bay +45 for $2
+```
+
+### A.4 · The meters
+
+```                     set   read      declared rungs                 highest gate built
+player.standing         25      4      —                              —
+player.arousal          42      8
+player.loop_stage       25      3
+player.loop_act         20      5
+player.clean            14      2
+player.energy            6      3
+player.money             5      0 conditions / 5 cost sites
+npc_isaac.want          10      4      5, 18, 38, 66                  38
+npc_booth.want           8      1      6, 16, 30, 50, 74              50
+npc_tobin.want           8      2      8, 30, 70                      70
+npc_booth.trust          7      3
+npc_cade.trust           7      4                                     26
+npc_sherrod.want         7      2      4, 15, 34, 62                  34
+npc_cade.want            6      1      5, 14, 26, 42, 60, 82          42
+npc_dorn.want            2      0 conditions / 2 quest cards   12, 55        —
+```
+
+### A.5 · Presence
+
+```                minutes covered per weekday (0 = Mon)
+npc_cade      810 810 810 810 989 209  30      zero days: none
+npc_booth     390 390 390 390 390 450 450      zero days: none
+npc_isaac     600 600 600 600 600 240 240      zero days: none
+npc_sherrod   600 600 600 600 600 390 390      zero days: none
+npc_tobin     690 690 690 690 690 330 150      zero days: none
+npc_dorn      435   -   -   - 269 599 419      zero days: Tue, Wed, Thu  (by design)
+```
+
+### A.6 · The five doors
+
+```
+hub_cade_office     -> loop_cade      npc_cade.want gte 42
+hub_booth_room      -> loop_booth     npc_booth.want gte 50
+hub_isaac_bay       -> loop_isaac     npc_isaac.want gte 38
+hub_sherrod_office  -> loop_sherrod   npc_sherrod.want gte 34
+hub_tobin_row       -> loop_tobin     npc_tobin.want gte 70
+```
+
+All five `show_when_locked` with a written reason. `loop_solo` is ungated.
+
+### A.7 · The presence gate
+
+```
+declare requires_npc  ->  25 canvases   6 one-shot meetings · 8 walk-ins · 11 hubs
+                          all 25 reach the built HTML as a non-null "requiresNpc"
+declare nothing       ->  21 random ambients that put a speaking character on screen
+                          0 of the 21 carry their own `schedules`
+                          0 of the 21 carry an npc_at_location condition
+runtime               ->  v2.py:5260  no requiresNpc = always allowed
+```
+
+### A.8 · The map, as declared by `navigation_order`
+
+```
+the_yard          -> the_office, the_shop_floor, the_kitchen, the_back_row, kerr_crossing
+the_office        -> sherrods_room
+the_shop_floor    -> the_bunk_room, the_wash_bay
+the_kitchen       -> your_room, the_bathroom, booths_room
+kerr_crossing     -> the_bank, the_bar
+(the other 8      -> leaf)
+```
+
+Every edge is authored one-way; the engine adds the return (`v2.py:19807`). Root is `the_yard`, which
+nothing lists — it is reached only by leaving a child. Max depth 2.
+
+### A.9 · Kin words in canvas prose
+
+```
+husband 8 · brother 8 · wife 6 · father 4 · son 2 · youngest 2 · eldest 1   = 31 in 10,298 words
+```
+
+### A.10 · The eight v2 want-lines, opening clause
+
+```
+back_home      24    "To be wanted — not looked after, not tolerated, not managed"
+forty_miles    26    "To be wanted by men who have nowhere else to be at 3am"
+off_season     39    "To be wanted -- not needed, not thanked, not worried about"
+seventh_day    21    "To be wanted by the men whose entire authority over her is telling her no"
+the_allowance  19    "To be wanted by the people who set her price"
+the_season     23    "To be wanted by men she shares a wall with"
+mrs_vance      27    "To be wanted by men who have to call her by a title she did not earn"
+steam          31    "To be necessary to people at the moment they have nothing on"
+```
+
+### A.11 · The lock sites
+
+```
+show_when_blocked  (room screen, greyed)   10
+show_when_locked   inside the sex loops    11
+show_when_locked   day-caps and needs       6
+show_when_locked   the loop entries         5
+                                          ---
+                                           32
+```
+
+---
+
+# Log
+
+**2026-08-25 — opened.** Thirteen items, all `OPEN`: B1 (blocker), C1/Q1/R1 (high), C2/S1/S2
+(med), Q2/T1/L1/L2/L3 (low), E1 (open question). Four self-corrections recorded in §0a before anything else
+was written. `v2_state.json` and the skill deliberately untouched — this pass records, it does not
+repair.
+
+**2026-08-25 — §12 added, from LO playing the build.** Six items: P1/M1/W1 (high), D1/M2/G1 (med;
+D1 and G1 are questions rather than defect calls). Two further self-corrections, N5 and N6, appended
+to §0a — the map data and the presence gate were both wrongly called broken in chat before being
+read properly, and both are correct. §9 gained the two matching cleared rows so neither is
+re-investigated. Count 13 → 19. Still nothing repaired.
+
+**2026-08-25 — L4 added.** Reconciling §4's pool count against the shipping commit before committing
+this file showed the commit's "46 pools" matches neither the grep (41) nor the parse (39), and its
+"46 in the_long_summer" is 49. Filed with L1–L3 as the same defect class. Count 19 → 20.
