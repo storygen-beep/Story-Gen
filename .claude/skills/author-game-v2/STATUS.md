@@ -291,15 +291,15 @@ Eleven were scoped; LO picked three. **A (the want), C (the loop) and D (the wri
 | | section | state |
 |---|---|---|
 | **B** | the first fifteen minutes | **DONE 2026-08-24** — `findings_B_refusal.md`. **Day one refuses nothing**: 12 of 14 identifiable openings carry zero spoken refusals, Course of Temptation's 78-passage prologue included. Field-wide, only **23%** of the 27,505 conditionals wrapped around an action refuse anything — 35% are variant selectors. Of refusals, **71% render nothing**; the 28% that speak run a **median 9 words** and **60% name a handle** (price 37%, place 2%). ⚠️ The section's real find is that **`engine.md` §15 taught the opposite** — *"prefer the want"* — which is why **13 of our 176 shown-locked choices carry a reason**. §15 is reversed and gate 42 landed |
-| **E** | how she gets from no to yes | **partly** — D found the refusal costs and Zara's consent fork. Missing: the systematic view |
-| **F** | going further | **partly** — C found the two shapes (menu grows vs. event escalates internally). Missing: rungs and spacing |
+| **E** | how she gets from no to yes | **DONE 2026-08-24** — `findings_E_yes.md`. The willingness meter is **per-person in 16 of 20 games**, and the field gives the whole cast **one word on one scale** — become-someone `trust` on 62 of 64, patriarch `like` on 37 of 38 — differentiating people by **modifiers** on it, not by vocabulary. **Median 1 meter per person, median 3 rungs, 88% of thresholds shared across the cast**, and `+1` is the increment. ⚠️ **W6 taught the opposite** — a different meter per relationship type — which is why `off_season` ships four characters with four vocabularies. W6 is reframed and the meter-ladder lint's cast branch now gets a per-character comparator instead of the player-ascent 8–17 |
+| **F** | going further | **DONE 2026-08-24** — `findings_F_further.md`. An act menu is **2 options wide, one step apart** (2,292 menus), and **9%** carry a finish. Of 61 arc hubs, **47 run one to four intensities and 14 run five or more** — going further mostly means *more variations at the same intensity*. And escalation is barely gated: **47%** of 7,598 act links carry no condition, her willingness gates **2%**, the player's ascent meter **13%** against her **6%**. ⚠️ **No spacing number exists** — only two arcs in the corpus space acts along a meter, and the honest answer is that the field does not build escalation as a spaced ladder |
 | **G** | the people | **DONE 2026-08-24** — `findings_G_people.md`. The field's answer is a UI component fired tens of thousands of times (a speaker macro is the **#1 macro in the whole game** in 7 of 25 — face + name + colour on every line), a label that encodes the relation (Stepmom · Aunt · Granny · Dr. Angela), **one term of address per person** (5–18% of their lines, never shared), and **a corner of the world each person owns**. `the_season` writes the voices well and then schedules **all four men into the camp every night** |
 | **H** | does the world know? | **DONE 2026-08-23** — `findings_H_known.md`. Reputation refuses almost nothing (14 of 644 field read sites, 2%); it is read constantly and swaps ~25-word lines. `the_season`'s `known` has **7 read sites in 111 passages** |
 | **I** | the body as a machine | **DONE 2026-08-24** — `findings_I_body.md`. The strongest evidence is negative: `degrees-of-lewdity` **built hygiene and switched it off** — 1,273 writes, one read site, a seven-band widget nothing calls, and `<<set $hygieneenabled to 0>> /* unused */` in its own initialiser. Corpus-wide the body gates a median **10%** of its reads (H's reputation: 2%), and a system either stays small and gates or grows large and colours. Ours: **102 garments across 10 games, 47 reads**, and four wardrobes read zero times |
 | **J** | what players say | **DONE 2026-08-23** — `findings_J_players.md`. ⚠️ This row previously read *"untouched"* and **that was wrong**: the 2026-07-24 mopoga study already read 22,622 comments across 31 games and published F1–F10 from them. J was narrowed to testing *this week's* doctrine against 3,479 comments on the four study games |
-| **K** | the mirror | **untouched, and must be last** — it is the synthesis, not a section |
+| **K** | the mirror | **untouched, and now the only one left** — it is the synthesis, not a section. Two inputs waiting for it: the deferred headline recheck, and **the 48% of act-gate conditions section F could not name**. That residue is each game's invented vocabulary; classifying it by *shape* rather than domain — the move section B used to take its own residue from 71% to 0.4% — would probably name most of it |
 
-**Eight are done: A, B, C, D, G, H, I and J.** (This line read *"Four are done"* over a list of six
+**Ten are done: A, B, C, D, E, F, G, H, I and J.** (This line read *"Four are done"* over a list of six
 until 2026-08-24.) The J-then-H recommendation that used to sit here is deleted — it was written
 before either ran, both are finished, and the order ended up reversed because checking the data
 first showed J was largely a re-run.
@@ -308,9 +308,9 @@ first showed J was largely a re-run.
 the section's question in a player's words, and it was the only complaint about `the_season` that
 came from a human rather than a gate.
 
-**Left: E and F (each partly answered by A/C/D), and K (the synthesis, and it must be last).**
-Neither is a blank page — D found E's refusal costs, C found F's two shapes. What is missing in each
-is the systematic view: the consent ladder stated once, and the spacing between rungs.
+**Left: K alone — the synthesis, and it must be last.** Every section that feeds it is now done.
+Before it runs, the deferred recheck has to land: sections A, C, D, G, H and J were measured on 25 of
+27 games, and both `tw.py` fixes from section B sit underneath their numbers.
 
 ⚠️ **The corpus is 27 parseable games, not 25.** `tw.py` only knew `<tw-passagedata>`; three games
 ship the older `<div id="store-area"><div tiddler=…>` container and parsed to zero, so sections

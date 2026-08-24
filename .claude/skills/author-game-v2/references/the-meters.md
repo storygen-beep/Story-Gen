@@ -220,6 +220,17 @@ DoL          exhibitionism  21 gates  11 rungs   15,19,25,35,40,50,55,60,75,80,9
 
 **8–17 rungs, densest at the bottom, lowest rung at a median of 5.**
 
+⚠️ **That number is about the meter that CARRIES the game, and it does not transfer to the cast.**
+Every meter in the table above is a player ascent meter. A per-character willingness meter is a
+different object and the field runs it much shorter — pooled over thirteen games, **median 3 rungs
+per person (p25 2, p75 6)**, with the lowest rung at a median of 5, the same as the ascent number
+(`findings_E_yes.md` §1). become-someone gives each of 62 people 5 rungs of `trust` while its player
+meter `mc.dom` carries 9; both are correct, because they are not the same kind of ladder.
+
+The lint below prints whichever comparator matches the branch it is on. Until 2026-08-24 it printed
+8–17 on both, which told the repo's one roster game its five-rung cast meters were short of eight
+when the field's per-character median is three.
+
 Ours: 3–4 rungs, and **all 16 declared tiers across five games put their lowest rung at exactly
 15.** Read that next to M1's measured failure — a rung is free and 12 clicks moved `cover` 4→16 —
 and the opening of a v2 game is fifteen clicks in which nothing the player does changes anything.
@@ -378,15 +389,60 @@ Three games is not a field. There is no threshold here and `gates.py` is unchang
 > **W6 is the cast's own gating meters**, one set per character, and it is the only one of the three
 > that is per-person. A rule from any of the three does not transfer to the other two.
 
+### One word for the cast, and the difference lives in the modifiers
+
+> **Pick ONE willingness word for the whole game. Put every person on it, on the same scale.
+> Differentiate people by what modifies that number, never by giving them different vocabularies.**
+
+Measured across the thirteen corpus games that run a per-person willingness meter on three or more
+people (`findings_E_yes.md` §1):
+
+```
+median meters per person                    1
+become-someone   trust     62 of 64 people      patriarch  like      37 of 38
+destroyer        relation  45 of 57             friends-of-mine  relation  5 of 5
+zaras-school-life  relationship 6 of 9          the-hellfire-club  love    3 of 3
+threshold values used by two or more people   88%   (range 41-99)
+rungs per person                    median 3  (p25 2, p75 6)
+```
+
+Only `college-daze` (median 3 meters each) and `free-cities` (2) run real stacks. **Nine of thirteen
+games give every person exactly one meter, and it is the same word every time.**
+
+**Three rungs is enough because this meter is not carrying the escalation.** Section F measured what
+actually guards a sex act: of 7,598 act links across thirteen games, **47% carry no condition at
+all** and **2% are gated on the per-person willingness meter**. Among the conditions that do exist,
+the **player's own ascent meter gates 13% and hers gates 6%** — twice as much on the player's side.
+Her meter says whether this person is available; **the player's says how far the game has come**, and
+that is the one W4 measures at 8–17 rungs. Two meters, two jobs, two depths, and both correct at once
+(`findings_F_further.md` §4).
+
+> #### ⚠️ This section said the opposite until 2026-08-24
+>
+> It read: *"For a **roster** game it is the engine, and an identical pair on everyone is the engine
+> missing. Pick each character's gating meter from what the relationship is."*
+>
+> The table below is kept — it is good at what it is actually for — but its job has changed. It
+> picks **the game's one word**, not a different word per person. The old reading produced
+> `off_season`: four characters, four vocabularies (`hold` · `ease+want` · `bond` · `trust+want`),
+> nothing shared. And it made W6 contradict itself two paragraphs later, where it correctly says to
+> reserve the rich model for the one or two arcs that carry the game. `vesper` is the shape that was
+> always right — `relation` on eleven, the rich triple on four.
+>
+> It also made this file criticise `the_season` for the wrong thing: Wade and Prine **sharing**
+> `{ease, want}` is the field's own practice. `the_season`'s real defect is the rule below that
+> stands — **Rae carries no meter at all.**
+
 The default the template shipped is `core_traits = { relation = 0, lust = 0 }` on every character.
-Measured, all five v2 games: **one distinct meter shape across the whole cast, every time.**
+Measured, all five v2 games: **one distinct meter shape across the whole cast, every time** — which,
+read against the numbers above, is the right instinct arrived at by accident.
 
 For a **ladder** game that is correct and deliberate — the tiers do the gating and a bond meter
 colours the arc. Say so and move on.
 
-For a **roster** game it is the engine, and an identical pair on everyone is the engine missing.
-Pick each character's gating meter from what the relationship *is* — adapted from
-`author-game/references/trait-design.md`, which has the full version:
+For a **roster** game the cast meter *is* the engine, so choose the word deliberately rather than
+inheriting `relation` from a template. Pick it from what the relationships in this game mostly
+**are** — adapted from `author-game/references/trait-design.md`, which has the full version:
 
 | the relationship | what gates the rungs |
 |---|---|
@@ -396,6 +452,10 @@ Pick each character's gating meter from what the relationship *is* — adapted f
 | service / workplace | trust only; willingness does not apply |
 | antagonist / witness | a hidden suspicion accumulator, never surfaced |
 | **someone she already belongs to** | **no climbing meter at all** — presence plus one opened flag. He is not a conquest; the variation is in pose and framing, not in a rising bar |
+
+⚠️ **Read the table as a menu of ONE choice, not a per-character assignment.** The last row is the
+exception that still holds per person: someone she already belongs to gets no climbing meter, and
+that is a decision about *that* character. Everyone who does climb, climbs on the same word.
 
 Two more rules that survive from v1 and are worth restating:
 
@@ -425,6 +485,20 @@ route cheaper and another route more expensive**:
 | Loyal | "Devoted and faithful" | never breaks up | — |
 
 > **A meter that only opens things is a stat wearing a personality's name.**
+
+**And this is where the differentiation goes.** `inseminator`'s six traits are not six meters — they
+are **coefficients on one affinity number**, which is exactly the mechanism the measurement above
+describes. `become-someone` does the same thing in code: the shared nudge carries a gift that belongs
+to one person —
+
+```
+<<katetrust>> = <<CharismaBoost>>
+                + (a locket in KATE's inventory)
+                + ''Kate trusts you more''
+```
+
+— a locket for Kate, lingerie for Jade, on the same `trust` number all 62 of them share. One word,
+sixty-two people, and nobody feels the same to play.
 
 Two mechanics from the same page worth having:
 
