@@ -5,6 +5,52 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-25 — a lint for the ambient that puts a man in a room he is not in (`gates.py`)
+
+**Why.** LO played `mrs_vance` — the first game to take all 41 gates — and found a character shutting
+the roller door in a room the navigation panel had just shown him absent from. Fifteen random
+ambients placed a speaking cast member with no gate of any kind. The build was green the whole way.
+
+**The miss is the shape SKILL.md warns about: the doctrine was right and the instrument was aimed at
+the wrong path.** `gates.py:5114` already carries the trace — `requires_npc` is consumed in exactly
+two functions, `checkRandomEncounters` (`v2.py:5245`, `trigger_mode="random"`) and
+`checkAndSubstituteCanvas` (`v2.py:5318`, `substitution_only`) — and G38 *"a meeting fires where they
+are"* then explicitly skips both and judges the auto-fire path, which does not read the field at all.
+The one path that consumes `requires_npc` had no check on it.
+
+**What changed.** New `lint_ambient_presence(model, game)`, next to `lint_dialogue_attribution` which
+it extends. It reports every `trigger_mode = "random"` canvas carrying a `dialog` block with an
+`npcId` and declaring none of `requires_npc`, an `npc_at_location` condition, or its own
+`trigger.schedules`. Wired into the call site, the `--json` payload as `ambient_presence`, and the
+printed lint block.
+
+**It splits the finding into two different jobs, which is the point.** The verdict is `gate it on
+<name>` when the speaker has schedule rows at that location — the window exists and one line of
+`requires_npc` is the fix — and `or narrate the arrival — no row here to gate on` when he does not,
+because there a gate would strand the canvas forever and the fix is prose. Reported as a **LIST and
+never a gate**: an ambient may legitimately place someone off-schedule (on the telephone, through a
+door, arriving from somewhere the scene declines to name), and only the author can tell those from
+the defect.
+
+**Verified.**
+- On `mrs_vance` before the repair it reports **20/21**; after, **4/21** — and the four are the three
+  the author had already written as off-schedule plus one real open question, `amb_kitchen_house`.
+- Both verdicts are exercised in that output: `amb_bathroom_water` and `amb_bathroom_landing` come
+  back as *or narrate* (Booth has no bathroom row), `amb_kitchen_house` and `amb_office_wrecker` as
+  *gate it*.
+- Scoped across the whole repo: `mrs_vance` is the **only** v2 game with a speaking character in a
+  random ambient — 46 random canvases across the other seven games, **zero** with a speaker. So the
+  lint has an in-scope population of one game today. It is ahead of the corpus, not a no-op, and it
+  bites the moment a second game puts its cast inside its texture.
+- `41/41 judged gates pass` on `mrs_vance` before and after; the lint touches no tally.
+- The gate itself proved live in headless Chromium against the built game, driving
+  `setup.checkRandomEncounters()` 400 times per hour instead of waiting on a 0.26–0.35 roll: at
+  Monday 10:00 the three gated bunk-room ambients return **0** while the ungated control returns 122;
+  at Monday 22:00 all four return. `amb_office_phone`'s two-item `npc_at_location` condition fires at
+  10:00 and not at 19:00, both directions correct.
+
+---
+
 ## 2026-08-24 — `ne` reaches two of three evaluators, a lint learns the second container type, and two of section K's own claims are corrected
 
 **Why.** Section K closed the field study and left two pieces of doctrine with nothing built against

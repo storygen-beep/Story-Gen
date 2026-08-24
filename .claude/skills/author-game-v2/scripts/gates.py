@@ -613,6 +613,93 @@ def lint_dialogue_attribution(model):
     return hits
 
 
+def lint_ambient_presence(model, game):
+    """A random ambient in which a character SPEAKS, with nothing saying he is there.
+
+    The other half of G38. G38 asks whether a one-shot meeting can only play in a room
+    its character is standing in, and is scoped to the auto-fire path — which does not
+    read `requires_npc` at all (`v2.py:4559`). This asks the same question of the path
+    that DOES read it: `trigger_mode = "random"` (`checkRandomEncounters`, `v2.py:5245`).
+
+    Nothing was checking it, and the miss is the exact shape SKILL.md warns about — the
+    doctrine was right, the instrument was aimed at the wrong path.
+
+    The failure this was written from, caught by a player and not by a build: fifteen
+    ambients in a green 41/41 game put a man in a room, speaking, with no gate of any
+    kind. The navigation panel reads presence from the schedule and correctly showed him
+    absent; the ambient then fired anyway and he shut the roller door in front of the
+    player. Once the panel is wrong once it stops being read, and the panel is how a
+    sandbox is navigated.
+
+    THREE OUTCOMES, and they are different jobs — the split is the point of the lint:
+
+      · `gate it`      — the speaker has schedule rows at this location, so the window
+                         exists and one line of `requires_npc` is the whole fix.
+      · `or narrate`   — the speaker has NO row here, so a gate would strand the canvas
+                         forever. The fix is prose: narrate the arrival, the way a
+                         correct one already does ("Sherrod comes down off his stairs
+                         and in through the back door"). Do NOT gate these.
+      · not reported   — already carries `requires_npc`, an `npc_at_location` condition,
+                         or its own `trigger.schedules`.
+
+    A LIST AND NEVER A GATE. An ambient may legitimately place a character who is
+    off-schedule, and three ways of saying so are all correct: he is on the telephone,
+    he is speaking through a door, he has arrived from somewhere the scene declines to
+    name. Only the author can tell those from the defect, so the check hands over the
+    rows and the windows and lets them call it.
+    """
+    npc_rows = collections.defaultdict(list)
+    for n in (game.get("npcs") or []):
+        for r in (n.get("schedules") or []):
+            loc = r.get("location") or r.get("location_id")
+            if loc:
+                npc_rows[(n.get("id"), loc)].append(r)
+
+    speaking, findings = 0, []
+    for c in model:
+        if not c.get("random"):
+            continue
+        trig = (c.get("raw") or {}).get("trigger") or {}
+        speakers = []
+        for n in c.get("nodes") or []:
+            blocks = []
+            _dialog_blocks(n.get("blocks"), blocks)
+            for b in blocks:
+                nid = ((b.get("props") or {}).get("npcId") or "").strip()
+                if nid and nid not in speakers:
+                    speakers.append(nid)
+        if not speakers:
+            continue                      # nobody to misplace
+        speaking += 1
+        if trig.get("requires_npc") or trig.get("schedules"):
+            continue
+        if any(it.get("type") == "npc_at_location"
+               for it in ((trig.get("conditions") or {}).get("items") or [])):
+            continue
+        loc = c.get("loc")
+        placed, stranded = [], []
+        for sp in speakers:
+            rows = npc_rows.get((sp, loc))
+            short = re.sub(r"^npc[_-]", "", sp)
+            if rows:
+                hrs = " · ".join(f"{r.get('start_time')}-{r.get('end_time')}" for r in rows[:2])
+                placed.append(f"{short} ({hrs})")
+            else:
+                stranded.append(short)
+        verdict = (f"gate it on {placed[0].split()[0]}" if placed
+                   else "or narrate the arrival — no row here to gate on")
+        findings.append(
+            f"{c['id']} @{loc}: {', '.join(speakers)} speak(s), no presence gate — "
+            f"{verdict}"
+            + (f"; {', '.join(stranded)} has no row at this location" if stranded and placed else ""))
+
+    if not speaking:
+        return ("", [])
+    summary = (f"{len(findings)}/{speaking} ambients where somebody speaks carry no "
+               f"presence gate")
+    return (summary, sorted(findings))
+
+
 def lint_screen_shape(model, game):
     """The two `the-surfaces.md` rules whose thresholds are not yet establishable.
 
@@ -5368,6 +5455,7 @@ def main():
     results = run_gates(model, game, state)
 
     lints = lint_dialogue_attribution(model)
+    amb_summary, amb_lints = lint_ambient_presence(model, game)
     world_lints = lint_world_prose(model, game)
     shape_summary, shape_lints = lint_screen_shape(model, game)
     label_summary, label_lints = lint_labels(model, game)
@@ -5397,6 +5485,8 @@ def main():
                                                "findings": label_lints},
                                     "browse_share": {"summary": browse_summary,
                                                      "findings": browse_lints},
+                                    "ambient_presence": {"summary": amb_summary,
+                                                         "findings": amb_lints},
                                     "dispatch_depth": {"summary": disp_summary,
                                                        "findings": disp_lints},
                                     "ladder": {"summary": ladder_summary,
@@ -5457,6 +5547,20 @@ def main():
             print(f"          · … and {len(lints)-12} more")
         print("          (a canvas that neither binds nor names the speaker — check the"
               " name that will render)")
+
+    if amb_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the ambient puts him in the room — {amb_summary}")
+        for h in amb_lints[:16]:
+            print(f"          · {h}")
+        if len(amb_lints) > 16:
+            print(f"          · … and {len(amb_lints)-16} more")
+        print("          (the OTHER half of G38, on the path that actually reads the field"
+              " — checkRandomEncounters, v2.py:5245. A LIST, never a score: an ambient may")
+        print("           legitimately place someone off-schedule, and the prose is where"
+              " that is said. Two different fixes — `gate it` is one line of requires_npc;")
+        print("           `or narrate` means no row exists here, so a gate would strand the"
+              " canvas and the arrival belongs in the prose instead)")
 
     if label_summary:
         print(f"  {'─'*72}")
