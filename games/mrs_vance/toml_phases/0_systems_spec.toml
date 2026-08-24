@@ -1,0 +1,466 @@
+# =============================================================================
+# Mrs. Vance — 0_systems_spec
+# Built with author-game-v2. Want + board: games/mrs_vance/WANT.md, v2_state.json
+#
+# WHO CLIMBS: "cast".  the-meters.md W1, declared before a meter was named.
+#   No player ascent bar. `board.ascent_tiers = []`. The ladders are the men,
+#   and they live on the [[npcs]] blocks as `subject = "npc"` meters.
+#
+# METERS
+#   CAST        ONE willingness word for the whole cast — `want`, same scale on
+#               everyone. W6 as rewritten 2026-08-24: nine of thirteen field
+#               games give every person exactly one meter and it is the same
+#               word every time; differentiation is per-site modifiers and per
+#               person subject matter, NOT a private vocabulary per man.
+#               off_season shipped four shapes for four people under the old
+#               reading and this game deliberately does not.
+#               `trust` (access — what he lets her into) is the RICH second
+#               meter and it is on TWO people only: Cade and Booth, the arcs
+#               that carry the game.
+#   COLOUR      `standing` — how much of the Vance name is actually hers. A
+#               W5b audience meter: it RISES, it is read constantly to swap ONE
+#               line, and it refuses almost nothing. The field reads reputation
+#               at 644 sites and refuses at 2% of them. Do NOT apply W5's
+#               shuts-a-door test to it — W5 owns the meter that closes.
+#   THROTTLE    `arousal` — gates the FINISH link on the act loops and nothing
+#               else, reset to 0 at climax (W2). Five v2 games raised it 232
+#               times and read it 4, because none of them built a loop for it
+#               to gate. This one builds the loop.
+#   NEEDS       energy · clean — each shuts a named door (M8-M10).
+#   CURRENCY    money. clamp = false on EVERY effect that writes it (§21).
+#   NO COUNTERWEIGHT. One field game in 25 ships one that gates anything.
+#
+# ⚠️ NO RUNG STARTS AT 15. All 16 declared tiers across five v2 games put their
+#    lowest rung at exactly 15 because templates/board.toml shipped that band
+#    table — fifteen clicks in which nothing the player does changes anything.
+#    Field runs 8-17 rungs on a player meter and a MEDIAN OF 3 on a per-person
+#    one, lowest at ~5 (W4). Every ladder here opens at 4-8.
+# =============================================================================
+
+schema_version = "1.0"
+
+[project]
+id              = "mrs_vance"
+title           = "Mrs. Vance"
+description     = "Eleven weeks married to the man who owns the yard, and he hauls four nights out of seven. His three sons and his brother are all still here, and every one of them has to call you by a title you did not earn."
+starting_canvas = "open_boot"
+quests_engine   = "v2"
+version         = "0.1"
+
+[time]
+starting_hour = 6
+starting_day  = "Monday"
+starting_week = 1
+
+[settings]
+narration_person  = "second"
+
+# ⚠️ CLOTHING IS OFF ON PURPOSE. With `clothing_enabled = true` the generator
+#    emits [[Change Clothes->WardrobePage]] on the wardrobe location
+#    UNCONDITIONALLY (v2.py:9601-9602) — no item check — so off_season 0.1
+#    shipped a live link at the top of her own home leading to a page rendered
+#    from an empty catalog. And a declared wardrobe must be READ somewhere or
+#    the `wardrobe is read` gate fails: 102 garments across ten of our games
+#    against 47 reads between them. Arm it in the release that authors both the
+#    catalog and the beat that teaches it (the-first-hour.md F4).
+clothing_enabled  = false
+
+[theme]
+mode = "dark"
+
+
+# =============================================================================
+# THE FRIDAY DRAWER COUNT — the engine under the whole game
+#
+# She keeps the books and is not on the account. The yard's cash sits in a
+# drawer she is responsible for, and every Friday Cade counts the drawer
+# against the book she wrote. That is the reversal made arithmetic: she can see
+# every number and touch none of them, and the shortfall is hers.
+#
+# ⚠️ THE ENGINE CHARGES THIS. Do NOT author a canvas that narrates the payment
+#    (engine.md §26). A shipped game wrote the hand-over scene beside a working
+#    [settings.rent] and the authored canvas carried no cost and no money
+#    effect — a free, repeatable, unlimited relation faucet, and the free one
+#    was the one with the writing in it. What IS authored here is the Thursday
+#    night before and the ask. Never the transaction.
+#
+# ⚠️ eviction_mode = "flag_set", NOT the default "game_end". The product never
+#    ends. Short on Friday past the grace week and Cade covers it — which sets
+#    `cade_covered`, which is a DEBT to Cade and opens his ladder. The failure
+#    branch is an escalation, not a loss.
+#
+# ⚠️ It arms at 00:00 on due_day (v2.py:5453-5464), not at the hour Cade's
+#    schedule row puts him in the office. start_after_flag keeps the first
+#    session pressure-free (the-first-hour.md F4b: the opening states the
+#    price and enforces nothing).
+#
+# ⚠️ currency_symbol must equal board.economy.symbol. Left out it defaults to
+#    "$" (v2.py:1190) and the rent card contradicts every button. It reaches
+#    four of the sixteen sites the engine prints money at (§33); RentDay_Short
+#    — the screen she meets when she CANNOT pay — hardcodes "$" and never reads
+#    this key. It agrees with us by luck, not by wiring. House default, and no
+#    real-world currency named anywhere in the prose.
+# =============================================================================
+[settings.rent]
+enabled          = true
+amount           = 260
+currency_symbol  = "$"
+due_day          = "Friday"
+collector_npc    = "npc_cade"
+grace_periods    = 1
+start_after_flag = "drawer_key"
+eviction_mode    = "flag_set"
+eviction_flag    = "cade_covered"
+
+[settings.rent.text]
+title            = "Friday"
+scene            = "He does it at the desk, not the counter, so he is sitting in the chair you have been sitting in all week. The book goes on his left and the drawer goes on his right and he does not open either one until you are standing where he can see you."
+greeting         = "Two sixty. Let's see the week."
+paid_scene       = "You count it out and he stacks it in fifties without looking at his hands, reading down your column while he does it. Your handwriting is the only thing in the room that is yours."
+paid_response    = "That's the week. You write neat."
+paid_closing     = "He squares the book on the desk facing you and stands up out of the chair, and it is not a thing he gives back so much as a thing he is finished with for now."
+cant_pay         = "You have not got the two sixty."
+warning_scene    = "You tell him it is short. He does not raise his voice and he does not look up. He goes back four days in your own column and lets his finger sit under the line where it went wrong, so you can read it yourself, and he waits until you have."
+warning_response = "One week. I'm not going to tell him, and you're going to want to understand what that is."
+warning_closing  = "He leaves the drawer open on the desk when he goes. Not the book — the drawer."
+eviction_scene_soft    = "The second Friday he brings his own money, which he has never done, and puts it in the drawer before he counts it, so the count comes out right. Then he sits down and takes his time about squaring the book."
+eviction_response_soft = "Now it balances. So we're past what you owe the yard, and onto what you owe me."
+eviction_closing_soft  = "He puts the drawer key back on the desk in front of you instead of taking it, which is worse, and he knows it is worse."
+
+
+# =============================================================================
+# SIDEBAR
+#
+# ⚠️ EVERY BANDED KEY IS `hidden = true` IN [[traits.labels]] BELOW. The sidebar
+#    prints a trait twice — once from the auto Traits dump, once from the item
+#    you wrote — and the two do not know about each other (§30, gate 27).
+# ⚠️ NO `max` ON A TOP BAND: a value landing outside every band renders NOTHING
+#    and the card vanishes, which reads as a missing HUD element.
+# =============================================================================
+
+# The audience meter. Identity, so `trait_status_text` and a word, never a
+# number — the player thinks in a word (M7). It rises and it colours.
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "standing"
+bands = [
+  { min = 0,  max = 14, text = "The new wife" },
+  { min = 15, max = 39, text = "Mrs. Vance, to your face" },
+  { min = 40, max = 69, text = "They ask for you now" },
+  { min = 70, text = "You are the one they come to" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "energy"
+bands = [
+  { min = 0,  max = 19, text = "Done in" },
+  { min = 20, max = 44, text = "Getting through it" },
+  { min = 45, text = "Up for it" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "clean"
+bands = [
+  { min = 0,  max = 24, text = "Diesel to the elbow" },
+  { min = 25, max = 39, text = "Grease under the nails" },
+  { min = 40, text = "Clean enough for the counter" },
+]
+
+# The throttle. Banded and value-hidden (M7, transient mood): the band, never
+# the volatile figure.
+[[sidebar_items]]
+type       = "trait_bar"
+trait      = "arousal"
+hide_value = true
+bands = [
+  { min = 0,  max = 29,  text = "—" },
+  { min = 30, max = 64,  text = "Aware of it" },
+  { min = 65, max = 100, text = "Not going to be able to leave it" },
+]
+
+# Countable resource: the exact figure, NO bands (M7). You do not band a thing
+# the player is counting against a Friday.
+#
+# ⚠️ `label` and `max` both belong on the ITEM. A trait_bar reads
+#    `_item.label || _tbKey` (v2.py:16215) and never consults [[traits.labels]],
+#    which is condition text only (v2.py:6781). And `_traitMax` defaults to 100
+#    (v2.py:16214), so an uncapped counter renders as a fraction of a ceiling
+#    that does not exist. max = 260 is [settings.rent] amount, so the bar reads
+#    as how much of Friday she has.
+[[sidebar_items]]
+type       = "trait_bar"
+trait      = "money"
+label      = "The drawer"
+max        = 260
+hide_value = false
+
+# The rail. `quest_next` renders the same renderQuestsGoalBlock the page does,
+# so the three surfaces cannot drift (§23). Without it the only always-visible
+# strings are band texts, which name a STATE and never a step — a player who
+# does not open the Quests page has no place, no verb and no person anywhere in
+# the persistent chrome.
+[[sidebar_items]]
+type = "quest_next"
+max  = 3
+
+
+# ─── Trait labels ────────────────────────────────────────────────────────────
+# money is deliberately NOT hidden: `hidden` drives two surfaces (v2.py:1220-1226)
+# and hiding the only unhidden player trait empties both the sidebar Traits box
+# and the Stats page. A redundant row beats two empty boxes — off_season tested
+# this both ways on 2026-08-22.
+[[traits.labels]]
+key   = "money"
+label = "The drawer"
+
+[[traits.labels]]
+key    = "standing"
+hidden = true
+
+[[traits.labels]]
+key    = "energy"
+hidden = true
+
+[[traits.labels]]
+key    = "clean"
+hidden = true
+
+[[traits.labels]]
+key    = "arousal"
+hidden = true
+
+# Loop state — hidden numeric traits, never flags. A flag set inside a
+# triggerless canvas has no located setter and HARD-FAILS the build (§16).
+# These are stage COUNTERS, set to distinct integers and read eq/gte/lt — the
+# field's commonest gate shape at 53% equality against our 4.5%, and the one
+# our v2 games build least (the-surfaces.md R5d).
+[[traits.labels]]
+key    = "loop_stage"
+hidden = true
+
+[[traits.labels]]
+key    = "loop_act"
+hidden = true
+
+# ⚠️ Hiding also keeps gate 10 honest. Its anti-narrowing test walks EVERY
+#    player trait and calls a key whose `lt` reads outnumber its `gte` reads a
+#    descent — which is what a loop counter read with `lt` looks like. Excluding
+#    hidden keys is deliberate in gates.py, because a hidden trait is not a
+#    meter the player can be lied to by.
+
+
+# =============================================================================
+# DAY ROLLOVER — [engine.daily_tick] (§28)
+#
+# ⚠️ The only clean way to day-cap a TRIGGERLESS rung, and nearly every rung in
+#    a v2 game is triggerless: `max_triggers_per_day` is read off the TRIGGER
+#    (v2.py:11017), so a hub choice has none.
+# ⚠️ The flag is SET ON THE CHOICE, never on a rung's exit. A choice runs
+#    flagEffects BEFORE advanceTime; a node exit runs advanceTime FIRST
+#    (v2.py:12648-12733 vs :13085-13088), and advanceTime is where the day rolls
+#    and this hook clears. An exit-set cap on a rung that crosses midnight
+#    starts the new day already capped — off_season's sleep rung ran 21:00→06:00
+#    and was never offered before midnight again from night two.
+# ⚠️ Two of the three parts validates and throttles nothing. Every flag cleared
+#    here is SET somewhere; gate `a day-cap closes` exists because off_season
+#    shipped four caps with the read and the clear and no set.
+# ⚠️ THE CAP IS PER PERSON AND THE HUBS ARE PER ROOM. Cade has three hubs and
+#    one `cade_rung_today`; spending it in the office empties the shop floor and
+#    the bar for the day, which is intended — but every one of those screens
+#    keeps a free door (R7, gate 37).
+# =============================================================================
+[engine.daily_tick]
+flagEffects = [
+  { targetType = "player", flag = "washed_today",       op = "unset" },
+  { targetType = "player", flag = "seen_today",         op = "unset" },
+  { targetType = "player", flag = "counter_done_today",  op = "unset" },
+  { targetType = "player", flag = "books_done_today",    op = "unset" },
+  { targetType = "player", flag = "parts_run_today",     op = "unset" },
+  { targetType = "player", flag = "trailer_done_today",  op = "unset" },
+  { targetType = "player", flag = "walkround_today",     op = "unset" },
+  { targetType = "player", flag = "cade_rung_today",     op = "unset" },
+  { targetType = "player", flag = "booth_rung_today",    op = "unset" },
+  { targetType = "player", flag = "isaac_rung_today",    op = "unset" },
+  { targetType = "player", flag = "sherrod_rung_today",  op = "unset" },
+  { targetType = "player", flag = "tobin_rung_today",    op = "unset" },
+  { targetType = "player", flag = "dorn_rung_today",     op = "unset" },
+]
+
+
+# =============================================================================
+# THE CAST PAGE — [ui.cast_page] (§34)
+#
+# Presence of the block is the entire opt-in; every line on a card already
+# exists elsewhere and is read at runtime. WHO IS LISTED IS THE QUEST CARDS'
+# DECISION — a character appears exactly when pickQuestsCard returns a card, the
+# same gate QuestsPage makes. Every card below carries that character's meeting
+# flag, so the page fills in as she meets people (the-first-hour.md F8).
+# =============================================================================
+[ui.cast_page]
+title        = "The Vances"
+button_label = "The Vances"
+button_icon  = "👥"
+intro        = "Four of them are his. One of them is yours."
+
+
+# =============================================================================
+# GUIDANCE — [[quest_cards]] (§23; the-voice.md R2/R3/R5)
+#
+# ⚠️ NO `version = "1.0"` ON A QUEST CARD. Quest conditions use a separate
+#    evaluator with no fail-open (v2.py:14878).
+# ⚠️ EVERY card in a character's ladder carries that character's meeting flag in
+#    `when`. A gap means the character reappears at the band whose card you
+#    missed — and the_season gated every hub correctly and still introduced all
+#    five people on the Quests page on click one.
+# ⚠️ A `when` item sets `flag` OR `trait`, never both (template_import.py:5285).
+# ⚠️ `terminal` is not computed from progress. A character whose ONLY card is
+#    terminal prints "✓ Arc complete" on turn one. Every ladder here is two
+#    cards: an open lower band, and a terminal upper one gated `gte` at a
+#    threshold real content sits on.
+# ⚠️ Exactly ONE card in the game sets `terminal_text`.
+#
+# This game declares NO ascent tiers, so there are no tier cards. The page is
+# the six people plus the story goals, which is what a roster game's guidance
+# page IS.
+#
+# Every goal label names a PLACE, a VERB and a WINDOW where the rung is
+# schedule-gated (R3). "Prove yourself to Cade" fails: no place, no action.
+# =============================================================================
+
+# ── STORY GOALS — never gated on a meeting, or the page reads "No active
+#    quests." on turn one (F8).
+[[quest_cards]]
+priority = 90
+text     = "You signed a paper that says nothing here is yours for three years. Until then the money runs through the drawer, the truck runs through Cade, and the room you sleep in is his father's room."
+tip      = "The drawer is counted every Friday and the number has to be two sixty. Work the counter and the bay, and keep the book straight."
+when     = [ { flag = "opening_started", subject = "player", op = "is_true" } ]
+goals    = [ { trait = "money", subject = "player", op = "gte", value = 260, label = "Have the two sixty in the drawer by Friday — the office" } ]
+
+[[quest_cards]]
+priority = 89
+text     = "He is on the road Monday to Thursday. The week has exactly one shape and it is which nights his truck is in the lot."
+tip      = "Nothing much happens while he is here. Everything happens while he is not."
+when     = [ { flag = "opening_started", subject = "player", op = "is_true" } ]
+goals    = [ { trait = "standing", subject = "player", op = "gte", value = 15, label = "Get them saying your name instead of asking for a man — the office counter" } ]
+
+# ── CADE — the spine. trust (access) then want (willingness). ────────────────
+[[quest_cards]]
+priority = 30
+npc_id   = "npc_cade"
+text     = "He runs the yard and he is two years older than you, and he was the only one at the wedding who did not pretend it was ordinary. He signs what you write down. He decides what you are allowed to touch."
+tip      = "He is at the office desk first thing and last thing. Do the books where he has to lean over you to read them."
+when     = [ { flag = "met_cade", subject = "player", op = "is_true" },
+             { trait = "trust", subject = "npc", npc_id = "npc_cade", op = "lt", value = 26 } ]
+goals    = [ { trait = "trust", subject = "npc", npc_id = "npc_cade", op = "gte", value = 26, label = "Do the books at his desk — the office, early or after six" } ]
+
+[[quest_cards]]
+priority = 31
+npc_id   = "npc_cade"
+text     = "He has stopped counting the drawer in front of you and started counting it beside you. What he has not done is say one word about the arrangement, and the not saying is the loudest thing in the room."
+tip      = "Stay in the office after he shuts the roller door. He does not ask you to and he does not tell you to go."
+when     = [ { flag = "met_cade", subject = "player", op = "is_true" },
+             { trait = "trust", subject = "npc", npc_id = "npc_cade", op = "gte", value = 26 } ]
+terminal = true
+terminal_text = "As far as this build goes"
+goals    = [ { trait = "want", subject = "npc", npc_id = "npc_cade", op = "gte", value = 42, label = "Stay after the roller door goes down — the office, after six" } ]
+
+# ── BOOTH — the taboo. trust (what he lets her see) then want. ───────────────
+[[quest_cards]]
+priority = 30
+npc_id   = "npc_booth"
+text     = "Nineteen, and the only one in the house who says the title like he means it. He has no idea what you are and he has decided you are his father's wife, which is the one answer nobody else here accepts."
+tip      = "He is in the kitchen after four and he does not leave when you come in. Be in the room and let it get long."
+when     = [ { flag = "met_booth", subject = "player", op = "is_true" },
+             { trait = "trust", subject = "npc", npc_id = "npc_booth", op = "lt", value = 30 } ]
+goals    = [ { trait = "trust", subject = "npc", npc_id = "npc_booth", op = "gte", value = 30, label = "Stay in the kitchen with him — afternoons, after four" } ]
+
+[[quest_cards]]
+priority = 31
+npc_id   = "npc_booth"
+text     = "He has started using your name and correcting himself back to the title, every time, out loud. He is doing it on purpose now and neither of you has said so."
+tip      = "His door is on the latch after ten. Knock on it about something that could have waited."
+when     = [ { flag = "met_booth", subject = "player", op = "is_true" },
+             { trait = "trust", subject = "npc", npc_id = "npc_booth", op = "gte", value = 30 } ]
+terminal = true
+goals    = [ { trait = "want", subject = "npc", npc_id = "npc_booth", op = "gte", value = 50, label = "Knock on his door about nothing — his room, after ten" } ]
+
+# ── ISAAC — the watcher. one meter. ─────────────────────────────────────────
+[[quest_cards]]
+priority = 30
+npc_id   = "npc_isaac"
+text     = "Twenty-four, and he has not said forty words to you. He watches, and he does not stop watching when you catch him at it, and that was the first thing about this place you liked."
+tip      = "He hoses out trailers in the bay midday. There is no door on the bay."
+when     = [ { flag = "met_isaac", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_isaac", op = "lt", value = 38 } ]
+goals    = [ { trait = "want", subject = "npc", npc_id = "npc_isaac", op = "gte", value = 38, label = "Get clean in the bay while he is working it — midday" } ]
+
+[[quest_cards]]
+priority = 31
+npc_id   = "npc_isaac"
+text     = "He has stopped pretending he was looking at something else. He still does not say anything, and the silence has changed sides — it is not his shyness any more, it is a thing he is doing to you."
+tip      = "The bunk room is over the shop and the stairs are outside. He is up there from nine."
+when     = [ { flag = "met_isaac", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_isaac", op = "gte", value = 38 } ]
+terminal = true
+goals    = [ { trait = "want", subject = "npc", npc_id = "npc_isaac", op = "gte", value = 66, label = "Go up the outside stairs — the bunk room, after nine" } ]
+
+# ── SHERROD — the debt. one meter, and it opens crude. ──────────────────────
+[[quest_cards]]
+priority = 30
+npc_id   = "npc_sherrod"
+text     = "Dorn's brother, fifty-one, and he lives up the stairs over the office. He knew about the wedding before you did and he has never once said what he thinks that is worth."
+tip      = "He is in the office after the shop shuts and he is in no hurry. Ask him something about the family."
+when     = [ { flag = "met_sherrod", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_sherrod", op = "lt", value = 34 } ]
+goals    = [ { trait = "want", subject = "npc", npc_id = "npc_sherrod", op = "gte", value = 34, label = "Ask him about the family — the office, evenings" } ]
+
+[[quest_cards]]
+priority = 31
+npc_id   = "npc_sherrod"
+text     = "He has started saying it. Not asking — saying, in the flat voice he uses for a job sheet, and then waiting to see whether you are going to make him say it twice."
+tip      = "His room is at the top of the outside stairs over the office."
+when     = [ { flag = "met_sherrod", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_sherrod", op = "gte", value = 34 } ]
+terminal = true
+goals    = [ { trait = "want", subject = "npc", npc_id = "npc_sherrod", op = "gte", value = 62, label = "Go up the outside stairs over the office — evenings" } ]
+
+# ── TOBIN — blood, and the shortest ladder. ─────────────────────────────────
+[[quest_cards]]
+priority = 30
+npc_id   = "npc_tobin"
+text     = "Your brother. You got him the job and he took it, and he is the only person on this property who knew you before there was a title to say. He has not called you Mrs. Vance once."
+tip      = "He walks the back row last thing at night, on his own, checking the parked trucks."
+when     = [ { flag = "met_tobin", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_tobin", op = "lt", value = 30 } ]
+goals    = [ { trait = "want", subject = "npc", npc_id = "npc_tobin", op = "gte", value = 30, label = "Walk the back row with him — last thing at night" } ]
+
+[[quest_cards]]
+priority = 31
+npc_id   = "npc_tobin"
+text     = "He has started saying out loud what everybody else here is careful not to, and he is saying it to you when there is nobody in the row but the two of you."
+tip      = "The back row, after eleven. Let him finish the sentence."
+when     = [ { flag = "met_tobin", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_tobin", op = "gte", value = 30 } ]
+terminal = true
+goals    = [ { trait = "want", subject = "npc", npc_id = "npc_tobin", op = "gte", value = 70, label = "Let him finish it — the back row, after eleven" } ]
+
+# ── DORN — the clock. A two-card ladder that is mostly a promise. ───────────
+[[quest_cards]]
+priority = 30
+npc_id   = "npc_dorn"
+text     = "Fifty-four, and your husband. Three nights his truck is in the lot and four nights it is not, and there is nothing else in the week that decides anything."
+tip      = "He is in the kitchen Friday and Saturday nights and in your room after. Ask him what the paper actually says."
+when     = [ { flag = "opening_done", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_dorn", op = "lt", value = 55 } ]
+goals    = [ { trait = "want", subject = "npc", npc_id = "npc_dorn", op = "gte", value = 12, label = "Ask him what the three years actually mean — the kitchen, weekend nights" } ]
+
+[[quest_cards]]
+priority = 31
+npc_id   = "npc_dorn"
+text     = "He is on the road Monday to Thursday and he has never once asked what happens here while he is gone. Whether that is trust or arithmetic is the thing this game has not answered yet."
+tip      = "Nothing further in this build."
+when     = [ { flag = "opening_done", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_dorn", op = "gte", value = 55 } ]
+terminal = true
