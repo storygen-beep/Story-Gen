@@ -1808,8 +1808,18 @@ rejection_effects         0 uses ·  0 games
 ```
 
 `locked_text_threshold` was already documented (§23). **`rejection_node` was not documented
-anywhere in this skill**, which is the same shape as `block_pool` (§35): a working primitive that
-nothing taught, so nothing used.
+anywhere in this skill** — a working primitive that nothing taught, so nothing used.
+
+⚠️ **This paragraph used to add "the same shape as `block_pool` (§35)", and it overstated §35.**
+Corrected 2026-08-24 (section E). §35's claim is *"no **v2** game has ever used it"*, and that is
+true — but dropping the qualifier makes a broader claim that is not. **`block_pool` is authored 69
+times across four games**: `the_long_summer` 49, `vesper` 12, `under_one_roof` 7,
+`the_long_summer_test` 1. None of the four carries a `v2_state.json`, so all four are v1-era, which
+is exactly why §35 phrases it the way it does.
+
+`rejection_node` is at **zero across every game in the repo**, v1 and v2 alike. That is a stronger
+statement than §35's and the analogy blurred it. Counted with `grep -c block_pool` over every merged
+final.
 
 ### What it is for — the field's refusal
 

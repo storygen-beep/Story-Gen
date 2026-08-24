@@ -5,6 +5,241 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-24 — Section F lands: the field ships the cheap loop, and my instrument flattered my own conclusion
+
+Section F asked how escalation continues once she says yes. C had answered half — the loop screen is
+a menu and the menu options are the ascent ladder. What was open was the rungs and the spacing.
+Evidence in `~/Documents/Female_PC_Craft_Study_20260823/findings_F_further.md`, new instrument
+`probe_arc.py`.
+
+### What the field does
+
+```
+act menu width      median 2 options   p75 3   p90 5   max 54     (n = 2,292 menus)
+span across talk>watch>strip>touch>oral>sex>anal>rough>group   median 1   p90 4
+carries a finish option                                         9%
+arc hubs (10+ acts) n=61 · median 15 acts but only 3 KINDS
+   1 kind x17  2 x11  3 x10  4 x9  |  5 x8  6 x4  7 x1  8 x1
+   47 hubs run one to four intensities · 14 run five or more
+```
+
+**A menu offers two neighbouring things** — `touch` beside `oral`, never `talk` beside `sex`. Checked
+against the counting artifact: recomputed by menu size, four-to-five-option menus still sit at span 0.
+
+**And the field mostly ships the cheap shape.** `the-surfaces.md` R3b already offered exactly the
+right three loop shapes and gave none of them a number; it introduces the **single-act loop** as *"the
+cheapest loop that is still a loop"*. The measurement says it is also **the common one**, and the pose
+ladder is the minority. That is the one change in this section that alters how a game gets built — a
+shape presented as the cheap option and a shape presented as the target are chosen very differently by
+a tired author. Going further mostly means **more variations at the same intensity**, which is
+`register.md`'s *"what varies is the REASON, not the act"* arriving from the menu side.
+
+### F explains E rather than contradicting it
+
+Of **7,598** act links across thirteen games, **47% carry no condition at all** and **2% are gated on
+the per-person willingness meter**. Among the conditions that do exist, the **player's own ascent
+meter gates 13% and hers gates 6%**.
+
+So E's per-person ladder can be three rungs deep because **it is not carrying the escalation** — the
+player's meter is, at W4's 8–17. Her meter says whether this person is available; the player's says
+how far the game has come. W6 gains that sentence; nothing else in the skill moved.
+
+### ⚠️ The instrument was wrong twice, and the second fault biased toward this section's own conclusion
+
+1. **A length filter ate the genre's most important label.** `labels()` ended with
+   `len(x) > 3`. **"Cum" is three characters** — so are "sex", "eat", "beg", "yes", "no". **825
+   dropped label instances** across six games, 73 of them `cum`.
+2. **The act vocabulary was too narrow.** `\bblow\b` does not match "blowing"; `pussy`, `tits`,
+   `pound` and `thrust` were absent entirely, so "Pound her pussy" classified as nothing. **A
+   classifier that cannot see an act undercounts kind-diversity, which makes every hub look shallower
+   than it is — the exact direction of the conclusion above.** It had to be tested before the
+   conclusion could be trusted.
+
+Re-measured with stems and the body nouns in:
+
+```
+                        narrow      widened
+act menus visible        1,564   ->   2,292
+menu width med / p90       2/5   ->     2/5     unchanged
+span med / p90             1/3   ->     1/4     unchanged
+arc hubs                    45   ->      61
+median kinds per hub         2   ->       3
+hubs reaching 5+ kinds  8 of 45  ->  14 of 61
+```
+
+**The conclusions survived; two numbers moved.** The doctrine landed on the widened figures.
+
+### ⚠️ R3b was right where I thought it was wrong — the second such near-miss this session
+
+R3b quotes `destroyer:ginablow` as *"five exits — Keep blowing · Pound her ass · Pound her pussy ·
+Cum · Go back."* My extractor returned four labels with no `Cum`, and I was one step from filing a
+citation correction. **The passage has all five, exactly as quoted.** The filter was dropping
+`[[Cum|ginacum]]` and the vocabulary was failing to classify two of the other three. The quote is
+kept verbatim and `ginablow` is now the instrument's regression test: 3 acts, 3 kinds, span 2.
+
+Section E did the same thing to `engine.md` §35's `block_pool` census and had to un-correct it.
+**Twice in one session a doctrine citation was suspected and turned out right. When a citation looks
+wrong, suspect the instrument before the citation.**
+
+### What changed
+
+- **`references/the-surfaces.md` R3b** — a new subsection carrying the measured menu width, the
+  61-hub depth distribution, and the sentence that the single-act loop is what the field ships. The
+  `ginablow` quote is untouched.
+- **`references/the-surfaces.md` R3c** — one line marking Gabby's eight-rung ladder as the minority
+  shape it is: 14 of 61.
+- **`references/the-meters.md` W6** — one paragraph: three rungs is enough because this meter gates
+  6% of act links while the player's gates 13% and 47% are ungated.
+- **`references/the-surfaces.md` "What is checked"** — R3b's numbers join the deliberately-not-gated
+  list, with the spread as the reason.
+- **`probe_arc.py`** — both faults fixed, each with the measurement inline. Outside the repo and not
+  under git, so this is the only record.
+
+### No gate, no lint
+
+Nothing in section F defends a threshold. Menu width runs 2 to 54 and hub depth splits 47/14 with
+working games on both sides. **Registry stays at 42 and `gates.py` output is byte-identical on all 21
+games** — for this section any diff at all would have been a defect.
+
+### Also
+
+`STATUS.md`: F row → DONE with the headline; "Nine are done" → **"Ten are done"**; remaining is **K
+alone**. The K row gains section F's one open input — the **48%** of act-gate conditions this
+instrument could not name are each game's invented vocabulary, and classifying them by *shape* rather
+than domain (section B's move, which took its own residue from 71% to 0.4%) would probably name most
+of it.
+
+**No spacing number was produced, deliberately.** Only two arcs in the entire corpus space acts along
+a meter — `friends-of-mine`'s Gabby and her father. n=2 is not a field, and the honest answer to the
+question `STATUS.md` had open is that **the field does not build escalation as a spaced ladder at
+all.**
+
+---
+
+## 2026-08-24 — Section E lands: one word for the whole cast, and W6 had been teaching the opposite
+
+Section E asked how she gets from no to yes. D had answered half — refusals cost money and standing.
+What was open was the systematic view. Evidence in
+`~/Documents/Female_PC_Craft_Study_20260823/findings_E_yes.md`, new instrument `probe_ladder.py`.
+
+### The measurement
+
+Across the twenty corpus games that carry a willingness meter, **sixteen track it per person** and
+three run one global meter. What the field does with those per-person meters is the finding:
+
+```
+median meters per person, 13 games              1
+become-someone   trust     62 of 64 people     patriarch        like      37 of 38
+destroyer        relation  45 of 57            friends-of-mine  relation   5 of 5
+median rungs per person                         3   (p25 2, p75 6)
+threshold values used by two or more people    88%  (range 41-99)
+`+1` share of raises, in the games that climb  71-76%
+```
+
+**One word for the whole cast, on one scale.** The difference between people lives in *modifiers* on
+that number, not in giving them different vocabularies — `inseminator`'s six relationship traits are
+coefficients on one affinity value, and `become-someone`'s shared nudge carries a gift that belongs to
+one person (a locket for Kate, lingerie for Jade) on the `trust` all 62 of them share.
+
+### ⚠️ W6 taught the opposite, and our newest games show the cost
+
+`the-meters.md` W6 read: *"For a **roster** game it is the engine, and an identical pair on everyone
+is the engine missing. Pick each character's gating meter from what the relationship is."*
+
+That produced `off_season` — four characters, four vocabularies (`hold` · `ease+want` · `bond` ·
+`trust+want`), nothing shared. It also made W6 contradict itself two paragraphs later, where it
+correctly says to reserve the rich model for the one or two arcs that carry the game. `vesper` is the
+shape that was always right: `relation` on eleven, the rich triple on four.
+
+And it made W6 criticise `the_season` for the wrong thing. Wade and Prine **sharing** `{ease, want}`
+is the field's own practice; `the_season`'s real defect is the W6 rule that stands — **Rae carries no
+meter at all**.
+
+LO's call was to **reframe, keeping the table**: it no longer picks a meter per character, it picks
+the game's one word. The old conclusion is kept visible as superseded, per the §15 precedent. The
+last table row survives as a genuine per-character exception — someone she already belongs to gets no
+climbing meter.
+
+### The lint was comparing cast meters to a player-ascent number
+
+`lint_meter_ladder` forks on `board.who_climbs` exactly as W4 describes, then printed the **same**
+comparator on both branches: `field 8-17 rungs, lowest at 5`. That 8–17 was measured on the one meter
+that carries a game — `you.corr`, `feminine`, `lust`, `mc.dom` — and is the wrong yardstick for a
+per-character meter, where the field's median is **3**.
+
+`off_season`, the repo's only roster game, was being told its five-rung cast meters were three short
+of eight when they are already above the field's per-character median. Fixed with a second set of
+constants used only on the cast branch, measurement inline beside them (`gates.py:1594-1613`). W4's
+prose gained the same split.
+
+**No gate was added or changed.** Registry stays at 42. Diffed against a fresh baseline on all 21
+games: **exactly one line moves, in exactly one game** —
+
+```
+- lint · the meter ladder — 6 cast meters · median 5 rungs · lowest rung 4 · field 8-17 rungs, lowest at 5
++ lint · the meter ladder — 6 cast meters · median 5 rungs · lowest rung 4 · field 2-6 rungs (median 3), lowest at 5
+```
+
+### `the-surfaces.md` gains R3c — the ladder across visits
+
+R3b owns the ladder *inside* one visit; this is the ladder *across* visits, the same screen re-entered
+for days with its menu growing. Worked example is `friends-of-mine`'s Gabby arc: one screen, one
+meter, 0 → 24, forty-nine gated actions. Four mechanics — each act written twice then surviving on
+`>=`; doing the act is what raises the meter; give and take arriving on one rung; and three rungs that
+are not acts at all but **conversations in which she says why not yet**, each sitting immediately
+below the next escalation.
+
+That last one is the section's answer and nothing in this skill had a name for it. She never refuses
+out loud — the act simply is not on the menu, which is section B's silent 71% — and three times on the
+climb the game spends a whole scene letting her explain the pause.
+
+Labelled a worked example, explicitly one game at rank 25. **No gate, no lint** — the field's rung
+spread is 1 to 25 and nothing there defends a threshold.
+
+### Four instrument failures, and two of them were mine on the same paragraph
+
+1. **600 of become-someone's `.trust +=` writes are five cheat pages** bumping all 24 girls at once.
+   In play the meter is written 152 times, not 617. Chrome is excluded everywhere.
+2. **`$PlayerCorruption` was read as person "Player"**, which would have reported zaras-school-life —
+   the corpus's clearest *global*-meter game — as per-person. `$heather_girlfriend` was read as
+   person `heather_girl`. Fixed by excluding player prefixes and matching the willingness words
+   longest-first.
+3. **A bare `=` matched inside `==`**, reporting college-daze raising `love` at 3,408 sites against
+   13 from the correct pass.
+4. **The word list missed the abbreviation `corr`.** become-someone reads it 268 times and runs a
+   genuine pair on 47 of 64 people; the first pass called it one meter. The corpus median is still 1,
+   but the headline was wrong for the game it leans on hardest.
+
+**Not fixed, stated:** three games hold the meter behind a pointer — `$activeSlave.devotion`,
+`$girl.maxLove`, `$tmpGirl.relationship`. Per-person at runtime, one holder to a static reader.
+`new-lust` is probably miscounted as global and free-cities' six holders are an undercount.
+
+### ⚠️ engine.md §36 overstated §35, and my first correction of it was also wrong
+
+§36 called `rejection_node` *"the same shape as `block_pool` (§35): a working primitive that nothing
+taught, so nothing used."* **`block_pool` is authored 69 times across four games** —
+`the_long_summer` 49, `vesper` 12, `under_one_roof` 7, `the_long_summer_test` 1.
+
+I first wrote that this made §35 false. **It does not.** §35 says *"no **v2** game has ever used
+it"*, and none of those four carries a `v2_state.json` — all four are v1-era, which is exactly why
+§35 is phrased that way. What is wrong is §36 **dropping the qualifier**, turning a true narrow claim
+into a false broad one. §36 corrected; §35 left alone.
+
+Two failures in one paragraph, both mine: repeating a doctrine sentence as evidence without checking
+the repo, then over-correcting because I checked against a paraphrase instead of §35's own words.
+**Checking the repo is not enough if you then check it against a paraphrase.**
+
+### Also
+
+`STATUS.md`: E row → DONE with the headline; "Eight are done" → "Nine are done: A, B, C, D, E, G, H,
+I and J"; remaining sections are now **F and K**. Gate count unchanged at 42.
+
+Not proposed and deliberately so: `<<katetrust>>`-style named nudges — 147 widgets, 1,606 call sites,
+each carrying base amount, the player's charisma, a per-person gift and its own player-facing line —
+are a **tooling** observation, not a doctrine gap. Recorded in the findings only.
+
+---
+
 ## 2026-08-24 — Section B lands: day one refuses nothing, and this skill taught the one shape the field never ships
 
 Section B asked what day one refuses to let her do, and how it says no. Evidence in

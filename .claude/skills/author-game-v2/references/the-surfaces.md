@@ -370,6 +370,46 @@ paged service      a ladder behind a paid or anonymous venue — no NPC arc, no 
                    entry, or entering and bailing is a faucet
 ```
 
+### How wide the menu actually is, and which shape the field actually picks
+
+Added 2026-08-24 from Section F. The three shapes above were right and carried no numbers.
+
+**An act menu is two options wide.** Measured across **2,292 act menus** in nineteen shipped
+sandboxes — every passage whose clickable labels include two or more classifiable acts:
+
+| | median | p75 | p90 | max |
+|---|---|---|---|---|
+| act options offered | **2** | 3 | 5 | 54 |
+| **span** across `talk › watch › strip › touch › oral › sex › anal › rough › group` | **1** | 2 | 4 | 8 |
+| carries a finish option | | | | **9%** |
+
+Span 1 means the options sit **one step apart** — `touch` beside `oral`, never `talk` beside `sex`.
+Checked against the obvious artifact: two options can only span 0 or 1, so it was recomputed by menu
+size, and menus of four to five options still sit at span 0. The narrowness is real.
+
+**And the field mostly ships the cheap shape.** Of **61 arc hubs** — menus offering ten or more acts
+— the median reaches **three** intensities, and:
+
+```
+kinds reached:   1 ×17   2 ×11   3 ×10   4 ×9   5 ×8   6 ×4   7 ×1   8 ×1
+                 └──────── 47 hubs ────────┘   └────── 14 hubs ──────┘
+```
+
+**47 of 61 run one to four intensities; 14 run five or more.** `degrees-of-lewdity`'s `Widgets Pub`
+is 25 acts, every one of them `talk`. `free-cities`' `Neighbor Interact` is 21 acts, every one
+`rough`.
+
+> **The single-act loop is introduced above as "the cheapest loop that is still a loop." It is also
+> the one the field mostly ships. The pose ladder is the minority shape.**
+
+That matters for how this list gets read: a shape presented as the cheap option and a shape presented
+as the target are chosen very differently by a tired author. Going further, in the field, mostly means
+**more variations at the same intensity** — which is `register.md`'s finding that *what varies is the
+reason, not the act*, arriving from the menu side.
+
+**Not gated and not linted.** Menu width has a median of 2 and a max of 54 for good reasons in both
+directions, and hub depth is a design choice the field splits 47/14. See *What is checked* below.
+
 **The labels inside a loop name the act** (`the-voice.md` R1). *Keep him in your mouth* · *Turn over
 — give him your ass* · *Let him finish inside you*. A loop whose exits say *Continue* has thrown away
 the only thing that makes the menu readable.
@@ -381,6 +421,61 @@ different rules; do not carry one's caveat onto the other.
 
 **Lint · the act menu** counts loops against one-shot cascades among repeatable explicit surfaces. A
 count, never a target.
+
+**R3c · The ladder across visits — the menu grows, and three rungs are conversations.**
+Added 2026-08-24 from Section E. **R3b above is the ladder INSIDE one visit** — cascade versus node
+routing, the 3–5 act-node pose ladder, what the player is looking at while one scene runs. This is
+the ladder **across** visits: the same screen, re-entered for days, its menu getting longer as one
+per-person meter climbs. Different axis, adjacent rule.
+
+The corpus's clearest example is `friends-of-mine`'s Gabby arc — **one screen**
+(`Old Gabby's Place`), **one meter** (`$gabbyrelation`), 0 → 24, forty-nine gated actions:
+
+```
+ 0  Chat Up Gabby                    12  Let Gabby Toy with You / Toy Gabby
+ 2  Let Gabby Tease You              14    → conversation
+ 4    → conversation                 15  Blow Gabby / Get a Blowjob / Let Her Eat Your Pussy
+ 5  Watch Gabby Masturbate           17  Fuck Her / Have Sex
+ 7  Have Gabby Show Off for You      20  Have Rough Sex
+ 9    → conversation                 22  Join Gabby and Her Friends
+10  Touch Each Other
+```
+
+**1 · Each act is written twice, then becomes furniture.** Every rung is gated `== N`, then `== N+1`,
+then survives on `>= N+2`. It is fresh for exactly two visits and standing content afterwards — new-content
+highlighting with no flag to maintain. One 6,202-character passage holds both variants of
+`Let Gabby Tease You`. **This is what `block_pool` is for** (`engine.md` §35).
+
+**2 · Doing the act is what raises the meter.** That same passage writes `$gabbyrelation to 3` on the
+first visit and `to 4` on the second, and `to 4` is what opens the next act. Nothing else advances
+her. The player is not persuading her; he is doing the thing she already says yes to, twice.
+
+**3 · Give and take arrive on one rung.** All three oral variants at 15, both toy variants at 12. The
+reciprocal pair is one step, not two.
+
+**4 · Three rungs are not acts. They are her explaining the pause.** The indented rungs — 4, 9, 14 —
+raise nothing and unlock nothing. Each is a conversation sitting immediately *below* the next
+escalation, placed exactly where a player would be asking why she has not moved:
+
+> "You tell Gabby that you thought she'd be interested in having sex by now and are surprised that
+> she's held back. *'Well what kind of trollup do you take me for, exactly? I may be promiscuous…'*"
+> — `Ask Gabby About Doing More`, rung 14, sitting under the jump to oral at 15
+
+**That is the whole answer to "how does she get from no to yes".** She never refuses out loud — the
+act simply is not on the menu yet, which is section B's silent 71% — and three times on the climb the
+game spends an entire scene letting her say *why not yet*, in her own voice. Nothing else in this
+skill has a name for that scene.
+
+The rung carries a **cost** too, checked before anything else: `<<if $energy < 10>>You are just too
+exhausted for this sort of thing at the moment.` Her willingness gates it; the player's day throttles
+it (`the-clock.md`, `engine.md` §27).
+
+⚠️ **One game, one character — and the shape is the minority.** Of the corpus's 61 arc hubs,
+**14 reach five or more intensities and 47 do not** (R3b above). `friends-of-mine` is rank 25 and
+this is its best-built arc. The
+per-person shape and the shared scale behind it are field measurements across twenty games
+(`the-meters.md` W6); **this ladder is a worked example and nothing more.** Not a gate, and not a
+lint — the field's rung spread is 1 to 25.
 
 **R4 · Money is not a scene.** A purchase is not a rung. Sinks belong where the thing being bought
 lives — the boiler upgrade at the boiler, the paint at the frontage — or on one dedicated ledger
@@ -755,6 +850,10 @@ shuts a door — *filthy means she cannot take the car* — turns a chore into a
 which is 2.26% and almost entirely UI chrome. **The fig leaf here produces something the field
 actually ships**, which is why this rule got a gate and R5b did not. What the gate cannot judge is
 whether the nine words are any good; R5c above is the part that has to be taught.
+
+**R3b's measured numbers join the not-gated list, and the reason is in the spread.** Act-menu width
+runs from 2 to 54 and hub depth splits 47/14 across the field; both are design choices with working
+games on either side. Section F recorded them and proposed no check.
 
 **R1, R2's judgement half, R4, R5b and R8 are deliberately not gated.** Whether *"Turn somebody away"* is
 aimed at a person or at the room is a judgement a parser cannot make, and a proxy check for it would

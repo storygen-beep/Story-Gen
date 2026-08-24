@@ -1594,6 +1594,23 @@ def _cast_meter_rungs(game):
 FIELD_METER_RUNGS      = 8
 FIELD_METER_FIRST_RUNG = 5
 
+# ⚠️ THE 8-17 ABOVE IS A PLAYER-ASCENT NUMBER AND DOES NOT TRANSFER TO THE CAST.
+# It was measured on the ONE meter that carries a game -- you.corr, feminine, lust,
+# mc.dom -- and until 2026-08-24 lint_meter_ladder printed it on both sides of W1's
+# fork, so a roster game was told it was six rungs short of a yardstick taken from a
+# different kind of meter.
+#
+# MEASURED per-character, section E (findings_E_yes.md), pooled over 13 corpus games
+# carrying a per-person willingness meter on 3+ people:
+#     rungs per person   median 3   (p25 2, p75 6)
+#     lowest rung        median 5   <- the SAME as the ascent number, so only the
+#                                      rung-count half of the comparator was wrong
+# Per game: become-someone `trust` 5 · patriarch `like` 6 · destroyer `relation` 3 ·
+# zaras-school-life `relationship` 2 · the-hellfire-club `love` 5.
+FIELD_CAST_METER_RUNGS_LO  = 2
+FIELD_CAST_METER_RUNGS_MED = 3
+FIELD_CAST_METER_RUNGS_HI  = 6
+
 
 def lint_meter_ladder(game, state):
     """Per meter that carries the game: how many rungs, and where the lowest sits.
@@ -1604,6 +1621,12 @@ def lint_meter_ladder(game, state):
     named tiers measured the ladder games and printed NOTHING for the one roster
     game in the repo — half a fork is not an instrument.
 
+    ⚠️ EACH BRANCH GETS ITS OWN FIELD NUMBER, since 2026-08-24. A declared tier is
+    judged against player-ascent meters (8-17 rungs); a cast meter against the field's
+    per-character willingness meters (2-6, median 3). Printing the ascent number beside
+    a roster game told `off_season` its 5-rung cast meters were short of 8 when the
+    field's per-character median is 3 -- it was already above it.
+
     A NUMBER, never a bar. A rung count is only comparable between meters on the
     same 0-100 scale, and a game is free to run a two-rung meter on purpose.
     What is worth seeing is that every meter in every v2 game so far reads
@@ -1613,6 +1636,8 @@ def lint_meter_ladder(game, state):
     """
     board = (state or {}).get("board") or {}
     tiers = board.get("ascent_tiers") or []
+    comparator = (f"field {FIELD_METER_RUNGS}-17 rungs, "
+                  f"lowest at {FIELD_METER_FIRST_RUNG}")
     if tiers:
         rungs = _meter_rungs(game)
         rows = [(t, rungs.get(t) or []) for t in tiers]
@@ -1620,6 +1645,8 @@ def lint_meter_ladder(game, state):
     elif str(board.get("who_climbs") or "").lower() == "cast":
         rows = sorted(_cast_meter_rungs(game).items())
         label, noun = "cast meters", "meters"
+        comparator = (f"field {FIELD_CAST_METER_RUNGS_LO}-{FIELD_CAST_METER_RUNGS_HI} rungs "
+                      f"(median {FIELD_CAST_METER_RUNGS_MED}), lowest at {FIELD_METER_FIRST_RUNG}")
     else:
         return "", []
     if not rows:
@@ -1627,7 +1654,7 @@ def lint_meter_ladder(game, state):
     late = [(t, r) for t, r in rows if r and r[0] > FIELD_METER_FIRST_RUNG]
     summary = (f"{len(rows)} {label} · median {_median([len(r) for _, r in rows]):.0f} rungs "
                f"· lowest rung {min([r[0] for _, r in rows if r] or [0])} "
-               f"· field {FIELD_METER_RUNGS}-17 rungs, lowest at {FIELD_METER_FIRST_RUNG}")
+               f"· {comparator}")
     findings = [f"{t}: {len(r)} rung(s) {r or '—'}" for t, r in rows]
     if late:
         findings.append(f"{len(late)} of {len(rows)} {noun} change nothing below "
