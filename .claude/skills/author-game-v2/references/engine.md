@@ -429,15 +429,43 @@ grep -rn "yourKeyName" apps/projects/services/template_import.py
 Zero hits means the key does not exist, however plausible it looks.
 
 **The catalog** is a top-level `[[clothing]]` array — `id`, `name`, `slot`, `image`, `initial`,
-`beauty`, `corruption`. Slots: `bra`, `underwear`, `top`, `bottom`, `dress`, `legwear`, `shoes`.
+`conditions`, `price`, `beauty`, `corruption`, `type` (`template_import.py:208-221`). Slots: `bra`,
+`underwear`, `top`, `bottom`, `dress`, `legwear`, `shoes`.
 
 **`worn_corruption` is a MAX aggregate, not a sum.** Verified live: with `sleep_vest` (2) worn,
 equipping `mothers_slip` (7) moved the reading **2 → 7**. One loaded garment sets the number on
 its own, so a catalog does not need to be large to reach a tier — it needs one item per tier.
+**`worn_beauty` is the same fold over `beauty`** (`template_import.py:218`, `v2.py:4044`) — it was
+missing from this list until 2026-08-24 and two games use it.
 
-This makes clothing a genuine gate source. Verified condition types: `worn_corruption`,
-`worn_type`, `clothing_slot` (empty/filled — i.e. "not wearing a bra"), and `clothing_item`
-with `equipped` / `unequipped` / `owned` / `not_owned`.
+### The three ways a wardrobe gets read
+
+A garment nothing reads is not a garment (`the-meters.md` W3), and **gate · the wardrobe is read**
+enforces it. All three of these families satisfy it, and the second is the one authors forget:
+
+**1 · A condition predicate.** `worn_corruption`, `worn_beauty`, `worn_type`, `clothing_slot`
+(empty/filled — i.e. "not wearing a bra"), and `clothing_item` with `equipped` / `unequipped` /
+`owned` / `not_owned`. This is the gate family.
+
+**2 · A `player_portrait` outfit override.** `when = { worn_type?, corruption?, flag? }`, first match
+wins (`template_import.py:743-745`). Only `worn_type` and `corruption` are wardrobe reads; a `flag`
+override is not. **This is a display reader, not a gate, and `the-meters.md` W7 is what says that is
+the field's normal case** — `vesper` reads its wardrobe 21 times and every one of them is display.
+
+**3 · A location dress code.** `clothing_rules.slots_required` on a location
+(`template_import.py:4227-4241`), optionally with its own `conditions` and a refusal `message`.
+
+### One thing the wardrobe cannot do, recorded deliberately
+
+**A worn stat can gate a choice and can explain itself when it blocks one, but it cannot be shown as
+a standing state.** `v2.py:7816-7823` renders the lock text — `"Outfit must be revealing
+(corruption ≥ 4)"`, `"Appearance ≥ 7"` — which the player meets only at the moment of refusal.
+`trait_status_text` (§30) takes a `trait`, and these are derived condition types rather than traits,
+so they cannot be given a sidebar band.
+
+**This is not a gap to close with a status row.** The field does not show the number either. It
+shows the world reacting — `degrees-of-lewdity` reads its derived `$exposed` about 900 times and 82%
+of those reads only change words. Write the reactions, not the readout.
 
 ---
 
@@ -1157,6 +1185,44 @@ disappears, which reads as a missing HUD element rather than a wrong number, so 
 sails past it. `trait_status_text` treats an omitted `min`/`max` as open-ended (`v2.py:16266`,
 defaults ∓1e9); `trait_words` needs a **closed** `[min, max]` to match (`v2.py:16335-16336`). Leave
 the top band's `max` off, or `cap` the terminal add (§29).
+
+### 30.1 A hygiene system is a deliberate non-feature — do not build one
+
+This engine has no hygiene, hunger or thirst primitive, and that is a decision rather than an
+omission. It is recorded here because **`trait_status_text` makes one authorable in an afternoon** —
+its own spec comment says *"Use for hygiene/energy/hunger-style needs that recover on action"*
+(`template_import.py:3685-3690`) — so the temptation lands precisely on this section.
+
+The field's verdict, from section I's read of all 27 parseable corpus games:
+
+- **`degrees-of-lewdity` built hygiene and switched it off.** 1,273 writes of `$hygiene`, 1,207 of
+  them the identical `<<set $hygiene += 500>>`, feeding **one** read site: a seven-band ladder in a
+  widget that is never called. The string `speckless` appears exactly once in 15,626 passages —
+  inside that widget. Its initialiser says so outright:
+
+  ```
+  <<set $hungerenabled to 0>>  /* unused */
+  <<set $thirstenabled to 0>>  /* unused */
+  <<set $hygieneenabled to 0>> /* unused */
+  ```
+
+- **`free-cities`, the corpus's deepest body simulator, never modelled it.** Its slave objects carry
+  `vagina`, `dick`, `boobs`, `anus`, `balls`, `butt`, `health` and `preg` as numeric properties, and
+  no hygiene or arousal property at all. Its two most-read properties are `devotion` (1,019) and
+  `trust` (667) — above every body part.
+
+- **Corpus-wide, hygiene is the rarest of the four body subsystems**: 234 read sites against
+  arousal's 8,183 and clothes' 6,821. Two of 27 games clear 20 read sites, and one of those two is
+  a single 22-read variable that is 86% colour.
+
+Our own games agree from the other side: `the_allowance`, `back_home`, `last_call` and
+`late_shifts` all raise a `hygiene` trait that nothing reads — they are in gate 33's own list of
+dead meters (`the-meters.md` W3).
+
+**If a need must exist, make it a `costs` entry on the acts that need it** (§27) — a price the
+engine already enforces — rather than a meter with a ladder and a decay hook. Recorded in the same
+register as the per-character dialogue colour in §34: a known difference from the field, left
+unbuilt on purpose.
 
 ---
 

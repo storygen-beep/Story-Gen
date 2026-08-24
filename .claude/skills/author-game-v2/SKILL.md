@@ -299,6 +299,14 @@ priced label against the field's 94% symbol).
   Roughly twenty words. One sentence, swapped. **When a system feels like it needs a big branch per
   state, the field's answer is almost always a small branch per site instead** — and ours default to
   the opposite: `the_season`'s seven `known` read sites have a median of 570 characters.
+- **A system is read to change the words, not to refuse the action.** The same law, arriving a third
+  time from a third instrument. Section H: reputation gates **2%** of its 644 read sites and colours
+  the other 98%. Section G: differentiation is many small swaps, above. Section I: the body —
+  clothes, arousal, hygiene, pregnancy — gates a median **10%** across 25 measured systems, 17 of
+  them under 25%. The exceptions are all *small* systems, which is the rule underneath it:
+  **a system either stays small and gates, or grows large and colours; nothing in the field is
+  both.** When you are designing a meter and reaching for gates, you are probably building the
+  wrong kind (`the-meters.md` W7).
 - **A per-NPC field has TWO write sites and the default build uses the second.**
   `template_import.create_project_from_template` is the `--use-db` path; `game_graph.build_game_graph`
   is the one a plain `package_from_toml` takes. Add a field to only the first and it reaches the

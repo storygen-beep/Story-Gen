@@ -5,6 +5,151 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-24 — Section I lands: the body, and the field's answer is mostly "don't build it"
+
+Section I asked which of clothes, arousal, hygiene and pregnancy are systems and which are
+decoration. Evidence in `~/Documents/Female_PC_Craft_Study_20260823/findings_I_body.md`. Method was
+section H's, deliberately, so the numbers are comparable: count writes (`<<set>>`), count reads
+(`<<if>>`/`<<elseif>>`), then split every read by what its consequent does — **gate** (a link, a
+`goto`, a button), **state** (only `<<set>>`), or **colour** (prose only).
+
+### The headline is negative, and it is the strongest thing in the section
+
+`degrees-of-lewdity` — rank 7, 15,626 passages, the game everyone points at for body simulation —
+**built hygiene and switched it off.** It writes `$hygiene` 1,273 times, 1,207 of them the identical
+`<<set $hygiene += 500>>` scattered through the world. It reads it at **one** site: a seven-rung
+`if/elseif` ladder inside `<<widget "hygiene">>`. Nothing calls that widget. The string `speckless`
+appears exactly once in the whole game — inside it. And the initialiser says so outright:
+
+```
+<<set $hungerenabled to 0>>  /* unused */
+<<set $thirstenabled to 0>>  /* unused */
+<<set $hygieneenabled to 0>> /* unused */
+```
+
+`free-cities`, the corpus's deepest body simulator, never modelled hygiene or arousal at all — its
+slave objects carry `vagina`, `dick`, `boobs`, `anus`, `balls`, `butt`, `health`, `preg`, and its
+two most-read properties are `devotion` (1,019) and `trust` (667), above every body part.
+Corpus-wide hygiene is the rarest of the four: **234 read sites against arousal's 8,183**.
+
+### Changed — `references/the-meters.md`
+
+**New W7 · the body's meters are read to colour, not to refuse.** W5 is the counterweight, W5b the
+audience meter, W6 the cast's gating meters; the body is a fourth shape and behaves like none of
+them. Across 25 (subsystem × game) systems the median gate share is **10%** — clothes 8%, arousal
+14%, pregnancy 7% — and 17 of 25 gate under 25%. The exceptions are named and they are all *small*
+systems (`new-life-project` 91% of 43 reads, `wasteland-lewdness` 63% of 35, `patriarch` 47% of 34),
+which is the rule underneath: **a system either stays small and gates or grows large and colours;
+nothing in the corpus is both.** Carries the band-ladder mechanic — DoL's seven rungs written once
+in a widget against `corpo-life` inlining the identical structure across 5,785 sites — and the note
+that the bands say *"Soft boner"*, not `45/100`.
+
+**W3 gains the case it cannot see.** `worn_beauty` / `worn_corruption` are **derived** from a
+garment's own declaration, never raised by an `effects` entry, so gate 33 looks straight past a full
+catalog. 102 garments in 10 of our games, 47 reads between them, four wardrobes read zero times.
+
+### Changed — `scripts/gates.py`
+
+**New gate · the wardrobe is read.** `n/a` when no `[[clothing]]` is declared; passes when any of
+three reader families appears. Modelled on gate 33 and using the existing `_walk_paths` helper — no
+new traversal code. Same fig-leaf risk as gate 33 and the same answer: no threshold is invented
+(W7 measures the field's median gate share at 10%, so demanding *gates* would be wrong), and the
+summary prints garments-against-reads so a thin pass is visible. **Scoreboard is now 41 gates.**
+
+### Changed — `references/engine.md`
+
+- **§17 gains `worn_beauty`.** It was missing from the verified condition-type list, it is real
+  (`template_import.py:218`, `v2.py:4044`, `:7821`), and two games use it. The catalog field list
+  was also short — `conditions`, `price` and `type` were undocumented.
+- **§17 gains "the three ways a wardrobe gets read"**, including the `player_portrait` outfit
+  override (`template_import.py:743-745`) named as a *display* reader.
+- **§17 records what the wardrobe cannot do**: a worn stat can gate a choice and explain itself when
+  it blocks one (`v2.py:7816-7823`), but cannot be a standing sidebar state, because
+  `trait_status_text` takes a `trait` and these are derived. **Explicitly not a gap to close** — the
+  field does not show the number either, it shows the world reacting.
+- **New §30.1 · a hygiene system is a deliberate non-feature.** Placed under `trait_status_text`
+  precisely because that primitive makes one authorable in an afternoon — its own spec comment says
+  *"Use for hygiene/energy/hunger-style needs that recover on action"*
+  (`template_import.py:3685-3690`). Carries DoL's `/* unused */`, free-cities' absence, the 2-of-27
+  coverage, and the four of our own games whose `hygiene` trait is already in gate 33's dead list.
+  Same register as the per-character dialogue colour in §34: a known difference, left unbuilt.
+
+### Changed — `SKILL.md`
+
+The law arrives a third time from a third instrument and is now stated as one: **a system is read to
+change the words, not to refuse the action.** H 2%, G many-small-swaps, I median 10%.
+
+### Changed — `STATUS.md`
+
+I row → DONE. Gate count 40 → 41 in both places. Corpus corrected to **27 parseable games**.
+Remaining sections are B, E, F and K. Also fixed a pre-existing line that read *"Four are done"*
+above a list of six.
+
+### The instrument was broken in four ways, and three would have shipped as doctrine
+
+1. **An empty variable list matched every variable in the game.** `vp()` built
+   `\$(?:' + "|".join(names) + ')\b`; with `names` empty that is `\$(?:)\b`, and the word boundary
+   always fires because `$` is non-word and the next letter is not. Every theme specced as `[]`
+   reported the whole game's totals — `growup` came out identical across all four subsystems,
+   `become-someone` across three. **Caught only because those numbers are impossible.**
+2. **⚠️ Three games had never been parsed by this study at all.** `tw.py` only knew
+   `<tw-passagedata>`; `college-daze`, `free-cities` and `confined-and-horny` ship the older
+   `<div id="store-area"><div tiddler="Name">` container and returned zero passages. **Sections A,
+   C, D, G, H and J all ran on 25 games and reported it as the field.** `tw.py` now parses both,
+   with a balanced `<div>` scan because a non-greedy `</div>` truncated one 235KB free-cities
+   passage to nothing. This mattered most here: `free-cities` is a breeding simulator and
+   `college-daze` is the only corpus game that puts a lust meter on every character.
+3. **`confined-and-horny` is not a game file.** After the fix it still parses to zero: no
+   store-area, no tiddlers, no passage data, **100% script bytes**. The download captured the
+   SugarCube engine and none of the story. Excluded with a reason. **The corpus is 27 parseable
+   games, not 25 and not 28.**
+4. **`$groom` in `the-hellfire-club` is a bridegroom** — `<<set $groom = "Matthew">>` — not a
+   grooming system, despite 82 sites. Its real hygiene variable is `$dirty`, at 8 reads. The same
+   sweep matched `laptop` on `top\b`, `emailAddress` on `dress`, `barbra` on `bra\b` and
+   `changingRoomGender` on `groom`. Every variable in the findings was read in source before it was
+   counted.
+
+### And I got our own side wrong, which is what produced the gate's design
+
+The findings first reported *"104 garments, 23 reads"* and named `vesper` as a game that authors
+eight garments and reads neither stat. **`vesper` reads its wardrobe 21 times — the most of any game
+we have** — 19 through `type = "clothing_item"` and twice through a `player_portrait` override. Its
+two `worn_corruption` mentions are *comments* saying it deliberately does not use that axis.
+
+There are **three reader families and I had counted two.** Had the gate shipped on the first count
+it would have failed `vesper` for doing the thing W7 had just finished establishing is the field's
+dominant mode. Corrected in the findings file rather than quietly overwritten, and the gate counts
+all three.
+
+### Refused
+
+- **No new `the-surfaces.md` rule.** The proposal was approved as one, and W3 already owns the law —
+  a second statement in another file is the duplication section G's cross-reference pass exists to
+  prevent. Folded into W3 plus the gate.
+- **No `exposed` derived state.** DoL's is load-bearing because ~900 sites read it; ours would be
+  read by nobody until the new gate has changed how games are authored. Right second move.
+- **No hygiene system.** That is what §30.1 is for.
+- **No lint-count change.** `STATUS.md` says 17 lints; a crude split of the report says 19. This
+  task did not measure it properly, so the number was left alone rather than guessed at.
+- **No game files touched** — not the four failing wardrobes, and not `vesper`.
+
+### Verified
+
+- Baseline captured for all 21 games before the change. After: **every diff line is either the
+  tally line (denominator +1) or the new gate's own output.** No existing gate's verdict moved.
+- The new gate lands as predicted: **4 FAIL** (`mothers_place` 6 garments/0 reads, `seventh_day`
+  8/0, `steam` 8/0, `the_allowance` 9/0), **6 PASS**, **11 n/a**.
+- `vesper` passes *via `clothing_item` ×19 + portrait ×2*, which is the case the first count got
+  wrong. `last_call` passes on 1 read for 8 garments and the summary line shows exactly that.
+- Distinct-gate union across all 21 games: **40 → 41**.
+- `the_season` and `off_season` keep 39/40 — the gate is `n/a` for both, so no score moved.
+- Cross-reference: W7 read against W5 / W5b / W6, and the W3 wardrobe paragraph against
+  `the-first-hour.md:168` (which is about a system never *taught*, not never *read*).
+- The `trait_status_text` citation was written as `engine.md` §34a, checked, and corrected to
+  **§30** before it shipped.
+
+---
+
 ## 2026-08-24 — Section G lands: the cast, and the first engine field this skill has ever added
 
 **What.** `references/the-surfaces.md` (new **R8**, plus its entry and its reason in the

@@ -183,6 +183,24 @@ and it goes green. That is the deleted gate 22's failure mode in a new coat. The
 whether a reader exists; **W2 is what says the reader has to be the act menu**, and the meter-ladder
 lint prints the rung count beside it so a one-rung fig leaf is visible.
 
+**⚠️ THE CASE THIS GATE CANNOT SEE: the wardrobe.** `worn_beauty` and `worn_corruption` are
+**derived** — the engine folds them out of each garment's own `beauty` / `corruption` declaration as
+a MAX aggregate (`engine.md` §17). Nothing raises them with an `effects` entry, so gate 33 looks
+straight past a full catalog and reports nothing wrong.
+
+Measured across our 21 games on 2026-08-24: **102 garments in 10 games, 47 reads between them.**
+`mothers_place` (6 garments), `seventh_day` (8), `steam` (8) and `the_allowance` (9) read theirs
+**zero** times. The player can dress and the world does not look.
+
+**Gate · the wardrobe is read.** A game declaring `[[clothing]]` must read it somewhere. Three
+reader families count, and all three are legitimate: a **condition predicate** (`worn_corruption`,
+`worn_beauty`, `worn_type`, `clothing_slot`, `clothing_item`), a **`player_portrait` outfit
+override** (`when = { worn_type = … }`), or a **location dress code** (`clothing_rules`). The
+portrait override is a *display* reader rather than a gate, and **W7 is what says that is the
+field's normal case** — `vesper` reads its wardrobe 21 times and 21 of those are display, which is
+the correct shape, not a shortfall. Same fig-leaf risk as above, answered the same way: the summary
+prints garments against reads, so a thin pass is visible.
+
 ---
 
 ## W4 · The ladder — deep, and it starts low
@@ -434,6 +452,80 @@ trade; every one of them only rises and only opens.
 
 **Lint · the cast's meters.** Per character: which meters they own and how many gate sites each
 carries, plus how many distinct shapes exist across the cast.
+
+---
+
+## W7 · The body's meters are read to colour, not to refuse
+
+> **A body value — clothes, arousal, hygiene, pregnancy — earns its place by changing the words in
+> a lot of places, not by closing doors in a few. Build it to be READ CHEAPLY AND OFTEN. If you
+> find yourself writing gates on it, you are building the wrong kind of meter.**
+
+Added 2026-08-24 from section I, which read all 27 parseable games in the mopoga corpus. W5 is the
+counterweight that shuts doors, W5b the audience meter that almost never refuses, W6 the cast's own
+gating meters. **The body is a fourth shape and it behaves like none of them.**
+
+Twenty-five (subsystem × game) pairs clear 20 read sites. Their gate share — the fraction of reads
+whose consequent contains a link, a `goto` or a button, rather than prose:
+
+| | median gate share | n |
+|---|---|---|
+| clothes | **8%** | 8 |
+| arousal | **14%** | 7 |
+| pregnancy | **7%** | 8 |
+| hygiene | 31% | 2 |
+| **all** | **10%** | **25** |
+
+**Seventeen of the twenty-five gate under 25%.** The colour share runs 87, 88, 89, 90, 97, 97, 98,
+98, 100 per cent.
+
+Section H measured reputation at **2% gating, 98% colouring** and called it an audience meter.
+Section G measured differentiation and found it is many small swaps rather than a few large
+branches. This is the same law arriving a third time, from a third instrument.
+
+**The exceptions are real and they are all small.** `new-life-project` gates 91% of its arousal
+reads — of **43**. `wasteland-lewdness` gates 63% of its clothing reads — of **35**. `patriarch`
+gates 47% of its pregnancy reads — of **34**.
+
+> **A body system either stays small and gates, or grows large and colours. Nothing in the corpus
+> is both big and gating.**
+
+### The band ladder — write it once
+
+The mechanic underneath every one of these is the same: a number, a ladder of bands, and a short
+string per band. What separates a good implementation from a bad one is **where the ladder lives.**
+
+`degrees-of-lewdity` writes it once, in a widget, seven rungs wide:
+
+```
+<<if $hygiene gte 2000>>   You are filthy.
+<<elseif $hygiene gte 1600>>You are soiled.
+<<elseif $hygiene gte 1200>>You are smelly.
+<<elseif $hygiene gte 800>> You are messy.
+<<elseif $hygiene gte 400>> You are neat.
+<<elseif $hygiene gte 1>>   You are clean.
+<<elseif $hygiene lte 0>>   You are speckless.
+```
+
+`corpo-life` writes the identical structure **inline, across 5,785 sites** — clamp, then band, then
+set a descriptor string, copy-pasted through the game instead of factored into one place.
+
+Note what the bands say. Not `45/100`. **"Soft boner."** The number is internal; what the player
+meets is a body state in words. Our surface for this is `trait_status_text` (`engine.md` §30) — one
+authored ladder, rendered wherever the trait sits.
+
+### What the player is shown
+
+The field does not show you the number. **It shows you the world reacting to it.**
+`degrees-of-lewdity`'s real body system is `$exposed`, a three-state value the author writes exactly
+once — `<<set $exposed to 0>>` at game start — and the engine derives from the worn set thereafter.
+The world then reads it about **900 times**: 415 sites test `gte 1`, 151 test `gte 2`, 90 test
+`lte 0`. Eighty-two per cent of those reads only change words. The portrait reads it too, setting
+the model's mouth to a frown at `exposed === 2`.
+
+**That is the shape to copy: one derived number, cheap enough to test that the whole world tests
+it.** Our equivalents are `worn_corruption` and `worn_beauty`, and W3's gate is what makes sure
+somebody reads them.
 
 ---
 
