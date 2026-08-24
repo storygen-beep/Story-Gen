@@ -239,8 +239,8 @@ games sit at 19–29% — inside a band no shipped game occupies, because the qu
 Measured directly from the reference game's seed source, because our first draft said "exactly one
 global axis" and the source refuted it.
 
-⚠️ **The layer-1 shape below is ONE game's, and the corpus does not repeat it.** Of 25 shipped
-sandboxes, **14 have no player ascent tier at all** and only two carry three or more — one of which
+⚠️ **The layer-1 shape below is ONE game's, and the corpus does not repeat it.** Of 27 parseable
+sandboxes, **15 have no player ascent tier at all** and only two carry three or more — one of which
 is this same reference game. Three-or-four-tiers is a legitimate answer for a `who_climbs = "player"`
 game. It is not the default, and treating it as one is how five games got the same board
 (`the-meters.md` W1).

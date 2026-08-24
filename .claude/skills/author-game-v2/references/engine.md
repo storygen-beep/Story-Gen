@@ -1494,10 +1494,15 @@ pluralising a currency.
 
 ## 34. `[ui.cast_page]` — the who-is-who page, and it authors nothing
 
-The player's place to look somebody up. Measured across the 25-game mopoga field: **17 of 25**
+The player's place to look somebody up. Measured across the 27-game mopoga field: **18 of 27**
 shipped sandboxes carry a page like this and **7 of the 8** parsed top-ten do — the lone exception,
 degrees-of-lewdity, carries the same load inside its prose by swapping description for name on the
-meeting flag in 64 places. **None of the 25 uses a narrator to tell the player who somebody is.**
+meeting flag in 64 places. **None of the 27 uses a narrator to tell the player who somebody is.**
+
+> Re-checked 2026-08-24. `college-daze`'s is a **phone contact list** — `Check Contacts`, one row
+> per person, each row a link to that person's own status page, and a `(*NEW!*)` badge on the row
+> when there is something new behind it. Rows appear as people are met, gated on 43 distinct
+> `$met_*` flags. `free-cities` has no cast page: its `Starting Girls` is a purchase screen.
 
 ```toml
 [ui.cast_page]
@@ -1609,7 +1614,7 @@ the character already owns (`the-surfaces.md` R8). It cannot give one to a chara
 
 Recorded 2026-08-24 as a **known difference. Nothing is built for it.**
 
-In seven of twenty-five field games the single most-used macro in the entire game is a
+In seven of twenty-seven field games the single most-used macro in the entire game is a
 speaker-attribution component — `become-taxi-driver`'s `<<chat>>` **59,751** times,
 `sluttown-usa`'s `<<nm>>` **37,379**, `destroyer`'s `<<speech>>` **30,640**, `lust-for-life`'s
 `<<dg>>` **26,122**, `the-company`'s `<<nm>>` **19,379**. Each renders three things: a **face**, the
