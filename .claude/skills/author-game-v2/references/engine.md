@@ -323,20 +323,52 @@ array. Two levels of nesting is where it breaks.
 
 ---
 
-## 15. `locked_text` REPLACES the choice label
+## 15. `locked_text` REPLACES the choice label — and a shown-locked row without one is mute
 
 A choice with `show_when_locked = true` renders as `<span class="locked-choice">`. If
 `locked_text` is set, that string is shown **instead of** the action text — the player never
 sees what the action was called.
 
-**Trade-off, decide deliberately:** omit `locked_text` and the greyed row shows the action
-("Stop pretending it's a secret") — a *want* the player can name, which is what sells the next
-release. Set it and the row shows the reason instead ("Not yet — he still thinks he's getting
-away with it") — clearer about the gate, weaker as a door. Prefer the want unless the gate is
-genuinely obscure.
+**Omit it and the row is not blank — it is the action label, greyed, with nothing beside it.**
+`escaped_locked = (locked_text or choice_text)` at `v2.py:13171`, and the same string is repeated
+into the `title` tooltip at `:13219-13220`, so the tooltip adds nothing either. The player sees
+"Kiss her" struck out and learns neither why nor when.
+
+**Set `locked_text` by default.** Reach for the bare label only when the action's own name already
+carries the reason, and argue it when you do.
 
 Verified live: at `nerve` 60 against a 75 gate, the row rendered as
 `SPAN.locked-choice :: Not yet — he still thinks he's getting away with it.`
+
+### ⚠️ This section said the opposite until 2026-08-24, and that is why our games score the way they do
+
+It read:
+
+> *"omit `locked_text` and the greyed row shows the action ("Stop pretending it's a secret") — a
+> want the player can name, which is what sells the next release […] **Prefer the want unless the
+> gate is genuinely obscure.**"*
+
+The mechanic in that paragraph was right and is kept above. The recommendation did not survive
+contact with the field. Measured across 26 shipped sandboxes (`findings_B_refusal.md`, section B):
+
+- A refusal is **either invisible or it speaks**. Of 16,167 refusing conditionals, **71% render
+  nothing at all** and **28% put a short line where the action was** — median **9 words**, and
+  **60% of those name a handle** (a price 37%, "already done" 18%, a time 5%, a place 2%).
+- A **visible, mute action label is 2.26%** of 4,513 spoken refusals, and nearly all of that is
+  settings and pagination chrome — `OptionsWidget` toggle states, `Widgets Outfits`
+  "Previous"/"Next" greyed at the ends — rather than gated content.
+
+So the shape this section used to recommend is the one shape the field does not ship. Our games
+followed the instruction faithfully: **13 of 176 shown-locked choices across every merged game carry
+a reason — 7%.** That is doctrine, not author sloppiness, which is why the advice is reversed here
+rather than the games being blamed.
+
+It also put this file in direct conflict with `the-surfaces.md` **R5b.2** — *"State the bar with
+`locked_text_threshold`; never fail silently"* — written the same day. The two now agree.
+
+Gate: **"a locked door says why"** (`gates.py`, `the-surfaces.md` R5c). It accepts `locked_text`,
+`locked_text_threshold` (§23 — the label becomes a clickable toast, `v2.py:13210-13217`) or
+`rejection_node` (§36). A choice gated only by `costs` is never counted against you — see §27.
 
 ---
 
@@ -988,6 +1020,19 @@ rung:
    filters on `setup.checkCostsAffordable(c.costs)` (`v2.py:4496`, `:4527`, `:4975`; the function
    itself at `v2.py:4625`). An unaffordable rung does not render as a broken click — it is not
    offered.
+
+   ⚠️ **That is the canvas picker. An exit-block CHOICE behaves differently, and better.** There the
+   generator opens `<<if setup.checkCostsAffordable(...)>>` (`v2.py:13014-13015`) and writes an
+   `<<else>>` that keeps the row, greyed, with the requirement appended by the engine itself
+   (`v2.py:13159-13166`):
+
+   > `Work a shift 🍺 (Requires 15 Energy (you have 6))`
+
+   **A priced choice explains itself with no authoring at all**, and a price is what the field's
+   spoken refusals name most (37% — §15). This is the asymmetry worth knowing: `costs` come with
+   their own message, `conditions` do not, and a `show_when_locked` condition with no `locked_text`
+   goes mute. The gate **"a locked door says why"** therefore never counts a cost-only choice
+   against a game.
 2. **The deduction is applied by `setup.deductCostArray`, not by your effects list**
    (`v2.py:4655-4661`). A `costs` entry is parsed as `{trait, value}` only
    (`template_import.py:2133-2136`).
@@ -1337,7 +1382,7 @@ a surprise (`~/Documents/Female_PC_Craft_Study_20260823/findings_C_loop.md`). No
 C4 already owns this as a lint, and the corpus evidence behind it is thin — 4,219 of the corpus's
 4,260 duration tags belong to one game.
 
-### 32.3 `show_when_blocked` — the only out-of-hours surface, and nothing uses it
+### 32.3 `show_when_blocked` — the only out-of-hours surface, and one game uses it
 
 A solo activity whose schedule window has closed is dropped from the location list entirely, unless
 the author opts in:
@@ -1355,8 +1400,11 @@ miss** before anything else (`v2.py:4573-4580`) — and, when the flag is set, p
 message (`v2.py:5140-5145`). The same path also catches `max_triggers_per_day` exhaustion
 (`v2.py:5098-5102`).
 
-⚠️ **Zero of the ten games in this repo set it.** Windowed work simply vanishes, and the player has
-no surface that says when to come back. The `SchedulePage` (`v2.py:18964`) publishes hours for
+⚠️ **One game in this repo sets it** — `off_season`, six times, writing the hours out in its own
+words (*"mornings, eight till one"*, *"after nine at night"*, *"the last two hours, before the
+shutter"*). Everywhere else windowed work simply vanishes and the player has no surface that says
+when to come back. (This paragraph read *"Zero of the ten games"* until 2026-08-24; it was written
+before `off_season` adopted it and nothing re-counted.) The `SchedulePage` (`v2.py:18964`) publishes hours for
 **people** — every declared `[[npcs.schedules]]` row as a Time / Location / Activity / Days table —
 and there is no equivalent for places or activities. `references/the-clock.md` C5.
 
@@ -1728,18 +1776,25 @@ A choice whose `conditions` fail has **two** shapes, and the second one is the e
 
 | mode | set | renders as | on click |
 |---|---|---|---|
-| **A — the wall** | `show_when_locked = true` | greyed out, label = `locked_text` or the choice text (`v2.py:13146`) | nothing, or a threshold toast if `locked_text_threshold` is set (`v2.py:13185-13186`, §23) |
+| **A — the wall** | `show_when_locked = true` | greyed out, label = `locked_text` or the choice text (`v2.py:13171`) | nothing, or a threshold toast if `locked_text_threshold` is set (`v2.py:13210-13217`, §23) |
 | **B — the rejection** | `rejection_node` | **a live link**, label = `locked_text` or the choice text | goes to that node and applies `rejection_effects` |
 
 The generator names Mode B itself — `# Mode B: Clickable rejection — redirects to rejection node`
-(`v2.py:13148`). The node id is resolved against `passage_name_map` at `v2.py:13668-13673`, which
+(`v2.py:13173`), entered from the `if rejection_passage:` branch at `v2.py:13172` (`rejection_passage`
+is the generator's internal name for the field authors write as `rejection_node`). The node id is resolved against `passage_name_map` at `v2.py:13668-13673`, which
 logs a warning rather than failing the build if the target does not exist, so **a typo here is
 silent in the game and visible only in the build log.** Effects are emitted at `v2.py:13152-13165`
 through the same `setup.pendingEffects` path a normal choice uses.
 
-Both fields live on `TemplateChoice` (`apps/projects/services/template_import.py:811-812`, in the
-class at `:792`), beside
-`conditions`, `show_when_locked`, `locked_text` and `locked_text_threshold`.
+Both fields live on `TemplateChoice` (`apps/projects/services/template_import.py:825-826`, in the
+class at `:806`), beside `conditions`, `show_when_locked`, `locked_text` and
+`locked_text_threshold`, and are read from the TOML at `:2204`.
+
+⚠️ **`rejection_node` IS build-validated, contrary to what the paragraph below used to imply.**
+`template_import.py:4616-4624` raises when it names a node that is not in the same canvas — so a
+typo fails the build with a message naming the canvas and the choice index. The fail-open warning
+described below is the generator's later slug→passage resolution, which only sees ids the importer
+has already accepted.
 
 ### The census — this is a recovery, not a discovery
 

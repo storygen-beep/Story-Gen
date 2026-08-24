@@ -44,7 +44,7 @@ session is wrong by the end of that session. Run `wc -l` if you need one.
 ```
 .claude/skills/author-game-v2/
   SKILL.md                             entry point, EXPLICIT-INVOKE ONLY
-  scripts/gates.py                     the scoreboard — 41 gates + 17 lints
+  scripts/gates.py                     the scoreboard — 42 gates + 17 lints
   scripts/genre_words.txt              the field's own vocabulary, for the word lint
   references/engine.md                 36 verified engine facts, each with file:line
   references/register.md               how the prose reads once they click
@@ -70,7 +70,7 @@ session is wrong by the end of that session. Run `wc -l` if you need one.
   STATUS.md                       —    this file
 ```
 
-## The scoreboard — 41 gates, 17 lints
+## The scoreboard — 42 gates, 17 lints
 
 **A gate scores. A lint prints a list and refuses to score.** The split is the discipline: if a
 threshold cannot be defended against a measurement, it does not get to fail a game.
@@ -290,7 +290,7 @@ Eleven were scoped; LO picked three. **A (the want), C (the loop) and D (the wri
 
 | | section | state |
 |---|---|---|
-| **B** | the first fifteen minutes | **partly** — A ate most of it. Missing: what day one *refuses* to let her do, and how it says no |
+| **B** | the first fifteen minutes | **DONE 2026-08-24** — `findings_B_refusal.md`. **Day one refuses nothing**: 12 of 14 identifiable openings carry zero spoken refusals, Course of Temptation's 78-passage prologue included. Field-wide, only **23%** of the 27,505 conditionals wrapped around an action refuse anything — 35% are variant selectors. Of refusals, **71% render nothing**; the 28% that speak run a **median 9 words** and **60% name a handle** (price 37%, place 2%). ⚠️ The section's real find is that **`engine.md` §15 taught the opposite** — *"prefer the want"* — which is why **13 of our 176 shown-locked choices carry a reason**. §15 is reversed and gate 42 landed |
 | **E** | how she gets from no to yes | **partly** — D found the refusal costs and Zara's consent fork. Missing: the systematic view |
 | **F** | going further | **partly** — C found the two shapes (menu grows vs. event escalates internally). Missing: rungs and spacing |
 | **G** | the people | **DONE 2026-08-24** — `findings_G_people.md`. The field's answer is a UI component fired tens of thousands of times (a speaker macro is the **#1 macro in the whole game** in 7 of 25 — face + name + colour on every line), a label that encodes the relation (Stepmom · Aunt · Granny · Dr. Angela), **one term of address per person** (5–18% of their lines, never shared), and **a corner of the world each person owns**. `the_season` writes the voices well and then schedules **all four men into the camp every night** |
@@ -299,7 +299,7 @@ Eleven were scoped; LO picked three. **A (the want), C (the loop) and D (the wri
 | **J** | what players say | **DONE 2026-08-23** — `findings_J_players.md`. ⚠️ This row previously read *"untouched"* and **that was wrong**: the 2026-07-24 mopoga study already read 22,622 comments across 31 games and published F1–F10 from them. J was narrowed to testing *this week's* doctrine against 3,479 comments on the four study games |
 | **K** | the mirror | **untouched, and must be last** — it is the synthesis, not a section |
 
-**Seven are done: A, C, D, G, H, I and J.** (This line read *"Four are done"* over a list of six
+**Eight are done: A, B, C, D, G, H, I and J.** (This line read *"Four are done"* over a list of six
 until 2026-08-24.) The J-then-H recommendation that used to sit here is deleted — it was written
 before either ran, both are finished, and the order ended up reversed because checking the data
 first showed J was largely a re-run.
@@ -308,10 +308,9 @@ first showed J was largely a re-run.
 the section's question in a player's words, and it was the only complaint about `the_season` that
 came from a human rather than a gate.
 
-**Left: B, E and F (each partly answered by A/C/D), and K (the synthesis, and it must be last).**
-None of the three is a blank page — A ate most of B, D found E's refusal costs, C found F's two
-shapes. What is missing in each is the systematic view: what day one *refuses*, the consent ladder
-stated once, and the spacing between rungs.
+**Left: E and F (each partly answered by A/C/D), and K (the synthesis, and it must be last).**
+Neither is a blank page — D found E's refusal costs, C found F's two shapes. What is missing in each
+is the systematic view: the consent ladder stated once, and the spacing between rungs.
 
 ⚠️ **The corpus is 27 parseable games, not 25.** `tw.py` only knew `<tw-passagedata>`; three games
 ship the older `<div id="store-area"><div tiddler=…>` container and parsed to zero, so sections
@@ -319,6 +318,14 @@ A, C, D, G, H and J all ran on 25 games and reported it as the field. Two are no
 `college-daze` and `free-cities` — and `confined-and-horny` is an engine-only file with no passage
 data at all. **LO has deferred the recheck of those sections' headline numbers to the end of the
 study**, after K's inputs are all in.
+
+⚠️ **Section B found two more instrument faults under the same corpus, and they widen that recheck.**
+The tiddler container was parsed but its **store-area escapes were never decoded** — Twine 1 writes a
+newline as the two characters `\n` and a backslash as `\s`, so 9,221 `college-daze` passages carried
+**0 newlines and 5,620 literal `\n` tokens** and every word count on those two games was inflated.
+And `tw.links()` **dropped every SugarCube setter link** `[[label|Target][$x += 1]]` plus every raw
+`<a data-passage="…">`, which is what the in-degree hub ranking and `the-first-hour.md` F1's funnel
+walk were built on. Both are fixed; both sit underneath numbers published before 2026-08-24.
 
 ## B · The other work, unchanged in priority
 

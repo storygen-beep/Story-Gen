@@ -4718,6 +4718,86 @@ def run_gates(model, game, state=None):
          detail)
 
     # ═════════════════════════════════════════════════════════════════════════
+    # G42 — A LOCKED DOOR SAYS WHY.  `the-surfaces.md` R5c, `engine.md` §15.
+    #
+    # A choice with `show_when_locked = true` and no reason beside it renders the
+    # ACTION LABEL, greyed, with nothing else — `escaped_locked = (locked_text or
+    # choice_text)` at v2.py:13171, repeated into the title tooltip at :13219-13220.
+    # The player sees "Kiss her" struck out and learns nothing.
+    #
+    # MEASURED, 26 shipped sandboxes, 2026-08-24 (findings_B_refusal.md):
+    #   27,505 conditionals wrap an action; only 23% refuse anything (35% are
+    #   variant selectors where every branch acts). Of the 16,167 that DO refuse:
+    #       71% render nothing at all      the option is simply not there
+    #       28% speak                      median 9 words, 60% naming a handle
+    #   A visible, MUTE action label is 2.26% of 4,513 spoken refusals, and nearly
+    #   all of that is settings and pagination chrome (OptionsWidget, Widgets
+    #   Outfits "Previous"/"Next") rather than gated content. The field hides a
+    #   refusal or it explains one. It does not show a dead label and stop.
+    #   Ours, same day, by tomllib over every merged final: 144 of 176 shown-locked
+    #   choices are mute — 82%, against the field's 2.26%.
+    #
+    # ⚠️ THIS GATE REVERSES WHAT THIS SKILL USED TO TEACH. engine.md §15 read
+    #    "Prefer the want unless the gate is genuinely obscure" until 2026-08-24,
+    #    so the 7% is doctrine, not sloppiness. §15 was rewritten in the same turn
+    #    this gate landed; the two must not be allowed to drift apart again.
+    #
+    # ⚠️ THREE THINGS COUNT AS A REASON, and the third is why late_shifts passes:
+    #      · locked_text            the reason replaces the label   (engine.md §15)
+    #      · locked_text_threshold  the label becomes a <<button>> that fires
+    #        setup.queueGatedNotification(...) on click (v2.py:13210-13217) — the
+    #        field's click-then-refused shape minus the passage, so it counts
+    #      · rejection_node         a live link to a real failure node (§36)
+    #    A `costs` entry needs NO authoring at all: the exit-block cost rung appends
+    #    setup.getCostBlockedMessage(...) by itself (v2.py:13159-13166), which is
+    #    the field's dominant `priced` refusal for free. A cost-only choice is never
+    #    counted against the game.
+    #
+    # NO INVENTED THRESHOLD. The check is categorical because the measurement is:
+    # the field's mute share is ~2% and it is UI chrome. The summary prints
+    # shown-locked against reasons given so a thin pass stays visible.
+    # ═════════════════════════════════════════════════════════════════════════
+    shown_locked, mute = [], []
+    for path, node in _walk_paths(game):
+        if not path or path[-1] != "[]" or "choices" not in path:
+            continue
+        if "text" not in node and "target" not in node:
+            continue
+        if not node.get("show_when_locked"):
+            continue
+        label = str(node.get("text") or node.get("target") or "?")
+        shown_locked.append(label)
+        has_reason = (
+            str(node.get("locked_text") or "").strip()
+            or str(node.get("locked_text_threshold") or "").strip()
+            or node.get("rejection_node")
+        )
+        if has_reason:
+            continue
+        # A choice gated ONLY by costs explains itself — the engine writes the
+        # message. Anything else is a condition, and a condition goes mute.
+        if not node.get("conditions") and node.get("costs"):
+            continue
+        mute.append(label)
+    detail = []
+    if mute:
+        _shown = ", ".join(f'"{m[:52]}"' for m in mute[:8])
+        detail.append(f"{len(mute)} of {len(shown_locked)} shown-locked choice(s) render the "
+                      f"action label greyed with no reason beside it — v2.py:13171 falls back "
+                      f"to the label when `locked_text` is absent")
+        detail.append(f"mute: {_shown}" + (" …" if len(mute) > 8 else ""))
+        detail.append("give each one a `locked_text` (the reason), a `locked_text_threshold` "
+                      "(the bar, on click), or a `rejection_node` (a real failure node). "
+                      "The field hides a refusal or explains it — 2.26% show a dead label "
+                      "(the-surfaces.md R5c, engine.md §15/§36)")
+    gate("a locked door says why",
+         None if not shown_locked else not mute,
+         (f"{len(shown_locked)} shown-locked · {len(shown_locked) - len(mute)} with a reason"
+          + (f" · {100 * len(mute) // len(shown_locked)}% mute (field 2%)" if mute else "")
+          ) if shown_locked else "no `show_when_locked` choices authored",
+         detail)
+
+    # ═════════════════════════════════════════════════════════════════════════
     # G34 — THE CLIMB IS WHERE YOU SAID IT IS.  `the-meters.md` W1.
     #
     # DECLARE-THEN-CHECK against `board.who_climbs`. The field does NOT converge
