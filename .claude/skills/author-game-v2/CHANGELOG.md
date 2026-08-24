@@ -5,6 +5,84 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-25 — the badge arrives before the content, in five of eight games (`engine.md` §23, `gates.py`)
+
+**Why.** `mrs_vance` printed **"✓ Arc complete"** on five of six characters at or before the click
+that opened their content. §23 already warned that `terminal` is not computed from progress and gave
+the rule that follows — *terminal belongs on a card the player has to CLIMB TO*. What it never said
+is **climb to what**, and every v2 game answered the same wrong way: the badge sits on the threshold
+that **opens** the loop rather than one above it.
+
+**Measured across the repo, and this is the half that makes it doctrine:**
+
+```
+mrs_vance     5 of 6 - 2 landing ON the door, 3 BEFORE it (one 40 points early,
+                       two on a DIFFERENT meter from the one the door reads)
+forty_miles   6 of 6 - every badge at exactly the door value
+seventh_day   1 badge on the door + 5 goals 25 points past anything the game reads
+the_season    4 of 5
+the_allowance 3 of 5
+vesper        0 of 5   <- the v1 game §23 was WRITTEN FROM is clean
+```
+
+Four v2 games and not the one the section was written from. The doctrine did not fail; the sentence
+that would have prevented this was never written.
+
+### 1 · `engine.md` §23 — a meter is the wrong thing to gate a badge on
+
+New warning under the climb-to rule: put the ✓ on a **flag the content sets on its way out**, so it
+means *you have played this* rather than *you have ground past it*, with the three-card TOML worked
+out (climb → ready → done). The v1 hint system had exactly that pairing —
+`arc_closure_flag` + `arc_complete`, `template_import.py:1017-1023` — and the v2 card schema dropped
+it without replacing it.
+
+Also new: **a goal threshold no condition anywhere reads is a number the player climbs to for
+nothing.** `mrs_vance` shipped three, `seventh_day` five. They stay invisible while the terminal
+frame outranks the bullets — and become live instructions to grind for nothing the moment the badge
+is fixed, so the numbers have to move in the same pass.
+
+### 2 · `engine.md` §23 — `ready_canvas` on a triggerless canvas renders NOTHING
+
+`lookupCanvasBySlug` (`v2.py:15371`) walks `help_data.locationCanvases`, keyed by location UUID. A
+triggerless canvas — the usual shape for a sex loop — is not in that index, so the lookup returns
+`null`, Frame 2 does `if (!found) return ""`, and the card falls through to no frame at all: the
+exact failure the section's own goal-less-card warning describes. Point it at the **hub**. Verified
+against a built HTML: `hub_cade_office` present with `hasSchedules: true`, `loop_cade` absent.
+
+### 3 · `engine.md` §23 — the one-`terminal_text` cap is scoped to a FINISHED game
+
+`CHANGELOG.md` 2026-08-13 records where the cap came from: `vesper` 0.1.8, where four arcs genuinely
+had ended and `"Arc complete"` was **true** of them. In a v0.1 **nothing is closed**, so the cap
+forces every track but one into `"Arc complete"` — **a stronger and falser claim than the string it
+was rationing**. `the-release.md:107-110` already rules the other way: *"a plain marker at the top of
+**each track**… An honest wall is a promise; a silent one is a bug report."* The section now caps the
+**claim**, not the field.
+
+### 4 · `gates.py` — `lint_badge_before_content`
+
+Reports three things: a `[badge]` at or below the highest `gte` threshold any canvas condition reads
+on that (character, trait); a `[goal]` above that ceiling; and a `[rung]` below it that no condition
+reads at all. A **LIST, never a gate** — "content" is proxied by a canvas condition on the same
+(character, trait), which is a reading. Wired into the call site, the `--json` payload as
+`badge_before_content`, and the printed block.
+
+**Verified.**
+- `mrs_vance`: **8 findings before the repair, 0 after** — all five badges and all three phantom
+  thresholds, including `tobin.want 30`, which is a `[rung]` below the ceiling that the `[goal]`
+  check alone would have missed.
+- Fires on four other v2 games with the counts in the table above, and **0 on `vesper`** — the
+  strongest available evidence it measures the thing and not just fires.
+- `41/41 judged gates pass` on `mrs_vance` before and after; G15 *"no chain ends in silence"* stays
+  `6/6`. The lint touches no tally.
+- Proved live in headless Chromium against the built game
+  (`games/mrs_vance/playtest_quests.py`, 23/23): per character, the goal frame with live progress
+  below the door, `🔓 Ready` **with a 📍** at the door and unplayed, and the ✓ with the authored
+  string — never `"Arc complete"` — only after the loop has been played. The 📍 is asserted rather
+  than mere non-emptiness precisely because of finding 2. Then all five loops played to their finish
+  node, each setting its flag `False -> True`.
+
+---
+
 ## 2026-08-25 — a lint for the ambient that puts a man in a room he is not in (`gates.py`)
 
 **Why.** LO played `mrs_vance` — the first game to take all 41 gates — and found a character shutting

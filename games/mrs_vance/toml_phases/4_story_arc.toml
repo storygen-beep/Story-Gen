@@ -493,6 +493,10 @@ effects = [
   { targetType = "npc", npcId = "npc_cade", trait = "want", op = "add", value = 4, cap = 100 },
   { targetType = "player", trait = "clean", op = "add", value = -25 },
 ]
+# The badge on this character's last quest card is gated on THIS flag, not on a
+# meter — "terminal" is not computed from progress (engine.md §23), so the ✓ has
+# to come from having PLAYED the loop.
+flagEffects = [ { targetType = "player", flag = "cade_loop_played", op = "set" } ]
 
 
 # ── ISAAC.  Single-act loop — the field's majority shape. He does not talk.
@@ -599,6 +603,10 @@ effects = [
   { targetType = "npc", npcId = "npc_isaac", trait = "want", op = "add", value = 4, cap = 100 },
   { targetType = "player", trait = "clean", op = "add", value = -30 },
 ]
+# The badge on this character's last quest card is gated on THIS flag, not on a
+# meter — "terminal" is not computed from progress (engine.md §23), so the ✓ has
+# to come from having PLAYED the loop.
+flagEffects = [ { targetType = "player", flag = "isaac_loop_played", op = "set" } ]
 
 
 # ── SHERROD.  Single-act. He opens crude and he says it in front of anybody.
@@ -709,6 +717,10 @@ effects = [
   { targetType = "npc", npcId = "npc_sherrod", trait = "want", op = "add", value = 4, cap = 100 },
   { targetType = "player", trait = "clean", op = "add", value = -20 },
 ]
+# The badge on this character's last quest card is gated on THIS flag, not on a
+# meter — "terminal" is not computed from progress (engine.md §23), so the ✓ has
+# to come from having PLAYED the loop.
+flagEffects = [ { targetType = "player", flag = "sherrod_loop_played", op = "set" } ]
 
 
 # ── BOOTH.  Single-act, and he is still calling her Mrs. Vance while he does it.
@@ -814,6 +826,10 @@ effects = [
   { targetType = "npc", npcId = "npc_booth", trait = "want", op = "add", value = 4, cap = 100 },
   { targetType = "player", trait = "clean", op = "add", value = -20 },
 ]
+# The badge on this character's last quest card is gated on THIS flag, not on a
+# meter — "terminal" is not computed from progress (engine.md §23), so the ✓ has
+# to come from having PLAYED the loop.
+flagEffects = [ { targetType = "player", flag = "booth_loop_played", op = "set" } ]
 
 
 # ── TOBIN.  Single-act, in a cab in the back row. Blood, and he uses her name.
@@ -919,6 +935,10 @@ effects = [
   { targetType = "npc", npcId = "npc_tobin", trait = "want", op = "add", value = 4, cap = 100 },
   { targetType = "player", trait = "clean", op = "add", value = -25 },
 ]
+# The badge on this character's last quest card is gated on THIS flag, not on a
+# meter — "terminal" is not computed from progress (engine.md §23), so the ✓ has
+# to come from having PLAYED the loop.
+flagEffects = [ { targetType = "player", flag = "tobin_loop_played", op = "set" } ]
 
 
 # ── SOLO.  The surface she initiates alone.

@@ -700,6 +700,129 @@ def lint_ambient_presence(model, game):
     return (summary, sorted(findings))
 
 
+def lint_badge_before_content(model, game):
+    """A ✓ that lands at or before the last thing the player can unlock — and a goal
+    threshold no content in the game reads.
+
+    Two findings, one instrument, because they are the same mistake seen from either
+    end: a number on a quest card that nothing else in the game agrees with.
+
+    `engine.md` §23 already warns that `terminal` is NOT computed from progress —
+    Frame 1 fires on `card.terminal === true` alone (`v2.py:15404`), ahead of the ready
+    and goal frames, and nothing checks that anything was achieved. It then gives the
+    rule that follows from it: terminal belongs on a card the player has to CLIMB TO.
+    What no check asked is **climb to WHAT** — whether the threshold the badge sits on
+    is above the last threshold any content reads.
+
+    The failure this was written from, in a game that passed all 41 gates: five of six
+    characters printed ✓ Arc complete at or before the click that opened their content.
+    Two landed exactly ON the door. Three landed BEFORE it — one of them forty points
+    of climbing early, and two of them gated on a DIFFERENT METER from the one the door
+    reads, so the badge could arrive at want 0. The same game asked the player to climb
+    to three thresholds (`isaac.want 66`, `sherrod.want 62`, `tobin.want 30`) that no
+    condition anywhere in it reads; they were invisible only because the terminal frame
+    outranked the bullets that would have shown them.
+
+    THE FIX THE FINDING POINTS AT is not a bigger number. A meter is the wrong thing to
+    gate a badge on at all: put the ✓ on a FLAG the content sets on its way out, so it
+    means "you have played this" instead of "you have ground past it". The v1 hint
+    system had exactly that pairing (`arc_closure_flag` + `arc_complete`,
+    `template_import.py:1017-1023`) and the v2 card schema dropped it.
+
+    A LIST, NEVER A GATE. "Content" here means a canvas condition reading that same
+    (character, trait), which is a proxy: an author may legitimately put a badge on a
+    meter no canvas reads if the arc closes on something else. Read the rows.
+    """
+    cards = game.get("quest_cards") or []
+    if not cards:
+        return ("", [])
+
+    # the highest `gte` threshold any CANVAS condition reads, per (npc, trait)
+    ceiling, rungs = {}, collections.defaultdict(set)
+    def scan(o):
+        if isinstance(o, dict):
+            key = o.get("trait_key") or o.get("trait")
+            npc = o.get("npc_id")
+            op = o.get("operator") or o.get("op")
+            val = o.get("value")
+            if key and npc and op in ("gte", "gt") and isinstance(val, (int, float)):
+                k = (npc, key)
+                ceiling[k] = max(ceiling.get(k, float("-inf")), float(val))
+                rungs[k].add(float(val))
+            for v in o.values():
+                scan(v)
+        elif isinstance(o, list):
+            for v in o:
+                scan(v)
+    for c in model:
+        scan(c.get("raw"))
+
+    findings = []
+    n_terminal = 0
+    for card in cards:
+        npc = card.get("npc_id")
+        if not npc:
+            continue
+        short = re.sub(r"^npc[_-]", "", npc)
+        # ── the badge
+        if card.get("terminal"):
+            n_terminal += 1
+            gates = [i for i in (card.get("when") or [])
+                     if i.get("trait") and i.get("op") in ("gte", "gt")
+                     and isinstance(i.get("value"), (int, float))]
+            if not gates:
+                pass          # flag-gated or unconditional — this check has no opinion
+            else:
+                for g in gates:
+                    top = ceiling.get((g.get("npc_id") or npc, g["trait"]))
+                    if top is None:
+                        continue
+                    if float(g["value"]) <= top:
+                        gap = ("lands ON the last content"
+                               if float(g["value"]) == top
+                               else f"lands {top - float(g['value']):.0f} EARLY")
+                        findings.append(
+                            f"[badge] {short}: terminal at {g['trait']} "
+                            f"{g['op']} {g['value']:g}, but content reads "
+                            f"{g['trait']} up to {top:g} — {gap}")
+                # a badge gated on a meter the door does not read at all
+                door_traits = {t for (n, t) in ceiling if n == npc}
+                mine = {g["trait"] for g in gates}
+                if door_traits and not (mine & door_traits):
+                    findings.append(
+                        f"[badge] {short}: terminal gated on {', '.join(sorted(mine))} "
+                        f"while the content reads {', '.join(sorted(door_traits))} — "
+                        f"a different meter, so the ✓ can arrive at zero")
+        # ── the goal nothing pays
+        for g in (card.get("goals") or []):
+            if not (g.get("trait") and g.get("op") in ("gte", "gt")
+                    and isinstance(g.get("value"), (int, float))):
+                continue
+            who = g.get("npc_id") or npc
+            top = ceiling.get((who, g["trait"]))
+            if top is None:
+                continue          # no content reads this trait at all — nothing to compare
+            if float(g["value"]) > top:
+                findings.append(
+                    f"[goal] {short}: card asks for {g['trait']} {g['op']} "
+                    f"{g['value']:g}, but nothing in the game reads {g['trait']} "
+                    f"above {top:g} — {float(g['value']) - top:.0f} points that buy nothing")
+            elif float(g["value"]) not in rungs[(who, g["trait"])]:
+                # A rung BELOW the ceiling that still opens nothing. Splits a real
+                # climb into halves the player is told to hit and is not paid for.
+                real = ", ".join(f"{v:g}" for v in sorted(rungs[(who, g["trait"])]))
+                findings.append(
+                    f"[rung] {short}: card asks for {g['trait']} {g['op']} "
+                    f"{g['value']:g}, which no condition reads — the real rungs on "
+                    f"{g['trait']} are {real}")
+
+    if not n_terminal:
+        return ("", [])
+    summary = (f"{len(findings)} finding(s) across {n_terminal} terminal card(s) — "
+               f"a ✓ at or before the last content, or a goal nothing reads")
+    return (summary, sorted(set(findings)))
+
+
 def lint_screen_shape(model, game):
     """The two `the-surfaces.md` rules whose thresholds are not yet establishable.
 
@@ -5456,6 +5579,7 @@ def main():
 
     lints = lint_dialogue_attribution(model)
     amb_summary, amb_lints = lint_ambient_presence(model, game)
+    badge_summary, badge_lints = lint_badge_before_content(model, game)
     world_lints = lint_world_prose(model, game)
     shape_summary, shape_lints = lint_screen_shape(model, game)
     label_summary, label_lints = lint_labels(model, game)
@@ -5487,6 +5611,8 @@ def main():
                                                      "findings": browse_lints},
                                     "ambient_presence": {"summary": amb_summary,
                                                          "findings": amb_lints},
+                                    "badge_before_content": {"summary": badge_summary,
+                                                             "findings": badge_lints},
                                     "dispatch_depth": {"summary": disp_summary,
                                                        "findings": disp_lints},
                                     "ladder": {"summary": ladder_summary,
@@ -5547,6 +5673,20 @@ def main():
             print(f"          · … and {len(lints)-12} more")
         print("          (a canvas that neither binds nor names the speaker — check the"
               " name that will render)")
+
+    if badge_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the badge arrives before the content — {badge_summary}")
+        for h in badge_lints[:16]:
+            print(f"          · {h}")
+        if len(badge_lints) > 16:
+            print(f"          · … and {len(badge_lints)-16} more")
+        print("          (engine.md §23 — Frame 1 fires on `terminal === true` ALONE, ahead of"
+              " ready and goals, and nothing checks achievement. A LIST, never a score:")
+        print("           \"content\" here is a canvas condition reading the same (character,"
+              " trait), which is a proxy. The fix a [badge] row points at is not a bigger")
+        print("           number — a meter is the wrong thing to gate a badge on. Put the ✓ on"
+              " a FLAG the content sets on its way out, so it means \"you played this\")")
 
     if amb_summary:
         print(f"  {'─'*72}")
