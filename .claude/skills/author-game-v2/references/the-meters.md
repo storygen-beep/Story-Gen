@@ -133,7 +133,7 @@ the game against **its own declaration**, never against a number this file picke
 >
 > Plus `seventh_day`'s per-character `lust` at **34 raises / 0 reads**.
 >
-> In the field a sexual-state meter is a real gate in **12 of 25 games**, and where it exists it is
+> In the field a sexual-state meter is a real gate in **13 of 27 games**, and where it exists it is
 > the **#1 or #2 most-gated thing in the whole game** — `corpo-life` `lust` (346 content gates,
 > the top meter in that game), DoL `arousal`, `family-ties` `you.arousal`, `friends-of-mine`
 > `excitement`. It is the genre's hottest gate and our deadest number.

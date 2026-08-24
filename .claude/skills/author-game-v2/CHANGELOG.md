@@ -5,6 +5,164 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-24 — The end-of-study recheck: one constant moves, one shipped figure was never reproducible, and F1's opening table stood on truncated walks
+
+**Why.** Every field number in this skill was measured on **25** of the mopoga corpus's 28 files.
+Section B then found three faults underneath them: `college-daze` and `free-cities` ship the Twine 1
+`<div id="store-area">` container and parsed to **zero** passages (the field is **27**); that
+container's `\n` escapes were never decoded; and `tw.links()` dropped setter links
+`[[label|Target][$x += 1]]` and raw `<a data-passage>`. LO deferred the recheck to the end of the
+study, and K depends on it. This is that recheck. Evidence:
+`~/Documents/Female_PC_Craft_Study_20260823/findings_RECHECK.md`, instruments `recheck.py` and
+`dialogue.py` in the same directory. Neither is under git; this entry is their only record.
+
+**Method — reproduce before re-measuring.** The 2026-08-18/19/22 measurement scripts are **not on
+disk**; they were run inline and discarded. So each instrument was rebuilt from its own documented
+description and **first re-run on the original 25 games against the number that shipped**. Without
+that step a moved number cannot be attributed to the corpus rather than to the rebuild. Five
+reproduce exactly or near-exactly — clock references (1.1 / 2.1, *exact*, using `gates.py`'s own
+`_clk_refs`), speaker macro is the #1 macro (7 of 25, *exact*), renders dialogue through a speech UI
+(20 of 25, *exact*), link labels (64,781 against 64,594), `genre_words` (18,574 against 18,043).
+Three do not and were used only to measure **movement**, never to replace an absolute:
+narration:dialogue, explicit-screen media, currency dominance.
+
+### One gate constant moves
+
+`lint_clock_in_prose`'s `FIELD_MEDIAN, FIELD_P75` — **1.1 / 2.1 → 0.8 / 1.8**. The old pair
+reproduced *exactly* on 25 games with the same `_clk_refs`, so this is the corpus and not the
+instrument. Both newly-readable games are clock-quiet (0.25 and 0.27 references per 10k). It moves
+**against** our games: `off_season` at 26.4 was 24x the field median and is now 33x.
+
+### One shipped figure was never reproducible under any filter
+
+`FIELD_LABEL_LONG_SHARE` shipped as **0.10** against a stated basis of 64,594 labels on 25 games.
+That basis reproduces to 0.29% and the median reproduces exactly at 3 — but the share at six or more
+words is **16%**, and no filter tested yields 10% while also yielding a median of 3 (all-labels
+gives 8.7% at a median of 2). Corrected to **0.21** on 27 games, with the non-reproduction recorded
+in the constant's own comment. The likeliest reading: the median was taken on the 2+ set and the
+long share on the whole set.
+
+### Four gate constants hold
+
+- `NARRATION_DIALOGUE_CEILING = 5.0` — both new games are narration-heavy (5.9:1, 9.7:1) and both
+  sit above the ceiling, so **neither count moved**: 10 of 25 → 10 of **27**, 18 of 25 → 18 of 27.
+- `FIELD_METER_RUNGS = 8` / `FIELD_METER_FIRST_RUNG = 5` — `free-cities`' `$rep` is a real player
+  ascent meter at **17 rungs**, landing exactly on the existing maximum. Band and first rung
+  unchanged; the constant reads rung COUNT, and `rep` runs 1000..12000 on the arcology's own scale.
+- `FIELD_DOM` / `FIELD_EXACT` — `free-cities` names no currency, `college-daze` is 99.9% `dollar`.
+- `EXPLICIT_BEAT_MEDIA_FLOOR = 50.0` — rebuilt per-screen share moved **up** (84% → 86%) and
+  words-per-clip held (51 → 57). The floor stays generous.
+
+`the-meters.md:553`'s body-system gate shares need no recheck: section I already read all 27.
+
+### `scripts/genre_words.txt` rebuilt — 18,043 → 20,555
+
+The list said "four or more of the **25** games … 10.6M words". On 27 the corpus is **14.7M words**
+and 214,559 distinct words. Rebuilt as a **UNION with the old list, never a replacement** — a full
+27-game rebuild would drop 5 words (`cola`, `gil`, `png'`, `sit-ups`, `upskirt`) on tokeniser noise,
+and nothing has ever been removed from this file. **+2,512 words**, 1,976 of them vocabulary the two
+unread games use that the lint was reporting as words the genre does not reach for. Visible in the
+lint immediately: `off_season`'s flagged-word count fell 231 → 213, `the_season`'s 117 → 104.
+
+**The curated list survives and gets stronger.** All eleven words `register.md` names as appearing
+in zero of 25 games appear in **zero of 27 across 14.7M words** — checked directly against both new
+games' prose, not inferred from a frequency table. `the-voice.md`'s `lodger` holds on the same
+evidence.
+
+### Counts whose numerator holds and whose denominator moves
+
+`register.md` 20 of 25 → **20 of 27** (speech UI) · `engine.md` 7 of 25 → **7 of 27** (#1 macro) ·
+`engine.md` 17 of 25 → **18 of 27** (cast page — `college-daze`'s `Check Contacts` is a phone
+contact list, one row per person gated on 43 `$met_*` flags, with a `(*NEW!*)` badge; `free-cities`'
+`Starting Girls` is a purchase screen and does not count) · `the-first-hour.md` 16 of 25 → **17 of
+27** (meeting state) · `the-meters.md` 12 of 25 → **13 of 27** (sexual-state gate) · `state.md` 14
+of 25 → **15 of 27** (no player ascent tier) · `register.md` easier than 24 of 25 → **26 of 27** ·
+`the-surfaces.md` 64,594 labels → **84,009**.
+
+`college-daze` is worth naming under the arousal row: its sexual-state meters are **per character**
+— 29 of them, 179 read sites — and they gate at **51% and 88%**, far above section I's 14% field
+median. They are also small. That is section I's own law arriving from a game section I never read:
+**small and gating, or large and colouring.**
+
+### `the-clock.md` C2 — the count shipped as 2 and it is 24
+
+"Across 92,226 link labels in the same 25 games: **2** name a clock time, **0** promise one as the
+outcome." Re-scanned across **84,009 action labels in all 27** with the corrected extractor: **24**
+name an absolute clock time — 6 wait/alarm actions, 7 stated windows, 6 chapter markers in one
+linear game, 5 narration fragments used as labels. **The load-bearing zero is unchanged**: not one
+is a repeatable canvas promising to end at a named hour. Also recorded there: **a duration in
+parentheses is not a clock time** — DoL prints `Bathe (0:30)` as the minute cost, which is C1 done
+right, and a naive scan returns 4,282 instead of 24.
+
+### The finding that matters — `the-first-hour.md` F1 rests on truncated walks
+
+**`destroyer` was listed as a 285-word cold open. It is not one.** Those 285 words are its legal
+disclaimer, and the walk stopped there because the passage leaves through
+`<a data-passage="intro1">`. Walked properly it is **eleven passages, ~3,300 words**, naming the
+father, the grandfather (who speaks at length), the stepmother and the school bullies — a **staged
+open** by F1's own definition. Moved to the staged row.
+
+It is not alone. Comparing extractors across all 25, **eight openings move and seventeen do not**:
+`growup` 26w → 8,132w, `realm-of-corruption` 7w → 2,099w, `amore` 6w → 709w, `wasteland-lewdness`
+1,004w → 6,516w, `destroyer` 531w → 3,272w, `the-hellfire-club` 681w → 1,728w, `inseminator`
+305w → 582w, `zaras-school-life` 1,173w → 1,482w.
+
+**So F1's two named shapes are sound and the EMPTY BAND BETWEEN THEM IS NOT RE-VERIFIED.** The
+300-to-700 gap may be real or may be an artifact of early-terminating walks. This is stated in the
+file rather than silently repaired, because **F1's own walker is not on disk** — the numbers above
+come from a plain greedy first-link walk that returns 531 words for `destroyer` where F1 published
+285, so it is evidence of movement and not a replacement measurement. F1's "ten of twenty openings
+name nobody" carries the same caveat. **The rule F1 asks of an author — make the cast load and the
+word budget agree — does not turn on the gap.**
+
+### Section C's in-degree table — one row is wrong
+
+Three of four rows reproduce **exactly** (`course-of-temptation` ShowerStall 41,
+`degrees-of-lewdity` Hallways 259 / Farm Work 233 / Forest 198 / Orphanage 193, `family-ties`
+hall 11 / south 11 / bathroom 9). `zaras-school-life` does not: `School` **46 → 120**, and `Park`
+(44) is no longer its runner-up — `Living room` (58) and `Jecinda District` (52) both outrank it.
+That game navigates through setter links; bracket links alone move `School` from **14 to 252**.
+**C's conclusion survives** — `School` is still the returned-to screen and still a menu — but the
+number was understated 2.6x and the second room was wrong. C's table lives in the findings file, not
+in the skill, so nothing shipped carried it.
+
+### Sections B, E, F and I needed no recheck
+
+They ran **after** the parser fixes and their own text proves it: `the-meters.md` W6 already names
+*"Only `college-daze` … and `free-cities` … run real stacks"*, and `the-first-hour.md` F4b already
+counts fourteen openings including both.
+
+⚠️ **And this was nearly filed as a correction.** The first draft of `findings_RECHECK.md` §5
+asserted W6's conclusion "was drawn without this game" — it was not; W6 cites it by name. Caught by
+reading the file before shipping the claim. **That is the third time in this study a doctrine
+citation was suspected and turned out right** (`ginablow` in F, `block_pool` in E). The rule written
+after the second one held again, with one clause added: **suspect the instrument, and then suspect
+yourself, before the citation.**
+
+A fourth word-boundary failure also nearly landed: the first ascent-meter scan of the new games used
+a substring list containing `corrupt`, which does not match `$corr` — `college-daze`'s actual
+corruption variable. Caught by dumping the variable census instead of trusting the filter. After
+`$groom`, `heather_girlfriend` and `$PlayerCorruption`, this class of bug has now cost four
+measurements in one study.
+
+### Files touched
+
+`scripts/gates.py` (six constants/comments plus five stale "of 25" strings) ·
+`scripts/genre_words.txt` (rebuilt) · `references/register.md` (8 sites) · `references/engine.md`
+(2) · `references/the-first-hour.md` (3) · `references/the-clock.md` (1) ·
+`references/the-surfaces.md` (1) · `references/the-meters.md` (1) · `references/state.md` (1) ·
+`references/the-voice.md` (1) · `STATUS.md` · this file.
+
+**Verified.** Fresh `gates.py` baseline over all 21 scorable games before any edit, re-run after.
+**Verdict tallies byte-identical: 223 FAIL / 337 n/a / 328 PASS, and no gate's verdict moved.** The
+distinct-gate union holds at **42** — the recheck adds no gate. Every output diff is one of four
+intended kinds: the narration comparator's `10 of 25` → `10 of 27`, the label lint's `10% at 6+` →
+`21% at 6+`, the clock lint's `1.1 / 2.1` → `0.8 / 1.8` (and its recomputed multiple, e.g.
+`off_season` 36x → 50x), and the genre-word lint flagging **fewer** words now that the list holds
+the field's full vocabulary.
+
+---
+
 ## 2026-08-24 — Section F lands: the field ships the cheap loop, and my instrument flattered my own conclusion
 
 Section F asked how escalation continues once she says yes. C had answered half — the loop screen is

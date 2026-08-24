@@ -157,7 +157,7 @@ this and checks the built game against it: `player` wants ≥60% of meter-gating
 what is judged is the game against its own declaration, never against an invented number.
 `the-meters.md` W1.
 
-**`board.ascent_tiers`** — names the ratcheting tiers, if this game has any: **14 of 25 shipped
+**`board.ascent_tiers`** — names the ratcheting tiers, if this game has any: **15 of 27 shipped
 sandboxes have no player ascent tier at all**, and an empty list is a legitimate declaration for a
 `who_climbs = "cast"` game. Gate 10 reads this and
 judges those meters by name; without it the gate falls back to a top-3 guess and says so in

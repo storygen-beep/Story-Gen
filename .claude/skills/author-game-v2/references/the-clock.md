@@ -201,15 +201,30 @@ label naming one is a promise it cannot keep.
 
 The fix is deleting two words. What remains is the only part the engine can honour.
 
-**The field is close to unanimous.** Across **92,226 link labels** in the same 25 games:
+**The field is close to unanimous.** Re-measured 2026-08-24 across **84,009 action labels** in all
+27 parseable games, with the corrected extractor:
 
 ```
-    2  name a clock time     "Wait until 21:00" · "Wait until 20:00"     both explicit WAIT actions
-    0  promise a clock time as the OUTCOME of an action
+   24  name an absolute clock time, of which —
+        6  are explicit WAIT or ALARM actions   "Wait until 21:00" · "Set alarm for 7:00am"
+        7  state a WINDOW as a requirement      "Req: After 6pm" · "Works until 8pm"
+        6  are a scripted chapter marker in one linear game (become-taxi-driver)
+        5  are narration used as a link label   "Around ten, there came a knock at the door"
+    0  promise a clock time as the OUTCOME of a repeatable action
 ```
 
-Both survivors are buttons whose entire purpose *is* to reach that hour, which the player is
-choosing to spend. Ours: **13 clock-time labels across four v2 games** (steam 8, off_season 2,
+⚠️ **The count shipped as `2` and it was measured through a hole.** The old extractor could not see
+setter links or `<a data-passage>`, and the scan ran on 25 games; the two it found were both
+`new-lust`'s. The **conclusion is unchanged and now better evidenced**: every one of the 24 is
+either a button whose entire purpose *is* to reach that hour, a stated window, or prose. **Not one
+is a repeatable canvas promising to end at a named time**, which is the thing this rule forbids.
+
+⚠️ **A duration in parentheses is not a clock time.** Degrees of Lewdity prints `Bathe (0:30)` on
+hundreds of buttons — that is the minute COST, which is C1 done right, and counting it as a clock
+reference is what a naive scan does (it returns 4,282 instead of 24).
+
+The wait-action survivors are buttons whose entire purpose *is* to reach that hour, which the player
+is choosing to spend. Ours: **13 clock-time labels across four v2 games** (steam 8, off_season 2,
 seventh_day 2, forty_miles 1) and **zero across all four v1 games**.
 
 Even a game that *can* do it does not. `lust-for-life` ships an absolute-time primitive
@@ -384,8 +399,10 @@ is the two words `till one` and `till seven`.
 - **Exempt:** world rules and shift patterns · backward canon · in-scene relative time · forward
   consequences. Most of what looks like a violation is one of these.
 - **The test:** read it at the last minute of the canvas's window — still true?
-- **A label may not promise a clock time.** `till one (2h 30m)` → `(2h 30m)`. Field: 2 in 92,226,
-  both explicit waits.
+- **A label may not promise a clock time.** `till one (2h 30m)` → `(2h 30m)`. Field: **24 in
+  84,009**, and **none of them a repeatable action** — 6 waits or alarms, 7 stated windows, 6
+  chapter markers in one linear game, 5 narration fragments. (It read "2 in 92,226" until the
+  2026-08-24 recheck; C2 carries the split.) A duration in parentheses is not a clock time.
 - **A label that spends the clock says how much**, in one form, held across the game. Travel time
   is tagged for you (`v2.py:4724`); activity time is not (`v2.py:12733`).
 - **A stated duration must equal the real spend** — the gate walks choice → target node → exit.

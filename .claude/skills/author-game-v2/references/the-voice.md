@@ -35,7 +35,7 @@ clothes. Keep the setting's voice in every paragraph; make the words on the nav 
 anyone. *The Box Room* becomes *The Back Room* and says where it is in two words anybody owns.
 
 > ⚠️ **This example has now been wrong twice, in opposite directions, and both are worth keeping.**
-> It read *The Lodger's Room* until 2026-08-22 — `lodger` is used by **zero** of the 25 field
+> It read *The Lodger's Room* until 2026-08-22 — `lodger` is used by **zero** of the 27 field
 > games, and `steam` and `off_season` both shipped a location copied from this line. The cure
 > written that day was *The Tenant's Room*, and **`tenant` is under the corpus bar too.**
 >
@@ -96,12 +96,17 @@ A loop whose exits say *Continue* or *Go on* has thrown away the only readable t
 does not soften the room-list rule above — a room button stays plain; an act button is inside a
 scene the player already chose to be in. `the-surfaces.md` R3b.
 
-**Measured against the field.** 64,594 action link labels across 25 shipped sandboxes
+**Measured against the field.** 84,009 action link labels across the 27 parseable sandboxes
 (`~/Documents/Mopoga_Twine_Sandbox_Research_20260724/gamehtml/`):
 
 ```
-FIELD           median 3 words          10% are 6 words or longer
+FIELD           median 3 words          21% are 6 words or longer
 ```
+
+> ⚠️ **The long share read 10% until 2026-08-24 and was never reproducible.** Rebuilt on the
+> original 25 games the label count reproduces to 0.29% and the median reproduces exactly at 3, but
+> the share at six-plus words is **16%** — and no filter yields 10% at a median of 3. The median is
+> the number this rule actually leans on, and it has not moved. `findings_RECHECK.md` §1.
 
 Ours, and the drift tracks build date:
 

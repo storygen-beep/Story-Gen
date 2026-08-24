@@ -232,7 +232,7 @@ priced label against the field's 94% symbol).
 - **An instrument that cannot see a thing reports its ABSENCE, not its rarity.** Before a
   measurement is allowed to retire a rule, ask what the measurement is blind to. v1's dialogue rule
   was dropped because a field study counted speech by looking for `"quote marks"` and found a
-  median of 33:1 — but 20 of 25 games render speech as a UI component (`<<speech>>`, `<<nm>>`, a
+  median of 33:1 — but 20 of 27 games render speech as a UI component (`<<speech>>`, `<<nm>>`, a
   chat bubble, one macro per character), so the instrument read the most spoken game in the corpus
   as **585:1 narration**. Re-measured with each game's own convention: median **2.93:1**, ten games
   under 2:1. The two games the study named as the dialogue-heavy outliers were simply the two whose

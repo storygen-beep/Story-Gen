@@ -49,11 +49,47 @@ The field runs **two** opening shapes and nothing in between. Measured across 25
 
 | shape | words | cast | examples |
 |---|---|---|---|
-| **cold open** | 60–300 | **nobody** | corpo-life 64 · the-company 126 · degrees-of-lewdity 193 · destroyer 285 |
-| **staged open** | 700–2,600 | one at a time, each on screen and speaking | friends-of-mine 1,377 · new-life-project 1,558 · patriarch 2,619 |
+| **cold open** | 60–300 | **nobody** | corpo-life 64 · the-company 126 · degrees-of-lewdity 193 |
+| **staged open** | 700–2,600 | one at a time, each on screen and speaking | friends-of-mine 1,377 · new-life-project 1,558 · patriarch 2,619 · **destroyer ~3,300** |
+
+> ### ⚠️ The walk this table stands on could not see two navigation forms
+>
+> **`destroyer` was listed here as a 285-word cold open until 2026-08-24. It is not one.** Those
+> 285 words are its legal disclaimer — *"I am not the owner of any of the media or pictures used in
+> this game…"* — and the walk stopped there because that passage leaves through
+> `<a data-passage="intro1">`, which the extractor did not read. Walked properly it runs **eleven
+> passages and roughly 3,300 words** and names the **father**, the **grandfather** (who speaks, at
+> length), the **stepmother** and the school bullies. By this table's own definition that is a
+> staged open.
+>
+> The same extractor also dropped setter links `[[label|Target][$x += 1]]`. Comparing the two
+> across all 25 games, **eight openings move and seventeen do not**:
+>
+> ```
+> growup                26w  ->  8,132w        realm-of-corruption    7w -> 2,099w
+> amore                  6w  ->    709w        wasteland-lewdness  1,004w -> 6,516w
+> destroyer            531w  ->  3,272w        the-hellfire-club     681w -> 1,728w
+> inseminator          305w  ->    582w        zaras-school-life   1,173w -> 1,482w
+> ```
+>
+> **So the two named shapes are sound and the EMPTY BAND BETWEEN THEM IS NOT YET RE-VERIFIED.**
+> The 300-to-700 gap may be real or may be an artifact of walks that stopped early. Re-measuring it
+> needs this section's own walker, which is not on disk — the numbers above come from a plain
+> greedy first-link walk, which returns 531 words for `destroyer` where this table published 285,
+> so it is evidence of *movement* and not a replacement measurement.
+>
+> **What the rule below asks of an author does not depend on the gap.** Pick a shape and make the
+> cast load and the word budget agree; that is a consistency rule, and the two shapes it names are
+> both real. `findings_RECHECK.md` §7.
 
 **Ten of twenty openings name nobody at all.** When a field opening does name people, it spends
 **~229 words per named character** (values 132, 174, 217, 229, 1055, 1558, 1633).
+
+⚠️ **Both figures rest on the same walk as the table above, so both carry its caveat.** `destroyer`
+alone moves from the names-nobody column to naming four, and seven other walks moved. The rate per
+named character is the more robust of the two — it is a ratio of two quantities that grow together
+— but neither has been re-derived. The rule they support is a consistency rule and does not turn on
+the exact count.
 
 corpo-life's whole cold open, in full — who, job, place, why poor, what is at stake, zero characters:
 
@@ -234,7 +270,7 @@ hub_roan_house       conditions: NONE
 hub_nessa_back_room  conditions: NONE
 ```
 
-**The field's answer.** 16 of 25 shipped games carry per-character meeting state, and the strongest
+**The field's answer.** 17 of 27 shipped games carry per-character meeting state, and the strongest
 one carries it on effectively its whole navigable cast — degrees-of-lewdity keeps a first-time flag
 on **24 of its 27 registered NPCs** (`C.npc.<Name>.init`, plus older `_intro`/`_seen` flags for the
 rest), read in conditions 150 times. become-someone gates **presence**, not just dialogue:

@@ -293,11 +293,11 @@ Eleven were scoped; LO picked three. **A (the want), C (the loop) and D (the wri
 | **B** | the first fifteen minutes | **DONE 2026-08-24** — `findings_B_refusal.md`. **Day one refuses nothing**: 12 of 14 identifiable openings carry zero spoken refusals, Course of Temptation's 78-passage prologue included. Field-wide, only **23%** of the 27,505 conditionals wrapped around an action refuse anything — 35% are variant selectors. Of refusals, **71% render nothing**; the 28% that speak run a **median 9 words** and **60% name a handle** (price 37%, place 2%). ⚠️ The section's real find is that **`engine.md` §15 taught the opposite** — *"prefer the want"* — which is why **13 of our 176 shown-locked choices carry a reason**. §15 is reversed and gate 42 landed |
 | **E** | how she gets from no to yes | **DONE 2026-08-24** — `findings_E_yes.md`. The willingness meter is **per-person in 16 of 20 games**, and the field gives the whole cast **one word on one scale** — become-someone `trust` on 62 of 64, patriarch `like` on 37 of 38 — differentiating people by **modifiers** on it, not by vocabulary. **Median 1 meter per person, median 3 rungs, 88% of thresholds shared across the cast**, and `+1` is the increment. ⚠️ **W6 taught the opposite** — a different meter per relationship type — which is why `off_season` ships four characters with four vocabularies. W6 is reframed and the meter-ladder lint's cast branch now gets a per-character comparator instead of the player-ascent 8–17 |
 | **F** | going further | **DONE 2026-08-24** — `findings_F_further.md`. An act menu is **2 options wide, one step apart** (2,292 menus), and **9%** carry a finish. Of 61 arc hubs, **47 run one to four intensities and 14 run five or more** — going further mostly means *more variations at the same intensity*. And escalation is barely gated: **47%** of 7,598 act links carry no condition, her willingness gates **2%**, the player's ascent meter **13%** against her **6%**. ⚠️ **No spacing number exists** — only two arcs in the corpus space acts along a meter, and the honest answer is that the field does not build escalation as a spaced ladder |
-| **G** | the people | **DONE 2026-08-24** — `findings_G_people.md`. The field's answer is a UI component fired tens of thousands of times (a speaker macro is the **#1 macro in the whole game** in 7 of 25 — face + name + colour on every line), a label that encodes the relation (Stepmom · Aunt · Granny · Dr. Angela), **one term of address per person** (5–18% of their lines, never shared), and **a corner of the world each person owns**. `the_season` writes the voices well and then schedules **all four men into the camp every night** |
+| **G** | the people | **DONE 2026-08-24** — `findings_G_people.md`. The field's answer is a UI component fired tens of thousands of times (a speaker macro is the **#1 macro in the whole game** in 7 of 27 — face + name + colour on every line), a label that encodes the relation (Stepmom · Aunt · Granny · Dr. Angela), **one term of address per person** (5–18% of their lines, never shared), and **a corner of the world each person owns**. `the_season` writes the voices well and then schedules **all four men into the camp every night** |
 | **H** | does the world know? | **DONE 2026-08-23** — `findings_H_known.md`. Reputation refuses almost nothing (14 of 644 field read sites, 2%); it is read constantly and swaps ~25-word lines. `the_season`'s `known` has **7 read sites in 111 passages** |
 | **I** | the body as a machine | **DONE 2026-08-24** — `findings_I_body.md`. The strongest evidence is negative: `degrees-of-lewdity` **built hygiene and switched it off** — 1,273 writes, one read site, a seven-band widget nothing calls, and `<<set $hygieneenabled to 0>> /* unused */` in its own initialiser. Corpus-wide the body gates a median **10%** of its reads (H's reputation: 2%), and a system either stays small and gates or grows large and colours. Ours: **102 garments across 10 games, 47 reads**, and four wardrobes read zero times |
 | **J** | what players say | **DONE 2026-08-23** — `findings_J_players.md`. ⚠️ This row previously read *"untouched"* and **that was wrong**: the 2026-07-24 mopoga study already read 22,622 comments across 31 games and published F1–F10 from them. J was narrowed to testing *this week's* doctrine against 3,479 comments on the four study games |
-| **K** | the mirror | **untouched, and now the only one left** — it is the synthesis, not a section. Two inputs waiting for it: the deferred headline recheck, and **the 48% of act-gate conditions section F could not name**. That residue is each game's invented vocabulary; classifying it by *shape* rather than domain — the move section B used to take its own residue from 71% to 0.4% — would probably name most of it |
+| **K** | the mirror | **untouched, and now the only one left** — it is the synthesis, not a section. **The deferred headline recheck landed 2026-08-24** and is no longer a blocker (`findings_RECHECK.md`). Two inputs remain: **the 48% of act-gate conditions section F could not name** — each game's invented vocabulary, and classifying it by *shape* rather than domain, the move section B used to take its own residue from 71% to 0.4%, would probably name most of it — and **`the-first-hour.md` F1's unverified 300-to-700-word gap**, which the recheck opened and could not close because F1's walker is not on disk |
 
 **Ten are done: A, B, C, D, E, F, G, H, I and J.** (This line read *"Four are done"* over a list of six
 until 2026-08-24.) The J-then-H recommendation that used to sit here is deleted — it was written
@@ -308,24 +308,57 @@ first showed J was largely a re-run.
 the section's question in a player's words, and it was the only complaint about `the_season` that
 came from a human rather than a gate.
 
-**Left: K alone — the synthesis, and it must be last.** Every section that feeds it is now done.
-Before it runs, the deferred recheck has to land: sections A, C, D, G, H and J were measured on 25 of
-27 games, and both `tw.py` fixes from section B sit underneath their numbers.
+**Left: K alone — the synthesis, and it must be last.** Every section that feeds it is now done,
+**and the deferred recheck has landed** (2026-08-24).
 
-⚠️ **The corpus is 27 parseable games, not 25.** `tw.py` only knew `<tw-passagedata>`; three games
-ship the older `<div id="store-area"><div tiddler=…>` container and parsed to zero, so sections
-A, C, D, G, H and J all ran on 25 games and reported it as the field. Two are now readable —
-`college-daze` and `free-cities` — and `confined-and-horny` is an engine-only file with no passage
-data at all. **LO has deferred the recheck of those sections' headline numbers to the end of the
-study**, after K's inputs are all in.
+### ✅ The recheck is done — `findings_RECHECK.md`
 
-⚠️ **Section B found two more instrument faults under the same corpus, and they widen that recheck.**
-The tiddler container was parsed but its **store-area escapes were never decoded** — Twine 1 writes a
-newline as the two characters `\n` and a backslash as `\s`, so 9,221 `college-daze` passages carried
-**0 newlines and 5,620 literal `\n` tokens** and every word count on those two games was inflated.
-And `tw.links()` **dropped every SugarCube setter link** `[[label|Target][$x += 1]]` plus every raw
-`<a data-passage="…">`, which is what the in-degree hub ranking and `the-first-hour.md` F1's funnel
-walk were built on. Both are fixed; both sit underneath numbers published before 2026-08-24.
+The corpus is **27** parseable games, not 25. `tw.py` only knew `<tw-passagedata>`; three games ship
+the older `<div id="store-area"><div tiddler=…>` container and parsed to zero. Two are now readable
+(`college-daze`, `free-cities`); `confined-and-horny` is an engine-only file with no passage data at
+all and is correctly excluded from both counts. Section B found two further faults under the same
+corpus — undecoded store-area escapes, and a `tw.links()` that dropped setter links
+`[[label|Target][$x += 1]]` and raw `<a data-passage>`.
+
+Eighteen shipped field numbers were re-measured. **Every instrument was first re-run on the original
+25 and checked against the figure that shipped**, because the 2026-08-18/19/22 scripts are not on
+disk and a moved number is otherwise unattributable. Five reproduced exactly or near-exactly; three
+did not and were used only to measure movement.
+
+| | |
+|---|---|
+| **moved** | `FIELD_MEDIAN, FIELD_P75` (clock references) **1.1 / 2.1 → 0.8 / 1.8** — the one gate constant the recheck re-baselined, and it moves *against* our games |
+| **was wrong all along** | `FIELD_LABEL_LONG_SHARE` shipped as **0.10**; the basis and the median reproduce but the share is **16%** on 25 and **21%** on 27, and no filter yields 10% at a median of 3 |
+| **held** | `NARRATION_DIALOGUE_CEILING` · `FIELD_METER_RUNGS` / `FIELD_METER_FIRST_RUNG` · `FIELD_DOM` / `FIELD_EXACT` · `EXPLICIT_BEAT_MEDIA_FLOOR` — numerators unchanged, denominators 25 → 27 |
+| **rebuilt** | `scripts/genre_words.txt` **18,043 → 20,555**, a union with the old list; the corpus is **14.7M words**, not 10.6M |
+| **strengthened** | the eleven locale words are still used by **zero of 27** games; `off_season` is easier than **26 of 27**; the cast page is in **18 of 27** |
+| **corrected** | `the-clock.md` C2's clock-naming label count **2 → 24** (its load-bearing zero survives) |
+
+⚠️ **The one open item the recheck produced: `the-first-hour.md` F1's empty band.** `destroyer` was
+listed as a 285-word cold open; those 285 words are its legal disclaimer and the walk stopped there
+because the passage leaves through `<a data-passage>`. It is an eleven-passage, ~3,300-word staged
+open, and it has been moved. **Eight of twenty-five opening walks move once the extractor can see
+setter links and raw anchors.** So the two named shapes are sound but **the 300-to-700-word gap
+between them is unverified**, and it is not silently repaired because F1's own walker is not on
+disk. K should treat the gap as an open question, not a measurement.
+
+⚠️ **Sections B, E, F and I needed no recheck** — they ran after the fixes, and their own text proves
+it (W6 already names `college-daze` and `free-cities`; F4b already counts fourteen openings including
+both). Section C's in-degree table reproduces exactly on three of four games; only
+`zaras-school-life` moves, and its conclusion survives. **That table never shipped into the skill.**
+
+**What the recheck did NOT re-measure**, and which therefore still carry a 25-game basis. None is a
+gate constant; each is a prose figure whose instrument was not recoverable in the time available:
+
+- `the-economy.md:195` — the money-printer census across "the 25-game corpus"
+- `the-clock.md:142` — the day-length instrument, "25 shipped sandboxes, 11.0M words"
+- `the-surfaces.md:21` — the R-series preamble's basis line
+- `register.md:259` — the 2026-08-18 provenance line (58,163 passages). Its *derived* figures were
+  all re-checked and updated; only the line naming the original run still says 25, which is correct
+  as history.
+- `the-surfaces.md`'s room-verb table itself — the shipped keyword lists are not recorded, so it
+  could not be reproduced. Re-run with equivalent lists, **every category's game count rises on 27
+  and the ordering is unchanged**, so the table's conclusion holds even though its cells are stale.
 
 ## B · The other work, unchanged in priority
 

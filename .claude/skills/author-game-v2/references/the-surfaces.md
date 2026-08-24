@@ -30,8 +30,10 @@ this skill and still be unplayable:
 ## What a room is for, measured
 
 Full HTML of the top-30 mopoga corpus is on disk at
-`~/Documents/Mopoga_Twine_Sandbox_Research_20260724/gamehtml/`. Every link label in 25 of those
-games, 64,594 of them, sorted by what the button does:
+`~/Documents/Mopoga_Twine_Sandbox_Research_20260724/gamehtml/`. Every link label in 27 of those
+games, 84,009 of them, sorted by what the button does. (25 games and 64,594 labels until the
+2026-08-24 recheck; the counts below are the 25-game measurement, and every one of its
+*in how many games* figures rises on 27 — the ordering does not change.)
 
 | what the button does | uses | in how many games |
 |---|---|---|

@@ -257,13 +257,15 @@ That distinction is why the three passes before this one did not stick: each add
 the first screen where it read wrong.
 
 **Measured 2026-08-18 across 25 shipped mopoga sandboxes** — 58,163 passages,
-`~/Documents/Mopoga_Twine_Sandbox_Research_20260724/gamehtml/`. Two corrections had to be made
+`~/Documents/Mopoga_Twine_Sandbox_Research_20260724/gamehtml/`. **The field is 27**; every figure
+derived below was re-checked on all 27 by the 2026-08-24 end-of-study recheck, and this line records
+the original run. Two corrections had to be made
 before any number meant anything, and both are recorded because they are why earlier studies of
 this same corpus got it wrong:
 
 - **Count one rendered path, not every branch.** `destroyer:ginablow` is eight `<<if>>` branches
   printing the same four words over a different image. Counting the source counts all eight.
-- **Speech is a UI component, not punctuation.** 20 of the 25 render dialogue through
+- **Speech is a UI component, not punctuation.** 20 of the 27 render dialogue through
   `<<speech>>`, `<<say>>`, `<<nm "Karlee" "…">>`, `<<chat portrait "…">>`,
   `<div class="npctextbox">`, or one macro per character (`<<Mc>>`, `<<AmyBd>>`). A quote-counter
   sees none of it and reports the most spoken game in the corpus as 585 : 1 narration.
@@ -376,7 +378,7 @@ field screen is one rung and ours is a scene, so no threshold across the two wou
 > they talk.**
 
 ```
-FIELD   median 2.93 : 1 narration to dialogue        10 of 25 games at or under 2 : 1
+FIELD   median 2.93 : 1 narration to dialogue        10 of 27 games at or under 2 : 1
 OURS    the_inheritance 1.5 · vesper 2.8 · last_call 6.6 · late_shifts 15.3
         steam 18.7 · back_home 24.1 · forty_miles 31.1 · the_allowance 50.4 · seventh_day 62.0
 ```
@@ -407,7 +409,7 @@ substitute for a conversation it is the defect, not the style.
 > course-of-temptation       4.6:1               4.57:1   ← unchanged
 > patriarch                  2.9:1               2.93:1   ← unchanged
 > MEDIAN                    65.3:1               2.93:1
-> at ≤2:1                          0             10 of 25
+> at ≤2:1                          0             10 of 27
 > ```
 >
 > The three that do not move are the three that punctuate speech with quote marks. The study did
@@ -419,7 +421,11 @@ substitute for a conversation it is the defect, not the style.
 > The field says 2.93 : 1.
 
 **Gate 32 · somebody speaks.** Whole-game narration : dialogue ≤ 5 : 1 — above the field median and
-above 18 of the 25, so it is slack rather than an invented line.
+above 18 of the 27, so it is slack rather than an invented line.
+
+> Re-checked 2026-08-24 on the two games that used to parse to zero. Both are narration-heavy —
+> `college-daze` 5.9 : 1, `free-cities` 9.7 : 1 — and both sit above the ceiling, so **only the
+> denominators moved**: 10 of 25 became 10 of 27, 18 of 25 became 18 of 27, and the median holds.
 
 **The exemption is real and narrow: nobody is there to speak.** A solo surface, an unseen peek, the
 interior stretch of a capstone. A *present* character is never exempt, and "she is alone" stops
@@ -535,7 +541,7 @@ carries the full caveat.
 
 ## The words the player has to already own
 
-Off Season scored **86.8 Flesch Reading Ease, grade 5.0 — easier than 24 of the 25 field games**
+Off Season scored **86.8 Flesch Reading Ease, grade 5.0 — easier than 26 of the 27 field games**
 (field median 78.0), and passed gate 19 at a median sentence of 10 words. It was then read by a
 human who could not follow it.
 
@@ -553,12 +559,13 @@ list** of about forty regional terms, so it is a judgement, and it is named as o
 
 | | |
 |---|---|
-| the field, 25 games | **0.8** |
+| the field, 27 games | **0.8** |
 | our v1 games | 1.3 – 7.3 |
 | our v2 games | **9.4 – 95.6** (off_season 95.6) |
 
-Eleven words this skill's games lean on appear in **zero of 25 games across 10.6M words**: *airer,
-anorak, bedsit, biro, chandlery, chippy, forecourt, fryers, holdall, lodger, wellies.*
+Eleven words this skill's games lean on appear in **zero of 27 games across 14.7M words**: *airer,
+anorak, bedsit, biro, chandlery, chippy, forecourt, fryers, holdall, lodger, wellies.* Re-checked
+2026-08-24 directly against both newly-readable games' prose: still zero, every one of them.
 
 **Gloss it in the sentence that first uses it, or use the plain word.** *immersion → water heater ·
 pitch → rent · chandlery → hardware shop · the front → the seafront · float → the till money · went
@@ -627,9 +634,10 @@ borrowed one cannot.**
 > Specificity the reader cannot decode is not specificity, it is noise.
 
 **The check is a list, not a score.** `lint · the words the player has to already own` prints every
-word in the player's face that fewer than four of the 25 field games use, ranked by how often you
-used it, measured against `scripts/genre_words.txt` — 18,043 words of the field's own vocabulary,
-data rather than taste. **It is deliberately not a gate**, and the reason is worth stating because
+word in the player's face that fewer than four of the 27 field games use, ranked by how often you
+used it, measured against `scripts/genre_words.txt` — 20,555 words of the field's own vocabulary,
+data rather than taste. (18,043 on 25 games until the 2026-08-24 recheck; rebuilding on 27 added
+1,976 words the genre uses that the list was reporting as words it does not.) **It is deliberately not a gate**, and the reason is worth stating because
 it looks like a contradiction.
 
 The curated list at the top of this section separates our games from the field cleanly — 0.8

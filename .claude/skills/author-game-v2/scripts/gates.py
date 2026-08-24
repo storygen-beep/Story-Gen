@@ -144,7 +144,9 @@ EXPLICIT_IN_REPEATABLE = 50.0
 EXPLICIT_BEAT_MEDIA_FLOOR = 50.0
 # Share of EXPLICIT beats (3+ frozen-list words) that carry a media block OF THEIR
 # OWN. Measured 2026-08-18 across 25 mopoga sandboxes, one rendered path per
-# passage (branches collapsed — see the note under NARRATION_DIALOGUE_CEILING):
+# passage (branches collapsed — see the note under NARRATION_DIALOGUE_CEILING).
+# Re-checked on all 27 parseable games 2026-08-24: the per-screen share moved UP and
+# the words-per-clip figure held, so the floor stays generous. Unchanged:
 #
 #   a screen carrying explicit prose ......... 91% carry media, median 3 clips
 #   one clip every ........................... 58 prose words (IQR 25-104, n=25,502)
@@ -169,9 +171,16 @@ EXPLICIT_BEAT_MEDIA_FLOOR = 50.0
 # is generous on both instruments. references/register.md.
 
 NARRATION_DIALOGUE_CEILING = 5.0
-# Whole-game narration words : dialogue words. Field median 2.93:1, and 10 of 25
-# games sit at or under 2:1. 5.0 is above the median and above 18 of the 25, so it
-# is slack rather than an invented line; the six games above it are the low-n and
+# Whole-game narration words : dialogue words. Field median 2.93:1, and 10 of 27
+# games sit at or under 2:1. 5.0 is above the median and above 18 of the 27, so it
+# is slack rather than an invented line;
+#
+# ⚠️ DENOMINATOR ONLY. Re-checked 2026-08-24 against the two games that used to parse
+# to zero: both are narration-heavy (college-daze 5.9:1, free-cities 9.7:1) and both
+# sit ABOVE the ceiling, so neither count moved — 10 of 25 became 10 of 27 and 18 of
+# 25 became 18 of 27. The median moves by +0.03 on a rebuilt instrument that does not
+# reproduce the shipped absolutes and is used only for movement.
+# the six games above it are the low-n and
 # simulation-heavy outliers (new_life_project 103:1 is a location-description
 # sandbox with almost no characters).
 #
@@ -179,7 +188,7 @@ NARRATION_DIALOGUE_CEILING = 5.0
 # CONSTANT CARRIES ITS OWN PROVENANCE. DOCTRINE_GAPS Study 4 measured the field by
 # counting text inside "quote marks" and reported a median of 33:1 and a spread
 # "too wide to threshold"; register.md then dropped v1's dialogue rule on that
-# basis. But 20 of the 25 games render speech as a UI COMPONENT — <<speech>>,
+# basis. But 20 of the 27 games render speech as a UI COMPONENT — <<speech>>,
 # <<say>>, <<nm "Karlee" "...">>, <<chat portrait "...">>, <div class="npctextbox">,
 # or one macro per character (<<Mc>>, <<AmyBd>>) — and a quote-counter sees none of
 # it. Re-measured with each game's own convention read out of its source first:
@@ -194,7 +203,7 @@ NARRATION_DIALOGUE_CEILING = 5.0
 #   course-of-temptation       4.6:1               4.57:1   <- unchanged
 #   patriarch                  2.9:1               2.93:1   <- unchanged
 #   MEDIAN                    65.3:1               2.93:1
-#   at <=2:1                        0             10 of 25
+#   at <=2:1                        0             10 of 27
 #
 # The three that do not move are the three that punctuate speech with quote marks.
 # The study did not find the two most dialogue-heavy games; it found the two whose
@@ -213,8 +222,10 @@ ASCENT_TIERS = 3
 # kind of going-further, each gating at 15/35/55/75, plus a `purity` counterweight.
 # Volatile state (arousal: 277 sets, moves both ways) is NOT ascent and is expected
 # to rank below them.
-# ⚠️ n = 1, and the corpus does not repeat it (2026-08-19): of 25 shipped sandboxes,
-# FOURTEEN have no player ascent tier at all and only two carry three or more. This
+# ⚠️ n = 1, and the corpus does not repeat it (2026-08-19): of 27 parseable sandboxes,
+# FIFTEEN have no player ascent tier at all and only two carry three or more.
+# (Fourteen of 25 until the 2026-08-24 recheck: `college-daze` runs four meters PER
+# CHARACTER and no player spine, `free-cities` carries `rep` at 17 rungs.) This
 # constant is a fallback for guessing when `board.ascent_tiers` is absent — it is not
 # a target, and 15/35/55/75 is one game's spacing, not a ladder to copy. Which meters
 # a game should have at all is `the-meters.md` W1; gate 34 checks it against
@@ -865,10 +876,19 @@ def _names_any(text, vocab):
 # and this skill has demoted two rules for exactly that.
 _DETERMINER = re.compile(r"^(the|a|an|your|his|her|their|my|our|this|that)\b", re.I)
 
-# 64,594 action labels across 25 shipped sandboxes, 2026-08-18:
+# 84,009 action labels across the 27 parseable sandboxes, re-measured 2026-08-24:
 #   ~/Documents/Mopoga_Twine_Sandbox_Research_20260724/gamehtml/
+# A label here is every clickable form — [[…]], <<link>>, <<button>>, <a data-passage> —
+# with ONE-WORD labels excluded ("Continue", "Next", "Back" are flow, not actions).
+#
+# ⚠️ THE LONG SHARE WAS WRONG AND IS CORRECTED HERE. It shipped as 0.10 against a stated
+# basis of 64,594 labels on 25 games. Rebuilt on that same 25 the basis reproduces to
+# 0.29% (64,781) and the median reproduces exactly at 3 — but the share at 6+ words is
+# 16%, not 10%, and NO filter tested produces 10% while also producing a median of 3
+# (all-labels gives 8.7% but a median of 2). The likeliest reading is that the median was
+# taken on the 2+ set and the long share on the whole set. `findings_RECHECK.md` §1.
 FIELD_LABEL_MEDIAN_WORDS = 3
-FIELD_LABEL_LONG_SHARE   = 0.10      # share at 6+ words
+FIELD_LABEL_LONG_SHARE   = 0.21      # share at 6+ words, 27 games (was 0.16 on 25)
 
 
 def _room_list_labels(model, game):
@@ -1588,9 +1608,15 @@ def _cast_meter_rungs(game):
 
 
 # Field, live player ascent meters, content gates only (see the instrument note):
-#   family-ties you.corr 17 rungs · corpo-life lust 11 · the-company horny 11 ·
-#   DoL exhibitionism 11 · become-someone mc.dom 9 · friends-of-mine feminine 8.
-# Lowest rung: 5, 10, 2, 15, 5, 5 — median 5.
+#   family-ties you.corr 17 rungs · free-cities rep 17 · corpo-life lust 11 ·
+#   the-company horny 11 · DoL exhibitionism 11 · become-someone mc.dom 9 ·
+#   friends-of-mine feminine 8.
+# Lowest rung: 5, 1000, 10, 2, 15, 5, 5 — median 5.
+#
+# `free-cities` was added by the 2026-08-24 recheck and lands exactly on the existing
+# maximum, so the 8-17 band and the median-5 first rung are both UNCHANGED. Its rungs
+# run 1000..12000 because reputation there is priced in the arcology's own scale; the
+# rung COUNT is what this constant reads, never the values.
 FIELD_METER_RUNGS      = 8
 FIELD_METER_FIRST_RUNG = 5
 
@@ -1740,9 +1766,15 @@ def lint_counterweight(game, state):
 # ─────────────────────────────────────────────────────────────────────────────
 # The words the player has to already own
 # ─────────────────────────────────────────────────────────────────────────────
-# `scripts/genre_words.txt` is every lowercase word used by FOUR OR MORE of the 25
-# games in the mopoga corpus — 18,043 words out of 10.6M. It is data, not taste: a
-# word missing from it is not banned, it is a word the genre does not reach for.
+# `scripts/genre_words.txt` is every lowercase word used by FOUR OR MORE of the 27
+# parseable games in the mopoga corpus — 20,555 words out of 14.7M. It is data, not
+# taste: a word missing from it is not banned, it is a word the genre does not reach
+# for.
+#
+# ⚠️ IT WAS 18,043 WORDS FROM 25 GAMES UNTIL 2026-08-24. `college-daze` and
+# `free-cities` parsed to zero, so a quarter of the corpus by volume was reported as
+# vocabulary the genre does not use. Rebuilding on 27 added 1,976 words and dropped
+# none — the file is a UNION with the old list, never a replacement.
 GENRE_WORDS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                 "genre_words.txt")
 _GENRE_WORDS_CACHE = None
@@ -1979,7 +2011,7 @@ def own_words_report(text, declared_names=(), suppress=frozenset(), shown=20):
     for w, n in sorted(ff, key=lambda kv: -kv[1]):
         findings.append(f"[false friend] {w} ×{n} — {_FALSE_FRIENDS[w]}")
 
-    summary = (f"{len(ranked)} word(s) the 25-game field does not use, "
+    summary = (f"{len(ranked)} word(s) the 27-game field does not use, "
                f"{sum(rare.values())} use(s) across {total:,} words"
                + (f" · plus {amb} ambiguous and {len(ff)} false-friend term(s)" if (amb or ff) else "")
                + (f" · {len(muted)} meta term(s) suppressed" if muted else "")
@@ -2828,8 +2860,17 @@ def lint_clock_in_prose(model, game):
     doctrine — SKILL.md's "a check that fails a game for obeying the doctrine is a bug
     in the check". The check hands over the lines and their windows; the author calls it.
 
-    Field basis: median 1.1 clock references per 10,000 words across 25 shipped sandboxes
-    (11.0M words), p75 2.1.
+    Field basis: median 0.8 clock references per 10,000 words across the 27 parseable
+    sandboxes (14.7M words), p75 1.8.
+
+    ⚠️ RE-BASELINED 2026-08-24 BY THE END-OF-STUDY RECHECK, from 1.1 / 2.1 on 25 games.
+    `college-daze` and `free-cities` ship the Twine 1 <div id="store-area"> container and
+    parsed to ZERO passages until section B taught the parser to read it. Both are
+    clock-quiet — 0.25 and 0.27 references per 10k — so the median falls. This is the ONE
+    field constant the recheck moved, and it moves AGAINST our games, not for them:
+    off_season at 26.4 was 24x the field median and is now 33x. The old figure reproduced
+    EXACTLY on the old 25 using this same `_clk_refs`, so the movement is the corpus and
+    not the instrument (`findings_RECHECK.md` §2).
 
     Re-measured 2026-08-22 on the corrected `_clk_refs` (half-hours, part-of-day phrases,
     quarter-past, and `<hour> the`). The figure moved 1.0 -> 1.1 and p75 held at 2.1: ONE
@@ -2839,7 +2880,7 @@ def lint_clock_in_prose(model, game):
     because the constructions they missed are ones our authors reach for and the corpus
     does not.
     """
-    FIELD_MEDIAN, FIELD_P75 = 1.1, 2.1
+    FIELD_MEDIAN, FIELD_P75 = 0.8, 1.8
     words = 0
     rows = []
     for c in model:
@@ -3368,7 +3409,7 @@ def run_gates(model, game, state=None):
     gate("somebody speaks",
          None if not (narr_w + spoken_w) else ratio <= NARRATION_DIALOGUE_CEILING,
          (f"{ratio:.1f}:1 narration to dialogue — {spoken_w:,} spoken of {narr_w + spoken_w:,} "
-          f"words (ceiling {NARRATION_DIALOGUE_CEILING:.0f}:1) · field median 2.93:1, 10 of 25 "
+          f"words (ceiling {NARRATION_DIALOGUE_CEILING:.0f}:1) · field median 2.93:1, 10 of 27 "
           f"games at or under 2:1"
           if spoken_w else
           f"NOBODY SPEAKS — {narr_w:,} words of prose and not one dialog block"),
@@ -4627,7 +4668,7 @@ def run_gates(model, game, state=None):
     #     arousal, across five v2 games:  232 raises  ·  4 reads
     #     seventh_day per-NPC lust 34 · 0   ·   forty_miles energy 28 · 0
     #     steam energy 50 · 0               ·   the_allowance hygiene 4 · 0
-    # In the field a sexual-state meter is a real gate in 12 of 25 games, and
+    # In the field a sexual-state meter is a real gate in 13 of 27 games, and
     # where it exists it is the #1 or #2 most-gated thing in the whole game
     # (corpo-life `lust`, DoL `arousal`, family-ties `you.arousal`,
     # friends-of-mine `excitement`). We raise it everywhere and read it nowhere.
