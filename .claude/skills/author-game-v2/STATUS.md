@@ -44,7 +44,7 @@ session is wrong by the end of that session. Run `wc -l` if you need one.
 ```
 .claude/skills/author-game-v2/
   SKILL.md                             entry point, EXPLICIT-INVOKE ONLY
-  scripts/gates.py                     the scoreboard — 40 gates + 17 lints
+  scripts/gates.py                     the scoreboard — 41 gates + 17 lints
   scripts/genre_words.txt              the field's own vocabulary, for the word lint
   references/engine.md                 36 verified engine facts, each with file:line
   references/register.md               how the prose reads once they click
@@ -70,7 +70,7 @@ session is wrong by the end of that session. Run `wc -l` if you need one.
   STATUS.md                       —    this file
 ```
 
-## The scoreboard — 40 gates, 17 lints
+## The scoreboard — 41 gates, 17 lints
 
 **A gate scores. A lint prints a list and refuses to score.** The split is the discipline: if a
 threshold cannot be defended against a measurement, it does not get to fail a game.
@@ -295,21 +295,30 @@ Eleven were scoped; LO picked three. **A (the want), C (the loop) and D (the wri
 | **F** | going further | **partly** — C found the two shapes (menu grows vs. event escalates internally). Missing: rungs and spacing |
 | **G** | the people | **DONE 2026-08-24** — `findings_G_people.md`. The field's answer is a UI component fired tens of thousands of times (a speaker macro is the **#1 macro in the whole game** in 7 of 25 — face + name + colour on every line), a label that encodes the relation (Stepmom · Aunt · Granny · Dr. Angela), **one term of address per person** (5–18% of their lines, never shared), and **a corner of the world each person owns**. `the_season` writes the voices well and then schedules **all four men into the camp every night** |
 | **H** | does the world know? | **DONE 2026-08-23** — `findings_H_known.md`. Reputation refuses almost nothing (14 of 644 field read sites, 2%); it is read constantly and swaps ~25-word lines. `the_season`'s `known` has **7 read sites in 111 passages** |
-| **I** | the body as a machine | **untouched** — clothes, arousal, hygiene, pregnancy: which are systems and which are decoration |
+| **I** | the body as a machine | **DONE 2026-08-24** — `findings_I_body.md`. The strongest evidence is negative: `degrees-of-lewdity` **built hygiene and switched it off** — 1,273 writes, one read site, a seven-band widget nothing calls, and `<<set $hygieneenabled to 0>> /* unused */` in its own initialiser. Corpus-wide the body gates a median **10%** of its reads (H's reputation: 2%), and a system either stays small and gates or grows large and colours. Ours: **102 garments across 10 games, 47 reads**, and four wardrobes read zero times |
 | **J** | what players say | **DONE 2026-08-23** — `findings_J_players.md`. ⚠️ This row previously read *"untouched"* and **that was wrong**: the 2026-07-24 mopoga study already read 22,622 comments across 31 games and published F1–F10 from them. J was narrowed to testing *this week's* doctrine against 3,479 comments on the four study games |
 | **K** | the mirror | **untouched, and must be last** — it is the synthesis, not a section |
 
-**Four are done: A, C, D, H, J and G.** The J-then-H recommendation that used to sit here is
-deleted — it was written before either ran, both are finished, and the order ended up reversed
-because checking the data first showed J was largely a re-run.
+**Seven are done: A, C, D, G, H, I and J.** (This line read *"Four are done"* over a list of six
+until 2026-08-24.) The J-then-H recommendation that used to sit here is deleted — it was written
+before either ran, both are finished, and the order ended up reversed because checking the data
+first showed J was largely a re-run.
 
 **G ran next because LO had already found its defect by playing** — *"I don't know who is who"* is
 the section's question in a player's words, and it was the only complaint about `the_season` that
 came from a human rather than a gate.
 
-**Left: B, E and F (each partly answered by A/C/D), I (untouched), and K (the synthesis, last).**
-**I** is the one genuinely untouched system question — clothes, arousal, hygiene, pregnancy, and
-which of them are systems rather than decoration.
+**Left: B, E and F (each partly answered by A/C/D), and K (the synthesis, and it must be last).**
+None of the three is a blank page — A ate most of B, D found E's refusal costs, C found F's two
+shapes. What is missing in each is the systematic view: what day one *refuses*, the consent ladder
+stated once, and the spacing between rungs.
+
+⚠️ **The corpus is 27 parseable games, not 25.** `tw.py` only knew `<tw-passagedata>`; three games
+ship the older `<div id="store-area"><div tiddler=…>` container and parsed to zero, so sections
+A, C, D, G, H and J all ran on 25 games and reported it as the field. Two are now readable —
+`college-daze` and `free-cities` — and `confined-and-horny` is an engine-only file with no passage
+data at all. **LO has deferred the recheck of those sections' headline numbers to the end of the
+study**, after K's inputs are all in.
 
 ## B · The other work, unchanged in priority
 

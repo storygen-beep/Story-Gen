@@ -4642,6 +4642,82 @@ def run_gates(model, game, state=None):
          detail)
 
     # ═════════════════════════════════════════════════════════════════════════
+    # G41 — THE WARDROBE IS READ.  `the-meters.md` W3, extended to the wardrobe.
+    #
+    # W3's law is "a number nothing reads is not a meter", and the gate above
+    # enforces it for player traits an `effects` entry RAISES. It is structurally
+    # blind to clothing: `worn_beauty` / `worn_corruption` are DERIVED from a
+    # garment's own `beauty` / `corruption` declaration (template_import.py:218-219,
+    # a MAX aggregate — engine.md §17), never raised by an effect, so a game can
+    # ship a full catalog and the meter gate sees nothing at all.
+    #
+    # MEASURED across the 21 games carrying a merged final, 2026-08-24:
+    #     102 garments in 10 games  ·  47 reads between them
+    #     mothers_place 6 garments / 0 reads      seventh_day   8 / 0
+    #     steam         8 garments / 0 reads      the_allowance 9 / 0
+    # The field reads its wardrobe an order of magnitude harder: degrees-of-lewdity
+    # reads its derived exposure ~900 times, the-hellfire-club its slot variables
+    # 484, zaras-school-life `$PlayerClothes` 415. Our best is vesper at 21.
+    #
+    # ⚠️ THREE READER FAMILIES. Counting only the first is how this gate would fail
+    #    a game for doing the most common thing in the field:
+    #      · a condition predicate — worn_corruption / worn_beauty / worn_type /
+    #        clothing_slot / clothing_item                        (engine.md §17)
+    #      · a player_portrait outfit override — when = { worn_type = … } or
+    #        { corruption = … }                          (template_import.py:744)
+    #      · a location dress code — clothing_rules.slots_required
+    #                                              (template_import.py:4227-4241)
+    #    The portrait override is a DISPLAY reaction rather than a gate, and W7 is
+    #    what says that is the field's dominant mode — DoL swaps the model's mouth
+    #    on `V.exposed === 2`. vesper reads its wardrobe 19 times through
+    #    `clothing_item` and twice through a portrait override; a first-family-only
+    #    check would have failed the best reader we have.
+    #
+    # ⚠️ THE SAME FIG LEAF AS THE GATE ABOVE — one throwaway `worn_corruption gte 1`
+    #    turns this green. No threshold is invented, because W7 measures the field's
+    #    median gate share at 10% and demanding gates would be wrong. Instead the
+    #    summary prints garments-against-reads, so a thin pass is visible on the
+    #    report the way the meter-ladder lint makes a one-rung ladder visible.
+    # ═════════════════════════════════════════════════════════════════════════
+    _CLOTHING_PREDICATES = ("worn_corruption", "worn_beauty", "worn_type",
+                            "clothing_slot", "clothing_item")
+    garments = [c for c in (game.get("clothing") or []) if isinstance(c, dict)]
+    wardrobe_reads = collections.Counter()
+    for path, node in _walk_paths(game):
+        ps = "|".join(path)
+        if node.get("type") in _CLOTHING_PREDICATES:
+            wardrobe_reads[str(node["type"])] += 1
+        elif ps.endswith("player_portrait|outfits|[]"):
+            when = node.get("when")
+            if isinstance(when, dict):
+                for k in ("worn_type", "corruption"):
+                    if k in when:
+                        wardrobe_reads["player_portrait when=" + k] += 1
+        elif ps.endswith("locations|[]") and isinstance(node.get("clothing_rules"), list):
+            wardrobe_reads["clothing_rules"] += len(node["clothing_rules"])
+    _reads = sum(wardrobe_reads.values())
+    detail = []
+    if garments and not _reads:
+        _slots = collections.Counter(str(c.get("slot") or "?") for c in garments)
+        _names = ", ".join(f"`{c.get('id') or c.get('name') or '?'}`" for c in garments[:8])
+        detail.append(f"{len(garments)} garment(s) across {len(_slots)} slot(s) "
+                      f"({' · '.join(f'{k} x{v}' for k, v in _slots.most_common())}) "
+                      f"and NOTHING reads the wardrobe — no worn_corruption / worn_beauty / "
+                      f"worn_type / clothing_slot / clothing_item condition, no player_portrait "
+                      f"outfit override, no location clothing_rules")
+        detail.append(f"the catalog: {_names}" + (" …" if len(garments) > 8 else ""))
+        detail.append("the player can dress and the world does not look. Either read it or cut it "
+                      "(the-meters.md W3, W7)")
+    gate("the wardrobe is read", None if not garments else bool(_reads),
+         (f"{len(garments)} garment(s) · {_reads} read(s)"
+          + (" · " + " · ".join(f"{k} x{v}" for k, v in wardrobe_reads.most_common(4))
+             if wardrobe_reads else "")
+          + (f" · field: DoL ~900, the-hellfire-club 484, zaras-school-life 415"
+             if garments and _reads and _reads < 50 else ""))
+         if garments else "no [[clothing]] catalog declared",
+         detail)
+
+    # ═════════════════════════════════════════════════════════════════════════
     # G34 — THE CLIMB IS WHERE YOU SAID IT IS.  `the-meters.md` W1.
     #
     # DECLARE-THEN-CHECK against `board.who_climbs`. The field does NOT converge
