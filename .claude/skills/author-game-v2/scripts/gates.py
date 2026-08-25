@@ -2996,29 +2996,57 @@ def lint_named_before_met(model, game):
         findings.append(f"[person] {first} is named in {', '.join(where)} "
                         f"and has no meeting anywhere")
 
-    # Places, heaviest first — a thin corridor legitimately needs no introduction and a
-    # room carrying a third of the game's prose does not, so the order carries the
-    # judgement the count cannot.
-    visits = _fh_first_visits(game)
+    if not findings:
+        return ("every named character is met before the game uses their name", [])
+    return (f"{len(findings)} character(s) named before any meeting — read the list, "
+            f"do not read the number"), findings
+
+
+def lint_place_function(model, game):
+    """Does a location's own description say what kind of place it is? — a LIST.
+
+    `the-first-hour.md` F9. The description is the ONLY surface a player sees on every
+    visit, so it is where a place has to say what it is and what happens in it. The
+    measured failure was an anchor budgeted at 27% of a whole game whose description ran
+    long, specific and well written and never once named the business it was — the first
+    thing the human reader asked was what the place is.
+
+    ⚠️ THIS REPLACED A GATE (2026-08-26). The gate required a non-repeatable canvas
+    bound to the anchor — a first-visit scene. Counted across the 26-game corpus that
+    device is ONE game: degrees-of-lewdity, 258 branches and 117 flags, against EIGHTEEN
+    games with none at all, destroyer and become-someone and course-of-temptation among
+    them. A green board should not depend on the outlier, and while it did, one author
+    wrote nine arrivals that were reverted the next day.
+
+    ⚠️ A LIST AND NEVER A SCORE. Whether a description names its function is a reading.
+    A thin corridor owes nothing; a room carrying a third of the game does. The order
+    carries the judgement the count cannot: heaviest first, with the description's own
+    length beside it, so a room where a great deal happens behind two lines of scene-set
+    is visible on sight.
+    """
     weight = collections.Counter()
     for c in model:
         weight[c["loc"]] += sum(b.words for b in c["beats"])
-    # A location with NO prose is a different defect and gate `location fill` owns it —
-    # saying it also lacks an introduction is noise on top of a real finding.
-    bare = [l for l in (game.get("locations") or [])
-            if l.get("id") and not visits.get(l["id"]) and weight[l["id"]]]
-    for l in sorted(bare, key=lambda l: -weight[l["id"]]):
-        name = str(l.get("name") or l["id"])
-        findings.append(f"[place] {name} has no first visit — {weight[l['id']]:,} words "
-                        f"of prose and nothing that says what kind of place it is")
-
-    if not findings:
-        return ("every named character is met and every location introduces itself", [])
-    people = sum(1 for f in findings if f.startswith("[person]"))
-    places = len(findings) - people
-    summary = (f"{people} character(s) named before any meeting · "
-               f"{places} location(s) with no first visit — read the list, do not read "
-               f"the number")
+    visits = _fh_first_visits(game)
+    rows = []
+    for l in (game.get("locations") or []):
+        lid = l.get("id")
+        if not lid or not weight[lid]:
+            continue          # `location fill` owns a room with no prose at all
+        desc = str(l.get("description") or "")
+        rows.append((lid, str(l.get("name") or lid), weight[lid],
+                     len(desc.split()), bool(visits.get(lid))))
+    if not rows:
+        return "", []
+    rows.sort(key=lambda r: -r[2])
+    findings = [
+        f"{name}: {w:,} words happen here, described in {d}"
+        + (" · has a first visit too" if fv else "")
+        for _, name, w, d, fv in rows]
+    med = _median([r[3] for r in rows])
+    summary = (f"{len(rows)} location(s) · median description {med:.0f} words · "
+               f"field room prose per visit, median 82 — read whether each one NAMES "
+               f"what the place is, not how long it is")
     return summary, findings
 
 
@@ -5528,40 +5556,15 @@ def run_gates(model, game, state=None):
          f"can only fire in that character's own hours",
          windowless)
 
-    # G35 — the anchor introduces itself (the-first-hour.md F9)
-    # ⚠️ AN EXISTENCE CHECK, which SKILL.md warns is the weakest kind — it asks whether a
-    # thing is there, not how much of it or what it cost. It is defensible here only
-    # because the real question genuinely IS existence: the game that prompted this gave
-    # first-visit canvases to five rooms and none to the anchor it had declared at 27% of
-    # the whole word budget. The per-location coverage prints below so the distribution
-    # stays visible and this does not quietly become a box to tick.
-    anchor_id, anchor_src = _fh_declared_anchor(game, state)
-    visits = _fh_first_visits(game)
-    all_locs = [l.get("id") for l in (game.get("locations") or []) if l.get("id")]
-    covered = [l for l in all_locs if visits.get(l)]
-    if not anchor_id:
-        gate("the anchor introduces itself", None,
-             "no v2_state.json fill budget — the declared anchor is unknown",
-             [f"{len(covered)}/{len(all_locs)} locations carry a first visit"]
-             if all_locs else None)
-    else:
-        ok = bool(visits.get(anchor_id))
-        det = []
-        if not ok:
-            det.append("the room the ledger budgeted largest is the one room nothing "
-                       "introduces")
-            det.append("a non-repeatable canvas bound to the location auto-fires once "
-                       "(v2.py:4453) — no new primitive is needed")
-        bare = sorted(set(all_locs) - set(covered))
-        if bare:
-            det.append(f"no first visit: {', '.join(bare[:8])}"
-                       + (f" … and {len(bare) - 8} more" if len(bare) > 8 else ""))
-        gate("the anchor introduces itself", ok,
-             f"[{anchor_src}] anchor {anchor_id} "
-             + (f"opens with {', '.join(visits[anchor_id][:3])}" if ok
-                else "has no first-visit canvas")
-             + f" · {len(covered)}/{len(all_locs)} locations carry one",
-             det)
+    # G35 was "the anchor introduces itself" and is GONE (2026-08-26).
+    # It passed a game only if its anchor carried a non-repeatable canvas — a
+    # first-visit scene. Counted across the 26-game corpus that device is ONE game
+    # (degrees-of-lewdity, 258 branches / 117 flags; eighteen games have none), so the
+    # gate made a green board depend on something most of the field declines to do,
+    # and it sent one author to write nine arrivals that were reverted the next day.
+    # What replaces it is `lint · the place says what it is` — a list, because whether
+    # a description names its function is a reading and not a measurement.
+    # the-first-hour.md F9 carries the numbers.
 
     # G36 — the label keeps its time (the-clock.md C3 + C4)
     # A label is a promise about what the click DOES. Two ways to break it:
@@ -5752,6 +5755,7 @@ def main():
     cw_summary, cw_lints = lint_counterweight(game, state)
     words_summary, words_lints = lint_own_words(model, game)
     fh_summary, fh_lints = lint_named_before_met(model, game)
+    place_summary, place_lints = lint_place_function(model, game)
     clock_summary, clock_lints = lint_clock_in_prose(model, game)
     tcost_summary, tcost_lints = lint_time_cost_on_button(model, game)
     cur_summary, cur_lints = lint_currency_in_prose(model, game, state)
@@ -5793,6 +5797,8 @@ def main():
                                                   "findings": words_lints},
                                     "named_before_met": {"summary": fh_summary,
                                                          "findings": fh_lints},
+                                    "place_function": {"summary": place_summary,
+                                                       "findings": place_lints},
                                     "clock_in_prose": {"summary": clock_summary,
                                                        "findings": clock_lints},
                                     "time_cost_on_button": {"summary": tcost_summary,
@@ -6010,12 +6016,25 @@ def main():
             print(f"          · {h}")
         if len(fh_lints) > 14:
             print(f"          · … and {len(fh_lints)-14} more")
-        print("          (the-first-hour.md F7/F9 — a LIST, never a score. The game does not"
-              " use a name until it has earned it: before the player has met a person or a")
-        print("           place, say what it IS and where; after, say the name. A character"
-              " named in passing and a corridor that needs no introduction are both fine —")
-        print("           read the rows and make the call. degrees-of-lewdity swaps the"
-              " description for the name on the meeting flag in 64 places)")
+        print("          (the-first-hour.md F7 — a LIST, never a score. The game does not"
+              " use a name until it has earned it: before the player has met somebody, say")
+        print("           what they ARE and where; after, say the name. A character named in"
+              " passing is fine — read the rows and make the call. degrees-of-lewdity swaps")
+        print("           the description for the name on the meeting flag in 64 places)")
+
+    if place_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the place says what it is — {place_summary}")
+        for h in place_lints[:14]:
+            print(f"          · {h}")
+        if len(place_lints) > 14:
+            print(f"          · … and {len(place_lints)-14} more")
+        print("          (the-first-hour.md F9 — a LIST, never a score. The description is"
+              " the only surface a player sees on EVERY visit, so it is where a place says")
+        print("           what it is. Read whether each one names the FUNCTION — the measured"
+              " failure ran long, specific and well written and never said what the business")
+        print("           was. This replaced a gate requiring a first-visit canvas: that"
+              " device is 1 of 26 games (DoL 258 branches; 18 games have none))")
 
     if clock_summary:
         print(f"  {'─'*72}")

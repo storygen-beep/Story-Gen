@@ -496,51 +496,90 @@ always-live "Story Goals" section, and a guidance page whose every card is gated
 
 ---
 
-## F9 · The anchor introduces itself
+## F9 · A place says what it is on the screen the player keeps coming back to
 
-A place gets the same treatment as a person: the first time the player walks in, the game says what
-kind of place it is and what happens there. After that, it can just be the name.
+**The location's own `description` says what kind of place this is and what happens here.** Not a
+scene that plays once. The description is the only surface the player sees on *every* visit,
+including the twentieth, and "what is this place" is a standing question, not a first-entry one.
 
-The field does this with the same flag family it uses for people — degrees-of-lewdity carries
-`$forest_shop_intro`, `$gwylan_cafe_intro`, `$prison_intro`, and swaps the reference the same way:
-
-```
-find a snow globe at <<if $forest_shop_intro is 1>>Gwylan's shop<<else>>the shop on the
-  outskirts of the forest<</if>>.
-```
-
-It extends past places to **knowledge**: become-someone's `$has.auntaddress` gates whether the
-player can travel to the aunt's house at all. Same primitive, three kinds of thing.
-
-**Ours needs no new engine work** — a non-repeatable canvas bound to the location auto-fires on
-first entry and never again (`v2.py:4453`).
-
-**The measured failure.** That game has a first-visit canvas at **5 of its 10 locations** — and the
-anchor is not one of them. The anchor is the room the ledger declared at **9,000 words, 27% of the
-game**. Its `description` reads:
+**The measured failure, which is a DESCRIPTION failure.** One game's anchor — the room its ledger
+budgeted at **9,000 words, 27% of the whole game** — reads:
 
 > *"KESH AMUSEMENTS in eight-foot letters over the door, and under them forty machines, half of them
 > off at the wall to save the electric…"*
 
-Forty machines of **what**. The description never says slot machines, never says amusement arcade,
-never says people put money in them — and the player is put behind its counter on turn one and asked
-to work it. *"What is arcade??"* was the first thing the human reader asked.
+Forty machines of **what**. It never says slot machines, never says amusement arcade, never says
+people put money in them — and the player is put behind its counter on turn one and asked to work
+it. *"What is arcade??"* was the first thing the human reader asked. That description is long,
+specific and well written. Length was never the problem. **It never names the function.**
 
 ⚠️ **This is `register.md`'s "words the player has to already own", one level up.** There the unit
 was a word; here it is a whole place. A location whose *function* is only implied is an unglossed
 noun the size of a room.
 
+### The field's device is the room screen, and it changes
+
+Measured across the 26-game corpus:
+
+```
+                                    field median   the game that prompted this
+room prose the player sees per visit   82 words              68
+variant branches per room screen           10                 2
+rooms that rotate their text              22%                0%
+rooms that vary by hour                   17%                0%
+an event renders ON the room screen       yes      no — ours <<goto>>s away from it
+```
+
+The place tells its own story every time you walk in, and it is not the same story twice.
+
+### ⚠️ The first-visit canvas is a MINORITY device — do not reach for it first
+
+This section previously taught the opposite, and worked its example from
+`degrees-of-lewdity`'s `$forest_shop_intro` / `$gwylan_cafe_intro` family. Counted properly, that
+family is **one game**:
+
+```
+degrees-of-lewdity   258 first-visit branches, 117 flags     the only game doing it
+realm-of-corruption   12
+amore · patriarch · sluttown-usa · zaras-school-life · new-life-project     2 each
+EIGHTEEN OF TWENTY-SIX GAMES     zero
+  — including destroyer, become-someone, course-of-temptation, the-company, friends-of-mine
+```
+
+It is a legitimate device and DoL builds a great deal on it. **It is not the default and it does not
+substitute for a description that names the function**, because it plays once and the confusion it
+is aimed at is permanent. A game shipped nine of them, went green, and had them reverted the next
+day on exactly that ground:
+
+> LO: *"I think the place name is description and what was going in that place should be able to
+> tell the whole story."*
+
+Reach for a first visit when a place has a **one-time** thing to say — a door that was locked and
+now is not, a room whose meaning changes the first time you are let into it. Never as the place's
+only introduction.
+
+### ⚠️ Half of the field's device is not authorable today — this is an ENGINE gap
+
+A location `description` is emitted as **one static string** (`v2.py:9629`, `:9676`), and
+`_resolve_at_references` substitutes names and fields only — there is no conditional form. So a
+description **cannot** vary by hour or by state, and the 10-branch / 22%-rotating / 17%-by-hour
+column above cannot be authored at all.
+
+What is authorable today is the half that matters most and costs nothing: **write the description so
+it names the function.** The variation half is filed as engine work; do not write a ledger promise
+against it.
+
 ---
 
 ## What the scoreboard checks
 
-Three gates and one lint. `python3 scripts/gates.py <slug>`.
+Two gates and two lints. `python3 scripts/gates.py <slug>`.
 
 | | |
 |---|---|
 | gate · **the opening hands over into an open door** | F3. Walks the funnel's clock and asks whether anything at the landing location is open at that minute. **n/a** when the landing location cannot be resolved. |
 | gate · **every hub is met first** | F5 + F8. Per character: **one** hub gated on a flag a non-repeatable canvas naming them sets, **no** hub left with zero conditions, and no such flag opening a second character's door. |
-| gate · **the anchor introduces itself** | F9. The anchor declared in `v2_state.json` `board.locations[].fill` has a non-repeatable canvas bound to it. **n/a** with no ledger. |
+| lint · **the place says what it is** | F9. Lists every location by how much prose happens there, against how long its own description is. **Whether a description names the function is a reading, not a measurement**, so this is a list to read and never a score. It replaced a gate that required a first-visit canvas at the anchor — a device eighteen of twenty-six top games do not use. |
 | lint · **named before met** | F7. Lists every character named in prose the player can reach before that character's meeting can fire. A list to read, never a score. |
 
 ⚠️ **Nothing checks the guidance surface.** The `named before met` lint reads *prose canvases* and
