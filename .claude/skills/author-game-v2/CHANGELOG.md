@@ -5,6 +5,70 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-26 — F9 was teaching the outlier, and a gate was enforcing it
+
+**Why.** LO, after nine first-visit "arrival" canvases were written for `mrs_vance`, shipped green
+and reverted the next day: *"I think the place name is description and what was going in that place
+should be able to tell the whole story."*
+
+He is right, and the skill is what sent the author the other way.
+
+### 1 · `references/the-first-hour.md` F9 — rewritten
+
+F9 taught that a place introduces itself **the first time the player walks in**, and worked its
+example from `degrees-of-lewdity`'s `$forest_shop_intro` / `$gwylan_cafe_intro` family. Counted
+across the 26-game corpus, that family is one game:
+
+```
+degrees-of-lewdity   258 first-visit branches, 117 flags     the only game doing it
+realm-of-corruption   12
+five games             2 each
+EIGHTEEN OF TWENTY-SIX     zero — destroyer, become-someone, course-of-temptation,
+                           the-company, friends-of-mine among them
+```
+
+**The section's own worked example proves the point against it.** The failure it documents is an
+anchor whose description ran long, specific and well written — *"forty machines, half of them off at
+the wall to save the electric"* — and never said **amusement arcade**. That is a description that
+does not name its function. A scene played once does not fix it, because *"what is this place"* is a
+standing question and the description is the only surface the player sees on every visit.
+
+F9's rule is now the description. The first-visit canvas is kept as a **named minority device** with
+its evidence, for a place that has a genuinely one-time thing to say, and explicitly not as a
+substitute for a description that names the function.
+
+Added the field's real numbers (room prose per visit median 82 · 10 variant branches · 22% of rooms
+rotating text · 17% varying by hour) **and the honest note that half of that is not authorable**: a
+location `description` is one static string (`v2.py:9629`, `:9676`) and `_resolve_at_references`
+substitutes names only, so it cannot vary by state. Filed as an engine gap so no ledger promises
+against it.
+
+### 2 · `scripts/gates.py` — gate G35 deleted, replaced by a list
+
+`the anchor introduces itself` passed a game only if its anchor carried a non-repeatable canvas.
+**A green board therefore required a device eighteen of twenty-six top games decline to use**, and
+while it stood it sent one author to write nine arrivals that were reverted.
+
+Replaced by `lint · the place says what it is` — every location ordered by how much prose happens
+there, against the length of its own description, with a first visit noted as information rather
+than as a requirement. A list and never a score, because whether a description names its function is
+a reading. The `named before met` lint keeps only its F7 half (people); its places half moved here.
+
+### Verified
+
+`gates.py` parses; run against `mrs_vance`, `off_season`, `the_season` and `vesper`. Every game
+loses **exactly one pass and one total** — 41/41 → 40/40, 39/41 → 38/40 — so the gate was passing
+everywhere and no game's pass/fail state changed. The new lint on `mrs_vance` reads:
+
+```
+14 location(s) · median description 57 words · field room prose per visit, median 82
+  · Office: 3,845 words happen here, described in 85 · has a first visit too
+  · Back Row: 1,116 words happen here, described in 64
+  · Booth's Room: 784 words happen here, described in 45
+```
+
+---
+
 ## 2026-08-25 — C5's own worked example was the dead path, and §15 answered half a question
 
 **Why.** LO: *"I didn't liked showing the why text for locked choices."* `mrs_vance` is the first

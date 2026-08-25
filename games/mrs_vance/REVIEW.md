@@ -1338,8 +1338,16 @@ an event renders ON the room screen     yes    no — 100% of ours <<goto>> away
 `getStoryCanvasRedirect` replaces the room screen rather than printing above it. So the skill cannot
 currently teach the field's device even if it wanted to — there is nothing to author it with.
 
-**Not fixed here.** The skill is out of scope for this pass and the engine work is unscheduled. Filed
-for LO with the numbers attached.
+**FIXED 2026-08-26.** F9 rewritten so the rule is the description — the only surface the player sees
+on every visit — with the first-visit canvas kept as a named minority device carrying its own
+evidence. Gate `the anchor introduces itself` **deleted** and replaced by `lint · the place says what
+it is`: every location by how much prose happens there against the length of its own description, a
+list and never a score. Every game loses exactly one pass and one total (41/41 → 40/40, off_season
+and the_season 39/41 → 38/40), so the gate was passing everywhere and no pass/fail state changed.
+
+**The engine half is still open** and is why M1 stays open: a description cannot vary by state
+(`v2.py:9629` — one static string; `_resolve_at_references` substitutes names only), and ambients
+replace the room screen instead of printing above it.
 
 ---
 
