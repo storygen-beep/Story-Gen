@@ -36,7 +36,8 @@ Engine claims here carry a `file:line` into
 7. F7 · Role before name
 8. F8 · One flag per character
 9. F9 · The anchor introduces itself
-10. What the scoreboard checks
+10. F10 · The role stays attached after the introduction
+11. What the scoreboard checks
 11. Cheat sheet
 
 ---
@@ -596,6 +597,62 @@ room standing around it, which is destroyer's shape. A story one-shot keeps the 
 
 The field's other column — 22% of rooms rotating their text between visits — needs a per-visit
 counter like `block_pool`'s and does not exist for descriptions. Do not promise it in a ledger.
+
+---
+
+## F10 · The role stays attached after the introduction
+
+F7 gets the role onto the screen at the meeting. **F9 says a place keeps saying what it is on every
+visit. This is the same rule for people, and it is the one that was missing.**
+
+"Who is this" is a **standing** question. A meeting answers it once, and the player then spends forty
+visits in a hub where the man is a bare first name.
+
+**The measured failure.** A game with six men: `npcs[].relationship` written well and landing each of
+them in six words — *"Your husband's eldest, 29"*, *"Your husband's brother, 51"* — and **those
+strings render on the cast page and nowhere else.** In the prose the player actually reads:
+
+```
+canvases   words   times his own surfaces say who he is
+      14   2,594                 2          <- the spine of the game
+      14   1,736                 2
+```
+
+Its author — who wrote every line of it — asked *"Who is Sherrod?"* off a location button. The other
+game that drew *"I don't know who is who"* from the same reader had the same shape.
+
+**Where it goes: the surfaces the player RE-ENTERS.** A hub, an ambient, a walk-in. Not the one-shot
+that introduced him — that one is already doing its job.
+
+**Both, never one instead of the other.**
+
+> *"Relation and name both are important and both can't be replaced with another. We are not calling
+> out for replacing one with another."*
+
+⚠️ **Do not swap the name out for the relation on the speaker line.** `destroyer` does
+(`<<speech "teagan" "Stepsister">>`) and it is the only game in the 26-game corpus that does — it
+survives it by having **exactly one of each relation**, where the failure above has three men inside
+one. Relation words on buttons run at **field median 0.4%, max 2.0%**. `sluttown-usa` is a family
+premise with 37,408 speaker labels and uses **names only**. Swapping does not remove the memory tax,
+it moves it: the player now has to remember who "Stepsister" is.
+
+The cheap form is three words riding in prose that was going to be there anyway:
+
+```
+before   He has taken his jacket off and hung it on the back of the chair, which is as close as
+         THIS MAN comes to being off duty.
+after    …which is as close as YOUR HUSBAND'S ELDEST comes to being off duty.
+
+before   CADE comes up for ten minutes on a Friday and stands rather than sits.
+after    CADE — YOUR HUSBAND'S ELDEST, and the only one of them with a reason to be in this
+         kitchen — comes up for ten minutes on a Friday…
+```
+
+Name and relation on the same line, at the point of use, and the register does not move.
+
+**Put it in a `block_pool` variant rather than in the always-renders text.** A hub pool cycles, so
+the anchor recurs periodically instead of arriving every single visit, which is how a reminder turns
+into nagging.
 
 ---
 

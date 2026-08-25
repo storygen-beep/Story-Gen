@@ -38,10 +38,10 @@ was found by **LO playing the built game** — a different instrument that finds
 defect, and the two are not merged so it stays visible which found what. Same split
 `off_season/REVIEW_1.md` records in its own header.
 
-**Current count: 7 open, 14 fixed** — 0 blockers, 1 high, 3 med, 2 low, 1 open question, and **P1,
-Q1, Q2, C1, C2, D1, M1, M2, R1, S2, L1, L2, L3 and T1 FIXED**. M1 and M2 were closed, **reopened**
+**Current count: 6 open, 15 fixed** — 0 blockers, **0 high**, 3 med, 2 low, 1 open question, and
+**P1, Q1, Q2, C1, C2, D1, M1, M2, R1, W1, S2, L1, L2, L3 and T1 FIXED**. M1 and M2 were closed, **reopened**
 after LO rejected a game-layer fix the field disagreed with (§0a **N12**), and closed properly on
-2026-08-26 by the engine work they always needed. **W1 is the last HIGH item.** Two of the twenty-one are still decisions for LO
+2026-08-26 by the engine work they always needed. **No HIGH items remain.** Two of the twenty-one are still decisions for LO
 rather than defect calls: E1 (the obligation's size) and G1 (whether the Want file's one shape is the
 genre). L4 is history and cannot be edited; the correction of record is in §7. Plus **twelve places
 this review was itself wrong**, recorded first in §0a — six caught before writing, and six (N7–N12)
@@ -1891,7 +1891,7 @@ overnight row:
 ---
 
 ### W1 · Six men, and the prose says who they are 31 times in 10,298 words
-**severity** HIGH · **layer** GAME + SKILL · **status** OPEN
+**severity** HIGH · **layer** GAME + SKILL · **status** **FIXED** — prose + doctrine + a lint, 2026-08-26
 
 > LO: *"For many npcs, it still sounds unclear like who is who."*
 
@@ -1916,11 +1916,54 @@ know who is who."* Second game, same failure, so it is the instruction set and n
 skill teaches a 7-step npc-intro and says nothing about **keeping** a name attached after the
 introduction, and no gate or lint counts whether prose re-anchors a relationship.
 
-#### Fix
+#### Fix — SHIPPED
 
-A kin-anchor in the recurring surfaces, not the one-shots: each character's hub and ambients carry
-their relation once. Then a lint that reports kin-words per character per 10k words, so the next game
-cannot ship at 31.
+**LO demonstrated this item himself.** Having written every line of the game, he asked **"Who is
+Sherrod?"** off a location button. If the author has to ask, a player reading that name on a travel
+card has no chance.
+
+**Measured per character**, with anchors taken from each man's own `relationship` string rather than
+from a kin list:
+
+```
+                 before                          after
+npc_cade      2 hits / 2,594 words   8 per 10k  ->  8 hits   30 per 10k
+npc_booth     2 hits / 1,736 words  12 per 10k  ->  5 hits   29 per 10k
+npc_tobin     3 hits                21 per 10k      unchanged
+npc_sherrod   4 hits                25 per 10k      unchanged
+npc_isaac     4 hits                29 per 10k      unchanged
+npc_dorn      3 hits                35 per 10k  ->  4 hits   45 per 10k
+```
+
+**The spine of the game carried fourteen canvases and 2,594 words and said who he was twice.**
+
+Five anchors added, all in **recurring** surfaces — `hub_cade_office`, `hub_cade_bar`,
+`amb_kitchen_friday`, `hub_booth_kitchen`, `hub_booth_room` — and all inside `block_pool` variants,
+so the reminder cycles instead of arriving every visit. Three words riding in prose already there:
+
+> *"…which is as close as **your husband's eldest** comes to being off duty."*
+>
+> *"**Cade — your husband's eldest**, and the only one of them with a reason to be in this
+> kitchen — comes up for ten minutes on a Friday…"*
+
+⚠️ **Not a display-label field on the speaker.** That was proposed during this pass and is wrong. It
+copies `destroyer`'s `<<speech "teagan" "Stepsister">>`, which **replaces** the name — and
+`destroyer` is the only game of 26 that does it, surviving on having exactly one of each relation
+where this game has three men in one. LO's ruling: *"Relation and name both are important and both
+can't be replaced with another."* Live, 30 of 30 hub renders still show **Cade:** on the speaker
+line with his portrait beside it. Both, at the point of use.
+
+**Skill layer — `the-first-hour.md` F10 and `lint · the role stays attached`.** F7 already gets the
+role on screen at the meeting and F9 keeps a place saying what it is on every visit; nothing said the
+same for people. The lint's instrument is the load-bearing part: **a kin-word detector was tried and
+rejected** (F7 records it firing wrongly on ten of `last_call`'s meetings), so this one derives each
+character's anchors from that character's own `relationship` line. `last_call`, `off_season` and
+`the_inheritance` declare zero relationship strings and the lint is **silent** on all three — no
+vocabulary, no false positives. It fires on `the_season` (Wade, 13 per 10k), **the other game that
+drew "I don't know who is who" from LO**, and on `late_shifts` (Cole: 807 words, 0 anchors).
+
+`40/40 judged gates` before and after · `somebody speaks` unmoved at 4.4:1 · app suite 255 passed ·
+`playtest_presence` 10/10 · `playtest_quests` 23/23 · live 4/4.
 
 ---
 
@@ -2420,4 +2463,29 @@ the `version = "1.0"` fail-open warning, and the two limits above. `CHANGELOG.md
 
 `40/40 judged gates pass` · `playtest_presence` 10/10 · `playtest_quests` 23/23 · 244 passed in the
 app suite including two new engine suites · live 7/7 · and **every authored passage in the six games
-that did not opt in is byte-identical**. Count 9 open → 7. **W1 is the last HIGH item.**
+that did not opt in is byte-identical**. Count 9 open → 7. **No HIGH items remain.**
+
+**2026-08-26 (2) — W1 fixed. No HIGH items remain.**
+
+LO demonstrated the item himself: he wrote the game and still asked *"Who is Sherrod?"* off a
+location button. The `relationship` strings were always good and always on the cast page, one click
+away and out of the scene.
+
+**Game.** Five anchors into Cade's and Booth's **recurring** surfaces, inside `block_pool` variants
+so the reminder cycles rather than nags. Cade 8 → 30 per 10k, Booth 12 → 29, into the band the rest
+of the cast already occupied. Nobody fell.
+
+**What it is not.** A display-label field replacing the name on the speaker line — proposed during
+this pass, and wrong. `destroyer` is the only game of 26 that does it and gets away with it by having
+one of each relation. Live: 30 of 30 hub renders still say **Cade:**, portrait beside it.
+
+**Skill.** `the-first-hour.md` **F10** — F9's rule, for people. And `lint · the role stays attached`,
+whose instrument matters more than its output: **a kin-word detector was already tried and rejected**
+for firing on ten of `last_call`'s meetings, so this one takes each character's anchors from that
+character's own `relationship` line. `last_call`, `off_season` and `the_inheritance` declare none and
+the lint is silent on all three — by construction, not by luck. It fires on `the_season` (Wade, 13
+per 10k), the other game that drew *"I don't know who is who"*, and on `late_shifts` (Cole: 8
+canvases, 0 anchors).
+
+`40/40 judged gates` · `somebody speaks` unmoved at 4.4:1 · 255 passed · playtests 10/10 and 23/23 ·
+live 4/4. Count 7 open → 6. **Zero HIGH items.**
