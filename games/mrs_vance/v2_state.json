@@ -73,7 +73,7 @@
         "act_nodes": "2 of 14 under 3 \u2014 both are BANDED finishers (Cade, Sherrod) whose thinnest renderable band is 6. Read as a false positive on band-folding, not a cold beat.",
         "the_ladder": "3 of 6 explicit canvases open at vaginal-or-above, against a field that does it 46% of the time. Inside the field's own rate.",
         "dispatch_depth": "3 hosts with ONE outcome (act_sleep, buy_propane, buy_drink) \u2014 the roll only decides whether the branch or the room renders. Owed.",
-        "cast_meters": "npc_dorn gates nothing \u2014 deliberate. He is the clock, not a ladder, and his arc is a promise below rather than content here.",
+        "cast_meters": "npc_dorn gates no CANVAS \u2014 deliberate. He is the clock, not a ladder, and his arc is a promise below rather than content here. He does gate his own two quest cards (`npc_dorn.want gte 12`), which is what the lint could not see and what the earlier wording \u2014 \"gates nothing\" \u2014 got wrong. REVIEW.md L2.",
         "meter_ladder": "median 2 rungs, lowest rung 5 \u2014 the field's own median lowest rung. Fixed this release from 8.",
         "screen_shape": "median 2 rows at turn one, 13/14 locations carry a random event."
       },
@@ -87,7 +87,7 @@
       "paid_in": null
     },
     {
-      "text": "Media. Every explicit surface declares `pool_dir` + `pool` and a search vocabulary; nothing is on disk. Six external files referenced and not copied. find-media's job, not this skill's.",
+      "text": "Media. Every explicit surface declares `pool_dir` + `pool` and a search vocabulary; nothing is on disk. The real inventory, walked over every file-shaped string in the TOML: 22 FIXED references, all missing \u2014 14 `locations[].image`, 6 `npcs[].portrait`, 2 `blocks[].props.file` \u2014 plus 34 distinct `pool_dir` directories, none of which exist. (This read \"six external files\" until 2026-08-25; six is the PACKAGER's warning and it counts portraits only, so the 14 location plates and 2 scene stills were invisible to the promise meant to track them. REVIEW.md L1.) find-media's job, not this skill's.",
       "made_in": "0.1",
       "paid_in": null
     },
@@ -108,6 +108,16 @@
     },
     {
       "text": "The wardrobe is off (`clothing_enabled = false`). Arm it in the release that authors both a catalog and the beat that teaches it \u2014 a live system with nothing in it is a broken link in the home base on turn one.",
+      "made_in": "0.1",
+      "paid_in": null
+    },
+    {
+      "text": "The top half of four ladders. `board.cast_meters.rungs` declares the full climb and v0.1 builds the lower part of it: cade 82 declared / 42 built, booth 74 / 50, isaac 66 / 38, sherrod 62 / 34. Only tobin (70 / 70) reaches its own top. npc_dorn's second rung at 55 is now read by nothing at all \u2014 the quest cards that carried it were rebuilt on a played-flag in the Q1 repair. Deferring the upper half is correct for a release stream; leaving it unwritten was the defect (the-release.md:107, \"log every promise and pay or cut it\"). Pay it or cut the rungs. REVIEW.md L3.",
+      "made_in": "0.1",
+      "paid_in": null
+    },
+    {
+      "text": "`standing` is written 25 times across 23 canvases and READ four times, all four inside `work_counter` \u2014 a correctly-banded three-tier ladder that works, and the game's only customer for the meter. WANT.md \u00a73 says it is \"read constantly\" and names three examples: the counter (built), the bank clerk's tone (zero reads in `the_bank`) and what the bar already knows (zero reads in `the_bar`). Field figure for comparison: reputation is read at 644 sites across the corpus. Adding reads to rooms that already exist is exactly what the fill promise describes; this names the first two. REVIEW.md S1/S2.",
       "made_in": "0.1",
       "paid_in": null
     }
@@ -168,6 +178,14 @@
     {
       "at": "0.1",
       "note": "The arousal-gated FINISH link appeared to be missing from every act menu under a live probe. It was the moment-commit trap (engine.md \u00a724 class): variables set from outside a passage transition are discarded by Engine.play. With setup.commitMoment() every menu renders its full ladder. Recorded because it is indistinguishable from a real defect and cost a probe to rule out."
+    },
+    {
+      "at": "review",
+      "note": "0.1 was reviewed after shipping (games/mrs_vance/REVIEW.md, 21 items) and repaired in place rather than in a 0.1.1, because output/ is still the --dev --debug test artefact and nothing is published (`dev: true`, no `version`, REVIEW.md B1/N7). Fixed so far: P1 the ambient presence gate, Q1/Q2 the terminal badge moved off a meter onto a played-flag, C1/C2 the sleep label's clock, D1 the in-loop refusal text plus ten dead cooldown lines, T1 loop_solo's shared `loop_act`. Each carried its skill fix in the same commit. The release-time procedure is unchanged and lives on the portal entry (games-data.js:44-49)."
+    },
+    {
+      "at": "board",
+      "note": "`player.loop_act` is ONE trait shared by all six loops rather than one per loop. Kept shared \u2014 the five NPC loops each set it at entry and clear it on the finish exit, so the bands read only what the live loop wrote. `loop_solo` was the hole: it set `loop_stage` and never `loop_act`, which is safe only while its finisher has no bands, and adding bands there is exactly what the review's \u00a74 asks for. Now sets 1 at entry and 0 on finish like the other five. REVIEW.md T1."
     }
   ],
   "board": {

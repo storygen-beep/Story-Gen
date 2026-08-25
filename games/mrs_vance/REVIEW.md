@@ -38,10 +38,10 @@ was found by **LO playing the built game** — a different instrument that finds
 defect, and the two are not merged so it stays visible which found what. Same split
 `off_season/REVIEW_1.md` records in its own header.
 
-**Current count: 15 open, 6 fixed** — 0 blockers, 3 high, 5 med, 6 low, 1 open question, and **P1,
-Q1, Q2, C1, C2 and D1 FIXED**. Two of the twenty-one are still decisions for LO rather than defect
-calls: E1 (the obligation's size) and G1 (whether the Want file's one shape is the genre). Plus
-**eleven places
+**Current count: 10 open, 11 fixed** — 0 blockers, 3 high, 4 med, 2 low, 1 open question, and **P1,
+Q1, Q2, C1, C2, D1, S2, L1, L2, L3 and T1 FIXED**. Two of the twenty-one are still decisions for LO
+rather than defect calls: E1 (the obligation's size) and G1 (whether the Want file's one shape is the
+genre). L4 is history and cannot be edited; the correction of record is in §7. Plus **eleven places
 this review was itself wrong**, recorded first in §0a — six caught before writing, and five (N7–N11)
 caught only after they had shipped in this file, one of them as its single blocker.
 `v2_state.json` is deliberately untouched; the remaining SKILL-layer items (C2, Q1, W1, G1, half of
@@ -755,7 +755,7 @@ condition, cost or quest goal. It is: `7/7`. Nothing asks how often, and nothing
 reads against what the game said it would do with them.
 
 ### S2 · The gap is legitimate to defer and is not written down
-**severity** MED · **layer** GAME · **status** OPEN
+**severity** MED · **layer** GAME · **status** **FIXED** — the promise is written; S1 itself stays open
 
 Building thin and thickening is the method, and adding reads to rooms that already exist is
 literally what `v2_state.json`'s own fill promise describes — *"every release until it closes adds
@@ -771,8 +771,22 @@ The same applies to a fourth thing not in `promises[]` — see L3.
 
 ### Fix
 
-Two or three `standing` band reads in `the_bank` and `the_bar`, on the lines the Want already
-specifies (the clerk's tone; what the bar already knows), and a promise entry naming the rest.
+**The promise is written** — `promises[]` gained an entry naming the measurement (25 writes across
+23 canvases, 4 reads all inside `work_counter`), the two rooms the Want names and the build does not
+read in (`the_bank`, `the_bar`), and the field figure to aim at (reputation read at 644 sites across
+the corpus). Six promises became eight.
+
+**S1 itself stays open**, and deliberately: it wants two or three `standing` band reads written into
+`the_bank` and `the_bar`, on the lines the Want already specifies — the clerk's tone, what the bar
+already knows. That is prose, and it belongs with the M1/M2/W1 pass rather than with a ledger
+correction. S2 was only ever *"the gap is not written down"*; it is now.
+
+⚠️ **Re-measured while writing the promise, and the review's numbers hold.** A first pass of that
+re-measurement reported standing being read at 27 sites across 23 canvases — including the bank and
+the bar — and it was wrong: it matched on `trait == "standing"` with *any* `op`, so it counted every
+`add` **effect** as a read. Conditions compare (`gte`/`lt`); effects assign (`add`/`set`). Separating
+them gives 25 writes and 4 reads, exactly as first recorded. Noted because it is the same
+prose-versus-structure slip as N8 and it nearly overturned a correct finding.
 
 ---
 
@@ -813,14 +827,15 @@ gain a demand the player cannot see coming.
 
 ---
 
-# §7 · The ledger records four things that are not true
+# §7 · The ledger recorded four things that are not true
 
-Three are in `games/mrs_vance/v2_state.json` and one is in the shipping commit. They are low
-severity and high consequence: the ledger is the to-do list the next release reads, and the commit
-message is what anyone reads first.
+Three were in `games/mrs_vance/v2_state.json` and one is in the shipping commit. Low severity and
+high consequence: the ledger is the to-do list the next release reads, and the commit message is what
+anyone reads first. **The three in the ledger are fixed; the fourth is history and stands corrected
+here.**
 
 ### L1 · "Six external files referenced and not copied" — it is 22, plus 34 directories
-**severity** LOW · **layer** GAME · **status** OPEN
+**severity** LOW · **layer** GAME · **status** **FIXED**
 
 
 `releases[0].promises` says *"Six external files referenced and not copied."* The real inventory,
@@ -841,7 +856,7 @@ the 14 location images and 2 scene images are invisible to the promise that is s
 them.
 
 ### L2 · "npc_dorn gates nothing — deliberate" — he gates two quest cards
-**severity** LOW · **layer** GAME · **status** OPEN
+**severity** LOW · **layer** GAME · **status** **FIXED**
 
 
 `lints_shipped_with.cast_meters` says *"npc_dorn gates nothing — deliberate. He is the clock, not a
@@ -850,7 +865,7 @@ cards, at `gte 12` and `gte 55`. It gates no *canvas*, which is what the lint me
 note meant. Worth stating precisely, because Q2 lives in the gap.
 
 ### L3 · Four ladders are declared to a top the build does not reach, and no promise says so
-**severity** LOW · **layer** GAME · **status** OPEN
+**severity** LOW · **layer** GAME · **status** **FIXED**
 
 
 `board.cast_meters.rungs` declares the full ladder; the build gates far below it:
@@ -863,14 +878,23 @@ npc_sherrod                 62                   34
 npc_tobin                   70                   70   <- built to its top
 ```
 
-Deferring the upper half is correct for a v0.1 release stream. But `promises[]` has six entries and
-none of them is *"the top half of four ladders"*, so the same silent-wall problem as S2 applies —
-and here it is compounded, because Isaac's and Sherrod's terminal quest cards carry goals at 66 and
-62, values nothing in the build sits on.
+Deferring the upper half is correct for a v0.1 release stream. But `promises[]` had six entries and
+none of them was *"the top half of four ladders"*, so the same silent-wall problem as S2 applied —
+and it was compounded at the time, because Isaac's and Sherrod's terminal quest cards carried goals
+at 66 and 62, values nothing in the build sits on.
+
+**Q1's repair removed those goals**, which makes the promise more necessary rather than less: 66 and
+62 — and Dorn's second rung at **55** — now live in `board.cast_meters.rungs` and **nowhere else in
+the game**. A declared rung the build does not reach is fine; a declared rung nothing anywhere
+mentions is a number that has quietly stopped meaning something.
 
 ### Fix
 
-Three edits to `v2_state.json` and two new `promises[]` entries. Not done in this pass — see §12.
+Applied to `v2_state.json`: L1's promise rewritten with the walked inventory, L2's lint note made
+precise, and **two new `promises[]` entries** — the four ladder tops (this item) and the colour
+meter's reads (S2). Six promises became eight. Two `decisions[]` entries were added at the same time:
+one recording that 0.1 is being repaired in place rather than in a 0.1.1 (because `output/` is still
+the test artefact and nothing is published — §1 B1/N7), and one recording the `loop_act` call (T1).
 
 ### L4 · The shipping commit counts 46 `block_pool`s; there are 39
 
@@ -906,7 +930,7 @@ Nothing to edit; history stands. The counts here are the correction of record.
 # §8 · Latent, not live
 
 ### T1 · `loop_act` is one shared trait across six loops, and `loop_solo` never writes it
-**severity** LOW · **layer** GAME · **status** OPEN
+**severity** LOW · **layer** GAME · **status** **FIXED**
 
 `player.loop_act` is a single trait carrying "which act is happening" for every loop in the game.
 `loop_cade` writes 1/2/3, `loop_sherrod` 1/2, `loop_isaac`, `loop_booth` and `loop_tobin` write 1.
@@ -922,8 +946,19 @@ asks for — and it will read whatever the last NPC loop left in the variable.
 
 ### Fix
 
-Either set `loop_act` at `loop_solo.base` the way the other five do, or split the trait per loop.
-The first is one line and matches the existing pattern.
+`loop_solo`'s entry choice now sets `loop_act = 1` alongside the `loop_stage = 0` it already set, and
+its `finish` exit resets it to 0 — the pattern the other five follow. All six loops now write the
+trait at both ends:
+
+```
+loop_cade     set 0,1,2,3      loop_booth   set 0,1
+loop_sherrod  set 0,1,2        loop_tobin   set 0,1
+loop_isaac    set 0,1          loop_solo    set 0,1     <- was: writes NONE
+```
+
+Kept shared rather than split per loop: every loop now brackets its own use, so a band can only read
+what the live loop wrote, and one trait is the smaller surface. Recorded as a `decisions[]` entry so
+the choice is not re-litigated.
 
 ---
 
@@ -1947,6 +1982,39 @@ re-investigated. Count 13 → 19. Still nothing repaired.
 **2026-08-25 — L4 added.** Reconciling §4's pool count against the shipping commit before committing
 this file showed the commit's "46 pools" matches neither the grep (41) nor the parse (39), and its
 "46 in the_long_summer" is 49. Filed with L1–L3 as the same defect class. Count 19 → 20.
+
+**2026-08-25 — the ledger pass: L1, L2, L3, S2 and T1 FIXED.** Nobody plays `v2_state.json`, but it
+is the to-do list the next release reads, and it recorded three things that are not true.
+
+**L1** said *"six external files referenced and not copied"* — that is the **packager's** warning and
+it counts portraits only. The walked inventory is **22 fixed references, all missing** (14 location
+plates, 6 portraits, 2 scene stills) plus **34 `pool_dir` directories, none on disk**. The 14 and the
+2 were invisible to the promise meant to track them.
+
+**L2** said `npc_dorn` *"gates nothing"*. He gates no **canvas** — which is what the lint measured and
+what the note meant — and he does gate his own two quest cards at `want gte 12`.
+
+**L3 and S2** were both silent walls, and `the-release.md:107` is *"log every promise and pay or cut
+it"*. Two new promises: the **four ladder tops** the build does not reach (cade 82/42, booth 74/50,
+isaac 66/38, sherrod 62/34; only tobin reaches its own at 70/70) and the **colour meter's reads**
+(`standing` written 25 times, read 4, all inside `work_counter`, against a field figure of 644 read
+sites for reputation). Q1's repair made the first one *more* necessary, not less: 66, 62 and Dorn's
+55 now live in `board.cast_meters.rungs` and nowhere else in the game.
+
+**T1** was the one game fix in the batch. `loop_solo` set `loop_stage` and never `loop_act` — safe
+only while its finisher has no bands, and adding bands there is exactly what §4 asks for. All six
+loops now set it at entry and clear it on finish. Kept shared rather than split, recorded as a
+decision so it is not re-litigated.
+
+Six promises → eight, fourteen decisions → sixteen, and one of the new decisions records that 0.1 is
+being repaired **in place** rather than in a 0.1.1, because `output/` is still the test artefact and
+nothing is published. `41/41` throughout. Count 15 open → 10.
+
+⚠️ **A re-measurement written for S2's promise briefly overturned a correct finding** and was caught
+before it reached the file: it reported `standing` read at 27 sites including the bank and the bar,
+by matching `trait == "standing"` with any `op` — counting every `add` **effect** as a read.
+Conditions compare, effects assign. The review's 25 writes / 4 reads is right. Same
+prose-versus-structure slip as N8, one layer down.
 
 **2026-08-25 — D1 FIXED, and two of the three things it wanted stripped were correct work.** The
 eleven greyed rungs inside the sex loops are gone — every one gated on `arousal` or `loop_stage`,
