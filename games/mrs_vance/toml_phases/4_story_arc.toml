@@ -958,8 +958,14 @@ type = "choices"
 text       = "Get your hand between your legs."
 targetType = "node"
 nodeId     = "loop_solo.act"
+# ⚠️ `loop_act` is ONE trait shared by every loop in the game, and entering a loop
+#    without setting it leaves whatever the last NPC loop wrote in it. This loop's
+#    finisher has no [group] bands today, so it reads nothing — but the moment it
+#    gains one (which is what §4 of the review asks for) it would elect on Cade's or
+#    Sherrod's leftover value. Set it at entry, the way the other five loops do.
 effects = [
   { targetType = "player", trait = "loop_stage", op = "set", value = 0 },
+  { targetType = "player", trait = "loop_act",   op = "set", value = 1 },
 ]
 
 [[canvases.nodes.exit_block.choices]]
@@ -1027,5 +1033,6 @@ costs = [ { trait = "energy", value = 3 } ]
 effects = [
   { targetType = "player", trait = "arousal",    op = "set", value = 0 },
   { targetType = "player", trait = "loop_stage", op = "set", value = 0 },
+  { targetType = "player", trait = "loop_act",   op = "set", value = 0 },
   { targetType = "player", trait = "energy",     op = "add", value = -4 },
 ]
