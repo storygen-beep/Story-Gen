@@ -38,14 +38,15 @@ was found by **LO playing the built game** — a different instrument that finds
 defect, and the two are not merged so it stays visible which found what. Same split
 `off_season/REVIEW_1.md` records in its own header.
 
-**Current count: 10 open, 11 fixed** — 0 blockers, 3 high, 4 med, 2 low, 1 open question, and **P1,
-Q1, Q2, C1, C2, D1, S2, L1, L2, L3 and T1 FIXED**. Two of the twenty-one are still decisions for LO
+**Current count: 7 open, 14 fixed** — 0 blockers, 0 high, 4 med, 2 low, 1 open question, and **P1,
+Q1, Q2, C1, C2, D1, M1, M2, R1, S2, L1, L2, L3 and T1 FIXED**. Two of the twenty-one are still decisions for LO
 rather than defect calls: E1 (the obligation's size) and G1 (whether the Want file's one shape is the
-genre). L4 is history and cannot be edited; the correction of record is in §7. Plus **eleven places
-this review was itself wrong**, recorded first in §0a — six caught before writing, and five (N7–N11)
+genre). L4 is history and cannot be edited; the correction of record is in §7. Plus **twelve places
+this review was itself wrong**, recorded first in §0a — six caught before writing, and six (N7–N12)
 caught only after they had shipped in this file, one of them as its single blocker.
-`v2_state.json` is deliberately untouched; the remaining SKILL-layer items (C2, Q1, W1, G1, half of
-D1) are recorded for LO to schedule.
+`v2_state.json` is no longer untouched: M1's nine arrivals took seven locations off their declared
+`fill`, and the budgets were corrected to what is built (§0a N12). The remaining SKILL-layer items
+(C2, Q1, W1, G1, half of D1) are recorded for LO to schedule.
 
 ---
 
@@ -249,6 +250,38 @@ against the regex in isolation, and stopped. It never asked whether the label re
 **Testing a pattern is not testing an instrument** — the question is always what the instrument is
 pointed at, and this is the second item in this file where that was the whole defect (P1/N8's G38 was
 aimed at the runtime path that does not read the field).
+
+### ⚠️ N12 · M1 named the wrong three locations, and the plan it was measured against could not fit its own fix
+
+**The sixth correction to ship in this file, and the fifth found by repairing the item.** Five for
+five now.
+
+M1's fix note said to start with *"`the_yard`, `the_bunk_room` and `the_back_row` — the three
+carrying the most prose with no introduction."* The lint immediately above it in the same file
+prints the list ordered by exactly that measure, and it does not say that:
+
+```
+Back Row 872 · Booth's Room 515 · Bunk Room 475 · Sherrod's Room 418 · Bar 391
+Bathroom 320 · Kerr Crossing 259 · Bank 257 · Yard 253
+```
+
+**The Yard is last.** It is still the right place to start, but on the argument that it is the root
+of the map and the most-crossed screen in the game — not on prose weight. Two of the three named
+were wrong, and the number was sitting in the same output.
+
+**The second half is more useful.** Nine arrivals of three or four beats took seven locations
+outside their declared `fill` budgets and five outside their `fill_finished` — the state the ledger
+says they should reach when the game is *done*. The Bank's finished budget is **200 words**; an
+arrival that says what kind of place it is costs about 150 before anything else happens there. Four
+arrivals were trimmed by a paragraph each; the remaining overshoot is the plan's, not the prose's,
+and `board.locations[].fill` was corrected to what is built (total 11,400 → 13,228, anchor share
+27% → 29%, still over the 25% floor).
+
+**A first visit has a floor cost, and per-location budgets written before the arrivals existed did
+not carry it.** That is a board-phase lesson, not a Mrs. Vance one — noted here rather than acted
+on, because the skill is out of scope for this pass.
+
+---
 
 ### ⚠️ N11 · D1 proposed stripping ten lines that C5 exists to require — and they were already dead
 
@@ -640,7 +673,7 @@ in the same commit.
 # §4 · The six repeatable sex loops are frozen
 
 ### R1 · 39 variant pools in the game, zero in the loops
-**severity** HIGH · **layer** GAME · **status** OPEN
+**severity** HIGH · **layer** GAME · **status** **FIXED** — 17 pools, prose and speech, proved live
 
 First, the thing that is going right, because it is the reason this item is sharp rather than
 routine. **Mrs. Vance is the first v2 game to ship `block_pool`.** Census across all 22 scorable
@@ -719,6 +752,30 @@ pool nests inside a group (depth cap 4) though **not** inside another pool.
 One authoring note from §35 worth carrying into the work: children may sit at the block's own
 `blocks` key **or** at `props.blocks`, and this game already uses the top-level form throughout, so
 copy what is here rather than the `props` form the doctrine used to show.
+
+#### What shipped
+
+**17 `block_pool`s, three or four variants each, across all six loops** — twelve on act and finish
+body paragraphs, five inside the `[group]` bands of Cade's and Sherrod's finishers (a pool nests
+inside a group; never inside another pool; max depth reached is 3 against a cap of 4).
+
+**And the speech was as frozen as the prose.** Every act node repeated one line forever — *"Slower.
+You're not doing the books now."* on every render, for the life of the save. Eight existing dialog
+blocks are now pools of three or four, and five nodes gained a spoken beat the prose had already
+promised and never delivered: Sherrod's act narrated *"He talks while you suck him"* and carried
+**no dialog block at all**.
+
+The act nodes roughly doubled in crude density — whole-node explicit counts `act_hand` 5 → 12,
+`act_mouth` 5 → 11, `act_desk` 6 → 12, `finish` 6 → 24; Sherrod 6 → 12 and 6 → 20; Isaac 5 → 11 and
+4 → 11; Booth 3 → 9 and 5 → 13; Tobin 4 → 11 and 4 → 11; solo 4 → 10 and 4 → 10.
+
+⚠️ **The one thing that can break a gate here is a thin variant**, because `gates.py:1666` reads a
+pool as an AXIS and scores the thinnest band a node can render. One Tobin variant landed on two
+explicit words and took `the act nodes` from 2-of-14 under 3 to 3-of-14; one word fixed it. The
+lint is back at **2 of 14**, the same two pre-existing finisher bands as before this pass.
+
+Proved live, 24 renders each: `loop_isaac.act` showed **3 of 3** body variants, `loop_cade.act_hand`
+**4 of 4** of his lines.
 
 ---
 
@@ -1603,7 +1660,7 @@ down. Type-guarded, and clean across all fourteen games.
 ---
 
 ### M1 · Thirteen of fourteen locations never say what kind of place they are
-**severity** HIGH · **layer** GAME · **status** OPEN
+**severity** HIGH · **layer** GAME · **status** **FIXED** — nine arrivals, proved live, 14/14
 
 > LO: *"couldnt understand the world, the map, locations."*
 
@@ -1633,15 +1690,38 @@ the player crosses more than any other. Its `description` is good and carries th
 A description renders under the room title on every visit. It is wallpaper, not an arrival, and
 `the-first-hour.md` F7/F9 is about the moment of arriving.
 
-#### Fix
+#### Fix — SHIPPED
 
-First visits for the nine, starting with `the_yard`, `the_bunk_room` and `the_back_row` — the three
-carrying the most prose with no introduction. `v2_state.json` already promises this; it is unpaid.
+**All nine, not three.** `2_one_shots.toml` gains `first_back_row`, `first_booths_room`,
+`first_bunk_room`, `first_sherrods_room`, `first_bar`, `first_bathroom`, `first_kerr_crossing`,
+`first_bank` and `first_yard`, each in `first_office`'s shape: `priority = 80`, `is_repeatable =
+false`, gated on `opening_done`, three or four beats, an image declared, exit back to the room.
+
+⚠️ **This item's own fix note named the wrong three** — see §0a **N12**. The lint's order is Back
+Row (872 words), Booth's Room (515), Bunk Room (475); the Yard is **last** at 253. The Yard went in
+anyway, because it is the root of the map and the screen crossed more than any other, and its beat
+is the only place the shape of the property is ever stated to the player:
+
+> *"The house is one side, kitchen door straight onto the gravel. The four-bay shop is the other,
+> under the roller door. Past the skip the overnight row starts, and the gate at the far end lets
+> onto the county road."*
+
+**Three constraints, each from a check that was passing.** No cast member is named in any of the
+nine — every one is reachable before at least one meeting can fire, and `named before met` read 0.
+No numbered hour — the clock lint was already the worst number on the board. And each arrival
+**reads and sets its own guard flag** (`back_row_seen`, `yard_seen`, …), because G7 counts a
+non-repeatable canvas as a milestone owing standing content, and these owe nothing; a self-read
+write is the once-guard shape the gate's own escape hatch describes.
+
+`the anchor introduces itself` **5/14 → 14/14**. `named before met` now reads *"every named
+character is met and every location introduces itself."* The clock lint **improved**, 16.5 → 13.4
+per 10k. Proved live: first entry to the Back Row plays the arrival, sets `back_row_seen`, and the
+second entry renders the room screen instead.
 
 ---
 
 ### M2 · The map is a two-level tree and the player is never shown its shape
-**severity** MED · **layer** GAME + SKILL · **status** OPEN
+**severity** MED · **layer** GAME + SKILL · **status** **FIXED** — by M1's yard beat; the other half refuted
 
 What is declared, via `navigation_order` (§0a N5):
 
@@ -1673,10 +1753,21 @@ will ever read it.
 **Skill layer:** `the-map.md` specifies archetypes and the graph. Nothing in it asks how the player
 learns the shape, so a correct `nested_zones` map can ship completely illegible.
 
-#### Fix
+#### Fix — SHIPPED, and half of it was wrong
 
-Group the travel list by zone, or put the shape into the yard's first visit (M1) so the player is
-told once that the house, the shop and the back row all hang off this gravel.
+This item offered two fixes. **The first has no support in the field and must not be attempted.**
+
+Measured across every game in the 26-game corpus with eight or more travel screens
+(`~/Documents/Player_Legibility_Study_20260825/`): a zone header standing above a run of travel
+links runs at **field median 0%**, and a grouped travel list at **field median 8%**. Nothing groups
+its travel list by zone. Grouping is not a convention this genre has.
+
+**The second fix is the supported one and it is the same action as M1's**, so M1's `first_yard`
+closes this item too. The same study says why: the field teaches the shape of a world in **prose
+that places one thing relative to another**, and on that axis this game already leads the corpus —
+**18.3 such phrases per 10,000 words against a field best of 4.8 and a median of 1.8**. The
+geography was never missing. It was rendering as wallpaper under a room title on every visit, which
+is what this item said in its own first paragraph.
 
 ---
 
@@ -2130,3 +2221,38 @@ in §0a that was written down before it was caught, and the only one that came f
 (`grep -cE 'output/|index\.html' gates.py` → 0) and `the-release.md` never mentions publishing one, so
 nine portal entries restate the procedure by hand in three phrasings. §9 gained the matching cleared
 row and §10 a B2 subsection. Count 20 → 21; blockers 1 → 0.
+
+**2026-08-25 — M1, M2 and R1 fixed; the third item's other half refuted.** The two HIGH game-layer
+items LO picked because nothing else depended on them, plus M2, which turned out to be the same job
+as M1.
+
+**M1 · nine arrivals.** `2_one_shots.toml` gains a non-repeatable canvas at each of the nine
+locations that had none, in `first_office`'s shape. `the anchor introduces itself` **5/14 → 14/14**;
+`named before met` now reads *"every named character is met and every location introduces itself."*
+No cast member is named in any of them and no numbered hour appears — the clock lint **improved**,
+16.5 → 13.4 per 10k. Live: first entry to the Back Row plays the arrival, sets `back_row_seen`, and
+the second entry renders the room screen.
+
+**M2 · closed by M1's yard beat, and its first fix deleted.** *"Group the travel list by zone"* has
+**no support anywhere in the field** — zone headers run at field median 0% across 26 games, grouped
+travel lists at 8%. The same study found this game's spatial prose already leads the corpus at
+**18.3 phrases per 10k words against a field best of 4.8**. The geography was written; it was
+staged as wallpaper.
+
+**R1 · 17 pools, and the speech was as frozen as the prose.** Twelve on act and finish bodies, five
+inside the two `[group]` finishers. Eight dialog blocks became pools and five nodes gained a spoken
+beat their own prose had promised — Sherrod's act narrated *"He talks while you suck him"* and had
+no dialog block at all. Whole-node explicit counts roughly doubled across all six loops. Live, 24
+renders each: `loop_isaac.act` 3 of 3 body variants, `loop_cade.act_hand` 4 of 4 lines.
+
+**Three gates broke on the way and all three are informative.** `milestones open something` — nine
+non-repeatable canvases that open nothing; fixed with the once-guard shape the gate's own comment
+describes. `somebody speaks` — 4.9:1 was already 2% under a 5:1 ceiling, and 3,100 words of pure
+narration took it to 6.3:1; fixed by pooling the speech, and it finished at **4.7:1, better than
+before this pass**. `location fill` — recorded as **N12**: M1 named the wrong three locations, and
+five of the small places could not fit an arrival inside their declared *finished* budget. Four
+arrivals trimmed; `board.locations[].fill` corrected to what is built.
+
+`41/41 judged gates pass` before and after. `playtest_presence.py` 10/10, `playtest_quests.py`
+23/23, and a six-check live pass on a scratch `--dev --debug` build. Count 10 open → 7; **0 HIGH
+items remain.**

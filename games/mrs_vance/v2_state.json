@@ -4,14 +4,14 @@
   "narration_person": "second",
   "protagonist": "Rilla Vance",
   "want": {
-    "who_she_is": "Rilla Vance, 27, nee Marek. Eleven weeks married to Dorn Vance, 54, who owns Vance Diesel \u2014 a repair yard on a county road outside Kerr Crossing, house on the same gravel lot. A paper signed before the wedding: nothing is hers for three years. No car in her name, not on the account, sixty dollars a week on the kitchen counter. Dorn put her on the books, so she writes down every number the yard makes and can touch none of them, and hands the week's cash to his eldest son on Friday. Dorn hauls four nights out of seven. What she has to lose: the three years, and the job she got her brother.",
-    "appetite": "To be wanted by men who have to call her by a title she did not earn. It cannot complete \u2014 no figure of respect settles it, and every man who starts using her name has to be replaced by one still using the title. The yard supplies them: drivers, hires, family home from somewhere. Release 41 adds a new hire in the bunk room, a customer who becomes a regular, or another Vance who needs a bed.",
-    "ascent": "Bottom: the office counter and the front rooms of the house, in daylight, with Dorn's name doing all the work; she asks Cade for the truck to leave the property at all. Top: the shop floor after close, the bunk room over it, the wash bay at midnight, the sleepers in the back row \u2014 and none of it needing his name, because by then they are not calling her by it. The ladders live on the cast: five men, two meters each (access \u2014 what he lets her near; willingness \u2014 how far he goes).",
+    "who_she_is": "Rilla Vance, 27, nee Marek. Eleven weeks married to Dorn Vance, 54, who owns Vance Diesel — a repair yard on a county road outside Kerr Crossing, house on the same gravel lot. A paper signed before the wedding: nothing is hers for three years. No car in her name, not on the account, sixty dollars a week on the kitchen counter. Dorn put her on the books, so she writes down every number the yard makes and can touch none of them, and hands the week's cash to his eldest son on Friday. Dorn hauls four nights out of seven. What she has to lose: the three years, and the job she got her brother.",
+    "appetite": "To be wanted by men who have to call her by a title she did not earn. It cannot complete — no figure of respect settles it, and every man who starts using her name has to be replaced by one still using the title. The yard supplies them: drivers, hires, family home from somewhere. Release 41 adds a new hire in the bunk room, a customer who becomes a regular, or another Vance who needs a bed.",
+    "ascent": "Bottom: the office counter and the front rooms of the house, in daylight, with Dorn's name doing all the work; she asks Cade for the truck to leave the property at all. Top: the shop floor after close, the bunk room over it, the wash bay at midnight, the sleepers in the back row — and none of it needing his name, because by then they are not calling her by it. The ladders live on the cast: five men, two meters each (access — what he lets her near; willingness — how far he goes).",
     "charge": "reversal + taboo",
     "why_this_person": {
       "npc_cade": "Cade Vance, 29. Runs the yard, two years older than his stepmother. He never once pretended the marriage was normal, and he decides what she is allowed to touch.",
       "npc_isaac": "Isaac Vance, 24. Bunk room over the shop. He watches and says nothing, and being watched by him was the first thing about this place she liked.",
-      "npc_booth": "Booth Vance, 19. Still in the house. The only one who takes the title at face value and means it \u2014 and undoing that is the whole taboo.",
+      "npc_booth": "Booth Vance, 19. Still in the house. The only one who takes the title at face value and means it — and undoing that is the whole taboo.",
       "npc_sherrod": "Sherrod Vance, 51. Dorn's brother, lives over the office. He arranged this, more or less, and has never said what he thinks he is owed.",
       "npc_tobin": "Tobin Marek, 22. Her brother, and she got him the job. The only person alive who knew her before the title, and the only one who can say out loud what she married into.",
       "npc_dorn": "Dorn Vance, 54. The husband. He is the clock and not a hub: three nights his truck is in the lot and four nights it is not, and the whole week is which."
@@ -20,27 +20,27 @@
       "npc_cade": [
         "tits, ass",
         "cock, cunt",
-        "full \u2014 cum, and he says all of it out loud"
+        "full — cum, and he says all of it out loud"
       ],
       "npc_isaac": [
         "tits",
         "cunt, cock",
-        "full, mostly in narration \u2014 he barely talks"
+        "full, mostly in narration — he barely talks"
       ],
       "npc_booth": [
-        "none \u2014 he cannot make himself say any of it",
+        "none — he cannot make himself say any of it",
         "tits, cock",
         "full, and still calling her Mrs. Vance while he does"
       ],
       "npc_sherrod": [
-        "cunt, tits \u2014 he opens here, he never pretended",
+        "cunt, tits — he opens here, he never pretended",
         "full",
         "full, in front of whoever is standing there"
       ],
       "npc_tobin": [
         "none",
         "none aloud; crude in narration only",
-        "full \u2014 and the only one using her name"
+        "full — and the only one using her name"
       ]
     },
     "last_read_at_release": "0.1"
@@ -48,8 +48,8 @@
   "releases": [
     {
       "version": "0.1",
-      "subject": "The Board \u2014 a diesel yard, five men she outranks on paper, and a book she writes every number into and cannot spend from.",
-      "want_line": "\u00a72 the appetite \u2014 to be wanted by men who have to call her by a title she did not earn. v0.1 builds the surfaces that appetite runs on rather than adding to them; the first release is the one exception to a release-shaped release.",
+      "subject": "The Board — a diesel yard, five men she outranks on paper, and a book she writes every number into and cannot spend from.",
+      "want_line": "§2 the appetite — to be wanted by men who have to call her by a title she did not earn. v0.1 builds the surfaces that appetite runs on rather than adding to them; the first release is the one exception to a release-shaped release.",
       "added": {
         "units": 91,
         "words": 10297,
@@ -57,24 +57,24 @@
         "characters": 6
       },
       "opened": [
-        "Cade's ladder ends on a visible locked door \u2014 `Lock the office from the inside`, shown-locked with the bar stated (want 42).",
+        "Cade's ladder ends on a visible locked door — `Lock the office from the inside`, shown-locked with the bar stated (want 42).",
         "Four more locked doors on the other ladders: Booth's door at want 50, Isaac's corner of the bay at 38, what Sherrod is owed at 34, and the sentence Tobin will not finish at 70.",
-        "`cade_covered` \u2014 miss the Friday count past the grace week and Cade covers it, which is a debt to Cade rather than a game over."
+        "`cade_covered` — miss the Friday count past the grace week and Cade covers it, which is a debt to Cade rather than a game over."
       ],
       "gates": {
         "passed": 41,
         "of": 41
       },
       "lints_shipped_with": {
-        "own_words": "34 words / 81 uses across 9,740 \u2014 0 ambiguous, 0 false friends. The list is now trade vocabulary the fiction builds on contact (diesel, bays, axle, compressor, wrecker, reefer). The regional ones were cut this release: mam, guv'nor, reckons, tyres, torch, tea.",
-        "clock_in_the_prose": "16.5 per 10k against a field median of 0.8. Every line was read against C2's test and the readings were fixed (six of them); everything left is on C2's own exempt list \u2014 opening hours, shift patterns, a timer, backward canon, forward consequence, and the one reading C1 licenses (the starting hour, on the opening's first node). The RATE stays high because the premise is a week with a shape, and that is a judgement being left on purpose, not an unread list.",
-        "named_before_met": "0 characters. 9 locations with no first visit \u2014 the anchor has one and gate F9 only owes the anchor. Owed.",
+        "own_words": "34 words / 81 uses across 9,740 — 0 ambiguous, 0 false friends. The list is now trade vocabulary the fiction builds on contact (diesel, bays, axle, compressor, wrecker, reefer). The regional ones were cut this release: mam, guv'nor, reckons, tyres, torch, tea.",
+        "clock_in_the_prose": "16.5 per 10k against a field median of 0.8. Every line was read against C2's test and the readings were fixed (six of them); everything left is on C2's own exempt list — opening hours, shift patterns, a timer, backward canon, forward consequence, and the one reading C1 licenses (the starting hour, on the opening's first node). The RATE stays high because the premise is a week with a shape, and that is a judgement being left on purpose, not an unread list.",
+        "named_before_met": "0 characters. 9 locations with no first visit — the anchor has one and gate F9 only owes the anchor. Owed.",
         "talk_screens": "13% against a field 29%. Up from every v2 game's 0-5%; not yet at the field.",
-        "act_nodes": "2 of 14 under 3 \u2014 both are BANDED finishers (Cade, Sherrod) whose thinnest renderable band is 6. Read as a false positive on band-folding, not a cold beat.",
+        "act_nodes": "2 of 14 under 3 — both are BANDED finishers (Cade, Sherrod) whose thinnest renderable band is 6. Read as a false positive on band-folding, not a cold beat.",
         "the_ladder": "3 of 6 explicit canvases open at vaginal-or-above, against a field that does it 46% of the time. Inside the field's own rate.",
-        "dispatch_depth": "3 hosts with ONE outcome (act_sleep, buy_propane, buy_drink) \u2014 the roll only decides whether the branch or the room renders. Owed.",
-        "cast_meters": "npc_dorn gates no CANVAS \u2014 deliberate. He is the clock, not a ladder, and his arc is a promise below rather than content here. He does gate his own two quest cards (`npc_dorn.want gte 12`), which is what the lint could not see and what the earlier wording \u2014 \"gates nothing\" \u2014 got wrong. REVIEW.md L2.",
-        "meter_ladder": "median 2 rungs, lowest rung 5 \u2014 the field's own median lowest rung. Fixed this release from 8.",
+        "dispatch_depth": "3 hosts with ONE outcome (act_sleep, buy_propane, buy_drink) — the roll only decides whether the branch or the room renders. Owed.",
+        "cast_meters": "npc_dorn gates no CANVAS — deliberate. He is the clock, not a ladder, and his arc is a promise below rather than content here. He does gate his own two quest cards (`npc_dorn.want gte 12`), which is what the lint could not see and what the earlier wording — \"gates nothing\" — got wrong. REVIEW.md L2.",
+        "meter_ladder": "median 2 rungs, lowest rung 5 — the field's own median lowest rung. Fixed this release from 8.",
         "screen_shape": "median 2 rows at turn one, 13/14 locations carry a random event."
       },
       "shipped": "2026-08-24"
@@ -82,12 +82,12 @@
   ],
   "promises": [
     {
-      "text": "Dorn's own ladder. He carries `want` with two rungs and zero gate sites \u2014 he is the week's clock in v0.1 and not yet a surface. Pay it or cut it.",
+      "text": "Dorn's own ladder. He carries `want` with two rungs and zero gate sites — he is the week's clock in v0.1 and not yet a surface. Pay it or cut it.",
       "made_in": "0.1",
       "paid_in": null
     },
     {
-      "text": "Media. Every explicit surface declares `pool_dir` + `pool` and a search vocabulary; nothing is on disk. The real inventory, walked over every file-shaped string in the TOML: 22 FIXED references, all missing \u2014 14 `locations[].image`, 6 `npcs[].portrait`, 2 `blocks[].props.file` \u2014 plus 34 distinct `pool_dir` directories, none of which exist. (This read \"six external files\" until 2026-08-25; six is the PACKAGER's warning and it counts portraits only, so the 14 location plates and 2 scene stills were invisible to the promise meant to track them. REVIEW.md L1.) find-media's job, not this skill's.",
+      "text": "Media. Every explicit surface declares `pool_dir` + `pool` and a search vocabulary; nothing is on disk. The real inventory, walked over every file-shaped string in the TOML: 22 FIXED references, all missing — 14 `locations[].image`, 6 `npcs[].portrait`, 2 `blocks[].props.file` — plus 34 distinct `pool_dir` directories, none of which exist. (This read \"six external files\" until 2026-08-25; six is the PACKAGER's warning and it counts portraits only, so the 14 location plates and 2 scene stills were invisible to the promise meant to track them. REVIEW.md L1.) find-media's job, not this skill's.",
       "made_in": "0.1",
       "paid_in": null
     },
@@ -107,17 +107,17 @@
       "paid_in": null
     },
     {
-      "text": "The wardrobe is off (`clothing_enabled = false`). Arm it in the release that authors both a catalog and the beat that teaches it \u2014 a live system with nothing in it is a broken link in the home base on turn one.",
+      "text": "The wardrobe is off (`clothing_enabled = false`). Arm it in the release that authors both a catalog and the beat that teaches it — a live system with nothing in it is a broken link in the home base on turn one.",
       "made_in": "0.1",
       "paid_in": null
     },
     {
-      "text": "The top half of four ladders. `board.cast_meters.rungs` declares the full climb and v0.1 builds the lower part of it: cade 82 declared / 42 built, booth 74 / 50, isaac 66 / 38, sherrod 62 / 34. Only tobin (70 / 70) reaches its own top. npc_dorn's second rung at 55 is now read by nothing at all \u2014 the quest cards that carried it were rebuilt on a played-flag in the Q1 repair. Deferring the upper half is correct for a release stream; leaving it unwritten was the defect (the-release.md:107, \"log every promise and pay or cut it\"). Pay it or cut the rungs. REVIEW.md L3.",
+      "text": "The top half of four ladders. `board.cast_meters.rungs` declares the full climb and v0.1 builds the lower part of it: cade 82 declared / 42 built, booth 74 / 50, isaac 66 / 38, sherrod 62 / 34. Only tobin (70 / 70) reaches its own top. npc_dorn's second rung at 55 is now read by nothing at all — the quest cards that carried it were rebuilt on a played-flag in the Q1 repair. Deferring the upper half is correct for a release stream; leaving it unwritten was the defect (the-release.md:107, \"log every promise and pay or cut it\"). Pay it or cut the rungs. REVIEW.md L3.",
       "made_in": "0.1",
       "paid_in": null
     },
     {
-      "text": "`standing` is written 25 times across 23 canvases and READ four times, all four inside `work_counter` \u2014 a correctly-banded three-tier ladder that works, and the game's only customer for the meter. WANT.md \u00a73 says it is \"read constantly\" and names three examples: the counter (built), the bank clerk's tone (zero reads in `the_bank`) and what the bar already knows (zero reads in `the_bar`). Field figure for comparison: reputation is read at 644 sites across the corpus. Adding reads to rooms that already exist is exactly what the fill promise describes; this names the first two. REVIEW.md S1/S2.",
+      "text": "`standing` is written 25 times across 23 canvases and READ four times, all four inside `work_counter` — a correctly-banded three-tier ladder that works, and the game's only customer for the meter. WANT.md §3 says it is \"read constantly\" and names three examples: the counter (built), the bank clerk's tone (zero reads in `the_bank`) and what the bar already knows (zero reads in `the_bar`). Field figure for comparison: reputation is read at 644 sites across the corpus. Adding reads to rooms that already exist is exactly what the fill promise describes; this names the first two. REVIEW.md S1/S2.",
       "made_in": "0.1",
       "paid_in": null
     }
@@ -129,7 +129,7 @@
     },
     {
       "at": "want",
-      "note": "Added npc_tobin (her brother) to the approved pitch, which was step-family only. Carries blood, gives the Vances someone to be jealous of, and inverts the roster's axis \u2014 the others climb toward taking her, he climbs toward being the one who never had to call her ma'am."
+      "note": "Added npc_tobin (her brother) to the approved pitch, which was step-family only. Carries blood, gives the Vances someone to be jealous of, and inverts the roster's axis — the others climb toward taking her, he climbs toward being the one who never had to call her ma'am."
     },
     {
       "at": "want",
@@ -161,15 +161,15 @@
     },
     {
       "at": "0.1",
-      "note": "TWO SCHEMA REQUIREMENTS THE SKILL'S REFERENCES DO NOT CARRY, both found by the build refusing and neither documented in engine.md: (1) every [[canvases.nodes]] needs a `name`; (2) every [[quest_cards]] needs a `when`, INCLUDING a story-goal card. the-first-hour.md F8 says story cards are 'never gated this way' and the importer rejects one with no `when` \u2014 both are true at once, so the story cards carry a `when` on a flag the boot sets, live from click one."
+      "note": "TWO SCHEMA REQUIREMENTS THE SKILL'S REFERENCES DO NOT CARRY, both found by the build refusing and neither documented in engine.md: (1) every [[canvases.nodes]] needs a `name`; (2) every [[quest_cards]] needs a `when`, INCLUDING a story-goal card. the-first-hour.md F8 says story cards are 'never gated this way' and the importer rejects one with no `when` — both are true at once, so the story cards carry a `when` on a flag the boot sets, live from click one."
     },
     {
       "at": "0.1",
-      "note": "Canvas `priority` is read off the TRIGGER (template_import.py:1914, trig_def.get('priority')), never off the canvas. Every priority in this game was written at canvas level first and was being silently discarded to 0 \u2014 valid TOML, green build, no warning. Same failure family as `op = \"subtract\"`."
+      "note": "Canvas `priority` is read off the TRIGGER (template_import.py:1914, trig_def.get('priority')), never off the canvas. Every priority in this game was written at canvas level first and was being silently discarded to 0 — valid TOML, green build, no warning. Same failure family as `op = \"subtract\"`."
     },
     {
       "at": "0.1",
-      "note": "Gate 26 walks the ROUTE INTO a canvas, not the price on the choice inside it. A located repeatable is entered by walking in, so `costs` on its choices brakes nothing \u2014 the brake has to be `max_triggers_per_day` or `costs` on the TRIGGER. This is the-economy R5's struck exemption in a new coat, and it caught act_wash_bay, the four purchase surfaces, every loop entry and every random event."
+      "note": "Gate 26 walks the ROUTE INTO a canvas, not the price on the choice inside it. A located repeatable is entered by walking in, so `costs` on its choices brakes nothing — the brake has to be `max_triggers_per_day` or `costs` on the TRIGGER. This is the-economy R5's struck exemption in a new coat, and it caught act_wash_bay, the four purchase surfaces, every loop entry and every random event."
     },
     {
       "at": "0.1",
@@ -177,7 +177,7 @@
     },
     {
       "at": "0.1",
-      "note": "The arousal-gated FINISH link appeared to be missing from every act menu under a live probe. It was the moment-commit trap (engine.md \u00a724 class): variables set from outside a passage transition are discarded by Engine.play. With setup.commitMoment() every menu renders its full ladder. Recorded because it is indistinguishable from a real defect and cost a probe to rule out."
+      "note": "The arousal-gated FINISH link appeared to be missing from every act menu under a live probe. It was the moment-commit trap (engine.md §24 class): variables set from outside a passage transition are discarded by Engine.play. With setup.commitMoment() every menu renders its full ladder. Recorded because it is indistinguishable from a real defect and cost a probe to rule out."
     },
     {
       "at": "review",
@@ -185,7 +185,7 @@
     },
     {
       "at": "board",
-      "note": "`player.loop_act` is ONE trait shared by all six loops rather than one per loop. Kept shared \u2014 the five NPC loops each set it at entry and clear it on the finish exit, so the bands read only what the live loop wrote. `loop_solo` was the hole: it set `loop_stage` and never `loop_act`, which is safe only while its finisher has no bands, and adding bands there is exactly what the review's \u00a74 asks for. Now sets 1 at entry and 0 on finish like the other five. REVIEW.md T1."
+      "note": "`player.loop_act` is ONE trait shared by all six loops rather than one per loop. Kept shared — the five NPC loops each set it at entry and clear it on the finish exit, so the bands read only what the live loop wrote. `loop_solo` was the hole: it set `loop_stage` and never `loop_act`, which is safe only while its finisher has no bands, and adding bands there is exactly what the review's §4 asks for. Now sets 1 at entry and 0 on finish like the other five. REVIEW.md T1."
     }
   ],
   "board": {
@@ -246,7 +246,7 @@
         "id": "the_yard",
         "job": "The ground the whole world sits on - gravel between the house and the shop, opening onto the county road. Where anyone can see anything.",
         "anchor": false,
-        "fill": 300,
+        "fill": 406,
         "has_cycling_pool": true,
         "serves": {
           "needs": [],
@@ -261,7 +261,7 @@
         "id": "the_office",
         "job": "She keeps the books here because Dorn told her to. Cade signs, drivers come to the counter, and it sits between the house and the shop - the one room both worlds touch.",
         "anchor": true,
-        "fill": 3000,
+        "fill": 3845,
         "has_cycling_pool": true,
         "serves": {
           "needs": [],
@@ -334,7 +334,7 @@
         "id": "the_back_row",
         "job": "Where overnight trucks park, each with a bed behind the seats. The far end of the property and the last place anybody looks.",
         "anchor": false,
-        "fill": 1000,
+        "fill": 1274,
         "has_cycling_pool": true,
         "serves": {
           "needs": [],
@@ -345,7 +345,7 @@
             "npc_tobin"
           ]
         },
-        "fill_finished": 1200
+        "fill_finished": 1274
       },
       {
         "id": "sherrods_room",
@@ -414,7 +414,7 @@
         "id": "booths_room",
         "job": "The youngest one's room, and the only one in the house who still means the title.",
         "anchor": false,
-        "fill": 600,
+        "fill": 877,
         "has_cycling_pool": true,
         "serves": {
           "needs": [],
@@ -423,39 +423,39 @@
             "npc_booth"
           ]
         },
-        "fill_finished": 800
+        "fill_finished": 877
       },
       {
         "id": "kerr_crossing",
         "job": "The crossroads twenty minutes down the road. Pumps, a light, and the only place on earth nobody here owns.",
         "anchor": false,
-        "fill": 300,
+        "fill": 395,
         "has_cycling_pool": false,
         "serves": {
           "needs": [],
           "work": [],
           "people": []
         },
-        "fill_finished": 300
+        "fill_finished": 395
       },
       {
         "id": "the_bank",
         "job": "Where the account she is not on lives.",
         "anchor": false,
-        "fill": 300,
+        "fill": 394,
         "has_cycling_pool": false,
         "serves": {
           "needs": [],
           "work": [],
           "people": []
         },
-        "fill_finished": 200
+        "fill_finished": 394
       },
       {
         "id": "the_bar",
         "job": "The one room in the world where nobody calls her Mrs. Vance, and the men from the yard drink here too.",
         "anchor": false,
-        "fill": 400,
+        "fill": 537,
         "has_cycling_pool": true,
         "serves": {
           "needs": [],
@@ -464,7 +464,7 @@
             "npc_cade"
           ]
         },
-        "fill_finished": 400
+        "fill_finished": 537
       }
     ],
     "needs": [
@@ -478,7 +478,7 @@
       {
         "key": "clean",
         "falls": "18 a day, 25 on shop work, 30 on a sex act",
-        "fills": "the_bathroom - Wash - 25 min, free \u00b7 the_wash_bay - Hose off - 15 min, $2 supplies, and the bay has no door",
+        "fills": "the_bathroom - Wash - 25 min, free · the_wash_bay - Hose off - 15 min, $2 supplies, and the bay has no door",
         "costs": "$2 in the bay, nothing in the house",
         "shuts": "clean >= 40 to stand the counter when a driver comes in, and clean >= 35 to take the truck into Kerr Crossing"
       }

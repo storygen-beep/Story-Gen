@@ -1539,6 +1539,360 @@ time_progression_minutes = 10
 flagEffects = [ { targetType = "player", flag = "met_sherrod", op = "set" } ]
 effects     = [ { targetType = "npc", npcId = "npc_sherrod", trait = "want", op = "add", value = 3 } ]
 
+
+# ═════════════════════════════════════════════════════════════════════════════
+# FIRST VISITS — the nine locations that had none.  (REVIEW.md M1 + M2)
+#
+# A description renders under the room title on EVERY visit, so it is wallpaper.
+# the-first-hour.md F9 wants the moment of arriving: the first time she walks in,
+# the game says what kind of place this is and what happens here. After that the
+# name is enough.
+#
+# MECHANISM — no engine work.  A non-repeatable canvas bound to a location
+# auto-fires on first entry and never again: selectAutoFireCanvasForLocation
+# skips isRepeatable / random / substitution_only and takes the highest-priority
+# valid candidate, and it is consulted BEFORE checkRandomEncounters, so an
+# arrival wins over an ambient on that entry (v2.py:4923 region).
+#
+# ⚠️ THREE CONSTRAINTS, each from a check that currently passes.
+#    1. No cast member is NAMED in any of these. Every one of the nine is
+#       reachable before at least one meeting can fire, and `lint · named before
+#       met` reads 0 today. Roles only — the-first-hour.md F7, role before name.
+#    2. No NUMBERED hour. `lint · the clock in the prose` is already the worst
+#       number on the board at 16.5 per 10k, 21x the field. Bare "night" and
+#       "morning" are safe; the lint needs a numeral or a spelled-out hour
+#       (gates.py:3042-3072).
+#    3. priority = 80, matching first_office. 100 and 90 are the opening at
+#       your_room and must stay in front of everything.
+#
+# ORDER OF THE NINE below is the lint's own — heaviest prose first. The Yard is
+# last by weight (253 words) and goes in anyway: it is the root of the map and
+# the screen crossed more than any other, and its beat is the only place the
+# shape of the property is ever stated to the player.
+# ═════════════════════════════════════════════════════════════════════════════
+
+
+[[canvases]]
+id       = "first_back_row"
+name     = "Six spaces and a hedge"
+
+[canvases.trigger]
+priority      = 80
+location      = "the_back_row"
+is_repeatable = false
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "back_row_seen", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "image", props = { file = "scenes/first_back_row_t1.jpg", description = "A row of parked sleeper-cab lorries at the dark end of a yard, angled into six spaces behind a hedge.", search_queries = ["truck stop overnight parking sleeper cabs dark row", "lorries parked overnight behind hedge yard night"] } },
+  { type = "paragraph", content = "Six spaces, angled off the end of the yard, and they are not the yard's. Drivers who cannot make the next leg pull in and sleep in the bed behind the seats. Nobody books in and nobody pays." },
+  { type = "paragraph", content = "Your husband lets them because a man who has slept in your row buys his diesel off your pumps. Somebody walks it before the lights go off, counts the cabs, and writes the number in the book you keep." },
+  { type = "paragraph", content = "The pole light stops at the skip. Past that it is hedge, and the road behind the hedge, and not one window in the house that looks this way. It is the last place on the property anybody looks." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "You lost, love?" },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Vance's, is it? Tell him the water is still off in the washroom. Been off a fortnight." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Six men asleep forty yards from the back step, and not one of them knows your name or has any reason to learn it." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Count the cabs."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_back_row"
+time_progression_minutes = 5
+flagEffects = [ { targetType = "player", flag = "back_row_seen", op = "set" } ]
+
+
+[[canvases]]
+id       = "first_booths_room"
+name     = "Over the kitchen"
+
+[canvases.trigger]
+priority      = 80
+location      = "booths_room"
+is_repeatable = false
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "booths_room_seen", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "image", props = { file = "scenes/first_booths_room_t1.jpg", description = "A small warm box bedroom over a kitchen, television on a chair, wardrobe door hanging open.", search_queries = ["small messy teenage box bedroom television on chair", "cramped upstairs bedroom wardrobe door open warm light"] } },
+  { type = "paragraph", content = "The smallest bedroom in the house, over the kitchen, and the water heater backs onto its wall. That makes it the warmest room in the building and the only one nobody has ever had to fight for." },
+  { type = "paragraph", content = "The door stands open more than it is shut, which in this house is not the same thing as being welcome. It is a nineteen-year-old with nothing at all to be late for." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "The only person on this property with less to do than you, and he did not have to marry in to get it." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave the door as you found it."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "booths_room"
+time_progression_minutes = 5
+flagEffects = [ { targetType = "player", flag = "booths_room_seen", op = "set" } ]
+
+
+[[canvases]]
+id       = "first_bunk_room"
+name     = "Up the inside stairs"
+
+[canvases.trigger]
+priority      = 80
+location      = "the_bunk_room"
+is_repeatable = false
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "bunk_room_seen", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "image", props = { file = "scenes/first_bunk_room_t1.jpg", description = "A two-bed bunk room over a workshop, plywood partition stopping short of the ceiling, window down onto a yard.", search_queries = ["workshop bunk room two beds plywood partition", "mechanic sleeping quarters above garage window over yard"] } },
+  { type = "paragraph", content = "Two beds over the shop, up the inside stairs, because a yard that runs a wrecker needs men it can wake without ringing round. This is not a bedroom in a house. It is part of the shop with beds in it." },
+  { type = "paragraph", content = "A plywood partition stops short of the ceiling, so it divides the room without ever closing it. The radio stays on whether anybody is listening. The floor is the shop's ceiling and the compressor comes up through your boots." },
+  { type = "paragraph", content = "There is no lock on the door and nobody has ever asked for one, because the men who sleep up here are not the ones a lock would be for." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "You came up once with towels and whoever was talking stopped, and did not start again until you were back down the stairs." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go back down."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_bunk_room"
+time_progression_minutes = 5
+flagEffects = [ { targetType = "player", flag = "bunk_room_seen", op = "set" } ]
+
+
+[[canvases]]
+id       = "first_sherrods_room"
+name     = "One room and a sink"
+
+[canvases.trigger]
+priority      = 80
+location      = "sherrods_room"
+is_repeatable = false
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "sherrods_room_seen", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "image", props = { file = "scenes/first_sherrods_room_t1.jpg", description = "A single bedsit room over an office with a sink in the corner, bed made, reached by external steel stairs.", search_queries = ["single room bedsit above garage office sink corner", "spartan lived-in room made bed one window steel stairs outside"] } },
+  { type = "paragraph", content = "One room and a sink over the office, with its own stairs bolted to the gable end, so whoever lives in it never has to come through the house to get to his bed." },
+  { type = "paragraph", content = "It has been somebody's longer than you have been a Vance. The bed is made. There is nothing in it on loan and nothing in it that says he is waiting on somewhere better coming up." },
+  { type = "paragraph", content = "The stairs outside are steel and they ring. You cannot go up them quietly and neither can anybody else, which is either a fault nobody has fixed or the entire point of them." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Forty feet from the office window, and the light in it is on more nights than it is off." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the stairs back down."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "sherrods_room"
+time_progression_minutes = 5
+flagEffects = [ { targetType = "player", flag = "sherrods_room_seen", op = "set" } ]
+
+
+[[canvases]]
+id       = "first_bar"
+name     = "The other corner"
+
+[canvases.trigger]
+priority      = 80
+location      = "the_bar"
+is_repeatable = false
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "bar_seen", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "image", props = { file = "scenes/first_bar_t1.jpg", description = "A dim rural roadside bar, unused pool table, a row of stools along the back where working men sit.", search_queries = ["dim small town roadside bar pool table stools", "rural american bar interior afternoon working men at counter"] } },
+  { type = "paragraph", content = "The bar on the corner opposite the bank, and it is where the yard drinks. Twenty minutes of county road from your own gate, which sounds like distance right up until you count who is standing in it." },
+  { type = "paragraph", content = "Everybody in here either works for your husband or sells to him. There is no version of this room in which what you do in it does not get back across those twenty minutes before you do." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "You'll be the wife, then." },
+  { type = "paragraph", content = "The man behind the bar says it without looking up from the glass he is doing, and it is not a question, and nobody in the room turns round because nobody in the room needed telling." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "What'll it be. It goes on the yard's tab either way." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "The first place you have stood in since the wedding that is not his, and it is still his." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Find the end of the bar."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_bar"
+time_progression_minutes = 5
+flagEffects = [ { targetType = "player", flag = "bar_seen", op = "set" } ]
+
+
+[[canvases]]
+id       = "first_bathroom"
+name     = "End of the landing"
+
+[canvases.trigger]
+priority      = 80
+location      = "the_bathroom"
+is_repeatable = false
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "bathroom_seen", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "image", props = { file = "scenes/first_bathroom_t1.jpg", description = "A plain shared family bathroom at the end of an upstairs landing, old bolt on the door that no longer catches.", search_queries = ["plain shared family bathroom upstairs landing door bolt", "worn white bathroom old house single basin bath door ajar"] } },
+  { type = "paragraph", content = "One bathroom at the end of the landing, for five adults, and there is no second one anywhere in this house. Everything that happens in here happens on somebody else's schedule as much as your own." },
+  { type = "paragraph", content = "The bolt does not sit in its keeper any more. It slides across, it touches the plate, and it holds nothing at all. Everybody in the house knows that, and everybody in the house knocks anyway. Most of the time." },
+  { type = "paragraph", content = "The hot is one tank and it does not care who is third. The landing outside is the route between every bedroom up here, so nobody gets to their own door without passing this one." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "A door that shuts and does not lock, in a house with four men in it." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Try the bolt anyway."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_bathroom"
+time_progression_minutes = 5
+flagEffects = [ { targetType = "player", flag = "bathroom_seen", op = "set" } ]
+
+
+[[canvases]]
+id       = "first_kerr_crossing"
+name     = "Four ways"
+
+[canvases.trigger]
+priority      = 80
+location      = "kerr_crossing"
+is_repeatable = false
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "crossing_seen", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "image", props = { file = "scenes/first_kerr_crossing_t1.jpg", description = "A rural four-way crossroads with two fuel pumps under a lit canopy, a small bank on one corner and a bar on the other.", search_queries = ["rural crossroads gas station canopy two pumps small town", "country four way junction flashing amber light storefronts"] } },
+  { type = "paragraph", content = "Twenty minutes of county road and then four ways: two pumps under a canopy, a bank on one corner, a bar on the other, and a light that flashes amber instead of ever changing." },
+  { type = "paragraph", content = "This is the whole of off-the-property. There is no town past it, there is no second option, and there is no errand you can invent for yourself that does not finish up standing under that canopy." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Fill her up? Vance's truck, that one." },
+  { type = "paragraph", content = "He is already unhooking the nozzle before you have the window down, and he has not looked at you once, only at the door panel." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Tell them the account's a fortnight behind. No rush. Just tell them I said." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Twenty minutes is not far enough to be anywhere, and it is the furthest you have been in eleven weeks." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stand under the canopy a minute."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "kerr_crossing"
+time_progression_minutes = 5
+flagEffects = [ { targetType = "player", flag = "crossing_seen", op = "set" } ]
+
+
+[[canvases]]
+id       = "first_bank"
+name     = "One counter"
+
+[canvases.trigger]
+priority      = 80
+location      = "the_bank"
+is_repeatable = false
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "bank_seen", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "image", props = { file = "scenes/first_bank_t1.jpg", description = "A tiny rural branch bank with a single counter, two chairs against the wall, one teller behind glass.", search_queries = ["tiny small town bank branch single teller counter two chairs", "rural bank interior one window paying in slip counter"] } },
+  { type = "paragraph", content = "One counter, two chairs against the wall, and a woman behind it who has been handling the Vance account since a long time before there was a Mrs. Vance to hand it over with." },
+  { type = "paragraph", content = "You can pay in. You can put the week in a sealed envelope, slide it under the glass and take a stamped slip back. You cannot ask what the balance is, because your name is not one of the two on the mandate." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Paying in? Lovely. Just the slip, then, my love." },
+  { type = "paragraph", content = "She has it stamped and back under the glass before you have finished getting the envelope out of your coat." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "And I can't tell you the balance, before you ask. It's not me being awkward. It's whose name is on it." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Eleven weeks married to the account and not on it." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the slip."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_bank"
+time_progression_minutes = 5
+flagEffects = [ { targetType = "player", flag = "bank_seen", op = "set" } ]
+
+
+[[canvases]]
+id       = "first_yard"
+name     = "Everything opens onto this"
+
+[canvases.trigger]
+priority      = 80
+location      = "the_yard"
+is_repeatable = false
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "yard_seen", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "image", props = { file = "scenes/first_yard_t1.jpg", description = "A graded gravel yard between a farmhouse and a four-bay truck workshop, roller door up, pole light on a mast, gate to a county road.", search_queries = ["gravel yard between house and truck workshop roller door", "rural diesel repair yard pole light gate county road"] } },
+  { type = "paragraph", content = "Gravel between the house and the shop, wide enough to turn an eighteen-wheeler on and graded so the water runs off toward the road. This is not a route between two places. It is the only route between all of them." },
+  { type = "paragraph", content = "The house is one side, kitchen door straight onto the gravel. The four-bay shop is the other, under the roller door. Past the skip the overnight row starts, and the gate at the far end lets onto the county road." },
+  { type = "paragraph", content = "There is no path around it and no door between any two buildings that does not come out here first. Whatever you are carrying from one to the other, you carry it across open gravel under a pole light." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Whoever is in the shop doorway can see the kitchen door. Whoever is at the kitchen window can see the shop. There is nowhere on this property to be that is in between." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Cross it."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_yard"
+time_progression_minutes = 5
+flagEffects = [ { targetType = "player", flag = "yard_seen", op = "set" } ]
+
 # ══════════════════════════════════════════════════════════════════
 # Phase: 3_activities.toml
 # ══════════════════════════════════════════════════════════════════
@@ -2501,7 +2855,12 @@ id = "entry"
 name = "Entry"
 blocks = [
   { type = "paragraph", content = "He puts the bar across the office door himself, and then the blind down over the wired glass, and he does both without hurrying and without looking at you while he does them." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Right. Come here, Mrs. Vance." },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Right. Come here, Mrs. Vance." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Door is done. Come here and stop looking at it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Blind is down. Nobody is coming. Come here." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Bar is across and the blind is down and the drawer is counted. Come here, Mrs. Vance." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -2532,8 +2891,17 @@ name = "Your hand"
 blocks = [
   { type = "video", props = { pool_dir = "sex/cade_hand_t5", pool = 4, description = "A woman working a man's cock with her hand at a desk.", search_queries = ["handjob desk office pov", "woman stroking cock hand close"] } },
   { type = "paragraph", content = "You get his belt open standing over him and pull his cock out and it is already hard against your palm. You work him slow with your fist closed under the head, and his hips come up off the chair to meet it." },
-  { type = "paragraph", content = "He puts his hand up under your shirt and takes a whole tit in it, thumb dragging over the nipple. Your cunt clenches every time he does it. His cock is leaking across your knuckles." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Slower. You're not doing the books now." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He puts his hand up under your shirt and takes a whole tit in it, thumb dragging over the nipple. Your cunt clenches every time he does it. His cock is leaking across your knuckles." },
+    { type = "paragraph", content = "He gets his hand under your shirt and pulls the bra down off one tit so he can have the nipple between two knuckles. Your cunt is soaking through your jeans. His cock jumps in your fist every time he squeezes." },
+    { type = "paragraph", content = "His free hand goes down the back of your jeans and two fingers find your cunt from behind and stay there, not moving, while you work his cock. Your tits are against the side of his head." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Slower. You're not doing the books now." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Slower than that. You have got all night and so have I." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "That is it. Keep your hand like that and do not speed up." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Both hands. One on it and one on my belt so I know where you are." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -2597,8 +2965,17 @@ name = "Your mouth"
 blocks = [
   { type = "video", props = { pool_dir = "sex/cade_mouth_t5", pool = 4, description = "A woman on her knees sucking a man's cock beside an office chair.", search_queries = ["blowjob on knees office chair", "woman sucking cock kneeling close"] } },
   { type = "paragraph", content = "You take his cock in your mouth and go down it until it is against the back of your throat, and he lets you set it for about four strokes before his hand goes into your hair and he stops letting you." },
-  { type = "paragraph", content = "He fucks up into your mouth in short shoves and you suck him through every one, spit running off your chin onto your own tits. Your cunt is soaking and you have not been touched once." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "There. That's it. All the way down, Mrs. Vance." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He fucks up into your mouth in short shoves and you suck him through every one, spit running off your chin onto your own tits. Your cunt is soaking and you have not been touched once." },
+    { type = "paragraph", content = "He holds you down on his cock until your nose is against him, then lets you up for one breath and does it again. Spit strings off your tits. Your cunt clenches every time he holds you there." },
+    { type = "paragraph", content = "You take him out of your mouth and drag your tongue up the underside of his cock, then take him back down. Your own hand is inside your jeans, working your clit while you suck him." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "There. That's it. All the way down, Mrs. Vance." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "All the way. You can take it, you have been taking it a fortnight." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Look up at me while you do it. That is it. Do not stop." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Take a breath through your nose and go back down. You know how far it goes." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -2662,8 +3039,17 @@ name = "The desk"
 blocks = [
   { type = "video", props = { pool_dir = "sex/cade_desk_t5", pool = 4, description = "A woman bent over an office desk being fucked from behind.", search_queries = ["bent over desk fucked from behind office", "woman bent over table sex behind"] } },
   { type = "paragraph", content = "He clears the spike off the desk with his forearm and puts you face down on the book, and gets your jeans down past your ass in one pull. Then he pushes his cock into your cunt in one long shove and holds it there." },
-  { type = "paragraph", content = "He fucks you against the edge of the desk with a hand flat between your shoulder blades, and every thrust drives your tits across your own handwriting. You are clenching around him and you cannot stop doing it." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Two sixty. That's what's in the book. Say it." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He fucks you against the edge of the desk with a hand flat between your shoulder blades, and every thrust drives your tits across your own handwriting. You are clenching around him and you cannot stop doing it." },
+    { type = "paragraph", content = "He fucks you flat on the desk, one hand between your shoulder blades, the other dragging your jeans off an ankle. Your tits skid across the page and his cock is all the way in you on every shove." },
+    { type = "paragraph", content = "He pulls nearly all the way out and pushes back into your cunt slowly, twice, so you feel the whole length of his cock, and then stops being slow. Your tits are flat on the book and you are clenching round him." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Two sixty. That's what's in the book. Say it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Whose handwriting are you lying on. Say the number." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Two sixty in the drawer by Friday. Say it while I am in you." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "That is your writing under your face. Read me the last line of it." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -2719,9 +3105,26 @@ id = "finish"
 name = "Finish"
 blocks = [
   { type = "video", props = { pool_dir = "sex/cade_finish_t5", pool = 4, description = "A man finishing.", search_queries = ["cumshot close finish", "man cumming pov close"] } },
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "loop_act", operator = "eq", value = 1 } ] }, blocks = [ { type = "paragraph", content = "His cock goes rigid in your fist and he cums up over your knuckles and your wrist in three long pulls, and you keep stroking him through all of it until he catches your hand and stops you." } ] },
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "loop_act", operator = "eq", value = 2 } ] }, blocks = [ { type = "paragraph", content = "He holds your head down and cums in your mouth, and you take it and swallow with his cock still on your tongue, and he does not let go of your hair until he is finished." } ] },
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "loop_act", operator = "eq", value = 3 } ] }, blocks = [ { type = "paragraph", content = "He drives all the way in and cums in your cunt with his hand still flat on your back, and you feel every pulse of it, and he stays inside you until he has gone soft." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "loop_act", operator = "eq", value = 1 } ] }, blocks = [ { type = "block_pool", blocks = [
+    { type = "paragraph", content = "His cock goes rigid in your fist and he cums up over your knuckles and your wrist in three long pulls, and you keep stroking him through all of it until he catches your hand and stops you." },
+    { type = "paragraph", content = "He cums over your fist and it runs down between your fingers onto the book, and you keep working his cock until he takes hold of your wrist and stops you. Your cunt is still clenching on nothing." },
+    { type = "paragraph", content = "His cock kicks in your hand and he cums up your forearm in three pulls, and you do not stop stroking, and he lets you keep going until it is too much and he pulls your hand off his cock." },
+  ] } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "loop_act", operator = "eq", value = 2 } ] }, blocks = [ { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He holds your head down and cums in your mouth, and you take it and swallow with his cock still on your tongue, and he does not let go of your hair until he is finished." },
+    { type = "paragraph", content = "He holds you down and cums with his cock against the back of your throat, and you swallow round it because there is nowhere else for it to go. Your cunt is soaking and nobody has touched it." },
+    { type = "paragraph", content = "He pulls out and cums across your mouth and chin and down onto your tits, still holding your hair, and then puts his cock back between your lips to be cleaned off." },
+  ] } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "loop_act", operator = "eq", value = 3 } ] }, blocks = [ { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He drives all the way in and cums in your cunt with his hand still flat on your back, and you feel every pulse of it, and he stays inside you until he has gone soft." },
+    { type = "paragraph", content = "He drives in to the root and cums in your cunt, and his hand comes off your back and takes a fistful of your hair instead, and holds you there with your tits flat on the book until he is done pulsing." },
+    { type = "paragraph", content = "He cums inside you with his cock all the way in and you feel every pulse of it against the front wall of your cunt. He stays in you, going soft, and neither of you says anything at all." },
+  ] } ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Right. Get yourself straight and get that drawer counted." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Same as any other night. Book on the desk before you go up." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "You will do that again on Friday and you will not say a word about it." },
+  ] },
   { type = "thought_bubble", props = { speaker = "player" }, content = "The book is under you and it is your handwriting, and that is the part you will think about at four in the morning." },
 ]
 
@@ -2777,9 +3180,17 @@ name = "The act"
 blocks = [
   { type = "video", props = { pool_dir = "sex/isaac_bay_t5", pool = 4, description = "A soaked woman fucked against a wall in a wash bay.", search_queries = ["wet woman fucked against wall standing", "soaked clothes sex against wall"] } },
   { type = "paragraph", content = "He gets your soaked jeans down to your thighs and his fingers straight into your cunt, two of them, and you are already wet enough that they go in to the knuckle first go. Your head goes back against the concrete." },
-  { type = "paragraph", content = "Then his cock instead, pushed up into you with your back on the wall and one of your legs hooked over his arm, and he fucks you in silence with the hose still running across the floor at both your feet." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "Then his cock instead, pushed up into you with your back on the wall and one of your legs hooked over his arm, and he fucks you in silence with the hose still running across the floor at both your feet." },
+    { type = "paragraph", content = "Then his cock, pushed up into your cunt with your back flat against the wall and one leg hooked over his arm, and he fucks you without a word while the water runs past both your feet." },
+    { type = "paragraph", content = "He turns you round, puts your palms flat on the wall and fucks you from behind with a hand spread on your hip, all the way into your cunt on every shove. Your tits drag on the wet concrete." },
+  ] },
   { type = "paragraph", content = "He has your shirt shoved up over your tits and he watches them move the whole time. He does not once look at your face." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "Don't stop." },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "Don't stop." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "Don't." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "Stay there." },
+  ] },
   { type = "paragraph", content = "Two words. It is the most he has said to you in eleven weeks and he says it with his cock all the way up inside you." },
 ]
 
@@ -2829,7 +3240,11 @@ id = "finish"
 name = "Finish"
 blocks = [
   { type = "video", props = { pool_dir = "sex/isaac_finish_t5", pool = 3, description = "A man finishing inside.", search_queries = ["creampie close finish", "man cumming inside pov"] } },
-  { type = "paragraph", content = "He shoves all the way up into you and holds it there. His cock jerks inside your cunt and he cums without making one sound, forehead down hard against your collarbone. You feel every pulse of it go into you. His hand is still clamped over one of your tits and it stays there while his whole body locks up." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He shoves all the way up into you and holds it there. His cock jerks inside your cunt and he cums without making one sound, forehead down hard against your collarbone. You feel every pulse of it go into you. His hand is still clamped over one of your tits and it stays there while his whole body locks up." },
+    { type = "paragraph", content = "He shoves in to the root and holds. His cock jerks in your cunt and he cums without a sound, teeth set, forehead hard against your collarbone. His hand stays clamped over one tit the whole time his body is locked up." },
+    { type = "paragraph", content = "He pulls out at the last second and cums up your belly and your tits instead, silently, still holding you against the wall, and then puts his cock away and picks the hose back up like nothing happened." },
+  ] },
   { type = "thought_bubble", props = { speaker = "player" }, content = "Forty words in eleven weeks, and none of them just now either." },
 ]
 
@@ -2865,7 +3280,12 @@ id = "entry"
 name = "Entry"
 blocks = [
   { type = "paragraph", content = "He does not get out of the chair. He turns it a quarter toward you and puts one boot up on the drawer he keeps locked, and tells you what he thinks he is owed in the same voice he reads a job sheet in." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "Nine months I've said nothing, girl. Get it out and I'll not say anything after, either." },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "Nine months I've said nothing, girl. Get it out and I'll not say anything after, either." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "Sit down or kneel down, girl, but pick one. I have been patient since the wedding." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "You have worked out what this is. Get it out and we will neither of us mention it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "Shut the door behind you first, girl. I am not going to be the one who explains it." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -2886,8 +3306,17 @@ name = "The act"
 blocks = [
   { type = "video", props = { pool_dir = "sex/sherrod_office_t5", pool = 4, description = "A woman kneeling to suck an older man in a chair.", search_queries = ["woman kneeling blowjob older man chair", "office chair blowjob pov older"] } },
   { type = "paragraph", content = "You get his belt open and his cock out of it and it is thick and already hard and he does not help you with any of it. You take it in your mouth off your knees on the office floor." },
-  { type = "paragraph", content = "He talks while you suck him — about the yard, about his brother, about what a thing is worth — and every time you go all the way down on his cock he stops mid-sentence and then carries on from where he was." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He talks while you suck him — about the yard, about his brother, about what a thing is worth — and every time you go all the way down on his cock he stops mid-sentence and then carries on from where he was." },
+    { type = "paragraph", content = "He talks the whole time you have his cock in your mouth — the yard, his brother, what a thing is worth — and only stops when you suck him all the way down. Your cunt aches and he has not touched it once." },
+    { type = "paragraph", content = "He takes hold of your jaw and moves your head where he wants it, still talking, and you keep his cock in your mouth and let him do it. Your tits are out of your shirt and your nipples are hard and he has not looked at them yet." },
+  ] },
   { type = "paragraph", content = "He gets a hand into the front of your shirt and pulls it open to get at your tits, and works one nipple between two fingers, hard enough that your cunt tightens on it." },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "Your husband bought that yard off his father with money he did not have. Did he tell you that one? No. Keep going." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "Twenty-two years I have run his books before you ever saw a drawer. Do not stop on my account, girl." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "There is not a thing on this property that is not owed to somebody. Including you. All the way down." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -2938,8 +3367,22 @@ id = "finish"
 name = "Finish"
 blocks = [
   { type = "video", props = { pool_dir = "sex/sherrod_finish_t5", pool = 3, description = "A man finishing in a woman's mouth.", search_queries = ["cum in mouth close swallow", "cumshot mouth pov close"] } },
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "loop_act", operator = "eq", value = 1 } ] }, blocks = [ { type = "paragraph", content = "He puts a hand on the back of your neck and cums in your mouth without breaking off what he is saying, and you swallow it with his cock still against your tongue and his sentence still running." } ] },
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "loop_act", operator = "eq", value = 2 } ] }, blocks = [ { type = "paragraph", content = "You take his cock all the way down sitting on him and he cums in your cunt with both hands on your ass, holding you down on it, and he keeps you there until the chair stops moving." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "loop_act", operator = "eq", value = 1 } ] }, blocks = [ { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He puts a hand on the back of your neck and cums in your mouth without breaking off what he is saying, and you swallow it with his cock still against your tongue and his sentence still running." },
+    { type = "paragraph", content = "He puts a hand on the back of your neck and cums in your mouth mid-sentence and does not stop the sentence, and you swallow round his cock with your tits still out and hear him finish the thought about the yard." },
+    { type = "paragraph", content = "He holds your head still and cums on your tongue, talking, and when he is done he tells you to swallow it and waits, with his cock still in your mouth, until you have." },
+  ] } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "loop_act", operator = "eq", value = 2 } ] }, blocks = [ { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You take his cock all the way down sitting on him and he cums in your cunt with both hands on your ass, holding you down on it, and he keeps you there until the chair stops moving." },
+    { type = "paragraph", content = "You take his cock to the root sitting on him and he cums in your cunt with both hands locked on your ass, holding you down, and keeps you there with your tits against his shirt until the chair stops moving." },
+    { type = "paragraph", content = "He pulls you down onto his cock and cums inside you without a word for once, both hands full of your ass, and holds you there long after he has finished, still hard enough to stay in your cunt." },
+  ] } ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "There. And I said nothing, and I will go on saying nothing." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "Same time next week and we will neither of us have mentioned it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "Good girl. Now put yourself straight before you go down those stairs." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sherrod" }, content = "Wipe your mouth. Those stairs ring and everybody on this yard knows what they sound like." },
+  ] },
   { type = "thought_bubble", props = { speaker = "player" }, content = "He said he would not mention it after. He will keep that, and it will cost you more than mentioning it would have." },
 ]
 
@@ -2996,8 +3439,17 @@ name = "The act"
 blocks = [
   { type = "video", props = { pool_dir = "sex/booth_room_t5", pool = 4, description = "A woman riding a younger man on a bed in a small warm room.", search_queries = ["woman riding man bed pov small room", "cowgirl bedroom young man close"] } },
   { type = "paragraph", content = "You put his hand flat on your tit and hold it there until he stops trying to take it back, and then get his shorts down and his cock out, and he is so hard it is standing up against his stomach." },
-  { type = "paragraph", content = "You sit down onto it and take him in one go and he makes a sound like he has been hit. You ride him slow with both hands on his chest, and your cunt is clenching on him every time you come down." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "Mrs. Vance — Mrs. — I can't, if you keep — " },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You sit down onto it and take him in one go and he makes a sound like he has been hit. You ride him slow with both hands on his chest, and your cunt is clenching on him every time you come down." },
+    { type = "paragraph", content = "You sit down onto his cock and take all of it in one go and he makes a sound like he has been hit. You ride him slow, both hands flat on his chest, tits in his face, and your cunt clenches on him every time you come down." },
+    { type = "paragraph", content = "You take him inside you an inch at a time to make him wait for it, and he grabs at the sheet instead of at you because he does not know he is allowed. His mouth finds a nipple and stays there. Your cunt is tight round his cock the whole way down." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "Mrs. Vance — Mrs. — I can't, if you keep — " },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "I'm not — Mrs. Vance, I'm going to, if you — " },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "You can't — that's — Mrs. Vance, God — " },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "I've thought about this. I've thought about this a lot. I'm sorry, I've thought about this." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -3046,7 +3498,17 @@ id = "finish"
 name = "Finish"
 blocks = [
   { type = "video", props = { pool_dir = "sex/booth_finish_t5", pool = 3, description = "A young man finishing under a woman.", search_queries = ["cumming inside cowgirl close", "creampie pov close finish"] } },
-  { type = "paragraph", content = "He grabs your hips and cums in your cunt with his whole body off the bed. His cock is still jerking inside you when he says the title out loud, twice, and does not hear himself say it either time. You stay down on him and take all of it. Your tits are in his face and both his hands are locked on your ass." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He grabs your hips and cums in your cunt with his whole body off the bed. His cock is still jerking inside you when he says the title out loud, twice, and does not hear himself say it either time. You stay down on him and take all of it. Your tits are in his face and both his hands are locked on your ass." },
+    { type = "paragraph", content = "He grabs your hips and cums in your cunt with his whole body coming up off the bed. His cock is still jerking in you when he says the title out loud, twice, and hears himself neither time. Your tits are in his face and you take all of it." },
+    { type = "paragraph", content = "He locks both hands on your ass and cums inside you saying Mrs. Vance into your tits, and his cock keeps pulsing after he has stopped moving, and he will not let you lift off him." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "Mrs. Vance. Mrs. Vance. Oh — Mrs. Vance — " },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "I'm sorry — I didn't mean to — Mrs. Vance, I'm sorry — " },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "Don't get off. Please don't get off yet." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "Was that — did I do it right? Tell me if I did it right." },
+  ] },
   { type = "thought_bubble", props = { speaker = "player" }, content = "He is the only one in this house who ever meant it. That is finished now, and you are the one who finished it." },
 ]
 
@@ -3103,8 +3565,17 @@ name = "The act"
 blocks = [
   { type = "video", props = { pool_dir = "sex/tobin_cab_t5", pool = 4, description = "Sex on the bunk behind the seats of a truck cab at night.", search_queries = ["truck sleeper cab sex bunk night", "sex in truck cab bed dark"] } },
   { type = "paragraph", content = "There is a bed behind the seats and no room to stand up in it. You go through on your hands and knees with him behind you, and he has your jeans off before you are all the way in." },
-  { type = "paragraph", content = "He pushes his cock into your cunt from behind with the curtain still open and one hand spread on your ass, and he fucks you slowly because the cab moves, and every stroke he says your name." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Rilla. Rilla. Look at me." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He pushes his cock into your cunt from behind with the curtain still open and one hand spread on your ass, and he fucks you slowly because the cab moves, and every stroke he says your name." },
+    { type = "paragraph", content = "He pushes his cock into your cunt from behind with the curtain still open and a hand spread flat on your ass, and fucks you slowly because the cab rocks with it, and says your name on every stroke." },
+    { type = "paragraph", content = "He gets you onto your back in the space there is, which is not much, and works his cock into your cunt with your knees up against the roof lining, watching your face the whole time. Your tits are out and his hand keeps coming back to them." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Rilla. Rilla. Look at me." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Rilla. Say it back. Say my name." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Look at me. I want you looking at me when you do." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "You could stay in here tonight. Nobody walks the row twice. Nobody would know." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -3153,7 +3624,17 @@ id = "finish"
 name = "Finish"
 blocks = [
   { type = "video", props = { pool_dir = "sex/tobin_finish_t5", pool = 3, description = "Finishing inside on a truck bunk.", search_queries = ["creampie finish close pov", "cumming inside close"] } },
-  { type = "paragraph", content = "He gets both arms right round you and cums in your cunt with his mouth against the back of your neck. He says your name into it, twice. His cock stays in you afterwards, going soft, and he keeps one hand full of your tit and does not let go of you for a long time after he has stopped." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He gets both arms right round you and cums in your cunt with his mouth against the back of your neck. He says your name into it, twice. His cock stays in you afterwards, going soft, and he keeps one hand full of your tit and does not let go of you for a long time after he has stopped." },
+    { type = "paragraph", content = "He gets both arms right round you and cums in your cunt with his mouth on the back of your neck, saying your name into it twice. His cock stays in you going soft and one hand stays full of your tit for a long time after." },
+    { type = "paragraph", content = "He holds you against him and cums inside you and then does not move at all, still in your cunt, one hand over a tit and the other flat on your stomach, until the cab has stopped rocking." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Rilla. Rilla. God, Rilla." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Stay there a minute. Just — stay there." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Say it back to me. Once. Go on." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "One of these nights you are going to get in this cab and not get back out of it." },
+  ] },
   { type = "thought_bubble", props = { speaker = "player" }, content = "Every other man on this property has a title for you. He has never once needed one." },
 ]
 
@@ -3238,7 +3719,11 @@ name = "The act"
 blocks = [
   { type = "video", props = { pool_dir = "sex/solo_window_t4", pool = 4, description = "A woman touching herself in bed by a window at night.", search_queries = ["woman masturbating bed night window", "solo female fingers bed dark"] } },
   { type = "paragraph", content = "You get your hand down inside your underwear and your fingers are wet the second they get there. Two of them into your cunt and the heel of your hand grinding down on your clit, knees up under the sheet." },
-  { type = "paragraph", content = "Your other hand goes up under your shirt and takes hold of a tit, thumb over the nipple, and you work yourself with the bunk-room light on the ceiling and the wet sound of your own fingers loud in the room." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "Your other hand goes up under your shirt and takes hold of a tit, thumb over the nipple, and you work yourself with the bunk-room light on the ceiling and the wet sound of your own fingers loud in the room." },
+    { type = "paragraph", content = "Your other hand goes up under your shirt and takes a tit, thumb working the nipple, and you keep three fingers moving in your cunt with the wet sound of it loud in a room that has nobody else in it." },
+    { type = "paragraph", content = "You get your knees up and your fingers deeper into your cunt and your thumb hard on your clit, and turn your face into his pillow because it is the only thing in the bed. Your other hand has a tit through your shirt." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -3275,7 +3760,11 @@ id = "finish"
 name = "Finish"
 blocks = [
   { type = "video", props = { pool_dir = "sex/solo_finish_t4", pool = 3, description = "A woman coming, alone.", search_queries = ["female orgasm close solo bed", "woman climax alone bed"] } },
-  { type = "paragraph", content = "You come with three fingers in your cunt and your other hand clamped over your own mouth. Your hips come up off the mattress. You keep working your clit right through the orgasm until your thighs stop shaking, and then lie still with your shirt up over your tits and your fingers still inside yourself." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You come with three fingers in your cunt and your other hand clamped over your own mouth. Your hips come up off the mattress. You keep working your clit right through the orgasm until your thighs stop shaking, and then lie still with your shirt up over your tits and your fingers still inside yourself." },
+    { type = "paragraph", content = "You come with three fingers in your cunt and the other hand clamped over your own mouth. Your hips come off the mattress. You keep on your clit right through it until your thighs stop shaking, shirt rucked up over your tits." },
+    { type = "paragraph", content = "It goes through you with your fingers still buried in your cunt and your heels dug into the mattress, and you ride it out on your own hand, and afterwards lie there with your tits bare and your clit still throbbing." },
+  ] },
   { type = "thought_bubble", props = { speaker = "player" }, content = "The light over the shop is still on. It is on every night, and you have started checking." },
 ]
 
