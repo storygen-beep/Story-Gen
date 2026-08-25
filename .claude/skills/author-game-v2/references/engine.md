@@ -370,6 +370,46 @@ Gate: **"a locked door says why"** (`gates.py`, `the-surfaces.md` R5c). It accep
 `locked_text_threshold` (§23 — the label becomes a clickable toast, `v2.py:13210-13217`) or
 `rejection_node` (§36). A choice gated only by `costs` is never counted against you — see §27.
 
+### ⚠️ That is what a shown row must SAY. It is not how many rows to show.
+
+The reversal above answered half a question and the first game authored after it went to **22 of 22
+shown-locked choices carrying a reason**, against 13 of 171 across every game before. The
+instruction was followed exactly; nothing told it when to stop.
+
+**The field's default is silence** (`findings_B_refusal.md` §2, 16,167 refusing chains): **71%
+render nothing at all**, and the per-game silent share runs a **median of 79%** across a **22–100%**
+range. The study's own reading: *"The spread is a house decision, not a genre norm"* —
+zaras-school-life speaks 78% of its refusals, corpo-life speaks two of 574, and both shipped. So
+there is no number to hit. There are three calls to make:
+
+**1 · A DOOR is not a REFUSAL, and their registers differ by measurement.**
+
+```
+field spoken refusals   n=4,540   median  9 words   flat, mechanical, names a price 37%
+vesper's nine doors               median 22 words   in-fiction, and the study calls it
+                                                    "the only game doing this properly"
+```
+
+Nine words is right for *"already done"* and *"wrong hour"*. It is wrong for the ceiling of a
+release, which `the-release.md` makes the thing that sells the next one.
+
+**2 · Never inside a scene when the scene moves the bar.** A greyed rung mid-beat, gated on a meter
+the canvas's own `effects` raise, is the machinery narrating its own progress bar: the row opens by
+itself in a click or two, so the text hands the player nothing to act on, and it puts a UI label in
+the one place the register says the body is the only thing on screen. Contrast vesper's in-scene
+*"Not like this — you're filthy, and the cover won't hold"* — gated on something the player goes
+**elsewhere** and fixes. That is a handle and it is correctly spoken. Measured: vesper has 8 in-scene
+shown-locked choices and **zero** on a self-moved bar; the game that prompted this had 11 and **all
+11** were `arousal` or `loop_stage`.
+
+**3 · A blocked WINDOW is a different surface and it is not this one.** An activity out of hours
+belongs in `show_when_blocked` + `cooldown_message` on the canvas trigger — `the-clock.md` C5, where
+the hours are the point and hiding them is *"lostness with a clock on it"*. Do not answer a noisy
+guidance screen by deleting those.
+
+`scripts/gates.py`'s **`lint · which refusals are shown at all`** reports all three: the in-scene
+count, the self-moved subset, and the reason-length median against 9 and 22.
+
 ---
 
 ## 16. A flag read by a TRIGGER **or a CHOICE** must be set from a LOCATED canvas

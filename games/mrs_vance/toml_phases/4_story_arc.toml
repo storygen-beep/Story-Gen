@@ -311,8 +311,6 @@ time_progression_minutes = 5
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "loop_stage", operator = "gte", value = 2 },
 ] }
-show_when_locked = true
-locked_text      = "Get up on the desk — not from a standing start, not with him like this."
 effects = [
   { targetType = "player", trait = "loop_act", op = "set", value = 3 },
   { targetType = "player", trait = "arousal",  op = "add", value = 10, cap = 100 },
@@ -326,8 +324,6 @@ time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 60 },
 ] }
-show_when_locked = true
-locked_text      = "Let him cum — he is nowhere near it yet."
 effects = [ { targetType = "player", trait = "loop_act", op = "set", value = 1 } ]
 
 [[canvases.nodes.exit_block.choices]]
@@ -380,8 +376,6 @@ time_progression_minutes = 5
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "loop_stage", operator = "gte", value = 2 },
 ] }
-show_when_locked = true
-locked_text      = "Get up on the desk — he has not got to the point of moving you yet."
 effects = [
   { targetType = "player", trait = "loop_act", op = "set", value = 3 },
   { targetType = "player", trait = "arousal",  op = "add", value = 10, cap = 100 },
@@ -395,8 +389,6 @@ time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 60 },
 ] }
-show_when_locked = true
-locked_text      = "Let him finish — not yet, he is still going slow enough to talk."
 effects = [ { targetType = "player", trait = "loop_act", op = "set", value = 2 } ]
 
 [[canvases.nodes.exit_block.choices]]
@@ -449,8 +441,6 @@ time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 65 },
 ] }
-show_when_locked = true
-locked_text      = "Let him cum inside you — he is still counting, and he has not lost it yet."
 effects = [ { targetType = "player", trait = "loop_act", op = "set", value = 3 } ]
 
 [[canvases.nodes.exit_block.choices]]
@@ -569,8 +559,6 @@ time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 60 },
 ] }
-show_when_locked = true
-locked_text      = "Let him cum — not yet, he has barely started."
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Get your jeans up."
@@ -666,8 +654,6 @@ time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "loop_stage", operator = "gte", value = 2 },
 ] }
-show_when_locked = true
-locked_text      = "Get up and ride him — he has not finished the sentence and he will not be interrupted."
 effects = [
   { targetType = "player", trait = "loop_stage", op = "add", value = 1 },
   { targetType = "player", trait = "loop_act",   op = "set", value = 2 },
@@ -682,8 +668,6 @@ time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 60 },
 ] }
-show_when_locked = true
-locked_text      = "Let him cum — he is nowhere near done talking."
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Sit back on your heels."
@@ -792,8 +776,6 @@ time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 60 },
 ] }
-show_when_locked = true
-locked_text      = "Let him cum — he is holding on and he is going to keep holding on."
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Get off him."
@@ -901,8 +883,6 @@ time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 60 },
 ] }
-show_when_locked = true
-locked_text      = "Let him cum — he has waited eight weeks and he is not rushing it now."
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Get your jeans and go back down the row."
@@ -956,15 +936,13 @@ location             = "your_room"
 priority             = 5
 is_repeatable        = true
 max_triggers_per_day = 1
+show_when_blocked = true
+cooldown_message  = "not with him in the house"
 
 [[canvases.trigger.schedules]]
 weekdays   = [0, 1, 2, 3, 4]
 start_time = "21:30"
 end_time   = "02:00"
-
-[canvases.trigger.metadata]
-show_when_blocked = true
-cooldown_message  = "Not with him in the house."
 
 [[canvases.nodes]]
 id = "base"
@@ -1021,8 +999,6 @@ time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 55 },
 ] }
-show_when_locked = true
-locked_text      = "Not there yet."
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Take your hand out."

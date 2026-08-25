@@ -5,6 +5,91 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-25 — C5's own worked example was the dead path, and §15 answered half a question
+
+**Why.** LO: *"I didn't liked showing the why text for locked choices."* `mrs_vance` is the first
+game authored after §15 was reversed on 2026-08-24 and it followed the new instruction exactly —
+**22 of 22** shown-locked choices carrying a reason, against **13 of 171** across every game before
+it. Investigating which of those to cut turned up a second, worse thing.
+
+### 1 · ⚠️ `the-clock.md` C5's TOML snippet put both keys in the wrong table
+
+The section's example was:
+
+```toml
+[canvases.trigger.metadata]
+show_when_blocked = true
+cooldown_message  = "…"
+```
+
+**That path is dead.** The importer reads `trig_def.get("show_when_blocked")` and
+`_require_str(trig_def, "cooldown_message")` — `template_import.py:1929-1930`, the **trigger table
+itself** — and then writes them *into* metadata at `:6980-6981` for the generator to read back at
+`v2.py:11484`. Authoring them in `metadata` skips the importer entirely: valid TOML, green build,
+every gate passing, and `showWhenBlocked` reaching the built HTML **zero** times.
+
+`mrs_vance` copied the example verbatim. **Ten authored schedule lines, none of them ever on
+screen**, and the activity vanishing at the wrong hour exactly as C5's own paragraph warns — *"which
+reads as a broken game, not a schedule"*, against a top-30 study where **lostness, not grind, is the
+genre's disease (4.7% of complaints against 0.9%)**. Confirmed live: at 20:00 the office showed no
+counter row at all before the fix and shows `Work the counter — mornings, seven till one…` after.
+
+`off_season`, written **before** this section existed, has always declared them at the top level —
+which is why its six work, and why the doctrine could be measured off it while the example was
+wrong. Snippet corrected, warning added, and the house register recorded: the engine renders
+`<row name> — <message>`, so the message is a bare lowercase phrase, never a sentence restating the
+row (*"Work the counter — The counter — mornings…"* was the doubling).
+
+### 2 · `engine.md` §15 — the other half of the reversal
+
+§15 says what a shown row must SAY. Nothing said how many to show. Added, from
+`findings_B_refusal.md`:
+
+- **The field's default is silence** — 71% of 16,167 refusals render nothing; per-game silent share
+  median **79%**, range 22–100%, which the study calls *"a house decision, not a genre norm"*. There
+  is no number to hit, so this is a list and never a gate.
+- **A door is not a refusal.** Field spoken refusals: n=4,540, **median 9 words**, flat and
+  mechanical, naming a price 37% of the time. `vesper`'s nine doors: **median 22**, in-fiction, and
+  the study calls it *"the only game doing this properly"*.
+- **Never inside a scene when the scene moves the bar.** A rung gated on a meter the canvas's own
+  effects raise opens by itself in a click or two. Measured: vesper has 8 in-scene shown-locked
+  choices and **zero** self-moved; `mrs_vance` had 11 and **all 11** were `arousal` or `loop_stage`.
+- **A blocked window is a different surface** — C5, not this one. Do not answer a noisy guidance
+  screen by deleting the hours.
+
+### 3 · `gates.py` — `lint_refusal_shape`
+
+Reports the three: shown-locked count, the in-scene subset, the self-moved subset, and the
+`locked_text` word-length median against 9 and 22. A **LIST, never a gate**. Gate 42 *a locked door
+says why* is untouched and keeps passing.
+
+```
+                shown  in-scene  self-moved  median words
+mrs_vance  was     22        11          11            15
+mrs_vance  now     11         0           0            13
+vesper             13         8           0            22   <- the exemplar: in-scene, none self-moved
+the_inheritance    27        15          10
+off_season          4         4           4
+the_allowance       8         3           3
+late_shifts        21         5           3             4
+everything else   1-30        0           0
+```
+
+⚠️ **A first draft of this lint crashed the whole scoreboard on `the_inheritance`** — an `effects`
+list carrying string entries, and an unguarded `.get()`. A lint must never be able to take the tally
+down; every element is type-guarded now, and the run is clean across all fourteen games.
+
+**Verified.**
+- `41/41 judged gates pass` on `mrs_vance` before and after; gate 42 `22 shown-locked · 22 with a
+  reason` → `11 · 11`, still PASS and still non-`n/a`.
+- The merged diff for the cut is **22 removed lines, 0 added, 0 unrelated**.
+- Live in headless Chromium: `loop_cade.act_desk` at `arousal 0` renders **no** `span.locked-choice`
+  and at 95 offers the finish choice as a live link; the office at 20:00 still carries its greyed
+  schedule row. 4/4, zero page errors.
+- `playtest_presence.py` 10/10 and `playtest_quests.py` 23/23 on the same build.
+
+---
+
 ## 2026-08-25 — the clock gate was reading 62% of the buttons (`gates.py`, `the-clock.md`)
 
 **Why.** `mrs_vance` shipped a sleep button labelled **"Sleep. (to six)"** on a canvas that opens

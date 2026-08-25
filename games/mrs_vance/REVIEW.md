@@ -38,12 +38,12 @@ was found by **LO playing the built game** — a different instrument that finds
 defect, and the two are not merged so it stays visible which found what. Same split
 `off_season/REVIEW_1.md` records in its own header.
 
-**Current count: 16 open, 5 fixed** — 0 blockers, 3 high, 6 med, 6 low, 1 open question, and **P1,
-Q1, Q2, C1 and C2 FIXED**. Three of the twenty-one are decisions for LO rather than defect calls: E1
-(the obligation's size), D1 (how much locked content should explain itself) and G1 (whether the Want
-file's one shape is the genre). Plus **ten places
-this review was itself wrong**, recorded first in §0a — six caught before writing, and four (N7, N8,
-N9, N10) caught only after they had shipped in this file, one of them as its single blocker.
+**Current count: 15 open, 6 fixed** — 0 blockers, 3 high, 5 med, 6 low, 1 open question, and **P1,
+Q1, Q2, C1, C2 and D1 FIXED**. Two of the twenty-one are still decisions for LO rather than defect
+calls: E1 (the obligation's size) and G1 (whether the Want file's one shape is the genre). Plus
+**eleven places
+this review was itself wrong**, recorded first in §0a — six caught before writing, and five (N7–N11)
+caught only after they had shipped in this file, one of them as its single blocker.
 `v2_state.json` is deliberately untouched; the remaining SKILL-layer items (C2, Q1, W1, G1, half of
 D1) are recorded for LO to schedule.
 
@@ -57,10 +57,11 @@ narrowed or overturned by checking them. **Six were caught before anything was w
 is the only reason they are corrections and not defects in this file. **N7 through N10 were not** —
 all four shipped in this file and were overturned afterwards: N7 by LO the day after, and N8, N9 and
 N10 by the work of actually repairing the items they belonged to. They are the four most instructive
-entries in the section for exactly that reason, and the last three say the same thing three times:
-**a defect's diagnosis does not survive contact with its repair.** Three items in a row were
-diagnosed wrong and repaired right, which is an argument for repairing sooner, not for reviewing
-harder.
+entries in the section for exactly that reason, and the last four say the same thing four times:
+**a defect's diagnosis does not survive contact with its repair.** Four items in a row were diagnosed
+wrong and repaired right — every repair attempted so far — which is an argument for repairing sooner,
+not for reviewing harder. Twice the truth was only in the **built game** and could not have been read
+out of the source at all (N7, N11).
 
 ### ⚠️ N1 · The clock-gate hole is one missing preposition, not "it cannot read spelled-out numbers"
 
@@ -248,6 +249,34 @@ against the regex in isolation, and stopped. It never asked whether the label re
 **Testing a pattern is not testing an instrument** — the question is always what the instrument is
 pointed at, and this is the second item in this file where that was the whole defect (P1/N8's G38 was
 aimed at the runtime path that does not read the field).
+
+### ⚠️ N11 · D1 proposed stripping ten lines that C5 exists to require — and they were already dead
+
+**The fifth correction to ship in this file, and the fourth found by repairing the item.** Four for
+four now.
+
+D1's fix note said *"drop `show_when_blocked` from the 10 cooldowns"*. `the-clock.md` **C5** is a
+whole section arguing the opposite: an activity whose window has closed and simply vanishes *"reads
+as a broken game, not a schedule"*, against a top-30 study where **lostness, not grind, is this
+genre's disease** — 4.7% of player complaints against 0.9%. Five of the ten publish hours that
+appear nowhere else outside the schedule page. **Answering LO's D1 that way would have worsened his
+M1/M2**, from the same play-report.
+
+**And the reason nobody noticed they were good is that they were never on screen.** C5's own TOML
+example puts both keys in `[canvases.trigger.metadata]`; the importer reads them from the trigger
+table itself (`template_import.py:1929-1930`) and *writes* them into metadata afterwards
+(`:6980-6981`). The game copied the example, so all ten imported as `False` and reached the built
+HTML **zero** times — valid TOML, green build, 41/41 gates.
+
+**Two lessons, and the second is the general one.**
+
+1. A review item that says *"strip this"* has to check what the thing is **for** before it checks how
+   much of it there is. D1 counted 32 sites and bucketed them by mechanism; it never asked which
+   doctrine section each bucket answered.
+2. **A feature can be authored, documented, gated and completely dead.** Nothing in the source or
+   the scoreboard could have told the difference — only rendering the room at the wrong hour and
+   looking. That is the third time in this file the answer was in the built game and not in the
+   TOML (B1/N7, P1's live capture, and now this).
 
 ---
 
@@ -1053,6 +1082,14 @@ Adjacency is `navigation_order`, not `connections` (§0a N5). All 14 locations d
 graph is a connected two-level tree, and the engine supplies the return edge. A script that looks
 for `connections` or `exits` will find nothing and be wrong.
 
+### The ten `cooldown_message` lines are C5-mandated — do not "tidy" them
+
+They publish the hours of an activity whose window has closed, which `the-clock.md` C5 requires and
+which `off_season` is the only other game to do. Five of the ten carry hours that appear nowhere else
+outside the schedule page. They live at the **top level of `[canvases.trigger]`** and must stay
+there: `[canvases.trigger.metadata]` is a dead path the importer never reads (§0a N11), and that is
+where they sat, unrendered, until 2026-08-25.
+
 ### The published field constants were NOT restated from this review's own extractor
 
 `the-clock.md` publishes **84,009 action labels** across 27 sandboxes and `gates.py` a prose median of
@@ -1087,8 +1124,27 @@ is enforcement, not the concept (B2).
 # §10 · What this says about the skill
 
 The `CLAUDE.md` test is *"would a correct author-game skill have prevented this?"* **Seven of the
-twenty-one answer yes** — P1, C2, Q1, W1, G1 and B2 outright, D1 in part. **One of the seven is
-fixed** (P1); the rest are recorded for LO to schedule.
+twenty-one answer yes** — P1, C2, Q1, D1, W1, G1 and B2. **Five of the seven are fixed** (P1, Q1,
+C2, C1's half, D1); W1, G1 and B2 are recorded for LO to schedule.
+
+### D1 · yes — twice, and the second one is the worst kind
+
+**The instruction landed half a rule.** `engine.md` §15 was reversed on 2026-08-24 to *"set
+`locked_text` by default"*, which is right. It says what a shown row must SAY and nothing about how
+many to show, and the first game authored after it went to 22 of 22 against 13 of 171 across every
+game before. The author followed the instruction exactly. §15 now carries the other half — the
+field's 79%-silent default, the door-vs-refusal register split, and never-in-scene-on-a-self-moved
+bar.
+
+**And `the-clock.md` C5's worked example was the dead path.** It put `show_when_blocked` /
+`cooldown_message` in `[canvases.trigger.metadata]`; the importer reads them from the trigger table
+itself. The game copied the example and shipped **ten authored schedule lines that reached the built
+HTML zero times** — the exact vanishing-activity failure C5 was written to prevent, caused by C5.
+
+That second one is a class this file has not recorded before: **not a doctrine that taught the wrong
+thing, and not an instrument that read the wrong surface, but a worked EXAMPLE that does not run.**
+It is worse than either, because copying the example is what a correct author does. Standing
+question to add to the one in C2's entry: *does the snippet in this section actually build?*
 
 ### C2 · yes — and it is the fifth instrument hole of the same family
 
@@ -1400,36 +1456,114 @@ closed it, because his only yard row is Sat–Sun.
 
 ---
 
-### D1 · The "why it is locked" text runs to 32 sites across three systems
-**severity** MED · **layer** GAME + SKILL — a question for LO, not a defect call · **status** OPEN
+### D1 · Eleven greyed rungs narrated the scene's own progress bar — and ten schedule lines were never on screen at all
+**severity** MED · **layer** GAME + SKILL · **status** **FIXED** — 11 cut, 10 revived, proved live
 
 > LO: *"I didn't liked showing the why text for locked choices."*
 
+**⚠️ Two of the three things this item proposed to strip are correct work.** §0a **N11** records it.
+
+Mrs. Vance is the **first game authored after `engine.md` §15 was reversed on 2026-08-24**, and it
+followed the new instruction exactly: **22 of 22** shown-locked choices carried a reason, against
+**13 of 171 (7%)** across every game before it. The instruction was right. Nothing said how many rows
+to show at all, so it was applied to everything that can be locked.
+
+#### What was actually there
+
+`show_when_locked` is **22**, not 32; the other 10 are canvas-level `show_when_blocked` +
+`cooldown_message`, a different surface. They split exactly by phase file:
+
+| bucket | n | file | verdict |
+|---|---|---|---|
+| canvas `cooldown_message` | 10 | `3_activities` · `4_story_arc` | **were DEAD — revived** |
+| the five doors | 5 | `5_scenes.toml` | kept |
+| day-cap / need choices | 6 | `3_activities.toml` | kept |
+| **in-loop ladder rungs** | **11** | **`4_story_arc.toml`** | **cut** |
+
+#### The ten schedule lines were declared and never rendered
+
+The worst thing in this item was invisible, and it is the reason it was invisible.
+
+`the-clock.md` C5's own worked example put both keys in `[canvases.trigger.metadata]`. **That path is
+dead.** The importer reads them from the **trigger table itself** (`template_import.py:1929-1930`)
+and then writes them *into* metadata at `:6980-6981` for the generator to read back
+(`v2.py:11484`). Authoring them in `metadata` skips the importer: valid TOML, green build, 41/41
+gates, and `showWhenBlocked` reaching the built HTML **zero** times.
+
+The game copied the example verbatim, so all ten were dead. Live, at 20:00 in the office:
+
 ```
-10  show_when_blocked + cooldown_message    greyed on the ROOM screen, re-read every day
-11  show_when_locked, inside the sex loops   "Let him cum — he is nowhere near it yet."
- 6  show_when_locked, day-caps and needs     "The book is straight for today."
- 5  show_when_locked, the loop entries       the release's five actual doors
+before   Office · Do the books · Sherrod's Room · Leave Office
+         (Work the counter simply GONE — the C5 failure, verbatim)
+after    Office · Do the books · Work the counter — mornings, seven till one, and clean
+         enough to stand at it · Sherrod's Room · Leave Office
 ```
 
-**The five doors should keep their reason.** `SKILL.md:70` says gate 42 exists *"because our locked
-doors are mute"*, and `the-release.md:110` is *"An honest wall is a promise; a silent one is a bug
-report."* Strip those and the player climbs a meter with nothing telling them what it buys.
+C5 calls the vanishing activity *"a broken game, not a schedule"*, against a top-30 study where
+**lostness, not grind, is this genre's disease — 4.7% of player complaints against 0.9%**. Five of
+the ten publish hours that appear nowhere else outside the schedule page. **Stripping them, as this
+item first proposed, would have answered D1 by worsening M1/M2** — the same play-report's *"couldn't
+understand the world."*
 
-**The other 27 are the noise, and the 11 inside the loops are the worst of them.** A locked choice
-mid-scene — *"Let him cum — he is nowhere near it yet"* — is the machinery explaining its own
-arousal threshold at the one moment the fiction should be the only thing on the screen. The 10
-room-screen cooldowns are re-read daily and say nothing a greyed-out item would not.
+Fixed by moving all ten to the top level of `[canvases.trigger]`, and trimmed to the house shape
+while there: the engine renders `<row name> — <message>`, so *"Work the counter — The counter —
+mornings, seven till one"* was doubling. `off_season`'s six are the exemplar — a bare lowercase
+phrase, no restatement, no full stop.
 
-Recorded as a question rather than a defect because it is a scope decision on a rule that is right
-where it was aimed. The skill never gave the door rule a boundary, so it got applied to everything
-that can be locked.
+#### The eleven that went
 
-#### Fix
+Every one is a rung inside a sex loop, gated on `arousal` or `loop_stage` — **meters that loop's own
+nodes raise**. The row opens by itself in a click or two, so the text hands the player nothing to act
+on, and it puts a UI label in the one place the register says the body is the only thing on screen.
 
-Split it: keep `locked_text` on the five loop entries, drop `show_when_locked` from the 11 in-loop
-ladder gates, and drop `show_when_blocked` from the 10 cooldowns. Then give the doctrine the missing
-scope sentence — a *door* says why, a *cooldown* does not.
+Contrast `vesper`, which the field study calls *"the only game doing this properly"*: **8 in-scene
+shown-locked choices and zero on a self-moved bar**. Its in-scene one reads *"Not like this — you're
+filthy, and the cover won't hold"* — gated on something the player goes **elsewhere** and fixes.
+That is a handle. Ours were a progress bar describing itself.
+
+The field agrees on volume: **71% of 16,167 refusals render nothing**, per-game silent share median
+**79%** across a 22–100% range. Cutting these takes the game from 0% silent to 50% — inside the
+range, at the speaks-a-lot end, which is right for a game whose doors are its selling point.
+
+#### What stayed, and why
+
+**The five doors.** Gate 9 needs a visible locked door and `the-release.md` makes it the thing that
+sells the next release. At ~20 words they match `vesper`'s median of 22 — and a **door is not a
+refusal**: the field's 9-word UI label is right for *"already done"*, wrong for a release ceiling.
+
+**The six day-caps.** *"The book is straight for today"* is the field's "already done" shape (18% of
+spoken refusals) and it stops a wasted trip. Same lostness argument as the schedule lines.
+
+#### Proved live
+
+```
+loop_cade.act_desk  arousal 0    zero span.locked-choice rendered
+loop_cade.act_desk  arousal 95   "Let him cum inside you." live as a link
+the_office          Monday 20:00 the greyed schedule row still there
+```
+
+4/4, zero page errors, and `playtest_presence.py` 10/10 + `playtest_quests.py` 23/23 unchanged.
+
+#### The skill fix, same commit
+
+`the-clock.md` C5's snippet corrected with the dead-path warning and the house register.
+`engine.md` §15 gains the half it never had — the field's silence default, the door/refusal register
+split, the never-in-scene-on-a-self-moved-bar rule, and a pointer that a blocked *window* is C5's
+surface and not this one. New **`lint · which refusals are shown at all`** reports all three
+measures; gate 42 is untouched and still passes.
+
+```
+                shown  in-scene  self-moved  median words
+mrs_vance  was     22        11          11            15
+mrs_vance  now     11         0           0            13
+vesper             13         8           0            22
+the_inheritance    27        15          10
+off_season          4         4           4
+```
+
+⚠️ A first draft of that lint **crashed the whole scoreboard on `the_inheritance`** — an `effects`
+list carrying string entries and an unguarded `.get()`. A lint must never be able to take the tally
+down. Type-guarded, and clean across all fourteen games.
 
 ---
 
@@ -1766,13 +1900,33 @@ steam          31    "To be necessary to people at the moment they have nothing 
 
 ### A.11 · The lock sites
 
+⚠️ **Re-measured 2026-08-25 while repairing D1.** The first table counted two different surfaces
+into one number and did not check whether either rendered.
+
 ```
-show_when_blocked  (room screen, greyed)   10
-show_when_locked   inside the sex loops    11
-show_when_locked   day-caps and needs       6
-show_when_locked   the loop entries         5
-                                          ---
-                                           32
+                                          was   now
+show_when_blocked  (room screen, greyed)   10    10   <- reached the build ZERO times
+                                                        until moved out of trigger.metadata
+show_when_locked   inside the sex loops    11     0   <- cut
+show_when_locked   day-caps and needs       6     6
+show_when_locked   the loop entries         5     5
+                                          ---   ---
+show_when_locked TOTAL                     22    11
+```
+
+Against the field (`findings_B_refusal.md`, 16,167 refusing chains):
+
+```
+silent share of refusals   field 71% overall · per-game median 79% · range 22-100%
+                           mrs_vance was 0%, now 50% of its choice-level locks
+spoken refusal length      field median  9 words  (n=4,540, names a price 37%)
+                           vesper's doors median 22   <- "the only game doing this properly"
+                           mrs_vance was 15, now 13
+
+in-scene shown-locked / of those on a bar the scene itself moves
+  mrs_vance  was 11 / 11      now 0 / 0
+  vesper         8 /  0       <- in-scene, but every one a handle the player fixes elsewhere
+  the_inheritance 15 / 10 · off_season 4 / 4 · the_allowance 3 / 3 · late_shifts 5 / 3
 ```
 
 ---
@@ -1793,6 +1947,30 @@ re-investigated. Count 13 → 19. Still nothing repaired.
 **2026-08-25 — L4 added.** Reconciling §4's pool count against the shipping commit before committing
 this file showed the commit's "46 pools" matches neither the grep (41) nor the parse (39), and its
 "46 in the_long_summer" is 49. Filed with L1–L3 as the same defect class. Count 19 → 20.
+
+**2026-08-25 — D1 FIXED, and two of the three things it wanted stripped were correct work.** The
+eleven greyed rungs inside the sex loops are gone — every one gated on `arousal` or `loop_stage`,
+meters the loop's own nodes raise, so the row opened by itself in a click or two and the text handed
+the player nothing. `vesper`, the field study's exemplar, has 8 in-scene shown-locked choices and
+**zero** on a self-moved bar; this game had 11 and all 11 were.
+
+**The ten `cooldown_message` lines D1 also wanted cut turned out to be C5-mandated AND already
+dead.** `the-clock.md` C5's own TOML example puts both keys in `[canvases.trigger.metadata]`; the
+importer reads them from the trigger table itself and writes them into metadata afterwards. The game
+copied the example, so all ten imported as `False` and reached the built HTML zero times — the
+vanishing-activity failure C5 exists to prevent, shipped by the section that prevents it. Moved to
+the top level, trimmed to `off_season`'s bare-phrase shape, and the office at 20:00 now carries
+`Work the counter — mornings, seven till one…` where it carried nothing. Recorded as **N11**.
+
+**Skill, same commit.** C5's snippet corrected with the dead-path warning; `engine.md` §15 gains the
+half it never had (the field's 79%-silent default, the door-vs-refusal register split at 9 words
+against vesper's 22, and never-in-scene-on-a-self-moved-bar); new `lint · which refusals are shown at
+all`. Gate 42 untouched, `22 shown-locked · 22 with a reason` → `11 · 11`, still PASS.
+
+**Verified.** 41/41 throughout; merged diff for the cut is 22 removed lines, 0 added, 0 unrelated;
+live 4/4 (no greyed rung at arousal 0, a live link at 95, the schedule row present at 20:00);
+presence 10/10 and quests 23/23. ⚠️ A first draft of the new lint crashed the whole scoreboard on
+`the_inheritance` — unguarded `.get()` on a string in `effects`. Type-guarded. Count 16 open → 15.
 
 **2026-08-25 — C1 and C2 FIXED, and C2's diagnosis was the wrong size.** C2 said the clock gate had
 *"a one-word hole"*, the missing preposition `to`. It had a **1,225-label blind spot**: `_clk_choices`
