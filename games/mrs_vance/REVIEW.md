@@ -2489,3 +2489,29 @@ canvases, 0 anchors).
 
 `40/40 judged gates` · `somebody speaks` unmoved at 4.4:1 · 255 passed · playtests 10/10 and 23/23 ·
 live 4/4. Count 7 open → 6. **Zero HIGH items.**
+
+**2026-08-26 (3) — a dev jump into every sex loop, for testing R1.**
+
+`6_dev_shortcuts.toml` (a phase `merge_toml_phases.py --no-dev` drops wholesale) gains one dev
+screen with six choices — one per loop. Each arms that loop's state (arousal 55, `loop_stage` and
+`loop_act` zeroed, the character's meters past every rung gate, the `met_` flag) and jumps straight
+to the loop's entry node. Live 9/9: all six land in the right entry, and `loop_isaac.act` showed
+**3 of 3** pool variants across 20 renders.
+
+⚠️ **`_is_dev()` exists in `gates.py` and two gates do not consult it.** This cost two red gates and
+is worth knowing before the next dev screen is written:
+
+- **`the walk-in floor`** counts a location-bound repeatable dev canvas as a solo activity, then
+  fails that room for having scheduled characters and no walk-in. Fixed by siting the screen at
+  `the_bank` — the only location with **zero** scheduled characters besides `the_bathroom` and
+  `kerr_crossing`.
+- **`the climb is paid for`** reads six free meter-setting choices as a free route up `want`,
+  `arousal` and `loop_stage`. Fixed with a 1-energy `costs` per choice and a
+  `max_triggers_per_day`, exactly as `seventh_day`'s header prescribes — braking for a scoreboard,
+  not design.
+
+⚠️ **Dropping `location` to dodge both does not work.** A triggerless canvas nothing references by
+node is never emitted (the generator only emits triggerless canvases the closure pass pulls in), so
+the jump vanished from the build entirely. It needs a location; it just needs the right one.
+
+`40/40 judged gates` · `playtest_presence` 10/10 · `playtest_quests` 23/23.
