@@ -205,6 +205,8 @@ def build_game_graph(
             loc.properties["entry_costs"] = {k: int(v) for k, v in l.costs.items()}
         if l.clothing_rules:
             loc.properties["clothing_rules"] = l.clothing_rules
+        if l.description_variants:
+            loc.properties["description_variants"] = l.description_variants
         slug_map[l.id] = loc
         graph.locations.append(loc)
 

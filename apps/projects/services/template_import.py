@@ -175,6 +175,15 @@ class TemplateLocation:
     # player trait (e.g. energy). Empty = a free move (today's behavior).
     costs: Dict[str, int] = field(default_factory=dict)
     clothing_rules: List[Dict[str, Any]] = field(default_factory=list)
+    # State-reactive room prose. `description` above is the ELSE branch and stays
+    # required; each variant is {conditions, text} and the generator emits them as a
+    # first-match <<if>>/<<elseif>>/<<else>> chain, the same semantics adjacent [group]
+    # blocks already have. Empty = one static paragraph, exactly as before.
+    #
+    # WHY: a room read identically at 03:00 and at 18:00, on day one and day ninety.
+    # Measured across a 26-game field, 22% of rooms rotate their text and 17% vary by
+    # hour; ours did neither, because there was no way to author it.
+    description_variants: List[Dict[str, Any]] = field(default_factory=list)
 
 
 # -------- Narrative person --------
@@ -185,6 +194,23 @@ class TemplateLocation:
 # stamped "You:" onto every player line — which reads as a contradiction in a game
 # narrated in third ("she") or first ("I").
 VALID_NARRATION_PERSONS = {"second", "first", "third"}
+
+# What a RANDOM ambient does to the room screen it fires on. Set once per game via
+# `[settings] ambient_render`.
+#
+#   "redirect" (default, every existing game) — the ambient <<goto>>s and OWNS the
+#       screen: no room title, no description, no NPC portraits, no activities, no
+#       exits. The player is moved somewhere without being shown where they were.
+#   "inline" — the ambient replaces the DESCRIPTION only. Title, portraits, solo
+#       activities and the navigation grid all still render beneath it.
+#
+# "inline" is the field's shape. destroyer's room screens roll an encounter into the
+# description slot (`<<if _scene is 0>>` encounter `<<elseif _scene > 0>>` the room's
+# own prose `<</if>>`) and print the affordance bar and the exits either way.
+#
+# A STORY one-shot keeps the redirect under both settings — a story beat owning the
+# screen is correct, and is not what this is about.
+VALID_AMBIENT_RENDER = {"redirect", "inline"}
 
 # Ceiling on `[[npcs]] tags` — the cast card's tag line. Four, because the field is
 # unanimous at four: friends-of-mine's Characterpedia gives all fifteen of its
@@ -360,6 +386,8 @@ class GameTemplate:
     # narrated in third person would otherwise render "You:" over prose saying "she".
     # "second" (default, RTS-native) | "first" | "third".
     narration_person: str = "second"
+    # See VALID_AMBIENT_RENDER. "redirect" keeps every existing game exactly as it is.
+    ambient_render: str = "redirect"
     # Clothing system
     clothing_enabled: bool = False
     clothing_items: List[TemplateClothingItem] = field(default_factory=list)
@@ -1868,6 +1896,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 auto_exit=bool(l.get("auto_exit", True)),
                 costs=_require_dict(l, "costs"),
                 clothing_rules=l.get("clothing_rules", []) or [],
+                description_variants=l.get("description_variants", []) or [],
             )
         )
 
@@ -2469,6 +2498,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     # ── Settings & Clothing ──
     settings_raw = data.get("settings", {}) or {}
     narration_person = _require_str(settings_raw, "narration_person", "second")
+    ambient_render = _require_str(settings_raw, "ambient_render", "redirect")
     clothing_enabled = _require_bool(settings_raw, "clothing_enabled", False)
     wardrobe_location = _require_str(settings_raw, "wardrobe_location", "")
     shop_location = _require_str(settings_raw, "shop_location", "")
@@ -3028,6 +3058,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         canvases=canvases,
         story_arc=story_arc_obj,
         narration_person=narration_person,
+        ambient_render=ambient_render,
         clothing_enabled=clothing_enabled,
         clothing_items=clothing_items,
         wardrobe_location=wardrobe_location or None,
@@ -3235,6 +3266,14 @@ def validate(template: GameTemplate) -> List[str]:
         errors.append(
             f"[settings] narration_person = '{template.narration_person}' is not valid. "
             f"Expected one of: {', '.join(sorted(VALID_NARRATION_PERSONS))}."
+        )
+
+    # Same reasoning: a typo would silently leave the game on "redirect", which is the
+    # behaviour the author was trying to turn off, and nothing on screen would say so.
+    if getattr(template, "ambient_render", "redirect") not in VALID_AMBIENT_RENDER:
+        errors.append(
+            f"[settings] ambient_render = '{template.ambient_render}' is not valid. "
+            f"Expected one of: {', '.join(sorted(VALID_AMBIENT_RENDER))}."
         )
 
     # Doc 69 Item 3 — predicate-context field-name validation. Walks every
@@ -4239,6 +4278,31 @@ def validate(template: GameTemplate) -> List[str]:
                         errors.append(
                             f"location '{l.id}' clothing_rules[{ri}] invalid slot '{s}', must be one of {sorted(VALID_CLOTHING_SLOTS)}"
                         )
+
+    # ===== Description variants validation (per-location) =====
+    for l in template.locations:
+        for vi, var in enumerate(l.description_variants):
+            where = f"location '{l.id}' description_variants[{vi}]"
+            if not isinstance(var, dict):
+                errors.append(f"{where} must be a dict of {{ conditions, text }}")
+                continue
+            if not str(var.get("text") or "").strip():
+                errors.append(f"{where} has no text")
+            cond = var.get("conditions")
+            if not isinstance(cond, dict) or not cond:
+                errors.append(f"{where} has no conditions — a variant with nothing to "
+                              f"match on would render forever and hide the base description")
+                continue
+            # ⚠️ setup.triggerConditionsSatisfied returns TRUE for any conditions{}
+            # missing `version`, with no build error. A fail-open here is worse than
+            # having no variants at all: the first variant would render permanently and
+            # the location's own description would never be seen again.
+            if str(cond.get("version") or "") != "1.0":
+                errors.append(f'{where} conditions must carry version = "1.0" — without '
+                              f"it the engine fails OPEN and this variant renders always")
+            if not l.description:
+                errors.append(f"{where} needs a base `description` on the location to fall "
+                              f"back to when no variant matches")
 
     # ===== Location entry-cost (travel friction) validation =====
     for l in template.locations:
@@ -6310,6 +6374,7 @@ def _assemble_project_metadata(project, template):
     # Narrative person — the generator reads this to label the player's own dialog
     # and thought-bubble blocks ("You:" / "Me:" / the character's name).
     project.metadata["narration_person"] = template.narration_person
+    project.metadata["ambient_render"] = getattr(template, "ambient_render", "redirect")
     # Optional sidebar version/release-date footer (new top-level metadata keys).
     project.metadata["version"] = template.project.version
     project.metadata["release_date"] = template.project.release_date
@@ -6873,6 +6938,8 @@ def create_project_from_template(
             loc.properties["entry_costs"] = {k: int(v) for k, v in l.costs.items()}
         if l.clothing_rules:
             loc.properties["clothing_rules"] = l.clothing_rules
+        if l.description_variants:
+            loc.properties["description_variants"] = l.description_variants
         loc.save()
         slug_map[l.id] = loc
 
