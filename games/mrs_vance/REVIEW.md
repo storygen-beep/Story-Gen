@@ -38,15 +38,17 @@ was found by **LO playing the built game** — a different instrument that finds
 defect, and the two are not merged so it stays visible which found what. Same split
 `off_season/REVIEW_1.md` records in its own header.
 
-**Current count: 7 open, 14 fixed** — 0 blockers, 0 high, 4 med, 2 low, 1 open question, and **P1,
-Q1, Q2, C1, C2, D1, M1, M2, R1, S2, L1, L2, L3 and T1 FIXED**. Two of the twenty-one are still decisions for LO
+**Current count: 9 open, 12 fixed** — 0 blockers, 2 high, 4 med, 2 low, 1 open question, and **P1,
+Q1, Q2, C1, C2, D1, R1, S2, L1, L2, L3 and T1 FIXED**. M1 and M2 were closed and **reopened** — the
+fix shipped, LO rejected it, and the field agrees with him (§0a **N12**). Two of the twenty-one are still decisions for LO
 rather than defect calls: E1 (the obligation's size) and G1 (whether the Want file's one shape is the
 genre). L4 is history and cannot be edited; the correction of record is in §7. Plus **twelve places
 this review was itself wrong**, recorded first in §0a — six caught before writing, and six (N7–N12)
-caught only after they had shipped in this file, one of them as its single blocker.
-`v2_state.json` is no longer untouched: M1's nine arrivals took seven locations off their declared
-`fill`, and the budgets were corrected to what is built (§0a N12). The remaining SKILL-layer items
-(C2, Q1, W1, G1, half of D1) are recorded for LO to schedule.
+caught only after they had shipped in this file, one of them as its single blocker and one as a
+whole fix that shipped green and was reverted. `v2_state.json` is no longer untouched: R1's pools
+grew two locations past their declared `fill`, and both were corrected to what is built, still
+inside their `fill_finished`. The remaining SKILL-layer items (C2, Q1, W1, G1, half of D1, and the
+first-visit gate in §10) are recorded for LO to schedule.
 
 ---
 
@@ -251,35 +253,39 @@ against the regex in isolation, and stopped. It never asked whether the label re
 pointed at, and this is the second item in this file where that was the whole defect (P1/N8's G38 was
 aimed at the runtime path that does not read the field).
 
-### ⚠️ N12 · M1 named the wrong three locations, and the plan it was measured against could not fit its own fix
+### ⚠️ N12 · M1's fix followed the skill instead of the field, and the skill gates on a device one game in twenty-six uses
 
-**The sixth correction to ship in this file, and the fifth found by repairing the item.** Five for
-five now.
+**The sixth correction to ship in this file, and the first that shipped a whole fix and took it back
+out again.**
 
-M1's fix note said to start with *"`the_yard`, `the_bunk_room` and `the_back_row` — the three
-carrying the most prose with no introduction."* The lint immediately above it in the same file
-prints the list ordered by exactly that measure, and it does not say that:
+Nine first-visit arrival canvases were written for M1, passed `41/41`, were proved live and were
+**reverted the next day** on LO's verdict: *"the place name is description and what was going in
+that place should be able to tell the whole story."*
 
-```
-Back Row 872 · Booth's Room 515 · Bunk Room 475 · Sherrod's Room 418 · Bar 391
-Bathroom 320 · Kerr Crossing 259 · Bank 257 · Yard 253
-```
+**He is right, and the evidence was already in hand when the fix was chosen.** First-visit devices
+across the 26-game corpus: `degrees-of-lewdity` 258, `realm-of-corruption` 12, five games with 2,
+and **eighteen games with none at all** — including `destroyer`, `become-someone`,
+`course-of-temptation`, `the-company` and `friends-of-mine`. One game in twenty-six.
 
-**The Yard is last.** It is still the right place to start, but on the argument that it is the root
-of the map and the most-crossed screen in the game — not on prose weight. Two of the three named
-were wrong, and the number was sitting in the same output.
+**Why it was picked anyway, which is the part worth keeping.** It was pure TOML, it needed no engine
+work, and **`the-first-hour.md` F9 teaches it** — citing `degrees-of-lewdity`, the single outlier, as
+its worked example. Cheap-and-doctrinal was chosen over what the measurements said. That ordering is
+the defect, not the prose.
 
-**The second half is more useful.** Nine arrivals of three or four beats took seven locations
-outside their declared `fill` budgets and five outside their `fill_finished` — the state the ledger
-says they should reach when the game is *done*. The Bank's finished budget is **200 words**; an
-arrival that says what kind of place it is costs about 150 before anything else happens there. Four
-arrivals were trimmed by a paragraph each; the remaining overshoot is the plan's, not the prose's,
-and `board.locations[].fill` was corrected to what is built (total 11,400 → 13,228, anchor share
-27% → 29%, still over the 25% floor).
+**And it is not only taught — it is GATED.** `the anchor introduces itself` fails a game whose
+anchor location has no non-repeatable canvas bound to it. **A gate enforcing a device that eighteen
+of twenty-six top games do not use.** That is a skill-layer finding and it is recorded in §10.
 
-**A first visit has a floor cost, and per-location budgets written before the arrivals existed did
-not carry it.** That is a board-phase lesson, not a Mrs. Vance one — noted here rather than acted
-on, because the skill is out of scope for this pass.
+**Three things survive the revert:**
+
+- **M2's grouping half stays refuted.** Zone headers above travel links: field median 0%. That
+  measurement is independent of the arrival and remains true.
+- **`somebody speaks` came out better than it went in** — 4.9:1 before the pass, **4.4:1 after** —
+  because R1's pooled dialogue stayed when the arrivals went. The gate had been sitting 2% under a
+  5:1 ceiling and nobody had noticed.
+- **A first visit has a floor cost the board phase does not budget for.** Nine arrivals of three or
+  four beats took five locations outside their declared `fill_finished`; the Bank's is 200 words and
+  an arrival costs about 150. Moot for this game now, but true for the next one that tries it.
 
 ---
 
@@ -1294,6 +1300,49 @@ instrument. This is a **doctrine-shaped hole** — no one taught it wrong, no on
 the authors kept solving it locally and correctly without anywhere to put the answer. Those are the
 ones that stay invisible longest, because every individual game looks fine.
 
+### M1 · yes — and this one is a gate pointed at the wrong device
+
+**Teeth test: would a correct `author-game-v2` have prevented it?** Yes, and more than prevented —
+the skill actively *caused* the wrong fix.
+
+`the-first-hour.md` **F9** teaches that a place introduces itself on first entry, and works its
+example from `degrees-of-lewdity`'s `$forest_shop_intro` / `$gwylan_cafe_intro` family. Measured
+across the whole 26-game corpus, that family is **one game**:
+
+```
+degrees-of-lewdity   258 first-visit branches, 117 flags
+realm-of-corruption   12
+five games             2 each
+EIGHTEEN GAMES         zero
+```
+
+`destroyer`, `become-someone`, `course-of-temptation`, `the-company` and `friends-of-mine` — the
+top of the field — have none. **F9 generalises from the single outlier.**
+
+**And gate `the anchor introduces itself` enforces it**: a game whose anchor location carries no
+non-repeatable canvas fails. A green board therefore requires a device eighteen of twenty-six top
+games decline to use.
+
+**What the field does instead is measurable and is not in the skill at all:**
+
+```
+                                   field median   mrs_vance
+room prose per visit                 82 words       68
+variant branches per room screen         10          2
+rooms that rotate their text            22%         0%
+rooms that vary by time of day          17%         0%
+an event renders ON the room screen     yes    no — 100% of ours <<goto>> away
+```
+
+**Two engine gaps sit under it**: a location `description` is one static string (`v2.py:9629`), and
+`getStoryCanvasRedirect` replaces the room screen rather than printing above it. So the skill cannot
+currently teach the field's device even if it wanted to — there is nothing to author it with.
+
+**Not fixed here.** The skill is out of scope for this pass and the engine work is unscheduled. Filed
+for LO with the numbers attached.
+
+---
+
 ### The rest are GAME-layer
 
 B1 is a build command, and per §0a N7 the right one for this phase. R1 had the doctrine — `engine.md` §35 is three pages long and names the
@@ -1660,7 +1709,7 @@ down. Type-guarded, and clean across all fourteen games.
 ---
 
 ### M1 · Thirteen of fourteen locations never say what kind of place they are
-**severity** HIGH · **layer** GAME · **status** **FIXED** — nine arrivals, proved live, 14/14
+**severity** HIGH · **layer** GAME + ENGINE · **status** **OPEN** — one fix was tried, shipped and reverted
 
 > LO: *"couldnt understand the world, the map, locations."*
 
@@ -1690,38 +1739,58 @@ the player crosses more than any other. Its `description` is good and carries th
 A description renders under the room title on every visit. It is wallpaper, not an arrival, and
 `the-first-hour.md` F7/F9 is about the moment of arriving.
 
-#### Fix — SHIPPED
+#### Fix — one was tried, and it was the wrong one
 
-**All nine, not three.** `2_one_shots.toml` gains `first_back_row`, `first_booths_room`,
-`first_bunk_room`, `first_sherrods_room`, `first_bar`, `first_bathroom`, `first_kerr_crossing`,
-`first_bank` and `first_yard`, each in `first_office`'s shape: `priority = 80`, `is_repeatable =
-false`, gated on `opening_done`, three or four beats, an image declared, exit back to the room.
+**A first-visit arrival canvas at each of the nine was written, shipped green and reverted the same
+day.** LO's verdict: *"I think the place name is description and what was going in that place
+should be able to tell the whole story."* He is right, and the field says so plainly.
 
-⚠️ **This item's own fix note named the wrong three** — see §0a **N12**. The lint's order is Back
-Row (872 words), Booth's Room (515), Bunk Room (475); the Yard is **last** at 253. The Yard went in
-anyway, because it is the root of the map and the screen crossed more than any other, and its beat
-is the only place the shape of the property is ever stated to the player:
+**First-visit introduction devices across the 26-game corpus:**
 
-> *"The house is one side, kitchen door straight onto the gravel. The four-bay shop is the other,
-> under the roller door. Past the skip the overnight row starts, and the gate at the far end lets
-> onto the county road."*
+```
+degrees-of-lewdity          258 branches, 117 flags     the ONLY game doing it
+realm-of-corruption          12
+amore · patriarch · sluttown-usa · zaras · new-life-project     2 each
+18 of 26 games                ZERO
+destroyer · become-someone · course-of-temptation · the-company · friends-of-mine    ZERO
+```
 
-**Three constraints, each from a check that was passing.** No cast member is named in any of the
-nine — every one is reachable before at least one meeting can fire, and `named before met` read 0.
-No numbered hour — the clock lint was already the worst number on the board. And each arrival
-**reads and sets its own guard flag** (`back_row_seen`, `yard_seen`, …), because G7 counts a
-non-repeatable canvas as a milestone owing standing content, and these owe nothing; a self-read
-write is the once-guard shape the gate's own escape hatch describes.
+**One game in twenty-six.** The arrival is not this genre's device for telling a player what a
+place is.
 
-`the anchor introduces itself` **5/14 → 14/14**. `named before met` now reads *"every named
-character is met and every location introduces itself."* The clock lint **improved**, 16.5 → 13.4
-per 10k. Proved live: first entry to the Back Row plays the arrival, sets `back_row_seen`, and the
-second entry renders the room screen instead.
+**What the field does instead is exactly what LO described** — the room screen itself carries it,
+every visit, and it changes:
+
+```
+                                   field median    mrs_vance
+room prose per visit                 82 words        68
+variant branches per room screen         10           2
+rooms that rotate their text            22%          0%
+rooms that vary by time of day          17%          0%
+an event renders ON the room screen     yes    no — ours <<goto>>s away, 100% of screens
+```
+
+**And the deeper reason the arrival could not have worked.** M1 is a *standing* confusion — *"couldn't
+understand the world"* is not a first-visit complaint. A scene that plays once and never again
+leaves the room screen exactly as dead as it was. The player who is lost on the twentieth visit is
+still lost.
+
+#### The fix, restated
+
+1. **ENGINE** — the location description must take variants. It is one frozen string today:
+   `<p>{location.description}</p>` (`v2.py:9629`, `:9676`).
+2. **ENGINE** — ambient events must render *on* the room screen instead of replacing it.
+   `getStoryCanvasRedirect` → `<<goto>>` takes the screen away before the description is drawn.
+3. **GAME** — then write the descriptions richer and per-state, against a field median of 82 words
+   and 10 branches.
+
+Steps 1 and 2 are the same two engine items batch two already surfaced. **M1 cannot be closed at the
+game layer alone**, which is why its layer is now GAME + ENGINE.
 
 ---
 
 ### M2 · The map is a two-level tree and the player is never shown its shape
-**severity** MED · **layer** GAME + SKILL · **status** **FIXED** — by M1's yard beat; the other half refuted
+**severity** MED · **layer** GAME + ENGINE · **status** **OPEN** — half of it refuted for good, the rest waits on M1
 
 What is declared, via `navigation_order` (§0a N5):
 
@@ -1753,7 +1822,7 @@ will ever read it.
 **Skill layer:** `the-map.md` specifies archetypes and the graph. Nothing in it asks how the player
 learns the shape, so a correct `nested_zones` map can ship completely illegible.
 
-#### Fix — SHIPPED, and half of it was wrong
+#### Fix — half of it is refuted for good; the rest is M1's
 
 This item offered two fixes. **The first has no support in the field and must not be attempted.**
 
@@ -1762,12 +1831,21 @@ Measured across every game in the 26-game corpus with eight or more travel scree
 links runs at **field median 0%**, and a grouped travel list at **field median 8%**. Nothing groups
 its travel list by zone. Grouping is not a convention this genre has.
 
-**The second fix is the supported one and it is the same action as M1's**, so M1's `first_yard`
-closes this item too. The same study says why: the field teaches the shape of a world in **prose
-that places one thing relative to another**, and on that axis this game already leads the corpus —
-**18.3 such phrases per 10,000 words against a field best of 4.8 and a median of 1.8**. The
-geography was never missing. It was rendering as wallpaper under a room title on every visit, which
-is what this item said in its own first paragraph.
+**The second fix is the supported one and it is the same action as M1's**, so this item closes when
+M1 does. The same study says why: the field teaches the shape of a world in **prose that places one
+thing relative to another**, and on that axis this game already leads the corpus — **18.3 such
+phrases per 10,000 words against a field best of 4.8 and a median of 1.8**. The geography was never
+missing. It was rendering as wallpaper under a room title on every visit, which is what this item
+said in its own first paragraph — and what the reverted arrival did not change, because it played
+once.
+
+The sentence that would carry it is already written, in `board.map.shape`, where no player will
+ever read it:
+
+> *"a diesel repair yard on a county road: gravel between a house and a four-bay shop, a row of
+> overnight trucks at the far end, and a crossroads twenty minutes down the road"*
+
+It belongs in the Yard's standing description, on every visit — not in a scene that plays once.
 
 ---
 
@@ -2222,37 +2300,42 @@ in §0a that was written down before it was caught, and the only one that came f
 nine portal entries restate the procedure by hand in three phrasings. §9 gained the matching cleared
 row and §10 a B2 subsection. Count 20 → 21; blockers 1 → 0.
 
-**2026-08-25 — M1, M2 and R1 fixed; the third item's other half refuted.** The two HIGH game-layer
-items LO picked because nothing else depended on them, plus M2, which turned out to be the same job
-as M1.
+**2026-08-25 — R1 fixed. M1 and M2 closed, then reopened the next day.**
 
-**M1 · nine arrivals.** `2_one_shots.toml` gains a non-repeatable canvas at each of the nine
-locations that had none, in `first_office`'s shape. `the anchor introduces itself` **5/14 → 14/14**;
-`named before met` now reads *"every named character is met and every location introduces itself."*
-No cast member is named in any of them and no numbered hour appears — the clock lint **improved**,
-16.5 → 13.4 per 10k. Live: first entry to the Back Row plays the arrival, sets `back_row_seen`, and
-the second entry renders the room screen.
+**R1 · 17 pools, and the speech was as frozen as the prose.** Twelve on act and finish body
+paragraphs, five inside the `[group]` bands of Cade's and Sherrod's finishers. Every act node had
+been repeating one line for the life of the save — *"Slower. You're not doing the books now."* on
+every render. Eight dialog blocks became pools of three or four, and five nodes gained a spoken beat
+their own prose had already promised: Sherrod's act narrated *"He talks while you suck him"* and
+carried **no dialog block at all**. Whole-node explicit counts roughly doubled across all six loops
+(`act_hand` 5 → 12, `finish` 6 → 24, Booth 3 → 9, Sherrod 6 → 20). Live, 24 renders each:
+`loop_isaac.act` showed 3 of 3 body variants, `loop_cade.act_hand` 4 of 4 of his lines.
 
-**M2 · closed by M1's yard beat, and its first fix deleted.** *"Group the travel list by zone"* has
-**no support anywhere in the field** — zone headers run at field median 0% across 26 games, grouped
-travel lists at 8%. The same study found this game's spatial prose already leads the corpus at
-**18.3 phrases per 10k words against a field best of 4.8**. The geography was written; it was
-staged as wallpaper.
+⚠️ **A pool is an AXIS to `gates.py:1666`** — it scores the thinnest band a node can render, so one
+thin variant took `the act nodes` from 2-of-14 under 3 to 3-of-14. One word fixed it. Back at 2 of
+14, the same two pre-existing finisher bands as before.
 
-**R1 · 17 pools, and the speech was as frozen as the prose.** Twelve on act and finish bodies, five
-inside the two `[group]` finishers. Eight dialog blocks became pools and five nodes gained a spoken
-beat their own prose had promised — Sherrod's act narrated *"He talks while you suck him"* and had
-no dialog block at all. Whole-node explicit counts roughly doubled across all six loops. Live, 24
-renders each: `loop_isaac.act` 3 of 3 body variants, `loop_cade.act_hand` 4 of 4 lines.
+**M1 and M2 · a fix shipped green and was reverted.** Nine first-visit arrival canvases took
+`the anchor introduces itself` to 14/14 and cleared the first-visit lint entirely. LO rejected it:
+*"the place name is description and what was going in that place should be able to tell the whole
+story."* Checked against the corpus and he is right — first-visit devices are **one game in
+twenty-six** (`degrees-of-lewdity` 258, eighteen games at zero), while the field's actual device is
+a room screen that changes: 82 words against our 68, 10 variant branches against our 2, 22% rotating
+and 17% time-varying against our 0%. And a scene that plays once cannot fix a standing confusion —
+after the arrival, the room screen was exactly as dead as before.
 
-**Three gates broke on the way and all three are informative.** `milestones open something` — nine
-non-repeatable canvases that open nothing; fixed with the once-guard shape the gate's own comment
-describes. `somebody speaks` — 4.9:1 was already 2% under a 5:1 ceiling, and 3,100 words of pure
-narration took it to 6.3:1; fixed by pooling the speech, and it finished at **4.7:1, better than
-before this pass**. `location fill` — recorded as **N12**: M1 named the wrong three locations, and
-five of the small places could not fit an arrival inside their declared *finished* budget. Four
-arrivals trimmed; `board.locations[].fill` corrected to what is built.
+Reverted in full: `2_one_shots.toml` and `v2_state.json` restored, then only the two locations **R1**
+actually grew (`the_office` 3,000 → 3,845, `booths_room` 600 → 784, both inside their
+`fill_finished`) recorded. M1 and M2 reopened, both now **GAME + ENGINE** — the location
+`description` is one static string (`v2.py:9629`) and ambients replace the room rather than print on
+it, so neither can be closed at the game layer. Recorded as §0a **N12**, and as a skill finding in
+§10: **F9 teaches the outlier and `the anchor introduces itself` gates on it.**
 
-`41/41 judged gates pass` before and after. `playtest_presence.py` 10/10, `playtest_quests.py`
-23/23, and a six-check live pass on a scratch `--dev --debug` build. Count 10 open → 7; **0 HIGH
-items remain.**
+**Three things survived the revert.** M2's grouping half stays refuted (zone headers: field median
+0%). `somebody speaks` finished **better than it started**, 4.9:1 → 4.4:1, because R1's pooled
+dialogue stayed — the gate had been sitting 2% under its ceiling unnoticed. And a first visit has a
+floor cost no board budget carries: nine arrivals put five locations past their declared
+`fill_finished`, the Bank's being 200 words against an arrival's ~150.
+
+`41/41 judged gates pass` at every step. `playtest_presence.py` 10/10, `playtest_quests.py` 23/23.
+Count 10 open → 9; R1 was one of the three HIGH items, so two remain.

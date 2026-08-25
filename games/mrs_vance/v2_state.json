@@ -246,7 +246,7 @@
         "id": "the_yard",
         "job": "The ground the whole world sits on - gravel between the house and the shop, opening onto the county road. Where anyone can see anything.",
         "anchor": false,
-        "fill": 406,
+        "fill": 300,
         "has_cycling_pool": true,
         "serves": {
           "needs": [],
@@ -334,7 +334,7 @@
         "id": "the_back_row",
         "job": "Where overnight trucks park, each with a bed behind the seats. The far end of the property and the last place anybody looks.",
         "anchor": false,
-        "fill": 1274,
+        "fill": 1000,
         "has_cycling_pool": true,
         "serves": {
           "needs": [],
@@ -345,7 +345,7 @@
             "npc_tobin"
           ]
         },
-        "fill_finished": 1274
+        "fill_finished": 1200
       },
       {
         "id": "sherrods_room",
@@ -414,7 +414,7 @@
         "id": "booths_room",
         "job": "The youngest one's room, and the only one in the house who still means the title.",
         "anchor": false,
-        "fill": 877,
+        "fill": 784,
         "has_cycling_pool": true,
         "serves": {
           "needs": [],
@@ -423,39 +423,39 @@
             "npc_booth"
           ]
         },
-        "fill_finished": 877
+        "fill_finished": 800
       },
       {
         "id": "kerr_crossing",
         "job": "The crossroads twenty minutes down the road. Pumps, a light, and the only place on earth nobody here owns.",
         "anchor": false,
-        "fill": 395,
+        "fill": 300,
         "has_cycling_pool": false,
         "serves": {
           "needs": [],
           "work": [],
           "people": []
         },
-        "fill_finished": 395
+        "fill_finished": 300
       },
       {
         "id": "the_bank",
         "job": "Where the account she is not on lives.",
         "anchor": false,
-        "fill": 394,
+        "fill": 300,
         "has_cycling_pool": false,
         "serves": {
           "needs": [],
           "work": [],
           "people": []
         },
-        "fill_finished": 394
+        "fill_finished": 200
       },
       {
         "id": "the_bar",
         "job": "The one room in the world where nobody calls her Mrs. Vance, and the men from the yard drink here too.",
         "anchor": false,
-        "fill": 537,
+        "fill": 400,
         "has_cycling_pool": true,
         "serves": {
           "needs": [],
@@ -464,7 +464,7 @@
             "npc_cade"
           ]
         },
-        "fill_finished": 537
+        "fill_finished": 400
       }
     ],
     "needs": [
