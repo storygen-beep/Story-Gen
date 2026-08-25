@@ -5,6 +5,66 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-26 (3) — F10: the role stays attached after the introduction
+
+**Why.** LO, who wrote `mrs_vance` himself, asked **"Who is Sherrod?"** off a location button. The
+answer exists and is good — *"Your husband's brother, 51…"* — and renders on the cast page and
+nowhere else. It is the second game to draw this from him; `the_season` got *"I don't know who is
+who."*
+
+Measured over each character's own canvases: the spine of the game carried **14 canvases and 2,594
+words and said who he was twice.**
+
+### 1 · `references/the-first-hour.md` — new rule **F10**
+
+F7 gets the role on screen **at the meeting**. F9 says a place keeps saying what it is **on every
+visit**. Nothing said the same for people, and "who is this" is a standing question that a meeting
+answers once.
+
+F10 puts the relation in the surfaces the player **re-enters** — hubs, ambients, walk-ins, not the
+one-shot that already did its job — and says to put it in a `block_pool` variant so it recurs
+instead of nagging.
+
+⚠️ **It also writes down what NOT to do**, because I proposed it in the same session and was wrong:
+do not swap the NAME out for the relation on the speaker line. `destroyer` does
+(`<<speech "teagan" "Stepsister">>`) and is the **only game of 26** that does — it survives it by
+having exactly one of each relation. Relation words on buttons run at field median 0.4%, max 2.0%;
+`sluttown-usa` is a family premise with 37,408 speaker labels and uses names only. Swapping does not
+remove the memory tax, it moves it. **Both, at the point of use.**
+
+### 2 · `scripts/gates.py` — `lint · the role stays attached`
+
+⚠️ **A version of this was tried and rejected, and F7 records why** — a fixed KIN-WORD list run over
+MEETINGS fired wrongly on ten of `last_call`'s meetings, eighteen of `the_inheritance`'s and three of
+`off_season`'s, because `last_call`'s cast is not family and the words were never going to be there.
+
+This one takes its vocabulary from the game: **anchors are the content words of each character's own
+`npcs[].relationship` string**, and it counts over that character's own canvases rather than over
+meetings. A cast of colleagues yields its own words; a game that declares no relationships yields
+nothing and is **skipped rather than failed**. A LIST with no threshold — there is no per-character
+field baseline and inventing one is what this file refuses everywhere else.
+
+### Verified — and the control is the whole point
+
+```
+last_call         silent   0 relationship strings declared — no vocabulary, no false positives
+off_season        silent   0
+the_inheritance   silent   0
+the_season        FIRES    Wade 13 per 10k, the thinnest row in the game
+late_shifts       FIRES    Cole, 807 words across 8 canvases, says who he is 0 times
+```
+
+**`last_call` is silent by construction** — the exact game the previous detector got wrong. And
+`the_season` is the game that drew *"I don't know who is who"* from the reader; the lint found it
+without being told.
+
+`mrs_vance` fixed alongside: five anchors added to Cade's and Booth's recurring surfaces, taking them
+from 8 and 12 per 10k into the 21–45 band the rest of the cast already sat in. `40/40 judged gates`
+before and after, `somebody speaks` unmoved at 4.4:1, app suite unchanged at **255 passed**, and live
+4/4 — the anchor appears in 4 of 30 hub renders while the speaker line says **Cade** in 30 of 30.
+
+---
+
 ## 2026-08-26 (2) — the room can finally change, and an ambient stops taking the screen
 
 **Why.** F9 was rewritten this morning to say the description carries the place. It then had to

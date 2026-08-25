@@ -4079,7 +4079,7 @@ blocks = [
   { type = "block_pool", blocks = [
     { type = "paragraph", content = "The spike is half down and there is a mug on the corner of the book with a ring under it he has not noticed and will not apologise for." },
     { type = "paragraph", content = "He has the phone against his shoulder saying nothing at all to somebody's dispatcher, which is a thing he does instead of arguing." },
-    { type = "paragraph", content = "He has taken his jacket off and hung it on the back of the chair, which is as close as this man comes to being off duty." },
+    { type = "paragraph", content = "He has taken his jacket off and hung it on the back of the chair, which is as close as your husband's eldest comes to being off duty." },
     { type = "paragraph", content = "He is going down a column with the end of a pen, not touching the page, and he gets to the bottom of it before he looks up." },
   ] },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Book's on the desk where you left it, Mrs. Vance. It's not going to do itself." },
@@ -4181,7 +4181,7 @@ name = "Base"
 blocks = [
   { type = "paragraph", content = "He sits at the end where the bar turns, so he can see the door without facing it, and he is not drinking much and never has been." },
   { type = "block_pool", blocks = [
-    { type = "paragraph", content = "In here nobody calls you anything. He notices that before you do, and you can tell he has noticed by which way he turns the stool." },
+    { type = "paragraph", content = "In here nobody calls you anything. Your husband's eldest notices that before you do, and you can tell he has noticed by which way he turns the stool." },
     { type = "paragraph", content = "There are two men from the yard at the other end and he has put himself between them and you without either of you agreeing to it." },
     { type = "paragraph", content = "He has the truck keys on the bar in front of him, which means he is driving, which means he is not staying, which he has not said." },
   ] },
@@ -4246,7 +4246,7 @@ blocks = [
   { type = "paragraph", content = "He is at the table with his phone face down, which he only does when there is somebody in the room he would rather look at." },
   { type = "block_pool", blocks = [
     { type = "paragraph", content = "He has the water heater on again and has not said so, and the bottle outside is going down faster than the month it is supposed to last." },
-    { type = "paragraph", content = "He is wearing a shirt he has ironed, in a kitchen, on a weekday, for nobody who is coming." },
+    { type = "paragraph", content = "Your husband's youngest is wearing a shirt he has ironed, in a kitchen, on a weekday, for nobody who is coming." },
     { type = "paragraph", content = "He starts a sentence about a job in Kerr Crossing and stops it halfway when he works out that it makes him sound nineteen." },
     { type = "paragraph", content = "He has moved down a chair from where he was sitting last week. Not toward you. Just to the one where he can see the door you come in by." },
   ] },
@@ -4329,7 +4329,7 @@ blocks = [
   { type = "paragraph", content = "The door is on the latch, not shut, and it has been on the latch every night this week. The television is on with the sound almost down." },
   { type = "block_pool", blocks = [
     { type = "paragraph", content = "The room is warm because the water heater backs onto this wall, so he sleeps on top of the covers and does not always hear the door." },
-    { type = "paragraph", content = "He sits up fast when you knock and then makes himself slow down halfway through doing it, which is worse than either." },
+    { type = "paragraph", content = "The youngest sits up fast when you knock and then makes himself slow down halfway through doing it, which is worse than either." },
     { type = "paragraph", content = "He has the sound down far enough that he would hear anybody on the landing, which means he is listening for somebody on the landing." },
   ] },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "You can come in. I mean — the door's open, so." },
@@ -5380,7 +5380,7 @@ conditions    = { version = "1.0", logic = "AND", items = [
 id = "base"
 name = "Base"
 blocks = [
-  { type = "paragraph", content = "Cade comes up for ten minutes on a Friday and stands rather than sits. Booth has taken his plate upstairs. Nobody asked him to." },
+  { type = "paragraph", content = "Cade — your husband's eldest, and the only one of them with a reason to be in this kitchen — comes up for ten minutes on a Friday and stands rather than sits. Booth has taken his plate upstairs. Nobody asked him to." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Week's straight. Drawer balanced Friday." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_dorn" }, content = "Good." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "The book's neat. Neater than it was." },

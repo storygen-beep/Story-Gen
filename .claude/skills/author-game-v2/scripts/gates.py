@@ -3002,6 +3002,89 @@ def lint_named_before_met(model, game):
             f"do not read the number"), findings
 
 
+_ROLE_STOP = {
+    "your", "the", "a", "an", "and", "he", "she", "it", "is", "was", "has", "have",
+    "who", "that", "his", "her", "you", "him", "them", "they", "of", "to", "in",
+    "on", "at", "by", "with", "for", "not", "but", "one", "this", "there",
+}
+
+
+def lint_role_stays_attached(model, game):
+    """After the meeting, do a character's own surfaces still say who he is? — a LIST.
+
+    `the-first-hour.md` F10. F7 gets the role on screen at the meeting; F9 says a place
+    keeps saying what it is on every visit. This is F9 for people, and it is the rule
+    that was missing: "who is this" is a STANDING question, and a meeting answers it
+    once before the player spends forty visits with a bare first name.
+
+    ⚠️ THE INSTRUMENT IS THE POINT, because a version of this WAS TRIED AND REJECTED.
+    F7 records it: a fixed KIN-WORD list run over MEETINGS fired wrongly on ten of
+    last_call's meetings, eighteen of the_inheritance's and three of off_season's. The
+    cause was structural — last_call's cast is not family, so kin words were never going
+    to be there, and no amount of tuning a kin list fixes a game it does not describe.
+
+    This one takes its vocabulary from the GAME: the anchors for each character are the
+    content words of that character's own `npcs[].relationship` string. A cast of
+    colleagues yields "boss" and "shift"; a cast of siblings yields "brother". A game
+    that declares no relationships yields nothing and is skipped rather than failed.
+
+    And it counts over that character's OWN canvases, not over meetings.
+
+    ⚠️ A LIST AND NEVER A SCORE. There is no per-character field baseline to hold anyone
+    to, and inventing one is what `gates.py` refuses everywhere else. The row speaks for
+    itself: "2,594 words of his own, says who he is twice" needs no threshold beside it.
+    """
+    npcs = game.get("npcs") or []
+    anchors = {}
+    for n in npcs:
+        nid, rel = n.get("id"), str(n.get("relationship") or "")
+        if not nid or not rel.strip():
+            continue
+        head = rel.split(".")[0].lower()
+        words = {w for w in re.findall(r"[a-z']+", head)
+                 if w not in _ROLE_STOP and len(w) > 2}
+        # the character's own NAME is not an anchor — it is the thing being anchored
+        words -= {str(n.get("name") or "").lower()}
+        if words:
+            anchors[nid] = sorted(words)
+    if not anchors:
+        return "", []
+
+    tally = {k: {"words": 0, "hits": 0, "canvases": 0, "which": collections.Counter()}
+             for k in anchors}
+    for c in model:
+        raw = c.get("raw") or {}
+        who = {c.get("npc"), c.get("requires_npc")}
+        who |= set(re.findall(r'"npcId":\s*"([^"]+)"', json.dumps(raw)))
+        text = _canvas_text(c).lower()
+        wc = len(text.split())
+        for k in (who & set(anchors)):
+            tally[k]["words"] += wc
+            tally[k]["canvases"] += 1
+            for a in anchors[k]:
+                hit = len(re.findall(r"\b" + re.escape(a) + r"\b", text))
+                tally[k]["hits"] += hit
+                tally[k]["which"][a] += hit
+
+    rows = [(k, v) for k, v in tally.items() if v["words"] >= 200]
+    if not rows:
+        return "", []
+    rows.sort(key=lambda kv: (kv[1]["hits"] / max(kv[1]["words"], 1)))
+    by_id = {str(n.get("id")): str(n.get("name") or n.get("id")) for n in npcs}
+    findings = []
+    for k, v in rows:
+        per = round(10000 * v["hits"] / max(v["words"], 1))
+        which = ", ".join(f"{a}x{n}" for a, n in v["which"].most_common(3) if n) or "never"
+        findings.append(f"{by_id.get(k, k)}: {v['words']:,} words across {v['canvases']} "
+                        f"canvases of his own, says who he is {v['hits']}x "
+                        f"({per} per 10k) — {which}")
+    med = _median([10000 * v["hits"] / max(v["words"], 1) for _, v in rows])
+    summary = (f"{len(rows)} character(s) · median {med:.0f} anchor(s) per 10k words in their "
+               f"own surfaces · anchors taken from each character's own `relationship` line, "
+               f"not from a kin list — read the thinnest row, there is no bar")
+    return summary, findings
+
+
 def lint_place_function(model, game):
     """Does a location's own description say what kind of place it is? — a LIST.
 
@@ -5756,6 +5839,7 @@ def main():
     words_summary, words_lints = lint_own_words(model, game)
     fh_summary, fh_lints = lint_named_before_met(model, game)
     place_summary, place_lints = lint_place_function(model, game)
+    role_summary, role_lints = lint_role_stays_attached(model, game)
     clock_summary, clock_lints = lint_clock_in_prose(model, game)
     tcost_summary, tcost_lints = lint_time_cost_on_button(model, game)
     cur_summary, cur_lints = lint_currency_in_prose(model, game, state)
@@ -5799,6 +5883,8 @@ def main():
                                                          "findings": fh_lints},
                                     "place_function": {"summary": place_summary,
                                                        "findings": place_lints},
+                                    "role_stays_attached": {"summary": role_summary,
+                                                            "findings": role_lints},
                                     "clock_in_prose": {"summary": clock_summary,
                                                        "findings": clock_lints},
                                     "time_cost_on_button": {"summary": tcost_summary,
@@ -6021,6 +6107,19 @@ def main():
         print("           what they ARE and where; after, say the name. A character named in"
               " passing is fine — read the rows and make the call. degrees-of-lewdity swaps")
         print("           the description for the name on the meeting flag in 64 places)")
+
+    if role_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the role stays attached — {role_summary}")
+        for h in role_lints[:12]:
+            print(f"          · {h}")
+        print("          (the-first-hour.md F10 — a LIST, never a score. F7 puts the role on"
+              " screen at the meeting; this asks whether it is still there on the fortieth")
+        print("           visit. Anchors come from each character's OWN relationship line, not"
+              " from a kin list — a fixed list was tried and fired wrongly on ten of")
+        print("           last_call's meetings because that cast is not family. Do not swap the"
+              " NAME out for the relation: destroyer is the only game of 26 that does, and it")
+        print("           has one of each relation. Both, at the point of use)")
 
     if place_summary:
         print(f"  {'─'*72}")
