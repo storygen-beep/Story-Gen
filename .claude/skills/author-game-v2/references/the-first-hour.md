@@ -558,16 +558,44 @@ Reach for a first visit when a place has a **one-time** thing to say — a door 
 now is not, a room whose meaning changes the first time you are let into it. Never as the place's
 only introduction.
 
-### ⚠️ Half of the field's device is not authorable today — this is an ENGINE gap
+### Authoring the two halves
 
-A location `description` is emitted as **one static string** (`v2.py:9629`, `:9676`), and
-`_resolve_at_references` substitutes names and fields only — there is no conditional form. So a
-description **cannot** vary by hour or by state, and the 10-branch / 22%-rotating / 17%-by-hour
-column above cannot be authored at all.
+**State-variance — `[[locations.description_variants]]`, shipped 2026-08-26.** The base
+`description` stays required and becomes the else; each variant is `{conditions, text}` and the
+engine emits a first-match chain. Conditions are the ordinary ones, so the most useful axis is
+**who is in the room** — which is the "what happens here" half of the rule, told by the room itself:
 
-What is authorable today is the half that matters most and costs nothing: **write the description so
-it names the function.** The variation half is filed as engine work; do not write a ledger promise
-against it.
+```toml
+[[locations]]
+id          = "the_yard"
+description = "Gravel from the back step of the house to the roller door of the shop…"
+
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_shop_floor", operator = "is_present" },
+] }
+text = "…and the roller door is up. Air tools go in bursts and stop."
+```
+
+⚠️ **`version = "1.0"` is not optional.** `triggerConditionsSatisfied` returns **true** for any
+`conditions{}` without it, so a variant missing it renders forever and the location's own
+description is never seen again. The importer refuses it rather than building green.
+
+⚠️ **There is no time-of-day condition.** The evaluator has `flag`, `trait`, `npc_at_location`,
+`stage`, `quest`, `item`, `days_since_flag`, `corruption_level` and the clothing family — and
+nothing that reads the hour. So the field's 17%-vary-by-hour column is still **not authorable**;
+schedules gate canvases by time, not descriptions. Gate presence-variants on who is there instead,
+which is where the hour shows up anyway.
+
+**An ambient that stops taking the screen — `[settings] ambient_render = "inline"`.** Under the
+default `"redirect"`, a random ambient `<<goto>>`s and owns the whole screen: no title, no
+description, no portraits, no exits. `"inline"` gives it the description slot only and leaves the
+room standing around it, which is destroyer's shape. A story one-shot keeps the redirect either way.
+
+### Rotation is still not built
+
+The field's other column — 22% of rooms rotating their text between visits — needs a per-visit
+counter like `block_pool`'s and does not exist for descriptions. Do not promise it in a ledger.
 
 ---
 

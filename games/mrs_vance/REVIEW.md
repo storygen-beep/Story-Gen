@@ -38,9 +38,10 @@ was found by **LO playing the built game** — a different instrument that finds
 defect, and the two are not merged so it stays visible which found what. Same split
 `off_season/REVIEW_1.md` records in its own header.
 
-**Current count: 9 open, 12 fixed** — 0 blockers, 2 high, 4 med, 2 low, 1 open question, and **P1,
-Q1, Q2, C1, C2, D1, R1, S2, L1, L2, L3 and T1 FIXED**. M1 and M2 were closed and **reopened** — the
-fix shipped, LO rejected it, and the field agrees with him (§0a **N12**). Two of the twenty-one are still decisions for LO
+**Current count: 7 open, 14 fixed** — 0 blockers, 1 high, 3 med, 2 low, 1 open question, and **P1,
+Q1, Q2, C1, C2, D1, M1, M2, R1, S2, L1, L2, L3 and T1 FIXED**. M1 and M2 were closed, **reopened**
+after LO rejected a game-layer fix the field disagreed with (§0a **N12**), and closed properly on
+2026-08-26 by the engine work they always needed. **W1 is the last HIGH item.** Two of the twenty-one are still decisions for LO
 rather than defect calls: E1 (the obligation's size) and G1 (whether the Want file's one shape is the
 genre). L4 is history and cannot be edited; the correction of record is in §7. Plus **twelve places
 this review was itself wrong**, recorded first in §0a — six caught before writing, and six (N7–N12)
@@ -1717,7 +1718,7 @@ down. Type-guarded, and clean across all fourteen games.
 ---
 
 ### M1 · Thirteen of fourteen locations never say what kind of place they are
-**severity** HIGH · **layer** GAME + ENGINE · **status** **OPEN** — one fix was tried, shipped and reverted
+**severity** HIGH · **layer** GAME + ENGINE · **status** **FIXED** — engine 2026-08-26, proved live
 
 > LO: *"couldnt understand the world, the map, locations."*
 
@@ -1783,22 +1784,49 @@ understand the world"* is not a first-visit complaint. A scene that plays once a
 leaves the room screen exactly as dead as it was. The player who is lost on the twentieth visit is
 still lost.
 
-#### The fix, restated
+#### The fix, as shipped
 
-1. **ENGINE** — the location description must take variants. It is one frozen string today:
-   `<p>{location.description}</p>` (`v2.py:9629`, `:9676`).
-2. **ENGINE** — ambient events must render *on* the room screen instead of replacing it.
-   `getStoryCanvasRedirect` → `<<goto>>` takes the screen away before the description is drawn.
-3. **GAME** — then write the descriptions richer and per-state, against a field median of 82 words
-   and 10 branches.
+**1 · `[[locations.description_variants]]`.** The description was one frozen string
+(`v2.py:9629`, `:9676`). It is now the **else branch** of a first-match chain, each variant
+`{conditions, text}`, evaluated by `setup.triggerConditionsSatisfied` — the helper the location
+passage already called for `entry_conditions` a few lines above. No new runtime primitive.
 
-Steps 1 and 2 are the same two engine items batch two already surfaced. **M1 cannot be closed at the
-game layer alone**, which is why its layer is now GAME + ENGINE.
+The axis that matters turned out to be **`npc_at_location`**, which is LO's own phrasing — *what was
+going in that place* — told by the room itself:
+
+> *"Gravel from the back step of the house to the roller door of the shop, **and the roller door is
+> up. Air tools go in bursts and stop. Somebody crosses the gravel with a part in his hands and does
+> not look at the house.**"*
+
+**Nine variants across seven rooms.** The Yard carries two, and the second states the shape of the
+property — the sentence that lived in `board.map.shape` where no player could reach it. **That is
+what closes M2.**
+
+**2 · `[settings] ambient_render = "inline"`.** A random ambient now takes the **description slot
+only**; the title, the NPC portraits, the solo activities and the nav grid all render around it. A
+story one-shot still owns the screen, under both settings — a story beat should.
+
+⚠️ **Two things the engine still cannot do, written down rather than implied.** There is **no
+time-of-day condition** in the evaluator, so the field's 17%-vary-by-hour column is unauthorable;
+presence is the axis to use instead. And per-visit **rotation** (the field's 22%) needs a counter
+like `block_pool`'s and does not exist for descriptions.
+
+#### Verified
+
+`40/40 judged gates pass` · `playtest_presence` 10/10 · `playtest_quests` 23/23 · two new engine
+suites (12 + 11) inside a full app run of **244 passed** · **live 7/7**: the variant renders while
+the shop is working, the base returns at 03:00, and with an ambient forced the description is
+replaced while the exits and portraits and title all still render.
+
+**Cross-game isolation** is the check that matters most here, because this touched the shared
+engine: seven built games hashed before and after, and every authored passage in `vesper`,
+`off_season`, `the_season`, `last_call`, `late_shifts` and `the_inheritance` is **byte-identical**.
+The only delta anywhere is 25 lines of new runtime library.
 
 ---
 
 ### M2 · The map is a two-level tree and the player is never shown its shape
-**severity** MED · **layer** GAME + ENGINE · **status** **OPEN** — half of it refuted for good, the rest waits on M1
+**severity** MED · **layer** GAME + ENGINE · **status** **FIXED** — by the Yard's variants; the other half refuted for good
 
 What is declared, via `navigation_order` (§0a N5):
 
@@ -1839,8 +1867,8 @@ Measured across every game in the 26-game corpus with eight or more travel scree
 links runs at **field median 0%**, and a grouped travel list at **field median 8%**. Nothing groups
 its travel list by zone. Grouping is not a convention this genre has.
 
-**The second fix is the supported one and it is the same action as M1's**, so this item closes when
-M1 does. The same study says why: the field teaches the shape of a world in **prose that places one
+**The second fix is the supported one and it is the same action as M1's**, and M1's engine work
+closed it on 2026-08-26. The same study says why: the field teaches the shape of a world in **prose that places one
 thing relative to another**, and on that axis this game already leads the corpus — **18.3 such
 phrases per 10,000 words against a field best of 4.8 and a median of 1.8**. The geography was never
 missing. It was rendering as wallpaper under a room title on every visit, which is what this item
@@ -1853,7 +1881,12 @@ ever read it:
 > *"a diesel repair yard on a county road: gravel between a house and a four-bay shop, a row of
 > overnight trucks at the far end, and a crossroads twenty minutes down the road"*
 
-It belongs in the Yard's standing description, on every visit — not in a scene that plays once.
+It belongs in the Yard's standing description, on every visit — not in a scene that plays once. It
+is now in the Yard's second `description_variant`, the one that renders when somebody is out on the
+overnight row:
+
+> *"…the county road goes past the gate, and everything here — the house one side, the four bays the
+> other, the row at the far end — opens onto this piece of ground."*
 
 ---
 
@@ -2347,3 +2380,44 @@ floor cost no board budget carries: nine arrivals put five locations past their 
 
 `41/41 judged gates pass` at every step. `playtest_presence.py` 10/10, `playtest_quests.py` 23/23.
 Count 10 open → 9; R1 was one of the three HIGH items, so two remain.
+
+**2026-08-26 — M1 and M2 closed by the engine work they always needed.**
+
+Yesterday's game-layer attempt at M1 was reverted because the field disagreed with it. What was left
+was two things no amount of writing could reach.
+
+**`[[locations.description_variants]]`.** A location's description was emitted as one static string
+at two byte-identical sites (`v2.py:9629`, `:9676`), and `_resolve_at_references` substitutes names
+only — so a room read the same at 03:00 and 18:00, on day one and day ninety. It is now the else
+branch of a first-match chain evaluated by `setup.triggerConditionsSatisfied`, the helper the
+location passage already called a few lines above for `entry_conditions`. The two emit sites were
+factored into one helper first, because byte-identical copies are how a change like this gets
+half-applied.
+
+The axis that matters is **`npc_at_location`** — the room describing itself differently when
+somebody is in it, which is LO's *"what was going in that place"* told by the room rather than by a
+scene. Nine variants across seven rooms; the Yard's second one states the shape of the property and
+closes **M2**.
+
+**`[settings] ambient_render = "inline"`.** A random ambient took the whole screen — no title, no
+description, no portraits, no exits. It now takes the **description slot only**. A story one-shot
+still redirects under both settings. `getStoryOneShotRedirect` is the new one-shot-only selector,
+and `checkRandomEncounters` gained an `inlineOnly` flag that skips ambients carrying Lane-3
+substitutions, because those inject a `<<goto>>` at node 1 that would navigate away mid-render.
+
+⚠️ **Two engine limits are now written down instead of implied.** There is **no time-of-day
+condition** in the evaluator, so the field's 17%-vary-by-hour column remains unauthorable — gate on
+presence instead. And per-visit **rotation** (the field's 22%) needs a `block_pool`-style counter and
+does not exist for descriptions.
+
+⚠️ **The default build is the no-DB path.** `package_from_toml` without `--use-db` goes through
+`apps/projects/services/game_graph.py`, not the DB writer in `template_import.py`. The first build of
+this feature emitted the ambient wrapper and **zero variants** because only one of the two carried
+the new property.
+
+Skill updated the same day: F9's *"is not authorable"* paragraph replaced with the authoring shape,
+the `version = "1.0"` fail-open warning, and the two limits above. `CHANGELOG.md` bullet alongside.
+
+`40/40 judged gates pass` · `playtest_presence` 10/10 · `playtest_quests` 23/23 · 244 passed in the
+app suite including two new engine suites · live 7/7 · and **every authored passage in the six games
+that did not opt in is byte-identical**. Count 9 open → 7. **W1 is the last HIGH item.**

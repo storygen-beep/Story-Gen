@@ -5,6 +5,68 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-26 (2) — the room can finally change, and an ambient stops taking the screen
+
+**Why.** F9 was rewritten this morning to say the description carries the place. It then had to
+admit, in its own text, that half of what the field does *"is not authorable"* — a location
+`description` was one static string. LO: *"now do the engine work for M1."*
+
+### 1 · `[[locations.description_variants]]` — state-reactive room prose
+
+`description` stays required and becomes the else branch; each variant is `{conditions, text}` and
+the generator emits a first-match `<<if>>/<<elseif>>/<<else>>` chain using
+`setup.triggerConditionsSatisfied`, the helper the location passage already calls for
+`entry_conditions`. No new runtime primitive.
+
+The useful axis turned out to be **`npc_at_location`** — the room describing itself differently
+when somebody is in it, which is the "what happens here" half of F9's rule told by the room rather
+than by a scene.
+
+⚠️ **The importer refuses a variant whose `conditions` lack `version = "1.0"`.** The evaluator
+returns **true** for any conditions without it and raises no build error, so such a variant would
+render forever and the location's own description would never be seen again — worse than having no
+variants at all.
+
+⚠️ **There is no time-of-day condition in the evaluator** — `flag`, `trait`, `npc_at_location`,
+`stage`, `quest`, `item`, `days_since_flag`, `corruption_level`, clothing, and nothing that reads
+the hour. F9 now says so instead of implying hour-variance is available. Rotation between visits is
+also still unbuilt, and F9 says that too.
+
+### 2 · `[settings] ambient_render` — `"redirect"` (default) | `"inline"`
+
+Under `"redirect"` a random ambient `<<goto>>`s and owns the entire screen: the player walks into
+the Yard and never sees the Yard. `"inline"` gives the ambient the **description slot only**, and
+the title, NPC portraits, solo activities and the navigation grid all render around it — destroyer's
+shape, where the encounter and the room's own prose are two branches of one `<<if>>` and the
+affordance bar and the exits print either way.
+
+A **story one-shot keeps the redirect under both settings**; a story beat owning the screen is
+correct. `setup.getStoryOneShotRedirect` is the new one-shot-only selector, and
+`checkRandomEncounters` gained an `inlineOnly` flag that skips ambients carrying Lane-3
+substitutions — those inject a `<<goto>>` at node 1, which inside an `<<include>>` would navigate
+away mid-render.
+
+### Verified
+
+- Two new suites: `test_location_description_variants.py` (12) and `test_ambient_render_inline.py`
+  (11). Full app suite **244 passed, 7 skipped**.
+- **Cross-game isolation, which is the load-bearing check.** Seven built games were hashed before
+  and after. Every authored passage in `vesper`, `off_season`, `the_season`, `last_call`,
+  `late_shifts` and `the_inheritance` is **byte-identical**; the only delta anywhere is 25 lines of
+  new runtime library (an unused function and an unused parameter).
+- `mrs_vance` opted in and authored nine variants across seven rooms. `40/40 judged gates pass`,
+  `playtest_presence` 10/10, `playtest_quests` 23/23.
+- Live in headless Chromium, 7/7: the shop-floor variant renders while the shop is working, the
+  base returns at 03:00, and with an ambient forced the description is replaced **while the exits,
+  the portraits and the room title all still render**.
+
+⚠️ **The default build is the no-DB path.** `package_from_toml` without `--use-db` builds through
+`apps/projects/services/game_graph.py`, not the DB writer in `template_import.py`. A property added
+to only one of them reaches the generator in neither the way you expect — the first build of this
+feature emitted the ambient wrapper and zero variants for exactly that reason.
+
+---
+
 ## 2026-08-26 — F9 was teaching the outlier, and a gate was enforcing it
 
 **Why.** LO, after nine first-visit "arrival" canvases were written for `mrs_vance`, shipped green
