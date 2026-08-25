@@ -354,29 +354,45 @@ One gate and two lints. `python3 scripts/gates.py <slug>`.
 
 | | |
 |---|---|
-| gate · **the label keeps its time** | C3 + C4. No choice label names a clock time; where a label states a duration, it equals the minutes that click actually spends (choice → target node → that node's exit). **n/a** when a game has no choice labels at all. |
+| gate · **the label keeps its time** | C3 + C4. No label names a clock time; where a label states a duration, it equals the minutes that click actually spends (choice → target node → that node's exit). Reads **both** exit shapes — a `choices` array **and** a single `exit_block` that is itself the button. **n/a** when a game has no labels at all. |
 | lint · **the clock in the prose** | C2. Every clock reference in a beat with its canvas's window width beside it, plus the game's rate against the field distribution. A list to read, never a score. |
 | lint · **the time cost is not on the button** | C4. Every click that moves the clock 60 minutes or more without a duration on its label. |
 
-Where each stood when the check landed, 2026-08-22 — read off the shipped gate, not a prediction:
+⚠️ **THE GATE READ 62% OF THE BUTTONS UNTIL 2026-08-25, AND THE TABLE BELOW USED TO SAY SO
+WITHOUT KNOWING IT.** A node's exit is either a `choices` array **or** a single `exit_block` that is
+itself the button (`{type: "location", text: "…", config: {…}}`); `_clk_choices` read only the first.
+That is **1,225 of the 3,214 labels in this repo**, and **22 labels naming a clock time were sitting
+in the unread half** across four games — using `at` and `before`, prepositions the instrument has
+always known. They were invisible because nothing looked, not because the pattern was narrow.
+
+Re-read off the shipped gate, 2026-08-25, after the reader was widened:
 
 ```
-                    label keeps its time
-steam                   FAIL   8 labels
-off_season              FAIL   2
-seventh_day             FAIL   2
-forty_miles             FAIL   1
-the_allowance           PASS
-back_home               PASS
-vesper          (v1)    PASS
-last_call       (v1)    PASS
-late_shifts     (v1)    PASS
-the_inheritance (v1)    PASS
+                    label keeps its time      was (2026-08-22)
+steam                   FAIL  16 labels           FAIL   9
+seventh_day             FAIL   8                  FAIL   2
+the_allowance           FAIL   6                  PASS      <- a false pass
+back_home               FAIL   3                  PASS      <- a false pass
+forty_miles             FAIL   1                  FAIL   1
+mrs_vance               PASS                      PASS      (repaired the same day)
+off_season              PASS                      FAIL   2  (repaired since)
+the_season              PASS                      —
+mothers_place           PASS                      —
+vesper          (v1)    PASS                      PASS
+last_call       (v1)    PASS                      PASS
+late_shifts     (v1)    PASS                      PASS
+the_inheritance (v1)    PASS                      PASS
 ```
 
-**Six of ten pass, and that includes all four v1 games**, so the bar is one shipped work has
-already cleared. `off_season`'s eight duration tags all match their real spend, so its only failure
-is the two words `till one` and `till seven`.
+**Eight of thirteen pass, and that includes all four v1 games**, so the bar is still one shipped work
+has cleared. What moved is the instrument, not the prose: two games that were passing had never been
+measured on 38% of their own buttons.
+
+⚠️ **And `_CLK_PREP` gained `to`, but only in a narrow form** — `to` + a spelled-out hour that is not
+`one`. Measured across 81,264 corpus labels: `to` in the shared alternation adds **8 hits, all
+false** (`Change to 0`, `Update to 0.3`); restricting to a word-hour leaves **1** (*"restrict myself
+to one?"*); excluding `one` leaves **0**. On our own prose the narrow form adds 21 hits across six
+games and every one is a real *"Twenty to eight"* the lint had been missing.
 
 > **Why C2 and C4 are lints and not gates.** A shift-driven world names hours as *rules* and should:
 > `seventh_day`'s `rung_kitchen_rota` and `steam`'s shift board are correct work that a rate gate would

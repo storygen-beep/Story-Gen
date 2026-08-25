@@ -38,12 +38,12 @@ was found by **LO playing the built game** — a different instrument that finds
 defect, and the two are not merged so it stays visible which found what. Same split
 `off_season/REVIEW_1.md` records in its own header.
 
-**Current count: 18 open, 3 fixed** — 0 blockers, 4 high, 7 med, 6 low, 1 open question, and **P1,
-Q1 and Q2 FIXED**. Three of the twenty-one are decisions for LO rather than defect calls: E1 (the
-obligation's size), D1 (how much locked content should explain itself) and G1 (whether the Want
-file's one shape is the genre). Plus **nine places
-this review was itself wrong**, recorded first in §0a — six caught before writing, and three (N7,
-N8, N9) caught only after they had shipped in this file, one of them as its single blocker.
+**Current count: 16 open, 5 fixed** — 0 blockers, 3 high, 6 med, 6 low, 1 open question, and **P1,
+Q1, Q2, C1 and C2 FIXED**. Three of the twenty-one are decisions for LO rather than defect calls: E1
+(the obligation's size), D1 (how much locked content should explain itself) and G1 (whether the Want
+file's one shape is the genre). Plus **ten places
+this review was itself wrong**, recorded first in §0a — six caught before writing, and four (N7, N8,
+N9, N10) caught only after they had shipped in this file, one of them as its single blocker.
 `v2_state.json` is deliberately untouched; the remaining SKILL-layer items (C2, Q1, W1, G1, half of
 D1) are recorded for LO to schedule.
 
@@ -54,11 +54,13 @@ D1) are recorded for LO to schedule.
 `forty_miles/REVIEW.md:31` puts its own corrections ahead of its defect list, because a review that
 hides its misses is worth less than one that does not. Seven claims made during this review were
 narrowed or overturned by checking them. **Six were caught before anything was written down**, which
-is the only reason they are corrections and not defects in this file. **N7, N8 and N9 were not** —
-all three shipped in this file and were overturned afterwards: N7 by LO the day after, N8 and N9 by
-the work of actually repairing the items they belonged to. They are the three most instructive
-entries in the section for exactly that reason, and the pattern in the last two is the same —
-**a defect's diagnosis does not survive contact with its repair.**
+is the only reason they are corrections and not defects in this file. **N7 through N10 were not** —
+all four shipped in this file and were overturned afterwards: N7 by LO the day after, and N8, N9 and
+N10 by the work of actually repairing the items they belonged to. They are the four most instructive
+entries in the section for exactly that reason, and the last three say the same thing three times:
+**a defect's diagnosis does not survive contact with its repair.** Three items in a row were
+diagnosed wrong and repaired right, which is an argument for repairing sooner, not for reviewing
+harder.
 
 ### ⚠️ N1 · The clock-gate hole is one missing preposition, not "it cannot read spelled-out numbers"
 
@@ -225,6 +227,28 @@ exposed three goal thresholds nothing in the game reads (`isaac.want 66`, `sherr
 `tobin.want 30`) as live instructions to grind for nothing. The right fix was to stop gating the
 badge on a meter at all.
 
+### ⚠️ N10 · C2's "the gate has a one-word hole" is wrong — it was reading 62% of the buttons
+
+**The fourth correction to ship in this file, and the third found by repairing the item.**
+
+C2 as written: the clock gate is correct in intent and *"has a one-word hole"* — `to` missing from
+`_CLK_PREP`. Adding `to` would have caught **1 of the 23** clock-naming labels in this repo.
+
+`_clk_choices`, whose docstring is *"Every … label the player can read on a button"*, iterated
+`exit_block.choices` only. A node's exit is **either** a `choices` array **or** a single `exit_block`
+that IS the button. **1,225 of the repo's 3,214 labels are the second kind — 38% — and 22 of the 23
+clock-naming labels were in that half**, using `at` and `before`, prepositions the gate has always
+known.
+
+So `act_sleep` was never read at all. The gate reporting `0 label(s) name a clock time` on this game
+was not a near miss; it was a check that had not looked at the button.
+
+**Why the first pass got it wrong.** It read `_CLK_PREP`, found `to` absent, tested the string
+against the regex in isolation, and stopped. It never asked whether the label reached the regex.
+**Testing a pattern is not testing an instrument** — the question is always what the instrument is
+pointed at, and this is the second item in this file where that was the whole defect (P1/N8's G38 was
+aimed at the runtime path that does not read the field).
+
 ---
 
 # §1 · The dev build is right for this phase, and the release boundary is unguarded
@@ -338,14 +362,13 @@ about authoring changes — which is precisely LO's rule expressed as code inste
 
 ---
 
-# §2 · A button promises an hour the engine cannot reach
+# §2 · A button promised an hour, and the gate was reading 62% of the buttons
 
-### C1 · `act_sleep` says "(to six)" and lands anywhere from 05:00 to 11:45
-**severity** HIGH · **layer** GAME · **status** OPEN
+### C1 · `act_sleep` said "(to six)" and landed anywhere from 05:00 to 11:45
+**severity** HIGH · **layer** GAME · **status** **FIXED** — now `Sleep. (8h)`, and the gate verifies it
 
-`act_sleep`'s exit block carries `text = "Sleep. (to six)"` and
-`time_progression_minutes = 480` — a flat eight hours. The canvas window is 21:00–04:00, seven
-hours wide. Live, driving the clock and clicking the button:
+`act_sleep`'s exit carried `text = "Sleep. (to six)"` and `time_progression_minutes = 480` — a flat
+eight hours — on a canvas open 21:00–04:00, seven hours wide. Live, driving the clock and clicking:
 
 ```
 sleep at 21:00 Monday    ->  wakes 05:00 Tuesday
@@ -355,39 +378,104 @@ sleep at 01:00 Thursday  ->  wakes 09:00 Thursday
 sleep at 03:45 Thursday  ->  wakes 11:45 Thursday
 ```
 
-The label is true for **one entry minute of a 420-minute window**.
+True for **one entry minute of a 420-minute window**, and not only cosmetic: `work_counter` runs
+07:00–13:00 and takes six hours, so sleeping at 03:45 makes the game's largest income surface
+unreachable that day.
 
-It is not only cosmetic. `work_counter` runs 07:00–13:00 and takes six hours. Sleep at 01:00 and
-two of those hours are gone before the player is awake; sleep at 03:45 and the counter — the
-largest income surface in the game at +74 — cannot be started at all.
+`the-clock.md` C3 (`:192`) forbids exactly this and prescribes the swap: *"state the DURATION
+instead"*. Field basis: **84,009 action labels across 27 parseable sandboxes**, 24 of which name an
+absolute clock time and **not one** promises a clock time as the outcome of a repeatable action.
 
-This is precisely what `the-clock.md` C3 (`:192`) forbids: *"A label is a promise about what the
-click does. The engine cannot deliver a clock time (C1), so a label naming one is a promise it
-cannot keep."* Against a field re-measurement of **84,009 action labels across all 27 parseable
-sandboxes**, of which 24 name an absolute clock time and **not one** promises a clock time as the
-outcome of a repeatable action.
+#### Fix
 
-### C2 · The gate that enforces C3 has a one-word hole
-**severity** MED · **layer** SKILL · **status** OPEN
+```toml
+text = "Sleep. (to six)"     ->     text = "Sleep. (8h)"
+```
 
-Gate G36, *the label keeps its time* (`gates.py:5209`), exists, is correct in intent, and reported
-`0 label(s) name a clock time` on this game. The cause is N1: `to` is absent from `_CLK_PREP`'s
-preposition alternation (`gates.py:2727-2730`).
+`(8h)` is true at every entry minute, matches the game's own tag format (`work_counter` is `(6h)`,
+`act_wash_house` is `(25m)`), and — unlike a bare `Sleep.` — it states the fact the label was
+reaching for: **sleeping costs eight hours, so sleeping at three in the morning costs the morning
+shift.** It is also now *checked*: G36's duration half reads the exit's own
+`config.time_progression_minutes` and confirms 480, taking the game from 25 to 26 verified tags, and
+`lint · the time cost is not on the button` goes from `1 of 14 silent` to `all 14 long clicks state
+their duration`.
 
-Four v1 games and two v2 games already pass this gate, so the bar is one shipped work has cleared —
-which makes the miss a hole rather than a threshold problem.
+**The window was deliberately not narrowed.** C3's other option is to shrink the schedule until the
+claim is true; here that would leave a player who is up at 03:00 with no bed. Sleeping late costing
+the morning is correct simulation. Only the label was lying.
 
-### Fix
+### C2 · The gate did not have a one-word hole — it was reading 62% of the buttons
+**severity** MED · **layer** SKILL · **status** **FIXED** — both halves, and four other games go red
 
-**Game.** Turn the reading into a rule, the grammatical turn C2 of the same doctrine already
-prescribes: `Sleep the night.` The clock stays engine business. If the hour genuinely has to be
-named, C3 says that is a window problem — narrow `act_sleep`'s schedule until the claim is true —
-and that there is no third option.
+**⚠️ This item's diagnosis was wrong.** §0a **N10** records it. It said G36 has *"a one-word hole"*,
+the missing preposition `to`. Adding `to` alone would have caught **1 of the 23** clock-naming labels
+in this repo.
 
-**Skill.** Add `to` to `_CLK_PREP`, re-run the census across the 22 scorable games, and record what
-moves. Expect false positives on `to` where it is not temporal (`to the yard`); the existing
-`_CLK_OK_NEXT` / `_CLK_BAD_NEXT` machinery is what handles that and will need the same treatment
-the other prepositions got.
+`_clk_choices` — docstring *"Every … label the player can read on a button"* — read only
+`exit_block.choices`. A node's exit is **either** a `choices` array **or** a single `exit_block` that
+**is** the button (`{type: "location", text: "…", config: {…}}`). `act_sleep` is the second kind, so
+G36 never saw the label at all:
+
+```
+choice labels the gate read           1,989
+single-exit labels it did not         1,225      <- 38% of every button in this repo
+
+clock-naming labels hiding in the unread half:
+  steam         7    'Open at eight.' x4 · 'Get out at one.' · 'Sort her out at six.'
+  seventh_day   6    'Down the ladder at four.' · 'Down the step before eight.' …
+  the_allowance 6    'Out before six.' · 'Go up at eleven.' · 'Get up before three.'
+  back_home     3    'Be gone before seven.' · 'Get up before four.' · 'In before six.'
+  mrs_vance     1    'Sleep. (to six)'
+```
+
+Twenty-two of the twenty-three use `at` or `before`, prepositions the instrument has always known.
+**They were invisible because nothing looked, not because the pattern was narrow** — and they are not
+marginal: **21 of the 23 sit on canvases with no schedule window at all**, so the hour is true for at
+most one minute in 1,440. Mrs. Vance's, on a 420-minute window, was one of the two least wrong.
+
+#### Fix — both halves
+
+**The reader.** `_clk_choices` now yields the `exit_block` itself when a node has no `choices`. It
+already carries `config.time_progression_minutes`, the first key `_clk_spent_minutes` reads, so C4's
+duration half started working on those labels with no further change. It yields a fourth field naming
+the shape, and G36 reports how many findings came from the newly-read surface so a jumped count is
+not misread as prose having changed. `lint_time_cost_on_button` shares the helper and got the same
+widening.
+
+**The preposition, in a narrow form.** Bare `to` is a false-positive machine. Against **81,264 action
+labels** from the 27-game corpus:
+
+```
+`to` in the shared alternation .......... +8, ALL false   "Change to 0" · "Update to 0.3"
+`to` + a spelled-out hour ............... +1 false        "restrict myself to one?"
+`to` + a spelled-out hour, NOT `one` .... +0              <- shipped
+```
+
+Excluding `one` loses no reading (`at one` and `till one` stay covered by the existing branch) and it
+is the same idiom trap `_CLK_BAD_NEXT` was built for — 312 corpus hits of *"at one point"*. On our own
+prose the narrow form adds **21 hits across six games, every one a real "Twenty to eight"** the lint
+had been missing.
+
+#### What it costs the other games, stated plainly
+
+```
+                    now                was (the-clock.md, 2026-08-22)
+steam               FAIL 16            FAIL  9
+seventh_day         FAIL  8            FAIL  2
+the_allowance       FAIL  6            PASS      <- a false pass
+back_home           FAIL  3            PASS      <- a false pass
+forty_miles         FAIL  1            FAIL  1
+mrs_vance           PASS               PASS
+```
+
+Two games that were passing had never been measured on 38% of their own buttons. That is the check
+starting to work, not a regression, and per the standing rule their 22 labels are **not** repaired
+here. `the-clock.md`'s per-game table has been re-run.
+
+⚠️ **No published constant was restated.** `the-clock.md` publishes *84,009 labels* and `gates.py` a
+prose median of *0.8 / p75 1.8*; the re-implementation used for the delta above gives 81,264 and
+0.45 / 0.91. The delta is trustworthy — same instrument both sides — the absolute level is a
+different instrument's. See §9.
 
 ---
 
@@ -965,6 +1053,18 @@ Adjacency is `navigation_order`, not `connections` (§0a N5). All 14 locations d
 graph is a connected two-level tree, and the engine supplies the return edge. A script that looks
 for `connections` or `exits` will find nothing and be wrong.
 
+### The published field constants were NOT restated from this review's own extractor
+
+`the-clock.md` publishes **84,009 action labels** across 27 sandboxes and `gates.py` a prose median of
+**0.8 / p75 1.8**. The re-implementation written to measure the `to` branch gives **81,264** labels
+and **0.45 / 0.91** — a simpler extractor (`[[…]]` and `<<link "…">>` only), so the gap is the
+instrument, not the corpus.
+
+**The delta is trustworthy and the level is not.** Every before/after figure quoted for C2 ran the
+same extractor on both sides, which is what a delta needs; nothing licenses overwriting another
+instrument's absolute number with this one. The published constants stand. Do not "correct" them from
+these figures.
+
 ### `ready_canvas` must name a canvas with a LOCATION, or Frame 2 renders nothing
 
 `lookupCanvasBySlug` (`v2.py:15371`) walks `help_data.locationCanvases`, which is keyed by location
@@ -990,68 +1090,30 @@ The `CLAUDE.md` test is *"would a correct author-game skill have prevented this?
 twenty-one answer yes** — P1, C2, Q1, W1, G1 and B2 outright, D1 in part. **One of the seven is
 fixed** (P1); the rest are recorded for LO to schedule.
 
-### C2 · yes — and the fix is one token
+### C2 · yes — and it is the fifth instrument hole of the same family
 
-`the-clock.md` C3 is correct, well-evidenced, and gated. The gate has a hole the size of the word
-`to`. Nothing about the doctrine needs rethinking; the instrument needs one alternation extended
-and a re-census. **This is the cheapest skill fix in the file and it ships again next game if it is
-not made.**
+`the-clock.md` C3 is correct, well-evidenced and gated. The gate was reading **62% of the buttons**:
+`_clk_choices` iterated `exit_block.choices` and a node's exit is just as often a single `exit_block`
+that IS the button. 1,225 labels unread, 22 clock-naming ones among them, four games affected.
 
-Pattern worth naming: this is the third instrument hole of the same shape recorded in this skill —
-`_band_texts` knowing `group` and not `block_pool`, `genre_words.txt` being structurally blind to
-false friends, and now `_clk_refs` missing a preposition. In every case the doctrine was right and
-the check was narrower than the doctrine.
+Nothing about the doctrine needed rethinking. What needed it was the habit of checking a **pattern**
+instead of an **instrument** — see §0a N10.
 
-### Q1 · yes — and the fix is shipped, in `engine.md` and in four other games' future
-
-§23 warned that `terminal` is not computed from progress and gave the rule that follows — *terminal
-belongs on a card the player has to CLIMB TO*. It never said **climb to what**, and every v2 game
-answered the same wrong way. Measured across the repo:
+**This is the fifth of the same family recorded in this file**, and at five it stops being a run of
+bad luck:
 
 ```
-mrs_vance     5 of 6 - two ON the door, three BEFORE it
-forty_miles   6 of 6 - every badge at exactly the door value
-seventh_day   1 badge on the door + 5 goals past anything the game reads
-the_season    4 of 5
-the_allowance 3 of 5
-vesper        0 of 5   <- the v1 game §23 was WRITTEN FROM
+_band_texts          knew `group`, not `block_pool`
+genre_words.txt      structurally blind to false friends
+_clk_refs            missing a preposition
+G38                  aimed at the runtime path that does NOT read requires_npc   (N8)
+_clk_choices         read one of the two exit shapes                             (N10)
 ```
 
-**Four v2 games and not the one the section came from.** The doctrine did not fail; the sentence that
-would have prevented this was never written. §23 now carries it — a meter is the wrong thing to gate
-a badge on, put the ✓ on a flag the content sets on its way out — plus the goal-nobody-reads warning
-and the `ready_canvas` trap. `lint_badge_before_content` reports all three.
-
-**And the one-`terminal_text` cap was right for a different game.** `CHANGELOG.md` 2026-08-13 records
-it coming from `vesper` 0.1.8, a **finished** build where four arcs genuinely had ended and
-*"Arc complete"* was true of them. In a v0.1 nothing is closed, so the cap forced five tracks into a
-**stronger and falser** claim than the string it was rationing — and `the-release.md:109` already
-asked for *"a plain marker at the top of each track"*. The cap is now on the **claim**, not the field.
-
-This is the second time in this file a rule turned out to be correct but scoped to the wrong phase —
-B1/N7 was the first. Worth naming: **a rule measured on a finished game is not automatically a rule
-about a first release.**
-
-### W1 · yes — and this is the second game to draw the same sentence from LO
-
-`the_season` was reported with *"I don't know who is who"*, and Mrs. Vance was reported with *"for
-many npcs, it still sounds unclear like who is who."* Two games, two casts, the same complaint. The
-skill has a 7-step npc-intro and nothing at all about **keeping** a name attached to a person once
-the introduction is over — no rule that prose re-anchors a relationship, no check that counts
-whether it does. 31 kin words in 10,298 is what "no rule" looks like.
-
-### G1 · yes — and it is the largest of the five
-
-`the-want.md` has no step comparing a new premise against the games already in the repo, and its §2
-mandates a single shape. Seven of eight shipped appetites open with the same four words. This one is
-not a Mrs. Vance defect at all; it decides what the *next* game can be.
-
-### D1 · partly — right about doors, over-applied everywhere else
-
-Gate 42 and `the-release.md:110` are correct that a locked door must say why, and the five real doors
-here are good work. Neither doctrine says anything about the other 27 sites, so an author with no
-guidance applied the door rule to cooldowns and to mid-scene arousal gates. The rule needs a scope,
-not a reversal.
+**In all five the doctrine was right and the check was narrower than the doctrine** — and in the last
+two the check was pointed at the wrong surface entirely, which no amount of widening a pattern would
+have fixed. The cheap standing question for any new check: *what fraction of its subject does it
+actually read, and how would I know?*
 
 ### P1 · yes — and the fix is shipped
 
@@ -1731,6 +1793,32 @@ re-investigated. Count 13 → 19. Still nothing repaired.
 **2026-08-25 — L4 added.** Reconciling §4's pool count against the shipping commit before committing
 this file showed the commit's "46 pools" matches neither the grep (41) nor the parse (39), and its
 "46 in the_long_summer" is 49. Filed with L1–L3 as the same defect class. Count 19 → 20.
+
+**2026-08-25 — C1 and C2 FIXED, and C2's diagnosis was the wrong size.** C2 said the clock gate had
+*"a one-word hole"*, the missing preposition `to`. It had a **1,225-label blind spot**: `_clk_choices`
+read `exit_block.choices` and never the single `exit_block` that IS the button — 38% of every label
+in this repo, with **22 of 23 clock-naming labels hiding in it**, using prepositions the gate already
+knew. `to` alone would have caught one of them, ours. Recorded as **N10**.
+
+**Applied.** `act_sleep` is now `Sleep. (8h)` — the duration swap C3 itself prescribes, true at every
+entry minute of the 420-minute window, matching the game's own tag format, and it states the fact the
+old label was reaching for: sleeping costs eight hours, so sleeping at three costs the morning shift.
+The window was deliberately not narrowed; that would leave a player up at 03:00 with no bed.
+
+**Skill, same commit.** `_clk_choices` yields the single exit too and names which shape a finding came
+from; `_CLK_PREP` gains `to` in a narrow branch — `to` + a spelled-out hour that is not `one`, which
+against 81,264 corpus labels adds **0** false positives where bare `to` adds 8. `the-clock.md`'s
+scoreboard row and per-game table re-run.
+
+**Verified.** The pre-fix TOML through the post-fix gate reports the sleep label; the repaired game
+reports `0 label(s) name a clock time · 26 stated duration(s) all match the spend` (25 → 26, the new
+tag is now *checked*), and `lint · the time cost is not on the button` goes `1 of 14 silent` → `all 14
+state their duration`. Corpus regression 0 → 0. `41/41 judged gates pass`. Both live suites unchanged
+at 10/10 and 23/23.
+
+**What it costs elsewhere, and it is the point:** `the_allowance` and `back_home` were **passing this
+gate on 38% of their own buttons** and now fail it, and `steam` 9 → 16, `seventh_day` 2 → 8. Not
+repaired — standing rule. Count 18 open → 16.
 
 **2026-08-25 — Q1 and Q2 FIXED, and Q1's own diagnosis corrected.** The badge is no longer gated on
 a meter. Repairing it overturned Q1's *"gated at the same value as the content"* — true for Isaac and

@@ -83,9 +83,15 @@ blocks = [
   { type = "block_pool", blocks = [ { type = "paragraph", content = "The window faces the yard so you can see whose truck is in it without getting up, and you check before the light goes off, every night, the way you would check a lock." }, { type = "paragraph", content = "The pole light is on a timer and it goes off at eleven, and for about a minute after that the room is darker than it is going to be, until your eyes catch up." }, { type = "paragraph", content = "The compressor down at the shop cuts in and out all night on its own schedule and you have stopped hearing it, except that you wake up in the gaps." }, { type = "paragraph", content = "You sleep on the side away from the door. Nobody put you there. You did it the first night and it has become a fact about you." }, ] },
 ]
 
+# ⚠️ A DURATION, NEVER A CLOCK TIME. The engine has no absolute-time advance —
+#    advanceTime(minutes) is the whole API — so the flat 480 below lands anywhere
+#    from 05:00 to 12:00 across this canvas's 21:00-04:00 window. "(to six)" was
+#    true for ONE entry minute of 420. `(8h)` is true at every one of them, which
+#    is the swap the-clock.md C3 prescribes, and it is the fact the player actually
+#    needs: sleeping at 03:00 costs the morning shift.
 [canvases.nodes.exit_block]
 type = "location"
-text = "Sleep. (to six)"
+text = "Sleep. (8h)"
 
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
