@@ -1603,6 +1603,8 @@ priority      = 20
 location             = "your_room"
 is_repeatable        = true
 max_triggers_per_day = 1
+show_when_blocked = true
+cooldown_message  = "from nine at night, once a night"
 
 [[canvases.trigger.schedules]]
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
@@ -1616,10 +1618,6 @@ exclusive_group  = "bed"
 conditions       = { version = "1.0", logic = "AND", items = [
   { type = "npc_at_location", location_id = "your_room", npc_id = "npc_dorn", operator = "is_present" },
 ] }
-
-[canvases.trigger.metadata]
-show_when_blocked = true
-cooldown_message  = "Bed — from nine at night, and once a night."
 
 [[canvases.nodes]]
 id = "base"
@@ -1779,10 +1777,8 @@ name     = "Work the counter"
 priority      = 20
 location      = "the_office"
 is_repeatable = true
-
-[canvases.trigger.metadata]
 show_when_blocked = true
-cooldown_message  = "The counter — mornings, seven till one, and clean enough to stand at it."
+cooldown_message  = "mornings, seven till one, and clean enough to stand at it"
 
 [[canvases.trigger.schedules]]
 weekdays   = [0, 1, 2, 3, 4]
@@ -1898,10 +1894,8 @@ name     = "Take a parts run"
 priority      = 20
 location      = "the_shop_floor"
 is_repeatable = true
-
-[canvases.trigger.metadata]
 show_when_blocked = true
-cooldown_message  = "Parts runs go out in the working day, eight till five."
+cooldown_message  = "the working day, eight till five"
 
 [[canvases.trigger.schedules]]
 weekdays   = [0, 1, 2, 3, 4]
@@ -1967,10 +1961,8 @@ name     = "Wash out a trailer"
 priority      = 20
 location      = "the_wash_bay"
 is_repeatable = true
-
-[canvases.trigger.metadata]
 show_when_blocked = true
-cooldown_message  = "Trailers get washed out midday, eleven till two."
+cooldown_message  = "midday, eleven till two"
 
 [[canvases.trigger.schedules]]
 weekdays   = [0, 1, 2, 3, 4]
@@ -2021,10 +2013,8 @@ name     = "Walk the row"
 priority      = 20
 location      = "the_back_row"
 is_repeatable = true
-
-[canvases.trigger.metadata]
 show_when_blocked = true
-cooldown_message  = "The walk-round is a night job — after ten."
+cooldown_message  = "nights, after ten"
 
 [[canvases.trigger.schedules]]
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
@@ -2097,10 +2087,8 @@ priority             = 15
 location             = "the_shop_floor"
 is_repeatable        = true
 max_triggers_per_day = 1
-
-[canvases.trigger.metadata]
 show_when_blocked = true
-cooldown_message  = "One thing off the parts wall a day. Cade counts the wall too."
+cooldown_message  = "one off the wall a day"
 
 [[canvases.nodes]]
 id = "base"
@@ -2138,10 +2126,8 @@ priority             = 15
 location             = "the_kitchen"
 is_repeatable        = true
 max_triggers_per_day = 1
-
-[canvases.trigger.metadata]
 show_when_blocked = true
-cooldown_message  = "One bottle. They come on a pallet once a month."
+cooldown_message  = "one bottle a day"
 
 [[canvases.trigger.substitutions]]
 target_canvas_id = "walkin_kitchen_booth"
@@ -2187,10 +2173,8 @@ priority             = 15
 location             = "kerr_crossing"
 is_repeatable        = true
 max_triggers_per_day = 1
-
-[canvases.trigger.metadata]
 show_when_blocked = true
-cooldown_message  = "You put back what you used. Once."
+cooldown_message  = "once a day, and only what you used"
 
 [[canvases.nodes]]
 id = "base"
@@ -2230,10 +2214,8 @@ priority             = 15
 location             = "the_bar"
 is_repeatable        = true
 max_triggers_per_day = 1
-
-[canvases.trigger.metadata]
 show_when_blocked = true
-cooldown_message  = "One round a night. Anything past that gets talked about."
+cooldown_message  = "one round a night"
 
 [[canvases.trigger.substitutions]]
 target_canvas_id = "walkin_bar_cade"
@@ -2587,8 +2569,6 @@ time_progression_minutes = 5
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "loop_stage", operator = "gte", value = 2 },
 ] }
-show_when_locked = true
-locked_text      = "Get up on the desk — not from a standing start, not with him like this."
 effects = [
   { targetType = "player", trait = "loop_act", op = "set", value = 3 },
   { targetType = "player", trait = "arousal",  op = "add", value = 10, cap = 100 },
@@ -2602,8 +2582,6 @@ time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 60 },
 ] }
-show_when_locked = true
-locked_text      = "Let him cum — he is nowhere near it yet."
 effects = [ { targetType = "player", trait = "loop_act", op = "set", value = 1 } ]
 
 [[canvases.nodes.exit_block.choices]]
@@ -2656,8 +2634,6 @@ time_progression_minutes = 5
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "loop_stage", operator = "gte", value = 2 },
 ] }
-show_when_locked = true
-locked_text      = "Get up on the desk — he has not got to the point of moving you yet."
 effects = [
   { targetType = "player", trait = "loop_act", op = "set", value = 3 },
   { targetType = "player", trait = "arousal",  op = "add", value = 10, cap = 100 },
@@ -2671,8 +2647,6 @@ time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 60 },
 ] }
-show_when_locked = true
-locked_text      = "Let him finish — not yet, he is still going slow enough to talk."
 effects = [ { targetType = "player", trait = "loop_act", op = "set", value = 2 } ]
 
 [[canvases.nodes.exit_block.choices]]
@@ -2725,8 +2699,6 @@ time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 65 },
 ] }
-show_when_locked = true
-locked_text      = "Let him cum inside you — he is still counting, and he has not lost it yet."
 effects = [ { targetType = "player", trait = "loop_act", op = "set", value = 3 } ]
 
 [[canvases.nodes.exit_block.choices]]
@@ -2845,8 +2817,6 @@ time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 60 },
 ] }
-show_when_locked = true
-locked_text      = "Let him cum — not yet, he has barely started."
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Get your jeans up."
@@ -2942,8 +2912,6 @@ time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "loop_stage", operator = "gte", value = 2 },
 ] }
-show_when_locked = true
-locked_text      = "Get up and ride him — he has not finished the sentence and he will not be interrupted."
 effects = [
   { targetType = "player", trait = "loop_stage", op = "add", value = 1 },
   { targetType = "player", trait = "loop_act",   op = "set", value = 2 },
@@ -2958,8 +2926,6 @@ time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 60 },
 ] }
-show_when_locked = true
-locked_text      = "Let him cum — he is nowhere near done talking."
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Sit back on your heels."
@@ -3068,8 +3034,6 @@ time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 60 },
 ] }
-show_when_locked = true
-locked_text      = "Let him cum — he is holding on and he is going to keep holding on."
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Get off him."
@@ -3177,8 +3141,6 @@ time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 60 },
 ] }
-show_when_locked = true
-locked_text      = "Let him cum — he has waited eight weeks and he is not rushing it now."
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Get your jeans and go back down the row."
@@ -3232,15 +3194,13 @@ location             = "your_room"
 priority             = 5
 is_repeatable        = true
 max_triggers_per_day = 1
+show_when_blocked = true
+cooldown_message  = "not with him in the house"
 
 [[canvases.trigger.schedules]]
 weekdays   = [0, 1, 2, 3, 4]
 start_time = "21:30"
 end_time   = "02:00"
-
-[canvases.trigger.metadata]
-show_when_blocked = true
-cooldown_message  = "Not with him in the house."
 
 [[canvases.nodes]]
 id = "base"
@@ -3297,8 +3257,6 @@ time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 55 },
 ] }
-show_when_locked = true
-locked_text      = "Not there yet."
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Take your hand out."

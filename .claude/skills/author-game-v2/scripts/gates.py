@@ -823,6 +823,115 @@ def lint_badge_before_content(model, game):
     return (summary, sorted(set(findings)))
 
 
+def lint_refusal_shape(model, game):
+    """WHICH rows are shown locked, and whether the reason on them is a door or a label.
+
+    `engine.md` §15 was reversed 2026-08-24 to *"set `locked_text` by default"*, and it is
+    right — a visible mute row is 2.26% of the field and nearly all of that is settings
+    chrome. But it answers only what a shown row must SAY. Nothing says how many rows to
+    show, and the first game authored after the reversal went to 22 of 22 against 13 of
+    171 across every game before it. The instruction was followed; the missing half is
+    this one.
+
+    THE FIELD'S DEFAULT IS SILENCE (`findings_B_refusal.md` §2, 16,167 refusing chains):
+    **71% render nothing at all**, and the per-game silent share runs a median of **79%**
+    across a **22–100%** range. The study's own words: *"a house decision, not a genre
+    norm"* — zaras-school-life speaks 78% of its refusals, corpo-life speaks two of 574,
+    and both shipped. So this is a LIST and can never be a gate; a threshold here would be
+    the invented number `gates.py` refuses elsewhere.
+
+    THREE THINGS IT HANDS OVER, because they are three different calls:
+
+    1. **In-scene.** A shown-locked choice routing to a node inside its OWN canvas is a
+       greyed rung in the middle of a beat rather than a door on a room screen.
+    2. **Self-moved.** Of those, the ones gated on a trait the same canvas's effects
+       WRITE. That is the machinery narrating its own progress bar: the row opens by
+       itself in a click or two, so the text hands the player nothing to act on. Contrast
+       vesper's in-scene *"Not like this — you're filthy"*, which names something the
+       player goes elsewhere and fixes — a real handle, correctly spoken.
+    3. **Length.** A DOOR and a REFUSAL are different objects and the numbers say so. The
+       field's spoken refusals are a flat mechanical UI label — n=4,540, **median 9
+       words**, naming a price 37% of the time. `vesper`, the study's *"only game doing
+       this properly"*, writes its nine in-fiction at a **median of 22**. Nine words is
+       right for "already done" and wrong for the ceiling of a release.
+    """
+    def _walk(o, f):
+        if isinstance(o, dict):
+            f(o)
+            for v in o.values():
+                _walk(v, f)
+        elif isinstance(o, list):
+            for v in o:
+                _walk(v, f)
+
+    shown, in_scene, self_moved, lens = 0, [], [], []
+    for c in model:
+        raw = c.get("raw") or {}
+        cid = c.get("id")
+        node_ids = {n.get("id") for n in (raw.get("nodes") or [])}
+        writes = set()
+
+        def _w(o):
+            # ⚠️ `effects` is not always a list of dicts. the_inheritance carries string
+            # entries and an unguarded .get() there took the WHOLE SCOREBOARD down for
+            # that game — a lint must never be able to do that. Guard every element.
+            for e in (o.get("effects") or []):
+                if not isinstance(e, dict):
+                    continue
+                k = e.get("trait")
+                if k:
+                    writes.add(("npc:" + e["npcId"] if e.get("npcId") else "player") + "." + k)
+        _walk(raw, _w)
+
+        hits = []
+
+        def _f(o):
+            if not o.get("show_when_locked"):
+                return
+            hits.append(o)
+        _walk(raw, _f)
+
+
+        for ch in hits:
+            shown += 1
+            lt = str(ch.get("locked_text") or "")
+            if lt.strip():
+                lens.append(len(re.findall(r"[A-Za-z][A-Za-z'\-]*", lt)))
+            tgt = str(ch.get("nodeId") or "")
+            inside = (ch.get("targetType") == "node" and
+                      (tgt in node_ids or tgt.startswith(cid + ".")))
+            if not inside:
+                continue
+            reads = set()
+            for it in ((ch.get("conditions") or {}).get("items") or []):
+                if not isinstance(it, dict):
+                    continue
+                k = it.get("trait_key") or it.get("trait")
+                if k:
+                    reads.add(("npc:" + it["npc_id"] if it.get("npc_id") else "player") + "." + k)
+            label = (lt or str(ch.get("text") or ""))[:46]
+            same = sorted(reads & writes)
+            if same:
+                self_moved.append(f'{cid}: "{label}" — gated on {", ".join(same)}, '
+                                  f"which this canvas's own effects raise")
+            else:
+                in_scene.append(f'{cid}: "{label}" — in-scene, gated on '
+                                f'{", ".join(sorted(reads)) or "a flag"}')
+
+    if not shown:
+        return ("", [])
+    findings = sorted(self_moved) + sorted(in_scene)
+    n_in = len(self_moved) + len(in_scene)
+    bits = [f"{shown} shown-locked · {n_in} in-scene"]
+    if self_moved:
+        bits.append(f"{len(self_moved)} gated on a bar the scene itself moves")
+    if lens:
+        lens.sort()
+        med = lens[len(lens) // 2]
+        bits.append(f"reason length median {med}w (field refusal 9 · vesper door 22)")
+    return (" · ".join(bits), findings)
+
+
 def lint_screen_shape(model, game):
     """The two `the-surfaces.md` rules whose thresholds are not yet establishable.
 
@@ -5628,6 +5737,7 @@ def main():
     lints = lint_dialogue_attribution(model)
     amb_summary, amb_lints = lint_ambient_presence(model, game)
     badge_summary, badge_lints = lint_badge_before_content(model, game)
+    refusal_summary, refusal_lints = lint_refusal_shape(model, game)
     world_lints = lint_world_prose(model, game)
     shape_summary, shape_lints = lint_screen_shape(model, game)
     label_summary, label_lints = lint_labels(model, game)
@@ -5661,6 +5771,8 @@ def main():
                                                          "findings": amb_lints},
                                     "badge_before_content": {"summary": badge_summary,
                                                              "findings": badge_lints},
+                                    "refusal_shape": {"summary": refusal_summary,
+                                                      "findings": refusal_lints},
                                     "dispatch_depth": {"summary": disp_summary,
                                                        "findings": disp_lints},
                                     "ladder": {"summary": ladder_summary,
@@ -5721,6 +5833,22 @@ def main():
             print(f"          · … and {len(lints)-12} more")
         print("          (a canvas that neither binds nor names the speaker — check the"
               " name that will render)")
+
+    if refusal_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · which refusals are shown at all — {refusal_summary}")
+        for h in refusal_lints[:14]:
+            print(f"          · {h}")
+        if len(refusal_lints) > 14:
+            print(f"          · … and {len(refusal_lints)-14} more")
+        print("          (engine.md §15 says what a shown row must SAY and nothing about how"
+              " many to show. The field's default is silence — 71% of 16,167 refusals render")
+        print("           nothing, per-game median 79% silent across a 22-100% range, which the"
+              " study calls \"a house decision, not a genre norm\". A LIST, never a score.")
+        print("           A row gated on a bar THIS SCENE moves is the machinery narrating its"
+              " own progress bar; a row gated on something the player goes elsewhere and")
+        print("           fixes is a real handle and worth speaking. Length: a refusal is a"
+              " 9-word UI label, a DOOR is in-fiction and vesper's run to 22)")
 
     if badge_summary:
         print(f"  {'─'*72}")

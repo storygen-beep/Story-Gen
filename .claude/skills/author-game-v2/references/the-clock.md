@@ -290,13 +290,29 @@ shutter"*). Every other game drops the entry silently:
 
 ```toml
 [canvases.trigger]
-location         = "the_arcade"
-is_repeatable    = true
-
-[canvases.trigger.metadata]
+location          = "the_arcade"
+is_repeatable     = true
 show_when_blocked = true
-cooldown_message  = "<one line saying when this is available>"
+cooldown_message  = "mornings, eight till one"
 ```
+
+⚠️ **BOTH KEYS GO AT THE TOP LEVEL OF `[canvases.trigger]`. THIS SNIPPET PUT THEM IN
+`[canvases.trigger.metadata]` UNTIL 2026-08-25 AND THAT PATH IS DEAD.** The importer reads
+`trig_def.get("show_when_blocked")` and `_require_str(trig_def, "cooldown_message")` —
+`template_import.py:1929-1930`, the trigger table itself — and then writes them **into** metadata at
+`:6980-6981` for the generator to read back at `v2.py:11484`. Authoring them in `metadata` directly
+skips the importer entirely: the TOML is valid, the build is green, every gate passes, and
+`showWhenBlocked` reaches the built HTML **zero** times.
+
+Caught by a game that copied this example verbatim: ten authored schedule lines, none of them ever
+on screen, and the activity vanishing exactly as the paragraph above warns. `off_season` — written
+before this section existed — has always declared them at the top level, which is why its six work
+and why the doctrine could be written from it while the example was wrong.
+
+**The message is a bare phrase, not a sentence.** The engine renders it as `<row name> — <message>`,
+so restating the row's own name doubles it: *"Work the counter — The counter — mornings, seven till
+one"*. `off_season`'s shape is the house one — lowercase, no restatement, no full stop:
+*"mornings, eight till one"*, *"after nine at night"*, *"the agency's key, nine till five"*.
 
 `show_when_blocked` and `cooldown_message` are read at `v2.py:11055-11059` and emitted as
 `showWhenBlocked` / `cooldownMessage` (`v2.py:11100-11101`). When `isCanvasValid` returns false —
