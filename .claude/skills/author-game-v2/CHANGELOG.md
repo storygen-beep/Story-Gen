@@ -5,6 +5,91 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-25 — the clock gate was reading 62% of the buttons (`gates.py`, `the-clock.md`)
+
+**Why.** `mrs_vance` shipped a sleep button labelled **"Sleep. (to six)"** on a canvas that opens
+21:00–04:00 and advances a flat 480 minutes — true for **one entry minute of 420**. G36 *the label
+keeps its time* passed it. `REVIEW.md` diagnosed a missing preposition, `to`. **That was wrong**, and
+the truth is bigger.
+
+### 1 · `_clk_choices` read one of the two exit shapes
+
+A node's exit is **either** a `choices` array **or** a single `exit_block` that is itself the button
+(`{type: "location", text: "…", config: {…}}`). The helper — docstring *"Every … label the player can
+read on a button"* — iterated `exit_block.choices` only.
+
+```
+choice labels it read           1,989
+single-exit labels it did not   1,225      <- 38% of every button in this repo
+```
+
+**23 labels naming a clock time were sitting in the unread half, across five games.** Twenty-two use
+`at` or `before` — prepositions this instrument has always known. They were invisible because nothing
+looked, not because the pattern was narrow. And they are not marginal: **21 of the 23 sit on canvases
+with no schedule window at all**, so the hour is true for at most one minute in 1,440.
+
+Fixed by yielding the `exit_block` itself when a node has no `choices`. It already carries
+`config.time_progression_minutes`, which is the first key `_clk_spent_minutes` reads, so C4's
+duration half started working on those labels with no further change — `mrs_vance` 25 → 26 verified
+tags, `off_season` 1 → 10. `_clk_choices` now yields a fourth field naming the shape, and G36 says how
+many findings came from the newly-read surface so a jumped count is not misread as prose having
+changed. `lint_time_cost_on_button` shares the helper and got the same widening.
+
+### 2 · `_CLK_PREP` gained `to`, in a narrow form
+
+Bare `to` is a false-positive machine. Measured against **81,264 action labels** from the 27-game
+corpus:
+
+```
+`to` in the shared alternation .......... +8, ALL false   "Change to 0" · "Update to 0.3"
+`to` + a spelled-out hour ............... +1 false        "restrict myself to one?"
+`to` + a spelled-out hour, NOT `one` .... +0
+```
+
+Shipped as a separate branch with its own word-list, `_CLK_WORDNUM_NOT_ONE`. Excluding `one` loses no
+reading — `at one` and `till one` stay covered by the existing branch — and `one` is the same idiom
+trap `_CLK_BAD_NEXT` was built for (312 corpus hits of "at one point"). On our own prose it adds **21
+hits across six games, every one a real "Twenty to eight" / "Ten to six"** the lint had been missing.
+
+⚠️ **Neither number here restates a published constant.** `the-clock.md` publishes *84,009 labels* and
+gates.py a prose median of *0.8 / p75 1.8*; this re-implementation of the extractor gives 81,264 and
+0.45 / 0.91. The **delta** is trustworthy — the same instrument on both sides — the absolute level is
+a different instrument's and was left alone rather than quietly overwritten.
+
+### 3 · `the-clock.md` — the scoreboard row and the per-game table
+
+C3 is correct doctrine and did not move. The gate's row now says it reads both exit shapes, and the
+2026-08-22 per-game table was re-run, because two of its passes were an artefact of the blind spot:
+
+```
+                    now                was
+steam               FAIL 16            FAIL  9
+seventh_day         FAIL  8            FAIL  2
+the_allowance       FAIL  6            PASS      <- a false pass
+back_home           FAIL  3            PASS      <- a false pass
+forty_miles         FAIL  1            FAIL  1
+mrs_vance           PASS               PASS      (repaired the same day)
+off_season          PASS               FAIL  2   (repaired since)
++ the_season · mothers_place · vesper · last_call · late_shifts · the_inheritance   PASS
+```
+
+Eight of thirteen pass, all four v1 games among them, so the bar is still one shipped work has
+cleared. Per the standing rule the other games' 22 labels are **not** repaired here.
+
+**Verified.**
+- Corpus regression, shipped gate vs new, 81,264 labels: **0 → 0**. The `to` branch adds nothing false.
+- The **pre-fix** `mrs_vance` TOML through the **post-fix** gate reports
+  `act_sleep: "Sleep. (to six)" — the engine cannot reach a clock time (to six))`; the repaired game
+  reports `0 label(s) name a clock time · 26 stated duration(s) all match the spend`.
+- `41/41 judged gates pass` on `mrs_vance` before and after.
+- `lint · the time cost is not on the button` goes `1 of 14 silent` → `all 14 long clicks state their
+  duration`, because the repaired label states `(8h)` — the swap C3 itself prescribes, and the fact
+  the player actually needs: sleeping at 03:00 costs the morning shift.
+- Both live suites unchanged against a fresh build: `playtest_presence.py` 10/10,
+  `playtest_quests.py` 23/23.
+
+---
+
 ## 2026-08-25 — the badge arrives before the content, in five of eight games (`engine.md` §23, `gates.py`)
 
 **Why.** `mrs_vance` printed **"✓ Arc complete"** on five of six characters at or before the click

@@ -2938,9 +2938,23 @@ _CLK_OCLOCK = re.compile(r"\bo'?clock\b", re.I)
 # Europe), so the two instruments were looking at the same string and neither counted
 # it as a clock.
 _CLK_HALF = r"half(?:\s+past)?\s+(?:" + _CLK_WORDNUM + r"|\d{1,2})"
+# `to` is a SEPARATE branch and a narrower one, because bare `to` is a false-positive
+# machine. Measured 2026-08-25 against 81,264 action labels from the 27-game corpus:
+#   `to` in the shared alternation .......... +8 hits, ALL false  ("Change to 0",
+#                                             "Update to 0.3" — sliders and version buttons)
+#   `to` + a spelled-out hour ............... +1 false ("restrict myself to one?")
+#   `to` + a spelled-out hour, NOT `one` .... +0
+# `one` is the same idiom trap _CLK_BAD_NEXT was built for (312 corpus hits of "at one
+# point"), and excluding it here loses no reading: `at one` and `till one` are still
+# covered by the branch above. On our own prose the narrow form adds 21 hits across six
+# games and every one is a real "Twenty to eight" / "Ten to six" the lint was missing.
+_CLK_WORDNUM_NOT_ONE = "two|three|four|five|six|seven|eight|nine|ten|eleven|twelve"
 _CLK_PREP = re.compile(
-    r"\b(?:at|till|until|by|before|after|past|from|gone)\s+"
-    r"(?:" + _CLK_HALF + r"|" + _CLK_WORDNUM + r"|\d{1,2})\b([^\w]*)(\w+)?", re.I)
+    r"\b(?:"
+    r"(?:at|till|until|by|before|after|past|from|gone)\s+"
+    r"(?:" + _CLK_HALF + r"|" + _CLK_WORDNUM + r"|\d{1,2})"
+    r"|to\s+(?:" + _CLK_HALF + r"|" + _CLK_WORDNUM_NOT_ONE + r")"
+    r")\b([^\w]*)(\w+)?", re.I)
 # An hour needs no preposition when a part of the day follows it — "Seven in the
 # morning and the fryers have been off an hour" was invisible to the rule above.
 _CLK_PARTOFDAY = re.compile(
@@ -3074,13 +3088,37 @@ def _clk_spent_minutes(idx, canvas_id, choice):
 
 
 def _clk_choices(model):
-    """Every (canvas_record, choice, label) the player can read on a button."""
+    """Every (canvas_record, exit, label) the player can read on a button.
+
+    ⚠️ A NODE'S EXIT COMES IN TWO SHAPES AND THIS READ ONLY ONE OF THEM UNTIL
+    2026-08-25. Either the exit_block carries a `choices` array, or it IS the button —
+    `{type: "location", text: "...", config: {...}}` with no choices at all. Reading
+    only the first missed **1,225 of the 3,214 labels in this repo, 38% of every button
+    a player clicks**, and 23 labels naming a clock time were sitting in that half
+    across five games. Twenty-two of them use `at` or `before`, prepositions this
+    instrument has always known — they were invisible because nothing looked, not
+    because the pattern was narrow.
+
+    The single exit_block already carries `config.time_progression_minutes`, which is
+    the first key `_clk_spent_minutes` reads, so yielding it makes C4's duration half
+    work on these labels with no further change.
+
+    The third field of each tuple is the label; the second is whatever object carries
+    the spend, and callers must not assume it is a choice dict. The fourth names the
+    shape — "choice" or "exit" — so a finding can say which half it came from.
+    """
     for c in model:
         for n in c["nodes"]:
-            for ch in ((n.get("exit_block") or {}).get("choices") or []):
+            eb = n.get("exit_block") or {}
+            chs = eb.get("choices") or []
+            for ch in chs:
                 t = str(ch.get("text") or ch.get("label") or "")
                 if t:
-                    yield c, ch, t
+                    yield c, ch, t, "choice"
+            if not chs:
+                t = str(eb.get("text") or "")
+                if t:
+                    yield c, eb, t, "exit"
 
 
 def _clk_windows(canvas_raw):
@@ -3186,7 +3224,7 @@ def lint_time_cost_on_button(model, game):
     BIG = 60
     idx = _clk_node_index(game)
     big, silent = 0, []
-    for c, ch, t in _clk_choices(model):
+    for c, ch, t, _shape in _clk_choices(model):
         spent = _clk_spent_minutes(idx, c["id"], ch)
         if not spent or spent < BIG:
             continue
@@ -5442,11 +5480,14 @@ def run_gates(model, game, state=None):
     # All four v1 games here already pass, so this is a bar shipped work has cleared.
     _idx = _clk_node_index(game)
     lab_n, clk_bad, dur_n, dur_bad = 0, [], 0, []
-    for _c, _ch, _t in _clk_choices(model):
+    _from_exit = 0
+    for _c, _ch, _t, _shape in _clk_choices(model):
         lab_n += 1
         _refs = _clk_refs(_t)
         if _refs:
             _shown = sorted({r.strip(" .,;:!?") for r in _refs})[:2]
+            if _shape == "exit":
+                _from_exit += 1
             clk_bad.append(f'{_c["id"]}: "{_t[:54]}" — the engine cannot reach a clock '
                            f'time ({", ".join(_shown)})')
         _said = _clk_stated_minutes(_t)
@@ -5464,6 +5505,13 @@ def run_gates(model, game, state=None):
         if clk_bad:
             _det.append("state the DURATION instead — \"Work the counter (2h 30m).\" is "
                         "true at every entry minute; the hour is not")
+            if _from_exit:
+                # Say where they came from. This check read only `exit_block.choices`
+                # until 2026-08-25, which is 62% of the buttons in this repo; a count
+                # that jumped without saying so would read as prose having changed.
+                _det.append(f"{_from_exit} of these sit on a SINGLE-EXIT node "
+                            "(exit_block.text, no choices array) — a surface this check "
+                            "did not read before 2026-08-25")
         gate("the label keeps its time", not (clk_bad or dur_bad),
              (f"{len(clk_bad)} label(s) name a clock time"
               + (f" · {len(dur_bad)} of {dur_n} stated durations do not match the spend"
