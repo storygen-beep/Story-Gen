@@ -38,7 +38,7 @@ was found by **LO playing the built game** — a different instrument that finds
 defect, and the two are not merged so it stays visible which found what. Same split
 `off_season/REVIEW_1.md` records in its own header.
 
-**Current count: 6 open, 15 fixed** — 0 blockers, **0 high**, 3 med, 2 low, 1 open question, and
+**Current count: 7 open, 15 fixed** — 0 blockers, **0 high**, 3 med, 3 low, 1 open question, and
 **P1, Q1, Q2, C1, C2, D1, M1, M2, R1, W1, S2, L1, L2, L3 and T1 FIXED**. M1 and M2 were closed, **reopened**
 after LO rejected a game-layer fix the field disagreed with (§0a **N12**), and closed properly on
 2026-08-26 by the engine work they always needed. **No HIGH items remain.** Two of the twenty-one are still decisions for LO
@@ -992,6 +992,29 @@ Nothing to edit; history stands. The counts here are the correction of record.
 ---
 
 # §8 · Latent, not live
+
+### T2 · A room's picture cannot change with state — and it is not on the room screen at all
+**severity** LOW · **layer** ENGINE · **status** OPEN — **deferred by LO 2026-08-26, noted for future**
+
+`[[locations.description_variants]]` (shipped 2026-08-26, M1) swaps the room's **text** by state. LO
+asked whether the **picture** could change with it. Two facts, both read out of the build rather than
+assumed:
+
+1. **A location's own `image` never renders on the room screen.** `locations/the_yard.jpg` is
+   declared in `1_metadata_and_locations.toml` and appears in exactly **one** place in the built
+   HTML — the Missing Media list. The room passage emits `<h2>`, the description, the portrait row
+   and the nav grid, and no location image at any point (`v2.py:9640-9668`).
+2. **Where it IS used is the travel CARD** — the tile you click in the parent room to come here
+   (`_render_location_nav_card`: `background-image: url(<image>)`, with an inline SVG placeholder
+   when the file is absent). One fixed image per location, chosen at build time.
+
+So "make the picture change too" is **two** pieces of work, not one: put a location image on the room
+screen at all, then let a `description_variant` carry an optional `image` beside its `text`.
+
+⚠️ Not a media-harvest question. Under the standing rule a declared media block counts as present —
+the file being unharvested is irrelevant here. **The room screen has no slot for it either way.**
+
+---
 
 ### T1 · `loop_act` is one shared trait across six loops, and `loop_solo` never writes it
 **severity** LOW · **layer** GAME · **status** **FIXED**
