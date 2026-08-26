@@ -173,6 +173,8 @@ def build_game_graph(
         # reaches the database and never reaches a packaged game.
         if n.tags:
             npc.ai_behavior_config["tags"] = n.tags
+        if n.role:
+            npc.ai_behavior_config["role"] = n.role
         graph.npcs.append(npc)
         npc_ids.append(str(npc.id))
 

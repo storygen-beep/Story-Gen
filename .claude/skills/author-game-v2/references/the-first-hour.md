@@ -657,6 +657,56 @@ Name and relation on the same line, at the point of use, and the register does n
 the anchor recurs periodically instead of arriving every single visit, which is how a reminder turns
 into nagging.
 
+### The mechanical half — `npcs[].role`
+
+Prose anchors recur every few visits. The **dialogue box** carries it every time somebody speaks:
+
+```
+[face]  Cade
+        husband's eldest          <- npcs[].role
+        "Slower. You're not doing the books now."
+```
+
+```toml
+[[npcs]]
+id           = "npc_cade"
+name         = "Cade"
+relationship = "Your husband's eldest, 29. He runs the yard…"   # the cast page's sentence
+role         = "husband's eldest"                                # the label under the name
+```
+
+**Three rules, and the third is the only one a gate can hold:**
+
+- **No "Your".** It is on every label, so it carries nothing and eats width in a small line.
+- **One to three words.** A sentence belongs in `relationship`, which the cast page renders.
+- **Unique in the cast.** `brother` is fine with one brother and useless with two. The importer
+  **refuses two roles that match** — that is the whole reason the field is worth having.
+
+When the relation word repeats, the label carries whatever actually separates them — birth order,
+side of the family, or a place:
+
+```
+two brothers            elder brother · younger brother
+three of his sons       husband's eldest · husband's middle son · husband's youngest
+him and his brother     husband · brother-in-law
+your brother + his      brother · brother-in-law
+two uncles              father's brother · mother's brother
+two housemates          housemate, top floor · housemate, back room
+no kin word at all      the canteen · the night shift
+```
+
+⚠️ **Author it. Never derive it, not even as a default.** Deriving from `relationship`'s first
+clause is the obvious idea and it collapses real casts: **five of one game's six relationship
+strings contain "husband"** (the husband, his three sons, his brother), and another game has two
+characters whose strings both begin *"Your brother"* — and that is the game whose reader said
+*"I don't know who is who."* A silent wrong default is worse than a missing one, because nobody
+would notice five people labelled `husband`. Empty renders no line at all, which is the safe default.
+
+⚠️ **`role` is not a swap for the name.** `destroyer` replaces the name with the relation
+(`<<speech "teagan" "Stepsister">>`) and is the only game of 26 that does — it survives on having
+exactly one of each relation. Swapping does not remove the memory tax, it moves it: the player now
+has to remember who "Stepsister" is. Both, at the point of use.
+
 ---
 
 ## What the scoreboard checks

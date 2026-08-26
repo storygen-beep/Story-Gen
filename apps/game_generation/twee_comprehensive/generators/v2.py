@@ -906,6 +906,7 @@ class TweeComprehensiveGeneratorV2:
                     "flags": flags_map,
                     "schedule": [],  # Derived at runtime from setup.help_data.locationCanvases
                     "relationship": ai_config.get("relationship", ""),
+                    "role": ai_config.get("role", ""),  # F10 — the label under the name
                     "customizable": ai_config.get("customizable", False),
                     "relationship_options": ai_config.get("relationship_options", []),
                     "trait_decay": ai_config.get("trait_decay", {}),
@@ -1034,6 +1035,9 @@ class TweeComprehensiveGeneratorV2:
         player_traits_json = json.dumps(player_traits)
         # Strip runtime-only fields from npc_map before serializing to game JSON
         # (relationship_options and customizable are used for passage generation, not runtime state)
+        # `role` (F10) belongs here too: the label is baked into the passage HTML at BUILD
+        # time and nothing reads it back at runtime, so shipping it in $npcs would put a
+        # dead key in every save of every game — including the games that never set one.
         npc_map_for_json = {}
         npc_trait_decay_config = {}  # {npc_uuid: {trait: decay_per_day}}
         for uuid, data in npc_map.items():
@@ -1041,6 +1045,7 @@ class TweeComprehensiveGeneratorV2:
             entry.pop("customizable", None)
             entry.pop("relationship_options", None)
             entry.pop("description", None)
+            entry.pop("role", None)
             # Extract trait_decay config for setup (not runtime state)
             td = entry.pop("trait_decay", None)
             if td:
@@ -15082,11 +15087,21 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                             speaker_html = f'<<print $npcs["{npc_uuid}"].name>>'
                         else:
                             speaker_html = html.escape(str(npc_name))
+                        # F10 — the short label under the NAME. `relationship` is a
+                        # cast-page sentence and repeats across a cast (five of one
+                        # game's six contain "husband"); `role` is authored to be
+                        # unique and validate() refuses duplicates. Absent = no line,
+                        # and the box renders exactly as it did before this existed.
+                        npc_role = (npc_data.get("role") or "").strip() if npc_data else ""
+                        role_html = (
+                            f'<span class="dialog-role">{html.escape(npc_role)}</span>'
+                            if npc_role else ''
+                        )
                         html_parts.append(
                             f'<div class="dialog-block dialog-npc">'
                             f'{portrait_html}'
                             f'<div class="dialog-content">'
-                            f'<strong>{speaker_html}:</strong> {content}'
+                            f'<strong>{speaker_html}:</strong>{role_html} {content}'
                             f'</div></div>'
                         )
                 elif block_type == "thought_bubble":
@@ -18534,6 +18549,18 @@ if (clothingMsg) {
 
 .dialog-content {
     flex: 1;
+}
+
+/* F10 — the role label under a speaker's name. Quieter than the name and at the
+   same weight as the cast page's tag line, because it is a label and must not
+   compete with the line the character is actually saying. `display: block` is
+   what puts it on its own row under the name rather than trailing after it. */
+.dialog-npc .dialog-role {
+    display: block;
+    font-size: 12px;
+    line-height: 1.3;
+    color: var(--theme-text-muted, #8a8a8a);
+    margin: 1px 0 3px;
 }
 
 /* Thought Bubble Block (S8) — interior monologue, paired with cascade beats */
