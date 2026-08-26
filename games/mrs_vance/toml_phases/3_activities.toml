@@ -263,7 +263,13 @@ blocks = [
   { type = "dialog", props = { speaker = "player" }, content = "Name and plate. I'll get you a slot." },
   { type = "dialog", props = { speaker = "unknown" }, content = "How long?" },
   { type = "dialog", props = { speaker = "player" }, content = "Longer if you stand there." },
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 40 }, ] }, blocks = [ { type = "paragraph", content = "The one with the tank trailer asks for you by name before you have said anything, which is new, and he does it in front of the two behind him." } ] },
+  # Four rungs, and they are ONE if/elseif chain -- adjacent [group] blocks merge,
+  # so these run highest-first and the 40 arm needs its ceiling or 70 never fires.
+  # The top rung is the sidebar's "You are the one they come to" and it inverts the
+  # bottom one exactly: at lt 15 he waits for a man rather than take her, at gte 70
+  # he waits for her rather than take a man.
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 70 }, ] }, blocks = [ { type = "paragraph", content = "The one with the tank trailer waits for you with Cade standing right there free, and when Cade offers he says he'll wait, and the two behind him hear him say it and stay where they are." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "standing", operator = "lt",  value = 70 }, ] }, blocks = [ { type = "paragraph", content = "The one with the tank trailer asks for you by name before you have said anything, which is new, and he does it in front of the two behind him." } ] },
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 15 }, { type = "trait", subject = "player", trait_key = "standing", operator = "lt",  value = 40 }, ] }, blocks = [ { type = "paragraph", content = "The one with the tank trailer says Mrs. Vance to your face and then asks for Cade anyway, and does not hear himself do it." } ] },
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "lt", value = 15 }, ] }, blocks = [ { type = "paragraph", content = "The one with the tank trailer waits at the counter looking at the hatch until somebody comes through it, and then talks to him with his back at an angle to you." } ] },
 ]

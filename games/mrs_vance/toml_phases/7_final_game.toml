@@ -26,10 +26,24 @@
 #               meter and it is on TWO people only: Cade and Booth, the arcs
 #               that carry the game.
 #   COLOUR      `standing` — how much of the Vance name is actually hers. A
-#               W5b audience meter: it RISES, it is read constantly to swap ONE
-#               line, and it refuses almost nothing. The field reads reputation
-#               at 644 sites and refuses at 2% of them. Do NOT apply W5's
-#               shuts-a-door test to it — W5 owns the meter that closes.
+#               W5b audience meter: it RISES and it rarely refuses. Do NOT
+#               apply W5's shuts-a-door test to it — W5 owns the meter that
+#               closes.
+#               ⚠️ CORRECTED 2026-08-27. This block used to read "the field
+#               reads reputation at 644 sites and refuses at 2% of them." That
+#               644 is three games (DoL 610, zaras 23, course-of-temptation 11)
+#               and 95% of it is DoL alone; the source flags the third as
+#               instrument-blind. Re-measured across 13 field games that carry
+#               a reputation meter (Player_Legibility_Study_20260825 §44):
+#                 1,944 references · ~10% of branch arms carry a link
+#                 MEDIAN 41% of reads change something mechanical
+#                 median 31 passages carry a read · median 9 rungs
+#               "Rarely refuses" survives. "Therefore it does nothing but swap
+#               a line" does NOT — that was DoL's habit read as the field's
+#               law. Three consequential uses the old number hid: reputation
+#               DELIVERS PEOPLE (patriarch: a knock at 5, 9, 14), MODIFIES A
+#               ROLL (destroyer: `_roll + $Respect`), and SCALES A RATE
+#               (corpo-life: relationship gain per band). See REVIEW.md S1b.
 #   THROTTLE    `arousal` — gates the FINISH link on the act loops and nothing
 #               else, reset to 0 at climax (W2). Five v2 games raised it 232
 #               times and read it 4, because none of them built a loop for it
@@ -1875,7 +1889,13 @@ blocks = [
   { type = "dialog", props = { speaker = "player" }, content = "Name and plate. I'll get you a slot." },
   { type = "dialog", props = { speaker = "unknown" }, content = "How long?" },
   { type = "dialog", props = { speaker = "player" }, content = "Longer if you stand there." },
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 40 }, ] }, blocks = [ { type = "paragraph", content = "The one with the tank trailer asks for you by name before you have said anything, which is new, and he does it in front of the two behind him." } ] },
+  # Four rungs, and they are ONE if/elseif chain -- adjacent [group] blocks merge,
+  # so these run highest-first and the 40 arm needs its ceiling or 70 never fires.
+  # The top rung is the sidebar's "You are the one they come to" and it inverts the
+  # bottom one exactly: at lt 15 he waits for a man rather than take her, at gte 70
+  # he waits for her rather than take a man.
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 70 }, ] }, blocks = [ { type = "paragraph", content = "The one with the tank trailer waits for you with Cade standing right there free, and when Cade offers he says he'll wait, and the two behind him hear him say it and stay where they are." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "standing", operator = "lt",  value = 70 }, ] }, blocks = [ { type = "paragraph", content = "The one with the tank trailer asks for you by name before you have said anything, which is new, and he does it in front of the two behind him." } ] },
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 15 }, { type = "trait", subject = "player", trait_key = "standing", operator = "lt",  value = 40 }, ] }, blocks = [ { type = "paragraph", content = "The one with the tank trailer says Mrs. Vance to your face and then asks for Cade anyway, and does not hear himself do it." } ] },
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "lt", value = 15 }, ] }, blocks = [ { type = "paragraph", content = "The one with the tank trailer waits at the counter looking at the hatch until somebody comes through it, and then talks to him with his back at an angle to you." } ] },
 ]

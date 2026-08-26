@@ -42,13 +42,19 @@ Added 2026-08-24, and it is the one thing eleven field-study sections agree on w
 them saying it. Each measured a different subsystem and each came back with the same answer:
 
 ```
-reputation refuses                 2%  of 644 read sites                  the-meters.md W5b
+reputation refuses                ~10% of branch arms (13 games)          the-meters.md W5b
 the body refuses          median  10%  of its reads                       the-meters.md W7
 her willingness gates              6%  of act links                       the-meters.md W6
 act links with no gate at all     47%  of 7,598                           the-surfaces.md R3b
 refusals that render nothing      71%  of 16,167                          the-surfaces.md R5c
 conditionals around an action     35%  select a variant · 23% refuse      the-surfaces.md R5
 ```
+
+⚠️ **Colours-more-than-it-locks is not decides-nothing.** The reputation row was `2% of 644 read
+sites` until 2026-08-27; that figure was three games with 95% of it in one, and it taught
+`mrs_vance` to build a meter written 25 times and read 4. Re-measured over 13 games, a **median
+41% of reputation reads change something mechanical** — by delivering a person, modifying a roll
+or scaling a rate, none of which prints a refusal. Read `the-meters.md` W5b before using this row.
 
 **A meter's main job in this genre is to select text, not to bar a door.** Reputation does not stop
 her walking into the bar — it changes what the barman says. The body does not lock the room — it
@@ -340,7 +346,9 @@ priced label against the field's 94% symbol).
   the opposite: `the_season`'s seven `known` read sites have a median of 570 characters.
 - **A system is read to change the words, not to refuse the action.** The same law, arriving a fourth
   time from a fourth instrument. Section H: reputation gates **2%** of its 644 read sites and colours
-  the other 98%. Section G: differentiation is many small swaps, above. Section I: the body —
+  the other 98% — ⚠️ *corrected 2026-08-27: that is three games, 95% of it degrees-of-lewdity. Over
+  13 games it is ~10% link-bearing, and a median 41% of reads change something mechanical without
+  ever refusing. The law survives; "colours" must not be read as "does nothing." See W5b.* Section G: differentiation is many small swaps, above. Section I: the body —
   clothes, arousal, hygiene, pregnancy — gates a median **10%** across 25 measured systems, 17 of
   them under 25%. Section B reaches it from the *choice* side rather than the meter side: of **27,505**
   conditionals wrapped around an action, **35% are variant selectors where every branch offers

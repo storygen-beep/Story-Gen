@@ -277,15 +277,18 @@ Do not take one because the template offered one. If you take one, it shuts a do
 `needs` gets at M9, for the same reason.
 
 ⚠️ **This rule is about a meter that runs DOWN and closes things off.** A *"who knows about her"*
-meter that rises is a different animal and fails this test on purpose — in the field it refuses the
-player at 2% of its read sites. See **W5b**, and do not apply the shuts-a-door test to it.
+meter that rises is a different animal and fails this test on purpose — in the field it rarely
+refuses the player anything (~10% of its branch arms carry a link, re-measured 2026-08-27 over 13
+games; the 2%-of-644 figure this line used to quote was a three-game sample). See **W5b**, and do
+not apply the shuts-a-door test to it — but do read W5b's three mechanisms, because rarely-refuses
+does **not** mean never-mechanical.
 
 **Lint · the counterweight.** Heuristic, which is why it is a lint: a player trait starting at 50+
 whose effects mostly fall, declared needs excluded. It prints how many times the thing is read.
 
 ---
 
-## W5b · The audience meter — it rises, and it almost never refuses
+## W5b · The audience meter — it rises, it rarely refuses, and it still decides things
 
 W5 is about a meter that runs **down** and shuts doors. A *"who knows about her"* meter runs the
 other way, and measuring the field on 2026-08-23 showed it obeys none of W5's rules. It got its own
@@ -293,23 +296,71 @@ entry because `the_season` shipped one, asserted its own doctrine at
 `0_systems_spec.toml:100` — *"known RISES AND WIDENS ... content, not punishment"* — and had no rule
 to check it against.
 
+> ### ⚠️ CORRECTED 2026-08-27 — read this before the numbers below
+>
+> W5b was written from **three games**: degrees-of-lewdity (610 read sites), zaras-school-life
+> (23) and course-of-temptation (11) — and `findings_H_known.md` §1 flags the third as
+> instrument-blind, not low. **610 of 644 sites, 95%, are one game.** The study was honest about
+> its sample. This entry was not: it wrote "the field" and `SKILL.md`'s commitment table hardened
+> the number into a one-line law, which then shipped into `mrs_vance`'s systems spec and produced
+> a meter written 25 times and read 4.
+>
+> **Re-measured 2026-08-27** across all 13 corpus games that carry a reputation meter
+> (`~/Documents/Player_Legibility_Study_20260825` §44, `measure_rep_*.py`):
+>
+> ```
+> 1,944 references · 13 of 25 measured field games
+> link-bearing branch arms   ~10%   (not 2%)
+> reads that change something mechanical   MEDIAN 41%
+> passages carrying a read   median 31        rungs   median 9
+> ```
+>
+> **What survives:** it rises, it rarely locks a door, and its commonest single use is a line
+> swap. **What does not:** *"therefore it only swaps a line."* That was DoL's house style read as
+> the field's law — see the three mechanisms below, none of which is a lock and all of which the
+> three-game sample was too narrow to contain.
+>
+> **Two numbers in this entry were wrong in opposite directions, so check both:** the 2% was too
+> low, and the claim that `family-ties` carries no reputation at all was flatly false. Corrected
+> in place below.
+
 ### It is optional. Take it only if being found out is the fantasy
 
-`family-ties` is rank 24, 204 passages, heavy sexual content, **267 distinct variables** and not one
-of them tracks reputation. Its fantasy is the act; it spends its variables on the act (28 sex
-positions). **There is no obligation to have this meter**, and a game that would rather spend the
-same effort elsewhere is following the field, not defying it.
+**The rule holds. The example was wrong and is replaced.** This paragraph used to say
+`family-ties` carries no reputation variable. It carries **six** — `you_init` declares
+`uni`, `southCafe`, `onlyfans`, `inst`, `model` and `pornhub`, each with its own `fame`, read
+257 times. It is not the field's example of a game without the meter; it is the field's best
+example of a **place-scoped** one. The original error came from withdrawing `$sexPose` as a false
+positive (it is the current sex *position*) and concluding the game had nothing, rather than
+looking again.
+
+The rule is still right, on ten better examples. Games with real size and **zero** reputation
+references:
+
+```
+friends-of-mine 2,707 passages · family-business 2,318 · the-company 2,078
+wasteland-lewdness 2,056 · the-hellfire-club 1,216 · sluttown-usa 759
+lust-for-life 707 · inseminator 513 · adam-and-gaia 210 · love-and-vice 192
+```
+
+**Twelve of twenty-five measured field games carry no such meter at all.** There is no obligation
+to have one, and a game that would rather spend the effort elsewhere is following the field, not
+defying it.
 
 ### If you take one, its job is that people already know — not that a door is closed
 
 Every `<<if>>` in three field games whose condition names a reputation variable, classified by what
-its branch actually contains (`findings_H_known.md` §1):
+its branch actually contains (`findings_H_known.md` §1) — **three games, and 610 of the 644 sites
+are degrees-of-lewdity**:
 
 ```
 644 read sites          opens a link  17%     colours prose  81%     REFUSES  2%   (14 sites)
+   3 games: DoL 610 · zaras-school-life 23 · course-of-temptation 11 (instrument-blind)
+
+re-measured 2026-08-27, 13 games      link-bearing ~10%      mechanical (median) 41%
 ```
 
-Fourteen. **A reputation meter is not a lock.** What it buys is a stranger who already knows:
+Fourteen, in that sample. **A reputation meter is not a lock.** What it buys is a stranger who already knows:
 
 ```
 $fame.prostitution gte 400   ->  "Hope you don't mind that I'm not paying for it."
@@ -317,6 +368,28 @@ $fame.rape gte 400           ->  "You like it rough, right? That's what I've hea
 $fame.exhibitionism gte 500  ->  "I think the town's pervs have missed you."
 $fame.scrap gte 400          ->  "Very scary. But there's scarier behind us."
 ```
+
+### Rarely a lock is not the same as never mechanical
+
+The three-game sample saw one shape because DoL only does one. Across thirteen it does three more,
+and **none of them refuses the player anything** — which is why "it does not refuse" was mistaken
+for "it does not decide":
+
+| game | what the meter does | shape |
+|---|---|---|
+| `patriarch` | `$Reputation gt 5` → Marlene knocks · `gt 9` → Luna · `gt 14` → Ana | **it delivers people** |
+| `destroyer` | `_roll1 to _roll + $Respect` in every pickup and every fight; `Math.clamp(5, 95, ($Muscularity * 0.8) + ($Respect * 1.6))` | **it modifies a roll** |
+| `corpo-life` | an 8-rung `$prestige_level` derived in `StoryCaption`, then read at **308 sites**, many of them `(Relationship +1 from prestige)` | **it scales a rate** |
+| `patriarch` | weekly income by band: `lt 300 → +2000`, `lt 400 → +3000`, … | **it prices the world** |
+
+A door that opens on its own is not a door the player found locked. **Prefer these to a gate**: they
+give the meter consequence without ever printing a refusal, which is what the 2% was really saying.
+
+**Where the reads live.** Not on the always-on surface — surface reads are 0–16 per game against
+7–934 in ordinary passages. They live in the **repeatable** ones: `family-ties` reads fame in
+`southCafeJob`, `teacherJob`, `uni*`, `inst`, `onlyfans`; `destroyer` writes the same encounter
+per location (`beachgirl`, `downtowngirl`, `downtownrandom`), each rolling `$Respect`; `patriarch`
+reads it in `Apartment` and in `Finances`, the weekly cycle.
 
 ⚠️ **W5's test does not apply here.** W5 says a counterweight earns its place by shutting a door —
 *"if nothing shuts when it is low, you have charged them for nothing."* That is correct for a
@@ -554,6 +627,9 @@ whose consequent contains a link, a `goto` or a button, rather than prose:
 98, 100 per cent.
 
 Section H measured reputation at **2% gating, 98% colouring** and called it an audience meter.
+⚠️ Corrected 2026-08-27: that split is three games and 95% of it is degrees-of-lewdity. Over 13
+games it is ~10% link-bearing and a **median 41% of reads change something mechanical**. See the
+correction box at the head of W5b.
 Section G measured differentiation and found it is many small swaps rather than a few large
 branches. This is the same law arriving a third time, from a third instrument.
 

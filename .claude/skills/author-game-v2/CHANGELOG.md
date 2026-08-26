@@ -5,6 +5,105 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-27 — W5b: the 644 was three games, and it taught a meter to decide nothing
+
+**Why.** `mrs_vance` shipped `standing` written at 25 sites and read at 4, all four in one canvas.
+Tracing where that design came from led to this skill, not to the game: `0_systems_spec.toml`
+declared it *"a W5b audience meter … it refuses almost nothing. The field reads reputation at 644
+sites and refuses at 2% of them."* The game inherited both the shape and the number from here.
+
+### 1 · What the number actually is
+
+`findings_H_known.md` §1 is explicit about its sample and this skill was not:
+
+```
+degrees-of-lewdity   610 read sites      <- 95% of the total
+zaras-school-life     23
+course-of-temptation  11   flagged by the source itself as INSTRUMENT-BLIND, not low
+                     ---
+                     644  written into W5b, SKILL.md and STATUS.md as "the field"
+```
+
+The study did nothing wrong. **W5b generalised three games to a field**, `SKILL.md`'s
+fifth-commitment table compressed it to a one-line law, and a game then built to the law.
+
+### 2 · Re-measured over thirteen games
+
+`~/Documents/Player_Legibility_Study_20260825` §44, instruments `measure_reputation.py`
+(`--selftest` pins 19 variable names), `measure_rep_use.py`, `measure_rep_final.py`:
+
+```
+1,944 references · 13 of 25 measured field games carry a reputation meter
+link-bearing branch arms          ~10%   (not 2%)
+reads that change something       MEDIAN 41%
+passages carrying a read          median 31        rungs  median 9
+```
+
+**What survives:** it rises, it rarely locks a door, its commonest single use is a line swap.
+**What does not:** *"therefore it only swaps a line."* That was one game's house style read as the
+field's law. Three mechanisms the narrow sample could not contain, **none of which refuses the
+player anything**:
+
+| game | the meter | shape |
+|---|---|---|
+| `patriarch` | `gt 5` → Marlene knocks · `gt 9` → Luna · `gt 14` → Ana; and weekly income by band | delivers people · prices the world |
+| `destroyer` | `_roll1 to _roll + $Respect` in every pickup and fight | modifies a roll |
+| `corpo-life` | 8-rung `$prestige_level` read at 308 sites — `(Relationship +1 from prestige)` | scales a rate |
+
+### 3 · ⚠️ A second error, in the opposite direction
+
+W5b's example for *"the meter is optional"* was `family-ties` — *"267 distinct variables and not
+one of them tracks reputation."* It carries **six**: `you_init` declares `uni`, `southCafe`,
+`onlyfans`, `inst`, `model` and `pornhub`, each with its own `fame`, read 257 times. It is not the
+field's example of a game without the meter, it is the field's best example of a **place-scoped**
+one. The original error came from correctly withdrawing `$sexPose` as a false positive (it is the
+sex *position*) and then concluding the game had nothing rather than looking again.
+
+**The rule survives; the example is replaced** with ten games that genuinely carry none —
+`friends-of-mine` (2,707 passages), `family-business` (2,318), `the-company` (2,078),
+`wasteland-lewdness` (2,056) and six more. Twelve of twenty-five measured field games have no such
+meter.
+
+### 4 · Instrument holes closed before any figure was reported
+
+- A `rep` substring match pulls in `$fireplace`, `$weddingprep`, `$replay`, `$repayment`,
+  `$replaced`, `$karleeRepeat`, `$amyForeplay`. Fixed segmentally. **A first regex-boundary attempt
+  failed silently because `re.IGNORECASE` makes `[A-Z0-9]` match lowercase** — the character class
+  stopped being a boundary at all. `--selftest` now pins 19 names.
+- `<<set $Reputation to $Reputation + 5>>` is the ordinary increment, not a dice roll. An
+  arithmetic test mis-scored all 31 of patriarch's; the rule is that the assignment target must be
+  a *different* variable. patriarch 31 → 0, destroyer 41 → 16 with the survivors verified.
+- `become-taxi-driver` has **no** reputation meter — all 103 hits are `$rep_quest_<name>.{time,min,
+  count,fase}` quest bookkeeping. `$standing_[1-4]` in `corpo-life` are **video filenames**.
+
+### 5 · What changed
+
+- `references/the-meters.md` — **W5b** retitled *"it rises, it rarely refuses, and it still decides
+  things"*; a correction box at its head; the optional-example paragraph rebuilt on the ten
+  zero-reputation games; a new section **Rarely a lock is not the same as never mechanical** with
+  the four-row mechanism table and where the reads live (repeatable job and location surfaces, not
+  the sidebar — surface reads are 0–16 per game against 7–934 in ordinary passages); the W5 pointer
+  and the Section-H footer annotated; the 644 block now discloses its three games inline.
+- `SKILL.md` — the fifth-commitment table's reputation row now reads `~10% of branch arms (13
+  games)`, with a ⚠️ note that colours-more-than-it-locks is **not** decides-nothing; the Section-H
+  citation further down annotated.
+- `STATUS.md` — the W5b index row and the Section-H study row both carry the corrected sample.
+
+**Not changed:** `the_season`, which also ships a `known` meter built on this doctrine. Flagged,
+not touched — it is a different game and a different session's call.
+
+### 6 · Verified
+
+- Every excluded variable was **read before it was excluded**, not pattern-matched away; the four
+  exclusions are named with their reasons in `measure_rep_final.py`'s docstring.
+- `family-ties`' six fame meters confirmed against `you_init`'s literal declaration, not inferred
+  from a name.
+- `grep -rn 644` across the skill returns only the six sites above, each now carrying its sample.
+- The companion figure in the same spec block — *"field runs 8-17 rungs on a player meter"* —
+  was re-measured and **holds** (median 9 across 12 games). Only the 644 was bad.
+
+---
+
 ## 2026-08-26 (5) — `npcs[].role`: the label under the name in every dialogue box
 
 **Why.** LO, on the prose-anchor fix for W1: *"I don't think this is the proper solution for it. In
