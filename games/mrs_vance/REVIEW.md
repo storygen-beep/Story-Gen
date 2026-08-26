@@ -38,7 +38,7 @@ was found by **LO playing the built game** — a different instrument that finds
 defect, and the two are not merged so it stays visible which found what. Same split
 `off_season/REVIEW_1.md` records in its own header.
 
-**Current count: 7 open, 15 fixed** — 0 blockers, **0 high**, 3 med, 3 low, 1 open question, and
+**Current count: 8 open, 15 fixed** — 0 blockers, **0 high**, 3 med, 4 low, 1 open question, and
 **P1, Q1, Q2, C1, C2, D1, M1, M2, R1, W1, S2, L1, L2, L3 and T1 FIXED**. M1 and M2 were closed, **reopened**
 after LO rejected a game-layer fix the field disagreed with (§0a **N12**), and closed properly on
 2026-08-26 by the engine work they always needed. **No HIGH items remain.** Two of the twenty-one are still decisions for LO
@@ -992,6 +992,42 @@ Nothing to edit; history stands. The counts here are the correction of record.
 ---
 
 # §8 · Latent, not live
+
+### T3 · A Lane 2 ambient takes the whole room screen, so the description never renders on that visit
+**severity** LOW · **layer** ENGINE · **status** OPEN — **built, reverted and left open by LO 2026-08-26**
+
+When a random ambient rolls on entry the room `<<goto>>`s to it. The player gets the ambient and
+nothing else: **no room title, no description, no NPC portraits, no solo activities, no exits.** On
+that visit the room's own prose — base or `description_variant` — does not render at all.
+
+**The field does it narrower.** `destroyer`'s room screens put the encounter and the room's own prose
+in the two branches of one `<<if>>` **in the description position**, and print the affordance bar and
+the exits either way:
+
+```
+<<if _scene is 0>>      <img …>  an encounter
+<<elseif _scene > 0>>   <img …>  "Your neighborhood. Quiet, sunny area…"
+<</if>>
+<div class="staff-bar"> … </div>      ← renders EITHER WAY
+… exits …                              ← render EITHER WAY
+```
+
+**A fix was built and reverted.** `[settings] ambient_render = "inline"` gave the ambient the
+description slot only and left the rest of the room standing. It worked — proved live, 40/40 gates,
+six other games byte-identical — and LO called it back on 2026-08-26 after the four render buckets
+were laid out for him. **Left open deliberately, not abandoned.**
+
+Anything picking this up again starts from that commit (`3250226` reverts `01b8b38`'s ambient half)
+and from three things learned building it:
+
+- `getStoryCanvasRedirect` answers *"capstone? no? then ambient?"* in one call and the room `<<goto>>`s
+  either. Splitting that question is the whole change.
+- An ambient carrying **Lane 3** substitution rules injects a `<<goto>>` at its first node, which
+  inside an `<<include>>` navigates away mid-render. Those have to keep the redirect.
+- `<<include>>` appears **zero** times in the generator, so this introduces a rendering pattern the
+  engine has never used.
+
+---
 
 ### T2 · A room's picture cannot change with state — and it is not on the room screen at all
 **severity** LOW · **layer** ENGINE · **status** OPEN — **deferred by LO 2026-08-26, noted for future**
