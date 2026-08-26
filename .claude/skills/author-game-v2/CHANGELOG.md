@@ -5,6 +5,53 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-26 (4) — `ambient_render` reverted; `description_variants` kept
+
+**Why.** LO, after the four render buckets were laid out for him: *"Undo that change completely
+first."*
+
+`[settings] ambient_render = "inline"` — which gave a Lane 2 random ambient the room's **description
+slot** instead of the whole screen — is **gone**. A random ambient `<<goto>>`s again, exactly as it
+did before 2026-08-26 (2) and as it always has in every other game.
+
+Removed: `setup.getStoryOneShotRedirect`, the `inlineOnly` parameter on
+`setup.checkRandomEncounters` and its substitution guard, `_location_autofire_line`,
+`_wrap_ambient_slot`, the `self.ambient_render` read, `VALID_AMBIENT_RENDER` and the whole
+`ambient_render` path through `template_import.py`, and
+`apps/game_generation/tests/test_ambient_render_inline.py` (11 tests).
+
+### ⚠️ `[[locations.description_variants]]` is NOT part of this and stays
+
+It shipped in the same commit and is a **separate feature** — it is what actually closed M1 and M2.
+The two touched in exactly one place (`_render_location_description` called `_wrap_ambient_slot`),
+and that call was the seam. State-reactive room prose still works; `mrs_vance` still carries nine
+variants across seven rooms.
+
+`the-first-hour.md` F9's authoring note now records the ambient behaviour as an **engine limit**
+rather than as a setting, with a line saying the setting was built and reverted so nobody promises
+against it in a ledger.
+
+### Verified
+
+- `pytest apps/game_generation/tests/ -q` → **244 passed, 7 skipped** (255 minus the 11 deleted).
+- Zero references to `ambient_render` / `getStoryOneShotRedirect` / `inlineOnly` /
+  `_wrap_ambient_slot` / `_location_autofire_line` anywhere in code or game TOML.
+- Seven games rebuilt: **six byte-identical**, `mrs_vance` changed in exactly the intended way —
+  its room passages lost the `<<set _amb …>><<if _amb>><<include _amb>>` wrapper and kept the
+  `<<if setup.triggerConditionsSatisfied(…)>>` variant chain.
+- `40/40 judged gates` · `somebody speaks` 4.4:1 · `playtest_presence` 10/10 ·
+  `playtest_quests` 23/23.
+- **Live 5/5**: a forced ambient lands on `Canvas_amb_yard_crossing_Node_base` with **0 nav cards
+  and no room description**; the shop-floor variant still renders with 5 nav cards below it; the
+  base returns at 03:00.
+
+⚠️ Two probe traps worth keeping, both of which produced a false FAIL first: the ambient's own prose
+contains *"the roller door is up"*, which is also in the shop-floor variant — assert on a phrase
+unique to the room. And `<<goto>>` **defers to after the current render**, so `State.passage` read
+in the same `evaluate()` still says `Location_the_yard`.
+
+---
+
 ## 2026-08-26 (3) — F10: the role stays attached after the introduction
 
 **Why.** LO, who wrote `mrs_vance` himself, asked **"Who is Sherrod?"** off a location button. The

@@ -129,7 +129,7 @@ def test_both_location_paths_call_the_same_helper():
     from apps.game_generation.twee_comprehensive.generators import v2 as mod
 
     src = inspect.getsource(mod)
-    assert src.count("{self._render_location_description(location, location_id)}") == 2
+    assert src.count("{self._render_location_description(location)}") == 2
     # and the old inline form is gone from both
     assert 'if location.description else "A location in your story."}</p>' not in src
 

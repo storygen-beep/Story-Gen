@@ -1136,16 +1136,6 @@ class TweeComprehensiveGeneratorV2:
             "narration_person", "second"
         )
 
-        # What a RANDOM ambient does to the room screen it fires on. "redirect" (the
-        # default, and every game built before this) hands the ambient the whole screen:
-        # no room title, no description, no portraits, no exits. "inline" gives it the
-        # DESCRIPTION SLOT only and leaves the rest of the room standing — which is the
-        # field's shape (destroyer rolls its encounter into the description and prints
-        # its affordance bar and its exits either way).
-        self.ambient_render = (self.project.metadata or {}).get(
-            "ambient_render", "redirect"
-        )
-
         # Clothing system data
         clothing_settings = (self.project.metadata or {}).get("clothing_settings", {})
         self.clothing_enabled = clothing_settings.get("enabled", False)
@@ -4930,22 +4920,6 @@ setup.selectCanvasByPriority = function(canvasList) {{
 
 // Check if a non-repeatable story event should auto-fire at this location.
 // Returns passage name to redirect to, or null if no story event fires.
-// A STORY one-shot only — no random-encounter fallback. Used by the "inline"
-// ambient_render path, where the one-shot still <<goto>>s (a story beat owning the
-// screen is correct) and the ambient is handled separately, in the description slot.
-setup.getStoryOneShotRedirect = function(locationId) {{
-    try {{
-        var best = setup.selectAutoFireCanvasForLocation(locationId);
-        if (best) {{
-            setup.markCanvasTriggered(best.id);
-            return best.passageName;
-        }}
-        return null;
-    }} catch (e) {{
-        return null;
-    }}
-}};
-
 setup.getStoryCanvasRedirect = function(locationId) {{
     try {{
         // Selection delegated to selectAutoFireCanvasForLocation so the
@@ -5198,11 +5172,7 @@ setup.renderLocationCanvases = function(locationId) {{
 // ===== Random Encounter System =====
 // Check for random encounters when entering a location.
 // Returns passage name to redirect to, or null if no encounter fires.
-// `inlineOnly` — the caller is going to <<include>> the result into a room screen
-// rather than <<goto>> it. An ambient carrying Lane-3 substitution rules injects a
-// <<goto>> at the top of its first node (PRD 25 §5.4); inside an <<include>> that
-// navigates away mid-render, taking the room with it. Those keep the redirect path.
-setup.checkRandomEncounters = function(locationId, inlineOnly) {{
+setup.checkRandomEncounters = function(locationId) {{
     try {{
         var sv = State.variables;
         var helpData = setup.help_data || {{}};
@@ -5235,9 +5205,6 @@ setup.checkRandomEncounters = function(locationId, inlineOnly) {{
         var randomCanvases = [];
         for (var i = 0; i < canvasList.length; i++) {{
             if (canvasList[i].triggerMode === "random") {{
-                if (inlineOnly && (setup.canvasSubstitutions || {{}})[canvasList[i].id]) {{
-                    continue;   // has a <<goto>> at node 1 — cannot be included
-                }}
                 randomCanvases.push(canvasList[i]);
             }}
         }}
@@ -9656,10 +9623,10 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 <<set $game_state.visited_locations.push("{location_id}")>>
 <</if>>
 <</nobr>>\
-{self._location_autofire_line(location_id)}\
+<<set _autoFire = setup.getStoryCanvasRedirect("{location_id}")>>\
 <<if _autoFire>><<goto _autoFire>><<else>>\
 <h2>{location.name}</h2>
-{self._render_location_description(location, location_id)}
+{self._render_location_description(location)}
 {wardrobe_link_ec}{shop_link_ec}<<= setup.renderNpcPortraits("{location_id}")>>
 <<= setup.renderSoloActivities("{location_id}")>>
 <div class="location-navigation">
@@ -9703,10 +9670,10 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 <<set $game_state.visited_locations.push("{location_id}")>>
 <</if>>
 <</nobr>>\
-{self._location_autofire_line(location_id)}\
+<<set _autoFire = setup.getStoryCanvasRedirect("{location_id}")>>\
 <<if _autoFire>><<goto _autoFire>><<else>>\
 <h2>{location.name}</h2>
-{self._render_location_description(location, location_id)}
+{self._render_location_description(location)}
 {wardrobe_link}{shop_link}<<= setup.renderNpcPortraits("{location_id}")>>
 <<= setup.renderSoloActivities("{location_id}")>>
 <div class="location-navigation">
@@ -9723,23 +9690,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 
         return content
 
-    def _location_autofire_line(self, location_id: str) -> str:
-        """The line that decides whether the player ever sees this room screen.
-
-        "redirect" (default, and every game built before ambient_render existed): one
-        call covers story one-shots AND random ambients, and either <<goto>>s — so an
-        ambient takes the whole screen, title and description and portraits and exits
-        with it.
-
-        "inline": only a story ONE-SHOT redirects here. The ambient is picked up in the
-        description slot instead (see _render_location_description) and the rest of the
-        room renders around it, which is what the field does.
-        """
-        if getattr(self, "ambient_render", "redirect") == "inline":
-            return f'<<set _autoFire = setup.getStoryOneShotRedirect("{location_id}")>>'
-        return f'<<set _autoFire = setup.getStoryCanvasRedirect("{location_id}")>>'
-
-    def _render_location_description(self, location, location_id: str = "") -> str:
+    def _render_location_description(self, location) -> str:
         """The description slot on a room screen — one paragraph, or a chain of them.
 
         A room is the screen a player re-enters more than any other, and until now it
@@ -9759,7 +9710,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                 if location.description else "A location in your story.")
         variants = (location.properties or {}).get("description_variants") or []
         if not variants:
-            return self._wrap_ambient_slot(f"<p>{base}</p>", location_id)
+            return f"<p>{base}</p>"
         parts = []
         for i, var in enumerate(variants):
             if not isinstance(var, dict):
@@ -9772,26 +9723,8 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
             parts.append(f"<<{kw} setup.triggerConditionsSatisfied({json.dumps(cond)})>>"
                          f"<p>{self._resolve_at_references(text)}</p>")
         if not parts:
-            return self._wrap_ambient_slot(f"<p>{base}</p>", location_id)
-        chain = "".join(parts) + f"<<else>><p>{base}</p><</if>>"
-        return self._wrap_ambient_slot(chain, location_id)
-
-    def _wrap_ambient_slot(self, described: str, location_id: str) -> str:
-        """Under ambient_render = "inline", a random ambient takes the DESCRIPTION and
-        nothing else — the room title above it and the portraits, activities and exits
-        below it all still render.
-
-        This is destroyer's shape, read from its own source: the encounter and the room's
-        own prose are the two branches of one <<if>> in the description position, and the
-        affordance bar and the exits sit outside that <<if>> and print either way.
-
-        Under "redirect" (the default) this returns the description untouched, because the
-        ambient never got this far — it was handled by the auto-fire <<goto>> above.
-        """
-        if getattr(self, "ambient_render", "redirect") != "inline" or not location_id:
-            return described
-        return (f'<<set _amb = setup.checkRandomEncounters("{location_id}", true)>>'
-                f'<<if _amb>><<include _amb>><<else>>{described}<</if>>')
+            return f"<p>{base}</p>"
+        return "".join(parts) + f"<<else>><p>{base}</p><</if>>"
 
     def _generate_story_canvases(self) -> str:
         """Generate story canvas passages (per-node emission)."""

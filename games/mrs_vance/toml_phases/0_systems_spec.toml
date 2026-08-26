@@ -55,16 +55,6 @@ starting_week = 1
 [settings]
 narration_person  = "second"
 
-# A random ambient takes the DESCRIPTION slot, not the whole screen. Under the old
-# default ("redirect") an ambient <<goto>>'d and the player never saw the room at
-# all — no title, no description, no portraits, no exits. That is half of M1: the
-# room's own prose was being hidden by the room's own events.
-#
-# destroyer's shape, from its source: the encounter and the room's own prose are two
-# branches of one <<if>> in the description position, and the affordance bar and the
-# exits print either way. A STORY one-shot still owns the screen under both settings.
-ambient_render    = "inline"
-
 # ⚠️ CLOTHING IS OFF ON PURPOSE. With `clothing_enabled = true` the generator
 #    emits [[Change Clothes->WardrobePage]] on the wardrobe location
 #    UNCONDITIONALLY (v2.py:9601-9602) — no item check — so off_season 0.1

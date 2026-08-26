@@ -588,10 +588,13 @@ nothing that reads the hour. So the field's 17%-vary-by-hour column is still **n
 schedules gate canvases by time, not descriptions. Gate presence-variants on who is there instead,
 which is where the hour shows up anyway.
 
-**An ambient that stops taking the screen — `[settings] ambient_render = "inline"`.** Under the
-default `"redirect"`, a random ambient `<<goto>>`s and owns the whole screen: no title, no
-description, no portraits, no exits. `"inline"` gives it the description slot only and leaves the
-room standing around it, which is destroyer's shape. A story one-shot keeps the redirect either way.
+⚠️ **A random ambient still takes the WHOLE screen, and that is an engine limit, not a choice.**
+When a Lane 2 ambient rolls on entry the room `<<goto>>`s to it — no title, no description, no
+portraits, no exits — so on that visit the description does not render at all. An `ambient_render =
+"inline"` setting that gave the ambient the description slot instead was built and **reverted on
+2026-08-26**; do not write doctrine or a ledger promise against it. `destroyer` renders its
+encounter in the description position and keeps its affordance bar and exits either way, so the
+shape is known and the gap is real — it is simply not available today.
 
 ### Rotation is still not built
 

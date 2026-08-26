@@ -1825,14 +1825,17 @@ going in that place* — told by the room itself:
 property — the sentence that lived in `board.map.shape` where no player could reach it. **That is
 what closes M2.**
 
-**2 · `[settings] ambient_render = "inline"`.** A random ambient now takes the **description slot
-only**; the title, the NPC portraits, the solo activities and the nav grid all render around it. A
-story one-shot still owns the screen, under both settings — a story beat should.
+**2 · `[settings] ambient_render = "inline"` — BUILT, THEN REVERTED 2026-08-26 on LO's call.** It
+gave a random ambient the description slot instead of the whole screen. It is gone; a Lane 2 ambient
+`<<goto>>`s again and the room screen is not drawn on that visit. **M1 and M2 stand on the
+description variants alone**, which is the half that was doing the work.
 
-⚠️ **Two things the engine still cannot do, written down rather than implied.** There is **no
+⚠️ **Three things the engine still cannot do, written down rather than implied.** There is **no
 time-of-day condition** in the evaluator, so the field's 17%-vary-by-hour column is unauthorable;
-presence is the axis to use instead. And per-visit **rotation** (the field's 22%) needs a counter
-like `block_pool`'s and does not exist for descriptions.
+presence is the axis to use instead. Per-visit **rotation** (the field's 22%) needs a counter like
+`block_pool`'s and does not exist for descriptions. And **a random ambient still takes the whole
+screen** — the setting that changed it was reverted, so the description does not render at all on a
+visit where one rolls.
 
 #### Verified
 
@@ -2538,3 +2541,31 @@ node is never emitted (the generator only emits triggerless canvases the closure
 the jump vanished from the build entirely. It needs a location; it just needs the right one.
 
 `40/40 judged gates` · `playtest_presence` 10/10 · `playtest_quests` 23/23.
+
+**2026-08-26 (4) — `ambient_render = "inline"` reverted. The description variants stay.**
+
+> LO: *"Undo that change completely first."*
+
+The half of the M1 engine work that changed **how a Lane 2 ambient renders** is gone. A random
+ambient `<<goto>>`s again and owns the whole screen — no title, no description, no portraits, no
+exits — exactly as it did before 2026-08-26 (2) and as it still does in every other game.
+
+Removed: `setup.getStoryOneShotRedirect`, the `inlineOnly` parameter on `checkRandomEncounters` and
+its substitution guard, `_location_autofire_line`, `_wrap_ambient_slot`, the `self.ambient_render`
+read, the whole `ambient_render` path through `template_import.py`, the `[settings]` line in
+`0_systems_spec.toml`, and `test_ambient_render_inline.py` (11 tests).
+
+**`[[locations.description_variants]]` is untouched and M1/M2 stay FIXED.** It shipped in the same
+commit but is a separate feature, and it is the half that closed both items. The two met in exactly
+one place — `_render_location_description` called `_wrap_ambient_slot` — and that call was the seam.
+`mrs_vance` still carries nine variants across seven rooms.
+
+**What this puts back on the table.** On a visit where an ambient rolls, the room's description —
+variant or base — does not render at all. That is now recorded in `the-first-hour.md` F9 as an
+engine limit rather than as a setting, so no future ledger promises against it.
+
+Verified: **244 passed, 7 skipped** · zero code references remain · seven games rebuilt with **six
+byte-identical** and `mrs_vance` changed exactly as intended · `40/40 judged gates` ·
+`somebody speaks` 4.4:1 · playtests 10/10 and 23/23 · **live 5/5** — a forced ambient lands on
+`Canvas_amb_yard_crossing_Node_base` with 0 nav cards and no room description, while the shop-floor
+variant still renders with 5 nav cards beneath it.
