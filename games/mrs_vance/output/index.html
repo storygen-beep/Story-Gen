@@ -2402,22 +2402,6 @@ setup.selectCanvasByPriority = function(canvasList) {
 
 // Check if a non-repeatable story event should auto-fire at this location.
 // Returns passage name to redirect to, or null if no story event fires.
-// A STORY one-shot only — no random-encounter fallback. Used by the "inline"
-// ambient_render path, where the one-shot still <<goto>>s (a story beat owning the
-// screen is correct) and the ambient is handled separately, in the description slot.
-setup.getStoryOneShotRedirect = function(locationId) {
-    try {
-        var best = setup.selectAutoFireCanvasForLocation(locationId);
-        if (best) {
-            setup.markCanvasTriggered(best.id);
-            return best.passageName;
-        }
-        return null;
-    } catch (e) {
-        return null;
-    }
-};
-
 setup.getStoryCanvasRedirect = function(locationId) {
     try {
         // Selection delegated to selectAutoFireCanvasForLocation so the
@@ -2670,11 +2654,7 @@ setup.renderLocationCanvases = function(locationId) {
 // ===== Random Encounter System =====
 // Check for random encounters when entering a location.
 // Returns passage name to redirect to, or null if no encounter fires.
-// `inlineOnly` — the caller is going to <<include>> the result into a room screen
-// rather than <<goto>> it. An ambient carrying Lane-3 substitution rules injects a
-// <<goto>> at the top of its first node (PRD 25 §5.4); inside an <<include>> that
-// navigates away mid-render, taking the room with it. Those keep the redirect path.
-setup.checkRandomEncounters = function(locationId, inlineOnly) {
+setup.checkRandomEncounters = function(locationId) {
     try {
         var sv = State.variables;
         var helpData = setup.help_data || {};
@@ -2707,9 +2687,6 @@ setup.checkRandomEncounters = function(locationId, inlineOnly) {
         var randomCanvases = [];
         for (var i = 0; i < canvasList.length; i++) {
             if (canvasList[i].triggerMode === "random") {
-                if (inlineOnly && (setup.canvasSubstitutions || {})[canvasList[i].id]) {
-                    continue;   // has a <<goto>> at node 1 — cannot be included
-                }
                 randomCanvases.push(canvasList[i]);
             }
         }
@@ -9094,8 +9071,8 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;if not $game_state.visited_locations.includes(&quot;the_yard&quot;)&gt;&gt;
 &lt;&lt;set $game_state.visited_locations.push(&quot;the_yard&quot;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryOneShotRedirect(&quot;the_yard&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Yard&lt;/h2&gt;
-&lt;&lt;set _amb = setup.checkRandomEncounters(&quot;the_yard&quot;, true)&gt;&gt;&lt;&lt;if _amb&gt;&gt;&lt;&lt;include _amb&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;npc_at_location&quot;, &quot;location_id&quot;: &quot;the_shop_floor&quot;, &quot;operator&quot;: &quot;is_present&quot;}]})&gt;&gt;&lt;p&gt;Gravel from the back step of the house to the roller door of the shop, and the roller door is up. Air tools go in bursts and stop. Somebody crosses the gravel with a part in his hands and does not look at the house. The county road goes past the gate and everything on this property opens onto this.&lt;/p&gt;&lt;&lt;elseif setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;npc_at_location&quot;, &quot;location_id&quot;: &quot;the_back_row&quot;, &quot;operator&quot;: &quot;is_present&quot;}]})&gt;&gt;&lt;p&gt;Gravel between the house and the shop, and past the skip a cab door shuts and the row settles again. The pole light is on its timer. The county road goes past the gate, and everything here — the house one side, the four bays the other, the row at the far end — opens onto this piece of ground.&lt;/p&gt;&lt;&lt;else&gt;&gt;&lt;p&gt;Gravel from the back step of the house to the roller door of the shop, wide enough to turn a rig on and graded so the water runs off toward the road. A pole light on a timer, a skip, a stack of split tires nobody has moved in a year. The county road goes past the gate and everything on this property opens onto this.&lt;/p&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryCanvasRedirect(&quot;the_yard&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Yard&lt;/h2&gt;
+&lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;npc_at_location&quot;, &quot;location_id&quot;: &quot;the_shop_floor&quot;, &quot;operator&quot;: &quot;is_present&quot;}]})&gt;&gt;&lt;p&gt;Gravel from the back step of the house to the roller door of the shop, and the roller door is up. Air tools go in bursts and stop. Somebody crosses the gravel with a part in his hands and does not look at the house. The county road goes past the gate and everything on this property opens onto this.&lt;/p&gt;&lt;&lt;elseif setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;npc_at_location&quot;, &quot;location_id&quot;: &quot;the_back_row&quot;, &quot;operator&quot;: &quot;is_present&quot;}]})&gt;&gt;&lt;p&gt;Gravel between the house and the shop, and past the skip a cab door shuts and the row settles again. The pole light is on its timer. The county road goes past the gate, and everything here — the house one side, the four bays the other, the row at the far end — opens onto this piece of ground.&lt;/p&gt;&lt;&lt;else&gt;&gt;&lt;p&gt;Gravel from the back step of the house to the roller door of the shop, wide enough to turn a rig on and graded so the water runs off toward the road. A pole light on a timer, a skip, a stack of split tires nobody has moved in a year. The county road goes past the gate and everything on this property opens onto this.&lt;/p&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;= setup.renderNpcPortraits(&quot;the_yard&quot;)&gt;&gt;
 &lt;&lt;= setup.renderSoloActivities(&quot;the_yard&quot;)&gt;&gt;
 &lt;div class=&quot;location-navigation&quot;&gt;
@@ -9106,8 +9083,8 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;if not $game_state.visited_locations.includes(&quot;the_office&quot;)&gt;&gt;
 &lt;&lt;set $game_state.visited_locations.push(&quot;the_office&quot;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryOneShotRedirect(&quot;the_office&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Office&lt;/h2&gt;
-&lt;&lt;set _amb = setup.checkRandomEncounters(&quot;the_office&quot;, true)&gt;&gt;&lt;&lt;if _amb&gt;&gt;&lt;&lt;include _amb&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;npc_at_location&quot;, &quot;location_id&quot;: &quot;the_office&quot;, &quot;operator&quot;: &quot;is_present&quot;}]})&gt;&gt;&lt;p&gt;A counter at the front for drivers and a desk at the back for the book, and somebody is between the two of them, which in this room means between you and the door. The window through to the shop floor is wired glass and it works both ways. The drawer is under the till side.&lt;/p&gt;&lt;&lt;elseif setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;npc_at_location&quot;, &quot;location_id&quot;: &quot;the_shop_floor&quot;, &quot;operator&quot;: &quot;is_present&quot;}]})&gt;&gt;&lt;p&gt;A counter at the front for drivers and a desk at the back for the book. Through the wired glass you can see four men working and any one of them can see the desk. The hatch is shut. The drawer is under the till side and the book is where you left it.&lt;/p&gt;&lt;&lt;else&gt;&gt;&lt;p&gt;A counter at the front for drivers and a desk at the back for the book, with a gate in the counter you have to lift to get between them. Job sheets on a spike, a filing cabinet with the third drawer locked, and the cash drawer under the till side that you are responsible for and cannot spend out of. There is a window onto the shop floor so whoever is in here can be seen from in there, and the other way round.&lt;/p&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryCanvasRedirect(&quot;the_office&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Office&lt;/h2&gt;
+&lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;npc_at_location&quot;, &quot;location_id&quot;: &quot;the_office&quot;, &quot;operator&quot;: &quot;is_present&quot;}]})&gt;&gt;&lt;p&gt;A counter at the front for drivers and a desk at the back for the book, and somebody is between the two of them, which in this room means between you and the door. The window through to the shop floor is wired glass and it works both ways. The drawer is under the till side.&lt;/p&gt;&lt;&lt;elseif setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;npc_at_location&quot;, &quot;location_id&quot;: &quot;the_shop_floor&quot;, &quot;operator&quot;: &quot;is_present&quot;}]})&gt;&gt;&lt;p&gt;A counter at the front for drivers and a desk at the back for the book. Through the wired glass you can see four men working and any one of them can see the desk. The hatch is shut. The drawer is under the till side and the book is where you left it.&lt;/p&gt;&lt;&lt;else&gt;&gt;&lt;p&gt;A counter at the front for drivers and a desk at the back for the book, with a gate in the counter you have to lift to get between them. Job sheets on a spike, a filing cabinet with the third drawer locked, and the cash drawer under the till side that you are responsible for and cannot spend out of. There is a window onto the shop floor so whoever is in here can be seen from in there, and the other way round.&lt;/p&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;= setup.renderNpcPortraits(&quot;the_office&quot;)&gt;&gt;
 &lt;&lt;= setup.renderSoloActivities(&quot;the_office&quot;)&gt;&gt;
 &lt;div class=&quot;location-navigation&quot;&gt;
@@ -9121,8 +9098,8 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;if not $game_state.visited_locations.includes(&quot;the_shop_floor&quot;)&gt;&gt;
 &lt;&lt;set $game_state.visited_locations.push(&quot;the_shop_floor&quot;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryOneShotRedirect(&quot;the_shop_floor&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Shop Floor&lt;/h2&gt;
-&lt;&lt;set _amb = setup.checkRandomEncounters(&quot;the_shop_floor&quot;, true)&gt;&gt;&lt;&lt;if _amb&gt;&gt;&lt;&lt;include _amb&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;npc_at_location&quot;, &quot;location_id&quot;: &quot;the_shop_floor&quot;, &quot;operator&quot;: &quot;is_present&quot;}]})&gt;&gt;&lt;p&gt;Four bays, three of them with something over a pit, and the parts wall runs the length of it. Somebody is under a truck with a light on a hook and somebody else is passing him things. The noise stops whenever you are the reason it stops, and starts again after.&lt;/p&gt;&lt;&lt;else&gt;&gt;&lt;p&gt;Four bays, three of them with something over a pit, and a parts wall that runs the whole back. It is loud from eight and it smells of diesel and hot metal and the orange soap by the sink. Everybody who works here is in here at some point in the day, which makes it the one room on the property where nobody is ever alone.&lt;/p&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryCanvasRedirect(&quot;the_shop_floor&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Shop Floor&lt;/h2&gt;
+&lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;npc_at_location&quot;, &quot;location_id&quot;: &quot;the_shop_floor&quot;, &quot;operator&quot;: &quot;is_present&quot;}]})&gt;&gt;&lt;p&gt;Four bays, three of them with something over a pit, and the parts wall runs the length of it. Somebody is under a truck with a light on a hook and somebody else is passing him things. The noise stops whenever you are the reason it stops, and starts again after.&lt;/p&gt;&lt;&lt;else&gt;&gt;&lt;p&gt;Four bays, three of them with something over a pit, and a parts wall that runs the whole back. It is loud from eight and it smells of diesel and hot metal and the orange soap by the sink. Everybody who works here is in here at some point in the day, which makes it the one room on the property where nobody is ever alone.&lt;/p&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;= setup.renderNpcPortraits(&quot;the_shop_floor&quot;)&gt;&gt;
 &lt;&lt;= setup.renderSoloActivities(&quot;the_shop_floor&quot;)&gt;&gt;
 &lt;div class=&quot;location-navigation&quot;&gt;
@@ -9136,8 +9113,8 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;if not $game_state.visited_locations.includes(&quot;the_wash_bay&quot;)&gt;&gt;
 &lt;&lt;set $game_state.visited_locations.push(&quot;the_wash_bay&quot;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryOneShotRedirect(&quot;the_wash_bay&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Wash Bay&lt;/h2&gt;
-&lt;&lt;set _amb = setup.checkRandomEncounters(&quot;the_wash_bay&quot;, true)&gt;&gt;&lt;&lt;if _amb&gt;&gt;&lt;&lt;include _amb&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;npc_at_location&quot;, &quot;location_id&quot;: &quot;the_wash_bay&quot;, &quot;operator&quot;: &quot;is_present&quot;}]})&gt;&gt;&lt;p&gt;Concrete, a floor drain in the middle, a hose on a reel that will strip paint if you hold it wrong, and it is running. Whoever is on it does not turn it off when you come in and does not look up. The water goes past your boots to the drain.&lt;/p&gt;&lt;&lt;else&gt;&gt;&lt;p&gt;Concrete, a floor drain in the middle, and a hose on a reel that will strip paint if you get the trigger wrong. It is the last bay on the end and it has no door — just the opening onto the yard, and the window onto the shop floor at the other side, and a curtain track with no curtain on it.&lt;/p&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryCanvasRedirect(&quot;the_wash_bay&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Wash Bay&lt;/h2&gt;
+&lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;npc_at_location&quot;, &quot;location_id&quot;: &quot;the_wash_bay&quot;, &quot;operator&quot;: &quot;is_present&quot;}]})&gt;&gt;&lt;p&gt;Concrete, a floor drain in the middle, a hose on a reel that will strip paint if you hold it wrong, and it is running. Whoever is on it does not turn it off when you come in and does not look up. The water goes past your boots to the drain.&lt;/p&gt;&lt;&lt;else&gt;&gt;&lt;p&gt;Concrete, a floor drain in the middle, and a hose on a reel that will strip paint if you get the trigger wrong. It is the last bay on the end and it has no door — just the opening onto the yard, and the window onto the shop floor at the other side, and a curtain track with no curtain on it.&lt;/p&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;= setup.renderNpcPortraits(&quot;the_wash_bay&quot;)&gt;&gt;
 &lt;&lt;= setup.renderSoloActivities(&quot;the_wash_bay&quot;)&gt;&gt;
 &lt;div class=&quot;location-navigation&quot;&gt;
@@ -9150,8 +9127,8 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;if not $game_state.visited_locations.includes(&quot;the_bunk_room&quot;)&gt;&gt;
 &lt;&lt;set $game_state.visited_locations.push(&quot;the_bunk_room&quot;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryOneShotRedirect(&quot;the_bunk_room&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Bunk Room&lt;/h2&gt;
-&lt;&lt;set _amb = setup.checkRandomEncounters(&quot;the_bunk_room&quot;, true)&gt;&gt;&lt;&lt;if _amb&gt;&gt;&lt;&lt;include _amb&gt;&gt;&lt;&lt;else&gt;&gt;&lt;p&gt;Up the inside stairs over the shop. Two beds, a plywood partition that stops short of the ceiling, a window looking down onto the yard, and a radio that stays on whether anybody is listening or not. The floor is the shop&#39;s ceiling, so you can hear the compressor cut in through it.&lt;/p&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryCanvasRedirect(&quot;the_bunk_room&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Bunk Room&lt;/h2&gt;
+&lt;p&gt;Up the inside stairs over the shop. Two beds, a plywood partition that stops short of the ceiling, a window looking down onto the yard, and a radio that stays on whether anybody is listening or not. The floor is the shop&#39;s ceiling, so you can hear the compressor cut in through it.&lt;/p&gt;
 &lt;&lt;= setup.renderNpcPortraits(&quot;the_bunk_room&quot;)&gt;&gt;
 &lt;&lt;= setup.renderSoloActivities(&quot;the_bunk_room&quot;)&gt;&gt;
 &lt;div class=&quot;location-navigation&quot;&gt;
@@ -9164,8 +9141,8 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;if not $game_state.visited_locations.includes(&quot;the_back_row&quot;)&gt;&gt;
 &lt;&lt;set $game_state.visited_locations.push(&quot;the_back_row&quot;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryOneShotRedirect(&quot;the_back_row&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Back Row&lt;/h2&gt;
-&lt;&lt;set _amb = setup.checkRandomEncounters(&quot;the_back_row&quot;, true)&gt;&gt;&lt;&lt;if _amb&gt;&gt;&lt;&lt;include _amb&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;npc_at_location&quot;, &quot;location_id&quot;: &quot;the_back_row&quot;, &quot;operator&quot;: &quot;is_present&quot;}]})&gt;&gt;&lt;p&gt;Six spaces past the skip and the split tires where the trucks park overnight, and a cab light is on at the far end. The pole light does not reach this far and the road is behind the hedge. Somebody is awake in one of them and knows the sound of somebody walking the row.&lt;/p&gt;&lt;&lt;else&gt;&gt;&lt;p&gt;Past the skip and the split tires, where the trucks park overnight — six spaces, angled, most of them with a bed behind the seats and a man asleep in it or nobody at all. The pole light does not reach this far and the road is on the other side of a hedge. It is the last place on the property anybody looks.&lt;/p&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryCanvasRedirect(&quot;the_back_row&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Back Row&lt;/h2&gt;
+&lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;npc_at_location&quot;, &quot;location_id&quot;: &quot;the_back_row&quot;, &quot;operator&quot;: &quot;is_present&quot;}]})&gt;&gt;&lt;p&gt;Six spaces past the skip and the split tires where the trucks park overnight, and a cab light is on at the far end. The pole light does not reach this far and the road is behind the hedge. Somebody is awake in one of them and knows the sound of somebody walking the row.&lt;/p&gt;&lt;&lt;else&gt;&gt;&lt;p&gt;Past the skip and the split tires, where the trucks park overnight — six spaces, angled, most of them with a bed behind the seats and a man asleep in it or nobody at all. The pole light does not reach this far and the road is on the other side of a hedge. It is the last place on the property anybody looks.&lt;/p&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;= setup.renderNpcPortraits(&quot;the_back_row&quot;)&gt;&gt;
 &lt;&lt;= setup.renderSoloActivities(&quot;the_back_row&quot;)&gt;&gt;
 &lt;div class=&quot;location-navigation&quot;&gt;
@@ -9178,8 +9155,8 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;if not $game_state.visited_locations.includes(&quot;sherrods_room&quot;)&gt;&gt;
 &lt;&lt;set $game_state.visited_locations.push(&quot;sherrods_room&quot;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryOneShotRedirect(&quot;sherrods_room&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Sherrod&#39;s Room&lt;/h2&gt;
-&lt;&lt;set _amb = setup.checkRandomEncounters(&quot;sherrods_room&quot;, true)&gt;&gt;&lt;&lt;if _amb&gt;&gt;&lt;&lt;include _amb&gt;&gt;&lt;&lt;else&gt;&gt;&lt;p&gt;Up the outside stairs on the gable end of the office, one room and a sink. He has been in it longer than you have been a Vance and there is nothing in it that says he expects to leave.&lt;/p&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryCanvasRedirect(&quot;sherrods_room&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Sherrod&#39;s Room&lt;/h2&gt;
+&lt;p&gt;Up the outside stairs on the gable end of the office, one room and a sink. He has been in it longer than you have been a Vance and there is nothing in it that says he expects to leave.&lt;/p&gt;
 &lt;&lt;= setup.renderNpcPortraits(&quot;sherrods_room&quot;)&gt;&gt;
 &lt;&lt;= setup.renderSoloActivities(&quot;sherrods_room&quot;)&gt;&gt;
 &lt;div class=&quot;location-navigation&quot;&gt;
@@ -9192,8 +9169,8 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;if not $game_state.visited_locations.includes(&quot;the_kitchen&quot;)&gt;&gt;
 &lt;&lt;set $game_state.visited_locations.push(&quot;the_kitchen&quot;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryOneShotRedirect(&quot;the_kitchen&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Kitchen&lt;/h2&gt;
-&lt;&lt;set _amb = setup.checkRandomEncounters(&quot;the_kitchen&quot;, true)&gt;&gt;&lt;&lt;if _amb&gt;&gt;&lt;&lt;include _amb&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;npc_at_location&quot;, &quot;location_id&quot;: &quot;the_kitchen&quot;, &quot;operator&quot;: &quot;is_present&quot;}]})&gt;&gt;&lt;p&gt;The back door off the yard opens straight into it, so everybody who comes in comes through here, and somebody is at the table now. Five adults eat in this room at different hours off the same two pans. Whatever gets said in here gets said in front of whoever is sitting down.&lt;/p&gt;&lt;&lt;else&gt;&gt;&lt;p&gt;The back door off the yard opens straight into it, so everybody who comes in comes in here first and most of them do not take their boots off. A table for six, a water heater on the wall that has to be switched on twenty minutes before anybody wants anything, and a window over the sink that looks at the shop.&lt;/p&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryCanvasRedirect(&quot;the_kitchen&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Kitchen&lt;/h2&gt;
+&lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;npc_at_location&quot;, &quot;location_id&quot;: &quot;the_kitchen&quot;, &quot;operator&quot;: &quot;is_present&quot;}]})&gt;&gt;&lt;p&gt;The back door off the yard opens straight into it, so everybody who comes in comes through here, and somebody is at the table now. Five adults eat in this room at different hours off the same two pans. Whatever gets said in here gets said in front of whoever is sitting down.&lt;/p&gt;&lt;&lt;else&gt;&gt;&lt;p&gt;The back door off the yard opens straight into it, so everybody who comes in comes in here first and most of them do not take their boots off. A table for six, a water heater on the wall that has to be switched on twenty minutes before anybody wants anything, and a window over the sink that looks at the shop.&lt;/p&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;= setup.renderNpcPortraits(&quot;the_kitchen&quot;)&gt;&gt;
 &lt;&lt;= setup.renderSoloActivities(&quot;the_kitchen&quot;)&gt;&gt;
 &lt;div class=&quot;location-navigation&quot;&gt;
@@ -9207,8 +9184,8 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;if not $game_state.visited_locations.includes(&quot;your_room&quot;)&gt;&gt;
 &lt;&lt;set $game_state.visited_locations.push(&quot;your_room&quot;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryOneShotRedirect(&quot;your_room&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Your Room&lt;/h2&gt;
-&lt;&lt;set _amb = setup.checkRandomEncounters(&quot;your_room&quot;, true)&gt;&gt;&lt;&lt;if _amb&gt;&gt;&lt;&lt;include _amb&gt;&gt;&lt;&lt;else&gt;&gt;&lt;p&gt;His and yours, and it was his before it was yours — the wardrobe is full of a dead woman&#39;s coat hangers and nobody has ever said what happened to what was on them. The bed faces the window and the window faces the yard, so you can see whose truck is in it without getting up.&lt;/p&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryCanvasRedirect(&quot;your_room&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Your Room&lt;/h2&gt;
+&lt;p&gt;His and yours, and it was his before it was yours — the wardrobe is full of a dead woman&#39;s coat hangers and nobody has ever said what happened to what was on them. The bed faces the window and the window faces the yard, so you can see whose truck is in it without getting up.&lt;/p&gt;
 &lt;&lt;= setup.renderNpcPortraits(&quot;your_room&quot;)&gt;&gt;
 &lt;&lt;= setup.renderSoloActivities(&quot;your_room&quot;)&gt;&gt;
 &lt;div class=&quot;location-navigation&quot;&gt;
@@ -9221,8 +9198,8 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;if not $game_state.visited_locations.includes(&quot;the_bathroom&quot;)&gt;&gt;
 &lt;&lt;set $game_state.visited_locations.push(&quot;the_bathroom&quot;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryOneShotRedirect(&quot;the_bathroom&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Bathroom&lt;/h2&gt;
-&lt;&lt;set _amb = setup.checkRandomEncounters(&quot;the_bathroom&quot;, true)&gt;&gt;&lt;&lt;if _amb&gt;&gt;&lt;&lt;include _amb&gt;&gt;&lt;&lt;else&gt;&gt;&lt;p&gt;One of them, for five adults, at the end of the landing. The bolt does not sit in its keeper any more and everybody in the house knows it and everybody in the house knocks anyway, most of the time.&lt;/p&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryCanvasRedirect(&quot;the_bathroom&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Bathroom&lt;/h2&gt;
+&lt;p&gt;One of them, for five adults, at the end of the landing. The bolt does not sit in its keeper any more and everybody in the house knows it and everybody in the house knocks anyway, most of the time.&lt;/p&gt;
 &lt;&lt;= setup.renderNpcPortraits(&quot;the_bathroom&quot;)&gt;&gt;
 &lt;&lt;= setup.renderSoloActivities(&quot;the_bathroom&quot;)&gt;&gt;
 &lt;div class=&quot;location-navigation&quot;&gt;
@@ -9235,8 +9212,8 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;if not $game_state.visited_locations.includes(&quot;booths_room&quot;)&gt;&gt;
 &lt;&lt;set $game_state.visited_locations.push(&quot;booths_room&quot;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryOneShotRedirect(&quot;booths_room&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Booth&#39;s Room&lt;/h2&gt;
-&lt;&lt;set _amb = setup.checkRandomEncounters(&quot;booths_room&quot;, true)&gt;&gt;&lt;&lt;if _amb&gt;&gt;&lt;&lt;include _amb&gt;&gt;&lt;&lt;else&gt;&gt;&lt;p&gt;The smallest one, over the kitchen, warm because the water heater backs onto its wall. A television on a chair, a wardrobe door that does not shut, and a nineteen-year-old in it who has no reason to get up in the morning and knows it.&lt;/p&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryCanvasRedirect(&quot;booths_room&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Booth&#39;s Room&lt;/h2&gt;
+&lt;p&gt;The smallest one, over the kitchen, warm because the water heater backs onto its wall. A television on a chair, a wardrobe door that does not shut, and a nineteen-year-old in it who has no reason to get up in the morning and knows it.&lt;/p&gt;
 &lt;&lt;= setup.renderNpcPortraits(&quot;booths_room&quot;)&gt;&gt;
 &lt;&lt;= setup.renderSoloActivities(&quot;booths_room&quot;)&gt;&gt;
 &lt;div class=&quot;location-navigation&quot;&gt;
@@ -9249,8 +9226,8 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;if not $game_state.visited_locations.includes(&quot;kerr_crossing&quot;)&gt;&gt;
 &lt;&lt;set $game_state.visited_locations.push(&quot;kerr_crossing&quot;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryOneShotRedirect(&quot;kerr_crossing&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Kerr Crossing&lt;/h2&gt;
-&lt;&lt;set _amb = setup.checkRandomEncounters(&quot;kerr_crossing&quot;, true)&gt;&gt;&lt;&lt;if _amb&gt;&gt;&lt;&lt;include _amb&gt;&gt;&lt;&lt;else&gt;&gt;&lt;p&gt;Twenty minutes of county road and then four ways, a light that flashes amber after ten, two pumps and a canopy. There is a bank on one corner and a bar on the other and about forty people who do not work for your husband.&lt;/p&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryCanvasRedirect(&quot;kerr_crossing&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Kerr Crossing&lt;/h2&gt;
+&lt;p&gt;Twenty minutes of county road and then four ways, a light that flashes amber after ten, two pumps and a canopy. There is a bank on one corner and a bar on the other and about forty people who do not work for your husband.&lt;/p&gt;
 &lt;&lt;= setup.renderNpcPortraits(&quot;kerr_crossing&quot;)&gt;&gt;
 &lt;&lt;= setup.renderSoloActivities(&quot;kerr_crossing&quot;)&gt;&gt;
 &lt;div class=&quot;location-navigation&quot;&gt;
@@ -9268,8 +9245,8 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;if not $game_state.visited_locations.includes(&quot;the_bank&quot;)&gt;&gt;
 &lt;&lt;set $game_state.visited_locations.push(&quot;the_bank&quot;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryOneShotRedirect(&quot;the_bank&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Bank&lt;/h2&gt;
-&lt;&lt;set _amb = setup.checkRandomEncounters(&quot;the_bank&quot;, true)&gt;&gt;&lt;&lt;if _amb&gt;&gt;&lt;&lt;include _amb&gt;&gt;&lt;&lt;else&gt;&gt;&lt;p&gt;One counter, two chairs and a woman called Dee who has known the Vance account since before you were on the paperwork, which you are not.&lt;/p&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryCanvasRedirect(&quot;the_bank&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Bank&lt;/h2&gt;
+&lt;p&gt;One counter, two chairs and a woman called Dee who has known the Vance account since before you were on the paperwork, which you are not.&lt;/p&gt;
 &lt;&lt;= setup.renderNpcPortraits(&quot;the_bank&quot;)&gt;&gt;
 &lt;&lt;= setup.renderSoloActivities(&quot;the_bank&quot;)&gt;&gt;
 &lt;div class=&quot;location-navigation&quot;&gt;
@@ -9282,8 +9259,8 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;if not $game_state.visited_locations.includes(&quot;the_bar&quot;)&gt;&gt;
 &lt;&lt;set $game_state.visited_locations.push(&quot;the_bar&quot;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryOneShotRedirect(&quot;the_bar&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Bar&lt;/h2&gt;
-&lt;&lt;set _amb = setup.checkRandomEncounters(&quot;the_bar&quot;, true)&gt;&gt;&lt;&lt;if _amb&gt;&gt;&lt;&lt;include _amb&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;npc_at_location&quot;, &quot;location_id&quot;: &quot;the_bar&quot;, &quot;operator&quot;: &quot;is_present&quot;}]})&gt;&gt;&lt;p&gt;Dark in the afternoon, a pool table nobody uses, and men on the stools who finished at the yard and have not gone home. Every one of them either works for your husband or sells to him. Whatever you do at this end of the bar is back at the yard before you are.&lt;/p&gt;&lt;&lt;else&gt;&gt;&lt;p&gt;Dark at four in the afternoon, a pool table nobody uses, and a row of stools where men who have finished sit until they have to go home. The yard drinks here, so it is not as far from the yard as the twenty minutes make it sound.&lt;/p&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryCanvasRedirect(&quot;the_bar&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Bar&lt;/h2&gt;
+&lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;npc_at_location&quot;, &quot;location_id&quot;: &quot;the_bar&quot;, &quot;operator&quot;: &quot;is_present&quot;}]})&gt;&gt;&lt;p&gt;Dark in the afternoon, a pool table nobody uses, and men on the stools who finished at the yard and have not gone home. Every one of them either works for your husband or sells to him. Whatever you do at this end of the bar is back at the yard before you are.&lt;/p&gt;&lt;&lt;else&gt;&gt;&lt;p&gt;Dark at four in the afternoon, a pool table nobody uses, and a row of stools where men who have finished sit until they have to go home. The yard drinks here, so it is not as far from the yard as the twenty minutes make it sound.&lt;/p&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;= setup.renderNpcPortraits(&quot;the_bar&quot;)&gt;&gt;
 &lt;&lt;= setup.renderSoloActivities(&quot;the_bar&quot;)&gt;&gt;
 &lt;div class=&quot;location-navigation&quot;&gt;
