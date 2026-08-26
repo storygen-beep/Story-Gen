@@ -5,6 +5,69 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-26 (5) — `npcs[].role`: the label under the name in every dialogue box
+
+**Why.** LO, on the prose-anchor fix for W1: *"I don't think this is the proper solution for it. In
+the dialogue box, we do show the NPC portrait and name — below name should also show another
+field."*
+
+The anchors recur every few visits. The dialogue box carries it **every time somebody speaks**:
+
+```
+[face]  Cade
+        husband's eldest
+        "Slower. You're not doing the books now."
+```
+
+### 1 · The field — `npcs[].role`
+
+Short, authored, rendered under the name in the NPC dialogue box. `speaker = "player"` and
+`speaker = "unknown"` take none. Plumbed through **both** build paths — `template_import.py` for
+`--use-db` and `game_graph.py` for the default — using `npcs[].tags` as the precedent.
+
+### 2 · ⚠️ Authored, never derived — and the repo is the argument
+
+Deriving it from `relationship`'s first clause was the obvious idea. Measured before writing a line:
+
+```
+mrs_vance    5 of 6 relationship strings contain "husband"  (him, his three sons, his brother)
+the_season   two characters whose strings both begin "Your brother"
+```
+
+A derived default labels five people `husband` and two people `brother` — **exactly the confusion the
+field exists to remove**, and silently, because nobody would look. Empty renders no line, which is the
+safe default.
+
+### 3 · The one rule a gate can hold — uniqueness
+
+`validate()` **refuses two roles that match** (case-insensitive, trimmed), and refuses a label past
+five words. It cannot invent the words; it can refuse two people wearing the same one. `the_season`
+would fail the moment it adopts the field with two `brother`s — which is correct, and it is the game
+that produced the original complaint.
+
+F10 gains the mechanical half: the TOML shape, the three rules, the worked table for hard casts
+(`elder brother` / `younger brother`, `husband` / `brother-in-law`, `father's brother` /
+`mother's brother`, `housemate, top floor` / `housemate, back room`), and the warning that this is
+**not** a swap for the name — `destroyer` is the only game of 26 that swaps, and it survives on
+having one of each relation.
+
+### Verified
+
+- New suite `test_npc_role_label.py` (11). Full app run **255 passed, 7 skipped**.
+- `mrs_vance` authored six unique labels; **169 role spans** in the build.
+- **Cross-game isolation.** Seven games rebuilt. The six that declare no role differ by **twelve
+  lines — the CSS rule alone**, for a class none of them uses.
+- ⚠️ It did not start that way. The first build put `"role": ""` into `$npcs` for **every NPC in
+  every game** — a dead key in every save, since the label is baked into passage HTML at build time
+  and nothing reads it back. Added to the existing strip list beside `customizable` and
+  `relationship_options`. Caught by hashing all seven builds, not by a test.
+- `40/40 judged gates` · `speakers are named` 253/253 · `playtest_presence` 10/10 ·
+  `playtest_quests` 23/23.
+- **Live:** the box renders `Cade:` at y=382 and `husband's eldest` at y=406, same left edge, with
+  the portrait to its left. `Stranger:` still renders with no role.
+
+---
+
 ## 2026-08-26 (4) — `ambient_render` reverted; `description_variants` kept
 
 **Why.** LO, after the four render buckets were laid out for him: *"Undo that change completely

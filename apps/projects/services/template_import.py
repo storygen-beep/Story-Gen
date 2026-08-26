@@ -147,6 +147,18 @@ class TemplateNPC:
     # `relationship`. Ships to runtime via the slug-keyed `setup.npc_tags`
     # registry, NOT via $npcs — see v2.py's npc_tags_map for why.
     tags: List[str] = field(default_factory=list)
+    # F10 · the short label under this character's NAME in every dialogue box.
+    # NOT `relationship`, which is a cast-page sentence and — measured across the
+    # repo — repeats: five of one game's six relationship strings contain
+    # "husband", and another game has two people whose strings both begin "Your
+    # brother". A label that repeats is the confusion this field exists to remove,
+    # so it is AUTHORED and never derived, and validate() refuses two that match.
+    #   · no "Your" — it is on every label and carries nothing
+    #   · 1-3 words: "husband's eldest", "brother-in-law", "elder brother"
+    #   · unique in the cast; when the relation word repeats, the label carries
+    #     what actually separates them — birth order, side of the family, a place
+    # Empty is fine and renders no line at all.
+    role: str = ""
 
 
 @dataclass
@@ -1844,6 +1856,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 hidden_from_ui=bool(n.get("hidden_from_ui", False)),
                 arc_stages=arc_stages,
                 tags=npc_tags,
+                role=_require_str(n, "role", ""),
             )
         )
 
@@ -4064,6 +4077,35 @@ def validate(template: GameTemplate) -> List[str]:
                 errors.append(
                     f"npcs[{i}].schedules[{si}].location '{sch.location}' not found in locations"
                 )
+
+    # ===== Role labels (F10) — the one rule a machine can hold here =====
+    # It cannot invent the words. It CAN refuse two people wearing the same label,
+    # which is the only thing that makes a label worth having: `brother` is fine
+    # with one brother and useless with two. Measured in this repo before the field
+    # existed — one game's cast has two characters whose relationship both begin
+    # "Your brother", and that is the game whose reader said "I don't know who is
+    # who".
+    seen_roles: Dict[str, str] = {}
+    for i, n in enumerate(template.npcs):
+        role = (n.role or "").strip()
+        if not role:
+            continue
+        if len(role.split()) > 5:
+            errors.append(
+                f"npcs[{i}] '{n.id}' role '{role}' is {len(role.split())} words. A role is a "
+                f"LABEL under the name (1-3 words); a sentence about them belongs in "
+                f"`relationship`, which the cast page renders."
+            )
+        key = role.casefold()
+        if key in seen_roles:
+            errors.append(
+                f"npcs[{i}] '{n.id}' role '{role}' is already used by '{seen_roles[key]}'. "
+                f"A role label has to be unique in the cast or it tells the player nothing — "
+                f"carry what separates them (birth order, side of the family, a place): "
+                f"'elder brother' / 'younger brother', not 'brother' twice."
+            )
+        else:
+            seen_roles[key] = n.id
 
     # Customizable NPC validation
     for i, n in enumerate(template.npcs):
@@ -6876,6 +6918,8 @@ def create_project_from_template(
         # G: per-NPC cast-card tag line.
         if n.tags:
             npc.ai_behavior_config["tags"] = n.tags
+        if n.role:
+            npc.ai_behavior_config["role"] = n.role
         npc.save()
         npc_ids.append(str(npc.id))
 

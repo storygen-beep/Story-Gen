@@ -2015,6 +2015,32 @@ where this game has three men in one. LO's ruling: *"Relation and name both are 
 can't be replaced with another."* Live, 30 of 30 hub renders still show **Cade:** on the speaker
 line with his portrait beside it. Both, at the point of use.
 
+**And then a second, better fix on top — `npcs[].role`, 2026-08-26.** LO: *"I don't think this is
+the proper solution for it. In the dialogue box, we do show the NPC portrait and name — below name
+should also show another field."* The anchors recur every few visits; the dialogue box carries it
+**every time somebody speaks**:
+
+```
+[face]  Cade
+        husband's eldest
+        "Slower. You're not doing the books now."
+```
+
+Six labels, each unique in the cast, none of them starting with "Your":
+
+```
+Dorn  husband   ·  Sherrod  brother-in-law   ·  Tobin  brother
+Cade  husband's eldest  ·  Isaac  husband's middle son  ·  Booth  husband's youngest
+```
+
+⚠️ **Authored, never derived**, and this game is the argument: **five of its six `relationship`
+strings contain "husband"** — him, his three sons and his brother. A first-clause derivation would
+label five people `husband`, silently. `validate()` refuses two roles that match, which is the one
+rule a machine can hold here.
+
+**The prose anchors stay.** LO kept them — the two are complementary, one in the writing and one in
+the interface.
+
 **Skill layer — `the-first-hour.md` F10 and `lint · the role stays attached`.** F7 already gets the
 role on screen at the meeting and F9 keeps a place saying what it is on every visit; nothing said the
 same for people. The lint's instrument is the load-bearing part: **a kin-word detector was tried and
@@ -2605,3 +2631,33 @@ byte-identical** and `mrs_vance` changed exactly as intended · `40/40 judged ga
 `somebody speaks` 4.4:1 · playtests 10/10 and 23/23 · **live 5/5** — a forced ambient lands on
 `Canvas_amb_yard_crossing_Node_base` with 0 nav cards and no room description, while the shop-floor
 variant still renders with 5 nav cards beneath it.
+
+**2026-08-26 (5) — `npcs[].role`: the answer moves onto the dialogue box.**
+
+> LO: *"I don't think this is the proper solution for it. In the dialogue box, we do show the NPC
+> portrait and name — below name should also show another field."*
+
+W1's prose anchors recur roughly one visit in five. A short authored label now sits **under the
+name in the NPC dialogue box, every time somebody speaks** — portrait, name, role, line. Nothing is
+replaced; `Cade:` is still on the line with his face.
+
+```
+Dorn  husband   ·  Sherrod  brother-in-law   ·  Tobin  brother
+Cade  husband's eldest  ·  Isaac  husband's middle son  ·  Booth  husband's youngest
+```
+
+⚠️ **It is authored and never derived, and this game is why.** Deriving from `relationship`'s first
+clause labels **five of these six "husband"** — him, his three sons, his brother. `the_season` has
+two characters whose strings both begin *"Your brother"*, and that is the game that drew *"I don't
+know who is who."* A silent wrong default is worse than a missing one. `validate()` refuses two
+labels that match and refuses a label past five words.
+
+⚠️ **The first build shipped `"role": ""` into `$npcs` for every NPC in every game** — a dead key in
+every save, since the label is baked into passage HTML at build time and nothing reads it back. It
+is now stripped alongside `customizable` and `relationship_options`. **Caught by hashing all seven
+builds, not by a test** — the six games that declare no role now differ by twelve lines, the CSS
+rule alone.
+
+`40/40 judged gates` · `speakers are named` 253/253 · new suite `test_npc_role_label.py` (11) inside
+a full app run of **255 passed** · playtests 10/10 and 23/23 · live: `Cade:` at y=382,
+`husband's eldest` at y=406, same left edge, portrait to the left; `Stranger:` renders with no role.
