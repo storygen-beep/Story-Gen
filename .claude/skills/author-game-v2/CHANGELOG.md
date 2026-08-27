@@ -5,6 +5,66 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-27 — gates.py G43 + register.md: the first gate that measures how the writing SOUNDS
+
+**Why.** Two players read a shipped v2-lineage game and said the prose "smacks of an underpowered
+AI whose 'mother language' isn't english," and that this made the narrative hard to follow. That
+put a standing claim in doubt, so the claim was tested rather than defended. Of the 42 gates then
+in the file, exactly one looked at writing (G19, median sentence length) and the game in question
+**passed it**, at 12 words against a field median of 12. The prose was field-normal on the only
+axis measured, and far off-field on one that had never been measured. Separately: the 25-game
+mopoga corpus had been on disk since 2026-07-24 and had only ever been asked structural questions.
+Its prose had never once been compared with ours.
+
+**⚠️ A finding was made, published in-session, and then RETRACTED. It is recorded here because the
+retraction is the more useful half.** Measuring our games from `output/index.html` produced
+"joints per sentence, ours 4.75x the field." That was an artifact. Our built HTML carries UI list
+blocks that never reach a full stop, so the sentence splitter read each as one enormous
+comma-filled sentence: 10.6% of our HTML "sentences" are those blocks, against the field's 1.5%.
+Re-measured on authored beat text, the basis a gate actually reads, **the direction reversed** —
+our prose is *less* packed than the field, `mrs_vance` 0.53 against 0.77. No packing gate was
+built. This is the same family of error the `SENTENCE_CEILING` comment already documents, hit a
+second time, and it is now written into G43's header so the third time is caught.
+
+**What changed.**
+
+- **`scripts/gates.py`** — new constant `DASH_CEILING = 35.0` beside `SENTENCE_CEILING`, and new
+  gate **G43 "prose texture"** beside G19. Dashes per 10,000 words, read from `b.text` and never
+  from built HTML. The ceiling is the corpus **maximum**, not its median: a shipped and
+  heavily-commented game writes at 35.4, so a game at or under that cannot be called wrong without
+  contradicting the field. The gate catches an author who has left the distribution, not one
+  working at its edge. Corpus figures: p50 0.99 · p75 4.21 · p90 17.46 · p95 25.72 · max 35.41.
+- The gate also prints joints per sentence, the share of `you`, and pronouns per name, explicitly
+  **with no field figure and no threshold**. A first draft did quote field figures for all three
+  and was wrong to: they come from HTML and the gate reads TOML, and `pronoun:name` moves from 0.87
+  to 9.99 on the same game across that seam. Caught in verification, fixed before commit. The dash
+  rate is quoted against the field precisely because it is the one that holds (27.2 HTML, 25.4
+  TOML, a 7% move).
+- **`references/register.md`** — new section **"Dashes stay rare"** after "Sentences run short",
+  with the corpus table, the rule, and a real three-state worked example from `mrs_vance` prose:
+  the original, the comma swap that is *not* the fix, and the split that is. Carries the ⚠️ that
+  swapping a dash for a comma leaves the joint in place; measured across two of our own games, dash
+  rate fell 3.5x while comma joints per sentence went **up**. That swap is what the `humanizer`
+  skill's §14 prescribes, so it will be suggested again. Also notes that this is the file's first
+  subtraction-shaped rule, against roughly five add-shaped rules for every cut-shaped one.
+- **`references/register.md`, "What is not measured here"** — records that texture is now measured
+  on exactly one marker, and that the three companion numbers are a trend line across our own games
+  and not a score.
+
+**Verified.** `gates.py mrs_vance` **41/41** (was 40/40), G43 passing at 25.4/10k, which reproduces
+an independent measurement of the same game to the decimal. `the_season` 2.3, `off_season` 5.5,
+`forty_miles` 1.8, all passing, no other gate's verdict moved in any of the four. `--json` parses
+and carries the gate. **Negative control:** the ceiling is worthless if nothing fails it, so G43's
+expressions were replicated read-only against `vesper`'s authored TOML, which reads **123.0/10k,
+FAIL, 3.5x the corpus maximum**. The gate therefore discriminates: it clears the four games the
+corpus says are normal and fails the one game human readers actually complained about.
+
+**Not changed.** No prose in any game. `mrs_vance` sits at the field's p95 with 32 dashes in 21
+content blocks, which the corpus itself says is inside normal, so it was measured and left alone.
+`games/vesper/` was not touched at any point; it appears above only as the calibration case.
+
+---
+
 ## 2026-08-27 — the-meters.md: how "it delivers people" is actually built on this engine
 
 **Why.** The correction earlier today told authors that a rising audience meter *should* have

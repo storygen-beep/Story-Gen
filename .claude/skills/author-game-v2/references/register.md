@@ -539,6 +539,56 @@ Gate 19 puts the ceiling at 14 — deliberately generous, calibrated across two 
 treat a pass as "not drifting" rather than as "matches the field." The constant in `gates.py`
 carries the full caveat.
 
+## Dashes stay rare
+
+**Words to watch:** `—` and `–`, and the spaced `--` that becomes one.
+
+**Why this rule exists.** Two players read a shipped game of ours and said the writing "smacks of
+an underpowered AI." Dash density is the marker readers reach for most often when they say that,
+and until 2026-08-27 nothing in this skill mentioned it. Measured over the 25 game corpus:
+
+| | dashes per 10,000 prose words |
+|---|---|
+| field p50 | **0.99** |
+| field p90 | 17.5 |
+| field p95 | 25.7 |
+| field max (`apocalyptic-world`) | 35.4 |
+| a game of ours, measured | **123.0**, which is 3.5x the corpus maximum |
+
+Half the corpus writes fewer than one dash per ten thousand words. Gate 43 puts the ceiling at the
+corpus **maximum**, so a game is only failed once it has left the distribution entirely. Treat a
+pass as "still inside the field," never as a target.
+
+**Rule.** A beat gets a dash when no other mark will do the job. Two dashes in one beat is a habit,
+not a choice. When you find a pair holding an aside, the aside is usually a sentence.
+
+**⚠️ The fix is never a comma.** This is the one wrong turn already taken here, and it is also what
+the `humanizer` skill prescribes, so it will be suggested again. Swapping the mark leaves the joint
+in place, the reader still holds the sentence open, and nothing reads easier. Measured across two of
+our own games: dash rate fell 3.5x and comma joints per sentence went **up**. Split the sentence, or
+cut the clause it was carrying.
+
+**Before** (real, `mrs_vance`, two dashes in 43 words):
+
+> Cade — your husband's eldest, and the only one of them with a reason to be in this kitchen —
+> comes up for ten minutes on a Friday and stands rather than sits.
+
+**The comma swap, which is not the fix.** Three commas now, and fourteen words sit between the
+subject and its verb:
+
+> Cade, your husband's eldest, and the only one of them with a reason to be in this kitchen, comes
+> up for ten minutes on a Friday and stands rather than sits.
+
+**After.** The aside was a sentence, so it became one:
+
+> Cade comes up for ten minutes on a Friday and stands rather than sits. He is your husband's
+> eldest, and the only one of them with a reason to be in this kitchen.
+
+**This is the first rule in this file shaped as a subtraction,** and that is worth saying out loud.
+Counted across the register doctrine, rules that tell an author to add something outnumber rules
+that tell them to cut by roughly five to one. A register taught only in additions drifts one
+direction, and the author cannot feel it happening from inside the prose.
+
 ## The words the player has to already own
 
 Off Season scored **86.8 Flesch Reading Ease, grade 5.0 — easier than 26 of the 27 field games**
@@ -724,6 +774,13 @@ stays **immutable once a release ships** — a person swap invalidates every lin
 
 Whether the writing is any good, and whether it arouses. Neither is countable, both are the job.
 `gates.py` measures shape. It cannot tell you the scene works.
+
+Since 2026-08-27 it also measures **texture, on exactly one marker**: the dash rate, gate 43. That
+is one countable habit and not a verdict on voice. Gate 43 prints three further numbers (joints per
+sentence, the share of `you`, pronouns per name) which carry **no field figure and no threshold**,
+because the corpus exists only as built HTML and none of the three survives the change of basis.
+They are a trend line across our own games. Reading them as a score is the error the gate's own
+header warns about, and it has already been made once.
 
 *(This file governs what the player reads **after** a click. Room names, button labels, guidance
 cards and locked-door text are a different job with a different rule — `references/the-voice.md`.

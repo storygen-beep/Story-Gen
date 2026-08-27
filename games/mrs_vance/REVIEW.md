@@ -1376,6 +1376,38 @@ worth naming as correct handling rather than luck:
 Beat lengths in act nodes run 25–46 words against a 35–40 target. Finish paragraphs run 55–65 —
 long, and defensible as terminal beats.
 
+### The prose texture is inside the field, measured against 25 shipped games
+
+**2026-08-27.** Two players read a different game of ours and called its prose "an underpowered AI
+whose 'mother language' isn't english." That prompted the first prose comparison this project has
+ever run: our writing against the 25-game mopoga corpus, same instrument on both sides. The result
+for this game is that **nothing needed changing.**
+
+| | `mrs_vance` | field |
+|---|---|---|
+| dashes per 10k words | **25.4** | p50 0.99 · p90 17.5 · **p95 25.7** · max 35.4 |
+| joints per sentence | 0.53 | 0.77 (better than field) |
+| median sentence | 9 words | 12 |
+| `you` as a share of words | 5.6% | 6.4% |
+
+The dash rate sits on the field's **p95** and inside its range: `love-and-vice` runs 25.7 and
+`apocalyptic-world` 35.4. The whole footprint is 32 dashes across 21 content blocks. By the
+corpus's own evidence that is not a defect, and **no prose was edited.** The game the players were
+reading runs 123.0 per 10k, which is 3.5× the corpus maximum, and is a different game and a
+different session's call.
+
+⚠️ **One finding from that session was published and then retracted, and it is recorded here so it
+is not re-derived.** Measuring our games from `output/index.html` gave "sentences 4.75× more packed
+than the field." That is an artifact of the built HTML: UI list blocks never reach a full stop, so
+the splitter reads each as one enormous comma-filled sentence (10.6% of our HTML "sentences" are
+those blocks, against the field's 1.5%). On authored beat text the direction **reverses** — see the
+0.53 against 0.77 above. Do not re-run that measurement on built HTML and do not treat its number
+as a finding.
+
+The instrument this produced is **gate 43, "prose texture"** (`gates.py`, ceiling 35.0 = the corpus
+maximum), so the tally for this game is now **41/41**. Its three companion numbers carry no field
+figure by design; `references/register.md`, "Dashes stay rare" holds the doctrine.
+
 ### The structure is clean
 
 ```
