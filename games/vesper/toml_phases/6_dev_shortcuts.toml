@@ -503,7 +503,7 @@ flagEffects = [
 #                             post-chapter surface reads. Setting owner_drained alone is NOT enough.
 #   leash_cut + file_read   — the chip is out and her page is open. leash_cut is what re-bands hub_kess_berth
 #                             and what retires the whole parts-loop conversation.
-#   part_installed = 1      — canon: cap_first_fire does NOT burn the fourth part, and cap_extraction's own
+#   part_installed = 1      — canon: mercer_drain_canvas.d1 does NOT burn the fourth part, and cap_extraction's own
 #                             prose says "the fourth part is still in her and the key is still beside it".
 #   part_spec = 3, spec_pending = 0, mercer_attempts = 3 — the loop finished and was debriefed, so no stall.
 #   yard_depth = 3          — she HAS done the Burned Yard (it is mandatory Act-1 content). Kept deliberately
@@ -641,4 +641,380 @@ flagEffects = [
   { targetType = "player", flag = "raid_done",               op = "unset" },
   { targetType = "player", flag = "lab_seen",                op = "unset" },
   { targetType = "player", flag = "cain_named",              op = "unset" },
+]
+
+# ─── ▶ WHOSE HAND: the 0.2.0 end-state, with the release unplayed ────────────────────────────────────────
+# beat_0140 (rev 190). THE RELEASE'S OWN START JUMP, and the reason it exists is that reaching beat 2 by hand
+# is two full acts — Renner, the hunt, the cell, the salvage, the Archive, the Leash, the face, the bar, the
+# raid — and every one of the eighteen beats built in this release has had to be tested from a seeded state
+# in a headless suite because there was no way to get there in a browser.
+#
+# ⚠️ IT DROPS AT THE COT, NOT AT THE STRIP, AND THAT IS THE WHOLE MECHANISM. cain_comes_for_her is an
+# auto-fire ONE-SHOT @the_cot gated lab_seen is_true + cain_named_grier is_false (5_scenes.toml). Landing on
+# the_cot with exactly that pair fires WHOSE HAND's opening beat on arrival, which then exits into cain_lab
+# and hands off to cap_cain_opens. Both are one-shots, so the jump is also the only way to replay them.
+# ⚠️ EVERY WHOSE HAND FLAG IS EXPLICITLY UNSET rather than left to default, so the jump is IDEMPOTENT — a
+# tester who takes it mid-release gets a clean chapter start instead of a half-finished ladder with two
+# pieces already seated. Same discipline as dev_jump_0_1_9_start.
+# ⚠️ COIN 80 IS DELIBERATE. The papers at beat 7 are 60, and post-raid her earners are The House (30 a head)
+# and the pit (8 / 20 a bout) — activity_bar_work is correctly shut by raid_done. 80 buys the cover
+# immediately and leaves her poor, which is the state the release is written for.
+# ⚠️ face_worn IS SET. It is a flag toggled at the_cot since beat_0116, and the two-token gate on the Rise
+# reads cover_research EQUIPPED plus face_worn — so a jump that left it off would look like a broken gate.
+# ⚠️ THE CLOCK IS NOT SETTABLE from an exit. Sabin keeps 08:00-11:00 on the floor and 11:00-22:00 in the lab,
+# and Grier is in his room 10:00-23:59. If the jump lands at a dead hour, sleep at the cot and come back.
+# Gated dev_mode_enabled; inert in every shipped build.
+[[canvases]]
+id          = "dev_jump_whose_hand"
+name        = "▶ 0.2.1: the 0.2.0 end-state (WHOSE HAND opens)"
+description = "DEV JUMP. Seeds the complete 0.2.0 end-state — everything of 0.1.8 plus THE FACE run to its last beat (face bought and worn, the bar climbed to bar_rung 4, Bastien drained twice, the taser through the door, the raid survived, cain_named, lab_seen) — and drops at the_cot with cain_named_grier UNSET, so cain_comes_for_her auto-fires on arrival and WHOSE HAND opens. Coin 80 (the cover papers are 60). Every WHOSE HAND flag and counter explicitly cleared so the jump is idempotent. Gated dev_mode_enabled; inert in shipped builds."
+
+[canvases.trigger]
+location      = "underworld_strip"
+is_repeatable = true
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "dev_mode_enabled", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "seed"
+name = "0.2.1 start (dev)"
+blocks = [
+  { type = "paragraph", content = "Dev jump: both acts, run to the end. Renner drained, the hunt walked, the cell survived, the core sealed, the Archive closed, the leash cut, the chip off the bench. Then a face she paid for, four rungs of a bar job under it, a man she worked twice for what he knew, a taser through a locked door, and a back room that burned with him on the floor of it." },
+  { type = "paragraph", content = "Dropping at the cot with the grey coat still owed her an answer. He comes to her; there is no lab to walk to. Sabin keeps 08:00-11:00 on the floor and 11:00-22:00 in the lab, Grier is in from ten — if this lands at a dead hour, sleep and come back." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "To the cot. Let him find her."
+targetType = "location"
+locationId = "the_cot"
+# ⚠️ NO wardrobeEffects. The release's one gate-item is cover_research and she buys it at beat 7 for 60 coin
+# — granting it here would skip the beat this jump exists to make reachable. Whatever she is wearing when
+# the jump is taken is what she keeps; the rack is at the_cot, which is where this lands.
+effects = [
+  # ── the body: repaired, sealed, drain live ──
+  { targetType = "player", trait = "equipped_weapon",     op = "set", value = 1 },
+  { targetType = "player", trait = "drain_charge",        op = "set", value = 1 },
+  { targetType = "player", trait = "arousal_charge",      op = "set", value = 3 },
+  { targetType = "player", trait = "emitter_broken",      op = "set", value = 0 },
+  { targetType = "player", trait = "core_strain",         op = "set", value = 0 },
+  { targetType = "player", trait = "core_sealed",         op = "set", value = 1 },
+  { targetType = "player", trait = "repair_session",      op = "set", value = 12 },
+  # ── Act 1 + the Archive ──
+  { targetType = "player", trait = "names_known",         op = "set", value = 1 },
+  { targetType = "player", trait = "case_progress",       op = "set", value = 6 },
+  { targetType = "player", trait = "colm_drains_done",    op = "set", value = 1 },
+  { targetType = "player", trait = "yard_depth",          op = "set", value = 3 },
+  { targetType = "player", trait = "stealth",             op = "set", value = 30 },
+  { targetType = "player", trait = "fighting",            op = "set", value = 20 },
+  # ── The Leash ──
+  { targetType = "player", trait = "mercer_leash_state",  op = "set", value = 2 },
+  { targetType = "player", trait = "mercer_attempts",     op = "set", value = 3 },
+  { targetType = "player", trait = "mercer_drains_done",  op = "set", value = 1 },
+  { targetType = "player", trait = "part_installed",      op = "set", value = 1 },
+  { targetType = "player", trait = "part_held",           op = "set", value = 0 },
+  { targetType = "player", trait = "part_spec",           op = "set", value = 3 },
+  { targetType = "player", trait = "spec_pending",        op = "set", value = 0 },
+  # ── THE FACE, played to its last beat ──
+  { targetType = "player", trait = "wall_refusals",       op = "set", value = 0 },
+  { targetType = "player", trait = "bar_rung",            op = "set", value = 4 },
+  { targetType = "player", trait = "taser_held",          op = "set", value = 1 },
+  { targetType = "player", trait = "taser_through",       op = "set", value = 1 },
+  { targetType = "player", trait = "bastien_drains_done", op = "set", value = 2 },
+  { targetType = "player", trait = "ruin_depth",          op = "set", value = 0 },
+  # ── the purse and the upkeep: the cover papers are 60 ──
+  { targetType = "player", trait = "coin",                op = "set", value = 80 },
+  { targetType = "player", trait = "energy",              op = "set", value = 100 },
+  { targetType = "player", trait = "feed_line_days",      op = "set", value = 3 },
+  # ── WHOSE HAND's own counters, zeroed so the jump is idempotent ──
+  { targetType = "player", trait = "pieces_seated",       op = "set", value = 0 },
+  { targetType = "player", trait = "grier_nights",        op = "set", value = 0 },
+  { targetType = "player", trait = "grier_drains_done",   op = "set", value = 0 },
+  { targetType = "player", trait = "sabin_drains_done",   op = "set", value = 0 },
+  { targetType = "player", trait = "sabin_suspects",      op = "set", value = 0 },
+  # ── relations ──
+  { targetType = "npc", npcId = "npc_mercer", trait = "relation", op = "set", value = 15 },
+  { targetType = "npc", npcId = "npc_kess",   trait = "relation", op = "set", value = 20 },
+  { targetType = "npc", npcId = "npc_grier",  trait = "relation", op = "set", value = 0  },
+  { targetType = "npc", npcId = "npc_sabin",  trait = "relation", op = "set", value = 0  },
+]
+flagEffects = [
+  # ── Act 1: the opening, Renner, the hunt, the cell, the three glitches ──
+  { targetType = "player", flag = "opening_done",            op = "set" },
+  { targetType = "player", flag = "renner_drained",          op = "set" },
+  { targetType = "player", flag = "renner_leads_extracted",  op = "set" },
+  { targetType = "player", flag = "hunt_lead",               op = "set" },
+  { targetType = "player", flag = "crew_known",              op = "set" },
+  { targetType = "player", flag = "bastien_found",           op = "set" },
+  { targetType = "player", flag = "bastien_revealed",        op = "set" },
+  { targetType = "player", flag = "captivity_entered",       op = "set" },
+  { targetType = "player", flag = "captivity_broken",        op = "set" },
+  { targetType = "player", flag = "captivity_done",          op = "set" },
+  { targetType = "player", flag = "glitch_i_seen",           op = "set" },
+  { targetType = "player", flag = "glitch_ii_seen",          op = "set" },
+  { targetType = "player", flag = "glitch_iii_seen",         op = "set" },
+  # ── the underworld economy she keeps working ──
+  { targetType = "player", flag = "rue_introduced",          op = "set" },
+  { targetType = "player", flag = "brothel_hired",           op = "set" },
+  # ── the salvage ──
+  { targetType = "player", flag = "salvage_entered",         op = "set" },
+  { targetType = "player", flag = "kess_met",                op = "set" },
+  { targetType = "player", flag = "salvage_done",            op = "set" },
+  { targetType = "player", flag = "salvage_relaunched",      op = "set" },
+  { targetType = "player", flag = "mission_3_active",        op = "set" },
+  { targetType = "player", flag = "mercer_hub_open",         op = "set" },
+  # ── the Archive ──
+  { targetType = "player", flag = "calloway_met",            op = "set" },
+  { targetType = "player", flag = "calloway_believes",       op = "set" },
+  { targetType = "player", flag = "case_insider_seen",       op = "set" },
+  { targetType = "player", flag = "case_curated_seen",       op = "set" },
+  { targetType = "player", flag = "pipe_known",              op = "set" },
+  { targetType = "player", flag = "colm_found",              op = "set" },
+  { targetType = "player", flag = "colm_met",                op = "set" },
+  { targetType = "player", flag = "access_problem_seen",     op = "set" },
+  { targetType = "player", flag = "docs_retrieved",          op = "set" },
+  { targetType = "player", flag = "archive_1a_done",         op = "set" },
+  { targetType = "player", flag = "controller_held",         op = "set" },
+  # ── The Leash ──
+  { targetType = "player", flag = "berth_home",              op = "set" },
+  { targetType = "player", flag = "file_shape_known",        op = "set" },
+  { targetType = "player", flag = "print_needed",            op = "set" },
+  { targetType = "player", flag = "mercer_found",            op = "set" },
+  { targetType = "player", flag = "mercer_hospitality_open", op = "set" },
+  { targetType = "player", flag = "owner_print_taken",       op = "set" },
+  { targetType = "player", flag = "parts_loop_open",         op = "set" },
+  { targetType = "player", flag = "owner_drained",           op = "set" },
+  { targetType = "player", flag = "leash_cut",               op = "set" },
+  { targetType = "player", flag = "file_read",               op = "set" },
+  { targetType = "player", flag = "chip_read",               op = "set" },
+  # ── THE FACE, all the way to the raid ──
+  { targetType = "player", flag = "wall_sol_asked",          op = "set" },
+  { targetType = "player", flag = "wall_colm_asked",         op = "set" },
+  { targetType = "player", flag = "wall_rue_asked",          op = "set" },
+  { targetType = "player", flag = "wall_market_asked",       op = "set" },
+  { targetType = "player", flag = "wall_understood",         op = "set" },
+  { targetType = "player", flag = "face_bought",             op = "set" },
+  { targetType = "player", flag = "face_worn",               op = "set" },
+  { targetType = "player", flag = "stranger_seen",           op = "set" },
+  { targetType = "player", flag = "bar_hired",               op = "set" },
+  { targetType = "player", flag = "bastien_seen",            op = "set" },
+  { targetType = "player", flag = "raid_done",               op = "set" },
+  { targetType = "player", flag = "cain_named",              op = "set" },
+  { targetType = "player", flag = "lab_seen",                op = "set" },
+  # ⚠️ plan_made IS LOAD-BEARING AND WAS MISSING FROM THE FIRST CUT — found live at beat_0140. cap_the_wait
+  # is an auto-fire ONE-SHOT @the_cot gated bastien_drains_done gte 1 + plan_made is_false, and this jump
+  # seeds bastien_drains_done = 2. Without it, cap_the_wait and cain_comes_for_her are BOTH eligible at
+  # priority 10 on the same arrival and the jump lands on a beat from the middle of THE FACE instead of on
+  # the release opener. dev_jump_0_1_9_start does not carry it and does not need to — it seeds the drain
+  # counter at 0. Every jump that seeds a Bastien drain must carry this flag.
+  { targetType = "player", flag = "plan_made",               op = "set" },
+  # ── and stopped one beat short: WHOSE HAND's opening one-shot is the thing under test ──
+  { targetType = "player", flag = "cain_named_grier",        op = "unset" },
+  { targetType = "player", flag = "taken_to_lab",            op = "unset" },
+  { targetType = "player", flag = "grier_met",               op = "unset" },
+  { targetType = "player", flag = "grier_opened_up",         op = "unset" },
+  { targetType = "player", flag = "piece_one_held",          op = "unset" },
+  { targetType = "player", flag = "rise_named",              op = "unset" },
+  { targetType = "player", flag = "papers_bought",           op = "unset" },
+  { targetType = "player", flag = "sabin_met",               op = "unset" },
+  { targetType = "player", flag = "archive_worked",          op = "unset" },
+  { targetType = "player", flag = "sabin_consulted",         op = "unset" },
+  { targetType = "player", flag = "sabin_opened_up",         op = "unset" },
+  { targetType = "player", flag = "decoy_made",              op = "unset" },
+  { targetType = "player", flag = "piece_two_held",          op = "unset" },
+  { targetType = "player", flag = "store_carried_seen",      op = "unset" },
+  { targetType = "player", flag = "price_named",             op = "unset" },
+  { targetType = "player", flag = "capstone_failed",         op = "unset" },
+  { targetType = "player", flag = "vesper_named",            op = "unset" },
+  { targetType = "player", flag = "cain_absent_confirmed",   op = "unset" },
+  { targetType = "player", flag = "third_located",           op = "unset" },
+  { targetType = "player", flag = "two_men_done",            op = "unset" },
+  { targetType = "player", flag = "bastien_no_body",         op = "unset" },
+]
+
+# ─── ▶ WHOSE HAND: both pieces seated, the price named, both loops standing ──────────────────────────────
+# beat_0140 (rev 190). THE SECOND HALF OF THE RELEASE, and it exists because the first jump does not reach
+# it: getting from beat 2 to beat 14 by hand is four afternoons on Grier's bench for a man who cannot
+# finish, a cover bought, a job taken, a ladder climbed twice, a decoy made and a store walked into. This
+# drops one beat short of the capstone with all of that already true.
+#
+# ⚠️ IT IS ALSO THE ONLY JUMP THAT REACHES THE STANDING SURFACES, which is what beat_0141's media pass and
+# any hand playtest actually need. price_named cannot be true unless both loops were beaten, so seeding it
+# necessarily seeds them: Grier at relation 26 past his three failed nights with his drain spent, Sabin at
+# relation 24 with the bench behind him and the store located. Both loops are open and repeatable on
+# arrival, and neither drain will fire again, which is the real end-state and not a convenience.
+# ⚠️ IT DROPS AT THE COT because activity_say_yes lives there — gated price_named is_true + vesper_named
+# is_false — and it is the only route into room_no_name, which is nav-invisible and reachable by nothing
+# else. One card on arrival, and the capstone is two clicks away.
+# ⚠️ IT GRANTS AND EQUIPS cover_research, which the first jump deliberately does not. Past beat 8 the Rise
+# is her job, the two-token gate reads cover_research EQUIPPED plus face_worn on four separate surfaces, and
+# a jump to the back half that left her in dock clothes would read as four broken gates at once.
+# ⚠️ sabin_suspects 4 puts Track B in its SECOND band — climbing, noticed, nothing decided. It gates nothing
+# by design (beat_0131), so any value is coherent; 4 is chosen because it is the one a real player would
+# have at this point and because it makes the ladder visible without spending its terminal band.
+# ⚠️ THE ENDGAME FLAGS ARE EXPLICITLY UNSET, same idempotence discipline as the first jump — capstone_failed,
+# vesper_named, cain_absent_confirmed, third_located and two_men_done all cleared, so a tester who takes
+# this twice gets the same clean state and not a finished release.
+# Gated dev_mode_enabled; inert in every shipped build.
+[[canvases]]
+id          = "dev_jump_whose_hand_end"
+name        = "▶ 0.2.1: two pieces in, the price named"
+description = "DEV JUMP. Seeds WHOSE HAND through beat 13 — Grier found, worked past the wall and drained (piece one); the cover bought and equipped; the Rise job taken; Sabin's ladder climbed, his loop beaten and the store located; the decoy made, the swap done (piece two); both pieces seated and Cain's price named — and drops at the_cot one beat short of the capstone, with activity_say_yes waiting. BOTH NEW LOOPS ARE OPEN AND REPEATABLE, which is what a media pass and a hand playtest need. sabin_suspects 4 (second band, gates nothing). Every endgame flag explicitly cleared so the jump is idempotent. Gated dev_mode_enabled; inert in shipped builds."
+
+[canvases.trigger]
+location      = "underworld_strip"
+is_repeatable = true
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "dev_mode_enabled", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "seed"
+name = "0.2.1 back half (dev)"
+blocks = [
+  { type = "paragraph", content = "Dev jump: the release to beat 13. Grier found in the Reach and worked four afternoons past a wall he has had for nine years, and what came out of him was the night they took it. A credential bought at the market, a job on a Vance floor under a face that is not hers, and a scientist who never once asked. The store two floors under his bench, a blank made at the docks, and the second piece out of a cold cabinet in a coat lining." },
+  { type = "paragraph", content = "Both of them are seated and nothing has happened either time, and he has told her why. Dropping at the cot with the answer to it waiting on the page. Both loops are open — Grier from ten in the morning, Sabin in his lab from eleven." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "To the cot. Stop working."
+targetType = "location"
+locationId = "the_cot"
+wardrobeEffects = [
+  { action = "add",   item_id = "cover_research" },
+  { action = "equip", item_id = "cover_research" },
+]
+effects = [
+  # ── the body, and the drain she has spent twice this release ──
+  { targetType = "player", trait = "equipped_weapon",     op = "set", value = 1 },
+  { targetType = "player", trait = "drain_charge",        op = "set", value = 1 },
+  { targetType = "player", trait = "arousal_charge",      op = "set", value = 3 },
+  { targetType = "player", trait = "emitter_broken",      op = "set", value = 0 },
+  { targetType = "player", trait = "core_strain",         op = "set", value = 0 },
+  { targetType = "player", trait = "core_sealed",         op = "set", value = 1 },
+  { targetType = "player", trait = "repair_session",      op = "set", value = 12 },
+  # ── everything of both prior acts ──
+  { targetType = "player", trait = "names_known",         op = "set", value = 1 },
+  { targetType = "player", trait = "case_progress",       op = "set", value = 6 },
+  { targetType = "player", trait = "colm_drains_done",    op = "set", value = 1 },
+  { targetType = "player", trait = "yard_depth",          op = "set", value = 3 },
+  { targetType = "player", trait = "stealth",             op = "set", value = 30 },
+  { targetType = "player", trait = "fighting",            op = "set", value = 20 },
+  { targetType = "player", trait = "mercer_leash_state",  op = "set", value = 2 },
+  { targetType = "player", trait = "mercer_attempts",     op = "set", value = 3 },
+  { targetType = "player", trait = "mercer_drains_done",  op = "set", value = 1 },
+  { targetType = "player", trait = "part_installed",      op = "set", value = 1 },
+  { targetType = "player", trait = "part_held",           op = "set", value = 0 },
+  { targetType = "player", trait = "part_spec",           op = "set", value = 3 },
+  { targetType = "player", trait = "spec_pending",        op = "set", value = 0 },
+  { targetType = "player", trait = "bar_rung",            op = "set", value = 4 },
+  { targetType = "player", trait = "taser_held",          op = "set", value = 1 },
+  { targetType = "player", trait = "taser_through",       op = "set", value = 1 },
+  { targetType = "player", trait = "bastien_drains_done", op = "set", value = 2 },
+  { targetType = "player", trait = "ruin_depth",          op = "set", value = 0 },
+  { targetType = "player", trait = "wall_refusals",       op = "set", value = 0 },
+  # ── WHOSE HAND, through beat 13 ──
+  { targetType = "player", trait = "pieces_seated",       op = "set", value = 2 },
+  { targetType = "player", trait = "grier_nights",        op = "set", value = 3 },
+  { targetType = "player", trait = "grier_drains_done",   op = "set", value = 1 },
+  { targetType = "player", trait = "sabin_drains_done",   op = "set", value = 1 },
+  { targetType = "player", trait = "sabin_suspects",      op = "set", value = 4 },
+  # ── the purse: the floor pays 15 a shift and she has worked a few ──
+  { targetType = "player", trait = "coin",                op = "set", value = 120 },
+  { targetType = "player", trait = "energy",              op = "set", value = 100 },
+  { targetType = "player", trait = "feed_line_days",      op = "set", value = 3 },
+  # ── relations: both ladders topped out, which is what keeps both loops on the page ──
+  { targetType = "npc", npcId = "npc_grier",  trait = "relation", op = "set", value = 26 },
+  { targetType = "npc", npcId = "npc_sabin",  trait = "relation", op = "set", value = 24 },
+  { targetType = "npc", npcId = "npc_mercer", trait = "relation", op = "set", value = 15 },
+  { targetType = "npc", npcId = "npc_kess",   trait = "relation", op = "set", value = 20 },
+]
+flagEffects = [
+  # ── both prior acts, entire ──
+  { targetType = "player", flag = "opening_done",            op = "set" },
+  { targetType = "player", flag = "renner_drained",          op = "set" },
+  { targetType = "player", flag = "renner_leads_extracted",  op = "set" },
+  { targetType = "player", flag = "hunt_lead",               op = "set" },
+  { targetType = "player", flag = "crew_known",              op = "set" },
+  { targetType = "player", flag = "bastien_found",           op = "set" },
+  { targetType = "player", flag = "bastien_revealed",        op = "set" },
+  { targetType = "player", flag = "captivity_entered",       op = "set" },
+  { targetType = "player", flag = "captivity_broken",        op = "set" },
+  { targetType = "player", flag = "captivity_done",          op = "set" },
+  { targetType = "player", flag = "glitch_i_seen",           op = "set" },
+  { targetType = "player", flag = "glitch_ii_seen",          op = "set" },
+  { targetType = "player", flag = "glitch_iii_seen",         op = "set" },
+  { targetType = "player", flag = "rue_introduced",          op = "set" },
+  { targetType = "player", flag = "brothel_hired",           op = "set" },
+  { targetType = "player", flag = "salvage_entered",         op = "set" },
+  { targetType = "player", flag = "kess_met",                op = "set" },
+  { targetType = "player", flag = "salvage_done",            op = "set" },
+  { targetType = "player", flag = "salvage_relaunched",      op = "set" },
+  { targetType = "player", flag = "mission_3_active",        op = "set" },
+  { targetType = "player", flag = "mercer_hub_open",         op = "set" },
+  { targetType = "player", flag = "calloway_met",            op = "set" },
+  { targetType = "player", flag = "calloway_believes",       op = "set" },
+  { targetType = "player", flag = "case_insider_seen",       op = "set" },
+  { targetType = "player", flag = "case_curated_seen",       op = "set" },
+  { targetType = "player", flag = "pipe_known",              op = "set" },
+  { targetType = "player", flag = "colm_found",              op = "set" },
+  { targetType = "player", flag = "colm_met",                op = "set" },
+  { targetType = "player", flag = "access_problem_seen",     op = "set" },
+  { targetType = "player", flag = "docs_retrieved",          op = "set" },
+  { targetType = "player", flag = "archive_1a_done",         op = "set" },
+  { targetType = "player", flag = "controller_held",         op = "set" },
+  { targetType = "player", flag = "berth_home",              op = "set" },
+  { targetType = "player", flag = "file_shape_known",        op = "set" },
+  { targetType = "player", flag = "print_needed",            op = "set" },
+  { targetType = "player", flag = "mercer_found",            op = "set" },
+  { targetType = "player", flag = "mercer_hospitality_open", op = "set" },
+  { targetType = "player", flag = "owner_print_taken",       op = "set" },
+  { targetType = "player", flag = "parts_loop_open",         op = "set" },
+  { targetType = "player", flag = "owner_drained",           op = "set" },
+  { targetType = "player", flag = "leash_cut",               op = "set" },
+  { targetType = "player", flag = "file_read",               op = "set" },
+  { targetType = "player", flag = "chip_read",               op = "set" },
+  { targetType = "player", flag = "wall_sol_asked",          op = "set" },
+  { targetType = "player", flag = "wall_colm_asked",         op = "set" },
+  { targetType = "player", flag = "wall_rue_asked",          op = "set" },
+  { targetType = "player", flag = "wall_market_asked",       op = "set" },
+  { targetType = "player", flag = "wall_understood",         op = "set" },
+  { targetType = "player", flag = "face_bought",             op = "set" },
+  { targetType = "player", flag = "face_worn",               op = "set" },
+  { targetType = "player", flag = "stranger_seen",           op = "set" },
+  { targetType = "player", flag = "bar_hired",               op = "set" },
+  { targetType = "player", flag = "bastien_seen",            op = "set" },
+  { targetType = "player", flag = "raid_done",               op = "set" },
+  { targetType = "player", flag = "cain_named",              op = "set" },
+  { targetType = "player", flag = "lab_seen",                op = "set" },
+  # ⚠️ plan_made — same reason as the start jump above, and it bit here first: without it cap_the_wait
+  # auto-fires on arrival at the cot and the on-ramp this jump exists to reach is behind nine clicks of a
+  # scene from two releases ago. Found live at beat_0140.
+  { targetType = "player", flag = "plan_made",               op = "set" },
+  # ── WHOSE HAND, beats 2 through 13 ──
+  { targetType = "player", flag = "cain_named_grier",        op = "set" },
+  { targetType = "player", flag = "taken_to_lab",            op = "set" },
+  { targetType = "player", flag = "grier_met",               op = "set" },
+  { targetType = "player", flag = "grier_opened_up",         op = "set" },
+  { targetType = "player", flag = "piece_one_held",          op = "set" },
+  { targetType = "player", flag = "rise_named",              op = "set" },
+  { targetType = "player", flag = "papers_bought",           op = "set" },
+  { targetType = "player", flag = "sabin_met",               op = "set" },
+  { targetType = "player", flag = "archive_worked",          op = "set" },
+  { targetType = "player", flag = "sabin_consulted",         op = "set" },
+  { targetType = "player", flag = "sabin_opened_up",         op = "set" },
+  { targetType = "player", flag = "decoy_made",              op = "set" },
+  { targetType = "player", flag = "piece_two_held",          op = "set" },
+  { targetType = "player", flag = "store_carried_seen",      op = "set" },
+  { targetType = "player", flag = "price_named",             op = "set" },
+  # ── and stopped one beat short: the capstone is the thing under test ──
+  { targetType = "player", flag = "capstone_failed",         op = "unset" },
+  { targetType = "player", flag = "vesper_named",            op = "unset" },
+  { targetType = "player", flag = "cain_absent_confirmed",   op = "unset" },
+  { targetType = "player", flag = "third_located",           op = "unset" },
+  { targetType = "player", flag = "two_men_done",            op = "unset" },
 ]

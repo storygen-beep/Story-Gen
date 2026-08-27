@@ -262,6 +262,41 @@ taser_through = 0
 # Declared here and not only in the labels block, because core_traits is what puts a trait into the
 # cross-release backfill — a trait declared only in labels is undefined on a 0.1.8 save.
 ruin_depth    = 0
+# pieces_seated 0-3 — beat_0122 (rev 174), WHOSE HAND. How many pieces of her memory Cain has seated.
+# ONE counter rather than a flag per piece: the store's four bands at the_cot, both install beats and the
+# capstone gate all read the same number, and three flags would eventually disagree with each other.
+# ⚠️ DECLARED HERE AND NOT ONLY IN THE LABELS BLOCK, for the reason the ruin_depth note above gives and for
+# one more: this is a SHIPPED game. core_traits is what the cross-release backfill initialises
+# (setup.backfillStateDefaults), so a 0.2.0 save loading into this release gets pieces_seated = 0 instead of
+# undefined, and every band comparing against it reads a number rather than a comparison on undefined.
+pieces_seated = 0
+# grier_nights 0-3 + grier_drains_done — beat_0126 (rev 176), WHOSE HAND. Grier's loop, and NEITHER of them
+# is the ladder's axis: that is plain npc_grier.relation, decided at beat_0125 after the build said a counter
+# would buy nothing.
+#   • grier_nights = how many nights he was worked and DID NOT FINISH. That is a different fact from how far
+#     up the ladder she is — she can sit with him for a month and never have tried. Every elected finish
+#     below the break bumps it and routes to its own written failure; at 3 the wall breaks. mercer_attempts'
+#     shape, for the same reason: one axis for one exclusive chain.
+#   • grier_drains_done = the twin of colm_drains_done / calloway_drains_done / bastien_drains_done. It picks
+#     .d0 from .done and it is what cap_grier_gives triggers on.
+# ⚠️ BOTH ARE TRAITS AND NOT FLAGS BECAUSE THEIR SETTER IS TRIGGERLESS. loop_grier_finisher has no location,
+# and the hint system resolves a flag by looking up the canvas that SETS it (template_import.py:1044, :6198),
+# so a flag whose only setter is triggerless has nowhere to point. Same discipline as rev 92 retiring
+# vane_confirmed in favour of colm_drains_done gte 1.
+# Declared here as well as in [[traits.labels]] for the pieces_seated reason above: core_traits is the
+# cross-release backfill, and a 0.2.0 save must load with a number in both rather than undefined.
+grier_nights      = 0
+grier_drains_done = 0
+# sabin_drains_done + sabin_suspects — beat_0131 (rev 181), WHOSE HAND. Sabin's TWO TRACKS (§9), and the
+# last two immutable keys this release declares. Both hidden; the full why is in 0_systems_spec.
+#   • sabin_drains_done = the twin of colm_drains_done / grier_drains_done. Picks .d0 vs .done on the
+#     triggerless finisher — AND it is beat_0132's gate, which is why Sabin ships no cap canvas and why
+#     §19's `store_located` working name dies unused (rev 92's vane_confirmed retirement, same shape).
+#   • sabin_suspects = TRACK B. +1 per shift on work_the_archive and nowhere else, because §9 says it is the
+#     READING that exposes her and that the two tracks never touch. It gates NOTHING: the day job is optional
+#     and the swap rides sabin_drains_done, so a player who never takes a shift is never locked out.
+sabin_drains_done = 0
+sabin_suspects    = 0
 
 # ─── Daily decay (engine-applied at every day rollover) ───────────────────────
 # advanceDay subtracts each value from its trait and floors at 0 (v2.py:5532-5544); parsed at
@@ -656,6 +691,90 @@ core_traits = { relation = 0 }
 flag_keys   = []
 arc_stages  = ["The shape"]
 
+# ── Grier + Sabin — WHOSE HAND (beat_0122, rev 174). DECLARED, SCHEDULELESS, SPEAKERS ONLY. ───────────
+# ⚠️ NO SCHEDULE ROWS, SAME RULE AS CAIN AND BASTIEN ABOVE. A [[npcs.schedules]] row is unconditional: it
+# parks a portrait badge on that location's nav card in EVERY save and puts the NPC on the Schedules page,
+# both of them from the moment the location is reachable. Neither of these two exists in the fiction yet —
+# Grier is named by Cain at beat_0124 and Sabin hires her at beat_0129 — so a row here would advertise both
+# of them for the whole of Act 1. They are dialogue speakers and nothing else until those beats, each of
+# which brings its own location + schedule + on-ramp as ONE whole amendment.
+# ⚠️ AND THEIR LADDER COUNTERS ARE DELIBERATELY NOT DECLARED HERE. Colm's ladder runs on plain `relation`
+# and needs no counter at all, so whether Grier wants one is a beat_0124/0125 decision and whether Sabin's
+# two tracks want one trait or two is beats 0130-0131. A trait key is IMMUTABLE once shipped (save-safety
+# §2), so naming an axis before deciding it is how you ship a key you can never rename.
+# MEDIA: two new slots, portraits/grier.jpg + portraits/sabin.jpg — the MISSING count rises by two until
+# the beat_0141 harvest, exactly as cain.jpg did at beat_0121.
+[[npcs]]
+id          = "npc_grier"
+name        = "Grier"
+description = "The old machinist, down in the Reach. He was an ASSISTANT and he never built anybody — he handed tools to the men who did, first to a team that failed on Cain and then to the one that did not fail on her. He was in the room the night they cut her memory into three parts, and he walked out of it the same night with Cain's and a third of hers, and he has never once known whose the third was. Nine years of drink since. Helping Cain cost him everything he had and he has decided, at length, that this was Cain's fault. Sour, unhurried, completely unimpressed, and the one man in this city who can tell what she is by looking at her."
+portrait    = "grier.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = ["The machinist"]
+
+# ⚠️ ADDED beat_0124 (rev 174). THIS ROW MUST STAY DIRECTLY UNDER npc_grier AND ABOVE npc_sabin. A
+# [[npcs.schedules]] block attaches to the LAST [[npcs]] declared above it, so inserting any NPC between
+# the two silently re-parents Grier's hours onto whoever now sits above them, with a green build.
+# ⚠️ HE IS ALWAYS IN. Nine years of drink and no trade left: a broke shut-in does not go out, and a wide
+# window is also the kind answer — the genre's disease is lostness, not grind (the mopoga read), and a
+# ladder the player has to catch in a two-hour slot is a ladder they stop climbing. The 00:00-09:59 gap is
+# real and grier_room_offhours covers it.
+[[npcs.schedules]]
+location   = "grier_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "10:00"
+end_time   = "23:59"
+activity   = "drinking through the afternoon"
+
+[[npcs]]
+id          = "npc_sabin"
+name        = "Sabin"
+description = "The Chairman's new roboticist, four months into the job and paid very well to be there. He was handed a knowledge base eleven years deep and told to reproduce a method whose author is dead, and he is not cruel and not cold — he is simply working, and he has no idea what most of what he is reading actually is. He needs fast readers and he hires them on their papers. He is the only person in the game who asks her what she thinks and then stops talking and waits for the answer."
+portrait    = "sabin.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = ["The scientist"]
+
+# ⚠️ ADDED beat_0129 (rev 179). THIS ROW MUST STAY DIRECTLY UNDER npc_sabin. A [[npcs.schedules]] block
+# attaches to the LAST [[npcs]] declared above it, so inserting any NPC between the two silently re-parents
+# his hours onto whoever now sits there, with a green build. Grier's row has the same warning for the same
+# reason and the two are three lines apart.
+# ⚠️ MORNINGS ON THE FLOOR ONLY. He is a working scientist and the lab is four floors up; the floor is where
+# he collects readers and hands out the day. beat_0130 adds the SECOND row for sabin_lab (11:00 onward) when
+# that room ships — a schedule row pointing at a location that does not exist yet is a row pointing at
+# nothing, and the whole-amendment rule is what keeps the lab out of this beat.
+# ⚠️ THE HIRE IS A ONE-SHOT INSIDE A THREE-HOUR WINDOW, so card AB's tip says "in the morning" in as many
+# words. The mopoga read is that lostness kills these games, not grind: a player who walks up at four in the
+# afternoon and finds an empty floor must be told why by the card, not left to work it out.
+[[npcs.schedules]]
+location   = "the_rise_floor"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "11:00"
+activity   = "handing out the day's reading"
+
+# ⚠️ ADDED beat_0130 (rev 180). HIS SECOND ROW, AND IT MUST STAY DIRECTLY UNDER THE FIRST ONE — same
+# [[npcs.schedules]] orphan trap, and now there are two rows between npc_sabin and the clothing catalog for
+# anything inserted here to re-parent.
+# ⚠️ THE SEAM IS EXACT AND IT IS PROVED IN THE CODE, NOT ASSUMED. setup.isCurrentTimeSlot returns
+# `currentTotal >= startTotal && currentTotal < endTotal` (v2.py:3820) — THE END IS EXCLUSIVE. So the floor
+# row above covers 08:00-10:59 and this one picks him up at 11:00 sharp: no minute where getNpcLocation's
+# first-match-wins walk (v2.py:3463) has two rows to choose between, and no minute where he is nowhere.
+# ⚠️ 22:00 AND NOT 20:00. The readers below go home at eight and the ladder's own register is the evening in
+# an emptying building (§6 — the empty building is what pays for the silence in §9). The 22:00-08:00 gap is
+# real and activity_leave_the_lab is what covers it: hub_sabin is a PORTRAIT hub and stops rendering the
+# moment he is out of window, and sabin_lab is nav-invisible, so without an unconditional exit down there
+# the room is bastien_backroom's soft-lock again.
+# ⚠️ CARD AB ALREADY PROMISED THIS. Its shipped tip says he is "upstairs the rest of the day" — this row is
+# the thing that makes that sentence true, and it was written at beat_0129 expecting it.
+[[npcs.schedules]]
+location   = "sabin_lab"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "11:00"
+end_time   = "22:00"
+activity   = "at the bench with the archive open"
+
 # ─── Clothing — the worn-state COVER catalog (beat_0015) ──────────────────────
 # Two "dress"-slot looks she swaps between at activity_wren_change, the Act-1 change surface in her room
 # (3_activities). ⚠️ NOT the rack — the rack is the engine-injected wardrobe page and it lives at
@@ -751,6 +870,29 @@ id         = "cover_stranger"
 name       = "Second-hand kit"
 slot       = "dress"
 image      = "clothing/cover_stranger.jpg"
+beauty     = 0
+corruption = 0
+
+# THE TOWER COVER (beat_0122, rev 174) — WHOSE HAND. What she wears onto a research floor at The Rise.
+# ⚠️ NO `type`, DELIBERATELY — cover_stranger's shape, not cover_analyst's. The player-portrait axis keys on
+# the `face_worn` FLAG since beat_0116, so a `type` here would be an outfit-rule orphan the build warns
+# about. Gates key on the item id (`clothing_item cover_research equipped`), never on type.
+# ⚠️ SAME `dress` SLOT as the other three covers, which is the point: equipItem replaces whatever is in the
+# slot, so putting this on takes the second-hand kit off and vice versa. One cover at a time.
+# ⚠️ NO `initial` — she does not own it, and NO GRANT IS AUTHORED IN THIS BEAT. The grant lands at
+# beat_0128 on a REPEATABLE purchase screen (the activity_buy_face shape, 3_activities.toml:2218).
+# THAT REPEATABILITY IS NOT TIDINESS: this is a PROGRESSION-GATING item on a shipped game, which is exactly
+# the class that produced the 0.1.5.1 soft-lock — cover_analyst was granted by a one-shot, the item landed
+# a release after the one-shot had already burned, and every carried save jammed on the floor forever with
+# no path to the kit. A repeatable screen cannot burn. See save-safety.md §5.
+# ⚠️ TWO TOKENS, NOT ONE. The Rise's surfaces read this item equipped AND face_worn is_true. Both halves
+# are shipped primitives; the CONJUNCTION is unproven and is claim 1 of 3 — prove it at beat_0129 before
+# building the rest of the floor.
+[[clothing]]
+id         = "cover_research"
+name       = "Research-floor kit"
+slot       = "dress"
+image      = "clothing/cover_research.jpg"
 beauty     = 0
 corruption = 0
 
@@ -1280,9 +1422,120 @@ blocked_message = "The door does not open for her."
 # she is. What it can say is what is IN it, and what is in it is the point: this is where the stolen Vance
 # paperwork has been going for years, and it is a workshop for rebuilding a body.
 #
+# ── grier_room — beat_0124 (rev 174), WHOSE HAND. THE MACHINIST'S ROOM, IN THE REACH. ────────────────
+# ⚠️ NAV-INVISIBLE ON PURPOSE — no entry_from, auto_exit = false, the bastien_backroom / cain_lab shape.
+# THE REASON IS THE GREYED CARD. A locked location always renders a greyed nav card carrying its
+# blocked_message — _render_location_nav_card emits `<<if navDestUnlocked>>open<<else>>locked_card<</if>>`
+# (v2.py:19829) and there is NO hide path. the_waterfront is reachable in Act 1, so an entry_from here would
+# park a greyed "Grier's Room" on the Reach grid from the game's first hour, for two whole acts. That is the
+# shape beat_0120 deleted from the Undertow, and it is the same reason activity_sift_the_ruin was built as a
+# CARD rather than a location.
+# ⚠️ SO THE WAY IN IS A CARD AND THE WAY OUT IS A GUARD — the route beat_0123 built for cain_lab, reused:
+# activity_go_to_grier (3_activities, @the_waterfront, repeatable, gated cain_named_grier) ports her in, and
+# grier_room_offhours (5_scenes, pri 1) is the exit whenever his hub is not rendering. Second use of the
+# pattern in this release; beats 6 and 12 are the third and fourth.
+# ⚠️ auto_exit = false IS HALF THE SHAPE, NOT A DETAIL. A nav-invisible room builds its grid from children,
+# has none, and an empty navigation_html trips the list-every-location FALLBACK (v2.py:19386) — which is how
+# bastien_backroom once offered a walk to the Spire from a cell. Both halves or neither.
+[[locations]]
+id          = "grier_room"
+name        = "Grier's Room"
+description = "The back half of a lockup off the lane, with the roller door chained from inside and a bench he has not worked at in nine years. A mattress, a chair, an electric ring, and bottles sorted by nothing at all. The tools are still on the wall in their outlines, which is the only tidy thing in it."
+image       = "locations/grier_room.jpg"
+image_search_queries = ["derelict workshop back room mattress bottles dim", "squalid lockup interior tool wall bare bulb night"]
+auto_exit   = false
+
 # ⚠️ NO SCHEDULE ROW FOR CAIN, EVER — the badge trap. getNpcsPresentAtLocation is not canvas-gated
 # (v2.py:4773), and Cain is the reserved reveal of the whole game. He is a scheduleless speaker inside
 # cap_the_lab, the cap_mercer_resurfaces precedent.
+# ═══ THE RISE — beat_0129 (rev 179), WHOSE HAND. ONE ROOM SHIPS HERE, NOT THREE. ══════════════════════
+# §19 row 8 says "the Rise is built here" and §6 lists three rooms. Only the floor opens in this beat.
+# sabin_lab opens at beat_0130 (the ladder) and the_dry_store at beat_0132 (the swap), because that is the
+# rule beat_0122 derived when it moved the whole building out of beat 1: A LOCATION SHIPS WITH THE BEAT
+# THAT OPENS IT. Shipping all three now would park two greyed cards carrying blocked_messages that promise
+# content one and three beats away.
+# ⚠️ NAV-INVISIBLE, AND FOR THE SAME REASON grier_room AND cain_lab ARE. the_waterfront is the Reach's
+# street hub and is reachable in Act 1 (1_metadata:893); a locked location ALWAYS renders a greyed nav card
+# carrying its blocked_message (_render_location_nav_card, v2.py:19829) and there is NO hide path. An
+# entry_from here would have parked a greyed "The Floor" on the Waterfront grid from the game's first hour.
+# ⚠️ auto_exit = false IS THE OTHER HALF. A nav-invisible room builds its grid from children, has none, and
+# an empty navigation_html trips the list-every-location FALLBACK (v2.py:19386). Both halves or neither.
+# ⚠️ THE WAY IN IS A TRAVEL CHOICE, NOT A NAV CARD — activity_travel_to_spire's third exit, gated
+# rise_named. THE WAY OUT IS activity_leave_the_rise, repeatable at priority 1, the guaranteed exit that
+# every nav-invisible room in this game has had since bastien_backroom's soft-lock at beat_0114.
+[[locations]]
+id          = "the_rise_floor"
+name        = "The Floor"
+description = "Twenty desks and twenty screens on a slab of a floor with the ceiling still open above it — cable trays, bare ducting, and a wall of glass on the long side that nobody has got round to fitting blinds to. The readers do not talk. From this height the Spire is a shape in the weather to the north, and she looks at it once and then does not again."
+image       = "locations/the_rise_floor.jpg"
+image_search_queries = ["open plan office floor unfinished ceiling cable trays rows of desks", "half built office interior bare concrete glass wall workers at screens"]
+auto_exit   = false
+
+# ── sabin_lab — beat_0130 (rev 180). THE SECOND OF THE RISE'S THREE ROOMS. ────────────────────────────
+# the_dry_store is still not here: it opens at beat_0132 with the swap, because a location ships with the
+# beat that opens it. The frontier telegraph for it is already spent and it was a man's mouth — Sabin
+# forbade both rooms out loud at the hire.
+# ⚠️ THE DISPLAY NAME IS "Sabin's Lab" AND NOT "The Lab", WHICH IS A COLLISION AND NOT A PREFERENCE.
+# cain_lab is already name = "The Lab" (below). Two locations sharing a display name collide in every nav
+# card, every journal line and every travel label the engine prints off the name rather than the id, and
+# the two rooms in question are the two labs in a game about who built her. §6's own table says Sabin's Lab.
+# ⚠️ NAV-INVISIBLE, THE FOURTH ROOM IN THIS GAME TO BE. No entry_from + auto_exit = false, BOTH HALVES:
+# a locked location always renders a greyed card with no hide path (_render_location_nav_card, v2.py:19829),
+# and a nav-invisible room that keeps auto_exit builds its grid from children, has none, and trips the
+# list-every-location FALLBACK (v2.py:19386). The way in is activity_up_to_the_lab; the way out is
+# activity_leave_the_lab, unconditional at priority 1.
+# ⚠️ THE ROOM IS THE REGISTER AND THE SILENCE IS A PROPERTY OF THE LEVEL, NOT THE HOUR. §9 requires that she
+# cannot make a sound up here, and §6 gives that a physical cause. Written as the level — open ceiling, no
+# doors that shut, nobody else on the floor — it reads the same at three in the afternoon as at nine at
+# night, which is what a room used across an eleven-hour window has to do.
+[[locations]]
+id          = "sabin_lab"
+name        = "Sabin's Lab"
+description = "Four floors up and the only thing on the level. Glass on two sides, lights that stay on whether anybody is in it or not, one long bench with eleven years of somebody else's work stacked down the length of it. The ceiling is open like the floor below and there is nothing up here to stop a sound: no partitions, no carpet, no doors that shut."
+image       = "locations/sabin_lab.jpg"
+image_search_queries = ["empty over lit laboratory bench glass walls night unfinished building", "single long workbench bright empty lab open ceiling concrete"]
+auto_exit   = false
+
+# ── the_dry_store — beat_0132 (rev 182). THE RISE'S THIRD AND LAST ROOM. The building is now built. ───
+# ⚠️ NAV-INVISIBLE, like the other two and for the same reason (a locked location always renders a greyed
+# card — _render_location_nav_card, v2.py:19829, no hide path). In: activity_into_the_store, gated on the
+# DECOY rather than on anything about the tower, because walking in there without one is how she gets caught.
+# Out: activity_leave_the_store, unconditional at priority 1.
+# ⚠️ THE ROOM IS THE CON. Everything in the description is a constraint the swap has to survive and every
+# one of them came out of beat_0131's drain: the door that logs, the cases that all look alike, and the
+# cabinet whose temperature is the only number anybody in this building actually checks.
+# ⚠️ IT IS COLD, AND THE COLD IS A CLOCK. Kess's blank has to go in and the real one come out inside the
+# range, which is what turns a shelf into a scene.
+# ── room_no_name — beat_0135 (rev 185). §21 OPEN ITEM 1, CLOSED. THE CAPSTONE ROOM. ──────────────────
+# ⚠️ ITS DISPLAY NAME IS "Somewhere" AND THAT IS THE DESIGN, NOT A PLACEHOLDER. §11 requires somewhere she
+# has never been, never returns to, and IS NEVER TOLD THE LOCATION OF. The fiction can leave it unnamed; the
+# engine cannot. So the id is greppable and the NAME is the honest answer to "where is this" — she does not
+# know, and in a list of The Cot / The Berth / The Undertow it reads as a hole where a place should be.
+# ⚠️ "The Room" WAS NOT AVAILABLE — captive_room already owns it, and the cell is the wrong echo entirely:
+# that room is where things were done TO her by people who wanted something. This one is the opposite.
+# ⚠️ NAV-INVISIBLE, the cain_lab shape exactly: no entry_from, auto_exit = false, both halves. The ONLY way
+# in is activity_say_yes at the_cot, and there is no way back except the scene's own exit — which is correct
+# here in a way it is nowhere else in this game, because she is not driving and does not know where she is.
+# ⚠️ NOT THE HOUSE (§11). underworld_brothel is where she WORKS and earns and is an operator, and
+# underworld_brothel_loop already ships the anonymous-john register. This scene needs a place that is
+# singular, that she never returns to, and where she is nothing at all.
+# MEDIA: locations/room_no_name.jpg.
+[[locations]]
+id          = "room_no_name"
+name        = "Somewhere"
+description = "Warm, low, and about twenty minutes from anywhere with her head down. A couch along one wall and a mattress on the floor under the window, and the window painted over. Nobody in it looked up when she came in and nobody asked her anything. There is a door and the door does not lock, and outside it there is a stairwell she never saw the bottom of."
+image       = "locations/room_no_name.jpg"
+image_search_queries = ["dim low room mattress on floor painted over window", "bare warm room couch mattress night no decoration"]
+auto_exit   = false
+
+[[locations]]
+id          = "the_dry_store"
+name        = "The Dry Store"
+description = "Two floors under the lab and colder than the rest of the building by a long way. Racks of sample cases in rows, every one of them labelled and not one of them explained, and a cold cabinet against the back wall running off the single circuit in this tower that nobody is allowed to switch off. There is a log on a stand beside the door and a plate above it saying so."
+image       = "locations/the_dry_store.jpg"
+image_search_queries = ["cold storage room racks of sample cases laboratory", "refrigerated sample store shelves labelled cases dim"]
+auto_exit   = false
+
 [[locations]]
 id          = "cain_lab"
 name        = "The Lab"

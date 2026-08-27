@@ -383,9 +383,17 @@ hidden = true
 [[traits.labels]]
 key    = "spec_pending"
 hidden = true
-# THE LEASH (beat_0079) — the Mercer drain counter. Hidden; no sidebar row. Bumped by cap_first_fire (the first
-# fire) and by every loop_mercer_warm_tap repeat after it, so it selects nothing today but is the twin of
-# calloway_drains_done / colm_drains_done and is what the repeat is counted on.
+# WHOSE HAND (beat_0122) — how many pieces of her memory are seated. 0-3. Hidden; no sidebar row. ONE counter
+# rather than a flag per piece, because three separate surfaces read it (the store's bands at the_cot, Cain's
+# install beats, and the capstone gate) and a number they all agree on cannot drift the way three flags can.
+# The player never sees the digit — they read it off how many slots are lit in canvas_chip_view_cot.
+[[traits.labels]]
+key    = "pieces_seated"
+hidden = true
+# THE LEASH (beat_0079) — the Mercer drain counter. Hidden; no sidebar row. Bumped by loop_mercer_finisher's
+# climax node (5_scenes.toml:7457 / :7615 / :7640) and by every loop_mercer_warm_tap repeat after it, so it
+# selects nothing today but is the twin of calloway_drains_done / colm_drains_done and is what the repeat is
+# counted on.
 [[traits.labels]]
 key    = "mercer_drains_done"
 hidden = true
@@ -461,6 +469,50 @@ hidden = true
 # live value, and this one was full.
 [[traits.labels]]
 key    = "ruin_depth"
+hidden = true
+# WHOSE HAND (beat_0126) — Grier's loop. Both hidden; no sidebar row, no entry in the traits dump. The player
+# reads grier_nights off the three written failed nights and grier_drains_done off what the finish gives her.
+# ⚠️ NEITHER IS THE LADDER'S AXIS. That is plain npc_grier.relation (beat_0125). grier_nights counts nights he
+# was WORKED AND DID NOT FINISH, which is not the same fact as how far up the ladder she is, and the wall's
+# chain wants its own axis to compare — mercer_attempts' argument exactly.
+# ⚠️ AND THEY ARE TRAITS BECAUSE THEIR SETTER IS TRIGGERLESS. loop_grier_finisher has no location, and the
+# hint system resolves a flag through the canvas that SETS it, so a flag set only on a triggerless canvas has
+# nowhere to point. The two flags this chapter actually gates on — piece_one_held and rise_named — are set by
+# cap_grier_gives instead, which is a located auto-fire in grier_room.
+[[traits.labels]]
+key    = "grier_nights"
+hidden = true
+[[traits.labels]]
+key    = "grier_drains_done"
+hidden = true
+# WHOSE HAND (beat_0131) — Sabin's TWO TRACKS. Both hidden; no sidebar row, no entry in the traits dump.
+# ⚠️ NEITHER IS THE LADDER'S AXIS EITHER. That is plain npc_sabin.relation (beat_0130). These are the two
+# facts the ladder does not measure: how many times the drain has landed on him, and how much of her he has
+# worked out from the reading.
+#
+# sabin_drains_done — a TRAIT for two reasons and the second one is the interesting one:
+#   (1) its setter is loop_sabin_finisher, which is triggerless, and the hint system resolves a flag through
+#       the canvas that SETS it (template_import.py:1044), so a flag there has nowhere to point.
+#   (2) IT IS ALSO BEAT_0132'S GATE, which is why Sabin needs no cap canvas at all. Grier has cap_grier_gives
+#       only because piece_one_held and rise_named are FLAGS and needed a located setter. §19 carried
+#       `store_located` as a working name for the same job here; it dies unused, because rev 92 already
+#       retired vane_confirmed and pointed all five of its gates at `colm_drains_done gte 1` (1_metadata:104).
+#       Same shape, one fewer moving part — and the fiction is better for it, because there is nothing for
+#       Sabin to hand over. He does not know he gave her anything.
+#
+# sabin_suspects — §9's TRACK B, the work track, and the last immutable key this release declares.
+# ⚠️ +1 PER SHIFT ON work_the_archive AND NOWHERE ELSE. §9: "it is the reading that exposes her, not the sex,"
+# and "the two tracks never touch." Nothing in the loop touches this key and nothing here touches the loop.
+# ⚠️ IT GATES NOTHING, DELIBERATELY. The day job is optional and the swap is gated on sabin_drains_done, so a
+# player who never took a shift must not be locked out of the release. It buys banded reveals and a threat.
+# ⚠️ ITS TERMINAL BAND IS NOT WRITTEN YET. §21 open item 2 — how close does he get, and what does the last
+# band say — is still open, and beat_0132 is the beat that spends it. Three climbing bands ship here and the
+# third one stops at the edge on purpose.
+[[traits.labels]]
+key    = "sabin_drains_done"
+hidden = true
+[[traits.labels]]
+key    = "sabin_suspects"
 hidden = true
 
 # ══════════════════════════════════════════════════════════════════

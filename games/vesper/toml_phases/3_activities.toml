@@ -115,6 +115,22 @@ nodeId     = "activity_travel_to_spire.riding_under"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
 ] }
+# ── THE RISE — beat_0129 (rev 179), WHOSE HAND. The way in, and it is a CHOICE and not a nav card.
+# ⚠️ GATED ON rise_named AND NOTHING ELSE, DELIBERATELY. She can walk up to that building the moment Grier
+# names it, in her own face, with no papers — and she MUST be able to, because save-safety §5's heal lives
+# on the point-of-need reaction up there and a heal the stranded player cannot reach is not a heal. The
+# tokens gate the HIRING, not the road.
+# ⚠️ NO show_when_locked. The trap that flag walks into is a consumed is_false clause showing a PRE-state
+# (toml-gotchas), and there is a worse problem here: before Grier names the place she does not know the
+# building exists, so a greyed "Up to the Rise" on the travel menu would tell her about it two beats early.
+# The frontier telegraph for this one is a man saying its name out loud, which is better than a card.
+[[canvases.nodes.exit_block.choices]]
+text       = "Up to the Rise."
+targetType = "node"
+nodeId     = "activity_travel_to_spire.riding_rise"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "rise_named", operator = "is_true" },
+] }
 
 [[canvases.nodes]]
 id   = "riding_spire"
@@ -131,6 +147,24 @@ locationId               = "spire_plaza"
 time_progression_minutes = 30
 # rev 67: no Charge cost — this is the ONLY way back to the cradle, so a tax here was always a soft-lock
 # risk the clamp merely hid. Time still rolls (see the ride-to-Reach note).
+
+# ⚠️ ON FOOT, NOT IN THE CAR. The Rise is on the edge of this district (§6) — siting it here is what turns
+# the CAIN -> GRIER -> SABIN chain into a walk instead of a commute, and putting her in a car for ten
+# minutes would quietly undo that. Ten minutes, no Charge, same as the descent to the gate.
+[[canvases.nodes]]
+id   = "riding_rise"
+name = "Up to the Rise"
+blocks = [
+  { type = "paragraph", content = "It is a walk and not a ride. Twenty floors of it stand up out of the low end of the Reach with eight of them lit and the rest open concrete, and a crane on the top that has not moved in the time it takes her to get there." },
+  { type = "paragraph", content = "The lobby is a desk, a man reading, and a lift that works. Nothing in the building is finished, and that includes whatever is supposed to stop her walking into it." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go up."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_rise_floor"
+time_progression_minutes = 10
 
 [[canvases.nodes]]
 id   = "riding_under"
@@ -2691,6 +2725,147 @@ time_progression_minutes = 120
 # existing, as a thing she knows rather than as a warning label.
 # ⚠️ NO TIME COST ON THE TOGGLE ITSELF. It is minutes at a mirror, and charging the clock for it would make
 # the honest act (taking it off, sitting with it, putting it back) more expensive than never taking it off.
+# ── canvas_chip_view_cot — beat_0122 (rev 174), WHOSE HAND. THE MEMORY STORE, SECOND HOME. ────────────
+# ⚠️ THIS IS A PAIR, NOT A MOVE, AND THE DESIGN SAID MOVE. design_whose_hand.md §16.2 asked for
+# canvas_chip_view to be re-pointed from `cradle` to `the_cot`, because the cradle sits behind the Spire seal
+# and the UI this release fills is otherwise unreachable. It cannot be re-pointed: `the_cot` is gated
+# `berth_home is_true` (1_metadata_and_locations.toml:1160), an Act-2 flag, while `cradle` is reachable in the
+# game's first hour. Re-pointing would have deleted the memory store from the whole of Act 1 — the four leaks
+# (the opening night, both cradle glitches, Glitch III) would still fire and the surface they point at would
+# not exist yet. So the Act-1 canvas STAYS WHERE IT IS and this one is added beside it. The finding is written
+# back into §16.2 rather than patched quietly here.
+# ⚠️ AND THE PAIR IS WHY THE FIRST BAND WORKS AT ALL. Band A0's beat is "they sealed the building and never
+# took this" — which only lands if there was an earlier place she used to open it in. A move would have
+# deleted the very thing that makes the line true.
+# ⚠️ BANDS RUN ON ONE COUNTER, pieces_seated (0_systems_spec), not a flag per piece. Three surfaces read it.
+# ⚠️ A0 IS ONE-SHOT VIA store_carried_seen. It is a realisation, and a realisation on a repeatable surface
+# rots by the third read (design_whose_hand.md §3 test 2). The exit choice is the located setter.
+# ⚠️ NO THIRD SLOT IS SHOWN. She learns a third piece exists at beat 17, from Grier. A store that displays an
+# empty third slot at install two spoils the ending two beats early.
+# MEDIA: its OWN asset, not canvas_chip_view's. One asset, one block — a shared file collapses to one review
+# verdict for two different beats.
+[[canvases]]
+id          = "canvas_chip_view_cot"
+name        = "The memory store"
+description = "beat_0122 (rev 174). Wren-solo @the_cot. Repeatable, pri 2, gated berth_home is_true. The Act-2 home of the memories UI, added beside canvas_chip_view rather than replacing it (see the banner above). Four exclusive bands on pieces_seated + store_carried_seen: the carried-it realisation (one-shot), the empty routine, one slot lit, two slots lit. Bands B and C are what make the two dead installs of §10 survivable — the fiction stays cold and the UI does the confirming, because two installs that change nothing read as a bug otherwise."
+
+[canvases.trigger]
+location      = "the_cot"
+is_repeatable = true
+priority      = 2
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "berth_home", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The memory store"
+blocks = [
+  { type = "image", props = { file = "activities/chip_view_cot.jpg", description = "A dim workshop bunk corner with a faint holographic index projected above a bedroll, most slots dark, one ringed slot glowing at the centre. Cables and a spliced feed line in the background. avoid: clean laboratory, avoid: clinical white interior.", search_queries = ["holographic data slots projected in dark industrial workshop", "faint sci-fi memory index floating above a makeshift bunk"] } },
+  # BAND A0 — empty, and she has not yet worked out why she still has it. ONE-SHOT.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "pieces_seated", operator = "lt", value = 1 },
+      { type = "flag",  subject = "player", flag_key  = "store_carried_seen", operator = "is_false" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She opens the store the company gave her for what it calls recovered assets. Empty, the way it has always been empty. One slot in it, greyed out, labelled in a hand that is not the company's: FRAGMENT 01 — LOCKED." },
+    { type = "paragraph", content = "They stripped her floor. They sealed the building behind her and put her face on every camera at the curb. They did not take this. She works out why on the second pass: it was never in the building." },
+  ] },
+  # BAND A1 — empty, routine. What the surface says on every visit after that.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "pieces_seated", operator = "lt", value = 1 },
+      { type = "flag",  subject = "player", flag_key  = "store_carried_seen", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She opens the store. Empty. FRAGMENT 01 sits greyed at the top of it in handwriting she does not remember using. She closes it, and notes again that she opens it more often than any task log would justify." },
+  ] },
+  # BAND B — one seated. The slot is LIT and it still does nothing to her. §10's whole problem, made visible.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "pieces_seated", operator = "eq", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The slot is lit. Not greyed — lit, with a size on the counter beside it and a date column that has stopped being blank. FRAGMENT 01, in her own handwriting, holding something at last." },
+    { type = "paragraph", content = "She opens it. The data is there, and it is intact, and reading it does nothing at all. It is a clean file about somebody she has never met, and the somebody is her." },
+  ] },
+  # BAND C — two seated. Second slot has no label, because she never got a night quiet enough to write one.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "pieces_seated", operator = "gte", value = 2 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Two of them lit now, side by side. The first still says FRAGMENT 01 in her own hand. The second carries no label at all, because nobody ever gave her a night quiet enough to write one." },
+    { type = "paragraph", content = "Both intact. Both hers. Both about as much use to her as a stranger's file left open on a bench, and she has stopped expecting that to change, which is its own kind of answer." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Close it."
+targetType = "location"
+locationId = "the_cot"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "store_carried_seen", operator = "is_false" },
+] }
+flagEffects = [
+  { targetType = "player", flag = "store_carried_seen", op = "set" },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Close it."
+targetType = "location"
+locationId = "the_cot"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "store_carried_seen", operator = "is_true" },
+] }
+
+# ── activity_go_to_grier — beat_0124 (rev 174), WHOSE HAND. THE WAY INTO GRIER'S ROOM. ────────────────
+# ⚠️ THIS CARD IS THE ROOM'S FRONT DOOR. grier_room is nav-invisible (see its banner in 1_metadata) because a
+# locked location always renders a greyed card and the_waterfront is reachable in Act 1. So the door is a
+# repeatable card here instead, gated on the flag Cain sets, and grier_room_offhours is the way back out.
+# Same route beat_0123 built for cain_lab. Two clicks instead of one, and no greyed card for two acts.
+# ⚠️ TWO BANDS, AND THE FIRST ONE IS THE FINDING. Cain gave her a name and a district, not an address —
+# "A man in the Reach" is the whole of what he said. Band A is her finding him, once, in a paragraph: it
+# answers "how did she get there" without spending a beat on a fetch quest, which is the genre disease.
+# Band B is the walk, forever after.
+# ⚠️ 30 MINUTES. The walk is real and the ladder is repeatable, so the clock is the throttle — there is no
+# day cap on the hub and there does not need to be one.
+[[canvases]]
+id          = "activity_go_to_grier"
+name        = "Down the lane"
+description = "beat_0124 (rev 174). Wren-solo @the_waterfront. Repeatable, pri 3, gated cain_named_grier is_true. The front door of grier_room, which is nav-invisible by design. Two exclusive bands on grier_met: the finding (once — Cain gave a name and a district, never an address) and the walk (every time after). +30 min. Exits type=location into grier_room."
+
+[canvases.trigger]
+location      = "the_waterfront"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "cain_named_grier", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Down the lane"
+blocks = [
+  # BAND A — the finding. Once. No fetch quest, one paragraph.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "grier_met", operator = "is_false" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "A name and a district is not an address. She spends an afternoon on it and it costs her nothing but the afternoon — old men in the Reach are a small list, and a machinist who stopped is a shorter one." },
+    { type = "paragraph", content = "Third try, a chandler on the water gives it up without being pushed: a lockup off the back lane, roller door, chained from the inside. He says the name like it is a thing that used to be worth something." },
+  ] },
+  # BAND B — the walk, every time after.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "grier_met", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Off the water, up the back lane, past the bins and the dead van. The roller door is down the way it is always down, and the side door is not locked, because nothing in there is worth the walk." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Knock."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "grier_room"
+time_progression_minutes = 30
+
 # MEDIA: none. It reuses the room she is standing in.
 [[canvases]]
 id          = "activity_the_face"
@@ -2868,3 +3043,652 @@ text = "Out."
 destinationType          = "specific"
 locationId               = "underworld_bar_bathroom"
 time_progression_minutes = 15
+
+# ═══ activity_buy_papers — beat_0128 (rev 178), WHOSE HAND. THE WAY IN. ═════════════════════════════════
+# Wren-solo @underworld_market. Repeatable, pri 3, gated rise_named is_true + cover_research NOT OWNED.
+#
+# ⚠️ THE TRIGGER GATES ON OWNERSHIP, NOT ON A BOUGHT-FLAG, AND THAT IS THE WHOLE SAVE-SAFETY POINT.
+# save-safety §5: the backfill has no wardrobe branch, so a clothing item added in a later release than the
+# beat that grants it never reaches a save that already passed that beat — and cover_research GATES
+# PROGRESSION, which is the 0.1.5.1 soft-lock class exactly (cover_analyst, granted on a one-shot dispatch,
+# stranded every 0.1.4 -> 0.1.5 carry-over on the floor forever). A `clothing_item ... not_owned` trigger
+# cannot burn: if the kit is ever missing for any reason, this card is simply back at the stall.
+# ⚠️ activity_buy_face's shape was ALMOST this and is not quite. It gates on face_bought is_false, so the
+# card does vanish once the flag is set. That was survivable because the face shipped in the same release as
+# its gate. This one does not get to rely on that, and there was no reason to copy the weaker half.
+# ⚠️ THE FLAG papers_bought EXISTS FOR THE QUEST CARDS AND FOR NOTHING ELSE. setup.checkQuestsCondition
+# handles `flag` and `trait` ONLY — there is no clothing clause in a card's `when` — so the Quests page
+# cannot read ownership and would go on telling her to buy papers she is already carrying. NEVER GATE THE
+# GRANT ON IT. If a later beat wants to know whether she has the kit, it asks the wardrobe.
+#
+# ⚠️ 60 COIN, HALF THE FACE. The face was 120 and the header there is right that the number was the point —
+# it was the largest ask in the game and the first thing she ever saved up for. This is bolted onto an
+# identity she already owns, so it must not read as a second identical purchase. Post-raid her income is the
+# pit (8 / 20 a bout) and The House (30 a head); activity_bar_work is correctly shut by raid_done, so 60 is
+# two heads or three hard bouts, and the price sits on the choice label the way gate 21 requires.
+#
+# ⚠️ SHE IS NOT BUYING A FACE. She already has one and beat_0116 split it out of the clothing system — the
+# face is the flag face_worn, toggled at the_cot. What is missing is the paper under it: somewhere that
+# trained her, somewhere that employed her, in a format a hiring floor will not read twice.
+#
+# ⚠️ AND VANE'S HAND IS NAMED ONCE, IN SOMEBODY ELSE'S MOUTH, AND NEVER UNDERLINED. §6 says "Vane makes it",
+# and the shipped game has him fleeing at the end of the Leash with "I'm gone tonight. The Reach, then
+# further." He is not staged here — restaging him is an NPC amendment and this beat is budgeted as a Lane-3
+# solo — but the woman at the row says whose hand is on the work, and Wren does not ask. Same discipline
+# §18.4 sets for the Bastien line: said once, in passing, never returned to in this release.
+#
+# MEDIA: reuses locations/underworld_market.jpg. That file is already shared by activity_buy_face,
+# activity_buy_part and underworld_market_shop — this is the fourth card at the same stall, and a fourth
+# near-identical market shot would be media debt bought to satisfy a rule whose purpose (one review verdict
+# per beat) is already conceded at this location by three shipped cards.
+[[canvases]]
+id          = "activity_buy_papers"
+name        = "Paper for the tower"
+description = "beat_0128 (rev 178), WHOSE HAND. Wren-solo @underworld_market. Repeatable, pri 3, gated rise_named is_true + clothing_item cover_research NOT_OWNED. Buy = 60 coin -> grants cover_research un-worn + sets papers_bought, +90 min. THE TRIGGER GATES ON OWNERSHIP AND NOT ON THE FLAG (save-safety §5 — this is the 0.1.5.1 gate-item class and a not_owned trigger cannot burn); papers_bought exists only because a quest card's `when` can read flags and traits and nothing else. She is buying a working history, not a face — she already owns the face, and beat_0116 made it a flag. The forger's hand is Vane's and the game says so once, in the seller's mouth, without staging him."
+[canvases.trigger]
+location      = "underworld_market"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "rise_named", operator = "is_true" },
+  { type = "clothing_item", item_id = "cover_research", operator = "not_owned" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Paper for the tower"
+blocks = [
+  { type = "image", props = { file = "locations/underworld_market.jpg", description = "Dim black-market stalls under a low ceiling, weapons and gear laid on cloth, cages further back.", search_queries = ["black market weapons stall dim", "underground arms bazaar cages back"] } },
+  { type = "paragraph", content = "The same three curtained tables at the end of the row, and the same woman behind them, and not one sign anywhere on her that she recognises a face she cut herself." },
+  { type = "dialog", props = { speaker = "player" }, content = "Not a face this time. A history. Somewhere that trained me, somewhere that had me for two years, and a card that gets looked at once by a floor that is hiring in a hurry." },
+  { type = "paragraph", content = "The woman pulls a drawer out from under the table and sets three blanks on the cloth without answering, which is how she says yes." },
+  { type = "paragraph", content = "\"Readers,\" she says. \"You want the Rise. Everybody who has asked me for this in a month wants the Rise, and none of you can read half as fast as you all think you can.\"" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Buy the credential. (60 coin.)"
+targetType = "node"
+nodeId     = "activity_buy_papers.buy"
+costs      = [{ trait = "coin", value = 60 }]
+flagEffects = [
+  { targetType = "player", flag = "papers_bought", op = "set" },
+]
+wardrobeEffects = [
+  { action = "add", item_id = "cover_research" },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Not yet."
+targetType = "location"
+locationId = "underworld_market"
+
+# ── Node: buy. ⚠️ NOTHING IS DONE TO HER THIS TIME, AND THAT IS THE CONTRAST. The face took an afternoon of
+# sitting still while a woman with instruments changed what her face reported. This is a bench, a lamp and a
+# stack of blanks, and the only part that involves her body is holding still for a picture. She has been
+# opened on a bench three times in this game; this is the first purchase that treats her as a customer.
+[[canvases.nodes]]
+id   = "buy"
+name = "Two years somewhere that never existed"
+blocks = [
+  { type = "paragraph", content = "It takes an hour and a half and none of it is done to her. The woman works at a bench under a lamp with a scalpel and a stack of blanks, and the only part that needs Wren at all is holding still for the picture." },
+  { type = "paragraph", content = "\"The hand on these is not mine,\" she says, not looking up. \"There is a man down here now who came out of the towers last winter with nothing on him but what he knew about paper. You are paying for his week, mostly, and he does not want to be thanked.\"" },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "She knows exactly one man who came down out of the Spire last winter with nothing on him. She does not ask." },
+  { type = "paragraph", content = "What she takes away is a card in a sleeve, two years of employment somewhere that has never existed, and a bag of clothes cut for a floor where nobody does anything at all with their hands." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take it back to the berth."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_market"
+time_progression_minutes = 90
+
+# ═══ THE RISE, THE FLOOR — beat_0129 (rev 179). The way out, and the day job. ═══════════════════════════
+
+# ── activity_leave_the_rise — the guaranteed exit. Repeatable, pri 1. ─────────────────────────────────
+# ⚠️ MANDATORY, NOT TIDINESS. the_rise_floor is nav-invisible, so its built passage carries an EMPTY
+# navigation div and every other surface up there is conditional — the hire is a one-shot, the two bounces
+# only fire out of cover, and the day job needs the tokens AND his hours. A hired player standing on that
+# floor at midnight in full cover would otherwise have nothing on the page. Same shape as berth_offhours /
+# grier_room_offhours / bastien_backroom_offhours, except this one is UNCONDITIONAL: it is not an off-hours
+# guard, it is the stairs.
+[[canvases]]
+id          = "activity_leave_the_rise"
+name        = "Back down to the Reach"
+description = "beat_0129 (rev 179). The guaranteed exit from the_rise_floor. Repeatable, pri 1, UNCONDITIONAL — the room is nav-invisible and every other surface on the floor is gated, so without this a hired player in full cover at the wrong hour has an empty page. Exits to the_waterfront, 10 min on foot."
+[canvases.trigger]
+location      = "the_rise_floor"
+is_repeatable = true
+priority      = 1
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Back down to the Reach"
+blocks = [
+  { type = "paragraph", content = "The lift works and the stairs are open concrete and both come out at the same desk with the same man reading behind it. He does not look up on the way out either." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Down to the road."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_waterfront"
+time_progression_minutes = 10
+
+# ── work_the_archive — the day job. Repeatable, pri 3, capped 1/day. ──────────────────────────────────
+# ⚠️ BOTH TOKENS ON THE TRIGGER, not on a choice. Out of the bought face and the research kit she is Wren,
+# and Wren does not work here — the shipped Renner-depot shape (5_scenes:534, "no working the floor out of
+# cover") and activity_bar_work's. It is also the quiet teaching surface: a player who takes the kit off and
+# wonders where her job went learns the rule without being told it.
+# ⚠️ CAPPED AT ONE SHIFT A DAY on the trigger. 240 minutes is most of a working day, and the audit gate's
+# named failure is "standing surfaces print money without limit" — activity_bar_work went to
+# max_triggers_per_day = 2 for exactly this and the engine reads the cap off the TRIGGER (gates.py:419-420),
+# keyed on the canvas NAME (v2.py:4495). This name is unique.
+# ⚠️ FIFTEEN COIN, THE SAME FLAT WAGE THE BAR PAID, and it is deliberate that the raid's lost income comes
+# back at the same number rather than a better one. The job is not a payline; what it is for is being the
+# room Sabin's suspicion climbs in (§9 track B, beat_0131) and the room the consulted beat happens in (§7,
+# beat_0130). Neither of those exists yet and this card is written so both can band onto it without moving.
+# ⚠️ SHE IS GOOD AT IT AND THE PROSE SAYS SO ONCE. §7: she is the fastest reader he has ever employed. It is
+# said flat, in passing, and not returned to — the beat where that lands properly is his, not the job's.
+[[canvases]]
+id          = "work_the_archive"
+name        = "Take a day on the floor"
+description = "beat_0129 (rev 179), WHOSE HAND. Wren-solo @the_rise_floor. Repeatable, pri 3, capped 1/day, gated sabin_met is_true + clothing_item cover_research EQUIPPED + face_worn is_true. THE TWO-TOKEN GATE, second surface. 240 min, 15 coin — the same flat wage the burned bar paid, because the job is not a payline: it exists to be the room the suspicion meter climbs in (beat_0131) and the room the consulted beat happens in (beat_0130), and it is written so both can band onto it without moving. Charges nothing but the day."
+[canvases.trigger]
+location      = "the_rise_floor"
+is_repeatable = true
+priority      = 3
+is_active     = true
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "sabin_met",  operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "face_worn",  operator = "is_true" },
+  { type = "clothing_item", item_id = "cover_research", operator = "equipped" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Take a day on the floor"
+blocks = [
+  { type = "image", props = { file = "activities/work_the_archive.jpg", description = "A woman at one of twenty desks on an unfinished open office floor, reading from a screen among rows of other silent readers. avoid: modern startup office, avoid: people talking, avoid: bright colourful decor.", search_queries = ["woman at desk reading screen open plan unfinished office rows", "rows of silent workers at screens bare concrete office floor"] } },
+  { type = "paragraph", content = "The work is eleven years of somebody else's notes in no order at all — lab logs, procurement, three different hands, half of it scanned crooked. She is given a range of dates and told to say what is in it." },
+  { type = "paragraph", content = "She is faster than the twenty other people on this floor and she is faster than she lets herself look. By the middle of the afternoon she has stopped reading the words and started reading the shape of them, which is not a thing she has ever had to explain to anybody." },
+  { type = "paragraph", content = "Nobody talks. The ceiling is open above the desks and sound goes straight up into the ducting, so even the coughing is polite." },
+  # ── TRACK B — THE SUSPICION LADDER (beat_0131, rev 181). §9: "it is the READING that exposes her, not the
+  # sex," and "the two tracks never touch." So: nothing in these bands mentions the lab, the bench or the
+  # man's hands, and nothing in loop_sabin_lab mentions the archive. She can be fucking him four floors up
+  # and still be one careless answer from him working out what she is, and the tension is the parallel.
+  # ⚠️ ONE LADDER ON THIS NODE, WHICH IS WHY NO CHAIN-BREAKER IS NEEDED. Adjacent [group] blocks merge into
+  # ONE if/elseif chain (first match wins), which is why work_the_case carries a real paragraph between its
+  # two ladders. The four blocks above are ungrouped, so this run starts a chain of its own. If a SECOND
+  # ladder is ever added here, a non-group block has to go between them or this one silently dies.
+  # ⚠️ THE THIRD BAND STOPS AT THE EDGE ON PURPOSE. §21 open item 2 — how close does he get, and what does
+  # the last band say — is still open, and beat_0132 is the beat that spends it. He concludes nothing out
+  # loud here; he takes the page back and goes upstairs, and that is the whole of it.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sabin_suspects", operator = "lt", value = 3 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Sabin comes down the row once in the afternoon with the mug and says the same thing he said the last time, and then goes back up the stairs with it still full." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Whatever it is you are doing, keep doing it. I do not need to understand it. Four months of this and you are the first thing that has gone right." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sabin_suspects", operator = "gte", value = 3 },
+      { type = "trait", subject = "player", trait_key = "sabin_suspects", operator = "lt",  value = 6 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He stops at the end of her desk on the way past now, and what he asks about is not the files. It is the reading itself — what order she goes in, and what she is looking at when she is not looking at the words." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "You are not scanning. I have watched people scan and it does not look like that. You go down a column and then you stop, and the stopping is the part I cannot account for." },
+    { type = "paragraph", content = "She gives him an answer that is true and useless — practice, and a good memory for shapes. He takes it, and nods, and writes something down on the corner of the sheet before he goes." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sabin_suspects", operator = "gte", value = 6 },
+      { type = "trait", subject = "player", trait_key = "sabin_suspects", operator = "lt",  value = 9 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He puts a page in front of her that is not out of the range she was given. Older, a different hand, and half of it is a notation nobody outside a company lab has ever had a reason to be able to read." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Humour me. What does the second column say." },
+    { type = "paragraph", content = "She reads it. It takes about four seconds, and she has answered out loud before the part of her that keeps her alive has caught up with the part of her that likes being good at things." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Right. Yes. That is what it says." },
+    { type = "paragraph", content = "He does not say anything else about it. He takes the page back, and goes up to the lab, and she sits at that desk for the rest of the shift listening to the ducting." },
+  ] },
+  # ── BAND 4 (beat_0132, rev 182) — §21 OPEN ITEM 2, ANSWERED. How close does he get, and what does the
+  # last band say? He gets ALL THE WAY and stops, and he says so out loud, in order, as a list.
+  # ⚠️ THE ANSWER IS HIS CHARACTER AND NOT LUCK. §4: "completely amoral about who is paying… he does not ask
+  # what it is for, because asking is not in the fee." A man built out of that sentence does not fail to
+  # notice — he notices everything and then declines to own it, because knowing would cost him a job he is
+  # paid enormously to keep. That is colder than being fooled and it is the only ending this character had.
+  # ⚠️ IT IS §19 ROW 11's "FIRST REAL BITE" AND THE BITE IS ON THE PLAYER, NOT ON THE MECHANICS. Nothing
+  # locks, nothing turns hostile. What lands is that he saw all of it and filed it.
+  # ⚠️ IT GATES NOTHING, EXACTLY LIKE THE THREE BANDS ABOVE IT. Nine shifts is a lot of floor and this is
+  # optional content; the swap rides decoy_made and never reads this key. See the exit's own note.
+  # ⚠️ BAND 3 IS NOW BOUNDED `lt 9`, AND THAT LINE IS LOAD-BEARING. Adjacent [group] blocks merge into ONE
+  # if/elseif chain and first match wins, so an unbounded `gte 6` above this would swallow every value and
+  # this band would be dead code with a green build. Same trap as beat_0122's.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sabin_suspects", operator = "gte", value = 9 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He does not ask her anything for a week. Then he comes down the row on a Thursday and sits on the corner of her desk, which he has never done, and looks at her for a while before he starts." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "You read a notation you have never been taught. You correct my arithmetic in your head and then decide whether to mention it. Nine hours and you do not get tired, and you do not eat. I have been keeping a list." },
+    { type = "paragraph", content = "He says all of it evenly, in order, the way he reads a column out. It takes about twenty seconds and there is nothing at all underneath it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "I am going to stop keeping it. Whatever you were before this and whoever is paying for it is not in my fee. It has never once been in my fee. Be here at eight and read what I put in front of you." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "He has just said out loud, in order, every single thing he has noticed about her, and then put it down. Knowing would cost him a job he is paid very well to hold. He would rather not pay." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sign out."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_rise_floor"
+time_progression_minutes = 240
+effects = [
+  { targetType = "player", trait = "coin", op = "add", value = 15, clamp = false },
+  # ⚠️ TRACK B's ONLY SETTER (beat_0131). +1 per shift and nowhere else in the game — §9 puts the exposure
+  # on the reading, not on the sex, and a second setter anywhere in loop_sabin_lab would tangle the tracks.
+  # ⚠️ IT GATES NOTHING, AND beat_0132 KEPT THAT PROMISE. The day job is optional and the swap rides
+  # decoy_made, so a player who never takes a shift is never locked out; the meter buys four banded reveals
+  # and the coldest thing anybody says about Sabin in the release, and it buys nothing else.
+  { targetType = "player", trait = "sabin_suspects", op = "add", value = 1, clamp = false },
+]
+# ⚠️ archive_worked ADDED beat_0130 (rev 180), AND IT IS A GATE AND NOT A RECORD. cap_sabin_consults reads
+# it, and without it that scene would fire on the HIRE's own exit: cap_sabin_hires lands her back on
+# the_rise_floor at +30 minutes, still inside his 08:00-11:00 window, and the auto-fire selector re-runs on
+# arrival. The interview and §7's beat would arrive back to back in one morning, and §7's beat is a man
+# asking a reader he has read what she thinks — it cannot be about a stranger he met half an hour ago.
+# One shift first, then the next morning. `set` is idempotent and the card is capped at one a day anyway.
+flagEffects = [
+  { targetType = "player", flag = "archive_worked", op = "set" },
+]
+
+# ── activity_up_to_the_lab — beat_0130 (rev 180). THE DOOR UP. Repeatable, pri 5. ─────────────────────
+# ⚠️ A CARD AND NOT A NAV LINK, for the fourth time and the same reason: sabin_lab is nav-invisible because
+# a locked location always renders a greyed card (v2.py:19829). This is the shape cain_lab, grier_room and
+# the_rise_floor all use — a repeatable card gated on the flag that opens the room, with an unconditional
+# exit waiting on the other side.
+# ⚠️ THE TWO-TOKEN GATE'S THIRD SURFACE. cover_research EQUIPPED + face_worn is_true, the same conjunction
+# cap_sabin_hires proved and work_the_archive carries. Out of either one she is a stranger four floors up in
+# a Vance building, which is worse than being a stranger in the lobby, and the floor's own bounce cards are
+# what catch her instead.
+# ⚠️ PRIORITY 5 — above the day job (3) and the stairs (1), below the out-of-cover bounces (9), which only
+# render in states where this card is gated off anyway. It is the thing she is on that floor to do.
+# ⚠️ ONE BAND, NOT TWO. activity_go_to_grier needed a first-time band because FINDING him was a beat in
+# itself — Cain gave a name and a district and never an address. Sabin told her where the lab is, out loud,
+# while forbidding it. There is nothing to find and a discovery band would be inventing one.
+# MEDIA: none. Four floors in a lift is not a thing to look at, and the room it opens carries the image.
+[[canvases]]
+id          = "activity_up_to_the_lab"
+name        = "Four floors up"
+description = "beat_0130 (rev 180). Wren-solo @the_rise_floor. Repeatable, pri 5, gated sabin_consulted is_true + cover_research EQUIPPED + face_worn is_true. The front door of sabin_lab, which is nav-invisible by design; activity_leave_the_lab is the way back. THE TWO-TOKEN GATE, third surface. One band — he told her where the lab was while forbidding it, so there is nothing to discover. +5 min. Exits type=location into sabin_lab."
+[canvases.trigger]
+location      = "the_rise_floor"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "sabin_consulted", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "face_worn",       operator = "is_true" },
+  { type = "clothing_item", item_id = "cover_research", operator = "equipped" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Four floors up"
+blocks = [
+  { type = "paragraph", content = "The lift takes four floors in about nine seconds and opens on a level with the lights already on and nobody in it. Nobody comes up here. There is nothing on this floor to come up for except the man at the far end of it." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go down the room."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "sabin_lab"
+time_progression_minutes = 5
+
+# ── activity_leave_the_lab — beat_0130 (rev 180). THE GUARANTEED EXIT. Repeatable, pri 1. ─────────────
+# ⚠️ MANDATORY, NOT TIDINESS, AND THE PRECEDENT IS A SOFT-LOCK LO FOUND BY PLAYING IT. sabin_lab is
+# nav-invisible so its built passage carries an EMPTY navigation div, and the only other surface up there is
+# hub_sabin — a PORTRAIT hub, which renders only while he is present. His lab window is 11:00-22:00 and a
+# rung costs 60 to 90 minutes, so a player who starts a rung at 21:30 would come out of it at 23:00 with no
+# link on the page. That is bastien_backroom_offhours' bug exactly.
+# ⚠️ UNCONDITIONAL, like activity_leave_the_rise and unlike the four offhours guards. The guards are gated
+# on the NPC being absent because their rooms have other unconditional surfaces; this room does not, and a
+# card that is always there costs one line and removes a whole class of dead page.
+# ⚠️ TWO BANDS ON HIS PRESENCE, AND npc_at_location WORKS IN A GROUP BLOCK — verified in the generator, not
+# assumed: _render_group_chain compiles group conditions to `<<if setup.triggerConditionsSatisfied(...)>>`
+# (v2.py:14318), and npc_at_location is handled inside that same evaluator (v2.py:4150). The absent band is
+# what makes an empty lab worth arriving in, and it is where the level's silence gets said once without
+# spending a rung on it.
+# MEDIA: none. It reuses the room she is standing in.
+[[canvases]]
+id          = "activity_leave_the_lab"
+name        = "Back down the stairs"
+description = "beat_0130 (rev 180). The guaranteed exit from sabin_lab. Repeatable, pri 1, UNCONDITIONAL — the room is nav-invisible and the only other surface on the level is a portrait hub that stops rendering at 22:00, so without this a player who starts a 90-minute rung at 21:30 is sealed in. Two bands on npc_at_location: the empty level, and him not looking up. Exits to the_rise_floor, 5 min."
+[canvases.trigger]
+location      = "sabin_lab"
+is_repeatable = true
+priority      = 1
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Back down the stairs"
+blocks = [
+  # BAND A — he is not here. The level does its own talking.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "npc_at_location", location_id = "sabin_lab", npc_id = "npc_sabin", operator = "is_absent" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The lights are on because they are always on. The bench is where he left it, the stacks are where he left them, and her own footsteps go up into the open ceiling and come back off the glass a half-second later." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "Nothing on this level shuts. Not a door, not a duct, not a partition. Anything done up here is done at whatever volume the building decides." },
+  ] },
+  # BAND B — he is here and does not look up.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "npc_at_location", location_id = "sabin_lab", npc_id = "npc_sabin", operator = "is_present" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He says something at the bench that is not aimed at her and does not need an answer, and is still saying it when the stair door goes. He does not look up. He is not being rude about it; he has simply not finished the sentence." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Down to the floor."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_rise_floor"
+time_progression_minutes = 5
+
+# ═══ beat_0132 (rev 182) — WHOSE HAND beat 11. PIECE TWO: THE SWAP. ═══════════════════════════════════
+# §19 row 11, and §9's "it is a swap or a con, not a robbery — the one place in this release where her mind,
+# not her body, does the work a second time." Three surfaces here plus cap_the_swap in 5_scenes:
+#   kess_makes_the_blank    @kess_berth      the decoy gets made. SETS decoy_made
+#   activity_into_the_store @the_rise_floor  the door, gated on the decoy
+#   activity_leave_the_store @the_dry_store  the unconditional way back
+#
+# ⚠️ §21 OPEN ITEM 3, ANSWERED — AND beat_0131 ALREADY ANSWERED IT. The drain established every constraint
+# the forgery has to survive, in his own mouth: the door LOGS, the item is SIGNED FOR, and he checks a
+# TEMPERATURE RANGE and nothing else ("Nothing else about it interests me"). So the con is a blank of the
+# same physical type, carrying the same eleven characters, held in range. Nothing new had to be invented.
+# ⚠️ AND THE LOG IS WHY IT MUST BE A SWAP. A theft makes the log a confession — a reader who went in the
+# morning something vanished. A swap makes the same log harmless: she went in, she came out, nothing is
+# missing. THE SWAP IS WHAT MAKES SIGNING IN SAFE, which is the whole shape of the con and it is hers.
+# ⚠️ IT HOLDS UNTIL SOMEBODY READS IT. Sabin needs the METHOD, which is in how the capture was taken and not
+# in what it says, so he may not open it for months. That is the release's last standing door and Kess is
+# the one who names it, because he is the only person in this game who tells her the whole price.
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+
+# ── kess_makes_the_blank — the decoy. Repeatable shop screen @kess_berth, pri 4. ──────────────────────
+# ⚠️ REPEATABLE AND OWNERSHIP-SHAPED, the activity_buy_papers pattern (:3085). A one-shot that costs coin is
+# a trap: a player who cannot afford it when it fires has burned the scene. Repeatable + a `decoy_made
+# is_false` gate means she can come back, and it closes itself the moment it has done its job.
+# ⚠️ PRESENCE IS A CONDITION, NOT requires_npc. The render-bucket guard flags requires_npc WITHOUT npc= as a
+# silent drop to a flat solo link, and this IS a solo activity that happens to need him at the bench. The
+# npc_at_location clause does the gating and the guard stays clean. (It is also the clause beat_0130 proved
+# an auto-fire needs anyway — requires_npc is not read on that path at all.)
+# ⚠️ FORTY-FIVE COIN, against the credential's sixty. The day job pays fifteen, so it is three shifts or one
+# night of something else — deliberately affordable without the floor, because the floor is optional.
+# ⚠️ SHE TELLS HIM THE TRUTH. Kess is the one person in this game who has never been handled, and the beat
+# where he asks what it has to survive and she answers plainly is what earns his warning at the end of it.
+[[canvases]]
+id          = "kess_makes_the_blank"
+name        = "Something to leave behind"
+description = "beat_0132 (rev 182), WHOSE HAND. Wren-solo @kess_berth. Repeatable, pri 4, gated sabin_drains_done gte 1 + decoy_made is_false + npc_kess present. THE DECOY: a blank of the same physical type, carrying the same eleven characters, that will hold a temperature — which is the entire specification, because beat_0131's drain established that a temperature is the only thing anybody in that building checks. 45 coin, 120 min, SETS decoy_made. She tells him what it is for; he builds it better than she asked and then tells her exactly how long it lasts, because he is the only person in this game who quotes the whole price."
+[canvases.trigger]
+location      = "kess_berth"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "sabin_drains_done", operator = "gte", value = 1 },
+  { type = "flag",  subject = "player", flag_key  = "decoy_made",        operator = "is_false" },
+  { type = "npc_at_location", location_id = "kess_berth", npc_id = "npc_kess", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Something to leave behind"
+blocks = [
+  { type = "paragraph", content = "He is under the cradle with a torch when she comes down the boards, and he does not come out from under it, and he does not have to be told twice that she wants something built." },
+  { type = "dialog", props = { speaker = "player" }, content = "A case. Sample case, company pattern, sealed, cold-rated. Eleven characters on the end of it that I will give you. Nothing inside it that has to be anything." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Nothing inside it. So it goes somewhere a thing already is, and the thing that's already there comes out. Don't tell me the room." },
+  { type = "paragraph", content = "She tells him the room anyway, and the shelf, and the number on the front of the cabinet, because the number is the specification and there is no version of this where she keeps it from the man cutting the metal." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Then that's what it has to survive. Not a lock, not a man's eyes, a number on a dial. That's the easiest thing anybody's ever asked me to forge and I want you to hear me say that out loud before you pay for it." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Have him make it. (45 coin.)"
+targetType = "node"
+nodeId     = "kess_makes_the_blank.made"
+costs      = [{ trait = "coin", value = 45 }]
+flagEffects = [
+  { targetType = "player", flag = "decoy_made", op = "set" },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Come back with the coin."
+targetType = "location"
+locationId = "kess_berth"
+
+# ── Node: made. ⚠️ HE NAMES THE CLOCK, AND THAT IS THE RELEASE'S LAST STANDING DOOR. Sabin wants the method
+# and the method is in how the capture was taken, not in what it says, so he may not open it for months. Kess
+# is the right mouth for it: he is the only person in this game who quotes the whole price without being
+# asked, and beat_0083's whole hinge was him refusing to let her go on a hunch.
+[[canvases.nodes]]
+id   = "made"
+name = "It will hold until somebody reads it"
+blocks = [
+  { type = "paragraph", content = "It takes him two hours and most of that is the label. The case comes off a hull he stripped in the spring, cut down, resealed, and cold-rated on a bench with a hose and a gauge until it holds the number she gave him with eleven degrees in hand." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Eleven characters. Count them yourself, twice, before you walk it in there. I've done nine and thought it was eleven before now and so has every man who ever made one of these." },
+  { type = "paragraph", content = "Then he wipes it down, wraps it, and holds onto it for a second longer than he needs to when he hands it over." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Understand what you're buying. That'll hold a dial forever. It holds a man exactly until the day one of them opens it up and reads it, and then it holds nothing at all and everybody who was in that log is in it." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He wants the method, not the contents. Nobody opens a thing they already know how to copy. She is buying months, and she does not get to know how many." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "kess_berth"
+time_progression_minutes = 120
+
+# ── activity_into_the_store — the door. Repeatable, pri 5. ────────────────────────────────────────────
+# ⚠️ IT GATES ON THE DECOY, NOT ON THE TOWER. There is no lock on that room she has to defeat — she is a
+# hire, hires go to the store, the door logs it and that is all it does. What she must not do is walk in
+# there with nothing to leave behind, so the decoy IS the gate. It also keeps the meter's promise: this beat
+# never reads sabin_suspects.
+# ⚠️ THE TWO-TOKEN GATE'S FOURTH SURFACE. Out of the kit or the face she is a stranger in a Vance building,
+# and the floor's own bounce cards catch her instead.
+# ⚠️ IT CLOSES ON piece_two_held. Once the swap is done that room has nothing in it, and a card into a dead
+# room is the dead end beat_0120 deleted from the Undertow.
+[[canvases]]
+id          = "activity_into_the_store"
+name        = "Down to the dry store"
+description = "beat_0132 (rev 182). Wren-solo @the_rise_floor. Repeatable, pri 5, gated decoy_made is_true + piece_two_held is_false + cover_research EQUIPPED + face_worn is_true. The front door of the_dry_store, which is nav-invisible by design; activity_leave_the_store is the way back. THE TWO-TOKEN GATE, fourth surface. Gated on the DECOY and never on sabin_suspects, which keeps beat_0131's promise that the meter locks nobody out. +5 min."
+[canvases.trigger]
+location      = "the_rise_floor"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "decoy_made",     operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "piece_two_held", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "face_worn",      operator = "is_true"  },
+  { type = "clothing_item", item_id = "cover_research", operator = "equipped" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Down to the dry store"
+blocks = [
+  { type = "paragraph", content = "Two floors down instead of four. The stairwell is the same open concrete the whole way and the door at the bottom of it is the only door in this building anybody has bothered to finish." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Open it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_dry_store"
+time_progression_minutes = 5
+
+# ── activity_leave_the_store — the guaranteed exit. Repeatable, pri 1, UNCONDITIONAL. ─────────────────
+# ⚠️ SAME MANDATORY SHAPE as activity_leave_the_rise and activity_leave_the_lab. the_dry_store is
+# nav-invisible so its passage carries an EMPTY navigation div, and the only other thing in the room is a
+# one-shot. The door card upstairs closes on piece_two_held, so in ordinary play this is unreachable after
+# the swap — which is exactly why it ships: the one state nobody plans for is the one that strands a save.
+[[canvases]]
+id          = "activity_leave_the_store"
+name        = "Back up the stairs"
+description = "beat_0132 (rev 182). The guaranteed exit from the_dry_store. Repeatable, pri 1, UNCONDITIONAL — the room is nav-invisible and the only other surface in it is a one-shot, so without this a player standing there with the swap already done has an empty page. Exits to the_rise_floor, 5 min."
+[canvases.trigger]
+location      = "the_dry_store"
+is_repeatable = true
+priority      = 1
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Back up the stairs"
+blocks = [
+  { type = "paragraph", content = "The log is on its stand by the door and the pen is on a string, and the cold comes off the racks the whole way to the stairwell and stops at the threshold like it has been told to." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Up to the floor."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_rise_floor"
+time_progression_minutes = 5
+
+# ── activity_say_yes — beat_0135 (rev 185). HOW SHE SAYS YES, AND IT IS BY STOPPING. ─────────────────
+# ⚠️ §21 OPEN ITEM 1's OTHER HALF. cap_the_price deliberately ended without her answering — he asked her no
+# question and told her he would not — so this beat has to build the answer, and the answer cannot be a
+# message, because she has no way to reach him and both of them know it. THE RELEASE HAS SAID "HE FINDS YOU"
+# FOUR TIMES ON FOUR CARDS. So the only thing she can actually do is the one thing he told her she could not
+# decide to do — and she does the nearest available version of it: she stops. No shifts, no tower, no lane,
+# no bench. She stays in. He reads it, because reading her is the only thing he has ever done.
+# ⚠️ THAT IS ALSO THE THEME ARRIVING AS A MECHANIC. The price is being somewhere that stopping is all there
+# is left, and the way she buys it is by stopping. It costs her two days and the card says so.
+# ⚠️ REPEATABLE, NOT A ONE-SHOT. A one-shot that costs two days is a scene a player can lose to a mistimed
+# click. Gated capstone_failed is_false for now — the SECOND trip is beat_0136's, and it is a different act
+# and gets its own band there rather than a silent reuse of this one.
+# MEDIA: none. It reuses the room she is standing in, and the point of it is that nothing happens.
+[[canvases]]
+id          = "activity_say_yes"
+name        = "Stop for two days"
+description = "beat_0135 (rev 185), WHOSE HAND. Wren-solo @the_cot. Repeatable, pri 4, gated price_named is_true + capstone_failed is_false. HOW SHE ANSWERS A MAN WHO ASKED HER NOTHING: she has no way to reach Cain, so she does the only thing available and stops — no shifts, no tower, no lane — and he reads it. The theme arriving as a mechanic. Costs two days of clock. Exits type=location into room_no_name, which is nav-invisible and reachable by no other route."
+[canvases.trigger]
+location      = "the_cot"
+is_repeatable = true
+priority      = 4
+is_active     = true
+# ⚠️ TRIGGER WIDENED AT beat_0136 (rev 186) AND THE NODE BANDED. It was gated capstone_failed is_false
+# because the second trip did not exist yet; it does now, and it is A DIFFERENT ACT rather than a silent
+# reuse of the first. Band A is her ANSWERING a man who asked her nothing. Band B is her ASKING, which she
+# has never done in this game for anything, and it costs her one night instead of two because he told her
+# there would be an again and he does not say things twice.
+# ⚠️ IT NOW CLOSES ON vesper_named, not on capstone_failed. She never goes back to that room after the fire.
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "price_named",  operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "vesper_named", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Stop for two days"
+blocks = [
+  # BAND A — the first trip. She is answering a question he did not ask.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "capstone_failed", operator = "is_false" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "There is no way to reach him. There has never been a way to reach him, in two acts and eleven years, and she sits on the bunk for a while working the problem the way she works every problem and gets nowhere at all with it." },
+    { type = "paragraph", content = "So she does the only thing she has. She does not take a shift. She does not take the road to the Reach or the lift up the tower or the lane down to the lockup. She stays in, and the second day is worse than the first, and on the second night he is standing at the feed line with his coat on." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Two days. I gave it three before I came and looked." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "He has never once had to be told a thing about her. She has spent this whole chapter learning to read men and he has been doing it to her the entire time for free." },
+  ] },
+  # BAND B — the second trip. She is asking, which she has never done for anything.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "capstone_failed", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She does not have to stop this time. He said again, and he is not a man who says a thing twice, so all she has to do is be in the room on a night he is likely to look — and she is in the room on the first one." },
+    { type = "paragraph", content = "He comes in and does not sit down and does not take his coat off, and he waits, because this time there is a question on the floor between them and it is hers and not his." },
+    { type = "dialog", props = { speaker = "player" }, content = "Take me back." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "Three words. She has spent nine years getting things out of men without ever once asking for anything, and it turns out asking takes about a second and a half." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go with him."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "room_no_name"
+time_progression_minutes = 90
+
+# ── activity_leave_somewhere — the way back. Repeatable, pri 1, UNCONDITIONAL. ────────────────────────
+# ⚠️ THE HOUSE RULE, FIFTH TIME: room_no_name is nav-invisible, so its passage carries an EMPTY navigation
+# div and everything else in it is a one-shot. Without this a player standing there with the scene spent has
+# no link on the page. It exits to the_cot rather than to a street, because she does not drive and does not
+# know where she is — being brought home is the only way out of that room and it always was.
+[[canvases]]
+id          = "activity_leave_somewhere"
+name        = "He takes you back"
+description = "beat_0135 (rev 185). The guaranteed exit from room_no_name. Repeatable, pri 1, UNCONDITIONAL — the room is nav-invisible and everything else in it is a one-shot. Exits to the_cot, because she does not drive and never learns where she is: being brought home is the only way out and it always was."
+[canvases.trigger]
+location      = "room_no_name"
+is_repeatable = true
+priority      = 1
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "He takes you back"
+blocks = [
+  { type = "paragraph", content = "The stairwell goes down further than she expects and comes out somewhere she does not recognise, and he does not tell her where it is on the way and she does not ask him. Head down for the middle of it, the same as every other time." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Home."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 60
+
+# ── activity_ask_him_to_come — beat_0139 (rev 189). SHE ASKS HIM TO GO BACK DOWN THAT LANE. ───────────
+# ⚠️ THE LAST ON-RAMP OF THE RELEASE, AND IT IS AN ASK RATHER THAN A KNOCK. Card AL ends on "put them in
+# one", and every pickup in this game is a spent one-shot, so the errand has to be a surface she takes. It
+# is also the payoff of beat_0137: she asked him for nothing for two acts, asked him for one thing at
+# beat_0136's on-ramp, and this is the second and much larger one.
+# ⚠️ HE REFUSES FIRST, AND THAT IS THE POINT. Grier's own line at beat_0138 is that Cain has not been down
+# that lane once in nine years, not even to see whether the man was still breathing. Getting him there is
+# the whole ask, and he does it because she asked and for no other reason he is willing to give.
+# ⚠️ REPEATABLE, gated third_located + two_men_done is_false. Nothing costs coin here, but a one-shot on the
+# release's final on-ramp is a scene a mistimed click can lose, and activity_say_yes set the precedent.
+# MEDIA: none. It is her room and a walk, and the image belongs to the room they are walking to.
+[[canvases]]
+id          = "activity_ask_him_to_come"
+name        = "Ask him to come with you"
+description = "beat_0139 (rev 189), WHOSE HAND. Wren-solo @the_cot. Repeatable, pri 4, gated third_located is_true + two_men_done is_false. THE LAST ON-RAMP, and it is an ASK: every pickup is a spent one-shot and card AL ends on 'put them in one'. He refuses first — he has not been down that lane in nine years — and then goes, because she asked. Exits type=location into grier_room, 120 min."
+[canvases.trigger]
+location      = "the_cot"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "third_located", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "two_men_done",  operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Ask him to come with you"
+blocks = [
+  { type = "paragraph", content = "He comes, because he always comes. She has stopped pretending to herself that she works out when and started simply waiting for it, which takes a day and a half this time." },
+  { type = "dialog", props = { speaker = "player" }, content = "It went up. A man came down for it in a case with a lock on it and took it up the tower, and the man who watched that happen is forty minutes' walk from here and will not talk to you." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "No." },
+  { type = "paragraph", content = "That is all of it. Not an argument, not a reason — a door closing, and she has watched enough men close enough doors to know she is not getting this one open by pushing on it." },
+  { type = "dialog", props = { speaker = "player" }, content = "I am not asking you to talk to him. I am asking you to stand in his room while he talks to me, because he has the half you have not got and you have the half he will never get, and I am the only thing either of you will let through a door." },
+  { type = "paragraph", content = "He looks at the floor for a while, the way he looked at it on the end of her bunk, and then he picks his coat up off the bench and holds the door open, which is his entire answer." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take him down the lane."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "grier_room"
+time_progression_minutes = 120
