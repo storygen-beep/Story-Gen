@@ -5,6 +5,66 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-27 — the protagonist becomes a declaration, and the start choice gets a gate that fails only on zero
+
+**Why.** Study 7 measured that all eight v2 games hand the player a finished woman and no choices
+about her, against a field whose largest single bucket is `freedom` (25.9% of top-30 engagement)
+while `premise` is 0 of 30. The cause was **upstream of every author and it was this skill**:
+`templates/want.md` wrote `she/her` **21 times and `he/him` zero**, `the-want.md` 16 vs 0, and a grep
+of the whole skill for a protagonist fork returned nothing. v1 asked the question first of anything
+(`author-game/references/step-0-1-seed.md:17`, *"Pick the PROTAGONIST POV first — it decides which
+fantasies even work"*); v2 deleted it. LO, asked whether the shape was deliberate: **"just happened."**
+
+**⚠️ SHIPPED ONLY AFTER ONE REAL GAME BUILT IT FIRST** (`mrs_vance`, `f34dc3b`) — the deliberate
+opposite of P0's order, refused earlier the same day for being specified before any game used the
+feature. That ordering is now written into Study 7 §5 as the reason it exists.
+
+**⚠️ THE FIX IS A DECLARATION, NOT A DE-GENDERING, and the distinction is the whole design.**
+Rewriting 21 pronouns to "they" would have been churn that destroyed a measured finding — *"for a
+female protagonist the ascent is not money and not status, it is reach"* — in order to launder an
+assumption. The drift mechanism was *the grammar answers before the author arrives*, so the fix puts
+the question **in front of** the grammar. **The female default stays and it is evidenced**: 49 corpus
+comments asking for a female lead (364 likes) against 11 opposed (124 likes), with the top-30's
+`female 4 of 30` being a **supply** figure — a player in that corpus counted the tags at 44 female to
+100 male. What was broken was never the answer. It was that the answer was never a question.
+
+**What changed.**
+
+- **`templates/want.md`** — new **§1 "Who the player is — answered BEFORE she is described"**: who the
+  player is (`female`/`male`/`picked`), written vs blank slate (the field runs 19 blank to 10 written,
+  blank holding 80.4% of engagement; **all eight v2 games are `written` and no ledger records anyone
+  choosing it**), and what the player picks at minute zero. The old §1 becomes §1b, so **nothing
+  renumbers** — only one citation to a Want section number exists anywhere and it is historical.
+  One line names the pronoun the template is written in and says to swap it if you declared otherwise:
+  **one line instead of twenty-one edits.**
+- **`references/the-want.md`** — the doctrine and every figure behind it, plus `mrs_vance` as the
+  worked example, plus two ⚠️ that cost real time to learn: **additive only** (each original rung keeps
+  its numbers and gains `<flag> is_false`, so no door closes and an old save reads what it read
+  yesterday), and **the placement trap** — adjacent `[group]` blocks merge into one if/elseif chain
+  (`v2.py:14637`), so a past-ladder dropped beside an existing ladder makes that ladder unreachable
+  for every player carrying a past, silently.
+- **`references/state.md`** — `want.player` = `{ who, definition, start_choice{asked_at, flags} }`.
+  Declare-then-check, the contract `board.who_climbs` and `locations[].fill` already use.
+- **`scripts/gates.py`** — gate **`the start choice is read`** (42 judged gates now). Undeclared →
+  `n/a` *which is not a pass*; declared and read zero times → **FAIL**, naming the flag; otherwise
+  PASS printing reads-per-flag.
+- **Scoped, not rewritten:** `SKILL.md:92`, `the-release.md:81`, `the-want.md` §3.
+
+**⚠️ THE GATE SHIPS WEAKER THAN IT WAS DRAFTED, ON PURPOSE.** Study 7 §5 proposed "read at least *k*
+gating sites". **The `k` is refused at n = 1** — one game cannot support a floor, and that is exactly
+how this skill lost an entire meter doctrine (`the-meters.md` W1, 2026-08-19). Declared-and-never-read
+is the fake-freedom defect *by definition* and needs no threshold, so that is all the gate asserts.
+The counts accumulate in the headline until a real distribution exists.
+
+**Verified.** `mrs_vance` **42/42 judged, 1 n/a** — 3 flags × 5 reads, counted from the game and not
+from the ledger's say-so. Seven other v2 games report `n/a` with the "an absence is not evidence"
+detail. ⚠️ **The FAIL branch was exercised rather than assumed** — a fourth flag nothing reads turned
+it red and named it — because this project has twice shipped a gate whose first contact with reality
+was correct work. All 22 scorable games re-scored: **0 pre-existing verdicts moved**, 22/22 gained the
+new row. (`sinks >= sources` excluded from the diff: still nondeterministic, found during P0, open.)
+
+---
+
 ## 2026-08-27 — P0 measured and REFUSED: pooled variants are words WRITTEN, and gate 1 is right to count them
 
 **Why.** `~/Documents/Female_PC_Craft_Study_20260823/proposal_for_skill.md` opens with a **P0** to

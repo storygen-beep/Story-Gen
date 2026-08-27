@@ -4,6 +4,18 @@
   "narration_person": "second",
   "protagonist": "Rilla Vance",
   "want": {
+    "player": {
+      "who": "female",
+      "definition": "written",
+      "start_choice": {
+        "asked_at": "open_dorn_leaves.the_book",
+        "flags": [
+          "past_books",
+          "past_road",
+          "past_counter"
+        ]
+      }
+    },
     "who_she_is": "Rilla Vance, 27, nee Marek. Eleven weeks married to Dorn Vance, 54, who owns Vance Diesel — a repair yard on a county road outside Kerr Crossing, house on the same gravel lot. A paper signed before the wedding: nothing is hers for three years. No car in her name, not on the account, sixty dollars a week on the kitchen counter. Dorn put her on the books, so she writes down every number the yard makes and can touch none of them, and hands the week's cash to his eldest son on Friday. Dorn hauls four nights out of seven. What she has to lose: the three years, and the job she got her brother.",
     "appetite": "To be wanted by men who have to call her by a title she did not earn. It cannot complete — no figure of respect settles it, and every man who starts using her name has to be replaced by one still using the title. The yard supplies them: drivers, hires, family home from somewhere. Release 41 adds a new hire in the bunk room, a customer who becomes a regular, or another Vance who needs a bed.",
     "ascent": "Bottom: the office counter and the front rooms of the house, in daylight, with Dorn's name doing all the work; she asks Cade for the truck to leave the property at all. Top: the shop floor after close, the bunk room over it, the wash bay at midnight, the sleepers in the back row — and none of it needing his name, because by then they are not calling her by it. The ladders live on the cast: five men, two meters each (access — what he lets her near; willingness — how far he goes).",

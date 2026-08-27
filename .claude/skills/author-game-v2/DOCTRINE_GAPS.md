@@ -158,7 +158,7 @@ A finished study graduates into a real v2 reference file. Until then it lives he
 | **11** | Pre-ship discipline — **still open, and it must NOT be built as a checklist.** §3a of this file already rules on that: *"checklists do not hold… v2 must not inherit the checkbox"*, with v1's 13-point audit followed by the very bug it was written to prevent. **Half of it closed 2026-08-23**: `the-release.md` loop step 5 now says the nineteen lints get read as well as the gates passing, and step 6 records the figures shipped with in `v2_state.json` — a tracked number rather than a box. Cause: Off Season shipped **37/38 with 67 flagged words**, two of which reached LO on a button. What remains open is everything the lints do not cover, and it arrives as instruments or not at all. |
 | **12** | Optional systems — phone, customization |
 | **13** | **Prose that copies a field** — a price, a window, a room name written into a beat is a duplicate of the TOML with no link back, and it goes stale the day the field moves. v1 carried a whole file on this (`author-game/references/prose-truth.md`, 121 lines); a grep of the v2 skill for `prose is a copy \| re-price \| stale prose` returns **nothing**. Found 2026-08-22 while closing the currency item, which is the first measured instance of it. |
-| **14** | **Who the player is** — gender, blank-slate vs written, and whether the player chooses anything about her at minute zero. **Studied 2026-08-27 → Study 7; §4/§5 are proposals, nothing applied.** ⚠️ **Partly covered already by the Female PC Craft Study of 2026-08-23** (`STATUS.md:186`), whose gender verdicts are adopted here because it read the games' openings; what is additive is the whole-field "what carries a game" classification, the pronoun mechanism, and the G1 correction. v1 asked this first of anything (`author-game/references/step-0-1-seed.md:17`, *"Pick the PROTAGONIST POV first"*); v2 deleted the question and answers it by grammar instead — `templates/want.md` says `she/her` **21 times and `he/him` zero**, and a grep of the whole skill for any protagonist fork returns **0 hits**. Consequence: eight v2 games, one protagonist, never chosen (LO: *"just happened"*). Measured against the 30-game corpus, **no game in the field is loved for its premise (0 of 30)** while `freedom` is its largest bucket at 25.9% — so the cost is not the repeated premise G1 named, it is that the player picks nothing. ⚠️ **The gender is NOT the defect** — the field's comments run 49-for to 11-against a female lead; do not read `female 4 of 30` as a supply-limited verdict. Converges with the 2026-06-17 research's *"no PLAYER-IDENTITY axis"*, which is why this is the **second** time the gap has been written down. |
+| **14** | **Who the player is** — gender, blank-slate vs written, and whether the player chooses anything about her at minute zero. **✅ ADDRESSED 2026-08-27 → Study 7, applied.** v1 asked this first of anything (`author-game/references/step-0-1-seed.md:17`); v2 answered it by grammar instead — `templates/want.md` said `she/her` **21 times and `he/him` zero** — and eight games shipped one protagonist nobody chose (LO: *"just happened"*). Now a **declaration**: `want.player` in `state.md`, a §1 in `templates/want.md` and `references/the-want.md` that is answered before she is described, and gate **`the start choice is read`**. ⚠️ **The female default STAYS and is evidenced** (49 corpus comments for a female lead against 11 opposed) — what was broken was that it was never a question. ⚠️ **The gate fails only on ZERO**; the read-count floor was refused at n = 1. Shipped only after `mrs_vance` (`f34dc3b`) built it first — the opposite order to P0, refused the same day. |
 
 ### Parked
 
@@ -1575,9 +1575,18 @@ three v2 games; menu shape parsed from each `7_final_game.toml` with a real TOML
 
 # Study 7 — Who the player is
 
-> **§4 and §5 are `PROPOSAL — NOT APPLIED`.** No reference file, template or gate changed on
-> 2026-08-27. Same posture the 7-24 field report used for its own *"Doctrine implications
-> (proposals, not yet applied)"*. LO has the decision.
+> **✅ APPLIED 2026-08-27, in the order the study argued for.** §4 and §5 shipped only *after* one
+> real game was built to the doctrine (`mrs_vance`, commit `f34dc3b`) — which is the whole point, and
+> the difference between this and the P0 refusal on the same day.
+>
+> - **§4 → `templates/want.md` §1 and `references/the-want.md` §1**, plus `want.player` in
+>   `references/state.md`. The protagonist is now a declaration, not a pronoun.
+> - **§5 → gate `the start choice is read`.** Built, and deliberately weaker than first drafted:
+>   **it fails only on zero.** See §5 for why the floor was refused.
+> - **Scoped, not rewritten:** `SKILL.md:92`, `the-release.md:81` and `the-want.md` §3 said *"For a
+>   female protagonist"* as a given; each now points at the declaration. **The measured guidance
+>   under them is unchanged** — the female default is evidenced, and de-gendering the prose would
+>   have destroyed a finding to launder an assumption.
 
 ## 1 · What it is, and what breaks without it
 
@@ -1724,7 +1733,7 @@ changed… awaiting his call on scope."* That was v1, from theory. This is v2, f
 arriving at the same place by a different road. **It is the second time this gap has been written
 down. Recording that so it is not derived a third time.**
 
-## 4 · What v2 says instead — `PROPOSAL — NOT APPLIED`
+## 4 · What v2 says instead — ✅ APPLIED 2026-08-27
 
 **P1 · The Want asks who the player is, before it describes her.** `templates/want.md` §1 becomes a
 fork, not a portrait. The pronoun comes out of the template's own prose so the page stops answering
@@ -1750,13 +1759,30 @@ a later reader who sees `female 4 of 30` and draws the obvious wrong conclusion.
 figure, and the 8-23 study reached the same verdict independently: *"the genre's top ranks are mostly
 male-PC games where women are the content."*
 
-## 5 · The check — `PROPOSAL — NOT APPLIED`
+## 5 · The check — ✅ BUILT 2026-08-27, and weaker than it was drafted
 
 Candidate gate: **a start-of-game choice does not ship unless real content reads it.** Every flag or
 trait written by the opening fork must be read by at least *k* gating sites elsewhere in the game,
 counted the way the flag-chain validator already counts a located setter
 (`apps/projects/services/template_import.py`). Mechanically decidable from `7_final_game.toml`
 alone; no judgement call.
+
+✅ **BUILT — as gate `the start choice is read`, after `mrs_vance` gave it something to run
+against.** And it ships **weaker than the sentence above**, which is the honest outcome rather than
+the tidy one:
+
+> **It fails only on ZERO.** Undeclared → `n/a` (*not* a pass). Declared and read zero times → FAIL.
+> Anything else → PASS, **printing the count without judging it.**
+
+⚠️ **The `k` in "at least *k* gating sites" was refused, and the reason is n = 1.** One game cannot
+support a floor. This skill has already had to supersede an entire meter doctrine derived that way
+(`the-meters.md` W1, 2026-08-19, *"three layers, three or four ratcheting tiers was n = 1"*).
+Declared-and-never-read needs no threshold — it is the defect by definition — so that is all the gate
+asserts. The counts accumulate in the headline until a real distribution exists to read a floor off.
+
+Measured on the day it shipped: `mrs_vance` 3 flags × 5 reads → PASS. The other seven v2 games → `n/a`.
+The FAIL branch was exercised on purpose, with a fourth flag nothing reads, rather than assumed —
+this project has twice shipped a gate whose first real contact was with correct work.
 
 ⚠️ **Not built here, and the reason is on this file's own record.** Study 2's R4 proposed a gate
 requiring `locked_text` on every locked door; built, it fired on 7 of 8 doors in a real game because
@@ -1814,6 +1840,7 @@ applies — check the halves separately, and say which is which.
 
 | date | what |
 |---|---|
+| 2026-08-27 | **Study 7 APPLIED — the protagonist becomes a declaration, and item 14 closes.** Shipped only after `mrs_vance` built the thing first (`f34dc3b`), which is the deliberate opposite of P0's order on the same day. **§4 →** `templates/want.md` §1 and `the-want.md` §1 now ask *who is the player* **before** she is described, with `want.player` recorded in `state.md`; the drift cause is named in both (this file wrote `she/her` 21 times against `he/him` 0, so the grammar answered before the author arrived, and v1 had asked the question first of anything at `step-0-1-seed.md:17`). ⚠️ **THE FIX IS A DECLARATION, NOT A DE-GENDERING** — rewriting 21 pronouns would have destroyed a measured finding (*"for a female protagonist the ascent is reach, not accumulation"*) to launder an assumption, and the female default is **evidenced**: 49 corpus comments asking for a female lead against 11 opposed, with `female 4 of 30` a supply figure. Three lines that stated it as a given (`SKILL.md:92`, `the-release.md:81`, `the-want.md` §3) were **scoped**, not rewritten. **§5 →** gate **`the start choice is read`**, and it ships weaker than drafted: **it fails only on ZERO**, because a read-count floor cannot be defended at n = 1 — the exact error that cost this skill its meter doctrine (W1, 2026-08-19). Undeclared reports `n/a`, which is not a pass. ⚠️ **The FAIL branch was exercised, not assumed** (a fourth flag nothing reads → red, naming it); this project has twice shipped a gate whose first contact with reality was correct work. Verified: `mrs_vance` **42/42** with 3 flags × 5 reads, seven other v2 games `n/a`, and **0 pre-existing verdicts moved across all 22 scorable games**. |
 | 2026-08-27 | **P0 measured and REFUSED — the third rule in this project taken out or turned down, and the first turned down before it was built.** The Female PC Craft Study's P0 (`~/Documents/Female_PC_Craft_Study_20260823/proposal_for_skill.md`) said `gates.py` must count a `block_pool` as one representative variant, to ship *"first, alone"*, because otherwise *"the scoreboard will punish authors for using it."* P1–P6 shipped 2026-08-24; P0 never did. It was specified when **no v2 game used a pool** — `mrs_vance` now ships **69 pools / 221 variants**, so it became testable. Scored three ways with `_collect` patched: `location fill` reads **12,509 words / 14-of-14 on budget** under both folding (today) and splitting, and **8,706 / 4-of-14 under P0**. ⚠️ **P0 would have failed ten locations of a game that did exactly what the doctrine asked** — `the-board.md:92` defines `fill` as *"its word budget — in round numbers, written now, before the prose"*, a plan for prose **written**, and pooled variants are written. The field-baselined gates barely move either (explicit floor 13.9→14.1%, sentence median 9→9, G43 19.2→19.2/10k) because they are rates. ⚠️ **And the one gate that looked like the real defect was an artifact of my own probe:** `an explicit beat carries a clip` swung 100% → 9% under splitting only because splitting orphaned each variant from the node's sibling media — counted against the source, **32 of 32 explicit pool variants sit under a shared-node clip and 0 render dry**, so the 100% is honest. **No change to word counting.** The refusal is recorded on `Beat`; gate 1 now *reports* `N pools, M words per pass` alongside the budget it judges, the same reporting-not-judging move gates 19/20 and G43 already make. Verified: **0 verdicts moved across all 22 scorable games**, exactly 2 headlines changed. ⚠️ **Found in passing and NOT fixed (out of scope):** `sinks >= sources` is **nondeterministic** — three runs on unchanged code and input named `harbour_end`, `the_lets` and `the_arcade`. Headline only; no verdict depends on it. |
 | 2026-08-27 | **Study 7 (who the player is) written — the first study here whose subject is the skill's own grammar.** Item 14 opened. Prompted by `mrs_vance/REVIEW.md` G1 (eight v2 games, one Want shape) and by LO answering the prerequisite: the shape was **never chosen**. Re-interrogated the 30-game 7-24 corpus, whose own ten findings are all mechanism and never touch the `protagonist` or `premise` fields. ⚠️ **NOT virgin ground, and this was caught during verification, not before:** the **Female PC Craft Study of 2026-08-23** (`STATUS.md:186`) had already read the openings of the female-PC games. Its gender verdicts are **adopted** and moved a headline — `new-life-project` is selectable (*"Gender assigned at birth: Girl | Guy"*), so games matching all three of our choices are **3 of 30 / 3.1%**, not 4 / 5.2%; its `findings_A_want.md` already carries this study's §4 mechanism as **"character creation is a memory, not a slider"**; and its §0.1 already documented the 500-cap. Headline: **no game in the field is loved for its premise, 0 of 30**, so G1's proposed dedup step is **dropped**; the largest bucket is `freedom` at **25.9%**, and all eight v2 games let the player choose nothing. Cause is citable and upstream of any output check: `templates/want.md` writes `she/her` **21 times against `he/him` zero**, `the-want.md` 16 vs 0, and a grep of the whole skill for `male pc` / `blank.slate` / `self.insert` / `character creation` returns **0 hits** — v1 asked the question first of anything (`step-0-1-seed.md:17`) and v2 deleted it. ⚠️ **§3 reports no v1 defect**, because there is not one to report — v1 is thin and unmeasured here, and inventing one to fill the section is the failure this file exists to avoid. ⚠️ **The gender is not the finding**: 49 comments for a female lead against 11 opposed. ⚠️ **One measurement trap hit and thrown away** — `comments/*.json` caps at 500 per game, so the first axis table's medians were an artefact. ⚠️ **Converges with the 2026-06-17 research's *"no PLAYER-IDENTITY axis"***, so this is the second recording of the same gap. **§4 and §5 are `PROPOSAL — NOT APPLIED`**: no reference file, template or gate changed, and the candidate gate ("a start-of-game choice does not ship unless real content reads it") is explicitly **not built**, per this file's own Study 2 R4 precedent. Scripts and method: `~/Documents/Mopoga_Twine_Sandbox_Research_20260724/premise_study_20260827/`. |
 | 2026-08-16 | **Whole-skill audit — the declaration hole was a CLASS.** Reviewed all 23 gates, 11 reference files and 1,618 lines of `gates.py`. **R6 added:** a gate that walks the GAME and looks a declaration up cannot be weakened; a gate that walks the DECLARATION can. `guidance exists` owed one card when the declared cast was truncated to one; `ascent tiers expand the world` was *narrowed by declaring* — naming only healthy tiers hid a descent meter from the gate built to catch one. Both now walk the game. **R7 added:** all four PRESENCE gates are blind to the important instance missing — which is where BOTH of `forty_miles`' blockers hid. **Two new gates close them: 23 · speakers are named** (147/145/79 blocks missing `props.speaker` across the three v2 games — three for three, because the skill mentioned `thought_bubble` once and never showed its shape) and **24 · the obligation is charged** (a declared obligation must carry an `obligation_amount` and some choice must take it). `engine.md` §25 written and `speaker = "unknown"` promoted out of *Unverified* — it had been read during the review and left there. Also: the stale "recompute the fill" instruction had a second home in `state.md`; **nine gates were documented in zero reference files**, now indexed in `SKILL.md` (23/23 findable); and `the-surfaces.md` called gate 20 by a name the board never prints. Scores: forty_miles 19/23, steam 15/21, back_home 11/19. |

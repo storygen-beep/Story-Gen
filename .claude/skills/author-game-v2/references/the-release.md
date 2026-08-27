@@ -78,8 +78,9 @@ scenes. The measured failure inverted exactly this, sealing 95% of its explicit 
 room with no exits while its nine replayable loops scored zero.
 
 **TRIGGERED** — fires when her state matches.
-*"during the weekends"*, *"when exposed"*, *"at high stress"*. For a female protagonist this
-is the main heat engine. The loudest complaint in a comparable game's comments was *"I can go
+*"during the weekends"*, *"when exposed"*, *"at high stress"*. For the `female` protagonist
+declared in `want.player` — the default, and the case this was measured on — this is the main
+heat engine. The loudest complaint in a comparable game's comments was *"I can go
 out anywhere and NOTHING happens to me."* The consequence layer is not garnish.
 
 **MILESTONE** — fires once, then opens standing content.

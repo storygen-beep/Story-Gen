@@ -89,8 +89,9 @@ anything earlier:
 - **STANDING** — a place or person she can go to and act on, repeatedly. The main surface.
   Carries the explicit floor.
 - **TRIGGERED** — fires when her state matches. DoL's own commit language: *"during the
-  weekends"*, *"when exposed"*, *"at high stress"*. For a female protagonist this is the
-  main heat engine, not a garnish.
+  weekends"*, *"when exposed"*, *"at high stress"*. For the `female` protagonist declared in
+  `want.player` — the default, and the case this was measured on — this is the main heat
+  engine, not a garnish.
 - **MILESTONE** — fires once at a threshold, then opens standing content.
 
 **Every milestone names the standing content it turns on.** A milestone that opens nothing

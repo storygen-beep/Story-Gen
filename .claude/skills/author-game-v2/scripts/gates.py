@@ -5551,6 +5551,73 @@ def run_gates(model, game, state=None):
               "either move the gating to where the declaration says it lives, or change the "
               "declaration — but do not leave it in the middle, which is where every v2 game "
               "so far has landed by default (the-meters.md W1)"])
+    # G44 — the start choice is read. `the-want.md` §1.
+    #
+    # WHAT THIS CATCHES: fake freedom. A game that asks the player who she is and then
+    # discards the answer. Measured, that is not hypothetical — mrs_vance's opening
+    # SHIPPED asking four questions whose choices shared one target, carried no effects
+    # and differed in no way, and nothing in 41 gates could see it.
+    #
+    # WHY IT IS WORTH GATING: `freedom` is the largest single thing the field is loved
+    # for (25.9% of top-30 engagement, reason (1) weighted by comment count), while
+    # `premise` is 0 of 30. The choosing is the product.
+    #
+    # ⚠️ IT FAILS ONLY ON ZERO, AND THAT RESTRAINT IS THE POINT. A floor ("read at least
+    # N times") cannot be defended from the one game that has a start choice, and this
+    # skill has already had to supersede a whole doctrine built at n = 1 (the-meters.md
+    # W1, 2026-08-19). Declared-and-never-read needs no threshold — it is the defect by
+    # definition. Everything else is REPORTED so a distribution accumulates and a future
+    # floor can be read off it instead of invented.
+    #
+    # ⚠️ THE SET-SITE IS NOT CHECKED HERE. The flag-chain validator already hard-fails a
+    # flag whose setter is triggerless (`template_import.py`), and two instruments on one
+    # question is how gate 22 and the anchoring lint had to be split apart.
+    # ═════════════════════════════════════════════════════════════════════════
+    sc = (((state or {}).get("want") or {}).get("player") or {}).get("start_choice") or {}
+    sc_flags = [f for f in (sc.get("flags") or []) if isinstance(f, str) and f.strip()]
+    if state is None:
+        gate("the start choice is read", None,
+             "no v2_state.json — nothing declared to check against")
+    elif not sc_flags:
+        gate("the start choice is read", None,
+             "no want.player.start_choice declared — the player chooses nothing about her",
+             ["declare it: want.player.start_choice = { asked_at, flags } — the-want.md §1",
+              "measured: `freedom` is 25.9% of top-30 engagement and the largest single "
+              "bucket; `premise` is 0 of 30. All eight v2 games let the player choose nothing",
+              "a memory, not a slider — ask what the scene already asks and set a flag; do "
+              "not build a stat screen",
+              "this reports n/a, which is NOT a pass — an absence is not evidence"])
+    else:
+        # A READ is the flag appearing in ANY condition anywhere in the canvas tree —
+        # a trigger, a choice, a [group] band. All three are how a start choice earns
+        # its keep, so all three count; `_conditions_of` only reaches one object, so
+        # this walks the whole structure the way the flag census does.
+        sc_reads = collections.Counter()
+
+        def _walk_conds(obj):
+            if isinstance(obj, dict):
+                for it in _conditions_of(obj):
+                    key = it.get("flag_key")
+                    if key in sc_flags:
+                        sc_reads[key] += 1
+                for v in obj.values():
+                    _walk_conds(v)
+            elif isinstance(obj, list):
+                for v in obj:
+                    _walk_conds(v)
+
+        _walk_conds(game.get("canvases") or [])
+        dead = [f for f in sc_flags if not sc_reads[f]]
+        shape = " · ".join(f"{f} read {sc_reads[f]}x" for f in sc_flags)
+        gate("the start choice is read", not dead,
+             f"{len(sc_flags)} start-choice flag(s) — {shape}"
+             + ("" if dead else "  (count reported, not judged — see the header)"),
+             ([f"declared and NEVER READ: {', '.join(dead)}",
+               "a choice the game does not read is the fake-freedom defect this gate exists "
+               "for — the player is asked who she is and the answer is discarded",
+               "either read it (a [group] band, a gated rung) or drop it from "
+               "want.player.start_choice.flags"] if dead else []))
+
     # G19 — sentence length. The first gate here that measures WRITING.
     sent_words = [len(s.split())
                   for c in model for b in c["beats"]

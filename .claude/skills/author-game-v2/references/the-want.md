@@ -19,7 +19,97 @@ amendment — never let it quietly stop being true.
 
 Keep it to one page. Longer means vaguer.
 
-### 1. Who she is
+### 1. Who the player is — settled before she is described
+
+**Added 2026-08-27. Its absence is the single largest measured defect in this skill.**
+
+Eight v2 games shipped one protagonist: a woman 19–39, held in place by money she cannot reach, in
+second person, in a small town. Asked whether that was deliberate, LO said **"just happened."** It
+did, and this file is why:
+
+| | |
+|---|---|
+| `templates/want.md` — `she/her/hers` vs `he/him/his` | **21 vs 0** |
+| this file — same count | **16 vs 0** |
+| whole v2 skill — `male pc` · `blank.slate` · `self.insert` · `character creation` | **0 hits** |
+
+**The grammar answered before the author arrived.** v1 asked the question first of anything —
+`author-game/references/step-0-1-seed.md:17`, *"Pick the PROTAGONIST POV first — it decides which
+fantasies even work"*, with female-PC and male-PC as named forks — and v2 deleted it. `vesper` is the
+control: authored before this file existed, `narration_person = "third"`, none of the shape.
+
+So three things are **declared** here, into `v2_state.json` → `want.player`, before §1b writes a
+single line about her.
+
+#### Who is the player? — `female` · `male` · `picked`
+
+⚠️ **The default is `female` and the evidence is FOR it, not merely permissive.** Across ~22,600
+corpus comments: **49 asking for a female lead (364 likes) against 11 opposed (124 likes)**, and the
+opposed get argued down in their own threads. The top-30 count — 20 male, 6 picked, 4 female — is a
+**supply** figure; a player in that corpus did the arithmetic himself at *"44 games with the Female
+Protagonist tag and 100 with the Male Protagonist tag."* Do not read `4 of 30` as a verdict. The
+sharpest practical argument is also a player's: *"as a guy I like to play female mc since we can get
+to the spicy part quicker and not grind around like in male mc games."*
+
+What this section is fixing is not the answer. **It is that the answer was never a question.**
+
+#### Written character, or blank slate? — `written` · `blank`
+
+Field: **19 blank to 10 written**, and blank carries **80.4%** of the top-30's engagement. All eight
+v2 games are `written`, and no ledger records the choice being made. `written` is defensible — it is
+what real-porn media and a named cast pull toward — but an undeclared default is not a decision.
+
+#### What does the player choose about her at minute zero?
+
+**`freedom` is the largest single thing this field is loved for.** Classifying reason (1) of every
+top-30 game's *"why players love it"*, weighted by comment count:
+
+```
+freedom 25.9% · performers 22.0% · systems 15.8% · volume 15.6%
+story 7.3% · characters 7.0% · cadence 5.4% · kink 0.8%
+
+premise 0.0%   <- not one game in thirty is loved for its setup
+```
+
+The #1 game's #1 reason is *"farmer, slave merchant, bounty hunter, cage fighter, Cannibal? You can
+be whatever you want."* **The choosing is the product; the premise is not.** That is also why the
+first fix proposed for this — a step checking a new premise against the repo — was dropped.
+
+**The rule: a memory, not a slider** (`~/Documents/Female_PC_Craft_Study_20260823/findings_A_want.md:93`).
+Course of Temptation never shows a stat screen; it asks what kind of teenager she was and initialises
+thirteen skills the player never sees. Ask something the scene is **already asking**, and set a flag
+from the answer.
+
+> **Worked example — `mrs_vance`, the only one that exists.** Its opening already asked the player
+> four questions and **discarded every answer**: both choices on `open_dorn_leaves.base` and both on
+> `.the_book` shared one target, carried no effects, and differed in no way. Nothing had to be
+> invented — the ledger scene already implies *have you done this before?*, so `the_book`'s two inert
+> choices became three, setting `past_books` / `past_road` / `past_counter`. Read at **5 sites each**:
+> a three-band ladder on the three daily work surfaces, plus a paired privilege rung on each.
+>
+> The `past_road` rung is the one that shows what a start choice is *for*: she takes the truck key off
+> the board herself, which is the bottom rung of this game's own declared ascent — *"she asks Cade for
+> the truck to leave the property at all."* **A start choice buys reach, not flavour** (§3).
+
+⚠️ **ADDITIVE ONLY.** Each original rung keeps every number it had and gains `<flag> is_false`, so the
+pair is mutually exclusive, no door closes, and a save made before the choice shipped carries no flag
+and reads exactly what it read yesterday. **A start choice that takes content away is the version
+players punish.**
+
+⚠️ **THE PLACEMENT TRAP, AND IT FAILS SILENTLY.** Adjacent `[group]` blocks merge into ONE if/elseif
+chain (`v2.py:14637`) and first match wins. Drop a past-ladder next to a surface's existing ladder and
+**that ladder becomes unreachable for every player carrying a past** — no error, no build warning, the
+prose simply stops appearing. Both surfaces this was first built on already had one: `work_books` a
+Cade-trust band, `work_counter` a four-band `standing` ladder. Separate the two chains with any
+non-`group` block.
+
+**The check.** Gate **"the start choice is read"** walks the game for reads of the declared flags. It
+reports `n/a` when nothing is declared — *which is not a pass* — and **fails only on zero**, because
+declared-and-never-read is the fake-freedom failure by definition and needs no threshold. It prints
+the count rather than judging it: one game is not a distribution, and this skill has already had to
+supersede one doctrine built at n = 1.
+
+### 1b. Who she is
 Her situation at minute zero, and what she has to lose. Concrete: a job, a debt, a room, a
 reputation. The thing that makes the first transgression cost something.
 
@@ -31,7 +121,8 @@ This is the line that decides whether the game can run forty updates. Test it: *
 release 41 do?* If you cannot answer, the appetite terminates and needs rewriting.
 
 ### 3. What she is becoming — stated as ACCESS
-The ascent. For a female protagonist this is **not money and not status** — it is reach.
+The ascent. For the `female` protagonist declared in §1 — the default, and the case this was
+measured on — this is **not money and not status**; it is reach.
 
 > Measured: the market's male-protagonist games run accumulation ladders (shop worker to CEO,
 > teacher to mayor). Its female-protagonist games run one global axis whose rise *expands what

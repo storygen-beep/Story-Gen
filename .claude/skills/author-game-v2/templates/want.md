@@ -6,7 +6,51 @@
 
 ---
 
-## 1. Who she is
+## 1. Who the player is — answered BEFORE she is described
+
+> ⚠️ **This block did not exist until 2026-08-27, and its absence is why eight v2 games shipped the
+> same protagonist.** Nobody chose a woman eight times: this file wrote `she/her` twenty-one times and
+> `he/him` zero, so the grammar answered before the author arrived. v1 asked this first of anything
+> (`author-game/references/step-0-1-seed.md:17`) and v2 dropped the question.
+> Doctrine and the measurements: `references/the-want.md` §1.
+
+**Who is the player?** `female` · `male` · `picked at start`
+
+> Default **`female`**, and the reason travels with it so it stays a choice rather than a habit. In
+> ~22,600 corpus comments, **49 ask for a female lead against 11 opposed**, and the opposed get
+> argued down. `female 4 of 30` in the top ranks is a **supply** figure, not a verdict — one player
+> counted the tags at 44 female to 100 male. The strongest practical case is a player's own: *"as a
+> guy I like to play female mc since we can get to the spicy part quicker."*
+
+**Written character, or blank slate?** `written` · `blank`
+
+> The field runs **19 blank to 10 written**, and blank carries **80.4%** of the top-30's engagement.
+> ⚠️ **All eight v2 games are `written` and not one ledger records that anybody picked it.** `written`
+> is a legitimate answer — it is what real-porn media and a named cast want — but write it down.
+
+**What does the player choose about her at minute zero?** <the start choice, or `none`>
+
+> **`freedom` is the largest single thing the field is loved for — 25.9%**, ahead of performers,
+> systems and volume. **Not one game in thirty is loved for its premise.** So the choosing matters
+> and the setup does not.
+>
+> **A memory, not a slider.** Do not build a stat screen. Ask her something the scene is already
+> asking — the answer reveals what she did before — and set a flag from it. See §3: what the flag
+> buys is *reach*.
+>
+> ⚠️ **Additive only.** Every rung the choice touches keeps its original version behind
+> `<flag> is_false`. A start choice that takes content away is the version players punish, and a save
+> made before it shipped must read exactly what it read yesterday.
+
+Record all three in `v2_state.json` under `want.player`, with the start choice's flags — the gate
+**"the start choice is read"** checks the game against that declaration and reports `n/a` if it is
+missing, which is not a pass.
+
+> **A note on this file's own pronouns.** Everything below is written `she/her` because that is the
+> default above and the measured guidance in §3 is specific to it. **If you declared otherwise, swap
+> them as you fill it in** — the pronoun is downstream of the declaration, never the other way round.
+
+## 1b. Who she is
 
 <Her situation at minute zero. Concrete: a job, a debt, a room, a reputation.>
 
