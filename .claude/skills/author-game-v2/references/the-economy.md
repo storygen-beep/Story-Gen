@@ -117,6 +117,99 @@ an obligation that is *trivially* paid is not pressure either, and only the firs
 usually guarded against. **Price it against the income channels in both directions.** Count what a
 week actually earns before setting the amount, then check that a bad week hurts.
 
+> **This paragraph existed, in this file, with that emoji on it, and NINE OF TEN AUTHORS DID NOT DO
+> IT.** Measured 2026-08-27 across every game we have built: eight of ten clear the whole week's
+> obligation in under one day of the best job, median 0.48 days. The tenth — `forty_miles`, 245
+> against ~350 earned, the only one in the field's range — did the sum **in a prose comment in its
+> spec**, because this file asked for arithmetic and gave it nowhere to live. That is fixed below:
+> **declare `week_income` beside `obligation_amount`.** An instruction with no field is a wish.
+
+### R3b · An obligation that does not MOVE is soft at any value
+
+**This is the rule E1 was really about, and the number was not the answer.** A constant obligation
+against an income that rises is soft by construction: raising it moves the week it stops mattering
+and does not change the shape. Every field game whose economy stays live moves the number.
+
+**Three shapes, all measured 2026-08-27. Pick the one your collector can justify.**
+
+| shape | mechanism | who ships it |
+|---|---|---|
+| **imposed ratchet** | the number climbs on its own as she earns | `degrees-of-lewdity`, `course-of-temptation` |
+| **cost follows holdings** | she bought something; it costs to keep | `sluttown-usa`, `the-hellfire-club`, `inseminator` |
+| **the tier you chose** | the number is a function of what she is living in | `corpo-life` |
+
+**1 · The imposed ratchet, and the thing that makes it work.** `degrees-of-lewdity`, `Widgets_Rent`:
+
+```
+<<widget "rentpay">>
+  <<money `-($rentmoney + ($babyRent or 0))` "baileyRent">>
+  <<set $rentmoney to [10000,30000,50000,70000,100000,150000,200000][Math.clamp($rentstage,1,6)]>>
+  <<rentmod>>
+  Bailey … "Good … Next week I want <<printmoney $rentmoney>>… You didn't think it would get any
+  easier, did you?"
+  <<set $rentstage += 1>>
+<</widget>>
+```
+
+Money is in pennies (the widget says so: *`<!-- (amount in pennies…) -->`*, cross-checked against a
+link reading `£15` that charges `<<money -1500>>`), so that is **£100 → £2,000 over seven
+payments.** `rentmod` multiplies it by a **player-facing 10–300% slider** and doubles it if she took
+Robin's debt; `$babyRent` adds a per-child surcharge she can avoid by looking after them.
+
+⚠️ **`$rentstage` is read in exactly five places and NOTHING in that game is gated on it. She gets
+nothing for the rise.** It works because the rise is **delivered in the collector's mouth at the
+moment of payment** — the same widget that advances the stage prints the next number, so the player
+is never surprised, and Bailey is a believed predator. `course-of-temptation` does the identical
+thing through her mother (*"the interest is killing us… next week we're going to need $X"*).
+
+**So: a bare ratchet needs a person whose motive the player already accepts.** If the money is
+already owed to the household — a wage handed over, a till counted — a number that climbs on its own
+reads as the author turning a dial, and the shape below is the honest one.
+
+**2 · Cost follows holdings — the shape that needs no collector.** `sluttown-usa` charges
+`$serverRent = ($runningServers * 50)` every Friday. She built the servers; they cost. The rise is
+*hers*, it is legible, and nobody has to justify it.
+
+**3 · The tier you chose, and the end state worth stealing.** `corpo-life` — the corpus game with
+**zero grind complaints** — sets rent from where she lives (`StoryCaption`):
+
+```
+Rented Small Apartment 200 · Spacious 800 · Luxury 10,000 · Penthouse 30,000
+Owned  (all eight tiers)  → 0
+```
+
+A 150× spread, and **owning zeroes the obligation.** Buying your way out of rent entirely is the
+economy's ending. Its extra apartments cost $1,000 and $20,000 a week and **buy content** —
+`Nene_Dinner_8` offers *"Why don't we go to my place?"* only when `$rent_studio_apart is 1`.
+
+### R3c · If the demand rises, the income has to rise with it
+
+⚠️ **Otherwise the ratchet is the corpus's single most-punished design.** The two field games that
+deliberately made money bite are the two whose players are angriest about it, and one of the devs
+answers in-thread that he is undoing it. The decisive complaint is four words long:
+
+> *"here u still grind for nothing."*
+
+**Grind is not the complaint. Grind that buys nothing is.** `course-of-temptation`'s answer is to
+denominate the payouts in the obligation itself — its homework jobs pay
+`Math.floor($weeklydebt * 0.15)` — so a rising debt is a **difficulty curve** and never more
+clicking.
+
+**Our engine has no computed effect values**, so do it with a band: gate a better-paying variant of
+an existing rung on the same flag that turned the obligation up, and keep the original behind the
+flag's `is_false`. Worked example, `mrs_vance` 2026-08-27: buying the truck adds `-22/day` on the
+day hook (`+154`/week of obligation) and turns a $34 parts errand into a $125 haul (`+455`/week).
+The week's demand went 260 → 414, she is 301 better off, and **both of those are her doing.**
+
+⚠️ **No engine change was needed for any of this and none should be reached for first.**
+`[engine.daily_tick]` already takes `traitEffects` with a per-effect condition gate
+(`template_import.py:706`), applied through `setup.applyAndNotifyTrait` (`v2.py:5586`) — so a daily
+upkeep **notifies the player** instead of draining silently. A silent charge meter is the one
+economy device the corpus universally hates (`sluttown-usa`'s, *"time-cost-without-content"*).
+A staged `[settings.rent] amount` would also make two surfaces lie — a `trait_bar max` set to the
+rent and any quest goal naming it — because `_traitMax` is static (`v2.py:16702`). A daily upkeep
+leaves the Friday number alone and both surfaces stay true.
+
 ### R4 · Prices move with state
 
 **Field: a median 24% of money movements carry a computed rather than a literal amount** — 86% at
@@ -299,10 +392,23 @@ the rule. Both rate checks print and never move the tally.
     "symbol":     "$",
     "obligation": "rent — Monday, from the landlord, in person",
     "obligation_amount": 120,
+    "week_income": 430,
+    "obligation_moves": "the boiler she bought — 15/week from the day it is in",
     "sinks":      ["rent", "the boiler", "the bus fare", "her phone"]
   }
 }
 ```
+
+**`week_income` is R3's arithmetic, given somewhere to live.** What a full week of the income rungs
+actually pays, written down where the obligation is — not an estimate of what a player will earn,
+the honest maximum, with the working. Declare it and the lint prints the ratio beside the two
+numbers; leave it out and the lint says so, because *"price it against the income channels in both
+directions"* has been in this file for a fortnight and nine of ten authors did not.
+
+⚠️ **This is a LINT and never a gate**, and the reason is in the data: `forty_miles` sits at 70% and
+`back_home` at 25%, and a threshold anywhere between them fails a game for obeying the doctrine.
+That is the error that demoted the anchoring check on 2026-08-15 and got P0 refused on 2026-08-27.
+The distribution accumulates until a floor can be read off it rather than invented.
 
 `symbol` is the notation every button, every paragraph and `[settings.rent] currency_symbol` must
 agree with (R7). Declaring the currency is strictly better than letting the gates infer it from
@@ -328,6 +434,7 @@ for in this game* asked at the point where it is still cheap to answer.
 | **Gate · the price is in one currency** | R7 — every notation on a button, plus the engine's own `currency_symbol`, resolves to ONE currency. A symbol and its spelled-out unit count as the same one |
 | **Lint · the currency in the prose** | the game's dominant-notation share against the field's 92% median, and its exact-amount-in-words rate against the field's 20% |
 | **Lint · the price is spelled out** | the form of every priced label — symbol / word / code — against the field's 94 / 5 / 1 |
+| **Lint · the obligation against the week** | R3 — `obligation_amount` over `week_income`, printed, never judged. Says so when `week_income` is not declared |
 
 **Whether the pressure is actually felt is deliberately not a gate.** Whether $120 against a $42 day
 *squeezes* is a play question. These five establish that a squeeze is possible; only a playthrough

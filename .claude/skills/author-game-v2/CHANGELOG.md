@@ -5,6 +5,100 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-27 — the obligation learns to MOVE, and money is asked whether it opens anything
+
+**Why.** `REVIEW.md` E1 asked one question — Mrs. Vance's week earns roughly four times her 260
+rent, should 260 go up? A research pass over 19 field games and our own ten
+(`~/Documents/Economy_Pressure_Study_20260827/`) answered **no, and the number was never the
+mechanism.** Three measurements:
+
+- **Their money buys content; ours buys meter points.** Seven corpus games sell a person, a scene or
+  an unlock — `degrees-of-lewdity`'s Robin (taking on his debt DOUBLES her rent and buys a love
+  interest), `patriarch`'s Lilith behind Villa Garcia, `corpo-life`'s marriage behind a 1M apartment.
+  Mrs. Vance's five purchases bought `clean +45`, `standing +4/+5/+6`, `trust +3/+4` at $2–$26
+  against $208 a day, and **zero of its 55 trait conditions read `money`.** Seven of our ten
+  rent-enabled games are the same; four price nothing in money at all.
+- **A constant obligation is soft at any value.** Eight of our ten clear the whole week in under one
+  day of the best job, median 0.48 days. Every field economy that stays live moves the number.
+- **Squeezing harder is the corpus's most-punished move.** The two games that made money bite are
+  the two whose players are angriest, one dev walking it back in-thread. The decisive complaint is
+  four words: *"here u still grind for nothing."*
+
+**⚠️ AND THE RULE THIS FILE ALREADY CARRIED DID NOT SURVIVE CONTACT WITH AN AUTHOR.**
+`the-economy.md` R3 has said *"price it against the income channels in both directions"*, with a
+warning emoji, since the file existed. **Nine of ten games did not do it.** The one that did
+(`forty_miles`, 245 against ~350) wrote the sum **in a prose comment in its spec**, because the
+ledger had no field for it. An instruction with no field is a wish — so R3 now has one.
+
+**Changed.**
+
+- **`references/the-economy.md`** — R3 gains the measured note that the rule was ignored nine times
+  out of ten. Two new rules:
+  - **R3b · an obligation that does not MOVE is soft at any value**, with the three field shapes and
+    which collector each needs: *imposed ratchet* (DoL's `[10000…200000]` pennies, £100 → £2,000 over
+    seven payments × a player-facing 10–300% slider × Robin's doubling × a per-child surcharge;
+    `course-of-temptation`'s mother), *cost follows holdings* (`sluttown-usa`'s
+    `$serverRent = $runningServers * 50`), *the tier you chose* (`corpo-life`'s 200/800/10,000/30,000
+    where **owning sets rent to 0**). ⚠️ Records that **nothing in DoL is gated on `$rentstage`** —
+    it is read in five places and none of them is content — so a bare ratchet buys the player
+    nothing and works only because the rise is delivered in a believed predator's mouth at the
+    moment of payment. Where the money is already owed to the household, that shape reads as the
+    author turning a dial.
+  - **R3c · if the demand rises, the income has to rise with it**, or the ratchet IS
+    "grind for nothing". `course-of-temptation` denominates its payouts in the debt
+    (`Math.floor($weeklydebt * 0.15)`); our engine has no computed effect values, so the same thing
+    is done with a band on an existing rung.
+  - The board block gains **`week_income`** and **`obligation_moves`**, and the checks table gains
+    the ratio lint.
+- **`references/state.md`** — the same two keys in the schema, with why each exists.
+- **`scripts/gates.py`** — two LINTS, no new gate and no threshold:
+  - **`money gates content, or only prices it`** splits gate 16's two channels. Gate 16 passes on
+    either and that stays right — the price channel was added 2026-08-14 to fix a real false
+    negative — but *money opens a door* and *money buys a thing* are different claims and the gate
+    cannot tell them apart. Run across our games it prints `⚠ NOTHING is gated on money` for
+    `forty_miles`, `the_season` and five others.
+  - **`the obligation against the week`** prints `obligation_amount / week_income`. An undeclared
+    week reports **NOT DECLARED, which is not a pass** — the same wording the climb and start-choice
+    gates use, because an absence is not evidence. A declared `obligation_moves` suppresses the
+    low-ratio note, because `week_income` is the BASELINE week by construction and nagging a game
+    whose obligation grows would be the check failing a game for obeying the doctrine.
+
+**⚠️ Why neither is a gate.** `forty_miles` sits at 70% and `back_home` at 25%; any threshold between
+them fails a game for doing the right thing. That is the error that demoted study 6's anchoring check
+(2026-08-15) and got P0 refused (2026-08-27), and it is the third time this skill has chosen to print
+a distribution instead of inventing a floor at n≈10.
+
+**Built first, taught second — again.** All of this ran in `mrs_vance` before a word of it was
+written here: an aspirational sink (a 2,600 flatbed she legally cannot own, so it goes in her
+brother's name), an upkeep that follows it (`-22/day` on `[engine.daily_tick]`), a haul that pays 125
+instead of 34 once the truck is hers, and `cade_covered` — the eviction flag that was **set by the
+engine and read by nothing**, two hits in the whole merged game — turned into a band, a rung, and an
+ask she can make before Friday.
+
+**⚠️ No engine change, and the staged-rent feature was deliberately NOT built.** `[engine.daily_tick]`
+already takes `traitEffects` with a per-effect condition gate (`template_import.py:706`), applied
+through `setup.applyAndNotifyTrait` (`v2.py:5586`) — so a daily upkeep **notifies** rather than
+draining silently, which is the device `sluttown-usa` is hated for. A DoL-style stage array would
+also have made two surfaces lie, since `_traitMax` is static (`v2.py:16702`): a `trait_bar max` set
+to the rent, and any quest goal naming it. A daily upkeep leaves Friday at 260 and both stay true.
+
+**Verified.** `mrs_vance` **42/42 judged, 1 n/a** — no pre-existing verdict moved; money conditions
+**0 → 5**; `cade_covered` hits 2 → 10 with four of them real. All 22 scorable games re-scored, no
+gate count changed anywhere (only lints were added), and the lint's three paths — declared,
+undeclared, no-obligation — each exercised on a real game. Live in headless Chromium
+(`games/mrs_vance/playtest_economy.py`, new): **14/14** — four bands render exactly one arm each,
+every new rung is clickable only in its own state, the upkeep takes 22 on `advanceDay()` with the
+truck and 0 without. Existing harnesses still green: quests 23/23, standing PASS, presence 10/10,
+walk-ins PASS.
+
+**⚠️ One research finding withdrawn in the same pass.** `FINDINGS.md` §2 listed
+`wasteland-lewdness`'s `$slaverent` as a scaling obligation. It is **income** — the passage is
+`Claim_your_weekly_profits`, *"Receive 20 grams of gunpowder per slave"*. The variable name matched
+the pattern and the direction did not, which is the same error class as reading `<<spend 5>>` as
+income. Corrected in place rather than deleted, because the claim had already been reported.
+
+---
+
 ## 2026-08-27 — the protagonist becomes a declaration, and the start choice gets a gate that fails only on zero
 
 **Why.** Study 7 measured that all eight v2 games hand the player a finished woman and no choices

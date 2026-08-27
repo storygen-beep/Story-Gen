@@ -121,6 +121,21 @@ belong here; only decisions, debts, and promises do.
       // ⚠️ The PRICE, as a number. Prose alone cannot be checked, and a game shipped with its
       //    central charge missing because only the prose existed. Gate 24.
       "obligation_amount": 245,
+      // ⚠️ THE OTHER HALF OF THAT NUMBER. What a full week of the income rungs actually pays —
+      //    the honest maximum with its working, not a guess at what a player will earn.
+      //    the-economy.md R3 has said "price it against the income channels in both directions"
+      //    since the file existed, and NINE OF TEN of our games did not: eight clear the whole
+      //    week in under one day of the best job. The one that did it wrote the sum in a prose
+      //    comment, because there was no field for it. This is the field. Printed by the
+      //    obligation-against-the-week LINT, never judged — forty_miles sits at 70% and
+      //    back_home at 25%, so any threshold between them fails a game for obeying the rule.
+      "week_income": 350,
+      // ⚠️ R3b. Present ONLY if the obligation moves, and it names the mechanism in one
+      //    line. A constant obligation against a rising income is soft at whatever value
+      //    it is set to, so this is the field's answer and not a nicety. Declaring it
+      //    also tells the obligation-against-the-week lint that a low baseline ratio is
+      //    by construction rather than an oversight.
+      "obligation_moves": "the caravan's upkeep — 45/week from the day she takes it on",
       "sinks":      ["rent", "the boiler", "the bus fare"]
     }
   },

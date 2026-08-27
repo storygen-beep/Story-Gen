@@ -3770,6 +3770,121 @@ def lint_currency_in_prose(model, game, state):
     return summary, sorted({r for u, r in rows if u != dom})[:40]
 
 
+def _declared_currency(state):
+    return (((state or {}).get("board") or {}).get("economy") or {}).get("currency")
+
+
+def lint_money_channel(model, game, state):
+    """HOW money is read — conditions vs prices. A LIST, never a score.
+
+    Gate 16 passes on either channel and that is deliberate: a game that prices its
+    choices instead of condition-gating them used to read as "nothing gates on money",
+    and that false negative was fixed on 2026-08-14. But the two channels are not the
+    same claim and the gate cannot tell them apart:
+
+      · a CONDITION on the currency means content exists that money OPENS
+      · a `costs` block means a thing can be BOUGHT
+
+    Measured 2026-08-27 across our ten rent-enabled games: **seven have zero money
+    conditions** and pass gate 16 on the price channel alone. The field median is 67.3
+    money conditions per 1,000 passages and every measured sandbox has some
+    (`the-economy.md` R1). A game at zero is not wrong about prices — it has simply
+    never put anything behind the money.
+
+    ⚠️ NOT A GATE, for the same reason the ratio below is not one: a floor cannot be
+    defended from ten games, and inventing one at n=1 is exactly how the meter doctrine
+    went wrong and had to be superseded on 2026-08-19. This prints, and the distribution
+    accumulates until a floor can be read off it.
+    """
+    currency = _declared_currency(state)
+    if not currency:
+        return ("board.economy.currency not declared — channel not counted", [])
+
+    cond_sites, price_sites = collections.Counter(), collections.Counter()
+
+    def walk(obj, cid):
+        if isinstance(obj, dict):
+            for it in _conditions_of(obj):
+                if it.get("trait_key") == currency:
+                    cond_sites[cid] += 1
+            for ch in ((obj.get("exit_block") or {}).get("choices") or []):
+                cs = ch.get("costs") or []
+                if isinstance(cs, dict):
+                    cs = [cs]
+                if any(isinstance(x, dict) and x.get("trait") == currency for x in cs):
+                    price_sites[cid] += 1
+            for v in obj.values():
+                walk(v, cid)
+        elif isinstance(obj, list):
+            for v in obj:
+                walk(v, cid)
+
+    for c in (game.get("canvases") or []):
+        walk(c, c.get("id") or "?")
+
+    n_cond, n_price = sum(cond_sites.values()), sum(price_sites.values())
+    summary = (f"`{currency}` is read by {n_cond} condition(s) across "
+               f"{len(cond_sites)} canvas(es) and priced by {n_price} choice(s) across "
+               f"{len(price_sites)} canvas(es)")
+    if not n_cond:
+        summary += (" · ⚠ NOTHING is gated on money — every purchase buys a number, "
+                    "and gate 16 passes on the price channel alone")
+    rows = [f"{cid}: {n} condition(s) read `{currency}`"
+            for cid, n in cond_sites.most_common(12)]
+    return summary, rows
+
+
+def lint_obligation_vs_week(model, game, state):
+    """The obligation against what a week actually earns — R3's arithmetic, printed.
+
+    `the-economy.md` R3 has said *"price it against the income channels in both
+    directions"* since the file existed, and measured 2026-08-27, **nine of our ten
+    rent-enabled games had not done it**: eight clear the whole week's obligation in
+    under one day of the best-paying job, median 0.48 days. The tenth wrote the sum in
+    a prose comment in its spec, because the ledger gave it nowhere to live. It has a
+    field now — `board.economy.week_income` — and this prints the ratio.
+
+    ⚠️ NEVER A GATE. `forty_miles` sits at 70% and `back_home` at 25%, and a threshold
+    anywhere between them fails a game for obeying the doctrine — the error that got the
+    anchoring check demoted (2026-08-15) and P0 refused (2026-08-27).
+    ⚠️ An undeclared `week_income` reports as UNDECLARED, which is not a pass. An
+    absence is not evidence — the same wording the climb and start-choice gates use.
+    """
+    econ = ((state or {}).get("board") or {}).get("economy") or {}
+    amount, week = econ.get("obligation_amount"), econ.get("week_income")
+    if not isinstance(amount, (int, float)) or not amount:
+        return ("no obligation_amount declared — nothing to price", [])
+    if not isinstance(week, (int, float)) or not week:
+        return (f"obligation {amount:g} · board.economy.week_income NOT DECLARED — "
+                "the ratio cannot be computed, which is not a pass",
+                ["the-economy.md R3 — count what a week actually earns and write it "
+                 "beside the amount. Nine of ten of our games skipped this step and "
+                 "eight of them clear the week in under a day of the best job."])
+    share = amount / week
+    summary = (f"obligation {amount:g} against a declared week of {week:g} — "
+               f"{share*100:.0f}% of the week")
+    rows = ["field reference: forty_miles 70% (the only one of our ten in the field's "
+            "range) · our median before this was measured: the whole week clears in "
+            "0.48 days of the best-paying job"]
+    # R3b — a declared moving obligation answers the low-ratio note before it is made.
+    # `week_income` is the BASELINE week by definition, so a game whose obligation grows
+    # with what the player buys will always read low here, and nagging it would be the
+    # check failing a game for obeying the doctrine.
+    moves = econ.get("obligation_moves")
+    if isinstance(moves, str) and moves.strip():
+        rows.append(f"the obligation MOVES (R3b): {moves.strip()}")
+        rows.append("the ratio above is the BASELINE week by construction — a moving "
+                    "obligation is priced against the week it starts in, not the week "
+                    "it ends in")
+    elif share < 0.30:
+        rows.append("⚠ under a third of the week, and the obligation does not move — "
+                    "board.economy.obligation_moves is not declared. Not a failure, but "
+                    "the-economy.md R3 is explicit that an obligation trivially paid is "
+                    "not pressure either, and R3b is the shape that fixes it without "
+                    "raising the number: make it MOVE with what she buys.")
+    return summary, rows
+
+
 def lint_price_spelled_out(model, game, state):
     """Priced buttons that do not use a symbol — a LIST.
 
@@ -6147,6 +6262,8 @@ def main():
     tcost_summary, tcost_lints = lint_time_cost_on_button(model, game)
     cur_summary, cur_lints = lint_currency_in_prose(model, game, state)
     price_summary, price_lints = lint_price_spelled_out(model, game, state)
+    chan_summary, chan_lints = lint_money_channel(model, game, state)
+    oblig_summary, oblig_lints = lint_obligation_vs_week(model, game, state)
 
     if "--json" in sys.argv:
         print(json.dumps({"gates": [dict(r) for r in results],
@@ -6195,7 +6312,11 @@ def main():
                                     "currency_in_prose": {"summary": cur_summary,
                                                           "findings": cur_lints},
                                     "price_spelled_out": {"summary": price_summary,
-                                                          "findings": price_lints}}},
+                                                          "findings": price_lints},
+                                    "money_channel": {"summary": chan_summary,
+                                                      "findings": chan_lints},
+                                    "obligation_vs_week": {"summary": oblig_summary,
+                                                           "findings": oblig_lints}}},
                          indent=1, default=str))
         return
 
@@ -6487,6 +6608,28 @@ def main():
               " labels use a symbol, 5% spell the unit out, 0.8% use a currency code. An"
               " invented unit used consistently — \"10 coin\", \"1000 caps\" — is the field's"
               " own pattern and is not a defect)")
+
+    if chan_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · money gates content, or only prices it — {chan_summary}")
+        for h in chan_lints[:10]:
+            print(f"          · {h}")
+        if len(chan_lints) > 10:
+            print(f"          · … and {len(chan_lints)-10} more")
+        print("          (the-economy.md R1 — a LIST, never a score. A CONDITION on the currency"
+              " means content exists that money opens; a `costs` block means a thing can be"
+              " bought. Gate 16 passes on either, deliberately — but seven of our ten"
+              " rent-enabled games have ZERO money conditions and pass on prices alone, against"
+              " a field median of 67.3 per 1,000 passages where every sandbox has some)")
+
+    if oblig_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the obligation against the week — {oblig_summary}")
+        for h in oblig_lints[:10]:
+            print(f"          · {h}")
+        print("          (the-economy.md R3 — a FIGURE, never a score. `forty_miles` runs 70% and"
+              " `back_home` 25%, so any threshold between them fails a game for obeying the"
+              " doctrine. Declare board.economy.week_income; an undeclared week is not a pass)")
 
     if world_lints:
         print(f"  {'─'*72}")

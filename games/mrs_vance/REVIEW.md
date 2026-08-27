@@ -46,16 +46,19 @@ read in one room — prose, payable now) and S1b (the meter decides nothing, on 
 does not hold up — a design question). **Both were paid the same day.** S1a in two instalments — the
 fourth `work_counter` rung, then the bank and the bar. S1b by pointing the meter at the Lane 3
 dispatcher: below `standing` 40 the four nameless walk-ins fire more often, and the meter stays
-one global number on purpose. `standing` reads **4 → 22**, in **1 canvas → 6**. **One** item is now a decision for LO rather than a defect
-call: E1 (the obligation's size). **G1 was the second and no longer is** — the study it asked for ran
-on 2026-08-27, answered its question and **refuted its proposed fix**; it is now an ordinary MED
+one global number on purpose. `standing` reads **4 → 22**, in **1 canvas → 6**. **No item is a decision for LO any more.** E1 was the
+last one, and the study it asked for ran on 2026-08-27 and **refuted its own question**: the number
+was never the mechanism, and it is **FIXED** without 260 moving a penny (§6). **G1 went the same way
+before it** — its study answered its question and refuted its proposed fix; it is now an ordinary MED
 SKILL item with a known direction (§0a **N13**, and `DOCTRINE_GAPS.md` Study 7). S1b's
-two questions are both answered in §5 — it delivers people, and it stays global — but its fourth
-possible shape, **pricing the world by band**, is deliberately left for LO because it lands on E1. L4 is history and cannot be edited; the correction of record is in §7. Plus **thirteen places
-this review was itself wrong**, recorded first in §0a — six caught before writing, and seven (N7–N13)
+two questions are both answered in §5 — it delivers people, and it stays global — and its fourth
+possible shape, **pricing the world by band**, is now unblocked: E1 is closed, and R3c's
+"income moves with the obligation" is the shape it was waiting for. L4 is history and cannot be edited; the correction of record is in §7. Plus **fourteen places
+this review was itself wrong**, recorded first in §0a — six caught before writing, and eight (N7–N14)
 caught only after they had shipped in this file, one of them as its single blocker, one as a
-whole fix that shipped green and was reverted, and one (**N13**) as an item whose proposed fix the
-field refuted outright. `v2_state.json` is no longer untouched: R1's pools
+whole fix that shipped green and was reverted, one (**N13**) as an item whose proposed fix the
+field refuted outright, and one (**N14**) where this file repeated a claim the game's own ledger
+made and neither had ever checked. `v2_state.json` is no longer untouched: R1's pools
 grew two locations past their declared `fill`, and both were corrected to what is built, still
 inside their `fill_finished`. The remaining SKILL-layer items (C2, Q1, W1, G1, half of D1, and the
 first-visit gate in §10) are recorded for LO to schedule.
@@ -387,6 +390,39 @@ of G1's fix.
 real pattern and then reached for the nearest mechanism to explain it — N8's census and now G1's
 dedup step. **A measured observation does not carry its own diagnosis.** G1 proposed a fix in the
 same breath as the finding and never asked the field whether the thing it was protecting had value.
+
+---
+
+### ⚠️ N14 · E1 called `cade_covered` "the mechanised centre of the whole premise". It was a dead flag.
+
+**Added 2026-08-27**, found while building E1's fix — not by reviewing E1, but by grepping for the
+thing E1 said was important.
+
+E1 quoted the game's own economy note approvingly:
+
+> *"The reversal, mechanised: she holds the drawer and is not on the account… Money failure feeds
+> the cast meters instead of ending the game."*
+
+and concluded that *"the most interesting outcome in the economy is the one the economy makes hardest
+to reach."* The premise of that sentence is that reaching it does something. **It did not.**
+`grep -c cade_covered` on the merged game returned **2**: the spec comment claiming the flag *"opens
+his ladder"*, and the `eviction_flag` key that arms it. The engine set it and **nothing anywhere read
+it.** It gated no canvas, no choice, no band, no card.
+
+So E1 understated its own item in one direction and overstated it in another: the failure branch was
+not merely hard to reach, it was **empty**, and the "mechanised" reversal was a comment.
+
+**What it says about this file's method.** N8 and N13 were the review reaching for a mechanism to
+explain a real pattern. This is different and worse: **the review took a claim from the artefact it
+was reviewing and passed it on without checking it.** The game's ledger said the flag opened a
+ladder; the review repeated it; both were written by the same author, so the agreement proved
+nothing. ⚠️ **A declaration is only evidence when something can contradict it** — the identical
+lesson `the-board.md` learned when three games back-filled `fill` from their own word counts and
+gate 1 compared each game to a record of itself. When a ledger asserts a mechanism, grep for the
+mechanism.
+
+Both are fixed in §6: the flag is read in three places, the comment says what is actually true, and
+the ledger note carries the correction rather than the claim.
 
 ---
 
@@ -1133,10 +1169,10 @@ prose-versus-structure slip as N8 and it nearly overturned a correct finding.
 
 ---
 
-# §6 · The obligation has no teeth
+# §6 · The obligation had no teeth — and the number was never the mechanism
 
 ### E1 · The week's income is roughly four times the week's demand
-**severity** OPEN — a design question for LO, not a defect call · **layer** GAME · **status** OPEN
+**severity** OPEN — a design question for LO, not a defect call · **layer** GAME + SKILL · **status** **FIXED 2026-08-27 — and not by raising 260**
 
 ```
 income surfaces (each day-capped by a *_done_today flag cleared in [engine.daily_tick])
@@ -1167,6 +1203,88 @@ Recorded as an **open question** rather than a defect because the numbers may be
 wants for a first release — a player who cannot pay rent in week one abandons the game, and every
 gate here passes. The question is whether 260 should rise, the sources fall, or the drawer count
 gain a demand the player cannot see coming.
+
+### Fix
+
+**The question was malformed, and the research says so.** A pass over 19 field games and our own ten
+(`~/Documents/Economy_Pressure_Study_20260827/`, `QUESTIONS.md` + `FINDINGS.md`) answered all three
+branches with **none of the above**:
+
+- **Raising 260 fixes nothing.** A constant obligation against a rising income is soft *by
+  construction* — it moves the week it stops mattering. Every field economy that stays live moves
+  the number: `degrees-of-lewdity` steps rent £100 → £2,000 over seven payments;
+  `sluttown-usa` charges `$runningServers * 50`; `corpo-life` derives rent from the home tier
+  (200/800/10,000/30,000) and **owning sets it to 0**.
+- **Cutting the sources is the corpus's most-punished move.** The two field games that made money
+  bite are the two whose players are angriest about it, and one dev is answering in-thread that he
+  is undoing it. The verdict is four words: *"here u still grind for nothing."*
+- **The actual defect was that money bought nothing.** ⚠️ **Zero of this game's 55 trait conditions
+  read `money`.** Its five purchases bought `clean +45`, `standing +4/+5/+6` and `trust +3/+4` at
+  $2–$26 against $208 a day. Seven of our ten rent-enabled games are the same; four price nothing in
+  money at all. The field runs a median 67.3 money conditions per 1,000 passages and **every**
+  measured sandbox has some.
+
+**⚠️ And a live defect found on the way, which this item had quoted approvingly.** The economy note
+E1 cites says `cade_covered` *"is a debt to Cade and opens his ladder."* **It opened nothing.** The
+flag was set by the engine and read by **nothing** — two hits in the entire merged game, that comment
+and the settings key that arms it. The most interesting outcome in the economy was the one the
+economy made hardest to reach *and* the one that led nowhere.
+
+**Built.** 260 is untouched. What changed is what money is FOR and what the week costs once she acts:
+
+```
+the truck        2600, a flatbed at the crossing she legally cannot own, so the
+                 paperwork goes in her 22-year-old brother's name
+                 bank (Dee: "not your name — you'll know a name")
+                 → the shop floor (the ask, gated `money gte 2600`)
+                 → the crossing (the purchase)
+the upkeep       -22/day, [engine.daily_tick] gated `truck_bought`, and it NOTIFIES
+                 (setup.applyAndNotifyTrait) — a silent drain is the charge meter
+                 sluttown-usa is hated for
+the haul         work_parts_run 34 → 125 with her own truck, 1h15 instead of 2h,
+                 no key off Cade's board. The original rungs keep every number and
+                 gain `truck_bought is_false`
+cade_covered     a band on hub_cade_office, a rung that exists only once the debt
+                 does, and an ASK gated `money lt 260` — she can choose the debt
+                 before Friday instead of only arriving at it by neglect
+```
+
+**The week:** obligation **260 → 414**, income **+455/week** from the haul against **−154** of
+upkeep. She is 301 better off, the obligation is 59% bigger, and **both of those are her doing** —
+which is the distinction between this and a number that climbs on its own. `degrees-of-lewdity` can
+do the latter because Bailey is a believed predator; here the Friday money is already the yard's, so
+an unexplained rise would read as the author turning a dial.
+
+**⚠️ No engine change, and the staged-rent feature was deliberately not built.** `[engine.daily_tick]`
+already takes `traitEffects` with a per-effect condition gate (`template_import.py:706`). A DoL-style
+stage array would also make two surfaces lie — the sidebar `trait_bar max = 260` and the quest goal
+`money gte 260`, both static — whereas a daily upkeep leaves Friday at 260 and both stay true.
+
+**Proved live.** `games/mrs_vance/playtest_economy.py` (new), headless Chromium: **14/14**. The four
+bands on the flatbed render exactly one arm each; every new rung is **clickable** only in its own
+state; the upkeep takes 22 off the drawer on `advanceDay()` with the truck and 0 without.
+⚠️ **The harness's first run reported two false failures** by asserting on text: a cost-blocked
+choice renders as `<span class="locked-choice">Buy it. ($2600, 1h) (Requires 2600 Money (you have
+2599))</span>`, so the label is on screen while the player cannot click it. It now asks whether an
+`<a>` exists — which is also the only question worth asking.
+
+**Gates 42/42, 1 n/a — no pre-existing verdict moved.** `money gates something` 8 canvases,
+`sinks >= sources` 7:6, `the obligation is charged` now reports *largest authored outflow 2600*.
+⚠️ `kerr_crossing` and `the_bank` fills **re-declared** (300→620, 500→660) because the design moved a
+surface into each — the reason is written beside both in `board.locations[].fill_note`, because a
+budget re-declared to clear a gate is the fudge `the-board.md` exists to prevent.
+
+**Skill layer.** *Would a correct `author-game` skill have prevented this?* **Yes, and it nearly
+did.** `the-economy.md` R3 has carried *"price it against the income channels in both directions"*
+with a warning emoji since the file existed — and nine of ten of our games did not do it, because it
+asked for arithmetic and gave it nowhere to live. `forty_miles`, the one that did, wrote the sum in a
+**prose comment in its spec**. Fixed: `board.economy` gains `week_income` and `obligation_moves`;
+`the-economy.md` gains **R3b** (an obligation that does not move is soft at any value, with the three
+field shapes) and **R3c** (if the demand rises the income must rise with it); `gates.py` gains two
+**lints** — the obligation-to-week ratio and a split of gate 16's two channels, which prints
+`⚠ NOTHING is gated on money` for seven of our own games. **Neither is a gate**: `forty_miles` sits
+at 70% and `back_home` at 25%, and a threshold between them would fail a game for obeying the
+doctrine. See the skill `CHANGELOG.md` for 2026-08-27.
 
 ---
 
