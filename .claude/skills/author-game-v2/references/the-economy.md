@@ -25,6 +25,133 @@ neither is a sandbox.
 
 A currency nothing reads is a number that goes up. Gate 16 checks for at least one.
 
+### R1b · What money buys has to STAY bought
+
+R1 is satisfied by a price on a cup of coffee. That is not what the field sells.
+
+> **Measured 2026-08-28** over 25 corpus games, ~55,000 passages
+> (`~/Documents/Accumulation_Study_20260828/`). Selection was structural, never by name, and every
+> figure below was then hand-read in the passage — the parent study's `$slaverent` error is the
+> reason for both halves of that sentence.
+
+**Nine of the corpus games sell the player a THING, and the four most-engaged sandboxes in the field
+all do.** A company, a car, five bedrooms, a home tier, a church, a lab, a farm, a bike, a hotel
+room, a rack of servers.
+
+An owned thing is not a meter, and the difference is structural:
+
+```
+owned thing    FEW write sites, MANY read sites    bought once; gates content forever after
+meter          many write sites, many read sites   every scene nudges it
+```
+
+| game | rank | what she owns | price | condition sites it gates |
+|---|---|---|---|---|
+| become-someone | 4 | a company, `$startup.level` 1→4 | 20k / 50k / 100k | **114** |
+| become-taxi-driver | 12 | a tuned car, `$car.body` 0→3 | shop | **46** |
+| destroyer | 2 | five room levels | 30k / 60k | 21 · 20 · 16 · 16 · 16 |
+| corpo-life | 9 | a home tier | four tiers | 79 |
+| apocalyptic-world | 1 | a church, 0→5 | 50 wood + 80 energy + 8h **per stage** | 8 |
+
+**Three shapes, and any of them is a correct answer:**
+
+1. **The level ladder** — one thing that upgrades. `become-someone`'s company at 20k → 50k → 100k.
+2. **The instalment build** — one thing bought in repeated payments. `apocalyptic-world`'s church:
+   five stages, each 50 wood and 80 energy and eight hours, with the progress on screen as a
+   percentage. This is why that game has **zero grind complaints in 820 comments** while running a
+   resource economy: the repetition is building something, and it says so every time.
+3. **The one-off possession** — bought once, kept. `destroyer`'s bedrooms.
+
+#### The four things the field does with it that we do not
+
+**a · The gate is COMPOUND.** Money alone never buys the next tier.
+
+```
+level 2 -> 3   $50,000  and at least TWO employees hired
+level 3 -> 4  $100,000  and at least FIVE
+```
+
+So grinding one channel cannot skip the arc. `become-taxi-driver` goes further and requires the
+asset *and* three separate relationships:
+`$lya.friend >= 130 and $mia.friend >= 95 and $neptuno.friend >= 90 and $car.fase >= 2 and $car.body >= 3`.
+
+**b · The asset is a SECOND AXIS on the people, not a parallel game.** Every one of
+`become-someone`'s asset gates is ANDed with someone's ladder —
+`$startup.level gte 4 && $tiffany.trust gte 15`, `$tammy.questmain gte 5 && $tammy.corr gte 40 &&
+$startup.level gte 4`. **An owned thing that only gates its own arc has been built as a side game.**
+
+**c · The locked state names its own price, and the finished state says it is finished.**
+
+```
+"You need $50,000 and at least two employees in order to upgrade the office"   red
+"Your office is fully upgraded!"                                               green
+```
+
+Which is `the-voice.md`'s locked-door rule, executed by the field's #4 game, on an asset gate. Our
+engine has this: `show_when_locked` + `locked_text`, and a cost-blocked choice already renders
+*"(Requires N Money (you have M))"* on its own.
+
+**d · It can be LOST, and losing it is recoverable.** `become-someone` runs a weekly payroll widget;
+fail it and `<<Bankruptcy>>` takes the company. `Bank Recover Company` buys it back for **$500**. Two
+of the nine assets carry upkeep at all (the other is `sluttown-usa`'s `$serverRent = $runningServers * 50`),
+so **upkeep is optional** — but where it exists it is the same object delivering the pressure, not a
+second system bolted on.
+
+#### ⚠️ The failure this rule exists to prevent, and it is ours
+
+```
+the_season   $20  work_store_run  sets has_boots      read 0 times
+             $5   work_store_run  sets truck_fuelled  read 0 times
+```
+
+**The player buys boots that fit for twenty dollars and the game never mentions them again.** The
+purchase, the flag and the price were all built; the doors were never cut. This is Study 7's
+fake-freedom defect in its economic form — *asked to choose, answer discarded* becomes *asked to pay,
+purchase discarded* — and the same zero-based test catches both.
+
+Across all eight v2 games at the time of measurement, **money bought exactly one thing that opened
+anything**: `mrs_vance`'s truck, `truck_bought`, 5 doors, shipped 2026-08-27 out of the economy pass
+as a sink with no doctrine behind it. Five of the eight games sell nothing at all.
+
+**The check.** Gate **`what money buys opens a door`** — a flag set by a choice that costs the
+currency, read zero times, is a FAIL. It fails only on zero, for the same reason
+`the start choice is read` does: one house with one asset is not a distribution, and a floor invented
+at n = 1 is how this skill lost its meter doctrine. The door counts print unjudged.
+
+### R1c · A repeatable she PAYS for deposits something
+
+The 2026-07-24 field report's critique #4 of us — *"our ambients re-roll but a repeated visit mints
+nothing; every repeatable should deposit into something"* — was written thirty-five days before it
+was measured, and measuring it narrowed it.
+
+A **paid repeatable** is a choice on a repeatable canvas costing money or energy, or 30 minutes or
+more. Across the eight v2 games:
+
+```
+                paid actions   deposit something   DEPOSIT NOTHING
+forty_miles          10               0                 10
+seventh_day         102              11                 91
+the_allowance        14               2                 12
+off_season           41              36                  5
+the_season           18              17                  1
+mrs_vance            47              46                  1
+ALL EIGHT           232             112                120   = 51.7%
+```
+
+`forty_miles` charges for diesel (£20), bleach (£6), the dryer (£1) and coffee (£1) and **grants
+nothing on any of its ten.** Its own TOML calls the diesel rung `SINK, £20` — it is obeying R2
+exactly.
+
+> ⚠️ **A pure sink is not a defect. A game made only of pure sinks is.** Nothing in this file
+> distinguished them, which is why ten of ten went out that way. R2 asks whether money leaves; R1c
+> asks whether anything remembers that it left.
+
+⚠️ **The broader phrasing is wrong and was rejected.** Counting *every* repeatable surface rather than
+paid ones gives 67% granting nothing — but that sweeps in ambient prose that fires for free, and an
+ambient is supposed to grant nothing. Shipping critique #4 as written would have failed correct work,
+which is the error that withdrew R4 and demoted study 6's anchoring check. **This is a lint. It
+prints the rate and does not judge it.**
+
 ### R2 · Sinks outnumber sources
 
 **Field: a median 2.2 spend-sites : 1 earn-site.** The reference game runs 1.76:1. The highest in

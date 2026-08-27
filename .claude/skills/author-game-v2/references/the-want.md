@@ -91,10 +91,25 @@ from the answer.
 > the board herself, which is the bottom rung of this game's own declared ascent — *"she asks Cade for
 > the truck to leave the property at all."* **A start choice buys reach, not flavour** (§3).
 
-⚠️ **ADDITIVE ONLY.** Each original rung keeps every number it had and gains `<flag> is_false`, so the
-pair is mutually exclusive, no door closes, and a save made before the choice shipped carries no flag
-and reads exactly what it read yesterday. **A start choice that takes content away is the version
-players punish.**
+⚠️ **ADDITIVE ONLY WHEN RETROFITTING.** Each original rung keeps every number it had and gains
+`<flag> is_false`, so the pair is mutually exclusive, no door closes, and a save made before the
+choice shipped carries no flag and reads exactly what it read yesterday. **A start choice that takes
+content away from an existing save is the version players punish.**
+
+⚠️ **THAT IS A SAVE-SAFETY RULE, NOT A DESIGN RULE, AND THE SCOPE WAS ADDED 2026-08-28.** Read as
+*"never close a door"* it contradicts the field, and the contradiction is measurable. `the-company`'s
+single most-liked reason for love is choice-consequence ownership — *"it only does that if you allow
+it to"* (39 likes), *"That's only because of your choices"* (27) — and it hard-locks a dom/sub route.
+Its single most avoidable complaint is that the lock is **silent**: *"If a choice locks you into a
+sub route, tell me that."*
+
+So in a game being designed, doors may close. **The rule is that they close out loud.** The corpus's
+best example is `become-taxi-driver`, whose gate is five terms —
+`$lya.friend >= 130 and $mia.friend >= 95 and $neptuno.friend >= 90 and $car.fase >= 2 and $car.body >= 3`
+— and whose refusal text names **every unmet term separately, with directions**: *"You need more
+friendship with Lya"*, *"You need a better car (From the city, go to 'Get in the car' and then
+'Street Race'…)"*. `the-voice.md` owns that half; `the-economy.md` R1b owns the asset the lock hangs
+on. Measured in `~/Documents/Accumulation_Study_20260828/` §4.
 
 ⚠️ **THE PLACEMENT TRAP, AND IT FAILS SILENTLY.** Adjacent `[group]` blocks merge into ONE if/elseif
 chain (`v2.py:14637`) and first match wins. Drop a past-ladder next to a surface's existing ladder and

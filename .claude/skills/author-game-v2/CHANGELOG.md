@@ -5,6 +5,206 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-28 — the release boundary: the rule was right, and nothing in the repo was holding it
+
+**Why.** `games/mrs_vance/REVIEW.md` **B2** (MED, layer SKILL + TOOLING). LO's rule — *dev mode and
+missing media block **release**, not testing* — is correct, and it existed **only as a comment on a
+JavaScript object literal** (`games-data.js:44-49`), restated by hand in **nine of twenty-eight
+portal entries in three different wordings**. Nine hand-copies in three wordings is the signature of
+doctrine living in a file no tool reads. Measured before touching anything: **`gates.py` had zero
+lines that read a built game** (its only knowledge of dev mode was a TOML trigger marker,
+`:2621-2627`), and **`the-release.md` — 164 lines, 8 headings, named for this — never mentioned
+`--dev`, `--debug`, a placeholder or a build.** The whole 42-check instrument is aimed at
+`7_final_game.toml` and is structurally incapable of judging an artefact. A release is the one
+moment the artefact, not the source, is the thing being judged.
+
+**The drift was already shipped.** Parsing the flags-init map and `MissingMediaPage` out of all
+**29 built games**:
+
+| game | portal | `debug_mode` | `dev_mode_enabled` | missing at build |
+|---|---|---|---|---|
+| `the_inheritance` | *main grid, no `dev`, no `version`* | **true** | **true** | **115** |
+| `the_long_summer` | *main grid* | **true** | — | **122** |
+| `forty_miles` | `version: "0.1"` **and** `dev: true` | **true** | **true** | **78** |
+| `under_one_roof` | *main grid* | false | — | **183** |
+| `vesper` | `version: "0.2.0"` | false | — | 48 |
+| `two_weeks`, `new_in_town` | *main grid* | false | — | 0 |
+
+**`the_inheritance` sits in the published grid carrying a full `--dev --debug` build** — a sharper
+instance than the one B2 names, and nothing could have reported it. And the version triangle was
+stale where it existed at all: `forty_miles` reads portal `0.1` / `[project] 0.1.2` / archives
+`{0.1, 0.1.1, 0.1.2}` — **the portal two releases behind the number printed in the player's face.**
+`vesper` was the only game where all three agreed.
+
+⚠️ **A CORRECTION TO B2'S OWN FIX, shipped with the claim rather than dropped.** B2 specified failing
+on *"an `[IMAGE MISSING]` or `[VIDEO POOL MISSING]` marker"* in the built HTML. **Those markers are
+`--debug`-only** — `v2.py:12403` (`if not self.debug: return ''`), `:14753`, `:14903` — so a clean
+build renders **silent gaps** and the grep passes it. It would have passed `under_one_roof` with
+**183 missing files**: the proposed instrument measures the presence of *scaffolding*, not the
+absence of *media*. Two instruments survive a clean build and are read instead — the build's own
+flags-init map (`v2.py:1077`, `:1081-1082`), which is its record of the flags it was made with, and
+`MissingMediaPage`, which `v2.py:216` documents as *"always generated, but button only shows in
+debug mode"*.
+
+**Shipped.**
+
+- **`references/the-release.md`** — new `## § Shipping the build`. The six steps **lifted from
+  `games-data.js:44-49`, not invented** (the procedure was already correct, only in the wrong file),
+  the three-places-that-say-what-shipped table, and the rule the schema never stated and therefore
+  could not adjudicate: **`dev: true` and `version` are mutually exclusive.** Written as a command,
+  not a checklist, with §3a's warning restated — v1's thirteen-point pre-ship audit was followed by
+  the exact bug it was written to prevent.
+- **`scripts/gates.py`** — `--release <slug>`, dispatched at the top of `main()` and short-circuiting
+  exactly like the existing `--words` mode. Six checks: a build exists · built without `--debug` ·
+  built without `--dev` · no missing media · not filed under `dev: true` · the version agrees across
+  portal, `[project]` and archive. **Off for every ordinary run**, and it **exits non-zero**, which
+  `words_mode` deliberately never does — a release is the one moment something can reach a player.
+- **`DOCTRINE_GAPS.md`** — inventory item **16 · the release boundary** and a Log row; and
+  **`games/mrs_vance/REVIEW.md`** B2 closed with the corrected instrument recorded in the section
+  itself rather than silently dropped (**6 open / 18 fixed → 5 open / 19 fixed**; **B1 stays OPEN**,
+  it is the rebuild and it needs media harvested first).
+
+⚠️ **Two things deliberately NOT gated, each with the measurement that stopped it.**
+**Byte-equality of `output/index.html` against `releases/v<version>.html`**: vesper's differ
+(`bfd9f9bd…` vs `b038eb4c…`) and vesper is the one game whose version triangle is whole — a gate
+there would fail the only correct case, which is how R4, study 6's anchoring check and P0 each ended.
+It prints as a note and judges nothing. And **no repo-wide sweep**: `--release` is pointed at the
+game you are about to ship, because nine legacy main-grid entries carry no `version` and failing all
+nine on day one turns a release gate into noise.
+
+⚠️ **The media count is a build-time snapshot** — files added to disk after a build are not in it.
+That is correct for a gate that judges what *ships*, and it means the fix for a red is a **rebuild,
+never a file copy**. Said in the docstring, in the doctrine and in the check's own output.
+
+**Baseline, recorded as the number that has to come down: 0 of 29 builds are clean.** Best in the
+repo is 5/6 — `vesper`, `two_weeks`, `new_in_town`.
+
+**Verified.** Every branch exercised on real work rather than asserted: the debug/dev/media reds on
+`the_inheritance` and `forty_miles`, the stale-triangle red on `forty_miles`, the whole-triangle PASS
+on `vesper`, and the five-of-six clean-flag path on `two_weeks` / `new_in_town`. The branches no
+shipped game reaches — `dev: true` **and** `version` on one entry, no build at all, a slug absent
+from the portal, and `games-data.js` absent (which reports **n/a**, not a pass) — driven on a fixture
+root. **Ordinary runs are untouched: 0 verdicts moved and 0 tallies moved across all 22 scorable
+games**, diffed per-gate against the pre-edit file, not by comparing totals. ⚠️ Six games differ
+run-to-run on two headline lines (`also ranked:` ordering and the room named by `sinks >= sources`) —
+**proved inherent by running the identical file twice and getting the same wobble**, not caused by
+this change; the `sinks >= sources` nondeterminism was already logged during P0 and is still open.
+`ast.parse` clean. **`mrs_vance` stays 43/43, 1 n/a.** No game was rebuilt or modified.
+
+## 2026-08-28 — what she owns: the biggest thing the field is loved for, and it costs us almost nothing
+
+**Why.** Study 7 closed the minute-zero slice of `freedom` — the field's largest bucket at **25.9%**
+of top-30 engagement against `premise` at **0 of 30**. Reading the four games in that bucket showed
+the slice was small: *"you can be whoever you want"*, *career/path variety*, *zero-to-hero
+money/career*, *choice-consequence ownership* — **not one of them is an opening question.** So a
+study was run on the ongoing half (`~/Documents/Accumulation_Study_20260828/`, 25 corpus games,
+~55,000 passages).
+
+⚠️ **This is an ADOPTION, not a discovery, and that is the uncomfortable part.** The 2026-07-24 field
+report already ranked this defect of ours at **#3 of eight** — *"No meta-loop of accumulation…
+nothing in Vesper visibly compounds — money is rent-pressure, not a snowball; no owned asset grows.
+This is the deepest structural difference"* — plus **#4 repetition doesn't pay** and **#6 the world
+never pushes back.** Thirty-five days, and not one of the three was ever carried into
+`DOCTRINE_GAPS.md`'s inventory. A grep of the whole skill before this: `meta-loop` 0 hits,
+`owned asset` 0, `snowball` 0, `closes a door` 0, `irreversible` 0.
+
+**What was measured.** Selection structural, never lexical, then hand-read in the passage — the
+parent study's `$slaverent` error is why both halves of that sentence are there.
+
+- **Nine of 25 corpus games sell the player a THING, and all four of the most-engaged sandboxes do.**
+  `become-someone`'s company (`$startup.level` 1→4, 20k/50k/100k) gates **114** condition sites;
+  `become-taxi-driver`'s `$car.body` **46**; `destroyer`'s five bedroom levels 21/20/16/16/16.
+- **The discriminator is structural**, which is what makes any of this checkable: an owned thing has
+  FEW write sites and MANY read sites; a meter has many of both.
+- **One asset closes three of the report's eight critiques.** become-someone's company accumulates
+  (#3), is what the work deposits into (#4), and missing its weekly payroll calls `<<Bankruptcy>>`
+  and takes it away — recoverable for **$500** (#6).
+- **It costs no new surfaces.** `destroyer`, rank 2: buying the bedroom takes its random pool from
+  `[1,2,3]` to `[3,4,5,6,7,8,9]`. Same room, same link, no branch — and scene 3 is in both, so
+  nothing is removed. **A `[group]` with `conditions` wrapping a `block_pool` is already live in
+  `mrs_vance`** at `loop_cade.finish` and `loop_sherrod.finish`, 5 instances; consecutive groups
+  become one chain at `v2.py:14634-14640`. No engine work.
+- **The field also states its prices.** *"You need $50,000 and at least two employees in order to
+  upgrade the office"* / *"Your office is fully upgraded!"* — the-voice.md's rule executed by the
+  field's #4 game on an asset gate. And `become-taxi-driver`'s five-term gate names **every** unmet
+  term with directions.
+- **Our side:** money bought **exactly one** thing that opened anything across eight games —
+  `mrs_vance`'s truck, 5 doors, shipped 2026-08-27 out of the economy pass as a sink with no doctrine
+  behind it. **Five of the eight sell nothing at all.**
+
+⚠️ **The expensive form of `freedom` is refused, on the corpus's own evidence.** More branches is the
+obvious reading and it is wrong: **College Daze**, 2,248 engagement, researched then *excluded* —
+*"branch explosion collapsed its cadence"*, ~1 year stale. *"The freedom players loved is what a
+sandbox delivers via reusable state-gated systems instead."*
+
+⚠️ **A contradiction inside our own file, scoped rather than deleted.** `the-want.md` said ADDITIVE
+ONLY — *no door closes*. That is a **save-safety** rule for retrofitting, and read as design law it
+inverts the field: `the-company`'s single most-liked reason for love is choice-consequence ownership
+(*"it only does that if you allow it to"*, 39 likes) on a **hard route-lock**, and its single most
+avoidable complaint is that the lock is silent — *"If a choice locks you into a sub route, tell me
+that."* The rule is not *don't close doors*; it is **close them out loud.**
+
+**Changed.**
+
+```
+references/the-economy.md   +R1b  what money buys has to STAY bought — the field table, the three
+                                  shapes (level ladder / instalment build / one-off possession),
+                                  the compound gate, the second-axis rule, the stated price, and
+                                  upkeep as optional-but-load-bearing
+                            +R1c  a repeatable she PAYS for deposits something
+references/the-surfaces.md  R6    the pool itself can be a function of state — destroyer's
+                                  [1,2,3] -> [3,4,5,6,7,8,9], why scene 3 is in both, and an
+                                  explicit note that this is NOT gated because we have not built it
+references/the-want.md      §1    ADDITIVE ONLY scoped to retrofitting; the design rule beside it
+scripts/gates.py            +gate  `what money buys opens a door`
+                            +lint  `what a paid repeatable leaves behind`
+DOCTRINE_GAPS.md            Study 8 + inventory item 15 + Log row
+```
+
+**The gate ships as weak as G44 and for the same reason.** It **fails only on ZERO**: a flag bought
+with the currency, surviving the night, read nowhere. A game that sells nothing reports `n/a`, *which
+is not a pass*. Everything else prints its door counts **unjudged** — `mrs_vance`'s truck at 5 doors
+is one house with one asset, not a distribution, and a floor invented at n = 1 is how this skill lost
+its meter doctrine (`the-meters.md` W1).
+
+⚠️ **Day caps are carved out, not failed.** A flag `[engine.daily_tick]` wipes overnight is a day
+cap, and `off_season` prices four of them in coins perfectly legitimately — the same exclusion
+`_holder_day_capped` already makes for gate 18.
+
+⚠️ **The FAIL branch was found in shipped work rather than constructed.** `the_season` sells boots
+that fit for **$20** (`has_boots`) and fuel for **$5** (`truck_fuelled`) and reads **neither flag
+anywhere**. The player pays and the game never refers to it again — Study 7's fake-freedom defect
+with a price on it. Its scoreboard moves 39/41 → **39/42** and that red is correct. Not fixed here:
+it is another game and that is LO's call.
+
+**The lint is a RATE and never a score**, and the report's own phrasing had to be narrowed to ship.
+Critique #4 said *"every repeatable should deposit into something"*; counted that way, 67% of our
+repeatable surfaces grant nothing — but that sweeps in ambient prose that fires for free and is
+*supposed* to grant nothing. Shipping the sentence as written would have failed correct work, the
+error that withdrew R4 and demoted study 6's anchoring check. Narrowed to choices the player pays
+for: **51.7% across the eight**, `forty_miles` **10 of 10** deposit nothing, `mrs_vance` 1 of 47.
+**A pure sink is not a defect; a game made only of pure sinks is.** Fourth distribution this file has
+printed instead of inventing a floor.
+
+**Not built, deliberately.** No check on the pool-widening pattern — no v2 game does it yet, and *a
+rule specified before its doctrine has a real game to run against will fail correct work*. No
+`board.holdings` ledger field — the gate reads the asset out of the TOML, and a field with no use
+would have produced eight new "not declared" reports and told no one anything.
+
+**Verified.**
+
+```
+mrs_vance      42/42 -> 43/43 judged, 1 n/a      truck_bought (2600) opens 5   PASS
+off_season     39/41 -> 40/42 judged, 2 n/a      meter_fed_once (3) opens 1    PASS
+the_season     39/41 -> 39/42 judged, 2 n/a      has_boots / truck_fuelled     FAIL  (correct)
+forty_miles, seventh_day, steam, the_allowance, the_inheritance, vesper,
+last_call, late_shifts                                                          n/a
+```
+
+**Every one of the 12 scorable games gained exactly one row and no pre-existing verdict moved** —
+checked by diffing the full per-gate list against `git show HEAD:…/gates.py`, not by comparing
+totals.
+
 ## 2026-08-27 — the obligation learns to MOVE, and money is asked whether it opens anything
 
 **Why.** `REVIEW.md` E1 asked one question — Mrs. Vance's week earns roughly four times her 260

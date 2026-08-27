@@ -23,6 +23,9 @@ Usage:
     python3 gates.py --words <path>         # the vocabulary lint on ANY text file,
                                             #   for the WANT and BOARD phases, before
                                             #   a game exists to measure
+    python3 gates.py --release <slug>       # the ARTEFACT, not the source: is the build
+                                            #   in games/<slug>/output/ shippable? Off for
+                                            #   every ordinary run; exits non-zero on a red.
 
 Why a real TOML parser and not grep: an earlier grep-based pass on this same file
 silently missed 24 `is_repeatable` lines (whitespace-aligned and unspaced variants)
@@ -3885,6 +3888,73 @@ def lint_obligation_vs_week(model, game, state):
     return summary, rows
 
 
+def lint_paid_repeatable_deposits(model, game, state):
+    """What a PAID repeatable leaves behind — a RATE, never a score.
+
+    `the-economy.md` R1c. The 2026-07-24 field report's critique #4 of us said *"every
+    repeatable should deposit into something"*. Measured 2026-08-28, that phrasing is too
+    broad to ship: counting every repeatable surface gives 67% granting nothing, but it
+    sweeps in ambient prose that fires for free, and an ambient is SUPPOSED to grant
+    nothing. Narrowed to the choices the player actually pays for — money, energy, or half
+    an hour or more — the figure is 51.7% across our eight v2 games, and `forty_miles` runs
+    10 of 10.
+
+    ⚠️ A pure sink is not a defect (R2 wants sinks). A game made only of pure sinks is.
+    ⚠️ NEVER A GATE, and this is the fourth time this file has printed a distribution
+    instead of inventing a floor: `mrs_vance` deposits on 46 of 47 and `forty_miles` on 0
+    of 10, and any threshold between them is a number nothing measured.
+    """
+    currency = _declared_currency(state)
+    paid = deposits = 0
+    empty = []
+
+    def choices_of(obj, out):
+        if isinstance(obj, dict):
+            if isinstance(obj.get("choices"), list):
+                out.extend(x for x in obj["choices"] if isinstance(x, dict))
+            for v in obj.values():
+                choices_of(v, out)
+        elif isinstance(obj, list):
+            for v in obj:
+                choices_of(v, out)
+
+    for c in (game.get("canvases") or []):
+        if not ((c.get("trigger") or {}).get("is_repeatable")):
+            continue
+        found = []
+        choices_of(c, found)
+        for ch in found:
+            costs = ch.get("costs") or []
+            if isinstance(costs, dict):
+                costs = [costs]
+            mins = ch.get("time_progression_minutes") or 0
+            if not costs and mins < 30:
+                continue
+            paid += 1
+            if (ch.get("effects") or ch.get("traitEffects")
+                    or ch.get("flagEffects") or ch.get("itemEffects")):
+                deposits += 1
+            elif len(empty) < 12:
+                price = next((f"{x.get('value')} {x.get('trait')}" for x in costs
+                              if isinstance(x, dict)), f"{mins}m")
+                empty.append(f"{c.get('id')}: \"{(ch.get('text') or '')[:44]}\" "
+                             f"costs {price} and leaves nothing behind")
+    if not paid:
+        return ("no paid repeatable choices — nothing to weigh", [])
+    rate = deposits / paid
+    summary = (f"{deposits} of {paid} paid repeatable choices deposit something "
+               f"({rate*100:.0f}%)")
+    if not deposits:
+        summary += " · ⚠ EVERY paid repeatable in this game is a pure sink"
+    rows = empty
+    if empty:
+        rows.append("R1c — R2 asks whether money leaves; this asks whether anything "
+                    "remembers that it left. A thing bought that stays bought is R1b.")
+    if currency:
+        rows.append(f"currency read as `{currency}`")
+    return summary, rows
+
+
 def lint_price_spelled_out(model, game, state):
     """Priced buttons that do not use a symbol — a LIST.
 
@@ -5733,6 +5803,107 @@ def run_gates(model, game, state=None):
                "either read it (a [group] band, a gated rung) or drop it from "
                "want.player.start_choice.flags"] if dead else []))
 
+    # G45 — what money buys opens a door. `the-economy.md` R1b.
+    #
+    # WHAT THIS CATCHES: a purchase the game forgets. `the_season` sells boots that fit
+    # for $20 (`has_boots`) and fuel for $5 (`truck_fuelled`), and BOTH flags are read
+    # zero times — the price, the flag and the shop were all built and the doors were
+    # never cut. Nothing in 44 gates could see it.
+    #
+    # WHY IT IS WORTH GATING: it is Study 7's fake-freedom defect in its economic form.
+    # There the player was asked who she is and the answer was discarded; here she is
+    # asked to pay and the purchase is discarded. Same shape, same zero-based test.
+    # Measured, the field sells a THING in nine of 25 corpus games and in all four of the
+    # most-engaged sandboxes — become-someone's company gates 114 condition sites,
+    # become-taxi-driver's car 46, destroyer's five rooms 21/20/16/16/16.
+    #
+    # ⚠️ IT FAILS ONLY ON ZERO, for the reason G44 does. `mrs_vance`'s truck opens 5 doors
+    # and it is the ONLY owned asset in eight games, so there is no distribution to read a
+    # floor off. The counts print unjudged until there is.
+    #
+    # ⚠️ A GAME THAT SELLS NOTHING REPORTS n/a, NOT PASS. Five of our eight sell nothing at
+    # all, and an absence is not evidence — the same wording the climb, start-choice and
+    # obligation checks use.
+    # ═════════════════════════════════════════════════════════════════════════
+    _cur = _declared_currency(state)
+    if not _cur:
+        gate("what money buys opens a door", None,
+             "board.economy.currency not declared — purchases cannot be identified")
+    else:
+        buys = {}                      # flag -> price paid for it
+
+        def _purchases(obj, cid):
+            if isinstance(obj, dict):
+                for ch in (obj.get("choices") or []):
+                    if not isinstance(ch, dict):
+                        continue
+                    cs = ch.get("costs") or []
+                    if isinstance(cs, dict):
+                        cs = [cs]
+                    price = next((x.get("value") for x in cs
+                                  if isinstance(x, dict) and x.get("trait") == _cur), None)
+                    if price is None:
+                        continue
+                    for e in (ch.get("flagEffects") or []):
+                        if isinstance(e, dict) and e.get("op") == "set" and e.get("flag"):
+                            buys.setdefault(e["flag"], (price, cid))
+                for v in obj.values():
+                    _purchases(v, cid)
+            elif isinstance(obj, list):
+                for v in obj:
+                    _purchases(v, cid)
+
+        for c in (game.get("canvases") or []):
+            _purchases(c, c.get("id") or "?")
+
+        # A READ is the flag in ANY condition anywhere — trigger, choice or [group] band,
+        # counted the way G44 counts a start choice rather than by reaching one object.
+        buy_reads = collections.Counter()
+
+        def _walk_buy_conds(obj):
+            if isinstance(obj, dict):
+                for it in _conditions_of(obj):
+                    if it.get("flag_key") in buys:
+                        buy_reads[it["flag_key"]] += 1
+                for v in obj.values():
+                    _walk_buy_conds(v)
+            elif isinstance(obj, list):
+                for v in obj:
+                    _walk_buy_conds(v)
+
+        _walk_buy_conds(game.get("canvases") or [])
+
+        # A flag the daily tick wipes overnight is a DAY CAP, not a possession, and a day
+        # cap priced in coins is a legitimate shape (off_season prices four of them). They
+        # are excluded here rather than failed — the same carve-out `_holder_day_capped`
+        # makes for gate 18.
+        _tick = ((game.get("engine") or {}).get("daily_tick") or {})
+        _nightly = {e.get("flag") for e in (_tick.get("flagEffects") or [])
+                    if isinstance(e, dict) and e.get("op") in ("clear", "unset", "reset")}
+        kept = {f: v for f, v in buys.items() if f not in _nightly}
+
+        if not kept:
+            gate("what money buys opens a door", None,
+                 f"nothing is bought with `{_cur}` that survives the night — "
+                 "the game sells no possession",
+                 ["the-economy.md R1b — nine of 25 corpus games sell the player a THING, "
+                  "and all four of the most-engaged sandboxes do",
+                  "a level ladder (a company at 20k/50k/100k), an instalment build (a "
+                  "church, five payments of 50 wood), or a one-off possession (a room)",
+                  "this reports n/a, which is NOT a pass — an absence is not evidence"])
+        else:
+            dead = [f for f in kept if not buy_reads[f]]
+            shape = " · ".join(f"{f} ({kept[f][0]:g}) opens {buy_reads[f]}"
+                               for f in sorted(kept, key=lambda k: -buy_reads[k]))
+            gate("what money buys opens a door", not dead, shape
+                 + ("" if dead else "  (doors reported, not judged — see the header)"),
+                 ([f"BOUGHT AND NEVER READ: "
+                   + ", ".join(f"{f} for {kept[f][0]:g} at {kept[f][1]}" for f in dead),
+                   "the player pays and the game never refers to it again — Study 7's "
+                   "fake-freedom defect with a price on it",
+                   "either read it (a [group] band, a gated rung, a wider block_pool — "
+                   "the-surfaces.md R6) or stop charging for it"] if dead else []))
+
     # G19 — sentence length. The first gate here that measures WRITING.
     sent_words = [len(s.split())
                   for c in model for b in c["beats"]
@@ -6217,6 +6388,241 @@ def words_mode(path):
     return 0
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# --release — the one mode that reads the ARTEFACT instead of the source
+# ─────────────────────────────────────────────────────────────────────────────
+# Everything above this line measures `7_final_game.toml`. That is the right
+# target for authoring and it is structurally incapable of seeing a build, which
+# is why the release boundary went unheld: LO's rule — dev mode and missing media
+# block RELEASE, not testing — lived only as a hand-copied comment on a JS object
+# literal (`games-data.js:44-49`), restated in nine of twenty-eight portal entries
+# in three wordings. Nine hand-copies in three wordings is doctrine in the wrong file.
+#
+# ⚠️ CORRECTION TO THE FIX AS IT WAS WRITTEN. `mrs_vance/REVIEW.md` B2 proposed
+# failing on an `[IMAGE MISSING]` / `[VIDEO POOL MISSING]` marker in the HTML.
+# Those markers are --debug ONLY — v2.py:12403 `if not self.debug: return ''`,
+# and again at :14753 and :14903 — so a CLEAN build renders silent gaps and a
+# marker grep passes it. Measured 2026-08-28: `under_one_roof` ships a clean build
+# with 183 missing files and ZERO markers. The grep measures the wrong thing.
+#
+# Two instruments survive a clean build, and both are read here instead:
+#   1. the flags-init JSON the generator always writes — `debug_mode` from
+#      v2.py:1077, `dev_mode_enabled` written only under --dev (v2.py:1081-1082).
+#      That is the build's own record of the flags it was made with.
+#   2. MissingMediaPage — v2.py:216, "always generated, but button only shows in
+#      debug mode"; _generate_missing_media_page at v2.py:10332 prints a real count
+#      in every build.
+#
+# ⚠️ The media count is a BUILD-TIME SNAPSHOT. Files added to disk after the build
+# are not in it. That is the correct semantic for a release gate — it judges the
+# artefact that ships, not the working tree — and it means the fix for a red here
+# is a REBUILD, never a file copy.
+
+_PORTAL_FILE = "games-data.js"
+
+
+def _portal_entries(root):
+    """Every entry in games-data.js as {slug: {...}}, or None if the file is absent.
+
+    Not a JS parser. Entries are brace-blocks at two-space indent and the fields
+    wanted here (`slug`, `dev`, `version`) are one-line literals; the only long
+    field is `summary`, a template literal that never opens a two-space brace.
+    """
+    path = os.path.join(root, _PORTAL_FILE)
+    if not os.path.exists(path):
+        return None
+    try:
+        text = open(path, encoding="utf-8").read()
+    except OSError:
+        return None
+    starts = [m.start() for m in re.finditer(r'^  \{', text, re.M)]
+    out = {}
+    for i, s in enumerate(starts):
+        chunk = text[s: starts[i + 1] if i + 1 < len(starts) else len(text)]
+        m = re.search(r'^\s*slug:\s*"([^"]+)"', chunk, re.M)
+        if not m:
+            continue
+        ver = re.search(r'^\s*version:\s*"([^"]+)"', chunk, re.M)
+        dev = re.search(r'^\s*dev:\s*(true|false)', chunk, re.M)
+        out[m.group(1)] = {"version": ver.group(1) if ver else None,
+                           "dev": (dev.group(1) == "true") if dev else False,
+                           "listed": True}
+    return out
+
+
+def _built_flags(text):
+    """(debug, dev, missing) read off the built HTML.
+
+    `text` is already html.unescape()d: the flags map and the missing-media page
+    both live inside passage source, so in the file itself they read
+    `&quot;debug_mode&quot;: true` and `Found &lt;strong&gt;50&lt;/strong&gt;`.
+    """
+    dbg = set(re.findall(r'"debug_mode":\s*(true|false)', text))
+    dev = set(re.findall(r'"dev_mode_enabled":\s*(true|false)', text))
+    m = re.search(r'Found <strong>(\d+)</strong> missing media', text)
+    if m:
+        missing = int(m.group(1))
+    elif "No missing media files found" in text:
+        missing = 0
+    else:
+        missing = None                      # the page is absent — not a pass
+    return ("true" in dbg), ("true" in dev), missing
+
+
+def release_mode(slug):
+    """Is this build shippable? The artefact, not the source.
+
+    OFF for every ordinary run — `gates.py <slug>` never reaches here — so nothing
+    about authoring changes. This is LO's rule expressed as code instead of as memory.
+
+    Exits NON-ZERO on any red. `words_mode` above is documented as always exiting 0
+    because it is a list and must never block a phase; this one is the opposite by
+    design, because a release is the one moment something can reach a player.
+    """
+    import html as _html
+
+    root = os.getcwd()
+    game_dir = os.path.join(root, "games", slug)
+    build = os.path.join(game_dir, "output", "index.html")
+
+    R = []
+
+    def check(name, ok, headline, detail=None):
+        R.append((name, ok, headline, detail or []))
+
+    print(f"\n  author-game-v2 release check — {slug}")
+    print(f"  {os.path.relpath(build, root)}")
+    print(f"  {'─'*72}")
+
+    # ── the build itself ────────────────────────────────────────────────────
+    if not os.path.exists(build):
+        check("a build exists", False,
+              "no games/%s/output/index.html — there is nothing to ship" % slug)
+        text = None
+    else:
+        check("a build exists", True,
+              f"{os.path.getsize(build)//1024} KB")
+        text = _html.unescape(open(build, encoding="utf-8", errors="replace").read())
+
+    if text is not None:
+        debug, dev, missing = _built_flags(text)
+
+        check("built without --debug", not debug,
+              "no debug scaffolding in the shipped flags" if not debug else
+              "debug_mode is TRUE — this build carries [IMAGE MISSING] placeholders "
+              "and the debug branches with them",
+              [] if not debug else
+              ["rebuild without --debug: manage.py package_from_toml --file "
+               f"games/{slug}/toml_phases/7_final_game.toml --output games/{slug}/output "
+               "--gen-version v2"])
+
+        check("built without --dev", not dev,
+              "no dev shortcuts in the shipped flags" if not dev else
+              "dev_mode_enabled is TRUE — the [DEV MODE] banner, the sidebar jump list "
+              "and every dev-shortcut canvas are live for the player")
+
+        if missing is None:
+            check("no missing media", False,
+                  "MissingMediaPage is absent from the build — nothing measured, "
+                  "and an absence is not a pass")
+        else:
+            check("no missing media", missing == 0,
+                  "0 missing at build time" if missing == 0 else
+                  f"{missing} media files were missing when this was built",
+                  [] if missing == 0 else
+                  ["a build-time snapshot: harvesting the files is not enough, the "
+                   "build has to be REDONE afterwards"])
+
+    # ── how the portal presents it ──────────────────────────────────────────
+    entries = _portal_entries(root)
+    if entries is None:
+        check("filed as published", None,
+              f"{_PORTAL_FILE} not found from {root} — run this from the repo root")
+        entry = None
+    else:
+        entry = entries.get(slug)
+        if entry is None:
+            check("filed as published", False,
+                  f"no entry for `{slug}` in {_PORTAL_FILE} — a game nobody can reach "
+                  "is not released")
+        else:
+            check("filed as published", not entry["dev"],
+                  "not filed under Dev / test builds" if not entry["dev"] else
+                  "`dev: true` still set — the portal files this under test builds, "
+                  "and that line is what moves it into the main grid")
+
+    # ── the version triangle ────────────────────────────────────────────────
+    # Three places say what shipped and nothing ever compared them: the portal
+    # (what the storefronts are told), [project] version (what the sidebar prints
+    # to the player) and the archive (the build itself, kept). Measured 2026-08-28:
+    # `forty_miles` reads 0.1 / 0.1.2 / {0.1, 0.1.1, 0.1.2} — the portal two
+    # releases behind the number in the player's face.
+    if entry is not None:
+        portal_v = entry["version"]
+        toml_path = os.path.join(game_dir, "toml_phases", "7_final_game.toml")
+        project_v = None
+        if os.path.exists(toml_path):
+            try:
+                project_v = ((_load(toml_path).get("project") or {}).get("version"))
+            except Exception:
+                project_v = None
+        archive = os.path.join(game_dir, "releases", f"v{portal_v}.html") if portal_v else None
+        have_archive = bool(archive and os.path.exists(archive))
+
+        if entry["dev"] and portal_v:
+            check("the version says what shipped", False,
+                  f"`dev: true` AND `version: \"{portal_v}\"` on the same entry — "
+                  "one says not published, the other says this is what is live")
+        elif not portal_v:
+            check("the version says what shipped", False,
+                  "no `version` on the portal entry — nothing can say what is live at "
+                  f"games/{slug}/output/",
+                  [f"[project] version in the TOML reads {project_v!r}" if project_v else
+                   "and the TOML declares none either"])
+        else:
+            agree = (project_v == portal_v) and have_archive
+            check("the version says what shipped", agree,
+                  f"{portal_v} — portal, [project] and archive agree" if agree else
+                  f"portal {portal_v} · [project] "
+                  f"{project_v if project_v else 'not declared'} · archive "
+                  f"{'present' if have_archive else 'MISSING'}",
+                  [] if agree else
+                  [f"the sidebar prints [project] version to the player; the portal is "
+                   f"what the storefronts are told",
+                   f"archive expected at games/{slug}/releases/v{portal_v}.html"])
+
+    for name, ok, headline, detail in R:
+        tag = "n/a " if ok is None else ("PASS" if ok else "FAIL")
+        print(f"  [{tag}]  {name:32s} {headline}")
+        for d in detail:
+            print(f"          · {d}")
+
+    judged = [r for r in R if r[1] is not None]
+    npass = sum(1 for r in judged if r[1])
+    print(f"  {'─'*72}")
+    print(f"  {npass}/{len(judged)} release checks pass")
+
+    # ── printed, never judged ───────────────────────────────────────────────
+    # ⚠️ The archive is NOT required to be byte-identical to output/. Measured
+    # 2026-08-28: vesper's differ (bfd9f9bd… vs b038eb4c…) and vesper is the one
+    # game in the repo whose version triangle is whole. A check here would fail the
+    # only correct case, which is how R4, study 6's anchoring check and P0 each ended.
+    if entry is not None and entry.get("version") and text is not None:
+        arch = os.path.join(game_dir, "releases", f"v{entry['version']}.html")
+        if os.path.exists(arch):
+            import hashlib
+            def _h(p):
+                return hashlib.sha256(open(p, "rb").read()).hexdigest()[:12]
+            a, b = _h(build), _h(arch)
+            print(f"  {'─'*72}")
+            print(f"  note · output/ vs releases/v{entry['version']}.html — "
+                  + ("identical" if a == b else f"differ ({a} vs {b})"))
+            print("          (reported, never judged — output/ is legitimately rebuilt after "
+                  "archiving. A gate here would fail the one game whose versions agree)")
+    print()
+    return 0 if judged and npass == len(judged) else 1
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -6226,6 +6632,11 @@ def main():
             print("usage: python3 gates.py --words <path/to/file>")
             sys.exit(2)
         sys.exit(words_mode(sys.argv[2]))
+    if sys.argv[1] == "--release":
+        if len(sys.argv) < 3:
+            print("usage: python3 gates.py --release <game-slug>")
+            sys.exit(2)
+        sys.exit(release_mode(sys.argv[2]))
     arg = sys.argv[1]
     path = arg if arg.endswith(".toml") else f"games/{arg}/toml_phases/7_final_game.toml"
     if not os.path.exists(path):
@@ -6264,6 +6675,7 @@ def main():
     price_summary, price_lints = lint_price_spelled_out(model, game, state)
     chan_summary, chan_lints = lint_money_channel(model, game, state)
     oblig_summary, oblig_lints = lint_obligation_vs_week(model, game, state)
+    dep_summary, dep_lints = lint_paid_repeatable_deposits(model, game, state)
 
     if "--json" in sys.argv:
         print(json.dumps({"gates": [dict(r) for r in results],
@@ -6315,6 +6727,8 @@ def main():
                                                           "findings": price_lints},
                                     "money_channel": {"summary": chan_summary,
                                                       "findings": chan_lints},
+                                    "paid_repeatable_deposits": {"summary": dep_summary,
+                                                                "findings": dep_lints},
                                     "obligation_vs_week": {"summary": oblig_summary,
                                                            "findings": oblig_lints}}},
                          indent=1, default=str))
@@ -6630,6 +7044,17 @@ def main():
         print("          (the-economy.md R3 — a FIGURE, never a score. `forty_miles` runs 70% and"
               " `back_home` 25%, so any threshold between them fails a game for obeying the"
               " doctrine. Declare board.economy.week_income; an undeclared week is not a pass)")
+
+    if dep_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · what a paid repeatable leaves behind — {dep_summary}")
+        for h in dep_lints[:10]:
+            print(f"          · {h}")
+        if len(dep_lints) > 10:
+            print(f"          · … and {len(dep_lints)-10} more")
+        print("          (the-economy.md R1c — a RATE, never a score. A pure sink is not a"
+              " defect; a game made only of pure sinks is. mrs_vance deposits on 46 of 47"
+              " and forty_miles on 0 of 10, so any threshold between them is invented)")
 
     if world_lints:
         print(f"  {'─'*72}")

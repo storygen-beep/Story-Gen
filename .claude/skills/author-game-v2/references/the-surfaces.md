@@ -751,6 +751,38 @@ tier the base node into T0/T1/T2 `[group]` blocks… Tiering the opener is a kno
 whose base node rewrites itself per stat band reads as N different scenes instead of one escalating
 hub.
 
+**⚠️ The pool itself can be a function of state, and the field's #2 game buys it.** Added
+2026-08-28 from `~/Documents/Accumulation_Study_20260828/`. `destroyer`'s bedrooms are purchased
+upgrades (30k, then 60k), and the first line of `Stepsister_s_bedroom.txt` is the whole mechanism:
+
+```
+<<if $sisbedroomlevel is 1>>     <<set _sceneOptions to [1, 2, 3]>>
+<<elseif $sisbedroomlevel gt 1>> <<set _sceneOptions to [3, 4, 5, 6, 7, 8, 9]>>
+```
+
+**Buying the room takes its pool from three scenes to seven.** No new surface, no new link, no
+branch — the room is where it always was and she reaches it the same way. `Stepmother_s_bedroom.txt`
+is the same shape, `[1, 2, 3]` → `[3, 4, 5, 6, 7, 8]`.
+
+Three things about that line carry the rule:
+
+- **Scene 3 is in BOTH pools.** The upgrade is not a swap. Nothing the player had is taken away, and
+  the overlap is how the field reconciles *a purchase must change something* with *never remove
+  content*.
+- **The room's picture changes with it** (`home/7.jpg` → `home/15.jpg`) — the purchase is visible
+  before it is mechanical. Same finding as Course of Temptation's dorm, which describes her
+  possessions rather than the room: *"You're the proud owner of a rock tumbler"*, four states, not
+  sexual and not required (`findings_C_loop.md:75`).
+- **The price carries a discount earned elsewhere** — `<<if $perk14 is true>><<set _price to _price * 0.8>>`.
+
+⚠️ **This is authorable here today and needs no engine work** — a `[group]` carrying `conditions` and
+wrapping a `block_pool` is live in `mrs_vance` at `loop_cade.finish` and `loop_sherrod.finish`
+(5 instances), and consecutive `[group]` blocks become one `if/elseif` chain at `v2.py:14634-14640`.
+**No v2 game gates a pool on an owned thing** — the five that exist ride a sex-act counter. This is
+recorded as a measured field pattern with the engine verified, and **it is deliberately not gated**:
+nothing of ours has built it yet, and a check written before its doctrine has a game to run against
+is what withdrew R4 and refused P0. `the-economy.md` R1b owns the asset half.
+
 **Mechanism 6 — who is standing there.** Added 2026-08-24. The five above change what the screen
 *says* or *offers*. Course of Temptation has one that changes **who the player finds**: whether an
 NPC has something on her is a term inside the person-selection predicate —

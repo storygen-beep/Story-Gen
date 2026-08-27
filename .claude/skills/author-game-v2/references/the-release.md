@@ -135,6 +135,83 @@ Posting volume predicts revenue (ρ = +0.58). Release *speed* does not (ρ = −
 
 ---
 
+## § Shipping the build — the boundary nothing was holding
+
+Everything above is about what a release **adds**. This is about the **artefact**, and until
+2026-08-28 no instrument in this project could see one: the whole scoreboard is aimed at
+`7_final_game.toml`, which is structurally incapable of judging a build.
+
+The rule is LO's and it is not the obvious one:
+
+> **Dev mode and missing media block RELEASE, not testing.**
+
+A test build with labelled placeholders and a jump list is a *good* test build. Nothing about
+authoring changes. The boundary is the moment it reaches a player.
+
+Six things separate a test build from a published one. Lifted from `games-data.js:44-49`, where
+this procedure was discovered once, written correctly, and left in the one file no tool reads —
+restated by hand in nine of twenty-eight portal entries in three different wordings, which is the
+signature of doctrine living in the wrong place:
+
+1. **Media harvested.** Every pool, plate and portrait.
+2. **Rebuilt with neither `--dev` nor `--debug`:**
+   ```bash
+   python3 manage.py package_from_toml \
+       --file games/<slug>/toml_phases/7_final_game.toml \
+       --output games/<slug>/output --gen-version v2
+   ```
+3. **Archived** to `games/<slug>/releases/v<version>.html` — the build itself, kept.
+4. **`version` set** on the portal entry **and matching `[project] version`** in the TOML.
+5. **`dev: true` dropped, in the same commit** — that line is what moves the game into the main grid.
+6. **`v2_state.json` promises reconciled** — paid or cut, per *Named but never paid* above.
+
+**`dev: true` and `version` are mutually exclusive.** One says not published; the other says this is
+what is live. The schema never stated the relationship, which is why nothing could adjudicate
+`forty_miles` carrying both.
+
+### The three places that say what shipped
+
+They drift, and nothing compared them until the check existed:
+
+| | what it is | who reads it |
+|---|---|---|
+| portal `version` | what the storefronts are told | gamcore / mopoga / itch |
+| `[project] version` | the sidebar footer | **the player, in the game** |
+| `releases/v<n>.html` | the build that shipped | you, when a bug report names a version |
+
+Measured 2026-08-28: `forty_miles` read `0.1` / `0.1.2` / `{0.1, 0.1.1, 0.1.2}` — the portal two
+releases behind the number in the player's face. `vesper` was the only game where all three agreed.
+
+### The check
+
+```bash
+python3 scripts/gates.py --release <slug>
+```
+
+Reads `games/<slug>/output/index.html` and the portal entry. **Off for every ordinary run** — this is
+the one mode that judges the artefact — and it exits non-zero on a red, unlike every lint in this
+skill.
+
+> ⚠️ **The same warning as step 5 of the loop applies here and is sharper.** This is a **command**,
+> not a checklist. `DOCTRINE_GAPS.md` §3a: v1's thirteen-point pre-ship audit was followed by the
+> exact bug it was written to prevent. Six boxes to tick would have gone the same way; six checks a
+> machine runs do not.
+
+⚠️ **What the check reads, and why it is not the obvious thing.** `[IMAGE MISSING]` and
+`[… POOL MISSING]` placeholders are emitted **only under `--debug`** (`v2.py:12403`, `:14753`,
+`:14903`). A clean build renders **silent gaps**, so grepping the HTML for those markers passes a
+game with 183 missing files. The check reads the build's own flags-init map (`debug_mode`,
+`dev_mode_enabled`) and the always-generated `MissingMediaPage` count instead.
+
+⚠️ **The media count is a build-time snapshot.** Files added to disk *after* a build are not in it.
+That is correct for a release gate — it judges what ships — and it means the fix for a red is a
+**rebuild**, never a file copy.
+
+⚠️ **The archive is reported, never judged.** `output/` is legitimately rebuilt after archiving, and
+a byte-equality gate would have failed the one game whose versions agreed.
+
+---
+
 ## § The first release (v0.1) — the one exception
 
 v0.1 builds the Board instead of adding to it.

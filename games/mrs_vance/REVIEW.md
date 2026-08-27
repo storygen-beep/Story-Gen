@@ -38,8 +38,12 @@ was found by **LO playing the built game** — a different instrument that finds
 defect, and the two are not merged so it stays visible which found what. Same split
 `off_season/REVIEW_1.md` records in its own header.
 
-**Current count: 7 open, 17 fixed** — 0 blockers, **0 high**, 2 med, 4 low, 1 open question, and
-**P1, Q1, Q2, C1, C2, D1, M1, M2, R1, W1, S1a, S1b, S2, L1, L2, L3 and T1 FIXED**. M1 and M2 were closed, **reopened**
+**Current count: 4 open, 19 fixed** — 0 blockers, **0 high**, **0 med**, 3 low, 1 open question, **1 parked**, and
+**P1, Q1, Q2, B2, C1, C2, D1, G1, M1, M2, R1, W1, S1a, S1b, S2, L1, L2, L3 and T1 FIXED**. **B2 closed 2026-08-28** — the release boundary is now `the-release.md` **§ Shipping the build** and `gates.py --release`, and ⚠️ **the instrument B2 itself specified was wrong**: the `[IMAGE MISSING]` markers it named are `--debug`-only, so the grep it asked for passes a clean build with 183 missing files. **B1 stays open** — it is the rebuild, and it needs media harvested first. **G1 closed
+2026-08-28** — its own ask (a premise-dedup step) was measured and *refused*, and the real defect it
+uncovered shipped as doctrine and a gate; the ongoing half it handed on is now `DOCTRINE_GAPS.md`
+Study 8, applied the same day. ⚠️ Closing it is a judgement, not a build: the retrofit across the
+other seven games is real work and it is tracked in G1's own table, not as an open review item. M1 and M2 were closed, **reopened**
 after LO rejected a game-layer fix the field disagreed with (§0a **N12**), and closed properly on
 2026-08-26 by the engine work they always needed. **No HIGH items remain.** S1 was **split** on 2026-08-27 into S1a (the meter is
 read in one room — prose, payable now) and S1b (the meter decides nothing, on a field figure that
@@ -429,7 +433,12 @@ the ledger note carries the correction rather than the claim.
 # §1 · The dev build is right for this phase, and the release boundary is unguarded
 
 ### B1 · The committed HTML is a `--dev --debug` artefact — correct for now, blocks release
-**severity** LOW — *downgraded from BLOCKER, see §0a N7* · **layer** GAME · **status** OPEN, at release only
+**severity** LOW — *downgraded from BLOCKER, see §0a N7* · **layer** GAME · **status** **PARKED by LO 2026-08-28** — *not being worked; the finding stands*
+
+⚠️ **LO took this off the task list on 2026-08-28.** Nothing below is withdrawn — the build in
+`games/mrs_vance/output/` is still a `--dev --debug` artefact with 50 missing media files, and
+`gates.py --release mrs_vance` scores it **1/6**. It is recorded, measurable on demand, and not
+scheduled. It is not counted as open work.
 
 Every measurement below held on re-check (2026-08-25). Only the severity and the prescription were
 wrong.
@@ -483,7 +492,7 @@ at `games-data.js:44-49`, and it is four steps in one commit:
 4. Drop `dev: true`, in the **same** commit — that is the line that moves the game into the main grid.
 
 ### B2 · Nothing enforces the release boundary — it lives in one hand-written comment per game
-**severity** MED · **layer** SKILL + TOOLING · **status** OPEN
+**severity** MED · **layer** SKILL + TOOLING · **status** **FIXED 2026-08-28** — *and the fix this section wrote would not have caught the worst case*
 
 B1 is only safe because someone remembers. The rule LO states — *dev mode and missing media block
 **release**, not testing* — is right, and there is no instrument anywhere in the repo that holds it.
@@ -534,6 +543,58 @@ the procedure is already correct, it is only in the wrong place.
 `DEV MODE` marker, an `[IMAGE MISSING]` or `[VIDEO POOL MISSING]` marker, `dev: true` still set on
 the portal entry, or a missing/stale `version`. It stays **off** for every ordinary run, so nothing
 about authoring changes — which is precisely LO's rule expressed as code instead of as memory.
+
+#### Status 2026-08-28: FIXED at the SKILL + TOOLING layer — and one instrument corrected
+
+Both halves shipped, and the second half **does not do what this section asked for.**
+
+⚠️ **The marker grep specified above measures the wrong thing.** `[IMAGE MISSING]`,
+`[VIDEO MISSING]` and `[… POOL MISSING]` are emitted **only under `--debug`** — `v2.py:12403`
+(`if not self.debug: return ''`), and again at `:14753` and `:14903`. A build made *correctly*, with
+no `--debug`, renders **silent gaps** and carries zero markers. Measured: **`under_one_roof` ships a
+clean build with 183 missing files and would have passed** the check this section wrote. The grep
+detects the presence of *scaffolding*, not the absence of *media* — it is the same shape of error as
+counting a `costs` block as a purchase and finding 35 of them, all energy.
+
+Two instruments survive a clean build, and the check reads those instead:
+
+| what | where | why it holds |
+|---|---|---|
+| `debug_mode` / `dev_mode_enabled` | the flags-init map the generator always writes — `v2.py:1077`, `:1081-1082` | the build's own record of the flags it was made with, not a symptom of them |
+| `MissingMediaPage` | `v2.py:216` — *"always generated, but button only shows in debug mode"* | a real count in every build, clean or not |
+
+**What shipped.**
+
+- **`references/the-release.md` — `## § Shipping the build`.** The six steps **lifted from
+  `games-data.js:44-49` rather than invented**, exactly as this section said to; the three places
+  that claim to say what shipped (portal `version`, `[project] version`, the archive) and the fact
+  that nothing ever compared them; and the relationship the schema never declared, which is why
+  nothing could adjudicate `forty_miles`: **`dev: true` and `version` are mutually exclusive.**
+- **`gates.py --release <slug>`.** Six checks — a build exists · built without `--debug` · built
+  without `--dev` · no missing media · not filed under `dev: true` · the version agrees across
+  portal, `[project]` and archive. Dispatched like the existing `--words` mode, **off for every
+  ordinary run**, and it **exits non-zero**, which `words_mode` deliberately never does.
+
+**What it found the moment it existed, none of which is fixed here.**
+
+| game | portal | what the build actually is |
+|---|---|---|
+| `the_inheritance` | *main grid — no `dev`, no `version`* | **`--dev --debug`, 115 missing** — published, and nobody knew |
+| `the_long_summer` | *main grid* | `--debug`, 122 missing |
+| `forty_miles` | `version: "0.1"` **and** `dev: true` | `--dev --debug`, 78 missing, and its TOML prints **0.1.2** to the player |
+| `under_one_roof` | *main grid* | clean flags, **183 missing, silently** |
+
+**Baseline across all 29 builds: 0 clean.** Best in the repo is 5/6 — `vesper`, `two_weeks`,
+`new_in_town`. Rebuilding any of them is a game-layer job and LO's call; this item was the
+instrument, and the instrument now exists.
+
+⚠️ **Byte-equality against `releases/v<version>.html` was deliberately NOT gated.** `vesper`'s
+`output/` and its own `v0.2.0.html` differ, and vesper is the only game in the repo whose version
+triangle is whole — a gate there would fail the one correct case. It prints as a note and judges
+nothing, the same demotion R4, study 6's anchoring check and P0 each ended in.
+
+⚠️ **B1 was the rebuild, and it is PARKED, not fixed** — LO took it off the task list on
+2026-08-28. This item was the instrument; the instrument exists and reports `mrs_vance` at **1/6**.
 
 ---
 
@@ -2532,7 +2593,8 @@ drew "I don't know who is who" from LO**, and on `late_shifts` (Cole: 807 words,
 ---
 
 ### G1 · Eight games, one Want shape — and the template picks the protagonist before the author does
-**severity** MED · **layer** SKILL · **status** OPEN · ⚠️ **diagnosis rewritten 2026-08-27 — the
+**severity** MED · **layer** SKILL · **status** FIXED 2026-08-28 — *its own ask was refused, and what
+it uncovered shipped instead* · ⚠️ **diagnosis rewritten 2026-08-27 — the
 original read this as a premise problem and proposed a premise check. Measured, the premise is not
 what players buy and the check is dropped. §0a N13.**
 
@@ -2675,12 +2737,54 @@ the script silently fell back to whole-`body` text and was diffing the sidebar's
 macro nesting had been correct all along. **A number that says "one of twelve cases failed" is a
 reason to check the instrument first.** Same lesson as the P0 clip artefact, two increments running.
 
-**Status: G1 stays OPEN as a SKILL item.** This is one game. The doctrine change and the proposed
-start-choice gate are Step 3, and `DOCTRINE_GAPS.md` Study 7 §5 still carries them as proposals — the
-whole point of building this first was to stop specifying a gate before a real game could run it.
+#### Step 3 SHIPPED 2026-08-27 (`21a879f`) — and this section was stale until 2026-08-28
 
-**Still open, deliberately:** the other four inert choices in `open_dorn_leaves.base` and elsewhere.
-One thing was tested at a time.
+The line that stood here said *"Step 3 is still a proposal."* It shipped an hour after Step 2
+was committed (`f34dc3b` 20:49, `21a879f` 21:52) and nobody came back to say so. What landed: `templates/want.md` §1 and
+`the-want.md` §1 ask **who is the player** before she is described, `want.player` joins
+`references/state.md`, and gate **`the start choice is read`** ships **failing only on zero** —
+the read-count floor was refused at n = 1. `DOCTRINE_GAPS.md` Study 7 is marked ✅ APPLIED and item
+14 is closed.
+
+#### Status 2026-08-28: **FIXED at the SKILL layer.** What remains is not G1.
+
+G1 asked for a step that compares a new game's premise against the repo. **That step was measured
+and refused** (N13 — no game in the top 30 is loved for its premise, 0 of 30). The real defect it
+uncovered — the protagonist was decided by the template's grammar rather than by an author — is
+**declared, taught and gated.** There is nothing left in this item's own scope.
+
+**What it uncovered and handed on, in the order I would do it:**
+
+| | where it lives now |
+|---|---|
+| **Seven of eight games ask the player nothing at all.** Measured 2026-08-28: **zero** opening forks that set a flag, in all seven. Not a declaration job — there is nothing to declare. | a retrofit, one game at a time |
+| **The gate cannot judge yet** — it fails only on zero because `mrs_vance` is the only game with a start choice. A floor needs a second and third. | blocked on the row above |
+| **The other four inert choices** in `open_dorn_leaves.base` and elsewhere. Measured across all eight games: **`mrs_vance` is the only one with this defect** — 4 fake forks of 81, every other game 0. | this game, small |
+| ⚠️ **The ongoing half of `freedom`, which is most of it.** The four games in that 25.9% bucket are loved for *"you can be whoever you want"*, career variety, a money snowball and choice-consequence ownership — **none of them an opening question.** | **`DOCTRINE_GAPS.md` Study 8, applied 2026-08-28** — see below |
+
+#### The follow-on: Study 8, and it says the missing thing is cheap
+
+Run 2026-08-28 (`~/Documents/Accumulation_Study_20260828/`, 25 corpus games, ~55,000 passages).
+
+**Nine corpus games sell the player a THING and all four of the most-engaged sandboxes do** — a
+company gating **114** condition sites, a car **46**, five bedrooms 21/20/16/16/16. Across our eight
+games **money bought exactly one thing that opened anything**: this game's truck, five doors, shipped
+the day before out of E1 as a sink with no doctrine behind it. Five of the eight sell nothing at all.
+
+**And the mechanism costs no new surfaces**, which is the only reason it is affordable at our size.
+`destroyer`, rank 2, buys a bedroom and the room's random pool goes `[1,2,3]` → `[3,4,5,6,7,8,9]` —
+same room, same link, no branch, scene 3 in both so nothing is taken away. A `[group]` wrapping a
+`block_pool` is already live in this game at `loop_cade.finish`.
+
+⚠️ **More branching is the wrong answer and the corpus says so** — College Daze, 2,248 engagement,
+researched then *excluded*: *"branch explosion collapsed its cadence."*
+
+⚠️ **An adoption, not a discovery.** The 2026-07-24 report ranked this at **#3, #4 and #6 of eight**
+thirty-five days earlier and no inventory item was ever opened. Now item 15.
+
+Shipped: `the-economy.md` **R1b**/**R1c**, `the-surfaces.md` R6's pool note, a scope on
+`the-want.md`'s additive-only rule, gate **`what money buys opens a door`** and a deposit-rate lint.
+This game goes **42/42 → 43/43 judged, 1 n/a.**
 
 ---
 
@@ -3308,3 +3412,53 @@ ladder that would have gone unreachable. Proved live: **4/4 distinct renders on 
 verification run was wrong** — `.passage` not `#passage`, so it diffed the sidebar's live meters and
 reported a defect that did not exist. Count unchanged at **7 open, 17 fixed**: G1 stays OPEN as a
 SKILL item, because one game is not doctrine and Step 3 is still a proposal.
+
+**2026-08-28 — G1 CLOSED, and the half it was hiding is now Study 8.** LO's call to continue G1.
+Reading it found the section stale: **Step 3 shipped on 2026-08-27 as `21a879f`**, an hour after
+Step 2, and the file still said *"Step 3 is still a proposal."* Corrected in place. G1's own ask — a
+premise-dedup step — was refused on measurement (N13), the defect it uncovered is declared, taught
+and gated, and there is nothing left in its scope, so it closes: **6 open, 18 fixed.**
+⚠️ **Closing it is a judgement and the work it handed on is real.** Measured the same day: **zero**
+of the other seven games has any opening fork that sets a flag, so their `n/a` is an absence of the
+feature, not paperwork; and `mrs_vance` is the **only** game of eight with a fake fork (4 of 81,
+every other game 0). Both are in G1's own table.
+**Then the larger half.** The four games in the `freedom` bucket — 25.9% of top-30 engagement — are
+loved for *"you can be whoever you want"*, career variety, a money snowball and choice-consequence
+ownership, and **not one is an opening question.** Study 8 (`~/Documents/Accumulation_Study_20260828/`,
+25 corpus games, ~55,000 passages) measured the ongoing half: **nine sell the player a THING and all
+four of the most-engaged sandboxes do** — a company gating **114** condition sites, a car 46, five
+bedrooms 21/20/16/16/16 — while across our eight games **money bought exactly one thing that opened
+anything**, this game's truck, shipped the day before out of E1 with no doctrine behind it. Five of
+eight sell nothing. ⚠️ **An adoption, not a discovery**: the 2026-07-24 report ranked this at #3, #4
+and #6 of eight, thirty-five days earlier, and no inventory item was ever opened. ⚠️ **More branching
+is the wrong answer and the corpus says so** — College Daze, 2,248 engagement, excluded for branch
+explosion. Shipped: `the-economy.md` **R1b**/**R1c**, `the-surfaces.md` R6's pool note, a scope on
+`the-want.md`'s additive-only rule (it is a save-safety rule, not a design law — *close doors out
+loud*), gate **`what money buys opens a door`** and a deposit-rate lint. ⚠️ **The gate's first red was
+found in shipped work, not constructed:** `the_season` sells $20 boots and $5 of fuel and reads
+neither flag anywhere — 39/41 → **39/42**. Not fixed here; another game, LO's call. This game:
+**42/42 → 43/43 judged, 1 n/a**, and every one of the 12 scorable games gained exactly one row with
+**no pre-existing verdict moved**, checked by diffing the full per-gate list against `HEAD`'s
+`gates.py` rather than comparing totals.
+
+**2026-08-28 — B2 fixed, and the fix B2 wrote would have passed the worst build in the repo.** The
+release boundary — *dev mode and missing media block RELEASE, not testing* — was held by nothing: it
+lived as a comment on a JS object literal (`games-data.js:44-49`), hand-copied into **nine of
+twenty-eight portal entries in three wordings**, while `gates.py` had **zero lines reading a built
+game** and `the-release.md` — 164 lines, named for this — never said `--dev`, `--debug` or *build*.
+Every gate here measures `7_final_game.toml`; a release is the one moment the **artefact** is what is
+judged. ⚠️ **B2's own specified instrument was corrected rather than adopted**: the `[IMAGE MISSING]`
+markers it named are emitted **only under `--debug`** (`v2.py:12403`, `:14753`, `:14903`), so a clean
+build renders silent gaps — `under_one_roof` ships **183 missing files and zero markers** and would
+have passed. The check reads the build's own flags-init map (`v2.py:1077`) and the always-generated
+`MissingMediaPage` (`v2.py:216`) instead. Shipped: `the-release.md` **§ Shipping the build** (six
+steps lifted from the JS comment, plus the rule the schema never stated — **`dev: true` and `version`
+are mutually exclusive**) and **`gates.py --release`**, six checks, off for every ordinary run,
+exiting non-zero. ⚠️ **What it found immediately, and none of it fixed here:** `the_inheritance` sits
+in the **published** grid as a full `--dev --debug` build with 115 missing files; `forty_miles`
+carries `dev: true` and `version: "0.1"` on one entry while its TOML prints `0.1.2` to the player.
+**Baseline 0 of 29 builds clean**, best 5/6. ⚠️ Byte-equality against the archive is **printed, never
+judged** — vesper's differ and vesper is the only whole triangle. This game's own score is untouched:
+**43/43 judged, 1 n/a**, with **0 verdicts and 0 tallies moved across all 22 scorable games**. B1
+stays open; it is the rebuild, and it needs media first.
+
