@@ -202,6 +202,18 @@ logs/
 !.claude/skills/**
 
 # ============================================================
+# DEV BUILDS — never committed, because this repo is PUBLIC and
+# games/<slug>/output/ is what the GitHub Pages portal serves.
+# A --dev build arms dev_mode_enabled at StoryInit, which renders the
+# <<devJumps>> sidebar (skip to any chapter) plus the stat-adjustment
+# controls. Publishing one hands every player the whole game at once.
+# So dev builds go to games/<slug>/output_dev/ and stay local — which
+# is still reachable from a phone, since Live Server is rooted at
+# story_gen/ and Tailscale reaches that. ship-gate: no --dev, no --debug.
+# ============================================================
+games/*/output_dev/
+
+# ============================================================
 # twine-game-explorer: browser profiles, saves, screenshots
 # (binary/transient runtime output — not source)
 # ============================================================
