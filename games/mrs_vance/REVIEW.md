@@ -38,14 +38,18 @@ was found by **LO playing the built game** — a different instrument that finds
 defect, and the two are not merged so it stays visible which found what. Same split
 `off_season/REVIEW_1.md` records in its own header.
 
-**Current count: 9 open, 15 fixed** — 0 blockers, **0 high**, 3 med, 4 low, 2 open questions, and
-**P1, Q1, Q2, C1, C2, D1, M1, M2, R1, W1, S2, L1, L2, L3 and T1 FIXED**. M1 and M2 were closed, **reopened**
+**Current count: 7 open, 17 fixed** — 0 blockers, **0 high**, 2 med, 4 low, 1 open question, and
+**P1, Q1, Q2, C1, C2, D1, M1, M2, R1, W1, S1a, S1b, S2, L1, L2, L3 and T1 FIXED**. M1 and M2 were closed, **reopened**
 after LO rejected a game-layer fix the field disagreed with (§0a **N12**), and closed properly on
 2026-08-26 by the engine work they always needed. **No HIGH items remain.** S1 was **split** on 2026-08-27 into S1a (the meter is
 read in one room — prose, payable now) and S1b (the meter decides nothing, on a field figure that
-does not hold up — a design question). **Three** items are now decisions for LO rather than defect
-calls: E1 (the obligation's size), G1 (whether the Want file's one shape is the genre) and S1b
-(whether `standing` stays one global number or scopes per place). L4 is history and cannot be edited; the correction of record is in §7. Plus **twelve places
+does not hold up — a design question). **Both were paid the same day.** S1a in two instalments — the
+fourth `work_counter` rung, then the bank and the bar. S1b by pointing the meter at the Lane 3
+dispatcher: below `standing` 40 the four nameless walk-ins fire more often, and the meter stays
+one global number on purpose. `standing` reads **4 → 22**, in **1 canvas → 6**. **Two** items are now decisions for LO rather than defect
+calls: E1 (the obligation's size) and G1 (whether the Want file's one shape is the genre). S1b's
+two questions are both answered in §5 — it delivers people, and it stays global — but its fourth
+possible shape, **pricing the world by band**, is deliberately left for LO because it lands on E1. L4 is history and cannot be edited; the correction of record is in §7. Plus **twelve places
 this review was itself wrong**, recorded first in §0a — six caught before writing, and six (N7–N12)
 caught only after they had shipped in this file, one of them as its single blocker and one as a
 whole fix that shipped green and was reverted. `v2_state.json` is no longer untouched: R1's pools
@@ -791,7 +795,7 @@ Proved live, 24 renders each: `loop_isaac.act` showed **3 of 3** body variants, 
 # §5 · The colour meter is read in one room
 
 ### S1a · `standing` moves 25 times and is read 4 times, all in the same canvas
-**severity** MED · **layer** GAME · **status** OPEN — *split from S1 on 2026-08-27*
+**severity** MED · **layer** GAME · **status** **FIXED** 2026-08-27 — 6 → 18 reads, 1 → 3 rooms, proved live
 
 > **Split note.** S1 was filed as one item: *the meter is under-read*. Measuring the field
 > (`Player_Legibility_Study_20260825` §44) showed it is two, with different fixes and
@@ -860,21 +864,55 @@ first.
 
 `standing` reads: **4 → 6**, still all inside `work_counter`.
 
-**Still open, and this is the rest of S1a:** the two rooms `WANT.md` §3 names and the build
-does not read in — `the_bank` (the clerk's tone) and `the_bar` (what the bar already knows).
+**The second payment closes it — the bank and the bar.** ✅ 2026-08-27. The two rooms
+`WANT.md` §3 names each got the same four-rung chain, on the repeatable ambient in each that
+already **wrote** the meter and never read it:
 
-**Verified.** `playtest_standing.py` (new, beside `playtest_presence.py`) drives all four
-bands live and asserts **exactly one** rung renders at each, probing inside each band rather
-than on its boundary: `5 → 25 → 55 → 80`, all PASS, and the sidebar word agrees at 80.
-⚠️ Its first run reported the lowest band empty; that was the probe, not the game —
-`work_counter` carries a 30% Lane 3 substitution (`walkin_office_driver`) that replaced the
-whole canvas on that roll. The harness now retries past it. Gates **40/40, 0 FAIL**;
-`location fill` 12,280 → 12,317 words against 12,429 declared, `the_office` 31% → 32%.
+```
+                      standing writes   standing reads
+the_bank  amb_bank_dee        -3              0  ->  4 rungs
+the_bar   amb_bar_regulars     —              0  ->  4 rungs
+          (plus buy_drink +6, hub_cade_bar -2, amb_bar_yard_drinks -4/+3, all read-free)
+```
+
+Both ladders change **tone, never fact**. Dee's account and the three years do not move at
+any band; what moves is how she says them — at `lt 15` she writes Dorn's name on the slip
+before you have said which account, and at `gte 70` she turns the screen a few degrees so
+you can see the figure, which she is not supposed to do. In the bar the room settles the
+question with one word and stops looking at `lt 15`, and at `gte 70` your name arrives down
+there ahead of you.
+
+`standing` reads: **6 → 18**, across **3 canvases in 3 rooms** — `work_counter`,
+`amb_bank_dee`, `amb_bar_regulars`. Against the field's median of 31 passages carrying a
+read we are still short, but the meter is no longer one room's private ladder, and all three
+of `WANT.md` §3's named examples are now built.
+
+⚠️ **The budget moved, and it had to.** Only one rung renders per visit, but `location fill`
+counts authored words, so both rooms went over their declared budget the moment the ladders
+landed — `the_bank` 300 → delivered 455, `the_bar` 400 → 548. This is the same growth R1's
+`block_pool`s caused in two other locations. `board.locations[].fill` raised to **500** and
+**600**, and `fill_finished` to **700** and **800**, in round numbers with headroom above
+what is built — the gate rejects a budget written from the delivered count
+(`gates.py:3744`, *"a budget that cannot be wrong is not a budget"*). `the_bank`'s
+`fill_finished` was **200 against a `fill` of 300**, the only inverted pair on the board, and
+that is corrected in the same edit.
+
+**Verified.** `playtest_standing.py` now drives **three** ladders, twelve bands, and asserts
+**exactly one** rung renders at each — probing inside each band rather than on its boundary,
+and with all twelve phrases unique across the three so a rung leaking from the wrong room
+cannot read as a pass. `5 → 25 → 55 → 80` in each of `work_counter`, `amb_bank_dee` and
+`amb_bar_regulars`: **12/12 PASS**, sidebar word agrees at 80.
+⚠️ The harness's first run against `work_counter` reported the lowest band empty; that was
+the probe, not the game — `work_counter` carries a 30% Lane 3 substitution
+(`walkin_office_driver`) that replaced the whole canvas on that roll. It retries past it, and
+the retry is harmless in the two ambients, which have no substitution and land first time.
+Gates **40/40, 0 FAIL**; `location fill` 12,317 → 12,627 words against 12,829 declared,
+**14/14 locations on their own budget**, anchor `the_office` 31%. `playtest_presence.py` 10/10, `playtest_quests.py` 23/23.
 
 ---
 
 ### S1b · The meter is read to colour and never to decide, on a field figure that does not hold
-**severity** OPEN — a design question for LO, not a defect call · **layer** GAME + SKILL · **status** OPEN
+**severity** OPEN — a design question for LO, not a defect call · **layer** GAME + SKILL · **status** **FIXED** 2026-08-27 — it delivers people now, and it stays global
 
 `0_systems_spec.toml` declared `standing` a meter that *"refuses almost nothing"* and cited
 *"the field reads reputation at 644 sites and refuses at 2% of them."*
@@ -909,12 +947,85 @@ refuse"* into *"does nothing"*, and `standing` was built to the collapsed versio
 field shows only the state. And `standing` is negative-capable (`-3.0`, `walkin_shop_tobin`);
 several field games are monotonic.
 
-**The open question for LO.** `WANT.md` §3 names three *places*. The two field games whose
-structure matches that sentence most closely both **scope the meter per place** —
-`family-ties` carries `$you.<venue>.fame` across six venues, `destroyer` writes the same
-encounter per location each rolling `$Respect`. Eight of thirteen scope it; five keep one
-global number. Both ship. Going scoped is a larger change than S1 and is filed here rather
-than smuggled into S1a.
+**The open question for LO — answered 2026-08-27, both halves.**
+
+**1 · Does it decide anything? Now yes: it delivers people.** That is `patriarch`'s shape and
+it was the cheapest of the four, because the machinery was already in the game and nobody had
+pointed it at the meter:
+
+```
+13 substitution rules across 7 hosts · 12 walk-ins · exactly ONE carried conditions
+```
+
+The line drawn is **the nameless walk-ins**. `standing` is the audience meter, so it governs
+the men with no name attached — the driver who asks for somebody who knows, the cup at the
+wired glass, the length of the shop past whoever is working, the phone light that goes off in
+the fourth cab. The five **named** walk-ins run on `trust` and `want` and are untouched: Cade,
+Isaac, Tobin, Booth and Dorn are relationships, not an audience.
+
+```
+below standing 40 -- the title is not holding -- the strangers come more often
+  work_counter    walkin_office_driver   0.30 -> 0.45
+  act_wash_bay    walkin_bay_seen        0.20 -> 0.35
+  work_parts_run  walkin_shop_watched    0.25 -> 0.40
+  work_walkround  walkin_row_cab         0.25 -> 0.40
+at or above 40, every rate is exactly what it was
+```
+
+**Direction matters and it is deliberate.** A rising audience meter that unlocked *more* sex
+would be backwards here: `WANT.md` §4 makes the fantasy the title being stripped —
+*"each flip is a man deciding out loud that the title does not apply to him."* High `standing`
+is the title **holding**. So the meter buys respect at the counter and costs traffic in the
+yard, and that is a trade the player can run in either direction. Nothing is locked at any
+value; every walk-in is reachable at every band.
+
+⚠️ **Appended, never prepended, and this is the whole engineering of it.** Rules in an
+`exclusive_group` share one dice over cumulative buckets (`v2.py:5345`), and a slot the dice
+claims whose conditions fail **falls through to solo rather than promoting the next rule**
+(`v2.py:5378`). Appending takes a bucket that already fell to solo, so at `gte 40` the world is
+bit-for-bit what it was. Prepending would have taken the bucket in *front* of an NPC walk-in
+and quietly cut Cade's and Tobin's rates at every band.
+
+⚠️ The condition set on each bonus rule is **copied from the rule above it** with the standing
+item added. A bonus rule that dropped the presence gate would still claim its slot and still
+fail — on the wrong reason, looking identical from outside.
+
+**2 · Global or scoped? Global, and this is a deliberate refusal of the field pattern.**
+Eight of thirteen scope it. `family-ties` scopes because `uni` fame and `onlyfans` fame are
+different audiences who do not talk to each other. This game's premise is the opposite, and
+`amb_bank_dee` says so on screen:
+
+> "She knows about the paper. **Everybody at this crossroads knows about the paper.**"
+
+One crossroads, one audience, one number. Scoping would have imported a field pattern whose
+cause we do not have.
+
+**Where `standing` stands now:**
+
+```
+             reads  writes   r:w   canvases carrying a read
+before S1        4      25   0.2            1
+after  S1b      22      25   0.9            6
+field median    62      28   2.3           31
+```
+
+**Not done, and it is still LO's call: the meter does not price anything.** `patriarch`'s
+fourth shape — weekly income by band — maps cleanly onto `work_counter`'s flat `+74`, and it
+would pull on **E1** (the week's income is four times the week's demand) at the same time.
+That is an economy change, E1 is filed as LO's decision, and it is not smuggled in here.
+
+**Verified.** `playtest_walkins.py` (new) drives `setup.checkAndSubstituteCanvas` 6,000 times
+per band per host — the function that owns the dice, so the distribution is measured rather
+than one draw of it sampled. All four lifts land between +0.141 and +0.163 against a declared
++0.15, the plain canvas absorbs the mirror of each, and **every named walk-in is flat to within
+0.009** across the two bands. Gates **40/40, 0 FAIL**; `playtest_standing.py` 12/12,
+`playtest_presence.py` 10/10, `playtest_quests.py` 23/23.
+⚠️ Two holes in the harness were found and closed before it was trusted, both of which would
+have made its *second* half vacuous while it still printed PASS. It first ran at an hour where
+no named walk-in could fire, so "flat" was comparing 0.000 to 0.000; and `requires_npc` is
+checked as *is that NPC where the **player** is* (`v2.py:5340`), so with `player.current_location`
+left at its initial `""` every named walk-in returned null regardless of the clock. The hours
+and the player's room are now part of the declared setup, with the reason written beside them.
 
 **Skill layer.** *Would a correct `author-game` skill have prevented this?* **Yes** — the
 game inherited the number from W5b. `the-meters.md` W5b, `SKILL.md`'s commitment table and

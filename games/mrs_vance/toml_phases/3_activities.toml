@@ -181,6 +181,16 @@ conditions       = { version = "1.0", logic = "AND", items = [
   { type = "npc_at_location", location_id = "the_shop_floor", operator = "is_present" },
 ] }
 
+# S1b — below 40 there is more often somebody at the glass. See the note at the counter.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_bay_seen"
+chance           = 0.15
+exclusive_group  = "bay"
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_shop_floor", operator = "is_present" },
+  { type = "trait", subject = "player", trait_key = "standing", operator = "lt", value = 40 },
+] }
+
 [[canvases.nodes]]
 id = "base"
 name = "Base"
@@ -251,6 +261,28 @@ chance           = 0.25
 exclusive_group  = "counter"
 conditions       = { version = "1.0", logic = "AND", items = [
   { type = "npc_at_location", location_id = "the_office", npc_id = "npc_cade", operator = "is_present" },
+] }
+
+# ── S1b · `standing` DELIVERS PEOPLE.  The nameless walk-ins -- the driver, the
+#    watcher at the glass, the man down the shop, the light in the cab -- are the
+#    audience, and `standing` is the audience meter. The named men run on trust and
+#    want and are untouched here. Below `standing` 40 the title is not holding
+#    ("The new wife" / "Mrs. Vance, to your face") and the strangers come more often.
+#
+# ⚠️ APPENDED, never prepended. These rules take a bucket that today falls to solo,
+#    so at `standing` gte 40 NOTHING changes -- the claimed slot fails its condition
+#    and falls through exactly as an empty bucket does (v2.py:5378). Prepending would
+#    have stolen the bucket in front of an NPC walk-in and cut its rate at every band.
+# ⚠️ The condition set is COPIED from the rule above and the standing item added. A
+#    bonus rule that dropped the presence gate would claim the slot and fail on the
+#    wrong reason, which reads identically from the outside and is not the same bug.
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_office_driver"
+chance           = 0.15
+exclusive_group  = "counter"
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "standing", operator = "lt", value = 40 },
 ] }
 
 [[canvases.nodes]]
@@ -379,6 +411,16 @@ conditions       = { version = "1.0", logic = "AND", items = [
   { type = "npc_at_location", location_id = "the_shop_floor", operator = "is_present" },
 ] }
 
+# S1b — below 40 the length of the shop is walked in front of more of them.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_shop_watched"
+chance           = 0.15
+exclusive_group  = "shop"
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_shop_floor", operator = "is_present" },
+  { type = "trait", subject = "player", trait_key = "standing", operator = "lt", value = 40 },
+] }
+
 [[canvases.nodes]]
 id = "base"
 name = "Base"
@@ -494,6 +536,15 @@ conditions       = { version = "1.0", logic = "AND", items = [
 target_canvas_id = "walkin_row_cab"
 chance           = 0.25
 exclusive_group  = "row"
+
+# S1b — below 40 the curtain in the fourth cab moves more nights than it does not.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_row_cab"
+chance           = 0.15
+exclusive_group  = "row"
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "standing", operator = "lt", value = 40 },
+] }
 
 [[canvases.nodes]]
 id = "base"

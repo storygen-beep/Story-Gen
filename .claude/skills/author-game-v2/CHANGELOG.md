@@ -5,6 +5,45 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-27 — the-meters.md: how "it delivers people" is actually built on this engine
+
+**Why.** The correction earlier today told authors that a rising audience meter *should* have
+mechanical consequence and named the field's four shapes — delivers people, modifies a roll,
+scales a rate, prices the world. It did not say how to build any of them here, and the first
+author to try it (`mrs_vance` S1b) found that the answer is the **Lane 3 dispatcher** and that the
+obvious way to write it is wrong. Doctrine that names a target and not a route is half a rule.
+
+**What changed.** `references/the-meters.md` gains a subsection, *"How 'it delivers people' is
+built on this engine"*, under **Rarely a lock is not the same as never mechanical**:
+
+- A substitution rule already takes a per-rule `conditions` block (`v2.py:5337`), so banding a
+  walk-in on a meter is one block — no engine work, no new primitive. Worked TOML included.
+- ⚠️ **Append, never prepend.** Rules in an `exclusive_group` share one dice over cumulative
+  buckets (`v2.py:5345`) and a claimed-but-failed slot falls to solo rather than promoting the
+  next rule (`v2.py:5378`). Appended, the bonus rule takes a bucket that already fell to solo and
+  nothing outside the band moves. Prepended, it silently cuts the rate of every rule below it —
+  including NPC walk-ins that have nothing to do with the meter.
+- ⚠️ Copy the conditions from the rule above and add the meter item; a bonus rule that drops the
+  presence gate still claims its slot and still fails, on the wrong reason.
+- ⚠️ Choose the meter's **direction** out loud. Delivering more as it rises is right when being
+  known is the fantasy and backwards when the fantasy is the title being stripped.
+- **Prove it with a distribution, not a playthrough** — and both halves, or the check is vacuous.
+  Two traps that make it read PASS while proving nothing are recorded: measuring at an hour where
+  no named walk-in can fire, and leaving `player.current_location` unset, because `requires_npc`
+  is checked as *is that NPC where the player is* (`v2.py:5340`).
+
+**Verified.** Every `v2.py` line reference read in the generator source before it was written
+down. The pattern is shipped in `games/mrs_vance/toml_phases/3_activities.toml` (four hosts) and
+measured by `games/mrs_vance/playtest_walkins.py` at 6,000 rolls per band per host: all four lifts
+land between +0.141 and +0.163 against a declared +0.15, and every named walk-in is flat to within
+0.009 across the bands. `gates.py mrs_vance` 40/40, 0 FAIL. Both harness traps above were live
+failures found in that run, not hypotheticals.
+
+⚠️ `the_season` also ships a `known` meter built on the pre-correction doctrine and is still
+untouched — a different game and a different session's call.
+
+---
+
 ## 2026-08-27 — W5b: the 644 was three games, and it taught a meter to decide nothing
 
 **Why.** `mrs_vance` shipped `standing` written at 25 sites and read at 4, all four in one canvas.

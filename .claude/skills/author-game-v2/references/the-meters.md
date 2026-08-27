@@ -397,6 +397,54 @@ falling counterweight and wrong for this. **W5 owns the meter that closes; W5b o
 talks.** If you find yourself gating content behind a rising audience meter, you have built W5's
 thing and should read W5's test instead.
 
+#### How "it delivers people" is built on this engine
+
+`patriarch`'s shape has a native home here and it is the **Lane 3 dispatcher**. A substitution rule
+already takes an optional `conditions` block, evaluated per rule at
+`v2.py:5337` — so banding a walk-in on the meter is one block, no engine work, no new primitive.
+
+```toml
+[[canvases.trigger.substitutions]]          # the existing rule, untouched
+target_canvas_id = "walkin_office_driver"
+chance           = 0.30
+exclusive_group  = "counter"
+
+# ...every other rule in the group, then LAST:
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_office_driver"   # the SAME walk-in, at a bonus rate
+chance           = 0.15
+exclusive_group  = "counter"
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "standing", operator = "lt", value = 40 },
+] }
+```
+
+⚠️ **APPEND it, never prepend it.** Rules sharing an `exclusive_group` share **one dice over
+cumulative buckets** (`v2.py:5345`), and a slot the dice claims whose conditions fail **falls
+through to solo rather than promoting the next rule** (`v2.py:5378`). Appended, the bonus rule
+takes a bucket that already fell to solo, so outside the band **nothing changes**. Prepended, it
+takes the bucket in *front* of the rules below it and silently cuts their rate at every band —
+including the NPC walk-ins, which have nothing to do with this meter.
+
+⚠️ **Copy the conditions from the rule above and add the meter item.** A bonus rule that drops the
+presence gate still claims its slot and still fails — on the wrong reason, looking identical from
+the outside.
+
+⚠️ **Decide which direction the meter points, out loud.** A rising audience meter that delivers
+*more* is right when being known is the fantasy. When the fantasy is the title being **stripped**,
+it is backwards, and the meter should buy standing in one room while costing traffic in another.
+Either is a trade the player can run; what fails is not choosing.
+
+**Prove it with a distribution, not a playthrough.** Call `setup.checkAndSubstituteCanvas` in a
+loop and count what comes back — it is the function that owns the dice, so a few thousand calls
+measure the shape instead of sampling one draw of it. Assert **both** halves: the rate moves
+inside the band, and every other outcome the host produces is **flat**. Two traps make the second
+half read PASS while proving nothing — measuring at an hour where no named walk-in could fire (so
+"flat" compares 0.000 to 0.000), and leaving `player.current_location` unset, because
+`requires_npc` is checked as *is that NPC where the **player** is* (`v2.py:5340`) and every named
+walk-in returns null regardless of the clock. `games/mrs_vance/playtest_walkins.py` is the worked
+harness.
+
 ### Its reads are one-line swaps, and that is why there are hundreds of them
 
 ```

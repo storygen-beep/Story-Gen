@@ -117,9 +117,9 @@
       "paid_in": null
     },
     {
-      "text": "`standing` is written 25 times across 23 canvases and READ four times, all four inside `work_counter` — a correctly-banded three-tier ladder that works, and the game's only customer for the meter. WANT.md §3 says it is \"read constantly\" and names three examples: the counter (built), the bank clerk's tone (zero reads in `the_bank`) and what the bar already knows (zero reads in `the_bar`). Field figures for comparison, re-measured 2026-08-27 across the 13 corpus games that carry a reputation meter (Player_Legibility_Study_20260825 §44): MEDIAN 31 passages carry a read against our 1, and a read:write ratio of 2.3 against our 0.2. The 644-site figure this promise used to cite is three games, 95% of it degrees-of-lewdity alone, and is withdrawn. PART PAID 2026-08-27: the fourth sidebar band is written — `work_counter` now runs four rungs and the top one inverts the bottom (at lt 15 he waits for a man rather than take her; at gte 70 he waits for her rather than take a man). Reads 4 -> 6, still all inside work_counter, so the promise stays OPEN for `the_bank` and `the_bar`. Proved by playtest_standing.py, four bands, exactly one rung each. Adding reads to rooms that already exist is exactly what the fill promise describes. REVIEW.md S1a.",
+      "text": "`standing` is written 25 times across 23 canvases and READ four times, all four inside `work_counter` — a correctly-banded three-tier ladder that works, and the game's only customer for the meter. WANT.md §3 says it is \"read constantly\" and names three examples: the counter (built), the bank clerk's tone (zero reads in `the_bank`) and what the bar already knows (zero reads in `the_bar`). Field figures for comparison, re-measured 2026-08-27 across the 13 corpus games that carry a reputation meter (Player_Legibility_Study_20260825 §44): MEDIAN 31 passages carry a read against our 1, and a read:write ratio of 2.3 against our 0.2. The 644-site figure this promise used to cite is three games, 95% of it degrees-of-lewdity alone, and is withdrawn. PAID 2026-08-27 in two instalments. (1) The fourth sidebar band: `work_counter` now runs four rungs and the top one inverts the bottom (at lt 15 he waits for a man rather than take her; at gte 70 he waits for her rather than take a man). (2) The two rooms WANT.md §3 names, each on the repeatable ambient that already wrote the meter and never read it -- `the_bank` via `amb_bank_dee` (the clerk's tone: at lt 15 Dee writes Dorn's name on the slip before you have said which account; at gte 70 she turns the screen so you can see the figure, which she is not supposed to do) and `the_bar` via `amb_bar_regulars` (what the room knows: at lt 15 it settles the question with one word and stops looking; at gte 70 your name arrives down there ahead of you). Both ladders change tone, never fact. Reads 4 -> 18, in 1 canvas -> 3, in 1 room -> 3; all three of WANT.md §3's named examples are now built. Against the re-measured field median of 31 passages carrying a read we are still short, and S1b (whether the meter should DECIDE anything, and whether it scopes per place) stays open as a design question for LO. Proved by playtest_standing.py: three ladders, twelve bands, exactly one rung each, all twelve phrases unique across the three so a rung from the wrong room cannot read as a pass. Gates 40/40. `the_bank` and `the_bar` went over their declared `fill` the moment the ladders landed -- only one rung renders per visit but the gate counts authored words -- so both budgets were raised in round numbers with headroom (500/700 and 600/800), the same correction R1's block_pools needed. REVIEW.md S1a.",
       "made_in": "0.1",
-      "paid_in": null
+      "paid_in": "0.1"
     }
   ],
   "decisions": [
@@ -186,6 +186,10 @@
     {
       "at": "board",
       "note": "`player.loop_act` is ONE trait shared by all six loops rather than one per loop. Kept shared — the five NPC loops each set it at entry and clear it on the finish exit, so the bands read only what the live loop wrote. `loop_solo` was the hole: it set `loop_stage` and never `loop_act`, which is safe only while its finisher has no bands, and adding bands there is exactly what the review's §4 asks for. Now sets 1 at entry and 0 on finish like the other five. REVIEW.md T1."
+    },
+    {
+      "at": "review",
+      "note": "2026-08-27, S1b. `standing` stays ONE GLOBAL NUMBER and is not scoped per place, which is a deliberate refusal of the field's majority pattern (8 of 13 corpus games scope it). family-ties scopes because uni fame and onlyfans fame are different audiences who do not talk to each other; this game's premise is the opposite and amb_bank_dee says so on screen - 'Everybody at this crossroads knows about the paper.' One crossroads, one audience, one number. Scoping would have imported a pattern whose cause we do not have. Also decided: the meter gains consequence by DELIVERING PEOPLE, not by gating - nothing is locked at any value. The fourth field shape, PRICING THE WORLD by band (patriarch's weekly income ladder), maps onto work_counter's flat +74 but lands on E1, which is LO's open decision, so it is deliberately not built here."
     }
   ],
   "board": {
@@ -237,9 +241,9 @@
     },
     "colour_meter": {
       "key": "standing",
-      "shape": "W5b audience meter - it RISES and it almost never refuses",
+      "shape": "W5b audience meter - it RISES, it almost never refuses, and as of 2026-08-27 it DELIVERS PEOPLE (patriarch's shape). Deliberately GLOBAL, not scoped per place.",
       "what": "how much of the Vance name is actually hers. Rises when a man treats her as his father's wife in front of someone; falls when he treats her as something else in front of someone.",
-      "note": "Read constantly to swap ONE line - the driver at the counter who talks to her or asks for a man, the clerk's tone, what the bar already knows. W5b: it rises and it RARELY refuses; do NOT apply W5's shuts-a-door test, W5 owns the meter that closes and W5b the meter that talks. CORRECTED 2026-08-27: the old '644 read sites, refuses at 2%' figure is three games (95% degrees-of-lewdity) and is withdrawn. Re-measured over 13 field games: ~10% of branch arms carry a link, and a MEDIAN 41% of reads change something mechanical - by delivering people (patriarch), modifying a roll (destroyer) or scaling a rate (corpo-life). Rarely-refuses survives; only-swaps-a-line does not. See REVIEW.md S1b."
+      "note": "Read to swap a line - the driver at the counter who talks to her or asks for a man, the clerk's tone, what the bar already knows - AND to decide who walks in. W5b: it rises and it RARELY refuses; do NOT apply W5's shuts-a-door test, W5 owns the meter that closes and W5b the meter that talks. CORRECTED 2026-08-27: the old '644 read sites, refuses at 2%' figure is three games (95% degrees-of-lewdity) and is withdrawn. Re-measured over 13 field games: ~10% of branch arms carry a link, and a MEDIAN 41% of reads change something mechanical - by delivering people (patriarch), modifying a roll (destroyer) or scaling a rate (corpo-life). Rarely-refuses survives; only-swaps-a-line does not. BUILT 2026-08-27 (S1b): below standing 40 the four NAMELESS walk-ins fire more often - walkin_office_driver 0.30 to 0.45, walkin_bay_seen 0.20 to 0.35, walkin_shop_watched 0.25 to 0.40, walkin_row_cab 0.25 to 0.40. The five NAMED walk-ins run on trust and want and are untouched: they are relationships, not an audience. Direction is deliberate - WANT.md §4 makes the fantasy the title being stripped, so high standing buys respect at the counter and costs traffic in the yard, and nothing is locked at any value. Rules are APPENDED to their exclusive_group, never prepended: group rules share one dice over cumulative buckets (v2.py:5345) and a claimed-but-failed slot falls to solo rather than promoting the next rule (v2.py:5378), so an appended rule takes a bucket that already fell to solo and at gte 40 nothing changes. Reads 4 -> 22, in 1 canvas -> 6. See REVIEW.md S1a and S1b."
     },
     "locations": [
       {
@@ -442,20 +446,20 @@
         "id": "the_bank",
         "job": "Where the account she is not on lives.",
         "anchor": false,
-        "fill": 300,
+        "fill": 500,
         "has_cycling_pool": false,
         "serves": {
           "needs": [],
           "work": [],
           "people": []
         },
-        "fill_finished": 200
+        "fill_finished": 700
       },
       {
         "id": "the_bar",
         "job": "The one room in the world where nobody calls her Mrs. Vance, and the men from the yard drink here too.",
         "anchor": false,
-        "fill": 400,
+        "fill": 600,
         "has_cycling_pool": true,
         "serves": {
           "needs": [],
@@ -464,7 +468,7 @@
             "npc_cade"
           ]
         },
-        "fill_finished": 400
+        "fill_finished": 800
       }
     ],
     "needs": [

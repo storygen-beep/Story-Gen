@@ -1807,6 +1807,16 @@ conditions       = { version = "1.0", logic = "AND", items = [
   { type = "npc_at_location", location_id = "the_shop_floor", operator = "is_present" },
 ] }
 
+# S1b — below 40 there is more often somebody at the glass. See the note at the counter.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_bay_seen"
+chance           = 0.15
+exclusive_group  = "bay"
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_shop_floor", operator = "is_present" },
+  { type = "trait", subject = "player", trait_key = "standing", operator = "lt", value = 40 },
+] }
+
 [[canvases.nodes]]
 id = "base"
 name = "Base"
@@ -1877,6 +1887,28 @@ chance           = 0.25
 exclusive_group  = "counter"
 conditions       = { version = "1.0", logic = "AND", items = [
   { type = "npc_at_location", location_id = "the_office", npc_id = "npc_cade", operator = "is_present" },
+] }
+
+# ── S1b · `standing` DELIVERS PEOPLE.  The nameless walk-ins -- the driver, the
+#    watcher at the glass, the man down the shop, the light in the cab -- are the
+#    audience, and `standing` is the audience meter. The named men run on trust and
+#    want and are untouched here. Below `standing` 40 the title is not holding
+#    ("The new wife" / "Mrs. Vance, to your face") and the strangers come more often.
+#
+# ⚠️ APPENDED, never prepended. These rules take a bucket that today falls to solo,
+#    so at `standing` gte 40 NOTHING changes -- the claimed slot fails its condition
+#    and falls through exactly as an empty bucket does (v2.py:5378). Prepending would
+#    have stolen the bucket in front of an NPC walk-in and cut its rate at every band.
+# ⚠️ The condition set is COPIED from the rule above and the standing item added. A
+#    bonus rule that dropped the presence gate would claim the slot and fail on the
+#    wrong reason, which reads identically from the outside and is not the same bug.
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_office_driver"
+chance           = 0.15
+exclusive_group  = "counter"
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "standing", operator = "lt", value = 40 },
 ] }
 
 [[canvases.nodes]]
@@ -2005,6 +2037,16 @@ conditions       = { version = "1.0", logic = "AND", items = [
   { type = "npc_at_location", location_id = "the_shop_floor", operator = "is_present" },
 ] }
 
+# S1b — below 40 the length of the shop is walked in front of more of them.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_shop_watched"
+chance           = 0.15
+exclusive_group  = "shop"
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_shop_floor", operator = "is_present" },
+  { type = "trait", subject = "player", trait_key = "standing", operator = "lt", value = 40 },
+] }
+
 [[canvases.nodes]]
 id = "base"
 name = "Base"
@@ -2120,6 +2162,15 @@ conditions       = { version = "1.0", logic = "AND", items = [
 target_canvas_id = "walkin_row_cab"
 chance           = 0.25
 exclusive_group  = "row"
+
+# S1b — below 40 the curtain in the fourth cab moves more nights than it does not.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_row_cab"
+chance           = 0.15
+exclusive_group  = "row"
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "standing", operator = "lt", value = 40 },
+] }
 
 [[canvases.nodes]]
 id = "base"
@@ -5144,6 +5195,13 @@ blocks = [
     { type = "paragraph", content = "In here nobody has to call you anything. That is the whole reason for the twenty minutes, and you have never said so out loud." },
     { type = "paragraph", content = "Two men from the yard at the far end. They have seen you. Neither of them is coming down, and neither of them is leaving." },
   ] },
+  # The same four-rung chain, highest-first with ceilings. `WANT.md` §3's "what the
+  # bar already knows": at the bottom the room settles the question with one word
+  # and stops looking, and at the top your name arrives down there ahead of you.
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 70 }, ] }, blocks = [ { type = "paragraph", content = "The one at the end says the yard's name and then yours, in that order, and the man he is telling has already had it off somebody else this week, which you can tell because he does not ask which yard." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "standing", operator = "lt",  value = 70 }, ] }, blocks = [ { type = "paragraph", content = "Somebody down the bar says your name to somebody else and it carries, and it is your name on its own and not the sentence with Dorn in it, and neither of them looks up to check whether you heard." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 15 }, { type = "trait", subject = "player", trait_key = "standing", operator = "lt",  value = 40 }, ] }, blocks = [ { type = "paragraph", content = "They have got as far as Mrs. Vance down there and no further. It comes back up the bar twice in an hour, always in the same sentence as the yard, never in one of its own." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "lt", value = 15 }, ] }, blocks = [ { type = "paragraph", content = "The two at the end work out who you are in under a minute and it takes them one word to do it, and the word is Dorn's, and then they stop looking, because that answered it." } ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -5659,6 +5717,16 @@ blocks = [
   { type = "dialog", props = { speaker = "player" }, content = "No." },
   { type = "dialog", props = { speaker = "unknown" }, content = "No. Well. Three years goes quicker than you'd think, love." },
   { type = "paragraph", content = "She knows about the paper. Everybody at this crossroads knows about the paper." },
+  # Four rungs on `standing`, and they are ONE if/elseif chain -- adjacent [group]
+  # blocks merge, so highest-first and every middle arm carries its ceiling or the
+  # arm above it never fires. This is `WANT.md` §3's "the bank clerk's tone": the
+  # facts of the account never move, only how Dee says them. At the bottom she is
+  # kind to a woman who will not be here long; at the top she breaks a small rule
+  # for a woman she expects to be signing.
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 70 }, ] }, blocks = [ { type = "paragraph", content = "Dee turns the screen a few degrees so you can see the figure, which she is not supposed to do, and she says your name with no husband in front of it, and the woman behind you does not lean in." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "standing", operator = "lt",  value = 70 }, ] }, blocks = [ { type = "paragraph", content = "Dee asks what the yard needs this month before she asks anything about Dorn, and she waits with her hand off the keyboard for you to answer it, which is not the order she used to do it in." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 15 }, { type = "trait", subject = "player", trait_key = "standing", operator = "lt",  value = 40 }, ] }, blocks = [ { type = "paragraph", content = "Dee says Mrs. Vance when she greets you and love when she finishes, both inside two minutes, and does not appear to notice she has done both, and she writes the yard's number on the slip without asking you for it." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "lt", value = 15 }, ] }, blocks = [ { type = "paragraph", content = "Dee writes Dorn's name on the slip before you have said which account, and she does it kindly, the way you are kind to somebody at a counter who will not be here long." } ] },
 ]
 
 [canvases.nodes.exit_block]
