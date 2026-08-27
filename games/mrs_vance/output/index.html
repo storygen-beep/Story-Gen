@@ -7885,23 +7885,37 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 /* The name takes a row of its own ONLY when a role follows it, so the role can sit under
    it. With no role there is nothing to sit under, and `dlg-inline` keeps the name on the
    speech&#39;s own line. */
+/* The name takes a row of its own ONLY when a role follows it, and the two are
+   proportioned to the FACE — 70% of its height for the name, 30% for the role — so the
+   identity reads as one unit standing the same height as the portrait beside it. Both
+   are derived from `--dlg-face` rather than fixed, so they track it at every viewport.
+   The font sizes carry floors: 24% of a 36px phone face is 8.6px, which is too small to
+   read, so `max()` holds the role at 9px there. */
 .dialog-content strong {
     display: block;
-    font-size: clamp(11px, 3vw, 14px);
-    line-height: 1.25;
+    font-size: max(12px, calc(var(--dlg-face) * 0.40));
+    line-height: calc(var(--dlg-face) * 0.70);
 }
 
+/* ⚠️ The role-less case shares its line with the speech, so it must NOT inherit the 70%
+   line box above — that would stretch the line the character is speaking on. It keeps
+   the surrounding leading instead. */
 .dialog-content strong.dlg-inline {
     display: inline;
+    font-size: clamp(11px, 3vw, 14px);
+    line-height: inherit;
 }
 
 /* F10 — the short label under a speaker&#39;s name. Quieter than the name, because it is a
    label and must not compete with the line the character is actually saying. INLINE, so
-   the speech continues from it rather than starting a new row. */
+   the speech continues from it rather than starting a new row.
+   ⚠️ Its 30% is the height of the ROLE&#39;s own inline box. The line it sits on also holds
+   the first words of the speech, and a line box is as tall as its tallest inline box, so
+   that line renders at the speech&#39;s leading — the 30% governs the label, not the row. */
 .dialog-role {
     display: inline;
-    font-size: clamp(9px, 2.6vw, 12px);
-    line-height: 1.25;
+    font-size: max(9px, calc(var(--dlg-face) * 0.24));
+    line-height: calc(var(--dlg-face) * 0.30);
     color: var(--theme-text-muted, #8a8a8a);
 }
 
