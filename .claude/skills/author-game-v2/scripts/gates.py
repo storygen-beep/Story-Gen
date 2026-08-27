@@ -136,6 +136,38 @@ SENTENCE_CEILING = 14
 # pass as "matches the field". Tightening it needs the field re-measured on TOML,
 # which is not obtainable: we do not have anyone else's source.
 
+DASH_CEILING = 35.0
+# Em and en dashes per 10,000 prose words. The SECOND threshold here that measures
+# writing, and it exists because two players read a shipped game of ours and said
+# the prose "smacks of an underpowered AI". Dash density is the marker readers most
+# often name when they say that, and nothing in this file looked at it.
+#
+# Measured 2026-08-27 over the 25-game mopoga corpus:
+#   p50 0.99 · p75 4.21 · p90 17.46 · p95 25.72 · max 35.41 (apocalyptic-world)
+#
+# The ceiling is the corpus MAXIMUM on purpose. A shipped, heavily-commented game
+# writes at 35, so a game at or under it cannot be called wrong without contradicting
+# the field. This catches an author who has left the distribution, not one working at
+# its edge: mrs_vance passes at 25.4 (p95); the game that prompted this runs 96.4,
+# which is 2.7x the corpus maximum.
+#
+# ⚠️ IT COUNTS SPEECH TOO, ON PURPOSE, AND THAT IS A KNOWN COST. An em-dash inside
+# dialogue is how English writes an interruption — "Mrs. Vance — Mrs. — I can't, if you
+# keep —" is correct as written — so a game with a lot of broken speech scores worse
+# without being worse: 24 of the prompting game's 32 dashes were speech. Narrowing the
+# verdict to narration was investigated and REFUSED, because it needs a narration-only
+# field baseline that cannot be built: 14 of the 25 corpus games put under 2% of their
+# words inside quote marks (corpus median 1.3%), marking speech with italics, speaker
+# prefixes, or nothing. Judging a narration-only measurement against an all-prose ceiling
+# is exactly the seam error below. The gate reports the split instead and gates the whole.
+#
+# ⚠️ THIS CONSTANT DOES NOT SPAN THE SEAM THAT SENTENCE_CEILING DOES. The field
+# figures come from built HTML and this gate reads authored TOML — the same two bases
+# — but the metric was checked on BOTH for the same game and moved 7% (mrs_vance 27.2
+# HTML, 25.4 TOML). A rate over word count is insensitive to how text is segmented,
+# which is exactly what the seam distorts. Do not weaken this constant believing it
+# inherits G19's approximation; it does not.
+
 EXPLICIT_IN_REPEATABLE = 50.0
 # Explicit prose must live where the player returns. Measured failure case:
 # 95% of Vesper's explicit beats sit in a sealed room with no exits, while all
@@ -5497,6 +5529,124 @@ def run_gates(model, game, state=None):
          + ([f"⚠️ sitting ON the ceiling. {SENTENCE_CEILING} is a backstop calibrated across "
              f"two extraction bases, not a target — the field runs 10 and the reference game 9."]
             if sent_words and margin <= 0 else []))
+
+    # G43 — prose texture. The SECOND gate here that measures writing.
+    #
+    # Added 2026-08-27, after two players read a shipped game of ours and called the prose
+    # "an underpowered AI whose mother language isn't english" and said it made the story
+    # hard to follow. Of the 42 gates that existed, exactly one looked at the writing (G19),
+    # and that game PASSED it — median sentence 12 words against a field median of 12. The
+    # prose was field-normal on the only axis measured and 97x off-field on one that was not.
+    #
+    # ⚠️ THIS READS b.text AND MUST NEVER READ THE BUILT HTML. The first attempt at this
+    # gate measured our games from output/index.html and reported them at 4.75x the field on
+    # joints-per-sentence — a dramatic number, and an artifact. Our HTML carries UI list
+    # blocks that never reach a full stop, so the splitter read each as one enormous
+    # comma-filled "sentence": 10.6% of our HTML "sentences" are those blocks against the
+    # field's 1.5%. Re-measured on authored beat text the direction REVERSED — our prose is
+    # less packed than the field, 0.53 against 0.77 — and the finding was withdrawn. That is
+    # the same family of error the SENTENCE_CEILING seam documents, hit a second time.
+    # Anything computed PER SENTENCE is not comparable across the two bases. A rate over
+    # word count, which is what this gate judges on, is.
+    #
+    # Only the dash carries a verdict. The three numbers reported under it gate nothing: no
+    # threshold is invented for a marker whose field spread has not been shown to separate
+    # a good game from a bad one.
+    tex_words = tex_dashes = 0
+    dash_by_canvas = {}
+    for c in model:
+        t = " ".join(x for b in c["beats"] for x in b.text)
+        w = len(re.findall(r"[A-Za-z][A-Za-z'-]*", t))
+        d = len(re.findall(r"—|–", t))
+        tex_words += w
+        tex_dashes += d
+        if d:
+            dash_by_canvas[c["id"]] = (d, w)
+    dash_rate = tex_dashes / tex_words * 10_000 if tex_words else 0.0
+
+    tex_prose = " ".join(x for c in model for b in c["beats"] for x in b.text)
+    tex_sents = [s for s in re.split(r"(?<=[.!?])\s+", tex_prose)
+                 if 2 <= len(s.split()) <= 120]
+    tex_joints = (sum(len(re.findall(r",|—|–|;|:", s)) for s in tex_sents)
+                  / len(tex_sents)) if tex_sents else 0.0
+    tex_tok = [w.lower() for w in re.findall(r"[A-Za-z][A-Za-z'-]*", tex_prose)]
+    tex_you = (sum(tex_tok.count(w) for w in ("you", "your", "yours"))
+               / len(tex_tok) * 100) if tex_tok else 0.0
+    tex_p2n = (len(re.findall(r"\b(?:he|him|his|she|her|hers|they|them|their)\b",
+                              tex_prose, re.I))
+               / max(len(re.findall(r"(?<![.!?]\s)(?<!^)\b[A-Z][a-z]{2,}\b", tex_prose)), 1))
+
+    # Where the dashes actually live. An em-dash in narration is the appositive habit
+    # register.md names; an em-dash in speech is how English writes an interruption, and
+    # "Mrs. Vance — Mrs. — I can't, if you keep —" is correct as written. Measured on the
+    # game that prompted this: 24 of its 32 dashes were speech breaking down, so 76% of
+    # its score was punctuation that is not a defect.
+    #
+    # ⚠️ REPORTED, NEVER GATED, and the verdict above deliberately still counts BOTH.
+    # Moving the verdict to narration-only needs a narration-only FIELD baseline, and that
+    # was investigated and cannot be had: 14 of the 25 corpus games put under 2% of their
+    # words inside quote marks (corpus median 1.3%), marking speech with italics, speaker
+    # prefixes or nothing at all. A narrowed measurement judged against an all-prose
+    # ceiling is the seam error this gate's header exists to warn about.
+    def _tex_split(blocks, spoken, narr):
+        for b in blocks or []:
+            if not isinstance(b, dict):
+                continue
+            props = b.get("props") or {}
+            if isinstance(b.get("content"), str):
+                # thought_bubble is a person's voice too, and stammers for the same reasons
+                (spoken if b.get("type") in ("dialog", "thought_bubble")
+                 else narr).append(b["content"])
+            for beat in (props.get("beats") or []):
+                _tex_split(beat.get("blocks"), spoken, narr)
+            _tex_split(props.get("blocks") or b.get("blocks"), spoken, narr)
+
+    tex_spoken, tex_narr = [], []
+    for c in (game.get("canvases") or []):
+        for n in (c.get("nodes") or []):
+            _tex_split(n.get("blocks"), tex_spoken, tex_narr)
+
+    def _rate(parts):
+        t = " ".join(parts)
+        w = len(re.findall(r"[A-Za-z][A-Za-z'-]*", t))
+        return (len(re.findall(r"—|–", t)) / w * 10000 if w else 0.0), w
+
+    spoken_rate, spoken_w = _rate(tex_spoken)
+    narr_rate, narr_w = _rate(tex_narr)
+
+    tex_detail = []
+    if tex_words and dash_rate > DASH_CEILING:
+        tex_detail += [f"{cid}: {d} in {w:,} words"
+                       for cid, (d, w) in sorted(dash_by_canvas.items(),
+                                                 key=lambda kv: -kv[1][0])[:6]]
+        tex_detail += [
+            "⚠️ do NOT fix this by swapping the dash for a comma. The joint survives the swap "
+            "and nothing reads easier — measured, on two of our own games. Split the sentence, "
+            "or cut the clause it was holding on.",
+            "field p50 is 0.99/10k — half the corpus writes under one dash per 10,000 words",
+        ]
+    if tex_words and (spoken_w or narr_w):
+        tex_detail.append(
+            f"where they live — narration {narr_rate:.1f}/10k over {narr_w:,} words · "
+            f"speech {spoken_rate:.1f}/10k over {spoken_w:,} words. A dash in speech is how "
+            f"English writes an interruption and is usually correct; the narration figure is "
+            f"the one register.md's \"Dashes stay rare\" is about. Verdict above counts both, "
+            f"because the field cannot be split (see DASH_CEILING).")
+    if tex_words:
+        tex_detail += [
+            f"reported, not gated, NO field figure — joints/sentence {tex_joints:.2f} · "
+            f'"you" {tex_you:.1f}% of words · pronoun:name {tex_p2n:.2f}',
+            "⚠️ these three are comparable ACROSS OUR OWN GAMES and to nothing else. The corpus "
+            "exists only as built HTML, whose UI strings and list blocks move all three: this "
+            "same game reads pronoun:name 0.87 on that basis and 9.99 on this one. The dash rate "
+            "above is quoted against the field precisely because it is the one that survives the "
+            "change of basis (27.2 HTML, 25.4 here).",
+        ]
+    gate("prose texture", None if not tex_words else dash_rate <= DASH_CEILING,
+         f"{tex_dashes} dash{'' if tex_dashes == 1 else 'es'} in {tex_words:,} prose words = "
+         f"{dash_rate:.1f}/10k (ceiling {DASH_CEILING:.0f}) · field p50 0.99, p90 17.5, max 35.4"
+         if tex_words else "no authored beat prose to measure",
+         tex_detail)
 
     # ─────────────────────────────────────────────────────────────────────────
     # THE FIRST HOUR — references/the-first-hour.md

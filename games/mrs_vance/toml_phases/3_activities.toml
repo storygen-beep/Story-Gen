@@ -181,6 +181,16 @@ conditions       = { version = "1.0", logic = "AND", items = [
   { type = "npc_at_location", location_id = "the_shop_floor", operator = "is_present" },
 ] }
 
+# S1b — below 40 there is more often somebody at the glass. See the note at the counter.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_bay_seen"
+chance           = 0.15
+exclusive_group  = "bay"
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_shop_floor", operator = "is_present" },
+  { type = "trait", subject = "player", trait_key = "standing", operator = "lt", value = 40 },
+] }
+
 [[canvases.nodes]]
 id = "base"
 name = "Base"
@@ -253,6 +263,28 @@ conditions       = { version = "1.0", logic = "AND", items = [
   { type = "npc_at_location", location_id = "the_office", npc_id = "npc_cade", operator = "is_present" },
 ] }
 
+# ── S1b · `standing` DELIVERS PEOPLE.  The nameless walk-ins -- the driver, the
+#    watcher at the glass, the man down the shop, the light in the cab -- are the
+#    audience, and `standing` is the audience meter. The named men run on trust and
+#    want and are untouched here. Below `standing` 40 the title is not holding
+#    ("The new wife" / "Mrs. Vance, to your face") and the strangers come more often.
+#
+# ⚠️ APPENDED, never prepended. These rules take a bucket that today falls to solo,
+#    so at `standing` gte 40 NOTHING changes -- the claimed slot fails its condition
+#    and falls through exactly as an empty bucket does (v2.py:5378). Prepending would
+#    have stolen the bucket in front of an NPC walk-in and cut its rate at every band.
+# ⚠️ The condition set is COPIED from the rule above and the standing item added. A
+#    bonus rule that dropped the presence gate would claim the slot and fail on the
+#    wrong reason, which reads identically from the outside and is not the same bug.
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_office_driver"
+chance           = 0.15
+exclusive_group  = "counter"
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "standing", operator = "lt", value = 40 },
+] }
+
 [[canvases.nodes]]
 id = "base"
 name = "Base"
@@ -263,7 +295,13 @@ blocks = [
   { type = "dialog", props = { speaker = "player" }, content = "Name and plate. I'll get you a slot." },
   { type = "dialog", props = { speaker = "unknown" }, content = "How long?" },
   { type = "dialog", props = { speaker = "player" }, content = "Longer if you stand there." },
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 40 }, ] }, blocks = [ { type = "paragraph", content = "The one with the tank trailer asks for you by name before you have said anything, which is new, and he does it in front of the two behind him." } ] },
+  # Four rungs, and they are ONE if/elseif chain -- adjacent [group] blocks merge,
+  # so these run highest-first and the 40 arm needs its ceiling or 70 never fires.
+  # The top rung is the sidebar's "You are the one they come to" and it inverts the
+  # bottom one exactly: at lt 15 he waits for a man rather than take her, at gte 70
+  # he waits for her rather than take a man.
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 70 }, ] }, blocks = [ { type = "paragraph", content = "The one with the tank trailer waits for you with Cade standing right there free, and when Cade offers he says he'll wait, and the two behind him hear him say it and stay where they are." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "standing", operator = "lt",  value = 70 }, ] }, blocks = [ { type = "paragraph", content = "The one with the tank trailer asks for you by name before you have said anything, which is new, and he does it in front of the two behind him." } ] },
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 15 }, { type = "trait", subject = "player", trait_key = "standing", operator = "lt",  value = 40 }, ] }, blocks = [ { type = "paragraph", content = "The one with the tank trailer says Mrs. Vance to your face and then asks for Cade anyway, and does not hear himself do it." } ] },
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "lt", value = 15 }, ] }, blocks = [ { type = "paragraph", content = "The one with the tank trailer waits at the counter looking at the hatch until somebody comes through it, and then talks to him with his back at an angle to you." } ] },
 ]
@@ -310,7 +348,7 @@ is_repeatable = true
 id = "base"
 name = "Base"
 blocks = [
-  { type = "block_pool", blocks = [ { type = "paragraph", content = "Job sheets off the spike, one at a time, and the number at the bottom of each into your column. Half of them have a second figure pencilled on the back that is not the same as the first." }, { type = "paragraph", content = "There is a way this place has always done it and nobody has written it down, so you are learning it out of the shape of the mistakes." }, { type = "paragraph", content = "Two hours of somebody else's handwriting and then your own underneath it, which is the only thing on this property that is yours." }, ] },
+  { type = "block_pool", blocks = [ { type = "paragraph", content = "Job sheets off the spike, one at a time, and the number at the bottom of each into your column. Half of them have a second figure pencilled on the back that is not the same as the first." }, { type = "paragraph", content = "There is a way this place has always done it and nobody has written it down, so you are learning it out of the shape of the mistakes." }, { type = "paragraph", content = "Two hours of somebody else's handwriting and then your own underneath it." }, ] },
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_cade", trait_key = "trust", operator = "gte", value = 26 }, ] }, blocks = [ { type = "paragraph", content = "He has stopped checking it behind you. You know because the spike is clear at the end and he has not touched it." } ] },
 ]
 
@@ -373,6 +411,16 @@ conditions       = { version = "1.0", logic = "AND", items = [
   { type = "npc_at_location", location_id = "the_shop_floor", operator = "is_present" },
 ] }
 
+# S1b — below 40 the length of the shop is walked in front of more of them.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_shop_watched"
+chance           = 0.15
+exclusive_group  = "shop"
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_shop_floor", operator = "is_present" },
+  { type = "trait", subject = "player", trait_key = "standing", operator = "lt", value = 40 },
+] }
+
 [[canvases.nodes]]
 id = "base"
 name = "Base"
@@ -429,7 +477,7 @@ id = "base"
 name = "Base"
 blocks = [
   { type = "video", props = { pool_dir = "amb/trailer_wash_t2", pool = 4, description = "Hosing out the inside of a trailer, soaked through.", search_queries = ["woman washing truck trailer hose wet", "wet woman working hose spray industrial"] } },
-  { type = "block_pool", blocks = [ { type = "paragraph", content = "Reefer trailers come back with the last load still in the corrugations and somebody has to get in there with the hose and walk it down the length on their knees." }, { type = "paragraph", content = "Forty-eight feet of steel and the water comes back at you off every inch of it, so by the second pass there is no part of you that is dry and no point pretending otherwise." }, { type = "paragraph", content = "It pays what it pays because none of them will do it. That is the whole reason it is money and everybody in the shop knows it is the whole reason." }, ] },
+  { type = "block_pool", blocks = [ { type = "paragraph", content = "Reefer trailers come back with the last load still in the corrugations and somebody has to get in there with the hose and walk it down the length on their knees." }, { type = "paragraph", content = "Forty-eight feet of steel and the water comes back at you off every inch of it, so by the second pass there is no part of you that is dry and no point pretending otherwise." }, { type = "paragraph", content = "It pays what it pays because none of them will do it. Everybody in the shop knows that." }, ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -488,6 +536,15 @@ conditions       = { version = "1.0", logic = "AND", items = [
 target_canvas_id = "walkin_row_cab"
 chance           = 0.25
 exclusive_group  = "row"
+
+# S1b — below 40 the curtain in the fourth cab moves more nights than it does not.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_row_cab"
+chance           = 0.15
+exclusive_group  = "row"
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "standing", operator = "lt", value = 40 },
+] }
 
 [[canvases.nodes]]
 id = "base"

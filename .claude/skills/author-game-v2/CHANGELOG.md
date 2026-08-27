@@ -5,6 +5,242 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-27 — gates.py G43: report where the dashes live, and refuse to narrow the verdict
+
+**Why.** G43 shipped counting every dash in a game. Applied to `mrs_vance` that produced a true but
+misleading number: **24 of its 32 dashes were inside `dialog` blocks**, and every one of those is
+speech breaking down — *"Mrs. Vance — Mrs. — I can't, if you keep —"*. The em-dash is the correct
+English mark for an interruption, so **76% of the game's score was punctuation that is not a
+defect.** An instrument that marks a game down for its stammers is measuring the wrong thing.
+
+**The obvious fix was investigated and REFUSED.** Narrowing the verdict to narration needs a
+narration-only *field* baseline, and the corpus cannot supply one: **14 of the 25 games put under 2%
+of their words inside quote marks** (corpus median 1.3%), marking speech with italics, speaker
+prefixes, or nothing at all. There is no reliable way to separate their narration from their
+dialogue. Judging a narration-only measurement against an all-prose ceiling would be precisely the
+seam error G43's own header exists to warn about — committed knowingly the second time. So the
+verdict and `DASH_CEILING` are unchanged and the split is **reported** instead, joining the three
+companion numbers already carried with no field figure.
+
+**What changed.**
+
+- **`scripts/gates.py`** — G43 gains a `_tex_split` walk over `canvases[].nodes[].blocks[]`
+  (mirroring the traversal `_speaking_blocks` already uses for G23, including `props.beats[]` and
+  nested `blocks`) that separates spoken text from narration and prints both rates. `thought_bubble`
+  counts as spoken: it is a person's voice and stammers for the same reasons.
+- **`DASH_CEILING`** gains a second ⚠️ recording that it counts speech on purpose, that this is a
+  known cost, and the 14-of-25 measurement that makes narrowing it impossible.
+
+⚠️ **The block walk must count braces.** A naive `\{ type = "(\w+)"(.*?)\}` stops at the first `}`,
+which in a `dialog` block closes `props = { speaker = … }` — so `content` falls outside the capture
+and **every dialogue dash reads as zero**. That bug produced a wrong count during this very
+investigation and was caught only by printing the raw TOML.
+
+**Verified.** `gates.py mrs_vance` **41/41**. The new line reads `narration 0.0/10k over 9,865 words
+· speech 91.3/10k over 2,629 words` — which is the whole point: after the game's narration dashes
+were fixed, every remaining dash is speech, and the gate now says so on one line instead of
+implying the game still has a habit.
+
+---
+
+## 2026-08-27 — gates.py G43 + register.md: the first gate that measures how the writing SOUNDS
+
+**Why.** Two players read a shipped v2-lineage game and said the prose "smacks of an underpowered
+AI whose 'mother language' isn't english," and that this made the narrative hard to follow. That
+put a standing claim in doubt, so the claim was tested rather than defended. Of the 42 gates then
+in the file, exactly one looked at writing (G19, median sentence length) and the game in question
+**passed it**, at 12 words against a field median of 12. The prose was field-normal on the only
+axis measured, and far off-field on one that had never been measured. Separately: the 25-game
+mopoga corpus had been on disk since 2026-07-24 and had only ever been asked structural questions.
+Its prose had never once been compared with ours.
+
+**⚠️ A finding was made, published in-session, and then RETRACTED. It is recorded here because the
+retraction is the more useful half.** Measuring our games from `output/index.html` produced
+"joints per sentence, ours 4.75x the field." That was an artifact. Our built HTML carries UI list
+blocks that never reach a full stop, so the sentence splitter read each as one enormous
+comma-filled sentence: 10.6% of our HTML "sentences" are those blocks, against the field's 1.5%.
+Re-measured on authored beat text, the basis a gate actually reads, **the direction reversed** —
+our prose is *less* packed than the field, `mrs_vance` 0.53 against 0.77. No packing gate was
+built. This is the same family of error the `SENTENCE_CEILING` comment already documents, hit a
+second time, and it is now written into G43's header so the third time is caught.
+
+**What changed.**
+
+- **`scripts/gates.py`** — new constant `DASH_CEILING = 35.0` beside `SENTENCE_CEILING`, and new
+  gate **G43 "prose texture"** beside G19. Dashes per 10,000 words, read from `b.text` and never
+  from built HTML. The ceiling is the corpus **maximum**, not its median: a shipped and
+  heavily-commented game writes at 35.4, so a game at or under that cannot be called wrong without
+  contradicting the field. The gate catches an author who has left the distribution, not one
+  working at its edge. Corpus figures: p50 0.99 · p75 4.21 · p90 17.46 · p95 25.72 · max 35.41.
+- The gate also prints joints per sentence, the share of `you`, and pronouns per name, explicitly
+  **with no field figure and no threshold**. A first draft did quote field figures for all three
+  and was wrong to: they come from HTML and the gate reads TOML, and `pronoun:name` moves from 0.87
+  to 9.99 on the same game across that seam. Caught in verification, fixed before commit. The dash
+  rate is quoted against the field precisely because it is the one that holds (27.2 HTML, 25.4
+  TOML, a 7% move).
+- **`references/register.md`** — new section **"Dashes stay rare"** after "Sentences run short",
+  with the corpus table, the rule, and a real three-state worked example from `mrs_vance` prose:
+  the original, the comma swap that is *not* the fix, and the split that is. Carries the ⚠️ that
+  swapping a dash for a comma leaves the joint in place; measured across two of our own games, dash
+  rate fell 3.5x while comma joints per sentence went **up**. That swap is what the `humanizer`
+  skill's §14 prescribes, so it will be suggested again. Also notes that this is the file's first
+  subtraction-shaped rule, against roughly five add-shaped rules for every cut-shaped one.
+- **`references/register.md`, "What is not measured here"** — records that texture is now measured
+  on exactly one marker, and that the three companion numbers are a trend line across our own games
+  and not a score.
+
+**Verified.** `gates.py mrs_vance` **41/41** (was 40/40), G43 passing at 25.4/10k, which reproduces
+an independent measurement of the same game to the decimal. `the_season` 2.3, `off_season` 5.5,
+`forty_miles` 1.8, all passing, no other gate's verdict moved in any of the four. `--json` parses
+and carries the gate. **Negative control:** the ceiling is worthless if nothing fails it, so G43's
+expressions were replicated read-only against `vesper`'s authored TOML, which reads **123.0/10k,
+FAIL, 3.5x the corpus maximum**. The gate therefore discriminates: it clears the four games the
+corpus says are normal and fails the one game human readers actually complained about.
+
+**Not changed.** No prose in any game. `mrs_vance` sits at the field's p95 with 32 dashes in 21
+content blocks, which the corpus itself says is inside normal, so it was measured and left alone.
+`games/vesper/` was not touched at any point; it appears above only as the calibration case.
+
+---
+
+## 2026-08-27 — the-meters.md: how "it delivers people" is actually built on this engine
+
+**Why.** The correction earlier today told authors that a rising audience meter *should* have
+mechanical consequence and named the field's four shapes — delivers people, modifies a roll,
+scales a rate, prices the world. It did not say how to build any of them here, and the first
+author to try it (`mrs_vance` S1b) found that the answer is the **Lane 3 dispatcher** and that the
+obvious way to write it is wrong. Doctrine that names a target and not a route is half a rule.
+
+**What changed.** `references/the-meters.md` gains a subsection, *"How 'it delivers people' is
+built on this engine"*, under **Rarely a lock is not the same as never mechanical**:
+
+- A substitution rule already takes a per-rule `conditions` block (`v2.py:5337`), so banding a
+  walk-in on a meter is one block — no engine work, no new primitive. Worked TOML included.
+- ⚠️ **Append, never prepend.** Rules in an `exclusive_group` share one dice over cumulative
+  buckets (`v2.py:5345`) and a claimed-but-failed slot falls to solo rather than promoting the
+  next rule (`v2.py:5378`). Appended, the bonus rule takes a bucket that already fell to solo and
+  nothing outside the band moves. Prepended, it silently cuts the rate of every rule below it —
+  including NPC walk-ins that have nothing to do with the meter.
+- ⚠️ Copy the conditions from the rule above and add the meter item; a bonus rule that drops the
+  presence gate still claims its slot and still fails, on the wrong reason.
+- ⚠️ Choose the meter's **direction** out loud. Delivering more as it rises is right when being
+  known is the fantasy and backwards when the fantasy is the title being stripped.
+- **Prove it with a distribution, not a playthrough** — and both halves, or the check is vacuous.
+  Two traps that make it read PASS while proving nothing are recorded: measuring at an hour where
+  no named walk-in can fire, and leaving `player.current_location` unset, because `requires_npc`
+  is checked as *is that NPC where the player is* (`v2.py:5340`).
+
+**Verified.** Every `v2.py` line reference read in the generator source before it was written
+down. The pattern is shipped in `games/mrs_vance/toml_phases/3_activities.toml` (four hosts) and
+measured by `games/mrs_vance/playtest_walkins.py` at 6,000 rolls per band per host: all four lifts
+land between +0.141 and +0.163 against a declared +0.15, and every named walk-in is flat to within
+0.009 across the bands. `gates.py mrs_vance` 40/40, 0 FAIL. Both harness traps above were live
+failures found in that run, not hypotheticals.
+
+⚠️ `the_season` also ships a `known` meter built on the pre-correction doctrine and is still
+untouched — a different game and a different session's call.
+
+---
+
+## 2026-08-27 — W5b: the 644 was three games, and it taught a meter to decide nothing
+
+**Why.** `mrs_vance` shipped `standing` written at 25 sites and read at 4, all four in one canvas.
+Tracing where that design came from led to this skill, not to the game: `0_systems_spec.toml`
+declared it *"a W5b audience meter … it refuses almost nothing. The field reads reputation at 644
+sites and refuses at 2% of them."* The game inherited both the shape and the number from here.
+
+### 1 · What the number actually is
+
+`findings_H_known.md` §1 is explicit about its sample and this skill was not:
+
+```
+degrees-of-lewdity   610 read sites      <- 95% of the total
+zaras-school-life     23
+course-of-temptation  11   flagged by the source itself as INSTRUMENT-BLIND, not low
+                     ---
+                     644  written into W5b, SKILL.md and STATUS.md as "the field"
+```
+
+The study did nothing wrong. **W5b generalised three games to a field**, `SKILL.md`'s
+fifth-commitment table compressed it to a one-line law, and a game then built to the law.
+
+### 2 · Re-measured over thirteen games
+
+`~/Documents/Player_Legibility_Study_20260825` §44, instruments `measure_reputation.py`
+(`--selftest` pins 19 variable names), `measure_rep_use.py`, `measure_rep_final.py`:
+
+```
+1,944 references · 13 of 25 measured field games carry a reputation meter
+link-bearing branch arms          ~10%   (not 2%)
+reads that change something       MEDIAN 41%
+passages carrying a read          median 31        rungs  median 9
+```
+
+**What survives:** it rises, it rarely locks a door, its commonest single use is a line swap.
+**What does not:** *"therefore it only swaps a line."* That was one game's house style read as the
+field's law. Three mechanisms the narrow sample could not contain, **none of which refuses the
+player anything**:
+
+| game | the meter | shape |
+|---|---|---|
+| `patriarch` | `gt 5` → Marlene knocks · `gt 9` → Luna · `gt 14` → Ana; and weekly income by band | delivers people · prices the world |
+| `destroyer` | `_roll1 to _roll + $Respect` in every pickup and fight | modifies a roll |
+| `corpo-life` | 8-rung `$prestige_level` read at 308 sites — `(Relationship +1 from prestige)` | scales a rate |
+
+### 3 · ⚠️ A second error, in the opposite direction
+
+W5b's example for *"the meter is optional"* was `family-ties` — *"267 distinct variables and not
+one of them tracks reputation."* It carries **six**: `you_init` declares `uni`, `southCafe`,
+`onlyfans`, `inst`, `model` and `pornhub`, each with its own `fame`, read 257 times. It is not the
+field's example of a game without the meter, it is the field's best example of a **place-scoped**
+one. The original error came from correctly withdrawing `$sexPose` as a false positive (it is the
+sex *position*) and then concluding the game had nothing rather than looking again.
+
+**The rule survives; the example is replaced** with ten games that genuinely carry none —
+`friends-of-mine` (2,707 passages), `family-business` (2,318), `the-company` (2,078),
+`wasteland-lewdness` (2,056) and six more. Twelve of twenty-five measured field games have no such
+meter.
+
+### 4 · Instrument holes closed before any figure was reported
+
+- A `rep` substring match pulls in `$fireplace`, `$weddingprep`, `$replay`, `$repayment`,
+  `$replaced`, `$karleeRepeat`, `$amyForeplay`. Fixed segmentally. **A first regex-boundary attempt
+  failed silently because `re.IGNORECASE` makes `[A-Z0-9]` match lowercase** — the character class
+  stopped being a boundary at all. `--selftest` now pins 19 names.
+- `<<set $Reputation to $Reputation + 5>>` is the ordinary increment, not a dice roll. An
+  arithmetic test mis-scored all 31 of patriarch's; the rule is that the assignment target must be
+  a *different* variable. patriarch 31 → 0, destroyer 41 → 16 with the survivors verified.
+- `become-taxi-driver` has **no** reputation meter — all 103 hits are `$rep_quest_<name>.{time,min,
+  count,fase}` quest bookkeeping. `$standing_[1-4]` in `corpo-life` are **video filenames**.
+
+### 5 · What changed
+
+- `references/the-meters.md` — **W5b** retitled *"it rises, it rarely refuses, and it still decides
+  things"*; a correction box at its head; the optional-example paragraph rebuilt on the ten
+  zero-reputation games; a new section **Rarely a lock is not the same as never mechanical** with
+  the four-row mechanism table and where the reads live (repeatable job and location surfaces, not
+  the sidebar — surface reads are 0–16 per game against 7–934 in ordinary passages); the W5 pointer
+  and the Section-H footer annotated; the 644 block now discloses its three games inline.
+- `SKILL.md` — the fifth-commitment table's reputation row now reads `~10% of branch arms (13
+  games)`, with a ⚠️ note that colours-more-than-it-locks is **not** decides-nothing; the Section-H
+  citation further down annotated.
+- `STATUS.md` — the W5b index row and the Section-H study row both carry the corrected sample.
+
+**Not changed:** `the_season`, which also ships a `known` meter built on this doctrine. Flagged,
+not touched — it is a different game and a different session's call.
+
+### 6 · Verified
+
+- Every excluded variable was **read before it was excluded**, not pattern-matched away; the four
+  exclusions are named with their reasons in `measure_rep_final.py`'s docstring.
+- `family-ties`' six fame meters confirmed against `you_init`'s literal declaration, not inferred
+  from a name.
+- `grep -rn 644` across the skill returns only the six sites above, each now carrying its sample.
+- The companion figure in the same spec block — *"field runs 8-17 rungs on a player meter"* —
+  was re-measured and **holds** (median 9 across 12 games). Only the 644 was bad.
+
+---
+
 ## 2026-08-26 (5) — `npcs[].role`: the label under the name in every dialogue box
 
 **Why.** LO, on the prose-anchor fix for W1: *"I don't think this is the proper solution for it. In

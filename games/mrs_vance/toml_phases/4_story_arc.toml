@@ -102,7 +102,7 @@ blocks = [
     { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "I put the water on. It's an hour, so. If you were going to. That's all." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "You're not what I thought you'd be. I don't mean that bad. I mean I'd made up a whole — no. Forget it." },
   ] },
-  { type = "paragraph", content = "He goes red from the collar up while he is still talking and keeps going anyway, which is the bravest thing anybody in this house does all week." },
+  { type = "paragraph", content = "He goes red from the collar up while he is still talking and keeps going anyway." },
 ]
 
 [canvases.nodes.exit_block]
@@ -695,8 +695,8 @@ blocks = [
   { type = "video", props = { pool_dir = "sex/sherrod_office_t5", pool = 4, description = "A woman kneeling to suck an older man in a chair.", search_queries = ["woman kneeling blowjob older man chair", "office chair blowjob pov older"] } },
   { type = "paragraph", content = "You get his belt open and his cock out of it and it is thick and already hard and he does not help you with any of it. You take it in your mouth off your knees on the office floor." },
   { type = "block_pool", blocks = [
-    { type = "paragraph", content = "He talks while you suck him — about the yard, about his brother, about what a thing is worth — and every time you go all the way down on his cock he stops mid-sentence and then carries on from where he was." },
-    { type = "paragraph", content = "He talks the whole time you have his cock in your mouth — the yard, his brother, what a thing is worth — and only stops when you suck him all the way down. Your cunt aches and he has not touched it once." },
+    { type = "paragraph", content = "He talks while you suck him. About the yard, about his brother, about what a thing is worth. Every time you go all the way down on his cock he stops mid-sentence and then carries on from where he was." },
+    { type = "paragraph", content = "He talks the whole time you have his cock in your mouth. The yard, his brother, what a thing is worth. He only stops when you suck him all the way down. Your cunt aches and he has not touched it once." },
     { type = "paragraph", content = "He takes hold of your jaw and moves your head where he wants it, still talking, and you keep his cock in your mouth and let him do it. Your tits are out of your shirt and your nipples are hard and he has not looked at them yet." },
   ] },
   { type = "paragraph", content = "He gets a hand into the front of your shirt and pulls it open to get at your tits, and works one nipple between two fingers, hard enough that your cunt tightens on it." },

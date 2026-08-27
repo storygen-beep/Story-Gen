@@ -186,7 +186,7 @@ is_repeatable     = true
 id = "base"
 name = "Base"
 blocks = [
-  { type = "paragraph", content = "He comes in off a load with a fault he cannot describe and a schedule he can, leans both forearms on the counter, and asks you to get somebody who knows. He is not being unpleasant about it. That is the part that gets you." },
+  { type = "paragraph", content = "He comes in off a load with a fault he cannot describe and a schedule he can, leans both forearms on the counter, and asks you to get somebody who knows. He is not being unpleasant about it." },
   { type = "block_pool", blocks = [
     { type = "dialog", props = { speaker = "unknown" }, content = "Is there a fella about, love?" },
     { type = "dialog", props = { speaker = "unknown" }, content = "No offence — I'll wait for one of the lads." },
@@ -360,7 +360,7 @@ requires_npc      = "npc_tobin"
 id = "base"
 name = "Base"
 blocks = [
-  { type = "paragraph", content = "He is three trucks down with the clipboard and he waits for you rather than working toward you, which means he has been out here doing nothing for a while." },
+  { type = "paragraph", content = "He is three trucks down with the clipboard and he waits for you rather than working toward you. He has been out here doing nothing for a while." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "You know he's not back till Friday, right." },
   { type = "paragraph", content = "It is not a question and he does not put a question in his voice. The hedge takes the road noise and out here there is nobody within two hundred feet of the pair of you." },
 ]
@@ -445,7 +445,7 @@ requires_npc      = "npc_booth"
 id = "base"
 name = "Base"
 blocks = [
-  { type = "paragraph", content = "He is where he always is and he has been there since four, and when you come in he does the thing with the chair — half up, then sitting back down when he works out that standing was the wrong call." },
+  { type = "paragraph", content = "He is where he always is and he has been there since four, and when you come in he does the thing with the chair. Half up, then sitting back down when he works out that standing was the wrong call." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "There's hot water, if you — I put it on. About an hour ago." },
   { type = "paragraph", content = "He put the water heater on an hour ago for a bath he is not going to have." },
 ]
@@ -491,7 +491,7 @@ name = "Base"
 blocks = [
   { type = "paragraph", content = "He is on his back with the light off and he has not been asleep at any point since he got in, and he does not say anything when you come up, which is his way of saying he knows what time it is." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_dorn" }, content = "Book all right?" },
-  { type = "paragraph", content = "In eleven weeks that is the closest he has come to asking you what you did today." },
+  { type = "paragraph", content = "It is the closest he has come in eleven weeks to asking what you did today." },
 ]
 
 [canvases.nodes.exit_block]
@@ -676,7 +676,7 @@ blocks = [
   { type = "block_pool", blocks = [
     { type = "paragraph", content = "In here nobody calls you anything. Your husband's eldest notices that before you do, and you can tell he has noticed by which way he turns the stool." },
     { type = "paragraph", content = "There are two men from the yard at the other end and he has put himself between them and you without either of you agreeing to it." },
-    { type = "paragraph", content = "He has the truck keys on the bar in front of him, which means he is driving, which means he is not staying, which he has not said." },
+    { type = "paragraph", content = "He has the truck keys on the bar in front of him. He is driving, so he is not staying. He has not said so." },
   ] },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Long way to come for a drink. Sit down or don't." },
 ]
@@ -823,7 +823,7 @@ blocks = [
   { type = "block_pool", blocks = [
     { type = "paragraph", content = "The room is warm because the water heater backs onto this wall, so he sleeps on top of the covers and does not always hear the door." },
     { type = "paragraph", content = "The youngest sits up fast when you knock and then makes himself slow down halfway through doing it, which is worse than either." },
-    { type = "paragraph", content = "He has the sound down far enough that he would hear anybody on the landing, which means he is listening for somebody on the landing." },
+    { type = "paragraph", content = "He has the sound down far enough that he would hear anybody on the landing." },
   ] },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_booth" }, content = "You can come in. I mean — the door's open, so." },
 ]
@@ -979,7 +979,7 @@ name = "Base"
 blocks = [
   { type = "paragraph", content = "Two beds and a plywood partition that stops a foot short of the ceiling, so there is no such thing as a private conversation in this room and everybody in it knows that." },
   { type = "block_pool", blocks = [
-    { type = "paragraph", content = "He is on his bed with the radio on and the door open, which is what he does instead of asking whether anybody is coming up." },
+    { type = "paragraph", content = "He is on his bed with the radio on and the door open. He does not ask whether anybody is coming up." },
     { type = "paragraph", content = "The window looks straight down onto the yard. From up here you can see the kitchen light and your own bedroom window and the gate." },
     { type = "paragraph", content = "The compressor cuts in under the floor and the whole room takes it, and he waits for it to stop before he says anything, every time." },
   ] },
@@ -1436,7 +1436,7 @@ blocks = [
   { type = "video", props = { pool_dir = "sex/shop_watched_t4", pool = 4, description = "A woman walking through a workshop past working men.", search_queries = ["woman walking through garage men working", "woman in workshop men watching her"] } },
   { type = "block_pool", blocks = [
     { type = "paragraph", content = "Two of them are under the same truck. One of them stops talking. The other one carries on for a second and then works out why." },
-    { type = "paragraph", content = "The compressor is loud. It is loud enough that nobody has to pretend to be saying something. They just look, and go back to it, and that is the whole exchange." },
+    { type = "paragraph", content = "The compressor is loud. It is loud enough that nobody has to pretend to be saying something. They just look, and go back to it." },
     { type = "dialog", props = { speaker = "unknown" }, content = "Morning, Mrs. Vance." },
     { type = "paragraph", content = "Somebody says it from inside a bay where you cannot see him. Then somebody else says it, further down, and it goes along the shop like a bell." },
   ] },
@@ -1618,9 +1618,16 @@ blocks = [
     { type = "paragraph", content = "He says it like a fact he has been checking against you all evening and has now confirmed. Then he goes back down the bar and tells the other one." },
   ] },
   { type = "block_pool", blocks = [
-    { type = "paragraph", content = "In here nobody has to call you anything. That is the whole reason for the twenty minutes, and you have never said so out loud." },
+    { type = "paragraph", content = "In here nobody has to call you anything. You have never said so out loud." },
     { type = "paragraph", content = "Two men from the yard at the far end. They have seen you. Neither of them is coming down, and neither of them is leaving." },
   ] },
+  # The same four-rung chain, highest-first with ceilings. `WANT.md` §3's "what the
+  # bar already knows": at the bottom the room settles the question with one word
+  # and stops looking, and at the top your name arrives down there ahead of you.
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 70 }, ] }, blocks = [ { type = "paragraph", content = "The one at the end says the yard's name and then yours, in that order, and the man he is telling has already had it off somebody else this week, which you can tell because he does not ask which yard." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "standing", operator = "lt",  value = 70 }, ] }, blocks = [ { type = "paragraph", content = "Somebody down the bar says your name to somebody else and it carries, and it is your name on its own and not the sentence with Dorn in it, and neither of them looks up to check whether you heard." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 15 }, { type = "trait", subject = "player", trait_key = "standing", operator = "lt",  value = 40 }, ] }, blocks = [ { type = "paragraph", content = "They have got as far as Mrs. Vance down there and no further. It comes back up the bar twice in an hour, always in the same sentence as the yard, never in one of its own." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "lt", value = 15 }, ] }, blocks = [ { type = "paragraph", content = "The two at the end work out who you are in under a minute and it takes them one word to do it, and the word is Dorn's, and then they stop looking, because that answered it." } ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -1686,7 +1693,7 @@ blocks = [
   { type = "video", props = { pool_dir = "sex/bank_counter_t4", pool = 3, description = "A woman at a small bank counter being told no.", search_queries = ["woman at bank counter teller", "woman bank branch counter small town"] } },
   { type = "block_pool", blocks = [
     { type = "dialog", props = { speaker = "unknown" }, content = "It's a Vance account, love, it's just not your Vance account. I can't show you a balance you're not a signatory on." },
-    { type = "paragraph", content = "Dee has known this account since before there was a second Mrs. Vance on the paperwork. There is not one now either. That is the point of the sentence." },
+    { type = "paragraph", content = "Dee has known this account since before there was a second Mrs. Vance on the paperwork. There is not one now either." },
   ] },
   { type = "block_pool", blocks = [
     { type = "paragraph", content = "You could bring in the book. The book is not the account. You have worked that out three times now, standing here." },
@@ -1834,7 +1841,7 @@ blocks = [
   { type = "dialog", props = { speaker = "unknown" }, content = "Who's fetching it?" },
   { type = "paragraph", content = "Cade does not look up from the sheets. He says it to the room." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Mrs. Vance is." },
-  { type = "paragraph", content = "That is the first time he has given you a job in front of them. Two of them turn round. Your brother does not." },
+  { type = "paragraph", content = "He has never given you a job in front of them before. Two of them turn round. Your brother does not." },
 ]
 
 [canvases.nodes.exit_block]
@@ -1873,7 +1880,7 @@ conditions    = { version = "1.0", logic = "AND", items = [
 id = "base"
 name = "Base"
 blocks = [
-  { type = "paragraph", content = "Cade — your husband's eldest, and the only one of them with a reason to be in this kitchen — comes up for ten minutes on a Friday and stands rather than sits. Booth has taken his plate upstairs. Nobody asked him to." },
+  { type = "paragraph", content = "Cade comes up for ten minutes on a Friday and stands rather than sits. He is your husband's eldest, and the only one of them with a reason to be in this kitchen. Booth has taken his plate upstairs. Nobody asked him to." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "Week's straight. Drawer balanced Friday." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_dorn" }, content = "Good." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_cade" }, content = "The book's neat. Neater than it was." },
@@ -2130,12 +2137,22 @@ id = "base"
 name = "Base"
 blocks = [
   { type = "dialog", props = { speaker = "unknown" }, content = "You'll be Dorn's, then." },
-  { type = "paragraph", content = "Dee has been on that counter twenty years. She says it kindly. That is the part that lands." },
+  { type = "paragraph", content = "Dee has been on that counter twenty years. She says it kindly." },
   { type = "dialog", props = { speaker = "player" }, content = "I keep the books for the yard." },
   { type = "dialog", props = { speaker = "unknown" }, content = "That's lovely. And you're not on the account." },
   { type = "dialog", props = { speaker = "player" }, content = "No." },
   { type = "dialog", props = { speaker = "unknown" }, content = "No. Well. Three years goes quicker than you'd think, love." },
   { type = "paragraph", content = "She knows about the paper. Everybody at this crossroads knows about the paper." },
+  # Four rungs on `standing`, and they are ONE if/elseif chain -- adjacent [group]
+  # blocks merge, so highest-first and every middle arm carries its ceiling or the
+  # arm above it never fires. This is `WANT.md` §3's "the bank clerk's tone": the
+  # facts of the account never move, only how Dee says them. At the bottom she is
+  # kind to a woman who will not be here long; at the top she breaks a small rule
+  # for a woman she expects to be signing.
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 70 }, ] }, blocks = [ { type = "paragraph", content = "Dee turns the screen a few degrees so you can see the figure, which she is not supposed to do, and she says your name with no husband in front of it, and the woman behind you does not lean in." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "standing", operator = "lt",  value = 70 }, ] }, blocks = [ { type = "paragraph", content = "Dee asks what the yard needs this month before she asks anything about Dorn, and she waits with her hand off the keyboard for you to answer it, which is not the order she used to do it in." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 15 }, { type = "trait", subject = "player", trait_key = "standing", operator = "lt",  value = 40 }, ] }, blocks = [ { type = "paragraph", content = "Dee says Mrs. Vance when she greets you and love when she finishes, both inside two minutes, and does not appear to notice she has done both, and she writes the yard's number on the slip without asking you for it." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "standing", operator = "lt", value = 15 }, ] }, blocks = [ { type = "paragraph", content = "Dee writes Dorn's name on the slip before you have said which account, and she does it kindly, the way you are kind to somebody at a counter who will not be here long." } ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -2416,7 +2433,7 @@ blocks = [
   { type = "dialog", props = { speaker = "unknown" }, content = "She's been at that book two hours." },
   { type = "dialog", props = { speaker = "unknown" }, content = "So?" },
   { type = "dialog", props = { speaker = "unknown" }, content = "So nothing. Just saying." },
-  { type = "paragraph", content = "They are not being unpleasant. That is the whole trouble with it. They are talking about the office the way they talk about the weather." },
+  { type = "paragraph", content = "They are not being unpleasant. They are talking about the office the way they talk about the weather." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Say it where she can hear you, then." },
   { type = "paragraph", content = "Nobody says anything after that. Your brother goes back to the parts wall with his ears red." },
 ]
@@ -2462,7 +2479,7 @@ blocks = [
   { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Because I watch the stairs." },
   { type = "paragraph", content = "Isaac is on the other bed and has not moved and has not stopped listening either." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "Everybody watches the stairs." },
-  { type = "paragraph", content = "That is the longest sentence he has produced in front of you and he says it to the ceiling." },
+  { type = "paragraph", content = "It is the longest sentence he has produced in front of you, and he says it to the ceiling." },
 ]
 
 [canvases.nodes.exit_block]
@@ -2877,7 +2894,7 @@ chance               = 0.26
 id = "base"
 name = "Base"
 blocks = [
-  { type = "paragraph", content = "The phone goes in the small hours, and it goes in the office, which means it goes through the wall into your room." },
+  { type = "paragraph", content = "The phone goes in the small hours, and it goes in the office. It comes through the wall into your room." },
   { type = "paragraph", content = "You are down the stairs and across the yard in a coat and boots before you have decided to be. The office is cold and the desk lamp is the only thing on." },
   { type = "dialog", props = { speaker = "unknown" }, content = "Vance Diesel?" },
   { type = "dialog", props = { speaker = "player" }, content = "Go on." },
