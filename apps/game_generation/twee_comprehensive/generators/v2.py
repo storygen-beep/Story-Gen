@@ -18570,7 +18570,17 @@ if (clothingMsg) {
    14-character first line. With no column there is nothing to reserve, so the phone and
    the laptop want the same rules. */
 .dialog-block {
-    --dlg-face: clamp(36px, 10vw, 44px);
+    /* ⚠️ THE FACE IS DERIVED FROM THE IDENTITY, NOT THE OTHER WAY ROUND. The label beside
+       the portrait is two rows — the name's own row, and the row the role SHARES with the
+       first words of the speech — so its height is `name-row + leading` no matter what the
+       portrait does. Sizing the rows as a fraction of the face made the label overflow it
+       by 8-9px, and could not be fixed by changing the fraction: solving
+       `0.7*F + leading <= F` needs `F >= leading / 0.3`, which at a 28px leading is a 93px
+       portrait. Deriving the face from the rows makes `identity == face` true by
+       construction, at any font size. */
+    --dlg-lead:     1.5em;
+    --dlg-name-row: 1.35em;
+    --dlg-face:     calc(var(--dlg-name-row) + var(--dlg-lead));
     display: block;
     margin: 10px 0;
     padding: 10px;
@@ -18620,6 +18630,7 @@ if (clothingMsg) {
    and give the phone a horizontal scrollbar, invisible at desktop width. */
 .dialog-content {
     overflow-wrap: anywhere;
+    line-height: var(--dlg-lead);
 }
 
 /* The name takes a row of its own ONLY when a role follows it, so the role can sit under
@@ -18633,8 +18644,9 @@ if (clothingMsg) {
    read, so `max()` holds the role at 9px there. */
 .dialog-content strong {
     display: block;
-    font-size: max(12px, calc(var(--dlg-face) * 0.40));
-    line-height: calc(var(--dlg-face) * 0.70);
+    height: var(--dlg-name-row);
+    line-height: var(--dlg-name-row);
+    font-size: 1.05em;
 }
 
 /* ⚠️ The role-less case shares its line with the speech, so it must NOT inherit the 70%
@@ -18642,8 +18654,9 @@ if (clothingMsg) {
    the surrounding leading instead. */
 .dialog-content strong.dlg-inline {
     display: inline;
-    font-size: clamp(11px, 3vw, 14px);
+    height: auto;
     line-height: inherit;
+    font-size: 1em;
 }
 
 /* F10 — the short label under a speaker's name. Quieter than the name, because it is a
@@ -18654,8 +18667,8 @@ if (clothingMsg) {
    that line renders at the speech's leading — the 30% governs the label, not the row. */
 .dialog-role {
     display: inline;
-    font-size: max(9px, calc(var(--dlg-face) * 0.24));
-    line-height: calc(var(--dlg-face) * 0.30);
+    font-size: max(9px, 0.62em);
+    line-height: inherit;
     color: var(--theme-text-muted, #8a8a8a);
 }
 
