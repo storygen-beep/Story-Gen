@@ -139,17 +139,55 @@ blocks = [
 [canvases.nodes.exit_block]
 type = "choices"
 
-[[canvases.nodes.exit_block.choices]]
-text                     = "Ask what happens if it does not agree."
-targetType               = "node"
-nodeId                   = "open_dorn_leaves.the_week"
-time_progression_minutes = 5
+# ─────────────────────────────────────────────────────────────────────────────
+# THE ONE CHOICE THAT SETS WHO SHE WAS.  G1 / DOCTRINE_GAPS Study 7.
+#
+# ⚠️ THIS NODE ALREADY HAD TWO CHOICES AND THEY DID NOTHING — both went to
+#    `the_week`, both carried no effects, and they differed in no way. Four such
+#    choices shipped in this opening. That is the defect Study 7 names, sitting
+#    in the game: the player is asked a question and the answer is discarded.
+#
+# ⚠️ A MEMORY, NOT A SLIDER (`findings_A_want.md:93`). She is not picking a stat
+#    off a character sheet — she is answering the man who just put a ledger in
+#    front of her, and what she says reveals what she did before eleven weeks
+#    ago. Course of Temptation asks what kind of teenager she was and sets
+#    thirteen skills the player never sees; this is the same move at one flag.
+#
+# ⚠️ THE FLAG IS SET ON THE CHOICE, NOT ON THE NODE EXIT. A choice runs
+#    flagEffects BEFORE advanceTime; an exit runs advanceTime FIRST
+#    (v2.py:12648-12733 vs :13085-13088). Same rule as every day-cap in
+#    `0_systems_spec.toml` §28.
+#
+# ⚠️ AND THE SETTER HAS TO BE LOCATED OR THE BUILD HARD-FAILS. This canvas
+#    declares `location = "your_room"` and a Monday 05:00-06:45 schedule, so the
+#    flag-chain validator can point a player at where it gets set. A triggerless
+#    node could not host this.
+#
+# Exclusive by construction: one choice, one flag, no mutex needed. A save made
+# before this shipped carries none of the three, which every read handles by
+# falling through — see `3_activities.toml`.
+# ─────────────────────────────────────────────────────────────────────────────
 
 [[canvases.nodes.exit_block.choices]]
-text                     = "Pick the key up."
+text                     = "Tell him you have kept books before."
 targetType               = "node"
 nodeId                   = "open_dorn_leaves.the_week"
 time_progression_minutes = 5
+flagEffects = [ { targetType = "player", flag = "past_books", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Tell him you used to drive."
+targetType               = "node"
+nodeId                   = "open_dorn_leaves.the_week"
+time_progression_minutes = 5
+flagEffects = [ { targetType = "player", flag = "past_road", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Say nothing. Pick the key up."
+targetType               = "node"
+nodeId                   = "open_dorn_leaves.the_week"
+time_progression_minutes = 5
+flagEffects = [ { targetType = "player", flag = "past_counter", op = "set" } ]
 
 
 [[canvases.nodes]]

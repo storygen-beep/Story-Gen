@@ -346,6 +346,45 @@ class Beat:
     branches inline — folding keeps our numbers comparable to the DoL baseline
     the thresholds came from. Cascade beats DO split, because each one is a
     separate screen the player advances through.
+
+    ⚠️ UNFOLDING `block_pool` WAS PROPOSED AND IS REFUSED. MEASURED 2026-08-27.
+    ═══════════════════════════════════════════════════════════════════════════
+    `~/Documents/Female_PC_Craft_Study_20260823/proposal_for_skill.md` opens with a
+    **P0**, to ship "first, alone": count a pool as ONE representative variant for
+    word-count purposes, because otherwise "the scoreboard will punish authors for
+    using it." The observation underneath is TRUE — a pool renders one of N, so a
+    game's counted words exceed what any single pass shows (mrs_vance: 12,509 counted,
+    8,706 per pass, a 30% gap).
+
+    THE CONCLUSION DOES NOT FOLLOW, and the fix would break a correct game. The
+    proposal was written when NO v2 game used a pool. mrs_vance now ships 69 pools /
+    221 variants, so it is finally testable. Scored three ways, `_collect` patched:
+
+        model            location fill words   locations on their own budget
+        fold (this file)        12,509          14/14
+        split                   12,509          14/14   <- folding is not what sets it
+        one variant              8,706           4/14   <- P0
+
+    `the-board.md:92` decides it: fill is "its word budget — in round numbers, written
+    now, BEFORE THE PROSE." It is a plan for what the author will WRITE. Three pooled
+    variants of 400 words ARE 1,200 words written. P0 would score an author 4/14 for
+    doing exactly what the doctrine asked — which is the Study 2 R4 failure the
+    proposal itself cites two sections earlier: a check that fails a game for obeying
+    the doctrine is a bug in the check.
+
+    The field-baselined gates barely move either, because they are RATES and both
+    halves move together: explicit floor 13.9%/108 -> 14.1%/326, sentence length
+    median 9 -> 9, G43 19.2/10k -> 19.2/10k.
+
+    ⚠️ AND THE ONE GATE THAT LOOKED LIKE THE REAL DEFECT WAS AN ARTIFACT OF THE PROBE.
+    `an explicit beat carries a clip` read 15/15 (100%) folded and 4/46 (9%) split — a
+    91-point swing — because the split model made each pool child its own beat and
+    ORPHANED IT FROM THE NODE'S SIBLING MEDIA. Counted against the source instead:
+    of 32 explicit(3+) pool variants in mrs_vance, **0 carry their own clip, 32 sit
+    under a clip on the shared node, and 0 render dry.** The 100% is honest.
+
+    So: no change. Gate 1 REPORTS the per-pass figure (see G1) and judges the budget.
+    ═══════════════════════════════════════════════════════════════════════════
     """
     __slots__ = ("canvas", "node", "text", "media")
 
@@ -403,6 +442,44 @@ def _collect(blocks, beat, out, canvas, node):
                 "files": props.get("files"),
                 "pool": props.get("pool"),
             })
+
+
+def _pool_pass_words(game):
+    """(pool count, words one pass shows) — REPORTING ONLY, judged by nothing.
+
+    A `block_pool` renders one of N (`v2.py:14572`), so a game's counted words and the
+    words a single playthrough shows are two different quantities. Gate 1 judges the
+    first, because `fill` is a budget for prose WRITTEN (`the-board.md:92`) — see the
+    refusal recorded on `Beat`. It prints the second so the gap is visible rather than
+    argued about, the way gates 19/20 print their distribution and G43 prints its split.
+
+    Per pass = every variant's words replaced by the MEDIAN variant of its pool. Median,
+    not first, so the figure does not swing on authoring order.
+    """
+    per_pool = []
+
+    def walk(blocks):
+        for b in blocks or []:
+            if not isinstance(b, dict):
+                continue
+            props = b.get("props") or {}
+            kids = b.get("blocks") or props.get("blocks") or []
+            if b.get("type") == "block_pool" and kids:
+                sizes = []
+                for k in kids:
+                    beat = Beat("", "")
+                    _collect([k], beat, [], "", "")
+                    sizes.append(beat.words)
+                if sizes:
+                    per_pool.append((sum(sizes), sorted(sizes)[len(sizes) // 2]))
+            walk(kids)
+            for sub in props.get("beats") or []:
+                walk(sub.get("blocks"))
+
+    for c in game.get("canvases") or []:
+        for n in c.get("nodes") or []:
+            walk(n.get("blocks"))
+    return len(per_pool), sum(written - shown for written, shown in per_pool)
 
 
 def _conditions_of(obj):
@@ -3842,6 +3919,15 @@ def run_gates(model, game, state=None):
         head = (f"{n} locations · {total:,} words · mean {mean:,.0f} · median {median:,} · "
                 f"anchor {anchor_id} {anchor_pct:.0f}% · [backstop — no declared budgets]")
 
+    # ⚠️ REPORTING ONLY — appended to every branch's headline, and judged by NOTHING.
+    # A pool renders one of N, so `total` above is words WRITTEN and this is words one
+    # pass shows. Gate 1 judges the first on purpose (`the-board.md:92`); the refusal of
+    # the proposal to judge the second is recorded on `Beat`. Printed because two numbers
+    # that differ by 30% should not be invisible behind a single PASS.
+    n_pools, pool_gap = _pool_pass_words(game)
+    if n_pools:
+        head += f" · {n_pools} pools, {total - pool_gap:,} words per pass"
+
     gate("location fill", not fails, head, fails)
 
     # G2 — explicit floor.
@@ -5465,6 +5551,73 @@ def run_gates(model, game, state=None):
               "either move the gating to where the declaration says it lives, or change the "
               "declaration — but do not leave it in the middle, which is where every v2 game "
               "so far has landed by default (the-meters.md W1)"])
+    # G44 — the start choice is read. `the-want.md` §1.
+    #
+    # WHAT THIS CATCHES: fake freedom. A game that asks the player who she is and then
+    # discards the answer. Measured, that is not hypothetical — mrs_vance's opening
+    # SHIPPED asking four questions whose choices shared one target, carried no effects
+    # and differed in no way, and nothing in 41 gates could see it.
+    #
+    # WHY IT IS WORTH GATING: `freedom` is the largest single thing the field is loved
+    # for (25.9% of top-30 engagement, reason (1) weighted by comment count), while
+    # `premise` is 0 of 30. The choosing is the product.
+    #
+    # ⚠️ IT FAILS ONLY ON ZERO, AND THAT RESTRAINT IS THE POINT. A floor ("read at least
+    # N times") cannot be defended from the one game that has a start choice, and this
+    # skill has already had to supersede a whole doctrine built at n = 1 (the-meters.md
+    # W1, 2026-08-19). Declared-and-never-read needs no threshold — it is the defect by
+    # definition. Everything else is REPORTED so a distribution accumulates and a future
+    # floor can be read off it instead of invented.
+    #
+    # ⚠️ THE SET-SITE IS NOT CHECKED HERE. The flag-chain validator already hard-fails a
+    # flag whose setter is triggerless (`template_import.py`), and two instruments on one
+    # question is how gate 22 and the anchoring lint had to be split apart.
+    # ═════════════════════════════════════════════════════════════════════════
+    sc = (((state or {}).get("want") or {}).get("player") or {}).get("start_choice") or {}
+    sc_flags = [f for f in (sc.get("flags") or []) if isinstance(f, str) and f.strip()]
+    if state is None:
+        gate("the start choice is read", None,
+             "no v2_state.json — nothing declared to check against")
+    elif not sc_flags:
+        gate("the start choice is read", None,
+             "no want.player.start_choice declared — the player chooses nothing about her",
+             ["declare it: want.player.start_choice = { asked_at, flags } — the-want.md §1",
+              "measured: `freedom` is 25.9% of top-30 engagement and the largest single "
+              "bucket; `premise` is 0 of 30. All eight v2 games let the player choose nothing",
+              "a memory, not a slider — ask what the scene already asks and set a flag; do "
+              "not build a stat screen",
+              "this reports n/a, which is NOT a pass — an absence is not evidence"])
+    else:
+        # A READ is the flag appearing in ANY condition anywhere in the canvas tree —
+        # a trigger, a choice, a [group] band. All three are how a start choice earns
+        # its keep, so all three count; `_conditions_of` only reaches one object, so
+        # this walks the whole structure the way the flag census does.
+        sc_reads = collections.Counter()
+
+        def _walk_conds(obj):
+            if isinstance(obj, dict):
+                for it in _conditions_of(obj):
+                    key = it.get("flag_key")
+                    if key in sc_flags:
+                        sc_reads[key] += 1
+                for v in obj.values():
+                    _walk_conds(v)
+            elif isinstance(obj, list):
+                for v in obj:
+                    _walk_conds(v)
+
+        _walk_conds(game.get("canvases") or [])
+        dead = [f for f in sc_flags if not sc_reads[f]]
+        shape = " · ".join(f"{f} read {sc_reads[f]}x" for f in sc_flags)
+        gate("the start choice is read", not dead,
+             f"{len(sc_flags)} start-choice flag(s) — {shape}"
+             + ("" if dead else "  (count reported, not judged — see the header)"),
+             ([f"declared and NEVER READ: {', '.join(dead)}",
+               "a choice the game does not read is the fake-freedom defect this gate exists "
+               "for — the player is asked who she is and the answer is discarded",
+               "either read it (a [group] band, a gated rung) or drop it from "
+               "want.player.start_choice.flags"] if dead else []))
+
     # G19 — sentence length. The first gate here that measures WRITING.
     sent_words = [len(s.split())
                   for c in model for b in c["beats"]

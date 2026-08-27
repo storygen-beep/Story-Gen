@@ -291,6 +291,18 @@ name = "Base"
 blocks = [
   { type = "image", props = { pool_dir = "amb/office_counter_t1", pool = 3, description = "A woman behind a workshop front counter with job sheets on a spike.", search_queries = ["woman behind garage service counter paperwork", "auto shop front desk woman clipboard"] } },
   { type = "block_pool", blocks = [ { type = "paragraph", content = "Drivers come in with a fault and a schedule and they are all in a hurry, and every one of them looks past you at the hatch to see whether there is a man behind it." }, { type = "paragraph", content = "Three of them in the first hour and none of them says the name of the part right. You write down what they actually said, and then what they meant, in the second column." }, { type = "paragraph", content = "The phone goes and it is somebody's dispatcher wanting a time, and there is no time to give him, so you give him a different true thing instead and he takes it." }, ] },
+  # ⚠️ THE PAST LADDER SITS HERE, BETWEEN THE POOL AND THE EXCHANGE, AND THAT IS
+  #    NOT A STYLE CHOICE. The four `standing` bands at the bottom of this node
+  #    are already one merged if/elseif chain — their own comment says so. Put
+  #    this ladder against them and it becomes a five-condition chain where the
+  #    first match wins, which would silently retire the whole standing ladder
+  #    for any player carrying a past. The four dialog blocks below break the
+  #    run, so these are two independent chains.
+  # ⚠️ No unconditional band: the pool above always renders, so a pre-existing
+  #    save with none of the three flags reads exactly what it read before.
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "past_books", operator = "is_true" }, ] }, blocks = [ { type = "paragraph", content = "You give the dispatcher a real time, because you can see the week on the spike and you can count. He argues with it out of habit and then writes it down. None of them expects the number to be true." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "past_road", operator = "is_true" }, ] }, blocks = [ { type = "paragraph", content = "You know what it is costing the one at the front to be stood here. Every man in this queue is running to a schedule somebody else wrote, and you talk to them like a woman who has had one." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "past_counter", operator = "is_true" }, ] }, blocks = [ { type = "paragraph", content = "This is the only thing on the property you already knew how to do. The hurry does not get in. You have had drunker men than these in more of a rush and a lot less room to do it in." } ] },
   { type = "dialog", props = { speaker = "unknown" }, content = "Air's dumping on the front axle. Been doing it since Tuesday." },
   { type = "dialog", props = { speaker = "player" }, content = "Name and plate. I'll get you a slot." },
   { type = "dialog", props = { speaker = "unknown" }, content = "How long?" },
@@ -309,6 +321,32 @@ blocks = [
 [canvases.nodes.exit_block]
 type = "choices"
 
+# ⚠️ PRIVILEGE — paired with the rung below, mutually exclusive on
+#    `past_counter`, nothing taken away. A woman who worked a bar gets more out
+#    of the same six hours of men: +5 standing rather than +3, and it costs her
+#    less to stand there (14 energy, not 18). Same money and the same six hours
+#    — the counter pays what the counter pays. What she is better at is being
+#    in front of them, and `standing` is the meter that measures exactly that.
+[[canvases.nodes.exit_block.choices]]
+text                     = "Take the morning on the counter — you know this room. (6h)"
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 360
+costs                    = [ { trait = "energy", value = 14 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "counter_done_today", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "past_counter",       operator = "is_true"  },
+  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
+] }
+flagEffects = [ { targetType = "player", flag = "counter_done_today", op = "set" } ]
+show_when_locked = true
+locked_text      = "The counter — and not with your arms like that. Get clean first."
+effects = [
+  { targetType = "player", trait = "money",    op = "add", value = 74, clamp = false },
+  { targetType = "player", trait = "standing", op = "add", value = 5, cap = 100 },
+  { targetType = "player", trait = "clean",    op = "add", value = -10 },
+]
+
 [[canvases.nodes.exit_block.choices]]
 text                     = "Take the morning on the counter. (6h)"
 targetType               = "location"
@@ -317,6 +355,7 @@ time_progression_minutes = 360
 costs                    = [ { trait = "energy", value = 18 } ]
 conditions               = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "counter_done_today", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "past_counter",       operator = "is_false" },
   { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
 ] }
 flagEffects = [ { targetType = "player", flag = "counter_done_today", op = "set" } ]
@@ -347,13 +386,50 @@ is_repeatable = true
 [[canvases.nodes]]
 id = "base"
 name = "Base"
+# ⚠️ THE PAST LADDER GOES FIRST, AND ITS POSITION IS LOAD-BEARING. Adjacent
+#    [group] blocks merge into ONE if/elseif chain (v2.py:14637-14641 collects
+#    consecutive `group` blocks) and first match wins. Put this ladder next to
+#    the Cade band below and they become one chain — every player carrying a
+#    past would match here and Cade's line would be UNREACHABLE. The block_pool
+#    between them is what keeps them two independent chains; `block_pool` is a
+#    different block type, so it breaks the run.
+# ⚠️ NO UNCONDITIONAL BAND, deliberately. The pool below always renders, so a
+#    save from before this shipped — carrying none of the three flags — falls
+#    through the whole chain and reads exactly what it read yesterday. Same
+#    shape as the Cade band, which has never had a fallback either.
 blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "past_books", operator = "is_true" }, ] }, blocks = [ { type = "paragraph", content = "You kept a book like this for a yard that ran four vans and a fitter who never wrote anything down. It takes you until the second page to find the column that stopped adding, and the last date in it is March." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "past_road", operator = "is_true" }, ] }, blocks = [ { type = "paragraph", content = "You have been the far end of a sheet like this, signing for a load at six in the morning with the engine still going. You know what the numbers are worth before you know what the parts are." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "past_counter", operator = "is_true" }, ] }, blocks = [ { type = "paragraph", content = "You never learned books. You learned faces over a bar top on a Friday. So you do it slowly, a line at a time, and you check the page twice because nobody in this yard is going to check it for you." } ] },
   { type = "block_pool", blocks = [ { type = "paragraph", content = "Job sheets off the spike, one at a time, and the number at the bottom of each into your column. Half of them have a second figure pencilled on the back that is not the same as the first." }, { type = "paragraph", content = "There is a way this place has always done it and nobody has written it down, so you are learning it out of the shape of the mistakes." }, { type = "paragraph", content = "Two hours of somebody else's handwriting and then your own underneath it." }, ] },
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_cade", trait_key = "trust", operator = "gte", value = 26 }, ] }, blocks = [ { type = "paragraph", content = "He has stopped checking it behind you. You know because the spike is clear at the end and he has not touched it." } ] },
 ]
 
 [canvases.nodes.exit_block]
 type = "choices"
+
+# ⚠️ PRIVILEGE — paired with the rung below, mutually exclusive on `past_books`,
+#    and nothing is taken away. She has done this job before, so the week goes
+#    straight in ninety minutes instead of two hours and Cade gets a cleaner
+#    book back: +5 trust rather than +3. Same money — she is not paid better for
+#    it, she is just faster and it shows.
+[[canvases.nodes.exit_block.choices]]
+text                     = "Put the week straight — you have done this before. (1h30)"
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 90
+costs                    = [ { trait = "energy", value = 10 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "books_done_today", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "past_books",       operator = "is_true"  },
+] }
+flagEffects = [ { targetType = "player", flag = "books_done_today", op = "set" } ]
+show_when_locked = true
+locked_text      = "The book is straight for today. It goes wrong again tomorrow."
+effects = [
+  { targetType = "player", trait = "money", op = "add", value = 22, clamp = false },
+  { targetType = "npc", npcId = "npc_cade", trait = "trust", op = "add", value = 5, cap = 100 },
+]
 
 [[canvases.nodes.exit_block.choices]]
 text                     = "Put the week straight. (2h)"
@@ -363,6 +439,7 @@ time_progression_minutes = 120
 costs                    = [ { trait = "energy", value = 10 } ]
 conditions               = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "books_done_today", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "past_books",       operator = "is_false" },
 ] }
 flagEffects = [ { targetType = "player", flag = "books_done_today", op = "set" } ]
 show_when_locked = true
@@ -426,10 +503,47 @@ id = "base"
 name = "Base"
 blocks = [
   { type = "block_pool", blocks = [ { type = "paragraph", content = "Somebody wants something that is not on the wall, and the place that has it is twenty minutes down the road and shuts at five, so it is you or it is nobody." }, { type = "paragraph", content = "Ask Cade for the truck. He gives you the key off the board without looking up, which is either trust or not caring and you have not worked out which yet." }, { type = "paragraph", content = "The shop truck smells of somebody else's cigarettes and the seat is set for a man six inches taller and you have stopped moving it back." }, ] },
+  # ⚠️ Safe to append here — this node has no other [group] block, so this ladder
+  #    is the only chain on it. (Contrast work_books and work_counter, where an
+  #    existing ladder made placement load-bearing.) No unconditional band: the
+  #    pool above always renders.
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "past_books", operator = "is_true" }, ] }, blocks = [ { type = "paragraph", content = "You take the job sheet with you, because the figure on it is not the figure you would have written and you want to see what the shelf says. Twenty minutes of road and you spend it doing arithmetic." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "past_road", operator = "is_true" }, ] }, blocks = [ { type = "paragraph", content = "You have driven worse than this for less. The seat goes where you want it in four seconds, which is a thing you have not done in eleven weeks, and the mirror after it." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "past_counter", operator = "is_true" }, ] }, blocks = [ { type = "paragraph", content = "The man on the parts desk twenty minutes down the road is a type, and you have handled a hundred of him across a bar. You come back with the part and a price that is not the price on the list." } ] },
 ]
 
 [canvases.nodes.exit_block]
 type = "choices"
+
+# ⚠️ THE PRIVILEGE, AND IT IS THE ONE THAT IS ACTUALLY REACH RATHER THAN
+#    FLAVOUR. The Want's own ascent line for the bottom of this game is that
+#    "she asks Cade for the truck to leave the property at all". A woman who
+#    drove for a living does not ask, and this hands her the bottom rung of the
+#    declared ascent on day one — 90 minutes instead of 120, because she knows
+#    the road, and no Cade in it.
+# ⚠️ PAIRED, NOT REPLACED. The original rung below keeps every number it had and
+#    gains `past_road is_false`, so the two are mutually exclusive and NOBODY
+#    loses a door — a start choice that takes content away is the version
+#    players punish. A save from before this shipped has no `past_road` and
+#    therefore takes the original rung, unchanged.
+[[canvases.nodes.exit_block.choices]]
+text                     = "Take the key off the board yourself. (1h30)"
+targetType               = "location"
+locationId               = "the_shop_floor"
+time_progression_minutes = 90
+costs                    = [ { trait = "energy", value = 12 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "parts_run_today", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "past_road",       operator = "is_true"  },
+] }
+flagEffects = [ { targetType = "player", flag = "parts_run_today", op = "set" } ]
+show_when_locked = true
+locked_text      = "Nothing else is waiting on a part today."
+effects = [
+  { targetType = "player", trait = "money",    op = "add", value = 34, clamp = false },
+  { targetType = "player", trait = "clean",    op = "add", value = -12 },
+  { targetType = "player", trait = "standing", op = "add", value = 3, cap = 100 },
+]
 
 [[canvases.nodes.exit_block.choices]]
 text                     = "Go and get it. (2h)"
@@ -439,6 +553,7 @@ time_progression_minutes = 120
 costs                    = [ { trait = "energy", value = 12 } ]
 conditions               = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "parts_run_today", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "past_road",       operator = "is_false" },
 ] }
 flagEffects = [ { targetType = "player", flag = "parts_run_today", op = "set" } ]
 show_when_locked = true

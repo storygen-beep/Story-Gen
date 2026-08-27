@@ -35,6 +35,22 @@ belong here; only decisions, debts, and promises do.
                                             //   own name tops her own vocabulary report.
 
   "want": {
+    // WHO THE PLAYER IS — declared BEFORE she is described. the-want.md §1.
+    // Added 2026-08-27. Its absence is why eight v2 games shipped one protagonist:
+    // templates/want.md wrote she/her 21 times and he/him zero, so the grammar
+    // answered before the author arrived. The default `female` is EVIDENCED
+    // (49 comments for a female lead, 11 against) — what was missing was the question.
+    "player": {
+      "who":        "female" | "male" | "picked",   // field: 20 male · 6 picked · 4 female (SUPPLY, not a verdict)
+      "definition": "written" | "blank",            // field: 19 blank · 10 written; blank holds 80.4% of engagement
+      // The start choice. `freedom` is the field's largest bucket (25.9%) and
+      // premise is 0 of 30 — the choosing is the product. A MEMORY, NOT A SLIDER:
+      // ask what the scene already asks, set a flag, never show a stat screen.
+      // Omit the key entirely for a game with no start choice; gate
+      // `the start choice is read` then reports n/a, which is NOT a pass.
+      "start_choice": { "asked_at": "canvas.node", "flags": ["…", "…"] }
+    },
+
     "who_she_is":      "…",
     "appetite":        "…",   // must not be completable
     "ascent":          "…",   // stated as ACCESS: what she can reach at the top
