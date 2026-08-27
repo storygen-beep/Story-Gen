@@ -67,14 +67,23 @@ def test_the_role_renders_and_the_name_is_still_there():
     assert out.index("Cade") < out.index("dialog-role")
 
 
-def test_the_speaker_column_holds_the_face_the_name_and_the_role():
-    """The left column is the whole layout: portrait, name, role, stacked."""
-    col = _line(_gen(portrait="faces/cade.jpg")).split('<div class="dialog-content">')[0]
+def test_the_face_is_a_sibling_of_the_name_block_not_a_child():
+    """⚠️ Structural, and it is the whole mechanism. Since 2026-08-27 the face and the
+    name block are two INDEPENDENT left floats, so the speech can sit beside the name,
+    then under the name while still beside the face, then under both. One float cannot
+    do that, so if the portrait ever drifts back inside `.dialog-speaker` the layout
+    silently degrades to a plain two-column box with none of the height saving.
 
-    assert '<div class="dialog-speaker">' in col
-    assert 'class="portrait"' in col
-    assert "<strong>Cade</strong>" in col
-    assert 'class="dialog-role"' in col
+    Asserting on "everything before .dialog-content" would NOT catch that — the portrait
+    is in that string either way. The order of the two opening tags is what pins it."""
+    out = _line(_gen(portrait="faces/cade.jpg"))
+
+    assert out.index('class="portrait"') < out.index('<div class="dialog-speaker">')
+
+    speaker = out.split('<div class="dialog-speaker">')[1].split('<div class="dialog-content">')[0]
+    assert "<strong>Cade</strong>" in speaker
+    assert 'class="dialog-role"' in speaker
+    assert "portrait" not in speaker
 
 
 def test_the_content_column_carries_the_line_and_nothing_else():
