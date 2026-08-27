@@ -100,8 +100,17 @@ mode = "dark"
 #
 # ⚠️ eviction_mode = "flag_set", NOT the default "game_end". The product never
 #    ends. Short on Friday past the grace week and Cade covers it — which sets
-#    `cade_covered`, which is a DEBT to Cade and opens his ladder. The failure
-#    branch is an escalation, not a loss.
+#    `cade_covered`, a DEBT to Cade. The failure branch is an escalation, not a
+#    loss.
+#
+#    ⚠️ THIS COMMENT USED TO SAY "and opens his ladder", AND THAT WAS FALSE
+#       until 2026-08-27. The flag was set by the engine and read by NOTHING:
+#       two hits in the merged TOML, this comment and the settings key below.
+#       The most interesting outcome in the economy opened no content at all.
+#       Now: the office hub reads it (a band and a rung), and she can ASK for it
+#       before Friday instead of only arriving at it by neglect — which is
+#       degrees-of-lewdity's `$robinpaid` exactly. Taking on the debt DOUBLES
+#       that game's rent and buys a love interest; the debt is the door.
 #
 # ⚠️ It arms at 00:00 on due_day (v2.py:5453-5464), not at the hour Cade's
 #    schedule row puts him in the office. start_after_flag keeps the first
@@ -302,6 +311,45 @@ flagEffects = [
   { targetType = "player", flag = "dorn_rung_today",     op = "unset" },
 ]
 
+# ─── THE UPKEEP — the obligation that MOVES, and it moves because she bought
+#     something (E1, 2026-08-27) ────────────────────────────────────────────
+#
+# Measured: the week's income was roughly four times the week's demand, and 260
+# is a build-time constant (setup.rent_amount, v2.py:3118), so it goes soft at
+# whatever value it is set to. The field's obligations move. Three shapes in the
+# corpus and this game takes the third:
+#   1. IMPOSED RATCHET — degrees-of-lewdity steps Bailey's rent through
+#      [10000,30000,50000,70000,100000,150000,200000] pennies (£100 → £2,000) on
+#      every payment, and NOTHING in that game is gated on the stage. It works
+#      there because the collector is a believed predator. Here the Friday money
+#      is already the yard's, so a number that climbs on its own reads as the
+#      author turning a dial.
+#   2. THE TIER YOU CHOSE — corpo-life derives rent from the home you rent
+#      (200/800/10,000/30,000) and OWNING sets it to 0.
+#   3. COST FOLLOWS HOLDINGS — sluttown-usa charges $runningServers * 50 every
+#      Friday. You built it, it costs. ← this one.
+#
+# So: she buys a truck, and from that morning the truck costs her every day. The
+# rise is the truck's fault, chosen, and she got the road for it.
+#
+# ⚠️ NO ENGINE CHANGE. traitEffects on the day hook take a per-effect condition
+#    gate (doc 45 G6, template_import.py:706) and are applied through
+#    setup.applyAndNotifyTrait (v2.py:5586) — so this NOTIFIES. A silent daily
+#    drain is the sluttown-usa charge-meter, which is the one economy device the
+#    corpus universally hates.
+# ⚠️ clamp = false. Fuel does not care that the drawer is empty; going under is
+#    the pressure. The Friday shortfall is what `cade_covered` is for.
+#
+# ⚠️ TOML: an inline table's own keys may NOT be split across lines — only a
+#    nested ARRAY value may contain newlines. Writing `conditions` on its own
+#    line inside this table fails the parse with "Invalid initial character for
+#    a key part". Keep the effect on one line and let the `items` array wrap.
+traitEffects = [
+  { targetType = "player", trait = "money", op = "add", value = -22, clamp = false, conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "truck_bought", operator = "is_true" },
+  ] } },
+]
+
 
 # =============================================================================
 # THE CAST PAGE — [ui.cast_page] (§34)
@@ -363,12 +411,43 @@ intro        = "Four of them are his. One of them is yours."
 
 # ── STORY GOALS — never gated on a meeting, or the page reads "No active
 #    quests." on turn one (F8).
+# ⚠️ `group = "friday"` on both Friday cards. pickQuestsCards collapses a group
+#    to its highest-priority MATCH (v2.py:15355-15375), so the truck card at 91
+#    REPLACES this one the day she buys the truck instead of standing beside it.
+#    Without the group the rail would carry two Friday goals with two different
+#    numbers, which is the drift §23 exists to prevent.
 [[quest_cards]]
 priority = 90
+group    = "friday"
 text     = "You signed a paper that says nothing here is yours for three years. Until then the money runs through the drawer, the truck runs through Cade, and the room you sleep in is his father's room."
 tip      = "The drawer is counted every Friday and the number has to be two sixty. Work the counter and the bay, and keep the book straight."
 when     = [ { flag = "opening_started", subject = "player", op = "is_true" } ]
 goals    = [ { trait = "money", subject = "player", op = "gte", value = 260, label = "Have the two sixty in the drawer by Friday — the office" } ]
+
+# Friday, once the truck is hers. Two sixty has not moved; what moved is that a
+# truck takes twenty-two a day out of the drawer whether she drives it or not,
+# so the week's real number is 260 + 154. She chose this. (E1, the-economy.md.)
+[[quest_cards]]
+priority = 91
+group    = "friday"
+text     = "Two sixty on Friday and a truck that drinks whether it moves or not. Nobody made you buy it. The road it opens is twenty minutes long and it goes both ways."
+tip      = "Fuel and the plates come out every morning. Take the runs yourself now — the shop floor pays a great deal better when the truck at the end of it is yours."
+when     = [ { flag = "truck_bought", subject = "player", op = "is_true" } ]
+goals    = [ { trait = "money", subject = "player", op = "gte", value = 414, label = "Two sixty for Friday and the week's fuel on top — the office" } ]
+
+# THE THING THE MONEY IS FOR. Measured 2026-08-27: every warmly-discussed economy
+# in the 19-game field has an aspirational sink and this game had none — its five
+# purchases bought clean +45, standing +4/+5/+6 and trust +3/+4, and ZERO of its
+# 55 trait conditions read money. The field always SHOWS the big purchase long
+# before it is affordable; this card is that showing, and the goal bullet renders
+# the live figure against it (_readCurrentValue, v2.py:15298).
+[[quest_cards]]
+priority = 88
+text     = "There is a flatbed on the end of the lot at the crossing with a price in the windscreen and no rust under the doors. You cannot put your name on it. Somebody can."
+tip      = "Twenty-six hundred, and Dee at the bank already told you whose name it would have to be. Ask him at the shop when you have the money in the drawer."
+when     = [ { flag = "truck_asked",  subject = "player", op = "is_true"  },
+             { flag = "truck_bought", subject = "player", op = "is_false" } ]
+goals    = [ { trait = "money", subject = "player", op = "gte", value = 2600, label = "Twenty-six hundred in the drawer — then the shop floor, then the crossing" } ]
 
 [[quest_cards]]
 priority = 89

@@ -526,6 +526,42 @@ type = "choices"
 #    loses a door — a start choice that takes content away is the version
 #    players punish. A save from before this shipped has no `past_road` and
 #    therefore takes the original rung, unchanged.
+# ⚠️ THE HAUL — income scales with the obligation (E1, 2026-08-27).
+#    The upkeep in [engine.daily_tick] takes 22 a day the moment the truck is
+#    hers, so the week's real demand goes 260 -> 414. If nothing on the income
+#    side moved, that would be the corpus's single most-punished design: a
+#    tighter week that buys nothing. The four-word verdict from the field's
+#    angriest economy is "here u still grind for nothing".
+#    course-of-temptation's answer is to denominate the payouts in the
+#    obligation itself — its homework jobs pay Math.floor($weeklydebt * 0.15) —
+#    so a rising debt is a difficulty curve and never more clicking. Our engine
+#    has no computed effect values, so the same thing is done with a BAND: her
+#    own truck turns a $34 errand into a $125 run, no key off Cade's board, and
+#    fifteen minutes shorter because nobody has to be asked.
+#    Weekly: +455 from the run against -154 of upkeep. She is better off, the
+#    obligation is bigger, and both of those are her doing.
+# ⚠️ ADDITIVE. The two rungs below keep every number they had and gain
+#    `truck_bought is_false`, so a save from before this shipped takes exactly
+#    the rung it took yesterday.
+[[canvases.nodes.exit_block.choices]]
+text                     = "Take your own truck out. (1h15)"
+targetType               = "location"
+locationId               = "the_shop_floor"
+time_progression_minutes = 75
+costs                    = [ { trait = "energy", value = 14 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "parts_run_today", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "truck_bought",    operator = "is_true"  },
+] }
+flagEffects = [ { targetType = "player", flag = "parts_run_today", op = "set" } ]
+show_when_locked = true
+locked_text      = "Nothing else is waiting on a part today."
+effects = [
+  { targetType = "player", trait = "money",    op = "add", value = 125, clamp = false },
+  { targetType = "player", trait = "clean",    op = "add", value = -12 },
+  { targetType = "player", trait = "standing", op = "add", value = 4, cap = 100 },
+]
+
 [[canvases.nodes.exit_block.choices]]
 text                     = "Take the key off the board yourself. (1h30)"
 targetType               = "location"
@@ -535,6 +571,7 @@ costs                    = [ { trait = "energy", value = 12 } ]
 conditions               = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "parts_run_today", operator = "is_false" },
   { type = "flag", subject = "player", flag_key = "past_road",       operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "truck_bought",    operator = "is_false" },
 ] }
 flagEffects = [ { targetType = "player", flag = "parts_run_today", op = "set" } ]
 show_when_locked = true
@@ -554,6 +591,7 @@ costs                    = [ { trait = "energy", value = 12 } ]
 conditions               = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "parts_run_today", operator = "is_false" },
   { type = "flag", subject = "player", flag_key = "past_road",       operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "truck_bought",    operator = "is_false" },
 ] }
 flagEffects = [ { targetType = "player", flag = "parts_run_today", op = "set" } ]
 show_when_locked = true
@@ -830,6 +868,199 @@ locationId               = "kerr_crossing"
 time_progression_minutes = 15
 effects = [
   { targetType = "player", trait = "energy", op = "add", value = 4, cap = 100 },
+]
+
+
+# =============================================================================
+# THE TRUCK — the aspirational sink, in three beats (E1, 2026-08-27)
+#
+# Measured across 19 field games: every economy players discuss warmly has ONE
+# big purchase, an order of magnitude above the week's obligation, SHOWN long
+# before it is affordable — corpo-life's mansion, patriarch's Villa Garcia (it
+# unlocks Lilith), new-life-project's cars at 150,000 against £400/week rent.
+# This game had none. Its five purchases bought meter points at $2-$26 against
+# $208 a day, and ZERO of its 55 trait conditions read `money`.
+#
+# The chain is bank -> brother -> forecourt, and the middle beat is the point:
+#   ask_papers   @ the_bank        Dee says whose name it would have to be
+#   (the ask)    @ hub_tobin_shop  gated `money gte 2600` — SHE CANNOT OWN IT
+#   see_truck    @ kerr_crossing   the flatbed, and the price in the windscreen
+#
+# ⚠️ `the_bank` had THREE canvases and all three were random ambients, so the
+#    room had nothing to DO in it. This is its first affordance.
+# =============================================================================
+
+[[canvases]]
+id       = "ask_papers"
+name     = "Ask Dee about a vehicle"
+
+[canvases.trigger]
+priority      = 15
+location      = "the_bank"
+is_repeatable = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "09:00"
+end_time   = "16:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "Dee is on the counter with a biro behind her ear and nobody behind you. She has twenty minutes and no reason to hurry either of you." },
+  # ⚠️ ONE chain on this node. Adjacent [group] blocks merge into a single
+  #    if/elseif and first match wins (v2.py:14637), so the ASKED arm goes above
+  #    the unasked one and the paragraph above always renders regardless.
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "truck_asked", operator = "is_true" },
+    ] }, blocks = [
+    { type = "dialog", props = { speaker = "unknown" }, content = "Same answer as last time, love. Not your name. Somebody's, though, and you've already worked out whose." },
+  ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "truck_asked", operator = "is_false" },
+    ] }, blocks = [
+    { type = "paragraph", content = "There is a card in the window for a flatbed on the lot across the road. You have looked at it four mornings running and not said the thing out loud yet." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# The discovery beat. Free, once, and it arms the quest card that shows the
+# price — the field ALWAYS shows the big purchase before it can be bought.
+[[canvases.nodes.exit_block.choices]]
+text                     = "Ask what it would take to put a vehicle on the road. (20m)"
+targetType               = "node"
+nodeId                   = "ask_papers.the_name"
+time_progression_minutes = 20
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "truck_asked", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "truck_asked", op = "set" } ]
+
+# ⚠️ R7 / gate 37 — a door with neither conditions nor costs, always.
+[[canvases.nodes.exit_block.choices]]
+text                     = "Say thanks and go."
+targetType               = "location"
+locationId               = "the_bank"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id = "the_name"
+name = "Whose name"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "If I wanted a vehicle. On the road, taxed, insured. What would that take." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Money and a name. You've got one of those coming and you haven't got the other." },
+  { type = "paragraph", content = "She says it without looking up from the biro, which is how Dee delivers the things she has decided are not her business to soften." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "It can't be yours for three years. It can be anyone else's today. You'll know a name." },
+  { type = "paragraph", content = "You do. He is twenty-two, he sleeps over the shop, and he got the job because you asked for it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave it on the counter and go."
+targetType               = "location"
+locationId               = "the_bank"
+time_progression_minutes = 5
+
+
+[[canvases]]
+id       = "see_truck"
+name     = "The flatbed on the lot"
+
+[canvases.trigger]
+priority      = 16
+location      = "kerr_crossing"
+is_repeatable = true
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "truck_asked", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "It sits at the end of the lot with the price soaped on the windscreen and the tailgate down. Somebody has kept the arches clean, which nobody does for a truck they mean to keep." },
+  # ⚠️ ONE chain again, and it is ordered highest-first. `truck_papers` is set on
+  #    Tobin's rung, which is itself gated on having the whole 2,600 — so this
+  #    ladder reads as: heard of it -> saved for it -> got the name -> bought it.
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "truck_bought", operator = "is_true" },
+    ] }, blocks = [
+    { type = "paragraph", content = "The space at the end of the lot has a rectangle of dry gravel in it and nothing standing on the rectangle, because the thing that made it is parked at the yard with your brother's name on the paperwork." },
+  ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "truck_papers", operator = "is_true" },
+    ] }, blocks = [
+    { type = "paragraph", content = "Tobin said yes in about four seconds and then asked twice whether it got you in trouble. The name goes on the form. The money comes out of the drawer." },
+  ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 2600 },
+    ] }, blocks = [
+    { type = "paragraph", content = "You have the number in the drawer and you have counted it twice today. What you do not have is a name, and there is exactly one of those on this crossroads that is yours to ask for." },
+  ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 1300 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Halfway. You know it is halfway because you did the arithmetic standing at the pumps and then again in bed, and both times it came out the same number of Fridays." },
+  ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 1300 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Twenty-six hundred, soaped on the glass in a hand that slopes. It is ten Fridays if you never spend a dollar, and you spend dollars." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# ⚠️ THE PURCHASE. `costs` is engine-enforced — an unaffordable choice is
+#    filtered out before it renders (v2.py:4496, the check at :4625) — so
+#    show_when_locked carries the price where she can read it.
+# ⚠️ This is the game's first sink that buys CONTENT rather than meter points.
+[[canvases.nodes.exit_block.choices]]
+text                     = "Buy it. ($2600, 1h)"
+targetType               = "node"
+nodeId                   = "see_truck.bought"
+time_progression_minutes = 60
+costs                    = [ { trait = "money", value = 2600 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "truck_papers", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "truck_bought", operator = "is_false" },
+] }
+show_when_locked = true
+locked_text      = "Twenty-six hundred, and a name on the form that is not going to be yours."
+flagEffects = [ { targetType = "player", flag = "truck_bought", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Walk round it once and go."
+targetType               = "location"
+locationId               = "kerr_crossing"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id = "bought"
+name = "Bought"
+blocks = [
+  { type = "paragraph", content = "The man counts it on the bonnet in two piles and does not ask why the name on the form is not the name on your mouth. Tobin signs where the biro points and hands the pen back the wrong way round." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "It's yours. It says me, but it's yours. You know that's the same sentence Dorn used." },
+  { type = "paragraph", content = "You get in. The seat is set for a man six inches taller and you move it, which takes four seconds and is the first thing on this crossroads you have not had to ask for." },
+  { type = "paragraph", content = "It drinks. It wants plates and it wants fuel and it wants both of them out of the same drawer that owes Cade two sixty on Friday. You knew that when you counted the second pile." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Drive it back to the yard."
+targetType               = "location"
+locationId               = "the_yard"
+time_progression_minutes = 20
+effects = [
+  { targetType = "player", trait = "standing", op = "add", value = 8, cap = 100 },
 ]
 
 [[canvases]]

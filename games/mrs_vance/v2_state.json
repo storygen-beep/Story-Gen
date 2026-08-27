@@ -206,6 +206,10 @@
     {
       "at": "release",
       "note": "2026-08-27 — THE PLAYER NOW CHOOSES WHO SHE WAS. G1 / DOCTRINE_GAPS Study 7 Step 2. The opening already asked four questions and discarded every answer: both choices on open_dorn_leaves.base and both on .the_book targeted the same next node with no effects and no difference. That is the fake-freedom failure the study names, already shipped. `the_book`'s two inert choices became three, each setting one of `past_books` / `past_road` / `past_counter` — a memory, not a slider (findings_A_want.md:93): she is answering the man who just put a ledger in front of her, and what she says is what she did before eleven weeks ago. Exclusive by construction; the flag is set ON THE CHOICE (0_systems_spec.toml:275) and the canvas is located, so the flag-chain validator can point at it. Read at 5 sites each (15 total): a three-band ladder on work_books, work_counter and work_parts_run, plus a paired privilege rung on each. PRIVILEGES ARE ADDITIVE — the original rung keeps every number and gains `past_* is_false`, so nothing is gated off and a save from before this carries no past and reads exactly what it read before. past_books: the week goes straight in 1h30 not 2h and Cade gets +5 trust not +3. past_road: she takes the key off the board herself, 1h30 and +3 standing — the Want's own bottom ascent rung, which says she asks Cade for the truck to leave the property at all. past_counter: the same six hours cost 14 energy not 18 and pay +5 standing not +3. ⚠️ LADDER PLACEMENT IS LOAD-BEARING: adjacent [group] blocks merge into ONE if/elseif chain (v2.py:14637), so on work_books the ladder goes BEFORE the pool (the Cade band follows it) and on work_counter it goes between the pool and the dialogue (the standing ladder follows it). Placed adjacent, either existing ladder would have gone unreachable for every player carrying a past. Verified live in headless Chromium: 4/4 distinct renders on all three activities across past_books / past_road / past_counter / no-past, zero empty renders, and each privilege rung offered to its own past only. gates 41/41 judged, 1 n/a."
+    },
+    {
+      "at": "review",
+      "note": "2026-08-27 \u2014 THE MONEY NOW BUYS SOMETHING, AND THE OBLIGATION MOVES. REVIEW.md E1. E1 asked one question: the week earns roughly four times the 260 rent, should 260 go up? The research pass (~/Documents/Economy_Pressure_Study_20260827/, 19 field games + our ten) answered NO, and the number was not the finding. THREE MEASUREMENTS DECIDED THIS. (1) Their money buys content; ours bought meter points \u2014 seven corpus games sell a person, a scene or an unlock (degrees-of-lewdity's Robin, patriarch's Lilith behind Villa Garcia, corpo-life's marriage behind a 1M apartment), and this game's five purchases bought clean +45, standing +4/+5/+6 and trust +3/+4, with ZERO of its 55 trait conditions reading money. (2) Squeezing harder is the corpus's most-punished move \u2014 the two games that made money bite are the two whose players are angriest and one dev is on record walking it back; the decisive comment is four words, 'here u still grind for nothing'. (3) The field's obligation MOVES and ours is a build-time constant (setup.rent_amount, v2.py:3118), so it goes soft at whatever value it is set to. LO'S FOUR CALLS: all three layers \u00b7 the sink is a truck in Tobin's name \u00b7 the weekly number rises because of the truck's RUNNING COSTS (sluttown-usa's $serverRent = $runningServers * 50, not degrees-of-lewdity's imposed ratchet \u2014 DoL gates NOTHING on $rentstage and gets away with a bare rise because Bailey is a believed predator; here the Friday money is already the yard's, so a number that climbs on its own reads as the author turning a dial) \u00b7 income scales with the obligation. BUILT: ask_papers @ the_bank (its FIRST affordance \u2014 the room had three canvases and all three were random ambients) \u2192 the ask on hub_tobin_shop, gated `money gte 2600`, which is the beat that makes money gate content \u2192 see_truck @ kerr_crossing, a four-band ladder reading the drawer and a 2600 purchase. Upkeep -22/day on [engine.daily_tick] traitEffects gated `truck_bought`, which NOTIFIES (setup.applyAndNotifyTrait, v2.py:5586) rather than draining silently \u2014 a silent charge meter is the one economy device the corpus universally hates (sluttown-usa). The parts run pays 125 instead of 34 with her own truck, no key off Cade's board: course-of-temptation denominates its payouts in the debt itself (_cash = Math.floor($weeklydebt * 0.15)) so a rising number is a difficulty curve and never more clicking; our engine has no computed effect values, so the same thing is done with a band. Week: +455 from the run against -154 upkeep = +301 net, obligation 260 \u2192 414. And `cade_covered` stopped being a dead flag \u2014 set by the engine, read by NOTHING, two hits in the merged game. Now a band on hub_cade_office, a rung that only exists once the debt does, and an ASK gated `money lt 260`. \u26a0\ufe0f NO ENGINE CHANGE WAS NEEDED and the staged-rent feature was deliberately NOT built: daily_tick traitEffects already take a per-effect condition gate (template_import.py:706), and a DoL-style stage array would make the sidebar `max = 260` and the quest goal `money gte 260` both lie. The daily upkeep leaves Friday at 260, so both surfaces stay true. \u26a0\ufe0f The +260 Cade grant carries the THREE-PART DAY CAP on one choice (reads cade_rung_today is_false, sets it, daily_tick clears it) plus `cade_covered is_false`, which is what keeps it off gate 18 \u2014 _holder_day_capped excludes a self-capped holder from _grants. \u26a0\ufe0f kerr_crossing and the_bank fills RE-DECLARED (300\u2192620, 500\u2192660) because the design moved, not to clear the gate; the reason is written beside each in board.locations[].fill_note. VERIFIED LIVE in headless Chromium (playtest_economy.py, new): 14/14 \u2014 the four bands render exactly one arm each, every new rung is CLICKABLE only in its own state, and the upkeep takes 22 off the drawer on advanceDay() with the truck and 0 without. \u26a0\ufe0f The first run of that harness reported two false failures by asserting on TEXT: a cost-blocked choice renders as <span class=\"locked-choice\">Buy it. ($2600, 1h) (Requires 2600 Money (you have 2599))</span>, so the label is on screen while the player cannot click it. It now asks whether an <a> exists. gates 42/42 judged, 1 n/a \u2014 no pre-existing verdict moved. playtest_quests 23/23, playtest_standing PASS, playtest_presence 10/10, playtest_walkins PASS."
     }
   ],
   "board": {
@@ -447,9 +451,10 @@
       },
       {
         "id": "kerr_crossing",
-        "job": "The crossroads twenty minutes down the road. Pumps, a light, and the only place on earth nobody here owns.",
+        "job": "The crossroads twenty minutes down the road. Pumps, a light, the flatbed on the end of the lot, and the only place on earth nobody here owns.",
         "anchor": false,
-        "fill": 300,
+        "fill": 620,
+        "fill_note": "RE-DECLARED 2026-08-27 (E1), from 300. Not a number moved to match delivery: the design changed. The crossing now carries the game's aspirational sink - the flatbed, its four-band ladder that reads the drawer, and the purchase scene - because the field's warmly-discussed economies all put the big purchase somewhere the player passes long before affording it. A budget re-declared when the plan changes is the plan; a budget re-declared to clear a gate is the fudge the-board.md exists to prevent.",
         "has_cycling_pool": false,
         "serves": {
           "needs": [],
@@ -460,9 +465,10 @@
       },
       {
         "id": "the_bank",
-        "job": "Where the account she is not on lives.",
+        "job": "Where the account she is not on lives, and where Dee tells her whose name a vehicle would have to be in.",
         "anchor": false,
-        "fill": 500,
+        "fill": 660,
+        "fill_note": "RE-DECLARED 2026-08-27 (E1), from 500. The room had three canvases and all three were random ambients, so there was nothing to DO here. `ask_papers` is its first affordance and the first beat of the truck chain.",
         "has_cycling_pool": false,
         "serves": {
           "needs": [],
@@ -605,6 +611,8 @@
       "obligation_amount": 260,
       "sinks": [
         "the Friday drawer count",
+        "THE FLATBED - 2600, in Tobin's name (kerr_crossing)",
+        "the truck's fuel and plates - 22 a day, [engine.daily_tick] (everywhere)",
         "wash-bay supplies (the_wash_bay)",
         "parts for the truck (the_shop_floor)",
         "propane and the water heater (the_kitchen)",
@@ -617,7 +625,10 @@
         "a parts run (the_shop_floor)",
         "the night walk-round (the_back_row)"
       ],
-      "note": "The reversal, mechanised: she holds the drawer and is not on the account. Short on Friday and Cade covers it - eviction_mode = flag_set sets `cade_covered`, which is a debt to Cade and opens his ladder. Money failure feeds the cast meters instead of ending the game."
+      "week_income": 1040,
+      "obligation_moves": "the truck's fuel and plates - 22 a day, every day, from the morning she buys it (2600, in Tobin's name). 260 on Friday never changes; the week does, 260 -> 414. Cost follows holdings (the-economy.md R3b, sluttown-usa's shape) rather than an imposed ratchet, because the Friday money is already the yard's and a number that climbed on its own would read as the author turning a dial. The parts run pays 125 instead of 34 with her own truck, so the income moves with it (R3c).",
+      "week_income_note": "What a five-day week actually pays before the truck: counter 74 + trailer 62 + parts run 34 + books 22 + walk-round 16 = 208/day, all five day-capped, x5 weekdays. Energy is the real ceiling - the five rungs cost 72 and one sleep restores 70 - so 1040 is the honest maximum, not the expected. Declared here because the-economy.md R3 says to price the obligation against the income in BOTH directions and nine of our ten games did not: the one that did (forty_miles) wrote the sum in a prose comment, because the ledger gave it nowhere to live. Ratio: 260/1040 = 25% before the truck, 414/1495 = 28% after (the haul lifts the week to 1495 and the upkeep takes 154). forty_miles, the only one of ten in the field's range, runs 70%.",
+      "note": "The reversal, mechanised: she holds the drawer and is not on the account. Short on Friday and Cade covers it - eviction_mode = flag_set sets `cade_covered`, a debt to Cade. Money failure feeds the cast meters instead of ending the game. ⚠️ THIS NOTE SAID `and opens his ladder` UNTIL 2026-08-27 AND IT WAS FALSE: the flag was set by the engine and read by nothing, two hits in the whole merged game. It is now read by a band on hub_cade_office and by a rung that only exists once the debt does, and she can ASK for it before Friday (money lt 260) instead of only arriving at it by neglect - degrees-of-lewdity's `$robinpaid`, where taking on a debt doubles the rent and buys a love interest."
     }
   }
 }
