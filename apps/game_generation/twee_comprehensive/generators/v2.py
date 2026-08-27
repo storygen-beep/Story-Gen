@@ -15062,8 +15062,8 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         portrait_html = self._render_portrait(player_portrait, alt_label)
                         html_parts.append(
                             f'<div class="dialog-block dialog-player">'
-                            f'<div class="dialog-speaker">'
                             f'{portrait_html}'
+                            f'<div class="dialog-speaker">'
                             f'<strong>{player_label}</strong>'
                             f'</div>'
                             f'<div class="dialog-content">{content}</div>'
@@ -15074,8 +15074,8 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         # x than every NPC line on the same screen. No role: nobody knows it.
                         html_parts.append(
                             f'<div class="dialog-block dialog-npc">'
-                            f'<div class="dialog-speaker">'
                             f'{self._render_portrait("", "Stranger")}'
+                            f'<div class="dialog-speaker">'
                             f'<strong>Stranger</strong>'
                             f'</div>'
                             f'<div class="dialog-content">{content}</div>'
@@ -15109,8 +15109,8 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         )
                         html_parts.append(
                             f'<div class="dialog-block dialog-npc">'
-                            f'<div class="dialog-speaker">'
                             f'{portrait_html}'
+                            f'<div class="dialog-speaker">'
                             f'<strong>{speaker_html}</strong>'
                             f'{role_html}'
                             f'</div>'
@@ -18536,44 +18536,93 @@ if (clothingMsg) {
     height: 70%;
 }
 
-/* Dialog Block — a speaker COLUMN on the left, the spoken line alone on the right.
-   face / name / role stack and centre; the line never shares that column.
+/* Dialog Block — the face and the name FLOAT, and the speech wraps around them.
 
-   Sized with clamp() rather than a breakpoint: a fixed width plus a media query is
-   what goes wrong on tablets. These reach full size around a 640px viewport, so the
-   column costs a phone ~58px and a laptop gets the full 96px. */
+   The column this replaced put height at max(identity, text), and the identity always
+   won: a face over two rows of type is about three times a line of speech, and most
+   speech is one line. Measured on a shipped game, 77% of a one-line box was not text.
+   Floating drops it to max(portrait, text) — the floor you cannot get under while
+   still showing a face. Measured: laptop 120px -> 64px, phone 93px -> 60px.
+
+   ⚠️ FLOATS, NOT FLEX, AND NOT BY PREFERENCE. Neither flex nor grid can make text wrap
+   around a box; only a float can. That is the whole mechanism, so `display: block`
+   here is load-bearing and must not be "tidied" back to flex.
+
+   ⚠️ The face size is now the ONLY height knob: 60px face gives an 80px box, 44px
+   gives 64px. That is why the max dropped from 60px. */
 .dialog-block {
-    --dlg-face: clamp(40px, 11vw, 60px);
-    --dlg-col:  clamp(56px, 15vw, 96px);
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    --dlg-face: clamp(36px, 10vw, 44px);
+    --dlg-name: clamp(78px, 24vw, 108px);
+    display: block;
     margin: 10px 0;
     padding: 10px;
     border-radius: 8px;
     color: var(--theme-text);
 }
 
-/* ⚠️ `flex: 0 0` is load-bearing. Without it this column shrinks on a narrow screen
-   and every box in a scene starts its text at a different x — a ragged left edge down
-   the page, which is the failure this layout exists to prevent. The width is reserved
-   even when the column is empty (a `speaker="unknown"` line has no role), so a
-   Stranger's words line up with everyone else's. */
-.dialog-speaker {
-    flex: 0 0 var(--dlg-col);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 4px;
-    min-width: 0;
+/* ⚠️ MANDATORY. A block containing only floats collapses to zero height, and it looks
+   fine until a box has a short line. `::after` rather than `overflow: hidden`: same
+   effect on height, no risk of clipping a rounded portrait. */
+.dialog-block::after {
+    content: "";
+    display: block;
+    clear: both;
 }
 
-/* Scoped to the dialog block on purpose: the global `.portrait` rule above is 40px and
-   still serves the thought bubble and every other caller. */
-.dialog-block .portrait {
+/* Scoped to the dialog block: the global `.portrait` rule above is 40px and still
+   serves the thought bubble and every other caller. */
+.dialog-block > .portrait {
+    float: left;
     width: var(--dlg-face);
     height: var(--dlg-face);
+    margin: 0 10px 4px 0;
+}
+
+/* Name and role only — the face is a SIBLING, so the two float independently and the
+   speech can sit beside the name, then under the name but still beside the face, then
+   under both.
+   ⚠️ NO FIXED HEIGHT. The design called for half the portrait's height; built
+   literally, `height: calc(var(--dlg-face) / 2)` CLIPS a long role — `husband's
+   youngest` was cut at every size, on phone and laptop. The half-height was a means to
+   stop this block driving the box, and floating already does that, so natural height
+   is both safe and sufficient — a long role wraps to a second line and pushes nothing.
+
+   ⚠️ FIXED WIDTH, NOT `max-width`, and this was caught by measurement rather than
+   reasoning. On `width: auto` the block is as wide as the name it holds, so the speech
+   starts wherever that name happens to end: measured at 451 / 472 / 484 / 516 / 532px
+   across one screen — five different left edges, which is the ragged-edge failure the
+   previous layout existed to prevent. A fixed width keeps every box's FIRST line at the
+   same x while the text still wraps under the block, so the height saving is kept and
+   the alignment comes back. */
+.dialog-speaker {
+    float: left;
+    width: var(--dlg-name);
+    margin: 0 10px 2px 0;
+    text-align: left;
+}
+
+/* ⚠️ A REAL BREAKPOINT, and the one place a media query beats clamp(). The float and
+   the phone are simply not compatible: the face, the name block and their margins eat
+   142px of a 360px screen, so the FIRST line of speech was measured at 101px — about
+   fourteen characters — before widening to thirty on line two and three on line three.
+   Three left edges in one short paragraph.
+
+   Below 480px the name block stops floating and sits beside the face as a block
+   (`overflow: hidden` gives it a BFC so it takes the remaining width instead of
+   flowing under the face), and the speech clears both and runs full width. One left
+   edge, one measure. It costs height on a one-line quote and that is the trade — the
+   float's whole point is saving height, and on a phone this hands some back to buy a
+   readable line. Above 480px the float layout is untouched. */
+@media (max-width: 480px) {
+    .dialog-speaker {
+        float: none;
+        width: auto;
+        overflow: hidden;
+        margin: 0 0 4px 0;
+    }
+    .dialog-content {
+        clear: both;
+    }
 }
 
 .dialog-player {
@@ -18594,29 +18643,32 @@ if (clothingMsg) {
     color: var(--theme-text-secondary);
 }
 
-/* ⚠️ `min-width: 0` is the other load-bearing rule. A flex item defaults to
-   `min-width: auto`, so one long unbroken string refuses to shrink, overflows the
-   box and gives the phone a horizontal scrollbar. It is invisible at desktop width,
-   which is why it survives review. */
+/* Normal flow on purpose — this is the element that wraps around the two floats above.
+   ⚠️ `overflow-wrap: anywhere` stays: one long unbroken string would otherwise overflow
+   and give the phone a horizontal scrollbar, which is invisible at desktop width and so
+   survives review. (The old `flex: 1` / `min-width: 0` are gone with the flex parent.) */
 .dialog-content {
-    flex: 1;
-    min-width: 0;
     overflow-wrap: anywhere;
 }
 
 /* The name, in the column. No trailing colon — `Dorn:` is inline speech attribution
    and reads wrong once the name sits above the face rather than in front of a line. */
+/* ⚠️ `display: block` on both, and it is required now. Under the old flex column these
+   two stacked for free; inside a float they are inline-level and would sit side by side
+   on one line. */
 .dialog-speaker strong {
+    display: block;
     font-size: clamp(11px, 3vw, 14px);
     line-height: 1.2;
 }
 
 /* F10 — the role label under a speaker's name. Quieter than the name and at the same
    weight as the cast page's tag line, because it is a label and must not compete with
-   the line the character is actually saying. It no longer needs `display: block`: the
-   column stacks it. A long role ("husband's youngest") wraps to two centred lines on a
-   phone and one on a laptop, which reads as a caption either way. */
+   the line the character is actually saying. Capped by `--dlg-name-max` rather than
+   clipped: a long role ("husband's youngest") wraps to a second line and pushes nothing
+   around, because this whole block is floated out of the height calculation. */
 .dialog-speaker .dialog-role {
+    display: block;
     font-size: clamp(9px, 2.6vw, 12px);
     line-height: 1.25;
     color: var(--theme-text-muted, #8a8a8a);
