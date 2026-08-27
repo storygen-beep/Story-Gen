@@ -46,13 +46,16 @@ read in one room — prose, payable now) and S1b (the meter decides nothing, on 
 does not hold up — a design question). **Both were paid the same day.** S1a in two instalments — the
 fourth `work_counter` rung, then the bank and the bar. S1b by pointing the meter at the Lane 3
 dispatcher: below `standing` 40 the four nameless walk-ins fire more often, and the meter stays
-one global number on purpose. `standing` reads **4 → 22**, in **1 canvas → 6**. **Two** items are now decisions for LO rather than defect
-calls: E1 (the obligation's size) and G1 (whether the Want file's one shape is the genre). S1b's
+one global number on purpose. `standing` reads **4 → 22**, in **1 canvas → 6**. **One** item is now a decision for LO rather than a defect
+call: E1 (the obligation's size). **G1 was the second and no longer is** — the study it asked for ran
+on 2026-08-27, answered its question and **refuted its proposed fix**; it is now an ordinary MED
+SKILL item with a known direction (§0a **N13**, and `DOCTRINE_GAPS.md` Study 7). S1b's
 two questions are both answered in §5 — it delivers people, and it stays global — but its fourth
-possible shape, **pricing the world by band**, is deliberately left for LO because it lands on E1. L4 is history and cannot be edited; the correction of record is in §7. Plus **twelve places
-this review was itself wrong**, recorded first in §0a — six caught before writing, and six (N7–N12)
-caught only after they had shipped in this file, one of them as its single blocker and one as a
-whole fix that shipped green and was reverted. `v2_state.json` is no longer untouched: R1's pools
+possible shape, **pricing the world by band**, is deliberately left for LO because it lands on E1. L4 is history and cannot be edited; the correction of record is in §7. Plus **thirteen places
+this review was itself wrong**, recorded first in §0a — six caught before writing, and seven (N7–N13)
+caught only after they had shipped in this file, one of them as its single blocker, one as a
+whole fix that shipped green and was reverted, and one (**N13**) as an item whose proposed fix the
+field refuted outright. `v2_state.json` is no longer untouched: R1's pools
 grew two locations past their declared `fill`, and both were corrected to what is built, still
 inside their `fill_finished`. The remaining SKILL-layer items (C2, Q1, W1, G1, half of D1, and the
 first-visit gate in §10) are recorded for LO to schedule.
@@ -323,6 +326,67 @@ HTML **zero** times — valid TOML, green build, 41/41 gates.
    the scoreboard could have told the difference — only rendering the room at the wrong hour and
    looking. That is the third time in this file the answer was in the built game and not in the
    TOML (B1/N7, P1's live capture, and now this).
+
+---
+
+### ⚠️ N13 · G1 asked whether one Want shape is the genre — the question is malformed, and its fix is dropped
+
+**Added 2026-08-27**, after the study G1 itself called for was run. G1 stands as an observation and
+falls as a diagnosis.
+
+G1 measured that seven of eight v2 games open their appetite with the same four words, called it a
+**premise** problem, and proposed *"a step in `the-want.md` that reads the other games'
+`v2_state.json` want blocks before a premise is proposed."* The census is correct — it is reproduced
+in §12 and is the evidence. The diagnosis is not.
+
+Measured against the same 30-game corpus this review used for prose texture (§9, *"the prose texture
+is inside the field"*), classifying reason (1) of each game's `why_players_love_it` and weighting by
+mopoga comment count:
+
+```
+freedom   25.9%   performers 22.0%   systems 15.8%   volume 15.6%
+story      7.3%   characters  7.0%   cadence  5.4%   kink    0.8%
+
+premise    0.0%   <- not one game in thirty is loved for its setup
+```
+
+**So a check that compares premises guards a door nobody uses, and it is dropped.** Two further
+reasons it could never have worked, both of which the original entry missed:
+
+1. **It compares outputs, and this is upstream of the output.** `templates/want.md` writes
+   `she/her/hers` **21 times and `he/him/his` zero**; `references/the-want.md` 16 versus 0; a grep of
+   the whole v2 skill for `male pc`, `blank.slate`, `self.insert` or `character creation` returns
+   **0 hits**. Nobody chose a woman eight times — the page's grammar chose, every fill. A string
+   comparison between finished want blocks cannot see a question that was never asked.
+2. **It would have flagged the wrong thing.** G1's own text says the appetite shape is *mandated* by
+   `the-want.md` §2, so a dedup step would fire on games that obeyed the doctrine — the exact failure
+   `DOCTRINE_GAPS.md` records against Study 2's R4.
+
+**What is actually wrong is one level up and larger:** all eight games hand the player a finished
+person and no choices about her, against a field whose single largest bucket is the opposite.
+
+⚠️ **The gender is NOT the defect, and this correction must not be read as saying so.** Across
+22,622 corpus comments: **49 asking for a female lead (364 likes) against 11 opposed (124 likes)**.
+Full study, scripts and limits: `.claude/skills/author-game-v2/DOCTRINE_GAPS.md` **Study 7** and
+`~/Documents/Mopoga_Twine_Sandbox_Research_20260724/premise_study_20260827/`.
+
+⚠️ **And a correction to this correction, caught in verification rather than before it.** The
+gender half of this was **already measured on 2026-08-23** by the Female PC Craft Study
+(`~/Documents/Female_PC_Craft_Study_20260823/`, linked from `author-game-v2/STATUS.md:186`), which
+settled it by **reading each game's opening** rather than classifying a note field — a better
+instrument, and its own header records that the probe which suggested its candidates *"was wrong
+twice"*. **Its verdicts are adopted and one moved a number here:** `new-life-project` is
+*"Character creation — Gender assigned at birth: **Girl | Guy**"*, so it is selectable, not a fixed
+female PC, and the three-axis match is **3 of 30 / 3.1%**, not 4 / 5.2%. That study also already
+holds the shape this correction points at, under a better name — **"character creation is a memory,
+not a slider"** (`findings_A_want.md:93`). What is genuinely new here is the whole-field *"what
+carries a game"* classification, the pronoun mechanism inside our own template, and the refutation
+of G1's fix.
+
+**What it says about this file's method.** This is the second item in §0a where the review named a
+real pattern and then reached for the nearest mechanism to explain it — N8's census and now G1's
+dedup step. **A measured observation does not carry its own diagnosis.** G1 proposed a fix in the
+same breath as the finding and never asked the field whether the thing it was protecting had value.
 
 ---
 
@@ -2349,8 +2413,10 @@ drew "I don't know who is who" from LO**, and on `late_shifts` (Cole: 807 words,
 
 ---
 
-### G1 · Eight games, one Want shape — and nothing checks a new premise against the repo
-**severity** MED · **layer** SKILL · **status** OPEN
+### G1 · Eight games, one Want shape — and the template picks the protagonist before the author does
+**severity** MED · **layer** SKILL · **status** OPEN · ⚠️ **diagnosis rewritten 2026-08-27 — the
+original read this as a premise problem and proposed a premise check. Measured, the premise is not
+what players buy and the check is dropped. §0a N13.**
 
 > LO: *"when it suggests some ideas, it goes and check the existing v2 games and made sure that new
 > game doesnt matches the current ones."*
@@ -2381,11 +2447,55 @@ titled *"the appetite that never fills."* So the check LO describes would not ha
 about this game's premise. It would have caught this, which is larger and decides what the next game
 can be.
 
-#### Fix
+#### Fix — ⚠️ REWRITTEN 2026-08-27, the original was wrong. See §0a N13.
 
-Two separate things, and only the first is small: a step in `the-want.md` that reads the other games'
-`v2_state.json` want blocks before a premise is proposed; and a decision about whether §2's shape is
-the genre or merely the first shape measured. That second one is not a fix, it is a study.
+The study this item asked for was run against the 30-game corpus. **It answered the question and
+refuted the fix.**
+
+**The dedup step is DROPPED.** No game in the top 30 is loved for its premise — 0 of 30, against
+`freedom` 25.9%, `performers` 22.0%, `systems` 15.8%, `volume` 15.6%. A check comparing premise
+strings protects something nobody buys, it compares outputs when the cause is upstream of them, and
+it would fire on games for obeying `the-want.md` §2. All three reasons are in N13.
+
+**The census above stands and is the evidence** — it just points somewhere else. Six axes are locked
+across the eight, and the skill fixes four. LO, asked whether that was deliberate: **"just happened."**
+
+**The cause is the template's grammar, not eight author decisions:**
+
+| evidence | figure |
+|---|---|
+| `templates/want.md` — `she/her/hers` vs `he/him/his` | **21 vs 0** |
+| `references/the-want.md` — same | **16 vs 0** |
+| v2 skill — any protagonist fork | **0 hits** |
+| `templates/want.md` §1 heading | **"Who she is"** — a finished person, not a fork |
+
+v1 asked the question first of anything — `author-game/references/step-0-1-seed.md:17`, *"Pick the
+PROTAGONIST POV first — it decides which fantasies even work"* — and v2 deleted it. `vesper` is the
+control: authored before the Want file, `narration_person = "third"`, none of the shape.
+
+**The real finding.** Ours against the field:
+
+```
+                  field                                     our 8
+gender      male 20 · pick 6 · female 4                     female, 8/8
+player is   the body 19 · the camera 10                     the body, 8/8
+who she is  blank slate 19 · written 10  (blank = 80.4%)    fully written, 8/8
+```
+
+All three of our choices together: **3 of 30 games, 3.1% of engagement**, best rank #21. **The gap is
+`freedom` — the field's largest bucket — and the player chooses nothing in any of our eight.**
+
+⚠️ **Do NOT change the gender.** 49 comments asking for a female lead (364 likes) against 11 opposed
+(124 likes), plus a mechanical argument at 14 likes and the real-porn media case. Recorded here
+because `female 4 of 30` invites the wrong conclusion from a later reader. It is a **supply** figure.
+
+**Where the work goes.** `.claude/skills/author-game-v2/DOCTRINE_GAPS.md` **Study 7 · Who the player
+is**, inventory item 14. §4 and §5 there are `PROPOSAL — NOT APPLIED`; no reference file, template or
+gate has changed. The candidate gate — *a start-of-game choice does not ship unless real content
+reads it* — is deliberately **not built** until one real opening proves the choices can change
+anything, because a check written ahead of its doctrine is how Study 2's R4 failed.
+
+**Status: still OPEN, still MED, still SKILL** — the diagnosis is corrected, nothing is repaired.
 
 ---
 
@@ -2398,6 +2508,7 @@ Everything quoted above, in one place.
 ### A.1 · The scoreboard
 
 ```
+AS AUDITED, 2026-08-25:
 41/41 judged gates pass · 1 n/a (no [[clothing]] catalog declared)
 location fill      14 locations · 10,298 words vs 11,400 declared · 14/14 on budget · anchor 27%
 explicit floor     14.0% of 107 beats carry 3+ explicit words (floor 7.5%)
@@ -2406,18 +2517,38 @@ narration:dialogue 4.9:1 — 1,760 spoken of 10,298 (ceiling 5:1) · field media
 sentence length    median 9 words across 796 sentences (ceiling 14) · field median 10
 speakers named     212/212 dialog and thought_bubble blocks
 traversal heat     14/14 locations carry a cycling explicit pool
+
+RE-RUN 2026-08-27, after R1/S1a/S1b/W1 were paid — the game GREW, still 41/41:
+location fill      14 locations · 12,509 words vs 12,829 declared · 14/14 on their own budget
+                   · anchor the_office 31% · 69 pools, 8,706 words per pass
+explicit floor     13.9% of 108 beats carry 3+ explicit words (floor 7.5%)
+explicit repeat    100.0% of 15 explicit beats are re-enterable (floor 50%)
+sentence length    median 9 words across 953 sentences (ceiling 14, margin +5)
+speakers named     253/253 dialog and thought_bubble blocks
 ```
+
+⚠️ **The 2026-08-25 column is kept, not overwritten.** Elsewhere this file quotes `10,298 words`
+as a denominator — W1's *"31 kin words in 10,298 words"* among them — and silently restating the
+total would leave those ratios reading against a number that no longer appears anywhere. The
+`words per pass` line is new on 2026-08-27 and is **reporting only**; see A.2.
 
 ### A.2 · The prose pools
 
 ```
-39 block_pool blocks across 35 canvases
+AS AUDITED 2026-08-25 — 39 block_pool blocks across 35 canvases
    variants:   21 pools of 3   ·   11 of 4   ·   7 of 2
    children:   32 paragraph    ·   13 dialog   (6 pools mix the two — importer WARNs, builds)
    nesting:    0 pools inside pools           depth cap is 4 (template_import.py:6143)
    in loops:   0 of 20 loop nodes
 
-cross-game census, 22 scorable games:   mrs_vance 39 · vesper 6 (v1) · all others 0
+RE-COUNTED 2026-08-27 — 69 pools / 221 variants (R1's fix added 30)
+   by source phase:  4_story_arc 36 · 5_scenes 25 · 3_activities 8
+   words:      12,509 written · 8,706 shown per pass (a pool renders one of N)
+   clips:      of 32 explicit(3+) variants, 0 carry their own clip, 32 sit under a
+               clip on the SHARED NODE, 0 render dry — so `an explicit beat carries
+               a clip` reading 100% is honest, not an artifact of folding
+
+cross-game census, 22 scorable games:   mrs_vance 69 · vesper 6 (v1) · all others 0
 ```
 
 ### A.3 · The economy
@@ -2955,3 +3086,23 @@ rule alone.
 `40/40 judged gates` · `speakers are named` 253/253 · new suite `test_npc_role_label.py` (11) inside
 a full app run of **255 passed** · playtests 10/10 and 23/23 · live: `Cade:` at y=382,
 `husband's eldest` at y=406, same left edge, portrait to the left; `Stranger:` renders with no role.
+
+**2026-08-27 — G1's study ran, and refuted G1's own fix.** LO's call to open it, and his answer to
+the prerequisite — the shape *woman 19–39 · small town · money she cannot reach · second person* was
+**never chosen, it drifted**. The 30-game corpus already on disk was re-interrogated (its ten
+findings are all mechanism and never touch the `protagonist` or `premise` fields). Result: **no game in the top 30
+is loved for its premise, 0 of 30** — so the proposed dedup step is **dropped**, and the defect is
+one level up: all eight v2 games let the player choose nothing about who she is, against a field
+whose largest bucket is `freedom` at 25.9%. Cause is the Want template's grammar — `she/her` **21
+against `he/him` 0**, and **0 hits** for any protagonist fork across the whole v2 skill; v1 asked the
+question first of anything and v2 deleted it. ⚠️ **The gender is not the defect** (49 comments for a
+female lead against 11 opposed) and ⚠️ **one measurement was thrown away mid-study** — the comment
+files cap at 500 per game, so the first axis table was an artefact. Written up as
+`DOCTRINE_GAPS.md` **Study 7** + inventory item 14; §0a gained **N13**; this file's G1 heading, fix
+block and header sentence rewritten. ⚠️ **And the study was NOT on virgin ground** — verification
+found the **Female PC Craft Study of 2026-08-23** (`author-game-v2/STATUS.md:186`) had already read
+the female-PC games' openings. Its verdicts are adopted, which moved the three-axis match from
+4 games / 5.2% to **3 / 3.1%**, and it already holds the Step-2 mechanism as *"character creation is
+a memory, not a slider"*. Recorded in N13; the additive half is the whole-field classification, the
+pronoun mechanism and this refutation. **Count unchanged at 7 open, 17 fixed** — the diagnosis is
+corrected, nothing is repaired, and no doctrine, template or gate was touched.
