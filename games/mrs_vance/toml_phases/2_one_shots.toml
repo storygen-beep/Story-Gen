@@ -159,7 +159,7 @@ blocks = [
   { type = "dialog", props = { speaker = "npc", npcId = "npc_dorn" }, content = "It agrees." },
   { type = "paragraph", content = "He puts his hand flat on the back of your head for a second on the way past, the way you would settle a dog, and goes out the back door into the yard. The cab starts, and it is loud enough in this kitchen that the cups move." },
   { type = "paragraph", content = "You watch him swing it out through the gate. Monday. He is back Friday, late, and that is four nights, and between here and Friday there are three of his sons and his brother on this property and not one other woman on it." },
-  { type = "paragraph", content = "The pole light goes off on its timer while you are standing there. It is getting light anyway. Down at the shop the roller door is already up, which means somebody has been awake longer than you have." },
+  { type = "paragraph", content = "The pole light goes off on its timer while you are standing there. It is getting light anyway. Down at the shop the roller door is already up. Somebody has been awake longer than you have." },
   { type = "thought_bubble", props = { speaker = "player" }, content = "Eleven weeks and nobody has told you what you are. The paper says three years. The book says go and do the books." },
 ]
 
@@ -203,7 +203,7 @@ id = "base"
 name = "Base"
 blocks = [
   { type = "image", props = { file = "scenes/first_office_t1.jpg", description = "The front counter of a truck repair shop office, job sheets on a spike, a hatch through to the workshop.", search_queries = ["truck repair shop front office counter job sheets", "diesel garage reception desk paperwork window to workshop"] } },
-  { type = "paragraph", content = "Vance Diesel fixes trucks. Not cars — trucks, the eighteen-wheel kind, four bays and a pit and a wrecker that goes out at two in the morning when somebody puts a rig in a ditch. Drivers come to this counter with a fault and a schedule and they are all, always, in a hurry." },
+  { type = "paragraph", content = "Vance Diesel fixes trucks. Not cars. Trucks, the eighteen-wheel kind, four bays and a pit and a wrecker that goes out at two in the morning when somebody puts a rig in a ditch. Drivers come to this counter with a fault and a schedule and they are all, always, in a hurry." },
   { type = "paragraph", content = "The counter is at the front and the desk is at the back and there is a gate in the counter you have to lift to get between them. The book goes on the desk. The drawer is under the till side, where he said." },
   { type = "paragraph", content = "There is a window through to the shop floor, wired glass, about waist height to chest. From in here you can see four men working. From in there they can see the desk." },
   { type = "thought_bubble", props = { speaker = "player" }, content = "You will be sitting in the one room on this property that everybody has to walk through." },
@@ -359,7 +359,7 @@ blocks = [
   { type = "paragraph", content = "Your husband's middle son is in the bay with a trailer up on the ramp and the hose going, and he is twenty-four, and he has said perhaps forty words to you since the wedding. He turns the trigger off when you come in. He does not turn round." },
   { type = "paragraph", content = "He is soaked to the shoulder on one side. The water comes off the trailer floor and goes down the drain in the middle and the whole bay is loud with it even with the hose off, dripping off eight feet of steel." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_isaac" }, content = "Bay's wet." },
-  { type = "paragraph", content = "That is the whole sentence. Then he stands there holding the hose and waits to find out whether you are leaving, and while he waits he looks at you, and he keeps looking after the point where a man normally stops." },
+  { type = "paragraph", content = "Then he stands there holding the hose and waits to find out whether you are leaving, and while he waits he looks at you, and he keeps looking after the point where a man normally stops." },
 ]
 
 [canvases.nodes.exit_block]

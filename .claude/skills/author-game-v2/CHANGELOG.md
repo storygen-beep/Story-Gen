@@ -5,6 +5,44 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-27 — gates.py G43: report where the dashes live, and refuse to narrow the verdict
+
+**Why.** G43 shipped counting every dash in a game. Applied to `mrs_vance` that produced a true but
+misleading number: **24 of its 32 dashes were inside `dialog` blocks**, and every one of those is
+speech breaking down — *"Mrs. Vance — Mrs. — I can't, if you keep —"*. The em-dash is the correct
+English mark for an interruption, so **76% of the game's score was punctuation that is not a
+defect.** An instrument that marks a game down for its stammers is measuring the wrong thing.
+
+**The obvious fix was investigated and REFUSED.** Narrowing the verdict to narration needs a
+narration-only *field* baseline, and the corpus cannot supply one: **14 of the 25 games put under 2%
+of their words inside quote marks** (corpus median 1.3%), marking speech with italics, speaker
+prefixes, or nothing at all. There is no reliable way to separate their narration from their
+dialogue. Judging a narration-only measurement against an all-prose ceiling would be precisely the
+seam error G43's own header exists to warn about — committed knowingly the second time. So the
+verdict and `DASH_CEILING` are unchanged and the split is **reported** instead, joining the three
+companion numbers already carried with no field figure.
+
+**What changed.**
+
+- **`scripts/gates.py`** — G43 gains a `_tex_split` walk over `canvases[].nodes[].blocks[]`
+  (mirroring the traversal `_speaking_blocks` already uses for G23, including `props.beats[]` and
+  nested `blocks`) that separates spoken text from narration and prints both rates. `thought_bubble`
+  counts as spoken: it is a person's voice and stammers for the same reasons.
+- **`DASH_CEILING`** gains a second ⚠️ recording that it counts speech on purpose, that this is a
+  known cost, and the 14-of-25 measurement that makes narrowing it impossible.
+
+⚠️ **The block walk must count braces.** A naive `\{ type = "(\w+)"(.*?)\}` stops at the first `}`,
+which in a `dialog` block closes `props = { speaker = … }` — so `content` falls outside the capture
+and **every dialogue dash reads as zero**. That bug produced a wrong count during this very
+investigation and was caught only by printing the raw TOML.
+
+**Verified.** `gates.py mrs_vance` **41/41**. The new line reads `narration 0.0/10k over 9,865 words
+· speech 91.3/10k over 2,629 words` — which is the whole point: after the game's narration dashes
+were fixed, every remaining dash is speech, and the gate now says so on one line instead of
+implying the game still has a habit.
+
+---
+
 ## 2026-08-27 — gates.py G43 + register.md: the first gate that measures how the writing SOUNDS
 
 **Why.** Two players read a shipped v2-lineage game and said the prose "smacks of an underpowered

@@ -348,7 +348,7 @@ is_repeatable = true
 id = "base"
 name = "Base"
 blocks = [
-  { type = "block_pool", blocks = [ { type = "paragraph", content = "Job sheets off the spike, one at a time, and the number at the bottom of each into your column. Half of them have a second figure pencilled on the back that is not the same as the first." }, { type = "paragraph", content = "There is a way this place has always done it and nobody has written it down, so you are learning it out of the shape of the mistakes." }, { type = "paragraph", content = "Two hours of somebody else's handwriting and then your own underneath it, which is the only thing on this property that is yours." }, ] },
+  { type = "block_pool", blocks = [ { type = "paragraph", content = "Job sheets off the spike, one at a time, and the number at the bottom of each into your column. Half of them have a second figure pencilled on the back that is not the same as the first." }, { type = "paragraph", content = "There is a way this place has always done it and nobody has written it down, so you are learning it out of the shape of the mistakes." }, { type = "paragraph", content = "Two hours of somebody else's handwriting and then your own underneath it." }, ] },
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_cade", trait_key = "trust", operator = "gte", value = 26 }, ] }, blocks = [ { type = "paragraph", content = "He has stopped checking it behind you. You know because the spike is clear at the end and he has not touched it." } ] },
 ]
 
@@ -477,7 +477,7 @@ id = "base"
 name = "Base"
 blocks = [
   { type = "video", props = { pool_dir = "amb/trailer_wash_t2", pool = 4, description = "Hosing out the inside of a trailer, soaked through.", search_queries = ["woman washing truck trailer hose wet", "wet woman working hose spray industrial"] } },
-  { type = "block_pool", blocks = [ { type = "paragraph", content = "Reefer trailers come back with the last load still in the corrugations and somebody has to get in there with the hose and walk it down the length on their knees." }, { type = "paragraph", content = "Forty-eight feet of steel and the water comes back at you off every inch of it, so by the second pass there is no part of you that is dry and no point pretending otherwise." }, { type = "paragraph", content = "It pays what it pays because none of them will do it. That is the whole reason it is money and everybody in the shop knows it is the whole reason." }, ] },
+  { type = "block_pool", blocks = [ { type = "paragraph", content = "Reefer trailers come back with the last load still in the corrugations and somebody has to get in there with the hose and walk it down the length on their knees." }, { type = "paragraph", content = "Forty-eight feet of steel and the water comes back at you off every inch of it, so by the second pass there is no part of you that is dry and no point pretending otherwise." }, { type = "paragraph", content = "It pays what it pays because none of them will do it. Everybody in the shop knows that." }, ] },
 ]
 
 [canvases.nodes.exit_block]

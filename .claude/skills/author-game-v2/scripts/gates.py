@@ -151,6 +151,16 @@ DASH_CEILING = 35.0
 # its edge: mrs_vance passes at 25.4 (p95); the game that prompted this runs 96.4,
 # which is 2.7x the corpus maximum.
 #
+# ⚠️ IT COUNTS SPEECH TOO, ON PURPOSE, AND THAT IS A KNOWN COST. An em-dash inside
+# dialogue is how English writes an interruption — "Mrs. Vance — Mrs. — I can't, if you
+# keep —" is correct as written — so a game with a lot of broken speech scores worse
+# without being worse: 24 of the prompting game's 32 dashes were speech. Narrowing the
+# verdict to narration was investigated and REFUSED, because it needs a narration-only
+# field baseline that cannot be built: 14 of the 25 corpus games put under 2% of their
+# words inside quote marks (corpus median 1.3%), marking speech with italics, speaker
+# prefixes, or nothing. Judging a narration-only measurement against an all-prose ceiling
+# is exactly the seam error below. The gate reports the split instead and gates the whole.
+#
 # ⚠️ THIS CONSTANT DOES NOT SPAN THE SEAM THAT SENTENCE_CEILING DOES. The field
 # figures come from built HTML and this gate reads authored TOML — the same two bases
 # — but the metric was checked on BOTH for the same game and moved 7% (mrs_vance 27.2
@@ -5566,6 +5576,44 @@ def run_gates(model, game, state=None):
                               tex_prose, re.I))
                / max(len(re.findall(r"(?<![.!?]\s)(?<!^)\b[A-Z][a-z]{2,}\b", tex_prose)), 1))
 
+    # Where the dashes actually live. An em-dash in narration is the appositive habit
+    # register.md names; an em-dash in speech is how English writes an interruption, and
+    # "Mrs. Vance — Mrs. — I can't, if you keep —" is correct as written. Measured on the
+    # game that prompted this: 24 of its 32 dashes were speech breaking down, so 76% of
+    # its score was punctuation that is not a defect.
+    #
+    # ⚠️ REPORTED, NEVER GATED, and the verdict above deliberately still counts BOTH.
+    # Moving the verdict to narration-only needs a narration-only FIELD baseline, and that
+    # was investigated and cannot be had: 14 of the 25 corpus games put under 2% of their
+    # words inside quote marks (corpus median 1.3%), marking speech with italics, speaker
+    # prefixes or nothing at all. A narrowed measurement judged against an all-prose
+    # ceiling is the seam error this gate's header exists to warn about.
+    def _tex_split(blocks, spoken, narr):
+        for b in blocks or []:
+            if not isinstance(b, dict):
+                continue
+            props = b.get("props") or {}
+            if isinstance(b.get("content"), str):
+                # thought_bubble is a person's voice too, and stammers for the same reasons
+                (spoken if b.get("type") in ("dialog", "thought_bubble")
+                 else narr).append(b["content"])
+            for beat in (props.get("beats") or []):
+                _tex_split(beat.get("blocks"), spoken, narr)
+            _tex_split(props.get("blocks") or b.get("blocks"), spoken, narr)
+
+    tex_spoken, tex_narr = [], []
+    for c in (game.get("canvases") or []):
+        for n in (c.get("nodes") or []):
+            _tex_split(n.get("blocks"), tex_spoken, tex_narr)
+
+    def _rate(parts):
+        t = " ".join(parts)
+        w = len(re.findall(r"[A-Za-z][A-Za-z'-]*", t))
+        return (len(re.findall(r"—|–", t)) / w * 10000 if w else 0.0), w
+
+    spoken_rate, spoken_w = _rate(tex_spoken)
+    narr_rate, narr_w = _rate(tex_narr)
+
     tex_detail = []
     if tex_words and dash_rate > DASH_CEILING:
         tex_detail += [f"{cid}: {d} in {w:,} words"
@@ -5577,6 +5625,13 @@ def run_gates(model, game, state=None):
             "or cut the clause it was holding on.",
             "field p50 is 0.99/10k — half the corpus writes under one dash per 10,000 words",
         ]
+    if tex_words and (spoken_w or narr_w):
+        tex_detail.append(
+            f"where they live — narration {narr_rate:.1f}/10k over {narr_w:,} words · "
+            f"speech {spoken_rate:.1f}/10k over {spoken_w:,} words. A dash in speech is how "
+            f"English writes an interruption and is usually correct; the narration figure is "
+            f"the one register.md's \"Dashes stay rare\" is about. Verdict above counts both, "
+            f"because the field cannot be split (see DASH_CEILING).")
     if tex_words:
         tex_detail += [
             f"reported, not gated, NO field figure — joints/sentence {tex_joints:.2f} · "

@@ -1380,8 +1380,10 @@ long, and defensible as terminal beats.
 
 **2026-08-27.** Two players read a different game of ours and called its prose "an underpowered AI
 whose 'mother language' isn't english." That prompted the first prose comparison this project has
-ever run: our writing against the 25-game mopoga corpus, same instrument on both sides. The result
-for this game is that **nothing needed changing.**
+ever run: our writing against the 25-game mopoga corpus, same instrument on both sides. On the dash,
+the marker that comparison started from, this game came back **inside the field** — but that was one
+marker, and a wider sweep the same day found two habits that were not. See **"The explaining habit"**
+below, which supersedes this section's original "nothing needed changing".
 
 | | `mrs_vance` | field |
 |---|---|---|
@@ -1391,10 +1393,12 @@ for this game is that **nothing needed changing.**
 | `you` as a share of words | 5.6% | 6.4% |
 
 The dash rate sits on the field's **p95** and inside its range: `love-and-vice` runs 25.7 and
-`apocalyptic-world` 35.4. The whole footprint is 32 dashes across 21 content blocks. By the
-corpus's own evidence that is not a defect, and **no prose was edited.** The game the players were
-reading runs 123.0 per 10k, which is 3.5× the corpus maximum, and is a different game and a
-different session's call.
+`apocalyptic-world` 35.4. The whole footprint was 32 dashes across 21 content blocks, and by the
+corpus's own evidence that is not a defect. **24 of those 32 were inside `dialog` blocks** — *"Mrs.
+Vance — Mrs. — I can't, if you keep —"* — where the em-dash is the correct English mark for an
+interruption. Those were left alone. The 8 in narration were split, taking the game to 19.2/10k with
+**narration at 0.0**. The game the players were reading runs 123.0 per 10k, which is 3.5× the corpus
+maximum, and is a different game and a different session's call.
 
 ⚠️ **One finding from that session was published and then retracted, and it is recorded here so it
 is not re-derived.** Measuring our games from `output/index.html` gave "sentences 4.75× more packed
@@ -1407,6 +1411,49 @@ as a finding.
 The instrument this produced is **gate 43, "prose texture"** (`gates.py`, ceiling 35.0 = the corpus
 maximum), so the tally for this game is now **41/41**. Its three companion numbers carry no field
 figure by design; `references/register.md`, "Dashes stay rare" holds the doctrine.
+
+### The explaining habit — found by a wider sweep, and fixed
+
+**2026-08-27.** Clearing the dash was one marker, so eleven named shapes of *"narration stops to
+declare significance"* were measured against the same corpus. **Two were outside it**, both by a
+wider margin than the dash ever was:
+
+| family | before | after | field max | |
+|---|---|---|---|---|
+| A `"that is the / that's what"` | 15.88 | **1.84** *(narration only)* | 4.00 | 4× over → inside |
+| C `"which is / which means"` | 8.73 | **1.52** | 0.62 | 14× over → 2 instances left |
+| dashes | 25.4 | **19.2** *(narration 0.0)* | 35.4 | was always inside |
+
+The habit reads as *"the text keeps explaining itself"*: the beat happens, then the narration stops
+and says what it meant. *"That is the part that lands."* · *"That is the point of the sentence."* ·
+*"…which is the bravest thing anybody in this house does all week."*
+
+**Why nothing caught it.** This is a **sibling of the pivot rule, not the pivot rule**. The pivot is
+taught and checked for **explicit beats only**, and this file's finding of zero pivots is correct —
+it read the sex scenes and they are clean. The habit lives in ordinary Lane 1/2 narration, where no
+rule and no gate has ever looked.
+
+**Every hit was read, not counted, and the raw numbers overstated the job by roughly half.**
+
+- **Kept — speech.** 7 family-A hits are characters talking (*"That's it. Do not stop."*).
+- **Kept — deliberate.** 2 narration hits: an idiomatic aside (*"because that is what there is"*) and
+  one `thought_bubble`, which is interiority by design and gets its own beat under the doctrine.
+- **Kept — the two that work.** *"…swings it round toward bay two, which is the answer."*
+- **Split, not cut.** Three `which means` clauses were doing genuine inference (*"the roller door is
+  already up, which means somebody has been awake longer than you have"*). Splitting the sentence
+  keeps the information **and** drops the construction — strictly better than the keep-or-cut choice
+  the fix was originally framed as.
+
+⚠️ **Four shapes came back at exactly zero and are recorded so they are not re-hunted:** `"not X,
+but Y"`, `"and they both know it"`, `"and there it is"`, `"doesn't know yet how much it will cost"`.
+The first of those was the shape most expected going in — it belongs to the other game, not this
+one. `triple_ABC` measured 6.35 against a field max of 6.72: inside, left alone.
+
+**Verified.** 41/41 gates · `location fill` 14/14 on their own budgets (12,515 words against 12,829
+declared, ~110 lost) · `somebody speaks` and `explicit floor` unmoved · `playtest_presence` 10/10 ·
+`playtest_quests` 23/23 · `playtest_standing` PASS · `playtest_walkins` PASS · all 21 edited
+paragraphs re-read end to end, and two were revised a second time where the first cut left them
+ending awkwardly.
 
 ### The structure is clean
 
