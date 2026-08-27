@@ -15056,20 +15056,30 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         # game's narration_person so it agrees with the prose around it.
                         player_label, _, alt_label = self._get_player_speech_labels()
                         player_portrait = getattr(self, 'player_portrait', '') or ''
-                        portrait_html = self._render_portrait(player_portrait, alt_label) if player_portrait else ''
+                        # Unguarded: _render_portrait("") returns the SVG silhouette, so the
+                        # speaker column is never visually empty. The old `if portrait else ''`
+                        # guard left a hole in the column for anyone without art.
+                        portrait_html = self._render_portrait(player_portrait, alt_label)
                         html_parts.append(
                             f'<div class="dialog-block dialog-player">'
+                            f'<div class="dialog-speaker">'
                             f'{portrait_html}'
-                            f'<div class="dialog-content">'
-                            f'<strong>{player_label}:</strong> {content}'
-                            f'</div></div>'
+                            f'<strong>{player_label}</strong>'
+                            f'</div>'
+                            f'<div class="dialog-content">{content}</div>'
+                            f'</div>'
                         )
                     elif speaker == "unknown":
+                        # A stranger gets the column too, or their line starts at a different
+                        # x than every NPC line on the same screen. No role: nobody knows it.
                         html_parts.append(
                             f'<div class="dialog-block dialog-npc">'
-                            f'<div class="dialog-content">'
-                            f'<strong>Stranger:</strong> {content}'
-                            f'</div></div>'
+                            f'<div class="dialog-speaker">'
+                            f'{self._render_portrait("", "Stranger")}'
+                            f'<strong>Stranger</strong>'
+                            f'</div>'
+                            f'<div class="dialog-content">{content}</div>'
+                            f'</div>'
                         )
                     else:
                         # NPC dialog with portrait support
@@ -15081,7 +15091,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         # Fallback: convert slug to title case (npc_ethan → Ethan)
                         if not npc_name:
                             npc_name = npc_id.replace("npc_", "").replace("_", " ").title() or "NPC"
-                        portrait_html = self._render_portrait(npc_portrait, npc_name) if npc_portrait else ''
+                        portrait_html = self._render_portrait(npc_portrait, npc_name)
                         # For customizable NPCs, use runtime name from $npcs
                         if npc_data and npc_data.get("customizable") and npc_uuid:
                             speaker_html = f'<<print $npcs["{npc_uuid}"].name>>'
@@ -15099,10 +15109,13 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         )
                         html_parts.append(
                             f'<div class="dialog-block dialog-npc">'
+                            f'<div class="dialog-speaker">'
                             f'{portrait_html}'
-                            f'<div class="dialog-content">'
-                            f'<strong>{speaker_html}:</strong>{role_html} {content}'
-                            f'</div></div>'
+                            f'<strong>{speaker_html}</strong>'
+                            f'{role_html}'
+                            f'</div>'
+                            f'<div class="dialog-content">{content}</div>'
+                            f'</div>'
                         )
                 elif block_type == "thought_bubble":
                     # NPC / player interior thought bubble (S8 — bundled with S7
@@ -16383,9 +16396,10 @@ if (clothingMsg) {
 <p><<print _rt.scene || "A heavy knock on the door. You open it to find " + _collectorName + " standing there, hand already extended.">></p>
 
 <div class="dialog-block dialog-npc">
-  <div class="dialog-content">
-    <strong><<print _collectorName>>:</strong> <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">>
+  <div class="dialog-speaker">
+    <strong><<print _collectorName>></strong>
   </div>
+  <div class="dialog-content"><<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">></div>
 </div>
 
 <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
@@ -16422,9 +16436,10 @@ if (clothingMsg) {
 <p><<print _rt.paid_scene || "You hand over the cash. " + _collectorName + " counts it, nods once, and turns to leave.">></p>
 
 <div class="dialog-block dialog-npc">
-  <div class="dialog-content">
-    <strong><<print _collectorName>>:</strong> <<print _rt.paid_response || "Same time next week.">>
+  <div class="dialog-speaker">
+    <strong><<print _collectorName>></strong>
   </div>
+  <div class="dialog-content"><<print _rt.paid_response || "Same time next week.">></div>
 </div>
 
 <p><<print _rt.paid_closing || "Another week secured.">></p>
@@ -16452,9 +16467,10 @@ if (clothingMsg) {
   <p><<print _rt.warning_scene || "You explain that you're short this week. " + _collectorName + "'s expression doesn't change.">></p>
 
   <div class="dialog-block dialog-npc">
-    <div class="dialog-content">
-      <strong><<print _collectorName>>:</strong> <<print _rt.warning_response || "Next Monday. Don't make me ask twice.">>
+    <div class="dialog-speaker">
+      <strong><<print _collectorName>></strong>
     </div>
+    <div class="dialog-content"><<print _rt.warning_response || "Next Monday. Don't make me ask twice.">></div>
   </div>
 
   <p><<print _rt.warning_closing || "You have one week to find the money.">></p>
@@ -16475,9 +16491,10 @@ if (clothingMsg) {
     <p><<print _rt.eviction_scene_soft || _rt.eviction_scene || _collectorName + " stops waiting for the money. Something shifts in the way " + _collectorName + " looks at you now.">></p>
 
     <div class="dialog-block dialog-npc">
-      <div class="dialog-content">
-        <strong><<print _collectorName>>:</strong> <<print _rt.eviction_response_soft || _rt.eviction_response || "We'll be having a different conversation from here on out.">>
+      <div class="dialog-speaker">
+        <strong><<print _collectorName>></strong>
       </div>
+      <div class="dialog-content"><<print _rt.eviction_response_soft || _rt.eviction_response || "We'll be having a different conversation from here on out.">></div>
     </div>
 
     <p><<print _rt.eviction_closing_soft || _rt.eviction_closing || "You're still here. But the terms have changed.">></p>
@@ -16488,9 +16505,10 @@ if (clothingMsg) {
     <p><<print _rt.eviction_scene || _collectorName + " doesn't wait for excuses this time.">></p>
 
     <div class="dialog-block dialog-npc">
-      <div class="dialog-content">
-        <strong><<print _collectorName>>:</strong> <<print _rt.eviction_response || "Locks are getting changed today. Pack your things.">>
+      <div class="dialog-speaker">
+        <strong><<print _collectorName>></strong>
       </div>
+      <div class="dialog-content"><<print _rt.eviction_response || "Locks are getting changed today. Pack your things.">></div>
     </div>
 
     <p><<print _rt.eviction_closing || "No negotiation. No extension. You had your chance.">></p>
@@ -18518,8 +18536,15 @@ if (clothingMsg) {
     height: 70%;
 }
 
-/* Dialog Block with Portrait */
+/* Dialog Block — a speaker COLUMN on the left, the spoken line alone on the right.
+   face / name / role stack and centre; the line never shares that column.
+
+   Sized with clamp() rather than a breakpoint: a fixed width plus a media query is
+   what goes wrong on tablets. These reach full size around a 640px viewport, so the
+   column costs a phone ~58px and a laptop gets the full 96px. */
 .dialog-block {
+    --dlg-face: clamp(40px, 11vw, 60px);
+    --dlg-col:  clamp(56px, 15vw, 96px);
     display: flex;
     align-items: center;
     gap: 12px;
@@ -18527,6 +18552,28 @@ if (clothingMsg) {
     padding: 10px;
     border-radius: 8px;
     color: var(--theme-text);
+}
+
+/* ⚠️ `flex: 0 0` is load-bearing. Without it this column shrinks on a narrow screen
+   and every box in a scene starts its text at a different x — a ragged left edge down
+   the page, which is the failure this layout exists to prevent. The width is reserved
+   even when the column is empty (a `speaker="unknown"` line has no role), so a
+   Stranger's words line up with everyone else's. */
+.dialog-speaker {
+    flex: 0 0 var(--dlg-col);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+    min-width: 0;
+}
+
+/* Scoped to the dialog block on purpose: the global `.portrait` rule above is 40px and
+   still serves the thought bubble and every other caller. */
+.dialog-block .portrait {
+    width: var(--dlg-face);
+    height: var(--dlg-face);
 }
 
 .dialog-player {
@@ -18547,20 +18594,32 @@ if (clothingMsg) {
     color: var(--theme-text-secondary);
 }
 
+/* ⚠️ `min-width: 0` is the other load-bearing rule. A flex item defaults to
+   `min-width: auto`, so one long unbroken string refuses to shrink, overflows the
+   box and gives the phone a horizontal scrollbar. It is invisible at desktop width,
+   which is why it survives review. */
 .dialog-content {
     flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
-/* F10 — the role label under a speaker's name. Quieter than the name and at the
-   same weight as the cast page's tag line, because it is a label and must not
-   compete with the line the character is actually saying. `display: block` is
-   what puts it on its own row under the name rather than trailing after it. */
-.dialog-npc .dialog-role {
-    display: block;
-    font-size: 12px;
-    line-height: 1.3;
+/* The name, in the column. No trailing colon — `Dorn:` is inline speech attribution
+   and reads wrong once the name sits above the face rather than in front of a line. */
+.dialog-speaker strong {
+    font-size: clamp(11px, 3vw, 14px);
+    line-height: 1.2;
+}
+
+/* F10 — the role label under a speaker's name. Quieter than the name and at the same
+   weight as the cast page's tag line, because it is a label and must not compete with
+   the line the character is actually saying. It no longer needs `display: block`: the
+   column stacks it. A long role ("husband's youngest") wraps to two centred lines on a
+   phone and one on a laptop, which reads as a caption either way. */
+.dialog-speaker .dialog-role {
+    font-size: clamp(9px, 2.6vw, 12px);
+    line-height: 1.25;
     color: var(--theme-text-muted, #8a8a8a);
-    margin: 1px 0 3px;
 }
 
 /* Thought Bubble Block (S8) — interior monologue, paired with cascade beats */

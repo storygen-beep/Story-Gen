@@ -60,9 +60,40 @@ def test_the_role_renders_and_the_name_is_still_there():
     tax onto the label."""
     out = _line(_gen())
 
-    assert "<strong>Cade:</strong>" in out
+    # No trailing colon since 2026-08-27: the name sits above the face in its own
+    # column, and `Cade:` is inline speech attribution, which reads wrong there.
+    assert "<strong>Cade</strong>" in out
     assert '<span class="dialog-role">husband&#x27;s eldest</span>' in out
     assert out.index("Cade") < out.index("dialog-role")
+
+
+def test_the_speaker_column_holds_the_face_the_name_and_the_role():
+    """The left column is the whole layout: portrait, name, role, stacked."""
+    col = _line(_gen(portrait="faces/cade.jpg")).split('<div class="dialog-content">')[0]
+
+    assert '<div class="dialog-speaker">' in col
+    assert 'class="portrait"' in col
+    assert "<strong>Cade</strong>" in col
+    assert 'class="dialog-role"' in col
+
+
+def test_the_content_column_carries_the_line_and_nothing_else():
+    """The property this markup exists for, and nothing pinned it before: the right
+    column is the spoken line on its own. If a name, a role or a face leaks back in
+    here, the two-column layout has silently collapsed into the old ragged stack."""
+    content = _line(_gen(portrait="faces/cade.jpg")).split('<div class="dialog-content">')[1]
+
+    assert "Slower." in content
+    assert "Cade" not in content
+    assert "dialog-role" not in content
+    assert "portrait" not in content
+
+
+def test_a_speaker_with_no_portrait_still_gets_one():
+    """The column must never be visually empty, or the face slot collapses and the
+    name jumps up. `_render_portrait("")` returns the SVG silhouette; the old
+    `if portrait else ''` guard at the call site skipped it entirely."""
+    assert 'class="portrait' in _line(_gen(portrait=""))
 
 
 def test_an_npc_with_no_role_renders_exactly_what_it_always_did():
@@ -90,10 +121,20 @@ def test_the_player_speaker_takes_no_role():
 
 
 def test_an_unknown_speaker_stays_a_stranger():
-    """`speaker = "unknown"` renders `Stranger:` — there is nobody to label."""
+    """`speaker = "unknown"` renders `Stranger` — there is nobody to label."""
     out = _line(_gen(), speaker="unknown")
-    assert "<strong>Stranger:</strong>" in out
+    assert "<strong>Stranger</strong>" in out
     assert "dialog-role" not in out
+
+
+def test_every_speaker_kind_gets_the_same_column():
+    """A Stranger line and a player line sit beside NPC lines on the same screen.
+    If any of the three skips the column its text starts at a different x, and a
+    ragged left edge down a scene is the exact failure this layout prevents."""
+    for speaker in ("npc", "player", "unknown"):
+        out = _line(_gen(), speaker=speaker)
+        assert '<div class="dialog-speaker">' in out, speaker
+        assert 'class="portrait' in out, speaker
 
 
 # ── 3. it is build-time text, not save state ─────────────────────────────────
