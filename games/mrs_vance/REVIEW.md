@@ -2495,7 +2495,74 @@ gate has changed. The candidate gate — *a start-of-game choice does not ship u
 reads it* — is deliberately **not built** until one real opening proves the choices can change
 anything, because a check written ahead of its doctrine is how Study 2's R4 failed.
 
-**Status: still OPEN, still MED, still SKILL** — the diagnosis is corrected, nothing is repaired.
+#### Built 2026-08-27 — and reading the opening made the job smaller than the pitch
+
+⚠️ **THE OPENING WAS ALREADY ASKING FOUR QUESTIONS AND THROWING EVERY ANSWER AWAY.** This is a
+GAME-layer finding that only surfaced because the skill-layer one sent me here, and it is worse than
+"there are no choices":
+
+```
+open_dorn_leaves.base    "Ask him what you are supposed to do all day."   -> the_book
+                         "Say nothing and let him get to it."             -> the_book
+open_dorn_leaves.the_book "Ask what happens if it does not agree."        -> the_week
+                         "Pick the key up."                               -> the_week
+```
+
+**Same target, no effects, no difference.** The player is asked twice who she is and the game
+discards both answers. That is the fake-freedom failure in its purest form, already shipped, in the
+first ninety seconds.
+
+**So this increment did not add a character-creation screen. It gave the question the game already
+asks an answer that survives.** `the_book`'s two inert choices became three, each setting one flag —
+*a memory, not a slider* (`findings_A_want.md:93`): she is answering the man who just put a ledger in
+front of her.
+
+| choice | flag |
+|---|---|
+| "Tell him you have kept books before." | `past_books` |
+| "Tell him you used to drive." | `past_road` |
+| "Say nothing. Pick the key up." | `past_counter` |
+
+**Read at 5 sites each, 15 total** — a three-band ladder on `work_books`, `work_counter` and
+`work_parts_run`, plus a paired privilege rung on each:
+
+- `past_books` — the week goes straight in **1h30 not 2h**, and Cade gets **+5 trust not +3**
+- `past_road` — she takes the key off the board **herself**, 1h30, +3 standing. This is the Want's own
+  bottom ascent rung, which reads *"she asks Cade for the truck to leave the property at all"*
+- `past_counter` — the same six hours cost **14 energy not 18** and pay **+5 standing not +3**
+
+⚠️ **NOTHING IS GATED OFF.** Each original rung keeps every number it had and gains `past_* is_false`,
+so the pair is mutually exclusive and no door closes. A save made before this carries no past flag and
+reads exactly what it read yesterday — verified, not assumed.
+
+⚠️ **LADDER PLACEMENT IS LOAD-BEARING, and this is the trap worth carrying forward.** Adjacent
+`[group]` blocks merge into ONE if/elseif chain (`v2.py:14637`), first match wins. `work_books`
+already had a Cade-trust band and `work_counter` already had a four-band `standing` ladder — placed
+adjacent, **either would have become unreachable for every player carrying a past.** So the ladder
+goes *before* the pool on `work_books` and *between the pool and the dialogue* on `work_counter`,
+with a non-`group` block separating the chains in both.
+
+**Proved live**, headless Chromium, all three activities × four states:
+
+```
+distinct renders   work_books 4/4 · work_counter 4/4 · work_parts_run 4/4
+empty renders      0
+privilege rungs    offered to their own past only, and to no other
+gates              41/41 judged, 1 n/a · 12,509 -> 12,870 words (per pass 8,706 -> 9,067)
+```
+
+⚠️ **One correction to my own verification.** The first run reported `work_counter` at 3/4 and I
+nearly filed it as a defect. The selector was wrong — the container is `.passage`, not `#passage`, so
+the script silently fell back to whole-`body` text and was diffing the sidebar's live meters. The
+macro nesting had been correct all along. **A number that says "one of twelve cases failed" is a
+reason to check the instrument first.** Same lesson as the P0 clip artefact, two increments running.
+
+**Status: G1 stays OPEN as a SKILL item.** This is one game. The doctrine change and the proposed
+start-choice gate are Step 3, and `DOCTRINE_GAPS.md` Study 7 §5 still carries them as proposals — the
+whole point of building this first was to stop specifying a gate before a real game could run it.
+
+**Still open, deliberately:** the other four inert choices in `open_dorn_leaves.base` and elsewhere.
+One thing was tested at a time.
 
 ---
 
@@ -3106,3 +3173,20 @@ the female-PC games' openings. Its verdicts are adopted, which moved the three-a
 a memory, not a slider"*. Recorded in N13; the additive half is the whole-field classification, the
 pronoun mechanism and this refutation. **Count unchanged at 7 open, 17 fixed** — the diagnosis is
 corrected, nothing is repaired, and no doctrine, template or gate was touched.
+
+**2026-08-27 — G1 Step 2 built: the opening's questions now have answers that survive.** LO's call,
+after Study 7. Reading the opening to place the choice found the sharper defect: **it already asked
+four questions and discarded all four** — both choices on `open_dorn_leaves.base` and both on
+`.the_book` shared one target, carried no effects and differed in no way. So no character-creation
+screen was added; `the_book`'s two inert choices became three, each setting `past_books` / `past_road`
+/ `past_counter` — a memory, not a slider. Read at **5 sites each, 15 total**: a three-band ladder on
+`work_books`, `work_counter`, `work_parts_run`, plus one paired privilege rung apiece (1h30 books at
++5 Cade trust · the truck key taken without asking · the counter at 14 energy and +5 standing).
+⚠️ **Additive only** — every original rung keeps its numbers and gains `past_* is_false`, so nothing
+is gated off and a pre-existing save reads what it read before. ⚠️ **Ladder placement is load-bearing:**
+adjacent `[group]` blocks merge into one chain, and both `work_books` and `work_counter` already had a
+ladder that would have gone unreachable. Proved live: **4/4 distinct renders on all three activities,
+0 empty, each privilege offered to its own past only**; gates **41/41 judged, 1 n/a**. ⚠️ **My first
+verification run was wrong** — `.passage` not `#passage`, so it diffed the sidebar's live meters and
+reported a defect that did not exist. Count unchanged at **7 open, 17 fixed**: G1 stays OPEN as a
+SKILL item, because one game is not doctrine and Step 3 is still a proposal.
