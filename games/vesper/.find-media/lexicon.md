@@ -1217,3 +1217,158 @@ the family to `ambiguous` — and `ambiguous` always passes. `tattooing` is the 
 face-down-vs-supine and back-vs-arm can only be judged by eye in the picker. Arm/sleeve work dominates the
 whole tattoo gif corpus. Query 1 also carries fandom contamination (Arcane, Call of Duty, Percy Jackson
 gifsets tagged "tattoo"), ~4 of 60 urls.
+
+---
+
+# The Bastien back-room chunk — 16 slots, 75 queries, 2026-08-17
+
+One agent per slot, rolling cap 6. 53 queries landed, 22 were condemned at the gate and never
+reached a shelf. 4,068 options stocked, 100% attributed, nothing installed. Every entry below
+was measured on a live grid during this run.
+
+## Engine — affects every slot, not just this game
+
+⚠️ **"More results" is no longer universally present.** On many queries Google now ends the grid
+with **"The rest of the results might not be what you're looking for. See more anyway"** — the
+corpus-boundary marker — instead of the button. Measured on 4 slots; on the fire-damage aisle it
+capped *every* landed query at ~90–95 extractable urls, so **shelf size there comes from query
+COUNT, not from clicking.** The skill's "still slots click twice" instruction is unexecutable on
+those grids.
+
+⚠️ **But do not read a failed button lookup as absence.** The button only enters the DOM after
+several scrolls — a single scroll-then-find reports `clicked:false` on a page that does have it.
+**Confirm absence by the "See more anyway" marker, never by the lookup alone.**
+
+⚠️ **Tenor plurality AFTER the click is not by itself a condemn signal.** It separates
+*exhaustion* from *drift* only after a tail glance, and the two demand opposite actions.
+Exhaustion junk (unrelated memes, a keyboard review) = Google ran out of matches, query is fine.
+A coherent WRONG topic (dev blogs, fitness, health) = condemn. Judge the HEAD of the grid.
+
+## The structural finding of this run
+
+⚠️ **THE DESK AND THE OLDER/HEAVY MALE ARE MUTUALLY EXCLUSIVE IN THE CORPUS.** Measured
+independently on **6** slots. `fat old man` queries return bed/couch/domestic prone-bone — the
+older-male tag corpus is domestic, not office. `bent over desk` queries return studio-fit YOUNG
+men in bright offices. **No tile anywhere showed both.** Buy one axis per query; the shelf
+carries both buckets and the human picks which compromise he wants.
+
+- `hair pulling` held the desk AND the hold together under an `anal` anchor — but **that property
+  is QUERY-LOCAL, not a property of the token**: under `anal creampie` it collapsed to bed/couch
+  entirely. Do not promote it as a general desk-holder.
+- `anal creampie` **neutralises the `fat` health tail** — with it as anchor and no position token
+  the histogram was 100% porn, zero rvohealth/hearstapps/AARP.
+
+## New poison — act slots
+
+| token | what it actually retrieves |
+|---|---|
+| ⚠️ **a furniture noun with NO act word beside it** | the whole class collapses. `fat old man bent over desk gif` → 100% Tenor/GIPHY **office-humor**; `bent over desk` is NOT self-anchoring the way `prone bone` is |
+| ⚠️ `table` with no act word | **chemistry / medical DATA TABLES** — pubs.acs.org, journals.asm.org topped the histogram. The known `desk` + `prone bone` pair is broader than recorded |
+| ⚠️ `desk` alone | a dev/tech-blog gif corpus (nvidia, froala) plus *"Did you mean: desi"*. **`office` is the clean substitute** on clothed-handling queries |
+| ⚠️ `sitting chair` beside `old man` | `old man rocking chair GIFs` — a large SFW meme corpus (Tenor, New Yorker, AARP, Healthline) that drowns even `cumshot`. **Naming his seat works only when the act word is the stronger corpus term**: it held with `blowjob`, it failed with `cumshot` |
+| ⚠️ `waitress` / `serving drinks` | the SFW **service-industry meme + #MeToo news** corpus (Tenor, GIFDB, New Yorker, Pitchfork, GQ, NYT) — zero porn hosts even with `groped` beside them. **`groped` alone does NOT anchor a query into porn.** The role is unbuyable; use `bar`/`restaurant` as room nouns |
+| ⚠️ `fat` (as the older-male token) | drags a **weight-loss / health-explainer** tail — rvohealth, hearstapps, everydayhealth, loseitblog, NBC, plus New Yorker/Slate/GQ. ~half of one post-click tail. A position or act-anchor token beside it carries it through |
+| ⚠️ `fat old man` + `anal creampie` | `fat` partly binds to the **WOMAN** — pulled a BBW sub-aisle (bbwgirls.club). ~half the tiles have the correct heavy male; the rest a heavy woman with an average man |
+
+✅ **`pull out creampie` LANDS** despite `pulls out` being on the narrative-process blacklist —
+`creampie` carries enough tag weight to rescue it. Confirmed twice (vaginal and anal variants);
+it was the best aftermath query on both slots. A shape exception, not a repeal of the rule.
+✅ **`creampie` rescues `bent over desk`** from the office-humor aisle: 100% porn hosts with it.
+✅ **`bar` and `table` behave as CLEAN furniture nouns for t4 handling** when an act word
+(`groping`) sits directly beside them — no catalog drift, contra the `desk` finding.
+✅ `fat old man` confirmed again — now **9 sightings across 8 slots**. Still the only reliable
+heavy/older-male token. `old man` alone works but skews silver-haired-LEAN rather than heavy.
+
+## New poison — place / still slots
+
+| token | what it actually retrieves |
+|---|---|
+| ⚠️ `dark room` | **"dark BACKGROUND"** — studio MACRO on black, not a dim interior. Killed a query with a perfect stock histogram |
+| ⚠️ `dark background` (object queries) | **3D / neon CGI renders**, behind a perfect stock crowd. Refines the above: `dark room` gives usable studio macro, `dark background` does not |
+| ⚠️ `dark` (interiors) | a **DECOR-THEME** keyword, not a lighting one — black-painted modern offices with monitors. Era anchors (`vintage`, `1970s`) un-modernise a room better, but drag typewriters and cubicle farms |
+| ⚠️ a furniture/object noun in the **HEAD** position | product-catalog magnet. `leather chair` → Amazon/Moglix/Lakdi. `magnifier lamp` → **97/97 e-commerce, zero stock hosts** — the purest shopping-aisle collapse of the run. Survives fine as a MODIFIER behind a room noun |
+| ⚠️ `work lamp` | the **home-lighting SHOPPING aisle** (chips: "Led lights / Garage lights / Workbench lighting"), bright tidy hobby workshops. Naming the LAMP is the same defect class as naming the props. **`dim` fixes it on one token swap** |
+| ⚠️ `laboratory` | the **SCI-FI CGI / GAME-RENDER** corpus — neon bunkers, Craiyon stills, zero photographs. `workshop` is the only live head noun for an improvised-workroom beat |
+| ⚠️ `soot stained walls` | a wall-SURFACE phrase, not a room phrase — soot/brick TEXTURE swatches plus a "how to clean soot off walls" advice aisle. Google offered chips "Drywall / Paint / Ceiling": the query left the room corpus |
+| ⚠️ `ash covered floor` | a Shutterstock **ground-texture series** (~2,719 assets) with no room in frame, plus CNN wildfire exteriors. Do not buy the floor as its own axis |
+| ⚠️ `empty room` | a **real-estate / vacant-listing** magnet — clean white rooms. Same family as `dark room` |
+| ⚠️ `bartender` / `pub counter` | flips the subject from **patron to STAFF** — bright hospitality/mixology stock where the woman IS the bartender. Condemned twice independently, behind perfect stock histograms |
+| ⚠️ `film noir` as query head | buys the **COSTUME, not the room** — gowns, cigarettes, fedoras, femme-fatale portraits, casino scenes, illustration/AI tiles. `moody light` / `low light` get the dim register without the period wardrobe |
+| ⚠️ `dingy` | **silently DROPPED** by the interiors corpus, no "Did you mean" line. Same class as the recorded `bare room` / `engine room` drops |
+| ⚠️ `underground` | never bit (reconfirmed) — warm ground-level pubs, or empty venue shots with NO person |
+
+✅ **NEW FIX — a PERSON+ACTIVITY head defeats the catalog magnet on an object slot.** `technician
+workbench circuit board repair workshop` flipped identical subject matter from **0% to 65/92
+stock hosts**. Cost: hands/people enter the frame, so a "nobody in the room" beat is bought only
+by eye off the shelf.
+✅ **Charred PAPER is not buyable as a subject but IS buyable as a ROOM.** `burned office interior
+fire damage charred desks` returned scorched paper strewn across desks inside real burned
+offices. **Spend the office query, never the paper query.**
+✅ **`fire damage restoration` is the money vocabulary for AFTERMATH** — the only query whose head
+hosts were restoration COMPANIES rather than stock agencies, and that band is unwatermarked and
+genuinely photographic.
+✅ Confirmed-binding proxies for the improvised-workroom family: `machine shop`, `basement
+workshop`, `abandoned factory`, `salvage yard workshop`, `dive bar interior` (the best worn-room
+token found — but ~half its tiles are empty of any figure).
+
+## Watermark ratios (a REPORTABLE number, never a filter)
+
+Measured per still slot: 27% / 54% / 55% / 60% / 62% / 67% / 79% from the watermarking set
+(Shutterstock, Dreamstime, Alamy, iStock, Getty). **Free stock (Pexels/Unsplash) contributed
+ZERO on the dim-workshop and dim-private-room beats** — that corpus does not exist there. The
+genuinely photographic clean end on the fire slots is the restoration-company band (puroclean,
+renonvwaterdamage, viprestorationservices, palmbld).
+
+## Wave 2 — the API-gap slots (3 locations + 2 clothing), 2026-08-17
+
+Scoped after LO caught that wave 1's TOML walk had missed the API's Locations / Clothing /
+Portraits categories. 1,538 options, 30 chips, 17 landed, 13 condemned.
+
+**Engine, sharpened:** the extractable-url ceiling is **~100 per query regardless of tile
+count** — one query took two "More results" clicks to 632 tiles and still yielded exactly 100.
+On still slots more clicking buys nothing; **more QUERIES is the only lever on shelf size.**
+
+### New poison — place slots
+
+| token | what it actually retrieves |
+|---|---|
+| ⚠️ `dim` beside `cubicle` | parsed as **`dimensions`** — 100% CAD elevation drawings and washroom-partition trade catalogues (duracube, jialifu, cubiclecentre). Zero photographs. `dim` is safe beside a room noun, not beside `cubicle` |
+| ⚠️ `bed` — **in ANY position, not just the head** | a product-catalog magnet that nukes a live room head: `machine shop makeshift bed dim` → 100% bed-frame retail (amazon, wakefit, nilkamal; chips "Murphy bed / Hydraulic storage"). **`makeshift` does not rescue it** |
+| ⚠️ `dive bar` + `bathroom` | a home-DECOR theme, not a venue — Pinterest, wixstatic, tile vendors. Swapping `bathroom`→`toilet` and adding `graffiti` escapes it entirely |
+| ⚠️ `dim` in a **trade/business** corpus | weak — returns bright modern boatyards on `boat repair workshop interior dim`. It fixed a hobby-workshop query on a sibling; it does not survive into commercial-services listings |
+
+✅ **`grimy` is NOT dropped, unlike `dingy`** — it is the working squalor token for the
+neglected-interior aisle and it drove the best shelf of its slot.
+✅ `toilet` survives as a ROOM noun inside `public toilet` / `pub toilet` with no retail
+contamination. It was `cubicle` that pulled the trade catalogue, not `toilet`.
+✅ Dropping `factory` kills the cathedral-scale problem while keeping the dim-workshop register.
+✅ **Paper, third confirmation:** it buys only as a ROOM and only when the room noun is
+`office`. `papers stacked` DROPS `workshop` entirely and returns macro paper + messy desks;
+`paperwork` beside `workshop bench` is silently absorbed. No tile anywhere held both long
+work-benches and paper everywhere.
+
+### Clothing/garment-icon slots — a DIFFERENT rule set
+
+⚠️ **A garment slot INVERTS this run's catalog rule.** Everywhere else the product-catalog aisle
+is the failure; for a wardrobe icon a clean product shot is the TARGET. The wrong crowd there is
+people-wearing-it lifestyle editorial, runway, and Pinterest outfit collages.
+
+| token | what it actually retrieves |
+|---|---|
+| ⚠️ `product shot` | autocorrects to **"product SHOOT"** → fashion-editorial lifestyle (models on staircases, in gardens) plus fit-and-flare prom silhouettes |
+| ⚠️ `hanger` | a heavily-catalogued product in its own right — returns **EMPTY WOODEN COAT HANGERS**, no garment in the head at all |
+| ⚠️ `flat lay` / `laid flat top view` | **the unstyled flat-lay does not exist.** Both normalise to the same aspirational styling genre — outfit sets with handbag, heels, sunglasses; Shutterstock's own tag is "Dresses Flat Lay" |
+| ⚠️ `old` on apparel | RETRO/VINTAGE COLLECTIBLE — 50s polka-dot, ball gowns, historical costume. Same trap as `vintage`; treat both as poisoned on garments |
+| ⚠️ `brown` on a dress | the BRIDESMAID/SATIN GOWN corpus — every related chip was bridesmaid/bride/gown. **`grey` is the clean drab anchor** |
+| ⚠️ `white background` WITHOUT `isolated` | collapses into **WHITE GARMENT** (white kurtis on models) |
+| ⚠️ `cheap` | silently dropped — resolves to the generic "Dress Isolated on White" catalog, so the shelf skews to saturated party colours |
+
+✅ **`isolated white background` is the load-bearing framing token for any garment-icon slot** —
+it is what forces object-not-model. ✅ `on mannequin` reliably blocks the body-shot drift.
+
+⚠️ **THE STRUCTURAL FINDING: the SECOND-HAND register and the SINGLE-GARMENT subject are
+mutually exclusive.** Every thrift token (`thrift store`, `second hand`, `charity shop`) is a
+retail-PLACE noun: it returns shop interiors, racks and piles, never one garment. The
+garment-as-object corpus is exclusively NEW-PRODUCT stock. **A worn second-hand dress isolated
+as an object does not exist as a photograph at this framing** — provenance is not a property a
+product shot can carry. Eight of that slot's ten queries were condemned proving it.

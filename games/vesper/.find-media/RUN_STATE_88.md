@@ -154,3 +154,78 @@ All are AUTHORING decisions for LO, not query bugs — every one had its allowed
     beats' avoid-band (pull-out, external cumshot) runs throughout. **Both are indistinguishable from a target
     clip as a still image.** Same for `print_tits`/`print_ass`, where the avoid-list (penetration, anal, bent
     over, kneeling, spanking) rules out a large share of what landed.
+
+### Added 2026-08-17 — the Bastien back-room chunk (16 slots, 4,068 options, 0 installed)
+
+All measured live by per-slot agents. **Every one is an AUTHORING decision for LO, not a query
+bug** — each had its allowed rounds spent. Full vocabulary in `lexicon.md`.
+
+15. **The DESK is incompatible with the OLDER MAN — across the entire Bastien arc.** Six
+    independent confirmations. `fat old man` retrieves domestic bed/couch; `bent over desk`
+    retrieves young studio men in bright offices; no tile has both. **Every one of the 8 Bastien
+    pool shelves is therefore split into a "right man" bucket and a "right room" bucket.**
+    Decision for LO: pick the man and let the prose carry the desk, or pick the desk and accept
+    a younger body. This is the arc's defining media constraint and it will recur on every
+    future Bastien beat.
+
+16. **`bar_floor_handled` — the TRAY is unbuyable and the waitress ROLE is worse than unbuyable.**
+    `waitress` + `serving drinks` leaves porn entirely for the service-industry meme and #MeToo
+    news corpus. No tile anywhere combines active serving with the handling. The shelf carries
+    bar/restaurant-table groping and public up-skirt instead — right act, right room, no tray.
+    **Authoring alternative (same shape as gaps #2 and #4): let the media carry the handling and
+    the PROSE carry the tray.**
+
+17. **`bastien_back_door` — the ajar door and the seated man are two different tiles.** `seated`
+    was silently dropped by all three queries; `film noir` buys a STANDING man in a full open
+    portal, plus fedoras. The honest proxy stocked is an empty warm-lit doorway. Decision for LO:
+    accept the empty doorway, or re-cut the beat so the figure is described rather than shown.
+
+18. **`wren_stranger_bar` — the barman INVERTS the composition.** Every two-figure tile that
+    surfaced made the woman the staff member. Bar-work nouns (`bartender`, `pub counter`) flip
+    patron→staff behind a perfect stock histogram. Stocked proxy: lone woman from behind at a
+    bar counter with the bottle wall and taps visible beyond her. Her second-hand plain clothes
+    are also unbuyable — the corpus dresses a lone woman at a bar in cocktail-glamour or
+    smart-casual. Subject-right, wardrobe-aspirational.
+
+19. **`cain_lab_bench` — room and light bought in full; props confirmed unbuyable.** 346 options
+    across four distinct readings (machine shop / basement / derelict factory / salvage yard).
+    No "components laid out in order", zero "empty upright body-frame". Gap #8 holds. ⚠️ One
+    arm (abandoned factory, 100 candidates) is **cathedral-scale** — right light, right era,
+    wrong scale for a bench beat. Kept deliberately as a distinct read; LO should eye the scale.
+
+20. **`kess_chip_light` — gap #8 CONFIRMED but NARROWED, and the block is worth keeping.** The
+    prop is unretrievable **only when the product noun heads the query** (`magnifier lamp` →
+    97/97 e-commerce). Two honest proxies landed once it was demoted: the bench-under-lamp wide
+    shot (light + bench, generic board, person usually in frame) and the tiny-component macro
+    (the component, a tool in frame, no bench). **The literal beat — component alone, no hands —
+    does not exist as a staged photograph.** Decision for LO: which compromise, not whether to
+    drop the block.
+
+21. **`backroom_burning` vs `backroom_ruin` — the fire corpus, measured for the first time.**
+    Burning PAPER and box files inside a room is not a corpus (studio macro of one sheet on
+    black). Burning/burnt ROOMS are. The two slots split cleanly: mid-burn interiors (heavy
+    AI-generated stock) vs aftermath charred interiors (mostly real photography, and the
+    restoration-company band is the unwatermarked best of it). Cheap win found late: **charred
+    paper IS buyable as a room** via `burned office interior fire damage charred desks`.
+
+22. **The finish beats keep hitting the same wall as the earlier anal slots.** No query retrieves
+    the instant of stillness AFTER — the corpus is mid-act or post-withdrawal aftermath with
+    nothing between (35–45% of those shelves is aftermath). **Both are indistinguishable from a
+    target clip as a still thumbnail: judge these four pools on the ANIMATION, not the tile.**
+    Same for `finish_facial`, where slack affect and a visible standing man sit at opposite ends
+    of the shelf — the shelf deliberately carries both ends.
+
+### Owed to the SKILL from this run — not yet applied, LO's call
+
+1. **"More results" is no longer universal**; Google's "See more anyway" corpus boundary replaces
+   it, capping some aisles at ~90–95 urls. An agent that gates on the button silently reports
+   zero. **But the button also only enters the DOM after several scrolls**, so absence must be
+   confirmed by the marker, never by a failed lookup. → `chrome_route.md` §4, which currently
+   teaches the button as reliable and repeatable.
+2. **Tenor plurality after the click separates exhaustion from drift only after a tail glance** —
+   the two demand opposite actions. → `SKILL.md` §Iteration.
+3. **The furniture-noun rule**: a furniture noun needs an act word beside it or the query
+   collapses to a meme/catalog aisle; in the HEAD position it is a product-catalog magnet on any
+   slot kind. → the poisoned-token list, as a CLASS rather than as individual tokens.
+4. **A PERSON+ACTIVITY head defeats the catalog magnet on an object slot** (0% → 71% stock hosts).
+   → the still-slot guidance; it is the first general fix found for gap #8.

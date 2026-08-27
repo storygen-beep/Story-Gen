@@ -23,11 +23,20 @@ are exempt. This was always the game's voice, it just was never written down —
 on her own dialogue for the whole of its shipped life. **Locked: never mix in a "you."** (Person is the first
 of the three register axes — `.claude/skills/author-game/references/rts-flat-prose.md` Rule 1.)
 
-> **Known register debt (not fixed here — LO's call pending).** Vesper's narration:dialogue ratio is
-> **7.25 : 1**; Road to Success runs **0.73 : 1**. We *narrate* where RTS *speaks*. The word budget is fine
-> (~45-word blocks vs RTS's 35–40/beat); the **mode** is inverted, and the cascades are under-beated
-> (~3.5 beats median where an RTS peak runs 10–24). Any new Vesper beat must clear the Rule-4 gate
-> (≤1.5:1 with a present NPC); the existing corpus is a separate prose pass if we want it.
+> **Register debt — RE-MEASURED 2026-08-26, and it is mostly paid.** This note used to read *7.25 : 1* (a
+> 2026-07-14 figure). The Leash and The Face fixed most of it. Measured with the skill's own script
+> (`rts-flat-prose.md` §7 check 3):
+>
+> | file | ratio | read |
+> |---|---|---|
+> | `3_activities.toml` | 51.6 : 1 | **correct** — she is alone; nobody is there to speak |
+> | `2_one_shots.toml` | 10.1 : 1 | worth a look; some are interior by design |
+> | `5_scenes.toml` | **2.14 : 1** | **the number that matters** — where people share a room |
+> | whole game | **2.70 : 1** | target ≤ 2 : 1 |
+>
+> Road to Success runs **0.73 : 1**. **The standing target for all new work is 2.14 : 1 or better**, measured
+> at every build and reported. If it climbs, a beat narrated a scene that should have been played. The
+> cascades are still under-beated (~3.5 beats median where an RTS peak runs 10–24) — that part is unpaid.
 
 **What she is (the core — read this first):**
 - **Half-human, not a pure machine.** Marrow's breakthrough was building his creations on a *living human
@@ -2936,3 +2945,144 @@ can shut · and a **set of names** she has only two of.
 close, reserved — he is the cheapest next chapter and spending him now costs that) · **`the_site`** (still the
 one read-never-set flag in the game; it is Cain's door) · the **Spire** (sealed, stays sealed) · her **solo
 want** · the rest of the **set of names**.
+
+---
+
+## The Face (Act 2 · 1c) — pointer only
+
+**Not folded into this book.** Its full design record is `games/vesper/design_the_face.md` and it shipped as
+**0.1.9 / 0.2.0**. Recorded here so the chapter order in this file is not silently missing a link between
+*The Leash* and *Whose Hand*: The Face is the chapter where she buys a bought identity (`cover_stranger`,
+120 coin, `underworld_market`), works the Undertow under it, and it closes on **the raid** — three machines
+through the wall, Bastien dragged out, and Cain saying her name in his lab while she keeps the weapon up the
+entire scene and walks out without lowering it. The last line she hears is *"Now put down the weapon, Wren."*
+and the exit choice is literally **"Don't."**
+
+---
+
+## WHOSE HAND (Act 2 · 1d — the memory, in three pieces) — added during authoring
+
+> The content release after *The Face*, and the one the 0.2.0 ledger asks for in its own words: *"NEXT:
+> content… the next release needs a real door behind that wall."* Full design record:
+> `games/vesper/design_whose_hand.md` — that file is authoritative and carries the blueprint, the register
+> rows, the rejected shapes and the build order. Story folded here (the review surface).
+> **21 beats — bigger than The Face.**
+
+### Why it exists
+
+The game has been asking one question since its first hour and has never touched it. Four separate surfaces
+leak the same fragment — the opening night, both cradle glitches, and Glitch III in Bastien's cell — and the
+cell version ends on Wren's own thought-bubble: ***"Whose hand."***
+
+This is the chapter that answers it, **incompletely**, and the incompleteness is the ending.
+
+She recovers **one memory in three pieces** and gets back a childhood and her real name. She does not get back
+the person she loved, because a stranger owns him.
+
+### The split — and why it is a split
+
+They did not cut her memory into three arbitrary chunks. **They cut it by kind, so no single stored piece
+could ever wake anybody up.**
+
+| # | What is in it | Who has it | Why |
+|---|---|---|---|
+| **1** | **The childhood** — who she was before any of this | **Grier** | He stole it. It is what broke him. |
+| **2** | **The making** — the lab, the years, the process | **Sabin** | The Chairman gave it to him **to copy the method**. |
+| **3** | **Cain** — who she loved | **The Chairman** | The leash. **NOT this release.** |
+
+Feeling with no picture is a mood. A picture with no feeling is a room. A name on its own is just a name.
+**It is a prison built out of filing.** And it is why three sets of keys existed in the first place: so that
+no one person could ever take all of her. Grier proved the design worked — he got away with a third, and a
+third was the most anyone could have taken.
+
+**The Chairman is not holding the important bit. He is holding who she loved** — and he can let the rest of
+her be reassembled and still own the one thing that would make it matter, ready to hand over on the day he
+needs her pointed at Cain and needs it to stick. He is not hiding it. **He is waiting for her.**
+
+### The two new people
+
+- **Grier** — the old machinist, in the Reach. An **assistant**, never a builder; he was in the room when they
+  split her and ran the same night with Cain's memories and a third of hers. Nine years of drink since.
+  Helping Cain cost him everything and he has decided it was Cain's fault. **Bitter, sour, never softens.**
+- **Sabin** — the new roboticist, four months in, hired by the Chairman and handed the whole knowledge base.
+  He works for money and does not know what he is studying. **He is not cruel.** He hires her for her mind and
+  she is the best reader he has ever employed.
+
+### The chain — CAIN → GRIER → SABIN
+
+**Every link is a person's mouth, not a document.** Cain names Grier, because Grier is where Cain got his own
+memories back and Cain spent nine years finding him. Cain cannot go himself — Grier would give that man
+nothing, ever — and **Cain does not tell her that up front.** Grier names The Rise, because he was in the
+room when they split her and knows one part was kept for study.
+
+### The Rise — the new tower
+
+Not the Spire. **The Spire stays sealed** and nothing in this release opens it. The Rise is a half-built Vance
+tower on the edge of the Reach — eight working floors, the rest bare concrete — hiring fast and checking slow,
+which is why forged papers work. **From its upper floors the Spire is visible.** Three rooms: **The Floor**
+(her day job and the suspicion meter), **Sabin's Lab** (the ladder, the loop, the drain), **The Dry Store**
+(piece two, and the swap).
+
+### Two ladders, deliberately opposite
+
+- **Grier's** runs on **spite, not desire.** He does not want her because she is beautiful; he wants her
+  because she is *one of them* — the exact category of object that took his life apart. And **nine years of
+  drink means he mostly cannot finish**, so the drain will not fire and the shortcut is closed. The ladder's
+  real goal is getting a ruined man to finish. Filthy room, half-drunk, she is never shown enjoying it.
+- **Sabin's** runs on **two tracks that never touch** — the body, and the work. She can be fucking him in the
+  lab and still be one careless answer away from him working out what she is. Clean, over-lit, silent.
+
+### The capstone — why she cannot feel the pieces
+
+Both pieces seat and **nothing happens**, twice. Cain says why, once, plainly, and it must be in his mouth or
+the scene reads as arbitrary: *"They're both in you. They're not coming up because you never stop."*
+
+**She has never once been fucked without working.** Always a cover, a target, a weapon to fire. The memory
+only opens when there is nobody home.
+
+So he takes her somewhere and hands her over — strangers, no name, no cover, nothing to gain — **and leaves,
+and comes back for her.** Not The House; somewhere she has never been and never returns to.
+
+**And she fails the first time.** She cannot help working the room: reads the man, finds the lever, angles for
+the finish. Two acts of climbing from *used* to *user* and her body will not let her stop. Nothing fires. She
+has to go back and choose it properly.
+
+**The whole game has been her climbing out of being used. The last step back to herself is going all the way
+down one more time — on purpose, because she asked for it.**
+
+### What she gets — and the name
+
+An ordinary afternoon. Late light on one side of her face, small, doing something badly with her hands, and
+somebody behind her not correcting her. **A hand comes to rest on the back of her neck.** No fear anywhere in
+it. It joins all four existing leaks into one memory.
+
+**And the voice says her name, and it is not Wren. It is VESPER.**
+
+Said once, in someone else's voice. **The game does not rename her anywhere** — she has a name she cannot use
+yet. And **there is no face in it**, because the face is in the third piece.
+
+### The ending
+
+She tells Cain what she remembers and **he is not in it.** *"You don't remember me at all?"*
+
+Grier gives them the last of it — including that he has been fucking her, watching Cain's face while he says
+it — and there is no reconciliation. **Cain knows who is in the third piece. Grier knows where it went.**
+Neither could have worked it out alone; **she is the reason they are in the same room.**
+
+The answer lands as arithmetic: the Chairman has the part with Cain in it, and he has been waiting.
+
+**The release ends on a silence** — one person hurt, the other genuinely not understanding why.
+
+### What is standing when it is over
+
+Two open repeatable sex loops (Sabin's and Grier's, opposite registers), the day job at The Floor, and the
+memory store at the cot showing two of three slots filled. **The 0.2.0 problem — a release that ends with
+nothing to play — does not repeat.**
+
+### Deferred (not this chunk)
+
+**The Chairman on screen** · **the Spire** (the ride up, the atrium, the penthouse, `vance_securities`,
+`docs_vault` — `vault_cleared` stays never-set) · **what Cain was to her** · **`the_site`** · the rest of the
+**set of names** · **the units as individuals** · **why the drain has never worked on Mercer** (still unspent,
+still owed) · **Bastien's survival** — alive, taken, not dead, and *no body was ever found in the wreckage*
+gets said **once** here in Sol's or Colm's mouth and is never underlined. **His chapter is next.**
