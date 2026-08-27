@@ -15060,25 +15060,26 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         # speaker column is never visually empty. The old `if portrait else ''`
                         # guard left a hole in the column for anyone without art.
                         portrait_html = self._render_portrait(player_portrait, alt_label)
+                        # No role on the player, so the NAME carries the colon and the line
+                        # runs straight on from it. `dlg-inline` is what keeps the name on
+                        # the speech's own line instead of a row of its own.
                         html_parts.append(
                             f'<div class="dialog-block dialog-player">'
                             f'{portrait_html}'
-                            f'<div class="dialog-speaker">'
-                            f'<strong>{player_label}</strong>'
+                            f'<div class="dialog-content">'
+                            f'<strong class="dlg-inline">{player_label}</strong> {content}'
                             f'</div>'
-                            f'<div class="dialog-content">{content}</div>'
                             f'</div>'
                         )
                     elif speaker == "unknown":
-                        # A stranger gets the column too, or their line starts at a different
-                        # x than every NPC line on the same screen. No role: nobody knows it.
+                        # A stranger still gets a face, so the block keeps its shape next to
+                        # named lines. No role: nobody knows it, so the name takes the colon.
                         html_parts.append(
                             f'<div class="dialog-block dialog-npc">'
                             f'{self._render_portrait("", "Stranger")}'
-                            f'<div class="dialog-speaker">'
-                            f'<strong>Stranger</strong>'
+                            f'<div class="dialog-content">'
+                            f'<strong class="dlg-inline">Stranger</strong> {content}'
                             f'</div>'
-                            f'<div class="dialog-content">{content}</div>'
                             f'</div>'
                         )
                     else:
@@ -15103,18 +15104,27 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         # unique and validate() refuses duplicates. Absent = no line,
                         # and the box renders exactly as it did before this existed.
                         npc_role = (npc_data.get("role") or "").strip() if npc_data else ""
-                        role_html = (
-                            f'<span class="dialog-role">{html.escape(npc_role)}</span>'
-                            if npc_role else ''
-                        )
+                        # Whichever of the two comes LAST carries the colon, and the speech
+                        # runs straight on from it:
+                        #     with a role     Dorn
+                        #                     husband: Back Friday. Late.
+                        #     without one     Dorn: Back Friday. Late.
+                        # `dlg-inline` is the no-role case, where the name must not take a
+                        # row of its own. The colon itself is added in CSS, so the role text
+                        # stays clean for anything that reads it.
+                        if npc_role:
+                            name_html = f'<strong>{speaker_html}</strong>'
+                            role_html = (
+                                f'<span class="dialog-role">{html.escape(npc_role)}</span>')
+                        else:
+                            name_html = f'<strong class="dlg-inline">{speaker_html}</strong>'
+                            role_html = ''
                         html_parts.append(
                             f'<div class="dialog-block dialog-npc">'
                             f'{portrait_html}'
-                            f'<div class="dialog-speaker">'
-                            f'<strong>{speaker_html}</strong>'
-                            f'{role_html}'
+                            f'<div class="dialog-content">'
+                            f'{name_html}{role_html} {content}'
                             f'</div>'
-                            f'<div class="dialog-content">{content}</div>'
                             f'</div>'
                         )
                 elif block_type == "thought_bubble":
@@ -16396,10 +16406,9 @@ if (clothingMsg) {
 <p><<print _rt.scene || "A heavy knock on the door. You open it to find " + _collectorName + " standing there, hand already extended.">></p>
 
 <div class="dialog-block dialog-npc">
-  <div class="dialog-speaker">
-    <strong><<print _collectorName>></strong>
+  <div class="dialog-content">
+    <strong class="dlg-inline"><<print _collectorName>></strong> <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">>
   </div>
-  <div class="dialog-content"><<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">></div>
 </div>
 
 <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
@@ -16436,10 +16445,9 @@ if (clothingMsg) {
 <p><<print _rt.paid_scene || "You hand over the cash. " + _collectorName + " counts it, nods once, and turns to leave.">></p>
 
 <div class="dialog-block dialog-npc">
-  <div class="dialog-speaker">
-    <strong><<print _collectorName>></strong>
+  <div class="dialog-content">
+    <strong class="dlg-inline"><<print _collectorName>></strong> <<print _rt.paid_response || "Same time next week.">>
   </div>
-  <div class="dialog-content"><<print _rt.paid_response || "Same time next week.">></div>
 </div>
 
 <p><<print _rt.paid_closing || "Another week secured.">></p>
@@ -16467,10 +16475,9 @@ if (clothingMsg) {
   <p><<print _rt.warning_scene || "You explain that you're short this week. " + _collectorName + "'s expression doesn't change.">></p>
 
   <div class="dialog-block dialog-npc">
-    <div class="dialog-speaker">
-      <strong><<print _collectorName>></strong>
+    <div class="dialog-content">
+      <strong class="dlg-inline"><<print _collectorName>></strong> <<print _rt.warning_response || "Next Monday. Don't make me ask twice.">>
     </div>
-    <div class="dialog-content"><<print _rt.warning_response || "Next Monday. Don't make me ask twice.">></div>
   </div>
 
   <p><<print _rt.warning_closing || "You have one week to find the money.">></p>
@@ -16491,10 +16498,9 @@ if (clothingMsg) {
     <p><<print _rt.eviction_scene_soft || _rt.eviction_scene || _collectorName + " stops waiting for the money. Something shifts in the way " + _collectorName + " looks at you now.">></p>
 
     <div class="dialog-block dialog-npc">
-      <div class="dialog-speaker">
-        <strong><<print _collectorName>></strong>
+      <div class="dialog-content">
+        <strong class="dlg-inline"><<print _collectorName>></strong> <<print _rt.eviction_response_soft || _rt.eviction_response || "We'll be having a different conversation from here on out.">>
       </div>
-      <div class="dialog-content"><<print _rt.eviction_response_soft || _rt.eviction_response || "We'll be having a different conversation from here on out.">></div>
     </div>
 
     <p><<print _rt.eviction_closing_soft || _rt.eviction_closing || "You're still here. But the terms have changed.">></p>
@@ -16505,10 +16511,9 @@ if (clothingMsg) {
     <p><<print _rt.eviction_scene || _collectorName + " doesn't wait for excuses this time.">></p>
 
     <div class="dialog-block dialog-npc">
-      <div class="dialog-speaker">
-        <strong><<print _collectorName>></strong>
+      <div class="dialog-content">
+        <strong class="dlg-inline"><<print _collectorName>></strong> <<print _rt.eviction_response || "Locks are getting changed today. Pack your things.">>
       </div>
-      <div class="dialog-content"><<print _rt.eviction_response || "Locks are getting changed today. Pack your things.">></div>
     </div>
 
     <p><<print _rt.eviction_closing || "No negotiation. No extension. You had your chance.">></p>
@@ -18536,23 +18541,36 @@ if (clothingMsg) {
     height: 70%;
 }
 
-/* Dialog Block — the face and the name FLOAT, and the speech wraps around them.
+/* Dialog Block — the face floats, and ONE text flow runs beside and under it.
 
-   The column this replaced put height at max(identity, text), and the identity always
-   won: a face over two rows of type is about three times a line of speech, and most
-   speech is one line. Measured on a shipped game, 77% of a one-line box was not text.
-   Floating drops it to max(portrait, text) — the floor you cannot get under while
-   still showing a face. Measured: laptop 120px -> 64px, phone 93px -> 60px.
+   Two earlier shapes were built and rejected in the same session, and the reasons are
+   worth keeping because both look reasonable on paper:
 
-   ⚠️ FLOATS, NOT FLEX, AND NOT BY PREFERENCE. Neither flex nor grid can make text wrap
-   around a box; only a float can. That is the whole mechanism, so `display: block`
-   here is load-bearing and must not be "tidied" back to flex.
+     · a fixed-width speaker COLUMN — every box's text started at the same x, which was
+       the point, but the identity stack drove the height: a one-line box measured 120px
+       carrying 28px of text, so 77% of it was not text.
+     · the same column FLOATED — height dropped to 68px, but a fixed column still holds
+       its width whether the name needs it or not, which left a wide empty gap between
+       "husband" and the line the character was actually saying.
 
-   ⚠️ The face size is now the ONLY height knob: 60px face gives an 80px box, 44px
-   gives 64px. That is why the max dropped from 60px. */
+   The gap was the complaint, and a column of any kind causes it. So there is no column:
+   the name, the role and the speech are one flow. Whichever of name/role comes last takes
+   a colon and the speech continues straight from it, wrapping beside the portrait and then
+   under it.
+
+       ┌──────┐ Dorn
+       │ face │ husband: Back Friday. Late.
+       └──────┘ ...and the rest wraps under the face.
+
+   ⚠️ FLOAT, NOT FLEX. Neither flex nor grid can make text wrap around a box; only a float
+   can. `display: block` here is the mechanism, not a style choice.
+
+   ⚠️ The 480px breakpoint the floated column needed is GONE, and should not come back.
+   It existed because a fixed column plus a face ate 142px of a 360px screen and left a
+   14-character first line. With no column there is nothing to reserve, so the phone and
+   the laptop want the same rules. */
 .dialog-block {
     --dlg-face: clamp(36px, 10vw, 44px);
-    --dlg-name: clamp(78px, 24vw, 108px);
     display: block;
     margin: 10px 0;
     padding: 10px;
@@ -18569,60 +18587,13 @@ if (clothingMsg) {
     clear: both;
 }
 
-/* Scoped to the dialog block: the global `.portrait` rule above is 40px and still
-   serves the thought bubble and every other caller. */
+/* Scoped to the dialog block: the global `.portrait` rule above is 40px and still serves
+   the thought bubble and every other caller. */
 .dialog-block > .portrait {
     float: left;
     width: var(--dlg-face);
     height: var(--dlg-face);
     margin: 0 10px 4px 0;
-}
-
-/* Name and role only — the face is a SIBLING, so the two float independently and the
-   speech can sit beside the name, then under the name but still beside the face, then
-   under both.
-   ⚠️ NO FIXED HEIGHT. The design called for half the portrait's height; built
-   literally, `height: calc(var(--dlg-face) / 2)` CLIPS a long role — `husband's
-   youngest` was cut at every size, on phone and laptop. The half-height was a means to
-   stop this block driving the box, and floating already does that, so natural height
-   is both safe and sufficient — a long role wraps to a second line and pushes nothing.
-
-   ⚠️ FIXED WIDTH, NOT `max-width`, and this was caught by measurement rather than
-   reasoning. On `width: auto` the block is as wide as the name it holds, so the speech
-   starts wherever that name happens to end: measured at 451 / 472 / 484 / 516 / 532px
-   across one screen — five different left edges, which is the ragged-edge failure the
-   previous layout existed to prevent. A fixed width keeps every box's FIRST line at the
-   same x while the text still wraps under the block, so the height saving is kept and
-   the alignment comes back. */
-.dialog-speaker {
-    float: left;
-    width: var(--dlg-name);
-    margin: 0 10px 2px 0;
-    text-align: left;
-}
-
-/* ⚠️ A REAL BREAKPOINT, and the one place a media query beats clamp(). The float and
-   the phone are simply not compatible: the face, the name block and their margins eat
-   142px of a 360px screen, so the FIRST line of speech was measured at 101px — about
-   fourteen characters — before widening to thirty on line two and three on line three.
-   Three left edges in one short paragraph.
-
-   Below 480px the name block stops floating and sits beside the face as a block
-   (`overflow: hidden` gives it a BFC so it takes the remaining width instead of
-   flowing under the face), and the speech clears both and runs full width. One left
-   edge, one measure. It costs height on a one-line quote and that is the trade — the
-   float's whole point is saving height, and on a phone this hands some back to buy a
-   readable line. Above 480px the float layout is untouched. */
-@media (max-width: 480px) {
-    .dialog-speaker {
-        float: none;
-        width: auto;
-        overflow: hidden;
-        margin: 0 0 4px 0;
-    }
-    .dialog-content {
-        clear: both;
-    }
 }
 
 .dialog-player {
@@ -18643,35 +18614,42 @@ if (clothingMsg) {
     color: var(--theme-text-secondary);
 }
 
-/* Normal flow on purpose — this is the element that wraps around the two floats above.
+/* Normal flow on purpose — this is what wraps around the floated face, and it now holds
+   the name and role as well as the speech.
    ⚠️ `overflow-wrap: anywhere` stays: one long unbroken string would otherwise overflow
-   and give the phone a horizontal scrollbar, which is invisible at desktop width and so
-   survives review. (The old `flex: 1` / `min-width: 0` are gone with the flex parent.) */
+   and give the phone a horizontal scrollbar, invisible at desktop width. */
 .dialog-content {
     overflow-wrap: anywhere;
 }
 
-/* The name, in the column. No trailing colon — `Dorn:` is inline speech attribution
-   and reads wrong once the name sits above the face rather than in front of a line. */
-/* ⚠️ `display: block` on both, and it is required now. Under the old flex column these
-   two stacked for free; inside a float they are inline-level and would sit side by side
-   on one line. */
-.dialog-speaker strong {
+/* The name takes a row of its own ONLY when a role follows it, so the role can sit under
+   it. With no role there is nothing to sit under, and `dlg-inline` keeps the name on the
+   speech's own line. */
+.dialog-content strong {
     display: block;
     font-size: clamp(11px, 3vw, 14px);
-    line-height: 1.2;
+    line-height: 1.25;
 }
 
-/* F10 — the role label under a speaker's name. Quieter than the name and at the same
-   weight as the cast page's tag line, because it is a label and must not compete with
-   the line the character is actually saying. Capped by `--dlg-name-max` rather than
-   clipped: a long role ("husband's youngest") wraps to a second line and pushes nothing
-   around, because this whole block is floated out of the height calculation. */
-.dialog-speaker .dialog-role {
-    display: block;
+.dialog-content strong.dlg-inline {
+    display: inline;
+}
+
+/* F10 — the short label under a speaker's name. Quieter than the name, because it is a
+   label and must not compete with the line the character is actually saying. INLINE, so
+   the speech continues from it rather than starting a new row. */
+.dialog-role {
+    display: inline;
     font-size: clamp(9px, 2.6vw, 12px);
     line-height: 1.25;
     color: var(--theme-text-muted, #8a8a8a);
+}
+
+/* The colon lives in CSS so the role and name TEXT stay clean for anything that reads
+   them. It goes on whichever of the two is last. */
+.dialog-role::after,
+.dialog-content strong.dlg-inline::after {
+    content: ":";
 }
 
 /* Thought Bubble Block (S8) — interior monologue, paired with cascade beats */

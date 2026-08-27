@@ -67,35 +67,48 @@ def test_the_role_renders_and_the_name_is_still_there():
     assert out.index("Cade") < out.index("dialog-role")
 
 
-def test_the_face_is_a_sibling_of_the_name_block_not_a_child():
-    """⚠️ Structural, and it is the whole mechanism. Since 2026-08-27 the face and the
-    name block are two INDEPENDENT left floats, so the speech can sit beside the name,
-    then under the name while still beside the face, then under both. One float cannot
-    do that, so if the portrait ever drifts back inside `.dialog-speaker` the layout
-    silently degrades to a plain two-column box with none of the height saving.
-
-    Asserting on "everything before .dialog-content" would NOT catch that — the portrait
-    is in that string either way. The order of the two opening tags is what pins it."""
+def test_the_face_is_a_sibling_of_the_flow_not_inside_it():
+    """⚠️ Structural, and it is the whole mechanism. The face is a FLOAT and the text is
+    normal flow beside it — that is the only way to get speech to wrap around a box, and
+    it only works while the portrait is a sibling of `.dialog-content`. Put it back
+    inside and the float has nothing to wrap and the layout silently flattens."""
     out = _line(_gen(portrait="faces/cade.jpg"))
 
-    assert out.index('class="portrait"') < out.index('<div class="dialog-speaker">')
-
-    speaker = out.split('<div class="dialog-speaker">')[1].split('<div class="dialog-content">')[0]
-    assert "<strong>Cade</strong>" in speaker
-    assert 'class="dialog-role"' in speaker
-    assert "portrait" not in speaker
+    assert out.index('class="portrait"') < out.index('<div class="dialog-content">')
 
 
-def test_the_content_column_carries_the_line_and_nothing_else():
-    """The property this markup exists for, and nothing pinned it before: the right
-    column is the spoken line on its own. If a name, a role or a face leaks back in
-    here, the two-column layout has silently collapsed into the old ragged stack."""
+def test_name_role_and_speech_are_ONE_flow_with_no_wrapper_between_them():
+    """⚠️ The layout this replaced put the name in a fixed-width column, and LO's whole
+    complaint was the gap that left between the label and the line being spoken. A column
+    of any width reintroduces it. So: name, role and speech run together, in that order,
+    with nothing between the role and the first word of the line except one space.
+
+    An earlier version of this file asserted the OPPOSITE — that `.dialog-content` held
+    the line and nothing else. That test described a design that has been abandoned, and
+    is inverted here rather than deleted so the reversal is on the record."""
     content = _line(_gen(portrait="faces/cade.jpg")).split('<div class="dialog-content">')[1]
 
-    assert "Slower." in content
-    assert "Cade" not in content
-    assert "dialog-role" not in content
-    assert "portrait" not in content
+    assert content.startswith("<strong>Cade</strong>")
+    assert '<span class="dialog-role">husband&#x27;s eldest</span> Slower.' in content
+    assert "portrait" not in content          # the face stays outside the flow
+
+
+def test_the_colon_goes_on_whichever_of_name_or_role_comes_last():
+    """The colon itself is CSS (`::after`), so what the HTML must get right is WHICH
+    element is last, and that is carried by `dlg-inline`:
+
+        with a role     <strong>Dorn</strong><span class="dialog-role">husband</span>
+        without one     <strong class="dlg-inline">Dorn</strong>
+
+    `dlg-inline` doubles as the rule that keeps a role-less name on the speech's own
+    line instead of taking a row to itself."""
+    with_role = _line(_gen(role="husband's eldest"))
+    assert "<strong>Cade</strong>" in with_role
+    assert "dlg-inline" not in with_role
+
+    without = _line(_gen(role=""))
+    assert '<strong class="dlg-inline">Cade</strong>' in without
+    assert "dialog-role" not in without
 
 
 def test_a_speaker_with_no_portrait_still_gets_one():
@@ -130,20 +143,21 @@ def test_the_player_speaker_takes_no_role():
 
 
 def test_an_unknown_speaker_stays_a_stranger():
-    """`speaker = "unknown"` renders `Stranger` — there is nobody to label."""
+    """`speaker = "unknown"` renders `Stranger` — there is nobody to label, so the name
+    takes the colon and stays inline."""
     out = _line(_gen(), speaker="unknown")
-    assert "<strong>Stranger</strong>" in out
+    assert '<strong class="dlg-inline">Stranger</strong>' in out
     assert "dialog-role" not in out
 
 
-def test_every_speaker_kind_gets_the_same_column():
-    """A Stranger line and a player line sit beside NPC lines on the same screen.
-    If any of the three skips the column its text starts at a different x, and a
-    ragged left edge down a scene is the exact failure this layout prevents."""
+def test_every_speaker_kind_gets_a_face():
+    """A Stranger line and a player line sit among NPC lines on the same screen. If any
+    of the three renders without a face, the text beside it starts at the left margin
+    while its neighbours are indented past a portrait — a ragged edge down the scene."""
     for speaker in ("npc", "player", "unknown"):
         out = _line(_gen(), speaker=speaker)
-        assert '<div class="dialog-speaker">' in out, speaker
         assert 'class="portrait' in out, speaker
+        assert out.index('class="portrait') < out.index('<div class="dialog-content">'), speaker
 
 
 # ── 3. it is build-time text, not save state ─────────────────────────────────
