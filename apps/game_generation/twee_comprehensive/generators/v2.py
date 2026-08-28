@@ -1578,6 +1578,61 @@ setup.getWornStatMax = function(field) {
 setup.getWornBeauty = function() { return setup.getWornStatMax('beauty'); };
 setup.getWornCorruption = function() { return setup.getWornStatMax('corruption'); };
 
+// ─────────────────────────────────────────────────────────────────────────────
+// EXPOSURE — how much of her is showing. 0 covered / 1 underwear-level / 2 bare.
+//
+// ⚠️ THIS IS THE ONE AGGREGATE THAT READS EMPTY SLOTS, and that is the whole reason
+// it exists. getWornStatMax above SKIPS a slot with nothing in it and starts at 0, so
+// before this the engine returned the SAME VALUE for a naked player and one in a plain
+// bra and briefs — every condition in every game we have ever shipped was blind to
+// nakedness. Measured 2026-08-28 across ten of our games with a wardrobe: exactly ONE
+// choice anywhere was ever gated on clothing, and five of the ten read it zero times.
+//
+// The model is the field's. degrees-of-lewdity's `$exposed` is the most-read variable in
+// that game — 654 tests of `gte 1`, 307 of `gte 2` — against 54 reads of any per-slot
+// `.exposed`, so the 0/1/2 scalar is what the world actually asks and the per-slot detail
+// is not worth building. 71% of its 407 world gates are about how much skin is showing,
+// and they sit in ordinary places: streets, an arcade, a canteen, a park.
+//
+// Two ways to reach a level. A garment may DECLARE `exposure` (a mesh top is 1 while
+// worn), and an empty core region IS exposure regardless of what any garment says:
+//   upper — bare unless `top` or `dress` is filled; underwear-level if only `bra`
+//   lower — bare unless `bottom` or `dress` is filled; underwear-level if only `underwear`
+// The result is the MAX of the two regions and every declared garment exposure, so the
+// most-revealed part of her is what the world reacts to.
+setup.getWornExposure = function() {
+    if (!setup.clothing_enabled) return 0;
+    var sv = State.variables;
+    var eq = (sv.player && sv.player.equipped) || {};
+    var cdata = setup.clothing_data || [];
+    var filled = function(slot) { return !!eq[slot]; };
+
+    var dress = filled('dress');
+    // upper region
+    var upper = 0;
+    if (!dress && !filled('top')) upper = filled('bra') ? 1 : 2;
+    // lower region
+    var lower = 0;
+    if (!dress && !filled('bottom')) lower = filled('underwear') ? 1 : 2;
+
+    var best = upper > lower ? upper : lower;
+    // a garment can declare its own exposure while worn — a mesh top covers the slot
+    // but does not cover HER, so the slot being filled is not the end of the question
+    for (var slot in eq) {
+        if (!eq.hasOwnProperty(slot)) continue;
+        var id = eq[slot];
+        if (!id) continue;
+        for (var i = 0; i < cdata.length; i++) {
+            if (cdata[i].id === id) {
+                var v = cdata[i].exposure || 0;
+                if (v > best) best = v;
+                break;
+            }
+        }
+    }
+    return best;
+};
+
 // Doc 72 / Doc 71 R2 — Outfit-category aggregator. Returns array of unique
 // non-empty `type` strings across all currently-equipped items. Used by the
 // `worn_type` predicate. Returns array (not Set) for SugarCube serialization
@@ -4046,6 +4101,17 @@ setup.triggerConditionsSatisfied = function(conditions) {{
             // equipped outfit. Routes content; does NOT touch global corruption.
             // Guard MUST short-circuit before calling the aggregate — the
             // aggregates only exist in clothing-enabled builds.
+            // worn_exposure: how much of her is showing, 0/1/2. Unlike the two
+            // aggregates below it READS EMPTY SLOTS — see setup.getWornExposure.
+            if (type === 'worn_exposure') {{
+                if (!setup.clothing_enabled) {{ results.push(false); continue; }}
+                satisfied = compare(it.operator || 'gte',
+                                    setup.getWornExposure(),
+                                    it.value || 0);
+                results.push(satisfied);
+                continue;
+            }}
+
             if (type === 'worn_beauty' || type === 'worn_corruption') {{
                 if (!setup.clothing_enabled) {{ results.push(false); continue; }}
                 var wornOp = it.operator || 'gte';
@@ -7825,6 +7891,12 @@ setup.formatCanvasConditions = function(conditions) {{
             }} else {{
                 parts.push(nalAbsent ? (nalLocName + " must be empty") : (nalLocName + " must be occupied"));
             }}
+        }}
+        else if (item.type === "worn_exposure") {{
+            var weOp = item.operator || "gte";
+            var weSym = weOp === "gt" ? ">" : weOp === "lte" ? "≤" : weOp === "lt" ? "<" : weOp === "eq" ? "=" : "≥";
+            var weWord = (item.value || 0) >= 2 ? "bare" : "showing";
+            parts.push("She must be " + weWord + " (exposure " + weSym + " " + (item.value || 0) + ")");
         }}
         else if (item.type === "worn_corruption") {{
             var wcOp = item.operator || "gte";

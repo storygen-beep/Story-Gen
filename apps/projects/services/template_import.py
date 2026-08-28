@@ -241,6 +241,15 @@ class TemplateClothingItem:
     # content only — never mutates the global player.corruption core_trait.
     type: str = ""  # Optional category tag ("swim", "costume", etc.); read by `worn_type`
     # predicate. Doc 72 / Doc 71 R2. Empty string = untyped; worn_type matches return false.
+    exposure: int = 0  # How much of her this garment leaves showing: 0 covers, 1 shows
+    # underwear-level skin, 2 leaves the region bare. Read by `worn_exposure`, which takes
+    # the MAX across the outfit AND treats an empty core slot as bare — that second half is
+    # the whole point, because before this the engine could not tell naked from dressed
+    # (getWornStatMax skips empty slots and starts at 0, so both returned 0).
+    #
+    # Measured, degrees-of-lewdity: `$exposed` is the most-read variable in the game — 654
+    # tests of `gte 1` and 307 of `gte 2` against 54 reads of any per-slot `.exposed`, so the
+    # single 0/1/2 scalar is what the field actually gates on and the per-slot detail is not.
 
 
 @dataclass
@@ -2512,6 +2521,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     beauty=_require_int(c_raw, "beauty", 0),
                     corruption=_require_int(c_raw, "corruption", 0),
                     type=_require_str(c_raw, "type", ""),
+                    exposure=_require_int(c_raw, "exposure", 0),
                 )
             )
 
@@ -6418,6 +6428,7 @@ def _assemble_project_metadata(project, template):
                     "beauty": ci.beauty,
                     "corruption": ci.corruption,
                     "type": ci.type,  # Doc 72 — outfit-category tag for worn_type predicate
+                    "exposure": ci.exposure,  # 0 covers / 1 underwear-level / 2 bare
                 }
                 for ci in template.clothing_items
             ],
