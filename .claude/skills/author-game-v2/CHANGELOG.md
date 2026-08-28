@@ -5,6 +5,73 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-29 — the MISSING bucket, hand-resolved: 17 wrong, one of them naming the wrong FILE
+
+**Why.** The previous entry left 19 citations whose anchor was not in the target file at all,
+unexplored. LO asked for them next, and ruled on the other open question: **a bad citation does not
+fail a build.** `cite_check.py` stays out of `gates.py --selfcheck`; its `--strict` flag is for a
+human running it deliberately. A stale line number is a documentation defect, and refusing to ship a
+game over one is the checkbox failure `DOCTRINE_GAPS.md` §3a already ruled against. Recorded in the
+tool's own docstring so the next reader finds it there.
+
+**⚠️ The bucket was over-reporting, and that mattered more than the count.** Every one was read by
+hand against live source. Three kinds were in it:
+
+- **ELIDED** — the doc abbreviates on purpose: `def _media_pool_key(...)`,
+  `["Monday","Tuesday",…]`, `has_location_costs = any(...)`. No anchor can ever match these.
+- **PROSE** — the column beside the citation is a description, not code: *"the V2 QuestsPage
+  overlay is emitted only when"*, *"and again for the portrait row"*.
+- **genuinely wrong** — the code is real and is somewhere else.
+
+Calling all three MISSING would have sent the next reader chasing citations that were fine, so the
+tool now classifies them apart and a **prefix fallback** was added: a `strong` anchor that fails
+exact match retries on its first 24 characters, because `def _resolve_pool_dir(self, pool_dir)` is a
+readable rendering of a signature that carries type hints in the source. MISSING **19 → 8**, and all
+8 remaining were hand-verified correct — they are prose columns and one line the doc compresses from
+two source lines.
+
+**Of the 19, seventeen were genuinely wrong. All seventeen are fixed**, each target grepped from
+live source before the edit and re-read after:
+
+| what it documents | was | is |
+|---|---|---|
+| `loc.properties["entry_conditions"] = l.entry_conditions` | `v2.py:6590` | **`template_import.py:6956`** |
+| `_resolve_pool_dir` / `_media_pool_key` | `v2.py:11888` / `:11902` | `:12460` / `:12474` |
+| the clamp default and the clamp itself | `v2.py:5759` / `:5760` | `:5851` / `:5852` |
+| `has_location_costs` | `v2.py:15276` | `:15885` |
+| `entry_conditions` / `blocked_message` on the dataclass | `template_import.py:159-160` | `:177-178` |
+| …and where they are parsed | `template_import.py:1775-1776` | `:1898-1899` |
+| the `quest_cards` top-level key | `template_import.py:2456-2462` | `:2581-2587` |
+| the `[[quest_cards]]` parser | `template_import.py:1068` | `:1163` |
+| `terminal_text` on `QuestsCard` | `template_import.py:1032-1039` | `:1127` |
+| the V2 QuestsPage emission gate | `v2.py:14711` | `:15316` |
+| `renderQuestsGoalBlock` | `v2.py:14970` | `:15569` |
+| its terminal frame | `v2.py:14968-14976` | `:15572-15577` |
+| `dayIndex` | `v2.py:3273` | `:3345` |
+| the nav badge and the portrait row | `v2.py:19297` / `:19321` | `:19995` / `:20019` |
+
+**⚠️ The worst one was not drift. `v2.py:6590` named the wrong FILE entirely** — the assignment it
+documents is in the importer, not the generator, and has been for as long as both files have existed.
+A reader following it landed in the middle of an unrelated flag-closure comment. No amount of
+re-anchoring within `v2.py` would ever have found it; only reading the sentence and grepping both
+files did.
+
+The eighteenth, `apps/stories/models.py:355`, was **already correct** and was left alone — the tool
+had only flagged it because the doc writes `models.BooleanField(default=True, ...)` with the
+help text elided.
+
+**Verified.** `--selfcheck` green, 45/45 gates and 28/28 lints. Gate tallies identical —
+`mrs_vance` 44/44, `back_home` 16/36, `forty_miles` 25/38. Engine suite 291 passed, 7 skipped. Only
+citation numbers and one filename changed; no prose, no rule, no threshold.
+
+**Where this leaves the ledger.** OK 67 · DRIFTED 22 · AMBIGUOUS 106 · MISSING 8 · ELIDED 5 ·
+PROSE 11 · **UNVERIFIABLE 328 (60%)**. ⚠️ That last number is still the honest headline: three fifths
+of the skill's citations have nothing code-like near them, so nothing mechanical can judge them, and
+the base rate on the ones that *could* be judged was 3%. Those need a human with the sentence in
+front of them, and they are the remaining work here.
+
+---
+
 ## 2026-08-29 — the citations were wrong: 14 of 543 verified, and a tool to keep them honest
 
 **Why.** Found while correcting the citations my own `time_of_day` insert had moved. Before
@@ -7568,7 +7635,7 @@ recorded — `references/engine.md` (new **§21**).
 
 ```
 v2.py:5753   if (clampFlag === undefined || clampFlag === null) { clampFlag = true; }
-v2.py:5754   if (clampFlag) { next = window._traitClamp(next, 0, 100); }
+v2.py:5852   if (clampFlag) { next = window._traitClamp(next, 0, 100); }
 ```
 
 `clamp` is a hard **0–100 on every trait**, and it **defaults to true when the key is absent**. All

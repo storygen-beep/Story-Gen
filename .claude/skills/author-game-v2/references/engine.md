@@ -88,8 +88,8 @@ A top band with **no** `max` is unbounded by design and promises nothing. A top 
 ```
 
 ```python
-v2.py:11888   def _resolve_pool_dir(self, pool_dir)     # contents discovered from disk
-v2.py:11902   def _media_pool_key(...)                  # cycle state key
+v2.py:12460   def _resolve_pool_dir(self, pool_dir)     # contents discovered from disk
+v2.py:12474   def _media_pool_key(...)                  # cycle state key
 v2.py:11908   # ... $game_state.media_cycle
 v2.py:11872-11874  # `pool_dir` is preferred: the count is never hardcoded, so the human curates
 ```
@@ -634,8 +634,8 @@ is bound, so nothing can be mis-attributed — there is no character in scope to
 ## 21. `clamp` is 0–100, it defaults to TRUE, and it will silently cap a CURRENCY
 
 ```js
-v2.py:5759   if (clampFlag === undefined || clampFlag === null) { clampFlag = true; }
-v2.py:5760   if (clampFlag) { next = window._traitClamp(next, 0, 100); }   // :5761
+v2.py:5851   if (clampFlag === undefined || clampFlag === null) { clampFlag = true; }
+v2.py:5852   if (clampFlag) { next = window._traitClamp(next, 0, 100); }   // :5853
 ```
 
 Two facts, and the second one is the dangerous one:
@@ -725,7 +725,7 @@ costs = { time = 20, energy = 5 }     # time is minutes on the day clock; any ot
 template_import.py:188    costs: Dict[str, int] = field(default_factory=dict)
 template_import.py:1901   costs=_require_dict(l, "costs"),
 v2.py:4687                // A location's per-entry cost lives in setup.locations[slug].entry_costs
-v2.py:15276               has_location_costs = any(...)   # the travel-cost block is only emitted
+v2.py:15885               has_location_costs = any(...)   # the travel-cost block is only emitted
                                                           # when some location declares costs
 ```
 
@@ -741,9 +741,9 @@ blocked_message  = "The dining room's been dark since the staff went."
 ```
 
 ```
-template_import.py:159-160   entry_conditions / blocked_message
-template_import.py:1775-1776 parsed
-v2.py:6590                   loc.properties["entry_conditions"] = l.entry_conditions
+template_import.py:177-178   entry_conditions / blocked_message
+template_import.py:1898-1899 parsed
+template_import.py:6956      loc.properties["entry_conditions"] = l.entry_conditions
 ```
 
 ⚠️ `entry_conditions` needs `version = "1.0"` like any condition block, or it **fails open** and the
@@ -765,10 +765,10 @@ The table is **`quest_cards`**, flat and top-level — **not** `[[quests]]`, whi
 table.
 
 ```
-template_import.py:2456-2462   top-level key is `quest_cards` (flat, not nested under `quests`)
+template_import.py:2581-2587   top-level key is `quest_cards` (flat, not nested under `quests`)
 template_import.py:1085         class QuestsCard
-template_import.py:1068        parser for one [[quest_cards]] entry
-v2.py:14711                    the V2 QuestsPage overlay is emitted only when
+template_import.py:1163        parser for one [[quest_cards]] entry
+v2.py:15316                    the V2 QuestsPage overlay is emitted only when
                                project.metadata["quests_engine"] == "v2"
 ```
 
@@ -776,7 +776,7 @@ v2.py:14711                    the V2 QuestsPage overlay is emitted only when
 sidebar entry and the page **on**. Authoring no cards leaves a nav link to a heading with nothing
 under it. Switching the engine on is not authoring guidance.
 
-**Rendering.** `renderQuestsGoalBlock` (`v2.py:14970`) renders **exactly one** frame per card, in
+**Rendering.** `renderQuestsGoalBlock` (`v2.py:15569`) renders **exactly one** frame per card, in
 order: ✓ terminal → 🔓 `ready_canvas` → 🎯 unmet goals. A card that matches none of the three returns
 empty and the row goes blank.
 
@@ -787,8 +787,8 @@ overrides the ✓ label (default `Arc complete`) and exists because a finished a
 BUILD are different endings; it needs `terminal` set or the string is dead, and the validator warns.
 
 ```
-template_import.py:1032-1039   terminal + terminal_text on QuestsCard
-v2.py:14968-14976              Frame 1, terminal_text || "Arc complete"
+template_import.py:1127        terminal_text on QuestsCard
+v2.py:15572-15577              Frame 1, terminal_text || "Arc complete"
 ```
 
 ⚠️ **The one-`terminal_text`-per-game cap is scoped to a game whose arcs are CLOSED.** It was
@@ -964,7 +964,7 @@ it.)*
 ### 24.2 `time_state.current_day` is a day NAME, not an index
 
 ```
-v2.py:3273   const dayIndex = ["Monday","Tuesday",…].indexOf(timeState.current_day);
+v2.py:3345   const dayIndex = ["Monday","Tuesday",…].indexOf(timeState.current_day);
              also :3444 :3588 :3643 :3706
 ```
 
@@ -978,8 +978,8 @@ belongs.
 
 ```
 v2.py:4871    setup.getNpcsPresentAtLocation = function(locationId)
-v2.py:19297   the engine's own nav badges call it
-v2.py:19321   and again for the portrait row
+v2.py:19995   the engine's own nav badges call it
+v2.py:20019   and again for the portrait row
 ```
 
 **The false alarm:** hand-rolling presence from `[[npcs.schedules]]` gets overnight windows wrong —

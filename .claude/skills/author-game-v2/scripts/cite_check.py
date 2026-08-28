@@ -41,6 +41,11 @@ USAGE
 
 `--fix` rewrites ONLY citations whose anchor resolves to exactly one place. It never
 touches AMBIGUOUS or UNVERIFIABLE ones, and it never invents an anchor.
+
+⚠️ LO's decision, 2026-08-29: **a bad citation does not fail a build.** This tool is not
+wired into `gates.py --selfcheck` and `--strict` exists for a human running it on
+purpose, not for CI. A stale line number is a documentation defect; refusing to ship a
+game over one would be the checklist failure `DOCTRINE_GAPS.md` §3a already ruled against.
 """
 from __future__ import annotations
 
@@ -75,6 +80,9 @@ CODEISH = re.compile(r"[_.(\[]|^[a-z]+[A-Z]")
 
 # Anchors this common are worthless — they match everywhere.
 MAX_MATCHES = 6
+
+# A doc fragment that abbreviates on purpose can never match the source.
+ELIDED = re.compile(r'\u2026|\.\.\.')
 
 # `key = true` / `key = "x"` / `key = 3` — TOML the author writes, not engine code.
 TOML_ASSIGN = re.compile(r'^[\w.]+\s*=\s*(true|false|-?\d|"|\[)', re.I)
@@ -188,10 +196,30 @@ def resolve(c: Citation, src: list[str]) -> None:
     if c.inline_code:
         frag = c.inline_code.split("//")[0].split("#")[0].strip()
         frag = frag.rstrip("\\").strip()
+        # The column beside a citation is not always literal code. Two forms can never
+        # be matched, and calling them MISSING sends the next reader chasing citations
+        # that were fine: an ELIDED fragment (`def _media_pool_key(...)`, `["Monday",…]`)
+        # deliberately abbreviates, and a PROSE column ("the overlay is emitted only
+        # when") is a description. Separated so the number means something.
+        if ELIDED.search(frag):
+            c.verdict, c.strength, c.anchor = "ELIDED", "none", frag
+            return
+        if not CODEISH.search(frag):
+            c.verdict, c.strength, c.anchor = "PROSE", "none", frag
+            return
         if len(frag) >= 8:
             c.anchor, c.strength = frag, "strong"
             nfrag = brace_norm(frag)
             c.found = [i + 1 for i, l in enumerate(src) if nfrag in brace_norm(l)]
+            if not c.found and len(nfrag) >= 18:
+                # These docs abbreviate on purpose — `def _resolve_pool_dir(self,
+                # pool_dir)` for a signature that carries type hints in the source. A
+                # prefix still identifies the line, and calling the citation MISSING
+                # because the doc is readable would be the tool's error, not the doc's.
+                pre = nfrag[:24]
+                c.found = [i + 1 for i, l in enumerate(src) if pre in brace_norm(l)]
+                if c.found:
+                    c.anchor = pre + "…"
             _verdict(c)
             return
 
@@ -288,9 +316,11 @@ def main() -> int:
     print("  author-game-v2 — are the file:line citations still true?")
     print("  " + "─" * 68)
     print(f"  citations found              {total}")
-    for v in ("OK", "DRIFTED", "AMBIGUOUS", "MISSING", "UNVERIFIABLE"):
+    for v in ("OK", "DRIFTED", "AMBIGUOUS", "MISSING", "ELIDED", "PROSE",
+              "UNVERIFIABLE"):
         if tally[v]:
             mark = "PASS" if v == "OK" else ("FAIL" if v in ("DRIFTED", "MISSING") else "warn")
+        # ELIDED and PROSE are shapes this tool cannot judge, never defects.
             print(f"  [{mark}]  {v:<26} {tally[v]:>5}"
                   f"   ({100 * tally[v] / max(total, 1):.0f}%)")
     print(f"  anchored by                 strong {strengths['strong']} · "
