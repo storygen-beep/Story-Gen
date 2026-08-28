@@ -5906,6 +5906,70 @@ def run_gates(model, game, state=None):
                    "either read it (a [group] band, a gated rung, a wider block_pool — "
                    "the-surfaces.md R6) or stop charging for it"] if dead else []))
 
+    # ═════════════════════════════════════════════════════════════════════════
+    # G46 — she can say no. `the-surfaces.md` R5b, existence half. 2026-08-28.
+    #
+    # ⚠️ R5b WAS DELIBERATELY LEFT UNGATED AND THIS DOES NOT OVERTURN THAT. The reason on
+    # record is that it rested on "four games read in source, which is an observation, not
+    # a field", and that whether a decline is written at full length and PAID is a
+    # judgement no parser makes. Both still hold, and the quality half stays ungated. What
+    # this gates is strictly narrower and countable — is there a single choice in the whole
+    # game that declines an offer — and it rests on the whole corpus, not on four games.
+    #
+    # WHAT THIS CATCHES: a game the player cannot decline anything in. FOUR of our
+    # thirteen scorable games ship exactly that — `forty_miles` (218 choices), `steam`
+    # (216), `seventh_day` (114) and `the_allowance` (74). 622 authored choices between
+    # them and not one refusal anywhere. Nothing in 45 gates could see it, and an author
+    # can write two hundred choices without ever noticing they never wrote a no.
+    #
+    # THE FIELD: 1,763 of 84,458 clickable labels across the 25 corpus games are a real
+    # refusal — 2.09%, roughly one click in fifty. And they are NOT theatre, which was
+    # checked before this gate was written: of 4,973 refusals sitting beside at least one
+    # other option, 79% go somewhere the accepting link does not, the median destination
+    # carries 262 words, and only 3% lead to a stub under 20. In the field, declining buys
+    # content. Refusal is a content kind, not a courtesy.
+    #
+    # ⚠️ FAILS ONLY ON ZERO, on the precedent of G44 and G45. A rate floor cannot be
+    # defended from here: our own games run 0% to 6.5%, and the field's 2.09% is not the
+    # same measurement — their labels include navigation and ours are authored choice
+    # text. Zero needs no threshold. It is the defect by definition, and everything above
+    # zero is reported so a distribution can accumulate and a future floor be READ off it
+    # rather than invented. That restraint is what R4, study 6's anchoring check and P0
+    # were withdrawn for missing.
+    #
+    # ⚠️ THE PATTERN IS NARROW ON PURPOSE, AND THE FIRST DRAFT WAS WRONG. A looser one
+    # counted `leave` and `ignore`, which are navigation — "Leave the shop" declines
+    # nothing. It put `the_inheritance` at zero when the game has three real refusals, and
+    # `forty_miles` at two when it has none. A refusal DECLINES AN OFFER; anything that
+    # merely exits a room is not one. If this gate is ever loosened, re-check those two
+    # games first.
+    # ═════════════════════════════════════════════════════════════════════════
+    _REFUSAL = re.compile(
+        r"^\s*(no[,.!\s]|no$|refuse|decline|say no|reject|resist|turn (him|her|it|them) down|"
+        r"don't|do not|not (tonight|now|today|this)|push (him|her|them) (off|away)|"
+        r"stop (him|her|them)|pull away|shake your head|tell (him|her|them) no|"
+        r"back off|not interested|keep (them|it) on|refuse to)", re.I)
+    _ch_texts = [ch.get("text") for c in (game.get("canvases") or [])
+                 for n in (c.get("nodes") or [])
+                 for ch in ((n.get("exit_block") or {}).get("choices") or [])
+                 if isinstance(ch.get("text"), str)]
+    _refusals = [t for t in _ch_texts if _REFUSAL.match(t.strip())]
+    if not _ch_texts:
+        gate("she can say no", None, "no authored choices to judge")
+    else:
+        _rate = len(_refusals) / len(_ch_texts) * 100
+        gate("she can say no", len(_refusals) > 0,
+             f"{len(_refusals)} refusal(s) in {len(_ch_texts):,} choices = {_rate:.1f}%"
+             + ("  (rate reported, not judged — see the header)" if _refusals else "")
+             + " · field 2.09% of labels",
+             ([f"e.g. {t.strip()[:60]!r}" for t in _refusals[:3]] if _refusals else
+              ["the player cannot decline ANYTHING in this game — every choice is a way of "
+               "saying yes, and a choice she cannot refuse is not a choice",
+               "the field puts a real refusal on roughly one click in fifty, and 79% of them "
+               "lead somewhere the accepting link does not, median 262 words behind them",
+               "write the no as content, not as a dead end: what she does instead is a scene",
+               "⚠️ a refusal is not `Leave` — exiting a room declines nothing"]))
+
     # G19 — sentence length. The first gate here that measures WRITING.
     sent_words = [len(s.split())
                   for c in model for b in c["beats"]
@@ -7019,6 +7083,52 @@ def main():
 
     if act_summary:
         print(f"  {'─'*72}")
+    # lint · she permits or she acts. Measured 2026-08-28, the corpus-verb study.
+    #
+    # The field puts the ACT on the button: across 113,134 clickable labels, `fuck` 1,349,
+    # `cum` 1,073, `blowjob` 492, `missionary` and `doggy` 778 between them. `let` is 779
+    # — 0.69% of all labels.
+    #
+    # Ours inverts it. `let` is the single commonest opening word in every choice this
+    # project has written, and it CONCENTRATES: 20% of the choices inside our sex loops
+    # begin `Let him…` against 5% everywhere else. Outside the bedroom she takes, asks,
+    # works and buys; inside it she almost only permits. The prose is explicit and the
+    # button is a permission, so the verb collapses at exactly the moment the content is
+    # supposed to be hottest.
+    #
+    # ⚠️ REPORTED, NEVER JUDGED. `let` is a proxy for "this choice grants rather than does",
+    # and a proxy is not a defect: a permission is the right button in a scene about being
+    # used, which several of these games are about. No threshold is defensible from one
+    # marker, and the field figure is a different measurement (their labels include
+    # navigation, ours are authored choice text). It prints the share and stops.
+    # computed here rather than reused from run_gates — different function, different scope
+    _all_ch = [ch.get("text") for c in (game.get("canvases") or [])
+               for n in (c.get("nodes") or [])
+               for ch in ((n.get("exit_block") or {}).get("choices") or [])
+               if isinstance(ch.get("text"), str)]
+    permit = [t for t in _all_ch if re.match(r"^\s*let\b", t, re.I)]
+    if _all_ch:
+        loop_ids = {c.get("id") for c in (game.get("canvases") or [])
+                    if re.search(r"loop|sex|fuck|serve|climax|cell_use", str(c.get("id") or ""))}
+        loop_ch = [ch.get("text") for c in (game.get("canvases") or []) if c.get("id") in loop_ids
+                   for n in (c.get("nodes") or [])
+                   for ch in ((n.get("exit_block") or {}).get("choices") or [])
+                   if isinstance(ch.get("text"), str)]
+        loop_let = [t for t in loop_ch if re.match(r"^\s*let\b", t, re.I)]
+        bits = [f"{len(permit)}/{len(_all_ch)} choices open with `let` "
+                f"({len(permit)/len(_all_ch)*100:.1f}%)"]
+        if loop_ch:
+            bits.append(f"inside sex loops {len(loop_let)}/{len(loop_ch)} "
+                        f"({len(loop_let)/len(loop_ch)*100:.0f}%)")
+        print(f"  lint · she permits or she acts — " + " · ".join(bits))
+        for t in permit[:4]:
+            print(f"          · {t.strip()[:70]!r}")
+        print("          (reported, never judged. The field puts the act on the button — `fuck`"
+              " 1,349, `cum` 1,073, `blowjob` 492 across 113,134 labels, against `let` at 0.69%."
+              " A permission is the right button in a scene about being used; a game where it is"
+              " the ONLY button has moved the act into the prose and left the player granting"
+              " consent to a paragraph. register.md `The model beats`)")
+
         print(f"  lint · the act nodes — {act_summary}")
         for h in act_lints[:10]:
             print(f"          · {h}")

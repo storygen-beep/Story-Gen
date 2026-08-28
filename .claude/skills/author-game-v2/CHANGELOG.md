@@ -5,6 +5,78 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-28 — what does she actually DO: the field puts the act on the button, and four of our games never let her say no
+
+**Why.** LO's question, asked after clothing and corruption both turned out to be mostly decoration:
+*what does she do?* The corpus answers it in its own words — every clickable label is a game telling
+the player what is available. **113,134 labels across the 25 corpus games**, against **2,114 authored
+choices** in ours.
+
+**The verb profile, and it inverts.**
+
+| the field's word | field | ours |
+|---|---|---|
+| `leave` | 6,010 | 77 |
+| `ask` | 1,674 | 124 |
+| `fuck` | 1,349 | **1** |
+| `cum` | 1,073 | **0** |
+| `refuse` | 964 | 1 |
+| `wear` | 504 | **0** |
+
+**Our commonest opening word in every choice this project has written is `let`** — 169 of 2,114,
+8.0%. And it concentrates: **20% of the choices inside our sex loops open `Let him…` against 5%
+everywhere else.** Outside the bedroom she takes, asks, works and buys; inside it she almost only
+permits. The prose is explicit and the button is a permission, so the verb collapses at exactly the
+moment the content is supposed to be hottest.
+
+**⚠️ The refusal figure was wrong the first time and the correction changed which games fail.** A
+loose pattern counted `leave` and `ignore` as refusals — they are navigation; *"Leave the shop"*
+declines nothing. It put `the_inheritance` at zero when the game has three real refusals, and
+`forty_miles` at two when it has none. Tightened to patterns that DECLINE AN OFFER, both sides
+re-measured: the field runs **1,763 of 84,458 labels = 2.09%**, and four of our games run **zero** —
+`forty_miles` (218 choices), `steam` (216), `seventh_day` (114), `the_allowance` (74). 622 authored
+choices between them and not one refusal.
+
+**And the field's refusals are not theatre, which was checked before anything was built.** Of 4,973
+refusals sitting beside at least one other option, **79% go somewhere the accepting link does not**,
+the median destination carries **262 words**, and only **3%** lead to a stub under 20. Declining
+buys content.
+
+**What changed.**
+
+- **`gates.py` G46 `she can say no`** — at least one choice in the game declines an offer. **Fails
+  only on zero**, on G44 and G45's precedent; the rate prints unjudged.
+- **`gates.py` lint `she permits or she acts`** — the `let` share overall and inside sex loops,
+  reported against the field's verb profile and never judged. A permission is the right button in a
+  scene about being used; a game where it is the only button has moved the act into the prose.
+- **`references/the-surfaces.md` R5b** — a box recording that the EXISTENCE half is now gated and
+  the QUALITY half is not, plus the two rows in `What is checked`.
+- **`SKILL.md`** — the gate row and the lint mention.
+
+**⚠️ R5b was DELIBERATELY ungated and this does not overturn it.** The reason on record is that R5b
+rested on *"four games read in source, which is an observation, not a field"*, and that whether a
+decline is written at full length and paid is a judgement no parser makes. **Both still hold.** What
+is gated is strictly narrower — the countable existence question — on the whole corpus rather than
+four games. The paragraph recording the original decision now says so, because a future reader
+finding a gate on a rule marked *deliberately not gated* would reasonably think someone overrode it.
+
+**Verified.** `--selfcheck` green both directions, **45/45 gates and 28/28 lints**. All 22 scorable
+games re-scored: **0 pre-existing verdicts moved**, the new gate present on 22 of 22, and its reds
+land on exactly the four games the measurement named. `mrs_vance` 43/43 → **44/44, 1 n/a**. No game
+touched.
+
+**⚠️ Found by crashing, worth recording.** The lint was first written referencing a variable from
+`run_gates` while sitting in `main` — a `NameError` on every run, which a `2>/dev/null` in my own
+verification command hid completely. **A check that is verified with stderr discarded is not
+verified.**
+
+**Left open.** The clothing study that prompted the question is not yet written up: our engine cannot
+represent an empty slot (`getWornStatMax` skips them and starts at zero, so naked and plainly dressed
+are the same value), while all three clothing-heavy field games gate on exactly that. That is an
+ENGINE gap, not a doctrine one, and it is recorded in `DOCTRINE_GAPS.md` rather than fixed here.
+
+---
+
 ## 2026-08-28 — the register has no stopping point, and the skill had 419 words of example to steer by
 
 **Why.** Six of nineteen posts on F95zone 312420 called `vesper`'s prose machine-made. Padding was

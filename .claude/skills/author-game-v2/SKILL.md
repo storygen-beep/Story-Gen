@@ -193,6 +193,7 @@ documented nowhere but in the script's own comments, so an author who hit one ha
 | **the map is a place** | a shape was CHOSEN, and the exterior is the ground rather than a room off the kitchen | `the-map.md` R0 · R3 |
 | guidance exists · no chain ends in silence | the player is told where to go next | `the-voice.md` R2 |
 | money gates something · sinks >= sources · no free uncapped income · a price is on its label · **the obligation is charged** | the economy can say no | `the-economy.md` |
+| **she can say no** | at least one choice in the whole game DECLINES an offer — the field puts a real refusal on one click in fifty, and 79% of them lead somewhere the yes does not | `the-surfaces.md` R5b |
 | **what money buys opens a door** | a thing bought with the currency that survives the night is READ somewhere — money that buys meter points buys nothing | `the-economy.md` R1b |
 | a place is not a catalogue | the backstop on room size — **not** the target | `the-surfaces.md` R2 |
 | **a need shuts a door** | every declared need is read by a condition — a restore that gates nothing is a chore | `the-meters.md` M8–M10 |
@@ -228,7 +229,8 @@ cannot decode is undecodable on a button too; a list to read, never a score) · 
 things one activity can turn into, and how often the activity itself still renders) ·
 **the act nodes** (body words on the thinnest band each act and finish node can render) ·
 **named before met** (every character
-named before the game has introduced them) · **the place says what it is** (every location by how
+named before the game has introduced them) · **she permits or she acts** (the share of
+choices that open `let` — the act on the button against the act in the prose) · **the place says what it is** (every location by how
 much prose happens there against how long its own description is — read whether each one names the
 FUNCTION, which is what replaced the gate that required a first-visit canvas) ·
 **the clock in the prose** (every hour a beat names, with the window it has to survive) ·

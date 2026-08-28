@@ -520,6 +520,20 @@ being refused costs `friendship -50 -60` and `Arousal -100`, and the scene has t
 returns the player to an unchanged menu is a door that was never really open.
 (`~/Documents/Female_PC_Craft_Study_20260823/findings_D_writing.md`)
 
+> ⚠️ **R5b's EXISTENCE half is gated as of 2026-08-28; its QUALITY half is still not, and the split
+> is the point.** This rule was left ungated because it rested on *"four games read in source, which
+> is an observation, not a field"* — and whether a decline is written at full length and paid is a
+> judgement no parser makes. Both of those still hold. What changed is that the narrower question
+> was measured across the whole corpus: **1,763 of 84,458 clickable labels in 25 games are a real
+> refusal, 2.09%** — and they are not theatre, because of 4,973 refusals sitting beside another
+> option **79% go somewhere the accepting link does not**, the median destination carries **262
+> words**, and only 3% lead to a stub under 20. So the gate asks the one thing a count can answer —
+> *is there a single choice in this whole game that declines an offer* — and **fails only on zero**.
+> It was written because four of our own games answer no: `forty_miles` (218 choices), `steam`
+> (216), `seventh_day` (114) and `the_allowance` (74). 622 authored choices and not one refusal.
+> Gate `she can say no`. **Nothing about how good the refusal is has been gated, and R5b's own
+> reasoning is why.**
+
 **R5b.2 · A refusal that can never fail is a menu item.** Added 2026-08-24 after the field was
 re-read on exactly this question. R5b above says the decline branch is written and paid; the field
 carries a half we do not have at all.
@@ -952,6 +966,8 @@ shuts a door — *filthy means she cannot take the car* — turns a chore into a
 | **Gate 42 · a locked door says why** | every choice with `show_when_locked = true` carries a `locked_text`, a `locked_text_threshold` or a `rejection_node`. A choice gated only by `costs` is exempt — the engine writes that message itself (`engine.md` §27). R5c |
 | **Lint · noun-only buttons** | the share of room-list labels that open on a determiner and name no verb. A number, not a bar — `the-voice.md` R1 |
 | **Lint · the browse share** | the share of repeatable room canvases whose entire click changes nothing but the clock |
+| **Gate 46 · she can say no** | at least one choice in the whole game declines an offer. Fails only on zero — the rate is printed and never judged. R5b's existence half; its quality half stays ungated |
+| **Lint · she permits or she acts** | the share of choices opening `let`, and the share inside sex loops. Reported against the field's verb profile, never judged |
 | **Lint · the act menu** | repeatable explicit surfaces split into node-routed loops and one-shot cascades. A count, never a target — R3b |
 
 **What a tired author writes to satisfy gate 42, checked before it landed.** The answer is
@@ -975,7 +991,9 @@ measured it and proposed no check.
 aimed at a person or at the room is a judgement a parser cannot make, and a proxy check for it would
 pass exactly the game that failed. They stay a board-phase and authoring-time discipline. R5b joins
 them for a different reason: it rests on four games read in source, which is an observation, not a
-field.
+field. ⚠️ **That last clause is now half-true and the half matters**: R5b's
+quality half is still ungated for exactly this reason, but its existence half was re-measured across
+all 25 corpus games on 2026-08-28 (84,458 labels) and IS gated — see the box under R5b above.
 
 **R8 joins them for a third reason, and it is the strongest of the three: the field disagrees with
 itself.** `degrees-of-lewdity` is rank 7 with 15,626 passages, and its NPC record reads `penis`
