@@ -230,7 +230,7 @@ things one activity can turn into, and how often the activity itself still rende
 **the act nodes** (body words on the thinnest band each act and finish node can render) ·
 **named before met** (every character
 named before the game has introduced them) · **she permits or she acts** (the share of
-choices that open `let` — the act on the button against the act in the prose) · **the place says what it is** (every location by how
+choices that open `let` — the act on the button against the act in the prose; `the-voice.md` R6) · **the place says what it is** (every location by how
 much prose happens there against how long its own description is — read whether each one names the
 FUNCTION, which is what replaced the gate that required a first-visit canvas) ·
 **the clock in the prose** (every hour a beat names, with the window it has to survive) ·

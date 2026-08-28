@@ -7127,7 +7127,7 @@ def main():
               " 1,349, `cum` 1,073, `blowjob` 492 across 113,134 labels, against `let` at 0.69%."
               " A permission is the right button in a scene about being used; a game where it is"
               " the ONLY button has moved the act into the prose and left the player granting"
-              " consent to a paragraph. register.md `The model beats`)")
+              " consent to a paragraph. the-voice.md R6 has the worked rewrites)")
 
         print(f"  lint · the act nodes — {act_summary}")
         for h in act_lints[:10]:

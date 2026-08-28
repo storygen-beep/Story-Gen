@@ -5,6 +5,68 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-29 — the sex-loop study: five questions, four nulls, and the one that survived was found by accident
+
+**Why.** The last Tier 3 item that is the product itself. The skill has a lint reporting which
+machine a repeatable explicit surface is built on and no rule about it, and yesterday's verb study
+left a thread hanging: 20% of the choices inside our sex loops open `Let him…` against 5% elsewhere.
+
+**⚠️ FOUR OF THE FIVE QUESTIONS CAME BACK NULL OR TOO THIN, AND NOTHING WAS WRITTEN FOR THEM.**
+
+- **Menu against single-exit chain predicts nothing.** Correlated with engagement across the 16
+  games whose navigation is readable: **rho −0.13 for menus, +0.09 for chains.** The two
+  least-engaged sit at opposite extremes (`adam-and-gaia` 63% menus, `new-lust` 88% chains) and the
+  two most-engaged are both mid-range. Both machines ship. **No rule prescribes either.**
+- **"Loops that fold back on themselves do better" — WITHDRAWN.** +0.52, and it survives controlling
+  for size (+0.40 on total passages, +0.34 on explicit screens). Then look at the data: **exactly two
+  games loop at all** — `corpo-life` 68%, `family-ties` 64% — and the two most-engaged loop **7% and
+  3%**. A rank correlation over sixteen games carried by two points is not a finding.
+- **"More explicit content does better" — WITHDRAWN.** +0.61 raw, **+0.18** holding total game size
+  constant. It was mostly *bigger games collect more comments*.
+- **Scene length and choice count**: −0.11 and −0.33. Nothing.
+
+**⚠️ TWO EXTRACTION FAILURES, BOTH CAUGHT BEFORE ANY CONCLUSION.** The first pass counted only
+`[[links]]` and reported "0 choices" for games that plainly have navigation — `family-ties` has
+**zero** `[[links]]` and 6,246 `<<link>>`, `destroyer` has 8,925 HTML anchors, DoL splits 37,285 /
+37,871. All four mechanisms are counted now. Eight games remain unreadable because each invents its
+own navigation vocabulary (`<<loc_Kitchen>>`, `<<include>>`, and `lust-for-life` is Italian with an
+English fallback inside `<<cm>>`), so the shape figures are stated over the 16 that are readable and
+say so.
+
+**What survived, and it never depended on a correlation.** Across **38,039 clickable labels on
+explicit screens**: **9.2% name an act** and **1.01% open with `let`**. Ours: **0.1% name an act** —
+one `fuck` in 2,114 authored choices — and **20% of sex-loop choices open `Let him…`**. A robustness
+check re-ran it including the eight unreadable games and **every figure moved by ≤0.6 points**, so
+the exclusion biases nothing.
+
+⚠️ **And the first version of this figure was overstated.** I reported "over half the buttons inside
+a sex scene are transport" from summing per-game top-10 lists, which over-weights. Counted properly
+over all labels: **32% transport, 9.2% acts.** The field uses filler too. The difference is what is
+on the OTHER buttons.
+
+**What changed.**
+
+- **`references/the-voice.md` R6 · Inside an explicit surface, the button names what SHE does** —
+  with four rewrites of our own shipped labels (*"Let him bend you over the desk."* → **"Bend over
+  the desk."**), the ⚠️ that permitting is a legitimate button and 1% of the field's, and the ⚠️ that
+  the surface's SHAPE is not a rule and must not become one.
+- **`the-voice.md`'s checks table and its not-gated paragraph** — the lint row, and both withdrawn
+  findings recorded with their numbers so neither is re-proposed.
+- **`gates.py`** — one string: the existing `she permits or she acts` lint now points at R6, the rule
+  it was missing. **That is the entire code change in this arc.**
+
+**Verified.** `--selfcheck` green both directions, 45/45 and 27/27. **0 verdicts and 0 tallies moved
+across all 22 games**, proved by running HEAD's `gates.py` beside the working copy: five games differ
+only on `also ranked:` tie ordering and the room named by `sinks >= sources`, both documented as
+nondeterministic and both `[PASS]` either side. `mrs_vance` 44/44, 1 n/a. No game touched.
+
+⚠️ **A verification of my own was broken and is worth recording.** The first "did anything move" check
+compared against a scratchpad baseline that had been cleared overnight, so it diffed against empty
+files and reported **22 of 22 moved**. A comparison whose baseline is missing does not fail loudly —
+it reports total change. Diff against `git show HEAD:<file>`, not against a temp directory.
+
+---
+
 ## 2026-08-28 — the shape this skill told authors to copy was not buildable with the parts it named
 
 **Why.** LO asked for the clothing system, built to give the same player experience as the game we
