@@ -194,7 +194,7 @@ goes stale — a player comment on `college-daze`: *"Most of the characters stat
 profile don't actually mean anything anymore."*
 
 **We are well placed here.** Phone conversations, posts and profiles are evaluated by
-`setup.triggerConditionsSatisfied` (`v2.py:2203`) — **the same evaluator canvases use**
+`setup.triggerConditionsSatisfied` (`v2.py:2204`) — **the same evaluator canvases use**
 (`v2.py:3888`). Every condition type a canvas can gate on, a phone thread can gate on:
 
 ```
@@ -441,9 +441,9 @@ That is P1's rule stated as architecture, and it is why that system does not rea
 
 **We have the primitive and have never used it.** A chat reply choice carries `effects`,
 `flagEffects`, `questEffects` and **`scheduleEffects`** (`v2.py:2355`).
-`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:6027`) pushes
+`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:6042`) pushes
 onto `game_state.scheduled`; the day tick decrements `daysLeft` and fires at zero
-(`v2.py:5672–5683`), where `setup.fireScheduledEvent` (`v2.py:6041`) can set a flag, start a quest,
+(`v2.py:5687–5698`), where `setup.fireScheduledEvent` (`v2.py:6056`) can set a flag, start a quest,
 or deliver a conversation. Usage across all thirty games: **zero**.
 
 ```toml
@@ -471,7 +471,7 @@ hand.**
   on waking. One of the three, minimum.
 
 ⚠️ **`linked_phone` is the other direction** — a canvas node completed by a phone conversation
-(`template_import.py:950`, `v2.py:7388`). One game uses it: `under_one_roof`, on five nodes.
+(`template_import.py:950`, `v2.py:7403`). One game uses it: `under_one_roof`, on five nodes.
 
 ---
 

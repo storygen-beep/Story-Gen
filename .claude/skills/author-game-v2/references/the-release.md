@@ -199,7 +199,7 @@ skill.
 > machine runs do not.
 
 ⚠️ **What the check reads, and why it is not the obvious thing.** `[IMAGE MISSING]` and
-`[… POOL MISSING]` placeholders are emitted **only under `--debug`** (`v2.py:12404`, `:14753`,
+`[… POOL MISSING]` placeholders are emitted **only under `--debug`** (`v2.py:12498`, `:14753`,
 `:14906`). A clean build renders **silent gaps**, so grepping the HTML for those markers passes a
 game with 183 missing files. The check reads the build's own flags-init map (`debug_mode`,
 `dev_mode_enabled`) and the always-generated `MissingMediaPage` count instead.

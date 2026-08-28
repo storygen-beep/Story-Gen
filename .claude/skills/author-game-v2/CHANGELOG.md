@@ -5,6 +5,94 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-29 — the citations were wrong: 14 of 543 verified, and a tool to keep them honest
+
+**Why.** Found while correcting the citations my own `time_of_day` insert had moved. Before
+touching any, I measured the baseline **at HEAD** — and of the citations written in the
+self-verifying form `v2.py:NNNN   <the code>`, **0 of 25 matched**. `engine.md` §20 placed the
+`npc_at_location` branch at `v2.py:4131-4145`; it was at 4216, 85 lines out.
+
+This is not cosmetic. `SKILL.md`'s operating rules say *"Every engine claim carries a `file:line`.
+If `references/engine.md` doesn't have it, go read the code."* That rule is the skill's main
+defence against asserting things about an engine nobody re-read — LO's first standing rule. A
+citation pointing at the wrong line defeats it in the worst possible way: it sends the reader
+confidently to code that says something else.
+
+**NEW `scripts/cite_check.py`.** Re-anchors each citation individually by searching the target file
+for what the citation's own context says should be there. A blanket offset cannot work — drift
+differs per citation, because insertions happened at many points over many months.
+
+Three anchor strengths, and it proposes a move for only the first two:
+
+| strength | anchor | e.g. |
+|---|---|---|
+| strong | the code written beside the citation | `v2.py:3820   if (!conditions.version …` |
+| named | a backticked identifier near it, or in the enclosing heading | ``​`window.advanceTime(minutes)` (`v2.py:5400`)`` |
+| none | nothing code-like nearby → **UNVERIFIABLE, never touched** | |
+
+**Baseline, and after.** 543 citations across the skill:
+
+| | before | after |
+|---|---|---|
+| OK | **14 (3%)** | **65 (12%)** |
+| DRIFTED | 71 | 21 |
+| AMBIGUOUS | 106 | 106 |
+| MISSING (anchor not in the file at all) | 19 | 19 |
+| UNVERIFIABLE | 332 | 332 |
+
+**50 citations rewritten**, each resolving to exactly one line, and every distinct target
+hand-verified against source before applying.
+
+**⚠️ 61% UNVERIFIABLE is a LIMIT OF THE TOOL, NOT A CLEAN BILL OF HEALTH.** Those citations have no
+code-like token near them, so nothing mechanical can judge them. Given that only 3% of the
+*checkable* ones were right, the honest expectation is that most of the unverifiable ones are wrong
+too. They need a human with the sentence in front of them.
+
+**⚠️ FOUR BUGS IN MY OWN TOOL, each caught by reading its proposals before applying, and each of
+which would have turned merely-stale citations into false ones.** This is the whole reason `--fix`
+is a separate flag from the report:
+
+1. **`engine.md` used as an anchor.** It is backticked all over these files and appears once inside
+   a v2.py *comment* (`:1590`), so it resolved "uniquely" and would have re-pointed **seven**
+   unrelated citations at that comment. Doc filenames are now rejected outright.
+2. **Brace doubling.** v2.py emits its JavaScript from inside Python f-strings, so every brace is
+   doubled in the source. The clamp line exists at `:5851` (the real template, `{{ }}`) and again at
+   `:19953` (a plain copy); an anchor written with single braces matched **only the second**. Both
+   sides are now normalised, which makes it report AMBIGUOUS — the honest answer.
+3. **TOML anchored to a docstring.** `show_when_locked = true` is authoring syntax, and v2.py
+   carries TOML examples inside its docstrings; the anchor found the example (`:14380`) instead of
+   the branch that reads the field (`:13319`). `key = value` forms are now rejected, and a named
+   anchor found only inside comments is refused.
+4. **Call site mistaken for definition.** An anchor written `advanceTime(minutes)` matches every
+   *call*, while the sentence around the citation describes the *definition*. Three clock citations
+   were headed for a call inside `waitTime` (`:5534`) instead of the definition (`:5492`). The tool
+   now looks for `name = function(` / `def name(` first.
+
+**⚠️ Two things `--fix` refuses to touch, by design.**
+
+- **Ranges.** `v2.py:5140-5145` names a span and one anchor cannot reproduce a span — the first run
+  proposed collapsing a JS portrait range onto a Python parser line 6,000 lines away.
+- **Two citations on one markdown line resolving to the same target.** They were distinguishing two
+  lines; collapsing them destroys what the sentence said.
+
+Those two account for the 21 that remain DRIFTED. They are reported and left for a human.
+
+**It earned its keep immediately**: it caught `the-phone.md`'s `setup.scheduleEvent` citation, which
+**I had broken myself earlier the same day** with the `time_of_day` insert and had not noticed.
+Hand-checking the rest of that file found three more of mine — the day tick, `fireScheduledEvent`
+and `linked_phone` — all corrected.
+
+**Not done, and left for LO.** The 19 MISSING (anchor absent from the file entirely — renamed
+functions, or the wrong file cited) are unexplored. And the tool is **not** wired into
+`gates.py --selfcheck`; adding a mode changes the documented mode count, and whether a citation
+check should be able to fail a build is a decision, not a detail.
+
+**Verified.** `--selfcheck` green, 45/45 gates and 28/28 lints. Gate tallies unmoved —
+`mrs_vance` 44/44, `back_home` 16/36, `forty_miles` 25/38, identical either side. Full engine suite
+291 passed, 7 skipped. Only markdown citation numbers changed; no prose, no rule, no threshold.
+
+---
+
 ## 2026-08-29 — `time_of_day`: the field's second most common gate, and the one we could not express
 
 **Why.** Step 2 of the phone work, approved by LO after the study. Of the four ways the corpus gates
@@ -2103,7 +2191,7 @@ wrong**, and the truth is the section's real content:
 
 | evaluator | backs | `ne` |
 |---|---|---|
-| `compare()` — `v2.py:3848`, reached at `:3956` | canvas / node / choice | already, since v2 shipped |
+| `compare()` — `v2.py:3911`, reached at `:3956` | canvas / node / choice | already, since v2 shipped |
 | `setup.checkSingleCondition` — `v2.py:7513` | hints, quest-goal bullets, `_findFlagSetterCanvas` | **added** |
 | `setup.checkQuestsCondition` | `[[quest_cards]]` `when` / `goals` | **no, deliberately** |
 
@@ -2845,7 +2933,7 @@ scores the way it does. The two files now agree.
 
 - **`references/engine.md` §15 — reversed.** `locked_text` is the default; the bare label is a rare,
   argued exception. Keeps the verified render fact and adds what actually happens without it:
-  `escaped_locked = (locked_text or choice_text)` (`v2.py:13171`), with the same string repeated into
+  `escaped_locked = (locked_text or choice_text)` (`v2.py:13319`), with the same string repeated into
   the `title` tooltip (`:13219-13220`), so the tooltip adds nothing.
 - **`references/engine.md` §27 — scoped, not corrected.** Its claim that an unaffordable rung *"is
   not offered"* is true of the canvas pickers (`v2.py:4496`, `:4527`, `:4975`) but **not** of
@@ -3721,7 +3809,7 @@ description swapped for name on the meeting flag, 64 places. `the_season` did ne
 
 ### Changed — `references/engine.md`
 
-- **§23** — the correction above: Frame 1 fires on `card.terminal === true` alone (`v2.py:15199`),
+- **§23** — the correction above: Frame 1 fires on `card.terminal === true` alone (`v2.py:15576`),
   nothing checks achievement. `terminal` belongs on a card the player has to **climb to**; an arc
   needs an open lower band and a terminal upper one.
 - **New §34, `[ui.cast_page]`.** The block authors no content — name, `relationship`, live location
@@ -4519,7 +4607,7 @@ In `off_season` those four caps meant the talk screens were re-clickable every t
 rung they were designed to sit below.
 
 **One more fact recorded while verifying:** a **located** canvas needs no flag at all.
-`max_triggers_per_day` is read off the trigger (`v2.py:11017`) and `markCanvasTriggered` stamps its
+`max_triggers_per_day` is read off the trigger (`v2.py:11583`) and `markCanvasTriggered` stamps its
 day key **before** `advanceTime` (`v2.py:4290`), so it is immune to the whole problem. The flag
 pattern is for triggerless rungs only. Both files now say so.
 
@@ -4763,7 +4851,7 @@ does it. That is why C4 shipped as a lint.
 
 - **No absolute-time advance exists.**
   `grep -E 'target_hour|advance_to|until_time|time_target' v2.py` → **0 hits**;
-  `advanceTime(minutes)` (`v2.py:5400`) is the whole API. (`setTime` matches eight times and every
+  `advanceTime(minutes)` (`v2.py:5492`) is the whole API. (`setTime` matches eight times and every
   one is `setTimeout`.) There is no `@time` token either — `_resolve_at_references` (`v2.py:14027`)
   resolves `@player` and `@<npc>` only.
 - **Travel time is auto-tagged; activity time is not.** `getLocationCostTag` (`v2.py:4724`) renders
@@ -6412,8 +6500,8 @@ above it does, so the exception was invisible to anyone reading the rule off the
 checks the weekday and the time wrap **separately**, weekday first, against *today*:
 
 ```
-v2.py:3446   if (!setup._weekdayMatches(ds.weekdays, todayIndex)) continue;
-v2.py:3448   if (!setup.isCurrentTimeSlot(ds.start_time, ds.end_time)) continue;
+v2.py:3519   if (!setup._weekdayMatches(ds.weekdays, todayIndex)) continue;
+v2.py:3520   if (!setup.isCurrentTimeSlot(ds.start_time, ds.end_time)) continue;
 ```
 
 So `weekdays = [1], 23:00–06:00` places the character on Tuesday night and **deletes them at
@@ -6740,8 +6828,8 @@ they might be true or might be not."* Correct. Checked all six against source:
 |---|---|
 | `State`/`Engine` on `window.SugarCube` | ✅ true — `window.SugarCube=` with `State:State`, `Engine:Engine`, in the built file |
 | `current_day` is a day NAME | ✅ true — `v2.py:3273` `[…].indexOf(timeState.current_day)`, plus `:3444 :3588 :3643 :3706` |
-| `setup.getNpcsPresentAtLocation(slug)` | ✅ true — `v2.py:4773`; the engine's own nav badges call it at `:19297`, `:19321` |
-| `pickQuestsCards` takes one scope | ✅ true, and **understated** — `v2.py:14838` `if (scope !== "story_goals") return [];` |
+| `setup.getNpcsPresentAtLocation(slug)` | ✅ true — `v2.py:4871`; the engine's own nav badges call it at `:19297`, `:19321` |
+| `pickQuestsCards` takes one scope | ✅ true, and **understated** — `v2.py:15443` `if (scope !== "story_goals") return [];` |
 | Playwright text selectors break | ⚠️ true, but **tooling, not engine behaviour** |
 | page source is entity-encoded | ✅ true — **663** `&lt;&lt;set` against **3** literal in one build |
 

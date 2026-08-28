@@ -48,13 +48,13 @@ it is the player's pace.
 grep -E 'target_hour|advance_to|until_time|time_target' v2.py     0 hits
 ```
 
-`advanceTime(minutes)` (`v2.py:5400`) adds minutes to `time_state` and rolls the day when the hours
+`advanceTime(minutes)` (`v2.py:5492`) adds minutes to `time_state` and rolls the day when the hours
 pass 24. That is the whole time API. There is **no way to send the clock to a named hour**, and no
 way to print the current one into prose either — `_resolve_at_references` (`v2.py:14027`) resolves
 `@player` and `@<npc>` and nothing else, so there is no `@time` token to fall back on.
 
 A node exit that declares nothing still moves the clock: the default is **3 minutes**
-(`v2.py:13200`, `config.get('default_time_progression', 3)`; the exception fallback at `:13388`
+(`v2.py:13766`, `config.get('default_time_progression', 3)`; the exception fallback at `:13388`
 emits the same). So a player walking a four-node opening has already drifted 9 minutes before
 their first real choice.
 
@@ -422,7 +422,7 @@ games and every one is a real *"Twenty to eight"* the lint had been missing.
 ## Cheat sheet
 
 - **Name a time only where the engine pins it.** It pins exactly one: `[time] starting_hour`.
-- **There is no absolute-time advance** — `advanceTime(minutes)` is the whole API (`v2.py:5400`),
+- **There is no absolute-time advance** — `advanceTime(minutes)` is the whole API (`v2.py:5492`),
   and there is no `@time` token to print the clock either (`v2.py:14027`).
 - **A beat may not say what time it is.** Windows here run 149–540 minutes wide; five in the whole
   repo are an hour or less.
