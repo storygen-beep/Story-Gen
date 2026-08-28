@@ -244,8 +244,9 @@ class TemplateClothingItem:
     exposure: int = 0  # How much of her this garment leaves showing: 0 covers, 1 shows
     # underwear-level skin, 2 leaves the region bare. Read by `worn_exposure`, which takes
     # the MAX across the outfit AND treats an empty core slot as bare — that second half is
-    # the whole point, because before this the engine could not tell naked from dressed
-    # (getWornStatMax skips empty slots and starts at 0, so both returned 0).
+    # the whole point for the AGGREGATES: getWornStatMax skips empty slots and starts at 0,
+    # so worn_beauty and worn_corruption cannot tell naked from plainly dressed. (Per-slot
+    # emptiness was always askable via the `clothing_slot` predicate — engine.md §17.)
     #
     # Measured, degrees-of-lewdity: `$exposed` is the most-read variable in the game — 654
     # tests of `gte 1` and 307 of `gte 2` against 54 reads of any per-slot `.exposed`, so the

@@ -1581,12 +1581,17 @@ setup.getWornCorruption = function() { return setup.getWornStatMax('corruption')
 // ─────────────────────────────────────────────────────────────────────────────
 // EXPOSURE — how much of her is showing. 0 covered / 1 underwear-level / 2 bare.
 //
-// ⚠️ THIS IS THE ONE AGGREGATE THAT READS EMPTY SLOTS, and that is the whole reason
-// it exists. getWornStatMax above SKIPS a slot with nothing in it and starts at 0, so
-// before this the engine returned the SAME VALUE for a naked player and one in a plain
-// bra and briefs — every condition in every game we have ever shipped was blind to
-// nakedness. Measured 2026-08-28 across ten of our games with a wardrobe: exactly ONE
-// choice anywhere was ever gated on clothing, and five of the ten read it zero times.
+// ⚠️ THIS IS THE ONE AGGREGATE THAT READS EMPTY SLOTS. getWornStatMax above SKIPS a slot
+// with nothing in it and starts at 0, so worn_beauty and worn_corruption return the SAME
+// VALUE for a naked player and one in a plain bra and briefs.
+//
+// ⚠️ CORRECTION TO THIS FEATURE'S OWN FIRST CLAIM: nakedness was NOT unaskable before
+// this. The `clothing_slot` predicate (empty/filled, evaluated a few hundred lines below)
+// has always been able to ask whether one slot is filled, and `engine.md` §17 documents it.
+// What did not exist is a DERIVED value that folds the regions together into one 0/1/2
+// scale. That is worth having because it is what the field actually gates on:
+// degrees-of-lewdity tests its derived `$exposed` 961 times against 54 reads of any
+// per-slot `.exposed`. The scalar is the thing the world asks; per-slot is the exception.
 //
 // The model is the field's. degrees-of-lewdity's `$exposed` is the most-read variable in
 // that game — 654 tests of `gte 1`, 307 of `gte 2` — against 54 reads of any per-slot

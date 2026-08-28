@@ -3,9 +3,13 @@
 Measured 2026-08-28: `setup.getWornStatMax` — which backs both `worn_beauty` and
 `worn_corruption` — SKIPS a slot with nothing in it (`if (!id) continue;`) and starts at
 zero. So a player wearing nothing returned 0, and a player in a plain bra and cotton
-briefs (both declared 0/0 in `late_shifts`) also returned 0. Every condition in every game
-this project has shipped was blind to nakedness, and across ten games with a wardrobe
-exactly ONE choice was ever gated on clothing at all.
+briefs (both declared 0/0 in `late_shifts`) also returned 0.
+
+⚠️ This feature's first write-up overclaimed and the correction is kept here. Nakedness was
+NOT unaskable: the `clothing_slot` predicate (empty/filled) has always been able to ask
+about one slot, and `engine.md` §17 documents it. What did not exist is the DERIVED scalar
+that folds the regions into one 0/1/2 value — which is what the field gates on, testing
+degrees-of-lewdity's `$exposed` 961 times against 54 reads of any per-slot `.exposed`.
 
 The field builds its clothing games on precisely the value we could not compute.
 `degrees-of-lewdity`'s `$exposed` is the most-read variable in that game — 654 tests of
