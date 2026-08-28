@@ -67,6 +67,14 @@ gate and strands every save in the wild. `references/the-returning-player.md` ow
 flag and trait keys, stat ranges, the title, and the one-shot grant a carried save has already
 burned. The engine repairs *additions* on its own (`engine.md` §40) and nothing else.
 
+```bash
+python3 scripts/gates.py --saves <slug>
+```
+
+One command, like step 5 and like `--release`, and for the same reason: four greps in a row would be
+a checklist, and §3a already ruled on those. It needs the archive step 3 keeps — no archive, no diff,
+and it exits 2 rather than pretending.
+
 **6. Ship, and log.** Record in `v2_state.json`: the subject, what it added, **what it
 opened**, the gate scores, and **the lint figures you are shipping with** — at minimum the
 own-words count and anything you consciously left. A number in the ledger is one that has to come

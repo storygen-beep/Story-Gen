@@ -6690,6 +6690,268 @@ def release_mode(slug):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# --saves — the only check that reads TWO releases
+# ─────────────────────────────────────────────────────────────────────────────
+# Every other check in this file, `--release` included, reads ONE snapshot. A
+# save-compatibility break does not exist in a snapshot: renaming a canvas id
+# produces a game that is perfectly correct on its own terms and strands every
+# player holding a save. It exists only in the DIFFERENCE between what shipped and
+# what is about to.
+#
+# `references/the-returning-player.md` states the rules; this is the half a human
+# cannot be trusted to do by eye, because it is four set-differences across a few
+# hundred names. It compares the current build against the newest archived
+# release — which is why `the-release.md` step 3 archives one, and why a game with
+# no archive cannot be checked at all.
+#
+# ⚠️ ADDITIONS ARE NEVER A FAILURE, and that is the whole shape of the thing.
+# `setup.backfillStateDefaults` (`engine.md` §40) reaches a new flag, meter, NPC or
+# `$game_state` sub-map on the next passage. Only a name that DISAPPEARED breaks a
+# save, and a rename reads here as a removal plus an addition — correctly, because
+# that is exactly what it is to the save.
+#
+# ⚠️ What this CANNOT see, and no diff of two builds can: a rescaled stat whose key
+# never moved, and a one-shot grant a carried save already burned. Both are real,
+# both have shipped, and both stay human — `the-returning-player.md` §4 and §6.
+
+
+def _join_keys(text):
+    """The four things a save is joined on, read off a built game.
+
+    `text` must already be html.unescape()d — passage source is stored escaped, so
+    `<<set $flags = {&quot;a&quot;: true}>>` is what is in the file.
+    Returns None for any part that could not be read, so an unreadable build is
+    never mistaken for one that lost every key.
+    """
+    out = {"passages": None, "npcs": None, "flags": None,
+           "player_traits": None, "npc_traits": None, "title": None,
+           "schema": None}
+
+    names = re.findall(r'<tw-passagedata[^>]*\bname="([^"]*)"', text)
+    if names:
+        out["passages"] = set(names)
+    m = re.search(r'<tw-storydata[^>]*\bname="([^"]*)"', text)
+    if m:
+        out["title"] = m.group(1)
+    m = re.search(r'Config\.saves\.version = (\d+)', text)
+    if m:
+        out["schema"] = m.group(1)
+
+    def obj(var):
+        head = "<<set $%s = " % var
+        i = text.find(head)
+        if i == -1:
+            return None
+        i = text.find("{", i)
+        if i == -1:
+            return None
+        depth, j = 0, i
+        while j < len(text):
+            if text[j] == "{":
+                depth += 1
+            elif text[j] == "}":
+                depth -= 1
+                if depth == 0:
+                    break
+            j += 1
+        else:
+            return None
+        try:
+            return json.loads(text[i:j + 1])
+        except ValueError:
+            # A build whose init object is not valid JSON is a broken build, and
+            # guessing its keys with a regex would report a confident wrong answer.
+            return None
+
+    flags = obj("flags")
+    if flags is not None:
+        out["flags"] = set(flags)
+    player = obj("player")
+    if player is not None:
+        out["player_traits"] = set(player.get("core_traits") or {})
+    npcs = obj("npcs")
+    if npcs is not None:
+        out["npcs"] = set(npcs)
+        out["npc_traits"] = {
+            "%s.%s" % (slug, t)
+            for slug, rec in npcs.items()
+            for t in (rec.get("core_traits") or {})
+        }
+    return out
+
+
+def _newest_archive(game_dir):
+    """The highest-versioned `releases/v*.html`, preferring the free build.
+
+    Sorted numerically, not lexically: `v0.1.10` is newer than `v0.1.9`, and a
+    string sort puts it earlier. A `-paid` file is the same game with a different
+    content set, so it carries the same join keys — taken only when it is the one
+    copy of that version.
+    """
+    d = os.path.join(game_dir, "releases")
+    if not os.path.isdir(d):
+        return None, None
+    best = None
+    for fn in os.listdir(d):
+        m = re.fullmatch(r"v(.+?)(-paid)?\.html", fn)
+        if not m:
+            continue
+        ver, paid = m.group(1), bool(m.group(2))
+        try:
+            key = tuple(int(p) for p in ver.split("."))
+        except ValueError:
+            continue                        # not a numeric version — skip, do not guess
+        cand = (key, not paid, ver, fn)     # free sorts above paid at equal version
+        if best is None or cand > best:
+            best = cand
+    if best is None:
+        return None, None
+    return os.path.join(d, best[3]), best[2]
+
+
+def saves_mode(slug, against=None, now_version=None):
+    """Would this build break the saves of the last release?
+
+    Exits NON-ZERO on any red, like `--release` — a save break reaches a player
+    who has already spent hours, which is the most expensive thing this repo can
+    ship. Additions are counted and never judged.
+
+        gates.py --saves <slug>                    output/ vs the newest archive
+        gates.py --saves <slug> 0.1.3              output/ vs a chosen archive
+        gates.py --saves <slug> 0.1.3 0.1.7        two archives, after the fact
+
+    The third form is not decoration. Run over this repo's own history it found
+    three passages dropped between vesper 0.1.3 and 0.1.7 and one between
+    forty_miles 0.1 and 0.1.2 — every save parked on those landed nowhere, and
+    nothing said so at the time.
+    """
+    import html as _html
+
+    root = os.getcwd()
+    game_dir = os.path.join(root, "games", slug)
+    build_path = os.path.join(game_dir, "output", "index.html")
+    if against:
+        cand = os.path.join(game_dir, "releases", f"v{against}.html")
+        arch_path, arch_ver = (cand, against) if os.path.exists(cand) else (None, None)
+        if arch_path is None:
+            print(f"\n  no games/{slug}/releases/v{against}.html\n")
+            return 2
+    else:
+        arch_path, arch_ver = _newest_archive(game_dir)
+
+    R = []
+
+    def check(name, ok, headline, detail=None):
+        R.append((name, ok, headline, detail or []))
+
+    print(f"\n  author-game-v2 save-compatibility check — {slug}")
+    print(f"  {'─'*72}")
+
+    if now_version:
+        # Audit: diff two ARCHIVED releases instead of output/. Same code path, so a
+        # question asked about history and one asked before shipping cannot disagree.
+        cand = os.path.join(game_dir, "releases", f"v{now_version}.html")
+        if not os.path.exists(cand):
+            print(f"\n  no games/{slug}/releases/v{now_version}.html\n")
+            return 2
+        build_path = cand
+    if not os.path.exists(build_path):
+        print(f"  no games/{slug}/output/index.html — build it first\n")
+        return 2
+    if arch_path is None:
+        print(f"  no games/{slug}/releases/v*.html to compare against.")
+        print("  Nothing shipped yet, or step 3 of the release loop was skipped —")
+        print("  `the-release.md` § Shipping the build. Without an archive there is no")
+        print("  previous release to diff, and this check cannot run at all.\n")
+        return 2
+
+    print(f"  {'later   ' if now_version else 'now     '} "
+          f"{os.path.relpath(build_path, root)}")
+    print(f"  {'earlier ' if now_version else 'shipped '} "
+          f"{os.path.relpath(arch_path, root)}")
+    print(f"  {'─'*72}")
+
+    now = _join_keys(_html.unescape(
+        open(build_path, encoding="utf-8", errors="replace").read()))
+    was = _join_keys(_html.unescape(
+        open(arch_path, encoding="utf-8", errors="replace").read()))
+
+    added = {}
+
+    def compare(name, key, what, why, sample=6):
+        old, new = was[key], now[key]
+        if old is None or new is None:
+            side = "the shipped build" if old is None else "this build"
+            check(name, None, f"could not read {what} from {side} — not measured")
+            return
+        gone = sorted(old - new)
+        added[key] = len(new - old)
+        check(name, not gone,
+              f"{len(old)} shipped, {len(new)} now, +{len(new - old)} added"
+              if not gone else
+              f"{len(gone)} {what} present in v{arch_ver} and GONE from this build",
+              [] if not gone else
+              [", ".join(gone[:sample]) + (f" … and {len(gone) - sample} more"
+                                           if len(gone) > sample else ""),
+               why])
+
+    compare("no passage disappeared", "passages", "passages",
+            "a save stores the passage it is parked on BY NAME — renaming a canvas, "
+            "node or location id lands the player nowhere. the-returning-player.md §2")
+    compare("no NPC key disappeared", "npcs", "NPC keys",
+            "$npcs is keyed by the TOML id; a renamed NPC takes her whole "
+            "relationship history with her. §2")
+    compare("no flag disappeared", "flags", "flags",
+            "the flag name IS the join between the scene that set it and the gate "
+            "that reads it — a rename re-locks an earned door. §3")
+    compare("no player meter disappeared", "player_traits", "player meters",
+            "a renamed meter reads as undefined and the player is back at zero. §3")
+    compare("no NPC meter disappeared", "npc_traits", "NPC meters",
+            "same rule, per character. §3")
+
+    if was["title"] is None or now["title"] is None:
+        check("the title is unchanged", None, "could not read the story title")
+    else:
+        same = was["title"] == now["title"]
+        check("the title is unchanged", same,
+              f"{now['title']!r}" if same else
+              f"{was['title']!r} → {now['title']!r}",
+              [] if same else
+              ["SugarCube namespaces in-browser save slots by slugify(title), so "
+               "every existing slot disappears from the player's list. §5"])
+
+    for name, ok, headline, detail in R:
+        tag = "n/a " if ok is None else ("PASS" if ok else "FAIL")
+        print(f"  [{tag}]  {name:30s} {headline}")
+        for d in detail:
+            print(f"          · {d}")
+
+    judged = [r for r in R if r[1] is not None]
+    npass = sum(1 for r in judged if r[1])
+    print(f"  {'─'*72}")
+    print(f"  {npass}/{len(judged)} save-compatibility checks pass")
+
+    # ── printed, never judged ───────────────────────────────────────────────
+    # The schema stamp moves whenever the trait/flag key SURFACE moves, which
+    # includes every legitimate addition. Judging it would fail a release for
+    # adding a flag — the exact shape that took R4 and P0 back out.
+    print(f"  {'─'*72}")
+    print(f"  note · schema stamp {was['schema']} → {now['schema']}"
+          + ("  (unchanged)" if was["schema"] == now["schema"] else
+             "  (moved — expected whenever a flag or meter is added)"))
+    total_added = sum(v for v in added.values() if v)
+    print(f"  note · {total_added} names added since v{arch_ver}, none of which can "
+          "break a save")
+    print("          (setup.backfillStateDefaults reaches them on the next passage — "
+          "engine.md §40)")
+    print("  ⚠️  a rescaled stat and a burned one-shot grant are invisible here and "
+          "stay human —")
+    print("          the-returning-player.md §4 and §6")
+    print()
+    return 0 if judged and npass == len(judged) else 1
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # --selfcheck — does SKILL.md still document what this script runs?
 # ─────────────────────────────────────────────────────────────────────────────
 # SKILL.md's scoreboard table is what an author reads WHEN A GATE FAILS, and it
@@ -6794,7 +7056,7 @@ def selfcheck_mode():
     flat = re.sub(r"\s+", " ", skill)
 
     gates, lints = _emitted_names(src)
-    modes = ["--words", "--release", "--selfcheck"]
+    modes = ["--words", "--release", "--saves", "--selfcheck"]
     documented = _documented_gate_names(skill)
 
     missing_g = [g for g in gates if g not in flat]
@@ -6851,6 +7113,14 @@ def main():
             print("usage: python3 gates.py --release <game-slug>")
             sys.exit(2)
         sys.exit(release_mode(sys.argv[2]))
+    if sys.argv[1] == "--saves":
+        if len(sys.argv) < 3:
+            print("usage: python3 gates.py --saves <game-slug> "
+                  "[<shipped-version> [<compare-version>]]")
+            sys.exit(2)
+        sys.exit(saves_mode(sys.argv[2],
+                            sys.argv[3] if len(sys.argv) > 3 else None,
+                            sys.argv[4] if len(sys.argv) > 4 else None))
     if sys.argv[1] == "--selfcheck":
         sys.exit(selfcheck_mode())
     arg = sys.argv[1]

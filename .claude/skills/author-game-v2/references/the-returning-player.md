@@ -211,11 +211,37 @@ Safe to ship freely, because the slug passages and the backfill carry them: new 
 NPCs, meters, flags, locations, quests, whole systems; inserting, reordering or deleting beats inside
 a canvas; renaming any display `name` or `title`; retuning a numeric gate value; prose; media.
 
-⚠️ **There is no machine check for this yet**, and that is a stated gap rather than an oversight —
-`DOCTRINE_GAPS.md`. Four greps in a row would be a checklist, and this skill's evidence on checklists
-is unambiguous: v1's thirteen-point pre-ship audit was followed by the exact bug it existed to
-prevent. Until a `gates.py` mode reads the archived build and compares its join keys to the current
-one, this is a human diff, and the honest thing to do is say so.
+### The check
+
+```bash
+python3 scripts/gates.py --saves <slug>
+```
+
+It diffs the current build's join keys against the newest `releases/v<version>.html` — passage
+names, `$npcs` keys, flag keys, player and NPC meter keys, the story title — and **exits non-zero on
+a removal**. Additions are counted and never judged, because §1 covers them. A rename reads as a
+removal plus an addition, correctly: that is what it is to a save.
+
+Two archived versions can be compared after the fact, which is how this check earned its place
+before it had ever run on an unshipped build:
+
+```bash
+python3 scripts/gates.py --saves vesper 0.1.3 0.1.7
+```
+
+> Run over this repo's own history it found **three passages dropped between vesper 0.1.3 and 0.1.7**
+> (`Canvas_hunt_sol_lead_Node_ask`, `…_Node_base`, `Canvas_underworld_strip_hub_Node_to_spire`) and
+> **one between forty_miles 0.1 and 0.1.2** (`Canvas_rung_nunn_settle_Node_base`). Every save parked
+> on one of those landed nowhere, it shipped, and nothing said so at the time. It also surfaces the
+> known one-time break: vesper's two pre-slug NPC keys are UUIDs, and the first slug-id build reset
+> those players once — unavoidable, and the reason that reset is worth doing exactly once.
+
+⚠️ **It cannot see §4 or §6.** A rescaled stat keeps its key, and a burned one-shot grant is not a
+name at all. Those stay human, and the check says so in its own output rather than letting a green
+run imply otherwise.
+
+⚠️ **Without an archive it does not run** — it exits 2 and tells you so. That is the dependency
+`the-release.md` step 3 exists to satisfy: a release you did not keep is a release you cannot diff.
 
 When a rename is genuinely unavoidable, it is a **major version with an announced save reset** — one
 clean break in the release notes, never a silent update.

@@ -5,6 +5,64 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-29 — `gates.py --saves`: the first check that reads two releases, and it found breaks that had already shipped
+
+**Why.** The entry below shipped the save-compatibility doctrine and left one thing open: nothing
+could verify it. Every check in this file reads ONE snapshot of `7_final_game.toml`, and a save break
+does not exist in a snapshot — renaming a canvas id produces a game that is perfectly correct on its
+own terms and strands every player holding a save. It exists only in the **difference between what
+shipped and what is about to.**
+
+**What it does.** Diffs the current build's join keys against the newest
+`games/<slug>/releases/v<version>.html`: passage names, `$npcs` keys, flag keys, player and NPC meter
+keys, the story title. **Exits non-zero on a removal.** Additions are counted and never judged —
+`setup.backfillStateDefaults` reaches them on the next passage (`engine.md` §40), and judging them
+would fail a release for adding a flag, which is the exact shape that took R4, study 6's anchoring
+check and P0 back out. A rename reads as a removal plus an addition, correctly: that is what it is to
+a save.
+
+**One command, not four greps.** v1's `save-safety.md` §6 ended in a four-grep pre-update checklist.
+`DOCTRINE_GAPS.md` §3a has already ruled on that shape — v1's thirteen-point pre-ship audit was
+followed by the exact bug it existed to prevent — so this went in as a mode beside `--release`
+instead of a list beside the prose.
+
+**⚠️ It found real breaks in this repo's own shipped history, before it had ever run on an unshipped
+build.** Two archived versions can be compared after the fact
+(`gates.py --saves vesper 0.1.3 0.1.7`), and that is how the check was validated — a synthetic
+mutation would only have proved the code runs:
+
+- **vesper 0.1.3 → 0.1.7 dropped three passages** — `Canvas_hunt_sol_lead_Node_ask`,
+  `Canvas_hunt_sol_lead_Node_base`, `Canvas_underworld_strip_hub_Node_to_spire`. Every save parked on
+  one of those landed nowhere.
+- **forty_miles 0.1 → 0.1.2 dropped one** — `Canvas_rung_nunn_settle_Node_base`.
+- **vesper 0.1 → 0.2.0 lost two NPC keys**, and they are **UUIDs** — the known one-time break at the
+  slug-id migration. Correctly surfaced rather than special-cased, because it is the reason that
+  reset is worth doing exactly once.
+
+Both games are green against their newest archive, so this is history rather than a live blocker —
+but nothing said so at the time, which is the whole argument for the check.
+
+**⚠️ What it deliberately cannot see**, printed in its own output so a green run never implies
+otherwise: a rescaled stat (the key never moves, only its meaning) and a burned one-shot grant (not a
+name at all). `the-returning-player.md` §4 and §6.
+
+**Without an archive it does not run** — exits 2 and says so. That is the dependency
+`the-release.md` step 3 exists to satisfy: a release you did not keep is a release you cannot diff.
+`back_home` is in that state today.
+
+**Files.** `scripts/gates.py` — `saves_mode`, `_join_keys`, `_newest_archive`, the CLI branch, and
+`--saves` added to `--selfcheck`'s mode list · `SKILL.md` scoreboard row ·
+`references/the-returning-player.md` § The check (replacing the "no machine check yet" paragraph) ·
+`references/the-release.md` step 5b now names the command · `DOCTRINE_GAPS.md` row 17 closed.
+
+**Verified.** Green on `vesper` and `forty_miles` against their newest archives; red on the historical
+pairs above with the three passage names printed. Exit codes checked directly rather than through a
+pipe: **1** on a red, **0** on a green, **2** when there is no archive or no build. `--selfcheck`
+back to green at 45/45, 28/28, **4/4 modes**, 45/45 rows. `mrs_vance` still **44/44, 1 n/a** — no
+gate, threshold or verdict moved; this adds a mode and touches nothing `run_gates` reads.
+
+---
+
 ## 2026-08-29 — save safety: the doctrine v2 lost, and a seam that covered three keys
 
 **Why.** LO asked what save safety actually is — *"on a new release the old player saves shouldn't
