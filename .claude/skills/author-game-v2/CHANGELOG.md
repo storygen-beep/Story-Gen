@@ -5,6 +5,74 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-28 — padding measured and REFUSED: our prose is not fat, it is stripped, and 13 of 14 games sit below the field's floor
+
+**Why.** Players on F95zone thread 312420 read `vesper` v0.2.0 and said the prose reads as
+machine-written. The most-argued post says why: it is long but *"FAILS to communicate"*, it is
+skimmed rather than read, and the cause named is padding — *"turn the one line you wrote into a
+couple of paragraphs with an LLM."* Nothing in this file measures that. G19 measures sentence
+LENGTH, which our games pass at the field median; G43 measures the dash rate, one habit. A
+wordiness gate looked overdue, and was proposed to LO in exactly those terms.
+
+**It was measured first, and the hypothesis is dead.** Five markers, each a rate per 1,000 words
+because the G43 arc proved anything per-sentence does not survive the HTML/TOML seam. 25 field
+games against our 14.
+
+| marker | field range (p50) | ours p50 | our games outside the field |
+|---|---|---|---|
+| `-ly` adverbs | 8.87 – 22.57 (13.43) | **4.22** | **13 of 14 BELOW the field minimum**, 0 above |
+| hedge words | 5.39 – 22.42 (11.99) | **2.96** | **10 of 14 BELOW the minimum**, 0 above |
+| commas | 17.23 – 153.30 (50.97) | 44.50 | none outside |
+| repeated trigrams | 155.49 – 649.74 (299.39) | 167.76 | 6 below, 0 above |
+| vocabulary variety | 0.48 – 0.69 (0.59) | 0.56 | none outside |
+
+`vesper` — the game those readers were reading — writes **3.01** adverbs and **4.00** hedges per
+1,000 words against field floors of 8.87 and 5.39, and repeats phrasing **less** than the field
+(210.71 against a p50 of 299.39). Its commas are field-normal, its sentences field-median length.
+By every marker of padding it is **cleaner** than the games it competes with.
+
+**⚠️ Round one of the measurement was contaminated, and the correction ran AGAINST the conclusion.**
+The first pass leaked `degrees-of-lewdity`'s JavaScript block comments and `friends-of-mine`'s
+`[img[...]]` markup into the field text. Both add non-prose WORDS, which dilutes a per-word rate
+and pushes the FIELD figure DOWN — that is, it flattered the result. Cleaned before anything was
+recorded: the field's adverb floor rose 6.16 → **8.87**, and `love-and-vice` fell from 23,687
+words to 9,110, being 60% script. The finding survived the correction and got stronger.
+
+**⚠️ NO GATE WAS BUILT, and that is the finding.** A padding ceiling set anywhere in the field's
+range passes all fourteen of our games forever. That is the fourth check this skill has measured
+and turned down — after R4, study 6's anchoring check and P0 — and the reason is the same each
+time: a gate that cannot fail looks like coverage and is not.
+
+**What the numbers do point at.** Set beside G43, the one marker where we are off-field on the
+HIGH side: `vesper` writes **118.3 dashes per 10,000 words** where the corpus maximum is 35.41 and
+the median is 0.99. Dash-joined, modifier-light, sentences at the field median. **That is a
+texture, not a volume**, and it is a better fit for what those readers actually described than
+padding is. It is also already measured and already failing, so no new instrument is needed to act
+on it.
+
+**⚠️ One claim checked and withdrawn before it was written down.** The leanness was about to be
+blamed on `CLAUDE.md`'s filler ban leaking from chat into prose. That file scopes itself explicitly
+— caveman governs chat and *"has never governed a beat"* — so the claim is false. What is true and
+citable is that this file already prescribes the direction: `register.md:122`, *"Replacing the
+hedged clause with the specific one."* Whether that was meant to put 13 of 14 games below the
+field's floor is stated nowhere, and **no rule in this skill names a floor for either marker**. No
+reader in the thread named modifiers either. So the numbers are recorded and nothing is prescribed.
+
+**What changed.**
+
+- **`references/register.md`, "What is not measured here"** — records that padding was measured on
+  five markers and there is nothing to gate, with the direction, the counts, and the pointer to the
+  study. It sits in the one section that already tells an author what the instrument cannot see.
+- **`DOCTRINE_GAPS.md`** — a Log row. No inventory item: nothing is broken and nothing is owed.
+
+**Verified.** `gates.py --selfcheck` green in both directions, 44/44. `mrs_vance` **43/43, 1 n/a**.
+No gate, lint, threshold or constant touched, so no verdict can have moved. No game touched; the
+skill's only new content is prose. Scripts, data and method:
+`~/Documents/Prose_Padding_Study_20260828/` — `measure.py` reproduces the table, and the
+contaminated first pass is kept beside it so the correction is inspectable.
+
+---
+
 ## 2026-08-28 — a gate was deleted and seven surfaces went on teaching it, including both templates
 
 **Why.** LO asked for an audit of everything the recent arcs shipped — *"go one by one confirm and

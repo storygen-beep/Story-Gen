@@ -782,6 +782,25 @@ because the corpus exists only as built HTML and none of the three survives the 
 They are a trend line across our own games. Reading them as a score is the error the gate's own
 header warns about, and it has already been made once.
 
+**Padding is not measured, because it was measured and there is nothing to catch.** 2026-08-28,
+prompted by readers of a shipped game saying the prose is long but says little: five markers —
+`-ly` adverbs, hedge words, commas, repeated trigrams, vocabulary variety — each a rate per 1,000
+words, over 25 field games and our 14. Our prose is not fat. It is **stripped**, and outside the
+field's own range on the lean side: **13 of 14 games write fewer `-ly` adverbs than the field's
+leanest game** (ours 4.22 per 1,000, field floor 8.87, field median 13.43), 10 of 14 the same for
+hedges, and none of our games is above the field maximum on any of the five. The game the readers
+were reading writes 3.01 and 4.00 and repeats phrasing *less* than the field. A ceiling set
+anywhere in that range passes every game we own forever, so none was built — the fourth check this
+skill has measured and turned down. Full method and data:
+`~/Documents/Prose_Padding_Study_20260828/`.
+
+⚠️ **That is a measurement, not a new rule.** Nothing here names a floor for a modifier, and no
+reader asked for one. The direction is consistent with what this file already prescribes at
+line 122 — *replacing the hedged clause with the specific one* — and whether it should run this
+far past the field is an open question, not a defect to fix. What the same study DOES point at is
+gate 43 above: set beside it, the shape is a **texture** — dash-joined, modifier-light, sentences
+at the field median — and not a volume.
+
 *(This file governs what the player reads **after** a click. Room names, button labels, guidance
 cards and locked-door text are a different job with a different rule — `references/the-voice.md`.
 Which machine a piece of content is built on — cascade or node-routed loop — is
