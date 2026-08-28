@@ -1032,7 +1032,6 @@ class TweeComprehensiveGeneratorV2:
         # NPC schedules are derived at runtime from setup.help_data.locationCanvases
         # (see getNpcScheduleFromCanvases JS function) — no static schedule needed
 
-        player_traits_json = json.dumps(player_traits)
         # Strip runtime-only fields from npc_map before serializing to game JSON
         # (relationship_options and customizable are used for passage generation, not runtime state)
         # `role` (F10) belongs here too: the label is baked into the passage HTML at BUILD
@@ -1081,43 +1080,6 @@ class TweeComprehensiveGeneratorV2:
         if self.dev_mode:
             flags_init_map["dev_mode_enabled"] = True
         flags_init_json = json.dumps(flags_init_map)
-
-        # ── Save-migration seam (fill-if-absent backfill for cross-release saves) ──
-        # SugarCube never re-runs :: Start on load, so a returning player's save
-        # (from an earlier release) is missing any $npcs / trait / flag a new
-        # release added. setup.stateDefaults carries the current defaults — built
-        # from the SAME dicts Start serializes, so they can't drift — and the
-        # :passagestart handler deep-merges MISSING keys only into loaded state.
-        state_defaults = {
-            "player_core_traits": player_traits,
-            "npcs": npc_map_for_json,
-            "flags": flags_init_map,
-        }
-        state_defaults_json = json.dumps(state_defaults)
-        # Schema signature stamped into every save via Config.saves.version, so a
-        # future build can detect an incompatible save (changes when the trait/flag
-        # key surface or corruption tiers change). The reject-on-mismatch handler is
-        # a deferred follow-up — today the stamp is recorded but inert.
-        import hashlib as _hashlib
-        _schema_sig_src = json.dumps(
-            {
-                "player_traits": sorted(player_traits.keys()),
-                "npc_traits": {
-                    u: sorted((e.get("core_traits") or {}).keys())
-                    for u, e in npc_map_for_json.items()
-                },
-                "flags": sorted(flags_init_map.keys()),
-                "tiers": self.project.metadata.get("corruption_tiers"),
-            },
-            sort_keys=True,
-        )
-        saves_version = int(_hashlib.sha1(_schema_sig_src.encode()).hexdigest()[:8], 16)
-        # Stable save id — pin to the template slug (rename-safe), NOT the default
-        # slugify(StoryTitle), which orphans saves when the game title changes.
-        saves_id = (self.project.metadata.get("template", {}) or {}).get("slug") or str(
-            self.project.id
-        )
-        saves_id_json = json.dumps(saves_id)
 
         # Story arc data for narrative journal
         story_arc_json = self._build_story_arc_json()
@@ -1169,8 +1131,6 @@ class TweeComprehensiveGeneratorV2:
                         "image": item.get("image", ""),
                     }
                     initial_equipped[item["slot"]] = item["id"]
-            wardrobe_json = json.dumps(initial_wardrobe)
-            equipped_json = json.dumps(initial_equipped)
             clothing_data_json = json.dumps(clothing_items)
             clothing_requirements_json = json.dumps(clothing_requirements)
 
@@ -1435,61 +1395,147 @@ class TweeComprehensiveGeneratorV2:
         # Dev mode JS helpers moved to [script] tagged passage in _generate_time_system()
         # This ensures they're available on page refresh/save load, not just when Start is visited
 
-        # Escape player portrait for JSON
-        player_portrait_escaped = json.dumps(player_portrait)
-
         # NPC portrait path prefix (resolved at generation time, embedded in JS)
         npc_portrait_prefix = (getattr(self, 'video_path', '') or './media').rstrip('/') + '/'
 
-        # Build optional wardrobe lines for $player
-        clothing_player_fields = ""
+        # ── The state skeleton, built ONCE as data ────────────────────────────
+        # $player and $game_state are serialized into :: Start from these dicts
+        # AND handed to setup.stateDefaults, so the save-migration backfill can
+        # never fall behind what a fresh game starts with. They used to be two
+        # hand-maintained string blocks and a three-key defaults dict, which is
+        # why turning on the phone (or rent, passes, inventory, clothing) in a
+        # new release left the whole sub-map undefined in every existing save.
+        player_init = {
+            "name": player_name,
+            "portrait": player_portrait,
+            "current_location": "",
+            "core_traits": player_traits,
+        }
         if self.clothing_enabled:
-            clothing_player_fields = f',\n    "wardrobe": {wardrobe_json},\n    "equipped": {equipped_json}'
-
-        # Build optional player customization default fields for $player
-        player_custom_fields = ""
+            player_init["wardrobe"] = initial_wardrobe
+            player_init["equipped"] = initial_equipped
         if self.player_customizable and self.player_customization_fields:
             for cf in self.player_customization_fields:
                 if cf["id"] == "name":
                     continue  # name is already in $player.name
-                player_custom_fields += f',\n    "{cf["id"]}": {json.dumps(cf.get("default", ""))}'
+                player_init[cf["id"]] = cf.get("default", "")
+        player_init_json = json.dumps(player_init, indent=4)
 
-        # Build optional rent_state block for $game_state
-        rent_state_block = ""
+        game_state_init = {
+            "current_canvas": "",
+            "visited_locations": [],
+            "visited_nodes": [],
+            "trigger_history": {},
+            "activity_trigger_history": {},
+            "visited_choices": {},
+            "active_modifiers": {},
+            "random_cooldowns": {},
+            "stage_advancement_log": {},
+            "media_cycle": {},
+            "quests": {},
+            "scheduled": [],
+            "fast_jobs": {"xp": 0, "cooldowns": {}},
+            "bank": {"balance": 0},
+            "time_state": {
+                "current_hour": time_settings["starting_hour"],
+                "current_minute": 0,
+                "current_day": time_settings["starting_day"],
+                "current_week": time_settings["starting_week"],
+                "day": 1,
+            },
+        }
+        # Optional systems. Each one is the case the backfill exists for: a game
+        # that ships without it and turns it on later.
         if self.rent_enabled:
-            starting_week = time_settings.get('starting_week', 1)
-            rent_state_block = f""",
-    "rent_state": {{
-        "last_paid_week": {starting_week},
-        "warnings": 0,
-        "is_due": false
-    }}"""
-
-        # Build optional passes state block for $game_state
-        passes_state_block = ""
+            game_state_init["rent_state"] = {
+                "last_paid_week": time_settings.get("starting_week", 1),
+                "warnings": 0,
+                "is_due": False,
+            }
         if self.passes:
-            passes_state_block = ',\n    "passes": {}'
-
-        # Build optional inventory state block for $game_state
-        inventory_state_block = ""
+            game_state_init["passes"] = {}
         if self.items:
-            inventory_state_block = ',\n    "inventory": {}'
-
-        # Build optional phone state block for $game_state
-        phone_state_block = ""
+            game_state_init["inventory"] = {}
         if self.phone_enabled:
-            phone_state_block = """,
-    "phone": {
-        "triggered_conversations": {},
-        "read_conversations": {},
-        "replies": {},
-        "triggered_posts": {},
-        "viewed_feed": false,
-        "triggered_profiles": {},
-        "liked_profiles": {},
-        "passed_profiles": {},
-        "matches": {}
-    }"""
+            game_state_init["phone"] = {
+                "triggered_conversations": {},
+                "read_conversations": {},
+                "replies": {},
+                "triggered_posts": {},
+                "viewed_feed": False,
+                "triggered_profiles": {},
+                "liked_profiles": {},
+                "passed_profiles": {},
+                "matches": {},
+            }
+        # Schema signature stamped into every save via Config.saves.version: a
+        # fingerprint of the trait/flag key surface and the corruption tiers, so a
+        # build can tell whether a save was written against its own data shape.
+        import hashlib as _hashlib
+        _schema_sig_src = json.dumps(
+            {
+                "player_traits": sorted(player_traits.keys()),
+                "npc_traits": {
+                    u: sorted((e.get("core_traits") or {}).keys())
+                    for u, e in npc_map_for_json.items()
+                },
+                "flags": sorted(flags_init_map.keys()),
+                "tiers": self.project.metadata.get("corruption_tiers"),
+            },
+            sort_keys=True,
+        )
+        saves_version = int(_hashlib.sha1(_schema_sig_src.encode()).hexdigest()[:8], 16)
+        # Stable save id — pin to the template slug (rename-safe), NOT the default
+        # slugify(StoryTitle), which orphans saves when the game title changes.
+        saves_id = (self.project.metadata.get("template", {}) or {}).get("slug") or str(
+            self.project.id
+        )
+        saves_id_json = json.dumps(saves_id)
+
+        # ── Release provenance, recorded INSIDE the save ──────────────────────
+        # There is no other durable channel. setup.* is rebuilt from the CURRENT
+        # build on every load, so by the time anything can ask "which release wrote
+        # this save?" the old build's constants are already gone. Only $game_state
+        # travels with the player.
+        #
+        # origin_* is written once by :: Start and never touched again — the backfill
+        # fills only keys that are ABSENT, so it cannot overwrite them. last_* is
+        # reassigned by the :passagestart handler whenever the running build differs.
+        # Together they answer "started on X, now running Y", which is the pair a bug
+        # report needs and neither field gives alone.
+        build_version = str(
+            (self.project.metadata or {}).get("version", "") or ""
+        ).strip()
+        build_version_json = json.dumps(build_version or None)
+        game_state_init["origin_version"] = build_version or None
+        game_state_init["origin_schema"] = saves_version
+        game_state_init["last_version"] = build_version or None
+        game_state_init["last_schema"] = saves_version
+        game_state_init_json = json.dumps(game_state_init, indent=4)
+
+        # ── Save-migration seam (fill-if-absent backfill for cross-release saves) ──
+        # SugarCube never re-runs :: Start on load, so a returning player's save
+        # (from an earlier release) is missing any $npcs / trait / flag / state
+        # map a new release added. setup.stateDefaults carries the current
+        # defaults — the SAME dicts Start serializes, so they can't drift — and
+        # the :passagestart handler deep-merges MISSING keys only into loaded
+        # state. See setup.backfillStateDefaults for the depth rules.
+        #
+        # ⚠️ origin_* is the ONE deliberate divergence between Start and the
+        # defaults, and it has to be one. A save written before the stamp existed
+        # carries no origin_*; filling it from the current build would make that
+        # save claim to have STARTED here, which is the opposite of the truth.
+        # Absent means unknown, and unknown is the honest answer to record.
+        game_state_defaults = dict(game_state_init)
+        game_state_defaults["origin_version"] = None
+        game_state_defaults["origin_schema"] = None
+        state_defaults = {
+            "player": player_init,
+            "npcs": npc_map_for_json,
+            "flags": flags_init_map,
+            "game_state": game_state_defaults,
+        }
+        state_defaults_json = json.dumps(state_defaults)
 
         # Pre-build conditional wardrobe JS blocks (regular strings with literal braces)
         # These get interpolated into the f-string below via {wardrobe_js_block} and {wardrobe_handlers_block}
@@ -3161,6 +3207,37 @@ Config.history.maxStates = 20;
 // version is a schema signature so a future build can detect an incompatible save.
 Config.saves.id = {saves_id_json};
 Config.saves.version = {saves_version};
+
+// This build's own identity, for save provenance. Read by the :passagestart
+// handler, which writes it into $game_state.last_* — the copy inside the save is
+// the only record that survives, since setup.* is rebuilt by whichever build the
+// player next opens.
+setup.buildVersion = {build_version_json};
+setup.buildSchema = {saves_version};
+
+// Load hook. SugarCube 2.30 calls this with the save object BEFORE
+// State.unmarshalForSave, so State.variables here is still the PRE-load state —
+// never write to it from this function. `save.version` is the schema stamp of the
+// build that wrote the save (SugarCube copies Config.saves.version in on save).
+//
+// It never throws, and that is a decision rather than an omission. A throw here
+// aborts the load with UI.alert — the call sits inside unmarshal's try — and that
+// is exactly the reject-on-mismatch handler this stamp was minted for. We do not
+// want it: setup.backfillStateDefaults already heals the mismatches a player can
+// actually hit, and refusing a save costs someone their whole run over a schema
+// difference they cannot act on. If that ever changes, throw from here; the
+// mechanism is wired and this comment is the only thing standing in its way.
+Config.saves.onLoad = function (save) {{
+    var wroteSchema = (save && save.version) || null;
+    setup.saveOrigin = {{
+        schema: wroteSchema,
+        mismatch: wroteSchema !== setup.buildSchema
+    }};
+    if (typeof console !== 'undefined' && console.info) {{
+        console.info('[save] written by schema ' + wroteSchema + ', this build is ' +
+            setup.buildSchema + (setup.saveOrigin.mismatch ? ' — MIGRATED' : ''));
+    }}
+}};
 
 // Static lookup data — stored on setup (not State.variables) to avoid deep-clone on every passage transition
 setup.help_data = {help_data_json};
@@ -8271,38 +8348,12 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 
 
 :: Start
-<<set $player = {{
-    "name": "{player_name}",
-    "portrait": {player_portrait_escaped},
-    "current_location": "",
-    "core_traits": {player_traits_json}{clothing_player_fields}{player_custom_fields}
-}}>>\
+<<set $player = {player_init_json}>>\
 <<set $npcs = {npc_map_json}>>\
 <<set $npc_interacted_today = {{}}>>\
 <<set $flags = {flags_init_json}>>\
 <<set $flags_meta = {{}}>>\
-<<set $game_state = {{
-    "current_canvas": "",
-    "visited_locations": [],
-    "visited_nodes": [],
-    "trigger_history": {{}},
-    "activity_trigger_history": {{}},
-    "visited_choices": {{}},
-    "active_modifiers": {{}},
-    "random_cooldowns": {{}},
-    "stage_advancement_log": {{}},
-    "quests": {{}},
-    "scheduled": [],
-    "fast_jobs": {{ "xp": 0, "cooldowns": {{}} }},
-    "bank": {{ "balance": 0 }},
-    "time_state": {{
-        "current_hour": {time_settings['starting_hour']},
-        "current_minute": 0,
-        "current_day": "{time_settings['starting_day']}",
-        "current_week": {time_settings['starting_week']},
-        "day": 1
-    }}{rent_state_block}{passes_state_block}{inventory_state_block}{phone_state_block}
-}}>>\
+<<set $game_state = {game_state_init_json}>>\
 <<nobr>>
 <div class="game-intro">
 <h1>{project_name}</h1>
@@ -12633,10 +12684,12 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         ref = f'$game_state.media_cycle["{self._media_pool_key(pool_files, pool_dir)}"]'
         max_idx = len(entries) - 1
 
-        # An `ndef` guard rather than a default in the `:: Start` init passage:
-        # setup.backfillStateDefaults only backfills flags / player.core_traits /
-        # npcs, so a NEW $game_state sub-map is undefined in every save written
-        # before this build. Guarding here heals old saves on first render.
+        # Belt and braces. media_cycle is in the :: Start skeleton and
+        # setup.backfillStateDefaults now heals a missing $game_state sub-map on
+        # every passage, so a save written before the pool existed arrives here
+        # already carrying the map. The guard stays because it costs one `ndef`
+        # and it is the only thing standing between a save the backfill somehow
+        # missed and a hard undefined on first render.
         parts = [
             '<<if ndef $game_state.media_cycle>><<set $game_state.media_cycle to {}>><</if>>',
             f'<<set {ref} to ({ref} === undefined ? 0 : ({ref} + 1) % {len(entries)})>>',
@@ -15937,19 +15990,54 @@ setup.infoPages = """ + info_pages_list + """;
 
 // Cross-release save migration: fill-if-absent deep-merge of the current default
 // skeleton (setup.stateDefaults) into a loaded save's State.variables. Adds any
-// $npcs / core_trait / flag a newer release introduced (SugarCube never re-runs
-// :: Start on load); NEVER overwrites an earned value. Idempotent. Called from the
-// :passagestart handler below on every passage (fresh play = no-op, all present).
+// $npcs / core_trait / flag / $game_state sub-map a newer release introduced
+// (SugarCube never re-runs :: Start on load); NEVER overwrites an earned value.
+// Idempotent. Called from the :passagestart handler below on every passage
+// (fresh play = no-op, all present).
+//
+// DEPTH IS NOT UNIFORM, and the asymmetry is deliberate:
+//   $game_state  top level AND one level into a sub-map. Safe because every
+//                non-empty default here is engine bookkeeping (phone, rent_state,
+//                fast_jobs, bank, time_state) whose keys are structural. The
+//                player-owned maps (quests, inventory, passes, trigger_history)
+//                all default to {}, so there is nothing to fill into them.
+//   $player      top level ONLY, plus core_traits named explicitly. $player.wardrobe
+//                is an id -> garment map, so filling INTO it would hand back a
+//                starting garment the player sold or discarded. core_traits is
+//                named because a new release's new meter must appear, and a trait
+//                is bookkeeping the player never deletes.
+// Arrays are never merged at any depth: a default [] would otherwise re-seed a
+// list the player has legitimately emptied.
 setup.backfillStateDefaults = function (sv) {
     var sd = setup.stateDefaults;
     if (!sd || !sv) return;
+    // Defaults live on setup and are shared by every save in the session, so hand
+    // out copies — otherwise a player's state aliases the default object and the
+    // next mutation edits the template every later backfill reads from.
+    function clone(v) {
+        return (v && typeof v === 'object') ? JSON.parse(JSON.stringify(v)) : v;
+    }
+    function isFillable(v) {
+        return v && typeof v === 'object' && !Array.isArray(v);
+    }
     if (!sv.flags) sv.flags = {};
     var df = sd.flags || {};
-    for (var fk in df) { if (!(fk in sv.flags)) sv.flags[fk] = df[fk]; }
+    for (var fk in df) { if (!(fk in sv.flags)) sv.flags[fk] = clone(df[fk]); }
+    var dp = sd.player || {};
     if (sv.player) {
+        for (var pk in dp) { if (!(pk in sv.player)) sv.player[pk] = clone(dp[pk]); }
         if (!sv.player.core_traits) sv.player.core_traits = {};
-        var pt = sd.player_core_traits || {};
+        var pt = dp.core_traits || {};
         for (var tk in pt) { if (!(tk in sv.player.core_traits)) sv.player.core_traits[tk] = pt[tk]; }
+    }
+    var dg = sd.game_state || {};
+    if (!sv.game_state) sv.game_state = {};
+    for (var gk in dg) {
+        var dv = dg[gk];
+        if (!(gk in sv.game_state)) { sv.game_state[gk] = clone(dv); continue; }
+        var cv = sv.game_state[gk];
+        if (!isFillable(dv) || !isFillable(cv)) continue;
+        for (var sk in dv) { if (!(sk in cv)) cv[sk] = clone(dv[sk]); }
     }
     if (!sv.npcs) sv.npcs = {};
     var dn = sd.npcs || {};
@@ -16074,6 +16162,13 @@ $(document).on(':passagestart', function(ev) {
     // save from an earlier release picks up any NPC / trait / flag a newer release
     // added (SugarCube never re-runs :: Start on load). See setup.backfillStateDefaults.
     if (setup.backfillStateDefaults) { setup.backfillStateDefaults(sv); }
+    // Release provenance: last_* follows the build currently running, origin_* was
+    // written once by :: Start and the backfill cannot overwrite it. Guarded on a
+    // difference so a save that has not changed builds is not dirtied every passage.
+    if (sv.game_state && sv.game_state.last_schema !== setup.buildSchema) {
+        sv.game_state.last_version = setup.buildVersion;
+        sv.game_state.last_schema = setup.buildSchema;
+    }
     var psg = ev.passage.title;
     var infoPages = setup.infoPages;
 """ + rent_redirect_block + clothing_redirect_block + travel_cost_block + """    if (infoPages.indexOf(psg) === -1) {

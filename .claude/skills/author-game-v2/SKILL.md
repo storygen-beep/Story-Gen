@@ -148,7 +148,7 @@ Resolve the game slug from the request, then read `games/<slug>/v2_state.json`:
 | *(no state file)* | write the Want, create the state file | `references/the-want.md` |
 | `want` | lay down the world | `references/the-board.md` + `the-map.md` + `the-economy.md` + `the-meters.md` |
 | `board` | build v0.1 | `references/the-release.md` (§ first release) + `the-voice.md` |
-| `release` | run the loop — pitch, attack, write, gate, ship, log | `references/the-release.md` |
+| `release` | run the loop — pitch, attack, write, gate, ship, log | `references/the-release.md` + `the-returning-player.md` |
 
 **The world files, all read in the board phase:** `the-board.md` (fill, meters, cast) ·
 `the-map.md` (the world as a place someone could draw) · `the-surfaces.md` (which screen each
@@ -158,6 +158,13 @@ exist and who owns them, what the climb costs, and how the player reads it off t
 once they click) · **`the-first-hour.md` (the opening, the first meeting with each character, and
 the first visit to each place)** · **`the-clock.md` (the time the game promises and the time the
 engine keeps)**.
+
+**From the second release onward, `the-returning-player.md` is not optional.** It owns what may not
+CHANGE once players hold saves — ids, flag and trait keys, stat ranges, the title — against
+`the-release.md`, which owns what a release has to clear before it ships. Renaming an id is invisible
+to every gate in this skill and strands every save in the wild; the engine's own migration seam
+(`engine.md` §40) repairs additions and nothing else. v2 shipped without this file entirely until
+2026-08-29.
 
 **One optional file, read only if the game declares the system:** `the-phone.md` (whether this game
 needs a phone, what goes on it, and how it is wired to the world). **Its P1 is a refusal question —

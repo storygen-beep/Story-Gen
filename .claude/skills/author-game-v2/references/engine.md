@@ -13,8 +13,8 @@ Paths are relative to `story_gen_web_app/story_gen_django/`.
 ## 1. `is_repeatable` defaults to TRUE when the key is absent
 
 ```python
-v2.py:11509   "is_repeatable": trigger.is_repeatable if trigger else True
-v2.py:11582   is_repeatable = getattr(trigger, 'is_repeatable', True) if trigger else True
+v2.py:11560   "is_repeatable": trigger.is_repeatable if trigger else True
+v2.py:11633   is_repeatable = getattr(trigger, 'is_repeatable', True) if trigger else True
 apps/stories/models.py:355   is_repeatable = models.BooleanField(default=True, ...)
 ```
 
@@ -27,7 +27,7 @@ that assumed `false` reported one game as 33% repeatable when the majority was r
 ## 2. Conditions **fail open** without `version = "1.0"`
 
 ```js
-v2.py:3892   if (!conditions.version || conditions.version !== '1.0') return true;
+v2.py:3969   if (!conditions.version || conditions.version !== '1.0') return true;
 ```
 
 **Why it matters:** a gate missing its `version` passes for everybody, silently, with a green
@@ -88,7 +88,7 @@ A top band with **no** `max` is unbounded by design and promises nothing. A top 
 ```
 
 ```python
-v2.py:12460   def _resolve_pool_dir(self, pool_dir)     # contents discovered from disk
+v2.py:12511   def _resolve_pool_dir(self, pool_dir)     # contents discovered from disk
 v2.py:12474   def _media_pool_key(...)                  # cycle state key
 v2.py:11908   # ... $game_state.media_cycle
 v2.py:11872-11874  # `pool_dir` is preferred: the count is never hardcoded, so the human curates
@@ -133,14 +133,14 @@ about a different path — **verify live before splitting a window.**
 ## 7. Random events have a per-location cooldown
 
 ```js
-v2.py:5288   var cooldowns = sv.game_state.random_cooldowns = sv.game_state.random_cooldowns || {};
+v2.py:5365   var cooldowns = sv.game_state.random_cooldowns = sv.game_state.random_cooldowns || {};
              // after a random event fires, skip N visits before rolling again
 ```
 
 Cooldown is engine-managed per location — do not author your own. Random canvases are
 selected by `triggerMode === "random"`.
 
-`max_triggers_per_day` is read per trigger (`v2.py:11583`).
+`max_triggers_per_day` is read per trigger (`v2.py:11634`).
 
 ---
 
@@ -165,7 +165,7 @@ down anywhere before 2026-08-18.
 
 ```python
 v2.py:13258   target_passage = self.passage_name_map.get(str(node_id))   # BUILD-time resolution
-v2.py:14519   body_html = self._convert_blocks_to_game_html(beat_blocks) # INSIDE <<linkreplace>>
+v2.py:14572   body_html = self._convert_blocks_to_game_html(beat_blocks) # INSIDE <<linkreplace>>
 ```
 
 - **`targetType = "node"` is resolved when the game is built**, into a static link to
@@ -330,7 +330,7 @@ A choice with `show_when_locked = true` renders as `<span class="locked-choice">
 sees what the action was called.
 
 **Omit it and the row is not blank — it is the action label, greyed, with nothing beside it.**
-`escaped_locked = (locked_text or choice_text)` at `v2.py:13319`, and the same string is repeated
+`escaped_locked = (locked_text or choice_text)` at `v2.py:13372`, and the same string is repeated
 into the `title` tooltip at `:13219-13220`, so the tooltip adds nothing either. The player sees
 "Kiss her" struck out and learns neither why nor when.
 
@@ -678,7 +678,7 @@ else { /* Unknown op; do nothing */ return; }
 
 Nothing normalises it: the string `subtract` appears **nowhere** in `generators/v2.py` or in
 `apps/projects/services/template_import.py`. The generator interpolates the op straight through
-(`v2.py:5950`), so the build emits `applyAndNotifyTrait(..., "subtract", 4, ...)` verbatim and the
+(`v2.py:6027`), so the build emits `applyAndNotifyTrait(..., "subtract", 4, ...)` verbatim and the
 runtime drops it on the floor.
 
 **Every effect family, and the ops each actually runs:**
@@ -876,8 +876,8 @@ content`** reports both.
 ⚠️ **`pickQuestsCards` takes EXACTLY ONE scope string, and anything else fails silently.**
 
 ```
-v2.py:15442   setup.pickQuestsCards = function(scope) {
-v2.py:15443       if (scope !== "story_goals") return [];
+v2.py:15495   setup.pickQuestsCards = function(scope) {
+v2.py:15496       if (scope !== "story_goals") return [];
 ```
 
 A hard early return, no error, no warning. A typo in that string gives an **empty top section on the
@@ -885,8 +885,8 @@ guidance page** and no clue why. *(This paragraph originally described the funct
 mentioning the guard — written from source, and it still missed the function's first line. Read the
 whole function, not the part that answers your question.)*
 
-**Selection.** `pickQuestsCards(scope)` (`v2.py:15442`) returns every matching top-tier card;
-`pickQuestsCard(slug)` (`v2.py:15417`) returns the **single highest-`priority`** match for a
+**Selection.** `pickQuestsCards(scope)` (`v2.py:15495`) returns every matching top-tier card;
+`pickQuestsCard(slug)` (`v2.py:15470`) returns the **single highest-`priority`** match for a
 character — so a character's cards are a one-live-at-a-time chain.
 
 ⚠️ **Quest conditions use a SEPARATE evaluator with NO fail-open** — `checkQuestsCondition`,
@@ -977,7 +977,7 @@ belongs.
 ### 24.3 Ask the engine who is present — do not recompute it
 
 ```
-v2.py:4871    setup.getNpcsPresentAtLocation = function(locationId)
+v2.py:4948    setup.getNpcsPresentAtLocation = function(locationId)
 v2.py:19995   the engine's own nav badges call it
 v2.py:20019   and again for the portrait row
 ```
@@ -1132,7 +1132,7 @@ Two things happen, and the second is why this is the strongest throttle availabl
 rung:
 
 1. **The engine refuses the choice when the player cannot afford it.** Every choice-collection path
-   filters on `setup.checkCostsAffordable(c.costs)` (`v2.py:4717`, `:4527`, `:4975`; the function
+   filters on `setup.checkCostsAffordable(c.costs)` (`v2.py:4794`, `:4527`, `:4975`; the function
    itself at `v2.py:4625`). An unaffordable rung does not render as a broken click — it is not
    offered.
 
@@ -1181,7 +1181,7 @@ Parsed at `template_import.py:2714-2769` (`TemplateDailyTick`), and both effect 
 day rolls. `flagEffects` with `op = "unset"` is the mechanism behind every `_today` flag.
 
 **Why it matters more than it looks.** `max_triggers_per_day` is read **off the trigger**
-(`v2.py:11583`, `getattr(trigger, 'max_triggers_per_day', None)`). A triggerless rung — a canvas
+(`v2.py:11634`, `getattr(trigger, 'max_triggers_per_day', None)`). A triggerless rung — a canvas
 reached by a hub choice, which is what most rungs in this architecture are — has no trigger, so it
 cannot carry one. The pair that *does* work on a triggerless rung is:
 
@@ -1460,17 +1460,17 @@ grep -E 'target_hour|advance_to|until_time|time_target' v2.py     0 hits
 notification fade or a deferred `Engine.play`, not a clock setter. Grep for the word, not the
 prefix.)*
 
-`window.advanceTime(minutes)` (`v2.py:5492`) adds minutes to `time_state.current_minute`, rolls the
+`window.advanceTime(minutes)` (`v2.py:5569`) adds minutes to `time_state.current_minute`, rolls the
 hour past 60 and the day past 24, expires temporary modifiers, and repaints the sidebar. That is the
 whole time API. **Nothing in this engine can send the clock to a named hour**, so a label or a beat
 promising one ("work till one", "back by six") is a promise the engine cannot keep.
 
-`window.waitTime(minutes)` (`v2.py:5533`) is the sidebar wait buttons' entry point — the same
+`window.waitTime(minutes)` (`v2.py:5610`) is the sidebar wait buttons' entry point — the same
 advance, plus `setup.commitMoment()`, because a wait navigates nowhere and would otherwise live only
 in the active moment.
 
 An exit that declares no `time_progression_minutes` still costs **3 minutes**
-(`v2.py:13766`, `config.get('default_time_progression', 3)`; the exception fallback at `:13388` emits
+(`v2.py:13819`, `config.get('default_time_progression', 3)`; the exception fallback at `:13388` emits
 the same `advanceTime(3)`). A four-node opening has therefore drifted 9 minutes before the first real
 choice.
 
@@ -1550,7 +1550,7 @@ not give you one either.
 | | a location's nav cost tag — *"30m · 3 Money"* | `:4731` |
 | | the sidebar `trait_bar` — *"money: 12 / 100"* | `:16241` |
 
-`self.rent_currency_symbol = rent_settings.get("currency_symbol", "$") or "$"` — `v2.py:1192`.
+`self.rent_currency_symbol = rent_settings.get("currency_symbol", "$") or "$"` — `v2.py:1152`.
 Emitted to the runtime only when rent is enabled (`v2.py:3123`), so a game without
 `[settings.rent]` has no symbol setting at all.
 
@@ -1645,7 +1645,7 @@ v2.py                _generate_cast_page  ::CastPage + ::CastWidgets
 ```
 
 ⚠️ **`relationship` is the ONLY NPC string that survives to runtime.** `description` is
-`entry.pop("description", None)`'d before `$npcs` ships (`v2.py:1047`) — deliberately, because
+`entry.pop("description", None)`'d before `$npcs` ships (`v2.py:1046`) — deliberately, because
 `$npcs` is snapshotted into every history moment. A 50-word bio in `[[npcs]] description` is an
 author note the player will never see. Write the player-facing line in `relationship`; one sentence
 is what the field ships (patriarch gives six people 814 characters between them).
@@ -1756,9 +1756,9 @@ rediscover it as a gap; build it when a game asks for it.
 **The engine has had this since v2 shipped. No v2 game has ever used it.**
 
 ```python
-v2.py:14745   if block_type == "block_pool":
-v2.py:14746       pool_blocks = (block.get("props") or {}).get("blocks", [])
-v2.py:14753       parts = [f'<<set _bp to random(0, {max_idx})>>']
+v2.py:14798   if block_type == "block_pool":
+v2.py:14799       pool_blocks = (block.get("props") or {}).get("blocks", [])
+v2.py:14806       parts = [f'<<set _bp to random(0, {max_idx})>>']
 v2.py:14581-14588 # if / elseif / else chain over the variants
 ```
 
@@ -2126,7 +2126,7 @@ The path from the TOML to the screen, traced end to end:
 | copied onto the project's metadata | `template_import.py:6391-6392` |
 | escaped, then joined with ` · ` | `v2.py:16131-16132`, joined at `:16134` |
 | composed into the `versionFooter` widget | `v2.py:16139-16142` |
-| called unconditionally from `StoryCaption` — both variants | `v2.py:16231` and `:16177` |
+| called unconditionally from `StoryCaption` — both variants | `v2.py:16326` and `:16177` |
 
 Rendered as `v0.1 · 2026-08-23` in a `<div class="sidebar-version">` under the sidebar.
 
@@ -2135,7 +2135,7 @@ Rendered as `v0.1 · 2026-08-23` in a `<div class="sidebar-version">` under the 
 1. **The widget is ALWAYS defined, even when both keys are empty** — it just renders nothing. The
    ternary at `v2.py:16139-16142` emits an empty `<<widget "versionFooter">><</widget>>` rather than
    nothing at all. Deliberate: SugarCube throws on a call to an undefined widget, and `StoryCaption`
-   calls it unconditionally in both its variants (`v2.py:16231`, `:16177`) — same reason the
+   calls it unconditionally in both its variants (`v2.py:16326`, `:16177`) — same reason the
    cheat-page and cast-page widgets are emitted outside their own feature blocks.
 2. **`html.escape` runs on both** (`v2.py:16131-16132`), so a stray quote in a date string cannot
    break the build.
@@ -2204,3 +2204,63 @@ schedules, no phone and no clothing.
 13:00 and false at 20:00 and 10:59; a bare `18:00` true at 18:30 and false at 19:30. Lock text
 rendered as `Required: Only between 22:00 and 06:00`. Tests:
 `apps/game_generation/tests/test_time_of_day.py`, 11 of 11.
+
+---
+
+## 40. The save-migration seam — what a new release does to an old save
+
+`:: Start` runs once, when a playthrough begins. **SugarCube never re-runs it on load.** So every
+default a new release writes there — a flag, a meter, an NPC, a whole system — is `undefined` in
+every save that predates it, and the first read throws. The seam that repairs this is the engine's,
+not the author's, and knowing its exact reach is the difference between a safe release and a
+soft-lock. The authoring rules that follow from it are `references/the-returning-player.md`.
+
+**The skeleton is one object.** `$player` and `$game_state` are serialized into `:: Start` from the
+same Python dicts that are handed to `setup.stateDefaults` (`v2.py:3244`), so the defaults cannot
+fall behind what a fresh game starts with. They used to be two hand-maintained string blocks and a
+three-key dict, which is exactly how turning the phone on in a patch release left
+`$game_state.phone` undefined in every existing save with no build error anywhere.
+
+**`setup.backfillStateDefaults`** (`v2.py:16011`) is called from the `:passagestart` handler
+(`v2.py:16164`) on **every passage**. It fill-if-absent merges the defaults into `State.variables`,
+never overwrites an earned value, is idempotent, and hands out deep copies so a player's state can
+never alias the shared default object.
+
+**The depth is not uniform, and the asymmetry is load-bearing:**
+
+| | depth | why |
+|---|---|---|
+| `$flags` | keys | — |
+| `$npcs` | whole NPC, then `core_traits` / `flags` | a missing NPC arrives entire |
+| `$game_state` | top level **and one level into a sub-map** | every non-empty default there is engine bookkeeping (`phone`, `rent_state`, `fast_jobs`, `bank`, `time_state`); the player-owned maps all default to `{}` so there is nothing to fill into them |
+| `$player` | **top level only**, plus `core_traits` by name | `$player.wardrobe` is an id → garment map — a deeper fill hands back a garment the player sold. Same for `equipped`. |
+
+Arrays are never merged at any depth: a default `[]` would re-seed a list the player emptied.
+
+⚠️ **What it cannot do.** Follow a rename, notice a removal, reinterpret a rescaled number, or
+re-grant something the save already consumed. Those are `the-returning-player.md` §§2–6.
+
+**Provenance.** `$game_state` carries `origin_version` / `origin_schema` (the release the playthrough
+started on, written once by `:: Start`, never overwritable because the backfill only fills absent
+keys) and `last_version` / `last_schema` (the release currently running, restamped by
+`:passagestart`). ⚠️ `origin_*` is the **one deliberate divergence** between `:: Start` and
+`setup.stateDefaults`: the defaults carry `null`, so a save written before the stamp existed reads as
+*unknown* instead of being relabelled as having started on whichever build first migrated it.
+
+**The stamp and the hook.** `Config.saves.id` (`v2.py:3208`) is pinned to the template slug rather
+than the SugarCube default `slugify(StoryTitle)`, so a title change does not orphan **exported**
+saves — the in-browser slot namespace is still title-derived and still strands
+(`SimpleStore.create(Story.domId, …)` in `format.js`). `Config.saves.version` (`:3209`) is a sha1
+over the trait/flag key surface and the corruption tiers. `Config.saves.onLoad` (`:3230`) compares
+it and **logs**; it does not refuse. A `throw` there would abort the load with `UI.alert` — that is
+the reject-on-mismatch handler, deliberately unused.
+
+⚠️ **The story format is 2.30.0, not the 2.36.1 the build declares.** `StoryData` asks for
+`"format-version": "2.36.1"` (`v2.py:731`, `:742`) but the only SugarCube installed for Tweego is
+`storyformats/sugarcube-2/format.js` at `"version":"2.30.0"`, and that is what compiles. It matters
+here because the save hooks were rewritten between them: 2.30 has `Config.saves.onLoad` / `onSave`,
+and **`Save.onLoad.add()` does not exist**. Write against 2.30 and verify against the installed
+`format.js`, not against the version string in the build.
+
+Tests: `apps/game_generation/tests/test_save_migration.py`, 23 of 23 — which execute the emitted
+migration in node against synthetic old saves rather than grepping for it.

@@ -353,6 +353,28 @@ def main() -> int:
         if len(fixable) > 40:
             print(f"    … and {len(fixable) - 40} more")
 
+    # The rest of DRIFTED: real drift the guards above refuse to rewrite. Listing it
+    # is the whole point of --verbose — without this block a run whose drift is
+    # ENTIRELY ranges and same-line pairs prints a count and nothing else, which is
+    # what it did after the 2026-08-29 engine edits: "21 drifted", no way to see them.
+    if args.verbose:
+        held = [c for c in cites
+                if c.verdict == "DRIFTED" and c not in set(fixable)]
+        if held:
+            print()
+            print(f"    {len(held)} drifted but NOT auto-fixable — each needs a human:")
+            for c in held[:40]:
+                if c.end is not None:
+                    why = "range: one anchor cannot name a span"
+                elif not c.proposal:
+                    why = "anchor resolves nowhere or to several lines"
+                else:
+                    why = "two citations on one line share a target"
+                print(f"    {os.path.relpath(c.md, SKILL)}:{c.mdline}  "
+                      f"{c.raw}   [{why}] {c.anchor[:40]!r}")
+            if len(held) > 40:
+                print(f"    … and {len(held) - 40} more")
+
     if args.fix and fixable:
         edits: dict[str, list[Citation]] = {}
         for c in fixable:

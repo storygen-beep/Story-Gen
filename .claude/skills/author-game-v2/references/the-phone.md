@@ -441,7 +441,7 @@ That is P1's rule stated as architecture, and it is why that system does not rea
 
 **We have the primitive and have never used it.** A chat reply choice carries `effects`,
 `flagEffects`, `questEffects` and **`scheduleEffects`** (`v2.py:2355`).
-`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:6042`) pushes
+`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:6119`) pushes
 onto `game_state.scheduled`; the day tick decrements `daysLeft` and fires at zero
 (`v2.py:5687–5698`), where `setup.fireScheduledEvent` (`v2.py:6056`) can set a flag, start a quest,
 or deliver a conversation. Usage across all thirty games: **zero**.

@@ -61,6 +61,12 @@ a button.
 > purpose, named in the ledger, with the reason.** A lint you cannot explain leaving is a lint you
 > have not read.
 
+**5b. Check what you MOVED, not just what you added.** Every release after v0.1 lands on people
+holding saves, and the whole scoreboard above is blind to them: renaming a canvas id passes every
+gate and strands every save in the wild. `references/the-returning-player.md` owns that half — ids,
+flag and trait keys, stat ranges, the title, and the one-shot grant a carried save has already
+burned. The engine repairs *additions* on its own (`engine.md` §40) and nothing else.
+
 **6. Ship, and log.** Record in `v2_state.json`: the subject, what it added, **what it
 opened**, the gate scores, and **the lint figures you are shipping with** — at minimum the
 own-words count and anything you consciously left. A number in the ledger is one that has to come
@@ -137,8 +143,9 @@ Posting volume predicts revenue (ρ = +0.58). Release *speed* does not (ρ = −
 
 ## § Shipping the build — the boundary nothing was holding
 
-Everything above is about what a release **adds**. This is about the **artefact**, and until
-2026-08-28 no instrument in this project could see one: the whole scoreboard is aimed at
+Everything above is about what a release **adds**. This is about the **artefact** — and its
+companion is `references/the-returning-player.md`, which is about what a release must not **move**.
+Until 2026-08-28 no instrument in this project could see a build: the whole scoreboard is aimed at
 `7_final_game.toml`, which is structurally incapable of judging a build.
 
 The rule is LO's and it is not the obvious one:
@@ -199,7 +206,7 @@ skill.
 > machine runs do not.
 
 ⚠️ **What the check reads, and why it is not the obvious thing.** `[IMAGE MISSING]` and
-`[… POOL MISSING]` placeholders are emitted **only under `--debug`** (`v2.py:12498`, `:14753`,
+`[… POOL MISSING]` placeholders are emitted **only under `--debug`** (`v2.py:12549`, `:14753`,
 `:14906`). A clean build renders **silent gaps**, so grepping the HTML for those markers passes a
 game with 183 missing files. The check reads the build's own flags-init map (`debug_mode`,
 `dev_mode_enabled`) and the always-generated `MissingMediaPage` count instead.

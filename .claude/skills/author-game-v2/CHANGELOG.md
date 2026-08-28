@@ -5,6 +5,87 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-29 — save safety: the doctrine v2 lost, and a seam that covered three keys
+
+**Why.** LO asked what save safety actually is — *"on a new release the old player saves shouldn't
+break, right?"* Answering it honestly meant reading the engine rather than remembering it, and what
+came back was worse than the question assumed on both sides.
+
+**The doctrine side.** v1 shipped `references/save-safety.md` — 141 lines, written after a live
+soft-lock. **v2 carried nothing.** Across the whole skill there was no statement that renaming a
+canvas id strands every save in the wild, and no gate can catch it: every check here reads one
+snapshot of `7_final_game.toml`, and a join-key break exists only in the *difference between two
+releases*. Restored as `references/the-returning-player.md`, corrected against live source — five of
+v1's `file:line`s had drifted, and its claim that the backfill covers "flags and traits only" had
+stopped being true the same day.
+
+**The engine side.** `setup.backfillStateDefaults` migrated flags, `player.core_traits` and npcs.
+That was the whole list. Turning on any optional system in a patch release — phone, rent, passes,
+inventory, clothing — left its entire `$game_state` sub-map `undefined` in every existing save, with
+no build error and no symptom until a player opened the feature. The only remedy was an author
+remembering a hand-written `ndef` guard at each read site; **exactly two exist in the engine, both
+added after something broke.**
+
+Fixed at the root rather than per-site: `$player` and `$game_state` are now serialized into
+`:: Start` **and** into `setup.stateDefaults` from one pair of dicts, so the defaults cannot fall
+behind what a fresh game starts with. The backfill reaches both. Depth is deliberately asymmetric and
+the asymmetry is load-bearing — `$game_state` fills one level into a sub-map (everything non-empty
+down there is engine bookkeeping), `$player` fills top level only, because `$player.wardrobe` is an
+id → garment map and a deeper fill hands back a garment the player sold.
+
+**Provenance, and the stamp that stays inert.** Every save now records `origin_version` /
+`origin_schema` (the release it started on) and `last_version` / `last_schema` (the release running
+now). ⚠️ The defaults carry **`null`** for `origin_*` — the one deliberate divergence from `:: Start`
+— because filling it from the running build would relabel every pre-stamp save as having started on
+whichever release first migrated it, and a provenance field that looks right and is wrong is worse
+than an empty one. `Config.saves.version` stays a stamp and not a gate **by LO's decision**:
+`Config.saves.onLoad` logs the mismatch and returns. A throw there aborts the load with a dialog —
+that is the reject handler the stamp was minted for, and it is unused on purpose, because the
+backfill heals what a player can actually hit and refusing a save costs somebody their whole run.
+
+**What still cannot be repaired, and is now written down:** a renamed key, a removed key, a rescaled
+number, and — the one that has actually stranded players — a one-shot grant a carried save already
+burned. `the-returning-player.md` §6 keeps v1's Vesper `cover_analyst` case verbatim, because the
+engine change does **not** fix it: the backfill fills `$player.wardrobe` only when the whole map is
+absent, and with the game's *starting* garments. An item granted by a beat is not in that skeleton.
+
+**Also found.** The build declares SugarCube **2.36.1** (`v2.py:731`, `:742`) and compiles against
+the **2.30.0** that is actually installed for Tweego. It matters here and nowhere else in the skill:
+the save hooks were rewritten between those versions, so the hook is `Config.saves.onLoad` and
+`Save.onLoad.add()` does not exist. Recorded in `engine.md` §40.
+
+**Files.** `references/the-returning-player.md` (new, 221 lines) · `references/engine.md` §40
+appended at the end so no existing citation shifts · `SKILL.md` — the file is named in the `release`
+phase row and marked not-optional from the second release onward · `references/the-release.md` — new
+loop step 5b (*check what you MOVED, not just what you added*) and a cross-ref in § Shipping the
+build · `DOCTRINE_GAPS.md` row 17 + Log row · `scripts/cite_check.py` — see below.
+
+**`cite_check.py` — `--verbose` was printing nothing when it had the most to say.** The engine edits
+above moved line numbers across the skill: 69 citations drifted, `--fix` re-anchored 48, and the
+remaining 21 are the class the tool refuses to rewrite (a range cannot be reproduced by one anchor;
+two citations on one markdown line resolving to the same target were distinguishing two lines). But
+the listing loop only ever iterated the **fixable** set, so a run whose drift was entirely in that
+excluded class printed a count and no detail — exactly the state after these edits. `--verbose` now
+prints the held-back ones too, each with the reason it was held. Verified by isolation: the
+held-back list is **byte-identical against the pre-change generator**, so none of the 21 is damage
+from this work — they are the pre-existing residue, now visible instead of merely counted.
+
+**Verified.** 23 new tests in `apps/game_generation/tests/test_save_migration.py` that **execute the
+emitted migration in node** against synthetic old saves rather than grepping for it — an earned
+balance of 500 survives, an emptied list is not re-seeded, a sold garment stays sold, two saves do
+not alias each other, two passes are identical. 15 of 16 go red against the pre-change generator; a
+deliberate mutation removing the `origin_*` divergence turns 5 red. Old-vs-new skeleton diff across
+**13 games including vesper: 0 keys removed, 0 changed.** `node --check` clean on every emitted
+`[script]` passage of 5 builds. 314 generator tests green; the 10 failures in the wider suite are
+byte-identical on the baseline generator. No game was touched.
+
+⚠️ **Still open, named rather than half-built:** there is no machine check for join-key drift. Four
+greps against the last shipped TOML would be a checklist, and `DOCTRINE_GAPS.md` §3a already ruled on
+those. The instrument this wants reads `games/<slug>/releases/v<version>.html` and compares its join
+keys to the current build — a `gates.py` mode, not a list in a file.
+
+---
+
 ## 2026-08-29 — the MISSING bucket, hand-resolved: 17 wrong, one of them naming the wrong FILE
 
 **Why.** The previous entry left 19 citations whose anchor was not in the target file at all,
@@ -94,7 +175,7 @@ Three anchor strengths, and it proposes a move for only the first two:
 | strength | anchor | e.g. |
 |---|---|---|
 | strong | the code written beside the citation | `v2.py:3820   if (!conditions.version …` |
-| named | a backticked identifier near it, or in the enclosing heading | ``​`window.advanceTime(minutes)` (`v2.py:5400`)`` |
+| named | a backticked identifier near it, or in the enclosing heading | ``​`window.advanceTime(minutes)` (`v2.py:5569`)`` |
 | none | nothing code-like nearby → **UNVERIFIABLE, never touched** | |
 
 **Baseline, and after.** 543 citations across the skill:
@@ -2258,7 +2339,7 @@ wrong**, and the truth is the section's real content:
 
 | evaluator | backs | `ne` |
 |---|---|---|
-| `compare()` — `v2.py:3911`, reached at `:3956` | canvas / node / choice | already, since v2 shipped |
+| `compare()` — `v2.py:3988`, reached at `:3956` | canvas / node / choice | already, since v2 shipped |
 | `setup.checkSingleCondition` — `v2.py:7513` | hints, quest-goal bullets, `_findFlagSetterCanvas` | **added** |
 | `setup.checkQuestsCondition` | `[[quest_cards]]` `when` / `goals` | **no, deliberately** |
 
@@ -3000,7 +3081,7 @@ scores the way it does. The two files now agree.
 
 - **`references/engine.md` §15 — reversed.** `locked_text` is the default; the bare label is a rare,
   argued exception. Keeps the verified render fact and adds what actually happens without it:
-  `escaped_locked = (locked_text or choice_text)` (`v2.py:13319`), with the same string repeated into
+  `escaped_locked = (locked_text or choice_text)` (`v2.py:13372`), with the same string repeated into
   the `title` tooltip (`:13219-13220`), so the tooltip adds nothing.
 - **`references/engine.md` §27 — scoped, not corrected.** Its claim that an unaffordable rung *"is
   not offered"* is true of the canvas pickers (`v2.py:4496`, `:4527`, `:4975`) but **not** of
@@ -3876,7 +3957,7 @@ description swapped for name on the meeting flag, 64 places. `the_season` did ne
 
 ### Changed — `references/engine.md`
 
-- **§23** — the correction above: Frame 1 fires on `card.terminal === true` alone (`v2.py:15576`),
+- **§23** — the correction above: Frame 1 fires on `card.terminal === true` alone (`v2.py:15629`),
   nothing checks achievement. `terminal` belongs on a card the player has to **climb to**; an arc
   needs an open lower band and a terminal upper one.
 - **New §34, `[ui.cast_page]`.** The block authors no content — name, `relationship`, live location
@@ -4674,7 +4755,7 @@ In `off_season` those four caps meant the talk screens were re-clickable every t
 rung they were designed to sit below.
 
 **One more fact recorded while verifying:** a **located** canvas needs no flag at all.
-`max_triggers_per_day` is read off the trigger (`v2.py:11583`) and `markCanvasTriggered` stamps its
+`max_triggers_per_day` is read off the trigger (`v2.py:11634`) and `markCanvasTriggered` stamps its
 day key **before** `advanceTime` (`v2.py:4290`), so it is immune to the whole problem. The flag
 pattern is for triggerless rungs only. Both files now say so.
 
@@ -4918,7 +4999,7 @@ does it. That is why C4 shipped as a lint.
 
 - **No absolute-time advance exists.**
   `grep -E 'target_hour|advance_to|until_time|time_target' v2.py` → **0 hits**;
-  `advanceTime(minutes)` (`v2.py:5492`) is the whole API. (`setTime` matches eight times and every
+  `advanceTime(minutes)` (`v2.py:5569`) is the whole API. (`setTime` matches eight times and every
   one is `setTimeout`.) There is no `@time` token either — `_resolve_at_references` (`v2.py:14027`)
   resolves `@player` and `@<npc>` only.
 - **Travel time is auto-tagged; activity time is not.** `getLocationCostTag` (`v2.py:4724`) renders
@@ -6567,8 +6648,8 @@ above it does, so the exception was invisible to anyone reading the rule off the
 checks the weekday and the time wrap **separately**, weekday first, against *today*:
 
 ```
-v2.py:3519   if (!setup._weekdayMatches(ds.weekdays, todayIndex)) continue;
-v2.py:3520   if (!setup.isCurrentTimeSlot(ds.start_time, ds.end_time)) continue;
+v2.py:3596   if (!setup._weekdayMatches(ds.weekdays, todayIndex)) continue;
+v2.py:3597   if (!setup.isCurrentTimeSlot(ds.start_time, ds.end_time)) continue;
 ```
 
 So `weekdays = [1], 23:00–06:00` places the character on Tuesday night and **deletes them at
@@ -6895,8 +6976,8 @@ they might be true or might be not."* Correct. Checked all six against source:
 |---|---|
 | `State`/`Engine` on `window.SugarCube` | ✅ true — `window.SugarCube=` with `State:State`, `Engine:Engine`, in the built file |
 | `current_day` is a day NAME | ✅ true — `v2.py:3273` `[…].indexOf(timeState.current_day)`, plus `:3444 :3588 :3643 :3706` |
-| `setup.getNpcsPresentAtLocation(slug)` | ✅ true — `v2.py:4871`; the engine's own nav badges call it at `:19297`, `:19321` |
-| `pickQuestsCards` takes one scope | ✅ true, and **understated** — `v2.py:15443` `if (scope !== "story_goals") return [];` |
+| `setup.getNpcsPresentAtLocation(slug)` | ✅ true — `v2.py:4948`; the engine's own nav badges call it at `:19297`, `:19321` |
+| `pickQuestsCards` takes one scope | ✅ true, and **understated** — `v2.py:15496` `if (scope !== "story_goals") return [];` |
 | Playwright text selectors break | ⚠️ true, but **tooling, not engine behaviour** |
 | page source is entity-encoded | ✅ true — **663** `&lt;&lt;set` against **3** literal in one build |
 

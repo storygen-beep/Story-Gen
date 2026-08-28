@@ -487,7 +487,7 @@ Name no real-world currency in the prose. A game set in a specific place still h
 price and a wage; it does not need the word *pounds* to have them.
 
 > ⚠️ **The symbol is a PREFIX, and the engine has no suffix form.** All four rent prints concatenate
-> symbol-then-number (`"Pay " + _cur + _rent`, `v2.py:16516`). An invented unit that reads as a
+> symbol-then-number (`"Pay " + _cur + _rent`, `v2.py:16611`). An invented unit that reads as a
 > suffix — `10 coin`, `1000 caps` — is legitimate and the field ships it, but it cannot go through
 > `currency_symbol`. **If rent is enabled, the notation has to be a prefix.**
 

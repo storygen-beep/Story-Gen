@@ -87,9 +87,9 @@ def test_predicate_reaches_the_requirement_text():
 
 def test_requirement_text_names_both_ends_of_the_window():
     fm = V2.split('item.type === "time_of_day"')[1][:600]
-    assert "Only between" in fm and "Only at" in fm, (
-        "a window and a single hour read differently and must print differently"
-    )
+    assert (
+        "Only between" in fm and "Only at" in fm
+    ), "a window and a single hour read differently and must print differently"
 
 
 # --- it is a window, not a latch ------------------------------------------------
@@ -105,8 +105,23 @@ def test_the_predicate_is_not_guarded_on_any_optional_system():
 
 def test_the_clock_it_reads_is_initialised_in_every_build():
     """time_state is written into $game_state unconditionally, so the predicate cannot
-    throw in a build that has no schedules, no phone and no clothing."""
-    init = V2.split('"time_state": {{')[1][:300]
+    throw in a build that has no schedules, no phone and no clothing.
+
+    Asserted against a BUILT game rather than against v2.py's source. The source
+    anchor this used to grep (`"time_state": {{` inside the :: Start f-string) was
+    dissolved when the state skeleton became a Python dict — see
+    test_save_migration.py. The behaviour never changed, only where it is written,
+    and a test that reads the output cannot be broken again by that class of move."""
+    from apps.game_generation.twee_comprehensive.generators.v2 import (
+        TweeComprehensiveGeneratorV2,
+    )
+    from apps.projects.services.game_graph import build_game_graph
+    from apps.projects.services.template_import import normalize, parse_toml
+
+    fixture = "apps/game_generation/games_toml_files/engine_prd_phase2_2026_04_29.toml"
+    graph = build_game_graph(normalize(parse_toml(fixture)))
+    twee = TweeComprehensiveGeneratorV2().generate(graph.project, {}, graph=graph)
+    init = twee.split(":: Start")[1].split('"time_state"')[1][:300]
     assert "current_hour" in init and "current_minute" in init
 
 
@@ -129,6 +144,6 @@ def test_phone_triggers_run_through_the_same_evaluator():
     them without a line of phone-specific code. `the-phone.md` P4."""
     assert "setup.checkPhoneConversations = function()" in V2
     scan = V2.split("setup.checkPhoneConversations = function()")[1][:3000]
-    assert scan.count("setup.triggerConditionsSatisfied") == 3, (
-        "conversations, posts and profiles should each consult the shared evaluator"
-    )
+    assert (
+        scan.count("setup.triggerConditionsSatisfied") == 3
+    ), "conversations, posts and profiles should each consult the shared evaluator"
