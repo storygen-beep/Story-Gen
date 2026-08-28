@@ -5,6 +5,175 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-29 — `time_of_day`: the field's second most common gate, and the one we could not express
+
+**Why.** Step 2 of the phone work, approved by LO after the study. Of the four ways the corpus gates
+phone content — a meter (22/27), **the hour (20/27)**, a per-NPC stage (13/27), a past stamp plus a
+wait (3/27) — three were already expressible and the hour was not. Locations and NPCs reached the
+clock through their `[[schedules]]` rows; a canvas trigger and a phone conversation had no route to
+it, so "only in the evening" had to be faked by setting a flag from something that does touch the
+clock and gating on the flag.
+
+**What shipped.** A `time_of_day` condition type — `start_time`, optional `end_time`, `HH:MM`,
+24-hour, end exclusive; omitting `end_time` gives a one-hour window.
+
+- runtime branch `v2.py:4128`, lock text `v2.py:7915`
+- **it delegates to `setup.isCurrentTimeSlot` (`v2.py:3856`)** rather than parsing hours again
+
+**The delegation is the design, not a shortcut.** The overnight wrap is the trap: a hand-rolled
+`current >= start && current < end` passes every daytime case and fails every window crossing
+midnight, silently. `isCurrentTimeSlot` has handled it since the schedule primitive shipped, so
+there is now exactly one implementation of the wrap and no second copy to drift. Three tests pin the
+delegation, including two that fail if this branch grows its own `split(':')` or `* 60`.
+
+**Reaches the phone for free.** Conversations, posts and profiles are all evaluated by the shared
+`setup.triggerConditionsSatisfied` (`v2.py:2203`), so not one line of phone-specific code was needed
+— a test asserts all three consult it.
+
+**Verified end to end, not just read.** `late_shifts` rebuilt with an overnight condition injected
+into a phone conversation trigger, then driven through a real headless browser: **10 of 10 live
+cases pass**, including both sides of midnight (23:00 and 02:00 true inside `22:00`–`06:00`; 21:59,
+06:00 and 12:00 false), end-exclusivity on an ordinary window, and the bare-start one-hour default.
+Lock text renders `Required: Only between 22:00 and 06:00`. Unit tests
+`apps/game_generation/tests/test_time_of_day.py` 11/11; `test_worn_exposure.py` and
+`test_storage_fallback.py` still green alongside (31 passed).
+
+⚠️ **It is a window; a conversation's DELIVERY is still a latch.** `ps.triggered_conversations[conv.id]`
+(`v2.py:2202`) is written the first time a trigger passes and never re-read. So on a conversation
+this predicate means *deliver this the first time she is awake at 2am*, not *this thread only exists
+at 2am*. On a canvas trigger, evaluated fresh, it means the second. `the-phone.md` P4 now says which
+surface to put a window on, and `engine.md` §39 carries the same warning.
+
+⚠️ **No weekday form.** `[[schedules]]` rows have `weekdays`; this does not. "Only on Saturday" is
+still unbuildable as a condition. Not measured in the study, so not built.
+
+⚠️ **No `_enabled` guard, deliberately**, unlike every `worn_*` predicate — the clock is initialised
+in every build. A test fails if a guard appears, because one would silently break every game that
+did not opt into some unrelated system.
+
+**Applied.** `v2.py` (two branches), `apps/game_generation/tests/test_time_of_day.py` (new, 11
+tests), `references/engine.md` §39 (appended at the end so no existing citation moves),
+`references/the-phone.md` P4.
+
+**⚠️ Found while checking my own citations, and NOT fixed here — the skill's `file:line` discipline
+has drifted wholesale.** My two inserts into `v2.py` moved every downstream line, so I went to
+correct the citations I had invalidated and measured the baseline first, **at HEAD, before my
+change**. Of the citations that can be checked mechanically — the ones written as
+`v2.py:NNNN   <the actual code>`, which carry their own expected content — **0 of 25 match.**
+`engine.md` §20 places the `npc_at_location` branch at `v2.py:4131-4145`; at HEAD it is at **4216**,
+85 lines out. This is pre-existing and systemic: the engine has grown and roughly 600 citations
+across the skill were never re-anchored. **A blanket offset would not fix it** — the drift differs
+per citation — so nothing was mass-edited. Two things were done: every citation written *in this
+session* was individually verified against live source, and the single citation my own insert
+invalidated (`worn_exposure`'s lock text, `:7900` → `:7922`) was corrected. The rest is surfaced for
+LO as its own piece of work, because the fix is an instrument — a checker that re-anchors a citation
+by searching for its content — and not a hand pass over 600 numbers.
+
+---
+
+## 2026-08-29 — the phone: the engine had eight app types and the skill had no manual
+
+**Why.** LO picked the phone off the open list. `DOCTRINE_GAPS.md` Tier 3 row 12 has named it since
+the inventory opened, and a grep of the whole skill for `phone` returned four incidental hits — the
+gap row, an economy example listing "her phone" as a bill, and two `engine.md` table rows.
+
+**Method.** 107 questions written and frozen **before** any measurement
+(`~/Documents/Phone_System_Study_20260829/questions.md`), including four questions refused in advance
+— chief among them *"does having a phone predict a better game"*, which is the exact shape that
+produced two withdrawn findings in the sex-loop study. Then answered against 27 shipped sandbox
+games (22.5M words of extracted passage text) and 22,622 harvested player comments, 622 of which
+mention the phone.
+
+**⚠️ Corpus repair, recorded and deliberately NOT acted on.** Two corpus games store passages in the
+old Twine 1 `<div tiddler=>` store-area rather than `<tw-passagedata>`, and every earlier extraction
+here read only the second. Adding that parser recovers **`college-daze` — 9,221 passages, 3.56M
+words, the second-largest game in the corpus and its second-heaviest phone user — and
+`free-cities`**, taking the corpus from the **25** every `gates.py` header cites to **27 of 28**.
+Only `confined-and-horny` still yields nothing. Every existing figure in `gates.py` was taken on the
+25 and is internally consistent with itself; restating any of them would move verdicts, which was
+out of scope. **No line of `gates.py` changed.** The next study extracts with both parsers.
+
+**Headline: the gap was never the engine.** The engine has shipped eight phone app types since doc
+45 (`v2.py:2458-2465`). Measured across all thirty games in `games/`:
+
+- **`post_actions` authored zero times** — the field's most common phone porn mechanic, in 20 of 27
+  games, and we have never built it once.
+- **`scheduleEffects` authored zero times.**
+- Three of the five games with a phone give it **one app**.
+- `under_one_roof` ships a social feed with **34 posts she cannot post to**.
+- `mothers_place` declared `phone ON (8_phone.toml)` in `0_systems_spec.toml:7` and shipped with **no
+  such file and no `[phone]` block**. Nothing noticed.
+
+**What was measured, and became P1–P11.**
+
+- **The phone is a communication and self-display device, never a utility hub.** Messaging 24/27,
+  social feed 20, contacts 18, camming 17, dating **7**, bank **7**, jobs **4**, shop **2**, map
+  **0**. ⚠️ This indicts two of our own eight app types: an author reading the type list will build
+  the 4-of-27 thing before the 24-of-27 thing.
+- **A message bubble is 11–16 words**, pooled over **369 real bubbles** in three games and two
+  languages (p90 ≈ 22). A rate over word count, so it survives the HTML/TOML seam. Against this
+  skill's 35–40-word beat everywhere else, **the phone is its own register.**
+- **The feed that works reads her reputation back to her** — `course-of-temptation` generates feed
+  posts from meters rather than authoring one per beat.
+- **A daily thread costs ~1,300 words per NPC** (`become-someone`: 8 NPCs, 115 passages, 10,557
+  words), and needs an explicit null branch for a day when nothing happened.
+- **Battery is the one mechanic players openly hate** — 17/27 games ship one; the cleanest verdict in
+  the 622 comments is *"everyone hates it"* at **24 likes / 0 dislikes**.
+- **A locked app must name what unlocks it.** The two loudest phone threads in the corpus are the
+  same question at 50 and 31 net, and a PIN-locked phone produced **seven** separate high-scoring
+  comments begging for the code.
+
+**The wiring, asked as a follow-up: how does a chat connect to the world?** Exactly **1 of 27** games
+stores a real appointment; 26 talk about plans and keep none. The phone gates on **meters (22/27)**
+and **the hour (20/27)** — state the map and the hubs already read. The one real system,
+`course-of-temptation`'s `$planneddate`, is a **shared book with eleven writers and six readers**,
+and the phone is only one door into it. ⚠️ **We cannot express the hour at all**: there is no
+`time_of_day` condition type, and a conversation's trigger is a **latch** (`v2.py:2202`), so a
+condition means *the first moment this becomes true*, never *only while it is true*. ⚠️ And
+`game_state.scheduled` is written, ticked and fired (`v2.py:6027`, `:5672-5683`, `:6041`) and
+**rendered nowhere** — a scheduled plan the player cannot see is one they will not turn up for.
+
+**⚠️ Two of my own numbers were withdrawn mid-study.**
+
+- A first pass called **four** games appointment-keepers. Reading them: `degrees-of-lewdity`'s
+  `$harper_appointments` counts sessions **already had**, and `patriarch`'s `$haleydateset2` and
+  `sluttown-usa`'s `$katClockMeeting` are **unlock booleans**. The true figure is **1**.
+- Hour-windows read **15/27** until the variable pattern was allowed to match dotted names
+  (`$time.hour`), which moved it to **20/27** and `family-ties` from zero to 23. A regex that cannot
+  see a variable form is not evidence of absence.
+
+**Applied.**
+
+- **NEW `references/the-phone.md`** — P1 whether this game has a phone at all (a refusal question) ·
+  P2 build the channel never the hub · P3 a message is fifteen words · P4 the phone reads the world
+  and keeps no state of its own · P5 everything on the phone costs something · P6 if she can be
+  looked at she has to be able to post · P7 a locked app names what unlocks it · P8 one thing at a
+  time · P9 a repeatable thread is built out of today · P10 a plan the player cannot see is worse
+  than no plan · P11 never a battery. Worked TOML for P3, P6, P9 and P10.
+- **`SKILL.md`** — one paragraph after the world-files list marking `the-phone.md` the single
+  optional world file, read only if the game declares the system, and pointing at P1 as a refusal.
+- **`DOCTRINE_GAPS.md`** — row 12 marked **PHONE ADDRESSED, CUSTOMIZATION STILL OPEN** (the row
+  covered both; only half is done), plus a Log row.
+
+**⚠️ Nothing gated.** No new gate, lint, constant or threshold; no verdict can have moved. Two
+zero-failure candidates are named at the foot of `the-phone.md` and left for LO: *the phone is not a
+decoration* (`under_one_roof` red today) and *a specced system exists* (`mothers_place` red today,
+and not phone-specific). **P3's fifteen words must not become a gate** — a threshold there fails a
+correct three-word message, per the R4 / study-6 / P0 / duplicate-wardrobe precedent.
+
+**⚠️ P11 is the one rule where corpus prevalence and the player verdict disagree**, and the verdict
+wins. Prevalence measures what authors built, not what worked.
+
+**Verified.** Every engine citation in the new file re-read against live source with `grep -n` and
+`sed -n`; three line numbers were wrong on first write (`v2.py:2779` for the post gate,
+`v2.py:2728`/`:2730` for the locked and spent rungs, `template_import.py:349` for `cooldown`) and
+were corrected before this entry. The "nothing on our phone costs time" claim is a negative and was
+checked as one: the only occurrence of `advanceTime` or `passTime` in the whole phone block
+(`v2.py:2180-3140`) is a comment at `:3096`. The P3 and P9 TOML examples are the shapes
+`under_one_roof` already ships, read out of its own phase files.
+
+---
+
 ## 2026-08-29 — the sex-loop study: five questions, four nulls, and the one that survived was found by accident
 
 **Why.** The last Tier 3 item that is the product itself. The skill has a lint reporting which

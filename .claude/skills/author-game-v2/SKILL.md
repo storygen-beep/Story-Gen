@@ -159,6 +159,11 @@ once they click) · **`the-first-hour.md` (the opening, the first meeting with e
 the first visit to each place)** · **`the-clock.md` (the time the game promises and the time the
 engine keeps)**.
 
+**One optional file, read only if the game declares the system:** `the-phone.md` (whether this game
+needs a phone, what goes on it, and how it is wired to the world). **Its P1 is a refusal question —
+most games should not have one**, and a thinly-filled phone is worse than none. Read it before
+writing `[phone]`, not after.
+
 **Read `the-first-hour.md` before you author a single canvas.** It is the only one of these that
 governs content the player meets in a fixed order, and it is the one v2 shipped without: all six v2
 games put their entire cast in a room with no introduction, against four v1 games that did not.

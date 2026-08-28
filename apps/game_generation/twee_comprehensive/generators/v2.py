@@ -4117,6 +4117,21 @@ setup.triggerConditionsSatisfied = function(conditions) {{
                 continue;
             }}
 
+            // time_of_day: is the clock inside an hour window right now. The
+            // field's second most common phone gate (20 of 27 corpus games) and
+            // the only one we could not express — see references/the-phone.md P4.
+            // Delegates to setup.isCurrentTimeSlot so the overnight wrap
+            // (22:00-06:00) behaves exactly as it does for NPC schedules; there
+            // is no second implementation of the wrap to drift from the first.
+            // Unlike a schedule, this is re-evaluated on every read, so it is a
+            // window and not a latch — an omitted end_time means one hour.
+            if (type === 'time_of_day') {{
+                satisfied = setup.isCurrentTimeSlot(it.start_time || '00:00',
+                                                    it.end_time || null);
+                results.push(satisfied);
+                continue;
+            }}
+
             if (type === 'worn_beauty' || type === 'worn_corruption') {{
                 if (!setup.clothing_enabled) {{ results.push(false); continue; }}
                 var wornOp = it.operator || 'gte';
@@ -7896,6 +7911,13 @@ setup.formatCanvasConditions = function(conditions) {{
             }} else {{
                 parts.push(nalAbsent ? (nalLocName + " must be empty") : (nalLocName + " must be occupied"));
             }}
+        }}
+        else if (item.type === "time_of_day") {{
+            var todStart = item.start_time || "00:00";
+            var todEnd = item.end_time || "";
+            parts.push(todEnd
+                ? ("Only between " + todStart + " and " + todEnd)
+                : ("Only at " + todStart));
         }}
         else if (item.type === "worn_exposure") {{
             var weOp = item.operator || "gte";

@@ -522,7 +522,7 @@ enforces it. All three of these families satisfy it, and the second is the one a
 > **`worn_exposure` is the only one of these that reads an EMPTY slot**, and it is the newest
 > (2026-08-28). A derived 0/1/2 — 0 covered, 1 underwear-level, 2 bare — from
 > `setup.getWornExposure` (`v2.py:1608`); the predicate is at `v2.py:4111` and its lock text at
-> `:7900`; a garment declares its own `exposure` via `template_import.py:2525`. ⚠️ **The other two
+> `:7922`; a garment declares its own `exposure` via `template_import.py:2525`. ⚠️ **The other two
 > aggregates cannot see nakedness at all**: `worn_corruption` and `worn_beauty` are both
 > `getWornStatMax` (`v2.py:1578-1579`), which skips a slot with nothing in it, so naked and plainly
 > dressed return the same value. Use `worn_exposure` for how much is showing and the older pair for
@@ -2154,3 +2154,53 @@ one game reading `0.1` on the portal while printing **`0.1.2`** to the player.
 
 `the-release.md` § Shipping the build, step 4.
 
+
+---
+
+## 39. `time_of_day` — the hour window, and the only predicate that is a window rather than a latch
+
+```toml
+{ type = "time_of_day", start_time = "22:00", end_time = "06:00" }   # overnight, wraps midnight
+{ type = "time_of_day", start_time = "11:00", end_time = "20:00" }   # ordinary daytime window
+{ type = "time_of_day", start_time = "18:00" }                        # no end ⇒ exactly one hour
+```
+
+Shipped 2026-08-29. The runtime branch is at `v2.py:4128`; its lock text at `:7915`. `HH:MM`,
+24-hour, **end exclusive** — `11:00`–`20:00` is false at 20:00 exactly.
+
+**It delegates.** The branch is four lines and calls `setup.isCurrentTimeSlot`
+(`v2.py:3856`) — the same function NPC and location schedules have used since the schedule
+primitive shipped. It does not parse hours of its own, so **the overnight wrap has exactly one
+implementation** and there is no second copy to drift from the first. That wrap is the trap here: a
+hand-rolled `current >= start && current < end` passes every daytime case and fails every window
+that crosses midnight, silently.
+
+**Why it exists.** Measured across 27 shipped sandboxes
+(`~/Documents/Phone_System_Study_20260829/`), gating content on an hour window is the field's
+**second most common mechanism — 20 of 27 games** — behind only a meter gate at 22, and it was the
+one item in that list this engine could not express. Locations and NPCs reached the clock through
+their `[[schedules]]` rows; a canvas trigger and a phone conversation had no route to it at all, so
+"only in the evening" had to be faked by setting a flag from something that does touch the clock.
+`the-phone.md` P4.
+
+⚠️ **It is a window, not a latch, and that distinction is the whole reason to prefer it over a
+flag.** The predicate is re-evaluated on every read, so it is true only while the clock is inside
+the range. **A conversation's delivery, however, still latches** —
+`ps.triggered_conversations[conv.id]` (`v2.py:2202`) is written the first time the trigger passes
+and never re-read. So on a phone conversation this predicate means *"deliver this the first time she
+is awake at 2am"*, not *"this thread only exists at 2am"*. On a canvas trigger, which is evaluated
+fresh, it means the second. **Know which surface you are on.**
+
+⚠️ **No weekday form.** `[[schedules]]` rows carry a `weekdays` list; this predicate does not. "Only
+on Saturday" is still unbuildable as a condition. Not measured, so not built.
+
+⚠️ **Unlike every `worn_*` predicate it carries no `_enabled` guard**, and must not grow one — the
+clock is initialised in every build (`time_state` in `$game_state`), including builds with no
+schedules, no phone and no clothing.
+
+**Verified live in a built game, not just read.** Ten cases through a real browser against
+`late_shifts` rebuilt with an overnight condition on a phone conversation: 23:00 and 02:00 inside
+`22:00`–`06:00` both true; 21:59, 06:00 and 12:00 false; an ordinary `11:00`–`20:00` window true at
+13:00 and false at 20:00 and 10:59; a bare `18:00` true at 18:30 and false at 19:30. Lock text
+rendered as `Required: Only between 22:00 and 06:00`. Tests:
+`apps/game_generation/tests/test_time_of_day.py`, 11 of 11.
