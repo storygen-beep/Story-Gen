@@ -539,6 +539,112 @@ Gate 19 puts the ceiling at 14 — deliberately generous, calibrated across two 
 treat a pass as "not drifting" rather than as "matches the field." The constant in `gates.py`
 carries the full caveat.
 
+## How far is far enough
+
+`Sweeping backwards` above tells an author to replace the hedged clause with the specific one, and
+it is right. **It has never said where to stop, and the measurement says nobody stops.**
+
+Measured 2026-08-28, our built games against the field's built games, read identically — 28 of ours
+against 25 of theirs. Both sides from `output/index.html`, because the two do not compare on any
+other basis (see the ⚠️ below):
+
+| per 1,000 words | field | ours |
+|---|---|---|
+| `-ly` adverbs | 8.9 – 22.6 (p50 13.4) | **0.9 – 5.4 (p50 3.0)** |
+| hedge words — *just, almost, somewhat, seems, sort of* | 5.4 – 22.4 (p50 12.0) | **0.4 – 4.0 (p50 1.1)** |
+
+**Twenty-eight of twenty-eight of our builds sit below the field's floor on both.** Not most. Every
+game this project has ever produced, under either skill. There is no game in the genre that writes
+as bare as our barest, and no game of ours that reaches the genre's leanest.
+
+**What that costs, in a reader's words.** From the thread that prompted this study: the prose *"puts
+emphasis in the wrong places, needless details that are never mentioned again"*, so that it becomes
+*"impossible for the author to foreshadow or draw attention."* That is what the numbers are
+describing. Modifiers and hedges are the machinery English uses to say **this one matters and that
+one does not**. Strip them everywhere and every noun on the screen arrives at the same weight — the
+plot-critical object and the set dressing look identical, and the reader cannot sort them. A screen
+where nothing is unimportant has nothing important on it either.
+
+**The stopping point is not a number, it is a test.** Read the beat and ask which sentence you were
+supposed to carry out of it. If every sentence is equally loaded, you have swept past the rule
+rather than applied it.
+
+**Over-stripped**, real shape, from one of our own games:
+
+> The counter is at the front and the desk is at the back and there is a gate in the counter you
+> have to lift to get between them. The book goes on the desk. The drawer is under the till side.
+
+Three sentences, three objects, identical weight. Nothing tells the player that only one of them
+will matter tomorrow.
+
+**Weighted.** Same facts, same length, one thing marked down so another can carry:
+
+> The counter is at the front and the desk is at the back, with a gate between them you have to
+> lift every single time. The book goes on the desk, which barely matters. The drawer under the
+> till side is the one he mentioned twice.
+
+⚠️ **This is not permission to pad.** Padding was tested on the same corpus and refused: we run
+roughly half the field's typo rate, a quarter of its duplicated-word rate, and we repeat phrasing
+*less* than the field does. The instruction is to restore contrast, not volume. A beat that gains
+words and keeps every sentence at the same weight has got worse, not better.
+
+⚠️ **Why both sides are read from built HTML, and what it costs.** Our authored TOML holds only beat
+prose; a built game also carries labels, sidebar, quest cards and room lists — thousands of words
+with almost no modifiers in them. Reading our TOML against the field's HTML compares two different
+things and inflates every rate on our side by **1.1x to 2.4x**, measured across four games. It is
+the same seam that forced the retraction recorded under gate 43, hit a third time. **The cost: there
+is no clean field baseline for prose alone**, because the corpus exists only as built pages. So the
+figures above are honest for whole games and there is no per-beat number to write down — which is
+exactly why the stopping point is a test and the model beats below are the doctrine.
+
+⚠️ **One finding was withdrawn on this same test and is recorded so it is not re-proposed.** Article
+density (*the / a / an*) was measured, reported as our largest and most invisible habit at 101 per
+1,000 against a field maximum of 86, and **it was an artifact of the seam**. Read on one basis we
+sit at **47.9 against a field median of 58.1** — below the middle of the genre, with 2 of 28 builds
+outside the range. There is no article finding.
+
+---
+
+## The model beats
+
+The set that did not exist. Before this, the whole skill held **419 words of worked prose example**
+across 185,575 words of instruction — 0.23% — so an author had almost nothing to copy and modelled
+the explanation instead. That is the fourth instance of `SKILL.md`'s *"an example outranks every
+rule beside it"*, and the first where the failure was an **absence**.
+
+One per kind in the table above. Each is correct as written: no before, no diagnosis, nothing to
+un-learn. Second person, the genre standard.
+
+**Room / hub card** — the field writes 30 words, nobody speaking, fewer than half carrying a picture:
+
+> The laundry runs hot even in winter and it never quite loses the smell of other people's sheets.
+> Two machines work. The third has been out since spring and nobody has come about it.
+
+**Reveal beat** — 37 words in the field, and 58% carry a clip:
+
+> She gets the shirt off over her head, slowly enough that it is clearly for you, and underneath
+> she is exactly as good as you had spent the week trying not to picture. Then she waits, arms at
+> her sides, and lets you look.
+
+**Talk screen** — the genre's second largest content kind, 55 words and 65% of it spoken:
+
+> "You're early." She doesn't look up from the till. "That's twice this week."
+>
+> You could tell her the truth, which is that the flat is unbearable before dark. You say nothing
+> instead, and she lets it go, which is somehow worse than if she had pushed.
+
+**Explicit beat, repeatable surface** — crude is the default here, and the beat stays on the body
+for its whole length:
+
+> He bends you over the arm of the sofa and works his cock into your cunt without much ceremony,
+> and it is good in the dumb, immediate way that has nothing to do with whether you like him. You
+> hear the noise you make. You do not stop making it.
+
+Read the four together and the point is in what they are not: not one dash between them, and the
+soft words are load-bearing. *never quite · slowly · clearly · exactly · somehow · without much
+ceremony.* Take those out and every sentence flattens to the same volume, which is the defect this
+section exists to stop.
+
 ## Dashes stay rare
 
 **Words to watch:** `—` and `–`, and the spaced `--` that becomes one.
@@ -761,6 +867,24 @@ been applied to **shapes** — a floor plan, a set of thresholds — and nobody 
 > **When you write a worked example, you are writing doctrine.** An example is the only part of a
 > reference file that gets copied verbatim into a game. Anything you would not want in every game
 > this skill ever produces does not belong in one.
+
+**The fourth instance is an ABSENCE, and it is the one that got a game read on a forum.** The first
+three were things this skill *showed*: a locale-locked vocabulary, a map skeleton, a set of
+thresholds. Counted 2026-08-28, the whole of `author-game-v2` held **419 words of worked prose
+example, in 13 blocks, across 185,575 words** — 0.23%. The examples were not teaching a bad habit;
+measured, they sit inside the field on every marker. **There were almost none of them.** So an
+author reads a hundred and eighty-five thousand words of explanation and models *that*, and with no
+worked beat anchoring anyone the games scatter: our dash rates run **1.6 to 137 across builds from
+one skill**. An example outranks every rule beside it — and **nothing outranks an example that was
+never written.** `## The model beats` above is the answer, and it is the first thing to check when
+a habit shows up in every game and no rule anywhere asked for it.
+
+> ⚠️ **The count that produced this was wrong twice before it was right, and the failures are the
+> lesson.** A line-level pass over blockquotes reported 4,104 words of "example" across 11 files,
+> every one off-field — because a wrapped continuation line of an explanation does not begin with a
+> warning marker and reads as narrative. A whole **paragraph** is the unit, and it counts only if
+> all of it reads as narrative. The wrong count had a fix attached to it (*rewrite the examples*)
+> that would have edited prose which was never the problem.
 
 ## Second person is the genre standard
 

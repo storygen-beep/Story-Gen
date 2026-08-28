@@ -129,6 +129,19 @@ whether the name is doing work, or delete it.
 
 ---
 
+### The worked opening — cold open, naming nobody
+
+The shape above, written out. Thirty-eight words: the situation, the pressure, and the thing to do
+about it. No name, because nothing has earned one yet, and the cast arrives later through F5.
+
+> The room came furnished, which means somebody else chose the curtains and then left in a hurry.
+> Rent is due in nine days. There is a card on the fridge for a bar that is hiring, and the
+> handwriting on it is not yours.
+
+The last sentence is the hand-over: it is a door, and the player can walk at it on the next click.
+Note what the beat spends its softeners on — *which means*, *in a hurry*, *not yours* — and see
+`register.md` **How far is far enough** for why stripping them flattens the screen.
+
 ## F2 · Boot and capstone are two canvases
 
 Our own `starting_canvas` sizes, measured across ten built games:

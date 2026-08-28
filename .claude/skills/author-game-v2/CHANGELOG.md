@@ -5,6 +5,88 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-28 — the register has no stopping point, and the skill had 419 words of example to steer by
+
+**Why.** Six of nineteen posts on F95zone 312420 called `vesper`'s prose machine-made. Padding was
+tested and refused earlier today. Broken English was tested and refused too: we run roughly **half
+the field's malformed-word rate and a quarter of its duplicated-word rate**, and burstiness — the
+most-cited machine-text signal — sits inside the field range. What survives measurement is a
+register that has been swept in one direction with nothing telling anyone where to stop.
+
+**⚠️ Read this before trusting any number in this entry: the study was wrong twice, and both
+corrections are the useful part.**
+
+1. **The basis.** Every figure first reported compared the field's **built HTML** against our
+   **authored TOML**. A build carries labels, sidebar, quest cards and room lists — thousands of
+   words with almost no modifiers — so reading our TOML alone strips a large low-rate denominator
+   and inflates every rate on our side by **1.1x to 2.4x**, measured across four games. Redone with
+   both sides read from `output/index.html`, 28 of ours against 25 of theirs.
+2. **The extraction.** A line-level pass over blockquotes reported "4,104 words of example prose
+   across 11 files, every file off-field." A wrapped continuation line of an explanation does not
+   begin with a warning marker and reads as narrative, so the count was mostly my own prose. At
+   **block** level, whole-paragraph test: **419 words in 13 blocks.**
+
+**⚠️ A headline was WITHDRAWN by correction 1.** Article density was reported as our largest and
+most invisible habit — 101/1k against a field maximum of 86, "11 of 11 games outside". Read on one
+basis we sit at **47.9 against a field median of 58.1**, *below* the middle of the genre, 2 of 28
+builds outside the range. **There is no article finding.** It is recorded in `register.md` so it is
+not re-proposed.
+
+**What survived, on the matched basis.**
+
+| per 1,000 words | field | ours | outside |
+|---|---|---|---|
+| `-ly` adverbs | 8.9 – 22.6 (p50 13.4) | 0.9 – 5.4 (p50 3.0) | **28 of 28 builds** |
+| hedge words | 5.4 – 22.4 (p50 12.0) | 0.4 – 4.0 (p50 1.1) | **28 of 28 builds** |
+| dashes /10k | 0 – 35.0 (p50 1.0) | 1.6 – 137.2 (p50 40.8) | 19 of 28 builds |
+
+Every game this project has produced, under either skill, writes below the genre's floor on both
+modifier markers. **`Sweeping backwards` says to replace the hedged clause with the specific one and
+names no floor** — that is the cause, and it is a rule doing exactly what it says.
+
+**What changed.**
+
+- **`references/register.md` → `## How far is far enough`** — the stopping point the strip rule
+  never had. Carries the table, the reader's own words for what it costs (*"impossible for the
+  author to foreshadow or draw attention"*), the test that replaces a number (*read the beat and ask
+  which sentence you were supposed to carry out of it*), a real over-stripped/weighted pair, the
+  ⚠️ that this is **not** permission to pad, the seam warning, and the withdrawn article finding.
+- **`references/register.md` → `## The model beats`** — four worked beats, one per kind in the
+  file's own table: room card, reveal beat, talk screen, explicit repeatable. Correct as written,
+  no before/after to un-learn.
+- **`references/register.md` → `The examples are the register`** gains the **fourth instance**, and
+  it is a different shape from the first three: those were things the skill *showed*, this is what
+  it **failed to show**. 419 words of example against 185,575 words of instruction is 0.23%, so
+  authors model the explanation — and with nothing anchoring them the games scatter, dash rates
+  running **1.6 to 137 across builds from one skill**.
+- **`references/the-first-hour.md`** — the worked cold open, 38 words, naming nobody, ending on a
+  door.
+
+**Verified.** The new example prose was measured before it shipped, which is the whole point of the
+arc: **264 words, 0 dashes, `-ly` adverbs 18.9/1k and hedges 11.4/1k — both inside the field range**
+(8.9–22.6 and 5.4–22.4) against our games' 0.9–5.4 and 0.4–4.0. `--selfcheck` green both directions,
+44/44 and 27/27. **0 verdicts moved across all 22 scorable games**, which is trivially guaranteed:
+`gates.py` has a zero-line diff. No game touched.
+
+**Not done, and named rather than quietly skipped.**
+
+- **No gate, no reporting, no constant.** A draft added article and adverb rates under G43 quoted
+  against the field. It was **written, tested and reverted** when the basis test showed no marker
+  survives the change of basis — quoting a field figure beside a TOML-derived rate is the seam error
+  the gate's own header exists to warn about. There is no per-beat field number to write down,
+  because the corpus exists only as built pages.
+- **`back_home` FAILS G43 at 79.4/10k** — 284 dashes in 35,755 words, more than double the ceiling.
+  Recorded as a number that has to come down. LO's call: name it, do not fix it.
+- **⚠️ G43's own calibration is open, at LO's instruction.** The gate reads authored TOML and judges
+  it against a ceiling derived from the field's built HTML. `gates.py:6084` defends this with one
+  game — *"27.2 HTML, 25.4 here"*, a 7% move. Across four games the same measurement moves **1.11x
+  to 2.43x**. It errs strict, so nothing has been wrongly passed, and it is **held, not fixed**.
+
+Scripts, data and both superseded measurements: `~/Documents/Prose_Machine_Sound_Study_20260828/`
+and `~/Documents/Prose_Padding_Study_20260828/`.
+
+---
+
 ## 2026-08-28 — padding measured and REFUSED: our prose is not fat, it is stripped, and 13 of 14 games sit below the field's floor
 
 **Why.** Players on F95zone thread 312420 read `vesper` v0.2.0 and said the prose reads as
