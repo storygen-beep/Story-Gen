@@ -161,7 +161,8 @@ signature of doctrine living in the wrong place:
        --output games/<slug>/output --gen-version v2
    ```
 3. **Archived** to `games/<slug>/releases/v<version>.html` — the build itself, kept.
-4. **`version` set** on the portal entry **and matching `[project] version`** in the TOML.
+4. **`version` set** on the portal entry **and matching `[project] version`** in the TOML —
+   the field, the sidebar footer it renders and its four `file:line`s are `engine.md` §38.
 5. **`dev: true` dropped, in the same commit** — that line is what moves the game into the main grid.
 6. **`v2_state.json` promises reconciled** — paid or cut, per *Named but never paid* above.
 
@@ -176,7 +177,7 @@ They drift, and nothing compared them until the check existed:
 | | what it is | who reads it |
 |---|---|---|
 | portal `version` | what the storefronts are told | gamcore / mopoga / itch |
-| `[project] version` | the sidebar footer | **the player, in the game** |
+| `[project] version` | the sidebar footer (`engine.md` §38) | **the player, in the game** |
 | `releases/v<n>.html` | the build that shipped | you, when a bug report names a version |
 
 Measured 2026-08-28: `forty_miles` read `0.1` / `0.1.2` / `{0.1, 0.1.1, 0.1.2}` — the portal two
@@ -198,8 +199,8 @@ skill.
 > machine runs do not.
 
 ⚠️ **What the check reads, and why it is not the obvious thing.** `[IMAGE MISSING]` and
-`[… POOL MISSING]` placeholders are emitted **only under `--debug`** (`v2.py:12403`, `:14753`,
-`:14903`). A clean build renders **silent gaps**, so grepping the HTML for those markers passes a
+`[… POOL MISSING]` placeholders are emitted **only under `--debug`** (`v2.py:12404`, `:14753`,
+`:14906`). A clean build renders **silent gaps**, so grepping the HTML for those markers passes a
 game with 183 missing files. The check reads the build's own flags-init map (`debug_mode`,
 `dev_mode_enabled`) and the always-generated `MissingMediaPage` count instead.
 

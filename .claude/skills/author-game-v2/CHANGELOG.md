@@ -5,6 +5,195 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-28 — a gate was deleted and seven surfaces went on teaching it, including both templates
+
+**Why.** LO asked for an audit of everything the recent arcs shipped — *"go one by one confirm and
+verify each and everything"* — and then said to fix what it found. It ran the checks rather than
+reading the changelog: `--selfcheck`, `--release` on real builds, `gates.py mrs_vance`, `grep -n`
+on every engine citation, `tomllib` on the templates.
+
+**What passed, verified running and left alone.** Study 7 (`templates/want.md` §1, `the-want.md:22`,
+`state.md:43-51`, the gate printing `3 start-choice flag(s) … read 5x` on `mrs_vance`) · E1 (R3b
+`:254`, R3c `:312`, `week_income` and `obligation_moves` in `state.md`, both lints firing) · Study 8
+(R1b, R1c, the pool note, the gate green on `mrs_vance` at `truck_bought (2600) opens 5` and **red on
+`the_season` at `has_boots (20) opens 0`**, exactly as recorded) · `--release` (vesper 5/6 with the
+archive note unjudged; `the_inheritance` **115 missing, `--dev --debug`, filed as published**, which
+confirms the number SKILL.md quotes) · `engine.md` §38's `template_import.py` citations, exact.
+
+**The finding, and it is one cause wearing five faces:** *a check changed and the places that
+describe it did not.* `--selfcheck`, shipped the day before, is **one-directional** — script →
+SKILL.md — so it is blind to a stale row, a row pointing at the wrong section, a reference file's own
+checks table, and every template.
+
+### 1 · G35 was deleted on 2026-08-26 and seven surfaces still taught it
+
+`the anchor introduces itself` required a first-visit canvas at the anchor. It is **1 of 26 field
+games** (DoL, 258 branches; **eighteen have none**), and it *"sent one author to write nine arrivals
+that were reverted the next day"* — `gates.py:6233`. The instrument was cleaned up properly:
+`lint_place_function` only **reports** a first visit and never asks for one. The doctrine was
+rewritten to say the opposite: `the-first-hour.md:536`, *"The first-visit canvas is a MINORITY
+device — do not reach for it first."* Everything else kept teaching the retired device.
+
+```
+templates/board.toml:249       THE ROOT. description = "<what she sees; what it smells of; who
+                               is usually here>" — sensory scene-set, never the FUNCTION, which
+                               IS the measured failure. Rewritten function-first. Neither
+                               the-board.md nor the-map.md teaches this, so that placeholder was
+                               the only prescription an author ever saw.
+templates/first-hour.toml      section C rewritten: the description is the surface; the canvas is
+                               demoted to the minority case, with the 1-of-26 count, the deleted
+                               gate, and the reverted arrivals. Its paragraph placeholder said
+                               "what kind of place this is" — that belongs in the description now,
+                               so the block asks for the thing that is true ONCE.
+SKILL.md                       the gate row deleted; `named before met` no longer claims a places
+                               half; `the place says what it is` given its own description.
+references/the-map.md          R4's tail prescribed the canvas and cited "the gate that checks it".
+references/the-first-hour.md   contents line :38 and the cheat-sheet bullet still carried the old
+                               title against a section heading that changed at :500.
+scripts/gates.py               `named before met`'s docstring still described a PLACES half the
+                               function has not had since 2026-08-26.
+DOCTRINE_GAPS.md               item 6 listed the deleted gate among what closed onboarding.
+```
+
+⚠️ **This is the "a template is copied harder than a reference" rule catching us with our own
+hands.** SKILL.md has carried that operating rule since 2026-08-24; `templates/board.toml:249` is a
+fourth instance of it, and the worst kind, because the placeholder was not a bad example — it was a
+*correct-sounding* one that asked for everything except the thing F9 exists to get.
+
+### 2 · A row shipped the previous day pointed at the wrong section
+
+`the wardrobe is read` → `engine.md` **§23**, which is the guidance page. The wardrobe is **§17**
+(`:473`, gate named at `:515`). Mine, from the index arc, and logged rather than quietly patched.
+
+### 3 · `the-economy.md`'s own "What is checked" table was missing three of its checks
+
+Gate `what money buys opens a door` (R1b names it at `:116`; the table did not) · lint `what a paid
+repeatable leaves behind` (R1c said *"This is a lint"* and never named it — it does now) · lint
+`money gates content, or only prices it`, which appeared **nowhere** in the file that owns money.
+E1's entry says *"the checks table gains the ratio lint"*, so the table is maintained by convention;
+Study 8 skipped it and nothing noticed.
+
+### 4 · Three engine citations were off, in four files each
+
+| written | actual | what is really on the written line |
+|---|---|---|
+| `v2.py:216` | **217** | a blank line |
+| `v2.py:12403` | **12404** | the docstring's closing `"""` |
+| `v2.py:14903` | **14906** | a dict key, `'category'` |
+
+Fixed in `the-release.md`, `gates.py`, and **in this file and `DOCTRINE_GAPS.md` too**: a `file:line`
+is a pointer, not a claim about history, and the record of the correction is this entry. `:14753`,
+`:1077`, `:1081-1082`, `:10332` were exact and were left. So was `template_import.py:1696-1697` /
+`:6391-6392`. ⚠️ **A fourth was found by the verification step, in the block being rewritten** —
+`templates/first-hour.toml` cited `v2.py:4453` for auto-fire; the function is
+`setup.selectAutoFireCanvasForLocation` at **`:4459`**.
+
+### 5 · `engine.md` §38's two ranges under-reached
+
+*"joined with ` · `"* cited `16131-16133`; the join is at **16134**. *"called from `StoryCaption`"*
+cited `16138-16141` and `16139-16141`; the widget is composed at `16139-16142` and the two
+unconditional calls are at **`:16162` and `:16177`** — neither range contained a call site. Split
+into three rows so each claim sits on the lines that show it.
+
+### 6 · `--selfcheck` gains the reverse direction
+
+Documenting five gates fixed the last stale index; this one was a two-day-old **deletion** nobody
+propagated, and no check compared the table to the script in that direction. Every gate name in
+SKILL.md's scoreboard table must still be emitted.
+
+⚠️ **It invents no threshold and it was proved exact before it was written** — scoped to the one
+table whose header row is `| gate |`, it read **45 documented against 44 emitted and named exactly
+the one stale row**, zero noise in either direction. The unscoped version reads 8 false names off
+SKILL.md's other tables; `_documented_gate_names` carries that measurement in its docstring, because
+it is the whole reason for the scoping.
+
+⚠️ **Lints are checked one way only.** They live in a wrapped prose paragraph with no exact
+extraction; gates have a table. A reverse check on prose would fire on how a sentence was broken, and
+a check that fires wrongly is what took R4, study 6's anchoring check and P0 back out.
+
+**Verified.** `--selfcheck` **red before green on the new direction** — `44/45 still checked ·
+documented but NOT emitted: the anchor introduces itself`, exit 1 → `44/44` both ways, exit 0. A
+check whose first run is green has not been tested. **0 verdicts and 0 tallies moved across all 22
+scorable games**, compared as verdict lists; three games differ only on the known nondeterministic
+room named by `sinks >= sources`, `[PASS]` and identical counts on both sides. `ast.parse` clean;
+`mrs_vance` **43/43, 1 n/a**. **All 20 engine citations touched re-read off the live source**, zero
+failures. `templates/board.toml` still fails to parse on the identical statement at the identical
+line (`<tier_1> = 0`, :94 — the edit is below it); `templates/first-hour.toml` **does** parse, before
+and after. No game touched, nothing rebuilt.
+
+**Not done, and named rather than quietly skipped.** Nine of the 44 gate names appear in no reference
+file. Most are argued there under other wording — `meter ceiling` as *"the top of a bar buys
+something"* — so a "every gate must be named in a reference" check would fail correct work, which is
+the error this skill keeps taking rules back out for. The one with no home at all is `prose texture`:
+`register.md:542` argues it thoroughly and calls it *"Gate 43"*, a number the scoreboard never
+prints. Left as an observation.
+
+---
+
+## 2026-08-28 — the index reopened twelve days after it was closed, and now something watches it
+
+**Why.** LO asked whether anything was left on the skill side of the recent arcs. Two things were,
+and checking turned up a third that matters more than either.
+
+⚠️ **A correction to what was reported in chat before this was measured.** I said **three** lints were
+missing from `SKILL.md`. Against the 27 lint headlines the script prints it is **eight**, and five of
+those predate the recent arcs. Same shape on the gates: I named the two new ones; **five** were
+absent. The job was bigger than I described it, in the same direction.
+
+**The finding underneath both.** `SKILL.md:177` is the index an author reads when a gate fails, and
+it says so in its own words — *"When a gate fails, look it up here. Nine of these used to be
+documented nowhere but in the script's own comments, so an author who hit one had nothing to read."*
+The **2026-08-16 whole-skill audit closed exactly that** (*"nine gates were documented in zero
+reference files, now indexed in `SKILL.md` (23/23 findable)"*). **It reopened within twelve days.**
+Measured: the script emits **44 gates and 27 lint headlines**; the index carried 39 and 19, and named
+**none of the three alternate modes**. Nothing anywhere would have said so.
+
+**Shipped.**
+
+- **`SKILL.md`** — the index brought to **44/44 gates, 27/27 lints, 3/3 modes**. Five gate rows added
+  with the doctrine home for each verified rather than assumed (`the wardrobe is read` →
+  `the-meters.md:195`; `a locked door says why` → `the-surfaces.md:597`; `prose texture` →
+  `register.md:778`, `DASH_CEILING = 35.0`; `the start choice is read` → `the-want.md:121`;
+  `what money buys opens a door` → `the-economy.md:116`), eight lints added to the paragraph below the
+  table, and a modes table beside the **"Gates before ship"** operating rule — which until now named
+  the only command that *cannot* see a build.
+- **`scripts/gates.py`** — **`--selfcheck`**: every gate name and lint headline the script emits must
+  be findable in `SKILL.md`. No game needed, exits non-zero on a gap. ⚠️ It **invents no threshold**,
+  which is why it is safe where R4, study 6's anchoring check and P0 were not — it is a set difference
+  over strings, and the names are read out of the script's own source. Proved exact before it was
+  written: a static regex recovers **44 of 44** gate names with nothing extra in either direction,
+  checked against `--json`. ⚠️ The haystack is **whitespace-collapsed**, because `SKILL.md` is wrapped
+  prose and a lint named across a line break IS documented — without that the check sends the author
+  to reflow a paragraph instead of writing the row that is actually missing. ⚠️ **Comparison is
+  substring against the whole file, never cell-equality:** the index legitimately packs several gate
+  names into one cell (`guidance exists · no chain ends in silence`), and a cell-wise diff reported
+  fourteen false gaps on the first attempt.
+- **`references/engine.md` §38** — `[project] version` / `release_date`, the sidebar footer.
+  ⚠️ **Yesterday's `the-release.md` began requiring this field, and a grep of the entire skill —
+  references, templates, scripts — returned ZERO mentions of it outside those two new lines.** The
+  doctrine was asking for something the skill had never taught. Traced end to end:
+  `template_import.py:1696-1697` → `:6391-6392` → `v2.py:16131-16133` → the `versionFooter` widget
+  (`:16138-16141`), which is **always defined and renders nothing when both keys are empty** because
+  SugarCube throws on an undefined widget call.
+- **`templates/board.toml`** — `version` and `release_date` in `[project]`, with the file's own
+  ⚠️-comment style, saying what the player sees and why it must match the portal entry.
+- **`references/the-release.md`** — step 4 and the three-places table now point at §38 instead of
+  naming a bare field.
+
+⚠️ **A verification step in the plan was itself wrong, and is corrected here rather than dropped.**
+It said to confirm `templates/board.toml` still parses as TOML. **It never has**, and cannot: it is a
+fill-in-the-blanks skeleton whose placeholders (`<tier_1> = 0`) are invalid TOML by design. The real
+check is that the edit does not make it worse — the parse fails on the **same statement**, shifted by
+exactly the ten lines inserted (line 84 → 94, both `<tier_1> = 0`).
+
+**Verified.** `--selfcheck` **went red before it went green** — 16 names on the first run (5 gates,
+8 lints, 3 modes), 0 after; a check whose first run is green has not been tested. Ordinary runs
+untouched: **0 verdicts and 0 tallies moved across all 22 scorable games**, compared as verdict lists
+rather than totals. Five games differ on the two known nondeterministic headline lines (`also ranked:`
+tie ordering, the room named by `sinks >= sources`) — it was six games last session on unchanged code,
+which is the proof it is inherent. `ast.parse` clean. `mrs_vance` stays **43/43, 1 n/a**. No game
+touched.
+
 ## 2026-08-28 — the release boundary: the rule was right, and nothing in the repo was holding it
 
 **Why.** `games/mrs_vance/REVIEW.md` **B2** (MED, layer SKILL + TOOLING). LO's rule — *dev mode and
@@ -38,12 +227,12 @@ stale where it existed at all: `forty_miles` reads portal `0.1` / `[project] 0.1
 
 ⚠️ **A CORRECTION TO B2'S OWN FIX, shipped with the claim rather than dropped.** B2 specified failing
 on *"an `[IMAGE MISSING]` or `[VIDEO POOL MISSING]` marker"* in the built HTML. **Those markers are
-`--debug`-only** — `v2.py:12403` (`if not self.debug: return ''`), `:14753`, `:14903` — so a clean
+`--debug`-only** — `v2.py:12404` (`if not self.debug: return ''`), `:14753`, `:14906` — so a clean
 build renders **silent gaps** and the grep passes it. It would have passed `under_one_roof` with
 **183 missing files**: the proposed instrument measures the presence of *scaffolding*, not the
 absence of *media*. Two instruments survive a clean build and are read instead — the build's own
 flags-init map (`v2.py:1077`, `:1081-1082`), which is its record of the flags it was made with, and
-`MissingMediaPage`, which `v2.py:216` documents as *"always generated, but button only shows in
+`MissingMediaPage`, which `v2.py:217` documents as *"always generated, but button only shows in
 debug mode"*.
 
 **Shipped.**

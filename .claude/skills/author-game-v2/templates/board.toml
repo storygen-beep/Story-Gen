@@ -24,6 +24,16 @@ title          = "<Title>"
 description     = "<one paragraph — the fantasy, not the plot>"
 starting_canvas = "<canvas_id>"
 
+# ⚠️ THE ONLY RELEASE NUMBER A PLAYER CAN READ WITHOUT LEAVING THE GAME. Both
+# optional; together they render "v0.1 · 2026-08-23" in the sidebar footer
+# (v2.py:16131-16141 — the widget is always defined and renders nothing when
+# both are empty). Set `version` in the SAME commit that rebuilds output/, and
+# make it match the portal entry in games-data.js: one shipped game read 0.1 on
+# the portal while printing 0.1.2 to the player. references/the-release.md
+# § Shipping the build · references/engine.md §38.
+version      = "0.1"
+release_date = "<YYYY-MM-DD>"
+
 # ⚠️ THIS SWITCHES THE GUIDANCE PAGE ON. It does not author it.
 # With no [[quest_cards]] the sidebar shows a "Quests" entry leading to a page
 # with a heading and nothing under it — which is exactly what shipped once.
@@ -236,7 +246,15 @@ shuts = "<what she CANNOT do while this is empty>"
 [[locations]]
 id                   = "<location_id>"
 name                 = "<Name>"
-description          = "<what she sees; what it smells of; who is usually here>"
+# ⚠️ NAME THE FUNCTION FIRST, THEN THE FLAVOUR. This is the only surface the
+# player sees on EVERY visit, so it is where the place says what it IS — the
+# kind of business, what people do here, where the money comes from. The
+# measured failure ran long, specific and well written and never said: a game
+# described its anchor, budgeted at 27% of the whole game, as "…and under them
+# forty machines" — forty machines of WHAT. The first thing the human reader
+# asked was what the place is. Length was never the problem.
+# references/the-first-hour.md F9 · lint `the place says what it is`.
+description          = "<What kind of place this is and what happens here — then what she sees, what it smells of, who is usually here>"
 image                = "locations/<location_id>.jpg"
 image_search_queries = ["<query>", "<query>"]     # find-media fills the file
 entry_from           = "<other_location_id>"

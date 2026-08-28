@@ -2091,3 +2091,56 @@ it is rollback-only and slated for deletion.
 ### Where the rule lives
 
 `the-surfaces.md` R5d (a gate asks one of two questions).
+
+---
+
+## 38. `[project] version` / `release_date` — the sidebar footer, and the only number the player can quote
+
+Added 2026-08-28, because `the-release.md` § Shipping the build began requiring this field and a grep
+of the whole skill — references, templates, scripts — found **zero** mentions of it outside that one
+new section. The doctrine was asking for something the skill had never taught.
+
+Both keys are **optional** and live in `[project]`, alongside `id` / `title` / `starting_canvas`:
+
+```toml
+[project]
+version      = "0.1"
+release_date = "2026-08-23"
+```
+
+The path from the TOML to the screen, traced end to end:
+
+| step | where |
+|---|---|
+| read off `[project]`, defaulting to `""` | `template_import.py:1696-1697` |
+| copied onto the project's metadata | `template_import.py:6391-6392` |
+| escaped, then joined with ` · ` | `v2.py:16131-16132`, joined at `:16134` |
+| composed into the `versionFooter` widget | `v2.py:16139-16142` |
+| called unconditionally from `StoryCaption` — both variants | `v2.py:16162` and `:16177` |
+
+Rendered as `v0.1 · 2026-08-23` in a `<div class="sidebar-version">` under the sidebar.
+
+**Three facts that matter and are not guessable:**
+
+1. **The widget is ALWAYS defined, even when both keys are empty** — it just renders nothing. The
+   ternary at `v2.py:16139-16142` emits an empty `<<widget "versionFooter">><</widget>>` rather than
+   nothing at all. Deliberate: SugarCube throws on a call to an undefined widget, and `StoryCaption`
+   calls it unconditionally in both its variants (`v2.py:16162`, `:16177`) — same reason the
+   cheat-page and cast-page widgets are emitted outside their own feature blocks.
+2. **`html.escape` runs on both** (`v2.py:16131-16132`), so a stray quote in a date string cannot
+   break the build.
+3. **There is no build badge.** There is one build, and what a player needs to identify is the
+   RELEASE — it is what their guide's codes are scoped to. The version string does that here and in
+   the cheat page's heading (`v2.py:16134-16137`).
+
+### Why it is not cosmetic
+
+This is the **only** release identifier a player can read without leaving the game, so it is one of
+the three places that claim to say what shipped — with the portal's `version` and the archive under
+`games/<slug>/releases/`. `gates.py --release` checks that all three agree, and the first run found
+one game reading `0.1` on the portal while printing **`0.1.2`** to the player.
+
+### Where the rule lives
+
+`the-release.md` § Shipping the build, step 4.
+

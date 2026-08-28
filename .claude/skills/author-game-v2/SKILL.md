@@ -193,6 +193,7 @@ documented nowhere but in the script's own comments, so an author who hit one ha
 | **the map is a place** | a shape was CHOSEN, and the exterior is the ground rather than a room off the kitchen | `the-map.md` R0 · R3 |
 | guidance exists · no chain ends in silence | the player is told where to go next | `the-voice.md` R2 |
 | money gates something · sinks >= sources · no free uncapped income · a price is on its label · **the obligation is charged** | the economy can say no | `the-economy.md` |
+| **what money buys opens a door** | a thing bought with the currency that survives the night is READ somewhere — money that buys meter points buys nothing | `the-economy.md` R1b |
 | a place is not a catalogue | the backstop on room size — **not** the target | `the-surfaces.md` R2 |
 | **a need shuts a door** | every declared need is read by a condition — a restore that gates nothing is a chore | `the-meters.md` M8–M10 |
 | **the walk-in floor** | a room where she works alone with someone scheduled carries a walk-in | `the-surfaces.md` R3 |
@@ -203,16 +204,19 @@ documented nowhere but in the script's own comments, so an author who hit one ha
 | **the climb is paid for** | every meter a gate reads has a brake on the rungs that raise it | `the-meters.md` M1–M5 |
 | **a day-cap closes** | every flag read `is_false` and cleared in `[engine.daily_tick]` is SET somewhere — a cap with two of its three parts validates and throttles nothing | `the-meters.md` M5 · `engine.md` §28.2 |
 | **a spent day still has a door** | no screen whose every choice is day-capped or priced lacks one choice free of **both** `conditions` and `costs` — a spent cap renders nothing at all, not a greyed line | `the-surfaces.md` R7 · `engine.md` §28.3 |
+| **a locked door says why** | every `show_when_locked` choice carries the reason — a `locked_text`, a threshold or a rejection node. The field hides a refusal or explains it; 2% ship a dead greyed label | `the-surfaces.md` R5c · `engine.md` §15 · §36 |
 | **a meter is read** | every number the game raises is read by a condition, a cost or a quest goal — a raise with no reader is decoration | `the-meters.md` W3 |
+| **the wardrobe is read** | a game declaring `[[clothing]]` reads it somewhere — she can dress and the world does not look | `the-meters.md` W3 · W7 · `engine.md` §17 |
 | **the climb is where you said it is** | the game gates where `board.who_climbs` says it does | `the-meters.md` W1 · `state.md` |
 | **a banded meter is not also a number** | a banded sidebar stat is `hidden` in `[[traits.labels]]` | `the-meters.md` M7 · `engine.md` §30 |
 | **the opening opens a door** | the funnel's last click lands on a clock time when something at that location is actually open | `the-first-hour.md` F3 |
 | **every hub is met first** | no character's portrait is live before a meeting has fired, and one flag never opens the whole cast | `the-first-hour.md` F5 · F8 |
 | **a meeting fires where they are** | a one-shot naming a character carries a `trigger.schedules` window matching that character's own hours — `requires_npc` does not gate the auto-fire path, so without one the introduction plays to an empty room | `the-first-hour.md` F5 · `engine.md` §31 |
-| **the anchor introduces itself** | the room the ledger budgeted largest says what kind of place it is, once, on the first visit | `the-first-hour.md` F9 |
+| **the start choice is read** | a choice the opening asks the player to make is read by real content later — fails only on ZERO, and a game that asks nothing reports n/a, which is not a pass | `the-want.md` §1 · `state.md` |
 | **the label keeps its time** | no button promises a clock time the engine cannot reach, and a stated duration is the real spend | `the-clock.md` C3 · C4 |
 | **the price is in one currency** | every notation on a button, plus the engine's own `currency_symbol`, resolves to ONE currency | `the-economy.md` R7 · `engine.md` §33 |
 | sentence length | the prose has not drifted dense | `register.md` |
+| prose texture | the dash rate against the field — p50 0.99, p90 17.5, ceiling 35.0/10k. The other three texture figures print and are **not** judged | `register.md` — "Dashes stay rare" |
 
 Lints sit below the tally and never move it: dialogue attribution · room-list labels ·
 the browse share · screen shape · the prose names places the map does not have · **the ladder**
@@ -224,12 +228,21 @@ cannot decode is undecodable on a button too; a list to read, never a score) · 
 things one activity can turn into, and how often the activity itself still renders) ·
 **the act nodes** (body words on the thinnest band each act and finish node can render) ·
 **named before met** (every character
-named before the game has introduced them, and every room that never says what it is) ·
+named before the game has introduced them) · **the place says what it is** (every location by how
+much prose happens there against how long its own description is — read whether each one names the
+FUNCTION, which is what replaced the gate that required a first-visit canvas) ·
 **the clock in the prose** (every hour a beat names, with the window it has to survive) ·
 **the time cost is not on the button** (every click that moves the clock an hour or more in
 silence) · **the currency in the prose** (every line that names a currency other than the game's
 own, and whether the rent pages agree with it) · **the price is spelled out** (the form of every
-priced label against the field's 94% symbol).
+priced label against the field's 94% symbol) · **money gates content, or only prices it** (a
+CONDITION on the currency means content money opens; a `costs` block only means a thing can be
+bought, and gate 16 passes on either) · **the obligation against the week** (`obligation_amount`
+over the declared `week_income` — a figure, never a score) · **what a paid repeatable leaves
+behind** (how many surfaces she pays for deposit anything; a pure sink is not a defect, a game made
+only of pure sinks is) · **the ambient puts him in the room** · **the badge arrives before the
+content** · **the role stays attached** · **which refusals are
+shown at all**.
 
 ## Operating rules
 
@@ -241,6 +254,13 @@ priced label against the field's 94% symbol).
   citation. Never assert engine behaviour from memory.
 - **Gates before ship.** `python3 scripts/gates.py <slug>` must be green. A gate that fails
   is either a real defect or a wrong threshold — fix one or the other, never skip.
+- **The scoreboard has three other modes, and each answers something `<slug>` cannot.**
+
+  | | |
+  |---|---|
+  | `gates.py --words <path>` | the vocabulary lint on any text file — run it on the WANT and the BOARD, while the nouns are still being *chosen*. Run on a built game it is one phase too late: every noun is already a room name and a button. Always exits 0; it is a list, never a score. |
+  | `gates.py --release <slug>` | the **artefact**, not the source. Every gate above reads `7_final_game.toml` and none of them can see a build, which is why a game shipped to the published grid as a `--dev --debug` artefact with 115 missing files and nothing said so. Six checks, off for every ordinary run, **exits non-zero**. `the-release.md` § Shipping the build. |
+  | `gates.py --selfcheck` | does this file still document every gate and lint the script emits? Needs no game. The index went stale twice — the 2026-08-16 audit closed it and it reopened in twelve days — because nothing compared the script to the file that documents it. |
 - **An example outranks every rule beside it, so it goes in LAST — after it is validated, or not
   at all.** A rule is read; an example is copied. `the-map.md` shipped a worked example on day one
   that was the first game's own map — its character ids, its box room — with its two known bugs

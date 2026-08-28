@@ -149,8 +149,8 @@ exactly.
 ⚠️ **The broader phrasing is wrong and was rejected.** Counting *every* repeatable surface rather than
 paid ones gives 67% granting nothing — but that sweeps in ambient prose that fires for free, and an
 ambient is supposed to grant nothing. Shipping critique #4 as written would have failed correct work,
-which is the error that withdrew R4 and demoted study 6's anchoring check. **This is a lint. It
-prints the rate and does not judge it.**
+which is the error that withdrew R4 and demoted study 6's anchoring check. **This is a lint —
+`what a paid repeatable leaves behind`. It prints the rate and does not judge it.**
 
 ### R2 · Sinks outnumber sources
 
@@ -559,6 +559,9 @@ for in this game* asked at the point where it is still cheap to answer.
 | **Gate 25 · effects use a live op** | no effect uses an `op` the engine discards — the economy's deductions in particular |
 | **Gate 26 · the climb is paid for** | R6 — every trait a condition reads has a brake on the rungs that raise it (`the-meters.md` M1) |
 | **Gate · the price is in one currency** | R7 — every notation on a button, plus the engine's own `currency_symbol`, resolves to ONE currency. A symbol and its spelled-out unit count as the same one |
+| **Gate · what money buys opens a door** | R1b — a flag set by a choice that costs the currency, surviving the night, must be READ somewhere. **Fails only on ZERO**; a game that sells nothing reports `n/a`, which is not a pass. Day-capped flags are carved out, as gate 18 does |
+| **Lint · money gates content, or only prices it** | R1 — gate 16 passes on either channel and cannot tell them apart. A CONDITION on the currency means content money OPENS; a `costs` block only means a thing can be bought |
+| **Lint · what a paid repeatable leaves behind** | R1c — the share of paid repeatable choices that deposit anything. A pure sink is not a defect; a game made only of pure sinks is. A rate, never a score — ours run 10-of-10 pure at one end and 98% depositing at the other |
 | **Lint · the currency in the prose** | the game's dominant-notation share against the field's 92% median, and its exact-amount-in-words rate against the field's 20% |
 | **Lint · the price is spelled out** | the form of every priced label — symbol / word / code — against the field's 94 / 5 / 1 |
 | **Lint · the obligation against the week** | R3 — `obligation_amount` over `week_income`, printed, never judged. Says so when `week_income` is not declared |

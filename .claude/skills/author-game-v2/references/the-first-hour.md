@@ -35,7 +35,7 @@ Engine claims here carry a `file:line` into
 6. F6 · A meeting is small, and somebody speaks
 7. F7 · Role before name
 8. F8 · One flag per character
-9. F9 · The anchor introduces itself
+9. F9 · A place says what it is, in its own description
 10. F10 · The role stays attached after the introduction
 11. What the scoreboard checks
 11. Cheat sheet
@@ -775,4 +775,6 @@ the bar is one shipped work has cleared rather than an invented number. The six 
 - **A meeting is ~100–170 words and somebody speaks.**
 - **Role before name.** Swap description for name on the meeting flag where the reference matters.
 - **One flag per character.** `doors_open` for the whole cast is the cold-spawn hub in a coat.
-- **The anchor introduces itself** the first time the player walks in.
+- **A place says what it is in its own `description`**, which the player reads on every visit — the
+  function first, then the flavour. A first-visit canvas is a minority device: take one only for
+  something true once.

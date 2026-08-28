@@ -213,26 +213,43 @@ op         = "set"
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# C · THE FIRST VISIT — the anchor introduces itself
+# C · THE PLACE SAYS WHAT IT IS — and that is the description, not a scene
 # ─────────────────────────────────────────────────────────────────────────────
 #
-#   F9. Same rule as a person: the first time the player walks in, the game says
-#   what kind of place this is and what happens here. After that it is just the
-#   name. A non-repeatable canvas bound to the location auto-fires once
-#   (v2.py:4453) — no new primitive needed.
+#   F9. A location's own `description` says what kind of place this is and what
+#   happens here. It is the only surface the player sees on EVERY visit — the
+#   twentieth included — so "what is this place" is a standing question, not a
+#   first-entry one. That field lives in templates/board.toml, NOT here. This
+#   section is only about whether you ALSO owe a one-time scene, and usually you
+#   do not.
 #
-#   ⚠️ THE ANCHOR IS THE ONE THAT MATTERS. A game declared its anchor at 27% of
-#      the whole word budget, gave first-visit canvases to five OTHER rooms, and
-#      never once said what kind of place the anchor was. The first thing the
-#      human reader asked was what it is.
+#   ⚠️ THE FIRST-VISIT CANVAS IS A MINORITY DEVICE. DO NOT REACH FOR IT FIRST.
+#      Across the 26-game corpus it is ONE game (degrees-of-lewdity: 258 branches,
+#      117 flags); EIGHTEEN games have none at all. A gate here used to require
+#      one and was DELETED 2026-08-26, after it sent an author to write nine
+#      arrivals that were reverted the next day. What checks F9 now is
+#      `lint · the place says what it is`, which reads descriptions and never
+#      asks for a canvas.
+#
+#   ⚠️ THE MEASURED FAILURE WAS A DESCRIPTION, NOT AN ABSENT SCENE. A game
+#      declared its anchor at 27% of the whole word budget and described it as
+#      "…and under them forty machines" — forty machines of WHAT. Long, specific,
+#      well written, and it never named the business. Adding an arrival scene
+#      would not have fixed it; naming the function in the description does.
+#
+#   TAKE ONE ONLY when a place has a genuinely ONE-TIME thing to say: a door that
+#   was locked and now is not, an arrival that changes her standing. Then a
+#   non-repeatable canvas bound to the location auto-fires on entry
+#   (setup.selectAutoFireCanvasForLocation, v2.py:4459) — no new primitive.
+#   Otherwise DELETE the block below. references/the-first-hour.md F9.
 
 [[canvases]]
-id   = "<canvas_first_visit_anchor>"
+id   = "<canvas_first_visit_place>"
 name = "<First time in NAME>"
-description = "<Says what this place IS and what happens here. Fires once.>"
+description = "<The ONE-TIME thing this place has to say. Fires once. Delete if there isn't one.>"
 
 [canvases.trigger]
-location      = "<anchor_location>"
+location      = "<location_id>"
 is_repeatable = false
 priority      = 11
 is_active     = true
@@ -243,7 +260,10 @@ name = "<Screen title>"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "<What kind of place this is, in the plainest words available — the type of business, what people do here, where the money comes from. Then the detail.>"
+# NOT "what kind of place this is" — that is the location's description, on every
+# visit. This is the thing that is true ONCE: what changed, what she is seeing
+# that she will not see again.
+content = "<The one-time thing.>"
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -251,4 +271,4 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text       = "<Named next action.>"
 targetType = "location"
-locationId = "<anchor_location>"
+locationId = "<location_id>"

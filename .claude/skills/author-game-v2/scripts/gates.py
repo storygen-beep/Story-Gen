@@ -26,6 +26,8 @@ Usage:
     python3 gates.py --release <slug>       # the ARTEFACT, not the source: is the build
                                             #   in games/<slug>/output/ shippable? Off for
                                             #   every ordinary run; exits non-zero on a red.
+    python3 gates.py --selfcheck            # does SKILL.md still document every gate and
+                                            #   lint this script emits? No game needed.
 
 Why a real TOML parser and not grep: an earlier grep-based pass on this same file
 silently missed 24 `is_repeatable` lines (whitespace-aligned and unspaced variants)
@@ -3034,14 +3036,14 @@ def lint_named_before_met(model, game):
     Two halves, one rule (`the-first-hour.md`: the game does not use a name until it has
     earned it):
 
-      · PEOPLE — a character named in the opening, or on a quest card, or in a location
-        description, who has no meeting anywhere. The measured failure named six people
-        in 278 words, put none of them on screen, and two of the six are not in the game.
-      · PLACES — a location the prose or the map sends the player to that has no
-        first-visit canvas. A place whose FUNCTION is only implied is an unglossed noun
-        the size of a room; the anchor of the game that prompted this was never once
-        described as the kind of business it is, and the first thing the human reader
-        asked was what it is.
+    PEOPLE ONLY — a character named in the opening, or on a quest card, or in a
+    location description, who has no meeting anywhere. The measured failure named six
+    people in 278 words, put none of them on screen, and two of the six are not in the
+    game.
+
+    ⚠️ There was a PLACES half here and it moved out on 2026-08-26. It asked whether a
+    location had a first-visit canvas, which was the wrong question — the answer lives in
+    the location's own description. `lint_place_function` below owns places now.
 
     ⚠️ A LIST AND NEVER A GATE. Whether a name has been earned is a reading, not a
     measurement — a character can be legitimately named in passing (an offstage boss, a
@@ -6400,8 +6402,8 @@ def words_mode(path):
 #
 # ⚠️ CORRECTION TO THE FIX AS IT WAS WRITTEN. `mrs_vance/REVIEW.md` B2 proposed
 # failing on an `[IMAGE MISSING]` / `[VIDEO POOL MISSING]` marker in the HTML.
-# Those markers are --debug ONLY — v2.py:12403 `if not self.debug: return ''`,
-# and again at :14753 and :14903 — so a CLEAN build renders silent gaps and a
+# Those markers are --debug ONLY — v2.py:12404 `if not self.debug: return ''`,
+# and again at :14753 and :14906 — so a CLEAN build renders silent gaps and a
 # marker grep passes it. Measured 2026-08-28: `under_one_roof` ships a clean build
 # with 183 missing files and ZERO markers. The grep measures the wrong thing.
 #
@@ -6409,7 +6411,7 @@ def words_mode(path):
 #   1. the flags-init JSON the generator always writes — `debug_mode` from
 #      v2.py:1077, `dev_mode_enabled` written only under --dev (v2.py:1081-1082).
 #      That is the build's own record of the flags it was made with.
-#   2. MissingMediaPage — v2.py:216, "always generated, but button only shows in
+#   2. MissingMediaPage — v2.py:217, "always generated, but button only shows in
 #      debug mode"; _generate_missing_media_page at v2.py:10332 prints a real count
 #      in every build.
 #
@@ -6623,6 +6625,154 @@ def release_mode(slug):
     return 0 if judged and npass == len(judged) else 1
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# --selfcheck — does SKILL.md still document what this script runs?
+# ─────────────────────────────────────────────────────────────────────────────
+# SKILL.md's scoreboard table is what an author reads WHEN A GATE FAILS, and it
+# says so in its own words: "When a gate fails, look it up here. Nine of these
+# used to be documented nowhere but in the script's own comments, so an author
+# who hit one had nothing to read."
+#
+# That was closed by the 2026-08-16 whole-skill audit — "nine gates were
+# documented in zero reference files, now indexed in SKILL.md (23/23 findable)".
+# It REOPENED within twelve days: on 2026-08-28 the script emitted 44 gates and
+# 27 lint headlines against an index missing five gates, eight lints and both
+# alternate modes. Nothing anywhere would have said so, because nothing compared
+# the script to the file that documents it.
+#
+# Documenting the missing rows fixes that day. This kills the class.
+#
+# ⚠️ It invents NO threshold, which is why it is safe to build where R4, study 6's
+# anchoring check and P0 were not: it is a set difference over strings, and every
+# name is read out of this file's own source rather than guessed. Proved exact
+# before it was written — the regex below recovers 44 of 44 gate names with
+# nothing extra in either direction, checked against `--json`.
+#
+# ⚠️ The comparison is SUBSTRING against the whole file, never cell-equality.
+# SKILL.md legitimately packs several gate names into one table cell
+# ("guidance exists · no chain ends in silence"); a cell-wise diff reports
+# fourteen false gaps, which is exactly what the first attempt did.
+
+
+def _emitted_names(src):
+    """(gates, lints) this script can emit, read out of its own source.
+
+    Static rather than run against a game on purpose: a game that declares no
+    economy reports n/a and still emits the row, but a game missing a whole
+    subsystem would hide names from a runtime listing and the check would go
+    quiet exactly where the index is most likely to be stale.
+    """
+    gates = sorted(set(re.findall(r'\bgate\(\s*"([^"]+)"', src)))
+    lints = sorted({m.strip() for m in
+                    re.findall(r'print\(f"  lint · ([^—"]+?) *(?:—|\{)', src)})
+    return gates, lints
+
+
+def _documented_gate_names(skill):
+    """Gate names SKILL.md's scoreboard table claims exist — the other direction.
+
+    Scoped to the ONE table whose header row is `| gate | …`. SKILL.md carries
+    several other tables (the state model, the phases, the modes) and an unscoped
+    sweep reads their first cells as gate names: 8 false positives, measured. One
+    cell can hold several names joined by `·`, so each cell is split.
+    """
+    names, inside = [], False
+    for line in skill.splitlines():
+        if re.match(r"^\|\s*gate\s*\|", line):
+            inside = True
+            continue
+        if not inside:
+            continue
+        if not line.startswith("|"):
+            break                       # the table ended
+        if set(line) <= set("|-: "):
+            continue                    # the |---|---| rule
+        for part in line.split("|")[1].split("·"):
+            part = part.strip().strip("*").strip()
+            if part:
+                names.append(part)
+    return names
+
+
+def selfcheck_mode():
+    """Does SKILL.md still describe the checks this script actually runs?
+
+    Both directions, because the one-directional version shipped 2026-08-28 and
+    the audit two days later found what it cannot see:
+
+      · script -> SKILL.md   a check with no row. An author who hits it has
+                             nothing to read.
+      · SKILL.md -> script   a row with no check. G35 `the anchor introduces
+                             itself` was deleted 2026-08-26 and its row sat in
+                             the table for two days, sending authors at a device
+                             the doctrine that replaced it tells them to avoid.
+
+    Needs no game and touches none. Exits non-zero on a gap, like `--release`
+    and unlike `--words`.
+
+    ⚠️ LINTS ARE CHECKED ONE WAY ONLY. They live in a wrapped prose paragraph
+    with no exact extraction; gates have a table. A reverse check on prose would
+    fire on how a sentence was broken, and a check that fires wrongly is what
+    took R4, study 6's anchoring check and P0 back out.
+    """
+    here = os.path.dirname(os.path.abspath(__file__))
+    skill_path = os.path.join(os.path.dirname(here), "SKILL.md")
+    try:
+        skill = open(skill_path, encoding="utf-8").read()
+    except OSError as exc:
+        print(f"cannot read {skill_path}: {exc}")
+        return 2
+    src = open(os.path.abspath(__file__), encoding="utf-8").read()
+
+    # Whitespace-collapsed, because SKILL.md is wrapped prose: a lint named across
+    # a line break IS documented, and a check that says otherwise sends the author
+    # to reflow a paragraph instead of writing the row that is actually missing.
+    flat = re.sub(r"\s+", " ", skill)
+
+    gates, lints = _emitted_names(src)
+    modes = ["--words", "--release", "--selfcheck"]
+    documented = _documented_gate_names(skill)
+
+    missing_g = [g for g in gates if g not in flat]
+    missing_l = [l for l in lints if l not in flat]
+    missing_m = [m for m in modes if m not in flat]
+    stale_g = [d for d in documented if d not in set(gates)]
+
+    print(f"\n  author-game-v2 self-check — is the index current?")
+    print(f"  {os.path.relpath(skill_path, os.getcwd())}")
+    print(f"  {'─'*72}")
+    for label, found, missing in (
+            ("gates", gates, missing_g),
+            ("lints", lints, missing_l),
+            ("modes", modes, missing_m)):
+        tag = "PASS" if not missing else "FAIL"
+        print(f"  [{tag}]  {label:32s} {len(found)-len(missing)}/{len(found)} documented")
+        for m in missing:
+            print(f"          · undocumented: {m}")
+    tag = "PASS" if not stale_g else "FAIL"
+    print(f"  [{tag}]  {'gate rows':32s} "
+          f"{len(documented)-len(stale_g)}/{len(documented)} still checked")
+    for s in stale_g:
+        print(f"          · documented but NOT emitted: {s}")
+    print(f"  {'─'*72}")
+    total = len(missing_g) + len(missing_l) + len(missing_m) + len(stale_g)
+    if total:
+        if missing_g or missing_l or missing_m:
+            print(f"  {len(missing_g)+len(missing_l)+len(missing_m)} name(s) the script emits "
+                  f"and SKILL.md does not carry.")
+            print("  An author who hits one has nothing to read. Add the row, or rename the "
+                  "check — the two are the same fix.")
+        if stale_g:
+            print(f"  {len(stale_g)} row(s) SKILL.md documents and the script no longer runs.")
+            print("  Worse than a missing row: it sends an author to build for a check that is")
+            print("  gone, and the doctrine that replaced it may say the opposite. Delete the")
+            print("  row wherever it appears — the templates included.")
+    else:
+        print("  the index is current")
+    print()
+    return 1 if total else 0
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -6637,6 +6787,8 @@ def main():
             print("usage: python3 gates.py --release <game-slug>")
             sys.exit(2)
         sys.exit(release_mode(sys.argv[2]))
+    if sys.argv[1] == "--selfcheck":
+        sys.exit(selfcheck_mode())
     arg = sys.argv[1]
     path = arg if arg.endswith(".toml") else f"games/{arg}/toml_phases/7_final_game.toml"
     if not os.path.exists(path):

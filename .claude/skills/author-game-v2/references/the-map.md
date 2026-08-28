@@ -161,12 +161,16 @@ Say it out loud to someone who has not played: if they cannot tell you what is t
 it is a bad button no matter whose house style it matches.
 
 **And a button cannot carry the explanation.** Where the name alone will not tell a stranger what
-the place is FOR, the place needs a **first visit** — one non-repeatable canvas that says what kind
-of place this is, once, the first time she walks in. `references/the-first-hour.md` F9 owns that
-rule and the gate that checks it. Measured failure: a game declared its anchor at 27% of the whole
-word budget, gave first-visit canvases to five other rooms, and never once said what kind of
-business the anchor was. Its description opened *"…and under them forty machines"* — forty machines
-of what — and the first thing the human reader asked was what the place is.
+the place is FOR, the **location's own `description`** has to — it is the only surface the player
+sees on every visit, so it says what kind of place this is and what happens here before it says
+what it smells of. `references/the-first-hour.md` F9 owns that rule; `lint · the place says what it
+is` reads it. Measured failure: a game declared its anchor at 27% of the whole word budget and its
+description opened *"…and under them forty machines"* — forty machines of what — and the first thing
+the human reader asked was what the place is. It was long, specific and well written.
+
+⚠️ **The fix is not a first-visit scene.** That device is one game in twenty-six, and the gate that
+required it was deleted 2026-08-26 after it sent an author to write nine arrivals that were reverted
+the next day. Take one only when a place has a genuinely one-time thing to say. F9 carries the count.
 
 ### R5 · The graph owes the prose
 
