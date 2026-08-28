@@ -23,6 +23,8 @@ not collected by a bare `pytest`:
 
     pytest apps/game_generation/tests/test_tweego_required.py -q
 """
+import re
+from pathlib import Path
 from unittest.mock import Mock, patch
 
 import pytest
@@ -93,10 +95,15 @@ def test_old_optional_compile_entrypoint_is_gone(service):
 def _run_compile_with_output(service, html):
     """Drive a 'successful' Tweego run that emitted `html`."""
     mod = "apps.game_generation.services.game_service"
-    with patch(f"{mod}.subprocess.run", return_value=Mock(returncode=0, stdout=BANNER, stderr="")):
+    with patch(
+        f"{mod}.subprocess.run",
+        return_value=Mock(returncode=0, stdout=BANNER, stderr=""),
+    ):
         with patch("builtins.open", create=True) as mock_open:
             mock_open.return_value.__enter__.return_value.read.return_value = html
-            with patch(f"{mod}.os.path.exists", return_value=True), patch(f"{mod}.os.unlink"):
+            with patch(f"{mod}.os.path.exists", return_value=True), patch(
+                f"{mod}.os.unlink"
+            ):
                 return service.compile_twee_to_html(TWEE, "Probe")
 
 
@@ -109,7 +116,9 @@ def test_output_without_storydata_is_refused(service):
 def test_output_with_zero_passages_is_refused(service):
     """The exact shape of the broken builds: story data present, no passages."""
     with pytest.raises(RuntimeError) as exc:
-        _run_compile_with_output(service, '<html><tw-storydata name="Probe"></tw-storydata></html>')
+        _run_compile_with_output(
+            service, '<html><tw-storydata name="Probe"></tw-storydata></html>'
+        )
     assert "ZERO passages" in str(exc.value)
 
 
@@ -141,12 +150,17 @@ def test_version_mismatch_warns_but_still_builds(service):
     mod = "apps.game_generation.services.game_service"
     with patch(f"{mod}.logger") as mock_logger:
         with patch(
+            f"{mod}._installed_sugarcube_version",
+            return_value=EXPECTED_SUGARCUBE_VERSION,
+        ), patch(
             f"{mod}.subprocess.run",
             return_value=Mock(returncode=0, stdout="tweego, version 9.9.9", stderr=""),
         ):
             with patch("builtins.open", create=True) as mock_open:
                 mock_open.return_value.__enter__.return_value.read.return_value = html
-                with patch(f"{mod}.os.path.exists", return_value=True), patch(f"{mod}.os.unlink"):
+                with patch(f"{mod}.os.path.exists", return_value=True), patch(
+                    f"{mod}.os.unlink"
+                ):
                     assert service.compile_twee_to_html(TWEE, "Probe") == html
 
     assert mock_logger.warning.called, "a version mismatch must not pass unnoticed"
@@ -164,10 +178,89 @@ def test_matching_version_does_not_warn(service):
     )
     mod = "apps.game_generation.services.game_service"
     with patch(f"{mod}.logger") as mock_logger:
-        with patch(f"{mod}.subprocess.run", return_value=Mock(returncode=0, stdout=BANNER, stderr="")):
+        with patch(
+            f"{mod}._installed_sugarcube_version",
+            return_value=EXPECTED_SUGARCUBE_VERSION,
+        ), patch(
+            f"{mod}.subprocess.run",
+            return_value=Mock(returncode=0, stdout=BANNER, stderr=""),
+        ):
             with patch("builtins.open", create=True) as mock_open:
                 mock_open.return_value.__enter__.return_value.read.return_value = html
-                with patch(f"{mod}.os.path.exists", return_value=True), patch(f"{mod}.os.unlink"):
+                with patch(f"{mod}.os.path.exists", return_value=True), patch(
+                    f"{mod}.os.unlink"
+                ):
                     service.compile_twee_to_html(TWEE, "Probe")
 
     assert not mock_logger.warning.called
+
+
+# --- the story format is installed separately from the compiler ----------------
+#
+# `tweego --version` cannot see SugarCube: Tweego loads the format from a
+# storyformats/ directory beside the binary. Swap that directory and every future
+# build ships a different runtime with the compiler reporting the same version it
+# reported yesterday. Until 2026-08-29 EXPECTED_SUGARCUBE_VERSION was compared to
+# nothing — it appeared only inside the text of the Tweego warning.
+
+
+def test_the_installed_sugarcube_is_read_from_disk():
+    """Not mocked. This is the version the player actually runs, and if this machine
+    cannot answer, the test says so rather than asserting against a guess."""
+    from apps.game_generation.services.game_service import _installed_sugarcube_version
+
+    found = _installed_sugarcube_version("tweego")
+    if found is None:
+        pytest.skip("no storyformats/sugarcube-2/format.js reachable from tweego")
+    assert found == EXPECTED_SUGARCUBE_VERSION, (
+        f"the installed story format is {found}; every game on the portal was built "
+        f"against {EXPECTED_SUGARCUBE_VERSION}"
+    )
+
+
+def test_an_unlocatable_format_is_not_a_pass():
+    """None means the question could not be asked. A resolver that returned the
+    expected version on failure would make the check permanently green."""
+    from apps.game_generation.services.game_service import _installed_sugarcube_version
+
+    assert _installed_sugarcube_version("/nonexistent/path/to/tweego") is None
+
+
+def test_a_different_sugarcube_warns_and_still_builds(service):
+    """Same contract as the Tweego mismatch: loud, never fatal — an upgrade has to
+    stay possible, and a fatal check here would block the machine that does it."""
+    html = (
+        '<html><tw-storydata name="Probe">'
+        '<tw-passagedata pid="1" name="Start">hi</tw-passagedata></tw-storydata></html>'
+    )
+    mod = "apps.game_generation.services.game_service"
+    with patch(f"{mod}.logger") as mock_logger:
+        with patch(f"{mod}._installed_sugarcube_version", return_value="2.36.1"), patch(
+            f"{mod}.subprocess.run",
+            return_value=Mock(returncode=0, stdout=BANNER, stderr=""),
+        ):
+            with patch("builtins.open", create=True) as mock_open:
+                mock_open.return_value.__enter__.return_value.read.return_value = html
+                with patch(f"{mod}.os.path.exists", return_value=True), patch(
+                    f"{mod}.os.unlink"
+                ):
+                    assert service.compile_twee_to_html(TWEE, "Probe") == html
+
+    assert mock_logger.warning.called, "a swapped story format must not pass unnoticed"
+    emitted = " ".join(str(a) for a in mock_logger.warning.call_args.args)
+    assert "SugarCube version mismatch" in emitted
+    assert "2.36.1" in emitted
+
+
+def test_the_generator_declares_the_sugarcube_that_is_installed():
+    """⚠️ Tweego HARD-ERRORS on a format-version it does not have — "Story format
+    named \"SugarCube\" at version ... is not available" — and our packager only
+    escapes that because it passes `-f sugarcube-2`, which overrides StoryData
+    outright. So a wrong declaration is inert for us and fatal for anyone compiling
+    the same Twee any other way. It read 2.36.1 against an installed 2.30.0 from the
+    day the generator was written until 2026-08-29."""
+    src = Path("apps/game_generation/twee_comprehensive/generators/v2.py").read_text(
+        encoding="utf-8"
+    )
+    declared = set(re.findall(r'"format-version":\s*"([^"]+)"', src))
+    assert declared == {EXPECTED_SUGARCUBE_VERSION}, declared

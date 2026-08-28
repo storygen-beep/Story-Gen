@@ -36,6 +36,63 @@ logger = logging.getLogger(__name__)
 EXPECTED_TWEEGO_VERSION = "2.1.1"
 EXPECTED_SUGARCUBE_VERSION = "2.30.0"
 
+# Tweego does NOT bundle the story format — it loads it from a `storyformats/`
+# directory found beside the binary (or under TWEEGO_PATH, or ~/.tweego). So the
+# Tweego version check above cannot see SugarCube at all: replace
+# storyformats/sugarcube-2/ and every future build ships a different runtime with
+# `tweego --version` reporting exactly what it reported yesterday.
+#
+# That mattered on 2026-08-29: `StoryData` had declared SugarCube 2.36.1 since the
+# generator was written, the installed format is 2.30.0, and nothing anywhere
+# compared them — the packager passes `-f sugarcube-2`, which overrides the
+# declared version outright, so the lie was inert in our own pipeline and a hard
+# error for anyone compiling the same Twee without that flag ("Story format named
+# \"SugarCube\" at version \"2.36.1\" is not available"). The versions differ in
+# ways that reach us: the save hooks were rewritten between them, so 2.30's
+# `Config.saves.onLoad` is what the engine writes and 2.36's `Save.onLoad.add()`
+# does not exist here.
+#
+# Searched in Tweego's own order. Read, never enforced — an upgrade must stay
+# possible — but never silent.
+TWEEGO_FORMAT_SEARCH = (
+    os.environ.get("TWEEGO_PATH") or "",
+    None,                                   # placeholder: beside the binary
+    os.path.expanduser("~/.tweego/storyformats"),
+    "/usr/local/share/tweego/storyformats",
+    "/usr/share/tweego/storyformats",
+)
+
+
+def _installed_sugarcube_version(tweego_path):
+    """The SugarCube that will actually compile, or None if it cannot be located.
+
+    None is not a pass — it means the question could not be asked, and the caller
+    says so rather than staying quiet.
+    """
+    candidates = []
+    for entry in TWEEGO_FORMAT_SEARCH:
+        if entry is None:
+            binary = shutil.which(tweego_path) or tweego_path
+            candidates.append(os.path.join(os.path.dirname(os.path.abspath(binary)),
+                                           "storyformats"))
+        elif entry:
+            candidates.append(entry)
+    for root in candidates:
+        fmt = os.path.join(root, "sugarcube-2", "format.js")
+        if not os.path.exists(fmt):
+            continue
+        try:
+            # The header is `window.storyFormat({"name":...,"version":"2.30.0",...`
+            # at byte 0; the rest of the file is half a megabyte of minified engine.
+            with open(fmt, encoding="utf-8", errors="replace") as fh:
+                head = fh.read(4096)
+        except OSError:
+            continue
+        m = re.search(r'"version"\s*:\s*"([^"]+)"', head)
+        if m:
+            return m.group(1)
+    return None
+
 # Searched in order. `~/bin` covers the local install; /usr/bin and /usr/local/bin cover
 # a container that installed it by hand or by apt.
 TWEEGO_SEARCH_PATHS = (
@@ -437,6 +494,28 @@ class GameService:
         """
         tweego_cmd, version_banner = self._find_tweego()
 
+        # The story format is what the player actually runs, and it is installed
+        # separately from the compiler — so it is checked separately.
+        sugarcube = _installed_sugarcube_version(tweego_cmd)
+        if sugarcube is None:
+            logger.warning(
+                "Could not locate storyformats/sugarcube-2/format.js for %s — the "
+                "SugarCube version this build ships against is UNVERIFIED. Expected %s.",
+                tweego_cmd,
+                EXPECTED_SUGARCUBE_VERSION,
+            )
+        elif sugarcube != EXPECTED_SUGARCUBE_VERSION:
+            logger.warning(
+                "SugarCube version mismatch: expected %s, found %s. Tweego loads the "
+                "format from a directory beside itself, so `tweego --version` cannot "
+                "see this change. Every game on the portal runs SugarCube %s; the save "
+                "hooks in particular differ between versions. Verify the build before "
+                "shipping it.",
+                EXPECTED_SUGARCUBE_VERSION,
+                sugarcube,
+                EXPECTED_SUGARCUBE_VERSION,
+            )
+
         if EXPECTED_TWEEGO_VERSION not in version_banner:
             # Not fatal — upgrading must stay possible — but never silent, because the
             # story format is bundled with the compiler, not with our source.
@@ -522,7 +601,7 @@ class GameService:
                 f"Tweego compilation failed (exit code {e.returncode}):\n{e.stderr}"
             ) from e
         except subprocess.TimeoutExpired as e:
-            raise RuntimeError(f"Tweego compilation timed out after 30 seconds") from e
+            raise RuntimeError("Tweego compilation timed out after 30 seconds") from e
         except FileNotFoundError as e:
             raise RuntimeError(f"Tweego binary not found during compilation: {e}") from e
         except RuntimeError:

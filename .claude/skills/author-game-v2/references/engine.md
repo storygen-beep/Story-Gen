@@ -2255,12 +2255,24 @@ over the trait/flag key surface and the corruption tiers. `Config.saves.onLoad` 
 it and **logs**; it does not refuse. A `throw` there would abort the load with `UI.alert` — that is
 the reject-on-mismatch handler, deliberately unused.
 
-⚠️ **The story format is 2.30.0, not the 2.36.1 the build declares.** `StoryData` asks for
-`"format-version": "2.36.1"` (`v2.py:731`, `:742`) but the only SugarCube installed for Tweego is
-`storyformats/sugarcube-2/format.js` at `"version":"2.30.0"`, and that is what compiles. It matters
-here because the save hooks were rewritten between them: 2.30 has `Config.saves.onLoad` / `onSave`,
-and **`Save.onLoad.add()` does not exist**. Write against 2.30 and verify against the installed
-`format.js`, not against the version string in the build.
+⚠️ **The story format is SugarCube 2.30.0, and it is not installed with the compiler.** Tweego
+loads it from a `storyformats/` directory beside its own binary, so `tweego --version` cannot see
+it: replace `storyformats/sugarcube-2/` and every future build ships a different runtime with the
+compiler reporting exactly what it reported yesterday. `game_service.py` pins both
+(`EXPECTED_TWEEGO_VERSION = "2.1.1"`, `EXPECTED_SUGARCUBE_VERSION = "2.30.0"`) and warns —
+loudly, never fatally — when either moves.
+
+It matters here because the save hooks were rewritten between 2.30 and 2.36: 2.30 has
+`Config.saves.onLoad` / `onSave`, and **`Save.onLoad.add()` does not exist**. Write against 2.30 and
+verify against the installed `format.js`, not against a version string in a file.
+
+> **Fixed 2026-08-29, and worth knowing as a shape.** `StoryData` had declared `"format-version":
+> "2.36.1"` since the generator was written, against an installed 2.30.0. It was inert for us and
+> only for us: the packager compiles with `-f sugarcube-2`, which overrides StoryData outright.
+> Anyone compiling the same Twee any other way — by hand, from Twine — got a hard error, *"Story
+> format named \"SugarCube\" at version \"2.36.1\" is not available"*, and every build carried the
+> false number into its `:: Story [meta]` passage. Two constants said 2.30.0, one string said
+> 2.36.1, and nothing compared them for months.
 
 Tests: `apps/game_generation/tests/test_save_migration.py`, 23 of 23 — which execute the emitted
 migration in node against synthetic old saves rather than grepping for it.

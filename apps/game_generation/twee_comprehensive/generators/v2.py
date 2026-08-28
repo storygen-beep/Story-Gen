@@ -728,7 +728,7 @@ class TweeComprehensiveGeneratorV2:
     "name": "{story_name}",
     "ifid": "{self.project.id}",
     "format": "SugarCube",
-    "format-version": "2.36.1",
+    "format-version": "2.30.0",
     "start": "Start"
 }}
 
@@ -739,7 +739,7 @@ class TweeComprehensiveGeneratorV2:
 {{
     "ifid": "{self.project.id}",
     "format": "SugarCube",
-    "format-version": "2.36.1",
+    "format-version": "2.30.0",
     "start": "Start"
 }}"""
 

@@ -5,6 +5,59 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-29 — the SugarCube the build declared had never existed on this machine
+
+**Why.** Surfaced while writing `engine.md` §40: `StoryData` declared
+`"format-version": "2.36.1"` and the installed format is `2.30.0`. LO asked what to do about it, so
+it was measured before it was answered — and it turned out to be narrower and stranger than the
+first framing.
+
+**Tweego HARD-ERRORS on a format-version it does not have** — *"Story format named "SugarCube" at
+version "2.36.1" is not available"*, exit 1, no output. Our builds escape that only because the
+packager compiles with `-f sugarcube-2`, which overrides `StoryData` outright. So the wrong number
+was **inert in our pipeline and fatal in every other one**: a human running `tweego` on the same
+Twee, or opening it in Twine, got a hard failure with no obvious cause. It also shipped — the same
+JSON is copied into the `:: Story [meta]` passage, which lands in the built HTML.
+
+**Two constants already said 2.30.0** (`EXPECTED_TWEEGO_VERSION`, `EXPECTED_SUGARCUBE_VERSION` in
+`game_service.py`), one string said 2.36.1, and nothing compared them for the life of the generator.
+
+**And the check underneath was decoration.** `EXPECTED_SUGARCUBE_VERSION` appeared **only inside the
+text of the Tweego warning** — it was never compared to anything. That is the real hole, because
+**Tweego does not bundle the story format**: it loads it from a `storyformats/` directory beside its
+own binary. Replace `storyformats/sugarcube-2/` and every future build ships a different runtime
+while `tweego --version` reports exactly what it reported yesterday. The version that decides what a
+player runs was the one version nothing verified.
+
+**Fixed.** The declaration now reads `2.30.0` (`v2.py`, both occurrences), and
+`_installed_sugarcube_version()` reads the real version out of `storyformats/sugarcube-2/format.js`
+— searched in Tweego's own order, `TWEEGO_PATH` then beside the binary then `~/.tweego` then the two
+share paths — and warns on a mismatch. **Warned, never fatal**, matching the Tweego check's own
+stated contract: an upgrade has to stay possible, and a fatal check here would block the machine
+doing it. An unlocatable format warns too — *not measured* is not a pass.
+
+**NOT upgraded to 2.36, and that is the recommendation.** Every game on the portal runs 2.30;
+`Config.saves.onLoad`, which the migration seam added the same day depends on, is deprecated in 2.36;
+and nothing in 2.31–2.36 is used here. An upgrade changes the runtime under people already playing —
+the exact risk the save work reduced — so it is a deliberate major version with an audit of the
+emitted JS and a rebuild of every game, not a config edit.
+
+**Files.** `references/engine.md` §40 — the paragraph claiming the build declares 2.36.1 was true
+when written and is not now; replaced with the durable fact (the format is installed separately from
+the compiler) and the incident kept as a shape worth recognising. Engine-side:
+`twee_comprehensive/generators/v2.py`, `services/game_service.py`,
+`tests/test_tweego_required.py`.
+
+**Verified.** The corrected Twee **compiles with no `-f` flag at all** (exit 0), which the 2.36.1
+version could not do. Generated Twee declares only `2.30.0`. Resolver returns `2.30.0` for `tweego`
+and for the absolute path, `None` for a bogus one. Four new tests, one of them unmocked against this
+machine's actual `format.js` and skipping rather than guessing if it cannot be reached; the two
+pre-existing version tests now pin the format side so they keep testing the Tweego banner they were
+written for. 318 generator tests green; the 10 wider failures unchanged from baseline. `ruff` on
+`game_service.py` 10 → 6.
+
+---
+
 ## 2026-08-29 — `gates.py --saves`: the first check that reads two releases, and it found breaks that had already shipped
 
 **Why.** The entry below shipped the save-compatibility doctrine and left one thing open: nothing
