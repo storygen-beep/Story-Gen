@@ -7,6 +7,7 @@ It delegates to specific isolated systems based on the requested type.
 
 import logging
 import os
+import re
 import shutil
 import subprocess
 import tempfile
@@ -44,6 +45,164 @@ TWEEGO_SEARCH_PATHS = (
     "/opt/homebrew/bin/tweego",
     os.path.expanduser("~/bin/tweego"),
 )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Storage fallback — the difference between a downloaded build that runs and one
+# that shows a stack trace.
+#
+# SugarCube needs somewhere to keep a save and refuses to boot without one. It ships
+# two adapters and takes the first that works: Web Storage (needs localStorage AND
+# sessionStorage, both), then cookies.
+#
+# Measured 2026-08-28, real Chrome, a v2 build opened from disk:
+#
+#   default profile                 localStorage WORKS   -> game runs
+#   block THIRD-PARTY cookies       localStorage WORKS   -> game runs
+#   incognito                       localStorage WORKS   -> game runs
+#   block ALL cookies / site data   SecurityError        -> DEAD
+#
+# and, in EVERY one of those profiles, a cookie written on a file:// page reads back
+# as the empty string. Chrome drops them. So for a downloaded build the second adapter
+# does not exist: there is one way to save and no net under it. When Chrome denies Web
+# Storage — that setting, a privacy extension, an enterprise policy — SugarCube aborts
+# before rendering anything and the player gets:
+#
+#   Apologies! A fatal error has occurred. Aborting.
+#   Error: no valid storage adapters found.
+#
+# That is a real player report on Vesper v0.2.0 (F95zone thread 312420, post #18),
+# reproduced here character for character.
+#
+# So: probe storage before the engine loads, and if it is denied, hand the engine an
+# in-memory Storage. The game then runs and saves for the session — verified playable,
+# including Save.slots and Save.export. It is a NO-OP whenever storage works, which is
+# the overwhelming majority of loads, so nothing changes for anyone else.
+#
+# Memory saves die with the tab, so the player is TOLD, in the page, with the three
+# things they can actually do about it. A silent shim would be the worse bug: two hours
+# of progress gone with no explanation.
+STORAGE_FALLBACK_MARKER = "storage-fallback"
+
+STORAGE_FALLBACK_SCRIPT = """<script id="storage-fallback">
+/* Injected by GameService. Runs before the story format so SugarCube's adapter probe
+   sees working storage. No-op when the browser allows storage. */
+(function () {
+	'use strict';
+
+	function usable(name) {
+		try {
+			var store = window[name];
+			if (!store) { return false; }
+			var probe = '__sc_probe__';
+			store.setItem(probe, probe);
+			var ok = store.getItem(probe) === probe;
+			store.removeItem(probe);
+			return ok;
+		} catch (err) {
+			/* Chrome throws SecurityError here when site data is blocked. */
+			return false;
+		}
+	}
+
+	function memoryStorage() {
+		var map = Object.create(null);
+		return {
+			get length() { return Object.keys(map).length; },
+			key: function (i) { var keys = Object.keys(map); return i < keys.length ? keys[i] : null; },
+			getItem: function (k) { k = String(k); return k in map ? map[k] : null; },
+			setItem: function (k, v) { map[String(k)] = String(v); },
+			removeItem: function (k) { delete map[String(k)]; },
+			clear: function () { map = Object.create(null); }
+		};
+	}
+
+	var patched = false;
+	['localStorage', 'sessionStorage'].forEach(function (name) {
+		if (usable(name)) { return; }
+		try {
+			Object.defineProperty(window, name, { value: memoryStorage(), configurable: true });
+			patched = true;
+		} catch (err) {
+			/* Nothing further to try — SugarCube will report it the old way. */
+		}
+	});
+
+	if (!patched) { return; }
+	window.storageFallbackActive = true;
+
+	function showNotice() {
+		if (document.getElementById('storage-fallback-notice')) { return; }
+		var bar = document.createElement('div');
+		bar.id = 'storage-fallback-notice';
+		bar.setAttribute('role', 'status');
+		bar.style.cssText = [
+			'position:fixed', 'top:0', 'left:0', 'right:0', 'z-index:2147483647',
+			'box-sizing:border-box', 'padding:0.7em 1em', 'max-height:45vh', 'overflow:auto',
+			'background:#2b1d05', 'color:#f5e6c8', 'border-bottom:2px solid #d79a2b',
+			'font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif',
+			'text-align:left'
+		].join(';');
+		bar.innerHTML =
+			'<strong style="color:#ffc857">Saving is switched off in this browser.</strong> ' +
+			'You can play, but progress is lost when you close this tab.' +
+			'<ol style="margin:0.5em 0 0;padding-left:1.4em">' +
+			'<li>Allow cookies and site data for this page, then reload. ' +
+			'(Chrome: Settings &rarr; Privacy and security &rarr; Cookies and site data)</li>' +
+			'<li>Or before you close it: <strong>Saves</strong> in the sidebar &rarr; ' +
+			'<strong>Save to Disk</strong>.</li>' +
+			'<li>Or open this file in a different browser.</li>' +
+			'</ol>';
+		var close = document.createElement('button');
+		close.type = 'button';
+		close.textContent = 'Dismiss';
+		close.style.cssText = [
+			'margin-top:0.6em', 'padding:0.25em 0.9em', 'cursor:pointer',
+			'background:#d79a2b', 'color:#2b1d05', 'border:0', 'border-radius:3px',
+			'font:inherit', 'font-weight:600'
+		].join(';');
+		close.onclick = function () { bar.parentNode && bar.parentNode.removeChild(bar); };
+		bar.appendChild(close);
+		document.body.appendChild(bar);
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', showNotice);
+	} else {
+		showNotice();
+	}
+})();
+</script>
+"""
+
+
+def _inject_storage_fallback(html_content: str) -> str:
+    """Put the storage probe in <head>, ahead of every script the format ships.
+
+    Placed by string surgery on Tweego's output rather than as a Twee `[script]` passage
+    because a user script runs long after the decision is made: SugarCube creates its
+    store inside its own jQuery-ready handler, so anything authored in the story is too
+    late to matter.
+
+    Returns the html unchanged, and says so at INFO, if there is no <head> to inject
+    into or the script is already present. Never raises: a missing banner is worth a log
+    line, never a failed build.
+    """
+    if STORAGE_FALLBACK_MARKER in html_content:
+        logger.info("Storage fallback already present; not injecting twice")
+        return html_content
+
+    head = re.search(r"<head[^>]*>", html_content, re.IGNORECASE)
+    if not head:
+        logger.info(
+            "No <head> in the compiled output (%d bytes) — storage fallback not "
+            "injected. The build still works wherever the browser allows storage.",
+            len(html_content),
+        )
+        return html_content
+
+    at = head.end()
+    return html_content[:at] + "\n" + STORAGE_FALLBACK_SCRIPT + html_content[at:]
 
 
 class GameService:
@@ -333,6 +492,11 @@ class GameService:
                         f"Tweego exited 0 but the build contains ZERO passages "
                         f"({len(html_content)} bytes). Refusing to ship it."
                     )
+
+                # Downloaded builds are opened straight off disk, where the story
+                # format's cookie fallback is dead and one blocked setting is fatal.
+                # See STORAGE_FALLBACK_SCRIPT above. No-op when storage works.
+                html_content = _inject_storage_fallback(html_content)
 
                 logger.info(
                     "Compiled %r with %s (%s), %d bytes",
