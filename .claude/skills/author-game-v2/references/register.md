@@ -550,10 +550,11 @@ other basis (see the ⚠️ below):
 
 | per 1,000 words | field | ours |
 |---|---|---|
-| `-ly` adverbs | 8.9 – 22.6 (p50 13.4) | **0.9 – 5.4 (p50 3.0)** |
-| hedge words — *just, almost, somewhat, seems, sort of* | 5.4 – 22.4 (p50 12.0) | **0.4 – 4.0 (p50 1.1)** |
+| `-ly` adverbs | 8.9 – 22.6 (p50 13.5) | **1.3 – 8.6 (p50 3.2)** |
+| hedge words — *just, almost, somewhat, seems, sort of* | 5.4 – 22.4 (p50 12.0) | **0.5 – 7.1 (p50 1.6)** |
 
-**Twenty-eight of twenty-eight of our builds sit below the field's floor on both.** Not most. Every
+**Twenty-eight of twenty-eight of our builds sit below the field's floor on adverbs, and
+twenty-seven of twenty-eight on hedges.** Not most. Every
 game this project has ever produced, under either skill. There is no game in the genre that writes
 as bare as our barest, and no game of ours that reaches the genre's leanest.
 
@@ -591,17 +592,26 @@ words and keeps every sentence at the same weight has got worse, not better.
 ⚠️ **Why both sides are read from built HTML, and what it costs.** Our authored TOML holds only beat
 prose; a built game also carries labels, sidebar, quest cards and room lists — thousands of words
 with almost no modifiers in them. Reading our TOML against the field's HTML compares two different
-things and inflates every rate on our side by **1.1x to 2.4x**, measured across four games. It is
-the same seam that forced the retraction recorded under gate 43, hit a third time. **The cost: there
-is no clean field baseline for prose alone**, because the corpus exists only as built pages. So the
-figures above are honest for whole games and there is no per-beat number to write down — which is
-exactly why the stopping point is a test and the model beats below are the doctrine.
+things. **The cost: there is no clean field baseline for prose alone**, because the corpus exists
+only as built pages. So the figures above are honest for whole games and there is no per-beat number
+to write down — which is exactly why the stopping point is a test and the model beats below are the
+doctrine.
+
+⚠️ **The first version of this warning carried a wrong number and the mistake is worth keeping.** It
+claimed our TOML runs **1.1x to 2.4x** hot against our own build. That was an artifact of the
+measuring script, not of the seam: its tag-stripping pattern was bounded at 200 characters, and this
+engine emits inline-styled `<img>` tags longer than that, so `object-fit`, `border-radius`, `lazy`
+and `async` were counted as WORDS on our side only — field games write short `[img[...]]` markup and
+were untouched. Unbounded, across six games, the same measurement moves **0.68x to 1.27x**. A rate
+over word count really does survive this seam, which is what gate 43 has always claimed. **A number
+that indicts an existing check deserves the same scepticism as one that flatters you.**
 
 ⚠️ **One finding was withdrawn on this same test and is recorded so it is not re-proposed.** Article
 density (*the / a / an*) was measured, reported as our largest and most invisible habit at 101 per
 1,000 against a field maximum of 86, and **it was an artifact of the seam**. Read on one basis we
-sit at **47.9 against a field median of 58.1** — below the middle of the genre, with 2 of 28 builds
-outside the range. There is no article finding.
+sit at **65.0 against a field median of 58.3**, inside the field's 33.3–86.0 with **3 of 28 builds
+above the maximum and 5 below the minimum**. Modestly above the middle of the genre, nowhere near
+outside it. There is no article finding.
 
 ---
 

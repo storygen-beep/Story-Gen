@@ -18,9 +18,9 @@ corrections are the useful part.**
 
 1. **The basis.** Every figure first reported compared the field's **built HTML** against our
    **authored TOML**. A build carries labels, sidebar, quest cards and room lists — thousands of
-   words with almost no modifiers — so reading our TOML alone strips a large low-rate denominator
-   and inflates every rate on our side by **1.1x to 2.4x**, measured across four games. Redone with
-   both sides read from `output/index.html`, 28 of ours against 25 of theirs.
+   words with almost no modifiers — so the two do not compare. Redone with both sides read from
+   `output/index.html`, 28 of ours against 25 of theirs. ⚠️ **This entry first claimed the gap was
+   1.1x–2.4x; that figure was itself an artifact and is corrected below under G43.**
 2. **The extraction.** A line-level pass over blockquotes reported "4,104 words of example prose
    across 11 files, every file off-field." A wrapped continuation line of an explanation does not
    begin with a warning marker and reads as narrative, so the count was mostly my own prose. At
@@ -28,17 +28,17 @@ corrections are the useful part.**
 
 **⚠️ A headline was WITHDRAWN by correction 1.** Article density was reported as our largest and
 most invisible habit — 101/1k against a field maximum of 86, "11 of 11 games outside". Read on one
-basis we sit at **47.9 against a field median of 58.1**, *below* the middle of the genre, 2 of 28
-builds outside the range. **There is no article finding.** It is recorded in `register.md` so it is
+basis we sit at **65.0 against a field median of 58.3**, inside the field's 33.3–86.0 with 3 of 28
+builds above the maximum and 5 below the minimum — modestly above the middle, nowhere near outside. **There is no article finding.** It is recorded in `register.md` so it is
 not re-proposed.
 
 **What survived, on the matched basis.**
 
 | per 1,000 words | field | ours | outside |
 |---|---|---|---|
-| `-ly` adverbs | 8.9 – 22.6 (p50 13.4) | 0.9 – 5.4 (p50 3.0) | **28 of 28 builds** |
-| hedge words | 5.4 – 22.4 (p50 12.0) | 0.4 – 4.0 (p50 1.1) | **28 of 28 builds** |
-| dashes /10k | 0 – 35.0 (p50 1.0) | 1.6 – 137.2 (p50 40.8) | 19 of 28 builds |
+| `-ly` adverbs | 8.9 – 22.6 (p50 13.5) | 1.3 – 8.6 (p50 3.2) | **28 of 28 builds** |
+| hedge words | 5.4 – 22.4 (p50 12.0) | 0.5 – 7.1 (p50 1.6) | **27 of 28 builds** |
+| dashes /10k | 0 – 35.5 (p50 1.1) | 1.6 – 179.6 (p50 42.7) | 15 of 28 builds |
 
 Every game this project has produced, under either skill, writes below the genre's floor on both
 modifier markers. **`Sweeping backwards` says to replace the hedged clause with the specific one and
@@ -77,10 +77,15 @@ arc: **264 words, 0 dashes, `-ly` adverbs 18.9/1k and hedges 11.4/1k — both in
   because the corpus exists only as built pages.
 - **`back_home` FAILS G43 at 79.4/10k** — 284 dashes in 35,755 words, more than double the ceiling.
   Recorded as a number that has to come down. LO's call: name it, do not fix it.
-- **⚠️ G43's own calibration is open, at LO's instruction.** The gate reads authored TOML and judges
-  it against a ceiling derived from the field's built HTML. `gates.py:6084` defends this with one
-  game — *"27.2 HTML, 25.4 here"*, a 7% move. Across four games the same measurement moves **1.11x
-  to 2.43x**. It errs strict, so nothing has been wrongly passed, and it is **held, not fixed**.
+- **⚠️ G43's calibration was investigated and NO DEFECT WAS FOUND — the alarm was mine.** This entry
+  first reported that the gate reads authored TOML against a ceiling derived from the field's built
+  HTML, and that the same measurement moves **1.11x to 2.43x** where `gates.py:6084` claims 7%. That
+  spread was an artifact of the study script, not of the gate: its tag-stripping pattern was bounded
+  at `<[^>]{1,200}>`, and this engine emits inline-styled `<img>` tags longer than 200 characters, so
+  CSS tokens were counted as words on our side only — the field's short `[img[...]]` markup was
+  unaffected, so only our rates were deflated. Unbounded, across six games, the move is **0.68x to
+  1.27x**. The dash rate does survive the change of basis, which is exactly what the gate claims.
+  `DASH_CEILING` stands and no line of `gates.py` was changed.
 
 Scripts, data and both superseded measurements: `~/Documents/Prose_Machine_Sound_Study_20260828/`
 and `~/Documents/Prose_Padding_Study_20260828/`.
