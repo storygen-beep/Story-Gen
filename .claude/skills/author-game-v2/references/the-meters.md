@@ -748,6 +748,46 @@ ambient or substitution at one location, gated on `worn_exposure gte 1`, is the 
 move**; add the second when the first earns it. A derived number that only the wardrobe screen reads
 is the same defect in a new place.
 
+**The starting move, written out.** A random ambient at one location that can only fire when she is
+underdressed. The trigger shape is lifted from `forty_miles/event_forecourt_lights_off`, which
+ships — copy it, change the place and the words:
+
+```toml
+[[canvases]]
+id   = "event_market_underdressed"
+name = "The market notices"
+
+[canvases.trigger]
+location      = "the_market"
+is_repeatable = true
+is_active     = true
+priority      = 3
+trigger_mode  = "random"
+chance        = 0.35
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "worn_exposure", operator = "gte", value = 1 },
+] }
+
+[[canvases.nodes]]
+id = "base"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The woman on the fruit stall looks at her twice and does not pretend otherwise the second time. Somebody behind her says something she is glad she cannot quite hear, and the man weighing her apples takes slightly longer than he needs to."
+```
+
+⚠️ **`version = "1.0"` is not optional.** A `conditions` block without it **fails open** — the engine
+returns true and the ambient fires whatever she is wearing, which reads exactly like the feature
+being broken. `engine.md` records the same trap for `entry_conditions`.
+
+⚠️ **`trigger_mode = "random"` is what makes it an ambient.** The default is `"manual"`, which renders
+a clickable link instead of firing on entry — a link labelled *"The market notices"* is not the same
+content and gives the game away.
+
+⚠️ **Write the second one different.** The whole value is that the market and the depot do not react
+alike; two locations sharing one paragraph is the readout again, wearing a coat. And `gte 1` is right
+for a public street — save `gte 2` for the places where being bare is the event itself.
+
 ---
 
 # The ascent's price

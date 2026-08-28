@@ -59,6 +59,21 @@ because nothing was added to the scoreboard. `mrs_vance` **44/44, 1 n/a**. All f
 re-read off live source. 280 tests pass. No game touched, and the feature reaches players only on a
 rebuild.
 
+**⚠️ Amended the same day, after LO asked whether this was properly done in BOTH halves. It was
+not.** `worn_exposure` appeared six times across two reference files and **every one of them was
+prose** — no template, no copyable block. That is this skill's own diagnosis from earlier the same
+day (*an example outranks every rule beside it, and no example outranks nothing at all*)
+reintroduced by me, in a different file, hours later. W7 now carries a worked ambient.
+
+**⚠️ And the first version of that example did not work.** It was written from memory and invented a
+trigger it does not have — `type = "location_ambient"`, `locationId`, a bare `chance`. The real
+shape was read off `forty_miles/event_forecourt_lights_off`, which ships: `location`,
+`is_repeatable`, `is_active`, `priority`, `trigger_mode = "random"`, `chance`, `conditions`. The
+example now parses as TOML, every one of its seven trigger keys is known to `template_import.py`,
+and its condition type is one the evaluator handles — all four checked rather than assumed. **An
+example an author copies into a game that then silently does not fire is worse than no example**,
+which is the whole argument for verifying one before it ships.
+
 **Left open.** How many places must read exposure before a wardrobe earns its keep is **not** gated,
 because no threshold is defensible yet: the reference game carries about twenty per-district
 reactions and we carry zero, and any floor between those is invented. The existing `the wardrobe is
