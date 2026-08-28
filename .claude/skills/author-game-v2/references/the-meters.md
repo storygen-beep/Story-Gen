@@ -722,8 +722,31 @@ The world then reads it about **900 times**: 415 sites test `gte 1`, 151 test `g
 the model's mouth to a frown at `exposed === 2`.
 
 **That is the shape to copy: one derived number, cheap enough to test that the whole world tests
-it.** Our equivalents are `worn_corruption` and `worn_beauty`, and W3's gate is what makes sure
-somebody reads them.
+it.** W3's gate is what makes sure somebody reads it.
+
+⚠️ **This paragraph named the wrong equivalent until 2026-08-28, and the reason is worth keeping.**
+It pointed at `worn_corruption` and `worn_beauty` — and neither can do what `$exposed` does, because
+both are backed by `getWornStatMax`, **which skips a slot with nothing in it** and starts at zero
+(`v2.py:1578-1579`). A naked player and one in a plain bra and cotton briefs returned the same
+number. The shape this file told authors to copy was not buildable with the parts it named, which is
+why five years of our wardrobes are read for display and almost never for consequence.
+
+**`worn_exposure` is the real equivalent, and it exists as of 2026-08-28.** A derived 0/1/2 — 0
+covered, 1 underwear-level, 2 bare — computed by `setup.getWornExposure` (`v2.py:1608`), the one
+aggregate that reads an empty slot: the upper region is bare unless `top` or `dress` fills it and
+underwear-level if only `bra` does, the lower likewise, and the result is the max of the regions and
+any garment's own declared `exposure`. The predicate is `worn_exposure` (`v2.py:4111`, lock text at
+`:7900`), the garment field is `exposure` (`template_import.py:2525`), and `engine.md` §17 lists it
+with the rest.
+
+⚠️ **And copy where the reads live, not just the number.** In `degrees-of-lewdity` the passages that
+gate on clothing most are Cliff Street, the Arcade, the Moor, the Canteen, Connudatus Street, the
+Park, the Dance Studio — the walk to work, not the sex scenes. It carries roughly twenty
+per-district reactions (`cliffexposed`, `parkexposed`, `commercialexposed`, `schoolpoolexposed`…),
+so walking out underdressed means something different on the cliff than in the canteen. **One
+ambient or substitution at one location, gated on `worn_exposure gte 1`, is the whole starting
+move**; add the second when the first earns it. A derived number that only the wardrobe screen reads
+is the same defect in a new place.
 
 ---
 

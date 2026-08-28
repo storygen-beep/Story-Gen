@@ -515,9 +515,19 @@ missing from this list until 2026-08-24 and two games use it.
 A garment nothing reads is not a garment (`the-meters.md` W3), and **gate · the wardrobe is read**
 enforces it. All three of these families satisfy it, and the second is the one authors forget:
 
-**1 · A condition predicate.** `worn_corruption`, `worn_beauty`, `worn_type`, `clothing_slot`
-(empty/filled — i.e. "not wearing a bra"), and `clothing_item` with `equipped` / `unequipped` /
-`owned` / `not_owned`. This is the gate family.
+**1 · A condition predicate.** `worn_corruption`, `worn_beauty`, `worn_type`, `worn_exposure`,
+`clothing_slot` (empty/filled — i.e. "not wearing a bra"), and `clothing_item` with `equipped` /
+`unequipped` / `owned` / `not_owned`. This is the gate family.
+
+> **`worn_exposure` is the only one of these that reads an EMPTY slot**, and it is the newest
+> (2026-08-28). A derived 0/1/2 — 0 covered, 1 underwear-level, 2 bare — from
+> `setup.getWornExposure` (`v2.py:1608`); the predicate is at `v2.py:4111` and its lock text at
+> `:7900`; a garment declares its own `exposure` via `template_import.py:2525`. ⚠️ **The other two
+> aggregates cannot see nakedness at all**: `worn_corruption` and `worn_beauty` are both
+> `getWornStatMax` (`v2.py:1578-1579`), which skips a slot with nothing in it, so naked and plainly
+> dressed return the same value. Use `worn_exposure` for how much is showing and the older pair for
+> how the outfit reads. `the-meters.md` W7 is why this matters: the field's body system is one
+> derived number the whole world tests.
 
 **2 · A `player_portrait` outfit override.** `when = { worn_type?, corruption?, flag? }`, first match
 wins (`template_import.py:743-745`). Only `worn_type` and `corruption` are wardrobe reads; a `flag`

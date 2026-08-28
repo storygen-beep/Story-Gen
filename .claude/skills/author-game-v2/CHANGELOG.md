@@ -5,6 +5,67 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-28 — the shape this skill told authors to copy was not buildable with the parts it named
+
+**Why.** LO asked for the clothing system, built to give the same player experience as the game we
+take from. The study said the mechanic is exposure — `degrees-of-lewdity` tests its derived
+`$exposed` **961 times against 54 reads of any per-slot `.exposed`**, and **71% of its 407 world
+gates** ask how much skin is showing, in Cliff Street, the Arcade, the Canteen and the Park rather
+than in sex scenes. `the-hellfire-club` asks `$top eq "none"`; `course-of-temptation` asks
+`$pc.wearing_underwear()`. Three notations, one mechanic.
+
+**The engine could not compute it, and this file had already told authors to copy it anyway.**
+`the-meters.md` W7 identified `$exposed` correctly in August, said *"that is the shape to copy: one
+derived number, cheap enough to test that the whole world tests it"* — and then named
+**`worn_corruption` and `worn_beauty` as our equivalents.** Neither can be: both are backed by
+`getWornStatMax` (`v2.py:1578-1579`), **which skips a slot with nothing in it**, so a naked player
+and one in a plain bra and cotton briefs return the same value. The shape was prescribed with parts
+that could not build it, which is a large part of why five years of our wardrobes are read for
+display and almost never for consequence.
+
+**What changed.**
+
+- **The engine** (committed separately) — `exposure` on a garment, `setup.getWornExposure`
+  (`v2.py:1608`) deriving 0/1/2 and reading empty slots, the `worn_exposure` predicate
+  (`v2.py:4111`) and its lock text (`:7900`). Verified in a packaged build: dressed 0, underwear 1,
+  topless 2, naked 2, while `worn_corruption` read 0 for every one of those states.
+- **`references/the-meters.md` W7** — the paragraph that named the wrong equivalent is corrected,
+  with why it was wrong kept beside it, and `worn_exposure` named as the real one. Plus the half W7
+  never carried: **copy where the reads LIVE**, not just the number — ordinary places, roughly twenty
+  per-district reactions in the reference game, and one ambient gated on `worn_exposure gte 1` as the
+  whole starting move.
+- **`references/engine.md` §17** — the predicate joins the gate family, with the ⚠️ that it is the
+  only one of the six that reads an empty slot.
+
+**⚠️ TWO THINGS WERE BUILT, FOUND TO BE WRONG, AND REVERTED BEFORE COMMIT. Both were caught by
+reading `engine.md` §17 while writing the doctrine, which is the only reason they were caught.**
+
+1. **A gate `the world sees what she wears`** — written on the finding that *"five of our ten
+   wardrobe games read clothing zero times."* That finding came from grepping `worn_*` predicates
+   only. It missed `clothing_slot`, `clothing_item`, `player_portrait` overrides and location
+   `clothing_rules` — all four listed in §17 as legitimate reads. **A gate `the wardrobe is read`
+   already existed and counts all of them.** The true figure is **four** games, not five, and
+   `vesper` reads its wardrobe **30 times** and passes — while the new gate called it zero and
+   failed it, for doing what W7 calls the field's normal case. **A check that fails a game for
+   obeying the doctrine is a bug in the check** — R4's error, and the gate went in the bin with its
+   R9 doctrine section and its SKILL.md row. `gates.py` has a zero-line diff across this arc.
+2. **The claim "nakedness was unaskable."** False: `clothing_slot` (empty/filled) has always been
+   able to ask about one slot. What did not exist is the DERIVED scalar folding the regions into one
+   value — narrower ground, and the ground the field actually stands on. Corrected in the code
+   comment, the schema comment and the test docstring.
+
+**Verified.** `--selfcheck` green both directions, **45/45 gates and 27/27 lints — unchanged**,
+because nothing was added to the scoreboard. `mrs_vance` **44/44, 1 n/a**. All five engine citations
+re-read off live source. 280 tests pass. No game touched, and the feature reaches players only on a
+rebuild.
+
+**Left open.** How many places must read exposure before a wardrobe earns its keep is **not** gated,
+because no threshold is defensible yet: the reference game carries about twenty per-district
+reactions and we carry zero, and any floor between those is invented. The existing `the wardrobe is
+read` gate already fails a wardrobe nothing reads at all, which is the defensible half.
+
+---
+
 ## 2026-08-28 — what does she actually DO: the field puts the act on the button, and four of our games never let her say no
 
 **Why.** LO's question, asked after clothing and corruption both turned out to be mostly decoration:
