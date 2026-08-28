@@ -744,9 +744,29 @@ gate on clothing most are Cliff Street, the Arcade, the Moor, the Canteen, Connu
 Park, the Dance Studio — the walk to work, not the sex scenes. It carries roughly twenty
 per-district reactions (`cliffexposed`, `parkexposed`, `commercialexposed`, `schoolpoolexposed`…),
 so walking out underdressed means something different on the cliff than in the canteen. **One
-ambient or substitution at one location, gated on `worn_exposure gte 1`, is the whole starting
-move**; add the second when the first earns it. A derived number that only the wardrobe screen reads
-is the same defect in a new place.
+ambient at one location, gated on exposure AND on somebody being there to see it, is the whole
+starting move**; add the second when the first earns it. A derived number that only the wardrobe
+screen reads is the same defect in a new place.
+
+⚠️ **Exposure is not a property of the outfit. It is a property of the outfit in a PLACE, with an
+AUDIENCE** — and this is the half that is easy to miss, because the number itself hides it. Read
+`degrees-of-lewdity`'s `exposure()` and the first thing it computes is not clothing at all:
+
+```js
+const safeLocations = ["Bedroom", "Sleep", "Bird Tower", "Mirror", "Spa Tan Naked", ...];
+if (safeLocations.some(...) && !V.audiencepresent) { V.libertine = 2; }   // anything goes
+else if (["beach", "pool", "sea", "lake"].includes(...)) { ... }
+```
+
+`audiencepresent` is consulted 14 times. Naked in her own bedroom is nothing; naked on Cliff Street
+is the event; a swimsuit is exposure on the high street and unremarkable at the pool.
+
+**Our engine reaches the same place from the other direction, and the place half costs nothing.**
+DoL centralises the judgement in one function that knows which locations are safe. We distribute it:
+a canvas is bound to a location, so an exposure ambient only fires where an author put it, and her
+bedroom is safe by simply having none. The audience half is `npc_at_location` with no `npc_id` —
+the any-NPC "room occupied" form (`v2.py:4216`). **Gate on both.** An ambient that fires in an empty
+room is the game talking to itself.
 
 **The starting move, written out.** A random ambient at one location that can only fire when she is
 underdressed. The trigger shape is lifted from `forty_miles/event_forecourt_lights_off`, which
@@ -765,7 +785,8 @@ priority      = 3
 trigger_mode  = "random"
 chance        = 0.35
 conditions    = { version = "1.0", logic = "AND", items = [
-  { type = "worn_exposure", operator = "gte", value = 1 },
+  { type = "worn_exposure",   operator = "gte",        value = 1 },
+  { type = "npc_at_location", operator = "is_present", location_id = "the_market" },
 ] }
 
 [[canvases.nodes]]
@@ -783,6 +804,14 @@ being broken. `engine.md` records the same trap for `entry_conditions`.
 ⚠️ **`trigger_mode = "random"` is what makes it an ambient.** The default is `"manual"`, which renders
 a clickable link instead of firing on entry — a link labelled *"The market notices"* is not the same
 content and gives the game away.
+
+⚠️ **0/1/2 on the garment is the right scale, and this was checked rather than assumed.** DoL
+carries TWO fields per garment and it is easy to copy the wrong one. `exposed` is **0/1/2** — 515
+garments at 0, 37 at 1, 5 at 2 — and it is what `itemExposure()` returns and what the world gates
+on. `reveal` is a separate 0–10000 *look* rating feeding a colour scale (`>=900` red, `>=700` pink,
+`>=500` purple) and NPC lust checks; **our nearest equivalent to `reveal` is `beauty`, which we
+already have.** So `exposure = 0` as the default is correct too: the overwhelming majority of real
+garments cover.
 
 ⚠️ **Write the second one different.** The whole value is that the market and the depot do not react
 alike; two locations sharing one paragraph is the readout again, wearing a coat. And `gte 1` is right

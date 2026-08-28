@@ -74,6 +74,38 @@ and its condition type is one the evaluator handles — all four checked rather 
 example an author copies into a game that then silently does not fire is worse than no example**,
 which is the whole argument for verifying one before it ships.
 
+**⚠️ Amended again after LO asked the question I had not asked: what does the field actually PUT in
+the wardrobe.** I had measured whether clothing is read and what it gates, never what the garments
+ARE. Asking produced one correction to this feature and one addition worth more than the feature.
+
+**The catalogue.** `degrees-of-lewdity` ships **557 body garments** — 240 upper, 222 lower, 41
+under-upper, 54 under-lower — plus 123 head, 88 feet, 63 legs. `the-hellfire-club` independently
+carries **336 distinct garment values**. Ours ship **6 to 20 in total**. And the wardrobe is
+organised by OCCASION, not by lewdness: normal 203 · costume 146 · formal 92 · school 55 · serving
+42 · swim 37 · holy 33 · **fetish 26**. Under 5% of it is the lewd end. Pyjama shirt, Towel top,
+School shirt, Evening gown, Kimono, Maid dress. Ours carry `beauty` and `corruption` — we built the
+lewdness axis and skipped the life.
+
+**⚠️ A correction I nearly shipped in the other direction.** Seeing `reveal` run 0–10000 across
+garments, I told LO the 0/1/2 scale I had built was the derived readout and that I had skipped the
+real input. **Wrong, and reading `itemExposure()` is what caught it.** DoL carries TWO fields:
+`exposed` is **0/1/2** — 515 garments at 0, 37 at 1, 5 at 2 — and is what `itemExposure()` returns
+and what the world gates on; `reveal` is a separate *look* rating feeding a colour scale (`>=900`
+red, `>=700` pink, `>=500` purple) and NPC lust checks, whose nearest equivalent we already have as
+`beauty`. **The garment scale and the `exposure = 0` default were both already right.** Two "fixes"
+were proposed and neither was needed — because the derivation was read instead of the number copied.
+
+**⚠️ And the thing that was genuinely missing is not a number at all.** `exposure()` computes the
+PLACE and the AUDIENCE before it looks at clothing: a `safeLocations` list where anything goes, and
+`audiencepresent`, consulted 14 times. **Exposure is a property of the outfit in a place with an
+audience** — naked in her bedroom is nothing, naked on Cliff Street is the event, a swimsuit is
+exposure on the high street and unremarkable at the pool. W7 now says so. Our engine reaches it from
+the other side and the place half is free: a canvas is bound to a location, so an exposure ambient
+only fires where an author put it and the bedroom is safe by having none. The audience half is
+`npc_at_location` with no `npc_id` — the any-NPC "room occupied" form (`v2.py:4216`) — and the
+worked example now gates on both. **An ambient that fires in an empty room is the game talking to
+itself.**
+
 **Left open.** How many places must read exposure before a wardrobe earns its keep is **not** gated,
 because no threshold is defensible yet: the reference game carries about twenty per-district
 reactions and we carry zero, and any floor between those is invented. The existing `the wardrobe is
