@@ -13,7 +13,7 @@ Usage:
     python3 scripts/playtest.py <slug> --build /tmp/x/index.html   # a scratch artefact
     python3 scripts/playtest.py <slug> --headed      # watch it run
 
-    from playtest import open_game, sv, click, play, report   # the library
+    from playtest import open_game, sv, snapshot, click, play, Report   # the library
 
 Layer A is the library — the helpers below. Layer B is the universal checks in
 `universal()`, which need no per-game code and run on any build.
@@ -54,6 +54,11 @@ THE TWO RULES, ENFORCED HERE IN CODE
      · a walk-in naming `requires_npc` asks whether that NPC is where the PLAYER is
        (v2.py:5432) — leave `player.current_location` at its initial "" and every
        named walk-in returns null and you measure a world with nobody in it
+
+3. TWO MORE THE FIRST REAL PROBE PAID FOR, 2026-08-29, both now owned by helpers:
+     · `Engine.play` is a REQUEST — a Lane 3 host substitutes another canvas on
+       entry, so `play()` verifies and retries (see its docstring for the 2-in-12)
+     · player and NPC meters are different objects — `snapshot()` reads both
 
 Requires playwright (`pip install playwright && playwright install chromium`).
 """
@@ -160,6 +165,25 @@ def flags(page):
     return sv(page, "SugarCube.State.variables.flags")
 
 
+def snapshot(page):
+    """EVERY meter in the game as {(who, trait): value} — `who` is "player" or an npc id.
+
+    Diff two of these to measure what a choice actually did.
+
+    ⚠️ Player meters and NPC meters live in different objects, and the ones an author
+    writes side by side in a single choice are usually split across both: a work rung
+    that pays `money` and `standing` to the player also adds `trust` to the NPC.
+    Reading an NPC trait off `player.core_traits` returns a flat 0, so a working
+    effect reports as dead — one of the false alarms this file exists to prevent.
+    """
+    raw = page.evaluate("""() => {
+        const S = SugarCube.State.variables, out = {player: S.player.core_traits};
+        for (const k in (S.npcs || {})) out[k] = (S.npcs[k] || {}).core_traits || {};
+        return JSON.parse(JSON.stringify(out));
+    }""")
+    return {(who, t): v for who, tr in raw.items() for t, v in tr.items()}
+
+
 def links(page):
     """Clickable choice labels on the current screen."""
     return page.eval_on_selector_all(
@@ -213,14 +237,44 @@ def click(page, text, settle=250):
     return ok
 
 
-def play(page, canvas, node="base", settle=250):
-    """Jump straight to a canvas node. Returns True, or the error string."""
-    out = page.evaluate(
-        """(n) => { try { SugarCube.Engine.play(n); return true; }
-                    catch (e) { return String(e); } }""",
-        f"Canvas_{canvas}_Node_{node}")
-    page.wait_for_timeout(settle)
-    return out
+def passage(page):
+    """The passage actually on screen right now."""
+    return page.evaluate("() => SugarCube.State.passage")
+
+
+def play(page, canvas, node="base", settle=250, tries=12):
+    """Jump to a canvas node, and land on the one you ASKED for.
+
+    ⚠️ **`Engine.play` is a request, not a guarantee.** A Lane 3 dispatcher host
+    substitutes another canvas on entry (`setup.checkAndSubstituteCanvas`), so the
+    screen you get is often not the screen you named. Measured on `mrs_vance`:
+    twelve entries to `act_wash_bay` at Monday 11:00 rendered `walkin_bay_isaac`
+    seven times, `walkin_bay_seen` three times, and the canvas actually requested
+    **twice**. A probe that assumes otherwise reads the wrong screen's choices and
+    reports the surface as broken — which is how three reds in this file's first
+    money probe turned out to be the probe.
+
+    So this retries until the requested passage is the one rendered. Returns True
+    when it lands, the error string if `Engine.play` threw, or the last passage
+    seen if every try was substituted.
+
+    Pass `tries=1` to keep the raw single-entry behaviour — that is what you want
+    when you are measuring substitution itself, though `sample_dispatch` is the
+    better instrument for that.
+    """
+    want = f"Canvas_{canvas}_Node_{node}"
+    got = None
+    for _ in range(max(1, tries)):
+        out = page.evaluate(
+            """(n) => { try { SugarCube.Engine.play(n); return true; }
+                        catch (e) { return String(e); } }""", want)
+        page.wait_for_timeout(settle)
+        if out is not True:
+            return out
+        got = passage(page)
+        if got == want:
+            return True
+    return got
 
 
 def goto(page, passage, settle=250):
@@ -248,6 +302,22 @@ def set_time(page, day, hour, minute=0):
             const ts = SugarCube.State.variables.game_state.time_state;
             ts.current_day = a[0]; ts.current_hour = a[1]; ts.current_minute = a[2];
         }""", [day, hour, minute])
+
+
+def advance_time(page, minutes, settle=300):
+    """Push the clock forward through the engine's own advance, so the day
+    rollover and everything hung off it (`[engine.daily_tick]`, rent arming) run.
+
+    ⚠️ It is `window.advanceTime` (v2.py:5569) — NOT `setup.advanceTime`, which does
+    not exist. Looking in the `setup` namespace returns undefined, the clock never
+    moves, and a rent probe reports that the obligation was never charged on a day
+    that never arrived.
+    """
+    out = page.evaluate(
+        """(m) => { if (typeof window.advanceTime !== 'function') return 'no advanceTime';
+                    window.advanceTime(m); return true; }""", minutes)
+    page.wait_for_timeout(settle)
+    return out
 
 
 def stand_at(page, location_slug):
