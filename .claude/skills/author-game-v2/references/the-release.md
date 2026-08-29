@@ -47,6 +47,11 @@ different timing, an order of magnitude in value.
 **4. Write.** Events on existing surfaces. Default to **zero new locations** — if this release
 opens one, it arrives filled, not as a promise.
 
+> ⚠️ **If this release moves a field that prose already quotes — a price, an amount, a
+> window, a parent location, a label — it is an amendment, not an addition.** See *The prose
+> quotes the fields* below, and grep the prose for the OLD value **spelled out**, not only as
+> a digit. Ten of eleven rent-enabled games hand-write their own rent amount.
+
 **5. Gate — and read the lists.** `python3 scripts/gates.py <slug>` green, or fix it. That same
 command prints **nineteen lints below the tally**, and they are the half of the instrument that
 judges nothing: a game can be green on every gate with the lints full. Off Season shipped **37/38
@@ -134,6 +139,79 @@ run roughly 87% non-new content.
 
 So a release that is half repair is *normal*. Budget it. Do not treat a high rework rate as a
 defect to apologise for — under-shooting it is the more likely error.
+
+---
+
+## The prose quotes the fields, and a field that moves makes the prose lie
+
+**Read this before changing a `costs`, a rent `amount`, a `due_day`, an `entry_from`, a schedule,
+or a display label on content that already ships prose.**
+
+**The model.** An authored line that states a fact a field encodes is a **copy of that field** — a
+literal duplicate with no link back. `amount = 125` and Vince saying *"Rent. Hundred and
+twenty-five."* are two independent strings that happen to agree today. Everything here **passes
+the build**: the flag chain validates, no warning fires, nothing crashes. The damage is that the
+game tells the player something untrue, and the player cannot grep, cannot diff, and has no way
+to know.
+
+**The engine will not save you, and the rent block is the sharpest case.** An authored `greeting`
+*replaces* the default that would have interpolated the live number:
+
+```
+v2.py:16604   <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">>
+v2.py:16608   <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
+```
+
+Four lines apart. Re-price to 150 and the collector says *"Hundred and twenty-five"* directly
+above *"Rent is $150."* **The NPC contradicts the UI in a single screenshot.**
+
+**The exposure, measured 2026-08-29.** **Ten of eleven rent-enabled games hand-write their own
+rent amount**, and the most fragile copies sit *inside the rent block, beside `amount`*:
+
+| game | `amount` | authored copies |
+|---|---|---|
+| `off_season` | 90 | `greeting` *"Right. Ninety."* · `cant_pay` *"You haven't got the ninety."* · `eviction_response_soft` *"We're past the ninety."* |
+| `late_shifts` | 125 | `greeting` *"Rent. Hundred and twenty-five."* · a beat *"Rent's a hundred and twenty-five. Every Friday."* |
+| `back_home` | 120 | *"the rent is a hundred and twenty"* · *"a hundred and twenty a week for a room half the size of his"* |
+| `the_allowance` | 50 | `paid_response` *"Fifty. Ta, love."* · *"Fifty a week, Sunday, at the table."* |
+
+⚠️ **Nothing in the repo is currently WRONG.** This is not a bug list — it is a debt list. Every
+one of those pairs agrees today, and every one of them breaks the moment somebody re-prices.
+
+**Keep writing the copy.** It is load-bearing: the player budgets against a stated number, and a
+price only the UI knows is a plan they cannot make. What writing it creates is an obligation —
+**the field and its prose are one edit, not two.**
+
+### The four edits that carry this debt
+
+**MOVE** an `entry_from` · **RE-PRICE** a `costs` or an `amount` · **RE-SCHEDULE** a window or a
+`due_day` · **RENAME** a display label. All four change something that already has prose pointing
+at it. Treat each as an amendment, not an addition.
+
+### Before you commit one, grep the prose for the OLD value
+
+```bash
+git diff -U0 -- games/<slug>/toml_phases/ | grep -E '^-.*(amount|costs|entry_from|due_day|start_time)'
+# then search the prose for the value that just left
+```
+
+⚠️ **Grep the WORDS, not just the digits — this is the step that gets skipped.** `125` never
+appears as a digit in `late_shifts`; it is written *"Hundred and twenty-five"*, in voice, as it
+should be. A sweep of this repo for numerals found **zero** copies of any rent amount; the same
+sweep including spelled-out forms found **122 candidate strings across ten games**. The digit
+search is the one that feels thorough and is not.
+
+### What already catches part of this, and what does not
+
+| coupling | caught by |
+|---|---|
+| a price on a button vs the cost it charges | gate **a price is on its label** — it compares the amount |
+| a place the prose walks through that the map lacks | lint **the prose names places the map does not have** |
+| an hour a beat names against the window it fires in | lint **the clock in the prose** |
+| a currency that is not the game's own | lint **the currency in the prose** |
+| a house word that changed | lint **the words the player has to already own** |
+| a `file:line` in this skill that moved | `scripts/cite_check.py` |
+| **an amount spelled out in a beat or an NPC's line** | **nothing — this section is the whole guard** |
 
 ---
 

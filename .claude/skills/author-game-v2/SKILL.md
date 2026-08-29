@@ -148,7 +148,7 @@ Resolve the game slug from the request, then read `games/<slug>/v2_state.json`:
 | *(no state file)* | write the Want, create the state file | `references/the-want.md` |
 | `want` | lay down the world | `references/the-board.md` + `the-map.md` + `the-economy.md` + `the-meters.md` |
 | `board` | build v0.1 | `references/the-release.md` (§ first release) + `the-voice.md` |
-| `release` | run the loop — pitch, attack, write, gate, ship, log | `references/the-release.md` + `the-returning-player.md` |
+| `release` | run the loop — pitch, attack, write, gate, ship, log, and keep the prose true to the fields it quotes | `references/the-release.md` + `the-returning-player.md` |
 
 **The world files, all read in the board phase:** `the-board.md` (fill, meters, cast) ·
 `the-map.md` (the world as a place someone could draw) · `the-surfaces.md` (which screen each

@@ -5,6 +5,70 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-29 — the prose quotes the fields, and ten of eleven games quote their own rent by hand
+
+**Why.** `DOCTRINE_GAPS.md` item 13, the last never-studied subject in the inventory. v1 shipped
+`references/prose-truth.md` (121 lines) after being bitten; v2 said nothing at all.
+
+⚠️ **MOST OF THE ITEM WAS ALREADY CHECKED, UNDER OTHER NAMES.** Gate `a price is on its label`
+compares the amount against the label, not just its presence. Four lints cover the rest: a place
+the map lacks, an hour the window cannot guarantee, a foreign currency, a house word that moved.
+`cite_check.py` covers the skill's own citations. ⚠️ **And the item's own "first measured
+instance" was in the SKILL's worked example** — `the-voice.md` R1 taught *The Lodger's Room* until
+the vocabulary rule changed — **not in a game.**
+
+**Measured before writing anything.** 128 money amounts written into prose across 14 games: every
+one matches a declared field. Rent-in-prose against the declared obligation: **zero mismatches**
+(one candidate was an author's design note where both numbers were right). Three couplings nothing
+checks — a trait threshold named in prose, a meter band word in prose, an NPC's hours in prose —
+returned **zero real hits**: every candidate was dev-jump text, a design note, or a coincidence,
+plus an off-by-one in my own span check that read a time exactly at `end_time` as outside it.
+
+⚠️ **THEN v1'S OWN FILE REFUTED MY INSTRUMENT, IN ONE SENTENCE.** *"`125` never appears as a digit
+in that prose — it's spelled out, in voice, as it should be. That's why you cannot find these by
+grepping the prose for the value."* I had grepped digits. Re-swept including spelled-out forms:
+
+**Ten of eleven rent-enabled games hand-write their own rent amount** — roughly 17 unmistakable
+copies, and the most fragile sit *inside the rent block, beside `amount`*: `off_season` has three
+(`greeting` *"Right. Ninety."*, `cant_pay`, `eviction_response_soft`), `late_shifts` two,
+`back_home` two, `the_allowance` two. **Nothing is stale today. All of it breaks on the next
+re-price.**
+
+**The engine half, verified live rather than inherited.** An authored `greeting` *replaces* the
+default that would have interpolated the live value:
+
+- `v2.py:16604` — `<<print _rt.greeting || "Rent. " + _cur + _rent + …>>`
+- `v2.py:16608` — `Rent is <<print _cur>><<print _rent>>.`
+
+Four lines apart, so a re-price puts the collector's line directly above a number contradicting it.
+v1's example is true at today's line numbers.
+
+**What changed.**
+
+- **`references/the-release.md` § The prose quotes the fields** — placed under *Maintenance is the
+  job*, because that is when the damage happens. The model, the engine seam, the measured exposure
+  as a table, the four amendment edits (MOVE · RE-PRICE · RE-SCHEDULE · RENAME), a pre-commit grep
+  recipe, and a table of what already catches what — ending on the one coupling nothing catches.
+- **Loop step 4** gains the pointer, and **`SKILL.md`**'s release dispatch row says the loop now
+  owns keeping prose true to the fields it quotes.
+
+⚠️ **NO GATE AND NO LINT, DELIBERATELY.** Nothing in the repo is currently wrong; this is a debt
+list, not a bug list. A check for a defect with no current victim is the P0 error — **made and
+reversed once already today** with the dead-declaration lint. If a re-price ever does strand a
+line, the instrument to build is the spelled-out sweep, and this entry is where to find it.
+
+⚠️ **FIVE MEASUREMENT BUGS IN ONE DAY, ALL ONE FAMILY.** Grepping phase files instead of parsing
+the build (twice), a lookahead that ate the commonest token form, reading `rent.amount` when the
+field is `settings.rent.amount`, and searching for digits when the value is written in words.
+**The rule that would have caught every one: parse the artefact, and ask how an author would
+actually write the thing before deciding it is absent.**
+
+**Verified.** `--selfcheck` green — 46 gates, 28 lints, 46/46 rows. `gates.py` untouched this arc,
+so no verdict can move; confirmed by re-scoring `mrs_vance` **44/44** and `back_home` **16/36**.
+`cite_check` — the two new `v2.py` citations were re-read against live source before writing.
+
+---
+
 ## 2026-08-29 — customization: the field says the answer back, and we asked four times without listening
 
 **Why.** `DOCTRINE_GAPS.md` item 12's remaining half, and the last never-studied subject in the
