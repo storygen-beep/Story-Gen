@@ -964,8 +964,8 @@ it.)*
 ### 24.2 `time_state.current_day` is a day NAME, not an index
 
 ```
-v2.py:3345   const dayIndex = ["Monday","Tuesday",…].indexOf(timeState.current_day);
-             also :3444 :3588 :3643 :3706
+v2.py:3422   const dayIndex = ["Monday", "Tuesday", …].indexOf(timeState.current_day);
+             also :3593 :3737 :3792 :3855
 ```
 
 Set it to `0` and `indexOf` returns `-1` at every call site.

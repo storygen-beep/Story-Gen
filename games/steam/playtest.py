@@ -112,10 +112,13 @@ with sync_playwright() as p:
     # now the real question: do STEAM's own authored effects carry clamp=false?
     page.evaluate("() => { SugarCube.State.variables.player.core_traits.money = 95; }")
     fired = page.evaluate("""() => {
-        // replicate an authored money effect exactly as the game declares it
-        const eff = {targetType: 'player', trait: 'money', op: 'add', value: 40, clamp: false};
+        // replicate an authored money effect exactly as the game declares it.
+        // POSITIONAL: applyTraitEffect(targetType, npcId, trait, op, val, clampFlag, cap)
+        // — v2.py:5883. Handing it a single options object is a silent no-op: it
+        // returns without touching anything, money reads 95, and the check fails on
+        // a working build. That false alarm shipped here until 2026-08-29.
         if (typeof window.applyTraitEffect === 'function') {
-            window.applyTraitEffect(eff);
+            window.applyTraitEffect('player', null, 'money', 'add', 40, false, null);
             return {via: 'applyTraitEffect', money: SugarCube.State.variables.player.core_traits.money};
         }
         return {via: 'none', money: null};
@@ -162,11 +165,20 @@ with sync_playwright() as p:
     check("visible locked door renders on a hub", bool(locked), str(locked[:2]))
 
     # ── 6. guidance page has cards ─────────────────────────────────────────
+    # "story_goals" is the ONLY scope that answers — v2.py:15496 opens with
+    # `if (scope !== "story_goals") return [];`, so the 'all' this used to ask for
+    # returned [] by construction while gates.py reported 24 cards. And story cards
+    # skip anything carrying an npc_id (v2.py:15501), so the per-character cards
+    # come from setup.pickQuestsCard(slug) — v2.py:15470 — a different function.
     quests = page.evaluate("""() => {
         try {
-            if (typeof (SugarCube.setup||{}).pickQuestsCards === 'function') return SugarCube.setup.pickQuestsCards('all').length;
-            if (typeof window.pickQuestsCards === 'function') return window.pickQuestsCards('all').length;
-            return -1;
+            const S = SugarCube.setup || {};
+            let n = typeof S.pickQuestsCards === 'function'
+                  ? S.pickQuestsCards('story_goals').length : 0;
+            if (typeof S.pickQuestsCard === 'function')
+                for (const slug in (SugarCube.State.variables.npcs || {}))
+                    if (S.pickQuestsCard(slug)) n++;
+            return n;
         } catch (e) { return String(e); }
     }""")
     check("guidance cards resolve at runtime", isinstance(quests, int) and quests != 0,

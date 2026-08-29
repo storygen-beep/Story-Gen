@@ -80,6 +80,23 @@ target. Its output: the prose. It does not choose placement, gates, or media.
 
 ## The Player — measures heat, does not judge it
 
+> ✅ **BUILT 2026-08-29 — and it was mostly already written.** The harness is
+> `scripts/playtest.py`; the agent is `.claude/agents/v2-player.md`, callable as
+> `subagent_type: "v2-player"`. This section described a job still to be designed while
+> **seven hand-written play-tests** were already running in `games/` — five in `mrs_vance`,
+> one each in `steam` and `forty_miles`, 1,000+ lines — sharing a `check()` collector and
+> four helpers almost verbatim, and cited exactly once in this whole library
+> (`the-meters.md:445`). They found what no source gate could: an effect op the runtime does
+> not implement, an obligation that was checked as payable and never as taken, a character
+> deleted at midnight by a day-specific overnight row.
+>
+> ⚠️ **The case for making it shared code is measured, not aesthetic.** Run on 2026-08-29,
+> `steam`'s script reported two failures and **both were the harness** — it called
+> `applyTraitEffect` with one options object where the engine takes seven positional
+> arguments, and asked `pickQuestsCards` for a scope that returns `[]` by construction.
+> Two of two raw reds were noise, in a corpus of scripts written by people who knew the
+> engine. Every signature the harness wraps is one nobody re-derives.
+
 **Job:** play the build and report numbers.
 
 - clicks and words to the first explicit beat
@@ -106,6 +123,19 @@ The same applies to finding things to click: locate by passage and canvas id, no
 **Before it can assert at all it needs `engine.md` §24** — four facts about reading a built game,
 each of which otherwise produces a false alarm indistinguishable from a real defect. Two of the four
 have already cost this project a session apiece.
+
+⚠️ **The ban is on LABELS, and the line matters** — stated absolutely above, and one shipped script
+sits the other side of it. `playtest_standing.py` asserts on **body prose** to decide which ladder
+rung rendered, and it proved six rebuilt ladders live (`mrs_vance/REVIEW.md:721`). The distinction
+the record actually supports: a *label* is decorated at render — icons, spacing, cost suffixes — so
+matching author-side text against it fails on a working build; a *beat's prose* is not. So: prose may
+answer **which variant rendered**; only state may answer **whether the mechanic fired**. The harness
+enforces exactly that split — it ships `sv()` and `body()` and deliberately no `assert_text`.
+
+**Every red is a hypothesis until its cause is found in `v2.py` or the game's TOML, quoted as
+`file:line`.** This is the Player's version of the Attack Panel's verify pass, and it is not
+optional: of the four raw reds this harness has produced across nine games, **three were the
+harness** and one was real.
 
 ---
 

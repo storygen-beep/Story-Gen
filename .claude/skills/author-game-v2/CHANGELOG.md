@@ -5,6 +5,76 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-29 — the Player agent: it was built seven times and never collected
+
+**Why.** `DOCTRINE_GAPS.md` closed, so the largest remaining hole was the one `STATUS.md` had
+named for weeks — *"Pitchers, attack panel, prose maker, player — all still prose in `agents.md`.
+No prompts, no schemas, no call sites."*
+
+**That row was wrong about the Player.** Seven hand-written play-tests were already running in
+`games/`: five in `mrs_vance`, one each in `steam` and `forty_miles`, over a thousand lines, all
+Playwright, all driving `SugarCube` directly. Six shared the same `check(name, ok, detail)`
+collector; two shared four helpers almost verbatim. The skill did not know: `agents.md` described
+the Player as a job to be designed, `STATUS.md` and `SKILL.md` never mentioned a play-test, and
+the whole library carried one citation to any of them.
+
+They had already found what no source gate can: an effect op the runtime does not implement, an
+obligation checked as *payable* and never as *taken*, a character deleted at midnight by a
+day-specific overnight row.
+
+**The measured case for shared code.** Both existing scripts were run before anything was written.
+`forty_miles` returned 18/18. **`steam` returned 10/12 and both reds were the harness, not the
+game** — each traceable to one engine line. That is two of two raw findings being noise, in scripts
+written by people who knew this engine, which is the whole argument: a false alarm sends a session
+hunting a bug that does not exist.
+
+**What changed.**
+
+- **`scripts/playtest.py` — new.** Layer A is the library: `open_game` (age gate, error binding,
+  one wait policy instead of the three the seven scripts used), `sv` / `traits` / `flags`, `links` /
+  `locked` / `body`, `click` / `play` / `goto`, `set_time` / `stand_at`, `locations` / `npcs_at` /
+  `npc_at`, `quest_cards`, `random_canvases`, `apply_effect`, `sample_ambients`, `sample_dispatch`,
+  and a `Report` collector where **`n/a` is a first-class outcome and is not a pass**. Layer B is
+  `universal()` — nine checks that need no per-game code, deliberately answering only what a live
+  run can answer and not re-measuring what `gates.py` reads from source.
+- **`.claude/agents/v2-player.md` — new.** Callable as `subagent_type: "v2-player"`. It measures and
+  does not judge; it writes probe scripts to the scratchpad and never to `games/`.
+- **`references/agents.md`** — the Player section records that it is built, names the seven
+  precedents, and carries the two-of-two false-alarm finding.
+- **`games/steam/playtest.py`** — the two false probes corrected, with the cause in a comment.
+
+**The rules the harness enforces in code rather than in prose each author rewrites:** assert on
+state and never on a label (no `assert_text` helper exists), and the five engine facts that each
+fake a broken game — the `SugarCube.` prefix, the day NAME, presence asked of the engine, the
+entity-encoded page, and the player location a `requires_npc` walk-in is measured against.
+
+⚠️ **The label ban was narrowed to what the evidence supports, not restated.** `agents.md` said
+*never on rendered page text*, absolutely — while `playtest_standing.py` asserts on **body prose**
+to identify a ladder rung and proved six rebuilt ladders that way. The record is about *labels*,
+which are decorated at render; a beat's prose is not. So prose may answer which variant rendered,
+and only state may answer whether a mechanic fired. The harness ships `body()` and no `assert_text`.
+
+**Verified.** `steam` 10/12 to **12/12**; `forty_miles` still **18/18**. The universal checks run on
+games with no bespoke script: `last_call`, `late_shifts`, `the_allowance`, `seventh_day` **10/10**,
+`the_season` 8/8 + 1 n/a, `back_home` 7/7 + 2 n/a, and `mrs_vance` **10/10** against a scratch build
+(its `output/` is deliberately stale until release). `--selfcheck` unchanged.
+
+⚠️ **Three of the harness's own first four reds were the harness, and each was fixed before being
+believed** — quest cards read from one of the engine's two card functions; the ambient sample taken
+at a single hardcoded noon, which reads a night game as a dead world; and npc ids taken from the
+runtime map, which is UUID-keyed in a `--use-db` build while the cards still say `npc_hank`. **The
+rule that caught all three is now the agent's second law: a red is a hypothesis until its cause is
+quoted as `file:line`.**
+
+**The one real finding, and it is not fixed here.** `off_season` declares 15 `trigger_mode = "random"`
+ambients and **not one of them carries a `chance`**. The roll is `var chance = canvas.chance || 0`,
+so every one of them is not unlikely but impossible — the game's entire ambient layer is dead. It
+scores 41/2 on the source scoreboard, and the world-prose lint reads `10/10 locations carry a random
+event`, because the declaration is there and only the number is missing. Reported to LO with the
+gate question; no game touched, per the standing rule that already-generated v2 games are not patched.
+
+---
+
 ## 2026-08-29 — pre-ship discipline: the tools were all there and the loop named half of them
 
 **Why.** `DOCTRINE_GAPS.md` item 11, the last open row in the inventory. Its governing rule was

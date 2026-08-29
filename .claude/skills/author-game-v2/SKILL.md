@@ -277,6 +277,12 @@ shown at all**.
   | `gates.py --release <slug>` | the **artefact**, not the source. Every gate above reads `7_final_game.toml` and none of them can see a build, which is why a game shipped to the published grid as a `--dev --debug` artefact with 115 missing files and nothing said so. Six checks, off for every ordinary run, **exits non-zero**. `the-release.md` § Shipping the build. |
   | `gates.py --saves <slug> [<ver> [<ver>]]` | **the only check that reads TWO releases.** Every other check here reads one snapshot, and a save break does not exist in a snapshot — renaming a canvas id produces a game that is correct on its own terms and strands every player holding a save. Diffs the current build's join keys (passage names, `$npcs` keys, flag keys, player and NPC meter keys, the story title) against the newest archived release; additions are counted and never judged, because the migration seam reaches them (`engine.md` §40). Needs `releases/v<version>.html` to exist — without an archive it cannot run. **Exits non-zero.** ⚠️ A rescaled stat and a burned one-shot grant are invisible to it and stay human: `the-returning-player.md` §4 and §6. |
   | `gates.py --selfcheck` | does this file still document every gate and lint the script emits? Needs no game. The index went stale twice — the 2026-08-16 audit closed it and it reopened in twelve days — because nothing compared the script to the file that documents it. |
+- **`scripts/playtest.py <slug>` plays the build.** Every gate above reads the source; this drives
+  the running game in a browser and is the only place some defects exist at all — `forty_miles` 0.1
+  shipped 35 effects using an op the runtime does not implement, and the TOML, the validator, the
+  build and every gate were green the whole way down. It is also what the `v2-player` agent runs.
+  ⚠️ **A red is a hypothesis until its cause is quoted as `file:line`**: three of this harness's own
+  first four reds were the harness, not the game. `references/agents.md`, The Player.
 - **An example outranks every rule beside it, so it goes in LAST — after it is validated, or not
   at all.** A rule is read; an example is copied. `the-map.md` shipped a worked example on day one
   that was the first game's own map — its character ids, its box room — with its two known bugs

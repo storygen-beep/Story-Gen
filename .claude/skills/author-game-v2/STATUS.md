@@ -265,7 +265,7 @@ merged `7_final_game.toml`, and `gates.py` needs that file. The other seven (`ja
 
 | | |
 |---|---|
-| **The agents** | Pitchers, attack panel, prose maker, player — all still prose in `agents.md`. No prompts, no schemas, no call sites. `scripts/` contains `gates.py` and a word list. **Still the biggest architectural hole.** |
+| **The agents** | **The Player shipped 2026-08-29** — `scripts/playtest.py` plus a callable `v2-player`. ⚠️ It was not built from nothing: seven hand-written play-tests were already running in `games/` and this row did not know, which is why it read "all still prose" for weeks. **Pitchers, attack panel and prose maker are still prose**, and remain the architectural gap. |
 | **Evals** | None. "v2 beats v1" cannot be scored. |
 | **A cold reader** | Only one person has ever run the skill. |
 | **`the_season`'s fill** | 4,412 words against 15,500 declared. Its one red gate, and the real problem with the game. |
@@ -406,11 +406,11 @@ predates the recheck entirely. Corrected above.
 ## B · The other work, unchanged in priority
 
 1. **`the_season`'s fill.** Its one red gate. 4,412 of 15,500 words.
-2. **Build the agents.** Still the largest architectural gap. Pitchers first — three independent
-   takes with no shared context, the capability v1 most visibly lacks. For the Player agent's spec,
-   learned expensively: **forbid page-text assertions outright**, bake in that the clock is
-   `game_state.time_state`, that a repeatable canvas renders as a clickable action rather than an
-   auto-fire, and that there are *two* per-day ledgers.
+2. **Build the remaining agents.** Still the largest architectural gap, now three roles rather than
+   four. **The Player shipped 2026-08-29** and every lesson this line was holding for its spec is
+   in `scripts/playtest.py` as code. Pitchers next — three independent takes with no shared context,
+   the capability v1 most visibly lacks — though nothing is currently in flight to pitch into, and
+   a pitch is the one agent output with no check against it.
 3. **A release that adds zero locations.** Never demonstrated, and it is what the release model
    claims to be for.
 4. **A worked `block_pool`.** The doctrine is written and five games use the primitive
