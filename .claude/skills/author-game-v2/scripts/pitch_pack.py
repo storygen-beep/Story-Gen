@@ -422,6 +422,7 @@ def pack(slug, toml_path, state_path, as_json=False):
             words=words,
             people=at_loc.get(lid, []),
             declared_fill=(declared_loc.get(lid) or {}).get("fill"),
+            declared_finished=(declared_loc.get(lid) or {}).get("fill_finished"),
             anchor=bool((declared_loc.get(lid) or {}).get("anchor")),
             job=(declared_loc.get(lid) or {}).get("job"),
         ))
@@ -508,12 +509,34 @@ def pack(slug, toml_path, state_path, as_json=False):
               f"{l['random']:>6}{l['words']:>8}   {who[:34]}")
     print("  * = the anchor.  rep = repeatable canvases.  rand = random ambients.")
 
+    # ⚠️ BOTH BUDGETS, and the second one is why. A location declares `fill` (the
+    # budget for now) and `fill_finished` (the budget for the finished world). This
+    # printed `fill` alone until 2026-08-29, when the Attack Panel's first run found
+    # that `fill_finished` is read by NOTHING — grep returns 0 in `gates.py` and, at
+    # that point, here. Unread for long enough, it rotted: `mrs_vance`'s
+    # `kerr_crossing` declares `fill = 620` and `fill_finished = 300`, a finished
+    # budget BELOW its working one with 588 words already written. A Pitcher choosing
+    # what to build next was seeing "588 / 620 — nearly full" and half the plan.
+    #
+    # The `!` is a FACT, not a threshold: finished below working is incoherent on the
+    # author's own terms, whatever the numbers are. Nothing here is scored.
     declared = [l for l in locs if isinstance(l["declared_fill"], (int, float))]
     if declared:
         print()
-        print("  built words against the author's OWN declared fill (v2_state.json):")
+        print("  built words against the author's OWN declared budgets (v2_state.json):")
+        print(f"    {'':<24}{'built':>7}   {'now':>7}{'finished':>10}")
+        tot_now = tot_fin = 0
         for l in sorted(declared, key=lambda x: x["words"] - (x["declared_fill"] or 0)):
-            print(f"    {l['id']:<24}{l['words']:>7} / {int(l['declared_fill']):<7}")
+            now = int(l["declared_fill"])
+            fin = l["declared_finished"]
+            tot_now += now
+            tot_fin += int(fin) if isinstance(fin, (int, float)) else now
+            fin_s = f"{int(fin):>10}" if isinstance(fin, (int, float)) else f"{'—':>10}"
+            odd = "  !  finished budget is BELOW the working one" if (
+                isinstance(fin, (int, float)) and fin < now) else ""
+            print(f"    {l['id']:<24}{l['words']:>7}   {now:>7}{fin_s}{odd}")
+        print(f"    {'TOTAL':<24}{sum(l['words'] for l in declared):>7}   "
+              f"{tot_now:>7}{tot_fin:>10}")
     if unplaced:
         print()
         print(f"  {len(unplaced)} canvas(es) resolve to no location — they are reached by link only:")

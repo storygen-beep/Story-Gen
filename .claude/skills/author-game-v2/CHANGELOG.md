@@ -5,6 +5,63 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-29 — three follow-ups, and the first one turned out not to exist
+
+Three items came out of the Attack Panel's run. LO called all three. **The first was withdrawn on
+measurement, the second shipped, the third had a cause git could name.**
+
+### 1 · The `cite_check` blind spot — WITHDRAWN, the diagnosis was wrong
+
+The claim, written and committed earlier the same day: *"26 of 28 `gates.py` citations resolve as
+UNVERIFIABLE, because the checker anchors on a code token following the citation."*
+
+**The measurement holds. The cause was wrong.** `cite_check.py:221` sets the context window to
+`m.start() - 200` through `m.end() + 200` — it has always read 200 characters in **both**
+directions. Measured before building anything: of **403** UNVERIFIABLE citations project-wide,
+**304 have no code token near them at all**, which is unverifiable by construction and precisely
+what the verdict name means. The fix that followed from the wrong cause — resolve a dotted
+`Class.method` to its `def method(` — would have rescued **3 of 403**. Not built.
+
+The real and duller truth, now recorded in both ledgers: a citation written as bare prose with no
+identifier beside it cannot be checked by anything, and `gates.py`'s are mostly written that way.
+Both the `STATUS.md` row and the previous `CHANGELOG` entry are corrected in place rather than
+quietly dropped, because the wrong version was committed and read.
+
+### 2 · `pitch_pack.py` prints both budgets — SHIPPED
+
+A location declares `fill` (the budget for now) and `fill_finished` (the budget for the finished
+world). The pack printed the first alone, so a Pitcher choosing what to build next saw
+`kerr_crossing 588 / 620 — nearly full` and half the plan. It now prints both, plus a TOTAL row,
+and marks a location whose finished budget sits **below** its working one. That mark is a **fact,
+not a threshold** — finished below working is incoherent on the author's own terms whatever the
+numbers are — and nothing here is scored. A game that declares no `fill_finished` prints `—` and
+the total falls back to the working budget; verified on all ten games with a built TOML.
+
+### 3 · `kerr_crossing` 300 → 620 — and it was never a typo
+
+The guess in chat was *"probably a typo for 800."* **Wrong.** `git log` on `v2_state.json` gives
+the whole history:
+
+```
+e097590  fill=620 finished=300
+df5b66e  fill=620 finished=300     <- the truck commit
+21a879f  fill=300 finished=300
+…        fill=300 finished=300
+```
+
+`df5b66e` **deliberately** re-declared two fills — `kerr_crossing` 300→620 and `the_bank` 500→660 —
+and wrote a `fill_note` on each explaining the design change. It updated `the_bank`'s finished
+budget and **left `kerr_crossing`'s on the old number.** A half-finished edit, invisible for two
+days because nothing reads the field.
+
+Corrected to **620**: the only number in evidence, restoring finished ≥ working and matching this
+file's own two finished==fill rooms (`your_room` 900/900, `the_bathroom` 400/400). Any larger
+figure would have been invented, and the note beside it says so. ⚠️ **`gates.py` scored 44/44 both
+before and after the change** — which is the proof that the field is still read by nothing, and the
+open question of whether it should be is recorded in `STATUS.md` rather than answered.
+
+---
+
 ## 2026-08-29 — the Attack Panel, and the finding that it must NOT get an instrument
 
 **Why.** `the-release.md:43` is step 3 of the release loop. The panel was the last of the four
@@ -64,12 +121,18 @@ Two citations to `gates.py` drifted during this work — four lines added to the
 moved `Beat.explicit` from `:405` to `:409` and `words_mode` from `:6515` to `:6519`. **Both were
 caught by hand. `cite_check.py` flagged neither.**
 
-Cause: **26 of 28 `gates.py:NNNN` citations in this library resolve as UNVERIFIABLE**, because the
-checker anchors on a code token *following* the citation and these are written in prose —
-`` `Beat.explicit` (`gates.py:409`) `` puts the identifier before it. The file this skill edits
-every single session is the one whose citations nothing checks. Recorded in `STATUS.md`; the fix
-is small (let the anchor scan look backwards too) and is **not done**, because the task was the
-Panel.
+Cause: **26 of 28 `gates.py:NNNN` citations in this library resolve as UNVERIFIABLE**. The file
+this skill edits every single session is the one whose citations nothing checks.
+
+⚠️ **The cause first written here was wrong and is corrected below.** It said the checker anchors
+on a code token *following* the citation. It does not: `cite_check.py:221` sets the context window
+to `m.start() - 200` through `m.end() + 200` and has always read **both** directions. Measured
+after the claim was already committed: of **403** UNVERIFIABLE citations project-wide, **304 have
+no code token near them at all**, which is unverifiable by construction and exactly what the
+verdict name means. The fix that followed from the wrong cause — resolve a dotted `Class.method`
+to its `def method(` — was measured before being built and would have rescued **3 of 403**. Not
+built. The real and duller truth: a citation written as bare prose with no identifier beside it
+cannot be checked by anything, and `gates.py`'s are mostly written that way.
 
 ### The live run — four lenses, then two verifiers
 

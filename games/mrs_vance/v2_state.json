@@ -469,7 +469,8 @@
           "work": [],
           "people": []
         },
-        "fill_finished": 300
+        "fill_finished": 620,
+        "fill_finished_note": "CORRECTED 2026-08-29, from 300. Not a typo — a half-finished edit. df5b66e re-declared `fill` 300 -> 620 for the truck chain and left `fill_finished` on the old number, so the finished budget sat BELOW the working one with 588 words already built. It went unseen because NOTHING reads this field: grep returned 0 in gates.py and in pitch_pack.py. Found by the Attack Panel's first run. 620 restores the invariant using the only number in evidence — it matches this file's own finished == fill rooms (your_room 900/900, the_bathroom 400/400). If the crossing is meant to carry more than the flatbed chain, raise it deliberately; any other figure here would have been invented."
       },
       {
         "id": "the_bank",
