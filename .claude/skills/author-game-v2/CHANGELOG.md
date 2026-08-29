@@ -5,6 +5,66 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-29 — R6 was declared shipped in two ledgers and had never been written
+
+**Why.** LO asked what to work on next. Before recommending another study I checked what the last
+one landed, and it had not landed.
+
+**The find.** This morning's sex-loop study returned four nulls and one survivor, and the survivor
+was recorded here and in `DOCTRINE_GAPS.md`'s Log as **shipped**: *"`references/the-voice.md` R6 ·
+Inside an explicit surface, the button names what SHE does — with four rewrites of our own shipped
+labels."* On disk `the-voice.md` read **"## The five rules"** and stopped at R5. `R6` appeared
+exactly twice in the file — a row in the checks table, and a paragraph opening *"R6 has no gate
+either, and two things were tested and refused before it was written"* — plus one citation in
+`gates.py`'s `she permits or she acts` lint. **Three references to a rule with no section defining
+it**, and `git log -S "R6 · " -- references/the-voice.md` returns nothing: no commit has ever
+contained it. The four label rewrites were nowhere on disk. An author reading the file got five
+rules and then a footnote about a sixth.
+
+⚠️ **`--selfcheck` cannot see this class of defect, and that is by design, not by accident.** It
+reconciles gate, lint and mode NAMES emitted by `gates.py` against `SKILL.md`. A rule cited by a
+reference file with no heading defining it is outside everything it reads — which is why the index
+was green through the whole gap. Named here as a check worth considering; **not built**, because
+cross-file citations (`the-surfaces.md R5b` quoted from `the-voice.md`) are legitimate and a naive
+version would fail correct work, which is the R4 / study-6 / P0 precedent.
+
+**What changed.**
+
+- **`references/the-voice.md` R6** — written. The field measurement (**9.2%** of 38,039
+  explicit-screen labels name an act, **1.01%** open with `let`, and **32%** are transport, so the
+  field writes filler too and the difference is what sits on the buttons that are not filler),
+  against ours (**0.1%** naming an act — one `fuck` in 2,114 authored choices — and **20%** of
+  sex-loop labels opening `Let him…` against 5% elsewhere). Four rewrites, the ⚠️ that permitting is
+  legitimate and about one field label in a hundred, and the ⚠️ that the surface's SHAPE is not part
+  of the rule. Heading corrected to **"The six rules"**.
+- **`DOCTRINE_GAPS.md` inventory row 10** — was the bare cell `| **10** | Sex-loop shape |` while the
+  Log row 1,800 lines below carried the whole study. Now records the addressal, that four of five
+  questions came back null, and that the rule was declared shipped and was absent.
+
+⚠️ **The four rewrites are extracted, not invented.** Each names a real shipped label, and the middle
+column of the table quotes what that beat's own prose already says, so the replacement button comes
+from writing that exists rather than from taste — *`back_home` "Let him look."*, whose beat says she
+is naked with the vest eighteen inches from her hand and does not reach for it, becomes **"Don't
+reach for the vest."**
+
+**One new measurement, method stated in the rule.** **31 distinct permitting labels sit on explicit
+beats across five games** — `back_home`, `forty_miles`, `seventh_day`, `steam`, `vesper` — counting
+cascade `advance_text` on beats carrying 3+ body words, phase files only, with the merged
+`7_final_game.toml` excluded. The exclusion matters: counted without it every label appears twice.
+
+**Verified.** `--selfcheck` green — gates 45/45, lints 28/28, modes 4/4, gate rows 45/45.
+`mrs_vance` **44/44**, `back_home` **16/36**, both identical to the recorded values. **A verdict
+could not have moved and this was confirmed rather than assumed**: `gates.py` was not touched this
+turn, and a grep of it for `references/` returns only comments and docstrings — it reads `SKILL.md`
+for the index and game TOML for everything else, so no file under `references/` is an input.
+`cite_check.py` unchanged at **21 drifted / 8 missing**, and the new text adds no `file:line`
+citation to drift.
+
+⚠️ **No game was touched.** `vesper` is quoted as evidence of the defect and not edited, per standing
+instruction.
+
+---
+
 ## 2026-08-29 — the worked examples that were never written
 
 **Why.** I told LO the v2 skill "grades work it never taught," and went to measure it before acting

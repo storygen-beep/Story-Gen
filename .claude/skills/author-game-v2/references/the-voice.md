@@ -17,7 +17,7 @@ unambiguous on a first read, by someone who has never seen the game.
 
 ---
 
-## The five rules
+## The six rules
 
 ### R1 · A label answers "what happens if I click"
 
@@ -296,6 +296,50 @@ because a finished *arc* and a finished *build* are different endings and the de
 say the first. In a **v0.1 nothing is closed** — every track stops at a build boundary — so the
 one-`terminal_text`-per-game guidance written from a finished build is the wrong rule there, and
 following it produces the worse outcome.
+
+### R6 · Inside an explicit surface, the button names what she does
+
+R1 governs the buttons in a room. This is R1 inside a scene, split out because the defect it names
+is ours alone. It is not a register rule — `register.md` still owns every word that appears *after*
+the click; this governs the word on the button.
+
+**The field puts the act on the button.** Across **38,039 clickable labels on explicit screens** in
+the corpus, **9.2% name an act** and **1.01% open with `let`**. Ours: **0.1% name an act** — one
+`fuck` in 2,114 authored choices — and **inside a sex loop 20% of our labels open `Let him…`**
+against 5% everywhere else.
+
+⚠️ **The field is not tidier than we are — it is more specific.** **32%** of its explicit-surface
+labels are transport (`continue`, `leave`, `next`). Everyone writes filler. The difference is what
+sits on the buttons that are *not* filler: theirs name an act, ours ask his permission.
+
+**The rewrite is already written, and it is in the beat.** A permitting label is almost always a
+beat whose own prose names the action, with the action then left off the button:
+
+| shipped label | what its beat already says | the button |
+|---|---|---|
+| `back_home` *"Let him look."* | she is naked, the vest is eighteen inches from her hand, and she does not reach for it | **"Don't reach for the vest."** |
+| `forty_miles` *"Let him get the vest off."* | it comes off over her head in a cab too small for it | **"Get the vest over your head."** |
+| `forty_miles` *"Let him get you flat."* | on her back on the bunk, knees up against the locker | **"Go flat on the bunk."** |
+| `vesper` *"Let him turn you round."* | he turns her by the hip and takes her ass in both hands | **"Turn round for him."** |
+
+Measured on our own source: **31 distinct permitting labels sit on explicit beats across five
+games** — `back_home`, `forty_miles`, `seventh_day`, `steam`, `vesper` — counting cascade
+`advance_text` on beats carrying three or more body words, phase files only, with the merged
+`7_final_game.toml` excluded so nothing is counted twice.
+
+⚠️ **Permitting is a legitimate button and the field writes it too** — 1.01%, about one label in a
+hundred. Keep it where **her not moving is the decision**: she holds still, she does not cover up,
+she lets it happen and that is the choice. Even there the button names *her* — *"Don't reach for the
+vest"*, not *"Let him look."* What the rule refuses is the permitting frame as the house default,
+which is what 20% is.
+
+⚠️ **The SHAPE of the surface is not part of this rule and must not become one.** Menu against
+single-exit chain was tested against engagement and predicts nothing; both machines ship. The
+figures, and two further findings withdrawn from the same study, are under *What is checked, and
+what is not*.
+
+Source: `~/Documents/Sex_Loop_Study_20260829/shape.py`, and the label counts in the verb study of
+2026-08-28.
 
 ---
 
