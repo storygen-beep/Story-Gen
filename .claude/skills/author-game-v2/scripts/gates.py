@@ -7114,6 +7114,95 @@ def _documented_gate_names(skill):
     return names
 
 
+_RULE_DEF = re.compile(r"^(?:#{1,6}\s+|\*\*)([A-Z]{1,2}\d+[a-z]?)\s*·")
+# A qualified reference names its file, so it can be resolved exactly. Backticks and a
+# `references/` prefix are both in live use — `the-surfaces.md` R3b, `references/the-economy.md` R7 —
+# and a regex that misses them turns three correct cross-file pointers into false orphans.
+_RULE_QUALIFIED = re.compile(
+    r"`?(?:references/)?([a-z][a-z0-9-]*\.md)`?\s+`?([A-Z]{1,2}\d+[a-z]?)`?\b")
+
+
+def _rule_definitions(skill_dir):
+    """{file -> set of rule ids it DEFINES}.
+
+    A rule is defined by `## R6 · …` (a heading) or `**W1 · …**` (a bold lead). Both
+    forms are in use and the `·` is what separates a definition from a mention.
+    """
+    out = {}
+    for root, _, files in os.walk(os.path.join(skill_dir, "references")):
+        for f in sorted(files):
+            if not f.endswith(".md"):
+                continue
+            ids = set()
+            with open(os.path.join(root, f), encoding="utf-8", errors="replace") as fh:
+                for line in fh:
+                    m = _RULE_DEF.match(line)
+                    if m:
+                        ids.add(m.group(1))
+            if ids:
+                out[f] = ids
+    return out
+
+
+def _orphan_rules(skill_dir, defs):
+    """Rules that are POINTED AT and never written. Returns (broken, unwritten).
+
+    This exists because of a defect nothing in the toolchain could see. `the-voice.md`
+    R6 was recorded as shipped in two ledgers, cited by this script, and listed in the
+    file's own checks table — while the file itself read "The five rules" and stopped at
+    R5. `git log -S "R6 · "` returned nothing: no commit had ever contained it. The name
+    reconciliation above cannot help, because it compares GATE names, and a rule cited by
+    a reference file with no section defining it is outside what it reads.
+
+    Two directions, and they are NOT equally certain, so they are not reported the same:
+
+      broken    a QUALIFIED reference — `the-voice.md R6` — names its own file, so the
+                lookup is exact and a miss is a fact. These FAIL.
+
+    ⚠️ SCOPED TO `references/` IN BOTH DIRECTIONS, and that is not tidiness. The rules
+    live there; `CHANGELOG.md`, `DOCTRINE_GAPS.md` and `STATUS.md` are dated ledgers that
+    MENTION them, including ones since deleted. Scanning the ledgers reported three
+    "broken" pointers at `the-surfaces.md` R2b — a rule superseded on 2026-08-18 and
+    recorded as such — and 118 bare hits, most of them gate numbers in changelog prose.
+    A check that fires on an accurate history entry is the R4 error with a new face.
+
+      unwritten a BARE reference inside the file that owns that letter family. This is
+                the direction that would have caught R6, and it is prose: `the-phone.md`
+                says "P0 … was withdrawn" and `the-surfaces.md` discusses a deleted R2b,
+                both correct, neither a broken pointer. So it is a LIST TO EYEBALL and
+                never a failure — the same restraint this file's own docstring records
+                for lints, and the same one that took R4, study 6's anchoring check and
+                P0 back out for inventing a threshold that failed a correct file.
+    """
+    broken, unwritten = [], []
+    for root, _, files in os.walk(os.path.join(skill_dir, "references")):
+        for f in sorted(files):
+            if not f.endswith(".md"):
+                continue
+            path = os.path.join(root, f)
+            rel = os.path.relpath(path, skill_dir)
+            own = defs.get(f, set())
+            families = {i[0] for i in own}
+            bare = re.compile(r"\b(%s)(\d+[a-z]?)\b" % "|".join(sorted(families))) \
+                if families else None
+            with open(path, encoding="utf-8", errors="replace") as fh:
+                for n, line in enumerate(fh, 1):
+                    qualified = set()
+                    for tgt, rid in _RULE_QUALIFIED.findall(line):
+                        qualified.add(rid)
+                        if tgt in defs and rid not in defs[tgt]:
+                            broken.append((rel, n, f"{tgt} {rid}"))
+                    # A definition line is not a reference to itself, and an id already
+                    # resolved against the file that OWNS it is not an orphan here: three
+                    # of the five first hits were `the-surfaces.md` R3b and its kin — real
+                    # cross-file pointers, correct, and only "undefined" locally.
+                    if bare and not _RULE_DEF.match(line):
+                        for fam, num in bare.findall(line):
+                            if fam + num not in own and fam + num not in qualified:
+                                unwritten.append((rel, n, fam + num))
+    return broken, unwritten
+
+
 def selfcheck_mode():
     """Does SKILL.md still describe the checks this script actually runs?
 
@@ -7174,8 +7263,32 @@ def selfcheck_mode():
           f"{len(documented)-len(stale_g)}/{len(documented)} still checked")
     for s in stale_g:
         print(f"          · documented but NOT emitted: {s}")
+
+    skill_dir = os.path.dirname(here)
+    rule_defs = _rule_definitions(skill_dir)
+    broken, unwritten = _orphan_rules(skill_dir, rule_defs)
+    n_rules = sum(len(v) for v in rule_defs.values())
+    tag = "PASS" if not broken else "FAIL"
+    print(f"  [{tag}]  {'rule pointers':32s} "
+          f"{n_rules} rules across {len(rule_defs)} files, "
+          f"{len(broken)} pointing at nothing")
+    for rel, n, what in broken:
+        print(f"          · {rel}:{n} points at {what} — no section defines it")
     print(f"  {'─'*72}")
-    total = len(missing_g) + len(missing_l) + len(missing_m) + len(stale_g)
+
+    if unwritten:
+        # A LIST, never a score. See `_orphan_rules`.
+        print(f"  rule · referenced and not defined in its own file — "
+              f"{len(unwritten)} to eyeball")
+        for rel, n, rid in unwritten[:12]:
+            print(f"          · {rel}:{n} says {rid}")
+        if len(unwritten) > 12:
+            print(f"          · … and {len(unwritten)-12} more")
+        print("          (a withdrawn or superseded rule discussed as history is fine;")
+        print("           a rule the file relies on and never wrote is the R6 defect)")
+        print(f"  {'─'*72}")
+
+    total = len(missing_g) + len(missing_l) + len(missing_m) + len(stale_g) + len(broken)
     if total:
         if missing_g or missing_l or missing_m:
             print(f"  {len(missing_g)+len(missing_l)+len(missing_m)} name(s) the script emits "

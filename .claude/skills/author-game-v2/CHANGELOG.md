@@ -5,6 +5,48 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-29 — `--selfcheck` can now see a rule that is cited and was never written
+
+**Why.** The R6 defect had no instrument that could catch it. `the-voice.md` R6 was recorded as
+shipped in two ledgers, cited by `gates.py`, and listed in its own file's checks table — while the
+file read *"The five rules"* and stopped at R5. `git log -S "R6 · "` returned nothing: **no commit
+had ever contained it.** `--selfcheck` reconciles gate and lint NAMES against `SKILL.md`, so a rule
+cited by a reference file with no section defining it was outside everything it reads. A human
+reading the file found it, three references later.
+
+**What changed — `scripts/gates.py`, `_rule_definitions()` and `_orphan_rules()`, plus one row in
+`SKILL.md`.** A rule is defined by `## R6 · …` or `**W1 · …**`; the `·` is what separates a
+definition from a mention. 91 rules across 10 reference files.
+
+**Two directions, reported differently, because they are not equally certain:**
+
+- **Qualified** — `the-voice.md R6` names its own file, the lookup is exact, a miss is a fact.
+  **Fails.** Currently zero.
+- **Bare, in the file that owns that letter family** — this is the direction that catches R6, and
+  it is prose. **A list to eyeball, never scored.**
+
+⚠️ **The list-not-score split is the whole design and it was earned twice during the build.**
+
+1. **Scanning the ledgers reported three "broken" pointers at `the-surfaces.md` R2b** — a rule
+   superseded on 2026-08-18 and recorded as such in `DOCTRINE_GAPS.md`'s own opening. The check was
+   failing an accurate history entry: the R4 error with a new face. **Scoped to `references/` in
+   both directions** — the rules live there; the ledgers mention them, including deleted ones.
+2. **The bare scan double-counted qualified cross-file pointers.** Three of its first five hits were
+   `` `the-surfaces.md` R3b `` and kin — correct pointers, undefined only *locally*. The regex now
+   tolerates backticks and a `references/` prefix, and an id already resolved on that line is not
+   re-reported.
+
+**Result: 0 broken, 2 to eyeball** — `the-phone.md` P0 and `the-surfaces.md` R2b, both rules
+withdrawn and discussed as history, both correct prose. That is the honest floor: down from 3
+false failures and 118 bare hits.
+
+**Verified by simulation.** Removing R6's heading from `the-voice.md` makes the list name
+`the-voice.md:370` and `:374` — precisely the two references that survived the original defect.
+Restored with no diff. `--selfcheck` green and exit 0: 46 gates, 28 lints, 4 modes, 46 rows,
+91 rules, 0 pointing at nothing.
+
+---
+
 ## 2026-08-29 — the citations: half the reported drift was the checker, and fixing that surfaced real drift it had been hiding
 
 **Why.** The skill's authority rests on *"every engine claim carries a `file:line`"*. Measured at
