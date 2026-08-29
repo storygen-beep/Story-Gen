@@ -5,6 +5,105 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-29 — the Pitchers: three agents that could not see the game they were pitching into
+
+**Why.** `the-release.md:39` is step 2 of the release loop and it tells the author to run three
+Pitcher agents with **no shared context**. Nothing existed to run. `references/agents.md` described
+the job in prose and `STATUS.md` had carried it as an open architectural gap for weeks.
+
+**The design has a cost that had never been paid.** Independence is the point — shared context
+yields three shades of one idea — but a Pitcher with no context also does not know what the game
+already *contains*. It will name a location that exists, a character who does not, or a mechanic
+the engine cannot run. So the context it is denied has to be the **conversation**, never the
+**facts**.
+
+**What changed.**
+
+- **NEW `scripts/pitch_pack.py`** — the world a Pitcher may pitch into, generated rather than
+  remembered: places, people, the meters and flags a pitch can key to, the money, the Want
+  verbatim, what already shipped, which promises are open. It reuses `gates.build()` and
+  re-parses nothing.
+- **NEW `.claude/agents/v2-pitcher.md`** — one page, `subagent_type: "v2-pitcher"`, run three in
+  one message. Read-only: `Bash, Read, Grep, Glob`, no `Write`.
+- **`references/agents.md`** — the Pitchers section marked built, with the pack's argument and
+  the convergence measurement below.
+- **`SKILL.md`** — one bullet under the scoreboard so an author can find the script.
+- **`STATUS.md`** — the Part 6 agents row and B-list item 2 both rewritten. Two of four shipped.
+
+**It scores nothing and always exits 0**, the same rule `--words` carries and for a harder reason:
+*"this location is too thin"* is an opinion, and four checks here have already been withdrawn for
+failing something correct. Every figure is a count or the author's own declared number; where the
+two disagree it prints both and says nothing about which is right.
+
+### Four defects, and the interesting one was found by the agent, not by me
+
+1. **The declared ladder was starred by substring.** `npc_cade · want` showed a gate at rung 5.
+   No canvas gates cade's `want` at 5 — it came from `npc_tobin`, because `want` is a substring of
+   every cast label. **The pack printed a fact that was not true of the game**, which is the one
+   thing a fact pack may never do. `_declared_rungs` now returns owner and trait separately and the
+   match is on exact keys. Verified against the game's own recorded figures in `v2_state.json`
+   (*"cade 82 declared / 42 built, booth 74 / 50, isaac 66 / 38, sherrod 62 / 34, only tobin
+   70 / 70"*) — the pack now reproduces all five independently.
+2. **The Want printed string fields only.** `mrs_vance`'s `crude_ceiling` is a dict of lists, so the
+   field that says how far this game's prose may go rendered as a bare heading with nothing under
+   it. A Pitcher would have had the ceiling withheld from it.
+3. **A wrapped promise printed as four bullets** and read as four separate promises. Hanging indent.
+4. ⚠️ **`_ladders()` read two condition sites out of four, and reported that `mrs_vance` gates
+   NOTHING on `player.standing`.** A full walk of the same file finds **22 `standing` condition
+   sites** — in `trigger.substitutions[]` (Lane 3 dispatch) and in `nodes[].blocks[]` (the prose
+   bands), which is where a colour meter does all its work. **A pack that omits a meter's only 22
+   uses has asserted something false by silence**, and silence is worse than a wrong number:
+   nothing in the output invites the reader to check. The scan now walks all four sites and
+   **tags which gate each one is** — `entry` (whether the canvas fires) · `dispatch` (which canvas
+   a Lane 3 host swaps to) · `choice` (whether a link is offered) · `band` (which prose variant
+   renders). Those are not interchangeable, and the distinction is the point: `player.standing`
+   reads **bandx18 dispatchx4 and entryx0** — it colours the game and locks nothing.
+
+**How #4 was found: a Pitcher went and read the TOML.** It reported that standing "is the game's
+title meter and no canvas trigger gates entry on it", which is true, and which the pack had given
+it no way to know — the pack had simply omitted the meter. It reached the right sentence from an
+absence that was wrong for a different reason. Luck, not the instrument.
+
+### The live run — three agents, one message, no shared context
+
+Run on `mrs_vance` 0.1. **All three picked the same subject: Friday night at `the_bar`, with
+`npc_cade`, the title giving way to her name.** All three quoted the same clause of the appetite.
+
+⚠️ **`agents.md` claims no-shared-context yields genuinely different options. On the first
+measured run it did not.** Removing the *conversation* removes conversational correlation; it does
+nothing about **informational** correlation, and three agents given identical facts and an
+identical prompt converge. The pack, by being good, may make this worse — the Want prints verbatim
+and its most actionable clause is the one all three took.
+
+**What did differ was the mechanism**, and substantially: 16 beats keyed to `npc_cade.want` 42 plus
+the debt flag · 23 beats keyed to `player.standing` 40 routing through the `buy_drink` cost · 14
+beats keyed to the unbuilt rung 60 plus `cade_loop_played`, spanning bar to yard. Same subject,
+three different builds of it.
+
+**Two claims spot-checked against the source, both true**: `player.standing` gates no canvas entry
+(confirmed — 0 entry sites of 22), and `cade_loop_played` is set at `4_story_arc.toml:538` and read
+only by its own quest card, never by a canvas (confirmed — merged line 3397 sets it, 494 and 503
+read it). **One claim was false**: that `hub_cade_bar` "already runs `weekdays = [4, 5]`,
+21:00-23:59". That canvas carries no weekdays and no times at all; the window belonged to
+`npc_cade`'s *schedule*, printed two lines above it in the pack. **The row was true and the
+sentence built on it was not, which is the pack's problem and not the agent's** — it now labels the
+line `schedule` and says in the output that it does not carry canvas triggers, and the agent file
+carries the same warning.
+
+**Open, and LO's call, not mine:** whether to give each Pitcher a distinct lens — a different Want
+line, a different character, one that must pay an open promise and one that must not. That would
+change the doctrine in `agents.md`, so it is recorded here and not done.
+
+**Verified.** `pitch_pack.py` runs clean on all ten built games that have a `7_final_game.toml`
+(exit 0, no traceback) and exits 2 on the two that do not; `--json` parses. `gates.py --selfcheck`
+still 46 gates / 28 lints / 4 modes / 91 rules / 0 broken pointers. `cite_check.py` unchanged at
+10 drifted / 6 missing — **none of them in a file this entry touched**, and every new `file:line`
+here was re-read with `sed` before commit (two were wrong on the first write:
+`the-release.md:20-29` is a blank line, the ten-commit finding is `:27`; and `:52` is the amendment
+warning, the zero-new-locations rule is `:47`).
+
+---
+
 ## 2026-08-29 — `--selfcheck` can now see a rule that is cited and was never written
 
 **Why.** The R6 defect had no instrument that could catch it. `the-voice.md` R6 was recorded as

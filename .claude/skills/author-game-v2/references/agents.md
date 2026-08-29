@@ -28,15 +28,70 @@ context, which is exactly why they cannot be delegated.
 
 ## Pitchers — 3, parallel, deliberately uncorrelated
 
+> ✅ **BUILT 2026-08-29.** The agent is `.claude/agents/v2-pitcher.md`, callable as
+> `subagent_type: "v2-pitcher"`. Run three in **one message** so they go in parallel and
+> cannot see each other.
+
 **Job:** three takes on the next release subject.
 
 Run them with **no shared context**. This is the one place where not sharing is the feature —
 common context yields three shades of one idea, and the point is genuinely different options.
 
+⚠️ **That design has a cost, and the cost is what took the build.** A Pitcher with no context
+does not know what the game already contains: it will name a location that exists, a character
+who does not, or a mechanic the engine cannot run. So the context it is denied is the
+*conversation*, never the *facts* — and the facts are generated rather than remembered:
+
+```bash
+python3 scripts/pitch_pack.py <slug>
+```
+
+Places, people, the meters and flags a pitch can key to, the money, the Want verbatim, what
+already shipped, and which promises are still open — read off the game's own
+`7_final_game.toml` and `v2_state.json`. **Everything a Pitcher may name is in the pack.**
+
+It reuses `gates.build()` and re-parses nothing, for the reason the Player's harness exists:
+in this subject alone, a condition names its trait `trait_key` while an effect names it
+`trait`, a condition names its owner `subject`/`npc_id` while an effect uses
+`targetType`/`npcId`, and a triggerless canvas inherits its location from whatever links to
+it. **The pack's own first run got one of these wrong** — it matched the declared ladder to
+the built one by substring and starred a rung on `npc_cade · want` that belonged to
+`npc_tobin`, because `want` is a substring of every cast label. It printed a fact that was not
+true of the game, which is the one thing a fact pack may never do.
+
+**And it scores nothing.** Every figure is a count or the author's own declared number; where
+the two disagree it prints both and says nothing about which is right. *"This location is too
+thin"* is an opinion, `gates.py <slug>` is where opinions with evidence live, and four checks
+here have already been withdrawn for failing something correct.
+
 Each returns: the subject, which line of the Want it serves, which existing places and people
 it touches, what it opens, and roughly what it costs.
 
 LO picks one. The Owner develops it.
+
+### ⚠️ The first measured run did NOT produce three different ideas
+
+Three Pitchers, one message, no shared context, `mrs_vance` 0.1. **All three came back with the
+same subject** — Friday night at `the_bar`, with `npc_cade`, the title giving way to her name —
+and all three quoted the same clause of the appetite.
+
+Removing the *conversation* removes conversational correlation. It does nothing about
+**informational** correlation, and three agents given identical facts and an identical prompt
+converge. The pack may make this worse by being good: it prints the Want verbatim, and its most
+actionable line is the one all three took.
+
+**What did differ was the mechanism**, substantially — 16 beats keyed to `npc_cade.want` 42 and
+the debt flag · 23 beats keyed to `player.standing` 40 routing through an existing `$16` cost · 14
+beats keyed to the unbuilt rung 60 and `cade_loop_played`, spanning two rooms. Same subject, three
+different builds of it. So the run is not worthless; it is just not what this section promised.
+
+Two readings, and **both are honest**: convergence is a failure of the design's stated goal, or
+convergence is a signal — three independent readers agreeing on what the game most needs next.
+One run cannot tell them apart.
+
+**Open: whether to give each Pitcher a distinct lens** — a different Want line, a different
+character, one that must pay an open promise and one that must not. That is a change to this
+section's design and it is LO's call, so it is recorded and not done.
 
 > This is the capability the incumbent system most visibly lacks. It is a correctness
 > pipeline — engine tables, traps, gates — which is a different muscle from "here are three

@@ -283,6 +283,15 @@ shown at all**.
   build and every gate were green the whole way down. It is also what the `v2-player` agent runs.
   ⚠️ **A red is a hypothesis until its cause is quoted as `file:line`**: three of this harness's own
   first four reds were the harness, not the game. `references/agents.md`, The Player.
+- **`scripts/pitch_pack.py <slug>` is the world a Pitcher may pitch into.** `the-release.md:39`
+  runs three Pitchers with **no shared context** — that is the design, and its unpaid cost is that
+  a Pitcher with no context does not know what the game already contains and will name a location
+  that exists or a character who does not. The pack is that context, generated instead of
+  remembered: places, people, the meters and flags a pitch can key to, the money, the Want
+  verbatim, what already shipped, and which promises are still open. It is what the `v2-pitcher`
+  agent reads first. **It scores nothing and always exits 0** — same rule as `--words`, and for a
+  harder reason: *"this location is too thin"* is an opinion, and four checks in this project's
+  history were withdrawn for failing something correct.
 - **An example outranks every rule beside it, so it goes in LAST — after it is validated, or not
   at all.** A rule is read; an example is copied. `the-map.md` shipped a worked example on day one
   that was the first game's own map — its character ids, its box room — with its two known bugs

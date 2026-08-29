@@ -265,7 +265,7 @@ merged `7_final_game.toml`, and `gates.py` needs that file. The other seven (`ja
 
 | | |
 |---|---|
-| **The agents** | **The Player shipped 2026-08-29** — `scripts/playtest.py` plus a callable `v2-player`. ⚠️ It was not built from nothing: seven hand-written play-tests were already running in `games/` and this row did not know, which is why it read "all still prose" for weeks. **Pitchers, attack panel and prose maker are still prose**, and remain the architectural gap. |
+| **The agents** | **Two of four shipped 2026-08-29.** The **Player** — `scripts/playtest.py` plus a callable `v2-player`; it was not built from nothing, seven hand-written play-tests were already running in `games/` and this row did not know, which is why it read "all still prose" for weeks. The **Pitchers** — `scripts/pitch_pack.py` plus a callable `v2-pitcher`, run three-in-one-message. ⚠️ **Both took the same shape, and it is the shape, not the prompt, that was the work**: a deterministic source of facts the agent must not re-derive, plus a rule that keeps its output from being noise. The Player's is *a red is a hypothesis until its cause is `file:line`*; the Pitcher's is *everything you may name is in the pack*. **Attack panel and prose maker are still prose.** ⚠️ The Prose Maker cannot be built to its own spec yet — `agents.md` promises it "one measurable target" and no instrument scores a loose beat: `Beat.explicit` (`gates.py:405`) is a property on a Beat parsed out of TOML blocks, and `--words` is a list that always exits 0. The scorer comes first or the agent cannot be told whether it succeeded. |
 | **Evals** | None. "v2 beats v1" cannot be scored. |
 | **A cold reader** | Only one person has ever run the skill. |
 | **`the_season`'s fill** | 4,412 words against 15,500 declared. Its one red gate, and the real problem with the game. |
@@ -406,11 +406,21 @@ predates the recheck entirely. Corrected above.
 ## B · The other work, unchanged in priority
 
 1. **`the_season`'s fill.** Its one red gate. 4,412 of 15,500 words.
-2. **Build the remaining agents.** Still the largest architectural gap, now three roles rather than
-   four. **The Player shipped 2026-08-29** and every lesson this line was holding for its spec is
-   in `scripts/playtest.py` as code. Pitchers next — three independent takes with no shared context,
-   the capability v1 most visibly lacks — though nothing is currently in flight to pitch into, and
-   a pitch is the one agent output with no check against it.
+2. **Build the remaining agents.** Now **two** roles rather than four. **The Player and the
+   Pitchers both shipped 2026-08-29**, and every lesson these lines were holding for their specs is
+   in `scripts/playtest.py` and `scripts/pitch_pack.py` as code.
+   - **The Attack Panel is next**, and it is the highest-value one by this skill's own record —
+     `the-release.md:43`, *"every cheap catch in our history happened here; every expensive one
+     happened after shipping."* It is also the highest-risk, because it emits opinions shaped like
+     defects, which is precisely the failure that took R4, study 6's anchoring check, P0 and the
+     rule-pointer scan's first cut. Its ten lenses already exist in `agents.md`. What it needs is
+     a verify bar at least as hard as the Player's `file:line`.
+   - **The Prose Maker is blocked on an instrument**, not on nerve — see the agents row in Part 6.
+   ⚠️ **The caveat this line carried was half right and is worth keeping in its corrected form**:
+   it said *"a pitch is the one agent output with no check against it."* True of the pitch, false
+   of its inputs — `pitch_pack.py` is exactly that check on everything a pitch may name, and it is
+   what stops a contextless Pitcher inventing a room. The judgement stays LO's; the facts no
+   longer do.
 3. **A release that adds zero locations.** Never demonstrated, and it is what the release model
    claims to be for.
 4. **A worked `block_pool`.** The doctrine is written and five games use the primitive
