@@ -634,8 +634,8 @@ is bound, so nothing can be mis-attributed — there is no character in scope to
 ## 21. `clamp` is 0–100, it defaults to TRUE, and it will silently cap a CURRENCY
 
 ```js
-v2.py:5851   if (clampFlag === undefined || clampFlag === null) { clampFlag = true; }
-v2.py:5852   if (clampFlag) { next = window._traitClamp(next, 0, 100); }   // :5853
+v2.py:5928   if (clampFlag === undefined || clampFlag === null) { clampFlag = true; }
+v2.py:5930   next = window._traitClamp(next, 0, 100);
 ```
 
 Two facts, and the second one is the dangerous one:
@@ -687,7 +687,7 @@ runtime drops it on the floor.
 |---|---|---|---|
 | trait | `trait` | `add` · `set` | `v2.py:5749-5756` |
 | flag | `flag` | `set` · `unset` · `toggle` | `v2.py:5810-5825` |
-| quest | `quest_id` | `start` · `update` · `complete` · `cancel` | `v2.py:5922-5925` |
+| quest | `quest_id` | `start` · `update` · `complete` · `cancel` | `v2.py:6084` |
 | item | `action`, not `op` | `add` · `remove` | — |
 
 **To take something away, write `op = "add"` with a NEGATIVE value.** Proven live on a shipped
@@ -788,7 +788,7 @@ BUILD are different endings; it needs `terminal` set or the string is dead, and 
 
 ```
 template_import.py:1127        terminal_text on QuestsCard
-v2.py:15572-15577              Frame 1, terminal_text || "Arc complete"
+v2.py:15630                    var _tlabel = card.terminal_text || "Arc complete";
 ```
 
 ⚠️ **The one-`terminal_text`-per-game cap is scoped to a game whose arcs are CLOSED.** It was
@@ -1099,7 +1099,7 @@ eviction_closing_soft = "…"
 
 **How it fires — and the timing is the part authors get wrong.**
 
-1. `advanceDay()` sets `rent_state.is_due` when the day rolls over **to** `due_day` (`v2.py:5453-5464`).
+1. `advanceDay()` sets `rent_state.is_due` when the day rolls over **to** `due_day` (`v2.py:5615`).
    Days roll at midnight (`v2.py:5405-5408`), so the demand arms at **00:00 on the due day**, not at
    whatever hour the collector's schedule row says.
 2. The next time the player lands on a `Location_*` passage or `Navigation`, they are intercepted
@@ -1229,7 +1229,7 @@ trigger (`v2.py:11017`) and `markCanvasTriggered` stamps its day key **before** 
 
 A flag read as `is_false` and cleared here, with **no canvas setting it**, is a cap that never
 closes. Nothing in the toolchain objects: the generator's flag-chain validator only reports a
-never-set flag when a condition requires it `is_true` (`v2.py:11659`) — deliberately, since an
+never-set flag when a condition requires it `is_true` (`v2.py:12312`) — deliberately, since an
 `is_false` read is a re-entry guard rather than a prerequisite — so the gate simply fails open.
 
 Measured: `off_season` shipped four `*_talk_today` caps with the read and the clear and no set, and
@@ -1405,13 +1405,14 @@ setup.getStoryCanvasRedirect            v2.py:4921   ← entry-time auto-fire
        requiresNpc is NOT among them.
 ```
 
-`requiresNpc` is emitted into `help_data.locationCanvases` at `v2.py:11104` and consumed in
+`requiresNpc` is emitted into `help_data.locationCanvases` at `v2.py:11721` and consumed in
 exactly two places:
 
 ```
-v2.py:5253-5268   the RANDOM-ENCOUNTER selector — "Phase A (2026-05-14) — NPC presence gate.
-                  Canvases without requiresNpc are unaffected."   ← works as documented
-v2.py:5332-5335   substitution rules — same check on the substitution TARGET
+v2.py:5432   var npcLoc = setup.getNpcLocation(canvNpc.requiresNpc);
+             the RANDOM-ENCOUNTER selector's presence gate   ← works as documented
+v2.py:5502   var subNpcLoc = setup.getNpcLocation(target.requiresNpc);
+             substitution rules — the same check on the substitution TARGET
 ```
 
 Neither is the auto-fire path. **Consequence in a shipped game:** `vesper/cap_renner_hired` is
@@ -1487,7 +1488,7 @@ cannot be *printed into prose* by any authored token.
 
 | what | tagged? | where |
 |---|---|---|
-| `[[locations.costs]] time` | **yes, automatically** — renders `20m` on the nav card | `getLocationCostTag` `v2.py:4724`, used at `:19353` / `:19370` |
+| `[[locations.costs]] time` | **yes, automatically** — renders `20m` on the nav card | `getLocationCostTag` `v2.py:4893`, used at `:19353` / `:19370` |
 | a choice's `time_progression_minutes` | **no** — emits a bare `<<script>>advanceTime(150);<</script>>` at the bottom of the passage body | `v2.py:12733` |
 | a trait `costs` entry | yes, when unaffordable | `getCostBlockedMessage` `v2.py:4670` |
 
@@ -1513,11 +1514,11 @@ cooldown_message  = "Counter work — mornings, eight till one."
 ```
 
 Read at `v2.py:11055-11059`, emitted as `showWhenBlocked` / `cooldownMessage` (`v2.py:11100-11101`).
-`renderSoloActivities` checks `isCanvasValid` (`v2.py:5091`) — which returns false on a **schedule
+`renderSoloActivities` (`v2.py:5242`) checks `isCanvasValid` (`v2.py:4742`) — which returns false on a **schedule
 miss** before anything else (`v2.py:4573-4580`) — and, when the flag is set, pushes the canvas onto
 `soloCooldownBlocked` instead of dropping it, rendering a dimmed non-clickable line carrying the
-message (`v2.py:5140-5145`). The same path also catches `max_triggers_per_day` exhaustion
-(`v2.py:5098-5102`).
+message (`v2.py:5309`). The same path also catches `max_triggers_per_day` exhaustion
+(`v2.py:5263`).
 
 ⚠️ **One game in this repo sets it** — `off_season`, six times, writing the hours out in its own
 words (*"mornings, eight till one"*, *"after nine at night"*, *"the last two hours, before the
@@ -1567,7 +1568,7 @@ line reads *"the pages hardcoded `$` before this key existed"*; the key did not 
 ### 33.2 The symbol is a prefix
 
 Every honouring site concatenates symbol-then-number — `"Pay " + _cur + _rent + " rent"`
-(`v2.py:15929`), `<<print _cur>><<print _money>>` (`v2.py:15926`). There is no suffix form and no
+(`v2.py:16604`), `<<print _cur>><<print _money>>` (`v2.py:16608`). There is no suffix form and no
 format string. An invented unit that reads after the number (`10 coin`, `1000 caps`) cannot be
 expressed through `currency_symbol`.
 
@@ -1928,7 +1929,7 @@ A choice whose `conditions` fail has **two** shapes, and the second one is the e
 | **B — the rejection** | `rejection_node` | **a live link**, label = `locked_text` or the choice text | goes to that node and applies `rejection_effects` |
 
 The generator names Mode B itself — `# Mode B: Clickable rejection — redirects to rejection node`
-(`v2.py:13173`), entered from the `if rejection_passage:` branch at `v2.py:13172` (`rejection_passage`
+(`v2.py:13374`), entered from the `if rejection_passage:` branch at `v2.py:13373` (`rejection_passage`
 is the generator's internal name for the field authors write as `rejection_node`). The node id is resolved against `passage_name_map` at `v2.py:13668-13673`, which
 logs a warning rather than failing the build if the target does not exist, so **a typo here is
 silent in the game and visible only in the build log.** Effects are emitted at `v2.py:13152-13165`
@@ -2053,7 +2054,7 @@ real architecture is below, and it is the load-bearing fact:
 | `setup.checkSingleCondition` — `v2.py:7658`, trait branch `:7670`, `ne` at `:7692` | hints, quest-card *goal* bullets, `_findFlagSetterCanvas`, ten-plus call sites | **yes, since 2026-08-24** |
 | `setup.checkQuestsCondition` — `v2.py:15536` | `[[quest_cards]]` `when` and `goals` | **no, deliberately** |
 
-`compare()` is reached first from the trait branch at `v2.py:4098`.
+`compare()` is reached first from the trait branch at `v2.py:3988`.
 
 **Anything added to one has to be checked against the other three.** That is the rule this section
 exists for; `ne` is just the case that exposed it.
@@ -2162,26 +2163,26 @@ The path from the TOML to the screen, traced end to end:
 
 | step | where |
 |---|---|
-| read off `[project]`, defaulting to `""` | `template_import.py:1696-1697` |
-| copied onto the project's metadata | `template_import.py:6391-6392` |
-| escaped, then joined with ` · ` | `v2.py:16131-16132`, joined at `:16134` |
-| composed into the `versionFooter` widget | `v2.py:16139-16142` |
-| called unconditionally from `StoryCaption` — both variants | `v2.py:16326` and `:16177` |
+| read off `[project]`, defaulting to `""` | `template_import.py:1706` |
+| copied onto the project's metadata | `template_import.py:6402` |
+| escaped, then joined with ` · ` | `v2.py:16325-16326`, joined at `:16328` |
+| composed into the `versionFooter` widget | `v2.py:16333-16336` |
+| called unconditionally from `StoryCaption` — both variants | `v2.py:16356` and `:16371` |
 
 Rendered as `v0.1 · 2026-08-23` in a `<div class="sidebar-version">` under the sidebar.
 
 **Three facts that matter and are not guessable:**
 
 1. **The widget is ALWAYS defined, even when both keys are empty** — it just renders nothing. The
-   ternary at `v2.py:16139-16142` emits an empty `<<widget "versionFooter">><</widget>>` rather than
+   ternary at `v2.py:16333-16336` emits an empty `<<widget "versionFooter">><</widget>>` rather than
    nothing at all. Deliberate: SugarCube throws on a call to an undefined widget, and `StoryCaption`
-   calls it unconditionally in both its variants (`v2.py:16326`, `:16177`) — same reason the
+   calls it unconditionally in both its variants (`v2.py:16356`, `:16371`) — same reason the
    cheat-page and cast-page widgets are emitted outside their own feature blocks.
-2. **`html.escape` runs on both** (`v2.py:16131-16132`), so a stray quote in a date string cannot
+2. **`html.escape` runs on both** (`v2.py:16325-16326`), so a stray quote in a date string cannot
    break the build.
 3. **There is no build badge.** There is one build, and what a player needs to identify is the
    RELEASE — it is what their guide's codes are scoped to. The version string does that here and in
-   the cheat page's heading (`v2.py:16134-16137`).
+   the cheat page's heading (`v2.py:16329-16331`).
 
 ### Why it is not cosmetic
 

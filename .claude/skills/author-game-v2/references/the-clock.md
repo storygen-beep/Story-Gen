@@ -242,7 +242,7 @@ option, because there is no absolute advance to reach for.
 
 The engine is already inconsistent with itself here, and the author is the one who pays.
 
-- **Travel time is tagged automatically.** `getLocationCostTag` (`v2.py:4724`) renders `20m` on the
+- **Travel time is tagged automatically.** `getLocationCostTag` (`v2.py:4893`) renders `20m` on the
   navigation card from `[[locations.costs]] time`, used at `v2.py:19353` and `:19370`.
 - **Activity time is not tagged at all.** A choice's `time_progression_minutes` emits a bare
   `<<script>>advanceTime(150);<</script>>` at the bottom of the passage body (`v2.py:12733`) with
@@ -436,7 +436,7 @@ games and every one is a real *"Twenty to eight"* the lint had been missing.
   chapter markers in one linear game, 5 narration fragments. (It read "2 in 92,226" until the
   2026-08-24 recheck; C2 carries the split.) A duration in parentheses is not a clock time.
 - **A label that spends the clock says how much**, in one form, held across the game. Travel time
-  is tagged for you (`v2.py:4724`); activity time is not (`v2.py:12733`).
+  is tagged for you (`v2.py:4893`); activity time is not (`v2.py:12733`).
 - **A stated duration must equal the real spend** — the gate walks choice → target node → exit.
 - **If a thing has hours, publish them** — `show_when_blocked` + `cooldown_message`
   (`v2.py:11055`), the one surface where an hour belongs. Zero games have used it.

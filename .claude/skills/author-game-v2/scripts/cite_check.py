@@ -42,6 +42,16 @@ USAGE
 `--fix` rewrites ONLY citations whose anchor resolves to exactly one place. It never
 touches AMBIGUOUS or UNVERIFIABLE ones, and it never invents an anchor.
 
+⚠️ **RUN `--fix` BEFORE HAND-VERIFYING, NEVER AFTER.** It re-anchors on its own
+heuristic and will happily overwrite a better line a human chose. Measured 2026-08-29,
+on the pass that hand-fixed 21 citations: a following `--fix` moved the quest-effect row
+off `setup.applyQuestEffect` onto `var qid = String(it.quest_id …)` in the goal
+evaluator, moved an `is_true` citation off the operator test onto the DOCSTRING three
+lines above it, and collapsed two pairs — the rent greeting onto the money print, and
+the `rejection_passage` branch onto its own body. The pair guard below only fires while
+both halves still share a target, which is exactly what a hand-fix undoes. Four of ten
+rewrites had to be reverted.
+
 ⚠️ LO's decision, 2026-08-29: **a bad citation does not fail a build.** This tool is not
 wired into `gates.py --selfcheck` and `--strict` exists for a human running it on
 purpose, not for CI. A stale line number is a documentation defect; refusing to ship a
@@ -109,7 +119,11 @@ def looks_like_code(tok: str) -> bool:
         return False
     if DOCFILE.search(tok):                # engine.md, board.toml — documentation
         return False
-    if tok.startswith(("$", "[[", "#", ".", "§")):   # TOML / state / prose marker
+    if tok.startswith(("$", "[", "#", ".", "§")):   # TOML / state / prose marker
+        # ⚠️ `[` and not just `[[`: a SECTION marker is authoring syntax too.
+        # `[group]` resolved onto a v2.py comment and `[project] version` onto an
+        # error-message STRING, and both were then reported as drift against
+        # hand-verified citations that pointed at the actual implementation.
         return False
     if TOML_ASSIGN.match(tok):
         # `show_when_locked = true` is authoring syntax, and v2.py carries TOML
@@ -121,6 +135,33 @@ def looks_like_code(tok: str) -> bool:
 
 def is_comment(line: str) -> bool:
     return line.strip().startswith(("#", "//", "*"))
+
+
+def is_documentation(line: str) -> bool:
+    """A source line that is TALKING about the code rather than being it.
+
+    ⚠️ Scanning for triple-quoted docstrings would be wrong here and badly so:
+    `v2.py` emits its whole JavaScript engine from inside Python f-strings, so
+    "inside a string literal" describes most of the engine. What separates prose
+    from implementation in this codebase is narrower and more reliable — **a line
+    that carries a `file.py:NNNN` citation of its own is documentation.** Comments
+    here cite line numbers; code does not.
+
+    Measured case: `v2.py:9855` reads *"the same semantics adjacent [group] blocks
+    already have (v2.py:14561)"* — a comment, and itself a stale citation. It was
+    proposed as the anchor for the `[group]` chain over `_render_group_chain`.
+    """
+    return is_comment(line) or bool(CITE.search(line))
+
+
+def in_string_literal(line: str, needle: str) -> bool:
+    """Does `needle` appear ONLY inside quotes on this line?
+
+    An error message that happens to contain the words `[project] version` is not
+    where `[project] version` is implemented (`template_import.py:3013`).
+    """
+    stripped = re.sub(r'"[^"]*"|\'[^\']*\'', "", line)
+    return needle not in stripped and needle in line
 
 
 def brace_norm(text: str) -> str:
@@ -256,7 +297,9 @@ def resolve(c: Citation, src: list[str]) -> None:
         # as TOML inside a v2.py comment (:14380), and on this tool's first run the
         # citation using it was re-pointed at that comment instead of the branch that
         # implements it. A named anchor found ONLY in comments is not evidence.
-        code_hits = [h for h in hits if not is_comment(src[h - 1])]
+        code_hits = [h for h in hits
+                     if not is_documentation(src[h - 1])
+                     and not in_string_literal(src[h - 1], needle)]
         if code_hits:
             hits = code_hits
         elif hits:

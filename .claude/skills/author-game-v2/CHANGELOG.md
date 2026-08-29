@@ -5,6 +5,62 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-29 — the citations: half the reported drift was the checker, and fixing that surfaced real drift it had been hiding
+
+**Why.** The skill's authority rests on *"every engine claim carries a `file:line`"*. Measured at
+the start of this pass: **609 citations, 71 verified (12%)**, 20 drifted, 8 pointing at nothing.
+An 88% unverified floor under a doctrine that argues from evidence.
+
+**What the numbers actually meant — and this is the finding.** Chasing the count would have been
+the wrong work. Of the 8 MISSING, **four were correct citations the checker cannot parse**: it
+treats the description in a self-verifying `file:line   <description>` row as a code anchor, so
+`template_import.py:177-178   entry_conditions / blocked_message` reports as missing while pointing
+at exactly the right two lines. And of the drift it reported against hand-verified lines, its
+counter-proposals were a **comment**, an **error-message string literal**, and a Python emitter —
+never the implementation.
+
+**Two weaknesses in `cite_check.py`, both fixed, both conservative** (they only ever remove a
+candidate anchor, pushing toward the honest UNVERIFIABLE):
+
+- `looks_like_code` rejected `[[` but not `[`. A TOML SECTION marker is authoring syntax too:
+  `[group]` anchored onto a v2.py comment and `[project] version` onto an error message.
+- Added `is_documentation()` — **a source line carrying a `file.py:NNNN` citation of its own is
+  prose about the code, not the code.** ⚠️ Deliberately NOT a docstring scan: `v2.py` emits its
+  whole JavaScript engine from inside Python f-strings, so "inside a string literal" describes most
+  of the engine and excluding it would blind the tool. Added `in_string_literal()` for the narrower
+  case.
+
+⚠️ **Making the checker stricter LOWERED the OK count and RAISED unverifiable — and that is the
+correct direction.** It stopped claiming anchors it could not justify. It also unmasked genuine
+drift those bad anchors had been absorbing: `getLocationCostTag` was 169 lines out and cited that
+way in **three** files, `is_true` pointed into unrelated code, and `scheduleEffects`, `RentDay_Short`
+and `body_html` had all moved.
+
+**Fixed by hand, each re-read against live source before writing:** the clamp block (`v2.py:5928`,
+`:5930` — it had been split across three lines, which is why the one-line form matched nothing), the
+quest-effect applier, `advanceDay`'s rent arming, the solo-cooldown render path, both rent prints,
+the `rejection_passage` branch, the `[group]` chain, the whole seven-row version-footer trace, and
+`requiresNpc`'s two consumption sites.
+
+⚠️ **`--fix` MUST run BEFORE hand-verification, never after** — now recorded in the script's own
+docstring. Run after this pass, it overwrote four hand-picked lines with weaker guesses: it moved
+the quest row off `setup.applyQuestEffect` onto `it.quest_id` in the goal evaluator, moved `is_true`
+onto the docstring three lines above the operator test, and collapsed two pairs. Its pair guard only
+fires while both halves still share a target, which is precisely what a hand-fix undoes. All four
+were reverted.
+
+⚠️ **FOUR FLAGS IN `engine.md` ARE PERMANENT AND CORRECT — DO NOT "FIX" THEM BACK.** Each was read
+against live source this session and the checker's proposal is worse: `:690` quest effects
+(applier, not the goal evaluator), `:1232` `is_true` (the operator test, not its docstring),
+`:1571` the rent pair (greeting and money print are different lines), `:1932` the
+`rejection_passage` pair (branch and body).
+
+**Result: 20 drifted → 10, 8 missing → 5, OK 71 → 74.** Six of the ten remaining are in
+`CHANGELOG.md`, which is a dated diary rather than doctrine. **`references/` now has four flags and
+all four are the checker being wrong.**
+
+---
+
 ## 2026-08-29 — the Player agent: it was built seven times and never collected
 
 **Why.** `DOCTRINE_GAPS.md` closed, so the largest remaining hole was the one `STATUS.md` had
@@ -5365,7 +5421,7 @@ volatile list.
 `is_false` in any condition **and** unset in `[engine.daily_tick]` must have at least one
 `op = "set"` site. A cap with two of its three parts validates and throttles nothing, and nothing
 else in the toolchain can see it: the generator's flag-chain validator reports a never-set flag only
-when a condition requires it `is_true` (`v2.py:11659`), so an `is_false` read on a never-set flag
+when a condition requires it `is_true` (`v2.py:12302`), so an `is_false` read on a never-set flag
 fails open, silently.
 
 Fully mechanical — no threshold, no field measurement, nothing to judge. Predicted with a standalone
@@ -5470,7 +5526,7 @@ thing we have to a printer, and of the **sixteen sites** where the generator pri
 it reaches **four** — all on the rent-day screen. Nine hardcode `$`; three print no notation at all.
 Full census: `references/engine.md` §33. Three findings inside it that nothing in the skill recorded:
 
-1. **`RentDay_Short` hardcodes `$` and does not even set `_cur`** (`v2.py:16000`). It is the branch
+1. **`RentDay_Short` hardcodes `$` and does not even set `_cur`** (`v2.py:16656`). It is the branch
    taken when the player cannot pay. `games/forty_miles` declares `currency_symbol = "£"` with the
    author's own comment *"the pages hardcoded `$` before this key existed"* — and its released build
    still ships `You have: <strong>$<<print $player.core_traits.money>></strong>`. The key did not
@@ -5630,7 +5686,7 @@ does it. That is why C4 shipped as a lint.
   `advanceTime(minutes)` (`v2.py:5569`) is the whole API. (`setTime` matches eight times and every
   one is `setTimeout`.) There is no `@time` token either — `_resolve_at_references` (`v2.py:14027`)
   resolves `@player` and `@<npc>` only.
-- **Travel time is auto-tagged; activity time is not.** `getLocationCostTag` (`v2.py:4724`) renders
+- **Travel time is auto-tagged; activity time is not.** `getLocationCostTag` (`v2.py:4893`) renders
   `20m` on a nav card; a choice's `time_progression_minutes` emits a bare `advanceTime()`
   (`v2.py:12733`) with nothing on the label. A door announces twenty minutes and a 150-minute shift
   announces nothing.
@@ -5936,7 +5992,7 @@ Nobody applied it to words.** Third instance of a known mechanism.
   `the-map.md` ×2, `the-board.md` ×2, `gates.py`; `rota`/`rotas` → `roster`/`rosters` ×3 across
   `the-board.md`, `the-map.md`, `the-release.md`; `fortnight` → `two weeks` ×2.
 - **Deliberately NOT rewritten — quotations of real games are evidence.** `the-surfaces.md`'s five
-  `airer` lines, `SKILL.md:174`, `the-voice.md:92` and `gates.py:841` all quote `the_allowance`'s
+  `airer` lines, `SKILL.md:174`, `the-voice.md:92` and `gates.py:1637` all quote `the_allowance`'s
   real canvas *"Get the washing in off the airer"* (`the_allowance/7_final_game.toml:1163`).
   `the-economy.md:73` quotes `forty_miles`' declared obligation (`forty_miles/v2_state.json:376`).
   `gates.py:252`'s `knickers` is inside the frozen explicit lexicon — it exists to *detect* the
@@ -6393,7 +6449,7 @@ a REVEAL BEAT          3,005         37        —      58%       1       —
 
 ### C1 · The clip does not ride the beat — and it is an engine fact
 
-A cascade renders as nested `<<linkreplace>>` (`v2.py:13952`, `body_html` emitted inside the
+A cascade renders as nested `<<linkreplace>>` (`v2.py:14572`, `body_html` emitted inside the
 linkreplace body): every beat **appends** and nothing is removed, so the node-lead clip illustrates
 beat 0 and nothing after it. Node routing is the opposite — resolved at BUILD time
 (`v2.py:13258`) into a real passage, so the screen **swaps**.

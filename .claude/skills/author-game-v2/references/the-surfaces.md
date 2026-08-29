@@ -791,7 +791,7 @@ Three things about that line carry the rule:
 
 ⚠️ **This is authorable here today and needs no engine work** — a `[group]` carrying `conditions` and
 wrapping a `block_pool` is live in `mrs_vance` at `loop_cade.finish` and `loop_sherrod.finish`
-(5 instances), and consecutive `[group]` blocks become one `if/elseif` chain at `v2.py:14634-14640`.
+(5 instances), and consecutive `[group]` blocks become one `if/elseif` chain at `v2.py:14378`.
 **No v2 game gates a pool on an owned thing** — the five that exist ride a sex-act counter. This is
 recorded as a measured field pattern with the engine verified, and **it is deliberately not gated**:
 nothing of ours has built it yet, and a check written before its doctrine has a game to run against
