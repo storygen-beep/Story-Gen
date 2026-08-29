@@ -1,0 +1,378 @@
+# =============================================================================
+# The Route — 0_systems_spec
+# Built with author-game-v2. Spec: games/the_route/WANT.md
+#
+# who_climbs = "cast" (the-meters.md W1) — declared in v2_state.json, with
+# ascent_tiers = [] because a roster game's climb lives on the cast by
+# definition. There is NO player ascent tier in this game.
+#
+#   CAST SPINE   `want` on everyone who climbs, ONE word, one scale
+#                `access` as a second meter on Roy and Dane only — the two arcs
+#                that carry the game (the-meters.md W6)
+#                `trust` on Cheryl, which IS the route: which houses, which
+#                hours, whose keys. The meter that widens the map is owned by a
+#                person, not by the player.
+#   THROTTLE     arousal — the act menu on the node-routed loops, nothing else
+#   NEEDS        energy · hunger · clean · fuel
+#
+# ⚠️ RUNGS ARE NOT 15/35/55/75, and they are not 8-17 either. The 8-17 band is a
+#    PLAYER-ascent number and does not transfer to a roster game. Per-character
+#    willingness in the field: median 3 rungs (p25 2, p75 6), lowest at about 5
+#    (gates.py:2113-2119). Every ladder here starts at 4-6.
+#
+# ⚠️ BANDS BELOW ARE THE SIDEBAR'S BUSINESS, NOT THE RUNG LADDER. They are how
+#    the player READS a meter; the gates go where the content goes.
+#
+# ⚠️ LOCALE: plain American, declared in WANT.md §7 and enforced on labels as
+#    well as prose. A button cannot carry its own gloss.
+# =============================================================================
+
+schema_version = "1.0"
+
+[project]
+id              = "the_route"
+title           = "The Route"
+description     = "Six houses on a county road, and two of them are your own family. You are the home health aide the agency sends, which means you are the one who gets them washed and dressed and through the day — your father since the stroke, your brother since the wreck. Your uncle signs the hours. Nobody has to explain why you are in the room."
+starting_canvas = "canvas_first_shift"
+quests_engine   = "v2"
+version         = "0.1"
+
+[time]
+starting_hour = 7          # the sheet starts at seven; C1 — the opening's first
+starting_day  = "Monday"   #   node may state this hour and nothing after it
+starting_week = 1
+
+[settings]
+narration_person  = "second"        # IMMUTABLE once 0.1 ships
+clothing_enabled  = true            # scrubs and not-scrubs is the whole read
+wardrobe_location = "her_apartment"
+
+# ─── Rent — Monday, and it is rent because the engine says so ────────────────
+# ⚠️ THE OBLIGATION HAD TO BE RENT. RentDay hardcodes "— Rent Day" in its heading
+#    (v2.py:16598), "Rent is $X" (v2.py:16610) and "Pay $X rent" (v2.py:16608).
+#    Only title / scene / greeting and the response strings are author-set
+#    (template_import.py:2696). A truck note or a medical bill would have made
+#    the engine lie on the one page that charges it.
+#
+# ⚠️ eviction_mode = "flag_set", NOT the default "game_end". A product that never
+#    ends must not carry a lose-state that stops play. Coming up short past the
+#    one warning sets `behind_on_rent`, which is a condition other content reads.
+#
+# The agency pays Friday and the rent is due Monday, so the week's money has to
+# survive the weekend. $180 against a best week of $420.
+[settings.rent]
+enabled          = true
+amount           = 180
+due_day          = "Monday"
+grace_periods    = 1
+start_after_flag = "first_route_run"
+eviction_mode    = "flag_set"
+eviction_flag    = "behind_on_rent"
+currency_symbol  = "$"          # ONE notation, everywhere. the-economy.md R7
+
+[settings.rent.text]
+title            = "Monday"
+scene            = "He comes up the outside stairs rather than knocking at the bottom, which is his way of saying he has been up them before. The laundromat is running underneath and the whole floor is warm from it."
+greeting         = "Monday. Same as it was Monday."
+paid_scene       = "You count it out on the top of the dryer because there is nowhere else flat, and he watches you do it without offering to help and without looking away."
+paid_response    = "That's it, then. I'll get out of your morning."
+paid_closing     = "He goes back down the outside stairs. The money is gone and it is seven fifteen and the sheet is still on the seat of the truck."
+cant_pay         = "Tell him it isn't there."
+warning_scene    = "You tell him it isn't there. He does not say anything for long enough that you hear the dryer change cycle underneath."
+warning_response = "Once. I'll carry it once and I'd rather not have the conversation twice."
+warning_closing  = "He goes down the stairs slower than he came up them."
+eviction_scene_soft    = "The second Monday he does not come up at all. There is a folded sheet of paper wedged in the door frame at the bottom of the stairs, and it has a date on it."
+eviction_response_soft = "You're behind now. That's different from being short."
+eviction_closing_soft  = "You put it in the glovebox because there is nowhere in the apartment you would not see it."
+
+[theme]
+mode = "dark"
+
+
+# ─── The body ────────────────────────────────────────────────────────────────
+# Four needs, and every one of them SHUTS something (the-meters.md M8, gate 29).
+# A restore that gates nothing is a chore.
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "energy"
+bands = [
+  { min = 0,  max = 24, text = "Cannot take another house" },
+  { min = 25, max = 59, text = "Running on the morning" },
+  { min = 60, text = "Good for the day" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "hunger"
+bands = [
+  { min = 0,  max = 24, text = "Hands not steady" },
+  { min = 25, max = 59, text = "Should have eaten" },
+  { min = 60, text = "Fed" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "clean"
+bands = [
+  { min = 0,  max = 34, text = "Been in it all day" },
+  { min = 35, max = 69, text = "Worked in" },
+  { min = 70, text = "Clean" },
+]
+
+# The gauge. A number, not a band — the player is counting it against the road.
+# ⚠️ `label` AND `max` are both required on a trait_bar. It takes its label from
+#    the sidebar item, never [[traits.labels]], and _traitMax defaults to 100.
+[[sidebar_items]]
+type  = "trait_bar"
+trait = "fuel"
+label = "Gas"
+max   = 100
+
+# The throttle. Banded and value-hidden — the player sees the band, never the
+# volatile figure. Its ONLY job is the act menu on the node-routed loops
+# (the-meters.md W2). Five earlier v2 games raised arousal 232 times and read it 4.
+[[sidebar_items]]
+type       = "trait_bar"
+trait      = "arousal"
+hide_value = true
+bands = [
+  { min = 0,  max = 29,  text = "—" },
+  { min = 30, max = 64,  text = "Aware of it" },
+  { min = 65, max = 100, text = "Not going to be able to leave it" },
+]
+
+# ⚠️ max = 500, NOT the default 100. A best week is $420 against $180 rent, and
+#    _traitMax defaults to 100 — an uncapped counter renders as a percentage of a
+#    ceiling that does not exist.
+# ⚠️ AND EVERY EFFECT THAT WRITES money CARRIES clamp = false. The clamp defaults
+#    to TRUE and is a hard 0-100 on every trait including a currency
+#    (v2.py:5928-5930). A shipped game paid 30 a shift against 120 rent, hit the
+#    ceiling at 100, and could never pay it — valid TOML, green build, ten green
+#    gates. engine.md §21.
+# ⚠️ AND A DEDUCTION IS op = "add" WITH A NEGATIVE VALUE. `subtract` is not an
+#    engine op; applyTraitEffect runs add and set and returns on anything else
+#    (v2.py:5749-5756). Two v2 games shipped 105 effects that did nothing.
+[[sidebar_items]]
+type  = "trait_bar"
+trait = "money"
+label = "Cash"
+max   = 500
+
+
+# ─── Trait labels ────────────────────────────────────────────────────────────
+# Everything banded above is hidden here: a banded meter is not also a number.
+[[traits.labels]]
+key    = "energy"
+hidden = true
+
+[[traits.labels]]
+key    = "hunger"
+hidden = true
+
+[[traits.labels]]
+key    = "clean"
+hidden = true
+
+[[traits.labels]]
+key    = "arousal"
+hidden = true
+
+# The start-choice memory. Set once at intake, read at five sites each.
+# Hidden — it is a fact about her, not a number she is climbing.
+[[traits.labels]]
+key    = "past_kind"
+hidden = true
+
+# Loop state. Hidden numeric traits, never flags — a flag set inside a triggerless
+# canvas has no located setter and HARD-FAILS the build.
+[[traits.labels]]
+key    = "roy_loop_stage"
+hidden = true
+
+[[traits.labels]]
+key    = "dane_loop_stage"
+hidden = true
+
+
+# ─── Day rollover — [engine.daily_tick] ──────────────────────────────────────
+# ⚠️ THE ONLY CLEAN WAY TO DAY-CAP A TRIGGERLESS RUNG, and nearly every rung in a
+#    v2 game is triggerless: max_triggers_per_day is read off the TRIGGER
+#    (v2.py:11017) and a hub choice has none. the-meters.md M5.
+#
+# ⚠️ A FLAG, NEVER A COUNTER TRAIT. A hidden counter read with `lt` puts a player
+#    trait in the game whose only conditions CLOSE content, which reads to gate
+#    10 as a descent wearing an ascent's clothes.
+#
+# ⚠️ EVERY FLAG HERE NEEDS A SETTER IN 0.1. A cap with two of its three parts
+#    validates and throttles nothing — the clear and the read exist, the setter
+#    is what makes it a cap. Until 0.1's content lands the day-cap gate will say
+#    so, and that is correct: an absence is not a pass.
+[engine.daily_tick]
+flagEffects = [
+  { targetType = "player", flag = "roy_rung_today",     op = "unset" },
+  { targetType = "player", flag = "dane_rung_today",    op = "unset" },
+  { targetType = "player", flag = "ward_rung_today",    op = "unset" },
+  { targetType = "player", flag = "marlon_rung_today",  op = "unset" },
+  { targetType = "player", flag = "roy_washed_today",   op = "unset" },
+  { targetType = "player", flag = "roy_visit_today",    op = "unset" },
+  { targetType = "player", flag = "dane_visit_today",   op = "unset" },
+  { targetType = "player", flag = "marlon_visit_today", op = "unset" },
+  { targetType = "player", flag = "sheet_picked_up",    op = "unset" },
+  { targetType = "player", flag = "cheryl_talk_today",  op = "unset" },
+  { targetType = "player", flag = "washed_today",       op = "unset" },
+  { targetType = "player", flag = "ate_today",          op = "unset" },
+  { targetType = "player", flag = "night_visit_today",  op = "unset" },
+  { targetType = "player", flag = "roy_loop_today",     op = "unset" },
+  { targetType = "player", flag = "dane_loop_today",    op = "unset" },
+  { targetType = "player", flag = "solo_bed_today",     op = "unset" },
+  { targetType = "player", flag = "pulled_over_today",  op = "unset" },
+  { targetType = "player", flag = "far_end_today",      op = "unset" },
+  { targetType = "player", flag = "roy_talk_today", op = "unset" },
+  { targetType = "player", flag = "dane_talk_today", op = "unset" },
+  { targetType = "player", flag = "dane_leg_today", op = "unset" },
+  { targetType = "player", flag = "marlon_talk_today", op = "unset" },
+  { targetType = "player", flag = "cheryl_ask_today", op = "unset" },
+  { targetType = "player", flag = "copay_today", op = "unset" },
+  { targetType = "player", flag = "groceries_today", op = "unset" },
+  { targetType = "player", flag = "roy_night_today", op = "unset" },
+  { targetType = "player", flag = "kettle_today", op = "unset" },
+  { targetType = "player", flag = "evening_today", op = "unset" },
+]
+
+
+# ─── THE ROUTE — [ui.cast_page] ──────────────────────────────────────────────
+# The who-is-who page. Nothing about the cast is authored here: each card is
+# built at runtime from the character's `relationship` line, where the schedule
+# puts them at this minute, and their own quest card's next step.
+#
+# ⚠️ WHO APPEARS IS DECIDED BY THE QUEST CARDS BELOW, not by this block. A
+#    character is listed exactly when pickQuestsCard returns a card for them, so
+#    the meeting flag on their cards opens this page and the guidance page in the
+#    same instant and the two can never disagree.
+[ui.cast_page]
+title        = "The Route"
+button_label = "The Route"
+button_icon  = "🚪"
+intro        = "Six houses on the sheet. Two of them are yours."
+
+
+# ─── GUIDANCE — [[quest_cards]] ──────────────────────────────────────────────
+# ⚠️ quests_engine = "v2" turns the sidebar entry and the page ON. Authoring no
+#    cards leaves a nav link to a heading with nothing under it — which is
+#    exactly what shipped once. Switching the engine on is not authoring
+#    guidance. (engine.md §23)
+#
+# ⚠️ NO `version = "1.0"` ON A QUEST CARD. Quest conditions use a separate
+#    evaluator with no fail-open, and it takes five operators, not six — `ne` is
+#    rejected at build time.
+#
+# ⚠️ A `when` ITEM SETS EITHER `flag` OR `trait`, NEVER BOTH — the importer
+#    rejects an item carrying both (template_import.py:5285). The meeting flag is
+#    its own item beside the trait band.
+#
+# ⚠️ FLAG NAMES ARE NOT VALIDATED. A typo hides that character's guidance forever
+#    and no build error says so.
+#
+# ⚠️ EVERY CAST CARD CARRIES ITS CHARACTER'S MEETING FLAG, or the guidance page
+#    introduces the whole route on click one — before the player has met anybody.
+#    the-first-hour.md F8.
+#
+# ⚠️ `terminal = true` IS NOT COMPUTED FROM PROGRESS. A character whose only card
+#    is terminal on a `lt` band reads as finished at value zero. Every ladder here
+#    is two cards: an open lower band and a terminal upper one that must be
+#    climbed to. EXACTLY ONE card game-wide sets `terminal_text`.
+#
+# Every tip names a PLACE, a PERSON where there is one, and a VERB, with the
+# window when the rung is schedule-gated (the-voice.md R3).
+
+# ── Roy — the reversal, and the first house every day ────────────────────────
+[[quest_cards]]
+priority = 90
+npc_id   = "npc_roy"
+text     = "Your father ran everything and decided everything, and now the first hour of his day is your hands. He says thank you the way he would say it to the agency."
+tip      = "His house, from seven. Get him up, get him washed in the bathroom, get him to the kitchen — every morning, and it is the same hour every time."
+when     = [ { flag = "met_roy", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_roy", op = "lt", value = 22 } ]
+
+[[quest_cards]]
+priority = 89
+npc_id   = "npc_roy"
+text     = "He has stopped calling it by its clinical name. Neither of you has said anything about that, and the sheet still says the same three lines it said in March."
+tip      = "The bathroom, first thing. The key on the hook by his door is the one that decides whether you are still knocking."
+when     = [ { flag = "met_roy", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_roy", op = "gte", value = 22 } ]
+terminal = true
+terminal_text = "As far in as 0.1 goes"
+
+# ── Dane — the fastest ladder, nothing to lose ───────────────────────────────
+[[quest_cards]]
+priority = 80
+npc_id   = "npc_dane"
+text     = "Your brother has nothing to do all day but wait for the visit, and he has never once pretended otherwise. He jokes about it, which is how he gets to say it."
+tip      = "The trailer, afternoons. Change the bed while he is in it."
+when     = [ { flag = "met_dane", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_dane", op = "lt", value = 24 } ]
+
+[[quest_cards]]
+priority = 79
+npc_id   = "npc_dane"
+text     = "He has stopped joking. The door is unlocked before you get there now, and he sits up for it."
+tip      = "The trailer. He does not wait for the visit any more, so the hour matters less than it did."
+when     = [ { flag = "met_dane", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_dane", op = "gte", value = 24 } ]
+terminal = true
+
+# ── Ward — he signs the hours ────────────────────────────────────────────────
+[[quest_cards]]
+priority = 70
+npc_id   = "npc_ward"
+text     = "Your uncle signs your timesheet, which means the money you are paid for washing your father passed through his hand first. He has never once said what he thinks that is."
+tip      = "He comes by your father's house in the middle of the morning. Hand him the sheet yourself instead of leaving it on the counter."
+when     = [ { flag = "met_ward", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_ward", op = "lt", value = 20 } ]
+
+[[quest_cards]]
+priority = 69
+npc_id   = "npc_ward"
+text     = "He says it in the kitchen with your father down the hall, at a volume he has clearly thought about."
+tip      = "Your father's house, mid-morning. He signs whatever hours you write now."
+when     = [ { flag = "met_ward", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_ward", op = "gte", value = 20 } ]
+terminal = true
+
+# ── Marlon — the one who is only a job, unless the player named him closer ───
+[[quest_cards]]
+priority = 60
+npc_id   = "npc_marlon"
+text     = "Six weeks out of surgery and careful with you in a way none of the others are. He is on the sheet like anyone else."
+tip      = "His house, late on the round. Get him dressed — it is the part he cannot do."
+when     = [ { flag = "met_marlon", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_marlon", op = "lt", value = 20 } ]
+
+[[quest_cards]]
+priority = 59
+npc_id   = "npc_marlon"
+text     = "He is not careful now, and he says out loud what you are to him, which is the thing you decided about him before any of this started."
+tip      = "His house, after dark. He has stopped putting it on the calendar."
+when     = [ { flag = "met_marlon", subject = "player", op = "is_true" },
+             { trait = "want", subject = "npc", npc_id = "npc_marlon", op = "gte", value = 20 } ]
+terminal = true
+
+# ── Cheryl — trust IS the route, so this ladder is the map ───────────────────
+[[quest_cards]]
+priority = 50
+npc_id   = "npc_cheryl"
+text     = "She assigns the route and she reads the checklist back to you on Friday. She has been doing this for thirty years and she knows exactly what the job is supposed to be."
+tip      = "The agency office, first thing — pick up the sheet in person instead of taking it off the board."
+when     = [ { flag = "met_cheryl", subject = "player", op = "is_true" },
+             { trait = "trust", subject = "npc", npc_id = "npc_cheryl", op = "lt", value = 18 } ]
+
+[[quest_cards]]
+priority = 49
+npc_id   = "npc_cheryl"
+text     = "She lets you write your own hours now, and she has stopped reading the sheet back line by line. That is either trust or it is her looking away, and you have decided not to work out which."
+tip      = "The agency office. Ask for the evening houses — she is the only person who can give you one."
+when     = [ { flag = "met_cheryl", subject = "player", op = "is_true" },
+             { trait = "trust", subject = "npc", npc_id = "npc_cheryl", op = "gte", value = 18 } ]
+terminal = true

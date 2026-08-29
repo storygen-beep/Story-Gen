@@ -15,6 +15,55 @@
 //                        NOT whatever is currently half-built in the working tree.
 window.GAMES = [
   {
+    // Listed 2026-08-30. Authored end-to-end with author-game-v2. 8,202 words across 10
+    // locations, 52 canvases, 5 characters, 10 guidance cards, 46/46 gates with ZERO n/a —
+    // the first game here where no check reported an absence.
+    //
+    // Built against the shape the previous eight kept landing on. SIX of the eight v2 games are
+    // a female protagonist and blood family, so the premise was never going to differentiate
+    // this one — the corpus says premise is 0 of 30 reasons a game in this genre is loved, and
+    // freedom is the largest at 25.9%. So the differentiation went into the three §1
+    // declarations every earlier game answered by default: `written` recorded as a CHOICE, a
+    // start choice shipped in 0.1 rather than retrofitted (the intake form asks what she did
+    // before, three answers, each read at five sites), and `relationship_options` on two of the
+    // men — the player names what her brother and the last client are to her, and the prose
+    // reads it back through @dane.rel and @marlon.rel.
+    //
+    // The structural move is that she has a JOB that makes her visit people. A home health aide
+    // route forces the map to be a town rather than one household, makes the repeatable surface
+    // body contact by construction (the bath chair, the bed change), and answers release 41
+    // mechanically: a new house on the sheet.
+    //
+    // `who_climbs = "cast"` with `ascent_tiers` EMPTY — 100% of the climb sits on the cast, and
+    // the meter that widens the map belongs to a person: Cheryl's `trust` is the route. There is
+    // no player ascent tier in this game at all.
+    //
+    // Firsts for this repo: 87 `block_pool` uses, the most of any game here; the wardrobe read as
+    // a COLOUR rather than a lock (five variant selectors, no refusals); and five talk screens,
+    // the genre's second-largest content kind, which no v2 game had built.
+    //
+    // ⚠️ FOUR DEFECTS THE 46 SOURCE GATES COULD NOT SEE, all found by the build and the live run:
+    // `targetType = "canvas"` is not a valid choice target (importer takes trigger|location|node
+    // — both act loops were unreachable); `exit_block.type = "choice"` is invalid; `outfit` is
+    // not one of the seven VALID_CLOTHING_SLOTS; and `npc` is a TRIGGER field, so ten hubs
+    // carried it at canvas level and rendered no portrait while the gate reported n/a, not FAIL.
+    //
+    // ⚠️ MEDIA HAS NEVER BEEN HARVESTED. 35 files missing at build time. Current output/ is a
+    // --dev --debug build, so the art shows labelled debug placeholders rather than silent gaps.
+    // Run find-media, rebuild WITHOUT --dev --debug, add `version`, archive to
+    // games/the_route/releases/, and drop `dev: true` in the same commit.
+    //
+    // ⚠️ Open debts, all logged in v2_state.json promises: Marlon tops out at want 20 with no act
+    // loop of his own; every dispatch host produces ONE outcome where the doctrine wants three;
+    // no phone (P1's three questions pass on paper, revisit at 0.3); and `board.map.r1_signoff`
+    // is still null — the map has not been signed off by anyone but its author.
+    slug: "the_route",
+    title: "The Route",
+    badge: "v2",
+    dev: true,
+    summary: `Nora Ashby is twenty-seven and drives a county home care route: six houses off a two-lane road, get people up, get them washed, get them through the day, forty-five minutes a card. Two of the six are hers. Her father since the stroke in March, who ran everything and decided everything and now cannot get a sock on without her. Her brother since the wreck, home on a rebuilt knee with nothing to do all day but listen for her truck. Her uncle holds the power of attorney, which means the man who signs her timesheet is deciding how long she spends alone in that house — and he has never once said what he thinks that is worth. Above all of it is the woman at the agency who assigns the route, reads the hours back to her every Friday, and is the only person in the county who can take any of it away. Rent is Monday. The tank is half full. Nobody has ever had to explain why she is the one in the room.`,
+  },
+  {
     // Listed 2026-08-25. Authored end-to-end with author-game-v2. 10,297 words across 14
     // locations, 91 canvases, 6 characters, 14 guidance cards, 41/41 gates — the first game
     // here to take the whole scoreboard.

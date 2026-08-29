@@ -1,0 +1,407 @@
+# =============================================================================
+# The Route — 1_metadata_and_locations
+#
+# THE MAP: nested_zones, rooted on COUNTY ROAD 9 — the road is the ground and it
+# is also the title. Every house and the town hang off it.
+#
+#     county_road_9 ──┬── rossiter ──┬── her_apartment
+#                     │              ├── agency_office
+#                     │              ├── the_diner
+#                     │              └── gas_station
+#                     ├── roy_house ── roy_bathroom      (ANCHOR)
+#                     ├── dane_trailer
+#                     └── marlon_house
+#
+# ⚠️ THE EXTERIOR IS THE ROOT, NOT A LEAF. A game shipped an exterior priced at
+#    25 minutes that hung off its kitchen — stepping outside meant stepping from
+#    one interior into a row of shops. Gate 28 reads entry_from and fails a leaf.
+#    the-map.md R3.
+#
+# ⚠️ THE SHAPE WAS PICKED IN THE WANT, BEFORE THE CAST. Deriving the map from the
+#    roster is circular: the premise fixes the cast, the cast fixes the map, and a
+#    family returns a house every time. Six of the eight earlier v2 games are a
+#    female protagonist and blood family; two of five shipped seven rooms of one
+#    building. Giving her a ROUTE for a job is what makes the map a town.
+#    the-map.md R0.
+#
+# ⚠️ navigation_order is FORWARD-ONLY — the children of this location, never the
+#    way back. The return link is implicit from entry_from, and the validator
+#    hard-fails a nav entry whose entry_from is not this room.
+#
+# ⚠️ TRAVEL FRICTION SITS ON THE BRIDGES, never on every room. With free instant
+#    travel a schedule grid is a lookup table. `time` is minutes on the day clock;
+#    any other key deducts that player trait — which is how `fuel` shuts the far
+#    end of the road. engine.md §22.
+#
+# Word budgets (`fill`) live in v2_state.json and were written BEFORE any prose:
+# 31,500 across ten, anchor roy_house at 9,000 = 28.6%.
+#
+# ⚠️ THERE IS NO [[needs]] TABLE IN THIS FILE and that is deliberate. The importer
+#    reads 24 top-level tables and `needs` is not one of them — the block in
+#    templates/board.toml maps to no engine key. The needs are declared in
+#    v2_state.json under board.needs[], and they exist in the game as
+#    [player.core_traits] + [player.trait_decay] plus the conditions that read
+#    them. A key the engine does not consume fails silently.
+# =============================================================================
+
+[player]
+id          = "player"
+name        = "Nora"
+customizable = true
+
+# ⚠️ SECTION form, not an inline table — a multi-line `core_traits = { … }` is a
+#    TOML parse error.
+[player.core_traits]
+# NO PLAYER ASCENT TIER. who_climbs = "cast": the climb is on the cast, and the
+# meter that widens the map is npc_cheryl.trust. the-meters.md W1.
+
+# The throttle — act menu only, on Roy's and Dane's node-routed loops.
+arousal         = 0
+
+# The body. Four needs, each of which SHUTS something (board.needs[], gate 29).
+energy          = 100
+hunger          = 100
+clean           = 100
+fuel            = 60
+
+# ⚠️ money IS A QUANTITY, NOT A 0-100 METER. Every effect that writes it carries
+#    clamp = false, or the engine's default clamp caps it at 100 and the $180 rent
+#    becomes unpayable — valid TOML, green build, green gates. engine.md §21.
+money           = 95
+
+# The start-choice memory, set once at intake and read at five sites each.
+# 1 = the hospital floor · 2 = the bar · 3 = nursed her mother at home.
+past_kind       = 0
+
+# Loop state (hidden). Numeric, never flags — a triggerless canvas has no located
+# setter for a flag and the build hard-fails.
+roy_loop_stage  = 0
+dane_loop_stage = 0
+
+# Falls on its own. `fuel` is deliberately absent: it drops PER VISIT, on the
+# bridges, not on the calendar — which is what makes it the premise's own need
+# rather than a fourth copy of energy.
+[player.trait_decay]
+energy = 15
+hunger = 20
+clean  = 18
+
+# Three fields, which is the field median. W1: if you ask, print it back — the
+# field reads a created value a median of four times and our games left six of
+# fourteen unread.
+[[player.customization_fields]]
+id          = "name"
+type        = "text"
+label       = "Your name"
+default     = "Nora"
+
+[[player.customization_fields]]
+id          = "hair"
+type        = "select"
+label       = "Hair"
+options     = ["dark", "fair", "red", "grey coming through"]
+default     = "dark"
+
+[[player.customization_fields]]
+id          = "build"
+type        = "select"
+label       = "Build"
+options     = ["small", "average", "heavy", "strong"]
+default     = "average"
+
+
+# ─── county road 9 — THE ROOT, and the ground everything sits on ─────────────
+[[locations]]
+id                   = "county_road_9"
+name                 = "County Road 9"
+description          = "Two lanes of patched asphalt running out of town past the houses on your route. Mailboxes on posts, a ditch running under the road, a grain bin a mile back off the shoulder. Everything you do today is somewhere off this road, and the truck is how you get to any of it."
+image                = "locations/county_road_9.jpg"
+image_search_queries = ["rural two lane county road", "farm road mailboxes shoulder"]
+navigation_order     = ["rossiter", "roy_house", "dane_trailer", "marlon_house"]
+
+# ─── rossiter — the town zone ────────────────────────────────────────────────
+[[locations]]
+id                   = "rossiter"
+name                 = "Rossiter"
+description          = "The county seat: four blocks of storefronts, a courthouse nobody goes into, and the agency that hands out the routes. Everything you need that is not on the road is on these four blocks."
+image                = "locations/rossiter.jpg"
+image_search_queries = ["small american town main street", "rural county seat storefronts"]
+entry_from           = "county_road_9"
+navigation_order     = ["her_apartment", "agency_office", "the_diner", "gas_station"]
+costs                = { time = 15, fuel = 6 }
+
+# ─── her apartment — home base ───────────────────────────────────────────────
+[[locations]]
+id                   = "her_apartment"
+name                 = "Your Apartment"
+description          = "One room and a bathroom over the laundromat, up an outside staircase. The floor is warm all day from the dryers underneath and the whole place smells like other people's detergent. Your bed, your shower, and the only door on the route that locks behind you."
+image                = "locations/her_apartment.jpg"
+image_search_queries = ["small studio apartment above shop", "cheap one room apartment bed window"]
+entry_from           = "rossiter"
+navigation_order     = []
+
+# ─── the agency — the sheet, the payday, the standard ────────────────────────
+[[locations]]
+id                   = "agency_office"
+name                 = "The Agency"
+description          = "The county home care office: two desks, a wall of client folders, and the board where the day's routes go up. This is where you are told which houses are yours and how many hours you are allowed to write down."
+image                = "locations/agency_office.jpg"
+image_search_queries = ["small county office desks filing", "home health care office interior"]
+entry_from           = "rossiter"
+navigation_order     = []
+
+# ─── the diner ───────────────────────────────────────────────────────────────
+[[locations]]
+id                   = "the_diner"
+name                 = "The Diner"
+description          = "Six booths and a counter, open from five for the people who work early. It is where you eat when there is no time to eat properly, and where the woman who assigns your route sits at the end of a shift because she does not want to go home yet either."
+image                = "locations/the_diner.jpg"
+image_search_queries = ["small town american diner booths", "roadside diner counter interior"]
+entry_from           = "rossiter"
+navigation_order     = []
+
+# ─── the gas station — where the road costs money ────────────────────────────
+[[locations]]
+id                   = "gas_station"
+name                 = "The Gas Station"
+description          = "Two pumps and a store that sells coffee, sandwiches under a lamp, and everything else at twice what it is worth. Every mile of the route comes out of this tank, so every mile of the route comes out of your week."
+image                = "locations/gas_station.jpg"
+image_search_queries = ["rural gas station two pumps", "small town gas station convenience store"]
+entry_from           = "rossiter"
+navigation_order     = []
+
+# ─── your father's house — THE ANCHOR ────────────────────────────────────────
+[[locations]]
+id                   = "roy_house"
+name                 = "Your Father's House"
+description          = "The house you grew up in, and the first stop on the sheet every morning. Since the stroke it has a rail on the porch steps, a bed moved down into the front room, and a chair by the window he sits in whether or not anyone puts him there. His brother has a key and lets himself in."
+image                = "locations/roy_house.jpg"
+image_search_queries = ["small rural farmhouse front room", "elderly home care bedroom chair window"]
+entry_from           = "county_road_9"
+navigation_order     = ["roy_bathroom"]
+costs                = { time = 20, fuel = 8 }
+
+# ─── the bathroom — the crudest repeatable surface in the game ───────────────
+# ⚠️ THE WALK-IN LIVES HERE (the-surfaces.md R3, gate 30). She works alone in this
+#    room and Ward is scheduled in roy_house from ten — that pairing is a JOIN of
+#    this board, not a judgement, and the gate computes it.
+[[locations]]
+id                   = "roy_bathroom"
+name                 = "The Bathroom"
+description          = "The room the county paid to change: grab bars on three walls, the tub taken out, and a plastic bath chair bolted where it was. The door does not lock any more, because a door that locks is the thing that kills people in here."
+image                = "locations/roy_bathroom.jpg"
+image_search_queries = ["accessible bathroom grab bars shower chair", "home care bathroom handrails"]
+entry_from           = "roy_house"
+navigation_order     = []
+
+# ─── your brother's trailer ──────────────────────────────────────────────────
+[[locations]]
+id                   = "dane_trailer"
+name                 = "Your Brother's Trailer"
+description          = "A single-wide on a rented lot behind the co-op, where he has been since the knee and since his wife took the truck and went. Front room, a back bedroom, and a TV that is on whether or not he is watching it."
+image                = "locations/dane_trailer.jpg"
+image_search_queries = ["single wide trailer interior living room", "mobile home bedroom messy"]
+entry_from           = "county_road_9"
+navigation_order     = []
+costs                = { time = 25, fuel = 10 }
+
+# ─── the last house on the sheet ─────────────────────────────────────────────
+[[locations]]
+id                   = "marlon_house"
+name                 = "The Last House"
+description          = "The far end of the route, twelve miles past your father's, and the only client on the sheet you were not related to before you started. One floor, no stairs anywhere in it, and a bed set up in what used to be the dining room while his back heals."
+image                = "locations/marlon_house.jpg"
+image_search_queries = ["rural ranch house interior daytime", "recovery bed set up in living room"]
+entry_from           = "county_road_9"
+navigation_order     = []
+costs                = { time = 30, fuel = 14 }
+
+
+# ─── THE ROUTE ───────────────────────────────────────────────────────────────
+# ⚠️ ORDERING: [[npcs.schedules]] binds to the [[npcs]] block ABOVE it. Inserting
+#    a character between an existing one and its schedules silently re-parents
+#    them.
+#
+# ⚠️ WEEKDAYS ARE MONDAY-ZERO — DAY_NAMES.indexOf(current_day), v2.py:3591-3593.
+#    An all-days row handles an overnight wrap on its own (isCurrentTimeSlot,
+#    v2.py:3784); a DAY-SPECIFIC overnight window needs two rows, because the
+#    weekday check runs first against today and today has changed by midnight.
+#    Nothing here is both day-specific and overnight.
+#
+# ⚠️ ONE WILLINGNESS WORD FOR THE WHOLE GAME — `want`, everybody on the same
+#    scale, people told apart by what MODIFIES it. Measured over thirteen corpus
+#    games: median one meter per person, nine of thirteen use the same word for
+#    everyone. The rich second meter goes to the two arcs that carry the game.
+#    the-meters.md W6 — which said the OPPOSITE until 2026-08-24, and the old
+#    reading is what produced off_season's four characters with four vocabularies.
+
+# ─── Roy — the reversal. Rich arc #1. ────────────────────────────────────────
+[[npcs]]
+id           = "npc_roy"
+name         = "Roy"
+relationship = "Your father, 57. Right side gone since March."
+description  = "Her father, 57. A stroke in March took his right side and most of what he could do for himself. He ran everything and decided everything, and now the first hour of his day is her hands on him — and the county pays her for that hour."
+portrait     = "roy.jpg"
+core_traits  = { want = 0, access = 0 }
+flag_keys    = ["met_roy"]
+arc_stages   = ["Your father", "Letting you", "Asking you", "Not calling it the job"]
+
+[[npcs.schedules]]
+location   = "roy_bathroom"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "07:00"
+end_time   = "09:00"
+activity   = "waiting in the chair to be got up"
+
+[[npcs.schedules]]
+location   = "roy_house"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "09:00"
+end_time   = "23:00"
+activity   = "in the chair by the window"
+
+[[npcs.schedules]]
+location   = "roy_house"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "23:00"
+end_time   = "07:00"
+activity   = "in the bed they moved down to the front room"
+
+# ─── Dane — the fastest ladder, nothing to lose. Rich arc #2. ────────────────
+# ⚠️ customizable = true renders a name TEXTBOX as well as the relationship
+#    listbox (v2.py:9296), so every line of prose about him uses @dane, never a
+#    typed name. The picked relation reads back as @dane.rel (v2.py:14656).
+[[npcs]]
+id                    = "npc_dane"
+name                  = "Dane"
+relationship          = "brother"
+relationship_options  = ["brother", "half-brother", "stepbrother", "cousin"]
+customizable          = true
+description           = "29, home on a rebuilt knee since the wreck, wife gone with the truck. Nothing to do all day but wait for the visit, and he has never once pretended otherwise. He never had power over her, so his wanting is not a reversal — it is the only appetite here with nothing to lose."
+portrait              = "dane.jpg"
+core_traits           = { want = 0, access = 0 }
+flag_keys             = ["met_dane"]
+arc_stages            = ["Joking about it", "Not joking", "Sitting up for it", "Not waiting for the visit"]
+
+[[npcs.schedules]]
+location   = "dane_trailer"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "06:00"
+end_time   = "23:59"
+activity   = "in the front room with the TV on"
+
+[[npcs.schedules]]
+location   = "dane_trailer"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "00:00"
+end_time   = "06:00"
+activity   = "asleep in the back bedroom"
+
+# ─── Ward — he signs the hours ───────────────────────────────────────────────
+[[npcs]]
+id           = "npc_ward"
+name         = "Ward"
+relationship = "Your uncle, 49. He holds the power of attorney."
+description  = "Roy's younger brother, 49. He signs her timesheet, so every dollar she has earned passed through the hand of the man who decides how long she is alone in that house. He has never once said what he thinks that is worth."
+portrait     = "ward.jpg"
+core_traits  = { want = 0 }
+flag_keys    = ["met_ward"]
+arc_stages   = ["Signs it blind", "Asks what you do in there", "Says it in the kitchen", "Stops asking"]
+
+[[npcs.schedules]]
+location   = "roy_house"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "10:00"
+end_time   = "11:30"
+activity   = "letting himself in to check on his brother"
+
+[[npcs.schedules]]
+location   = "the_diner"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "12:00"
+end_time   = "13:00"
+activity   = "the same booth, the same order"
+
+# ─── Marlon — the control, and whatever the player named him ─────────────────
+[[npcs]]
+id                    = "npc_marlon"
+name                  = "Marlon"
+relationship          = "family friend"
+relationship_options  = ["neighbor", "mom's ex", "stepfather", "family friend"]
+customizable          = true
+description           = "44, six weeks out of back surgery, the last house on the sheet. The one client she was not related to before she started — which makes his ladder the one that shows her what this is when it is only a job, or proves it never was."
+portrait              = "marlon.jpg"
+core_traits           = { want = 0 }
+flag_keys             = ["met_marlon"]
+arc_stages            = ["Careful with you", "Not careful", "Says what you are to him", "In front of somebody"]
+
+[[npcs.schedules]]
+location   = "marlon_house"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "22:00"
+activity   = "in the bed they set up in the dining room"
+
+[[npcs.schedules]]
+location   = "marlon_house"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "08:00"
+activity   = "asleep with the hall light on"
+
+# ─── Cheryl — trust IS the route ─────────────────────────────────────────────
+# W6's service/workplace row: trust only, willingness does not apply. She is the
+# standard and the brake, and her meter is what opens the map — which houses,
+# which hours, whose keys. There is no player ascent tier in this game because
+# this is it, and it belongs to a person.
+# `the_season`'s real defect was Rae carrying no meter at all.
+[[npcs]]
+id           = "npc_cheryl"
+name         = "Cheryl"
+relationship = "Your supervisor at the agency."
+description  = "Fifties, thirty years of this, and the only person in the county who knows exactly what the job is supposed to be. She assigns the route and she reads the checklist back on Friday. She is the standard, and she is the one who can take the route away."
+portrait     = "cheryl.jpg"
+core_traits  = { trust = 0 }
+flag_keys    = ["met_cheryl"]
+arc_stages   = ["Reads it back line by line", "Stops checking", "Gives you the evening houses", "Writes what you tell her"]
+
+[[npcs.schedules]]
+location   = "agency_office"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "07:00"
+end_time   = "16:00"
+activity   = "at the board with the day's routes"
+
+[[npcs.schedules]]
+location   = "the_diner"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "16:30"
+end_time   = "18:00"
+activity   = "the end booth, not going home yet"
+
+
+# ─── The wardrobe ────────────────────────────────────────────────────────────
+# [settings] declares clothing_enabled = true, and a declared system that does not
+# exist in the built game is the defect the-phone.md P1 names. Scrubs and
+# not-scrubs is the whole of it: what she has on decides whether she is the
+# county in that room or somebody's daughter.
+[[clothing]]
+id          = "scrubs_dark"
+name        = "Dark scrubs"
+slot        = "top"
+description = "The dark set. They do not show what the job puts on them, which is why you bought them."
+worn_beauty = 0
+
+[[clothing]]
+id          = "scrubs_light"
+name        = "Light scrubs"
+slot        = "top"
+description = "The pale set the agency issued. They show everything and they go transparent at the front when you lean over a bath chair."
+worn_beauty = 2
+
+[[clothing]]
+id          = "own_clothes"
+name        = "Your own clothes"
+slot        = "top"
+description = "Jeans and whatever is clean. Nobody on the route has seen you in them and it changes every room you walk into."
+worn_beauty = 3

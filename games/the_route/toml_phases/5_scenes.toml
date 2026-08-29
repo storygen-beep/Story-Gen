@@ -1,0 +1,564 @@
+# =============================================================================
+# The Route — 5_scenes · THE ACT LOOPS
+#
+# The two arcs the Want names as carrying the game: her father on the bath chair,
+# her brother on the bed she just made. Six parts each (the-surfaces.md R3b):
+#
+#   entry      resets arousal + <npc>_loop_stage on the way IN (on the hub choice)
+#   act nodes  3 rungs, own pool each · self-loop · switch links BOTH ways
+#   finish     gated on arousal, routes to the finisher
+#   finisher   [group] bands electing on loop_stage, then resets every loop trait
+#   loop_reset the "Stop" node — also resets
+#
+# ⚠️ NODE-ROUTED, NEVER A CASCADE. The passage swaps, so the clip changes with the
+#    act. A cascade appends, which leaves the setup clip on screen while the
+#    player reads the act — the measured failure register.md S1 exists for.
+#
+# ⚠️ THESE CANVASES ARE TRIGGERLESS, so no flag may be set from their exits
+#    (engine.md §16 — the flag-chain validator HARD-FAILS the build). The day-cap
+#    flags live on the HUB CHOICE that enters the loop, in 3_activities.toml.
+#
+# ⚠️ RESET ON ENTRY AND ON EVERY EXIT. Forget either and the next run starts
+#    mid-climb. Both entries reset in 3_activities; all three exits reset here.
+#
+# ⚠️ EVERY ACT NODE AND EVERY FINISHER BAND CARRIES REAL BODY WORDS ON THE
+#    THINNEST BAND IT CAN RENDER. A finisher is banded by definition and the
+#    player sees exactly ONE band, so a cold band is invisible in a fold.
+#
+# ⚠️ AN EXPLICIT BEAT STAYS ON THE BODY FOR ITS WHOLE LENGTH. Interiority gets its
+#    own beat AFTER — the thought_bubble at the end of each finisher — never
+#    folded into the act. Read the last sentence of any beat below: if it is about
+#    what the moment MEANS rather than what is HAPPENING, it has pivoted.
+#
+# ⚠️ block_pool INSIDE THE ACT NODES. A self-loop is the most re-read screen in
+#    the game — the player clicks it four or five times in a row — so the body
+#    beat is a pool and the sentence changes on every render (v2.py:14798). A
+#    block_pool may NOT nest directly in a block_pool (template_import.py:6230),
+#    but it may sit inside a group, which is how the finisher bands use it.
+# =============================================================================
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE BATH CHAIR — her father. Entered from work_roy_bath, gated on his own
+# access >= 6 and on her being clean enough to still be doing the job.
+# The reversal at its furthest in: the room the county rebuilt, the chair they
+# bolted down, and the door that is not allowed to close.
+# ═════════════════════════════════════════════════════════════════════════════
+[[canvases]]
+id          = "loop_bath_chair"
+name        = "Take longer over it"
+description = "Node-routed pose ladder off work_roy_bath. entry -> hand <-> mouth <-> astride (access >= 14) -> finish (arousal >= 60); finisher elects on roy_loop_stage 3/2/<2. Own pool per act node, block_pool on every self-looped body beat. Resets arousal and roy_loop_stage on entry and on all exits."
+
+[[canvases.nodes]]
+id   = "entry"
+name = "The water still running"
+blocks = [
+  { type = "paragraph", content = "The cloth is on the arm of the chair and the water is still running because neither of you has reached over to turn it off. He has his good hand on the rail and he is not looking at the door." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roy" }, content = "Card says forty-five minutes." },
+  { type = "dialog", props = { speaker = "player" }, content = "The card has been wrong since March." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Put your hand round his cock."
+targetType = "node"
+nodeId     = "hand"
+effects = [
+  { targetType = "player", trait = "arousal",        op = "set", value = 0 },
+  { targetType = "player", trait = "roy_loop_stage", op = "set", value = 1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Push him off and finish the wash."
+targetType = "location"
+locationId = "roy_bathroom"
+effects = [
+  { targetType = "player", trait = "arousal",        op = "set", value = 0 },
+  { targetType = "player", trait = "roy_loop_stage", op = "set", value = 0 },
+]
+
+
+[[canvases.nodes]]
+id   = "hand"
+name = "Your hand on him"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bath_chair_hand_t5", pool = 6, description = "A woman's soapy hand working a seated man's cock in a small bathroom.", search_queries = ["handjob shower chair bathroom close", "soapy hand on cock bathroom seated"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The cloth goes on the floor. You take his cock in your wet hand and he is hard, and he has been hard long enough that neither of you is going to call it a surprise. Your thumb finds the slit of it." },
+    { type = "paragraph", content = "You work his cock with the soap still on your fingers. Slow, thumb dragging over the wet head of it every stroke. His good hand shuts on the rail and the whole chair moves on its bolts." },
+    { type = "paragraph", content = "His cock is thicker than you were ready for and it goes slippery fast. You get your other hand under his balls and hold them while you stroke him, and his breath goes short and loud." },
+    { type = "paragraph", content = "You crouch beside the chair and jerk his cock properly, wrist turning at the top. He is wet at the tip already and it runs down over your knuckles, and his balls draw up tight in your other hand." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roy" }, content = "Door doesn't shut. You know the door doesn't shut." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Keep working his cock."
+targetType               = "node"
+nodeId                   = "hand"
+costs                    = [ { trait = "energy", value = 3 } ]
+time_progression_minutes = 10
+effects = [ { targetType = "player", trait = "arousal", op = "add", value = 12, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Take him in your mouth."
+targetType               = "node"
+nodeId                   = "mouth"
+costs                    = [ { trait = "energy", value = 3 } ]
+time_progression_minutes = 10
+effects = [
+  { targetType = "player", trait = "arousal",        op = "add", value = 14, cap = 100 },
+  { targetType = "player", trait = "roy_loop_stage", op = "set", value = 2 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish in your hand."
+targetType = "node"
+nodeId     = "finish"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 65 },
+]}
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell him no and stop."
+targetType = "node"
+nodeId     = "loop_reset"
+
+
+[[canvases.nodes]]
+id   = "mouth"
+name = "In your mouth"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bath_chair_mouth_t5", pool = 6, description = "A woman kneeling and sucking a seated man's cock in a small tiled bathroom.", search_queries = ["blowjob kneeling bathroom tile close", "woman sucking cock seated man chair"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You go down on the wet tile between the chair and the bars and take his cock in your mouth. You suck him with your tongue flat under the head. He makes a sound he has never made in front of you and his hand lands in your hair." },
+    { type = "paragraph", content = "You suck him with your fist working the base of his cock and your tits pressed against his knee. The tile is soaking through the front of your scrubs and your cunt is aching and you do not stop." },
+    { type = "paragraph", content = "His cock is heavy on your tongue and salt at the back of your throat. You take him deeper than you meant to on the third stroke and your eyes water, and you keep sucking anyway." },
+    { type = "paragraph", content = "His good hand finds the back of your head and holds. Not pushing. You suck him with your lips tight round the head of his cock and your fist turning underneath, and your tits are pressed flat to his shin." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_roy" }, content = "Ward comes by at ten." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Keep him in your mouth."
+targetType               = "node"
+nodeId                   = "mouth"
+costs                    = [ { trait = "energy", value = 3 } ]
+time_progression_minutes = 10
+effects = [ { targetType = "player", trait = "arousal", op = "add", value = 13, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Use your hand instead."
+targetType               = "node"
+nodeId                   = "hand"
+time_progression_minutes = 5
+effects = [ { targetType = "player", trait = "roy_loop_stage", op = "set", value = 1 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Get the scrubs off and climb on."
+targetType               = "node"
+nodeId                   = "astride"
+costs                    = [ { trait = "energy", value = 4 } ]
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_roy", trait_key = "access", operator = "gte", value = 14 },
+]}
+effects = [
+  { targetType = "player", trait = "arousal",        op = "add", value = 15, cap = 100 },
+  { targetType = "player", trait = "roy_loop_stage", op = "set", value = 3 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish in your mouth."
+targetType = "node"
+nodeId     = "finish"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 65 },
+]}
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell him no and stop."
+targetType = "node"
+nodeId     = "loop_reset"
+
+
+[[canvases.nodes]]
+id   = "astride"
+name = "On the chair"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bath_chair_astride_t5", pool = 6, description = "A woman astride a seated man on a chair in a small bathroom, riding him.", search_queries = ["woman riding man seated chair close", "cowgirl on chair bathroom dim"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The scrubs come off wet and you get a knee either side of him. You put his cock in your cunt and go down the whole way in one. You are wet enough that he goes without any argument and the bolts take both of you." },
+    { type = "paragraph", content = "You ride his cock with your hands flat on the bars behind his head. Your cunt is soaked and takes all of him, and his good hand is up under your shirt with your nipple pulled between two fingers." },
+    { type = "paragraph", content = "His cock is deep enough that you have to stop moving every few strokes. His hand goes round to your ass and grips, holding your cunt down on him while he pushes up into you, and your tits are in his face." },
+    { type = "paragraph", content = "The chair is wet and your knees slide on it, so you get your feet down and fuck him standing over him instead. His cock goes deeper that way. Your tits are in his face and his mouth is open against them." },
+  ] },
+  { type = "dialog", props = { speaker = "player" }, content = "Hold onto the rail." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Keep riding him."
+targetType               = "node"
+nodeId                   = "astride"
+costs                    = [ { trait = "energy", value = 4 } ]
+time_progression_minutes = 10
+effects = [ { targetType = "player", trait = "arousal", op = "add", value = 16, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Get off him and use your mouth."
+targetType               = "node"
+nodeId                   = "mouth"
+time_progression_minutes = 5
+effects = [ { targetType = "player", trait = "roy_loop_stage", op = "set", value = 2 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him come inside you."
+targetType = "node"
+nodeId     = "finish"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 65 },
+]}
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell him no and stop."
+targetType = "node"
+nodeId     = "loop_reset"
+
+
+[[canvases.nodes]]
+id   = "finish"
+name = "He finishes"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "roy_loop_stage", operator = "gte", value = 3 },
+    ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/bath_finish_inside_t5", pool = 5, description = "A man coming inside a woman riding him on a chair, close.", search_queries = ["man coming inside woman riding close", "creampie seated cowgirl dim close"] } },
+    { type = "paragraph", content = "His good hand shuts on your hip, holds your cunt all the way down on his cock, and he cums inside you. You feel every pull of it. Your cunt grips him through the whole thing and neither of you makes a sound." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "roy_loop_stage", operator = "eq", value = 2 },
+    ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/bath_finish_mouth_t5", pool = 5, description = "A man coming in a kneeling woman's mouth in a bathroom, close.", search_queries = ["cum in mouth kneeling close", "man coming womans mouth bathroom"] } },
+    { type = "paragraph", content = "He goes rigid in the chair and cums in your mouth in three thick pulls. You swallow it and keep sucking his cock soft, lips tight, and the water is still running over both your hands the whole time." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "roy_loop_stage", operator = "lt", value = 2 },
+    ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/bath_finish_hand_t5", pool = 5, description = "A man coming over a woman's hand while seated, close.", search_queries = ["man coming over womans hand close", "handjob finish seated close"] } },
+    { type = "paragraph", content = "He cums over your fist and down his own stomach in three long pulls. You keep jerking his cock through all of it with your other hand tight under his balls, until he gets hold of your wrist and makes you stop." },
+  ] },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "You wash him afterwards, the same as you would have. That is the part that will still be sitting on your chest at the third house." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Rinse the cloth out and finish the card."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "roy_bathroom"
+time_progression_minutes = 25
+costs = [ { trait = "energy", value = 5 } ]
+effects = [
+  { targetType = "npc", npcId = "npc_roy", trait = "want",   op = "add", value = 5, cap = 85 },
+  { targetType = "npc", npcId = "npc_roy", trait = "access", op = "add", value = 3, cap = 85 },
+  { targetType = "player", trait = "arousal",        op = "set", value = 0 },
+  { targetType = "player", trait = "roy_loop_stage", op = "set", value = 0 },
+  { targetType = "player", trait = "clean",          op = "add", value = -20 },
+  { targetType = "player", trait = "energy",         op = "add", value = -8 },
+]
+
+
+[[canvases.nodes]]
+id   = "loop_reset"
+name = "Stop"
+blocks = [
+  { type = "paragraph", content = "You turn the water off. He gets his good hand back on the rail without being asked and looks at the towel over his knees, and the two of you finish the card in the order the card says." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Finish the wash."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "roy_bathroom"
+time_progression_minutes = 15
+effects = [
+  { targetType = "player", trait = "arousal",        op = "set", value = 0 },
+  { targetType = "player", trait = "roy_loop_stage", op = "set", value = 0 },
+]
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE BED CHANGE — her brother. Entered from work_dane_visit, gated on his own
+# access >= 5. The fastest ladder in the game, because he is the one appetite
+# here with nothing to lose and he has never once pretended otherwise.
+# ⚠️ @dane THROUGHOUT — both his name and his kinship are player-set.
+# ═════════════════════════════════════════════════════════════════════════════
+[[canvases]]
+id          = "loop_bed_change"
+name        = "Get on the bed with him"
+description = "Node-routed pose ladder off work_dane_visit. entry -> hand <-> mouth <-> fuck (access >= 12) -> finish (arousal >= 60); finisher elects on dane_loop_stage 3/2/<2. Own pool per act node, block_pool on every self-looped body beat. Resets arousal and dane_loop_stage on entry and on all exits."
+
+[[canvases.nodes]]
+id   = "entry"
+name = "Half the bed made"
+blocks = [
+  { type = "paragraph", content = "Half the bed is made and he is lying on the half that is not, on top of the clean sheet you have just put down, watching you decide whether to tell him to move." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_dane" }, content = "Forty minutes. You said forty minutes four times a week." },
+  { type = "dialog", props = { speaker = "player" }, content = "Move your leg." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get his shorts down."
+targetType = "node"
+nodeId     = "hand"
+effects = [
+  { targetType = "player", trait = "arousal",         op = "set", value = 0 },
+  { targetType = "player", trait = "dane_loop_stage", op = "set", value = 1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell him no and finish the corners."
+targetType = "location"
+locationId = "dane_trailer"
+effects = [
+  { targetType = "player", trait = "arousal",         op = "set", value = 0 },
+  { targetType = "player", trait = "dane_loop_stage", op = "set", value = 0 },
+]
+
+
+[[canvases.nodes]]
+id   = "hand"
+name = "Your hand on him"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bed_change_hand_t5", pool = 6, description = "A woman's hand working a man's cock on a half-made bed in daylight.", search_queries = ["handjob bed daylight close hand on cock", "woman stroking cock bedroom afternoon"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You get his shorts down over the brace and his cock out and he is hard before your hand is round it. You work him wet with your own spit. He laughs once at the ceiling, the way he laughs at everything he means." },
+    { type = "paragraph", content = "You kneel on the clean half of the bed and work his cock with your fist, slow and tight. He is hard enough that it stands off his stomach, and he watches your face the whole time instead of your hand." },
+    { type = "paragraph", content = "His cock is thick and hot in your fist and wet at the tip already. You spread it down him with your thumb and stroke him properly, and his good leg goes flat and tense on the mattress." },
+    { type = "paragraph", content = "One hand on his cock and the other flat on his stomach holding him down on the sheet. He keeps trying to fuck up into your fist and the knee will not let him, and he is leaking over your knuckles." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_dane" }, content = "Eleven weeks. Eleven weeks of you doing the corners." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Keep going."
+targetType               = "node"
+nodeId                   = "hand"
+costs                    = [ { trait = "energy", value = 3 } ]
+time_progression_minutes = 10
+effects = [ { targetType = "player", trait = "arousal", op = "add", value = 12, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Take him in your mouth."
+targetType               = "node"
+nodeId                   = "mouth"
+costs                    = [ { trait = "energy", value = 3 } ]
+time_progression_minutes = 10
+effects = [
+  { targetType = "player", trait = "arousal",         op = "add", value = 14, cap = 100 },
+  { targetType = "player", trait = "dane_loop_stage", op = "set", value = 2 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish in your hand."
+targetType = "node"
+nodeId     = "finish"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 65 },
+]}
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell him no and stop."
+targetType = "node"
+nodeId     = "loop_reset"
+
+
+[[canvases.nodes]]
+id   = "mouth"
+name = "In your mouth"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bed_change_mouth_t5", pool = 6, description = "A woman sucking a man's cock on a bed in the afternoon, close.", search_queries = ["blowjob bed afternoon close", "woman sucking cock bedroom daylight"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You get down over him and take his cock in your mouth and suck. He says your name once, which is not what he was going to say. His hand goes into your hair and stays there, and he is hard against your tongue." },
+    { type = "paragraph", content = "You suck his cock with your fist working the base and your other hand on his good thigh. He is not quiet about it and there is nobody within a hundred yards to be quiet for, and your cunt is wet through your scrubs." },
+    { type = "paragraph", content = "He gets the hair off your face to watch. You hold his eye and take his cock deeper and his stomach goes tight under your forearm every time you suck him down, and his balls are hard up against your chin." },
+    { type = "paragraph", content = "The TV is still going in the other room. You have his cock in your throat and your tits against his hip and your fist wet round the base of him, and a game show is telling somebody they have won a car." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_dane" }, content = "Nobody's coming out here. Nobody has come out here since March." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Keep him in your mouth."
+targetType               = "node"
+nodeId                   = "mouth"
+costs                    = [ { trait = "energy", value = 3 } ]
+time_progression_minutes = 10
+effects = [ { targetType = "player", trait = "arousal", op = "add", value = 13, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Use your hand instead."
+targetType               = "node"
+nodeId                   = "hand"
+time_progression_minutes = 5
+effects = [ { targetType = "player", trait = "dane_loop_stage", op = "set", value = 1 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Get the scrubs off and get on him."
+targetType               = "node"
+nodeId                   = "fuck"
+costs                    = [ { trait = "energy", value = 4 } ]
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_dane", trait_key = "access", operator = "gte", value = 12 },
+]}
+effects = [
+  { targetType = "player", trait = "arousal",         op = "add", value = 15, cap = 100 },
+  { targetType = "player", trait = "dane_loop_stage", op = "set", value = 3 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish in your mouth."
+targetType = "node"
+nodeId     = "finish"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 65 },
+]}
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell him no and stop."
+targetType = "node"
+nodeId     = "loop_reset"
+
+
+[[canvases.nodes]]
+id   = "fuck"
+name = "On the clean sheet"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bed_change_fuck_t5", pool = 6, description = "A woman riding a man on a bed in the afternoon, close.", search_queries = ["cowgirl bed afternoon close", "woman riding man bedroom daylight"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You get the scrubs off and a knee either side of the brace and put his cock in your cunt. You are wet enough that he goes all the way in one, and you both stop dead with your tits against his chest." },
+    { type = "paragraph", content = "You ride his cock with your hands on his chest and do all the moving, because the knee cannot. His hands are on your ass holding your cunt down on him every time you come back onto it." },
+    { type = "paragraph", content = "He gets a hand up and takes your tit, whole hand, thumb going over the nipple in time with it. Your cunt tightens on his cock and he swears at you and you do not slow down for any of it." },
+    { type = "paragraph", content = "The clean sheet is half off the bed under both of you now. He fucks up into your cunt as hard as the leg lets him, one hand shut on your tit, and none of it is gentle." },
+  ] },
+  { type = "dialog", props = { speaker = "player" }, content = "I have to put another one on now." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Keep going."
+targetType               = "node"
+nodeId                   = "fuck"
+costs                    = [ { trait = "energy", value = 4 } ]
+time_progression_minutes = 10
+effects = [ { targetType = "player", trait = "arousal", op = "add", value = 16, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Get off him and use your mouth."
+targetType               = "node"
+nodeId                   = "mouth"
+time_progression_minutes = 5
+effects = [ { targetType = "player", trait = "dane_loop_stage", op = "set", value = 2 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him come inside you."
+targetType = "node"
+nodeId     = "finish"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 65 },
+]}
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell him no and stop."
+targetType = "node"
+nodeId     = "loop_reset"
+
+
+[[canvases.nodes]]
+id   = "finish"
+name = "He finishes"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "dane_loop_stage", operator = "gte", value = 3 },
+    ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/bed_finish_inside_t5", pool = 5, description = "A man coming inside a woman riding him on a bed, close.", search_queries = ["man coming inside woman riding bed", "creampie cowgirl afternoon close"] } },
+    { type = "paragraph", content = "He gets both hands on your hips, holds your cunt down on his cock and cums inside you. He says it out loud while he does it, what you are to him, the whole word, twice, with your tits in his face." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "dane_loop_stage", operator = "eq", value = 2 },
+    ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/bed_finish_mouth_t5", pool = 5, description = "A man coming in a woman's mouth on a bed, close.", search_queries = ["cum in mouth bed close", "man coming womans mouth daylight"] } },
+    { type = "paragraph", content = "He cums in your mouth with his fist shut in your hair and he is loud about it. You swallow and keep sucking his cock until he is soft, your tits flat on his thigh, and his hand comes loose out of your hair." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "dane_loop_stage", operator = "lt", value = 2 },
+    ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/bed_finish_hand_t5", pool = 5, description = "A man coming over a woman's hand on a bed, close.", search_queries = ["man coming over womans hand bed", "handjob finish sheets close"] } },
+    { type = "paragraph", content = "He cums over your fist and onto the clean sheet in three pulls. You keep jerking his cock through it with your thumb dragging the head, and he grabs your wrist at the end to make you stop." },
+  ] },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "You strip the bed again afterwards and put the third sheet on. There is one more in the truck and after that it is the laundromat." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Strip it and start again."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "dane_trailer"
+time_progression_minutes = 25
+costs = [ { trait = "energy", value = 5 } ]
+effects = [
+  { targetType = "npc", npcId = "npc_dane", trait = "want",   op = "add", value = 6, cap = 85 },
+  { targetType = "npc", npcId = "npc_dane", trait = "access", op = "add", value = 4, cap = 85 },
+  { targetType = "player", trait = "arousal",         op = "set", value = 0 },
+  { targetType = "player", trait = "dane_loop_stage", op = "set", value = 0 },
+  { targetType = "player", trait = "clean",           op = "add", value = -18 },
+  { targetType = "player", trait = "energy",          op = "add", value = -8 },
+]
+
+
+[[canvases.nodes]]
+id   = "loop_reset"
+name = "Stop"
+blocks = [
+  { type = "paragraph", content = "You get off the bed and pull the sheet straight and do the corners the way you were going to. He puts the TV up two notches from where he is lying and neither of you says anything else about it." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Do the corners."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "dane_trailer"
+time_progression_minutes = 15
+effects = [
+  { targetType = "player", trait = "arousal",         op = "set", value = 0 },
+  { targetType = "player", trait = "dane_loop_stage", op = "set", value = 0 },
+]
