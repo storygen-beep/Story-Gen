@@ -44,8 +44,11 @@ session is wrong by the end of that session. Run `wc -l` if you need one.
 ```
 .claude/skills/author-game-v2/
   SKILL.md                             entry point, EXPLICIT-INVOKE ONLY
-  scripts/gates.py                     the scoreboard — 42 gates + 17 lints
+  scripts/gates.py                     the scoreboard — 46 gates + 28 lints, and --beat,
+                                       which measures loose prose with no game at all
   scripts/genre_words.txt              the field's own vocabulary, for the word lint
+  scripts/playtest.py                  the Player's harness — drives a BUILT game in a browser
+  scripts/pitch_pack.py                the Pitchers' fact pack — the world a pitch may name
   references/engine.md                 37 verified engine facts, each with file:line
   references/register.md               how the prose reads once they click
   references/the-surfaces.md           which screen each piece of content lives on
@@ -58,7 +61,8 @@ session is wrong by the end of that session. Run `wc -l` if you need one.
   references/the-map.md                the world as a place someone could draw
   references/state.md                  v2_state.json schema
   references/the-release.md            the unit of work
-  references/agents.md                 the roster (described, NOT built)
+  references/agents.md                 the roster — 3 of 4 BUILT (Player, Pitchers, Prose
+                                       Maker). Only the Attack Panel is still prose.
   references/the-want.md               the spec re-read every release
   templates/board.toml                 fillable. ⚠️ does NOT parse as-is — `<tier_1> = 0` is a
                                        placeholder, not TOML. This line read "parses" until
@@ -74,7 +78,7 @@ session is wrong by the end of that session. Run `wc -l` if you need one.
   STATUS.md                       —    this file
 ```
 
-## The scoreboard — 45 gates, 28 lints
+## The scoreboard — 46 gates, 28 lints
 
 **A gate scores. A lint prints a list and refuses to score.** The split is the discipline: if a
 threshold cannot be defended against a measurement, it does not get to fail a game.
@@ -265,7 +269,7 @@ merged `7_final_game.toml`, and `gates.py` needs that file. The other seven (`ja
 
 | | |
 |---|---|
-| **The agents** | **Two of four shipped 2026-08-29.** The **Player** — `scripts/playtest.py` plus a callable `v2-player`; it was not built from nothing, seven hand-written play-tests were already running in `games/` and this row did not know, which is why it read "all still prose" for weeks. The **Pitchers** — `scripts/pitch_pack.py` plus a callable `v2-pitcher`, run three-in-one-message. ⚠️ **Both took the same shape, and it is the shape, not the prompt, that was the work**: a deterministic source of facts the agent must not re-derive, plus a rule that keeps its output from being noise. The Player's is *a red is a hypothesis until its cause is `file:line`*; the Pitcher's is *everything you may name is in the pack*. **Attack panel and prose maker are still prose.** ⚠️ The Prose Maker cannot be built to its own spec yet — `agents.md` promises it "one measurable target" and no instrument scores a loose beat: `Beat.explicit` (`gates.py:405`) is a property on a Beat parsed out of TOML blocks, and `--words` is a list that always exits 0. The scorer comes first or the agent cannot be told whether it succeeded. |
+| **The agents** | **Three of four shipped 2026-08-29.** The **Player** (`scripts/playtest.py` + `v2-player`), the **Pitchers** (`scripts/pitch_pack.py` + `v2-pitcher`, three-in-one-message), the **Prose Maker** (`gates.py --beat` + `v2-prose`). ⚠️ **All three took the same shape, and it is the shape, not the prompt, that was the work**: a deterministic source of facts or measurements the agent must not re-derive, plus a rule that keeps its output from being noise. The Player's is *a red is a hypothesis until its cause is `file:line`*; the Pitcher's is *everything you may name is in the pack*; the Prose Maker's is *measure with the build's own instrument before you return*. ⚠️ **The Prose Maker had been blocked on a missing instrument for as long as `agents.md` had described it, and that file never noticed** — its spec promised "one measurable target" while nothing here could score a loose paragraph. **Only the Attack Panel is still prose**, and it is the highest-risk of the four because it emits opinions shaped like defects. |
 | **Evals** | None. "v2 beats v1" cannot be scored. |
 | **A cold reader** | Only one person has ever run the skill. |
 | **`the_season`'s fill** | 4,412 words against 15,500 declared. Its one red gate, and the real problem with the game. |
@@ -406,16 +410,19 @@ predates the recheck entirely. Corrected above.
 ## B · The other work, unchanged in priority
 
 1. **`the_season`'s fill.** Its one red gate. 4,412 of 15,500 words.
-2. **Build the remaining agents.** Now **two** roles rather than four. **The Player and the
-   Pitchers both shipped 2026-08-29**, and every lesson these lines were holding for their specs is
-   in `scripts/playtest.py` and `scripts/pitch_pack.py` as code.
+2. **Build the remaining agents.** Now **one** role rather than four. **The Player, the Pitchers and the
+   Prose Maker all shipped 2026-08-29**, and every lesson these lines were holding for their specs
+   is in `scripts/playtest.py`, `scripts/pitch_pack.py` and `gates.py --beat` as code.
    - **The Attack Panel is next**, and it is the highest-value one by this skill's own record —
      `the-release.md:43`, *"every cheap catch in our history happened here; every expensive one
      happened after shipping."* It is also the highest-risk, because it emits opinions shaped like
      defects, which is precisely the failure that took R4, study 6's anchoring check, P0 and the
      rule-pointer scan's first cut. Its ten lenses already exist in `agents.md`. What it needs is
      a verify bar at least as hard as the Player's `file:line`.
-   - **The Prose Maker is blocked on an instrument**, not on nerve — see the agents row in Part 6.
+   - **The Prose Maker is no longer blocked.** `gates.py --beat` measures loose prose on the
+     build's own regexes and constants, so the agent can be told whether it hit its target. The
+     lesson worth keeping: the blocker was named in the agent's own spec — *"one measurable
+     target"* — and sat there unread for as long as the section existed.
    ⚠️ **The caveat this line carried was half right and is worth keeping in its corrected form**:
    it said *"a pitch is the one agent output with no check against it."* True of the pitch, false
    of its inputs — `pitch_pack.py` is exactly that check on everything a pitch may name, and it is

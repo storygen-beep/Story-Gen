@@ -120,6 +120,30 @@ catches failure modes that redundancy cannot.
 
 ## The Prose Maker — narrow on purpose
 
+> ✅ **BUILT 2026-08-29.** The agent is `.claude/agents/v2-prose.md`, callable as
+> `subagent_type: "v2-prose"`. The instrument is `gates.py --beat <path>`.
+>
+> ⚠️ **It was blocked on that instrument for as long as this section has existed, and the
+> section never noticed.** The spec below promises "one measurable target" — and nothing in
+> this skill could measure a loose paragraph. `Beat.explicit` (`gates.py:405`) is a property
+> on a `Beat` assembled out of parsed TOML blocks, so it needs a built game; `--words` reports
+> vocabulary and nothing else. **The agent's own spec named a target that did not exist**, and
+> an agent that cannot be told whether it succeeded is not an agent, it is a wish.
+>
+> `--beat` closes it, and **every threshold in it is one `gates.py` already used** — the 3+
+> explicit words that make a beat count as explicit at all, `SENTENCE_CEILING`, `DASH_CEILING`,
+> the `RUNGS` list. Nothing new was invented, deliberately: an instrument built for one agent,
+> measuring on its own private scale, would let the Prose Maker optimise for something the
+> build never checks.
+>
+> **The pivot is reported as a SHAPE and never as a verdict.** The rule is a reading test —
+> *is the last sentence about what it MEANS or what is HAPPENING* — and no regex decides what a
+> sentence is about. What is observable is where the body words fall, so `--beat` prints the
+> distribution across sentences and quotes the last sentence back. Two real `mrs_vance` beats
+> sampled while building it both end on a sentence carrying no body word. Whether either
+> pivoted is a reader's call, and automating that call is how a check starts failing correct
+> work.
+
 **Job:** one beat, from a spec it cannot argue with, hitting one measurable target.
 
 This exists because of a specific, documented pattern: the register rule was the most

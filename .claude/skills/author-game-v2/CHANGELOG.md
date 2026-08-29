@@ -5,6 +5,102 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-29 — the Prose Maker was blocked on an instrument its own spec had named
+
+**Why.** `references/agents.md` specifies the Prose Maker as *"one beat, from a spec it cannot
+argue with, hitting one measurable target."* **No such measurement existed.** `Beat.explicit`
+(`gates.py:405`) is a property on a `Beat` assembled out of parsed TOML blocks, so it needs a built
+game; `--words` reports vocabulary and nothing else. Nothing in this skill could score a loose
+paragraph — so the agent could not be told whether it had succeeded, and an agent that cannot be
+told that is not an agent.
+
+The blocker was written in the agent's own spec and sat there unread for as long as the section
+existed. Same shape as the `STATUS.md` agents row that read *"all still prose"* while seven
+play-tests were running, and as the `block_pool` row that read *"used by zero v2 games"* while five
+games used it. **This skill's recurring defect is not a wrong claim; it is a true claim nobody
+re-read.**
+
+**What changed.**
+
+- **NEW `gates.py --beat <path>`** — the only mode that measures prose that is not in a game yet.
+  Blank-line separated blocks are beats.
+- **NEW `.claude/agents/v2-prose.md`** — `subagent_type: "v2-prose"`. Writes one beat, measures it
+  with `--beat` before returning, hands back prose plus numbers. Scratchpad only; never `games/`,
+  never a `.toml`.
+- **`references/agents.md`** — the Prose Maker section marked built, with the blocker recorded.
+- **`SKILL.md`** — the `--beat` row in the modes table.
+- **`STATUS.md`** — three of four agents shipped. And the Part 2 inventory, which was stale in
+  three places at once: it called `gates.py` *"42 gates + 17 lints"* (46 and 28), the scoreboard
+  heading said 45 gates (46), and `references/agents.md` was listed as *"the roster (described,
+  NOT built)"*. `playtest.py` and `pitch_pack.py` were missing from the inventory entirely.
+
+### Every threshold in `--beat` is one this script already used
+
+Nothing new is invented, and that is the design, not modesty: **an instrument built for one agent,
+measuring on its own private scale, would let the Prose Maker optimise for something the build
+never checks.**
+
+| | |
+|---|---|
+| 3 explicit words | the count `explicit floor` uses to call a beat explicit at all. `lint_act_nodes` says it in as many words: *"3 is not an invented threshold"* |
+| `SENTENCE_CEILING` 14 | measured over 18 shipped sandboxes; field median 10, reference game 9 |
+| `DASH_CEILING` 35.0 | per 10,000 words, measured over the 25-game mopoga corpus |
+| `RUNGS` | the act ladder — reports whether the text names an ACT or only anatomy |
+
+**It always exits 0**, like `--words`. A paragraph outside its canvas cannot be failed: the same 25
+words are right as one rung of a cascade and thin as a capstone.
+
+### ⚠️ Two things it deliberately refuses to do
+
+**1. It does not judge the pivot.** `register.md`'s rule is a READING test — *is the last sentence
+about what the moment MEANS rather than what is HAPPENING* — and no regex decides what a sentence
+is about. What IS observable is where the body words fall, so `--beat` prints the per-sentence
+distribution and quotes the last sentence back. Both real `mrs_vance` beats sampled while building
+it end on a sentence carrying no body word (*"Drain's slow."* and *"Forty words in eleven weeks,
+and none of them just now either."*). Whether either pivoted is a reader's call. **Automating that
+call is how a check starts failing correct work**, which has happened four times here.
+
+**2. It gives no verdict on beat length, and the first cut did.** It printed *"over the 35-40
+band"* against beats of 100 and 152 words — and that comparison is a **unit mismatch**.
+`register.md:332`'s 37-word figure is per *reveal beat*, meaning one SCREEN; a non-cascade canvas
+node is a single `Beat` to this script and can hold several screens' worth of prose. `forty_miles`
+ships **938 beats against 259 nodes** — the two counts are not the same thing. The mode now prints
+the number, the reference, and the caveat, and lets the reader match unit to unit.
+
+**Verified.** `--beat` run on two real explicit beats extracted read-only from `mrs_vance`
+(100 and 152 words, 3 and 11 explicit) and on a hand-written test pair. The test's deliberately
+crude first beat scores **2** explicit words and is correctly reported as NOT registering as
+explicit — *wet*, *rides* and *pushes in* are not on the frozen list — which is exactly the signal
+the agent needs and exactly what a human eyeball would have got wrong. `gates.py --selfcheck` now
+**46 gates / 28 lints / 5 modes** (modes went 4 → 5 with the new row). `gates.py mrs_vance` still
+**44/44 judged gates pass, 0 FAIL** — no regression.
+
+⚠️ **And `gates.py` is itself a cited file, so editing it moved a citation.** Four lines added to
+the module docstring shifted everything below them by four, and `CHANGELOG.md:6208`'s
+`gates.py:1637` became `:1641`. Found by `cite_check.py` and hand-fixed, not `--fix`ed — the
+auto-fixer has clobbered hand-verified citations here before. Back to the baseline exactly:
+**74 OK / 10 drifted / 6 missing**.
+
+### The live run
+
+One beat, specified: Isaac against the wash-bay wall, second person, tier 3, ceiling *full, mostly
+in narration — he barely talks*. **The agent revised twice on the instrument's own output**: the
+first draft spent three sentences on positioning, the second pushed median sentence to 13. Final:
+43 words, **5 explicit** (cock, cunt, fuck, thrust, tits), median sentence **9**, act rung
+**vaginal**, body words by sentence **0 2 0 1 2** — the last sentence carries two, so no pivot
+warning fired and none should have.
+
+**Its reported numbers were re-measured independently and match exactly.** It also declined to fold
+the stepmother pressure into the act beat, naming it as belonging to a following interiority beat —
+which is the register's own instruction rather than a thing the spec asked for.
+
+⚠️ **Read `cite_check.py`'s totals with `PYTHONHASHSEED=0` or they move.** Three identical runs
+returned 12, 11, 12 drifted; with the seed pinned, 11 three times. `STATUS.md`'s header already
+tells the reader to pin it for `gates.py`; nothing said so for the citation checker, and a
+comparison against a baseline is worthless if the number wobbles by one on its own.
+
+---
+
 ## 2026-08-29 — the Pitchers: three agents that could not see the game they were pitching into
 
 **Why.** `the-release.md:39` is step 2 of the release loop and it tells the author to run three
@@ -6133,7 +6229,7 @@ Nobody applied it to words.** Third instance of a known mechanism.
   `the-map.md` ×2, `the-board.md` ×2, `gates.py`; `rota`/`rotas` → `roster`/`rosters` ×3 across
   `the-board.md`, `the-map.md`, `the-release.md`; `fortnight` → `two weeks` ×2.
 - **Deliberately NOT rewritten — quotations of real games are evidence.** `the-surfaces.md`'s five
-  `airer` lines, `SKILL.md:174`, `the-voice.md:92` and `gates.py:1637` all quote `the_allowance`'s
+  `airer` lines, `SKILL.md:174`, `the-voice.md:92` and `gates.py:1641` all quote `the_allowance`'s
   real canvas *"Get the washing in off the airer"* (`the_allowance/7_final_game.toml:1163`).
   `the-economy.md:73` quotes `forty_miles`' declared obligation (`forty_miles/v2_state.json:376`).
   `gates.py:252`'s `knickers` is inside the frozen explicit lexicon — it exists to *detect* the

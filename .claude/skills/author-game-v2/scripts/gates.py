@@ -26,6 +26,10 @@ Usage:
     python3 gates.py --release <slug>       # the ARTEFACT, not the source: is the build
                                             #   in games/<slug>/output/ shippable? Off for
                                             #   every ordinary run; exits non-zero on a red.
+    python3 gates.py --beat <path>          # measure LOOSE PROSE the way the build measures
+                                            #   a beat — explicit count, sentence length, dash
+                                            #   rate, act rungs, and where the body words fall.
+                                            #   The only mode that needs no game. Always exits 0.
     python3 gates.py --selfcheck            # does SKILL.md still document every gate and
                                             #   lint this script emits? No game needed.
 
@@ -6549,6 +6553,141 @@ def words_mode(path):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# --beat — the only mode that measures prose that is not in a game yet
+# ─────────────────────────────────────────────────────────────────────────────
+# Everything else here needs a built `7_final_game.toml`, which is one phase too
+# late for the job it is wanted for. `references/agents.md` specifies the Prose
+# Maker as "one beat, from a spec it cannot argue with, hitting one measurable
+# target" — and no instrument in this skill could measure a loose paragraph. The
+# explicit counter is a property on a `Beat` assembled out of parsed TOML blocks
+# (`Beat.explicit`), and `--words` reports vocabulary and nothing else. So the
+# agent's own spec named a target that did not exist, and it could not be told
+# whether it had succeeded.
+#
+# ⚠️ EVERY NUMBER BELOW IS ALREADY IN THIS FILE. Nothing new is invented here, and
+# that is deliberate: an instrument built for one agent, measuring on its own
+# private scale, would let the Prose Maker optimise for something the build never
+# checks. Same regexes, same constants, same reason.
+#
+#   3 explicit words     the count `explicit floor` uses to call a beat explicit
+#                        at all. `lint_act_nodes` says it in as many words:
+#                        "3 is not an invented threshold".
+#   SENTENCE_CEILING 14  measured over 18 shipped sandboxes, field median 10.
+#   DASH_CEILING 35.0    per 10,000 words, measured over the 25-game mopoga corpus.
+#   35-40 words a beat   `register.md` — the field runs 37 words per reveal beat.
+#
+# AND IT REPORTS, IT DOES NOT GRADE. Exit is always 0, like `--words`. A beat is
+# not a game and a single paragraph outside its canvas cannot be failed: the same
+# 25 words are correct as one rung of a four-beat cascade and thin as a capstone.
+# The reader decides; this says what is on the page.
+
+
+def _beat_sentences(text):
+    """Sentence split, identical to G19's so the two never disagree."""
+    return [s.strip() for s in re.split(r"(?<=[.!?])\s+", text.strip()) if s.strip()]
+
+
+def beat_mode(path):
+    """Measure loose prose the way the build measures a beat.
+
+    Blank-line separated blocks are separate beats; a single paragraph is one beat.
+
+    ⚠️ THE PIVOT IS REPORTED AS A SHAPE AND NEVER AS A VERDICT. `register.md`'s rule
+    is a READING test — "read the beat's last sentence; if it is about what the moment
+    MEANS rather than what is HAPPENING, the beat has pivoted" — and no regex decides
+    what a sentence is about. What IS observable is where the body words fall, so the
+    report prints the distribution across sentences and quotes the last sentence back.
+    A beat whose explicit words all sit in the front half and whose final sentence
+    carries none has the shape the rule describes. Whether it pivoted is the reader's
+    call, and calling it automatically is how a check starts failing correct work.
+    """
+    try:
+        with open(path, encoding="utf-8") as fh:
+            raw = fh.read()
+    except OSError as exc:
+        print(f"cannot read {path}: {exc}")
+        return 2
+
+    beats = [b.strip() for b in re.split(r"\n\s*\n", raw) if b.strip()]
+    if not beats:
+        print(f"{path} is empty — nothing measured (an absence is not a pass)")
+        return 0
+
+    print()
+    print(f"  the beat as the build would measure it — {path}")
+    print("  " + "\u2500" * 68)
+    print(f"  {len(beats)} beat(s). Every threshold below is one this script already "
+          f"uses;")
+    print("  none of them is new, and none of them can fail here — see --beat's header.")
+
+    all_words, all_sents, all_expl = 0, [], 0
+    for i, text in enumerate(beats, 1):
+        words = text.split()
+        sents = _beat_sentences(text)
+        expl = EXPLICIT.findall(text)
+        per_sent = [len(EXPLICIT.findall(s)) for s in sents]
+        sent_lens = [len(s.split()) for s in sents if 2 <= len(s.split()) <= 120]
+        med = _median(sent_lens) if sent_lens else 0
+        dashes = text.count("\u2014") + text.count("\u2013")
+        rate = 10000.0 * dashes / max(len(words), 1)
+        rungs = [name for name, rx in RUNGS if rx.search(text)]
+
+        all_words += len(words)
+        all_sents += sent_lens
+        all_expl += len(expl)
+
+        print()
+        print(f"  BEAT {i}")
+        # ⚠️ NO VERDICT ON LENGTH, and the reason is a unit mismatch that would have
+        # made this line lie. `register.md:332` gives 37 words per reveal beat, where
+        # a beat is ONE SCREEN. A canvas node that is not a cascade is a single `Beat`
+        # to this script and can hold several screens' worth of prose: two real
+        # mrs_vance beats sampled while building this mode ran 100 and 152 words, and
+        # calling them "over the band" would report a defect that the doctrine's own
+        # unit does not support. `forty_miles` ships 938 beats against 259 nodes — the
+        # two counts are not the same thing. So: the number, the reference, and the
+        # caveat, and the reader matches unit to unit.
+        print(f"    words                {len(words):>4}   register.md:332 \u2014 the field runs "
+              f"37 words per")
+        print(f"{'':>32}reveal beat, where a beat is ONE SCREEN. Compare only")
+        print(f"{'':>32}if this text is one screen.")
+        print(f"    explicit words       {len(expl):>4}   "
+              f"{'registers as explicit (3+)' if len(expl) >= 3 else 'does NOT register as explicit (needs 3+)'}")
+        if expl:
+            print(f"      {', '.join(sorted(set(w.lower() for w in expl)))}")
+        print(f"    median sentence      {med:>4}   "
+              f"ceiling {SENTENCE_CEILING}, field median 10, reference game 9")
+        print(f"    dashes               {dashes:>4}   {rate:.0f}/10k "
+              f"(ceiling {DASH_CEILING:.0f}, field p50 0.99)")
+        print(f"    act rungs named      {', '.join(rungs) if rungs else 'none — anatomy without an act, or no act here'}")
+
+        # The pivot shape.
+        if sents:
+            print(f"    body words by sentence   "
+                  f"{' '.join(str(n) for n in per_sent)}   ({len(sents)} sentences)")
+            if len(expl) >= 3 and per_sent and per_sent[-1] == 0:
+                print("    \u26a0 the last sentence carries no body word. `register.md`: an "
+                      "explicit beat")
+                print("      stays on the body for its whole length. Read it and decide "
+                      "whether it is")
+                print("      about what is HAPPENING or about what it MEANS \u2014 this is a "
+                      "shape, not a verdict:")
+                print(f"        \u201c{sents[-1][:110]}\u201d")
+
+    if len(beats) > 1:
+        print()
+        print("  ALL BEATS")
+        print(f"    words {all_words:,} \u00b7 explicit {all_expl} \u00b7 median sentence "
+              f"{_median(all_sents) if all_sents else 0} \u00b7 "
+              f"{sum(1 for b in beats if len(EXPLICIT.findall(b)) >= 3)}"
+              f"/{len(beats)} register as explicit")
+    print()
+    print("  A beat outside a band is not a defect. The same 25 words are right as one")
+    print("  rung of a cascade and thin as a capstone \u2014 which is why this exits 0.")
+    return 0
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # --release — the one mode that reads the ARTEFACT instead of the source
 # ─────────────────────────────────────────────────────────────────────────────
 # Everything above this line measures `7_final_game.toml`. That is the right
@@ -7239,7 +7378,7 @@ def selfcheck_mode():
     flat = re.sub(r"\s+", " ", skill)
 
     gates, lints = _emitted_names(src)
-    modes = ["--words", "--release", "--saves", "--selfcheck"]
+    modes = ["--words", "--beat", "--release", "--saves", "--selfcheck"]
     documented = _documented_gate_names(skill)
 
     missing_g = [g for g in gates if g not in flat]
@@ -7315,6 +7454,11 @@ def main():
             print("usage: python3 gates.py --words <path/to/file>")
             sys.exit(2)
         sys.exit(words_mode(sys.argv[2]))
+    if sys.argv[1] == "--beat":
+        if len(sys.argv) < 3:
+            print("usage: python3 gates.py --beat <path/to/beat.txt>")
+            sys.exit(2)
+        sys.exit(beat_mode(sys.argv[2]))
     if sys.argv[1] == "--release":
         if len(sys.argv) < 3:
             print("usage: python3 gates.py --release <game-slug>")
