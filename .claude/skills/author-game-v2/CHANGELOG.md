@@ -5,6 +5,105 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-29 — the worked examples that were never written
+
+**Why.** I told LO the v2 skill "grades work it never taught," and went to measure it before acting
+on it. **The claim was wrong.** `gates.py` carries 45 distinct gate names and every one of them
+appears verbatim in a doctrine file — there are no orphan gates. v2 also carries **54 worked TOML
+blocks against v1's 37**, so the "v2 is thinner than v1" framing (16 reference files against 39) was
+counting files, not teaching.
+
+What survived measurement is narrower and real. The worked examples are **concentrated in the
+engine fact sheet and absent from the files that own the judged subjects** — 31 of the 54 blocks sit
+in `engine.md`, while the four files below held none between them:
+
+| file | doctrine | worked blocks, before |
+|---|---|---|
+| `register.md` | 9,428 words | 0 TOML (its prose examples landed 2026-08-28) |
+| `the-economy.md` | 5,919 words | 0 — all 26 fences are diagrams or field tables |
+| `the-voice.md` | 2,909 words | 0 — its examples are label strings, which is what it owns |
+| `the-map.md` | 2,747 words | schema only, world deliberately withheld |
+
+**Two subjects had no worked example anywhere in the skill, and both are judged:**
+
+1. **A condition on a currency.** Zero blocks in `author-game-v2` contained `trait_key` on a
+   currency. The only money example the skill has ever shown is `engine.md` §27's `costs` block —
+   the *other* channel, and the one `the-economy.md`'s own lint says everyone over-uses: *seven of
+   our ten rent-enabled games have ZERO money conditions and pass on prices alone.* **The skill
+   showed the habit it complains about and never showed the alternative.**
+2. **A media block nested in a cascade beat.** `engine.md` §5 states outright that this "is the
+   shape `register.md` S1 requires" and then models a node-level block. Measured in S1:
+   `back_home` 0/169, `steam` 0/623, `forty_miles` 0/938, `the_allowance` 0/39, `seventh_day` 0/516.
+
+**The rule, because the file's own doctrine pulled both ways.** `register.md`'s *"an example
+outranks every rule beside it"* records three instances where an example **taught a defect** and a
+fourth where an **absence** did. Nothing reconciled them, so the skill kept choosing between two
+failures. The line is not how big the example is:
+
+> **A mechanism copied verbatim produces a correct game. A world copied verbatim produces five
+> games with the same box room.**
+
+All three earlier failures were worlds — a locale-locked vocabulary, one game's floor plan, one
+game's tier numbers — and all three are things the author should be *deciding*. The absence was a
+mechanism. Every block added here uses placeholder ids and carries no proper nouns; where a number
+had to appear for the shape to read, the text says in the same breath that it is filler.
+
+**What shipped.**
+
+- `references/the-economy.md` — **R1**: a money-condition ladder, ordered highest-first because
+  adjacent `[group]` blocks compile to one exclusive if/elseif chain. **R5**: a capped income rung
+  carrying six rules at once (`costs` brake, the day flag set on the *choice* not the node exit,
+  flag-not-counter, `clamp = false`, `show_when_locked` + `locked_text`, duration on the label),
+  plus its `[engine.daily_tick]` clear.
+- `references/the-voice.md` — **R2**: the stepped ascent ladder as TOML, which existed only as an
+  ASCII diagram, with the card-vs-canvas condition asymmetry shown rather than described. **R5**: the
+  `terminal = true` card that stops a finished arc rendering as a live objective.
+- `references/register.md` — **S1**: a beat-nested media block in both `file` and `pool_dir` forms,
+  reusing prose from `## The model beats` so nothing new is taught about the writing. Plus
+  **`## Show the mechanism. Never show the world.`** under `## The examples are the register`.
+- `references/the-map.md` — **R3**: `entry_from` present or absent, and no rooms.
+- `DOCTRINE_GAPS.md` — a Log row. No inventory item: every rule here already existed.
+
+⚠️ **`the-map.md`'s refusal to carry a worked map was honoured, not reversed** — LO's call, and it
+is correct under the new rule: a floor plan is a world however abstractly drawn. The file also now
+records that `back_home` fails both map gates because it declared **no `board.map` at all**, with
+the full schema sitting in that file. That is undone work, and no example would have prevented it.
+
+⚠️ **Two defects in my own examples, caught before commit.** The first quest card carried `group`
+**and** `npc_id` — `group` is Story-Goal-only and is ignored on an NPC card with a validator warning
+(`template_import.py:1105`). And three blocks split an **inline table across lines**, which TOML
+forbids. Both were found by parsing every new block rather than by reading it. **A worked example
+that does not parse is worse than none**, and this is the check that has to run every time one is
+added.
+
+⚠️ **One warning I wrote was overstated and corrected against source.** I claimed that writing the
+canvas condition form on a quest card produces a card that silently stops matching. It does not —
+the validator hard-errors (`template_import.py:5509`). The genuinely silent trap is **`ne`**, which
+the card validator excludes on purpose because the third evaluator has no `ne` case and falls
+through to `return false`.
+
+⚠️ **A stale citation in existing doctrine, found while verifying my own.** `v2.py:13952` — cited in
+`engine.md` §5 and twice in `register.md` S1 for the linkreplace fact — points at a broken-exit
+branch. Repointed to `_render_cascade` (`v2.py:14426`) and `_render_cascade_tail` (`:14512`), with
+`:14572` for the line that makes a beat's blocks the linkreplace body. The `CHANGELOG` entry of
+2026-08-27 that also carries `13952` is left alone: it is history, not instruction.
+
+**How verified.** All **8 new TOML blocks parse under `tomllib`** (fragments wrapped in the array
+they belong to). Every `file:line` added was re-read with `grep -n` against live source —
+`template_import.py:1105`, `:5502-5509`, `v2.py:14426`, `:14512`, `:14572`, and the four
+`games/…` sources the examples were lifted from. `gates.py --selfcheck` green, 45/45 gates.
+`mrs_vance` **44/44**, `back_home` **16/36**, `forty_miles` and `vesper` byte-identical against the
+baseline captured before the first edit — **0 verdicts and 0 tallies moved**, which is structural
+rather than lucky: `gates.py` reads `SKILL.md` and game TOML, and no file under `references/`.
+**No gate, constant or threshold added. No game touched.**
+
+⚠️ **Deferred, not abandoned** (LO's call). `register.md`'s `How far is far enough` carries the
+adverb and hedge field figures — 28 of 28 of our builds below the field's floor — and nothing prints
+them where an author would read them. Article density stays **withdrawn** as a measurement artifact;
+do not re-propose it.
+
+---
+
 ## 2026-08-29 — the SugarCube the build declared had never existed on this machine
 
 **Why.** Surfaced while writing `engine.md` §40: `StoryData` declared

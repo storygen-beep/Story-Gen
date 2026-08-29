@@ -101,7 +101,7 @@ list because the count comes from disk.
 Media blocks also appear nested — under group blocks (`blocks[].blocks[].props`) and inside
 cascade beats (`blocks[].props.beats[].blocks[].props`). Any tool walking media must recurse.
 
-**A clip inside a cascade beat renders at that beat** (`v2.py:13952`) — nesting it there is not
+**A clip inside a cascade beat renders at that beat** (`v2.py:14572`, inside `_render_cascade_tail` at `:14512`) — nesting it there is not
 merely allowed, it is the shape `register.md` S1 requires, because a cascade appends and the node
 lead's clip stops being the current one after beat 0. See §8.
 

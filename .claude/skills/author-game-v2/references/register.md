@@ -309,7 +309,7 @@ which is what every v2 game does, gets neither.
 > **A clip at the top of a canvas is a clip for beat 0. Every beat that ESCALATES carries its own.**
 
 This is an engine fact before it is a rule. A cascade renders as nested `<<linkreplace>>`
-(`v2.py:13952` — the beat's blocks are emitted *inside* the linkreplace body), so **every beat
+(`v2.py:14572` — the beat's blocks become the linkreplace body, `_render_cascade_tail` at `:14512`), so **every beat
 appends below the last and nothing is ever removed.** The clip stays pinned where it was. By the
 beat that is the act, it has scrolled away, and the player reads the payoff under a picture of the
 setup.
@@ -334,6 +334,57 @@ length was never the problem; the picture on the beat was.**
 
 **Gate 31 · an explicit beat carries a clip.** ≥50% of beats with 3+ frozen-list words carry a
 media block of their own. Half the field's per-screen figure, below its per-reveal figure.
+
+### And here is the shape, because it was never written down
+
+`engine.md` §5 says outright that a clip nested in a cascade beat "is the shape `register.md` S1
+requires" — and then shows a node-level block, which is the thing this rule exists to stop. Counted
+2026-08-29: **no worked example anywhere in this skill put a media block inside a beat.** Stated
+here, stated there, modelled in neither — and the games read exactly like that
+(`back_home` 0/169, `steam` 0/623, `forty_miles` 0/938).
+
+Both blocks below are **one beat out of a cascade**, shown alone. In a real cascade **beat 0 carries
+no `advance_text`** — it renders on entry — and so does a terminal beat; the `advance_text` is what
+makes a beat a click. `v2.py:14426`.
+
+**One-shot beat — a fixed `file`:**
+
+```toml
+{ type = "cascade", props = { beats = [
+  { advance_text = "<the click that reveals this beat>", blocks = [
+    { type = "paragraph", content = "She gets the shirt off over her head, slowly enough that it is clearly for you, and underneath she is exactly as good as you had spent the week trying not to picture. Then she waits, arms at her sides, and lets you look." },
+    { type = "video", props = { file = "<dir>/<clip>.webm", description = "<what is on screen, for the harvest pass>", search_queries = [ "<a query that would find it>", "<another>" ] } },
+  ] },
+] } },
+```
+
+**Repeatable surface — a `pool_dir`, and on a re-entered surface it is not optional:**
+
+```toml
+{ type = "cascade", props = { beats = [
+  { advance_text = "<the click>", blocks = [
+    { type = "paragraph", content = "He bends you over the arm of the sofa and works his cock into your cunt without much ceremony, and it is good in the dumb, immediate way that has nothing to do with whether you like him. You hear the noise you make. You do not stop making it." },
+    { type = "video", props = { pool_dir = "<dir>/<beat_name>", description = "<what is on screen>", search_queries = [ "<a query>", "<another>" ] } },
+  ] },
+] } },
+```
+
+The prose in both is lifted from `## The model beats` below — the validated set — so nothing new is
+being taught about the writing here. **The only thing being shown is where the clip goes.**
+
+⚠️ **`pool_dir` over `file` on anything re-enterable.** A pool **cycles** (1→2→3→1) through
+`$game_state.media_cycle` rather than re-rolling, so the player never sees the same clip twice
+running, and the count comes from disk instead of a number you have to keep correct. Gate
+`repeatable explicit media cycles` judges exactly this. `engine.md` §5.
+
+⚠️ **ONE ASSET, ONE BLOCK.** Never reuse a `file` or a `pool_dir` across two blocks. The media
+review dedupes by file, so two beats sharing an asset collect **one** verdict between them, and the
+second beat is reviewed by nobody.
+
+⚠️ **The node lead's clip does not scroll away — the beats append underneath it.** A cascade renders
+as nested `<<linkreplace>>` (`_render_cascade`, `v2.py:14426`), so nothing is ever removed. That is why a clip at the
+top is a clip for beat 0 and cannot serve beat 4: by then the player is reading the act under a
+picture of the setup.
 
 ---
 
@@ -895,6 +946,30 @@ a habit shows up in every game and no rule anywhere asked for it.
 > warning marker and reads as narrative. A whole **paragraph** is the unit, and it counts only if
 > all of it reads as narrative. The wrong count had a fix attached to it (*rewrite the examples*)
 > that would have edited prose which was never the problem.
+
+### Show the mechanism. Never show the world.
+
+The four instances pull in opposite directions and nothing reconciled them, so the skill kept
+choosing between two failures — instances 1–3 say an example is dangerous, instance 4 says an
+absence is worse. Both are true, and the line between them is not how *big* the example is:
+
+> **A mechanism copied verbatim produces a correct game. A world copied verbatim produces five
+> games with the same box room.**
+
+Every one of the first three failures was a **world**: a locale-locked vocabulary, one game's floor
+plan, one game's tier numbers. All three are things an author should be *deciding*, and an example
+decides them by default. The absence was a **mechanism** — where the clip goes, how a ladder is
+gated, which key day-caps a rung. Those have one correct answer that does not vary by game, and an
+author who has to derive them derives them differently every time.
+
+So: **show the shape, name the slots, and leave every number and every proper noun out.** Placeholder
+ids (`<npc_id>`, `<currency>`, `<exterior_location_id>`) are not decoration — they are the thing
+that makes an example safe to copy. Where a number genuinely has to appear for the shape to read,
+say in the same breath that the number is filler and name the rule that derives it.
+
+⚠️ **This does not license a worked map.** `the-map.md` still refuses one, and the refusal is
+correct under exactly this rule: a floor plan is a world however abstractly it is drawn. What that
+file gained instead is the *mechanism* — one key, `entry_from`, present or absent — and no rooms.
 
 ## Second person is the genre standard
 

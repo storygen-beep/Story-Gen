@@ -183,6 +183,53 @@ nerve  >= 55  < 75     "Make it routine"                    goal -> 75
 nerve  >= 75           flag rung, or terminal               (see R5)
 ```
 
+**That ladder as TOML, which this file has never shown.** `[[quest_cards]]` is flat and top-level —
+**not** `[[quests]]`, which is an unrelated table (`engine.md` §23):
+
+```toml
+# One rung of an ascent ladder. A card with npc_id renders in that character's
+# section; a card without one renders under "Story Goals".
+[[quest_cards]]
+priority = 90
+npc_id   = "<npc_id>"
+text     = "<where she is on this ladder, in the fiction — two or three sentences>"
+tip      = "<the route: a PLACE, a PERSON where there is one, and a VERB. R3.>"
+when     = [ { trait = "<meter>", subject = "player", op = "gte", value = 15 },
+             { trait = "<meter>", subject = "player", op = "lt",  value = 35 } ]
+goals    = [ { trait = "<meter>", subject = "player", op = "gte", value = 35, label = "<the next rung, named as an action at a place>" } ]
+```
+
+⚠️ **An inline table may not span lines.** The `when` array above wraps because an *array* can; each
+`{ … }` inside it is whole on its own line. Break one of those across two lines and the build stops
+at a TOML parse error.
+
+⚠️ **`group` and `npc_id` do not go together.** `group` collapses several **Story Goal** cards to
+one — the crisis variant of a goal and its ordinary form, sharing a slot — and is **ignored on an
+NPC card, with a validator warning** (`template_import.py:1105`). A character's section already
+renders one card per NPC per render; that is what `priority` is for.
+
+⚠️ **A quest card is NOT a canvas condition and the two forms are different.** Everything else in
+this engine reads `flag_key` / `trait_key` + `operator`, inside a `conditions` object carrying
+`version = "1.0"`. A card reads **`flag` / `trait` + `op`**, in a bare `when` array, and takes no
+`version` at all. Compare against `the-economy.md` R1's ladder — the same author writing the same
+idea in the other form.
+
+Writing the canvas form on a card is **caught at build time**, so it is noisy rather than dangerous:
+the parser reads neither key, and the validator errors with
+`trait condition op must be gte/lte/gt/lt/eq, got ''` (`template_import.py:5509`). A stray
+`version` inside a `when` item is simply dropped.
+
+⚠️ **The silent one is `ne`, and it is silent by design.** Cards are evaluated by a *third*
+evaluator — `setup.checkQuestsCondition` — whose switch has **no `ne` case and falls through to
+`return false`**. So the card validator's whitelist deliberately excludes `ne`
+(`template_import.py:5501-5509`): widening it would let an author write a routing condition that is
+always false, and a card that never matches leaves a blank row rather than an error. Canvas
+conditions are a different path and do support it. `engine.md` §37.
+
+⚠️ **`gte X` + `lt Y` on every rung, so exactly one matches.** An `lt`-only gate is a *window*: the
+card vanishes the moment the meter passes it and the character's row goes blank. A `gte`-only
+ladder matches every rung at once and the picker's priority order silently decides the game.
+
 ### R3 · Name the feeder, not the number
 
 The sidebar already prints `exposure 22`. **What the player cannot see is which repeatable click
@@ -224,6 +271,31 @@ card, or a goal-less end-of-content card that reads forward (*"his trail is logg
 in a future update"*).
 
 Never dangle a live goal bullet that cannot flip in this build. That is a fake objective, forever.
+
+**The card that catches them, at the bottom of every ladder:**
+
+```toml
+[[quest_cards]]
+priority      = 10                            # lowest — every live rung outranks it
+npc_id        = "<npc_id>"
+terminal      = true
+terminal_text = "<what ENDED — an arc, or this build. The default says 'Arc complete'.>"
+text          = "<where they stand now, written forward: still here, still usable>"
+when          = [ { trait = "<meter>", subject = "player", op = "gte", value = 75 } ]
+# no goals: a terminal card is not climbing. See the warning below.
+```
+
+⚠️ **`terminal = true` is the whole mechanism, and leaving it off is how a finished arc ends up
+looking live.** `renderQuestsGoalBlock` emits exactly one frame per card, in order:
+✓ terminal → 🔓 `ready_canvas` → 🎯 unmet goals. A **goal-less, non-terminal** card matches all
+three tests and draws **none** of them — so the card still renders its `text` and `tip` and reads as
+an objective with nothing ticked, forever. `engine.md` §23.
+
+⚠️ **`terminal_text` needs `terminal` set or the string is dead** (the validator warns). It exists
+because a finished *arc* and a finished *build* are different endings and the default label can only
+say the first. In a **v0.1 nothing is closed** — every track stops at a build boundary — so the
+one-`terminal_text`-per-game guidance written from a finished build is the wrong rule there, and
+following it produces the worse outcome.
 
 ---
 

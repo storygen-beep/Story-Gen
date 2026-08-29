@@ -25,6 +25,64 @@ neither is a sandbox.
 
 A currency nothing reads is a number that goes up. Gate 16 checks for at least one.
 
+**And here is one, because until 2026-08-29 there was not one anywhere in this skill.** Counted
+across every reference file: **zero worked blocks contained a condition on a currency.** The only
+money example the skill has ever shown is `engine.md` §27's `costs` block — which is the *other*
+channel, the one the lint below this section says everyone over-uses (*seven of our ten
+rent-enabled games have ZERO money conditions and pass on prices alone*). **The skill showed the
+habit it complains about and never showed the alternative.** That is `register.md`'s *"nothing
+outranks an example that was never written"* — the failure is an absence, not a bad example, and
+`## Show the mechanism. Never show the world.` there is the rule this block is written under.
+
+The shape: **one object, several rungs, and the prose under it changes as she saves toward it.**
+This is R1 and `R1b`'s showing-the-purchase clause in the same block — the thing is on screen long
+before it is affordable, and the screen reports her progress at it.
+
+```toml
+# ⚠️ ORDERED HIGHEST-FIRST, and that is not style. Adjacent [group] blocks compile
+#    into ONE exclusive if/elseif chain, so a low-first ladder is DEAD below its
+#    first rung — the `lt` case would match forever and nothing after it renders.
+blocks = [
+  { type = "paragraph", content = "<the object, as it always looks — the line every rung sits under>" },
+
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "<thing>_bought", operator = "is_true" },
+    ] }, blocks = [
+    { type = "paragraph", content = "<she owns it — what stands where it used to stand>" },
+  ] },
+
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "<currency>", operator = "gte", value = 400 },
+    ] }, blocks = [                                                          # = <full_price>
+    { type = "paragraph", content = "<she has the whole price — and what is missing is not money>" },
+  ] },
+
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "<currency>", operator = "gte", value = 200 },
+    ] }, blocks = [                                                          # = <full_price> / 2
+    { type = "paragraph", content = "<halfway, counted in a unit she can name — weeks, shifts, Fridays>" },
+  ] },
+
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "<currency>", operator = "lt", value = 200 },
+    ] }, blocks = [
+    { type = "paragraph", content = "<the price, and how far away it is from here>" },
+  ] },
+]
+```
+
+⚠️ **The numbers are the one thing not to copy.** `400` and `200` are filler and their only
+doctrine is the *relationship* — a full price and its half. What the price should actually be
+against a week's income is **R3c**, below, and it is derived per game. A set of thresholds shipped
+in an example is the third recorded instance of *an example outranks every rule beside it*
+(`the-meters.md`: `15/35/55/75` reached every tier of every game built afterwards). Do not make
+this the fourth.
+
+⚠️ **Conditions need `version = "1.0"` or they FAIL OPEN** — the engine returns true for any
+`conditions{}` without it, with no build error, so a ladder missing it renders every rung at once.
+`engine.md` §2. Note that a **quest card** takes the opposite form and must never be given this
+key; `the-voice.md` R2 shows the two side by side.
+
 ### R1b · What money buys has to STAY bought
 
 R1 is satisfied by a price on a cup of coffee. That is not what the field sells.
@@ -376,6 +434,60 @@ it does nothing. What works:
 | `max_triggers_per_day` | only a canvas that has a `[canvases.trigger]` block |
 
 The full menu, and why one brake alone is brittle, is `references/the-meters.md` M3–M5.
+
+**Both brakes on one choice, which is what a paying rung actually looks like:**
+
+```toml
+[[canvases.nodes.exit_block.choices]]
+text                     = "<the act, and the duration in the game's one form> (2h)"
+targetType               = "location"
+locationId               = "<where she ends up>"
+time_progression_minutes = 120
+costs                    = [ { trait = "energy", value = 10 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "<rung>_done_today", operator = "is_false" },
+] }
+flagEffects      = [ { targetType = "player", flag = "<rung>_done_today", op = "set" } ]
+show_when_locked = true
+locked_text      = "<why it is closed, in the fiction — and that it reopens tomorrow>"
+effects = [
+  { targetType = "player", trait = "<currency>", op = "add", value = 22, clamp = false },
+]
+```
+
+```toml
+[engine.daily_tick]
+flagEffects = [
+  { targetType = "player", flag = "<rung>_done_today", op = "unset" },
+]
+```
+
+Six rules are carried by that one choice, and each of them has cost a shipped game:
+
+1. **`costs` is the brake the engine enforces for you.** An unaffordable choice is not offered, and
+   the engine appends the requirement to the greyed row *with no authoring* — `Requires 15 Energy
+   (you have 6)`. `engine.md` §27.
+2. **The day flag is set in `flagEffects` on the CHOICE, never on a node exit.** A choice runs
+   `flagEffects` *before* `advanceTime`; a node exit runs `advanceTime` first, which is where the
+   day rolls and this hook clears. A rung that crosses midnight with an exit-set cap starts the new
+   day **already capped** — `off_season`'s sleep rung ran 21:00→06:00 and was never offered before
+   midnight again from night two. `engine.md` §28.
+3. **A flag, not a counter trait.** A hidden counter with an `lt` condition works and reads to
+   gate 10 as a meter that only ever closes. `the-meters.md` M5.
+4. **`clamp = false` on the money grant**, or the engine caps the balance at 100 (`engine.md` §21).
+   ⚠️ And know the asymmetry: a **`costs` deduction is hard-clamped to 0–100 and cannot be
+   unclamped**, so above 100 the next priced purchase truncates the balance. §27.
+5. **`show_when_locked` + `locked_text`** — a shown-locked row with no reason is mute, which is the
+   gate `a locked door says why`. A cost-only choice is exempt, because the engine writes its own
+   reason; a *condition*-locked one is not.
+6. **The duration is on the label**, in one form held across the game, and it is the real spend.
+   A label may never name a clock time — the engine has no absolute-time advance.
+   `the-clock.md` C3/C4.
+
+⚠️ **Every flag cleared in `[engine.daily_tick]` must be SET somewhere.** Two of the three parts
+validates nothing on its own: a `_today` flag that is cleared and never set throttles nothing, and
+one that is set and never cleared closes the rung permanently on day two. Gate `a day-cap closes`
+exists because a shipped game did the first.
 
 ### R6 · The same test applies to any trait a condition reads
 

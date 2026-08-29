@@ -124,8 +124,34 @@ So: **the declared `exterior` must be a root** — no `entry_from` — with the 
 things that hang off it. Where the fiction wants two separate grounds (a home and a town that are
 genuinely apart), make them **two roots joined by a travel canvas**, not one nested inside the other.
 
+The diagram above is the topology. This is what it is in keys, and it is the whole of the
+difference — one field, present or absent, on the location the board names as `exterior`:
+
+```toml
+# ❌ inverted — the ground hangs off a room, and gate 28 fails
+[[locations]]
+id         = "<exterior_location_id>"
+entry_from = "<an_interior_location_id>"     # ← this line is the defect
+
+# ✅ a root — nothing is its parent, and everything else hangs off it
+[[locations]]
+id = "<exterior_location_id>"
+# no entry_from at all
+```
+
+> ⚠️ **No example world here, and there still will not be one** — see the note under *What the
+> board phase records*. A mechanism is safe to show and a floor plan is not: a mechanism copied
+> verbatim produces a correct game, and a world copied verbatim produced three games with the same
+> box room. That is why this shows one key and no rooms.
+
 **Gate 28 checks this mechanically**, off `entry_from`. It is the half of R1 a parser can actually
 see. Declare the exterior in `board.map.exterior` and the routes across it in `board.map.bridges`.
+
+⚠️ **The commoner failure is not an inverted map — it is no map at all.** Measured 2026-08-29,
+`back_home` fails both `the map is a place` and `residents have homes` for one reason: it declared
+no `board.map` block, with the full schema sitting in this file. **No example would have prevented
+that.** An undeclared board is undone work, and the gates report it as red rather than `n/a`
+precisely so it cannot pass as an absence.
 
 ### R4 · Names are navigation, and a name is not house style's business
 
