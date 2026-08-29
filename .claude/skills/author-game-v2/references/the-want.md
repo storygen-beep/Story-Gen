@@ -124,6 +124,75 @@ declared-and-never-read is the fake-freedom failure by definition and needs no t
 the count rather than judging it: one game is not a distribution, and this skill has already had to
 supersede one doctrine built at n = 1.
 
+#### The other mechanism — the creation screen, and what it is for
+
+Everything above is the **diegetic** question: ask what the scene already asks, set a flag, gate
+content on it. The engine also ships a literal creation screen —
+`[[player.customization_fields]]`, three field types (`text`, `select`, `image_select`) plus
+`sets_portrait` — and until 2026-08-29 the skill's only instruction about it was *"set it `false`
+unless you are actually shipping the fields."*
+
+Measured against the field (13 top-30 games with a creation step, 22,614 comments; instruments in
+`~/Documents/Customization_Study_20260829/`):
+
+**W1 · If you ask, print it back.** The field reads every created field a median of **four** times
+after creation, and the median game leaves **none** of them unread. We read **12 times across 14
+fields**, with **6 read nowhere at all**. That is the whole rule; there is nothing subtler under it.
+
+**W2 · The payload is a word, not a gate.** Only **1.8%** of the field's reads of a created value
+are conditions. **82%** of its creation controls are free text and **0%** are numeric — and a typed
+value cannot be gated on, only printed. So do not design branches on what she picked. Our engine's
+condition types cannot read the `$player.<field_id>` namespace, and on this evidence **they should
+not learn to** — the gap is worth 1.8% of what the mechanism is for.
+
+⚠️ **This corroborates "a memory, not a slider" from a new direction.** The corpus's creation
+screens carry **zero** stat fields. Nobody out there builds the stat screen this section already
+tells you not to build.
+
+**W3 · Three fields, not thirty.** Field median is **3**; ours is 3 in four of six games — the same
+screen. **No threshold, deliberately.** The largest creation screen in the corpus is 59 fields and
+it is the only one anyone asked to skip, at one comment and one like. That is n = 1 and a ceiling
+read off it would be invented, per the P0 refusal.
+
+**W4 · The distinctive axis is the cast, not the player — and it is already built.** The field's
+creation screens ask *"Veronika is my ___"*, *"Amy is my little ___"*, *"What is her relationship
+to you and $karlee:"*. The player names the household and the kinship inside it, which in this
+genre is the setting. We ship this already: `npcs[].relationship_options` renders a picker on the
+same screen, the pick lands on the NPC, the cast page prints it, and prose has a token for it —
+**`@<npc>.rel`**. It is written **11 times in the whole repo**. See `engine.md` for the field
+reference.
+
+**W5 · Refusing costs nothing.** Half the corpus ships no creation step at all, including the
+second-ranked game. Across 22,614 comments the entire subject runs at **0.12%** — against lostness
+at 4.7% and grind at 0.9%. Six comments ask for more customization; two ask for a skip button.
+
+⚠️ **This is NOT `the-phone.md` P1's refusal rule, and must not be written as one.** P1 could say
+*"most games should not have a phone"* because the corpus returned a verdict — 24 likes to 0.
+**Here there is no verdict in either direction.** Nobody is asking for a creation screen and nobody
+resents one. So the rule is conditional, not prohibitive: **have one or don't; if you have one,
+read it back.**
+
+**The two syntaxes, because one of them is easy to miss.** A field's value lands at
+`$player.<field_id>` — or `$player.name` for the reserved id `name` — and the house form for
+reading it in prose is the `@` token: `@player` for her name, `@player.<field_id>` for anything
+else. Both work. **The token is what authors actually type**, and two separate passes of this
+study's own instrument reported a false zero by knowing only the raw form.
+
+**The check.** Gate **"what she picks is read"** counts both syntaxes across the built game and
+**fails only on zero**, the same shape as the start-choice gate above. A game declaring no
+customization reports `n/a`, which is not a pass. ⚠️ **`sets_portrait = true` counts as a read** —
+an `image_select` field writes `$player.portrait`, which the stats page renders, so a gate without
+that exemption fails every game using the feature correctly.
+
+⚠️ **A second check — a lint for "fields declared while the screen is off" — was built here and
+taken back out the same day.** It has no subject. Parsed across every built game, **five declare
+customization fields and all five have it switched on**: zero dead declarations. The four games
+that appeared to have one carry a TOML *comment* —
+`customizable = false  # deferred: needs [[player.customization_fields]]` — which is an author
+recording the decision, and is correct practice rather than a defect. They were counted as
+declarations by grepping the phase files instead of parsing the built game. Shipping it anyway
+would have been the P0 error: a check built for a state nothing is in.
+
 ### 1b. Who she is
 Her situation at minute zero, and what she has to lose. Concrete: a job, a debt, a room, a
 reputation. The thing that makes the first transgression cost something.

@@ -304,6 +304,27 @@ Three hard rules, all gated:
 **Where ceilings live:** `sidebar_items[].bands[]`. **Not** in `player.core_traits`, which is
 a flat map of starting values only.
 
+**The operators a trait gate may use.** Six, and every evaluator in the engine agrees on all six:
+
+```
+eq   ne   gt   gte   lt   lte
+```
+
+⚠️ **`ne` is legal and this skill never said so.** It has worked on a canvas, node or choice
+condition since v2 shipped, and across all thirty games it has been used **zero times** — because
+until 2026-08-29 the only two places it appeared in this skill were an engine architecture section
+and a warning telling you not to use it on a quest card. *"She is not at stage 3"* is the negated
+form of the field's commonest gate shape (`the-surfaces.md` R5d) and it is one word.
+
+⚠️ **Quest cards take five, not six** — `[[quest_cards]]` `when` and `goals` reject `ne` at build
+time, deliberately, because their evaluator has no case for it. `the-voice.md` R2 and `engine.md`
+§37. Do not widen that whitelist without the evaluator case in the same change.
+
+⚠️ **`compare()` accepts six more** — `in`, `not_in`, `contains`, `not_contains`, `exists`,
+`not_exists` — **and nothing else in the engine does.** A gate using one of those opens the door and
+then reads as false in the locked-reason line and in every hint. Treat the six above as the set.
+`engine.md` §37 carries the count.
+
 ---
 
 ## 4. The daily loop — `board.needs[]`

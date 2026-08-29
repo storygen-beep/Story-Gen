@@ -226,6 +226,7 @@ documented nowhere but in the script's own comments, so an author who hit one ha
 | **every hub is met first** | no character's portrait is live before a meeting has fired, and one flag never opens the whole cast | `the-first-hour.md` F5 · F8 |
 | **a meeting fires where they are** | a one-shot naming a character carries a `trigger.schedules` window matching that character's own hours — `requires_npc` does not gate the auto-fire path, so without one the introduction plays to an empty room | `the-first-hour.md` F5 · `engine.md` §31 |
 | **the start choice is read** | a choice the opening asks the player to make is read by real content later — fails only on ZERO, and a game that asks nothing reports n/a, which is not a pass | `the-want.md` §1 · `state.md` |
+| **what she picks is read** | every `[[player.customization_fields]]` value is printed somewhere — `$player.<id>` or the `@player.<id>` token — fails only on ZERO, `sets_portrait` counts as a read, and a game declaring no customization reports n/a, which is not a pass | `the-want.md` §1 W1 |
 | **the label keeps its time** | no button promises a clock time the engine cannot reach, and a stated duration is the real spend | `the-clock.md` C3 · C4 |
 | **the price is in one currency** | every notation on a button, plus the engine's own `currency_symbol`, resolves to ONE currency | `the-economy.md` R7 · `engine.md` §33 |
 | sentence length | the prose has not drifted dense | `register.md` |

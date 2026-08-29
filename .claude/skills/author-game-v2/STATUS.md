@@ -74,7 +74,7 @@ session is wrong by the end of that session. Run `wc -l` if you need one.
   STATUS.md                       —    this file
 ```
 
-## The scoreboard — 42 gates, 17 lints
+## The scoreboard — 45 gates, 28 lints
 
 **A gate scores. A lint prints a list and refuses to score.** The split is the discipline: if a
 threshold cannot be defended against a measurement, it does not get to fail a game.
@@ -270,11 +270,10 @@ merged `7_final_game.toml`, and `gates.py` needs that file. The other seven (`ja
 | **A cold reader** | Only one person has ever run the skill. |
 | **`the_season`'s fill** | 4,412 words against 15,500 declared. Its one red gate, and the real problem with the game. |
 | **`the_season`'s `known`** | Rises and repaints a quest card. **7 read sites in 111 passages**; zero in the locations, zero in the one-shots, and a median branch of 570 chars against the field's 84–139. Measured in `findings_H_known.md` §6. |
-| **`block_pool` in practice** | Now documented in four places and used by **zero** v2 games. Doctrine without a worked example is a suggestion. |
-| **Three engine facts** | Still on the do-not-cite list in `engine.md`. |
-| **`ne` in the importer** | `engine.md` §37. The runtime evaluates *"not equal"* (`v2.py:3848`, reached at `:3956`) and already renders it (`:1926`); the importer rejects it at `template_import.py:5414`, with a second whitelist at `:5227`. **Three whitelist entries, no runtime work** — and it is the negated form of the field's commonest gate. Not applied: an engine change is LO's call. |
+| **`block_pool` in practice** | ⚠️ **This row read *"used by zero v2 games"* until 2026-08-29 and was wrong.** Counted in phase files, merged output excluded: `the_long_summer` **152** · `mrs_vance` **77** · `under_one_roof` **14** · `vesper` **12** · `the_long_summer_test` **1**. `mrs_vance` is the v2 reference game, so the primitive did reach v2 — what is true is narrower: **five games of thirty**, and the doctrine still has no worked example of its own. |
+| **One engine fact** | The do-not-cite list in `engine.md` is down to a single bullet — the cooldown count for random events. ⚠️ This row said **three** until 2026-08-29; the list held **two**, and one of those (*which identifiers orphan a live save when renamed*) had been answered on 2026-08-29 by `the-returning-player.md` §2–§5 and left sitting there. Struck, and the row recounted. |
+| **`ne` — the canvas half is DONE; only quest cards are open** | ⚠️ **This row said the opposite until 2026-08-29, and the stale version was read back and acted on.** It carried *"three whitelist entries, no runtime work… not applied"* — the exact sentence `engine.md` §37 was rewritten on **2026-08-24** to correct, on the day it shipped the fix. A canvas condition's operator is not validated by the importer at all, so `ne` has always worked there; `setup.checkSingleCondition` got its case and `setup.formatCanvasConditions` got its `≠` the same day. **What is still open is one evaluator**: `setup.checkQuestsCondition` (`v2.py:15536`) has a five-case switch and quest cards reject `ne` at `template_import.py:5509`, deliberately and with a comment saying so. **Parked on evidence, not on nerve** — `ne` is legal on a canvas today and authored **zero** times across all thirty games, because until 2026-08-29 no doctrine file offered it. `the-board.md` now names the operator set; if a card then needs `ne`, the evaluator case and the whitelist go in together. |
 | **The study's instruments** | Four of them published numbers and were then discarded — F1's opening walker, F's act-gate driver, and three of the recheck's rebuilds. Two of those numbers are now permanently unrecoverable. `probe_K.py` is on disk with a `main`; the earlier ones are not, and nothing enforces that they should be. |
-| **Eight study sections** | See PART 7. |
 
 ## Promotion criteria — still NOT met
 
@@ -290,7 +289,7 @@ defects, and then again by `the_season` at 39/40 that a player could not navigat
 
 # PART 7 — WHAT IS NEXT
 
-## A · The eight open study sections
+## A · The eleven study sections — all closed
 
 Eleven were scoped; LO picked three. **A (the want), C (the loop) and D (the writing) are done.**
 
@@ -414,7 +413,9 @@ predates the recheck entirely. Corrected above.
    auto-fire, and that there are *two* per-day ledgers.
 3. **A release that adds zero locations.** Never demonstrated, and it is what the release model
    claims to be for.
-4. **A worked `block_pool`.** The doctrine is written; nothing has been authored against it.
+4. **A worked `block_pool`.** The doctrine is written and five games use the primitive
+   (`mrs_vance` 77 among them) — what is missing is a worked example inside the skill, not usage
+   in the field. Corrected 2026-08-29; this line previously said nothing had been authored.
 
 ## The operating rule that outranks all of the above
 

@@ -1006,9 +1006,13 @@ Facts we believe but have not confirmed against source during this skill's const
 Read and cite before using; delete from this list once promoted above.
 
 - The exact cooldown count for random events.
-- Save-safety specifics: which identifiers orphan a live save when renamed.
 
 *(`speaker = "unknown"` was on this list. It has been read and promoted — see §25.)*
+
+*(**Save-safety specifics — which identifiers orphan a live save when renamed** — was on this list.
+**Read and promoted 2026-08-29:** `references/the-returning-player.md` §2–§5 names them — the
+canvas/node slug, a flag or trait key, a stat's scale, and the game title — and §40 below carries
+the engine half. Struck here 2026-08-29, having outlived the answer by a day.)*
 
 *(Adjacent `[group]` blocks merging into a single if/elseif chain was on this list, while
 `the-surfaces.md` R6 stated it as fact — the skill contradicted itself. **Read and promoted
@@ -2035,21 +2039,57 @@ Four rules the field follows, all of them cheap:
 
 ---
 
-## 37. THREE condition evaluators, and they do not agree by default
+## 37. FOUR condition evaluators, and they do not agree by default
 
 Added 2026-08-24 from section K. **Rewritten the same day, because the first version of this
 section was wrong** — it said the fix was *"three whitelist entries and no runtime work"*, and it
-named `template_import.py:5414` as the thing blocking `ne` on a canvas condition. That line is the
-**quest-card** validator. The real architecture is below, and it is the load-bearing fact:
+named the quest-card validator as the thing blocking `ne` on a canvas condition. It is not. The
+real architecture is below, and it is the load-bearing fact:
 
 | evaluator | backs | `ne` |
 |---|---|---|
-| `compare()` — `v2.py:3848` | canvas / node / choice `conditions`, reached at `v2.py:3956` | **yes**, since v2 shipped |
-| `setup.checkSingleCondition` — `v2.py:7490`, trait branch `:7513` | hints, quest-card *goal* bullets, `_findFlagSetterCanvas`, ten-plus call sites | **yes, since 2026-08-24** |
-| `setup.checkQuestsCondition` | `[[quest_cards]]` `when` and `goals` | **no, deliberately** |
+| `compare()` — `v2.py:3988` | canvas / node / choice `conditions` | **yes**, since v2 shipped |
+| `setup.describeUnmetConditions` — `v2.py:2004`, trait switch `:2027`, phrases `:2037` | the *why is this locked* text on a blocked choice | **yes** |
+| `setup.checkSingleCondition` — `v2.py:7658`, trait branch `:7670`, `ne` at `:7692` | hints, quest-card *goal* bullets, `_findFlagSetterCanvas`, ten-plus call sites | **yes, since 2026-08-24** |
+| `setup.checkQuestsCondition` — `v2.py:15536` | `[[quest_cards]]` `when` and `goals` | **no, deliberately** |
 
-**Anything added to one has to be checked against the other two.** That is the rule this section
+`compare()` is reached first from the trait branch at `v2.py:4098`.
+
+**Anything added to one has to be checked against the other three.** That is the rule this section
 exists for; `ne` is just the case that exposed it.
+
+### The four sets, counted 2026-08-29 — and they still do not agree
+
+On a **trait** condition:
+
+| evaluator | operators on a trait |
+|---|---|
+| `compare()` | `eq` `ne` `gt` `gte` `lt` `lte` `in` `not_in` `contains` `not_contains` `exists` `not_exists` — **12** |
+| `describeUnmetConditions` | `eq` `ne` `gt` `gte` `lt` `lte` — **6** |
+| `checkSingleCondition` | `eq` `ne` `gt` `gte` `lt` `lte` — **6** |
+| `checkQuestsCondition` | `eq` `gt` `gte` `lt` `lte` — **5** |
+
+⚠️ **`ne` is fixed and six operators are not.** `in`, `not_in`, `contains`, `not_contains`, `exists`
+and `not_exists` pass `compare()`, so a canvas gate using one **works** — and every other reader
+falls through to `return false`. The same condition item is therefore true on the door and false in
+the *why is this locked* line, in every hint, and in `_findFlagSetterCanvas`. This is the exact
+shape `ne` had before 2026-08-24, still live, times six.
+
+**Not fixed here, and not a bug report against a game: no authored condition uses any of the six.**
+Measured 2026-08-29 over every predicate item carrying a `trait_key`, phase files only, across the
+twenty games that have trait conditions: **`gte` 2,287 · `lt` 527 · `eq` 191 · `lte` 31 · `gt` 1 ·
+`ne` 0**, and none of the other six anywhere. (Type-specific operators — `is_true`, `is_false`,
+`is_present`, `equipped`, `owned`, `is_active` and their negations — are their own branches and are
+not part of this comparison.) Recorded so the next person adding an operator reads the count before
+the code, and so a game that reaches for `contains` is recognised as the first real demand rather
+than as a mystery.
+
+⚠️ **The count was THREE here until 2026-08-29, and the fourth was found by counting rather than by
+a bug.** `setup.describeUnmetConditions` carries its own inline operator chain and its own phrase
+table — it neither calls `compare()` nor `checkSingleCondition` — and it happens to handle `ne`
+already, so nothing was broken. **The in-code comment beside `checkSingleCondition`'s `ne` line
+(`v2.py:7686`) still calls itself "THE SECOND EVALUATOR" and names one other.** The code is correct;
+the count in the comment is not. Read this table, not that comment, before adding an operator.
 
 ### What was actually broken, and what was not
 
@@ -2062,7 +2102,7 @@ branch ran `gte / gt / lte / lt / eq` and then `return false`. A `ne` gate was t
 canvas and false in every hint and flag-setter lookup that touched it. One line, now fixed.
 
 The second half was cosmetic and worse than it sounds. The requirement-label formatter
-(`v2.py:7743`) mapped an unknown operator to `"≥"`, so a `ne` gate rendered as *"Elena Affection ≥
+(`setup.formatCanvasConditions`, `v2.py:7903`, operator map at `:7918`) mapped an unknown operator to `"≥"`, so a `ne` gate rendered as *"Elena Affection ≥
 50"* — the game stating the opposite of its own rule. Now `"≠"`.
 
 ```toml
@@ -2075,20 +2115,20 @@ conditions = { version = "1.0", items = [
 
 ### ⚠️ Quest cards reject `ne` on purpose — do not "fix" the whitelist
 
-`[[quest_cards]]` conditions **are** whitelisted (`template_import.py:5414`, `gte/lte/gt/lt/eq`) and
+`[[quest_cards]]` conditions **are** whitelisted (`template_import.py:5509`, `gte/lte/gt/lt/eq`) and
 their evaluator, `setup.checkQuestsCondition`, has no `ne` case — its `switch` falls through to
 `return false`. Widening that whitelist without adding the case would let an author write a card
 condition that is **silently always false**, which is the failure this engine has had before with
 `conditions` lacking `version = "1.0"`.
 
 Widening it correctly means the whitelist **and** the evaluator, in the same change. The comment at
-`template_import.py:5414` says so at the site.
+`template_import.py:5502-5509` says so at the site.
 
 Also unchanged, and for the same reason — each is its own path:
 
-- `template_import.py:5227` — hint `trait_checks`.
-- `template_import.py:5154` / `:5177` — quest `stage_op`, `{eq, gte, lte}`.
-- `template_import.py:5782` — a **heuristic** threshold reader, not a validator. `ne` is not a
+- `template_import.py:5315` — hint `trait_checks`.
+- `template_import.py:5242`, checked at `:5265` — hint-template `stage_op`, `{eq, gte, lte}`.
+- `template_import.py:5877` — a **heuristic** threshold reader, not a validator. `ne` is not a
   threshold and does not belong there.
 
 ### ⚠️ The v1 rollback path

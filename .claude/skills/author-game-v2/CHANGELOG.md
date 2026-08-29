@@ -5,6 +5,186 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-29 — customization: the field says the answer back, and we asked four times without listening
+
+**Why.** `DOCTRINE_GAPS.md` item 12's remaining half, and the last never-studied subject in the
+inventory. The engine ships a player-creation screen — three field types plus `sets_portrait` —
+and the skill mentioned it three times, its only actual instruction being *"set it `false` unless
+you are actually shipping the fields."*
+
+**The study.** `~/Documents/Customization_Study_20260829/`, Parts C, B and H of an 11-part question
+set, five instruments kept and re-runnable. Parts A, D, E, F, G, I and J were **not run** and the
+doctrine does not depend on them.
+
+- **Part C — the field does not gate on what she created; it says it back.** **1.8%** of reads of
+  a created value are conditions; ~95% are the value printed into prose. Field median **4** reads
+  per created field, and the median game leaves **none** unread.
+- **Part B — the controls prove it mechanically.** 82% free text, 17% pick-one, 1% checkbox,
+  **0% numeric**. A typed value cannot be gated on, only printed — two measurements reaching the
+  same answer from opposite directions. Screen size is the same as ours: field median **3**.
+  Axes carry **zero** stat fields, which corroborates §1's existing *"a memory, not a slider"*
+  from a new direction.
+- **Part B — the distinctive axis is the cast, not the player.** *"Veronika is my ___"*, *"What is
+  her relationship to you and $karlee:"*. **And we already ship it**: `relationship_options`
+  renders a picker, the pick lands on the NPC, the cast page prints it, and prose has `@<npc>.rel`.
+  Written **11 times in the whole repo**.
+- **Part H — nobody cares in either direction.** 22,614 comments; the subject runs at **0.12%**
+  against this project's own baselines of lostness 4.7% and grind 0.9%. Two comments ask for a
+  skip button, one of them on the 59-field outlier. Six ask for more.
+
+⚠️ **THE ENGINE CHANGE IS REFUSED, on three independent grounds.** No condition type reads the
+`$player.<field_id>` namespace and none should learn to: the field barely gates (1.8%), every axis
+it uses is already expressible here, and nobody is asking for any of it.
+
+**What changed.**
+
+- **`references/the-want.md` §1** — a subsection covering the creation screen, the mechanism §1 did
+  not own. **W1** if you ask, print it back · **W2** the payload is a word, not a gate · **W3**
+  three fields not thirty, *with no threshold* · **W4** the distinctive axis is the cast, and it is
+  already built · **W5** refusing costs nothing. Plus both read syntaxes, and the check.
+- **`scripts/gates.py` — gate `what she picks is read`** (G47), modelled on G44. Fails only on
+  zero; `n/a` when nothing is declared and n/a is not a pass; `sets_portrait` counts as a read.
+- **`SKILL.md`** — the index row, beside its sibling.
+
+⚠️ **W5 IS NOT A REFUSAL RULE AND MUST NOT BE READ AS ONE.** `the-phone.md` P1 could say *"most
+games should not have a phone"* because the corpus returned a verdict — 24 likes to 0. Here there
+is **no verdict in either direction**, so the rule is conditional: have one or don't; if you have
+one, read it back.
+
+⚠️ **A SECOND CHECK WAS BUILT AND TAKEN BACK OUT THE SAME DAY.** A lint listing customization
+fields declared under `customizable = false` — proposed on a count of four games. Parsed rather
+than grepped, **five games declare fields and all five have it switched on: zero dead
+declarations.** The four carry a TOML *comment* —
+`customizable = false  # deferred: needs [[player.customization_fields]]` — an author recording the
+decision, which is correct practice. Shipping it would have been the P0 error: a check for a state
+nothing is in. Removed, and the reason is recorded in `the-want.md` so it is not re-proposed.
+
+⚠️ **THE CENTRAL FIGURE WAS WRONG TWICE BEFORE IT WAS RIGHT, AND ALL THREE PASSES REACHED LO.**
+
+| pass | claim | the error |
+|---|---|---|
+| 1 | 2 reads across 16 fields | the instrument knew only `$player.<id>` and missed `@player.<id>`, the engine's own documented house token |
+| 2 | 20 reads | counted **TOML comments** as reads, and a lookahead excluding `.` ate `@player.` at a sentence end — the commonest form of the name token |
+| 3 | **12 reads across 14 fields, 6 never read** | parsed the built game with both token forms handled |
+
+**The lesson, and it is the same one twice this week: measure the artefact the check reads, and
+parse it — do not grep the phase files.** A phase file carries comments and design notes that never
+reach a player, and a merged build does not. The dead-declaration miscount has the identical cause.
+
+**Verified.** `--selfcheck` green — **46 gates**, 28 lints, 4 modes, 46/46 rows; the missing index
+row was caught by `--selfcheck` itself before it could ship. **Zero existing gate verdicts changed
+across all 22 games**, compared verdict-line by verdict-line against a baseline captured before the
+first edit and asserted non-empty first. The new gate's blast radius is exactly what was predicted
+from the merged files: **`last_call` PASS** (20/35) · **`late_shifts` PASS** (17/36) ·
+**`mothers_place` FAIL** (11/31) · **`seventh_day` FAIL** (29/42) · **`the_inheritance` FAIL**
+(18/34) · seventeen games **n/a**. `mrs_vance` 44/44 and `back_home` 16/36, both unmoved.
+`cite_check` unchanged at **20 drifted / 8 missing**.
+
+⚠️ **No engine code and no game touched.** The three failing games are left failing.
+
+---
+
+## 2026-08-29 — a stale STATUS row put a wrong engine recommendation in front of LO
+
+**Why.** LO asked what engine changes we need. I answered that `ne` (*not equal*) was missing and the
+fix was *"add one word to one list."* **It shipped on 2026-08-24.** `references/engine.md` §37
+documents it correctly and was itself rewritten that day **because its first version made the
+identical mistake, in the same words** — *"three whitelist entries and no runtime work."*
+
+The claim survived in `STATUS.md:275`, which was never updated when §37 was corrected. That is the
+line I read. A stale sentence in this skill's own status file is what reached LO, so the
+documentation defect here is worth more than the feature was.
+
+**What is actually true**, verified line by line against live source:
+
+| operator reader | where | `ne` |
+|---|---|---|
+| `compare()` | `v2.py:3988`, first reached `:4098` | ✅ since v2 shipped |
+| `setup.describeUnmetConditions` | `v2.py:2004`, switch `:2027`, phrases `:2037` | ✅ |
+| `setup.checkSingleCondition` | `v2.py:7658`, trait branch `:7670`, `ne` `:7692` | ✅ since 2026-08-24 |
+| `setup.checkQuestsCondition` | `v2.py:15536` | ❌ — five cases, falls to `return false` |
+
+⚠️ **§37 said THREE evaluators and there are FOUR.** `setup.describeUnmetConditions` — the *why is
+this locked* text on a blocked choice — carries its own inline operator chain and its own phrase
+table, calling neither `compare()` nor `checkSingleCondition`. It handles `ne` already, so nothing
+was broken; the section's load-bearing rule was simply undercounting the thing it exists to enforce.
+
+⚠️ **AND THE RULE HAS SIX LIVE VIOLATIONS THAT ARE NOT `ne`.** Counting each evaluator's trait path:
+`compare()` accepts **12** operators, `describeUnmetConditions` and `checkSingleCondition` **6** each,
+`checkQuestsCondition` **5**. So `in`, `not_in`, `contains`, `not_contains`, `exists` and
+`not_exists` pass on a canvas gate and read **false** in the locked-reason line, in every hint, and
+in `_findFlagSetterCanvas` — the exact shape `ne` had before 2026-08-24, still live, times six.
+**Recorded, not fixed**: measured over every predicate item carrying a `trait_key` across the twenty
+games that have one, phase files only, the authored operators are **`gte` 2,287 · `lt` 527 ·
+`eq` 191 · `lte` 31 · `gt` 1 · `ne` 0**, and none of the other six appears anywhere.
+
+**The decision: no engine change, and the reason is evidence.** Quest-card `ne` is the one real gap
+and it is parked. `ne` has been writable on a canvas since v2 shipped and is authored **zero** times
+— because until today the only two places it appeared in this skill were §37, an architecture
+section, and `the-voice.md` R2's trap telling authors *not* to use it on a card. **That zero measures
+absent teaching, not absent demand.** Widening `checkQuestsCondition` now would build on a want never
+tested, which is the precedent that refused P0 and withdrew R4 and study 6's anchoring check. The
+skill's own order is the opposite one — `mrs_vance` built the truck before the economy gate shipped.
+Teach the operator; if a card then needs it, the evaluator case and the whitelist go in together.
+
+**What changed.**
+
+- **`references/engine.md` §37** — retitled FOUR; **all nine citations re-anchored** (`v2.py:3848 →
+  3988`, `:3956 → 4098`, `:7490 → 7658`, `:7513 → 7670`, `:7743 → 7903`; `template_import.py:5414 →
+  5509` ×2, `:5227 → 5315`, `:5154`/`:5177 → 5242`/`:5265`, `:5782 → 5877`); the fourth evaluator
+  added to the table; the rule now reads *"the other three"*; and a new subsection counting all four
+  operator sets with the six-operator divergence above. The quest-card refusal is untouched — it is
+  correct and this change agrees with it.
+- **`references/engine.md`, the do-not-cite list** — *"Save-safety specifics: which identifiers
+  orphan a live save when renamed"* struck. Answered 2026-08-29 by `the-returning-player.md` §2–§5
+  and `engine.md` §40; the list's own instruction is to delete once promoted, and it had outlived
+  the answer by a day.
+- **`references/the-board.md`** — the six operators a trait gate may use, named where an author picks
+  one, with `ne`'s legality, the quest-card exception, and the six that only `compare()` honours.
+  **No new rule, no gate, no threshold** — a statement of what the engine accepts.
+- **`references/the-voice.md`** — *"a third evaluator"* → *"one of the four this engine runs and the
+  only one without `ne`"*.
+- **`STATUS.md`** — six stale statements: the `ne` row rewritten; *"42 gates, 17 lints"* → **45 and
+  28**, taken from `--selfcheck` output rather than from memory; PART 7's heading *"eight open study
+  sections"* over a table saying all eleven are done; `block_pool` *"used by zero v2 games"* (five
+  games use it — `the_long_summer` 152, **`mrs_vance` 77**, `under_one_roof` 14, `vesper` 12,
+  `the_long_summer_test` 1) in both places it was claimed; *"Three engine facts"* on the do-not-cite
+  list when it held two, now one; and the orphaned *"Eight study sections"* row removed.
+
+⚠️ **One of my own claims was overstated and was caught before commit.** I first wrote that the
+operators games use are *"`eq`, `gte`, `lte`, `gt`, `lt`, `is_true`, `is_false` — nothing else"*,
+which silently conflated trait comparisons with the type-specific branches (`is_present`, `equipped`,
+`owned`, `is_active` and their negations are their own operators on their own predicates). Re-measured
+scoped to items carrying a `trait_key`, and the figures above are that measurement.
+
+⚠️ **The in-code comment at `v2.py:7686` still calls itself "THE SECOND EVALUATOR" and names one
+other.** The code is right; the count is not. **Not edited — no engine code is touched in this arc**,
+and §37 now carries the count that comment should have deferred to.
+
+**Verified.** `--selfcheck` green — gates 45/45, lints 28/28, modes 4/4, gate rows 45/45, and those
+are the numbers written into `STATUS.md`. `cite_check.py`: **drifted 21 → 20**, **OK 61 → 68**,
+**missing 8 → 8** — drift fell, nothing new broke, and **zero drifted citations sit in any file this
+change touched**.
+
+⚠️ **That was not true on the first pass, and the checker is what caught it.** Drift went 21 → **22**
+once the ledgers were written: three citations I had just added were unanchorable, all for the same
+reason — **several `file:line` refs and several code identifiers packed onto one line**, so
+nearest-anchor matching paired each ref with whichever identifier happened to sit closest rather
+than the one it names. The citations were right; the lines they sat on made them unreadable. Fixed by moving `compare()`'s call
+site off the table row into its own sentence, and by taking the line numbers out of the
+`DOCTRINE_GAPS` Log row entirely — a Log row is a summary and the CHANGELOG is where the anchors
+belong. **A long table row is a citation hazard**, and this is the second instrument this week to
+find a defect that reading did not. **0 of 22 games moved**: every scorable game re-scored and diffed byte-for-byte
+against a baseline captured before the first edit — and the baseline was asserted non-empty (22
+files) *before* the diff was trusted, which is the failure this ledger recorded three entries ago.
+All eighteen citations re-read with `sed -n '<line>p'` against live source before commit, which is
+how `template_import.py:5501-5509` was found to start at **5502** and pinned in both files carrying it.
+
+⚠️ **No engine code and no game touched.** Not `v2.py`, not `template_import.py`, never
+`generators/v1.py`; `vesper` is cited as a count and not edited.
+
+---
+
 ## 2026-08-29 — R6 was declared shipped in two ledgers and had never been written
 
 **Why.** LO asked what to work on next. Before recommending another study I checked what the last

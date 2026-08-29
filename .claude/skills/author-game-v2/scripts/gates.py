@@ -5970,6 +5970,100 @@ def run_gates(model, game, state=None):
                "write the no as content, not as a dead end: what she does instead is a scene",
                "⚠️ a refusal is not `Leave` — exiting a room declines nothing"]))
 
+    # ═════════════════════════════════════════════════════════════════════════
+    # G47 — what she picks is read. `the-want.md` §1, W1. 2026-08-29.
+    #
+    # WHAT THIS CATCHES: the creation screen that goes nowhere. A game asks the player
+    # her name, her build and her look at minute zero and then never uses one of them.
+    # This is G44's fake-freedom defect in the engine's OTHER start-choice mechanism —
+    # G44 reads `want.player.start_choice.flags` and has no knowledge of
+    # `[[player.customization_fields]]`, which is where the discarding is worst.
+    #
+    # WHY IT IS WORTH GATING: measured over the 13 top-30 games with a creation step,
+    # the field reads each created field a median of FOUR times and the median game
+    # leaves NONE of them unread. Ours: 12 reads across 14 fields, 6 read nowhere.
+    #
+    # ⚠️ FAILS ONLY ON ZERO, on the precedent of G44, G45 and G46. No rate floor: the
+    # field's median of 4 is a different measurement (their reads run through name widgets
+    # and bare interpolation over whole games) and a threshold between it and ours would
+    # fail a game for obeying the doctrine. Zero is the defect by definition.
+    #
+    # ⚠️ A GAME DECLARING NO CUSTOMIZATION REPORTS n/a, NOT PASS — same wording as the
+    # start-choice, climb and obligation checks. An absence is not evidence.
+    #
+    # ⚠️ TWO SYNTAXES, AND MISSING ONE PRODUCES A FALSE ZERO. The value lands at
+    # `$player.<id>` (or `$player.name`), and the HOUSE form for reading it in prose is
+    # the `@` token — `@player` for the name, `@player.<id>` for the rest. This study's
+    # own instrument reported a false zero twice by knowing only one form: once by
+    # missing `@player.<id>` entirely, once by excluding `@player.` at a sentence end,
+    # which is the commonest way the name token appears. The name pattern below is
+    # therefore "@player NOT followed by a dot and another declared field id".
+    #
+    # ⚠️ `sets_portrait = true` COUNTS AS A READ. An image_select field writes
+    # `$player.portrait`, which the stats page renders. Without this exemption every
+    # image_select field in all five games with customization fails — a gate that fails a
+    # game for using a feature correctly, which is exactly what took R4 back out.
+    # ═════════════════════════════════════════════════════════════════════════
+    _pl = game.get("player") or {}
+    _cfs = [c for c in (_pl.get("customization_fields") or []) if isinstance(c, dict)]
+    if not _cfs or not _pl.get("customizable"):
+        gate("what she picks is read", None,
+             "no customization declared — the player is handed a protagonist whole",
+             ["that is a legitimate choice: half the corpus ships no creation step, "
+              "including the second-ranked game, and across 22,614 comments the whole "
+              "subject runs at 0.12% (lostness 4.7%, grind 0.9%)",
+              "if you do add one: the-want.md §1 W1 — if you ask, print it back",
+              "this reports n/a, which is NOT a pass — an absence is not evidence"])
+    else:
+        _blob = []
+
+        def _strings(o):
+            if isinstance(o, dict):
+                for v in o.values():
+                    _strings(v)
+            elif isinstance(o, list):
+                for v in o:
+                    _strings(v)
+            elif isinstance(o, str):
+                _blob.append(o)
+
+        _strings(game)
+        _text = "\n".join(_blob)
+        _ids = [str(c.get("id") or "") for c in _cfs]
+        _other = [i for i in _ids if i and i != "name"]
+        _nametok = (re.compile(r"@player(?!\.(?:" + "|".join(map(re.escape, _other)) + r")\b)")
+                    if _other else re.compile(r"@player\b"))
+        _counts, _dead = {}, []
+        for _cf in _cfs:
+            _fid = str(_cf.get("id") or "")
+            if not _fid:
+                continue
+            if _fid == "name":
+                _n = (len(re.findall(r"\$player\.name(?![A-Za-z0-9_])", _text))
+                      + len(_nametok.findall(_text)))
+            else:
+                _n = (len(re.findall(r"\$player\." + re.escape(_fid) + r"(?![A-Za-z0-9_])", _text))
+                      + len(re.findall(r"@player\." + re.escape(_fid) + r"(?![A-Za-z0-9_])", _text)))
+            _counts[_fid] = _n
+            if _n == 0 and not _cf.get("sets_portrait"):
+                _dead.append(_fid)
+        _shape = " · ".join(
+            f"{k} {v}x" + (" (portrait)" if any(c.get("id") == k and c.get("sets_portrait")
+                                                for c in _cfs) else "")
+            for k, v in _counts.items())
+        gate("what she picks is read", not _dead,
+             f"{len(_counts)} field(s) — {_shape}"
+             + ("" if _dead else "  (counts reported, not judged — see the header)")
+             + " · field median 4 reads per field",
+             ([f"declared and NEVER READ: {', '.join(_dead)}",
+               "the player is asked who she is and the answer is discarded — the-want.md "
+               "§1 W1. The field reads each created field a median of 4 times and the "
+               "median game leaves none unread",
+               "print it back: `@player` for her name, `@player.<field_id>` for the rest "
+               "(or the raw `$player.<field_id>`) — the payload is a WORD, not a gate",
+               "or drop the field. Refusing costs nothing: half the corpus ships no "
+               "creation step at all"] if _dead else []))
+
     # G19 — sentence length. The first gate here that measures WRITING.
     sent_words = [len(s.split())
                   for c in model for b in c["beats"]
