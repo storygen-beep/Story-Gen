@@ -5,6 +5,50 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-29 — pre-ship discipline: the tools were all there and the loop named half of them
+
+**Why.** `DOCTRINE_GAPS.md` item 11, the last open row in the inventory. Its governing rule was
+**"it arrives as instruments or not at all"** — §3a having ruled out the checklist, after v1's
+thirteen-point pre-ship audit was followed by the exact bug it was written to prevent.
+
+**Where it actually stood.** The row was written 2026-08-23 and had gone stale the way three other
+rows did today. Since it was written, **three more instruments shipped**: `--release` (the built
+artefact — dev mode, missing media, three version numbers that drift), `--saves` (the difference
+between two releases), and `--selfcheck` (this skill against its own scoreboard) — beside the 46
+gates and 28 lints. The instruments requirement was already met.
+
+⚠️ **What was left was WIRING, and it is the third instance of that shape found today.** The loop
+named **two** of the four. It ran 1–5b and then stopped at *"Ship, and log"*, while the six-step
+build procedure and `--release` sat **two hundred lines below** in `§ Shipping the build`. An author
+walking the loop reached the end and was never sent to the check named after the release boundary —
+which is how `the_inheritance` reached the published grid carrying a full `--dev --debug` build with
+115 missing files.
+
+Same shape as `the-voice.md` R6 (cited three times, never written) and `STATUS.md`'s `ne` row
+(corrected five days late): **built, documented, and not connected to the place someone would look.**
+
+**What changed.** `references/the-release.md` only:
+
+- **Step 6 is now "Build, and cross the boundary"** — the six steps in one line each, ending on
+  `python3 scripts/gates.py --release <slug>`, with LO's rule restated at the point of use: *dev
+  mode and missing media block RELEASE, not testing.*
+- **Logging becomes step 7**, unchanged in content.
+- **A table of the loop's four instruments in the order they run**, with what each one can see —
+  source, two releases diffed, the built artefact, the skill itself.
+
+⚠️ **CLOSED AS TOOLS-AND-WIRING, NOT AS A GUARANTEE, AND THE FILE SAYS SO.** Nothing checks that an
+author ran any of them and nothing can — a check that a list was read **is** the checkbox §3a rules
+out. What holds is step 7: *anything left in a list is left on purpose, named in the ledger, with
+the reason.* That is a discipline. It is written that way on purpose so the closed row is not read
+as more than it is.
+
+**Verified.** `--selfcheck` green — 46 gates, 28 lints, 4 modes, 46/46 rows. `gates.py` untouched,
+so no verdict can move; confirmed on `mrs_vance` **44/44** and `back_home` **16/36**. `cite_check`
+unchanged at **20 drifted / 8 missing** — the new step adds no `file:line`. **Tier 3 is now closed
+and every item in the inventory is addressed.**
+
+---
+
 ## 2026-08-29 — the prose quotes the fields, and ten of eleven games quote their own rent by hand
 
 **Why.** `DOCTRINE_GAPS.md` item 13, the last never-studied subject in the inventory. v1 shipped

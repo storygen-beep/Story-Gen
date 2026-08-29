@@ -80,12 +80,46 @@ One command, like step 5 and like `--release`, and for the same reason: four gre
 a checklist, and §3a already ruled on those. It needs the archive step 3 keeps — no archive, no diff,
 and it exits 2 rather than pretending.
 
-**6. Ship, and log.** Record in `v2_state.json`: the subject, what it added, **what it
+**6. Build, and cross the boundary.** Everything above judges the SOURCE. A release is the one
+moment the **artefact** is what is judged, and until 2026-08-28 no instrument in this project could
+see a build at all. The six steps — media harvested, rebuilt without `--dev` or `--debug`, archived,
+`version` set in both places, `dev: true` dropped in the same commit, ledger promises reconciled —
+are in **§ Shipping the build** below, and they end on one command:
+
+```bash
+python3 scripts/gates.py --release <slug>
+```
+
+> ⚠️ **This step exists because the loop used to stop at "ship" and the procedure lived two hundred
+> lines further down.** An author walking the loop reached the end and was never sent to the check
+> named after the release boundary. That is how `the_inheritance` reached the published grid
+> carrying a full `--dev --debug` build with 115 missing files. **The rule is LO's and it is not the
+> obvious one: dev mode and missing media block RELEASE, not testing** — a test build with labelled
+> placeholders and a jump list is a *good* test build.
+
+**7. Log.** Record in `v2_state.json`: the subject, what it added, **what it
 opened**, the gate scores, and **the lint figures you are shipping with** — at minimum the
 own-words count and anything you consciously left. A number in the ledger is one that has to come
 down next time; a number only in a terminal is one nobody is holding. This is the same mechanism
 the anchor share already runs on, and the reason the anchor gets budgeted and the word list does
 not is only that one of them was written down.
+
+---
+
+### The loop's four instruments, in the order they run
+
+| step | command | what it can see |
+|---|---|---|
+| 5 | `gates.py <slug>` | the source — 46 gates, 28 lints |
+| 5b | `gates.py --saves <slug>` | the difference between **two** releases — what a rename stranded |
+| 6 | `gates.py --release <slug>` | the **built artefact** — dev mode, missing media, three version numbers |
+| — | `gates.py --selfcheck` | this skill against its own scoreboard; needs no game |
+
+⚠️ **Nothing checks that you ran them, and nothing can.** `DOCTRINE_GAPS.md` §3a rules out the
+checkbox, and a check that an author read a list is the checkbox. What holds instead is step 7:
+**anything left in a list is left on purpose, named in the ledger, with the reason.** A lint you
+cannot explain leaving is a lint you have not read. That is a discipline, not a guarantee, and it
+should not be written up as one.
 
 ---
 
