@@ -5,11 +5,131 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-29 — the Attack Panel, and the finding that it must NOT get an instrument
+
+**Why.** `the-release.md:43` is step 3 of the release loop. The panel was the last of the four
+roster entries still described in prose, and by this skill's own record it is the highest-value
+one: *"every cheap catch in our history happened here; every expensive one happened after
+shipping."*
+
+**What changed.** **NEW `.claude/agents/v2-attack.md`** — `subagent_type: "v2-attack"`, one lens
+per instance, run in one message. Read-only: `Bash, Read, Grep, Glob`. **The same file does the
+verify pass**: hand an instance somebody else's finding instead of a lens and its job flips to
+refuting it. Plus the Panel section of `references/agents.md`, the agents row and B-list item 2 in
+`STATUS.md`, and the roster paragraph in `SKILL.md`.
+
+### The finding: it gets NO instrument, and that is measured
+
+The other three agents each got a deterministic thing they must not re-derive — `playtest.py`,
+`pitch_pack.py`, `gates.py --beat`. The obvious move was to build a fourth. **Three candidates
+were prototyped read-only against every v2 game first, and all three came back empty:**
+
+| candidate check | result |
+|---|---|
+| a meter whose every mover is itself gated at or above the rung it feeds — the circular soft-lock | **0 across 8 games** |
+| a meter read by a condition and written by nothing | **0 across 9 games** |
+| a gate above the meter's reachable ceiling | **1 hit, and it was the probe's own bug** |
+
+⚠️ **The third one is the instructive one.** It reported `vesper`'s `player.loop_npc_pleasure` as
+*"gated at 50 but only ever `set`, max 0"*. The meter climbs **8–14 at a time** — the effect's
+value is `{ type = "random", min = 8, max = 14 }`, a dict, and the probe's
+`isinstance(val, (int, float))` filter dropped every one of them. **The only "finding" a nine-game
+sweep produced was noise.** That is the Panel's own measured hit rate in miniature (4 confirmed
+against 6 refuted in one prior audit; 17 against 2 in another), and it is why the verify pass is
+the load-bearing part of the agent rather than a nicety.
+
+A fourth candidate was considered and dropped without being built: **days-to-reach arithmetic**.
+It runs — but the best-case number it produces is a fantasy (`player.arousal` to rung 65 in *0.2
+days*) because it assumes every adder fires the same day and ignores presence windows, energy,
+day caps and the gates in between. Shipping that number would have been inventing a threshold with
+extra steps.
+
+**So the Panel's first instruction is to run `gates.py` and `pitch_pack.py` and then report
+nothing they already report.** 46 gates and 28 lints already hold the ground of *"broken in a way
+we have seen before"* — the scoreboard's own honest limit is that it has *"never once found a new
+one"*, and new is the Panel's half. It attacks a design that has not been built, where nothing can
+be parsed because nothing exists yet.
+
+### One real fix carried out of the prototyping
+
+`pitch_pack.py` had the same `isinstance(val, (int, float))` blind spot in its economy split, so a
+randomised money grant would have been counted in the total and in neither column. Added `_sign()`,
+which reads the random shape, plus a line that says how many values the split could not read.
+**No game randomises money today**, so no output changes — this is here so the first one that does
+is not silently uncounted.
+
+### And `gates.py`'s own citations are nearly all invisible to the checker
+
+Two citations to `gates.py` drifted during this work — four lines added to the module docstring
+moved `Beat.explicit` from `:405` to `:409` and `words_mode` from `:6515` to `:6519`. **Both were
+caught by hand. `cite_check.py` flagged neither.**
+
+Cause: **26 of 28 `gates.py:NNNN` citations in this library resolve as UNVERIFIABLE**, because the
+checker anchors on a code token *following* the citation and these are written in prose —
+`` `Beat.explicit` (`gates.py:409`) `` puts the identifier before it. The file this skill edits
+every single session is the one whose citations nothing checks. Recorded in `STATUS.md`; the fix
+is small (let the anchor scan look backwards too) and is **not done**, because the task was the
+Panel.
+
+### The live run — four lenses, then two verifiers
+
+Run against `mrs_vance` 0.1 on a design that does not exist: the Cade-name release all three
+Pitchers converged on. Four attackers (`numbers`, `timing`, `flag chains`, `prose-vs-mechanic`),
+one lens each, one message, no shared context. **18 raw findings.** Nine were then verified
+directly against source by the Owner, and two were handed to fresh `v2-attack` instances told to
+refute them.
+
+⚠️ **Three of the four lenses independently found the same defect, by three different roads.**
+The pitch said *"repeatable at `max_triggers_per_day = 1`"*. That key is read off a canvas
+**trigger** (`v2.py:11634`) and all five of this game's NPC sex loops are **triggerless**,
+node-linked from their hubs — so on the house pattern the cap parses, ships green and throttles
+nothing. `flag chains` got there from the five triggerless loops; `timing` from the
+`canTriggerCanvas` call site; `numbers` from the game's own source comment. Two of them separately
+noted that **`gates.py:2708` scores that dead cap as a real route brake**, so the build stays green
+on a throttle the runtime never consults.
+
+**The best finding was not about the change at all.** `fill_finished` — the finished-world word
+budget every location declares in `v2_state.json` — is read by **nothing**: `grep` returns 0 in
+both `gates.py` and `pitch_pack.py`. Unread, it has rotted. `kerr_crossing` declares
+`fill = 620` and `fill_finished = 300`, a finished budget **below** its working budget, with 588
+words already built. And Σ`fill_finished` is **16,900**, not the 16,000 the game's own decision
+note cites — so the anchor share recorded in that note (28%) is wrong; it is 26.6%. All three
+verified. ⚠️ **This also indicts `pitch_pack.py`**, which prints `fill` and never `fill_finished`,
+so a Pitcher sees `kerr_crossing 588 / 620` and cannot know the finished plan says 300.
+
+**The verify pass earned its keep on the first run.**
+
+- **REFUTED** — *"`standing` already owns 'her name at the bar', and the climb costs standing −8
+  over four nights."* Every load-bearing claim failed. The file's own S1b note says
+  *"`standing` is the audience meter. The named men run on trust and want and are untouched
+  here."* `cade_loop_played` is set in the same effects array that adds `want +4` behind a gate of
+  42, so want is minimum **46** when the flag lands — three clicks, not four; −6, not −8. Four
+  standing-free want rungs exist, one of them (`walkin_bar_cade`) **in the same room**. And
+  `standing` gates nothing: every use is a prose band or a walk-in that fires *more* as it falls.
+  The finding was plausible and fully cited. It was wrong.
+- **CONFIRMED, with two of five claims corrected** — the bar→yard exit really does skip
+  `kerr_crossing`'s 20 minutes, proven end-to-end in the **built** artefact
+  (`entry_costs {"time": 20}` on the crossing, `{}` on bar and yard). But the finding cited the
+  `choices` arm, and this game uses `exit_block.type = "location"` for all 25 of its location
+  exits — right conclusion, wrong branch, a reader following the citation lands where the game
+  never goes. Its "23:45" arithmetic assumed a 5-minute exit that is stated nowhere. The verifier
+  also added what the finding missed: the skipped hop re-evaluates `clean >= 35`, so the exit is
+  not merely 20 free minutes, it is **the only way out of the bar that cannot be blocked**.
+
+Both outcomes are the mechanic working. One killed a finding; one kept a finding and fixed its
+evidence.
+
+**Verified.** `--selfcheck` 46 gates / 28 lints / 5 modes / 91 rules / 0 broken pointers.
+`cite_check` back at the baseline exactly — **74 OK / 10 drifted / 6 missing**. `pitch_pack.py`
+still clean on all ten games with a built TOML and every economy split still sums.
+
+---
+
 ## 2026-08-29 — the Prose Maker was blocked on an instrument its own spec had named
 
 **Why.** `references/agents.md` specifies the Prose Maker as *"one beat, from a spec it cannot
 argue with, hitting one measurable target."* **No such measurement existed.** `Beat.explicit`
-(`gates.py:405`) is a property on a `Beat` assembled out of parsed TOML blocks, so it needs a built
+(`gates.py:409`) is a property on a `Beat` assembled out of parsed TOML blocks, so it needs a built
 game; `--words` reports vocabulary and nothing else. Nothing in this skill could score a loose
 paragraph — so the agent could not be told whether it had succeeded, and an agent that cannot be
 told that is not an agent.

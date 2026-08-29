@@ -181,7 +181,12 @@ are not using.
 CAST?** The field splits 8 roster / 9 ladder with nothing between them, and all five v2 games landed
 in the empty middle because nobody asked. Declare `board.who_climbs` before naming a meter.
 
-The agent roster for each phase is in `references/agents.md`. The state schema is in
+**The agent roster is in `references/agents.md`, and as of 2026-08-29 all four are BUILT** —
+`v2-player` (plays the build), `v2-pitcher` (three per release, no shared context),
+`v2-prose` (one beat against `gates.py --beat`), `v2-attack` (one lens per instance, before the
+build). Three carry a deterministic instrument; the Panel carries none, and `agents.md` records
+the three checks that were prototyped for it and came back empty, so nobody builds them twice.
+The state schema is in
 `references/state.md`. Engine facts are in `references/engine.md` — and **only** there.
 
 ## The scoreboard — what fails, and where to read about it

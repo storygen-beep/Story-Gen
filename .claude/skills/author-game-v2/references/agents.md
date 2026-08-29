@@ -101,6 +101,32 @@ section's design and it is LO's call, so it is recorded and not done.
 
 ## The Attack Panel — before the build, never after
 
+> ✅ **BUILT 2026-08-29.** The agent is `.claude/agents/v2-attack.md`, callable as
+> `subagent_type: "v2-attack"`. Give each instance **one lens** and run them in one message.
+> The same file does the verify pass: hand an instance somebody else's finding instead of a
+> lens, and its job flips to refuting it.
+>
+> ⚠️ **It is the one agent with NO instrument of its own, and that is measured rather than
+> assumed.** The Player got `playtest.py`, the Pitchers got `pitch_pack.py`, the Prose Maker got
+> `--beat`. Three candidate checks were prototyped for this one against every v2 game and all
+> three came back empty:
+>
+> | candidate | result |
+> |---|---|
+> | a meter whose every mover is itself gated at or above the rung it feeds — the circular soft-lock | **0 across 8 games** |
+> | a meter read by a condition and written by nothing | **0 across 9 games** |
+> | a gate above the meter's reachable ceiling | **1 hit, and it was the probe's own bug** — `vesper`'s `loop_npc_pleasure` climbs 8–14 at a time through a `{type="random"}` value the filter dropped, and the probe called it "only ever set, max 0" |
+>
+> **The tooling is not missing.** `gates.py` already occupies the space of "broken in a way we
+> have seen before" with 46 gates and 28 lints, and the Panel's whole value is the other half —
+> a design that has not been built, where nothing can be parsed because nothing exists yet. So
+> the agent's first instruction is to run `gates.py` and `pitch_pack.py` and then **report
+> nothing they already report.**
+>
+> The third probe's failure is kept above on purpose: it is the only "finding" a nine-game sweep
+> produced, and it was noise. That is the panel's own hit rate in miniature, which is why the
+> verify pass below is not optional.
+
 **Job:** try to break the *design*, while changing it is still cheap.
 
 Lenses, each drawn from a run that caught something real:
@@ -125,7 +151,7 @@ catches failure modes that redundancy cannot.
 >
 > ⚠️ **It was blocked on that instrument for as long as this section has existed, and the
 > section never noticed.** The spec below promises "one measurable target" — and nothing in
-> this skill could measure a loose paragraph. `Beat.explicit` (`gates.py:405`) is a property
+> this skill could measure a loose paragraph. `Beat.explicit` (`gates.py:409`) is a property
 > on a `Beat` assembled out of parsed TOML blocks, so it needs a built game; `--words` reports
 > vocabulary and nothing else. **The agent's own spec named a target that did not exist**, and
 > an agent that cannot be told whether it succeeded is not an agent, it is a wish.

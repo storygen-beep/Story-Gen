@@ -32,7 +32,7 @@ may cost (the economy).
 
 ⚠️ IT SCORES NOTHING AND ALWAYS EXITS 0.
 
-This is the same rule `--words` carries (`gates.py:6515`) and for a harder reason
+This is the same rule `--words` carries (`gates.py:6519`) and for a harder reason
 here. Four checks in this project's history were withdrawn for failing something
 correct — study 2's R4, study 6's anchoring check, P0, and the rule-pointer scan's
 first cut, which failed an accurate history entry. A fact pack that graded would
@@ -267,6 +267,29 @@ def _flag_reads(model):
             if it.get("flag_key"):
                 reads[it["flag_key"]][kind] += 1
     return reads
+
+
+def _sign(val):
+    """+1 / -1 / 0 for an effect value, INCLUDING the random shape.
+
+    ⚠️ An effect value is not always a number. `vesper` writes 32 of them as
+    `{ type = "random", min = 8, max = 14 }`, and an `isinstance(val, (int, float))`
+    filter drops every one of them silently. That exact filter, in a throwaway probe,
+    reported `player.loop_npc_pleasure` as "gated at 50 but only ever set, max 0" —
+    a meter the game climbs 8-14 at a time, and the only "finding" a nine-game sweep
+    produced. It was the probe, not the game.
+
+    Today no game randomises money, so nothing downstream changes; this is here so
+    that the first one that does is not silently uncounted.
+    """
+    if isinstance(val, (int, float)):
+        return (val > 0) - (val < 0)
+    if isinstance(val, dict):
+        lo, hi = val.get("min"), val.get("max")
+        for v in (lo, hi):
+            if isinstance(v, (int, float)) and v:
+                return (v > 0) - (v < 0)
+    return 0
 
 
 def _movers(game):
@@ -576,12 +599,15 @@ def pack(slug, toml_path, state_path, as_json=False):
     if rent.get("enabled"):
         print(f"  obligation      {rent.get('currency_symbol', '')}{rent.get('amount')} "
               f"every {rent.get('due_day')}, collected by {rent.get('collector_npc')}")
-    earners = [(c, op, val) for c, op, val in mv.get(("player", cur), [])
-               if isinstance(val, (int, float)) and val > 0 and op in ("add", None)]
-    spenders = [(c, op, val) for c, op, val in mv.get(("player", cur), [])
-                if isinstance(val, (int, float)) and (val < 0 or op == "subtract")]
-    print(f"  {cur} moves on {len(mv.get(('player', cur), []))} canvas(es) — "
+    moves = mv.get(("player", cur), [])
+    earners = [(c, op, v) for c, op, v in moves if _sign(v) > 0 and op in ("add", None)]
+    spenders = [(c, op, v) for c, op, v in moves if _sign(v) < 0 or op == "subtract"]
+    print(f"  {cur} moves on {len(moves)} canvas(es) — "
           f"{len(earners)} add, {len(spenders)} take")
+    unread = len(moves) - len(earners) - len(spenders)
+    if unread:
+        print(f"  ({unread} carry a value shape this split cannot read — counted in the "
+              f"total, in neither column)")
     costed = [c for c in model if c["costs"]]
     print(f"  {len(costed)} canvas(es) carry an engine `costs` gate (the engine blocks "
           f"on affordability)")

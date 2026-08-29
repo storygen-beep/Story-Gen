@@ -61,8 +61,8 @@ session is wrong by the end of that session. Run `wc -l` if you need one.
   references/the-map.md                the world as a place someone could draw
   references/state.md                  v2_state.json schema
   references/the-release.md            the unit of work
-  references/agents.md                 the roster — 3 of 4 BUILT (Player, Pitchers, Prose
-                                       Maker). Only the Attack Panel is still prose.
+  references/agents.md                 the roster — ALL FOUR BUILT. Agent files live in
+                                       .claude/agents/v2-{player,pitcher,prose,attack}.md
   references/the-want.md               the spec re-read every release
   templates/board.toml                 fillable. ⚠️ does NOT parse as-is — `<tier_1> = 0` is a
                                        placeholder, not TOML. This line read "parses" until
@@ -269,7 +269,7 @@ merged `7_final_game.toml`, and `gates.py` needs that file. The other seven (`ja
 
 | | |
 |---|---|
-| **The agents** | **Three of four shipped 2026-08-29.** The **Player** (`scripts/playtest.py` + `v2-player`), the **Pitchers** (`scripts/pitch_pack.py` + `v2-pitcher`, three-in-one-message), the **Prose Maker** (`gates.py --beat` + `v2-prose`). ⚠️ **All three took the same shape, and it is the shape, not the prompt, that was the work**: a deterministic source of facts or measurements the agent must not re-derive, plus a rule that keeps its output from being noise. The Player's is *a red is a hypothesis until its cause is `file:line`*; the Pitcher's is *everything you may name is in the pack*; the Prose Maker's is *measure with the build's own instrument before you return*. ⚠️ **The Prose Maker had been blocked on a missing instrument for as long as `agents.md` had described it, and that file never noticed** — its spec promised "one measurable target" while nothing here could score a loose paragraph. **Only the Attack Panel is still prose**, and it is the highest-risk of the four because it emits opinions shaped like defects. |
+| **The agents** | **ALL FOUR SHIPPED 2026-08-29** — the Player (`scripts/playtest.py` + `v2-player`), the Pitchers (`scripts/pitch_pack.py` + `v2-pitcher`), the Prose Maker (`gates.py --beat` + `v2-prose`), the Attack Panel (`v2-attack`, one lens per instance, same file does the verify pass). This row read *"all still prose… still the biggest architectural hole"* for weeks. ⚠️ **Three of the four took the same shape and the fourth deliberately did not.** Three got a deterministic instrument the agent must not re-derive; the Panel got none, because three candidate checks were prototyped against every v2 game and all three came back empty (0 circular soft-locks in 8 games · 0 read-never-written meters in 9 · one ceiling hit that was the probe's own bug). `gates.py` already holds that ground with 46 gates and 28 lints. What every one of the four does share is the second half: **a rule that keeps its output from being noise** — *a red is a hypothesis until its cause is `file:line`* · *everything you may name is in the pack* · *measure with the build's own instrument before you return* · *every finding gets an adversarial verify whose job is to refute it*. |
 | **Evals** | None. "v2 beats v1" cannot be scored. |
 | **A cold reader** | Only one person has ever run the skill. |
 | **`the_season`'s fill** | 4,412 words against 15,500 declared. Its one red gate, and the real problem with the game. |
@@ -277,6 +277,8 @@ merged `7_final_game.toml`, and `gates.py` needs that file. The other seven (`ja
 | **`block_pool` in practice** | ⚠️ **This row read *"used by zero v2 games"* until 2026-08-29 and was wrong.** Counted in phase files, merged output excluded: `the_long_summer` **152** · `mrs_vance` **77** · `under_one_roof` **14** · `vesper` **12** · `the_long_summer_test` **1**. `mrs_vance` is the v2 reference game, so the primitive did reach v2 — what is true is narrower: **five games of thirty**, and the doctrine still has no worked example of its own. |
 | **One engine fact** | The do-not-cite list in `engine.md` is down to a single bullet — the cooldown count for random events. ⚠️ This row said **three** until 2026-08-29; the list held **two**, and one of those (*which identifiers orphan a live save when renamed*) had been answered on 2026-08-29 by `the-returning-player.md` §2–§5 and left sitting there. Struck, and the row recounted. |
 | **`ne` — the canvas half is DONE; only quest cards are open** | ⚠️ **This row said the opposite until 2026-08-29, and the stale version was read back and acted on.** It carried *"three whitelist entries, no runtime work… not applied"* — the exact sentence `engine.md` §37 was rewritten on **2026-08-24** to correct, on the day it shipped the fix. A canvas condition's operator is not validated by the importer at all, so `ne` has always worked there; `setup.checkSingleCondition` got its case and `setup.formatCanvasConditions` got its `≠` the same day. **What is still open is one evaluator**: `setup.checkQuestsCondition` (`v2.py:15536`) has a five-case switch and quest cards reject `ne` at `template_import.py:5509`, deliberately and with a comment saying so. **Parked on evidence, not on nerve** — `ne` is legal on a canvas today and authored **zero** times across all thirty games, because until 2026-08-29 no doctrine file offered it. `the-board.md` now names the operator set; if a card then needs `ne`, the evaluator case and the whitelist go in together. |
+| **`gates.py` citations are mostly invisible to `cite_check`** | ⚠️ Found 2026-08-29. **26 of 28 `gates.py:NNNN` citations in this library resolve as UNVERIFIABLE**, because the checker anchors on a code token *after* the citation and these are written in prose — `` `Beat.explicit` (`gates.py:409`) `` puts the identifier BEFORE it. So the file this skill edits every single session is the one whose citations nothing checks. Two of them drifted on 2026-08-29 when four lines were added to the module docstring (`:405`→`:409`, `:6515`→`:6519`); **both were caught by hand and neither was flagged.** The fix is small — let the anchor scan look backwards as well as forwards — and it is not done. |
+| **`fill_finished` is read by nothing** | ⚠️ Found 2026-08-29 by the Attack Panel's first run. Every location declares a finished-world word budget in `v2_state.json`; `grep fill_finished` returns **0** in both `gates.py` and `pitch_pack.py`. Unread, it has rotted: `kerr_crossing` declares `fill = 620` and `fill_finished = 300` — a finished budget *below* its working budget, 588 words already built — and Σ`fill_finished` is **16,900** against the 16,000 the game's own decision note cites, making the anchor share recorded there (28%) wrong by 1.4 points. `pitch_pack.py` prints `fill` only, so a Pitcher cannot see any of this. Not fixed. |
 | **The study's instruments** | Four of them published numbers and were then discarded — F1's opening walker, F's act-gate driver, and three of the recheck's rebuilds. Two of those numbers are now permanently unrecoverable. `probe_K.py` is on disk with a `main`; the earlier ones are not, and nothing enforces that they should be. |
 
 ## Promotion criteria — still NOT met
@@ -410,24 +412,20 @@ predates the recheck entirely. Corrected above.
 ## B · The other work, unchanged in priority
 
 1. **`the_season`'s fill.** Its one red gate. 4,412 of 15,500 words.
-2. **Build the remaining agents.** Now **one** role rather than four. **The Player, the Pitchers and the
-   Prose Maker all shipped 2026-08-29**, and every lesson these lines were holding for their specs
-   is in `scripts/playtest.py`, `scripts/pitch_pack.py` and `gates.py --beat` as code.
-   - **The Attack Panel is next**, and it is the highest-value one by this skill's own record —
-     `the-release.md:43`, *"every cheap catch in our history happened here; every expensive one
-     happened after shipping."* It is also the highest-risk, because it emits opinions shaped like
-     defects, which is precisely the failure that took R4, study 6's anchoring check, P0 and the
-     rule-pointer scan's first cut. Its ten lenses already exist in `agents.md`. What it needs is
-     a verify bar at least as hard as the Player's `file:line`.
-   - **The Prose Maker is no longer blocked.** `gates.py --beat` measures loose prose on the
-     build's own regexes and constants, so the agent can be told whether it hit its target. The
-     lesson worth keeping: the blocker was named in the agent's own spec — *"one measurable
-     target"* — and sat there unread for as long as the section existed.
-   ⚠️ **The caveat this line carried was half right and is worth keeping in its corrected form**:
-   it said *"a pitch is the one agent output with no check against it."* True of the pitch, false
-   of its inputs — `pitch_pack.py` is exactly that check on everything a pitch may name, and it is
-   what stops a contextless Pitcher inventing a room. The judgement stays LO's; the facts no
-   longer do.
+2. **Build the remaining agents — DONE 2026-08-29.** All four are built: `v2-player`,
+   `v2-pitcher`, `v2-prose`, `v2-attack`. What this line was actually holding, now that it is
+   closed: **the prompt was never the work.** Each agent needed either a deterministic input it
+   must not re-derive or proof that one was not needed, plus a rule that stops its output being
+   noise. The Player's harness collected seven scripts that already existed; the Pitchers' pack
+   exists because no-shared-context denies the *conversation* and must not deny the *facts*; the
+   Prose Maker was blocked on a target its own spec had named and nobody had read; the Panel got
+   no instrument and the three empty prototypes are recorded in `agents.md` so nobody builds them
+   again.
+   ⚠️ **Two open questions came out of the runs and both are LO's, not mine.** Whether each
+   Pitcher should get a forced angle — three independent Pitchers returned the *same subject* on
+   the first measured run, because removing the conversation does nothing about identical facts.
+   And whether the Panel's verify pass should be a separate agent rather than the same file
+   invoked differently.
 3. **A release that adds zero locations.** Never demonstrated, and it is what the release model
    claims to be for.
 4. **A worked `block_pool`.** The doctrine is written and five games use the primitive
