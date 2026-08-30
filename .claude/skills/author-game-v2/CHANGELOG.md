@@ -5,6 +5,101 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-30 — the load rules: three subtractions this file's own doctrine taught
+
+LO read `the_route`'s scene content beside `new-life-project` and said, four rewrites running, that
+ours was harder to follow. He was right about something no instrument here measures.
+
+**The prose is not fat. It is loaded.** The 2026-08-28 padding study is not wrong — it measured
+`-ly` adverbs, hedges, commas, repeated trigrams and vocabulary variety over 25 field games and 14
+of ours, found our prose leaner than the field's leanest, and concluded there was nothing to catch.
+That conclusion holds for those five markers and covers none of the three below, because it
+measured **volume** and the defect is **load**: what a reader must hold, infer or already know to
+finish a sentence.
+
+### The measurement — and it indicts this skill, not one game
+
+27 corpus games (14.5M prose words) against every game in this repo, split by authoring skill:
+
+| | gloss / 1k words | negation, % sent | history, % sent |
+|---|---|---|---|
+| field p50 · p90 · MAX | 0.06 · 0.19 · **0.24** | 7.59 · 13.56 · **20.22** | 1.64 · 3.94 · **5.41** |
+| **games THIS skill authored (9)** | **1.34 – 2.71** | **22.5 – 38.0** | **4.8 – 12.1** |
+| games the v1 skill authored (6) | 0.00 – 0.66 | 9.8 – 27.3 | 1.3 – 6.6 |
+| above the field MAXIMUM | v2 **9/9** · v1 3/6 | v2 **9/9** · v1 1/6 | v2 **8/9** · v1 2/6 |
+
+Nine of nine games this skill authored are above the whole field's maximum on the first two counts,
+and the lowest runs 5.6x the field's worst game on the gloss. The games written before this doctrine
+mostly are not. `the_route`, the game that prompted this, is **fifth** — `the_allowance`,
+`off_season`, `steam` and `seventh_day` are worse.
+
+**"Sweeping backwards" is the mechanism.** *Replace the hedged clause with the specific one* tells an
+author to attach a specifying clause, and `, which is the county's way of saying skilled tasks
+approved` **is** a specifying clause. The rule is obeyed and the defect is the obedience — which is
+exactly what "Dashes stay rare" predicted in its closing paragraph: *a register taught only in
+additions drifts one direction, and the author cannot feel it happening from inside the prose.*
+These are subtractions two, three and four.
+
+### What shipped
+
+- **`references/register.md`** — new section **"The load rules — hand the reader a fact, not a thing
+  to work out"**, sibling to "Dashes stay rare" and built on the same shape (why → measured table →
+  rule → ⚠️ the wrong fix → real before/after). Three rules: **L1** no `, which is` / `, which means`
+  · **L2** say what happened, not what didn't · **L3** a repeatable screen carries no history. Every
+  example is a real line from a shipped game, and the worked pass is `work_roy_morning`: 319 words /
+  17 sentences / 53% over-20-words / 41% negation / 29% history → 254 / 36 / 0% / 3% / 0%. **Sixty-five
+  words shorter with every fact intact.**
+- **`references/register.md`** — new subsection under "The words the player has to already own":
+  **"The same rule for a phrase, not just a word."** That section was scoped to locale-locked *nouns*
+  against a curated list, so *"let yourself in"* — three facts folded into an idiom, every word of it
+  common — passed straight through. Extended to phrasal idiom where a plain verb exists. **Prose rule
+  only, no instrument**: the idiom probe was a hand-built pattern list, far too weak for a number, and
+  **speech is exempt in full.**
+- **`scripts/gates.py`** — three lints, `the sentence explains itself` · `what did not happen` ·
+  `history on a repeatable screen`, beside the existing prose lints. Each carries its field
+  percentiles and the word LIST in the parenthetical.
+- **`SKILL.md`** — all three added to the lint block. Tally **28 → 31**.
+
+### Three decisions worth the record
+
+**Lints, not gates — deliberately.** The separation is total on two of three, so a threshold is
+defensible on the numbers and is still refused: it would red every one of the nine games this skill
+has already authored on the day it lands, which is the R4 / study-6 / P0 failure this skill has
+turned down four times. The fix is per-sentence, so the useful artefact is the sentences.
+
+**Narration only, and the first cut had it wrong.** `PROSE_BLOCKS` (`gates.py:324`) folds `dialog` in
+with `paragraph`, so the first version scored speech and flagged a character's own line — *"That's
+the county's arithmetic, not mine."* The new rule exempts speech in full, so a lint that scores it
+contradicts the doctrine it serves. `_narration_by_canvas` walks the game dict instead of the model.
+⚠️ **The basis now differs from the field figure, in the field's favour**: the corpus is built HTML
+with speech inline and cannot be split, so the quoted percentiles are all-text. Excluding speech
+**raises** our numbers on every count and every game (`the_route` 2.26 → 2.74 gloss, 12.1 → 16.0
+history), so the reported gap is the conservative one — it can understate the drift, never invent it.
+
+**Two checks measured and NOT built**, recorded in the section so they are not proposed again:
+**fragments — REFUSED** (field runs 5.3% `the-company` to 58.6% `family-ties`; no threshold survives
+that range — the fifth check this skill has measured and turned down), and **stative `is` — DEFERRED**
+(ours straddles the field on both sides, `late_shifts` 7.7% below its floor and `back_home` 45.1%
+double its ceiling, and it is downstream of L1 anyway, since a gloss is usually "which **is**").
+
+⚠️ **The history regex is the soft one, and it was tightened before any figure was taken.** The loose
+version scored *"moved his hand"* as history. The shipped pattern keeps temporal markers only and was
+checked against a 14-case fixture (7 real history lines, 7 action lines) at 0 errors. It still
+over-counts a sentence that merely mentions a duration; the lint says so and says to read the list.
+
+### Verified
+
+`--selfcheck` **46 gates / 31 lints / 5 modes**, index current. Gate verdicts diffed against the
+committed `gates.py` across **all 23 games with a built TOML — zero changed.** The lints discriminate:
+`the_allowance` 2.76 / 34.5% / 8.9% against `late_shifts` 0.18 / 10.8% / 0.5%. `cite_check` back to
+its baseline **74 OK / 10 drifted / 16 total** — the insert pushed `gates.py:1641` to `1785` and broke
+one citation in this file, re-anchored above; `pitch_pack.py:35`'s `gates.py:6519` → `6663` was fixed
+too, though `cite_check` scans only `.md` and never counted it.
+
+**No game TOML touched.** The `the_route` rewrites are written and measured and land separately.
+
+---
+
 ## 2026-08-29 — three follow-ups, and the first one turned out not to exist
 
 Three items came out of the Attack Panel's run. LO called all three. **The first was withdrawn on
@@ -6412,7 +6507,7 @@ Nobody applied it to words.** Third instance of a known mechanism.
   `the-map.md` ×2, `the-board.md` ×2, `gates.py`; `rota`/`rotas` → `roster`/`rosters` ×3 across
   `the-board.md`, `the-map.md`, `the-release.md`; `fortnight` → `two weeks` ×2.
 - **Deliberately NOT rewritten — quotations of real games are evidence.** `the-surfaces.md`'s five
-  `airer` lines, `SKILL.md:174`, `the-voice.md:92` and `gates.py:1641` all quote `the_allowance`'s
+  `airer` lines, `SKILL.md:174`, `the-voice.md:92` and `gates.py:1785` all quote `the_allowance`'s
   real canvas *"Get the washing in off the airer"* (`the_allowance/7_final_game.toml:1163`).
   `the-economy.md:73` quotes `forty_miles`' declared obligation (`forty_miles/v2_state.json:376`).
   `gates.py:252`'s `knickers` is inside the frozen explicit lexicon — it exists to *detect* the

@@ -32,7 +32,7 @@ may cost (the economy).
 
 ⚠️ IT SCORES NOTHING AND ALWAYS EXITS 0.
 
-This is the same rule `--words` carries (`gates.py:6519`) and for a harder reason
+This is the same rule `--words` carries (`gates.py:6663`) and for a harder reason
 here. Four checks in this project's history were withdrawn for failing something
 correct — study 2's R4, study 6's anchoring check, P0, and the rule-pointer scan's
 first cut, which failed an accurate history entry. A fact pack that graded would

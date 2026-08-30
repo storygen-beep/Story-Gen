@@ -1190,6 +1190,150 @@ def lint_world_prose(model, game):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# The load lints — register.md "The load rules"
+# ─────────────────────────────────────────────────────────────────────────────
+# Three LISTS, never scores. The separation from the field is total on two of the
+# three, so a threshold is defensible on the numbers and is still refused: it would
+# red every one of the nine games this skill has already authored on the day it
+# lands, which is the R4 / study-6 / P0 failure this file has turned down four
+# times. The fix is per-sentence, so the useful artefact is the sentences.
+#
+# Field figures, 27 corpus games / 14.5M prose words, quoted at each print site.
+
+GLOSS_RE = re.compile(r",\s*(which|who)\s+(means|is|are|was|were)\b", re.I)
+
+NEGATION_RE = re.compile(r"\b(not|never|no|nothing|nobody|neither|nor|n't|without)\b", re.I)
+
+# ⚠️ TIGHTENED, and the loose version is why. `since|years|moved|carried` scored
+# "moved his hand" and "carried the tray" as history. This keeps TEMPORAL markers
+# only and was checked against a 14-case fixture (7 real history lines from a
+# shipped game, 7 action lines) at 0 errors before any figure was taken. It still
+# over-counts a sentence that merely mentions a duration — read the list, not the
+# number.
+HISTORY_RE = re.compile(
+    r"\b(used to"
+    r"|\bago\b"
+    r"|\bsince\b"
+    r"|(has|have|had) been\b"
+    r"|\b(ever since|these days|back then|any more|anymore)\b"
+    r"|\b(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|\d+)\s+"
+    r"(days?|weeks?|months?|years?)\b"
+    r")", re.I)
+
+
+def _narration_by_canvas(game):
+    """[(canvas_id, is_repeatable, [sentence, ...]), ...] — NARRATION ONLY.
+
+    ⚠️ NOT built on `model`, and that is the point. `PROSE_BLOCKS` folds `dialog` in
+    with `paragraph`, so a lint reading `Beat.text` scores speech — and the rule these
+    three serve exempts speech in full ("The same rule for a phrase, not just a word":
+    a character may talk however that person talks). The first cut of this lint flagged
+    a character's own line, *"That's the county's arithmetic, not mine."*
+
+    ⚠️ THE BASIS DIFFERS FROM THE FIELD FIGURE, deliberately, and in the field's
+    favour. The corpus exists only as built HTML with speech inline, so the p50/p90/max
+    quoted at each print site are ALL-TEXT and the field's narration-only rates would be
+    higher than printed. Excluding speech raises OUR numbers on every count and every
+    game (the_route 2.26 -> 2.74 gloss, 12.1 -> 16.0 history), so the gap this reports
+    is the conservative one. It can understate the drift; it cannot invent it.
+    """
+    out = []
+    for c in game.get("canvases") or []:
+        buf = []
+
+        def walk(blocks):
+            for b in blocks or []:
+                if not isinstance(b, dict):
+                    continue
+                props = b.get("props") or {}
+                if b.get("content") and b.get("type") != "dialog":
+                    buf.extend(_beat_sentences(str(b["content"])))
+                walk(b.get("blocks") or props.get("blocks"))
+                for sub in props.get("beats") or []:
+                    walk([sub])
+
+        for nd in c.get("nodes") or []:
+            walk(nd.get("blocks"))
+        if buf:
+            rep = bool((c.get("trigger") or {}).get("is_repeatable"))
+            out.append((c.get("id", "—"), rep, buf))
+    return out
+
+
+def lint_gloss(game):
+    """A fact, then an explanation of the fact, welded into the same sentence.
+
+    `register.md` "The load rules" L1. The cleanest separation measured anywhere in
+    this file: the field's worst game writes 0.24 per 1,000 words and our best writes
+    1.34, so the two distributions do not touch. A gloss is always more abstract than
+    the thing it glosses, which is why it costs the reader rather than helping them.
+
+    Returns (rate per 1,000 words, hits) — one hit per sentence, worst canvas first.
+    """
+    hits, words = [], 0
+    for cid, _rep, sents in _narration_by_canvas(game):
+        for s in sents:
+            words += len(re.findall(r"[A-Za-z][A-Za-z']*", s))
+            m = GLOSS_RE.search(s)
+            if m:
+                hits.append(dict(canvas=cid, line=s.strip()[:110], joint=m.group(0).strip()))
+    rate = 1000.0 * len(hits) / words if words else 0.0
+    return rate, sorted(hits, key=lambda h: h["canvas"])
+
+
+def lint_negation(game):
+    """Sentences whose claim is what did NOT happen.
+
+    `register.md` "The load rules" L2. Field max 20.22% of sentences; the nine games
+    this skill authored run 22.5–38.0%. Behind almost every one is a positive fact
+    that is shorter and more specific, so this is the rare subtraction that makes the
+    prose MORE specific.
+
+    Returns (share of sentences, total sentences, worst canvases) — a canvas is worth
+    listing only once it is both above the field max and carrying real prose.
+    """
+    total = neg = 0
+    per = []
+    for cid, _rep, ss in _narration_by_canvas(game):
+        n = sum(1 for s in ss if NEGATION_RE.search(s))
+        total += len(ss)
+        neg += n
+        if len(ss) >= 8:
+            per.append(dict(canvas=cid, share=100.0 * n / len(ss), n=n, of=len(ss),
+                            line=next((s.strip()[:100] for s in ss if NEGATION_RE.search(s)), "")))
+    share = 100.0 * neg / total if total else 0.0
+    return share, total, sorted([p for p in per if p["share"] > 20.22],
+                                key=lambda p: -p["share"])
+
+
+def lint_history_repeatable(game):
+    """Backstory on a screen the player re-enters dozens of times.
+
+    `register.md` "The load rules" L3. Field max 5.41%; eight of our nine are above it.
+    A repeatable canvas is the expensive place for history — the reader reconstructs a
+    prior state of the world before the present one means anything, every visit.
+
+    ⚠️ REPEATABLE ONLY, and that is the rule rather than a scoping convenience. The
+    same sentence on a one-time canvas is where the doctrine says to PUT it, so a
+    lint that flagged both would argue against its own fix.
+
+    Not to be confused with `the-clock.md` C2, which owns clock time. This is elapsed
+    time.
+    """
+    hits, total = [], 0
+    for cid, rep, sents in _narration_by_canvas(game):
+        if not rep:
+            continue
+        for s in sents:
+            total += 1
+            m = HISTORY_RE.search(s)
+            if m:
+                hits.append(dict(canvas=cid, line=s.strip()[:110], marker=m.group(0).strip()))
+    share = 100.0 * len(hits) / total if total else 0.0
+    return share, total, sorted(hits, key=lambda h: h["canvas"])
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Gates
 # ─────────────────────────────────────────────────────────────────────────────
 _OBJ_STOP = set("""
@@ -7503,6 +7647,9 @@ def main():
     cast_summary, cast_lints = lint_cast_meters(game, state)
     cw_summary, cw_lints = lint_counterweight(game, state)
     words_summary, words_lints = lint_own_words(model, game)
+    gloss_rate, gloss_lints = lint_gloss(game)
+    neg_share, neg_total, neg_lints = lint_negation(game)
+    hist_share, hist_total, hist_lints = lint_history_repeatable(game)
     fh_summary, fh_lints = lint_named_before_met(model, game)
     place_summary, place_lints = lint_place_function(model, game)
     role_summary, role_lints = lint_role_stays_attached(model, game)
@@ -7815,6 +7962,57 @@ def main():
               " corpus — a false friend is by definition a common word, so genre_words.txt")
         print("           is structurally blind to them. Expect false positives and read them:"
               " vesper's `torch` is a CUTTING torch, which is correct everywhere)")
+
+    if gloss_lints:
+        print(f"  {'─'*72}")
+        print(f"  lint · the sentence explains itself — {len(gloss_lints)} gloss(es), "
+              f"{gloss_rate:.2f} per 1,000 words")
+        for h in gloss_lints[:10]:
+            print(f"          · {h['canvas']}: …{h['line']}")
+        if len(gloss_lints) > 10:
+            print(f"          · … and {len(gloss_lints)-10} more")
+        print("          (register.md 'The load rules' L1 — a LIST, never a score. A fact followed"
+              " by an explanation of the fact, welded into one sentence.")
+        print("           Field over 27 games: p50 0.06, p90 0.19, MAX 0.24 (destroyer). The nine"
+              " games this skill authored run 1.34-2.71 — the two")
+        print("           distributions do not touch. Delete the clause or make it its own"
+              " sentence; deletion is the default, because the fact was")
+        print("           usually already doing the work. A dash or a bracket is NOT the fix —"
+              " the joint survives the swap)")
+
+    if neg_lints or neg_share > 20.22:
+        print(f"  {'─'*72}")
+        print(f"  lint · what did not happen — {neg_share:.1f}% of {neg_total} sentences carry a "
+              f"negation")
+        for h in neg_lints[:8]:
+            print(f"          · {h['canvas']}: {h['share']:.0f}% ({h['n']}/{h['of']}) — {h['line']}")
+        if len(neg_lints) > 8:
+            print(f"          · … and {len(neg_lints)-8} more canvases over the field max")
+        print("          (register.md 'The load rules' L2 — a FIGURE and a LIST, never a score."
+              " Field over 27 games: p50 7.59%, p90 13.56%,")
+        print("           MAX 20.22% (become-taxi-driver). Ours run 22.5-38.0%. Behind almost every"
+              " negation is a positive fact that is shorter AND")
+        print("           more specific — 'it takes you ninety' beats 'you have never once done it"
+              " in forty-five'. Canvases listed are those over the")
+        print("           field max with 8+ sentences)")
+
+    if hist_lints:
+        print(f"  {'─'*72}")
+        print(f"  lint · history on a repeatable screen — {len(hist_lints)} of {hist_total} "
+              f"sentences ({hist_share:.1f}%)")
+        for h in hist_lints[:10]:
+            print(f"          · {h['canvas']} [{h['marker']}]: {h['line']}")
+        if len(hist_lints) > 10:
+            print(f"          · … and {len(hist_lints)-10} more")
+        print("          (register.md 'The load rules' L3 — a LIST, never a score. REPEATABLE"
+              " canvases only: the same sentence on a one-time canvas is")
+        print("           where the doctrine says to PUT it. Field over 27 games: p50 1.64%,"
+              " p90 3.94%, MAX 5.41% (free-cities); eight of our nine are")
+        print("           above that max. The marker set is temporal (used to / ago / since /"
+              " has been / N days-weeks-months-years) and it OVER-COUNTS a")
+        print("           sentence that merely mentions a duration — read the lines, not the"
+              " number. Clock time is a different rule and belongs to")
+        print("           the-clock.md C2; this one is elapsed time)")
 
     if fh_summary:
         print(f"  {'─'*72}")

@@ -246,7 +246,13 @@ of the 27 field games use — **prose, choice labels AND location names**, becau
 cannot decode is undecodable on a button too; a list to read, never a score) · **dispatch depth** (how many different
 things one activity can turn into, and how often the activity itself still renders) ·
 **the act nodes** (body words on the thinnest band each act and finish node can render) ·
-**named before met** (every character
+**the sentence explains itself** (every
+`, which is` / `, which means` — a fact welded to a gloss of the fact; field MAX 0.24 per 1,000
+words over 27 games, our nine run 1.34–2.76, the two distributions do not touch) · **what did not
+happen** (the share of sentences whose claim is a negation, and every canvas over the field's
+maximum of 20.22%) · **history on a repeatable screen** (backstory on a canvas the player
+re-enters — `is_repeatable` only, because a one-time canvas is where the doctrine says to PUT it;
+elapsed time, NOT clock time, which is `the-clock.md` C2) · **named before met** (every character
 named before the game has introduced them) · **she permits or she acts** (the share of
 choices that open `let` — the act on the button against the act in the prose; `the-voice.md` R6) · **the place says what it is** (every location by how
 much prose happens there against how long its own description is — read whether each one names the

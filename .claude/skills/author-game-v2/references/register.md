@@ -756,6 +756,164 @@ Counted across the register doctrine, rules that tell an author to add something
 that tell them to cut by roughly five to one. A register taught only in additions drifts one
 direction, and the author cannot feel it happening from inside the prose.
 
+## The load rules — hand the reader a fact, not a thing to work out
+
+Subtractions two, three and four, and they came from the drift the section above predicted.
+
+**Why these rules exist.** A reader put a shipped game of ours beside `new-life-project` — one of
+the corpus's most-read female-PC games — and said ours was harder to follow. Every readability
+instrument in this skill disagreed. The game passes gate 19 at a median sentence of **9 words**,
+writes fewer `-ly` adverbs than the field's leanest game, and sits inside the field on every texture
+marker gate 43 prints.
+
+The reader was right and the instruments were pointed at the wrong quantity. **The prose is not fat.
+It is loaded.** "What is not measured here" at the end of this file records a padding study across
+five markers — `-ly` adverbs, hedge words, commas, repeated trigrams, vocabulary variety — that found
+nothing to catch. That conclusion is correct for those five markers and covers none of the three
+below, because the study measured **volume** and the defect is **load**: how much a reader has to
+hold, infer, or already know to get to the end of a sentence.
+
+**Measured over 27 corpus games (14.5M prose words) against every game in this repo, split by which
+skill authored it:**
+
+| | gloss / 1,000 words | negation, % of sentences | history, % of sentences |
+|---|---|---|---|
+| field p50 | 0.06 | 7.59 | 1.64 |
+| field p90 | 0.19 | 13.56 | 3.94 |
+| field p95 | 0.20 | 15.59 | 4.47 |
+| field max | **0.24** `destroyer` | **20.22** `become-taxi-driver` | **5.41** `free-cities` |
+| **games THIS skill authored (9)** | **1.34 – 2.71** | **22.5 – 38.0** | **4.8 – 12.1** |
+| games the v1 skill authored (6) | 0.00 – 0.66 | 9.8 – 27.3 | 1.3 – 6.6 |
+| above the field MAXIMUM | v2 **9/9** · v1 3/6 | v2 **9/9** · v1 1/6 | v2 **8/9** · v1 2/6 |
+
+**Nine of nine games this skill authored sit above the entire field's maximum on the first two
+counts**, and the lowest of them runs 5.6x the field's worst game on the gloss. The games written
+before this doctrine mostly do not. **This file taught it**, and "Sweeping backwards" above is the
+mechanism: *replace the hedged clause with the specific one* tells an author to attach a specifying
+clause, and `, which is the county's way of saying skilled tasks approved` **is** a specifying
+clause. The rule is obeyed and the defect is the obedience.
+
+The three rules are one idea at three grammatical addresses.
+
+### L1 · No `, which is` · no `, which means`
+
+The sharpest of the three and the cleanest measurement in this file: **zero overlap.** The field's
+worst game writes 0.24 per thousand words; our best writes 1.34.
+
+The shape is a fact followed immediately by an explanation of the fact, welded into the same
+sentence. It reads as craft while writing and as fog on arrival, because **a gloss is always more
+abstract than the thing it glosses** — the reader is handed a concrete detail and then made to hold
+it while a vaguer sentence lands on top.
+
+Real, all from one 8,836-word game, which shipped twenty of them:
+
+> ❌ "…never once seen him take a chair in here, **which is either respect or its exact opposite**."
+> ❌ "…the orange sticker in the corner, **which is the county's way of saying skilled tasks approved**."
+> ❌ "She turns it face down when you come in, **which is a different thing entirely**."
+> ❌ "…the cushion has given up on the left side, **which is the side that works**."
+
+**Rule.** Delete the clause, or make it its own sentence. **Deletion is the default** — in most cases
+the fact was already doing the work and the gloss is the writer not trusting it.
+
+| ❌ | ✅ |
+|---|---|
+| "She turns it face down when you come in, which is a different thing entirely." | "She turns it face down when you come in." |
+| "…one sock on, which is as far as he got, and he has been sitting like that long enough that…" | "Roy sits on the edge of the bed with one sock on. He got that far and stopped." |
+| "…the orange sticker, which is the county's way of saying skilled tasks approved." | "Two of your cards have an orange sticker. Orange means the county approved skilled tasks." |
+| "…never once seen him take a chair, which is either respect or its exact opposite." | "Eleven weeks. Ward has never sat down in this room. You have not worked out why." |
+
+⚠️ **The fix is not a dash or a bracket.** Same error as the comma swap above: the joint survives the
+swap and the reader still holds the sentence open. Cut it or split it.
+
+### L2 · Say what happened, not what didn't
+
+Field max 20.22% of sentences; our nine run 22.5–38.0%. To read a negative the reader builds the
+positive first and then cancels it. Once is an effect. Every fourth sentence is arithmetic.
+
+> ❌ "He has **never once** said a word about it."
+> ❌ "You have **never once** done it in forty-five minutes."
+> ❌ "the door that **does not** close"
+> ❌ "It is a small room and there is **nowhere** to stand that is **not** close."
+
+**Rule.** Behind almost every negation is a positive fact that is shorter and more specific. Write
+that one.
+
+| ❌ | ✅ |
+|---|---|
+| "The card says forty-five minutes. You have never once done it in forty-five minutes." | "Forty-five minutes on Cheryl's card. It takes you ninety." |
+| "…painted a grey that does not match anything else on the house. He has never once said a word about it." | "The county painted it grey. Everything else on the house is white. Roy has opinions about that rail. He keeps them." |
+| "It is a small room and there is nowhere to stand that is not close." | "The room is small. You stand close. There is one place to stand and that is it." |
+| "he does not put anything on before you come" | "he waits on the edge of the bed with the sheet across his lap and nothing else" |
+
+**The negation is usually hiding a number or an image**, and both are more specific than the
+negative was. *"Never once done it in forty-five"* is vaguer than *"it takes you ninety"* **and
+longer**. This rule costs nothing and is the one place in this file where obeying a subtraction
+makes the prose more specific rather than less.
+
+### L3 · A repeatable screen carries no history
+
+Field max 5.41%; eight of our nine are above it, the worst at 12.1%.
+
+A repeatable canvas is re-entered dozens of times. Backstory read on visit one is furniture by visit
+nineteen, and it is the most expensive kind of sentence there — the reader has to reconstruct a
+prior state of the world before the present one means anything.
+
+> ❌ "The bed **they moved down** is against the wall where the couch **used to be**, and the couch is in the barn."
+> ❌ "**Eight months** of the same man in the same chair and the cushion has given up on the left side."
+> ❌ "There is a rail on the porch steps the county **put in**…"
+
+Three inferences before anyone in the room does anything.
+
+**Rule.** On a canvas with `trigger.is_repeatable = true`, every sentence is something happening now.
+No *used to*, no *since*, no *eight months*, no *they moved*, no *the county put in*.
+
+**The facts are not deleted — they move.** Backstory belongs on a one-time canvas, where it lands
+once, properly, and then stays out of the way:
+
+> **Repeatable screen:** "You unlock Roy's door and go in. His bed stands against the front-room
+> wall, under the window that faces the road. He watches it. Always. He hears you in the hall and
+> turns his head."
+>
+> **One-time canvas, same facts:** "Ward and two neighbours carried Roy's bed down out of the
+> upstairs room in March. The couch went out to the barn to make space. He has slept in the front
+> room ever since."
+
+⚠️ **`the-clock.md` C2 already owns the neighbouring rule** — a beat may not say what *time* it is —
+and it is complete, including the exemptions for a recurring hour (*"Ward comes by at ten"*) and a
+past one. **L3 is about elapsed time, not clock time.** Do not read one as the other.
+
+### What one pass looks like
+
+The anchor activity of a shipped game, every rule applied, nothing cut but load:
+
+```
+                   words  sentences  median  >20w   negation  history
+before               319      17       20w   52.9%    41.2%    29.4%
+after                254      36        8w    0.0%     2.8%     0.0%
+field reference                         7w    7.7%     8.3%     3.1%
+```
+
+**Sixty-five words shorter, with every fact intact and the voice unchanged.** That is the shape of a
+correct pass: the sentence count roughly doubles, the word count falls, and nothing is lost.
+
+### Two checks measured and NOT built
+
+Recorded here for the same reason the others are — so they are not proposed again.
+
+- **Fragments (sentences under five words) — REFUSED.** The field runs 5.3% (`the-company`) to 58.6%
+  (`family-ties`). No threshold survives that range, and our games sit inside it. This is the fifth
+  check this skill has measured and turned down.
+- **Stative `is` as the main verb — DEFERRED, not refused.** Our games straddle the field on *both*
+  sides: `late_shifts` at 7.7% is below the field floor of 10.0%, `back_home` at 45.1% is double its
+  ceiling. It is also downstream of L1 — a gloss is usually "which **is**" — so re-measure it after
+  L1 has been applied to a game and see whether it moves on its own before inventing a number.
+
+⚠️ **The history count is a proxy and the softest of the three.** It matches temporal markers
+(*used to · ago · since · has been · N days/weeks/months/years*) and cannot tell a story from a
+sentence that merely mentions a duration. It was tightened against a fourteen-case fixture before
+these figures were taken — the loose version scored *"moved his hand"* as history — and it will still
+over-count. Read the lint's list, not its number.
+
 ## The words the player has to already own
 
 Off Season scored **86.8 Flesch Reading Ease, grade 5.0 — easier than 26 of the 27 field games**
@@ -872,6 +1030,36 @@ the cleanest game. **What separates them is what the words ARE, and no count can
 measurement that discriminates cannot be shipped — it is a hand-built list — and the measurement
 that can be shipped does not discriminate. That is exactly the condition under which a check must
 be a list and not a threshold. The lint hands over the words; you make the call.
+
+### The same rule for a phrase, not just a word
+
+Everything above is scoped to **nouns** — *airer*, *eiderdown*, *chippy* — a thing the reader has to
+arrive already holding. **A phrasal idiom does the same damage and slips straight through**, because
+every word in it is common and none of it is regional.
+
+The measured case came out of the load-rules pass. A rewrite drafted *to be the easy version* opened:
+
+> ❌ "You **let yourself in** at seven."
+
+Three facts folded into an idiom — she has a key, she does not knock, nobody greets her — and none
+of the three is recoverable by a reader who does not already own the phrase. The plain version is
+one word longer and carries all three:
+
+> ✅ "You **unlock Roy's door** and go in."
+
+Same family, same games: *"the cushion has **given up** on the left side"*, *"neither of you is
+going to **call it** a surprise"*, *"you both **let that stand**"*. Each one is a plain event
+wearing a phrase.
+
+**Rule. Where a plain verb exists, use it.** The test is the one this section already runs, applied
+to a phrase instead of a word: *does this sentence hand the meaning over, or does it require the
+meaning to arrive with the reader?*
+
+⚠️ **No instrument, and deliberately.** Idiom rate was probed against a hand-built pattern list
+(ours 0.79 per 1,000 words, `new-life-project` 0.26) and that list is far too weak to carry a number
+— it would score idiomatic dialogue, which is exempt, and miss most of the prose cases. **Speech is
+exempt in full**: a character may talk however that person talks. This is a rule for narration only,
+and it has no lint.
 
 ### The false-friend half is hand-built, and this file is where it goes stale
 
