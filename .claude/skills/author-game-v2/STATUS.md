@@ -45,7 +45,10 @@ session is wrong by the end of that session. Run `wc -l` if you need one.
 .claude/skills/author-game-v2/
   SKILL.md                             entry point, EXPLICIT-INVOKE ONLY
   scripts/gates.py                     the scoreboard — 46 gates + 31 lints, and --beat,
-                                       which measures loose prose with no game at all
+                                       which measures loose prose with no game at all;
+                                       --release now carries 7 artefact checks, one of
+                                       which is the only thing here that can see a canvas
+                                       the generator DROPPED
   scripts/genre_words.txt              the field's own vocabulary, for the word lint
   scripts/playtest.py                  the Player's harness — drives a BUILT game in a browser
   scripts/pitch_pack.py                the Pitchers' fact pack — the world a pitch may name
@@ -434,6 +437,10 @@ predates the recheck entirely. Corrected above.
    in the field. Corrected 2026-08-29; this line previously said nothing had been authored.
 
 ## The operating rule that outranks all of the above
+
+| **Reachability — FIXED 2026-08-30, and it took two games to see** | `commuter` shipped **six of its seven sex loops written, at their ceilings, and absent from the built game** — deleted, not locked — with all 46 gates green over them. `the_route` did the same the day before from a different cause. Every gate parses `7_final_game.toml`; reachability is decided later by the generator, so **no gate could ever have seen it**, and the failure mode is always "the game shipped without its porn in it" and always scores green. Fixed as a seventh `--release` check, `every canvas is a passage`, reading the built HTML. ⚠️ **The defect file's proposed `grep -c` was wrong three ways** — a bare substring PASSES on a dangling link (17 of `loop_ray`'s 23 matches are link references, not declarations), the opening canvas emits as `StartingCanvas_…` and its absence false-fails every game, and node ids are not portable across generator eras. ⚠️ **Two exemptions were tested and refused**: dev canvases need none (`vesper` has 11 in a non-dev build at zero missing) and mtime discriminates nothing (11 of 13 games look "stale"). Measured over **1,895 canvases in 23 builds: one red**, `mrs_vance`, a genuine stale build. |
+| **`engine.md` §30 taught a compile error — FIXED 2026-08-30** | Its only worked example was `trait_status_text` with an open top band, which is legal there and **rejected by the other two types**; a board copied the shape onto `trait_words` and the build refused to compile. ⚠️ **The defect file's diagnosis was wrong and correcting it shrank the fix**: it claimed nothing said the shape does not carry, but §30 drew the distinction two lines under the example — the cause was the *next clause*, a type-blind *"leave the top band's `max` off"*. The imperative beat the distinction. Example swapped to `trait_words` with both bounds closed, per-type table added. Third instance of `SKILL.md:307` — **an example outranks every rule beside it** — after the British-noun leak and the 15/35/55/75 rung table. |
+| **Defect files are not exempt from the citation rule** | Fixing the two above meant re-reading every `file:line` in them. **Five were wrong** — 001 named the primary closure implementation and its no-DB twin *backwards* and missed a second seed site; 002's validator table was wrong in two of three rows. **Four more stale citations turned up in §30 itself**, all off by ~682 lines, plus `engine.md:188` off by 140. Corrections are marked inline in each defect file rather than overwritten, because the next author reads them. A wrong `file:line` in a defect report is the same failure the report is about. |
 
 **LO plays it.** Every real advance in this skill's history came from him clicking through a game
 for an hour, not from the scoreboard. Twice now the scoreboard has been green while the game was

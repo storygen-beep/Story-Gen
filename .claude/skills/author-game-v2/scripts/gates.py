@@ -6912,6 +6912,37 @@ def _built_flags(text):
     return ("true" in dbg), ("true" in dev), missing
 
 
+# A passage declaration, NOT a mention. Three things this regex has to get right,
+# each of them measured against every build in the repo (23 games, 1,895 canvases):
+#
+#  1. It anchors on `<tw-passagedata … name="`. A canvas that is LINKED TO but never
+#     emitted still has its name in the HTML, inside the link text of the passages
+#     pointing at it — on commuter's `loop_ray`, 17 of 23 raw matches are link
+#     references and only 6 are declarations. A bare substring search therefore
+#     returns a false PASS on a dangling link, which is the other half of this very
+#     bug class.
+#  2. It accepts the `StartingCanvas_` prefix. The opening canvas emits as
+#     `StartingCanvas_<id>_Node_base`; without the prefix this false-fails EVERY
+#     game in the repo.
+#  3. It keys on the CANVAS, never the node. Node ids are not portable across
+#     generator eras — mothers_place (2026-06-20) emits `_Node_1`, current games
+#     emit `_Node_base` — so a node-level check raises 17 false alarms on that one
+#     game and finds nothing anywhere else.
+_PASSAGE_DECL = re.compile(
+    r'<tw-passagedata\b[^>]*\bname="(?:Starting)?Canvas_([A-Za-z0-9_]+?)_Node_[^"]*"')
+
+
+def _built_passages(text):
+    """The set of canvas ids that actually became passages in the built HTML.
+
+    `text` is already html.unescape()d by the caller, which does not matter here —
+    passage NAMES are attributes and are never entity-encoded — but the shared
+    reader keeps this beside `_built_flags` on purpose: both answer "what is in the
+    artefact", which no gate can see because every gate parses the source.
+    """
+    return set(_PASSAGE_DECL.findall(text))
+
+
 def release_mode(slug):
     """Is this build shippable? The artefact, not the source.
 
@@ -6975,6 +7006,72 @@ def release_mode(slug):
                   [] if missing == 0 else
                   ["a build-time snapshot: harvesting the files is not enough, the "
                    "build has to be REDONE afterwards"])
+
+        # ── every canvas is a passage ───────────────────────────────────────
+        # Reachability is not a property of the source, so no gate above can see
+        # it: it is what the generator DECIDED TO EMIT. commuter shipped six of
+        # its seven sex loops written, at their ceilings, and absent from the
+        # build — 46 green gates over prose the player could never reach, because
+        # they parse `7_final_game.toml` and count content. the_route did the same
+        # thing the day before from a different cause. defects/001.
+        src_path = os.path.join(game_dir, "toml_phases", "7_final_game.toml")
+        try:
+            src_game = _load(src_path)
+        except Exception:
+            src_game = None
+
+        if src_game is None:
+            check("every canvas is a passage", None,
+                  "7_final_game.toml is unreadable — nothing to compare the build against")
+        else:
+            built = _built_passages(text)
+            src_canvases = src_game.get("canvases") or []
+            gone = [c for c in src_canvases if c.get("id") not in built]
+
+            # WHICH of the two causes, read off the canvas's own trigger. A canvas
+            # carrying trigger.location is in the SEED set by construction
+            # (v2.py:420-424 graph path, :447-451 ORM path) and cannot be pruned by
+            # the closure — so if it is absent, the build simply predates it. One
+            # with no location had to be pulled in by a targetType="node" choice or
+            # a substitution target (_compute_included_canvases, v2.py:564-640, and
+            # its no-DB twin at :642-691), and absence means nothing pulled it.
+            #
+            # ⚠️ Two discriminators were tested and are NOT used, because inventing
+            # the wrong exemption is how R4, study 6 and P0 were all withdrawn:
+            #   · dev-gated canvases need no exemption — vesper carries 11 in a
+            #     NON-dev build and the_long_summer_test 9, both at zero missing.
+            #   · file mtime discriminates nothing — 11 of 13 games have a TOML
+            #     newer than their build, including every game at zero missing,
+            #     because merge_toml_phases rewrites 7_final_game.toml routinely.
+            stale = [c["id"] for c in gone if (c.get("trigger") or {}).get("location")]
+            pruned = [c["id"] for c in gone if not (c.get("trigger") or {}).get("location")]
+
+            detail = []
+            if pruned:
+                detail.append(
+                    f"NOTHING LINKS TO THESE, so the build dropped them: {', '.join(sorted(pruned)[:8])}"
+                    + (f" … and {len(pruned)-8} more" if len(pruned) > 8 else ""))
+                detail.append(
+                    "a triggerless canvas is only built if a targetType=\"node\" choice or a "
+                    "substitution target pulls it in — write the link in the same edit as the "
+                    "canvas (engine.md §8)")
+            if stale:
+                detail.append(
+                    f"these carry a location, so they are in the seed set and the BUILD PREDATES "
+                    f"them: {', '.join(sorted(stale)[:8])}"
+                    + (f" … and {len(stale)-8} more" if len(stale) > 8 else ""))
+                detail.append(
+                    "REBUILD — do not go hunting for a missing link: manage.py package_from_toml "
+                    f"--file games/{slug}/toml_phases/7_final_game.toml --output games/{slug}/output "
+                    "--gen-version v2")
+
+            check("every canvas is a passage", not gone,
+                  f"{len(src_canvases)}/{len(src_canvases)} canvases reached the build"
+                  if not gone else
+                  f"{len(src_canvases) - len(gone)}/{len(src_canvases)} canvases reached the build "
+                  f"— {len(gone)} in the source "
+                  f"{'is' if len(gone) == 1 else 'are'} not in the HTML",
+                  detail)
 
     # ── how the portal presents it ──────────────────────────────────────────
     entries = _portal_entries(root)

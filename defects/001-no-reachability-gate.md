@@ -1,7 +1,7 @@
 # 001 · No gate asks whether a canvas is reachable
 
 **Found:** 2026-08-30, in `games/commuter` at v0.1
-**Status:** OPEN
+**Status:** FIXED 2026-08-30
 **Layer:** skill / scoreboard (`.claude/skills/author-game-v2/scripts/gates.py`)
 
 ## What happened
@@ -23,14 +23,23 @@ Every one of those numbers counted prose the player could never reach.
 
 ## Why the engine drops them
 
+⚠️ **The three citations below were WRONG when this file was written and are corrected here**
+(2026-08-30, re-read against source). The mechanism was right; the line numbers and the naming of
+the two implementations were not. The original said `420-423` / `642-682` "the graph path a plain
+`package_from_toml` takes" / `563-640` "the ORM twin" — which calls the copy the original and the
+original the copy, and misses a second seed site entirely.
+
 The generator builds its canvas set in two moves:
 
-1. **Seed** — canvases carrying `trigger.location_id`
-   (`apps/game_generation/twee_comprehensive/generators/v2.py:420-423`).
+1. **Seed** — canvases carrying `trigger.location_id`. **Two sites, not one:**
+   `apps/game_generation/twee_comprehensive/generators/v2.py:420-424` (the no-DB graph path) and
+   `:447-451` (the ORM path).
 2. **Closure** — pull in anything a seeded canvas points at with a choice whose
-   `targetType == "node"`, plus Lane-3 substitution targets
-   (`v2.py:642-682`, the graph path a plain `package_from_toml` takes; the ORM twin at `:563-640`
-   does the same thing).
+   `targetType == "node"` (`:615` ORM, `:676` graph), plus Lane-3 substitution targets
+   (`:596`, `:663`). The **primary** implementation and sole entry point is
+   `_compute_included_canvases` (`v2.py:564-640`); it delegates at `:566-568` to its own no-DB
+   twin `_compute_included_canvases_graph` (`:642-691`), whose docstring at `:643-644` says so
+   outright.
 
 A canvas in neither set never becomes a passage. `loop_three` survived only because
 `act_back_bedroom` happened to carry a choice pointing at `loop_three.entry`.
@@ -93,3 +102,48 @@ citation has drifted 140 lines. Worth a sweep of §8's neighbours while the file
 
 A check that only asks "is this canvas well-formed" manufactures well-formed orphans. A check that
 asks "is it in the build" cannot be satisfied except by wiring it in. Passes.
+
+---
+
+## Fixed — 2026-08-30
+
+**1 · `gates.py --release` gained a seventh check, `every canvas is a passage.`** Every canvas id in
+`7_final_game.toml` must appear as a `<tw-passagedata>` declaration in `output/index.html`. It reads
+the artefact, because reachability is not a property of the source.
+
+Three things the proposed `grep -c` above would have got wrong, each caught by running the check
+against every build in the repo before shipping it:
+
+- **A bare substring match returns a false PASS on a dangling link.** A canvas that is *linked to*
+  but never *emitted* still has its name in the HTML, inside the link text of the passages pointing
+  at it — on `loop_ray`, 17 of 23 raw matches are link references and only 6 are declarations. The
+  matcher anchors on `<tw-passagedata … name="`.
+- **The opening canvas emits as `StartingCanvas_<id>_Node_…`.** Without that prefix the check
+  false-fails *every game in the repo*.
+- **Node ids are not portable across generator eras** — `mothers_place` emits `_Node_1`, current
+  games `_Node_base` — so the check is canvas-level, never node-level.
+
+**Two exemptions were tested and deliberately NOT added**, per `gates.py:2785-2809` on how R4,
+study 6 and P0 were withdrawn for exactly this:
+
+- dev-gated canvases need none — `vesper` carries 11 in a **non-dev** build and
+  `the_long_summer_test` 9, both at zero missing;
+- file mtime discriminates nothing — 11 of 13 games have a TOML newer than their build, including
+  every game at zero missing, because `merge_toml_phases` rewrites `7_final_game.toml` routinely.
+
+**The discriminator is the canvas's own trigger**, and the message names which of the two causes it
+is, or the author hunts for a link that was never the problem: a canvas carrying `trigger.location`
+is in the seed set by construction and can only be absent because *the build predates it* →
+**rebuild**; one with no location was never pulled into the closure → **write the link**.
+
+**Measured before shipping:** 1,895 canvases across 23 builds, one red — `mrs_vance`, missing
+`ask_papers` and `see_truck`, both carrying a location, correctly reported as a stale build. That
+red is deliberate (LO's call, 2026-08-30); rebuilding that game is separate work. Sensitivity proved
+by synthetic injection in an isolated tree: a triggerless unlinked canvas → FAIL, correct cause,
+exit 1.
+
+**2 · `engine.md` §8 now states the consequence**, which was net-new — a full-file search of all
+2,319 lines confirmed nothing said a triggerless unlinked canvas is pruned. The stale `v2.py:3177`
+in the same section was re-anchored to **`v2.py:3317-3331`**.
+
+**3 · `SKILL.md:289`** updated from six release checks to seven.

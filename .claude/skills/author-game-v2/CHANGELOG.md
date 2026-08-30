@@ -5,6 +5,105 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-30 — defects 001 and 002 closed, and the defect files were themselves wrong
+
+Both defects were opened the same day while building `commuter`, and both are skill defects: the
+answer to *"would a correct skill have prevented this?"* is yes for each.
+
+### 001 — nothing asked whether a canvas survives the build
+
+`commuter` shipped six of its seven sex loops fully written, at their declared ceilings, and **absent
+from the built game** — not locked, deleted. All 46 gates were green over them, because every gate
+parses `7_final_game.toml` and reachability is decided later, by the generator. `the_route` did the
+same thing the day before from a different cause (a mistyped `targetType`), which is what makes it a
+bug class rather than a slip, and the class always eats the explicit content, because act loops are
+the canvases written as standalone link targets.
+
+**`gates.py --release` gained a seventh check, `every canvas is a passage`** (`_built_passages()`
+beside `_built_flags`, and one `check(...)` in `release_mode`). It reads the artefact.
+
+The defect file proposed `grep -c "Canvas_<id>_Node_"`. **That would have been wrong three ways**,
+all three found by running the check against every build in the repo before shipping it:
+
+1. **A bare substring returns a false PASS on a dangling link.** A canvas that is *linked to* but
+   never *emitted* still has its name in the HTML, inside the link text of the passages pointing at
+   it — on `loop_ray`, 17 of 23 raw matches are link references and 6 are declarations. Anchored on
+   `<tw-passagedata … name="` instead.
+2. **The opening canvas emits as `StartingCanvas_<id>_Node_…`** — without that prefix the check
+   false-fails *every game in the repo*.
+3. **Canvas-level, never node-level.** `mothers_place` (2026-06-20) emits `_Node_1`, current games
+   `_Node_base`; a node-level check raises 17 false alarms there and finds nothing anywhere else.
+
+**Two exemptions were tested and deliberately NOT added**, this file's standing warning at
+`gates.py:2785-2809` being how R4, study 6 and P0 all got withdrawn: dev-gated canvases need none
+(`vesper` carries 11 in a **non-dev** build and `the_long_summer_test` 9, both at zero missing), and
+file mtime discriminates nothing (11 of 13 games have a TOML newer than their build, including every
+game at zero missing, because `merge_toml_phases` rewrites `7_final_game.toml` routinely).
+
+**The discriminator is the canvas's own trigger, and the message names the cause** — otherwise the
+author hunts for a link that was never the problem. A canvas carrying `trigger.location` is in the
+seed set by construction (`v2.py:420-424`, `:447-451`) and can only be absent because the build
+predates it → *rebuild*. One with no location was never pulled into the closure
+(`_compute_included_canvases`, `v2.py:564-640`, twin at `:642-691`) → *write the link*.
+
+`engine.md` §8 now states the consequence, which was **net-new**: a search of all 2,319 lines
+confirmed nothing anywhere said a triggerless unlinked canvas is pruned. `SKILL.md:289` six → seven
+checks.
+
+### 002 — the one worked example was legal on one of three types
+
+`commuter`'s board wrote open-topped sidebar bands and the build refused to compile. §30's only
+example was `trait_status_text`, where an open top band is legal; the board copied the shape onto
+`trait_words`, where it is not.
+
+**The defect file's diagnosis was wrong**, and correcting it made the fix smaller. It said *"nothing
+beside it says the shape does not carry to the other two types."* Something did — §30 drew the exact
+distinction two lines under the example. The cause was the **next clause**: *"Leave the top band's
+`max` off"*, type-blind, immediately after the sentence saying it is safe on only one type. The
+imperative beat the distinction.
+
+Fixed by replacing that clause with a per-type table, and by **swapping the example to `trait_words`
+with both bounds closed** — the shape that is legal on all three, so blind copying cannot break a
+build. `SKILL.md:307`'s rule is named in §30 as the diagnosis: *an example outranks every rule
+beside it.*
+
+### The citations in both defect files were wrong
+
+Every `file:line` in both was re-read against source. **Five were wrong**, plus **four more stale
+ones in §30** the defect files never noticed:
+
+- 001 named the primary implementation and its no-DB twin **backwards**, and missed the second seed
+  site (`v2.py:447-451`) entirely.
+- 002's validator table was wrong in two of three rows — `trait_status_text` had drifted ~180 lines
+  (`:3574-3576` → `:3751-3757`, the old address being loop preamble), and `trait_words` was
+  described as "both required" when the real rule is `flag` **XOR** range, so a flag-only band is
+  legal.
+- §30's four `v2.py` citations were **all stale by ~682 lines** (`16251`/`16314`/`16266`/
+  `16335-16336` → `16933`/`16996`/`16948-16949`/`17017-17018`); `trait_bar` had none at all and now
+  carries `16886`. `engine.md:188`'s `v2.py:3177` → `:3317-3331`, stale by 140.
+
+Corrections are marked **inline** in each defect file rather than silently overwritten — the file is
+read by the next author, and an uncorrected one hands the error forward. `defects/README.md` now
+carries the convention: a defect file's citations get verified on the way IN, because a wrong
+`file:line` in a defect report is the same failure the report is about.
+
+### Verified
+
+- `--selfcheck` green, **46 gates / 31 lints unchanged** — a release check uses the `check(...)`
+  closure, not `gate(...)`, so `_emitted_names` never harvests it and no `SKILL.md` row is owed.
+- **Gate verdicts across all games diffed against the committed script: zero changed.** This adds a
+  release check, not a gate.
+- `--release` across all 23 builds: **1,895 canvases, one red.** `mrs_vance` is missing `ask_papers`
+  and `see_truck`, both carrying a location — correctly reported as a stale build with the *rebuild*
+  headline, not the *nothing links to it* one. That red is deliberate (LO's call, 2026-08-30);
+  rebuilding that game is separate work and was not done.
+- **Sensitivity proved by synthetic injection** in an isolated tree outside the repo: a triggerless
+  unlinked canvas → FAIL, correct cause, exit 1. There is no archived broken build to test against —
+  `commuter`'s first commit is also its first build — so the defect could not be replayed.
+- No game was touched.
+
+---
+
 ## 2026-08-30 — the load rules: three subtractions this file's own doctrine taught
 
 LO read `the_route`'s scene content beside `new-life-project` and said, four rewrites running, that

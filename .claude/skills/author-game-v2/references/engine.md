@@ -155,6 +155,20 @@ A canvas with **no** `trigger` block is a link target — it has no location of 
 inherits its context from whatever links into it. Substitutions use
 `trigger.substitutions[].target_canvas_id`.
 
+⚠️ **A triggerless canvas that nothing links to is DELETED from the build, silently.** The seed set
+is canvases carrying `trigger.location_id` (`v2.py:420-424`, the no-DB graph path; `:447-451`, the
+ORM path). Everything else has to be pulled into the closure by a `targetType = "node"` choice or a
+substitution target — `_compute_included_canvases` (`v2.py:564-640`, the primary and sole entry
+point) and its no-DB twin `_compute_included_canvases_graph` (`:642-691`). A canvas in neither set
+never becomes a passage: it costs nothing at compile time, the validator is silent, and every gate
+in `gates.py` stays green over it, because gates parse the source and reachability is decided by the
+generator. **Write the link in the same edit as the canvas.**
+
+Measured twice in two days: `the_route` shipped both act loops unreachable through a mistyped
+`targetType`, and `commuter` shipped six of seven — fully written, at their ceilings — through a
+missing link, both with 46 green gates. `gates.py --release` now checks every canvas against the
+built HTML for exactly this. `defects/001-no-reachability-gate.md`.
+
 `show_when_locked = true` on a choice renders it greyed and visible instead of hidden. This is
 the mechanism behind "every release ends on a visible locked door."
 
@@ -185,7 +199,7 @@ Two consequences worth carrying:
    time resolution needs no runtime lookup, so node routing into a canvas with no `trigger` works
    — it is how every sub-menu and every sex loop in this codebase is reached. A *substitution*
    target is different: `setup.getCanvasById` indexes only `help_data.locationCanvases`
-   (`v2.py:3177`), which is populated only for canvases carrying `trigger.location`, so a
+   (`v2.py:3317-3331`), which is populated only for canvases carrying `trigger.location`, so a
    triggerless substitution target silently never fires. **Same word "triggerless", opposite
    answer — do not carry one rule onto the other.**
 
@@ -1319,8 +1333,8 @@ already above the cap it is left alone; the cap only refuses to *raise* it past 
 The sidebar prints **two** things about a trait, from two different places:
 
 1. **The auto Traits dump** — every declared `core_trait`, as a bare number.
-2. **Whatever `[[sidebar_items]]` you authored** — `trait_status_text` (`v2.py:16251`),
-   `trait_words` (`v2.py:16314`), `trait_bar`.
+2. **Whatever `[[sidebar_items]]` you authored** — `trait_status_text` (`v2.py:16933`),
+   `trait_words` (`v2.py:16996`), `trait_bar` (`v2.py:16886`).
 
 They do not know about each other. Band a trait without suppressing its number and the player reads
 *"Nothing under it"* and `cover 55` stacked on top of each other.
@@ -1331,9 +1345,11 @@ They do not know about each other. Band a trait without suppressing its number a
 
 ```toml
 [[sidebar_items]]
-type  = "trait_status_text"
+type  = "trait_words"
 trait = "cover"
-bands = [ { min = 0, max = 14, text = "Long dress, hair pinned" }, { min = 15, text = "Apron off" } ]
+bands = [ { min = 0, max = 14, text = "Long dress, hair pinned" },
+          { min = 15, max = 100, text = "Apron off" } ]   # ← top band CLOSED, and its
+                                                          #   max sits at/above the ceiling
 
 [[traits.labels]]
 key    = "cover"          # ← REQUIRED, or the number prints underneath the words
@@ -1346,9 +1362,29 @@ of them in `[[traits.labels]]`, and printed every one twice.
 
 ⚠️ **The other half: a banded value that lands outside every band renders NOTHING** — the whole card
 disappears, which reads as a missing HUD element rather than a wrong number, so a quick playtest
-sails past it. `trait_status_text` treats an omitted `min`/`max` as open-ended (`v2.py:16266`,
-defaults ∓1e9); `trait_words` needs a **closed** `[min, max]` to match (`v2.py:16335-16336`). Leave
-the top band's `max` off, or `cap` the terminal add (§29).
+sails past it.
+
+**The band rules are PER TYPE, and an open top band is legal on exactly one of the three.** The
+example above is `trait_words` on purpose: its shape is the one that is legal everywhere, so copying
+it blindly cannot break a build.
+
+| type | open-ended top band? | the rule | source |
+|---|---|---|---|
+| `trait_status_text` | **yes** — an omitted bound defaults to ∓1e9 | at least one of `min` / `max` | `template_import.py:3751-3757` · `v2.py:16948-16949` |
+| `trait_words` | **no** | `flag` **XOR** range; in range mode BOTH `min` and `max`. A flag-only band is legal | `template_import.py:3613-3623` · `v2.py:17017-17018` |
+| `trait_bar` | **no** | both `min` and `max`; `flag` is rejected outright; `bands` itself is optional | `template_import.py:3659`, `:3676-3681` |
+
+So the fix for a value off the top of the ladder is **not** to drop the `max` — that compiles on one
+type and hard-fails the build on the other two. Give the top band a `max` at or above the trait's
+ceiling, or `cap` the terminal add (§29). `commuter` runs `max = 100` against declared ceilings of
+88 / 86 / 80, which is the safe direction.
+
+⚠️ **This section taught the bug it now warns about.** Its only worked example used to be
+`trait_status_text` with an open top band — correct for that type — and the sentence under it said
+*"leave the top band's `max` off"* with no type attached, two lines after the sentence that drew the
+distinction. A board copied the shape onto `trait_words` and the build refused to compile.
+`SKILL.md`'s own operating rule is the diagnosis: **an example outranks every rule beside it.**
+`defects/002-sidebar-band-example-wrong-type.md`.
 
 ### 30.1 A hygiene system is a deliberate non-feature — do not build one
 
