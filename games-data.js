@@ -15,6 +15,53 @@
 //                        NOT whatever is currently half-built in the working tree.
 window.GAMES = [
   {
+    // Listed 2026-08-30. Authored with author-game-v2. 13 locations, 56 canvases, 6 characters,
+    // 41 guidance cards, 8,414 words, 42/46 gates. THE FIRST BUILD THIS GAME HAS EVER HAD —
+    // it existed as TOML for a day and had never been compiled.
+    //
+    // The reason it is here at 42/46 rather than finished: this build is where a whole bug class
+    // got found. SIX of the seven act loops — Ray, Cole, Gail, Doyle, Trevor, Vic — were written
+    // at their declared ceilings and were NOT IN THE GAME. They carried no [canvases.trigger] and
+    // nothing pointed at them, and the generator seeds its canvas set from trigger.location_id
+    // (v2.py:420-423) then closes only over targetType "node" choices (v2.py:642-682), so all six
+    // were pruned out of the HTML. Every gate was green over them, because the scoreboard parses
+    // the TOML and counts content, not reach: `location fill` read 5,809 words before the wiring
+    // and 8,414 after, without a word being written. Fixed by a third rung on each character hub
+    // targeting loop_<npc>.entry, gated on relation >= 35 AND the tier rung. Logged as
+    // defects/001-no-reachability-gate.md — no check in the skill asks whether a canvas is in
+    // the build, and the cheapest one is a grep against the built HTML.
+    //
+    // Also fixed to make it compile at all: 50 canvas nodes missing the required `name`, 12
+    // children listing their PARENT in navigation_order (the return link is generated from
+    // entry_from, engine.md §10), and 4 sidebar bands written open-topped. That last one is
+    // defects/002 — the band rule is PER ITEM TYPE and engine.md §30's only worked example is a
+    // trait_status_text, which legally takes a min-only top band where trait_words and trait_bar
+    // both reject it (template_import.py:3574-3576 vs :3623, :3681).
+    //
+    // The structural break from the other nine: the ANCHOR IS THE CAMPUS, not the household.
+    // Eight of nine v2 games rooted their world on one worksite or one household; the measured
+    // reference puts ~30% of location prose in a school. The obligation is a payment plan in her
+    // own name rather than rent — first break of that tic in nine games — and the gap between the
+    // 180 it takes and the 260 a week of shifts pays is what she has to ask for. `who_climbs` is
+    // `both` and now holds on measurement at 15 tier sites / 45 cast, exactly the 25% floor.
+    //
+    // ⚠️ THIS IS A --dev BUILD. Stat controls in the sidebar, because the first act loop is
+    // 10-15 in-game days behind relation 35 + a tier rung and that is unplayable to test against.
+    // ⚠️ MEDIA HAS NEVER BEEN HARVESTED. 34 cycling pools plus portraits and plates, ZERO files
+    // on disk, so every image is a gap. Run find-media, rebuild WITHOUT --dev, add `version`,
+    // archive to games/commuter/releases/, and drop `dev: true` in the same commit.
+    //
+    // ⚠️ Open debts, all in v2_state.json: 8,414 words against a 34,000-word plan, so every room
+    // is under budget and the anchor holds 16% where the plan says 26%; the back bedroom has no
+    // walk-in; seven meters band above their highest authored gate; and five gated meters still
+    // have a free route to them.
+    slug: "commuter",
+    title: "Commuter",
+    badge: "v2",
+    dev: true,
+    summary: `Dana Reed is nineteen and rides three quarters of a mile to Dutton State every morning, because the money went to the payment plan instead of a dorm room. The plan is in her name. The gap between what it costs and what a week behind the campus service desk actually pays is not, and it gets made up every Thursday at the kitchen table by a man whose surname she does not have. She is the only Reed in that house. One bathroom, four people, and a door she still locks. On the other end of the ride there is a lecturer who has to notice her by contract and spends all three hours a week pretending he does not, a lab partner with no power over her at all who is therefore the only one who says it out loud, and a night porter who decides which buildings are locked at nine. Her mother is the one person in the house who was ever looked at this way before, and she is watching it happen with something that is not entirely warning.`,
+  },
+  {
     // Listed 2026-08-30. Authored end-to-end with author-game-v2. 8,202 words across 10
     // locations, 52 canvases, 5 characters, 10 guidance cards, 46/46 gates with ZERO n/a —
     // the first game here where no check reported an absence.

@@ -1,0 +1,430 @@
+# =============================================================================
+# Commuter — 2_one_shots  ·  THE FIRST HOUR
+#
+# references/the-first-hour.md. This is the half v2 shipped without: counting
+# non-repeatable canvases that fire at a character's location, four v1 games run
+# 24 / 13 / 7 / 0 and all six v2 games run ZERO.
+#
+# F1 · ONE SHAPE, AND IT COMMITS. This is a STAGED open staging exactly ONE
+#      person: Gail. She is on screen, she is described, she speaks, and she
+#      says what she wants. Nobody else is named. The defect F1 names is the
+#      MIDDLE — a cold open carrying a staged open's payload, six people named
+#      and none of them on screen. Our own measured failure named six, two of
+#      whom were not in the game at all.
+# F2 · BOOT AND CAPSTONE ARE TWO CANVASES. v1 split them; v2 collapsed both into
+#      one, which is why v2's openings run more than double v1's. The boot
+#      starts the chain and the capstone spends the prose.
+# F3 · HAND OVER INTO AN OPEN DOOR. 07:00 + 5 to the kitchen, then 3 + 3 through
+#      the capstone's nodes (v2.py:13819, the 3-minute default), then 15 out, so
+#      the player lands in her own room at 07:26 where `act_read` carries no
+#      schedule and is open at every minute. A random ambient is not a door and a
+#      substitution_only walk-in is not a door.
+# F4 · EVERY LIVE SYSTEM GETS ONE BEAT. The plan and its number, the desk job,
+#      the reading, and the 8am section are all named in the capstone.
+#      `first_week_started` is set THERE, which is what arms [settings.rent], so
+#      the first Thursday is the first charge and the guidance card that names
+#      the number is live from turn one.
+# F4b· THE OPENING REFUSES NOTHING. Twelve of fourteen field openings contain no
+#      spoken refusal at all; the largest true opening in the corpus is 78
+#      passages and holds seven conditionals and not one refusal. It hands over
+#      a bill. It does not enforce one.
+# F5 · EVERY HUB SITS BEHIND A MEETING, and each meeting carries a `schedules`
+#      window matching that character's OWN hours. `requires_npc` does NOT gate
+#      the auto-fire path (v2.py:4573) — it is set below because it is free and
+#      correct on the two paths that do read it, but the schedule is what works.
+# F6 · A MEETING IS SMALL AND SOMEBODY SPEAKS. Field median 101 words, 64% with
+#      dialogue. A meeting with no `dialog` block is a description, not an
+#      introduction.
+# F7 · ROLE BEFORE NAME. Every meeting below opens on what he is to her.
+#      the_season/meet_emmett opened "Emmett is on the belt…" and no line in
+#      that canvas ever said he was her brother.
+# F8 · ONE FLAG PER CHARACTER. `arrival_done` opening four hubs is the cold-spawn
+#      hub with a coat on, and three of six v2 games shipped exactly that.
+#      Six flags here, one each: met_gail, met_ray, met_cole, met_doyle,
+#      met_trevor, met_vic.
+#
+# ⚠️ @ray AND @cole, NEVER A TYPED NAME. Both carry relationship_options, so
+#    `customizable = true` renders a name textbox (v2.py:9296) and whatever the
+#    player types is their name. The kinship reads as @ray.rel / @cole.rel
+#    (v2.py:14656).
+#
+# ⚠️ ONE TERM OF ADDRESS PER PERSON AND NOBODY ELSE USES IT (register.md S3).
+#    Roughly every sixth to twentieth line, and the terms do not overlap:
+#      @ray "kid" · Gail "love" · @cole "trouble" · Doyle "Miss Reed"
+#      · Trevor uses her actual name (@player) and is the only one who does
+#      · Vic "miss"
+#    the_season shipped 56 NPC lines in which only one character ever addressed
+#    the protagonist at all, and her own father never said her name once.
+#
+# ⚠️ L3 — HISTORY LIVES HERE, NOT ON A REPEATABLE SCREEN. Field max is 5.41% of
+#    sentences carrying elapsed time; eight of our nine games are above it and
+#    the worst runs 12.1%. The backstory canvases at the bottom of this file are
+#    where "six years", "since September" and "before the wedding" are allowed
+#    to land, once, properly, and then stay out of the way.
+# =============================================================================
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE BOOT.  Small. It does not carry the cast.
+# ═════════════════════════════════════════════════════════════════════════════
+[[canvases]]
+id       = "open_boot"
+name     = "Seven o'clock, Monday"
+
+[canvases.trigger]
+priority      = 100
+location      = "her_room"
+is_repeatable = false
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "Your alarm goes at seven and you are already awake, lying still, listening to whether the bathroom is free. It is the same ceiling you looked at when you were twelve. The desk under the window has a lamp on it and a stack of paper you have not opened." },
+  { type = "paragraph", content = "First week of the second year. You are reading @player.major. You live at home. The bus is a quarter of an hour if you catch it." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Somebody is already downstairs. That will be your mother, and she will want to talk about money." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go down before she leaves."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_kitchen"
+time_progression_minutes = 5
+flagEffects = [
+  { targetType = "player", flag = "opening_started", op = "set" },
+]
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE CAPSTONE.  One person, on screen, speaking — and the START CHOICE.
+#
+# ⚠️ A MEMORY, NOT A SLIDER (the-want.md §1). The scene is already asking it:
+#    Gail brings up last summer because she is working out whether her daughter
+#    is going to be able to make the payments. Do not build a stat screen. The
+#    field's creation screens carry ZERO stat fields.
+# ⚠️ THE FLAG GOES ON THE CHOICE, and this canvas is LOCATED (the_kitchen), so
+#    the flag-chain validator can resolve it. A flag set inside a triggerless
+#    canvas has no located setter and HARD-FAILS the build (§16).
+# ⚠️ Both canvases auto-fire through selectAutoFireCanvasForLocation, which
+#    takes the highest-priority valid NON-repeatable canvas (v2.py:4453-4471).
+#    The `opening_started` gate is what guarantees the order.
+# ═════════════════════════════════════════════════════════════════════════════
+[[canvases]]
+id       = "open_kitchen"
+name     = "What you did all summer"
+
+[canvases.trigger]
+priority      = 99
+location      = "the_kitchen"
+is_repeatable = false
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_started", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "Your mother is at the table with her coat on and her bag already over the back of the chair. She has about six minutes. There is a letter open in front of her with the school's name across the top." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_gail" }, content = "Sit down a minute, love. This came Saturday." },
+  { type = "paragraph", content = "It is the payment plan. Your name is on it and nobody else's. A hundred and eighty a week. Thursdays, at the window in the main building. The first one is this week." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_gail" }, content = "The desk job covers most of a week. Most of it. The rest you'll have to ask for at this table, and you know who you'll be asking." },
+  { type = "paragraph", content = "She says it flat, the way she says everything before a shift. Then she looks at you properly for the first time this morning." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask her what she means by that."
+targetType = "node"
+nodeId     = "open_kitchen.the_summer"
+
+
+[[canvases.nodes]]
+id = "the_summer"
+name = "Last summer"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_gail" }, content = "I mean you had all summer, and I still don't know what you did with it." },
+  { type = "paragraph", content = "She is working out what she is dealing with. It is the first straight question anybody has asked you since June." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# ── THE START CHOICE. Three answers, three flags, five read sites each, and
+#    every rung they touch keeps its original version behind `<flag> is_false`.
+#    ⚠️ PLACEMENT: keep each past-band separated from a surface's existing
+#    ladder by a non-`group` block. Adjacent [group] blocks merge into ONE
+#    if/elseif chain and first match wins (v2.py:14637), so a past-band dropped
+#    beside an existing ladder makes that ladder unreachable for every player
+#    carrying a past — no error, no warning, the prose simply stops appearing.
+[[canvases.nodes.exit_block.choices]]
+text        = "\"I worked. Forty hours a week, all of it gone.\""
+targetType  = "node"
+nodeId      = "open_kitchen.answered"
+flagEffects = [ { targetType = "player", flag = "past_worked", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text        = "\"I was away. You know I was away.\""
+targetType  = "node"
+nodeId      = "open_kitchen.answered"
+flagEffects = [ { targetType = "player", flag = "past_away", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text        = "\"I was here. The whole time. In this house.\""
+targetType  = "node"
+nodeId      = "open_kitchen.answered"
+flagEffects = [ { targetType = "player", flag = "past_home", op = "set" } ]
+
+
+[[canvases.nodes]]
+id = "answered"
+name = "Answered"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "past_worked", operator = "is_true" },
+    ] }, blocks = [
+    { type = "paragraph", content = "She nods once. She can do that arithmetic herself, and she has decided to be kind about it. You worked a counter all summer. You know how to stand at one for eight hours and still sound pleasant at the end." },
+  ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "past_away", operator = "is_true" },
+    ] }, blocks = [
+    { type = "paragraph", content = "She nods once and lets it go. In August she asked twice and then stopped. Three months in somebody else's flat two states over. Nobody in this house has properly looked at you since May." },
+  ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "past_home", operator = "is_true" },
+    ] }, blocks = [
+    { type = "paragraph", content = "She nods once and something in her face moves, because that is the answer she already knew. Three months in these six rooms. @ray and @cole are used to you at that table at two in the afternoon. You are used to them." },
+  ] },
+  { type = "paragraph", content = "She stands, and puts the letter in your hand rather than back in its envelope." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_gail" }, content = "Thursday, love. And go to the eight o'clock. It's the only one they take a register at." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the letter upstairs and get your bag. (15m)"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "her_room"
+time_progression_minutes = 15
+flagEffects = [
+  { targetType = "player", flag = "met_gail",           op = "set" },
+  { targetType = "player", flag = "first_week_started", op = "set" },
+]
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE FIVE MEETINGS
+#
+# Gail was met in the capstone. These five each carry ONE flag, a schedules
+# window inside that character's own hours, and somebody speaking.
+#
+# ⚠️ THE SCHEDULE IS WHAT GATES, NOT `requires_npc`. Traced:
+#      getStoryCanvasRedirect (v2.py:4921) -> selectAutoFireCanvasForLocation
+#      (v2.py:4453) -> isCanvasValid (v2.py:4573), which checks schedules,
+#      conditions and repeatability and NEVER READS requiresNpc.
+#    `requiresNpc` is consumed at only two sites, v2.py:5259 (random encounters)
+#    and v2.py:5332 (substitutions). Neither is auto-fire. vesper's
+#    cap_renner_hired carries requires_npc and introduces him in an empty bar at
+#    ten in the morning. It is set below because it is free and correct on the
+#    two paths that read it — the window is what works.
+# ⚠️ A non-repeatable canvas renders NO PORTRAIT — selectNpcPortraitCanvases
+#    skips `if (!c.isRepeatable) continue` (v2.py:4482-4487) — so a meeting
+#    cannot leak onto the location screen as a face before it has fired.
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ── RAY.  Role first. He is the money, and he has never once traded on it.
+[[canvases]]
+id       = "meet_ray"
+name     = "In off the drive"
+
+[canvases.trigger]
+priority      = 90
+location      = "the_kitchen"
+is_repeatable = false
+requires_npc  = "npc_ray"
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_gail", operator = "is_true" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:30"
+end_time   = "19:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "Your @ray.rel comes in at half six with his coat still on. The bank envelope goes on the table before he does anything else. He does that first every week. He has worked out that doing it after tea turns it into a conversation." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "That's the shortfall on Thursday, kid. Count it now so you're not counting it at the window." },
+  { type = "paragraph", content = "You count it. He watches your hands and not your face, and you have decided over six years that this is a courtesy." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "And take the printed receipt off the girl. Not the stamp. They lose the stamp." },
+  { type = "paragraph", content = "Then he hangs the coat up, and the kitchen goes back to being a kitchen." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Put it in your bag."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_kitchen"
+time_progression_minutes = 10
+flagEffects = [ { targetType = "player", flag = "met_ray", op = "set" } ]
+
+
+# ── COLE.  Role first. He works nights, so his morning is her afternoon.
+[[canvases]]
+id       = "meet_cole"
+name     = "The other side of the wall"
+
+[canvases.trigger]
+priority      = 90
+location      = "coles_room"
+is_repeatable = false
+requires_npc  = "npc_cole"
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_gail", operator = "is_true" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "11:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "Your @cole.rel is face down on top of the covers with the blinds shut. His boots are on the floor where he stepped out of them. He came in off the plant at one. You knock on the frame and he answers without turning over." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cole" }, content = "It's on the side, trouble. Take it and shut the door on your way." },
+  { type = "paragraph", content = "Your charger is on the side. He has had it a week. He rolls over onto an elbow and looks at you properly. He takes his time about it. He has done that since you were both fifteen and living in the same house as strangers." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cole" }, content = "You're up early for somebody with nothing on till eight tomorrow." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the charger."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "coles_room"
+time_progression_minutes = 10
+flagEffects = [ { targetType = "player", flag = "met_cole", op = "set" } ]
+
+
+# ── DOYLE.  Role first. Three contracted hours a week.
+[[canvases]]
+id       = "meet_doyle"
+name     = "The eight o'clock"
+
+[canvases.trigger]
+priority      = 90
+location      = "the_lecture_hall"
+is_repeatable = false
+requires_npc  = "npc_doyle"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "08:00"
+end_time   = "09:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "The man who takes the eight o'clock section is at the bottom of the room by the door. He is marking a register he clearly resents. Forty-six, jacket, a stack of paper he keeps squaring. Ninety of you and one of him." },
+  { type = "paragraph", content = "He reads the list out. At your name he stops a half second longer than the ones either side. Then he goes on." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_doyle" }, content = "Miss Reed. You're the one who's actually done the reading, going by Friday's sheet." },
+  { type = "paragraph", content = "Eighty-nine people hear him say it. He goes straight back to the register and does not look up again for the whole hour." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Find a seat."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_lecture_hall"
+time_progression_minutes = 5
+flagEffects = [ { targetType = "player", flag = "met_doyle", op = "set" } ]
+
+
+# ── TREVOR.  Role first. The only person here with nothing over her.
+[[canvases]]
+id       = "meet_trevor"
+name     = "The other name on the list"
+
+[canvases.trigger]
+priority      = 90
+location      = "the_lab"
+is_repeatable = false
+requires_npc  = "npc_trevor"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3]
+start_time = "18:00"
+end_time   = "22:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "The other name on the evening list is already at the far bench with both taps running. He has a look on his face like the taps have personally wronged him. Twenty, second year, and he gets through the four hours by talking." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_trevor" }, content = "You're @player. You sat two along from me all last term. I said nothing for eleven weeks. I'm getting it over with now." },
+  { type = "paragraph", content = "He says it straight at you across the bench, cheerfully, with the water still running. Nobody on this campus has said anything to you that directly since you enrolled." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_trevor" }, content = "Right. That's done. Can you do the glassware, because I genuinely cannot look at it." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the far tap."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_lab"
+time_progression_minutes = 10
+flagEffects = [ { targetType = "player", flag = "met_trevor", op = "set" } ]
+
+
+# ── VIC.  Role first. He is the doors.
+[[canvases]]
+id       = "meet_vic"
+name     = "The man with the keys"
+
+[canvases.trigger]
+priority      = 90
+location      = "the_campus"
+is_repeatable = false
+requires_npc  = "npc_vic"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "21:00"
+end_time   = "01:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "The man who locks the buildings is coming the other way across the grass. The ring on his belt is heavy enough to hear. Fifty-eight, work coat, a torch he is not using because he knows the paths." },
+  { type = "paragraph", content = "The doors went at nine. You are on the wrong side of that by twenty minutes and you both know it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_vic" }, content = "Front's shut, miss. Side door by the bins is on the latch till I get to it." },
+  { type = "paragraph", content = "He says it and keeps walking. He asks nothing, and the book on his belt stays shut." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go round to the side door."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_campus"
+time_progression_minutes = 5
+flagEffects = [ { targetType = "player", flag = "met_vic", op = "set" } ]

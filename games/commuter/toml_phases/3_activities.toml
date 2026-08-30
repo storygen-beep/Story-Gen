@@ -1,0 +1,1255 @@
+# =============================================================================
+# Commuter — 3_activities  ·  THE STANDING SURFACES
+#
+# R2 · A ROOM'S LIST IS NEEDS + WORK + PEOPLE, and nothing else. A body needs
+#      about five things and a room contains fifty nouns: needs are a CLOSED
+#      list, objects are an OPEN one, so the count sizes itself. The rule this
+#      replaced — declare the objects and hang a choice off each — shipped a
+#      kitchen with five buttons, three of which had a free duplicate inside the
+#      first. People are hubs and they live in 5_scenes. Field median for
+#      things-to-do-at-a-place is THREE; gate 20's cap of 8 is a backstop.
+# M8 · EVERY NEED SHUTS A NAMED DOOR, or it is a chore. the_allowance declared a
+#      hygiene decay, shipped FOUR ways to wash, and had ZERO conditions reading
+#      it — a fully wired loop that meant nothing.
+#        energy   -> spent through `costs`; under the band the 8am is gone
+#        hunger   -> gates the desk shift and the lab hour
+#        hygiene  -> gates the desk shift and the section (she will not go out)
+#        prep     -> gates the section rungs; the way through is owing Doyle
+# M5 · A DAY-CAP FLAG GOES ON THE CHOICE, never on a rung's exit. A choice runs
+#      flagEffects BEFORE advanceTime; an exit runs advanceTime FIRST
+#      (v2.py:12648-12733 vs :13085-13088), and advanceTime is where the day
+#      rolls and [engine.daily_tick] clears. off_season's sleep rung ran
+#      21:00->06:00 with the flag on the exit and was never offered before
+#      midnight again from night two.
+#      ⚠️ A LOCATED canvas needs no flag: max_triggers_per_day is read off the
+#      trigger (v2.py:11017) and markCanvasTriggered stamps the day key BEFORE
+#      advanceTime (v2.py:4290), so it is immune.
+# R7 · EVERY SCREEN KEEPS ONE DOOR. A choice whose conditions fail renders
+#      NOTHING (v2.py:12806), and a COST-BEARING choice counts as conditional
+#      too (v2.py:12827-12836) — so a screen whose only affordance costs $3 is
+#      as empty at $0 as a spent hub is. Every screen below has one choice with
+#      neither `conditions` nor `costs`, written to CLOSE the beat.
+# R6 · MECHANISM 5 — `block_pool`. 46 uses in the_long_summer, 14 in
+#      under_one_roof, 6 in vesper, and ZERO across every v2 game. Every base
+#      node here carries one. "Same gifs every time you do same things every
+#      single time" is the top-liked criticism of a field game.
+# C4 · A LABEL THAT SPENDS THE CLOCK SAYS HOW MUCH, in one form held across the
+#      game, and the stated duration is the real spend. C3 · a label may never
+#      name a CLOCK TIME — the engine has no absolute-time advance (0 hits).
+# C5 · IF A THING HAS HOURS, PUBLISH THEM. show_when_blocked + cooldown_message
+#      at the TOP LEVEL of [canvases.trigger] keep a closed activity as a dimmed
+#      line carrying the author's words instead of dropping it silently
+#      (v2.py:11055, rendered :5143). Authoring them under trigger.metadata is a
+#      DEAD PATH: valid TOML, green build, and showWhenBlocked reaches the HTML
+#      zero times. One game in the repo uses this surface at all.
+# §21· clamp = false ON EVERY MONEY GRANT, or the balance caps at 100 and the
+#      $180 demand is unpayable. A `costs` deduction is hard-clamped 0-100 and
+#      CANNOT be unclamped, so above 100 the next priced purchase truncates.
+# =============================================================================
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE BODY — four needs, four doors.
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ── SLEEP.  Located + max_triggers_per_day, so it needs no flag and cannot hit
+#    the midnight trap. energy is a RESTORE, so `cap` is exactly what cap is for
+#    (§29): it bounds the VALUE, never the rate.
+[[canvases]]
+id       = "act_sleep"
+name     = "Sleep"
+
+[canvases.trigger]
+priority             = 20
+location             = "her_room"
+is_repeatable        = true
+max_triggers_per_day = 1
+show_when_blocked    = true
+cooldown_message     = "from ten at night, once a night"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "04:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The wall behind your bed is nine inches of drywall. You have known which side of it to sleep on since you were thirteen. You still sleep on that side." },
+    { type = "paragraph", content = "The landing light stays on until your mother is in. You can see the line of it under your door and you wait for it to go out." },
+    { type = "paragraph", content = "The plant bus goes past the end of the road at ten past. You are usually awake for it and usually asleep by the next one." },
+    { type = "paragraph", content = "Your bag is packed by the door with the reading in it. You did that at sixteen too, for the same reason, so the morning is somebody else's problem." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sleep. (8h)"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "her_room"
+time_progression_minutes = 480
+effects = [
+  { targetType = "player", trait = "energy", op = "add", value = 75, cap = 100 },
+]
+
+
+# ── WASH.  One bathroom, four people. The door is the content.
+[[canvases]]
+id       = "act_wash"
+name     = "Wash"
+
+[canvases.trigger]
+priority      = 20
+location      = "the_bathroom"
+is_repeatable = true
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The bolt sits proud of the keeper and always has. It holds the door against habit and nothing else. Everyone in this house knows to knock and everyone in this house forgets." },
+    { type = "paragraph", content = "Somebody has left the window open again and the room is cold enough to see your breath in. The mirror is the only thing in here that stays clear." },
+    { type = "paragraph", content = "Your @player.hair hair takes twenty minutes to dry and there is one socket, out on the landing, by the top of the stairs." },
+    { type = "paragraph", content = "There is a mark on the frosted glass at shoulder height where a hand goes when somebody pushes the door instead of trying the handle." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Get clean. (25m)"
+targetType               = "location"
+locationId               = "the_bathroom"
+time_progression_minutes = 25
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "washed_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "washed_today", op = "set" } ]
+show_when_locked = true
+locked_text      = "You have had the water once today and @cole is on nights. Tomorrow."
+effects = [
+  { targetType = "player", trait = "hygiene", op = "add", value = 60, cap = 100 },
+  { targetType = "player", trait = "energy",  op = "add", value = 4,  cap = 100 },
+]
+
+# ── The `seen` rung in here, and it is where the wardrobe gets READ.
+#    worn_exposure is the only aggregate that can tell naked from plainly
+#    dressed: getWornStatMax SKIPS an empty slot and starts at zero
+#    (v2.py:1578-1579), so worn_beauty and worn_corruption cannot.
+#    ⚠️ ADDITIVE. The past-band below is a separate CHOICE, not a [group]
+#    dropped beside this one — adjacent groups merge into one if/elseif chain
+#    and first match wins (v2.py:14637).
+[[canvases.nodes.exit_block.choices]]
+text                     = "Come out onto the landing in the towel. (5m)"
+targetType               = "location"
+locationId               = "home"
+time_progression_minutes = 5
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "washed_today", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "hygiene", operator = "gte", value = 40 },
+  { type = "worn_exposure", operator = "lte", value = 1 },
+] }
+show_when_locked = true
+locked_text      = "Get in the shower first. Walking the landing in a towel you have not earned is just cold."
+effects = [
+  { targetType = "player", trait = "seen",  op = "add", value = 3, cap = 100 },
+  { targetType = "player", trait = "house", op = "add", value = 2, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Dress in here, the way you always have."
+targetType               = "location"
+locationId               = "home"
+time_progression_minutes = 10
+
+
+# ── EAT — the kitchen. Free, and there is somebody at the table.
+[[canvases]]
+id       = "act_eat_home"
+name     = "Eat"
+
+[canvases.trigger]
+priority      = 20
+location      = "the_kitchen"
+is_repeatable = true
+
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_kitchen_ray"
+chance           = 0.15
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_kitchen", npc_id = "npc_ray", operator = "is_present" },
+  { type = "trait", subject = "npc", npc_id = "npc_ray", trait_key = "relation", operator = "lt", value = 22 },
+] }
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_kitchen_ray"
+chance           = 0.4
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_kitchen", npc_id = "npc_ray", operator = "is_present" },
+  { type = "trait", subject = "npc", npc_id = "npc_ray", trait_key = "relation", operator = "gte", value = 22 },
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "There is bread and there are eggs and there is a note about the eggs. Your mother writes the note whether or not anybody has touched them." },
+    { type = "paragraph", content = "The table seats four and has done since you were twelve. Nobody has ever sat in the chair with its back to the window." },
+    { type = "paragraph", content = "Somebody has stacked the plates rather than washed them. You know exactly who, and so does everybody else, and nobody says it." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Make something and stand up to eat it. (20m)"
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 20
+effects = [
+  { targetType = "player", trait = "hunger", op = "add", value = 55, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave it. You will get something on Main."
+targetType               = "location"
+locationId               = "home"
+time_progression_minutes = 5
+
+
+# ── EAT — out. Priced, and it is the cheapest sink in the game.
+[[canvases]]
+id       = "act_eat_out"
+name     = "Get something to eat"
+
+[canvases.trigger]
+priority      = 20
+location      = "main_street"
+is_repeatable = true
+
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_street_cole"
+chance           = 0.15
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "main_street", npc_id = "npc_cole", operator = "is_present" },
+  { type = "trait", subject = "npc", npc_id = "npc_cole", trait_key = "relation", operator = "lt", value = 22 },
+] }
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_street_cole"
+chance           = 0.4
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "main_street", npc_id = "npc_cole", operator = "is_present" },
+  { type = "trait", subject = "npc", npc_id = "npc_cole", trait_key = "relation", operator = "gte", value = 22 },
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The bakery on Main stays open past the shops because it sells to the plant shift. Four pounds of pastry in the window and a queue of men in work coats." },
+    { type = "paragraph", content = "The counter girl is in your year and neither of you has ever worked out whether to say so. She rings it through and says nothing, again." },
+    { type = "paragraph", content = "You eat it standing at the window with your bag between your feet, and you watch the bus you are not getting go past." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Buy something at the bakery. ($4, 15m)"
+targetType               = "location"
+locationId               = "main_street"
+time_progression_minutes = 15
+costs                    = [ { trait = "money", value = 4 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "ate_out_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "ate_out_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "hunger", op = "add", value = 50, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Walk past it."
+targetType               = "location"
+locationId               = "main_street"
+time_progression_minutes = 5
+
+
+# ── READ.  `prep` is the need the premise adds, and the one that routes her
+#    into owing somebody. It is also the only need she can fill in two places.
+[[canvases]]
+id       = "act_read_room"
+name     = "Do the reading"
+
+[canvases.trigger]
+priority      = 20
+location      = "her_room"
+is_repeatable = true
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The desk faces the window and the window faces the road. You have moved it twice and put it back both times." },
+    { type = "paragraph", content = "You can hear the television downstairs through the floor. Not the words. The shape of the words, which is worse." },
+    { type = "paragraph", content = "@player.major does not get easier at eleven at night. It gets shorter, because you start skipping the parts you can bluff." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Read until it stops going in. (2h)"
+targetType               = "location"
+locationId               = "her_room"
+time_progression_minutes = 120
+costs                    = [ { trait = "energy", value = 14 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "read_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "read_today", op = "set" } ]
+show_when_locked = true
+locked_text      = "You have done the reading today. It will still be there tomorrow."
+effects = [
+  { targetType = "player", trait = "prep", op = "add", value = 55, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Shut the book."
+targetType               = "location"
+locationId               = "her_room"
+time_progression_minutes = 5
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# WORK — where the money comes from. Three channels, and the honest weekly max
+# is the sum of them: desk 5 x $28 = 140 · lab 4 x $18 = 72 · asking 7 x $20 =
+# 140, so $352 against a $180 demand. She never HAS to ask. Energy and the clock
+# are what make her, and the sinks are what take it.
+#
+# ⚠️ NO PAYMENT CANVAS. [settings.rent] takes the money (§26). A shipped game ran
+#    that system correctly AND wrote the hand-over scene beside it, and the
+#    authored one carried no cost and no money effect — a free, repeatable,
+#    unlimited relation faucet, and the free one was the one with the writing in
+#    it. The ask BEFORE is authored. The transaction is not.
+# ⚠️ R5 · NO FREE UNCAPPED INCOME, gated rungs included. "A gate in front of a
+#    printer delays the printer." Every earning choice below carries BOTH a day
+#    flag and an energy cost.
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ── THE DESK.  The anchor. Everyone on this campus walks past it.
+[[canvases]]
+id       = "work_desk"
+name     = "Work the desk"
+
+[canvases.trigger]
+priority          = 25
+location          = "the_service_desk"
+is_repeatable     = true
+show_when_blocked = true
+cooldown_message  = "weekdays, ten till four"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "10:00"
+end_time   = "16:00"
+
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_desk_vic"
+chance           = 0.15
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_service_desk", npc_id = "npc_vic", operator = "is_present" },
+  { type = "trait", subject = "npc", npc_id = "npc_vic", trait_key = "relation", operator = "lt", value = 22 },
+] }
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_desk_vic"
+chance           = 0.4
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_service_desk", npc_id = "npc_vic", operator = "is_present" },
+  { type = "trait", subject = "npc", npc_id = "npc_vic", trait_key = "relation", operator = "gte", value = 22 },
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The counter is between the front doors and the stairs, so everybody in this building passes it twice. Most of them look. A few of them stop." },
+    { type = "paragraph", content = "There is a bell on the counter that nobody has ever needed to use, because you are always already looking up by the time they reach it." },
+    { type = "paragraph", content = "The chair is too low for the counter. You spend six hours a week with your shoulders up and you have stopped noticing." },
+    { type = "paragraph", content = "Lost property lives in a crate under the desk. Somebody's coat has been in it since March and you have started to think of it as yours." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Work the shift. ($28, 4h)"
+targetType               = "location"
+locationId               = "the_service_desk"
+time_progression_minutes = 240
+costs                    = [ { trait = "energy", value = 22 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "desk_shift_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "hygiene", operator = "gte", value = 25 },
+  { type = "trait", subject = "player", trait_key = "hunger",  operator = "gte", value = 25 },
+] }
+flagEffects = [ { targetType = "player", flag = "desk_shift_today", op = "set" } ]
+show_when_locked = true
+locked_text      = "Not today. You have done your hours, or you are in no state to stand behind that counter."
+effects = [
+  { targetType = "player", trait = "money",    op = "add", value = 28, clamp = false },
+  { targetType = "player", trait = "standing", op = "add", value = 4, cap = 100 },
+  { targetType = "player", trait = "hygiene",  op = "add", value = -18 },
+]
+
+# ── The late shift. Opened by `standing`, and it is R3c's answer: when the
+#    demand rises the income has to rise with it. The original stays live behind
+#    the flag's is_false, so nothing is taken away.
+[[canvases.nodes.exit_block.choices]]
+text                     = "Take the lock-up shift as well. ($34, 3h)"
+targetType               = "location"
+locationId               = "the_service_desk"
+time_progression_minutes = 180
+costs                    = [ { trait = "energy", value = 20 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "desk_shift_today", operator = "is_true" },
+  { type = "flag",  subject = "player", flag_key = "lockup_today",     operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "standing", operator = "gte", value = 30 },
+] }
+flagEffects = [ { targetType = "player", flag = "lockup_today", op = "set" } ]
+show_when_locked = true
+locked_text      = "They give the lock-up to somebody they already trust with a key, and only the once a night."
+effects = [
+  { targetType = "player", trait = "money",    op = "add", value = 34, clamp = false },
+  { targetType = "player", trait = "standing", op = "add", value = 3, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Work it in what you bought on Main. ($28, 4h)"
+targetType               = "location"
+locationId               = "the_service_desk"
+time_progression_minutes = 240
+costs                    = [ { trait = "energy", value = 22 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "desk_shift_today", operator = "is_false" },
+  { type = "clothing_item", item_id = "black_dress", operator = "equipped" },
+] }
+flagEffects = [ { targetType = "player", flag = "desk_shift_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "money",    op = "add", value = 28, clamp = false },
+  { targetType = "player", trait = "standing", op = "add", value = 4, cap = 100 },
+  { targetType = "player", trait = "seen",     op = "add", value = 5, cap = 100 },
+  { targetType = "player", trait = "hygiene",  op = "add", value = -18 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Sign out and go."
+targetType               = "location"
+locationId               = "the_campus"
+time_progression_minutes = 5
+
+
+# ── THE LAB HOUR.  Covering for somebody is how you become somebody's favour.
+[[canvases]]
+id       = "work_lab_hour"
+name     = "Cover the lab hour"
+
+[canvases.trigger]
+priority          = 25
+location          = "the_lab"
+is_repeatable     = true
+show_when_blocked = true
+cooldown_message  = "Monday to Thursday, from six"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3]
+start_time = "18:00"
+end_time   = "22:00"
+
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_lab_trevor"
+chance           = 0.15
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_lab", npc_id = "npc_trevor", operator = "is_present" },
+  { type = "trait", subject = "npc", npc_id = "npc_trevor", trait_key = "relation", operator = "lt", value = 22 },
+] }
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_lab_trevor"
+chance           = 0.4
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_lab", npc_id = "npc_trevor", operator = "is_present" },
+  { type = "trait", subject = "npc", npc_id = "npc_trevor", trait_key = "relation", operator = "gte", value = 22 },
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The lights take a second to come on and then stay on too hard. Four hours of that and the corridor outside looks like dusk at nine o'clock." },
+    { type = "paragraph", content = "Two benches, four taps, and a bank of drawers nobody has labelled since before you enrolled. You know where everything is by feel now." },
+    { type = "paragraph", content = "The rota on the door has your name on it in somebody else's handwriting. Trevor writes it up on Mondays and spells it wrong on purpose." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Take the hour. ($18, 2h)"
+targetType               = "location"
+locationId               = "the_lab"
+time_progression_minutes = 120
+costs                    = [ { trait = "energy", value = 12 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "lab_hour_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "hunger", operator = "gte", value = 25 },
+] }
+flagEffects = [ { targetType = "player", flag = "lab_hour_today", op = "set" } ]
+show_when_locked = true
+locked_text      = "You have done the hour, or you are too hungry to stand at a bench for two of them."
+effects = [
+  { targetType = "player", trait = "money",    op = "add", value = 18, clamp = false },
+  { targetType = "player", trait = "standing", op = "add", value = 2, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Read at the bench instead. (1h)"
+targetType               = "location"
+locationId               = "the_lab"
+time_progression_minutes = 60
+costs                    = [ { trait = "energy", value = 8 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "read_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "read_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "prep", op = "add", value = 40, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Turn the lights off behind you."
+targetType               = "location"
+locationId               = "the_campus"
+time_progression_minutes = 5
+
+
+# ── THE ASK.  The third income channel, and the only one with a person's face
+#    on it. It costs @ray relation: W6's rule that a meter is a TRADE, not a
+#    bonus. inseminator's six traits make five of six routes cheaper AND
+#    another more expensive; a meter that only opens things is a stat wearing a
+#    personality's name.
+[[canvases]]
+id       = "work_ask_table"
+name     = "Ask at the table"
+
+[canvases.trigger]
+priority          = 25
+location          = "the_kitchen"
+is_repeatable     = true
+show_when_blocked = true
+cooldown_message  = "evenings, when he is in"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time   = "21:30"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The envelope lives in the drawer by the sink and everybody in this house knows which drawer. Nobody has ever moved it." },
+    { type = "paragraph", content = "Asking costs about four seconds. You have spent whole evenings working out how to make those four seconds shorter." },
+    { type = "paragraph", content = "He keeps the school's letter folded in the same drawer. Your name is on it. He has read it more times than you have." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Ask him for the difference. ($20, 15m)"
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 15
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_ray", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "asked_at_table_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "asked_at_table_today", op = "set" } ]
+show_when_locked = true
+locked_text      = "You have asked once today. Twice is a different conversation."
+effects = [
+  { targetType = "player", trait = "money", op = "add", value = 20, clamp = false },
+  { targetType = "npc", npcId = "npc_ray", trait = "relation", op = "add", value = -2 },
+]
+
+# ── R5b · SHE CAN SAY NO, and the decline is written at full length and PAYS.
+#    Zara's School Life grants +60 energy on its decline branch; Course of
+#    Temptation charges for pushing and being refused. Four of our games ship
+#    622 authored choices between them and not one refusal.
+[[canvases.nodes.exit_block.choices]]
+text                     = "Tell him no. You have got it covered this week. (10m)"
+targetType               = "node"
+nodeId                   = "work_ask_table.declined"
+time_progression_minutes = 10
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_ray", operator = "is_true" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave the drawer shut."
+targetType               = "location"
+locationId               = "home"
+time_progression_minutes = 5
+
+
+[[canvases.nodes]]
+id = "declined"
+name = "Declined"
+blocks = [
+  { type = "paragraph", content = "You tell him you have got it covered. It is true this week and he can tell it is true, and he does something with his mouth that is almost a smile." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "Right. Well. It stays in the drawer, then, kid." },
+  { type = "paragraph", content = "He leaves it in the drawer. He also leaves the drawer open about an inch, which he has never done before, and you both look at it." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "home"
+time_progression_minutes = 5
+effects = [
+  { targetType = "npc", npcId = "npc_ray", trait = "relation", op = "add", value = 5 },
+  { targetType = "player", trait = "energy", op = "add", value = 10, cap = 100 },
+]
+
+
+# ── THE SECTION.  Not income. It is where `standing` starts and where `prep`
+#    shuts a door — and the only way through a shut one is owing Doyle.
+[[canvases]]
+id       = "act_section"
+name     = "The eight o'clock"
+
+[canvases.trigger]
+priority          = 25
+location          = "the_lecture_hall"
+is_repeatable     = true
+show_when_blocked = true
+cooldown_message  = "weekdays, eight till nine"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "08:00"
+end_time   = "09:00"
+
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_hall_doyle"
+chance           = 0.15
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_lecture_hall", npc_id = "npc_doyle", operator = "is_present" },
+  { type = "trait", subject = "npc", npc_id = "npc_doyle", trait_key = "relation", operator = "lt", value = 22 },
+] }
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_hall_doyle"
+chance           = 0.4
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_lecture_hall", npc_id = "npc_doyle", operator = "is_present" },
+  { type = "trait", subject = "npc", npc_id = "npc_doyle", trait_key = "relation", operator = "gte", value = 22 },
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "Ninety seats and about sixty people, so everybody sits in a ring around the empty middle. The register goes round on a clipboard and comes back short." },
+    { type = "paragraph", content = "There is one door and it is at the bottom, by him. Coming in late means walking the whole width of the room in front of everybody." },
+    { type = "paragraph", content = "The radiator under the third row works and the rest do not. In October that is the only seat anybody wants." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Sit near the front and answer him. (1h)"
+targetType               = "location"
+locationId               = "the_lecture_hall"
+time_progression_minutes = 60
+costs                    = [ { trait = "energy", value = 8 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "section_done_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "energy",  operator = "gte", value = 20 },
+  { type = "trait", subject = "player", trait_key = "prep",    operator = "gte", value = 30 },
+  { type = "trait", subject = "player", trait_key = "hygiene", operator = "gte", value = 25 },
+] }
+flagEffects = [ { targetType = "player", flag = "section_done_today", op = "set" } ]
+show_when_locked = true
+locked_text      = "You have not read it and he will ask. Sit at the back, or go and see him about an extension."
+effects = [
+  { targetType = "player", trait = "standing", op = "add", value = 5, cap = 100 },
+  { targetType = "player", trait = "prep",     op = "add", value = -15 },
+  { targetType = "npc", npcId = "npc_doyle", trait = "relation", op = "add", value = 3 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Sit at the back and keep your head down. (1h)"
+targetType               = "location"
+locationId               = "the_lecture_hall"
+time_progression_minutes = 60
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "section_done_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "energy", operator = "gte", value = 20 },
+] }
+flagEffects = [ { targetType = "player", flag = "section_done_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "standing", op = "add", value = 1, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Skip it."
+targetType               = "location"
+locationId               = "the_campus"
+time_progression_minutes = 5
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# SINKS — and they are SPREAD. A game passed gate 17 at 21 sinks : 20 sources
+# while TWELVE of those sinks sat on a single front desk. Presence is not
+# placement: pile them at one counter and you have a shop, not an economy.
+#
+# ⚠️ R1 · MONEY MUST GATE CONTENT, not merely price it. Gate 16 passes on either
+#    channel and cannot tell them apart; seven of our ten rent-enabled games have
+#    ZERO money conditions and pass on prices alone. The shop ladder below is the
+#    condition channel: the dress is on screen from day one and the prose under
+#    it changes as she saves toward it.
+# ⚠️ GROUPS ORDERED HIGHEST-FIRST. Adjacent [group] blocks compile into ONE
+#    exclusive if/elseif chain (v2.py:14637) and first match wins, so a low-first
+#    ladder is DEAD below its first rung: the `lt` case matches forever.
+# ⚠️ R1b · WHAT MONEY BUYS HAS TO STAY BOUGHT AND BE READ. Across all eight
+#    earlier v2 games money bought exactly ONE thing that opened anything, and
+#    five of the eight sell nothing at all. The dress is read by worn_exposure.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id       = "shop_main"
+name     = "The shop on Main"
+
+[canvases.trigger]
+priority          = 22
+location          = "main_street"
+is_repeatable     = true
+show_when_blocked = true
+cooldown_message  = "the shops shut at six"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5]
+start_time = "09:00"
+end_time   = "18:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "paragraph", content = "There is one rail at the back of the shop that is not school-run clothes, and there is a black dress on it that has been there since the start of term." },
+
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "dress_bought", operator = "is_true" },
+    ] }, blocks = [
+    { type = "paragraph", content = "The rail has a gap in it at your shoulder height now. The dress is in your room, on the back of the door, where you can see it from the bed." },
+  ] },
+
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 45 },
+    ] }, blocks = [
+    { type = "paragraph", content = "You have got the forty-five. You have had it since Thursday. What is stopping you is standing at the till with it and having the woman look at what you are buying." },
+  ] },
+
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 22 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Halfway. Another shift and a bit, if you keep off the bakery. You have started working it out in shifts rather than in money." },
+  ] },
+
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 22 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Forty-five dollars of nothing very much. Two weeks of the difference between what the desk pays and what Thursday takes." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Buy the campus pass off the machine. ($30, 10m)"
+targetType               = "location"
+locationId               = "main_street"
+time_progression_minutes = 10
+costs                    = [ { trait = "money", value = 30 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "has_pass", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "has_pass", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Look at the rail and go to the bus."
+targetType               = "location"
+locationId               = "main_street"
+time_progression_minutes = 5
+
+
+# ── THE WASHER.  A sink in the room the sink belongs in, and it shares the
+#    garage with the one person who is out there every evening.
+[[canvases]]
+id       = "act_laundry"
+name     = "Put a wash on"
+
+[canvases.trigger]
+priority      = 22
+location      = "the_garage"
+is_repeatable = true
+
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_garage_ray"
+chance           = 0.15
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_garage", npc_id = "npc_ray", operator = "is_present" },
+  { type = "trait", subject = "npc", npc_id = "npc_ray", trait_key = "relation", operator = "lt", value = 22 },
+] }
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_garage_ray"
+chance           = 0.4
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_garage", npc_id = "npc_ray", operator = "is_present" },
+  { type = "trait", subject = "npc", npc_id = "npc_ray", trait_key = "relation", operator = "gte", value = 22 },
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The machine is out here because it was too loud in the kitchen. It walks about a foot to the left on a full spin and somebody has wedged it with a brick." },
+    { type = "paragraph", content = "The powder is on the shelf above it, next to a jar of screws and a torch with no batteries. Everything in this garage is one of those three." },
+    { type = "paragraph", content = "There is a chair out here. Nobody has ever called it a chair for anybody in particular and everybody knows whose it is." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Put a wash on. ($3, 45m)"
+targetType               = "location"
+locationId               = "the_garage"
+time_progression_minutes = 45
+costs                    = [ { trait = "money", value = 3 } ]
+effects = [
+  { targetType = "player", trait = "hygiene", op = "add", value = 12, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave it in the basket."
+targetType               = "location"
+locationId               = "home"
+time_progression_minutes = 5
+
+
+# ── THE CROSSING.  The campus ground, and where `has_pass` is READ. R1b: an
+#    owned thing has FEW write sites and MANY read sites, and across all eight
+#    earlier v2 games money bought exactly one thing that opened anything.
+[[canvases]]
+id       = "act_campus_cross"
+name     = "Cross the campus"
+
+[canvases.trigger]
+priority      = 22
+location      = "the_campus"
+is_repeatable = true
+
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_campus_vic"
+chance           = 0.15
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_campus", npc_id = "npc_vic", operator = "is_present" },
+  { type = "trait", subject = "npc", npc_id = "npc_vic", trait_key = "relation", operator = "lt", value = 22 },
+] }
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_campus_vic"
+chance           = 0.4
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_campus", npc_id = "npc_vic", operator = "is_present" },
+  { type = "trait", subject = "npc", npc_id = "npc_vic", trait_key = "relation", operator = "gte", value = 22 },
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Base"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The paths go round three sides of the grass and everybody cuts the fourth. There is a worn line across it that the groundsman reseeds every spring." },
+    { type = "paragraph", content = "Between the hour and ten past, four hundred people cross this square. You have learned which ten minutes to be nowhere near it." },
+    { type = "paragraph", content = "The main building keeps its lights on after the doors go. From out here you can see which offices are still occupied and roughly by whom." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Get something from the counter. ($5, 15m)"
+targetType               = "location"
+locationId               = "the_campus"
+time_progression_minutes = 15
+costs                    = [ { trait = "money", value = 5 } ]
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "ate_out_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "ate_out_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "hunger", op = "add", value = 45, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Take the late bus home. (35m)"
+targetType               = "location"
+locationId               = "home"
+time_progression_minutes = 35
+conditions               = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "has_pass", operator = "is_true" },
+] }
+show_when_locked = true
+locked_text      = "The late bus is pass only. The machine on Main sells them."
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Walk it."
+targetType               = "location"
+locationId               = "main_street"
+time_progression_minutes = 25
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE WORLD ACTS FIRST — trigger_mode = "random", and the TRAVERSAL LAYER
+#
+# R6 mechanism 4 is the one games actually drop: an event that replaces the
+# whole screen. Measured across the field, `trigger_mode = "random"` canvases —
+# vesper 14, forty_miles 8, and back_home / steam / seventh_day ZERO.
+#
+# This is also gate 5, and the reason it exists: movement between scenes is most
+# of the play minutes, so a non-erotic traversal layer wins by sheer occupancy.
+# A room that is warm only when she is working at it is a game that is cold most
+# of the time she is playing it.
+#
+# ⚠️ ONE ASSET, ONE BLOCK. Never reuse a `pool_dir` across two blocks — the media
+#    review dedupes by file, so two beats sharing an asset collect ONE verdict
+#    between them and the second is reviewed by nobody.
+# ⚠️ Cooldown is engine-managed per location (v2.py:5365). Do not author one.
+# ⚠️ A random ambient is NOT a door (F3) and cannot be the thing the opening
+#    hands over into.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id       = "amb_street_looked"
+name     = "Main Street"
+[canvases.trigger]
+trigger_mode         = "random"
+chance               = 0.18
+location             = "main_street"
+is_repeatable        = true
+max_triggers_per_day = 1
+priority             = 4
+[[canvases.nodes]]
+id = "base"
+name = "Main Street"
+blocks = [
+  { type = "video", props = { pool_dir = "amb/street_looked_t4", description = "A young woman walking a small-town street, men's heads turning.", search_queries = ["girl walking street men looking", "candid street walk tight jeans"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The plant shift comes down Main at six and takes up the whole pavement. You go single file past them and every one of them looks, and one of them says something you do not catch." },
+    { type = "paragraph", content = "Two men outside the bakery stop talking as you pass and start again after. You have been walking this street since you were eight. It stopped being the same street about a year ago." },
+    { type = "paragraph", content = "A car slows behind you for the length of two shops and then goes on. You do not turn round. You count the shops." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Keep walking."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "main_street"
+time_progression_minutes = 5
+effects = [ { targetType = "player", trait = "seen", op = "add", value = 1, cap = 100 } ]
+
+[[canvases]]
+id       = "amb_campus_watched"
+name     = "The square"
+[canvases.trigger]
+trigger_mode         = "random"
+chance               = 0.18
+location             = "the_campus"
+is_repeatable        = true
+max_triggers_per_day = 1
+priority             = 4
+[[canvases.nodes]]
+id = "base"
+name = "The square"
+blocks = [
+  { type = "video", props = { pool_dir = "amb/campus_watched_t4", description = "A student crossing a campus quad, watched from a window.", search_queries = ["college girl walking campus candid", "student quad walk behind"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "There are four floors of window on the long side of the square and about a third of them have somebody at them. You cross the middle of the grass anyway." },
+    { type = "paragraph", content = "Somebody wolf-whistles from a second-floor window and gets shouted down by whoever else is in the room. The whole square hears both halves of it." },
+    { type = "paragraph", content = "The wind comes round the corner of the main building hard enough to do what it likes with a skirt, and everybody who crosses here knows it, and everybody crosses here." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go on across."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_campus"
+time_progression_minutes = 5
+effects = [ { targetType = "player", trait = "seen", op = "add", value = 1, cap = 100 } ]
+
+[[canvases]]
+id       = "amb_desk_leaning"
+name     = "The counter"
+[canvases.trigger]
+trigger_mode         = "random"
+chance               = 0.20
+location             = "the_service_desk"
+is_repeatable        = true
+max_triggers_per_day = 1
+priority             = 4
+[[canvases.nodes]]
+id = "base"
+name = "The counter"
+blocks = [
+  { type = "video", props = { pool_dir = "amb/desk_leaning_t4", description = "A man leaning over a reception counter at a young woman working it.", search_queries = ["man leaning reception desk girl", "office counter flirt lean over"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He puts both forearms on the counter and leans in far enough that you can smell the coffee, and he asks you something he could have read off the board behind your head." },
+    { type = "paragraph", content = "The chair is low and the counter is high, so anybody standing at it is looking down at you. You have worked out that most of them enjoy that and none of them would say so." },
+    { type = "paragraph", content = "Somebody's mate waits by the stairs while he talks to you, and keeps looking over, and grins at him when he comes back." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Deal with it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_service_desk"
+time_progression_minutes = 5
+effects = [ { targetType = "player", trait = "seen", op = "add", value = 1, cap = 100 } ]
+
+[[canvases]]
+id       = "amb_landing_pass"
+name     = "The landing"
+[canvases.trigger]
+trigger_mode         = "random"
+chance               = 0.20
+location             = "home"
+is_repeatable        = true
+max_triggers_per_day = 1
+priority             = 4
+[[canvases.nodes]]
+id = "base"
+name = "The landing"
+blocks = [
+  { type = "video", props = { pool_dir = "amb/landing_pass_t5", description = "A woman in a towel passing a man in a narrow upstairs hallway.", search_queries = ["towel hallway pass by", "girl towel corridor man"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The landing is eleven feet and there is no way to take it that does not put you within a foot of whoever is coming the other way. Tonight it is @cole, and he turns side on, and so do you, and neither of you is quick about it." },
+    { type = "paragraph", content = "@ray comes up while you are at the top of the stairs with wet hair and a towel round you. He says goodnight, kid, and he keeps his eyes level, and it costs him something you can see." },
+    { type = "paragraph", content = "The bathroom door opens behind you and the steam goes out across the landing and somebody is in the hall below looking up through it." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go to your room."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "home"
+time_progression_minutes = 5
+effects = [
+  { targetType = "player", trait = "seen",  op = "add", value = 1, cap = 100 },
+  { targetType = "player", trait = "house", op = "add", value = 1, cap = 100 },
+]
+
+[[canvases]]
+id       = "amb_room_wall"
+name     = "Through the wall"
+[canvases.trigger]
+trigger_mode         = "random"
+chance               = 0.18
+location             = "her_room"
+is_repeatable        = true
+max_triggers_per_day = 1
+priority             = 4
+[[canvases.nodes]]
+id = "base"
+name = "Through the wall"
+blocks = [
+  { type = "video", props = { pool_dir = "amb/room_wall_t5", description = "A woman alone on a bed listening at a bedroom wall.", search_queries = ["girl bed listening wall", "woman alone bedroom hand under covers"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He is on the other side of the wall and he is not being quiet about it. You lie still and listen to the whole of it with your hand flat on your stomach and you do not move it." },
+    { type = "paragraph", content = "The bed on the other side of the wall goes twice and stops. You are awake for a long time afterwards working out whether he knows the wall is that thin." },
+    { type = "paragraph", content = "Somebody comes up at one and stops outside your door for about four seconds before going on to their own. You count the four seconds every time." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Turn over."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "her_room"
+time_progression_minutes = 10
+effects = [ { targetType = "player", trait = "arousal", op = "add", value = 12, cap = 100 } ]
+
+[[canvases]]
+id       = "amb_bath_handle"
+name     = "The handle"
+[canvases.trigger]
+trigger_mode         = "random"
+chance               = 0.22
+location             = "the_bathroom"
+is_repeatable        = true
+max_triggers_per_day = 1
+priority             = 4
+[[canvases.nodes]]
+id = "base"
+name = "The handle"
+blocks = [
+  { type = "video", props = { pool_dir = "amb/bath_handle_t5", description = "A woman naked in a small bathroom, door handle turning.", search_queries = ["shower door opens caught", "bathroom towel surprised doorway"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The handle goes down while you are stood on the mat with nothing on. The bolt holds it at about an inch. Whoever it is says sorry through the gap and does not go straight away." },
+    { type = "paragraph", content = "You forgot the bolt. The door comes open on @cole with a toothbrush in his hand and you are facing him. He looks, properly, and then he backs out, and he takes his time doing both." },
+    { type = "paragraph", content = "Somebody tries it, finds it shut, and waits on the landing rather than going downstairs. You can hear them not going downstairs the entire time you are drying off." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get dressed."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_bathroom"
+time_progression_minutes = 10
+effects = [ { targetType = "player", trait = "seen", op = "add", value = 2, cap = 100 } ]
+
+[[canvases]]
+id       = "amb_kitchen_reach"
+name     = "The top shelf"
+[canvases.trigger]
+trigger_mode         = "random"
+chance               = 0.18
+location             = "the_kitchen"
+is_repeatable        = true
+max_triggers_per_day = 1
+priority             = 4
+[[canvases.nodes]]
+id = "base"
+name = "The top shelf"
+blocks = [
+  { type = "video", props = { pool_dir = "amb/kitchen_reach_t4", description = "A woman reaching up in a kitchen while a man watches from the table.", search_queries = ["girl reaching kitchen shelf shirt rides up", "kitchen stretch top shelf candid"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The mugs are on the top shelf because your mother is tall and nobody has ever moved them. You go up on your toes for one and your shirt goes with you, and @ray is at the table, and he looks back down at the paper." },
+    { type = "paragraph", content = "You are at the sink with your back to the room and somebody comes in and does not say anything for a moment before they say anything." },
+    { type = "paragraph", content = "There is one gap between the table and the counter and two of you want it at the same time. You both turn sideways. It is still not enough room." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the mug and go."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_kitchen"
+time_progression_minutes = 5
+effects = [ { targetType = "player", trait = "seen", op = "add", value = 1, cap = 100 } ]
+
+[[canvases]]
+id       = "amb_coles_door"
+name     = "His door"
+[canvases.trigger]
+trigger_mode         = "random"
+chance               = 0.20
+location             = "coles_room"
+is_repeatable        = true
+max_triggers_per_day = 1
+priority             = 4
+[[canvases.nodes]]
+id = "base"
+name = "His door"
+blocks = [
+  { type = "video", props = { pool_dir = "amb/coles_door_t5", description = "A man asleep on a bed in daylight, a woman standing over him.", search_queries = ["man sleeping bed woman standing watching", "bedroom daylight blinds shut man bed"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He sleeps on top of the covers in this weather with nothing on but shorts, and the blinds do about half a job, and you are in here for a charger you could get later." },
+    { type = "paragraph", content = "He is face down and out cold and the room smells like the plant. You stand in it longer than the errand takes." },
+    { type = "paragraph", content = "He says something in his sleep that is definitely a name and definitely not yours, and you stand there in the middle of his floor working out how you feel about that." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get what you came for."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "coles_room"
+time_progression_minutes = 5
+effects = [ { targetType = "player", trait = "arousal", op = "add", value = 8, cap = 100 } ]
+
+[[canvases]]
+id       = "amb_garage_chair"
+name     = "The chair"
+[canvases.trigger]
+trigger_mode         = "random"
+chance               = 0.20
+location             = "the_garage"
+is_repeatable        = true
+max_triggers_per_day = 1
+priority             = 4
+[[canvases.nodes]]
+id = "base"
+name = "The chair"
+blocks = [
+  { type = "video", props = { pool_dir = "amb/garage_chair_t4", description = "A man sitting alone in a garage at night, a woman in the doorway.", search_queries = ["man garage workbench night beer", "woman doorway garage watching man"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He is out here with the light on a cable and the door half down, and the machine is going, and he does not have anything in his hands. He has been out here an hour." },
+    { type = "paragraph", content = "You come out for the basket and @ray is in the chair with his boots off. He moves the basket for you before you get to it and says nothing about it." },
+    { type = "paragraph", content = "The spin cycle walks the machine and you both put a hand out for it at the same time and yours goes on top of his." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the basket in."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_garage"
+time_progression_minutes = 5
+effects = [ { targetType = "npc", npcId = "npc_ray", trait = "relation", op = "add", value = 1 } ]

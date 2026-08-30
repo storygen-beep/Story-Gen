@@ -1,0 +1,793 @@
+{
+  "slug": "commuter",
+  "phase": "board",
+  "narration_person": "second",
+  "protagonist": "Dana Reed",
+  "want": {
+    "player": {
+      "who": "female",
+      "definition": "written",
+      "definition_note": "Chosen, not defaulted. The field runs 19 blank / 10 written and blank holds 80.4% of top-30 engagement; `written` is taken here because the cast is named and the media is real-performer. The freedom the field pays for is bought back two other ways: the start choice below, and npcs[].relationship_options on npc_ray and npc_cole.",
+      "start_choice": {
+        "asked_at": "PIN_AT_BOARD.kitchen_table_first_morning",
+        "flags": [
+          "past_worked",
+          "past_away",
+          "past_home"
+        ],
+        "note": "A memory, not a slider. The opening already asks it: Gail says something about last summer. past_worked buys the campus-shift rungs and Vic already knowing her face; past_away buys the `seen` rungs early (nobody in the house has looked at her in three months); past_home buys the household rungs early (Ray and Cole are used to her being there at 2pm). Five read sites each, ADDITIVE ONLY — every original rung keeps its numbers and gains `<flag> is_false`. WARNING: separate the past-ladder from any surface's existing ladder with a non-`group` block, or adjacent [group] blocks merge into one if/elseif chain (v2.py:14637) and the original ladder goes dark. Exact canvas.node id is pinned in the board phase and `asked_at` updated then."
+      },
+      "relationship_picker": {
+        "npc_ray": [
+          "stepfather",
+          "mom's husband",
+          "father",
+          "uncle"
+        ],
+        "npc_cole": [
+          "stepbrother",
+          "half-brother",
+          "brother",
+          "cousin"
+        ],
+        "note": "npcs[].relationship_options. Reaches the default build path at game_graph.py:164-165, read by v2.py:911, rendered at v2.py:9282. Needs customizable=true on the NPC AND player.customizable with fields (template_import.py:3448). WARNING: customizable=true also renders a name textbox (v2.py:9296), so ALL prose for Ray and Cole uses @ray / @cole and never a typed name. Prose reads the relation as @<npc>.rel (v2.py:14656). Gail, Doyle, Trevor and Vic stay fixed."
+      },
+      "customization_fields": 3
+    },
+    "who_she_is": "Dana Reed, 19. Second year at Dutton State, three quarters of a mile from the house she was twelve in. She rides in because the money went to the payment plan instead of a dorm — the plan is in her name, the gap is not, and the difference is made up at the kitchen table every week by a man whose name she does not have. She is the only Reed in the house. One bathroom. Her door has a lock and she still uses it. What she has to lose: her spot — the house is the only reason she can afford to be a student at all, and both facts are held by the same two people.",
+    "appetite": "To be wanted by the men who are supposed to be looking after her, and by the ones who only see her three hours a week. It cannot complete: every degree closer resets the distance, and there is always a next person who has not looked yet. Release 41 adds a new body in a hub that already exists — a cousin for the summer, a new TA, somebody's friend who stops leaving — plus the next rung on somebody already standing. Zero new locations.",
+    "ascent": "BOTTOM: she dresses in the bathroom and keeps her door shut; on campus she is one of ninety in an 8am section, the buildings lock at nine, and she takes the last bus home. TOP: doors in the house stay open, hers included, and nobody knocks; on campus she has a reason to be inside a locked building after nine, and she does not always take the last bus.",
+    "charge": "taboo (primary) + transformation (secondary). The relationship itself is the transgression and it lives in a house with one bathroom and four people who see each other every morning; the relationship_picker lets the player set the exact degree and the game is written so every setting lands. She starts as the kid in that house and ends as the reason the other three arrange their evenings. Reversal is available on Ray (he holds the money) but is not the spine.",
+    "why_this_person": {
+      "npc_ray": "He pays for the thing that lets her be enrolled, and he has never once acted like it buys him anything — which is exactly why she keeps testing whether it does.",
+      "npc_gail": "The only person in the house who was ever looked at the way Dana is starting to be, and she is watching it happen with something that is not entirely warning. Further in she is not the clock — she is in the room.",
+      "npc_cole": "Six years sharing a wall and he was never her brother. He is the only one who treats her like she is not a kid, because he never knew her as one.",
+      "npc_doyle": "Three hours a week of a man who has to notice her by contract and spends all three pretending he does not.",
+      "npc_trevor": "No power over her whatsoever, which is why he is the only one who says it out loud.",
+      "npc_vic": "He decides which doors are locked at nine. He has already decided about hers."
+    },
+    "crude_ceiling": {
+      "npc_ray": {
+        "t1": [
+          "tits",
+          "ass",
+          "hard"
+        ],
+        "t2": [
+          "cock",
+          "cunt",
+          "wet",
+          "fuck"
+        ],
+        "t3": [
+          "cock",
+          "cunt",
+          "cum",
+          "throat",
+          "hole",
+          "fuck her",
+          "and what her body does back"
+        ]
+      },
+      "npc_gail": {
+        "t1": [
+          "tits",
+          "ass"
+        ],
+        "t2": [
+          "cunt",
+          "wet",
+          "fingers",
+          "mouth"
+        ],
+        "t3": [
+          "cunt",
+          "cum",
+          "tongue",
+          "fuck",
+          "between them",
+          "both of them",
+          "her turn"
+        ]
+      },
+      "npc_cole": {
+        "t1": [
+          "tits",
+          "ass",
+          "hard",
+          "cock"
+        ],
+        "t2": [
+          "cunt",
+          "wet",
+          "fuck",
+          "cum"
+        ],
+        "t3": [
+          "the coarsest register in the game — nothing withheld, because he has nothing to protect"
+        ]
+      },
+      "npc_doyle": {
+        "t1": [
+          "her mouth",
+          "her knees",
+          "the desk — withheld and clinical"
+        ],
+        "t2": [
+          "cock",
+          "cunt",
+          "wet"
+        ],
+        "t3": [
+          "fuck",
+          "cunt",
+          "cum",
+          "on her knees in an office — crude, but still in his voice"
+        ]
+      },
+      "npc_trevor": {
+        "t1": [
+          "tits",
+          "hard",
+          "cock"
+        ],
+        "t2": [
+          "cunt",
+          "fuck",
+          "cum"
+        ],
+        "t3": [
+          "crude and unembarrassed; he has never had a reason to be careful"
+        ]
+      },
+      "npc_vic": {
+        "t1": [
+          "ass",
+          "tits"
+        ],
+        "t2": [
+          "cock",
+          "cunt"
+        ],
+        "t3": [
+          "fuck",
+          "cum",
+          "cunt",
+          "throat"
+        ]
+      },
+      "_where_it_lives": "The REPEATABLE surfaces: the hall and the one bathroom · Cole's room · the kitchen on the nights Gail is on shift · Doyle's office after six · the lab at close · the loading door after nine · the last bus · and the back bedroom once the milestone opens it. NOT a capstone. If the crudest writing in this game ends up in a scene the player sees once, the game is cold and the release does not ship."
+    },
+    "last_read_at_release": null
+  },
+  "board": {
+    "who_climbs": "both",
+    "who_climbs_note": "LO's call, 2026-08-30. Her three tiers are the FLOOR on explicit content; per-character `relation` is the SPINE of each arc. Gate 34 wants >=25% of meter-gating on each side — the cut points sit inside the corpus's own empty band (8 roster games at 65%+, 9 ladder games at 13% or less, nothing between). This SUPERSEDES the `player` declaration written in the want phase; the reason `player` was proposed was that no v2 game has ever declared it, which is a novelty argument and not a design one. `both` is the honest shape for a six-person household where per-person escalation carries the heat.",
+    "ascent_tiers": [
+      "house",
+      "standing",
+      "seen"
+    ],
+    "ceilings": {
+      "house": 88,
+      "standing": 86,
+      "seen": 80
+    },
+    "locations": [
+      {
+        "id": "main_street",
+        "job": "The ground. She crosses it several times a day between the house and the campus, and it is the only place strangers see her.",
+        "anchor": false,
+        "fill": 900,
+        "has_cycling_pool": true,
+        "carries_heat": true,
+        "serves": {
+          "needs": [
+            "hunger"
+          ],
+          "work": [],
+          "people": [
+            "npc_cole"
+          ]
+        }
+      },
+      {
+        "id": "the_campus",
+        "job": "The ground of the school — the crossing between buildings, the payments window, and the doors Vic decides are locked at nine.",
+        "anchor": false,
+        "fill": 3800,
+        "has_cycling_pool": true,
+        "carries_heat": true,
+        "serves": {
+          "needs": [
+            "hunger"
+          ],
+          "work": [],
+          "people": [
+            "npc_vic"
+          ]
+        }
+      },
+      {
+        "id": "the_service_desk",
+        "job": "Her campus shift. Hours a day at a counter everyone on this campus has to walk past.",
+        "anchor": true,
+        "fill": 9000,
+        "has_cycling_pool": true,
+        "carries_heat": true,
+        "serves": {
+          "needs": [],
+          "work": [
+            "the desk shift"
+          ],
+          "people": [
+            "npc_doyle",
+            "npc_vic"
+          ]
+        }
+      },
+      {
+        "id": "the_lecture_hall",
+        "job": "The 8am section. Ninety people, and a man who has to notice her by contract.",
+        "anchor": false,
+        "fill": 800,
+        "has_cycling_pool": false,
+        "carries_heat": false,
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_doyle"
+          ]
+        }
+      },
+      {
+        "id": "doyles_office",
+        "job": "Office hours nobody comes to.",
+        "anchor": false,
+        "fill": 2400,
+        "has_cycling_pool": false,
+        "carries_heat": true,
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_doyle"
+          ]
+        }
+      },
+      {
+        "id": "the_lab",
+        "job": "The evening lab hour she shares with one other person, and the bench she can read at when the house is loud.",
+        "anchor": false,
+        "fill": 2000,
+        "has_cycling_pool": false,
+        "carries_heat": true,
+        "serves": {
+          "needs": [
+            "prep"
+          ],
+          "work": [
+            "covering the lab hour"
+          ],
+          "people": [
+            "npc_trevor"
+          ]
+        }
+      },
+      {
+        "id": "home",
+        "job": "The house's door and stairs. The one bathroom is off it and everybody has to pass through.",
+        "anchor": false,
+        "fill": 1400,
+        "has_cycling_pool": true,
+        "carries_heat": true,
+        "serves": {
+          "needs": [
+            "energy"
+          ],
+          "work": [],
+          "people": [
+            "npc_gail"
+          ]
+        }
+      },
+      {
+        "id": "her_room",
+        "job": "Where she sleeps and reads. The door has a lock and she still uses it.",
+        "anchor": false,
+        "fill": 2400,
+        "has_cycling_pool": false,
+        "carries_heat": true,
+        "serves": {
+          "needs": [
+            "energy",
+            "prep"
+          ],
+          "work": [],
+          "people": []
+        }
+      },
+      {
+        "id": "the_bathroom",
+        "job": "One bathroom, four people, and a door that gets tried.",
+        "anchor": false,
+        "fill": 2100,
+        "has_cycling_pool": false,
+        "carries_heat": true,
+        "serves": {
+          "needs": [
+            "hygiene"
+          ],
+          "work": [],
+          "people": []
+        }
+      },
+      {
+        "id": "the_kitchen",
+        "job": "Where the money gets asked for and where the week gets settled.",
+        "anchor": false,
+        "fill": 3500,
+        "has_cycling_pool": true,
+        "carries_heat": true,
+        "serves": {
+          "needs": [
+            "hunger"
+          ],
+          "work": [
+            "asking at the table"
+          ],
+          "people": [
+            "npc_gail",
+            "npc_ray"
+          ]
+        }
+      },
+      {
+        "id": "coles_room",
+        "job": "The room on the other side of her wall.",
+        "anchor": false,
+        "fill": 3000,
+        "has_cycling_pool": false,
+        "carries_heat": true,
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_cole"
+          ]
+        }
+      },
+      {
+        "id": "the_garage",
+        "job": "Ray's evenings, and the washer.",
+        "anchor": false,
+        "fill": 1800,
+        "has_cycling_pool": false,
+        "carries_heat": true,
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_ray"
+          ]
+        }
+      },
+      {
+        "id": "the_back_bedroom",
+        "job": "Their room, which she is in when they are not — and, after the milestone, when they are.",
+        "anchor": false,
+        "fill": 900,
+        "has_cycling_pool": false,
+        "carries_heat": true,
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_ray",
+            "npc_gail"
+          ]
+        }
+      }
+    ],
+    "needs": [
+      {
+        "key": "energy",
+        "falls": "spent through `costs` on every rung, plus a small daily decay",
+        "fills": "her_room · Sleep · overnight  ||  home · the couch · 90 min",
+        "costs": "time",
+        "shuts": "under the band she cannot take the 8am section — the day starts at noon and half the campus rungs are gone with it"
+      },
+      {
+        "key": "hunger",
+        "falls": "[player.trait_decay], across the day",
+        "fills": "the_kitchen · free, with a conversation attached  ||  main_street · the_campus · priced",
+        "costs": "nothing at home; $ out",
+        "shuts": "under the band she cannot work a shift or a lab"
+      },
+      {
+        "key": "hygiene",
+        "falls": "[player.trait_decay], daily and faster after a shift",
+        "fills": "the_bathroom · Wash · 30 min — and it is occupied",
+        "costs": "time, and whoever is waiting",
+        "shuts": "under the band the exit from home to main_street is shut: she will not go out"
+      },
+      {
+        "key": "prep",
+        "falls": "[player.trait_decay], every day she does not do the reading",
+        "fills": "her_room · the_lab bench · 60-120 min",
+        "costs": "time she does not have",
+        "shuts": "under the band the classroom rungs are closed, and the only way through is asking Doyle for an extension — which costs `relation`"
+      }
+    ],
+    "needs_note": "`prep` is the one the premise adds and it is the one that feeds the taboo economy: the cheapest way out of it is owing somebody. Gate 29 fails any need no condition reads; the_allowance shipped hygiene with a daily decay, four ways to wash and ZERO readers. Decay rates mirror into [player.trait_decay] as POSITIVE magnitudes — the validator rejects a negative (engine.md §11).",
+    "characters": [
+      {
+        "id": "npc_ray",
+        "why_wanted": "He pays for the thing that lets her be enrolled and has never acted like it buys him anything.",
+        "meters": {
+          "relation": "access — what she is allowed to ask for",
+          "raises": "being the one who needs something from him",
+          "costs": "asking for money drops it; the ask is priced"
+        },
+        "schedule_rows": 3,
+        "owns_alone": "the_garage 19:00-22:00"
+      },
+      {
+        "id": "npc_gail",
+        "why_wanted": "She was looked at that way once and is watching it happen to Dana with something that is not entirely warning.",
+        "meters": {
+          "relation": "access — whether she is being read as a daughter",
+          "raises": "being in the room when Gail is not being a mother",
+          "costs": "it falls while `house` is low — she reads the house before she reads Dana"
+        },
+        "schedule_rows": 3,
+        "owns_alone": "the_kitchen 05:30-07:00"
+      },
+      {
+        "id": "npc_cole",
+        "why_wanted": "Six years sharing a wall and he was never her brother.",
+        "meters": {
+          "relation": "access — how little care he takes",
+          "raises": "being caught, not being careful",
+          "costs": "it drops when Dana covers up"
+        },
+        "schedule_rows": 2,
+        "owns_alone": "coles_room 01:00-11:00"
+      },
+      {
+        "id": "npc_doyle",
+        "why_wanted": "Has to notice her by contract and spends all three hours pretending he does not.",
+        "meters": {
+          "relation": "access — whether he stops pretending",
+          "raises": "`prep` — arriving having done the reading",
+          "costs": "a missed section drops it, and the extension spends it"
+        },
+        "schedule_rows": 3,
+        "owns_alone": "doyles_office 14:00-17:00"
+      },
+      {
+        "id": "npc_trevor",
+        "why_wanted": "No power over her at all, which is why he says it out loud.",
+        "meters": {
+          "relation": "access — how easily he says it out loud",
+          "raises": "time on the same lab shift",
+          "costs": "nothing — he has no power over her, so he has no price"
+        },
+        "schedule_rows": 1,
+        "owns_alone": "the_lab 18:00-22:00"
+      },
+      {
+        "id": "npc_vic",
+        "why_wanted": "He decides which doors are locked at nine.",
+        "meters": {
+          "relation": "access — which doors he opens",
+          "raises": "being on campus after nine",
+          "costs": "it falls if she uses a door he did not open"
+        },
+        "schedule_rows": 2,
+        "owns_alone": "the_campus 21:00-01:00"
+      }
+    ],
+    "map": {
+      "archetype": "nested_zones",
+      "shape": "Dutton, a college town. MAIN STREET is the ground and the ROOT — the strip from the campus gate down to the houses — and both hubs hang off it, neither containing the other. THE CAMPUS is a zone off Main, fifteen minutes away, holding the service desk where she works, the lecture hall, Doyle's office and the lab. THE HALL is the house's door and stairs, also off Main, holding her room, the one bathroom, the kitchen, Cole's room, the garage and the back bedroom. She commutes; that is the title and the whole geometry.",
+      "anchor_note": "THE ANCHOR IS THE CAMPUS, NOT THE HOUSE. Eight of nine v2 games rooted the world on one worksite or one household; the measured reference puts ~30% of all location prose in a school. The house is the second hub and is budgeted like one.",
+      "home_base": "her_room",
+      "exterior": "main_street",
+      "homes": {
+        "npc_ray": "the_back_bedroom",
+        "npc_gail": "the_back_bedroom",
+        "npc_cole": "coles_room",
+        "npc_doyle": "offscreen",
+        "npc_trevor": "offscreen",
+        "npc_vic": "offscreen"
+      },
+      "bridges": [
+        {
+          "from": "main_street",
+          "to": "the_campus",
+          "costs": {
+            "time": 15
+          },
+          "note": "The commute. Travel friction goes on the ONE bridge between zones, never on every room — it is what makes the schedule grid bite."
+        },
+        {
+          "from": "main_street",
+          "to": "home",
+          "costs": {
+            "time": 5
+          }
+        }
+      ],
+      "r1_signoff": "LO, in chat, 2026-08-30. Shown the full 13-location graph in the terminal — every id, every name, the two zone costs and the anchor share — and approved it in two words: \"Go ahead\". Recorded as what it was: a human read of the graph, not a considered walk of it. The author did not sign their own map, which is what this field exists to prevent.",
+      "exterior_note": "A ROOT — no `entry_from` at all. Gate 28 reads entry_from and fails a leaf. The measured failure declared an exterior, priced it at 25 minutes, passed every gate, and hung it off the kitchen: stepping outside meant stepping from one interior into a row of shops."
+    },
+    "economy": {
+      "currency": "money",
+      "symbol": "$",
+      "obligation": "the school payment — weekly, charged by [settings.rent], collected in Ray's mouth at the kitchen table",
+      "obligation_amount": 180,
+      "week_income": 260,
+      "sinks": [
+        "the school payment @ the_campus",
+        "the campus pass @ main_street",
+        "food out @ main_street · the_campus",
+        "the washer @ the_garage",
+        "a garment @ main_street"
+      ],
+      "note": "THE OBLIGATION IS NOT RENT. Nine of nine v2 games ran a rent-or-debt hook; this is a payment plan in her own name and the gap is the lever — the difference between 180 and what a week of shifts actually pays is what she has to ask for, and asking has a price at that table.",
+      "obligation_moves": "the plan's installment steps up at midterm, delivered in a letter from the school — an imposed ratchet whose motive the player already accepts, so it never reads as the author turning a dial (the-economy.md R3b). R3c then requires the income to rise with it: a `standing` rung opens a better-paying variant of the desk shift, with the original kept behind that flag's is_false.",
+      "sources": [
+        "the desk shift @ the_service_desk",
+        "asking at the table @ the_kitchen",
+        "covering Trevor's lab hour @ the_lab"
+      ],
+      "owned_thing": {
+        "what": "a garment, bought on main_street and kept",
+        "read_by": "the `seen` rungs, through worn_exposure / worn_corruption",
+        "note": "R1b — what money buys has to STAY bought. Across all eight earlier v2 games money bought exactly ONE thing that opened anything. This satisfies `what money buys opens a door` and `the wardrobe is read` with the same object. worn_exposure is the right predicate and worn_beauty/worn_corruption are not: getWornStatMax SKIPS an empty slot and starts at zero (v2.py:1578-1579), so those two cannot tell naked from plainly dressed."
+      },
+      "rent_settings": {
+        "enabled": true,
+        "amount": 180,
+        "collector_npc": "npc_ray",
+        "grace_periods": 1,
+        "eviction_mode": "flag_set",
+        "currency_symbol": "$",
+        "note": "[settings.rent.text] authors every beat of all three pages, so the engine charges the money while the fiction stays a school payment plan (engine.md §26). eviction_mode is flag_set and NEVER game_end — the product does not end. `start_after_flag` is set by the opening so the first session is pressure-free (F4b). DO NOT also author a canvas that narrates the payment: a shipped game ran this system correctly AND wrote a free repeatable settle-up beside it, and the free one was the one with the writing in it. Write the ASK BEFORE instead — which is where this game's charge lives anyway. Money must be unclamped (clamp = false) or the balance caps at 100 and a 180 demand is unpayable (§21)."
+      }
+    },
+    "phone": "REFUSED. the-phone.md P1. The premise's whole friction is that she has to be physically in a room; a phone dissolves it.",
+    "rungs": {
+      "house": [
+        5,
+        10,
+        17,
+        25,
+        35,
+        46,
+        58,
+        72,
+        88
+      ],
+      "standing": [
+        5,
+        12,
+        20,
+        30,
+        42,
+        55,
+        70,
+        86
+      ],
+      "seen": [
+        5,
+        11,
+        18,
+        27,
+        38,
+        50,
+        64,
+        80
+      ],
+      "_note": "NOT 15/35/55/75. All sixteen tiers across five v2 games put their lowest rung at exactly 15 because templates/board.toml had that table sitting in the slot; the field's live player meters run 8-17 rungs with the lowest near 5 (the-meters.md W4). Ceilings above are the TOP RUNG, so the top of each bar is actually bought (gate 8); the sidebar's top band carries no `max` so a value landing above it still renders (engine.md §30)."
+    },
+    "cast_meter": {
+      "word": "relation",
+      "rungs": [
+        5,
+        12,
+        22,
+        35,
+        50,
+        68
+      ],
+      "_note": "ONE willingness word for the whole game, same scale on all six — nine of thirteen field games do exactly this (the-meters.md W6). Six rungs because this is a `both` game and the per-character meter is the spine; the field's per-character median is 3 (p25 2, p75 6). Differentiation lives in the MODIFIERS, never in the vocabulary, and every one is a TRADE: a meter that only opens things is a stat wearing a personality's name."
+    },
+    "fill_plan": {
+      "total": 34000,
+      "anchor": "the_service_desk",
+      "anchor_share": 0.2647,
+      "heat_share": 0.9231,
+      "_note": "A PLAN, in round numbers, written before a word of prose. Gate 1 refuses to credit a budget that is mostly non-round: all three earlier v2 games back-filled theirs from the delivered word count (9,607 / 4,936 / 10,295, not one of twenty-four round to the nearest hundred) so gate 1 compared each game to a record of itself and passed 8/8. A budget that cannot be wrong is not a budget. WARNING: budget the anchor against the FINISHED total, never the current one — a ratio gate tightens every time any other room grows, and one build watched its anchor fall 53% -> 35% without a word being removed."
+    },
+    "characters_note": "R8 — a person owns a corner of the world AND the schedule has to agree. `owns_alone` is the place and hour where that character is the ONLY one there; bucket every [[npcs.schedules]] row by (location, start_time, end_time) and read back any row holding two names. the_season passed R8's writing half and collapsed its whole cast into two places — all four men in the camp every night — so no one of them ever got to be a particular man. The single deliberate shared row is Ray and Gail overnight in the_back_bedroom: it is their bed, and that is the point.",
+    "decisions": null,
+    "scoreboard_at_board": {
+      "run": "2026-08-30, after the merge of 0_ and 1_",
+      "result": "14 of 23 judged gates pass · 23 n/a (nothing authored yet to judge)",
+      "green_off_the_board_alone": [
+        "world reachable (13/13 from main_street)",
+        "residents have homes (6/6)",
+        "guidance exists (41 cards · 3 tiers · 6 characters)",
+        "no chain ends in silence (6/6)",
+        "sinks >= sources",
+        "no free uncapped income",
+        "the price is in one currency (declared $)",
+        "a place is not a catalogue",
+        "the obligation is charged (180 every Thursday, [settings.rent])",
+        "effects use a live op",
+        "a spent day still has a door",
+        "a banded meter is not also a number (0 of 8)",
+        "the map is a place (nested_zones, exterior is the ground)"
+      ],
+      "red_and_it_is_PROSE_DEBT_not_defect": [
+        "location fill — 0 of 34,000 declared words placed",
+        "traversal heat — no cycling pools declared yet",
+        "standing surface — 0 bound canvases for 6 characters (all 6 have schedule rows)",
+        "ends on an opening — no choices authored",
+        "money gates something — no condition reads `money` yet",
+        "a need shuts a door — 0/4 needs read by a condition",
+        "the wardrobe is read — 7 garments, 0 reads",
+        "the start choice is read — past_worked / past_away / past_home read 0x",
+        "what she picks is read — name / major / hair read 0x"
+      ],
+      "known_false_reads_do_not_trust_these": [
+        "`a day-cap closes` PASSES VACUOUSLY. gates.py:5253 computes open_caps as `[f for f in tick_cleared if cap_read.get(f) and not cap_set.get(f)]` — a flag has to be READ as is_false somewhere before it can be judged, and with zero canvases cap_read is empty. The 13 declared caps are UNCHECKED. Two things follow for the release phase: every one of them must be SET on the CHOICE (never a node exit) and READ as is_false on that same choice, and a cap that is set and cleared but never READ still passes this gate. Hold it by hand.",
+        "`location fill` prints `anchor the_back_bedroom 0%`. That is not the ledger's anchor being ignored — gates.py:4169 picks the anchor by DELIVERED words (`max(declared, key=wl.get)`), which is 0 everywhere, so the tie broke arbitrarily. The ledger's declared anchor is the_service_desk at the largest `fill`, which is what _fh_declared_anchor reads (gates.py:3149). It resolves the moment prose lands. Re-read it at v0.1 rather than assuming."
+      ]
+    },
+    "v01_progress": {
+      "steps_done": [
+        "1 · 2_one_shots.toml — the opening, the start choice, five meetings",
+        "2 · 3_activities.toml — four needs, three income channels, the section, the sinks, nine traversal ambients",
+        "3 · 5_scenes.toml — the six character hubs, the six talk screens, seven walk-ins",
+        "4 · 4_story_arc.toml — the seven act loops, the back-bedroom milestone",
+        "5 · media declarations — 34 pooled clips, every explicit beat carries one",
+        "6 · 2026-08-30 · the build blockers and the loop wiring (see the v0.1 decisions below)"
+      ],
+      "steps_left": [
+        "7 · location fill — 8,414 of 34,000 declared words placed; every one of 13 rooms is under budget",
+        "8 · the four remaining red gates, all downstream of the fill",
+        "9 · media files on disk (13 referenced, 0 copied — no --video-folder yet)",
+        "10 · ship: gates.py --release, an archived releases/v0.1.html, then gates.py --saves"
+      ],
+      "scoreboard": "42 of 46 judged gates · was 41 of 46 before the wiring, 14 of 23 at board phase",
+      "words_placed": 8414,
+      "words_budgeted": 34000,
+      "still_red_and_why": {
+        "location fill": "prose debt — 8,414 of 34,000. This ROSE from 5,809 without a word being written, because the six orphan loops now count as located content once they are reachable.",
+        "meter ceiling": "7 meters band above their highest authored gate. Fixed by content at the top rungs, not by lowering the bands — the ceilings are the declared top rungs and gate 8 wants the top of the bar bought.",
+        "the climb is paid for": "5 of 9 (was 6). The remaining free routes are inside the act loops, whose first click has no `costs`. The hub entry rung now carries one.",
+        "the walk-in floor": "the_back_bedroom still has no walk-in — 1 solo activity, 2 scheduled residents. ~450 bytes of substitution_only prose."
+      },
+      "builds": "YES, first green build 2026-08-30. package_from_toml exits 0; playtest.py 10/10; all 7 loop canvases present in the HTML."
+    }
+  },
+  "releases": [],
+  "promises": [
+    {
+      "text": "the back bedroom — Ray and Gail's — becomes a STANDING, repeatable surface with both of them in it, opened by a one-time milestone at the top of `house` with Gail's own relation at its band. The map owes this location (the-map.md R2: a room the Want promises must exist).",
+      "made_in": "want",
+      "paid_in": null
+    },
+    {
+      "text": "board.map.r1_signoff — LO reads the map graph and signs it with a NAME and a DATE. Owed before v0.1 ships.",
+      "made_in": "board",
+      "paid_in": "board"
+    }
+  ],
+  "decisions": [
+    {
+      "at": "want",
+      "note": "Slug and premise chosen against a measured drift across all nine v2 ledgers: female x9, written x9, second x9, ages 19-39, money-or-obligation hook x9, SUBORDINATE protagonist x9, and 8 of 9 rooted on one worksite or one household. LO asked for a college-going young woman with a family, so the household stays; the break is that the CAMPUS carries the anchor budget and the house is the second hub."
+    },
+    {
+      "at": "want",
+      "note": "who_climbs = `player` — never declared once in v2 (cast x3, both x1, missing x5)."
+    },
+    {
+      "at": "want",
+      "note": "The obligation is a school payment plan, not rent — first break of that tic in nine games. Cost: the economy gates now depend on a weekly window at a specific place with a specific person, which the board must build."
+    },
+    {
+      "at": "want",
+      "note": "Start choice designed IN at the Want, not retrofitted at release 3. Only 2 of 9 v2 games have one and both were retrofits."
+    },
+    {
+      "at": "want",
+      "note": "No phone. Refused per the-phone.md P1 because physical co-presence IS this premise's friction."
+    },
+    {
+      "at": "want",
+      "note": "LO's calls, 2026-08-30: Gail is a target as well as the clock, and the top of `house` opens a repeatable three-way surface in the back bedroom with Ray and Gail. Ray's picker leads with `stepfather`. Dana is 19."
+    },
+    {
+      "at": "want",
+      "note": "Names deliberately plain (Reed, Marsh, Doyle, Nunez, Boyd) against a nine-game house tic of mannered surnames (Vance, Kesh, Sayer, Ashby, Renfro, Vane, Marlow, Vasey). Vocabulary is American-neutral: the skill's own worked examples taught British nouns (airer x9, lodger x8, immersion x3) and v2 games run locale-locked words at 9.4-95.6 per 10k against a field of 0.8."
+    },
+    {
+      "at": "board",
+      "note": "who_climbs moved `player` -> `both` on LO's call, 2026-08-30. The want-phase argument for `player` was that no v2 game had ever declared it — a novelty argument, not a design one. `both` puts the three tiers under the explicit content as a FLOOR and the per-character `relation` as each arc's SPINE, which is the honest shape for a six-person household. Cost: gate 34 now wants >=25% on each side rather than >=60% on hers, so the tiers must still do real gating and cannot decay into flavour."
+    },
+    {
+      "at": "board",
+      "note": "13 locations, derived from needs + work + people inside the chosen archetype — not picked. 34,000-word budget, the same band as back_home 36,035 / steam 36,019 / forty_miles 37,450, spread over thirteen rooms instead of eight. Anchor the_service_desk at 26.47%, heat 12/13 = 92%."
+    },
+    {
+      "at": "board",
+      "note": "Anchor is the_service_desk (her campus shift), NOT a room in the house. Eight of nine v2 games rooted the world on one worksite or one household; the reference game puts ~30% of location prose in a school. This is the structural break the premise was chosen for."
+    },
+    {
+      "at": "board",
+      "note": "the_back_bedroom is enterable from day one — she is in their room when they are not. That is what stops it being a declared-and-empty location (gate 1 debt). The milestone converts it into the repeatable three-way surface, and the gate-9 locked door is a CHOICE inside it carrying locked_text, never the room."
+    },
+    {
+      "at": "board",
+      "note": "Rungs deliberately not 15/35/55/75: house 5-88 over 9 rungs, standing 5-86 over 8, seen 5-80 over 8, cast relation 5-68 over 6. Ceilings declared at the TOP RUNG so the top of each bar is bought (gate 8)."
+    },
+    {
+      "at": "board",
+      "note": "Obligation runs on [settings.rent] with [settings.rent.text] authored as a school payment plan and collector_npc = npc_ray, so the weekly reckoning happens at the kitchen table and the obligation's face is the taboo's face. No payment canvas is authored beside it (engine.md §26)."
+    },
+    {
+      "at": "board",
+      "note": "block_pool WILL be used. It runs 46 times in the_long_summer, 14 in under_one_roof, 6 in vesper and 0 times in every v2 game — the primitive shipped with the engine and v2 lost it in the divorce from the old corpus (engine.md §35). Named here so it is a commitment rather than an intention."
+    },
+    {
+      "at": "board",
+      "note": "Engine facts verified against source this session, not from memory: weekdays index 0 = Monday (v2.py:3591 DAY_NAMES); VALID_CLOTHING_SLOTS is the 7 at template_import.py:220; worn_exposure is the predicate that can tell naked from dressed, worn_beauty/worn_corruption cannot (getWornStatMax skips empty slots, v2.py:1578-1579)."
+    },
+    {
+      "at": "board",
+      "note": "Location id `the_hall` renamed to `home` before any prose existed. R4: a room name is a button read on every turn, and `Hall` does not tell a stranger what is through the door. `Home` does. The landing itself is described inside it. Also genericized `His Room` and `Their Room`: Ray and Cole carry relationship_options, so a location label naming them would contradict whatever the player typed — late_shifts made the same fix for the same reason."
+    },
+    {
+      "at": "board",
+      "note": "Two board-phase gate fixes made before leaving the phase, both real: every quest ladder's top card carried a `goals` block, so `no chain ends in silence` failed 0/6 — a card with a goal is not terminal (gates.py:4717 wants `terminal` or NEITHER goals nor ready_text), and pickQuestsCard returning no match makes that character's whole section AND their cast-page row vanish. Nine terminal cards added and every rung below them closed with an `lt` so exactly one matches. Also fixed three British nouns the vocabulary lint caught in location and cast descriptions — plasterboard, rota, timetables — plus adjunct, bedsides and tiered. 13 flagged uses down to 8, of which 5 are the cast's own names."
+    },
+    {
+      "at": "v0.1",
+      "note": "MY OWN VALIDATOR WAS THE BROKEN INSTRUMENT. `toml` 0.10.2 cannot parse a nested inline table followed by another key — it rejects `{ type = \"dialog\", props = { ... }, content = \"...\" }` — so it failed my file AND the shipped mrs_vance files identically. Caught by running it against a game known to build. The real pipeline uses tomllib/tomli (merge_toml_phases.py:120-123); the venv is 3.12 and has tomllib. All validation from here uses tomli. This is the skill's own 'an instrument that cannot see a thing reports its ABSENCE' failure, one level down."
+    },
+    {
+      "at": "v0.1",
+      "note": "ENGINE FINDING — `itemEffects` cannot grant a garment, and a shipped game is broken by it. The importer reads `item_id`/`action` (template_import.py:2177-2182); the_allowance writes `itemId`/`op`, so its £12 dress purchase grants NOTHING and always has. Garments are bought through the engine's OWN shop page: renderShopPage lists every non-initial garment with price > 0 and calls addToWardrobe (v2.py:2069-2086), surfaced by `[settings] shop_location` (v2.py:9770, :9818). commuter sets shop_location = main_street and authors no garment purchase choice."
+    },
+    {
+      "at": "v0.1",
+      "note": "`worn_exposure` is live in the condition evaluator (v2.py:4188, guarded on clothing_enabled) and is the ONLY aggregate that can tell naked from plainly dressed. But the `wardrobe is read` gate's reader list does not contain it — it checks worn_corruption / worn_beauty / worn_type / clothing_slot / clothing_item, a portrait override, or clothing_rules. So the game reads the wardrobe twice on purpose: worn_exposure on the towel rung because it is correct, and clothing_item on the desk shift because it is what the gate can see. FLAG FOR THE SKILL: the gate's list is missing a live predicate its own engine.md recommends."
+    },
+    {
+      "at": "v0.1",
+      "note": "Gate 18 does not count an energy `costs` as a brake on a MONEY rung, and gate 26 cannot model a one-shot flag purchase. Both flagged real defects anyway: the lock-up shift read `desk_shift_today is_true` which caps nothing, and the bus pass granted `standing` for a reason the fiction did not support. Fixed with a `lockup_today` cap and by deleting the standing grant."
+    },
+    {
+      "at": "v0.1",
+      "note": "ORPHANED LOOPS — the six per-character act loops were written and were NOT IN THE GAME. loop_ray, loop_cole, loop_gail, loop_doyle, loop_trevor and loop_vic had no [canvases.trigger] and no choice anywhere targeted them. The generator seeds its canvas set from canvases carrying trigger.location_id (v2.py:420-423) and then closes only over choices with targetType 'node' (v2.py:642-682, the graph path a plain package_from_toml takes), so all six were pruned out of the HTML. Every gate was green over them because the scoreboard reads the TOML and counts content, not reach. loop_three survived solely because act_back_bedroom pointed at loop_three.entry. FIX: a third rung on each character hub in 5_scenes.toml, targetType 'node' -> loop_<npc>.entry, gated on relation >= 35 AND the tier rung, day-capped on <npc>_rung_today, with an energy cost and a locked_text. FLAG FOR THE SKILL: no gate in gates.py asks whether a canvas can be reached; the cheapest check is `grep -c Canvas_<id>_Node_ output/index.html` after a build, which is what caught it."
+    },
+    {
+      "at": "v0.1",
+      "note": "FIRST GREEN BUILD, 2026-08-30. 66 validation errors cleared in three classes: 50 canvas nodes were missing the required `name` (it renders in the journal's Memories list, v2.py:19637, so the names are in-fiction rung labels, not slugs); 12 children listed their PARENT in navigation_order, which the validator rejects because the return link is generated from entry_from and renders as 'Leave <Name>' (engine.md §10); and 4 sidebar bands were written open-topped. The band rule is PER ITEM TYPE and engine.md §30 does not say so: trait_status_text accepts a min-only top band (template_import.py:3574-3576) but trait_words and trait_bar require both min and max (:3623, :3681). The board ledger wrote the open top band on trait_words. FLAG FOR THE SKILL: engine.md §30's worked example is a trait_status_text and teaches a shape that fails on the other two types."
+    },
+    {
+      "at": "v0.1",
+      "note": "who_climbs = `both` now HOLDS on measurement. The six loop rungs each carry one tier condition and one cast condition, moving `the climb is where you said it is` from 9 tier / 39 cast (81% cast, FAIL) to 15 / 45 (75% cast, PASS at the 25% floor). It is exactly on the line: any future rung added on a per-character meter alone re-fails it."
+    },
+    {
+      "at": "v0.1",
+      "note": "One British money reference fixed — 3_activities.toml said 'Forty-five pounds' in a game whose currency is $. 'Four pounds of pastry' in the same file is weight and was left. The currency lint flagged both; it cannot tell the two apart."
+    }
+  ]
+}
