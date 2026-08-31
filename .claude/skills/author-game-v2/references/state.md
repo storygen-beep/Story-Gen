@@ -27,7 +27,10 @@ belong here; only decisions, debts, and promises do.
 ```jsonc
 {
   "slug": "…",
-  "phase": "want" | "board" | "release",   // the dispatcher reads THIS
+  "phase": "want" | "board" | "sheets" | "release",  // the dispatcher reads THIS.
+                                            //   `sheets` was added 2026-08-31: the board
+                                            //   phase ends in a signed design, not in TOML.
+                                            //   the-sheets.md.
   "narration_person": "second",             // immutable once a release has shipped
   "protagonist": "…",                       // her name. Read by `gates.py --words` as a
                                             //   name the fiction teaches — she is not in
@@ -271,3 +274,27 @@ was ever written down as a cost.
 was **decided** and what is **owed**.
 
 When the two disagree, the gates win and the ledger gets corrected.
+
+---
+
+## The `board` keys the GATES actually read
+
+`[added 2026-08-31]` Six gates read this file, and a ledger written to a schema they do not consume
+degrades them to backstops **silently** — one prints *"[top-3 guess — no v2_state.json]"* while the
+file sits there being read by a different gate. These are the exact paths:
+
+| key | read by | shape |
+|---|---|---|
+| `board.ascent_tiers` | *ascent tiers expand the world* | `["corruption", "exhibitionism"]` — a list of trait keys, **not** rung numbers, and **not** at the top level |
+| `board.map` | *the map is a place* · *residents have homes* | `{ archetype, shape, home_base, exterior, homes{npc_id: location_id} }`; archetype is one of `nested_zones` / `two_hub` / `map_hotspots` / `street_mesh` / `time_slot` |
+| `board.characters` | *residents have homes* · *guidance exists* | `[{ id, name, role }]` |
+| `board.locations[].fill` | *location fill* | a LIST of `{id, fill}`, **not** a dict — and declared before the prose, or the gate says so |
+| `board.economy` | four economy gates | `{ currency, symbol, week_income, obligation }`; `currency` is the trait key, and without it the economy channel is *"not counted"* |
+| `board.needs[]` | *a need shuts a door* | `[{ key, decay_per_day, shuts }]` — and every key must be READ by a condition somewhere in the game |
+
+⚠️ **`needs` has no TOML table.** The importer reads 24 top-level tables and `needs` is not one of
+them. A need exists in the game as `[player.core_traits]` + `[player.trait_decay]` plus the
+conditions that read it; this ledger is where it is *declared*. A key the engine does not consume
+fails silently.
+
+⚠️ **The decision sheet and this file are one document written twice** — `the-sheets.md` S7.

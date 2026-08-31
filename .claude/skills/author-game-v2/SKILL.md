@@ -81,6 +81,27 @@ many versions of one line — is documented in four places and used by zero v2 g
 (`the-surfaces.md` R5 and R5d, `the-meters.md` W5b). **This is a frame, not a quota** — no section
 measured a defensible ratio and nothing here is gated.
 
+## The discipline this is, and its published failure modes
+
+**Our games are storylets.** Quality-based narrative — Failbetter's term, Emily Short's and Max
+Kreminski's literature — is the published discipline for exactly this architecture: content units
+gated on state, selected by salience, re-entered rather than traversed. Measured 2026-08-31 across
+this skill: `storylet` 0 · `quality-based` 0 · `QBN` 0 · `salience` 0 · `Failbetter` 0 · `Ashwell` 0 ·
+`Emily Short` 0, in 21,831 lines. **We had been inventing the vocabulary of a solved problem.**
+
+By Ashwell's taxonomy ours are **Loop and Grow + Open Map + Floating Modules at once**, and each of
+those carries published weaknesses that match defects we have already shipped:
+
+| the pattern | its documented weakness | our matching defect |
+|---|---|---|
+| Open Map | *"Reviewers may miss narrative content if exploration becomes tedious"* | lostness is the genre's dominant complaint, 4.7% median share against grind's 0.9% |
+| Floating Modules | *"Reviewers struggle to assess completeness"* | two games shipped act loops written and absent, 46 green gates over them |
+| Floating Modules | *"requires substantial content; collapses into linearity otherwise"* | ten v2 games, median lifespan two days, nine with zero archived releases |
+| all three | *"writers tend to rebound quickly to a more unified structure"* | the arc pull — **a known property of the structure, not indiscipline** |
+
+That last row is worth the whole table. The urge to make a sandbox into a story is documented
+behaviour, not a failure of will, and a method that does not push back on it will lose to it.
+
 ## The three kinds of content
 
 Named from what those release commits actually do, so the vocabulary owes nothing to
@@ -147,8 +168,23 @@ Resolve the game slug from the request, then read `games/<slug>/v2_state.json`:
 |---|---|---|
 | *(no state file)* | write the Want, create the state file | `references/the-want.md` |
 | `want` | lay down the world | `references/the-board.md` + `the-map.md` + `the-economy.md` + `the-meters.md` |
-| `board` | build v0.1 | `references/the-release.md` (§ first release) + `the-voice.md` |
+| `board` | **write the sheets** — the design LO reads and signs, before any TOML | `references/the-sheets.md` |
+| `sheets` | build v0.1 from the signed sheets | `references/the-release.md` (§ first release) + `the-voice.md` |
 | `release` | run the loop — pitch, attack, write, gate, ship, log, and keep the prose true to the fields it quotes | `references/the-release.md` + `the-returning-player.md` |
+
+**The board phase ends in SHEETS, not in TOML** — added 2026-08-31, after the `night_desk`
+experiment. A sandbox in this engine cannot be reviewed by playing it (Ashwell 2015, on the two
+patterns our games are built from: *"Reviewers may miss narrative content if exploration becomes
+tedious"* and *"Reviewers struggle to assess completeness"*), so the review surface has to be
+generated. `references/the-sheets.md` carries the five sheet types, the `[REVIEW] → [READY] →
+[GAME-READY]` workflow, and ten rules — **every one of them an incident from the one game built this
+way**, not a preference.
+
+⚠️ **Its first rule is the one the other nine are special cases of: a number on a sheet is a PROMISE
+until an instrument produces it.** The experiment's sheets counted paragraphs and `gates.py` counts
+nodes; the design reported 75 beats against a build of 52, and the same game read 6 explicit by the
+sheet and 3 by the instrument on the same afternoon. There is no `--sheets` mode yet, which means
+every count on a sheet sits on the intent side of the measured/intent split.
 
 **The world files, all read in the board phase:** `the-board.md` (fill, meters, cast) ·
 `the-map.md` (the world as a place someone could draw) · `the-surfaces.md` (which screen each
@@ -197,7 +233,7 @@ documented nowhere but in the script's own comments, so an author who hit one ha
 | gate | what it means | where it is argued |
 |---|---|---|
 | location fill | the world is a distribution — one anchor, budgeted rooms | `the-board.md` §1 |
-| explicit floor | enough beats carry real heat | `register.md` · `gates.py` THRESHOLDS |
+| explicit floor | enough **repeatable** beats carry real heat — the denominator is re-enterable beats, not every beat, so a well-built opening cannot drag the score down. The all-beats figure prints beside it, unjudged. ⚠️ Changed 2026-08-31; `steam` and `the_allowance` went from BARE PASS to FAIL | `register.md` · `gates.py` THRESHOLDS |
 | explicit in repeatable | the heat is where the player returns, not sealed away | `gates.py` THRESHOLDS |
 | repeatable explicit media cycles | re-entered surfaces cycle their clips instead of repeating one | `gates.py` THRESHOLDS |
 | traversal heat | most locations carry something, not just the one hot room | `the-board.md` §1 |
@@ -272,6 +308,11 @@ shown at all**.
 
 ## Operating rules
 
+- **A number is a promise until an instrument produces it.** `the-sheets.md` S1. The one that cost
+  most: a design's sheets counted paragraphs, `gates.py` counts nodes, and the same game read 6
+  explicit beats by the sheet and 3 by the script on the same afternoon — both reported as
+  measurements. Anything not emitted by `gates.py`, `playtest.py` or a build belongs on the INTENT
+  side of a summary, however carefully it was counted.
 - **Parse, never grep.** Game state is TOML; read it with a parser. A grep-based pass on one
   game silently missed 24 `is_repeatable` lines and reported the opposite of the truth. The
   same discipline applies to every claim: measure it, don't eyeball it.

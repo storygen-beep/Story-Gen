@@ -172,6 +172,91 @@ chain back one screen at a time. "Two canvases" is about *what each one is for*,
 
 ---
 
+## F2b · The opening is SCREENS, and two of them are not ours
+
+`[new] 2026-08-31.` **F1 through F10 are all about what the opening SAYS. Not one is about what the
+player does with their hands.** That hole shipped straight into the first design built with
+`the-sheets.md`: three beats were specified, and nothing said whether they were one screen or three,
+what was written on the button between them, or what the player saw before any of it.
+
+**Four facts settle it, and all four belong on the opening sheet.**
+
+**1 · Screen one is the age gate, and we get it for free.** `Start` initialises state and renders a
+title screen; the starting canvas is reached only through
+`[[✓ I am 18 or older - Enter Game->StartingCanvas_<canvas>_Node_<node>]]` (`engine.md` §12). **The
+player's first screen is never beat 1.** A sheet whose timeline opens on the first prose beat is
+describing the second screen and calling it the first — which is exactly what the first draft did.
+
+**2 · There may be a character screen in front of the game, and its words are not ours.**
+`[player] customizable = true` with one `[[player.customization_fields]]` builds a
+`CustomizeCharacters` passage **and repoints the age gate at it** (`v2.py:1065`, `v2.py:9251`). Its
+headings and button are hard-coded — *"Customize Characters"*, *"Personalize the characters in your
+story"*, *"Continue to Game"*. **Seven of fifteen built games ship that screen.** The only authored
+text on it is `player_description` (`v2.py:9509`); an author who does not know that ships the
+default, in a product voice, as the second thing a player reads.
+
+**3 · One node is one screen.** The engine plays a node chain back one screen at a time (F2 above,
+"this is not a size cut"). Three beats in one node is ONE screen carrying all three; three nodes is
+three screens. Those are different things to sit through and the sheet has to say which.
+
+**4 · The break between screens is a written button.** A mid-funnel node exits through
+`exit_block.type = "choices"` carrying a single choice, and that choice's `text` is the button — a
+line in the game's voice, not "Continue". `seventh_day`'s reads *"Get up before the others."* The
+last node exits `type = "location"`, whose `config` carries `locationId`,
+`time_progression_minutes`, `flagEffects` and `effects` — so **the handover is also where the opening
+sets its flags and pays its first money.**
+
+### The screen walk — the review view that cannot be faked
+
+One row per screen, in order, with the button quoted. A screen either exists or it does not; intent
+cannot satisfy a row. The timeline and the checklist both describe an opening, and **an opening never
+broken into screens passes both of them.**
+
+<pre>
+  #  canvas · node                 what is on the screen                    the button
+ ─────────────────────────────────────────────────────────────────────────────────────────
+  0  Start            <b>engine</b>      title card · age gate                    ✓ I am 18 or older
+  1  CustomizeCharacters <b>engine</b>   the fields declared, if any              Continue to Game
+ ─────────────────────────────────────────────────────────────────────────────────────────
+  2  boot · <i>node</i>                  …                                        "…"
+     ── location exit ──►  the anchor, at a clock time · sets <b>flag</b>
+  4  capstone · <i>node</i>              …                                        "…"
+  6  <i>meeting</i> · <i>node</i>               …                                        "…"
+ ─────────────────────────────────────────────────────────────────────────────────────────
+     <b>THE FUNNEL ENDS.</b>  what is live on the screen it hands over to
+</pre>
+
+⚠️ **Rows 0 and 1 go in even though we do not author them.** Leaving them off is how a sheet ends up
+describing an opening the player never has.
+
+⚠️ **Every button is quoted, not summarised.** "the player continues" is not a row. If the line has
+not been written, the screen is not finished.
+
+### Measured: every opening we have built
+
+```
+seventh_day      5 screens  420 w        commuter         1    93
+the_allowance    5          535          last_call        1    60
+back_home        4          468          late_shifts      1    45
+forty_miles      3          339          mothers_place    1   101
+steam            3          285          mrs_vance        1   100
+off_season       2          160          the_inheritance  1    31
+vesper           2           89          the_route        1   136
+                                         the_season       1   119
+```
+
+**Eight of fifteen open on a single screen**, then the sandbox. The largest true opening in the field
+corpus is Course of Temptation's at **78 passages and 8,057 words** (F4b below). Length is the
+author's decision; what the format requires is that the decision be **visible** rather than arrived
+at by default.
+
+⚠️ **The funnel should contain the job, done once.** Ours have been narration plus a name box; the
+field's largest openings are funnels the player *acts* inside — Course of Temptation's carries seven
+conditionals and not one refusal. A choice that colours and gates nothing is legal here and is the
+only thing that teaches by doing.
+
+---
+
 ## F3 · The opening hands over into an open door
 
 The last click of the funnel puts the player somewhere, at a clock time, and that place has to have

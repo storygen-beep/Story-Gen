@@ -261,6 +261,46 @@ Posting volume predicts revenue (ρ = +0.58). Release *speed* does not (ρ = −
 
 ---
 
+⚠️ **EVERY NUMBER ABOVE DESCRIBES A GAME THAT ALREADY EXISTS.** `[added 2026-08-31]` The ~31-day
+figure, the +196-units-and-zero-new-locations shape, the whole ship-smaller-on-time argument — all of
+it was measured off **mature** products, including a reference game of 2.24M words. It is a
+maintenance rhythm, and we adopted it as a **construction** method.
+
+The result is on the shelf: **ten v2 games, median lifespan two days, nine of them with zero archived
+releases.** A cadence rule cannot be followed by a game that has not been born yet, and "ship
+smaller" applied to release one produces a thing too small to be a sandbox at all.
+
+**Read this section only from v0.2 onward.** v0.1 is governed by the seed size below.
+
+---
+
+## § Minimum viable mass — the floor under v0.1
+
+`[added 2026-08-31]` **This architecture has a size below which nothing works**, and three
+independent lines say so:
+
+| | |
+|---|---|
+| the reference game's own seed | **116,540 words across 25 locations** — mean 4,661 per location |
+| Ashwell, on Floating Modules | *"requires substantial content; **collapses into linearity otherwise**"* |
+| Failbetter's StoryNexus retrospective | *"time-to-bootstrap… making a minimally playable experience took ages because one had to create quite a number of storylets"* |
+
+Ours open 8–14 locations at roughly 1,000 words each.
+
+⚠️ **The measured consequence, and the reason this section exists.** A game built end-to-end from a
+signed design in 2026-08 landed **4,590 words, mean 656 per location**, cleared **39 of 40 gates**,
+and failed the fortieth — `location fill` — for being **seven times too small**. Nothing about it was
+badly made. There was simply not enough of it for the structure to hold anything up.
+
+**Gate 1's backstop constants are the floor**: `MEDIAN_LOCATION_WORDS = 3000`,
+`MEAN_LOCATION_WORDS = 4500`. A v0.1 that declares its own budgets is judged against those instead —
+which is correct, and is not permission to declare small ones.
+
+**A game is not started until the seed is sized.** Declare it in `v2_state.json` at
+`board.locations[].fill`, in the board phase, before a word of prose. `the-sheets.md` S3.
+
+---
+
 ## § Shipping the build — the boundary nothing was holding
 
 Everything above is about what a release **adds**. This is about the **artefact** — and its

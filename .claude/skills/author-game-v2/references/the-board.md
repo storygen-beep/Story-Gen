@@ -216,6 +216,44 @@ whoever is standing there when the new one arrives.
 
 ---
 
+### What the reference game requires of its own writers
+
+`[added 2026-08-31]` **We have measured that game ten ways and never read its instructions to its
+writers.** Four rules from its own Writer's Guide that this skill did not hold:
+
+**1 · The three-way personality check is MANDATORY on every player line.**
+
+> *"It is essential you include all three checks when the player speaks up."*
+
+Meek / bratty / neutral, every time she speaks. This is the mechanism behind the field's largest
+love-reason — **freedom, 25.9%, against premise at 0.0%** — and our games have no player-identity
+axis at all. Mechanically it is `block_pool`, which **zero v2 games use**.
+
+⚠️ **Writing the three lines is not the rule. Wiring them is.** A design shipped 33 of these against
+a game with no personality meter, so all of them rotate at random and read as variety rather than
+identity. `the-sheets.md` S8: a named system points at its mechanism, or says in the open that it is
+rotation.
+
+**2 · Per-character mood axes are enumerated and REQUIRED.** Robin cheerful↔traumatised, Kylar
+shy↔obsessive, Sydney pure↔corrupt — and:
+
+> *"Scenes that can trigger at any level of trauma need variants to cover both."*
+
+We have per-NPC meters and no rule that a scene must cover their range.
+
+**3 · A required exit matrix on every encounter** — fights him off / makes him finish / asks him to
+stop, **the first two required for all encounters**. Our `she can say no` fails only on zero across a
+whole game, which is a floor, not a matrix.
+
+**4 · Character bibles are ONE LINE.**
+
+> *"Bailey: The caretaker. Rules the orphanage with an iron fist. Extorts the orphans for what
+> they're worth. Confident and pragmatic."*
+
+Ours run pages. A page is where an author hides the fact that they have not decided anything.
+
+---
+
 ## 3. The meters — declared here, designed in `the-meters.md`
 
 **The design decision is not on this page.** Which meters exist, who owns them, how deep the ladder

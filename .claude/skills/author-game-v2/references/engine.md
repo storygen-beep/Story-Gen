@@ -2353,3 +2353,66 @@ verify against the installed `format.js`, not against a version string in a file
 
 Tests: `apps/game_generation/tests/test_save_migration.py`, 23 of 23 — which execute the emitted
 migration in node against synthetic old saves rather than grepping for it.
+
+---
+
+## 41. Five facts a build cost one round each, 2026-08-31
+
+All five surfaced translating a signed design into TOML for `night_desk` 0.0.1. Each cost exactly one
+build or one gate run, and none of them is guessable from the schema.
+
+### 41a. `op = "sub"` parses, imports, builds — and does nothing
+
+`applyTraitEffect` runs `['add', 'set']` and nothing else (`v2.py:5742-5751`). A `sub` effect is
+valid TOML, survives the importer's dataclasses, reaches the generator and is discarded at runtime.
+
+**To take something away, write `op = "add"` with a NEGATIVE value.** A quantity like `money` also
+needs `clamp = false`, or the default 0–100 clamp (`v2.py:5928-5930`) eats it.
+
+⚠️ Nine canvases shipped this in one pass. **Every energy cost in the game would have been free.**
+The importer's own validator now catches it with the fix in the message — which is the good version
+of this — but nothing about the TOML looks wrong.
+
+### 41b. Quest-card conditions use `trait`; canvas conditions use `trait_key`
+
+Same word "condition", two parsers, two key names:
+
+```toml
+# a CANVAS condition
+{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 12 }
+
+# a QUEST CARD condition — `trait`, and `op`, not `operator`
+{ type = "trait", subject = "player", trait = "corruption", op = "gte", value = 12 }
+```
+
+`template_import.py:1361` is the quest side. Writing `trait_key` in a quest card fails validation
+with *"condition item must set either `flag` or `trait`"*, which names the key it wants and gives no
+hint that the other half of the same file uses a different one.
+
+### 41c. A quest goal needs a `label`; every card needs a `when`
+
+- `goals[]` items are refused without `label` — *"it renders next to the ◯ bullet"*.
+- A card with no `when` is refused outright: *"Every card must scope itself to a state-window."*
+
+Both are hard validation failures, and both come after 41b, so a first quest-card block typically
+costs three build rounds rather than one.
+
+### 41d. `hide_value` on a sidebar item does not hide the value
+
+The suppression is `[[traits.labels]] hidden = true` and nothing else — §30 above says so, and it is
+worth repeating here because the wrong key is the obvious guess. `hide_value` parses, imports,
+builds and does nothing; the auto Traits dump keeps printing the bare number under the band.
+
+### 41e. `_is_free` reads the TRIGGER, never the inner choices
+
+Not an engine fact but a scoreboard one, and it belongs beside them because it costs the same rounds.
+`gates.py:2913` decides a rung is farmable from **the way in**: `trigger.costs`,
+`trigger.max_triggers_per_day`, or a day-cap flag condition on the trigger whose setter sits on a
+choice inside.
+
+> *"Min over routes, never max: one unbraked door makes the whole rung farmable, no matter how well
+> priced the other doors are."*
+
+⚠️ Three rounds of `the climb is paid for` were spent adding `costs` to choice after choice with no
+movement. Moving the same costs onto the triggers cleared five meters at once. See `the-sheets.md`
+S9 — the sheets imply the brake is a property of the rung, and it is a property of the door.

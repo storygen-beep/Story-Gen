@@ -1,0 +1,374 @@
+# =============================================================================
+# Night Desk — 1_metadata_and_locations
+#
+# THE MAP — decision 9, seven rooms, one building, no way out.
+#
+#     the_lot ── the_desk ──┬── the_corridor ── room_6
+#      (root)    (ANCHOR)   ├── the_office
+#                           ├── the_kitchen
+#                           └── the_bathroom
+#
+# ⚠️ RE-ROOTED ON THE LOT, 2026-08-31. The sheets had the desk as the root with
+#    the lot as one of five exits off it. the-map.md R3 requires the EXTERIOR to
+#    be the root — a game shipped an exterior hanging off its kitchen and gate 28
+#    reads entry_from and fails a leaf. The sheets were wrong against a rule the
+#    skill already held. The place-sheet format has no row for how a room attaches
+#    to the map, which is why nothing caught it; that is the finding, and it is
+#    logged in iterations/001/BUILD_VS_SHEET.md.
+#
+#    The desk still shows FIVE doors — four children plus the implicit way back
+#    to the lot — so decision 8's "five exits, LO's call" survives the re-root
+#    untouched.
+#
+# ⚠️ navigation_order is FORWARD-ONLY: the children of this location, never the
+#    way back. The return link is implicit from entry_from and the validator
+#    hard-fails a nav entry whose entry_from is not this room.
+#
+# ⚠️ NO TRAVEL COSTS. Every room in this game is inside one building or ten steps
+#    outside it. Pricing a walk down a corridor would be the friction tax charged
+#    for nothing — the friction here is TIME OFF THE DESK, which is money, and it
+#    is priced on the activities rather than the doors.
+#
+# ⚠️ THERE IS NO [[needs]] TABLE and that is deliberate. The importer reads no
+#    such key; the needs are [player.core_traits] + [player.trait_decay] plus the
+#    conditions that read them, and they are declared in v2_state.json.
+# =============================================================================
+
+[player]
+id           = "player"
+name         = "Nine"
+customizable = true
+
+# ⚠️ ONE FIELD — decision 16. Block A decision 2 locked her as female AND WRITTEN,
+#    so a build/hair select would let the player assemble somebody the prose then
+#    argues with. `id = "name"` is the one id the generator maps to $player.name
+#    (v2.py:9522); any other id writes $player.<id> and nothing here reads those.
+#
+# ⚠️ Declaring this repoints the age gate at CustomizeCharacters (v2.py:1065,
+#    v2.py:9251) and the screen's headings and button are hard-coded. The only
+#    text we own is player_description, below.
+[[player.customization_fields]]
+id      = "name"
+type    = "text"
+label   = "What do they call you?"
+default = "Nine"
+
+# ⚠️ SECTION form, not an inline table — a multi-line core_traits = { … } is a
+#    TOML parse error.
+[player.core_traits]
+# The two she climbs. Both 0-100, nine rungs at 2/6/12/20/30/45/60/78/95.
+# corruption is what opens exhibitionism — decision 7. She is at zero on both
+# after three weeks in the building, which is what makes the zero honest.
+exhibitionism = 0
+corruption    = 0
+
+# The body — decision 14. Three, each shutting a real door.
+energy        = 100
+hunger        = 100
+hygiene       = 100
+
+# ⚠️ money IS A QUANTITY, NOT A 0-100 METER. Every effect that writes it carries
+#    clamp = false, or the default clamp (v2.py:5928-5930) caps it at 100 and the
+#    $400 bus fare — the whole objective — becomes unreachable. Valid TOML, green
+#    build, green gates, dead game.
+money         = 60
+
+# Occupancy: rooms with somebody in them at midnight. $6 each, twelve rooms.
+# Set by check-ins, read by the midnight tick. Numeric and hidden — a triggerless
+# canvas has no located setter for a flag and the build hard-fails.
+rooms_full    = 4
+
+[player.trait_decay]
+energy  = 14
+hunger  = 18
+hygiene = 16
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE MAP
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ─── the lot — the root, and the edge of the world ───────────────────────────
+[[locations]]
+id                   = "the_lot"
+name                 = "The Lot"
+description          = "Nine spaces, four cars, and the sign doing the thing where the C goes out and comes back. The road is one lane each way and empty in both directions."
+image                = "locations/the_lot.jpg"
+image_search_queries = ["motel parking lot night vacancy sign", "empty roadside motel lot neon sign dark"]
+navigation_order     = ["the_desk"]
+
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "03:00", end_time = "06:00" },
+] }
+text = "Nine spaces and the sign doing the thing with the C. Whatever is parked here now is here until morning, and the road has not had anything on it for an hour."
+
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "09:00", end_time = "18:00" },
+] }
+text = "Nine spaces, the sign washed out to nothing in the daylight, and you can see the heat coming off the road. The road can see you too."
+
+# ─── the front desk — THE ANCHOR ─────────────────────────────────────────────
+# Most of the game's prose lives here. Five things to do against a field median
+# of three, because it is the hub and she stands here all night.
+[[locations]]
+id                   = "the_desk"
+name                 = "The Front Desk"
+description          = "Two fluorescent tubes over the register, and one of them ticks. Twelve keys on twelve hooks. The monitor cycles four cameras at eight seconds each — corridor, lot, ice machine, back hall — and comes round to the corridor again."
+image                = "locations/the_desk.jpg"
+image_search_queries = ["motel front desk night fluorescent key hooks", "cheap motel reception counter security monitor"]
+entry_from           = "the_lot"
+navigation_order     = ["the_corridor", "the_office", "the_kitchen", "the_bathroom"]
+
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 30 },
+] }
+text = "Two tubes and the tick, twelve keys, the monitor going round its four. You stopped sitting behind the counter about a week ago and you have not gone back to it."
+
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "02:00", end_time = "06:00" },
+] }
+text = "The road has been empty for an hour and the tube is still ticking. Twelve keys, four cameras, eight seconds each. Nothing on any of them."
+
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "09:00", end_time = "18:00" },
+] }
+text = "The tubes are on because they are always on and the glass is doing nothing to keep the heat out. Twelve keys, and everyone who walks past the window can see straight in."
+
+# ─── the corridor — twelve doors, and the route past everything ──────────────
+[[locations]]
+id                   = "the_corridor"
+name                 = "The Corridor"
+description          = "Twelve doors, six a side, and the carpet has a path worn up the middle of it. The ice machine hums at the far end and makes nothing."
+image                = "locations/the_corridor.jpg"
+image_search_queries = ["motel interior corridor doors night carpet", "long motel hallway ice machine fluorescent"]
+entry_from           = "the_desk"
+navigation_order     = ["room_6"]
+
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "room_6", npc_id = "npc_marek", operator = "is_present" },
+] }
+text = "Twelve doors, six a side, the worn path up the middle, and six is open a hand's width with the light on. The ice machine hums and makes nothing."
+
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "03:00", end_time = "06:00" },
+] }
+text = "Twelve doors and every one of them shut. You can hear one television through one of them, and the ice machine, and nothing else."
+
+# ─── room 6 — LOCKED THE ENTIRE RELEASE. The door IS the content. ────────────
+# ⚠️ entry_conditions carry version = "1.0" or they FAIL OPEN and the door
+#    silently unlocks (engine.md §2). marek_invited is never set in 0.0.1 — the
+#    release ends on a visible locked door and this is the clearest one in the
+#    game: a room she has a key to and will not go into.
+[[locations]]
+id                   = "room_6"
+name                 = "Room 6"
+description          = "He has unpacked. That is the thing about it. Shirts on hangers, a kettle, a photograph face-down on the nightstand."
+image                = "locations/room_6.jpg"
+image_search_queries = ["cheap motel room lived in long stay", "motel room shirts hanging kettle nightstand"]
+entry_from           = "the_corridor"
+navigation_order     = []
+entry_conditions     = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "marek_invited", operator = "is_true" },
+] }
+blocked_message      = "You have a key to every door on this hall and no reason to use that one."
+
+# ─── the office — Del's, and shut two nights in three ────────────────────────
+# ⚠️ The lock is npc_at_location, not a flag: the door is open when Del is UP,
+#    which is his schedule, which is about one night in three. That is why the
+#    camera monitor moved to the desk while the desk sheet was being written —
+#    the corruption on-ramp cannot sit behind this door. The RECORDER can, and
+#    does, because it is a corruption-30 rung and waiting is part of it.
+[[locations]]
+id                   = "the_office"
+name                 = "The Office"
+description          = "A cot, a filing cabinet, a safe, and the recorder the desk monitor feeds into. It smells like burnt coffee and has done since June."
+image                = "locations/the_office.jpg"
+image_search_queries = ["motel back office cot filing cabinet", "small cluttered office safe ledger desk lamp"]
+entry_from           = "the_desk"
+navigation_order     = []
+entry_conditions     = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_office", npc_id = "npc_del", operator = "is_present" },
+] }
+blocked_message      = "The door's shut and the light's off."
+
+# ─── the kitchen — where hunger is fixed, at two speeds ──────────────────────
+[[locations]]
+id                   = "the_kitchen"
+name                 = "The Kitchen"
+description          = "A table, a fridge, a kettle, and a strip light that takes a second to decide. Somebody has labelled a margarine tub with a date in April."
+image                = "locations/the_kitchen.jpg"
+image_search_queries = ["small staff kitchen strip light fridge table", "motel back kitchen kettle worn table night"]
+entry_from           = "the_desk"
+navigation_order     = []
+
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_kitchen", npc_id = "npc_del", operator = "is_present" },
+] }
+text = "The table, the fridge, the strip light doing its thing, and he is at the table with the ledger and a mug he is not drinking."
+
+# ─── the bathroom — shared, not split by sex, behind the desk ────────────────
+# ⚠️ MOVED BEHIND THE DESK, corrected 2026-08-31 — the prose had it off the
+#    corridor and the map had it off the desk. Behind the desk is the better
+#    version: a few steps from where she stands all night, so she and everyone in
+#    the cheap half keep crossing at it. It is Marek's entire on-ramp.
+[[locations]]
+id                   = "the_bathroom"
+name                 = "The Bathroom"
+description          = "Two stalls, two showers, a bench, and a window painted shut. Somebody's shampoo has been on the ledge for weeks. The bolt has been broken since before you got here."
+image                = "locations/the_bathroom.jpg"
+image_search_queries = ["shared bathroom tiled showers bench old", "motel communal shower room worn tile night"]
+entry_from           = "the_desk"
+navigation_order     = []
+
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_bathroom", operator = "is_present" },
+] }
+text = "Two stalls, two showers, the bench, the painted-shut window — and one of the showers is running."
+
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 30 },
+] }
+text = "Two stalls, two showers, a bench, a window painted shut. You have stopped checking the door before you undress, and you did not decide to stop."
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE CAST — two standing, and the traffic is scenery
+# ═════════════════════════════════════════════════════════════════════════════
+#
+# ⚠️ [[npcs.schedules]] MUST FOLLOW ITS OWN [[npcs]] WITH NOTHING BETWEEN THEM.
+#    Inserting another [[npcs]] between an NPC and its schedule rows silently
+#    re-attaches them to the wrong person. TOML scoping, no error, no warning.
+#
+# ⚠️ TWO SCHEDULE CONTRADICTIONS CAME OUT OF THE SHEETS AND ARE RESOLVED HERE:
+#
+#    1. Del was declared 22:00-02:00 at the DESK (the desk sheet) and 22:00-02:00
+#       in the OFFICE (the office sheet). He cannot be in both. Split: an hour at
+#       the desk, then the books in the office.
+#    2. Marek was declared 00:20-01:30 in the CORRIDOR (the corridor sheet) and
+#       00:00-01:00 in the BATHROOM (the bathroom occupancy table). Overlap of
+#       forty minutes. Split: bathroom first, then the walk for ice.
+#
+#    Neither is a design defect — both are two sheets each describing one room
+#    correctly, with nothing in the format that reads across them. The person
+#    sheet lists WHERE somebody is and never WHEN. Logged in BUILD_VS_SHEET.md.
+#
+# ⚠️ "ABOUT ONE NIGHT IN THREE" IS NOT A THING THE ENGINE HAS. Schedules are
+#    deterministic per weekday; there is no probability on a presence row. Del's
+#    one-in-three is expressed as two weekdays out of seven (29%), which is the
+#    closest whole-day approximation. The prose may say "some nights"; the engine
+#    says Tuesday and Friday.
+
+# ─── Del — 58, owns the Wayside, sleeps in the back office ───────────────────
+# The slow one. He has the building, the money and forty years on her, and all
+# three make him careful. His relation gate at the top rung is 85.
+[[npcs]]
+id           = "npc_del"
+name         = "Del"
+relationship = "He owns the Wayside. You rent room twelve off him."
+description  = "Fifty-eight, owns the twelve rooms and the ground under them, sleeps on a cot in the back office. Certain about the building and about nothing else. He has something to lose, which is the whole reason he is slow."
+portrait     = "del.jpg"
+core_traits  = { relation = 0, corruption = 0 }
+flag_keys    = ["met_del"]
+arc_stages   = ["The man who owns it", "Letting you sit in", "Watching you", "Not pretending"]
+
+# Tuesday and Friday — the "one night in three" (see the note above).
+[[npcs.schedules]]
+location   = "the_desk"
+weekdays   = [1, 4]
+start_time = "22:00"
+end_time   = "23:00"
+activity   = "at the far end of the counter doing something to the register with a biro"
+
+[[npcs.schedules]]
+location   = "the_office"
+weekdays   = [1, 4]
+start_time = "23:00"
+end_time   = "02:00"
+activity   = "doing the books by hand in the ledger"
+
+# The empty-week kitchen. He comes in with the ledger when the numbers are bad.
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [1, 4]
+start_time = "02:30"
+end_time   = "03:30"
+activity   = "at the table with the ledger and a mug he is not drinking"
+
+# ⚠️ The 4am monitor window. del_30 effectively only fires here — the sheet says
+#    it needs him already at the monitor, and without this row that rung is
+#    written and unreachable.
+[[npcs.schedules]]
+location   = "the_desk"
+weekdays   = [1, 4]
+start_time = "03:30"
+end_time   = "04:30"
+activity   = "at the monitor, counting"
+
+[[npcs.schedules]]
+location   = "the_bathroom"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "06:00"
+end_time   = "07:00"
+activity   = "first in, most mornings"
+
+# ─── Marek — thirties, room 6, eleven weeks, cash on Fridays ─────────────────
+# The fast one. He has no power over her, nothing to protect, and no reason to be
+# careful, so his relation gate at the top rung is 50 against Del's 85. Same nine
+# corruption rungs, half the trust. That column is the whole difference.
+#
+# ⚠️ His rows are ALL-DAYS, so a window that crosses midnight is ONE row. A
+#    day-specific row that wrapped would need two.
+[[npcs]]
+id           = "npc_marek"
+name         = "Marek"
+relationship = "Room 6. Eleven weeks. Cash on Fridays."
+description  = "Thirties, in room six for eleven weeks, pays cash on a Friday and has said he is leaving eleven times. He has unpacked, and that is the thing about him. Room six is the cheap half, which shares the bathroom, which is why he is early on a ladder he did not have to climb."
+portrait     = "marek.jpg"
+core_traits  = { relation = 0, corruption = 0 }
+flag_keys    = ["met_marek"]
+arc_stages   = ["Room six", "Not going yet", "Saying it out loud", "Not leaving on Friday"]
+
+[[npcs.schedules]]
+location   = "the_bathroom"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "00:00"
+end_time   = "00:20"
+activity   = "washing before he sleeps"
+
+[[npcs.schedules]]
+location   = "the_corridor"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "00:20"
+end_time   = "01:30"
+activity   = "down for ice from a machine that has never had any"
+
+[[npcs.schedules]]
+location   = "room_6"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "01:30"
+end_time   = "05:30"
+activity   = "in six with the light on"
+
+[[npcs.schedules]]
+location   = "the_bathroom"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "05:30"
+end_time   = "06:30"
+activity   = "in the shower before anybody else is up"
+
+[[npcs.schedules]]
+location   = "room_6"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "06:30"
+end_time   = "00:00"
+activity   = "in six, kettle going"

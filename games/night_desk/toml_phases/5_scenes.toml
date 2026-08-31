@@ -1,0 +1,808 @@
+# =============================================================================
+# Night Desk — 5_scenes · THE TWO LADDERS
+#
+# Four portrait hubs, one per person per location where that person is reachable.
+# ONE CANVAS PER NPC PER LOCATION (renderNpcPortraits, v2.py:5114 / :4919) — the
+# highest-priority one wins and the rest are invisible, so the rungs are NODES
+# INSIDE the hub, not canvases of their own. There is no targetType = "canvas"
+# in any shipped game and there is none here.
+#
+#   hub_del_desk        the_desk        rung 2 · rung 30
+#   hub_del_office      the_office      rung 6 · rung 12 · rung 20 · refusal r25
+#   hub_marek_corridor  the_corridor    rung 2 · rung 6 · rung 12 · refusal r15
+#   hub_marek_bathroom  the_bathroom    rung 20
+#
+# ⚠️ TWO GATES ON EVERY RUNG: her corruption AND his relation. She has to be
+#    willing and he has to be willing to want it. The relation column is the whole
+#    difference between the two men — Del needs 85 at the top rung, Marek 50.
+#    Same nine corruption rungs, half the trust.
+#
+# ⚠️ THE CORRUPTION BANDS ARE EXCLUSIVE — gte X and lt Y — so exactly one rung is
+#    live at a time, which is what the person sheets mean by "showing 1 at a
+#    time". Each hub then carries ONE visible locked door with a reason on it.
+#
+# ⚠️ SHE SPEAKS THREE WAYS and in 0.0.1 that is a block_pool, i.e. ROTATION, not
+#    identity. The sheets specify a meek/bratty/neutral personality check — the
+#    reference game's own mandatory rule — and this game has no personality axis
+#    to hang it on. The three lines are written and they cycle. Logged in
+#    BUILD_VS_SHEET.md as the largest single sheet-to-build divergence.
+#
+# ⚠️ THE SIX EXPLICIT BEATS ARE COPIED VERBATIM from the scene sheets. Each was
+#    verified against gates.py:286 — three counted words apiece — and re-writing
+#    them here would throw that verification away. `hard` and `wet` are NOT on
+#    that list; three beats that leaned on them scored 0, 0 and 1 and were
+#    rewritten on the sheets before this file was written.
+# =============================================================================
+
+# ═══════════════════ DEL, AT THE DESK ════════════════════════════════════════
+[[canvases]]
+id          = "hub_del_desk"
+name        = "Del"
+description = "Portrait hub at the anchor. Rung 2 (the cameras) and rung 30 (behind you at the monitor). The 4am window is his empty-week desk row — without it rung 30 is written and unreachable."
+
+[canvases.trigger]
+npc           = "npc_del"
+location      = "the_desk"
+is_repeatable = true
+is_active     = true
+priority      = 6
+requires_npc  = "npc_del"
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_del", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "del_rung_today", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The far end of the counter"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "Road do anything?" },
+  { type = "dialog", props = { speaker = "player" }, content = "One. Station wagon, took two goes at the space." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "That's one more than Tuesday." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He is at the far end of the counter doing something to the register with a biro, which is not a thing a biro fixes. He has owned this register longer than you have been alive." },
+    { type = "paragraph", content = "He came out for the pot and stayed for the pot, and now he is leaning on the end of the counter watching the monitor cycle its four with his mug going cold in his hand." },
+    { type = "paragraph", content = "Four in the morning and he is out here rather than on the cot, which happens when the week has been thin. He does not say why and you have learned not to ask on those nights." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# ── rung 2 · corruption 2-5, relation 0 ─────────────────────────────────────
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him what the cameras actually cover."
+targetType = "node"
+nodeId     = "rung_02"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 2 },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt",  value = 30 },
+  { type = "flag",  subject = "player", flag_key  = "del_rung_today", operator = "is_false" },
+] }
+
+# ── rung 30 · corruption 30+, relation 40 ───────────────────────────────────
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him stand behind you at the monitor."
+targetType = "node"
+nodeId     = "rung_30"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 30 },
+  { type = "trait", subject = "npc", npc_id = "npc_del", trait_key = "relation", operator = "gte", value = 40 },
+  { type = "trait", subject = "player", trait_key = "hygiene", operator = "gte", value = 25 },
+  { type = "flag",  subject = "player", flag_key  = "del_rung_today", operator = "is_false" },
+] }
+show_when_locked = true
+locked_text      = "He still hasn't decided what you are."
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get back to it."
+targetType = "location"
+locationId = "the_desk"
+
+# ── rung 2 · "Ask him about the cameras" ────────────────────────────────────
+[[canvases.nodes]]
+id   = "rung_02"
+name = "Four cameras and not the rooms"
+blocks = [
+  { type = "paragraph", content = "You ask what the cameras actually cover. It is a real question and it is the first one you have asked him about anything." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "rooms_full", operator = "lt", value = 5 },
+  ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "Corridor, lot, ice machine, back hall. Not the rooms, $player.name. Recorder keeps thirty days and I have never once had a reason to go into it." },
+  ] },
+  { type = "group", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "Corridor, lot, the ice machine, the back hall. Not the rooms. Nobody's ever wanted to look at any of it." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "player" }, content = "I just didn't want to be doing something stupid on one of them." },
+    { type = "dialog", props = { speaker = "player" }, content = "So you can see everything except the interesting parts." },
+    { type = "dialog", props = { speaker = "player" }, content = "Thirty days is a long time." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get back to it."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_desk"
+time_progression_minutes = 15
+effects = [
+  { targetType = "npc", npcId = "npc_del", trait = "relation", op = "add", value = 2, cap = 10 },
+]
+flagEffects = [ { targetType = "player", flag = "del_rung_today", op = "set" } ]
+
+# ── rung 30 · "Let him stand behind you at the monitor" ─────────────────────
+# TWO EXPLICIT BEATS, both verified against gates.py:286.
+#   beat 4  cock · ass · tits    42 words
+#   beat 5  cunt · ass · cock    37 words
+# Neither pivots: beat 4 ends on him not stepping back, beat 5 on her pushing
+# into him. The meaning is the beat after, which is her speaking.
+[[canvases.nodes]]
+id   = "rung_30"
+name = "Camera four, and him not stopping where he stops"
+blocks = [
+  { type = "paragraph", content = "The monitor is on camera four, the corridor, and there is nobody in it. It will be nobody in it for another eight seconds and then it will be the lot." },
+  { type = "paragraph", content = "He comes up behind you and does not stop where he usually stops. His hand finds your hip and stays there, thumb hooked over the waistband, and he says nothing at all about the fact that it is there." },
+  { type = "video", props = { pool_dir = "sex/del_30_monitor_t4", pool = 4, description = "A man standing close behind a woman at a desk, one hand on her hip, both facing a screen.", search_queries = ["man behind woman at desk hand on hip", "standing behind her at a monitor from behind close"] } },
+  { type = "paragraph", content = "He leans past you for the dial. His cock is against your ass through the cloth, not hard yet and getting there, and his forearm comes across under your tits and stays. He does not step back when the dial is turned." },
+  { type = "paragraph", content = "It stops being not-hard somewhere around the second time the camera cycles. Your cunt has been wet since his forearm landed, and you push your ass back into his cock about an inch, and he lets you." },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "player" }, content = "That's — camera four's fine." },
+    { type = "dialog", props = { speaker = "player" }, content = "You turned that dial ten minutes ago." },
+    { type = "dialog", props = { speaker = "player" }, content = "Corridor's empty." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# ⚠️ EXHIBITIONISM CAPS AT 44 HERE via the condition, not via a cap on the effect
+#    — this rung cannot carry her to the next one, which is what stops it being
+#    farmed. The day flag stops it inside one night as well.
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stay where you are."
+targetType               = "node"
+nodeId                   = "rung_30"
+time_progression_minutes = 30
+costs = [ { trait = "energy", value = 5 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 44 },
+] }
+effects = [
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 2 },
+  { targetType = "player", trait = "corruption",    op = "add", value = 1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Turn around."
+targetType = "location"
+locationId = "the_desk"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 45 },
+  { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 },
+] }
+show_when_locked = true
+locked_text      = "Not while he is still deciding what you are."
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "I should get the desk."
+targetType               = "location"
+locationId               = "the_desk"
+time_progression_minutes = 30
+effects = [
+  { targetType = "npc", npcId = "npc_del", trait = "relation",   op = "add", value = 2, cap = 60 },
+  { targetType = "npc", npcId = "npc_del", trait = "corruption", op = "add", value = 2, cap = 70 },
+]
+flagEffects = [ { targetType = "player", flag = "del_rung_today", op = "set" } ]
+
+
+# ═══════════════════ DEL, IN THE OFFICE ══════════════════════════════════════
+# ⚠️ The office door is open only when Del is in it — the entry_conditions in
+#    phase 1 are npc_at_location, not a flag. So this hub is reachable exactly
+#    when he is up, which is Tuesday and Friday. Three rungs and a refusal live
+#    behind two nights a week, and that is the design: he is the slow one.
+[[canvases]]
+id          = "hub_del_office"
+name        = "Del"
+description = "Portrait hub in his room. Rungs 6, 12 and 20 plus the refusal at his corruption 25. Rung 20 is the conversation that raises nothing."
+
+[canvases.trigger]
+npc           = "npc_del"
+location      = "the_office"
+is_repeatable = true
+is_active     = true
+priority      = 6
+requires_npc  = "npc_del"
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_del", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "del_rung_today", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The ledger, the cot, the recorder"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "Shut it behind you. The light gets out into the lot and people think we're open." },
+  { type = "dialog", props = { speaker = "player" }, content = "We are open." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "We're open at the desk. This isn't the desk." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He does the books by hand in a ledger, which you did not expect from a man with a computer in the room. Pen, ruler, a column for each of the twelve. It takes him most of three hours." },
+    { type = "paragraph", content = "The recorder is on the shelf above the cot with a light on it, and the ledger is open, and he is doing the thing where he adds a column twice because it came out wrong the first time." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# ── rung 6 · corruption 6-11, relation 10 ───────────────────────────────────
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit down while he does the books."
+targetType = "node"
+nodeId     = "rung_06"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 6 },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt",  value = 12 },
+  { type = "trait", subject = "npc", npc_id = "npc_del", trait_key = "relation", operator = "gte", value = 10 },
+  { type = "flag",  subject = "player", flag_key  = "del_rung_today", operator = "is_false" },
+] }
+
+# ── rung 12 · corruption 12-19, relation 20 ─────────────────────────────────
+[[canvases.nodes.exit_block.choices]]
+text       = "Get the spare towels down off the top shelf."
+targetType = "node"
+nodeId     = "rung_12"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 12 },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt",  value = 20 },
+  { type = "trait", subject = "npc", npc_id = "npc_del", trait_key = "relation", operator = "gte", value = 20 },
+  { type = "trait", subject = "player", trait_key = "hygiene", operator = "gte", value = 25 },
+  { type = "flag",  subject = "player", flag_key  = "del_rung_today", operator = "is_false" },
+] }
+
+# ── rung 20 · the conversation. Raises nothing, opens nothing, weekly. ──────
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask why four of the hooks always have keys on them."
+targetType = "node"
+nodeId     = "rung_20"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 },
+  { type = "trait", subject = "npc", npc_id = "npc_del", trait_key = "relation", operator = "gte", value = 30 },
+  { type = "flag",  subject = "player", flag_key  = "del_told_rooms", operator = "is_false" },
+] }
+
+# ── the refusal · his corruption 25, hers under 30 ──────────────────────────
+[[canvases.nodes.exit_block.choices]]
+text       = "Change in here. The bathroom had somebody in it."
+targetType = "node"
+nodeId     = "refusal_r25"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_del", trait_key = "corruption", operator = "gte", value = 25 },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 30 },
+  { type = "flag",  subject = "player", flag_key  = "del_asked_door", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave him to it."
+targetType = "location"
+locationId = "the_office"
+
+# ── rung 6 ──────────────────────────────────────────────────────────────────
+[[canvases.nodes]]
+id   = "rung_06"
+name = "Somebody might come in"
+blocks = [
+  { type = "paragraph", content = "You sit on the end of the cot because there is nowhere else, and the cot is made, and the shoes are under it. He has lived in this room for some years and it took you three weeks to be in it." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "rooms_full", operator = "lt", value = 5 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He talks while he works — the rate, the season, what a Tuesday is worth — and then he stops halfway through a sentence and just adds up, and does not come back to it." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "He talks while he works. The rate, the season, what a Tuesday is worth. He tells you about the best month he ever had and then tells you about it again, differently, ten minutes later." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "player" }, content = "I should get back to the desk." },
+    { type = "dialog", props = { speaker = "player" }, content = "What do you do with it? The money." },
+    { type = "dialog", props = { speaker = "player" }, content = "How long have you had this place?" },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stay a bit longer."
+targetType               = "node"
+nodeId                   = "rung_06"
+time_progression_minutes = 30
+costs = [ { trait = "energy", value = 5 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_del", trait_key = "relation", operator = "lt", value = 20 },
+] }
+effects = [
+  { targetType = "npc", npcId = "npc_del", trait = "relation", op = "add", value = 2, cap = 20 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Somebody might come in."
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 30
+costs = [ { trait = "energy", value = 4 } ]
+effects = [
+  { targetType = "npc", npcId = "npc_del", trait = "relation", op = "add", value = 2, cap = 20 },
+]
+flagEffects = [ { targetType = "player", flag = "del_rung_today", op = "set" } ]
+
+# ── rung 12 · ONE EXPLICIT BEAT · ass · tits · nipples · 41 words ───────────
+# ⚠️ THIS IS THE GAME'S FIRST EXPLICIT BEAT, at corruption 12, on about night
+#    two. It used to be Marek's at 20. She is fully dressed in it and nothing is
+#    touched — it is her shape under her own clothes and his reaction to it,
+#    which is what Del tier 1 is for. Nothing here reaches tier 2.
+[[canvases.nodes]]
+id   = "rung_12"
+name = "The shelf she is not tall enough for"
+blocks = [
+  { type = "paragraph", content = "The spare towels live on the top shelf and you are not tall enough for it without going up on your toes. The shirt comes untucked when you do that. It always has and you have never once tucked it back in fast." },
+  { type = "video", props = { pool_dir = "sex/del_12_shelf_t3", pool = 4, description = "A woman stretching up on her toes to reach a high shelf, shirt riding up, watched from a desk.", search_queries = ["woman reaching high shelf shirt rides up", "stretching up on tiptoes reaching shelf from behind"] } },
+  { type = "paragraph", content = "Up on your toes the shirt goes with you and your ass is at the height of the desk he sits at. Your tits pull up under the cotton, nipples through it. He is hard in his lap and writing nothing." },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "player" }, content = "There's only three left. I'll tell you when we're out." },
+    { type = "dialog", props = { speaker = "player" }, content = "You could have got these yourself." },
+    { type = "dialog", props = { speaker = "player" }, content = "Three left." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Do it again."
+targetType               = "node"
+nodeId                   = "rung_12"
+time_progression_minutes = 15
+costs = [ { trait = "energy", value = 4 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 24 },
+] }
+effects = [
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_del", trait = "relation", op = "add", value = 3, cap = 40 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "That's all of them."
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 15
+costs = [ { trait = "energy", value = 3 } ]
+effects = [
+  { targetType = "npc", npcId = "npc_del", trait = "relation",   op = "add", value = 3, cap = 40 },
+  { targetType = "npc", npcId = "npc_del", trait = "corruption", op = "add", value = 2, cap = 50 },
+]
+flagEffects = [ { targetType = "player", flag = "del_rung_today", op = "set" } ]
+
+# ── rung 20 · THE CONVERSATION RUNG. Raises nothing. Opens nothing. ────────
+# ⚠️ IT PAYS OUT NOTHING ON PURPOSE — not relation, not corruption. If it paid it
+#    would be a rung, and the shape only works because it does not. Three of these
+#    sit on each climb, placed exactly where a player would be asking. The field's
+#    own device; our skill has never had a name for it.
+[[canvases.nodes]]
+id   = "rung_20"
+name = "Four keys that stay on their hooks"
+blocks = [
+  { type = "paragraph", content = "Four of the twelve hooks always have keys on them and you have never asked why. You ask why." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "Two have damp. One has no working lock and I'm not paying what he wants for the lock. And one I don't rent." },
+  { type = "paragraph", content = "You wait, which is a thing you have learned works on him, and he tells you about that one anyway without you having asked a second time." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "Girl worked the desk before you. That was the room she used. I've not had anybody in it since and I'm not going to." },
+  { type = "dialog", props = { speaker = "player" }, content = "How long was she here?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "Longer than three weeks. Not much longer." },
+  { type = "paragraph", content = "He says it plainly and it is not a warning, or he does not mean it as one, and he goes back to the column he was adding before you can decide which." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You say nothing for long enough that he goes back to the ledger, and then you keep saying nothing." },
+    { type = "dialog", props = { speaker = "player" }, content = "Is this the part where you tell me to be careful?" },
+    { type = "dialog", props = { speaker = "player" }, content = "Which room." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "You should get back."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_office"
+time_progression_minutes = 20
+flagEffects = [ { targetType = "player", flag = "del_told_rooms", op = "set" } ]
+
+# ── the refusal · written at full length, and it goes somewhere the yes doesn't
+# ⚠️ THE REFUSAL IS THE CONTENT. The field puts a real one on about one click in
+#    fifty and 79% of them go somewhere the yes does not. We had never written one.
+#    What it leads to: he is quieter for two nights, his relation does not move,
+#    and the conversation rung at 20 reads differently afterwards.
+[[canvases.nodes]]
+id   = "refusal_r25"
+name = "He asks, and it is not a joke"
+blocks = [
+  { type = "paragraph", content = "The bathroom had somebody in it, so you change in the office with him facing the ledger, which is a thing that has happened twice before and been nothing both times." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_del" }, content = "Next time. You could leave that door open. If you wanted." },
+  { type = "paragraph", content = "The asking is worse than the thing asked. He has clearly worked out how to say it, and worked out the two words at the end that make it your idea, and the working-out is all over the sentence." },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "player" }, content = "I don't think so." },
+    { type = "dialog", props = { speaker = "player" }, content = "You could have just asked me to do it, instead of asking if you could ask." },
+    { type = "dialog", props = { speaker = "player" }, content = "No." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "No."
+targetType               = "location"
+locationId               = "the_office"
+time_progression_minutes = 20
+effects = [
+  { targetType = "npc", npcId = "npc_del", trait = "corruption", op = "add", value = 3, cap = 70 },
+]
+flagEffects = [ { targetType = "player", flag = "del_asked_door", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Yes."
+targetType = "location"
+locationId = "the_office"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 30 },
+] }
+show_when_locked = true
+locked_text      = "Not this month, and you know exactly how far off that is."
+
+
+# ═══════════════════ MAREK, IN THE CORRIDOR ══════════════════════════════════
+# ⚠️ His relation gates are HALF Del's on the same corruption ladder. Del needs 85
+#    at the top rung and Marek needs 50. He has no power over her, nothing to
+#    protect and no reason to be careful — the two-meter system makes them
+#    different people without needing different mechanics.
+[[canvases]]
+id          = "hub_marek_corridor"
+name        = "Marek"
+description = "Portrait hub in the hall. Rungs 2, 6 and 12 plus the refusal at his corruption 15. His mood — going, or staying — colours every one of them and drifts toward staying as her relation climbs."
+
+[canvases.trigger]
+npc           = "npc_marek"
+location      = "the_corridor"
+is_repeatable = true
+is_active     = true
+priority      = 6
+requires_npc  = "npc_marek"
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_marek", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "marek_rung_today", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Twenty past, and the machine"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_marek" }, content = "Still nothing in it." },
+  { type = "dialog", props = { speaker = "player" }, content = "There was never going to be anything in it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_marek" }, content = "No. But I'd have to stop coming down, then, wouldn't I." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "Twenty past, and he is down for ice from a machine that has never had any in the eleven weeks he has been here. He does it every night. Neither of you has ever said the obvious thing about it." },
+    { type = "paragraph", content = "He is at the far end by the machine with the bucket he does not need, in the shirt he sleeps in, not really waiting for anything. He looks up when the fire door goes because he knows it is you." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Give him his key."
+targetType = "node"
+nodeId     = "rung_02"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 2 },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt",  value = 6 },
+  { type = "flag",  subject = "player", flag_key  = "marek_rung_today", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Walk him down to the ice machine."
+targetType = "node"
+nodeId     = "rung_06"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 6 },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt",  value = 12 },
+  { type = "trait", subject = "npc", npc_id = "npc_marek", trait_key = "relation", operator = "gte", value = 5 },
+  { type = "flag",  subject = "player", flag_key  = "marek_rung_today", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him why he is still here."
+targetType = "node"
+nodeId     = "rung_12"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 12 },
+  { type = "trait", subject = "npc", npc_id = "npc_marek", trait_key = "relation", operator = "gte", value = 10 },
+  { type = "flag",  subject = "player", flag_key  = "marek_told_waiting", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him say the thing he keeps not saying."
+targetType = "node"
+nodeId     = "refusal_r15"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_marek", trait_key = "corruption", operator = "gte", value = 15 },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 },
+  { type = "flag",  subject = "player", flag_key  = "marek_asked_coincidence", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Goodnight."
+targetType = "location"
+locationId = "the_corridor"
+
+# ── rung 2 · the cheapest rung in the game ─────────────────────────────────
+[[canvases.nodes]]
+id   = "rung_02"
+name = "Six"
+blocks = [
+  { type = "paragraph", content = "He leaves the key at the desk every morning and picks it up every night, which is not a thing the other eleven rooms do. Nobody asked him to. He has done it for eleven weeks." },
+  { type = "paragraph", content = "He takes it off the counter and does not immediately go." },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "player" }, content = "Six." },
+    { type = "dialog", props = { speaker = "player" }, content = "You know you're allowed to keep it." },
+    { type = "dialog", props = { speaker = "player" }, content = "Six. Goodnight." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Goodnight."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_corridor"
+effects = [
+  { targetType = "npc", npcId = "npc_marek", trait = "relation", op = "add", value = 2, cap = 10 },
+]
+flagEffects = [ { targetType = "player", flag = "marek_rung_today", op = "set" } ]
+
+# ── rung 6 · first scene that uses his mood axis ───────────────────────────
+[[canvases.nodes]]
+id   = "rung_06"
+name = "A machine that makes a noise and nothing else"
+blocks = [
+  { type = "paragraph", content = "He goes for ice every night at about twenty past and there has never been any ice. You walk down with him and neither of you mentions that, the way you have not mentioned it eleven times." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_marek", trait_key = "relation", operator = "lt", value = 12 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He talks about where he is going next and he is specific about it — the road, the hours, a man there who owes him a start. It sounds like a plan because he has said it enough times to smooth it." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "He talks about a town he drove through once and what the front of it looked like, and he does not mention leaving at all, and both of you notice that he does not." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "player" }, content = "It might just need — I don't know what it needs." },
+    { type = "dialog", props = { speaker = "player" }, content = "You know it's broken. You've known for eleven weeks." },
+    { type = "dialog", props = { speaker = "player" }, content = "Del says not to bother fixing it." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Wait with him."
+targetType               = "node"
+nodeId                   = "rung_06"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_marek", trait_key = "relation", operator = "lt", value = 20 },
+] }
+effects = [
+  { targetType = "npc", npcId = "npc_marek", trait = "relation", op = "add", value = 2, cap = 20 },
+  { targetType = "player", trait = "energy", op = "add", value = -2 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "You've got the desk."
+targetType               = "location"
+locationId               = "the_corridor"
+time_progression_minutes = 20
+effects = [
+  { targetType = "npc", npcId = "npc_marek", trait = "relation", op = "add", value = 2, cap = 20 },
+]
+flagEffects = [ { targetType = "player", flag = "marek_rung_today", op = "set" } ]
+
+# ── rung 12 · THE CONVERSATION RUNG. Raises nothing. ───────────────────────
+[[canvases.nodes]]
+id   = "rung_12"
+name = "Eleven hundred dollars"
+blocks = [
+  { type = "paragraph", content = "You ask why he is still here, which is the question you have been not asking for three weeks and he has been waiting on for eleven." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_marek" }, content = "Money. Somebody owes me and he's good for it, he's just not quick about it." },
+  { type = "paragraph", content = "You ask how much, and it is eleven hundred dollars, and you have been imagining something larger than eleven hundred dollars for three weeks." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_marek", trait_key = "relation", operator = "lt", value = 12 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He says he could have walked away from it in week two, and says it the way a man describes a mistake he has stopped making, and does not explain the part where he did not." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "He says he could have walked away from it in week two. Then he asks what time you get off, which is not a change of subject he has bothered to disguise." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "player" }, content = "That's not — that isn't very much." },
+    { type = "dialog", props = { speaker = "player" }, content = "Eleven hundred. You've spent that on the room." },
+    { type = "dialog", props = { speaker = "player" }, content = "How long do you give it?" },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "You should get back."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_corridor"
+time_progression_minutes = 20
+flagEffects = [ { targetType = "player", flag = "marek_told_waiting", op = "set" } ]
+
+# ── the refusal · he laughs and drops it. That line IS the difference. ──────
+[[canvases.nodes]]
+id   = "refusal_r15"
+name = "The coincidence"
+blocks = [
+  { type = "paragraph", content = "He says it on the walk back from the machine, easily, as if it were a small thing and not the thing he has been carrying down this hall every night for a fortnight." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_marek" }, content = "You going to keep pretending the bathroom's a coincidence, $player.name?" },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "player" }, content = "I don't know what you mean." },
+    { type = "dialog", props = { speaker = "player" }, content = "It IS a coincidence. There's one bathroom." },
+    { type = "dialog", props = { speaker = "player" }, content = "I'm going to keep pretending, yes." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# ⚠️ HE LAUGHS AND DROPS IT. Del goes quiet for two nights. That single line is
+#    the difference between the two men and it is legible in one sentence.
+[[canvases.nodes.exit_block.choices]]
+text                     = "No."
+targetType               = "location"
+locationId               = "the_corridor"
+time_progression_minutes = 10
+effects = [
+  { targetType = "npc", npcId = "npc_marek", trait = "corruption", op = "add", value = 3, cap = 55 },
+]
+flagEffects = [ { targetType = "player", flag = "marek_asked_coincidence", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Yes."
+targetType = "location"
+locationId = "the_corridor"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 },
+] }
+show_when_locked = true
+locked_text      = "Not out loud. Not yet."
+
+
+# ═══════════════════ MAREK, IN THE BATHROOM ══════════════════════════════════
+# ⚠️ THE FIRST SCENE WHERE SHE IS NOT DRESSED, at corruption 20, on about night
+#    three. THREE EXPLICIT BEATS, all verified against gates.py:286:
+#      beat 2   naked · tits · cunt      43 words
+#      beat 3   tits · nipples · cock    46 words
+#      beat 4   tits · cunt · cock       45 words
+#    None pivots. The meaning is the beat after, which is her speaking.
+#
+# ⚠️ Beats 2 and 3 were REWRITTEN on the sheets before this file was written. Both
+#    were the release's voice sample, both were called explicit, and both scored
+#    0 and 1 — beat 3 said "what looking at you has done to him", which gestures
+#    at his cock rather than saying it. The word list caught a flinch, not just
+#    a miscount.
+[[canvases]]
+id          = "hub_marek_bathroom"
+name        = "Marek"
+description = "Rung 20 only. Nothing is done to her and nothing is asked — she does not cover up, and she turns round. The locked exit above it, at corruption 30, is where touching starts."
+
+[canvases.trigger]
+npc           = "npc_marek"
+location      = "the_bathroom"
+is_repeatable = true
+is_active     = true
+priority      = 6
+requires_npc  = "npc_marek"
+conditions    = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_marek", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "marek_rung_today", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "One bathroom, and he is in the cheap half"
+blocks = [
+  { type = "paragraph", content = "Rooms one to six share this room and so does staff, and he is in six. You have been washing six feet from this man since before either of you said anything to the other." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_marek" }, content = "There's two showers and there's always been two showers." },
+  { type = "dialog", props = { speaker = "player" }, content = "I'm aware of how many showers there are." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Don't cover up when he comes in."
+targetType = "node"
+nodeId     = "rung_20"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 },
+  { type = "trait", subject = "npc", npc_id = "npc_marek", trait_key = "relation", operator = "gte", value = 15 },
+  { type = "trait", subject = "player", trait_key = "hygiene", operator = "gte", value = 25 },
+  { type = "flag",  subject = "player", flag_key  = "marek_rung_today", operator = "is_false" },
+] }
+show_when_locked = true
+locked_text      = "You would reach for the towel. You know you would."
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Wait until he's out."
+targetType = "location"
+locationId = "the_bathroom"
+
+[[canvases.nodes]]
+id   = "rung_20"
+name = "The water, the door, and not reaching for the towel"
+blocks = [
+  { type = "paragraph", content = "The water has been running long enough to go lukewarm. The door goes without a knock, because the bolt has been broken since before you got here and everybody in the cheap half knows it. You hear him put his towel down on the bench." },
+  { type = "video", props = { pool_dir = "sex/marek_20_shower_t4", pool = 5, description = "A woman under a shower in a shared tiled bathroom, not turning away as somebody else comes in.", search_queries = ["woman shower shared bathroom someone walks in", "wet naked woman standing under shower turning to face"] } },
+  { type = "paragraph", content = "You do not reach for yours. That is the whole decision and it takes about a second — you standing there naked with the water still coming off your tits and your cunt. He is four feet away, and he stops turning away." },
+  { type = "paragraph", content = "He looks at you the way you have been imagining somebody looking at you, and he does not hurry it — your tits, the water still on your nipples, down and back up again. The towel he is holding is doing nothing to hide his cock." },
+  { type = "paragraph", content = "You turn round. Not fast — you just stop being side-on, and there is nothing of you he is not looking at now. Your tits, your cunt, the water coming off both. The towel drops and his cock is not hidden by it at all." },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "player" }, content = "The hot water's nearly gone." },
+    { type = "dialog", props = { speaker = "player" }, content = "Take your time. I'm not in a hurry." },
+    { type = "dialog", props = { speaker = "player" }, content = "It goes lukewarm after ten minutes." },
+  ] },
+  { type = "paragraph", content = "He gets under the other shower without saying anything else. You finish washing six feet from him, and neither of you says one word about it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Finish washing."
+targetType               = "node"
+nodeId                   = "rung_20"
+time_progression_minutes = 15
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 34 },
+  { type = "trait", subject = "player", trait_key = "hygiene", operator = "gte", value = 25 },
+] }
+costs = [ { trait = "energy", value = 5 }, { trait = "hygiene", value = 8 } ]
+effects = [
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 2 },
+  { targetType = "player", trait = "corruption",    op = "add", value = 1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get in with him."
+targetType = "location"
+locationId = "the_bathroom"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 30 },
+  { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 34 },
+] }
+show_when_locked = true
+locked_text      = "He has not asked and neither have you."
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Get out before he does."
+targetType               = "location"
+locationId               = "the_bathroom"
+time_progression_minutes = 15
+effects = [
+  { targetType = "npc", npcId = "npc_marek", trait = "relation",   op = "add", value = 2, cap = 40 },
+  { targetType = "npc", npcId = "npc_marek", trait = "corruption", op = "add", value = 3, cap = 60 },
+]
+flagEffects = [ { targetType = "player", flag = "marek_rung_today", op = "set" } ]

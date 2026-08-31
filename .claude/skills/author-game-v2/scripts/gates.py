@@ -4273,13 +4273,60 @@ def run_gates(model, game, state=None):
     # range and still four times colder than its genre. One did exactly that and the
     # gate said PASS. Until a field-comparable threshold exists (see the constant),
     # the honest thing is to print how marginal a marginal pass is.
-    pct = 100 * len(expl) / max(len(all_beats), 1)
+    # ⚠️ THE DENOMINATOR IS REPEATABLE BEATS, NOT EVERY BEAT. Changed 2026-08-31.
+    # This gate used to divide by every beat in the game, which answers "what share of
+    # this game's text is explicit?" The question worth asking is "when the player
+    # RETURNS to a surface, is it hot?" — and the two diverge the moment a game contains
+    # legitimately cold content, because the cold content lands in the denominator.
+    #
+    # The opening funnel is the largest such block and it is one the author is supposed
+    # to build WELL. Measured on night_desk: a 25-beat opening moved the all-beats score
+    # from 12.0% to 8.0% on identical prose. That is a live incentive to shorten an
+    # opening to move a number, which is the worst available response, and the old
+    # denominator rewarded it.
+    #
+    # Re-run with this script across all 15 built games, 13 verdicts are unchanged and
+    # TWO FLIP PASS -> FAIL:
+    #
+    #     steam           7.6% all -> 7.2% repeatable      was a BARE PASS
+    #     the_allowance   8.1% all -> 7.3% repeatable      was a BARE PASS
+    #
+    # Both were already flagged BARE PASS, which this gate itself glosses as "evidence of
+    # not being empty" rather than evidence of heat. They are now red. That is a real
+    # consequence of the change and not a rounding artefact: their one-shots are hotter
+    # than their loops, which is the shape this gate exists to catch.
+    #
+    # ⚠️ The DIRECTION of the gap is the diagnostic, and it is worth reading off the
+    # headline. A repeatable share ABOVE the all-beats share means the cold content is
+    # in one-shots, where it belongs. BELOW means the heat is in one-shots and the loops
+    # are cold. Measured: steam -0.4, the_allowance -0.8, forty_miles -0.2, vesper -0.6;
+    # every other game is positive, the_season most (+8.4).
+    #
+    # ⚠️ vesper does NOT flip — it failed on all-beats already (4.9%) and fails harder
+    # here (4.3%). An earlier draft of this comment claimed it flipped, from a throwaway
+    # probe whose beat model was not this script's. The numbers above come from running
+    # this file, before and after, on every game.
+    #
+    # ⚠️ EXPLICIT_BEAT_FLOOR HAS NOT BEEN RE-BASELINED ON THIS DENOMINATOR, and the
+    # honest consequence is that the floor is now LENIENT, not strict. The 7.5-9.3% band
+    # was measured on the reference game over all its beats; a repeatable-only share is
+    # >= an all-beats share for any game whose one-shots are colder than its loops, which
+    # is every game we have. Re-baselining needs the reference game segmented by
+    # repeatability and that has never been done. Until it is, treat a pass here as
+    # "not empty", never as "hot" — which is what the BARE PASS note already says.
+    rep_beats = [b for c in model if c["rep"] for b in c["beats"]]
+    rep_expl = [b for b in rep_beats if b.explicit >= 3]
+    pct = 100 * len(rep_expl) / max(len(rep_beats), 1)
+    all_pct = 100 * len(expl) / max(len(all_beats), 1)
     marginal = EXPLICIT_BEAT_FLOOR <= pct < 12.0
-    gate("explicit floor", None if not all_beats else pct >= EXPLICIT_BEAT_FLOOR,
-         f"{pct:.1f}% of {len(all_beats):,} beats carry 3+ explicit words "
-         f"(floor {EXPLICIT_BEAT_FLOOR}%)" + ("  ← BARE PASS" if marginal else ""),
-         [f"{len(expl)} explicit beats in the whole game — the floor is the reference game's own "
-          f"band, and that game is the coldest of 18 measured sandboxes",
+    gate("explicit floor", None if not rep_beats else pct >= EXPLICIT_BEAT_FLOOR,
+         f"{pct:.1f}% of {len(rep_beats):,} REPEATABLE beats carry 3+ explicit words "
+         f"(floor {EXPLICIT_BEAT_FLOOR}%)"
+         f" · {all_pct:.1f}% of all {len(all_beats):,} beats [reported, not judged]"
+         + ("  ← BARE PASS" if marginal else ""),
+         [f"{len(rep_expl)} explicit beats on re-enterable surfaces, {len(expl)} in the game — "
+          f"the floor is the reference game's own band, and that game is the coldest of 18 "
+          f"measured sandboxes",
           "clearing this floor is not evidence of heat; it is evidence of not being empty"]
          if marginal else [])
 

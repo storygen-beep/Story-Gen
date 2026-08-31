@@ -5,6 +5,137 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-08-31 — the review format is promoted, and a `sheets` phase sits before TOML
+
+**NEW `references/the-sheets.md`** · **`SKILL.md`** · **`references/engine.md`** ·
+**`references/the-first-hour.md`** · **`references/the-release.md`** · **`references/the-board.md`** ·
+**`references/state.md`**
+
+**What changed.** The board phase used to end in TOML. It now ends in **sheets** — a design LO reads,
+argues with and signs — and `phase` gains `"sheets"` between `board` and `release`. Nothing in
+`gates.py` reads `phase`, so the new value is documentation-only and cannot break a build.
+
+**Why.** A sandbox in this engine cannot be reviewed by playing it (Ashwell 2015, on the two patterns
+our games are built from: *"Reviewers may miss narrative content if exploration becomes tedious"* and
+*"Reviewers struggle to assess completeness"*). The review surface has to be generated. Until now the
+skill had **no review artifact of any kind** — 46 gates and 31 lints, all reading a game after it
+exists.
+
+**How it was earned.** `games/night_desk` 0.0.1 was designed in 29 Markdown sheets, signed off, and
+only then translated to TOML and built: **39/40 gates green, 35/35 canvases in the build.** The
+sheets caught ten design defects before a line of TOML existed. **Ten more were invisible from inside
+the format** and are the ten rules in the new file. Every rule is an incident from that build; the
+full comparison is `games/night_desk/iterations/001/BUILD_VS_SHEET.md`.
+
+**`the-sheets.md`** — five sheet types that never merge (place · person · scene · decision ·
+opening), the `[REVIEW] → [READY] → [GAME-READY]` workflow and the four-part verdict from the
+reference game's own Writer's Workflow and submission rubric, and **S1–S10**:
+
+| | |
+|---|---|
+| **S1** | a beat is a NODE — a number is a promise until an instrument produces it |
+| **S2** | a place sheet says what it hangs off |
+| **S3** | a place sheet declares its word budget, at design time |
+| **S4** | every cost and effect names its op |
+| **S5** | a person sheet is a schedule grid, not a list of places |
+| **S6** | nothing a gate requires may be deferred by a sheet |
+| **S7** | the decision sheet and `v2_state.json` are one document written twice |
+| **S8** | a named system points at its mechanism |
+| **S9** | the brake is on the way IN |
+| **S10** | guidance has a row |
+
+⚠️ **S1 is the one the other nine are special cases of, and it cost the most.** The sheets counted
+**paragraphs**; `gates.py` counts **nodes**. The design reported 75 beats against a build of 52, and
+the same game read **6 explicit by the sheet and 3 by the instrument on the same afternoon** — both
+reported to LO as measurements. The same rule now sits in `SKILL.md`'s operating rules.
+
+**`SKILL.md`** — a `sheets` row in Dispatch; a new section **naming the discipline** (storylets /
+quality-based narrative: `storylet` 0 · `QBN` 0 · `Failbetter` 0 · `Ashwell` 0 across 21,831 lines
+before today) with a table of each pattern's published weakness beside our matching shipped defect;
+and the promise-vs-measurement operating rule.
+
+**`engine.md` §41** — five facts that cost one build round each: `op = "sub"` parses and does nothing;
+quest-card conditions use `trait`/`op` while canvas conditions use `trait_key`/`operator`; quest goals
+need `label` and every card needs `when`; `hide_value` does not hide a value (`[[traits.labels]]
+hidden` does); and `_is_free` reads the trigger, never the inner choices.
+
+**`the-first-hour.md` F2b** — the opening as SCREENS. F1–F10 were all about what the opening *says*
+and none about what the player does with their hands. Adds: the age gate is screen 0; a declared
+`[player] customizable` inserts `CustomizeCharacters` and repoints the age gate at it — **7 of 15
+built games ship that screen** and its text is hard-coded; one node is one screen; the break is a
+written button. Plus the **screen walk** review view and the measured table of every opening we have
+built — **8 of 15 are a single screen**.
+
+**`the-release.md`** — a new **§ Minimum viable mass**, and a correction on **§ Cadence**: every
+figure there was measured off mature products and describes **maintenance, not construction**. Ten
+v2 games, median lifespan two days, nine with zero archived releases. The seed floor is the reference
+game's own 116,540 words across 25 locations, Ashwell's *"collapses into linearity otherwise"*, and
+Failbetter's time-to-bootstrap.
+
+**`the-board.md`** — four rules from the reference game's own Writer's Guide that this skill never
+held: the mandatory three-way personality check on every player line, per-character mood axes with
+scenes required to cover their range, the required exit matrix on encounters, and one-line character
+bibles.
+
+**`state.md`** — `phase` gains `"sheets"`, plus a table of the exact `board.*` keys the gates read.
+A ledger written to a schema they do not consume degrades six gates to backstops **silently**.
+
+**How verified.** `gates.py --selfcheck` green on all five rows — 46/46 gates, 46/46 rows, and
+**105 rules across 11 files, 0 pointing at nothing** (was 94 across 10). `night_desk` re-merged,
+re-validated and re-gated at 39/40 after the doc pass.
+
+⚠️ **NO CHECKER SHIPPED, AND S1 SAYS SO IN ITS OWN TEXT.** LO's call: docs only this pass. There is
+no `gates.py --sheets`, so a rule that tells an author to measure with the instrument provides no
+instrument for sheets, and every count on a sheet stays on the intent side of the measured/intent
+split. That is a real gap and it is named in the rule rather than left to be discovered.
+
+⚠️ **`steam` and `the_allowance` ARE RED and are staying red — LO's call.** Both went PASS → FAIL on
+the 2026-08-31 `explicit floor` denominator change. Both were already flagged **BARE PASS**, which
+the gate itself glosses as *"evidence of not being empty"* rather than of heat, so the red is the
+gate becoming correct rather than the games getting worse. Recorded here so nobody re-derives it.
+
+---
+
+## 2026-08-31 — `explicit floor` now divides by REPEATABLE beats
+
+**`scripts/gates.py`** (G2) · **`SKILL.md`** (scoreboard row)
+
+**What changed.** The `explicit floor` gate divided explicit beats by *every* beat in the game. It
+now divides by *repeatable* beats, and prints the all-beats share beside it as a reported figure
+with no floor. The gate name, the constant (`EXPLICIT_BEAT_FLOOR = 7.5`) and the BARE PASS band are
+untouched.
+
+**Why.** The old ratio answers *"what share of this game's text is explicit?"* The question worth
+asking is *"when the player returns to a surface, is it hot?"* — and the two diverge as soon as a
+game contains legitimately cold content, because the cold content lands in the denominator. The
+opening funnel is the largest such block and one the author is supposed to build well. Found while
+building `games/night_desk` as a review-format experiment: writing a proper twelve-screen opening
+moved that game's score from 12.0% to 8.0% **on identical prose**. That is a standing incentive to
+shorten an opening to move a number, which is the worst available response.
+
+**How verified.** Ran this script, before and after, against all fifteen built games. Thirteen
+verdicts unchanged. Two flip PASS → FAIL — `steam` 7.6% → 7.2% and `the_allowance` 8.1% → 7.3% —
+and **both were already flagged BARE PASS**, which the gate itself glosses as evidence of not being
+empty rather than evidence of heat. `vesper` does not flip; it failed before (4.9%) and fails harder
+now (4.3%). `gates.py --selfcheck` green: 46/46 gates documented, 46/46 rows still checked.
+
+⚠️ **`EXPLICIT_BEAT_FLOOR` has NOT been re-baselined on the new denominator**, and the consequence
+is that the floor is now *lenient*, not strict — a repeatable-only share is ≥ an all-beats share for
+any game whose one-shots are colder than its loops. Re-baselining needs the reference game segmented
+by repeatability, which has never been done. Recorded in the gate's own comment block.
+
+⚠️ **The direction of the gap is a new diagnostic** and it is on the headline. Repeatable share
+*above* all-beats means the cold content sits in one-shots, where it belongs; *below* means the heat
+is in one-shots and the loops are cold — the documented Vesper shape. Measured: `steam` −0.4,
+`the_allowance` −0.8, `forty_miles` −0.2, `vesper` −0.6; every other game positive, `the_season`
+most at +8.4.
+
+⚠️ **One earlier draft of the gate's comment carried figures from a throwaway probe whose beat model
+was not this script's, and claimed `vesper` flipped.** It does not. Corrected before commit; the
+numbers above all come from running this file.
+
+---
+
 ## 2026-08-30 — defects 001 and 002 closed, and the defect files were themselves wrong
 
 Both defects were opened the same day while building `commuter`, and both are skill defects: the

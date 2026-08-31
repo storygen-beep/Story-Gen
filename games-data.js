@@ -15,6 +15,47 @@
 //                        NOT whatever is currently half-built in the working tree.
 window.GAMES = [
   {
+    // Listed 2026-08-31. THE FIRST GAME DESIGNED BEFORE IT WAS BUILT. 29 Markdown sheets — 16
+    // decisions, 7 places, 2 people, 11 scenes, a 12-screen opening — written, reviewed and
+    // SIGNED OFF with no TOML in existence, then translated and compiled. 4,590 words, 35
+    // canvases, 52 nodes, 7 locations, 2 characters, 9 guidance cards, 5 walk-ins, 39/40 gates.
+    //
+    // It exists to test a REVIEW FORMAT, not to be a game. The sheets caught ten design defects
+    // before a line of TOML: an introduction gated on a 1-in-3 schedule that two players in three
+    // would never have seen, the corruption on-ramp sitting behind a door locked two nights in
+    // three, a bathroom in two places at once, an opening that explained five systems and never
+    // named the $400 the whole game is about.
+    //
+    // And ten MORE were invisible from inside the format, found only by building it. The largest:
+    // the sheets counted PARAGRAPHS and gates.py counts NODES, so the design reported 75 beats
+    // against a build of 52, and the same game read 6 explicit beats by the sheet and 3 by the
+    // instrument on the same afternoon. Both had been reported as measurements. The full
+    // comparison is games/night_desk/iterations/001/BUILD_VS_SHEET.md, and its second half is
+    // now references/the-sheets.md S1-S10 in the skill.
+    //
+    // ⚠️ THE ONE RED GATE IS `location fill` AND IT CANNOT BE EDITED GREEN. 4,590 words, mean 656
+    // per location, against a backstop expecting 4,500. This game needs to be roughly SEVEN TIMES
+    // LARGER to pass. That is the minimum-viable-mass finding with a number on it — the reference
+    // seed is 116,540 words across 25 locations — and it is why the-release.md now carries a seed
+    // floor and a note that its cadence figures describe maintenance, not construction.
+    //
+    // ⚠️ MEDIA HAS NEVER BEEN HARVESTED. 15 cycling pools plus two portraits, ZERO files on disk,
+    // so every image is a gap. Run find-media, rebuild, add `version`, archive to
+    // games/night_desk/releases/, and drop `dev: true` in the same commit.
+    //
+    // ⚠️ THE TITLE HAS NEVER BEEN CHECKED against the storefronts for a collision, and it is a
+    // Block A decision — locked once anything ships.
+    //
+    // Open debts, all on the sheets: `Fix the sign` opens nothing, the face-down photograph in
+    // room 6 opens nothing, and both ladders stop at rung 30 and rung 20 with everything above
+    // visible and locked.
+    slug: "night_desk",
+    title: "Night Desk",
+    badge: "v2",
+    dev: true,
+    summary: `Twelve rooms on a state highway, forty minutes from anywhere in either direction. She is nineteen, she has been here three weeks, and tonight is the first night they have left her on the desk alone. She sleeps in room twelve and eighty dollars a week comes back out of her pay for it. A seat on the bus out is four hundred; she has sixty, folded flat in the lining of her bag, and she counts it more often than she needs to. There is the man who owns the place — fifty-eight, sleeps on a cot in the back office, careful because he has something to lose — and the man in room six, eleven weeks in a room he has unpacked into, who has said he is leaving eleven times. Six is the cheap half, which shares the bathroom, which is why he is early on a ladder he never had to climb. She cannot leave. That is the whole shape of it.`,
+  },
+  {
     // Listed 2026-08-30. Authored with author-game-v2. 13 locations, 56 canvases, 6 characters,
     // 41 guidance cards, 8,414 words, 42/46 gates. THE FIRST BUILD THIS GAME HAS EVER HAD —
     // it existed as TOML for a day and had never been compiled.
