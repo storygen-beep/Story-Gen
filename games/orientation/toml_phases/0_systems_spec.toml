@@ -1,0 +1,415 @@
+# =============================================================================
+# Orientation — 0_systems_spec
+# Built with author-game-v2 from games/orientation/sheets/. The sheets are the
+# spec; this file is the translation. Where the two disagree the disagreement is
+# recorded in iterations/001/BUILD_VS_SHEET.md.
+#
+#   PLAYER ASCENT  nerve       what she will do where someone can see
+#                  appetite    what she will take, and whether she asks
+#                  reputation  how much of campus has heard   ← AUDIENCE meter
+#   COUNTERWEIGHT  home_face   what the household still believes. Falls.
+#                              Above 60 Ray will not move. It is the WIRE between
+#                              the campus charge and the house charge.
+#   NEEDS          rest · clean · fed — each shuts a real door
+#   MONEY          the dues, $120 a Friday, Simone counts. ~$260 an honest week.
+#
+# ⚠️ RUNGS START AT 5, NOT 15. All sixteen declared tiers across five v2 games put
+#    their lowest rung at exactly 15 because templates/board.toml carries that band
+#    table. The field's live meters run 8-17 rungs with the lowest at ~5.
+#    nerve/appetite  5 · 15 · 30 · 50 · 70 · 90
+#    reputation     10 · 25 · 45 · 65 · 85
+#
+# ⚠️ TOP BANDS CARRY NO `max`. Unbounded on purpose, which promises nothing —
+#    gate 8 fails a top band whose max sits above the highest authored gate.
+# =============================================================================
+
+schema_version = "1.0"
+
+[project]
+id              = "orientation"
+title           = "Orientation"
+description     = "You have been in this house four hours. Your mother married the man who owns it in June, his son is a junior at the college you start tomorrow, and nobody here has a read on you yet. Tuition is his. Everything college charges on top of tuition is yours, and it is counted on a Friday by a woman who decides who you get to be."
+starting_canvas = "canvas_arrival_night"
+quests_engine   = "v2"
+version         = "0.1"
+
+# ⚠️ ARRIVAL NIGHT IS A SUNDAY so the funnel hands over on MONDAY 07:20.
+#    Halloran teaches [0,2,4] Mon/Wed/Fri — handing over on a Tuesday would give
+#    her a first day of college with no class and strand both day-one meetings.
+#    Caught by reading OPENING.md against sheets/people/halloran.md.
+[time]
+starting_hour = 19
+starting_day  = "Sunday"
+starting_week = 1
+
+[settings]
+narration_person = "second"      # IMMUTABLE once 0.1 ships — changing it rewrites every line
+clothing_enabled = true
+wardrobe_location = "her_room"
+
+[theme]
+mode = "dark"
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE THREE SHE CLIMBS
+# ═════════════════════════════════════════════════════════════════════════════
+# Read as words, never as numbers. The sidebar is how the player READS a meter;
+# the rung gates live with the content, and the two are independent.
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "nerve"
+bands = [
+  { min = 0,  max = 4,  text = "You lock the door behind you" },
+  { min = 5,  max = 14, text = "You let the door swing" },
+  { min = 15, max = 29, text = "You stopped reaching for the towel" },
+  { min = 30, max = 49, text = "You want the looking" },
+  { min = 50, max = 69, text = "You go where the light is" },
+  { min = 70, text = "You do not check who is in the room" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "appetite"
+bands = [
+  { min = 0,  max = 4,  text = "Nothing has happened yet" },
+  { min = 5,  max = 14, text = "You let it take longer than it needs to" },
+  { min = 15, max = 29, text = "You stopped calling it an accident" },
+  { min = 30, max = 49, text = "You are the one who starts it" },
+  { min = 50, max = 69, text = "You ask out loud" },
+  { min = 70, text = "You ask for the thing you actually want" },
+]
+
+# ⚠️ THE AUDIENCE METER. It rises, it almost never refuses, and it still decides
+#    things — its job is that people ALREADY KNOW. In the field ~10% of its branch
+#    arms carry a link and a median 41% of its reads change something mechanical
+#    without printing a refusal. Do NOT apply the counterweight's shuts-a-door test
+#    to it. Most of its reads here are one-line swaps.
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "reputation"
+bands = [
+  { min = 0,  max = 9,  text = "Nobody here knows your name" },
+  { min = 10, max = 24, text = "Two people know your name" },
+  { min = 25, max = 44, text = "The house knows who you are" },
+  { min = 45, max = 64, text = "The row knows who you are" },
+  { min = 65, max = 84, text = "People you have not met have heard" },
+  { min = 85, text = "They know before you get there" },
+]
+
+# ─── THE COUNTERWEIGHT — falls, and SHUTS something ──────────────────────────
+# ⚠️ A falling meter costs the player on every rung that drops it. If nothing shuts
+#    when it is low you have charged them for nothing and told them it mattered.
+#    Four of five v2 games shipped one and three of those gate almost nothing.
+#    This one gates Ray's entire arc from step 5 on: above 60 he will not move.
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "home_face"
+bands = [
+  { min = 0,  max = 39, text = "Your mother has started asking properly" },
+  { min = 40, max = 59, text = "They have noticed something" },
+  { min = 60, max = 79, text = "You are the girl who moved in" },
+  { min = 80, text = "Nobody in this house has a read on you" },
+]
+
+# ─── THE BODY — three needs, each of which SHUTS a real door ─────────────────
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "rest"
+bands = [
+  { min = 0,  max = 29, text = "You will not make the eight o'clock" },
+  { min = 30, text = "Awake enough" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "clean"
+bands = [
+  { min = 0,  max = 39, text = "Not in front of anybody" },
+  { min = 40, text = "Clean enough to be looked at" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "fed"
+bands = [
+  { min = 0,  max = 29, text = "You cannot hold a thought, let alone a nerve" },
+  { min = 30, text = "Fed enough" },
+]
+
+[[sidebar_items]]
+type  = "trait_bar"
+trait = "money"
+label = "Money"
+max   = 400
+hide_value = false
+
+[[sidebar_items]]
+type  = "trait_bar"
+trait = "followers"
+label = "Followers"
+max   = 400
+hide_value = false
+
+# ─── Suppress the auto Traits dump for every banded key ──────────────────────
+# ⚠️ engine.md §30. The sidebar prints TWO things about a trait from two places
+#    that do not know about each other: the auto dump (a bare number) and the
+#    [[sidebar_items]] you authored. Band a key without hiding it and the player
+#    reads a sentence and `nerve 55` stacked on each other. `hide_value` on the
+#    sidebar item does NOT do this — only [[traits.labels]].
+#    money and followers are deliberately absent: they are quantities and the
+#    number IS the read.
+[[traits.labels]]
+key    = "nerve"
+hidden = true
+
+[[traits.labels]]
+key    = "appetite"
+hidden = true
+
+[[traits.labels]]
+key    = "reputation"
+hidden = true
+
+[[traits.labels]]
+key    = "home_face"
+hidden = true
+
+[[traits.labels]]
+key    = "rest"
+hidden = true
+
+[[traits.labels]]
+key    = "clean"
+hidden = true
+
+[[traits.labels]]
+key    = "fed"
+hidden = true
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# DAY ROLLOVER — [engine.daily_tick]
+# ═════════════════════════════════════════════════════════════════════════════
+# ⚠️ THE DAY-CAP MECHANISM. A choice carries `<x>_today is_false` in conditions and
+#    sets the flag in flagEffects; this clears it at rollover. Without the tick a
+#    capped choice is once per SAVE, not once per day.
+#
+# ⚠️ AND THE FLAG IS SET ON THE CHOICE, NEVER ON THE RUNG'S EXIT. The generator
+#    emits the two in opposite orders — choice: flagEffects -> costs -> advanceTime
+#    (v2.py:12648-12733); node exit: advanceTime -> traitEffects -> flagEffects
+#    (v2.py:13085-13088). advanceTime rolls the day inside itself (v2.py:5411-5414)
+#    and that is where this tick clears the flags (v2.py:5552), so an EXIT-set cap
+#    on a rung crossing midnight is written AFTER the clear and the new day starts
+#    already capped. Both of this game's late windows cross midnight.
+[engine.daily_tick]
+flagEffects = [
+  { targetType = "player", flag = "went_up_today",      op = "unset" },
+  { targetType = "player", flag = "kitchen_late_today", op = "unset" },
+  { targetType = "player", flag = "backroom_today",     op = "unset" },
+  { targetType = "player", flag = "shift_today",        op = "unset" },
+  { targetType = "player", flag = "alone_today",        op = "unset" },
+  { targetType = "player", flag = "wall_today",         op = "unset" },
+  { targetType = "player", flag = "seen_today",         op = "unset" },
+  { targetType = "player", flag = "ray_rung_today",     op = "unset" },
+  { targetType = "player", flag = "simone_rung_today",  op = "unset" },
+  { targetType = "player", flag = "wes_rung_today",     op = "unset" },
+  { targetType = "player", flag = "halloran_rung_today", op = "unset" },
+  { targetType = "player", flag = "office_today",       op = "unset" },
+  { targetType = "player", flag = "shelter_today",      op = "unset" },
+]
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# GUIDANCE — [[quest_cards]] · sheets/GUIDANCE.md
+# ═════════════════════════════════════════════════════════════════════════════
+# ⚠️ quests_engine = "v2" lights a sidebar entry and a page; WITHOUT CARDS it
+#    renders a heading and nothing. Lostness is the genre's dominant complaint at
+#    a 4.7% median share of player comments against grind's 0.9%.
+#
+# ⚠️ QUEST-CARD CONDITIONS USE `trait`, CANVAS CONDITIONS USE `trait_key`. Same
+#    word "condition", two parsers, two key names. Writing `trait_key` in a quest
+#    card is a hard validation failure whose message does not name the right key.
+#
+# ⚠️ QUEST CARDS TAKE FIVE OPERATORS, NOT SIX. `ne` is rejected at build time by
+#    their evaluator, deliberately — it has no case for it. Canvas, node and choice
+#    conditions take all six.
+#
+# ⚠️ A STEPPED LADDER — cards sit on EXCLUSIVE bands so exactly one story card is
+#    live per tier. The trap this avoids: a met goal with no ready_canvas renders a
+#    finished goal pointing nowhere.
+#
+# ⚠️ NAME THE FEEDER, NOT THE NUMBER. A card that says "reach nerve 30" tells the
+#    player a number they cannot see — every band is hidden. The card says where to
+#    go and what to do there.
+
+# ─── nerve ───────────────────────────────────────────────────────────────────
+[[quest_cards]]
+group      = "nerve"
+priority   = 10
+text       = "One bathroom, four people, and a bolt that works. Whether you use it is the only thing in this house nobody has decided for you."
+ready_text = "You have stopped reaching for the towel."
+tip        = "The bathroom at home, early, while @wes is still on that side of the door."
+when       = [ { type = "trait", subject = "player", trait = "nerve", op = "lt", value = 15 } ]
+goals      = [ { type = "trait", subject = "player", trait = "nerve", op = "gte", value = 15, label = "Let the door swing" } ]
+ready_canvas = "act_bath_wash"
+
+[[quest_cards]]
+group      = "nerve"
+priority   = 9
+text       = "Downstairs at the house you are one of twelve. Upstairs on a Thursday there are four, and Simone decides which."
+tip        = "The Pledge House, Thursday to Saturday, and do not stand at the edge of it."
+when       = [ { type = "trait", subject = "player", trait = "nerve", op = "gte", value = 15 } ]
+goals      = [ { type = "flag", subject = "player", flag = "simone_open", op = "is_true", label = "Get taken upstairs" } ]
+ready_canvas = "act_pledge_seen"
+terminal      = true
+terminal_text = "That is as far as 0.1 goes on this one. Everything above it is on the ladder, visible, and it says why."
+
+# ─── appetite ────────────────────────────────────────────────────────────────
+[[quest_cards]]
+group      = "appetite"
+priority   = 8
+text       = "Your mother is on nights from ten. From ten the kitchen is his, and everyone in this house knows it."
+ready_text = "You are up when he is up, and it is not an accident any more."
+tip        = "The kitchen, after ten, on a night she is working. Not Friday or Saturday."
+when       = [ { type = "trait", subject = "player", trait = "appetite", op = "lt", value = 30 } ]
+goals      = [ { type = "flag", subject = "player", flag = "ray_open", op = "is_true", label = "Sit up with him without pretending it is about the dues" } ]
+ready_canvas = "hub_ray_kitchen"
+
+[[quest_cards]]
+group      = "appetite"
+priority   = 7
+text       = "There is a door at the back of the house that you have been walking past for a month."
+tip        = "Ray's room, after one in the morning. The door says what it wants."
+when       = [ { type = "trait", subject = "player", trait = "appetite", op = "gte", value = 30 } ]
+goals      = [ { type = "trait", subject = "player", trait = "appetite", op = "gte", value = 70, label = "Enough to knock" } ]
+ready_canvas = "act_kitchen_late"
+terminal      = true
+terminal_text = "0.1 stops at the door. It is visible and it tells you the number."
+
+# ─── reputation ──────────────────────────────────────────────────────────────
+[[quest_cards]]
+group      = "reputation"
+priority   = 6
+text       = "Nobody on this campus knows your name, which is the only thing you own and the only thing worth spending."
+ready_text = "Two people know your name and one of them tells the others."
+tip        = "Sit on the wall on the quad where people go past, and post from your room."
+when       = [ { type = "trait", subject = "player", trait = "reputation", op = "lt", value = 25 } ]
+goals      = [ { type = "trait", subject = "player", trait = "reputation", op = "gte", value = 25, label = "Let the house know who you are" } ]
+ready_canvas = "act_quad_wall"
+
+[[quest_cards]]
+group      = "reputation"
+priority   = 5
+text       = "There are eight houses on that row and you have been inside one of them."
+tip        = "Followers help. So does being upstairs on a Thursday."
+when       = [ { type = "trait", subject = "player", trait = "reputation", op = "gte", value = 25 } ]
+goals      = [ { type = "trait", subject = "player", trait = "reputation", op = "gte", value = 85, label = "Be known on the row before you get there" } ]
+ready_canvas = "act_quad_wall"
+terminal      = true
+terminal_text = "The rest of the row is 0.2. You can see it from the quad and it tells you the number."
+
+# ─── the cast ────────────────────────────────────────────────────────────────
+# ⚠️ F8 — the same flag gates the portrait AND the card, so a card never points at
+#    somebody the player has not met.
+# ⚠️ R5 / gate `no chain ends in silence` — every ladder keeps a card after its last
+#    rung. Ray's and Simone's become standing cards once their surface opens.
+# ⚠️ THE BADGE IS ON A FLAG, NOT A METER. Frame 1 fires on `terminal === true` alone,
+#    ahead of ready and goals, and nothing checks achievement — a ✓ on a meter
+#    threshold lands while content is still there. A flag the content sets on its
+#    way out means "you played this".
+[[quest_cards]]
+npc_id     = "npc_ray"
+priority   = 4
+text       = "He paid for the semester and he has not once said so out loud. That is the part you cannot get past."
+tip        = "The kitchen after ten. Ask him for the dues before you are short — he is not waiting to be needed."
+when       = [ { type = "flag", subject = "player", flag = "met_ray", op = "is_true" } ]
+goals      = [ { type = "flag", subject = "player", flag = "ray_open", op = "is_true", label = "Stop pretending it is about the money" } ]
+ready_canvas = "hub_ray_kitchen"
+
+[[quest_cards]]
+npc_id     = "npc_simone"
+priority   = 3
+text       = "She signs you in, she bills you on a Friday, and she is the only person here who says out loud what you are allowed to be."
+tip        = "The office, weekday afternoons. The dues are Friday and she counts them."
+when       = [ { type = "flag", subject = "player", flag = "met_simone", op = "is_true" } ]
+goals      = [ { type = "flag", subject = "player", flag = "simone_open", op = "is_true", label = "Be one of the four upstairs" } ]
+ready_canvas = "hub_simone_office"
+
+[[quest_cards]]
+npc_id     = "npc_wes"
+priority   = 2
+text       = "He was here first, on both sides of the bus route, and he has not decided what you are yet either."
+tip        = "The bathroom before seven, the avenue at quarter past, his room after seven at night."
+when       = [ { type = "flag", subject = "player", flag = "met_wes", op = "is_true" } ]
+goals      = [ { type = "flag", subject = "player", flag = "wes_room_open", op = "is_true", label = "Get past the doorway" } ]
+ready_canvas = "hub_wes_bathroom"
+
+[[quest_cards]]
+npc_id     = "npc_halloran"
+priority   = 1
+text       = "He teaches the eight o'clock to two hundred people and holds office hours for whoever turns up. The floor empties at five."
+tip        = "Office hours are Monday, Wednesday and Friday, four until six. Buy the lab kit on the quad first."
+when       = [ { type = "flag", subject = "player", flag = "met_halloran", op = "is_true" } ]
+goals      = [ { type = "flag", subject = "player", flag = "late_lab_open", op = "is_true", label = "Be in the building after the department has gone" } ]
+ready_canvas = "hub_halloran_office"
+
+
+# ─── the standing cards — R5, nothing retires into silence ───────────────────
+# ⚠️ Gate `no chain ends in silence`: every character ladder keeps a card after its
+#    last rung, or the section vanishes the moment the arc closes and the player is
+#    told the person is finished with.
+# ⚠️ THE BADGE IS ON A FLAG THE CONTENT SET ON ITS WAY OUT, not on a meter. Frame 1
+#    fires on `terminal === true` ALONE, ahead of ready and goals, and nothing checks
+#    achievement — a ✓ hung on a threshold lands while content is still there.
+
+[[quest_cards]]
+npc_id        = "npc_ray"
+priority      = 14
+text          = "The second chair is round before you get there, every night she is on. There is no conversation about it and there is not going to be one."
+when          = [ { type = "flag", subject = "player", flag = "ray_open", op = "is_true" } ]
+terminal      = true
+terminal_text = "The kitchen after ten, Sunday to Thursday. That is 0.1. His door is the next one and it tells you the number."
+
+[[quest_cards]]
+npc_id        = "npc_simone"
+priority      = 13
+text          = "Thursdays, and Fridays if you want it. She stopped saying your name from the stairs and started taking your wrist on the way past."
+when          = [ { type = "flag", subject = "player", flag = "simone_open", op = "is_true" } ]
+terminal      = true
+terminal_text = "Upstairs on a party night, whenever you want it. The rest of the row is 0.2."
+
+[[quest_cards]]
+npc_id        = "npc_wes"
+priority      = 12
+text          = "He stopped shutting that door properly and neither of you has said a word about it."
+when          = [ { type = "flag", subject = "player", flag = "wes_room_open", op = "is_true" } ]
+terminal      = true
+terminal_text = "As far as @wes goes in 0.1. There is more of him owed and it is written down."
+
+[[quest_cards]]
+npc_id        = "npc_halloran"
+priority      = 11
+text          = "The department empties at five and the late lab runs until seven, and nobody has ever asked why the light is on."
+when          = [ { type = "flag", subject = "player", flag = "late_lab_open", op = "is_true" } ]
+terminal      = true
+terminal_text = "As far as he goes in 0.1. There is more of him owed and it is written down."
+
+# ─── Dee — every character in the game needs a card of their own ─────────────
+[[quest_cards]]
+npc_id     = "npc_dee"
+priority   = 1
+text       = "She is on Sunday to Thursday until Christmas and she is grateful for this house out loud, too often, and she has started putting the keys down before she asks you things."
+tip        = "The kitchen before nine on a night she is working."
+when       = [ { type = "flag", subject = "player", flag = "met_dee", op = "is_true" } ]
+goals      = [ { type = "trait", subject = "player", trait = "home_face", op = "lt", value = 40, label = "She starts asking properly" } ]
+ready_canvas = "hub_dee_kitchen"
+
+[[quest_cards]]
+npc_id        = "npc_dee"
+priority      = 10
+text          = "She puts the keys down before she asks you things now. She is not stupid and she has never been stupid, and the only thing keeping this house upright is that she would rather ask you than him."
+when          = [ { type = "trait", subject = "player", trait = "home_face", op = "lt", value = 40 } ]
+terminal      = true
+terminal_text = "She is asking properly now. 0.1 does not answer her. 0.2 does."

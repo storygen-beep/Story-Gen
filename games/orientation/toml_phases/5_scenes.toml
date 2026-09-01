@@ -1,0 +1,1184 @@
+# =============================================================================
+# Orientation — 5_scenes · THE HUBS, THE ACT SURFACES, THE WALK-INS
+#
+# ⚠️ R1 — ONE CANVAS PER (who it's aimed at × when). Work never goes inside a
+#    character's hub. The object test, on hub choices only: is a PERSON the object
+#    of the verb? "Ask him for the dues" yes; "Take a shift" no, that is work.
+#
+# ⚠️ THE BRAKE IS ON THE WAY IN. On the trigger, not on an inner choice — one
+#    unbraked door makes the whole rung farmable however well the others are priced.
+#
+# ⚠️ REPEATABLE EXPLICIT CONTENT DECLARES pool_dir + pool, NEVER A SINGLE file.
+#    A beat replayed fifty times with one clip is dead on arrival.
+#
+# ⚠️ THE CLIP RIDES THE BEAT the player is reading, not the one above it.
+#
+# ⚠️ A10 — the act ends on a WRITTEN beat, ~32 words, no sex in it. 23 of 23 finish
+#    nodes across six v2 games have an empty exit_block. These do not.
+#    A11 — a STOP beat, about how HE takes being stopped, not about her exit.
+# =============================================================================
+
+# ═══════════════════ @ray — the kitchen after ten ════════════════════════════
+
+[[canvases]]
+id          = "hub_ray_kitchen"
+name        = "Sit with @ray"
+description = "His hub. Three rungs on relation, day-capped, inside his own window."
+npc         = "npc_ray"
+
+[canvases.trigger]
+location      = "the_kitchen"
+is_repeatable = true
+is_active     = true
+priority      = 6
+requires_npc  = "npc_ray"
+costs         = [ { trait = "rest", value = 6 } ]
+
+[[canvases.nodes]]
+id   = "base"
+name = "Up when he is up"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_ray", trait_key = "relation", operator = "gte", value = 20 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He has stopped pretending to be doing something when you come in. The radio is on low and there are two mugs out before you have said anything, which is a thing he started doing about a week ago." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "He is at the counter with the radio down so low it is barely on. He does the thing where he half stands when you come in, which nobody in your actual family has ever done." },
+  ] },
+  { type = "paragraph", content = "Your mother's car went at half nine. It always goes at half nine." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Sit down across from him."
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 45
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "ray_rung_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "ray_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_ray", trait = "relation", op = "add", value = 3, cap = 40 },
+  { targetType = "player", trait = "home_face", op = "add", value = -1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Ask him for the dues before you're short."
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_simone", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "ray_owed", operator = "is_false" },
+] }
+show_when_locked = true
+locked_text      = "You have not signed anything yet. There is nothing to be short of."
+flagEffects = [ { targetType = "player", flag = "ray_owed", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_ray", trait = "relation", op = "add", value = 6, cap = 40 },
+  { targetType = "npc", npcId = "npc_ray", trait = "lust", op = "add", value = 3, cap = 30 },
+  { targetType = "player", trait = "money", op = "add", value = 120, clamp = false },
+  { targetType = "player", trait = "home_face", op = "add", value = -4 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Say goodnight."
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 5
+
+# ─── the converted surface — opened by ray_09 ────────────────────────────────
+[[canvases]]
+id          = "act_kitchen_late"
+name        = "Sit up with him"
+description = "@ray's repeatable act surface. The REWARD for finishing his nine-step arc, not the starting position. Node routing, not a cascade — the picture changes with the act."
+npc         = "npc_ray"
+
+[canvases.trigger]
+location      = "the_kitchen"
+is_repeatable = true
+is_active     = true
+priority      = 7
+requires_npc  = "npc_ray"
+costs         = [ { trait = "rest", value = 12 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "ray_open", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "home_face", operator = "lt", value = 60 },
+]}
+
+[[canvases.nodes]]
+id   = "base"
+name = "After the car has gone"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He does not get up when you come in now. He turns the radio off, which is the part that means something, and puts his hand out for yours before you have got to the table." },
+    { type = "paragraph", content = "The plate is out and neither of you touches it. He looks at the door your mother went out of two hours ago and then he stops looking at it, and that is the whole of the conversation." },
+    { type = "paragraph", content = "You come down in what you sleep in and he does not say anything about it, which he did the first time. He pulls the second chair round so it is beside his instead of across." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Get on his lap."
+targetType               = "node"
+nodeId                   = "lap"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "kitchen_late_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "kitchen_late_today", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Not tonight."
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "lap"
+name = "On his lap"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/kitchen_late_t5", pool = 5, description = "her on his lap at the kitchen table, clothes half off", search_queries = ["amateur couple kitchen table lap grinding", "girlfriend on his lap kitchen night"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You get on his lap facing him and he has your top up before you are settled. His mouth goes to your tits and he sucks one hard enough that you make a noise. His hand is already down the back of what you sleep in." },
+    { type = "paragraph", content = "You straddle him in the chair. He pushes your top up and works your tits with both hands, and he gets two fingers into your cunt through the leg of your shorts without moving you off him." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Take him out."
+targetType               = "node"
+nodeId                   = "fuck"
+time_progression_minutes = 15
+effects = [
+  { targetType = "player", trait = "appetite", op = "add", value = 2, cap = 90 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stop."
+targetType               = "node"
+nodeId                   = "stop"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "fuck"
+name = "In the chair"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/kitchen_late_t5", pool = 5, description = "riding him in the kitchen chair", search_queries = ["amateur riding cowgirl kitchen chair", "couple fucking kitchen chair homemade"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You get his cock out and put it in yourself, and he holds your hips still for a second like he is deciding. Then he stops deciding. You fuck him in the chair with your mouth on his shoulder so the house stays quiet." },
+    { type = "paragraph", content = "He turns you round and bends you over the table and gets his cock into you standing. He has one hand flat between your shoulders. You come with your face on the wood and he does not stop when you do." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Let him finish."
+targetType               = "node"
+nodeId                   = "after"
+time_progression_minutes = 15
+effects = [
+  { targetType = "player", trait = "appetite", op = "add", value = 3, cap = 90 },
+  { targetType = "npc", npcId = "npc_ray", trait = "lust", op = "add", value = 3, cap = 40 },
+  { targetType = "player", trait = "home_face", op = "add", value = -3 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stop."
+targetType               = "node"
+nodeId                   = "stop"
+time_progression_minutes = 5
+
+# ⚠️ A10 — THE AFTERMATH. ~32 words, no sex in it, written for HIM. Scoring 0 on
+#    the explicit list here is correct: it is after the act, and it is the one place
+#    in a sex surface where interiority is the point rather than the pivot defect.
+[[canvases.nodes]]
+id   = "after"
+name = "Afterwards"
+blocks = [
+  { type = "paragraph", content = "He does the mugs. That is what he does afterwards, every time, standing at the sink with his back to you while you sort your clothes out, and he says the same thing about the water heater." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "Go up before six. She comes in at six." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go up."
+targetType               = "location"
+locationId               = "the_avenue"
+time_progression_minutes = 10
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stay down here a bit."
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 30
+
+# ⚠️ A11 — THE STOP BEAT, and it is about HIS reaction, not her exit.
+[[canvases.nodes]]
+id   = "stop"
+name = "Stopping"
+blocks = [
+  { type = "paragraph", content = "You stop. He takes his hands off you straight away and puts them flat on the table, and he does not ask why and he does not look annoyed, and somehow that is worse than if he had." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "Right. Goodnight, love." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go up."
+targetType               = "location"
+locationId               = "the_avenue"
+time_progression_minutes = 5
+
+# ─── the walk-in — REQUIRED, and not deferred ────────────────────────────────
+[[canvases]]
+id          = "walkin_kitchen_dee"
+substitution_only = true
+name        = "The car in the drive"
+description = "The one thing in the game that can cost home_face in a single move. Fires in @ray's window when Dee's shift breaks."
+
+[canvases.trigger]
+location      = "the_kitchen"
+is_repeatable = true
+is_active     = true
+priority      = 9
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "ray_open", operator = "is_true" },
+]}
+
+[[canvases.trigger.schedules]]
+weekdays   = [6, 0, 1, 2, 3]
+start_time = "22:30"
+end_time   = "23:59"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Headlights on the ceiling"
+blocks = [
+  { type = "paragraph", content = "Headlights come up the avenue and stop, and the engine goes off, and it is your mother's car. Agency nights get cancelled at the door sometimes and she has never once rung ahead to say so." },
+  { type = "paragraph", content = "@ray is already up and the second chair is already back where it was. You have about forty seconds." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go up the stairs."
+targetType               = "location"
+locationId               = "the_avenue"
+time_progression_minutes = 5
+effects = [
+  { targetType = "player", trait = "home_face", op = "add", value = 3, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Sit back down and let her come in."
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 20
+effects = [
+  { targetType = "player", trait = "home_face", op = "add", value = -12 },
+  { targetType = "player", trait = "nerve", op = "add", value = 3, cap = 90 },
+]
+
+# ═══════════════════ SIMONE — the office, and upstairs ═══════════════════════
+
+[[canvases]]
+id          = "hub_simone_office"
+name        = "Talk to Simone"
+description = "Her hub. The dues are handed over here on a Friday and that is a separate row from talking to her."
+npc         = "npc_simone"
+
+[canvases.trigger]
+location      = "the_pledge_house"
+is_repeatable = true
+is_active     = true
+priority      = 6
+requires_npc  = "npc_simone"
+costs         = [ { trait = "rest", value = 5 } ]
+
+[[canvases.nodes]]
+id   = "base"
+name = "The office"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_simone", trait_key = "relation", operator = "gte", value = 20 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "She does not look up when you come in any more, which in this house is a promotion. There is a chair on your side of the desk now and it did not used to be there." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "The office is the front room with a desk in it and the book on the desk. She looks up, works out which one you are, and goes back to what she was doing before she answers." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Ask her what she wants from you."
+targetType               = "location"
+locationId               = "the_pledge_house"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "simone_rung_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "simone_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_simone", trait = "relation", op = "add", value = 3, cap = 40 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Hand over the dues. $120"
+targetType               = "location"
+locationId               = "the_pledge_house"
+time_progression_minutes = 15
+costs = [ { trait = "money", value = 120 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "dues_armed", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "dues_paid_week", operator = "is_false" },
+] }
+show_when_locked = true
+locked_text      = "It is a hundred and twenty and it is Friday, in here, in cash. She said it the day you signed and she has not said it since."
+flagEffects = [ { targetType = "player", flag = "dues_paid_week", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_simone", trait = "relation", op = "add", value = 4, cap = 40 },
+  { targetType = "player", trait = "reputation", op = "add", value = 1, cap = 45 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave her to it."
+targetType               = "location"
+locationId               = "the_pledge_house"
+time_progression_minutes = 5
+
+# ─── the anchor's act surface — the crudest writing in the game ──────────────
+[[canvases]]
+id          = "act_pledge_upstairs"
+name        = "Go up"
+description = "The anchor's repeatable act surface, opened by simone_06. Node routing. Two exits per screen all the way down — field median for an act menu is 2 options, span 1."
+npc         = "npc_simone"
+
+[canvases.trigger]
+location      = "the_pledge_house"
+is_repeatable = true
+is_active     = true
+priority      = 7
+requires_npc  = "npc_simone"
+costs         = [ { trait = "rest", value = 15 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "simone_open", operator = "is_true" },
+]}
+
+[[canvases.trigger.schedules]]
+weekdays   = [3, 4, 5]
+start_time = "21:00"
+end_time   = "23:59"
+
+[[canvases.trigger.schedules]]
+weekdays   = [4, 5, 6]
+start_time = "00:00"
+end_time   = "02:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The bottom of the stairs"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "She comes through the downstairs room, takes your wrist on the way past without stopping, and you are on the third stair before you have decided anything. There are four people up there already." },
+    { type = "paragraph", content = "She says your name from the bottom of the stairs and does not say anything after it, and everybody in the room knows what that is and one of them looks at the floor." },
+    { type = "paragraph", content = "You are at the bottom of the stairs when she comes down them and stops two steps up, so that for once you have to look up at her, which she has done on purpose." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go up with her."
+targetType               = "node"
+nodeId                   = "stairs"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "went_up_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
+] }
+show_when_locked = true
+locked_text      = "Not tonight. Either you have already been up there today or you have come straight off a six-hour shift, and she can tell which."
+flagEffects = [ { targetType = "player", flag = "went_up_today", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stay where you are."
+targetType               = "location"
+locationId               = "the_pledge_house"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "stairs"
+name = "At the top of the stairs"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/pledge_upstairs_t5", pool = 6, description = "two women, top off against a bedroom door, hand between her legs", search_queries = ["amateur lesbian against door bedroom party", "two girls undressing bedroom homemade"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "She has your top off at the top of the stairs. Her mouth goes to your tits and she sucks hard enough to mark you. Two fingers push into your cunt while she is still standing. You moan into her shoulder and she does not slow down." },
+    { type = "paragraph", content = "She backs you into the door before it is shut. Her hand is down the front of your skirt and two fingers are in your cunt inside ten seconds, and she kisses you like she is checking something rather than asking." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Let her put you on the bed."
+targetType               = "node"
+nodeId                   = "bed"
+time_progression_minutes = 25
+effects = [
+  { targetType = "player", trait = "nerve", op = "add", value = 2, cap = 90 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stop."
+targetType               = "node"
+nodeId                   = "stop"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "bed"
+name = "On the bed"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/pledge_upstairs_t5", pool = 6, description = "going down on her on a bed, skirt up", search_queries = ["amateur lesbian oral bed homemade", "girl going down on girl bedroom real"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "She puts you on the bed and shoves your skirt up. Her tongue works your clit in flat slow strokes. She licks you until your thighs shake and holds them open when you try to close them. You come with her mouth still on your cunt." },
+    { type = "paragraph", content = "She gets you on your back and her mouth is on your cunt before you have got your knees apart on your own. She licks you slowly and then not slowly, and she keeps one hand flat on your stomach to hold you down." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stay when the door opens."
+targetType               = "node"
+nodeId                   = "three"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 50 },
+] }
+show_when_locked = true
+locked_text      = "Somebody is on the landing and the handle has moved twice. You are not doing this with anybody watching yet, and she knows it, and she has not pushed."
+effects = [
+  { targetType = "player", trait = "nerve", op = "add", value = 3, cap = 90 },
+  { targetType = "player", trait = "reputation", op = "add", value = 2, cap = 85 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Enough."
+targetType               = "node"
+nodeId                   = "after"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "three"
+name = "When the door opens"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/pledge_upstairs_t5", pool = 6, description = "ffm, on her knees on the carpet, one woman directing", search_queries = ["amateur ffm threesome bedroom homemade", "two girls one guy party bedroom real"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You are on your knees on the carpet. She has your hair in her fist and his cock in your mouth. She works two fingers into your cunt while you suck him. Your jaw aches. She pushes your head down until his cock is in your throat." },
+    { type = "paragraph", content = "She puts him behind you and keeps your face where she wants it. He fucks you on the carpet while she holds your shoulders down and tells him what you will take, and she is right about all of it." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Let them finish."
+targetType               = "node"
+nodeId                   = "after"
+time_progression_minutes = 25
+effects = [
+  { targetType = "player", trait = "nerve", op = "add", value = 4, cap = 90 },
+  { targetType = "player", trait = "appetite", op = "add", value = 2, cap = 90 },
+  { targetType = "player", trait = "reputation", op = "add", value = 3, cap = 85 },
+  { targetType = "npc", npcId = "npc_simone", trait = "lust", op = "add", value = 3, cap = 40 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stop."
+targetType               = "node"
+nodeId                   = "stop"
+time_progression_minutes = 5
+
+# ⚠️ A10 — the aftermath. Three moves in thirty-three words: she is already gone,
+#    she notices being left, and the loop asks whether she is coming back.
+[[canvases.nodes]]
+id   = "after"
+name = "Afterwards"
+blocks = [
+  { type = "paragraph", content = "She finds your top and hands it over. She is already talking to somebody in the doorway. You are still on the carpet with your skirt around your waist." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_simone" }, content = "Thursday. Come Thursday." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go back down."
+targetType               = "location"
+locationId               = "the_pledge_house"
+time_progression_minutes = 10
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stay a minute."
+targetType               = "location"
+locationId               = "the_pledge_house"
+time_progression_minutes = 25
+
+[[canvases.nodes]]
+id   = "stop"
+name = "Stopping"
+blocks = [
+  { type = "paragraph", content = "You stop. She takes her hand back and sits up on her heels and looks at you for a second, and then she shrugs and reaches past you for her drink off the floor, and does not make you say anything about it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_simone" }, content = "Fine. Go down, there's food." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go down."
+targetType               = "location"
+locationId               = "the_pledge_house"
+time_progression_minutes = 5
+
+# ─── the walk-in — REQUIRED ──────────────────────────────────────────────────
+[[canvases]]
+id          = "walkin_shower_simone"
+substitution_only = true
+name        = "The tin by the door"
+description = "Fires on the clean restore at the pledge house inside Simone's window. Cover or do not — and those are two beats, not one beat with a modifier."
+
+[canvases.trigger]
+location      = "the_pledge_house"
+is_repeatable = true
+is_active     = true
+priority      = 8
+max_triggers_per_day = 1
+requires_npc  = "npc_simone"
+
+[[canvases.nodes]]
+id   = "base"
+name = "No lock on that one"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/pledge_shower_t4", pool = 4, description = "walked in on in a shower, another woman in the doorway", search_queries = ["amateur shower caught doorway homemade", "girl in shower door opens real"] } },
+  { type = "paragraph", content = "There is no lock on the upstairs bathroom and everybody in this house knows it, and Simone comes in with a towel over her arm like she has been waiting for the water to go on." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Turn your back."
+targetType               = "location"
+locationId               = "the_pledge_house"
+time_progression_minutes = 10
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Don't."
+targetType               = "location"
+locationId               = "the_pledge_house"
+time_progression_minutes = 15
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 15 },
+] }
+show_when_locked = true
+locked_text      = "You have the towel up before you have thought about it. That is going to keep happening until it stops."
+effects = [
+  { targetType = "player", trait = "nerve", op = "add", value = 3, cap = 90 },
+  { targetType = "npc", npcId = "npc_simone", trait = "lust", op = "add", value = 2, cap = 40 },
+]
+
+# ═══════════════════ @wes — the bathroom, the ride, the room ═════════════════
+
+[[canvases]]
+id          = "hub_wes_bathroom"
+name        = "Talk to @wes"
+description = "His hub, in the one room this house makes them share. Three rungs, converted on day one — his arc is owed at 0.2."
+npc         = "npc_wes"
+
+[canvases.trigger]
+location      = "the_bathroom"
+is_repeatable = true
+is_active     = true
+priority      = 6
+requires_npc  = "npc_wes"
+costs         = [ { trait = "rest", value = 5 } ]
+
+[[canvases.nodes]]
+id   = "base"
+name = "Both of you at that door"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_wes", trait_key = "relation", operator = "gte", value = 15 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He has stopped shutting the door properly, which is either laziness or the other thing, and neither of you has said a word about which." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Both of you at that door at ten to seven every morning, and one of you gets it. There is a system now and neither of you agreed to it out loud." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Wait him out and talk through the door."
+targetType               = "location"
+locationId               = "the_bathroom"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "wes_rung_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "wes_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_wes", trait = "relation", op = "add", value = 3, cap = 35 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave him to it."
+targetType               = "location"
+locationId               = "the_bathroom"
+time_progression_minutes = 5
+
+# ─── the walk-in — REQUIRED, and its two exits are TWO BEATS ─────────────────
+[[canvases]]
+id          = "walkin_bath_wes"
+substitution_only = true
+name        = "The door opens"
+description = "A6b — the deliberate version and the accidental version of one reveal are two beats, not one beat with a modifier. Everything downstream differs."
+
+[canvases.trigger]
+location      = "the_bathroom"
+is_repeatable = true
+is_active     = true
+priority      = 8
+max_triggers_per_day = 1
+
+[[canvases.nodes]]
+id   = "base"
+name = "Ten to seven"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bathroom_morning_t4", pool = 5, description = "caught undressed in a bathroom doorway, morning", search_queries = ["amateur bathroom caught towel homemade", "girl bathroom door opens morning real"] } },
+  { type = "paragraph", content = "The handle goes and the door is already opening, because he has done this at ten to seven every morning for two years and there has never been anybody in here." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Get the towel up."
+targetType               = "location"
+locationId               = "the_bathroom"
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Don't reach for it."
+targetType               = "location"
+locationId               = "the_bathroom"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 5 },
+] }
+show_when_locked = true
+locked_text      = "The towel is up before you have decided anything. Your hands did it. That is going to keep happening for a while yet."
+effects = [
+  { targetType = "player", trait = "nerve", op = "add", value = 3, cap = 90 },
+  { targetType = "npc", npcId = "npc_wes", trait = "relation", op = "add", value = 2, cap = 35 },
+  { targetType = "player", trait = "home_face", op = "add", value = -2 },
+]
+
+# ═══════════════════ HALLORAN — office hours, and after five ═════════════════
+
+[[canvases]]
+id          = "hub_halloran_office"
+name        = "Office hours"
+description = "His hub. Three rungs, converted on day one — his arc is owed at 0.3. past_top reaches the key in week one."
+npc         = "npc_halloran"
+
+[canvases.trigger]
+location      = "halloran_office"
+is_repeatable = true
+is_active     = true
+priority      = 6
+requires_npc  = "npc_halloran"
+costs         = [ { trait = "rest", value = 5 } ]
+
+[[canvases.nodes]]
+id   = "base"
+name = "Third floor, at the end"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_halloran", trait_key = "relation", operator = "gte", value = 15 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He has stopped calling you by the wrong name off the roll. The door is open the way it is supposed to be and the corridor outside it is empty the way it is every afternoon." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "The door is open and he is marking. Nobody comes to office hours. He tells you that himself, twice, as though it is a fact about students and not about him." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# ⚠️ THE past_top RUNG. Additive: the original below keeps its numbers and gains
+#    past_top is_false. And the two are separated by the plain choice between them,
+#    because adjacent [group] blocks merge — that trap is about blocks, but the
+#    same discipline is why the rungs are written as two explicit choices here.
+[[canvases.nodes.exit_block.choices]]
+text                     = "Ask him for the reader's key."
+targetType               = "location"
+locationId               = "halloran_office"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "past_top", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "office_today", operator = "is_false" },
+] }
+flagEffects = [
+  { targetType = "player", flag = "office_today", op = "set" },
+  { targetType = "player", flag = "has_reader_key", op = "set" },
+]
+effects = [
+  { targetType = "npc", npcId = "npc_halloran", trait = "relation", op = "add", value = 6, cap = 35 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Sit down and let him talk."
+targetType               = "location"
+locationId               = "halloran_office"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "office_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "office_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_halloran", trait = "relation", op = "add", value = 3, cap = 35 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "The late lab."
+targetType               = "location"
+locationId               = "halloran_office"
+time_progression_minutes = 90
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "has_lab_kit", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_halloran", trait_key = "relation", operator = "gte", value = 15 },
+] }
+show_when_locked = true
+locked_text      = "The late lab needs the kit, which is twenty-eight dollars at the union shop, and it needs him to have decided you are worth staying late for."
+flagEffects = [ { targetType = "player", flag = "late_lab_open", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_halloran", trait = "relation", op = "add", value = 4, cap = 35 },
+  { targetType = "player", trait = "rest", op = "add", value = -10 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave him to it."
+targetType               = "location"
+locationId               = "halloran_office"
+time_progression_minutes = 5
+
+# ─── the walk-in — REQUIRED ──────────────────────────────────────────────────
+[[canvases]]
+id          = "walkin_latelab"
+name        = "A door down the corridor"
+description = "Fires on the late lab. Located, so max_triggers_per_day on the trigger is enough — markCanvasTriggered stamps the day key before advanceTime."
+
+[canvases.trigger]
+location      = "halloran_office"
+is_repeatable = true
+is_active     = true
+priority      = 8
+trigger_mode  = "random"
+chance        = 30
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "late_lab_open", operator = "is_true" },
+]}
+
+[[canvases.nodes]]
+id   = "base"
+name = "After five"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/office_hours_t4", pool = 4, description = "office, desk, older man and a student, clothed and close", search_queries = ["amateur office desk couple clothed homemade", "professor student office real amateur"] } },
+  { type = "paragraph", content = "A door goes somewhere down the corridor at twenty past six and both of you stop. It is a cleaner or it is a colleague and there is no version of this where the difference does not matter." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Step back from the desk."
+targetType               = "location"
+locationId               = "halloran_office"
+time_progression_minutes = 10
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Don't move."
+targetType               = "location"
+locationId               = "halloran_office"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 30 },
+] }
+show_when_locked = true
+locked_text      = "You are off the desk and two feet away before the footsteps have resolved into anything. He watches you do it and says nothing about it."
+effects = [
+  { targetType = "player", trait = "nerve", op = "add", value = 3, cap = 90 },
+  { targetType = "npc", npcId = "npc_halloran", trait = "relation", op = "add", value = 3, cap = 35 },
+]
+
+# ═══════════════════ THE COUNTER BACK ROOM ═══════════════════════════════════
+# A12 — the reason she is there is a SYSTEM, not a sentence. Two routes in, and
+# they are not one scene with two openings: a price somebody paid, and an accident.
+
+[[canvases]]
+id          = "act_counter_backroom"
+name        = "The back room"
+description = "The nerve act surface on the campus side. Two routes in, each with its own negotiation."
+
+[canvases.trigger]
+location      = "the_counter"
+is_repeatable = true
+is_active     = true
+priority      = 6
+costs         = [ { trait = "rest", value = 10 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "shift_today", operator = "is_true" },
+]}
+
+[[canvases.nodes]]
+id   = "base"
+name = "The stockroom door"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The regular who comes in at two tips in notes, folded, and today the fold has more in it than the coffee cost by a factor that is not an accident. He looks at the stockroom door when he does it." },
+    { type = "paragraph", content = "The stockroom door does not lock from the inside and the delivery man has a key to the outer one, and both of those facts have been true all term and only became interesting this week." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Take the fold and go through first."
+targetType               = "node"
+nodeId                   = "back"
+time_progression_minutes = 25
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "backroom_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 30 },
+] }
+show_when_locked = true
+locked_text      = "You put the fold in the tin with the rest of the tips. Thirty seconds later you are still thinking about the stockroom door, and that is all that happens."
+flagEffects = [ { targetType = "player", flag = "backroom_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "money", op = "add", value = 40, clamp = false },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Wipe the machine down."
+targetType               = "location"
+locationId               = "the_counter"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "back"
+name = "Behind the counter"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/counter_backroom_t5", pool = 5, description = "stockroom, against the shelving, skirt up from behind", search_queries = ["amateur stockroom quickie homemade", "backroom sex against shelves real amateur"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He has your skirt up against the shelving before the door has swung shut. He gets his cock into you standing and one hand over your mouth, and the machine is still going out front the whole time." },
+    { type = "paragraph", content = "You go down on him between the crates with your apron still on. He holds the back of your head and you take his cock as far as you can, and somebody rings the bell out front twice and neither of you stops." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Finish it."
+targetType               = "node"
+nodeId                   = "after"
+time_progression_minutes = 15
+effects = [
+  { targetType = "player", trait = "nerve", op = "add", value = 3, cap = 90 },
+  { targetType = "player", trait = "appetite", op = "add", value = 2, cap = 90 },
+  { targetType = "player", trait = "reputation", op = "add", value = 1, cap = 85 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stop."
+targetType               = "node"
+nodeId                   = "after"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "after"
+name = "Back out front"
+blocks = [
+  { type = "paragraph", content = "He goes out through the delivery door because he is not stupid. You wash your hands twice at the little sink and go back out front, and the bell has been rung four more times and nobody has left." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Serve the queue."
+targetType               = "location"
+locationId               = "the_counter"
+time_progression_minutes = 20
+
+# ═══════════════════ THE TWO REMAINING WALK-INS ══════════════════════════════
+# One per qualifying room. Gate `the walk-in floor` is PER ROOM, not per pair —
+# the raw cross-product would rebuild the wall of buttons one layer down.
+
+[[canvases]]
+id          = "walkin_avenue_ray"
+name        = "He is still in the car"
+description = "Substitution on standing out past the shelter. He has not gone in yet and he can see her from the drive."
+substitution_only = true
+
+[canvases.trigger]
+location      = "the_avenue"
+is_repeatable = true
+is_active     = true
+priority      = 8
+max_triggers_per_day = 1
+
+[[canvases.nodes]]
+id   = "base"
+name = "From the drive"
+blocks = [
+  { type = "paragraph", content = "The car has been in the drive for ten minutes with him still in it, which he does most evenings, and from where he is sitting he has a clear view of you out past the shelter in what you are wearing." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Come in off the road."
+targetType               = "location"
+locationId               = "the_avenue"
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stay out there and let him watch."
+targetType               = "location"
+locationId               = "the_avenue"
+time_progression_minutes = 15
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 15 },
+] }
+show_when_locked = true
+locked_text      = "You are in off the road before you have thought about who is in the car. It will be a while before that stops happening."
+effects = [
+  { targetType = "player", trait = "nerve", op = "add", value = 2, cap = 90 },
+  { targetType = "npc", npcId = "npc_ray", trait = "lust", op = "add", value = 2, cap = 40 },
+  { targetType = "player", trait = "home_face", op = "add", value = -2 },
+]
+
+[[canvases]]
+id          = "walkin_quad_halloran"
+name        = "He comes past the wall"
+description = "Substitution on sitting on the wall. He crosses the quad twice a day and one of those is on his way to an empty office."
+substitution_only = true
+
+[canvases.trigger]
+location      = "the_quad"
+is_repeatable = true
+is_active     = true
+priority      = 8
+max_triggers_per_day = 1
+
+[[canvases.nodes]]
+id   = "base"
+name = "The roll under his arm"
+blocks = [
+  { type = "paragraph", content = "He comes past the wall with the roll under his arm and stops, which he did not do the first three times, and asks you a question about the module that he already knows the answer to." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_halloran" }, content = "Office hours are four until six and nobody comes to them. I have said that to you before and I am going to keep saying it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Say you'll think about it."
+targetType               = "location"
+locationId               = "the_quad"
+time_progression_minutes = 10
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Ask him what he actually wants."
+targetType               = "location"
+locationId               = "the_quad"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 15 },
+] }
+show_when_locked = true
+locked_text      = "You say you will think about it. You are not asking a man like that a question like that on open ground with two hundred people going past."
+effects = [
+  { targetType = "npc", npcId = "npc_halloran", trait = "relation", op = "add", value = 4, cap = 35 },
+  { targetType = "player", trait = "reputation", op = "add", value = 1, cap = 85 },
+]
+
+# ═══════════════════ DEE — a surface, because a character without one is scenery
+# ⚠️ Gate `standing surface` — every character needs at least one standing surface
+#    AND at least one schedule row. She is the price tag, not a route, so her
+#    surface is two bands and no ladder: what she asks, and how it changes.
+
+[[canvases]]
+id          = "hub_dee_kitchen"
+name        = "Talk to your mother"
+description = "Her surface. Two bands on home_face — the meter stated in a person's mouth, and then the same person noticing."
+npc         = "npc_dee"
+
+[canvases.trigger]
+location      = "the_kitchen"
+is_repeatable = true
+is_active     = true
+priority      = 6
+requires_npc  = "npc_dee"
+costs         = [ { trait = "rest", value = 5 } ]
+
+[[canvases.nodes]]
+id   = "base"
+name = "Before the car goes"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "home_face", operator = "lt", value = 40 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "She has started asking properly. Not the doorway version — she puts the keys down first, which she never used to do, and she asks you where you were and then she waits through the whole answer." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_dee" }, content = "You are up late. He says you are up late. I am asking you and not him because I would rather ask you." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "She is eating standing up with her keys in her hand and she wants to know if you have everything you need, which is the only question she has time for before ten." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_dee" }, content = "Tell me if you need anything. Tell me and not him, @player. He has done enough." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Tell her you're fine."
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 15
+effects = [
+  { targetType = "npc", npcId = "npc_dee", trait = "relation", op = "add", value = 2, cap = 20 },
+  { targetType = "player", trait = "home_face", op = "add", value = 2, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Let her get to work."
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 5
+
+# ═══════════════════ WES'S ROOM — the door that is usually open ══════════════
+# Closes three things at once: wes_room had no surface at all, traversal heat was
+# one location short of the 60% floor, and `nerve` promised a band at 70 while the
+# highest authored gate on it sat at 50 — a bar whose top buys nothing.
+
+[[canvases]]
+id          = "hub_wes_room"
+name        = "Go in"
+description = "@wes's surface in his own room. The nerve 70 rung is the top of that bar and it is what the sidebar has been promising."
+npc         = "npc_wes"
+
+[canvases.trigger]
+location      = "wes_room"
+is_repeatable = true
+is_active     = true
+priority      = 6
+requires_npc  = "npc_wes"
+costs         = [ { trait = "rest", value = 6 } ]
+
+[[canvases.nodes]]
+id   = "base"
+name = "The door is open"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/wes_room_t4", pool = 4, description = "young couple on a bed in a small bedroom, clothed and close", search_queries = ["amateur couple bedroom kissing homemade", "young couple small bedroom bed real amateur"] } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_wes", trait_key = "relation", operator = "gte", value = 15 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "The door is open the way it always is and he does not take the headphones all the way off when you come in, which by now you understand is not rudeness. There is one chair and it has clothes on it, so there is the bed." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "The door is open the way it always is. He is at the desk with one headphone off and he does not ask what you want, because in this house nobody asks that." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_wes" }, content = "Shut it or leave it, I do not care. Dad is downstairs until one either way." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Sit on the end of the bed."
+targetType               = "location"
+locationId               = "wes_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "wes_rung_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "wes_rung_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_wes", trait = "relation", op = "add", value = 3, cap = 35 },
+]
+
+# ⚠️ THE nerve 70 RUNG. The sidebar's top band opens at 70 and until this existed
+#    the highest authored gate on nerve was 50 — the remaining twenty points bought
+#    nothing and gate 8 said so.
+[[canvases.nodes.exit_block.choices]]
+text                     = "Shut the door behind you."
+targetType               = "location"
+locationId               = "wes_room"
+time_progression_minutes = 45
+costs = [ { trait = "rest", value = 8 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 70 },
+  { type = "trait", subject = "npc", npc_id = "npc_wes", trait_key = "relation", operator = "gte", value = 30 },
+  { type = "flag", subject = "player", flag_key = "wes_rung_today", operator = "is_false" },
+] }
+show_when_locked = true
+locked_text      = "His father is downstairs until one and your mother is back at six, and there is one bathroom and four people and a landing that carries. You would have to not care who heard, and you are not there yet."
+flagEffects = [
+  { targetType = "player", flag = "wes_rung_today", op = "set" },
+  { targetType = "player", flag = "wes_room_open", op = "set" },
+]
+effects = [
+  { targetType = "npc", npcId = "npc_wes", trait = "relation", op = "add", value = 5, cap = 35 },
+  { targetType = "player", trait = "nerve", op = "add", value = 3, cap = 90 },
+  { targetType = "player", trait = "home_face", op = "add", value = -6 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave him to it."
+targetType               = "location"
+locationId               = "the_avenue"
+time_progression_minutes = 5

@@ -1,0 +1,821 @@
+# =============================================================================
+# Orientation — 3_activities · THE ROOM LISTS
+#
+# ⚠️ R2c — EVERY ROW IS A SYSTEM SURFACING IN THIS ROOM. The systems list came
+#    first (sheets/SYSTEMS.md, 19 keys) and nothing here is invented from the
+#    fiction. night_desk was built to R2 alone and its rooms came out as a night
+#    porter's duties — walk the property, fix the sign, hit the ice machine —
+#    correctly derived, with nothing to want in them, because six meters and no
+#    clothing/items/phone could not give six rooms a list.
+#
+# Rows per room, against a FIELD MEDIAN OF 3:
+#
+#   the_pledge_house   6   ANCHOR — six systems live here
+#   the_quad           4
+#   the_kitchen        3   (+2 hubs)
+#   her_room           4
+#   the_bathroom       2   (+1 hub)
+#   the_counter        3
+#   the_avenue         3
+#   the_back_bedroom   1   the door IS the content
+#   wes_room           1   (+1 hub)
+#
+# ⚠️ THE CAP OF 8 IS A BACKSTOP, NOT A SIZE. A game built after the cap existed put
+#    19 of its 30 screens at exactly 8 and shipped the same 213 choices as the
+#    23-choices-on-one-desk game the cap was written to fail.
+#
+# ⚠️ DAY CAPS ARE A FLAG ON THE CHOICE, NOT A PROPERTY OF THE CANVAS, and never on
+#    a node exit — see the note in phase 0.
+#
+# ⚠️ money AND followers CARRY clamp = false EVERY TIME THEY ARE WRITTEN.
+# =============================================================================
+
+# ═══════════════════ HER ROOM — sleep, dress, the phone ══════════════════════
+
+[[canvases]]
+id          = "act_room_sleep"
+name        = "Sleep"
+description = "The rest need. Restores to morning and rolls the day."
+
+[canvases.trigger]
+location      = "her_room"
+is_repeatable = true
+is_active     = true
+priority      = 5
+
+[[canvases.nodes]]
+id   = "base"
+name = "Under the shelves"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "home_face", operator = "lt", value = 40 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "You lie under the shelves that are still on the wall and listen to the house. Your mother came in at six and did not knock, which she used to do. You hear her put the kettle on and not make anything." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "You lie under the shelves that are still on the wall and listen to the house. Somebody uses the bathroom. A car goes down the avenue and the light goes across the ceiling and off it." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Sleep until the alarm."
+targetType               = "location"
+locationId               = "her_room"
+time_progression_minutes = 420
+effects = [
+  { targetType = "player", trait = "rest", op = "add", value = 100 },
+]
+
+[[canvases]]
+id          = "act_room_alone"
+name        = "Lie there with the door shut"
+description = "The appetite on-ramp. Free, private, day-capped, and it is what she has instead of anything else in week one."
+
+[canvases.trigger]
+location      = "her_room"
+is_repeatable = true
+is_active     = true
+priority      = 4
+costs         = [ { trait = "rest", value = 8 } ]
+
+[[canvases.nodes]]
+id   = "base"
+name = "The door shut"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "appetite", operator = "gte", value = 30 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "You put your hand between your legs with the door shut and you are not thinking about anybody in particular, which is a lie you have stopped bothering with. The house is quiet. You take your time and you are not quiet about it at the end." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "appetite", operator = "gte", value = 5 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "You lie on top of the covers with the door shut and your hand flat on your stomach, and then not flat, and then lower. It takes a while. You listen for the landing the whole time." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "You lie on top of the covers with the door shut and nothing much happens. There are boxes against the wall you have not opened and a bracket where somebody else's monitor was, and this is your room now, apparently." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# ⚠️ THE FLAG IS SET ON THE CHOICE — the SET and the GATE ride together.
+[[canvases.nodes.exit_block.choices]]
+text                     = "Take your time."
+targetType               = "location"
+locationId               = "her_room"
+time_progression_minutes = 40
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "alone_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fed", operator = "gte", value = 30 },
+] }
+show_when_locked = true
+locked_text      = "You have not eaten since this morning and you cannot hold a thought for long enough, let alone anything else."
+flagEffects = [ { targetType = "player", flag = "alone_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "appetite", op = "add", value = 2, cap = 30 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Get up."
+targetType               = "location"
+locationId               = "her_room"
+time_progression_minutes = 5
+
+[[canvases]]
+id          = "act_room_wardrobe"
+name        = "The wardrobe"
+description = "The clothing system's surface. A catalogue is legitimately long because its job is to list — it opens a wardrobe, it does not put twelve garments on the room screen."
+
+[canvases.trigger]
+location      = "her_room"
+is_repeatable = true
+is_active     = true
+priority      = 3
+
+[[canvases.nodes]]
+id   = "base"
+name = "What you brought"
+blocks = [
+  { type = "paragraph", content = "Two cases and one of them still shut. What you own is what fitted, which is jeans, three tops, and the shoes you are wearing." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Change."
+targetType               = "location"
+locationId               = "her_room"
+time_progression_minutes = 10
+
+[[canvases]]
+id          = "act_room_phone"
+name        = "The phone"
+description = "The phone's way in from the room. The app itself is the sidebar button; this is the in-fiction door to it."
+
+[canvases.trigger]
+location      = "her_room"
+is_repeatable = true
+is_active     = true
+priority      = 2
+
+[[canvases.nodes]]
+id   = "base"
+name = "Lying on the bed with it"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "followers", operator = "gte", value = 200 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "Two hundred and something now, and about forty of them are people who actually walk past you on the quad. That is the part nobody warns you about — the number stops being strangers." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "You lie on the bed with it above your face until your arm aches. Everybody from home is still doing what they were doing and none of it has anything to do with you now." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Put it down."
+targetType               = "location"
+locationId               = "her_room"
+time_progression_minutes = 15
+
+# ═══════════════════ THE BATHROOM — clean, and the bolt ══════════════════════
+
+[[canvases]]
+id          = "act_bath_wash"
+name        = "Shower"
+description = "The clean need. Under 40 she will not go where she is looked at, which shuts every nerve rung in the game — that is what makes this room compulsory."
+
+[canvases.trigger]
+location      = "the_bathroom"
+is_repeatable = true
+is_active     = true
+priority      = 5
+
+
+# ⚠️ THE WALK-IN. Somebody is scheduled here and she works here alone, so somebody
+#    can interrupt her. Gate `the walk-in floor` counts trigger.substitutions on the
+#    SOLO activity — a standalone random canvas is NOT a walk-in as far as it is
+#    concerned, and five of ours were written that way first.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_bath_wes"
+chance           = 0.35
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_bathroom", npc_id = "npc_wes", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "One bathroom, four people"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 15 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "You get in without doing the bolt. The water is hot for about four minutes and then it is whatever the tank has left, and you stand in it and listen to the landing and do not hurry." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "You do the bolt. It goes across hard and you have to lift the door on its hinges to get it back. The water is hot for about four minutes and then it is whatever the tank has left." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Wash."
+targetType               = "location"
+locationId               = "the_bathroom"
+time_progression_minutes = 25
+effects = [
+  { targetType = "player", trait = "clean", op = "add", value = 100 },
+]
+
+[[canvases]]
+id          = "act_bath_bolt"
+name        = "Leave the bolt"
+description = "The nerve on-ramp — free, private, day-capped, and the cheapest rung in the game. This is the choice the room asks her every morning."
+
+[canvases.trigger]
+location      = "the_bathroom"
+is_repeatable = true
+is_active     = true
+priority      = 4
+
+[[canvases.nodes]]
+id   = "base"
+name = "The bolt"
+blocks = [
+  { type = "paragraph", content = "The bolt works. That is the thing about this house — nothing is broken, so every door you leave open you left open." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave it across the frame, not in."
+targetType               = "location"
+locationId               = "the_bathroom"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "seen_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
+] }
+show_when_locked = true
+locked_text      = "Not like this. You will not stand in front of anybody at all until you have washed."
+flagEffects = [ { targetType = "player", flag = "seen_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "nerve", op = "add", value = 2, cap = 15 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Shoot it."
+targetType               = "location"
+locationId               = "the_bathroom"
+time_progression_minutes = 2
+
+# ═══════════════════ THE KITCHEN — fed ═══════════════════════════════════════
+
+[[canvases]]
+id          = "act_kitchen_eat"
+name        = "Eat"
+description = "The fed need at home. Free, because the house feeds her — the $4 version is on campus."
+
+[canvases.trigger]
+location      = "the_kitchen"
+is_repeatable = true
+is_active     = true
+priority      = 5
+
+
+# ⚠️ THE WALK-IN. Somebody is scheduled here and she works here alone, so somebody
+#    can interrupt her. Gate `the walk-in floor` counts trigger.substitutions on the
+#    SOLO activity — a standalone random canvas is NOT a walk-in as far as it is
+#    concerned, and five of ours were written that way first.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_kitchen_dee"
+chance           = 0.3
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_kitchen", npc_id = "npc_ray", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "There is a plate in the oven"
+blocks = [
+  { type = "paragraph", content = "There is always a plate. Your mother does it before she goes and @ray eats his standing up at the counter, and the two of them have been running this arrangement since June without discussing it once." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Eat."
+targetType               = "location"
+locationId               = "the_kitchen"
+time_progression_minutes = 20
+effects = [
+  { targetType = "player", trait = "fed", op = "add", value = 100 },
+]
+
+# ═══════════════════ THE AVENUE — the crossing, and being looked at ══════════
+
+[[canvases]]
+id          = "act_avenue_shelter"
+name        = "Stand where the shelter isn't"
+description = "The reputation on-ramp on the house side. Clothing moves the odds — worn_exposure raises the floor of the roll."
+
+[canvases.trigger]
+location      = "the_avenue"
+is_repeatable = true
+is_active     = true
+priority      = 3
+
+
+# ⚠️ THE WALK-IN. Somebody is scheduled here and she works here alone, so somebody
+#    can interrupt her. Gate `the walk-in floor` counts trigger.substitutions on the
+#    SOLO activity — a standalone random canvas is NOT a walk-in as far as it is
+#    concerned, and five of ours were written that way first.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_avenue_ray"
+chance           = 0.3
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_avenue", npc_id = "npc_ray", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The stop"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "worn_exposure", operator = "gte", value = 1 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "You stand out past the shelter where the traffic can see you, dressed the way the row dresses, and three cars in ten minutes slow down more than the road needs them to. One of them is somebody's father from four doors up." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "You stand out past the shelter where the traffic can see you. Nothing happens for eleven minutes and then the bus comes, which is the honest version of most of this." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Wait out where they can see you."
+targetType               = "location"
+locationId               = "the_avenue"
+time_progression_minutes = 15
+costs = [ { trait = "rest", value = 4 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
+  { type = "flag", subject = "player", flag_key = "shelter_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "shelter_today", op = "set" } ]
+show_when_locked = true
+locked_text      = "Not looking like this. Wash first and then stand in the road."
+effects = [
+  { targetType = "player", trait = "reputation", op = "add", value = 1, cap = 25 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Wait under the shelter like everybody else."
+targetType               = "location"
+locationId               = "the_avenue"
+time_progression_minutes = 10
+
+# ═══════════════════ THE QUAD — work, money, and the door 0.1 ends on ════════
+
+[[canvases]]
+id          = "act_quad_class"
+name        = "The eight o'clock"
+description = "Attendance. rest under 30 shuts it, and Halloran's whole ladder runs through it."
+
+[canvases.trigger]
+location      = "the_quad"
+is_repeatable = true
+is_active     = true
+priority      = 5
+# ⚠️ Ninety minutes of a schedule window is not a brake on its own — the gate
+#    walked this and found relation 0 -> 30 for FREE in fifteen clicks.
+costs         = [ { trait = "rest", value = 6 } ]
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "08:00"
+end_time   = "09:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Two hundred people"
+blocks = [
+  { type = "paragraph", content = "A room built for a hundred and sixty and he starts eleven minutes in. You can sit at the back and not be a person, which is what most of the two hundred are doing." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Sit through it."
+targetType               = "location"
+locationId               = "the_quad"
+time_progression_minutes = 90
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "rest", operator = "gte", value = 30 },
+] }
+show_when_locked = true
+locked_text      = "You did not sleep. You would be asleep in the third row in front of two hundred people and he does look up."
+effects = [
+  { targetType = "npc", npcId = "npc_halloran", trait = "relation", op = "add", value = 2, cap = 30 },
+  { targetType = "player", trait = "rest", op = "add", value = -8 },
+]
+
+[[canvases]]
+id          = "act_quad_wall"
+name        = "Sit on the wall"
+description = "The reputation dispatcher. A7 — most visits produce NOTHING, the nothing is written five ways, and it returns something she wanted anyway."
+
+[canvases.trigger]
+location      = "the_quad"
+is_repeatable = true
+is_active     = true
+priority      = 4
+
+
+# ⚠️ THE WALK-IN. Somebody is scheduled here and she works here alone, so somebody
+#    can interrupt her. Gate `the walk-in floor` counts trigger.substitutions on the
+#    SOLO activity — a standalone random canvas is NOT a walk-in as far as it is
+#    concerned, and five of ours were written that way first.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_quad_halloran"
+chance           = 0.3
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_quad", npc_id = "npc_halloran", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The wall by the path"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You sit on the wall where the path comes round and nothing happens for half an hour. Two girls argue about a module code. Somebody's dog gets loose and gets caught. You are better for having sat down." },
+    { type = "paragraph", content = "You sit on the wall and eat nothing and watch the row of houses on the east side do its afternoon, which is people going in and nobody coming out. Half an hour goes and your legs stop aching." },
+    { type = "paragraph", content = "You sit on the wall. A man with a trolley of chairs goes past four times and on the fourth he says something about the weather that is not about the weather, and then he goes and that is that." },
+    { type = "paragraph", content = "You sit on the wall in the sun with your eyes shut for twenty minutes and nobody says anything to you at all, and when you open them the quad has completely changed over and you did not notice it happen." },
+    { type = "paragraph", content = "You sit on the wall and somebody you were in the eight o'clock with says hello and then cannot think of the next thing, and neither can you, and they go. Half an hour. Your feet stop hurting." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Sit where the path comes round."
+targetType               = "location"
+locationId               = "the_quad"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "wall_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "wall_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "rest", op = "add", value = 8 },
+  { targetType = "player", trait = "reputation", op = "add", value = 1, cap = 45 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Get up and go."
+targetType               = "location"
+locationId               = "the_quad"
+time_progression_minutes = 5
+
+[[canvases]]
+id          = "act_quad_shop"
+name        = "Buy the lab kit"
+description = "R1b — what money buys has to STAY bought and be READ. The kit opens the late lab; the dress is read by Simone's step 5 and by the ambient roll. Money buys the KEY to a rung, never a meter point."
+
+[canvases.trigger]
+location      = "the_quad"
+is_repeatable = true
+is_active     = true
+priority      = 3
+
+[[canvases.nodes]]
+id   = "base"
+name = "The union shop"
+blocks = [
+  { type = "paragraph", content = "The union shop sells three things anybody wants: the lab kit nobody told you was not included, coffee, and the kind of dress the row wears on a Thursday, on a rail by the door, at sixty dollars because they know." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Buy the lab kit. $28"
+targetType               = "location"
+locationId               = "the_quad"
+time_progression_minutes = 15
+costs = [ { trait = "money", value = 28 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "has_lab_kit", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "has_lab_kit", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Buy the dress off the rail. $60"
+targetType               = "location"
+locationId               = "the_quad"
+time_progression_minutes = 20
+costs = [ { trait = "money", value = 60 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "has_dress", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "has_dress", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave it."
+targetType               = "location"
+locationId               = "the_quad"
+time_progression_minutes = 5
+
+# ⚠️ THE DOOR 0.1 ENDS ON. Visible, locked, and it says the number.
+[[canvases]]
+id          = "act_quad_row"
+name        = "Cross to the row"
+description = "Every release ends on a visible locked door. This is 0.1's."
+
+[canvases.trigger]
+location      = "the_quad"
+is_repeatable = true
+is_active     = true
+priority      = 2
+
+[[canvases.nodes]]
+id   = "base"
+name = "Eight houses"
+blocks = [
+  { type = "paragraph", content = "There are eight houses along the east edge and you have been inside one of them. The others have their own books by their own doors and their own Fridays, and none of them knows your name yet." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Walk down the row."
+targetType               = "location"
+locationId               = "the_quad"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 85 },
+] }
+show_when_locked = true
+locked_text      = "You can walk down it. Nobody would stop you, and nobody would open a door either. They have to have heard of you first, and right now seven of those eight houses have not."
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go back."
+targetType               = "location"
+locationId               = "the_quad"
+time_progression_minutes = 2
+
+# ═══════════════════ THE COUNTER — the only money in the game ════════════════
+
+[[canvases]]
+id          = "act_counter_shift"
+name        = "Take a shift"
+description = "The only income channel. ~$50 a shift, six shifts a week is ~$260 against a $120 Friday — 46%."
+
+[canvases.trigger]
+location      = "the_counter"
+is_repeatable = true
+is_active     = true
+priority      = 5
+costs         = [ { trait = "rest", value = 20 } ]
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5]
+start_time = "10:00"
+end_time   = "16:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Behind the counter"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 45 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "Six hours and the queue never really goes. Two people this shift said your name before you said it, and one of them added where they had heard it, and you rang his coffee through and said nothing back." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Six hours and the queue never really goes. The machine is older than you are and it takes forty seconds to do what it says it does in twenty. Nobody here knows your name and nobody asks it." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Work the shift."
+targetType               = "location"
+locationId               = "the_counter"
+time_progression_minutes = 360
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "shift_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "rest", operator = "gte", value = 25 },
+] }
+show_when_locked = true
+locked_text      = "You have done today's. They will not put you on twice and you could not stand it if they did."
+flagEffects = [ { targetType = "player", flag = "shift_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "money", op = "add", value = 48, clamp = false },
+  { targetType = "player", trait = "rest", op = "add", value = -15 },
+  { targetType = "player", trait = "clean", op = "add", value = -10 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go back out to the quad."
+targetType               = "location"
+locationId               = "the_quad"
+time_progression_minutes = 5
+
+[[canvases]]
+id          = "act_counter_eat"
+name        = "Eat on shift"
+description = "The fed need on campus. $4, because it is not her kitchen."
+
+[canvases.trigger]
+location      = "the_counter"
+is_repeatable = true
+is_active     = true
+priority      = 4
+
+[[canvases.nodes]]
+id   = "base"
+name = "Whatever is going out of date"
+blocks = [
+  { type = "paragraph", content = "Staff price on anything going out of date at four, which is most of the cabinet by then. You eat it standing in the doorway of the stockroom where the manager cannot see you doing it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Eat. $4"
+targetType               = "location"
+locationId               = "the_counter"
+time_progression_minutes = 15
+costs = [ { trait = "money", value = 4 } ]
+effects = [
+  { targetType = "player", trait = "fed", op = "add", value = 100 },
+]
+
+# ═══════════════════ THE PLEDGE HOUSE — the anchor's non-hub rows ════════════
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave it."
+targetType               = "location"
+locationId               = "the_counter"
+time_progression_minutes = 5
+
+[[canvases]]
+id          = "act_pledge_shower"
+name        = "Shower here"
+description = "The clean need on campus. $2, because it is not her house — and this is the room the walk-in fires in."
+
+[canvases.trigger]
+location      = "the_pledge_house"
+is_repeatable = true
+is_active     = true
+priority      = 4
+
+
+# ⚠️ THE WALK-IN. Somebody is scheduled here and she works here alone, so somebody
+#    can interrupt her. Gate `the walk-in floor` counts trigger.substitutions on the
+#    SOLO activity — a standalone random canvas is NOT a walk-in as far as it is
+#    concerned, and five of ours were written that way first.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_shower_simone"
+chance           = 0.35
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_pledge_house", npc_id = "npc_simone", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The upstairs bathroom"
+blocks = [
+  { type = "paragraph", content = "There is a tin by the door of the upstairs bathroom with two dollars written on a card taped to it, for the water, and every girl in this house puts two dollars in it and nobody has ever checked." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Wash here. $2"
+targetType               = "location"
+locationId               = "the_pledge_house"
+time_progression_minutes = 25
+costs = [ { trait = "money", value = 2 } ]
+effects = [
+  { targetType = "player", trait = "clean", op = "add", value = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave it and go down."
+targetType               = "location"
+locationId               = "the_pledge_house"
+time_progression_minutes = 5
+
+[[canvases]]
+id          = "act_pledge_seen"
+name        = "Sit where they can see you"
+description = "The reputation dispatcher at the anchor. A7 — five written quiet outcomes, and the quiet outcome pays."
+
+[canvases.trigger]
+location      = "the_pledge_house"
+is_repeatable = true
+is_active     = true
+priority      = 3
+
+[[canvases.nodes]]
+id   = "base"
+name = "Downstairs"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You sit on the arm of the sofa downstairs for an hour and nobody sends you anywhere. Two of the twelve learn your name and use it wrong and then right. Nothing else happens and you go home warmer than you came." },
+    { type = "paragraph", content = "You sit downstairs while four of them do somebody's hair for something that is not tonight. Nobody explains what it is for. You hand up a clip when it is asked for and that is your whole contribution." },
+    { type = "paragraph", content = "You sit downstairs and the television is on with the sound off and three of them are on their phones. It is the least anybody has wanted from you in a week and you stay an hour longer than you meant to." },
+    { type = "paragraph", content = "You sit downstairs and Simone goes through twice without stopping, and on the second one she says your name to somebody else in a sentence you do not catch the rest of. An hour goes." },
+    { type = "paragraph", content = "You sit downstairs while somebody's brother fixes the door on the cupboard under the stairs, badly, and four people give him advice. Nobody asks you for anything. You are better for having sat down." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stay downstairs an hour."
+targetType               = "location"
+locationId               = "the_pledge_house"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "seen_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "seen_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "rest", op = "add", value = 6 },
+  { targetType = "player", trait = "reputation", op = "add", value = 2, cap = 45 },
+  { targetType = "npc", npcId = "npc_simone", trait = "relation", op = "add", value = 1, cap = 30 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go."
+targetType               = "location"
+locationId               = "the_pledge_house"
+time_progression_minutes = 5
+
+# ═══════════════════ RAY'S ROOM — the door IS the content ════════════════════
+
+[[canvases]]
+id          = "act_back_bedroom_door"
+name        = "Go in"
+description = "0.1's other locked door. Gated on appetite, which she raises elsewhere — a real handle, not the machinery narrating its own progress bar."
+
+[canvases.trigger]
+location      = "the_back_bedroom"
+is_repeatable = true
+is_active     = true
+priority      = 3
+
+[[canvases.nodes]]
+id   = "base"
+name = "The door at the back"
+blocks = [
+  { type = "paragraph", content = "The door at the back of the house. Your mother is on until six and has been since August, and from one in the morning there is one person behind it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Knock."
+targetType               = "location"
+locationId               = "the_back_bedroom"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "appetite", operator = "gte", value = 70 },
+  { type = "flag", subject = "player", flag_key = "ray_open", operator = "is_true" },
+] }
+show_when_locked = true
+locked_text      = "You could knock. You have got as far as the handle twice. It is not the door that is not ready — you know exactly what you would be asking for and you cannot say it yet."
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go back to your room."
+targetType               = "location"
+locationId               = "the_avenue"
+time_progression_minutes = 2

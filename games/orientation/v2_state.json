@@ -1,0 +1,595 @@
+{
+  "slug": "orientation",
+  "phase": "release",
+  "narration_person": "second",
+  "protagonist": "Josie Marsh",
+  "want": {
+    "player": {
+      "who": "female",
+      "definition": "blank",
+      "definition_note": "CHOSEN, and the first `blank` in v2. Field runs 19 blank / 10 written with blank holding 80.4% of top-30 engagement; the eight prior v2 games are all `written` and no ledger records the choice being made. The premise is the best fit for blank this repo will get — 18, first night in the house, nobody in it has a read on her. Blank means her PAST is not written; her face is fixed by real-performer media either way. Cost accepted: no inherited history to gate on, so every gate hangs on the start choice or on a meter.",
+      "start_choice": {
+        "asked_at": "PIN_AT_BOARD.arrival_night.wes_asks",
+        "flags": [
+          "past_top",
+          "past_crowd",
+          "past_nobody"
+        ],
+        "note": "A memory, not a slider. Wes asks what she was at her old school on the arrival night — the scene already asks it. past_top buys Halloran's reader key and the late lab in week one; past_crowd buys Simone walking her past the sign-in book and the upstairs early; past_nobody buys the un-clocked rungs and makes reputation-from-zero worth more. FIVE READ SITES EACH. ADDITIVE ONLY — every original rung keeps its numbers and gains `<flag> is_false`. WARNING: adjacent [group] blocks merge into ONE if/elseif chain (v2.py:14637) and first match wins, so separate any past-ladder from a surface's existing ladder with a non-`group` block. Exact canvas.node id pinned at board phase and `asked_at` updated then."
+      },
+      "relationship_picker": {
+        "npc_ray": [
+          "stepfather",
+          "mom's husband",
+          "father",
+          "uncle"
+        ],
+        "npc_wes": [
+          "stepbrother",
+          "half-brother",
+          "brother",
+          "cousin"
+        ],
+        "note": "npcs[].relationship_options. VERIFIED on the default (non --use-db) build path: game_graph.py:164-165 writes it, v2.py:911 reads it, v2.py:9282 renders the listbox. Prose reads it as @<npc>.rel. ⚠️ v2.py:9294 emits `<<textbox \"$npcs[...].name\">>` for EVERY customizable NPC, unconditionally — so Ray and Wes are both player-renameable and ALL prose about them must use @ray / @wes and never a typed name. Dee, Simone and Halloran stay fixed."
+      },
+      "customization_fields": 3
+    },
+    "who_she_is": "Josie Marsh, 18. Two suitcases in a room that was an office until Sunday. Her mother Dee married Ray Kessler in June and the house came with him, and with his son Wes, 20, a junior at the college she starts tomorrow. She has been in this house four hours. What she has to lose: nobody in it has a read on her yet — that is the only thing she owns, and every rung spends some of it.",
+    "obligation": "The dues — Friday, at the pledge house, Simone counts them on the office desk and writes a name down if the number is short. Tuition is Ray's; everything college charges ON TOP of tuition is hers. THE OFFER (R5e): Ray covers the dues, reachable while she is fine and NOT gated on being short — owing him opens his ladder. Campus charges her, the debt lands at home.",
+    "appetite": "To be the one who gets asked — by the people who set the rules, in the rooms where the rules are set — and to hear her own name said in a room she has not walked into yet. Cannot complete: every room has a room behind it, and campus keeps supplying people who have not looked at her yet. Where the bill stops being the reason: the Friday she has the dues folded in her pocket, walks past the office desk, and asks Ray for it anyway.",
+    "ascent": "Bottom: the lecture hall, the dining hall, the sign-in book at the pledge house, the upstairs bathroom at home when it is free. Top: up the stairs at the pledge house on a party night without being stopped; into Halloran's office after the department has emptied; into the kitchen at one in the morning when Ray is the only one awake and nobody is pretending it is about the dues.",
+    "charge": "taboo + transformation — taboo drives the house track, transformation drives the campus track, and the `home_face` counterweight is the wire between them",
+    "why_this_person": {
+      "npc_ray": "The first adult who looks at her like the room changed when she walked in — and the one person she cannot afford to lose, because he is the reason she is enrolled at all.",
+      "npc_wes": "He was already inside every room she is trying to get into, and he is the only person who sees both halves of her life.",
+      "npc_dee": "Not wanted — she is the PRICE TAG. Every hour Ray is alone with Josie is an hour Dee is on shift, and that is what makes it cost.",
+      "npc_simone": "She decides who Josie gets to be on that campus and says so out loud. Being chosen by her is the fantasy; being billed by her is the engine.",
+      "npc_halloran": "The one man whose approval is worth something on paper — and the only one who can hand her a key."
+    },
+    "crude_ceiling": {
+      "npc_ray": [
+        "t1: tits · ass · hard · his cock through the seam of his jeans",
+        "t2: cock · cunt · wet · suck · fuck",
+        "t3: full — cunt, cock, cum, throat, fuck, come in her"
+      ],
+      "npc_wes": [
+        "t1: tits · ass · dick · hard",
+        "t2: cock · cunt · fingers in her · fuck",
+        "t3: full — cum, throat, ass"
+      ],
+      "npc_simone": [
+        "t1: tits · ass · wet · what she calls Josie in front of the others",
+        "t2: cunt · fingers · tongue · come",
+        "t3: full — cunt, cum, slut, and the words she uses about Josie to men"
+      ],
+      "npc_halloran": [
+        "t1: hard · his cock · the word cunt, and it is his word",
+        "t2: cock in her mouth · throat · cum",
+        "t3: full"
+      ],
+      "npc_dee": [
+        "none — heard through a wall, never touched. A DELIBERATE ceiling, not an omission."
+      ]
+    },
+    "crude_lives_on": [
+      "the upstairs at the pledge house on a party night",
+      "the shared bathroom at the Kessler house",
+      "Halloran's office hours",
+      "the Friday dues count",
+      "the back room of her campus job"
+    ],
+    "last_read_at_release": "0.1-design"
+  },
+  "board": {
+    "who_climbs": "player",
+    "who_climbs_note": "CHOSEN. The premise is that COLLEGE corrupts her, so the ladder is hers; the cast carries light per-character meters (W6). Field splits 8 roster / 9 ladder with nothing between 15% and 65% — all five prior v2 games landed at 19-29% because nobody asked. Gate 34 wants >=60% of meter-gating on her own tiers.",
+    "ascent_tiers": [
+      "nerve",
+      "appetite",
+      "reputation"
+    ],
+    "ceilings": {
+      "nerve": 100,
+      "appetite": 100,
+      "reputation": 100
+    },
+    "rungs": {
+      "nerve": [
+        5,
+        15,
+        30,
+        50,
+        70,
+        90
+      ],
+      "appetite": [
+        5,
+        15,
+        30,
+        50,
+        70,
+        90
+      ],
+      "reputation": [
+        10,
+        25,
+        45,
+        65,
+        85
+      ]
+    },
+    "rungs_note": "Lowest rung at 5, NOT 15. All sixteen declared tiers across five v2 games sit at exactly 15 because templates/board.toml carries that band table; the field runs 8-17 rungs starting around 5.",
+    "counterweight": {
+      "key": "home_face",
+      "protects": "what the household still believes about her — while it is high, Ray will not move",
+      "spent_by": "carrying campus home; every act that lets the two hubs touch"
+    },
+    "map": {
+      "archetype": "two_hub",
+      "shape": "The Kessler house on the near side of a college town and the campus along its east edge, joined by an avenue with a bus stop on it. Two grounds, genuinely apart: the avenue is the house side's ground and the quad is the campus side's, and she crosses between them on a bus she pays for or in a car she has to ask for.",
+      "home_base": "her_room",
+      "exterior": "the_avenue",
+      "exterior_note": "ROOT — no entry_from. the_quad hangs off it with travel costs on the LOCATION ({time=40, money=2}), which IS the bridge: the-map.md's own mechanism table puts travel friction on [[locations]] costs, on bridges between zones. CORRECTED AT BUILD: the board declared 'two roots joined by a travel canvas' per R3, and the engine cannot express it — template_import.py:4287 hard-fails a navigation_order entry whose entry_from is not that location, so two roots cannot be joined by nav, and joining them by canvas exits alone strands the_quad and its three children in gate 11, which builds adjacency from entry_from + navigation_order only.",
+      "homes": {
+        "npc_ray": "the_back_bedroom",
+        "npc_dee": "the_back_bedroom",
+        "npc_wes": "wes_room",
+        "npc_simone": "the_pledge_house",
+        "npc_halloran": "offscreen"
+      },
+      "homes_note": "halloran is offscreen DELIBERATELY — faculty, lives across town, has no bed in this world. Declared, not guessed: only a declaration separates 'lives elsewhere' from 'was never given a room'.",
+      "bridges": [
+        {
+          "from": "the_avenue",
+          "to": "the_quad",
+          "costs": {
+            "time": 40,
+            "money": 2
+          },
+          "label": "the bus — priced on the_quad location itself",
+          "note": "a ride from @wes or @ray is a CANVAS exit that lands the same place for 15 min and no fare, gated on relation. The two ways across are the point."
+        }
+      ],
+      "r1_signoff": "SIGNED OFF by LO in chat, board phase, 2026-09-02. What he saw: the 10 place sheets and DECISIONS.md sections A5/B1/B3 — two_hub on two roots (the_avenue, the_quad), the anchor on the campus side at 25.6%, every resident with a declared bed and halloran explicitly offscreen, and the bridge priced two ways (bus $2/40min, or a favour)."
+    },
+    "economy": {
+      "currency": "money",
+      "symbol": "$",
+      "obligation": "the dues — Friday, at the pledge house, Simone counts",
+      "obligation_amount": 120,
+      "week_income": 260,
+      "obligation_moves": "cost follows holdings — every commitment she signs (meal plan, lab kit, the ride, the second-semester dues band) adds weekly upkeep. The rise is hers and needs no collector to justify it.",
+      "sinks": [
+        "the dues",
+        "the meal plan",
+        "the bus",
+        "the lab kit",
+        "clothes that make a nerve rung reachable"
+      ],
+      "obligation_note": "Collector is a woman, on campus. The house is where the debt LANDS, not where it is charged — that is the inversion the whole game runs on.",
+      "buys_a_door": [
+        "the outfit — read by worn_exposure, and Simone's step 5 will not pass without it",
+        "the lab kit — opens the late lab, which is when the department is empty",
+        "the semester bus pass — removes the per-crossing fare, so the ride stops being the only cheap way across"
+      ],
+      "the_offer": "R5e — Ray covers the dues, reachable while she is FINE. NOT gated on being short. Two games with no shared context both wired this behind scarcity (money lt 260, prep lt 30) and made it near-unreachable. Test: can she take this when she doesn't need to?"
+    },
+    "needs_draft": [
+      {
+        "key": "rest",
+        "shuts": "under 30 the eight o'clock is closed — and Halloran's rungs run through attendance"
+      },
+      {
+        "key": "clean",
+        "shuts": "under 40 she will not go where she is looked at — every nerve rung is shut"
+      },
+      {
+        "key": "fed",
+        "shuts": "ON PROBATION — cut at board unless it earns a real shut (M9: a need that shuts nothing is a chore)"
+      }
+    ],
+    "characters_draft": [
+      {
+        "id": "npc_ray",
+        "owns": "the house, the money, the car",
+        "alone_with_her": "the kitchen, late, after Dee leaves for nights"
+      },
+      {
+        "id": "npc_wes",
+        "owns": "the ride, the bathroom, the campus he already knows",
+        "alone_with_her": "the upstairs landing, mornings"
+      },
+      {
+        "id": "npc_dee",
+        "owns": "the shift schedule, the rules, the reason it costs",
+        "alone_with_her": "nights — offscreen"
+      },
+      {
+        "id": "npc_simone",
+        "owns": "the pledge ladder, the other girls, the party, the dues",
+        "alone_with_her": "the house office, Friday"
+      },
+      {
+        "id": "npc_halloran",
+        "owns": "grades, the department, office hours",
+        "alone_with_her": "his office, late afternoon"
+      }
+    ],
+    "locations": [
+      {
+        "id": "the_pledge_house",
+        "job": "Simone, the dues, the other girls, and the upstairs on a party night. The corrupting engine, and the place the game is actually about.",
+        "anchor": true,
+        "fill": 11500,
+        "has_cycling_pool": true,
+        "serves": {
+          "needs": [
+            "clean"
+          ],
+          "work": [],
+          "people": [
+            "npc_simone"
+          ]
+        }
+      },
+      {
+        "id": "the_quad",
+        "job": "Campus ground. The eight o'clock sits here rather than in a hall of its own — a lecture room with two hundred people in it is not a surface. Where the lab kit is bought and where the row of houses is visible from.",
+        "anchor": false,
+        "fill": 5000,
+        "has_cycling_pool": true,
+        "serves": {
+          "needs": [],
+          "work": [
+            "the eight o'clock"
+          ],
+          "people": []
+        }
+      },
+      {
+        "id": "the_kitchen",
+        "job": "Ray's hour, after Dee has left for nights. The one room in the house where the two of them are alone by the clock rather than by accident.",
+        "anchor": false,
+        "fill": 4500,
+        "has_cycling_pool": true,
+        "serves": {
+          "needs": [
+            "fed"
+          ],
+          "work": [],
+          "people": [
+            "npc_ray",
+            "npc_dee"
+          ]
+        }
+      },
+      {
+        "id": "her_room",
+        "job": "Where she sleeps and where she dresses. Was an office until Sunday and still has the shelves.",
+        "anchor": false,
+        "fill": 4000,
+        "has_cycling_pool": false,
+        "serves": {
+          "needs": [
+            "rest"
+          ],
+          "work": [],
+          "people": []
+        }
+      },
+      {
+        "id": "halloran_office",
+        "job": "Office hours, late afternoon, and the department empty after five. Grades, the reader's key, the late lab.",
+        "anchor": false,
+        "fill": 4000,
+        "has_cycling_pool": true,
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_halloran"
+          ]
+        }
+      },
+      {
+        "id": "the_bathroom",
+        "job": "Shared, one door, and Wes is behind it every morning. The bolt works and she has to decide about it.",
+        "anchor": false,
+        "fill": 3500,
+        "has_cycling_pool": true,
+        "serves": {
+          "needs": [
+            "clean"
+          ],
+          "work": [],
+          "people": [
+            "npc_wes"
+          ]
+        }
+      },
+      {
+        "id": "the_counter",
+        "job": "The campus coffee counter. The only place money comes from, and the back room is one of the five surfaces the crude register lives on.",
+        "anchor": false,
+        "fill": 3500,
+        "has_cycling_pool": true,
+        "serves": {
+          "needs": [
+            "fed"
+          ],
+          "work": [
+            "the counter shift"
+          ],
+          "people": []
+        }
+      },
+      {
+        "id": "the_avenue",
+        "job": "The ground the house side sits on. The stop is here, and so is the ride she has to ask a man for.",
+        "anchor": false,
+        "fill": 3000,
+        "has_cycling_pool": true,
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_wes",
+            "npc_ray"
+          ]
+        }
+      },
+      {
+        "id": "the_back_bedroom",
+        "job": "Ray and Dee's room. Where he sleeps, which is why it exists (the-map.md R2), and the access the Want sells at the top of the house track.",
+        "anchor": false,
+        "fill": 3000,
+        "has_cycling_pool": true,
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_ray"
+          ]
+        }
+      },
+      {
+        "id": "wes_room",
+        "job": "Wes's room. He is a junior who never moved out, and the door is usually open.",
+        "anchor": false,
+        "fill": 3000,
+        "has_cycling_pool": true,
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_wes"
+          ]
+        }
+      }
+    ],
+    "needs": [
+      {
+        "key": "rest",
+        "falls": "12 a day",
+        "decay_per_day": 12,
+        "fills": "her_room · Sleep · to 07:00",
+        "costs": "free",
+        "shuts": "under 30 the eight o'clock is closed, and Halloran's ladder runs through attendance"
+      },
+      {
+        "key": "clean",
+        "falls": "15 a day",
+        "decay_per_day": 15,
+        "fills": "the_bathroom · Shower · 25 min",
+        "costs": "free at home, $2 at the pledge house",
+        "shuts": "under 40 she will not go where she is looked at — every nerve rung is shut"
+      },
+      {
+        "key": "fed",
+        "falls": "20 a day",
+        "decay_per_day": 20,
+        "fills": "the_kitchen · Eat · 20 min · free, or the_counter · Eat on shift · 15 min · $4",
+        "costs": "$4 on campus",
+        "shuts": "under 30 no appetite rung will raise"
+      }
+    ],
+    "characters": [
+      {
+        "id": "npc_ray",
+        "name": "Ray",
+        "role": "her step-father",
+        "surfaces": 3,
+        "schedule_rows": 4,
+        "why_wanted": "The first adult who looks at her like the room changed when she walked in, and the one person she cannot afford to lose.",
+        "owns": "the house, the money, the car",
+        "alone_with_her": "the_kitchen, 22:00-01:00, after Dee leaves",
+        "meters": {
+          "relation": "access — what she is allowed to be near",
+          "lust": "willingness — how far he will go"
+        },
+        "arc": "ray, 9 steps, direction HERS"
+      },
+      {
+        "id": "npc_simone",
+        "name": "Simone",
+        "role": "the senior who runs the pledge house",
+        "surfaces": 3,
+        "schedule_rows": 3,
+        "why_wanted": "She decides who Josie gets to be on that campus and says so out loud. Being chosen by her is the fantasy; being billed by her is the engine.",
+        "owns": "the pledge ladder, the other girls, the party, the dues",
+        "alone_with_her": "the house office, Friday 17:00-19:00",
+        "meters": {
+          "relation": "access",
+          "lust": "willingness"
+        },
+        "arc": "simone, 7 steps, direction THEIRS"
+      },
+      {
+        "id": "npc_wes",
+        "name": "Wes",
+        "role": "her step-brother",
+        "surfaces": 2,
+        "schedule_rows": 3,
+        "why_wanted": "He was already inside every room she is trying to get into, and he is the only person who sees both halves of her life.",
+        "owns": "the ride, the bathroom, the campus he already knows",
+        "alone_with_her": "the_bathroom, 07:00-08:00",
+        "meters": {
+          "relation": "access"
+        },
+        "arc": "NONE in v0.1 — 3 converted rungs. Arc debt owed at 0.2."
+      },
+      {
+        "id": "npc_halloran",
+        "name": "Halloran",
+        "role": "the professor who teaches the eight o'clock",
+        "surfaces": 2,
+        "schedule_rows": 2,
+        "why_wanted": "The one man whose approval is worth something on paper, and the only one who can hand her a key.",
+        "owns": "grades, the department, office hours",
+        "alone_with_her": "halloran_office, 16:00-18:00",
+        "meters": {
+          "relation": "access"
+        },
+        "arc": "NONE in v0.1 — 3 converted rungs. Arc debt owed at 0.3."
+      },
+      {
+        "id": "npc_dee",
+        "name": "Dee",
+        "role": "her mother",
+        "surfaces": 1,
+        "schedule_rows": 2,
+        "why_wanted": "Not wanted — she is the PRICE TAG. Every hour Ray is alone with Josie is an hour Dee is on shift.",
+        "owns": "the shift schedule, the rules, the reason it costs",
+        "alone_with_her": "the_kitchen, 17:00-21:00 before she leaves",
+        "meters": {
+          "relation": "access"
+        },
+        "arc": "NONE — deliberate. No sexual ceiling; she is heard through a wall."
+      }
+    ],
+    "phone": {
+      "declared": true,
+      "p1": "All three P1 questions are yes: she cannot reach Wes while she is at home; Dee's shift and the pledge house run offscreen; reputation IS being looked at by people she is not in the room with.",
+      "apps": [
+        "messaging — Ray, Wes, Simone, Dee",
+        "flaunt (social_feed) — she POSTS, with a followers counter"
+      ],
+      "corruption_min_decision": "HYBRID, no engine change. post_actions' only gate reads player.core_traits.corruption LITERALLY (v2.py:2652, :2764, :2824, :2440) and no trait of that name exists here, so rungs above the first would sit permanently locked. Bottom two rungs use post_actions with daily_cap and NO corruption_min; every rung above is a canvas the feed links to, gated on `nerve` via setup.triggerConditionsSatisfied (v2.py:2204), the same evaluator canvases use (v2.py:3888). Cost: native lock/tick rendering lost above rung 2.",
+      "followers_sink": "at 200 the row answers her — the reputation 45 rung's cheapest route in. A counter with no sink is not counted (R1b)."
+    },
+    "time": {
+      "starting_day": "Sunday",
+      "starting_hour": 19,
+      "note": "Arrival night is SUNDAY so the funnel hands over on MONDAY 07:20 — Halloran teaches [0,2,4] Mon/Wed/Fri and both day-one meetings fall inside their own characters' hours."
+    }
+  },
+  "releases": [],
+  "promises": [],
+  "decisions": [
+    {
+      "at": "want",
+      "note": "definition = `blank` — first in v2. Cost: no written past to gate on, so every early gate hangs on the start choice or a meter. Taken because 18-and-arriving is the best fit for blank this repo will get, and because eight prior games took `written` without recording a choice."
+    },
+    {
+      "at": "want",
+      "note": "who_climbs = `player`. The brief is that COLLEGE corrupts her, so the ladder is hers and the cast meters stay light. Deliberately outside the 19-29% band all five prior v2 games landed in by accident."
+    },
+    {
+      "at": "want",
+      "note": "map archetype = `two_hub`, not `nested_zones`. Five v2 games are nested and the doctrine names it the default to beat; the premise is honestly two grounds joined by a commute, and the commute is a favour she has to ask a man for."
+    },
+    {
+      "at": "want",
+      "note": "Anchor is the PLEDGE HOUSE on campus, not the kitchen. Puts the ~30% prose anchor on the corrupting side. The obligation's collector is Simone, a woman, on campus — the house is where the debt lands, not where it is charged."
+    },
+    {
+      "at": "want",
+      "note": "Lowest rung at 5 across all three tiers, against templates/board.toml's 15/35/55/75 band table which produced 16 identical tiers across five games."
+    },
+    {
+      "at": "board",
+      "note": "Schedule grids reconciled across sheets. Two conflicts fixed: Wes was double-booked (bathroom 07:00-08:00 vs avenue 07:10-07:45) — now 06:40-07:10 and 07:15-07:50; and the funnel handed over on a Tuesday when Halloran teaches Mon/Wed/Fri, so starting_day is Sunday and the handover is Monday 07:20."
+    },
+    {
+      "at": "board",
+      "note": "Two day-specific overnight windows are declared as TWO ROWS each — Ray's kitchen (Sun-Thu 22:00-01:00) and Simone's party window (Thu-Sat 21:00-02:00). The weekday check runs first and against today (v2.py:3596), so a single day-specific row would put them on site and delete them at midnight. An all-days row would legitimately be one."
+    },
+    {
+      "at": "board",
+      "note": "Phone: HYBRID taken on corruption_min rather than an engine change or a tier rename. post_actions reads player.core_traits.corruption literally (v2.py:2652/:2764/:2824/:2440) and no such trait exists here. Bottom two post rungs use post_actions with daily_cap and no corruption_min; rungs above are canvases the feed links to, gated on `nerve` via triggerConditionsSatisfied (v2.py:2204). Cost: native lock/tick rendering lost above rung 2."
+    },
+    {
+      "at": "board",
+      "note": "Phase advanced want -> sheets. 18 sheets written: SYSTEMS, OPENING, GUIDANCE, scenes/INDEX, 10 places, 5 people, 5 scenes. All [REVIEW]; none [READY] until LO signs and r1_signoff names a person and a date."
+    },
+    {
+      "at": "board",
+      "note": "First draft of the anchor's four explicit beats scored 0/4 explicit with median sentences 21-32 against a ceiling of 14, and beat 3 pivoted (last sentence carried no body word). Rewritten to 3/4 registering, median sentence 11. Recorded because the pivot defect was authored three increments running by authors who had just re-read the rule against it."
+    },
+    {
+      "at": "board",
+      "note": "Sheets signed 2026-09-02. All 18 moved [REVIEW] -> [READY]. `fed` kept — LO did not call it invented. Phase advances sheets -> release; v0.1 is built from the signed design, not re-designed."
+    },
+    {
+      "at": "0.1-build",
+      "note": "MAP CORRECTED AT BUILD. The board declared two roots (the_avenue, the_quad) joined by a travel canvas, per the-map.md R3's 'two grounds genuinely apart'. The engine cannot express that: template_import.py:4287 hard-fails a navigation_order entry whose entry_from is not that location, and gate 11 builds adjacency from entry_from + navigation_order only, so canvas-only travel would strand the_quad plus its three children. Built as ONE root (the_avenue, the declared exterior) with the_quad hanging off it carrying costs={time=40,money=2} on the location — which is the-map.md's own stated mechanism for travel friction on a bridge between zones. archetype stays two_hub: that entry is 'two strong hubs joined by a commute' and says nothing about roots. The sheets were wrong against the engine; the sheets are corrected, not worked around."
+    },
+    {
+      "at": "0.1-build",
+      "note": "ENGINE FACT, cost one build: `relationship` on a customizable NPC is the DEFAULT SELECTED OPTION and must be a member of relationship_options. Prose belongs in `description`. The importer message is 'default relationship <x> not in relationship_options'."
+    },
+    {
+      "at": "0.1-build",
+      "note": "ENGINE FACT, cost one build: CONDITIONS use `npc_id`, EFFECTS use `npcId`. Mixing them is caught with 'field npcId is not allowed in a predicate item'. Five sites."
+    },
+    {
+      "at": "0.1-build",
+      "note": "GATE SHAPE, cost one round: a dialog block's speaker lives in `props` — { type = \"dialog\", props = { speaker = \"npc\", npcId = \"...\" }, content = \"...\" }. Written with speaker at the top level the build renders fine and `speakers are named` reads 0/21. Valid TOML, green build, gate red."
+    },
+    {
+      "at": "0.1-build",
+      "note": "GATE SHAPE, cost one round: `the walk-in floor` counts [[canvases.trigger.substitutions]] ON THE SOLO ACTIVITY, not a standalone random canvas. Five walk-ins were authored as random canvases first and scored 0/5. The target canvas carries substitution_only = true at CANVAS level."
+    },
+    {
+      "at": "0.1-build",
+      "note": "ENGINE FACT: `worn_type` reads `value` with operator eq/neq (v2.py:4227), not a `worn_type` key."
+    },
+    {
+      "at": "0.1-build",
+      "note": "⚠️ OPEN — POSSIBLE GATE GAP, not fixed without LO. `the wardrobe is read` accepts worn_corruption / worn_beauty / worn_type / clothing_slot / clothing_item and NOT worn_exposure — but worn_exposure is the predicate engine.md names as the one that reads an empty slot, and it is unambiguously a wardrobe read. Our game used it and scored '7 garments, 0 reads'. Worked around by adding a worn_type condition beside it, which is honest here (the dress is typed). The gate's list still looks like an omission."
+    },
+    {
+      "at": "0.1-build",
+      "note": "The python `toml` package silently drops an inline-table band containing an apostrophe; the build reads `tomli` (package_from_toml.py:369), which is correct. Validate with tomli, never toml."
+    }
+  ],
+  "arc_log": {
+    "built": {
+      "A1": "numbered ladder converting into a repeatable — ray 9 steps, simone 7",
+      "A2": "first third has no sex — ray 1-3, simone 1-2 buy WHEN he is alone and WHAT he is vulnerable about",
+      "A3b": "parked refusal, both arcs — free, reversible, and the game prints the place and the hour",
+      "A4": "step grants the meter that opens the step after it, capped at the next threshold",
+      "A6": "a garment is a rung (simone_04) AND clothing moves the ambient roll's floor via worn_exposure",
+      "A6b": "the dress code belongs to the house, not to her; and cover/dont-cover are TWO beats",
+      "A7": "quiet outcome pays — 5 written nothings at the_quad and the_pledge_house, +time +tick",
+      "A8": "a pending arc beat pre-empts the dice via auto-fire priority (v2.py:4633-4634)",
+      "A9": "incidents at one place are different SETUPS, gates spread nerve 5 -> reputation 85",
+      "A10": "the act ends on a written beat, ~32 words, no sex in it, per partner",
+      "A11": "a stop beat about HIS reaction, not her exit",
+      "A12": "two routes into the counter back room — a price paid, and an accident"
+    },
+    "skipped": {
+      "A3-counted": "no counted-and-closed refusal in v0.1. Both are parked. The counted shape is for when the closing is itself content and neither arc is that.",
+      "A5": "one incident / two ladders reading DIFFERENT meters — not built. Ray and Simone are separate trunks, not one trunk forking. Owed when a third arc exists to fork.",
+      "A4b-skill": "no practised-skill ladder (a number raised elsewhere that three arcs read). A skill ladder that feeds nothing is a chore, so the READER has to exist first."
+    },
+    "note": "the-arc.md's closing rule: name which of A1-A12 the release built and which it skipped, with the reason. Until the lints exist an arc is authored on discipline alone."
+  },
+  "build_state": {
+    "version": "0.1-wip",
+    "gates": "43/44 judged (2 n/a)",
+    "only_failure": "location fill — 6,644 of 45,000 declared words",
+    "remaining": "38,356 words, distributed per board.locations[].fill. the_pledge_house needs 9,829 of them to hold the >=25% anchor share; the_kitchen is currently the de facto anchor at 31% and must not stay that way.",
+    "structural": "every other gate green: walk-ins, brakes, needs, wardrobe, guidance, meter ceiling, spent-day doors, speakers, dialogue ratio, locked doors, start choice, arcs."
+  }
+}

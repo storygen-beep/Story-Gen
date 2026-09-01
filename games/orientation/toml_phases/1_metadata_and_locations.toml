@@ -1,0 +1,462 @@
+# =============================================================================
+# Orientation — 1_metadata_and_locations
+#
+# THE MAP — two_hub, rooted on the avenue.
+#
+#     the_avenue ──┬── her_room  (home base)
+#      (ROOT,      ├── the_kitchen
+#       exterior)  ├── the_bathroom
+#                  ├── the_back_bedroom
+#                  ├── wes_room
+#                  └── the_quad ──┬── the_pledge_house   ANCHOR
+#                    40 min, $2   ├── halloran_office
+#                                 └── the_counter
+#
+# ⚠️ CORRECTED AT BUILD. The board declared TWO roots joined by a travel canvas
+#    (the-map.md R3). The engine cannot express it: template_import.py:4287
+#    hard-fails a navigation_order entry whose entry_from is not that location, and
+#    gate 11 builds adjacency from entry_from + navigation_order ONLY — a
+#    canvas-only crossing would strand the_quad and its three children. The bridge
+#    is the travel COST on the_quad, which is the-map.md's own mechanism. two_hub
+#    is untouched: it is "two strong hubs joined by a commute" and says nothing
+#    about roots. Logged in v2_state.json decisions.
+#
+# ⚠️ navigation_order is FORWARD-ONLY: the children of this location, never the way
+#    back. The return link is implicit from entry_from.
+#
+# ⚠️ TRAVEL COST SITS ON THE BRIDGE, NOT ON EVERY ROOM. Only the_quad carries one.
+#    A premise that says "forty minutes away" while arriving costs nothing has
+#    written a fact the player never experiences.
+#
+# ⚠️ THERE IS NO [[needs]] TABLE. The importer reads no such key. The needs are
+#    [player.core_traits] + [player.trait_decay] plus the conditions that read them,
+#    and they are DECLARED in v2_state.json where gate 29 reads them.
+# =============================================================================
+
+[player]
+id           = "player"
+name         = "Josie"
+customizable = true
+player_description = "You have been in this house four hours. Nobody in it has a read on you yet."
+
+# ⚠️ ONE player field. The other two the design calls "fields" live on the NPCs as
+#    relationship_options, which is the axis the field actually uses — the player
+#    names the household and the kinship inside it.
+#    `id = "name"` is the one id the generator maps to $player.name; any other id
+#    writes $player.<id>. Read in prose as @player.
+#
+# ⚠️ Declaring this repoints the age gate at CustomizeCharacters (v2.py:1065,
+#    v2.py:9251). Its headings and button are HARD-CODED — the only text we own is
+#    player_description above. Seven of fifteen built games ship the default there,
+#    in a product voice, as the second thing a player reads.
+[[player.customization_fields]]
+id      = "name"
+type    = "text"
+label   = "What does the house call you?"
+default = "Josie"
+
+# ⚠️ SECTION form, not an inline table — a multi-line core_traits = { … } is a TOML
+#    parse error.
+[player.core_traits]
+# The three she climbs. Rungs at 5/15/30/50/70/90 and 10/25/45/65/85.
+nerve      = 0
+appetite   = 0
+reputation = 0
+
+# The counterweight. Starts FULL and falls — above 60 Ray will not move.
+home_face  = 100
+
+# The body. Three, each shutting a real door.
+rest       = 100
+clean      = 100
+fed        = 100
+
+# ⚠️ QUANTITIES, NOT 0-100 METERS. Every effect that writes either carries
+#    clamp = false, or the default clamp caps them at 100 and both the $120 dues
+#    and the 200-follower door become unreachable. Valid TOML, green build, dead game.
+money      = 45
+followers  = 0
+
+# ─── The clock on the body — [player.trait_decay] ────────────────────────────
+# ⚠️ Decay is a POSITIVE MAGNITUDE. The validator rejects a negative.
+[player.trait_decay]
+rest  = 12
+clean = 15
+fed   = 20
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE MAP
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[locations]]
+id                   = "the_avenue"
+name                 = "Avenue"
+description          = "Four houses, a shelter at the stop, and Ray's car in the drive with one wheel up on the kerb. The bus into campus is forty minutes and it goes when it goes. This is the street the house is on and everything on this side hangs off it."
+image                = "locations/the_avenue.jpg"
+image_search_queries = ["suburban street bus stop shelter morning", "residential avenue parked car bus stop"]
+navigation_order     = ["her_room", "the_kitchen", "the_bathroom", "the_back_bedroom", "wes_room", "the_quad"]
+
+[[locations]]
+id                   = "her_room"
+name                 = "Your Room"
+description          = "It was an office until Sunday. The shelves are still up and there is a bracket on the wall where a monitor arm used to be. Your bed is under them and your second case is not unpacked. You sleep here and you dress here."
+image                = "locations/her_room.jpg"
+image_search_queries = ["small bedroom converted office shelves single bed", "teen girl bedroom moving boxes shelves"]
+entry_from           = "the_avenue"
+
+[[locations]]
+id                   = "the_kitchen"
+name                 = "Kitchen"
+description          = "Where this house eats and where it argues. Your mother is in it until nine on the nights she works and Ray is in it from ten, and those two facts do not overlap. There is food, and after ten there is nobody else."
+image                = "locations/the_kitchen.jpg"
+image_search_queries = ["family kitchen night overhead light table", "suburban kitchen dark evening table two chairs"]
+entry_from           = "the_avenue"
+
+[[locations]]
+id                   = "the_bathroom"
+name                 = "Bathroom"
+description          = "One bathroom, four people, and a bolt that works. This is where you wash and it is where you decide about the bolt, and @wes is behind that door every morning before seven."
+image                = "locations/the_bathroom.jpg"
+image_search_queries = ["small family bathroom shower door mirror", "narrow bathroom sink mirror morning light"]
+entry_from           = "the_avenue"
+
+[[locations]]
+id                   = "the_back_bedroom"
+name                 = "Ray's Room"
+description          = "The room at the back of the house where your mother and @ray sleep, and where he is on his own from one in the morning on the nights she works. You have walked past this door every day since you got here."
+image                = "locations/the_back_bedroom.jpg"
+image_search_queries = ["dark bedroom doorway hallway night", "master bedroom door ajar dark corridor"]
+entry_from           = "the_avenue"
+
+[[locations]]
+id                   = "wes_room"
+name                 = "Wes's Room"
+description          = "@wes never moved out. He is a junior and he still sleeps twelve feet from the bathroom, and the door is usually open, which is a fact about him rather than about the door."
+image                = "locations/wes_room.jpg"
+image_search_queries = ["college guy bedroom messy desk laptop", "young man bedroom open door bed desk"]
+entry_from           = "the_avenue"
+
+# ─── THE BRIDGE ──────────────────────────────────────────────────────────────
+# ⚠️ The commute, priced. Forty minutes and two dollars, every crossing. This is
+#    the ONLY location in the game carrying a travel cost, and it is what makes
+#    being in two places stop being free — which is the entire point of having
+#    authored a schedule grid. The other way across is a ride from @wes or @ray:
+#    fifteen minutes, no fare, and you have to ask.
+[[locations]]
+id                   = "the_quad"
+name                 = "Quad"
+description          = "Open ground with the lecture buildings on three sides and the row of houses along the east edge. The eight o'clock is in the hall behind you and two hundred people go to it. This is where campus starts and where you can see the rest of the row from."
+image                = "locations/the_quad.jpg"
+image_search_queries = ["college campus quad students walking daytime", "university green lawn buildings students"]
+entry_from           = "the_avenue"
+costs                = { time = 40, money = 2 }
+navigation_order     = ["the_pledge_house", "halloran_office", "the_counter"]
+
+[[locations]]
+id                   = "the_pledge_house"
+name                 = "Pledge House"
+description          = "Third house along the row. Twelve girls live in it, Simone runs it, and there is a book on the table inside the door that everybody signs and nobody reads. Downstairs is where you get taken in. Upstairs on a Thursday is what you get taken in for."
+image                = "locations/the_pledge_house.jpg"
+image_search_queries = ["sorority house exterior porch evening", "college house party living room night"]
+entry_from           = "the_quad"
+
+[[locations]]
+id                   = "halloran_office"
+name                 = "Halloran's Office"
+description          = "Third floor, at the end, and the department empties at five. He holds office hours here for whoever turns up, which is how you get a grade changed and how you get a key. The last hour is the only hour anybody is up here."
+image                = "locations/halloran_office.jpg"
+image_search_queries = ["university professor office bookshelves desk", "academic office door corridor evening"]
+entry_from           = "the_quad"
+
+[[locations]]
+id                   = "the_counter"
+name                 = "Counter"
+description          = "The coffee counter on the ground floor of the union building. This is where your money comes from — six shifts a week if you can take them — and there is a stockroom behind it with a door that closes."
+image                = "locations/the_counter.jpg"
+image_search_queries = ["campus coffee counter cafe interior students", "small cafe service counter espresso machine"]
+entry_from           = "the_quad"
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE CAST — five, and each owns a different corner of the world
+# ═════════════════════════════════════════════════════════════════════════════
+# ⚠️ ORDERING TRAP: [[npcs.schedules]] binds to the [[npcs]] block ABOVE it.
+#    Inserting a new character between an existing one and its schedules silently
+#    re-parents them.
+#
+# ⚠️ 0 = MONDAY, 6 = Sunday (v2.py:3906, SHORT = ["Mon"…"Sun"]). An empty or
+#    seven-long list means every day.
+#
+# ⚠️ A DAY-SPECIFIC OVERNIGHT WINDOW NEEDS TWO ROWS. The weekday check runs FIRST
+#    and against TODAY (v2.py:3596), then the time check (v2.py:3597).
+#    isCurrentTimeSlot handles the midnight wrap fine — but a day-specific row puts
+#    the character on site and DELETES them at midnight, because todayIndex has
+#    moved on. An ALL-DAYS row would legitimately be one. Two characters here are
+#    split for exactly this reason: @ray's kitchen and Simone's party window.
+#
+# ⚠️ ONE WILLINGNESS WORD FOR THE WHOLE CAST — `relation`, same scale on everyone.
+#    People are differentiated by what modifies it, never by different vocabularies.
+#    The rich pair (+ lust) goes to @ray and Simone ONLY: the two arcs that carry
+#    the game. Field median is 3 rungs per person; the 8-17 figure is the PLAYER's
+#    ascent meter and does not transfer to the cast.
+
+# ─── @ray — the house, the money, the car ────────────────────────────────────
+# ⚠️ customizable = true ALSO renders a name textbox (v2.py:9294), unconditionally.
+#    So he is player-renameable and EVERY line of prose about him uses @ray.
+[[npcs]]
+id           = "npc_ray"
+name         = "Ray"
+# ⚠️ `relationship` ON A CUSTOMIZABLE NPC IS THE DEFAULT SELECTED OPTION, NOT PROSE.
+#    It must be a member of relationship_options or the importer hard-fails:
+#    "default relationship '<x>' not in relationship_options". Prose belongs in
+#    description. Cost one build.
+relationship = "stepfather"
+description  = "Your mother married him in June and the house came with him. Forty-six. Owns the house, pays the tuition, and has not once said so out loud. He was on his own in it for a long time before your mother and he has not finished being surprised that anyone is in the kitchen at night."
+portrait     = "ray.jpg"
+customizable = true
+relationship_options = ["stepfather", "mom's husband", "father", "uncle"]
+core_traits  = { relation = 0, lust = 0 }
+flag_keys    = ["met_ray"]
+arc_stages   = ["The man who owns it", "Up when you are up", "Owing him", "Not pretending"]
+
+[[npcs.schedules]]
+location   = "the_avenue"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "08:00"
+end_time   = "08:30"
+activity   = "putting the case in the car and not in a hurry about it"
+
+[[npcs.schedules]]
+location   = "the_avenue"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "18:00"
+end_time   = "18:30"
+activity   = "back, sitting in the car for a minute before he comes in"
+
+# The kitchen window — Sun-Thu, because Dee is on nights those days. SPLIT IN TWO.
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [6, 0, 1, 2, 3]
+start_time = "22:00"
+end_time   = "23:59"
+activity   = "up on his own with the radio down low"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "00:00"
+end_time   = "01:00"
+activity   = "still up, and not going to bed while you are down here"
+
+# ─── Dee — the shift, the rules, the reason it costs ─────────────────────────
+[[npcs]]
+id           = "npc_dee"
+name         = "Dee"
+relationship = "Your mother."
+description  = "Forty-three, agency nights at the county hospital, ten to six. She married the house and she is grateful for it in a way she says out loud too often. She is the reason every hour you spend in that kitchen after ten costs something."
+portrait      = "dee.jpg"
+core_traits  = { relation = 0 }
+flag_keys    = ["met_dee"]
+arc_stages   = ["Your mother", "Asking properly"]
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [6, 0, 1, 2, 3]
+start_time = "17:00"
+end_time   = "21:00"
+activity   = "eating standing up with her keys already in her hand"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [4, 5]
+start_time = "09:00"
+end_time   = "13:00"
+activity   = "home, awake, and in the middle of everything"
+
+# ─── @wes — the ride, the bathroom, the campus he already knows ──────────────
+[[npcs]]
+id           = "npc_wes"
+name         = "Wes"
+relationship = "stepbrother"
+description  = "@ray's son, a junior at the college you start tomorrow. Twenty, never moved out, and already inside every room you are trying to get into. He is the only person who sees both halves of your life and he has not decided what to do with that yet."
+portrait     = "wes.jpg"
+customizable = true
+relationship_options = ["stepbrother", "half-brother", "brother", "cousin"]
+core_traits  = { relation = 0 }
+flag_keys    = ["met_wes"]
+arc_stages   = ["His house", "The ride", "The door open"]
+
+# ⚠️ 06:40-07:10 and 07:15-07:50 DO NOT OVERLAP. An earlier draft had the bathroom
+#    at 07:00-08:00 against an avenue row at 07:10-07:45 — thirty-five minutes in
+#    two rooms. Caught by reading the person sheet against the opening sheet, which
+#    is the only place a cross-room conflict is visible.
+[[npcs.schedules]]
+location   = "the_bathroom"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "06:40"
+end_time   = "07:10"
+activity   = "in there with the door not quite shut"
+
+[[npcs.schedules]]
+location   = "the_avenue"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "07:15"
+end_time   = "07:50"
+activity   = "car running, one arm on the roof, not waiting long"
+
+[[npcs.schedules]]
+location   = "wes_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time   = "23:00"
+activity   = "door open, headphones half off"
+
+# ─── Simone — the ladder, the girls, the party, THE DUES ─────────────────────
+[[npcs]]
+id           = "npc_simone"
+name         = "Simone"
+relationship = "The senior who runs the pledge house."
+description  = "Twenty-two, final year, and she runs that house the way somebody runs a business they intend to leave in good order. She decides who you get to be on this campus and she will tell you so to your face. She is also the one who counts your money on a Friday."
+portrait     = "simone.jpg"
+core_traits  = { relation = 0, lust = 0 }
+flag_keys    = ["met_simone"]
+arc_stages   = ["The book by the door", "One of the twelve", "One of the four", "Hers"]
+
+[[npcs.schedules]]
+location   = "the_pledge_house"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "16:00"
+end_time   = "19:00"
+activity   = "in the office with the book, and on Friday with the tin as well"
+
+# The party window — Thu/Fri/Sat. SPLIT IN TWO for the same reason as @ray's.
+[[npcs.schedules]]
+location   = "the_pledge_house"
+weekdays   = [3, 4, 5]
+start_time = "21:00"
+end_time   = "23:59"
+activity   = "downstairs, deciding who goes up"
+
+[[npcs.schedules]]
+location   = "the_pledge_house"
+weekdays   = [4, 5, 6]
+start_time = "00:00"
+end_time   = "02:00"
+activity   = "still up, and past caring who sees"
+
+# ─── Halloran — grades, the department, office hours ─────────────────────────
+[[npcs]]
+id           = "npc_halloran"
+name         = "Halloran"
+relationship = "He teaches the eight o'clock."
+description  = "Fifties, tenured, and bored in a way he has stopped hiding. Two hundred people take his eight o'clock and he holds office hours for whoever turns up, which is almost nobody. He is the only man here whose approval is worth anything on paper."
+portrait     = "halloran.jpg"
+core_traits  = { relation = 0 }
+flag_keys    = ["met_halloran"]
+arc_stages   = ["The man at the front", "Office hours", "After five"]
+
+[[npcs.schedules]]
+location   = "the_quad"
+weekdays   = [0, 2, 4]
+start_time = "08:00"
+end_time   = "09:30"
+activity   = "coming across from the car park with the roll under his arm"
+
+[[npcs.schedules]]
+location   = "halloran_office"
+weekdays   = [0, 2, 4]
+start_time = "16:00"
+end_time   = "18:00"
+activity   = "door open, marking, and the corridor going quiet around him"
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE WARDROBE — [[clothing]]
+# ═════════════════════════════════════════════════════════════════════════════
+# ⚠️ `exposure` is a 0/1/2 scalar and worn_exposure takes the MAX across the outfit
+#    AND treats an empty core slot as bare. It is the only one of the four worn
+#    predicates that reads an empty slot, which is what makes it the right one for a
+#    rung. beauty and corruption cannot tell naked from plainly dressed.
+#
+# ⚠️ A GARMENT IS A RUNG. Simone's step 5 asks her to do nothing at all — it asks her
+#    to WEAR something, and the arc will not pass until she does. And clothing also
+#    moves the FLOOR of the ambient roll: same scenes, twice as much world.
+#
+# ⚠️ WHAT MONEY BUYS OPENS A DOOR. The dress is bought and READ — money buys the KEY
+#    to a rung, never a meter point.
+
+[[clothing]]
+id      = "plain_bra"
+name    = "Plain bra"
+slot    = "bra"
+image   = "clothing/plain_bra.jpg"
+initial = true
+beauty  = 1
+corruption = 0
+exposure = 0
+
+[[clothing]]
+id      = "plain_briefs"
+name    = "Plain briefs"
+slot    = "underwear"
+image   = "clothing/plain_briefs.jpg"
+initial = true
+beauty  = 1
+corruption = 0
+exposure = 0
+
+[[clothing]]
+id      = "school_tshirt"
+name    = "The grey t-shirt"
+slot    = "top"
+image   = "clothing/school_tshirt.jpg"
+initial = true
+beauty  = 1
+corruption = 0
+exposure = 0
+
+[[clothing]]
+id      = "old_jeans"
+name    = "Your jeans"
+slot    = "bottom"
+image   = "clothing/old_jeans.jpg"
+initial = true
+beauty  = 1
+corruption = 0
+exposure = 0
+
+[[clothing]]
+id      = "trainers"
+name    = "Trainers"
+slot    = "shoes"
+image   = "clothing/trainers.jpg"
+initial = true
+beauty  = 1
+corruption = 0
+exposure = 0
+
+# ── bought on the quad, read by Simone's step 5 and by the ambient roll ──────
+[[clothing]]
+id      = "row_dress"
+name    = "The dress the row wears"
+slot    = "dress"
+image   = "clothing/row_dress.jpg"
+initial = false
+price   = 60
+beauty  = 3
+corruption = 2
+exposure = 1
+type    = "going_out"
+
+[[clothing]]
+id      = "black_set"
+name    = "The set you did not buy for yourself"
+slot    = "bra"
+image   = "clothing/black_set.jpg"
+initial = false
+price   = 35
+beauty  = 3
+corruption = 2
+exposure = 1
+type    = "going_out"

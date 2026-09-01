@@ -1,0 +1,259 @@
+# =============================================================================
+# Orientation — 2_one_shots · THE OPENING, and the two meetings that are not in it
+#
+# Seven screens from the age gate to the first open door. Two of the seven are the
+# engine's and are not in this file:
+#
+#   screen 0   Start                 title card + age gate
+#   screen 1   CustomizeCharacters   her name + what @ray and @wes are to her
+#
+# The five below are ours, one canvas, five nodes, in order. STAGED OPEN — three
+# people enter one at a time, each described, each SPEAKING, each stating what
+# they want. Committed to; not a cold open, and not the middle, which is the defect.
+#
+# ⚠️ THE OPENING REFUSES NOTHING. No locked row, no greyed choice, nothing gated in
+#    screens 2-6. The first refusal the player meets is on day one and it carries
+#    its reason. The dues are ARMED here and not charged until income exists.
+#
+# ⚠️ THE CLOCK. 19:00 Sunday + 15 + 20 + 15 + 10 = 20:00, then the handover carries
+#    680 minutes to 07:20 MONDAY. Monday because Halloran teaches [0,2,4] — handing
+#    over on a Tuesday would be a first day of college with no class.
+#
+# Prose is from sheets/OPENING.md. It was reviewed there.
+# =============================================================================
+
+[[canvases]]
+id          = "canvas_arrival_night"
+name        = "The night you got here"
+description = "The starting canvas. Five screens: @ray on the step, Dee going out the door, @wes in the doorway, the question he asks, and the alarm. Hands over to the avenue at 07:20 Monday."
+
+[canvases.trigger]
+location      = "the_avenue"
+is_repeatable = false
+priority      = 100
+is_active     = true
+
+# ─── screen 2 — @ray ─────────────────────────────────────────────────────────
+[[canvases.nodes]]
+id   = "base"
+name = "The man on the step"
+blocks = [
+  { type = "paragraph", content = "The car is still ticking. Two cases, and one of them has the handle that does not come up any more. Your mother married @ray in June and you have seen this house twice, both times in daylight, both times for about an hour." },
+  { type = "paragraph", content = "He comes down off the step and takes the heavy one before you have asked. He is bigger than you remember and he does not make anything of it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "Right. Your room is the one that was the office. I got the shelves down off one wall and then I ran out of Sunday." },
+  { type = "paragraph", content = "He waits, holding your case, until you say something back. That is the thing about him you will not work out for another month: he wants this to go well, and he has put the cost of it on you." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Let him take the heavy one."
+targetType               = "node"
+nodeId                   = "kitchen"
+time_progression_minutes = 15
+
+# ─── screen 3 — Dee ──────────────────────────────────────────────────────────
+[[canvases.nodes]]
+id   = "kitchen"
+name = "Your mother, going out the door"
+blocks = [
+  { type = "paragraph", content = "The kitchen smells of somebody else's cooking. Your mother is in scrubs with her keys already in her hand, because agency nights start at ten and she has been on them since August." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_dee" }, content = "There is a plate in the oven. I am back at six, and I am on again tomorrow, and the day after." },
+  { type = "paragraph", content = "She kisses the side of your head on her way past and stops in the doorway with one arm in her coat." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_dee" }, content = "Josie. Be good to him. He is paying for all of this and he has never once said it out loud, so I say it for him." },
+  { type = "paragraph", content = "Then the front door, and the car, and the house is three people and one of them is upstairs." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Tell her you're fine."
+targetType               = "node"
+nodeId                   = "wes"
+time_progression_minutes = 20
+
+# ─── screen 4 — @wes ─────────────────────────────────────────────────────────
+[[canvases.nodes]]
+id   = "wes"
+name = "The one who was here first"
+blocks = [
+  { type = "paragraph", content = "@wes is in the doorway with a plate in one hand, already eating off it. Twenty, and he has the same way of standing his father has, which neither of them knows about." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_wes" }, content = "You start tomorrow. Eight o'clock, and Halloran does not care if you are there, but the roll does." },
+  { type = "paragraph", content = "He says it like a man handing over a set of keys to something he owns. Which he does. It is his campus and from tomorrow it is also yours, and he has not decided how he feels about that." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_wes" }, content = "Bathroom is the second door. There is one. You will work it out." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Ask which one's the bathroom."
+targetType               = "node"
+nodeId                   = "the_question"
+time_progression_minutes = 15
+
+# ─── screen 5 — THE START CHOICE ─────────────────────────────────────────────
+# ⚠️ A MEMORY, NOT A SLIDER. The scene is already asking it. No stat screen, and
+#    nothing is shown to the player as a number. Five read sites each, ADDITIVE
+#    ONLY: every original rung keeps its numbers and gains `<flag> is_false`.
+[[canvases.nodes]]
+id   = "the_question"
+name = "What you were"
+blocks = [
+  { type = "paragraph", content = "Your room was an office until Sunday. The shelves are still on one wall and there is a bracket where a monitor arm was, and your bed is under them. @wes leans in the doorway on his way past with the empty plate." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_wes" }, content = "So what were you. At your old school." },
+  { type = "paragraph", content = "He is not being kind and he is not being clever. He wants to know what is about to be walking around his campus with his surname attached to it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "\"I had a 4.0 and nobody to talk to.\""
+targetType               = "node"
+nodeId                   = "lights_out"
+time_progression_minutes = 10
+flagEffects = [ { targetType = "player", flag = "past_top", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "\"I was always with people two years older than me.\""
+targetType               = "node"
+nodeId                   = "lights_out"
+time_progression_minutes = 10
+flagEffects = [ { targetType = "player", flag = "past_crowd", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "\"Nobody there knew my name.\""
+targetType               = "node"
+nodeId                   = "lights_out"
+time_progression_minutes = 10
+flagEffects = [ { targetType = "player", flag = "past_nobody", op = "set" } ]
+
+# ─── screen 6 — the handover ─────────────────────────────────────────────────
+# ⚠️ THREE BANDS ON THE FLAG, then a NON-GROUP BLOCK, then nothing else. Adjacent
+#    [group] blocks merge into ONE if/elseif chain and first match wins
+#    (v2.py:14637) — the paragraph after them is the separator, deliberately.
+[[canvases.nodes]]
+id   = "lights_out"
+name = "The alarm"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "past_top", operator = "is_true" },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He makes a noise that is not quite a laugh and goes. You did have a 4.0. You also had a table you sat at on your own for two years, and you are not sad about leaving it, which is the part you have not said to anybody." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "past_crowd", operator = "is_true" },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He looks at you for a second longer than the answer needed. You did run with people two years older and you know exactly what that bought you and what it cost, and you have not decided yet which one you are here for." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "past_nobody", operator = "is_true" },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He shrugs and goes, and that is the whole of it. Nobody at that school knew your name and nobody here does either, and for the first time it occurs to you that the second one is a thing you get to spend." },
+  ] },
+  { type = "paragraph", content = "You set the alarm for six. The house makes noises you do not know yet. Somewhere after one you hear the front door, which is your mother home early or @ray going out, and you do not get up to find out which." },
+]
+
+# ⚠️ THE HANDOVER IS ALSO WHERE THE OPENING SETS ITS FLAGS. 680 minutes carries
+#    20:00 Sunday to 07:20 Monday, on the avenue, where the bus is live and @wes is
+#    there with the car from 07:15.
+[canvases.nodes.exit_block]
+type = "location"
+config = { locationId = "the_avenue", time_progression_minutes = 680, flagEffects = [
+  { targetType = "player", flag = "met_ray", op = "set" },
+  { targetType = "player", flag = "met_dee", op = "set" },
+  { targetType = "player", flag = "met_wes", op = "set" },
+  { targetType = "player", flag = "arrived", op = "set" },
+] }
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE TWO MEETINGS THAT ARE NOT IN THE FUNNEL
+# ═════════════════════════════════════════════════════════════════════════════
+# ⚠️ F5 — no character's portrait is live before a meeting has fired, and ONE FLAG
+#    NEVER OPENS THE WHOLE CAST. Five separate flags.
+#
+# ⚠️ EACH CARRIES trigger.schedules MATCHING THAT CHARACTER'S OWN HOURS.
+#    `requires_npc` does NOT gate the auto-fire path, so a meeting without a
+#    matching window plays to an empty room.
+#
+# ⚠️ F6 — a meeting is SMALL and somebody SPEAKS. F7 — role before name: the player
+#    is told what they are before they are told who.
+
+[[canvases]]
+id          = "meet_halloran"
+name        = "The man who teaches the eight o'clock"
+description = "Fires on the quad inside Halloran's own teaching window. One screen, he speaks, and it is the roll that introduces him."
+
+[canvases.trigger]
+location      = "the_quad"
+is_repeatable = false
+priority      = 60
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_halloran", operator = "is_false" },
+] }
+
+# Matches npc_halloran's own row 1 exactly — [0,2,4] 08:00-09:30.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "08:00"
+end_time   = "09:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The roll"
+blocks = [
+  { type = "paragraph", content = "Two hundred people and a room built for a hundred and sixty. The man at the front does not introduce himself, because the timetable did that, and he starts eleven minutes in without apologising for the eleven minutes." },
+  { type = "paragraph", content = "Afterwards he stands by the door with the roll under his arm while the room empties past him, and he stops you with two fingers on the sheet." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_halloran" }, content = "You are new and you are on my roll twice, which means somebody in the office has made you two people. Come to office hours and I will make you one again. Mondays, Wednesdays, Fridays, four until six." },
+  { type = "paragraph", content = "He is already looking at the next one behind you when he says it." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+config = { locationId = "the_quad", time_progression_minutes = 5, flagEffects = [
+  { targetType = "player", flag = "met_halloran", op = "set" },
+] }
+
+[[canvases]]
+id          = "meet_simone"
+name        = "The woman with the book"
+description = "Fires at the pledge house inside Simone's office window. One screen, she speaks, and signing the book is the first step of her arc."
+
+[canvases.trigger]
+location      = "the_pledge_house"
+is_repeatable = false
+priority      = 60
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_simone", operator = "is_false" },
+] }
+
+# Matches npc_simone's own row 1 exactly — [0,1,2,3,4] 16:00-19:00.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "16:00"
+end_time   = "19:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The book by the door"
+blocks = [
+  { type = "paragraph", content = "Third house along the row. There is a table inside the door with a book open on it and a pen on a string, and twelve names on the page in twelve different hands." },
+  { type = "paragraph", content = "The woman who comes out of the office does not ask what you want. She looks at you for about as long as it takes to price something." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_simone" }, content = "Sign it. Everybody signs it and nobody reads it, and that is the only part of this house that works like that." },
+  { type = "paragraph", content = "You write your name under the twelfth one. She reads it upside down, which people can do or cannot, and she can." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_simone" }, content = "Dues are Friday, in here, in cash. A hundred and twenty. I am Simone and I decide what you are in this house, and I will tell you when I have." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+config = { locationId = "the_pledge_house", time_progression_minutes = 20, flagEffects = [
+  { targetType = "player", flag = "met_simone", op = "set" },
+  { targetType = "player", flag = "simone_01", op = "set" },
+  { targetType = "player", flag = "dues_armed", op = "set" },
+] }
