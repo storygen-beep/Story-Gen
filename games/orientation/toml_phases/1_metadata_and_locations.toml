@@ -1,25 +1,30 @@
 # =============================================================================
 # Orientation — 1_metadata_and_locations
 #
-# THE MAP — two_hub, rooted on the avenue.
+# THE MAP — nested_zones, rooted on the avenue.
 #
-#     the_avenue ──┬── her_room  (home base)
-#      (ROOT,      ├── the_kitchen
-#       exterior)  ├── the_bathroom
-#                  ├── the_back_bedroom
-#                  ├── wes_room
-#                  └── the_quad ──┬── the_pledge_house   ANCHOR
+#     the_avenue ──┬── the_hall ──┬── her_room  (home base)
+#      (ROOT,      │              ├── the_kitchen
+#       exterior)  │              ├── the_bathroom
+#                  │              ├── the_back_bedroom
+#                  │              └── wes_room
+#                  └── the_quad ──┬── the_row ── the_pledge_house   ANCHOR
 #                    40 min, $2   ├── halloran_office
 #                                 └── the_counter
 #
-# ⚠️ CORRECTED AT BUILD. The board declared TWO roots joined by a travel canvas
-#    (the-map.md R3). The engine cannot express it: template_import.py:4287
-#    hard-fails a navigation_order entry whose entry_from is not that location, and
-#    gate 11 builds adjacency from entry_from + navigation_order ONLY — a
-#    canvas-only crossing would strand the_quad and its three children. The bridge
-#    is the travel COST on the_quad, which is the-map.md's own mechanism. two_hub
-#    is untouched: it is "two strong hubs joined by a commute" and says nothing
-#    about roots. Logged in v2_state.json decisions.
+# ⚠️ RESTRUCTURED 2026-09-02. This was two_hub with all five house rooms hanging
+#    off the STREET and the pledge house hanging off a lawn — the-map.md R3's own
+#    inverted-map failure ("the home contains a bit of world"), and R5's ("three
+#    uses of the same word is a place": the prose said landing 7x, stairs 6x,
+#    corridor 3x, and the map had none of them). the_hall and the_row are those
+#    words made into ground. Measured shape before: the avenue carried 2 things to
+#    do against 6 ways out; the field median for a place is 3 things and 1 way out
+#    (the-surfaces.md:151-156).
+#
+#    The archetype is now nested_zones — the-map.md:38's "default to beat", and a
+#    literal description of this premise ("a town or campus PLUS a home"). Still
+#    ONE root: depth is free (template_import.py validates existence, cycles and
+#    child-membership only), two roots are not. Logged in v2_state.json decisions.
 #
 # ⚠️ navigation_order is FORWARD-ONLY: the children of this location, never the way
 #    back. The return link is implicit from entry_from.
@@ -92,10 +97,64 @@ fed   = 20
 [[locations]]
 id                   = "the_avenue"
 name                 = "Avenue"
-description          = "Four houses, a shelter at the stop, and Ray's car in the drive with one wheel up on the kerb. The bus into campus is forty minutes and it goes when it goes. This is the street the house is on and everything on this side hangs off it."
+description          = "Four houses, a shelter at the stop, and Ray's car in the drive with one wheel up on the kerb. The bus into campus is forty minutes and it goes when it goes. This is the street the house is on, and the house is the one with the light on over the door."
 image                = "locations/the_avenue.jpg"
 image_search_queries = ["suburban street bus stop shelter morning", "residential avenue parked car bus stop"]
-navigation_order     = ["her_room", "the_kitchen", "the_bathroom", "the_back_bedroom", "wes_room", "the_quad"]
+navigation_order     = ["the_hall", "the_quad"]
+
+# ═══ THE HALL ═══ the-map.md R5. The prose named this room seven times before the
+# map contained it: "a landing that carries", "@wes is twelve feet that way",
+# "the landing light is on a timer". Every room of the house now hangs off it
+# instead of off the street.
+#
+# ⚠️ NOT is_container. A container SWALLOWS any canvas attached to it
+#    (engine.md:770-772) and would leave this permanently in gate 1's "declared
+#    locations with nothing placed" list — and unwarmable, which fails gate 5.
+#
+# ⚠️ NO [[npcs.schedules]] ROW HERE, DELIBERATELY. `the walk-in floor` (gate 30)
+#    qualifies any location holding BOTH a solo repeatable canvas AND a scheduled
+#    body, and then owes it a substitution rule. This room reports on the rooms
+#    NEXT to it, which does not qualify it.
+[[locations]]
+id                   = "the_hall"
+name                 = "Hall"
+description          = "The front door, the stairs, and the kitchen through the arch. Four doors off the landing at the top and one bathroom among them, and it carries every sound the house makes. You pass through this six times a day and it is where you find out who is in."
+image                = "locations/the_hall.jpg"
+image_search_queries = ["house hallway stairs front door interior", "narrow hall staircase landing evening light"]
+entry_from           = "the_avenue"
+navigation_order     = ["her_room", "the_kitchen", "the_bathroom", "the_back_bedroom", "wes_room"]
+
+# R6c — a hall is shared circulation and gets NO door. Occupancy is prose inside
+# the room, not a threshold in front of it.
+#
+# The variants are the house reporting itself. `npc_at_location` is cross-room
+# (v2.py:4368-4387), so a condition evaluated HERE can ask about the bathroom.
+# The destination cards already carry a portrait badge for whoever is scheduled
+# in that room right now (v2.py:20338) — this is the sentence that goes with it.
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_bathroom", npc_id = "npc_wes", operator = "is_present" },
+] }
+text = "The water is going in the bathroom and the door is shut, which between ten to seven and ten past is @wes and is not negotiable. The stairs are cold. Your mother's coat is gone off the hook."
+
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_kitchen", npc_id = "npc_ray", operator = "is_present" },
+  { type = "npc_at_location", location_id = "the_kitchen", npc_id = "npc_dee", operator = "is_absent" },
+] }
+text = "The kitchen light is on through the arch and the radio is down so low it is only a shape. One person makes that much noise and it is not your mother, because her car went at half nine."
+
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_kitchen", npc_id = "npc_dee", operator = "is_present" },
+] }
+text = "Your mother is in the kitchen with her keys already down somewhere she will not find them. The hall smells like the coat she wears to work. Four doors upstairs and all of them shut."
+
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "wes_room", npc_id = "npc_wes", operator = "is_present" },
+] }
+text = "The landing light has gone off on its timer and there is a line under @wes's door with something playing behind it. The rest of the house is dark all the way down to the front door."
 
 [[locations]]
 id                   = "her_room"
@@ -103,7 +162,7 @@ name                 = "Your Room"
 description          = "It was an office until Sunday. The shelves are still up and there is a bracket on the wall where a monitor arm used to be. Your bed is under them and your second case is not unpacked. You sleep here and you dress here."
 image                = "locations/her_room.jpg"
 image_search_queries = ["small bedroom converted office shelves single bed", "teen girl bedroom moving boxes shelves"]
-entry_from           = "the_avenue"
+entry_from           = "the_hall"
 
 [[locations]]
 id                   = "the_kitchen"
@@ -111,7 +170,7 @@ name                 = "Kitchen"
 description          = "Where this house eats and where it argues. Your mother is in it until nine on the nights she works and Ray is in it from ten, and those two facts do not overlap. There is food, and after ten there is nobody else."
 image                = "locations/the_kitchen.jpg"
 image_search_queries = ["family kitchen night overhead light table", "suburban kitchen dark evening table two chairs"]
-entry_from           = "the_avenue"
+entry_from           = "the_hall"
 
 [[locations]]
 id                   = "the_bathroom"
@@ -119,7 +178,7 @@ name                 = "Bathroom"
 description          = "One bathroom, four people, and a bolt that works. This is where you wash and it is where you decide about the bolt, and @wes is behind that door every morning before seven."
 image                = "locations/the_bathroom.jpg"
 image_search_queries = ["small family bathroom shower door mirror", "narrow bathroom sink mirror morning light"]
-entry_from           = "the_avenue"
+entry_from           = "the_hall"
 
 [[locations]]
 id                   = "the_back_bedroom"
@@ -127,7 +186,7 @@ name                 = "Ray's Room"
 description          = "The room at the back of the house where your mother and @ray sleep, and where he is on his own from one in the morning on the nights she works. You have walked past this door every day since you got here."
 image                = "locations/the_back_bedroom.jpg"
 image_search_queries = ["dark bedroom doorway hallway night", "master bedroom door ajar dark corridor"]
-entry_from           = "the_avenue"
+entry_from           = "the_hall"
 
 # ═══ THE DOOR ═══ the-map.md R6. This room belongs to a person and she is the visitor,
 # which is the whole test — not that somebody is sometimes in it. It is one of two doors
@@ -179,7 +238,7 @@ name                 = "Wes's Room"
 description          = "@wes never moved out. He is a junior and he still sleeps twelve feet from the bathroom, and the door is usually open, which is a fact about him rather than about the door."
 image                = "locations/wes_room.jpg"
 image_search_queries = ["college guy bedroom messy desk laptop", "young man bedroom open door bed desk"]
-entry_from           = "the_avenue"
+entry_from           = "the_hall"
 
 # ═══ THE OPEN DOOR ═══ the-map.md R6, and the ONE place this game departs from the
 # field on purpose. `become-someone` offers only *Knock* and entering is what knocking
@@ -226,12 +285,59 @@ goes_to    = { type = "enter" }
 [[locations]]
 id                   = "the_quad"
 name                 = "Quad"
-description          = "Open ground with the lecture buildings on three sides and the row of houses along the east edge. The eight o'clock is in the hall behind you and two hundred people go to it. This is where campus starts and where you can see the rest of the row from."
+description          = "Open ground with the lecture buildings on three sides and the row of houses along the east edge. The eight o'clock is in the theatre behind you and two hundred people go to it. This is where campus starts, and the row runs off it."
 image                = "locations/the_quad.jpg"
 image_search_queries = ["college campus quad students walking daytime", "university green lawn buildings students"]
 entry_from           = "the_avenue"
 costs                = { time = 40, money = 2 }
-navigation_order     = ["the_pledge_house", "halloran_office", "the_counter"]
+navigation_order     = ["the_row", "halloran_office", "the_counter"]
+
+# ═══ THE ROW ═══ This was `act_quad_row`: a canvas whose only content was its own
+# locked_text, whose unlocked choice returned the player to the quad after thirty
+# minutes with no effect, no flag and no destination. `gates.py` printed it as a
+# lint every build — "costs 30m and leaves nothing behind" — and it shipped anyway.
+# The row is a street in this game's own prose (17 sites, a sidebar band, an item
+# called row_dress). It is ground now.
+#
+# ⚠️ R4 NAMING RISK, ACCEPTED IN THE OPEN. the-map.md:180-183 killed "The Parade"
+#    for being a word a player cannot resolve off a button. "Row" is the same class.
+#    It survives because the game teaches it before this card exists — the meeting
+#    with Simone, the dress on the rail, the sidebar band — and because R4:189-191
+#    puts the load on the DESCRIPTION when the button cannot carry it. Hence the
+#    first clause below says eight houses.
+#
+# ⚠️ NOT gated. The seven she cannot get into are prose that BANDS on reputation,
+#    not seven stub locations and not a locked door onto an empty street. 0.1 ends
+#    on Ray's door (appetite 70) and Simone's landing, both of which have content
+#    behind them. Logged in DECISIONS.md A5 and the gate table.
+[[locations]]
+id                   = "the_row"
+name                 = "The Row"
+description          = "Eight houses along the east edge of the quad, porches all facing the same way, and you have been inside one of them. The other seven have their own books by their own doors and their own Fridays. Nobody stops you walking down it."
+image                = "locations/the_row.jpg"
+image_search_queries = ["sorority row houses street daytime", "college fraternity row houses porches"]
+entry_from           = "the_quad"
+navigation_order     = ["the_pledge_house"]
+
+# The street reporting how far she has got. This is where "Cross to the row"'s
+# locked_text went — it was the only real writing in that canvas.
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 85 },
+] }
+text = "Eight houses and you have been inside one. Two of the others have said your name to you on the path this week without being told it first, which is how it starts, and there is a Friday coming that you have not been asked to yet."
+
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 45 },
+] }
+text = "Eight houses and you have been inside one. You can walk down it and nobody stops you, and nobody opens a door either. They have heard of you now. Heard of is not the same as asked."
+
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 25 },
+] }
+text = "Eight houses and you have been inside one. The rest have their own books by their own doors. You know two names off this street and neither of them knows yours yet."
 
 [[locations]]
 id                   = "the_pledge_house"
@@ -239,7 +345,7 @@ name                 = "Pledge House"
 description          = "Third house along the row. Twelve girls live in it, Simone runs it, and there is a book on the table inside the door that everybody signs and nobody reads. Downstairs is where you get taken in. Upstairs on a Thursday is what you get taken in for."
 image                = "locations/the_pledge_house.jpg"
 image_search_queries = ["sorority house exterior porch evening", "college house party living room night"]
-entry_from           = "the_quad"
+entry_from           = "the_row"
 
 [[locations]]
 id                   = "halloran_office"

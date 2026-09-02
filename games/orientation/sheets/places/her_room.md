@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **id** | `her_room` · button `Your Room` — owned interior, possessive |
-| **ENTERED FROM** | `the_avenue` |
+| **ENTERED FROM** | `the_hall` |
 | **FILL** | 4,000 words |
 | **cycling pool** | no — this is a cold room by design, and the floor is 60% of locations carrying heat, not 100% |
 
@@ -16,7 +16,7 @@ monitor arm was. Her bed is against them.
 |---|---|
 | **Sleep** | needs — `rest`, to 07:00 |
 | **The wardrobe** | clothing — `[[clothing]]`, and the catalogue is a legitimately long screen |
-| **The phone** | phone — messaging and `flaunt` |
+| **Check your phone** | phone — messaging and `flaunt` |
 | **Lie there with the door shut** | ascent — `appetite`. Day-capped |
 
 ⚠️ **A catalogue is legitimately long, because its job is to list.** A place you return to every day
@@ -25,4 +25,4 @@ is not one. The wardrobe row opens a wardrobe; it does not put twelve garments o
 **BRAKE** — `Lie there`: `rest 8` + day-cap flag `alone_today`, **set on the choice**.
 
 ## Ways out
-`the_avenue`
+`the_hall`

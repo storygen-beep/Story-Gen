@@ -11,12 +11,14 @@
 # Rows per room, against a FIELD MEDIAN OF 3:
 #
 #   the_pledge_house   6   ANCHOR — six systems live here
-#   the_quad           4
+#   the_quad           3   (was 4; `act_quad_row` deleted — it went nowhere)
 #   the_kitchen        3   (+2 hubs)
 #   her_room           4
 #   the_bathroom       2   (+1 hub)
 #   the_counter        3
 #   the_avenue         3
+#   the_hall           1   the house reports itself; carries the reputation-free rest
+#   the_row            1   carries the reputation tier's only gate site
 #   the_back_bedroom   1   the door IS the content
 #   wes_room           1   (+1 hub)
 #
@@ -29,6 +31,74 @@
 #
 # ⚠️ money AND followers CARRY clamp = false EVERY TIME THEY ARE WRITTEN.
 # =============================================================================
+
+# ═══════════════════ THE HALL — who is in, and the one bathroom ══════════════
+
+# The hall's own row. The location's description_variants already report WHO is
+# behind which door; this is the surface where standing there is an action.
+#
+# ⚠️ THIS CANVAS IS LOAD-BEARING FOR GATE 5. `traversal heat` counts a location as
+#    hot when a REPEATABLE canvas there carries media whose pool_dir matches
+#    _t[45] (gates.py:4987, floor 60%). Adding the hall and the row without this
+#    takes the game 7/10 = 70% -> 7/12 = 58% and fails. With it: 8/12 = 67%.
+#
+# ⚠️ IT PAYS A NEED, NOT AN ASCENT TIER. The measured lesson from the corpus
+#    (zaras-school-life's park bench): the QUIET outcome restores energy and the
+#    LOUD one moves the climbing meter. Paying reputation for standing still is
+#    what turned `act_quad_wall` into a day-locked, capped dead button.
+[[canvases]]
+id          = "act_hall_landing"
+name        = "Wait on the landing"
+description = "The hall's act row. Four doors and one bathroom, and the wait is the content. Pays rest — a need, never a tier."
+
+[canvases.trigger]
+location      = "the_hall"
+is_repeatable = true
+is_active     = true
+priority      = 3
+
+[[canvases.nodes]]
+id   = "base"
+name = "Four doors and one bathroom"
+blocks = [
+  { type = "video", props = { pool_dir = "traffic/hall_landing_t4", pool = 4, description = "young woman waiting on a landing outside a bathroom, someone passing in a towel", search_queries = ["amateur hallway towel after shower home", "girl waiting outside bathroom door apartment real"] } },
+  # ⚠️ THE CONDITIONAL ARM IS NOT DECORATION. `lint · screen shape` counts a location
+  #    as never-moving unless one of R6's four mechanisms is on a CANVAS there — the
+  #    location's own description_variants do not count (gates.py:1165-1177 reads
+  #    `mech` off canvases). Without this group the hall shipped as the game's only
+  #    "renders identically on every visit" room.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "npc_at_location", location_id = "the_bathroom", npc_id = "npc_wes", operator = "is_present" },
+  ] } }, blocks = [
+    { type = "paragraph", content = "You sit on the third stair up with your things on your knees. The extractor is going and he is taking his time about it. Twenty minutes and the door goes and it is @wes, towel, steam off him, and he says morning and nothing else." },
+  ] },
+  { type = "group", blocks = [
+    { type = "block_pool", blocks = [
+      { type = "paragraph", content = "You wait on the landing where the carpet stops. The house does its noises — the boiler, a car outside, the fridge going on downstairs. Nobody comes out of anywhere. You are better for having sat down." },
+      { type = "paragraph", content = "You stand at the top with your hand on the rail. There is a strip of light under the back bedroom and the radio going under it, and it stops when the stair creaks, and then it starts again." },
+      { type = "paragraph", content = "You wait by the airing cupboard where it is warm. Your mother's coat is off the hook, which means the shift, which means the kitchen is empty until ten and then it is not." },
+      { type = "paragraph", content = "You sit on the third stair with the front door in front of you and nobody uses it for twenty minutes. Four doors up and all of them shut. This house is very good at having nobody in it." },
+    ] },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Wait it out. (20m)"
+targetType               = "location"
+locationId               = "the_hall"
+time_progression_minutes = 20
+effects = [
+  { targetType = "player", trait = "rest", op = "add", value = 4 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go on up. (2m)"
+targetType               = "location"
+locationId               = "the_hall"
+time_progression_minutes = 2
 
 # ═══════════════════ HER ROOM — sleep, dress, the phone ══════════════════════
 
@@ -61,7 +131,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text                     = "Sleep until the alarm."
+text                     = "Sleep until the alarm. (7h)"
 targetType               = "location"
 locationId               = "her_room"
 time_progression_minutes = 420
@@ -128,7 +198,7 @@ time_progression_minutes = 5
 
 [[canvases]]
 id          = "act_room_phone"
-name        = "The phone"
+name        = "Check your phone"
 description = "The phone's way in from the room. The app itself is the sidebar button; this is the in-fiction door to it."
 
 [canvases.trigger]
@@ -302,7 +372,7 @@ effects = [
 
 [[canvases]]
 id          = "act_avenue_shelter"
-name        = "Stand where the shelter isn't"
+name        = "Wait out by the road (15m)"
 description = "The reputation on-ramp on the house side. Clothing moves the odds — worn_exposure raises the floor of the roll."
 
 [canvases.trigger]
@@ -363,11 +433,85 @@ targetType               = "location"
 locationId               = "the_avenue"
 time_progression_minutes = 10
 
-# ═══════════════════ THE QUAD — work, money, and the door 0.1 ends on ════════
+# ═══════════════════ THE ROW — what reputation actually buys ═════════════════
+
+# ⚠️ THIS CANVAS CARRIES THE REPUTATION TIER. Deleting `act_quad_row` removed the
+#    game's ONLY `reputation >= 85` site, and gate `ascent tiers expand the world`
+#    immediately went red with reputation at 0 expand / 0 contract — a declared
+#    tier that gates nothing. A meter the player climbs has to BUY something.
+#
+#    The difference from the canvas this replaces: `act_quad_row` was a screen
+#    whose reward branch returned you to the quad with no effect, no flag and no
+#    destination. Here the street already exists and is walkable at any
+#    reputation; what 85 buys is being SPOKEN TO on it, and that sets a flag the
+#    0.2 arc reads. The wall being visible is not the reward — being known is.
+[[canvases]]
+id          = "act_row_walk"
+name        = "Walk the row (30m)"
+description = "The reputation tier's only gate site. Open at any level; what 85 buys is somebody using your name first."
+
+[canvases.trigger]
+location      = "the_row"
+is_repeatable = true
+is_active     = true
+priority      = 4
+
+[[canvases.nodes]]
+id   = "base"
+name = "Eight porches"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 85 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "You go the length of it slowly. Two porches have people on them and both of them stop talking as you come level and start again after, and the second one uses your name in the sentence, and they are not being quiet about it." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 45 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "You go the length of it and back. Somebody on the third porch lifts a hand at you without stopping what she is saying, which is more than last week, and a car goes past slowly enough that you notice." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "You go the length of it and nobody looks up. Eight porches, four with people on them, and the conversation does not change shape when you pass. You come back out onto the quad the way you went in." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Walk it. (30m)"
+targetType               = "location"
+locationId               = "the_row"
+time_progression_minutes = 30
+costs = [ { trait = "rest", value = 4 } ]
+
+# The tier's payoff. Visible from the first visit, locked with the number in it.
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stop when she says your name. (20m)"
+targetType               = "location"
+locationId               = "the_row"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 85 },
+] }
+show_when_locked = true
+locked_text      = "Nobody on this street says it first. They have to have heard it somewhere that is not you, and right now seven of those eight houses have not."
+flagEffects = [ { targetType = "player", flag = "row_knows_her", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "home_face", op = "add", value = -4 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Back to the quad. (2m)"
+targetType               = "location"
+locationId               = "the_row"
+time_progression_minutes = 2
+
+# ═══════════════════ THE QUAD — class, work and the shop ═════════════════════
 
 [[canvases]]
 id          = "act_quad_class"
-name        = "The eight o'clock"
+name        = "Sit through the eight o'clock"
 description = "Attendance. rest under 30 shuts it, and Halloran's whole ladder runs through it."
 
 [canvases.trigger]
@@ -395,7 +539,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text                     = "Sit through it."
+text                     = "Sit through it. (1h 30m)"
 targetType               = "location"
 locationId               = "the_quad"
 time_progression_minutes = 90
@@ -411,7 +555,7 @@ effects = [
 
 [[canvases]]
 id          = "act_quad_wall"
-name        = "Sit on the wall"
+name        = "Sit on the wall (30m)"
 description = "The reputation dispatcher. A7 — most visits produce NOTHING, the nothing is written five ways, and it returns something she wanted anyway."
 
 [canvases.trigger]
@@ -517,45 +661,6 @@ targetType               = "location"
 locationId               = "the_quad"
 time_progression_minutes = 5
 
-# ⚠️ THE DOOR 0.1 ENDS ON. Visible, locked, and it says the number.
-[[canvases]]
-id          = "act_quad_row"
-name        = "Cross to the row"
-description = "Every release ends on a visible locked door. This is 0.1's."
-
-[canvases.trigger]
-location      = "the_quad"
-is_repeatable = true
-is_active     = true
-priority      = 2
-
-[[canvases.nodes]]
-id   = "base"
-name = "Eight houses"
-blocks = [
-  { type = "paragraph", content = "There are eight houses along the east edge and you have been inside one of them. The others have their own books by their own doors and their own Fridays, and none of them knows your name yet." },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Walk down the row."
-targetType               = "location"
-locationId               = "the_quad"
-time_progression_minutes = 30
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 85 },
-] }
-show_when_locked = true
-locked_text      = "You can walk down it. Nobody would stop you, and nobody would open a door either. They have to have heard of you first, and right now seven of those eight houses have not."
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Go back."
-targetType               = "location"
-locationId               = "the_quad"
-time_progression_minutes = 2
-
 # ═══════════════════ THE COUNTER — the only money in the game ════════════════
 
 [[canvases]]
@@ -593,7 +698,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text                     = "Work the shift."
+text                     = "Work the shift. (6h)"
 targetType               = "location"
 locationId               = "the_counter"
 time_progression_minutes = 360
@@ -732,7 +837,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text                     = "Stay downstairs an hour."
+text                     = "Stay downstairs an hour. (1h)"
 targetType               = "location"
 locationId               = "the_pledge_house"
 time_progression_minutes = 60
@@ -809,7 +914,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text                     = "Put it back square and get out."
 targetType               = "location"
-locationId               = "the_avenue"
+locationId               = "the_hall"
 time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "searched_today", operator = "is_false" },
@@ -823,7 +928,7 @@ effects = [
 [[canvases.nodes.exit_block.choices]]
 text                     = "Leave it alone."
 targetType               = "location"
-locationId               = "the_avenue"
+locationId               = "the_hall"
 time_progression_minutes = 2
 
 
@@ -855,7 +960,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text                     = "Say you were looking for the spare charger."
 targetType               = "location"
-locationId               = "the_avenue"
+locationId               = "the_hall"
 time_progression_minutes = 10
 effects = [
   { targetType = "player", trait = "home_face", op = "add", value = 2, cap = 100 },
@@ -868,7 +973,7 @@ effects = [
 [[canvases.nodes.exit_block.choices]]
 text                     = "Don't bother."
 targetType               = "location"
-locationId               = "the_avenue"
+locationId               = "the_hall"
 time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 30 },

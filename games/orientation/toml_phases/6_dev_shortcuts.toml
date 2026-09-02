@@ -77,7 +77,7 @@ effects = [
 [[canvases.nodes.exit_block.choices]]
 text                     = "Go up."
 targetType               = "location"
-locationId               = "the_avenue"
+locationId               = "the_hall"
 time_progression_minutes = 5
 
 [[canvases]]
@@ -191,7 +191,7 @@ effects = [
 [[canvases.nodes.exit_block.choices]]
 text                     = "Leave him to it."
 targetType               = "location"
-locationId               = "the_avenue"
+locationId               = "the_hall"
 time_progression_minutes = 5
 
 [[canvases]]

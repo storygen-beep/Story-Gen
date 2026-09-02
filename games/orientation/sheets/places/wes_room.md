@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **id** | `wes_room` · button `Wes's Room` |
-| **ENTERED FROM** | `the_avenue` |
+| **ENTERED FROM** | `the_hall` |
 | **FILL** | 3,000 words |
 | **cycling pool** | yes — `sex/wes_room_t4`, pool 4 |
 
@@ -26,4 +26,4 @@ The door is usually open, which is a fact about him rather than about the door.
 which it skipped, with the reason; this is that entry.
 
 ## Ways out
-`the_avenue`
+`the_hall`

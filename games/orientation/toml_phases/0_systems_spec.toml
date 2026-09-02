@@ -301,16 +301,24 @@ when       = [ { type = "trait", subject = "player", trait = "reputation", op = 
 goals      = [ { type = "trait", subject = "player", trait = "reputation", op = "gte", value = 25, label = "Let the house know who you are" } ]
 ready_canvas = "act_quad_wall"
 
+# ⚠️ THE COMPASS POINTED AT A DEAD ACTIVITY. This card's goal is 85 and its
+#    ready_canvas was `act_quad_wall` — which grants reputation with `cap = 45`,
+#    so from 45 upward it pays exactly nothing while still costing 30 minutes.
+#    The card sent the player at the spent lever for the entire second half of
+#    the climb. gates.py already knew the answer and printed it every build:
+#    "`reputation` gates at 85 · cheapest rung act_pledge_upstairs +5 / 30 min".
+#    (The caps themselves are an M6 violation — the-meters.md:955, "never on an
+#    ascent tier" — and are queued behind this change, not fixed here.)
 [[quest_cards]]
 group      = "reputation"
 priority   = 5
 text       = "There are eight houses on that row and you have been inside one of them."
-tip        = "Followers help. So does being upstairs on a Thursday."
+tip        = "Upstairs at the pledge house on a party night is the only thing that still moves this. The wall on the quad stopped paying at forty-five."
 when       = [ { type = "trait", subject = "player", trait = "reputation", op = "gte", value = 25 } ]
 goals      = [ { type = "trait", subject = "player", trait = "reputation", op = "gte", value = 85, label = "Be known on the row before you get there" } ]
-ready_canvas = "act_quad_wall"
+ready_canvas = "act_pledge_upstairs"
 terminal      = true
-terminal_text = "The rest of the row is 0.2. You can see it from the quad and it tells you the number."
+terminal_text = "The row is open ground and you can walk it whenever you like. Being spoken to on it is the number above. The other seven doors are 0.2."
 
 # ─── the cast ────────────────────────────────────────────────────────────────
 # ⚠️ F8 — the same flag gates the portrait AND the card, so a card never points at
@@ -343,7 +351,7 @@ ready_canvas = "hub_simone_office"
 npc_id     = "npc_wes"
 priority   = 2
 text       = "He was here first, on both sides of the bus route, and he has not decided what you are yet either."
-tip        = "The bathroom before seven, the avenue at quarter past, his room after seven at night."
+tip        = "The bathroom before seven, the avenue at quarter past on his way out, his room after seven at night."
 when       = [ { type = "flag", subject = "player", flag = "met_wes", op = "is_true" } ]
 goals      = [ { type = "flag", subject = "player", flag = "wes_room_open", op = "is_true", label = "Get past the doorway" } ]
 ready_canvas = "hub_wes_bathroom"
@@ -380,7 +388,7 @@ priority      = 13
 text          = "Thursdays, and Fridays if you want it. She stopped saying your name from the stairs and started taking your wrist on the way past."
 when          = [ { type = "flag", subject = "player", flag = "simone_open", op = "is_true" } ]
 terminal      = true
-terminal_text = "Upstairs on a party night, whenever you want it. The rest of the row is 0.2."
+terminal_text = "Upstairs on a party night, whenever you want it. The other seven doors on the row are 0.2."
 
 [[quest_cards]]
 npc_id        = "npc_wes"

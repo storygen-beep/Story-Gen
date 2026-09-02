@@ -44,7 +44,7 @@ What the household still believes about her. Starts at 100 and falls.
   **above 60, Ray will not move.** His arc steps 5–9 all carry `home_face lt 60`. Dee's questions at
   the kitchen table get sharper below 40.
 
-**Surfaces in:** `the_kitchen`, `the_back_bedroom`, `the_avenue`.
+**Surfaces in:** `the_kitchen`, `the_back_bedroom`, `the_hall` (the house reporting who is in), `the_avenue`.
 
 ⚠️ This is the wire between the two charges. Campus raises the three tiers; carrying it home spends
 this one; spending it is what opens the taboo. If it ever stops doing that, the two halves of the

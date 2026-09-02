@@ -23,8 +23,8 @@ every save in the wild**; the engine's migration seam repairs additions and noth
 below are the contract:
 
 ```
-the_avenue  the_quad  her_room  the_kitchen  the_bathroom  the_back_bedroom
-wes_room    the_pledge_house    halloran_office           the_counter
+the_avenue  the_hall  the_quad  the_row  her_room  the_kitchen  the_bathroom
+the_back_bedroom  wes_room  the_pledge_house  halloran_office  the_counter
 
 npc_ray  npc_wes  npc_dee  npc_simone  npc_halloran
 
@@ -45,24 +45,72 @@ eight prior v2 games are `written` and **no ledger records anyone choosing it.**
 **Cost, accepted:** no written past to gate on, so every early gate hangs on the start choice or on a
 meter. Her face is fixed by real-performer media either way — blank means we do not write her past.
 
-## A5 · The map is `two_hub`, rooted on `the_avenue`
+## A5 · The map is `nested_zones`, rooted on `the_avenue`
 `the_avenue` is the declared exterior and it is a **root** — no `entry_from`. Gate 28 fails a
 declared exterior that hangs off an interior room, and the measured failure stepped out of a kitchen
 straight into a row of shops. Nothing here does.
 
-⚠️ **CORRECTED AT BUILD, 2026-09-02.** This section declared **two** roots, per `the-map.md` R3's
-*"two grounds genuinely apart are two roots joined by a travel canvas."* **The engine cannot express
-that.** `template_import.py:4287` hard-fails a `navigation_order` entry whose `entry_from` is not
-that location, so two roots cannot be joined by nav at all; and gate 11 builds adjacency from
-`entry_from` + `navigation_order` only, so joining them by canvas exits would strand `the_quad` and
-its three children. Built as **one root** with `the_quad` hanging off it carrying
-`costs = { time = 40, money = 2 }` **on the location** — which is `the-map.md`'s own stated mechanism
-for travel friction on a bridge between zones. `two_hub` is unaffected: that archetype is *"two
-strong hubs joined by a commute"* and says nothing about roots.
+```
+the_avenue ──┬── the_hall ──┬── her_room  (home base)
+ (ROOT,      │              ├── the_kitchen
+  exterior)  │              ├── the_bathroom
+             │              ├── the_back_bedroom
+             │              └── wes_room
+             └── the_quad ──┬── the_row ── the_pledge_house   ANCHOR
+               40 min, $2   ├── halloran_office
+                            └── the_counter
+```
 
-⚠️ Five v2 games are `nested_zones` and the doctrine names it *the default to beat*. The premise is
-honestly two grounds, and **the crossing is a favour she has to ask a man for** — which makes the
-bridge a surface rather than a corridor.
+⚠️ **RESTRUCTURED 2026-09-02, from `two_hub`.** The first build declared `two_hub` and hung all five
+house rooms off **the street**, because the board wanted two roots and the engine refuses them
+(`template_import.py:4306` hard-fails a `navigation_order` entry whose `entry_from` is not that
+location). The workaround made `the_avenue` the root of the house as well as the road to campus, and
+that is `the-map.md` R3's own inverted map — *"the home contains a bit of world"*. **There was no
+house.** She walked out to the street to get from her bed to the bathroom, and the prose named a
+landing 7×, stairs 6× and a corridor 3× that the map did not contain (R5: *"three uses of the same
+word is a place"*).
+
+Measured against the 25-game mopoga corpus: the avenue carried **2 things to do against 6 ways out**,
+the quad 5 against 4, and every other room 1 way out. Field median for a place is **3 things to do
+and 1 way out** (`the-surfaces.md:151-156`, measured by playing five games).
+
+`nested_zones` is `the-map.md:38`'s *"default to beat"* and a literal description of this premise —
+*"a town or campus **plus** a home."* Depth is free: validation is existence, cycle-DFS and
+child-membership only, and `steam`, `vesper` and `the_inheritance` all ship depth 5. Two roots are
+still impossible, and are no longer wanted.
+
+The bridge is unchanged: `costs = { time = 40, money = 2 }` **on `the_quad` location**, which is
+`the-map.md`'s own mechanism for friction between zones. **The crossing is still a favour she can
+ask a man for instead of paying — and that canvas is still unbuilt.** See the open-debt note in
+`v2_state.json`.
+
+## A5b · `the_row` is open ground, and 0.1 ends on Ray's door
+`act_quad_row` — *"Cross to the row"* — was 0.1's declared locked door. It was a canvas whose only
+content was its own `locked_text`, gated at `reputation >= 85`, and whose reward branch sent the
+player back to `the_quad` after thirty minutes with **no effect, no flag and no destination**.
+`gates.py` printed it as a lint on every build — *"costs 30m and leaves nothing behind"* — and it
+shipped anyway. **Deleted.**
+
+The row is a street in this game's own prose (17 sites, the sidebar band *"The row knows who you
+are"*, an item called `row_dress`). It is ground now: walkable at any reputation, carrying the
+pledge house. The other seven houses are **reputation-banded prose on the location**, not seven stub
+locations and not a locked door onto an empty street — a player who grinds to 85 must not arrive at
+nothing, which was the original defect wearing a new costume.
+
+What 85 buys is `act_row_walk`'s gated exit: **being spoken to on that street first**, which sets
+`row_knows_her` for 0.2. That canvas also carries the reputation tier's **only** `gte` site —
+deleting `act_quad_row` took gate `ascent tiers expand the world` red with reputation at 0 expand /
+0 contract, because a declared tier that gates nothing is not a tier.
+
+**0.1 now ends on Ray's door** (`appetite >= 70`, `[locations.door]` on `the_back_bedroom`) and
+Simone's landing (`nerve >= 50`) — 19 shown-locked choices, all 19 carrying a reason, and both
+headline doors have authored content behind them.
+
+⚠️ **R4 naming risk, accepted in the open.** `the-map.md:180-183` killed **`The Parade`** for being a
+word a player cannot resolve off a button. *"The Row"* is the same class. It survives because the
+game teaches it before the card exists — the meeting with Simone, the dress on the rail, the sidebar
+band — and because R4 puts the load on the **location's own description** where the button cannot
+carry it. Its first clause says *eight houses* for that reason.
 
 ---
 
@@ -75,7 +123,7 @@ non-round, because a budget written afterwards is a description and **cannot fai
 
 | location | fill | anchor |
 |---|---|---|
-| `the_pledge_house` | **11,500** | ✅ **25.6%** |
+| `the_pledge_house` | **12,000** | ✅ **25.8%** |
 | `the_quad` | 5,000 | |
 | `the_kitchen` | 4,500 | |
 | `her_room` | 4,000 | |
@@ -85,9 +133,20 @@ non-round, because a budget written afterwards is a description and **cannot fai
 | `the_avenue` | 3,000 | |
 | `the_back_bedroom` | 3,000 | |
 | `wes_room` | 3,000 | |
+| `the_hall` | 600 | |
+| `the_row` | 400 | |
 
-**45,000 · mean 4,500 · median 3,750 · 10/10 round.** Clears gate 1's backstop
+**46,500 · 12/12 round.** Clears gate 1's backstop
 (`MEDIAN_LOCATION_WORDS = 3000`, `MEAN_LOCATION_WORDS = 4500`).
+
+⚠️ **The anchor was raised 11,500 → 12,000 by the same edit that added the two locations, and it
+had to be.** Gate 1's plan-anchor test is `max(fill) / sum(fill) >= 25.0` (`gates.py:4784-4790`).
+At 11,500 / 45,000 the anchor sat at 25.56% — **0.56 points of headroom**, so any new budget above
+1,000 words in total would have introduced a failure line that did not exist before: *"the PLAN has
+no centre."* This is `the-board.md:137-139` in practice — **budget the anchor against the FINISHED
+total, not the current one.** The two new rooms are small on purpose: a hall and a street are
+corridors with one row each, and `the-board.md:55-59` says a 300-word satellite is not a defect
+**provided you declared it as one**.
 
 ⚠️ **Why this large.** `night_desk` is the only other game built from sheets. It scores **39/40** and
 the one gate it fails is this one — 4,590 words, mean 656, **seven times too small.** Nothing about
@@ -184,7 +243,7 @@ and `the walk-in floor` is a **gate**, which failed 0/5. **A deferral is not a p
 | gate | where this design answers it |
 |---|---|
 | location fill | B1 — 45,000 over 10, declared round, before the prose |
-| the map is a place · residents have homes · world reachable | A5, B3 |
+| the map is a place · residents have homes · world reachable | A5, B3 — `nested_zones`, 12/12 reachable on foot from `the_avenue` |
 | standing surface | B2 — every character has ≥1 surface and ≥1 schedule row |
 | **the walk-in floor** | `the_bathroom`, `the_counter` back room, `the_kitchen`, `halloran_office`, `the_pledge_house` office — **all five authored, none deferred** |
 | the climb is paid for | every rung carries a price or a day-cap flag **set on the choice** |
@@ -192,7 +251,7 @@ and `the walk-in floor` is a **gate**, which failed 0/5. **A deferral is not a p
 | a meter is read · the wardrobe is read | `worn_exposure` on the ambient roll; `followers` at 200 |
 | she can say no | the two parked refusals, plus in-scene stops |
 | a locked door says why | every `show_when_locked` row carries the bar and the number |
-| ends on an opening | v0.1 closes on the row of houses, visible and locked at `reputation` 85 |
+| ends on an opening | A5b — v0.1 closes on **Ray's door** (`appetite` 70) and Simone's landing (`nerve` 50). It used to close on `act_quad_row`, which had nothing behind it. 19 shown-locked choices, 19 with a reason |
 | the start choice is read | `past_*`, 5 read sites each |
 | what she picks is read | `@player`, `@ray.rel`, `@wes.rel` |
 | every hub is met first · a meeting fires where they are | F5/F8 — one flag per character, `trigger.schedules` matching their own hours |
