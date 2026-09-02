@@ -2481,6 +2481,7 @@ dispatcher-only target.
 | `locations[].description` | `v2.py:9864` |
 | a location's `blocked_message` | `v2.py:9793` |
 | choice `text` | `v2.py:13256` |
+| `npcs[].role` — the label under the name | `v2.py:15272` (added 2026-09-02) |
 
 Every other author string is emitted verbatim. The ones that reach a player:
 
@@ -2490,6 +2491,14 @@ Every other author string is emitted verbatim. The ones that reach a player:
 | `npcs[].description` | the CustomizeCharacters screen — `html.escape` only, `v2.py:9312`. This is the game's **first** screen |
 | `quest_cards[].tip` · `.ready_text` · `.terminal_text` | the guidance page |
 | `canvases[].description` | dev surfaces only (`CanvasReview_*`, the `--debug` canvas banner) |
+
+⚠️ **`npcs[].role` was static until 2026-09-02 and that was wrong for the case it matters most in.**
+A `customizable` NPC with `relationship_options` is one the PLAYER decides the relation for, so the
+label under their name has to be theirs: `role = "@<npc>.rel"` prints the option they picked and
+follows a change. It shipped static, and the game with two renameable characters consequently
+labelled a stepfather *"owns the house"*. Escape first, then resolve — `html.escape` touches no
+character the token regex reads, so author markup is still neutralised and the macro comes through
+live. `the-first-hour.md` F10.
 
 **The rule: a token belongs in prose. Anywhere else, write the role.** `"His son"` and
 `"Sit with him"` survive a rename; `"@ray's son"` and `"Sit with @ray"` print the token.

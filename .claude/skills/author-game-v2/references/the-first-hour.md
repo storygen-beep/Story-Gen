@@ -995,7 +995,26 @@ would notice five people labelled `husband`. Empty renders no line at all, which
 ⚠️ **`role` is not a swap for the name.** `destroyer` replaces the name with the relation
 (`<<speech "teagan" "Stepsister">>`) and is the only game of 26 that does — it survives on having
 exactly one of each relation. Swapping does not remove the memory tax, it moves it: the player now
-has to remember who "Stepsister" is. Both, at the point of use.
+has to remember who "Stepsister" is.
+
+> ### ⚠️ For a renameable character the label is the PLAYER'S, and `role` takes an @-token
+>
+> `[[npcs]] customizable = true` with `relationship_options` renders a listbox: the player decides
+> whether this man is her stepfather, her father or her uncle. **Write `role = "@<npc>.rel"`.** It
+> resolves to `<<print $npcs["…"].relationship>>` (`engine.md` §43), so the box prints the option
+> they picked and follows it if they change it.
+>
+> **Measured failure, and it was this file's own advice.** `role` shipped 2026-08-27 as static text.
+> `orientation` has two renameable characters, and the guidance written for it said to *"name what
+> does not change"* — so the label under Ray read **`owns the house`** where the player had chosen
+> *stepfather*. LO's words: *"It should show like stepfather stepbro."* Correct. The label exists to
+> say what he is to her, and that is the one thing the picker already knows. The generator now
+> resolves tokens in this field (escape first, then resolve), and the lint
+> `the label under the name` flags a hard-coded label on any character the player can rename.
+>
+> A **fixed** character still takes a plain string — `mother`, `the eight o'clock` — and a
+> `relationship` written as a sentence (*"Your mother."*) must not be tokenised into the label,
+> because the label carries a colon in CSS and a full stop lands in front of it. Both, at the point of use.
 
 ---
 

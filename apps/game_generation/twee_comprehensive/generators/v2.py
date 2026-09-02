@@ -15264,10 +15264,21 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         # `dlg-inline` is the no-role case, where the name must not take a
                         # row of its own. The colon itself is added in CSS, so the role text
                         # stays clean for anything that reads it.
+                        #
+                        # 2026-09-02 — `role` RESOLVES @-TOKENS. It shipped as static text,
+                        # which is wrong for the case the label matters most in: a
+                        # `customizable` NPC with `relationship_options` is one the PLAYER
+                        # decides the relation for, and a hard-coded label either contradicts
+                        # the pick or has to dodge it. `role = "@ray.rel"` prints what they
+                        # chose — stepfather / father / uncle — and changes when they change
+                        # it. Escape FIRST, then resolve: html.escape touches no character
+                        # the token regex reads, so author markup is still neutralised while
+                        # the macro comes through live.
                         if npc_role:
                             name_html = f'<strong>{speaker_html}</strong>'
                             role_html = (
-                                f'<span class="dialog-role">{html.escape(npc_role)}</span>')
+                                f'<span class="dialog-role">'
+                                f'{self._resolve_at_references(html.escape(npc_role))}</span>')
                         else:
                             name_html = f'<strong class="dlg-inline">{speaker_html}</strong>'
                             role_html = ''

@@ -3705,12 +3705,20 @@ def lint_role_label(game):
             rel = " ".join(str(n.get("relationship") or "").split())[:44]
             rows.append(f"{n.get('id')}: no role — the dialogue box prints the bare name"
                         + (f" (relationship: \"{rel}\")" if rel else ""))
-    # a label that cannot survive the player's own choice is worse than none
+    # ⚠️ A RENAMEABLE CHARACTER'S LABEL BELONGS TO THE PLAYER. `relationship_options`
+    # renders a listbox: the player decides whether this man is her stepfather, her
+    # father or her uncle. A hard-coded label there either contradicts the pick or has
+    # to dodge it — the first version of this game answered "owns the house" to avoid
+    # the problem, which is not what the box is for. `role = "@<npc>.rel"` prints the
+    # pick and follows it when they change it (engine.md §43).
     for n in have:
         if n.get("customizable") and (n.get("relationship_options") or []):
-            rows.append(f"{n.get('id')}: role \"{n['role'].strip()}\" — renameable with "
-                        f"{len(n['relationship_options'])} relationship options; check the "
-                        f"label stays true under every one (`role` is static, no @-tokens)")
+            r = n["role"].strip()
+            if "@" not in r:
+                short = str(n.get("id", "")).replace("npc_", "")
+                rows.append(f"{n.get('id')}: role \"{r}\" is hard-coded, but the player picks "
+                            f"this relation from {len(n['relationship_options'])} options — "
+                            f"use `role = \"@{short}.rel\"` so the label says what they chose")
     return f"{len(have)}/{len(npcs)} characters carry a label under the name", sorted(rows)
 
 

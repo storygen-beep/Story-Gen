@@ -581,6 +581,10 @@
     {
       "at": "repair",
       "note": "2026-09-02 — `npcs[].role` was declared on zero of the five characters, so every dialogue box printed a bare name. The engine was fine (mrs_vance renders 174 labels); the field was simply never declared, here or in 16 of 17 games, because templates/board.toml carried neither `role` nor `relationship`. Authored: Ray `owns the house`, Dee `mother`, Wes `his son`, Simone `runs the pledge house`, Halloran `the eight o'clock`. Ray and Wes are renameable with a relationship picker and `role` is STATIC text with no @-token resolution, so neither label uses a kin word — what cannot change is what he owns and whose son the other one is. 65/65 dialogue blocks now carry a label."
+    },
+    {
+      "at": "repair",
+      "note": "2026-09-02 (same day, corrected) — the first role pass hard-coded Ray as `owns the house` and Wes as `his son`, on the reasoning that `role` was static text and a kin word could contradict the relationship picker. That inverts the point: the picker exists so the PLAYER decides what he is to her, and the label under his name is where that answer belongs. Engine changed to resolve @-tokens in `role` (v2.py:15272, escape then resolve); Ray is now `@ray.rel` and Wes `@wes.rel`, so the box prints the option chosen and follows a change. Dee/Simone/Halloran keep plain strings — Dee's relationship is a SENTENCE (\"Your mother.\") and the colon is CSS, so tokenising it would put a full stop before the colon."
     }
   ],
   "arc_log": {

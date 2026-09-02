@@ -5,6 +5,45 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-02 — `npcs[].role` resolves @-tokens: the label under a renameable name belongs to the player
+
+**`generators/v2.py`** (`:15272` — resolve, don't just escape) · **`references/the-first-hour.md`**
+(F10) · **`references/engine.md`** (§43) · **`templates/board.toml`** ·
+**`scripts/gates.py`** (the lint's renameable branch, inverted). LO, on the build shipped an hour
+earlier: *"It is showing own the house. What the fuck. It should show like stepfather stepbro."*
+
+**He is right, and the guidance he was given was mine and was wrong.** `role` shipped 2026-08-27 as
+static text. Reasoning from that, the note added to `board.toml` this morning told authors that for
+a `customizable` NPC the label *"must stay true under EVERY option"* and to *"name what does not
+change"* — so `orientation` labelled Ray **`owns the house`** while the player had picked
+*stepfather* from the listbox two screens earlier.
+
+**That inverts what the field is for.** `relationship_options` exists so the PLAYER decides what
+this man is to her. The label under his name is the one place that answer belongs, and the picker
+already holds it. Dodging it to keep a static string true is solving the wrong problem.
+
+**Fix, one line in the generator.** `role` now runs through `_resolve_at_references`, so
+`role = "@ray.rel"` emits `<<print $npcs["npc_ray"].relationship>>`. **Escape FIRST, then resolve** —
+`html.escape` touches no character the token regex reads, so author markup is still neutralised and
+the macro comes through live.
+
+**The lint's renameable branch was inverted with it.** It warned *"check the label stays true under
+every option"*; it now reports a hard-coded label on a renameable character as the defect and prints
+the exact fix (`role = "@<npc>.rel"`). Tested both directions against a synthetic cast: fires on
+`owns the house`, clears on `@ray.rel`.
+
+**`orientation`:** Ray and Wes now read the picker; Dee / Simone / Halloran keep plain strings
+(`mother` · `runs the pledge house` · `the eight o'clock`). ⚠️ A sentence-shaped `relationship`
+must NOT be tokenised into the label — Dee's is *"Your mother."* and the colon is added in CSS, so
+a full stop would land in front of it. Verified live at six points: default renders *stepfather* /
+*stepbrother*, and switching the runtime value to *uncle*, *mom's husband* or *cousin* changes the
+label with it.
+
+**Verified.** `--selfcheck` 47/47 · 36/36 · 133 rules, 0 broken pointers. **318 passed, 7 skipped**
+in `apps/game_generation/tests/`. `orientation` 45/46, 65/65 dialogue blocks labelled.
+
+---
+
 ## 2026-09-02 — `npcs[].role`: the third field in one day that was taught in a reference and absent from a template
 
 **`templates/board.toml`** (`relationship` + `role` added to `[[npcs]]`) ·

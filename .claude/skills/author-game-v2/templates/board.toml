@@ -302,10 +302,12 @@ portrait    = "<id>.jpg"
 #    Absent = no line at all, so a game that skips it just never shows the label.
 #    Author it, never derive it: five of one game's six `relationship` strings contain
 #    "husband", so a derived default would have labelled five people identically.
-#    ⚠️ `role` is STATIC text — no @-token resolution — so if this character is
-#    `customizable` with `relationship_options`, the label must stay true under EVERY
-#    option. Name what does not change (`owns the house`, `his son`, `the night shift`)
-#    rather than a kin word the player can overrule.
+#    ⚠️ IF THIS CHARACTER IS `customizable` WITH `relationship_options`, THE LABEL IS
+#    THE PLAYER'S, NOT YOURS: write `role = "@<npc>.rel"` and the box prints the option
+#    they picked — stepfather / father / uncle — and follows it if they change it.
+#    A hard-coded label there either contradicts the pick or dodges it; the first game
+#    to ship this field answered "owns the house" to sidestep the problem and the label
+#    stopped saying the one thing it exists to say.
 #    Repeat a relation word and the label carries what separates them:
 #      two brothers → elder brother · younger brother
 #      three sons   → husband's eldest · husband's middle son · husband's youngest

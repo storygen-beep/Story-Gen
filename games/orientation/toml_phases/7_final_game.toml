@@ -640,7 +640,9 @@ name         = "Ray"
 #    "default relationship '<x>' not in relationship_options". Prose belongs in
 #    description. Cost one build.
 relationship = "stepfather"
-role         = "owns the house"   # F10 — the label under the name in every dialogue box
+role         = "@ray.rel"   # F10 — the label under the name. The PLAYER'S pick from
+                            # relationship_options below: stepfather / mom's husband /
+                            # father / uncle. Never hard-code it for a renameable NPC.
 description  = "Your mother married him in June and the house came with him. Forty-six. Owns the house, pays the tuition, and has not once said so out loud. He was on his own in it for a long time before your mother and he has not finished being surprised that anyone is in the kitchen at night."
 portrait     = "ray.jpg"
 customizable = true
@@ -709,7 +711,8 @@ activity   = "home, awake, and in the middle of everything"
 id           = "npc_wes"
 name         = "Wes"
 relationship = "stepbrother"
-role         = "his son"   # F10 — the label under the name in every dialogue box
+role         = "@wes.rel"   # F10 — stepbrother / half-brother / brother / cousin,
+                            # whichever the player chose.
 description  = "The son of the man your mother married, a junior at the college you start tomorrow. Twenty, never moved out, and already inside every room you are trying to get into. He is the only person who sees both halves of your life and he has not decided what to do with that yet."
 portrait     = "wes.jpg"
 customizable = true
