@@ -97,6 +97,11 @@ usually **no**: a door is a handful per game and it belongs to a person's home, 
 takes occupancy-gated rows instead (R6c). A sheet that never asks the question gets the default by
 accident, which is how Ray's Room shipped a threshold with nothing behind it.
 
+**And every row says whether it lands on a SCREEN** — added 2026-09-02, `the-surfaces.md` R9. A row
+that changes her and shows nothing resolves the act into a 2-second toast; the sheet is where that is
+cheap to catch, because the answer is one column and the alternative is finding it in the build. A
+*work* row may resolve to a toast. A row aimed at a person, or at her own body, may not.
+
 **It also carries a `LABELS` row** — what kind of place this is, from the menu in `the-systems.md`
 SY3, and **every row on the sheet names the system it belongs to.** Added 2026-09-02. A sheet whose
 rows name no system is the thing to catch here, and it is catchable at design time for the price of

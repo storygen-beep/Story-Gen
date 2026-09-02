@@ -2591,3 +2591,35 @@ unreachable.
 before the generator sees it, and a door option is not yet one of the references that closure walks.
 Such an option is **dropped rather than left pointing nowhere**, with a `logger.warning` naming the
 option, the location and the canvas. The author fix is one line: give that canvas a trigger location.
+
+---
+
+## 45. The effect toast — what a choice's `effects` actually show the player
+
+Added 2026-09-02. **Nothing in this skill had ever written this down**, which is how doctrine came to
+teach a shape without knowing what it rendered as.
+
+Every `effects` / `flagEffects` / `costs` entry on a choice runs through
+`setup.applyAndNotifyTrait` / `applyAndNotifyFlag` (`v2.py:6090`, `:6126`), which pushes a line onto
+`setup.pendingEffects`. `setup.showEffectNotification()` (`v2.py:6204`) then renders **one green toast
+at the bottom of the screen** and removes it after **2000 ms** (`v2.py:6239`):
+
+```
++6 Ray's Relation • +3 Ray's Lust • +120 Money • -4 Home_face • 🔓 Ray owed
+```
+
+Three consequences, and the first is the one that matters:
+
+1. **This is the whole of the feedback for a `targetType = "location"` choice.** The link goes
+   straight to `Location_<slug>` (`v2.py:14090`), so the toast is not a *summary* of a screen the
+   player is about to read — it is instead of one. `the-surfaces.md` **R9** is the rule that follows
+   from this fact.
+2. **Costs notify too.** A per-choice `costs` entry is emitted as a negative `applyAndNotifyTrait`
+   (`v2.py:13503`), so a spend is never silent. This is correct and needs no authoring.
+3. ⚠️ **The toast does not wrap and has no maximum width.** `.effect-toast` is
+   `position: fixed; left: 50%; white-space: nowrap` with no `max-width` and no media query
+   (`v2.py:18228`). A five-effect choice produces a ~92-character line — roughly 650px at 14px — which
+   on a 390px phone is clipped at **both** ends, because the element is centred with
+   `translateX(-50%)`. The warning variant `.effect-toast.notify-warning` was deliberately given
+   wrapping (`v2.py:18246`); the green one never was. **Not fixed** — recorded here so a future
+   change is a decision rather than a discovery.

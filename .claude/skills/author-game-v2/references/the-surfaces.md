@@ -1096,7 +1096,87 @@ doctrine. The menu shape set that ratio before a word was written.
 walks into a kitchen because they are hungry, not because there is an airer in it. And a need that
 shuts a door — *filthy means she cannot take the car* — turns a chore into a plan.
 
+
 ---
+
+**R9 · An act that returns her to an unchanged menu is an act that never happened.** Added
+2026-09-02, from LO reading a build: *"Some exit choice have an action but does not have the follow
+up node, it simply exit to the location."*
+
+A choice with `targetType = "location"` that carries `effects` fires them, shows a **2-second numeric
+toast** (`engine.md` §45), and puts the player back on the room screen. So the click has three parts
+and the middle one is missing:
+
+| | |
+|---|---|
+| before the click | written — he is at the counter, the radio is low, two mugs are out |
+| **the act itself** | **nothing** |
+| after the click | `+6 Ray's Relation · +120 Money`, for two seconds |
+
+*"Ask him for the dues before you're short."* — she asks a man for money, he gives her £120, he wants
+her more for it, and the game shows her a receipt.
+
+**The seam is not the target, it is whether the choice does anything.** R7's leave-link is the same
+TOML shape and it is correct: it fires **no effects**, it exists so a spent screen still has a door,
+and it is navigation. A location exit that grants a trait, sets a flag or charges a cost is an **act
+that happens to end in a room**, and an act needs a screen. Read the two rules together and the test
+is one line: *does this choice change her?*
+
+**This is the general case of two rules already written.** R5b says it about refusals — *"a 'no' that
+returns the player to an unchanged menu is a door that was never really open"* — and `the-arc.md`
+A10/A11 say it about the end of an act, where **23 of 23 finish nodes shipped an empty `exit_block`**
+and every `Stop.` choice *"routes at a reset node and prints nothing."* R9 is the same sentence with
+*act* in place of *no*, and it is what those three were each seeing one corner of.
+
+⚠️ **Nothing here owned it, which is why it shipped.** `the-arc.md`'s ownership table routes *which
+screen* to this file, *how the prose reads* to `register.md`, and *the steps between* to itself.
+**"Whether there is prose once they click" was in none of the three rows.**
+
+**A WORK rung may resolve to a toast. A rung aimed at a PERSON, or at her own body, may not.**
+`the-economy.md` R5 teaches this exact template as *"what a paying rung actually looks like"* and it
+is right for work — nobody needs a paragraph about stacking shelves. It never drew the distinction,
+the word *person* does not appear in that file, and so the job template got used on people. LO, on
+being offered a carve-out for sleeping, washing and eating: *"Nope nothing should be skipped. Wash
+bath are content in themselves."* The bath, the bed and alone-with-the-door-shut are **surfaces**.
+
+### The repair is one node, and it is cheaper than it sounds
+
+Route the choice at a node with `targetType = "node"`, write what happened, and exit from there.
+Measured across `vesper`, `off_season` and `commuter` (534 node-choices):
+
+- **Several gated choices can share ONE banded outcome node.** `vesper`'s `activity_bar_work` routes
+  **four** rung-gated choices into a single `shift` node whose `group` bands render what the night
+  was actually like. Its own comment says why: *"Choice effects fire on CLICK and exit effects fire
+  on RENDER, and per-rung pay/relation cannot live on a single shared exit at all."*
+- **Where each thing sits.** `costs` → **the choice, always** (zero instances on a target exit in any
+  of the three games; it is a gate as much as a price). Per-branch effects → the choice. Uniform
+  payload and the clock → the target node's `exit_block.config`. A day-cap flag → the **located**
+  choice, never inside the triggerless canvas, which has no located setter and hard-fails the build.
+- **Staying fresh**, because most of these sit on repeatable surfaces: `group` bands keyed on the
+  meter the surface climbs, plus a `pool_dir` pool — the house style. `block_pool` is `commuter`'s
+  answer, on 17 of its 20 targets. ⚠️ **`text_variants` does not exist** in any game; do not write it.
+- **Video on outcome nodes, images on hubs.** No follow-up node in the three games carries an
+  `image`, and 59 of 60 videos on them are pools rather than single files.
+
+### The extreme case, which is a gate
+
+⚠️ **`orientation`'s `hub_ray_bedroom` authored three nodes and linked one.** `base` fell through to
+the engine's default `[[Continue->Location_…]]`, so the sex and the morning-after — **288 words,
+including the game's entire explicit core** — were built into the HTML and impossible to reach. It
+passed 45 of 46 gates. Every other game in the repo links every node it writes: **426/426, 154/154
+and 84/84 nodes carry an authored `exit_block`.**
+
+**Every node you write gets an inbound edge in the same edit.** A node is reached by a
+`targetType = "node"` choice, a `rejection_node`, or an `exit_block.config.destinationId` — and
+**not** by `[[canvases.connections]]`, which parses, persists and is never read by the generator
+(`game_graph.py:390`).
+
+### What this costs
+
+The field range is **0% to 68%** of choices, so there is no threshold here that would not fail a game
+for obeying the doctrine — `steam` and `back_home` ship zero, `the_inheritance` 74. The general case
+is therefore a **lint that cannot fail anything**; only the extreme case — a node nothing points at —
+is a gate, and it is safe as one because the corpus is already at zero.
 
 ## What is checked
 
@@ -1112,6 +1192,8 @@ shuts a door — *filthy means she cannot take the car* — turns a chore into a
 | **Gate 46 · she can say no** | at least one choice in the whole game declines an offer. Fails only on zero — the rate is printed and never judged. R5b's existence half; its quality half stays ungated |
 | **Lint · she permits or she acts** | the share of choices opening `let`, and the share inside sex loops. Reported against the field's verb profile, never judged |
 | **Lint · the act menu** | repeatable explicit surfaces split into node-routed loops and one-shot cascades. A count, never a target — R3b |
+| **Gate 48 · every authored node is reachable** | no node outside a canvas's entry has zero inbound edges. `world reachable` one level down: that asks whether a ROOM can be walked to, this whether a SCREEN can be opened. R9 |
+| **Lint · the act between the click and the number** | location exits that fire effects and show no screen, with the game-time they burn. A LIST, never a score — the field runs 0–68% — R9 |
 
 **What a tired author writes to satisfy gate 42, checked before it landed.** The answer is
 `locked_text = "Not yet"` — a bare negative with no handle. That is a real shape in the field:
