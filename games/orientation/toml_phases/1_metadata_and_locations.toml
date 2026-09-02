@@ -129,6 +129,50 @@ image                = "locations/the_back_bedroom.jpg"
 image_search_queries = ["dark bedroom doorway hallway night", "master bedroom door ajar dark corridor"]
 entry_from           = "the_avenue"
 
+# ═══ THE DOOR ═══ the-map.md R6. This room belongs to a person and she is the visitor,
+# which is the whole test — not that somebody is sometimes in it. It is one of two doors
+# in the game, and `the_bathroom` deliberately has none (R6c: a shared room takes
+# occupancy-gated rows, not a threshold).
+[locations.door]
+description = "The door at the back of the house. Your mother is on until six and has been since August, and from one in the morning there is one person behind it."
+# R6 — the field's refusal runs a median of 8 words and is allowed to be the same line
+# every time. The value of the screen is its structure.
+no_answer   = "You listen at it. The house is asleep and so is he."
+
+[[locations.door.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_back_bedroom", npc_id = "npc_ray", operator = "is_present" },
+] }
+text = "The door at the back of the house, and the strip of light under it says he has not gone to sleep either. Your mother has four hours left of her shift."
+
+[[locations.door.options]]
+text       = "Knock."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_back_bedroom", npc_id = "npc_ray", operator = "is_present" },
+] }
+goes_to    = { type = "canvas", canvas_id = "ray_knock" }
+
+# The top of the house track, and what the Want sells. `appetite` is raised elsewhere,
+# so this is a real handle rather than the machinery narrating its own progress bar.
+[[locations.door.options]]
+text             = "Go in without knocking."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "appetite", operator = "gte", value = 70 },
+  { type = "flag",  subject = "player", flag_key = "ray_open", operator = "is_true" },
+] }
+show_when_locked = true
+locked_text      = "You have got as far as the handle twice. It is not the door that is not ready — you know exactly what you would be asking for and you cannot say it yet."
+goes_to          = { type = "enter" }
+
+# Nobody home. R6c's other half: the empty room is content, and the field builds it —
+# 260 trespass labels across 15 of 27 games.
+[[locations.door.options]]
+text       = "Try the handle."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_back_bedroom", operator = "is_absent" },
+] }
+goes_to    = { type = "enter" }
+
 [[locations]]
 id                   = "wes_room"
 name                 = "Wes's Room"
@@ -136,6 +180,42 @@ description          = "@wes never moved out. He is a junior and he still sleeps
 image                = "locations/wes_room.jpg"
 image_search_queries = ["college guy bedroom messy desk laptop", "young man bedroom open door bed desk"]
 entry_from           = "the_avenue"
+
+# ═══ THE OPEN DOOR ═══ the-map.md R6, and the ONE place this game departs from the
+# field on purpose. `become-someone` offers only *Knock* and entering is what knocking
+# earns; here both are live, because @wes's door being open is a fact about HIM — the
+# location's own description says so — and knocking on it anyway is a different beat
+# from walking in. LO's call, 2026-09-02, and R6 records it as a departure.
+[locations.door]
+description = "His door, and it is open, which is the whole of what there is to say about it. The landing light is on a timer and it has gone off."
+no_answer   = "He is not in. The desk lamp is off and the chair is pushed under."
+
+[[locations.door.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "wes_room", npc_id = "npc_wes", operator = "is_present" },
+] }
+text = "His door is open the way it always is. One headphone is off and he has heard you on the landing, and he is going to let you decide what that means."
+
+[[locations.door.options]]
+text       = "Knock on the frame anyway."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "wes_room", npc_id = "npc_wes", operator = "is_present" },
+] }
+goes_to    = { type = "canvas", canvas_id = "wes_knock" }
+
+[[locations.door.options]]
+text       = "Go in."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "wes_room", npc_id = "npc_wes", operator = "is_present" },
+] }
+goes_to    = { type = "enter" }
+
+[[locations.door.options]]
+text       = "Have a look while he is out."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "wes_room", operator = "is_absent" },
+] }
+goes_to    = { type = "enter" }
 
 # ─── THE BRIDGE ──────────────────────────────────────────────────────────────
 # ⚠️ The commute, priced. Forty minutes and two dollars, every crossing. This is
@@ -251,6 +331,18 @@ weekdays   = [0, 1, 2, 3, 4]
 start_time = "00:00"
 end_time   = "01:00"
 activity   = "still up, and not going to bed while you are down here"
+
+# ⚠️ THE ROW THE SHEET DECLARED AND THE BUILD LOST. ray.md's grid carries
+#    `the_back_bedroom 01:00-06:00 — asleep, home only` and nothing ever emitted it, so
+#    the room he sleeps in had NOBODY scheduled in it while its own description says he
+#    is there from one in the morning. Found by `lint · a door opens onto something`
+#    (the-map.md R6): a knock nobody can answer. All days, so it is ONE row — the
+#    weekday-first trap only splits a DAY-SPECIFIC overnight window.
+[[npcs.schedules]]
+location   = "the_back_bedroom"
+start_time = "01:00"
+end_time   = "06:00"
+activity   = "asleep, or not"
 
 # ─── Dee — the shift, the rules, the reason it costs ─────────────────────────
 [[npcs]]
