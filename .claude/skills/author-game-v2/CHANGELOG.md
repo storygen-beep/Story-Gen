@@ -5,6 +5,60 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-03 — a second surface for the same person is a node inside the first, not a row beside it
+
+**`references/the-first-hour.md`** (F5b gains the half it was missing) ·
+**`scripts/gates.py`** (the `bound to a person, no face` trailing note — a print string, no
+behaviour).
+
+LO, playing `orientation`: *"Ask him about the campus / Ask whom???"*
+
+**What he saw, reproduced live.** At `wes_room` on a Monday at 20:30 the screen renders Wes's
+portrait, captioned **Wes** — and directly beneath it a bare link reading *"Ask him about the
+campus."* Both rows are the same man. Only one wears his face, because the second sits in the SOLO
+lane (`renderSoloActivities`), the lane that holds Sleep, Shower and Eat, where nothing carries a
+name. The label was therefore the only identity the row had, and it said *"him."*
+
+**The cause was already documented; the fix was not.** F5b said the portrait comes from
+`[canvases.trigger] npc` and that a location shows **one canvas per character, highest priority**.
+The lint `bound to a person, no face` had been printing all five of that game's talk canvases by
+name on every scoreboard run, with the note *"a surface ON that person wants the face."* Nothing in
+the skill said **what to do when the face is already taken** — and the gap has a receipt: the game's
+own ledger records the previous session declining to fold, on the reason *"folding them into the
+hubs would have buried them under the higher-priority hub."* That is wrong, and worth naming
+precisely: **priority ranks canvases competing for one face; a node is reached by a choice and has
+no priority to lose.**
+
+**Shipped in F5b**, after the existing one-canvas-per-character paragraph:
+
+1. The rule itself, with the four-line TOML — the opener is a `targetType = "node"` choice carrying
+   no effects and no clock, so it is R7's door rather than an act.
+2. ⚠️ **The retirement trap.** Where a *higher*-priority canvas for the same character owns the same
+   room — `act_kitchen_late` p7 over `hub_ray_kitchen` p6 — a pool folded into the hub goes dark the
+   moment the arc flag sets. A **qualified** `nodeId = "hub_ray_kitchen.talk"` reaches across
+   canvases, resolved globally at import (`template_import.py:7414-7420`, validated `:4498-4518`),
+   so the two surfaces share one pool instead of duplicating forty lines.
+3. ⚠️ **Check the phase file.** `merge_toml_phases.py` drops `6_dev_shortcuts.toml` **by name** on
+   `--no-dev` (`:62`), the release setting. All five of `orientation`'s talk screens lived in it —
+   forty exchanges, that game's whole answer to a 10.7:1 narration ratio, parked in the one phase a
+   release merge throws away, gating on nothing and warning about nothing. Found while folding, not
+   by any check.
+
+**Not built: a gate.** The lint stays a list. Its own corpus figure is why — 21 hits in 5 of 26
+games, and everything outside `orientation` is a walk-in or a windowed scene, so a threshold here
+would fail four games for obeying the doctrine. What changed is that the lint now says where the
+surface should go, not only that it is in the wrong place.
+
+**Verified.** `--selfcheck` **48/48 gates · 38/38 lints · 5/5 modes · 137 rules, 0 pointing at
+nothing**, exit 0 — unchanged, since nothing was added to the scoreboard. `--words` run on the
+edited reference. `gates.py`'s diff is one string literal inside a `print`. On `orientation`, which
+was repaired to the new rule in the same turn: every gate verdict **identical** before and after
+(46/47, `location fill` the only red), the lint itself **5 findings to 0**, all 40 dialogue lines
+present in the built HTML, and the five folded nodes plus both cross-canvas links clicked through in
+a headless browser with no JS errors.
+
+---
+
 ## 2026-09-02 — the act between the click and the number: a location exit that fires effects is not a door
 
 **`references/the-surfaces.md`** (R9, and both of its tables) · **`references/the-arc.md`** (the

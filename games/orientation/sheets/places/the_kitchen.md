@@ -16,8 +16,17 @@ works 22:00–06:00. From 22:00 the kitchen is Ray's, and everyone in the house 
 |---|---|
 | **Eat** | needs — `fed`, 20 min, free |
 | **Talk to @ray** | cast — `npc_ray` hub, 22:00–01:00 |
+| ├ *Ask him about the house.* | cast — his eight exchanges, `hub_ray_kitchen.talk` |
 | **Talk to your mother** | cast — `npc_dee`, 17:00–21:00 |
+| ├ *Ask her about the shift.* | cast — her eight exchanges, `hub_dee_kitchen.talk` |
 | **Sit up with him** | ascent — `appetite` / counterweight `home_face`. **The repeatable act surface**, opened by `ray_09` |
+
+⚠️ **The talk pools are BRANCHES of the two hubs, not rows.** Folded 2026-09-03 — see
+`wes_room.md` for why the solo lane is the wrong place for a person. **`act_kitchen_late` outranks
+`hub_ray_kitchen` for the same man in the same room** (p7 over p6, and the portrait renders one
+canvas per character), so his pool would have retired the moment `ray_open` set. The act surface
+carries a qualified cross-canvas link, `nodeId = "hub_ray_kitchen.talk"`, which resolves globally
+(`template_import.py:7414`). The same holds for Simone at the pledge house.
 
 ## Sit up with him — the act surface
 Opened by **`ray_09`**, the last step of his nine-step arc. Before that flag the row does not exist —

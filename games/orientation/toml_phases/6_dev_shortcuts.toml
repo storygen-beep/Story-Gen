@@ -1,305 +1,35 @@
 # =============================================================================
-# Orientation — 6_dev_shortcuts · TALK SURFACES
+# Orientation — 6_dev_shortcuts · EMPTY BY DESIGN
 #
-# ⚠️ register.md S4 — THE TALK SCREEN IS A CONTENT KIND, NOT A GARNISH, and S3:
-#    the game is not all narration. Field median is 2.93:1 narration to dialogue
-#    and ten of 27 games run at or under 2:1. Ours opened at 10.7:1.
+# This phase held the five talk surfaces (@ray, Simone, @wes, Halloran, Dee)
+# until 2026-09-02. They are gone from here and they are not deleted: each pool
+# is now a `talk` node inside that character's own hub in 5_scenes.toml.
 #
-# One per character. Each is a `block_pool` of exchanges on the subject THAT
-# PERSON OWNS (R8) — nobody else in this cast talks about these things:
+# Two reasons, and the second one is the sharper of the pair.
 #
-#   @ray       the house, the money, the car
-#   Simone     the ladder, the girls, the party, the dues
-#   @wes       the ride, the bathroom, the campus he already knows
-#   Halloran   grades, the department, office hours
-#   Dee        the shift, the rules, the reason it costs
+# 1. THE FACE. A canvas gets a portrait from `[canvases.trigger] npc`, never
+#    from `requires_npc` (v2.py:4714 vs :4746). All five carried only
+#    `requires_npc`, so all five rendered in the SOLO list — the lane that holds
+#    Sleep, Shower and Eat — with no portrait and no name attached. Nothing down
+#    there is a person, so the button text was the only identity the row had,
+#    and two of the five said "him". `bound to a person, no face` had been
+#    printing all five by name on every scoreboard run.
 #
-# ⚠️ ONE TERM OF ADDRESS PER PERSON AND NOBODY ELSE USES IT. @ray says "love",
-#    Simone uses her surname, @wes uses nothing at all, Halloran says "Miss",
-#    Dee says her first name. That is four characters told apart in one word each.
+#    They could not simply be given `npc`: the portrait lane renders ONE canvas
+#    per character, highest priority (v2.py:4735). Each hub already sits at
+#    priority 6 and would have swallowed its own talk screen. A second surface
+#    for the same person in the same room has to be a BRANCH of the first.
 #
-# (This is phase 6 because the merge orders it after 5_scenes and before the
-#  phone. It carries no dev jumps — the file name is the pipeline's, not the
-#  content's.)
+# 2. THIS FILE IS DROPPED FROM A RELEASE. `merge_toml_phases.py --no-dev`
+#    excludes 6_dev_shortcuts.toml by name (DEV_PHASE, :62). Forty exchanges of
+#    dialogue — the whole of this game's answer to a 10.7:1 narration ratio —
+#    were parked in the one phase a release merge throws away, and nothing in
+#    the pipeline would have said a word about it.
+#
+# The register note that lived here is still true and now lives beside the pools
+# themselves: one subject per person that nobody else in the cast owns, and ONE
+# term of address each — @ray says "love", Simone uses her surname, @wes uses
+# nothing at all, Halloran says "Miss", Dee says @player's first name.
+#
+# Real dev shortcuts belong in this file. There are none today.
 # =============================================================================
-
-[[canvases]]
-id          = "talk_ray"
-name        = "Ask him about the house"
-description = "His talk screen. Eight exchanges on the three things he owns and nobody else does."
-
-[canvases.trigger]
-location      = "the_kitchen"
-is_repeatable = true
-is_active     = true
-priority      = 5
-requires_npc  = "npc_ray"
-costs         = [ { trait = "rest", value = 3 } ]
-
-[[canvases.trigger.schedules]]
-weekdays   = [6, 0, 1, 2, 3]
-start_time = "22:00"
-end_time   = "23:59"
-
-[[canvases.trigger.schedules]]
-weekdays   = [0, 1, 2, 3, 4]
-start_time = "00:00"
-end_time   = "01:00"
-
-[[canvases.nodes]]
-id   = "base"
-name = "Across the counter"
-blocks = [
-  { type = "block_pool", blocks = [
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "This house was my father's and his father put the extension on it, badly, which is why the back bedroom is cold. Three generations and not one of us could hold a level straight." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "I do not mind paying for it. I mind being thanked for it, and your mother thanks me about four times a week, and I cannot work out how to tell her to stop without it sounding like something else." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "The car does eleven miles to a gallon on that run and I have been saying I will change it for two years. I will not change it. I know what I am like." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "@wes was fifteen when his mother went and he did not say anything for about a year, and then one day he asked me for driving lessons, and that was him telling me he was all right. That is how this family does it, love." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "There is a tin on top of the fridge and there has been a tin on top of the fridge since I was nine years old. You do not have to ask. I would rather you took it than went short." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "Twenty-two years at the same yard and they made me foreman by outliving everybody. That is the whole story. There is no better version of it I have been saving." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "I sat in that car in the drive for twenty minutes last night and I could not have told you why. It is a good house. It has been a quiet house for a long time and now it is not, and I am still getting used to that being a good thing." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "College is four years and then you will go, and that is what it is for, and I would rather you went from here than from wherever you would have gone from otherwise. That is all I will say about it." },
-  ] },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Let him talk."
-targetType               = "location"
-locationId               = "the_kitchen"
-time_progression_minutes = 20
-effects = [
-  { targetType = "npc", npcId = "npc_ray", trait = "relation", op = "add", value = 1, cap = 40 },
-]
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Go up."
-targetType               = "location"
-locationId               = "the_hall"
-time_progression_minutes = 5
-
-[[canvases]]
-id          = "talk_simone"
-name        = "Ask Simone about the house"
-description = "Her talk screen. Eight exchanges on the ladder, the girls, the party and the dues. She uses your surname and nobody else in this game does."
-
-[canvases.trigger]
-location      = "the_pledge_house"
-is_repeatable = true
-is_active     = true
-priority      = 5
-requires_npc  = "npc_simone"
-costs         = [ { trait = "rest", value = 3 } ]
-
-[[canvases.trigger.schedules]]
-weekdays   = [0, 1, 2, 3, 4]
-start_time = "16:00"
-end_time   = "19:00"
-
-[[canvases.trigger.schedules]]
-weekdays   = [3, 4, 5]
-start_time = "21:00"
-end_time   = "23:59"
-
-[[canvases.trigger.schedules]]
-weekdays   = [4, 5, 6]
-start_time = "00:00"
-end_time   = "02:00"
-
-[[canvases.nodes]]
-id   = "base"
-name = "Across the desk"
-blocks = [
-  { type = "block_pool", blocks = [
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_simone" }, content = "Twelve names and fourteen beds, Marsh. The other seven houses on this row know that number and two of them have already offered to take our overflow, which is a thing you offer when you know there is not any." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_simone" }, content = "The dues are not for the house. The dues are so that everybody in it has handed something over, because a girl who has paid for a thing behaves differently in it. You will see it in yourself in about a month." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_simone" }, content = "I do not run this the way it was run when I got here. When I got here there was a woman upstairs who decided things by who she liked. I decide things by who turns up, which everybody says is fairer and nobody actually prefers." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_simone" }, content = "Thursday is the one that counts. Friday is the one people come to and Saturday is the one people remember, and Thursday is the one where it gets decided who is at the other two." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_simone" }, content = "You want to know what I get out of it. Everybody asks eventually and most of them wait longer than you have. I get a house that runs, and one year of being the person who decides, and then I graduate and I am nobody again." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_simone" }, content = "There are girls in here who will be your friends for thirty years and girls who will not remember your name in June, and you cannot tell which is which yet and neither can I, and anybody who says they can is selling something." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_simone" }, content = "You live at home. I know you live at home. It is not held against you and it is not nothing either, because the girls upstairs at two in the morning are the ones who did not have to be anywhere at six." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_simone" }, content = "I have watched about forty girls come through that door and the ones who last are not the ones who want it most. They are the ones who work out fastest what it actually costs. You are quick, Marsh. I will give you that for free and it is the last thing I give you for free." },
-  ] },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Let her talk."
-targetType               = "location"
-locationId               = "the_pledge_house"
-time_progression_minutes = 20
-effects = [
-  { targetType = "npc", npcId = "npc_simone", trait = "relation", op = "add", value = 1, cap = 40 },
-]
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Go."
-targetType               = "location"
-locationId               = "the_pledge_house"
-time_progression_minutes = 5
-
-[[canvases]]
-id          = "talk_wes"
-name        = "Ask him about the campus"
-description = "His talk screen. He uses no term of address at all, which is its own tell."
-
-[canvases.trigger]
-location      = "wes_room"
-is_repeatable = true
-is_active     = true
-priority      = 5
-requires_npc  = "npc_wes"
-costs         = [ { trait = "rest", value = 3 } ]
-
-[[canvases.trigger.schedules]]
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "19:00"
-end_time   = "23:00"
-
-[[canvases.nodes]]
-id   = "base"
-name = "One headphone off"
-blocks = [
-  { type = "block_pool", blocks = [
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_wes" }, content = "Halloran fails about forty people a year and it is always the same forty, the ones who never come to office hours. He is not cruel about it. He just genuinely does not notice you exist unless you go up there." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_wes" }, content = "The row is eight houses and they all pretend they are different from each other. They are not. My second year I was in and out of four of them and it is the same room with a different carpet every time." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_wes" }, content = "I could have moved out. Dad offered, twice, and the second time he had actually worked out the money for it. I said no both times and I have never once said why, and he has never once asked." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_wes" }, content = "The bus is forty minutes because it goes all the way round the industrial estate for two people who get on at the far end. Everybody knows. Nobody has ever done anything about it." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_wes" }, content = "You are going to get asked to that house. I am not telling you not to go. I am telling you that Simone decides who goes upstairs and that she has never once got it wrong about somebody, and that is the part people find out too late." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_wes" }, content = "The counter is the worst job on campus and it is also the only one that will take you in your first term, so everybody does a year of it and then never talks about it again." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_wes" }, content = "It was quiet here for four years. I am not saying that as a complaint. I am saying I had got used to a house where nothing happened and then in June there were two more people in it, and one of them is on nights, so really there is one." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_wes" }, content = "I will drive you in. I am going anyway and it is fifteen minutes against forty and two dollars, so do not make it a thing. Just be out there at quarter past because I am not waiting." },
-  ] },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Let him talk."
-targetType               = "location"
-locationId               = "wes_room"
-time_progression_minutes = 20
-effects = [
-  { targetType = "npc", npcId = "npc_wes", trait = "relation", op = "add", value = 1, cap = 35 },
-]
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Leave him to it."
-targetType               = "location"
-locationId               = "the_hall"
-time_progression_minutes = 5
-
-[[canvases]]
-id          = "talk_halloran"
-name        = "Let Halloran talk"
-description = "His talk screen. He says Miss and nobody else does."
-
-[canvases.trigger]
-location      = "halloran_office"
-is_repeatable = true
-is_active     = true
-priority      = 5
-requires_npc  = "npc_halloran"
-costs         = [ { trait = "rest", value = 3 } ]
-
-[[canvases.trigger.schedules]]
-weekdays   = [0, 2, 4]
-start_time = "16:00"
-end_time   = "18:00"
-
-[[canvases.nodes]]
-id   = "base"
-name = "Marking"
-blocks = [
-  { type = "block_pool", blocks = [
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_halloran" }, content = "Two hundred and eleven registered and I see about ninety in the room. I have stopped minding. What I mind is being asked in April why they failed, as though April were the first opportunity anyone had to mention it." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_halloran" }, content = "Office hours are a legal fiction, Miss. Four until six, twice a week, thirty years, and I could name every student who has ever used them properly on two hands. You are on the second hand now." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_halloran" }, content = "The department has eleven staff and nine of them are trying to be somewhere else. I stopped trying in about 2009 and it has been the most productive stretch of my life, which is not the lesson anybody wants from me." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_halloran" }, content = "A grade is a piece of information about one afternoon. That is all it has ever been. The trouble is that everybody upstairs has agreed to pretend otherwise, and I have to sign the form." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_halloran" }, content = "The floor empties at five past five. You can hear it go. Somebody in the eighties put a door closer on every door on this corridor and they all fire within a minute of each other, and then it is just me." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_halloran" }, content = "I read every one of the long essays and I read about a third of the short ones, and if you tell anybody I said that I will deny it and you will not be able to prove it, because the marks come out the same either way." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_halloran" }, content = "There was a version of this job where I went to conferences. I do not miss it. I miss having something to say at the end of the week that was not a number in a spreadsheet, which is a different complaint entirely." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_halloran" }, content = "The lab runs until seven and nobody books it after five, so it is effectively mine, and I have been handing out the key to whoever seemed likely to use it for about a decade. Nobody has ever queried it. Nobody queries anything, Miss. That is the actual finding." },
-  ] },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Let him talk."
-targetType               = "location"
-locationId               = "halloran_office"
-time_progression_minutes = 20
-effects = [
-  { targetType = "npc", npcId = "npc_halloran", trait = "relation", op = "add", value = 1, cap = 35 },
-]
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Go."
-targetType               = "location"
-locationId               = "the_quad"
-time_progression_minutes = 5
-
-[[canvases]]
-id          = "talk_dee"
-name        = "Ask your mother about the shift"
-description = "Her talk screen. She is the only person in this game who says @player's first name."
-
-[canvases.trigger]
-location      = "the_kitchen"
-is_repeatable = true
-is_active     = true
-priority      = 5
-requires_npc  = "npc_dee"
-costs         = [ { trait = "rest", value = 3 } ]
-
-[[canvases.trigger.schedules]]
-weekdays   = [6, 0, 1, 2, 3]
-start_time = "17:00"
-end_time   = "21:00"
-
-[[canvases.trigger.schedules]]
-weekdays   = [4, 5]
-start_time = "09:00"
-end_time   = "13:00"
-
-[[canvases.nodes]]
-id   = "base"
-name = "Keys in her hand"
-blocks = [
-  { type = "block_pool", blocks = [
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_dee" }, content = "Agency means they ring at four and tell you where, and you go, and if you say no twice they stop ringing. That is the whole arrangement and I signed it knowing, @player." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_dee" }, content = "Eight years I did days and I was tired all of the time. Two years of nights and I am tired in a different shape, and the difference is that nobody talks to you on nights, which turns out to be the part I can stand." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_dee" }, content = "I met him at a wedding neither of us wanted to be at and we spent the entire thing outside by the cars. Four months later he asked me and I said yes in about a second, and I have not once been sorry, and I am aware of how that sounds." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_dee" }, content = "You will not remember the flat and I hope you do not. Two rooms over a shop and the boiler that went every February. This house has a spare room, @player. I did not know people had spare rooms." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_dee" }, content = "@wes has been nothing but decent and I keep waiting for the other thing, because a boy that age does not usually take a stranger moving into his house like that, and he has, and I do not understand it and I have stopped poking at it." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_dee" }, content = "Tuition is done. That is the thing I want you to hear properly, because you have been carrying it around like a bill. It is done, it is paid, and the only thing you owe anybody in this house is that you turn up to the eight o'clock." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_dee" }, content = "I am on until Christmas and then I do not know. They will ask. They always ask, and I always say yes, and one of these days I am going to say no and I will not know what to do with the evening." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_dee" }, content = "Be good to him. I know I keep saying it. It is not a warning, @player, it is the only way I know how to say that I am frightened of how much better this is than the last one." },
-  ] },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Let her talk."
-targetType               = "location"
-locationId               = "the_kitchen"
-time_progression_minutes = 20
-effects = [
-  { targetType = "npc", npcId = "npc_dee", trait = "relation", op = "add", value = 1, cap = 20 },
-  { targetType = "player", trait = "home_face", op = "add", value = 1, cap = 100 },
-]
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Let her get to work."
-targetType               = "location"
-locationId               = "the_kitchen"
-time_progression_minutes = 5

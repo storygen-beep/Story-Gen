@@ -637,6 +637,39 @@ showing whichever ranks highest right now. That is the intended shape and it com
 tier ladder, but decide the priorities on purpose: a hub at 6 sitting under an escalation at 7 means
 the escalation replaces it whenever its conditions hold.
 
+### So a second surface for the same person in the same room is a NODE INSIDE THE FIRST.
+
+That is the half this section was missing, and its absence has a measured cost. `orientation` wrote
+five talk screens as their own canvases, could not give them `npc` without the hubs swallowing them,
+and left all five in the solo lane — the one that holds Sleep and Shower and attaches no name to
+anything. The button text was then the only identity the row had, and two of the five read
+*"Ask him about the campus"* with the man's own portrait rendered directly above. The reason
+recorded in that game's ledger for not folding them was *"it would have buried them under the
+higher-priority hub"* — **which is wrong, and wrong in a way worth naming: a node has no priority.**
+Priority ranks canvases competing for one face. A node is reached by a choice.
+
+```toml
+# on the hub's base exit_block — no effects, no clock. It is a door, not an act (the-surfaces.md R7)
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him about the campus."
+targetType = "node"
+nodeId     = "talk"
+```
+
+⚠️ **And when a HIGHER-priority canvas for the same character owns that room, the branch retires
+with the hub unless something links to it.** `act_kitchen_late` (p7) replaces `hub_ray_kitchen` (p6)
+the moment its arc flag sets, so the pool folded into the hub goes dark exactly when the player has
+most reason to want it. A **qualified** nodeId reaches across canvases —
+`nodeId = "hub_ray_kitchen.talk"` — resolved globally at import (`template_import.py:7414-7420`,
+validated at `:4498-4518`). One line on the escalation's base, and the two surfaces share the pool
+instead of duplicating forty lines of dialogue.
+
+⚠️ **Check which phase file the surface lives in before you decide it is safe.**
+`merge_toml_phases.py` drops `6_dev_shortcuts.toml` **by name** on `--no-dev` (`:62`), which is the
+release setting. `orientation`'s five talk screens sat in it — forty exchanges, the whole of that
+game's answer to a 10.7:1 narration ratio, in the one phase a release merge throws away, gating on
+nothing and warning about nothing.
+
 ---
 
 ## F6 · A meeting is small, and somebody speaks

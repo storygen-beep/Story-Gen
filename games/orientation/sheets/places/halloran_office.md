@@ -15,6 +15,7 @@ hour of them is the only hour anyone is up there.
 | row | system |
 |---|---|
 | **Office hours** | cast — `npc_halloran` hub, 16:00–18:00 |
+| ├ *Ask him about the department.* | cast — his eight exchanges, `hub_halloran_office.talk` |
 | **The late lab** | work + arc — needs the lab kit bought at `the_quad` |
 | **Ask about the reader's key** | start choice — `past_top` reaches this in week one |
 
@@ -25,6 +26,9 @@ her into the building after the department has emptied, which is the top of this
 ⚠️ **Separate the past-ladder from the existing `relation` band with a non-`group` block.** Adjacent
 `[group]` blocks merge into one if/elseif chain and first match wins (`v2.py:14637`); the original
 ladder would go dark with no error.
+
+⚠️ **His talk pool is a BRANCH of the hub, not a row** — folded 2026-09-03, see `wes_room.md`.
+Nothing outranks `hub_halloran_office` here, so one link on its base is the whole wiring.
 
 ## Walk-in
 **Required.** `walkin_latelab` — a colleague's door opens down the corridor while she is in there

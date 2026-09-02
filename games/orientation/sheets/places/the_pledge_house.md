@@ -37,6 +37,7 @@ Nothing is invented from the fiction.
 |---|---|---|
 | **Sign the book** | arc flags — `simone_01` | one-time. The meeting. Gone after it fires |
 | **Talk to the woman who runs it** | cast — `npc_simone` hub | her ladder, one rung at a time |
+| ├ *Ask her about the house.* | cast — `hub_simone_office.talk` | her eight exchanges. A branch of the hub, never its own row |
 | **Hand over the dues** | money — the obligation | Friday 17:00–19:00 only |
 | **Shower here** | needs — `clean` | $2. The reason it costs is that it is not her house |
 | **Go up** | ascent — `nerve` / `appetite` | party nights only. **The repeatable act surface** |
@@ -53,6 +54,11 @@ object ✓. *Hand over the dues* → **not a hub rung**; it is the obligation, i
 menu item's clothes.
 
 ---
+
+⚠️ **Her talk pool is a BRANCH of the hub, not a row** — folded 2026-09-03, see `wes_room.md`.
+And **`Go up` outranks the hub** (p7 over p6) on party nights, so `act_pledge_upstairs.base` carries
+a cross-canvas link to `hub_simone_office.talk`: without it the pool would go dark on exactly the
+nights she is most worth talking to.
 
 ## Go up — the repeatable act surface
 
