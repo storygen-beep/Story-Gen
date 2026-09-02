@@ -291,3 +291,12 @@ game_explorations/vesper_wardrobe/
 # pushed. Same treatment as game_explorations/ above: kept locally, out of git.
 # ============================================================
 patreon/
+
+# ============================================================
+# Resume / job-application material — on disk, deliberately NOT tracked.
+# This repo is PUBLIC (verified 2026-09-02 via `gh repo view`: visibility PUBLIC),
+# so personal data must never reach it: once pushed it is in the history and in
+# anyone's clone, and deleting the file later does not remove it. Same treatment
+# as patreon/ and game_explorations/ above.
+# ============================================================
+/resume/
