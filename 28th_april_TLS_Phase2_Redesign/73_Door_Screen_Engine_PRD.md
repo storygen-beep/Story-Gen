@@ -206,7 +206,9 @@ raise**. Insert after the per-location `costs` loop ends (`~:4342`), before
 
 `apps/game_generation/twee_comprehensive/generators/v2.py`
 
-**5.1 · Runtime payload.** `locations_map` (`:1012-1021`) gains `"door": loc_props.get("door", {})`.
+**5.1 · Runtime payload.** `locations_map` (`:1012-1021`) gains a `door` key — **absent, not
+empty, when unauthored**, and carrying every option's target already resolved to a passage name
+(`_door_for_payload`).
 Serialized at `:1066`, emitted at `:3247` as `setup.locations`. It reads `loc.properties`, which is
 fed by **both** writers of §4.3 — the graph one on a real build. Default `{}` → no door → today's
 behaviour, which is the backward-compat guarantee expressed in the data rather than in a branch.
@@ -247,20 +249,55 @@ if nothing rendered:
     <p class="entry-blocked-narrative">NO_ANSWER</p>
 ```
 
-`TARGET` is `Location_<slug>` for `enter`, or the canvas's entry passage for `canvas` — built at
-generation time with `self._node_passage_name("Canvas", canvas_prefix, first_node)` (`:12376-12387`),
-the same expression that fills `help_data.locationCanvases[].passageName` (`:11700-11705`).
+`TARGET` is resolved at **generation** time by `_door_for_payload`, so the runtime never has to
+know how a passage is named: `Location_<slug>` for `enter`, or the canvas's entry passage for
+`canvas` — `self._node_passage_name("Canvas", canvas_prefix, first_node)`, the same expression that
+fills `help_data.locationCanvases[].passageName`.
 
-**5.4 · The nav card.** `_render_location_nav_card` (`:20085-20114`) and `_render_location_nav_link`
-(`:20116-20129`): when the destination carries a door, emit **only the open card/link**, pointing at
-`Door_<slug>`, with no `<<if setup.navDestUnlocked>>` fork.
+⚠️ **KNOWN LIMIT, found during item 2.** The importer proves the canvas exists in the TOML (V5), but
+a canvas with **no trigger and nothing referencing it** is pruned by `_compute_included_canvases`
+before the generator sees it, and a door option is not yet one of the references that closure walks.
+Adding it means touching that function **and its no-DB twin**, so it is deferred. Until then the
+option is **dropped rather than left pointing nowhere**, and the drop is a `logger.warning` naming
+the option, the location and the canvas. The fix an author needs is one line: give that canvas a
+trigger location.
+
+**5.4 · Every engine-generated way IN — FOUR sites, not two.** ⚠️ **CORRECTED 2026-09-02 during
+item 2.** This section named the nav grid and the nav text list. There are two more: `::
+Navigation` carries a second, flat list of every location, in two branches. It linked straight into
+the room, so a player could reach Ray's bedroom **without ever seeing his door**.
+
+All four now go through one helper, `_location_entry_passage(loc)` — `Door_<slug>` when the location
+has a door, `Location_<slug>` otherwise:
+
+| site | |
+|---|---|
+| `_render_location_nav_card` | the grid; emits **only the open card**, no `navDestUnlocked` fork |
+| `_render_location_nav_link` | the text list, same |
+| `_generate_basic_navigation` | the no-connections global list |
+| `_generate_basic_navigation` | the initial-selection list |
+
+Deliberately **NOT** routed: the *"Back to \<name\>"* link on the same screen (she is already
+inside, and bouncing her onto her own threshold is a loop, not a door), and any authored canvas
+exit, which goes where the author said.
 
 A door location's card is therefore always clickable — which is the whole point, since you can knock
 at a door you may not enter — and it **keeps its presence badges for free** (`:20101`), closing the
 "you cannot see who is in the room you are locked out of" gap without a CSS change.
 
-**5.5 · `setup.isRerenderSafe`** (`:16124`) gains `if (title.indexOf("Door_") === 0) return true;`
+**5.5 · `setup.isRerenderSafe`** gains `if (title.indexOf("Door_") === 0) return true;`
 Legitimate only because of §3 property 1.
+
+⚠️ **CORRECTED 2026-09-02 during item 2.** That block is a **plain string assembled by
+concatenation**, not an f-string — a `{placeholder}` in it is emitted literally. Injected the way
+its neighbour already is: `""" + door_rerender + """`.
+
+**5.5b · EVERY door site is gated on `_has_doors()`.** ⚠️ **ADDED 2026-09-02 during item 2, after
+the first cut failed its own inert proof.** Emitting the renderer, the `isRerenderSafe` clause and
+the payload key unconditionally moved **all 26 built games by ~2.7 KB** for a feature none of them
+uses. All three are now conditional, the same rule the travel-friction block follows a few thousand
+lines down — *"only emitted when some location declares costs; otherwise movement stays free."*
+The inert proof is what caught it, which is the entire reason it is in the verification list.
 
 **5.6 · Do NOT touch** `passage_to_location` (`:1024-1030`). §3 property 2.
 
@@ -453,7 +490,7 @@ two here.
 | # | item | effort | note |
 |---|---|---|---|
 | 1 | importer: field, parse, **both** write-outs, V1–V8, **and its own 24 plumbing/validator tests** | ~2.5 h | ✅ **DONE 2026-09-02.** No runtime risk; nothing reads it yet. 27 builds byte-identical. |
-| 2 | generator: payload, `Door_` passage, `renderDoorOptions`, nav card, `isRerenderSafe` | ~3.5 h | the whole feature |
+| 2 | generator: payload, `Door_` passage, `renderDoorOptions`, **four** nav sites, `isRerenderSafe`, `_has_doors()` gating | ~3.5 h | ✅ **DONE 2026-09-02.** 39 tests; 27 builds byte-identical. |
 | 3 | `test_location_door.py` generator half + the whole-corpus hash check | ~1.5 h | **before** any game consumes it. The hash instrument exists and ran clean on 27 builds at item 1. |
 | 4 | doctrine: `the-map.md` R6/R6b/R6c + the five satellite edits + CHANGELOG | ~1.5 h | must land with the lint for `--selfcheck` |
 | 5 | `gates.py` lint + `SKILL.md` row | ~1 h | same commit as 4 |
