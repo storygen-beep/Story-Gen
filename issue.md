@@ -430,3 +430,165 @@ search query: never right old man or age or middle age or anything similar.
 
 
 index.html, one page reload the selected query goes away
+
+some gifs, when on compressed we can see that they are no longer then 2 secs, it makes a very low quality experience, we couldnt figure out how long is the GIF, but yes, the converted video is no more then 2 secs, or even 3 secs.
+
+
+
+**16th Aug**
+
+**Vesper**
+
+[DONE]Change cloths should be in the cot right??
+
+[DONE]change cloth in bathroom. She can go up and work, currently the change cloth happens instantly in the canvas itself, isnt it, confirm me if Im wrong. So when she gets the dress, sol tells her she can go to bathroom to change the cloths.
+
+[DONE]Canvas: Somebody sent for you (rung_bar_promotion_4) | Node: Somebody sent for you
+Sol says. Sol: I did. You've had three weeks and you've turned up every one of them, so I'll take it you thought.
+Does it means that she has worked there for there weeks?? If yess, we shouldn’t mention these as they don’t reflect correct data.
+
+[DONE]Canvas: The door (bastien_door_search) | Node: The door
+Canvas exit player to the backroom and there is no choice in the backroom. No exit or nothing. Player is stuck in there.
+
+[DONE]After bastien drain when do the vance people do the raid??
+
+[DONE]Check if the quests page is good or not.
+
+
+[DONE]Canvas put it down, wren says to cain that he came for her an year ago, wrong, dont mention time or hard data. And it should have cain dialogs too as an NPC now.
+
+
+**Author game v2**
+
+Author a new game > thin to thick > test first version 
+
+The allowance:
+
+
+[DONE]The Landing, the parade: What are these words? they could have ment something but couldnt we have used simpler language, easy to understand. Also the shop is in the parade is that the right design, is shop in the house itself?? If not, there should have been a street or city or whatever, but I think we have done the same mistake we have done in back home if I guess.
+Inspired from back home, as it is the only working example skill have.
+Removing the worked example and importing the formating locations from v1.
+
+
+[PROGRESS]traits used are nerve, seen, price, appetite, is this how mopoga top games are designed??
+
+
+[DONE]Im in the kitchen and see:
+Look round the kitchen
+Sit out on the back step
+Come down in what you slept in
+Get the washing in off the airer
+Ask for more than you need
+5 choices for nothing, or for what?? Does it make choices depending on whatever can be done in the location.
+
+
+Location shows 5m / 10m, we dont want to show that, simple cost it, but not show the time it costs.
+
+[DONE]The content how it is being written.
+
+How spicy writer.com works??
+
+google analytics
+
+
+**22 Aug**
+
+
+Move from providing beta build to cheat codes. Start with Vesper
+
+
+People pay more for cheats not usually for the builds
+
+
+**review off season**
+
+the language being used here is tough to get.
+what is arcade?? No NPC introductions. 
+
+Had a choice:
+Open up and work the counter canvas had a choice: 
+Work the counter till one (2h 30m).
+One is 1 pm or am whatever it is, but we dont mention work till one or time, there is something wrong going on. Its content also have shutter up at eight and more, WTF is tbis?? Time is dynamic it is a sandbox game, time could be 2 pm or whatever then everything here makes no sense.
+
+What does Feed the Meter (GBP 3) means??
+
+In the start canvas, should it be like this, why couldnt we use simpler language, are we try to ramp things up too fast, and it also does nt even have the NPC intros. I think we still havent learnt how the game should be started.
+
+
+
+**23 Aug**
+
+[DONE]Feed the meter ($3)
+What does Feed the meter means actually??
+rare words are being used instead of common words.
+
+
+[DONE]No Exit Choice Issue Found in V2 Game Off Season.
+
+Generate New Game From V2: The Season
+
+The Season: Review it
+added cast page
+fixed few bugs
+
+
+I still think something is missing in game. Somethings I dont properly understand while playing the game, I have to come to the session to understand things, to ask it what is it about and explain it to me.
+
+
+if it is looking decent, should we go ahead with other items in the author game v2 skill or review and fix more cycles.
+
+See how spicy writer works, how we can generate fantasy and experience similar or better then the top mopoga games.
+
+Puzzle or something in the game. First see if it works in the top mopoga games or not. What web based puzzle we can have??
+
+
+Themes to work properly a proper research on how it can be done, so every games looks different.
+
+[DONE]Creative Part, questions, that makes a good game...
+
+
+[PROGRESS]Player persona or agent. An agent that is by heart a player and can replicate player experience on a game, it can play it or see what player experience that game is reflecting, from starting to any where we want it to work too, for how much time we want it to work, or whatever like something we need to see in some area what kind of player experience is build. It can compare two games and see which one is better and how it is better.
+
+**Vesper**
+
+Vesper two more releases
+One with new cheat page instant release, tomorrow. 0.1.9
+
+So we will have to build two releases and we will.
+
+[DONE]also start working on the cheat code pannel and PDF. As the system update, where this 0.2.0 version will be released to the public directly no wait.
+
+[DONE]Patreon skill linked with author game, on game release we create new posts here: 
+/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/patreon
+Now, we need new posts formats, using simple language, one chill nut post format, and one beta nut, do we need to repeat what we posts for chill nut or we can say something like chill nut post link and game guide something like this, or we should send full post for beta nut too.
+
+[DONE]F95Zone start posting the game.
+Now eligible to upload the game and links
+
+[DONE]Study on the link provider I think we do need to provide atleast 3 links for the package from their verified sources so do verify that and see what sources would be the best one for you.
+
+[DONE]How Guide PDFs are uploaded to patreon posts?? as a link like the game package is added or direct pdf file upload to patreon??            
+
+[PROGRESS]F95Zone Mirror Links:
+A code way to do it.
+Use MediaFire, Pixeldrain and Mega.
+
+[PROGRESS]Google Analytics
+
+
+
+**Auhor Game V2**
+
+**Ms Vance**
+
+create a new game
+
+Its a great great progress.
+
+So the first when it suggests some ideas, it goes and check the existing v2 games and made sure that enw game doesnt mathes the current ones.
+
+I didnt liked showing the why text for locked choices.
+
+Sometimes, is it random canvases, or one time canvases but what happens is in the navigation pannel where I see npc present or not, it doesnt shows up and it automatically fires up.
+
+One thing worth thinking about is, we have got a good starting in our new game, but saw two issues, just my thoughts, so one is, couldnt understand the world, the map, locations. For many npcs, it still sounds unclear like who is who. 
