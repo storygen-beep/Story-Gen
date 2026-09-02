@@ -226,7 +226,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text                     = "Go up."
 targetType               = "location"
-locationId               = "the_avenue"
+locationId               = "the_hall"
 time_progression_minutes = 10
 
 [[canvases.nodes.exit_block.choices]]
@@ -250,7 +250,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text                     = "Go up."
 targetType               = "location"
-locationId               = "the_avenue"
+locationId               = "the_hall"
 time_progression_minutes = 5
 
 # ─── the walk-in — REQUIRED, and not deferred ────────────────────────────────
@@ -289,7 +289,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text                     = "Go up the stairs."
 targetType               = "location"
-locationId               = "the_avenue"
+locationId               = "the_hall"
 time_progression_minutes = 5
 effects = [
   { targetType = "player", trait = "home_face", op = "add", value = 3, cap = 100 },
@@ -815,7 +815,7 @@ effects = [
 ]
 
 [[canvases.nodes.exit_block.choices]]
-text                     = "The late lab."
+text                     = "The late lab. (1h 30m)"
 targetType               = "location"
 locationId               = "halloran_office"
 time_progression_minutes = 90
@@ -893,7 +893,7 @@ effects = [
 
 [[canvases]]
 id          = "act_counter_backroom"
-name        = "The back room"
+name        = "Go in the back room"
 description = "The nerve act surface on the campus side. Two routes in, each with its own negotiation."
 
 [canvases.trigger]
@@ -1234,7 +1234,7 @@ effects = [
 [[canvases.nodes.exit_block.choices]]
 text                     = "Leave him to it."
 targetType               = "location"
-locationId               = "the_avenue"
+locationId               = "the_hall"
 time_progression_minutes = 5
 
 # ═══════════════ BEHIND THE TWO DOORS ═══════════════════════════════════════
@@ -1315,7 +1315,7 @@ effects = [
 [[canvases.nodes.exit_block.choices]]
 text                     = "Go back to bed."
 targetType               = "location"
-locationId               = "the_avenue"
+locationId               = "the_hall"
 time_progression_minutes = 5
 
 # ─── @wes · knocking on a door that is already open ──────────────────────────
@@ -1363,7 +1363,7 @@ effects = [
 [[canvases.nodes.exit_block.choices]]
 text                     = "Leave him to it."
 targetType               = "location"
-locationId               = "the_avenue"
+locationId               = "the_hall"
 time_progression_minutes = 2
 
 # ─── @ray · the room itself. What the Want has been selling ──────────────────
@@ -1411,6 +1411,15 @@ blocks = [
   { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "Quiet. @wes is twelve feet that way and the landing carries." },
 ]
 
+# ⚠️ R9 — see the note on `act`. This link is what makes the act exist.
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Pull him over you."
+targetType = "node"
+nodeId     = "act"
+
 [[canvases.nodes]]
 id   = "act"
 name = "Under him"
@@ -1426,6 +1435,18 @@ blocks = [
   { type = "paragraph", content = "Her alarm clock is nine inches from your head and you can read it. Four minutes past three. She is on until six." },
 ]
 
+# ⚠️ R9 — THE CHAIN. Without these two links `act` and `after` are authored and
+#    unreachable: `base` fell through to the engine's default [[Continue->Location_…]]
+#    and the whole act was dead text in the file (288 words, found 2026-09-02).
+#    No time, no effects on the hops — the payload stays on `after`'s exit choices.
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Don't move yet."
+targetType = "node"
+nodeId     = "after"
+
 [[canvases.nodes]]
 id   = "after"
 name = "What he does after"
@@ -1439,7 +1460,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text                     = "Stay until she is nearly back."
+text                     = "Stay until she is nearly back. (1h 30m)"
 targetType               = "location"
 locationId               = "the_back_bedroom"
 time_progression_minutes = 90
@@ -1458,7 +1479,7 @@ effects = [
 [[canvases.nodes.exit_block.choices]]
 text                     = "Go before you fall asleep in here."
 targetType               = "location"
-locationId               = "the_avenue"
+locationId               = "the_hall"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "bedroom_today", operator = "is_false" },
@@ -1475,7 +1496,7 @@ effects = [
 [[canvases.nodes.exit_block.choices]]
 text                     = "Not tonight."
 targetType               = "location"
-locationId               = "the_avenue"
+locationId               = "the_hall"
 time_progression_minutes = 5
 effects = [
   { targetType = "npc", npcId = "npc_ray", trait = "relation", op = "add", value = 1, cap = 40 },

@@ -1901,6 +1901,76 @@ def lint_doors(model, game):
     return summary, findings
 
 
+def lint_unwritten_act(model, game):
+    """`the-surfaces.md` R9 — the clicks that change her and show her nothing.
+
+    A choice that targets a LOCATION and fires effects resolves whatever it named
+    into a 2-second numeric toast (`v2.py:6239`) and puts the player back on the room
+    screen. The approach is written, the outcome is a number, and the act between them
+    was never authored.
+
+    ⚠️ THIS IS A LIST AND CANNOT FAIL ANYTHING — LO's call, 2026-09-02, and the reason
+    is measured: at zero tolerance it fails 16 of our 18 games at once, `vesper` (the
+    released one) included, and a scoreboard that reds everything stops telling a
+    broken game from an unfinished one. The doctrine carries the absolute; this makes
+    each game's debt visible.
+
+    ⚠️ IT IS SAFE AS A LINT because authoring MORE of these makes the output worse and
+    never better — the property `objects`/gate 22 lacked.
+
+    The split it reports is the actionable one. On a SINGLE-NODE canvas the act is
+    definitively unwritten: one screen of approach, then a button. On a multi-node
+    canvas the click closes a chain that was written, so it is a departure — still
+    time passing with nothing on it, but a different repair.
+    """
+    rows, single, multi = [], 0, 0
+    for c in (game.get("canvases") or []):
+        if _is_dev(c):
+            continue                                  # dev shortcut — no player reaches it
+        nodes = c.get("nodes") or []
+        last = nodes[-1].get("id") if nodes else None
+        for n in nodes:
+            for ch in _node_choices(n):
+                if (ch.get("targetType") or "node") != "location" or not _choice_acts(ch):
+                    continue
+                mins = ch.get("time_progression_minutes") or 0
+                closes = len(nodes) > 1 and n.get("id") == last
+                if closes:
+                    multi += 1
+                else:
+                    single += 1
+                what = []
+                for e in (ch.get("effects") or []):
+                    t = e.get("trait") or e.get("trait_key")
+                    if not t:
+                        continue
+                    v = e.get("value")
+                    # ⚠️ `value` is not always a number. The engine also takes a random
+                    # RANGE — `value = { type = "random", min = 2, max = 4 }` — which
+                    # `the_long_summer_test` uses 43 times. Formatting it as a scalar
+                    # raised TypeError and took the whole lint down with it.
+                    if isinstance(v, dict):
+                        what.append(f"+{v.get('min','?')}..{v.get('max','?')} {t}")
+                    elif isinstance(v, (int, float)):
+                        what.append(f"{'+' if v >= 0 else ''}{v:g} {t}")
+                    else:
+                        what.append(str(t))
+                for fe in (ch.get("flagEffects") or []):
+                    if fe.get("flag"):
+                        what.append(str(fe["flag"]))
+                rows.append((mins, closes,
+                             f"{c.get('id')}.{n.get('id')} \"{str(ch.get('text',''))[:44]}\" — "
+                             f"{mins}m, {' '.join(what[:4]) or 'costs only'}"
+                             + (" (closes a written chain)" if closes else "")))
+    if not rows:
+        return "", []
+    mins_total = sum(r[0] for r in rows)
+    summary = (f"{len(rows)} choice(s) change her and show nothing — "
+               f"{mins_total:,}m ({mins_total/60:.1f}h) of game time · "
+               f"{single} on a single-screen canvas, {multi} closing a written chain")
+    return summary, [r[2] for r in sorted(rows, key=lambda r: -r[0])]
+
+
 def lint_labels(model, game):
     """`the-voice.md` R1 as two numbers: noun-only share, and label length."""
     rows = _room_list_labels(model, game)
@@ -3176,6 +3246,35 @@ def _exit_holders(canvas_nodes):
         out.append(eb.get("config") or {})
         out.extend(eb.get("choices") or [])
     return out
+
+
+def _node_choices(node):
+    """Every choice on ONE node — `exit_block.choices` AND `exit_block.config.choices`.
+
+    `_exit_holders` does this for a whole canvas; this is the per-node form, needed
+    wherever a count is per-screen rather than per-canvas. The `config.choices`
+    spelling is legal and currently used ZERO times across the 18 games, so reading
+    it changes nothing today — it just stops a per-node walker having a silent hole
+    the canvas-level one does not.
+    """
+    eb = node.get("exit_block") or {}
+    return list(eb.get("choices") or []) + list((eb.get("config") or {}).get("choices") or [])
+
+
+def _choice_acts(ch):
+    """Does this choice CHANGE anything? — the seam `the-surfaces.md` R9 draws.
+
+    A location-target choice that fires nothing is a DOOR: R7's leave-link, written
+    to close the beat, and it is navigation. One that grants a trait, sets a flag,
+    moves an item, or charges a cost is an ACT that happens to end in a room, and it
+    is a decision the player made.
+
+    ⚠️ Both spellings of the item key are read because the generator reads both
+    (`v2.py` — `itemEffects` and `item_effects`); authored TOML uses `itemEffects`
+    4 times and `item_effects` never.
+    """
+    return any(ch.get(k) for k in ("effects", "flagEffects", "itemEffects", "item_effects",
+                                   "questEffects", "wardrobeEffects", "costs"))
 
 
 def _tick_cleared(game):
@@ -5221,6 +5320,72 @@ def run_gates(model, game, state=None):
          f"{start_loc or '(no start)'}",
          [f"{l} is not reachable and is not marked offscreen/sealed" for l in stranded])
 
+    # G11b — every authored node is reachable. `world reachable` one level down:
+    # that gate asks whether a ROOM can be walked to, this asks whether a SCREEN can
+    # be opened. Added 2026-09-02 (the-surfaces.md R9).
+    #
+    # ⚠️ THE INCIDENT. `orientation`'s `hub_ray_bedroom` shipped three nodes — the bed,
+    # the sex, the morning after — and only the first was linked. `base` fell through
+    # to the engine's default `[[Continue->Location_…]]`, so 288 words including the
+    # game's entire explicit core were authored, built, and impossible to reach. It
+    # passed 45 of 46 gates. Nothing here could see it, because the only reachability
+    # check in the repo (`release_mode`'s `every canvas is a passage`) deliberately
+    # keys on the CANVAS and throws the node segment away — node ids are not portable
+    # across generator eras, so it cannot look inside. This gate reads the SOURCE,
+    # where node ids are exactly as authored, so that objection does not apply.
+    #
+    # ⚠️ WHY A GATE AND NOT A LINT. The corpus is already at zero: 34 game files, and
+    # the only offenders were this one and a malformed dev block. There is no band to
+    # argue about — a node nothing points at is not a style, it is content the player
+    # can never open.
+    #
+    # ⚠️ QUALIFY BEFORE COMPARING. `nodeId` may be bare or `canvas.node`; `rejection_node`
+    # and `config.destinationId` are authored BARE and same-canvas (game_graph.py:450-453,
+    # :516). `base`, `act` and `dev` repeat across canvases corpus-wide, so an unqualified
+    # target set lets one canvas's `base` mark every other canvas's `base` as reached and
+    # the gate silently under-reports to zero.
+    #
+    # ⚠️ `[[canvases.connections]]` IS NOT AN EDGE. It parses and persists, and the
+    # generator never reads it — `game_graph.py:390`: "NodeConnection is dead — never
+    # read by the generator — skipped." Counting it would clear a node that is still
+    # dead in the build. Zero games declare one; it is excluded on purpose, not by
+    # oversight.
+    #
+    # A substitution targets a CANVAS, so it reaches that canvas's entry node, which is
+    # already exempt — it buys nothing here and is not read.
+    node_targets, orphans, node_total = set(), [], 0
+    for c in (game.get("canvases") or []):
+        if _is_dev(c):
+            continue                                  # dev shortcut — stripped from a shipped build
+        cid = c.get("id") or "?"
+        for n in (c.get("nodes") or []):
+            for ch in _node_choices(n):
+                for raw in (ch.get("nodeId"), ch.get("rejection_node")):
+                    raw = str(raw or "")
+                    if raw:
+                        node_targets.add(raw if "." in raw else f"{cid}.{raw}")
+            dest = str(((n.get("exit_block") or {}).get("config") or {}).get("destinationId") or "")
+            if dest:
+                node_targets.add(dest if "." in dest else f"{cid}.{dest}")
+    for c in (game.get("canvases") or []):
+        if _is_dev(c):
+            continue
+        cid = c.get("id") or "?"
+        nodes = c.get("nodes") or []
+        node_total += len(nodes)
+        # nodes[0] is the canvas entry — the build lands on it, so it needs no inbound edge.
+        for n in nodes[1:]:
+            key = f"{cid}.{n.get('id')}"
+            if key not in node_targets:
+                w = sum(len(b.split()) for b in _band_texts(n)) if _band_texts(n) else 0
+                orphans.append(f"{key} — {w} words, and nothing in the game links to it")
+    gate("every authored node is reachable", None if not node_total else not orphans,
+         f"{node_total - len(orphans)}/{node_total} authored nodes can be opened",
+         orphans[:12] + ([f"… and {len(orphans) - 12} more"] if len(orphans) > 12 else [])
+         + (["a node is reached by a `targetType = \"node\"` choice, a `rejection_node`, or an "
+             "`exit_block.config.destinationId` — write the link in the same edit as the node "
+             "(the-surfaces.md R9)"] if orphans else []))
+
     # G12 — everyone who lives here has somewhere to sleep.
     # Not inferable: a shopkeeper legitimately has no bed in the player's house and
     # a tenant on nights legitimately has no night schedule row. Only a declaration
@@ -5604,15 +5769,36 @@ def run_gates(model, game, state=None):
                             if (x.get("trigger") or {}).get("location")}):
             continue                                  # rungs are link targets, not screens
         for n in c["nodes"]:
-            # Count DECISIONS, not navigation. A choice that leaves for another
-            # location is an exit; the field's big screens are mostly exits and
-            # standing travel affordances, and only 1-6 things to actually do.
-            # Today this excludes nothing — every choice we have ever authored is
-            # targetType "node" — but the engine does support location targets
-            # (v2.py:13252), so the count is made denominator-proof up front.
-            choices = (n.get("exit_block") or {}).get("choices") or []
+            # Count DECISIONS, not navigation. The field's big screens are mostly
+            # exits and standing travel affordances, and only 1-6 things to do.
+            #
+            # ⚠️ CORRECTED 2026-09-02 — THIS GATE HAD GONE BLIND, and the comment that
+            # blinded it was the give-away. It read: "Today this excludes nothing —
+            # every choice we have ever authored is targetType 'node'" (2026-08-13,
+            # d1dc430). That stopped being true almost immediately. Excluding EVERY
+            # location target meant excluding the acts as well as the doors: in this
+            # gate's own scope `orientation` had 51 choice-nodes and it counted 9,
+            # `mothers_place` was invisible entirely (100%), `the_inheritance` 87%,
+            # `the_route` 78%. It was reporting "rooms median 2 · 0/2 at the cap" for
+            # a twelve-location game.
+            #
+            # And this file already disagreed with itself: the `a spent day still has
+            # a door` gate below PRESCRIBES a location-target leave-link as the fix it
+            # wants authors to write, so the advice manufactured exactly the choices
+            # this line then refused to see.
+            #
+            # The seam is not the target, it is whether the choice DOES anything
+            # (`the-surfaces.md` R9). A location exit that fires nothing is R7's door
+            # and stays uncounted; one that grants, flags or charges is an act that
+            # happens to end in a room, and it is a decision.
+            #
+            # Re-measured across all 18 games when this changed: EVERY verdict
+            # identical — `steam` 9 screens over the cap, every other game 0. The gate
+            # sees the corpus now; it does not judge it differently.
+            choices = _node_choices(n)
             decisions = [ch for ch in choices
-                         if (ch.get("targetType") or "node") != "location"]
+                         if (ch.get("targetType") or "node") != "location"
+                         or _choice_acts(ch)]
             if decisions:
                 (per_hub if c["id"] in npc_bound else per_screen).append(len(decisions))
             if len(decisions) > MENU_CEILING:
@@ -8467,6 +8653,7 @@ def main():
     label_summary, label_lints = lint_labels(model, game)
     sys_summary, sys_lints = lint_labels_and_systems(model, game, state)
     door_summary, door_lints = lint_doors(model, game)
+    unwritten_summary, unwritten_lints = lint_unwritten_act(model, game)
     browse_summary, browse_lints = lint_browse_share(model, game)
     disp_summary, disp_lints = lint_dispatch_depth(game)
     ladder_summary, ladder_lints = lint_ladder(model, game)
@@ -8509,6 +8696,8 @@ def main():
                                                            "findings": sys_lints},
                                     "doors": {"summary": door_summary,
                                               "findings": door_lints},
+                                    "unwritten_act": {"summary": unwritten_summary,
+                                                      "findings": unwritten_lints},
                                     "browse_share": {"summary": browse_summary,
                                                      "findings": browse_lints},
                                     "ambient_presence": {"summary": amb_summary,
@@ -8631,6 +8820,26 @@ def main():
               " that is said. Two different fixes — `gate it` is one line of requires_npc;")
         print("           `or narrate` means no row exists here, so a gate would strand the"
               " canvas and the arrival belongs in the prose instead)")
+
+    if unwritten_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the act between the click and the number — {unwritten_summary}")
+        for h in unwritten_lints[:16]:
+            print(f"          · {h}")
+        if len(unwritten_lints) > 16:
+            print(f"          · … and {len(unwritten_lints)-16} more")
+        print("          (the-surfaces.md R9 — a LIST, never a score. A location exit"
+              " that fires nothing is R7's door and is fine. One that fires effects is")
+        print("           an ACT that happens to end in a room, and the engine shows it"
+              " as a 2-second numeric toast: the approach is written, the outcome is a")
+        print("           number, and the act between them was never authored. A WORK"
+              " rung may resolve to a toast — nobody needs a paragraph about stacking")
+        print("           shelves. A rung aimed at a PERSON, or at her own body, may"
+              " not. The repair is one follow-up node, and several gated choices can")
+        print("           share it: vesper's `activity_bar_work` routes four into one"
+              " banded `shift` node. ⚠️ Field range is 0-68%, so there is no threshold")
+        print("           to set here that would not fail a game for obeying the"
+              " doctrine — which is why this cannot fail anything)")
 
     if door_summary:
         print(f"  {'─'*72}")

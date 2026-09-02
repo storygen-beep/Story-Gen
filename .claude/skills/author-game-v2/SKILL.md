@@ -253,6 +253,7 @@ documented nowhere but in the script's own comments, so an author who hit one ha
 | ends on an opening | the release closes on a visible locked door | `the-release.md` |
 | ascent tiers expand the world | your meters open content; **and no player meter quietly closes it** | `the-board.md` §3 |
 | world reachable · residents have homes | the map is a place someone could draw | `the-map.md` |
+| **every authored node is reachable** | no node outside a canvas's entry has zero inbound edges — a screen nothing links to is content the player can never open. 288 words of `orientation` were dead this way and it passed 45 of 46 gates | `the-surfaces.md` R9 |
 | **the map is a place** | a shape was CHOSEN, and the exterior is the ground rather than a room off the kitchen | `the-map.md` R0 · R3 |
 | guidance exists · no chain ends in silence | the player is told where to go next | `the-voice.md` R2 |
 | money gates something · sinks >= sources · no free uncapped income · a price is on its label · **the obligation is charged** | the economy can say no | `the-economy.md` |
@@ -339,7 +340,9 @@ is around is a legitimate shape; the hard version of the failure is the gate abo
 verbatim — a canvas `name`, an npc `description`, a quest card. Player-facing and dev-only counted
 separately; `engine.md` §43 has the four fields that DO resolve) · **the badge arrives before the
 content** · **the role stays attached** · **which refusals are
-shown at all**.
+shown at all** · **the act between the click and the number** (`the-surfaces.md` R9 — location
+exits that fire effects and show no screen, with the game-time they burn. A LIST: the field runs
+0-68%, so any threshold would fail a game for obeying the doctrine).
 
 ## Operating rules
 

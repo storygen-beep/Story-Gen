@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **id** | `the_bathroom` · button `Bathroom` |
-| **ENTERED FROM** | `the_avenue` |
+| **ENTERED FROM** | `the_hall` |
 | **FILL** | 3,500 words |
 | **cycling pool** | yes — `sex/bathroom_morning_t4`, pool 5 |
 
@@ -33,4 +33,4 @@ it needs no flag — `max_triggers_per_day` is read off the trigger (`v2.py:1101
 the midnight trap. Reach for the flag only when a rung is triggerless.
 
 ## Ways out
-`the_avenue`
+`the_hall`

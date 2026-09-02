@@ -62,7 +62,14 @@ while content is still there. **Put the ✓ on a FLAG the content sets on its wa
 
 ## The wall and the card are different jobs
 
-**R4 — a wall shows the want; the card shows the route.** The locked row at `the_quad` (*cross to the
-row*, `reputation 85`) says what she wants and what bars it. The **card** is what tells her where to
-go and earn it. Ours is the corpus's best shape: a refusal that names **every unmet term separately,
+**R4 — a wall shows the want; the card shows the route.** The locked row is now `act_row_walk`'s
+*stop when she says your name* at `the_row` (`reputation 85`): it says what she wants and what bars
+it. The **card** is what tells her where to go and earn it.
+
+⚠️ **AND THE CARD WAS POINTING AT A SPENT LEVER.** The 25→85 reputation card carried
+`ready_canvas = "act_quad_wall"`, and that activity's grant is capped at 45 — so for the entire
+second half of the climb the game's own compass sent the player at a button that could not move the
+goal. `gates.py` had the right answer and printed it every build: *"cheapest rung
+act_pledge_upstairs +5 / 30 min"*. Repointed 2026-09-02. **A card whose `ready_canvas` cannot reach
+its own goal is worse than no card.** Ours is the corpus's best shape: a refusal that names **every unmet term separately,
 with directions**, rather than one greyed label.

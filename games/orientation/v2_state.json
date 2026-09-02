@@ -125,11 +125,11 @@
       "spent_by": "carrying campus home; every act that lets the two hubs touch"
     },
     "map": {
-      "archetype": "two_hub",
-      "shape": "The Kessler house on the near side of a college town and the campus along its east edge, joined by an avenue with a bus stop on it. Two grounds, genuinely apart: the avenue is the house side's ground and the quad is the campus side's, and she crosses between them on a bus she pays for or in a car she has to ask for.",
+      "archetype": "nested_zones",
+      "shape": "The Kessler house on the near side of a college town and the campus along its east edge, joined by an avenue with a bus stop on it. The avenue is the ground: the house hangs off it through its own hall, and the quad hangs off it forty minutes and two dollars away. Campus fans out from the quad into the row of eight sorority houses, the professor's building and the union counter. Two grounds, one root, and she crosses on a bus she pays for.",
       "home_base": "her_room",
       "exterior": "the_avenue",
-      "exterior_note": "ROOT — no entry_from. the_quad hangs off it with travel costs on the LOCATION ({time=40, money=2}), which IS the bridge: the-map.md's own mechanism table puts travel friction on [[locations]] costs, on bridges between zones. CORRECTED AT BUILD: the board declared 'two roots joined by a travel canvas' per R3, and the engine cannot express it — template_import.py:4287 hard-fails a navigation_order entry whose entry_from is not that location, so two roots cannot be joined by nav, and joining them by canvas exits alone strands the_quad and its three children in gate 11, which builds adjacency from entry_from + navigation_order only.",
+      "exterior_note": "ROOT — no entry_from. Everything else is nested under it: the_hall carries the five house rooms, the_quad carries the_row (which carries the anchor), halloran_office and the_counter. Travel cost sits on the_quad LOCATION ({time=40, money=2}), which IS the bridge. RESTRUCTURED 2026-09-02 from two_hub: the five house rooms used to hang off the STREET (the-map.md R3's inverted map — 'the home contains a bit of world') and the pledge house off a lawn. Depth is free; the engine only forbids TWO ROOTS (template_import.py:4306).",
       "homes": {
         "npc_ray": "the_back_bedroom",
         "npc_dee": "the_back_bedroom",
@@ -150,7 +150,7 @@
           "note": "a ride from @wes or @ray is a CANVAS exit that lands the same place for 15 min and no fare, gated on relation. The two ways across are the point."
         }
       ],
-      "r1_signoff": "SIGNED OFF by LO in chat, board phase, 2026-09-02. What he saw: the 10 place sheets and DECISIONS.md sections A5/B1/B3 — two_hub on two roots (the_avenue, the_quad), the anchor on the campus side at 25.6%, every resident with a declared bed and halloran explicitly offscreen, and the bridge priced two ways (bus $2/40min, or a favour)."
+      "r1_signoff": "RESTRUCTURE SIGNED OFF by LO in chat, 2026-09-02, after the map was measured against the mopoga corpus. What he saw: the avenue carrying 2 things to do against 6 ways out where the field median for a place is 3 things and 1 way out; that the quad was standing in for three separate places its own prose names (the row, the lecture building, the union building); and that act_quad_row's reward branch returned the player to the quad with no effect, flag or destination. He chose one house hub, the row opened rather than locked, and Ray's door as 0.1's locked door."
     },
     "economy": {
       "currency": "money",
@@ -217,10 +217,24 @@
     ],
     "locations": [
       {
+        "id": "the_row",
+        "job": "Eight sorority houses along the east edge of the quad, one of which she has been inside. The reputation tier's only gate site and the ground 0.2 opens into: what 85 buys is somebody on this street using her name first.",
+        "anchor": false,
+        "fill": 400,
+        "has_cycling_pool": false,
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_simone"
+          ]
+        }
+      },
+      {
         "id": "the_pledge_house",
         "job": "Simone, the dues, the other girls, and the upstairs on a party night. The corrupting engine, and the place the game is actually about.",
         "anchor": true,
-        "fill": 11500,
+        "fill": 12000,
         "has_cycling_pool": true,
         "serves": {
           "needs": [
@@ -335,6 +349,24 @@
           "people": [
             "npc_wes",
             "npc_ray"
+          ]
+        }
+      },
+      {
+        "id": "the_hall",
+        "job": "The house reporting itself. Front door, stairs, four doors off the landing and the one bathroom among them. It is where she finds out who is in before she decides which door to open, and it is the only room in the house that is not somebody's.",
+        "anchor": false,
+        "fill": 600,
+        "has_cycling_pool": true,
+        "serves": {
+          "needs": [
+            "rest"
+          ],
+          "work": [],
+          "people": [
+            "npc_wes",
+            "npc_ray",
+            "npc_dee"
           ]
         }
       },
@@ -585,6 +617,10 @@
     {
       "at": "repair",
       "note": "2026-09-02 (same day, corrected) — the first role pass hard-coded Ray as `owns the house` and Wes as `his son`, on the reasoning that `role` was static text and a kin word could contradict the relationship picker. That inverts the point: the picker exists so the PLAYER decides what he is to her, and the label under his name is where that answer belongs. Engine changed to resolve @-tokens in `role` (v2.py:15272, escape then resolve); Ray is now `@ray.rel` and Wes `@wes.rel`, so the box prints the option chosen and follows a change. Dee/Simone/Halloran keep plain strings — Dee's relationship is a SENTENCE (\"Your mother.\") and the colon is CSS, so tokenising it would put a full stop before the colon."
+    },
+    {
+      "at": "map restructure",
+      "note": "2026-09-02 — THE MAP WAS A CORRIDOR AND THE ROW WAS A BUTTON. A playtest asked what `Stand where the shelter isn't`, `Sit on the wall` and `Cross to the row` were FOR. Measured against the 25-game mopoga corpus the v2 rules were derived from: two of our ten locations were pass-through (the avenue 2 things to do against 6 ways out; the quad 5 against 4) and they were exactly the two holding the complained-about buttons. Field median for a place across 13 parseable corpus games is 4 things and 1 way out; the skill's own figure, measured by playing, is 1-6 things (median 3) — the-surfaces.md:151. CAUSE: archetype was two_hub where the-map.md:38 names nested_zones the 'default to beat' for exactly this premise ('a town or campus PLUS a home'), and the board's wish for two roots was blocked by template_import.py:4306, so the quad was hung under the avenue and the avenue became the root of the house as well. There was no house — all five rooms had entry_from = the_avenue, so she walked out to the street to get from her bed to the bathroom, and the prose named a landing 7x, stairs 6x and a corridor 3x that the map did not contain (R5: 'three uses of the same word is a place'). DONE: archetype -> nested_zones; the_hall added carrying the five house rooms; the_row added carrying the pledge house; 14 canvas exits retargeted from the street to the hall; act_quad_row DELETED. WHAT REPLACES THE HEAT IT REMOVED: act_quad_row was 0.1's declared locked door and the game's ONLY reputation>=85 site — deleting it took `ascent tiers expand the world` red with reputation at 0 expand / 0 contract. act_row_walk carries the tier now, and it is the thing the old canvas was not: the street is walkable at any reputation, 85 buys being SPOKEN TO on it, and that sets `row_knows_her` for 0.2. 0.1 now ends on Ray's door (appetite 70) and Simone's landing (nerve 50), both of which have content behind them, rather than on a screen whose reward branch returned the player to the quad with no effect, no flag and no destination — which gates.py had been printing as a lint every build ('costs 30m and leaves nothing behind') and which shipped anyway. COST: two locations against a fill gate already red. Legal because the-release.md:264-273 scopes 'default to zero new locations' to v0.2 onward and this is v0.1 with releases: []. the_pledge_house.fill raised 11,500 -> 12,000 so the plan-anchor ratio holds at 25.8% over the new 46,500 total (the-board.md:137 — budget the anchor against the FINISHED total). the_hall carries a _t4 pool because traversal heat is a RATIO: 7/10 = 70% would have become 7/12 = 58% and failed the 60% floor. FREE NOW, EXPENSIVE LATER: releases: [] — nothing has shipped, so the A2 id contract and A5 are still open and no save is stranded. Re-parenting is not a rename in any case (location ids are stable slugs; current_location = \"the_kitchen\" in the built HTML)."
     }
   ],
   "arc_log": {
@@ -611,17 +647,19 @@
   },
   "build_state": {
     "version": "0.1-wip",
-    "gates": "45/46 judged (1 n/a)",
+    "gates": "45/46 judged (1 n/a) · playtest 9/10",
     "failures": [
-      "location fill — 7,593 of 45,000 declared words. The only red, and it is authoring, not structure."
+      "location fill — 7,874 of 46,500 declared words, 0/12 on their own budget. The only red, and it is authoring, not structure.",
+      "playtest `a random event actually fires` — 0/1. walkin_latelab is the game's only trigger_mode=random canvas and it is gated on `late_lab_open`, which Halloran's arc sets; a turn-one walk of six Monday hours cannot have it. VERIFIED PRE-EXISTING 2026-09-02 by building git HEAD into a scratch dir and playing it: the baseline scores the identical 9/10 with the identical failure. Not a regression of the map restructure."
     ],
-    "remaining": "37,407 words, distributed per board.locations[].fill. the_pledge_house needs 9,829 of them to hold the >=25% anchor share; the_kitchen is the de facto anchor at 27% and must not stay that way.",
+    "remaining": "38,794 words, distributed per board.locations[].fill (total raised to 46,500 by the 2026-09-02 map restructure). the_pledge_house is the declared anchor at 12,000 = 25.8% of plan; the_kitchen is still the de facto BUILT anchor at 27% and must not stay that way.",
     "structural": "portraits live, gated on `met AND located` for all 5 characters — verified in a browser at ten day/hour/flag points: no portrait exists before its meeting has fired, and a met character still does not appear outside their own hours. Walk-ins fire only as substitutions. Zero @-tokens in the built HTML. One wardrobe door. Built without --debug. Every NPC dialogue block carries the role label under the name (65/65, zero bare names).",
     "known_open": [
       "walkin_bath_wes / walkin_avenue_ray / walkin_quad_halloran carry no schedule and no conditions — they are day-capped substitution targets, so this is far milder than it was, but their windows are still implicit.",
       "act_back_bedroom_door and hub_wes_room share the name 'Go in'. Daily limits are shared BY NAME; neither is day-capped today, so it is inert — but it will bite the moment one gets a cap."
     ],
     "opening_vs_field": "5 screens, 625 words, screens of 81-179 against a field median first-fiction screen of 144, one real choice on screen 4. No dev note, no changelog, no systems explainer — which the top two games all ship.",
-    "doors": "the_back_bedroom and wes_room carry [locations.door] (the-map.md R6). the_bathroom deliberately does NOT — R6c, a shared room takes occupancy-gated rows. Ray's 01:00-06:00 bedroom schedule row was declared on his sheet and missing from the build until `lint · a door opens onto something` found it: a knock nobody could answer."
+    "doors": "the_back_bedroom and wes_room carry [locations.door] (the-map.md R6). the_bathroom deliberately does NOT — R6c, a shared room takes occupancy-gated rows. Ray's 01:00-06:00 bedroom schedule row was declared on his sheet and missing from the build until `lint · a door opens onto something` found it: a knock nobody could answer.",
+    "map": "nested_zones, 12 locations, one root (the_avenue), depth 4. Verified in the BUILT html: the avenue renders exactly two cards (the_hall, the_quad, the latter tagged 40m · 2 Money); the hall renders five (three nav cards + two door cards, because a location with a [locations.door] routes through its threshold, v2.py:12608); the quad renders the_row/halloran_office/the_counter; every leaf's Leave-link points at its new parent (Kitchen -> Hall, Pledge House -> The Row). `act_quad_row` and the string 'Cross to the row' appear nowhere in the build. Both new description chains carry version = \"1.0\" on every arm — `entry_conditions` and its neighbours fail OPEN without it and nothing validates that (template_import.py has no check)."
   }
 }

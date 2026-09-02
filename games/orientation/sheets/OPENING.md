@@ -115,8 +115,8 @@ second ladder goes dark with no error and no build warning.
 | | |
 |---|---|
 | the bus | the bridge to `the_quad` — 40 min, $2. Always open |
-| `@wes` | on the avenue with the car, **07:15–07:50** (his row 2). The ride is 15 min and it is a **favour**, not a fare |
-| walk back inside | `her_room`, `the_kitchen`, `the_bathroom` all reachable |
+| `@wes` | on the avenue with the car, **07:15–07:50** (his row 2). The ride would be 15 min and a **favour**, not a fare — ⚠️ **the canvas does not exist**; see `sheets/places/the_avenue.md` |
+| walk back inside | **`the_hall`**, and `her_room` / `the_kitchen` / `the_bathroom` off it. The hall says who is in before she picks a door |
 
 Gate *the opening opens a door* checks exactly this: that the funnel's last click lands on a clock
 time when something at that location is actually open.

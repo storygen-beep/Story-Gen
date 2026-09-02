@@ -4,7 +4,7 @@
 |---|---|
 | **id** | `the_pledge_house` |
 | **name on the button** | `Pledge House` — public venue, bare noun, no article |
-| **ENTERED FROM** | `the_quad` |
+| **ENTERED FROM** | `the_row` |
 | **FILL** | **11,500 words · 25.6% of the world** — declared before the prose |
 | **cycling pool** | yes — `sex/pledge_upstairs_t5`, pool 6 |
 

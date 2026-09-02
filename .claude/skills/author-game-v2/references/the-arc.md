@@ -38,6 +38,7 @@ and both were wrong.**
 | **what happens between meeting someone and the repeatable surface** | **this file** |
 | which screen a piece of content lives on | `the-surfaces.md` |
 | how the prose reads once they click | `register.md` |
+| **whether there is any prose once they click** | `the-surfaces.md` R9 — added 2026-09-02. This row did not exist, and a choice that produced no screen at all fell between all three of the rows above it |
 | the introduction itself, and the first hour | `the-first-hour.md` |
 | which meters exist, and what the climb costs | `the-meters.md` |
 | what a release has to clear before it ships | `the-release.md` |

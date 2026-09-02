@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **id** | `the_kitchen` · button `Kitchen` |
-| **ENTERED FROM** | `the_avenue` |
+| **ENTERED FROM** | `the_hall` |
 | **FILL** | 4,500 words |
 | **cycling pool** | yes — `sex/kitchen_late_t5`, pool 5 |
 
@@ -42,4 +42,4 @@ surface at low probability, and it is the only thing in the game that can cost `
 move.
 
 ## Ways out
-`the_avenue`
+`the_hall`

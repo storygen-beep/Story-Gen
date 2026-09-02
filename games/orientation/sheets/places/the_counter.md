@@ -16,7 +16,7 @@ and the back room behind it is one of the five surfaces the crude register lives
 |---|---|
 | **Take a shift** | work — the only income channel |
 | **Eat on shift** | needs — `fed`, $4, 15 min |
-| **The back room** | ascent — `nerve`. **The repeatable act surface** |
+| **Go in the back room** | ascent — `nerve`. **The repeatable act surface** |
 
 ## The shift — income, and the brake on it
 Gate *no free uncapped income*: **every income surface has a brake on every route in.**

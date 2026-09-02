@@ -509,6 +509,13 @@ flagEffects = [
 ]
 ```
 
+⚠️ **This template is for WORK, and 2026-09-02 is when that stopped being implicit.** It resolves the
+act into a 2-second numeric toast and returns the player to the room, which is right for a shift —
+nobody needs a paragraph about stacking shelves. It is **not** right for a rung aimed at a person, or
+at her own body: `the-surfaces.md` R9 owns that split, and nothing in this file drew it. The word
+*person* does not appear here, and so this template got applied to people — 53 choices in one game,
+34 hours of game time, the act missing every time.
+
 Six rules are carried by that one choice, and each of them has cost a shipped game:
 
 1. **`costs` is the brake the engine enforces for you.** An unaffordable choice is not offered, and

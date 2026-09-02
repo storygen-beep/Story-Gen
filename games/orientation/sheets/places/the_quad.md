@@ -26,12 +26,21 @@ in it answers only *work*, thinly, and the count is derived from needs + work + 
 ## The list
 | row | system |
 |---|---|
-| **The eight o'clock** | work — attendance. **Shut when `rest lt 30`** |
+| **Sit through the eight o'clock** | work — attendance. **Shut when `rest lt 30`** |
 | **Buy the lab kit** | money — a purchase that **stays bought** and opens the late lab (R1b) |
-| **Cross to the row** | ends-on-a-door — `show_when_locked`, `reputation 85` |
-| **Sit on the wall** | ascent — `reputation`. The quiet outcome pays |
+| ~~**Cross to the row**~~ | **DELETED 2026-09-02.** The row is a location now — `sheets/places/the_row.md`, DECISIONS.md A5b |
+| **Sit on the wall (30m)** | ascent — `reputation`. The quiet outcome pays — **but only to 45; see below** |
 
 ## Sit on the wall — the dispatcher
+
+⚠️ **THIS ROW IS SPENT FROM `reputation` 45 AND THE PLAYER IS NOT TOLD.** Its grant carries
+`cap = 45`, so past that it costs 30 minutes and pays exactly nothing, while looking identical.
+Its 30% walk-in also needs @halloran physically on the quad — Mon/Wed/Fri 08:00–09:30 only, ~4.5
+hours a week — so outside that window the roll is 0%, not 30%. Both are `Cause 2` in the
+2026-09-02 analysis (per-source caps violate `the-meters.md:955` M6, and the field gates a
+dispatcher's hit on NPC presence in 0–5% of cases against our 6/6). **Out of scope for the map
+restructure; not fixed here.** The quest card that used to point at this row for the 45→85 climb
+now points at `act_pledge_upstairs`, which can actually move it.
 **A7.** Most visits produce nothing, and the nothing is written **five ways**, returning 30 minutes
 and a small `reputation` tick. A place where something always happens has no tension in the click.
 
@@ -46,4 +55,9 @@ much world.**
 the ambient, and entry-time auto-fire redirects before the location screen renders (`v2.py:4921`).
 
 ## Ways out
-`the_pledge_house` · `halloran_office` · `the_counter` · **bridge → `the_avenue`**
+`the_row` · `halloran_office` · `the_counter` · **bridge → `the_avenue`**
+
+⚠️ **`the_pledge_house` moved one level down, onto `the_row`.** This game's own prose calls it
+*"third house along the row"*, and the quad was standing in for three separate places its writing
+names — the row, the lecture building, the union building. Only the first of those is built.
+`act_quad_row` — the canvas that pretended the row was a button — is deleted. DECISIONS.md A5b.

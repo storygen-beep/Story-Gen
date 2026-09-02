@@ -25,7 +25,7 @@ keep that honest is to say which rows are load-bearing.
 **Wes** — 3 converted rungs · **Halloran** — 3 converted rungs, `walkin_latelab` ·
 **Dee** — 2 band rungs, no scenes
 
-**Rooms** — `the_counter` back room (explicit, two A12 routes in) · `the_quad` ambient dispatcher
+**Rooms** — `the_counter` back room (explicit, two A12 routes in) · `the_quad` ambient dispatcher · `the_hall` landing traffic · `the_row` the walk
 (5 outcomes, A9 setups spread `nerve` 5 → `reputation` 85) · `the_back_bedroom` (explicit,
 `appetite` 70)
 

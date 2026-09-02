@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **id** | `the_back_bedroom` · button `Ray's Room` — owned interior, possessive |
-| **ENTERED FROM** | `the_avenue` |
+| **ENTERED FROM** | `the_hall` |
 | **FILL** | 3,000 words |
 | **cycling pool** | yes — `sex/back_bedroom_t5`, pool 4 (BUILT 2026-09-02; declared and absent before that) |
 
@@ -44,4 +44,4 @@ show a locked row at all. This one is not mute.
 This one is gated on `appetite`, which she raises elsewhere — a real handle, and worth speaking.
 
 ## Ways out
-`the_avenue`
+`the_hall`

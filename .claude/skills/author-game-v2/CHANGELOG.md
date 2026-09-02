@@ -5,6 +5,91 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-02 — the act between the click and the number: a location exit that fires effects is not a door
+
+**`references/the-surfaces.md`** (R9, and both of its tables) · **`references/the-arc.md`** (the
+ownership row that did not exist) · **`references/the-economy.md`** (R5's template scoped to work) ·
+**`references/engine.md`** (new §45) · **`references/the-sheets.md`** (S2) · **`SKILL.md`** (the gate
+row and the lint) · **`scripts/gates.py`** (`lint_unwritten_act`, the `every authored node is
+reachable` gate, `_node_choices`, `_choice_acts`, and G20's exclusion).
+
+LO, reading a build: *"Some exit choice have an action but does not have the follow up node, it
+simply exit to the location."* Then, on the carve-out proposed for sleeping, washing and eating:
+**"Nope nothing should be skipped. Wash bath are content in themselves."**
+
+**The shape.** A choice with `targetType = "location"` carrying `effects` fires them, shows a
+2-second numeric toast, and returns the player to the room. The approach is written, the outcome is
+a number, and the act between them was never authored. *"Ask him for the dues before you're short."*
+— she asks a man for money, he gives her £120, and the game shows her a receipt. **53 choices in
+`orientation`, 34.1 hours of game time.** Field range 0–68%: `steam` and `back_home` ship zero,
+`the_inheritance` 74.
+
+**R9 is the general case of two rules already written.** `the-surfaces.md` R5b says it about
+refusals — *"a 'no' that returns the player to an unchanged menu is a door that was never really
+open"* — and `the-arc.md` A10/A11 say it about the end of an act. The seam against R7 is clean and
+is stated in R9's own words: **R7's leave-link fires no effects and is navigation; a location exit
+that changes her is an act, and an act needs a screen.**
+
+⚠️ **Nothing owned this question, which is why it shipped.** `the-arc.md`'s ownership table routed
+*which screen* to `the-surfaces.md`, *how the prose reads* to `register.md`, and *the steps between*
+to itself — **"whether there is prose once they click" was in none of the three rows.** It has one
+now. `the-economy.md` R5 meanwhile taught this exact TOML as *"what a paying rung actually looks
+like"*, correctly for work and with no person in it — the word *person* does not appear in that
+file — so the job template got applied to people. R5 now says it is for work and points at R9.
+
+**A gate the repo never had: `every authored node is reachable`.** `orientation`'s `hub_ray_bedroom`
+authored three nodes and linked one; `base` fell through to the engine's default
+`[[Continue->Location_…]]`, so the sex and the morning-after — **288 words, the game's entire
+explicit core** — were built into the HTML and impossible to reach, and it **passed 45 of 46 gates**.
+The only reachability check in the repo (`release_mode`) deliberately keys on the canvas and throws
+the node segment away, because node ids are not portable across generator eras; this one reads the
+source, where they are exactly as authored. ⚠️ Targets are canvas-qualified before comparing —
+`base`, `act` and `dev` repeat corpus-wide, and an unqualified set lets one canvas's `base` mark
+every other one as reached. ⚠️ `[[canvases.connections]]` is deliberately **not** an edge: it parses,
+persists, and the generator never reads it (`game_graph.py:390`).
+
+**`lint · the act between the click and the number`** — LO's call: a list, never a score. At zero
+tolerance a gate would fail **16 of 18 games** at once, `vesper` included, and a scoreboard that
+reds everything stops telling a broken game from an unfinished one. It reports the count, the hours,
+and the split that is actually actionable: on a single-screen canvas the act is definitively
+unwritten; on a multi-node canvas the click closes a chain that was written.
+
+**And a gate had gone blind.** `a place is not a catalogue` excluded every location-target choice on
+a comment reading *"Today this excludes nothing — every choice we have ever authored is targetType
+'node'"* (2026-08-13, `d1dc430`). That went false almost immediately, and the file already
+disagreed with itself — the `a spent day still has a door` gate **prescribes** a location-target
+leave-link as the fix it wants written. In its own scope `orientation` had 51 choice-nodes and it
+counted **9**; `mothers_place` was invisible entirely, `the_inheritance` 87%, `the_route` 78%. It
+now counts a location exit that *does something*. Re-measured across all 18 games: **every verdict
+identical**, `steam` 9 over the cap and every other game 0 — it sees the corpus now, it does not
+judge it differently.
+
+**Two engine facts written down for the first time.** §45 documents the effect toast at all: it is
+the *whole* of the feedback for a location choice, costs notify too (so a spend is never silent),
+and ⚠️ `.effect-toast` is `white-space: nowrap` with no `max-width` and no media query, so a
+five-effect toast runs ~92 characters — about 650px — and is clipped at both ends on a 390px phone.
+Recorded, not fixed, so a future change is a decision rather than a discovery.
+
+**Two defects found while measuring, neither fixed here.** `ascent tiers expand the world` is
+**non-deterministic** on any game without a `v2_state.json`: identical code and input flip the
+verdict, because the "top-3 guess" fallback breaks a tie on unordered iteration. And
+`the_long_summer_test` fails the new gate legitimately — `scene_cookie_diner_evening.dev` is a dev
+node whose `[[canvases]]` header is missing, so TOML welded it onto the preceding ambient canvas; it
+is not `_is_dev`-excludable because its host canvas is not a dev canvas.
+
+**Verified.** `--selfcheck` **48/48 · 38/38 · 5/5 · 137 rules across 13 files, 0 broken pointers**,
+exit 0 — 136 → 137 is exactly R9. All 18 games re-scored against a frozen corpus: **0 pre-existing
+verdicts moved**, the gate set gained exactly the one new name, and the new gate fails only
+`the_long_summer_test`. It was made to fire on the real bug — pointed at `orientation` as it stood
+at `bfb5003` it reports *"hub_ray_bedroom.act — 192 words"* and *"hub_ray_bedroom.after — 96
+words"*, which is the 288. The lint's count was reconciled against an independent walk on all 18
+games: every game agrees, and `steam` and `back_home` stay silent at 0. ⚠️ One crash caught in
+review: `value` is not always a number — the engine also takes `{ type = "random", min, max }`,
+which `the_long_summer_test` uses 43 times, and formatting it as a scalar took the whole lint down.
+`pytest apps/game_generation/tests/` 357 passed, 7 skipped — nothing under `apps/` was touched.
+
+---
+
 ## 2026-09-02 — the door: a threshold she can knock at, and the rule that it belongs to a person
 
 **`references/the-map.md`** (R6 · R6b · R6c, and both of its tables) · **`references/engine.md`**
