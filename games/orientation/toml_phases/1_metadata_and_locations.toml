@@ -212,6 +212,7 @@ name         = "Ray"
 #    "default relationship '<x>' not in relationship_options". Prose belongs in
 #    description. Cost one build.
 relationship = "stepfather"
+role         = "owns the house"   # F10 — the label under the name in every dialogue box
 description  = "Your mother married him in June and the house came with him. Forty-six. Owns the house, pays the tuition, and has not once said so out loud. He was on his own in it for a long time before your mother and he has not finished being surprised that anyone is in the kitchen at night."
 portrait     = "ray.jpg"
 customizable = true
@@ -254,6 +255,7 @@ activity   = "still up, and not going to bed while you are down here"
 id           = "npc_dee"
 name         = "Dee"
 relationship = "Your mother."
+role         = "mother"   # F10 — the label under the name in every dialogue box
 description  = "Forty-three, agency nights at the county hospital, ten to six. She married the house and she is grateful for it in a way she says out loud too often. She is the reason every hour you spend in that kitchen after ten costs something."
 portrait      = "dee.jpg"
 core_traits  = { relation = 0 }
@@ -279,7 +281,8 @@ activity   = "home, awake, and in the middle of everything"
 id           = "npc_wes"
 name         = "Wes"
 relationship = "stepbrother"
-description  = "@ray's son, a junior at the college you start tomorrow. Twenty, never moved out, and already inside every room you are trying to get into. He is the only person who sees both halves of your life and he has not decided what to do with that yet."
+role         = "his son"   # F10 — the label under the name in every dialogue box
+description  = "The son of the man your mother married, a junior at the college you start tomorrow. Twenty, never moved out, and already inside every room you are trying to get into. He is the only person who sees both halves of your life and he has not decided what to do with that yet."
 portrait     = "wes.jpg"
 customizable = true
 relationship_options = ["stepbrother", "half-brother", "brother", "cousin"]
@@ -317,6 +320,7 @@ activity   = "door open, headphones half off"
 id           = "npc_simone"
 name         = "Simone"
 relationship = "The senior who runs the pledge house."
+role         = "runs the pledge house"   # F10 — the label under the name in every dialogue box
 description  = "Twenty-two, final year, and she runs that house the way somebody runs a business they intend to leave in good order. She decides who you get to be on this campus and she will tell you so to your face. She is also the one who counts your money on a Friday."
 portrait     = "simone.jpg"
 core_traits  = { relation = 0, lust = 0 }
@@ -350,6 +354,7 @@ activity   = "still up, and past caring who sees"
 id           = "npc_halloran"
 name         = "Halloran"
 relationship = "He teaches the eight o'clock."
+role         = "the eight o'clock"   # F10 — the label under the name in every dialogue box
 description  = "Fifties, tenured, and bored in a way he has stopped hiding. Two hundred people take his eight o'clock and he holds office hours for whoever turns up, which is almost nobody. He is the only man here whose approval is worth anything on paper."
 portrait     = "halloran.jpg"
 core_traits  = { relation = 0 }

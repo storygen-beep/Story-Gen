@@ -250,7 +250,7 @@ group      = "nerve"
 priority   = 10
 text       = "One bathroom, four people, and a bolt that works. Whether you use it is the only thing in this house nobody has decided for you."
 ready_text = "You have stopped reaching for the towel."
-tip        = "The bathroom at home, early, while @wes is still on that side of the door."
+tip        = "The bathroom at home, early, while he is still on that side of the door."
 when       = [ { type = "trait", subject = "player", trait = "nerve", op = "lt", value = 15 } ]
 goals      = [ { type = "trait", subject = "player", trait = "nerve", op = "gte", value = 15, label = "Let the door swing" } ]
 ready_canvas = "act_bath_wash"
@@ -386,7 +386,7 @@ priority      = 12
 text          = "He stopped shutting that door properly and neither of you has said a word about it."
 when          = [ { type = "flag", subject = "player", flag = "wes_room_open", op = "is_true" } ]
 terminal      = true
-terminal_text = "As far as @wes goes in 0.1. There is more of him owed and it is written down."
+terminal_text = "As far as he goes in 0.1. There is more of him owed and it is written down."
 
 [[quest_cards]]
 npc_id        = "npc_halloran"

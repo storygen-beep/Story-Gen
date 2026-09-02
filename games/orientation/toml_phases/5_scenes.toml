@@ -22,18 +22,27 @@
 
 [[canvases]]
 id          = "hub_ray_kitchen"
-name        = "Sit with @ray"
+name        = "Sit with him"
 description = "His hub. Three rungs on relation, day-capped, inside his own window."
-npc         = "npc_ray"
 
 [canvases.trigger]
 location      = "the_kitchen"
 is_repeatable = true
 is_active     = true
 priority      = 6
+npc           = "npc_ray"     # the portrait + the presence gate (F5b)
 requires_npc  = "npc_ray"
 costs         = [ { trait = "rest", value = 6 } ]
 
+# F5 — his portrait does not exist until the meeting that names him has fired.
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "met_ray"
+operator = "is_true"
 [[canvases.nodes]]
 id   = "base"
 name = "Up when he is up"
@@ -96,13 +105,13 @@ time_progression_minutes = 5
 id          = "act_kitchen_late"
 name        = "Sit up with him"
 description = "@ray's repeatable act surface. The REWARD for finishing his nine-step arc, not the starting position. Node routing, not a cascade — the picture changes with the act."
-npc         = "npc_ray"
 
 [canvases.trigger]
 location      = "the_kitchen"
 is_repeatable = true
 is_active     = true
 priority      = 7
+npc           = "npc_ray"     # the portrait + the presence gate (F5b)
 requires_npc  = "npc_ray"
 costs         = [ { trait = "rest", value = 12 } ]
 conditions = { version = "1.0", logic = "AND", items = [
@@ -247,11 +256,11 @@ time_progression_minutes = 5
 # ─── the walk-in — REQUIRED, and not deferred ────────────────────────────────
 [[canvases]]
 id          = "walkin_kitchen_dee"
-substitution_only = true
 name        = "The car in the drive"
 description = "The one thing in the game that can cost home_face in a single move. Fires in @ray's window when Dee's shift breaks."
 
 [canvases.trigger]
+substitution_only = true     # NEVER renders alone — dispatcher target only (F5b)
 location      = "the_kitchen"
 is_repeatable = true
 is_active     = true
@@ -302,16 +311,25 @@ effects = [
 id          = "hub_simone_office"
 name        = "Talk to Simone"
 description = "Her hub. The dues are handed over here on a Friday and that is a separate row from talking to her."
-npc         = "npc_simone"
 
 [canvases.trigger]
 location      = "the_pledge_house"
 is_repeatable = true
 is_active     = true
 priority      = 6
+npc           = "npc_simone"     # the portrait + the presence gate (F5b)
 requires_npc  = "npc_simone"
 costs         = [ { trait = "rest", value = 5 } ]
 
+# F5 — his portrait does not exist until the meeting that names him has fired.
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "met_simone"
+operator = "is_true"
 [[canvases.nodes]]
 id   = "base"
 name = "The office"
@@ -371,13 +389,13 @@ time_progression_minutes = 5
 id          = "act_pledge_upstairs"
 name        = "Go up"
 description = "The anchor's repeatable act surface, opened by simone_06. Node routing. Two exits per screen all the way down — field median for an act menu is 2 options, span 1."
-npc         = "npc_simone"
 
 [canvases.trigger]
 location      = "the_pledge_house"
 is_repeatable = true
 is_active     = true
 priority      = 7
+npc           = "npc_simone"     # the portrait + the presence gate (F5b)
 requires_npc  = "npc_simone"
 costs         = [ { trait = "rest", value = 15 } ]
 conditions = { version = "1.0", logic = "AND", items = [
@@ -568,11 +586,11 @@ time_progression_minutes = 5
 # ─── the walk-in — REQUIRED ──────────────────────────────────────────────────
 [[canvases]]
 id          = "walkin_shower_simone"
-substitution_only = true
 name        = "The tin by the door"
 description = "Fires on the clean restore at the pledge house inside Simone's window. Cover or do not — and those are two beats, not one beat with a modifier."
 
 [canvases.trigger]
+substitution_only = true     # NEVER renders alone — dispatcher target only (F5b)
 location      = "the_pledge_house"
 is_repeatable = true
 is_active     = true
@@ -616,18 +634,27 @@ effects = [
 
 [[canvases]]
 id          = "hub_wes_bathroom"
-name        = "Talk to @wes"
+name        = "Catch him at the door"
 description = "His hub, in the one room this house makes them share. Three rungs, converted on day one — his arc is owed at 0.2."
-npc         = "npc_wes"
 
 [canvases.trigger]
 location      = "the_bathroom"
 is_repeatable = true
 is_active     = true
 priority      = 6
+npc           = "npc_wes"     # the portrait + the presence gate (F5b)
 requires_npc  = "npc_wes"
 costs         = [ { trait = "rest", value = 5 } ]
 
+# F5 — his portrait does not exist until the meeting that names him has fired.
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "met_wes"
+operator = "is_true"
 [[canvases.nodes]]
 id   = "base"
 name = "Both of you at that door"
@@ -667,11 +694,11 @@ time_progression_minutes = 5
 # ─── the walk-in — REQUIRED, and its two exits are TWO BEATS ─────────────────
 [[canvases]]
 id          = "walkin_bath_wes"
-substitution_only = true
 name        = "The door opens"
 description = "A6b — the deliberate version and the accidental version of one reveal are two beats, not one beat with a modifier. Everything downstream differs."
 
 [canvases.trigger]
+substitution_only = true     # NEVER renders alone — dispatcher target only (F5b)
 location      = "the_bathroom"
 is_repeatable = true
 is_active     = true
@@ -717,16 +744,25 @@ effects = [
 id          = "hub_halloran_office"
 name        = "Office hours"
 description = "His hub. Three rungs, converted on day one — his arc is owed at 0.3. past_top reaches the key in week one."
-npc         = "npc_halloran"
 
 [canvases.trigger]
 location      = "halloran_office"
 is_repeatable = true
 is_active     = true
 priority      = 6
+npc           = "npc_halloran"     # the portrait + the presence gate (F5b)
 requires_npc  = "npc_halloran"
 costs         = [ { trait = "rest", value = 5 } ]
 
+# F5 — his portrait does not exist until the meeting that names him has fired.
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "met_halloran"
+operator = "is_true"
 [[canvases.nodes]]
 id   = "base"
 name = "Third floor, at the end"
@@ -960,9 +996,9 @@ time_progression_minutes = 20
 id          = "walkin_avenue_ray"
 name        = "He is still in the car"
 description = "Substitution on standing out past the shelter. He has not gone in yet and he can see her from the drive."
-substitution_only = true
 
 [canvases.trigger]
+substitution_only = true     # NEVER renders alone — dispatcher target only (F5b)
 location      = "the_avenue"
 is_repeatable = true
 is_active     = true
@@ -1005,9 +1041,9 @@ effects = [
 id          = "walkin_quad_halloran"
 name        = "He comes past the wall"
 description = "Substitution on sitting on the wall. He crosses the quad twice a day and one of those is on his way to an empty office."
-substitution_only = true
 
 [canvases.trigger]
+substitution_only = true     # NEVER renders alone — dispatcher target only (F5b)
 location      = "the_quad"
 is_repeatable = true
 is_active     = true
@@ -1055,16 +1091,25 @@ effects = [
 id          = "hub_dee_kitchen"
 name        = "Talk to your mother"
 description = "Her surface. Two bands on home_face — the meter stated in a person's mouth, and then the same person noticing."
-npc         = "npc_dee"
 
 [canvases.trigger]
 location      = "the_kitchen"
 is_repeatable = true
 is_active     = true
 priority      = 6
+npc           = "npc_dee"     # the portrait + the presence gate (F5b)
 requires_npc  = "npc_dee"
 costs         = [ { trait = "rest", value = 5 } ]
 
+# F5 — his portrait does not exist until the meeting that names him has fired.
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "met_dee"
+operator = "is_true"
 [[canvases.nodes]]
 id   = "base"
 name = "Before the car goes"
@@ -1109,16 +1154,25 @@ time_progression_minutes = 5
 id          = "hub_wes_room"
 name        = "Go in"
 description = "@wes's surface in his own room. The nerve 70 rung is the top of that bar and it is what the sidebar has been promising."
-npc         = "npc_wes"
 
 [canvases.trigger]
 location      = "wes_room"
 is_repeatable = true
 is_active     = true
 priority      = 6
+npc           = "npc_wes"     # the portrait + the presence gate (F5b)
 requires_npc  = "npc_wes"
 costs         = [ { trait = "rest", value = 6 } ]
 
+# F5 — his portrait does not exist until the meeting that names him has fired.
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "met_wes"
+operator = "is_true"
 [[canvases.nodes]]
 id   = "base"
 name = "The door is open"

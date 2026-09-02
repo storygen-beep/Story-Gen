@@ -127,33 +127,6 @@ locationId               = "her_room"
 time_progression_minutes = 5
 
 [[canvases]]
-id          = "act_room_wardrobe"
-name        = "The wardrobe"
-description = "The clothing system's surface. A catalogue is legitimately long because its job is to list — it opens a wardrobe, it does not put twelve garments on the room screen."
-
-[canvases.trigger]
-location      = "her_room"
-is_repeatable = true
-is_active     = true
-priority      = 3
-
-[[canvases.nodes]]
-id   = "base"
-name = "What you brought"
-blocks = [
-  { type = "paragraph", content = "Two cases and one of them still shut. What you own is what fitted, which is jeans, three tops, and the shoes you are wearing." },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Change."
-targetType               = "location"
-locationId               = "her_room"
-time_progression_minutes = 10
-
-[[canvases]]
 id          = "act_room_phone"
 name        = "The phone"
 description = "The phone's way in from the room. The app itself is the sidebar button; this is the in-fiction door to it."

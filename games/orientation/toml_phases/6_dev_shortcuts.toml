@@ -25,9 +25,8 @@
 
 [[canvases]]
 id          = "talk_ray"
-name        = "Ask @ray about the house"
+name        = "Ask him about the house"
 description = "His talk screen. Eight exchanges on the three things he owns and nobody else does."
-npc         = "npc_ray"
 
 [canvases.trigger]
 location      = "the_kitchen"
@@ -36,6 +35,16 @@ is_active     = true
 priority      = 5
 requires_npc  = "npc_ray"
 costs         = [ { trait = "rest", value = 3 } ]
+
+[[canvases.trigger.schedules]]
+weekdays   = [6, 0, 1, 2, 3]
+start_time = "22:00"
+end_time   = "23:59"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "00:00"
+end_time   = "01:00"
 
 [[canvases.nodes]]
 id   = "base"
@@ -75,7 +84,6 @@ time_progression_minutes = 5
 id          = "talk_simone"
 name        = "Ask Simone about the house"
 description = "Her talk screen. Eight exchanges on the ladder, the girls, the party and the dues. She uses your surname and nobody else in this game does."
-npc         = "npc_simone"
 
 [canvases.trigger]
 location      = "the_pledge_house"
@@ -84,6 +92,21 @@ is_active     = true
 priority      = 5
 requires_npc  = "npc_simone"
 costs         = [ { trait = "rest", value = 3 } ]
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "16:00"
+end_time   = "19:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [3, 4, 5]
+start_time = "21:00"
+end_time   = "23:59"
+
+[[canvases.trigger.schedules]]
+weekdays   = [4, 5, 6]
+start_time = "00:00"
+end_time   = "02:00"
 
 [[canvases.nodes]]
 id   = "base"
@@ -121,9 +144,8 @@ time_progression_minutes = 5
 
 [[canvases]]
 id          = "talk_wes"
-name        = "Ask @wes about the campus"
+name        = "Ask him about the campus"
 description = "His talk screen. He uses no term of address at all, which is its own tell."
-npc         = "npc_wes"
 
 [canvases.trigger]
 location      = "wes_room"
@@ -132,6 +154,11 @@ is_active     = true
 priority      = 5
 requires_npc  = "npc_wes"
 costs         = [ { trait = "rest", value = 3 } ]
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time   = "23:00"
 
 [[canvases.nodes]]
 id   = "base"
@@ -171,7 +198,6 @@ time_progression_minutes = 5
 id          = "talk_halloran"
 name        = "Let Halloran talk"
 description = "His talk screen. He says Miss and nobody else does."
-npc         = "npc_halloran"
 
 [canvases.trigger]
 location      = "halloran_office"
@@ -180,6 +206,11 @@ is_active     = true
 priority      = 5
 requires_npc  = "npc_halloran"
 costs         = [ { trait = "rest", value = 3 } ]
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "16:00"
+end_time   = "18:00"
 
 [[canvases.nodes]]
 id   = "base"
@@ -219,7 +250,6 @@ time_progression_minutes = 5
 id          = "talk_dee"
 name        = "Ask your mother about the shift"
 description = "Her talk screen. She is the only person in this game who says @player's first name."
-npc         = "npc_dee"
 
 [canvases.trigger]
 location      = "the_kitchen"
@@ -228,6 +258,16 @@ is_active     = true
 priority      = 5
 requires_npc  = "npc_dee"
 costs         = [ { trait = "rest", value = 3 } ]
+
+[[canvases.trigger.schedules]]
+weekdays   = [6, 0, 1, 2, 3]
+start_time = "17:00"
+end_time   = "21:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [4, 5]
+start_time = "09:00"
+end_time   = "13:00"
 
 [[canvases.nodes]]
 id   = "base"
