@@ -1187,6 +1187,132 @@ def lint_screen_shape(model, game):
     return summary, out
 
 
+def lint_faceless_surfaces(game):
+    """Repeatable person-bound canvases that render no portrait. A LIST, never a score.
+
+    `trigger.npc` is what puts a character's face on a location screen AND what gates that
+    surface on their declared [[npcs.schedules]] (v2.py:5176-5179). A repeatable canvas that
+    names somebody via `requires_npc` but carries no `npc` renders instead as a plain
+    activity button (v2.py:5259 skips only canvases that HAVE an npcId) with no presence
+    check of any kind — `requires_npc` is read on exactly two paths, trigger_mode = "random"
+    (v2.py:5343) and substitution_only (v2.py:5486), and this is neither.
+
+    ⚠️ A LIST AND NOT A GATE, on purpose. The hard version of this failure — `npc` written
+    one level too high, where the key is discarded outright — is convicted by the gate
+    `no canvas key is discarded`, which cannot produce a false positive. THIS is the
+    soft version, and the corpus says plainly that it has legitimate instances. Measured
+    across all 26 games the day it was written — 21 hits in 5 games, 21 games clean:
+
+        orientation   14   the whole cast, every one of them a hub or a talk screen
+        the_allowance  3   walkin_gareth_wash / joss / martin — three walk-ins
+        late_shifts    2   scene_ben_stage2_charged_moment, scene_pam_confrontation
+        the_route      1   house_the_evening
+        vesper         1   react_renner_threat
+
+    Everything outside `orientation` is a WALK-IN or a scene that happens in a place while
+    somebody is around, and four of the seven are already windowed by their own
+    `trigger.schedules` — the correct alternative per the-first-hour.md F5b. A gate here
+    would fail four games for obeying the doctrine, which is the R4 error.
+
+    ⚠️ THE FIRST VERSION OF THIS DOCSTRING SAID "orientation 13, vesper 1, the_route 1,
+    every other game 0". That was an ELEVEN-game sample stated as the corpus, and running
+    the finished lint over all 26 found `the_allowance` and `late_shifts` immediately. The
+    numbers above are the full sweep. Measure the artefact the check reads.
+    """
+    rows = []
+    for c in (game.get("canvases") or []):
+        t = c.get("trigger") or {}
+        if not t.get("is_repeatable") or _is_dev(c):
+            continue
+        if t.get("npc"):
+            continue
+        who = t.get("requires_npc")
+        if not who:
+            continue
+        # the two paths that DO read requires_npc — nothing is missing there
+        if t.get("trigger_mode") == "random" or t.get("substitution_only"):
+            continue
+        # ⚠️ list(), not the bare call — _conditions_of is a GENERATOR and a generator is
+        # always truthy, which read every unconditioned hub as "conditions only" once.
+        gated = "windowed by trigger.schedules" if t.get("schedules") else (
+            "conditions only, no window" if list(_conditions_of(t))
+            else "NO window and NO conditions")
+        rows.append(f"{c.get('id')} @{t.get('location')}: names {who}, renders as a link "
+                    f"not a face — {gated}")
+    if not rows:
+        return "", []
+    return (f"{len(rows)} repeatable canvas(es) name a character and render no portrait"), sorted(rows)
+
+
+# Fields the engine emits VERBATIM. `_resolve_at_references` (v2.py:14646) and its link-text
+# twin (v2.py:14693) are called on block content (v2.py:15193), a location's `description`
+# (v2.py:9864) and `blocked_message` (v2.py:9793), and choice `text` (v2.py:13256) — and on
+# nothing else. Everything below reaches a player with the token still in it. Listed as an
+# explicit whitelist of BAD sites rather than inferred by excluding the good ones: the
+# inverse needs a correct path classifier for every nested block shape, and a wrong one
+# would either miss leaks or convict resolved prose. engine.md §43.
+_TOKEN_SITES_PLAYER = [
+    ("canvases", "name", "the link label, the quest card's canvas_name, the canvas heading"),
+    ("npcs", "description", "the CustomizeCharacters screen — the game's FIRST screen"),
+    ("npcs", "name", "the character's name itself"),
+    ("locations", "name", "the location heading and every nav card"),
+    ("quest_cards", "text", "the quest card"),
+    ("quest_cards", "tip", "the quest card"),
+    ("quest_cards", "ready_text", "the quest card, once ready"),
+    ("quest_cards", "terminal_text", "the quest card, at the end of the ladder"),
+]
+_TOKEN_SITES_DEV = [
+    ("canvases", "description", "dev surfaces only — CanvasReview_*, the --debug banner"),
+]
+
+
+def lint_unresolved_tokens(game):
+    """`@player` / `@npc` sitting in a field the engine never resolves. A LIST, never a score.
+
+    Returns (summary, player_facing_rows, dev_rows) — the two are reported separately
+    because a token on a CanvasReview page is a cosmetic dev artefact and one on the
+    character-creation screen is the first thing anybody sees.
+
+    Scoped to references the engine WOULD have resolved in prose — a declared npc slug or
+    `player` — so an email address or a decorative `@` in a title is not a finding.
+    """
+    known = {"player"}
+    for n in (game.get("npcs") or []):
+        nid = str(n.get("id") or "")
+        known.add(nid)
+        if nid.startswith("npc_"):
+            known.add(nid[4:])
+    pat = re.compile(r"@(\w+)")
+
+    def scan(sites):
+        out = []
+        for section, field, shows in sites:
+            for item in (game.get(section) or []):
+                val = item.get(field)
+                if not isinstance(val, str):
+                    continue
+                hits = sorted({m.group(0) for m in pat.finditer(val)
+                               if m.group(1).split(".")[0] in known})
+                if hits:
+                    # quest_cards carry no `id` — name them by whatever they DO have, or the
+                    # first words of the card, so a finding is findable in the TOML.
+                    who = (item.get("id") or item.get("group") or item.get("ready_canvas")
+                           or item.get("npc_id") or (str(item.get("text", ""))[:28] or "?"))
+                    out.append(f"{section}[{who}].{field}: "
+                               f"{' '.join(hits)} — prints raw on {shows}")
+        return sorted(out)
+
+    player, dev = scan(_TOKEN_SITES_PLAYER), scan(_TOKEN_SITES_DEV)
+    if not player and not dev:
+        return "", [], []
+    bits = []
+    if player:
+        bits.append(f"{len(player)} player-facing")
+    if dev:
+        bits.append(f"{len(dev)} dev-only")
+    return " · ".join(bits), player, dev
+
+
 def lint_world_prose(model, game):
     """Parts of a building the writing treats as real, that the map does not have.
 
@@ -3352,6 +3478,28 @@ def _fh_meeting_setters(game):
     return out
 
 
+# ⚠️ NOT BUILT, ON PURPOSE — the self-gating meeting (corpo-life's shape).
+#
+# The 2026-09-02 field study found that a meeting need not be its own canvas: `corpo-life`
+# (1,464 comments) opens *Mia Office Interaction* with `<<if $metmia is 0>>` and gates
+# everything after on `$metkaren is 1` — one canvas, first visit is the meeting, every visit
+# after is the hub. `become-taxi-driver` and `amore` do the same. F5 allows only the
+# separate-canvas shape, so a game using this one reads as cold-spawning when it is not.
+#
+# A detector for it WAS built and REVERTED the same hour. The rule it used — "the canvas
+# branches on a flag it also sets" — is satisfied by every DAY CAP in the repo: orientation's
+# hubs matched on `ray_rung_today`, `wes_rung_today`, `office_today`, `went_up_today`, and
+# vesper flipped FAIL -> PASS on `renner_flirts_back` and `grier_opened_up`, which are arc
+# rungs. Semantically the check has to answer "is this the FIRST contact or the third rung",
+# and nothing in the TOML distinguishes them: both read a flag `is_false`, both set it on the
+# way out. A lenient version silently passes games that ARE cold-spawning, which is worse
+# than under-reporting.
+#
+# So the second shape is recorded in `the-first-hour.md` F5 as legitimate and is NOT scored.
+# An author who builds it should expect this gate to under-report and say so in the ledger.
+# Study: ~/Documents/Opening_And_Introduction_Study_20260902/.
+
+
 def _fh_cast_met(game):
     """(met, cast, flag_owners, cold) — who is introduced before their hub opens.
 
@@ -3530,6 +3678,40 @@ _ROLE_STOP = {
     "who", "that", "his", "her", "you", "him", "them", "they", "of", "to", "in",
     "on", "at", "by", "with", "for", "not", "but", "one", "this", "there",
 }
+
+
+def lint_role_label(game):
+    """`npcs[].role` — the label the engine prints under the name. A LIST, never a score.
+
+    `the-first-hour.md` F10. Distinct from `lint_role_stays_attached` below, which measures
+    the role ANCHORS IN PROSE and never looks at this field at all — which is why a game
+    could carry zero labels and nothing said so.
+
+    Absent is a legal choice (F10: empty renders no line), so this cannot fail anything. It
+    exists because the field was invisible rather than declined: measured 2026-09-02,
+    **6 of 88 characters across 17 games declare a role, and all six are `mrs_vance`** —
+    the one game F10 was written from. `templates/board.toml` carried neither `role` nor
+    `relationship` until the same day, so every author who filled in the template got every
+    field it listed and never saw this one.
+    """
+    npcs = [n for n in (game.get("npcs") or []) if isinstance(n, dict)]
+    if not npcs:
+        return "", []
+    have = [n for n in npcs if (n.get("role") or "").strip()]
+    rows = []
+    for n in npcs:
+        r = (n.get("role") or "").strip()
+        if not r:
+            rel = " ".join(str(n.get("relationship") or "").split())[:44]
+            rows.append(f"{n.get('id')}: no role — the dialogue box prints the bare name"
+                        + (f" (relationship: \"{rel}\")" if rel else ""))
+    # a label that cannot survive the player's own choice is worse than none
+    for n in have:
+        if n.get("customizable") and (n.get("relationship_options") or []):
+            rows.append(f"{n.get('id')}: role \"{n['role'].strip()}\" — renameable with "
+                        f"{len(n['relationship_options'])} relationship options; check the "
+                        f"label stays true under every one (`role` is static, no @-tokens)")
+    return f"{len(have)}/{len(npcs)} characters carry a label under the name", sorted(rows)
 
 
 def lint_role_stays_attached(model, game):
@@ -6844,6 +7026,59 @@ def run_gates(model, game, state=None):
          f"can only fire in that character's own hours",
          windowless)
 
+    # G47 — no canvas key is discarded (the-first-hour.md F5b, engine.md §42)
+    #
+    # `TemplateCanvas` has seven fields — id, name, description, trigger, nodes, connections,
+    # loop (template_import.py:906-913) — and it is built with named arguments only
+    # (:2302-2310), so ANY other key on a [[canvases]] table is dropped: no error, no
+    # warning, green build. `slug` is tolerated because the parser does read it, as a
+    # fallback label in error context (:2033).
+    #
+    # The keys that get written up here are TRIGGER keys, and losing one is invisible in
+    # exactly the way that hurts — the TOML still says what the author meant.
+    #
+    # ⚠️ THIS INVENTS NO THRESHOLD AND CANNOT PRODUCE A FALSE POSITIVE, which is why it is
+    #    a gate where its softer sibling below is only a lint. A key outside the seven does
+    #    nothing at all, on any path, in any shape of game. Writing one is never correct, so
+    #    there is no game this can fail for obeying the doctrine — R4 is unreachable here.
+    #
+    # Measured across all 26 games the day it was written — 23 keys in 2 games, 24 clean:
+    #
+    #   orientation  18   13 × `npc` (the whole cast: no portraits, no presence gate, and
+    #                     the canvas title rendered as the link label — the defect that
+    #                     started this) + 5 × `substitution_only`
+    #   night_desk    5   5 × `substitution_only` — every walk-in in the game renders as a
+    #                     clickable activity instead of a dispatcher-only target
+    #
+    # ⚠️ SCOPED TO `npc` UNTIL THE ORIENTATION REPAIR HIT `walkin_shower_simone`, which
+    #    carried `substitution_only` one level too high in the identical way. A gate named
+    #    for one key would have passed night_desk with all five of its walk-ins broken.
+    #    The class is the key PLACEMENT, not the key.
+    CANVAS_FIELDS = {"id", "name", "description", "trigger", "nodes", "connections",
+                     "loop", "slug"}
+    TRIGGER_FIELDS = {"location", "is_active", "is_repeatable", "max_triggers_per_day",
+                      "priority", "conditions", "schedules", "npc", "trigger_mode",
+                      "chance", "costs", "show_when_blocked", "cooldown_message",
+                      "entry_only_from", "substitutions", "substitution_only",
+                      "requires_npc", "pre_substitution_effects"}
+    misplaced = []
+    for c in (game.get("canvases") or []):
+        t = c.get("trigger") or {}
+        for k in sorted(set(c) - CANVAS_FIELDS):
+            where = f" @{t['location']}" if t.get("location") else ""
+            if k in TRIGGER_FIELDS:
+                home = f"a [canvases.trigger] field — move it one level down"
+                if k in t:
+                    home += ", where this canvas already sets it (the top-level copy is dead)"
+            else:
+                home = "not a field the importer reads anywhere"
+            misplaced.append(f"{c.get('id')}{where}: `{k}` on [[canvases]] is discarded — {home}")
+    n_misplaced = len(misplaced)
+    gate("no canvas key is discarded", not n_misplaced,
+         f"{n_misplaced} canvas key(s) sit on [[canvases]] and are dropped by the importer"
+         if n_misplaced else "every canvas key is one the importer reads",
+         misplaced)
+
     # G35 was "the anchor introduces itself" and is GONE (2026-08-26).
     # It passed a game only if its anchor carried a non-repeatable canvas — a
     # first-visit scene. Counted across the 26-game corpus that device is ONE game
@@ -7891,6 +8126,69 @@ def _orphan_rules(skill_dir, defs):
     return broken, unwritten
 
 
+_TOML_HDR = re.compile(r'^\s*(\[\[?[A-Za-z][\w.]*\]?\])\s*$')
+_TOML_FLD = re.compile(r'^\s*#?\s*([a-z_][a-z0-9_]*)\s*=')
+
+
+def _toml_fields_by_table(text, count_commented):
+    """{table -> set of field names}, with a sub-table counted as a field of its parent.
+
+    `[canvases.trigger.conditions]` IS the `conditions` field of `[canvases.trigger]`
+    written long. Without that equivalence the comparison below reports every sub-table
+    in the skill as a missing field — six false positives, measured.
+    """
+    out, tables, cur = collections.defaultdict(set), set(), None
+    for ln in text.split("\n"):
+        h = _TOML_HDR.match(ln)
+        if h:
+            cur = h.group(1).strip("[]")
+            tables.add(cur)
+            continue
+        if cur is None:
+            continue
+        if not count_commented and ln.lstrip().startswith("#"):
+            continue
+        m = _TOML_FLD.match(ln)
+        if m:
+            out[cur].add(m.group(1))
+    for t in tables:
+        if "." in t:
+            parent, leaf = t.rsplit(".", 1)
+            out[parent].add(leaf)
+    return out
+
+
+def _template_field_gap(skill_dir):
+    """{table -> fields} a reference TEACHES and no template SHOWS.
+
+    ⚠️ THE ASYMMETRY IS DELIBERATE. A commented line in a REFERENCE is commentary — F5b's
+    own `# npc = "npc_ray"  ← WRONG` is an anti-example, and counting it reported the very
+    field the template had just been fixed to carry. A commented line in a TEMPLATE is
+    still on the author's screen, so it counts as shown.
+    """
+    taught = collections.defaultdict(set)
+    ref = os.path.join(skill_dir, "references")
+    for f in sorted(os.listdir(ref)) if os.path.isdir(ref) else []:
+        if not f.endswith(".md"):
+            continue
+        with open(os.path.join(ref, f), encoding="utf-8", errors="replace") as fh:
+            for blk in re.findall(r"```toml\n(.*?)```", fh.read(), re.S):
+                for t, fs in _toml_fields_by_table(blk, False).items():
+                    taught[t] |= fs
+    shown = collections.defaultdict(set)
+    tpl = os.path.join(skill_dir, "templates")
+    for f in sorted(os.listdir(tpl)) if os.path.isdir(tpl) else []:
+        if not f.endswith(".toml"):
+            continue
+        with open(os.path.join(tpl, f), encoding="utf-8", errors="replace") as fh:
+            for t, fs in _toml_fields_by_table(fh.read(), True).items():
+                shown[t] |= fs
+    # only tables a template actually defines — a reference may teach whole subsystems
+    # (the phone, quest cards, the cheat page) that no template is meant to scaffold
+    return {t: sorted(taught[t] - shown[t]) for t in sorted(set(taught) & set(shown))
+            if taught[t] - shown[t]}
+
+
 def selfcheck_mode():
     """Does SKILL.md still describe the checks this script actually runs?
 
@@ -7976,6 +8274,20 @@ def selfcheck_mode():
         print("           a rule the file relies on and never wrote is the R6 defect)")
         print(f"  {'─'*72}")
 
+    gap = _template_field_gap(skill_dir)
+    if gap:
+        print(f"  field · taught in a reference, shown in no template — "
+              f"{sum(len(v) for v in gap.values())} to eyeball")
+        for tbl in sorted(gap):
+            print(f"          · [{tbl}]  {', '.join(sorted(gap[tbl]))}")
+        print("          (THE CAUSE OF THREE BUGS IN ONE DAY, 2026-09-02: `npc` and")
+        print("           `substitution_only` written one table too high in two games, and")
+        print("           `role` declared by ONE game of 17. Each was documented correctly in")
+        print("           a reference and absent from the file an author actually fills in.")
+        print("           A LIST, never a score — a template is not meant to carry every")
+        print("           advanced field, and this cannot tell an omission from a decision)")
+        print(f"  {'─'*72}")
+
     total = len(missing_g) + len(missing_l) + len(missing_m) + len(stale_g) + len(broken)
     if total:
         if missing_g or missing_l or missing_m:
@@ -8040,6 +8352,8 @@ def main():
     badge_summary, badge_lints = lint_badge_before_content(model, game)
     refusal_summary, refusal_lints = lint_refusal_shape(model, game)
     world_lints = lint_world_prose(model, game)
+    face_summary, face_lints = lint_faceless_surfaces(game)
+    tok_summary, tok_player, tok_dev = lint_unresolved_tokens(game)
     shape_summary, shape_lints = lint_screen_shape(model, game)
     label_summary, label_lints = lint_labels(model, game)
     sys_summary, sys_lints = lint_labels_and_systems(model, game, state)
@@ -8059,6 +8373,7 @@ def main():
     fh_summary, fh_lints = lint_named_before_met(model, game)
     place_summary, place_lints = lint_place_function(model, game)
     role_summary, role_lints = lint_role_stays_attached(model, game)
+    label_sum, label_rows = lint_role_label(game)
     clock_summary, clock_lints = lint_clock_in_prose(model, game)
     tcost_summary, tcost_lints = lint_time_cost_on_button(model, game)
     cur_summary, cur_lints = lint_currency_in_prose(model, game, state)
@@ -8460,6 +8775,20 @@ def main():
               " passing is fine — read the rows and make the call. degrees-of-lewdity swaps")
         print("           the description for the name on the meeting flag in 64 places)")
 
+    if label_sum:
+        print(f"  {'─'*72}")
+        print(f"  lint · the label under the name — {label_sum}")
+        for h in label_rows[:12]:
+            print(f"          · {h}")
+        if len(label_rows) > 12:
+            print(f"          · … and {len(label_rows)-12} more")
+        print("          (the-first-hour.md F10 — a LIST, never a score. `npcs[].role` is the"
+              " 1-3 word label the engine prints under the name in EVERY dialogue box;"
+              " `relationship` is the cast page's sentence and does NOT render there. Absent"
+              " is legal and renders no line. Measured 2026-09-02: 6 of 88 characters across"
+              " 17 games declare one, and all six are mrs_vance — the field was invisible,"
+              " not declined, because templates/board.toml did not carry it)")
+
     if role_summary:
         print(f"  {'─'*72}")
         print(f"  lint · the role stays attached — {role_summary}")
@@ -8586,6 +8915,39 @@ def main():
         for h in world_lints[:10]:
             print(f"          · \"{h['part']}\" ×{h['count']}: {h['line']}…")
         print("          (either the location is missing, or the sentence is wrong)")
+
+    if face_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · bound to a person, no face — {face_summary}")
+        for h in face_lints[:10]:
+            print(f"          · {h}")
+        if len(face_lints) > 10:
+            print(f"          · … and {len(face_lints)-10} more")
+        print("          (the-first-hour.md F5b — a LIST, never a score. `trigger.npc` renders the"
+              " portrait AND gates the surface on that character's own [[npcs.schedules]];"
+              " `requires_npc` does neither here (v2.py:5343 and :5486 are its only readers)."
+              " An activity that happens in a place while somebody is around is a legitimate"
+              " shape — window it with trigger.schedules. A surface ON that person wants the"
+              " face. Corpus: 21 hits in 5 of 26 games, and everything outside orientation is a"
+              " walk-in or a windowed scene, which is why this cannot fail anything)")
+
+    if tok_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · a token the engine never resolves — {tok_summary}")
+        for h in tok_player[:10]:
+            print(f"          · {h}")
+        if len(tok_player) > 10:
+            print(f"          · … and {len(tok_player)-10} more player-facing")
+        for h in tok_dev[:3]:
+            print(f"          · (dev) {h}")
+        if len(tok_dev) > 3:
+            print(f"          · (dev) … and {len(tok_dev)-3} more")
+        print("          (engine.md §43 — a LIST, never a score. @-tokens are resolved in block"
+              " content, a location's description and blocked_message, and choice text. Nowhere"
+              " else. A canvas `name` becomes the link label on the room screen and the quest"
+              " card's canvas_name; an npc `description` is the character-creation screen. Write"
+              " the ROLE in these fields — \"his son\", \"Sit with him\" — and keep the token for"
+              " prose)")
     print()
     sys.exit(0 if judged and npass == judged else 1)
 

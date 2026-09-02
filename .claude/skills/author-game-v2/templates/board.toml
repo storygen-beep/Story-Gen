@@ -295,6 +295,23 @@ id          = "npc_<id>"
 name        = "<Name>"
 description = "<who they are — and why she wants them, or why being wanted by them lands>"
 portrait    = "<id>.jpg"
+# ⚠️ THE TWO LINES BELOW ARE DIFFERENT SURFACES AND YOU WANT BOTH. F7 · F10.
+#    `relationship` is the CAST PAGE's sentence. `role` is the label printed under the
+#    name in EVERY dialogue box — 1-3 words, no "Your", and validate() refuses two
+#    characters with the same one, which is the whole reason the field earns its place.
+#    Absent = no line at all, so a game that skips it just never shows the label.
+#    Author it, never derive it: five of one game's six `relationship` strings contain
+#    "husband", so a derived default would have labelled five people identically.
+#    ⚠️ `role` is STATIC text — no @-token resolution — so if this character is
+#    `customizable` with `relationship_options`, the label must stay true under EVERY
+#    option. Name what does not change (`owns the house`, `his son`, `the night shift`)
+#    rather than a kin word the player can overrule.
+#    Repeat a relation word and the label carries what separates them:
+#      two brothers → elder brother · younger brother
+#      three sons   → husband's eldest · husband's middle son · husband's youngest
+#      no kin at all→ the canteen · the night shift · housemate, top floor
+relationship = "<one sentence — the cast page renders this>"
+role         = "<1-3 words — the label under the name in every dialogue box>"
 # ⚠️ THE PAIR BELOW IS THE LADDER SCHOOL'S ANSWER — correct when who_climbs is
 #    "player" (the tiers gate, the bond colours). For who_climbs = "cast" it is
 #    the engine missing: pick THIS character's gating meter from what the

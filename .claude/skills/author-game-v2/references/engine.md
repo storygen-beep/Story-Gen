@@ -2416,3 +2416,94 @@ choice inside.
 ⚠️ Three rounds of `the climb is paid for` were spent adding `costs` to choice after choice with no
 movement. Moving the same costs onto the triggers cleared five meters at once. See `the-sheets.md`
 S9 — the sheets imply the brake is a property of the rung, and it is a property of the door.
+
+---
+
+## 42. `trigger.npc` — the portrait, and the presence gate it carries
+
+One key decides whether a character surface is a **face on the location screen** or a **line of link
+text**, and the same key is what enforces that character's hours. It lives at the top level of
+`[canvases.trigger]`.
+
+```
+[[canvases]] npc = …            → dropped. TemplateCanvas has no such field
+                                  (template_import.py:906-913, built named-only at :2302-2310)
+
+[canvases.trigger] npc = …      → TemplateTrigger.npc (template_import.py:642)
+                                  → game_graph.py:311  "npc" into trigger metadata
+                                  → v2.py:11656        read back out
+                                  → v2.py:11713        emitted as help_data npcId
+```
+
+**With `npcId`** — `selectNpcPortraitCanvasesForLocation` (`v2.py:4651`) and `renderNpcPortraits`
+(`v2.py:5114`) claim the canvas. The renderer then applies the only real presence check in the
+engine: the character must have a declared `[[npcs.schedules]]` and `getNpcLocation` must put them
+where the player is standing right now (`v2.py:5176-5179`). It draws the portrait and prints
+`$npcs[…].name`.
+
+**Without it** — `renderSoloActivities` does not skip the canvas (`v2.py:5259` skips only canvases
+that *have* an `npcId`), so it renders as an ordinary activity button carrying the canvas's own
+`displayName` (`v2.py:5290`). No face, **no presence check at all**, and the author-facing title
+becomes player-facing text. `requires_npc` does not cover the gap — §31 above, and it is read on
+exactly two paths, `v2.py:5343` and `v2.py:5486`.
+
+⚠️ **One location shows ONE canvas per character.** The renderer gathers every valid repeatable
+canvas per NPC and keeps the highest `priority`, preferring affordable over cost-blocked
+(`v2.py:5125-5158`). Three Ray surfaces in one kitchen render as one Ray, not three rows. Set the
+priorities deliberately: an escalation at 7 above a hub at 6 replaces the hub whenever its conditions
+hold, which is usually what you want and is never what you get by accident.
+
+⚠️ **A non-repeatable canvas renders no portrait either** (`v2.py:4662` skips
+`!c.isRepeatable`), which is what keeps a meeting from leaking onto the screen as a face — see
+`the-first-hour.md` F5b.
+
+**Measured:** `orientation` wrote `npc` one level too high on all thirteen character surfaces. Every
+entry in its built `help_data.locationCanvases` carried `npcId: null` and `canvasIdToNpcUuid` was
+`{}` — zero portraits in the whole game, thirteen ungated surfaces, and `Sit with @ray` as a link
+label. The build was green and the scoreboard read 43/44, because the gate that checks hubs
+(`every hub is met first`) starts by counting portrait hubs, found none, and reported **n/a**. The
+gate `no canvas key is discarded` exists so that cannot recur — widened from `npc` alone within
+the hour, when the same misplacement turned up as `substitution_only` on `orientation`'s walk-in and
+on **all five** of `night_desk`'s, each of them rendering as a clickable activity instead of a
+dispatcher-only target.
+
+---
+
+## 43. Where `@` tokens resolve, and where they do not
+
+`@player`, `@player.<field>`, `@<npc>` and `@<npc>.rel` are resolved by
+`_resolve_at_references` (`v2.py:14646`) and, for link text, `_resolve_at_references_expr`
+(`v2.py:14693`). **Both are called on four things and nothing else:**
+
+| resolved | site |
+|---|---|
+| block `content` — paragraph, heading, dialog, thought_bubble | `v2.py:15193` |
+| `locations[].description` | `v2.py:9864` |
+| a location's `blocked_message` | `v2.py:9793` |
+| choice `text` | `v2.py:13256` |
+
+Every other author string is emitted verbatim. The ones that reach a player:
+
+| NOT resolved | where it shows up |
+|---|---|
+| `canvases[].name` | the solo-activity link label (`v2.py:5290`), the quest card's `canvas_name`, the canvas `<h2>` |
+| `npcs[].description` | the CustomizeCharacters screen — `html.escape` only, `v2.py:9312`. This is the game's **first** screen |
+| `quest_cards[].tip` · `.ready_text` · `.terminal_text` | the guidance page |
+| `canvases[].description` | dev surfaces only (`CanvasReview_*`, the `--debug` canvas banner) |
+
+**The rule: a token belongs in prose. Anywhere else, write the role.** `"His son"` and
+`"Sit with him"` survive a rename; `"@ray's son"` and `"Sit with @ray"` print the token.
+
+⚠️ **This bites hardest exactly where customization is on.** `v2.py:9294` emits a name textbox for
+every customizable NPC unconditionally, so those characters *must* be referred to by token in prose —
+which trains the author to reach for `@ray` everywhere, including the four fields above.
+
+**Measured across all 26 games: 9 player-facing leaks in 2 games, 24 clean.** `orientation` 7 — four
+canvas names, Wes's `description` on the character-creation screen, and two quest cards. `commuter`
+2 — `hub_cole_room` and `hub_ray_garage`, both shipped, both printing the token as the room's link
+label. Two customization games, both leaking, and nothing in the toolchain said so until this lint
+existed.
+
+> **Linted as `a token the engine never resolves`** — a LIST, never a score. It walks the merged TOML
+> and reports any `@` reference sitting outside the resolved set, dev-only fields reported separately
+> from player-facing ones.

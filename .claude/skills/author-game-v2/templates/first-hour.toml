@@ -190,26 +190,42 @@ op         = "set"
 #    games shipped exactly that. One flag may open the same character's talk hub
 #    AND their sex hub; it may never open a second character's door.
 #
-# [[canvases]]
-# id   = "<hub_npcid_place>"
-# name = "<A DIFFERENT name from the meeting canvas>"
-#
-# [canvases.trigger]
-# location      = "<where they are>"
-# requires_npc  = "<npc_id>"
-# npc           = "<npc_id>"          # this is what renders the portrait
-# is_repeatable = true
-# priority      = 6
-# is_active     = true
-#
-# [canvases.trigger.conditions]
-# version = "1.0"
-# logic   = "AND"
-# [[canvases.trigger.conditions.items]]
-# type     = "flag"
-# subject  = "player"
-# flag_key = "<npc>_met"
-# operator = "is_true"
+# ⚠️ F5b — `npc` GOES INSIDE `[canvases.trigger]`, AND IT IS NOT `requires_npc`.
+#    This block used to be COMMENTED OUT, which made `requires_npc` — live in the
+#    two blocks above — the only NPC key an author could copy. A game was then
+#    authored with `npc` on `[[canvases]]` instead, one level too high, on all
+#    thirteen of its character surfaces. `TemplateCanvas` has no `npc` field
+#    (template_import.py:906-913): the key was dropped with no error and no warning,
+#    the game shipped with ZERO portraits, and every character surface rendered as a
+#    text link labelled with the canvas's own title. See references/the-first-hour.md F5b.
+
+[[canvases]]
+id   = "<hub_npcid_place>"
+name = "<A DIFFERENT name from the meeting canvas>"
+
+[canvases.trigger]
+location      = "<where they are>"
+npc           = "<npc_id>"     # THE PORTRAIT. Also the presence gate: the renderer
+                               # checks this character's own [[npcs.schedules]] against
+                               # where the player is standing (v2.py:5194-5199). Without
+                               # it there is no face, no presence check, and the link
+                               # label becomes `name` above — tokens and all.
+requires_npc  = "<npc_id>"     # NOT a substitute. Inert here; read on exactly two
+                               # paths — trigger_mode = "random" (v2.py:5343) and
+                               # substitution_only (v2.py:5486). Keep it: free, and it
+                               # documents intent.
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "<npc>_met"
+operator = "is_true"
 
 
 # ─────────────────────────────────────────────────────────────────────────────

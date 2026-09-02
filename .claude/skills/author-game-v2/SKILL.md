@@ -276,6 +276,7 @@ documented nowhere but in the script's own comments, so an author who hit one ha
 | **the opening opens a door** | the funnel's last click lands on a clock time when something at that location is actually open | `the-first-hour.md` F3 |
 | **every hub is met first** | no character's portrait is live before a meeting has fired, and one flag never opens the whole cast | `the-first-hour.md` F5 · F8 |
 | **a meeting fires where they are** | a one-shot naming a character carries a `trigger.schedules` window matching that character's own hours — `requires_npc` does not gate the auto-fire path, so without one the introduction plays to an empty room | `the-first-hour.md` F5 · `engine.md` §31 |
+| **no canvas key is discarded** | every key on a `[[canvases]]` table is one of the seven `TemplateCanvas` reads. Anything else — a **trigger** key written one level too high, `npc` or `substitution_only` — is dropped silently, and the TOML still says what the author meant. Invents no threshold and cannot false-positive: a key outside the seven does nothing on any path | `the-first-hour.md` F5b · `engine.md` §42 |
 | **the start choice is read** | a choice the opening asks the player to make is read by real content later — fails only on ZERO, and a game that asks nothing reports n/a, which is not a pass | `the-want.md` §1 · `state.md` |
 | **what she picks is read** | every `[[player.customization_fields]]` value is printed somewhere — `$player.<id>` or the `@player.<id>` token — fails only on ZERO, `sets_portrait` counts as a read, and a game declaring no customization reports n/a, which is not a pass | `the-want.md` §1 W1 |
 | **the label keeps its time** | no button promises a clock time the engine cannot reach, and a stated duration is the real spend | `the-clock.md` C3 · C4 |
@@ -322,7 +323,16 @@ only of pure sinks is) · **how much explicit content is in here** (the ABSOLUTE
 per 1,000 words against the field's 1.24 — every other heat check is a share with a hand-picked
 denominator, which is how `the_route` is 46/46 green with 11 explicit screens; reads the built HTML
 on the field's own word list, and prints both the matched and the generous basis) · **the ambient
-puts him in the room** · **the badge arrives before the
+puts him in the room** · **the label under the name** (`npcs[].role` — the 1-3 word label the engine
+prints under the name in EVERY dialogue box, against `relationship`, which is the cast page's
+sentence and renders nowhere else. Absent is legal; the lint exists because the field was invisible
+rather than declined — 6 of 88 characters in 17 games, all six in one game) · **bound to a person, no face** (every repeatable canvas that names a
+character via `requires_npc` and carries no `trigger.npc` — it renders as a link, not a portrait,
+and has no presence check at all. A list because an activity that happens in a place while somebody
+is around is a legitimate shape; the hard version of the failure is the gate above) ·
+**a token the engine never resolves** (`@player` / `@npc` sitting in a field the engine emits
+verbatim — a canvas `name`, an npc `description`, a quest card. Player-facing and dev-only counted
+separately; `engine.md` §43 has the four fields that DO resolve) · **the badge arrives before the
 content** · **the role stays attached** · **which refusals are
 shown at all**.
 

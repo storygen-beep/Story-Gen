@@ -5,6 +5,252 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-02 — `npcs[].role`: the third field in one day that was taught in a reference and absent from a template
+
+**`templates/board.toml`** (`relationship` + `role` added to `[[npcs]]`) ·
+**`references/the-first-hour.md`** (one reworded line) · **`scripts/gates.py`** (lint
+`the label under the name`; `--selfcheck` gains `field · taught in a reference, shown in no
+template`) · **`SKILL.md`** (index row). LO: *"in the dialog box under npc name we show the
+relationship or role — that is missing."*
+
+**⚠️ I reported a broken feature and was wrong; the correction is the first fact here.** Grepping
+the built HTML for `class="dialog-role"` returned **0 in every game, including `mrs_vance`, which
+declares a role on all six characters** — which read as a dead feature. It is not: passage bodies
+are HTML-escaped inside `tw-passagedata`, so the class only appears after `html.unescape`. A fresh
+build of `mrs_vance` renders **174** labels. *Unescape before believing a grep on a built game* —
+the same trap this repo already records for `&amp;#x27;`.
+
+**The real finding.** The chain is intact end to end — TOML → `TemplateNPC.role` (`:161`) →
+`ai_behavior_config` (`game_graph.py:176`, and the DB path at `:6933`) → `npc_map` (`v2.py:909`) →
+the dialogue block (`v2.py:15258-15270`), with `validate()` enforcing ≤5 words and refusing
+duplicates. **`orientation` simply declared no role on any of its five characters.** Nor did anyone
+else: **6 of 88 characters across 17 games, and all six are `mrs_vance`** — the one game F10 was
+written from.
+
+**Cause, and it is the third instance today of one pattern.** `templates/board.toml`'s `[[npcs]]`
+block carried `id`, `name`, `description`, `portrait`, `core_traits`, `flag_keys`, `arc_stages` —
+and neither `role` nor `relationship`. F10 documents the field completely, in a reference file.
+`orientation` was authored **six days after** the feature shipped, with the doctrine in place, and
+filled in exactly the fields the template listed.
+
+| today's three | taught in | missing from |
+|---|---|---|
+| `trigger.npc` | `the-first-hour.md` F5 | `first-hour.toml` — the correct line was **commented out** |
+| `trigger.substitution_only` | `the-surfaces.md` | no template at all |
+| `npcs[].role` | `the-first-hour.md` F10 | `board.toml` |
+
+**The reference is read once. The template is open while you type.** F5 already states this
+principle against `template_import.py` — *"when doctrine and the schema disagree, the schema wins"* —
+and all three failures are the same sentence pointed at a different artefact.
+
+**⚠️ And nothing could see it.** The existing `role stays attached` lint measures **prose anchors**
+derived from each character's `relationship` string; it never reads the `role` field, so a game with
+zero labels passed it silently.
+
+**Shipped, in the order that kills the class:**
+1. `board.toml` carries both fields, with the F10 rules and the static-text warning inline.
+2. Lint **`the label under the name`** — declared/total, plus a row for any character that is
+   `customizable` with `relationship_options`, because `role` is static text with **no @-token
+   resolution** and a kin word can contradict the player's own pick.
+3. `--selfcheck` gains **`field · taught in a reference, shown in no template`** — a set difference
+   over TOML field names, the same shape as the gate/lint reconciliation and safe for the same
+   reason. It reports **22**, and `substitution_only` is on the list: **this check would have
+   predicted this morning's bug.** ⚠️ Two false-positive classes had to die first — a sub-table
+   `[x.y]` counts as field `y` of `[x]` (six false hits), and a commented line in a *reference* is
+   commentary while a commented line in a *template* is still on screen. Without the second rule it
+   flagged F5b's own `# npc = … ← WRONG` anti-example, i.e. the field the template had just been
+   fixed to carry.
+
+**`orientation`: five roles authored** — `owns the house` · `mother` · `his son` ·
+`runs the pledge house` · `the eight o'clock`. Ray and Wes are renameable, so neither label uses a
+kin word: what does not change is what he owns and whose son the other one is. Verified in the
+built game: **65 of 65 NPC dialogue blocks carry a label, zero bare names**, both runtime-named
+characters included, and `the eight o'clock` checked in a live browser because the apostrophe ships
+double-escaped.
+
+**Verified.** `--selfcheck` **47/47 gates · 36/36 lints · 5/5 modes · 133 rules, 0 pointing at
+nothing**. Full corpus diff against the session baseline: **24 of 26 games untouched**;
+`night_desk` FAILS the key gate and `orientation` is **45/46**, its one red the word budget.
+⚠️ One self-inflicted regression caught by the run: F2b's new prose said *"a request for F95
+feedback"* and the rule-pointer check read `F95` as a rule id. Reworded.
+
+---
+
+## 2026-09-02 — The opening and the introduction: 28 shipped games, and a check that had to be un-built
+
+**`references/the-first-hour.md`** (F5 field evidence + the second meeting shape · F2b field
+numbers for the first screen) · **`scripts/gates.py`** (a recorded NON-finding where a detector
+was reverted). Study: `~/Documents/Opening_And_Introduction_Study_20260902/` — README plus
+`opening.py`, `introductions.py`, `per_character.py` and their JSON. Run after `every hub is met
+first` woke up and read `orientation` 0/5.
+
+**Corpus.** 28 games from the mopoga capture, ranked by comment count. **25 parseable** —
+`college-daze`, `confined-and-horny` and `free-cities` hold no `<tw-passagedata>` at all
+(engine-only captures) and are excluded with a reason rather than counted as zeros.
+
+### Q1 — introductions, and the field is unanimous
+
+**14 of 25 games keep a named per-character first-contact flag — 9 of the top 10.** 209 characters
+carry one; **188 (90%) are read inside a condition.** DoL 78, become-someone 31, corpo-life 30,
+wasteland-lewdness 20, patriarch 10, lust-for-life 9, destroyer 7, zaras 7.
+
+⚠️ **Not one character in the field is met at turn one.** Every meeting flag in all 14 games,
+swept for an init-to-true before play: zero. The three apparent exceptions are a mid-game passage,
+a dinner scene, and DoL's **save-migration widget**.
+
+**The transferable half: the field gates PRESENCE on it.** `become-someone`'s Beach passage asks
+`$nami.intro && $nami.loc is "Beach"` on every row. `renderNpcPortraits` does the located half
+and nothing else — F5 now carries that comparison, and it is why the fix to a cold-spawning hub
+is a `trigger.conditions` flag rather than new prose.
+
+### Q2 — the first screen
+
+Walked all 25 from `startnode`; the scaffolding/fiction boundary was **read**, not scored, because
+the classifier called `sluttown-usa`'s 1,999-word changelog "fiction". 19 resolve. **Median 2
+screens of scaffolding · first fiction screen median 144 words · median 2 links · 11 of 19 end on a
+real choice.** DoL spends 141 words putting a debt and a deadline on the player;
+`the-hellfire-club` spends 144 and ends on three ways to cross London.
+
+Two findings recorded against each other: **the commonest way a top game wastes screen one is the
+developer talking** (apocalyptic-world opens on a version number and a systems lecture;
+become-someone on patch notes) — prevalent and still refused, the same call `the-clock.md` C2 and
+`the-economy.md` R3 already make against a field majority. But **the long backstory prologue is a
+genuine shipped shape and the #2 game is one** — `destroyer` runs ten screens and ~2,900 words
+before the world opens, so F1's short cold open is a default and not a law.
+
+### ⚠️ A gate change was built, measured, and REVERTED the same hour
+
+The study found a second legitimate meeting shape: **`corpo-life` (1,464 comments) holds first
+contact inside the hub** — `<<if $metmia is 0>>` on the standing surface, everything after gated on
+`$metkaren is 1`. One canvas. F5 allowed only the separate-canvas shape.
+
+A detector for it was written into `_fh_cast_met`, and the only rule available to it — *"the canvas
+branches on a flag it also sets"* — turned out to be **satisfied by every day cap in the repo**. It
+matched `orientation` on `ray_rung_today` / `office_today` / `went_up_today` / `wes_rung_today` and
+flipped **`vesper` FAIL → PASS on `grier_opened_up`**, an arc rung. Nothing in the TOML separates
+*first contact* from *third rung*: both read a flag `is_false` and set it on the way out.
+
+**Reverted.** A lenient version silently passes games that really are cold-spawning, which is worse
+than under-reporting — the same restraint this file already records for R4, study 6's anchoring
+check and P0. The shape is now doctrine in F5 and is explicitly **not scored**; the reasoning sits
+in `gates.py` where the next author will look for the missing check.
+
+**Verified.** `--selfcheck` 47/47 · 35/35 · 5/5 · 133 rules, 0 pointing at nothing — unchanged, no
+gate added or renamed. Full `--json` diff against the pre-session baseline across all 26 games:
+**24 unchanged**, `night_desk` FAILS the new key gate (a true finding), `orientation`
+`every hub is met first` **n/a → PASS 5/5**. `vesper` sits back at its own pre-existing verdict.
+
+**`orientation` repaired: 5/5, 45/46.** The gate's 0/5 was never five scenes of missing work —
+`canvas_arrival_night` already set `met_ray` / `met_dee` / `met_wes` and `meet_halloran` /
+`meet_simone` already set theirs. **Six hubs never read them.** Six `trigger.conditions` flags.
+Verified in a browser at ten day/hour/flag points: no portrait exists before its meeting has fired,
+and a met character still does not appear outside their own hours.
+
+---
+
+## 2026-09-02 — F5b: the key that draws a face was live in a comment and inert in the schema
+
+**`templates/first-hour.toml`** (hub block uncommented into live TOML) · **`references/the-first-hour.md`**
+(new **F5b**, F5 table cell, F4 wardrobe warning) · **`references/engine.md`** (new §42, §43) ·
+**`scripts/gates.py`** (gate `no canvas key is discarded`, lints `bound to a person, no face` and
+`a token the engine never resolves`) · **`SKILL.md`** (index rows). Cause of a defect LO found by
+playing `orientation`: `@ray` printed as the link label on the kitchen screen.
+
+**One misplaced key, three failures, and a green board.** `orientation` wrote `npc = "npc_ray"` on
+`[[canvases]]` instead of inside `[canvases.trigger]`, on all thirteen character surfaces.
+`TemplateCanvas` has no `npc` field (`template_import.py:906-913`, built named-only at `:2302-2310`),
+so the key was **discarded with no error and no warning**. Verified in the built artefact: every entry
+in `help_data.locationCanvases` carried `npcId: null` and `canvasIdToNpcUuid` was `{}`.
+
+| what broke | why |
+|---|---|
+| **zero portraits, whole game** | `renderNpcPortraits` and its selector bail on `!c.npcId` (`v2.py:5140`, `:4662`) |
+| **`@ray` on screen** | the canvas falls to the solo path, which writes `displayName` raw (`v2.py:5290`); the portrait path writes the resolved name |
+| **no presence gate at all** | the portrait renderer *is* the presence check — declared `[[npcs.schedules]]` vs `getNpcLocation` (`v2.py:5176-5179`). 13 of 14 `requires_npc` canvases had neither schedule nor condition, so *Sit with @ray* was clickable at 07:00 Monday with Ray at work |
+
+**The skill taught it.** The only correct `[canvases.trigger] npc =` in the whole skill sat inside a
+**commented-out** block in `templates/first-hour.toml`; the two live copyable trigger blocks beside it
+carried `requires_npc` and never `npc`, and the only other `npc =` example anywhere is
+`[[phone.daily_topics]]`, where it genuinely is top-level. `the-first-hour.md:393` said `` `npc =` set ``
+as a bare table cell with no nesting. Every other game in the repo has it trigger-level; `orientation`
+is 0/13. This is the F5/`the_season` failure repeating one path over: **when doctrine and the schema
+disagree, the schema wins, because the schema is what is open while you type.**
+
+**⚠️ The gate that should have caught it was disabled by the bug.** `every hub is met first` counts
+portrait hubs, found none, reported **n/a**, and the footer read *"43/44 judged gates pass (2 n/a —
+nothing authored yet to judge)"*. An absence flattered the game. Same class as `98a1ff4`.
+
+**Also fixed: F4 sent an author to build a door the engine had already built.** Declaring
+`wardrobe_location` renders `[[Change Clothes->WardrobePage]]` unconditionally (`v2.py:9814`).
+`orientation` read F4's *"every live system gets one beat"* and authored a second wardrobe canvas
+whose exit routed back to the room it was already in — ten minutes spent, `WardrobePage` never
+reached, sitting under the working link. F4 now says the door exists and that arming the system means
+a **read**, not a door.
+
+**Verified.** `--selfcheck` **47/47 gates · 35/35 lints · 5/5 modes · 133 rules, 0 pointing at
+nothing** (was 46/33/5/132). Full before/after `--json` diff across **all 26 games: 24 unchanged with
+the new gate passing**; the only two movements are both true findings — `night_desk` FAILS the new
+gate, and `orientation`'s `every hub is met first` went **n/a → FAIL (0/5)**, which is the dormant
+gate waking up now that the game has portraits to judge.
+
+**The repair, verified in a real browser** (`games/orientation`, rebuilt without `--debug`). All six
+character surfaces gated on their own `[[npcs.schedules]]`, checked at 12 day/hour points:
+
+```
+Ray      @the_kitchen       22:30 → [Ray]     07:00 → []
+Dee      @the_kitchen       18:00 → [Dee]     23:00 → [Ray]     ← the room hands over
+Wes      @the_bathroom      06:50 → [Wes]     12:00 → []
+Wes      @wes_room          20:00 → [Wes]     09:00 → []
+Simone   @the_pledge_house  17:00 → [Simone]  09:00 → []
+Halloran @halloran_office   17:00 → [Halloran] 11:00 → []
+```
+
+Before and after on the same screen, from the committed build and the new one:
+
+```
+BEFORE  kitchen  Mon 07:00  ['Ask your mother about the shift', 'Ask @ray about the house',
+                             'Talk to your mother', 'Sit with @ray', 'Eat']   no portrait
+BEFORE  kitchen  Mon 22:30  ...identical. The clock did nothing.
+AFTER   kitchen  Mon 07:00  ['Eat']                                          no portrait
+AFTER   kitchen  Mon 22:30  ['Ask him about the house', 'Eat']  + Ray's portrait
+```
+
+The bathroom shows the walk-in half: `BEFORE ['The door opens', 'Talk to @wes', 'Leave the bolt',
+'Shower']` — *"The door opens"* is `walkin_bath_wes`, a **clickable spoiler button for the player's
+own interruption**. `AFTER ['Leave the bolt', 'Shower']` plus Wes's portrait, with the walk-in
+reachable only through its dispatcher. Substitution reachability re-checked on all five walk-ins
+against both builds: unchanged (`walkin_kitchen_dee` fires 1/80 with `ray_open` set, in BEFORE and
+AFTER alike — its 0/60 without the flag is correct gating, not breakage). Built artefact: **0**
+`@ray`/`@wes` anywhere, **1** `Change Clothes` link, **0** `CanvasReview_` passages. `orientation`
+43/44 → **44/46**. 
+
+**⚠️ The gate was scoped to `npc` alone and that was too narrow — caught while repairing the game,
+not by the check.** `orientation/walkin_shower_simone` carried **`substitution_only`** at canvas
+level in the identical way, and the corpus sweep then found `night_desk` doing it on **all five** of
+its walk-ins: every one renders as a clickable activity instead of a dispatcher-only target, in the
+game this repo committed as *"the first game designed before it was built"*. The gate now reads the
+whole key class — any key on `[[canvases]]` outside the seven `TemplateCanvas` fields (`slug`
+tolerated, the parser reads it for error context at `:2033`). **Corpus: 23 discarded keys in 2 games,
+24 clean** — `orientation` 18, `night_desk` 5. A gate named for one key would have passed
+`night_desk` with all five walk-ins broken. **The class is the placement, not the key.**
+
+**⚠️ Two numbers in this change were written from an eleven-game sample and were wrong; the finished
+lint over all 26 found the rest immediately.** `bound to a person, no face` is **21 hits in 5 games**
+— orientation 14, the_allowance 3, late_shifts 2, the_route 1, vesper 1 — not the "orientation 13,
+vesper 1, the_route 1, all others 0" first written into the docstring and F5b. Everything outside
+`orientation` is a walk-in or a scene windowed by its own `trigger.schedules`, which is why this is a
+list and not a gate: a gate would fail four games for obeying the doctrine. `a token the engine never
+resolves` found **9 player-facing leaks in 2 games** and `commuter` is a **new find** — `hub_cole_room`
+and `hub_ray_garage` have been shipping the raw token as their link label. Corrected in all three
+places. The lesson is the one this ledger already carries from 2026-08-29: **measure the artefact the
+check reads, and sweep the whole corpus before writing a number down.**
+
+**⚠️ One bug in the new lint, caught by reading its own output:** `_conditions_of` is a **generator**,
+so `if _conditions_of(t)` is always true and every unconditioned hub read as "conditions only". Fixed
+to `list(...)`, matching `_fh_cast_met`'s existing idiom.
+
+---
+
 ## 2026-09-02 — SY2b: the shape is not enough, and all eight of ours are bookmarks
 
 **`references/the-systems.md`** (new SY2b) · **`DOCTRINE_GAPS.md`** (item 19 extended). LO's call
