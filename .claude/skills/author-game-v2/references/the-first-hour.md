@@ -985,6 +985,25 @@ two housemates          housemate, top floor · housemate, back room
 no kin word at all      the canteen · the night shift
 ```
 
+> ### ⚠️ The label answers WHO THIS PERSON IS. A place or a timeslot is not an answer.
+>
+> The "no kin word" row above is the one that misleads, and it misled the author of this
+> paragraph. `housemate, top floor` works because **housemate** is the who and *top floor* only
+> separates him from the other one. `the canteen` and `the night shift` work only where the game
+> has already made that shift into somebody's whole identity — as a general pattern they are a
+> trap.
+>
+> **Measured, within an hour of the field shipping:** `orientation` labelled its professor
+> **`the eight o'clock`** — the hour he lectures at. Under his name, to a player who has met him
+> once, that is not an answer to anything. LO: *"Halloran who is he. It says 8 o clock WTF???"*
+> It is now `professor`.
+>
+> **The test:** read the label alone, with no name and no scene, and ask *"is this a person?"*
+> `mother` · `professor` · `stepfather` · `runs the pledge house` · `housemate, top floor` pass.
+> `the eight o'clock` · `owns the house` · `the back room` do not — they name a time, a fact and
+> a place. The label is the answer to *"who is this"*, which is the standing question this whole
+> rule exists to keep answered.
+
 ⚠️ **Author it. Never derive it, not even as a default.** Deriving from `relationship`'s first
 clause is the obvious idea and it collapses real casts: **five of one game's six relationship
 strings contain "husband"** (the husband, his three sons, his brother), and another game has two

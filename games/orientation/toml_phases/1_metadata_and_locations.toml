@@ -357,7 +357,8 @@ activity   = "still up, and past caring who sees"
 id           = "npc_halloran"
 name         = "Halloran"
 relationship = "He teaches the eight o'clock."
-role         = "the eight o'clock"   # F10 — the label under the name in every dialogue box
+role         = "professor"   # F10 — the label answers WHO HE IS. It read "the eight
+                             # o'clock" for an hour: that is a timeslot, not a person.
 description  = "Fifties, tenured, and bored in a way he has stopped hiding. Two hundred people take his eight o'clock and he holds office hours for whoever turns up, which is almost nobody. He is the only man here whose approval is worth anything on paper."
 portrait     = "halloran.jpg"
 core_traits  = { relation = 0 }

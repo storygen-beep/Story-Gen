@@ -3719,6 +3719,12 @@ def lint_role_label(game):
                 rows.append(f"{n.get('id')}: role \"{r}\" is hard-coded, but the player picks "
                             f"this relation from {len(n['relationship_options'])} options — "
                             f"use `role = \"@{short}.rel\"` so the label says what they chose")
+    # ⚠️ PRINT EVERY DECLARED LABEL, not just the missing ones. Whether a label answers
+    # "who is this person" is a reading, not a measurement — no parser can tell `professor`
+    # from `the eight o'clock`, which is what this game shipped for an hour before a human
+    # read it back. Listing them is the only check available, and it costs one line.
+    for n in have:
+        rows.append(f"{n.get('id')}: \"{n['role'].strip()}\"")
     return f"{len(have)}/{len(npcs)} characters carry a label under the name", sorted(rows)
 
 
@@ -8795,7 +8801,10 @@ def main():
               " `relationship` is the cast page's sentence and does NOT render there. Absent"
               " is legal and renders no line. Measured 2026-09-02: 6 of 88 characters across"
               " 17 games declare one, and all six are mrs_vance — the field was invisible,"
-              " not declined, because templates/board.toml did not carry it)")
+              " not declined, because templates/board.toml did not carry it). READ THE"
+              " LABELS: each must answer WHO THIS PERSON IS. `professor` and `mother`"
+              " pass; `the eight o'clock` names an hour and `owns the house` names a"
+              " fact, and this game shipped both before a human read them back)")
 
     if role_summary:
         print(f"  {'─'*72}")

@@ -5,6 +5,36 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-02 — the label answers WHO, and "the eight o'clock" answers when
+
+**`references/the-first-hour.md`** (F10) · **`scripts/gates.py`** (the lint now prints every
+declared label). LO, reading the build: *"Halloran who is he. It says 8 o clock WTF???"*
+
+Right. `the eight o'clock` is the hour he lectures at. Under his name, to a player who has met him
+once, it answers nothing. It is now `professor`.
+
+**F10's own examples led there, and that is the fix worth keeping.** The "no kin word at all" row
+offered `the canteen · the night shift`. `housemate, top floor` works because **housemate** is the
+who and *top floor* only separates him from the other one; the other two work only where a game has
+already made a shift into somebody's whole identity, and as a general pattern they are a trap. F10
+now carries the test: **read the label alone, with no name and no scene, and ask "is this a
+person?"** `mother` · `professor` · `stepfather` · `runs the pledge house` pass. `the eight
+o'clock` · `owns the house` · `the back room` name a time, a fact and a place.
+
+⚠️ **Both of this game's bad labels were mine, an hour apart, and both were caught by a human
+reading the built game rather than by anything here.** `owns the house` came from treating a static
+field as a constraint to design around; `the eight o'clock` came from copying a doctrine example
+too literally. So the lint `the label under the name` now **prints every declared label**, not only
+the missing ones — no parser can tell `professor` from `the eight o'clock`, and listing them is the
+only check available. It costs one line and it is where a reader would have caught both.
+
+`orientation` labels now: `@ray.rel` → *stepfather* · `mother` · `@wes.rel` → *stepbrother* ·
+`runs the pledge house` · `professor`. Verified live, one dialogue box each.
+
+**Verified.** `--selfcheck` 47/47 · 36/36 · 133 rules, 0 broken pointers. 318 passed, 7 skipped.
+
+---
+
 ## 2026-09-02 — `npcs[].role` resolves @-tokens: the label under a renameable name belongs to the player
 
 **`generators/v2.py`** (`:15272` — resolve, don't just escape) · **`references/the-first-hour.md`**
