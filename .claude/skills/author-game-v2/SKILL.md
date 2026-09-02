@@ -290,7 +290,12 @@ system claims, a system whose label is on no room, and a `sourced` system that i
 says or is read nowhere else. ⚠️ Declaring more labels makes it worse, not better, which is the only
 reason it is checked; a count that can be optimised upward is the `objects`/gate-22 failure) ·
 room-list labels ·
-the browse share · screen shape · the prose names places the map does not have · **the ladder**
+the browse share · screen shape · the prose names places the map does not have ·
+**a door opens onto something** (`the-map.md` R6–R6c — every `[locations.door]`: one no option
+can ever open, one whose only option is `enter` (a room with an extra click), a knock gated on
+somebody no schedule puts there, and a door on a room the whole cast passes through. ⚠️ Silent
+on a game that declares no door, because a door is meant to be RARE — six in a 15,626-passage
+game — and declaring another makes this worse, not better) · **the ladder**
 (where a scene starts and stops on it) · **talk screens** · **the act menu** · **the meter ladder**
 (rungs per tier, and where the lowest one sits) · **the cast's meters** · **the counterweight** ·
 **the words the player has to already own** (every word in the player's face that fewer than four

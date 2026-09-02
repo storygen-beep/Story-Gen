@@ -5,6 +5,50 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-02 — the door: a threshold she can knock at, and the rule that it belongs to a person
+
+**`references/the-map.md`** (R6 · R6b · R6c, and both of its tables) · **`references/engine.md`**
+(new §44, plus a pointer from §22) · **`references/the-sheets.md`** (S2 gains a DOOR row) ·
+**`SKILL.md`** (the lint) · **`scripts/gates.py`** (`lint_doors`).
+
+The engine learned doors this session (Doc 73, `28th_april_TLS_Phase2_Redesign/`). Nothing taught
+an author when to use one and nothing checked one — the exact shape of the defect that started the
+thread, where R2c mandated a systems list that existed nowhere and `night_desk` shipped a duty list.
+
+**The doctrine is measured, not reasoned.** `~/Documents/Door_Study_20260902/` — 27 shipped
+sandboxes, 67,845 passages, ten probes, every figure reproducible from a named script.
+
+- **R6 · a door belongs to a PERSON, not a room.** `degrees-of-lewdity`: six named doors in a
+  15,626-passage game. Presence cannot be the test — **151 of 239 rooms across our own 18 games,
+  63%, ever hold a scheduled person.** The refusal runs a field median of **8 words** and is the
+  same sentence 44 times; ours run 22 and bespoke, so R6 says plainly that one stock line is
+  allowed. The value of the screen is its structure.
+- **R6b · the door always renders; what is conditional is whether it EXISTS.** `become-someone`
+  ships 54 door screens, 50 gating on occupancy, and **skips none**. Rarity is the answer to the
+  two-click tax. ⚠️ This rule exists because the skip was designed, argued for, and only then
+  measured — one probe killed it.
+- **R6c · a shared room gets no door.** The bathroom is a conditional chain *inside the room*, and
+  a locked bathroom is a sentence, not a screen. `back_home` already ships 13 occupancy-gated rows;
+  `orientation` simply did not use them, which is how Ray's Room shipped 31 words against 3,000.
+
+**`lint · a door opens onto something`** — LO's call: one lint, prints only, no gate. Four findings:
+a door no option can ever open (the Ray bug generalised) · a door whose only option is `enter` · a
+knock nobody is scheduled to answer · a door on a room the whole cast passes through. ⚠️ **Silent on
+a game that declares none**, because a door is meant to be rare and a row on 26 doorless games is
+noise. Declaring another door makes the output worse, never better — the property `objects`/gate 22
+lacked.
+
+**It found a real defect on its first run against real data.** Pointed at `orientation` with a door
+authored on `the_back_bedroom`, it reported *"waits for `npc_ray` at `the_back_bedroom`, where no
+schedule row ever puts them."* True: **neither Ray nor Dee has a single schedule row in the room
+they sleep in**, though its own description says he is there from one in the morning. Nothing else
+in the scoreboard could see that.
+
+**Verified.** `--selfcheck` 47/47 · 37/37 · 5/5 · 136 rules across 13 files, 0 broken pointers,
+exit 0 — 133 → 136 is exactly R6, R6b, R6c. All 26 games: every verdict unchanged and **zero**
+print a door row, which is the correct output since none declares a door. Each of the four findings
+made to fire on a hand-broken probe, one at a time — a finding that cannot fire is not a finding.
+
 ## 2026-09-02 — the label answers WHO, and "the eight o'clock" answers when
 
 **`references/the-first-hour.md`** (F10) · **`scripts/gates.py`** (the lint now prints every

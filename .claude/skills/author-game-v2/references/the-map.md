@@ -205,16 +205,83 @@ either the hall exists or the paragraph is wrong. Both are cheap on the day and 
 thousand words later. Reported as a lint, because *"he came through the hall"* in a world that
 deliberately has no hall is a judgement call — but three uses of the same word is a place.
 
+### R6 · A door belongs to a PERSON, not to a room
+
+A **door** is a threshold screen the player lands on *instead of* the room: click Ray's Room and get
+**knock** rather than walking straight in. `[locations.door]`, `engine.md` §44.
+
+**It is rare, and rarity is not a style note — it is the rule.** `degrees-of-lewdity` carries **six
+named doors** (47 `<<dooricon>>` sites over 30 passages) in a **15,626-passage** game.
+`become-someone` has 54, and every one of them is a *person's house*. Measured 2026-09-02 across 27
+shipped sandboxes; every figure here is reproducible from `~/Documents/Door_Study_20260902/`.
+
+⚠️ **Presence is NOT the test.** **151 of 239 rooms across our own 18 games — 63% — ever hold a
+scheduled person.** If "someone is sometimes in there" earned a door, two rooms in three would have
+one and the game would be a knocking simulator. What earns a door is that the room **belongs to
+somebody** and she is the visitor.
+
+**The refusal is one short line, and it is allowed to be the same line every time.** The field runs
+a **median 8 words**, and it is the *same sentence 44 times* — *"You knock on the door, but nobody
+came."* Ours run 22 and are bespoke. The value of the screen is its **structure**, not its prose;
+spend the words on the far side of the door.
+
+> **One authored departure, recorded as a departure.** The field never offers *knock* and *go in*
+> side by side — `become-someone`'s `katehouse` offers only *Knock*, and entering is what knocking
+> earns. LO's call, 2026-09-02: on a door that is *open*, both may be live, because an open door is
+> a fact about the person behind it. That is ours, not the field's, and it is written here so the
+> next author knows which is which.
+
+### R6b · The door always renders. What is conditional is whether the door EXISTS
+
+**Do not build a rule that skips the threshold when it has nothing to say.** It is the first thing
+anyone designs and the field does not do it: `become-someone` ships **54 door screens — 50 gating on
+occupancy, 46 on occupancy AND time of day, median 14 words, 53 of 54 carrying a way back** — and
+not one of them is skipped.
+
+What the field makes conditional is the **door's existence**. `degrees-of-lewdity` puts Whitney's
+flat on the street only once `$whitney_home_stage gte 3`; from then on the screen always renders.
+
+**So rarity is the answer to the two-click tax, not skipping.** A door on eight rooms is a speed
+bump on every one of them. A door on one room is the room.
+
+⚠️ **This rule exists because the skip was designed, argued for, and only then measured.** It was in
+the plan, it sounded obviously right, and one probe killed it. Assume the same about the next
+obvious refinement.
+
+### R6c · A shared room gets no door
+
+A bathroom, a kitchen, a front room — she walks in. **Occupancy is a row INSIDE the room**, not a
+threshold in front of it.
+
+`become-someone`'s `Bathroom` is the room itself with a conditional chain in it: walk in on one
+character at one hour, on another at another, and *"the door is locked… you hear the shower… you
+leave, needing to wait your turn"* written as prose **inside the room** rather than as a blocked
+card on the map. A locked bathroom is a sentence, not a screen.
+
+**We already do this correctly and did not notice.** `back_home` ships **13 occupancy-gated rows** —
+`activity_wash` gated `is_absent` beside `bath_occupied` gated `is_present`, and
+`activity_his_room` gated on the lodger being out. The engine has had the primitive all along
+(`npc_at_location`, per-NPC or any-NPC). `orientation` simply did not use it, which is how Ray's
+Room shipped one row of 31 words against a declared 3,000.
+
+**And the empty room is content.** Where the field has a door it usually also has *going through
+their things while they are out* — 260 such labels across 15 of 27 games. `new-life-project` shows
+the best shape of it: the row is there, and the game says **"Tyson is in there."** in red beside
+*"Search anyways"*. Occupancy as a stated risk, not a lock.
+
+---
+
 ---
 
 ## The engine gives you more than `entry_from`
 
-All four verified against source; full citations in `references/engine.md`.
+All five verified against source; full citations in `references/engine.md`.
 
 | you want | the field |
 |---|---|
 | walking somewhere to **cost** time or a trait | `costs = { time = 20, energy = 5 }` on `[[locations]]` |
-| a door that is **visible but shut**, with in-world prose on the card | `entry_conditions` + `blocked_message` |
+| a place that is **shut and inert** — the mall at midnight, a story gate | `entry_conditions` + `blocked_message` (a greyed, unclickable card) |
+| a door she can **stand at and knock on**, whether or not she may enter | `[locations.door]` — R6, `engine.md` §44 |
 | an "away" label for a schedule with **no nav card** | `offscreen = true` |
 | a pure navigation wrapper holding no content | `is_container` + `default_entry` |
 
@@ -270,6 +337,7 @@ only `board.map.homes`), so they are stale, not broken.
 | **Gate 12 · residents have homes** | every declared character has a `home` that is a real location |
 | **Gate 28 · the map is a place** | `board.map.archetype` is one of R0's five, **and** the declared `exterior` is a root rather than a leaf off an interior room (R3) |
 | **Lint · the prose names places the map does not have** | place nouns used three or more times with no matching location |
+| **Lint · a door opens onto something** | every `[locations.door]`: one no option can ever open, one whose only option is `enter`, a knock nobody is scheduled to answer, and a door on a room the whole cast passes through (R6–R6c). Silent on a game that declares none |
 
 **R1 as a whole is still not a gate.** Whether a world *reads* as a coherent place is not
 mechanically decidable, and a check that measures a proxy for it is exactly how a world with no

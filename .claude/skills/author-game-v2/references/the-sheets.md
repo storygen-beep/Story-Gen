@@ -41,7 +41,7 @@ from memory without noticing there was a gap.
 | | what it carries | one per |
 |---|---|---|
 | **system** | what the game keeps track of about her: `ambient` or `sourced`, the key it keeps, where it is fed, what reads it, which room labels it attaches to | system |
-| **place** | what the player sees on entering a room: doors, auto-fires, who is here, things to do, ways out — and **what kind of place it is** (its labels) | location |
+| **place** | what the player sees on entering a room: auto-fires, who is here, things to do, ways out — **what kind of place it is** (its labels), and whether it has a DOOR | location |
 | **person** | the ladder — rungs, both gates, where and **when** they are reachable, refusals | character |
 | **scene** | one rung: branch map, node bodies, exits, and every explicit beat written out | rung |
 | **decision** | what is locked forever, what is expensive, what is cheap — blocked by reversibility | game |
@@ -90,6 +90,12 @@ and names the **exterior**.
 > in**, so nothing could see it.
 
 A map can be right room-by-room and wrong as a whole. Only the way *in* makes it a tree.
+
+**It also carries a `DOOR` row** — added 2026-09-02. Yes or no, and if yes, the options and what
+each is gated on (`the-map.md` R6). It is a row rather than an afterthought because the answer is
+usually **no**: a door is a handful per game and it belongs to a person's home, while a shared room
+takes occupancy-gated rows instead (R6c). A sheet that never asks the question gets the default by
+accident, which is how Ray's Room shipped a threshold with nothing behind it.
 
 **It also carries a `LABELS` row** — what kind of place this is, from the menu in `the-systems.md`
 SY3, and **every row on the sheet names the system it belongs to.** Added 2026-09-02. A sheet whose

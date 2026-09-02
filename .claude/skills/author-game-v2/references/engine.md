@@ -771,6 +771,9 @@ inventing a room for them. `template_import.py:154`.
 `template_import.py:153`, `:3968`. A container **swallows** any canvas attached to it; attach to a
 non-container hub instead.
 
+⚠️ **The lock above is the INERT kind** — a greyed, unclickable card. For a door she can stand at
+and knock on, see **§44**; it is a different field and a different fiction.
+
 ---
 
 ## 23. The guidance page — `[[quest_cards]]`, and it is OFF by default in practice
@@ -2516,3 +2519,75 @@ existed.
 > **Linted as `a token the engine never resolves`** — a LIST, never a score. It walks the merged TOML
 > and reports any `@` reference sitting outside the resolved set, dev-only fields reported separately
 > from player-facing ones.
+
+---
+
+## 44. The door — `[locations.door]`, a threshold she lands on instead of the room
+
+Shipped 2026-09-02. Opt-in and **inert when unauthored**: a game that declares no door builds
+byte-identical output, verified over 27 builds. `the-map.md` R6–R6c owns *when* to use one; this
+section is the mechanism.
+
+```toml
+[[locations]]
+id   = "the_back_bedroom"
+name = "Ray's Room"
+
+[locations.door]
+description = "The door at the back of the house."
+no_answer   = "You knock. Nobody comes to it."
+# optional, same shape and same evaluator as [[locations.description_variants]]
+description_variants = [ { conditions = { version = "1.0", ... }, text = "..." } ]
+
+[[locations.door.options]]
+text       = "Knock."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_back_bedroom", npc_id = "npc_ray",
+    operator = "is_present" },
+] }
+goes_to    = { type = "canvas", canvas_id = "ray_knock" }
+
+[[locations.door.options]]
+text             = "Go in."
+show_when_locked = true
+locked_text      = "You have got as far as the handle twice."
+goes_to          = { type = "enter" }
+```
+
+```
+template_import.py   TemplateLocation.door · parsed beside entry_conditions · validated in validate()
+game_graph.py        loc.properties["door"] — THE PATH A REAL BUILD TAKES
+v2.py                setup.locations[slug].door · _render_door_passage · setup.renderDoorOptions
+                     _location_entry_passage · isRerenderSafe
+```
+
+**Two option types, and `leave` is implicit.** `{ type = "enter" }` goes to the room;
+`{ type = "canvas", canvas_id = "…" }` goes to that canvas's entry passage, resolved at generation
+time. A `Leave` link is always emitted.
+
+**The lock is declared once.** An `enter` option with no `conditions` inherits the location's
+`entry_conditions`; with no `locked_text` it inherits `blocked_message`.
+
+**Every engine-generated way IN routes through the door** — the nav grid, the nav text list, and
+both location lists on `:: Navigation`. Deliberately NOT routed: the *"Back to \<name\>"* link (she
+is already inside) and any authored canvas exit, which goes where the author said.
+
+⚠️ **AN OPTION MAY CARRY NO COST AND NO TIME, and that is structural, not stylistic.** The door
+passage is a **pure render** — no `<<pass>>`, no effect, no flag, no `current_location` write. Only
+that makes it legal for `setup.isRerenderSafe`, and a passage that is not rerender-safe re-applies
+its body on every save-load. Cost lives on the far side: a `canvas` option pays through its own
+`trigger.costs`, an `enter` option through the location's `entry_costs` via the travel intercept,
+which keys on `"Location_"` and never sees a threshold. The field does the same — `degrees-of-lewdity`
+charges the walk on the street link and nothing on the knock screen.
+
+⚠️ **`conditions` needs `version = "1.0"`**, like any condition block, or it **fails open** (§4) and
+the option is never actually gated. The importer refuses it.
+
+⚠️ **A door needs a nav card to hang off.** The importer refuses one on `auto_exit = false`,
+`offscreen`, or `is_container` — all three render no card, so the door would be authored and
+unreachable.
+
+⚠️ **KNOWN LIMIT.** A canvas with no trigger and nothing referencing it is pruned from the build
+before the generator sees it, and a door option is not yet one of the references that closure walks.
+Such an option is **dropped rather than left pointing nowhere**, with a `logger.warning` naming the
+option, the location and the canvas. The author fix is one line: give that canvas a trigger location.

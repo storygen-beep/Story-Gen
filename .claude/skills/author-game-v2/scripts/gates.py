@@ -1806,6 +1806,101 @@ def lint_labels_and_systems(model, game, state):
     return summary, findings
 
 
+def lint_doors(model, game):
+    """`the-map.md` R6-R6c — every `[locations.door]`, and whether it opens onto anything.
+
+    A DOOR is the threshold screen the player lands on instead of the room: click Ray's
+    Room and get *knock* rather than walking straight in. Doc 73.
+
+    ⚠️ PRINTS NOTHING when a game declares no door, and that is deliberate. R6 says a
+    door is a handful per game — DoL carries SIX named doors in a 15,626-passage game —
+    so a row on every doorless game would be noise, and this is a check on a feature,
+    never a nudge toward one. The `print(f"  lint · …")` line still exists in the
+    source, so `--selfcheck` finds the name either way.
+
+    ⚠️ A LINT AND NOT A GATE, and the direction is why it is safe. Declaring another
+    door makes findings 2-4 WORSE, never better — an unreachable door, a door with
+    nothing on it, and a knock nobody can answer are what it prints. Nothing here can be
+    optimised into a pass, which is the property `objects` / gate 22 lacked.
+    """
+    doors = [(l.get("id"), l.get("door")) for l in (game.get("locations") or [])
+             if isinstance(l.get("door"), dict) and l.get("door")]
+    if not doors:
+        return "", []
+
+    # Everything any canvas in the game opens — flags AND trait writes, both already
+    # folded into the model's per-canvas `sets` (build(), and note the key asymmetry
+    # recorded there: an effect names its trait `trait`, a condition `trait_key`).
+    opened = set()
+    for c in model:
+        opened |= set(c["sets"])
+
+    # Who is ever scheduled where. Same walk the walk-in and ambient checks use.
+    sched = collections.defaultdict(set)
+    for npc in (game.get("npcs") or []):
+        for r in (npc.get("schedules") or []):
+            loc = r.get("location") or r.get("location_id")
+            if loc:
+                sched[loc].add(npc.get("id"))
+
+    findings = []
+    n_options = 0
+    for lid, door in sorted(doors, key=lambda x: str(x[0])):
+        options = [o for o in (door.get("options") or []) if isinstance(o, dict)]
+        n_options += len(options)
+
+        # 1 · a door no option can ever open. The Ray bug generalised: `Knock.` sat
+        #     behind appetite 70 + ray_open and unlocked into nothing.
+        live = []
+        for oi, o in enumerate(options):
+            keys = [it.get("flag_key") or it.get("trait_key")
+                    for it in _conditions_of(o)]
+            keys = [k for k in keys if k]
+            if not keys or any(k in opened for k in keys):
+                live.append(oi)
+            elif keys:
+                findings.append(
+                    f"{lid} options[{oi}] `{str(o.get('text') or '')[:28]}` is gated on "
+                    f"{', '.join('`%s`' % k for k in keys if k not in opened)}, which no "
+                    f"canvas ever sets — the door does not open onto this")
+        if options and not live:
+            findings.append(f"{lid}: no option on this door can EVER open (R6)")
+
+        # 2 · a door whose only way through is `enter`. That is not a door, it is a
+        #     room with an extra click — the two-click tax R6b is about.
+        kinds = [str((o.get("goes_to") or {}).get("type") or "enter") for o in options]
+        if kinds and set(kinds) == {"enter"} and len(kinds) == 1:
+            findings.append(
+                f"{lid}: the only option is `enter` — that is a room with an extra "
+                f"click, not a door. Drop the door or give it something to say (R6b)")
+
+        # 3 · a knock nobody can answer.
+        for oi, o in enumerate(options):
+            for it in _conditions_of(o):
+                if it.get("type") != "npc_at_location" or it.get("operator") == "is_absent":
+                    continue
+                who = it.get("npc_id") or it.get("character_id")
+                where = it.get("location_id") or it.get("location") or lid
+                if who and who not in sched.get(where, set()):
+                    findings.append(
+                        f"{lid} options[{oi}] waits for `{who}` at `{where}`, where no "
+                        f"schedule row ever puts them — a knock nobody can answer")
+
+        # 4 · R6c. A door belongs to a PERSON'S home; a room the whole cast passes
+        #     through is shared, and a shared room takes rows inside, not a threshold.
+        #     Reported to eyeball: "shared" is a proxy and only the author can call it.
+        if len(sched.get(lid, set())) > 1:
+            findings.append(
+                f"{lid} is scheduled for {len(sched[lid])} characters "
+                f"({', '.join(sorted(sched[lid]))}) — a shared room takes occupancy-gated "
+                f"ROWS, not a door (R6c)")
+
+    n_locs = len([l for l in (game.get("locations") or []) if l.get("id")])
+    summary = (f"{len(doors)} door(s) on {n_locs} locations · {n_options} option(s) · "
+               f"{len(findings)} to eyeball")
+    return summary, findings
+
+
 def lint_labels(model, game):
     """`the-voice.md` R1 as two numbers: noun-only share, and label length."""
     rows = _room_list_labels(model, game)
@@ -8371,6 +8466,7 @@ def main():
     shape_summary, shape_lints = lint_screen_shape(model, game)
     label_summary, label_lints = lint_labels(model, game)
     sys_summary, sys_lints = lint_labels_and_systems(model, game, state)
+    door_summary, door_lints = lint_doors(model, game)
     browse_summary, browse_lints = lint_browse_share(model, game)
     disp_summary, disp_lints = lint_dispatch_depth(game)
     ladder_summary, ladder_lints = lint_ladder(model, game)
@@ -8411,6 +8507,8 @@ def main():
                                                "findings": label_lints},
                                     "labels_and_systems": {"summary": sys_summary,
                                                            "findings": sys_lints},
+                                    "doors": {"summary": door_summary,
+                                              "findings": door_lints},
                                     "browse_share": {"summary": browse_summary,
                                                      "findings": browse_lints},
                                     "ambient_presence": {"summary": amb_summary,
@@ -8533,6 +8631,24 @@ def main():
               " that is said. Two different fixes — `gate it` is one line of requires_npc;")
         print("           `or narrate` means no row exists here, so a gate would strand the"
               " canvas and the arrival belongs in the prose instead)")
+
+    if door_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · a door opens onto something — {door_summary}")
+        for h in door_lints[:16]:
+            print(f"          · {h}")
+        if len(door_lints) > 16:
+            print(f"          · … and {len(door_lints)-16} more")
+        print("          (the-map.md R6-R6c — a LIST, never a score, and it cannot fail"
+              " anything. A door is the threshold screen the player lands on INSTEAD of")
+        print("           the room. It belongs to a PERSON'S HOME and it is rare: DoL"
+              " carries six named doors in a 15,626-passage game, while 63% of our own")
+        print("           rooms hold a scheduled person — presence is not the test. The"
+              " field never SKIPS a threshold either (become-someone: 54 door screens,")
+        print("           50 gating on occupancy, none skipped); what it makes"
+              " conditional is whether the door exists at all. ⚠️ Declaring another door")
+        print("           makes this output worse, not better, which is the only reason"
+              " it is checked. Silent on a game that declares none, by design)")
 
     if sys_summary:
         print(f"  {'─'*72}")
