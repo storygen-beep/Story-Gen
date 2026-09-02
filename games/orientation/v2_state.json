@@ -613,14 +613,15 @@
     "version": "0.1-wip",
     "gates": "45/46 judged (1 n/a)",
     "failures": [
-      "location fill — 6,619 of 45,000 declared words. The only red, and it is authoring."
+      "location fill — 7,593 of 45,000 declared words. The only red, and it is authoring, not structure."
     ],
-    "remaining": "38,356 words, distributed per board.locations[].fill. the_pledge_house needs 9,829 of them to hold the >=25% anchor share; the_kitchen is currently the de facto anchor at 31% and must not stay that way.",
+    "remaining": "37,407 words, distributed per board.locations[].fill. the_pledge_house needs 9,829 of them to hold the >=25% anchor share; the_kitchen is the de facto anchor at 27% and must not stay that way.",
     "structural": "portraits live, gated on `met AND located` for all 5 characters — verified in a browser at ten day/hour/flag points: no portrait exists before its meeting has fired, and a met character still does not appear outside their own hours. Walk-ins fire only as substitutions. Zero @-tokens in the built HTML. One wardrobe door. Built without --debug. Every NPC dialogue block carries the role label under the name (65/65, zero bare names).",
     "known_open": [
       "walkin_bath_wes / walkin_avenue_ray / walkin_quad_halloran carry no schedule and no conditions — they are day-capped substitution targets, so this is far milder than it was, but their windows are still implicit.",
       "act_back_bedroom_door and hub_wes_room share the name 'Go in'. Daily limits are shared BY NAME; neither is day-capped today, so it is inert — but it will bite the moment one gets a cap."
     ],
-    "opening_vs_field": "5 screens, 625 words, screens of 81-179 against a field median first-fiction screen of 144, one real choice on screen 4. No dev note, no changelog, no systems explainer — which the top two games all ship."
+    "opening_vs_field": "5 screens, 625 words, screens of 81-179 against a field median first-fiction screen of 144, one real choice on screen 4. No dev note, no changelog, no systems explainer — which the top two games all ship.",
+    "doors": "the_back_bedroom and wes_room carry [locations.door] (the-map.md R6). the_bathroom deliberately does NOT — R6c, a shared room takes occupancy-gated rows. Ray's 01:00-06:00 bedroom schedule row was declared on his sheet and missing from the build until `lint · a door opens onto something` found it: a knock nobody could answer."
   }
 }

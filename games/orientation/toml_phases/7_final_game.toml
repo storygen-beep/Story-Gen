@@ -226,6 +226,8 @@ flagEffects = [
   { targetType = "player", flag = "halloran_rung_today", op = "unset" },
   { targetType = "player", flag = "office_today",       op = "unset" },
   { targetType = "player", flag = "shelter_today",      op = "unset" },
+  { targetType = "player", flag = "bedroom_today",      op = "unset" },
+  { targetType = "player", flag = "searched_today",     op = "unset" },
 ]
 
 
@@ -557,6 +559,50 @@ image                = "locations/the_back_bedroom.jpg"
 image_search_queries = ["dark bedroom doorway hallway night", "master bedroom door ajar dark corridor"]
 entry_from           = "the_avenue"
 
+# ═══ THE DOOR ═══ the-map.md R6. This room belongs to a person and she is the visitor,
+# which is the whole test — not that somebody is sometimes in it. It is one of two doors
+# in the game, and `the_bathroom` deliberately has none (R6c: a shared room takes
+# occupancy-gated rows, not a threshold).
+[locations.door]
+description = "The door at the back of the house. Your mother is on until six and has been since August, and from one in the morning there is one person behind it."
+# R6 — the field's refusal runs a median of 8 words and is allowed to be the same line
+# every time. The value of the screen is its structure.
+no_answer   = "You listen at it. The house is asleep and so is he."
+
+[[locations.door.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_back_bedroom", npc_id = "npc_ray", operator = "is_present" },
+] }
+text = "The door at the back of the house, and the strip of light under it says he has not gone to sleep either. Your mother has four hours left of her shift."
+
+[[locations.door.options]]
+text       = "Knock."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_back_bedroom", npc_id = "npc_ray", operator = "is_present" },
+] }
+goes_to    = { type = "canvas", canvas_id = "ray_knock" }
+
+# The top of the house track, and what the Want sells. `appetite` is raised elsewhere,
+# so this is a real handle rather than the machinery narrating its own progress bar.
+[[locations.door.options]]
+text             = "Go in without knocking."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "appetite", operator = "gte", value = 70 },
+  { type = "flag",  subject = "player", flag_key = "ray_open", operator = "is_true" },
+] }
+show_when_locked = true
+locked_text      = "You have got as far as the handle twice. It is not the door that is not ready — you know exactly what you would be asking for and you cannot say it yet."
+goes_to          = { type = "enter" }
+
+# Nobody home. R6c's other half: the empty room is content, and the field builds it —
+# 260 trespass labels across 15 of 27 games.
+[[locations.door.options]]
+text       = "Try the handle."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_back_bedroom", operator = "is_absent" },
+] }
+goes_to    = { type = "enter" }
+
 [[locations]]
 id                   = "wes_room"
 name                 = "Wes's Room"
@@ -564,6 +610,42 @@ description          = "@wes never moved out. He is a junior and he still sleeps
 image                = "locations/wes_room.jpg"
 image_search_queries = ["college guy bedroom messy desk laptop", "young man bedroom open door bed desk"]
 entry_from           = "the_avenue"
+
+# ═══ THE OPEN DOOR ═══ the-map.md R6, and the ONE place this game departs from the
+# field on purpose. `become-someone` offers only *Knock* and entering is what knocking
+# earns; here both are live, because @wes's door being open is a fact about HIM — the
+# location's own description says so — and knocking on it anyway is a different beat
+# from walking in. LO's call, 2026-09-02, and R6 records it as a departure.
+[locations.door]
+description = "His door, and it is open, which is the whole of what there is to say about it. The landing light is on a timer and it has gone off."
+no_answer   = "He is not in. The desk lamp is off and the chair is pushed under."
+
+[[locations.door.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "wes_room", npc_id = "npc_wes", operator = "is_present" },
+] }
+text = "His door is open the way it always is. One headphone is off and he has heard you on the landing, and he is going to let you decide what that means."
+
+[[locations.door.options]]
+text       = "Knock on the frame anyway."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "wes_room", npc_id = "npc_wes", operator = "is_present" },
+] }
+goes_to    = { type = "canvas", canvas_id = "wes_knock" }
+
+[[locations.door.options]]
+text       = "Go in."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "wes_room", npc_id = "npc_wes", operator = "is_present" },
+] }
+goes_to    = { type = "enter" }
+
+[[locations.door.options]]
+text       = "Have a look while he is out."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "wes_room", operator = "is_absent" },
+] }
+goes_to    = { type = "enter" }
 
 # ─── THE BRIDGE ──────────────────────────────────────────────────────────────
 # ⚠️ The commute, priced. Forty minutes and two dollars, every crossing. This is
@@ -679,6 +761,18 @@ weekdays   = [0, 1, 2, 3, 4]
 start_time = "00:00"
 end_time   = "01:00"
 activity   = "still up, and not going to bed while you are down here"
+
+# ⚠️ THE ROW THE SHEET DECLARED AND THE BUILD LOST. ray.md's grid carries
+#    `the_back_bedroom 01:00-06:00 — asleep, home only` and nothing ever emitted it, so
+#    the room he sleeps in had NOBODY scheduled in it while its own description says he
+#    is there from one in the morning. Found by `lint · a door opens onto something`
+#    (the-map.md R6): a knock nobody can answer. All days, so it is ONE row — the
+#    weekday-first trap only splits a DAY-SPECIFIC overnight window.
+[[npcs.schedules]]
+location   = "the_back_bedroom"
+start_time = "01:00"
+end_time   = "06:00"
+activity   = "asleep, or not"
 
 # ─── Dee — the shift, the rules, the reason it costs ─────────────────────────
 [[npcs]]
@@ -1920,46 +2014,136 @@ targetType               = "location"
 locationId               = "the_pledge_house"
 time_progression_minutes = 5
 
-# ═══════════════════ RAY'S ROOM — the door IS the content ════════════════════
+# ═══════════════════ RAY'S ROOM — behind the door ════════════════════════════
+# `act_back_bedroom_door` used to live here: one row named "Go in", INSIDE a room the
+# player was already standing in, whose only choice ("Knock.") was locked behind
+# appetite 70 + ray_open and, when it opened, ran advanceTime(20) and nothing else. The
+# room delivered 31 words against a declared 3,000.
+#
+# The door is a real threshold now — `[locations.door]` in phase 1, the-map.md R6 — so
+# what lives here is what is BEHIND it, and which surface she gets is decided by whether
+# he is in the room rather than by a menu.
 
+# ─── He is out. The empty room is content (R6c) ──────────────────────────────
 [[canvases]]
-id          = "act_back_bedroom_door"
-name        = "Go in"
-description = "0.1's other locked door. Gated on appetite, which she raises elsewhere — a real handle, not the machinery narrating its own progress bar."
+id          = "act_bedroom_search"
+name        = "Go through their things"
+description = "The trespass. Gated on the room being empty, which is most of the day — and it feeds `appetite` somewhere that is not him."
 
 [canvases.trigger]
 location      = "the_back_bedroom"
 is_repeatable = true
 is_active     = true
 priority      = 3
+costs         = [ { trait = "rest", value = 4 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_back_bedroom", operator = "is_absent" },
+] }
+
+# ⚠️ THE WALK-IN. She does solo work here and somebody sleeps here, so somebody can
+#    come in on her — the-surfaces.md R3, and the gate counts trigger.substitutions on
+#    the SOLO activity, never a standalone random canvas.
+#    His window opens at 01:00. Hers closes at 01:00. The overlap is the whole point.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_bedroom_ray"
+chance           = 0.3
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_kitchen", npc_id = "npc_ray", operator = "is_present" },
+] }
 
 [[canvases.nodes]]
 id   = "base"
-name = "The door at the back"
+name = "Their room, with nobody in it"
 blocks = [
-  { type = "paragraph", content = "The door at the back of the house. Your mother is on until six and has been since August, and from one in the morning there is one person behind it." },
+  { type = "paragraph", content = "The bed is made on his side and not on hers, which tells you which of them got up last. The room smells of him and of the spray your mother uses and the two do not go together." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The top drawer is socks and a watch that has stopped. The second is hers. The third is his and you go through it with two fingers, moving nothing, and there is nothing in it but paperwork about the car." },
+    { type = "paragraph", content = "There is a shirt over the back of the chair that he wore on Thursday. You pick it up to move it and you do not move it, and you stand there holding it for longer than moving it would have taken." },
+    { type = "paragraph", content = "Under his side of the bed there is a shoebox with the lid on properly. You get as far as the lid. You put it back exactly square, which is how you know you are coming back to open it." },
+    { type = "paragraph", content = "Their bathroom door is open and his razor is on the cistern and there is a towel on the floor. You hang the towel up. It takes four seconds and it is the most married thing you have ever done." },
+    { type = "paragraph", content = "Her side of the wardrobe is tunics and one dress. His side is four shirts and a suit bag. There is a foot of empty rail between them that neither of them has ever used." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text                     = "Knock."
+text                     = "Put it back square and get out."
 targetType               = "location"
-locationId               = "the_back_bedroom"
-time_progression_minutes = 20
+locationId               = "the_avenue"
+time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "appetite", operator = "gte", value = 70 },
-  { type = "flag", subject = "player", flag_key = "ray_open", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "searched_today", operator = "is_false" },
 ] }
-show_when_locked = true
-locked_text      = "You could knock. You have got as far as the handle twice. It is not the door that is not ready — you know exactly what you would be asking for and you cannot say it yet."
+flagEffects = [ { targetType = "player", flag = "searched_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "appetite", op = "add", value = 2, cap = 90 },
+  { targetType = "player", trait = "home_face", op = "add", value = -2 },
+]
 
 [[canvases.nodes.exit_block.choices]]
-text                     = "Go back to your room."
+text                     = "Leave it alone."
 targetType               = "location"
 locationId               = "the_avenue"
 time_progression_minutes = 2
+
+
+# ─── The walk-in itself ──────────────────────────────────────────────────────
+[[canvases]]
+id          = "walkin_bedroom_ray"
+name        = "He comes up"
+description = "Substitution target for act_bedroom_search. Never renders as a row of its own."
+
+[canvases.trigger]
+location          = "the_back_bedroom"
+is_repeatable     = true
+is_active         = true
+substitution_only = true
+priority          = 4
+
+[[canvases.nodes]]
+id   = "base"
+name = "The stair with the give in it"
+blocks = [
+  { type = "paragraph", content = "The fourth stair goes and you are standing in their room with his drawer open. There is no version of the next four seconds where you get out of here first, so you stop moving and let it happen." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "You looking for something?" },
+  { type = "paragraph", content = "He is in the doorway with a glass in his hand and he is not angry, which is worse. He looks at the drawer, then at you, and he takes his time about both." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Say you were looking for the spare charger."
+targetType               = "location"
+locationId               = "the_avenue"
+time_progression_minutes = 10
+effects = [
+  { targetType = "player", trait = "home_face", op = "add", value = 2, cap = 100 },
+]
+
+# ⚠️ THE DAY-CAP IS ON THIS CHOICE, not on the substitution. A walk-in REPLACES its
+#    host, so it never touches the host's `searched_today`, and the first cut granted
+#    appetite and his lust on an uncapped roll — `the climb is paid for` read appetite
+#    0→70 in 35 free clicks. Being caught IS her search for the night.
+[[canvases.nodes.exit_block.choices]]
+text                     = "Don't bother."
+targetType               = "location"
+locationId               = "the_avenue"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 30 },
+  { type = "flag", subject = "player", flag_key = "searched_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "searched_today", op = "set" } ]
+show_when_locked = true
+locked_text      = "You could just let him look at you and not explain. You are not there yet — you are fifteen feet from your mother's side of the bed."
+effects = [
+  { targetType = "npc", npcId = "npc_ray", trait = "lust", op = "add", value = 2, cap = 40 },
+  { targetType = "player", trait = "appetite", op = "add", value = 2, cap = 90 },
+  { targetType = "player", trait = "home_face", op = "add", value = -6 },
+]
 
 # ══════════════════════════════════════════════════════════════════
 # Phase: 4_story_arc.toml
@@ -3763,7 +3947,7 @@ time_progression_minutes = 5
 
 [[canvases]]
 id          = "hub_wes_room"
-name        = "Go in"
+name        = "Sit down in here"
 description = "@wes's surface in his own room. The nerve 70 rung is the top of that bar and it is what the sidebar has been promising."
 
 [canvases.trigger]
@@ -3847,6 +4031,250 @@ text                     = "Leave him to it."
 targetType               = "location"
 locationId               = "the_avenue"
 time_progression_minutes = 5
+
+# ═══════════════ BEHIND THE TWO DOORS ═══════════════════════════════════════
+# the-map.md R6. A door belongs to a person and she is the visitor. Both scenes below
+# are what a door option routes to — they are NOT rows in the room, and neither renders
+# on the room screen at all.
+
+# ─── @ray · the knock ────────────────────────────────────────────────────────
+# LO's decision, 2026-09-02: knocking lands in a SCENE, never in the room. If knocking
+# and walking in converged, the door would be decoration.
+[[canvases]]
+id           = "ray_knock"
+name         = "The door at the back"
+description  = "Routed to by [locations.door] on the_back_bedroom. Not a row: it has no location trigger of its own beyond the room, and the player only ever arrives here from the threshold."
+
+[canvases.trigger]
+location      = "the_back_bedroom"
+is_repeatable = true
+is_active     = true
+priority      = 2
+npc           = "npc_ray"
+requires_npc  = "npc_ray"
+substitution_only = true
+# ⚠️ THE BRAKE IS ON THE WAY IN (the-sheets.md S9). Knocking grants `appetite` and his
+#    `lust`, and the first cut carried neither a cost nor a cap — `the climb is paid
+#    for` reported appetite 0→70 in twelve free clicks. Standing at the door is free;
+#    knocking is not.
+costs                = [ { trait = "rest", value = 4 } ]
+max_triggers_per_day = 1
+# F5 — no portrait, and no door to knock on, before the meeting that names him.
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_ray", operator = "is_true" },
+]}
+
+[[canvases.nodes]]
+id   = "base"
+name = "Two knuckles"
+blocks = [
+  { type = "paragraph", content = "Two knuckles, twice, not loud. The bed goes and the strip of light under the door does not change, and then it is open and he is in the doorway in the shirt he wore all day with the buttons undone." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "It is ten past two, @player." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "ray_open", operator = "is_true" },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He does not say anything else and he does not move out of the doorway. He has done the arithmetic on your mother's shift the same as you have, and he is waiting to see whether you are going to make him be the one who says it." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "He looks past you down the landing first, which is the thing he always does, and it tells you he has thought about this happening. The house is quiet enough that you can hear the fridge from here." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Say you couldn't sleep."
+targetType               = "location"
+locationId               = "the_back_bedroom"
+time_progression_minutes = 10
+effects = [
+  { targetType = "npc", npcId = "npc_ray", trait = "relation", op = "add", value = 2, cap = 40 },
+  { targetType = "player", trait = "appetite", op = "add", value = 2, cap = 90 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Don't say anything."
+targetType               = "location"
+locationId               = "the_back_bedroom"
+time_progression_minutes = 15
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "ray_open", operator = "is_true" },
+] }
+effects = [
+  { targetType = "npc", npcId = "npc_ray", trait = "lust", op = "add", value = 3, cap = 40 },
+  { targetType = "player", trait = "appetite", op = "add", value = 4, cap = 90 },
+  { targetType = "player", trait = "home_face", op = "add", value = -4 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go back to bed."
+targetType               = "location"
+locationId               = "the_avenue"
+time_progression_minutes = 5
+
+# ─── @wes · knocking on a door that is already open ──────────────────────────
+[[canvases]]
+id           = "wes_knock"
+name         = "The frame"
+description  = "The departure R6 records. Knocking on an open door is a different beat from walking in — it makes her the one who asked."
+
+[canvases.trigger]
+location      = "wes_room"
+is_repeatable = true
+is_active     = true
+priority      = 2
+npc           = "npc_wes"
+requires_npc  = "npc_wes"
+substitution_only = true
+costs                = [ { trait = "rest", value = 3 } ]
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_wes", operator = "is_true" },
+]}
+
+[[canvases.nodes]]
+id   = "base"
+name = "You knock on the frame"
+blocks = [
+  { type = "paragraph", content = "The door is open so there is nothing to knock on but the frame, and you do it anyway. He takes the headphone all the way off for that, which he does not do when you just walk in." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_wes" }, content = "You do not have to do that. It is open. It is always open." },
+  { type = "paragraph", content = "You know. That is why you did it. In this house nobody asks for anything and you have just asked for something, and both of you heard it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go in."
+targetType               = "location"
+locationId               = "wes_room"
+time_progression_minutes = 5
+effects = [
+  { targetType = "npc", npcId = "npc_wes", trait = "relation", op = "add", value = 2, cap = 35 },
+  { targetType = "player", trait = "nerve", op = "add", value = 1, cap = 90 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave him to it."
+targetType               = "location"
+locationId               = "the_avenue"
+time_progression_minutes = 2
+
+# ─── @ray · the room itself. What the Want has been selling ──────────────────
+# the-map.md R2: a room the Want promises must EXIST, and nothing in the scoreboard can
+# see that promise except the fill gate. This is the top of the house track and it is
+# the last thing on it. BRAKE on the way in (the-sheets.md S9): trigger.costs + a
+# day-cap flag whose setter sits on the choices inside.
+#
+# CEILING: tier 3, per sheets/people/ray.md. A ceiling is never a floor; writing under
+# it is the defect.
+[[canvases]]
+id           = "hub_ray_bedroom"
+name         = "Get into the bed"
+description  = "The repeatable explicit surface behind the door. Reached only from the room, which is reached only through the threshold."
+
+[canvases.trigger]
+location      = "the_back_bedroom"
+is_repeatable = true
+is_active     = true
+priority      = 8
+npc           = "npc_ray"
+requires_npc  = "npc_ray"
+costs         = [ { trait = "rest", value = 10 } ]
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "ray_open", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "appetite", operator = "gte", value = 70 },
+]}
+
+[[canvases.nodes]]
+id   = "base"
+name = "His side of the bed"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/back_bedroom_t5", pool = 4, description = "older man and young woman in a dark bedroom, bed, night", search_queries = ["stepdad bedroom night amateur homemade", "older man young woman bed dark bedroom real"] } },
+  { type = "paragraph", content = "He has left the lamp off and the door open two inches, which is the only concession either of you makes to the fact that this is her room too. The sheet is still warm on the side he was lying on." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_ray", trait_key = "lust", operator = "gte", value = 25 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "He does not wait for you to decide where to be. He takes your wrist and puts you on your back on her side of the bed and gets the shirt off you without sitting up, and his hand is between your legs before the shirt is off the bed." },
+    { type = "paragraph", content = "His fingers go into your cunt two at a time and you are wet enough that they go in with no work at all. He keeps them there and does not move them, listening to what your breathing does, and only then starts." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "He puts his hand flat on your stomach first, the way you would settle an animal, and slides it down until his fingers are in your cunt. You are already wet and he finds that out slowly and does not say anything about it." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "Quiet. @wes is twelve feet that way and the landing carries." },
+]
+
+[[canvases.nodes]]
+id   = "act"
+name = "Under him"
+blocks = [
+  { type = "paragraph", content = "His cock is hard against your thigh through the shorts and then it is not through anything. He gets your knees apart with one hand and pushes into you in one go, all of it, and holds there while your body works out what has happened." },
+  { type = "paragraph", content = "He fucks you slowly because the bed is old and it gives him away if he does not. You can hear the frame anyway, a small sound every time, and his hand comes over your mouth and stays there." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "appetite", operator = "gte", value = 80 },
+  ] } }, blocks = [
+    { type = "paragraph", content = "You get your legs up round him to take him deeper and he swears into your hair and stops being careful about the bed. His cock goes into you the whole way and stays the whole way and you come round it with his hand still over your mouth." },
+  ] },
+  { type = "paragraph", content = "He comes in you. He does not ask and he does not pull out, and he stays where he is afterwards with his weight on his forearms, breathing, still inside you while it goes soft." },
+  { type = "paragraph", content = "Her alarm clock is nine inches from your head and you can read it. Four minutes past three. She is on until six." },
+]
+
+[[canvases.nodes]]
+id   = "after"
+name = "What he does after"
+blocks = [
+  { type = "paragraph", content = "He gets up first, always, and pulls the sheet back over the side you were on so it looks like nobody was. Then he stands at the window with his back to you and lights one and does not open the window." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "Go and have a shower before you sleep. Not the one up here. The one downstairs." },
+  { type = "paragraph", content = "He says it like a man telling you the bins go out Tuesday. It is the most careful thing anybody in this house has ever done for you and neither of you is going to call it that." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Stay until she is nearly back."
+targetType               = "location"
+locationId               = "the_back_bedroom"
+time_progression_minutes = 90
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "bedroom_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "bedroom_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_ray", trait = "relation", op = "add", value = 3, cap = 40 },
+  { targetType = "npc", npcId = "npc_ray", trait = "lust", op = "add", value = 4, cap = 40 },
+  { targetType = "player", trait = "appetite", op = "add", value = 3, cap = 90 },
+  { targetType = "player", trait = "home_face", op = "add", value = -8 },
+  { targetType = "player", trait = "clean", op = "add", value = -20 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go before you fall asleep in here."
+targetType               = "location"
+locationId               = "the_avenue"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "bedroom_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "bedroom_today", op = "set" } ]
+effects = [
+  { targetType = "npc", npcId = "npc_ray", trait = "lust", op = "add", value = 3, cap = 40 },
+  { targetType = "player", trait = "appetite", op = "add", value = 2, cap = 90 },
+  { targetType = "player", trait = "home_face", op = "add", value = -5 },
+  { targetType = "player", trait = "clean", op = "add", value = -20 },
+]
+
+# A11 — the stop beat. How HE takes being stopped, and it is free.
+[[canvases.nodes.exit_block.choices]]
+text                     = "Not tonight."
+targetType               = "location"
+locationId               = "the_avenue"
+time_progression_minutes = 5
+effects = [
+  { targetType = "npc", npcId = "npc_ray", trait = "relation", op = "add", value = 1, cap = 40 },
+]
 
 # ══════════════════════════════════════════════════════════════════
 # Phase: 6_dev_shortcuts.toml

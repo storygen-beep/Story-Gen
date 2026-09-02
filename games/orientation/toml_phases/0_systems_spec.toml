@@ -218,6 +218,8 @@ flagEffects = [
   { targetType = "player", flag = "halloran_rung_today", op = "unset" },
   { targetType = "player", flag = "office_today",       op = "unset" },
   { targetType = "player", flag = "shelter_today",      op = "unset" },
+  { targetType = "player", flag = "bedroom_today",      op = "unset" },
+  { targetType = "player", flag = "searched_today",     op = "unset" },
 ]
 
 

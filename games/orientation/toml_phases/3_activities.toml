@@ -752,43 +752,133 @@ targetType               = "location"
 locationId               = "the_pledge_house"
 time_progression_minutes = 5
 
-# ═══════════════════ RAY'S ROOM — the door IS the content ════════════════════
+# ═══════════════════ RAY'S ROOM — behind the door ════════════════════════════
+# `act_back_bedroom_door` used to live here: one row named "Go in", INSIDE a room the
+# player was already standing in, whose only choice ("Knock.") was locked behind
+# appetite 70 + ray_open and, when it opened, ran advanceTime(20) and nothing else. The
+# room delivered 31 words against a declared 3,000.
+#
+# The door is a real threshold now — `[locations.door]` in phase 1, the-map.md R6 — so
+# what lives here is what is BEHIND it, and which surface she gets is decided by whether
+# he is in the room rather than by a menu.
 
+# ─── He is out. The empty room is content (R6c) ──────────────────────────────
 [[canvases]]
-id          = "act_back_bedroom_door"
-name        = "Go in"
-description = "0.1's other locked door. Gated on appetite, which she raises elsewhere — a real handle, not the machinery narrating its own progress bar."
+id          = "act_bedroom_search"
+name        = "Go through their things"
+description = "The trespass. Gated on the room being empty, which is most of the day — and it feeds `appetite` somewhere that is not him."
 
 [canvases.trigger]
 location      = "the_back_bedroom"
 is_repeatable = true
 is_active     = true
 priority      = 3
+costs         = [ { trait = "rest", value = 4 } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_back_bedroom", operator = "is_absent" },
+] }
+
+# ⚠️ THE WALK-IN. She does solo work here and somebody sleeps here, so somebody can
+#    come in on her — the-surfaces.md R3, and the gate counts trigger.substitutions on
+#    the SOLO activity, never a standalone random canvas.
+#    His window opens at 01:00. Hers closes at 01:00. The overlap is the whole point.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_bedroom_ray"
+chance           = 0.3
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_kitchen", npc_id = "npc_ray", operator = "is_present" },
+] }
 
 [[canvases.nodes]]
 id   = "base"
-name = "The door at the back"
+name = "Their room, with nobody in it"
 blocks = [
-  { type = "paragraph", content = "The door at the back of the house. Your mother is on until six and has been since August, and from one in the morning there is one person behind it." },
+  { type = "paragraph", content = "The bed is made on his side and not on hers, which tells you which of them got up last. The room smells of him and of the spray your mother uses and the two do not go together." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The top drawer is socks and a watch that has stopped. The second is hers. The third is his and you go through it with two fingers, moving nothing, and there is nothing in it but paperwork about the car." },
+    { type = "paragraph", content = "There is a shirt over the back of the chair that he wore on Thursday. You pick it up to move it and you do not move it, and you stand there holding it for longer than moving it would have taken." },
+    { type = "paragraph", content = "Under his side of the bed there is a shoebox with the lid on properly. You get as far as the lid. You put it back exactly square, which is how you know you are coming back to open it." },
+    { type = "paragraph", content = "Their bathroom door is open and his razor is on the cistern and there is a towel on the floor. You hang the towel up. It takes four seconds and it is the most married thing you have ever done." },
+    { type = "paragraph", content = "Her side of the wardrobe is tunics and one dress. His side is four shirts and a suit bag. There is a foot of empty rail between them that neither of them has ever used." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text                     = "Knock."
+text                     = "Put it back square and get out."
 targetType               = "location"
-locationId               = "the_back_bedroom"
-time_progression_minutes = 20
+locationId               = "the_avenue"
+time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "appetite", operator = "gte", value = 70 },
-  { type = "flag", subject = "player", flag_key = "ray_open", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "searched_today", operator = "is_false" },
 ] }
-show_when_locked = true
-locked_text      = "You could knock. You have got as far as the handle twice. It is not the door that is not ready — you know exactly what you would be asking for and you cannot say it yet."
+flagEffects = [ { targetType = "player", flag = "searched_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "appetite", op = "add", value = 2, cap = 90 },
+  { targetType = "player", trait = "home_face", op = "add", value = -2 },
+]
 
 [[canvases.nodes.exit_block.choices]]
-text                     = "Go back to your room."
+text                     = "Leave it alone."
 targetType               = "location"
 locationId               = "the_avenue"
 time_progression_minutes = 2
+
+
+# ─── The walk-in itself ──────────────────────────────────────────────────────
+[[canvases]]
+id          = "walkin_bedroom_ray"
+name        = "He comes up"
+description = "Substitution target for act_bedroom_search. Never renders as a row of its own."
+
+[canvases.trigger]
+location          = "the_back_bedroom"
+is_repeatable     = true
+is_active         = true
+substitution_only = true
+priority          = 4
+
+[[canvases.nodes]]
+id   = "base"
+name = "The stair with the give in it"
+blocks = [
+  { type = "paragraph", content = "The fourth stair goes and you are standing in their room with his drawer open. There is no version of the next four seconds where you get out of here first, so you stop moving and let it happen." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ray" }, content = "You looking for something?" },
+  { type = "paragraph", content = "He is in the doorway with a glass in his hand and he is not angry, which is worse. He looks at the drawer, then at you, and he takes his time about both." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Say you were looking for the spare charger."
+targetType               = "location"
+locationId               = "the_avenue"
+time_progression_minutes = 10
+effects = [
+  { targetType = "player", trait = "home_face", op = "add", value = 2, cap = 100 },
+]
+
+# ⚠️ THE DAY-CAP IS ON THIS CHOICE, not on the substitution. A walk-in REPLACES its
+#    host, so it never touches the host's `searched_today`, and the first cut granted
+#    appetite and his lust on an uncapped roll — `the climb is paid for` read appetite
+#    0→70 in 35 free clicks. Being caught IS her search for the night.
+[[canvases.nodes.exit_block.choices]]
+text                     = "Don't bother."
+targetType               = "location"
+locationId               = "the_avenue"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 30 },
+  { type = "flag", subject = "player", flag_key = "searched_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "searched_today", op = "set" } ]
+show_when_locked = true
+locked_text      = "You could just let him look at you and not explain. You are not there yet — you are fifteen feet from your mother's side of the bed."
+effects = [
+  { targetType = "npc", npcId = "npc_ray", trait = "lust", op = "add", value = 2, cap = 40 },
+  { targetType = "player", trait = "appetite", op = "add", value = 2, cap = 90 },
+  { targetType = "player", trait = "home_face", op = "add", value = -6 },
+]

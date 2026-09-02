@@ -1019,6 +1019,16 @@ class TweeComprehensiveGeneratorV2:
                 "entry_conditions": loc_props.get("entry_conditions", {}),
                 "blocked_message": loc_props.get("blocked_message", ""),
             }
+            # THE DOOR — the threshold screen's own data, with every option's target
+            # resolved to a passage name HERE (see _door_for_payload). Fed by BOTH
+            # importer write-outs (create_project_from_template and
+            # game_graph.build_game_graph); the graph one is what a real build takes.
+            # ABSENT, not empty, when unauthored — so a doorless game's payload is
+            # byte-for-byte what it was before this feature existed.
+            if loc_props.get("door"):
+                locations_map[loc_slug]["door"] = self._door_for_payload(
+                    loc, loc_props["door"]
+                )
 
         # Build passage name → location slug reverse map (for clothing checks)
         passage_to_location = {}
@@ -3193,6 +3203,59 @@ jQuery(document).on('click', '.phone-match-dismiss', function(e) {
 jQuery(document).on('click', '#ui-bar-body a', function() {{ if (window.innerWidth <= 768) {{ UIBar.stow(); }} }});
 """
 
+        # The door screen's runtime, emitted ONLY when a location declares a door.
+        # Same rule as the travel-friction block below: a game that authors none must
+        # emit byte-identical output, and an unconditional function body would move
+        # every one of the 26 built games by ~2.7 KB for nothing.
+        door_js = '''// ===== The door screen =====
+// Render the option list on a Door_<slug> passage. Doc 73.
+//
+// The markup is deliberately the room's own: an available option is the same
+// .solo-activity-btn a room's activity list uses, and a shown-locked one is the same
+// .solo-activity-cooldown. A door therefore reads as a room screen with a short list,
+// which is what it is — no new surface for a player to learn.
+//
+// PURE RENDER. This writes nothing. See setup.isRerenderSafe.
+setup.renderDoorOptions = function(slug) {
+    try {
+        var door = ((setup.locations || {})[String(slug)] || {}).door || {};
+        var options = door.options || [];
+        var html = '<div class="location-solo-activities">';
+        var shown = 0;
+        for (var i = 0; i < options.length; i++) {
+            var o = options[i] || {};
+            var text = String(o.text || '');
+            if (!text) continue;
+            var live = !o.conditions || setup.triggerConditionsSatisfied(o.conditions);
+            if (live) {
+                if (!o.passage) continue;   // generator resolved no target — never link nowhere
+                html += '<a class="link-internal solo-activity-btn" data-passage="' +
+                        o.passage + '">' + text + '</a><br>';
+                shown++;
+            } else if (o.show_when_locked) {
+                // The reason is REQUIRED at import (V6) — locked_text, or the
+                // location's blocked_message as the declared-once fallback.
+                var why = String(o.locked_text || door.blocked_message || '');
+                html += '<span class="solo-activity-cooldown">' + text +
+                        (why ? ' — <em>' + why + '</em>' : '') + '</span><br>';
+                shown++;
+            }
+        }
+        html += '</div>';
+        if (shown === 0) {
+            // Nothing to offer right now. The field's answer is one short line, not an
+            // empty screen — measured at a median of 8 words across 53 door screens.
+            var na = String(door.no_answer || '');
+            return na ? '<p class="entry-blocked-narrative">' + na + '</p>' : '';
+        }
+        return html;
+    } catch (e) {
+        return '';
+    }
+};
+
+''' if self._has_doors() else ""
+
         return f""":: GameEngine [script]
 // Initialize setup object and time management functions
 if (typeof setup === 'undefined') {{
@@ -5321,7 +5384,7 @@ setup.renderSoloActivities = function(locationId) {{
     }}
 }};
 
-// Legacy compatibility wrapper — calls the new split functions
+{door_js}// Legacy compatibility wrapper — calls the new split functions
 // Kept for any code that still references renderLocationCanvases
 setup.renderLocationCanvases = function(locationId) {{
     try {{
@@ -9635,8 +9698,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 <div class="location-list">
 """
             for location in self.locations:
-                location_name = location.name.replace(' ', '_')
-                content += f"""    [[{location.name}->{self._location_passage_for_name(location_name)}]]<br>\n"""
+                content += f"""    [[{location.name}->{self._location_entry_passage(location)}]]<br>\n"""
             content += """</div>"""
             return content
 
@@ -9655,8 +9717,8 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         lines.append("<<if $player.current_location == \"\">>")
         lines.append("<div class=\"location-list\">")
         for location in self.locations:
-            location_name = location.name.replace(' ', '_')
-            lines.append(f"    [[{location.name}->{self._location_passage_for_name(location_name)}]]<br>")
+            lines.append(
+                f"    [[{location.name}->{self._location_entry_passage(location)}]]<br>")
         lines.append("</div>")
         lines.append("<</if>>")
         return "\n".join(lines)
@@ -9843,7 +9905,61 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 
 """
 
+        # ── DOOR passages ────────────────────────────────────────────────────
+        # Emitted after every room, so a door is never entangled with the
+        # container / entry_conditions branching above. Doc 73.
+        for location in self.locations:
+            door = (getattr(location, 'properties', None) or {}).get('door')
+            if door:
+                content += self._render_door_passage(location, door)
+
         return content
+
+    def _render_door_passage(self, location, door) -> str:
+        """`:: Door_<slug>` — the threshold the player lands on instead of the room.
+
+        A door is opt-in and rare: measured across 27 shipped sandboxes, DoL carries six
+        named doors in a 15,626-passage game. It belongs to a PERSON'S HOME, never to a
+        shared room, where occupancy is a row inside instead (the-map.md R6/R6c).
+
+        ⚠️ THE BODY IS A PURE RENDER, and that is load-bearing rather than tidy. There is
+        no <<pass>>, no trait effect, no flag, no $player.current_location write and no
+        visited_locations push — she is not in the room. Only that makes the passage
+        safe for setup.isRerenderSafe, and only that keeps a save parked on a door from
+        re-charging on every reload. Every cost lives on the FAR side: a canvas option
+        pays through its own trigger.costs, an enter option through the location's
+        entry_costs via the travel intercept, which keys on "Location_" and so never
+        sees this passage. The field does the same — DoL charges the walk on the street
+        link and nothing on the knock screen.
+        """
+        slug = self._location_nav_slug(location)
+        video_path = getattr(self, 'video_path', '') or './media'
+        base = self._resolve_at_references(str(door.get('description') or '')) \
+            or self._resolve_at_references(location.description or '')
+        prose = self._render_prose_chain(base, door.get('description_variants') or [])
+        back = (self._get_smart_exit_destination(location.entry_from)
+                if location.entry_from else "Navigation")
+        # The same presence badges the map card carries, from the same schedule helper,
+        # so the door and the card can never disagree about who is behind it.
+        presence = (
+            f'<<nobr>><div class="location-card-indicators">'
+            f'<<for _npc range setup.getNpcsPresentAtLocation("{location.id}")>>'
+            f'<<if _npc.portrait>><img @src="\'{video_path}/\' + _npc.portrait" '
+            f'class="nav-npc-badge" @alt="_npc.name"><</if>><</for>>'
+            f'</div><</nobr>>'
+        )
+        # Raw name, as every other <h2>{location.name}</h2> site does — a room and its
+        # door must render their heading identically.
+        return f""":: Door_{slug}
+<h2>{location.name}</h2>
+{prose}
+{presence}
+<<= setup.renderDoorOptions("{slug}")>>
+<div class="location-nav-exits">
+[[Leave->{back}]]
+</div>
+
+"""
 
     def _render_location_description(self, location) -> str:
         """The description slot on a room screen — one paragraph, or a chain of them.
@@ -9864,10 +9980,19 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         base = (self._resolve_at_references(location.description)
                 if location.description else "A location in your story.")
         variants = (location.properties or {}).get("description_variants") or []
+        return self._render_prose_chain(base, variants)
+
+    def _render_prose_chain(self, base, variants) -> str:
+        """A base paragraph, or a first-match <<if>>/<<elseif>>/<<else>> chain over it.
+
+        Shared by the room description above and by a DOOR's own prose (Doc 73), which
+        varies on exactly the same axis — who is behind it, and at what hour. One slot,
+        for the reason the docstring above gives: two copies is how half a change ships.
+        """
         if not variants:
             return f"<p>{base}</p>"
         parts = []
-        for i, var in enumerate(variants):
+        for var in variants:
             if not isinstance(var, dict):
                 continue
             text = str(var.get("text") or "").strip()
@@ -12386,6 +12511,92 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         )
         return f"{passage_prefix}_{canvas_prefix}_Node_{node_slug}"
 
+    def _has_doors(self) -> bool:
+        """Does any location declare a door?
+
+        ⚠️ EVERY piece of door machinery is gated on this — the runtime renderer, the
+        isRerenderSafe clause and the payload key. Same rule the travel-friction block
+        follows a few thousand lines down ("only emitted when some location declares
+        costs; otherwise movement stays free"), and for the same reason: a game that
+        authors no door must emit BYTE-IDENTICAL output. Measured, 27 builds.
+        """
+        return any((getattr(loc, 'properties', None) or {}).get('door')
+                   for loc in self.locations)
+
+    def _canvas_entry_passages(self) -> dict:
+        """slug -> the passage a canvas is ENTERED at (its first ordered node).
+
+        Same expression that fills help_data.locationCanvases[].passageName, so a door
+        option and a room row land on the identical passage. Built once per generate();
+        self.story_canvases is populated by _compute_included_canvases, which runs
+        before _generate_initialization.
+        """
+        cached = getattr(self, "_canvas_entry_passage_cache", None)
+        if cached is not None:
+            return cached
+        out = {}
+        for canvas in (self.story_canvases or []):
+            try:
+                prefix = self._sanitize_canvas_name(self._get_canvas_slug(canvas))
+            except ValueError:
+                continue
+            nodes = self._get_canvas_nodes_ordered(canvas)
+            out[prefix] = (self._node_passage_name("Canvas", prefix, nodes[0])
+                           if nodes else f"Canvas_{prefix}")
+        self._canvas_entry_passage_cache = out
+        return out
+
+    def _door_for_payload(self, location, door) -> dict:
+        """A door as setup.locations carries it: every option's target RESOLVED here,
+        at generation time, so the runtime never has to know how a passage is named.
+
+        An option whose canvas cannot be resolved gets no `passage` and the renderer
+        skips it — a door must never render a link that goes nowhere. The importer
+        already refuses an unknown canvas_id (V5), so this is the second belt.
+        """
+        entries = self._canvas_entry_passages()
+        out = dict(door)
+        # The location's own refusal, carried alongside so a shown-locked option can
+        # fall back to it — the lock stays declared once, on the location.
+        out["blocked_message"] = self._resolve_at_references(
+            (getattr(location, 'properties', None) or {}).get("blocked_message", "") or ""
+        )
+        options = []
+        for opt in (door.get("options") or []):
+            if not isinstance(opt, dict):
+                continue
+            o = dict(opt)
+            o["text"] = self._resolve_at_references(str(o.get("text") or ""))
+            if o.get("locked_text"):
+                o["locked_text"] = self._resolve_at_references(str(o["locked_text"]))
+            goes_to = o.get("goes_to") or {}
+            gt_type = str(goes_to.get("type") or "enter")
+            if gt_type == "enter":
+                o["passage"] = self._location_passage_name(location)
+            else:
+                cid = str(goes_to.get("canvas_id") or "")
+                target = entries.get(self._sanitize_canvas_name(cid))
+                if target:
+                    o["passage"] = target
+                else:
+                    # ⚠️ KNOWN LIMIT. The importer proves the canvas exists in the TOML
+                    # (V5), but a canvas with no trigger and nothing referencing it is
+                    # pruned by _compute_included_canvases before we get here, and a
+                    # door option is not yet one of the references that closure walks.
+                    # Adding it means touching that function AND its no-DB twin, so it
+                    # is deferred; until then the option is DROPPED rather than left
+                    # pointing nowhere, and the drop is loud. Doc 73 §5.3.
+                    logger.warning(
+                        "Door option %r on location %r targets canvas %r, which is not "
+                        "in the build (no trigger, nothing references it). The option "
+                        "is dropped. Give that canvas a trigger location.",
+                        o.get("text"), (getattr(location, 'properties', None) or {})
+                        .get("slug", location.id), cid,
+                    )
+            options.append(o)
+        out["options"] = options
+        return out
+
     def _location_passage_name(self, loc):
         """Twee passage name for a location — STABLE across releases.
 
@@ -12393,6 +12604,19 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         longer moves its passage → a save parked there still resolves.
         """
         return f"Location_{self._location_nav_slug(loc)}"
+
+    def _location_entry_passage(self, loc):
+        """Where a link that ENTERS this location should point.
+
+        A location with a door is entered through its threshold, never straight into
+        the room — that is the whole feature. Every engine-generated way IN goes
+        through here: the nav grid, the nav text list, and both location lists on the
+        Navigation screen. Deliberately NOT used for "Back to <name>" (she is already
+        inside) or for an authored canvas exit, which goes where the author said.
+        """
+        if (getattr(loc, 'properties', None) or {}).get('door'):
+            return f"Door_{self._location_nav_slug(loc)}"
+        return self._location_passage_name(loc)
 
     def _location_passage_for_name(self, name_underscored):
         """Map a display-name-derived string (``loc.name.replace(' ','_')``) to the
@@ -15942,6 +16166,18 @@ window.devGoBack = function() {
     }
 """
 
+        # A DOOR screen is safe to re-render for the same reason a location is, and only
+        # because its body is a pure render: no <<pass>>, no trait effect, no flag, no
+        # current_location write. Every cost a door leads to is charged on the FAR side —
+        # the canvas's own trigger.costs, or the location's entry_costs via the travel
+        # intercept below, which keys on "Location_" and never sees a door. Keep it that
+        # way or this clause becomes a clock that drifts forward on every reload.
+        # Emitted only when a door exists, so a doorless game is byte-identical.
+        door_rerender = (
+            '    if (title.indexOf("Door_") === 0) return true;\n'
+            if self._has_doors() else ""
+        )
+
         # Travel-friction: charge a location's entry cost (time + traits) on a genuine
         # move. Runs AFTER rent/clothing so a blocked entry never charges (no
         # double-charge on retry). Only emitted when some location declares costs;
@@ -16125,7 +16361,7 @@ setup.isRerenderSafe = function (title) {
     if (!title) return false;
     if (title === "Navigation") return true;
     if (title.indexOf("Location_") === 0) return true;
-    return setup.infoPages.indexOf(title) !== -1;
+""" + door_rerender + """    return setup.infoPages.indexOf(title) !== -1;
 };
 
 // Commit a history moment WITHOUT navigating or re-rendering.
@@ -20111,6 +20347,14 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
             f'<div class="location-card-content"><span class="location-card-name">{safe_name}</span>'
             f'<span class="nav-locked-reason"><<= setup.navDestBlockedReason("{slug}")>></span></div></div>'
         )
+        # A DOOR location is ALWAYS the open card, pointing at its threshold rather than
+        # at the room. That is the whole point: you can knock at a door you may not
+        # enter, so the card must stay clickable, and the lock moves onto the door's own
+        # `enter` option. It also keeps the presence badges, which the locked card drops
+        # — and knowing someone is in there is exactly why you would knock.
+        if (getattr(loc, 'properties', None) or {}).get('door'):
+            return open_card.replace(f'data-passage="{passage_name}"',
+                                     f'data-passage="{self._location_entry_passage(loc)}"')
         return f'<<if setup.navDestUnlocked("{slug}")>>{open_card}<<else>>{locked_card}<</if>>'
 
     def _render_location_nav_link(self, loc, video_path):
@@ -20126,6 +20370,11 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
             f'{cost_tag}'
         )
         locked_link = f'<span class="nav-link-locked">{html.escape(loc.name)} — <<= setup.navDestBlockedReason("{slug}")>></span>'
+        # Text-mode sibling of the door branch in _render_location_nav_card.
+        if (getattr(loc, 'properties', None) or {}).get('door'):
+            return open_link.replace(
+                f'[[{loc.name}->{link_name}]]',
+                f'[[{loc.name}->{self._location_entry_passage(loc)}]]')
         return f'<<if setup.navDestUnlocked("{slug}")>>{open_link}<<else>>{locked_link}<</if>>'
 
     def _generate_hierarchical_navigation(self, location) -> str:
