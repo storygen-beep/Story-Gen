@@ -196,6 +196,20 @@ class TemplateLocation:
     # Measured across a 26-game field, 22% of rooms rotate their text and 17% vary by
     # hour; ours did neither, because there was no way to author it.
     description_variants: List[Dict[str, Any]] = field(default_factory=list)
+    # THE DOOR — an opt-in threshold screen shown INSTEAD of walking straight in.
+    # Shape: { description, no_answer, description_variants, options = [ {text,
+    # conditions, show_when_locked, locked_text, goes_to = {type, canvas_id}} ] }.
+    # Carried as a raw dict, like `clothing_rules` and `description_variants` above:
+    # it is written into loc.properties by TWO paths (create_project_from_template
+    # here and build_game_graph in game_graph.py), and a typed record would need a
+    # serialize step in both — one more place for the two to drift. validate()
+    # carries the whole contract instead. Empty = today's behaviour, exactly.
+    #
+    # WHY: the engine could lock a room and say why, but the player could do NOTHING
+    # at a locked door — the nav card is a <div>, and the blocked passage offers one
+    # "Go back". Measured across 27 shipped sandboxes (Door_Study_20260902): 75
+    # threshold screens in 10 of them, and 105 labels that act on a locked door.
+    door: Dict[str, Any] = field(default_factory=dict)
 
 
 # -------- Narrative person --------
@@ -1901,6 +1915,11 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 costs=_require_dict(l, "costs"),
                 clothing_rules=l.get("clothing_rules", []) or [],
                 description_variants=l.get("description_variants", []) or [],
+                # ⚠️ Nothing in this file rejects an unknown key, so a [locations.door]
+                #    block is silently discarded without this line. That is the whole
+                #    difference between the feature existing and evaporating with no
+                #    error anywhere in merge, --validate or package.
+                door=_require_dict(l, "door"),
             )
         )
 
@@ -4349,6 +4368,131 @@ def validate(template: GameTemplate) -> List[str]:
         )
 
     loc_index = {l.id: l for l in template.locations}
+
+    # ===== Door validation (per-location) =====
+    # Sits HERE rather than with the other per-location blocks above because it needs
+    # `canvas_ids` (built just above); rebuilding that set locally would be a second
+    # source of truth for what a canvas id is.
+    #
+    # A door is a THRESHOLD SCREEN the player lands on instead of the room. Doc 73.
+    for l in template.locations:
+        if not l.door:
+            continue
+        where = f"location '{l.id}' door"
+        if not isinstance(l.door, dict):
+            errors.append(f"{where} must be a table")
+            continue
+
+        # V7/V8 — a door needs a nav card to hang off, and three location kinds
+        # render none, so a door on one is authored and unreachable.
+        if l.auto_exit is False:
+            errors.append(
+                f"{where} is on a transit stop (auto_exit = false), which takes no "
+                f"nav card — the door would be unreachable"
+            )
+        if l.offscreen:
+            errors.append(
+                f"{where} is on an offscreen location, which renders no nav card — "
+                f"the door would be unreachable"
+            )
+        if l.is_container:
+            errors.append(
+                f"{where} is on a container, which holds no content of its own — "
+                f"put the door on the room the container leads to"
+            )
+
+        # Door prose is optional; a door may be nothing but its option list. When
+        # variants ARE authored they get the same three checks the location's own
+        # description_variants get, for the same fail-open reason.
+        for vi, var in enumerate(l.door.get("description_variants") or []):
+            vwhere = f"{where} description_variants[{vi}]"
+            if not isinstance(var, dict):
+                errors.append(f"{vwhere} must be a dict of {{ conditions, text }}")
+                continue
+            if not str(var.get("text") or "").strip():
+                errors.append(f"{vwhere} has no text")
+            vcond = var.get("conditions")
+            if not isinstance(vcond, dict) or not vcond:
+                errors.append(
+                    f"{vwhere} has no conditions — a variant with nothing to match "
+                    f"on would render forever"
+                )
+            elif str(vcond.get("version") or "") != "1.0":
+                errors.append(
+                    f'{vwhere} conditions must carry version = "1.0" — without it '
+                    f"the engine fails OPEN and this variant renders always"
+                )
+
+        # V1 — a threshold with no way through is a wall the author did not mean.
+        options = l.door.get("options")
+        if not isinstance(options, list) or not options:
+            errors.append(
+                f"{where} has no options — a door with nothing on it is a wall; "
+                f"give it at least one way through"
+            )
+            continue
+
+        for oi, opt in enumerate(options):
+            owhere = f"{where} options[{oi}]"
+            # V2
+            if not isinstance(opt, dict):
+                errors.append(f"{owhere} must be a table")
+                continue
+            if not str(opt.get("text") or "").strip():
+                errors.append(
+                    f"{owhere} has no text — it would render as a blank button"
+                )
+
+            # V3 — the fail-open trap. setup.triggerConditionsSatisfied returns TRUE
+            # for any conditions{} missing `version`, with no build error, so a
+            # versionless option would render forever and never actually be gated.
+            cond = opt.get("conditions")
+            if cond is not None:
+                if not isinstance(cond, dict) or not cond:
+                    errors.append(
+                        f"{owhere} conditions must be a non-empty table, or omitted "
+                        f"entirely if the option is always available"
+                    )
+                elif str(cond.get("version") or "") != "1.0":
+                    errors.append(
+                        f'{owhere} conditions must carry version = "1.0" — without '
+                        f"it the engine fails OPEN and this option is never actually "
+                        f"gated"
+                    )
+
+            # V4/V5 — where the option sends the player.
+            goes_to = opt.get("goes_to") or {}
+            if not isinstance(goes_to, dict):
+                errors.append(
+                    f"{owhere} goes_to must be a table of {{ type, canvas_id }}"
+                )
+                continue
+            gt_type = str(goes_to.get("type") or "enter")
+            if gt_type not in ("enter", "canvas"):
+                errors.append(
+                    f"{owhere} goes_to.type '{gt_type}' is not one of 'enter', "
+                    f"'canvas'"
+                )
+            elif gt_type == "canvas":
+                cid = str(goes_to.get("canvas_id") or "")
+                if not cid:
+                    errors.append(
+                        f"{owhere} goes_to.type = 'canvas' needs a canvas_id"
+                    )
+                elif cid not in canvas_ids:
+                    errors.append(
+                        f"{owhere} goes_to.canvas_id '{cid}' not found in canvases"
+                    )
+
+            # V6 — a shown-locked row that says nothing is exactly what the
+            # `a locked door says why` gate exists to prevent.
+            if opt.get("show_when_locked"):
+                if not str(opt.get("locked_text") or "").strip() and not l.blocked_message:
+                    errors.append(
+                        f"{owhere} is show_when_locked with no locked_text, and the "
+                        f"location has no blocked_message to fall back to — a locked "
+                        f"row must say why"
+                    )
 
     # Node universe for resolving choice/exit_block node references.
     # nodeIds in the TOML come in two forms:
@@ -6966,6 +7110,11 @@ def create_project_from_template(
             loc.properties["clothing_rules"] = l.clothing_rules
         if l.description_variants:
             loc.properties["description_variants"] = l.description_variants
+        if l.door:
+            # ⚠️ MIRRORED in game_graph.py's location loop, which is the path a real
+            #    build uses. A door written only here parses, validates, and never
+            #    reaches the generator.
+            loc.properties["door"] = l.door
         loc.save()
         slug_map[l.id] = loc
 

@@ -209,6 +209,11 @@ def build_game_graph(
             loc.properties["clothing_rules"] = l.clothing_rules
         if l.description_variants:
             loc.properties["description_variants"] = l.description_variants
+        if l.door:
+            # ⚠️ MIRRORED in template_import.create_project_from_template. THIS is the
+            #    path a real build takes (services.py + every no-DB test), so a door
+            #    missing here is a door the generator never sees.
+            loc.properties["door"] = l.door
         slug_map[l.id] = loc
         graph.locations.append(loc)
 
