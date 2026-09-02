@@ -5,6 +5,695 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-02 — SY2b: the shape is not enough, and all eight of ours are bookmarks
+
+**`references/the-systems.md`** (new SY2b) · **`DOCTRINE_GAPS.md`** (item 19 extended). LO's call
+after reading the analysis. Source: `~/Documents/Load_Bearing_Systems_Study_20260902/`, a study run
+by a **separate session** and finished a few hours before SY1–SY2 shipped, so neither knew about the
+other.
+
+**Why it was adopted, and it is the sharpest reason available: it breaks the rule shipped earlier
+the same day.** SY2 says a sourced system is *"fed in one place and read in many."* Running SY2's
+own test over the study's eight load-bearing systems: `margaret_broken` 1 write / 21 reads,
+`grayson_flipped` 1/20, `first_shift_done` 1/24, `first_night_done` 1/20, `met_roy` 1/12,
+`hired_at_diner` 1/12, `arrival_done` 1/11, `dev_mode_enabled` 0/11. **Eight for eight pass SY2, and
+seven are plot bookmarks plus one dev toggle.** The new `the labels and the systems agree` lint
+would pass them too. That is SKILL.md's own *"ask what a tired author would build to satisfy a
+check"* firing on a rule six hours old.
+
+**Reproduced before it was believed** — the discipline this project's own *"a note written by the
+agent that did the work is a CLAIM, not a fact"* rule demands, and every figure held:
+
+| their claim | re-run |
+|---|---|
+| the field's load-bearing tables (5 games) | ✅ identical, row for row |
+| our eight, all one-time flags | ✅ identical |
+| `worn_exposure` read **3** times across every built game | ✅ exactly 3 — `commuter` 1, `orientation` 2 |
+| DoL is 15,626 passages, not the 636 in `census.tsv` | ✅ matches an independent count made earlier the same day |
+
+**One thing measured here that the study did not, and it sharpens the headline.** Their line is
+*"theirs describe her, ours record plot."* True of the load-bearing set, but the fuller picture is
+worse and more actionable: across the twelve v2 games there are **50 body-and-disposition systems**
+— arousal, hygiene, exposure, nerve, energy, warmth, propriety — with a median read-to-write of
+**0.40** and **zero** clearing the 10:1 bar. **We are not short of descriptive systems. We run them
+backwards**, writing them two and a half times for every time we consult one. So the authoring
+instruction is *write content against what is already declared*, never *declare more*.
+
+⚠️ **The study's proposed placement was NOT followed.** §8.1 proposed this as `W8` in
+`the-meters.md`, reasoning that *"a second id in a second file splits one idea across two places,
+which is the R6 defect."* That was correct when written — `the-systems.md` did not exist yet. It
+does now, SY1/SY2 own what-kind-of-system, and putting the rule in `the-meters.md` today would
+**create** the split the study was guarding against. Shipped as **SY2b**, immediately under the rule
+it corrects.
+
+⚠️ **The study's proposed `lint_system_depth` was NOT built**, and the reason is in its own §6: the
+≥10:1 / ≥80% / ≥5 bar is invented and the field's spread is 3 to 121, so no threshold is defensible.
+Worse, a parser cannot decide whether a value *describes her* — the one thing that matters — and a
+check keyed on "flag written once" would fail correct introduction bookmarks, which
+`the-first-hour.md` F5 **requires**. That is the `objects` / gate-22 failure in a new suit.
+
+⚠️ **Its §10/§11 verification figures are stale and were not used.** They baseline 32 lints and 125
+rules across 12 files; the same day's earlier work moved those to 33 and 131/13. A session following
+§10 literally would read a correct build as broken.
+
+⚠️ **Three claims the study refuted mid-run are carried into SY2b so they are not resurrected**:
+*"our systems don't read each other"* (false — reads per screen run field 0–3 against ours 0–2), the
+top-10 read:write average (meaningless — diluted by page-routing plumbing), and *"no game we have
+built has a load-bearing system"* (false — `the_inheritance` has two, at 1.9% density against DoL's
+0.77%). **The count is not the finding and SY2b says so; the kind is.**
+
+**Verified.**
+- `--selfcheck` exits 0 — 46/46 gates, 33/33 lints, 5/5 modes, **132 rules across 13 files** (up
+  from 131; SY2b resolves), 0 pointing at nothing.
+- **Orphans still 2** (`the-phone.md:517` → P0 · `the-surfaces.md:129` → R2b). ⚠️ The study warned
+  that a drop to 1 is a regression rather than an improvement — that is how the R2b/R2c collision
+  hid itself on 2026-09-01 — so this was checked rather than assumed.
+- All twelve v2 games re-scored against the figures recorded in the entry below: **12/12 identical**
+  (back_home 16/36 · commuter 42/46 · forty_miles 25/38 · mrs_vance 44/44 · night_desk 39/40 ·
+  off_season 41/43 · orientation 43/44 · seventh_day 29/42 · steam 17/38 · the_allowance 29/41 ·
+  the_route 46/46 · the_season 40/43). Docs-only edit, but proven rather than assumed.
+- `--words` on the updated file: of the new section's own vocabulary only `scoreboards` is flagged,
+  which is doctrine prose about the skill and not a word taught for a game's surface.
+- The `worn_exposure` engine citation re-read at `v2.py:4186` before it was written down.
+
+**No game was touched.** `night_desk` in particular stays as it is, per LO's 2026-09-01 instruction.
+
+---
+
+## 2026-09-02 — the systems step: the file R2c was pointing at, which did not exist
+
+**NEW `references/the-systems.md`** · **`state.md`** · **`the-board.md`** · **`the-surfaces.md`** ·
+**`the-sheets.md`** · **`SKILL.md`** · **`scripts/gates.py`** · **`DOCTRINE_GAPS.md`** (item 19).
+LO's call, and his scope: docs this round, the notice specified and not built, one lint and no gate.
+Study and scripts: `~/Documents/Systems_Study_20260902/`.
+
+**The defect.** `the-surfaces.md` R2c, added 2026-09-01, says *"the room list cannot be written
+before the systems list is."* The phrase appears three times in this skill and was defined **nowhere**
+— no reference file, no `v2_state.json` field, no sheet type, no board step, no check. And
+`the-release.md` never uses the word *system* at all: a release adds events to surfaces that already
+exist, so a system could only be born in the board phase, which had no place for one. `night_desk`
+is the consequence on disk — built to R2 correctly, six declared meters, and rooms that came out as
+*walk the property · fix the sign · hit the ice machine · start a load*.
+
+**Read, not counted.** Every room of `family-ties` (50 rooms, 161 rows), the hubs of
+`zaras-school-life`, the 126 tagged rooms of `course-of-temptation`, `new-life-project`'s 59 hubs,
+and `degrees-of-lewdity` as reference — the female-lead set from `gender_verdicts.md`.
+
+| finding | evidence |
+|---|---|
+| **two kinds of system** | *ambient* is fed by nearly every room (`family-ties` writes time in **49 of 50**, money 13, the body's needs 14) and therefore cannot make any room special; *sourced* is fed in one or two and read all over — piercings **2 → 117**, clothes **1 → 53**, the skill ladder **1 → 19**; `zaras` corruption **18 → 376**, clothes **6 → 188** |
+| **a room declares what KIND of place it is** | `course-of-temptation`: **349 distinct tags, median 9 per room**. Sleeping reads `homebase`/`custombed`, undressing reads `stripallowed`, the inventory reads `homebase`. `degrees-of-lewdity` runs the coarse form — 2,760 screens over **69 place types**, 616 sites keying off them |
+| **half those tags are navigation** | opening hours 114 · zone 121 · has-a-map 23, against the affordances. **One declaration, two layers** — `outdoors` decides weather *and* whether being seen counts as public |
+
+⚠️ **Nothing was ported from v1.** `author-game/references/system-patterns.md` (nine authored system
+recipes) and `systems.md` were read and **deliberately excluded** — LO's explicit instruction. They
+are cookbooks written from taste; every rule in the new file is read out of a shipped game.
+
+⚠️ **R2c's own comparison is RETIRED by this, and R2c asked for exactly that.** Its
+*"DoL 693 · night_desk 6"* set a `$var` census against our declared traits — two different things —
+and its own note said no check should be built until the instrument was matched. Matched
+(`matched2.py`): field median **82** distinct leaf names at ≥25 refs, ours **37.5** counting every
+declared name. **A factor of two, not a hundred**, and composition is the real gap — 62% of our flag
+vocabulary across twelve games is throttle and introduction bookkeeping. R2c is appended to, never
+rewritten; its "no gate and no lint" note still stands for what it measures.
+
+⚠️ **Two corrections recorded because both were asserted before they were checked.** (a) I told LO
+the field *"puts a shower in twelve rooms."* Wrong twice — `shower` is a tag on **3** rooms,
+`bathroom` on 5, and the twelve were public toilets in public venues, with six systems each hanging
+a conditional row off the place-type. (b) A first pass reported money as ungated in 5 of 12 of our
+games, because **`costs` is a LIST of `{trait, value}` and was read as a dict.** Corrected before it
+reached doctrine: money is gated in 11 of 12. The new lint's `_cost_traits_of` carries that trap in
+its docstring, and the same asymmetry is why the check counts a price as a read.
+
+**⚠️ What we cannot do, written down rather than designed around.** In the field a system is written
+once and injects its row wherever its label is — `course-of-temptation` puts opportunities into 50 of
+126 rooms, a planned date into 22, the restroom shelf into 12. **`TemplateTrigger.location` is a
+single string** (`template_import.py:1939`), so a canvas belongs to exactly one room and a row wanted
+in three is authored three times. Priced honestly at our 8–14 locations; revisit past ~30. SY4.
+
+**⚠️ SPECIFIED AND NOT BUILT — the notice.** `degrees-of-lewdity` calls one widget on **2,736 of its
+2,760** room screens; whichever system has news prints one line into whatever room the player is in
+(*the science fair is in the town hall today · your rented book is due*). It answers lostness — the
+genre's dominant complaint at a 4.7% median share against grind's 0.9% — and unlike SY4 it does not
+scale with room count. SY6 carries the proposed `[[notices]]` shape and the build path:
+`_render_location_description` (`v2.py:9848`) already emits a conditional chain onto the room screen
+through `setup.triggerConditionsSatisfied`, so the change is *all* matches printing instead of
+first-match. ⚠️ `[[story_arc.hints.templates]]` cannot be repurposed — it filters on one `npc_id` and
+is the v1 guidance path, superseded by `[[quests.cards]]` which every game here uses.
+
+**The check — one lint, `the labels and the systems agree`.** Declare-then-check over
+`board.systems[]` and `board.locations[].labels`, modelled on the `a need shuts a door` gate. Three
+lists: a label no system claims · a system whose label is on no room · a `sourced` system not written
+where it says or read nowhere else. **No gate**, and both reasons are precedents in this file: a
+count is satisfied by declaring more (`objects` / gate 22 manufactured nine duplicate room screens
+before it was deleted), and **P0** forbids a check for a state nothing is in — all twelve games
+declare zero today. This lint runs the safe direction: **declaring more labels makes its output
+worse.**
+
+**Verified.**
+- `--selfcheck` exits 0 — **33/33 lints documented**, 46/46 gates, **131 rules across 13 files, 0
+  pointing at nothing** (the new file's SY1–SY6 resolve).
+- All twelve v2 games scored before and after: **every tally byte-identical** (back_home 16/36,
+  commuter 42/46, forty_miles 25/38, mrs_vance 44/44, night_desk 39/40, off_season 41/43,
+  orientation 43/44, seventh_day 29/42, steam 17/38, the_allowance 29/41, the_route 46/46,
+  the_season 40/43). The lint moves no score, proven rather than asserted.
+- The lint row prints on all twelve, reporting *"the systems step has not been taken"* — which is the
+  finding, not a failure.
+- **All three branches hand-checked on a fixture** (a scratchpad copy of `night_desk`; no game's
+  ledger was touched): nine dead labels, one system claiming a label no room carries, one `fed_at`
+  naming a room that does not write the key, one source with no readers. ⚠️ **And the negative
+  control held** — the one correctly-declared system in the fixture produced no finding.
+- `gates.py --words references/the-systems.md` run while the label menu was still being chosen; the
+  flagged words are skill-meta and quoted field tags, and **no word in the menu itself is flagged**.
+
+---
+
+## 2026-09-01 — the offer: the third kind of choice, and this skill had no word for it
+
+**`references/the-surfaces.md`** · **`DOCTRINE_GAPS.md`**. LO's call. Study:
+`~/Documents/Ignition_Study_20260901/` (`offers.py` regenerates every quote below).
+
+**The defect, found in shipped work.** `mrs_vance` ships the best choice in its opening — she tells
+Cade she will be short, he covers the rent, and *owing him* opens his ladder — gated on
+`money lt 260`. She earns **$208 in a day against a $260 week**, so it is close to unreachable.
+`commuter` repeats the shape with `prep lt 30` → `prep +45`. **Two authors, no shared context.**
+Neither was careless: R5b–R5d cover the choice she is *refused* and the choice she *declines*, and
+the file had nothing for a choice offered **before she needs it**. They wired it the only way the
+doctrine names.
+
+**The field check, run BEFORE the rule was written** — because three claims died this session for
+resting on n = 1. Three of the four corpus games with an obligation let her volunteer for a bigger
+one, and **not one gates it on scarcity**:
+
+| game | offer | gate |
+|---|---|---|
+| `degrees-of-lewdity` | take on Robin's debt — **doubles the rent, permanently** | `$robindebtknown is 1` — that she **knows** |
+| `course-of-temptation` | join a Greek house — dues + housing, forever | `!$firsttime.greekduespaid` |
+| `corpo-life` | move up an apartment — rent 200 → 30,000 | does not own it yet |
+
+DoL puts the price on the button in red (`<<note "Doubles weekly payment" "red">>`), states
+*"Taking on Robin's debt is irreversible"* before the commit, and what the debt buys is **the
+person** — `$robinpaid` gates his gift, his free drink and the romance chain across 42 sites.
+
+**Shipped: R5e.** *A gate opens when she has earned it. An offer is there before she needs it.*
+Test: **can she take this when she doesn't need to?**
+
+⚠️ **The obvious phrasing is wrong and the rule says so.** *"Never gate a grant on a lack"* is false
+— a rescue **should** require needing rescue, and **50 sites across our games do it correctly**. The
+narrow claim is the one that holds: if taking on a burden is what opens a person, it must be
+reachable while she is fine.
+
+⚠️ **No gate and no lint, and the measurement is the reason.** The signature —
+*grant clears the very lack that gated it* — needs two exclusions (the ceiling pattern; once-only
+counters written `X lt 1` → `X +1`) before it discriminates, and then the subject is **2**. The
+unfiltered version fires on **49 correct implementations**, which is the R4 failure exactly. The
+signature is recorded inside R5e for the day it has a subject.
+
+**Bonus, folded into R3d's evidence:** `new-life-project` caps its rent too
+(`if $rentAmount gte 1800 → to 1800`), making it **four of four** obligation games with a
+hand-placed ceiling.
+
+**Verified.** `--selfcheck`: rule pointers **115 → 116, 0 pointing at nothing**; lints 32/32; gate
+rows 46/46. `--words` on `the-surfaces.md`: no false friend introduced. `gates.py` untouched by this
+batch, and all games re-scored unchanged.
+
+---
+
+## 2026-09-01 — the appetite is the destination, not the engine
+
+**`references/the-want.md`** · **`templates/want.md`** · **`references/the-economy.md`** ·
+**`references/state.md`** · **`DOCTRINE_GAPS.md`** (item 18). LO's call. Study:
+`~/Documents/Ignition_Study_20260901/`.
+
+**The defect.** §2 asked for the protagonist's appetite and claimed it was *"the line that decides
+whether the game can run forty updates."* Measured, that is false: in `degrees-of-lewdity` the
+obligation is read by **57 of 91,814** conditions — *is it due*, *can she pay* — while **1,336**
+sites are gated on tier rungs. The meters schedule content; an appetite cannot.
+
+**And the four identical sentences have a citable cause.** `templates/want.md` shipped a *filled-in*
+✅ example, "be wanted by people who shouldn't want her", and four of four `WANT.md` files wrote that
+sentence. Same mechanism as item 14's `she/her` 21-vs-0, one section further down; fifth instance of
+*"a template is copied harder than a reference."* The example is now a **shape** with an explicit
+do-not-copy warning.
+
+**Shipped.** §2 becomes the destination and names the division of labour — §1b starts her, §3
+carries her, §2 is where she lands, and that last clause is §4's Transformation charge stated
+mechanically. **The release-41 test moved to §3**, with a note saying where it used to live and why
+that was wrong. §1b asks for a demand with a face and a date. `the-economy.md` gains **R3d** — the
+obligation is an ignition, not a tax; both top games cap their own ratchet by hand and the bill is
+*allowed* to go quiet once the meters gate content. `state.md` gains `obligation`.
+
+⚠️ **SCOPE SHRANK ON CONTACT, and that is the reusable part.** The plan was to split §2 into an
+obligation section. Reading `the-economy.md` first killed it: **R3 already has the date, the face and
+*armed after income exists*; R3b already teaches the ratchet and quotes DoL's exact ladder line;
+R3c already handles the rising-income half with `mrs_vance`'s truck as its worked example.** Only
+one thing was missing — that it may stop — so only R3d shipped. Third study in a row to shrink this
+way; read the file you are about to duplicate.
+
+⚠️ **Three claims withdrawn mid-investigation**, recorded so they are not re-derived: *"move the
+meter onto her"* (the field is 16-of-20 per-person, and `the-meters.md` W1 already owns the fork as
+`board.who_climbs` with gate 34 behind it); a read:write comparison (superseded by
+`Player_Legibility_Study_20260825`, whose instrument excludes chrome — mine counted sidebar markup
+and inverted the direction); and *"the debt-to-the-collector branch was never built"* (`mrs_vance`
+ships it, gated on `money lt 260`, which is why nobody sees it).
+
+⚠️ **No gate. n = 4** — four corpus games carry a recurring obligation, and a threshold read off
+four games is invented.
+
+**Verified.** `--selfcheck`: rule pointers **105 → 106, 0 pointing at nothing**; lints 32/32, gate
+rows 46/46. Vocabulary re-swept on all three edited reference/template files per R3's own rule — no
+new false friend (the-economy.md's `float`/`pitch`/`chemist` are pre-existing and deliberate).
+`mrs_vance`, `the_season`, `back_home`, `vesper` all hold **46 green**; `gates.py` was not touched by
+this batch, so game scoring cannot have moved.
+
+---
+
+## 2026-09-01 — a room's rows are its SYSTEMS: `the-surfaces.md` R2c
+
+**`references/the-surfaces.md`**. LO's call, from a long read-only session comparing our room
+screens against the field's. **One rule shipped out of it; four frameworks were refused.**
+
+**The rule.** R2 says a room's list is *needs + work + people, and nothing else*. That is a SIZING
+rule and it works — a closed set cannot sprawl. What it never said is what an individual row IS, and
+read alone it answers *"what would she do in this room"*, which returns a job description.
+
+Read directly in four anchor rooms in four shipped games, **every row is a different SYSTEM of the
+game surfacing where that system lives**: DoL's bedroom is five rows and five systems (sleep ·
+arousal · clothing · toys · body); `family-ties`' bedroom is six and six (+ the OnlyFans line and
+skills); `zaras-school-life`' library is two skills plus arousal; its gym is fitness plus voyeurism.
+**The count is not chosen — it falls out of the systems list.**
+
+**The consequence, in our own work.** `night_desk` followed R2 exactly and its rooms came out as
+*walk the property · fix the sign · hit the ice machine · start a load* — a night porter's duties,
+correctly derived, with nothing in them anyone wants. Not a writing failure: the game declares
+**six meters**, three of which are hunger, hygiene and energy, plus no clothing catalog, no phone
+and no items. **There were not enough systems to give six rooms a list**, so the rows had to be
+invented out of the fiction.
+
+⚠️ **The system-count figures are ONE CRUDE INSTRUMENT and are printed in the file as indicative,
+not as a target.** DoL 693 · `zaras-school-life` 76 · `new-life-project` 61 · `family-ties` 52,
+counting `$vars` used 25+ times in each game's built HTML — **and our engine does not use `$vars`**
+(meters live in `player.core_traits`), so the two sides are not measured the same way. The field's
+own **13x spread** means no threshold is defensible. What survives the mismatch is the order of
+magnitude, and the rule itself, which was READ rather than counted.
+
+⚠️ **The brake ships in the same breath, and it is not optional.** R2 exists because gate 22
+manufactured **nine duplicate room screens across five games** before it was deleted. Read
+carelessly, R2c invites the mirror-image failure — declare twenty systems, get twenty rows, ship
+twenty dead meters, which is `the-meters.md` W3 at scale and exactly what SKILL.md's *"ask what a
+tired author would build"* rules out. So the rule carries its own test: **a system earns its place
+by being read in more than one room, by more than one kind of content.** One system surfacing in
+three rooms beats three surfacing in one each.
+
+**No gate and no lint.** A count is satisfied by declaring traits. If a check is ever built here it
+is **the matched instrument first, on its own, verified against three games BEFORE any doctrine
+cites it** — the opposite of the order that produced P0.
+
+⚠️ **A NAMING DEFECT I INTRODUCED AND FIXED IN THE SAME TURN.** The rule was first written as
+**`R2b`** — which is a **deleted** rule name: Study 5's *"every choice hangs off a named object in
+the prose"*, superseded 2026-08-18 with gate 22, and still discussed as history at
+`the-surfaces.md:129`, in seven places in `DOCTRINE_GAPS.md`, and in `gates.py:7743-7749`, which
+carries an explicit exemption naming it. Reusing it made line 129's historical pointer resolve to
+the wrong rule, falsified the `gates.py` comment, and — worst — **took `--selfcheck`'s orphan list
+from 2 to 1**, which reads as an improvement and was the check going blind to a legitimate orphan.
+Renamed to `R2c`. **The pass condition for this entry is the orphan count going back UP to 2.**
+
+⚠️ **FOUR THINGS WERE DELIBERATELY LEFT OUT, and the reasoning is the point.** The session produced
+a four-reasons-a-row-exists test, a six-category taxonomy (needs/work/people/appetite/system/build),
+a designed `guests` system for `night_desk`, and a full front-desk mockup. LO liked the last two.
+**None of them shipped.** The first two are frameworks assembled from reading labels — plausible,
+unmeasured, and indistinguishable in kind from the rules this skill has had to withdraw. The last
+two are one game's worked example, which is precisely the shape `templates/board.toml`'s `airer`
+and `£5` took before putting five games in a dialect the genre does not use. A worked guests system
+would be copied into games that are not motels. **They live in LO's notes; the sentence lives here.**
+
+**Verified.** `--selfcheck` green — 46/46 gates, 32/32 lints, and the orphan list back at **2 to
+eyeball** (`P0` and the historical `R2b`), which is the correct state. `_rule_definitions` lists
+`R2c` under `the-surfaces.md` and not `R2b`. `gates.py the_season` 40/43 and `night_desk` 39/40,
+both unchanged — nothing here touches a game.
+
+---
+
+## 2026-09-01 — the arc, increment 2: A10-A12 and five sub-rules, from three more rounds of reading
+
+**`references/the-arc.md`**. LO's call. Three further read-only rounds after A1-A9 shipped:
+`family-ties`' husband line, `zaras-school-life`'s named-NPC chain and quest journal, the
+`course-of-temptation` bar job, `new-life-project` end to end, and CoT's gloryhole, frat party
+and streaming job. **A1, A2, A7, A8, A9 held unchanged.** A3, A5 and A6 were each narrower than
+the field. Three mechanisms had no rule at all.
+
+**A10 - the act ends on a written beat, about who it was.** CoT ships **74 `*Post` passages,
+median 32 words**, one per partner type at a single surface (`GenericPost`, `HarasserPost`,
+`MeanPost`, `ServicePost`, `TowniePost`, `FilmPost`). The generic one is 60 words and does three
+things: he leaves rudely, she notices being left, the loop asks if she is staying. **Ours: 23 of
+23 `finish`/`climax`/`cum`/`end` nodes across six games have an EMPTY `exit_block`** - the act
+completes and the canvas stops. Cheapest rule in the file to satisfy: 32 words on a node that
+already exists.
+
+**A11 - stopping partway is a written outcome, distinct from refusing.** CoT: **113 `*Abort`**
+(median 23 words) and **5 `*Chicken`** (backing out of a dare already accepted). Three exits,
+three scenes. ⚠️ **An earlier pass reported we had none of this and it was WRONG** - `commuter`
+writes a stop beat on all seven loops (27-59 words, median 29) and it is correct practice (the beat is about *his*
+reaction, not her exit). Recorded in the file, because a rule written off that first pass would
+have told an author to build what they had already built.
+
+**A12 - the reason she is there is a SYSTEM, not a sentence.** One act, three machines in one
+game: a wager lost inside a 40-passage kart race (*"The loser orally services the winner"*, with
+`DistractWithCleavage` as a racing move), a price paid by a stranger in stream chat
+(`TitsDono` -> Flash/Refuse), and an anonymous gloryhole (7 partner types x offer/abort/do/post,
+of which **only 3 of 50 passages register as explicit**). Promotes `register.md`'s reason axis
+from a prose rule to a design rule. Carries the party's relationship outputs - `AddFuckbuddy`,
+`AddHatefuck`, `AddBully`, `AddVictim`, `GainCrush` - as a source of new cast costing no new
+location, which is commitment 4 with a mechanism under it.
+
+**Five sub-rules on existing entries**, each because the original was measurably too narrow:
+
+- **A3b** - the field's DEFAULT refusal is parked, not closed, and it prints the address:
+  *"if you change your mind later, just talk to your husband in the bedroom when he's there."*
+  A3's counted-and-closed shape is the exception, for when the closing is itself content.
+- **A4b** - "the number" is three kinds, not one: a meter the scene feeds, **a skill practised
+  elsewhere** (`family-ties` gates on blowjob 20/40 and deepthroat 35/50/60, and the deepthroat
+  line is a seven-step ladder existing only to feed three other arcs), and **a preparation
+  bought and endured** (enema + lube + plug, then three nights sleeping in it while a counter
+  ticks). The second makes money buy the key to a rung - `the-economy.md` R1b from the arc side.
+- **A4c** - the field's meters are READ and ours are WRITTEN. `zaras-school-life`
+  `$PlayerCorruption` **2,117 conditions / 4 writes**; `new-life-project` `$corrupt` 247/2 and
+  `$inhib` 105/2 (inverted - LOW opens things). Ours: `forty_miles` arousal **0 reads / 52
+  writes**, `steam` 2/55, `back_home` 2/47, `mrs_vance` want 10/65, `the_season` arousal 6/24;
+  best is `off_season` ease 27/11. ⚠️ **The two instruments differ and the magnitudes do NOT
+  compare** - their low write counts are centralised setter widgets; the direction survives, and
+  one row survives outright. Notes that gate `a meter is read` finds DEAD meters
+  (`forty_miles` 4/8, `steam` 6/7) and cannot see a STARVED one (`the_season` passes 9/9 at 6:24).
+- **A5b** - the ladder has three directions and A5 described one. HERS (`family-ties`), THEIRS
+  (`zaras-school-life`, nine times in its own words: *"Zara attempts to unlock Kyle's mind to
+  accept blowjobs from her"*), or a CONTEST (CoT). Explains `night_desk`'s refusals-that-are-his
+  as a legitimate shape rather than a slip. Carries Zara's one-template-per-person cast
+  (brother/father/mother x quest 1-3) with its risk stated.
+- **A6b** - a dress code can be an employer's ladder (CoT's owner: Traditional -> Sporty ->
+  Classy -> Sexy -> Topless, with a first-topless scene branching on whether she liked it), and
+  **`showonstream` vs `showonstreamaccident` are two separate widgets** - deliberate and
+  accidental are two beats, not one beat with a modifier.
+
+**The check: still nothing ships**, same two precedents. Candidate list grows to three with
+**`an act ends on something`** (23 of 23 today). ⚠️ **A11 is the first rule here with a precedent
+game**, so its lint is the first that can honestly ship - "1 of 11" is a distribution, "0 of 11"
+is an indictment. Build order stated in the file.
+
+⚠️ **THREE FINDINGS BELONG TO OTHER FILES AND WERE NOT ACTED ON.** Recorded here so they are not
+lost, for LO to schedule one at a time:
+
+1. **`the-want.md` W1** - `new-life-project` reads its creation choice **73 times across 34
+   passages** (W1's field median is 4; ours is 12 reads across 14 fields with 6 read nowhere),
+   and its **median read is 38 characters** - below every figure SKILL.md already carries (114,
+   139) against our `the_season` `known` at 570. Its creation screen is a biography picker: seven
+   upbringings each printing a paragraph of second-person backstory, two of them gender-locked.
+2. **`the-voice.md`** - NLP ships **NO guidance at all**. `QUESTS`, `PATRON CONTENT` and all
+   three Questline passages are empty stubs, in a rank-16 game of 1,671 passages. Guidance is a
+   house decision, not a genre floor: CoT ships a full walkthrough, `family-ties` a detailed
+   quest log, NLP nothing.
+3. **Zara's 128 scene/`replay` pairs are a PAID FEATURE, not a design pattern.** Median **99%**
+   of the prose identical; the only difference is stripped bookkeeping (no quest advance, no
+   corruption gate, no time cost), sold as *"unlocked Cheats and Quest Replay"* on Patreon.
+   Recorded because it was nearly written up as the field's repeatability mechanism.
+
+**Verified.** `--selfcheck` green - 46/46 gates, 32/32 lints, and `_rule_definitions` picks up all
+seventeen ids in this file (`A1`-`A12` plus `A3b`, `A4b`, `A4c`, `A5b`, `A6b`). `gates.py
+the_season` unchanged at 40/43. `--words` run on the file and the list read. ⚠️ **One structural
+slip caught and fixed in the same turn**: the A6b edit consumed the `## A7` heading and orphaned
+its body under A6; found by diffing the heading list against the rule scan, not by eye.
+
+---
+
+## 2026-09-01 — the arc: what happens between the introduction and the loop
+
+**`references/the-arc.md` (new)** · **`SKILL.md`** · **`DOCTRINE_GAPS.md`**. LO's call, from the
+plan approved this session. Closes the four nulls left by item 10 (sex-loop shape) — **by reading
+five arcs end to end, not by measuring them.**
+
+**The hole.** Every v2 game builds a meeting, a hub, one repeatable act loop and a few walk-ins,
+and nothing between them. `the-surfaces.md` R3c already said so in its own words about the
+no-to-yes scene — *"Nothing else in this skill has a name for that scene."* The 2026-08-29 study
+aimed here measured passage SHAPE across 20 games (choices per screen, dead-end share, self-loop
+share) and returned a spread with no signal: median 1 choice against a max of 68. Shape is not
+where the answer lives.
+
+**Method, and it is a departure.** Five arcs read start to finish in the only three clean
+female-PC games in the top thirty (`gender_verdicts.md`): Zara's five detention scenarios and
+seven park-bench incidents, Family Ties' nine-step brother arc, Course of Temptation's 111-passage
+harasser with both its paths. **Nothing here is a threshold, because none of it is a distribution**
+— it is one mechanism read three times in three games.
+
+**What shipped.** A1-A9. The load-bearing one is A1: an arc is a numbered ladder of one-time steps
+that ends by CONVERTING into the repeatable surface, and the surface is what finishing it buys.
+Family Ties writes its own quest log for this — step 7 is *"Now you can wank to [him] just by
+approaching him and chatting."* Then A2 (the first third carries no sex; it buys access and
+information), A3 (the refusal is counted, warned about with the content it forfeits NAMED, and
+ROUTED — Zara's fourth refusal starts a different character's intro), A4 (the step grants the
+meter that opens the step after it, capped at the next threshold), A5 (one incident, two ladders,
+on two different meters), A6 (a garment is a rung, and clothing moves the ODDS the world acts),
+A7 (a dispatching place keeps a quiet outcome and the quiet outcome pays), A8 (a pending arc beat
+pre-empts the dice), A9 (incidents at one place are different SETUPS, taught as a menu).
+
+**Measured, ours:** across twelve built games and **1,396 canvases, zero arcs** — no character
+anywhere in this repo has a second thing that happens. And **zero tier groups**: no two canvases
+share a `name` with different priorities.
+
+⚠️ **The native primitive for A1 exists and is ORPHANED, and the file says so rather than pointing
+authors at it.** `setup.selectCanvasByPriority` (`v2.py:4980`) implements A1 exactly — same-`name`
+canvases form a group, unvisited tiers play in ascending `priority`, and once all are seen it
+returns the highest-priority one forever. In `games/the_season/output/index.html` the symbol
+appears three times and is **called zero times**; the live path is `renderSoloActivities`
+(`v2.py:5242`), which drops every non-repeatable canvas and does no progression. So A1 is authored
+with flags today. Wiring it is named as an open engine decision and was not attempted.
+
+⚠️ **TWO CLAIMS MADE WHILE GETTING HERE WERE WRONG, and both are recorded in the file and in item
+10 so they are not re-proposed.** (a) *A volume floor* — DoL, the reference game, has the LOWEST
+explicit share in the field at 4.8% against our 9.3%, and a count would be manufactured; that
+finding became `lint_explicit_volume`, a lint, in the entry below. (b) *"Sex is a small fraction
+of an arc"* — true of `course-of-temptation` (111 harasser passages, 20 explicit), false of
+`zaras-school-life` (15 detention passages, **15** explicit). Density is a house decision; the
+ladder is the finding.
+
+⚠️ **NO GATE AND NO LINT SHIPPED, deliberately, and the file says why.** All twelve games fail all
+nine rules on day one, which measures the doctrine's age and not the games — P0's exact error — and
+"a check that fails a game for obeying the doctrine is a bug in the check" applies to every red,
+because until today nothing asked for any of this. Two zero-failure lints are named at the foot of
+the file for after one game builds an arc, the order that produced `the start choice is read`:
+`a refusal is remembered` and `the arc ladder`.
+
+⚠️ **Every quotation is fenced EVIDENCE - NOT A TEMPLATE with its game and rank, and every rule
+states its shape as a menu before its quote.** LO's call, taken as a question this session. The
+exposure is measured: `templates/board.toml`'s `airer` and `£5` put five games in a dialect the
+genre does not use, and its example rung of 15 was copied by all sixteen declared tiers.
+
+**Verified.** `--selfcheck` green and it **sees the new rules** — `_rule_definitions` picks up all
+nine (`A1`-`A9` now in its 12-file, 115-rule scan), so a future pointer at a withdrawn A-rule fails
+the way R6's should have. `gates.py the_season` unchanged at 40/43. `--words` run on the new file
+and the list read. Every engine claim re-read against its `file:line` before commit.
+
+---
+
+## 2026-09-01 — volume becomes visible: `lint_explicit_volume`
+
+**`scripts/gates.py`** · **`SKILL.md`**. LO's call, from the plan approved this session. Study:
+`~/Documents/Ignition_Study_20260901/`.
+
+**The hole.** Every heat check in this file is a SHARE with a hand-picked denominator, so nothing
+could see how much explicit content a game actually contains. Proof, and it is not hypothetical:
+**`the_route` is 46/46 green with 11 explicit screens; `night_desk` 39/40 with 6.** Measured
+2026-09-01, our median game ships **32** explicit screens against the field's **457**, and 0.567 per
+1,000 words against **1.24**.
+
+**What shipped.** One lint, printing the absolute count and the rate per 1,000 words against the
+field median and p25. **No gate, deliberately** — every v2 game sits under the field median on the
+matched basis, so a gate would fail all of them at once for obeying current doctrine, which is the
+failure that withdrew R4, study 6's anchoring check and P0.
+
+⚠️ **It runs the FIELD's word list, not this file's `EXPLICIT`.** `EXPLICIT` is broader (it counts
+kiss, naked, arous, lust, breast) and that is correct for every gate that uses it, because those
+measure our beats against our beats. This lint compares us against the field, so it must use the
+field's list — `~/Documents/Sex_Loop_Study_20260829/shape.py:12`, verbatim — or the comparison is
+invalid by construction. `dol_seed_vs_vesper` records three corpora measured with three different
+lists and every cross-comparison thrown away; this is that error avoided rather than repeated.
+
+⚠️ **It reads the BUILT HTML, which G43 forbids for prose texture — and for G43's own stated
+reason.** Our build carries UI blocks the field's passages do not, so anything computed per sentence
+or per passage is not comparable across the two bases, *but a rate over word count is*. The field
+figures come from `<tw-passagedata>` bodies, so ours must too.
+
+⚠️ **TWO BASES ARE PRINTED, and that is the honest part.** ALL passages (matched to how the field
+number was made) and CANVAS-only (ours, excluding UI chrome — generous, unmatched, an upper bound).
+The gap survives both: matched, our best is 1.03 against 1.24. **But on the generous basis
+`the_season` reaches 1.78 and `commuter` 1.41, above the field median — so "every v2 game is below
+the field's p25" is true of the MATCHED basis only**, and the memory entry stating it flatly
+overstates it. Both numbers now print side by side so the basis cannot be dropped.
+
+**Verified.** All three branches exercised on real games, not hypotheticals: under-20-screens on
+`the_route` (11) and `night_desk` (6); below-p25-on-both on `mrs_vance` (0.51 / 0.62); the
+basis-split branch on `back_home` (0.75 matched, 0.95 generous). **A/B against a pre-edit baseline
+across all 25 scorable games: 0 verdicts moved** — mrs_vance holds 46/46. `--selfcheck` 32/32 lints,
+46/46 gate rows. ⚠️ Two apparent diffs in the first A/B were noise and are recorded so the next
+person does not chase them: a `top-3 guess` tie printing `want, arousal` in either order, and a
+wrapped help line — comparing verdict + gate name is the comparison that means something.
+
+---
+
+## 2026-09-01 — `NEGATION_RE` fixed, and L2's baseline re-measured on a matched basis
+
+**`scripts/gates.py`** · **`references/register.md`** · **`SKILL.md`**. LO's call, following the
+finding logged in the entry below. **No gate touched — `lint_negation` is the only consumer of
+`NEGATION_RE` and it is a lint. All five games spot-checked hold their verdicts.**
+
+### Two errors, not one, and they compounded
+
+1. **The regex.** `\b(...|n't|...)\b` — `\bn't\b` can never match inside a word, because the `n` of
+   `doesn't` is preceded by `e`. **`doesn't`, `don't`, `won't`, `isn't`, `can't` and `cannot` were
+   all invisible.** Fixed: the contraction is now its own branch, `n['’]t\b`, plus `cannot`.
+2. **The basis.** The published field figure was **all-text with speech inline**; `lint_negation`
+   has always read **narration only** (`_narration_by_canvas` drops `dialog`). Contracted negatives
+   live in speech, so error 1 hid the field's speech negations while error 2 kept that speech in the
+   field's denominator and dropped ours. Fixing only the regex would have widened the mismatch.
+
+### The re-based baseline
+
+Field reduced to narration the same way ours is — `<<...>>` macro speech stripped (20 of 27 corpus
+games mark speech that way), quoted spans stripped, split with the lint's own `_beat_sentences`.
+Same regex, same splitter, same register, both sides. **25 games, 784,591 sentences:**
+
+| | old (broken regex, all-text field) | re-based |
+|---|---|---|
+| field p50 | 7.59% | **12.06%** |
+| field p90 | 13.56% | **16.38%** |
+| field max | 20.22% | **25.76%** `become-taxi-driver` |
+| ours | "our nine 22.5–38.0%" | **19.0–42.1%**, p50 33.44% |
+| above the field max | v2 9/9 · v1 1/6 | **14 of 16, under BOTH skills** · 16 of 16 above p90 |
+
+**The finding survived the repair and got bigger.** It also stopped being a v2 finding: the old
+regex was flattering v1, which contracts more in narration — `the_inheritance` 18.8 → 35.1,
+`last_call` 20.1 → 33.5, `the_long_summer_test` 12.0 → 28.1, `late_shifts` 10.8 → 24.0. Every game
+under both skills now sits above the field p90, so *"this file taught it"* — true of the gloss and
+the history, which split cleanly by skill — **is not true of the negation**. Recorded as a ⚠️ beside
+that claim: whatever drives this habit predates the skill and a doctrine fix cannot reach it.
+
+### ⚠️ My own intermediate reading was wrong, and it is kept because the class recurs
+
+Measuring our **built HTML** against the field's built HTML put us at **0 of 31** above the field
+max, and I reported to LO that fixing the regex "takes L2's entire quantitative case to zero."
+Wrong. A build carries thousands of words of engine-generated labels, room lists and sidebar with
+almost no negation in them, and that dilutes a per-sentence share. **A rate over word count survives
+the HTML/TOML seam; a share of sentences does not** — the same rule `DASH_CEILING` and
+`SENTENCE_CEILING` already record, applied in the wrong direction. Recorded as a blockquote under L2
+so the comparison is not re-run and the rule re-retired. **That is twice in one session that a seam
+produced a confident wrong answer, once in each direction.**
+
+### What shipped
+
+- **`gates.py`** — `NEGATION_RE` fixed with a header carrying the fixture and why the error is not
+  symmetric; new `FIELD_NEGATION_P50 / P90 / MAX` constants replacing the hardcoded `20.22` at both
+  sites; `lint_negation`'s docstring re-based, including the intermediate wrong reading; the print
+  block now quotes the narration-only figures and says the baseline was re-measured.
+- **`references/register.md`** — the load-rules table's negation column, the L2 header, the
+  "nine of nine" claim scoped to gloss and history, and the earlier ⚠️ replaced with the repaired
+  account.
+- **`SKILL.md:289`** — the lint's one-line description, 20.22% → 25.76%.
+
+### Verified
+
+- **Fixture, 12 cases**: all six contraction forms and `cannot` now HIT; `not`/`never`/`nothing`/
+  `without` unchanged; *"She looks up."* and *"He said it plainly."* still miss. No false positives.
+- **No verdict moved** — `the_route` 46/46, `night_desk` 39/40, `mrs_vance` 44/44, `off_season`
+  41/43, `commuter` 42/46, all identical to the pre-change run.
+- **The lint does real new work**: `night_desk` 40.1% → 40.5%, and `act_desk_monitor` enters the
+  list on *"You cannot see in."* — a sentence the old pattern could not see at all.
+- `--selfcheck` green, index current, 46/46 gates and 5/5 modes.
+
+---
+
+## 2026-09-01 — the four model beats broke this file's own rules, and the L2 instrument is blind to contractions
+
+**`references/register.md`** only. `gates.py` untouched — zero-line diff, so no verdict can move.
+
+### The defect
+
+`## The model beats` shipped 2026-08-28 labelled *"Each is correct as written: no before, no
+diagnosis, nothing to un-learn"*, and `:648` promotes the set further — *"the model beats below are
+the doctrine"*. It was verified before commit **on the markers that existed that day**: dashes,
+`-ly` adverbs, hedges. The **load rules landed 2026-08-30, ninety lines below in the same file**,
+and nobody re-scored the examples against them. Measured 2026-09-01 with `gates.py`'s own regexes:
+
+| | the four beats, as shipped | field p50 | field MAX |
+|---|---|---|---|
+| gloss `, which is` | **11.49 / 1k** | 0.06 | 0.24 — **48x the worst of 27 games** |
+| negation, % of sentences | 50.0% | 7.59% | 20.22% |
+| history, % of sentences | 8.3% | 1.64% | 5.41% |
+
+Plus three misses against figures the section states in its own line of text: the talk screen ran
+**13% spoken against the 65% it cites**; the explicit beat scored **2** explicit words where 3 are
+needed to register, so `--beat` reported *"0/4 register as explicit"*; and single sentences ran 33
+and 38 words against a ceiling of 14.
+
+**Fifth instance of *"an example outranks every rule beside it"*, and the first where the example
+broke a rule in its own file.** The first four were about what an example teaches. This one is about
+an example that was correct when it shipped and wrong two days later, silently.
+
+### What shipped
+
+- **The four beats rewritten** (`## The model beats`), each carrying its measured numbers underneath
+  so the next rule-writer can see what to re-score. Set now: **gloss 0 · negation 0/16 · history
+  0/16 · 0 dashes**; talk screen **76% spoken**; explicit beat **3 words (`fuck`, `cunt`, `tits`)
+  and names the `vaginal` rung**; longest sentence in the set 17 words, was 38.
+- **The two duplicate copies at S1** (the media-block TOML at `:355` and `:366`) take the new prose —
+  `:372` says they are lifted from the validated set, so they had to move together. **One line each,
+  replaced one-for-one**, so no `file:line` citation shifted.
+- **The closing claim split.** It listed *never quite · somehow · without much ceremony* beside
+  *slowly · clearly · exactly* and called all six load-bearing. The first three are the L2 shape —
+  a hedge standing where a fact goes — so the file was defending by name the habit it bans. Plain
+  modifiers are cleared and stay (padding study: 4.22 `-ly` per 1k against a field floor of 8.87).
+- **`The examples are the register` gains the fifth instance**, with the rule it implies: *a rule
+  added to this file dates every example above it — re-score them before you commit.*
+
+### ⚠️ Found while verifying: `NEGATION_RE` cannot see a contraction, and it takes L2's number with it
+
+`\bn't\b` cannot match inside a word, so **`doesn't`, `don't`, `won't`, `isn't`, `can't` are all
+invisible to the L2 lint.** Harmless only if both sides contract equally, and they do not — the
+field writes far more speech than we do. Measured like-for-like, built HTML both sides, 25 field
+games against 31 of our builds:
+
+| | as the lint counts | contractions counted |
+|---|---|---|
+| field p50 | 6.9% | **12.3%** |
+| ours p50 | 6.2% | 8.7% |
+| **our games above the field maximum** | **5 of 31** | **0 of 31** |
+
+**Fixing the regex takes L2's entire quantitative case to zero.** The craft argument survives on its
+own merits; the headline *"our nine run 22.5–38.0%"* does not — it carries this hole **and** the
+HTML/TOML seam. Recorded as a ⚠️ under L2 in `register.md`. **Nothing rewritten and no line of
+`gates.py` changed — the call is LO's.**
+
+> ⚠️ **SUPERSEDED THE SAME DAY — the sentence in bold above is WRONG.** LO called the regex fix, and
+> doing it properly meant matching the basis as well: measured narration-to-narration with the regex
+> fixed, the field's rate roughly doubles and so does ours, and **the finding gets bigger, not
+> smaller**. "0 of 31" came from comparing built HTML on both sides, which dilutes a per-sentence
+> share with engine UI text. See the entry above this one.
+
+⚠️ **Two of my own figures were wrong in the first draft of this edit** and were caught by running
+the check rather than trusting the draft: the talk screen was annotated 48 words / 75% spoken and
+measures 49 / 76%. Fixed before commit. This is the same failure the whole entry is about, one
+scale down.
+
+### Verified
+
+- The four beats **extracted from the file as edited** and scored on `gates.py`'s own `GLOSS_RE`,
+  `NEGATION_RE`, `HISTORY_RE`, `EXPLICIT` and `RUNGS` — the check 08-28 skipped. Numbers above.
+- `gates.py --beat` on the new set: the explicit beat reports **3** explicit words, was 2.
+- `gates.py --selfcheck` green both directions — no gate or lint name touched.
+- `cite_check.py` — no citation moved; `register.md:332`, `:544` and `:640` are cited from
+  `SKILL.md`, `gates.py` and `STATUS.md` and all still point where they did.
+- `the_route` re-scored: unchanged. Trivially guaranteed — `gates.py` never opens `register.md` at
+  runtime — and checked anyway.
+
+---
+
 ## 2026-08-31 — the review format is promoted, and a `sheets` phase sits before TOML
 
 **NEW `references/the-sheets.md`** · **`SKILL.md`** · **`references/engine.md`** ·
@@ -6737,7 +7426,7 @@ Nobody applied it to words.** Third instance of a known mechanism.
   `the-map.md` ×2, `the-board.md` ×2, `gates.py`; `rota`/`rotas` → `roster`/`rosters` ×3 across
   `the-board.md`, `the-map.md`, `the-release.md`; `fortnight` → `two weeks` ×2.
 - **Deliberately NOT rewritten — quotations of real games are evidence.** `the-surfaces.md`'s five
-  `airer` lines, `SKILL.md:174`, `the-voice.md:92` and `gates.py:1785` all quote `the_allowance`'s
+  `airer` lines, `SKILL.md:174`, `the-voice.md:92` and `gates.py:1840` all quote `the_allowance`'s
   real canvas *"Get the washing in off the airer"* (`the_allowance/7_final_game.toml:1163`).
   `the-economy.md:73` quotes `forty_miles`' declared obligation (`forty_miles/v2_state.json:376`).
   `gates.py:252`'s `knickers` is inside the frozen explicit lexicon — it exists to *detect* the

@@ -55,7 +55,10 @@ belong here; only decisions, debts, and promises do.
     },
 
     "who_she_is":      "…",
-    "appetite":        "…",   // must not be completable
+    "obligation":      "…",   // what she owes, who collects, when — the-economy.md R3-R3d
+    "appetite":        "…",   // must not be completable. A DESTINATION, not the opening
+                              // position and not the content schedule — the tiers are that
+                              // (the-want.md §2)
     "ascent":          "…",   // stated as ACCESS: what she can reach at the top
     "charge":          "reversal" | "taboo" | "transformation" | "…",
     "why_this_person": { "npc_id": "one line — why she wants them, or why being wanted lands" },
@@ -64,6 +67,26 @@ belong here; only decisions, debts, and promises do.
   },
 
   "board": {
+    // WHAT THE GAME KEEPS TRACK OF — answered BEFORE the locations exist, because the
+    // location count is derived from what a place is FOR and that derivation is circular
+    // without it. the-systems.md SY1-SY3. Added 2026-09-02: the-surfaces.md R2c had said
+    // since 2026-09-01 that "the room list cannot be written before the systems list is",
+    // and there was no systems list — no field, no file, no step.
+    //   `kind`    — SY1's fork, answered per system, not per game. A game needs both.
+    //               "ambient" is fed by nearly every room (time, money, the body);
+    //               "sourced" is fed in one or two places and read all over.
+    //   `key`     — the trait or flag the game actually keeps. This is what the lint reads.
+    //   `fed_at`  — location ids. On a `sourced` system this should usually be ONE; if it
+    //               is five, the thing is probably ambient (SY2).
+    //   `labels`  — which room labels this system attaches to. ⚠️ In THIS engine that is a
+    //               design statement, not wiring: a canvas belongs to exactly one location
+    //               (template_import.py:1939), so the row is authored per room. SY4.
+    "systems": [
+      { "id": "look", "kind": "sourced", "key": "grooming",
+        "fed_at": ["the_office"], "labels": ["has_mirror"],
+        "read_by": "one line — what changes because of it" }
+    ],
+
     // WHO CLIMBS — answered BEFORE any meter is named. the-meters.md W1, gate 34.
     // The field splits 8 roster / 9 ladder with nothing between 15% and 65%; all
     // five v2 games landed at 19-29% because the question was never asked.
@@ -80,7 +103,14 @@ belong here; only decisions, debts, and promises do.
       // `serves` — the three kinds a room's list may hold, and nothing else. THIS is the
       //   room's menu and its length. the-surfaces.md R2. (It replaced `objects` on 2026-08-18;
       //   the old key stays readable in shipped ledgers but nothing reads it.)
+      // `labels` — what KIND of place this is. the-systems.md SY3. ⚠️ NOT the same field as
+      //   `serves` and it must not be merged with it: `serves` is what HAPPENS here, `labels`
+      //   is what would let anything happen here at all. A room carrying `has_mirror` with no
+      //   mirror row is a room whose systems have not arrived yet — a finding, not an error.
+      //   Half of these are read by the map (hours, zone) and half by the systems
+      //   (`home_base`, `she_can_undress`); a few by both. Keep ONE list, not two.
       { "id": "…", "job": "…", "anchor": false, "fill": 3200, "has_cycling_pool": false,
+        "labels": ["private", "has_mirror"],
         "serves": { "needs": ["hunger"], "work": ["the Saturday shift"], "people": ["npc_…"] } }
     ],
 
@@ -200,6 +230,21 @@ and should not be mistaken for the spine.
 
 **`board.ceilings`** — each tier's top band. If the highest authored gate on a tier sits below
 its ceiling, the top of that bar buys nothing. Gate 8 fails and the player is being lied to.
+
+**`board.systems[]`** — what the game keeps track of about her, declared before the locations are
+written. `the-systems.md` SY1–SY3. The load-bearing field is **`kind`**: an `ambient` system is fed
+by nearly every room and therefore cannot make any room special, and a game of only ambient systems
+produces a duty list — which is the measured diagnosis of `night_desk`, six declared meters, three
+of them hunger, hygiene and energy, and six rooms with nothing of their own to show. A `sourced`
+system is fed in one or two places and read all over: measured in `family-ties`, piercings are fed
+in **2** rooms and read in **117** passages, clothes 1 → 53, the skill ladder 1 → 19.
+⚠️ **`fed_at` on a `sourced` system should usually name ONE location** — if it names five, the
+thing is ambient and the ledger is the cheapest place to find that out.
+
+**`board.locations[].labels`** — what kind of place each room is. `the-systems.md` SY3. Read the
+label menu there and **cut it down**; a label no system reads is dead weight, and the lint prints it
+as such. ⚠️ **Declaring more is worse, not better** — this field is not a score and cannot be
+gamed upward, which is the only reason it is checked at all.
 
 **`board.map.homes`** — where every declared character sleeps, or the literal `"offscreen"`.
 **This cannot be inferred and must not be guessed.** A tenant working nights legitimately has no

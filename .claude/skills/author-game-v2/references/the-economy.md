@@ -395,6 +395,53 @@ A staged `[settings.rent] amount` would also make two surfaces lie — a `trait_
 rent and any quest goal naming it — because `_traitMax` is static (`v2.py:16702`). A daily upkeep
 leaves the Friday number alone and both surfaces stay true.
 
+### R3d · The obligation is an ignition, not a tax — and it is allowed to go quiet
+
+**R3b says make it move. This says where it is going, and that it is allowed to stop.** Measured
+2026-09-01, `~/Documents/Ignition_Study_20260901/` (`probe.py` regenerates all of it).
+
+**Both top games build the ratchet and then cap it by hand.** This is not decay or neglect; it is
+an author reaching in and switching it off.
+
+```
+degrees-of-lewdity   [10000,30000,50000,70000,100000,150000,200000][Math.clamp($rentstage,1,6)]
+                     seven rungs written, SIX reachable — £100 to £2,000, then flat forever
+
+course-of-temptation $weeklydebt is 100 and $debtpaid gte 500   ->  += 50
+                     $weeklydebt is 150 and $debtpaid gte 1000  ->  200
+                     false and $weeklydebt is 200 and $debtpaid gte 3000    <- disabled
+                     false and $weeklydebt is 250 and $debtpaid gte 8000    <- disabled
+                     $weeklydebt gt 200 -> to 200                           <- hard cap
+```
+
+Five rungs authored, **three shipped**, the top two killed with a literal `false and`. The author
+left his reason in the build: `/* !!!! must be removed someday once money is easier */`.
+
+**Why capping it is correct: the obligation gates almost no content.** In `degrees-of-lewdity`,
+**57 of 91,814** condition sites read `$rent*` — and reading them settles what they are: 20 are
+*`$renttime lte 0`* (is it due), 10 are *`$money gte $rentmoney`* (can she pay), four are one story
+thread, and the rest are save migration. Against that, **1,336** sites are gated on tier rungs.
+
+**So the bill's job is the opening hours, and only those.** It has to be there in week one, when
+she has no standing, no capability and no ladder — that is what buys the first transgression. Once
+the meters gate content, the bill going soft is the system working, not the system failing.
+
+⚠️ **This does NOT license a flat number.** R3b still holds for the stretch where the bill is doing
+its job: a constant against a rising income goes soft *before* the meters are ready to take over,
+which leaves a gap where nothing is pulling. Ratchet it through the ignition, then let it plateau.
+
+⚠️ **And it does not license squeezing.** R3c owns that half and the corpus is unambiguous. The
+opening should be uncoverable by *clean work* — never uncoverable. The transgressive route has to
+be open, obvious and well paid on day one, or the ratchet is a wall instead of a door.
+
+⚠️ **Ours are all ignition and no spark.** Eight of ten games clear the whole week's obligation in
+under one day of the best job, median **0.48** (`Economy_Pressure_Study_20260827/FINDINGS.md:289`).
+`mrs_vance` earns $208 in a full day against a $260 *week* — so the debt-to-the-collector branch its
+author built is reachable, in practice, almost never.
+
+**Not a gate.** Four corpus games carry a recurring obligation; a threshold read off four games
+would be invented.
+
 ### R4 · Prices move with state
 
 **Field: a median 24% of money movements carry a computed rather than a literal amount** — 86% at

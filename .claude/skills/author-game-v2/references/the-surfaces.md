@@ -196,6 +196,89 @@ inside one of them, or it belongs on a different surface entirely.
   **One game uses it** — `off_season`, six times. Every other game drops the entry silently. `references/the-clock.md` C5 owns the rule; this is the
   surface it lands on.
 
+**R2c · Each row is a SYSTEM surfacing in this room — so the room list cannot be written before
+the systems list is.**
+
+Added 2026-09-01. R2 above is a **sizing** rule and it works: needs, work and people is a closed
+set, so a room cannot sprawl. What it does not say is what an individual row IS, and read alone it
+answers *"what would she do in this room"* — which returns a job description.
+
+**Read four anchor rooms in four shipped games and every row is a different system of the game,
+appearing where that system lives:**
+
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.**
+>
+> | `degrees-of-lewdity` · Bedroom | | `family-ties` (rank 24) · bedroom | |
+> |---|---|---|---|
+> | Strip and get in bed | sleep | Bed | sleep |
+> | Masturbate in bed | arousal | PC | the OnlyFans line |
+> | Wardrobe | clothing | Wardrobe | clothing |
+> | Sex toys | toys | Mirror | body |
+> | Mirror | body | Try out a dildo | toys |
+> | | | Improve your deepthroat skills | skills |
+>
+> `zaras-school-life` · library — *Read a book on science* · *Practice Coding and Hacking* (two
+> skills) · *Read an adult book* (arousal). Its **gym** is two rows: *Workout* (fitness) and
+> *Peek into the men's locker room* (voyeurism).
+
+Five rows in DoL's bedroom because five systems live in a bedroom. Two in Zara's gym because two
+live in a gym. **The count is not chosen; it falls out of the systems list, which is R2's closed-set
+logic one level up.**
+
+⚠️ **The consequence, and it is measured.** `night_desk` was built to R2 and its rooms came out as
+*walk the property · fix the sign · hit the ice machine · start a load* — a night porter's duties,
+correctly derived, with nothing to want in them. The cause is not the writing. Counting variables
+used 25+ times in each game's own source: **DoL 693 · zaras-school-life 76 · new-life-project 61 ·
+family-ties 52.** `night_desk` declares **six meters**, three of which are hunger, hygiene and
+energy, and no clothing catalog, no phone and no items. **There were not enough systems to give six
+rooms a list**, so the rows had to be invented from the fiction instead.
+
+⚠️ **The comparison above is one crude instrument and is NOT a target.** It counts `$vars` in the
+field's built HTML; our engine keeps meters in `player.core_traits`, so the two sides are not
+measured the same way and the figures are indicative only. The field's own 13× spread (52 → 693)
+means there is no defensible number here, and none is gated. What survives the mismatch is the
+order of magnitude, and the rule above, which was read rather than counted.
+
+⚠️ **The brake, and it is not optional.** R2 exists because gate 22 manufactured nine duplicate room
+screens across five games before it was deleted. Read carelessly, R2c invites the mirror-image
+failure: declare twenty systems, get twenty rows, ship twenty dead meters —
+which is `the-meters.md` W3's defect at scale, and exactly what SKILL.md's *"ask what a tired author
+would build"* rules out. So:
+
+> **A system earns its place by being read in more than one room, by more than one kind of content.**
+
+One system that surfaces in three rooms beats three that surface in one each. **The test is not how
+many systems the game has; it is whether a room has anything of its own to show.**
+
+**No gate and no lint.** A count is satisfied by declaring traits, and the instrument above is not
+matched across the two sides. If a check is ever built here it is the matched instrument first, on
+its own, verified against three games before any doctrine cites it.
+
+> ### ✅ COMPLETED 2026-09-02 — where a system is FED, and where the list itself lives
+>
+> Everything above stands. Two things were missing from it, and both now live in
+> **`references/the-systems.md`**, which is the file R2c's opening sentence was pointing at and
+> which did not exist when R2c was written.
+>
+> **1 · The earn-test above is about READS, and says nothing about WRITES.** Its natural reading —
+> build the thing in three rooms — describes a system fed by every room, which is the kind that
+> *cannot* make a room special. Measured in `family-ties`, all 50 room passages parsed: piercings
+> are fed in **2** rooms and read in **117** passages, clothes **1 → 53**, the skill ladder
+> **1 → 19**, while time is written by **49 of 50** rooms and the body's needs by 14.
+> `the-systems.md` **SY1** names the two kinds and **SY2** carries the write side.
+>
+> **2 · The matched instrument this note asked for was built, and it retires the comparison
+> above.** *"DoL 693 · night_desk 6"* compares a `$var` census against our declared traits — two
+> different things, and it overstates by an order of magnitude. Run on the same footing
+> (`~/Documents/Systems_Study_20260902/matched2.py`): field median **82** distinct leaf names at
+> ≥25 references, ours median **37.5** counting every declared name. **A factor of about two, not a
+> hundred** — and composition, not count, is the real gap: 62% of our flag vocabulary across twelve
+> games is throttle and introduction bookkeeping.
+>
+> ⚠️ **Still no gate**, and this note does not change that. What shipped is one **lint** —
+> `the labels and the systems agree` — which reports and never scores, and which is safe only
+> because declaring more makes its output worse rather than better.
+
 **R3 · The walk-in — one activity deepens, the room does not widen.**
 
 This is the largest content bucket in the field and the one v2 shipped without. **10 substitution
@@ -689,6 +772,66 @@ thresholds and be correct. See "What is checked".
 the shape the field writes as `$robinromance isnot 1`. It reads correctly in every evaluator as of
 2026-08-24; before that it was true on the canvas and silently false in every hint that touched it.
 **It is still rejected on a `[[quest_cards]]` condition, deliberately.** `engine.md` §37.
+
+**R5e · A gate opens when she has earned it. An OFFER is there before she needs it.** Added
+2026-09-01. R5b–R5d cover the choice she is refused and the choice she declines. This is the third
+kind, the field leans on it hard, and **this skill had no word for it** — which is exactly why we
+shipped it wired backwards, twice.
+
+**The defect, in our own games.** `mrs_vance` ships the best choice in its opening — she tells Cade
+she will be short, he covers the rent, and *owing him* is what opens his ladder. It is gated on
+`money lt 260`. She earns $208 in a day against a $260 **week**, so she is essentially never short
+and the choice is close to unreachable. `commuter` does the same shape with `prep lt 30` → `prep +45`.
+Two authors, no shared context, both obedient to a doctrine whose only vocabulary is *content
+appears when a condition is met*.
+
+**The field, measured 2026-09-01** (`~/Documents/Ignition_Study_20260901/`). Three of the four
+corpus games that carry an obligation let the player **volunteer for a bigger one**, and **not one
+of them gates it on scarcity**:
+
+| game | the offer | what it is gated on |
+|---|---|---|
+| `degrees-of-lewdity` | *"Take on Robin's debt"* — **doubles the weekly rent, permanently** | `$robinpaid isnot 1 and $robindebtknown is 1` — that she **knows**, never that she is short |
+| `course-of-temptation` | join a Greek house — dues **plus** housing on the weekly bill, forever | `!$firsttime.greekduespaid` — that she has not yet |
+| `corpo-life` | move up an apartment tier — rent 200 → 800 → 10,000 → 30,000 | that she does not own it yet |
+
+DoL's is worth reading in full, because every part of it is doing a job:
+
+```
+<<if $robinpaid isnot 1 and $robindebtknown is 1>>
+  <<link [[Take on Robin's debt|Bailey's Office Robin]]>><<note "Doubles weekly payment" "red">>
+```
+> *"You want to take on that worthless waif's debt? Why?" Bailey says. "Don't answer. I don't care."*
+> *Taking on Robin's debt is irreversible.*  →  `<<set $rentpaid…>> <<set $rentmoney *= 2>>`
+
+**The price is on the button, in red** — R5c's rule, applied to a door she is walking through rather
+than one she is refused. The irreversibility is stated before she commits, which is Study 8's *close
+doors out loud*. And what the debt buys is **the person**: `$robinpaid` gates his weekly gift, his
+free drink and the romance chain.
+
+> **The test: can she take this when she doesn't need to?**
+> If not, it is not an offer. It is a consolation prize, and she will only ever see it after she has
+> already lost.
+
+⚠️ **The obvious phrasing of this rule is wrong, so do not use it.** *"Never gate a grant on a lack"*
+is false — a rescue **should** require needing rescue, and 50 sites across our games gate a grant on
+a lack correctly. The narrow claim is the one that holds: **if taking on a burden is what opens a
+person, it has to be reachable while she is fine.**
+
+**Not gated, and the measurement is why.** The mechanical signature is real —
+*a choice gated on lacking X whose grant CLEARS the very lack that gated it* — but it needs two
+exclusions before it discriminates at all, and then it has almost no subject:
+
+```
+gated on lacking X, grants X                                    50   ← fires on correct work
+  minus the CEILING pattern      (corruption +1 under corruption lt 40)
+  minus ONCE-ONLY counters       (X lt 1 → X +1, eight of them in vesper)
+grant clears the lack, threshold > 1                             2   ← mrs_vance, commuter
+```
+
+Two games is under this file's own bar, and the unfiltered version fires on **49 correct
+implementations** — the R4 failure exactly. The signature is recorded here so it can be built the
+day it has a subject. It is not built now.
 
 **R6 · The screen moves on re-entry — but the opener does not.** A location the player returns to
 daily has to render differently each time. **It does not do this by rewriting its first sentence.**

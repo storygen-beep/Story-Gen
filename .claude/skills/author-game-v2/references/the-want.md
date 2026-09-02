@@ -197,12 +197,41 @@ would have been the P0 error: a check built for a state nothing is in.
 Her situation at minute zero, and what she has to lose. Concrete: a job, a debt, a room, a
 reputation. The thing that makes the first transgression cost something.
 
-### 2. The appetite that never fills
+> **Prefer a recurring demand with a collector and a date over a situation.** *"She has no money"*
+> is a mood; *"Friday, $260, and Cade counts it at the desk"* is a machine. The mechanism, the three
+> shapes it can take and the trap of a flat number all live in `the-economy.md` **R3–R3d**, which
+> owns them — this line only says to reach for one.
+
+### 2. The appetite — where she lands, not where she starts
 What she wants, phrased so it can never be finished. "Get revenge on X" finishes. "Be wanted
 by people who shouldn't want her" does not.
 
-This is the line that decides whether the game can run forty updates. Test it: *what does
-release 41 do?* If you cannot answer, the appetite terminates and needs rewriting.
+⚠️ **This section used to claim it was "the line that decides whether the game can run forty
+updates". That was measured and it is false.** The appetite is not a content schedule. What decides
+whether release 41 has anything in it is the **meters** — §3 — and the gap is not close:
+
+| in `degrees-of-lewdity` | condition sites |
+|---|---|
+| the rent — the obligation the whole opening runs on | **57** of 91,814, and they are *is it due* / *can she pay* |
+| the tier rungs — `<<promiscuity3>>`, `<<exhibitionism5>>` | **1,336** |
+
+So the three parts of this page divide the game between them, and each does one job:
+
+- **§1b — the obligation starts her.** It has to be there in week one, when nothing else is.
+- **§3 — the meters carry her.** They are what still gates content at release 41.
+- **§2 — the appetite is what she arrives at.** The bill goes quiet (`the-economy.md` R3d) and the
+  act does not change; the *reason* does.
+
+That last sentence is **§4's Transformation charge stated mechanically** — see it, and write the two
+to agree.
+
+⚠️ **Write it as a destination and the field agrees; write it as her opening position and you have
+copied the weakest example in the corpus.** Of the four female-lead games read in source, three open
+on a bill, a threat or an erosion. The one that opens on her own appetite is the one measured as
+*"an appetite with no obstacle at all — the weakest want of the four"*
+(`~/Documents/Female_PC_Craft_Study_20260823/findings_A_want.md`).
+
+**The release-41 test has moved to §3**, where the meters are.
 
 ### 3. What she is becoming — stated as ACCESS
 The ascent. For the `female` protagonist declared in §1 — the default, and the case this was
@@ -227,6 +256,14 @@ must open content or gates 8 and 10 fail.
 
 **Anti-pattern, measured:** a protagonist whose dominant meter rises toward failure while the
 world contracts to a sealed room. Rising must widen.
+
+> **The release-41 test lives here.** *What does release 41 add?* It is asked of the **tiers**, not
+> of the appetite, because the tiers are what still gate content that far out — 1,336 rung-gated
+> sites in the reference game against 57 conditions that read its rent (§2). If you cannot answer
+> it against a named tier, the tier is decorative and release 41 has nothing to hang on.
+>
+> *(This test sat in §2 until 2026-09-01, attached to the appetite. It was measured there and the
+> attachment was wrong; an appetite is a destination and cannot schedule content.)*
 
 ### 4. The charge
 One of — or a deliberate combination of:
@@ -265,7 +302,8 @@ Three declarations, made once:
 
 Answer these four out loud. If any answer is soft, the Want is not done.
 
-1. What does release 41 add? *(if unanswerable, the appetite terminates)*
+1. What does release 41 add? *(ask it of a named §3 tier. If no tier can answer it, the tier is
+   decorative — the appetite was never what scheduled content)*
 2. What can she reach at the top that she cannot reach at the bottom? *(the ascent)*
 3. Which character would a player miss if you deleted them, and why? *(the product)*
 4. Which repeatable surface carries the crudest writing in the game? *(the register, in the

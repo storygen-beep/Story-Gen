@@ -289,6 +289,27 @@ EXPLICIT = re.compile(
     r"|arous|lust|lewd|slut|whore|thrust|penetrat|grope|erect|masturbat|vagina"
     r"|kiss|lick)", re.I)
 
+# ── The field's OWN word list, and why this is not `EXPLICIT` above ───────────
+# `EXPLICIT` is deliberately broad — it counts kiss, naked, arous, lust, breast —
+# and that is correct for every gate that uses it, because those measure a share of
+# our beats against our beats: one list, one substrate.
+#
+# ⚠️ THIS LINT COMPARES US AGAINST THE FIELD, so it must run the FIELD's list or the
+# comparison is invalid by construction. That error has been made on this corpus
+# before and cost a whole analysis: `dol_seed_vs_vesper` records three corpora
+# measured with three different word lists and every cross-comparison thrown away.
+# This is verbatim `~/Documents/Sex_Loop_Study_20260829/shape.py:12`, which is where
+# the field figures below come from.
+FIELD_BODY = re.compile(r"\b(cock|dick|cunt|pussy|clit|tits|nipples?|balls|ass|arse|thrust|"
+                        r"fuck\w*|cum\w*|orgasm\w*|moan\w*|suck\w*|lick\w*|penetrat\w*)\b", re.I)
+FIELD_EXPLICIT_PER_KW = 1.24   # median, 25 mopoga sandboxes
+FIELD_EXPLICIT_P25    = 0.95
+FIELD_EXPLICIT_ABS    = 457    # median absolute explicit screens
+FIELD_MIN_SCREENS     = 20     # shape.py's own inclusion filter: fewer and a game is not in the field
+
+_TW_PASSAGE = re.compile(r'<tw-passagedata[^>]*\bname="([^"]*)"[^>]*>(.*?)</tw-passagedata>', re.S)
+_CANVAS_NAME = re.compile(r'^(?:Starting)?Canvas_[A-Za-z0-9_]+?_Node_')
+
 # The ladder a sexual scene climbs, lowest rung first. Used by a LINT ONLY, and
 # deliberately: naming an act is not the same as depicting it, and no threshold on
 # word-presence would survive contact. It exists to print WHERE a game's scenes sit,
@@ -1202,7 +1223,33 @@ def lint_world_prose(model, game):
 
 GLOSS_RE = re.compile(r",\s*(which|who)\s+(means|is|are|was|were)\b", re.I)
 
-NEGATION_RE = re.compile(r"\b(not|never|no|nothing|nobody|neither|nor|n't|without)\b", re.I)
+NEGATION_RE = re.compile(
+    r"\b(not|never|no|nothing|nobody|neither|nor|without|cannot)\b"
+    r"|n['’]t\b", re.I)
+# ⚠️ THE CONTRACTION BRANCH IS SEPARATE, AND THE VERSION WITHOUT IT WAS WRONG FOR
+# TWO DAYS. Until 2026-09-01 the alternation carried `n't` INSIDE the `\b(...)\b`
+# group, and `\bn't\b` can never match inside a word: the `n` of `doesn't` is
+# preceded by `e`, so there is no word boundary in front of it. `doesn't`, `don't`,
+# `won't`, `isn't`, `can't` and `cannot` were ALL invisible to this rule. Fixture:
+#   "She doesn't look up."  miss -> HIT      "She does not look up."   HIT (unchanged)
+# It is not a symmetric error. Contracted negatives live in SPEECH, the field writes
+# far more speech than we do, and so the hole hid more of the field than of us. The
+# field's own rate roughly doubles once it is closed — see the re-based figures under
+# `lint_negation`. Anything measured with the old pattern is void.
+
+# The L2 field baseline, re-measured 2026-09-01 with the fixed regex above and with the
+# field reduced to NARRATION — the register `_narration_by_canvas` reads on our side —
+# by stripping `<<...>>` macro speech (20 of 27 corpus games mark speech that way) and
+# quoted spans, then splitting with `_beat_sentences`. Same regex, same splitter, same
+# register, both sides. 25 games, 784,591 sentences.
+#
+# ⚠️ THESE ARE LINT BOUNDS, NOT A GATE. Nothing fails on them and nothing should:
+# fourteen of our sixteen games are over the max, which is a finding to read, not a
+# build to break. The old values (7.59 / 13.56 / 20.22) were measured with the broken
+# regex against an ALL-TEXT field and must not be restored.
+FIELD_NEGATION_P50 = 12.06
+FIELD_NEGATION_P90 = 16.38
+FIELD_NEGATION_MAX = 25.76   # become-taxi-driver
 
 # ⚠️ TIGHTENED, and the loose version is why. `since|years|moved|carried` scored
 # "moved his hand" and "carried the tray" as history. This keeps TEMPORAL markers
@@ -1284,10 +1331,39 @@ def lint_gloss(game):
 def lint_negation(game):
     """Sentences whose claim is what did NOT happen.
 
-    `register.md` "The load rules" L2. Field max 20.22% of sentences; the nine games
-    this skill authored run 22.5–38.0%. Behind almost every one is a positive fact
-    that is shorter and more specific, so this is the rare subtraction that makes the
-    prose MORE specific.
+    `register.md` "The load rules" L2. Behind almost every one is a positive fact that
+    is shorter and more specific, so this is the rare subtraction that makes the prose
+    MORE specific.
+
+    ⚠️ RE-BASED 2026-09-01, and BOTH the regex and the field figure moved. The old
+    numbers (field p50 7.59%, max 20.22%, "our nine run 22.5-38.0%") were taken with
+    the broken `\bn't\b` pattern above AND against an ALL-TEXT field baseline, while
+    this function has always read NARRATION ONLY (`_narration_by_canvas` drops
+    `dialog`). Two mismatches, and they pull in opposite directions, so neither the
+    old verdict nor its magnitude could be trusted.
+
+    Re-measured with the fixed regex, the field reduced to narration the same way
+    (macro speech and quoted spans stripped) and split with `_beat_sentences` — the
+    same regex, splitter and register on both sides, 25 games, 784,591 sentences:
+
+        field   p50 12.06%  ·  p90 16.38%  ·  p95 22.32%  ·  MAX 25.76%
+                                                    (become-taxi-driver)
+        ours    p50 33.44%  ·  range 19.01-42.14%  ·  14 of 16 above the field MAX
+                                                       16 of 16 above the field p90
+
+    ⚠️ THE FINDING SURVIVED AND GOT BIGGER, and an intermediate reading said the
+    opposite. Measuring our BUILT HTML against the field's built HTML put us at 0 of
+    31 above the field max and briefly retired this rule — wrong, because our build
+    carries thousands of words of engine-generated labels, room lists and sidebar with
+    almost no negation in them, which dilutes exactly the quantity being measured. The
+    authored narration is the register an author controls and the one this lint reads.
+    Do not re-run that comparison and re-retire the rule.
+
+    ⚠️ THE OLD REGEX WAS FLATTERING v1, WHICH IS WHY THE "v2 HABIT" STORY IS WRONG.
+    Contracted narration moved `the_inheritance` 18.8 -> 35.1, `last_call` 20.1 -> 33.5,
+    `the_long_summer_test` 12.0 -> 28.1 and `late_shifts` 10.8 -> 24.0. All sixteen
+    games under BOTH skills now sit above the field p90. It is a house habit, not a
+    v2 one.
 
     Returns (share of sentences, total sentences, worst canvases) — a canvas is worth
     listing only once it is both above the field max and carrying real prose.
@@ -1302,7 +1378,7 @@ def lint_negation(game):
             per.append(dict(canvas=cid, share=100.0 * n / len(ss), n=n, of=len(ss),
                             line=next((s.strip()[:100] for s in ss if NEGATION_RE.search(s)), "")))
     share = 100.0 * neg / total if total else 0.0
-    return share, total, sorted([p for p in per if p["share"] > 20.22],
+    return share, total, sorted([p for p in per if p["share"] > FIELD_NEGATION_MAX],
                                 key=lambda p: -p["share"])
 
 
@@ -1492,6 +1568,116 @@ def _room_list_labels(model, game):
         if nm:
             out.append((c["id"], c["loc"], nm))
     return out
+
+
+def _cost_traits_of(canvas):
+    """Every trait a canvas charges — trigger costs AND choice costs.
+
+    Separate from the model's `reads` on purpose. `reads` is built from CONDITIONS,
+    and a `costs` block is just as much a read: the engine refuses the choice when the
+    player cannot afford it (v2.py:12556). The `money gates something` gate already
+    makes exactly this correction for the currency; a check that counted only
+    conditions would report a system read solely through a price as unread, which is
+    the "an instrument that cannot see a thing reports its ABSENCE" failure.
+
+    ⚠️ `costs` is a LIST of {trait, value}, never a dict. Read as a dict it matches
+    nothing at all and the check goes quietly, wrongly green.
+    """
+    out = set()
+
+    def take(cs):
+        if isinstance(cs, dict):
+            cs = [cs]
+        for x in (cs or []):
+            if isinstance(x, dict) and isinstance(x.get("trait"), str):
+                out.add(x["trait"])
+
+    take(((canvas.get("trigger") or {}).get("costs")))
+    for n in (canvas.get("nodes") or []):
+        eb = n.get("exit_block") or {}
+        take(eb.get("costs"))
+        for ch in (eb.get("choices") or []):
+            take(ch.get("costs"))
+    return out
+
+
+def lint_labels_and_systems(model, game, state):
+    """`the-systems.md` SY1-SY4 — do the declared systems and the room labels agree?
+
+    DECLARE-THEN-CHECK against `board.systems[]` and `board.locations[].labels`, the
+    same shape as the `a need shuts a door` gate. Three lists, and a verdict on none
+    of them.
+
+    ⚠️ A LINT AND NOT A GATE, and the direction is the whole reason it is safe to
+    build. A count is satisfied by declaring more — that is why R2c shipped with no
+    check at all, and why `objects` / gate 22 had to be deleted after it manufactured
+    nine duplicate room screens across five games. This one runs the other way:
+    declaring another label makes the output WORSE, because an unread label is what it
+    prints. Nothing here can be optimised into a pass.
+
+    ⚠️ P0 — never build a check for a state nothing is in. Every game in the repo
+    declares zero systems and zero labels the day this lands, so a gate would fail
+    twelve games for the age of the doctrine rather than for anything in them. This
+    reports "not declared" and moves on; it cannot fail anything.
+    """
+    if state is None:
+        return "", []
+    board = (state or {}).get("board") or {}
+    systems = [s for s in (board.get("systems") or []) if isinstance(s, dict)]
+    locs = [l for l in (board.get("locations") or []) if isinstance(l, dict)]
+    room_labels = {str(l.get("id")): {str(x) for x in (l.get("labels") or [])}
+                   for l in locs if l.get("id")}
+    declared_labels = set().union(*room_labels.values()) if room_labels else set()
+
+    if not systems and not declared_labels:
+        return ("no board.systems[] and no room labels declared — the systems step has "
+                "not been taken (the-systems.md SY1)"), []
+
+    findings = []
+
+    # 1 · a label on a room that no system names — dead weight.
+    claimed = set()
+    for s in systems:
+        claimed |= {str(x) for x in (s.get("labels") or [])}
+    for lid, labs in sorted(room_labels.items()):
+        for lab in sorted(labs - claimed):
+            findings.append(f"{lid}: label `{lab}` is claimed by no declared system")
+
+    # 2 · a label a system names that no room carries — nowhere to live.
+    for s in systems:
+        for lab in sorted({str(x) for x in (s.get("labels") or [])} - declared_labels):
+            findings.append(f"system `{s.get('id')}`: label `{lab}` is on no location")
+
+    # 3 · a sourced system: fed where it says, and read somewhere else. SY2.
+    by_loc = {}
+    for c in model:
+        by_loc.setdefault(c["loc"], []).append(c)
+    for s in systems:
+        if str(s.get("kind")) != "sourced":
+            continue
+        key, sid = str(s.get("key") or ""), s.get("id")
+        if not key:
+            findings.append(f"system `{sid}`: no `key` — nothing to check it against")
+            continue
+        fed = [str(x) for x in (s.get("fed_at") or [])]
+        if not fed:
+            findings.append(f"system `{sid}`: `sourced` with no `fed_at` — say where it is fed")
+            continue
+        written_at = [f for f in fed if any(key in c["sets"] for c in by_loc.get(f, []))]
+        elsewhere = sorted({c["loc"] for c in model
+                            if c["loc"] not in fed
+                            and (key in c["reads"] or key in _cost_traits_of(c["raw"]))})
+        if not written_at:
+            findings.append(f"system `{sid}`: nothing at {', '.join(fed)} writes `{key}`")
+        if not elsewhere:
+            findings.append(f"system `{sid}`: `{key}` is read in no room outside {', '.join(fed)} "
+                            f"— a source with no readers (SY2)")
+
+    sourced = sum(1 for s in systems if str(s.get("kind")) == "sourced")
+    summary = (f"{len(systems)} systems declared ({sourced} sourced) · "
+               f"{len(declared_labels)} distinct labels over {len(room_labels)} rooms · "
+               f"{len(findings)} to eyeball")
+    return summary, findings
 
 
 def lint_labels(model, game):
@@ -1970,6 +2156,81 @@ def _band_texts(node):
 
     base, axes = walk(node.get("blocks"))
     return _expand_axes(base, axes)
+
+
+def lint_explicit_volume(slug):
+    """How much explicit content is actually IN this game, in absolute terms.
+
+    Every other heat check here is a SHARE with a hand-picked denominator, so a game
+    can clear all of them while being nearly empty: `the_route` is 46/46 green with
+    **11** explicit screens, `night_desk` 39/40 with 6. Nothing could see that.
+
+    Measured 2026-09-01: our median game ships 32 explicit screens against the field's
+    457, and 0.567 per 1,000 words against 1.24.
+
+    ⚠️ READS THE BUILT HTML, and that is deliberate here even though G43 forbids it for
+    prose texture. The reason is the same one G43 gives: our build carries UI blocks the
+    field's passages do not, so anything computed PER SENTENCE or PER PASSAGE is not
+    comparable across the two bases — but *a rate over word count is*. The field figures
+    come from `<tw-passagedata>` bodies (`shape.py`), so ours must too, or the bases
+    differ and the comparison is void.
+
+    ⚠️ TWO BASES ARE PRINTED ON PURPOSE, and the difference is the honesty.
+      · ALL passages      — matched to how the field number was produced. The primary.
+      · CANVAS passages   — ours only, excluding UI chrome. GENEROUS to us, unmatched,
+                            and therefore an upper bound rather than a fairer figure.
+    Measured both ways, the gap survives: on the matched basis our best game reaches
+    1.03 against a field median of 1.24 and most sit at half that. But on the generous
+    basis `the_season` reaches 1.78 and `commuter` 1.41, i.e. ABOVE the field median —
+    so the claim "every v2 game is below the field's p25" is true of the matched basis
+    ONLY, and stating it without the basis overstates it.
+
+    A LINT, never a gate. Every v2 game sits under the field median on the matched
+    basis; a gate here would fail all of them at once for obeying current doctrine —
+    the failure that withdrew R4, study 6's anchoring check and P0. It prints the
+    numbers and judges nothing.
+    """
+    build = os.path.join(os.getcwd(), "games", slug, "output", "index.html")
+    if not os.path.exists(build):
+        return "", []
+    import html as _html
+    text = _html.unescape(open(build, encoding="utf-8", errors="replace").read())
+    parts = _TW_PASSAGE.findall(text)
+    if not parts:
+        return "", []
+
+    def measure(keep):
+        screens = words = 0
+        for name, body in parts:
+            if not keep(name):
+                continue
+            words += len(re.findall(r"[A-Za-z][a-z']+",
+                                    re.sub(r"<<.*?>>|<[^>]*>|\[\[.*?\]\]", " ", body)))
+            if len(FIELD_BODY.findall(body)) >= 3:
+                screens += 1
+        return screens, words, (screens / words * 1000 if words else 0.0)
+
+    a_scr, a_wrd, a_rate = measure(lambda n: True)
+    c_scr, _, c_rate = measure(lambda n: _CANVAS_NAME.match(n))
+
+    summary = (f"{a_scr} explicit screen(s) over {a_wrd:,} words — {a_rate:.2f} per 1,000 "
+               f"(field median {FIELD_EXPLICIT_PER_KW}, p25 {FIELD_EXPLICIT_P25}; "
+               f"canvas-only basis {c_rate:.2f} from {c_scr})")
+    findings = []
+    if a_scr < FIELD_MIN_SCREENS:
+        findings.append(f"{a_scr} explicit screens — under {FIELD_MIN_SCREENS}, which is the "
+                        f"threshold below which `shape.py` drops a game from the field "
+                        f"altogether. It is not in the distribution being compared to.")
+    if a_rate < FIELD_EXPLICIT_P25 and c_rate < FIELD_EXPLICIT_P25:
+        findings.append(f"below the field's p25 ({FIELD_EXPLICIT_P25}) on BOTH bases "
+                        f"({a_rate:.2f} matched, {c_rate:.2f} generous) — the gap is not an "
+                        f"artefact of UI chrome in the denominator")
+    elif a_rate < FIELD_EXPLICIT_P25 <= c_rate:
+        findings.append(f"below p25 on the matched basis ({a_rate:.2f}) but above it on the "
+                        f"generous one ({c_rate:.2f}) — report the basis with the number")
+    findings.append(f"field median is {FIELD_EXPLICIT_ABS} explicit screens in absolute terms; "
+                    f"this game has {a_scr}")
+    return summary, findings
 
 
 def lint_act_nodes(model, game):
@@ -7781,6 +8042,7 @@ def main():
     world_lints = lint_world_prose(model, game)
     shape_summary, shape_lints = lint_screen_shape(model, game)
     label_summary, label_lints = lint_labels(model, game)
+    sys_summary, sys_lints = lint_labels_and_systems(model, game, state)
     browse_summary, browse_lints = lint_browse_share(model, game)
     disp_summary, disp_lints = lint_dispatch_depth(game)
     ladder_summary, ladder_lints = lint_ladder(model, game)
@@ -7804,6 +8066,11 @@ def main():
     chan_summary, chan_lints = lint_money_channel(model, game, state)
     oblig_summary, oblig_lints = lint_obligation_vs_week(model, game, state)
     dep_summary, dep_lints = lint_paid_repeatable_deposits(model, game, state)
+    # The slug, for the one lint that reads the ARTEFACT rather than the source.
+    # A bare `<slug>` argument is the slug; a `.toml` path is two directories under it.
+    _slug = (os.path.basename(os.path.dirname(os.path.dirname(path)))
+             if arg.endswith(".toml") else arg)
+    vol_summary, vol_lints = lint_explicit_volume(_slug)
 
     if "--json" in sys.argv:
         print(json.dumps({"gates": [dict(r) for r in results],
@@ -7813,6 +8080,8 @@ def main():
                                                      "findings": shape_lints},
                                     "labels": {"summary": label_summary,
                                                "findings": label_lints},
+                                    "labels_and_systems": {"summary": sys_summary,
+                                                           "findings": sys_lints},
                                     "browse_share": {"summary": browse_summary,
                                                      "findings": browse_lints},
                                     "ambient_presence": {"summary": amb_summary,
@@ -7935,6 +8204,22 @@ def main():
               " that is said. Two different fixes — `gate it` is one line of requires_npc;")
         print("           `or narrate` means no row exists here, so a gate would strand the"
               " canvas and the arrival belongs in the prose instead)")
+
+    if sys_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the labels and the systems agree — {sys_summary}")
+        for h in sys_lints[:16]:
+            print(f"          · {h}")
+        if len(sys_lints) > 16:
+            print(f"          · … and {len(sys_lints)-16} more")
+        print("          (the-systems.md SY1-SY3 — a LIST, never a score, and it cannot fail"
+              " anything. `serves` is what happens in a room; `labels` is what KIND of place")
+        print("           it is. An AMBIENT system is fed by nearly every room and so makes no"
+              " room special; a SOURCED one is fed in one or two places and read all over —")
+        print("           measured in family-ties, piercings 2 rooms → 117 read sites, clothes"
+              " 1 → 53. A game of only ambient systems ships a duty list, which is")
+        print("           night_desk. ⚠️ Declaring MORE labels makes this output worse, not"
+              " better — that direction is the only reason it is checked at all)")
 
     if label_summary:
         print(f"  {'─'*72}")
@@ -8124,7 +8409,7 @@ def main():
         print("           usually already doing the work. A dash or a bracket is NOT the fix —"
               " the joint survives the swap)")
 
-    if neg_lints or neg_share > 20.22:
+    if neg_lints or neg_share > FIELD_NEGATION_MAX:
         print(f"  {'─'*72}")
         print(f"  lint · what did not happen — {neg_share:.1f}% of {neg_total} sentences carry a "
               f"negation")
@@ -8133,12 +8418,16 @@ def main():
         if len(neg_lints) > 8:
             print(f"          · … and {len(neg_lints)-8} more canvases over the field max")
         print("          (register.md 'The load rules' L2 — a FIGURE and a LIST, never a score."
-              " Field over 27 games: p50 7.59%, p90 13.56%,")
-        print("           MAX 20.22% (become-taxi-driver). Ours run 22.5-38.0%. Behind almost every"
-              " negation is a positive fact that is shorter AND")
-        print("           more specific — 'it takes you ninety' beats 'you have never once done it"
-              " in forty-five'. Canvases listed are those over the")
-        print("           field max with 8+ sentences)")
+              f" Field, NARRATION ONLY, 25 games: p50 {FIELD_NEGATION_P50}%,")
+        print(f"           p90 {FIELD_NEGATION_P90}%, MAX {FIELD_NEGATION_MAX}%"
+              " (become-taxi-driver). Ours run 19.0-42.1%, 14 of 16 over that max. Behind almost"
+              " every negation is")
+        print("           a positive fact that is shorter AND more specific — 'it takes you ninety'"
+              " beats 'you have never once done it in forty-five'.")
+        print("           Canvases listed are those over the field max with 8+ sentences. Baseline"
+              " re-measured 2026-09-01: the old figures were taken")
+        print("           with a regex blind to every contraction and against an ALL-TEXT field"
+              " while this reads narration only — see NEGATION_RE)")
 
     if hist_lints:
         print(f"  {'─'*72}")
@@ -8280,6 +8569,16 @@ def main():
         print("          (the-economy.md R1c — a RATE, never a score. A pure sink is not a"
               " defect; a game made only of pure sinks is. mrs_vance deposits on 46 of 47"
               " and forty_miles on 0 of 10, so any threshold between them is invented)")
+
+    if vol_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · how much explicit content is in here — {vol_summary}")
+        for h in vol_lints[:10]:
+            print(f"          · {h}")
+        print("          (a NUMBER, never a score. Every other heat check here is a share with"
+              " a hand-picked denominator, which is how `the_route` is 46/46 green with 11"
+              " explicit screens. Reads the BUILT html on the field's own word list; a rate"
+              " over word count is the only figure comparable across the two bases)")
 
     if world_lints:
         print(f"  {'─'*72}")

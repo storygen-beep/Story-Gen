@@ -36,15 +36,21 @@ from memory without noticing there was a gap.
 
 ---
 
-## Five sheet types, and they never merge
+## Six sheet types, and they never merge
 
 | | what it carries | one per |
 |---|---|---|
-| **place** | what the player sees on entering a room: doors, auto-fires, who is here, things to do, ways out | location |
+| **system** | what the game keeps track of about her: `ambient` or `sourced`, the key it keeps, where it is fed, what reads it, which room labels it attaches to | system |
+| **place** | what the player sees on entering a room: doors, auto-fires, who is here, things to do, ways out — and **what kind of place it is** (its labels) | location |
 | **person** | the ladder — rungs, both gates, where and **when** they are reachable, refusals | character |
 | **scene** | one rung: branch map, node bodies, exits, and every explicit beat written out | rung |
 | **decision** | what is locked forever, what is expensive, what is cheap — blocked by reversibility | game |
 | **opening** | the funnel, screen by screen, from the age gate to the first open door | game |
+
+⚠️ **The system sheets are written FIRST and the place sheets are written against them**
+(`the-systems.md` SY1–SY3). Written the other way round, a place sheet answers *"what would she do
+here"* and returns a job description — the measured `night_desk` defect. A place sheet whose rows
+name no system is the finding, and the labels line is where it shows.
 
 **They never merge**, and the reason is an incident: a person's ladder was written into a place's
 choice list, and it read fine until somebody asked whether every row was a location link. A place is
@@ -84,6 +90,12 @@ and names the **exterior**.
 > in**, so nothing could see it.
 
 A map can be right room-by-room and wrong as a whole. Only the way *in* makes it a tree.
+
+**It also carries a `LABELS` row** — what kind of place this is, from the menu in `the-systems.md`
+SY3, and **every row on the sheet names the system it belongs to.** Added 2026-09-02. A sheet whose
+rows name no system is the thing to catch here, and it is catchable at design time for the price of
+one column: `night_desk`'s rooms passed review as four correctly-derived duties because nothing on
+the sheet asked what system each one was.
 
 ## S3 · A PLACE SHEET DECLARES ITS WORD BUDGET, AT DESIGN TIME
 

@@ -56,14 +56,23 @@ missing, which is not a pass.
 
 **What she has to lose:** <the thing that makes the first transgression cost something>
 
-## 2. The appetite that never fills
+**What she owes, who collects it, and when:** <a recurring demand with a face and a date — not a
+mood. "Friday, $260, and he counts it at the desk." `the-economy.md` R3 owns the mechanism.>
+
+## 2. The appetite — where she lands, not where she starts
 
 <What she wants, phrased so it can never be finished.>
 
-- ✅ "be wanted by people who shouldn't want her"
-- ❌ "get revenge on X" — that completes, and then release 41 has nothing to do
+⚠️ **Do not copy the line below. It is a SHAPE, not an answer** — four games in this repo shipped
+one sentence because this slot used to hold a filled-in example. Write hers, in her nouns, from
+§1b's obligation.
 
-**What does release 41 add?** <answer it here, now, in one line>
+- ✅ shape: an appetite the world can always supply one more of, stated in the vocabulary of the
+  place she is actually standing in
+- ❌ "get revenge on X" — that completes, and then there is nothing left to want
+
+**Where the bill stops being the reason:** <the point where she is still paying it and it is no
+longer why — §4's Transformation charge, stated as a moment>
 
 ## 3. What she is becoming — as ACCESS
 
@@ -83,6 +92,10 @@ who doesn't want one still climb another. Rungs at **15 / 35 / 55 / 75**.
 | `<tier_3>` | | | | | |
 
 **Counterweight (optional):** `<key>` — <what it protects, and what spends it>
+
+**What does release 41 add?** <answer it against a named tier above, in one line. Asked HERE and
+not of §2: the tiers are what still gate content that far out — 1,336 rung-gated sites in the
+reference game against 57 conditions that read its rent.>
 
 ## 4. The charge
 
@@ -154,7 +167,8 @@ A character with no line here has no reason to exist: cut them, or write it.
 
 ## The four checks — answer out loud before leaving this file
 
-1. **What does release 41 add?** (if unanswerable, the appetite terminates — rewrite §2)
+1. **What does release 41 add?** (ask it of a named §3 tier. If no tier can answer, the tier is
+   decorative — and note this used to be asked of §2, which cannot schedule content)
 2. **What can she reach at the top that she cannot at the bottom?** (the ascent, §3)
 3. **Which character would a player miss if deleted, and why?** (the product, §6)
 4. **Which repeatable surface carries the crudest writing in the game?** (§7 — and if the

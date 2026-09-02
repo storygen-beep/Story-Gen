@@ -118,6 +118,13 @@ anything earlier:
 **Every milestone names the standing content it turns on.** A milestone that opens nothing
 is a dead end, and `gates.py` will say so.
 
+⚠️ **A milestone is rarely alone — in the field it is the LAST step of a numbered arc, and the
+standing surface is what finishing that arc buys.** `family-ties` runs nine steps before the act
+becomes something she can simply do; `course-of-temptation` runs ten. Ours run one: measured
+2026-09-01 across twelve built games and 1,396 canvases, **no character anywhere in this repo has
+a second thing that happens.** Every hub and act loop here is authored in its converted state on
+day one. `references/the-arc.md`.
+
 ⚠️ **Those three answer WHEN content fires. They do not answer WHICH SCREEN IT LIVES ON, and that
 is a separate question with its own file — `references/the-surfaces.md`.** Ask *who is this aimed
 at*: a person → their hub · the room or herself → its own located canvas · her, done to her → a
@@ -167,7 +174,7 @@ Resolve the game slug from the request, then read `games/<slug>/v2_state.json`:
 | `phase` | do this | reference |
 |---|---|---|
 | *(no state file)* | write the Want, create the state file | `references/the-want.md` |
-| `want` | lay down the world | `references/the-board.md` + `the-map.md` + `the-economy.md` + `the-meters.md` |
+| `want` | lay down the world — **`the-systems.md` FIRST** | `references/the-systems.md` → `the-board.md` + `the-map.md` + `the-economy.md` + `the-meters.md` |
 | `board` | **write the sheets** — the design LO reads and signs, before any TOML | `references/the-sheets.md` |
 | `sheets` | build v0.1 from the signed sheets | `references/the-release.md` (§ first release) + `the-voice.md` |
 | `release` | run the loop — pitch, attack, write, gate, ship, log, and keep the prose true to the fields it quotes | `references/the-release.md` + `the-returning-player.md` |
@@ -186,14 +193,17 @@ nodes; the design reported 75 beats against a build of 52, and the same game rea
 sheet and 3 by the instrument on the same afternoon. There is no `--sheets` mode yet, which means
 every count on a sheet sits on the intent side of the measured/intent split.
 
-**The world files, all read in the board phase:** `the-board.md` (fill, meters, cast) ·
+**The world files, all read in the board phase — `the-systems.md` before any of them:**
+**`the-systems.md` (WHAT THE GAME KEEPS TRACK OF, and what kind of place each room is — read
+first, because every other file below derives from it)** · `the-board.md` (fill, meters, cast) ·
 `the-map.md` (the world as a place someone could draw) · `the-surfaces.md` (which screen each
 piece of content lives on) · `the-economy.md` (what money is for) · **`the-meters.md` (WHICH meters
 exist and who owns them, what the climb costs, and how the player reads it off the sidebar)** ·
 `the-voice.md` (how the game talks to the player about itself) · `register.md` (how the prose reads
 once they click) · **`the-first-hour.md` (the opening, the first meeting with each character, and
 the first visit to each place)** · **`the-clock.md` (the time the game promises and the time the
-engine keeps)**.
+engine keeps)** · **`the-arc.md` (what happens between that first meeting and the repeatable
+surface — the steps that earn it)**.
 
 **From the second release onward, `the-returning-player.md` is not optional.** It owns what may not
 CHANGE once players hold saves — ids, flag and trait keys, stat ranges, the title — against
@@ -273,7 +283,12 @@ documented nowhere but in the script's own comments, so an author who hit one ha
 | sentence length | the prose has not drifted dense | `register.md` |
 | prose texture | the dash rate against the field — p50 0.99, p90 17.5, ceiling 35.0/10k. The other three texture figures print and are **not** judged | `register.md` — "Dashes stay rare" |
 
-Lints sit below the tally and never move it: dialogue attribution · room-list labels ·
+Lints sit below the tally and never move it: dialogue attribution · **the labels and the systems
+agree** (`the-systems.md` SY1–SY3 — every declared system against every room label: a label no
+system claims, a system whose label is on no room, and a `sourced` system that is not fed where it
+says or is read nowhere else. ⚠️ Declaring more labels makes it worse, not better, which is the only
+reason it is checked; a count that can be optimised upward is the `objects`/gate-22 failure) ·
+room-list labels ·
 the browse share · screen shape · the prose names places the map does not have · **the ladder**
 (where a scene starts and stops on it) · **talk screens** · **the act menu** · **the meter ladder**
 (rungs per tier, and where the lowest one sits) · **the cast's meters** · **the counterweight** ·
@@ -286,7 +301,8 @@ things one activity can turn into, and how often the activity itself still rende
 `, which is` / `, which means` — a fact welded to a gloss of the fact; field MAX 0.24 per 1,000
 words over 27 games, our nine run 1.34–2.76, the two distributions do not touch) · **what did not
 happen** (the share of sentences whose claim is a negation, and every canvas over the field's
-maximum of 20.22%) · **history on a repeatable screen** (backstory on a canvas the player
+maximum of 25.76% — narration-only baseline, re-measured 2026-09-01 after `NEGATION_RE` was found
+blind to every contraction) · **history on a repeatable screen** (backstory on a canvas the player
 re-enters — `is_repeatable` only, because a one-time canvas is where the doctrine says to PUT it;
 elapsed time, NOT clock time, which is `the-clock.md` C2) · **named before met** (every character
 named before the game has introduced them) · **she permits or she acts** (the share of
@@ -302,7 +318,11 @@ CONDITION on the currency means content money opens; a `costs` block only means 
 bought, and gate 16 passes on either) · **the obligation against the week** (`obligation_amount`
 over the declared `week_income` — a figure, never a score) · **what a paid repeatable leaves
 behind** (how many surfaces she pays for deposit anything; a pure sink is not a defect, a game made
-only of pure sinks is) · **the ambient puts him in the room** · **the badge arrives before the
+only of pure sinks is) · **how much explicit content is in here** (the ABSOLUTE count and the rate
+per 1,000 words against the field's 1.24 — every other heat check is a share with a hand-picked
+denominator, which is how `the_route` is 46/46 green with 11 explicit screens; reads the built HTML
+on the field's own word list, and prints both the matched and the generous basis) · **the ambient
+puts him in the room** · **the badge arrives before the
 content** · **the role stays attached** · **which refusals are
 shown at all**.
 

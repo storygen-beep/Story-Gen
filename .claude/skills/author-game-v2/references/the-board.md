@@ -19,6 +19,13 @@ key, it does not belong on the board.
 
 ## 1. Locations — `[[locations]]`
 
+⚠️ **Read `references/the-systems.md` before this section, and declare `board.systems[]` first.**
+The derivation below is circular without it: ask *"what would she do in this room"* with nothing
+declared and the answer is a job description. `night_desk` was built to R2 correctly and its rooms
+came out as *walk the property · fix the sign · hit the ice machine · start a load* — because it
+had six systems, all of them the kind that every room feeds, and so no room had anything of its own
+to show (`the-systems.md` SY1).
+
 **How many locations is not a number you pick. Derive it from what a place is FOR** — the three
 things a room's list can hold (`the-surfaces.md` R2):
 
@@ -88,6 +95,18 @@ For each location, decide and record in `v2_state.json` under `board.locations[]
   open one. `the-surfaces.md`, *"Why this sizes itself"*.
 
   The `objects` key is left readable in the five existing ledgers. **Nothing reads it any more.**
+- **What KIND of place it is** (`labels`) — `the-systems.md` SY3. Not the same question as `serves`:
+  `serves` is what happens here, `labels` is what would let anything happen here. *Private · has a
+  mirror · open all night · she cannot undress here.* Cut the menu in SY3 down to the labels this
+  game's systems actually read; a label nothing reads is dead weight.
+
+  ```jsonc
+  { "id": "the_kitchen", "labels": ["private", "sells_food", "has_washer"] }
+  ```
+
+  ⚠️ **A room carrying no `sourced` system is the `night_desk` defect** (`the-systems.md` SY2). It
+  is not gated — there is no measured answer to *how many is enough* — but it is the question to ask
+  of every room on this list before the prose exists.
 - **Anchor or satellite?** (`anchor`) Exactly one location is the anchor.
 - **Its word budget** (`fill`) — **in round numbers, written now, before the prose.**
 

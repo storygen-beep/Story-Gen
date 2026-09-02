@@ -352,7 +352,7 @@ makes a beat a click. `v2.py:14426`.
 ```toml
 { type = "cascade", props = { beats = [
   { advance_text = "<the click that reveals this beat>", blocks = [
-    { type = "paragraph", content = "She gets the shirt off over her head, slowly enough that it is clearly for you, and underneath she is exactly as good as you had spent the week trying not to picture. Then she waits, arms at her sides, and lets you look." },
+    { type = "paragraph", content = "She pulls the shirt over her head slowly, so you know it is for you. Underneath she is better than you guessed. She puts her arms at her sides and lets you look." },
     { type = "video", props = { file = "<dir>/<clip>.webm", description = "<what is on screen, for the harvest pass>", search_queries = [ "<a query that would find it>", "<another>" ] } },
   ] },
 ] } },
@@ -363,7 +363,7 @@ makes a beat a click. `v2.py:14426`.
 ```toml
 { type = "cascade", props = { beats = [
   { advance_text = "<the click>", blocks = [
-    { type = "paragraph", content = "He bends you over the arm of the sofa and works his cock into your cunt without much ceremony, and it is good in the dumb, immediate way that has nothing to do with whether you like him. You hear the noise you make. You do not stop making it." },
+    { type = "paragraph", content = "He bends you over the arm of the couch. One hand goes flat between your shoulder blades and he fucks your cunt from behind. Your tits drag on the cushion each time he goes in. You hear the noise you make and you keep making it." },
     { type = "video", props = { pool_dir = "<dir>/<beat_name>", description = "<what is on screen>", search_queries = [ "<a query>", "<another>" ] } },
   ] },
 ] } },
@@ -673,38 +673,74 @@ across 185,575 words of instruction — 0.23% — so an author had almost nothin
 the explanation instead. That is the fourth instance of `SKILL.md`'s *"an example outranks every
 rule beside it"*, and the first where the failure was an **absence**.
 
-One per kind in the table above. Each is correct as written: no before, no diagnosis, nothing to
-un-learn. Second person, the genre standard.
+One per kind in the table above. Second person, the genre standard. Each was scored on every rule
+this file states before it was written down — the numbers are under each one, and they are the
+point: **a worked example that has not been measured is a rule you cannot see.**
 
 **Room / hub card** — the field writes 30 words, nobody speaking, fewer than half carrying a picture:
 
-> The laundry runs hot even in winter and it never quite loses the smell of other people's sheets.
-> Two machines work. The third has been out since spring and nobody has come about it.
+> The laundry runs hot all year and smells of other people's sheets. Two machines take coins. The
+> third has a paper sign on it, OUT in marker.
+
+*27 words · 3 sentences, median 11 · gloss 0 · negation 0 · history 0 — L3 applies here, because a
+room card is re-entered on every visit.*
 
 **Reveal beat** — 37 words in the field, and 58% carry a clip:
 
-> She gets the shirt off over her head, slowly enough that it is clearly for you, and underneath
-> she is exactly as good as you had spent the week trying not to picture. Then she waits, arms at
-> her sides, and lets you look.
+> She pulls the shirt over her head slowly, so you know it is for you. Underneath she is better than
+> you guessed. She puts her arms at her sides and lets you look.
+
+*33 words · 3 sentences, longest 15 · gloss 0 · negation 0. "Better than you guessed" states the
+fact. The version this replaced made the reader supply it.*
 
 **Talk screen** — the genre's second largest content kind, 55 words and 65% of it spoken:
 
-> "You're early." She doesn't look up from the till. "That's twice this week."
+> "You're early." She keeps her eyes on the register. "That's twice this week."
 >
-> You could tell her the truth, which is that the flat is unbearable before dark. You say nothing
-> instead, and she lets it go, which is somehow worse than if she had pushed.
+> "The apartment gets bad before dark."
+>
+> "Bad how?"
+>
+> "Quiet. Just quiet."
+>
+> She looks up at that. "You can sit. I am here till nine and I don't mind the company, but you are
+> buying something eventually."
+
+*49 words · **76% spoken** · gloss 0 · median sentence 6. She has her own want and says it. A talk
+screen that is 13% spoken is a narration beat with quotes in it.*
 
 **Explicit beat, repeatable surface** — crude is the default here, and the beat stays on the body
 for its whole length:
 
-> He bends you over the arm of the sofa and works his cock into your cunt without much ceremony,
-> and it is good in the dumb, immediate way that has nothing to do with whether you like him. You
-> hear the noise you make. You do not stop making it.
+> He bends you over the arm of the couch. One hand goes flat between your shoulder blades and he
+> fucks your cunt from behind. Your tits drag on the cushion each time he goes in. You hear the noise
+> you make and you keep making it.
+
+*46 words · **3 explicit words** — `fuck`, `cunt`, `tits` — so it registers against the 3+ the
+`explicit floor` gate uses · names the `vaginal` rung · longest sentence 15. The last sentence is an
+event, not a verdict on the event: that is the pivot diagnostic passing.*
 
 Read the four together and the point is in what they are not: not one dash between them, and the
-soft words are load-bearing. *never quite · slowly · clearly · exactly · somehow · without much
-ceremony.* Take those out and every sentence flattens to the same volume, which is the defect this
-section exists to stop.
+plain modifiers are load-bearing. *slowly · better · flat · each time.* Take those out and every
+sentence flattens to the same volume, which is the defect this section exists to stop.
+
+⚠️ **A soft word is not the same thing as a hedge, and this paragraph used to say it was.** It
+listed *never quite · somehow · without much ceremony* beside *slowly · clearly · exactly* and
+called all six load-bearing. The first three are the L2 shape — a negation or a hedge standing where
+a fact goes — and defending them by name in the file that bans them is how the first set of these
+beats came to break L1 and L2. **Modifiers are cleared** (the padding study: we write 4.22 `-ly` per
+1,000 against a field floor of 8.87, so there is nothing to cut). Hedges are not.
+
+⚠️ **The first version of these four was wrong, and how it got here is the lesson.** Shipped
+2026-08-28 labelled *"correct as written: no before, no diagnosis, nothing to un-learn"*, and it was
+measured before commit — on dashes, `-ly` adverbs and hedges, which were the markers that existed
+that day. **The load rules landed two days later, ninety lines below, and nobody re-scored the
+examples against them.** Measured 2026-09-01 the original four ran **gloss 11.49/1,000 words against
+a field maximum of 0.24 — 48x the worst game in 27** — with two `, which is` clauses in one 46-word
+talk screen, 50% of sentences carrying a negation, an explicit beat that scored **2** explicit words
+where 3 are needed to register, and single sentences of 33 and 38 words. **This is the fifth instance
+of "an example outranks every rule beside it", and the first where the example broke a rule in its
+own file.** When you add a rule here, re-score every example above it the same day.
 
 ## Dashes stay rare
 
@@ -778,20 +814,40 @@ skill authored it:**
 
 | | gloss / 1,000 words | negation, % of sentences | history, % of sentences |
 |---|---|---|---|
-| field p50 | 0.06 | 7.59 | 1.64 |
-| field p90 | 0.19 | 13.56 | 3.94 |
-| field p95 | 0.20 | 15.59 | 4.47 |
-| field max | **0.24** `destroyer` | **20.22** `become-taxi-driver` | **5.41** `free-cities` |
-| **games THIS skill authored (9)** | **1.34 – 2.71** | **22.5 – 38.0** | **4.8 – 12.1** |
-| games the v1 skill authored (6) | 0.00 – 0.66 | 9.8 – 27.3 | 1.3 – 6.6 |
-| above the field MAXIMUM | v2 **9/9** · v1 3/6 | v2 **9/9** · v1 1/6 | v2 **8/9** · v1 2/6 |
+| field p50 | 0.06 | **12.06** | 1.64 |
+| field p90 | 0.19 | **16.38** | 3.94 |
+| field p95 | 0.20 | **22.32** | 4.47 |
+| field max | **0.24** `destroyer` | **25.76** `become-taxi-driver` | **5.41** `free-cities` |
+| **games THIS skill authored (9)** | **1.34 – 2.71** | **19.0 – 40.5** | **4.8 – 12.1** |
+| games the v1 skill authored (6) | 0.00 – 0.66 | **24.0 – 39.6** | 1.3 – 6.6 |
+| above the field MAXIMUM | v2 **9/9** · v1 3/6 | **14 of 16, under BOTH skills** | v2 **8/9** · v1 2/6 |
 
-**Nine of nine games this skill authored sit above the entire field's maximum on the first two
-counts**, and the lowest of them runs 5.6x the field's worst game on the gloss. The games written
+⚠️ **The negation column was re-measured 2026-09-01 and every figure in it moved.** The old
+row (p50 7.59, max 20.22, v2 22.5–38.0, v1 9.8–27.3) carried two mismatches at once:
+`NEGATION_RE` could not match a contraction — `\bn't\b` never fires inside `doesn't` — and the
+field baseline was **all-text with speech inline** while this lint has always read **narration
+only**. Contractions live in speech, so the hole hid more of the field than of us; excluding
+speech from our side raised ours. Re-measured with the regex fixed and the field reduced to
+narration the same way, 25 games and 784,591 sentences: the field's own rate nearly doubles, and
+so does ours. **The finding survived and got bigger — and it stopped being a v2 finding.** The old
+regex was flattering v1, which contracts more in narration: `the_inheritance` 18.8 → 35.1,
+`last_call` 20.1 → 33.5, `the_long_summer_test` 12.0 → 28.1, `late_shifts` 10.8 → 24.0. **All
+sixteen games under both skills are above the field p90.** Gloss and history are unaffected and
+keep their 08-30 figures.
+
+**Nine of nine games this skill authored sit above the entire field's maximum on the gloss and the
+history**, and the lowest of them runs 5.6x the field's worst game on the gloss. The games written
 before this doctrine mostly do not. **This file taught it**, and "Sweeping backwards" above is the
 mechanism: *replace the hedged clause with the specific one* tells an author to attach a specifying
 clause, and `, which is the county's way of saying skilled tasks approved` **is** a specifying
 clause. The rule is obeyed and the defect is the obedience.
+
+⚠️ **That diagnosis holds for L1 and L3 and NOT for L2, and the difference is the point.** The
+gloss and the history split cleanly by skill, which is what makes "this file taught it" a claim
+evidence can carry. The negation does not: re-measured, v1 runs 24.0–39.6% against v2's 19.0–40.5%
+and the two ranges sit on top of each other. **Whatever drives the negation habit predates this
+skill and is not in this file.** A doctrine fix cannot reach it, and the story that it could was an
+artifact of a regex that could not see `doesn't`.
 
 The three rules are one idea at three grammatical addresses.
 
@@ -827,8 +883,9 @@ swap and the reader still holds the sentence open. Cut it or split it.
 
 ### L2 · Say what happened, not what didn't
 
-Field max 20.22% of sentences; our nine run 22.5–38.0%. To read a negative the reader builds the
-positive first and then cancels it. Once is an effect. Every fourth sentence is arithmetic.
+Field max 25.76% of sentences, p50 12.06%; our sixteen run 19.0–42.1%, fourteen of them over that
+max. To read a negative the reader builds the positive first and then cancels it. Once is an effect.
+Every third sentence is arithmetic.
 
 > ❌ "He has **never once** said a word about it."
 > ❌ "You have **never once** done it in forty-five minutes."
@@ -849,6 +906,32 @@ that one.
 negative was. *"Never once done it in forty-five"* is vaguer than *"it takes you ninety"* **and
 longer**. This rule costs nothing and is the one place in this file where obeying a subtraction
 makes the prose more specific rather than less.
+
+⚠️ **THE INSTRUMENT WAS BROKEN UNTIL 2026-09-01, AND THE BASELINE ABOVE IS THE REPAIRED ONE.**
+`NEGATION_RE` was `\b(not|never|no|…|n't|without)\b`, and `\bn't\b` cannot match inside a word — the
+`n` of `doesn't` is preceded by `e`, so there is no boundary in front of it. **`doesn't`, `don't`,
+`won't`, `isn't`, `can't` and `cannot` were all invisible.** Fixed at `gates.py`'s `NEGATION_RE`,
+which now carries the contraction as its own branch, and the field baseline re-measured with it.
+
+⚠️ **A SECOND MISMATCH RODE ON TOP OF IT, AND IT IS THE ONE WORTH REMEMBERING.** The old field
+figure was **all-text with speech inline**; `lint_negation` reads **narration only**
+(`_narration_by_canvas` drops `dialog`). Contracted negatives live in speech, so the two errors
+compounded: the regex hid the field's speech negations, and the basis then counted that same speech
+in the field's denominator while excluding ours. The repaired baseline reduces the field to
+narration the same way — macro speech and quoted spans stripped, split with `_beat_sentences` — so
+the regex, the splitter and the register now match on both sides.
+
+**The finding survived the repair and got bigger.** Field p50 12.06%, max 25.76%; ours 19.0–42.1%,
+with fourteen of sixteen over the field maximum and **sixteen of sixteen over its p90**.
+
+> ⚠️ **An intermediate reading said the opposite, and it is recorded so it is not repeated.**
+> Measured on our **built HTML** against the field's built HTML, our games came out at 0 of 31 above
+> the field maximum, and the rule was briefly called dead. That comparison is wrong for this
+> quantity: a build carries thousands of words of engine-generated labels, room lists and sidebar
+> text with almost no negation in them, which dilutes the exact thing being measured. **A rate over
+> word count survives that seam; a share of sentences does not.** Authored narration is the register
+> an author controls and the one this lint reads. Do not re-run the HTML comparison and re-retire
+> the rule.
 
 ### L3 · A repeatable screen carries no history
 
@@ -1127,6 +1210,21 @@ worked beat anchoring anyone the games scatter: our dash rates run **1.6 to 137 
 one skill**. An example outranks every rule beside it — and **nothing outranks an example that was
 never written.** `## The model beats` above is the answer, and it is the first thing to check when
 a habit shows up in every game and no rule anywhere asked for it.
+
+**The fifth instance is the answer to the fourth breaking a rule in its own file.** *"The examples
+were not teaching a bad habit; measured, they sit inside the field on every marker"* was true of the
+markers that existed when it was written — dashes, `-ly` adverbs, hedges — and it stopped being true
+two days later without anyone touching a word of it. The **load rules landed on 2026-08-30, ninety
+lines below the model beats, and the beats were never re-scored against them.** Measured 2026-09-01
+the original four ran **gloss 11.49 per 1,000 words against a field maximum of 0.24**, with two
+`, which is` clauses inside a 46-word talk screen — the one construction L1 bans outright, sitting
+in the file that bans it, in the block an author copies. Rewritten and re-measured the same day.
+
+> **A rule added to this file dates every example above it.** The first four instances were about
+> what an example *teaches*. This one is about what an example *stops being*: correct on the day it
+> shipped, wrong by the next rule, and silent about the difference. When you add a rule here,
+> re-score every worked example in the file before you commit — the examples are the register, so a
+> rule the examples break is a rule that has already lost.
 
 > ⚠️ **The count that produced this was wrong twice before it was right, and the failures are the
 > lesson.** A line-level pass over blockquotes reported 4,104 words of "example" across 11 files,
