@@ -6496,8 +6496,15 @@ def run_gates(model, game, state=None):
     #    summary prints garments-against-reads, so a thin pass is visible on the
     #    report the way the meter-ladder lint makes a one-rung ladder visible.
     # ═════════════════════════════════════════════════════════════════════════
+    # ⚠️ `worn_exposure` was missing here until 2026-09-03 while `engine.md:532` listed it
+    #    in the same reader family and the engine implemented it (v2.py:4255, :8117). It is
+    #    the newest of the predicates and the only one that reads an EMPTY slot, so a game
+    #    reading its wardrobe exclusively that way was reported as reading it not at all:
+    #    orientation printed `1 read` against a true 3. No verdict moved — nothing passed or
+    #    failed on it — but the detail block would have told that author "NOTHING reads the
+    #    wardrobe" while three conditions did.
     _CLOTHING_PREDICATES = ("worn_corruption", "worn_beauty", "worn_type",
-                            "clothing_slot", "clothing_item")
+                            "worn_exposure", "clothing_slot", "clothing_item")
     garments = [c for c in (game.get("clothing") or []) if isinstance(c, dict)]
     wardrobe_reads = collections.Counter()
     for path, node in _walk_paths(game):
@@ -6531,6 +6538,100 @@ def run_gates(model, game, state=None):
              if wardrobe_reads else "")
           + (f" · field: DoL ~900, the-hellfire-club 484, zaras-school-life 415"
              if garments and _reads and _reads < 50 else ""))
+         if garments else "no [[clothing]] catalog declared",
+         detail)
+
+    # ═════════════════════════════════════════════════════════════════════════
+    # G48 — A DECLARED GARMENT CAN BE GOT.  `the-meters.md` W3 · `engine.md` §17.
+    #
+    # G41 above asks whether the wardrobe is READ. This asks the prior question, the one
+    # that makes the read moot: can the player ever OWN the thing? A garment with no route
+    # into `sv.player.wardrobe` is a catalog entry, and every condition naming it is a door
+    # with no key.
+    #
+    # WHAT THIS CATCHES, and it is not wardrobe hygiene. `orientation` declared `row_dress`
+    # ($60) and `black_set` ($35), set no `shop_location`, and wrote no `wardrobeEffects`
+    # anywhere — so neither could be obtained. They were the only two garments in the game
+    # carrying `type = "going_out"` and `exposure = 1`, and `simone_05` — step 5 of the
+    # anchor character's six-step arc — triggers on `worn_exposure gte 1 AND worn_type eq
+    # "going_out"`. Verified live: `isCanvasValid(simone_05) === false` with every other
+    # prerequisite met. The arc died there, `simone_06` never set `simone_open`,
+    # `act_pledge_upstairs` — the anchor's repeatable act surface — was sealed for the whole
+    # release, and two quest cards went on pointing the player at it. 46 of 47 gates green.
+    #
+    # THE CORPUS, measured 2026-09-03 over every game with a merged final — 7_ AND 6_, since
+    # five pre-v2 games merge to 6_ and this script only ever loads 7_, so they are outside
+    # every gate here and had to be measured by hand:
+    #   the_allowance   parade_dress, parade_tights             2   no shop_location
+    #   the_route       scrubs_dark, scrubs_light, own_clothes  3   no shop_location
+    #   under_one_roof  7 gift garments                         7   HAS a live shop   [pre-v2]
+    # 3 of 15 wardrobe games, 12 garments. Every clean game has a shop or wardrobeEffects.
+    # This gate prints the first two; `under_one_roof` has no v2 ledger and is field
+    # evidence for the CHECK's shape, not a row the scoreboard will ever show.
+    #
+    # ⚠️ `under_one_roof` IS WHY THE SHOP CLAUSE IS NOT "a shop exists". Its seven are
+    # non-initial at `price = 0` and named for the characters meant to give them
+    # (`jakes_flannel`, `frank_nice_dress`), and `renderShopPage` stocks only
+    # `!initial && price > 0` (v2.py:2105-2107) — they are invisible on the very page they
+    # sit beside. A check reading "there is a shop, therefore buyable" reports zero here and
+    # misses the sharpest case in the corpus.
+    #
+    # ⚠️ `shop_location` IS NEVER VALIDATED. template_import.py:2536 takes the slug as a bare
+    # string and v2.py:9935 compares it to each location's own slug; a typo is silent and the
+    # whole catalog is unreachable with no error anywhere. Hence the `in _loc_ids` test.
+    #
+    # ⚠️ ZERO-BASED, like G44 and G45, and for the same reason: there is no threshold to
+    # invent. Either a route exists or none does. A game declaring no [[clothing]] reports
+    # n/a, which is NOT a pass.
+    #
+    # ⚠️ THIS DOES NOT ASK WHETHER A CONDITION IS SATISFIABLE. That needs the derived
+    # worn_beauty / worn_corruption MAX aggregate modelled, and a check that cannot see the
+    # shape of the thing it judges manufactures whatever it can see (the deleted gate 22,
+    # `the-surfaces.md`). Measured: orientation was the only game in the corpus with an
+    # unsatisfiable clothing condition, and its cause was an ungrantable garment — so the
+    # exact question reaches the same defect from the side that can be answered.
+    # ═════════════════════════════════════════════════════════════════════════
+    _settings = game.get("settings") or {}
+    _loc_ids = {l.get("id") for l in (game.get("locations") or []) if isinstance(l, dict)}
+    _shop_slug = str(_settings.get("shop_location") or "")
+    _shop_live = bool(_settings.get("clothing_enabled")) and _shop_slug in _loc_ids
+    _grantable = {c.get("id") for c in garments if c.get("initial")}
+    if _shop_live:
+        _grantable |= {c.get("id") for c in garments
+                       if not c.get("initial") and (c.get("price") or 0) > 0}
+    for _path, _wnode in _walk_paths(game):
+        for _we in (_wnode.get("wardrobeEffects") or []):
+            if isinstance(_we, dict) and _we.get("item_id"):
+                _grantable.add(str(_we["item_id"]))
+    _ungrantable = [c for c in garments if c.get("id") not in _grantable]
+    _why_no_shop = ("no `shop_location` in [settings]" if not _shop_slug else
+                    "clothing_enabled is false" if not _settings.get("clothing_enabled") else
+                    f'`shop_location = "{_shop_slug}"` names no declared location')
+    detail = []
+    if _ungrantable:
+        detail.append(
+            f"{len(_ungrantable)} declared garment(s) with NO route into the wardrobe: "
+            + ", ".join(f"`{c.get('id')}`"
+                        + (" (price 0 — the shop stocks only price > 0, v2.py:2105)"
+                           if _shop_live and not (c.get("price") or 0) else "")
+                        for c in _ungrantable[:10])
+            + (" …" if len(_ungrantable) > 10 else ""))
+        if not _shop_live:
+            detail.append(f"the shop is not live — {_why_no_shop} — and no `wardrobeEffects` "
+                          f"grants them either (v2.py:14414, :14575)")
+        detail.append("three routes exist and this game uses none of them for these: "
+                      "`initial = true`, a shop purchase (`[settings] shop_location` + "
+                      "`initial = false` + `price > 0`), or `wardrobeEffects = "
+                      '[{ item_id = "…", action = "add" }]` on a choice or an '
+                      "`exit_block.config` — `engine.md` §17")
+        detail.append("a condition naming a garment nothing can grant is a door with no key. "
+                      "Open a route or cut the garment (`the-meters.md` W3)")
+    gate("a declared garment can be got",
+         None if not garments else not _ungrantable,
+         (f"{len(garments) - len(_ungrantable)}/{len(garments)} declared garment(s) have a "
+          f"route into the wardrobe"
+          + (f" · shop @{_shop_slug}" if _shop_live else f" · no shop ({_why_no_shop})")
+          + (f" · {len(_ungrantable)} unreachable" if _ungrantable else ""))
          if garments else "no [[clothing]] catalog declared",
          detail)
 
@@ -6766,6 +6867,8 @@ def run_gates(model, game, state=None):
              "board.economy.currency not declared — purchases cannot be identified")
     else:
         buys = {}                      # flag -> price paid for it
+        _buy_choice = collections.defaultdict(set)   # flag -> id() of the choices that SET it
+        _buy_canvas = collections.defaultdict(set)   # flag -> canvas ids holding those choices
 
         def _purchases(obj, cid):
             if isinstance(obj, dict):
@@ -6782,6 +6885,8 @@ def run_gates(model, game, state=None):
                     for e in (ch.get("flagEffects") or []):
                         if isinstance(e, dict) and e.get("op") == "set" and e.get("flag"):
                             buys.setdefault(e["flag"], (price, cid))
+                            _buy_choice[e["flag"]].add(id(ch))
+                            _buy_canvas[e["flag"]].add(cid)
                 for v in obj.values():
                     _purchases(v, cid)
             elif isinstance(obj, list):
@@ -6793,20 +6898,42 @@ def run_gates(model, game, state=None):
 
         # A READ is the flag in ANY condition anywhere — trigger, choice or [group] band,
         # counted the way G44 counts a start choice rather than by reaching one object.
+        #
+        # ⚠️ EXCEPT THE TILL'S OWN GATE, WHICH IS NOT A DOOR. Two conditions exist only so
+        # the same thing cannot be sold twice, and neither is content the money opened:
+        #   · `<flag> is_false` on the BUYING CHOICE — stops re-selling it;
+        #   · `<flag> is_false` on the TRIGGER of the canvas holding that choice — retires
+        #     the whole row once it is owned.
+        # Counting them handed every carefully-written purchase a free +1 and put this
+        # gate's zero test out of reach. Measured 2026-09-03 across the corpus: 6 of 10
+        # purchases carry the choice form, and `orientation/has_dress` ($60) and
+        # `the_season/has_fan` ($12) passed on nothing else — has_dress bought a garment
+        # the player never received and no condition anywhere ever named it again.
+        # The trigger form is 0 of 10 today and is excluded in advance: it is what
+        # `<flag> is_false` on [canvases.trigger] produces, and an author writing it
+        # would silently re-open the hole. Restricted to `is_false` — an `is_true` test on
+        # the choice that SETS the flag can never fire, so it is dead either way.
         buy_reads = collections.Counter()
 
-        def _walk_buy_conds(obj):
+        def _walk_buy_conds(obj, cid=None, in_trigger=False):
             if isinstance(obj, dict):
                 for it in _conditions_of(obj):
-                    if it.get("flag_key") in buys:
-                        buy_reads[it["flag_key"]] += 1
-                for v in obj.values():
-                    _walk_buy_conds(v)
+                    key = it.get("flag_key")
+                    if key not in buys:
+                        continue
+                    if it.get("operator") == "is_false" and (
+                            id(obj) in _buy_choice[key]
+                            or (in_trigger and cid in _buy_canvas[key])):
+                        continue                      # the till, not a door
+                    buy_reads[key] += 1
+                for k, v in obj.items():
+                    _walk_buy_conds(v, cid, in_trigger or k == "trigger")
             elif isinstance(obj, list):
                 for v in obj:
-                    _walk_buy_conds(v)
+                    _walk_buy_conds(v, cid, in_trigger)
 
-        _walk_buy_conds(game.get("canvases") or [])
+        for c in (game.get("canvases") or []):
+            _walk_buy_conds(c, c.get("id") or "?")
 
         # A flag the daily tick wipes overnight is a DAY CAP, not a possession, and a day
         # cap priced in coins is a legitimate shape (off_season prices four of them). They
@@ -6830,6 +6957,7 @@ def run_gates(model, game, state=None):
             dead = [f for f in kept if not buy_reads[f]]
             shape = " · ".join(f"{f} ({kept[f][0]:g}) opens {buy_reads[f]}"
                                for f in sorted(kept, key=lambda k: -buy_reads[k]))
+            shape += "  (the purchase's own `is_false` gate is not a door)"
             gate("what money buys opens a door", not dead, shape
                  + ("" if dead else "  (doors reported, not judged — see the header)"),
                  ([f"BOUGHT AND NEVER READ: "

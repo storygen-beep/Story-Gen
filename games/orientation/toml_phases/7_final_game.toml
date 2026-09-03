@@ -54,6 +54,14 @@ starting_week = 1
 narration_person = "second"      # IMMUTABLE once 0.1 ships — changing it rewrites every line
 clothing_enabled = true
 wardrobe_location = "her_room"
+# ⚠️ WITHOUT THIS LINE THE CATALOGUE IS DECORATION. `initial = false` garments have
+#    exactly two ways into a wardrobe: the shop buy button this key switches on
+#    (v2.py:2092), or a `wardrobeEffects` grant on a choice (v2.py:14575). With
+#    neither, `row_dress` and `black_set` were unbuyable, every `worn_exposure` and
+#    `worn_type` condition in the game was unsatisfiable, and simone_05 — and so
+#    simone_06, `simone_open` and `act_pledge_upstairs` behind it — could not be
+#    entered. The engine renders the whole shop; the author writes one key.
+shop_location = "the_union_shop"
 
 [theme]
 mode = "dark"
@@ -368,7 +376,7 @@ ready_canvas = "hub_wes_bathroom"
 npc_id     = "npc_halloran"
 priority   = 1
 text       = "He teaches the eight o'clock to two hundred people and holds office hours for whoever turns up. The floor empties at five."
-tip        = "Office hours are Monday, Wednesday and Friday, four until six. Buy the lab kit on the quad first."
+tip        = "Office hours are Monday, Wednesday and Friday, four until six. Buy the lab kit at the union shop first."
 when       = [ { type = "flag", subject = "player", flag = "met_halloran", op = "is_true" } ]
 goals      = [ { type = "flag", subject = "player", flag = "late_lab_open", op = "is_true", label = "Be in the building after the department has gone" } ]
 ready_canvas = "hub_halloran_office"
@@ -448,7 +456,8 @@ terminal_text = "She is asking properly now. 0.1 does not answer her. 0.2 does."
 #                  │              └── wes_room
 #                  └── the_quad ──┬── the_row ── the_pledge_house   ANCHOR
 #                    40 min, $2   ├── halloran_office
-#                                 └── the_counter
+#                                 ├── the_counter
+#                                 └── the_union_shop   SHOP
 #
 # ⚠️ RESTRUCTURED 2026-09-02. This was two_hub with all five house rooms hanging
 #    off the STREET and the pledge house hanging off a lawn — the-map.md R3's own
@@ -728,7 +737,7 @@ image                = "locations/the_quad.jpg"
 image_search_queries = ["college campus quad students walking daytime", "university green lawn buildings students"]
 entry_from           = "the_avenue"
 costs                = { time = 40, money = 2 }
-navigation_order     = ["the_row", "halloran_office", "the_counter"]
+navigation_order     = ["the_row", "halloran_office", "the_counter", "the_union_shop"]
 
 # ═══ THE ROW ═══ This was `act_quad_row`: a canvas whose only content was its own
 # locked_text, whose unlocked choice returned the player to the quad after thirty
@@ -800,6 +809,49 @@ description          = "The coffee counter on the ground floor of the union buil
 image                = "locations/the_counter.jpg"
 image_search_queries = ["campus coffee counter cafe interior students", "small cafe service counter espresso machine"]
 entry_from           = "the_quad"
+
+# ═══ THE UNION SHOP ═══ This was `act_quad_shop`: a canvas standing on open ground,
+# named after one of the three things it sold, whose dress choice took sixty dollars
+# and put nothing in the wardrobe because a choice cannot. The place is already a
+# place in this game's own player-facing prose — Halloran's locked_text says the kit
+# is "twenty-eight dollars at the union shop" (5_scenes.toml) and simone_05 says the
+# dress came "off a rail by the door of the union shop" (4_story_arc.toml). It is
+# ground now, the same promotion `the_row` got.
+#
+# ⚠️ THE SHOP SCREEN IS THE ENGINE'S, NOT AN AUTHORED CANVAS. `shop_location` in
+#    0_systems_spec.toml renders [[Browse Clothes->ShopPage]] here, above the
+#    activity list, on every visit (v2.py:9902 and :9949). Do NOT author a second
+#    "browse the rail" canvas beside it — that is exactly the mistake
+#    act_room_wardrobe made at the wardrobe_location and was deleted for.
+#
+# ⚠️ NOTHING NON-REPEATABLE AND NOTHING trigger_mode="random" MAY LIVE HERE. The
+#    shop link is emitted INSIDE the `<<if _autoFire>><<goto _autoFire>><<else>>`
+#    branch, and getStoryCanvasRedirect fires on a non-repeatable canvas
+#    (v2.py:4696) OR falls through to checkRandomEncounters (v2.py:5211). Either
+#    one redirects the screen before the link is drawn. Put a one-shot meeting or
+#    a random walk-in here and the shop is invisible until it has fired.
+#    `act_shop_kit` is repeatable and manual for exactly this reason.
+[[locations]]
+id                   = "the_union_shop"
+name                 = "The Union Shop"
+description          = "Two aisles and a rail by the door. It sells the lab kit nobody told you was not included, coffee it carries down from the counter, and the kind of dress the row wears on a Thursday, at sixty dollars because they know."
+image                = "locations/the_union_shop.jpg"
+image_search_queries = ["campus university bookstore interior aisles", "small college store clothing rail counter"]
+entry_from           = "the_quad"
+
+# The rail reporting what she has already done at it. This is where the union-shop
+# paragraph that used to sit inside the canvas went.
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "clothing_item", item_id = "row_dress", operator = "owned" },
+] }
+text = "Two aisles and a rail by the door, and you have bought off that rail. The girl at the till rang it through without looking up, which is its own information about how many of you there have been."
+
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 45 },
+] }
+text = "Two aisles and a rail by the door. Two girls stopped talking at the rail when you came in this afternoon and started again after, and one of them was holding the dress you have been costing out for a week."
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -1030,6 +1082,13 @@ activity   = "door open, marking, and the corridor going quiet around him"
 #
 # ⚠️ WHAT MONEY BUYS OPENS A DOOR. The dress is bought and READ — money buys the KEY
 #    to a rung, never a meter point.
+#
+# ⚠️ AND "READ" ONLY COUNTS IF THE READ CAN BE TRUE. Every `worn_exposure` and
+#    `worn_type` condition in this game names a property that only `row_dress` and
+#    `black_set` carry — the five starting garments are exposure 0 and untyped. Until
+#    `shop_location` shipped, both were unobtainable, so all four reads were dead and
+#    Simone's arc stopped at step 5. Before adding a clothing condition, check that
+#    something the player can actually GET satisfies it.
 
 [[clothing]]
 id      = "plain_bra"
@@ -1081,7 +1140,15 @@ beauty  = 1
 corruption = 0
 exposure = 0
 
-# ── bought on the quad, read by Simone's step 5 and by the ambient roll ──────
+# ── THE TWO SHE HAS TO BUY. Both reach her through the engine's shop screen at
+#    `the_union_shop` and through nothing else — a choice's `flagEffects` cannot put
+#    a garment in a wardrobe, which is what the old act_quad_shop tried and why $60
+#    used to buy nothing. A non-initial garment needs `price > 0` here AND a
+#    `shop_location` in 0_systems_spec.toml, or a `wardrobeEffects` grant on a
+#    choice. Neither has `conditions`, so getCorruptionThreshold returns 0
+#    (v2.py:1999) and both sit in the always-open Basic tier — right, because this
+#    game has no corruption meter.
+# ── bought at the union shop, read by Simone's step 5 and by the ambient roll ──
 [[clothing]]
 id      = "row_dress"
 name    = "The dress the row wears"
@@ -1883,7 +1950,7 @@ targetType               = "location"
 locationId               = "the_row"
 time_progression_minutes = 2
 
-# ═══════════════════ THE QUAD — class, work and the shop ═════════════════════
+# ═══════════════════════ THE QUAD — class and the wall ═══════════════════════
 
 [[canvases]]
 id          = "act_quad_class"
@@ -1988,53 +2055,61 @@ targetType               = "location"
 locationId               = "the_quad"
 time_progression_minutes = 5
 
+# ══════════════ THE UNION SHOP — the one thing here that is not clothes ══════
+# This was `act_quad_shop` at `the_quad`: a repeatable row named "Buy the lab kit"
+# that was actually a three-item shop, and that went on saying "Buy the lab kit"
+# for the rest of the game after the kit was bought, with nothing behind it but
+# "Leave it." Measured across all 18 buildable games it was the ONLY repeatable
+# canvas whose every offer sat behind a flag that is never unset.
+#
+# ⚠️ THE DRESS IS NOT SOLD HERE ANY MORE, AND MUST NOT BE. A choice's `flagEffects`
+#    cannot put a garment in a wardrobe — the old one took $60, set `has_dress`
+#    (which nothing read) and left the wardrobe untouched. Clothing reaches her
+#    through the engine's shop screen, which `shop_location` renders on this
+#    location for free. See 1_metadata_and_locations.toml's [[clothing]] banner.
+#
+# ⚠️ REPEATABLE ON PURPOSE, AND THE TRIGGER CONDITION IS WHAT RETIRES IT. The row
+#    disappears the moment the kit is owned, rather than standing there offering a
+#    thing she has. It must stay repeatable: a non-repeatable canvas here would be
+#    picked up by the auto-fire selector (v2.py:4696) and redirect the location
+#    screen, and the [[Browse Clothes->ShopPage]] link lives inside the branch that
+#    redirect skips (v2.py:9902, :9949).
 [[canvases]]
-id          = "act_quad_shop"
-name        = "Buy the lab kit"
-description = "R1b — what money buys has to STAY bought and be READ. The kit opens the late lab; the dress is read by Simone's step 5 and by the ambient roll. Money buys the KEY to a rung, never a meter point."
+id          = "act_shop_kit"
+name        = "Buy the lab kit ($28)"
+description = "R1b — what money buys has to STAY bought and be READ. The kit opens the late lab (hub_halloran_office). The row retires itself on has_lab_kit so the label is never a thing she already owns."
 
 [canvases.trigger]
-location      = "the_quad"
+location      = "the_union_shop"
 is_repeatable = true
 is_active     = true
 priority      = 3
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "has_lab_kit", operator = "is_false" },
+] }
 
 [[canvases.nodes]]
 id   = "base"
-name = "The union shop"
+name = "The kit"
 blocks = [
-  { type = "paragraph", content = "The union shop sells three things anybody wants: the lab kit nobody told you was not included, coffee, and the kind of dress the row wears on a Thursday, on a rail by the door, at sixty dollars because they know." },
+  { type = "paragraph", content = "It is a tray of glass and a pair of goggles in a plastic sleeve, and the sticker says twenty-eight dollars. The reading list said the lab was included. The reading list was written by somebody who does not buy the trays." },
 ]
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text                     = "Buy the lab kit. $28"
+text                     = "Buy it. $28"
 targetType               = "location"
-locationId               = "the_quad"
+locationId               = "the_union_shop"
 time_progression_minutes = 15
 costs = [ { trait = "money", value = 28 } ]
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "has_lab_kit", operator = "is_false" },
-] }
 flagEffects = [ { targetType = "player", flag = "has_lab_kit", op = "set" } ]
 
 [[canvases.nodes.exit_block.choices]]
-text                     = "Buy the dress off the rail. $60"
+text                     = "Leave it on the shelf."
 targetType               = "location"
-locationId               = "the_quad"
-time_progression_minutes = 20
-costs = [ { trait = "money", value = 60 } ]
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "has_dress", operator = "is_false" },
-] }
-flagEffects = [ { targetType = "player", flag = "has_dress", op = "set" } ]
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Leave it."
-targetType               = "location"
-locationId               = "the_quad"
+locationId               = "the_union_shop"
 time_progression_minutes = 5
 
 # ═══════════════════ THE COUNTER — the only money in the game ════════════════

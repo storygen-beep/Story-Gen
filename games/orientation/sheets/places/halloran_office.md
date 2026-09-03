@@ -16,7 +16,7 @@ hour of them is the only hour anyone is up there.
 |---|---|
 | **Office hours** | cast — `npc_halloran` hub, 16:00–18:00 |
 | ├ *Ask him about the department.* | cast — his eight exchanges, `hub_halloran_office.talk` |
-| **The late lab** | work + arc — needs the lab kit bought at `the_quad` |
+| **The late lab** | work + arc — needs the lab kit bought at `the_union_shop` |
 | **Ask about the reader's key** | start choice — `past_top` reaches this in week one |
 
 ⚠️ **`past_top` buys REACH here, and that is what a start choice is for.** Not flavour — the key gets

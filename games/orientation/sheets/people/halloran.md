@@ -47,7 +47,7 @@ prose as atmosphere; it is a consequence of row 2 ending at 18:00 and the depart
 | rung | gate |
 |---|---|
 | the reader's key | `met_halloran` · **`past_top` reaches this in week one** |
-| the late lab — needs the kit bought at `the_quad` | relation 15 · `item:lab_kit` |
+| the late lab — needs the kit bought at `the_union_shop` | relation 15 · `item:lab_kit` |
 | after the floor empties | relation 30 · `appetite` 30 |
 
 ⚠️ **Rung 2 is A4b's third key kind — a preparation BOUGHT.** Money buys the key to a rung, never a

@@ -5,6 +5,114 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-03 — one missing settings line, and the arc behind it
+
+**SKILL** — `scripts/gates.py` (G45's self-gate carve-out · `_CLOTHING_PREDICATES` gains
+`worn_exposure` · **NEW gate** `a declared garment can be got`) · `SKILL.md` (one new row in the
+scoreboard table) · `references/the-meters.md` (W3's wardrobe block) ·
+`references/the-economy.md` (R1b, "The check") · `references/the-first-hour.md` (the F4 box).
+**GAME** — `games/orientation/` TOML, `v2_state.json`, `sheets/`.
+
+LO, playing: *"Buy the lab kit / Should be in a shop."* Four defects stacked on one row.
+
+**The one he could see.** `act_quad_shop` was a repeatable canvas at `the_quad` named after one of
+the three things it sold, whose node was already titled *The union shop*. Because the kit is a
+permanent one-time buy, the label became a standing lie — after the purchase the row still read
+*"Buy the lab kit"* and the only live choice behind it was *"Leave it."* Measured across all 18
+buildable games it was the **only** repeatable canvas whose every offer sat behind a flag that is
+never unset and is not a day cap. A one-off slip, not a class.
+
+**The one he could not.** Probed live with $300 in hand: `money 300 → 240`, `has_dress = True`,
+**wardrobe unchanged**. A choice's `flagEffects` cannot put a garment in a wardrobe. `has_dress` was
+write-only — its only two occurrences in the game were its own re-buy guard and its own setter.
+
+**The one that mattered.** `[settings]` carried `clothing_enabled = true` and `wardrobe_location`
+and **no `shop_location`**, and the game wrote no `wardrobeEffects` anywhere, so `row_dress` and
+`black_set` could not be obtained by any route the engine has. They are the only garments in the
+game with `exposure = 1` and `type = "going_out"` — and **all four** clothing conditions in the game
+read one of those two properties. So `simone_05`, step 5 of the anchor character's six-step arc,
+could not be entered. Verified live in the shipped build, every other prerequisite met, the right
+day and hour, $500 in hand:
+
+```
+wardrobe: ['plain_bra','plain_briefs','school_tshirt','old_jeans','trainers']
+simone_05 → setup.isCanvasValid(c) === false
+```
+
+`simone_06` therefore never set `simone_open`, and `act_pledge_upstairs` — which describes itself as
+*"the anchor's repeatable act surface"* — was sealed for the whole release while two quest cards
+went on pointing the player at it. **The scoreboard read 46 of 47 green.**
+
+**Why it read green — two instruments, both blind.**
+
+- **G45 `what money buys opens a door`** counted a bought flag's reads as the flag in *any*
+  condition anywhere. A purchase always gates itself — `<flag> is_false` on the buying choice, to
+  stop selling it twice — so every carefully-written purchase collected a free `+1` and could never
+  reach zero. Measured: **6 of 10 corpus purchases carry that self-gate**, and it hid two real
+  defects, `orientation/has_dress` ($60) and `the_season/has_fan` ($12). Both forms are excluded
+  now, the trigger form pre-emptively, because `<flag> is_false` on `[canvases.trigger]` is what the
+  fixed `orientation` itself writes. **G44 `the start choice is read` was measured for the same
+  blindness and is clean — 12 start-choice flags across 4 games, 0 self-gate sites.**
+- **G41 `the wardrobe is read`** counts readers and cannot ask whether a reader can ever be **true**.
+  It also had `worn_exposure` missing from `_CLOTHING_PREDICATES` while `engine.md:532` listed it and
+  the engine implemented it (`v2.py:4255`, `:8117`) — orientation printed `1 read` against a true 3.
+  No verdict moved; the detail block would have told that author "NOTHING reads the wardrobe".
+
+**And the skill taught it.** `the-first-hour.md`'s F4 box said *"What F4 actually asks for here is a
+READ, not a door"* and named `worn_type` / `worn_exposure` as the way to arm clothing. Orientation
+obeyed it precisely. The box now carries the other half: **a read is only armed if something she can
+obtain satisfies it.**
+
+**NEW GATE — `a declared garment can be got`.** Zero-based, beside G41. An `initial = false` garment
+needs one of the only two routes the engine has: a shop purchase (`shop_location` naming a
+**declared** location — it is never validated, `template_import.py:2536` — plus `price > 0`, because
+`renderShopPage` stocks only `!initial && price > 0`, `v2.py:2105`), or a `wardrobeEffects` grant on
+a choice (`v2.py:14575`) or an `exit_block.config` (`v2.py:14414`). Measured 2026-09-03 across every
+game with a merged final — **7_ and 6_, since five pre-v2 games merge to 6_ and this script only ever
+loads 7_**:
+
+```
+the_allowance   parade_dress, parade_tights             2   no shop_location
+the_route       scrubs_dark, scrubs_light, own_clothes  3   no shop_location
+under_one_roof  7 gift garments at price 0              7   HAS a live shop   [pre-v2]
+```
+
+**3 of 15 wardrobe games, 12 garments.** `under_one_roof` is why the shop clause is not "a shop
+exists": its seven are non-initial at `price = 0`, named for the characters meant to give them
+(`jakes_flannel`, `frank_nice_dress`), and invisible on the very page they sit beside. It has no v2
+ledger, so it is field evidence for the check's shape, not a row the scoreboard can print.
+
+⚠️ **`the_allowance` and `the_route` are REPORTED, NOT REPAIRED** — the gate names them; LO rebuilds
+when he chooses. Same call as the 2026-09-03 engine change above.
+
+**THE FIX in `orientation`.** A new location `the_union_shop` off `the_quad` — the game's own
+player-facing prose already named it twice, in Halloran's `locked_text` and in `simone_05`'s beat —
+with `shop_location` pointed at it. `act_quad_shop` became `act_shop_kit`, named for the one thing it
+does, with `[canvases.trigger] conditions` on `has_lab_kit is_false` so the row **retires itself**.
+The dress choice and `has_dress` are deleted; the dress is a real shop purchase and a real garment.
+
+⚠️ **Nothing non-repeatable and nothing `trigger_mode = "random"` may ever live at a `shop_location`
+or a `wardrobe_location`.** Both injected links sit **inside** the
+`<<if _autoFire>><<goto _autoFire>><<else>>` branch (`v2.py:9902`, `:9949`), and
+`getStoryCanvasRedirect` fires on a non-repeatable canvas (`v2.py:4696`) or falls through to
+`checkRandomEncounters` (`v2.py:5211`). Recorded in the F4 box, the game's TOML and its place sheet.
+
+**Verified.** Build green. `grep -c "Browse Clothes" games/orientation/output/index.html` → **1**
+(was 0). Live: `money 300 → 240` and **`row_dress` lands in the wardrobe**; the kit row is absent
+from both `links` and `locked` once owned; `simone_05` auto-fires into `Canvas_simone_05_Node_base`
+with the dress on and does **not** fire without it; `act_pledge_upstairs` is valid and selectable
+once `simone_open` is set. `errors == []` on every probe. **`--selfcheck` exit 0 at 49/49 gates ·
+38/38 lints · 5/5 modes · 137 rules, 0 pointing at nothing.**
+
+⚠️ **Two things found and NOT fixed, both LO's call.** (1) Leaving any child of `the_quad`
+re-charges the quad's own entry cost — 40 minutes and $2 — because `deductLocationCosts` fires
+whenever destination != current (`v2.py:16266`). It predates this change and hits `the_row`,
+`halloran_office` and `the_counter` identically; it reads like the quad's cost being mis-scoped to
+re-entry from its own children. (2) `gates.py` only ever loads `7_final_game.toml`, so five pre-v2
+games are outside every gate in the file.
+
+---
+
 ## 2026-09-03 — two switches on a location screen that had never been wired
 
 **ENGINE** — `generators/v2.py` (`_npcPresentForCanvas`, `isCanvasSelectable`, six selection sites,

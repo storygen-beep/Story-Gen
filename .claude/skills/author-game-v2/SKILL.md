@@ -272,6 +272,7 @@ documented nowhere but in the script's own comments, so an author who hit one ha
 | **a locked door says why** | every `show_when_locked` choice carries the reason — a `locked_text`, a threshold or a rejection node. The field hides a refusal or explains it; 2% ship a dead greyed label | `the-surfaces.md` R5c · `engine.md` §15 · §36 |
 | **a meter is read** | every number the game raises is read by a condition, a cost or a quest goal — a raise with no reader is decoration | `the-meters.md` W3 |
 | **the wardrobe is read** | a game declaring `[[clothing]]` reads it somewhere — she can dress and the world does not look | `the-meters.md` W3 · W7 · `engine.md` §17 |
+| **a declared garment can be got** | every `[[clothing]]` entry has a route into the wardrobe — `initial`, a shop purchase, or `wardrobeEffects`. 3 of 15 wardrobe games ship one that has none. `orientation`'s two were the only `going_out` garments in the game and `simone_05` gates on wearing one, so the anchor's arc died at step 5 and two quest cards kept pointing at it | `the-meters.md` W3 · `engine.md` §17 |
 | **the climb is where you said it is** | the game gates where `board.who_climbs` says it does | `the-meters.md` W1 · `state.md` |
 | **a banded meter is not also a number** | a banded sidebar stat is `hidden` in `[[traits.labels]]` | `the-meters.md` M7 · `engine.md` §30 |
 | **the opening opens a door** | the funnel's last click lands on a clock time when something at that location is actually open | `the-first-hour.md` F3 |

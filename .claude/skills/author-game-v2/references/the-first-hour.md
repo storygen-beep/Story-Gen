@@ -367,6 +367,40 @@ ceiling **is** the "there is a climb ahead" read, on frame one, with no teach sc
 > `clothing_slot` or `clothing_item` condition, or a `player_portrait` outfit override. See
 > `the-meters.md` W7, which carries the field evidence that the reads belong in ordinary places
 > rather than in sex scenes. The gate that measures it is `the wardrobe is read`.
+>
+> ### ⚠️ And a read is only armed if something she can GET satisfies it. This paragraph, as it stood, produced a dead arc.
+>
+> `orientation` obeyed the instruction above exactly and wrote four clothing conditions — two
+> `worn_exposure gte 1`, one `worn_type eq "going_out"`, and the `simone_05` trigger carrying both.
+> Every one of them named a property that only `row_dress` and `black_set` carried, and those two
+> were `initial = false` in a game with **no `shop_location`** and no `wardrobeEffects`. Nothing
+> could put either in the wardrobe. So all four reads were dead, and `simone_05` — step 5 of the
+> anchor's six-step arc — could not be entered; `simone_06` never set `simone_open`;
+> `act_pledge_upstairs`, the anchor's repeatable act surface, was sealed for the whole release.
+> The scoreboard said 46 of 47 green.
+>
+> **So the check is two-part, and F4 only ever stated the first half:**
+>
+> ```
+> 1. something in the world reads the wardrobe          ← what this box said
+> 2. something she can OBTAIN satisfies that read       ← what it did not
+> ```
+>
+> Part 2 means one of: the property lives on an `initial = true` garment; or `[settings]
+> shop_location` names a **declared location** and the garment has `price > 0`; or a
+> `wardrobeEffects = [{ item_id = "…", action = "add" }]` grant exists on a choice or an
+> `exit_block.config`. Those are the only three routes the engine has. `shop_location` is never
+> validated — a typo is as silent as an omission — so after a build, check
+> `grep -c "Browse Clothes" <output>/index.html`. The gate is `a declared garment can be got`
+> (`the-meters.md` W3).
+>
+> ### ⚠️ Nothing non-repeatable may live at the `shop_location` or the `wardrobe_location`.
+>
+> Both injected links are emitted **inside** the `<<if _autoFire>><<goto _autoFire>><<else>>`
+> branch (`v2.py:9902` and `:9949`), and `getStoryCanvasRedirect` fires on a non-repeatable canvas
+> *or* a `trigger_mode = "random"` one. Put a one-shot meeting or a random walk-in in that room and
+> the door to the wardrobe or the shop is invisible until it has fired. Pick a room with neither —
+> and note that most corpus shop locations are bare rooms for exactly this reason.
 
 ⚠️ **The rent clock is armed, not fired.** Use `[settings.rent] start_after_flag` pointed at a flag
 the opening raises, so the first session is pressure-free — no charge lands before the player has

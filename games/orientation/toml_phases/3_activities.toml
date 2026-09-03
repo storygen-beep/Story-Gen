@@ -507,7 +507,7 @@ targetType               = "location"
 locationId               = "the_row"
 time_progression_minutes = 2
 
-# ═══════════════════ THE QUAD — class, work and the shop ═════════════════════
+# ═══════════════════════ THE QUAD — class and the wall ═══════════════════════
 
 [[canvases]]
 id          = "act_quad_class"
@@ -612,53 +612,61 @@ targetType               = "location"
 locationId               = "the_quad"
 time_progression_minutes = 5
 
+# ══════════════ THE UNION SHOP — the one thing here that is not clothes ══════
+# This was `act_quad_shop` at `the_quad`: a repeatable row named "Buy the lab kit"
+# that was actually a three-item shop, and that went on saying "Buy the lab kit"
+# for the rest of the game after the kit was bought, with nothing behind it but
+# "Leave it." Measured across all 18 buildable games it was the ONLY repeatable
+# canvas whose every offer sat behind a flag that is never unset.
+#
+# ⚠️ THE DRESS IS NOT SOLD HERE ANY MORE, AND MUST NOT BE. A choice's `flagEffects`
+#    cannot put a garment in a wardrobe — the old one took $60, set `has_dress`
+#    (which nothing read) and left the wardrobe untouched. Clothing reaches her
+#    through the engine's shop screen, which `shop_location` renders on this
+#    location for free. See 1_metadata_and_locations.toml's [[clothing]] banner.
+#
+# ⚠️ REPEATABLE ON PURPOSE, AND THE TRIGGER CONDITION IS WHAT RETIRES IT. The row
+#    disappears the moment the kit is owned, rather than standing there offering a
+#    thing she has. It must stay repeatable: a non-repeatable canvas here would be
+#    picked up by the auto-fire selector (v2.py:4696) and redirect the location
+#    screen, and the [[Browse Clothes->ShopPage]] link lives inside the branch that
+#    redirect skips (v2.py:9902, :9949).
 [[canvases]]
-id          = "act_quad_shop"
-name        = "Buy the lab kit"
-description = "R1b — what money buys has to STAY bought and be READ. The kit opens the late lab; the dress is read by Simone's step 5 and by the ambient roll. Money buys the KEY to a rung, never a meter point."
+id          = "act_shop_kit"
+name        = "Buy the lab kit ($28)"
+description = "R1b — what money buys has to STAY bought and be READ. The kit opens the late lab (hub_halloran_office). The row retires itself on has_lab_kit so the label is never a thing she already owns."
 
 [canvases.trigger]
-location      = "the_quad"
+location      = "the_union_shop"
 is_repeatable = true
 is_active     = true
 priority      = 3
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "has_lab_kit", operator = "is_false" },
+] }
 
 [[canvases.nodes]]
 id   = "base"
-name = "The union shop"
+name = "The kit"
 blocks = [
-  { type = "paragraph", content = "The union shop sells three things anybody wants: the lab kit nobody told you was not included, coffee, and the kind of dress the row wears on a Thursday, on a rail by the door, at sixty dollars because they know." },
+  { type = "paragraph", content = "It is a tray of glass and a pair of goggles in a plastic sleeve, and the sticker says twenty-eight dollars. The reading list said the lab was included. The reading list was written by somebody who does not buy the trays." },
 ]
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text                     = "Buy the lab kit. $28"
+text                     = "Buy it. $28"
 targetType               = "location"
-locationId               = "the_quad"
+locationId               = "the_union_shop"
 time_progression_minutes = 15
 costs = [ { trait = "money", value = 28 } ]
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "has_lab_kit", operator = "is_false" },
-] }
 flagEffects = [ { targetType = "player", flag = "has_lab_kit", op = "set" } ]
 
 [[canvases.nodes.exit_block.choices]]
-text                     = "Buy the dress off the rail. $60"
+text                     = "Leave it on the shelf."
 targetType               = "location"
-locationId               = "the_quad"
-time_progression_minutes = 20
-costs = [ { trait = "money", value = 60 } ]
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "has_dress", operator = "is_false" },
-] }
-flagEffects = [ { targetType = "player", flag = "has_dress", op = "set" } ]
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Leave it."
-targetType               = "location"
-locationId               = "the_quad"
+locationId               = "the_union_shop"
 time_progression_minutes = 5
 
 # ═══════════════════ THE COUNTER — the only money in the game ════════════════

@@ -83,7 +83,7 @@ rather than leaving a chore in the game.
 | sinks | the dues · the meal plan · the bus · the lab kit · clothes that make a `nerve` rung reachable |
 
 **Surfaces in:** `the_counter` (the only source), `the_pledge_house` (the dues), `the_avenue` (the
-bus), `the_quad` (the lab kit).
+bus), `the_union_shop` (the lab kit and the two garments).
 
 ---
 
@@ -96,7 +96,16 @@ Two jobs, and they are different (`the-arc.md` **A6**):
 - **Clothing moves the odds the world acts.** `worn_exposure` shifts the floor of the ambient roll
   at `the_quad` and `the_pledge_house`. Same scenes, twice as much world.
 
-**Surfaces in:** `her_room` (the wardrobe row), and as a predicate everywhere.
+**Surfaces in:** `the_union_shop` (**where she gets them** — the engine's shop screen, off
+`[settings] shop_location`), `her_room` (the engine's wardrobe link, off `wardrobe_location`), and as
+a predicate everywhere.
+
+⚠️ **Both halves are needed and only one used to exist.** Until 2026-09-03 this game declared
+`clothing_enabled`, a `wardrobe_location`, two `initial = false` garments and four conditions reading
+them — and **no `shop_location`**, so nothing could put either garment in the wardrobe. `row_dress`
+and `black_set` are the only garments carrying `exposure = 1` / `type = "going_out"`, which is what
+all four conditions read, so all four were dead and Simone's step 5 could not be entered. **A read is
+only armed if something she can obtain satisfies it.** Gate: `a declared garment can be got`.
 
 `worn_exposure` is the only one of the four worn predicates that reads an empty slot.
 

@@ -46,6 +46,14 @@ starting_week = 1
 narration_person = "second"      # IMMUTABLE once 0.1 ships — changing it rewrites every line
 clothing_enabled = true
 wardrobe_location = "her_room"
+# ⚠️ WITHOUT THIS LINE THE CATALOGUE IS DECORATION. `initial = false` garments have
+#    exactly two ways into a wardrobe: the shop buy button this key switches on
+#    (v2.py:2092), or a `wardrobeEffects` grant on a choice (v2.py:14575). With
+#    neither, `row_dress` and `black_set` were unbuyable, every `worn_exposure` and
+#    `worn_type` condition in the game was unsatisfiable, and simone_05 — and so
+#    simone_06, `simone_open` and `act_pledge_upstairs` behind it — could not be
+#    entered. The engine renders the whole shop; the author writes one key.
+shop_location = "the_union_shop"
 
 [theme]
 mode = "dark"
@@ -360,7 +368,7 @@ ready_canvas = "hub_wes_bathroom"
 npc_id     = "npc_halloran"
 priority   = 1
 text       = "He teaches the eight o'clock to two hundred people and holds office hours for whoever turns up. The floor empties at five."
-tip        = "Office hours are Monday, Wednesday and Friday, four until six. Buy the lab kit on the quad first."
+tip        = "Office hours are Monday, Wednesday and Friday, four until six. Buy the lab kit at the union shop first."
 when       = [ { type = "flag", subject = "player", flag = "met_halloran", op = "is_true" } ]
 goals      = [ { type = "flag", subject = "player", flag = "late_lab_open", op = "is_true", label = "Be in the building after the department has gone" } ]
 ready_canvas = "hub_halloran_office"

@@ -168,8 +168,8 @@
       ],
       "obligation_note": "Collector is a woman, on campus. The house is where the debt LANDS, not where it is charged — that is the inversion the whole game runs on.",
       "buys_a_door": [
-        "the outfit — read by worn_exposure, and Simone's step 5 will not pass without it",
-        "the lab kit — opens the late lab, which is when the department is empty",
+        "the dress — bought on the shop screen at the_union_shop, so it lands in the wardrobe as row_dress. Read by worn_exposure and worn_type; Simone's step 5 will not pass without it",
+        "the lab kit — $28 at the_union_shop, opens the late lab, which is when the department is empty",
         "the semester bus pass — removes the per-crossing fare, so the ride stops being the only cheap way across"
       ],
       "the_offer": "R5e — Ray covers the dues, reachable while she is FINE. NOT gated on being short. Two games with no shared context both wired this behind scarcity (money lt 260, prep lt 30) and made it near-unreachable. Test: can she take this when she doesn't need to?"
@@ -248,7 +248,7 @@
       },
       {
         "id": "the_quad",
-        "job": "Campus ground. The eight o'clock sits here rather than in a hall of its own — a lecture room with two hundred people in it is not a surface. Where the lab kit is bought and where the row of houses is visible from.",
+        "job": "Campus ground. The eight o'clock sits here rather than in a hall of its own — a lecture room with two hundred people in it is not a surface. The hinge of the campus side: the row, the office, the counter and the union shop all hang off it.",
         "anchor": false,
         "fill": 5000,
         "has_cycling_pool": true,
@@ -334,6 +334,18 @@
           "work": [
             "the counter shift"
           ],
+          "people": []
+        }
+      },
+      {
+        "id": "the_union_shop",
+        "job": "The one room on campus that only sells. The engine's shop screen renders here off [settings] shop_location, so the two going_out garments are obtainable at all — and with them every worn_exposure and worn_type condition in the game, and Simone's step 5. The lab kit is the one thing here the shop screen cannot sell, so it keeps a canvas.",
+        "anchor": false,
+        "fill": 500,
+        "has_cycling_pool": false,
+        "serves": {
+          "needs": [],
+          "work": [],
           "people": []
         }
       },
@@ -625,6 +637,10 @@
     {
       "at": "release",
       "note": "2026-09-03 — the five talk_* canvases are FOLDED into their hubs, on LO's call after playing: `Ask him about the campus` was a bare row in the SOLO list with Wes's own portrait six inches above it, and \"him\" pointed at nothing because that lane carries no name. Each pool is now a `talk` node reached by one choice on the hub's base. Two corrections to the 2026-09-02 entry above. (1) A fold does not compete on priority — the pool became a node, not a canvas. (2) Where a p7 surface for the same character at the same place DOES outrank the hub — act_kitchen_late over hub_ray_kitchen, act_pledge_upstairs over hub_simone_office — the pool would have retired the moment the arc converted, so both carry a qualified cross-canvas link (`hub_ray_kitchen.talk`), which template_import resolves globally (template_import.py:7414-7420). Also fixed by the move: 6_dev_shortcuts.toml is the phase `merge_toml_phases.py --no-dev` DROPS BY NAME, so all forty exchanges — this game's whole answer to a 10.7:1 narration ratio — would have vanished from any release merge. Entry cost rises from `rest 3` to the hub's `rest 5`/`rest 6`; every effect value is unchanged. Verified: 46/47 gates with every verdict identical before and after, `bound to a person, no face` 5 findings to 0, all 40 lines present in the built HTML, and the five nodes plus both cross-links clicked live with no JS errors."
+    },
+    {
+      "at": "release",
+      "note": "2026-09-03 — the union shop is a LOCATION, and the clothing system was never switched on. LO, playing: \"Buy the lab kit / Should be in a shop.\" Four defects on top of each other. (1) act_quad_shop was a repeatable row named after one of three things it sold, and it went on saying \"Buy the lab kit\" forever after the kit was bought — corpus-wide the only repeatable canvas whose every offer sat behind a never-unset flag. (2) Its dress choice took $60, set has_dress (which nothing read) and left the wardrobe untouched, because a choice's flagEffects cannot put a garment in a wardrobe. (3) THE REAL ONE: [settings] carried clothing_enabled + wardrobe_location and no shop_location, and the game wrote no wardrobeEffects, so row_dress and black_set were unobtainable. They are the only garments carrying exposure=1 / type=going_out, and all four clothing conditions in the game read one of those two properties — so simone_05 could not be entered (verified live: isCanvasValid === false with every other prerequisite met), simone_06 never set simone_open, and act_pledge_upstairs was sealed for the whole release while two quest cards pointed at it. (4) Two instruments were blind to it: gate 45 counted the purchase's own is_false re-buy guard as a door, and gate 41 counts wardrobe readers without asking whether a reader can be true. Both fixed in gates.py the same day, plus a new gate `a declared garment can be got`. THE FIX: new location the_union_shop off the_quad (the game's own player-facing prose already named it twice — Halloran's locked_text and simone_05's beat), shop_location pointed at it, act_quad_shop replaced by act_shop_kit which retires itself on a trigger condition, has_dress deleted. Verified live: money 300→240 and row_dress lands in the wardrobe; the kit row is absent from links AND locked once owned; simone_05 auto-fires with the dress on and does not without it. ⚠️ NOTHING NON-REPEATABLE OR trigger_mode=random MAY EVER LIVE AT the_union_shop — the Browse Clothes link sits inside the branch that an auto-fire or random redirect skips (v2.py:9902, :9949, :5211). ⚠️ KNOWN AND NOT FIXED: leaving any child of the_quad re-charges the quad's own entry cost (40 min, $2) on the way back, because deductLocationCosts fires whenever destination != current (v2.py:16266). That predates this change and hits the_row, halloran_office and the_counter identically — it reads like the quad's cost being mis-scoped to re-entry from its own children, and it is LO's call. ⚠️ ALSO KNOWN: the shop screen is an info page, so buying costs no game time; the dress used to cost 20 minutes."
     }
   ],
   "arc_log": {

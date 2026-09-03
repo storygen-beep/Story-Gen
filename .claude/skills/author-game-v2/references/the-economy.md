@@ -176,6 +176,54 @@ currency, read zero times, is a FAIL. It fails only on zero, for the same reason
 `the start choice is read` does: one house with one asset is not a distribution, and a floor invented
 at n = 1 is how this skill lost its meter doctrine. The door counts print unjudged.
 
+#### ⚠️ The till's own gate is not a door — and for a year it was counted as one
+
+The gate counted a bought flag's reads as *the flag appearing in any condition anywhere*. But a
+purchase always gates **itself**, in one of two places, and neither is content the money opened:
+
+```
+<flag> is_false  on the BUYING CHOICE            stops selling the same thing twice
+<flag> is_false  on that canvas's TRIGGER        retires the row once it is owned
+```
+
+Every carefully-written purchase therefore collected a free `+1` and could never reach zero.
+Measured 2026-09-03 across the corpus — 10 purchases in 6 games, **6 of them carrying the choice
+form**:
+
+```
+                                     counted   self-gate   real
+commuter      has_pass       $30         2          1        1
+mrs_vance     truck_bought   $2600       5          1        4
+off_season    meter_fed_once $3          1          0        1
+orientation   has_lab_kit    $28         2          1        1
+orientation   has_dress      $60         1          1        0   ← passed on nothing
+orientation   dues_paid_week $120        2          1        1
+the_route     third_scrubs   $28         2          1        1
+the_season    truck_fuelled  $5          0          0        0   caught already
+the_season    has_boots      $20         0          0        0   caught already
+the_season    has_fan        $12         1          1        0   ← passed on nothing
+```
+
+**`orientation/has_dress` is why this matters, and it is the second failure R1b did not name.**
+R1b's shape is *she pays and the game forgets*. The dress was worse: **she paid and never received
+the thing at all.** $60 left the wallet, `has_dress` was set, and the wardrobe was untouched —
+because a choice's `flagEffects` cannot put a garment in a wardrobe. Only the engine's shop
+(`shop_location`) or a `wardrobeEffects` grant can. So the price bought a flag, the flag gated
+nothing, and the garment it named was unobtainable — which killed the anchor character's arc at step
+5. See `the-meters.md` W3 and the gate `a declared garment can be got`.
+
+**Both self-gate forms are excluded now.** The trigger form was 0 of 10 at the time of the fix and
+is excluded in advance: it is exactly what `<flag> is_false` on `[canvases.trigger]` produces, and
+an author writing it would silently re-open the hole. The exclusion is restricted to `is_false` — an
+`is_true` test on the choice that sets the flag can never fire, so it is dead code either way.
+
+⚠️ **No game lost a pass it deserved.** Every purchase with a real reader keeps at least one, and
+the only shape that could false-positive — a purchase whose sole legitimate read is on its own buy
+row — was checked: two buy choices in the corpus carry `show_when_locked`, and neither depends on
+the self-gate for its verdict. **`the start choice is read` was measured for the same blindness and
+is clean: 12 start-choice flags across 4 games, self-gate count 0 on every one.** A start choice is
+set once in the funnel and has no "don't ask twice" pressure to make its setter gate on it.
+
 ### R1c · A repeatable she PAYS for deposits something
 
 The 2026-07-24 field report's critique #4 of us — *"our ambients re-roll but a repeated visit mints

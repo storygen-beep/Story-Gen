@@ -10,7 +10,8 @@
 #                  │              └── wes_room
 #                  └── the_quad ──┬── the_row ── the_pledge_house   ANCHOR
 #                    40 min, $2   ├── halloran_office
-#                                 └── the_counter
+#                                 ├── the_counter
+#                                 └── the_union_shop   SHOP
 #
 # ⚠️ RESTRUCTURED 2026-09-02. This was two_hub with all five house rooms hanging
 #    off the STREET and the pledge house hanging off a lawn — the-map.md R3's own
@@ -290,7 +291,7 @@ image                = "locations/the_quad.jpg"
 image_search_queries = ["college campus quad students walking daytime", "university green lawn buildings students"]
 entry_from           = "the_avenue"
 costs                = { time = 40, money = 2 }
-navigation_order     = ["the_row", "halloran_office", "the_counter"]
+navigation_order     = ["the_row", "halloran_office", "the_counter", "the_union_shop"]
 
 # ═══ THE ROW ═══ This was `act_quad_row`: a canvas whose only content was its own
 # locked_text, whose unlocked choice returned the player to the quad after thirty
@@ -362,6 +363,49 @@ description          = "The coffee counter on the ground floor of the union buil
 image                = "locations/the_counter.jpg"
 image_search_queries = ["campus coffee counter cafe interior students", "small cafe service counter espresso machine"]
 entry_from           = "the_quad"
+
+# ═══ THE UNION SHOP ═══ This was `act_quad_shop`: a canvas standing on open ground,
+# named after one of the three things it sold, whose dress choice took sixty dollars
+# and put nothing in the wardrobe because a choice cannot. The place is already a
+# place in this game's own player-facing prose — Halloran's locked_text says the kit
+# is "twenty-eight dollars at the union shop" (5_scenes.toml) and simone_05 says the
+# dress came "off a rail by the door of the union shop" (4_story_arc.toml). It is
+# ground now, the same promotion `the_row` got.
+#
+# ⚠️ THE SHOP SCREEN IS THE ENGINE'S, NOT AN AUTHORED CANVAS. `shop_location` in
+#    0_systems_spec.toml renders [[Browse Clothes->ShopPage]] here, above the
+#    activity list, on every visit (v2.py:9902 and :9949). Do NOT author a second
+#    "browse the rail" canvas beside it — that is exactly the mistake
+#    act_room_wardrobe made at the wardrobe_location and was deleted for.
+#
+# ⚠️ NOTHING NON-REPEATABLE AND NOTHING trigger_mode="random" MAY LIVE HERE. The
+#    shop link is emitted INSIDE the `<<if _autoFire>><<goto _autoFire>><<else>>`
+#    branch, and getStoryCanvasRedirect fires on a non-repeatable canvas
+#    (v2.py:4696) OR falls through to checkRandomEncounters (v2.py:5211). Either
+#    one redirects the screen before the link is drawn. Put a one-shot meeting or
+#    a random walk-in here and the shop is invisible until it has fired.
+#    `act_shop_kit` is repeatable and manual for exactly this reason.
+[[locations]]
+id                   = "the_union_shop"
+name                 = "The Union Shop"
+description          = "Two aisles and a rail by the door. It sells the lab kit nobody told you was not included, coffee it carries down from the counter, and the kind of dress the row wears on a Thursday, at sixty dollars because they know."
+image                = "locations/the_union_shop.jpg"
+image_search_queries = ["campus university bookstore interior aisles", "small college store clothing rail counter"]
+entry_from           = "the_quad"
+
+# The rail reporting what she has already done at it. This is where the union-shop
+# paragraph that used to sit inside the canvas went.
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "clothing_item", item_id = "row_dress", operator = "owned" },
+] }
+text = "Two aisles and a rail by the door, and you have bought off that rail. The girl at the till rang it through without looking up, which is its own information about how many of you there have been."
+
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 45 },
+] }
+text = "Two aisles and a rail by the door. Two girls stopped talking at the rail when you came in this afternoon and started again after, and one of them was holding the dress you have been costing out for a week."
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -592,6 +636,13 @@ activity   = "door open, marking, and the corridor going quiet around him"
 #
 # ⚠️ WHAT MONEY BUYS OPENS A DOOR. The dress is bought and READ — money buys the KEY
 #    to a rung, never a meter point.
+#
+# ⚠️ AND "READ" ONLY COUNTS IF THE READ CAN BE TRUE. Every `worn_exposure` and
+#    `worn_type` condition in this game names a property that only `row_dress` and
+#    `black_set` carry — the five starting garments are exposure 0 and untyped. Until
+#    `shop_location` shipped, both were unobtainable, so all four reads were dead and
+#    Simone's arc stopped at step 5. Before adding a clothing condition, check that
+#    something the player can actually GET satisfies it.
 
 [[clothing]]
 id      = "plain_bra"
@@ -643,7 +694,15 @@ beauty  = 1
 corruption = 0
 exposure = 0
 
-# ── bought on the quad, read by Simone's step 5 and by the ambient roll ──────
+# ── THE TWO SHE HAS TO BUY. Both reach her through the engine's shop screen at
+#    `the_union_shop` and through nothing else — a choice's `flagEffects` cannot put
+#    a garment in a wardrobe, which is what the old act_quad_shop tried and why $60
+#    used to buy nothing. A non-initial garment needs `price > 0` here AND a
+#    `shop_location` in 0_systems_spec.toml, or a `wardrobeEffects` grant on a
+#    choice. Neither has `conditions`, so getCorruptionThreshold returns 0
+#    (v2.py:1999) and both sit in the always-open Basic tier — right, because this
+#    game has no corruption meter.
+# ── bought at the union shop, read by Simone's step 5 and by the ambient roll ──
 [[clothing]]
 id      = "row_dress"
 name    = "The dress the row wears"

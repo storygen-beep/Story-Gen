@@ -194,12 +194,54 @@ Measured across our 21 games on 2026-08-24: **102 garments in 10 games, 47 reads
 
 **Gate · the wardrobe is read.** A game declaring `[[clothing]]` must read it somewhere. Three
 reader families count, and all three are legitimate: a **condition predicate** (`worn_corruption`,
-`worn_beauty`, `worn_type`, `clothing_slot`, `clothing_item`), a **`player_portrait` outfit
-override** (`when = { worn_type = … }`), or a **location dress code** (`clothing_rules`). The
+`worn_beauty`, `worn_type`, `worn_exposure`, `clothing_slot`, `clothing_item`), a
+**`player_portrait` outfit override** (`when = { worn_type = … }`), or a **location dress code**
+(`clothing_rules`). The
 portrait override is a *display* reader rather than a gate, and **W7 is what says that is the
 field's normal case** — `vesper` reads its wardrobe 21 times and 21 of those are display, which is
 the correct shape, not a shortfall. Same fig-leaf risk as above, answered the same way: the summary
 prints garments against reads, so a thin pass is visible.
+
+**⚠️ AND A READ ONLY COUNTS IF SOMETHING SHE CAN GET SATISFIES IT.** The gate above asks whether
+the wardrobe is read. It cannot ask whether the read can ever be **true**, and for a whole release
+that difference was the game.
+
+```
+orientation 0.1      row_dress   initial=false  exposure=1  type=going_out  $60
+                     black_set   initial=false  exposure=1  type=going_out  $35
+                     5 starting garments        exposure=0  type=none
+```
+
+`[settings]` carried `clothing_enabled = true` and `wardrobe_location` and **no
+`shop_location`**, and the game wrote no `wardrobeEffects` anywhere — so neither garment could be
+obtained. All four clothing conditions in the game read `worn_exposure gte 1` or `worn_type eq
+"going_out"`, properties **only those two carry**. `simone_05` — step 5 of the anchor character's
+six-step arc — triggers on both. Verified live: `isCanvasValid(simone_05) === false` with every
+other prerequisite met, the right day and hour, and $500 in hand. `simone_06` never set
+`simone_open`; `act_pledge_upstairs`, the anchor's repeatable act surface, was sealed for the whole
+release; two quest cards went on pointing the player at it. The scoreboard read **46 of 47 green**.
+
+**Gate · a declared garment can be got.** A `[[clothing]]` entry with `initial = false` needs one of
+the only two routes the engine has: a shop purchase — `[settings] shop_location` naming a **declared
+location** plus `price > 0`, because `renderShopPage` stocks only `!initial && price > 0` — or a
+`wardrobeEffects = [{ item_id = "…", action = "add" }]` on a choice or an `exit_block.config`.
+Zero-based; no threshold to invent. Measured 2026-09-03: **3 of 15 wardrobe games ship 12 garments
+with neither.** `under_one_roof` is the case that fixes the shape of the check — it has a working
+shop and seven non-initial garments at `price = 0`, named for the characters meant to give them
+(`jakes_flannel`, `frank_nice_dress`), invisible on the very page they sit beside. A check reading
+"a shop exists, therefore buyable" reports zero there.
+
+⚠️ **`shop_location` is never validated** (`template_import.py:2536` takes it as a bare string,
+`v2.py:9935` compares it to each location's slug). A typo produces no error, no warning and no shop
+— the same silence as omitting it. After a build, `grep -c "Browse Clothes" <output>/index.html`
+must be 1.
+
+⚠️ **The stronger check — "is this clothing condition satisfiable at all" — was measured and
+declined.** It needs the derived `worn_beauty` / `worn_corruption` MAX aggregate modelled, and a
+check that cannot see the shape of the thing it judges manufactures whatever it can see (the deleted
+gate 22, `the-surfaces.md`). Orientation was the only game in the corpus carrying an unsatisfiable
+one, and its cause was an ungrantable garment — so the exact question reaches the same defect from
+the side that can be answered.
 
 ---
 
