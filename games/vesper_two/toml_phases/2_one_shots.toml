@@ -1,0 +1,363 @@
+# =============================================================================
+# Vesper: Undertow — 2 · the opening funnel and the seven meetings
+#
+# Built from sheets/OPENING.md and the `## The meeting` block on each person
+# sheet. Every window below matches that character's own [[npcs.schedules]] row
+# in phase 1 — check_people.py verifies the two agree.
+#
+# ⚠️ location / is_repeatable / priority / is_active live under [canvases.trigger],
+#    NOT on the [[canvases]] table. A trigger key written one level too high is
+#    DROPPED SILENTLY and the TOML still says what the author meant (gate
+#    `no canvas key is discarded`, engine.md §42).
+# =============================================================================
+
+# --- THE OPENING ------------------------------------------------------------
+# COLD OPEN: names NOBODY. Wren's situation and the pressure, no people at all.
+# The cast arrives through the seven meetings below, each one earning its name.
+
+[[canvases]]
+id          = "open_boot"
+name        = "The Reach, ten in the morning"
+description = "The opening funnel. Two nodes, two screens, and it hands over at kess_berth 10:33 with the feed line live."
+
+[canvases.trigger]
+location      = "underworld_strip"
+is_repeatable = false
+priority      = 14
+is_active     = true
+
+# ── Screen 2 · the boot ──────────────────────────────────────────────────────
+# Three things and no fourth: what she is, who holds the leash (never a NAME),
+# and the pressure. ~150 words.
+
+[[canvases.nodes]]
+id   = "boot"
+name = "The Reach, ten in the morning"
+blocks = [
+  { type = "image", props = { file = "locations/underworld_strip.jpg", description = "A narrow underground market row under a dock road, wet concrete, strip lighting.", search_queries = ["underground market alley wet concrete", "dim industrial market row night"] } },
+  { type = "paragraph", content = "You are a Vance Dynamics asset. That is not a job description. It is what you are made of, and it means the company owns the body you are standing in, down to the seam under your ribs and the charge that runs behind it." },
+  { type = "paragraph", content = "The charge is going down. It goes down every day, and there is one place under the dock road that will put it back, and the man who owns that place wants ten a night for it." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Ten a night, love, same as it was yesterday. Nobody down here runs a tab." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "You have five." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# ⚠️ A CHOICE cannot be a location exit — an exit_block is EITHER `choices` OR
+# `location` (validator: "choices[0].targetType invalid"). So the three answers
+# set their flag and route to one node, and THAT node carries the location exit.
+# The F3 sum is unchanged: 10:00 boot -> +3 past -> +30 exit = 10:33.
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Hands. Weather. Other people's cargo."
+targetType  = "node"
+nodeId      = "open_boot.past"
+flagEffects = [ { targetType = "player", flag = "past_field", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Somebody paid for me before they did."
+targetType  = "node"
+nodeId      = "open_boot.past"
+flagEffects = [ { targetType = "player", flag = "past_house", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text        = "I have stood on a floor like this."
+targetType  = "node"
+nodeId      = "open_boot.past"
+flagEffects = [ { targetType = "player", flag = "past_floor", op = "set" } ]
+
+# ── Screen 3 · the handover ──────────────────────────────────────────────────
+
+[[canvases.nodes]]
+id   = "past"
+name = "Down off the row"
+blocks = [
+  { type = "paragraph", content = "Whatever that was, the company has no file on it and neither do you. The charge is still going down and the berth is still forty paces along the row." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go and see what ten a night buys."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "kess_berth"
+time_progression_minutes = 30
+
+# =============================================================================
+# THE SEVEN MEETINGS
+#
+# F5 · no character's portrait is live before a meeting has fired.
+# F8 · ONE FLAG PER CHARACTER — one flag never opens the whole cast.
+#
+# ⚠️ Each carries trigger.schedules matching that character's OWN hours.
+#    `requires_npc` does NOT gate the auto-fire path (v2.py:4559), so without a
+#    schedule window the introduction plays to an EMPTY ROOM. Vesper scored 0/18.
+#
+# ⚠️ `npc` on the trigger renders the portrait AND gates on that character's
+#    own schedule. F6: field median 101 words, 64% carrying spoken dialogue.
+#    F7: ROLE BEFORE NAME — what he is, then who he is.
+# =============================================================================
+
+[[canvases]]
+id          = "meet_kess"
+name        = "The mechanic"
+description = "F5 meeting · Kess · opens hub_kess via met_kess. Fires on the landing screen."
+
+[canvases.trigger]
+location      = "kess_berth"
+npc           = "npc_kess"
+is_repeatable = false
+priority      = 11
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "10:00"
+end_time   = "22:00"
+
+[[canvases.nodes]]
+id   = "meet"
+name = "The mechanic"
+blocks = [
+  { type = "paragraph", content = "The man at the bench does not look up. He is stripping something decommissioned and he keeps doing it while you stand there, and when he does look it is at the frame rather than the face." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Company steel. Get out." },
+  { type = "paragraph", content = "Then he looks again, longer, because nobody under the dock road can afford a frame like the one he is looking at." },
+  { type = "paragraph", content = "He is the only synth mechanic under the dock road and the row's opinion is that he is worth the walk. He puts the part down. He does not put the pliers down." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Ten a night for the line. That buys the charge and a few days of me caring what is wrong with you." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Kess. You will hear it off the row anyway and I would rather you heard it right." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Tell him what you need."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "kess_berth"
+flagEffects = [ { targetType = "player", flag = "met_kess", op = "set" } ]
+effects     = [ { targetType = "npc", npcId = "npc_kess", trait = "relation", op = "add", value = 3 } ]
+
+[[canvases]]
+id          = "meet_colm"
+name        = "The courier"
+description = "F5 meeting · Colm · opens hub_colm via met_colm."
+
+[canvases.trigger]
+location      = "underworld_bar"
+npc           = "npc_colm"
+is_repeatable = false
+priority      = 11
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time   = "23:59"
+
+[[canvases.nodes]]
+id   = "meet"
+name = "The courier"
+blocks = [
+  { type = "paragraph", content = "There is a man at the end of the bar with a delivery he is drinking through. He starts talking before you have finished putting the glass down." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "You are new. I would remember. I remember everything until about nine." },
+  { type = "paragraph", content = "He tells you what is in the crate, who it is for, and which of the two he is annoyed about. None of it was asked for." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Keep his glass full."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_bar"
+flagEffects = [ { targetType = "player", flag = "met_colm", op = "set" } ]
+effects     = [ { targetType = "npc", npcId = "npc_colm", trait = "relation", op = "add", value = 3 } ]
+
+[[canvases]]
+id          = "meet_renner"
+name        = "The depot owner"
+description = "F5 meeting · Renner · opens hub_renner via met_renner."
+
+[canvases.trigger]
+location      = "renner_depot"
+npc           = "npc_renner"
+is_repeatable = false
+priority      = 11
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "09:00"
+end_time   = "18:00"
+
+[[canvases.nodes]]
+id   = "meet"
+name = "The depot owner"
+blocks = [
+  { type = "paragraph", content = "The yard is half empty and the man running it is hiring hands off the road. He does not look at the one he hires." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Rows four to nine. Twelve for the day. Do not talk to me while I am counting." },
+  { type = "paragraph", content = "That is the whole interview." },
+  { type = "paragraph", content = "The coveralls come off a hook by the door and they are somebody's old ones. Renner does not say whose and does not watch you put them on, and they are the first thing in this city that is yours." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take it."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "renner_depot"
+wardrobeEffects = [ { action = "add", item_id = "cover_dockhand" } ]
+flagEffects = [ { targetType = "player", flag = "met_renner", op = "set" } ]
+effects     = [ { targetType = "npc", npcId = "npc_renner", trait = "relation", op = "add", value = 2 } ]
+
+[[canvases]]
+id          = "meet_calloway"
+name        = "The rogue-hunter"
+description = "F5 meeting · Calloway · opens hub_calloway via met_calloway."
+
+[canvases.trigger]
+location      = "vance_securities"
+npc           = "npc_calloway"
+is_repeatable = false
+priority      = 11
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "20:00"
+
+[[canvases.nodes]]
+id   = "meet"
+name = "The rogue-hunter"
+blocks = [
+  { type = "paragraph", content = "The file room is being audited shut around a man who is mid-sentence with himself. He does not stop when you come in. He redirects." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "Two years. Two years of copies going out and nothing going missing, and they have me down as the crank who cannot count." },
+  { type = "paragraph", content = "He explains the whole case to you because you are standing there, and he has been waiting a long time for somebody to be standing there." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Listen to all of it."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "vance_securities"
+flagEffects = [ { targetType = "player", flag = "met_calloway", op = "set" } ]
+effects     = [ { targetType = "npc", npcId = "npc_calloway", trait = "relation", op = "add", value = 4 } ]
+
+[[canvases]]
+id          = "meet_bastien"
+name        = "The man who owns the room"
+description = "F5 meeting · Bastien · opens hub_bastien via met_bastien."
+
+[canvases.trigger]
+location      = "bastien_backroom"
+npc           = "npc_bastien"
+is_repeatable = false
+priority      = 11
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "20:00"
+end_time   = "23:59"
+
+[[canvases.nodes]]
+id   = "meet"
+name = "The man who owns the room"
+blocks = [
+  { type = "paragraph", content = "The man behind the bar's own door already knows whose you are. He says so the way you would mention the weather." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Mercer's. Down here on your own feet, which is new. Arms out." },
+  { type = "paragraph", content = "He searches you at the door and he is not enjoying it, and he does not pretend to be. He is checking where things are." },
+  { type = "paragraph", content = "He owns the bar and the room behind it and does not work either. What he does is sit at a threshold and find out things, and the whole row is careful with him for a reason none of them can name." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Bastien. You will hear it before you need it. Everybody does." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Arms out."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "bastien_backroom"
+flagEffects = [ { targetType = "player", flag = "met_bastien", op = "set" } ]
+effects     = [ { targetType = "npc", npcId = "npc_bastien", trait = "relation", op = "add", value = 3 } ]
+
+[[canvases]]
+id          = "meet_mercer"
+name        = "The man who used to own you"
+description = "F5 meeting · Mercer · opens hub_mercer via met_mercer."
+
+[canvases.trigger]
+location      = "penthouse"
+npc           = "npc_mercer"
+is_repeatable = false
+priority      = 11
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "23:00"
+
+[[canvases.nodes]]
+id   = "meet"
+name = "The man who used to own you"
+blocks = [
+  { type = "paragraph", content = "He says your name before you have said anything, and he says it the way a man says the name of a good tool he thought he had lost." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Wren. Look at you. Come in, come in — the floor is quieter than it was." },
+  { type = "paragraph", content = "The floor is quieter than it was. The desk is the same desk and the view is the same view and there is nobody in the outer office at all." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let him be pleased."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "penthouse"
+flagEffects = [ { targetType = "player", flag = "met_mercer", op = "set" } ]
+effects     = [ { targetType = "npc", npcId = "npc_mercer", trait = "relation", op = "add", value = 4 } ]
+
+[[canvases]]
+id          = "meet_marsh"
+name        = "The fixer"
+description = "F5 meeting · Marsh · opens hub_marsh via met_marsh. SUNDAY ONLY — his schedule row is weekdays = [6]."
+
+[canvases.trigger]
+location      = "underworld_brothel"
+npc           = "npc_marsh"
+is_repeatable = false
+priority      = 11
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "20:00"
+end_time   = "23:59"
+
+[[canvases.nodes]]
+id   = "meet"
+name = "The fixer"
+blocks = [
+  { type = "paragraph", content = "He is waiting on the hour he booked and you are not what he booked. He checks the time before he asks about it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "The arrangement was for eight. Is the arrangement different now, or is this a mistake I am paying for?" },
+  { type = "paragraph", content = "He is a fixer off the dock road, which down here means he knows who owes what and takes a cut of the settling. Two years of the same hour and he has never asked whose body was in it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "Marsh. You will not need it, but the desk likes both names on the slate and I have stopped arguing with the desk." },
+  { type = "paragraph", content = "One question about the arrangement, and none at all about you." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Tell him the slot can be bought."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_brothel"
+flagEffects = [ { targetType = "player", flag = "met_marsh", op = "set" } ]
+effects     = [ { targetType = "npc", npcId = "npc_marsh", trait = "relation", op = "add", value = 2 } ]
+

@@ -1,0 +1,315 @@
+# =============================================================================
+# Vesper: Undertow — 0 · systems spec
+#
+# Generated from the SIGNED sheets. Every value here traces to v2_state.json or
+# to a sheet; nothing was invented at TOML time.
+#
+# ⚠️ NEVER hand-edit 7_final_game.toml — it is the merge output.
+# =============================================================================
+
+[project]
+id              = "vesper_two"
+title           = "Vesper: Undertow"
+version         = "0.1"
+release_date    = "2026-09-03"
+starting_canvas = "open_boot"
+
+# ⚠️ The title is NOT "Vesper". In-browser save slots namespace off
+# Util.slugify(title) (the-returning-player.md:129, engine.md:2338), so an
+# identical title would collide with the live vesper v0.2.0 in a returning
+# player's browser. Frozen from here — engine.md §40.
+
+[settings]
+narration_person  = "second"          # per-game, IMMUTABLE after v0.1 ships
+clothing_enabled  = true
+wardrobe_location = "kess_berth"
+quests_engine     = "v2"
+
+# ⚠️ wardrobe_location renders [[Change Clothes->WardrobePage]] on that room's
+# screen UNCONDITIONALLY (v2.py:9814), above the portrait row. Do NOT author a
+# second wardrobe canvas beside it — orientation did, and the authored one is
+# the one that did not work. kess_berth's place sheet records the deletion.
+
+# ⚠️ [settings.rent] is deliberately ABSENT. due_day takes weekday names only and
+# arms at 00:00 (engine.md §26), so the engine's demand is WEEKLY and cannot
+# express the feed line's nightly ten. The charge is a `costs` entry on the bench
+# night row instead — ONE channel, and no authored canvas narrates a payment the
+# engine is making.
+
+[time]
+starting_hour = 10
+starting_day  = "Monday"
+starting_week = 1
+
+# F3, computed on OPENING.md and checked by the gate:
+#   10:00 boot renders · +3 default node hop (v2.py:13200) · +30 location exit
+#   = 10:33 at kess_berth, inside Kess's 10:00–22:00 row.
+
+[player]
+id          = "player"
+name        = "Wren"
+description = "A Vance Dynamics asset. She serves the company and the man who owns her and she is good at it. She has no self yet and is not looking for one."
+portrait    = "wren.jpg"
+customizable = false
+
+# ⚠️ customizable = false is REQUIRED here, not incidental. Setting it true with a
+# declared field builds a CustomizeCharacters passage and REPOINTS THE AGE GATE AT
+# IT (v2.py:1065, :9251), whose headings are hard-coded product voice. The Want
+# declines a creation step; OPENING.md records the absence deliberately.
+
+[player.core_traits]
+charge      = 100      # the body's clock — a declared need
+clean       = 100      # what is on her — a declared need
+coin        = 5        # the currency. She lands unable to afford the night.
+cover       = 0        # ascent tier
+service     = 0        # ascent tier
+drain       = 0        # ascent tier
+seated      = 0        # the SOURCED system — fed only at kess_berth
+arousal     = 0        # throttle: gates the act menu and nothing else
+colm_drinks = 0        # rises with the hour, cleared nightly — Colm's band axis
+kess_refusals = 0      # ⚠️ counts, so it is a TRAIT. At 3 it sets kess_closed and
+                       #    FREEZES `seated` for the rest of the game — the most
+                       #    expensive door in v0.1 (sheets/people/kess.md).
+
+[player.trait_decay]
+charge = 20            # ⚠️ POSITIVE magnitudes — the amount to LOSE, not a delta.
+clean  = 10            #    `-10` is rejected with "must be >= 0" (engine.md §11).
+
+# --- the sidebar -------------------------------------------------------------
+# F4's other half: a banded stat reading near-empty against its ceiling IS the
+# "there is a climb ahead" read on frame one, with no teach screen.
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "cover"
+# ⚠️ Banded to what v0.1 REACHES (highest authored gate: 20). The 40/65/90 bands
+# this shipped with promised a climb the release does not contain.
+bands = [
+  { min = 0,  max = 4,   text = "company issue" },
+  { min = 5,  max = 9,   text = "passes at a glance" },
+  { min = 10, max = 14,  text = "dressed for the room" },
+  { min = 15, max = 19,  text = "dressed to be looked at" },
+  { min = 20, max = 100, text = "whatever the door wants" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "service"
+bands = [
+  { min = 0,  max = 9,   text = "used where she is put" },
+  { min = 10, max = 19,  text = "known on the floor" },
+  { min = 20, max = 29,  text = "asked for" },
+  { min = 30, max = 39,  text = "booked" },
+  { min = 40, max = 100, text = "choosing" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "drain"
+bands = [
+  { min = 0,  max = 4,   text = "on order" },
+  { min = 5,  max = 9,   text = "when it suits her" },
+  { min = 10, max = 14,  text = "a way in" },
+  { min = 15, max = 19,  text = "a reason to be careful" },
+  { min = 20, max = 100, text = "hers" },
+]
+
+# ⚠️ A banded sidebar stat MUST be hidden in [[traits.labels]] or the band AND the
+# raw number both render (engine.md §30). Vesper shipped energy and hygiene banded
+# and unhidden, and gate `a banded meter is not also a number` failed on both.
+
+[[traits.labels]]
+key    = "cover"
+label  = "Cover"
+hidden = true
+
+[[traits.labels]]
+key    = "service"
+label  = "Service"
+hidden = true
+
+[[traits.labels]]
+key    = "drain"
+label  = "Drain"
+hidden = true
+
+[[traits.labels]]
+key   = "charge"
+label = "Charge"
+
+[[traits.labels]]
+key   = "clean"
+label = "Clean"
+
+[[traits.labels]]
+key   = "coin"
+label = "Coin"
+
+# --- the sidebar portrait ------------------------------------------------------
+# ⚠️ Eight wren_*.jpg states have been on disk the whole time and nothing read
+# them. The place sheet: "this is the room where she undresses, so it is where the
+# state-reactive sidebar portrait earns itself."
+#
+# The four undress images fire off an actually-cleared slot (the wardrobe rack).
+# The outfit rules are keyed on the dominant dress `type`, first match wins
+# (template_import.py:743-745). This is a DISPLAY reader, not a gate.
+
+[player_portrait]
+enabled          = true
+default_image    = "portraits/wren_grays.jpg"
+naked_image      = "portraits/wren_naked.jpg"
+topless_image    = "portraits/wren_topless.jpg"
+bottomless_image = "portraits/wren_bottomless.jpg"
+underwear_image  = "portraits/wren_underwear.jpg"
+
+[[player_portrait.outfits]]
+image = "portraits/wren_cover.jpg"
+when  = { worn_type = "cover" }
+
+[[player_portrait.outfits]]
+image = "portraits/wren_cover_analyst.jpg"
+when  = { worn_type = "cover_analyst" }
+
+[[player_portrait.outfits]]
+image = "portraits/wren_cover_stranger.jpg"
+when  = { worn_type = "cover_stranger" }
+
+# --- the day rollover --------------------------------------------------------
+# The only clean way to day-cap a triggerless rung (engine.md §28). A cap has
+# THREE parts — read is_false on the trigger, SET by a choice inside, CLEARED
+# here — and two of three validates while throttling nothing.
+
+# ⚠️ THE KEYS ARE flagEffects / traitEffects (template_import.py:2714-2769).
+# This block first shipped with `clear_flags` / `set_traits`, which are INVENTED.
+# Valid TOML, green build, importer silently ignored the lot, and gates.py said
+# "no [engine.daily_tick] flag clears" against three declared clears. That is the
+# silent-vocabulary failure this skill warns about, written into the same file as
+# the warning. `op = "unset"` is the mechanism behind every _today flag.
+
+[engine.daily_tick]
+flagEffects = [
+  { targetType = "player", flag = "bench_used_today",   op = "unset" },
+  { targetType = "player", flag = "brothel_hour_today", op = "unset" },
+  { targetType = "player", flag = "bar_shift_today",    op = "unset" },
+  { targetType = "player", flag = "case_worked_today",  op = "unset" },
+  { targetType = "player", flag = "haul_done_today",    op = "unset" },
+  { targetType = "player", flag = "informant_asked_today", op = "unset" },
+  { targetType = "player", flag = "bar_open_today",        op = "unset" },
+  { targetType = "player", flag = "upstairs_today",        op = "unset" },
+  { targetType = "player", flag = "round_bought_today",    op = "unset" },
+  { targetType = "player", flag = "hands_today",           op = "unset" },
+  { targetType = "player", flag = "lockin_today",          op = "unset" },
+  { targetType = "player", flag = "searched_today",        op = "unset" },
+]
+traitEffects = [
+  { targetType = "player", trait = "colm_drinks", op = "set", value = 0 },
+]
+
+# --- guidance ----------------------------------------------------------------
+# ⚠️ quests_engine = "v2" turns the sidebar entry and the page ON. Authoring no
+# cards leaves a nav link to a heading with nothing under it (engine.md §23).
+#
+# ⚠️ v0.1 arcs stop at a BUILD boundary, not at an ending. "Arc complete" is a
+# stronger and falser claim than the wall these tracks actually hit, so each
+# track carries its own honest marker instead (the-release.md:107-110).
+#
+# ⚠️ A quest-card condition uses `trait` + `op`. A CANVAS condition uses
+# `trait_key` + `operator`. Same word, two parsers (engine.md §41b).
+
+[[quest_cards]]
+id   = "card_the_night"
+text = "Ten coin a night, paid to Kess at the berth. Off the line she runs down."
+tip  = "The Undertow pays for a shift on the floor. The Reach, after dark."
+
+[[quest_cards]]
+id   = "card_cover"
+text = "The Spire reads what she is wearing before it reads anything else."
+tip  = "The wardrobe is at the berth."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait = "cover", op = "gte", value = 5 },
+] }
+
+[[quest_cards]]
+id   = "card_drain"
+text = "The drain only fires with something seated, and only above thirty charge."
+tip  = "Kess seats parts. He wants coin and the interesting problem."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait = "drain", op = "gte", value = 0 },
+] }
+
+[[quest_cards]]
+id   = "card_service"
+text = "Who she will let use her, and where. The back rooms open before the rooms behind those."
+tip  = "The Undertow's floor, after dark."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait = "service", op = "gte", value = 0 },
+] }
+
+[[quest_cards]]
+id     = "card_kess"
+npc_id = "npc_kess"
+text = "Kess wants coin and the interesting problem. The bench is the only place anything gets put inside her on purpose."
+tip  = "The berth, ten to ten."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag = "met_kess", op = "is_true" },
+] }
+
+[[quest_cards]]
+id     = "card_renner"
+npc_id = "npc_renner"
+text = "Renner hires cheap hands and does not look up. The crew clocks out at five and he does not."
+tip  = "The depot, nine to six."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag = "met_renner", op = "is_true" },
+] }
+
+[[quest_cards]]
+id     = "card_bastien"
+npc_id = "npc_bastien"
+text = "Bastien searches her at the door every visit. What he has never permitted is being read himself."
+tip  = "Behind the Undertow, after eight."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag = "met_bastien", op = "is_true" },
+] }
+
+[[quest_cards]]
+id     = "card_calloway"
+npc_id = "npc_calloway"
+text = "Calloway is starving to be believed. The audit closes his room in a fortnight."
+tip  = "Vance Securities. The auditors go at six."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag = "met_calloway", op = "is_true" },
+] }
+
+[[quest_cards]]
+id     = "card_colm"
+npc_id = "npc_colm"
+text = "Colm talks with a drink in him, and after nine he will answer anything."
+tip  = "The end of the Undertow's bar."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag = "met_colm", op = "is_true" },
+] }
+
+[[quest_cards]]
+id     = "card_marsh"
+npc_id = "npc_marsh"
+text = "Marsh books the same hour every Sunday and does not care whose body is in it."
+tip  = "The House. Sunday evening, and the slot belongs to somebody else."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag = "met_marsh", op = "is_true" },
+] }
+
+[[quest_cards]]
+id     = "card_mercer"
+npc_id = "npc_mercer"
+text = "Mercer owns her and it costs him nothing. He is fond of her the way a man is fond of a good tool."
+tip  = "The penthouse by day. The stall under the dock road by night."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag = "met_mercer", op = "is_true" },
+] }
+
+[[quest_cards]]
+id            = "card_wall"
+text          = "This is as far as the build goes. Everything above still has rungs on it."
+terminal      = true
+terminal_text = "The wall for this release"

@@ -1,0 +1,769 @@
+{
+  "slug": "vesper_two",
+  "phase": "sheets",
+  "narration_person": "second",
+  "protagonist": "Wren",
+  "want": {
+    "player": {
+      "who": "female",
+      "definition": "written",
+      "start_choice": {
+        "asked_at": "TBD — assigned in the board phase, in the opening funnel's own scene",
+        "flags": [
+          "past_field",
+          "past_house",
+          "past_floor"
+        ]
+      }
+    },
+    "who_she_is": "Wren, a Vance Dynamics asset. She serves the company and the man who owns her and she is good at it. She has no self yet and is not looking for one.",
+    "obligation": "The feed line — ten coin a night, paid to Kess at the berth. A paid night buys her charge and a few days of his attention. Miss it and she is off the line, and off the line she runs down.",
+    "appetite": "To be the one who decides who gets used. She starts as the thing the company points at people; every man in the city is above her. It cannot be finished — there is always another hand higher up the leash. When the coin stops counting the act does not change, only the reason does.",
+    "ascent": "At the bottom she takes what she is given, in the two rooms she is allowed into, in what she was issued. At the top she picks the man, the room and the hour, and walks into places that would have thrown her out. Three tiers, climbed separately: cover (how brazenly she wears the body as a tool), service (who she will let use her, and where), drain (taking a man in order to take something off him).",
+    "charge": "reversal",
+    "why_this_person": {
+      "npc_mercer": "He owns her and it costs him nothing. He is fond of her the way a man is fond of a good tool, and he will never notice her change. The top of the leash and the last door.",
+      "npc_renner": "Cold, mean and clawing at a gutted business. He ignores her and then he cannot. She climbs him from cheap hands upward, and every rung is her doing it on purpose.",
+      "npc_bastien": "He caught her. He strips her at the door every visit because he knows where she carries the drain, and his lever is curiosity rather than desire. The one man who wants to read her.",
+      "npc_calloway": "He is starving to be believed. She takes his hunt seriously and that is the whole seduction — the first time she holds something a man needs.",
+      "npc_colm": "Cold and fast and nothing else. He is what an easy one feels like once she has had hard ones, and the rung where the act stops being an event.",
+      "npc_marsh": "He pays and does not care whose body is in the slot. The honest version of what the company does to her, and the first time she chooses a mark.",
+      "npc_kess": "He reads bodies as hardware and hers as an interesting problem. Her landlord, her charge and her repair — the one man who wants nothing off her but coin.",
+      "npc_cain": "Named, seen once, out of reach. The company says he is the thing she is for. The door this release closes on."
+    },
+    "crude_ceiling": {
+      "npc_mercer": [
+        "cock",
+        "cunt",
+        "ass",
+        "tits",
+        "throat",
+        "cum"
+      ],
+      "npc_renner": [
+        "cock",
+        "cunt",
+        "ass",
+        "tits",
+        "cum"
+      ],
+      "npc_bastien": [
+        "cock",
+        "cunt",
+        "ass",
+        "cum"
+      ],
+      "npc_calloway": [
+        "cock",
+        "cunt",
+        "ass",
+        "cum"
+      ],
+      "npc_colm": [
+        "cock",
+        "cunt",
+        "ass",
+        "cum"
+      ],
+      "npc_marsh": [
+        "cock",
+        "cunt",
+        "ass",
+        "cum"
+      ],
+      "npc_kess": [
+        "no sex — the seam: hands inside her, parts seated, what she does while he works"
+      ],
+      "npc_cain": []
+    },
+    "last_read_at_release": "0.1"
+  },
+  "releases": [],
+  "promises": [
+    {
+      "text": "Cain — named, seen once and unreachable. v0.1 closes on his door.",
+      "made_in": "0.1",
+      "paid_in": null
+    }
+  ],
+  "decisions": [
+    {
+      "at": "0.1",
+      "note": "The ascent is INVERTED from the shipped game's. games/vesper declared her axis as 'the awakening: chip fragments + the accumulating glitch-dread' (design_book.md:595) and started her pre-maxed — 'she starts at the bottom of herself' (:563). That is a plot ladder, and it produced the whole failure set on gates.py vesper (17 PASS / 22 FAIL / 11 n/a): explicit floor 4.3%, heat sealed one-time in captive_room, ascent tiers reading case_progress / names_known, and 17 of 18 gated meters raisable for free because there was no climb to brake. WHAT REPLACES IT: three access tiers — cover, service, drain — each already media-complete on disk. The cost is that Wren no longer starts at her sexual ceiling, so the shipped game's captivity material has no home here."
+    },
+    {
+      "at": "0.1",
+      "note": "Cast cut from 17 to 8, driven by media already paid for. KEPT: Mercer (16 act pools), Renner (9, and the only graded on-ramp on disk — tease_t2 / flash_t3 / grope_t4), Bastien (8), Marsh (7), Calloway (7), Colm (7), Kess (no acts; he is the obligation's collector), Cain (no acts; the locked door). CUT: Sol, Rue, Vane, Enns, Voss, Reyes, Marr, Grier, Sabin. Grier and Sabin have neither face nor acts and would start from zero media. The cost is that Sol's informant function and Rue's brothel-slot obstacle both need re-homing if the Undertow keeps its shape."
+    },
+    {
+      "at": "0.1",
+      "note": "Story title is 'Vesper: Undertow', NOT 'Vesper'. In-browser save slots namespace off Util.slugify(title) (the-returning-player.md:129, engine.md:2338), so an identical title would collide with the live vesper v0.2.0 in a returning player's browser. Exported .save files survive a title change; in-browser slots do not."
+    },
+    {
+      "at": "0.1",
+      "note": "definition = 'written' chosen AGAINST the field, which runs 19 blank to 10 written with blank holding 80.4% of top-30 engagement (the-want.md:58). Reason: eight Wren portrait states, six complete act ladders and a wardrobe are already keyed to a named woman. What blank buys is bought instead by the start choice — past_field / past_house / past_floor, read as bands on the standing surfaces rather than as a stat screen."
+    },
+    {
+      "at": "0.1",
+      "note": "OPEN — 'grays' (the company uniform) is flagged by gates.py --words as a noun none of the 27 field games use. It is already on disk as videos/clothing/company_grays.jpg, so it is no longer a soft noun; renaming costs a media rename. Recorded rather than silently kept. Decide before the board phase names garments."
+    },
+    {
+      "at": "0.1",
+      "note": "Charge channel: the feed line is a `costs` entry on the berth rung, NOT `[settings.rent]`. `due_day` takes weekday names only and the demand arms at 00:00 on that day (engine.md 26, v2.py:5615), so the engine's system is weekly and cannot express a nightly charge. obligation_amount is therefore declared as 10 — the amount ONE charge takes, which is what gate 24 compares against the largest authored outflow (gates.py:5901) — with the weekly 70 carried in the obligation prose. ONE channel only: no authored canvas narrates a payment the engine is making, because the measured failure shipped both and the free duplicate was the one with the writing in it."
+    },
+    {
+      "at": "0.1",
+      "note": "board.systems was missing `service` and `drain`. Both are declared ascent tiers, and the-systems.md:39 is explicit that a meter is one kind of system — so a tier absent from board.systems is a thing the game keeps track of that the systems list does not know about. Found while writing the system sheets, which is what the sheets phase is for. Both declared `ambient`: they are fed at every act surface, which is most rooms. Ambient-fed is not thinly-read — DoL raises promiscuity in 22 places and gates on it in 206."
+    },
+    {
+      "at": "0.1",
+      "note": "Mercer holds TWO rooms and the first draft made them contradictory: the penthouse sheet had him owning a Spire floor 08:00-23:00 while the stall sheet had him 'blown and hiding under a flat new name'. Those are two states of the same character from the shipped game's timeline, declared as simultaneous. Resolved: he is not hiding, he is SLIDING — the penthouse by day because his position still just holds, the stall by night because it does not. Found by writing his arc, not by reading the place sheets, which is the sheets phase working as intended."
+    },
+    {
+      "at": "0.1",
+      "note": "kess_berth's 'The wardrobe.' row was DELETED. Declaring wardrobe_location renders [[Change Clothes->WardrobePage]] on that location's screen unconditionally (v2.py:9814), above the portrait row, on every visit. An authored canvas beside it is a second door and is the one that does not work — orientation shipped exactly that. The room now has 3 rows, which is the field median."
+    },
+    {
+      "at": "0.1",
+      "note": "`grays` CLOSED — LO's call 2026-09-03: it stays. gates.py --words flags it as a noun none of the 27 field games use, and it was logged as open because videos/clothing/company_grays.jpg already exists so a rename would cost a media rename. LO kept the noun; no rename, and the lint entry is now an accepted cost rather than an open question."
+    },
+    {
+      "at": "0.1",
+      "note": "board.who_climbs corrected `player` -> `both`. It was declared in the board phase before a single arc existed, and gate 34 now measures 19 gate sites on the declared tiers against 18 on per-character meters — 49%, against the 60% a `player` declaration wants. That split is not a defect: every arc in this game is spined on `relation`, and the three tiers are the floor under them. the-meters.md W1 describes `both` as exactly that — 'a player tier as the FLOOR under per-character arcs' — and asks for >=25% each. The declaration was wrong, not the content."
+    },
+    {
+      "date": "2026-09-03",
+      "pass": "E7",
+      "what": "The five empty rooms got prose, the brake moved onto the entering choices, and the file became a milestone.",
+      "why": "Three reds went in and one came out. `the climb is paid for` was fixed by reading gates.py:3470-3504 rather than guessing a third time: `routes` is keyed by the TARGET canvas, the brake is read off the choice that ENTERS it, and an intra-canvas nodeId is skipped outright — so both earlier fixes were priced somewhere the gate cannot look. `milestones open something` went 41/41 on a past_floor-gated bar rung: a start choice buys reach, not flavour. `location fill` is still red and the budgets were NOT re-declared to match delivery — that is the failure gate 1 exists to catch.",
+      "evidence": [
+        "43/44 judged gates pass; the single red is `location fill`, 9,629 of 29,600 words.",
+        "Zero locations with nothing placed (was five); 4/14 now on their own budget (was 0/14).",
+        "18 block_pools live — the primitive documented in four places and used by zero v2 games until now.",
+        "somebody speaks 4.2:1 against a 5:1 ceiling, improved from 4.8:1 while adding 3,058 words.",
+        "check_beats 68/68 no findings; check_people no findings; git status games/vesper empty."
+      ],
+      "defects_i_caused_and_fixed": [
+        "amb_the_street shipped three consecutive [group] blocks with an unconditioned one in the middle — _render_group_chain (v2.py:14561-14568) folds consecutive groups into ONE if/elseif chain, so the past_field band could never render. Pools now separate every run.",
+        "act_bar_work's new rung put its coin on the outcome node's location exit instead of on the capped choice, so the grant and the cap sat on different holders and two gates went red.",
+        "A [[canvases.nodes]] block inserted before the wrong [[canvases]] silently re-parented the whole loop_calloway_files canvas — the same binding trap [[npcs.schedules]] has."
+      ],
+      "open": [
+        "location fill: ~20,000 words outstanding. underworld_bar is the declared anchor at 842 of 9,000 and the game currently has NO anchor — mercer_room holds 16.4% against a planned 30%.",
+        "Two gates.py instrument bugs still await LO's call: `the opening opens a door` can never pass (funnel walker keys nodes bare at :3587, tests qualified at :3609), and the-board.md:463 tells authors to run the scoreboard at board phase while gates.py hard-requires 7_final_game.toml.",
+        "A one-time flag is a HARDER cap than a day cap, and _holder_day_capped credits only daily_tick-cleared flags. Worked around by authoring the milestone as its own canvas; worth raising as a third instrument note rather than a game fix."
+      ]
+    },
+    {
+      "date": "2026-09-03",
+      "pass": "E8",
+      "what": "The anchor. underworld_bar 842 → 6,788 and the bathroom 80 → 490, both inside their declared ±25%.",
+      "why": "The bar was not under-written, it was under-POPULATED. Canvas by canvas the anchor's surfaces were the same size as every satellite's — act_bar_work 259 words against loop_marsh_sunday's 251 — and nobody was in the room from 08:00 to 19:00. The place sheet's own ladder stopped a rung short: 'counter → floor → the room upstairs' and the build ended at the dress. So the pass gave the anchor the things an anchor has rather than adding paragraphs to what was there.",
+      "built": [
+        "act_bar_open — the day shift, 08:00-19:00, four rows, no NPC as the object of any verb.",
+        "loop_upstairs — the sheet's missing third rung, FOUR rungs of its own (40/60/100/200), opened by `service` and paid for at the bar up front.",
+        "amb_undertow_floor — the room when she is not working it, with hour bands.",
+        "walkin_bar_hands, walkin_bar_booking, walkin_bar_lockin — three more branches on the anchor's dispatch; the booking one routes into loop_upstairs rather than dead-ending.",
+        "Colm pooled: his hub, his three drink bands, both finishes, the informant, his walk-in.",
+        "act_wash rebuilt from 80 words to 490, and the four bar rungs given three phrasings each."
+      ],
+      "evidence": [
+        "43/44 judged gates pass; the single red is `location fill`, 15,985 of 29,600.",
+        "underworld_bar and underworld_bar_bathroom both dropped OFF the fill gate's list; 6/14 rooms on budget, was 4.",
+        "The built anchor is underworld_bar at 42%, was mercer_room at 16.4% — a 2,500-word satellite holding the centre.",
+        "71 block_pools, up from 18 at the end of E7 and 0 across every v2 game before this one.",
+        "somebody speaks improved 4.2:1 → 4.0:1 while adding 3,607 words. explicit in repeatable 58.5% → 64.5%.",
+        "check_beats 68/68 no findings; check_people no findings; git status games/vesper empty."
+      ],
+      "defects_i_caused_and_fixed": [
+        "Five substitution rules on act_bar_work with no `exclusive_group` each roll their own dice (v2.py:5382-5391), so they compound — the lint measured the HOST work surface rendering 18% of the time. One shared group, rates rebalanced, bonus rule APPENDED not prepended.",
+        "'Go down at six.' named a clock time. Nothing in this engine can send the clock to a named hour, so the label states a duration instead.",
+        "Two ONE ASSET, ONE BLOCK collisions found and fixed: act_wash and walkin_colm_backroom both pointed at act_bar_work's `sex/bar_floor_handled_t4`. The media review dedupes by file.",
+        "walkin_bar_hands granted `service` on every roll — a roll is not a brake. Three-part day cap added.",
+        "Four new coin sources tipped `sinks >= sources` to 6:7. Fixed with the house cut made literal (20 up front on every booking) and a round bought for the floor, not by deleting income."
+      ],
+      "open": [
+        "location fill: 13,615 words outstanding across eight rooms. kess_berth (2,222) and underworld_brothel (1,869) are the next two, then bastien_backroom (1,836).",
+        "The anchor is at 42% of built prose and the plan is 30.4% — correct while the other eight rooms are empty, and it converges as they fill. Do NOT top the bar up further.",
+        "`money gates content` lint still reads coin as priced by 12 choices and read by 0 conditions."
+      ]
+    },
+    {
+      "date": "2026-09-03",
+      "pass": "E9",
+      "what": "The berth. kess_berth 778 → 2,254, and the wardrobe that had been declared but never built.",
+      "why": "The room the sheets call the game's spine had three of its jobs unbuilt. `clothing_enabled` and `wardrobe_location = kess_berth` were already set, so the engine has been rendering a Change Clothes link on that screen into an EMPTY wardrobe — a broken door, not a missing feature. Eight garments the cover sheet names as the ladder's spine and eight wren_*.jpg portrait states were on disk the whole time, read by nothing.",
+      "built": [
+        "8 [[clothing]] entries + [player_portrait] with three worn_type rules. Gate `the wardrobe is read` went n/a → PASS; a second gate, `a declared garment can be got`, appeared and is 8/8.",
+        "Acquisition routes, each where the world would give it: the coveralls when Renner hires her, the dress when Bastien keeps one, and the analyst's coat (60) and a whole other woman (120) sold at Mercer's stall — two more coin sinks and 400 words into a room that was also short.",
+        "The refusal ladder: kess_refusals counted on the Stop choice, the warning at 2 naming all four things it costs, and the bench shut at 3.",
+        "Prose: hub_kess 65 → ~500, act_feed_line 101 → ~500, the bench's three bands pooled, the aftermath pooled, the walk-in given a third band, and the morning she wakes up in her own room."
+      ],
+      "evidence": [
+        "45/46 judged gates pass. 8/14 rooms on budget, was 6 — kess_berth AND mercer_room both cleared.",
+        "17,865 of 29,600 words. check_beats 68/68 no findings; check_people clean; games/vesper untouched.",
+        "Built page verified: WardrobePage exists, setup.renderWardrobePage() is called, all 8 garment ids are in the data, and the portrait resolver carries the three worn_type rules."
+      ],
+      "deviations_from_the_sheet": [
+        "⚠️ The refusal door is built as `kess_refusals lt 3` ON THE TRIGGER, not as the sheet's `kess_closed` flag. Reason: a per-flagEffect `conditions` is accepted by the importer (template_import.py:3403) but the runtime path I read applies flagEffects with NO condition check (v2.py:2394-2405), so 'set the flag on the third refusal' would fire on the wrong click. A trait threshold needs no ordering assumption and shuts the identical door. sheets/people/kess.md still says kess_closed — NOT edited, because it is signed. LO's call."
+      ],
+      "defects_i_caused_and_fixed": [
+        "bench_kess's past_floor band was DEAD — it sat directly after the unconditioned `seated` arm and consecutive groups fold into one chain (v2.py:14561-14568). Fixed, and past_field and past_house bands added beside it, so all three start choices now pay off in the spine room.",
+        "act_feed_line and bench_kess each had 2 substitution rules with no exclusive_group; at seated>=2 they compounded to a 46% branch rate. One shared group, 0.12 + 0.13."
+      ],
+      "i_was_wrong_about": [
+        "I called four of Kess's clip pools a ONE ASSET, ONE BLOCK collision and renamed them. They are NOT a collision — each pool_dir is referenced exactly once in the whole game. The names are legacy ('mercer_*' on Kess's bench) but each holds 4 curated clips whose descriptions match these beats, and games/vesper/videos is read-only. The rename stranded 16 real files and blanked four beats on the spine surface. REVERTED in the same pass."
+      ],
+      "open": [
+        "~9,900 words across six rooms: underworld_brothel (1,869), bastien_backroom (1,836), renner_depot (1,534), penthouse (1,249), underworld_strip (734), vance_securities (483).",
+        "`grays` naming question still unresolved — LO's call, costs a media rename."
+      ]
+    },
+    {
+      "date": "2026-09-03",
+      "pass": "E10",
+      "what": "The two Reach rooms. underworld_brothel 631 → 1,930, bastien_backroom 664 → 1,883, and seven curated clip pools that nothing pointed at.",
+      "why": "Both rooms were ~-74% and both had the same shape of hole: seven pools on disk — every one a FINISH or a hard band — referenced by nothing. They were not missing media; they were media whose beat was never written. act_the_house, the House's entire generic work row, was base → out1 with no finish nodes and no clip on any outcome.",
+      "built": [
+        "door_bastien — THE DOOR. sheets/places/bastien_backroom.md declares two rows and row 1 is 'Let him search you.', 'the one door in the game that earns itself… the only place in the game where seated is read against her before she has said anything.' It did not exist: hub_bastien carried five arc choices and a way out. Banded on `seated`, and it ALWAYS renders — the second arm is the same search on a day it has already paid, so the threshold never goes missing.",
+        "act_the_house given a real act node with service bands and three finishes carrying brothel_finish_inside / _ass / _facial.",
+        "loop_marsh_sunday given fin_inside and fin_nodrain — the paid/nodrain distinction his own pool NAMES encode and the build never had.",
+        "loop_bastien_backroom given a seated-gated hard band (bastien_loop_anal_hard_t5) and a third finish (bastien_finish_facial_t5).",
+        "Pools across both hubs, both walk-ins, both loops' bands, both aftermaths, and both meetings grown to the field's median size for a meeting."
+      ],
+      "evidence": [
+        "45/46 judged gates pass. 10/14 rooms on budget, was 8. 20,343 of 29,600 words.",
+        "All seven previously-unused pools now referenced exactly once each, verified by grep.",
+        "explicit in repeatable 64.5% → 66.7%; `she can say no` 1 → 2 refusals; somebody speaks 4.1:1.",
+        "check_beats 68/68 no findings; check_people clean; git status games/vesper empty."
+      ],
+      "defects_i_caused_and_fixed": [
+        "act_the_house's substitutions compounded (0.15 + 0.55, no exclusive_group) — the host rendered 38% of the time at service 45. Third room this pass family has been found in.",
+        "door_bastien granted +1 relation on a threshold that fires every visit — 35 free clicks to a gate at 35. Capped with searched_today, cleared on the tick.",
+        "A duplicate time_progression_minutes key broke the TOML parse; caught by the build."
+      ],
+      "open": [
+        "~7,400 words across four rooms: renner_depot (1,534), penthouse (1,249), underworld_strip (734), vance_securities (483).",
+        "The anchor is at 33% and converging on its planned 30.4% as the rest fills — do not top it up.",
+        "`grays` naming question still LO's call."
+      ]
+    }
+  ],
+  "board": {
+    "systems": [
+      {
+        "id": "seated",
+        "kind": "sourced",
+        "key": "seated",
+        "fed_at": [
+          "kess_berth"
+        ],
+        "labels": [
+          "has_bench"
+        ],
+        "read_by": "whether the drain fires at all, what Bastien's door-search turns up, which act rungs her body will take, and what Kess charges for the night"
+      },
+      {
+        "id": "cover",
+        "kind": "sourced",
+        "key": "cover",
+        "fed_at": [
+          "kess_berth"
+        ],
+        "labels": [
+          "checks_cover",
+          "outdoors"
+        ],
+        "read_by": "whether a door admits her, what the bar floor pays her, and whether a room reads her as company property"
+      },
+      {
+        "id": "service",
+        "kind": "ambient",
+        "key": "service",
+        "fed_at": [
+          "underworld_bar",
+          "bastien_backroom",
+          "underworld_brothel",
+          "mercer_room",
+          "penthouse",
+          "renner_depot",
+          "vance_securities"
+        ],
+        "labels": [
+          "private",
+          "she_can_undress"
+        ],
+        "read_by": "which act rungs render, which back room opens, how a man opens the scene, what the floor lets her do — ambient-fed but read-heavy, the DoL promiscuity shape (22 raises, 206 gate sites)"
+      },
+      {
+        "id": "drain",
+        "kind": "ambient",
+        "key": "drain",
+        "fed_at": [],
+        "labels": [],
+        "read_by": "what a drain returns (banded on drain x seated), which doors it opens, whether a man notices afterwards, what Kess will seat next"
+      },
+      {
+        "id": "charge",
+        "kind": "ambient",
+        "key": "charge",
+        "fed_at": [
+          "kess_berth"
+        ],
+        "labels": [
+          "home_base"
+        ],
+        "read_by": "the body's clock — under 30 no drain fires and the act rungs that cost charge stop rendering"
+      },
+      {
+        "id": "clean",
+        "kind": "ambient",
+        "key": "clean",
+        "fed_at": [
+          "underworld_bar_bathroom",
+          "kess_berth"
+        ],
+        "labels": [
+          "she_can_undress"
+        ],
+        "read_by": "the cover doors refuse her under 40, and the bar floor pays less — every finish takes it down"
+      },
+      {
+        "id": "coin",
+        "kind": "ambient",
+        "key": "coin",
+        "fed_at": [
+          "underworld_bar"
+        ],
+        "labels": [],
+        "read_by": "the feed line every night, the garments, Kess's parts"
+      },
+      {
+        "id": "arousal",
+        "kind": "ambient",
+        "key": "arousal",
+        "fed_at": [],
+        "labels": [],
+        "read_by": "the act menu on a node-routed loop and nothing else (the-meters.md W2) — declared only because the loop exists to gate"
+      }
+    ],
+    "who_climbs": "both",
+    "ascent_tiers": [
+      "cover",
+      "service",
+      "drain"
+    ],
+    "ceilings": {
+      "cover": 100,
+      "service": 100,
+      "drain": 100
+    },
+    "locations": [
+      {
+        "id": "the_street",
+        "job": "The ground the three districts sit on. Everything she walks between, she walks here.",
+        "anchor": false,
+        "fill": 600,
+        "has_cycling_pool": false,
+        "labels": [
+          "outdoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        }
+      },
+      {
+        "id": "spire_plaza",
+        "job": "The glass front of the company. Where the cover gets tested before she is even inside.",
+        "anchor": false,
+        "fill": 800,
+        "has_cycling_pool": false,
+        "labels": [
+          "outdoors",
+          "public",
+          "zone:spire",
+          "checks_cover"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        }
+      },
+      {
+        "id": "vance_securities",
+        "job": "Calloway's file room, being audited shut. The one place her own file might be.",
+        "anchor": false,
+        "fill": 1500,
+        "has_cycling_pool": true,
+        "labels": [
+          "private",
+          "zone:spire",
+          "checks_cover"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "work his case"
+          ],
+          "people": [
+            "npc_calloway"
+          ]
+        }
+      },
+      {
+        "id": "penthouse",
+        "job": "Mercer's floor. She is furniture here and it is the softest bed in the game.",
+        "anchor": false,
+        "fill": 2000,
+        "has_cycling_pool": true,
+        "labels": [
+          "private",
+          "zone:spire",
+          "checks_cover",
+          "she_can_undress"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_mercer"
+          ]
+        }
+      },
+      {
+        "id": "the_waterfront",
+        "job": "The dock road. The Spire is behind you and the Reach is below.",
+        "anchor": false,
+        "fill": 800,
+        "has_cycling_pool": false,
+        "labels": [
+          "outdoors",
+          "public",
+          "zone:waterfront"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        }
+      },
+      {
+        "id": "renner_depot",
+        "job": "Renner's gutted supply yard. He hires cheap hands and does not look up.",
+        "anchor": false,
+        "fill": 2500,
+        "has_cycling_pool": true,
+        "labels": [
+          "private",
+          "zone:waterfront"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "hauling"
+          ],
+          "people": [
+            "npc_renner"
+          ]
+        }
+      },
+      {
+        "id": "underworld_strip",
+        "job": "The Reach's open row. Nobody here cares what she is.",
+        "anchor": false,
+        "fill": 1000,
+        "has_cycling_pool": true,
+        "labels": [
+          "outdoors",
+          "public",
+          "zone:reach"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        }
+      },
+      {
+        "id": "underworld_bar",
+        "job": "The floor she works. Where men come to her instead of the other way round.",
+        "anchor": true,
+        "fill": 9000,
+        "has_cycling_pool": true,
+        "labels": [
+          "public",
+          "zone:reach",
+          "checks_cover"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "the floor",
+            "the counter"
+          ],
+          "people": [
+            "npc_colm"
+          ]
+        }
+      },
+      {
+        "id": "underworld_bar_bathroom",
+        "job": "Two sinks and a lock that does not. Where she gets clean enough to go back out.",
+        "anchor": false,
+        "fill": 600,
+        "has_cycling_pool": true,
+        "labels": [
+          "private",
+          "zone:reach",
+          "she_can_undress"
+        ],
+        "serves": {
+          "needs": [
+            "clean"
+          ],
+          "work": [],
+          "people": []
+        }
+      },
+      {
+        "id": "bastien_backroom",
+        "job": "Behind his own bar. He strips her at the door every time, and he is not looking for a weapon.",
+        "anchor": false,
+        "fill": 2500,
+        "has_cycling_pool": true,
+        "labels": [
+          "private",
+          "zone:reach",
+          "she_can_undress"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_bastien"
+          ]
+        }
+      },
+      {
+        "id": "underworld_brothel",
+        "job": "The House. A booked hour, and Sunday belongs to Marsh.",
+        "anchor": false,
+        "fill": 2500,
+        "has_cycling_pool": true,
+        "labels": [
+          "private",
+          "zone:reach",
+          "she_can_undress"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "a booked hour"
+          ],
+          "people": [
+            "npc_marsh"
+          ]
+        }
+      },
+      {
+        "id": "kess_berth",
+        "job": "His bench, her charger, her bed. The only place anything gets put inside her on purpose.",
+        "anchor": false,
+        "fill": 3000,
+        "has_cycling_pool": true,
+        "labels": [
+          "private",
+          "zone:reach",
+          "home_base",
+          "has_bench",
+          "she_can_undress"
+        ],
+        "serves": {
+          "needs": [
+            "charge",
+            "clean"
+          ],
+          "work": [
+            "hold still"
+          ],
+          "people": [
+            "npc_kess"
+          ]
+        }
+      },
+      {
+        "id": "mercer_room",
+        "job": "The stall he runs under a flat new name. He is delighted every single time.",
+        "anchor": false,
+        "fill": 2500,
+        "has_cycling_pool": true,
+        "labels": [
+          "private",
+          "zone:reach",
+          "she_can_undress"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_mercer"
+          ]
+        }
+      },
+      {
+        "id": "cain_lab",
+        "job": "Dark, and the door does not open. The company says he is what she is for.",
+        "anchor": false,
+        "fill": 300,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:reach"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        }
+      }
+    ],
+    "needs": [
+      {
+        "key": "charge",
+        "falls": "20 a day",
+        "fills": "kess_berth · a night on the feed line · to 100",
+        "costs": "10 coin a night, paid to Kess",
+        "shuts": "under 30 no drain fires and every act rung that costs charge stops rendering"
+      },
+      {
+        "key": "clean",
+        "falls": "30 per finish, 10 a day",
+        "fills": "underworld_bar_bathroom · Wash · 20 min · free · or the berth",
+        "costs": "free at the bathroom; a berth night covers it",
+        "shuts": "under 40 the cover doors at spire_plaza, vance_securities and penthouse refuse her, and the bar floor pays half"
+      }
+    ],
+    "characters": [
+      {
+        "id": "npc_mercer",
+        "surfaces": 2,
+        "schedule_rows": 2,
+        "why_wanted": "He owns her and it costs him nothing. The top of the leash and the last door.",
+        "meters": {
+          "relation": "nostalgia — how much of his old life is back in the room. Buys hospitality access, never register: he is at his ceiling from the first beat."
+        }
+      },
+      {
+        "id": "npc_renner",
+        "surfaces": 2,
+        "schedule_rows": 1,
+        "why_wanted": "Cold, mean, clawing at a gutted business. He ignores her and then he cannot.",
+        "meters": {
+          "relation": "how far up from cheap hands she has climbed — the only graded approach ladder in the game"
+        }
+      },
+      {
+        "id": "npc_bastien",
+        "surfaces": 2,
+        "schedule_rows": 1,
+        "why_wanted": "He caught her, he strips her at the door, and his lever is curiosity rather than desire.",
+        "meters": {
+          "relation": "how much he has been allowed to read — the one thing he actually wants"
+        }
+      },
+      {
+        "id": "npc_calloway",
+        "surfaces": 2,
+        "schedule_rows": 1,
+        "why_wanted": "Starving to be believed. She takes his hunt seriously and that is the whole seduction.",
+        "meters": {
+          "relation": "belief — how far he has let her into the case"
+        }
+      },
+      {
+        "id": "npc_colm",
+        "surfaces": 2,
+        "schedule_rows": 1,
+        "why_wanted": "Cold and fast and nothing else. The rung where the act stops being an event. Carries the informant function cut with Sol: bring him a name off the floor and he knows who ran it.",
+        "meters": {
+          "relation": "how readily he talks with a drink in him"
+        }
+      },
+      {
+        "id": "npc_marsh",
+        "surfaces": 1,
+        "schedule_rows": 1,
+        "why_wanted": "He pays and does not care whose body is in the slot. The first time she chooses a mark. Carries the slot obstacle cut with Rue: the Sunday hour is bought off someone, and the coin is the obstacle.",
+        "meters": {
+          "relation": "whether he books her by name instead of by slot"
+        }
+      },
+      {
+        "id": "npc_kess",
+        "surfaces": 2,
+        "schedule_rows": 1,
+        "why_wanted": "He reads bodies as hardware and hers as an interesting problem. Landlord, charge and repair.",
+        "meters": {
+          "relation": "how interesting the problem has got — it moves what he will seat and what he charges"
+        }
+      }
+    ],
+    "map": {
+      "archetype": "nested_zones",
+      "shape": "One street at ground level. Three districts hang off it: the Spire uphill behind glass, the Waterfront along the dock road, and the Reach down under it. Everything else is a room inside one of those three.",
+      "home_base": "kess_berth",
+      "exterior": "the_street",
+      "homes": {
+        "npc_mercer": "mercer_room",
+        "npc_kess": "kess_berth",
+        "npc_bastien": "bastien_backroom",
+        "npc_renner": "offscreen",
+        "npc_calloway": "offscreen",
+        "npc_colm": "offscreen",
+        "npc_marsh": "offscreen"
+      },
+      "bridges": [
+        {
+          "from": "the_street",
+          "to": "spire_plaza",
+          "costs": {
+            "time": 20
+          }
+        },
+        {
+          "from": "the_street",
+          "to": "the_waterfront",
+          "costs": {
+            "time": 20
+          }
+        },
+        {
+          "from": "the_street",
+          "to": "underworld_strip",
+          "costs": {
+            "time": 20
+          }
+        }
+      ],
+      "r1_signoff": "SIGNED by LO, 2026-09-03. Drawn by ENI the same day; the-map.md is explicit that the author of a map cannot sign it, so this waited for him. He read the shape sentence, the exterior root and the three zone grounds, and signed."
+    },
+    "economy": {
+      "currency": "coin",
+      "symbol": "coin",
+      "obligation": "The feed line — 10 coin a night, paid to Kess at the berth, which is also the only thing that refills her charge. Seventy across a week.",
+      "obligation_amount": 10,
+      "week_income": 210,
+      "obligation_moves": "Kess raises the nightly rate as he seats more in her — the more he has put inside her, the more a night on the line costs. The demand rides the `seated` system rather than a second mechanic.",
+      "sinks": [
+        "the feed line",
+        "cover garments",
+        "Kess's parts and repairs",
+        "the toll at the Reach gate",
+        "buying Sunday's slot off the girl who holds it"
+      ]
+    }
+  }
+}

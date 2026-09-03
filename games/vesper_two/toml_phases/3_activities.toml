@@ -1,0 +1,1669 @@
+# =============================================================================
+# Vesper: Undertow — 3 · activities
+#
+# The room-level surfaces: NEEDS and WORK. Two of the three things a room's list
+# may hold (the-surfaces.md R2). The third is PEOPLE, which is the hubs, phase 5.
+#
+# Every row here is lifted from a place sheet. Nothing invented at TOML time.
+#
+# ⚠️ A DAY-CAP FLAG GOES ON THE CHOICE, NEVER ON A NODE EXIT.
+#    choice     flagEffects -> costs -> ... -> advanceTime   (v2.py:12648-12733)
+#    node exit  advanceTime -> traitEffects -> flagEffects   (v2.py:13085-13088)
+#    advanceTime rolls the day inside itself and the tick clears flags there, so
+#    a midnight-crossing rung capped on its EXIT is locked out of the FOLLOWING
+#    day, silently. off_season shipped exactly that and was green on every
+#    instrument. The berth row below crosses midnight; its cap is on the choice.
+# =============================================================================
+
+# --- kess_berth · THE OBLIGATION ---------------------------------------------
+# The only fill point for `charge`, the only authored money outflow of size, and
+# the thing gate 24 compares against board.economy.obligation_amount = 10.
+
+[[canvases]]
+id          = "act_feed_line"
+name        = "The feed line"
+description = "The obligation. 10 coin a night to Kess, and it is the only thing that puts the charge back. Crosses midnight — cap on the CHOICE."
+
+[canvases.trigger]
+location      = "kess_berth"
+is_repeatable = true
+priority      = 4
+is_active     = true
+substitutions = [
+  { target_canvas_id = "walkin_kess_berth", chance = 0.12, exclusive_group = "the_bench", conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "seated", operator = "gte", value = 1 } ] } },
+  { target_canvas_id = "walkin_kess_berth", chance = 0.13, exclusive_group = "the_bench", conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "seated", operator = "gte", value = 2 } ] } },
+]
+
+[[canvases.nodes]]
+id   = "base"
+name = "The feed line"
+blocks = [
+  { type = "image", props = { file = "locations/kess_berth.jpg", description = "A cluttered dockside workshop berth with a bench, a cot and cabling.", search_queries = ["dockside workshop bunk cables", "industrial berth workbench dim"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The line runs off his bench and it costs ten a night. Nine hours on the cot with the cuff at the base of your spine and the charge climbing, and you are aware of none of it." },
+    { type = "paragraph", content = "It is a cable, a cuff and a regulator he built himself, and it is the only thing in the Reach that will put the charge back into what you are. Everything else in this city takes." },
+    { type = "paragraph", content = "Ten a night, every night, whether or not you have earned ten. That is the whole arrangement and he has never once pretended it was anything warmer." },
+    { type = "paragraph", content = "He runs it in while you are still standing. One hand flat between your tits to hold you. You are asleep before the coveralls are off your legs." },
+    { type = "paragraph", content = "The cot is against the wall the bench backs onto, so what wakes you is him starting work. It is the most reliable thing in your life and he does not know that it is." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Ten. I do not haggle and I do not carry anyone. You are welcome to sleep on the row if the maths does not work." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "You came in under thirty again. Do that four nights running and you will not wake up, and I will have to explain a body to the row." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Cuff goes on before you lie down, not after. I have told you that more times than I have told you anything else." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "No, I do not want to know where the ten came from. That is not delicacy. It is that the answer would be work for me." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "charge", operator = "lt", value = 30 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Under thirty your hands stop being reliable first and your face stops being reliable second. You have learned to notice it at the hands, because by the face it is other people noticing." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [] } }, blocks = [
+    { type = "paragraph", content = "You can feel the level the way anybody feels hunger, which is to say not at all until a threshold and then constantly." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "A night on the line. (10 coin.)"
+targetType  = "node"
+nodeId      = "act_feed_line.out1"
+costs       = [{ trait = "coin", value = 10 }]
+conditions  = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "bench_used_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "bench_used_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "charge", op = "set", value = 100 },
+  { targetType = "player", trait = "clean",  op = "set", value = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave him to it."
+targetType = "node"
+nodeId     = "act_feed_line.out2"
+
+[[canvases.nodes]]
+id   = "out1"
+name = "After"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You get on the cot and he runs the line off the bench without looking at you. It takes all night and you are aware of none of it. In the morning the charge reads full and the coin is gone." },
+    { type = "paragraph", content = "Nine hours of nothing, and then the room comes back in the order it always does: the radio, the smell of the bench, the weight of the cuff, and last of all the fact that you are in it again." },
+    { type = "paragraph", content = "You wake before he unclips you and lie still for a minute because it is the only minute in the day nobody wants anything. He knows you do this. He gives you the minute." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "kess_berth"
+time_progression_minutes = 540
+
+[[canvases.nodes]]
+id   = "out2"
+name = "After"
+blocks = [ { type = "paragraph", content = "He does not look up when you go. The bench light stays on behind you and the line stays coiled on its hook." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "kess_berth"
+
+[[canvases]]
+id          = "act_wash"
+name        = "The sinks"
+description = "The only FREE fill for `clean`. Every finish takes it down 30; under 40 the Spire doors refuse her and the bar floor pays half."
+
+[canvases.trigger]
+location      = "underworld_bar_bathroom"
+is_repeatable = true
+priority      = 4
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The sinks"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bathroom_after_t4", pool = 4, description = "A woman cleaning herself up at a bar bathroom sink, clothes half open.", search_queries = ["woman bar bathroom sink dishevelled", "club restroom mirror after"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "Two sinks, one of them plumbed, and a lock that does not work on a door that opens inward against a bin. Everybody in the Reach knows to knock and about half of them do it." },
+    { type = "paragraph", content = "The hand drier was taken off the wall years ago and the two bolt holes are still there with the wires taped back into them. There is a towel on a nail and you do not use the towel." },
+    { type = "paragraph", content = "Somebody has written a whole argument on the back of the door in three different hands over what is plainly several years, and the last line in it is a phone number with the last digit worn off." },
+    { type = "paragraph", content = "Cold tap only. The hot has been off since before you came down here and the bar's answer, every time anybody raises it, is that the sinks are not what the room is for." },
+    { type = "paragraph", content = "The window is painted shut and the extractor goes through to the alley, so what the room smells of is the alley. It is still the only door in this building she can shut behind her." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "unknown" }, content = "You going to be in there all night? There is a queue and half of it is paying customers." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Is that you? Bar wants to know if the room is turning round tonight or not." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "There is no lock, love, there has never been a lock. Put the bin against it like everybody else." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Leave the tap running a second, would you. I do not want to hear what I can hear." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "service", operator = "gte", value = 30 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The mirror is the only place in the city that gives you the whole picture, and you have got quicker at it — what needs doing, in what order, and how long the room will wait." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "cover", operator = "gte", value = 15 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "What you have on cost more than this room has taken in a week and it is hanging on the back of a door with no lock. That is most of what the climb has been so far." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [] } }, blocks = [
+    { type = "paragraph", content = "Company grays in a bar mirror under a bare bulb. Whatever the Spire designed them to say about the woman in them, this is not the room they designed them for." },
+  ] },
+  { type = "paragraph", content = "It is enough to go back out with." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Wash. (20 min.)"
+targetType = "node"
+nodeId     = "act_wash.out1"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Back out to the floor."
+targetType = "node"
+nodeId     = "act_wash.out2"
+
+[[canvases.nodes]]
+id   = "out1"
+name = "After"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "Cold water, no soap worth the name, and twenty minutes of getting the night off your face and out of your hair. It is enough to be let back through a door with." },
+    { type = "paragraph", content = "You wash to the elbow, then the throat, then everything the dress does not cover, in that order, because that is the order a door reads you in. Twenty minutes and the cold water helps with the rest of it too." },
+    { type = "paragraph", content = "Cum comes off with cold water if you get to it. It does not come out of hair. There is a way of putting hair up that hides the difference and you learned it in a week." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_bar_bathroom"
+time_progression_minutes = 20
+
+[[canvases.nodes]]
+id   = "out2"
+name = "After"
+blocks = [ { type = "paragraph", content = "You go back out into the noise without touching the taps." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_bar"
+
+[[canvases]]
+id          = "act_bar_work"
+name        = "Work the floor"
+description = "The anchor's income. Three rungs on `bar_rung`. The third is SHOWN-LOCKED with a real reason — gate `ends on an opening` counts locked CHOICES, not locked locations."
+
+[canvases.trigger]
+location      = "underworld_bar"
+is_repeatable = true
+priority      = 3
+is_active     = true
+substitutions = [
+  { target_canvas_id = "walkin_colm_backroom", chance = 0.10, exclusive_group = "the_floor", conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "colm_drinks", operator = "gte", value = 3 } ] } },
+  { target_canvas_id = "walkin_bar_hands", chance = 0.10, exclusive_group = "the_floor", conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "service", operator = "gte", value = 10 } ] } },
+  { target_canvas_id = "walkin_bar_booking", chance = 0.08, exclusive_group = "the_floor", conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "service", operator = "gte", value = 20 } ] } },
+  { target_canvas_id = "walkin_bar_lockin", chance = 0.07, exclusive_group = "the_floor", conditions = { version = "1.0", logic = "AND", items = [
+    { type = "time_of_day", start_time = "23:00", end_time = "02:00" } ] } },
+  # the bonus rate, APPENDED so it takes a bucket that had already fallen through to
+  # the host — outside the band nothing below it changes.
+  { target_canvas_id = "walkin_colm_backroom", chance = 0.10, exclusive_group = "the_floor", conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "colm_drinks", operator = "gte", value = 6 } ] } },
+]
+
+[[canvases.nodes]]
+id   = "base"
+name = "Work the floor"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bar_floor_handled_t4", pool = 3, description = "A woman working a crowded dim bar floor, hands finding her as she passes.", search_queries = ["crowded bar waitress groped dim", "nightclub floor crowd hands amateur"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The counter is safe and pays counter money. The floor pays better because the floor is where they can reach you." },
+    { type = "paragraph", content = "It is a Tuesday room — half full, all of it men off the yards, and the noise is low enough that anything said at the counter carries to the third table." },
+    { type = "paragraph", content = "The room is at the hour where the ones who were going to go home have gone home. What is left is the part of the night the bar makes its money on." },
+    { type = "paragraph", content = "Somebody has got the machine going in the corner and the whole room is louder for it, which means the floor pays better tonight and the counter pays the same." },
+    { type = "paragraph", content = "Two crews in and neither of them likes the other, so the room has arranged itself in halves with a lane down the middle. The lane is where you will be working." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "Floor tonight? You will want the long way round the tables, then." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Work the counter. (15 coin, 4h.)"
+targetType  = "node"
+nodeId      = "act_bar_work.out1"
+conditions  = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "bar_shift_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "bar_shift_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "coin",  op = "add", value = 15, clamp = false },
+  { targetType = "player", trait = "clean", op = "add", value = -10 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Work the floor. (25 coin, 4h.)"
+targetType  = "node"
+nodeId      = "act_bar_work.out2"
+conditions  = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "bar_shift_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "clean",           operator = "gte", value = 40 },
+] }
+flagEffects = [ { targetType = "player", flag = "bar_shift_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "coin",  op = "add", value = 25, clamp = false },
+  { targetType = "player", trait = "cover", op = "add", value = 5 },
+  { targetType = "player", trait = "clean", op = "add", value = -20 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text             = "Work the floor in what he sent down. (40 coin, 4h.)"
+targetType       = "node"
+nodeId           = "act_bar_work.out3"
+show_when_locked = true
+locked_text      = "There is a dress behind the bar with her name on the bag, and it is not something she can put on until the floor is hers to work. Bar rung two."
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "bar_shift_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "clean",           operator = "gte", value = 40 },
+  { type = "trait", subject = "player", trait_key = "cover",           operator = "gte", value = 15 },
+] }
+flagEffects = [ { targetType = "player", flag = "bar_shift_today", op = "set" } ]
+
+effects = [
+  { targetType = "player", trait = "coin",    op = "add", value = 40, clamp = false },
+  { targetType = "player", trait = "cover",   op = "add", value = 5 },
+  { targetType = "player", trait = "service", op = "add", value = 3 },
+  { targetType = "player", trait = "clean",   op = "add", value = -30 },
+]
+
+# ⚠️ THE START CHOICE BUYING REACH. Only a woman who has stood on a floor like
+# this knows how to work one, and this rung exists for her alone.
+[[canvases.nodes.exit_block.choices]]
+text        = "Work it like you have done it before. (50 coin, 4h.)"
+targetType  = "node"
+nodeId      = "act_bar_work.out5"
+conditions  = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "past_floor",      operator = "is_true" },
+  { type = "flag",  subject = "player", flag_key  = "bar_shift_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "clean",           operator = "gte", value = 40 },
+] }
+flagEffects = [ { targetType = "player", flag = "bar_shift_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "coin",    op = "add", value = 50, clamp = false },
+  { targetType = "player", trait = "cover",   op = "add", value = 5 },
+  { targetType = "player", trait = "service", op = "add", value = 2 },
+  { targetType = "player", trait = "clean",   op = "add", value = -20 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Buy the room a round. (20 coin.)"
+targetType  = "node"
+nodeId      = "act_bar_work.round"
+costs       = [{ trait = "coin", value = 20 }]
+conditions  = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "round_bought_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "round_bought_today", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Not tonight."
+targetType = "node"
+nodeId     = "act_bar_work.out4"
+
+[[canvases.nodes]]
+id   = "out5"
+name = "After"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You work it the way you were taught on a floor nobody here has heard of. The long way round the tables. Never empty-handed. Fifty at the end of it, and the bar asks where you learned it." },
+    { type = "paragraph", content = "The trick is that you never stop moving, so a hand gets one grab and not a hold. It still gets the grab. Forty times in four hours somebody takes your ass or your cunt on the way past." },
+    { type = "paragraph", content = "You know how to be handled at speed. Lean into the ones who tip. Let the hand go up under the skirt while he finds his coins. Fifty coin, and your cunt is wet from four hours of it." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 240
+
+[[canvases.nodes]]
+id   = "round"
+name = "A round"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "Twenty across the bar buys the room one each and buys you about forty minutes of being somebody who bought a round. It is not friendship and everybody in here knows the difference, and it still works." },
+    { type = "paragraph", content = "You put twenty down and the bar calls it out and half the room turns round. Two of them raise a glass at you and one of them looks at the tin you took it out of rather than at you." },
+    { type = "paragraph", content = "It is the oldest thing there is and it works in a room like this because nobody down here has ever been able to afford to do it twice." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "unknown" }, content = "From her. No, from her. Sit down and drink it and stop asking why." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "You want something. Everybody who buys a round wants something. I do not mind, I am just saying I know." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Twenty. That is two hours of my shift and about nine minutes of yours, and I have made my peace with that." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back into the room."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 40
+
+[[canvases.nodes]]
+id   = "out4"
+name = "After"
+blocks = [ { type = "paragraph", content = "You put the cloth down and go back out through the room without taking a shift." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_bar"
+
+[[canvases.nodes]]
+id   = "out1"
+name = "After"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "Four hours behind the counter. Glasses, tabs, and a wall between you and the room. Fifteen at the end of it, and nobody has put a hand on you all night." },
+    { type = "paragraph", content = "The counter is three feet of zinc and it is the whole difference. They lean over it and they talk at you and they do not get round it, because the one rule of this room everybody keeps is the one about the bar." },
+    { type = "paragraph", content = "Four hours of pulling pints for men who are working out whether to ask, and going home before any of them does. Fifteen. It is the least this room pays and it is the only shift you walk out of clean." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "unknown" }, content = "Counter again? You will not make rent on counter money, love. That is not advice, it is arithmetic." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Two of the same and whatever you are having. No? Nobody ever is." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "You are quick. Whoever taught you to pour, they taught you on a busier bar than this." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_bar"
+time_progression_minutes = 240
+
+[[canvases.nodes]]
+id   = "out2"
+name = "After"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "Four hours on the floor. The room is close and it reaches. By two you have stopped tracking whose hand was whose. Twenty-five, and you need the sinks." },
+    { type = "paragraph", content = "Four hours of carrying trays down a narrow aisle. A hand takes your ass every third pass. One of them gets two fingers into your cunt through the fabric before you are past." },
+    { type = "paragraph", content = "The floor pays because the floor is where they can reach you. Somebody has your tits in his hand while he orders. Somebody else pulls you onto his lap and holds you there. Your cunt is wet by midnight and nobody paid for that part." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "service", operator = "gte", value = 25 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "They have stopped checking your face first. A hand goes where it is going and then looks up to see whether that was all right, in that order, and it always is." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [] } }, blocks = [
+    { type = "paragraph", content = "The first month they still ask with their eyes. It is not politeness. It is a room working out what you will carry, the way a room works out what a new barrel is worth." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_bar"
+time_progression_minutes = 240
+
+[[canvases.nodes]]
+id   = "out3"
+name = "After"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "Four hours in what he sent down. The dress does most of the working. Forty at the end of it, and three men asked the bar what your hours are." },
+    { type = "paragraph", content = "The dress is cut so that bending to the low tables is the whole transaction. You bend to the low tables forty times. A man puts his hand flat on your cunt under it and counts out coins with the other." },
+    { type = "paragraph", content = "In the dress they stop pretending it is about the drink. Two of them get your tits out at the back table. They pass you between them for a minute and a hand stays in your cunt the whole time." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "unknown" }, content = "That is not a bar dress. Somebody bought that for a room with a door on it." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "What are your hours? No — what are your hours upstairs. I can read a room." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Careful in that. Not of them. Of getting used to what it earns." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_bar"
+
+[[canvases]]
+id          = "act_haul"
+name        = "Haul"
+description = "Work at the depot. The 4h cost is sized against Renner's 09:00-18:00 window — ~2/day, and advancing past it makes him absent, which is what actually stops it."
+
+[canvases.trigger]
+location      = "renner_depot"
+is_repeatable = true
+priority      = 3
+is_active     = true
+# THE ROUTER. Three chance bands riding the same trait as the content — the
+# doctrine's validated mechanism, copied as a MECHANISM and not as a world.
+substitutions = [
+  { target_canvas_id = "walkin_renner_depot", chance = 0.10, conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "service", operator = "lt", value = 20 } ] } },
+  { target_canvas_id = "walkin_renner_depot", chance = 0.35, conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "service", operator = "gte", value = 20 },
+    { type = "trait", subject = "player", trait_key = "service", operator = "lt",  value = 40 } ] } },
+  { target_canvas_id = "walkin_renner_depot", chance = 0.70, conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "service", operator = "gte", value = 40 } ] } },
+]
+
+[[canvases.nodes]]
+id   = "base"
+name = "Haul"
+blocks = [
+  { type = "video", props = { pool_dir = "scenes/rung_renner_tease_t2", pool = 4, description = "A woman working in a dim supply yard among crates while a man watches from a desk.", search_queries = ["warehouse worker woman crates dim", "supply yard woman working watched"] } },
+  { type = "paragraph", content = "Rows four to nine, and the yard is quiet enough that you can hear him not looking up." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Manifest is on the crate. Do not ask me which crate." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Haul. (12 coin, 4h.)"
+targetType  = "node"
+nodeId      = "act_haul.out1"
+conditions  = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "haul_done_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "charge",          operator = "gte", value = 30 },
+] }
+flagEffects = [ { targetType = "player", flag = "haul_done_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "coin",   op = "add", value = 12, clamp = false },
+  { targetType = "player", trait = "charge", op = "add", value = -15 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave the rows."
+targetType = "node"
+nodeId     = "act_haul.out2"
+
+[[canvases.nodes]]
+id   = "out1"
+name = "After"
+blocks = [ { type = "paragraph", content = "Rows four to nine, four hours, twelve coin. He counts it out without looking up and goes back to the manifest before you have got to the gate." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "renner_depot"
+time_progression_minutes = 240
+
+[[canvases.nodes]]
+id   = "out2"
+name = "After"
+blocks = [ { type = "paragraph", content = "You leave the rows where they are. He does not ask about it and he will not remember tomorrow." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "renner_depot"
+
+[[canvases]]
+id          = "act_the_house"
+name        = "The House"
+description = "Work priced by the act, plus the Sunday slot bought off whoever holds it — A4b's third key, a preparation BOUGHT and endured. Money buys the key to a rung, not a stat."
+
+[canvases.trigger]
+location      = "underworld_brothel"
+is_repeatable = true
+priority      = 3
+is_active     = true
+substitutions = [
+  { target_canvas_id = "walkin_underworld_brothel", chance = 0.12, exclusive_group = "the_house", conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "service", operator = "gte", value = 20 } ] } },
+  { target_canvas_id = "walkin_underworld_brothel", chance = 0.15, exclusive_group = "the_house", conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "service", operator = "gte", value = 45 } ] } },
+]
+
+[[canvases.nodes]]
+id   = "base"
+name = "The House"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/brothel_oral_t5", pool = 4, description = "A dim booked room in a working house, a woman on a bed with a client.", search_queries = ["dim brothel room bed client amateur", "booked room woman working"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "Hours are booked in advance here, and the board behind the desk says who has which." },
+    { type = "paragraph", content = "Four rooms off one corridor and a desk at the end of it with a woman who has run this House since before the merger. Nothing happens here that is not written on the board first." },
+    { type = "paragraph", content = "It is the only building in the Reach with clean sheets, and the sheets are clean because the desk charges for the turnover and the turnover is the actual business." },
+    { type = "paragraph", content = "Nobody who works here pretends it is anything else, and after the Spire that is almost restful. The company took the same hours off you and called it a posting." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "unknown" }, content = "Sunday evening has a name on it and it is not yours. Everything else, you can have at the going rate." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Rate is the rate. I do not do favours and I do not do arrangements, because both of those end up in front of me eventually." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Room three has a window that opens. Ask for three if anybody has ever frightened you, and do not tell me whether anybody has." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Clean or come back clean. That is not about you, it is about the sheets and what the sheets cost me." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Take an hour. (35 coin.)"
+targetType  = "node"
+nodeId      = "act_the_house.out1"
+conditions  = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "brothel_hour_today", operator = "is_false" },
+  { type = "flag",  subject = "player", flag_key  = "marsh_slot",         operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "clean",              operator = "gte", value = 40 },
+] }
+flagEffects = [ { targetType = "player", flag = "brothel_hour_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "coin",    op = "add", value = 35, clamp = false },
+  { targetType = "player", trait = "service", op = "add", value = 3 },
+  { targetType = "player", trait = "clean",   op = "add", value = -30 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Buy Sunday's slot. (20 coin.)"
+targetType = "node"
+nodeId     = "act_the_house.out2"
+costs      = [{ trait = "coin", value = 20 }]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "marsh_slot", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "marsh_slot", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Read the board and go."
+targetType = "node"
+nodeId     = "act_the_house.out3"
+
+[[canvases.nodes]]
+id   = "out1"
+name = "The hour"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/brothel_anal_t5", pool = 4, description = "A booked room in a working house, a man taking the hour he paid for.", search_queries = ["brothel room hour client amateur", "paid room bed man woman dim"] } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "service", operator = "gte", value = 35 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Asked for by name now, and the hour is booked before you arrive. He has your tits out inside a minute and your cunt inside two, and he paid at the desk for exactly that." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "service", operator = "gte", value = 15 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He booked an hour and does not know your name. He puts you on your knees, then on your back. His cock is in your cunt for most of what he paid for." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [] } }, blocks = [
+    { type = "paragraph", content = "The room turns over between hours and the sheet is what it is. He gets the coveralls off and his cock into your cunt and does not talk. Forty minutes, and none of it is about you, and your cunt is sore after." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "unknown" }, content = "How long have I got? No — do not tell me. Telling me ruins it." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "You are the company one. They said. I did not believe it and now I have, and I am not going to think about that until tomorrow." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Do not do the talking bit. The other one does the talking bit and it is worse than nothing." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Thirty-five at the desk. That is a day and a half at the yard, and I have thought about it for a week." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him have it where he paid for it."
+targetType = "node"
+nodeId     = "act_the_house.fin_in"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Turn over for the last of it."
+targetType = "node"
+nodeId     = "act_the_house.fin_ass"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take it on your face."
+targetType = "node"
+nodeId     = "act_the_house.fin_face"
+
+[[canvases.nodes]]
+id   = "fin_in"
+name = "Inside"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/brothel_finish_inside_t5", pool = 4, description = "A man finishing inside a woman in a rented room.", search_queries = ["creampie rented room amateur", "finish inside brothel bed"] } },
+  { type = "paragraph", content = "He finishes inside because that is what the hour costs. His cock stays in while it goes. Your cunt keeps it and the desk does not charge extra either way." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get up."
+targetType = "node"
+nodeId     = "act_the_house.after"
+
+[[canvases.nodes]]
+id   = "fin_ass"
+name = "The last of it"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/brothel_finish_ass_t5", pool = 4, description = "A man finishing in a woman from behind in a rented room.", search_queries = ["anal creampie rented room", "finish from behind brothel bed"] } },
+  { type = "paragraph", content = "He pulls out and puts his cock in your ass for the last of it. His cum goes in there instead. He is done in under a minute after that." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get up."
+targetType = "node"
+nodeId     = "act_the_house.after"
+
+[[canvases.nodes]]
+id   = "fin_face"
+name = "On her"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/brothel_finish_facial_t5", pool = 4, description = "A man finishing over a woman's face in a rented room.", search_queries = ["facial rented room amateur", "cumshot brothel bed dim"] } },
+  { type = "paragraph", content = "He gets off you and finishes on your face and your tits, and takes a second afterwards to look at it, which is the only part of the hour he took slowly." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get up."
+targetType = "node"
+nodeId     = "act_the_house.after"
+
+[[canvases.nodes]]
+id   = "after"
+name = "The corridor"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "An hour, priced by what is in it. Thirty-five at the desk on the way out, and the room is turned over before you are down the corridor." },
+    { type = "paragraph", content = "The woman who does the turning over passes you in the corridor with an armful of sheets and says nothing, and there is nothing in the nothing. It is a job and she is doing it." },
+    { type = "paragraph", content = "Thirty-five, and the desk counts it out in front of you because the desk counts everything out in front of everybody. It is the only honest room in the Reach and it is honest about the wrong things." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_brothel"
+time_progression_minutes = 60
+
+[[canvases.nodes]]
+id   = "out2"
+name = "After"
+blocks = [ { type = "paragraph", content = "Twenty buys the woman who holds Sunday a week off it. She takes the coin and does not ask why, and the board behind the desk gets a new name on it." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_brothel"
+time_progression_minutes = 20
+
+[[canvases.nodes]]
+id   = "out3"
+name = "After"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You read the board and go back out. Sunday is still somebody else's." },
+    { type = "paragraph", content = "The board is chalk on slate and the names go up on Monday for the whole week, and hers has been in the Sunday slot long enough that the slate has gone smooth where it is written." },
+    { type = "paragraph", content = "Four rooms, seven days, three shifts a day, and about nine names to fill them. You can read the whole economy of the Reach off one slate if you stand there long enough." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_brothel"
+
+[[canvases]]
+id          = "act_the_toll"
+name        = "The gate man"
+description = "A sink at the junction. The price is ON the label — every game in the play corpus that charges money puts the amount there, because the player is budgeting against a date."
+
+[canvases.trigger]
+location      = "underworld_strip"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The gate man"
+blocks = [
+  { type = "paragraph", content = "There is a man at the top of the row who decides who walks it." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Five, and then I know your face. After that you are somebody who comes down here, which is cheaper." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Pay the toll. (5 coin.)"
+targetType  = "node"
+nodeId      = "act_the_toll.out1"
+costs       = [{ trait = "coin", value = 5 }]
+conditions  = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "toll_paid", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "toll_paid", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Walk past him."
+targetType = "node"
+nodeId     = "act_the_toll.out2"
+
+[[canvases.nodes]]
+id   = "out1"
+name = "After"
+blocks = [ { type = "paragraph", content = "Five, and he stands aside without saying anything. He will remember your face now, which is what the five was actually for." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_strip"
+
+[[canvases.nodes]]
+id   = "out2"
+name = "After"
+blocks = [ { type = "paragraph", content = "You walk past him. He lets you, and he watches the whole way down the row." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_strip"
+
+[[canvases]]
+id          = "act_work_the_case"
+name        = "Work his case"
+description = "The only work in the game that pays no coin. R1c asks whether a repeatable leaves anything behind; this one deposits belief. Gated on the Spire's cover+clean coupling."
+
+[canvases.trigger]
+location      = "vance_securities"
+is_repeatable = true
+priority      = 3
+is_active     = true
+substitutions = [
+  { target_canvas_id = "walkin_vance_securities", chance = 0.10, conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_calloway", trait_key = "relation", operator = "gte", value = 20 } ] } },
+  { target_canvas_id = "walkin_vance_securities", chance = 0.35, conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_calloway", trait_key = "relation", operator = "gte", value = 35 } ] } },
+]
+
+[[canvases.nodes]]
+id   = "base"
+name = "Work his case"
+blocks = [
+  { type = "video", props = { pool_dir = "scenes/rung_calloway_contact_t4", pool = 4, description = "A woman leaning over a desk of files beside a seated man in a dim records room.", search_queries = ["office records room woman desk files man", "archive room two people paperwork dim"] } },
+  { type = "paragraph", content = "Two years of copies going out and nothing going missing. He has the pattern and nobody to show it to." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "A fortnight and they box all of it. Sit down — no, that chair, the other one has the index on it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Work the stacks with him. (2h.)"
+targetType  = "node"
+nodeId      = "act_work_the_case.out1"
+conditions  = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "case_worked_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "cover",             operator = "gte", value = 10 },
+  { type = "trait", subject = "player", trait_key = "clean",             operator = "gte", value = 40 },
+] }
+flagEffects = [ { targetType = "player", flag = "case_worked_today", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave him to it."
+targetType = "node"
+nodeId     = "act_work_the_case.out2"
+
+[[canvases.nodes]]
+id   = "out1"
+name = "After"
+blocks = [ { type = "paragraph", content = "Two hours in the stacks with him talking the whole time. Nothing in it pays, and by the end he has shown you where the copies are indexed and where they are not." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "vance_securities"
+time_progression_minutes = 120
+
+[[canvases.nodes]]
+id   = "out2"
+name = "After"
+blocks = [ { type = "paragraph", content = "You leave him with the boxes. He is still talking when the door shuts." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "vance_securities"
+
+# --- penthouse · DEFERRED TO E3, and the validator is why ---------------------
+#
+# `act_penthouse_bed` was written here and REMOVED. It gates on `mercer_open`,
+# which nothing sets yet because Mercer's arc is not authored, and the flag-chain
+# validator hard-failed the build:
+#
+#     x mercer_open - Required by: The bed - NEVER SET, no canvas sets this flag
+#
+# The right fix is not a stub setter. The bed is what finishing his arc BUYS —
+# his nostalgia meter buying hospitality access, never register — and authoring
+# the reward before the arc exists is exactly the defect this project is built
+# against: every hub and act loop in the repo is authored in its converted state
+# on day one. It lands in E3, beside arc_mercer_05.
+
+[[canvases]]
+id          = "act_penthouse_bed"
+name        = "The bed"
+description = "RESTORED in E6. Deferred in E2 because it gated on mercer_open and nothing set it — the flag-chain validator hard-failed the build. arc_mercer_05 sets it now. The second charge fill and the only FREE one."
+
+[canvases.trigger]
+location      = "penthouse"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "mercer_open", operator = "is_true" },
+] }
+substitutions = [
+  { target_canvas_id = "walkin_mercer", chance = 0.20, conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "service", operator = "gte", value = 20 } ] } },
+  { target_canvas_id = "walkin_mercer", chance = 0.60, conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "service", operator = "gte", value = 45 } ] } },
+]
+
+[[canvases.nodes]]
+id   = "base"
+name = "The bed"
+blocks = [
+  { type = "paragraph", content = "The bed is his and the offer is standing, and taking it costs nothing but the whole night up in the Spire, out of reach of every window in the Reach." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Stay. There is nothing down there at this hour that will not still be there at seven." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sleep here."
+targetType = "node"
+nodeId     = "act_penthouse_bed.slept"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go back down."
+targetType = "node"
+nodeId     = "act_penthouse_bed.down"
+
+[[canvases.nodes]]
+id   = "slept"
+name = "Morning"
+blocks = [ { type = "paragraph", content = "The bed is soft and the Spire is quiet and the charge reads full at seven. Nothing down in the Reach happened while you were up here." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "penthouse"
+time_progression_minutes = 540
+effects = [ { targetType = "player", trait = "charge", op = "set", value = 100 } ]
+
+[[canvases.nodes]]
+id   = "down"
+name = "The plaza"
+blocks = [ { type = "paragraph", content = "The lift takes a long time and the plaza is bright and full of people who work here." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Down."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "spire_plaza"
+
+# =============================================================================
+# THE FOUR EMPTY ROOMS. A declared location with nothing placed in it is DEBT,
+# not a location — and these four had zero words between them.
+# Their budgets are NOT re-declared to match what got delivered: that is the
+# exact failure gate 1 was rebuilt to catch.
+# =============================================================================
+
+[[canvases]]
+id          = "amb_the_street"
+name        = "The street"
+description = "Traversal @ the_street, the exterior root. Budget 600. Reads `cover` — the ground is where the ascent gets a consequence surface outside anybody's room."
+
+[canvases.trigger]
+location      = "the_street"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The street"
+blocks = [
+  { type = "paragraph", content = "Ground level runs the length of the city and belongs to nobody. Uphill it goes glass and quiet; along the dock road it goes cargo; underneath it goes to the Reach, and the three of them do not like each other." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "cover", operator = "gte", value = 15 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "In what you are wearing now nobody looks twice, and that is a thing you had to buy." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [] } }, blocks = [
+    { type = "paragraph", content = "Company grays on the open street get you a second look from everybody who has ever been made redundant, which down here is most people." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Lost, love? Spire's that way. Long way up." },
+  ] },
+  # ⚠️ THE POOL. block_pool picks a different child on EVERY render (v2.py:14798),
+  # and it is documented in four places and used by zero v2 games — v1 used it 46
+  # times in one game and the divorce from that corpus lost it. A street she crosses
+  # fifty times must not be the same street. Also, structurally, the pool BREAKS THE
+  # GROUP RUN: the band above it and the band below it are now two chains, not one.
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "A tram cuts the road in half twice an hour and nobody waits for it to finish. The queue at the crossing is six deep and half of it is company grays walking the other way." },
+    { type = "paragraph", content = "Somebody has painted over the ward notice again. Under the paint the old one still schedules the Reach for demolition, dated four years ago, in a hand that has since given up." },
+    { type = "paragraph", content = "Two men are arguing about a delivery in the middle of the pavement, and the pavement has arranged itself around them. Neither is going to move first and both of them know it." },
+    { type = "paragraph", content = "A woman is selling charge off a cart. Coils, half of them scavenged, none of them rated, and she has a queue anyway. Everything down here runs low by the third day of the week." },
+    { type = "paragraph", content = "The rain reaches ground level about a minute after it starts and never entirely leaves. Under the lamps there is a shine on the road that makes the whole street look wetter than it is." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "time_of_day", start_time = "06:00", end_time = "18:00" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Daytime the street is cargo and errands, and nobody on it is doing anything they would have to explain. It is the only stretch of the day when being seen costs her nothing." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "time_of_day", start_time = "18:00", end_time = "23:00" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The evening road belongs to whoever has finished work and has not gone home. The traffic goes downhill from here, and so does most of what is being carried." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [] } }, blocks = [
+    { type = "paragraph", content = "After eleven the crossing lights keep running for nobody. The men still out are either working or waiting for somebody who is, and they can tell which you are from further off than you would like." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "unknown" }, content = "Charge, love? Half what the Spire wants for it. Runs hot but it runs." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "You want the crossing, not the stair. Stair's flooded past the fourth step and nobody's coming to pump it." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Tell your people the second yard is still owed for the last lot. They will know what for." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Sorry — thought you were somebody else. You walk like her." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Anything moving tonight? No? Nothing ever is, until it is." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "past_field", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "You have walked worse roads than this one carrying heavier things than yourself, and the walking is the part of the field you kept." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Cross to the Spire. (20 min.)"
+targetType = "node"
+nodeId     = "amb_the_street.spire"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the dock road. (20 min.)"
+targetType = "node"
+nodeId     = "amb_the_street.docks"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go down into the Reach. (20 min.)"
+targetType = "node"
+nodeId     = "amb_the_street.reach"
+
+[[canvases.nodes]]
+id   = "spire"
+name = "Uphill"
+blocks = [ { type = "paragraph", content = "The road goes up and the pavement gets swept, and by the top of it you are the only thing on the street that was not put there deliberately." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "spire_plaza"
+time_progression_minutes = 20
+
+[[canvases.nodes]]
+id   = "docks"
+name = "The dock road"
+blocks = [ { type = "paragraph", content = "The dock road smells of standing water and diesel, and the cargo on it has been going the same direction for a hundred years." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Along."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_waterfront"
+time_progression_minutes = 20
+
+[[canvases.nodes]]
+id   = "reach"
+name = "Down"
+blocks = [ { type = "paragraph", content = "The stair down to the Reach is behind a hoarding that has advertised the same demolition for six years. The air changes on the fourth step." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Down."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_strip"
+time_progression_minutes = 20
+
+[[canvases]]
+id          = "amb_spire_plaza"
+name        = "The plaza"
+description = "Traversal @ spire_plaza. Budget 800. THE FIRST DOOR THAT READS HER — and the refusal is a SENTENCE, not a greyed label."
+
+[canvases.trigger]
+location      = "spire_plaza"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The plaza"
+blocks = [
+  { type = "paragraph", content = "Glass on three sides and a desk in the middle of it, and the man behind the desk decides who is staff. He has decided about you before, both ways, and neither time did he look up for longer than it took." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Today you are presentable enough that the badge is the only question." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [] } }, blocks = [
+    { type = "paragraph", content = "There is a night on you that a lobby can see from ten feet, and he does not say what it is. He does not have to." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Not today. Try the service entrance, or try tomorrow." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The plaza is built so that everybody crossing it can be seen from four floors up. Nobody has ever said that out loud and every person on it walks like they know." },
+    { type = "paragraph", content = "A row of contractors is waiting by the planters with their badges out, and none of them sits down. The benches are stone and angled just enough that nobody does." },
+    { type = "paragraph", content = "Two audit staff go past with a trolley of boxes, and the boxes are labelled with a floor number and a date. Somebody's whole department, going down in a lift." },
+    { type = "paragraph", content = "The fountain has been off since the quarter began and the basin has a hand's depth of coins in it that nobody is allowed to take. There is a cleaner whose whole job is watching it." },
+    { type = "paragraph", content = "Glass on three sides means there is nowhere on the plaza to stand out of the wind, and the wind comes off the hill all afternoon. Everybody moves faster than they mean to." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "cover", operator = "gte", value = 15 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "In this coat the desk reads you as somebody's problem rather than his own, which is the entire trick of it. He looks at the collar and not the face." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "cover", operator = "gte", value = 5 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "What you have on passes at a glance and does not survive a second one, so the trick is to be through the doors before anybody takes it." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [] } }, blocks = [
+    { type = "paragraph", content = "Company issue on a Spire plaza reads as maintenance, and maintenance goes round the side. Everybody here has learned to look past the grays and most of them have stopped noticing they do it." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "unknown" }, content = "Badge, or a name I can call up. One or the other, and I do not much care which." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Deliveries round the side. If it is not a delivery you still want the side." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "You were here Tuesday. I do remember faces, whatever they tell you." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Audit's on nine and they have taken the lift out of service twice today. Not my doing." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "If you are waiting for somebody, wait outside. Lobby is not a lobby this quarter." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Through the lobby to the file room."
+targetType = "node"
+nodeId     = "amb_spire_plaza.through"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "cover", operator = "gte", value = 10 },
+  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
+] }
+show_when_locked = true
+locked_text      = "The desk reads what she is wearing and how her night went, in that order, and today neither answer gets her past him. Cover ten, clean forty."
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Up to the penthouse."
+targetType = "node"
+nodeId     = "amb_spire_plaza.up"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "met_mercer", operator = "is_true" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Round to the service door. (20 min.)"
+targetType = "node"
+nodeId     = "amb_spire_plaza.side"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "service", operator = "gte", value = 10 },
+] }
+show_when_locked = true
+locked_text      = "The side door opens for people the building's own staff know by sight, and she is not one of them yet. Service ten."
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Back down to the street."
+targetType = "node"
+nodeId     = "amb_spire_plaza.down"
+
+[[canvases.nodes]]
+id   = "through"
+name = "The lobby"
+blocks = [ { type = "paragraph", content = "The lobby is cold and the lift is quiet and nobody on the way up asks you anything, which is what the clothes were for." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "In."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "vance_securities"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "up"
+name = "The lift"
+blocks = [ { type = "paragraph", content = "The lift to his floor still takes your palm without arguing, which is either an oversight or the closest thing he has to sentiment." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "penthouse"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "side"
+name = "The service door"
+blocks = [
+  { type = "paragraph", content = "The service door is at the bottom of a ramp behind the loading bay, propped with a fire extinguisher the way it has been propped for years. Two porters are having the last of a cigarette on the step." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "You are the one off the Undertow floor. Saw you carry four trays through a room of drunks without dropping one." },
+  { type = "paragraph", content = "That is what the side door reads. Not the coat, not the badge — whether the people who move things for a living have decided you are one of the people who move things." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Nine's being audited. Go up the back stair, not the lift, and do not carry anything with a lid on it." },
+  { type = "paragraph", content = "The back stair smells of wet concrete for six floors and then abruptly of carpet. Nobody on the way up asks you anything, because nobody on the back stair ever does." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Up the back stair."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "vance_securities"
+time_progression_minutes = 20
+
+[[canvases.nodes]]
+id   = "down"
+name = "The hill"
+blocks = [ { type = "paragraph", content = "Downhill the pavement stops being swept about halfway." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Down."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_street"
+time_progression_minutes = 20
+
+[[canvases]]
+id          = "amb_the_waterfront"
+name        = "The dock road"
+description = "Traversal @ the_waterfront. Budget 800. The hour it costs is what makes Renner's 09:00-18:00 window bite."
+
+[canvases.trigger]
+location      = "the_waterfront"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The dock road"
+blocks = [
+  { type = "paragraph", content = "Cargo one side, water the other, and a row of yards that used to fit out facilities for the company and now fit out whatever comes. Renner's is the third one along and the only one with the lights on past six." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "met_renner", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The crews on the road know you work the third yard now, and one of them raises a hand without stopping." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [] } }, blocks = [
+    { type = "dialog", props = { speaker = "unknown" }, content = "You after work or after somebody? Third yard's hiring, if it is the first one." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The road runs cargo one side and water the other, and the water is the colour of the sky whatever the sky is doing. Somebody's crane has been stopped mid-lift since the morning." },
+    { type = "paragraph", content = "Four yards along, a crew is stripping a hull that has plainly been sold twice. They work fast and they do not talk, which on this road means the paperwork is somebody else's problem." },
+    { type = "paragraph", content = "The company's old fitting-out sheds start past the third yard and run for half a mile, and every one of them has the same faded logo at the same height. None of them has a light on." },
+    { type = "paragraph", content = "A tug goes past close enough to move the boards under your feet. The wash comes up through the gaps and takes the dust off the road for about a minute." },
+    { type = "paragraph", content = "Gulls have got into somebody's crate of ration tins and there is a man throwing bolts at them with real feeling. He is not going to win and the gulls have worked that out." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "time_of_day", start_time = "09:00", end_time = "17:00" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The road is working. Every yard has its gate up and its crew in, and a woman standing still on it gets asked her business twice before she has decided what it is." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "time_of_day", start_time = "17:00", end_time = "18:00" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Five o'clock and the crews come off in a block, all of them going the same way at the same speed. Behind them the third yard still has its lights on, because the man who owns it does not clock out." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [] } }, blocks = [
+    { type = "paragraph", content = "Off hours the road is gates and padlocks and one lit office window at the third yard. Sound carries badly here and footsteps carry perfectly, which is a bad combination for anybody with a reason to be quiet." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "unknown" }, content = "Mind the boards past the second gate. One of them went last week and took a man's ankle with it." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Hands wanted at the third yard. He pays end of shift and he pays what he said, which is more than the fourth does." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "That is Spire crating. You do not see Spire crating on this road any more, and I have not seen it going that direction ever." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "If you are after the man in the third yard, he does not talk before the crew has gone. Come back at six." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Water's up again. Half the low sheds have got it through the floor and the company still owns the pumps." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Into the depot."
+targetType = "node"
+nodeId     = "amb_the_waterfront.depot"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask along the road. (30 min.)"
+targetType = "node"
+nodeId     = "amb_the_waterfront.ask"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Back to the street."
+targetType = "node"
+nodeId     = "amb_the_waterfront.back"
+
+[[canvases.nodes]]
+id   = "ask"
+name = "Along the road"
+blocks = [
+  { type = "paragraph", content = "Asking on the dock road is not a conversation. You walk the length of it and you get half a sentence per yard, and by the far end you have something." },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "unknown" }, content = "Third yard took a contract off the company last quarter and nobody can work out what for. There is nothing left up there to service." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Two men came down asking after a woman in company grays. Not police. They had the walk but not the paperwork." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Whatever goes into the low sheds goes in at night and comes out on a flatbed with a sheet over it. Twice a month, and never the same night twice." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "You want the man in the third yard sweet, go at six with something cold. He drinks alone in there and he hates that anybody knows." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "There is a shutter at the dark end of the Reach with a lock on it worth more than the unit. Ask yourself who pays for that." },
+  ] },
+  { type = "paragraph", content = "None of it is a favour. Everybody on this road is owed something by somebody and telling you costs them nothing, which is exactly why it gets told." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Walk back up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_waterfront"
+time_progression_minutes = 30
+
+[[canvases.nodes]]
+id   = "depot"
+name = "The third yard"
+blocks = [ { type = "paragraph", content = "The gate is open because it is always open, and the yard behind it is half the size the fence says it should be." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "In."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "renner_depot"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "back"
+name = "The road"
+blocks = [ { type = "paragraph", content = "The road back takes as long as the road out and the water does not change." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_street"
+time_progression_minutes = 20
+
+[[canvases]]
+id          = "amb_cain_lab"
+name        = "The shutter"
+description = "@ cain_lab. Budget 300 — the smallest in the game, on purpose. THE DOOR v0.1 CLOSES ON. Gate 9's visible locked door, written as a refusal with a reason."
+
+[canvases.trigger]
+location      = "cain_lab"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The shutter"
+blocks = [
+  { type = "paragraph", content = "The unit at the dark end of the row has a shutter that has not moved in the time you have been walking past it, and a lock on the outside that is newer than the building." },
+  { type = "paragraph", content = "The company says the man behind it is what you are for. Nobody on the row will say his name out loud, which on the row means something." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "There is a cable run into the unit from the row's main line, spliced badly and taped, and it is warm. Whatever is behind the shutter has been drawing power the whole time you have lived here." },
+    { type = "paragraph", content = "Somebody has chalked a number on the frame and somebody else has scrubbed at it. Under the scrubbing it is still legible, and it is not a unit number." },
+    { type = "paragraph", content = "The gap under the shutter is the width of two fingers and the air coming out of it is colder than the row. Something in there is being kept at a temperature." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "drain", operator = "gte", value = 15 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "You can feel the draw off the cable through your palm now, the way you feel a socket before you find it. That is new, and it started with what Kess put in you." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [] } }, blocks = [
+    { type = "paragraph", content = "Whatever is in there is not for what you currently are, and standing in front of it you can tell exactly how much of you is missing." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text             = "Take the lock off."
+targetType       = "node"
+nodeId           = "amb_cain_lab.open"
+show_when_locked = true
+locked_text      = "The lock is not the problem. What is behind it needs more out of her than she currently has to give, and she can feel exactly how much is missing. Drain, at the top of it."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "drain", operator = "gte", value = 100 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Walk on."
+targetType = "node"
+nodeId     = "amb_cain_lab.walk"
+
+[[canvases.nodes]]
+id   = "open"
+name = "The shutter"
+blocks = [ { type = "paragraph", content = "Not this release." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back to the row."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_strip"
+
+[[canvases.nodes]]
+id   = "walk"
+name = "The row"
+blocks = [ { type = "paragraph", content = "You walk on, and the shutter is still there tomorrow." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "On."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_strip"
+
+# =============================================================================
+# E8 · CHUNK A — THE DAY SHIFT.
+#
+# ⚠️ Nobody was in this room from 08:00 to 19:00. Colm arrives at nineteen and
+# Bastien at twenty, so the declared ANCHOR — the room that is supposed to hold
+# 30% of the game's prose — was a place she could only visit after dark. DoL's
+# school is the anchor because she is THERE, on a schedule, most of the day.
+#
+# ⚠️ No NPC is the object of any verb here, and that is deliberate: the place
+# sheet's own note says rows 1-3 fail the object test and MUST stay work with
+# their own surface rather than becoming rungs inside Colm's hub. The 23-choice
+# failure the doctrine cites was a hub binding no NPC.
+#
+# The cap is all three parts on ONE holder: the choice reads `bar_open_today`
+# is_false, the same choice sets it, [engine.daily_tick] clears it. A grant and
+# its cap on different holders reads as uncapped income (gates.py:3379).
+# =============================================================================
+
+[[canvases]]
+id          = "act_bar_open"
+name        = "The opening"
+description = "Day shift @ underworld_bar, 08:00-19:00. Work with no person in it. The anchor's other half — the eleven hours the room was empty."
+
+[canvases.trigger]
+location      = "underworld_bar"
+is_repeatable = true
+priority      = 3
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "19:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The Undertow, daylight"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "In daylight the Undertow is a long room with a sticky floor and forty chairs on forty tables. Nothing about it is designed. It was three rooms once and somebody took two walls out with a hammer." },
+    { type = "paragraph", content = "The extractor over the back of the bar has been running all night because nobody turns it off, and the room smells of last night through it — spilled beer gone flat, and the wet ash somebody knocked into a glass." },
+    { type = "paragraph", content = "There is a light well at the far end that the building was not built with, and for about two hours in the morning it puts a hard white rectangle on the floor where nobody ever sits." },
+    { type = "paragraph", content = "Somebody has left the till drawer open and empty, which is the row's way of saying there is nothing in it. Everybody down here does it. A closed drawer is an invitation." },
+    { type = "paragraph", content = "The bar itself is a good one — proper zinc, worn through to the copper at the two places people lean. It is the only thing in the Reach that anybody has ever bothered to look after." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "unknown" }, content = "Cellar hatch sticks. Do not put your back into it, put your foot on the frame and lift." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Two crates short on the delivery and the docket says six. I am not arguing with them again this month." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "If the ice comes before eleven, it goes in the well. If it comes after, it goes in the sink and we lose half." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Whatever happened at that back table last night, I do not want to know and I do want it mopped." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "You are early. Nobody is ever early. Are you after hours or are you after something?" },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "service", operator = "gte", value = 20 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The day staff know what you do here at night and none of them says anything about it, which is not the same as not knowing. One of them stopped calling you love about a fortnight ago." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [] } }, blocks = [
+    { type = "paragraph", content = "In the morning nobody in this room knows what you are. It is eleven hours a day of being read as staff, which is a rest, and it is the only stretch of the clock where that is free." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Work the opening. (8 coin, 3h.)"
+targetType  = "node"
+nodeId      = "act_bar_open.worked"
+conditions  = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "bar_open_today", operator = "is_false" },
+] }
+flagEffects = [ { targetType = "player", flag = "bar_open_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "coin",  op = "add", value = 8, clamp = false },
+  { targetType = "player", trait = "clean", op = "add", value = -15 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go down to the cellar. (30 min.)"
+targetType = "node"
+nodeId     = "act_bar_open.cellar"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the delivery in. (1h.)"
+targetType = "node"
+nodeId     = "act_bar_open.delivery"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Look at the room."
+targetType = "node"
+nodeId     = "act_bar_open.look"
+
+[[canvases.nodes]]
+id   = "worked"
+name = "The opening"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "Chairs down, floor mopped twice because the first pass only moves it, glasses through the machine, bottles up from the cellar in fours. Three hours and the room is a room again by eleven." },
+    { type = "paragraph", content = "The optics come off and go in a bucket, the lines get flushed, and the first pint through afterwards is poured away because it is half water and tastes of the pipe. Nobody watches you do any of it." },
+    { type = "paragraph", content = "Ice, ashtrays, the two windows that open, the doormat out and beaten against the wall in the alley. It is dull and your hands know it after the first week and your head goes somewhere else for three hours." },
+    { type = "paragraph", content = "Somebody has been sick behind the radiator and it is a two-bucket job and there is nobody else to do it. Eight coin. The night pays twenty-five for four hours and takes something else out of you." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "unknown" }, content = "Good. You do it properly. Half of them mop round the tables, not under." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Eight, and I know it is eight. Take it up with the man who owns the room, not with me." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Same tomorrow if you want it. It is here every morning whether anybody takes it or not." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 180
+
+[[canvases.nodes]]
+id   = "cellar"
+name = "The cellar"
+blocks = [
+  { type = "paragraph", content = "The hatch is behind the bar and the stair under it is nine steps of wet stone. It is colder down here by a lot and the walls are the original brick of whatever stood here before the Reach was the Reach." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "Half the kegs are company stock with the facilities stamp still on the collar, which means Bastien is buying off somebody who is buying off somebody. Nobody down here asks and neither do you." },
+    { type = "paragraph", content = "There is a door at the back of the cellar that is bricked up to about shoulder height and open above it, and the air that comes through it is moving. It goes somewhere. It has always gone somewhere." },
+    { type = "paragraph", content = "Somebody keeps a mattress and a coat behind the last rack. It is not a secret and it is not talked about, and whoever it is has not been down here in a fortnight." },
+    { type = "paragraph", content = "The gas bottles are stacked against the wall the way you were taught never to stack gas bottles, and the tape on the regulator is somebody's third repair, not their first." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "unknown" }, content = "Do not go past the racks. That is not our wall and what is on the other side of it is not our business." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Bring four up. If you can carry six, bring four, because you will drop the sixth on the stair and I have seen it done." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Cold down there. Cold is why the room upstairs is worth what it is worth in August." },
+  ] },
+  { type = "paragraph", content = "You bring four up one-handed on the rail, which is the trick, and the hatch drops behind you with a sound the whole room hears." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 30
+
+[[canvases.nodes]]
+id   = "delivery"
+name = "The delivery"
+blocks = [
+  { type = "paragraph", content = "It comes off a flatbed at the top of the row and gets carried down, because nothing wider than a man gets into the Reach. Six crates on the docket and however many are actually there." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "Two of the six have a facilities stamp on the collar that somebody has gone at with a wire brush and not finished. You sign for six and carry down four and nobody involved says a word about the arithmetic." },
+    { type = "paragraph", content = "The driver will not come below the second turn of the stair and never has. He puts them down at the top, takes the docket, and is gone before you have got the first one on your shoulder." },
+    { type = "paragraph", content = "One crate is the wrong weight for what is written on it and you notice because you have carried the right ones. You put it at the bottom of the stack and say nothing, which is what everybody down here would have done." },
+    { type = "paragraph", content = "It rains the whole hour and the stair runs like a gutter, and by the fourth crate you have worked out the only footing that holds. Nobody has ever told anybody that; you all just learn it." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "unknown" }, content = "Sign at the bottom, not the box. The box is for the yard and the yard is not us." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Short again. Third week. Say nothing to him about it, he knows, and knowing is the part he does not like being reminded of." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "You carry like somebody who has done a job. Where was that, then? — No. Fine. Forget I asked." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Anything with a seal on it goes straight down the cellar and does not go behind the bar. That is not my rule, that is his." },
+  ] },
+  { type = "paragraph", content = "An hour of it and your arms are gone and the room has a week of stock in it. Nobody pays you for the delivery. It is simply what the opening turns into on a Tuesday." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stack it."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 60
+
+[[canvases.nodes]]
+id   = "look"
+name = "The room"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The back table is the one nobody sits at until after nine and everybody sits at after eleven. In daylight it is a table with a burn on it and one leg packed with a folded beer mat." },
+    { type = "paragraph", content = "There is a door beside the cellar hatch that goes up rather than down, and it is the one you have not been through. It has a bolt on the outside and the bolt is worn bright." },
+    { type = "paragraph", content = "The stools at the end of the bar are Colm's end. Nobody put a sign on it. It is simply where he has sat for long enough that the leather has gone flat in one place." },
+    { type = "paragraph", content = "The optics are mostly refilled from bottles that are not the bottles on the label, and everybody who drinks here knows it and drinks it anyway. The one exception is the shelf Bastien keeps for himself." },
+    { type = "paragraph", content = "There is a ledger under the till that is not the ledger the bar runs on. You have seen it out twice, both times in the afternoon, both times with Bastien's hand flat on it." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "In an empty room the boards over the back half sound different, and the different-sounding part is exactly the shape of the room above it. You worked that out standing still on a Tuesday." },
+    { type = "paragraph", content = "The bolt on the stair door is on the outside. Whoever put it there was not worried about anybody getting in, and that is a different kind of room from the one the bar describes." },
+    { type = "paragraph", content = "Nothing in here is fixed properly and everything in here works. That is the whole Reach in one room, and the Spire has never once managed either half of it." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Enough."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_bar"

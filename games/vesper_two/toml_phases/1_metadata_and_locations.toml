@@ -1,0 +1,372 @@
+# =============================================================================
+# Vesper: Undertow — 1 · locations and cast
+#
+# 14 locations, one root, budgets from board.locations[].fill.
+# 7 characters, 8 schedule rows, homes from board.map.homes.
+#
+# ⚠️ navigation_order lists CHILDREN ONLY. The return link is generated from
+#    entry_from and renders as "Leave <Name>" (engine.md §10).
+# =============================================================================
+
+# --- THE GROUND -------------------------------------------------------------
+# ⚠️ the_street is a ROOT: no entry_from at all. That single absent field is
+# gate 28. Vesper shipped TWELVE roots with the three zone grounds unjoined, and
+# only 9 of its 35 locations were reachable on foot.
+
+[[locations]]
+id               = "the_street"
+name             = "The Street"
+description      = "Ground level, and the only part of the city that belongs to nobody. The Spire is uphill behind glass, the Waterfront is along the dock road, and the Reach is underneath."
+image            = "locations/underworld_strip.jpg"
+navigation_order = ["spire_plaza", "the_waterfront", "underworld_strip"]
+
+# --- THE SPIRE --------------------------------------------------------------
+
+[[locations]]
+id               = "spire_plaza"
+name             = "Spire Plaza"
+description      = "Glass, badges, and a lobby that decides whether she is staff before she has said anything."
+image            = "locations/spire_plaza.jpg"
+entry_from       = "the_street"
+navigation_order = ["vance_securities", "penthouse"]
+costs            = { time = 20 }
+
+[[locations]]
+id               = "vance_securities"
+name             = "Vance Securities"
+description      = "An un-indexed file room being audited shut. One man works here and nobody visits him."
+image            = "locations/vance_securities.jpg"
+entry_from       = "spire_plaza"
+navigation_order = []
+
+[[locations]]
+id               = "penthouse"
+name             = "The Penthouse"
+description      = "The company floor. Soft, warm, and the only bed in the city she has ever been allowed to sleep in."
+image            = "locations/penthouse.jpg"
+entry_from       = "spire_plaza"
+navigation_order = []
+
+# --- THE WATERFRONT ---------------------------------------------------------
+
+[[locations]]
+id               = "the_waterfront"
+name             = "The Waterfront"
+description      = "The dock road. The Spire behind, the Reach below, and cargo moving between them all day."
+image            = "locations/the_waterfront.jpg"
+entry_from       = "the_street"
+navigation_order = ["renner_depot"]
+costs            = { time = 20 }
+
+[[locations]]
+id               = "renner_depot"
+name             = "Renner's Depot"
+description      = "A gutted supply yard that used to fit out facilities. He hires cheap hands and does not look up."
+image            = "locations/renner_depot.jpg"
+entry_from       = "the_waterfront"
+navigation_order = []
+
+# --- THE REACH --------------------------------------------------------------
+
+[[locations]]
+id               = "underworld_strip"
+name             = "The Strip"
+description      = "The Reach's open row, under the dock road. Nobody here cares what she is."
+image            = "locations/underworld_strip.jpg"
+entry_from       = "the_street"
+navigation_order = ["underworld_bar", "underworld_brothel", "kess_berth", "mercer_room", "cain_lab"]
+costs            = { time = 20 }
+
+[[locations]]
+id               = "underworld_bar"
+name             = "The Undertow"
+description      = "A working floor. Men come here to be served and some of them stay for the back room."
+image            = "locations/underworld_bar.jpg"
+entry_from       = "underworld_strip"
+navigation_order = ["underworld_bar_bathroom", "bastien_backroom"]
+
+[[locations]]
+id               = "underworld_bar_bathroom"
+name             = "The Undertow — Bathroom"
+description      = "Two sinks and a lock that does not work. It is where she gets clean enough to go back out."
+image            = "locations/underworld_bar_bathroom.jpg"
+entry_from       = "underworld_bar"
+navigation_order = []
+
+[[locations]]
+id               = "bastien_backroom"
+name             = "The Back Room"
+description      = "Behind the bar, past a man who searches her on the way in every single time."
+image            = "locations/bastien_backroom.jpg"
+entry_from       = "underworld_bar"
+navigation_order = []
+
+[[locations]]
+id               = "underworld_brothel"
+name             = "The House"
+description      = "Hours are booked in advance here and Sunday evening belongs to somebody already."
+image            = "locations/underworld_brothel.jpg"
+entry_from       = "underworld_strip"
+navigation_order = []
+
+[[locations]]
+id               = "kess_berth"
+name             = "Kess's Berth"
+description      = "A bench, a charger and a bed, in that order of importance to the man who owns them."
+image            = "locations/kess_berth.jpg"
+entry_from       = "underworld_strip"
+navigation_order = []
+
+[[locations]]
+id               = "mercer_room"
+name             = "Mercer's Stall"
+description      = "Spire paper sold under a flat name, at hours the Spire is not awake for."
+image            = "locations/mercer_room.jpg"
+entry_from       = "underworld_strip"
+navigation_order = []
+
+# ⚠️ THE DOOR v0.1 CLOSES ON. entry_conditions + blocked_message put the refusal
+# in-world on the greyed nav card (engine.md §22). `drain gte 100` is the top of
+# a tier she cannot reach this release — which is the point.
+
+[[locations]]
+id               = "cain_lab"
+name             = "Cain's Lab"
+description      = "Dark behind the shutter, and the company says he is what she is for."
+image            = "locations/cain_lab.jpg"
+entry_from       = "underworld_strip"
+navigation_order = []
+entry_conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "drain", operator = "gte", value = 100 },
+] }
+blocked_message  = "The shutter does not move, and whatever is behind it is not for what she is yet."
+
+# =============================================================================
+# THE CAST
+#
+# ⚠️ [[npcs.schedules]] binds to the [[npcs]] block ABOVE it. Inserting a
+#    character between an existing one and its schedules SILENTLY re-parents
+#    them. Every block below is written NPC-then-schedule, never regrouped.
+#
+# ⚠️ An overnight window is ONE row only when weekdays covers all seven days.
+#    The weekday check runs first, against TODAY (v2.py:3596). Mercer's stall row
+#    is 23:00-08:00 across all seven, so it wraps correctly as one.
+# =============================================================================
+
+[[npcs]]
+id           = "npc_kess"
+name         = "Kess"
+role         = "synth mechanic"
+description  = "He reads bodies as hardware and hers as an interesting problem. Her landlord, her charge and her repair."
+portrait     = "kess.jpg"
+core_traits  = { relation = 0 }
+
+[[npcs.schedules]]
+location   = "kess_berth"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "10:00"
+end_time   = "22:00"
+activity   = "at the bench, stripping something decommissioned"
+
+[[npcs]]
+id           = "npc_mercer"
+name         = "Mercer"
+role         = "former owner"
+description  = "He owns her and it costs him nothing. He is fond of her the way a man is fond of a good tool."
+portrait     = "mercer.jpg"
+core_traits  = { relation = 0 }
+
+[[npcs.schedules]]
+location   = "penthouse"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "23:00"
+activity   = "holding a floor his position no longer quite covers"
+
+[[npcs.schedules]]
+location   = "mercer_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "23:00"
+end_time   = "08:00"
+activity   = "running the stall under a flat name"
+
+[[npcs]]
+id           = "npc_renner"
+name         = "Renner"
+role         = "depot owner"
+description  = "Cold, mean, and clawing at a gutted business. He ignores her, and then he cannot."
+portrait     = "renner.jpg"
+core_traits  = { relation = 0, arousal = 0 }
+
+[[npcs.schedules]]
+location   = "renner_depot"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "09:00"
+end_time   = "18:00"
+activity   = "working the yard, not looking up"
+
+[[npcs]]
+id           = "npc_calloway"
+name         = "Calloway"
+role         = "rogue-hunter"
+description  = "Disbelieved for two years and starving to be taken seriously. His secret is not a kink."
+portrait     = "calloway.jpg"
+core_traits  = { relation = 0 }
+
+[[npcs.schedules]]
+location   = "vance_securities"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "20:00"
+activity   = "in the stacks, being audited shut"
+
+[[npcs]]
+id           = "npc_bastien"
+name         = "Bastien"
+role         = "owns the room"
+description  = "He caught her once and kept what he found. His lever is curiosity, not desire."
+portrait     = "bastien.jpg"
+core_traits  = { relation = 0 }
+
+[[npcs.schedules]]
+location   = "bastien_backroom"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "20:00"
+end_time   = "23:59"
+activity   = "behind his own bar, taking numbers"
+
+[[npcs]]
+id           = "npc_colm"
+name         = "Colm"
+role         = "courier"
+description  = "Cold and fast and nothing else. Bring him a name and he knows who ran it."
+portrait     = "colm.jpg"
+core_traits  = { relation = 0 }
+
+[[npcs.schedules]]
+location   = "underworld_bar"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time   = "23:59"
+activity   = "at the end of the bar, drinking through a delivery"
+
+[[npcs]]
+id           = "npc_marsh"
+name         = "Marsh"
+role         = "dockside fixer"
+description  = "He pays, and he does not care whose body is in the slot he booked."
+portrait     = "marsh.jpg"
+core_traits  = { relation = 0 }
+
+[[npcs.schedules]]
+location   = "underworld_brothel"
+weekdays   = [6]
+start_time = "20:00"
+end_time   = "23:59"
+activity   = "taking the standing hour he books weeks out"
+
+# =============================================================================
+# THE WARDROBE
+#
+# ⚠️ This is not a new system — `sheets/systems/cover.md:30` names these eight as
+# the `cover` ladder's spine, and all eight are on disk at videos/clothing/. What
+# was missing is the catalog. `clothing_enabled = true` and
+# `wardrobe_location = "kess_berth"` were ALREADY set in 0_systems_spec, so the
+# engine has been rendering [[Change Clothes->WardrobePage]] on the berth's screen
+# unconditionally (v2.py:9814) into an EMPTY wardrobe. A broken door, not a
+# missing one.
+#
+# ⚠️ Slots come from VALID_CLOTHING_SLOTS (template_import.py:234) and are exactly
+# seven: bra · underwear · top · bottom · dress · legwear · shoes.
+#
+# ⚠️ The wardrobe is NOT a row at the berth. The place sheet's own warning: an
+# authored wardrobe canvas beside the engine's link is a SECOND DOOR, and the
+# authored one is the one that does not work. Garments are acquired at shop rungs.
+#
+# ⚠️ A `type` tag with no matching [[player_portrait.outfits]] rule trips a build
+# warning, so only the three garments that HAVE a portrait carry one.
+# =============================================================================
+
+[[clothing]]
+id         = "company_grays"
+name       = "Company grays"
+slot       = "dress"
+image      = "clothing/company_grays.jpg"
+initial    = true
+beauty     = 1
+corruption = 0
+exposure   = 0
+
+[[clothing]]
+id         = "plain_bra"
+name       = "Plain bra"
+slot       = "bra"
+image      = "clothing/plain_bra.jpg"
+initial    = true
+beauty     = 0
+corruption = 0
+exposure   = 1
+
+[[clothing]]
+id         = "plain_briefs"
+name       = "Plain briefs"
+slot       = "underwear"
+image      = "clothing/plain_briefs.jpg"
+initial    = true
+beauty     = 0
+corruption = 0
+exposure   = 1
+
+[[clothing]]
+id         = "flat_shoes"
+name       = "Flat shoes"
+slot       = "shoes"
+image      = "clothing/flat_shoes.jpg"
+initial    = true
+beauty     = 0
+corruption = 0
+exposure   = 0
+
+# --- the three covers. Each is a rung and each has a face. --------------------
+
+[[clothing]]
+id         = "cover_dockhand"
+name       = "Dock coveralls"
+slot       = "dress"
+type       = "cover"
+image      = "clothing/cover_dockhand.jpg"
+beauty     = 1
+corruption = 0
+exposure   = 0
+
+[[clothing]]
+id         = "cover_analyst"
+name       = "Analyst's coat"
+slot       = "dress"
+type       = "cover_analyst"
+image      = "clothing/cover_analyst.jpg"
+beauty     = 4
+corruption = 0
+exposure   = 0
+
+[[clothing]]
+id         = "cover_stranger"
+name       = "Somebody else entirely"
+slot       = "dress"
+type       = "cover_stranger"
+image      = "clothing/cover_stranger.jpg"
+beauty     = 6
+corruption = 2
+exposure   = 0
+
+# --- and the one Mercer sent down. No type: there is no portrait for it, and a
+#     type with no rule warns at build time.
+
+[[clothing]]
+id         = "dress_undertow"
+name       = "The dress from the bag"
+slot       = "dress"
+image      = "clothing/dress_undertow.jpg"
+beauty     = 7
+corruption = 6
+exposure   = 1
