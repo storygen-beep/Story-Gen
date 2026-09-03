@@ -8,6 +8,21 @@ how it was verified if relevant (grep / build / live-play).
 
 Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 
+## 2026-09-03
+- `references/media.md` + `references/rts-flat-prose.md` — repointed the two citations of
+  `archive/the_inheritance_v1`, which was deleted from the working tree today along with 31 game folders
+  (commit `cc7d4e1`; the archive itself goes in the follow-up commit). §9's "Copy this" named
+  `archive/the_inheritance_v1/toml_phases/3_activities.toml:97-104` as the exemplar source and
+  `rts-flat-prose.md`'s person-audit table named the same folder in its `the_inheritance` row. Neither
+  path resolves any more. **No doctrine changed** — §9 already quotes the whole TOML block inline, so the
+  exemplar was never load-bearing on the file existing; what was broken was only the provenance pointer.
+  Both now say where the source lives (`git show cc7d4e1:archive/the_inheritance_v1/...`) and that the
+  game is gone. Verified: `grep -rn "archive/the_inheritance_v1" .claude/skills/author-game/` returns only
+  the two rewritten lines, and the inlined `blocks = [...]` example is unchanged.
+  ⚠️ The `.agents/skills/author-game/` copy (last touched 2026-08-03) and the two
+  `skill-snapshot*/` freezes still carry the old text. Left alone deliberately — snapshots are frozen by
+  definition, and `.agents/` is a stale duplicate that already diverges from the live skill.
+
 ## 2026-08-23
 - `references/ship-gate.md` — added a **pre-screen** step to the cheat-codes section and folded a `--no-dev`
   release merge into the rotation checklist. Both came out of cutting Vesper 0.2.0. (1) The plaintext-leak

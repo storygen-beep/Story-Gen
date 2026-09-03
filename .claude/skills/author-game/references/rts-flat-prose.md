@@ -561,7 +561,7 @@ are a slight over-read of the flagged column):
 | game | declared | flagged | read |
 |---|---|---|---|
 | `last_call` | second | **10 / 172** | clean — the hits are NPC-only paragraphs |
-| `the_inheritance` (v1, now `archive/the_inheritance_v1`) | second | **12 / 364** | clean — same |
+| `the_inheritance` (v1; deleted 2026-09-03, in git history at `cc7d4e1`) | second | **12 / 364** | clean — same |
 | `mothers_place` | second | **6 / 44** | clean |
 | `vesper` | third | **64 / 766** leak "you" | mostly Rule-5 impersonal-"you" similes — a *different* defect, worth fixing |
 | **`late_shifts`** | **(never declared)** | **362 / 398** | **BROKEN** — it is a *third*-person game that leaks second person. Nobody chose that. Nobody noticed. |

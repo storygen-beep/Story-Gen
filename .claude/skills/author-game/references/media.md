@@ -425,9 +425,12 @@ the actresses had retired. None of those was a design failure. Four cheap habits
 
 ## 9. Exemplar + anti-example
 
-**Copy this** — `archive/the_inheritance_v1/toml_phases/3_activities.toml:97-104` (the v1 build, archived
-2026-07-14 while the game is re-authored), the establishing-image →
-paragraph → act-video rhythm in one node, each media block carrying a description + 2 queries:
+**Copy this** — the establishing-image → paragraph → act-video rhythm in one node, each media block
+carrying a description + 2 queries. It came from `the_inheritance` v1
+(`toml_phases/3_activities.toml:97-104`), archived 2026-07-14 and deleted from the working tree
+2026-09-03; read the original with
+`git show cc7d4e1:archive/the_inheritance_v1/toml_phases/3_activities.toml`. The whole exemplar is
+quoted below, so nothing here depends on that file being on disk:
 ```toml
 blocks = [
   { type = "image", props = { file = "activities/porn_tv.jpg",
@@ -439,8 +442,9 @@ blocks = [
       search_queries = ["bedroom woman watching tv night", "girl aroused bed dark glow"] } },
 ]
 ```
-`the_inheritance` ships 49 `type=video` `.webm` for its act layer, each with a description + 2 queries — the
-shape to match.
+`the_inheritance` shipped 49 `type=video` `.webm` for its act layer, each with a description + 2
+queries — the shape to match. (The game was deleted 2026-09-03; the count stands as a measurement,
+and the source is in git history at `cc7d4e1`.)
 
 **Don't copy two_weeks:** 92 sex beats tagged `type=video` shipped as `.jpg` (§2) — they render as stills and
 the missing-media list is muddied. Tag matches asset matches intent, or don't tag it.
