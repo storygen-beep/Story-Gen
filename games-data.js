@@ -15,6 +15,45 @@
 //                        NOT whatever is currently half-built in the working tree.
 window.GAMES = [
   {
+    // Listed 2026-09-03. Authored with author-game-v2. 14 locations, 202 nodes, 7 characters,
+    // 12 guidance cards, 6 walk-ins, 20,343 words, 45/46 gates.
+    //
+    // A GROUND-UP RE-AUTHOR OF `vesper` UNDER v2. The live vesper (0.2.0, this list) is NOT
+    // touched by it and is not going anywhere; this is a separate game with a separate title,
+    // because in-browser save slots namespace off Util.slugify(title) and an identical title
+    // would collide in a returning player's browser.
+    //
+    // What v2 bought over the shipped game: seven numbered arcs that CONVERT into their
+    // repeatable surfaces rather than starting converted; three access tiers (cover/service/
+    // drain) that open content instead of colouring it; a wardrobe of eight garments, each
+    // earned somewhere different, wired to a state-reactive sidebar portrait; and 103
+    // block_pools, the variant primitive documented in four places and used by zero v2 games
+    // before this one.
+    //
+    // ⚠️ IT IS 69% WRITTEN AND THAT IS THE ONE RED GATE. 20,343 words against a declared
+    // 29,600, 10 of 14 rooms inside their own budget. The four short ones are renner_depot,
+    // penthouse, underworld_strip and vance_securities — every room works and those four are
+    // thin. ~7,400 words owed, distributed per board.locations[].fill.
+    //
+    // ⚠️ NO MEDIA SHIPS WITH THIS LISTING. The build reads 265 clips in place from
+    // games/vesper/videos, and .gitignore keeps games/*/output/videos out of the repo until a
+    // game goes live on the portal. On the portal every video block 404s. To change that, add
+    // `!games/vesper_two/output/videos/` and `!games/vesper_two/output/videos/**` to .gitignore
+    // and re-add — it is 145 MB into a repo already packed at 3.0 GiB.
+    //
+    // ⚠️ IT HAS NOT BEEN THROUGH A SHIP GATE and carries no `version` for that reason. v0.1
+    // stops at a BUILD boundary, not an ending: the quest ladder ends on an honest wall card
+    // and Cain's shutter is the visible locked door the release closes on.
+    //
+    // ⚠️ THE TITLE HAS NOT BEEN CHECKED against the storefronts for a collision, and it is
+    // immutable once anything ships.
+    slug: "vesper_two",
+    title: "Vesper: Undertow",
+    badge: "v2",
+    dev: true,
+    summary: `A company asset with no self yet, put out of the tower and down into the Reach with five coin and a bed she has to pay for nightly. Three ways up out of it and they are not the same ladder: what she wears through a door that reads her, what she will let a room use her for, and what she can take out of a man while he thinks he is taking. Seven people who each own a different part of the city — the mechanic who reads her as an interesting problem and is the only one who can put anything inside her on purpose, the man who still owns her and sells Spire paper under a flat name after midnight, the one who searches her at his door every visit and has never once wanted her. She starts owned. What she is climbing toward is being the one who decides who gets used.`,
+  },
+  {
     // Listed 2026-09-02. Authored with author-game-v2. 10 locations, 43 canvases, 5 characters,
     // 16 guidance cards, 5 walk-ins, 6,644 words, 43/44 gates.
     //
